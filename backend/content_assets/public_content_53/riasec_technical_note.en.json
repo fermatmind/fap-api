@@ -37,7 +37,7 @@
     },
     {
       "title": "How feedback is used",
-      "copy": "Saved, excluded, aspiration, disagreement, and experiment feedback can shape exploration paths, but they do not change assessment scores, report snapshots, or share content.",
+      "copy": "Saved, excluded, disagreement, and experiment feedback affect exploration paths only. They do not change assessment scores, report snapshots, or share content.",
       "section_key": "feedback_boundary",
       "data_status": "planned"
     },
@@ -113,13 +113,13 @@
     },
     "content_examples_not_registry_match": {
       "label": "Example provenance",
-      "copy": "Without a reviewed occupation-registry source, occupation examples are content examples rather than registry matches.",
+      "copy": "Without a reviewed registry source, occupation examples must be labeled content_example_not_registry_match.",
       "evidence_level": "content_boundary",
       "content_maturity": "v0.1"
     },
     "feedback_no_score_mutation": {
       "label": "Feedback",
-      "copy": "Feedback belongs to exploration. It does not overwrite measured interest codes, dimension scores, or formal report snapshots.",
+      "copy": "User feedback enters the exploration layer only. It does not overwrite measured_holland_code, dimension scores, or formal report snapshots.",
       "evidence_level": "method_boundary",
       "content_maturity": "v0.1"
     },
@@ -165,7 +165,7 @@
     {
       "key": "feedback_overlay_boundary",
       "label": "Feedback limits",
-      "copy": "Feedback does not change measured interest codes, scores, or formal report snapshots."
+      "copy": "Feedback does not change measured_holland_code, scores, or formal report snapshots."
     }
   ]
 }

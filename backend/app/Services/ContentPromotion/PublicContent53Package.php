@@ -155,7 +155,7 @@ final class PublicContent53Package
         if (($package['schema'] ?? null) !== 'fermatmind.public_content_translation.v1'
             || ($package['source_locale'] ?? null) !== 'zh-CN' || ($package['target_locale'] ?? null) !== 'en'
             || ($package['excluded_families'] ?? null) !== ['career', 'personality', 'blog']
-            || count($rows) < 1 || count($rows) > count(self::TRANSLATION_PAGES) + 1 || ($proof['schema'] ?? null) !== 'fermatmind.public_content_translation.review.v1'
+            || count($rows) < 1 || count($rows) > count(self::TRANSLATION_PAGES) + 3 || ($proof['schema'] ?? null) !== 'fermatmind.public_content_translation.review.v1'
             || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
             || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
             throw new DomainException('public_content_53_translation_review_or_scope_invalid');
@@ -163,7 +163,7 @@ final class PublicContent53Package
         $seen = [];
         foreach ($rows as $row) {
             $id = $row['page_id'] ?? '';
-            if ($id === 'PAGE-32' && ! isset($seen[$id])) {
+            if (in_array($id, ['PAGE-32', 'PAGE-33', 'PAGE-34'], true) && ! isset($seen[$id])) {
                 $this->translationSurface($row, $proof['pages'][$id] ?? []);
                 $seen[$id] = true;
 
@@ -232,11 +232,11 @@ final class PublicContent53Package
         return ['candidates' => $rows, 'package_sha256' => $sha];
     }
 
-    /** The existing Tests surface writer may change only these six human fields. */
+    /** Existing Tests surfaces accept source-bound human copy only. */
     private function translationSurface(array $row, array $review): void
     {
         if (($row['kind'] ?? null) !== 'surface'
-            || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => 'tests', 'locale' => 'en']
+            || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => self::TARGETS[$row['page_id']][1], 'locale' => 'en']
             || ($row['source_identity'] ?? null) !== [] || ($row['staging_source_identity'] ?? null) !== []) {
             throw new DomainException('public_content_53_translation_scope_invalid');
         }
@@ -245,6 +245,12 @@ final class PublicContent53Package
             ['quickStart', 'items', 3, 'description'], ['quickStart', 'items', 4, 'description'],
             ['families', 'items', 1, 'tests', 0, 'description'], ['families', 'items', 0, 'tests', 1, 'outputLabel'],
         ];
+        if ($row['page_id'] !== 'PAGE-32') {
+            $paths = $this->categoryHumanPaths($row['source_snapshot']['payload_json'] ?? []);
+            if ($paths === []) {
+                throw new DomainException('public_content_53_translation_fields_invalid');
+            }
+        }
         $remaining = [];
         foreach (['before', 'staging_before', 'snapshot', 'source_snapshot', 'staging_source_snapshot'] as $version) {
             $value = $row[$version] ?? [];
@@ -277,6 +283,25 @@ final class PublicContent53Package
             || ($review['staging_source_sha256'] ?? null) !== hash('sha256', PromotionContextFactory::canonicalJson($row['staging_source_snapshot']))) {
             throw new DomainException('public_content_53_translation_coverage_invalid');
         }
+    }
+
+    private function categoryHumanPaths(array $payload, array $prefix = []): array
+    {
+        $paths = [];
+        $fields = ['title', 'description', 'body', 'label', 'eyebrow', 'kicker', 'meta', 'outputLabel',
+            'primaryLabel', 'secondaryLabel', 'durationLabel', 'questionsLabel', 'scientificBasis',
+            'typeLabel', 'exploreLabel', 'allLabel', 'ctaLabel'];
+        foreach ($payload as $key => $value) {
+            $path = [...$prefix, $key];
+            if (is_array($value)) {
+                $paths = [...$paths, ...$this->categoryHumanPaths($value, $path)];
+            } elseif (is_string($value) && (in_array($key, $fields, true)
+                || (is_int($key) && in_array(end($prefix), ['points', 'representativeLabels'], true)))) {
+                $paths[] = $path;
+            }
+        }
+
+        return $paths;
     }
 
     private function structure(string $markdown): array

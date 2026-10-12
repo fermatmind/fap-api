@@ -68,6 +68,10 @@ final class RiasecTechnicalNoteContractTest extends TestCase
         $en = $this->getJson('/api/v0.3/scales/RIASEC/technical-note?locale=en')->assertOk()->json('technical_note_v1');
         self::assertSame('en', $en['canonical_locale']);
         self::assertSame(array_column($zh['sections'], 'section_key'), array_column($en['sections'], 'section_key'));
+        $sections = array_column($en['sections'], null, 'section_key');
+        self::assertStringContainsString('exploration paths only', $sections['feedback_boundary']['body']);
+        self::assertStringNotContainsString('aspiration', $sections['feedback_boundary']['body']);
+        self::assertStringContainsString('measured_holland_code', $en['method_boundaries']['feedback_no_score_mutation']['copy']);
         self::assertSame(array_column($zh['sections'], 'data_status'), array_column($en['sections'], 'data_status'));
         self::assertSame(array_keys($zh['method_boundaries']), array_keys($en['method_boundaries']));
         self::assertSame(array_column($zh['disclaimers'], 'key'), array_column($en['disclaimers'], 'key'));

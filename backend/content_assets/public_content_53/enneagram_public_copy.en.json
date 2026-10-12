@@ -2,55 +2,55 @@
   "sections": {
     "test_goal": {
       "title": "Test target",
-      "body": "The FermatMind Enneagram Test provides readable and observable hypotheses about personality patterns. It presents a primary candidate, top three candidates, the full nine-type profile, and close-call comparison before returning the reader to real situations. The technical note explains how modules are derived from response signals and interpretation rules, and which content remains theoretical or provisional."
+      "body": "The FermatMind Enneagram test offers hypotheses about motivational structure that you can read, observe, and provide feedback on. It first shows the primary candidate, top three candidates, full nine-type profile, and close-candidate comparison, then brings the reading back to real situations. This technical note explains how response signals and interpretation rules generate these modules, and which parts remain theoretical interpretations or product hypotheses."
     },
     "e105_fc144_forms": {
       "title": "E105 and FC144 two forms",
-      "body": "The E105 five-point Likert form uses rating responses to form a full nine-type profile and top three candidates. The FC144 two-option forced-choice form records relative preference signals across paired choices. Both forms have the same evidence status but different response tasks and scoring sources; FC144 does not overwrite E105's primary candidate."
+      "body": "The E105 five-point rating form uses intensity ratings to build a full nine-type profile and top three candidates. The FC144 two-option forced-choice form records relative trade-off signals through paired choices. The forms have the same evidence level, but their score sources and the questions they address differ. FC144 does not override E105's primary candidate."
     },
     "score_space_boundary": {
       "title": "Score space boundary",
-      "body": "E105 scores come from rating intensity; FC144 scores come from relative preferences in paired choices. The results share a presentation format, but their numbers have different meanings and cannot be directly compared. Sharing one interpretation model does not mean sharing one score space."
+      "body": "E105 scores come from five-point intensity ratings; FC144 scores come from relative preferences in paired choices. They can use the same result structure, but they do not support the same numerical comparison."
     },
     "dominance_gap": {
       "title": "Dominance Gap",
-      "body": "Dominance Gap describes the relative gap between Top1 and Top2 in the same form and the same score space, and is used to help the system choose a conservative tone of clear, close-call or diffuse. E105 is different from the question types and scoring units of FC144. The gap cannot be used as a unified ruler across forms, groups, or time; nor is it a measurement error range, statistical confidence interval, norm ranking, external validity proof, or personality certainty."
+      "body": "The leading-candidate gap describes the relative distance between the first and second candidates within the same form and score space. It guides the tone used for a clear pattern, close-candidate comparison, or a diffuse distribution. E105 and FC144 use different scoring units, so this gap is not a common yardstick across forms, populations, or time. It is also not a measurement-error range, statistical confidence interval, norm-based rank, proof of external validity, or certainty about personality."
     },
     "confidence_band": {
-      "title": "Confidence Band",
-      "body": "Interpretation states describe a clearer leading pattern, close leading candidates, a diffuse pattern or limited response quality. They control wording, module visibility and suggested actions; they do not prove one type. A clearer pattern is concentrated within this response and form; close candidates need side-by-side reading; a diffuse pattern needs less certainty about one type; limited response quality cannot support strong interpretations."
+      "title": "Interpretation stability",
+      "body": "Interpretation stability controls the result page's tone, module visibility, and suggested actions. A clear pattern means the interpretation is relatively concentrated within this form on this occasion; close-candidate comparison calls for reading candidates side by side; a diffuse distribution calls for less certainty about a single number; and a response-quality boundary means the signals do not support a strong interpretation."
     },
     "close_call": {
       "title": "Close-call",
-      "body": "When the two leading candidates are close, the page offers side-by-side comparison and seven-day observation rather than a forced choice. A close-call manages uncertainty; it does not change the measured result."
+      "body": "When the first and second candidates are close, the page offers a side-by-side comparison and a 7-day observation task, rather than turning a small gap into a definite conclusion."
     },
     "diffuse": {
       "title": "Diffuse",
-      "body": "A diffuse profile contains several type signals without a clear leading pattern. This reduces certainty about one type; it does not mean failure, invalidity, confusion or poor response quality. Read the three leading candidates, center distribution and counterexamples from recent real situations, then use repeatable observation tasks. Narrow the interpretation only when those clues recur in actual situations."
+      "body": "A diffuse distribution means several type signals appear together, and the first candidate and neighboring candidates do not yet support a strong primary-candidate narrative. The page shifts attention to shared themes among the top three candidates, the three-center distribution, recent counterexamples, and observation tasks that can be reviewed."
     },
     "low_quality": {
       "title": "Response-quality limits",
-      "body": "When response-quality signals are triggered, the interpretation is narrowed and retaking the same form is suggested. This labels the limits of this response, not the person’s reliability."
+      "body": "When quality signals are triggered, the page narrows its interpretive tone and suggests retaking the same form when your state is stable, rather than labeling you."
     },
     "retake_stability": {
       "title": "Retake Stability",
-      "body": "Test-retest stability is an indicator that will be tracked in subsequent Technical Notes. This version first discloses the definition and collection plan, and does not commit to specific stability rate figures in advance. Stability evidence needs to distinguish between retests of the same form, cross-form agreement, short-term status fluctuations, and user feedback; when the sample, time interval, and answer quality are insufficient, the page will not interpret a retest difference as a personality change."
+      "body": "This technical note will continue tracking retest stability, but it does not promise a stability rate until evidence about samples, time intervals, and response quality is sufficient. Analysis must distinguish same-form retests, agreement across forms, short-term changes in state, and user feedback. A difference in one retest cannot be interpreted as personality change."
     },
     "e105_fc144_agreement": {
       "title": "E105 / FC144 Agreement",
-      "body": "The agreement between E105 and FC144 is used to evaluate the overlap between the two question types on Top1 or Top3, rather than proving that the scores can be directly compared between the two. This version first defines indicators and collection directions, and then evaluates whether to disclose specific indicators based on samples. Agreement can only show the degree of agreement between the two question types in the ranking of candidates, and cannot independently prove the external validity, clinical validity or career prediction ability of the Enneagram model."
+      "body": "Agreement between E105 and FC144 describes overlap in the first or top three candidates across the two forms. It does not mean their scores can be compared directly. It describes agreement in candidate ranking only and cannot, on its own, establish the Enneagram model's external validity, clinical validity, or ability to predict career outcomes."
     },
     "resonance_feedback": {
       "title": "Resonance Feedback",
-      "body": "Day-seven feedback and the type the user recognizes after observation are recorded as self-observation evidence for research and content calibration. They do not silently overwrite the measured leading candidate. Feedback can suggest cautious wording, counterexamples or clearer explanations; agreement with a description is not evidence of measurement accuracy."
+      "body": "Users' day-7 resonance feedback and self-confirmed types enter history as self-observation evidence for research and content calibration, without silently overriding the primary candidate. Feedback is an observation layer, not a system reclassification. It can indicate which narratives need less weight, additional counterexamples, or revised wording, but a sense of resonance cannot be equated directly with measurement correctness."
     },
     "method_boundaries": {
       "title": "method boundaries",
-      "body": "This test is used for understanding personality patterns and self-observation, and is not used for clinical diagnosis, recruitment screening, treatment recommendations, hard judgments on health levels, or absolute personality characterization. Wing, arrow, subtype and development stage languages ​​are only reserved as interpretation layers or future modules in the current version, and no hard judgment will be made. Technical Note's evidence levels are by default divided into: launched product rules, operational indicators being collected, planned stability indicators, and an explanation framework that is only a theoretical background; these levels cannot be mixed into the same certainty."
+      "body": "This test supports understanding personality patterns and self-observation. It is not for clinical diagnosis, hiring screening, treatment advice, health-level judgments, or fixed personality conclusions. The current version retains wings, arrows, subtypes, and developmental stages only as theoretical background or placeholders for future modules, without hard judgments. This technical note distinguishes product rules, operational metrics being collected, planned stability metrics, and theoretical interpretation frameworks; it does not present them with the same degree of certainty."
     },
     "privacy": {
       "title": "Privacy and data",
-      "body": "Public explanations use aggregated method metrics and do not expose individual answers, private observation text or identifiable feedback. Shared pages omit private observation details by default. A user’s self-observed type is not the system’s final type. Feedback, sample material and technical indicators follow minimum-necessary use, aggregate display and traceable provenance. Planned or collecting indicators show definitions and collection direction, not invented values."
+      "body": "Public explanations use aggregated method metrics only. They do not disclose individual answers, private observation text, or feedback records that identify a user. Shared pages do not show private observations by default, and a user's confirmed type is not treated as the system's final type. Feedback, sample content, and technical metrics follow minimum-necessary use, aggregated display, and traceability. Metrics still being planned or collected show definitions and collection directions, without invented figures."
     }
   },
   "method_boundaries": {
@@ -60,11 +60,11 @@
     },
     "fc144_forced_choice_methodology": {
       "label": "FC144 paired-choice method",
-      "copy": "The FC144 two-option forced-choice form records relative preference signals across paired choices and can provide another observation after a close-call result. Both forms have the same evidence status. FC144 does not replace E105's primary candidate, top three candidates, or raw scoring facts, and its results are interpreted only within the FC144 scoring context."
+      "copy": "The FC144 two-option forced-choice form records relative motivational signals in difficult trade-offs through paired choices. It can serve as another observation after close-candidate comparison. The forms have the same evidence level. FC144 does not replace E105's primary candidate, top three candidates, or original scoring facts. Read results within FC144's own form boundaries; differences across forms cannot be interpreted as personality change or a judgment that one assessment is better."
     },
     "same_model_not_same_score_space": {
       "label": "One model, separate score spaces",
-      "copy": "E105 and FC144 use the same Enneagram interpretation framework but different response tasks, scoring sources, and error structures, so they do not share a scoring space. History, sharing, PDF, and retest surfaces retain each form's source. The page does not directly compare their values or interpret cross-form differences in the top three candidates as personality change."
+      "copy": "E105 and FC144 share an Enneagram interpretation framework, but their forms, response tasks, scoring sources, and error structures differ. They do not share a score space. Result pages may reuse structure and safety boundaries; history, sharing, PDF, and retest entry points must retain each form's provenance. The page does not directly compare their numerical values or interpret differences in the top three candidates across forms as changes in individual state, personality development, or evidence that one is more true."
     },
     "cross_form_compare_blocked": {
       "label": "Cross-form comparison limits",
@@ -72,15 +72,15 @@
     },
     "non_diagnostic_boundary": {
       "label": "Non-diagnostic use",
-      "copy": "This result supports personality-pattern reflection, self-observation, and dialogue. Current research does not support treating the Enneagram as a well-validated clinical scale. It is not used for mental-health judgment, treatment recommendations, hiring, job matching, competency evaluation, or individual risk assessment. Scores, leading candidates, close-call, diffuse, and response-quality states remain hypotheses to check against real situations."
+      "copy": "This result is only for understanding personality patterns, self-observation, and reflective dialogue. Current research is insufficient to treat the Enneagram as a fully validated clinical scale. It is not for mental-health judgments, treatment advice, hiring screening, job matching, ability evaluation, or individual risk assessment. High scores, the primary candidate, top three candidates, close-candidate comparison, diffuse distributions, and response-quality notices are interpretation hypotheses that must be checked against real situations."
     },
     "user_confirmed_type_boundary": {
       "label": "Self-observation feedback",
-      "copy": "A user-confirmed type records the user's own resonance after observation. It is not a system rescore or external confirmation. History and sharing surfaces present it only as a self-observation note; it does not overwrite the primary candidate, top three candidates, scorer output, or original scoring facts."
+      "copy": "A user's confirmed type records evidence of their own resonance after observation. It is not a system reclassification or external confirmation. It may enter history to mark the user's perspective for later reading. Sharing and result review show it only as a self-observation note, without overriding the primary candidate, top three candidates, scorer output, or scoring facts from the original responses."
     },
     "low_quality_boundary": {
       "label": "Response-quality limits",
-      "copy": "When response-quality signals are triggered, results remain readable with narrower interpretation and light observation suggestions. Retaking the same form when you have sufficient time and a more stable response context is preferred. Switching forms offers another observation; it must not bypass quality limits, seek a preferred answer, prove personality change or compare score gains and losses."
+      "copy": "When response-quality signals are triggered, the result remains readable, but its interpretation boundaries narrow substantially. The page retains only light observation suggestions and avoids turning a single set of responses into a definite type judgment. It first suggests retaking the same form when your state is stable and you have enough time. Switching forms offers another observation only; it cannot bypass quality limits, seek an ideal answer, prove personality change, or compare score increases and decreases."
     },
     "diffuse_boundary": {
       "label": "Diffuse-profile interpretation",

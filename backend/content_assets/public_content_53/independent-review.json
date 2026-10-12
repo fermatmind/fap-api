@@ -3,9 +3,9 @@
   "candidate_sha256": "1591b45a7ffa797f3b028616ea5ed5e61bf3559d8b9c62e8237777504ec4151b",
   "asset_sha256": {
     "assets.json": "1591b45a7ffa797f3b028616ea5ed5e61bf3559d8b9c62e8237777504ec4151b",
-    "enneagram_metrics.en.json": "bfe2558d68a5a7f443f63b5114f8387ac451e5388c229aea28dcf577ea69caa2",
-    "enneagram_public_copy.en.json": "e8200892718570eb696b2e527ee077bc52bf042a8211a6871d98585ca55d5ff7",
-    "riasec_technical_note.en.json": "4763b44e98f3c363df9d8c4238e571339c0e969d9bf78fd089eab48e09233dbe"
+    "enneagram_metrics.en.json": "06220e9a497f05dfe32bf93ba97f99f0d8071e157532288d5017c6fe068f4ec4",
+    "enneagram_public_copy.en.json": "6af03e0431d55986c77acc6ff94b55b0308986961f804dc9b936cce6548b86ff",
+    "riasec_technical_note.en.json": "89f02b1c509d6eeb9615fcea125e9577a8e30aa40472bf43a51a63efc46611cd"
   },
   "verdict": "PASS",
   "pages": {
@@ -66,5 +66,23 @@
   "review_scope": "Frozen public copy only; runtime, DOM and deployment require independent engineering acceptance.",
   "review_revision": "v4",
   "reviewer": "fresh independent read-only review; gpt-6.1-sol/high",
-  "policy_source": "Current public zh-CN privacy and terms full text, explicitly authorized by product owner on 2026-10-11."
+  "policy_source": "Current public zh-CN privacy and terms full text, explicitly authorized by product owner on 2026-10-11.",
+  "source_bound_amendment": {
+    "reviewer": "current-task Codex source-to-target semantic review",
+    "date": "2026-10-12",
+    "verdict": "PASS",
+    "scope": [
+      "PAGE-35",
+      "PAGE-36"
+    ],
+    "previous_asset_sha256": {
+      "enneagram_public_copy.en.json": "e8200892718570eb696b2e527ee077bc52bf042a8211a6871d98585ca55d5ff7",
+      "riasec_technical_note.en.json": "4763b44e98f3c363df9d8c4238e571339c0e969d9bf78fd089eab48e09233dbe",
+      "enneagram_metrics.en.json": "bfe2558d68a5a7f443f63b5114f8387ac451e5388c229aea28dcf577ea69caa2"
+    },
+    "source_snapshot_sha256": {
+      "enneagram": "34f5aa3f817a5a25c0f42527d51a22ff123abed5606c8110b7ede8b45f240c78",
+      "riasec": "f65936be2e2bf084bcfe472c21c22c0a3afc9f59d1a767837bbb83cc5733dc30"
+    }
+  }
 }

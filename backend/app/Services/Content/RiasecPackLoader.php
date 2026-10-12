@@ -96,11 +96,22 @@ final class RiasecPackLoader
             throw new \RuntimeException('RIASEC compiled questions_doc_by_locale missing.');
         }
 
+        $localeResolved = isset($docs[$localeResolved]) ? $localeResolved : 'zh-CN';
+        $anchors = array_values(array_filter((array) ($compiled['option_anchors'] ?? []), static fn ($item): bool => is_array($item)));
+        foreach ($anchors as &$anchor) {
+            $text = $anchor[$localeResolved === 'en' ? 'text_en' : 'text_zh'] ?? null;
+            if (! is_string($text) || trim($text) === '') {
+                throw new \RuntimeException('RIASEC localized option anchor missing.');
+            }
+            $anchor['text'] = $text;
+        }
+        unset($anchor);
+
         return [
             'locale_requested' => $locale,
-            'locale_resolved' => isset($docs[$localeResolved]) ? $localeResolved : 'zh-CN',
+            'locale_resolved' => $localeResolved,
             'items' => array_values(array_filter((array) ($doc['items'] ?? []), static fn ($item): bool => is_array($item))),
-            'option_anchors' => array_values(array_filter((array) ($compiled['option_anchors'] ?? []), static fn ($item): bool => is_array($item))),
+            'option_anchors' => $anchors,
             'dimension_codes' => array_values(array_filter(array_map('strval', (array) ($compiled['dimension_codes'] ?? ['R', 'I', 'A', 'S', 'E', 'C'])))),
             'form_kind' => trim((string) ($compiled['form_kind'] ?? 'standard')),
         ];

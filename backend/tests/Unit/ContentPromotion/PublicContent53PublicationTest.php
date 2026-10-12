@@ -380,7 +380,7 @@ PHP;
         foreach ($rows as $candidate) {
             if ($candidate['kind'] === 'surface') {
                 foreach (['en' => PublicContent53Package::before($candidate), 'zh-CN' => PublicContent53Package::source($candidate)] as $locale => $copy) {
-                    LandingSurface::query()->updateOrCreate(['org_id' => 0, 'surface_key' => 'tests', 'locale' => $locale], $copy + [
+                    LandingSurface::query()->updateOrCreate(['org_id' => 0, 'surface_key' => $candidate['identity']['slug'], 'locale' => $locale], $copy + [
                         'title' => 'Existing tests directory', 'schema_version' => '1.0', 'status' => 'published', 'is_public' => true, 'is_indexable' => false,
                     ]);
                 }
@@ -451,19 +451,29 @@ PHP;
         DB::transaction(fn () => app(PublicContent53Writer::class)->publish($this->translationContext(50), []));
     }
 
-    public function test_tests_translation_rejects_machine_changes_even_with_a_rebound_review(): void
+    public static function translatedSurfaces(): array
+    {
+        return [['PAGE-32'], ['PAGE-33'], ['PAGE-34']];
+    }
+
+    #[DataProvider('translatedSurfaces')]
+    public function test_tests_translation_rejects_machine_changes_even_with_a_rebound_review(string $pageId): void
     {
         $temporary = sys_get_temp_dir().'/fm-tests-translation-'.bin2hex(random_bytes(8));
         $directory = $temporary.'/'.PublicContent53Package::PACKAGE;
         mkdir($directory, 0700, true);
         $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/translation-batch.json')), true, 64, JSON_THROW_ON_ERROR);
         $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/translation-review.json')), true, 64, JSON_THROW_ON_ERROR);
-        $index = array_search('PAGE-32', array_column($package['candidates'], 'page_id'), true);
+        $index = array_search($pageId, array_column($package['candidates'], 'page_id'), true);
         self::assertIsInt($index);
-        $package['candidates'][$index]['snapshot']['payload_json']['quickStart']['items'][1]['href'] = '/en/unrelated';
+        if ($pageId === 'PAGE-32') {
+            $package['candidates'][$index]['snapshot']['payload_json']['quickStart']['items'][1]['href'] = '/en/unrelated';
+        } else {
+            $package['candidates'][$index]['snapshot']['payload_json']['allTests']['items'][0]['key'] = 'unrelated-test';
+        }
         $bytes = json_encode($package, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $proof['candidate_sha256'] = hash('sha256', $bytes);
-        $proof['pages']['PAGE-32']['snapshot_sha256'] = hash('sha256', PromotionContextFactory::canonicalJson($package['candidates'][$index]['snapshot']));
+        $proof['pages'][$pageId]['snapshot_sha256'] = hash('sha256', PromotionContextFactory::canonicalJson($package['candidates'][$index]['snapshot']));
         file_put_contents($directory.'/translation-batch.json', $bytes);
         file_put_contents($directory.'/translation-review.json', json_encode($proof, JSON_THROW_ON_ERROR));
         try {

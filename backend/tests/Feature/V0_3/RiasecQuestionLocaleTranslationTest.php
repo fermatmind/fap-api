@@ -37,6 +37,8 @@ final class RiasecQuestionLocaleTranslationTest extends TestCase
         $this->assertSame('非常不喜欢', data_get($items, '0.options.0.text_zh'));
         $this->assertSame(1, data_get($items, '0.options.0.score'));
 
+        $this->assertSame(['Strongly dislike', 'Dislike', 'Unsure / neutral', 'Like', 'Strongly like'], array_column((array) data_get($response->json(), 'meta.option_anchors', []), 'text'));
+        $this->assertSame([1, 2, 3, 4, 5], array_column((array) data_get($response->json(), 'meta.option_anchors', []), 'score'));
         $this->assertDisplayedFieldsDoNotContainChinese($items);
     }
 
@@ -56,6 +58,8 @@ final class RiasecQuestionLocaleTranslationTest extends TestCase
         $this->assertSame('Dislike', data_get($items, '136.options.1.text'));
         $this->assertSame(2, data_get($items, '136.options.1.score'));
 
+        $this->assertSame(['Strongly dislike', 'Dislike', 'Unsure / neutral', 'Like', 'Strongly like'], array_column((array) data_get($response->json(), 'meta.option_anchors', []), 'text'));
+        $this->assertSame([1, 2, 3, 4, 5], array_column((array) data_get($response->json(), 'meta.option_anchors', []), 'score'));
         $this->assertDisplayedFieldsDoNotContainChinese($items);
     }
 
@@ -69,6 +73,7 @@ final class RiasecQuestionLocaleTranslationTest extends TestCase
 
         $items = (array) data_get($response->json(), 'questions.items', []);
         $this->assertCount(60, $items);
+        $this->assertSame('非常不喜欢', data_get($response->json(), 'meta.option_anchors.0.text'));
         $this->assertSame('我喜欢动手搭建、修理或改装东西。', data_get($items, '0.text'));
         $this->assertSame('非常不喜欢', data_get($items, '0.options.0.text'));
         $this->assertSame('I enjoy building, repairing, or modifying things by hand.', data_get($items, '0.text_en'));

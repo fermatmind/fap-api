@@ -1,6 +1,6 @@
 {
   "schema": "fermatmind.public_content_translation.review.v1",
-  "candidate_sha256": "1c63950bf8fba8ca7c0f5261dc0359df7119d19d01622857c6d0091d73b19e20",
+  "candidate_sha256": "63692801ad024d522f93de092aa026872101761d3a4c66f38cca695afff89044",
   "verdict": "PASS",
   "pages": {
     "PAGE-HELP-ABOUT": {
@@ -93,6 +93,24 @@
           "outputLabel"
         ]
       ]
+    },
+    "PAGE-33": {
+      "verdict": "PASS",
+      "source_sha256": "aa5f02830a929266f48a06ce390b6d0c01d4803db5bec453620a1f5de88717fa",
+      "staging_source_sha256": "aa5f02830a929266f48a06ce390b6d0c01d4803db5bec453620a1f5de88717fa",
+      "snapshot_sha256": "4b34dba3e9ce54ac6c1628ca54a9d0e0e08729c1d834c75ea1ee4fc9deaed2a6",
+      "reviewer": "current-task Codex source-to-target semantic review",
+      "reviewed_human_units": 120,
+      "changed_human_units": 24
+    },
+    "PAGE-34": {
+      "verdict": "PASS",
+      "source_sha256": "53671cc41343d6140c10319c5d253f3c3aeeb67a20d99cebf351be6aec22e8b8",
+      "staging_source_sha256": "f8601bf538d7a6e7ff57fab23da9bc2fb4970d012de2592dbe9e9bba374055c1",
+      "snapshot_sha256": "c75bb03d1fce0f8235bede8041039a327d2f483f23c069f3a2ecee21b4275283",
+      "reviewer": "current-task Codex source-to-target semantic review",
+      "reviewed_human_units": 129,
+      "changed_human_units": 34
     }
   },
   "independent_semantic_review_sha256": "64dc8751169eb1a3189d89ed1a3dce62e5ec6e0a17fb60ab92a09ed11158456d"

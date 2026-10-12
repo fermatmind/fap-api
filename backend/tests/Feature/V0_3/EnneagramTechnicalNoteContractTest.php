@@ -63,6 +63,11 @@ final class EnneagramTechnicalNoteContractTest extends TestCase
         $zh = $this->getJson('/api/v0.3/scales/ENNEAGRAM/technical-note?locale=zh-CN')->assertOk()->json('technical_note_v1');
         $en = $this->getJson('/api/v0.3/scales/ENNEAGRAM/technical-note?locale=en')->assertOk()->json('technical_note_v1');
         self::assertSame('en', $en['canonical_locale']);
+        $sections = array_column($en['sections'], null, 'section_key');
+        self::assertSame('Interpretation stability', $sections['confidence_band']['title']);
+        self::assertStringContainsString('samples, time intervals, and response quality', $sections['retake_stability']['body']);
+        self::assertStringContainsString('personality development', $en['method_boundaries']['same_model_not_same_score_space']['copy']);
+        self::assertStringContainsString('top three candidates', $en['method_boundaries']['non_diagnostic_boundary']['copy']);
         self::assertSame(array_column($zh['sections'], 'section_key'), array_column($en['sections'], 'section_key'));
         self::assertSame(array_column($zh['sections'], 'data_status'), array_column($en['sections'], 'data_status'));
         self::assertSame(array_keys($zh['method_boundaries']), array_keys($en['method_boundaries']));
