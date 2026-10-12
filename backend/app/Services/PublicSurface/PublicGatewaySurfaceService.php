@@ -478,7 +478,7 @@ final class PublicGatewaySurfaceService
                 'title' => $isZh ? '团队信息' : 'Team information',
                 'summary' => $isZh
                     ? '查看团队与协作边界，了解谁在建设这些公开内容与测评入口。'
-                    : 'Review the team and collaboration boundaries behind the public content and assessment entry surfaces.',
+                    : 'Review the team and collaboration boundaries, and learn who builds this public content and these assessment entry points.',
                 'faq_blocks' => [],
             ],
             [
@@ -502,7 +502,7 @@ final class PublicGatewaySurfaceService
                 'title' => $isZh ? '联系支持' : 'Contact support',
                 'summary' => $isZh
                     ? '先完成正式入口，再联系支持，避免重复工单与无效往返。'
-                    : 'Finish the formal recovery or email-control paths first, then contact support to avoid duplicate tickets.',
+                    : 'Complete the formal entry paths first, then contact support to avoid duplicate tickets and unproductive back-and-forth.',
                 'faq_blocks' => [
                     [
                         'key' => 'contact_when',

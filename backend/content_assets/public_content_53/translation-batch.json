@@ -486,6 +486,2882 @@
       },
       "source_identity": [],
       "staging_source_identity": []
+    },
+    {
+      "page_id": "PAGE-32",
+      "kind": "surface",
+      "identity": {
+        "org_id": 0,
+        "slug": "tests",
+        "locale": "en"
+      },
+      "source_identity": [],
+      "staging_source_identity": [],
+      "source_snapshot": {
+        "payload_json": {
+          "seo": {
+            "title": "测评入口中心",
+            "description": "按问题或分类进入 FermatMind 测评入口，更快判断从哪一个测试开始。",
+            "iq_ramp_authority": {
+              "media": {
+                "source": "media_library_required",
+                "authority": "backend_cms_media_library",
+                "og_asset_key": "iq-owner-original-30-og",
+                "card_asset_key": "iq-owner-original-30-card",
+                "fallback_allowed": false,
+                "report_cover_asset_key": "iq-full-report-cover"
+              },
+              "locale": "zh-CN",
+              "robots": "index,follow",
+              "schema": "iq.seo_ramp_authority.v1",
+              "og_title": "IQ 推理练习",
+              "form_code": "IQ_OWNER_ORIGINAL_30",
+              "test_slug": "iq-test-intelligence-quotient-assessment",
+              "meta_title": "IQ 推理练习 | 30 题原创推理测评",
+              "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+              "claim_policy": {
+                "copy_boundary": "仅限原始分、维度参考、原创推理练习与方法边界",
+                "norm_authority_pr": "IQ-NORM-03",
+                "norm_authority_required": true,
+                "public_copy_percentile_claims_enabled": false,
+                "public_copy_iq_estimate_claims_enabled": false,
+                "paid_report_claims_require_backend_entitlement": true,
+                "result_context_iq_estimate_requires_backend_report": true
+              },
+              "is_indexable": true,
+              "llms_eligible": true,
+              "canonical_path": "/zh/tests/iq-test-intelligence-quotient-assessment",
+              "og_description": "原创 30 题推理练习；公开文案仅保留分数语境与方法边界。",
+              "jsonld_eligible": true,
+              "localized_paths": {
+                "en": "/en/tests/iq-test-intelligence-quotient-assessment",
+                "zh": "/zh/tests/iq-test-intelligence-quotient-assessment"
+              },
+              "structured_data": {
+                "@type": "Quiz",
+                "is_free": true,
+                "not_for": "医疗、雇佣或认证决策",
+                "result_scope": "raw_score_dimension_reference_paid_report_gated",
+                "question_count": 30,
+                "assessment_mode": "original_reasoning_practice",
+                "time_required_minutes": 20
+              },
+              "authority_source": "backend_cms_landing_surface",
+              "meta_description": "练习原创视觉空间、图形规律与数字规律题；当前 SEO 文案仅承诺原始分、维度参考和方法边界。",
+              "sitemap_eligible": true,
+              "llms_full_eligible": false
+            }
+          },
+          "hero": {
+            "body": "让每一次选择和努力都更有依据、更可执行、可持续复盘。",
+            "title": "帮助青年人看清自己、理解真实世界",
+            "eyebrow": "测评入口",
+            "previewBody": "职业方向、人格结构、状态判断和能力线索，都先用一个更清楚的入口接住。",
+            "previewFlow": [
+              "选择问题",
+              "进入分类",
+              "查看代表测试"
+            ],
+            "primaryHref": "#tests-quick-start",
+            "previewLabel": "选择预览",
+            "previewTitle": "先定问题，再进入最适合的测评。",
+            "primaryLabel": "开始选择",
+            "secondaryHref": "#tests-families",
+            "secondaryLabel": "浏览全部测评",
+            "previewFamilies": [
+              "人格与风格",
+              "职业与方向",
+              "情绪与状态",
+              "认知与能力",
+              "关系与协作"
+            ]
+          },
+          "trust": {
+            "items": [
+              {
+                "body": "报告更适合用来组织讨论、澄清倾向与形成下一步行动，而不是给人下结论。",
+                "title": "结果用于支持判断，不定义一个人"
+              },
+              {
+                "body": "可以先从问题和测试版本开始，匿名完成后再决定是否继续留下更多信息。",
+                "title": "可匿名开始"
+              },
+              {
+                "body": "情绪与状态类结果只作为结构化参考，不能替代专业诊疗、法律意见或高风险决策中的正式评估。",
+                "title": "不替代医疗、法律或诊断意见"
+              },
+              {
+                "body": "适合放进学习规划、职业讨论、合作磨合与阶段性复盘，而不是只看一次分数就结束。",
+                "title": "结果可以被复盘，也可以被放进真实场景"
+              }
+            ],
+            "title": "方法、边界与隐私"
+          },
+          "families": {
+            "body": "如果你已经知道大方向，但还没决定具体做哪个测试，这里会更清楚。",
+            "items": [
+              {
+                "id": "family-personality-style",
+                "tests": [
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types/take?form=mbti_93",
+                    "title": "MBTI 性格测试",
+                    "description": "当你想先看整体人格风格、偏好模式与协作中的自然倾向时。",
+                    "detailsHref": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "类型画像、偏好说明与场景化解释",
+                    "primaryLabel": "标准版",
+                    "durationLabel": "约 12-20 分钟",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?form=mbti_93",
+                        "meta": "适合快速了解类型偏好。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?form=mbti_144",
+                        "meta": "适合更完整的类型解释。",
+                        "label": "专业版"
+                      }
+                    ],
+                    "questionsLabel": "93-144 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  },
+                  {
+                    "key": "big-five-personality-test-ocean-model",
+                    "href": "/zh/tests/big-five-personality-test-ocean-model/take?form=big5_90",
+                    "title": "大五人格测试",
+                    "description": "当你需要更稳定、维度化地理解自己在工作、压力与关系中的特质结构时。",
+                    "detailsHref": "/zh/tests/big-five-personality-test-ocean-model",
+                    "outputLabel": "五维特质分布、强弱项与应用建议",
+                    "primaryLabel": "标准版",
+                    "durationLabel": "约 10-18 分钟",
+                    "previewVariant": "radar",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/big-five-personality-test-ocean-model/take?form=big5_90",
+                        "meta": "适合快速了解大五维度。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/big-five-personality-test-ocean-model/take?form=big5_120",
+                        "meta": "适合更细的维度解释。",
+                        "label": "专业版"
+                      }
+                    ],
+                    "questionsLabel": "90 / 120 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on Big Five"
+                  },
+                  {
+                    "key": "enneagram-personality-test-nine-types",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types",
+                    "title": "九型人格测试",
+                    "description": "从核心动机、压力反应与防御模式理解你的行为模式。",
+                    "detailsHref": "/zh/tests/enneagram-personality-test-nine-types",
+                    "outputLabel": "九型特质光谱、核心动力与成长线索",
+                    "primaryLabel": "查看专属页",
+                    "durationLabel": "约 12 / 18 分钟",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_likert_105",
+                        "meta": "105 题 ETI 标准特质画像。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_forced_choice_144",
+                        "meta": "144 题 EAM 核心动力矩阵。",
+                        "label": "专家版"
+                      }
+                    ],
+                    "questionsLabel": "105 / 144 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Enneagram framework"
+                  },
+                  {
+                    "key": "eq-test-emotional-intelligence-assessment",
+                    "href": "/zh/tests/eq-test-emotional-intelligence-assessment/take",
+                    "title": "情商测试",
+                    "description": "当你想看情绪调节、沟通表达与关系协作中的关键能力环节时。",
+                    "detailsHref": "/zh/tests/eq-test-emotional-intelligence-assessment",
+                    "outputLabel": "情绪能力结构、沟通提示与成长方向",
+                    "primaryLabel": "开始测试",
+                    "durationLabel": "约 10 分钟",
+                    "previewVariant": "bars",
+                    "questionsLabel": "60 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on EQ framework"
+                  }
+                ],
+                "title": "人格与风格",
+                "description": "适合先建立稳定的人格底图，再讨论偏好、风格与长期倾向。",
+                "exploreHref": "/zh/tests/category/personality",
+                "exploreLabel": "查看人格与风格入口",
+                "representativeLabels": [
+                  "MBTI 93Q",
+                  "MBTI 144Q",
+                  "Big Five 120Q",
+                  "九型人格"
+                ]
+              },
+              {
+                "id": "family-career-direction",
+                "tests": [
+                  {
+                    "key": "holland-career-interest-test-riasec",
+                    "href": "/zh/tests/holland-career-interest-test-riasec",
+                    "title": "霍兰德职业兴趣测试（RIASEC）",
+                    "description": "当你需要先判断职业兴趣方向、行业偏好与起步线索时。",
+                    "detailsHref": "/zh/tests/holland-career-interest-test-riasec",
+                    "outputLabel": "RIASEC 兴趣结构与主次代码",
+                    "primaryLabel": "开始测试",
+                    "durationLabel": "约 8 / 18 分钟",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                        "label": "60 题标准版",
+                        "form_code": "riasec_60"
+                      },
+                      {
+                        "href": "/zh/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                        "label": "140 题增强版",
+                        "form_code": "riasec_140"
+                      }
+                    ],
+                    "questionsLabel": "60 / 140 题",
+                    "secondaryLabel": "查看职业测试",
+                    "scientificBasis": "Based on Holland Code"
+                  },
+                  {
+                    "key": "big-five-personality-test-ocean-model",
+                    "href": "/zh/tests/big-five-personality-test-ocean-model/take?form=big5_90",
+                    "title": "大五人格测试",
+                    "description": "当你需要更稳定、维度化地理解自己在工作、压力与关系中的特质结构时。",
+                    "detailsHref": "/zh/tests/big-five-personality-test-ocean-model",
+                    "outputLabel": "五维特质分布、强弱项与应用建议",
+                    "primaryLabel": "标准版",
+                    "durationLabel": "约 10-18 分钟",
+                    "previewVariant": "radar",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/big-five-personality-test-ocean-model/take?form=big5_90",
+                        "meta": "适合快速了解大五维度。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/big-five-personality-test-ocean-model/take?form=big5_120",
+                        "meta": "适合更细的维度解释。",
+                        "label": "专业版"
+                      }
+                    ],
+                    "questionsLabel": "90 / 120 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on Big Five"
+                  },
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types/take?form=mbti_93",
+                    "title": "MBTI 性格测试",
+                    "description": "当你想先看整体人格风格、偏好模式与协作中的自然倾向时。",
+                    "detailsHref": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "类型画像、偏好说明与场景化解释",
+                    "primaryLabel": "标准版",
+                    "durationLabel": "约 12-20 分钟",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?form=mbti_93",
+                        "meta": "适合快速了解类型偏好。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?form=mbti_144",
+                        "meta": "适合更完整的类型解释。",
+                        "label": "专业版"
+                      }
+                    ],
+                    "questionsLabel": "93-144 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  }
+                ],
+                "title": "职业与方向",
+                "description": "适合把兴趣、工作风格与能力线索拼起来，用于职业方向判断。",
+                "exploreHref": "/zh/tests/category/career",
+                "exploreLabel": "查看职业与方向入口",
+                "representativeLabels": [
+                  "霍兰德职业兴趣",
+                  "Big Five 90Q",
+                  "MBTI 93Q"
+                ]
+              },
+              {
+                "id": "family-emotion-state",
+                "tests": [
+                  {
+                    "key": "depression-screening-test-standard-edition",
+                    "href": "/zh/tests/depression-screening-test-standard-edition/take",
+                    "title": "抑郁症标准版测试",
+                    "description": "当你想更快完成抑郁状态筛查，并获得近期状态参考时。",
+                    "detailsHref": "/zh/tests/depression-screening-test-standard-edition",
+                    "outputLabel": "抑郁状态筛查参考",
+                    "primaryLabel": "开始测试",
+                    "durationLabel": "约 3-5 分钟",
+                    "previewVariant": "summary",
+                    "questionsLabel": "20 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "基于 SDS"
+                  },
+                  {
+                    "key": "clinical-depression-anxiety-assessment-professional-edition",
+                    "href": "/zh/tests/clinical-depression-anxiety-assessment-professional-edition/take",
+                    "title": "抑郁焦虑综合症测试",
+                    "description": "当你想同时查看抑郁与焦虑两个维度，并获得更完整的近期状态参考时。",
+                    "detailsHref": "/zh/tests/clinical-depression-anxiety-assessment-professional-edition",
+                    "outputLabel": "抑郁焦虑双维状态参考",
+                    "primaryLabel": "开始测试",
+                    "durationLabel": "约 12 分钟",
+                    "previewVariant": "summary",
+                    "questionsLabel": "68 题",
+                    "secondaryLabel": "查看详情"
+                  }
+                ],
+                "title": "情绪与状态",
+                "description": "适合关注近期波动、风险信号与是否需要进一步支持的用户。",
+                "exploreHref": "/zh/tests#family-emotion-state",
+                "exploreLabel": "查看这一组测试",
+                "representativeLabels": [
+                  "抑郁症标准版",
+                  "抑郁焦虑综合症"
+                ]
+              },
+              {
+                "id": "family-cognitive-ability",
+                "tests": [
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "原创 IQ 推理练习卡片",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ 推理练习",
+                    "description": "适合先练习原创视觉空间、图形规律与数字规律题，当前只给出原始分和维度参考。",
+                    "detailsHref": "/zh/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "原始分、维度表现与稳定性提示；不输出正式 IQ 或百分位",
+                    "claim_policy": {
+                      "copy_boundary": "仅限原创推理练习和原始分参考",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "开始 30 题练习",
+                    "durationLabel": "约 20 分钟",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "30 题 Beta 版",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 题",
+                    "secondaryLabel": "查看边界说明"
+                  }
+                ],
+                "title": "认知与能力",
+                "description": "适合想看推理表现、能力基线与问题处理优势的人。",
+                "exploreHref": "/zh/tests#family-cognitive-ability",
+                "exploreLabel": "查看这一组测试",
+                "representativeLabels": [
+                  "IQ 测评"
+                ]
+              },
+              {
+                "id": "family-relationship-collaboration",
+                "tests": [
+                  {
+                    "key": "eq-test-emotional-intelligence-assessment",
+                    "href": "/zh/tests/eq-test-emotional-intelligence-assessment/take",
+                    "title": "情商测试",
+                    "description": "当你想看情绪调节、沟通表达与关系协作中的关键能力环节时。",
+                    "detailsHref": "/zh/tests/eq-test-emotional-intelligence-assessment",
+                    "outputLabel": "情绪能力结构、沟通提示与成长方向",
+                    "primaryLabel": "开始测试",
+                    "durationLabel": "约 10 分钟",
+                    "previewVariant": "bars",
+                    "questionsLabel": "60 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on EQ framework"
+                  },
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types/take?form=mbti_93",
+                    "title": "MBTI 性格测试",
+                    "description": "当你想先看整体人格风格、偏好模式与协作中的自然倾向时。",
+                    "detailsHref": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "类型画像、偏好说明与场景化解释",
+                    "primaryLabel": "标准版",
+                    "durationLabel": "约 12-20 分钟",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?form=mbti_93",
+                        "meta": "适合快速了解类型偏好。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?form=mbti_144",
+                        "meta": "适合更完整的类型解释。",
+                        "label": "专业版"
+                      }
+                    ],
+                    "questionsLabel": "93-144 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  }
+                ],
+                "title": "关系与协作",
+                "description": "适合想理解沟通、情绪处理与协作摩擦来源的人。",
+                "exploreHref": "/zh/tests#family-relationship-collaboration",
+                "exploreLabel": "查看这一组测试",
+                "representativeLabels": [
+                  "EQ",
+                  "MBTI"
+                ]
+              }
+            ],
+            "title": "按你要理解的方向继续往下走。",
+            "kicker": "Test Families"
+          },
+          "finalCta": {
+            "body": "如果你还不确定具体做哪个测试，就先进入问题入口，再从代表测试或双版本产品开始。",
+            "title": "先从更适合的问题开始，再决定做哪一个版本。",
+            "primaryHref": "#tests-quick-start",
+            "primaryLabel": "开始选择",
+            "secondaryHref": "/zh/tests/category/personality",
+            "secondaryLabel": "查看人格入口"
+          },
+          "resources": {
+            "body": "给开始前后最值得看的少量补充内容。",
+            "items": [
+              {
+                "key": "career-direction-guide",
+                "href": "/zh/career/guides/how-to-find-right-career-direction",
+                "title": "如何找到更适合自己的职业方向",
+                "typeLabel": "指南",
+                "description": "把兴趣、能力与现实约束放到一个决策框架里，而不是只凭一次直觉做选择。"
+              },
+              {
+                "key": "mbti-basics",
+                "href": "/zh/articles/mbti-basics",
+                "title": "MBTI 入门",
+                "typeLabel": "文章",
+                "description": "在开始测试前先理解它适合回答什么，不适合回答什么。"
+              },
+              {
+                "key": "big-five-guide",
+                "href": "/zh/articles/big-five-tool-guide",
+                "title": "大五工具说明",
+                "typeLabel": "文章",
+                "description": "如果你更偏好维度化解释，这篇内容适合作为 Big Five 的前置阅读。"
+              }
+            ],
+            "title": "在开始前，先看最值得读的 3 个入口。",
+            "kicker": "Related Resources",
+            "allHref": "/zh/articles",
+            "allLabel": "查看全部资源"
+          },
+          "quickStart": {
+            "body": "先把你现在要解决的问题说清楚，再进入更合适的测试版本。",
+            "items": [
+              {
+                "id": "career-direction",
+                "href": "/zh/tests/category/career",
+                "scent": [
+                  "霍兰德职业兴趣",
+                  "Big Five",
+                  "MBTI"
+                ],
+                "title": "我适合什么职业方向？",
+                "ctaLabel": "进入职业方向入口",
+                "description": "先看兴趣、工作风格与能力线索，再决定更值得深入的职业路径。"
+              },
+              {
+                "id": "personality-structure",
+                "href": "/zh/tests/category/personality",
+                "scent": [
+                  "MBTI 93Q",
+                  "MBTI 144Q",
+                  "Big Five 90Q"
+                ],
+                "title": "我的人格结构是什么？",
+                "ctaLabel": "进入人格测评入口",
+                "description": "从人格风格与稳定特质切入，先建立可讨论、可复盘的自我认知底图。"
+              },
+              {
+                "id": "emotion-state",
+                "href": "/zh/tests#family-emotion-state",
+                "scent": [
+                  "抑郁焦虑综合症"
+                ],
+                "title": "我现在的情绪或状态如何？",
+                "ctaLabel": "查看状态类测试",
+                "description": "如果你更关心近期波动与风险信号，先看状态类测试，再决定是否需要进一步支持。"
+              },
+              {
+                "id": "cognitive-ability",
+                "href": "/zh/tests#family-cognitive-ability",
+                "scent": [
+                  "IQ 测评",
+                  "推理表现"
+                ],
+                "title": "我的认知能力与优势在哪里？",
+                "ctaLabel": "查看能力类测试",
+                "description": "当你想看推理表现、认知节奏与能力基线时，优先从能力类入口开始。"
+              },
+              {
+                "id": "relationship-collaboration",
+                "href": "/zh/tests#family-relationship-collaboration",
+                "scent": [
+                  "EQ",
+                  "MBTI"
+                ],
+                "title": "我在人际、协作与关系中是什么风格？",
+                "ctaLabel": "查看协作类入口",
+                "description": "把情绪能力、偏好模式与互动习惯放在一起看，更适合协作与关系判断。"
+              }
+            ],
+            "title": "按你现在最在意的问题开始。",
+            "kicker": "Quick Start"
+          },
+          "howToChoose": {
+            "body": "只保留足够做决定的判断规则。",
+            "items": [
+              {
+                "title": "第一次进入，先从人格或职业方向开始",
+                "description": "它们更适合作为第一次进入产品时的总入口，帮助你建立后续判断框架。"
+              },
+              {
+                "title": "如果你关心近期波动，优先选情绪与状态类",
+                "description": "这类测试更适合处理“我最近怎么了”而不是“我本质上是谁”。"
+              },
+              {
+                "title": "如果你更关注优势与能力，优先看认知与能力类",
+                "description": "它更适合用在学习策略、问题处理与能力基线判断中。"
+              }
+            ],
+            "title": "先判断你要解决哪类问题。",
+            "kicker": "How to Choose"
+          }
+        }
+      },
+      "staging_source_snapshot": {
+        "payload_json": {
+          "seo": {
+            "title": "测评入口中心",
+            "description": "按问题或分类进入 FermatMind 测评入口，更快判断从哪一个测试开始。",
+            "iq_ramp_authority": {
+              "media": {
+                "source": "media_library_required",
+                "authority": "backend_cms_media_library",
+                "og_asset_key": "iq-owner-original-30-og",
+                "card_asset_key": "iq-owner-original-30-card",
+                "fallback_allowed": false,
+                "report_cover_asset_key": "iq-full-report-cover"
+              },
+              "locale": "zh-CN",
+              "robots": "index,follow",
+              "schema": "iq.seo_ramp_authority.v1",
+              "og_title": "IQ 推理练习",
+              "form_code": "IQ_OWNER_ORIGINAL_30",
+              "test_slug": "iq-test-intelligence-quotient-assessment",
+              "meta_title": "IQ 推理练习 | 30 题原创推理测评",
+              "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+              "claim_policy": {
+                "copy_boundary": "仅限原始分、维度参考、原创推理练习与方法边界",
+                "norm_authority_pr": "IQ-NORM-03",
+                "norm_authority_required": true,
+                "public_copy_percentile_claims_enabled": false,
+                "public_copy_iq_estimate_claims_enabled": false,
+                "paid_report_claims_require_backend_entitlement": true,
+                "result_context_iq_estimate_requires_backend_report": true
+              },
+              "is_indexable": true,
+              "llms_eligible": true,
+              "canonical_path": "/zh/tests/iq-test-intelligence-quotient-assessment",
+              "og_description": "原创 30 题推理练习；公开文案仅保留分数语境与方法边界。",
+              "jsonld_eligible": true,
+              "localized_paths": {
+                "en": "/en/tests/iq-test-intelligence-quotient-assessment",
+                "zh": "/zh/tests/iq-test-intelligence-quotient-assessment"
+              },
+              "structured_data": {
+                "@type": "Quiz",
+                "is_free": true,
+                "not_for": "医疗、雇佣或认证决策",
+                "result_scope": "raw_score_dimension_reference_paid_report_gated",
+                "question_count": 30,
+                "assessment_mode": "original_reasoning_practice",
+                "time_required_minutes": 20
+              },
+              "authority_source": "backend_cms_landing_surface",
+              "meta_description": "练习原创视觉空间、图形规律与数字规律题；当前 SEO 文案仅承诺原始分、维度参考和方法边界。",
+              "sitemap_eligible": true,
+              "llms_full_eligible": false
+            }
+          },
+          "hero": {
+            "body": "让每一次选择和努力都更有依据、更可执行、可持续复盘。",
+            "title": "帮助青年人看清自己、理解真实世界",
+            "eyebrow": "测评入口",
+            "previewBody": "职业方向、人格结构、状态判断和能力线索，都先用一个更清楚的入口接住。",
+            "previewFlow": [
+              "选择问题",
+              "进入分类",
+              "查看代表测试"
+            ],
+            "primaryHref": "#tests-quick-start",
+            "previewLabel": "选择预览",
+            "previewTitle": "先定问题，再进入最适合的测评。",
+            "primaryLabel": "开始选择",
+            "secondaryHref": "#tests-families",
+            "secondaryLabel": "浏览全部测评",
+            "previewFamilies": [
+              "人格与风格",
+              "职业与方向",
+              "情绪与状态",
+              "认知与能力",
+              "关系与协作"
+            ]
+          },
+          "trust": {
+            "items": [
+              {
+                "body": "报告更适合用来组织讨论、澄清倾向与形成下一步行动，而不是给人下结论。",
+                "title": "结果用于支持判断，不定义一个人"
+              },
+              {
+                "body": "可以先从问题和测试版本开始，匿名完成后再决定是否继续留下更多信息。",
+                "title": "可匿名开始"
+              },
+              {
+                "body": "情绪与状态类结果只作为结构化参考，不能替代专业诊疗、法律意见或高风险决策中的正式评估。",
+                "title": "不替代医疗、法律或诊断意见"
+              },
+              {
+                "body": "适合放进学习规划、职业讨论、合作磨合与阶段性复盘，而不是只看一次分数就结束。",
+                "title": "结果可以被复盘，也可以被放进真实场景"
+              }
+            ],
+            "title": "方法、边界与隐私"
+          },
+          "families": {
+            "body": "如果你已经知道大方向，但还没决定具体做哪个测试，这里会更清楚。",
+            "items": [
+              {
+                "id": "family-personality-style",
+                "tests": [
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI 性格测试",
+                    "description": "当你想先看整体人格风格、偏好模式与协作中的自然倾向时。",
+                    "detailsHref": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "类型画像、偏好说明与场景化解释",
+                    "primaryLabel": "标准版",
+                    "durationLabel": "约 12-20 分钟",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "适合快速了解类型偏好。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "适合更完整的类型解释。",
+                        "label": "专业版"
+                      }
+                    ],
+                    "questionsLabel": "93-144 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  },
+                  {
+                    "key": "big-five-personality-test-ocean-model",
+                    "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "title": "大五人格测试",
+                    "description": "当你需要更稳定、维度化地理解自己在工作、压力与关系中的特质结构时。",
+                    "detailsHref": "/zh/tests/big-five-personality-test-ocean-model",
+                    "outputLabel": "五维特质分布、强弱项与应用建议",
+                    "primaryLabel": "标准版",
+                    "durationLabel": "约 10-18 分钟",
+                    "previewVariant": "radar",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                        "meta": "适合快速了解大五维度。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                        "meta": "适合更细的维度解释。",
+                        "label": "专业版"
+                      }
+                    ],
+                    "questionsLabel": "60-120 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on Big Five"
+                  },
+                  {
+                    "key": "enneagram-personality-test-nine-types",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types",
+                    "title": "九型人格测试",
+                    "description": "从核心动机、压力反应与防御模式理解你的行为模式。",
+                    "detailsHref": "/zh/tests/enneagram-personality-test-nine-types",
+                    "outputLabel": "九型特质光谱、核心动力与成长线索",
+                    "primaryLabel": "查看专属页",
+                    "durationLabel": "约 15 / 40 分钟",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_likert_105",
+                        "meta": "105 题 ETI 标准特质画像。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_forced_choice_144",
+                        "meta": "144 题 EAM 核心动力矩阵。",
+                        "label": "专家版"
+                      }
+                    ],
+                    "questionsLabel": "105 / 144 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Enneagram framework"
+                  },
+                  {
+                    "key": "eq-test-emotional-intelligence-assessment",
+                    "href": "/zh/tests/eq-test-emotional-intelligence-assessment/take",
+                    "title": "情商测试",
+                    "description": "当你想看情绪调节、沟通表达与关系协作中的关键能力环节时。",
+                    "detailsHref": "/zh/tests/eq-test-emotional-intelligence-assessment",
+                    "outputLabel": "情绪能力结构、沟通提示与成长方向",
+                    "primaryLabel": "开始测试",
+                    "durationLabel": "约 10 分钟",
+                    "previewVariant": "bars",
+                    "questionsLabel": "60 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on EQ framework"
+                  }
+                ],
+                "title": "人格与风格",
+                "description": "适合先建立稳定的人格底图，再讨论偏好、风格与长期倾向。",
+                "exploreHref": "/zh/tests/category/personality",
+                "exploreLabel": "查看人格与风格入口",
+                "representativeLabels": [
+                  "MBTI 93Q",
+                  "MBTI 144Q",
+                  "Big Five 120Q",
+                  "九型人格"
+                ]
+              },
+              {
+                "id": "family-career-direction",
+                "tests": [
+                  {
+                    "key": "holland-career-interest-test-riasec",
+                    "href": "/zh/tests/holland-career-interest-test-riasec",
+                    "title": "霍兰德职业兴趣测试（RIASEC）",
+                    "description": "当你需要先判断职业兴趣方向、行业偏好与起步线索时。",
+                    "detailsHref": "/zh/tests/holland-career-interest-test-riasec",
+                    "outputLabel": "RIASEC 兴趣结构与主次代码",
+                    "primaryLabel": "开始测试",
+                    "durationLabel": "约 8 / 18 分钟",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                        "label": "60 题标准版",
+                        "form_code": "riasec_60"
+                      },
+                      {
+                        "href": "/zh/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                        "label": "140 题增强版",
+                        "form_code": "riasec_140"
+                      }
+                    ],
+                    "questionsLabel": "60 / 140 题",
+                    "secondaryLabel": "查看职业测试",
+                    "scientificBasis": "Based on Holland Code"
+                  },
+                  {
+                    "key": "big-five-personality-test-ocean-model",
+                    "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "title": "大五人格测试",
+                    "description": "当你需要更稳定、维度化地理解自己在工作、压力与关系中的特质结构时。",
+                    "detailsHref": "/zh/tests/big-five-personality-test-ocean-model",
+                    "outputLabel": "五维特质分布、强弱项与应用建议",
+                    "primaryLabel": "标准版",
+                    "durationLabel": "约 10-18 分钟",
+                    "previewVariant": "radar",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                        "meta": "适合快速了解大五维度。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                        "meta": "适合更细的维度解释。",
+                        "label": "专业版"
+                      }
+                    ],
+                    "questionsLabel": "60-120 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on Big Five"
+                  },
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI 性格测试",
+                    "description": "当你想先看整体人格风格、偏好模式与协作中的自然倾向时。",
+                    "detailsHref": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "类型画像、偏好说明与场景化解释",
+                    "primaryLabel": "标准版",
+                    "durationLabel": "约 12-20 分钟",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "适合快速了解类型偏好。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "适合更完整的类型解释。",
+                        "label": "专业版"
+                      }
+                    ],
+                    "questionsLabel": "93-144 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  }
+                ],
+                "title": "职业与方向",
+                "description": "适合把兴趣、工作风格与能力线索拼起来，用于职业方向判断。",
+                "exploreHref": "/zh/tests/category/career",
+                "exploreLabel": "查看职业与方向入口",
+                "representativeLabels": [
+                  "霍兰德职业兴趣",
+                  "Big Five 90Q",
+                  "MBTI 93Q"
+                ]
+              },
+              {
+                "id": "family-emotion-state",
+                "tests": [
+                  {
+                    "key": "depression-screening-test-standard-edition",
+                    "href": "/zh/tests/depression-screening-test-standard-edition/take",
+                    "title": "抑郁症标准版测试",
+                    "description": "当你想更快完成抑郁状态筛查，并获得近期状态参考时。",
+                    "detailsHref": "/zh/tests/depression-screening-test-standard-edition",
+                    "outputLabel": "抑郁状态筛查参考",
+                    "primaryLabel": "开始测试",
+                    "durationLabel": "约 3-5 分钟",
+                    "previewVariant": "summary",
+                    "questionsLabel": "20 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "基于 SDS"
+                  },
+                  {
+                    "key": "clinical-depression-anxiety-assessment-professional-edition",
+                    "href": "/zh/tests/clinical-depression-anxiety-assessment-professional-edition/take",
+                    "title": "抑郁焦虑综合症测试",
+                    "description": "当你想同时查看抑郁与焦虑两个维度，并获得更完整的近期状态参考时。",
+                    "detailsHref": "/zh/tests/clinical-depression-anxiety-assessment-professional-edition",
+                    "outputLabel": "抑郁焦虑双维状态参考",
+                    "primaryLabel": "开始测试",
+                    "durationLabel": "约 12 分钟",
+                    "previewVariant": "summary",
+                    "questionsLabel": "68 题",
+                    "secondaryLabel": "查看详情"
+                  }
+                ],
+                "title": "情绪与状态",
+                "description": "适合关注近期波动、风险信号与是否需要进一步支持的用户。",
+                "exploreHref": "/zh/tests#family-emotion-state",
+                "exploreLabel": "查看这一组测试",
+                "representativeLabels": [
+                  "抑郁症标准版",
+                  "抑郁焦虑综合症"
+                ]
+              },
+              {
+                "id": "family-cognitive-ability",
+                "tests": [
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "原创 IQ 推理练习卡片",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ 推理练习",
+                    "description": "适合先练习原创视觉空间、图形规律与数字规律题，当前只给出原始分和维度参考。",
+                    "detailsHref": "/zh/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "原始分、维度表现与稳定性提示；不输出正式 IQ 或百分位",
+                    "claim_policy": {
+                      "copy_boundary": "仅限原创推理练习和原始分参考",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "开始 30 题练习",
+                    "durationLabel": "约 20 分钟",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "30 题 Beta 版",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 题",
+                    "secondaryLabel": "查看边界说明"
+                  }
+                ],
+                "title": "认知与能力",
+                "description": "适合想看推理表现、能力基线与问题处理优势的人。",
+                "exploreHref": "/zh/tests#family-cognitive-ability",
+                "exploreLabel": "查看这一组测试",
+                "representativeLabels": [
+                  "IQ 测评"
+                ]
+              },
+              {
+                "id": "family-relationship-collaboration",
+                "tests": [
+                  {
+                    "key": "eq-test-emotional-intelligence-assessment",
+                    "href": "/zh/tests/eq-test-emotional-intelligence-assessment/take",
+                    "title": "情商测试",
+                    "description": "当你想看情绪调节、沟通表达与关系协作中的关键能力环节时。",
+                    "detailsHref": "/zh/tests/eq-test-emotional-intelligence-assessment",
+                    "outputLabel": "情绪能力结构、沟通提示与成长方向",
+                    "primaryLabel": "开始测试",
+                    "durationLabel": "约 10 分钟",
+                    "previewVariant": "bars",
+                    "questionsLabel": "60 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on EQ framework"
+                  },
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI 性格测试",
+                    "description": "当你想先看整体人格风格、偏好模式与协作中的自然倾向时。",
+                    "detailsHref": "/zh/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "类型画像、偏好说明与场景化解释",
+                    "primaryLabel": "标准版",
+                    "durationLabel": "约 12-20 分钟",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "适合快速了解类型偏好。",
+                        "label": "标准版"
+                      },
+                      {
+                        "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "适合更完整的类型解释。",
+                        "label": "专业版"
+                      }
+                    ],
+                    "questionsLabel": "93-144 题",
+                    "secondaryLabel": "查看详情",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  }
+                ],
+                "title": "关系与协作",
+                "description": "适合想理解沟通、情绪处理与协作摩擦来源的人。",
+                "exploreHref": "/zh/tests#family-relationship-collaboration",
+                "exploreLabel": "查看这一组测试",
+                "representativeLabels": [
+                  "EQ",
+                  "MBTI"
+                ]
+              }
+            ],
+            "title": "按你要理解的方向继续往下走。",
+            "kicker": "Test Families"
+          },
+          "finalCta": {
+            "body": "如果你还不确定具体做哪个测试，就先进入问题入口，再从代表测试或双版本产品开始。",
+            "title": "先从更适合的问题开始，再决定做哪一个版本。",
+            "primaryHref": "#tests-quick-start",
+            "primaryLabel": "开始选择",
+            "secondaryHref": "/zh/tests/category/personality",
+            "secondaryLabel": "查看人格入口"
+          },
+          "resources": {
+            "body": "给开始前后最值得看的少量补充内容。",
+            "items": [
+              {
+                "key": "career-direction-guide",
+                "href": "/zh/career/guides/how-to-find-right-career-direction",
+                "title": "如何找到更适合自己的职业方向",
+                "typeLabel": "指南",
+                "description": "把兴趣、能力与现实约束放到一个决策框架里，而不是只凭一次直觉做选择。"
+              },
+              {
+                "key": "mbti-basics",
+                "href": "/zh/articles/mbti-basics",
+                "title": "MBTI 入门",
+                "typeLabel": "文章",
+                "description": "在开始测试前先理解它适合回答什么，不适合回答什么。"
+              },
+              {
+                "key": "big-five-guide",
+                "href": "/zh/articles/big-five-tool-guide",
+                "title": "大五工具说明",
+                "typeLabel": "文章",
+                "description": "如果你更偏好维度化解释，这篇内容适合作为 Big Five 的前置阅读。"
+              }
+            ],
+            "title": "在开始前，先看最值得读的 3 个入口。",
+            "kicker": "Related Resources",
+            "allHref": "/zh/articles",
+            "allLabel": "查看全部资源"
+          },
+          "quickStart": {
+            "body": "先把你现在要解决的问题说清楚，再进入更合适的测试版本。",
+            "items": [
+              {
+                "id": "career-direction",
+                "href": "/zh/tests/category/career",
+                "scent": [
+                  "霍兰德职业兴趣",
+                  "Big Five",
+                  "MBTI"
+                ],
+                "title": "我适合什么职业方向？",
+                "ctaLabel": "进入职业方向入口",
+                "description": "先看兴趣、工作风格与能力线索，再决定更值得深入的职业路径。"
+              },
+              {
+                "id": "personality-structure",
+                "href": "/zh/tests/category/personality",
+                "scent": [
+                  "MBTI 93Q",
+                  "MBTI 144Q",
+                  "Big Five 90Q"
+                ],
+                "title": "我的人格结构是什么？",
+                "ctaLabel": "进入人格测评入口",
+                "description": "从人格风格与稳定特质切入，先建立可讨论、可复盘的自我认知底图。"
+              },
+              {
+                "id": "emotion-state",
+                "href": "/zh/tests#family-emotion-state",
+                "scent": [
+                  "抑郁焦虑综合症"
+                ],
+                "title": "我现在的情绪或状态如何？",
+                "ctaLabel": "查看状态类测试",
+                "description": "如果你更关心近期波动与风险信号，先看状态类测试，再决定是否需要进一步支持。"
+              },
+              {
+                "id": "cognitive-ability",
+                "href": "/zh/tests#family-cognitive-ability",
+                "scent": [
+                  "IQ 测评",
+                  "推理表现"
+                ],
+                "title": "我的认知能力与优势在哪里？",
+                "ctaLabel": "查看能力类测试",
+                "description": "当你想看推理表现、认知节奏与能力基线时，优先从能力类入口开始。"
+              },
+              {
+                "id": "relationship-collaboration",
+                "href": "/zh/tests#family-relationship-collaboration",
+                "scent": [
+                  "EQ",
+                  "MBTI"
+                ],
+                "title": "我在人际、协作与关系中是什么风格？",
+                "ctaLabel": "查看协作类入口",
+                "description": "把情绪能力、偏好模式与互动习惯放在一起看，更适合协作与关系判断。"
+              }
+            ],
+            "title": "按你现在最在意的问题开始。",
+            "kicker": "Quick Start"
+          },
+          "howToChoose": {
+            "body": "只保留足够做决定的判断规则。",
+            "items": [
+              {
+                "title": "第一次进入，先从人格或职业方向开始",
+                "description": "它们更适合作为第一次进入产品时的总入口，帮助你建立后续判断框架。"
+              },
+              {
+                "title": "如果你关心近期波动，优先选情绪与状态类",
+                "description": "这类测试更适合处理“我最近怎么了”而不是“我本质上是谁”。"
+              },
+              {
+                "title": "如果你更关注优势与能力，优先看认知与能力类",
+                "description": "它更适合用在学习策略、问题处理与能力基线判断中。"
+              }
+            ],
+            "title": "先判断你要解决哪类问题。",
+            "kicker": "How to Choose"
+          }
+        }
+      },
+      "before": {
+        "payload_json": {
+          "seo": {
+            "title": "Tests Hub",
+            "description": "Start from a clearer question or category and choose the right FermatMind assessment more quickly.",
+            "iq_ramp_authority": {
+              "media": {
+                "source": "media_library_required",
+                "authority": "backend_cms_media_library",
+                "og_asset_key": "iq-owner-original-30-og",
+                "card_asset_key": "iq-owner-original-30-card",
+                "fallback_allowed": false,
+                "report_cover_asset_key": "iq-full-report-cover"
+              },
+              "locale": "en",
+              "robots": "index,follow",
+              "schema": "iq.seo_ramp_authority.v1",
+              "og_title": "IQ Reasoning Practice",
+              "form_code": "IQ_OWNER_ORIGINAL_30",
+              "test_slug": "iq-test-intelligence-quotient-assessment",
+              "meta_title": "IQ Reasoning Practice | 30 Original Reasoning Items",
+              "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+              "claim_policy": {
+                "copy_boundary": "raw score, dimension reference, original reasoning practice, and method boundary only",
+                "norm_authority_pr": "IQ-NORM-03",
+                "norm_authority_required": true,
+                "public_copy_percentile_claims_enabled": false,
+                "public_copy_iq_estimate_claims_enabled": false,
+                "paid_report_claims_require_backend_entitlement": true,
+                "result_context_iq_estimate_requires_backend_report": true
+              },
+              "is_indexable": true,
+              "llms_eligible": true,
+              "canonical_path": "/en/tests/iq-test-intelligence-quotient-assessment",
+              "og_description": "Original 30-item reasoning practice; public copy stays limited to score context and method boundaries.",
+              "jsonld_eligible": true,
+              "localized_paths": {
+                "en": "/en/tests/iq-test-intelligence-quotient-assessment",
+                "zh": "/zh/tests/iq-test-intelligence-quotient-assessment"
+              },
+              "structured_data": {
+                "@type": "Quiz",
+                "is_free": true,
+                "not_for": "medical, employment, or certification decisions",
+                "result_scope": "raw_score_dimension_reference_paid_report_gated",
+                "question_count": 30,
+                "assessment_mode": "original_reasoning_practice",
+                "time_required_minutes": 20
+              },
+              "authority_source": "backend_cms_landing_surface",
+              "meta_description": "Practice original visual-spatial, pattern, and numeric reasoning items with raw score, dimension reference, and explicit method boundaries.",
+              "sitemap_eligible": true,
+              "llms_full_eligible": false
+            }
+          },
+          "hero": {
+            "body": "A curated set of assessment entry points for self-understanding, learning, career direction, relationships, and collaboration.",
+            "title": "Start from a clearer question and find the assessment that fits.",
+            "eyebrow": "Tests",
+            "previewBody": "Use a clearer starting surface for career direction, personality structure, state, and ability signals.",
+            "previewFlow": [
+              "Choose a question",
+              "Enter a category",
+              "See representative tests"
+            ],
+            "primaryHref": "#tests-quick-start",
+            "previewLabel": "Selection preview",
+            "previewTitle": "Start with the question, then move into the right assessment.",
+            "primaryLabel": "Start choosing",
+            "secondaryHref": "#tests-families",
+            "secondaryLabel": "Browse all assessments",
+            "previewFamilies": [
+              "Personality & Style",
+              "Career & Direction",
+              "Emotion & State",
+              "Cognition & Ability",
+              "Relationship & Collaboration"
+            ]
+          },
+          "trust": {
+            "items": [
+              {
+                "body": "Use reports to structure discussion, clarify tendencies, and decide the next move instead of treating them as final labels.",
+                "title": "Results support judgment. They do not define a person."
+              },
+              {
+                "body": "You can start from the question and the right test version first, then decide later whether to share more information.",
+                "title": "You can start anonymously"
+              },
+              {
+                "body": "State-oriented results are structured references, not formal diagnosis, treatment, or legal guidance.",
+                "title": "Not a substitute for medical, legal, or diagnostic advice"
+              },
+              {
+                "body": "The strongest use cases are learning plans, career conversations, collaboration review, and recurring reflection.",
+                "title": "Results should be reviewed in context"
+              }
+            ],
+            "title": "Method, boundary, and privacy"
+          },
+          "families": {
+            "body": "If you know the broad topic but not the exact test, this is the clearer way forward.",
+            "items": [
+              {
+                "id": "family-personality-style",
+                "tests": [
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI Personality Test",
+                    "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+                    "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "Type profile, preference map, and scenario interpretation",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "12-20 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "A fast type preference read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "A more complete type read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "93-144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  },
+                  {
+                    "key": "big-five-personality-test-ocean-model",
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "title": "Big Five Personality Test",
+                    "description": "When you need a more dimensional view of how stable traits shape work, stress, and relationships.",
+                    "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                    "outputLabel": "Five-factor trait profile with strengths and application notes",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "10-18 min",
+                    "previewVariant": "radar",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                        "meta": "A quick Big Five read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                        "meta": "A deeper trait read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "90 / 120 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Big Five"
+                  },
+                  {
+                    "key": "enneagram-personality-test-nine-types",
+                    "href": "/en/tests/enneagram-personality-test-nine-types",
+                    "title": "Enneagram Test",
+                    "description": "Understand behavior patterns through core motivation, stress response, and defense patterns.",
+                    "detailsHref": "/en/tests/enneagram-personality-test-nine-types",
+                    "outputLabel": "Trait spectrum, core motivation, and growth cues",
+                    "primaryLabel": "View dedicated page",
+                    "durationLabel": "12 / 18 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/enneagram-personality-test-nine-types/take?form=enneagram_likert_105",
+                        "meta": "105Q ETI standard trait profile.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/enneagram-personality-test-nine-types/take?form=enneagram_forced_choice_144",
+                        "meta": "144Q EAM core motivation matrix.",
+                        "label": "Expert"
+                      }
+                    ],
+                    "questionsLabel": "105 / 144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Enneagram framework"
+                  },
+                  {
+                    "key": "eq-test-emotional-intelligence-assessment",
+                    "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+                    "title": "EQ Test",
+                    "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+                    "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+                    "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "10 min",
+                    "previewVariant": "bars",
+                    "questionsLabel": "60 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on EQ framework"
+                  }
+                ],
+                "title": "Personality & Style",
+                "description": "Best for building a stable map of preferences, traits, and long-horizon tendencies.",
+                "exploreHref": "/en/tests/category/personality",
+                "exploreLabel": "View personality entry",
+                "representativeLabels": [
+                  "MBTI 93Q",
+                  "MBTI 144Q",
+                  "Big Five 120Q",
+                  "Enneagram"
+                ]
+              },
+              {
+                "id": "family-career-direction",
+                "tests": [
+                  {
+                    "key": "holland-career-interest-test-riasec",
+                    "href": "/en/tests/holland-career-interest-test-riasec",
+                    "title": "Holland Career Interest Test (RIASEC)",
+                    "description": "When you need a first-pass read on interest patterns, role direction, and industry fit.",
+                    "detailsHref": "/en/tests/holland-career-interest-test-riasec",
+                    "outputLabel": "RIASEC profile and top interest codes",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "8 / 18 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                        "label": "60-question standard",
+                        "form_code": "riasec_60"
+                      },
+                      {
+                        "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                        "label": "140-question enhanced",
+                        "form_code": "riasec_140"
+                      }
+                    ],
+                    "questionsLabel": "60 / 140 questions",
+                    "secondaryLabel": "View career tests",
+                    "scientificBasis": "Based on Holland Code"
+                  },
+                  {
+                    "key": "big-five-personality-test-ocean-model",
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "title": "Big Five Personality Test",
+                    "description": "When you need a more dimensional view of how stable traits shape work, stress, and relationships.",
+                    "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                    "outputLabel": "Five-factor trait profile with strengths and application notes",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "10-18 min",
+                    "previewVariant": "radar",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                        "meta": "A quick Big Five read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                        "meta": "A deeper trait read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "90 / 120 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Big Five"
+                  },
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI Personality Test",
+                    "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+                    "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "Type profile, preference map, and scenario interpretation",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "12-20 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "A fast type preference read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "A more complete type read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "93-144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  }
+                ],
+                "title": "Career & Direction",
+                "description": "Best for combining interest, work style, and capability signals into career direction decisions.",
+                "exploreHref": "/en/tests/category/career",
+                "exploreLabel": "View career entry",
+                "representativeLabels": [
+                  "RIASEC",
+                  "Big Five 90Q",
+                  "MBTI 93Q"
+                ]
+              },
+              {
+                "id": "family-emotion-state",
+                "tests": [
+                  {
+                    "key": "depression-screening-test-standard-edition",
+                    "href": "/en/tests/depression-screening-test-standard-edition/take",
+                    "title": "Depression Screening Test",
+                    "description": "When you want a faster depression-state screen and a recent-state reference.",
+                    "detailsHref": "/en/tests/depression-screening-test-standard-edition",
+                    "outputLabel": "Depression screening reference",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "3-5 min",
+                    "previewVariant": "summary",
+                    "questionsLabel": "20 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on SDS"
+                  },
+                  {
+                    "key": "clinical-depression-anxiety-assessment-professional-edition",
+                    "href": "/en/tests/clinical-depression-anxiety-assessment-professional-edition/take",
+                    "title": "Depression and Anxiety Assessment",
+                    "description": "When you want a fuller snapshot across both depression and anxiety dimensions.",
+                    "detailsHref": "/en/tests/clinical-depression-anxiety-assessment-professional-edition",
+                    "outputLabel": "Depression and anxiety state reference",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "12 min",
+                    "previewVariant": "summary",
+                    "questionsLabel": "68 questions",
+                    "secondaryLabel": "View details"
+                  }
+                ],
+                "title": "Emotion & State",
+                "description": "Best for recent fluctuation, warning signals, and deciding whether further support is needed.",
+                "exploreHref": "/en/tests#family-emotion-state",
+                "exploreLabel": "View this group",
+                "representativeLabels": [
+                  "Depression screening",
+                  "Clinical combo"
+                ]
+              },
+              {
+                "id": "family-cognitive-ability",
+                "tests": [
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
+                    "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "Start 30-item practice",
+                    "durationLabel": "20 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions",
+                    "secondaryLabel": "View boundaries"
+                  }
+                ],
+                "title": "Cognition & Ability",
+                "description": "Best for reasoning performance, baseline capability, and cognitive strength signals.",
+                "exploreHref": "/en/tests#family-cognitive-ability",
+                "exploreLabel": "View this group",
+                "representativeLabels": [
+                  "IQ assessment"
+                ]
+              },
+              {
+                "id": "family-relationship-collaboration",
+                "tests": [
+                  {
+                    "key": "eq-test-emotional-intelligence-assessment",
+                    "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+                    "title": "EQ Test",
+                    "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+                    "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+                    "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "10 min",
+                    "previewVariant": "bars",
+                    "questionsLabel": "60 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on EQ framework"
+                  },
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI Personality Test",
+                    "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+                    "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "Type profile, preference map, and scenario interpretation",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "12-20 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "A fast type preference read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "A more complete type read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "93-144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  }
+                ],
+                "title": "Relationship & Collaboration",
+                "description": "Best for reading communication style, emotional handling, and collaboration friction.",
+                "exploreHref": "/en/tests#family-relationship-collaboration",
+                "exploreLabel": "View this group",
+                "representativeLabels": [
+                  "EQ",
+                  "MBTI"
+                ]
+              }
+            ],
+            "title": "Continue through the family that best matches your question.",
+            "kicker": "Test Families"
+          },
+          "finalCta": {
+            "body": "If you are not sure which test to take yet, start with the question entry or the category hubs first.",
+            "title": "Start from the better question first, then decide how deep to go.",
+            "primaryHref": "#tests-quick-start",
+            "primaryLabel": "Start choosing",
+            "secondaryHref": "/en/tests/category/personality",
+            "secondaryLabel": "Open personality hub"
+          },
+          "resources": {
+            "body": "Three short reads that make the next choice easier.",
+            "items": [
+              {
+                "key": "career-direction-guide",
+                "href": "/en/career/guides/how-to-find-right-career-direction",
+                "title": "How to Find a Better-Fit Career Direction",
+                "typeLabel": "Guide",
+                "description": "Bring interest, ability, and real constraints into one decision frame instead of relying on a single instinct."
+              },
+              {
+                "key": "mbti-basics",
+                "href": "/en/articles/mbti-basics",
+                "title": "MBTI Basics",
+                "typeLabel": "Article",
+                "description": "Understand what MBTI helps with and where its interpretation boundary should stop."
+              },
+              {
+                "key": "big-five-guide",
+                "href": "/en/articles/big-five-tool-guide",
+                "title": "Big Five Tool Guide",
+                "typeLabel": "Article",
+                "description": "A clearer pre-read if you prefer dimensional interpretation over type-based language."
+              }
+            ],
+            "title": "Read the three most useful resources before you go deeper.",
+            "kicker": "Related Resources",
+            "allHref": "/en/articles",
+            "allLabel": "View all resources"
+          },
+          "quickStart": {
+            "body": "Name the question first, then move into the version that fits best.",
+            "items": [
+              {
+                "id": "career-direction",
+                "href": "/en/tests/category/career",
+                "scent": [
+                  "RIASEC",
+                  "Big Five",
+                  "MBTI"
+                ],
+                "title": "What career direction fits me best?",
+                "ctaLabel": "Open career entry",
+                "description": "Start with interest, work-style, and capability signals before deciding which path deserves deeper effort."
+              },
+              {
+                "id": "personality-structure",
+                "href": "/en/tests/category/personality",
+                "scent": [
+                  "MBTI 93Q",
+                  "MBTI 144Q",
+                  "Big Five 90Q"
+                ],
+                "title": "What does my personality structure look like?",
+                "ctaLabel": "Open personality entry",
+                "description": "Build a decision-ready self-understanding baseline through personality style and stable trait structure."
+              },
+              {
+                "id": "emotion-state",
+                "href": "/en/tests#family-emotion-state",
+                "scent": [
+                  "Clinical combo"
+                ],
+                "title": "How is my current emotional state?",
+                "ctaLabel": "View state tests",
+                "description": "If your main concern is recent fluctuation or warning signals, state-oriented tests should come first."
+              },
+              {
+                "id": "cognitive-ability",
+                "href": "/en/tests#family-cognitive-ability",
+                "scent": [
+                  "IQ assessment",
+                  "Reasoning"
+                ],
+                "title": "Where are my cognitive strengths?",
+                "ctaLabel": "View ability tests",
+                "description": "Use the ability entry when you want a clearer read on reasoning performance and baseline capability."
+              },
+              {
+                "id": "relationship-collaboration",
+                "href": "/en/tests#family-relationship-collaboration",
+                "scent": [
+                  "EQ",
+                  "MBTI"
+                ],
+                "title": "How do I show up in collaboration and relationships?",
+                "ctaLabel": "View collaboration entry",
+                "description": "Combine emotional skills and preference patterns to read how you tend to communicate, coordinate, and respond."
+              }
+            ],
+            "title": "Start from the question that matters most right now.",
+            "kicker": "Quick Start"
+          },
+          "howToChoose": {
+            "body": "Only keep the rules you need to make the next decision.",
+            "items": [
+              {
+                "title": "For a first pass, start with personality or career direction",
+                "description": "Those entries work best as first-pass routes because they help build the broader decision frame."
+              },
+              {
+                "title": "If the concern is recent fluctuation, start with emotion and state",
+                "description": "Those tests are better for “what is happening lately?” than “who am I in general?”"
+              },
+              {
+                "title": "If the goal is strengths and capability, start with cognition and ability",
+                "description": "That route is more useful for learning strategy, problem solving, and baseline ability checks."
+              }
+            ],
+            "title": "Choose based on the decision you need to make.",
+            "kicker": "How to Choose"
+          }
+        }
+      },
+      "staging_before": {
+        "payload_json": {
+          "seo": {
+            "title": "Tests Hub",
+            "description": "Start from a clearer question or category and choose the right FermatMind assessment more quickly.",
+            "iq_ramp_authority": {
+              "media": {
+                "source": "media_library_required",
+                "authority": "backend_cms_media_library",
+                "og_asset_key": "iq-owner-original-30-og",
+                "card_asset_key": "iq-owner-original-30-card",
+                "fallback_allowed": false,
+                "report_cover_asset_key": "iq-full-report-cover"
+              },
+              "locale": "en",
+              "robots": "index,follow",
+              "schema": "iq.seo_ramp_authority.v1",
+              "og_title": "IQ Reasoning Practice",
+              "form_code": "IQ_OWNER_ORIGINAL_30",
+              "test_slug": "iq-test-intelligence-quotient-assessment",
+              "meta_title": "IQ Reasoning Practice | 30 Original Reasoning Items",
+              "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+              "claim_policy": {
+                "copy_boundary": "raw score, dimension reference, original reasoning practice, and method boundary only",
+                "norm_authority_pr": "IQ-NORM-03",
+                "norm_authority_required": true,
+                "public_copy_percentile_claims_enabled": false,
+                "public_copy_iq_estimate_claims_enabled": false,
+                "paid_report_claims_require_backend_entitlement": true,
+                "result_context_iq_estimate_requires_backend_report": true
+              },
+              "is_indexable": true,
+              "llms_eligible": true,
+              "canonical_path": "/en/tests/iq-test-intelligence-quotient-assessment",
+              "og_description": "Original 30-item reasoning practice; public copy stays limited to score context and method boundaries.",
+              "jsonld_eligible": true,
+              "localized_paths": {
+                "en": "/en/tests/iq-test-intelligence-quotient-assessment",
+                "zh": "/zh/tests/iq-test-intelligence-quotient-assessment"
+              },
+              "structured_data": {
+                "@type": "Quiz",
+                "is_free": true,
+                "not_for": "medical, employment, or certification decisions",
+                "result_scope": "raw_score_dimension_reference_paid_report_gated",
+                "question_count": 30,
+                "assessment_mode": "original_reasoning_practice",
+                "time_required_minutes": 20
+              },
+              "authority_source": "backend_cms_landing_surface",
+              "meta_description": "Practice original visual-spatial, pattern, and numeric reasoning items with raw score, dimension reference, and explicit method boundaries.",
+              "sitemap_eligible": true,
+              "llms_full_eligible": false
+            }
+          },
+          "hero": {
+            "body": "A curated set of assessment entry points for self-understanding, learning, career direction, relationships, and collaboration.",
+            "title": "Start from a clearer question and find the assessment that fits.",
+            "eyebrow": "Tests",
+            "previewBody": "Use a clearer starting surface for career direction, personality structure, state, and ability signals.",
+            "previewFlow": [
+              "Choose a question",
+              "Enter a category",
+              "See representative tests"
+            ],
+            "primaryHref": "#tests-quick-start",
+            "previewLabel": "Selection preview",
+            "previewTitle": "Start with the question, then move into the right assessment.",
+            "primaryLabel": "Start choosing",
+            "secondaryHref": "#tests-families",
+            "secondaryLabel": "Browse all assessments",
+            "previewFamilies": [
+              "Personality & Style",
+              "Career & Direction",
+              "Emotion & State",
+              "Cognition & Ability",
+              "Relationship & Collaboration"
+            ]
+          },
+          "trust": {
+            "items": [
+              {
+                "body": "Use reports to structure discussion, clarify tendencies, and decide the next move instead of treating them as final labels.",
+                "title": "Results support judgment. They do not define a person."
+              },
+              {
+                "body": "You can start from the question and the right test version first, then decide later whether to share more information.",
+                "title": "You can start anonymously"
+              },
+              {
+                "body": "State-oriented results are structured references, not formal diagnosis, treatment, or legal guidance.",
+                "title": "Not a substitute for medical, legal, or diagnostic advice"
+              },
+              {
+                "body": "The strongest use cases are learning plans, career conversations, collaboration review, and recurring reflection.",
+                "title": "Results should be reviewed in context"
+              }
+            ],
+            "title": "Method, boundary, and privacy"
+          },
+          "families": {
+            "body": "If you know the broad topic but not the exact test, this is the clearer way forward.",
+            "items": [
+              {
+                "id": "family-personality-style",
+                "tests": [
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI Personality Test",
+                    "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+                    "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "Type profile, preference map, and scenario interpretation",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "12-20 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "A fast type preference read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "A more complete type read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "93-144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  },
+                  {
+                    "key": "big-five-personality-test-ocean-model",
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "title": "Big Five Personality Test",
+                    "description": "When you need a more dimensional view of how stable traits shape work, stress, and relationships.",
+                    "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                    "outputLabel": "Five-factor trait profile with strengths and application notes",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "10-18 min",
+                    "previewVariant": "radar",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                        "meta": "A quick Big Five read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                        "meta": "A deeper trait read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "90 / 120 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Big Five"
+                  },
+                  {
+                    "key": "enneagram-personality-test-nine-types",
+                    "href": "/en/tests/enneagram-personality-test-nine-types",
+                    "title": "Enneagram Test",
+                    "description": "Understand behavior patterns through core motivation, stress response, and defense patterns.",
+                    "detailsHref": "/en/tests/enneagram-personality-test-nine-types",
+                    "outputLabel": "Trait spectrum, core motivation, and growth cues",
+                    "primaryLabel": "View dedicated page",
+                    "durationLabel": "12 / 18 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/enneagram-personality-test-nine-types/take?form=enneagram_likert_105",
+                        "meta": "105Q ETI standard trait profile.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/enneagram-personality-test-nine-types/take?form=enneagram_forced_choice_144",
+                        "meta": "144Q EAM core motivation matrix.",
+                        "label": "Expert"
+                      }
+                    ],
+                    "questionsLabel": "105 / 144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Enneagram framework"
+                  },
+                  {
+                    "key": "eq-test-emotional-intelligence-assessment",
+                    "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+                    "title": "EQ Test",
+                    "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+                    "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+                    "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "10 min",
+                    "previewVariant": "bars",
+                    "questionsLabel": "60 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on EQ framework"
+                  }
+                ],
+                "title": "Personality & Style",
+                "description": "Best for building a stable map of preferences, traits, and long-horizon tendencies.",
+                "exploreHref": "/en/tests/category/personality",
+                "exploreLabel": "View personality entry",
+                "representativeLabels": [
+                  "MBTI 93Q",
+                  "MBTI 144Q",
+                  "Big Five 120Q",
+                  "Enneagram"
+                ]
+              },
+              {
+                "id": "family-career-direction",
+                "tests": [
+                  {
+                    "key": "holland-career-interest-test-riasec",
+                    "href": "/en/tests/holland-career-interest-test-riasec",
+                    "title": "Holland Career Interest Test (RIASEC)",
+                    "description": "When you need a first-pass read on interest patterns, role direction, and industry fit.",
+                    "detailsHref": "/en/tests/holland-career-interest-test-riasec",
+                    "outputLabel": "RIASEC profile and top interest codes",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "8 / 18 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                        "label": "60-question standard",
+                        "form_code": "riasec_60"
+                      },
+                      {
+                        "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                        "label": "140-question enhanced",
+                        "form_code": "riasec_140"
+                      }
+                    ],
+                    "questionsLabel": "60 / 140 questions",
+                    "secondaryLabel": "View career tests",
+                    "scientificBasis": "Based on Holland Code"
+                  },
+                  {
+                    "key": "big-five-personality-test-ocean-model",
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "title": "Big Five Personality Test",
+                    "description": "When you need a more dimensional view of how stable traits shape work, stress, and relationships.",
+                    "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                    "outputLabel": "Five-factor trait profile with strengths and application notes",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "10-18 min",
+                    "previewVariant": "radar",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                        "meta": "A quick Big Five read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                        "meta": "A deeper trait read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "90 / 120 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Big Five"
+                  },
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI Personality Test",
+                    "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+                    "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "Type profile, preference map, and scenario interpretation",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "12-20 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "A fast type preference read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "A more complete type read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "93-144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  }
+                ],
+                "title": "Career & Direction",
+                "description": "Best for combining interest, work style, and capability signals into career direction decisions.",
+                "exploreHref": "/en/tests/category/career",
+                "exploreLabel": "View career entry",
+                "representativeLabels": [
+                  "RIASEC",
+                  "Big Five 90Q",
+                  "MBTI 93Q"
+                ]
+              },
+              {
+                "id": "family-emotion-state",
+                "tests": [
+                  {
+                    "key": "depression-screening-test-standard-edition",
+                    "href": "/en/tests/depression-screening-test-standard-edition/take",
+                    "title": "Depression Screening Test",
+                    "description": "When you want a faster depression-state screen and a recent-state reference.",
+                    "detailsHref": "/en/tests/depression-screening-test-standard-edition",
+                    "outputLabel": "Depression screening reference",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "3-5 min",
+                    "previewVariant": "summary",
+                    "questionsLabel": "20 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on SDS"
+                  },
+                  {
+                    "key": "clinical-depression-anxiety-assessment-professional-edition",
+                    "href": "/en/tests/clinical-depression-anxiety-assessment-professional-edition/take",
+                    "title": "Depression and Anxiety Assessment",
+                    "description": "When you want a fuller snapshot across both depression and anxiety dimensions.",
+                    "detailsHref": "/en/tests/clinical-depression-anxiety-assessment-professional-edition",
+                    "outputLabel": "Depression and anxiety state reference",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "12 min",
+                    "previewVariant": "summary",
+                    "questionsLabel": "68 questions",
+                    "secondaryLabel": "View details"
+                  }
+                ],
+                "title": "Emotion & State",
+                "description": "Best for recent fluctuation, warning signals, and deciding whether further support is needed.",
+                "exploreHref": "/en/tests#family-emotion-state",
+                "exploreLabel": "View this group",
+                "representativeLabels": [
+                  "Depression screening",
+                  "Clinical combo"
+                ]
+              },
+              {
+                "id": "family-cognitive-ability",
+                "tests": [
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
+                    "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "Start 30-item practice",
+                    "durationLabel": "20 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions",
+                    "secondaryLabel": "View boundaries"
+                  }
+                ],
+                "title": "Cognition & Ability",
+                "description": "Best for reasoning performance, baseline capability, and cognitive strength signals.",
+                "exploreHref": "/en/tests#family-cognitive-ability",
+                "exploreLabel": "View this group",
+                "representativeLabels": [
+                  "IQ assessment"
+                ]
+              },
+              {
+                "id": "family-relationship-collaboration",
+                "tests": [
+                  {
+                    "key": "eq-test-emotional-intelligence-assessment",
+                    "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+                    "title": "EQ Test",
+                    "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+                    "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+                    "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "10 min",
+                    "previewVariant": "bars",
+                    "questionsLabel": "60 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on EQ framework"
+                  },
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI Personality Test",
+                    "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+                    "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "Type profile, preference map, and scenario interpretation",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "12-20 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "A fast type preference read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "A more complete type read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "93-144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  }
+                ],
+                "title": "Relationship & Collaboration",
+                "description": "Best for reading communication style, emotional handling, and collaboration friction.",
+                "exploreHref": "/en/tests#family-relationship-collaboration",
+                "exploreLabel": "View this group",
+                "representativeLabels": [
+                  "EQ",
+                  "MBTI"
+                ]
+              }
+            ],
+            "title": "Continue through the family that best matches your question.",
+            "kicker": "Test Families"
+          },
+          "finalCta": {
+            "body": "If you are not sure which test to take yet, start with the question entry or the category hubs first.",
+            "title": "Start from the better question first, then decide how deep to go.",
+            "primaryHref": "#tests-quick-start",
+            "primaryLabel": "Start choosing",
+            "secondaryHref": "/en/tests/category/personality",
+            "secondaryLabel": "Open personality hub"
+          },
+          "resources": {
+            "body": "Three short reads that make the next choice easier.",
+            "items": [
+              {
+                "key": "career-direction-guide",
+                "href": "/en/career/guides/how-to-find-right-career-direction",
+                "title": "How to Find a Better-Fit Career Direction",
+                "typeLabel": "Guide",
+                "description": "Bring interest, ability, and real constraints into one decision frame instead of relying on a single instinct."
+              },
+              {
+                "key": "mbti-basics",
+                "href": "/en/articles/mbti-basics",
+                "title": "MBTI Basics",
+                "typeLabel": "Article",
+                "description": "Understand what MBTI helps with and where its interpretation boundary should stop."
+              },
+              {
+                "key": "big-five-guide",
+                "href": "/en/articles/big-five-tool-guide",
+                "title": "Big Five Tool Guide",
+                "typeLabel": "Article",
+                "description": "A clearer pre-read if you prefer dimensional interpretation over type-based language."
+              }
+            ],
+            "title": "Read the three most useful resources before you go deeper.",
+            "kicker": "Related Resources",
+            "allHref": "/en/articles",
+            "allLabel": "View all resources"
+          },
+          "quickStart": {
+            "body": "Name the question first, then move into the version that fits best.",
+            "items": [
+              {
+                "id": "career-direction",
+                "href": "/en/tests/category/career",
+                "scent": [
+                  "RIASEC",
+                  "Big Five",
+                  "MBTI"
+                ],
+                "title": "What career direction fits me best?",
+                "ctaLabel": "Open career entry",
+                "description": "Start with interest, work-style, and capability signals before deciding which path deserves deeper effort."
+              },
+              {
+                "id": "personality-structure",
+                "href": "/en/tests/category/personality",
+                "scent": [
+                  "MBTI 93Q",
+                  "MBTI 144Q",
+                  "Big Five 90Q"
+                ],
+                "title": "What does my personality structure look like?",
+                "ctaLabel": "Open personality entry",
+                "description": "Build a decision-ready self-understanding baseline through personality style and stable trait structure."
+              },
+              {
+                "id": "emotion-state",
+                "href": "/en/tests#family-emotion-state",
+                "scent": [
+                  "Clinical combo"
+                ],
+                "title": "How is my current emotional state?",
+                "ctaLabel": "View state tests",
+                "description": "If your main concern is recent fluctuation or warning signals, state-oriented tests should come first."
+              },
+              {
+                "id": "cognitive-ability",
+                "href": "/en/tests#family-cognitive-ability",
+                "scent": [
+                  "IQ assessment",
+                  "Reasoning"
+                ],
+                "title": "Where are my cognitive strengths?",
+                "ctaLabel": "View ability tests",
+                "description": "Use the ability entry when you want a clearer read on reasoning performance and baseline capability."
+              },
+              {
+                "id": "relationship-collaboration",
+                "href": "/en/tests#family-relationship-collaboration",
+                "scent": [
+                  "EQ",
+                  "MBTI"
+                ],
+                "title": "How do I show up in collaboration and relationships?",
+                "ctaLabel": "View collaboration entry",
+                "description": "Combine emotional skills and preference patterns to read how you tend to communicate, coordinate, and respond."
+              }
+            ],
+            "title": "Start from the question that matters most right now.",
+            "kicker": "Quick Start"
+          },
+          "howToChoose": {
+            "body": "Only keep the rules you need to make the next decision.",
+            "items": [
+              {
+                "title": "For a first pass, start with personality or career direction",
+                "description": "Those entries work best as first-pass routes because they help build the broader decision frame."
+              },
+              {
+                "title": "If the concern is recent fluctuation, start with emotion and state",
+                "description": "Those tests are better for “what is happening lately?” than “who am I in general?”"
+              },
+              {
+                "title": "If the goal is strengths and capability, start with cognition and ability",
+                "description": "That route is more useful for learning strategy, problem solving, and baseline ability checks."
+              }
+            ],
+            "title": "Choose based on the decision you need to make.",
+            "kicker": "How to Choose"
+          }
+        }
+      },
+      "snapshot": {
+        "payload_json": {
+          "seo": {
+            "title": "Tests Hub",
+            "description": "Start from a clearer question or category and choose the right FermatMind assessment more quickly.",
+            "iq_ramp_authority": {
+              "media": {
+                "source": "media_library_required",
+                "authority": "backend_cms_media_library",
+                "og_asset_key": "iq-owner-original-30-og",
+                "card_asset_key": "iq-owner-original-30-card",
+                "fallback_allowed": false,
+                "report_cover_asset_key": "iq-full-report-cover"
+              },
+              "locale": "en",
+              "robots": "index,follow",
+              "schema": "iq.seo_ramp_authority.v1",
+              "og_title": "IQ Reasoning Practice",
+              "form_code": "IQ_OWNER_ORIGINAL_30",
+              "test_slug": "iq-test-intelligence-quotient-assessment",
+              "meta_title": "IQ Reasoning Practice | 30 Original Reasoning Items",
+              "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+              "claim_policy": {
+                "copy_boundary": "raw score, dimension reference, original reasoning practice, and method boundary only",
+                "norm_authority_pr": "IQ-NORM-03",
+                "norm_authority_required": true,
+                "public_copy_percentile_claims_enabled": false,
+                "public_copy_iq_estimate_claims_enabled": false,
+                "paid_report_claims_require_backend_entitlement": true,
+                "result_context_iq_estimate_requires_backend_report": true
+              },
+              "is_indexable": true,
+              "llms_eligible": true,
+              "canonical_path": "/en/tests/iq-test-intelligence-quotient-assessment",
+              "og_description": "Original 30-item reasoning practice; public copy stays limited to score context and method boundaries.",
+              "jsonld_eligible": true,
+              "localized_paths": {
+                "en": "/en/tests/iq-test-intelligence-quotient-assessment",
+                "zh": "/zh/tests/iq-test-intelligence-quotient-assessment"
+              },
+              "structured_data": {
+                "@type": "Quiz",
+                "is_free": true,
+                "not_for": "medical, employment, or certification decisions",
+                "result_scope": "raw_score_dimension_reference_paid_report_gated",
+                "question_count": 30,
+                "assessment_mode": "original_reasoning_practice",
+                "time_required_minutes": 20
+              },
+              "authority_source": "backend_cms_landing_surface",
+              "meta_description": "Practice original visual-spatial, pattern, and numeric reasoning items with raw score, dimension reference, and explicit method boundaries.",
+              "sitemap_eligible": true,
+              "llms_full_eligible": false
+            }
+          },
+          "hero": {
+            "body": "A curated set of assessment entry points for self-understanding, learning, career direction, relationships, and collaboration.",
+            "title": "Start from a clearer question and find the assessment that fits.",
+            "eyebrow": "Tests",
+            "previewBody": "Use a clearer starting surface for career direction, personality structure, state, and ability signals.",
+            "previewFlow": [
+              "Choose a question",
+              "Enter a category",
+              "See representative tests"
+            ],
+            "primaryHref": "#tests-quick-start",
+            "previewLabel": "Selection preview",
+            "previewTitle": "Start with the question, then move into the right assessment.",
+            "primaryLabel": "Start choosing",
+            "secondaryHref": "#tests-families",
+            "secondaryLabel": "Browse all assessments",
+            "previewFamilies": [
+              "Personality & Style",
+              "Career & Direction",
+              "Emotion & State",
+              "Cognition & Ability",
+              "Relationship & Collaboration"
+            ]
+          },
+          "trust": {
+            "items": [
+              {
+                "body": "Use reports to structure discussion, clarify tendencies, and decide the next move instead of treating them as final labels.",
+                "title": "Results support judgment. They do not define a person."
+              },
+              {
+                "body": "You can start from the question and the right test version first, then decide later whether to share more information.",
+                "title": "You can start anonymously"
+              },
+              {
+                "body": "State-oriented results are structured references, not formal diagnosis, treatment, or legal guidance.",
+                "title": "Not a substitute for medical, legal, or diagnostic advice"
+              },
+              {
+                "body": "The strongest use cases are learning plans, career conversations, collaboration review, and recurring reflection.",
+                "title": "Results should be reviewed in context"
+              }
+            ],
+            "title": "Method, boundary, and privacy"
+          },
+          "families": {
+            "body": "If you know the broad topic but not the exact test, this is the clearer way forward.",
+            "items": [
+              {
+                "id": "family-personality-style",
+                "tests": [
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI Personality Test",
+                    "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+                    "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "Type profile, preference map, and scenario interpretation",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "12-20 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "A fast type preference read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "A more complete type read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "93-144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  },
+                  {
+                    "key": "big-five-personality-test-ocean-model",
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "title": "Big Five Personality Test",
+                    "description": "When you need a more dimensional view of how stable traits shape work, stress, and relationships.",
+                    "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                    "outputLabel": "Five-dimensional trait distribution, strengths, weaknesses and application suggestions",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "10-18 min",
+                    "previewVariant": "radar",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                        "meta": "A quick Big Five read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                        "meta": "A deeper trait read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "90 / 120 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Big Five"
+                  },
+                  {
+                    "key": "enneagram-personality-test-nine-types",
+                    "href": "/en/tests/enneagram-personality-test-nine-types",
+                    "title": "Enneagram Test",
+                    "description": "Understand behavior patterns through core motivation, stress response, and defense patterns.",
+                    "detailsHref": "/en/tests/enneagram-personality-test-nine-types",
+                    "outputLabel": "Trait spectrum, core motivation, and growth cues",
+                    "primaryLabel": "View dedicated page",
+                    "durationLabel": "12 / 18 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/enneagram-personality-test-nine-types/take?form=enneagram_likert_105",
+                        "meta": "105Q ETI standard trait profile.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/enneagram-personality-test-nine-types/take?form=enneagram_forced_choice_144",
+                        "meta": "144Q EAM core motivation matrix.",
+                        "label": "Expert"
+                      }
+                    ],
+                    "questionsLabel": "105 / 144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Enneagram framework"
+                  },
+                  {
+                    "key": "eq-test-emotional-intelligence-assessment",
+                    "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+                    "title": "EQ Test",
+                    "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+                    "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+                    "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "10 min",
+                    "previewVariant": "bars",
+                    "questionsLabel": "60 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on EQ framework"
+                  }
+                ],
+                "title": "Personality & Style",
+                "description": "Best for building a stable map of preferences, traits, and long-horizon tendencies.",
+                "exploreHref": "/en/tests/category/personality",
+                "exploreLabel": "View personality entry",
+                "representativeLabels": [
+                  "MBTI 93Q",
+                  "MBTI 144Q",
+                  "Big Five 120Q",
+                  "Enneagram"
+                ]
+              },
+              {
+                "id": "family-career-direction",
+                "tests": [
+                  {
+                    "key": "holland-career-interest-test-riasec",
+                    "href": "/en/tests/holland-career-interest-test-riasec",
+                    "title": "Holland Career Interest Test (RIASEC)",
+                    "description": "When you first need to identify career interest directions, industry preferences and initial clues.",
+                    "detailsHref": "/en/tests/holland-career-interest-test-riasec",
+                    "outputLabel": "RIASEC profile and top interest codes",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "8 / 18 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                        "label": "60-question standard",
+                        "form_code": "riasec_60"
+                      },
+                      {
+                        "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                        "label": "140-question enhanced",
+                        "form_code": "riasec_140"
+                      }
+                    ],
+                    "questionsLabel": "60 / 140 questions",
+                    "secondaryLabel": "View career tests",
+                    "scientificBasis": "Based on Holland Code"
+                  },
+                  {
+                    "key": "big-five-personality-test-ocean-model",
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "title": "Big Five Personality Test",
+                    "description": "When you need a more dimensional view of how stable traits shape work, stress, and relationships.",
+                    "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                    "outputLabel": "Five-factor trait profile with strengths and application notes",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "10-18 min",
+                    "previewVariant": "radar",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                        "meta": "A quick Big Five read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                        "meta": "A deeper trait read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "90 / 120 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Big Five"
+                  },
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI Personality Test",
+                    "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+                    "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "Type profile, preference map, and scenario interpretation",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "12-20 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "A fast type preference read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "A more complete type read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "93-144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  }
+                ],
+                "title": "Career & Direction",
+                "description": "Best for combining interest, work style, and capability signals into career direction decisions.",
+                "exploreHref": "/en/tests/category/career",
+                "exploreLabel": "View career entry",
+                "representativeLabels": [
+                  "RIASEC",
+                  "Big Five 90Q",
+                  "MBTI 93Q"
+                ]
+              },
+              {
+                "id": "family-emotion-state",
+                "tests": [
+                  {
+                    "key": "depression-screening-test-standard-edition",
+                    "href": "/en/tests/depression-screening-test-standard-edition/take",
+                    "title": "Depression Screening Test",
+                    "description": "When you want a faster depression-state screen and a recent-state reference.",
+                    "detailsHref": "/en/tests/depression-screening-test-standard-edition",
+                    "outputLabel": "Depression screening reference",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "3-5 min",
+                    "previewVariant": "summary",
+                    "questionsLabel": "20 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on SDS"
+                  },
+                  {
+                    "key": "clinical-depression-anxiety-assessment-professional-edition",
+                    "href": "/en/tests/clinical-depression-anxiety-assessment-professional-edition/take",
+                    "title": "Depression and Anxiety Assessment",
+                    "description": "When you want a fuller snapshot across both depression and anxiety dimensions.",
+                    "detailsHref": "/en/tests/clinical-depression-anxiety-assessment-professional-edition",
+                    "outputLabel": "Depression and anxiety state reference",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "12 min",
+                    "previewVariant": "summary",
+                    "questionsLabel": "68 questions",
+                    "secondaryLabel": "View details"
+                  }
+                ],
+                "title": "Emotion & State",
+                "description": "Best for recent fluctuation, warning signals, and deciding whether further support is needed.",
+                "exploreHref": "/en/tests#family-emotion-state",
+                "exploreLabel": "View this group",
+                "representativeLabels": [
+                  "Depression screening",
+                  "Clinical combo"
+                ]
+              },
+              {
+                "id": "family-cognitive-ability",
+                "tests": [
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
+                    "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "Start 30-item practice",
+                    "durationLabel": "20 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions",
+                    "secondaryLabel": "View boundaries"
+                  }
+                ],
+                "title": "Cognition & Ability",
+                "description": "Best for reasoning performance, baseline capability, and cognitive strength signals.",
+                "exploreHref": "/en/tests#family-cognitive-ability",
+                "exploreLabel": "View this group",
+                "representativeLabels": [
+                  "IQ assessment"
+                ]
+              },
+              {
+                "id": "family-relationship-collaboration",
+                "tests": [
+                  {
+                    "key": "eq-test-emotional-intelligence-assessment",
+                    "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+                    "title": "EQ Test",
+                    "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+                    "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+                    "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+                    "primaryLabel": "Start test",
+                    "durationLabel": "10 min",
+                    "previewVariant": "bars",
+                    "questionsLabel": "60 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on EQ framework"
+                  },
+                  {
+                    "key": "mbti-personality-test-16-personality-types",
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "title": "MBTI Personality Test",
+                    "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+                    "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                    "outputLabel": "Type profile, preference map, and scenario interpretation",
+                    "primaryLabel": "Standard",
+                    "durationLabel": "12-20 min",
+                    "previewVariant": "summary",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                        "meta": "A fast type preference read.",
+                        "label": "Standard"
+                      },
+                      {
+                        "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                        "meta": "A more complete type read.",
+                        "label": "Pro"
+                      }
+                    ],
+                    "questionsLabel": "93-144 questions",
+                    "secondaryLabel": "View details",
+                    "scientificBasis": "Based on Jungian-inspired typology"
+                  }
+                ],
+                "title": "Relationship & Collaboration",
+                "description": "Best for reading communication style, emotional handling, and collaboration friction.",
+                "exploreHref": "/en/tests#family-relationship-collaboration",
+                "exploreLabel": "View this group",
+                "representativeLabels": [
+                  "EQ",
+                  "MBTI"
+                ]
+              }
+            ],
+            "title": "Continue through the family that best matches your question.",
+            "kicker": "Test Families"
+          },
+          "finalCta": {
+            "body": "If you are not sure which test to take yet, start with the question entry or the category hubs first.",
+            "title": "Start from the better question first, then decide how deep to go.",
+            "primaryHref": "#tests-quick-start",
+            "primaryLabel": "Start choosing",
+            "secondaryHref": "/en/tests/category/personality",
+            "secondaryLabel": "Open personality hub"
+          },
+          "resources": {
+            "body": "Three short reads that make the next choice easier.",
+            "items": [
+              {
+                "key": "career-direction-guide",
+                "href": "/en/career/guides/how-to-find-right-career-direction",
+                "title": "How to Find a Better-Fit Career Direction",
+                "typeLabel": "Guide",
+                "description": "Bring interest, ability, and real constraints into one decision frame instead of relying on a single instinct."
+              },
+              {
+                "key": "mbti-basics",
+                "href": "/en/articles/mbti-basics",
+                "title": "MBTI Basics",
+                "typeLabel": "Article",
+                "description": "Understand what MBTI helps with and where its interpretation boundary should stop."
+              },
+              {
+                "key": "big-five-guide",
+                "href": "/en/articles/big-five-tool-guide",
+                "title": "Big Five Tool Guide",
+                "typeLabel": "Article",
+                "description": "A clearer pre-read if you prefer dimensional interpretation over type-based language."
+              }
+            ],
+            "title": "Read the three most useful resources before you go deeper.",
+            "kicker": "Related Resources",
+            "allHref": "/en/articles",
+            "allLabel": "View all resources"
+          },
+          "quickStart": {
+            "body": "Name the question first, then move into the version that fits best.",
+            "items": [
+              {
+                "id": "career-direction",
+                "href": "/en/tests/category/career",
+                "scent": [
+                  "RIASEC",
+                  "Big Five",
+                  "MBTI"
+                ],
+                "title": "What career direction fits me best?",
+                "ctaLabel": "Open career entry",
+                "description": "Start with interest, work-style, and capability signals before deciding which path deserves deeper effort."
+              },
+              {
+                "id": "personality-structure",
+                "href": "/en/tests/category/personality",
+                "scent": [
+                  "MBTI 93Q",
+                  "MBTI 144Q",
+                  "Big Five 90Q"
+                ],
+                "title": "What does my personality structure look like?",
+                "ctaLabel": "Open personality entry",
+                "description": "Start with personality style and stable traits to build a baseline map of self-understanding that can be discussed and reviewed."
+              },
+              {
+                "id": "emotion-state",
+                "href": "/en/tests#family-emotion-state",
+                "scent": [
+                  "Clinical combo"
+                ],
+                "title": "How is my current emotional state?",
+                "ctaLabel": "View state tests",
+                "description": "If your main concern is recent fluctuations or risk signals, start with state-oriented tests, then decide whether you need further support."
+              },
+              {
+                "id": "cognitive-ability",
+                "href": "/en/tests#family-cognitive-ability",
+                "scent": [
+                  "IQ assessment",
+                  "Reasoning"
+                ],
+                "title": "Where are my cognitive strengths?",
+                "ctaLabel": "View ability tests",
+                "description": "Start with the ability entry when you want to examine reasoning performance, cognitive pace and a baseline of ability."
+              },
+              {
+                "id": "relationship-collaboration",
+                "href": "/en/tests#family-relationship-collaboration",
+                "scent": [
+                  "EQ",
+                  "MBTI"
+                ],
+                "title": "How do I show up in collaboration and relationships?",
+                "ctaLabel": "View collaboration entry",
+                "description": "View emotional skills, preference patterns and interaction habits together to better inform judgments about collaboration and relationships."
+              }
+            ],
+            "title": "Start from the question that matters most right now.",
+            "kicker": "Quick Start"
+          },
+          "howToChoose": {
+            "body": "Only keep the rules you need to make the next decision.",
+            "items": [
+              {
+                "title": "For a first pass, start with personality or career direction",
+                "description": "Those entries work best as first-pass routes because they help build the broader decision frame."
+              },
+              {
+                "title": "If the concern is recent fluctuation, start with emotion and state",
+                "description": "Those tests are better for “what is happening lately?” than “who am I in general?”"
+              },
+              {
+                "title": "If the goal is strengths and capability, start with cognition and ability",
+                "description": "That route is more useful for learning strategy, problem solving, and baseline ability checks."
+              }
+            ],
+            "title": "Choose based on the decision you need to make.",
+            "kicker": "How to Choose"
+          }
+        }
+      }
     }
   ],
   "source_locale": "zh-CN",

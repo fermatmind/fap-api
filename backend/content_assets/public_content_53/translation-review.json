@@ -1,6 +1,6 @@
 {
   "schema": "fermatmind.public_content_translation.review.v1",
-  "candidate_sha256": "17c92c282b6367ad9b35ea8b71e19948d25e8c10c7012e755d6452da433a1da3",
+  "candidate_sha256": "1c63950bf8fba8ca7c0f5261dc0359df7119d19d01622857c6d0091d73b19e20",
   "verdict": "PASS",
   "pages": {
     "PAGE-HELP-ABOUT": {
@@ -44,6 +44,55 @@
       "snapshot_sha256": "f17794c59b11b24bf7ecd3cabd138e6964b63d6f8e538e132f81d51f0d22f712",
       "reviewed_candidate_file_sha256": "64424ee2023a29ea266ea6c2e27a4b3af2011bc8ec820c5be4f593f6ba0177ac",
       "reviewed_units": 26
+    },
+    "PAGE-32": {
+      "verdict": "PASS",
+      "source_sha256": "0f0ce97606fb307aa54d24dc4ea74da79ce04b4b5ea0184ffdb87b67d1265ea8",
+      "staging_source_sha256": "d482aabf11063fdf8b78ba855da0f5a5a934b72981db9c27b5017b8d5608b755",
+      "snapshot_sha256": "08da64ea011c82fa68f3cd5293d85a589c7b35376019dcb45a0f8332f999e176",
+      "independent_semantic_review_sha256": "ff9cf2874adb7a99253d1a3a367b7148af644858d8ab6e35a2c9948cd8197ed0",
+      "translated_human_paths": [
+        [
+          "quickStart",
+          "items",
+          1,
+          "description"
+        ],
+        [
+          "quickStart",
+          "items",
+          2,
+          "description"
+        ],
+        [
+          "quickStart",
+          "items",
+          3,
+          "description"
+        ],
+        [
+          "quickStart",
+          "items",
+          4,
+          "description"
+        ],
+        [
+          "families",
+          "items",
+          1,
+          "tests",
+          0,
+          "description"
+        ],
+        [
+          "families",
+          "items",
+          0,
+          "tests",
+          1,
+          "outputLabel"
+        ]
+      ]
     }
   },
   "independent_semantic_review_sha256": "64dc8751169eb1a3189d89ed1a3dce62e5ec6e0a17fb60ab92a09ed11158456d"

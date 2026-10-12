@@ -155,7 +155,7 @@ final class PublicContent53Package
         if (($package['schema'] ?? null) !== 'fermatmind.public_content_translation.v1'
             || ($package['source_locale'] ?? null) !== 'zh-CN' || ($package['target_locale'] ?? null) !== 'en'
             || ($package['excluded_families'] ?? null) !== ['career', 'personality', 'blog']
-            || count($rows) < 1 || count($rows) > count(self::TRANSLATION_PAGES) || ($proof['schema'] ?? null) !== 'fermatmind.public_content_translation.review.v1'
+            || count($rows) < 1 || count($rows) > count(self::TRANSLATION_PAGES) + 1 || ($proof['schema'] ?? null) !== 'fermatmind.public_content_translation.review.v1'
             || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
             || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
             throw new DomainException('public_content_53_translation_review_or_scope_invalid');
@@ -163,6 +163,12 @@ final class PublicContent53Package
         $seen = [];
         foreach ($rows as $row) {
             $id = $row['page_id'] ?? '';
+            if ($id === 'PAGE-32' && ! isset($seen[$id])) {
+                $this->translationSurface($row, $proof['pages'][$id] ?? []);
+                $seen[$id] = true;
+
+                continue;
+            }
             if (! isset(self::TRANSLATION_PAGES[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'page'
                 || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => self::TRANSLATION_PAGES[$id], 'locale' => 'en']
                 || ($row['source_identity'] ?? null) !== [] || ($row['staging_source_identity'] ?? null) !== []) {
@@ -224,6 +230,53 @@ final class PublicContent53Package
         }
 
         return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
+    /** The existing Tests surface writer may change only these six human fields. */
+    private function translationSurface(array $row, array $review): void
+    {
+        if (($row['kind'] ?? null) !== 'surface'
+            || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => 'tests', 'locale' => 'en']
+            || ($row['source_identity'] ?? null) !== [] || ($row['staging_source_identity'] ?? null) !== []) {
+            throw new DomainException('public_content_53_translation_scope_invalid');
+        }
+        $paths = [
+            ['quickStart', 'items', 1, 'description'], ['quickStart', 'items', 2, 'description'],
+            ['quickStart', 'items', 3, 'description'], ['quickStart', 'items', 4, 'description'],
+            ['families', 'items', 1, 'tests', 0, 'description'], ['families', 'items', 0, 'tests', 1, 'outputLabel'],
+        ];
+        $remaining = [];
+        foreach (['before', 'staging_before', 'snapshot', 'source_snapshot', 'staging_source_snapshot'] as $version) {
+            $value = $row[$version] ?? [];
+            if (array_keys($value) !== ['payload_json'] || ! is_array($value['payload_json'])) {
+                throw new DomainException('public_content_53_translation_fields_invalid');
+            }
+            foreach ($paths as $path) {
+                $part = &$value['payload_json'];
+                foreach ($path as $key) {
+                    if (! is_array($part) || ! array_key_exists($key, $part)) {
+                        throw new DomainException('public_content_53_translation_fields_invalid');
+                    }
+                    $part = &$part[$key];
+                }
+                if (! is_string($part) || trim($part) === ''
+                    || ($version === 'snapshot' && preg_match('/[\x{3400}-\x{9fff}]/u', $part) === 1)) {
+                    throw new DomainException('public_content_53_translation_coverage_invalid');
+                }
+                $part = null;
+                unset($part);
+            }
+            $remaining[$version] = PromotionContextFactory::canonicalJson($value);
+        }
+        if ($remaining['snapshot'] !== $remaining['before'] || $remaining['snapshot'] !== $remaining['staging_before']) {
+            throw new DomainException('public_content_53_translation_machine_fields_changed');
+        }
+        if (($review['verdict'] ?? null) !== 'PASS'
+            || ($review['source_sha256'] ?? null) !== hash('sha256', PromotionContextFactory::canonicalJson($row['source_snapshot']))
+            || ($review['snapshot_sha256'] ?? null) !== hash('sha256', PromotionContextFactory::canonicalJson($row['snapshot']))
+            || ($review['staging_source_sha256'] ?? null) !== hash('sha256', PromotionContextFactory::canonicalJson($row['staging_source_snapshot']))) {
+            throw new DomainException('public_content_53_translation_coverage_invalid');
+        }
     }
 
     private function structure(string $markdown): array

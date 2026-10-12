@@ -11,6 +11,7 @@ use App\Http\Controllers\API\V0_5\Cms\TopicController;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use App\Models\ContentPage;
+use App\Models\LandingSurface;
 use DomainException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -81,15 +82,20 @@ final class PublicContent53State
                 $saved['relations']['page_blocks'] = $this->query('page_blocks', ['landing_surface_id' => $values['id']], $lock);
             }
             if (isset($row['source_snapshot'])) {
-                $source = $this->query('content_pages', array_replace($row['identity'], ['locale' => 'zh-CN']), $lock);
+                $sourceWhere = array_replace($row['identity'], ['locale' => 'zh-CN']);
+                if ($row['kind'] === 'surface') {
+                    $sourceWhere['surface_key'] = $sourceWhere['slug'];
+                    unset($sourceWhere['slug']);
+                }
+                $source = $this->query($table, $sourceWhere, $lock);
                 if (count($source) !== 1 || $source[0]['status'] !== 'published' || ! (bool) $source[0]['is_public']
                     || ($source[0]['deleted_at'] ?? null) !== null
                     || array_filter(['published_at', 'scheduled_at'], static fn ($field): bool => ($source[0][$field] ?? null) !== null && strtotime($source[0][$field]) > time())) {
                     throw new DomainException('public_content_53_translation_source_missing');
                 }
-                $sourcePage = new ContentPage;
+                $sourcePage = $row['kind'] === 'surface' ? new LandingSurface : new ContentPage;
                 $sourcePage->setRawAttributes($source[0], true);
-                if (! $sourcePage->passesPublicReadinessGate()) {
+                if ($sourcePage instanceof ContentPage && ! $sourcePage->passesPublicReadinessGate()) {
                     throw new DomainException('public_content_53_translation_source_hold');
                 }
                 $saved['translation_source'] = $source[0];

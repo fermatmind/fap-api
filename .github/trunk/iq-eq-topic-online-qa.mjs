@@ -39,7 +39,7 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     for (const candidate of row.snapshot.section_candidates) {
       const sections = payload.sections?.filter(section => section.section_key === candidate.section_key);
       if (sections?.length !== 1 || sections[0].render_variant !== candidate.render_variant || (sections[0].body_html ?? null) !== null) throw new Error('IQ_EQ_TOPIC_ONLINE_SECTION_DRIFT');
-      if (candidate.section_key === 'overview' && sections[0].body_md !== candidate.body_md) throw new Error('IQ_EQ_TOPIC_ONLINE_BODY_DRIFT');
+      if (candidate.section_key !== 'faq' && sections[0].body_md !== candidate.body_md) throw new Error('IQ_EQ_TOPIC_ONLINE_BODY_DRIFT');
       if (candidate.section_key === 'faq' && !equal(sections[0].payload_json?.items, candidate.payload_json.items)) throw new Error('IQ_EQ_TOPIC_ONLINE_FAQ_DRIFT');
     }
     const faqs = row.snapshot.section_candidates[1].payload_json.items;
@@ -61,6 +61,8 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     const verifyDOM = html => {
       assertSsrCandidate(html, { identity:row.identity, snapshot:{ title:row.snapshot.profile_patch.title, content_md:row.snapshot.section_candidates[0].body_md,
         seo_title:row.snapshot.seo_text_candidate.title, seo_description:row.snapshot.seo_text_candidate.description } }, seo, environment, response.robots, 'topic');
+      const callout = articleDom(html, 'topic_callout');
+      if (normalized(callout.body) !== normalized(row.snapshot.section_candidates[2].body_md)) throw new Error('IQ_EQ_TOPIC_ONLINE_VISIBLE_CALLOUT_DRIFT');
       const dom = articleDom(html, 'topic_faq');
       if (dom.faq_questions.length !== 7 || dom.faq_answers.length !== 7 || faqs.some((faq,index) => normalized(dom.faq_questions[index]) !== normalized(faq.question)
         || normalized(dom.faq_answers[index]) !== normalized(faq.answer))) throw new Error('IQ_EQ_TOPIC_ONLINE_VISIBLE_FAQ_DRIFT');

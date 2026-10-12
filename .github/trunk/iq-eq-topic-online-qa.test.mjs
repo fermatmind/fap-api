@@ -11,7 +11,7 @@ function dom(row){
  const links=[...row.snapshot.section_candidates[0].body_md.matchAll(/\[[^\]]+\]\(([^)]+)\)/g)].map(m=>m[1]);
  links.push(...[...row.snapshot.section_candidates[0].body_md.matchAll(/\/(?:zh|en)\/[a-z0-9][a-z0-9/-]*/g)].map(m=>m[0]));
  const faqs=row.snapshot.section_candidates[1].payload_json.items;const path=`/${row.identity.locale==='en'?'en':'zh'}/topics/iq-eq`;
- return `<html><head><meta charset="utf-8"><title>${esc(row.snapshot.seo_text_candidate.title)}</title><meta name="description" content="${esc(row.snapshot.seo_text_candidate.description)}"><meta name="robots" content="noindex,nofollow,noarchive,nocache"><link rel="canonical" href="https://fermatmind.com${path}"></head><body><h1>${esc(row.snapshot.profile_patch.title)}</h1><div id="overview">${esc(text)}${links.map(href=>`<a href="${esc(href)}">${esc(href)}</a>`).join('')}</div><div id="faq"><dl>${faqs.map(faq=>`<div><dt>${esc(faq.question)}</dt><dd>${esc(faq.answer)}</dd></div>`).join('')}</dl></div></body></html>`;
+ return `<html><head><meta charset="utf-8"><title>${esc(row.snapshot.seo_text_candidate.title)}</title><meta name="description" content="${esc(row.snapshot.seo_text_candidate.description)}"><meta name="robots" content="noindex,nofollow,noarchive,nocache"><link rel="canonical" href="https://fermatmind.com${path}"></head><body><h1>${esc(row.snapshot.profile_patch.title)}</h1><div id="overview">${esc(text)}${links.map(href=>`<a href="${esc(href)}">${esc(href)}</a>`).join('')}</div><div id="why_it_matters"><p>${esc(row.snapshot.section_candidates[2].body_md)}</p></div><div id="faq"><dl>${faqs.map(faq=>`<div><dt>${esc(faq.question)}</dt><dd>${esc(faq.answer)}</dd></div>`).join('')}</dl></div></body></html>`;
 }
 function fetcher(mutate=()=>{}, robots=null){return async(value,init)=>{
  assert.equal(init.redirect,'error');const u=new URL(value);
@@ -52,4 +52,10 @@ test('Topic API and SSR canonical reject another HTTPS port',async()=>{
  const pre=await readOnlinePrestate('production',root,fetcher());
  await assert.rejects(verifyOnlineCandidates('production',root,fetcher(payload=>{if(payload.meta)payload.meta.canonical=payload.meta.canonical.replace('fermatmind.com/','fermatmind.com:8443/');}),renderer,pre),/CANONICAL_DRIFT/);
  await assert.rejects(verifyOnlineCandidates('production',root,fetcher(),value=>renderer(value).replace('href="https://fermatmind.com/','href="https://fermatmind.com:8443/'),pre),/SSR_CANONICAL_MISMATCH/);
+});
+
+test('existing callout copy must be visible and exact in both API and DOM', async()=>{
+ const pre=await readOnlinePrestate('production',root,fetcher());
+ await assert.rejects(verifyOnlineCandidates('production',root,fetcher(payload=>{if(payload.sections)payload.sections[2].body_md='Old callout';}),renderer,pre),/BODY_DRIFT/);
+ await assert.rejects(verifyOnlineCandidates('production',root,fetcher(),value=>renderer(value).replace('id="why_it_matters"','id="why_it_matters" hidden'),pre),/VISIBLE_CALLOUT_DRIFT/);
 });

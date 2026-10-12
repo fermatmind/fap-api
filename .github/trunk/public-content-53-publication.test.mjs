@@ -11,14 +11,15 @@ import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 test('active full-page package binds only the reviewed eligible English pages',()=>{
  const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
- assert.equal(binding.expected_row_count,6);assert.equal(rows.length,6);
- assert.equal(new Set(rows.map(row=>row.page_id)).size,6);
- const allowed=['help-about','help-team','help-used-and-mentioned','help-payment-refund','help-unlock-failure','help-result-recovery'];
+ assert.equal(binding.expected_row_count,7);assert.equal(rows.length,7);
+ assert.equal(new Set(rows.map(row=>row.page_id)).size,7);
+ const allowed=['help-about','help-team','help-used-and-mentioned','help-payment-refund','help-unlock-failure','help-result-recovery','tests'];
  assert.deepEqual(rows.map(row=>row.identity.slug).sort(),allowed.sort());
- assert.ok(rows.every(row=>row.kind==='page' && row.identity.org_id===0 && row.identity.locale==='en'));
+ assert.ok(rows.every(row=>['page','surface'].includes(row.kind) && row.identity.org_id===0 && row.identity.locale==='en'));
  assert.equal(rows.find(row=>row.identity.slug==='help-payment-refund').snapshot.faq_items.length,4);
  assert.ok(rows.find(row=>row.identity.slug==='help-unlock-failure').snapshot.content_md.includes('24 hours'));
- assert.ok(rows.every(row=>!row.staging_source_snapshot));
+ assert.equal(rows.filter(row=>row.staging_source_snapshot).length,1);
+ assert.equal(rows.find(row=>row.page_id==='PAGE-32').kind,'surface');
 });
 test('previous immutable 50-row package remains fully validated by its own exact digest',()=>{
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');

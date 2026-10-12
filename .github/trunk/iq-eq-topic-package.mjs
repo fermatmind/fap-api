@@ -6,7 +6,7 @@ import { isIqArticleOnlyPromotionRegistration, isIqArticleOnlyContextFactoryChan
 import { canonical } from './iq-public-scale-package.mjs';
 
 export const packagePath = 'content_assets/iq_public/topics/20261010-v1';
-export const packageSha256 = 'ad0e2d75cdee2f969582620fb6157267dc661c688122900a12ca4a4f7359f2af';
+export const packageSha256 = '4713f9bca3262ce39607262e8b1a32406e2bac086c2ba091fcb5303d80c37933';
 export const executorPaths = [
   "app/Console/Commands/ContentPromoteExactPackage.php",
   "app/Http/Controllers/API/V0_5/Cms/TopicController.php",

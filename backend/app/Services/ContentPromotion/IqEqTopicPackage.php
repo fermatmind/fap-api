@@ -12,7 +12,7 @@ final class IqEqTopicPackage
 {
     public const PACKAGE = 'content_assets/iq_public/topics/20261010-v1';
 
-    public const SHA256 = 'ad0e2d75cdee2f969582620fb6157267dc661c688122900a12ca4a4f7359f2af';
+    public const SHA256 = '4713f9bca3262ce39607262e8b1a32406e2bac086c2ba091fcb5303d80c37933';
 
     public function read(string $backendRoot, string $expectedSha256): array
     {
@@ -54,9 +54,11 @@ final class IqEqTopicPackage
         }
         $review = $this->json($root, 'exact-payload-review.json');
         if (($review['schema'] ?? null) !== 'fermatmind.iq_eq_topic_exact_review.v1'
-            || ($review['approval_kind'] ?? null) !== 'verified_native_professional_candidate_review'
-            || ($review['reviewer_role'] ?? null) !== 'fm_independent_reviewer'
-            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($review['source_native_result_sha256'] ?? '')) !== 1) {
+            || ($review['approval_kind'] ?? null) !== 'verified_source_faithful_translation_review'
+            || ($review['reviewer_role'] ?? null) !== 'independent_semantic_reviewer'
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($review['independent_semantic_review_sha256'] ?? '')) !== 1
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($review['additional_independent_semantic_review_sha256'] ?? '')) !== 1
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($review['source_snapshot_sha256'] ?? '')) !== 1) {
             throw new DomainException('iq_eq_topic_review_invalid');
         }
         $rows = $manifest['rows'] ?? [];
@@ -91,13 +93,17 @@ final class IqEqTopicPackage
                 || ! is_string($title) || $title === '' || mb_strlen($title) > 255 || ! is_string($description) || $description === ''
                 || ! $this->same($snapshot['profile_patch'] ?? null, ['title' => $title, 'subtitle' => $description, 'excerpt' => ''])
                 || ! $this->same($snapshot['seo_text_candidate'] ?? null, ['title' => $title, 'description' => $description])
-                || count($snapshot['section_candidates'] ?? []) !== 2
+                || count($snapshot['section_candidates'] ?? []) !== 3
                 || ($snapshot['section_candidates'][0]['section_key'] ?? null) !== 'overview'
                 || ($snapshot['section_candidates'][0]['render_variant'] ?? null) !== 'rich_text'
                 || ($snapshot['section_candidates'][0]['body_md'] ?? null) !== $overview
                 || preg_match('/^#\s/m', $overview) === 1
                 || ($snapshot['section_candidates'][1]['section_key'] ?? null) !== 'faq'
-                || ($snapshot['section_candidates'][1]['render_variant'] ?? null) !== 'faq') {
+                || ($snapshot['section_candidates'][1]['render_variant'] ?? null) !== 'faq'
+                || ($snapshot['section_candidates'][2]['section_key'] ?? null) !== 'why_it_matters'
+                || ($snapshot['section_candidates'][2]['render_variant'] ?? null) !== 'callout'
+                || ! is_string($snapshot['section_candidates'][2]['body_md'] ?? null)
+                || trim($snapshot['section_candidates'][2]['body_md']) === '') {
                 throw new DomainException('iq_eq_topic_snapshot_invalid');
             }
             $faqs = $metadata['faq_items'] ?? null;

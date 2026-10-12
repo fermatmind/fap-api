@@ -378,6 +378,15 @@ PHP;
         $rows = app(PublicContent53Package::class)->read(base_path(), $this->translationDigest())['candidates'];
         $englishIds = [];
         foreach ($rows as $candidate) {
+            if ($candidate['kind'] === 'surface') {
+                foreach (['en' => PublicContent53Package::before($candidate), 'zh-CN' => PublicContent53Package::source($candidate)] as $locale => $copy) {
+                    LandingSurface::query()->updateOrCreate(['org_id' => 0, 'surface_key' => 'tests', 'locale' => $locale], $copy + [
+                        'title' => 'Existing tests directory', 'schema_version' => '1.0', 'status' => 'published', 'is_public' => true, 'is_indexable' => false,
+                    ]);
+                }
+
+                continue;
+            }
             $target = ContentPage::query()->updateOrCreate($candidate['identity'],
                 ['path' => '/en/'.$candidate['identity']['slug'], 'content_html' => ''] + PublicContent53Package::before($candidate) + [
                     'status' => 'published', 'is_public' => true, 'is_indexable' => false, 'review_state' => 'approved',
@@ -400,6 +409,8 @@ PHP;
         ]);
         $english->forceFill(['working_revision_id' => $draft->id])->saveQuietly();
         $draftBefore = $draft->fresh()->toArray();
+        $chineseSurfaces = DB::table('landing_surfaces')->where('locale', 'zh-CN')->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all();
+        $blocks = DB::table('page_blocks')->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all();
         $states = app(PublicContent53State::class);
         $before = $states->read($this->translationDigest());
         $states->assertBaseline($rows);
@@ -408,6 +419,8 @@ PHP;
         self::assertSame(count($rows), $after['written_count']);
         Cache::flush();
         $states->assertPublished($rows, $after['state']);
+        self::assertSame($chineseSurfaces, DB::table('landing_surfaces')->where('locale', 'zh-CN')->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all());
+        self::assertSame($blocks, DB::table('page_blocks')->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all());
         self::assertSame($otherPages, DB::table('content_pages')->whereNotIn('id', $englishIds)->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all());
         self::assertSame($draftBefore, $draft->fresh()->toArray());
         self::assertSame($draft->id, $english->fresh()->working_revision_id);
@@ -415,6 +428,18 @@ PHP;
         DB::transaction(fn () => $writer->restore($this->translationContext(), $before, $after['state']));
         Cache::flush();
         self::assertSame($before, $states->read($this->translationDigest()));
+        $surface = LandingSurface::query()->where(['org_id' => 0, 'surface_key' => 'tests', 'locale' => 'zh-CN'])->firstOrFail();
+        $sourcePayload = $surface->payload_json;
+        $driftedPayload = $sourcePayload;
+        $driftedPayload['quickStart']['items'][1]['description'] = 'Changed after source review';
+        $surface->forceFill(['payload_json' => $driftedPayload])->saveQuietly();
+        try {
+            $states->read($this->translationDigest());
+            self::fail('Concurrent Chinese surface copy must not be overwritten');
+        } catch (DomainException $error) {
+            self::assertSame('public_content_53_translation_source_drift', $error->getMessage());
+        }
+        $surface->forceFill(['payload_json' => $sourcePayload])->saveQuietly();
         ContentPage::query()->where(array_replace($rows[0]['identity'], ['locale' => 'zh-CN']))->update(['summary' => 'Changed after review']);
         $this->expectExceptionMessage('public_content_53_translation_source_drift');
         $states->read($this->translationDigest());
@@ -424,6 +449,33 @@ PHP;
     {
         $this->expectExceptionMessage('public_content_53_writer_context_invalid');
         DB::transaction(fn () => app(PublicContent53Writer::class)->publish($this->translationContext(50), []));
+    }
+
+    public function test_tests_translation_rejects_machine_changes_even_with_a_rebound_review(): void
+    {
+        $temporary = sys_get_temp_dir().'/fm-tests-translation-'.bin2hex(random_bytes(8));
+        $directory = $temporary.'/'.PublicContent53Package::PACKAGE;
+        mkdir($directory, 0700, true);
+        $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/translation-batch.json')), true, 64, JSON_THROW_ON_ERROR);
+        $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/translation-review.json')), true, 64, JSON_THROW_ON_ERROR);
+        $index = array_search('PAGE-32', array_column($package['candidates'], 'page_id'), true);
+        self::assertIsInt($index);
+        $package['candidates'][$index]['snapshot']['payload_json']['quickStart']['items'][1]['href'] = '/en/unrelated';
+        $bytes = json_encode($package, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $proof['candidate_sha256'] = hash('sha256', $bytes);
+        $proof['pages']['PAGE-32']['snapshot_sha256'] = hash('sha256', PromotionContextFactory::canonicalJson($package['candidates'][$index]['snapshot']));
+        file_put_contents($directory.'/translation-batch.json', $bytes);
+        file_put_contents($directory.'/translation-review.json', json_encode($proof, JSON_THROW_ON_ERROR));
+        try {
+            $this->expectExceptionMessage('public_content_53_translation_machine_fields_changed');
+            app(PublicContent53Package::class)->read($temporary, $this->translationDigest($temporary));
+        } finally {
+            unlink($directory.'/translation-batch.json');
+            unlink($directory.'/translation-review.json');
+            rmdir($directory);
+            rmdir(dirname($directory));
+            rmdir($temporary);
+        }
     }
 
     public static function invalidTranslationPackages(): array
@@ -457,9 +509,9 @@ PHP;
         }
         $bytes = json_encode($package, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $proof['candidate_sha256'] = hash('sha256', $bytes);
-        $proof['pages']['PAGE-02']['snapshot_sha256'] = hash('sha256', PromotionContextFactory::canonicalJson($package['candidates'][0]['snapshot']));
+        $proof['pages'][$package['candidates'][0]['page_id']]['snapshot_sha256'] = hash('sha256', PromotionContextFactory::canonicalJson($package['candidates'][0]['snapshot']));
         if ($case === 'unbound-review') {
-            $proof['pages']['PAGE-02']['source_sha256'] = str_repeat('0', 64);
+            $proof['pages'][$package['candidates'][0]['page_id']]['source_sha256'] = str_repeat('0', 64);
         }
         file_put_contents($directory.'/translation-batch.json', $bytes);
         file_put_contents($directory.'/translation-review.json', json_encode($proof, JSON_THROW_ON_ERROR));

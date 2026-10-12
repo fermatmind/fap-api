@@ -41,13 +41,13 @@ function canonicalLinkTarget(href, context = null) {
   } catch { return null; }
 }
 export function articleDom(html, surface = 'article') {
-  if (!['article', 'topic', 'topic_faq', 'entry'].includes(surface)) throw new Error('IQ_ARTICLE_SSR_DOM_INVALID');
+  if (!['article', 'topic', 'topic_faq', 'topic_callout', 'entry'].includes(surface)) throw new Error('IQ_ARTICLE_SSR_DOM_INVALID');
   const code = String.raw`
 $doc = new DOMDocument;
 libxml_use_internal_errors(true);
 if (!$doc->loadHTML(stream_get_contents(STDIN), LIBXML_NONET)) throw new RuntimeException('invalid html');
 $xp = new DOMXPath($doc);
-$bodyQuery = match ($argv[1]) { "topic" => '//*[@id="overview"]', "topic_faq" => '//*[@id="faq"]', "entry" => '//main[@data-test-landing-read-source]', default => '//article[@data-testid="article-detail-content"]' };
+$bodyQuery = match ($argv[1]) { "topic" => '//*[@id="overview"]', "topic_faq" => '//*[@id="faq"]', "topic_callout" => '//*[@id="why_it_matters"]//p', "entry" => '//main[@data-test-landing-read-source]', default => '//article[@data-testid="article-detail-content"]' };
 $body = $xp->query($bodyQuery);
 if ($body->length !== 1) throw new RuntimeException('body missing');
 $visible = function($node) {

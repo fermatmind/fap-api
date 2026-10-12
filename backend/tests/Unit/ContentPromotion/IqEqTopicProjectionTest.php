@@ -21,7 +21,10 @@ final class IqEqTopicProjectionTest extends TestCase
             self::assertSame($before['profile']['working_revision_id'], $after['profile']['working_revision_id']);
             self::assertSame($before['profile']['published_revision_id'], $after['profile']['published_revision_id']);
             self::assertSame($before['profile']['is_indexable'], $after['profile']['is_indexable']);
-            self::assertSame($before['sections'][1], $after['sections'][1]);
+            self::assertSame($row['snapshot']['section_candidates'][2]['body_md'], $after['sections'][1]['body_md']);
+            foreach (['id', 'profile_id', 'section_key', 'is_enabled', 'sort_order'] as $field) {
+                self::assertSame($before['sections'][1][$field], $after['sections'][1][$field]);
+            }
             self::assertNull($after['sections'][0]['body_html']);
             self::assertSame($row['snapshot']['section_candidates'][0]['body_md'], $after['sections'][0]['body_md']);
             self::assertCount(7, $after['sections'][2]['payload_json']['items']);
@@ -38,7 +41,7 @@ final class IqEqTopicProjectionTest extends TestCase
 
     public function test_existing_faq_replaces_copy_without_changing_layout(): void
     {
-        $row = $this->row();
+        $row = app(IqEqTopicPackage::class)->read(base_path(), IqEqTopicPackage::SHA256)[1];
         $before = $this->state($row);
         $before['sections'][] = ['id' => 8, 'profile_id' => 5, 'section_key' => 'faq', 'is_enabled' => true,
             'sort_order' => 28, 'title' => 'Questions', 'body_html' => 'old html', 'payload_json' => ['items' => []]];
@@ -129,6 +132,15 @@ final class IqEqTopicProjectionTest extends TestCase
         app(IqEqTopicProjection::class)->candidate($row, $before);
     }
 
+    public function test_changed_chinese_source_is_rejected_before_any_translation_plan(): void
+    {
+        $row = $this->row();
+        $before = $this->state($row);
+        $before['sections'][0]['body_md'] .= "\n\nConcurrent Chinese source edit";
+        $this->expectExceptionMessage('iq_eq_topic_translation_source_drift');
+        app(IqEqTopicProjection::class)->candidate($row, $before);
+    }
+
     private function row(): array
     {
         return app(IqEqTopicPackage::class)->read(base_path(), IqEqTopicPackage::SHA256)[0];
@@ -136,7 +148,7 @@ final class IqEqTopicProjectionTest extends TestCase
 
     private function state(array $row): array
     {
-        return [
+        $state = [
             'profile' => [...$row['identity'], 'id' => 5, 'topic_code' => 'iq-eq', 'title' => 'old', 'subtitle' => 'old', 'excerpt' => 'old',
                 'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'published_at' => '2026-01-01 00:00:00',
                 'working_revision_id' => 91, 'published_revision_id' => 90, 'cover_image_url' => 'https://example.invalid/image'],
@@ -152,5 +164,14 @@ final class IqEqTopicProjectionTest extends TestCase
             'seo' => ['profile_id' => 5, 'canonical_url' => 'https://fermatmind.com/zh/topics/iq-eq', 'robots' => 'index,follow',
                 'og_image_url' => 'https://example.invalid/image', 'jsonld_overrides_json' => ['name' => 'old', 'url' => 'https://fermatmind.com/zh/topics/iq-eq']],
         ];
+        if ($row['identity']['locale'] === 'zh-CN') {
+            $temporary = $row;
+            $temporary['identity']['locale'] = 'en';
+            $state['profile']['locale'] = 'en';
+            $state = app(IqEqTopicProjection::class)->candidate($temporary, $state);
+            $state['profile']['locale'] = 'zh-CN';
+        }
+
+        return $state;
     }
 }

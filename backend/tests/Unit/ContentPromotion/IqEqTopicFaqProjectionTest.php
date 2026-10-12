@@ -22,10 +22,10 @@ final class IqEqTopicFaqProjectionTest extends TestCase
             $profile = $this->profile($row);
             $response = $this->getJson('/api/v0.5/topics/iq-eq?org_id=0&locale='.$row['identity']['locale']);
             $response->assertOk()->assertJsonCount(7, 'answer_surface_v1.faq_blocks');
-            self::assertSame($row['snapshot']['section_candidates'][1]['payload_json']['items'], array_map(
+            self::assertSame(PromotionContextFactory::canonicalJson($row['snapshot']['section_candidates'][1]['payload_json']['items']), PromotionContextFactory::canonicalJson(array_map(
                 static fn (array $faq): array => ['question' => $faq['question'], 'answer' => $faq['answer']],
                 $response->json('answer_surface_v1.faq_blocks')
-            ));
+            )));
             // A drifted published pointer cannot grant the enlarged projection.
             $profile->forceFill(['published_revision_id' => null])->saveQuietly();
             $this->getJson('/api/v0.5/topics/iq-eq?org_id=0&locale='.$row['identity']['locale'])
@@ -52,15 +52,15 @@ final class IqEqTopicFaqProjectionTest extends TestCase
         foreach (app(IqEqTopicPackage::class)->read(base_path(), IqEqTopicPackage::SHA256) as $row) {
             $profile = $this->profile($row);
             $other = TopicProfileSection::query()->create([
-                'profile_id' => $profile->id, 'section_key' => 'why_it_matters', 'render_variant' => 'faq', 'sort_order' => 0,
+                'profile_id' => $profile->id, 'section_key' => 'retained_operator_faq', 'render_variant' => 'faq', 'sort_order' => 0,
                 'is_enabled' => true, 'payload_json' => ['items' => [['question' => 'Retained operator FAQ', 'answer' => 'Retained operator answer']]],
             ]);
             foreach ([0, 100] as $order) {
                 $other->forceFill(['sort_order' => $order])->saveQuietly();
                 $response = $this->getJson('/api/v0.5/topics/iq-eq?org_id=0&locale='.$row['identity']['locale']);
                 $response->assertOk()->assertJsonCount(7, 'answer_surface_v1.faq_blocks');
-                self::assertSame($row['snapshot']['section_candidates'][1]['payload_json']['items'], array_map(
-                    static fn (array $faq): array => ['question' => $faq['question'], 'answer' => $faq['answer']], $response->json('answer_surface_v1.faq_blocks')));
+                self::assertSame(PromotionContextFactory::canonicalJson($row['snapshot']['section_candidates'][1]['payload_json']['items']), PromotionContextFactory::canonicalJson(array_map(
+                    static fn (array $faq): array => ['question' => $faq['question'], 'answer' => $faq['answer']], $response->json('answer_surface_v1.faq_blocks'))));
                 self::assertSame('Retained operator FAQ', $other->fresh()->payload_json['items'][0]['question']);
             }
         }

@@ -89,18 +89,18 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
     public function test_new_faq_draft_is_private_recovery_replays_and_corrective_sha_can_publish(): void
     {
         $this->seedTopics();
-        TopicProfileSection::query()->where('section_key', 'faq')->delete();
+        TopicProfileSection::query()->where('section_key', 'faq')->whereIn('profile_id', TopicProfile::query()->withoutGlobalScopes()->where('locale', 'en')->pluck('id'))->delete();
         $adapter = app(IqEqTopicPromotionAdapter::class);
         $context = $this->context();
         $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
         $draft = $adapter->draftImport($context);
-        self::assertSame(2, TopicProfileSection::query()->where('section_key', 'faq')->where('is_enabled', false)->count());
+        self::assertSame(1, TopicProfileSection::query()->where('section_key', 'faq')->where('is_enabled', false)->count());
         $this->getJson('/api/v0.5/topics/iq-eq?org_id=0&locale=en')->assertOk()->assertJsonCount(0, 'answer_surface_v1.faq_blocks');
         $this->previous($context, 'cms_draft_import_receipt', $draft);
         $published = $adapter->publish($context);
         $adapter->rollback($context, $published['rollback_reference']);
         $adapter->rollback($context, $published['rollback_reference']);
-        self::assertSame(2, TopicProfileSection::query()->where('section_key', 'faq')->where('is_enabled', false)->count());
+        self::assertSame(1, TopicProfileSection::query()->where('section_key', 'faq')->where('is_enabled', false)->count());
         $corrective = new PromotionContext($context->packageDirectory, $context->packageSha256, $context->lane, $context->subscope,
             str_repeat('f', 40), $context->executorReleaseSha256, $context->releasePolicySha256, '13', 1, $context->workflowSignature, 2, str_repeat('f', 64));
         $this->previous($corrective, 'content_promotion_preflight_receipt', $adapter->preflight($corrective));
@@ -201,6 +201,23 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
                 TopicProfileEntry::query()->create(['profile_id' => $profile->id, ...array_intersect_key($entry, array_flip(['entry_type', 'group_key', 'target_key'])), 'excerpt_override' => 'Old entry', 'is_enabled' => true, 'sort_order' => 10]);
             }
             TopicProfileSeoMeta::query()->create(['profile_id' => $profile->id, 'seo_title' => 'Old SEO', 'seo_description' => 'Old description', 'canonical_url' => 'https://fermatmind.com/'.($row['identity']['locale'] === 'en' ? 'en' : 'zh').'/topics/iq-eq', 'robots' => 'noindex,follow', 'jsonld_overrides_json' => ['url' => 'https://fermatmind.com/']]);
+            if ($row['identity']['locale'] === 'zh-CN') {
+                $profile->forceFill($row['snapshot']['profile_patch'])->saveQuietly();
+                foreach ($row['snapshot']['section_candidates'] as $section) {
+                    TopicProfileSection::query()->where('profile_id', $profile->id)->where('section_key', $section['section_key'])
+                        ->update(['render_variant' => $section['render_variant'], 'body_md' => $section['body_md'] ?? null,
+                            'body_html' => null, 'payload_json' => isset($section['payload_json']) ? json_encode($section['payload_json'], JSON_UNESCAPED_UNICODE) : null]);
+                }
+                foreach ($row['snapshot']['entry_excerpt_overrides'] as $entry) {
+                    TopicProfileEntry::query()->where('profile_id', $profile->id)->where('target_key', $entry['target_key'])->update(['excerpt_override' => $entry['excerpt_override']]);
+                }
+                $text = $row['snapshot']['seo_text_candidate'];
+                TopicProfileSeoMeta::query()->where('profile_id', $profile->id)->update([
+                    'seo_title' => $text['title'], 'seo_description' => $text['description'],
+                    'og_title' => $text['title'], 'og_description' => $text['description'],
+                    'twitter_title' => $text['title'], 'twitter_description' => $text['description'],
+                ]);
+            }
         }
     }
 

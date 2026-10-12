@@ -30,7 +30,7 @@ final class IqEqTopicProjection
         $after['profile'] = array_replace($profile, $row['snapshot']['profile_patch']);
         foreach ($row['snapshot']['section_candidates'] as $candidate) {
             $matches = array_keys(array_filter($after['sections'], static fn (array $section): bool => ($section['section_key'] ?? null) === $candidate['section_key']));
-            if (count($matches) > 1 || ($candidate['section_key'] === 'overview' && count($matches) !== 1)) {
+            if (count($matches) > 1 || ($candidate['section_key'] !== 'faq' && count($matches) !== 1)) {
                 throw new DomainException('iq_eq_topic_section_identity_invalid');
             }
             if ($matches === []) {
@@ -83,6 +83,27 @@ final class IqEqTopicProjection
             if (is_array($after['seo']['jsonld_overrides_json'] ?? null)
                 && array_key_exists($key, $after['seo']['jsonld_overrides_json'])) {
                 $after['seo']['jsonld_overrides_json'][$key] = $text[$source];
+            }
+        }
+
+        // This package translates the approved Chinese source; it must never
+        // silently replace a Chinese edit made after that source was frozen.
+        if ($row['identity']['locale'] === 'zh-CN') {
+            $sourceBefore = $before;
+            $sourceAfter = $after;
+            // FAQ reader copy lives in payload_json. Its empty Markdown
+            // transport may be NULL or an empty string in existing records.
+            foreach ([&$sourceBefore, &$sourceAfter] as &$source) {
+                foreach ($source['sections'] as &$section) {
+                    if ($section['section_key'] === 'faq' && ($section['body_md'] ?? null) === '') {
+                        $section['body_md'] = null;
+                    }
+                }
+                unset($section);
+            }
+            unset($source);
+            if (PromotionContextFactory::canonicalJson($sourceAfter) !== PromotionContextFactory::canonicalJson($sourceBefore)) {
+                throw new DomainException('iq_eq_topic_translation_source_drift');
             }
         }
 
