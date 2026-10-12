@@ -94,6 +94,22 @@ final class StagingAccountantPublicationTest extends TestCase
         self::assertArrayHasKey(CareerStagingAccountantPublication::SLUG.'|zh-CN', $lookup->jobDetailCoverageItems(['zh-CN']));
     }
 
+    public function test_accountant_without_an_ai_score_publishes_the_exact_file_page(): void
+    {
+        $page = $this->app->make(CareerPageProjector::class)->read(CareerStagingAccountantPublication::SLUG, 'zh-CN');
+        self::assertSame('missing', $page['hero']['ai']['availability']);
+        self::assertNull($page['hero']['ai']['fact_ref']);
+        self::assertNull($page['hero']['ai']['fact']);
+        $verified = false;
+        $result = $this->publisher()->publish(str_repeat('a', 40), function (array $actual) use ($page, &$verified): void {
+            self::assertSame($page, $actual);
+            CareerStagingAccountantPublication::assertResponse(200, $this->validBody($actual), $page);
+            $verified = true;
+        });
+        self::assertTrue($verified);
+        self::assertSame(1, $result['changed_locale_rows']);
+    }
+
     public function test_upgrades_the_legacy_generation_format_used_by_staging(): void
     {
         $root = storage_path('app/private/career_generation_authority');
@@ -246,7 +262,7 @@ final class StagingAccountantPublicationTest extends TestCase
         } elseif ($case === 'display') {
             unset($body['career_page']['display']);
         } elseif ($case === 'score') {
-            $body['career_page']['hero']['ai']['availability'] = 'missing';
+            $body['career_page']['hero']['ai']['availability'] = $page['hero']['ai']['availability'] === 'available' ? 'missing' : 'available';
         } elseif ($case === 'hash') {
             $body['career_page']['source_content_sha256'] = str_repeat('0', 64);
         }

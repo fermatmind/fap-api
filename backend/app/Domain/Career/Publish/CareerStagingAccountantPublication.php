@@ -35,8 +35,7 @@ final class CareerStagingAccountantPublication
         if (($page['locale'] ?? null) !== self::LOCALE
             || data_get($page, 'subject.canonical_slug') !== $this->slug
             || data_get($page, 'display.contract_version') !== 'career.detail.display.v1'
-            || ($this->slug === self::SLUG && data_get($page, 'hero.ai.availability') !== 'available')
-            || ($this->slug === 'actors' && ! in_array(data_get($page, 'hero.ai.availability'), ['available', 'missing'], true))
+            || ! in_array(data_get($page, 'hero.ai.availability'), ['available', 'missing'], true)
             || count(data_get($page, 'hero.badges', [])) !== 3) {
             throw new RuntimeException('staging_accountant_file_incomplete');
         }
