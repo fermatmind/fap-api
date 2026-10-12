@@ -201,7 +201,7 @@ final class PublicContent53Writer
     private function assertContext(PromotionContext $context): void
     {
         if (DB::transactionLevel() < 1 || $context->lane !== 'W3' || $context->subscope !== 'PUBLIC-CONTENT-53'
-            || $context->expectedRowCount !== 50 || realpath($context->packageDirectory) !== realpath(base_path(PublicContent53Package::PACKAGE))) {
+            || $context->expectedRowCount !== count($this->package->read(base_path(), $context->packageSha256)['candidates']) || realpath($context->packageDirectory) !== realpath(base_path(PublicContent53Package::PACKAGE))) {
             throw new DomainException('public_content_53_writer_context_invalid');
         }
     }

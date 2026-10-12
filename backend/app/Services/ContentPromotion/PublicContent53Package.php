@@ -6,7 +6,7 @@ namespace App\Services\ContentPromotion;
 
 use DomainException;
 
-/** Fixed 50 native identities behind the approved 53 public URL task. No writes. */
+/** Exact reviewed native content packages. No writes. */
 final class PublicContent53Package
 {
     public const PACKAGE = 'content_assets/public_content_53';
@@ -67,6 +67,17 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        // Both immutable package identities remain readable; the workflow selects
+        // the active translation package and binds its exact digest.
+        if (is_file($root.'/'.self::PACKAGE.'/translation-batch.json')) {
+            $chain = "fermatmind.public_content_translation.v1\n";
+            foreach (['translation-batch.json', 'translation-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readTranslation($root, $expectedSha256);
+            }
+        }
         $bytes = $this->bytes($root, 'assets.json');
         $review = $this->bytes($root, 'independent-review.json');
         $proof = json_decode($review, true, 64, JSON_THROW_ON_ERROR);
@@ -121,6 +132,65 @@ final class PublicContent53Package
         }
 
         return ['candidates' => $package['candidates'], 'package_sha256' => $expectedSha256];
+    }
+
+    private function readTranslation(string $root, string $sha): array
+    {
+        $bytes = $this->bytes($root, 'translation-batch.json');
+        $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $proof = json_decode($this->bytes($root, 'translation-review.json'), true, 64, JSON_THROW_ON_ERROR);
+        $rows = $package['candidates'] ?? [];
+        if (($package['schema'] ?? null) !== 'fermatmind.public_content_translation.v1'
+            || ($package['source_locale'] ?? null) !== 'zh-CN' || ($package['target_locale'] ?? null) !== 'en'
+            || ($package['excluded_families'] ?? null) !== ['career', 'personality', 'blog']
+            || count($rows) !== 1 || ($proof['schema'] ?? null) !== 'fermatmind.public_content_translation.review.v1'
+            || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
+            throw new DomainException('public_content_53_translation_review_or_scope_invalid');
+        }
+        $seen = [];
+        foreach ($rows as $row) {
+            $id = $row['page_id'] ?? '';
+            // About is the first accepted pilot; later cohorts extend this fixed scope.
+            if ($id !== 'PAGE-02' || isset($seen[$id]) || ($row['kind'] ?? null) !== 'page'
+                || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => 'about', 'locale' => 'en']
+                || ($row['source_identity'] ?? null) !== [] || ($row['staging_source_identity'] ?? null) !== []) {
+                throw new DomainException('public_content_53_translation_scope_invalid');
+            }
+            $seen[$id] = true;
+            $fields = ['content_md', 'faq_items', 'summary', 'title'];
+            foreach (['before', 'staging_before', 'snapshot', 'source_snapshot'] as $version) {
+                $actual = array_keys($row[$version] ?? []);
+                sort($actual);
+                if ($actual !== $fields || ! is_array($row[$version]['faq_items'])
+                    || array_filter(['title', 'summary', 'content_md'], fn ($field) => ! is_string($row[$version][$field]) || trim($row[$version][$field]) === '')) {
+                    throw new DomainException('public_content_53_translation_fields_invalid');
+                }
+            }
+            $review = $proof['pages'][$id] ?? [];
+            if (($review['verdict'] ?? null) !== 'PASS'
+                || ($review['source_sha256'] ?? null) !== hash('sha256', PromotionContextFactory::canonicalJson($row['source_snapshot']))
+                || ($review['snapshot_sha256'] ?? null) !== hash('sha256', PromotionContextFactory::canonicalJson($row['snapshot']))
+                || $this->structure($row['source_snapshot']['content_md']) !== $this->structure($row['snapshot']['content_md'])
+                || count($row['source_snapshot']['faq_items']) !== count($row['snapshot']['faq_items'])
+                || preg_match('/[\x{3400}-\x{9fff}]/u', json_encode($row['snapshot'], JSON_UNESCAPED_UNICODE)) === 1) {
+                throw new DomainException('public_content_53_translation_coverage_invalid');
+            }
+        }
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
+    private function structure(string $markdown): array
+    {
+        $shape = [];
+        foreach (preg_split('/\n\s*\n/', trim($markdown)) as $block) {
+            foreach (preg_split('/\n(?=(?:#{1,6} |[-*+] |\d+[.)] ))/', $block) as $unit) {
+                $shape[] = preg_match('/^(#{1,6}|[-*+]|\d+[.)]) /', $unit, $match) === 1 ? $match[1] : 'paragraph';
+            }
+        }
+
+        return $shape;
     }
 
     public static function environment(): string

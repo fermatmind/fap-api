@@ -122,7 +122,7 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
             throw new DomainException('public_content_53_cache_closeout_failed', previous: $error);
         }
 
-        return $this->result($context, $published['written_count'], 50, $published['reference'], $published['state']);
+        return $this->result($context, $published['written_count'], $context->expectedRowCount, $published['reference'], $published['state']);
     }
 
     public function liveQa(PromotionContext $context): array
@@ -136,7 +136,7 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
         }
         $this->states->assertPublished($rows, $state);
 
-        return $this->result($context, 0, 50, null, $state);
+        return $this->result($context, 0, $context->expectedRowCount, null, $state);
     }
 
     public function rollback(PromotionContext $context, string $rollbackReference): void
@@ -160,14 +160,19 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
 
     private function rows(PromotionContext $context): array
     {
-        if (! $this->supports($context->lane, $context->subscope) || $context->expectedRowCount !== 50
+        if (! $this->supports($context->lane, $context->subscope)
             || realpath($context->packageDirectory) !== realpath(base_path(PublicContent53Package::PACKAGE))) {
             throw new DomainException('public_content_53_context_invalid');
         }
 
         $this->activePackageSha = $context->packageSha256;
 
-        return $this->package->read(base_path(), $context->packageSha256)['candidates'];
+        $rows = $this->package->read(base_path(), $context->packageSha256)['candidates'];
+        if (count($rows) !== $context->expectedRowCount) {
+            throw new DomainException('public_content_53_context_count_invalid');
+        }
+
+        return $rows;
     }
 
     private function previous(PromotionContext $context, string $kind): array
@@ -239,13 +244,15 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
                 \Illuminate\Support\Facades\Cache::forget('content_page:v1:0:'.$row['identity']['slug'].':'.$row['identity']['locale']);
             }
         }
-        $this->cache->flushArticleDiscoverabilityCaches(false);
+        if (array_filter($rows, static fn (array $row): bool => $row['kind'] !== 'page')) {
+            $this->cache->flushArticleDiscoverabilityCaches(false);
+        }
         app(\App\Services\ContentPromotion\PublicContent53FrontendRevalidator::class)->revalidate($rows);
     }
 
     private function result(PromotionContext $context, int $written, int $published, ?string $reference, array $state): array
     {
-        return PromotionAdapterResultFactory::make($context, $written, 50, $published, $reference, [
+        return PromotionAdapterResultFactory::make($context, $written, $context->expectedRowCount, $published, $reference, [
             'indexability_mutation_count' => 0, 'sitemap_mutation_count' => 0, 'llms_mutation_count' => 0, 'search_mutation_count' => 0, 'deploy_mutation_count' => 0,
         ]) + ['target_state_sha256' => $this->states->hash($state)];
     }

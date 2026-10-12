@@ -64,7 +64,8 @@ export function projection(row,data) {
 const apiPath = row => `/api/v0.5/${{article:'articles',page:'content-pages',surface:'landing-surfaces',profile:'topics'}[row.kind]}/${row.identity.slug}?locale=${row.identity.locale}&org_id=0`;
 export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch) {
   const [api,web] = hosts(environment); const result={};
-  for (const row of readCandidateRows(backendRoot).candidates) {
+  const rows = readCandidateRows(backendRoot).candidates;
+  for (const row of rows) {
     const data=parseApi(await read(api+apiPath(row),fetcher));const value=projection(row,data);
     if (!equal(value,environment === 'staging' ? row.staging_before : row.before) && !equal(value,row.snapshot)) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DRIFT_${row.page_id}`);
     const native=data[row.kind];
@@ -145,7 +146,8 @@ export function assertDom(row,html,before,environment) {
 }
 export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fetch,renderer=renderPage,prestate) {
   const [api,web]=hosts(environment);if(!prestate) throw new Error('PUBLIC_CONTENT_53_PRESTATE_REQUIRED');
-  for (const row of readCandidateRows(backendRoot).candidates) {
+  const rows = readCandidateRows(backendRoot).candidates;
+  for (const row of rows) {
     const data=parseApi(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
     if(!before || !equal(projection(row,data),row.snapshot) || native.id !== before.id || Object.entries(before.flags).some(([k,v])=>!equal(native[k],v))) throw new Error(`PUBLIC_CONTENT_53_NATIVE_READBACK_${row.page_id}`);
     // One publication only. Existing 300-second public fetch caches can settle
@@ -156,5 +158,5 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
       catch(error) {last=error?.message?.startsWith('PUBLIC_CONTENT_53_') ? error : new Error(`PUBLIC_CONTENT_53_BROWSER_FAILED_${row.page_id}`);if(Date.now()>=deadline) throw last;await new Promise(resolve=>setTimeout(resolve,10000));}
     }
   }
-  return {environment,api_readback_count:50,dom_readback_count:50};
+  return {environment,api_readback_count:rows.length,dom_readback_count:rows.length};
 }

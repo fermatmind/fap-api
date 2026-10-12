@@ -1,11 +1,14 @@
 import { createHash, createHmac } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { readFileSync, realpathSync, lstatSync } from 'node:fs';
+import { readFileSync, realpathSync, lstatSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { canonical } from './iq-public-scale-package.mjs';
 
 export const packagePath = 'content_assets/public_content_53';
 export function packageDigest(backendRoot) {
+  if (existsSync(resolve(backendRoot, packagePath, 'translation-batch.json'))) {
+    return sha('fermatmind.public_content_translation.v1\n'+['translation-batch.json','translation-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
+  }
   const names = ['assets.json','independent-review.json','enneagram_metrics.en.json','enneagram_public_copy.en.json','riasec_technical_note.en.json'];
   return sha('fermatmind.public_content_53.v1\n'+names.map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
 }
@@ -45,14 +48,14 @@ export const executorPaths = [
   "scripts/deploy/run_public_content_53_publish.php"
 ];
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
-export function readCandidateRows(backendRoot) {
+export function readCandidateRows(backendRoot, digest = packageDigest(backendRoot)) {
   const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2]), JSON_THROW_ON_ERROR);';
-  return JSON.parse(execFileSync('php', ['-r', code, realpathSync(backendRoot), packageDigest(backendRoot)], { encoding: 'utf8', timeout: 30000, maxBuffer: 4000000, stdio: ['pipe', 'pipe', 'pipe'] }));
+  return JSON.parse(execFileSync('php', ['-r', code, realpathSync(backendRoot), digest], { encoding: 'utf8', timeout: 30000, maxBuffer: 4000000, stdio: ['pipe', 'pipe', 'pipe'] }));
 }
 export function inspectPackage(backendRoot) {
   const root = realpathSync(backendRoot);
   const packageSha256 = packageDigest(root);
-  if (readCandidateRows(root).candidates.length !== 50) throw new Error('PUBLIC_CONTENT_53_PACKAGE_SCOPE_INVALID');
+  const count = readCandidateRows(root).candidates.length;
   const material = executorPaths.map(path => {
     const file = resolve(root, path);
     const stat = lstatSync(file);
@@ -61,7 +64,7 @@ export function inspectPackage(backendRoot) {
   }).join('');
   return { schema: 'public.content53.binding.v1', package_path: packagePath, package_sha256: packageSha256,
     executor_release_sha256: sha(material), release_policy_sha256: sha(JSON.stringify(canonical(JSON.parse(readFileSync(resolve(root, 'config/content_promotion_release_policy.v2.json'), 'utf8'))))),
-    lane: 'W3', subscope: 'PUBLIC-CONTENT-53', expected_row_count: 50 };
+    lane: 'W3', subscope: 'PUBLIC-CONTENT-53', expected_row_count: count };
 }
 export function workflowSignature(binding, key, source, run, attempt) {
   if (!['staging','production'].includes(binding.environment) || typeof key !== 'string' || key.length < 32 || !/^[a-f0-9]{40}$/.test(source) || !/^[1-9][0-9]*$/.test(String(run)) || attempt !== 1) throw new Error('PUBLIC_CONTENT_53_WORKFLOW_IDENTITY_INVALID');

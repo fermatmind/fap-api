@@ -97,12 +97,13 @@ try {
     }
     putenv('PUBLIC_CONTENT_53_ENVIRONMENT='.$request['environment']);
     $_SERVER['PUBLIC_CONTENT_53_ENVIRONMENT'] = $_ENV['PUBLIC_CONTENT_53_ENVIRONMENT'] = $request['environment'];
-    putenv('CONTENT_PROMOTION_EXPECTED_ROW_COUNT=50');
-    $_SERVER['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = $_ENV['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = '50';
+    require $root.'/vendor/autoload.php';
+    $expectedCount = count((new PublicContent53Package)->read($root, $request['package_sha256'])['candidates']);
+    putenv('CONTENT_PROMOTION_EXPECTED_ROW_COUNT='.$expectedCount);
+    $_SERVER['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = $_ENV['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = (string) $expectedCount;
     // Previous receipts come solely from this driver's immutable phase chain.
     putenv('CONTENT_PROMOTION_PREVIOUS_RECEIPT');
     unset($_SERVER['CONTENT_PROMOTION_PREVIOUS_RECEIPT'], $_ENV['CONTENT_PROMOTION_PREVIOUS_RECEIPT']);
-    require $root.'/vendor/autoload.php';
     $app = require $root.'/bootstrap/app.php';
     $app->make(Kernel::class)->bootstrap();
     // The validated per-run environment must override the release config cache.
@@ -150,17 +151,17 @@ try {
         }
         $path = $directory.'/'.$phase.'.json';
         $result = $app->make(ExactPackagePromotionService::class)->execute($context, $phase, $path);
-        if (($result['receipt']['expected_count'] ?? null) !== 50 || ($result['receipt']['readback_count'] ?? null) !== 50) {
+        if (($result['receipt']['expected_count'] ?? null) !== $expectedCount || ($result['receipt']['readback_count'] ?? null) !== $expectedCount) {
             throw new DomainException('public_content_53_phase_count_invalid');
         }
-        $completed[] = ['phase' => $phase, 'receipt_sha256' => $result['receipt_sha256'], 'readback_count' => 50];
+        $completed[] = ['phase' => $phase, 'receipt_sha256' => $result['receipt_sha256'], 'readback_count' => $expectedCount];
         $previous = $path;
     }
     echo json_encode([
         'schema' => 'public.content53.publish.v1', 'ok' => true,
         'source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId,
         'workflow_run_attempt' => 1, 'package_sha256' => $context->packageSha256,
-        'published_count' => 50, 'phases' => $completed,
+        'published_count' => $expectedCount, 'phases' => $completed,
         'elapsed_seconds' => round(microtime(true) - $started, 3), 'sanitized' => true,
     ], JSON_THROW_ON_ERROR).PHP_EOL;
 } catch (Throwable $error) {

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
@@ -8,11 +9,20 @@ import { buildExecution, publish, recoveryFailure } from './public-content-53-pu
 import { assertDom, pathFor, read } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
-test('fixed reviewed package covers exactly the existing native identities',()=>{
+test('active translation package contains only the reviewed About English identity',()=>{
  const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
- assert.equal(binding.expected_row_count,50);assert.equal(rows.length,50);assert.equal(new Set(rows.map(x=>x.page_id)).size,50);
+ assert.equal(binding.expected_row_count,1);assert.equal(rows.length,1);
+ assert.deepEqual(rows[0].identity,{org_id:0,slug:'about',locale:'en'});
+ assert.equal(rows[0].kind,'page');assert.ok(rows[0].source_snapshot.content_md.includes('我们的边界'));
+});
+test('previous immutable 50-row package remains fully validated by its own exact digest',()=>{
+ const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+ const names=['assets.json','independent-review.json','enneagram_metrics.en.json','enneagram_public_copy.en.json','riasec_technical_note.en.json'];
+ const digest=sha('fermatmind.public_content_53.v1\n'+names.map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));
+ const rows=readCandidateRows(root,digest).candidates;
+ assert.equal(rows.length,50);assert.equal(new Set(rows.map(x=>x.page_id)).size,50);
  assert.equal(rows.filter(x=>x.kind==='article').length,33);assert.equal(rows.filter(x=>x.kind==='page').length,11);
- assert.ok(rows.every(x=>['en','zh-CN'].includes(x.identity.locale)));assert.equal(rows.filter(x=>x.kind==='profile').length,2);
+ assert.equal(rows.filter(x=>x.kind==='profile').length,2);
 });
 test('public-only registration proof rejects unrelated policy or canonical changes',()=>{
  const config=readFileSync(resolve(root,'config/content_promotion.php'),'utf8');const base=config.replace("    'public_content_53_environment' => env('PUBLIC_CONTENT_53_ENVIRONMENT', 'production'),\n",'').replace("        'content_assets/public_content_53',\n",'').replace(", 'PUBLIC-CONTENT-53' => 'audit_compatible'",'');
@@ -89,13 +99,13 @@ test('inline citation labels and their rendered bibliography remain required vis
 });
 
 test('async publication accepts the complete signed protocol without invoking recovery',async()=>{
- const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123',mode:'publish'},binding:{package_sha256:'b'.repeat(64)}};
+ const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123',mode:'publish'},binding:{package_sha256:'b'.repeat(64),expected_row_count:1}};
  const calls=[];
  const receipt=await publish(execution,async request=>{
   calls.push(request.mode);await new Promise(resolve=>setImmediate(resolve));
-  return {status:0,stdout:JSON.stringify({schema:'public.content53.publish.v1',ok:true,source_commit:request.source_commit,workflow_run_id:request.workflow_run_id,workflow_run_attempt:1,package_sha256:execution.binding.package_sha256,published_count:50,sanitized:true,phases:['preflight','draft-import','publish','live-qa'].map(phase=>({phase,readback_count:50,receipt_sha256:'c'.repeat(64)}))})};
+  return {status:0,stdout:JSON.stringify({schema:'public.content53.publish.v1',ok:true,source_commit:request.source_commit,workflow_run_id:request.workflow_run_id,workflow_run_attempt:1,package_sha256:execution.binding.package_sha256,published_count:1,sanitized:true,phases:['preflight','draft-import','publish','live-qa'].map(phase=>({phase,readback_count:1,receipt_sha256:'c'.repeat(64)}))})};
  });
- assert.deepEqual(calls,['publish']);assert.equal(receipt.ok,true);assert.equal(receipt.published_count,50);
+ assert.deepEqual(calls,['publish']);assert.equal(receipt.ok,true);assert.equal(receipt.published_count,1);
  const invalid=()=>({status:0,stdout:'invalid private response bytes'});
  await assert.rejects(()=>publish(execution,invalid),error=>error.receipt.error_code==='PUBLIC_CONTENT_53_PUBLICATION_JSON_INVALID'&&error.receipt.transport_response?.shape==='text'&&!JSON.stringify(error.receipt).includes('private'));
 });
@@ -133,6 +143,6 @@ test('failed SSH exit is classified before JSON parsing and still invokes exact 
 
 
 test('nonzero remote business failures retain their typed cause rather than becoming SSH errors',async()=>{
- const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123',mode:'publish'},binding:{package_sha256:'b'.repeat(64)}};
+ const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123',mode:'publish'},binding:{package_sha256:'b'.repeat(64),expected_row_count:1}};
  await assert.rejects(()=>publish(execution,async()=>({status:1,stdout:JSON.stringify({ok:false,error_code:'public_content_53_revalidation_http_429',sanitized:true})})),error=>error.receipt.error_code==='public_content_53_revalidation_http_429');
 });

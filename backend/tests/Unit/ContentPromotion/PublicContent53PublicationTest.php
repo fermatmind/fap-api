@@ -7,6 +7,7 @@ namespace Tests\Unit\ContentPromotion;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
 use App\Models\PersonalityProfile;
@@ -349,6 +350,110 @@ PHP;
         ArticleSeoMeta::query()->create(['article_id' => $article->id, 'org_id' => 0, 'locale' => $article->locale, 'seo_title' => mb_substr($article->title, 0, 60), 'seo_description' => mb_substr($article->excerpt, 0, 160)]);
 
         return $article;
+    }
+
+    private function translationDigest(?string $root = null): string
+    {
+        $chain = "fermatmind.public_content_translation.v1\n";
+        foreach (['translation-batch.json', 'translation-review.json'] as $name) {
+            $chain .= $name."\n".hash_file('sha256', ($root ?? base_path()).'/'.PublicContent53Package::PACKAGE.'/'.$name)."\n";
+        }
+
+        return hash('sha256', $chain);
+    }
+
+    private function translationContext(int $count = 1): PromotionContext
+    {
+        return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->translationDigest(), 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), $count, str_repeat('e', 64));
+    }
+
+    #[DataProvider('environments')]
+    public function test_about_translation_roundtrip_preserves_chinese_other_pages_and_divergent_drafts(string $environment): void
+    {
+        config(['content_promotion.public_content_53_environment' => $environment]);
+        $this->seedTargets();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $this->translationDigest())['candidates'];
+        $row = $rows[0];
+        $english = ContentPage::query()->where('slug', 'about')->where('locale', 'en')->firstOrFail();
+        $english->forceFill(PublicContent53Package::before($row))->save();
+        ContentPage::query()->create(['org_id' => 0, 'slug' => 'about', 'locale' => 'zh-CN', 'path' => '/zh/about'] + $row['source_snapshot'] + [
+            'status' => 'published', 'is_public' => true, 'is_indexable' => false, 'review_state' => 'approved',
+            'publish_allowed' => true, 'operator_approval_required' => false, 'claim_gate_status' => 'passed',
+        ]);
+        $otherPages = DB::table('content_pages')->where('id', '!=', $english->id)->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all();
+        $draft = CmsTranslationRevision::query()->create([
+            'org_id' => 0, 'content_type' => 'content_page', 'content_id' => $english->id,
+            'translation_group_id' => $english->translation_group_id, 'locale' => 'en', 'source_locale' => $english->source_locale,
+            'revision_number' => 1, 'revision_status' => CmsTranslationRevision::STATUS_DRAFT,
+            'source_version_hash' => $english->source_version_hash, 'payload_json' => ['title' => 'Unpublished operator draft'],
+        ]);
+        $english->forceFill(['working_revision_id' => $draft->id])->saveQuietly();
+        $draftBefore = $draft->fresh()->toArray();
+        $states = app(PublicContent53State::class);
+        $before = $states->read($this->translationDigest());
+        $states->assertBaseline($rows);
+        $writer = app(PublicContent53Writer::class);
+        $after = DB::transaction(fn () => $writer->publish($this->translationContext(), $before));
+        self::assertSame(1, $after['written_count']);
+        Cache::flush();
+        $states->assertPublished($rows, $after['state']);
+        self::assertSame($otherPages, DB::table('content_pages')->where('id', '!=', $english->id)->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all());
+        self::assertSame($draftBefore, $draft->fresh()->toArray());
+        self::assertSame($draft->id, $english->fresh()->working_revision_id);
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($this->translationContext(), $after['state']))['written_count']);
+        DB::transaction(fn () => $writer->restore($this->translationContext(), $before, $after['state']));
+        Cache::flush();
+        self::assertSame($before, $states->read($this->translationDigest()));
+        ContentPage::query()->where('slug', 'about')->where('locale', 'zh-CN')->update(['summary' => 'Changed after review']);
+        $this->expectExceptionMessage('public_content_53_translation_source_drift');
+        $states->read($this->translationDigest());
+    }
+
+    public function test_translation_count_mismatch_is_rejected_before_native_writes(): void
+    {
+        $this->expectExceptionMessage('public_content_53_writer_context_invalid');
+        DB::transaction(fn () => app(PublicContent53Writer::class)->publish($this->translationContext(50), []));
+    }
+
+    public static function invalidTranslationPackages(): array
+    {
+        return [['excluded'], ['missing-paragraph'], ['unbound-review'], ['empty-title']];
+    }
+
+    #[DataProvider('invalidTranslationPackages')]
+    public function test_translation_package_rejects_excluded_scope_omission_and_unbound_review(string $case): void
+    {
+        $temporary = sys_get_temp_dir().'/fm-translation-'.bin2hex(random_bytes(8));
+        $directory = $temporary.'/'.PublicContent53Package::PACKAGE;
+        mkdir($directory, 0700, true);
+        $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/translation-batch.json')), true, 64, JSON_THROW_ON_ERROR);
+        $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/translation-review.json')), true, 64, JSON_THROW_ON_ERROR);
+        if ($case === 'excluded') {
+            $package['candidates'][0]['identity']['slug'] = 'personality';
+        } elseif ($case === 'missing-paragraph') {
+            $package['candidates'][0]['snapshot']['content_md'] = preg_replace('/\n\n[^#\n][^\n]+(?=\n\n)/u', '', $package['candidates'][0]['snapshot']['content_md'], 1);
+        } elseif ($case === 'empty-title') {
+            $package['candidates'][0]['snapshot']['title'] = '';
+        }
+        $bytes = json_encode($package, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $proof['candidate_sha256'] = hash('sha256', $bytes);
+        $proof['pages']['PAGE-02']['snapshot_sha256'] = hash('sha256', PromotionContextFactory::canonicalJson($package['candidates'][0]['snapshot']));
+        if ($case === 'unbound-review') {
+            $proof['pages']['PAGE-02']['source_sha256'] = str_repeat('0', 64);
+        }
+        file_put_contents($directory.'/translation-batch.json', $bytes);
+        file_put_contents($directory.'/translation-review.json', json_encode($proof, JSON_THROW_ON_ERROR));
+        try {
+            $this->expectException(DomainException::class);
+            app(PublicContent53Package::class)->read($temporary, $this->translationDigest($temporary));
+        } finally {
+            unlink($directory.'/translation-batch.json');
+            unlink($directory.'/translation-review.json');
+            rmdir($directory);
+            rmdir(dirname($directory));
+            rmdir($temporary);
+        }
     }
 
     private function seedTargets(): void

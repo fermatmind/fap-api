@@ -80,6 +80,24 @@ final class PublicContent53State
             } else {
                 $saved['relations']['page_blocks'] = $this->query('page_blocks', ['landing_surface_id' => $values['id']], $lock);
             }
+            if (isset($row['source_snapshot'])) {
+                $source = $this->query('content_pages', array_replace($row['identity'], ['locale' => 'zh-CN']), $lock);
+                if (count($source) !== 1 || $source[0]['status'] !== 'published' || ! (bool) $source[0]['is_public']
+                    || ($source[0]['deleted_at'] ?? null) !== null
+                    || array_filter(['published_at', 'scheduled_at'], static fn ($field): bool => ($source[0][$field] ?? null) !== null && strtotime($source[0][$field]) > time())) {
+                    throw new DomainException('public_content_53_translation_source_missing');
+                }
+                $sourcePage = new ContentPage;
+                $sourcePage->setRawAttributes($source[0], true);
+                if (! $sourcePage->passesPublicReadinessGate()) {
+                    throw new DomainException('public_content_53_translation_source_hold');
+                }
+                $saved['translation_source'] = $source[0];
+                $sourceProjection = array_intersect_key($sourcePage->toArray(), $row['source_snapshot']);
+                if ($this->hash($sourceProjection) !== $this->hash($row['source_snapshot'])) {
+                    throw new DomainException('public_content_53_translation_source_drift');
+                }
+            }
             $state[$row['page_id']] = $saved;
         }
 
@@ -112,6 +130,13 @@ final class PublicContent53State
     public function assertBaseline(array $rows): void
     {
         foreach ($rows as $row) {
+            if (isset($row['source_snapshot'])) {
+                $source = $row;
+                $source['identity']['locale'] = 'zh-CN';
+                if ($this->hash($this->projection($source)) !== $this->hash($row['source_snapshot'])) {
+                    throw new DomainException('public_content_53_translation_public_source_drift');
+                }
+            }
             $projection = $this->projection($row);
             // A staging environment may already contain the accepted candidate.
             if ($this->hash($projection) !== $this->hash(PublicContent53Package::before($row)) && $this->hash($projection) !== $this->hash($row['snapshot'])) {
