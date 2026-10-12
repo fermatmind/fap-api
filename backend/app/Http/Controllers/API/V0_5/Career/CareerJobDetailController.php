@@ -21,7 +21,12 @@ final class CareerJobDetailController extends Controller
         $slug = app(CareerCurrentIdentity::class)->canonicalSlug($slug);
         $publicLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
         try {
-            $payload = app(\App\Services\Career\CareerFilePageReader::class)->read($slug, $publicLocale, ! app(\App\Support\Career\CareerVerifyOnlyRequestAuthorizer::class)->isAuthorized($request));
+            $payload = app(\App\Services\Career\CareerFilePageReader::class)->read(
+                $slug,
+                $publicLocale,
+                ! app(\App\Support\Career\CareerVerifyOnlyRequestAuthorizer::class)->isAuthorized($request),
+                $request->query('projection_contract') === 'career.detail.presence.v1',
+            );
         } catch (\App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure $error) {
             return response()->json(['error' => 'CAREER_PAGE_UNAVAILABLE', 'code' => $error->safeCode], 503)->header('Cache-Control', 'private, no-store');
         }

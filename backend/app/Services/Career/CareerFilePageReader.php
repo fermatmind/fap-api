@@ -19,7 +19,7 @@ final class CareerFilePageReader
         private readonly CareerContentV3CanonicalReader $content,
     ) {}
 
-    public function read(string $slug, string $locale, bool $cacheWrite = true): ?array
+    public function read(string $slug, string $locale, bool $cacheWrite = true, bool $presenceOnly = false): ?array
     {
         $locale = in_array(strtolower($locale), ['zh', 'zh-cn'], true) ? 'zh-CN' : $locale;
         $projection = $this->publication->filePagePublication($slug, $locale);
@@ -31,6 +31,16 @@ final class CareerFilePageReader
         if (! is_file($path) || is_link($path) || filesize($path) !== $entry['bytes']
             || ! hash_equals($entry['sha256'], hash_file('sha256', $path))) {
             throw new \App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_HASH_MISMATCH');
+        }
+        // Route status probes need published identity, not a second copy of the
+        // full page, business projection, or occupation relations. Keep the
+        // same publication and authoritative-file checks as the full reader.
+        if ($presenceOnly) {
+            return [
+                'bundle_kind' => 'career_job_presence',
+                'bundle_version' => 'career.detail.presence.v1',
+                'identity' => ['canonical_slug' => $slug],
+            ];
         }
         $sourceHash = (string) $entry['source_content_sha256'];
         $key = self::cacheKeyFromIdentity($slug, $locale, $sourceHash);

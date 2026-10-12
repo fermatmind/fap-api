@@ -79,6 +79,42 @@ final class CareerFilePageReaderTest extends TestCase
         self::assertNull(app(CareerFilePageReader::class)->read('actors', 'en'));
     }
 
+    public function test_presence_projection_is_small_and_skips_full_detail_queries_and_cache(): void
+    {
+        $this->publication(true);
+        DB::enableQueryLog();
+        foreach (['zh-CN', 'en'] as $locale) {
+            $response = $this->getJson("/api/v0.5/career/jobs/Actors?locale={$locale}&projection_contract=career.detail.presence.v1")->assertOk();
+            $this->assertNoStore($response);
+            $response->assertExactJson([
+                'bundle_kind' => 'career_job_presence',
+                'bundle_version' => 'career.detail.presence.v1',
+                'identity' => ['canonical_slug' => 'actors'],
+            ]);
+            self::assertLessThan(200, strlen($response->getContent()));
+            $page = app(\App\Domain\Career\Display\CareerPageProjector::class)->read('actors', $locale);
+            self::assertNull(\App\Support\PublicProjectionCache::get(CareerFilePageReader::cacheKey($page)));
+        }
+        foreach (DB::getQueryLog() as $query) {
+            self::assertStringNotContainsString('occupations', $query['query']);
+            self::assertStringNotContainsString('occupation_aliases', $query['query']);
+            self::assertStringNotContainsString('occupation_crosswalks', $query['query']);
+        }
+        // Existing callers still receive the original full page contract.
+        $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN&projection_contract=career.detail.page.v1')
+            ->assertOk()->assertJsonPath('career_page.subject.canonical_slug', 'actors');
+    }
+
+    public function test_presence_projection_preserves_publication_and_missing_file_failures(): void
+    {
+        $uri = '/api/v0.5/career/jobs/actors?locale=zh-CN&projection_contract=career.detail.presence.v1';
+        $this->publication(false);
+        $this->assertNoStore($this->getJson($uri)->assertNotFound());
+        $this->publication(true);
+        $this->assertNoStore($this->getJson('/api/v0.5/career/jobs/missing-file-role?locale=en&projection_contract=career.detail.presence.v1')
+            ->assertStatus(503)->assertJsonPath('error', 'CAREER_PAGE_UNAVAILABLE'));
+    }
+
     public function test_http_cache_loss_and_poison_cannot_replace_the_file_or_dispatch_a_warm_job(): void
     {
         $this->publication(true);
