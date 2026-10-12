@@ -72,6 +72,8 @@ final class PublicContent53Package
         'PAGE-METHOD-BOUNDARIES' => 'method-boundaries', 'PAGE-ITEM-DESIGN' => 'item-design-notes',
         'PAGE-RELIABILITY' => 'reliability-validity', 'PAGE-DATA-PRIVACY' => 'data-privacy',
         'PAGE-MISCONCEPTIONS' => 'common-misconceptions', 'PAGE-CONTACT' => 'help-contact',
+        'PAGE-HELP-ABOUT' => 'help-about', 'PAGE-HELP-TEAM' => 'help-team', 'PAGE-HELP-MENTIONS' => 'help-used-and-mentioned',
+        'PAGE-HELP-PAYMENT' => 'help-payment-refund', 'PAGE-HELP-UNLOCK' => 'help-unlock-failure', 'PAGE-HELP-RECOVERY' => 'help-result-recovery',
     ];
 
     public function read(string $backendRoot, string $expectedSha256): array

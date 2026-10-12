@@ -11,14 +11,14 @@ import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 test('active full-page package binds only the reviewed eligible English pages',()=>{
  const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
- assert.equal(binding.expected_row_count,17);assert.equal(rows.length,17);
- assert.equal(new Set(rows.map(row=>row.page_id)).size,17);
- const allowed=['about','brand','careers','charter','common-misconceptions','data-privacy','foundation','help-contact','help-faq','help-for-business-and-research','item-design-notes','method-boundaries','policies','privacy','reliability-validity','science','terms'];
+ assert.equal(binding.expected_row_count,6);assert.equal(rows.length,6);
+ assert.equal(new Set(rows.map(row=>row.page_id)).size,6);
+ const allowed=['help-about','help-team','help-used-and-mentioned','help-payment-refund','help-unlock-failure','help-result-recovery'];
  assert.deepEqual(rows.map(row=>row.identity.slug).sort(),allowed.sort());
  assert.ok(rows.every(row=>row.kind==='page' && row.identity.org_id===0 && row.identity.locale==='en'));
- assert.equal(rows.find(row=>row.identity.slug==='science').snapshot.summary,null);
- assert.ok(rows.find(row=>row.identity.slug==='brand').snapshot.content_md.includes('“费马测试（FermatMind）”'));
- assert.ok(rows.some(row=>row.staging_source_snapshot));
+ assert.equal(rows.find(row=>row.identity.slug==='help-payment-refund').snapshot.faq_items.length,4);
+ assert.ok(rows.find(row=>row.identity.slug==='help-unlock-failure').snapshot.content_md.includes('24 hours'));
+ assert.ok(rows.every(row=>!row.staging_source_snapshot));
 });
 test('previous immutable 50-row package remains fully validated by its own exact digest',()=>{
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -158,4 +158,12 @@ test('full-page metadata must expose the same approved translated candidate',()=
  const before={dom:{canonical:['https://fermatmind.com/en/method-boundaries'],robots:[],alternates:[]}};
  assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
  assert.throws(()=>assertDom(row,html.replace('Complete interpretation and usage boundaries.','Old English summary.'),before,'production'),/METADATA/);
+});
+
+test('ASCII FAQ control comments stay in the exact API candidate without becoming reader copy',()=>{
+ const row={page_id:'PAGE-HELP-PAYMENT',kind:'page',identity:{locale:'en',slug:'help-payment-refund'},snapshot:{title:'Payment',content_md:'<!-- help-service-visible-faq:start -->\n\n### Refund conditions\n\nRequest within 7 days.\n\n<!-- help-service-visible-faq:end -->'}};
+ const before={dom:{canonical:['https://fermatmind.com/en/help/payment-refund'],robots:[],alternates:[]}};
+ const html='<html><head><link rel="canonical" href="https://fermatmind.com/en/help/payment-refund"></head><body><main><h1>Payment</h1><h3>Refund conditions</h3><p>Request within 7 days.</p></main></body></html>';
+ assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ assert.throws(()=>assertDom(row,html.replace('Request within 7 days.',''),before,'production'),/VISIBLE_BODY/);
 });

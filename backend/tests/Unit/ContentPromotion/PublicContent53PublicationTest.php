@@ -390,7 +390,7 @@ PHP;
                     'publish_allowed' => true, 'operator_approval_required' => false, 'claim_gate_status' => 'passed',
                 ]);
         }
-        $english = ContentPage::query()->where('slug', 'about')->where('locale', 'en')->firstOrFail();
+        $english = ContentPage::query()->where($rows[0]['identity'])->firstOrFail();
         $otherPages = DB::table('content_pages')->whereNotIn('id', $englishIds)->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all();
         $draft = CmsTranslationRevision::query()->create([
             'org_id' => 0, 'content_type' => 'content_page', 'content_id' => $english->id,
@@ -415,7 +415,7 @@ PHP;
         DB::transaction(fn () => $writer->restore($this->translationContext(), $before, $after['state']));
         Cache::flush();
         self::assertSame($before, $states->read($this->translationDigest()));
-        ContentPage::query()->where('slug', 'about')->where('locale', 'zh-CN')->update(['summary' => 'Changed after review']);
+        ContentPage::query()->where(array_replace($rows[0]['identity'], ['locale' => 'zh-CN']))->update(['summary' => 'Changed after review']);
         $this->expectExceptionMessage('public_content_53_translation_source_drift');
         $states->read($this->translationDigest());
     }
