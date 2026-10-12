@@ -339,7 +339,9 @@ jobs:
                 and .seo_competitive_evidence.result == "skipped"))
           ' \
             "$receipt" >/dev/null
-          classification="$(jq -c .classification "$receipt")"
+          # Keep job outputs bounded for the full 1046-page Career batch.
+          # Exact-SHA policy validation uses the complete receipt above.
+          classification="$(jq -c '{operations: .classification.operations}' "$receipt")"
           career_content_only="$(jq -r '.classification.operations.career_content_only == true' "$receipt")"
           career_first_publish="$(jq -r '.classification.operations.career_first_publish == true' "$receipt")"
           career_package="$(jq -r '.classification.operations.career_content_only == true or .classification.operations.career_first_publish == true' "$receipt")"

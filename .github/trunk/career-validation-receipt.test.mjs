@@ -90,6 +90,38 @@ test('wrong-SHA large Career receipts still fail before output', () => {
   } finally { rmSync(item.root, { recursive: true, force: true }); }
 });
 
+test('CI and deploy job outputs carry switches without the full 1046-page inventory', () => {
+  const item = fixture();
+  try {
+    const classification = JSON.parse(readFileSync(join(item.root, 'trunk-path-classification.json'), 'utf8'));
+    classification.paths = item.change.changed_pages.map((page) => page.path);
+    classification.career_content_change.changed_pages = item.change.changed_pages.map((page) => ({
+      ...page, source_content_sha256: digest, before_source_content_sha256: digest,
+    }));
+    assert.ok(Buffer.byteLength(JSON.stringify(classification), 'utf16le') > 1024 * 1024);
+    item.write('trunk-path-classification.json', classification);
+    item.write('validation.json', { classification });
+    const deploy = readFileSync(new URL('../workflows/deploy.yml', import.meta.url), 'utf8');
+    const assignments = [
+      workflow.match(/^          compact=.*$/m)[0].trim(),
+      deploy.match(/^          classification=.*$/m)[0].trim(),
+    ];
+    const result = spawnSync('bash', ['-c', [
+      'classification_path="$RUNNER_TEMP/classification.json"',
+      'cp trunk-path-classification.json "$classification_path"',
+      'receipt=validation.json', ...assignments,
+      'printf "%s\\n%s\\n" "$compact" "$classification"',
+    ].join('\n')], { cwd: item.root, env: { ...process.env, RUNNER_TEMP: item.root }, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    for (const output of result.stdout.trim().split('\n')) {
+      assert.ok(Buffer.byteLength(output, 'utf16le') < 64 * 1024);
+      assert.deepEqual(JSON.parse(output), { operations: classification.operations });
+    }
+    assert.deepEqual(JSON.parse(readFileSync(join(item.root, 'classification.json'), 'utf8')), classification);
+    assert.equal(JSON.parse(readFileSync(join(item.root, 'validation.json'), 'utf8')).classification.career_content_change.changed_pages.length, 1046);
+  } finally { rmSync(item.root, { recursive: true, force: true }); }
+});
+
 test('CI transport correction carries the unreleased Career batch into deployment', () => {
   const result = classifyRelease({
     pushBase: base, head: sha, baseline: { sha: tree, runId: 7 }, isAncestor: () => true,

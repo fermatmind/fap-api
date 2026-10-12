@@ -77,7 +77,9 @@ jobs:
           test -s "$RUNNER_TEMP/changed-paths"
           node .github/trunk/classify-release.mjs > "$RUNNER_TEMP/classification.json"
           base_sha="$(jq -r .scope.validation_base_sha "$RUNNER_TEMP/classification.json")"
-          compact="$(jq -c . "$RUNNER_TEMP/classification.json")"
+          # Job expressions consume only operation switches; the immutable
+          # artifact retains the complete path and page inventories.
+          compact="$(jq -c '{operations}' "$RUNNER_TEMP/classification.json")"
           {
             echo "base_sha=$base_sha"
             echo "deploy=$(jq -r .deploy "$RUNNER_TEMP/classification.json")"
