@@ -9,6 +9,32 @@ import { buildExecution, publish, recoveryFailure } from './public-content-53-pu
 import { assertDom, pathFor, read } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
+function translatedTestsHubDom() {
+ const row=readCandidateRows(root).candidates.find(row=>row.page_id==='PAGE-32');
+ const payload=row.snapshot.payload_json;
+ const list={'@type':'ItemList',inLanguage:'en',numberOfItems:payload.quickStart.items.length,itemListElement:payload.quickStart.items.map((item,index)=>({'@type':'ListItem',position:index+1,name:item.title,description:item.description,url:'https://fermatmind.com'+item.href}))};
+ const cards=[payload.families.items[1].tests[0].description,payload.families.items[0].tests[1].outputLabel];
+ const script='<script type="application/ld+json" id="tests-hub-quickstart-en">'+JSON.stringify(list)+'</script>';
+ const html='<html><head><link rel="canonical" href="https://fermatmind.com/en/tests"></head><body><main>'+script+'<h1>Free assessments</h1>'+cards.map(text=>'<p>'+text+'</p>').join('')+'</main></body></html>';
+ return {row,list,cards,script,html,before:{dom:{canonical:['https://fermatmind.com/en/tests'],robots:[],alternates:[]}}};
+}
+test('translated tests hub checks quickStart in its actual named JSON-LD consumer and cards in visible prose',()=>{
+ const {row,cards,html,before}=translatedTestsHubDom();
+ assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ for(const card of cards) {
+  assert.throws(()=>assertDom(row,html.replace('<p>'+card+'</p>',''),before,'production'),/VISIBLE_BODY/);
+  assert.throws(()=>assertDom(row,html.replace('<p>'+card+'</p>','<script>'+card+'</script>'),before,'production'),/VISIBLE_BODY/);
+ }
+});
+test('tests hub JSON-LD must retain the exact translated text, identity, route and full item inventory',()=>{
+ const {row,list,script,html,before}=translatedTestsHubDom();
+ for(const mutate of [x=>{x.itemListElement[1].description='Old unrelated summary';},x=>{x.itemListElement[2].url='https://external.invalid/tests';},x=>{x.itemListElement[3].url='https://fermatmind.com/en/tests#wrong';},x=>{x.itemListElement[1].position=99;},x=>{x.itemListElement.pop();},x=>{x.inLanguage='zh-CN';}]) {
+  const altered=structuredClone(list);mutate(altered);
+  assert.throws(()=>assertDom(row,html.replace(JSON.stringify(list),JSON.stringify(altered)),before,'production'),/QUICKSTART_JSONLD/);
+ }
+ for(const altered of [html.replace(script,''),html.replace(script,script+script),html.replace('tests-hub-quickstart-en','unrelated-data'),html.replace('application/ld+json','text/javascript'),html.replace(JSON.stringify(list),'{')])
+  assert.throws(()=>assertDom(row,altered,before,'production'),/QUICKSTART_JSONLD/);
+});
 test('active full-page package binds only the reviewed eligible English pages',()=>{
  const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
  assert.equal(binding.expected_row_count,7);assert.equal(rows.length,7);

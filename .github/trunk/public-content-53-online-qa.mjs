@@ -48,7 +48,9 @@ $walk = function($node) use (&$walk) {
 };
 $labels=[]; foreach($xp->query('//main//a') as $anchor) { $label=$walk($anchor); if (trim($label)!=='') $labels[$anchor->getAttribute('href')][]=$label; }
 $values = function($query,$attr=null) use($xp,$walk) { $out=[];foreach($xp->query($query) as $node) $out[]=$attr===null?$walk($node):$node->getAttribute($attr);return $out;};
+$quickstart=[]; foreach($xp->query('//script[@type="application/ld+json" and @id="tests-hub-quickstart-en"]') as $node) $quickstart[]=$node->textContent;
 echo json_encode(['link_labels'=>$labels,'body'=>$values('//main[not(ancestor::main)]'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
+ 'tests_quickstart_jsonld'=>$quickstart,
  'title'=>$values('//head/title'),'description'=>$values('//meta[@name="description"]','content'),
  'canonical'=>$values('//link[@rel="canonical"]','href'),'robots'=>$values('//meta[@name="robots"]','content'),
  'alternates'=>$values('//link[@rel="alternate"]','href')],JSON_THROW_ON_ERROR);`;
@@ -130,9 +132,28 @@ export function assertDom(row,html,before,environment) {
       || !equal(dom.description.map(compact),description ? [compact(description)] : []))
       throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
   }
+  const translatedTestsHub = row.kind === 'surface' && row.page_id === 'PAGE-32' && row.identity.slug === 'tests' && row.identity.locale === 'en' && row.source_snapshot;
+  if (translatedTestsHub) {
+    // TestsHubExperience renders family test cards. tests/page.tsx consumes
+    // quickStart exclusively in its named ItemList JSON-LD, not visible prose.
+    let list;
+    try { if (dom.tests_quickstart_jsonld.length !== 1) throw new Error(); list=JSON.parse(dom.tests_quickstart_jsonld[0]); }
+    catch { throw new Error('PUBLIC_CONTENT_53_QUICKSTART_JSONLD_PAGE-32'); }
+    const items=row.snapshot.payload_json.quickStart.items;
+    if (list?.['@type'] !== 'ItemList' || list.inLanguage !== 'en' || list.numberOfItems !== items.length || list.itemListElement?.length !== items.length)
+      throw new Error('PUBLIC_CONTENT_53_QUICKSTART_JSONLD_PAGE-32');
+    for (const [index,item] of items.entries()) {
+      const entry=list.itemListElement[index], expected=internalTarget(item.href,environment), actual=internalTarget(entry?.url,environment);
+      if (entry?.['@type'] !== 'ListItem' || entry.position !== index+1 || entry.name !== item.title || entry.description !== item.description
+        || !expected || !actual || actual.pathname !== expected.pathname || actual.search !== expected.search || actual.hash !== expected.hash)
+        throw new Error(`PUBLIC_CONTENT_53_QUICKSTART_JSONLD_PAGE-32_ITEM_${index+1}`);
+    }
+  }
   const copy=row.snapshot.content_md;
   const lines = copy ? copy.split('\n').map(line=>readerLine(line,row.kind)).filter(line=>line.trim() && !/^[\s|:-]+$/.test(line)).flatMap(line=>line.split('|'))
-    : row.kind === 'profile' ? row.snapshot.sections.flatMap(s=>[s.title,s.body_md]).filter(Boolean) : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
+    : row.kind === 'profile' ? row.snapshot.sections.flatMap(s=>[s.title,s.body_md]).filter(Boolean)
+      : translatedTestsHub ? changedStrings(row.before.payload_json.families,row.snapshot.payload_json.families)
+        : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
   for (const [index, line] of lines.entries()) {
     const text=compact(plain(line));
     if (text && !body.includes(text) && !readerVariants(line,row,dom,environment).some(variant=>body.includes(compact(variant))))
