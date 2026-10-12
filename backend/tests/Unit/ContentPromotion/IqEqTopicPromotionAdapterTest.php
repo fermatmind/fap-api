@@ -46,6 +46,12 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
         $this->previous($context, 'cms_draft_import_receipt', $draft);
         $published = $adapter->publish($context);
         self::assertSame(2, $published['published_count']);
+        $english = app(IqEqTopicPackage::class)->read(base_path(), IqEqTopicPackage::SHA256)[1];
+        $payload = $this->getJson('/api/v0.5/topics/iq-eq?org_id=0&locale=en')->assertOk()->json();
+        $callout = array_values(array_filter($payload['sections'], static fn (array $section): bool => $section['section_key'] === 'why_it_matters'));
+        self::assertCount(1, $callout);
+        self::assertSame($english['snapshot']['section_candidates'][2]['body_md'], $callout[0]['body_md']);
+        self::assertSame('Retained operator copy', TopicProfileSection::query()->where('section_key', 'retained_operator_callout')->firstOrFail()->body_md);
         self::assertSame(2, TopicProfile::query()->withoutGlobalScopes()->whereNull('published_at')->whereNull('scheduled_at')->count());
         $this->previous($context, 'cms_publication_receipt', $published);
         self::assertSame(2, $adapter->liveQa($context)['readback_count']);
@@ -197,6 +203,7 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
             TopicProfileSection::query()->create(['profile_id' => $profile->id, 'section_key' => 'overview', 'render_variant' => 'rich_text', 'body_md' => 'Old overview', 'body_html' => 'Old HTML', 'is_enabled' => true, 'sort_order' => 10]);
             TopicProfileSection::query()->create(['profile_id' => $profile->id, 'section_key' => 'faq', 'render_variant' => 'faq', 'payload_json' => ['items' => [['question' => 'Old question', 'answer' => 'Old answer']]], 'is_enabled' => true, 'sort_order' => 20]);
             TopicProfileSection::query()->create(['profile_id' => $profile->id, 'section_key' => 'why_it_matters', 'render_variant' => 'callout', 'body_md' => 'Protected callout', 'is_enabled' => true, 'sort_order' => 30]);
+            TopicProfileSection::query()->create(['profile_id' => $profile->id, 'section_key' => 'retained_operator_callout', 'render_variant' => 'callout', 'body_md' => 'Retained operator copy', 'is_enabled' => true, 'sort_order' => 40]);
             foreach ($row['snapshot']['entry_excerpt_overrides'] as $entry) {
                 TopicProfileEntry::query()->create(['profile_id' => $profile->id, ...array_intersect_key($entry, array_flip(['entry_type', 'group_key', 'target_key'])), 'excerpt_override' => 'Old entry', 'is_enabled' => true, 'sort_order' => 10]);
             }

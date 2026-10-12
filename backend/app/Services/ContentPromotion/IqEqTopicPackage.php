@@ -12,7 +12,7 @@ final class IqEqTopicPackage
 {
     public const PACKAGE = 'content_assets/iq_public/topics/20261010-v1';
 
-    public const SHA256 = '4713f9bca3262ce39607262e8b1a32406e2bac086c2ba091fcb5303d80c37933';
+    public const SHA256 = '2648ade765d858748c85d2a5d480fc44bc34e7516790828687bf067c573ad167';
 
     public function read(string $backendRoot, string $expectedSha256): array
     {
@@ -90,7 +90,7 @@ final class IqEqTopicPackage
             $description = $metadata['metadata']['description'] ?? null;
             if (($metadata['page_id'] ?? null) !== 'SH-01' || ($metadata['locale'] ?? null) !== $locale
                 || ($metadata['candidate_sha256'] ?? null) !== $row['body_sha256']
-                || ! is_string($title) || $title === '' || mb_strlen($title) > 255 || ! is_string($description) || $description === ''
+                || ! is_string($title) || $title === '' || mb_strlen($title) > 255 || ! is_string($description) || $description === '' || mb_strlen($description) > 255
                 || ! $this->same($snapshot['profile_patch'] ?? null, ['title' => $title, 'subtitle' => $description, 'excerpt' => ''])
                 || ! $this->same($snapshot['seo_text_candidate'] ?? null, ['title' => $title, 'description' => $description])
                 || count($snapshot['section_candidates'] ?? []) !== 3

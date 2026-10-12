@@ -170,7 +170,7 @@ final class IqEqTopicPromotionAdapter implements ExactPackagePromotionAdapter
 
                         continue;
                     }
-                    if (! in_array($section['section_key'], ['overview', 'faq'], true)) {
+                    if (! in_array($section['section_key'], ['overview', 'faq', 'why_it_matters'], true)) {
                         continue;
                     }
                     TopicProfileSection::query()->findOrFail($section['id'])->forceFill([...Arr::only($section, self::SECTION_FIELDS), ...(($before['owned_faq_placeholder_id'] ?? null) === $section['id'] ? ['is_enabled' => true] : [])])->saveQuietly();
@@ -209,6 +209,15 @@ final class IqEqTopicPromotionAdapter implements ExactPackagePromotionAdapter
             foreach ($row['snapshot']['profile_patch'] as $field => $value) {
                 if (data_get($payload, 'profile.'.$field) !== $value) {
                     throw new DomainException('iq_eq_topic_public_profile_drift');
+                }
+            }
+            foreach ($row['snapshot']['section_candidates'] as $candidate) {
+                if ($candidate['section_key'] === 'faq') {
+                    continue;
+                }
+                $sections = array_values(array_filter(data_get($payload, 'sections', []), static fn (array $section): bool => $section['section_key'] === $candidate['section_key']));
+                if (count($sections) !== 1 || ($sections[0]['body_md'] ?? null) !== $candidate['body_md']) {
+                    throw new DomainException('iq_eq_topic_public_section_drift');
                 }
             }
             $faqs = array_map(static fn (array $faq): array => Arr::only($faq, ['question', 'answer']), data_get($payload, 'answer_surface_v1.faq_blocks', []));
@@ -263,7 +272,7 @@ final class IqEqTopicPromotionAdapter implements ExactPackagePromotionAdapter
                     ...Arr::only($before['profile'], self::PROFILE_FIELDS), 'published_revision_id' => $before['profile']['published_revision_id'],
                 ])->saveQuietly();
                 foreach ($before['sections'] as $section) {
-                    if (in_array($section['section_key'], ['overview', 'faq'], true)) {
+                    if (in_array($section['section_key'], ['overview', 'faq', 'why_it_matters'], true)) {
                         TopicProfileSection::query()->findOrFail($section['id'])->forceFill(Arr::only($section, self::SECTION_FIELDS))->saveQuietly();
                     }
                 }
@@ -396,7 +405,7 @@ final class IqEqTopicPromotionAdapter implements ExactPackagePromotionAdapter
     private function owned(array $state, bool $pointer = true): string
     {
         $profileFields = [...self::PROFILE_FIELDS, ...($pointer ? ['published_revision_id'] : [])];
-        $sections = array_values(array_filter($state['sections'], static fn (array $section): bool => in_array($section['section_key'], ['overview', 'faq'], true)));
+        $sections = array_values(array_filter($state['sections'], static fn (array $section): bool => in_array($section['section_key'], ['overview', 'faq', 'why_it_matters'], true)));
 
         return $this->hash(['profile' => Arr::only($state['profile'], $profileFields),
             'sections' => array_map(static fn (array $section): array => Arr::only($section, ['section_key', ...self::SECTION_FIELDS]), $sections),

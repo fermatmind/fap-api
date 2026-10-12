@@ -31,6 +31,9 @@ final class IqEqTopicPackageTest extends TestCase
             self::assertCount(7, $row['snapshot']['section_candidates'][1]['payload_json']['items']);
             self::assertSame(['IQ_RAVEN', 'EQ_60'], array_column($row['snapshot']['entry_excerpt_overrides'], 'target_key'));
             self::assertSame('', $row['snapshot']['profile_patch']['excerpt']);
+            // MySQL topic_profiles.subtitle is VARCHAR(255); SQLite does not
+            // enforce its width during this package's lifecycle tests.
+            self::assertLessThanOrEqual(255, mb_strlen($row['snapshot']['profile_patch']['subtitle']));
             self::assertSame($row['snapshot']['profile_patch']['title'], $row['snapshot']['seo_text_candidate']['title']);
         }
     }
