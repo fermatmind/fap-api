@@ -536,7 +536,26 @@ function deployHttpsUrlArg(string $host, string $path): string
     return deployShellArg("https://{$host}{$path}");
 }
 
-function runProductionPublicDnsBusinessEvidence(string $runtimeRoot): void
+function runActiveRevisionHealthcheck(string $runtimeRoot): void
+{
+    if (! in_array($runtimeRoot, ['{{release_path}}', '{{current_path}}'], true)) {
+        throw new \RuntimeException('active revision healthcheck runtime root is invalid');
+    }
+
+    $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
+    $url = deployHttpsUrlArg($host, '/revision');
+    $marker = deployPlaceholderPathArg($runtimeRoot, 'REVISION');
+    $jq = deployShellArg('keys == ["revision"] and .revision == $revision');
+    $command = 'expected_revision="$(tr -d \'\\r\\n\' < '.$marker.')"'
+        .' && [[ "$expected_revision" =~ ^[0-9a-f]{40}$ ]]'
+        ." && curl -fsS --connect-timeout 3 --max-time 15 {$resolveArg}{$url}"
+        .' | jq -e --arg revision "$expected_revision" '.$jq.' >/dev/null';
+
+    run($command);
+}
+
+function runProductionPublicDnsBusinessEvidence(string $runtimeRoot, bool $expectActiveRevision = false): void
 {
     if (currentHost()->getAlias() !== 'production') {
         return;
@@ -560,8 +579,17 @@ function runProductionPublicDnsBusinessEvidence(string $runtimeRoot): void
         $assignments[] = $name.'='.deployShellArg($value);
     }
 
+    $expectedRevisionPrefix = '';
+    if ($expectActiveRevision) {
+        $marker = deployPlaceholderPathArg($runtimeRoot, 'REVISION');
+        $expectedRevisionPrefix = 'expected_revision="$(tr -d \'\\r\\n\' < '.$marker.')"'
+            .' && [[ "$expected_revision" =~ ^[0-9a-f]{40}$ ]] && ';
+        $assignments[] = 'PUBLIC_DNS_PROBE_EXPECTED_REVISION="$expected_revision"';
+    }
+
     run(sprintf(
-        '%s bash %s',
+        '%s%s bash %s',
+        $expectedRevisionPrefix,
         implode(' ', $assignments),
         deployPlaceholderPathArg($runtimeRoot, 'backend/scripts/deploy/verify_public_dns_business_evidence.sh'),
     ));
@@ -4639,6 +4667,7 @@ task('healthcheck:public', function () {
     $jq = deployShellArg('.ok==true');
     $cmd = "curl -fsS {$resolveArg}{$url} | jq -e {$jq}";
     run($cmd);
+    runActiveRevisionHealthcheck('{{release_path}}');
 });
 
 task('healthcheck:career-content-only', function () {
@@ -4708,7 +4737,7 @@ task('healthcheck:public-dns', function () {
     if (deployUsesCareerContentPackage()) {
         return;
     }
-    runProductionPublicDnsBusinessEvidence('{{release_path}}');
+    runProductionPublicDnsBusinessEvidence('{{release_path}}', true);
 });
 
 task('rollback:healthcheck:public', function () {
@@ -4717,6 +4746,7 @@ task('rollback:healthcheck:public', function () {
     $url = deployHttpsUrlArg($host, '/api/healthz');
     $jq = deployShellArg('.ok==true');
     run("curl -fsS {$resolveArg}{$url} | jq -e {$jq}");
+    runActiveRevisionHealthcheck('{{current_path}}');
 });
 
 task('rollback:healthcheck:sitemap-source', function () {
@@ -4730,7 +4760,7 @@ task('rollback:healthcheck:sitemap-source', function () {
 });
 
 task('rollback:healthcheck:public-dns', function () {
-    runProductionPublicDnsBusinessEvidence('{{current_path}}');
+    runProductionPublicDnsBusinessEvidence('{{current_path}}', true);
 });
 
 $authGuestContractHealthcheck = function () {

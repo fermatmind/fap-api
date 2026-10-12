@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\V0_5\Ops\SeoIntel\SeoCouncilMissionController;
 use App\Http\Controllers\API\V0_5\SEO\LlmsController;
+use App\Http\Controllers\DeployedRevisionController;
 use App\Http\Controllers\Ops\ArticleDraftPreviewController;
 use App\Http\Controllers\Ops\BlogSurfacePreviewController;
 use App\Http\Controllers\SitemapController;
@@ -43,6 +44,17 @@ Route::get('/', function () {
 
     return view('welcome');
 });
+
+Route::get('/revision', [DeployedRevisionController::class, '__invoke'])
+    ->withoutMiddleware([
+        \Illuminate\Cookie\Middleware\EncryptCookies::class,
+        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+        \App\Http\Middleware\VerifyCsrfToken::class,
+    ]);
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])
     ->withoutMiddleware([

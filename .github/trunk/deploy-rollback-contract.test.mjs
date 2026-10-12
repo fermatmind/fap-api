@@ -72,7 +72,7 @@ test("normal deploy keeps release-bound public health ordering", () => {
   assert.match(deployer, /after\('healthcheck:sitemap-source', 'healthcheck:public-dns'\);/);
   assert.match(
     taskBlock("healthcheck:public-dns"),
-    /runProductionPublicDnsBusinessEvidence\('\{\{release_path\}\}'\)/,
+    /runProductionPublicDnsBusinessEvidence\('\{\{release_path\}\}', true\)/,
   );
   assert.match(
     taskBlock("guard:public-dns-health"),
@@ -81,8 +81,11 @@ test("normal deploy keeps release-bound public health ordering", () => {
   assert.doesNotMatch(deployer, /runProductionPublicDnsBusinessEvidence\(\)/);
   assert.match(
     taskBlock("rollback:healthcheck:public-dns"),
-    /runProductionPublicDnsBusinessEvidence\('\{\{current_path\}\}'\)/,
+    /runProductionPublicDnsBusinessEvidence\('\{\{current_path\}\}', true\)/,
   );
+  assert.match(taskBlock("healthcheck:public"), /runActiveRevisionHealthcheck\('\{\{release_path\}\}'\)/);
+  assert.match(taskBlock("rollback:healthcheck:public"), /runActiveRevisionHealthcheck\('\{\{current_path\}\}'\)/);
+  assert.match(deployer, /PUBLIC_DNS_PROBE_EXPECTED_REVISION="\$expected_revision"/);
 });
 
 test("LKG recovery rebuilds the exact revision, re-reads REVISION, and emits a sanitized receipt", () => {

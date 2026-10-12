@@ -2,6 +2,7 @@
 set -euo pipefail
 
 PUBLIC_DNS_PROBE_BASE_URL="${PUBLIC_DNS_PROBE_BASE_URL:-}"
+PUBLIC_DNS_PROBE_EXPECTED_REVISION="${PUBLIC_DNS_PROBE_EXPECTED_REVISION:-}"
 PUBLIC_DNS_PROBE_ATTEMPTS="${PUBLIC_DNS_PROBE_ATTEMPTS:-3}"
 PUBLIC_DNS_PROBE_RETRY_DELAYS_SECONDS="${PUBLIC_DNS_PROBE_RETRY_DELAYS_SECONDS-2 5}"
 PUBLIC_DNS_PROBE_CONNECT_TIMEOUT_SECONDS="${PUBLIC_DNS_PROBE_CONNECT_TIMEOUT_SECONDS:-3}"
@@ -25,6 +26,10 @@ validate_integer_range() {
 
 [[ "$PUBLIC_DNS_PROBE_BASE_URL" =~ ^https://[A-Za-z0-9.-]+(:[0-9]+)?$ ]] \
   || fail "configuration error: PUBLIC_DNS_PROBE_BASE_URL must be an HTTPS origin without credentials or a path" 2
+if [ -n "$PUBLIC_DNS_PROBE_EXPECTED_REVISION" ]; then
+  [[ "$PUBLIC_DNS_PROBE_EXPECTED_REVISION" =~ ^[0-9a-f]{40}$ ]] \
+    || fail "configuration error: PUBLIC_DNS_PROBE_EXPECTED_REVISION must be a lowercase 40-character SHA" 2
+fi
 validate_integer_range "PUBLIC_DNS_PROBE_ATTEMPTS" "$PUBLIC_DNS_PROBE_ATTEMPTS" 1 5
 validate_integer_range \
   "PUBLIC_DNS_PROBE_CONNECT_TIMEOUT_SECONDS" \
@@ -93,6 +98,18 @@ probe_http() {
 verify_public_evidence() {
   PROBE_STAGE="public_health"
   probe_http "${PUBLIC_DNS_PROBE_BASE_URL}/api/healthz" "404" || return $?
+
+  if [ -n "$PUBLIC_DNS_PROBE_EXPECTED_REVISION" ]; then
+    PROBE_STAGE="public_revision"
+    probe_http "${PUBLIC_DNS_PROBE_BASE_URL}/revision" "200" || return $?
+
+    PROBE_STAGE="public_revision_contract"
+    printf '%s' "$PROBE_BODY" | jq -e \
+      --arg revision "$PUBLIC_DNS_PROBE_EXPECTED_REVISION" \
+      'keys == ["revision"] and .revision == $revision' \
+      >/dev/null \
+      || return 1
+  fi
 
   PROBE_STAGE="public_flags"
   probe_http "${PUBLIC_DNS_PROBE_BASE_URL}/api/v0.3/flags" "200" || return $?
