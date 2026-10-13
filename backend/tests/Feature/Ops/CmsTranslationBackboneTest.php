@@ -741,6 +741,8 @@ final class CmsTranslationBackboneTest extends TestCase
         $target->forceFill(['status' => 'published', 'translation_status' => 'published', 'is_public' => true])->saveQuietly();
         $workspace = app(RowBackedRevisionWorkspace::class);
         $targetRevision = $workspace->ensureInitialRevision('content_page', $target);
+        // Isolate reviewed_at corruption from the audited revision timestamp.
+        $targetRevision->timestamps = false;
         $target->refresh();
         $targetBefore = \App\Support\ContentPageSourceTargetSnapshot::hash($target);
         $sourceBefore = $source->getAttributes();
@@ -816,13 +818,15 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertSame(1, Artisan::call('translation:restore-content-page-source-version', $restore + ['--dry-run' => true]));
         $meta['old_working_revision_id'] = null;
         $audit->forceFill(['meta_json' => $meta])->saveQuietly();
+        $this->travel(2)->seconds();
         $targetRevision->forceFill(['reviewed_at' => now()])->saveQuietly();
         $this->assertSame(1, Artisan::call('translation:restore-content-page-source-version', $restore + ['--dry-run' => true]));
         $this->assertContains('target_revision_snapshot_drift', json_decode(Artisan::output(), true)['errors']);
         $targetRevision->forceFill(['reviewed_at' => null])->saveQuietly();
+        $this->travelBack();
         $this->assertSame(0, Artisan::call('translation:restore-content-page-source-version', $restore + [
             '--execute' => true, '--confirm' => sprintf('Restore content page source %d revision %d.', $source->id, $new->id),
-        ]));
+        ]), Artisan::output());
         $source->refresh();
         $this->assertNull($source->working_revision_id);
         $this->assertNull($source->published_revision_id);

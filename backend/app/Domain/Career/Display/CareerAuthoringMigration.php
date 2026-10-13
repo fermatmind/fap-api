@@ -17,7 +17,13 @@ final class CareerAuthoringMigration
         (new CareerCurrentAuthorityReleaseIntent(new CareerCurrentAuthorityPackageLoader($package)))->verify($backendRoot);
         $manifest = $index['manifest'];
         $layout = new CareerAuthoringLayout;
-        $baseline = $layout->baseline($package->pageFromIndex($index, 'accountants-and-auditors', 'zh-CN'));
+        $accountant = $package->pageFromIndex($index, 'accountants-and-auditors', 'zh-CN');
+        if (array_key_exists('authoring_structure', $accountant)) {
+            CareerAuthoringStructure::assert($accountant);
+            $baseline = array_intersect_key($accountant['authoring_structure'], array_flip(['contract_version', 'module_order', 'slots']));
+        } else {
+            $baseline = $layout->baseline($accountant);
+        }
         $schema = CareerAuthoringStructure::schema();
         if (array_keys($baseline['slots']) !== array_keys($schema['slots']) || $baseline['module_order'] !== $schema['module_order']) {
             throw new CareerCurrentAuthorityPackageFailure('CAREER_AUTHORING_BASELINE_DRIFT');
@@ -65,10 +71,14 @@ final class CareerAuthoringMigration
                 if ($page['content_state'] !== $original['content_state']) {
                     throw new CareerCurrentAuthorityPackageFailure('CAREER_AUTHORING_MIGRATION_COHORT_DRIFT');
                 }
-                $before = CareerAuthoringStructure::publicContent($original);
-                $after = CareerAuthoringStructure::publicContent($page);
-                if ($before !== $after || $projector->project($original) !== $projector->project($page)) {
-                    throw new CareerCurrentAuthorityPackageFailure('CAREER_AUTHORING_PUBLIC_CONTENT_DRIFT');
+                if ($page !== $original) {
+                    $before = CareerAuthoringStructure::publicContent($original);
+                    $after = CareerAuthoringStructure::publicContent($page);
+                    if ($before !== $after || $projector->project($original) !== $projector->project($page)) {
+                        throw new CareerCurrentAuthorityPackageFailure('CAREER_AUTHORING_PUBLIC_CONTENT_DRIFT');
+                    }
+                } elseif (! isset($page['hero'], $page['seo'])) {
+                    throw new CareerCurrentAuthorityPackageFailure('CAREER_PAGE_FIELDS_MISSING');
                 }
                 $semantic = $page;
                 unset($semantic['source_content_sha256']);

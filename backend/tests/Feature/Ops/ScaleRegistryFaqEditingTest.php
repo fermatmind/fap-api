@@ -15,11 +15,16 @@ use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
+use Illuminate\Database\MySqlConnection;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\View\ViewException;
 use Livewire\Livewire;
 use Mockery;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -425,6 +430,86 @@ final class ScaleRegistryFaqEditingTest extends TestCase
         $faq[1]->a = 'Rejected local FAQ';
         $page->set('data.content_i18n_json.zh.faq', json_encode($faq, JSON_PRESERVE_ZERO_FRACTION))->call('save', false)->assertHasFormErrors(['content_i18n_json.zh.faq']);
         self::assertSame($before, (array) DB::table('scales_registry_v2')->where('id', 20)->first());
+    }
+
+    public function test_missing_legacy_table_keeps_ordinary_edit_but_rejects_faq_edit(): void
+    {
+        Schema::drop('scales_registry');
+        $page = Livewire::test(EditScaleRegistry::class, ['record' => 10]);
+        self::assertSame([], $page->get('faqEditBaseline'));
+        $page->set('data.seo_i18n_json.zh.title', 'V2-only title')->call('save', false)->assertHasNoFormErrors();
+        self::assertSame('V2-only title', json_decode(DB::table('scales_registry_v2')->where('id', 10)->value('seo_i18n_json'))->zh->title);
+        $before = (array) DB::table('scales_registry_v2')->where('id', 10)->first();
+        $faq = json_decode($page->get('data.content_i18n_json.zh.faq'));
+        $faq[1]->a = 'Rejected without legacy table';
+        $page->set('data.content_i18n_json.zh.faq', json_encode($faq, JSON_PRESERVE_ZERO_FRACTION))->call('save', false)->assertHasFormErrors(['content_i18n_json.zh.faq']);
+        self::assertSame($before, (array) DB::table('scales_registry_v2')->where('id', 10)->first());
+    }
+
+    public function test_legacy_query_dependency_error_is_not_treated_as_missing_legacy_table(): void
+    {
+        Schema::drop('scales_registry');
+        DB::unprepared('CREATE VIEW scales_registry AS SELECT * FROM missing_registry_dependency');
+        try {
+            Livewire::test(EditScaleRegistry::class, ['record' => 10]);
+            self::fail('A missing view dependency must not be swallowed');
+        } catch (ViewException $exception) {
+            $cause = $exception;
+            while ($cause->getPrevious() !== null) {
+                $cause = $cause->getPrevious();
+                if ($cause instanceof QueryException) {
+                    self::assertSame('no such table: main.missing_registry_dependency', $cause->errorInfo[2]);
+
+                    return;
+                }
+            }
+            self::fail('The rendering exception must retain its database cause');
+        }
+    }
+
+    public static function mysqlLegacyErrors(): array
+    {
+        return [
+            'exact prefixed legacy table' => ['42S02', 1146, "Table 'faq_fixture.prefix_scales_registry' doesn't exist", true],
+            'other missing table' => ['42S02', 1146, "Table 'faq_fixture.missing_dependency' doesn't exist", false],
+            'invalid view' => ['HY000', 1356, "View 'faq_fixture.prefix_scales_registry' references invalid table(s)", false],
+        ];
+    }
+
+    #[DataProvider('mysqlLegacyErrors')]
+    public function test_mysql_legacy_error_boundary(string $state, int $code, string $message, bool $missingLegacy): void
+    {
+        $pdoError = new \PDOException($message);
+        $pdoError->errorInfo = [$state, $code, $message];
+        $error = new QueryException('mysql-legacy-fixture', 'select * from scales_registry', [], $pdoError);
+        $connection = new MySqlConnection(null, 'faq_fixture', 'prefix_', ['driver' => 'mysql']);
+        $builder = Mockery::mock(Builder::class);
+        $builder->shouldReceive('where')->with('org_id', 0)->once()->andReturnSelf();
+        $builder->shouldReceive('where')->with('code', 'ENNEAGRAM')->once()->andReturnSelf();
+        $builder->shouldReceive('get')->once()->andThrow($error);
+        $realManager = DB::getFacadeRoot();
+        $manager = Mockery::mock($realManager);
+        $manager->shouldReceive('table')->withAnyArgs()->andReturnUsing(fn ($table) => $realManager->table($table))->byDefault();
+        $manager->shouldReceive('connection')->withAnyArgs()->andReturnUsing(fn ($name = null) => $realManager->connection($name))->byDefault();
+        DB::swap($manager);
+        $manager->shouldReceive('table')->with('scales_registry')->andReturn($builder);
+        $manager->shouldReceive('connection')->with('mysql-legacy-fixture')->andReturn($connection);
+        try {
+            $page = Livewire::test(EditScaleRegistry::class, ['record' => 10]);
+            self::assertTrue($missingLegacy, 'Other database errors must reject editor mount');
+            self::assertSame([], $page->get('faqEditBaseline'));
+        } catch (ViewException $outer) {
+            self::assertFalse($missingLegacy, $outer->getMessage());
+            $cause = $outer;
+            while ($cause instanceof ViewException) {
+                $cause = $cause->getPrevious();
+            }
+            self::assertSame($error, $cause);
+            self::assertSame($pdoError, $cause->getPrevious());
+            self::assertSame([$state, $code, $message], $cause->errorInfo);
+        } finally {
+            DB::swap($realManager);
+        }
     }
 
     private function cacheFailedPage(): \Livewire\Features\SupportTesting\Testable

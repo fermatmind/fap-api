@@ -14,8 +14,8 @@ use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Locked;
 
@@ -51,21 +51,39 @@ class EditScaleRegistry extends EditRecord
         // A string preserves opaque JSON types across Livewire's snapshot codec.
         $this->faqFormBaselineJson = json_encode($form, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION);
         $this->faqEditBaseline = [];
-        if (! Schema::hasTable('scales_registry')) {
-            return;
-        }
-        $rows = DB::transaction(function () use ($record): array {
-            $rows = [];
-            foreach (['scales_registry_v2', 'scales_registry'] as $table) {
-                $found = DB::table($table)->where('org_id', $record->org_id)->where('code', $record->code)->get();
-                if ($found->count() !== 1) {
-                    return [];
+        $readingLegacy = false;
+        try {
+            $rows = DB::transaction(function () use ($record, &$readingLegacy): array {
+                $rows = [];
+                foreach (['scales_registry_v2', 'scales_registry'] as $table) {
+                    $readingLegacy = $table === 'scales_registry';
+                    $found = DB::table($table)->where('org_id', $record->org_id)->where('code', $record->code)->get();
+                    $readingLegacy = false;
+                    if ($found->count() !== 1) {
+                        return [];
+                    }
+                    $rows[] = (array) $found->first();
                 }
-                $rows[] = (array) $found->first();
+
+                return $rows;
+            });
+        } catch (QueryException $exception) {
+            $info = $exception->errorInfo ?? [];
+            $connection = DB::connection($exception->getConnectionName());
+            $driver = $connection->getDriverName();
+            $legacyMissingMessage = sprintf("Table '%s.%s' doesn't exist", $connection->getDatabaseName(), $connection->getTablePrefix().'scales_registry');
+            $missingLegacy = $readingLegacy && (
+                ($driver === 'mysql' && ($info[0] ?? null) === '42S02' && (int) ($info[1] ?? 0) === 1146
+                    && ($info[2] ?? null) === $legacyMissingMessage)
+                || ($driver === 'sqlite' && ($info[0] ?? null) === 'HY000' && (int) ($info[1] ?? 0) === 1
+                    && ($info[2] ?? null) === 'no such table: scales_registry')
+            );
+            if (! $missingLegacy) {
+                throw $exception;
             }
 
-            return $rows;
-        });
+            return;
+        }
         // Keep ordinary editing available for v2-only/org-local authority.
         // FAQ changes require a dual-table baseline and cannot fall back to wide writes.
         if ($rows === [] || $rows[0] !== $record->getRawOriginal() || $rows[0]['content_i18n_json'] !== $rows[1]['content_i18n_json']) {
