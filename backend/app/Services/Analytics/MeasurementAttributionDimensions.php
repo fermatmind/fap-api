@@ -70,7 +70,7 @@ final class MeasurementAttributionDimensions
             return 'not_organic';
         }
 
-        return match (true) {
+        $channelFromCampaign = match (true) {
             str_contains($source, 'google') => 'google',
             str_contains($source, 'baidu') => 'baidu',
             str_contains($source, 'bing') => 'bing',
@@ -78,6 +78,70 @@ final class MeasurementAttributionDimensions
             $medium === 'organic', $medium === 'seo', $channel === 'organic', $channel === 'seo' => 'other_search',
             default => 'unknown',
         };
+
+        if ($channelFromCampaign !== 'unknown' || $source !== '' || $medium !== '') {
+            return $channelFromCampaign;
+        }
+
+        foreach (['campaign', 'term', 'content'] as $field) {
+            if ($this->safeScalar($utm[$field] ?? null, 128) !== '') {
+                return 'unknown';
+            }
+        }
+
+        foreach (['gclid', 'msclkid', 'fbclid', 'bd_vid'] as $clickId) {
+            if (! empty($meta[$clickId])) {
+                return 'unknown';
+            }
+        }
+
+        foreach (['landing_path', 'current_path'] as $pathField) {
+            $path = $meta[$pathField] ?? null;
+            if (! is_string($path)) {
+                continue;
+            }
+            $query = parse_url($path, PHP_URL_QUERY);
+            if (! is_string($query)) {
+                continue;
+            }
+            foreach (explode('&', $query) as $parameter) {
+                $key = strtolower(rawurldecode(explode('=', $parameter, 2)[0]));
+                if (in_array($key, ['gclid', 'msclkid', 'fbclid', 'bd_vid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'], true)) {
+                    return 'unknown';
+                }
+            }
+        }
+
+        return $this->searchEngineFromStoredReferrer($meta['referrer'] ?? null);
+    }
+
+    private function searchEngineFromStoredReferrer(mixed $value): string
+    {
+        if (! is_string($value) || filter_var($value, FILTER_VALIDATE_URL) === false) {
+            return 'unknown';
+        }
+
+        $url = parse_url($value);
+        if (! is_array($url) || ! in_array(strtolower($url['scheme'] ?? ''), ['http', 'https'], true)
+            || isset($url['user']) || isset($url['pass'])) {
+            return 'unknown';
+        }
+
+        $host = rtrim(strtolower($url['host'] ?? ''), '.');
+        foreach ([
+            'google' => ['google.com', 'google.com.hk', 'google.co.uk', 'google.co.jp', 'google.cn'],
+            'baidu' => ['baidu.com'],
+            'bing' => ['bing.com'],
+            'sogou' => ['sogou.com'],
+        ] as $engine => $domains) {
+            foreach ($domains as $domain) {
+                if ($host === $domain || str_ends_with($host, '.'.$domain)) {
+                    return $engine;
+                }
+            }
+        }
+
+        return 'unknown';
     }
 
     private function deviceClass(mixed $value): string

@@ -126,6 +126,36 @@ final class MeasurementFunnelReadModelTest extends TestCase
         $this->assertSame($before, $this->tableCounts());
     }
 
+    public function test_existing_referrer_is_used_consistently_for_all_backend_stages_without_writes(): void
+    {
+        $scenario = $this->seedFunnelAnalyticsScenario(76);
+        $attemptId = $scenario['attempt_a'];
+        DB::table('attempts')->where('id', $attemptId)->update([
+            'scale_code' => 'RIASEC',
+            'channel' => 'web',
+            'answers_summary_json' => json_encode(['meta' => [
+                'form_code' => 'riasec_60',
+                'referrer' => 'https://www.google.com/search?q=private-query&email=private@example.com',
+            ]], JSON_UNESCAPED_SLASHES),
+        ]);
+        $this->insertEvent(76, 'result_ready', $attemptId, CarbonImmutable::parse($scenario['day'].' 08:06:00'));
+        $before = $this->tableCounts();
+
+        $report = app(MeasurementFunnelReadModel::class)->report(76, $scenario['day'], $scenario['day'], ['RIASEC'], ['en']);
+
+        $this->assertSame($before, $this->tableCounts());
+        $this->assertTrue($report['ok']);
+        $this->assertSame(1, $report['row_count']);
+        $this->assertSame('google', $report['rows'][0]['dimensions']['organic_channel']);
+        foreach (['attempt_started_count', 'test_completed_count', 'result_ready_count', 'result_ready_event_count'] as $metric) {
+            $this->assertSame(1, $report['totals'][$metric]);
+        }
+        $encoded = json_encode($report, JSON_THROW_ON_ERROR);
+        foreach ([$attemptId, 'private-query', 'private@example.com', 'referrer', 'google.com'] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $encoded);
+        }
+    }
+
     public function test_submit_event_meta_uses_only_the_measurement_allowlist(): void
     {
         $scenario = $this->seedFunnelAnalyticsScenario(73);
