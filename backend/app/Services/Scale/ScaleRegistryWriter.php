@@ -2,12 +2,17 @@
 
 namespace App\Services\Scale;
 
+use App\Filament\Ops\Resources\ScaleRegistryResource;
+use App\Models\AuditLog;
 use App\Models\ScaleRegistry as ScaleRegistryModel;
+use App\Models\ScaleRegistryV2;
 use App\Models\ScaleSlug;
+use App\Services\Audit\AuditLogger;
 use App\Support\CacheKeys;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class ScaleRegistryWriter
 {
@@ -19,8 +24,11 @@ class ScaleRegistryWriter
         private PublicScaleCatalogCache $publicScaleCatalogCache,
     ) {}
 
-    public function upsertScale(array $payload): ScaleRegistryModel
+    public function upsertScale(array $payload, ?array $faqEditContext = null): ScaleRegistryModel
     {
+        if ($faqEditContext !== null) {
+            return $this->saveSingleFaq($payload, $faqEditContext);
+        }
         $code = strtoupper(trim((string) ($payload['code'] ?? '')));
         $orgId = (int) ($payload['org_id'] ?? 0);
         if ($code === '') {
@@ -89,6 +97,195 @@ class ScaleRegistryWriter
         $this->invalidatePublicProjection($orgId, $code, $affectedSlugs);
 
         return $scale;
+    }
+
+    /** Precision branch of the existing authenticated editor; never accepts a JSON path. */
+    private function saveSingleFaq(array $payload, array $context): ScaleRegistryModel
+    {
+        $this->assertExactKeys($context, ['target', 'baseline', 'form_before_json']);
+        $target = $context['target'];
+        $this->assertExactKeys($target, ['org_id', 'id', 'code', 'primary_slug']);
+        $this->assertExactKeys($context['baseline'], ['v2', 'legacy']);
+        if (! is_int($target['org_id']) || $target['org_id'] < 0 || ! is_int($target['id']) || $target['id'] <= 0
+            || ! is_string($target['code']) || $target['code'] === '' || ! is_string($target['primary_slug'])
+            || ($payload['org_id'] ?? null) !== $target['org_id'] || ($payload['code'] ?? null) !== $target['code']) {
+            throw new \DomainException('FAQ target identity mismatch.');
+        }
+        foreach ($context['baseline'] as $hash) {
+            if (! is_string($hash) || ! preg_match('/^[a-f0-9]{64}$/D', $hash)) {
+                throw new \DomainException('Invalid FAQ baseline.');
+            }
+        }
+        $record = ScaleRegistryV2::withoutGlobalScopes()->find($target['id']);
+        if (! $record || ! ScaleRegistryResource::canEdit($record) || (int) $record->org_id !== $target['org_id']
+            || $record->code !== $target['code'] || $record->primary_slug !== $target['primary_slug']) {
+            throw new \DomainException('FAQ editing is outside the current authenticated write scope.');
+        }
+        if (! $this->useV2Table() || ! in_array(DB::connection()->getDriverName(), ['mysql', 'sqlite'], true)
+            || ! Schema::hasTable(self::LEGACY_TABLE) || ! Schema::hasTable('audit_logs')) {
+            throw new \DomainException('FAQ authority or audit storage is unavailable.');
+        }
+        if (DB::transactionLevel() !== 0) {
+            throw new \DomainException('FAQ save requires its own top-level transaction.');
+        }
+        if (! is_string($context['form_before_json'])) {
+            throw new \DomainException('Invalid FAQ form baseline.');
+        }
+        $beforeForm = json_decode($context['form_before_json'], false, 512, JSON_THROW_ON_ERROR);
+        if (! $beforeForm instanceof \stdClass || ! ($beforeForm->content_i18n_json->zh ?? null) instanceof \stdClass) {
+            throw new \DomainException('Invalid FAQ form baseline.');
+        }
+        $afterForm = $payload;
+        unset($beforeForm->content_i18n_json->zh->faq, $afterForm['content_i18n_json']['zh']['faq']);
+        if ($this->faqJson($beforeForm) !== $this->faqJson($afterForm)) {
+            throw new \DomainException('Save one FAQ only; keep every other form field unchanged.');
+        }
+        $submitted = $payload['content_i18n_json']['zh']['faq'] ?? null;
+        $submitted = json_decode(json_encode($submitted, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION), false, 512, JSON_THROW_ON_ERROR);
+        $this->assertFaqList($submitted);
+        $result = DB::transaction(function () use ($target, $context, $submitted): array {
+            $rows = [];
+            foreach ([self::V2_TABLE, self::LEGACY_TABLE] as $table) {
+                $found = DB::table($table)->where('org_id', $target['org_id'])->where('code', $target['code'])->lockForUpdate()->get();
+                if ($found->count() !== 1) {
+                    throw new \DomainException('FAQ save requires exactly one existing row in each authority table.');
+                }
+                $row = (array) $found->first();
+                if ((int) $row['org_id'] !== $target['org_id'] || $row['code'] !== $target['code'] || $row['primary_slug'] !== $target['primary_slug']
+                    || ($table === self::V2_TABLE && (int) $row['id'] !== $target['id'])) {
+                    throw new \DomainException('FAQ authority identity mismatch.');
+                }
+                $rows[$table] = $row;
+            }
+            $fingerprints = $this->faqRowHashes($rows);
+            if ($fingerprints !== $context['baseline']) {
+                throw new \DomainException('The FAQ baseline changed. Reload before editing.');
+            }
+            if ($rows[self::V2_TABLE]['content_i18n_json'] !== $rows[self::LEGACY_TABLE]['content_i18n_json']) {
+                throw new \DomainException('FAQ authority contents differ.');
+            }
+            $content = json_decode($rows[self::V2_TABLE]['content_i18n_json'], false, 512, JSON_THROW_ON_ERROR);
+            $before = $content->zh->faq ?? null;
+            $this->assertFaqList($before);
+            if (count($submitted) !== count($before)) {
+                throw new \DomainException('Keep the existing FAQ count and order.');
+            }
+            $changed = [];
+            foreach ($before as $index => $item) {
+                if ($submitted[$index]->id !== $item->id) {
+                    throw new \DomainException('Keep every existing FAQ id and order.');
+                }
+                if ($this->faqJson($submitted[$index]) !== $this->faqJson($item)) {
+                    $changed[] = $index;
+                }
+            }
+            if (count($changed) !== 1) {
+                throw new \DomainException('Change exactly one existing FAQ.');
+            }
+            $index = $changed[0];
+            $candidate = $this->faqJson($submitted[$index]);
+            $expected = json_decode(json_encode($content, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION), false, 512, JSON_THROW_ON_ERROR);
+            $expected->zh->faq[$index] = $submitted[$index];
+            $path = '$.zh.faq['.$index.']'; // Derived integer index, never an input JSON path.
+            $mysql = DB::connection()->getDriverName() === 'mysql';
+            foreach ([self::V2_TABLE, self::LEGACY_TABLE] as $table) {
+                $jsonValue = $mysql ? 'CAST(? AS JSON)' : 'json(?)';
+                $count = DB::update("UPDATE {$table} SET content_i18n_json = JSON_SET(content_i18n_json, '{$path}', {$jsonValue}) WHERE org_id = ? AND code = ?", [$candidate, $target['org_id'], $target['code']]);
+                if ($count !== 1) {
+                    throw new \DomainException('FAQ dual-table update count mismatch.');
+                }
+            }
+            $post = [];
+            foreach ([self::V2_TABLE, self::LEGACY_TABLE] as $table) {
+                $row = (array) DB::table($table)->where('org_id', $target['org_id'])->where('code', $target['code'])->lockForUpdate()->first();
+                if ($this->faqJson(json_decode($row['content_i18n_json'], false, 512, JSON_THROW_ON_ERROR)) !== $this->faqJson($expected)) {
+                    throw new \DomainException('FAQ content readback mismatch.');
+                }
+                $oldProtected = $rows[$table];
+                $newProtected = $row;
+                unset($oldProtected['content_i18n_json'], $newProtected['content_i18n_json']);
+                if ($oldProtected !== $newProtected) {
+                    throw new \DomainException('FAQ protected-column readback mismatch.');
+                }
+                $post[$table] = $row;
+            }
+            $operationId = (string) Str::uuid();
+            $candidateHash = hash('sha256', $candidate);
+            $actorId = (int) auth((string) config('admin.guard', 'admin'))->id();
+            app(AuditLogger::class)->log(request(), 'scale_registry.faq.updated', 'scale_registry', (string) $target['id'], [
+                'operation_id' => $operationId, 'target' => $target, 'faq_id' => $submitted[$index]->id,
+                'baseline' => $fingerprints, 'post_baseline' => $this->faqRowHashes($post), 'candidate_sha256' => $candidateHash,
+                'before_faq_json' => $this->faqJson($before[$index]), 'after_faq_json' => $candidate,
+                'protected_fields_preserved' => true, 'cache_closeout' => 'after_content_commit', 'params_sanitized' => [],
+            ], 'single FAQ edit through existing CMS Save', 'content_applied');
+            $audit = AuditLog::withoutGlobalScopes()->where('org_id', $target['org_id'])->where('actor_admin_id', $actorId)
+                ->where('action', 'scale_registry.faq.updated')->where('target_type', 'scale_registry')->where('target_id', (string) $target['id'])
+                ->where('meta_json->operation_id', $operationId)->first();
+            if (! $audit || ($audit->meta_json['candidate_sha256'] ?? null) !== $candidateHash
+                || ($audit->meta_json['post_baseline'] ?? null) !== $this->faqRowHashes($post)) {
+                throw new \DomainException('FAQ audit readback failed; content was not committed.');
+            }
+
+            return ['status' => 'APPLIED', 'audit_id' => $audit->getKey(), 'operation_id' => $operationId,
+                'candidate_sha256' => $candidateHash, 'post_baseline' => $this->faqRowHashes($post)];
+        });
+        try {
+            $this->invalidatePublicContentProjection($target['org_id'], $target['code'], array_values(array_unique([
+                ...$this->existingSlugs($target['org_id'], $target['code']),
+                ...$this->existingProjectedSlugs($target['org_id'], $target['code']),
+            ])));
+        } catch (\Throwable) {
+            $result['status'] = 'PARTIAL_CACHE_CLOSEOUT';
+        }
+        $record->refresh();
+        $record->setRelation('faqEditReceipt', $result);
+
+        return $record;
+    }
+
+    private function assertFaqList(mixed $items): void
+    {
+        if (! is_array($items) || ! array_is_list($items)) {
+            throw new \DomainException('FAQ must remain a JSON list.');
+        }
+        $ids = [];
+        foreach ($items as $item) {
+            if (! $item instanceof \stdClass || ! is_string($item->id ?? null) || trim($item->id) === ''
+                || isset($ids[$item->id]) || ! is_string($item->q ?? null) || ! is_string($item->a ?? null)) {
+                throw new \DomainException('FAQ contains an invalid or duplicate item.');
+            }
+            $ids[$item->id] = true;
+        }
+    }
+
+    private function faqRowHashes(array $rows): array
+    {
+        return array_map(fn (array $row): string => hash('sha256', json_encode($row, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)), [
+            'v2' => $rows[self::V2_TABLE], 'legacy' => $rows[self::LEGACY_TABLE],
+        ]);
+    }
+
+    private function faqJson(mixed $value): string
+    {
+        $sort = function (mixed $item) use (&$sort): mixed {
+            if ($item instanceof \stdClass) {
+                $fields = get_object_vars($item);
+                ksort($fields, SORT_STRING);
+
+                return (object) array_map($sort, $fields);
+            }
+            if (is_array($item)) {
+                if (! array_is_list($item)) {
+                    ksort($item, SORT_STRING);
+                }
+
+                return array_map($sort, $item);
+            }
+
+            return $item;
+        };
+
+        return json_encode($sort($value), JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION);
     }
 
     /** The single public EQ intro seam; never accepts a generic row or JSON patch. */

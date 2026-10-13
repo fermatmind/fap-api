@@ -175,6 +175,9 @@ class ScaleRegistryResource extends Resource
                                 ->label('How It Works'),
                             Forms\Components\Textarea::make('content_i18n_json.en.faq')
                                 ->label('FAQ JSON')
+                                ->formatStateUsing(fn (mixed $state, ?ScaleRegistryV2 $record): string => self::faqText($state, $record, 'en'))
+                                ->rules([self::faqTextRule()])
+                                ->dehydrateStateUsing(fn (mixed $state): array => self::parseFaqText($state))
                                 ->rows(4),
                             Forms\Components\Textarea::make('content_i18n_json.en.disclaimer')
                                 ->label('Disclaimer')
@@ -227,6 +230,9 @@ class ScaleRegistryResource extends Resource
                                 ->label('流程说明'),
                             Forms\Components\Textarea::make('content_i18n_json.zh.faq')
                                 ->label('FAQ JSON')
+                                ->formatStateUsing(fn (mixed $state, ?ScaleRegistryV2 $record): string => self::faqText($state, $record, 'zh'))
+                                ->rules([self::faqTextRule()])
+                                ->dehydrateStateUsing(fn (mixed $state): array => self::parseFaqText($state))
                                 ->rows(4),
                             Forms\Components\Textarea::make('content_i18n_json.zh.disclaimer')
                                 ->label('免责声明')
@@ -335,6 +341,49 @@ class ScaleRegistryResource extends Resource
         return parent::getEloquentQuery()
             ->withoutGlobalScope(TenantScope::class)
             ->whereIn('org_id', $orgId > 0 ? [0, $orgId] : [0]);
+    }
+
+    private static function faqText(mixed $state, ?ScaleRegistryV2 $record, string $locale): string
+    {
+        // Model array casts lose empty-object and numeric JSON types. Read the original FAQ.
+        if ($record !== null) {
+            $content = json_decode($record->getRawOriginal('content_i18n_json') ?? '{}', false, 512, JSON_THROW_ON_ERROR);
+            $state = $content->{$locale}->faq ?? $state;
+        }
+
+        return json_encode($state ?? [], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION);
+    }
+
+    private static function faqTextRule(): \Closure
+    {
+        return fn (): \Closure => function (string $attribute, mixed $value, \Closure $fail): void {
+            try {
+                self::parseFaqText($value);
+            } catch (\JsonException|\DomainException) {
+                $fail('Enter a JSON array of FAQ objects with unique ids and text questions and answers.');
+            }
+        };
+    }
+
+    private static function parseFaqText(mixed $state): array
+    {
+        if ($state === null || $state === '') {
+            return [];
+        }
+        $items = is_string($state) ? json_decode($state, false, 512, JSON_THROW_ON_ERROR) : $state;
+        if (! is_array($items) || ! array_is_list($items)) {
+            throw new \DomainException('FAQ must be a JSON list.');
+        }
+        $ids = [];
+        foreach ($items as $item) {
+            if (! $item instanceof \stdClass || ! is_string($item->id ?? null) || trim($item->id) === ''
+                || isset($ids[$item->id]) || ! is_string($item->q ?? null) || ! is_string($item->a ?? null)) {
+                throw new \DomainException('Invalid or duplicate FAQ item.');
+            }
+            $ids[$item->id] = true;
+        }
+
+        return $items;
     }
 
     private static function recordIsInWriteScope(ScaleRegistryV2 $record): bool
