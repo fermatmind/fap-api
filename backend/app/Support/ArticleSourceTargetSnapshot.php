@@ -46,8 +46,13 @@ final class ArticleSourceTargetSnapshot
     /** @return list<array{article_id:int,sha256:string}> */
     public static function capture(Article $source, bool $lock = false): array
     {
+        if (! in_array($source->locale, ['en', 'zh-CN'], true)) {
+            throw new RuntimeException('source_locale_unsupported');
+        }
+        $targetLocale = $source->locale === 'en' ? 'zh-CN' : 'en';
+        $collision = $targetLocale === 'en' ? 'english_identity_collision' : 'target_identity_collision';
         $query = Article::query()->withoutGlobalScopes()->withTrashed()->where('org_id', 0)
-            ->where('locale', 'en')->where(function ($query) use ($source): void {
+            ->where('locale', $targetLocale)->where(function ($query) use ($source): void {
                 $query->where('source_article_id', $source->id)
                     ->orWhere('translation_group_id', $source->translation_group_id)
                     ->orWhere('slug', $source->slug);
@@ -57,7 +62,7 @@ final class ArticleSourceTargetSnapshot
         }
         $targets = $query->get();
         if ($targets->count() > 1) {
-            throw new RuntimeException('english_identity_collision');
+            throw new RuntimeException($collision);
         }
         $out = [];
         foreach ($targets as $target) {
@@ -66,7 +71,7 @@ final class ArticleSourceTargetSnapshot
                 || (string) $target->source_locale !== (string) $source->locale
                 || (string) $target->translation_group_id !== (string) $source->translation_group_id
                 || (string) $target->translation_status === Article::TRANSLATION_STATUS_SOURCE) {
-                throw new RuntimeException('english_identity_collision');
+                throw new RuntimeException($collision);
             }
             $revisions = ArticleTranslationRevision::query()->withoutGlobalScopes()
                 ->where('article_id', $target->id)->orderBy('id');

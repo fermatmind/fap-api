@@ -20,14 +20,14 @@ use Throwable;
 final class ArticleImportPreparedTranslationDraft extends Command
 {
     protected $signature = 'articles:import-prepared-translation-draft
-        {--file= : Local JSON package containing one complete English draft and exact source locks}
+        {--file= : Local JSON package containing one complete en or zh-CN draft and exact source locks}
         {--sha256= : Exact SHA-256 of package bytes}
         {--dry-run : Read and validate only}
         {--execute : Create one private working draft}
         {--confirm= : Exact execute confirmation}
         {--json : Emit metadata-only JSON}';
 
-    protected $description = 'Import one operator-supplied English article draft with exact source locks; never approve or publish it.';
+    protected $description = 'Import one operator-supplied English or Chinese article draft with exact source locks; never approve or publish it.';
 
     public function handle(AuditLogger $auditLogger): int
     {
@@ -68,9 +68,9 @@ final class ArticleImportPreparedTranslationDraft extends Command
                     $target = Article::query()->create([
                         'org_id' => 0,
                         'slug' => (string) $source->slug,
-                        'locale' => 'en',
+                        'locale' => $copy['locale'],
                         'translation_group_id' => (string) $source->translation_group_id,
-                        'source_locale' => 'zh-CN',
+                        'source_locale' => (string) $source->locale,
                         'translation_status' => Article::TRANSLATION_STATUS_MACHINE_DRAFT,
                         'source_article_id' => (int) $source->id,
                         'translated_from_article_id' => (int) $source->id,
@@ -95,8 +95,8 @@ final class ArticleImportPreparedTranslationDraft extends Command
                         'article_id' => (int) $target->id,
                         'source_article_id' => (int) $source->id,
                         'translation_group_id' => (string) $source->translation_group_id,
-                        'locale' => 'en',
-                        'source_locale' => 'zh-CN',
+                        'locale' => $copy['locale'],
+                        'source_locale' => (string) $source->locale,
                         'revision_number' => 1,
                         'revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT,
                         'source_version_hash' => $sourceHash,
@@ -117,7 +117,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
                     ArticleSeoMeta::query()->create([
                         'org_id' => 0,
                         'article_id' => (int) $target->id,
-                        'locale' => 'en',
+                        'locale' => $copy['locale'],
                         'seo_title' => $copy['seo_title'],
                         'seo_description' => $copy['seo_description'],
                         'is_indexable' => false,
@@ -224,7 +224,9 @@ final class ArticleImportPreparedTranslationDraft extends Command
         $copy = $package['translation'];
         if (! is_int($source['article_id']) || $source['article_id'] <= 0
             || ! is_int($source['published_revision_id']) || $source['published_revision_id'] <= 0
-            || $source['locale'] !== 'zh-CN' || $copy['locale'] !== 'en'
+            || ! in_array($source['locale'], ['en', 'zh-CN'], true)
+            || ! in_array($copy['locale'], ['en', 'zh-CN'], true)
+            || $source['locale'] === $copy['locale']
             || ! preg_match('/^[0-9a-f]{64}$/', (string) $source['source_version_hash'])
             || ! preg_match('/^[0-9a-f]{64}$/', (string) $source['content_sha256'])
             || ! preg_match('/^[0-9a-f]{64}$/', (string) $source['published_revision_content_sha256'])
@@ -235,7 +237,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
             throw new RuntimeException('source_lock_invalid');
         }
         foreach (['title', 'excerpt', 'content_md', 'seo_title', 'seo_description'] as $field) {
-            if (! is_string($copy[$field]) || trim($copy[$field]) === '' || preg_match('/\p{Han}/u', $copy[$field])) {
+            if (! is_string($copy[$field]) || trim($copy[$field]) === '' || ($copy['locale'] === 'en' && preg_match('/\p{Han}/u', $copy[$field]))) {
                 throw new RuntimeException('translation_copy_invalid');
             }
         }
@@ -267,7 +269,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
         }
         $errors = [];
         if ((int) $source->org_id !== 0 || ! $source->isSourceArticle()
-            || (string) $source->locale !== 'zh-CN'
+            || (string) $source->locale !== $sourceLock['locale']
             || (string) $source->status !== 'published' || ! (bool) $source->is_public
             || (int) $source->working_revision_id !== (int) $source->published_revision_id) {
             $errors[] = 'source_identity_or_state_mismatch';
@@ -286,7 +288,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
         if (! $published instanceof ArticleTranslationRevision
             || (int) $published->article_id !== (int) $source->id
             || (int) $published->source_article_id !== (int) $source->id
-            || (string) $published->locale !== 'zh-CN'
+            || (string) $published->locale !== $sourceLock['locale']
             || ! in_array((string) $published->revision_status, [
                 ArticleTranslationRevision::STATUS_SOURCE,
                 ArticleTranslationRevision::STATUS_PUBLISHED,
@@ -299,7 +301,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
             $errors[] = 'source_revision_mismatch';
         }
         $collisions = Article::query()->withoutGlobalScopes()->withTrashed()
-            ->where('org_id', 0)->where('locale', 'en')
+            ->where('org_id', 0)->where('locale', $package['translation']['locale'])
             ->where(function ($query) use ($source): void {
                 $query->where('translation_group_id', (string) $source->translation_group_id)
                     ->orWhere('slug', (string) $source->slug);
@@ -308,7 +310,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
             $collisions->lockForUpdate();
         }
         if ($collisions->exists()) {
-            $errors[] = 'english_identity_collision';
+            $errors[] = $package['translation']['locale'] === 'en' ? 'english_identity_collision' : 'target_identity_collision';
         }
 
         return [
@@ -317,6 +319,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
             'source_version_hash' => (string) $source->source_version_hash,
             'published_revision_id' => (int) $source->published_revision_id,
             'english_identity_collision' => in_array('english_identity_collision', $errors, true),
+            'target_identity_collision' => in_array('target_identity_collision', $errors, true) || in_array('english_identity_collision', $errors, true),
         ];
     }
 
@@ -329,6 +332,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
             'source_version_hash' => $snapshot['source_version_hash'] ?? null,
             'published_revision_id' => $snapshot['published_revision_id'] ?? null,
             'english_identity_collision' => $snapshot['english_identity_collision'] ?? null,
+            'target_identity_collision' => $snapshot['target_identity_collision'] ?? null,
         ];
     }
 
@@ -336,7 +340,8 @@ final class ArticleImportPreparedTranslationDraft extends Command
     private function confirmation(array $package): string
     {
         return sprintf(
-            'Import private English draft for source %d in group %s with package %s.',
+            'Import private %s draft for source %d in group %s with package %s.',
+            $package['translation']['locale'] === 'en' ? 'English' : 'zh-CN',
             $package['source']['article_id'],
             $package['source']['translation_group_id'],
             (string) $this->option('sha256'),

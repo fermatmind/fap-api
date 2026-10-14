@@ -109,35 +109,67 @@ final class ReviewedTranslationPublicationTest extends TestCase
         $this->assertSame(0, AuditLog::count());
     }
 
-    private function fixture(): array
+    public function test_english_source_can_publish_reviewed_chinese_without_changing_source_or_noindex_gate(): void
+    {
+        [$s, $t, $p] = $this->fixture('en');
+        $sourceBefore = F::sourceHash($s);
+        $this->assertSame(0, $this->runPublish($p), Artisan::output());
+        $this->assertSame(0, $this->runPublish($p, true), Artisan::output());
+        $this->assertSame('zh-CN', $t->fresh()->locale);
+        $this->assertSame('en', $t->fresh()->source_locale);
+        $this->assertSame($p['working_revision_id'], $t->fresh()->published_revision_id);
+        $this->assertFalse($t->fresh()->is_indexable);
+        $this->assertSame('noindex,nofollow', $t->seoMeta->fresh()->robots);
+        $this->assertSame($sourceBefore, F::sourceHash($s->fresh()));
+    }
+
+    public function test_reverse_publish_rejects_wrong_language_canonical_and_drift_with_zero_writes(): void
+    {
+        [$s, $t, $p] = $this->fixture('en');
+        $t->seoMeta->forceFill(['canonical_url' => 'https://fermatmind.com/en/articles/'.$t->slug])->saveQuietly();
+        $p['target_snapshot_hash'] = F::targetHash($s);
+        $before = F::targetHash($s);
+        $this->assertSame(1, $this->runPublish($p, true));
+        $this->assertSame($before, F::targetHash($s));
+        $this->assertFalse($t->fresh()->is_public);
+        $this->assertSame(0, AuditLog::count());
+        $t->seoMeta->forceFill(['canonical_url' => 'https://fermatmind.com/zh/articles/'.$t->slug])->saveQuietly();
+        $p['target_snapshot_hash'] = F::targetHash($s);
+        $s->forceFill(['title' => 'New English source'])->saveQuietly();
+        $this->assertSame(1, $this->runPublish($p, true));
+        $this->assertFalse($t->fresh()->is_public);
+        $this->assertSame(0, AuditLog::count());
+    }
+
+    private function fixture(string $sourceLocale = 'zh-CN'): array
     {
         $owner = AdminUser::create(['name' => 'Owner', 'email' => 'owner@example.test', 'password' => bcrypt('test'), 'is_active' => 1]);
         config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => $owner->id]);
         $this->actingAs($owner, (string) config('admin.guard', 'admin'));
-        $s = Article::create(['org_id' => 0, 'locale' => 'zh-CN', 'slug' => 'reviewed-translation', 'source_locale' => 'zh-CN',
+        $s = Article::create(['org_id' => 0, 'locale' => $sourceLocale, 'slug' => 'reviewed-translation', 'source_locale' => $sourceLocale,
             'translation_group_id' => 'reviewed-translation', 'translation_status' => 'source', 'title' => '源文',
             'content_md' => "## 参考来源\n\nhttps://doi.org/example", 'status' => 'published', 'is_public' => true, 'published_at' => now()->subDay()]);
         $sr = ArticleTranslationRevision::create(['org_id' => 0, 'article_id' => $s->id, 'source_article_id' => $s->id,
-            'translation_group_id' => $s->translation_group_id, 'locale' => 'zh-CN', 'source_locale' => 'zh-CN', 'revision_number' => 1,
+            'translation_group_id' => $s->translation_group_id, 'locale' => $sourceLocale, 'source_locale' => $sourceLocale, 'revision_number' => 1,
             'revision_status' => 'source', 'title' => $s->title, 'content_md' => $s->content_md,
             'source_version_hash' => $s->source_version_hash, 'translated_from_version_hash' => $s->source_version_hash]);
         $s->forceFill(['working_revision_id' => $sr->id, 'published_revision_id' => $sr->id])->saveQuietly();
         EditorialReview::create(['org_id' => 0, 'content_type' => 'article', 'content_id' => $s->id, 'workflow_state' => 'approved', 'reviewed_by_admin_user_id' => $owner->id]);
         $category = ArticleCategory::create(['org_id' => 0, 'name' => 'Research', 'slug' => 'research', 'is_active' => true]);
         $tag = ArticleTag::create(['org_id' => 0, 'name' => 'Personality', 'slug' => 'personality', 'is_active' => true]);
-        $t = Article::create(['org_id' => 0, 'locale' => 'en', 'slug' => $s->slug, 'source_locale' => 'zh-CN', 'source_article_id' => $s->id,
+        $t = Article::create(['org_id' => 0, 'locale' => $sourceLocale === 'en' ? 'zh-CN' : 'en', 'slug' => $s->slug, 'source_locale' => $sourceLocale, 'source_article_id' => $s->id,
             'translated_from_article_id' => $s->id, 'translation_group_id' => $s->translation_group_id, 'translation_status' => 'approved',
             'title' => 'English research', 'excerpt' => 'Reviewed excerpt', 'content_md' => "## References\n\nhttps://doi.org/example",
             'category_id' => $category->id, 'status' => 'draft', 'is_public' => false, 'is_indexable' => false,
             'cover_image_url' => 'https://assets.fermatmind.com/cover.jpg', 'cover_image_alt' => 'Research illustration']);
         $t->tags()->sync([$tag->id => ['org_id' => 0]]);
         $tr = ArticleTranslationRevision::create(['org_id' => 0, 'article_id' => $t->id, 'source_article_id' => $s->id,
-            'translation_group_id' => $s->translation_group_id, 'locale' => 'en', 'source_locale' => 'zh-CN', 'revision_number' => 1,
+            'translation_group_id' => $s->translation_group_id, 'locale' => $sourceLocale === 'en' ? 'zh-CN' : 'en', 'source_locale' => $sourceLocale, 'revision_number' => 1,
             'revision_status' => 'approved', 'title' => $t->title, 'excerpt' => $t->excerpt, 'content_md' => $t->content_md,
             'source_version_hash' => $s->source_version_hash, 'translated_from_version_hash' => $s->source_version_hash]);
         $t->forceFill(['working_revision_id' => $tr->id])->saveQuietly();
-        ArticleSeoMeta::create(['org_id' => 0, 'article_id' => $t->id, 'locale' => 'en', 'seo_title' => $t->title,
-            'seo_description' => 'Research interpretation', 'canonical_url' => 'https://fermatmind.com/en/articles/'.$t->slug,
+        ArticleSeoMeta::create(['org_id' => 0, 'article_id' => $t->id, 'locale' => $sourceLocale === 'en' ? 'zh-CN' : 'en', 'seo_title' => $t->title,
+            'seo_description' => 'Research interpretation', 'canonical_url' => 'https://fermatmind.com/'.($t->locale === 'zh-CN' ? 'zh' : 'en').'/articles/'.$t->slug,
             'og_image_url' => $t->cover_image_url, 'robots' => 'noindex,nofollow', 'is_indexable' => false]);
         foreach ([$sr, $tr] as $r) {
             app(Reviews::class)->bindOrCreateApproved(null, 'cms_article_review', 'test:revision:'.$r->id,

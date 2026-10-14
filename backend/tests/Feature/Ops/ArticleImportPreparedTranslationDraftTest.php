@@ -164,14 +164,86 @@ final class ArticleImportPreparedTranslationDraftTest extends TestCase
         }
     }
 
-    private function source(string $slug): Article
+    public function test_english_source_imports_complete_chinese_draft_with_exact_lineage_and_no_publication(): void
+    {
+        $source = $this->source('english-to-chinese', 'en');
+        [$path] = $this->package($source);
+        try {
+            $package = json_decode(file_get_contents($path), true, 32, JSON_THROW_ON_ERROR);
+            $package['translation'] = ['locale' => 'zh-CN', 'title' => '英格兰16岁后的选择', 'excerpt' => '比较实际课程及岗位条件。',
+                'content_md' => "## 条件\n\nA levels、T Levels 和学徒制并非保证录取。", 'seo_title' => '英格兰16岁后的选择', 'seo_description' => '核对具体课程和岗位的要求。'];
+            file_put_contents($path, json_encode($package, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
+            $sha = hash_file('sha256', $path);
+            $args = ['--file' => $path, '--sha256' => $sha, '--json' => true];
+            $this->assertSame(0, Artisan::call('articles:import-prepared-translation-draft', $args + ['--dry-run' => true]));
+            $this->assertSame(1, Article::withoutGlobalScopes()->count());
+            $this->assertSame(0, Artisan::call('articles:import-prepared-translation-draft', $args + ['--execute' => true,
+                '--confirm' => sprintf('Import private zh-CN draft for source %d in group %s with package %s.', $source->id, $source->translation_group_id, $sha)]));
+            $target = Article::withoutGlobalScopes()->where('locale', 'zh-CN')->where('slug', $source->slug)->firstOrFail();
+            $this->assertSame('en', $target->source_locale);
+            $this->assertSame((int) $source->id, (int) $target->source_article_id);
+            $this->assertSame($source->translation_group_id, $target->translation_group_id);
+            $this->assertSame($source->source_version_hash, $target->workingRevision->translated_from_version_hash);
+            $this->assertSame($package['translation']['content_md'], $target->workingRevision->content_md);
+            $this->assertSame('zh-CN', $target->seoMeta->locale);
+            $this->assertFalse($target->is_public);
+            $this->assertFalse($target->is_indexable);
+            $this->assertNull($target->published_revision_id);
+            $this->assertSame(1, AuditLog::withoutGlobalScopes()->where('action', 'article_translation_prepared_draft_imported')->count());
+            $this->assertSame(1, Artisan::call('articles:import-prepared-translation-draft', $args + ['--dry-run' => true]));
+            $this->assertContains('target_identity_collision', json_decode(Artisan::output(), true)['errors']);
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_reverse_import_rejects_published_source_drift_and_soft_deleted_target_collision(): void
+    {
+        $source = $this->source('reverse-import-lock', 'en');
+        [$path, $sha] = $this->package($source);
+        try {
+            $collision = Article::query()->create(['org_id' => 0, 'locale' => 'zh-CN', 'slug' => $source->slug,
+                'title' => '既有中文', 'content_md' => '既有正文', 'status' => 'draft', 'is_public' => false]);
+            $collision->delete();
+            $this->assertSame(1, Artisan::call('articles:import-prepared-translation-draft', ['--file' => $path, '--sha256' => $sha, '--dry-run' => true]));
+            $this->assertContains('target_identity_collision', json_decode(Artisan::output(), true)['errors']);
+            $source->publishedRevision->forceFill(['content_md' => 'Changed published source'])->save();
+            $this->assertSame(1, Artisan::call('articles:import-prepared-translation-draft', ['--file' => $path, '--sha256' => $sha, '--dry-run' => true]));
+            $this->assertContains('source_revision_mismatch', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame(0, AuditLog::withoutGlobalScopes()->where('action', 'article_translation_prepared_draft_imported')->count());
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_same_or_unsupported_locale_and_chinese_in_english_target_are_rejected(): void
+    {
+        $source = $this->source('invalid-locale-direction');
+        foreach (['zh-CN', 'fr', 'en'] as $locale) {
+            [$path] = $this->package($source);
+            try {
+                $package = json_decode(file_get_contents($path), true, 32, JSON_THROW_ON_ERROR);
+                $package['translation']['locale'] = $locale;
+                $package['translation']['title'] = '中文不能混入英文标题';
+                file_put_contents($path, json_encode($package, JSON_THROW_ON_ERROR));
+                $this->assertSame(1, Artisan::call('articles:import-prepared-translation-draft', [
+                    '--file' => $path, '--sha256' => hash_file('sha256', $path), '--dry-run' => true]));
+                $this->assertContains('package_or_snapshot_invalid', json_decode(Artisan::output(), true)['errors']);
+                $this->assertSame(1, Article::withoutGlobalScopes()->count());
+            } finally {
+                unlink($path);
+            }
+        }
+    }
+
+    private function source(string $slug, string $locale = 'zh-CN'): Article
     {
         $source = Article::query()->create([
             'org_id' => 0,
             'slug' => $slug,
-            'locale' => 'zh-CN',
+            'locale' => $locale,
             'translation_group_id' => 'source-'.$slug,
-            'source_locale' => 'zh-CN',
+            'source_locale' => $locale,
             'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
             'title' => '中文源文',
             'excerpt' => '中文摘要',
@@ -186,8 +258,8 @@ final class ArticleImportPreparedTranslationDraftTest extends TestCase
             'article_id' => (int) $source->id,
             'source_article_id' => (int) $source->id,
             'translation_group_id' => (string) $source->translation_group_id,
-            'locale' => 'zh-CN',
-            'source_locale' => 'zh-CN',
+            'locale' => $locale,
+            'source_locale' => $locale,
             'revision_number' => 1,
             'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
             'source_version_hash' => (string) $source->source_version_hash,
@@ -213,7 +285,7 @@ final class ArticleImportPreparedTranslationDraftTest extends TestCase
                 'article_id' => (int) $source->id,
                 'translation_group_id' => (string) $source->translation_group_id,
                 'slug' => (string) $source->slug,
-                'locale' => 'zh-CN',
+                'locale' => (string) $source->locale,
                 'source_version_hash' => (string) $source->source_version_hash,
                 'content_sha256' => hash('sha256', (string) $source->content_md),
                 'published_revision_id' => (int) $source->published_revision_id,
@@ -222,7 +294,7 @@ final class ArticleImportPreparedTranslationDraftTest extends TestCase
                 'updated_at' => (string) $source->getRawOriginal('updated_at'),
             ],
             'translation' => [
-                'locale' => 'en',
+                'locale' => $source->locale === 'en' ? 'zh-CN' : 'en',
                 'title' => 'Prepared English title',
                 'excerpt' => 'Prepared English summary',
                 'content_md' => "# Prepared English title\n\nDraft body with a source reference.",
@@ -235,8 +307,8 @@ final class ArticleImportPreparedTranslationDraftTest extends TestCase
         $sha = hash_file('sha256', $path);
 
         return [$path, $sha, sprintf(
-            'Import private English draft for source %d in group %s with package %s.',
-            $source->id, $source->translation_group_id, $sha,
+            'Import private %s draft for source %d in group %s with package %s.',
+            $source->locale === 'en' ? 'zh-CN' : 'English', $source->id, $source->translation_group_id, $sha,
         )];
     }
 }

@@ -86,7 +86,7 @@ final readonly class ReviewedTranslationPublication
         $rows = ($lock ? $q->lockForUpdate() : $q)->get()->keyBy('id');
         $s = $rows->get($p['source_id']);
         $t = $rows->get($p['target_id']);
-        if (! $s instanceof Article || ! $t instanceof Article || $s->locale !== 'zh-CN' || $t->locale !== 'en' || ! $s->isSourceArticle()
+        if (! $s instanceof Article || ! $t instanceof Article || ! in_array($s->locale, ['en', 'zh-CN'], true) || ! in_array($t->locale, ['en', 'zh-CN'], true) || $s->locale === $t->locale || ! $s->isSourceArticle()
             || $s->published_revision_id !== $p['source_published_revision_id'] || $s->working_revision_id !== $s->published_revision_id
             || $t->working_revision_id !== $p['working_revision_id'] || $t->published_revision_id !== null || $t->status !== 'draft' || $t->is_public
             || $t->source_article_id !== $s->id || $t->translation_group_id !== $s->translation_group_id
@@ -105,7 +105,7 @@ final readonly class ReviewedTranslationPublication
             throw new RuntimeException('translation_review_or_lineage_invalid');
         }
         if (! $t->category || $t->tags->isEmpty() || ! filled($t->cover_image_url) || ! filled($t->cover_image_alt) || ! $t->seoMeta
-            || $t->seoMeta->canonical_url !== 'https://fermatmind.com/en/articles/'.$t->slug
+            || $t->seoMeta->canonical_url !== 'https://fermatmind.com/'.($t->locale === 'zh-CN' ? 'zh' : 'en').'/articles/'.$t->slug
             || ! filled($t->seoMeta->seo_title) || ! filled($t->seoMeta->seo_description) || ! filled($t->seoMeta->og_image_url)) {
             throw new RuntimeException('translation_public_metadata_incomplete');
         }
