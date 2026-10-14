@@ -31,7 +31,7 @@ final class UpdateArticlePublicReaderMetadata extends Command
         {--deployed-sha= : Exact active production revision}
         {--confirm= : Exact package bytes SHA-256 for execute}';
 
-    protected $description = 'Merge bounded FAQ, cover alt and test entry metadata while preserving content, history, pointers and eligibility.';
+    protected $description = 'Merge bounded FAQ, cover alt, reading time and test entry metadata while preserving content, history, pointers and eligibility.';
 
     /** @return array<string,mixed> */
     public static function state(Article $article, bool $lock = false): array
@@ -139,10 +139,17 @@ final class UpdateArticlePublicReaderMetadata extends Command
                     }
                 }
                 $fields = (array) data_get($p, 'candidate.article_fields', []);
-                if (array_diff(array_keys($fields), ['cover_image_alt', 'related_test_slug']) !== []) {
+                if (array_diff(array_keys($fields), ['cover_image_alt', 'related_test_slug', 'reading_minutes']) !== []) {
                     throw new RuntimeException('article_metadata_scope_invalid');
                 }
                 foreach ($fields as $key => $value) {
+                    if ($key === 'reading_minutes') {
+                        if ($value !== null && (! is_int($value) || $value < 1 || $value > 1440)) {
+                            throw new RuntimeException('article_metadata_value_invalid');
+                        }
+
+                        continue;
+                    }
                     if (! is_string($value) || trim($value) === '' || ($key === 'related_test_slug' && preg_match('/\A[a-z0-9][a-z0-9-]*\z/', $value) !== 1)) {
                         throw new RuntimeException('article_metadata_value_invalid');
                     }

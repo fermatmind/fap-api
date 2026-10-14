@@ -168,6 +168,37 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $this->assertSame($before, Updater::state($article->fresh()));
     }
 
+    public function test_reading_time_override_can_be_cleared_without_republishing_text(): void
+    {
+        $article = $this->article();
+        $actor = $this->actor();
+        $before = Updater::state($article);
+        $package = $this->package($article);
+        $package['candidate']['schema_json'] = $article->seoMeta->schema_json;
+        foreach ([0, 1441, '20', 1.5] as $invalid) {
+            $package['candidate']['article_fields'] = ['reading_minutes' => $invalid];
+            $this->assertSame(1, $this->runPackage($package, $actor));
+            $this->assertSame($before, Updater::state($article->fresh()));
+        }
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+        $package['candidate']['article_fields'] = ['reading_minutes' => 20];
+        $this->assertSame(0, $this->runPackage($package));
+        $this->assertSame($before, Updater::state($article->fresh()));
+        $this->assertSame(0, $this->runPackage($package, $actor));
+        $this->assertSame(20, $article->fresh()->reading_minutes);
+        $clear = $this->package($article->fresh());
+        $clear['candidate']['schema_json'] = $article->fresh()->seoMeta->schema_json;
+        $clear['candidate']['article_fields'] = ['reading_minutes' => null];
+        $this->assertSame(0, $this->runPackage($clear, $actor));
+        $this->assertNull($article->fresh()->reading_minutes);
+        $after = Updater::state($article->fresh());
+        foreach (['before', 'after'] as $state) {
+            unset(${$state}['article']['updated_at'], ${$state}['seo']['updated_at']);
+        }
+        $this->assertSame($before, $after);
+        $this->assertSame(2, AuditLog::withoutGlobalScopes()->count());
+    }
+
     public function test_broken_public_pointer_or_future_revision_cannot_update_metadata(): void
     {
         $article = $this->article();
