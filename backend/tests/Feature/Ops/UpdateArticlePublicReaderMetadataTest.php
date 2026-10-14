@@ -93,6 +93,100 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
     }
 
+    public function test_unchanged_seven_faqs_allow_a_test_entry_update_without_touching_authority(): void
+    {
+        $article = $this->article();
+        $schema = $this->package($article)['candidate']['schema_json'];
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'] = $this->faqItems(7);
+        $article->seoMeta->update(['schema_json' => $schema]);
+        ScaleRegistry::query()->create(['code' => 'IQ_TEST', 'org_id' => 0, 'primary_slug' => 'iq-test',
+            'slugs_json' => ['iq-test'], 'driver_type' => 'test', 'default_pack_id' => 'test',
+            'default_region' => 'CN_MAINLAND', 'default_locale' => 'en', 'default_dir_version' => 'v1',
+            'is_public' => true, 'is_active' => true]);
+        $article = $article->fresh();
+        $before = Updater::state($article);
+        $publicBefore = app(ArticleController::class)->show(Request::create('/api/v0.5/articles/'.$article->slug, 'GET',
+            ['locale' => 'en', 'org_id' => 0]), $article->slug)->getData(true);
+        $package = $this->package($article);
+        $package['candidate'] = ['schema_json' => $schema, 'article_fields' => ['related_test_slug' => 'iq-test']];
+        $this->assertSame(0, $this->runPackage($package));
+        $this->assertSame($before, Updater::state($article->fresh()));
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+        $this->assertSame(0, $this->runPackage($package, $this->actor()), Artisan::output());
+        $after = Updater::state($article->fresh());
+        $before['article']['related_test_slug'] = 'iq-test';
+        unset($before['article']['updated_at'], $after['article']['updated_at'], $before['seo']['updated_at'], $after['seo']['updated_at']);
+        $this->assertSame($before, $after);
+        $this->assertSame(1, AuditLog::withoutGlobalScopes()->count());
+        $response = app(ArticleController::class)->show(Request::create('/api/v0.5/articles/'.$article->slug, 'GET',
+            ['locale' => 'en', 'org_id' => 0]), $article->slug);
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertCount(7, data_get($article->fresh()->seoMeta->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'));
+        $this->assertSame(data_get($publicBefore, 'answer_surface_v1.faq_blocks'), data_get($response->getData(true), 'answer_surface_v1.faq_blocks'));
+    }
+
+    public function test_unchanged_large_fallback_faqs_can_pass_through(): void
+    {
+        $article = $this->article();
+        $article->cover_image_variants = ['editorial_package_v1' => ['answer_surface_v1' => ['faq_items' => $this->faqItems(7)]]];
+        $article->saveQuietly();
+        $article = $article->fresh();
+        $before = Updater::state($article);
+        $package = $this->package($article);
+        $package['candidate']['schema_json'] = $article->seoMeta->schema_json;
+        $package['candidate']['article_fields'] = ['reading_minutes' => 20];
+        $this->assertSame(0, $this->runPackage($package, $this->actor()), Artisan::output());
+        $after = Updater::state($article->fresh());
+        $before['article']['reading_minutes'] = 20;
+        unset($before['article']['updated_at'], $after['article']['updated_at'], $before['seo']['updated_at'], $after['seo']['updated_at']);
+        $this->assertSame($before, $after);
+    }
+
+    public function test_changes_or_reordering_to_existing_seven_faqs_are_refused_without_writes(): void
+    {
+        $article = $this->article();
+        $schema = $this->package($article)['candidate']['schema_json'];
+        $items = $this->faqItems(7);
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'] = $items;
+        $article->seoMeta->update(['schema_json' => $schema]);
+        $article = $article->fresh();
+        $before = Updater::state($article);
+        $actor = $this->actor();
+        $changed = $items;
+        $changed[0]['answer'] = 'Changed answer';
+        foreach ([$changed, array_reverse($items)] as $replacement) {
+            $package = $this->package($article);
+            $package['candidate']['schema_json'] = $schema;
+            $package['candidate']['schema_json']['editorial_package_v1']['answer_surface_v1']['faq_items'] = $replacement;
+            $this->assertSame(1, $this->runPackage($package, $actor));
+            $this->assertSame('ordinary_faq_scope_invalid', json_decode(Artisan::output(), true)['error']);
+            $this->assertSame($before, Updater::state($article->fresh()));
+        }
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    public function test_six_faqs_cannot_be_expanded_to_seven(): void
+    {
+        $article = $this->article();
+        $schema = $this->package($article)['candidate']['schema_json'];
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'] = $this->faqItems(6);
+        $article->seoMeta->update(['schema_json' => $schema]);
+        $article = $article->fresh();
+        $before = Updater::state($article);
+        $package = $this->package($article);
+        $package['candidate']['schema_json'] = $schema;
+        $package['candidate']['schema_json']['editorial_package_v1']['answer_surface_v1']['faq_items'] = $this->faqItems(7);
+        $this->assertSame(1, $this->runPackage($package, $this->actor()));
+        $this->assertSame('ordinary_faq_scope_invalid', json_decode(Artisan::output(), true)['error']);
+        $this->assertSame($before, Updater::state($article->fresh()));
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    private function faqItems(int $count): array
+    {
+        return array_map(static fn (int $index): array => ['question' => 'Question '.$index.'?', 'answer' => 'Answer '.$index.'.'], range(1, $count));
+    }
+
     public function test_cap_hold_and_missing_seo_do_not_get_bypassed(): void
     {
         $article = $this->article();

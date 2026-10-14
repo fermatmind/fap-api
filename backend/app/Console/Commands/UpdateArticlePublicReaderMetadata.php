@@ -123,8 +123,10 @@ final class UpdateArticlePublicReaderMetadata extends Command
                 $oldAnswer = (array) ($oldMetadata['answer_surface_v1'] ?? []);
                 $newAnswer = (array) ($newMetadata['answer_surface_v1'] ?? []);
                 $items = data_get($schema, 'editorial_package_v1.answer_surface_v1.faq_items', $newAnswer['faq_items'] ?? []);
+                $oldItems = data_get($oldSchema, 'editorial_package_v1.answer_surface_v1.faq_items', $oldAnswer['faq_items'] ?? []);
                 unset($oldAnswer['faq_items'], $newAnswer['faq_items']);
-                if (Hash::hash($oldAnswer) !== Hash::hash($newAnswer) || ! is_array($items) || ! array_is_list($items) || count($items) > 6) {
+                if (Hash::hash($oldAnswer) !== Hash::hash($newAnswer) || ! is_array($items) || ! array_is_list($items)
+                    || (count($items) > 6 && Hash::hash($items) !== Hash::hash($oldItems))) {
                     throw new RuntimeException('ordinary_faq_scope_invalid');
                 }
                 if (($oldMetadata['answer_surface_visibility'] ?? null) === 'disabled'
