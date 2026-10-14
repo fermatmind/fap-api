@@ -215,6 +215,8 @@ final class ArticleUpdateImageMetadataCommandTest extends TestCase
         $exit = Artisan::call('articles:update-image-metadata', $options + ['--execute' => true]);
         $executed = $this->jsonOutput();
         $this->assertSame(0, $exit);
+        $this->assertContains('schema_json.editorial_package_v1.body_visual_image_url', $executed['updates_scope']['article_seo_meta_fields']);
+        $this->assertTrue($executed['updates_scope']['non_media_schema_and_gates_preserved']);
         $after = $this->protectedSnapshot($article->fresh());
         foreach (['body_visual_asset_key', 'body_visual_image_url', 'body_visual_fallback_authorized'] as $field) {
             unset($before['schema_json']['editorial_package_v1'][$field], $after['schema_json']['editorial_package_v1'][$field]);

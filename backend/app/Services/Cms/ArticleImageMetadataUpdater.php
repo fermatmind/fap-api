@@ -535,7 +535,11 @@ final class ArticleImageMetadataUpdater
                 ],
                 'article_seo_meta_fields' => [
                     'og_image_url',
+                    'schema_json.editorial_package_v1.body_visual_asset_key',
+                    'schema_json.editorial_package_v1.body_visual_image_url',
+                    'schema_json.editorial_package_v1.body_visual_fallback_authorized',
                 ],
+                'non_media_schema_and_gates_preserved' => true,
             ],
             'protected_holds' => [
                 'no_publish' => true,
