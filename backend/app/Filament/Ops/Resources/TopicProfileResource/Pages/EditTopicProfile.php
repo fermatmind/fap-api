@@ -14,6 +14,8 @@ class EditTopicProfile extends EditRecord
 {
     protected static string $resource = TopicProfileResource::class;
 
+    protected ?bool $hasDatabaseTransactions = true;
+
     /**
      * @var array<string, mixed>
      */
@@ -109,6 +111,7 @@ class EditTopicProfile extends EditRecord
         $this->getRecord()->unsetRelation('sections');
         $this->getRecord()->unsetRelation('entries');
         $this->getRecord()->unsetRelation('seoMeta');
+        TopicWorkspace::validatePublicWorkspace($this->getRecord());
         TopicWorkspace::createRevision($this->getRecord(), __('ops.resources.common.revisions.workspace_update'));
     }
 

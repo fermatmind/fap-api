@@ -36,10 +36,7 @@ final class TopicProfileSeoService
             'title' => $title,
             'description' => $description,
             'canonical' => $canonical,
-            'alternates' => [
-                'en' => $this->buildCanonicalUrl($profile, 'en'),
-                'zh-CN' => $this->buildCanonicalUrl($profile, 'zh-CN'),
-            ],
+            'alternates' => $this->publicAlternates($profile),
             'og' => [
                 'title' => $this->fallbackText($seoMeta?->og_title, $title),
                 'description' => $this->fallbackText($seoMeta?->og_description, $description),
@@ -103,6 +100,23 @@ final class TopicProfileSeoService
     public function mapBackendLocaleToFrontendSegment(string $locale): string
     {
         return $this->normalizeLocale($locale) === 'zh-CN' ? 'zh' : 'en';
+    }
+
+    private function publicAlternates(TopicProfile $profile): array
+    {
+        return TopicProfile::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', (int) $profile->org_id)
+            ->where('slug', (string) $profile->slug)
+            ->where('status', TopicProfile::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->whereIn('locale', ['en', 'zh-CN'])
+            ->where(fn ($query) => $query->whereNull('published_at')->orWhere('published_at', '<=', now()))
+            ->get()
+            ->mapWithKeys(fn (TopicProfile $alternate): array => [
+                (string) $alternate->locale => $this->buildCanonicalUrl($alternate, (string) $alternate->locale),
+            ])
+            ->all();
     }
 
     private function normalizeLocale(string $locale): string

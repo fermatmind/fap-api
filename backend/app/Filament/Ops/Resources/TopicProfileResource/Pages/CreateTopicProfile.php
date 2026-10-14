@@ -14,6 +14,8 @@ class CreateTopicProfile extends CreateRecord
 {
     protected static string $resource = TopicProfileResource::class;
 
+    protected ?bool $hasDatabaseTransactions = true;
+
     /**
      * @var array<string, mixed>
      */
@@ -112,6 +114,7 @@ class CreateTopicProfile extends CreateRecord
         $this->getRecord()->unsetRelation('sections');
         $this->getRecord()->unsetRelation('entries');
         $this->getRecord()->unsetRelation('seoMeta');
+        TopicWorkspace::validatePublicWorkspace($this->getRecord());
         TopicWorkspace::createRevision($this->getRecord(), __('ops.resources.common.revisions.initial_workspace_snapshot'));
     }
 

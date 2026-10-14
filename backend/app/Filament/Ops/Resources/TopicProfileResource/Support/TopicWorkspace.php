@@ -10,6 +10,7 @@ use App\Models\TopicProfileEntry;
 use App\Models\TopicProfileRevision;
 use App\Models\TopicProfileSection;
 use App\Models\TopicProfileSeoMeta;
+use App\Services\Cms\TopicEntryResolverService;
 use App\Services\Cms\TopicProfileSeoService;
 use Filament\Forms\Get;
 use Illuminate\Contracts\Support\Htmlable;
@@ -20,6 +21,45 @@ use Illuminate\Validation\ValidationException;
 
 final class TopicWorkspace
 {
+    public static function validatePublicWorkspace(TopicProfile $profile): void
+    {
+        if ($profile->status !== TopicProfile::STATUS_PUBLISHED || ! $profile->is_public) {
+            return;
+        }
+
+        $profile->loadMissing(['sections', 'entries', 'seoMeta']);
+        $errors = [];
+        $overview = $profile->sections->firstWhere('section_key', 'overview');
+        if (! $overview?->is_enabled || blank($overview->body_md)) {
+            $errors['data.workspace_sections.overview.body_md'] = 'A public topic needs an enabled, substantive overview.';
+        }
+        foreach ($profile->sections->where('is_enabled', true) as $section) {
+            if (blank($section->body_md) && blank($section->body_html) && empty($section->payload_json)) {
+                $errors['data.workspace_sections.'.$section->section_key.'.body_md'] = 'Add content or disable this empty section.';
+            }
+        }
+        foreach (['title', 'excerpt'] as $field) {
+            if (blank($profile->{$field})) {
+                $errors['data.'.$field] = 'A public topic needs a '.$field.'.';
+            }
+        }
+        foreach (['seo_title', 'seo_description'] as $field) {
+            if (blank($profile->seoMeta?->{$field})) {
+                $errors['data.workspace_seo.'.$field] = 'A public topic needs '.$field.'.';
+            }
+        }
+        $enabledEntries = $profile->entries->where('is_enabled', true)->values();
+        $publicProfile = clone $profile;
+        $publicProfile->setRelation('entries', $enabledEntries);
+        $resolved = app(TopicEntryResolverService::class)->resolveGroupedEntries($publicProfile, (string) $profile->locale);
+        if ($enabledEntries->isEmpty() || array_sum(array_map('count', $resolved)) !== $enabledEntries->count()) {
+            $errors['data.workspace_entries'] = 'Public entries must resolve to actual readable resources.';
+        }
+        if ($errors !== []) {
+            throw ValidationException::withMessages($errors);
+        }
+    }
+
     /**
      * @return array<string, array{label: string, title: string, description: string, render_variant: string, sort_order: int, enabled: bool}>
      */

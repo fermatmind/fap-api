@@ -175,6 +175,7 @@ final class TopicController extends Controller
     private function buildDetailLandingSurface(TopicProfile $profile, array $entryGroups, string $locale): array
     {
         $segment = $this->frontendLocaleSegment($locale);
+        $personalityTopic = in_array($profile->slug, ['mbti', 'big-five', 'iq-eq'], true);
         $firstFeatured = $this->firstEntryForGroups($entryGroups, ['featured', 'articles', 'personalities', 'related']);
         $firstTest = $this->firstEntryForGroups($entryGroups, ['tests']);
         if ($locale === 'en' && $profile->slug === 'big-five') {
@@ -201,16 +202,16 @@ final class TopicController extends Controller
             ],
             'discoverability_keys' => array_keys($entryGroups),
             'continue_reading_keys' => array_keys($entryGroups),
-            'start_test_target' => is_array($firstTest) ? trim((string) ($firstTest['url'] ?? '')) : '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'start_test_target' => is_array($firstTest) ? trim((string) ($firstTest['url'] ?? '')) : ($personalityTopic ? '/'.$segment.'/tests/mbti-personality-test-16-personality-types' : null),
             'result_resume_target' => null,
-            'content_continue_target' => is_array($firstFeatured) ? trim((string) ($firstFeatured['url'] ?? '')) : '/'.$segment.'/personality',
+            'content_continue_target' => is_array($firstFeatured) ? trim((string) ($firstFeatured['url'] ?? '')) : ($personalityTopic ? '/'.$segment.'/personality' : null),
             'cta_bundle' => array_values(array_filter([
-                [
+                is_array($firstTest) || $personalityTopic ? [
                     'key' => 'start_test',
-                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                    'label' => trim((string) ($firstTest['cta_label'] ?? '')) ?: ($locale === 'zh-CN' ? '开始测试' : 'Take the test'),
                     'href' => is_array($firstTest) ? trim((string) ($firstTest['url'] ?? '')) : '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
                     'kind' => 'start_test',
-                ],
+                ] : null,
                 is_array($firstFeatured)
                     ? [
                         'key' => 'continue_public_content',
@@ -219,12 +220,12 @@ final class TopicController extends Controller
                         'kind' => 'content_continue',
                     ]
                     : null,
-                [
+                $personalityTopic ? [
                     'key' => 'personality_hub',
                     'label' => $locale === 'zh-CN' ? '人格画像' : 'Personality hub',
                     'href' => '/'.$segment.'/personality',
                     'kind' => 'discover',
-                ],
+                ] : null,
             ])),
             'indexability_state' => $profile->is_indexable ? 'indexable' : 'noindex',
             'attribution_scope' => 'public_topic_landing',

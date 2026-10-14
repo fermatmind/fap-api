@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Resources\TopicProfileResource;
+use App\Filament\Ops\Resources\TopicProfileResource\Pages\CreateTopicProfile;
+use App\Filament\Ops\Resources\TopicProfileResource\Pages\EditTopicProfile;
 use App\Filament\Ops\Resources\TopicProfileResource\Support\TopicWorkspace;
 use App\Models\AdminUser;
 use App\Models\Organization;
@@ -15,14 +17,84 @@ use App\Models\TopicProfileEntry;
 use App\Models\TopicProfileRevision;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
+use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 final class TopicWorkspaceTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_public_topic_create_rejects_empty_workspace_atomically(): void
+    {
+        $this->prepareWorkspaceAdmin();
+        Livewire::test(CreateTopicProfile::class)
+            ->fillForm(['topic_code' => 'education', 'slug' => 'education', 'title' => 'Education', 'excerpt' => 'Options', 'status' => 'published', 'is_public' => true])
+            ->call('create')
+            ->assertHasErrors(['data.workspace_sections.overview.body_md']);
+        $this->assertDatabaseMissing('topic_profiles', ['slug' => 'education']);
+        $this->assertSame(0, TopicProfileRevision::query()->count());
+    }
+
+    public function test_topic_edit_snapshot_failure_rolls_back_profile_and_children(): void
+    {
+        $this->prepareWorkspaceAdmin();
+        $profile = $this->seedProfile();
+        TopicWorkspace::syncWorkspaceSections($profile, $this->workspaceSectionsState());
+        TopicWorkspace::createRevision($profile, 'Initial');
+        $sections = $this->workspaceSectionsState();
+        $sections['overview']['body_md'] = 'Should also roll back';
+        TopicProfileRevision::creating(static function (): void {
+            throw \Illuminate\Validation\ValidationException::withMessages(['data.title' => 'Snapshot failed']);
+        });
+        Livewire::test(EditTopicProfile::class, ['record' => $profile->getRouteKey()])
+            ->fillForm(['title' => 'Should roll back', 'workspace_sections' => $sections])
+            ->call('save')
+            ->assertHasErrors(['data.title']);
+        $this->assertSame('MBTI Topic Hub', $profile->fresh()->title);
+        $this->assertSame(1, $profile->revisions()->count());
+        $this->assertSame($this->workspaceSectionsState()['overview']['body_md'], $profile->sections()->where('section_key', 'overview')->first()->body_md);
+    }
+
+    public function test_complete_public_topic_can_be_saved_and_safely_taken_offline(): void
+    {
+        $this->prepareWorkspaceAdmin();
+        $sections = TopicWorkspace::defaultWorkspaceSectionsState();
+        foreach ($sections as &$section) {
+            $section['is_enabled'] = false;
+        }
+        unset($section);
+        $sections['overview']['is_enabled'] = true;
+        $sections['overview']['body_md'] = 'Compare actual study and training options.';
+        $entries = TopicWorkspace::defaultWorkspaceEntriesState();
+        $entries['related'] = [['entry_type' => 'custom_link', 'title_override' => 'Read articles', 'target_url_override' => '/en/articles', 'is_enabled' => true]];
+        $entries['related'][] = ['entry_type' => 'custom_link', 'title_override' => 'Inactive entry', 'target_url_override' => '/en/topics', 'is_enabled' => false];
+        Livewire::test(CreateTopicProfile::class)
+            ->fillForm(['topic_code' => 'education', 'slug' => 'education', 'locale' => 'en', 'title' => 'Education', 'excerpt' => 'Explore options', 'status' => 'published', 'is_public' => true, 'is_indexable' => false, 'workspace_sections' => $sections, 'workspace_entries' => $entries, 'workspace_seo' => ['seo_title' => 'Education options', 'seo_description' => 'Compare actual options.']])
+            ->call('create')
+            ->assertHasNoFormErrors();
+        $profile = TopicProfile::query()->where('slug', 'education')->firstOrFail();
+        $this->assertSame(1, $profile->revisions()->count());
+        $this->assertCount(2, $profile->revisions()->first()->snapshot_json['entries']);
+        $this->getJson('/api/v0.5/topics/education?locale=en')->assertOk();
+        Livewire::test(EditTopicProfile::class, ['record' => $profile->getRouteKey()])
+            ->fillForm(['status' => 'draft', 'is_public' => false])
+            ->call('save')
+            ->assertHasNoFormErrors();
+        $this->getJson('/api/v0.5/topics/education?locale=en')->assertNotFound();
+        $this->assertSame(2, $profile->revisions()->count());
+    }
+
+    private function prepareWorkspaceAdmin(): void
+    {
+        Filament::setCurrentPanel(Filament::getPanel('ops'));
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_OWNER]);
+        session(['ops_org_id' => $this->createSelectedOrg()->id, 'ops_admin_totp_verified_user_id' => (int) $admin->id]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+    }
 
     public function test_topic_workspace_pages_render_for_authorized_admin(): void
     {

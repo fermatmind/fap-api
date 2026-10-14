@@ -20,6 +20,23 @@ final class TopicsPublicApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_single_locale_topic_has_only_real_alternates_and_no_unrelated_cta(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $topic = $this->createTopicProfile(['topic_code' => 'education', 'slug' => 'education', 'locale' => 'en', 'status' => 'published', 'is_public' => true, 'is_indexable' => false]);
+        $this->createTopicProfile(['topic_code' => 'education', 'slug' => 'education', 'locale' => 'zh-CN', 'status' => 'draft', 'is_public' => true]);
+        $this->createTopicProfile(['org_id' => 7, 'topic_code' => 'education', 'slug' => 'education', 'locale' => 'zh-CN', 'status' => 'published', 'is_public' => true]);
+        $seo = $this->getJson('/api/v0.5/topics/education/seo?locale=en')->assertOk();
+        $this->assertSame(['en' => 'https://fermatmind.com/en/topics/education'], $seo->json('meta.alternates'));
+        $this->getJson('/api/v0.5/topics/education?locale=zh-CN')->assertNotFound();
+        $this->getJson('/api/v0.5/topics/education?locale=en')->assertOk()->assertJsonPath('landing_surface_v1.cta_bundle', []);
+        TopicProfileEntry::query()->create(['profile_id' => $topic->id, 'entry_type' => 'custom_link', 'group_key' => 'tests', 'target_key' => '', 'target_url_override' => '/en/tests/holland-career-interest-test-riasec', 'title_override' => 'Interest reflection', 'cta_label' => 'Explore work activities', 'is_enabled' => true]);
+        $response = $this->getJson('/api/v0.5/topics/education?locale=en')->assertOk();
+        $response->assertJsonPath('landing_surface_v1.cta_bundle.0.label', 'Explore work activities')
+            ->assertJsonPath('landing_surface_v1.cta_bundle.0.href', '/en/tests/holland-career-interest-test-riasec');
+        $this->assertCount(1, $response->json('landing_surface_v1.cta_bundle'));
+    }
+
     public function test_list_returns_published_public_only(): void
     {
         $visible = $this->createTopicProfile([
@@ -240,7 +257,7 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonPath('seo_surface_v1.surface_type', 'topic_public_detail')
             ->assertJsonPath('seo_surface_v1.canonical_url', 'https://fermatmind.com/en/topics/mbti')
             ->assertJsonPath('seo_surface_v1.alternates.en', 'https://fermatmind.com/en/topics/mbti')
-            ->assertJsonPath('seo_surface_v1.alternates.zh-CN', 'https://fermatmind.com/zh/topics/mbti')
+            ->assertJsonPath('seo_surface_v1.alternates.zh-CN', null)
             ->assertJsonPath('seo_surface_v1.og_payload.url', 'https://fermatmind.com/en/topics/mbti')
             ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
             ->assertJsonPath('landing_surface_v1.entry_surface', 'topic_detail')
