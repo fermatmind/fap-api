@@ -243,6 +243,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
 
     public function test_console_publishes_approved_replacement_without_changing_source_or_prior_public_version(): void
     {
+        $this->freezeTime();
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_READ,
             PermissionNames::ADMIN_CONTENT_RELEASE,
@@ -251,8 +252,10 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
         $group = $this->createPublishedTranslationGroup('approved-replacement');
         $target = $group['translation'];
+        $firstPublishedAt = $target->published_at->toIso8601String();
         $previous = $group['translationRevision']->fresh()->getAttributes();
         $sourceBefore = $group['source']->fresh()->getAttributes();
+        $this->travel(1)->minutes();
         $replacement = $this->createRevision($target, [
             'revision_number' => 2,
             'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
@@ -272,6 +275,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertTrue($english['preflight']['ok'], json_encode($english['preflight']));
         $this->assertTrue($action['enabled']);
         $this->assertSame($previous, $group['translationRevision']->fresh()->getAttributes());
+
         $this->assertSame($previous['content_md'], $target->fresh()->content_md);
 
         Livewire::test(ArticleTranslationOpsPage::class)
@@ -287,6 +291,19 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertTrue((bool) $target->seoMeta->is_indexable);
         $this->assertSame($sourceBefore, $group['source']->fresh()->getAttributes());
         $this->assertSame($previous, $group['translationRevision']->fresh()->getAttributes());
+        $decision = \App\Models\ContentMaterialDecision::query()
+            ->where('family', 'article')->where('authority_subject_key', 'article:'.$target->id)
+            ->where('authority_revision', (string) $replacement->id)->latest('id')->firstOrFail();
+        $this->assertSame($firstPublishedAt, $target->published_at->toIso8601String());
+        $this->assertSame($target->publishedRevision->published_at->toIso8601String(), $decision->material_changed_at->toIso8601String());
+
+        $feed = app(\App\Http\Controllers\API\V0_5\Cms\ArticleController::class)
+            ->feed(\Illuminate\Http\Request::create('/api/v0.5/articles/feed', 'GET', ['locale' => 'en', 'org_id' => 0]))->getData(true);
+        $item = collect($feed['items'])->firstWhere('id', (int) $target->id);
+        $this->assertNotNull($item);
+        $this->assertSame($firstPublishedAt, $item['published_at']);
+        $this->assertSame($target->publishedRevision->published_at->toIso8601String(), $item['material_updated_at']);
+
         $this->assertTrue(AuditLog::withoutGlobalScopes()->where('action', 'article_translation_published')
             ->where('target_id', (string) $target->id)->exists());
         $dashboard = app(ArticleTranslationOpsService::class)->dashboard(['slug' => 'approved-replacement']);

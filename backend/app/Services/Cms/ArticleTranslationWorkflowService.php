@@ -478,7 +478,7 @@ final class ArticleTranslationWorkflowService
             $this->materialDecisions->recordPublished(
                 $locked,
                 $revision,
-                $locked->published_at ?? now(),
+                $revision->published_at ?? now(),
             );
 
             ContentReleaseAudit::log('article', $locked->fresh(), $source);

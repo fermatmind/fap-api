@@ -117,6 +117,9 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             '[Science](/zh/science?utm_source=blog#evidence)',
             '[Boundaries](/zh/method-boundaries)',
             '[Reliability](/zh/reliability-validity)',
+            '[Design](/zh/item-design-notes)',
+            '[English design](/en/item-design-notes?utm_source=blog#scope)',
+            '[Private design](/en/item-design-notes?signature=private-preview-token)',
             '[Privacy](/zh/data-privacy)',
             '[Misconceptions](/zh/common-misconceptions)',
             '[Unknown child](/zh/science/private)',
@@ -146,9 +149,11 @@ final class ArticleDraftPreviewRouteTest extends TestCase
         $this->assertSame('https://fermatmind.com/en/personality/big-five', $hrefs['English model']);
         $this->assertSame('https://fermatmind.com/zh/articles/guide', $hrefs['Article']);
         $this->assertSame('https://fermatmind.com/zh/science?utm_source=blog#evidence', $hrefs['Science']);
-        foreach (['Boundaries' => 'method-boundaries', 'Reliability' => 'reliability-validity', 'Privacy' => 'data-privacy', 'Misconceptions' => 'common-misconceptions'] as $label => $path) {
+        foreach (['Boundaries' => 'method-boundaries', 'Reliability' => 'reliability-validity', 'Design' => 'item-design-notes', 'Privacy' => 'data-privacy', 'Misconceptions' => 'common-misconceptions'] as $label => $path) {
             $this->assertSame('https://fermatmind.com/zh/'.$path, $hrefs[$label]);
         }
+        $this->assertSame('https://fermatmind.com/en/item-design-notes?utm_source=blog#scope', $hrefs['English design']);
+        $this->assertSame('', $hrefs['Private design']);
         $this->assertSame('/zh/science/private', $hrefs['Unknown child']);
         $this->assertSame('', $hrefs['Sensitive science']);
         $this->assertSame('#intro', $hrefs['In-page']);
