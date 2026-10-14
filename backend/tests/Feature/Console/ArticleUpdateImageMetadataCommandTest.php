@@ -183,6 +183,58 @@ final class ArticleUpdateImageMetadataCommandTest extends TestCase
         }
     }
 
+    public function test_explicit_body_visual_update_reaches_public_reader_over_existing_seo_override(): void
+    {
+        $articles = $this->createPublishedPair();
+        $article = $articles[1];
+        $seo = $article->seoMeta;
+        $schema = $seo->schema_json;
+        $schema['editorial_package_v1'] += [
+            'body_visual_asset_key' => 'old.localized.diagram',
+            'body_visual_image_url' => 'https://assets.fermatmind.com/articles/old/diagram.jpg',
+            'body_visual_fallback_authorized' => true,
+        ];
+        $seo->update(['schema_json' => $schema]);
+        $options = [
+            '--article-ids' => (string) $article->id,
+            '--translation-group-id' => self::TRANSLATION_GROUP_ID,
+            '--resolved-metadata' => $this->writeResolvedMetadata(),
+            '--json' => true,
+            '--no-publish' => true, '--no-schema' => true, '--no-hreflang' => true,
+            '--no-search' => true, '--no-sitemap-llms-change' => true,
+        ];
+        $history = ArticleTranslationRevision::withoutGlobalScopes()->get()->toArray();
+        $before = $this->protectedSnapshot($article);
+        $otherBefore = $this->protectedSnapshot($articles[0]);
+        $exit = Artisan::call('articles:update-image-metadata', $options);
+        $plan = $this->jsonOutput();
+        $this->assertSame(0, $exit);
+        $this->assertSame($schema, $article->fresh()->seoMeta->schema_json);
+        $this->assertNotSame($plan['before'][0]['schema_json_sha256'], $plan['after'][0]['schema_json_sha256']);
+        $this->assertSame($plan['before'][0]['schema_non_media_sha256'], $plan['after'][0]['schema_non_media_sha256']);
+        $exit = Artisan::call('articles:update-image-metadata', $options + ['--execute' => true]);
+        $executed = $this->jsonOutput();
+        $this->assertSame(0, $exit);
+        $after = $this->protectedSnapshot($article->fresh());
+        foreach (['body_visual_asset_key', 'body_visual_image_url', 'body_visual_fallback_authorized'] as $field) {
+            unset($before['schema_json']['editorial_package_v1'][$field], $after['schema_json']['editorial_package_v1'][$field]);
+        }
+        $this->assertSame($before, $after);
+        $this->assertSame($history, ArticleTranslationRevision::withoutGlobalScopes()->get()->toArray());
+        $this->assertSame($otherBefore, $this->protectedSnapshot($articles[0]->fresh()));
+        $public = $this->getJson('/api/v0.5/articles/choose-career-using-personality-tests?locale=en&org_id=0')->assertOk();
+        $this->assertSame('https://assets.fermatmind.com/articles/career-map/body_1600x900.jpg', $public->json('article.body_visual.image_url'));
+        $this->assertFalse($public->json('article.body_visual.fallback_authorized'));
+        $this->assertSame($this->normalizeJsonObjects($plan['after']), $this->normalizeJsonObjects($executed['after']));
+
+        $coverOnly = $this->writeResolvedMetadata(static function (array &$payload): void {
+            unset($payload['body_visual_asset_key'], $payload['body_visual_image_url'], $payload['body_visual_fallback_authorized']);
+        });
+        $currentSchema = $article->fresh()->seoMeta->schema_json;
+        $this->assertSame(0, Artisan::call('articles:update-image-metadata', array_replace($options, ['--resolved-metadata' => $coverOnly, '--execute' => true])), Artisan::output());
+        $this->assertSame($currentSchema, $article->fresh()->seoMeta->schema_json);
+    }
+
     public function test_translation_group_lock_rejects_wrong_articles(): void
     {
         $articles = $this->createPublishedPair();

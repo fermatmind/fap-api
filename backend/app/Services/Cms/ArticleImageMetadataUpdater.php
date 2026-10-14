@@ -14,6 +14,8 @@ final class ArticleImageMetadataUpdater
 {
     private const REQUIRED_VARIANTS = ['hero', 'card', 'thumbnail', 'og', 'preload'];
 
+    private const BODY_VISUAL_FIELDS = ['body_visual_asset_key', 'body_visual_image_url', 'body_visual_fallback_authorized'];
+
     private const SAFETY_FLAGS = [
         'no_publish',
         'no_schema',
@@ -220,7 +222,7 @@ final class ArticleImageMetadataUpdater
             'social_image_metadata' => is_array($metadata['social_image_metadata'] ?? null) ? $metadata['social_image_metadata'] : [],
             'image_metadata_updated_by' => 'articles:update-image-metadata',
         ];
-        foreach (['body_visual_asset_key', 'body_visual_image_url', 'body_visual_fallback_authorized'] as $field) {
+        foreach (self::BODY_VISUAL_FIELDS as $field) {
             if (array_key_exists($field, $metadata)) {
                 $variants['editorial_package_v1'][$field] = match ($field) {
                     'body_visual_asset_key' => trim((string) $metadata[$field]),
@@ -260,6 +262,7 @@ final class ArticleImageMetadataUpdater
         $seoMeta = $article->seoMeta;
         $seoMeta->forceFill([
             'og_image_url' => $normalized['og_image_url'],
+            'schema_json' => $this->mergedSchemaJson($article, $normalized),
         ])->saveQuietly();
     }
 
@@ -288,6 +291,7 @@ final class ArticleImageMetadataUpdater
             'robots' => $seoMeta instanceof ArticleSeoMeta ? (string) $seoMeta->robots : null,
             'seo_is_indexable' => $seoMeta instanceof ArticleSeoMeta ? (bool) $seoMeta->is_indexable : null,
             'schema_json_sha256' => $seoMeta instanceof ArticleSeoMeta ? hash('sha256', (string) json_encode($seoMeta->schema_json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE)) : null,
+            'schema_non_media_sha256' => $this->protectedSchemaHash($seoMeta?->schema_json),
             'cover_image_url' => $article->cover_image_url,
             'cover_image_alt' => $article->cover_image_alt,
             'cover_image_width' => $article->cover_image_width,
@@ -311,6 +315,9 @@ final class ArticleImageMetadataUpdater
         $snapshot['cover_image_height'] = $normalized['cover_image_height'];
         $snapshot['cover_image_variants'] = $this->mergedCoverVariants($article, $normalized);
         $snapshot['og_image_url'] = $normalized['og_image_url'];
+        $schema = $this->mergedSchemaJson($article, $normalized);
+        $snapshot['schema_json_sha256'] = hash('sha256', (string) json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE));
+        $snapshot['schema_non_media_sha256'] = $this->protectedSchemaHash($schema);
 
         return $snapshot;
     }
@@ -329,6 +336,35 @@ final class ArticleImageMetadataUpdater
         );
 
         return $variants;
+    }
+
+    /** Synchronize only an existing SEO media override; cover-only updates leave it intact. */
+    private function mergedSchemaJson(Article $article, array $normalized): mixed
+    {
+        $schema = $article->seoMeta?->schema_json;
+        $editorial = is_array($schema) ? ($schema['editorial_package_v1'] ?? null) : null;
+        if (! is_array($editorial) || array_intersect(self::BODY_VISUAL_FIELDS, array_keys($editorial)) === []) {
+            return $schema;
+        }
+        $media = $normalized['cover_image_variants']['editorial_package_v1'];
+        foreach (self::BODY_VISUAL_FIELDS as $field) {
+            if (array_key_exists($field, $media)) {
+                $schema['editorial_package_v1'][$field] = $media[$field];
+            }
+        }
+
+        return $schema;
+    }
+
+    private function protectedSchemaHash(mixed $schema): string
+    {
+        if (is_array($schema) && is_array($schema['editorial_package_v1'] ?? null)) {
+            foreach (self::BODY_VISUAL_FIELDS as $field) {
+                unset($schema['editorial_package_v1'][$field]);
+            }
+        }
+
+        return hash('sha256', (string) json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE));
     }
 
     /**
@@ -353,7 +389,7 @@ final class ArticleImageMetadataUpdater
             'canonical_url',
             'robots',
             'seo_is_indexable',
-            'schema_json_sha256',
+            'schema_non_media_sha256',
             'revision_count',
         ];
 
