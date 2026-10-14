@@ -48,6 +48,28 @@ final class IqTestDriverTest extends TestCase
         $this->assertStringNotContainsString('correct_answer', json_encode($result->toArray(), JSON_THROW_ON_ERROR));
     }
 
+    public function test_complete_owner_30_persists_designed_beta_with_existing_raw_and_legacy_fields(): void
+    {
+        $spec = $this->ownerOriginalScoringSpec();
+        $spec['item_bank']['item_count'] = 30;
+        $spec['items'] = [];
+        $answers = [];
+        for ($index = 1; $index <= 30; $index++) {
+            $question = sprintf('IQ%03d', $index);
+            $dimension = $index <= 14 ? 'VSPR' : ($index <= 27 ? 'VSI' : 'NPR');
+            $spec['items'][] = $this->itemDefinition('fixture-'.$index, $question, $dimension, 'A', 'matrix_reasoning', 'L2');
+            $answers[] = ['question_id' => $question, 'code' => $index <= 6 ? 'A' : 'B'];
+        }
+        $result = (new IqTestDriver)->score($answers, $spec, ['duration_ms' => 23000]);
+        $this->assertSame(6.0, $result->rawScore);
+        $this->assertSame(107, data_get($result->normedJson, 'beta_standard_score'));
+        $this->assertSame(102, data_get($result->normedJson, 'beta_reference.display_score'));
+        $this->assertEqualsWithDelta(55.30, data_get($result->normedJson, 'beta_reference.percentile'), 0.005);
+        $this->assertSame(data_get($result->normedJson, 'beta_reference'), data_get($result->breakdownJson, 'score_result.beta_reference'));
+        $this->assertFalse(data_get($result->normedJson, 'beta_reference.population_percentile_eligible'));
+        $this->assertContains('SPEEDING', data_get($result->normedJson, 'quality.flags'));
+    }
+
     public function test_missing_answer_key_returns_blocked_unscored_state(): void
     {
         $driver = new IqTestDriver;

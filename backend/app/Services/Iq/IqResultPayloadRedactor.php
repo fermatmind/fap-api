@@ -92,6 +92,6 @@ final class IqResultPayloadRedactor
             $redacted[$key] = is_array($value) ? self::redactNode($value) : $value;
         }
 
-        return $redacted;
+        return (new IqBetaReferenceScore)->withCurrentInterpretation($redacted);
     }
 }

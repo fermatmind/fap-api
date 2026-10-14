@@ -6,6 +6,7 @@ namespace App\Services\Report;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Iq\IqBetaReferenceScore;
 
 final class IqReportBuilder
 {
@@ -122,6 +123,7 @@ final class IqReportBuilder
                 'reason_code' => $reasonCode,
                 'scoring_mode' => $this->stringOrNull($score['scoring_mode'] ?? null),
                 'bank_id' => $this->stringOrNull($score['bank_id'] ?? null),
+                'beta_reference' => $summary['beta_reference'] ?? null,
                 'norm_table_version' => $this->stringOrNull($summary['norm_table_version'] ?? null),
                 'score_claim_level' => $this->stringOrNull($summary['score_claim_level'] ?? null) ?? 'raw_score_only',
                 'claim_policy' => is_array($summary['claim_policy'] ?? null) ? $summary['claim_policy'] : [],
@@ -265,6 +267,9 @@ final class IqReportBuilder
 
         return [
             'raw_score' => $scored ? $this->floatOrNull($score['raw_score'] ?? null) : null,
+            'beta_reference' => array_key_exists('beta_reference', $score)
+                ? $score['beta_reference']
+                : app(IqBetaReferenceScore::class)->fromScore($score),
             'iq_estimate' => $scored && $hasNormAuthority ? $this->floatOrNull($norms['iq_estimate'] ?? null) : null,
             'percentile' => $scored && $hasNormAuthority ? $this->floatOrNull($norms['percentile'] ?? null) : null,
             'confidence_interval' => $scored && $hasNormAuthority && is_array($norms['confidence_interval'] ?? null)

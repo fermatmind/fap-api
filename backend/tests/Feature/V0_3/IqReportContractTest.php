@@ -188,43 +188,33 @@ final class IqReportContractTest extends TestCase
         ]);
     }
 
-    public function test_iq_report_endpoint_uses_iq_specific_three_dimension_payload_without_payment_unlock_changes(): void
+    public function test_iq_owner_report_and_access_are_free_without_global_rollout_or_projection(): void
     {
+        config()->set('fap.features.free_full_report_mode', false);
+        config()->set('fap.free_full_report_assessments', []);
         $this->seedScales(paidPreview: true);
-
         $attemptId = (string) Str::uuid();
-        $anonId = 'anon_iq_report_contract';
+        $anonId = 'anon_iq_free_owner';
         $token = $this->issueAnonToken($anonId);
         $this->createAttempt($attemptId, $anonId);
-        $this->createScoredResult($attemptId);
+        $result = $this->createScoredResult($attemptId, withOwnerBetaStandardScore: true);
+        $originalJson = $result->result_json;
+        $headers = ['X-Anon-Id' => $anonId, 'Authorization' => 'Bearer '.$token];
 
-        $response = $this->withHeaders([
-            'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer '.$token,
-        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
-
-        $response->assertStatus(200);
-        $response->assertJson([
-            'ok' => true,
-            'locked' => true,
-            'access_level' => 'free',
-            'variant' => 'free',
-        ]);
-        $response->assertJsonPath('report.schema_version', 'iq.report.v1');
-        $response->assertJsonPath('report.scale_code', 'IQ_INTELLIGENCE_QUOTIENT');
-        $response->assertJsonPath('report.scale_code_legacy', 'IQ_RAVEN');
-        $response->assertJsonPath('report.attempt_id', $attemptId);
-        $response->assertJsonPath('report.summary.raw_score', null);
-        $response->assertJsonPath('report.sections', []);
-        $response->assertJsonPath('report._meta.redacted', true);
-        $response->assertJsonPath('report.access.report_access_level', 'free');
-        $response->assertJsonMissingPath('report.dimensions');
-        $response->assertJsonMissingPath('report.quality');
-        $response->assertJsonMissingPath('report.stability');
-        $response->assertJsonMissingPath('report.scoring');
-        $response->assertJsonMissingPath('report.iq_pro');
-        $response->assertJsonMissingPath('report.profile');
-        $response->assertJsonPath('upgrade_sku', null);
+        $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report-access")
+            ->assertOk()->assertJsonPath('access_state', 'ready')
+            ->assertJsonPath('free_full_report_mode', true)->assertJsonPath('paywall_suppressed', true);
+        $report = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report");
+        $report->assertOk()->assertJsonPath('locked', false)->assertJsonPath('access_level', 'full')
+            ->assertJsonPath('variant', 'full')->assertJsonPath('report.summary.beta_reference.display_score', 132)
+            ->assertJsonPath('report.summary.beta_reference.source_kind', 'designed_reference')
+            ->assertJsonPath('report.summary.iq_estimate', null)->assertJsonPath('report.summary.percentile', null);
+        $this->assertPayloadHasNoAnswerKeyFields($report->json());
+        $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/result")
+            ->assertOk()->assertJsonPath('result.normed_json.beta_reference.display_score', 132)
+            ->assertJsonPath('result.normed_json.beta_standard_score', 145);
+        $this->assertSame($originalJson, $result->fresh()->result_json);
+        $this->assertSame(0, DB::table('benefit_grants')->count());
     }
 
     public function test_iq_report_endpoint_returns_full_report_under_free_full_report_mode_without_answer_key_leak(): void
@@ -492,33 +482,19 @@ final class IqReportContractTest extends TestCase
         $this->assertPayloadHasNoIqV1ForbiddenArtifactClaims($payload);
     }
 
-    public function test_iq_paid_report_entitlement_does_not_unlock_for_wrong_anon(): void
+    public function test_free_iq_report_does_not_bypass_attempt_ownership(): void
     {
         $this->seedScales(paidPreview: true);
-
         $attemptId = (string) Str::uuid();
-        $anonId = 'anon-iq-paid-owner-locked';
-        $token = $this->issueAnonToken($anonId);
-        $this->createAttempt($attemptId, $anonId);
+        $owner = 'anon-iq-owner';
+        $stranger = 'anon-iq-stranger';
+        $token = $this->issueAnonToken($stranger);
+        $this->createAttempt($attemptId, $owner);
         $this->createScoredResult($attemptId);
-        $this->grantIqPaidReport($attemptId, 'anon-iq-paid-someone-else');
-
-        $response = $this->withHeaders([
-            'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer '.$token,
-        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
-
-        $response->assertOk();
-        $payload = $response->json();
-        $this->assertTrue((bool) data_get($payload, 'locked'));
-        $this->assertSame('free', data_get($payload, 'access_level'));
-        $this->assertSame('free', data_get($payload, 'variant'));
-        $this->assertContains('iq_core', data_get($payload, 'modules_allowed', []));
-        $this->assertNotContains('iq_full', data_get($payload, 'modules_allowed', []));
-        $this->assertNull(data_get($payload, 'report.dimensions'));
-        $this->assertNull(data_get($payload, 'report.scoring'));
-        $this->assertNull(data_get($payload, 'report.iq_pro'));
-        $this->assertNull(data_get($payload, 'report.summary.raw_score'));
+        foreach (['report', 'report-access'] as $endpoint) {
+            $this->withHeaders(['X-Anon-Id' => $stranger, 'Authorization' => 'Bearer '.$token])
+                ->getJson("/api/v0.3/attempts/{$attemptId}/{$endpoint}")->assertNotFound();
+        }
     }
 
     public function test_iq_paid_report_module_contract_is_iq_specific(): void

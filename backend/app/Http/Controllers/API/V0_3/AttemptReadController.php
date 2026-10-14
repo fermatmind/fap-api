@@ -48,6 +48,7 @@ use App\Services\Report\Pdf\ResultPagePdfExportException;
 use App\Services\Report\Pdf\ResultPagePdfTokenService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
+use App\Services\Report\Resolvers\AccessResolver;
 use App\Services\Results\ResultEmailReadAccessService;
 use App\Services\Riasec\RiasecPublicFormSummaryBuilder;
 use App\Services\Riasec\RiasecPublicProjectionService;
@@ -1706,20 +1707,7 @@ class AttemptReadController extends Controller
 
     private function freeFullReportModeEnabledForScale(string $scaleCode): bool
     {
-        if (strtoupper(trim($scaleCode)) === ReportAccess::SCALE_MBTI) {
-            return MbtiReportAccessPolicy::grantsFreeFull($scaleCode);
-        }
-
-        if (! (bool) config('fap.features.free_full_report_mode', false)) {
-            return false;
-        }
-
-        $allowedScales = array_map(
-            static fn (mixed $value): string => strtoupper(trim((string) $value)),
-            (array) config('fap.free_full_report_assessments', [])
-        );
-
-        return in_array(strtoupper(trim($scaleCode)), array_values(array_filter($allowedScales)), true);
+        return app(AccessResolver::class)->freeFullReportModeEnabled($scaleCode);
     }
 
     /**

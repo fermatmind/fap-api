@@ -4,6 +4,7 @@ namespace App\Services\Assessment\Drivers;
 
 use App\Services\Assessment\IqBetaStandardScore;
 use App\Services\Assessment\ScoreResult;
+use App\Services\Iq\IqBetaReferenceScore;
 use App\Services\Iq\IqNormAuthorityContract;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -100,6 +101,8 @@ class IqTestDriver implements DriverInterface
                 'content_manifest_hash' => (string) ($ctx['content_manifest_hash'] ?? ''),
             ],
         ], $betaStandardScore ?? []);
+
+        $scorePayload['beta_reference'] = app(IqBetaReferenceScore::class)->fromScore($scorePayload);
 
         return new ScoreResult(
             rawScore: $rawScore,
