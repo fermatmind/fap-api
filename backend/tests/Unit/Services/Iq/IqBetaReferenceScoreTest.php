@@ -57,6 +57,12 @@ final class IqBetaReferenceScoreTest extends TestCase
         $this->assertSame(102, IqResultPayloadRedactor::redactAnswerKeys($report)['beta_reference']['display_score']);
         $report['access']['report_access_level'] = 'free';
         $this->assertArrayNotHasKey('beta_reference', IqResultPayloadRedactor::redactAnswerKeys($report));
+        $report['access']['report_access_level'] = 'full';
+        $report['quality'] = ['flags' => ['PARTIAL_COMPLETION']];
+        $this->assertArrayNotHasKey('beta_reference', IqResultPayloadRedactor::redactAnswerKeys($report));
+        $report['quality'] = ['flags' => ['SPEEDING']];
+        $report['technical_failure'] = true;
+        $this->assertArrayNotHasKey('beta_reference', IqResultPayloadRedactor::redactAnswerKeys($report));
     }
 
     private function score(int $raw): array

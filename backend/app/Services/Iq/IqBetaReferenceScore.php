@@ -17,6 +17,7 @@ final class IqBetaReferenceScore
         if (($score['status'] ?? null) !== 'scored'
             || ($score['bank_id'] ?? null) !== self::BANK_ID
             || ($score['technical_failure'] ?? false) === true
+            || in_array('PARTIAL_COMPLETION', (array) ($score['quality']['flags'] ?? []), true)
             || (! is_int($raw) && ! is_float($raw))
             || ! is_finite((float) $raw) || floor((float) $raw) !== (float) $raw
             || $raw < 0 || $raw > 30
@@ -63,7 +64,10 @@ final class IqBetaReferenceScore
             if (($payload['access']['report_access_level'] ?? null) !== 'full') {
                 return $payload;
             }
-            $score = array_merge($payload['scoring'] ?? [], $payload['summary'] ?? []);
+            $score = array_merge($payload['scoring'] ?? [], $payload['summary'] ?? [], [
+                'quality' => $payload['quality'] ?? [],
+                'technical_failure' => ($payload['technical_failure'] ?? false) === true,
+            ]);
         }
 
         $reference = $this->fromScore($score);
