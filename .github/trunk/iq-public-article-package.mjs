@@ -11,6 +11,8 @@ export const seoPackagePath = 'content_assets/iq_public/articles/20261015-seo-v1
 export const seoPackageSha256 = 'b9755f9564f3ff6b39a5c987cac2c49d0fda4c00b3ed2713b6612fb5d361c041';
 export const parityPackagePath = 'content_assets/iq_public/articles/20261015-en-parity';
 export const parityPackageSha256 = '1a0ad2975484f667e3e6da3c529c31a87697283552207a8945a743e95880262a';
+export const mensaPackagePath = 'content_assets/iq_public/articles/20261015-mensa-v1';
+export const mensaPackageSha256 = '32230e74353bab576906b97d58c171579163557354abca3b87888edaecd9811c';
 export const executorPaths = [
   "app/Console/Commands/ContentPromoteExactPackage.php",
   "app/Http/Controllers/API/V0_5/Cms/ArticleController.php",
@@ -48,7 +50,8 @@ export function inspectPackage(backendRoot, expectedPackageSha256 = packageSha25
   const root = realpathSync(backendRoot);
   const selected = expectedPackageSha256 === packageSha256 ? { path: packagePath, count: 10 }
     : expectedPackageSha256 === seoPackageSha256 ? { path: seoPackagePath, count: 2 }
-    : expectedPackageSha256 === parityPackageSha256 ? { path: parityPackagePath, count: 6 } : null;
+    : expectedPackageSha256 === parityPackageSha256 ? { path: parityPackagePath, count: 6 }
+    : expectedPackageSha256 === mensaPackageSha256 ? { path: mensaPackagePath, count: 2 } : null;
   if (!selected || readCandidateRows(root, expectedPackageSha256).length !== selected.count) throw new Error('IQ_ARTICLE_PACKAGE_SCOPE_INVALID');
   const material = executorPaths.map(path => {
     const file = resolve(root, path);
@@ -66,6 +69,11 @@ export function workflowSignature(binding, key, source, run, attempt) {
   return createHmac('sha256', key).update(material).digest('hex');
 }
 export function isIqArticleOnlyPromotionRegistration(before, after) {
+  const mensaRoot = `        '${mensaPackagePath}',\n`;
+  if (after.includes(mensaRoot) && !before.includes(mensaRoot)) {
+    const without = after.replace(mensaRoot, '');
+    return without === before || isIqArticleOnlyPromotionRegistration(before, without);
+  }
   const parityRoot = `        '${parityPackagePath}',\n`;
   if (after.includes(parityRoot) && !before.includes(parityRoot)) {
     const without = after.replace(parityRoot, '');

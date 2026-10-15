@@ -39,6 +39,10 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
 
     private const FAQ_PATHS = ['answer_surface_policy', 'answer_surface_visibility', 'answer_surface_v1.faq_items', 'iq_article_exact_package_v1'];
 
+    private const DISCOVERY_FLAGS = ['is_indexable', 'sitemap_eligible', 'llms_eligible'];
+
+    private const MENSA_HREFLANG_GATE = ['enabled' => true, 'policy' => 'reciprocal_counterparts_verified'];
+
     public function __construct(
         private readonly IqPublicArticlePackage $package,
         private readonly PromotionReceiptStore $receipts,
@@ -109,6 +113,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                         'translation_group_id' => $source?->translation_group_id,
                         'title' => $row['snapshot']['title'], 'excerpt' => $row['snapshot']['excerpt'], 'content_md' => $row['snapshot']['content_md'],
                         'status' => 'draft', 'is_public' => false, 'is_indexable' => false, 'sitemap_eligible' => false, 'llms_eligible' => false,
+                        ...($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256 ? ['related_test_slug' => 'iq-test-intelligence-quotient-assessment'] : []),
                     ]);
                     ArticleSeoMeta::query()->withoutGlobalScopes()->create([
                         'org_id' => 0, 'article_id' => $article->id, 'locale' => $article->locale,
@@ -221,6 +226,9 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                     }
                     if ($row['operation'] === 'new_source_pair') {
                         $patch += ['status' => 'published', 'is_public' => true, 'published_at' => $now];
+                        if ($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256) {
+                            $patch += array_fill_keys(self::DISCOVERY_FLAGS, true);
+                        }
                         if ($article->locale === 'en') {
                             $patch['translation_status'] = Article::TRANSLATION_STATUS_PUBLISHED;
                         }
@@ -241,10 +249,14 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                     $metadata['answer_surface_visibility'] = 'visible';
                     Arr::set($metadata, 'answer_surface_v1.faq_items', $row['snapshot']['faq_items']);
                     $metadata['iq_article_exact_package_v1'] = $this->publicationBinding($row, $revision, $context);
+                    if ($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256) {
+                        $metadata['hreflang_gate_v1'] = self::MENSA_HREFLANG_GATE;
+                    }
                     $schema['editorial_package_v1'] = $metadata;
                     $seo->forceFill([
                         'seo_title' => $row['snapshot']['seo_title'], 'og_title' => $row['snapshot']['seo_title'],
                         'seo_description' => $row['snapshot']['seo_description'], 'og_description' => $row['snapshot']['seo_description'], 'schema_json' => $schema,
+                        ...($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256 ? ['is_indexable' => true, 'robots' => 'index,follow'] : []),
                     ])->saveQuietly();
                     $this->decisions->recordPublished($article, $revision, $now, 'publish', $reference);
                     $written++;
@@ -310,7 +322,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                 $this->assertPriorRevisionUnchanged($article, $saved);
                 if ((int) $article->published_revision_id === (int) ($saved['article']['published_revision_id'] ?? 0)
                     && $revision->revision_status === ArticleTranslationRevision::STATUS_APPROVED) {
-                    $this->assertRestoredCopy($article, $saved);
+                    $this->assertRestoredCopy($article, $saved, $context);
 
                     continue;
                 }
@@ -328,6 +340,9 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                 }
                 $schema = $seo->schema_json ?? [];
                 $metadata = (array) ($schema['editorial_package_v1'] ?? []);
+                if ($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256) {
+                    $this->assertMensaDiscoverability($article, $seo);
+                }
                 if (! $this->sameJson(Arr::get($metadata, 'answer_surface_v1.faq_items'), $row['snapshot']['faq_items'])
                     || Arr::get($metadata, 'iq_article_exact_package_v1.revision_id') !== $revision->id) {
                     throw new DomainException('iq_article_rollback_owned_faq_drift');
@@ -343,7 +358,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                     throw new DomainException('iq_article_rollback_owned_faq_drift');
                 }
                 $originalMetadata = (array) data_get($saved, 'seo.schema_json.editorial_package_v1', []);
-                foreach (self::FAQ_PATHS as $path) {
+                foreach ($this->faqPaths($context) as $path) {
                     if (Arr::has($originalMetadata, $path)) {
                         Arr::set($metadata, $path, Arr::get($originalMetadata, $path));
                     } else {
@@ -374,7 +389,9 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                     }
                     $seo->delete();
                 } else {
-                    $seo->forceFill([...Arr::only($saved['seo'], self::SEO_COPY), 'schema_json' => $schema])->saveQuietly();
+                    $seo->forceFill([...Arr::only($saved['seo'], self::SEO_COPY), 'schema_json' => $schema,
+                        ...($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256 ? Arr::only($saved['seo'], ['is_indexable', 'robots']) : []),
+                    ])->saveQuietly();
                 }
                 $patch = [...Arr::only($saved['article'], self::ARTICLE_COPY), 'published_revision_id' => $saved['article']['published_revision_id']];
                 if ((int) $article->working_revision_id === (int) $revision->id) {
@@ -382,6 +399,9 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                 }
                 if ($row['operation'] === 'new_source_pair') {
                     $patch['is_public'] = false;
+                    if ($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256) {
+                        $patch += Arr::only($saved['article'], self::DISCOVERY_FLAGS);
+                    }
                     $patch['published_at'] = $saved['article']['published_at'];
                     if ($article->status === 'published') {
                         $patch['status'] = $saved['article']['status'];
@@ -477,7 +497,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
             $seo = $article ? $this->seo($article, $lock) : null;
             $revisions = $article ? ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)
                 ->where(static function ($query) use ($article): void {
-                    $query->whereIn('id', array_filter([$article->published_revision_id, $article->working_revision_id]))->orWhereIn('authority_package_sha256', [IqPublicArticlePackage::SHA256, IqPublicArticlePackage::SEO_SHA256, IqPublicArticlePackage::PARITY_SHA256]);
+                    $query->whereIn('id', array_filter([$article->published_revision_id, $article->working_revision_id]))->orWhereIn('authority_package_sha256', [IqPublicArticlePackage::SHA256, IqPublicArticlePackage::SEO_SHA256, IqPublicArticlePackage::PARITY_SHA256, IqPublicArticlePackage::MENSA_SHA256]);
                 })->orderBy('id')->when($lock, static fn ($query) => $query->lockForUpdate())->get()->map->getAttributes()->all() : [];
             $seoAttributes = $seo?->getAttributes();
             if ($seoAttributes) {
@@ -516,9 +536,15 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                     }
                     $owned = array_values(array_filter($saved['revisions'], static fn (array $revision): bool => ($revision['authority_package_sha256'] ?? null) === $context->packageSha256 && ($revision['authority_asset_key'] ?? null) === $row['identity']['locale'].':'.$row['identity']['slug']));
                     $metadata = count($owned) === 1 ? json_decode($owned[0]['authority_metadata_json'] ?? '{}', true, 32, JSON_THROW_ON_ERROR) : [];
+                    $searchLaunch = $context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256;
+                    $expectedIndexable = $searchLaunch && count($owned) === 1 && $article['is_public'] && $article['status'] === 'published'
+                        && (int) $article['published_revision_id'] === (int) $owned[0]['id'] && $owned[0]['revision_status'] === ArticleTranslationRevision::STATUS_PUBLISHED;
                     if (count($owned) !== 1 || ($metadata['created_identity_by_package'] ?? null) !== true
                         || ! $this->sameJson($metadata['snapshot'] ?? null, $row['snapshot']) || $article['title'] !== $row['snapshot']['title'] || $article['content_md'] !== $row['snapshot']['content_md']
-                        || $article['is_indexable'] || $article['sitemap_eligible'] || $article['llms_eligible']
+                        || collect(self::DISCOVERY_FLAGS)->contains(static fn (string $field): bool => (bool) $article[$field] !== $expectedIndexable)
+                        || ($searchLaunch && (! is_array($saved['seo']) || (bool) ($saved['seo']['is_indexable'] ?? null) !== $expectedIndexable
+                            || ($saved['seo']['robots'] ?? null) !== ($expectedIndexable ? 'index,follow' : null)
+                            || ! $this->sameJson(data_get($saved, 'seo.schema_json.editorial_package_v1.hreflang_gate_v1'), $expectedIndexable ? self::MENSA_HREFLANG_GATE : null)))
                         || ! in_array($article['status'], ['draft', 'published'], true)
                         || ($article['working_revision_id'] !== null && (int) $article['working_revision_id'] !== (int) $owned[0]['id'])
                         || in_array($article['lifecycle_state'] ?? null, [Article::LIFECYCLE_ARCHIVED, Article::LIFECYCLE_SOFT_DELETED], true)) {
@@ -555,6 +581,9 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                 throw new DomainException('iq_article_published_projection_invalid');
             }
             $binding = (array) data_get($seo->schema_json, 'editorial_package_v1.iq_article_exact_package_v1', []);
+            if ($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256) {
+                $this->assertMensaDiscoverability($article, $seo);
+            }
             if (count($binding) !== 7 || array_diff_key($binding, $this->publicationBinding($row, $revision, $context)) !== []
                 || ($binding['package_sha256'] ?? null) !== $context->packageSha256 || ($binding['revision_id'] ?? null) !== $revision->id
                 || ($binding['snapshot_sha256'] ?? null) !== $row['snapshot_sha256']
@@ -707,7 +736,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
         }
     }
 
-    private function assertRestoredCopy(Article $article, array $saved): void
+    private function assertRestoredCopy(Article $article, array $saved, PromotionContext $context): void
     {
         foreach (array_diff(self::ARTICLE_COPY, ['source_version_hash']) as $field) {
             if ($article->getAttributes()[$field] !== $saved['article'][$field]) {
@@ -716,6 +745,13 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
         }
         if ($article->source_version_hash !== $article->computeSourceVersionHash()) {
             throw new DomainException('iq_article_rollback_restored_copy_drift');
+        }
+        if ($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256) {
+            foreach (self::DISCOVERY_FLAGS as $field) {
+                if ($article->getAttributes()[$field] !== $saved['article'][$field]) {
+                    throw new DomainException('iq_article_rollback_restored_copy_drift');
+                }
+            }
         }
         $seo = $this->seo($article, true);
         if ($saved['seo'] === null) {
@@ -728,12 +764,31 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
         if (! $seo || PromotionContextFactory::canonicalJson(Arr::only($seo->getAttributes(), self::SEO_COPY)) !== PromotionContextFactory::canonicalJson(Arr::only($saved['seo'], self::SEO_COPY))) {
             throw new DomainException('iq_article_rollback_restored_seo_drift');
         }
+        if ($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256
+            && ((bool) $seo->is_indexable !== (bool) $saved['seo']['is_indexable'] || $seo->robots !== $saved['seo']['robots'])) {
+            throw new DomainException('iq_article_rollback_restored_seo_drift');
+        }
         $current = (array) data_get($seo->schema_json, 'editorial_package_v1', []);
         $before = (array) data_get($saved, 'seo.schema_json.editorial_package_v1', []);
-        foreach (self::FAQ_PATHS as $path) {
+        foreach ($this->faqPaths($context) as $path) {
             if (Arr::has($current, $path) !== Arr::has($before, $path) || ! $this->sameJson(Arr::get($current, $path), Arr::get($before, $path))) {
                 throw new DomainException('iq_article_rollback_restored_faq_drift');
             }
+        }
+    }
+
+    private function faqPaths(PromotionContext $context): array
+    {
+        return [...self::FAQ_PATHS, ...($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256 ? ['hreflang_gate_v1'] : [])];
+    }
+
+    private function assertMensaDiscoverability(Article $article, ArticleSeoMeta $seo): void
+    {
+        if (collect(self::DISCOVERY_FLAGS)->contains(fn (string $field): bool => $article->$field !== true)
+            || ! $seo->is_indexable || $seo->robots !== 'index,follow' || $seo->canonical_url !== null
+            || ! $this->sameJson(data_get($seo->schema_json, 'editorial_package_v1.hreflang_gate_v1'), self::MENSA_HREFLANG_GATE)
+            || $article->related_test_slug !== 'iq-test-intelligence-quotient-assessment') {
+            throw new DomainException('iq_article_search_launch_projection_invalid');
         }
     }
 

@@ -2,7 +2,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, workflowSignature, packageSha256, parityPackageSha256 } from './iq-public-article-package.mjs';
+import { inspectPackage, workflowSignature, packageSha256, mensaPackageSha256 } from './iq-public-article-package.mjs';
 import { verifyOnlineCandidates, readOnlinePrestate } from './iq-public-article-online-qa.mjs';
 
 const quote = value => `'${String(value).replaceAll("'", "'\\''")}'`;
@@ -82,7 +82,7 @@ function failedBeforeTransport(env) {
     || env.GITHUB_RUN_ATTEMPT !== '1') throw new Error('IQ_ARTICLE_WORKFLOW_IDENTITY_INVALID');
   const error = new Error('IQ_ARTICLE_PUBLICATION_FAILED');
   error.receipt = { schema: 'iq.public_articles.publish.v1', ok: false, source_commit: env.DEPLOY_SHA,
-    workflow_run_id: env.GITHUB_RUN_ID, workflow_run_attempt: 1, package_sha256: parityPackageSha256,
+    workflow_run_id: env.GITHUB_RUN_ID, workflow_run_attempt: 1, package_sha256: mensaPackageSha256,
     transport_started: false, recovery_completed: true, recovery_status: 'not_required', sanitized: true };
   return error;
 }
@@ -103,7 +103,7 @@ async function cli() {
   try {
     mkdirSync(directory, { recursive: true, mode: 0o700 });
     if (execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim() !== env.DEPLOY_SHA) throw new Error('IQ_ARTICLE_CHECKOUT_SHA_MISMATCH');
-    execution = buildExecution(env, resolve('backend'), parityPackageSha256);
+    execution = buildExecution(env, resolve('backend'), mensaPackageSha256);
     const prestate = await readOnlinePrestate(env.IQ_ARTICLE_PUBLISH_ENVIRONMENT, resolve('backend'), fetch, execution.binding.package_sha256);
     transportStarted = true;
     const receipt = await acceptOnline(execution, publish(execution), env.IQ_ARTICLE_PUBLISH_ENVIRONMENT, resolve('backend'), prestate);

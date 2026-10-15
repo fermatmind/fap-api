@@ -25,6 +25,12 @@ final class IqPublicArticlePackage
     // Keep already-published FAQ projections readable while the new package is promoted.
     public const PREVIOUS_PARITY_SHA256 = 'a2ae9ba665b88d612cea7d84f8a499325a214b5f1b2490fc727167b7bf889fb2';
 
+    public const MENSA_PACKAGE = 'content_assets/iq_public/articles/20261015-mensa-v1';
+
+    public const MENSA_SHA256 = '32230e74353bab576906b97d58c171579163557354abca3b87888edaecd9811c';
+
+    public const MENSA_SLUG = 'mensa-iq-test-free-practice-vs-admission';
+
     private const SCHEMA = 'fermatmind.iq_public_article_package.v1';
 
     private const SLUGS = [
@@ -47,6 +53,7 @@ final class IqPublicArticlePackage
             self::SHA256 => self::PACKAGE,
             self::SEO_SHA256 => self::SEO_PACKAGE,
             self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => self::PARITY_PACKAGE,
+            self::MENSA_SHA256 => self::MENSA_PACKAGE,
             default => throw new DomainException('iq_article_package_digest_mismatch'),
         };
     }
@@ -56,13 +63,14 @@ final class IqPublicArticlePackage
         self::pathForSha($sha);
 
         return match ($sha) {
-            self::SEO_SHA256 => 2, self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => 6, default => 10
+            self::SEO_SHA256, self::MENSA_SHA256 => 2, self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => 6, default => 10
         };
     }
 
     public static function supportsPublishedDigest(?string $sha, string $slug): bool
     {
         return ($sha === self::SHA256 && in_array($slug, self::SLUGS, true))
+            || ($sha === self::MENSA_SHA256 && $slug === self::MENSA_SLUG)
             || ($sha === self::SEO_SHA256 && $slug === self::SLUGS['IQ-03'])
             || (in_array($sha, [self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256], true) && in_array($slug, array_intersect_key(self::SLUGS, array_flip(['IQ-02', 'IQ-03', 'IQ-05'])), true));
     }
@@ -76,6 +84,7 @@ final class IqPublicArticlePackage
         $package = self::pathForSha($expectedSha256);
         $slugs = match ($expectedSha256) {
             self::SEO_SHA256 => ['IQ-03' => self::SLUGS['IQ-03']],
+            self::MENSA_SHA256 => ['IQ-07' => self::MENSA_SLUG],
             self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => array_intersect_key(self::SLUGS, array_flip(['IQ-02', 'IQ-03', 'IQ-05'])),
             default => self::SLUGS,
         };
@@ -107,7 +116,7 @@ final class IqPublicArticlePackage
         $boundaries = [
             'preserve_existing_indexability' => true,
             'preserve_foreign_working_revisions' => true,
-            'new_source_pair_indexable' => false,
+            'new_source_pair_indexable' => $expectedSha256 === self::MENSA_SHA256,
             'search_submission' => false,
             'private_payload_write' => false,
             'eq_write' => false,
@@ -149,7 +158,7 @@ final class IqPublicArticlePackage
             $stem = $id.'-'.$locale;
             if (! isset($slugs[$id]) || ! in_array($locale, ['zh-CN', 'en'], true) || isset($seen[$stem])
                 || ($target['slug'] ?? null) !== $slugs[$id]
-                || ($target['operation'] ?? null) !== ($id === 'IQ-06' ? 'new_source_pair' : 'existing_public_update')) {
+                || ($target['operation'] ?? null) !== (in_array($id, ['IQ-06', 'IQ-07'], true) ? 'new_source_pair' : 'existing_public_update')) {
                 throw new DomainException('iq_article_package_scope_invalid');
             }
             $seen[$stem] = true;
@@ -170,7 +179,7 @@ final class IqPublicArticlePackage
                 || ($verdicts[0]['snapshot_json_sha256'] ?? null) !== hash('sha256', $files[$stem.'.snapshot.json'])) {
                 throw new DomainException('iq_article_review_unbound');
             }
-            $sourceFile = $id === 'IQ-06' ? 'iq-publication-three-fresh-result.json' : 'iq-all-source-fresh-result.json';
+            $sourceFile = in_array($id, ['IQ-06', 'IQ-07'], true) ? 'iq-publication-three-fresh-result.json' : 'iq-all-source-fresh-result.json';
             $sourceReview = json_decode($files[$sourceFile], true, 32, JSON_THROW_ON_ERROR);
             $sourceVerdicts = [];
             foreach ((array) ($sourceReview['pages'] ?? []) as $page) {

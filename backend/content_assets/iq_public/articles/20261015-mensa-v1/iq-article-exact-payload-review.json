@@ -1,0 +1,42 @@
+{
+  "reviewer_role": "fm_independent_reviewer",
+  "review_date": "2026-10-15",
+  "independent_review_count": 1,
+  "scope": "Frozen bilingual IQ-07 content, metadata, FAQ and source correspondence only; engineering, publication, indexing and search outcomes are separate.",
+  "source_commit": "9a15b52b35e0b64371c9533049c38c0549339040",
+  "sources": [
+    "https://www.mensa.org/mensa-iq-challenge/",
+    "https://mensa.no/",
+    "https://test.mensa.no/Home/Test/en",
+    "https://mensa.org.uk/test-your-iq/",
+    "https://mensa.org.uk/mensa-online-iq-test/",
+    "https://www.us.mensa.org/join/mensa-practice-test-review/",
+    "https://www.us.mensa.org/join/testing/",
+    "https://www.mensa.org/getting-your-iq-tested-faqs/",
+    "https://www.mensa.org/national-groups/"
+  ],
+  "limitations": [
+    "Search volume and keyword difficulty unavailable.",
+    "International FAQ has a general online-test statement; current British proctored service is treated as a specific national offering.",
+    "British test-options page had later timeout/403; official search text, Workout and supervised-service pages were cross-checked."
+  ],
+  "schema": "iq.article_exact_payload_review.v1",
+  "targets": [
+    {
+      "page_id": "IQ-07",
+      "locale": "zh-CN",
+      "decision": "PASS",
+      "body_sha256": "7fc4cd86c6c4198362cbefc2697fb6fb40e5fddd1c496cc8fd25e7f65f4dc4de",
+      "candidate_json_sha256": "7a207b2fbc791f77567eac1e3c8c2e61f676e702365e83d490f770fcb0801867",
+      "snapshot_json_sha256": "d8dcda621a26f2dd494a7e11944ba2622356af53147df0a23b73d69ae225f7c1"
+    },
+    {
+      "page_id": "IQ-07",
+      "locale": "en",
+      "decision": "PASS",
+      "body_sha256": "a84c2d963b44698a1f09583356d6ca801e1a77902ad4d75160ee43a7eb7bbb07",
+      "candidate_json_sha256": "fa84a8fd8adadd186890ae783cd3e8f7e19258716f1f760d9656d21a36d4c5d6",
+      "snapshot_json_sha256": "221c8c606d98a40997d7837d7bb6d32329b0cba47d7bc2284342b359856e08a2"
+    }
+  ]
+}

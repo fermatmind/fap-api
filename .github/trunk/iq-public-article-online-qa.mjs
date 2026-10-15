@@ -2,7 +2,7 @@ import { execFileSync, spawn } from 'node:child_process';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readCandidateRows, packageSha256 } from './iq-public-article-package.mjs';
+import { readCandidateRows, packageSha256, mensaPackageSha256 } from './iq-public-article-package.mjs';
 import { closeOwnedBrowser } from './eq-new-source-online-qa.mjs';
 
 const clean = value => String(value).replace(/\s+/gu, ' ').trim();
@@ -314,14 +314,22 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     if (['title', 'excerpt', 'content_md'].some(key => article[key] !== row.snapshot[key])) throw new Error('IQ_ARTICLE_ONLINE_BODY_MISMATCH');
     const faqs = payload.answer_surface_v1?.faq_blocks;
     if (!Array.isArray(faqs) || JSON.stringify(faqs.map(item => ({ question: item.question, answer: item.answer }))) !== JSON.stringify(row.snapshot.faq_items)) throw new Error('IQ_ARTICLE_ONLINE_FAQ_MISMATCH');
-    const qualifications = prestate[`${row.identity.locale}:${row.identity.slug}`];
-    if (!qualifications || Object.entries(qualifications).some(([key, value]) => typeof value !== 'boolean' || article[key] !== value)) throw new Error('IQ_ARTICLE_ONLINE_QUALIFICATION_MISMATCH');
+    const before = prestate[`${row.identity.locale}:${row.identity.slug}`];
+    const searchLaunch = expectedPackageSha256 === mensaPackageSha256;
+    const qualifications = searchLaunch ? { is_indexable: true, sitemap_eligible: true, llms_eligible: true } : before;
+    if (!before || Object.entries(before).some(([,value]) => typeof value !== 'boolean') || !qualifications
+      || Object.entries(qualifications).some(([key, value]) => typeof value !== 'boolean' || article[key] !== value)) throw new Error('IQ_ARTICLE_ONLINE_QUALIFICATION_MISMATCH');
     const path = `/${row.identity.locale === 'en' ? 'en' : 'zh'}/articles/${row.identity.slug}`;
     const seo = JSON.parse(await read(`${api}/api/v0.5/articles/${row.identity.slug}/seo?locale=${row.identity.locale}&org_id=0`, 'application/json', fetcher));
     if (seo.meta?.title !== row.snapshot.seo_title || seo.meta?.description !== row.snapshot.seo_description
       || seo.meta?.og?.title !== row.snapshot.seo_title || seo.meta?.og?.description !== row.snapshot.seo_description || !validCanonical(seo.meta?.canonical, path, environment)
       || seo.meta?.article_authority_v1?.published_revision_backed !== true
       || (!article.is_indexable && !String(seo.meta?.robots).split(/[,\s]+/).includes('noindex'))) throw new Error('IQ_ARTICLE_ONLINE_SEO_MISMATCH');
+    if (searchLaunch && (String(seo.meta.robots).toLowerCase().split(/[,\s]+/).filter(Boolean).sort().join(',') !== 'follow,index'
+      || article.seo_meta?.hreflang_gate_v1?.enabled !== true
+      || article.seo_meta?.hreflang_gate_v1?.policy !== 'reciprocal_counterparts_verified'
+      || !['en', 'zh-CN'].every(locale => validCanonical(seo.meta.alternates?.[locale], `/${locale === 'en' ? 'en' : 'zh'}/articles/${row.identity.slug}`, environment))))
+      throw new Error('IQ_ARTICLE_ONLINE_SEO_MISMATCH');
     let responseRobots = null;
     await read(`${web}${path}`, 'text/html', fetcher, false, headers => { responseRobots = headers.get('x-robots-tag'); });
     const verifyDOM = html => assertSsrCandidate(html, row, seo.meta, environment, responseRobots);

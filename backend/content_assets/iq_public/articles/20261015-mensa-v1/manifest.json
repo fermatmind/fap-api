@@ -1,0 +1,36 @@
+{
+  "schema": "fermatmind.iq_public_article_package.v1",
+  "boundaries": {
+    "preserve_existing_indexability": true,
+    "preserve_foreign_working_revisions": true,
+    "new_source_pair_indexable": true,
+    "search_submission": false,
+    "private_payload_write": false,
+    "eq_write": false
+  },
+  "targets": [
+    {
+      "page_id": "IQ-07",
+      "locale": "zh-CN",
+      "slug": "mensa-iq-test-free-practice-vs-admission",
+      "operation": "new_source_pair"
+    },
+    {
+      "page_id": "IQ-07",
+      "locale": "en",
+      "slug": "mensa-iq-test-free-practice-vs-admission",
+      "operation": "new_source_pair"
+    }
+  ],
+  "files": {
+    "IQ-07-en.json": "fa84a8fd8adadd186890ae783cd3e8f7e19258716f1f760d9656d21a36d4c5d6",
+    "IQ-07-en.md": "a84c2d963b44698a1f09583356d6ca801e1a77902ad4d75160ee43a7eb7bbb07",
+    "IQ-07-en.snapshot.json": "221c8c606d98a40997d7837d7bb6d32329b0cba47d7bc2284342b359856e08a2",
+    "IQ-07-zh-CN.json": "7a207b2fbc791f77567eac1e3c8c2e61f676e702365e83d490f770fcb0801867",
+    "IQ-07-zh-CN.md": "7fc4cd86c6c4198362cbefc2697fb6fb40e5fddd1c496cc8fd25e7f65f4dc4de",
+    "IQ-07-zh-CN.snapshot.json": "d8dcda621a26f2dd494a7e11944ba2622356af53147df0a23b73d69ae225f7c1",
+    "iq-all-source-fresh-result.json": "23e0104a8227fe2935229702afe0783c1d37b80aef66a23980783563d2a91457",
+    "iq-article-exact-payload-review.json": "a7f2cc5e160d9c148693e50c937f66262ee1850f313db4eafbd12438b96dc0f6",
+    "iq-publication-three-fresh-result.json": "23e0104a8227fe2935229702afe0783c1d37b80aef66a23980783563d2a91457"
+  }
+}

@@ -27,6 +27,132 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
 
     private array $receiptFiles = [];
 
+    public function test_mensa_launch_is_indexable_bilingual_reversible_and_leaves_all_existing_content_untouched(): void
+    {
+        $this->seedExisting();
+        $this->publish();
+        $controls = Article::query()->orderBy('id')->get()->map->getAttributes()->all();
+        $controlSeo = ArticleSeoMeta::query()->orderBy('id')->get()->map->getAttributes()->all();
+        $controlRevisions = ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all();
+        [$adapter, $context] = $this->importMensa();
+        $published = $adapter->publish($context);
+        self::assertSame(2, $published['published_count']);
+        self::assertSame(2, $adapter->liveQa($context)['readback_count']);
+        $count = ArticleTranslationRevision::query()->count();
+        self::assertSame(2, $adapter->preflight($context)['readback_count']);
+        self::assertSame(2, $adapter->publish($context)['published_count']);
+        self::assertSame($count, ArticleTranslationRevision::query()->count());
+        $pair = Article::query()->with(['seoMeta', 'publishedRevision'])->where('slug', IqPublicArticlePackage::MENSA_SLUG)->get();
+        self::assertCount(2, $pair);
+        self::assertSame($pair[0]->translation_group_id, $pair[1]->translation_group_id);
+        foreach ($pair as $article) {
+            foreach (['is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible'] as $field) {
+                self::assertTrue($article->$field);
+            }
+            self::assertSame('index,follow', $article->seoMeta->robots);
+            self::assertSame('iq-test-intelligence-quotient-assessment', $article->related_test_slug);
+            self::assertTrue(data_get($article->seoMeta->schema_json, 'editorial_package_v1.hreflang_gate_v1.enabled'));
+            $response = app(\App\Http\Controllers\API\V0_5\Cms\ArticleController::class)->seo(
+                \Illuminate\Http\Request::create('/api/v0.5/articles/'.$article->slug.'/seo', 'GET', ['locale' => $article->locale, 'org_id' => 0]), $article->slug,
+            );
+            self::assertSame(200, $response->getStatusCode());
+            $meta = $response->getData(true)['meta'];
+            foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $route) {
+                self::assertStringEndsWith('/'.$route.'/articles/'.IqPublicArticlePackage::MENSA_SLUG, $meta['alternates'][$locale]);
+            }
+        }
+        $adapter->rollback($context, $published['rollback_reference']);
+        $adapter->rollback($context, $published['rollback_reference']);
+        foreach ($pair as $article) {
+            $article->refresh();
+            foreach (['is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible'] as $field) {
+                self::assertFalse($article->$field);
+            }
+            self::assertNull($article->published_revision_id);
+            self::assertNull($article->seoMeta->robots);
+            self::assertNull(data_get($article->seoMeta->schema_json, 'editorial_package_v1.hreflang_gate_v1'));
+        }
+        [$newAdapter, $newContext] = $this->importMensa('f');
+        self::assertSame(2, $newAdapter->publish($newContext)['published_count']);
+        self::assertSame(2, $newAdapter->liveQa($newContext)['readback_count']);
+        self::assertSame($controls, Article::query()->where('slug', '!=', IqPublicArticlePackage::MENSA_SLUG)->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertSame($controlSeo, ArticleSeoMeta::query()->whereNotIn('article_id', $pair->pluck('id'))->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertSame($controlRevisions, ArticleTranslationRevision::query()->whereNotIn('article_id', $pair->pluck('id'))->orderBy('id')->get()->map->getAttributes()->all());
+    }
+
+    public function test_mensa_launch_refuses_an_existing_operator_identity_before_import(): void
+    {
+        $article = Article::query()->create(['org_id' => 0, 'locale' => 'zh-CN', 'slug' => IqPublicArticlePackage::MENSA_SLUG, 'title' => 'Operator article', 'content_md' => 'Original private draft', 'status' => 'draft']);
+        try {
+            $this->importMensa();
+            self::fail('An operator identity was accepted.');
+        } catch (DomainException $error) {
+            self::assertSame('iq_article_new_identity_collision', $error->getMessage());
+        }
+        self::assertSame('Original private draft', $article->fresh()->content_md);
+        self::assertSame(1, Article::query()->count());
+        self::assertSame(0, ArticleTranslationRevision::query()->count());
+    }
+
+    public function test_mensa_late_locale_failure_rolls_back_both_publication_and_search_flags(): void
+    {
+        [$adapter, $context] = $this->importMensa();
+        $before = Article::query()->orderBy('id')->get()->map->getAttributes()->all();
+        $beforeSeo = ArticleSeoMeta::query()->orderBy('id')->get()->map->getAttributes()->all();
+        $fail = true;
+        Article::saving(function (Article $article) use (&$fail): void {
+            if ($fail && $article->slug === IqPublicArticlePackage::MENSA_SLUG && $article->locale === 'en' && $article->status === 'published') {
+                throw new \RuntimeException('synthetic_mensa_late_save_failure');
+            }
+        });
+        try {
+            $adapter->publish($context);
+            self::fail('The injected publication failure was ignored.');
+        } catch (\RuntimeException $error) {
+            self::assertSame('synthetic_mensa_late_save_failure', $error->getMessage());
+        } finally {
+            $fail = false;
+        }
+        self::assertSame($before, Article::query()->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertSame($beforeSeo, ArticleSeoMeta::query()->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertTrue($adapter->recoverFailedPublication($context));
+        $this->expectExceptionMessage('iq_article_failed_source_requires_new_commit');
+        $adapter->preflight($context);
+    }
+
+    public function test_mensa_rollback_refuses_later_operator_discoverability_changes_atomically(): void
+    {
+        [$adapter, $context] = $this->importMensa();
+        $published = $adapter->publish($context);
+        $english = Article::query()->where('slug', IqPublicArticlePackage::MENSA_SLUG)->where('locale', 'en')->firstOrFail();
+        $english->seoMeta->forceFill(['robots' => 'noindex,nofollow'])->saveQuietly();
+        $before = Article::query()->orderBy('id')->get()->map->getAttributes()->all();
+        try {
+            $adapter->rollback($context, $published['rollback_reference']);
+            self::fail('Operator discoverability was overwritten.');
+        } catch (DomainException $error) {
+            self::assertSame('iq_article_search_launch_projection_invalid', $error->getMessage());
+        }
+        self::assertSame($before, Article::query()->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertSame('noindex,nofollow', $english->seoMeta->fresh()->robots);
+    }
+
+    private function importMensa(string $owner = 'e'): array
+    {
+        $context = new PromotionContext(
+            packageDirectory: base_path(IqPublicArticlePackage::MENSA_PACKAGE), packageSha256: IqPublicArticlePackage::MENSA_SHA256,
+            lane: 'W3', subscope: IqPublicArticlePromotionAdapter::SUBSCOPE, sourceCommit: str_repeat($owner, 40),
+            executorReleaseSha256: str_repeat('b', 64), releasePolicySha256: hash('sha256', PromotionContextFactory::canonicalJson(config('content_promotion.release_policy'))),
+            workflowRunId: $owner === 'e' ? '2001' : '2002', workflowRunAttempt: 1, workflowSignature: str_repeat('c', 64),
+            expectedRowCount: 2, idempotencyKey: hash('sha256', 'mensa-'.$owner),
+        );
+        $adapter = app(IqPublicArticlePromotionAdapter::class);
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $this->previous($context, 'cms_draft_import_receipt', $adapter->draftImport($context));
+
+        return [$adapter, $context];
+    }
+
     protected function tearDown(): void
     {
         foreach ($this->receiptFiles as $file) {

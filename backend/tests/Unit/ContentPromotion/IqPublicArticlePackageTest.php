@@ -14,6 +14,18 @@ final class IqPublicArticlePackageTest extends TestCase
 {
     private ?string $temporaryRoot = null;
 
+    public function test_mensa_package_is_an_independently_reviewed_pair_without_existing_article_updates(): void
+    {
+        $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::MENSA_SHA256);
+        self::assertSame(['IQ-07', 'IQ-07'], array_column($rows, 'page_id'));
+        self::assertSame(['new_source_pair', 'new_source_pair'], array_column($rows, 'operation'));
+        self::assertSame(['zh-CN', 'en'], array_column(array_column($rows, 'identity'), 'locale'));
+        self::assertSame([5, 5], array_map(static fn (array $row): int => count($row['snapshot']['faq_items']), $rows));
+        self::assertTrue(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::MENSA_SHA256, IqPublicArticlePackage::MENSA_SLUG));
+        self::assertFalse(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::MENSA_SHA256, 'iq-test-tool-guide'));
+        self::assertFalse(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::SHA256, IqPublicArticlePackage::MENSA_SLUG));
+    }
+
     protected function tearDown(): void
     {
         if ($this->temporaryRoot !== null) {

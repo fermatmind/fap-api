@@ -5,7 +5,7 @@ import { mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'no
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createServer } from 'node:http';
-import { readCandidateRows, seoPackageSha256 } from './iq-public-article-package.mjs';
+import { readCandidateRows, seoPackageSha256, mensaPackageSha256 } from './iq-public-article-package.mjs';
 import { assertSsrCandidate, articleDom, readOnlinePrestate, verifyOnlineCandidates, renderPage } from './iq-public-article-online-qa.mjs';
 
 const row = { identity: { locale: 'en', slug: 'iq-test-tool-guide' }, snapshot: {
@@ -99,6 +99,29 @@ test('the versioned guide acceptance reads exactly its bilingual pair and retain
   }, prestate, seoPackageSha256);
   assert.deepEqual(rendered, ['zh-CN', 'en']);
   assert.deepEqual(result, { api_readback_count: 2, seo_readback_count: 2, ssr_readback_count: 2, environment: 'production' });
+});
+test('Mensa search launch verifies only the new pair and rejects broken discovery on the final locale', async () => {
+  const candidates = readCandidateRows(backend, mensaPackageSha256);
+  const prestate = await readOnlinePrestate('production', backend, onlineFetcher(undefined, true, candidates), mensaPackageSha256);
+  const launched = (payload, candidate) => {
+    if (payload.article) Object.assign(payload.article, { is_indexable: true, sitemap_eligible: true, llms_eligible: true,
+      seo_meta: { hreflang_gate_v1: { enabled: true, policy: 'reciprocal_counterparts_verified' } } });
+    if (payload.meta) Object.assign(payload.meta, { robots: 'index,follow', alternates: Object.fromEntries(['en', 'zh-CN'].map(locale =>
+      [locale, `https://fermatmind.com/${locale === 'en' ? 'en' : 'zh'}/articles/${candidate.identity.slug}`])) });
+  };
+  const renderer = value => renderedFixture(candidates.find(candidate => candidate.identity.locale ===
+    (new URL(value).pathname.startsWith('/en/') ? 'en' : 'zh-CN'))).replace('noindex,nofollow,noarchive,nocache', 'index,follow');
+  const verify = mutate => verifyOnlineCandidates('production', backend, onlineFetcher((payload, candidate) => {
+    launched(payload, candidate);
+    if (candidate.identity.locale === 'en') mutate?.(payload);
+  }, false, candidates), renderer, prestate, mensaPackageSha256);
+  assert.deepEqual(await verify(), { api_readback_count: 2, seo_readback_count: 2, ssr_readback_count: 2, environment: 'production' });
+  for (const mutation of [
+    payload => { if (payload.article) payload.article.sitemap_eligible = false; },
+    payload => { if (payload.article) payload.article.seo_meta.hreflang_gate_v1.enabled = false; },
+    payload => { if (payload.meta) delete payload.meta.alternates['zh-CN']; },
+    payload => { if (payload.meta) payload.meta.robots = 'noindex,follow'; },
+  ]) await assert.rejects(verify(mutation), /IQ_ARTICLE_ONLINE_(?:QUALIFICATION|SEO)_MISMATCH/);
 });
 test('the last locale cannot pass with truncated FAQ, authority drift or changed qualifications', async () => {
   const prestate = await readOnlinePrestate('production', backend, onlineFetcher(undefined, true));
