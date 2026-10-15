@@ -17,6 +17,8 @@ final class MigrationPurityGateTest extends TestCase
         '2026_10_15_080000_activate_iq_article_hreflang.php',
         // ReviewedChineseArticleDiscoverabilityMigrationTest covers native review, source locks and metadata-only rollback.
         '2026_10_15_060000_activate_reviewed_c07_c11_chinese_indexability.php',
+        // Exact reviewed English259/P853 metadata only; focused test covers approval, source and cache recovery.
+        '2026_10_15_091000_activate_reviewed_c07_english_indexability.php',
         // IqEnglishArticleDiscoverabilityMigrationTest covers exact scope, source/review checks and atomic rollback.
         '2026_10_15_030000_activate_iq_english_article_indexability.php',
         '2026_02_13_020000_add_identity_unique_to_idempotency_keys.php',
