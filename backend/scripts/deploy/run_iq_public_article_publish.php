@@ -88,16 +88,17 @@ try {
         putenv($name.'='.$request[$field]);
         $_SERVER[$name] = $_ENV[$name] = (string) $request[$field];
     }
-    putenv('CONTENT_PROMOTION_EXPECTED_ROW_COUNT=10');
-    $_SERVER['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = $_ENV['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = '10';
     // Previous receipts come solely from this driver's immutable phase chain.
     putenv('CONTENT_PROMOTION_PREVIOUS_RECEIPT');
     unset($_SERVER['CONTENT_PROMOTION_PREVIOUS_RECEIPT'], $_ENV['CONTENT_PROMOTION_PREVIOUS_RECEIPT']);
     require $root.'/vendor/autoload.php';
+    $rowCount = IqPublicArticlePackage::rowCountForSha($request['package_sha256']);
+    putenv('CONTENT_PROMOTION_EXPECTED_ROW_COUNT='.$rowCount);
+    $_SERVER['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = $_ENV['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = (string) $rowCount;
     $app = require $root.'/bootstrap/app.php';
     $app->make(Kernel::class)->bootstrap();
     $context = $app->make(PromotionContextFactory::class)->make(
-        IqPublicArticlePackage::PACKAGE, $request['package_sha256'], 'W3', IqPublicArticlePromotionAdapter::SUBSCOPE,
+        IqPublicArticlePackage::pathForSha($request['package_sha256']), $request['package_sha256'], 'W3', IqPublicArticlePromotionAdapter::SUBSCOPE,
     );
     $app->make(IqPublicArticlePackage::class)->read($root, $context->packageSha256);
     $receiptRoot = $root.'/storage/app/content-promotion/iq-public-articles';
@@ -139,17 +140,17 @@ try {
         }
         $path = $directory.'/'.$phase.'.json';
         $result = $app->make(ExactPackagePromotionService::class)->execute($context, $phase, $path);
-        if (($result['receipt']['expected_count'] ?? null) !== 10 || ($result['receipt']['readback_count'] ?? null) !== 10) {
+        if (($result['receipt']['expected_count'] ?? null) !== $rowCount || ($result['receipt']['readback_count'] ?? null) !== $rowCount) {
             throw new DomainException('iq_article_phase_count_invalid');
         }
-        $completed[] = ['phase' => $phase, 'receipt_sha256' => $result['receipt_sha256'], 'readback_count' => 10];
+        $completed[] = ['phase' => $phase, 'receipt_sha256' => $result['receipt_sha256'], 'readback_count' => $rowCount];
         $previous = $path;
     }
     echo json_encode([
         'schema' => 'iq.public_articles.publish.v1', 'ok' => true,
         'source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId,
         'workflow_run_attempt' => 1, 'package_sha256' => $context->packageSha256,
-        'published_count' => 10, 'phases' => $completed,
+        'published_count' => $rowCount, 'phases' => $completed,
         'elapsed_seconds' => round(microtime(true) - $started, 3), 'sanitized' => true,
     ], JSON_THROW_ON_ERROR).PHP_EOL;
 } catch (Throwable $error) {

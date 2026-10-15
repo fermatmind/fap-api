@@ -35,6 +35,56 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         parent::tearDown();
     }
 
+    public function test_guide_version_upgrade_preserves_other_articles_foreign_drafts_and_qualifications(): void
+    {
+        $this->seedExisting();
+        [$adapter] = $this->publish();
+        $controls = Article::query()->where('slug', '!=', 'iq-test-tool-guide')->orderBy('id')->get()->map->getAttributes()->all();
+        $controlSeo = ArticleSeoMeta::query()->whereNotIn('article_id', Article::query()->where('slug', 'iq-test-tool-guide')->pluck('id'))->orderBy('id')->get()->map->getAttributes()->all();
+        $before = Article::query()->where('slug', 'iq-test-tool-guide')->orderBy('id')->get()->keyBy('id')->map->getAttributes()->all();
+        $drafts = ArticleTranslationRevision::query()->where('revision_status', ArticleTranslationRevision::STATUS_MACHINE_DRAFT)->orderBy('id')->get()->map->getAttributes()->all();
+        $legacy = $this->context();
+        $context = new PromotionContext(
+            packageDirectory: base_path(IqPublicArticlePackage::SEO_PACKAGE), packageSha256: IqPublicArticlePackage::SEO_SHA256,
+            lane: $legacy->lane, subscope: $legacy->subscope, sourceCommit: str_repeat('e', 40),
+            executorReleaseSha256: $legacy->executorReleaseSha256, releasePolicySha256: $legacy->releasePolicySha256,
+            workflowRunId: '1002', workflowRunAttempt: 1, workflowSignature: $legacy->workflowSignature,
+            expectedRowCount: 2, idempotencyKey: hash('sha256', 'bilingual-guide-refresh'),
+        );
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $draft = $adapter->draftImport($context);
+        self::assertSame(2, $draft['written_count']);
+        self::assertSame(0, $draft['created_count']);
+        $this->previous($context, 'cms_draft_import_receipt', $draft);
+        $publication = $adapter->publish($context);
+        self::assertSame(2, $publication['published_count']);
+        self::assertSame(2, $adapter->liveQa($context)['readback_count']);
+        $revisionCount = ArticleTranslationRevision::query()->count();
+        self::assertSame(2, $adapter->publish($context)['published_count']);
+        self::assertSame($revisionCount, ArticleTranslationRevision::query()->count());
+        foreach (app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::SEO_SHA256) as $row) {
+            $article = Article::query()->with(['seoMeta', 'publishedRevision'])->where($row['identity'])->firstOrFail();
+            self::assertSame($row['snapshot']['content_md'], $article->content_md);
+            self::assertSame(IqPublicArticlePackage::SEO_PACKAGE, $article->publishedRevision->authority_source_package);
+            foreach (['is_indexable', 'sitemap_eligible', 'llms_eligible', 'working_revision_id'] as $field) {
+                if ($field !== 'working_revision_id' || (int) $before[$article->id][$field] !== (int) $before[$article->id]['published_revision_id']) {
+                    self::assertSame($before[$article->id][$field], $article->getAttributes()[$field]);
+                }
+            }
+        }
+        self::assertSame($controls, Article::query()->where('slug', '!=', 'iq-test-tool-guide')->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertSame($controlSeo, ArticleSeoMeta::query()->whereNotIn('article_id', Article::query()->where('slug', 'iq-test-tool-guide')->pluck('id'))->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertSame($drafts, ArticleTranslationRevision::query()->where('revision_status', ArticleTranslationRevision::STATUS_MACHINE_DRAFT)->orderBy('id')->get()->map->getAttributes()->all());
+        $adapter->rollback($context, $publication['rollback_reference']);
+        foreach ($before as $id => $attributes) {
+            $article = Article::query()->findOrFail($id);
+            foreach (['title', 'content_md', 'published_revision_id', 'working_revision_id', 'source_version_hash', 'translated_from_version_hash'] as $field) {
+                self::assertSame($attributes[$field], $article->getAttributes()[$field]);
+            }
+        }
+        self::assertSame($controls, Article::query()->where('slug', '!=', 'iq-test-tool-guide')->orderBy('id')->get()->map->getAttributes()->all());
+    }
+
     public function test_bilingual_publish_and_rollback_preserve_foreign_drafts_and_indexability(): void
     {
         // Publication and recovery evict derived sitemap reads but must preserve a live warmer's mutex.
@@ -476,6 +526,25 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         config(['content_promotion.execution.executor_release_sha256' => str_repeat('e', 64)]);
         $this->expectExceptionMessage('workflow_identity_signature_invalid');
         $factory->make(IqPublicArticlePackage::PACKAGE, $context->packageSha256, 'W3', IqPublicArticlePromotionAdapter::SUBSCOPE);
+    }
+
+    public function test_guide_signature_cannot_reuse_the_legacy_ten_row_scope(): void
+    {
+        $context = $this->context();
+        $key = str_repeat('guide-test-key', 4);
+        config(['content_promotion.workflow_identity_key' => $key]);
+        foreach ([
+            'source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId, 'workflow_run_attempt' => 1, 'expected_row_count' => 2,
+            'executor_release_sha256' => $context->executorReleaseSha256, 'release_policy_sha256' => $context->releasePolicySha256,
+            'workflow_signature' => hash_hmac('sha256', implode('|', ['content-promotion-v2', $context->sourceCommit, $context->workflowRunId, '1', 'W3', IqPublicArticlePromotionAdapter::SUBSCOPE, IqPublicArticlePackage::SEO_SHA256, $context->releasePolicySha256, '2', $context->executorReleaseSha256]), $key),
+        ] as $field => $value) {
+            config(['content_promotion.execution.'.$field => $value]);
+        }
+        $factory = app(PromotionContextFactory::class);
+        self::assertSame(2, $factory->make(IqPublicArticlePackage::SEO_PACKAGE, IqPublicArticlePackage::SEO_SHA256, 'W3', IqPublicArticlePromotionAdapter::SUBSCOPE)->expectedRowCount);
+        config(['content_promotion.execution.expected_row_count' => 10]);
+        $this->expectExceptionMessage('workflow_identity_signature_invalid');
+        $factory->make(IqPublicArticlePackage::SEO_PACKAGE, IqPublicArticlePackage::SEO_SHA256, 'W3', IqPublicArticlePromotionAdapter::SUBSCOPE);
     }
 
     public function test_same_sha_new_run_reuses_success_without_old_snapshot_recovery_rights(): void
@@ -965,7 +1034,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         $receipt = [
             'receipt_kind' => $kind, 'result' => 'SUCCEEDED', 'lane' => $context->lane, 'subscope' => $context->subscope,
             'package_sha256' => $context->packageSha256, 'source_commit' => $context->sourceCommit, 'release_policy_sha256' => $context->releasePolicySha256,
-            'expected_count' => 10, 'target_state_sha256' => $result['target_state_sha256'],
+            'expected_count' => $context->expectedRowCount, 'target_state_sha256' => $result['target_state_sha256'],
             'workflow_run_id' => $context->workflowRunId, 'workflow_run_attempt' => $context->workflowRunAttempt, 'executor_release_sha256' => $context->executorReleaseSha256,
         ];
         $receipt['receipt_content_sha256'] = hash('sha256', PromotionContextFactory::canonicalJson($receipt));

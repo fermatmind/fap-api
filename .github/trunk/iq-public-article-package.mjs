@@ -7,6 +7,8 @@ import { isEqOnlyPromotionRegistration } from './eq-new-source-package.mjs';
 
 export const packagePath = 'content_assets/iq_public/articles/20261010-v1';
 export const packageSha256 = 'ca6612bf60a63e2f8f253658587e0299997e82a3dfecad11994ee7f21d79fcad';
+export const seoPackagePath = 'content_assets/iq_public/articles/20261015-seo-v1';
+export const seoPackageSha256 = 'b9755f9564f3ff6b39a5c987cac2c49d0fda4c00b3ed2713b6612fb5d361c041';
 export const executorPaths = [
   "app/Console/Commands/ContentPromoteExactPackage.php",
   "app/Http/Controllers/API/V0_5/Cms/ArticleController.php",
@@ -36,22 +38,24 @@ export const executorPaths = [
   "scripts/deploy/run_iq_public_article_publish.php"
 ];
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
-export function readCandidateRows(backendRoot) {
+export function readCandidateRows(backendRoot, expectedPackageSha256 = packageSha256) {
   const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/Cms/ArticleBodyHeadingGuard.php"; require $argv[1]."/app/Services/ContentPromotion/IqPublicArticlePackage.php"; echo json_encode((new App\\Services\\ContentPromotion\\IqPublicArticlePackage(new App\\Services\\Cms\\ArticleBodyHeadingGuard))->read($argv[1],$argv[2]), JSON_THROW_ON_ERROR);';
-  return JSON.parse(execFileSync('php', ['-r', code, realpathSync(backendRoot), packageSha256], { encoding: 'utf8', timeout: 30000, maxBuffer: 2000000, stdio: ['pipe', 'pipe', 'pipe'] }));
+  return JSON.parse(execFileSync('php', ['-r', code, realpathSync(backendRoot), expectedPackageSha256], { encoding: 'utf8', timeout: 30000, maxBuffer: 2000000, stdio: ['pipe', 'pipe', 'pipe'] }));
 }
-export function inspectPackage(backendRoot) {
+export function inspectPackage(backendRoot, expectedPackageSha256 = packageSha256) {
   const root = realpathSync(backendRoot);
-  if (readCandidateRows(root).length !== 10) throw new Error('IQ_ARTICLE_PACKAGE_SCOPE_INVALID');
+  const selected = expectedPackageSha256 === packageSha256 ? { path: packagePath, count: 10 }
+    : expectedPackageSha256 === seoPackageSha256 ? { path: seoPackagePath, count: 2 } : null;
+  if (!selected || readCandidateRows(root, expectedPackageSha256).length !== selected.count) throw new Error('IQ_ARTICLE_PACKAGE_SCOPE_INVALID');
   const material = executorPaths.map(path => {
     const file = resolve(root, path);
     const stat = lstatSync(file);
     if (!stat.isFile() || stat.nlink !== 1 || realpathSync(file) !== file) throw new Error('IQ_ARTICLE_EXECUTOR_INVALID');
     return `${path}\n${sha(readFileSync(file))}\n`;
   }).join('');
-  return { schema: 'iq.public_articles.binding.v1', package_path: packagePath, package_sha256: packageSha256,
+  return { schema: 'iq.public_articles.binding.v1', package_path: selected.path, package_sha256: expectedPackageSha256,
     executor_release_sha256: sha(material), release_policy_sha256: sha(JSON.stringify(canonical(JSON.parse(readFileSync(resolve(root, 'config/content_promotion_release_policy.v2.json'), 'utf8'))))),
-    lane: 'W3', subscope: 'IQ-PUBLIC-ARTICLES', expected_row_count: 10 };
+    lane: 'W3', subscope: 'IQ-PUBLIC-ARTICLES', expected_row_count: selected.count };
 }
 export function workflowSignature(binding, key, source, run, attempt) {
   if (typeof key !== 'string' || key.length < 32 || !/^[a-f0-9]{40}$/.test(source) || !/^[1-9][0-9]*$/.test(String(run)) || attempt !== 1) throw new Error('IQ_ARTICLE_WORKFLOW_IDENTITY_INVALID');
@@ -59,6 +63,11 @@ export function workflowSignature(binding, key, source, run, attempt) {
   return createHmac('sha256', key).update(material).digest('hex');
 }
 export function isIqArticleOnlyPromotionRegistration(before, after) {
+  const refreshRoot = `        '${seoPackagePath}',\n`;
+  if (after.includes(refreshRoot) && !before.includes(refreshRoot)) {
+    const without = after.replace(refreshRoot, '');
+    return without === before || isIqArticleOnlyPromotionRegistration(before, without);
+  }
   const root = `        '${packagePath}',\n`;
   const lane = ", 'IQ-PUBLIC-ARTICLES' => 'audit_compatible'";
   if (!after.includes(root) || !after.includes(lane) || before.includes(root) || before.includes(lane)) return false;

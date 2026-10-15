@@ -1,0 +1,35 @@
+{
+  "schema": "fermatmind.iq_public_article_package.v1",
+  "boundaries": {
+    "preserve_existing_indexability": true,
+    "preserve_foreign_working_revisions": true,
+    "new_source_pair_indexable": false,
+    "search_submission": false,
+    "private_payload_write": false,
+    "eq_write": false
+  },
+  "targets": [
+    {
+      "page_id": "IQ-03",
+      "locale": "zh-CN",
+      "slug": "iq-test-tool-guide",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "en",
+      "slug": "iq-test-tool-guide",
+      "operation": "existing_public_update"
+    }
+  ],
+  "files": {
+    "IQ-03-en.json": "1d0f47c55626920189e573f7f18b9947e980f184958f37d3072a09847f12fb5a",
+    "IQ-03-en.md": "6c60862673d4fa3e8410fbe462691c9f87e2d88bf413c4d62bf2a582cd719d6a",
+    "IQ-03-en.snapshot.json": "059e14f3dfd745838c083f017dc81e386b3094c768570ade991d7dac73e528b9",
+    "IQ-03-zh-CN.json": "f78d36bd744d413daaf36c2b39b4f445bc83476de77eadddd4256ba92c941568",
+    "IQ-03-zh-CN.md": "15ff1f19153e9e0be180cc67f5f944205e4b7f3dddf9db98e376e1036048b2da",
+    "IQ-03-zh-CN.snapshot.json": "388197a9281d86030e5c501cddf4d7d733178ab85871a015744b56b9848e6263",
+    "iq-all-source-fresh-result.json": "8c156d91f086c6460e26ee86e48e21326fa4d8823c69565bbbe536cccd1b3168",
+    "iq-article-exact-payload-review.json": "524b9fa9e70c834a092cfd62a2c3734568644b051f77b5511e46847d14a8209b"
+  }
+}

@@ -5,7 +5,7 @@ import { mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'no
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createServer } from 'node:http';
-import { readCandidateRows } from './iq-public-article-package.mjs';
+import { readCandidateRows, seoPackageSha256 } from './iq-public-article-package.mjs';
 import { assertSsrCandidate, articleDom, readOnlinePrestate, verifyOnlineCandidates, renderPage } from './iq-public-article-online-qa.mjs';
 
 const row = { identity: { locale: 'en', slug: 'iq-test-tool-guide' }, snapshot: {
@@ -52,11 +52,11 @@ function renderedFixture(candidate) {
   links.push(...[...candidate.snapshot.content_md.matchAll(/\/(?:zh|en)\/[a-z0-9][a-z0-9/-]*/g)].map(match => match[0]));
   return `<html><head><meta charset="utf-8"><title>${escapeHtml(candidate.snapshot.seo_title)}</title><meta name="description" content="${escapeHtml(candidate.snapshot.seo_description)}"><meta name="robots" content="noindex,nofollow,noarchive,nocache"><link rel="canonical" href="https://fermatmind.com${path}"></head><body><h1>${escapeHtml(candidate.snapshot.title)}</h1><article data-testid="article-detail-content">${escapeHtml(body)}${links.map(href => `<a href="${escapeHtml(href)}">${escapeHtml(href)}</a>`).join('')}</article></body></html>`;
 }
-function onlineFetcher(mutate = () => {}, before = false) {
+function onlineFetcher(mutate = () => {}, before = false, candidates = rows) {
   return async (value, init) => {
     assert.equal(init.redirect, 'error');
     const url = new URL(value);
-    const candidate = rows.find(item => url.pathname.includes(item.identity.slug) && url.searchParams.get('locale') === item.identity.locale);
+    const candidate = candidates.find(item => url.pathname.includes(item.identity.slug) && url.searchParams.get('locale') === item.identity.locale);
     if (url.hostname === 'fermatmind.com') return new Response('<html></html>', { headers: { 'content-type': 'text/html' } });
     assert.ok(candidate);
     if (before && candidate.operation === 'new_source_pair') return new Response('', { status: 404 });
@@ -85,6 +85,20 @@ test('online acceptance traverses all ten exact API, SEO and rendered candidates
   }, prestate);
   assert.deepEqual(result, { api_readback_count: 10, seo_readback_count: 10, ssr_readback_count: 10, environment: 'production' });
   assert.equal(renderCount, 10);
+});
+test('the versioned guide acceptance reads exactly its bilingual pair and retains prestate', async () => {
+  const candidates = readCandidateRows(backend, seoPackageSha256);
+  const fetcher = onlineFetcher(undefined, false, candidates);
+  const prestate = await readOnlinePrestate('production', backend, fetcher, seoPackageSha256);
+  const rendered = [];
+  const result = await verifyOnlineCandidates('production', backend, fetcher, value => {
+    const url = new URL(value);
+    const candidate = candidates.find(item => item.identity.locale === (url.pathname.startsWith('/en/') ? 'en' : 'zh-CN'));
+    rendered.push(candidate.identity.locale);
+    return renderedFixture(candidate);
+  }, prestate, seoPackageSha256);
+  assert.deepEqual(rendered, ['zh-CN', 'en']);
+  assert.deepEqual(result, { api_readback_count: 2, seo_readback_count: 2, ssr_readback_count: 2, environment: 'production' });
 });
 test('the last locale cannot pass with truncated FAQ, authority drift or changed qualifications', async () => {
   const prestate = await readOnlinePrestate('production', backend, onlineFetcher(undefined, true));

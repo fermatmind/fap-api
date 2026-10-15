@@ -49,6 +49,32 @@ final class IqPublicArticlePackageTest extends TestCase
         $this->reader()->read(dirname(__DIR__, 3), str_repeat('a', 64));
     }
 
+    public function test_reviewed_seo_refresh_is_limited_to_the_existing_bilingual_guide(): void
+    {
+        $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::SEO_SHA256);
+        self::assertSame([
+            ['org_id' => 0, 'slug' => 'iq-test-tool-guide', 'locale' => 'zh-CN'],
+            ['org_id' => 0, 'slug' => 'iq-test-tool-guide', 'locale' => 'en'],
+        ], array_column($rows, 'identity'));
+        self::assertSame(['existing_public_update', 'existing_public_update'], array_column($rows, 'operation'));
+        self::assertSame(2, IqPublicArticlePackage::rowCountForSha(IqPublicArticlePackage::SEO_SHA256));
+        self::assertSame(IqPublicArticlePackage::SEO_PACKAGE, IqPublicArticlePackage::pathForSha(IqPublicArticlePackage::SEO_SHA256));
+        self::assertTrue(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::SHA256, 'what-is-iq-and-how-it-is-measured'));
+        self::assertTrue(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::SEO_SHA256, 'iq-test-tool-guide'));
+        self::assertFalse(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::SEO_SHA256, 'iq-test-score-and-limits-explained'));
+        self::assertFalse(IqPublicArticlePackage::supportsPublishedDigest(str_repeat('f', 64), 'iq-test-tool-guide'));
+    }
+
+    public function test_changed_seo_refresh_cannot_reuse_the_frozen_review(): void
+    {
+        $this->temporaryRoot = sys_get_temp_dir().'/iq-guide-refresh-test-'.bin2hex(random_bytes(8));
+        (new Filesystem)->copyDirectory(dirname(__DIR__, 3).'/'.IqPublicArticlePackage::SEO_PACKAGE, $this->temporaryRoot.'/'.IqPublicArticlePackage::SEO_PACKAGE);
+        file_put_contents($this->temporaryRoot.'/'.IqPublicArticlePackage::SEO_PACKAGE.'/IQ-03-en.md', "\nChanged copy\n", FILE_APPEND);
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessage('iq_article_file_digest_mismatch');
+        $this->reader()->read($this->temporaryRoot, IqPublicArticlePackage::SEO_SHA256);
+    }
+
     public function test_changed_body_is_rejected_before_any_candidate_is_returned(): void
     {
         $root = $this->copyPackage();

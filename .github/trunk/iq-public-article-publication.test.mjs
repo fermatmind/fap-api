@@ -4,7 +4,7 @@ import { createHash, createHmac } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
+import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, seoPackageSha256, seoPackagePath, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
 import { buildExecution, publish, recoveryFailure, acceptOnline } from './iq-public-article-publish.mjs';
 
 const backend = fileURLToPath(new URL('../../backend/', import.meta.url));
@@ -22,6 +22,30 @@ test('binding reads all ten reviewed payloads through the sole PHP package codec
   assert.equal(rows.length, 10);
   assert.deepEqual(rows.map(row => row.snapshot.faq_items.length), [7, 7, 5, 5, 5, 5, 5, 5, 9, 9]);
   assert.equal(inspectPackage(backend).package_sha256, packageSha256);
+});
+test('the SEO refresh binds only the two reviewed guide versions and rejects a ten-row receipt', () => {
+  const current = buildExecution(env, backend, seoPackageSha256);
+  assert.equal(current.binding.package_path, seoPackagePath);
+  assert.equal(current.binding.expected_row_count, 2);
+  assert.deepEqual(readCandidateRows(backend, seoPackageSha256).map(row => [row.identity.slug, row.identity.locale]),
+    [['iq-test-tool-guide', 'zh-CN'], ['iq-test-tool-guide', 'en']]);
+  const response = { ...success(), package_sha256: seoPackageSha256, published_count: 2,
+    phases: success().phases.map(row => ({ ...row, readback_count: 2 })) };
+  assert.equal(publish(current, () => ({ status: 0, stdout: JSON.stringify(response) })).published_count, 2);
+  const modes = [];
+  assert.throws(() => publish(current, request => {
+    modes.push(request.mode);
+    return { status: 0, stdout: JSON.stringify({ ...response, published_count: 10 }) };
+  }), /IQ_ARTICLE_PUBLICATION_FAILED/);
+  assert.deepEqual(modes, ['publish', 'recover']);
+});
+test('a version upgrade admits only its fixed package root without broadening capabilities', () => {
+  const after = readFileSync(`${backend}/config/content_promotion.php`, 'utf8');
+  const before = after.replace(`        '${seoPackagePath}',\n`, '');
+  assert.equal(isIqArticleOnlyPromotionRegistration(before, after), true);
+  assert.equal(isIqArticleOnlyPromotionRegistration(before, `${after}\n`), false);
+  const cli = readFileSync(new URL('./iq-public-article-publish.mjs', import.meta.url), 'utf8');
+  assert.match(cli, /buildExecution\(env, resolve\('backend'\), seoPackageSha256\)/);
 });
 test('the real PHP driver and Node workflow bind identical executor files and hashes', () => {
   const source = readFileSync(`${backend}/scripts/deploy/run_iq_public_article_publish.php`, 'utf8');

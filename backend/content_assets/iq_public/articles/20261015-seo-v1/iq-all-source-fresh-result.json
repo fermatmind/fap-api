@@ -1,0 +1,29 @@
+{
+  "schema": "iq.source_review.v1",
+  "review_role": "fm_independent_reviewer",
+  "sources": [
+    "https://gwern.net/doc/iq/2018-scharfen.pdf",
+    "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+    "https://test.mensa.no/Home/Test/en",
+    "https://fermatmind.com/en/tests/iq-test-intelligence-quotient-assessment",
+    "https://fermatmind.com/zh/tests/iq-test-intelligence-quotient-assessment"
+  ],
+  "pages": [
+    {
+      "page_id": "IQ-03",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "decision": "PASS",
+          "body_sha256": "15ff1f19153e9e0be180cc67f5f944205e4b7f3dddf9db98e376e1036048b2da"
+        },
+        {
+          "locale": "en",
+          "decision": "PASS",
+          "body_sha256": "6c60862673d4fa3e8410fbe462691c9f87e2d88bf413c4d62bf2a582cd719d6a"
+        }
+      ]
+    }
+  ],
+  "frozen_candidate_version": "v2"
+}
