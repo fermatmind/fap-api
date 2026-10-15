@@ -13,6 +13,8 @@ final class MigrationPurityGateTest extends TestCase
      * @var list<string>
      */
     private const LEGACY_FILE_ALLOWLIST = [
+        // IqEnglishArticleDiscoverabilityMigrationTest covers exact scope, source/review checks and atomic rollback.
+        '2026_10_15_030000_activate_iq_english_article_indexability.php',
         '2026_02_13_020000_add_identity_unique_to_idempotency_keys.php',
         '2026_02_14_235000_add_is_active_to_organization_members_table.php',
         '2026_04_23_000100_add_article_translation_contract_v1.php',
