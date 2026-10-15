@@ -18,6 +18,15 @@ final class IqEqTopicPrerequisites
 
     public function assertPublished(bool $lock = false): void
     {
+        $translations = [];
+        foreach ($this->articles->read(base_path(), IqPublicArticlePackage::PARITY_SHA256) as $row) {
+            $translations[$row['identity']['locale'].':'.$row['identity']['slug']] = $row;
+        }
+        $seoExamples = [];
+        foreach ($this->articles->read(base_path(), IqPublicArticlePackage::SEO_SHA256) as $row) {
+            $seoExamples[$row['identity']['locale'].':'.$row['identity']['slug']] = $row;
+        }
+        // Keep all five existing dependencies; only the three translated pairs have a new edition.
         foreach ($this->articles->read(base_path(), IqPublicArticlePackage::SHA256) as $row) {
             $matches = Article::query()->withoutGlobalScopes()->withTrashed()->where($row['identity'])->when($lock, fn ($query) => $query->lockForUpdate())->get();
             $article = $matches->first();
@@ -28,6 +37,14 @@ final class IqEqTopicPrerequisites
             }
             $article->setRelation('seoMeta', $article->seoMeta()->when($lock, fn ($query) => $query->lockForUpdate())->first());
             $article->setRelation('publishedRevision', $article->publishedRevision()->when($lock, fn ($query) => $query->lockForUpdate())->first());
+            $expectedSha = IqPublicArticlePackage::SHA256;
+            if ($article->publishedRevision?->authority_package_sha256 === IqPublicArticlePackage::PARITY_SHA256) {
+                $row = $translations[$article->locale.':'.$article->slug] ?? throw new DomainException('iq_eq_topic_required_article_authority_drift');
+                $expectedSha = IqPublicArticlePackage::PARITY_SHA256;
+            } elseif ($article->publishedRevision?->authority_package_sha256 === IqPublicArticlePackage::SEO_SHA256) {
+                $row = $seoExamples[$article->locale.':'.$article->slug] ?? throw new DomainException('iq_eq_topic_required_article_authority_drift');
+                $expectedSha = IqPublicArticlePackage::SEO_SHA256;
+            }
             foreach (['title', 'excerpt', 'content_md'] as $field) {
                 if ($article->{$field} !== $row['snapshot'][$field]) {
                     throw new DomainException('iq_eq_topic_required_article_copy_drift');
@@ -45,14 +62,14 @@ final class IqEqTopicPrerequisites
             $binding = data_get($metadata, 'iq_article_exact_package_v1');
             if (! $revision || (int) $revision->article_id !== (int) $article->id || (int) $revision->org_id !== 0
                 || $revision->locale !== $article->locale || $revision->revision_status !== 'published'
-                || $revision->authority_package_sha256 !== IqPublicArticlePackage::SHA256
-                || $revision->authority_source_package !== IqPublicArticlePackage::PACKAGE
+                || $revision->authority_package_sha256 !== $expectedSha
+                || $revision->authority_source_package !== IqPublicArticlePackage::pathForSha($expectedSha)
                 || $revision->authority_asset_key !== $article->locale.':'.$article->slug
                 || $revision->authority_source_hash !== $row['snapshot_sha256']
                 || ! $source || $revision->source_version_hash !== $source->computeSourceVersionHash()
                 || $article->source_version_hash !== $article->computeSourceVersionHash() || $article->content_html !== null
                 || ($article->locale === 'en' && $revision->translated_from_version_hash !== $source->computeSourceVersionHash())
-                || ! is_array($binding) || ($binding['package_sha256'] ?? null) !== IqPublicArticlePackage::SHA256
+                || ! is_array($binding) || ($binding['package_sha256'] ?? null) !== $expectedSha
                 || ($binding['revision_id'] ?? null) !== (int) $revision->id || ($binding['snapshot_sha256'] ?? null) !== $row['snapshot_sha256']
                 || PromotionContextFactory::canonicalJson((array) data_get($revision->authority_metadata_json, 'snapshot')) !== PromotionContextFactory::canonicalJson($row['snapshot'])
                 || PromotionContextFactory::canonicalJson((array) data_get($metadata, 'answer_surface_v1.faq_items')) !== PromotionContextFactory::canonicalJson($row['snapshot']['faq_items'])) {

@@ -142,7 +142,7 @@ test('business publication failure after core activation retains LKG baseline an
       'backend/content_assets/eq_public/candidate/20261009-new-articles/assets.json',
       'backend/content_assets/eq_public/candidate/20261010-existing-pages/assets.json',
       'backend/content_assets/iq_public/entry/20261009-v1/assets.json',
-      'backend/content_assets/iq_public/articles/20261010-v1/assets.json',
+      'backend/content_assets/iq_public/articles/20261015-en-parity/assets.json',
       'backend/content_assets/iq_public/topics/20261010-v1/assets.json',
     ]});
   for(const operation of ['eq_new_source_articles_publish','eq_existing_public_pages_publish','eq_new_english_articles_publish','iq_public_scale_publish','iq_public_articles_publish','iq_eq_topic_publish']) assert.equal(result.operations[operation],true,operation);

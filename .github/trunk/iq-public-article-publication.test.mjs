@@ -4,7 +4,7 @@ import { createHash, createHmac } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, seoPackageSha256, seoPackagePath, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
+import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, seoPackageSha256, seoPackagePath, parityPackageSha256, parityPackagePath, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
 import { buildExecution, publish, recoveryFailure, acceptOnline } from './iq-public-article-publish.mjs';
 
 const backend = fileURLToPath(new URL('../../backend/', import.meta.url));
@@ -45,7 +45,13 @@ test('a version upgrade admits only its fixed package root without broadening ca
   assert.equal(isIqArticleOnlyPromotionRegistration(before, after), true);
   assert.equal(isIqArticleOnlyPromotionRegistration(before, `${after}\n`), false);
   const cli = readFileSync(new URL('./iq-public-article-publish.mjs', import.meta.url), 'utf8');
-  assert.match(cli, /buildExecution\(env, resolve\('backend'\), seoPackageSha256\)/);
+  assert.match(cli, /buildExecution\(env, resolve\('backend'\), parityPackageSha256\)/);
+});
+test('the translation edition binds exactly the three bilingual article pairs', () => {
+  const binding = inspectPackage(backend, parityPackageSha256);
+  assert.equal(binding.package_path, parityPackagePath);
+  assert.equal(binding.expected_row_count, 6);
+  assert.deepEqual(readCandidateRows(backend, parityPackageSha256).map(row => row.page_id), ['IQ-02', 'IQ-02', 'IQ-03', 'IQ-03', 'IQ-05', 'IQ-05']);
 });
 test('the real PHP driver and Node workflow bind identical executor files and hashes', () => {
   const source = readFileSync(`${backend}/scripts/deploy/run_iq_public_article_publish.php`, 'utf8');

@@ -18,6 +18,10 @@ final class IqPublicArticlePackage
 
     public const SEO_SHA256 = 'b9755f9564f3ff6b39a5c987cac2c49d0fda4c00b3ed2713b6612fb5d361c041';
 
+    public const PARITY_PACKAGE = 'content_assets/iq_public/articles/20261015-en-parity';
+
+    public const PARITY_SHA256 = 'a2ae9ba665b88d612cea7d84f8a499325a214b5f1b2490fc727167b7bf889fb2';
+
     private const SCHEMA = 'fermatmind.iq_public_article_package.v1';
 
     private const SLUGS = [
@@ -39,6 +43,7 @@ final class IqPublicArticlePackage
         return match ($sha) {
             self::SHA256 => self::PACKAGE,
             self::SEO_SHA256 => self::SEO_PACKAGE,
+            self::PARITY_SHA256 => self::PARITY_PACKAGE,
             default => throw new DomainException('iq_article_package_digest_mismatch'),
         };
     }
@@ -47,13 +52,16 @@ final class IqPublicArticlePackage
     {
         self::pathForSha($sha);
 
-        return $sha === self::SEO_SHA256 ? 2 : 10;
+        return match ($sha) {
+            self::SEO_SHA256 => 2, self::PARITY_SHA256 => 6, default => 10
+        };
     }
 
     public static function supportsPublishedDigest(?string $sha, string $slug): bool
     {
         return ($sha === self::SHA256 && in_array($slug, self::SLUGS, true))
-            || ($sha === self::SEO_SHA256 && $slug === self::SLUGS['IQ-03']);
+            || ($sha === self::SEO_SHA256 && $slug === self::SLUGS['IQ-03'])
+            || ($sha === self::PARITY_SHA256 && in_array($slug, array_intersect_key(self::SLUGS, array_flip(['IQ-02', 'IQ-03', 'IQ-05'])), true));
     }
 
     /** @return list<array<string,mixed>> */
@@ -63,7 +71,11 @@ final class IqPublicArticlePackage
             throw new DomainException('iq_article_package_digest_mismatch');
         }
         $package = self::pathForSha($expectedSha256);
-        $slugs = $expectedSha256 === self::SEO_SHA256 ? ['IQ-03' => self::SLUGS['IQ-03']] : self::SLUGS;
+        $slugs = match ($expectedSha256) {
+            self::SEO_SHA256 => ['IQ-03' => self::SLUGS['IQ-03']],
+            self::PARITY_SHA256 => array_intersect_key(self::SLUGS, array_flip(['IQ-02', 'IQ-03', 'IQ-05'])),
+            default => self::SLUGS,
+        };
         $rowCount = self::rowCountForSha($expectedSha256);
         $root = realpath($backendRoot);
         if ($root === false) {
@@ -210,7 +222,7 @@ final class IqPublicArticlePackage
             }
         }
         $this->headings->assertNoBodyH1($body);
-        if ($locale === 'en' && preg_match('/\p{Han}/u', PromotionContextFactory::canonicalJson($snapshot)) === 1) {
+        if ($locale === 'en' && preg_match('/\p{sc:Han}/u', PromotionContextFactory::canonicalJson($snapshot)) === 1) {
             throw new DomainException('iq_article_locale_invalid');
         }
         if (preg_match('~/(?:account|attempts?|checkout|history|orders?|payments?|private|recovery|reports?|results?|shares?)(?:/|[?#\s]|$)|[?&](?:token|attempt_id|report_id|user_id)=~i', $body) === 1) {

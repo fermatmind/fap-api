@@ -7,7 +7,7 @@ import { articleDom, assertSsrCandidate as assertPublicSurface, renderPage } fro
 
 export { renderPage };
 const slug = 'iq-test-intelligence-quotient-assessment';
-const headings = { en: 'Free IQ Test', zh: 'IQ智商免费测试' }; // Bound product UI heading; reviewed SEO comes from the immutable package.
+const headings = { en: 'Free IQ Test', zh: '免费智商测试（IQ）' }; // Bound product UI heading; reviewed SEO comes from the immutable package.
 export function ssrMainText(html) {
   try { return articleDom(html, 'entry').body; }
   catch { throw new Error('IQ_SSR_MAIN_INVALID'); }
@@ -76,7 +76,7 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     const payload = JSON.parse((await read(`${api}/api/v0.3/scales/lookup?slug=${slug}&locale=${row.identity.locale}`, 'application/json')).bytes);
     if (payload.ok !== true || payload.primary_slug !== slug || payload.scale_code !== 'IQ_RAVEN' || payload.is_public !== true
       || typeof payload.is_indexable !== 'boolean') throw new Error('IQ_ONLINE_IDENTITY_MISMATCH');
-    for (const leaf of ['landing_copy', 'why_choose', 'faq']) {
+    for (const leaf of Object.keys(row.patch)) {
       if (!isDeepStrictEqual(payload.content_i18n_json?.[row.key]?.[leaf], row.patch[leaf])) throw new Error('IQ_ONLINE_BODY_MISMATCH');
     }
     const page = `${web}/${row.key}/tests/${slug}`;

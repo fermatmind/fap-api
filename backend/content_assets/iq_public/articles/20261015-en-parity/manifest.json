@@ -1,0 +1,72 @@
+{
+  "schema": "fermatmind.iq_public_article_package.v1",
+  "boundaries": {
+    "preserve_existing_indexability": true,
+    "preserve_foreign_working_revisions": true,
+    "new_source_pair_indexable": false,
+    "search_submission": false,
+    "private_payload_write": false,
+    "eq_write": false
+  },
+  "targets": [
+    {
+      "page_id": "IQ-02",
+      "locale": "zh-CN",
+      "slug": "iq-test-score-and-limits-explained",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-02",
+      "locale": "en",
+      "slug": "iq-test-score-and-limits-explained",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "zh-CN",
+      "slug": "iq-test-tool-guide",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "en",
+      "slug": "iq-test-tool-guide",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-05",
+      "locale": "zh-CN",
+      "slug": "iq-test-growth-guide",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-05",
+      "locale": "en",
+      "slug": "iq-test-growth-guide",
+      "operation": "existing_public_update"
+    }
+  ],
+  "files": {
+    "IQ-02-en.json": "2bc6c11817b911d53cbabc00efcce3c67834e6502d5a9a9990c8e12d9f9383bd",
+    "IQ-02-en.md": "75767daedc5879f566af90ba2438050a07f1ae839b3db3dc5ff6fe64d300e725",
+    "IQ-02-en.snapshot.json": "7ced29a1d4331d260ee94ff3b48b903e8e2378e737db34ff3632268095e67865",
+    "IQ-02-zh-CN.json": "e120372bf9a7e60792e1923466349aa87ad5bbdddd43907447a3f316c54a0306",
+    "IQ-02-zh-CN.md": "1cccf6af1b519380e23c6f8cc4520bc242517ae9c636c51e79f6efd1cc793a46",
+    "IQ-02-zh-CN.snapshot.json": "af1f562521068190f5042a5f228458b9a53f4531e9326af1921ff345b69f00ef",
+    "IQ-03-en.json": "4afab6f61d38bb42dca74e32dab98ff9e4b5f0c33fcb8c8e55d0acc101655780",
+    "IQ-03-en.md": "9616f3c68bf0f6437b5bf8b859bb0750862f7451903663882fb989ae650855a0",
+    "IQ-03-en.snapshot.json": "0d29fea9d8616617ad8ec4c6b4b8bdf92f51a0918c001aee56c003ab6222f3e0",
+    "IQ-03-zh-CN.json": "f78d36bd744d413daaf36c2b39b4f445bc83476de77eadddd4256ba92c941568",
+    "IQ-03-zh-CN.md": "15ff1f19153e9e0be180cc67f5f944205e4b7f3dddf9db98e376e1036048b2da",
+    "IQ-03-zh-CN.snapshot.json": "388197a9281d86030e5c501cddf4d7d733178ab85871a015744b56b9848e6263",
+    "IQ-05-en.json": "7272ba9cf0fc9a33fb240c41b72857dfb789b981436bc83ecd069877be02d8bd",
+    "IQ-05-en.md": "e2f1c1b13007ee5b6c607e2c2f025c4f6eddb4dad2ee3bbed4e6a1b93483d2e7",
+    "IQ-05-en.snapshot.json": "e9c3648688170fabdff0035195d800cf2501408fc6e15eb98cc582eb3e924aa1",
+    "IQ-05-zh-CN.json": "7423d68487e13c47f814dd2431ff32d6bd8ea3980de4a24d49bc759a1c6edd07",
+    "IQ-05-zh-CN.md": "fac19ad660514ba97362a8f77eee501ec8c7d713d05b2511c3ae699ce7479a8e",
+    "IQ-05-zh-CN.snapshot.json": "17c26ac83b67ceef86dc08d2e970d16cbdefa526e89098f6c7887d31c8644e19",
+    "iq-all-source-fresh-result.json": "0b79dee890b788050d4623d32b2acbc4ed8300a57c343afd22b533fd84c4b508",
+    "iq-article-exact-payload-review.json": "bb1fd9f644cbd30038f56d4fe20cd86dd1bd1b36b1a15153cfdcdb383880a1b8",
+    "iq-publication-three-fresh-result.json": "9c46a1879d50321f87f736bde6b908011236bd086dab7efc516671d7a0e52aec"
+  }
+}

@@ -680,9 +680,9 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
                     continue;
                 }
                 $content = json_decode($row['content_i18n_json'], true);
-                foreach (['zh', 'en'] as $key) {
-                    foreach (['landing_copy', 'why_choose', 'faq'] as $leaf) {
-                        unset($content[$key][$leaf]);
+                foreach (app(IqPublicEntryPackage::class)->read(base_path(), IqPublicEntryPackage::SHA256) as $candidate) {
+                    foreach (array_keys($candidate['patch']) as $leaf) {
+                        unset($content[$candidate['key']][$leaf]);
                     }
                 }
                 $row['content_i18n_json'] = $content;

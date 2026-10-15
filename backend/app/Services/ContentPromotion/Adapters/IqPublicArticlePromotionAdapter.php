@@ -477,7 +477,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
             $seo = $article ? $this->seo($article, $lock) : null;
             $revisions = $article ? ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)
                 ->where(static function ($query) use ($article): void {
-                    $query->whereIn('id', array_filter([$article->published_revision_id, $article->working_revision_id]))->orWhereIn('authority_package_sha256', [IqPublicArticlePackage::SHA256, IqPublicArticlePackage::SEO_SHA256]);
+                    $query->whereIn('id', array_filter([$article->published_revision_id, $article->working_revision_id]))->orWhereIn('authority_package_sha256', [IqPublicArticlePackage::SHA256, IqPublicArticlePackage::SEO_SHA256, IqPublicArticlePackage::PARITY_SHA256]);
                 })->orderBy('id')->when($lock, static fn ($query) => $query->lockForUpdate())->get()->map->getAttributes()->all() : [];
             $seoAttributes = $seo?->getAttributes();
             if ($seoAttributes) {

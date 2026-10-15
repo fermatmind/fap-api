@@ -1,0 +1,18 @@
+{
+  "scope": "仅冻结候选内容；不判定CMS、页面QA、实际上线、产品效度或自然排名",
+  "pages": [],
+  "actual_checks": [
+    "读取适用本地AGENTS、独立核查Skill真实路径及其authority、implementation-review、experience参考。",
+    "对三个md和三个json重新计算SHA-256；三个candidate_sha256均与md实际字节一致。",
+    "核对原始提取文本SHA；原始索引内七个有文本的记录均匹配。",
+    "完整阅读三个候选正文、metadata和FAQ；IQ-06两语言各9项FAQ与CMS正文逐项一致。",
+    "用Python独立重算Beta边界与教学算例；没有执行应用、数据库或业务测试。",
+    "使用只读Web访问Pearson Raven’s 2和ITC原始来源相关段落。"
+  ],
+  "actual_limits": [
+    "宿主为read-only；最初shell here-doc需要临时文件而被系统拒绝，随后改用不写文件的读取方式。",
+    "未修改任何候选、资产、仓库、CMS、权限、进度或定时；未提交、推送、部署、启动子Agent或执行受控业务入口。",
+    "没有读取作者报告、candidates/reviews、source-supplement或旧审查结论。",
+    "PASS仅绑定上述六个实际文件SHA及本次内容范围。"
+  ]
+}

@@ -85,6 +85,43 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         self::assertSame($controls, Article::query()->where('slug', '!=', 'iq-test-tool-guide')->orderBy('id')->get()->map->getAttributes()->all());
     }
 
+    public function test_current_translation_release_only_updates_the_three_authorized_article_pairs(): void
+    {
+        $this->seedExisting();
+        [$adapter] = $this->publish();
+        $guideContext = new PromotionContext(
+            packageDirectory: base_path(IqPublicArticlePackage::SEO_PACKAGE), packageSha256: IqPublicArticlePackage::SEO_SHA256,
+            lane: 'W3', subscope: IqPublicArticlePromotionAdapter::SUBSCOPE, sourceCommit: str_repeat('d', 40),
+            executorReleaseSha256: str_repeat('b', 64), releasePolicySha256: hash('sha256', PromotionContextFactory::canonicalJson(config('content_promotion.release_policy'))),
+            workflowRunId: '1002', workflowRunAttempt: 1, workflowSignature: str_repeat('c', 64), expectedRowCount: 2, idempotencyKey: str_repeat('d', 64),
+        );
+        $this->previous($guideContext, 'content_promotion_preflight_receipt', $adapter->preflight($guideContext));
+        $this->previous($guideContext, 'cms_draft_import_receipt', $adapter->draftImport($guideContext));
+        $adapter->publish($guideContext);
+        $chineseGuide = Article::query()->where('slug', 'iq-test-tool-guide')->where('locale', 'zh-CN')->value('content_md');
+        $control = Article::query()->whereIn('slug', ['iq-test-narrative-portrait', 'what-is-iq-and-how-it-is-measured'])->orderBy('id')->get()->toArray();
+        $context = new PromotionContext(
+            packageDirectory: base_path(IqPublicArticlePackage::PARITY_PACKAGE), packageSha256: IqPublicArticlePackage::PARITY_SHA256,
+            lane: 'W3', subscope: IqPublicArticlePromotionAdapter::SUBSCOPE, sourceCommit: str_repeat('e', 40),
+            executorReleaseSha256: str_repeat('b', 64), releasePolicySha256: hash('sha256', PromotionContextFactory::canonicalJson(config('content_promotion.release_policy'))),
+            workflowRunId: '1003', workflowRunAttempt: 1, workflowSignature: str_repeat('c', 64), expectedRowCount: 6, idempotencyKey: str_repeat('e', 64),
+        );
+        $adapter = app(IqPublicArticlePromotionAdapter::class);
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $draft = $adapter->draftImport($context);
+        self::assertSame(6, $draft['written_count']);
+        self::assertSame(0, $draft['created_count']);
+        $this->previous($context, 'cms_draft_import_receipt', $draft);
+        $published = $adapter->publish($context);
+        self::assertSame(6, $published['published_count']);
+        self::assertSame(6, $adapter->liveQa($context)['readback_count']);
+        self::assertSame($chineseGuide, Article::query()->where('slug', 'iq-test-tool-guide')->where('locale', 'zh-CN')->value('content_md'));
+        self::assertSame($control, Article::query()->whereIn('slug', ['iq-test-narrative-portrait', 'what-is-iq-and-how-it-is-measured'])->orderBy('id')->get()->toArray());
+        self::assertSame(2, Article::query()->where('slug', 'what-is-iq-and-how-it-is-measured')->count());
+        $adapter->rollback($context, $published['rollback_reference']);
+        self::assertSame($control, Article::query()->whereIn('slug', ['iq-test-narrative-portrait', 'what-is-iq-and-how-it-is-measured'])->orderBy('id')->get()->toArray());
+    }
+
     public function test_bilingual_publish_and_rollback_preserve_foreign_drafts_and_indexability(): void
     {
         // Publication and recovery evict derived sitemap reads but must preserve a live warmer's mutex.

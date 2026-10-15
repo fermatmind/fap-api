@@ -22,6 +22,7 @@ return [
         'content_assets/iq_public/entry/20261009-v1',
         'content_assets/iq_public/articles/20261010-v1',
         'content_assets/iq_public/articles/20261015-seo-v1',
+        'content_assets/iq_public/articles/20261015-en-parity',
         'content_assets/iq_public/topics/20261010-v1',
         'content_assets/eq_public/candidate/20261010-existing-pages',
         'content_packs',

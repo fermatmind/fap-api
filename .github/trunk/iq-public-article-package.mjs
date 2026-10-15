@@ -9,6 +9,8 @@ export const packagePath = 'content_assets/iq_public/articles/20261010-v1';
 export const packageSha256 = 'ca6612bf60a63e2f8f253658587e0299997e82a3dfecad11994ee7f21d79fcad';
 export const seoPackagePath = 'content_assets/iq_public/articles/20261015-seo-v1';
 export const seoPackageSha256 = 'b9755f9564f3ff6b39a5c987cac2c49d0fda4c00b3ed2713b6612fb5d361c041';
+export const parityPackagePath = 'content_assets/iq_public/articles/20261015-en-parity';
+export const parityPackageSha256 = 'a2ae9ba665b88d612cea7d84f8a499325a214b5f1b2490fc727167b7bf889fb2';
 export const executorPaths = [
   "app/Console/Commands/ContentPromoteExactPackage.php",
   "app/Http/Controllers/API/V0_5/Cms/ArticleController.php",
@@ -45,7 +47,8 @@ export function readCandidateRows(backendRoot, expectedPackageSha256 = packageSh
 export function inspectPackage(backendRoot, expectedPackageSha256 = packageSha256) {
   const root = realpathSync(backendRoot);
   const selected = expectedPackageSha256 === packageSha256 ? { path: packagePath, count: 10 }
-    : expectedPackageSha256 === seoPackageSha256 ? { path: seoPackagePath, count: 2 } : null;
+    : expectedPackageSha256 === seoPackageSha256 ? { path: seoPackagePath, count: 2 }
+    : expectedPackageSha256 === parityPackageSha256 ? { path: parityPackagePath, count: 6 } : null;
   if (!selected || readCandidateRows(root, expectedPackageSha256).length !== selected.count) throw new Error('IQ_ARTICLE_PACKAGE_SCOPE_INVALID');
   const material = executorPaths.map(path => {
     const file = resolve(root, path);
@@ -63,6 +66,11 @@ export function workflowSignature(binding, key, source, run, attempt) {
   return createHmac('sha256', key).update(material).digest('hex');
 }
 export function isIqArticleOnlyPromotionRegistration(before, after) {
+  const parityRoot = `        '${parityPackagePath}',\n`;
+  if (after.includes(parityRoot) && !before.includes(parityRoot)) {
+    const without = after.replace(parityRoot, '');
+    return without === before || isIqArticleOnlyPromotionRegistration(before, without);
+  }
   const refreshRoot = `        '${seoPackagePath}',\n`;
   if (after.includes(refreshRoot) && !before.includes(refreshRoot)) {
     const without = after.replace(refreshRoot, '');

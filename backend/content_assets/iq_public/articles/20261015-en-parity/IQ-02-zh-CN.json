@@ -1,0 +1,82 @@
+{
+  "page_id": "IQ-02",
+  "locale": "zh-CN",
+  "baseline_api_sha256": "c1f085f1a1d9ac7275abb1100d850d18d768eb6b9cc9e596ddd0b837d5903890",
+  "candidate_sha256": "1cccf6af1b519380e23c6f8cc4520bc242517ae9c636c51e79f6efd1cc793a46",
+  "metadata": {
+    "title": "在线 IQ 测试准吗？智商分数和题型解释",
+    "description": "在线施测本身不决定准确性。本文区分标准分、正确率与百分位，并解释 FermatMind 原创30题练习及随机模拟 Beta 的用途和限制。"
+  },
+  "faq_items": [
+    {
+      "question": "在线 IQ 测试准吗？",
+      "answer": "要看具体工具和用途，不能仅凭在线或线下判断。FermatMind 当前原创30题可记录特定矩阵推理表现；公开的随机模拟 Beta 不支持人群 IQ 或百分位解释。正式解释还需要适用常模、标准化施测和相应用途的测量证据。"
+    },
+    {
+      "question": "FermatMind 的 IQ 测试是正式智商测验吗？",
+      "answer": "不能把本页介绍的在线推理任务等同于正式智力评估。矩阵推理、模式识别和抽象问题解决是任务范围；没有对应的常模、计分和测量证据时，不把本次表现解释为正式 IQ 或人群排名。"
+    },
+    {
+      "question": "IQ 分数怎么看？",
+      "answer": "先区分正确题数、正确率、模拟 Beta 和有适用常模的标准分。本站18/30表示60%正确；8题正确按公开公式得到 Beta 121，但不是人群 IQ 121。12至30题正确都会得到 Beta 145，不能据此反推正确数。人群百分位需要相应常模，不能从正确率或 Beta直接换算。"
+    },
+    {
+      "question": "IQ 测试通常有哪些题型？",
+      "answer": "不同智力测验覆盖范围不同，有的包含语言理解、工作记忆或加工速度等任务。FermatMind 当前原创30题聚焦视觉矩阵、模式识别和抽象推理，不据此解释完整智力结构。结果中的题组成绩也不是已经验证的能力分量表。"
+    },
+    {
+      "question": "IQ 能决定一个人的能力吗？",
+      "answer": "不能用一个分数概括人的全部能力或价值。本站这次成绩是特定推理任务的表现，不能单独支持职业适配、未来收入、录取、招聘或诊断结论。其他智力测验能支持什么解释，要核对该工具及用途的证据，不能由本站指标的限制代替判断。"
+    },
+    {
+      "question": "IQ 和 EQ 有什么区别？",
+      "answer": "IQ 更偏向推理任务、模式识别和抽象问题解决表现；EQ 更偏向情绪觉察、调节、关系沟通和压力恢复。两者观察的是不同方面，不能互相替代，也不能决定人的价值。"
+    },
+    {
+      "question": "做完 IQ 测试后下一步应该做什么？",
+      "answer": "不要只盯分数。先记录自己在哪类题型上卡住，再复盘解题策略和注意力状态。你可以用短周期训练验证是否只是题型不熟，也可以结合学习目标决定下一步练习方向。"
+    }
+  ],
+  "source_bindings": [
+    {
+      "claim": "常见IQ尺度以100为均值、15为标准差；标准分、正确率、百分位及测量误差应分别解释。",
+      "url": "https://www.123test.com/interpretation-of-an-iq-score/",
+      "read_scope": "本角色实读attachments/web-123test-read.json中的原页L61–95，特别是L76–90；另读research/current-source-notes.md中宿主本次完整页面读取记录。",
+      "limitation": "这是分数解释的英文组织基线，不是本站产品效度证据；未继承该站等级标签、极端分数人数推算或付费产品准确性宣传。本角色没有重新读取原页后半段。"
+    },
+    {
+      "claim": "年龄、语言和目标群体的等值性、常模及测量证据需要按具体版本核查。",
+      "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
+      "read_scope": "实读冻结research/current-source-notes.md：宿主记录PC-2/PC-3第8–9页、C-2第17–18页、C-3第21页及相关解释的读取范围。",
+      "limitation": "本角色读取的是冻结来源记录，未逐页重读41页原PDF；只保留版本和目标群体证据要求，不给本站适龄范围、公平性或误差参数。"
+    },
+    {
+      "claim": "本站原创30题、原始正确数及18/30=60%；Beta使用随机模拟参照，0→62、8→121、12至30→145；55为配置下界。",
+      "url": "https://fermatmind.com/zh/tests/iq-test-intelligence-quotient-assessment",
+      "read_scope": "实读research/current/IQ-01-zh-CN-ssr.txt及冻结IqBetaStandardScore.php全部；以纯数学重算核0、8、11、12、18、30六个输入。",
+      "limitation": "冻结入口和代码支持公开算法，不证明实际生产release绑定或用户结果显示Beta；没有读取题目答案键、真实attempt或执行计分服务。"
+    },
+    {
+      "claim": "Beta不能作为结果页独立常模标准分或百分位的依据；题组正确率只表示本次分组成绩。",
+      "url": "https://fermatmind.com/zh/articles/iq-test-tool-guide",
+      "read_scope": "产品解释绑定依据为冻结research/source-current/fap-web/lib/iq/presentation.ts:90–139及扫描报告所指结果调用链；公开URL为读者后续阅读路径。",
+      "limitation": "该公开指南不是前端行为证据。前端仅在独立normative_reasoning满足资格、参照人群和版本条件时取标准分/百分位；这不证明本站已有合格人群常模，也不承诺当前结果实际显示这些字段。"
+    },
+    {
+      "claim": "重测成绩改善可能受练习影响，不能据本站两次成绩推算一般智力增长或最佳重测间隔。",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17371085/",
+      "read_scope": "实读research/source-supplement-01.md中的摘要读取记录；该记录明确摘要可读、作者版PDF未成功取得。",
+      "limitation": "研究范围是组织和教育选择中的认知测验重测；未读完整论文，不移植效应量、间隔或干预结论到本站。小林案例及下一步均为合成教学与观察建议。"
+    }
+  ],
+  "unresolved": [
+    "只能核冻结包；未重新采集线上事实。实际结果全程展示、production release绑定和CMS私有working revision/hold仍未核。",
+    "本角色实际处于read-only；shell heredoc临时文件被拒绝，已改用python3 -c纯读取。未写文件、CMS、资产或业务进度，未提交、推送或部署。",
+    "正文现有7条FAQ，而answer_surface_v1及SEO结构化投影主要提供前6条。返回保留全部7条正文语义；宿主须沿现有投影规则核实际提取范围，不凭本提案擅自改变schema资格。",
+    "中文SSR现有裸文章链接可能自动产生英文标签；提案将相关锚文本显式中文化，但实际渲染效果仍须候选SSR和双端QA确认。",
+    "新增科学来源中部分仅有冻结读取记录；已明确读法并缩窄主张，没有宣称本角色完整复读原论文、手册或指南。",
+    "独立审稿、完整候选唯一替换检查、页面QA及发布接受尚未执行；排名和超越知乎未核。"
+  ],
+  "state": "author_candidate_not_reviewed",
+  "excerpt": "在线施测本身不决定准确性。本文区分标准分、正确率与百分位，并解释 FermatMind 原创30题练习及随机模拟 Beta 的用途和限制。"
+}

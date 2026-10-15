@@ -42,6 +42,18 @@ final class IqPublicArticlePackageTest extends TestCase
         self::assertSame('new_source_pair', $rows[9]['operation']);
     }
 
+    public function test_translation_edition_retains_latest_chinese_guide_and_only_three_article_pairs(): void
+    {
+        $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::PARITY_SHA256);
+        self::assertSame(['IQ-02', 'IQ-02', 'IQ-03', 'IQ-03', 'IQ-05', 'IQ-05'], array_column($rows, 'page_id'));
+        $source = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::SEO_SHA256)[0];
+        self::assertSame($source['snapshot'], $rows[2]['snapshot']);
+        self::assertStringContainsString('·', $rows[3]['snapshot']['content_md']);
+        self::assertSame(0, preg_match('/\p{sc:Han}/u', $rows[3]['snapshot']['content_md']));
+        self::assertSame(6, IqPublicArticlePackage::rowCountForSha(IqPublicArticlePackage::PARITY_SHA256));
+        self::assertFalse(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::PARITY_SHA256, 'iq-test-narrative-portrait'));
+    }
+
     public function test_a_different_authorized_package_digest_is_rejected(): void
     {
         $this->expectException(DomainException::class);
