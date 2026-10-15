@@ -13,6 +13,8 @@ final class MigrationPurityGateTest extends TestCase
      * @var list<string>
      */
     private const LEGACY_FILE_ALLOWLIST = [
+        // IqArticleHreflangMigrationTest covers pinned bilingual authority, native gates and atomic metadata-only writes.
+        '2026_10_15_080000_activate_iq_article_hreflang.php',
         // ReviewedChineseArticleDiscoverabilityMigrationTest covers native review, source locks and metadata-only rollback.
         '2026_10_15_060000_activate_reviewed_c07_c11_chinese_indexability.php',
         // IqEnglishArticleDiscoverabilityMigrationTest covers exact scope, source/review checks and atomic rollback.
