@@ -23,8 +23,8 @@ final class IqPublicArticleFaqProjection
             || ! $article->is_public || $article->status !== 'published' || ! is_array($binding) || ! $revision
             || $revision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
             || (int) $revision->article_id !== (int) $article->id || (int) $revision->org_id !== 0 || $revision->locale !== $article->locale
-            || IqPublicArticlePackage::packageForSha((string) $revision->authority_package_sha256) === null
-            || $revision->authority_source_package !== IqPublicArticlePackage::packageForSha((string) $revision->authority_package_sha256)
+            || ! IqPublicArticlePackage::supportsPublishedDigest($revision->authority_package_sha256, $article->slug)
+            || $revision->authority_source_package !== IqPublicArticlePackage::pathForSha($revision->authority_package_sha256)
             || $revision->authority_asset_key !== $article->locale.':'.$article->slug
             || ($binding['package_sha256'] ?? null) !== $revision->authority_package_sha256
             || ($binding['revision_id'] ?? null) !== (int) $article->published_revision_id

@@ -112,7 +112,7 @@ test('only the exact IQ-only signature extension exempts unaffected private cano
 test('Topic registration and signature proofs handle the full unreleased Article delta but reject unrelated changes', () => {
   const config = readFileSync(`${backend}/config/content_promotion.php`, 'utf8');
   const baseline = config.replace("        'content_assets/iq_public/topics/20261010-v1',\n", '').replace(", 'IQ-EQ-TOPIC' => 'audit_compatible'", '')
-    .replace("        'content_assets/iq_public/articles/20261015-en-parity',\n", '').replace(", 'IQ-PUBLIC-ARTICLES' => 'audit_compatible'", '');
+    .replace("        'content_assets/iq_public/articles/20261010-v1',\n", '').replace(", 'IQ-PUBLIC-ARTICLES' => 'audit_compatible'", '');
   assert.equal(isIqEqTopicOnlyPromotionRegistration(baseline, config), true);
   assert.equal(isIqEqTopicOnlyPromotionRegistration(baseline, config.replace("'fail_closed_legacy_audit'", "'audit_compatible'")), false);
   const factory = readFileSync(`${backend}/app/Services/ContentPromotion/PromotionContextFactory.php`, 'utf8');

@@ -2,7 +2,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, workflowSignature, packageSha256 } from './iq-public-article-package.mjs';
+import { inspectPackage, workflowSignature, packageSha256, parityPackageSha256 } from './iq-public-article-package.mjs';
 import { verifyOnlineCandidates, readOnlinePrestate } from './iq-public-article-online-qa.mjs';
 
 const quote = value => `'${String(value).replaceAll("'", "'\\''")}'`;
@@ -14,13 +14,13 @@ const onlineFailureCodes = new Set([
   'IQ_ARTICLE_ONLINE_QUALIFICATION_MISMATCH', 'IQ_ARTICLE_ONLINE_SEO_MISMATCH', 'IQ_ARTICLE_ONLINE_RENDER_FAILED',
   'IQ_ARTICLE_ONLINE_RENDER_OPTIONS_INVALID', 'IQ_ARTICLE_ONLINE_TIMEOUT', 'IQ_ARTICLE_ONLINE_TRANSPORT_FAILED',
 ]);
-export function buildExecution(env, backendRoot) {
+export function buildExecution(env, backendRoot, expectedPackageSha256 = packageSha256) {
   if (!['staging', 'production'].includes(env.IQ_ARTICLE_PUBLISH_ENVIRONMENT)
     || !/^\/[a-zA-Z0-9_./-]+$/.test(env.DEPLOY_PATH ?? '')
     || !/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(env.DEPLOY_USER ?? '')
     || !/^[a-zA-Z0-9][a-zA-Z0-9.:-]*$/.test(env.DEPLOY_HOST ?? '')
     || !/^[1-9][0-9]{0,4}$/.test(env.DEPLOY_PORT ?? '') || Number(env.DEPLOY_PORT) > 65535) throw new Error('IQ_ARTICLE_TRANSPORT_IDENTITY_INVALID');
-  const binding = inspectPackage(backendRoot);
+  const binding = inspectPackage(backendRoot, expectedPackageSha256);
   const request = {
     source_commit: env.DEPLOY_SHA, workflow_run_id: env.GITHUB_RUN_ID,
     workflow_run_attempt: Number(env.GITHUB_RUN_ATTEMPT), package_sha256: binding.package_sha256,
@@ -67,12 +67,12 @@ export function publish(execution, execute = request => transport(execution, req
     if (response.status !== 0 || output.ok !== true || output.schema !== 'iq.public_articles.publish.v1'
       || output.source_commit !== execution.request.source_commit || output.workflow_run_id !== execution.request.workflow_run_id
       || output.workflow_run_attempt !== 1 || output.package_sha256 !== execution.binding.package_sha256
-      || output.published_count !== 6 || output.sanitized !== true
+      || output.published_count !== execution.binding.expected_row_count || output.sanitized !== true
       || output.phases?.map(row => row.phase).join('|') !== 'preflight|draft-import|publish|live-qa'
-      || output.phases.some(row => row.readback_count !== 6 || !/^[a-f0-9]{64}$/.test(row.receipt_sha256))) throw new Error('IQ_ARTICLE_PUBLICATION_RESPONSE_INVALID');
+      || output.phases.some(row => row.readback_count !== execution.binding.expected_row_count || !/^[a-f0-9]{64}$/.test(row.receipt_sha256))) throw new Error('IQ_ARTICLE_PUBLICATION_RESPONSE_INVALID');
     return { schema: output.schema, ok: true, source_commit: output.source_commit, workflow_run_id: output.workflow_run_id,
-      workflow_run_attempt: 1, package_sha256: output.package_sha256, published_count: 6,
-      phases: output.phases.map(row => ({ phase: row.phase, receipt_sha256: row.receipt_sha256, readback_count: 6 })), sanitized: true };
+      workflow_run_attempt: 1, package_sha256: output.package_sha256, published_count: execution.binding.expected_row_count,
+      phases: output.phases.map(row => ({ phase: row.phase, receipt_sha256: row.receipt_sha256, readback_count: execution.binding.expected_row_count })), sanitized: true };
   } catch {
     throw recoveryFailure(execution, execute);
   }
@@ -82,14 +82,14 @@ function failedBeforeTransport(env) {
     || env.GITHUB_RUN_ATTEMPT !== '1') throw new Error('IQ_ARTICLE_WORKFLOW_IDENTITY_INVALID');
   const error = new Error('IQ_ARTICLE_PUBLICATION_FAILED');
   error.receipt = { schema: 'iq.public_articles.publish.v1', ok: false, source_commit: env.DEPLOY_SHA,
-    workflow_run_id: env.GITHUB_RUN_ID, workflow_run_attempt: 1, package_sha256: packageSha256,
+    workflow_run_id: env.GITHUB_RUN_ID, workflow_run_attempt: 1, package_sha256: parityPackageSha256,
     transport_started: false, recovery_completed: true, recovery_status: 'not_required', sanitized: true };
   return error;
 }
 export async function acceptOnline(execution, receipt, environment, backendRoot, prestate,
   verify = verifyOnlineCandidates, execute = request => transport(execution, request)) {
   try {
-    receipt.online_acceptance = await verify(environment, backendRoot, fetch, undefined, prestate);
+    receipt.online_acceptance = await verify(environment, backendRoot, fetch, undefined, prestate, execution.binding.package_sha256);
     return receipt;
   } catch (error) {
     throw recoveryFailure(execution, execute, error);
@@ -103,8 +103,8 @@ async function cli() {
   try {
     mkdirSync(directory, { recursive: true, mode: 0o700 });
     if (execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim() !== env.DEPLOY_SHA) throw new Error('IQ_ARTICLE_CHECKOUT_SHA_MISMATCH');
-    execution = buildExecution(env, resolve('backend'));
-    const prestate = await readOnlinePrestate(env.IQ_ARTICLE_PUBLISH_ENVIRONMENT, resolve('backend'));
+    execution = buildExecution(env, resolve('backend'), parityPackageSha256);
+    const prestate = await readOnlinePrestate(env.IQ_ARTICLE_PUBLISH_ENVIRONMENT, resolve('backend'), fetch, execution.binding.package_sha256);
     transportStarted = true;
     const receipt = await acceptOnline(execution, publish(execution), env.IQ_ARTICLE_PUBLISH_ENVIRONMENT, resolve('backend'), prestate);
     writeFileSync(resolve(directory, `${env.IQ_ARTICLE_PUBLISH_ENVIRONMENT}.json`), `${JSON.stringify(receipt)}\n`, { flag: 'wx', mode: 0o600 });

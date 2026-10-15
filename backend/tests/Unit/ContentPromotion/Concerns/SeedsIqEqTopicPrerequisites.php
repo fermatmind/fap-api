@@ -11,12 +11,12 @@ use App\Services\ContentPromotion\IqPublicArticlePackage;
 
 trait SeedsIqEqTopicPrerequisites
 {
-    private function seedArticles(bool $withTranslations = false): void
+    private function seedArticles(bool $withTranslations = false, bool $withGuide = false): void
     {
-        $rows = app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::LEGACY_SHA256);
+        $rows = app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::SHA256);
         $translations = [];
-        if ($withTranslations) {
-            foreach (app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::SHA256) as $row) {
+        if ($withTranslations || $withGuide) {
+            foreach (app(IqPublicArticlePackage::class)->read(base_path(), $withTranslations ? IqPublicArticlePackage::PARITY_SHA256 : IqPublicArticlePackage::SEO_SHA256) as $row) {
                 $translations[$row['identity']['locale'].':'.$row['identity']['slug']] = $row;
             }
             $rows = array_map(static fn (array $row): array => $translations[$row['identity']['locale'].':'.$row['identity']['slug']] ?? $row, $rows);
@@ -35,12 +35,12 @@ trait SeedsIqEqTopicPrerequisites
         foreach ($rows as $row) {
             $article = $articles[$row['identity']['locale'].':'.$row['identity']['slug']];
             $source = $articles['zh-CN:'.$row['identity']['slug']];
-            $packageSha = isset($translations[$article->locale.':'.$article->slug]) ? IqPublicArticlePackage::SHA256 : IqPublicArticlePackage::LEGACY_SHA256;
+            $packageSha = isset($translations[$article->locale.':'.$article->slug]) ? ($withTranslations ? IqPublicArticlePackage::PARITY_SHA256 : IqPublicArticlePackage::SEO_SHA256) : IqPublicArticlePackage::SHA256;
             $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->create([
                 'org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $source->id, 'translation_group_id' => $article->translation_group_id, 'locale' => $article->locale,
                 'source_locale' => 'zh-CN', 'revision_number' => 1, 'revision_status' => 'published', 'published_at' => now(),
                 'source_version_hash' => $source->computeSourceVersionHash(), 'translated_from_version_hash' => $source->computeSourceVersionHash(),
-                'authority_package_sha256' => $packageSha, 'authority_source_package' => IqPublicArticlePackage::packageForSha($packageSha),
+                'authority_package_sha256' => $packageSha, 'authority_source_package' => IqPublicArticlePackage::pathForSha($packageSha),
                 'authority_asset_key' => $article->locale.':'.$article->slug, 'authority_source_hash' => $row['snapshot_sha256'],
                 'authority_metadata_json' => ['snapshot' => $row['snapshot']], ...$row['snapshot'],
             ]);

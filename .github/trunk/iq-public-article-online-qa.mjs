@@ -2,7 +2,7 @@ import { execFileSync, spawn } from 'node:child_process';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readCandidateRows } from './iq-public-article-package.mjs';
+import { readCandidateRows, packageSha256 } from './iq-public-article-package.mjs';
 import { closeOwnedBrowser } from './eq-new-source-online-qa.mjs';
 
 const clean = value => String(value).replace(/\s+/gu, ' ').trim();
@@ -188,9 +188,9 @@ async function read(url, type, fetcher, allowAbsent = false, captureHeaders = nu
   if (bytes.length > 2000000) throw new Error('IQ_ARTICLE_ONLINE_PAYLOAD_LIMIT');
   return bytes;
 }
-export async function readOnlinePrestate(environment, backendRoot, fetcher = fetch) {
+export async function readOnlinePrestate(environment, backendRoot, fetcher = fetch, expectedPackageSha256 = packageSha256) {
   const [api] = hosts(environment); const result = {};
-  for (const row of readCandidateRows(backendRoot)) {
+  for (const row of readCandidateRows(backendRoot, expectedPackageSha256)) {
     const bytes = await read(`${api}/api/v0.5/articles/${row.identity.slug}?locale=${row.identity.locale}&org_id=0`, 'application/json', fetcher, row.operation === 'new_source_pair');
     const article = bytes === null ? null : JSON.parse(bytes).article;
     if (article && (article.slug !== row.identity.slug || article.locale !== row.identity.locale || article.org_id !== 0 || article.is_public !== true || article.status !== 'published')) throw new Error('IQ_ARTICLE_ONLINE_PRESTATE_INVALID');
@@ -297,10 +297,11 @@ export async function renderPage(url, { surface = 'article', verifyDOM = null } 
   }
 }
 
-export async function verifyOnlineCandidates(environment, backendRoot, fetcher = fetch, renderer = renderPage, prestate) {
+export async function verifyOnlineCandidates(environment, backendRoot, fetcher = fetch, renderer = renderPage, prestate, expectedPackageSha256 = packageSha256) {
   const [api, web] = hosts(environment);
   if (!prestate) throw new Error('IQ_ARTICLE_ONLINE_PRESTATE_REQUIRED');
-  for (const row of readCandidateRows(backendRoot)) {
+  const rows = readCandidateRows(backendRoot, expectedPackageSha256);
+  for (const row of rows) {
     const payload = JSON.parse(await read(`${api}/api/v0.5/articles/${row.identity.slug}?locale=${row.identity.locale}&org_id=0`, 'application/json', fetcher));
     const article = payload.article;
     if (payload.ok !== true || !article || article.slug !== row.identity.slug || article.locale !== row.identity.locale || article.org_id !== 0
@@ -321,5 +322,5 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     const verifyDOM = html => assertSsrCandidate(html, row, seo.meta, environment, responseRobots);
     verifyDOM(await renderer(`${web}${path}`, { verifyDOM }));
   }
-  return { api_readback_count: 6, seo_readback_count: 6, ssr_readback_count: 6, environment };
+  return { api_readback_count: rows.length, seo_readback_count: rows.length, ssr_readback_count: rows.length, environment };
 }

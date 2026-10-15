@@ -10,13 +10,17 @@ use DomainException;
 /** Reads the fixed reviewed IQ Article cohort; it never writes CMS records. */
 final class IqPublicArticlePackage
 {
-    public const PACKAGE = 'content_assets/iq_public/articles/20261015-en-parity';
+    public const PACKAGE = 'content_assets/iq_public/articles/20261010-v1';
 
-    public const LEGACY_PACKAGE = 'content_assets/iq_public/articles/20261010-v1';
+    public const SHA256 = 'ca6612bf60a63e2f8f253658587e0299997e82a3dfecad11994ee7f21d79fcad';
 
-    public const LEGACY_SHA256 = 'ca6612bf60a63e2f8f253658587e0299997e82a3dfecad11994ee7f21d79fcad';
+    public const SEO_PACKAGE = 'content_assets/iq_public/articles/20261015-seo-v1';
 
-    public const SHA256 = '9190c3fd020c59f717419c012a8d4802ca4a8b718dbcef50d01b29e7f01879b3';
+    public const SEO_SHA256 = 'b9755f9564f3ff6b39a5c987cac2c49d0fda4c00b3ed2713b6612fb5d361c041';
+
+    public const PARITY_PACKAGE = 'content_assets/iq_public/articles/20261015-en-parity';
+
+    public const PARITY_SHA256 = 'a2ae9ba665b88d612cea7d84f8a499325a214b5f1b2490fc727167b7bf889fb2';
 
     private const SCHEMA = 'fermatmind.iq_public_article_package.v1';
 
@@ -34,25 +38,45 @@ final class IqPublicArticlePackage
 
     public function __construct(private readonly ArticleBodyHeadingGuard $headings) {}
 
-    public static function packageForSha(string $sha): ?string
+    public static function pathForSha(string $sha): string
     {
         return match ($sha) {
             self::SHA256 => self::PACKAGE,
-            self::LEGACY_SHA256 => self::LEGACY_PACKAGE,
-            default => null,
+            self::SEO_SHA256 => self::SEO_PACKAGE,
+            self::PARITY_SHA256 => self::PARITY_PACKAGE,
+            default => throw new DomainException('iq_article_package_digest_mismatch'),
         };
+    }
+
+    public static function rowCountForSha(string $sha): int
+    {
+        self::pathForSha($sha);
+
+        return match ($sha) {
+            self::SEO_SHA256 => 2, self::PARITY_SHA256 => 6, default => 10
+        };
+    }
+
+    public static function supportsPublishedDigest(?string $sha, string $slug): bool
+    {
+        return ($sha === self::SHA256 && in_array($slug, self::SLUGS, true))
+            || ($sha === self::SEO_SHA256 && $slug === self::SLUGS['IQ-03'])
+            || ($sha === self::PARITY_SHA256 && in_array($slug, array_intersect_key(self::SLUGS, array_flip(['IQ-02', 'IQ-03', 'IQ-05'])), true));
     }
 
     /** @return list<array<string,mixed>> */
     public function read(string $backendRoot, string $expectedSha256): array
     {
-        $legacy = hash_equals(self::LEGACY_SHA256, $expectedSha256);
-        $package = $legacy ? self::LEGACY_PACKAGE : self::PACKAGE;
-        $slugs = $legacy ? self::SLUGS : array_intersect_key(self::SLUGS, array_flip(['IQ-02', 'IQ-03', 'IQ-05']));
-        $count = count($slugs) * 2;
-        if (preg_match('/\A[a-f0-9]{64}\z/', $expectedSha256) !== 1 || (! $legacy && ! hash_equals(self::SHA256, $expectedSha256))) {
+        if (preg_match('/\A[a-f0-9]{64}\z/', $expectedSha256) !== 1) {
             throw new DomainException('iq_article_package_digest_mismatch');
         }
+        $package = self::pathForSha($expectedSha256);
+        $slugs = match ($expectedSha256) {
+            self::SEO_SHA256 => ['IQ-03' => self::SLUGS['IQ-03']],
+            self::PARITY_SHA256 => array_intersect_key(self::SLUGS, array_flip(['IQ-02', 'IQ-03', 'IQ-05'])),
+            default => self::SLUGS,
+        };
+        $rowCount = self::rowCountForSha($expectedSha256);
         $root = realpath($backendRoot);
         if ($root === false) {
             throw new DomainException('iq_article_package_path_invalid');
@@ -66,7 +90,9 @@ final class IqPublicArticlePackage
         }
         $bytes = $this->bytes($directory, 'manifest.json');
         $manifest = json_decode($bytes, true, 32, JSON_THROW_ON_ERROR);
-        $expectedFiles = self::REVIEW_FILES;
+        $expectedFiles = $expectedSha256 === self::SEO_SHA256
+            ? ['iq-all-source-fresh-result.json', 'iq-article-exact-payload-review.json']
+            : self::REVIEW_FILES;
         foreach (array_keys($slugs) as $id) {
             foreach (['zh-CN', 'en'] as $locale) {
                 foreach (['md', 'json', 'snapshot.json'] as $extension) {
@@ -84,7 +110,7 @@ final class IqPublicArticlePackage
             'eq_write' => false,
         ];
         if (($manifest['schema'] ?? null) !== self::SCHEMA || ($manifest['boundaries'] ?? null) !== $boundaries
-            || ! is_array($manifest['targets'] ?? null) || count($manifest['targets']) !== $count
+            || ! is_array($manifest['targets'] ?? null) || count($manifest['targets']) !== $rowCount
             || array_keys((array) ($manifest['files'] ?? [])) !== $expectedFiles) {
             throw new DomainException('iq_article_package_scope_invalid');
         }
@@ -109,7 +135,7 @@ final class IqPublicArticlePackage
         }
         $exactReview = json_decode($files['iq-article-exact-payload-review.json'], true, 32, JSON_THROW_ON_ERROR);
         if (($exactReview['schema'] ?? null) !== 'iq.article_exact_payload_review.v1'
-            || ! is_array($exactReview['targets'] ?? null) || count($exactReview['targets']) !== $count) {
+            || ! is_array($exactReview['targets'] ?? null) || count($exactReview['targets']) !== $rowCount) {
             throw new DomainException('iq_article_review_unbound');
         }
         $targets = [];
@@ -196,7 +222,7 @@ final class IqPublicArticlePackage
             }
         }
         $this->headings->assertNoBodyH1($body);
-        if ($locale === 'en' && preg_match('/\p{Han}/u', PromotionContextFactory::canonicalJson($snapshot)) === 1) {
+        if ($locale === 'en' && preg_match('/\p{sc:Han}/u', PromotionContextFactory::canonicalJson($snapshot)) === 1) {
             throw new DomainException('iq_article_locale_invalid');
         }
         if (preg_match('~/(?:account|attempts?|checkout|history|orders?|payments?|private|recovery|reports?|results?|shares?)(?:/|[?#\s]|$)|[?&](?:token|attempt_id|report_id|user_id)=~i', $body) === 1) {

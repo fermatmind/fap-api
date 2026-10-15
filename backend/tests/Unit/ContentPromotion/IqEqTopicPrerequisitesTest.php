@@ -27,6 +27,14 @@ final class IqEqTopicPrerequisitesTest extends TestCase
         app(IqEqTopicPrerequisites::class)->assertPublished();
     }
 
+    public function test_updated_guide_preserves_all_five_required_article_dependencies(): void
+    {
+        $this->seedArticles(withGuide: true);
+        $this->seedIqEntry();
+        app(IqEqTopicPrerequisites::class)->assertPublished();
+        self::assertSame(10, Article::query()->count());
+    }
+
     public function test_authority_read_failure_cannot_fall_back_to_a_published_legacy_entry(): void
     {
         config(['fap.scales_registry.use_v2' => true]);

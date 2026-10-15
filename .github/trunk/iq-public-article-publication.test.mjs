@@ -4,7 +4,7 @@ import { createHash, createHmac } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
+import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, seoPackageSha256, seoPackagePath, parityPackageSha256, parityPackagePath, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
 import { buildExecution, publish, recoveryFailure, acceptOnline } from './iq-public-article-publish.mjs';
 
 const backend = fileURLToPath(new URL('../../backend/', import.meta.url));
@@ -12,16 +12,46 @@ const env = { IQ_ARTICLE_PUBLISH_ENVIRONMENT: 'staging', DEPLOY_PATH: '/srv/appl
   DEPLOY_SHA: 'a'.repeat(40), GITHUB_RUN_ID: '12', GITHUB_RUN_ATTEMPT: '1', CONTENT_PROMOTION_AUTOMATION_KEY: 'synthetic-test-key-never-a-production-secret' };
 const execution = () => buildExecution(env, backend);
 const success = () => ({ schema: 'iq.public_articles.publish.v1', ok: true, source_commit: env.DEPLOY_SHA, workflow_run_id: '12', workflow_run_attempt: 1,
-  package_sha256: packageSha256, published_count: 6, sanitized: true,
-  phases: ['preflight', 'draft-import', 'publish', 'live-qa'].map(phase => ({ phase, receipt_sha256: 'b'.repeat(64), readback_count: 6 })) });
+  package_sha256: packageSha256, published_count: 10, sanitized: true,
+  phases: ['preflight', 'draft-import', 'publish', 'live-qa'].map(phase => ({ phase, receipt_sha256: 'b'.repeat(64), readback_count: 10 })) });
 const recovery = () => ({ ok: true, mode: 'recover', source_commit: env.DEPLOY_SHA, workflow_run_id: '12', workflow_run_attempt: 1,
   package_sha256: packageSha256, executor_release_sha256: execution().binding.executor_release_sha256, restored: true, recovery_status: 'restored', sanitized: true });
 
-test('binding reads the six reviewed translation payloads through the sole PHP package codec', () => {
+test('binding reads all ten reviewed payloads through the sole PHP package codec', () => {
   const rows = readCandidateRows(backend);
-  assert.equal(rows.length, 6);
-  assert.deepEqual(rows.map(row => row.snapshot.faq_items.length), [7, 7, 5, 5, 5, 5]);
+  assert.equal(rows.length, 10);
+  assert.deepEqual(rows.map(row => row.snapshot.faq_items.length), [7, 7, 5, 5, 5, 5, 5, 5, 9, 9]);
   assert.equal(inspectPackage(backend).package_sha256, packageSha256);
+});
+test('the SEO refresh binds only the two reviewed guide versions and rejects a ten-row receipt', () => {
+  const current = buildExecution(env, backend, seoPackageSha256);
+  assert.equal(current.binding.package_path, seoPackagePath);
+  assert.equal(current.binding.expected_row_count, 2);
+  assert.deepEqual(readCandidateRows(backend, seoPackageSha256).map(row => [row.identity.slug, row.identity.locale]),
+    [['iq-test-tool-guide', 'zh-CN'], ['iq-test-tool-guide', 'en']]);
+  const response = { ...success(), package_sha256: seoPackageSha256, published_count: 2,
+    phases: success().phases.map(row => ({ ...row, readback_count: 2 })) };
+  assert.equal(publish(current, () => ({ status: 0, stdout: JSON.stringify(response) })).published_count, 2);
+  const modes = [];
+  assert.throws(() => publish(current, request => {
+    modes.push(request.mode);
+    return { status: 0, stdout: JSON.stringify({ ...response, published_count: 10 }) };
+  }), /IQ_ARTICLE_PUBLICATION_FAILED/);
+  assert.deepEqual(modes, ['publish', 'recover']);
+});
+test('a version upgrade admits only its fixed package root without broadening capabilities', () => {
+  const after = readFileSync(`${backend}/config/content_promotion.php`, 'utf8');
+  const before = after.replace(`        '${seoPackagePath}',\n`, '');
+  assert.equal(isIqArticleOnlyPromotionRegistration(before, after), true);
+  assert.equal(isIqArticleOnlyPromotionRegistration(before, `${after}\n`), false);
+  const cli = readFileSync(new URL('./iq-public-article-publish.mjs', import.meta.url), 'utf8');
+  assert.match(cli, /buildExecution\(env, resolve\('backend'\), parityPackageSha256\)/);
+});
+test('the translation edition binds exactly the three bilingual article pairs', () => {
+  const binding = inspectPackage(backend, parityPackageSha256);
+  assert.equal(binding.package_path, parityPackagePath);
+  assert.equal(binding.expected_row_count, 6);
+  assert.deepEqual(readCandidateRows(backend, parityPackageSha256).map(row => row.page_id), ['IQ-02', 'IQ-02', 'IQ-03', 'IQ-03', 'IQ-05', 'IQ-05']);
 });
 test('the real PHP driver and Node workflow bind identical executor files and hashes', () => {
   const source = readFileSync(`${backend}/scripts/deploy/run_iq_public_article_publish.php`, 'utf8');
@@ -33,7 +63,7 @@ test('the real PHP driver and Node workflow bind identical executor files and ha
 });
 test('workflow HMAC binds exact executor release and cannot transfer to changed implementation', () => {
   const binding = inspectPackage(backend);
-  const material = ['content-promotion-v2', env.DEPLOY_SHA, '12', 1, 'W3', 'IQ-PUBLIC-ARTICLES', packageSha256, binding.release_policy_sha256, 6, binding.executor_release_sha256].join('|');
+  const material = ['content-promotion-v2', env.DEPLOY_SHA, '12', 1, 'W3', 'IQ-PUBLIC-ARTICLES', packageSha256, binding.release_policy_sha256, 10, binding.executor_release_sha256].join('|');
   const signature = workflowSignature(binding, env.CONTENT_PROMOTION_AUTOMATION_KEY, env.DEPLOY_SHA, '12', 1);
   assert.equal(signature, createHmac('sha256', env.CONTENT_PROMOTION_AUTOMATION_KEY).update(material).digest('hex'));
   assert.notEqual(signature, workflowSignature({ ...binding, executor_release_sha256: 'e'.repeat(64) }, env.CONTENT_PROMOTION_AUTOMATION_KEY, env.DEPLOY_SHA, '12', 1));
@@ -89,7 +119,7 @@ test('the PHP driver rejects malformed signed input before bootstrapping or expo
 });
 test('a public registration exemption proves only the exact article root and capability', () => {
   const after = readFileSync(`${backend}/config/content_promotion.php`, 'utf8');
-  const before = after.replace("        'content_assets/iq_public/articles/20261015-en-parity',\n", '').replace(", 'IQ-PUBLIC-ARTICLES' => 'audit_compatible'", '');
+  const before = after.replace("        'content_assets/iq_public/articles/20261010-v1',\n", '').replace(", 'IQ-PUBLIC-ARTICLES' => 'audit_compatible'", '');
   assert.equal(isIqArticleOnlyPromotionRegistration(before, after), true);
   assert.equal(isIqArticleOnlyPromotionRegistration(before, `${after}\n`), false);
   assert.equal(isIqArticleOnlyPromotionRegistration(before, after.replace("'iq' => 'fail_closed_legacy_audit'", "'iq' => 'audit_compatible'")), false);
