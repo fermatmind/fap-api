@@ -67,12 +67,12 @@ export function publish(execution, execute = request => transport(execution, req
     if (response.status !== 0 || output.ok !== true || output.schema !== 'iq.public_articles.publish.v1'
       || output.source_commit !== execution.request.source_commit || output.workflow_run_id !== execution.request.workflow_run_id
       || output.workflow_run_attempt !== 1 || output.package_sha256 !== execution.binding.package_sha256
-      || output.published_count !== 10 || output.sanitized !== true
+      || output.published_count !== 6 || output.sanitized !== true
       || output.phases?.map(row => row.phase).join('|') !== 'preflight|draft-import|publish|live-qa'
-      || output.phases.some(row => row.readback_count !== 10 || !/^[a-f0-9]{64}$/.test(row.receipt_sha256))) throw new Error('IQ_ARTICLE_PUBLICATION_RESPONSE_INVALID');
+      || output.phases.some(row => row.readback_count !== 6 || !/^[a-f0-9]{64}$/.test(row.receipt_sha256))) throw new Error('IQ_ARTICLE_PUBLICATION_RESPONSE_INVALID');
     return { schema: output.schema, ok: true, source_commit: output.source_commit, workflow_run_id: output.workflow_run_id,
-      workflow_run_attempt: 1, package_sha256: output.package_sha256, published_count: 10,
-      phases: output.phases.map(row => ({ phase: row.phase, receipt_sha256: row.receipt_sha256, readback_count: 10 })), sanitized: true };
+      workflow_run_attempt: 1, package_sha256: output.package_sha256, published_count: 6,
+      phases: output.phases.map(row => ({ phase: row.phase, receipt_sha256: row.receipt_sha256, readback_count: 6 })), sanitized: true };
   } catch {
     throw recoveryFailure(execution, execute);
   }

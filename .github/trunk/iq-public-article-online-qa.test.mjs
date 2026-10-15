@@ -75,7 +75,7 @@ function onlineFetcher(mutate = () => {}, before = false) {
     return new Response(JSON.stringify(payload), { headers: { 'content-type': 'application/json' } });
   };
 }
-test('online acceptance traverses all ten exact API, SEO and rendered candidates after fixed prestate', async () => {
+test('online acceptance traverses all six exact API, SEO and rendered candidates after fixed prestate', async () => {
   const prestate = await readOnlinePrestate('production', backend, onlineFetcher(undefined, true));
   let renderCount = 0;
   const result = await verifyOnlineCandidates('production', backend, onlineFetcher(), value => {
@@ -83,8 +83,8 @@ test('online acceptance traverses all ten exact API, SEO and rendered candidates
     const url = new URL(value); const locale = url.pathname.startsWith('/en/') ? 'en' : 'zh-CN';
     return renderedFixture(rows.find(item => item.identity.locale === locale && url.pathname.endsWith(item.identity.slug)));
   }, prestate);
-  assert.deepEqual(result, { api_readback_count: 10, seo_readback_count: 10, ssr_readback_count: 10, environment: 'production' });
-  assert.equal(renderCount, 10);
+  assert.deepEqual(result, { api_readback_count: 6, seo_readback_count: 6, ssr_readback_count: 6, environment: 'production' });
+  assert.equal(renderCount, 6);
 });
 test('the last locale cannot pass with truncated FAQ, authority drift or changed qualifications', async () => {
   const prestate = await readOnlinePrestate('production', backend, onlineFetcher(undefined, true));
@@ -93,8 +93,8 @@ test('the last locale cannot pass with truncated FAQ, authority drift or changed
   };
   for (const field of ['faq', 'qualification', 'authority']) {
     await assert.rejects(verifyOnlineCandidates('production', backend, onlineFetcher((payload, candidate) => {
-      if (candidate.page_id !== 'IQ-06' || candidate.identity.locale !== 'en') return;
-      if (field === 'faq' && payload.article) payload.answer_surface_v1.faq_blocks = payload.answer_surface_v1.faq_blocks.slice(0, 6);
+      if (candidate.page_id !== 'IQ-05' || candidate.identity.locale !== 'en') return;
+      if (field === 'faq' && payload.article) payload.answer_surface_v1.faq_blocks = payload.answer_surface_v1.faq_blocks.slice(0, -1);
       if (field === 'qualification' && payload.article) payload.article.is_indexable = true;
       if (field === 'authority' && payload.meta) payload.meta.article_authority_v1.published_revision_backed = false;
     }), renderer, prestate), /IQ_ARTICLE_ONLINE_(?:FAQ|QUALIFICATION|SEO)_MISMATCH/);

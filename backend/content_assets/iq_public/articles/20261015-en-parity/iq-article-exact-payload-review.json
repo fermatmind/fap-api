@@ -1,0 +1,247 @@
+{
+  "schema": "iq.article_exact_payload_review.v1",
+  "scope": "IQ-02, IQ-03 and IQ-05 frozen bilingual Article payloads; unchanged Chinese bytes and Chinese-source English translation parity",
+  "overall_decision": "PASS",
+  "saved": false,
+  "checks": {
+    "files_read": 18,
+    "index_hashes_match": true,
+    "content_md_utf8_byte_equal": true,
+    "faq_source_equal": true,
+    "faq_present_in_body": true,
+    "seo_source_equal": true,
+    "identity_equal": true,
+    "body_h1_count": 0,
+    "english_seo_limits_pass": true
+  },
+  "unverified_scope": [
+    "Full scientific source review and professional manuals",
+    "IQ-03 actual required-answer and next-question interaction",
+    "Runtime publisher implementation and production release binding",
+    "CMS/public API/SSR readback and structured FAQ extraction",
+    "Desktop/mobile visuals and link/CTA behavior",
+    "Indexability, technical SEO, rankings and business effects",
+    "FermatMind population norms, reliability and validity"
+  ],
+  "targets": [
+    {
+      "page_id": "IQ-02",
+      "locale": "zh-CN",
+      "body_sha256": "1cccf6af1b519380e23c6f8cc4520bc242517ae9c636c51e79f6efd1cc793a46",
+      "candidate_json_sha256": "e120372bf9a7e60792e1923466349aa87ad5bbdddd43907447a3f316c54a0306",
+      "snapshot_json_sha256": "af1f562521068190f5042a5f228458b9a53f4531e9326af1921ff345b69f00ef",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-02-zh-CN.md:24",
+          "detail": "标题摘要承诺由分数、题型、常模及正式测验比较兑现；正确率、百分位和随机Beta明确区分，模拟计算及截断结果正确。正文、7条FAQ和SEO字段精确一致。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-02",
+      "locale": "en",
+      "body_sha256": "75767daedc5879f566af90ba2438050a07f1ae839b3db3dc5ff6fe64d300e725",
+      "candidate_json_sha256": "2bc6c11817b911d53cbabc00efcce3c67834e6502d5a9a9990c8e12d9f9383bd",
+      "snapshot_json_sha256": "7ced29a1d4331d260ee94ff3b48b903e8e2378e737db34ff3632268095e67865",
+      "decision": "PASS",
+      "findings": [],
+      "translation_review": {
+        "reviewer": "fm_independent_reviewer",
+        "task": "iq_translation_review",
+        "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+        "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
+        "verdict": "PASS"
+      },
+      "previous_review": {
+        "page_id": "IQ-02",
+        "locale": "en",
+        "body_sha256": "75767daedc5879f566af90ba2438050a07f1ae839b3db3dc5ff6fe64d300e725",
+        "candidate_json_sha256": "2bc6c11817b911d53cbabc00efcce3c67834e6502d5a9a9990c8e12d9f9383bd",
+        "snapshot_json_sha256": "7ced29a1d4331d260ee94ff3b48b903e8e2378e737db34ff3632268095e67865",
+        "decision": "PASS",
+        "findings": [
+          {
+            "type": "verified",
+            "location": "article-package-review-input-v1/IQ-02-en.md:96",
+            "detail": "英文独立解释原始成绩、百分比、模拟Beta和人群标准分；未将Beta121称为人口IQ，重测案例保留替代解释。正文、7条FAQ及SEO精确一致；SEO长度57/146。"
+          }
+        ],
+        "translation_review": {
+          "reviewer": "fm_independent_reviewer",
+          "task": "iq_translation_review",
+          "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+          "frozen_manifest_sha256": "041d78687f0497e50724fbe282c410ccc94ce93a5bd1d701eab7fd90592c5110",
+          "verdict": "PASS"
+        },
+        "previous_review": {
+          "page_id": "IQ-02",
+          "locale": "en",
+          "body_sha256": "e6d227a7662768d6394be7665f21a3ce7012a5508a308ae642d0b60c4f1b1ffd",
+          "candidate_json_sha256": "716d7f9b365eac9b91fcf5734aac1b29bebc57a24656cb5bacaac81fbeee966e",
+          "snapshot_json_sha256": "0a76110c1a181bb29383598bff55fb08474a7112d9ad016d5bd01164683b2556",
+          "decision": "PASS",
+          "findings": [
+            {
+              "type": "verified",
+              "location": "article-package-review-input-v1/IQ-02-en.md:96",
+              "detail": "英文独立解释原始成绩、百分比、模拟Beta和人群标准分；未将Beta121称为人口IQ，重测案例保留替代解释。正文、7条FAQ及SEO精确一致；SEO长度57/146。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "zh-CN",
+      "body_sha256": "b337184434550fe8d9e81fd0a1e55cb2549645a39816d3d6a63b17397c2094bd",
+      "candidate_json_sha256": "481182c66049b8c680f494f8f52c33dc99f9fe345da3d32ca30257ea47e41c8c",
+      "snapshot_json_sha256": "ea663a4d3a47ff8848c5d1958c046e4c4ea1072c075393c2a7f4bda3a2a11782",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-03-zh-CN.md:3",
+          "detail": "30题、预计约20分钟、作答建议和结果限制兑现标题摘要；原创规则反例及18/30合成结果完整，独立常模与Beta显示承诺分开。正文、5条FAQ及SEO精确一致。"
+        },
+        {
+          "type": "unverified",
+          "location": "article-package-review-input-v1/IQ-03-zh-CN.md:47",
+          "detail": "先选择才能继续及全部30题必须作答的真实前端操作链未在允许源码冻结包中独立核实；本次PASS不覆盖实际交互。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "en",
+      "body_sha256": "e4a882b89cddd3bd698db148734be271557fa8c78a456d3ab520b836cdf2f219",
+      "candidate_json_sha256": "00a2799e4ab4d59a94e573b3c56f206f29ecc36bf1a66ec6263fe0f906dd8ca4",
+      "snapshot_json_sha256": "741ff21da8b1140877ab5a8b5fb03f20d1abed257007eda8fe7b94453af9a73f",
+      "decision": "PASS",
+      "findings": [],
+      "translation_review": {
+        "reviewer": "fm_independent_reviewer",
+        "task": "iq_translation_review",
+        "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+        "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
+        "verdict": "PASS"
+      },
+      "previous_review": {
+        "page_id": "IQ-03",
+        "locale": "en",
+        "body_sha256": "e4a882b89cddd3bd698db148734be271557fa8c78a456d3ab520b836cdf2f219",
+        "candidate_json_sha256": "00a2799e4ab4d59a94e573b3c56f206f29ecc36bf1a66ec6263fe0f906dd8ca4",
+        "snapshot_json_sha256": "741ff21da8b1140877ab5a8b5fb03f20d1abed257007eda8fe7b94453af9a73f",
+        "decision": "PASS",
+        "findings": [
+          {
+            "type": "verified",
+            "location": "article-package-review-input-v1/IQ-03-en.md:91",
+            "detail": "英文工具说明、合成结果和失败状态可独立理解；未承诺正式Raven、Mensa资格或结果必显示Beta。正文、5条FAQ及SEO精确一致；SEO长度50/160。"
+          },
+          {
+            "type": "unverified",
+            "location": "article-package-review-input-v1/IQ-03-en.md:47",
+            "detail": "Required-answer and next-question controls未在允许源码冻结包中独立核实；本次PASS不覆盖实际交互。"
+          }
+        ],
+        "translation_review": {
+          "reviewer": "fm_independent_reviewer",
+          "task": "iq_translation_review",
+          "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+          "frozen_manifest_sha256": "041d78687f0497e50724fbe282c410ccc94ce93a5bd1d701eab7fd90592c5110",
+          "verdict": "PASS"
+        },
+        "previous_review": {
+          "page_id": "IQ-03",
+          "locale": "en",
+          "body_sha256": "4c0bfebd678dacad5f883f7f8748269b98af5a3597b6994c1fb73718713caaa5",
+          "candidate_json_sha256": "9aad77c68aec75784b736f1d3f04f4b6e2db44e503ed494f18a47a13fcec371e",
+          "snapshot_json_sha256": "1f9ca2a2d84aeb90c896fd7c107e2ea35fe1ab0bce8f030f19d76afe53bc3687",
+          "decision": "PASS",
+          "findings": [
+            {
+              "type": "verified",
+              "location": "article-package-review-input-v1/IQ-03-en.md:91",
+              "detail": "英文工具说明、合成结果和失败状态可独立理解；未承诺正式Raven、Mensa资格或结果必显示Beta。正文、5条FAQ及SEO精确一致；SEO长度50/160。"
+            },
+            {
+              "type": "unverified",
+              "location": "article-package-review-input-v1/IQ-03-en.md:47",
+              "detail": "Required-answer and next-question controls未在允许源码冻结包中独立核实；本次PASS不覆盖实际交互。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "page_id": "IQ-05",
+      "locale": "zh-CN",
+      "body_sha256": "fac19ad660514ba97362a8f77eee501ec8c7d713d05b2511c3ae699ce7479a8e",
+      "candidate_json_sha256": "7423d68487e13c47f814dd2431ff32d6bd8ea3980de4a24d49bc759a1c6edd07",
+      "snapshot_json_sha256": "17c26ac83b67ceef86dc08d2e970d16cbdefa526e89098f6c7887d31c8644e19",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-05-zh-CN.md:73",
+          "detail": "四周编辑性安排、原创标签卡片反例、错误日志和真实学习复盘兑现标题摘要；明确未验证、不保证IQ或现实能力提升。正文、5条FAQ及SEO精确一致。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-05",
+      "locale": "en",
+      "body_sha256": "e2f1c1b13007ee5b6c607e2c2f025c4f6eddb4dad2ee3bbed4e6a1b93483d2e7",
+      "candidate_json_sha256": "7272ba9cf0fc9a33fb240c41b72857dfb789b981436bc83ecd069877be02d8bd",
+      "snapshot_json_sha256": "e9c3648688170fabdff0035195d800cf2501408fc6e15eb98cc582eb3e924aa1",
+      "decision": "PASS",
+      "findings": [],
+      "translation_review": {
+        "reviewer": "fm_independent_reviewer",
+        "task": "iq_translation_review",
+        "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+        "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
+        "verdict": "PASS"
+      },
+      "previous_review": {
+        "page_id": "IQ-05",
+        "locale": "en",
+        "body_sha256": "e2f1c1b13007ee5b6c607e2c2f025c4f6eddb4dad2ee3bbed4e6a1b93483d2e7",
+        "candidate_json_sha256": "7272ba9cf0fc9a33fb240c41b72857dfb789b981436bc83ecd069877be02d8bd",
+        "snapshot_json_sha256": "e9c3648688170fabdff0035195d800cf2501408fc6e15eb98cc582eb3e924aa1",
+        "decision": "PASS",
+        "findings": [
+          {
+            "type": "verified",
+            "location": "article-package-review-input-v1/IQ-05-en.md:148",
+            "detail": "英文练习、反例和失败调整完整；区分重复记忆、新题观察与迁移因果，没有把研究转成四周方案效果证明。正文、5条FAQ及SEO精确一致；SEO长度49/153。"
+          }
+        ],
+        "translation_review": {
+          "reviewer": "fm_independent_reviewer",
+          "task": "iq_translation_review",
+          "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+          "frozen_manifest_sha256": "041d78687f0497e50724fbe282c410ccc94ce93a5bd1d701eab7fd90592c5110",
+          "verdict": "PASS"
+        },
+        "previous_review": {
+          "page_id": "IQ-05",
+          "locale": "en",
+          "body_sha256": "8f35bcc64c60c05e2e066f4cb817f3929f44bd7c03934e934ce6f3edde93f7d0",
+          "candidate_json_sha256": "fc38a3616ae1d498e8ce79d7673d05d3e2b93da060bcd7e119ed1ff0f7115e3e",
+          "snapshot_json_sha256": "a5df2f6f24ff767999e19626f162545bc4c6f3ef9f2ddd9cff0b11a999d2f035",
+          "decision": "PASS",
+          "findings": [
+            {
+              "type": "verified",
+              "location": "article-package-review-input-v1/IQ-05-en.md:148",
+              "detail": "英文练习、反例和失败调整完整；区分重复记忆、新题观察与迁移因果，没有把研究转成四周方案效果证明。正文、5条FAQ及SEO精确一致；SEO长度49/153。"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

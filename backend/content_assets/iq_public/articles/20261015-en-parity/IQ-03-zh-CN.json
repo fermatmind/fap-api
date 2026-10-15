@@ -1,0 +1,78 @@
+{
+  "page_id": "IQ-03",
+  "locale": "zh-CN",
+  "baseline_api_sha256": "94c774296db7ddfcb453502b150ae21847cf24b9c2c4d381329c2846100216ce",
+  "candidate_sha256": "b337184434550fe8d9e81fd0a1e55cb2549645a39816d3d6a63b17397c2094bd",
+  "metadata": {
+    "title": "FermatMind IQ 测试说明：30 题、作答方法与结果边界",
+    "description": "费马测试 IQ 在线测试包含 30 道矩阵与图形规律题，约 20 分钟。了解作答方法、结果用途以及常模和正式测验边界。"
+  },
+  "faq_items": [
+    {
+      "question": "FermatMind IQ 测试有多少题，需要多久？",
+      "answer": "当前公开入口是原创30题视觉推理练习，建议预留约20分钟。这是预计用时，不是本指南确认的硬性倒计时；实际用时会因作答节奏和设备而不同。当前需要先选一个选项才能继续下一题。 全部30题均须选择答案，完成后按界面提交并查看结果。"
+    },
+    {
+      "question": "结果是正式 IQ 分数吗？",
+      "answer": "不是正式临床、教育或资格测验结果，也不是官方 Raven 或门萨证明。18/30＝60%表示本次正确率；随机模拟 Beta 不能代替人群 IQ 或百分位，且本指南不承诺结果页显示 Beta。缺少合格人群参照时，不应自行补出标准分或排名。"
+    },
+    {
+      "question": "可以把结果写进简历或申请材料吗？",
+      "answer": "不建议。它不是经目标机构认可的资格证明，也不能代替正式能力证据。"
+    },
+    {
+      "question": "多做几次会更准确吗？",
+      "answer": "短期重复可能带来熟悉和练习效应。若要复测，应记录间隔、环境和题目熟悉度，不要把分数变化直接解释成智力变化。"
+    },
+    {
+      "question": "分数低是否说明不聪明？",
+      "answer": "不能这样判断。一次在线题集受题型、时间、状态、设备和经验影响，也不覆盖完整认知能力。"
+    }
+  ],
+  "source_bindings": [
+    {
+      "claim": "当前公开入口为原创30题视觉推理练习，预计约20分钟；选项后继续，不承诺标记、跳题、留空或暂停恢复。",
+      "url": "https://fermatmind.com/zh/tests/iq-test-intelligence-quotient-assessment",
+      "read_scope": "读取冻结 research/current/IQ-01-zh-CN-lookup.json 的 forms、IQ-01公开SSR相关说明，以及 current-source-notes.md 的宿主真实zh首屏记录。任务文件提供 QuizTakeClient.tsx:1140–1160 的继续条件。另核 IqOwnerOriginal30BankService.php:15–55、212–245 的身份及完整提交要求。",
+      "limitation": "宿主只观察首屏，没有完成全部作答；QuizTakeClient定位来自任务与宿主记录，本冻结source-current目录未提供该文件。未证明生产release snapshot绑定、完整导航或暂停恢复。"
+    },
+    {
+      "claim": "18/30＝60%是本次正确率；分组成绩不是已验证的能力分量表，用时不能单独推出加工速度。",
+      "url": "/Users/rainie/Desktop/FermatMind内容交付/iq-eq-pages-20261009/iq/research/source-current/fap-web/lib/iq/presentation.ts",
+      "read_scope": "完整读取 presentation.ts 与 components/result/iq/IqResultShell.tsx。presentation.ts:83起计算分组正确率，:104起计算总正确率；IqResultShell呈现答对数、正确率、用时及分组图。",
+      "limitation": "这是源码呈现逻辑核查，未执行真实结果页验收。18/30、两种自记观察及规则表均为原创合成教学材料，不是用户数据。"
+    },
+    {
+      "claim": "Beta公开公式使用随机模拟基线；R＝8得121，R＝18截断后得145，均不能代替人口IQ或百分位。",
+      "url": "https://fermatmind.com/zh/tests/iq-test-intelligence-quotient-assessment",
+      "read_scope": "读取冻结IQ-01中文公开SSR的Beta公式段；核 research/source-current/fap-api/backend/app/Services/Assessment/IqBetaStandardScore.php 的参数、转换、截断和资格字段。",
+      "limitation": "公式的数学解释不等于运行真实计分服务或验证人群常模。Beta演示不承诺用户结果页显示该字段。"
+    },
+    {
+      "claim": "结果显示人群标准分和百分位需要独立合格的人群参照；缺失和未评分不能当作零分。",
+      "url": "/Users/rainie/Desktop/FermatMind内容交付/iq-eq-pages-20261009/iq/research/source-current/fap-web/components/result/iq/IqResultShell.tsx",
+      "read_scope": "完整读取结果组件及 presentation.ts:114–125 的 normative_reasoning 资格检查、blocked字段处理、缺失提示与不可评分文案。",
+      "limitation": "未读真实attempt或数据库常模，未完成合成结果全程QA。代码资格成立也不单独证明参照人群代表性或测量效度。"
+    },
+    {
+      "claim": "专业解释需核目标群体、语言适配和测量证据，不能借他方工具验证本站。",
+      "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
+      "read_scope": "读取冻结 current-source-notes.md 中PC-2/PC-3、C-2、C-3及19–21页相关解释的宿主实读记录。",
+      "limitation": "本角色只读冻结记录，没有重新联网读取41页原PDF；仅采用范围内的适配和证据边界，不宣称完成全文方法审稿。"
+    },
+    {
+      "claim": "重测可能包含熟悉和练习效应；Mensa Norway练习条件不能转用于费马。",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17371085/",
+      "read_scope": "读取 source-supplement-01.md 的Hausknecht摘要补证，以及 current-source-notes.md 对 https://test.mensa.no/Home/Test/en 开场和操作说明的有范围读取记录。",
+      "limitation": "Hausknecht仅摘要，适用组织与教育选择中的重测；不估计费马效应量或间隔。Mensa页面未完成测试、不研究题目或解法，也不转移资格与常模。"
+    }
+  ],
+  "unresolved": [
+    "CMS私有working revision、hold及当前受控发布资格未核，不能据公开published投影声称可发布。",
+    "实际生产题本release绑定、全程导航和提交后的真实结果未验收；不承诺跳题、回溯或恢复。",
+    "源码中的人群参照资格不等于已取得可用常模或本站效度证据。",
+    "宿主仍需严格生成完整候选、冻结后fresh审稿，并核真实API/SSR、目录、FAQ及桌面手机可读性。",
+    "只读权限未阻碍文本提案；一次here-doc读取因临时文件创建被沙箱拒绝，已用无写入命令完成读取。未修改仓库、CMS或产品资产。"
+  ],
+  "state": "author_candidate_not_reviewed"
+}

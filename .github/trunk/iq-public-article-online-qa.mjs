@@ -321,5 +321,5 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     const verifyDOM = html => assertSsrCandidate(html, row, seo.meta, environment, responseRobots);
     verifyDOM(await renderer(`${web}${path}`, { verifyDOM }));
   }
-  return { api_readback_count: 10, seo_readback_count: 10, ssr_readback_count: 10, environment };
+  return { api_readback_count: 6, seo_readback_count: 6, ssr_readback_count: 6, environment };
 }

@@ -11,7 +11,7 @@ final class IqPublicEntryPackage
 {
     public const PACKAGE = 'content_assets/iq_public/entry/20261009-v1';
 
-    public const SHA256 = 'f6e170de25839e081342c8953d17a17a85938c2c9ebb2b07d9cf8ff48351cb7f';
+    public const SHA256 = '870c7948ee846cc7679a0dae0618bd30ba7df92d2d1b72e141ff2bcb28bbe7e8';
 
     public const CODE = 'IQ_RAVEN';
 
@@ -94,6 +94,13 @@ final class IqPublicEntryPackage
                 throw new DomainException('iq_public_entry_review_unbound');
             }
             $patch = $this->project($body, $input['faq_items'], $key);
+            if ($locale === 'en' && isset($input['entry_fields'])) {
+                $fields = ['title', 'description', 'audience', 'when_to_use', 'how_it_works', 'landing_entry', 'highlight'];
+                if (! is_array($input['entry_fields']) || array_keys($input['entry_fields']) !== $fields) {
+                    throw new DomainException('iq_public_entry_fields_invalid');
+                }
+                $patch = [...$patch, ...$input['entry_fields']];
+            }
             if ($locale === 'en' && preg_match('/\p{Han}/u', PromotionContextFactory::canonicalJson($patch)) === 1) {
                 throw new DomainException('iq_public_entry_locale_invalid');
             }

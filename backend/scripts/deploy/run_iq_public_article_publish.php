@@ -88,8 +88,8 @@ try {
         putenv($name.'='.$request[$field]);
         $_SERVER[$name] = $_ENV[$name] = (string) $request[$field];
     }
-    putenv('CONTENT_PROMOTION_EXPECTED_ROW_COUNT=10');
-    $_SERVER['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = $_ENV['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = '10';
+    putenv('CONTENT_PROMOTION_EXPECTED_ROW_COUNT=6');
+    $_SERVER['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = $_ENV['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = '6';
     // Previous receipts come solely from this driver's immutable phase chain.
     putenv('CONTENT_PROMOTION_PREVIOUS_RECEIPT');
     unset($_SERVER['CONTENT_PROMOTION_PREVIOUS_RECEIPT'], $_ENV['CONTENT_PROMOTION_PREVIOUS_RECEIPT']);
@@ -139,17 +139,17 @@ try {
         }
         $path = $directory.'/'.$phase.'.json';
         $result = $app->make(ExactPackagePromotionService::class)->execute($context, $phase, $path);
-        if (($result['receipt']['expected_count'] ?? null) !== 10 || ($result['receipt']['readback_count'] ?? null) !== 10) {
+        if (($result['receipt']['expected_count'] ?? null) !== 6 || ($result['receipt']['readback_count'] ?? null) !== 6) {
             throw new DomainException('iq_article_phase_count_invalid');
         }
-        $completed[] = ['phase' => $phase, 'receipt_sha256' => $result['receipt_sha256'], 'readback_count' => 10];
+        $completed[] = ['phase' => $phase, 'receipt_sha256' => $result['receipt_sha256'], 'readback_count' => 6];
         $previous = $path;
     }
     echo json_encode([
         'schema' => 'iq.public_articles.publish.v1', 'ok' => true,
         'source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId,
         'workflow_run_attempt' => 1, 'package_sha256' => $context->packageSha256,
-        'published_count' => 10, 'phases' => $completed,
+        'published_count' => 6, 'phases' => $completed,
         'elapsed_seconds' => round(microtime(true) - $started, 3), 'sanitized' => true,
     ], JSON_THROW_ON_ERROR).PHP_EOL;
 } catch (Throwable $error) {

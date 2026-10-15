@@ -136,7 +136,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                     'revision_status' => ArticleTranslationRevision::STATUS_APPROVED, 'source_version_hash' => $sourceHash,
                     'translated_from_version_hash' => $article->locale === 'en' ? $sourceHash : null,
                     'supersedes_revision_id' => $article->published_revision_id,
-                    'authority_asset_key' => $this->key($row), 'authority_source_package' => IqPublicArticlePackage::PACKAGE,
+                    'authority_asset_key' => $this->key($row), 'authority_source_package' => IqPublicArticlePackage::packageForSha($context->packageSha256),
                     'authority_source_hash' => $row['snapshot_sha256'], 'authority_package_sha256' => $context->packageSha256,
                     'authority_metadata_json' => ['snapshot' => $row['snapshot'], 'approval_kind' => 'verified_automated_exact_package', 'source_commit' => $context->sourceCommit, 'created_identity_by_package' => $created],
                     ...Arr::only($row['snapshot'], ['title', 'excerpt', 'content_md', 'seo_title', 'seo_description']),
@@ -253,7 +253,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
             }, 3);
         }
         if ($written === 0) {
-            return $this->result($context, 0, 10, $reference, $this->state($rows, false));
+            return $this->result($context, 0, $context->expectedRowCount, $reference, $this->state($rows, false));
         }
         try {
             $this->cache->flushArticleDiscoverabilityCaches(false);
@@ -262,7 +262,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
             throw new DomainException('iq_article_cache_failed_rollback_succeeded', previous: $error);
         }
 
-        return $this->result($context, $written, 10, $reference, $this->state($rows, false));
+        return $this->result($context, $written, $context->expectedRowCount, $reference, $this->state($rows, false));
     }
 
     public function liveQa(PromotionContext $context): array
@@ -290,7 +290,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
             }
         }
 
-        return $this->result($context, 0, 10, null, $this->state($rows, false));
+        return $this->result($context, 0, $context->expectedRowCount, null, $this->state($rows, false));
     }
 
     public function rollback(PromotionContext $context, string $rollbackReference): void
@@ -428,8 +428,9 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
 
     private function rows(PromotionContext $context): array
     {
-        if (! $this->supports($context->lane, $context->subscope) || $context->expectedRowCount !== 10 || $context->workflowRunAttempt !== 1
-            || realpath($context->packageDirectory) !== realpath(base_path(IqPublicArticlePackage::PACKAGE))) {
+        if (! $this->supports($context->lane, $context->subscope) || ! in_array($context->expectedRowCount, [6, 10], true) || $context->workflowRunAttempt !== 1
+            || ! ((hash_equals(IqPublicArticlePackage::SHA256, $context->packageSha256) && $context->expectedRowCount === 6 && realpath($context->packageDirectory) === realpath(base_path(IqPublicArticlePackage::PACKAGE)))
+                || (hash_equals(IqPublicArticlePackage::LEGACY_SHA256, $context->packageSha256) && $context->expectedRowCount === 10 && realpath($context->packageDirectory) === realpath(base_path(IqPublicArticlePackage::LEGACY_PACKAGE))))) {
             throw new DomainException('iq_article_context_invalid');
         }
 
@@ -477,7 +478,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
             $seo = $article ? $this->seo($article, $lock) : null;
             $revisions = $article ? ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)
                 ->where(static function ($query) use ($article): void {
-                    $query->whereIn('id', array_filter([$article->published_revision_id, $article->working_revision_id]))->orWhere('authority_package_sha256', IqPublicArticlePackage::SHA256);
+                    $query->whereIn('id', array_filter([$article->published_revision_id, $article->working_revision_id]))->orWhereIn('authority_package_sha256', [IqPublicArticlePackage::SHA256, IqPublicArticlePackage::LEGACY_SHA256]);
                 })->orderBy('id')->when($lock, static fn ($query) => $query->lockForUpdate())->get()->map->getAttributes()->all() : [];
             $seoAttributes = $seo?->getAttributes();
             if ($seoAttributes) {
@@ -622,7 +623,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
         if (! $source || (int) $revision->org_id !== 0 || $revision->locale !== $article->locale
             || (int) $revision->source_article_id !== (int) $source->id || $revision->translation_group_id !== $article->translation_group_id
             || $revision->authority_package_sha256 !== $context->packageSha256 || $revision->authority_asset_key !== $this->key($row)
-            || $revision->authority_source_package !== IqPublicArticlePackage::PACKAGE || $revision->authority_source_hash !== $row['snapshot_sha256']
+            || $revision->authority_source_package !== IqPublicArticlePackage::packageForSha($context->packageSha256) || $revision->authority_source_hash !== $row['snapshot_sha256']
             || ! $this->sameJson(data_get($revision->authority_metadata_json, 'snapshot'), $row['snapshot'])
             || ($article->locale === 'en' && ((int) $article->source_article_id !== (int) $source->id || $article->translation_group_id !== $source->translation_group_id))) {
             throw new DomainException('iq_article_exact_draft_payload_drift');
@@ -772,8 +773,8 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
 
     private function result(PromotionContext $context, int $written, int $published, ?string $reference, array $state, int $created = 0): array
     {
-        return [...PromotionAdapterResultFactory::make($context, $written, 10, $published, $reference, array_fill_keys([
+        return [...PromotionAdapterResultFactory::make($context, $written, $context->expectedRowCount, $published, $reference, array_fill_keys([
             'indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count', 'deploy_mutation_count',
-        ], 0), ['created_count' => $created, 'updated_count' => $written - $created, 'unchanged_count' => 10 - $written]), 'target_state_sha256' => hash('sha256', PromotionContextFactory::canonicalJson($state))];
+        ], 0), ['created_count' => $created, 'updated_count' => $written - $created, 'unchanged_count' => $context->expectedRowCount - $written]), 'target_state_sha256' => hash('sha256', PromotionContextFactory::canonicalJson($state))];
     }
 }

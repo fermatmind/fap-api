@@ -27,8 +27,6 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
 
     private const PACK_ID = 'iq-public-scale';
 
-    private const LEAVES = ['landing_copy', 'why_choose', 'faq'];
-
     public function __construct(
         private readonly IqPublicEntryPackage $package,
         private readonly PromotionReceiptStore $receipts,
@@ -115,7 +113,7 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
                 foreach ($state['registries'] as $registry) {
                     $content = $registry['content'];
                     foreach ($rows as $row) {
-                        foreach (self::LEAVES as $leaf) {
+                        foreach (array_keys($row['patch']) as $leaf) {
                             if (! $this->sameJsonValue($content[$row['key']][$leaf] ?? null, $row['patch'][$leaf])) {
                                 $changedLocales[$row['key']] = true;
                             }
@@ -133,7 +131,7 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
                 }
                 $after = $this->state(true);
                 $this->assertPublished($rows, $after);
-                if ($this->protectedHash($state) !== $this->protectedHash($after)) {
+                if ($this->protectedHash($state, $rows) !== $this->protectedHash($after, $rows)) {
                     throw new DomainException('iq_public_scale_protected_field_drift');
                 }
                 $written = count($changedLocales);
@@ -164,7 +162,7 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
                 throw new DomainException('iq_public_scale_public_readback_invalid');
             }
             foreach ($rows as $row) {
-                foreach (self::LEAVES as $leaf) {
+                foreach (array_keys($row['patch']) as $leaf) {
                     if (! $this->sameJsonValue(data_get($public, 'content_i18n_json.'.$row['key'].'.'.$leaf), $row['patch'][$leaf])) {
                         throw new DomainException('iq_public_scale_public_readback_drift');
                     }
@@ -194,7 +192,7 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
                 }
                 $content = $matches[0]['content'];
                 foreach ($rows as $row) {
-                    foreach (self::LEAVES as $leaf) {
+                    foreach (array_keys($row['patch']) as $leaf) {
                         $actual = $content[$row['key']][$leaf] ?? null;
                         $old = $saved['content'][$row['key']][$leaf] ?? null;
                         if (! $this->sameJsonValue($actual, $row['patch'][$leaf]) && ! $this->sameJsonValue($actual, $old)) {
@@ -272,7 +270,7 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
     {
         foreach ($state['registries'] as $registry) {
             foreach ($rows as $row) {
-                foreach (self::LEAVES as $leaf) {
+                foreach (array_keys($row['patch']) as $leaf) {
                     if (! $this->sameJsonValue($registry['content'][$row['key']][$leaf] ?? null, $row['patch'][$leaf])) {
                         throw new DomainException('iq_public_scale_published_content_drift');
                     }
@@ -305,13 +303,13 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
         return true;
     }
 
-    private function protectedHash(array $state): string
+    private function protectedHash(array $state, array $rows): string
     {
         foreach ($state['registries'] as &$row) {
             unset($row['values']['content_i18n_json']);
-            foreach (['zh', 'en'] as $key) {
-                foreach (self::LEAVES as $leaf) {
-                    unset($row['content'][$key][$leaf]);
+            foreach ($rows as $candidate) {
+                foreach (array_keys($candidate['patch']) as $leaf) {
+                    unset($row['content'][$candidate['key']][$leaf]);
                 }
             }
         }

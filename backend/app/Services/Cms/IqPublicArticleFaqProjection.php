@@ -23,9 +23,10 @@ final class IqPublicArticleFaqProjection
             || ! $article->is_public || $article->status !== 'published' || ! is_array($binding) || ! $revision
             || $revision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
             || (int) $revision->article_id !== (int) $article->id || (int) $revision->org_id !== 0 || $revision->locale !== $article->locale
-            || $revision->authority_package_sha256 !== IqPublicArticlePackage::SHA256
+            || IqPublicArticlePackage::packageForSha((string) $revision->authority_package_sha256) === null
+            || $revision->authority_source_package !== IqPublicArticlePackage::packageForSha((string) $revision->authority_package_sha256)
             || $revision->authority_asset_key !== $article->locale.':'.$article->slug
-            || ($binding['package_sha256'] ?? null) !== IqPublicArticlePackage::SHA256
+            || ($binding['package_sha256'] ?? null) !== $revision->authority_package_sha256
             || ($binding['revision_id'] ?? null) !== (int) $article->published_revision_id
             || ($binding['snapshot_sha256'] ?? null) !== $revision->authority_source_hash
             || ! is_string($binding['snapshot_sha256'] ?? null) || preg_match('/\A[a-f0-9]{64}\z/', $binding['snapshot_sha256']) !== 1

@@ -17,6 +17,16 @@ final class IqEqTopicPrerequisitesTest extends TestCase
     use RefreshDatabase;
     use \Tests\Unit\ContentPromotion\Concerns\SeedsIqEqTopicPrerequisites;
 
+    public function test_three_translated_pairs_preserve_all_five_required_article_dependencies(): void
+    {
+        $this->seedArticles(true);
+        $this->seedIqEntry();
+        app(IqEqTopicPrerequisites::class)->assertPublished();
+        Article::query()->where('slug', 'what-is-iq-and-how-it-is-measured')->where('locale', 'en')->update(['is_public' => false]);
+        $this->expectExceptionMessage('iq_eq_topic_required_article_unpublished');
+        app(IqEqTopicPrerequisites::class)->assertPublished();
+    }
+
     public function test_authority_read_failure_cannot_fall_back_to_a_published_legacy_entry(): void
     {
         config(['fap.scales_registry.use_v2' => true]);

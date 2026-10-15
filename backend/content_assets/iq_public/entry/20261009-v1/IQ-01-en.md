@@ -1,59 +1,61 @@
 # Free IQ Test
 
-Try FermatMind’s original 30-question visual matrix reasoning exercise. Allow about 20 minutes to work through the questions independently. The current test and its results are free.
+FermatMind currently offers an original 30-question visual matrix reasoning exercise, estimated to take about 20 minutes, which is free to complete and view results. You compare quantities, directions, combinations and changes in shapes to identify patterns and observe your performance on this particular task.
 
-The tasks ask you to compare quantities, directions, combinations and changes in visual patterns. They provide information about performance on this set of questions. They do not cover every aspect of cognition, including verbal comprehension, memory, processing speed, creativity or practical expertise. The entry-page name “IQ test” does not make this an official Raven assessment, a Mensa admission test or a comprehensive Wechsler assessment.
+“IQ test” is the entry-page name. The current form is not an official Raven assessment, a Mensa admission test or a comprehensive Wechsler intelligence assessment; one visual task also cannot encompass verbal comprehension, memory, processing speed, creativity or real-world problem-solving ability.
 
 [Start the free 30-question test](/en/tests/iq-test-intelligence-quotient-assessment/take)
 
-## Before you begin
+## Before you begin, set aside uninterrupted time
 
-Choose a device that displays the patterns and answer options clearly, and set aside uninterrupted time. About 20 minutes is an estimate, not an intelligence threshold. Follow the actual question-page instructions for answering and submitting.
+Allow about 20 minutes, use a device that displays the diagrams and options clearly, and minimise interruptions. These 20 minutes are an estimate, not an intelligence threshold or an indication that faster means smarter. Follow the actual question-page instructions for answering and submitting.
 
-If your goal is to observe your independent performance, avoid search, AI solutions and hints from other people. Assistance changes what the result describes. Make a note of substantial interruptions, fatigue or display problems rather than treating an affected attempt as your ability ceiling.
+To observe your independent performance, answer on your own without search, AI solutions or other people's hints. Assisted scores reflect different conditions and cannot be compared directly with independent attempts. If diagrams do not display, you are noticeably fatigued or interruptions persist, address those problems first rather than treating the affected result as your ability ceiling.
 
-## A reasoning example: test the rule against every position
+## What visual reasoning involves: propose a rule, then look for a counterexample
 
-This teaching example was created for this page. It is not a question from FermatMind’s bank or from a professional assessment. Each cell describes a number of identical arrows and their direction.
+Matrix reasoning involves comparing relationships across rows, columns or positions, then judging the missing part. Finding a seemingly plausible rule is only the beginning; check whether it also explains the other known positions.
+
+The following teaching material was created for this page. It is not a question from this site's bank or a sample from any formal assessment. Arrows indicate direction and numbers indicate how many identical arrows appear.
 
 | Position | First cell | Second cell | Third cell |
 |---|---|---|---|
-| First row | 1 upward arrow | 2 rightward arrows | 3 downward arrows |
-| Second row | 2 upward arrows | 3 rightward arrows | 4 downward arrows |
-| Third row | 3 upward arrows | 4 rightward arrows | ? |
+| First row | 1 ↑ | 2 → | 3 ↓ |
+| Second row | 2 ↑ | 3 → | 4 ↓ |
+| Third row | 3 ↑ | 4 → | ? |
 
-Start with quantity. Moving right adds one arrow; moving down also adds one. Both checks lead to five arrows in the missing cell. Now examine direction. Each row follows up, right, down, while each column keeps its direction. The missing cell therefore contains five downward arrows.
+First consider quantity alone: moving right adds 1 in each row, and moving down adds 1 in each column, so the missing cell should contain 5. Next consider direction: every row follows ↑, →, ↓, while direction stays constant within a column, so the missing cell should contain 5 ↓.
 
-A tempting first explanation is that arrows always rotate clockwise. That fits the horizontal change but fails down the first column, where every arrow points upward. Narrow the rule to the relationship actually observed: direction changes across a row and stays constant down a column.
+One tempting mistake is to say “the shapes always rotate clockwise”. This explains the change from left to right but not from top to bottom: the first column always points ↑ and does not rotate. Revise the rule to “direction changes horizontally and stays constant vertically”, rather than ignoring counterexamples to preserve a guess.
 
-Five rightward arrows would satisfy the quantity rule but violate the direction rule. This is why a plausible answer needs more than one supporting detail. Describe the observations, propose a rule, check the remaining positions and test the proposed answer against all conditions. A small teaching grid cannot exclude every imaginable rule; its purpose is to demonstrate consistent checking, not to classify intelligence.
+This example also shows that the correct quantity is not a complete answer: 5 → satisfies the quantity condition but violates the third column's direction condition. Work through four steps: describe observations, propose a rule, check every known position, and confirm that the answer satisfies every condition. Limited material may not exclude every imaginable rule; the teaching example uses a simple rule that consistently explains the known information, rather than proving someone's intelligence level.
 
-## What the raw result means
+## How the raw result is calculated
 
-In the current original form, each correct answer contributes one point and an incorrect answer contributes zero. There is no deduction for wrong answers. The raw score is the number correct, from 0 to 30: R = Σ[pᵢ × I(item i correct)], with pᵢ = 1 for each item.
+On the current original 30-question form, a correct answer earns 1 point and an incorrect answer earns 0, with no deduction for wrong answers. The raw result is the correct-answer count, ranging from 0–30. It can also be written as R = Σ[pᵢ × I(item i correct)], with pᵢ = 1 for every item in the current form.
 
-Eighteen correct answers give a raw score of 18 and 18÷30×100% = 60% correct. That percentage describes answers on this form. It is neither an IQ of 60 nor the 60th percentile.
+For example, 18 correct answers give a raw result of 18 and an accuracy of 18÷30×100% = 60%. This describes the proportion answered correctly on this form, not IQ 60 or the 60th percentile.
 
-Any item-group summaries should be read as performance on their assigned questions. Group labels and percentage-correct figures do not establish validated ability subscales or enduring cognitive types.
+If a result includes item-group summaries, read them in terms of each group's correct-answer count and item count. Group names and percentages help organise this attempt's performance; they do not establish validated independent ability subscales or stable “spatial” or “numerical” intelligence types.
 
-## The published Beta calculation uses a simulated baseline
+## The Beta indicator: a public formula is not population norms
 
-The public technical explanation uses a random-response simulation baseline with μ = 5.096 and σ = 2.034. It calculates z = (R − 5.096)÷2.034, then round(100 + 15z), capped between 55 and 145.
+The Beta indicator in the current public technical explanation uses a simulated random-response baseline: μ = 5.096, σ = 2.034, and z = (R − 5.096)÷2.034. It then calculates round(100 + 15z) and caps the result between 55–145. These parameters describe simulated random responses, not the intelligence distribution of a representative population of test takers.
 
-For R = 8, z is approximately 1.428 and Beta is 121. This is not a population-normed IQ of 121 and cannot establish how many people you outperform. All integer raw scores from 12 through 30 map to 145, so the ceiling cannot distinguish those results. A raw score of zero maps to 62; 55 is the configured lower bound, not the output for zero correct answers.
+For R = 8, z is approximately 1.428 and Beta is 121. That 121 cannot be called a population-normed IQ of 121 or interpreted as how many people you outperform. Every integer correct count from 12–30 currently reaches 145, so that ceiling cannot distinguish those raw results or reveal the original correct count. For R = 0, the formula actually outputs 62; 55 is the configured lower bound, not the result for zero correct answers.
 
-This section explains a published technical indicator. It does not promise that the current report interface displays Beta. A norm-referenced score or percentile requires separate information about the reference population, version and availability; a simulated indicator cannot fill in a missing population score. Read [IQ scores and interpretation limits](/en/articles/iq-test-score-and-limits-explained) for the fuller distinction.
+This section explains a published technical indicator and does not promise that the current report interface displays Beta. Any norm-referenced standard score and percentile in a report requires separate checks of its reference population, version and availability; Beta cannot replace a missing population score. See [IQ scores and interpretation limits](/en/articles/iq-test-score-and-limits-explained) for detailed guidance on the numbers.
 
-## Match the evidence to your purpose
+## How to judge what a result can be used for
 
-Ask what the questions cover, how scoring works, which ages and languages are supported, how the reference sample was obtained, and what reliability and validity evidence supports the proposed interpretation. Familiar-looking puzzles and an open formula do not settle those questions.
+Ask separately what the questions cover, how scoring works, which ages and languages are supported, how the reference sample was obtained, whether scores are reliable, and whether evidence supports the judgment you want to make. Questions resembling classic intelligence puzzles, an open formula or numbers on a scale centred around 100 cannot establish these points by themselves.
 
-The testing standards connect validity to particular score interpretations and uses. Exploring your reasoning process requires a different evidential basis from educational placement, clinical assessment or another consequential decision. [Standards for Educational and Psychological Testing](https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf)
+The Standards for Educational and Psychological Testing emphasise that validity concerns specific score interpretations and uses. Exploring your reasoning process requires different evidence from childhood educational placement, clinical assessment or other consequential decisions. [Testing standards](https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf)
 
-Use this exercise to explore a task and identify questions for reflection. Without clear age-specific validation and norms, do not use it to assess childhood intelligence or rank people of different ages. Its result is not a hiring credential, diagnostic certificate or Mensa qualification. For formal evidence, check the receiving institution’s accepted instruments, language versions, practitioners and procedures.
+This page is for experiencing visual reasoning tasks, understanding this attempt's performance and identifying questions for reflection. Without clear age validation and relevant norms, do not use it for childhood intelligence assessment or cross-age rankings; the result is not a Mensa qualification, hiring credential, school assessment or diagnostic certificate. If formal documentation is needed, check which instruments, language versions, practitioners and procedures the receiving institution accepts.
 
-## Choose a useful next step
+## After finishing, choose one concrete next step
 
-For the instrument and its conditions of use, read the [FermatMind IQ test guide](/en/articles/iq-test-tool-guide). For the meaning of raw scores, percentage correct and Beta, read [IQ scores and interpretation limits](/en/articles/iq-test-score-and-limits-explained). For strategy review, continue to [IQ test practice and retesting](/en/articles/iq-test-growth-guide).
+To understand this site's tool and its conditions of use, read the [FermatMind IQ test guide](/en/articles/iq-test-tool-guide). For questions about raw scores, accuracy and Beta, read [IQ scores and interpretation limits](/en/articles/iq-test-score-and-limits-explained). To improve rule checking and review habits, read [IQ test practice and review](/en/articles/iq-test-growth-guide).
 
-Record one testable observation, such as “I selected an answer before checking the second row,” then watch for it on new practice material. Repeated exposure may improve familiarity or answer memory. A higher repeated score alone does not demonstrate growth in general intelligence, and a low result does not establish a lack of potential.
+First record one testable question, such as “Did I choose an answer after checking only the first row?”, then observe whether it happens again on entirely new practice material. Repeating the same questions can increase familiarity and answer memory; a score increase alone does not prove an increase in general intelligence. A single low score likewise does not prove a lack of potential; consider real learning performance, response conditions and support needs.

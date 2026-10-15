@@ -12,15 +12,15 @@ const env = { IQ_ARTICLE_PUBLISH_ENVIRONMENT: 'staging', DEPLOY_PATH: '/srv/appl
   DEPLOY_SHA: 'a'.repeat(40), GITHUB_RUN_ID: '12', GITHUB_RUN_ATTEMPT: '1', CONTENT_PROMOTION_AUTOMATION_KEY: 'synthetic-test-key-never-a-production-secret' };
 const execution = () => buildExecution(env, backend);
 const success = () => ({ schema: 'iq.public_articles.publish.v1', ok: true, source_commit: env.DEPLOY_SHA, workflow_run_id: '12', workflow_run_attempt: 1,
-  package_sha256: packageSha256, published_count: 10, sanitized: true,
-  phases: ['preflight', 'draft-import', 'publish', 'live-qa'].map(phase => ({ phase, receipt_sha256: 'b'.repeat(64), readback_count: 10 })) });
+  package_sha256: packageSha256, published_count: 6, sanitized: true,
+  phases: ['preflight', 'draft-import', 'publish', 'live-qa'].map(phase => ({ phase, receipt_sha256: 'b'.repeat(64), readback_count: 6 })) });
 const recovery = () => ({ ok: true, mode: 'recover', source_commit: env.DEPLOY_SHA, workflow_run_id: '12', workflow_run_attempt: 1,
   package_sha256: packageSha256, executor_release_sha256: execution().binding.executor_release_sha256, restored: true, recovery_status: 'restored', sanitized: true });
 
-test('binding reads all ten reviewed payloads through the sole PHP package codec', () => {
+test('binding reads the six reviewed translation payloads through the sole PHP package codec', () => {
   const rows = readCandidateRows(backend);
-  assert.equal(rows.length, 10);
-  assert.deepEqual(rows.map(row => row.snapshot.faq_items.length), [7, 7, 5, 5, 5, 5, 5, 5, 9, 9]);
+  assert.equal(rows.length, 6);
+  assert.deepEqual(rows.map(row => row.snapshot.faq_items.length), [7, 7, 5, 5, 5, 5]);
   assert.equal(inspectPackage(backend).package_sha256, packageSha256);
 });
 test('the real PHP driver and Node workflow bind identical executor files and hashes', () => {
@@ -33,7 +33,7 @@ test('the real PHP driver and Node workflow bind identical executor files and ha
 });
 test('workflow HMAC binds exact executor release and cannot transfer to changed implementation', () => {
   const binding = inspectPackage(backend);
-  const material = ['content-promotion-v2', env.DEPLOY_SHA, '12', 1, 'W3', 'IQ-PUBLIC-ARTICLES', packageSha256, binding.release_policy_sha256, 10, binding.executor_release_sha256].join('|');
+  const material = ['content-promotion-v2', env.DEPLOY_SHA, '12', 1, 'W3', 'IQ-PUBLIC-ARTICLES', packageSha256, binding.release_policy_sha256, 6, binding.executor_release_sha256].join('|');
   const signature = workflowSignature(binding, env.CONTENT_PROMOTION_AUTOMATION_KEY, env.DEPLOY_SHA, '12', 1);
   assert.equal(signature, createHmac('sha256', env.CONTENT_PROMOTION_AUTOMATION_KEY).update(material).digest('hex'));
   assert.notEqual(signature, workflowSignature({ ...binding, executor_release_sha256: 'e'.repeat(64) }, env.CONTENT_PROMOTION_AUTOMATION_KEY, env.DEPLOY_SHA, '12', 1));
@@ -89,7 +89,7 @@ test('the PHP driver rejects malformed signed input before bootstrapping or expo
 });
 test('a public registration exemption proves only the exact article root and capability', () => {
   const after = readFileSync(`${backend}/config/content_promotion.php`, 'utf8');
-  const before = after.replace("        'content_assets/iq_public/articles/20261010-v1',\n", '').replace(", 'IQ-PUBLIC-ARTICLES' => 'audit_compatible'", '');
+  const before = after.replace("        'content_assets/iq_public/articles/20261015-en-parity',\n", '').replace(", 'IQ-PUBLIC-ARTICLES' => 'audit_compatible'", '');
   assert.equal(isIqArticleOnlyPromotionRegistration(before, after), true);
   assert.equal(isIqArticleOnlyPromotionRegistration(before, `${after}\n`), false);
   assert.equal(isIqArticleOnlyPromotionRegistration(before, after.replace("'iq' => 'fail_closed_legacy_audit'", "'iq' => 'audit_compatible'")), false);

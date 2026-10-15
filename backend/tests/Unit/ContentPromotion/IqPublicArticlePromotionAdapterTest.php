@@ -35,6 +35,32 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         parent::tearDown();
     }
 
+    public function test_current_translation_release_only_updates_the_three_authorized_article_pairs(): void
+    {
+        $this->seedExisting();
+        $this->publish();
+        $control = Article::query()->whereIn('slug', ['iq-test-narrative-portrait', 'what-is-iq-and-how-it-is-measured'])->orderBy('id')->get()->toArray();
+        $context = new PromotionContext(
+            packageDirectory: base_path(IqPublicArticlePackage::PACKAGE), packageSha256: IqPublicArticlePackage::SHA256,
+            lane: 'W3', subscope: IqPublicArticlePromotionAdapter::SUBSCOPE, sourceCommit: str_repeat('e', 40),
+            executorReleaseSha256: str_repeat('b', 64), releasePolicySha256: hash('sha256', PromotionContextFactory::canonicalJson(config('content_promotion.release_policy'))),
+            workflowRunId: '1003', workflowRunAttempt: 1, workflowSignature: str_repeat('c', 64), expectedRowCount: 6, idempotencyKey: str_repeat('e', 64),
+        );
+        $adapter = app(IqPublicArticlePromotionAdapter::class);
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $draft = $adapter->draftImport($context);
+        self::assertSame(6, $draft['written_count']);
+        self::assertSame(0, $draft['created_count']);
+        $this->previous($context, 'cms_draft_import_receipt', $draft);
+        $published = $adapter->publish($context);
+        self::assertSame(6, $published['published_count']);
+        self::assertSame(6, $adapter->liveQa($context)['readback_count']);
+        self::assertSame($control, Article::query()->whereIn('slug', ['iq-test-narrative-portrait', 'what-is-iq-and-how-it-is-measured'])->orderBy('id')->get()->toArray());
+        self::assertSame(2, Article::query()->where('slug', 'what-is-iq-and-how-it-is-measured')->count());
+        $adapter->rollback($context, $published['rollback_reference']);
+        self::assertSame($control, Article::query()->whereIn('slug', ['iq-test-narrative-portrait', 'what-is-iq-and-how-it-is-measured'])->orderBy('id')->get()->toArray());
+    }
+
     public function test_bilingual_publish_and_rollback_preserve_foreign_drafts_and_indexability(): void
     {
         // Publication and recovery evict derived sitemap reads but must preserve a live warmer's mutex.
@@ -153,7 +179,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         } catch (DomainException $error) {
             self::assertSame('iq_article_prestate_drift', $error->getMessage());
         }
-        self::assertSame(0, ArticleTranslationRevision::query()->where('authority_package_sha256', IqPublicArticlePackage::SHA256)->count());
+        self::assertSame(0, ArticleTranslationRevision::query()->where('authority_package_sha256', IqPublicArticlePackage::LEGACY_SHA256)->count());
         self::assertSame(8, Article::query()->count());
     }
 
@@ -281,7 +307,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
     {
         $this->seedExisting();
         [$adapter, $context] = $this->import();
-        ArticleTranslationRevision::query()->where('authority_package_sha256', IqPublicArticlePackage::SHA256)->where('locale', 'en')->first()->forceFill(['content_md' => 'Changed stored candidate'])->saveQuietly();
+        ArticleTranslationRevision::query()->where('authority_package_sha256', IqPublicArticlePackage::LEGACY_SHA256)->where('locale', 'en')->first()->forceFill(['content_md' => 'Changed stored candidate'])->saveQuietly();
         $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
         $this->expectExceptionMessage('iq_article_exact_draft_payload_drift');
         $adapter->draftImport($context);
@@ -291,7 +317,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
     {
         $this->seedExisting();
         [$adapter, $context] = $this->import();
-        ArticleTranslationRevision::query()->where('authority_package_sha256', IqPublicArticlePackage::SHA256)->where('locale', 'en')->first()->forceFill(['translated_from_version_hash' => str_repeat('f', 64)])->saveQuietly();
+        ArticleTranslationRevision::query()->where('authority_package_sha256', IqPublicArticlePackage::LEGACY_SHA256)->where('locale', 'en')->first()->forceFill(['translated_from_version_hash' => str_repeat('f', 64)])->saveQuietly();
         $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
         $this->expectExceptionMessage('iq_article_exact_draft_payload_drift');
         $adapter->draftImport($context);
@@ -312,7 +338,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         $beforeArticles = Article::query()->orderBy('id')->get()->map->getAttributes()->all();
         $beforeRevisions = ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all();
         $context = new PromotionContext(
-            packageDirectory: base_path(IqPublicArticlePackage::PACKAGE), packageSha256: IqPublicArticlePackage::SHA256,
+            packageDirectory: base_path(IqPublicArticlePackage::LEGACY_PACKAGE), packageSha256: IqPublicArticlePackage::LEGACY_SHA256,
             lane: 'W3', subscope: IqPublicArticlePromotionAdapter::SUBSCOPE, sourceCommit: str_repeat('e', 40),
             executorReleaseSha256: str_repeat('b', 64), releasePolicySha256: $this->context()->releasePolicySha256,
             workflowRunId: '1002', workflowRunAttempt: 1, workflowSignature: str_repeat('c', 64), expectedRowCount: 10, idempotencyKey: str_repeat('f', 64),
@@ -371,7 +397,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
             $this->receiptFiles[] = $path;
             $output = new BufferedOutput;
             $exit = Artisan::call('content:promote-exact-package', [
-                '--package' => IqPublicArticlePackage::PACKAGE, '--expected-package-sha256' => $context->packageSha256,
+                '--package' => IqPublicArticlePackage::LEGACY_PACKAGE, '--expected-package-sha256' => $context->packageSha256,
                 '--lane' => 'W3', '--subscope' => IqPublicArticlePromotionAdapter::SUBSCOPE, '--phase' => $phase, '--receipt' => $path, '--json' => true,
             ], $output);
             $response = json_decode(trim($output->fetch()), true, 32, JSON_THROW_ON_ERROR);
@@ -400,7 +426,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
             self::assertSame('iq_article_rollback_supported_baseline_required', $error->getMessage());
         }
         self::assertSame(8, Article::query()->count());
-        self::assertSame(0, ArticleTranslationRevision::query()->where('authority_package_sha256', IqPublicArticlePackage::SHA256)->count());
+        self::assertSame(0, ArticleTranslationRevision::query()->where('authority_package_sha256', IqPublicArticlePackage::LEGACY_SHA256)->count());
         self::assertSame(0, ContentReleaseSnapshot::query()->where('pack_id', 'iq-public-articles')->count());
     }
 
@@ -472,10 +498,10 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
             config(['content_promotion.execution.'.$field => $value]);
         }
         $factory = app(PromotionContextFactory::class);
-        self::assertSame($context->executorReleaseSha256, $factory->make(IqPublicArticlePackage::PACKAGE, $context->packageSha256, 'W3', IqPublicArticlePromotionAdapter::SUBSCOPE)->executorReleaseSha256);
+        self::assertSame($context->executorReleaseSha256, $factory->make(IqPublicArticlePackage::LEGACY_PACKAGE, $context->packageSha256, 'W3', IqPublicArticlePromotionAdapter::SUBSCOPE)->executorReleaseSha256);
         config(['content_promotion.execution.executor_release_sha256' => str_repeat('e', 64)]);
         $this->expectExceptionMessage('workflow_identity_signature_invalid');
-        $factory->make(IqPublicArticlePackage::PACKAGE, $context->packageSha256, 'W3', IqPublicArticlePromotionAdapter::SUBSCOPE);
+        $factory->make(IqPublicArticlePackage::LEGACY_PACKAGE, $context->packageSha256, 'W3', IqPublicArticlePromotionAdapter::SUBSCOPE);
     }
 
     public function test_same_sha_new_run_reuses_success_without_old_snapshot_recovery_rights(): void
@@ -741,7 +767,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
     {
         $this->seedExisting();
         [$adapter, $context] = $this->publish();
-        foreach (ArticleTranslationRevision::query()->where('authority_package_sha256', IqPublicArticlePackage::SHA256)->get() as $revision) {
+        foreach (ArticleTranslationRevision::query()->where('authority_package_sha256', IqPublicArticlePackage::LEGACY_SHA256)->get() as $revision) {
             $metadata = $revision->authority_metadata_json;
             $metadata['snapshot'] = array_reverse($metadata['snapshot'], true);
             $metadata['snapshot']['faq_items'] = array_map(static fn (array $faq): array => array_reverse($faq, true), $metadata['snapshot']['faq_items']);
@@ -834,7 +860,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         $faqProjection = new \ReflectionMethod($controller, 'publicArticleFaqBlocks');
         $seoService = app(\App\Services\Cms\ArticleSeoService::class);
         $schemaProjection = new \ReflectionMethod($seoService, 'buildVisibleFaqPage');
-        foreach (app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::SHA256) as $row) {
+        foreach (app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::LEGACY_SHA256) as $row) {
             $article = Article::query()->with(['seoMeta', 'publishedRevision'])->where($row['identity'])->firstOrFail();
             $faqs = $faqProjection->invoke($controller, $article);
             self::assertSame($row['snapshot']['faq_items'], array_map(static fn (array $item): array => Arr::only($item, ['question', 'answer']), $faqs));
@@ -857,7 +883,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
     {
         $this->seedExisting();
         $this->publish();
-        foreach (app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::SHA256) as $row) {
+        foreach (app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::LEGACY_SHA256) as $row) {
             $base = '/api/v0.5/articles/'.$row['identity']['slug'];
             $query = '?locale='.$row['identity']['locale'].'&org_id=0';
             $response = $this->getJson($base.$query)->assertOk();
@@ -887,7 +913,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
 
     private function seedExisting(): array
     {
-        $rows = app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::SHA256);
+        $rows = app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::LEGACY_SHA256);
         $sources = [];
         $before = [];
         foreach ($rows as $row) {
@@ -965,7 +991,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         $receipt = [
             'receipt_kind' => $kind, 'result' => 'SUCCEEDED', 'lane' => $context->lane, 'subscope' => $context->subscope,
             'package_sha256' => $context->packageSha256, 'source_commit' => $context->sourceCommit, 'release_policy_sha256' => $context->releasePolicySha256,
-            'expected_count' => 10, 'target_state_sha256' => $result['target_state_sha256'],
+            'expected_count' => $context->expectedRowCount, 'target_state_sha256' => $result['target_state_sha256'],
             'workflow_run_id' => $context->workflowRunId, 'workflow_run_attempt' => $context->workflowRunAttempt, 'executor_release_sha256' => $context->executorReleaseSha256,
         ];
         $receipt['receipt_content_sha256'] = hash('sha256', PromotionContextFactory::canonicalJson($receipt));
@@ -976,7 +1002,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
     private function context(): PromotionContext
     {
         return new PromotionContext(
-            packageDirectory: base_path(IqPublicArticlePackage::PACKAGE), packageSha256: IqPublicArticlePackage::SHA256,
+            packageDirectory: base_path(IqPublicArticlePackage::LEGACY_PACKAGE), packageSha256: IqPublicArticlePackage::LEGACY_SHA256,
             lane: 'W3', subscope: IqPublicArticlePromotionAdapter::SUBSCOPE, sourceCommit: str_repeat('a', 40),
             executorReleaseSha256: str_repeat('b', 64), releasePolicySha256: hash('sha256', PromotionContextFactory::canonicalJson(config('content_promotion.release_policy'))),
             workflowRunId: '1001', workflowRunAttempt: 1, workflowSignature: str_repeat('c', 64), expectedRowCount: 10, idempotencyKey: str_repeat('d', 64),

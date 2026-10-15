@@ -5,8 +5,8 @@ import { resolve } from 'node:path';
 import { canonical, isIqOnlyPromotionRegistration, isIqOnlyContextFactoryChange } from './iq-public-scale-package.mjs';
 import { isEqOnlyPromotionRegistration } from './eq-new-source-package.mjs';
 
-export const packagePath = 'content_assets/iq_public/articles/20261010-v1';
-export const packageSha256 = 'ca6612bf60a63e2f8f253658587e0299997e82a3dfecad11994ee7f21d79fcad';
+export const packagePath = 'content_assets/iq_public/articles/20261015-en-parity';
+export const packageSha256 = '9190c3fd020c59f717419c012a8d4802ca4a8b718dbcef50d01b29e7f01879b3';
 export const executorPaths = [
   "app/Console/Commands/ContentPromoteExactPackage.php",
   "app/Http/Controllers/API/V0_5/Cms/ArticleController.php",
@@ -42,7 +42,7 @@ export function readCandidateRows(backendRoot) {
 }
 export function inspectPackage(backendRoot) {
   const root = realpathSync(backendRoot);
-  if (readCandidateRows(root).length !== 10) throw new Error('IQ_ARTICLE_PACKAGE_SCOPE_INVALID');
+  if (readCandidateRows(root).length !== 6) throw new Error('IQ_ARTICLE_PACKAGE_SCOPE_INVALID');
   const material = executorPaths.map(path => {
     const file = resolve(root, path);
     const stat = lstatSync(file);
@@ -51,7 +51,7 @@ export function inspectPackage(backendRoot) {
   }).join('');
   return { schema: 'iq.public_articles.binding.v1', package_path: packagePath, package_sha256: packageSha256,
     executor_release_sha256: sha(material), release_policy_sha256: sha(JSON.stringify(canonical(JSON.parse(readFileSync(resolve(root, 'config/content_promotion_release_policy.v2.json'), 'utf8'))))),
-    lane: 'W3', subscope: 'IQ-PUBLIC-ARTICLES', expected_row_count: 10 };
+    lane: 'W3', subscope: 'IQ-PUBLIC-ARTICLES', expected_row_count: 6 };
 }
 export function workflowSignature(binding, key, source, run, attempt) {
   if (typeof key !== 'string' || key.length < 32 || !/^[a-f0-9]{40}$/.test(source) || !/^[1-9][0-9]*$/.test(String(run)) || attempt !== 1) throw new Error('IQ_ARTICLE_WORKFLOW_IDENTITY_INVALID');

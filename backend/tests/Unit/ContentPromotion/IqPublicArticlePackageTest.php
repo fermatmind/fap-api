@@ -24,12 +24,12 @@ final class IqPublicArticlePackageTest extends TestCase
 
     public function test_full_reviewed_bilingual_cohort_retains_source_bytes_and_all_faqs(): void
     {
-        $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::SHA256);
+        $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::LEGACY_SHA256);
         self::assertCount(10, $rows);
         self::assertSame(['IQ-02', 'IQ-02', 'IQ-03', 'IQ-03', 'IQ-04', 'IQ-04', 'IQ-05', 'IQ-05', 'IQ-06', 'IQ-06'], array_column($rows, 'page_id'));
         self::assertSame(['zh-CN', 'en', 'zh-CN', 'en', 'zh-CN', 'en', 'zh-CN', 'en', 'zh-CN', 'en'], array_column(array_column($rows, 'identity'), 'locale'));
         self::assertSame([7, 7, 5, 5, 5, 5, 5, 5, 9, 9], array_map(static fn (array $row): int => count($row['snapshot']['faq_items']), $rows));
-        $review = json_decode(file_get_contents(dirname(__DIR__, 3).'/'.IqPublicArticlePackage::PACKAGE.'/iq-article-exact-payload-review.json'), true, 32, JSON_THROW_ON_ERROR);
+        $review = json_decode(file_get_contents(dirname(__DIR__, 3).'/'.IqPublicArticlePackage::LEGACY_PACKAGE.'/iq-article-exact-payload-review.json'), true, 32, JSON_THROW_ON_ERROR);
         foreach ($rows as $row) {
             $matches = array_values(array_filter($review['targets'], static fn (array $target): bool => $target['page_id'] === $row['page_id'] && $target['locale'] === $row['identity']['locale']));
             self::assertCount(1, $matches);
@@ -52,31 +52,31 @@ final class IqPublicArticlePackageTest extends TestCase
     public function test_changed_body_is_rejected_before_any_candidate_is_returned(): void
     {
         $root = $this->copyPackage();
-        file_put_contents($root.'/'.IqPublicArticlePackage::PACKAGE.'/IQ-06-en.md', "\nChanged public copy\n", FILE_APPEND);
+        file_put_contents($root.'/'.IqPublicArticlePackage::LEGACY_PACKAGE.'/IQ-06-en.md', "\nChanged public copy\n", FILE_APPEND);
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('iq_article_file_digest_mismatch');
-        $this->reader()->read($root, IqPublicArticlePackage::SHA256);
+        $this->reader()->read($root, IqPublicArticlePackage::LEGACY_SHA256);
     }
 
     public function test_changed_metadata_cannot_reuse_the_original_review(): void
     {
         $root = $this->copyPackage();
-        $path = $root.'/'.IqPublicArticlePackage::PACKAGE.'/IQ-03-en.json';
+        $path = $root.'/'.IqPublicArticlePackage::LEGACY_PACKAGE.'/IQ-03-en.json';
         $metadata = json_decode(file_get_contents($path), true, 32, JSON_THROW_ON_ERROR);
         $metadata['metadata']['description'] = 'A different reader promise.';
         file_put_contents($path, json_encode($metadata, JSON_THROW_ON_ERROR));
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('iq_article_file_digest_mismatch');
-        $this->reader()->read($root, IqPublicArticlePackage::SHA256);
+        $this->reader()->read($root, IqPublicArticlePackage::LEGACY_SHA256);
     }
 
     public function test_unexpected_files_are_rejected(): void
     {
         $root = $this->copyPackage();
-        file_put_contents($root.'/'.IqPublicArticlePackage::PACKAGE.'/unreviewed.json', '{}');
+        file_put_contents($root.'/'.IqPublicArticlePackage::LEGACY_PACKAGE.'/unreviewed.json', '{}');
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('iq_article_package_inventory_invalid');
-        $this->reader()->read($root, IqPublicArticlePackage::SHA256);
+        $this->reader()->read($root, IqPublicArticlePackage::LEGACY_SHA256);
     }
 
     public function test_symlinked_parent_directory_cannot_supply_identical_bytes(): void
@@ -86,17 +86,17 @@ final class IqPublicArticlePackageTest extends TestCase
         symlink($root.'/same-articles', $root.'/content_assets/iq_public/articles');
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('iq_article_package_path_invalid');
-        $this->reader()->read($root, IqPublicArticlePackage::SHA256);
+        $this->reader()->read($root, IqPublicArticlePackage::LEGACY_SHA256);
     }
 
     public function test_hardlinked_candidate_cannot_supply_mutable_external_bytes(): void
     {
         $root = $this->copyPackage();
-        $path = $root.'/'.IqPublicArticlePackage::PACKAGE.'/IQ-06-en.md';
+        $path = $root.'/'.IqPublicArticlePackage::LEGACY_PACKAGE.'/IQ-06-en.md';
         link($path, $root.'/shared-body.md');
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('iq_article_package_path_invalid');
-        $this->reader()->read($root, IqPublicArticlePackage::SHA256);
+        $this->reader()->read($root, IqPublicArticlePackage::LEGACY_SHA256);
     }
 
     private function reader(): IqPublicArticlePackage
@@ -107,7 +107,7 @@ final class IqPublicArticlePackageTest extends TestCase
     private function copyPackage(): string
     {
         $this->temporaryRoot = sys_get_temp_dir().'/iq-article-package-test-'.bin2hex(random_bytes(8));
-        (new Filesystem)->copyDirectory(dirname(__DIR__, 3).'/'.IqPublicArticlePackage::PACKAGE, $this->temporaryRoot.'/'.IqPublicArticlePackage::PACKAGE);
+        (new Filesystem)->copyDirectory(dirname(__DIR__, 3).'/'.IqPublicArticlePackage::LEGACY_PACKAGE, $this->temporaryRoot.'/'.IqPublicArticlePackage::LEGACY_PACKAGE);
 
         return $this->temporaryRoot;
     }

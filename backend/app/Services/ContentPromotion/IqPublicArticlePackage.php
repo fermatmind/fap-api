@@ -10,9 +10,13 @@ use DomainException;
 /** Reads the fixed reviewed IQ Article cohort; it never writes CMS records. */
 final class IqPublicArticlePackage
 {
-    public const PACKAGE = 'content_assets/iq_public/articles/20261010-v1';
+    public const PACKAGE = 'content_assets/iq_public/articles/20261015-en-parity';
 
-    public const SHA256 = 'ca6612bf60a63e2f8f253658587e0299997e82a3dfecad11994ee7f21d79fcad';
+    public const LEGACY_PACKAGE = 'content_assets/iq_public/articles/20261010-v1';
+
+    public const LEGACY_SHA256 = 'ca6612bf60a63e2f8f253658587e0299997e82a3dfecad11994ee7f21d79fcad';
+
+    public const SHA256 = '9190c3fd020c59f717419c012a8d4802ca4a8b718dbcef50d01b29e7f01879b3';
 
     private const SCHEMA = 'fermatmind.iq_public_article_package.v1';
 
@@ -30,10 +34,23 @@ final class IqPublicArticlePackage
 
     public function __construct(private readonly ArticleBodyHeadingGuard $headings) {}
 
+    public static function packageForSha(string $sha): ?string
+    {
+        return match ($sha) {
+            self::SHA256 => self::PACKAGE,
+            self::LEGACY_SHA256 => self::LEGACY_PACKAGE,
+            default => null,
+        };
+    }
+
     /** @return list<array<string,mixed>> */
     public function read(string $backendRoot, string $expectedSha256): array
     {
-        if (preg_match('/\A[a-f0-9]{64}\z/', $expectedSha256) !== 1 || ! hash_equals(self::SHA256, $expectedSha256)) {
+        $legacy = hash_equals(self::LEGACY_SHA256, $expectedSha256);
+        $package = $legacy ? self::LEGACY_PACKAGE : self::PACKAGE;
+        $slugs = $legacy ? self::SLUGS : array_intersect_key(self::SLUGS, array_flip(['IQ-02', 'IQ-03', 'IQ-05']));
+        $count = count($slugs) * 2;
+        if (preg_match('/\A[a-f0-9]{64}\z/', $expectedSha256) !== 1 || (! $legacy && ! hash_equals(self::SHA256, $expectedSha256))) {
             throw new DomainException('iq_article_package_digest_mismatch');
         }
         $root = realpath($backendRoot);
@@ -41,7 +58,7 @@ final class IqPublicArticlePackage
             throw new DomainException('iq_article_package_path_invalid');
         }
         $directory = $root;
-        foreach (explode('/', self::PACKAGE) as $segment) {
+        foreach (explode('/', $package) as $segment) {
             $directory .= '/'.$segment;
             if (! is_dir($directory) || is_link($directory) || realpath($directory) !== $directory) {
                 throw new DomainException('iq_article_package_path_invalid');
@@ -50,7 +67,7 @@ final class IqPublicArticlePackage
         $bytes = $this->bytes($directory, 'manifest.json');
         $manifest = json_decode($bytes, true, 32, JSON_THROW_ON_ERROR);
         $expectedFiles = self::REVIEW_FILES;
-        foreach (array_keys(self::SLUGS) as $id) {
+        foreach (array_keys($slugs) as $id) {
             foreach (['zh-CN', 'en'] as $locale) {
                 foreach (['md', 'json', 'snapshot.json'] as $extension) {
                     $expectedFiles[] = $id.'-'.$locale.'.'.$extension;
@@ -67,7 +84,7 @@ final class IqPublicArticlePackage
             'eq_write' => false,
         ];
         if (($manifest['schema'] ?? null) !== self::SCHEMA || ($manifest['boundaries'] ?? null) !== $boundaries
-            || ! is_array($manifest['targets'] ?? null) || count($manifest['targets']) !== 10
+            || ! is_array($manifest['targets'] ?? null) || count($manifest['targets']) !== $count
             || array_keys((array) ($manifest['files'] ?? [])) !== $expectedFiles) {
             throw new DomainException('iq_article_package_scope_invalid');
         }
@@ -92,7 +109,7 @@ final class IqPublicArticlePackage
         }
         $exactReview = json_decode($files['iq-article-exact-payload-review.json'], true, 32, JSON_THROW_ON_ERROR);
         if (($exactReview['schema'] ?? null) !== 'iq.article_exact_payload_review.v1'
-            || ! is_array($exactReview['targets'] ?? null) || count($exactReview['targets']) !== 10) {
+            || ! is_array($exactReview['targets'] ?? null) || count($exactReview['targets']) !== $count) {
             throw new DomainException('iq_article_review_unbound');
         }
         $targets = [];
@@ -101,15 +118,15 @@ final class IqPublicArticlePackage
             $id = $target['page_id'] ?? '';
             $locale = $target['locale'] ?? '';
             $stem = $id.'-'.$locale;
-            if (! isset(self::SLUGS[$id]) || ! in_array($locale, ['zh-CN', 'en'], true) || isset($seen[$stem])
-                || ($target['slug'] ?? null) !== self::SLUGS[$id]
+            if (! isset($slugs[$id]) || ! in_array($locale, ['zh-CN', 'en'], true) || isset($seen[$stem])
+                || ($target['slug'] ?? null) !== $slugs[$id]
                 || ($target['operation'] ?? null) !== ($id === 'IQ-06' ? 'new_source_pair' : 'existing_public_update')) {
                 throw new DomainException('iq_article_package_scope_invalid');
             }
             $seen[$stem] = true;
             $input = json_decode($files[$stem.'.json'], true, 32, JSON_THROW_ON_ERROR);
             $payload = json_decode($files[$stem.'.snapshot.json'], true, 32, JSON_THROW_ON_ERROR);
-            $identity = ['org_id' => 0, 'slug' => self::SLUGS[$id], 'locale' => $locale];
+            $identity = ['org_id' => 0, 'slug' => $slugs[$id], 'locale' => $locale];
             if (($input['page_id'] ?? null) !== $id || ($input['locale'] ?? null) !== $locale
                 || ($payload['page_id'] ?? null) !== $id || ($payload['identity'] ?? null) !== $identity
                 || ($input['candidate_sha256'] ?? null) !== hash('sha256', $files[$stem.'.md'])) {

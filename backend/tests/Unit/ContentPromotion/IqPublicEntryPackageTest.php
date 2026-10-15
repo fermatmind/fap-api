@@ -26,11 +26,13 @@ final class IqPublicEntryPackageTest extends TestCase
     {
         $rows = (new IqPublicEntryPackage)->read(dirname(__DIR__, 3), IqPublicEntryPackage::SHA256);
         self::assertSame(['zh-CN', 'en'], array_column(array_column($rows, 'identity'), 'locale'));
-        // Independently frozen Python/API projection used for the full-page QA.
-        $hashes = ['zh-CN' => '47521226c69b6f00ef710fb783441acf11927380c84a6099854a2bd85a6e435d', 'en' => '4d1b2ccf1623d3d6aa6e066e2d41f131c76d78b72cfb65e86316dcdfc508513e'];
+        // Freeze the reviewed source projection, including every authorized English entry field.
+        $hashes = ['zh-CN' => '47521226c69b6f00ef710fb783441acf11927380c84a6099854a2bd85a6e435d', 'en' => '11f8b57344b2fcb62419f3dc21107910ff32a32ea9a8da3c102a27031cf85d66'];
         foreach ($rows as $row) {
             self::assertSame($hashes[$row['identity']['locale']], hash('sha256', PromotionContextFactory::canonicalJson($row['patch'])));
-            self::assertSame(['landing_copy', 'why_choose', 'faq'], array_keys($row['patch']));
+            self::assertSame($row['identity']['locale'] === 'en'
+                ? ['landing_copy', 'why_choose', 'faq', 'title', 'description', 'audience', 'when_to_use', 'how_it_works', 'landing_entry', 'highlight']
+                : ['landing_copy', 'why_choose', 'faq'], array_keys($row['patch']));
             self::assertCount(11, $row['patch']['faq']);
             self::assertSame(0, $row['identity']['org_id']);
             self::assertSame(IqPublicEntryPackage::CODE, $row['identity']['code']);
