@@ -133,12 +133,16 @@ final class EnneagramArticleRefreshTest extends TestCase
     public function test_staging_missing_seo_and_older_source_are_published_through_the_same_native_chain(): void
     {
         $this->seedBaseline('staging');
+        $this->assertSame('', Article::withoutGlobalScopes()->findOrFail(51)->content_html);
         $this->assertSame(['status' => 'ready', 'changed' => 0], app(EnneagramArticleRefresh::class)->publish(true));
         $this->assertSame(['status' => 'published', 'changed' => 2], app(EnneagramArticleRefresh::class)->publish());
         $this->assertDatabaseHas('article_seo_meta', ['article_id' => 190, 'locale' => 'en', 'robots' => 'index,follow']);
         $source = Article::withoutGlobalScopes()->findOrFail(51);
         $this->assertTrue($source->isSourceArticle());
+        $this->assertNull($source->content_html);
+        $this->assertSame($source->source_version_hash, $source->workingRevision->source_version_hash);
         $this->assertSame($source->source_version_hash, Article::withoutGlobalScopes()->findOrFail(190)->translated_from_version_hash);
+        $this->assertSame($source->source_version_hash, Article::withoutGlobalScopes()->findOrFail(190)->publishedRevision->translated_from_version_hash);
     }
 
     public function test_second_language_native_failure_rolls_back_both_languages_reviews_and_material_decisions(): void

@@ -125,6 +125,13 @@ final class EnneagramArticleRefresh
                     'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
                 ], $owner);
                 $sourceHash = (string) $articles['zh-CN']->fresh()->source_version_hash;
+                if ($locale === 'zh-CN') {
+                    // Native promotion clears legacy HTML, including an empty string.
+                    // Bind the revision to that final projection, not the old HTML value.
+                    $projection = clone $article;
+                    $projection->forceFill(['content_md' => $revision->content_md, 'content_html' => null]);
+                    $sourceHash = $projection->computeSourceVersionHash();
+                }
                 $revision->forceFill([
                     'source_version_hash' => $sourceHash, 'translated_from_version_hash' => $sourceHash,
                     'authority_source_package' => self::PACKAGE, 'authority_package_sha256' => self::PACKAGE_SHA256,
