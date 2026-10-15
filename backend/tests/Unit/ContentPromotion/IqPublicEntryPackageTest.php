@@ -27,7 +27,7 @@ final class IqPublicEntryPackageTest extends TestCase
         $rows = (new IqPublicEntryPackage)->read(dirname(__DIR__, 3), IqPublicEntryPackage::SHA256);
         self::assertSame(['zh-CN', 'en'], array_column(array_column($rows, 'identity'), 'locale'));
         // Freeze the reviewed source projection, including every authorized English entry field.
-        $hashes = ['zh-CN' => '47521226c69b6f00ef710fb783441acf11927380c84a6099854a2bd85a6e435d', 'en' => '11f8b57344b2fcb62419f3dc21107910ff32a32ea9a8da3c102a27031cf85d66'];
+        $hashes = ['zh-CN' => 'fed10cb13f218c9af4962a52be09123e656ca4b437830b0674903f9507aa85fa', 'en' => 'bb58170c8dce053cc447f4fac6dd89a2ffd5165639b0d7bec5661c4257f7859a'];
         foreach ($rows as $row) {
             self::assertSame($hashes[$row['identity']['locale']], hash('sha256', PromotionContextFactory::canonicalJson($row['patch'])));
             self::assertSame($row['identity']['locale'] === 'en'

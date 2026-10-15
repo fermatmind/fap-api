@@ -115,10 +115,15 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         $published = $adapter->publish($context);
         self::assertSame(6, $published['published_count']);
         self::assertSame(6, $adapter->liveQa($context)['readback_count']);
-        self::assertSame($chineseGuide, Article::query()->where('slug', 'iq-test-tool-guide')->where('locale', 'zh-CN')->value('content_md'));
+        $currentGuide = Article::query()->where('slug', 'iq-test-tool-guide')->where('locale', 'zh-CN')->value('content_md');
+        $candidateGuide = app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::PARITY_SHA256)[2]['snapshot']['content_md'];
+        self::assertSame($candidateGuide, $currentGuide);
+        self::assertSame(explode('## 免费智商测试', $chineseGuide)[0], explode('## 免费智商测试', $currentGuide)[0]);
+        self::assertStringContainsString('IQ得分为126分', $currentGuide);
         self::assertSame($control, Article::query()->whereIn('slug', ['iq-test-narrative-portrait', 'what-is-iq-and-how-it-is-measured'])->orderBy('id')->get()->toArray());
         self::assertSame(2, Article::query()->where('slug', 'what-is-iq-and-how-it-is-measured')->count());
         $adapter->rollback($context, $published['rollback_reference']);
+        self::assertSame($chineseGuide, Article::query()->where('slug', 'iq-test-tool-guide')->where('locale', 'zh-CN')->value('content_md'));
         self::assertSame($control, Article::query()->whereIn('slug', ['iq-test-narrative-portrait', 'what-is-iq-and-how-it-is-measured'])->orderBy('id')->get()->toArray());
     }
 

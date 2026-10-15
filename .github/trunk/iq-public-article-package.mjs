@@ -10,7 +10,7 @@ export const packageSha256 = 'ca6612bf60a63e2f8f253658587e0299997e82a3dfecad1199
 export const seoPackagePath = 'content_assets/iq_public/articles/20261015-seo-v1';
 export const seoPackageSha256 = 'b9755f9564f3ff6b39a5c987cac2c49d0fda4c00b3ed2713b6612fb5d361c041';
 export const parityPackagePath = 'content_assets/iq_public/articles/20261015-en-parity';
-export const parityPackageSha256 = 'a2ae9ba665b88d612cea7d84f8a499325a214b5f1b2490fc727167b7bf889fb2';
+export const parityPackageSha256 = '1a0ad2975484f667e3e6da3c529c31a87697283552207a8945a743e95880262a';
 export const executorPaths = [
   "app/Console/Commands/ContentPromoteExactPackage.php",
   "app/Http/Controllers/API/V0_5/Cms/ArticleController.php",

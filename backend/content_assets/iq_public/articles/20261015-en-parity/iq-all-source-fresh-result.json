@@ -5,45 +5,58 @@
       "locales": [
         {
           "locale": "zh-CN",
-          "body_sha256": "1cccf6af1b519380e23c6f8cc4520bc242517ae9c636c51e79f6efd1cc793a46",
-          "candidate_json_sha256": "58ea752cbebf2a9ebe91da8f8cc232caf71d6f99cf80e98e52f9f4e8929d83eb",
+          "body_sha256": "be136892adbb9a71ba5a3e0dfc124e560b4e25beba35934141fd3c56699d3b1a",
+          "candidate_json_sha256": "953ced92908b8fd0225da0f93ed1adda59eeeacab6ff01318cba08aa83f58bed",
           "decision": "PASS",
           "findings": [],
-          "source_checks": [
-            {
-              "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
-              "actual_read_scope": "读取原PDF第21–23页、冻结5.4–5.11及原PDF第115页5.12。候选“正式 IQ 解释需要标准化施测、适用常模和相应用途的测量证据”及不直接交换不同工具分数的说明对齐；5.12要求版本可交换的依据与等值证据。",
-              "limitation": "冻结摘录缺少5.12，已直接补读。未核任何工具的具体等值研究或付费手册。"
-            },
-            {
-              "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
-              "actual_read_scope": "读取原始冻结网页段落中PC2、PC3、TD5、C1、C2，并直接补读原PDF第22–24页C3、C4；核对本地适用性、构念/方法/题目差异和常模不能自动移植。",
-              "limitation": "未读41页全文；跨语言可比性应按用途验证，不意味着每一种本地使用都必须进行跨语言分数比较。候选没有作这种扩大解释。"
-            },
-            {
-              "url": "https://pubmed.ncbi.nlm.nih.gov/17371085/",
-              "actual_read_scope": "读取检索返回的原始PubMed摘要，并交叉读取作者机构Cornell记录摘要：50项研究、107个样本、134436人，重复施测及练习可影响认知测验成绩。候选仅用其支持重测影响，不指定费马最佳间隔。",
-              "limitation": "未读论文全文；PubMed直接打开未返回完整正文。摘要证据不验证本站效应量或重测周期。"
-            }
-          ],
-          "unverified": [
-            "常见100/15刻度、正确率、模拟Beta、人口百分位的区分已核；本站具体常模有效性未核。",
-            "观察表是编辑性提示，候选没有从总分推算实际未提供的能力分项。",
-            "正文及meta完整读取、hash一致；不核QA、发布或排名。"
-          ]
+          "copy_review": {
+            "reviewer": "fm_independent_reviewer",
+            "task": "iq_copy_review",
+            "frozen_index_sha256": "7723898898b411bdc51f1f789df55ef0292166c46ee62aa8c799914186752bdb",
+            "scope": "Approved current-model copy, bilingual correspondence, 31-row math, FAQ/metadata consistency; not population validation or publication."
+          },
+          "previous_review": {
+            "locale": "zh-CN",
+            "body_sha256": "1cccf6af1b519380e23c6f8cc4520bc242517ae9c636c51e79f6efd1cc793a46",
+            "candidate_json_sha256": "58ea752cbebf2a9ebe91da8f8cc232caf71d6f99cf80e98e52f9f4e8929d83eb",
+            "decision": "PASS",
+            "findings": [],
+            "source_checks": [
+              {
+                "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+                "actual_read_scope": "读取原PDF第21–23页、冻结5.4–5.11及原PDF第115页5.12。候选“正式 IQ 解释需要标准化施测、适用常模和相应用途的测量证据”及不直接交换不同工具分数的说明对齐；5.12要求版本可交换的依据与等值证据。",
+                "limitation": "冻结摘录缺少5.12，已直接补读。未核任何工具的具体等值研究或付费手册。"
+              },
+              {
+                "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
+                "actual_read_scope": "读取原始冻结网页段落中PC2、PC3、TD5、C1、C2，并直接补读原PDF第22–24页C3、C4；核对本地适用性、构念/方法/题目差异和常模不能自动移植。",
+                "limitation": "未读41页全文；跨语言可比性应按用途验证，不意味着每一种本地使用都必须进行跨语言分数比较。候选没有作这种扩大解释。"
+              },
+              {
+                "url": "https://pubmed.ncbi.nlm.nih.gov/17371085/",
+                "actual_read_scope": "读取检索返回的原始PubMed摘要，并交叉读取作者机构Cornell记录摘要：50项研究、107个样本、134436人，重复施测及练习可影响认知测验成绩。候选仅用其支持重测影响，不指定费马最佳间隔。",
+                "limitation": "未读论文全文；PubMed直接打开未返回完整正文。摘要证据不验证本站效应量或重测周期。"
+              }
+            ],
+            "unverified": [
+              "常见100/15刻度、正确率、模拟Beta、人口百分位的区分已核；本站具体常模有效性未核。",
+              "观察表是编辑性提示，候选没有从总分推算实际未提供的能力分项。",
+              "正文及meta完整读取、hash一致；不核QA、发布或排名。"
+            ]
+          },
+          "snapshot_json_sha256": "7fceb5e7f7e064dd9b180ea080ea6c1d43031573868e9f2782bcca24398d391a"
         },
         {
           "locale": "en",
-          "body_sha256": "75767daedc5879f566af90ba2438050a07f1ae839b3db3dc5ff6fe64d300e725",
-          "candidate_json_sha256": "2bc6c11817b911d53cbabc00efcce3c67834e6502d5a9a9990c8e12d9f9383bd",
+          "body_sha256": "6d5032c6c210f8662c246d45307ad361ce72ee7ff7e7e50cc8aa2e6799581658",
+          "candidate_json_sha256": "8ef476131b58da1b776c3c32c89f352714134e2f89a2b7bde9e573056aaf334d",
           "decision": "PASS",
           "findings": [],
-          "translation_review": {
+          "copy_review": {
             "reviewer": "fm_independent_reviewer",
-            "task": "iq_translation_review",
-            "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
-            "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
-            "verdict": "PASS"
+            "task": "iq_copy_review",
+            "frozen_index_sha256": "7723898898b411bdc51f1f789df55ef0292166c46ee62aa8c799914186752bdb",
+            "scope": "Approved current-model copy, bilingual correspondence, 31-row math, FAQ/metadata consistency; not population validation or publication."
           },
           "previous_review": {
             "locale": "en",
@@ -55,38 +68,53 @@
               "reviewer": "fm_independent_reviewer",
               "task": "iq_translation_review",
               "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
-              "frozen_manifest_sha256": "041d78687f0497e50724fbe282c410ccc94ce93a5bd1d701eab7fd90592c5110",
+              "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
               "verdict": "PASS"
             },
             "previous_review": {
               "locale": "en",
-              "body_sha256": "e6d227a7662768d6394be7665f21a3ce7012a5508a308ae642d0b60c4f1b1ffd",
-              "candidate_json_sha256": "153d538e3f15f2ede9682f4adbf2abeca23930d90c83d2ad7c6d1e93e129f8de",
+              "body_sha256": "75767daedc5879f566af90ba2438050a07f1ae839b3db3dc5ff6fe64d300e725",
+              "candidate_json_sha256": "2bc6c11817b911d53cbabc00efcce3c67834e6502d5a9a9990c8e12d9f9383bd",
               "decision": "PASS",
               "findings": [],
-              "source_checks": [
-                {
-                  "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
-                  "actual_read_scope": "原PDF第21–23页、5.4–5.11冻结原文及第115页5.12已读。候选“percentage correct and Beta are not population IQ scores or percentiles”与冻结实现和用途/常模原则一致。",
-                  "limitation": "5.12的冻结材料缺口已补核；没有认定网上施测本身必然无效，也没有将常见刻度视为验证。"
-                },
-                {
-                  "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
-                  "actual_read_scope": "实际读取PC2、PC3、TD5、C1–C4相关原始段落，支持语言、当地证据、常模及工具之间不能直接换算的边界。",
-                  "limitation": "未核费马跨语言等值性；指南原则不能代替本站研究。"
-                },
-                {
-                  "url": "https://ecommons.cornell.edu/entities/publication/97becf46-3c0a-4de4-a48f-79b715ba8446",
-                  "actual_read_scope": "读取Hausknecht等2007年论文的完整机构摘要，与PubMed摘要交叉核对练习及重测效应。",
-                  "limitation": "仅摘要；不支持具体个人的提升原因、最佳间隔或本站效应量。"
-                }
-              ],
-              "unverified": [
-                "英文正文及meta独立完整读取、hash一致。",
-                "人口常模、正式测验资格、界面字段可用性、线上QA及排名不在本轮裁定内。"
-              ]
+              "translation_review": {
+                "reviewer": "fm_independent_reviewer",
+                "task": "iq_translation_review",
+                "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+                "frozen_manifest_sha256": "041d78687f0497e50724fbe282c410ccc94ce93a5bd1d701eab7fd90592c5110",
+                "verdict": "PASS"
+              },
+              "previous_review": {
+                "locale": "en",
+                "body_sha256": "e6d227a7662768d6394be7665f21a3ce7012a5508a308ae642d0b60c4f1b1ffd",
+                "candidate_json_sha256": "153d538e3f15f2ede9682f4adbf2abeca23930d90c83d2ad7c6d1e93e129f8de",
+                "decision": "PASS",
+                "findings": [],
+                "source_checks": [
+                  {
+                    "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+                    "actual_read_scope": "原PDF第21–23页、5.4–5.11冻结原文及第115页5.12已读。候选“percentage correct and Beta are not population IQ scores or percentiles”与冻结实现和用途/常模原则一致。",
+                    "limitation": "5.12的冻结材料缺口已补核；没有认定网上施测本身必然无效，也没有将常见刻度视为验证。"
+                  },
+                  {
+                    "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
+                    "actual_read_scope": "实际读取PC2、PC3、TD5、C1–C4相关原始段落，支持语言、当地证据、常模及工具之间不能直接换算的边界。",
+                    "limitation": "未核费马跨语言等值性；指南原则不能代替本站研究。"
+                  },
+                  {
+                    "url": "https://ecommons.cornell.edu/entities/publication/97becf46-3c0a-4de4-a48f-79b715ba8446",
+                    "actual_read_scope": "读取Hausknecht等2007年论文的完整机构摘要，与PubMed摘要交叉核对练习及重测效应。",
+                    "limitation": "仅摘要；不支持具体个人的提升原因、最佳间隔或本站效应量。"
+                  }
+                ],
+                "unverified": [
+                  "英文正文及meta独立完整读取、hash一致。",
+                  "人口常模、正式测验资格、界面字段可用性、线上QA及排名不在本轮裁定内。"
+                ]
+              }
             }
-          }
+          },
+          "snapshot_json_sha256": "4c047a78a5c3ee1cc98f5d66f373bd009438234c8eb1a0b24e6871ac1095f521"
         }
       ]
     },
@@ -95,73 +123,86 @@
       "locales": [
         {
           "locale": "zh-CN",
+          "body_sha256": "4966c8e59ef61a894c38139dc7076e6a4ddc6c8e8bd484444293d6a577788f4b",
+          "candidate_json_sha256": "004cad6d7f7486f87a2cccc0ebd82fe9703007d3954f43c8327bbae07f0159e4",
           "decision": "PASS",
-          "body_sha256": "15ff1f19153e9e0be180cc67f5f944205e4b7f3dddf9db98e376e1036048b2da",
-          "candidate_json_sha256": "f78d36bd744d413daaf36c2b39b4f445bc83476de77eadddd4256ba92c941568",
           "findings": [],
-          "translation_review": {
+          "copy_review": {
             "reviewer": "fm_independent_reviewer",
-            "task": "iq_translation_review",
-            "scope": "IQ-03 Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
-            "source_commit": "5994cca7d77032c6f2379b5db48e3147b7670ae8",
-            "frozen_manifest_sha256": "b42f8e60a3fb4738d64c94d25f4cbed562ce945bd82e2e10943fc528f4fa27dd",
-            "verdict": "PASS"
+            "task": "iq_copy_review",
+            "frozen_index_sha256": "7723898898b411bdc51f1f789df55ef0292166c46ee62aa8c799914186752bdb",
+            "scope": "Approved current-model copy, bilingual correspondence, 31-row math, FAQ/metadata consistency; not population validation or publication."
           },
           "previous_review": {
             "locale": "zh-CN",
-            "body_sha256": "b337184434550fe8d9e81fd0a1e55cb2549645a39816d3d6a63b17397c2094bd",
-            "candidate_json_sha256": "4532fd4f4c677dc262f61f4c1461b052bb0c3d94d726254c811d7bf9fc708025",
             "decision": "PASS",
-            "findings": [],
-            "source_checks": [
-              {
-                "url": "source-current/fap-web/lib/iq/presentation.ts",
-                "actual_read_scope": "读取第70–140行并对照冻结后端计分。候选“本指南不承诺结果页会显示 Beta；缺少合格参照时，不能用 Beta 或60%填补空缺”符合标准分/百分位显示所需的可用、资格、参照人群、常模及模型版本条件。",
-                "limitation": "未运行浏览器全流程；该结论属于冻结实现，而非线上验收。"
-              },
-              {
-                "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
-                "actual_read_scope": "已读PC2、PC3及C1–C4相应原始段落。候选“公式公开不等于具备适用人群常模或信效度证据”成立，年龄、语言和版本不得自动移植。",
-                "limitation": "本工具本地验证和跨语言研究未核。"
-              },
-              {
-                "url": "https://test.mensa.no/Home/Test/en",
-                "actual_read_scope": "读取原始页面开头第0–23行及结尾第724–758行；核对在线练习与专业测试的区别。另读Mensa International资格FAQ。",
-                "limitation": "未分析测试题，未借用其35题/25分钟参数，也未据其证明费马科学有效。"
-              }
-            ],
-            "unverified": [
-              "候选30题、约20分钟预计用时与原始入口相关字段一致；倒计时和完整交互未核。",
-              "合成例题、个人日志与报告字段已分开；未把18/30推成人口百分位。",
-              "正文及meta完整读取、hash一致；不核QA或排名。"
-            ]
-          }
-        },
-        {
-          "locale": "en",
-          "decision": "PASS",
-          "body_sha256": "9616f3c68bf0f6437b5bf8b859bb0750862f7451903663882fb989ae650855a0",
-          "candidate_json_sha256": "4afab6f61d38bb42dca74e32dab98ff9e4b5f0c33fcb8c8e55d0acc101655780",
-          "findings": [],
-          "translation_review": {
-            "reviewer": "fm_independent_reviewer",
-            "task": "iq_translation_review",
-            "scope": "IQ-03 Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
-            "source_commit": "5994cca7d77032c6f2379b5db48e3147b7670ae8",
-            "frozen_manifest_sha256": "b42f8e60a3fb4738d64c94d25f4cbed562ce945bd82e2e10943fc528f4fa27dd",
-            "verdict": "PASS"
-          },
-          "previous_review": {
-            "locale": "en",
-            "body_sha256": "e4a882b89cddd3bd698db148734be271557fa8c78a456d3ab520b836cdf2f219",
-            "candidate_json_sha256": "00a2799e4ab4d59a94e573b3c56f206f29ecc36bf1a66ec6263fe0f906dd8ca4",
-            "decision": "PASS",
+            "body_sha256": "15ff1f19153e9e0be180cc67f5f944205e4b7f3dddf9db98e376e1036048b2da",
+            "candidate_json_sha256": "f78d36bd744d413daaf36c2b39b4f445bc83476de77eadddd4256ba92c941568",
             "findings": [],
             "translation_review": {
               "reviewer": "fm_independent_reviewer",
               "task": "iq_translation_review",
-              "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
-              "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
+              "scope": "IQ-03 Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+              "source_commit": "5994cca7d77032c6f2379b5db48e3147b7670ae8",
+              "frozen_manifest_sha256": "b42f8e60a3fb4738d64c94d25f4cbed562ce945bd82e2e10943fc528f4fa27dd",
+              "verdict": "PASS"
+            },
+            "previous_review": {
+              "locale": "zh-CN",
+              "body_sha256": "b337184434550fe8d9e81fd0a1e55cb2549645a39816d3d6a63b17397c2094bd",
+              "candidate_json_sha256": "4532fd4f4c677dc262f61f4c1461b052bb0c3d94d726254c811d7bf9fc708025",
+              "decision": "PASS",
+              "findings": [],
+              "source_checks": [
+                {
+                  "url": "source-current/fap-web/lib/iq/presentation.ts",
+                  "actual_read_scope": "读取第70–140行并对照冻结后端计分。候选“本指南不承诺结果页会显示 Beta；缺少合格参照时，不能用 Beta 或60%填补空缺”符合标准分/百分位显示所需的可用、资格、参照人群、常模及模型版本条件。",
+                  "limitation": "未运行浏览器全流程；该结论属于冻结实现，而非线上验收。"
+                },
+                {
+                  "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
+                  "actual_read_scope": "已读PC2、PC3及C1–C4相应原始段落。候选“公式公开不等于具备适用人群常模或信效度证据”成立，年龄、语言和版本不得自动移植。",
+                  "limitation": "本工具本地验证和跨语言研究未核。"
+                },
+                {
+                  "url": "https://test.mensa.no/Home/Test/en",
+                  "actual_read_scope": "读取原始页面开头第0–23行及结尾第724–758行；核对在线练习与专业测试的区别。另读Mensa International资格FAQ。",
+                  "limitation": "未分析测试题，未借用其35题/25分钟参数，也未据其证明费马科学有效。"
+                }
+              ],
+              "unverified": [
+                "候选30题、约20分钟预计用时与原始入口相关字段一致；倒计时和完整交互未核。",
+                "合成例题、个人日志与报告字段已分开；未把18/30推成人口百分位。",
+                "正文及meta完整读取、hash一致；不核QA或排名。"
+              ]
+            }
+          },
+          "snapshot_json_sha256": "ad1a6e6cd9b3aed74a82c4f306019532bc22cf9e5edf463a99a3770b3e891aa0"
+        },
+        {
+          "locale": "en",
+          "body_sha256": "81db4c2f6cfa96fcf2cb6a1b74ad0cf810aca14fdced215feb5ebc7af33465d8",
+          "candidate_json_sha256": "97210282e797c3a7ce1e9c9b14e127a627c72606f34ac5996ad058f84c71821e",
+          "decision": "PASS",
+          "findings": [],
+          "copy_review": {
+            "reviewer": "fm_independent_reviewer",
+            "task": "iq_copy_review",
+            "frozen_index_sha256": "7723898898b411bdc51f1f789df55ef0292166c46ee62aa8c799914186752bdb",
+            "scope": "Approved current-model copy, bilingual correspondence, 31-row math, FAQ/metadata consistency; not population validation or publication."
+          },
+          "previous_review": {
+            "locale": "en",
+            "decision": "PASS",
+            "body_sha256": "9616f3c68bf0f6437b5bf8b859bb0750862f7451903663882fb989ae650855a0",
+            "candidate_json_sha256": "4afab6f61d38bb42dca74e32dab98ff9e4b5f0c33fcb8c8e55d0acc101655780",
+            "findings": [],
+            "translation_review": {
+              "reviewer": "fm_independent_reviewer",
+              "task": "iq_translation_review",
+              "scope": "IQ-03 Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+              "source_commit": "5994cca7d77032c6f2379b5db48e3147b7670ae8",
+              "frozen_manifest_sha256": "b42f8e60a3fb4738d64c94d25f4cbed562ce945bd82e2e10943fc528f4fa27dd",
               "verdict": "PASS"
             },
             "previous_review": {
@@ -174,39 +215,54 @@
                 "reviewer": "fm_independent_reviewer",
                 "task": "iq_translation_review",
                 "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
-                "frozen_manifest_sha256": "041d78687f0497e50724fbe282c410ccc94ce93a5bd1d701eab7fd90592c5110",
+                "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
                 "verdict": "PASS"
               },
               "previous_review": {
                 "locale": "en",
-                "body_sha256": "4c0bfebd678dacad5f883f7f8748269b98af5a3597b6994c1fb73718713caaa5",
-                "candidate_json_sha256": "ccecf2810cbeaafdc56c2f5f226c58973b9b8214b9d0770f7e085db729469eff",
+                "body_sha256": "e4a882b89cddd3bd698db148734be271557fa8c78a456d3ab520b836cdf2f219",
+                "candidate_json_sha256": "00a2799e4ab4d59a94e573b3c56f206f29ecc36bf1a66ec6263fe0f906dd8ca4",
                 "decision": "PASS",
                 "findings": [],
-                "source_checks": [
-                  {
-                    "url": "source-current/fap-web/lib/iq/presentation.ts",
-                    "actual_read_scope": "第70–140行核对英文候选“This guide does not promise a displayed Beta score”及合格人口参照条件；随机Beta不替代人口标准分的描述与实现一致。",
-                    "limitation": "只证明冻结调用逻辑，未核当前部署和报告实际显示。"
-                  },
-                  {
-                    "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
-                    "actual_read_scope": "原PDF第21–23页及常模/可比性相关5.7–5.12已读，支持公式、工具覆盖、使用情境和证据之间的区分。",
-                    "limitation": "未将这些原则视为对原创30题的验证。"
-                  },
-                  {
-                    "url": "https://www.mensa.org/getting-your-iq-tested-faqs/",
-                    "actual_read_scope": "读取资格与练习区别的FAQ；候选“it is not an official Raven assessment or evidence of Mensa eligibility”与原创题本身份和官方资格要求一致。",
-                    "limitation": "未核具体个人资格或接收机构政策；亦未核英文CTA追踪参数的线上行为。"
-                  }
-                ],
-                "unverified": [
-                  "英文正文及meta独立完整读取、hash一致。",
-                  "20分钟是预计用时；完整施测流程、线上QA、资格认证和排名未核。"
-                ]
+                "translation_review": {
+                  "reviewer": "fm_independent_reviewer",
+                  "task": "iq_translation_review",
+                  "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+                  "frozen_manifest_sha256": "041d78687f0497e50724fbe282c410ccc94ce93a5bd1d701eab7fd90592c5110",
+                  "verdict": "PASS"
+                },
+                "previous_review": {
+                  "locale": "en",
+                  "body_sha256": "4c0bfebd678dacad5f883f7f8748269b98af5a3597b6994c1fb73718713caaa5",
+                  "candidate_json_sha256": "ccecf2810cbeaafdc56c2f5f226c58973b9b8214b9d0770f7e085db729469eff",
+                  "decision": "PASS",
+                  "findings": [],
+                  "source_checks": [
+                    {
+                      "url": "source-current/fap-web/lib/iq/presentation.ts",
+                      "actual_read_scope": "第70–140行核对英文候选“This guide does not promise a displayed Beta score”及合格人口参照条件；随机Beta不替代人口标准分的描述与实现一致。",
+                      "limitation": "只证明冻结调用逻辑，未核当前部署和报告实际显示。"
+                    },
+                    {
+                      "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+                      "actual_read_scope": "原PDF第21–23页及常模/可比性相关5.7–5.12已读，支持公式、工具覆盖、使用情境和证据之间的区分。",
+                      "limitation": "未将这些原则视为对原创30题的验证。"
+                    },
+                    {
+                      "url": "https://www.mensa.org/getting-your-iq-tested-faqs/",
+                      "actual_read_scope": "读取资格与练习区别的FAQ；候选“it is not an official Raven assessment or evidence of Mensa eligibility”与原创题本身份和官方资格要求一致。",
+                      "limitation": "未核具体个人资格或接收机构政策；亦未核英文CTA追踪参数的线上行为。"
+                    }
+                  ],
+                  "unverified": [
+                    "英文正文及meta独立完整读取、hash一致。",
+                    "20分钟是预计用时；完整施测流程、线上QA、资格认证和排名未核。"
+                  ]
+                }
               }
             }
-          }
+          },
+          "snapshot_json_sha256": "b77f098aea4d982b54d89bb2e0deac3086c88d8aadcced84dca833a51262eace"
         }
       ]
     },

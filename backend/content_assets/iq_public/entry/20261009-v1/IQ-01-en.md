@@ -38,14 +38,13 @@ For example, 18 correct answers give a raw result of 18 and an accuracy of 18÷3
 
 If a result includes item-group summaries, read them in terms of each group's correct-answer count and item count. Group names and percentages help organise this attempt's performance; they do not establish validated independent ability subscales or stable “spatial” or “numerical” intelligence types.
 
-## The Beta indicator: a public formula is not population norms
+## Understanding Your IQ Score and Results
 
-The Beta indicator in the current public technical explanation uses a simulated random-response baseline: μ = 5.096, σ = 2.034, and z = (R − 5.096)÷2.034. It then calculates round(100 + 15z) and caps the result between 55–145. These parameters describe simulated random responses, not the intelligence distribution of a representative population of test takers.
+After you complete and submit all 30 questions, the results page displays your IQ score, proportion exceeded, answer accuracy, correct answers, time taken and five-axis ability radar.
 
-For R = 8, z is approximately 1.428 and Beta is 121. That 121 cannot be called a population-normed IQ of 121 or interpreted as how many people you outperform. Every integer correct count from 12–30 currently reaches 145, so that ceiling cannot distinguish those raw results or reveal the original correct count. For R = 0, the formula actually outputs 62; 55 is the configured lower bound, not the result for zero correct answers.
+The current IQ score converts the number of correct answers using predefined scoring rules, with a range of 73–145. For example, 5 correct answers give a score of 100, 10 give 110, 20 give 130, and 30 give 145. Other correct-answer counts are converted within their respective intervals and rounded to the nearest integer for display.
 
-This section explains a published technical indicator and does not promise that the current report interface displays Beta. Any norm-referenced standard score and percentile in a report requires separate checks of its reference population, version and availability; Beta cannot replace a missing population score. See [IQ scores and interpretation limits](/en/articles/iq-test-score-and-limits-explained) for detailed guidance on the numbers.
-
+“Proportion exceeded” is calculated from the scoring model’s reference distribution and differs from answer accuracy. For example, 8 correct answers give an IQ score of 106, a displayed proportion exceeded of 65.54%, and answer accuracy of approximately 26.7%. These figures describe different measures and are not interchangeable. See [IQ Scores and Interpretation Limits](/en/articles/iq-test-score-and-limits-explained) for the calculation details.
 ## How to judge what a result can be used for
 
 Ask separately what the questions cover, how scoring works, which ages and languages are supported, how the reference sample was obtained, whether scores are reliable, and whether evidence supports the judgment you want to make. Questions resembling classic intelligence puzzles, an open formula or numbers on a scale centred around 100 cannot establish these points by themselves.
@@ -56,6 +55,6 @@ This page is for experiencing visual reasoning tasks, understanding this attempt
 
 ## After finishing, choose one concrete next step
 
-To understand this site's tool and its conditions of use, read the [FermatMind IQ test guide](/en/articles/iq-test-tool-guide). For questions about raw scores, accuracy and Beta, read [IQ scores and interpretation limits](/en/articles/iq-test-score-and-limits-explained). To improve rule checking and review habits, read [IQ test practice and review](/en/articles/iq-test-growth-guide).
+To understand this site's tool and its conditions of use, read the [FermatMind IQ test guide](/en/articles/iq-test-tool-guide). For questions about correct answers, answer accuracy, IQ score and proportion exceeded, read [IQ scores and interpretation limits](/en/articles/iq-test-score-and-limits-explained). To improve rule checking and review habits, read [IQ test practice and review](/en/articles/iq-test-growth-guide).
 
 First record one testable question, such as “Did I choose an answer after checking only the first row?”, then observe whether it happens again on entirely new practice material. Repeating the same questions can increase familiarity and answer memory; a score increase alone does not prove an increase in general intelligence. A single low score likewise does not prove a lack of potential; consider real learning performance, response conditions and support needs.

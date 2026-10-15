@@ -2,7 +2,7 @@
 
 Compare task-level details only if the report actually provides the relevant task or process data. The observation tables and practice suggestions here are editorial prompts, not validated diagnostic tools, ability subscales, or interventions. Without the relevant information, do not infer personal conclusions such as “slow” or “strong spatial ability” from the total score.
 
-If you have just received a result, identify the number first: correct answers, percentage correct, a simulation-based Beta indicator, or a standard score supported by applicable population norms. For FermatMind's current original 30-item form, percentage correct and Beta are not population IQ scores or percentiles. Review item-group performance only when the relevant data are actually available.
+To understand your result, first distinguish IQ score, proportion exceeded, answer accuracy and correct answers. FermatMind’s current original 30-question test converts correct answers into an IQ score using predefined anchors and calculates “proportion exceeded” from the scoring model. Answer accuracy is calculated directly from the number of correct answers. This article explains these figures, their score bands and their interpretation limits.
 
 1. An online IQ test can help you observe your performance on tasks such as matrix reasoning, pattern recognition, and abstract problem solving.
 2. FermatMind's current original 30-item exercise is not equivalent to a formal intelligence assessment; formal IQ interpretation requires standardized administration, applicable norms, and measurement evidence for the intended use.
@@ -37,7 +37,7 @@ The question of “accuracy” needs to be broken down.
 
 If you mean “Can an online test observe my performance on certain reasoning questions?”, yes. FermatMind's current public IQ test mainly concerns matrix reasoning, pattern recognition, and abstract problem solving. These tasks can help you observe performance on particular cognitive question types.
 
-If you mean “Can FermatMind's current original 30-item form provide conclusions equivalent to a formal intelligence assessment?”, the available public evidence does not support that interpretation. Assess the particular instrument, version, and use: standardized administration, applicable norms, reliability, validity, and interpretation procedures. Online delivery is one administration condition to evaluate; it does not by itself establish measurement quality. FermatMind's published simulation baseline does not support population rankings or clinical judgments.
+If you mean “Can FermatMind's current original 30-item form provide conclusions equivalent to a formal intelligence assessment?”, the available public evidence does not support that interpretation. Assess the particular instrument, version, and use: standardized administration, applicable norms, reliability, validity, and interpretation procedures. Online delivery is one administration condition to evaluate; it does not by itself establish measurement quality. FermatMind's current scoring model does not replace professional assessment or support clinical judgments.
 
 A more accurate statement is:
 
@@ -97,33 +97,69 @@ After an online IQ test, “score interpretation” is where problems most easil
 
 Each item in the current original 30-item form is worth one point, with no deduction for an incorrect answer. Raw score R is the number correct, from 0 to 30. Synthetic example: 18 correct answers give R=18 and 18÷30×100%=60% correct. That describes this attempt, not IQ 60 or the 60th percentile. Differences in difficulty and coverage also mean that 18/30 cannot be directly compared with 18/30 on another site's form.
 
-### Beta Uses a Random-Response Simulation Baseline
+### How the Current IQ Score Is Calculated
 
-The [FermatMind IQ entry page](/en/tests/iq-test-intelligence-quotient-assessment) publishes the current Beta calculation using a simulated random-response mean μ=5.096 and standard deviation σ=2.034.
+Each correct answer earns 1 point, and an incorrect answer earns 0 points, with no penalty for an incorrect answer. Let R be the number of correct answers and S the converted score before rounding. The current rules are:
 
-- z=(R−5.096)÷2.034.
-- Beta=round(100+15z), then bounded to 55–145; round means rounding to the nearest integer.
+| Correct answers | Conversion |
+|---|---|
+| R = 0 | S = 73 |
+| 1≤R≤5 | S = 85 + 3.75×(R−1) |
+| 6≤R≤20 | S = 100 + 2×(R−5) |
+| 21≤R≤30 | S = 130 + 1.5×(R−20) |
 
-Synthetic calculation: for R=8, z=(8−5.096)÷2.034≈1.428, and 100+15z≈121.416, giving Beta=121. The calculation is reproducible, but its reference is simulated random responding, not a representative population. It is not a normed IQ of 121 and cannot tell you what percentage of people you outperform.
+The results page rounds S to the nearest integer, with halves rounded up. The current displayed range is 73–145.
 
-| Synthetic correct count R | Percentage correct | Rounded conversion before bounding | Final Beta |
-|---:|---:|---:|---:|
-| 0 | 0% | 62 | 62 |
-| 8 | About 26.7% | 121 | 121 |
-| 11 | About 36.7% | 144 | 144 |
-| 12 | 40% | 151 | 145 |
-| 18 | 60% | 195 | 145 |
-| 30 | 100% | 284 | 145 |
+### How “Proportion Exceeded” Is Calculated
 
-55 is the configured lower bound, not the output for zero correct answers. For integer correct counts from 0 to 30, the lowest actual output is 62. Every correct count from 12 through 30 maps to 145, so the upper bound cannot distinguish those raw results or reveal the original correct count.
+The current “proportion exceeded” is calculated using the scoring model’s normal reference distribution, with a mean of 100 and a standard deviation of 15:
 
-This is why an open formula and a valid population interpretation require different evidence. The formula explains how the indicator is generated; applicable population norms and reliability and validity evidence support the proposed comparisons and uses. Adding 100 and 15 does not create that evidence.
+Proportion exceeded = 100 × Φ((S − 100) ÷ 15).
 
-This section explains the published entry-page algorithm, not a promise that every results page displays Beta. If a report separately presents a standard score or percentile, check its own reference population, norm and model versions, eligibility conditions, and supporting evidence. The simulated Beta baseline cannot establish those measures.
+Φ is the standard normal cumulative distribution function, and S is the converted score before rounding. The values 100 and 15 are the specified parameters of the reference distribution.
+
+For example, 3 correct answers give S = 92.5. The IQ score displays 93, while proportion exceeded displays 30.85%. Rounding 92.5 to 93 before recalculating the proportion would produce a value that differs from the results page.
+
+### Current Score Conversion Table
+
+| Correct answers | IQ score | Proportion exceeded |
+|---:|---:|---:|
+| 0 | 73 | 3.59% |
+| 1 | 85 | 15.87% |
+| 2 | 89 | 22.66% |
+| 3 | 93 | 30.85% |
+| 4 | 96 | 40.13% |
+| 5 | 100 | 50.00% |
+| 6 | 102 | 55.30% |
+| 7 | 104 | 60.51% |
+| 8 | 106 | 65.54% |
+| 9 | 108 | 70.31% |
+| 10 | 110 | 74.75% |
+| 11 | 112 | 78.81% |
+| 12 | 114 | 82.47% |
+| 13 | 116 | 85.69% |
+| 14 | 118 | 88.49% |
+| 15 | 120 | 90.88% |
+| 16 | 122 | 92.88% |
+| 17 | 124 | 94.52% |
+| 18 | 126 | 95.85% |
+| 19 | 128 | 96.90% |
+| 20 | 130 | 97.72% |
+| 21 | 132 | 98.21% |
+| 22 | 133 | 98.61% |
+| 23 | 135 | 98.93% |
+| 24 | 136 | 99.18% |
+| 25 | 138 | 99.38% |
+| 26 | 139 | 99.53% |
+| 27 | 141 | 99.65% |
+| 28 | 142 | 99.74% |
+| 29 | 144 | 99.81% |
+| 30 | 145 | 99.87% |
+
 
 If the result actually supplies item-group correct counts, totals, or percentages, these describe performance on those grouped items in this attempt. They are not validated spatial, speed, or other ability subscales. Keep group sizes visible: one extra error can substantially change the percentage in a small group. A total score alone cannot distinguish slow solving, carelessness, or an unclear strategy; those hypotheses need process data or explicitly identified personal observations.
 
-Without published norms, the product cannot claim percentiles or rankings. Without age norms, it cannot offer age-based interpretations. Without an explanation of measurement error, one score cannot be treated as an exact judgment.
+The current “proportion exceeded” is calculated from the scoring model’s reference distribution, rather than a ranking among actual test takers. Without age norms, it cannot offer age-based interpretations. Without an explanation of measurement error, one score cannot be treated as an exact judgment.
 
 Safer interpretations are:
 
@@ -156,7 +192,7 @@ Users can of course care about scores, but the article must first place each sco
 
 Even with norms, a score is an estimate rather than an error-free personal constant. If a report provides an interval, check its confidence level and calculation basis. Without verified error parameters for this form, do not invent a margin such as “plus or minus five points.” Fatigue, display problems, attention, and familiarity are conditions worth recording, but they do not establish that someone's underlying ability must be higher.
 
-Synthetic scenario: Xiaolin scores 18/30 on a first attempt and 21/30 after practice. Both produce Beta 145 under the current formula. The correct count increases by three and percentage correct rises from 60% to 70%; the unchanged Beta reflects information lost at its upper bound. The improvement could involve a better strategy, remembered items, different conditions, or other influences. Two results alone do not establish an increase in general intelligence.
+For example, 18 correct answers on a first attempt give an IQ score of 126 and answer accuracy of 60%. Twenty-one correct answers on a second attempt give an IQ score of 132 and answer accuracy of 70%. Three additional correct answers increase the displayed score by 6 points. When comparing attempts, also record whether the questions were familiar, whether you worked independently, and whether the conditions were similar. A higher score alone does not establish an increase in general intelligence.
 
 Next, record the form version, prior exposure, independent completion, and conditions. Use unseen practice material to observe whether you can explain a rule and check counterexamples. Improvement on new material supports further observation of that strategy; improvement confined to familiar items suggests considering memory or familiarity. If performance does not improve, focus on one strategy at a time and check whether the materials have comparable difficulty. This personal record is not a causal experiment or a test of your ability ceiling. The [Hausknecht and colleagues retesting abstract](https://pubmed.ncbi.nlm.nih.gov/17371085/) reports practice effects in selection tests, but does not establish an improvement size or ideal retest interval for FermatMind.
 
@@ -164,7 +200,7 @@ Two websites can both use “IQ” and a scale centered on 100 while differing i
 
 ## What This Attempt Cannot Judge for You
 
-Interpretations supported by different intelligence assessments must be evaluated against their specific versions and intended-use evidence. Raw performance and simulated Beta from FermatMind's current original 30-item form cannot independently support individual conclusions about careers, income, admission, hiring, or diagnosis.
+Interpretations supported by different intelligence assessments must be evaluated against their specific versions and intended-use evidence. Raw performance and the current scoring model from FermatMind's current original 30-item form cannot independently support individual conclusions about careers, income, admission, hiring, or diagnosis.
 
 This attempt cannot judge for you:
 
@@ -245,7 +281,7 @@ If you worry about misreading test results as labels, read /en/method-boundaries
 
 ### Are Online IQ Tests Accurate?
 
-Evaluate the specific instrument and intended use; online versus in-person delivery alone does not settle accuracy. FermatMind's current original 30-item form records particular matrix-reasoning performance. Its published random-simulation Beta does not support population IQ or percentile interpretations. Formal interpretation additionally requires applicable norms, standardized administration, and measurement evidence for the proposed use.
+Evaluate the specific instrument and intended use; online versus in-person delivery alone does not settle accuracy. FermatMind's current original 30-item form records particular matrix-reasoning performance. Its current scoring model generates the results page’s IQ score and “proportion exceeded”; it is not equivalent to a formal intelligence assessment. Formal interpretation additionally requires applicable norms, standardized administration, and measurement evidence for the proposed use.
 
 ### Is the FermatMind IQ Test a Formal Intelligence Assessment?
 
@@ -253,7 +289,7 @@ The online reasoning tasks described here should not be equated with a formal in
 
 ### How Should IQ Scores Be Read?
 
-Distinguish correct counts, percentage correct, simulated Beta, and standard scores supported by applicable norms. On this form, 18/30 means 60% correct. Eight correct answers yield Beta 121 under the published formula, not a population IQ of 121. Every correct count from 12 to 30 yields Beta 145, so it cannot reveal the correct count. Population percentiles require relevant norms and cannot be directly converted from percentage correct or Beta.
+Start with your IQ score and its summary, then consider proportion exceeded, answer accuracy, correct answers and time taken together. For example, 8 correct answers display a score of 106, a proportion exceeded of 65.54%, and approximately 26.7% answer accuracy. Score-band headings and summaries follow the current results page.
 
 ### What Types of Questions Do IQ Tests Usually Include?
 

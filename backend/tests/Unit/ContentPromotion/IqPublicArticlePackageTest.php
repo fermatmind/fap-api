@@ -42,16 +42,45 @@ final class IqPublicArticlePackageTest extends TestCase
         self::assertSame('new_source_pair', $rows[9]['operation']);
     }
 
-    public function test_translation_edition_retains_latest_chinese_guide_and_only_three_article_pairs(): void
+    public function test_translation_edition_retains_guide_examples_and_current_scoring_copy(): void
     {
         $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::PARITY_SHA256);
         self::assertSame(['IQ-02', 'IQ-02', 'IQ-03', 'IQ-03', 'IQ-05', 'IQ-05'], array_column($rows, 'page_id'));
         $source = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::SEO_SHA256)[0];
-        self::assertSame($source['snapshot'], $rows[2]['snapshot']);
+        self::assertSame(explode('## 免费智商测试', $source['snapshot']['content_md'])[0], explode('## 免费智商测试', $rows[2]['snapshot']['content_md'])[0]);
+        self::assertStringContainsString('IQ得分为126分', $rows[2]['snapshot']['content_md']);
+        self::assertStringContainsString('an IQ score of 126', $rows[3]['snapshot']['content_md']);
         self::assertStringContainsString('·', $rows[3]['snapshot']['content_md']);
         self::assertSame(0, preg_match('/\p{sc:Han}/u', $rows[3]['snapshot']['content_md']));
         self::assertSame(6, IqPublicArticlePackage::rowCountForSha(IqPublicArticlePackage::PARITY_SHA256));
         self::assertFalse(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::PARITY_SHA256, 'iq-test-narrative-portrait'));
+        self::assertTrue(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::PREVIOUS_PARITY_SHA256, 'iq-test-tool-guide'));
+        self::assertSame(IqPublicArticlePackage::PARITY_PACKAGE, IqPublicArticlePackage::pathForSha(IqPublicArticlePackage::PREVIOUS_PARITY_SHA256));
+    }
+
+    public function test_bilingual_published_conversion_tables_match_the_current_runtime_model(): void
+    {
+        $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::PARITY_SHA256);
+        foreach (array_slice($rows, 0, 2) as $row) {
+            $body = $row['snapshot']['content_md'];
+            $input = json_decode(file_get_contents(dirname(__DIR__, 3).'/'.IqPublicArticlePackage::PARITY_PACKAGE.'/IQ-02-'.$row['identity']['locale'].'.json'), true, 32, JSON_THROW_ON_ERROR);
+            if (isset($input['excerpt'])) {
+                self::assertSame($row['snapshot']['excerpt'], $input['excerpt']);
+            }
+            self::assertStringNotContainsString('5.096', $body);
+            self::assertStringNotContainsString('2.034', $body);
+            preg_match_all('/^\| (\d+) \| (\d+) \| ([\d.]+)% \|$/m', $body, $matches, PREG_SET_ORDER);
+            self::assertCount(31, $matches);
+            foreach ($matches as $raw => $match) {
+                $score = (new \App\Services\Iq\IqBetaReferenceScore)->fromScore([
+                    'status' => 'scored', 'bank_id' => 'IQ_OWNER_ORIGINAL_30', 'raw_score' => $raw,
+                    'expected_item_count' => 30, 'answer_count' => 30,
+                ]);
+                self::assertSame($raw, (int) $match[1]);
+                self::assertSame($score['display_score'], (int) $match[2]);
+                self::assertSame(number_format($score['percentile'], 2, '.', ''), $match[3]);
+            }
+        }
     }
 
     public function test_a_different_authorized_package_digest_is_rejected(): void
