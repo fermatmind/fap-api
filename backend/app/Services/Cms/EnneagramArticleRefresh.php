@@ -186,7 +186,9 @@ final class EnneagramArticleRefresh
             // Content and discoverability remain separate transitions in the same bounded lane.
             $english = $articles['en'];
             $english->forceFill(['is_indexable' => true, 'sitemap_eligible' => true, 'llms_eligible' => true])->saveQuietly();
-            $english->seoMeta->forceFill(['is_indexable' => true, 'robots' => 'index,follow'])->save();
+            // Native promotion already notifies both Articles after this outer
+            // transaction; those consumers read this final SEO/FAQ state.
+            $english->seoMeta->forceFill(['is_indexable' => true, 'robots' => 'index,follow'])->saveQuietly();
             $gate = $this->seoGates->run([
                 'article_ids' => '51,190', 'expected_slugs' => self::SLUG.','.self::SLUG,
                 'translation_group_id' => self::GROUP, 'enable_hreflang' => true, 'execute' => true,

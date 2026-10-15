@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth;
 use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
@@ -14,6 +15,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 use Tests\TestCase;
@@ -97,6 +99,27 @@ final class EnneagramArticleRefreshTest extends TestCase
         $before = $this->state();
         $this->assertSame(['status' => 'ready', 'changed' => 0], app(EnneagramArticleRefresh::class)->publish(true));
         $this->assertEquals($before, $this->state());
+    }
+
+    public function test_native_publication_notifies_each_final_article_once_without_duplicate_seo_sync(): void
+    {
+        $this->seedBaseline();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false, 'queue.default' => 'sync']);
+        Queue::fake([SyncPublicAuthorityUrlTruth::class]);
+        app(EnneagramArticleRefresh::class)->publish();
+
+        Queue::assertPushed(SyncPublicAuthorityUrlTruth::class, 2);
+        foreach (['zh-CN' => 51, 'en' => 190] as $locale => $id) {
+            Queue::assertPushed(SyncPublicAuthorityUrlTruth::class, function ($job) use ($locale, $id): bool {
+                $article = Article::withoutGlobalScopes()->with(['publishedRevision', 'seoMeta'])->findOrFail($id);
+
+                return $job->pageEntityType === 'article' && $job->entityIdentity === (string) $id
+                    && $job->locale === $locale && $job->scopedWrite
+                    && $article->is_indexable && $article->sitemap_eligible && $article->llms_eligible
+                    && $article->seoMeta->robots === 'index,follow'
+                    && $article->publishedRevision->authority_package_sha256 === EnneagramArticleRefresh::PACKAGE_SHA256;
+            });
+        }
     }
 
     public function test_foreign_working_draft_fails_without_overwrite(): void
