@@ -66,6 +66,8 @@ final class MigrationPurityGateTest extends TestCase
         '2026_09_20_100000_consolidate_mbti_method_content_en.php',
         // RiasecEnglishParityPublicationTest covers the two exact fields, two-registry parity, idempotence, and atomic rollback.
         '2026_09_21_010000_align_riasec_english_landing_parity.php',
+        // EnneagramBilingualLandingCopyTest covers exact fields, tenant preservation, idempotence and bilingual conflict rollback.
+        '2026_10_15_130000_refine_enneagram_bilingual_landing_copy.php',
     ];
 
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';
