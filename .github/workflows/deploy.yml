@@ -948,6 +948,7 @@ jobs:
           fi
           deploy_timeout=30m
           if test "$council_orchestration" = true; then deploy_timeout=60m; fi
+          if test '${{ fromJSON(needs.policy.outputs.classification).operations.career_cache }}' = true; then deploy_timeout=60m; fi
           timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task" staging -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode="$deploy_mode" \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \

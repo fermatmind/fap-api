@@ -195,6 +195,32 @@ test('synchronous repair timeout cannot become successful coverage or continue a
   assert.equal(result.coverage, null);
 });
 
+test('staging budgets include Career cache work without changing default or council limits', () => {
+  const step = workflow.indexOf('      - name: Deploy staging and run repository smoke chain');
+  assert.notEqual(step, -1);
+  const start = workflow.indexOf('          deploy_timeout=30m', step);
+  const end = workflow.indexOf('          timeout --signal=TERM', start);
+  assert.ok(start > step && end > start);
+  const budget = workflow.slice(start, end);
+  for (const cache of [false, true]) {
+    for (const council of [false, true]) {
+      for (const competitive of [false, true]) {
+        const script = budget.replaceAll(
+          '${{ fromJSON(needs.policy.outputs.classification).operations.career_cache }}', String(cache),
+        );
+        const actual = execFileSync('bash', ['-c', `${script}\nprintf '%s' "$deploy_timeout"`], {
+          encoding: 'utf8',
+          env: { ...process.env, council_orchestration: String(council), competitive_evidence: String(competitive) },
+        });
+        assert.equal(actual, cache || council ? '60m' : '30m', JSON.stringify({ cache, council, competitive }));
+      }
+    }
+  }
+  assert.match(workflow.slice(end), /^          timeout --signal=TERM --kill-after=30s "\$deploy_timeout" php \/tmp\/dep\.phar "\$deploy_task" staging/);
+  assert.match(deploy, /after\('deploy:success', 'cache:accept-public-projection'\)/);
+  assert.match(deploy, /cache:public-projection accept --sha=[\s\S]*?\['timeout' => 30\]/);
+});
+
 test('Career cache and Current production budgets preserve complete mixed-scope checks', () => {
   const start = workflow.indexOf('          deploy_timeout=30m', workflow.indexOf('          lkg_sha='));
   assert.notEqual(start, -1);
