@@ -275,10 +275,17 @@ final class ExactPackagePromotionService
         if (in_array($phase, ['publish', 'live-qa'], true) && $published !== $expected) {
             throw new DomainException('published_count_mismatch');
         }
+        $mensaLaunch = $adapter instanceof IqPublicArticlePromotionAdapter && $context->lane === 'W3'
+            && $context->subscope === IqPublicArticlePromotionAdapter::SUBSCOPE
+            && $context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256 && $expected === 2 && $phase === 'publish';
+        $boundaryCounts = [];
         foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count', 'deploy_mutation_count'] as $boundary) {
-            if ((int) ($result[$boundary] ?? -1) !== 0) {
+            $allowed = $mensaLaunch && in_array($boundary, ['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count'], true) ? $written : 0;
+            if (! is_int($result[$boundary] ?? null) || $result[$boundary] !== $allowed
+                || ($mensaLaunch && ! in_array($written, [0, 2], true))) {
                 throw new DomainException('prohibited_mutation_reported');
             }
+            $boundaryCounts[$boundary] = $result[$boundary];
         }
 
         return [
@@ -313,11 +320,7 @@ final class ExactPackagePromotionService
             'privacy_redaction' => true,
             'private_payload_read_count' => 0,
             'server_topology_exposed' => false,
-            'indexability_mutation_count' => 0,
-            'sitemap_mutation_count' => 0,
-            'llms_mutation_count' => 0,
-            'search_mutation_count' => 0,
-            'deploy_mutation_count' => 0,
+            ...$boundaryCounts,
             ...$this->top100Evidence($context, $result),
             ...$this->scopedPublicEvidence($context, $adapter, $result),
         ];

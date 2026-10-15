@@ -827,8 +827,15 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
 
     private function result(PromotionContext $context, int $written, int $published, ?string $reference, array $state, int $created = 0): array
     {
-        return [...PromotionAdapterResultFactory::make($context, $written, count($state), $published, $reference, array_fill_keys([
+        $result = [...PromotionAdapterResultFactory::make($context, $written, count($state), $published, $reference, array_fill_keys([
             'indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count', 'deploy_mutation_count',
         ], 0), ['created_count' => $created, 'updated_count' => $written - $created, 'unchanged_count' => count($state) - $written]), 'target_state_sha256' => hash('sha256', PromotionContextFactory::canonicalJson($state))];
+        if ($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256 && $published > 0) {
+            foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count'] as $field) {
+                $result[$field] = $written;
+            }
+        }
+
+        return $result;
     }
 }

@@ -37,6 +37,25 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         [$adapter, $context] = $this->importMensa();
         $published = $adapter->publish($context);
         self::assertSame(2, $published['published_count']);
+        foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count'] as $field) {
+            self::assertSame(2, $published[$field]);
+        }
+        $normalize = new \ReflectionMethod(ExactPackagePromotionService::class, 'normalizeResult');
+        $service = app(ExactPackagePromotionService::class);
+        $receipt = $normalize->invoke($service, $context, $adapter, 'publish', 'content_promotion_publish_receipt', $published, null);
+        self::assertSame(2, $receipt['indexability_mutation_count']);
+        self::assertSame(2, $receipt['sitemap_mutation_count']);
+        self::assertSame(2, $receipt['llms_mutation_count']);
+        foreach ([['publish', 'search_mutation_count', 2], ['publish', 'indexability_mutation_count', 0], ['live-qa', 'indexability_mutation_count', 2]] as [$phase, $field, $value]) {
+            $invalid = $published;
+            $invalid[$field] = $value;
+            try {
+                $normalize->invoke($service, $context, $adapter, $phase, 'content_promotion_publish_receipt', $invalid, null);
+                self::fail('Invalid boundary evidence must fail closed.');
+            } catch (DomainException $error) {
+                self::assertSame('prohibited_mutation_reported', $error->getMessage());
+            }
+        }
         self::assertSame(2, $adapter->liveQa($context)['readback_count']);
         $count = ArticleTranslationRevision::query()->count();
         self::assertSame(2, $adapter->preflight($context)['readback_count']);
