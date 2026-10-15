@@ -60,7 +60,8 @@ return new class extends Migration
                     || $revision->title !== $row['snapshot']['title'] || $revision->excerpt !== $row['snapshot']['excerpt']
                     || $revision->content_md !== $row['snapshot']['content_md']
                     || ! $seo || (int) $seo->org_id !== 0 || $seo->locale !== $article->locale || ! $seo->is_indexable
-                    || $seo->robots !== 'index,follow' || ! in_array($seo->canonical_url, [$path, 'https://fermatmind.com'.$path], true)
+                    || $seo->robots !== 'index,follow'
+                    || ($seo->canonical_url !== null && ! in_array($seo->canonical_url, [$path, 'https://fermatmind.com'.$path], true))
                     || $seo->seo_title !== $row['snapshot']['seo_title'] || $seo->seo_description !== $row['snapshot']['seo_description']) {
                     throw new RuntimeException('IQ hreflang published authority changed: '.$article->locale.':'.$article->slug);
                 }

@@ -72,6 +72,19 @@ final class IqArticleHreflangMigrationTest extends TestCase
         self::assertSame(7, AuditLog::query()->withoutGlobalScopes()->where('action', 'articles_seo_gate_rollout')->count());
     }
 
+    public function test_staging_english_canonical_fallback_is_verified_without_rewriting_it(): void
+    {
+        $this->seedCurrent();
+        DB::table('article_seo_meta')->whereIn('article_id', $this->targets()->where('locale', 'en')->pluck('id'))->update(['canonical_url' => null]);
+        $this->activate();
+        foreach ($this->targets()->where('locale', 'en') as $article) {
+            self::assertNull($article->seoMeta->canonical_url);
+            self::assertTrue(data_get($article->seoMeta->schema_json, 'editorial_package_v1.hreflang_gate_v1.enabled'));
+            $seo = app(ArticleSeoService::class)->buildSeoPayload($article, $article->publishedRevision);
+            self::assertSame('https://fermatmind.com/en/articles/'.$article->slug, $seo['canonical']);
+        }
+    }
+
     #[DataProvider('authorityConflicts')]
     public function test_authority_conflicts_refuse_the_entire_set_without_writes(string $table, string $field, mixed $value): void
     {
