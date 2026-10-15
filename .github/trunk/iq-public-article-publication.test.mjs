@@ -4,7 +4,7 @@ import { createHash, createHmac } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, seoPackageSha256, seoPackagePath, parityPackageSha256, parityPackagePath, mensaPackageSha256, mensaPackagePath, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
+import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, seoPackageSha256, seoPackagePath, parityPackageSha256, parityPackagePath, mensaPackageSha256, mensaPackagePath, matrixPackageSha256, matrixPackagePath, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
 import { buildExecution, publish, recoveryFailure, acceptOnline } from './iq-public-article-publish.mjs';
 
 const backend = fileURLToPath(new URL('../../backend/', import.meta.url));
@@ -45,9 +45,9 @@ test('a version upgrade admits only its fixed package root without broadening ca
   assert.equal(isIqArticleOnlyPromotionRegistration(before, after), true);
   assert.equal(isIqArticleOnlyPromotionRegistration(before, `${after}\n`), false);
   const cli = readFileSync(new URL('./iq-public-article-publish.mjs', import.meta.url), 'utf8');
-  assert.match(cli, /buildExecution\(env, resolve\('backend'\), mensaPackageSha256\)/);
+  assert.match(cli, /buildExecution\(env, resolve\('backend'\), matrixPackageSha256\)/);
 });
-test('the active publication contains only the new reviewed Mensa bilingual pair', () => {
+test('the historical Mensa package remains bound to its bilingual pair', () => {
   const current = buildExecution(env, backend, mensaPackageSha256);
   assert.equal(current.binding.package_path, mensaPackagePath);
   assert.equal(current.binding.expected_row_count, 2);
@@ -58,6 +58,19 @@ test('the active publication contains only the new reviewed Mensa bilingual pair
   const output = { ...success(), package_sha256: mensaPackageSha256, published_count: 2,
     phases: success().phases.map(row => ({ ...row, readback_count: 2 })) };
   assert.equal(publish(current, () => ({ status: 0, stdout: JSON.stringify(output) })).published_count, 2);
+});
+test('the active matrix publication binds two new pages and two existing guide updates', () => {
+  const current = buildExecution(env, backend, matrixPackageSha256);
+  assert.equal(current.binding.package_path, matrixPackagePath);
+  assert.equal(current.binding.expected_row_count, 4);
+  assert.deepEqual(readCandidateRows(backend, matrixPackageSha256).map(row => [row.page_id, row.operation, row.identity.locale]),
+    [['IQ-03','existing_public_update','zh-CN'], ['IQ-03','existing_public_update','en'],
+      ['IQ-08','new_source_pair','zh-CN'], ['IQ-08','new_source_pair','en']]);
+  const after = readFileSync(`${backend}/config/content_promotion.php`, 'utf8');
+  assert.equal(isIqArticleOnlyPromotionRegistration(after.replace(`        '${matrixPackagePath}',\n`, ''), after), true);
+  const output = { ...success(), package_sha256: matrixPackageSha256, published_count: 4,
+    phases: success().phases.map(row => ({ ...row, readback_count: 4 })) };
+  assert.equal(publish(current, () => ({ status: 0, stdout: JSON.stringify(output) })).published_count, 4);
 });
 test('the translation edition binds exactly the three bilingual article pairs', () => {
   const binding = inspectPackage(backend, parityPackageSha256);

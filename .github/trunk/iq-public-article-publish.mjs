@@ -2,13 +2,13 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, workflowSignature, packageSha256, mensaPackageSha256 } from './iq-public-article-package.mjs';
+import { inspectPackage, workflowSignature, packageSha256, matrixPackageSha256 } from './iq-public-article-package.mjs';
 import { verifyOnlineCandidates, readOnlinePrestate } from './iq-public-article-online-qa.mjs';
 
 const quote = value => `'${String(value).replaceAll("'", "'\\''")}'`;
 const onlineFailureCodes = new Set([
   'IQ_ARTICLE_SSR_DOM_INVALID', 'IQ_ARTICLE_SSR_LINK_MISMATCH', 'IQ_ARTICLE_SSR_LINK_VARIANT_LIMIT',
-  'IQ_ARTICLE_SSR_BODY_MISMATCH', 'IQ_ARTICLE_SSR_METADATA_MISMATCH', 'IQ_ARTICLE_SSR_CANONICAL_MISMATCH', 'IQ_ARTICLE_SSR_ROBOTS_MISMATCH',
+  'IQ_ARTICLE_SSR_BODY_MISMATCH', 'IQ_ARTICLE_SSR_DIAGRAM_MISMATCH', 'IQ_ARTICLE_SSR_METADATA_MISMATCH', 'IQ_ARTICLE_SSR_CANONICAL_MISMATCH', 'IQ_ARTICLE_SSR_ROBOTS_MISMATCH',
   'IQ_ARTICLE_ONLINE_RESPONSE_INVALID', 'IQ_ARTICLE_ONLINE_PAYLOAD_LIMIT', 'IQ_ARTICLE_ONLINE_PRESTATE_REQUIRED',
   'IQ_ARTICLE_ONLINE_IDENTITY_MISMATCH', 'IQ_ARTICLE_ONLINE_BODY_MISMATCH', 'IQ_ARTICLE_ONLINE_FAQ_MISMATCH',
   'IQ_ARTICLE_ONLINE_QUALIFICATION_MISMATCH', 'IQ_ARTICLE_ONLINE_SEO_MISMATCH', 'IQ_ARTICLE_ONLINE_RENDER_FAILED',
@@ -82,7 +82,7 @@ function failedBeforeTransport(env) {
     || env.GITHUB_RUN_ATTEMPT !== '1') throw new Error('IQ_ARTICLE_WORKFLOW_IDENTITY_INVALID');
   const error = new Error('IQ_ARTICLE_PUBLICATION_FAILED');
   error.receipt = { schema: 'iq.public_articles.publish.v1', ok: false, source_commit: env.DEPLOY_SHA,
-    workflow_run_id: env.GITHUB_RUN_ID, workflow_run_attempt: 1, package_sha256: mensaPackageSha256,
+    workflow_run_id: env.GITHUB_RUN_ID, workflow_run_attempt: 1, package_sha256: matrixPackageSha256,
     transport_started: false, recovery_completed: true, recovery_status: 'not_required', sanitized: true };
   return error;
 }
@@ -103,7 +103,7 @@ async function cli() {
   try {
     mkdirSync(directory, { recursive: true, mode: 0o700 });
     if (execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim() !== env.DEPLOY_SHA) throw new Error('IQ_ARTICLE_CHECKOUT_SHA_MISMATCH');
-    execution = buildExecution(env, resolve('backend'), mensaPackageSha256);
+    execution = buildExecution(env, resolve('backend'), matrixPackageSha256);
     const prestate = await readOnlinePrestate(env.IQ_ARTICLE_PUBLISH_ENVIRONMENT, resolve('backend'), fetch, execution.binding.package_sha256);
     transportStarted = true;
     const receipt = await acceptOnline(execution, publish(execution), env.IQ_ARTICLE_PUBLISH_ENVIRONMENT, resolve('backend'), prestate);

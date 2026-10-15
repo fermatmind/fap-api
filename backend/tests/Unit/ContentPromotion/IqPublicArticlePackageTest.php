@@ -14,6 +14,25 @@ final class IqPublicArticlePackageTest extends TestCase
 {
     private ?string $temporaryRoot = null;
 
+    public function test_matrix_package_binds_only_its_new_pair_and_preserves_the_three_existing_guide_examples(): void
+    {
+        $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::MATRIX_SHA256);
+        self::assertSame(['IQ-03', 'IQ-03', 'IQ-08', 'IQ-08'], array_column($rows, 'page_id'));
+        self::assertSame(['existing_public_update', 'existing_public_update', 'new_source_pair', 'new_source_pair'], array_column($rows, 'operation'));
+        foreach (array_slice($rows, 0, 2) as $index => $guide) {
+            $baseline = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::PARITY_SHA256)[2 + $index];
+            $body = preg_replace('~^(?:若你能跟上箭头方向|If the arrow rule is clear)[^\n]+\n\n~mu', '', $guide['snapshot']['content_md']);
+            self::assertSame($baseline['snapshot']['content_md'], $body);
+            foreach (['title', 'excerpt', 'seo_title', 'seo_description', 'faq_items'] as $field) {
+                self::assertSame($baseline['snapshot'][$field], $guide['snapshot'][$field]);
+            }
+        }
+        self::assertTrue(IqPublicArticlePackage::launchesDiscoverability(IqPublicArticlePackage::MATRIX_SHA256, IqPublicArticlePackage::MATRIX_SLUG));
+        self::assertFalse(IqPublicArticlePackage::launchesDiscoverability(IqPublicArticlePackage::MATRIX_SHA256, 'iq-test-tool-guide'));
+        self::assertFalse(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::MATRIX_SHA256, 'iq-test-growth-guide'));
+        self::assertSame(4, IqPublicArticlePackage::rowCountForSha(IqPublicArticlePackage::MATRIX_SHA256));
+    }
+
     public function test_mensa_package_is_an_independently_reviewed_pair_without_existing_article_updates(): void
     {
         $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::MENSA_SHA256);

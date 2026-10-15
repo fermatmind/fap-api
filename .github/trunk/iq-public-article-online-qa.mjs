@@ -2,7 +2,7 @@ import { execFileSync, spawn } from 'node:child_process';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readCandidateRows, packageSha256, mensaPackageSha256 } from './iq-public-article-package.mjs';
+import { readCandidateRows, packageSha256, mensaPackageSha256, matrixPackageSha256 } from './iq-public-article-package.mjs';
 import { closeOwnedBrowser } from './eq-new-source-online-qa.mjs';
 
 const clean = value => String(value).replace(/\s+/gu, ' ').trim();
@@ -78,7 +78,11 @@ $rawText = function($query) use ($xp) {
 $linkLabels = []; foreach ($xp->query($bodyQuery.'//a') as $anchor) {
     if ($visible($anchor)) $linkLabels[$anchor->getAttribute('href')][] = $walk($anchor);
 }
+$codeBlocks = []; foreach ($xp->query($bodyQuery.'//pre/code') as $node) {
+    if ($visible($node)) $codeBlocks[] = $node->textContent;
+}
 echo json_encode([
+    'code_blocks' => $codeBlocks,
     'link_labels' => $linkLabels,
     'body' => $walk($body->item(0)), 'h1' => $nodes('//h1'), 'title' => $rawText('//title'),
     'description' => $nodes('//meta[@name="description"]', 'content'),
@@ -99,6 +103,8 @@ export function assertSsrCandidate(html, row, meta, environment = 'production', 
   const linkTarget = href => canonicalLinkTarget(href, linkContext);
   if (dom.links.some(href => !linkTarget(href))) throw new Error('IQ_ARTICLE_SSR_LINK_MISMATCH');
   const visible = bodyPlain(dom.body);
+  const diagrams = [...row.snapshot.content_md.matchAll(/^\s*```[\w-]*\s*\n([\s\S]*?)\n\s*```\s*$/gm)].map(match => match[1].trimEnd());
+  if (diagrams.length > 0 && JSON.stringify(dom.code_blocks) !== JSON.stringify(diagrams)) throw new Error('IQ_ARTICLE_SSR_DIAGRAM_MISMATCH');
   let cursor = 0;
   const renderedLabels = new Map();
   for (const [href, labels] of Object.entries(dom.link_labels)) {
@@ -106,7 +112,7 @@ export function assertSsrCandidate(html, row, meta, environment = 'production', 
     const current = renderedLabels.get(target) ?? []; renderedLabels.set(target, [...new Set([...current, ...labels.map(clean)])]);
   }
   for (const original of row.snapshot.content_md.split('\n')) {
-    if (!original.trim() || /^[\s|:-]+$/.test(original)) continue;
+    if (!original.trim() || /^[\s|:-]+$/.test(original) || /^\s*```[\w-]*\s*$/.test(original)) continue;
     let variants = [markdownText(original)];
     // Registered internal links can have context-specific UI labels. Require
     // all reviewed non-link text and one actual visible anchor representation.
@@ -315,7 +321,8 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     const faqs = payload.answer_surface_v1?.faq_blocks;
     if (!Array.isArray(faqs) || JSON.stringify(faqs.map(item => ({ question: item.question, answer: item.answer }))) !== JSON.stringify(row.snapshot.faq_items)) throw new Error('IQ_ARTICLE_ONLINE_FAQ_MISMATCH');
     const before = prestate[`${row.identity.locale}:${row.identity.slug}`];
-    const searchLaunch = expectedPackageSha256 === mensaPackageSha256;
+    const searchLaunch = expectedPackageSha256 === mensaPackageSha256
+      || (expectedPackageSha256 === matrixPackageSha256 && row.operation === 'new_source_pair');
     const qualifications = searchLaunch ? { is_indexable: true, sitemap_eligible: true, llms_eligible: true } : before;
     if (!before || Object.entries(before).some(([,value]) => typeof value !== 'boolean') || !qualifications
       || Object.entries(qualifications).some(([key, value]) => typeof value !== 'boolean' || article[key] !== value)) throw new Error('IQ_ARTICLE_ONLINE_QUALIFICATION_MISMATCH');

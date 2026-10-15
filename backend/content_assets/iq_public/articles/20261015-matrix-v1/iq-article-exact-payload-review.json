@@ -1,0 +1,54 @@
+{
+  "reviewer_role": "fm_independent_reviewer",
+  "review_date": "2026-10-15",
+  "independent_review_count": 1,
+  "scope": "Frozen bilingual IQ-03 guide link additions and IQ-08 original matrix teaching, diagrams, text alternatives, metadata and FAQ; engineering, deployment, indexing and search outcomes are separate.",
+  "source_commit": "61f3c1ca4c8e744b12342e7661bf1af9c424b763",
+  "sources": [
+    "https://www.cimt.org.uk/ske/J4/Text.pdf",
+    "https://fermatmind.com/en/articles/iq-test-tool-guide",
+    "https://fermatmind.com/zh/articles/iq-test-tool-guide",
+    "https://fermatmind.com/en/tests/iq-test-intelligence-quotient-assessment",
+    "https://fermatmind.com/zh/tests/iq-test-intelligence-quotient-assessment"
+  ],
+  "limitations": [
+    "Initial text-alternative empty position and five-column diagram alignment were corrected and independently rechecked against a new frozen version.",
+    "No claim of global uniqueness, traffic growth, Google indexing or ranking.",
+    "Final device rendering and deployment acceptance are performed separately."
+  ],
+  "schema": "iq.article_exact_payload_review.v1",
+  "targets": [
+    {
+      "page_id": "IQ-03",
+      "locale": "zh-CN",
+      "decision": "PASS",
+      "body_sha256": "9599968228096855dfa58bb250761ac2b60a53a8e349faa9eb2b008b2c216a93",
+      "candidate_json_sha256": "e97f99dad8dff6916d9fc579312db7c28caa534fb47bc9ffac3853ee7e10714f",
+      "snapshot_json_sha256": "b42f7c1dd02783aac9bd5e6ee2358638d1745d133a4c67eebb667cf397010e1d"
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "en",
+      "decision": "PASS",
+      "body_sha256": "1a7023ac90dcd37d25448eea7a49e84db88ec4501d04b69e318919495e991575",
+      "candidate_json_sha256": "99f629f3e0a5e6022e9274a7534eb41af115239d8c27838abe0312bb6693c3d2",
+      "snapshot_json_sha256": "c47ee1491e76753bd32eb71a6cc4c3968efc1abf177cf06093205a85d203611e"
+    },
+    {
+      "page_id": "IQ-08",
+      "locale": "zh-CN",
+      "decision": "PASS",
+      "body_sha256": "4223d5cc3c1dba368df1d926c0d845e96281453ef0440eaa183a111d8257e9e6",
+      "candidate_json_sha256": "82b3d4f51cf9d12663890f69ed3b152d543524d951783be14f28b85cb2a9af71",
+      "snapshot_json_sha256": "a6e4ecb16469cf0104db16b86d212ce2ec68fe7a26851eb2f8ef97a9647811b7"
+    },
+    {
+      "page_id": "IQ-08",
+      "locale": "en",
+      "decision": "PASS",
+      "body_sha256": "b5ae235ab9d47545215187526f3059e4747b510b496ecf395968e9abe8cc475f",
+      "candidate_json_sha256": "ea0e51ac08a8e77c5e793e0962bc6698d7f5e71100a04e04570b95d3373d479f",
+      "snapshot_json_sha256": "230729c694097dff15c195ae2fd38e43fa00260ffaea84501132f90d4f021ae2"
+    }
+  ]
+}

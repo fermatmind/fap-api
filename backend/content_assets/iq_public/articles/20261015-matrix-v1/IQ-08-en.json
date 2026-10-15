@@ -1,0 +1,27 @@
+{
+  "page_id": "IQ-08",
+  "locale": "en",
+  "metadata": {
+    "title": "Matrix Reasoning: Rotation vs Reflection, with 5 Examples",
+    "description": "Solve five original matrix exercises: track landmarks, tell turns from mirrors, separate movement, check symmetry and test operation order. Answers explained."
+  },
+  "faq_items": [
+    {
+      "question": "How can I tell rotation from reflection in a matrix?",
+      "answer": "Specify the centre or mirror line, then track named landmarks. A rotation moves all points through the same angle; a reflection maps points across its line. Check more than one mark and verify a completed pair. Symmetric pictures may not distinguish the operations."
+    },
+    {
+      "question": "Does a reflection always look different from a rotation?",
+      "answer": "No. A symmetric or insufficiently marked picture can have the same visible result under different operations. Exercise 4 gives a missing board that is predictable even though the operation is not uniquely identifiable."
+    },
+    {
+      "question": "Should I rotate the whole matrix?",
+      "answer": "Only if the problem supports that relationship. Here each small board is transformed; the outer grid supplies examples and a missing board. Exercise 3 additionally moves the arrangement within its frame, which must be checked separately from its internal turn."
+    },
+    {
+      "question": "Does the order of a turn and a mirror matter?",
+      "answer": "It can. A clockwise quarter-turn followed by a vertical reflection differs from the reversed order on the arrangements in Exercise 5. Check the stipulated centre, axis and completed examples rather than assuming all operations commute."
+    }
+  ],
+  "candidate_sha256": "b5ae235ab9d47545215187526f3059e4747b510b496ecf395968e9abe8cc475f"
+}

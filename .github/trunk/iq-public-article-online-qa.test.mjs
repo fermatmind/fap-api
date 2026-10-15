@@ -5,7 +5,7 @@ import { mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'no
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createServer } from 'node:http';
-import { readCandidateRows, seoPackageSha256, mensaPackageSha256 } from './iq-public-article-package.mjs';
+import { readCandidateRows, seoPackageSha256, mensaPackageSha256, matrixPackageSha256 } from './iq-public-article-package.mjs';
 import { assertSsrCandidate, articleDom, readOnlinePrestate, verifyOnlineCandidates, renderPage } from './iq-public-article-online-qa.mjs';
 
 const row = { identity: { locale: 'en', slug: 'iq-test-tool-guide' }, snapshot: {
@@ -47,10 +47,12 @@ test('prestate transport and timeout failures stay failed without exposing raw d
 const escapeHtml = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 function renderedFixture(candidate) {
   const path = `/${candidate.identity.locale === 'en' ? 'en' : 'zh'}/articles/${candidate.identity.slug}`;
-  const body = candidate.snapshot.content_md.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/[*`_]/g, '').replace(/^\s*(?:>\s*)+/gm, '').replace(/^\s*(?:#{1,6}\s+|[-+]\s+|[0-9]+[.)]\s+)/gm, '');
+  const codes = [];
+  const source = candidate.snapshot.content_md.replace(/^\s*```[\w-]*\s*\n([\s\S]*?)\n\s*```\s*$/gm, (_match, code) => { codes.push(code.trimEnd()); return `CODEPLACEHOLDER${codes.length - 1}END`; });
+  const body = source.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/[*`_]/g, '').replace(/^\s*(?:>\s*)+/gm, '').replace(/^\s*(?:#{1,6}\s+|[-+]\s+|[0-9]+[.)]\s+)/gm, '');
   const links = [...candidate.snapshot.content_md.matchAll(/\[[^\]]+\]\(([^)]+)\)/g)].map(match => match[1]);
   links.push(...[...candidate.snapshot.content_md.matchAll(/\/(?:zh|en)\/[a-z0-9][a-z0-9/-]*/g)].map(match => match[0]));
-  return `<html><head><meta charset="utf-8"><title>${escapeHtml(candidate.snapshot.seo_title)}</title><meta name="description" content="${escapeHtml(candidate.snapshot.seo_description)}"><meta name="robots" content="noindex,nofollow,noarchive,nocache"><link rel="canonical" href="https://fermatmind.com${path}"></head><body><h1>${escapeHtml(candidate.snapshot.title)}</h1><article data-testid="article-detail-content">${escapeHtml(body)}${links.map(href => `<a href="${escapeHtml(href)}">${escapeHtml(href)}</a>`).join('')}</article></body></html>`;
+  return `<html><head><meta charset="utf-8"><title>${escapeHtml(candidate.snapshot.seo_title)}</title><meta name="description" content="${escapeHtml(candidate.snapshot.seo_description)}"><meta name="robots" content="noindex,nofollow,noarchive,nocache"><link rel="canonical" href="https://fermatmind.com${path}"></head><body><h1>${escapeHtml(candidate.snapshot.title)}</h1><article data-testid="article-detail-content">${escapeHtml(body).replace(/CODEPLACEHOLDER(\d+)END/g, (_match, index) => `<pre><code>${escapeHtml(codes[Number(index)])}</code></pre>`)}${links.map(href => `<a href="${escapeHtml(href)}">${escapeHtml(href)}</a>`).join('')}</article></body></html>`;
 }
 function onlineFetcher(mutate = () => {}, before = false, candidates = rows) {
   return async (value, init) => {
@@ -300,4 +302,41 @@ input.on('data', chunk => {
     if (previous === undefined) delete process.env.CHROME_BIN; else process.env.CHROME_BIN = previous;
     rmSync(directory, { recursive: true, force: true });
   }
+});
+
+test('diagram acceptance preserves visible line breaks, spaces and every marker', () => {
+  const candidate = { ...row, snapshot: { ...row.snapshot, content_md: '## Board\n\n```text\n1..\n..2\n.3.\n```' } };
+  const original = html().replace(/<article[\s\S]*<\/article>/, '<article data-testid="article-detail-content"><h2>Board</h2><pre><code>1..\n..2\n.3.</code></pre></article>');
+  assertSsrCandidate(original, candidate, meta);
+  for (const replacement of ['1....2.3.', '1..\n.2.\n.3.', '1..\n ..2\n.3.']) {
+    assert.throws(() => assertSsrCandidate(original.replace('1..\n..2\n.3.', replacement), candidate, meta), /IQ_ARTICLE_SSR_DIAGRAM_MISMATCH/);
+  }
+  assert.throws(() => assertSsrCandidate(original.replace('<pre>', '<pre hidden>'), candidate, meta), /IQ_ARTICLE_SSR_DIAGRAM_MISMATCH/);
+});
+test('matrix mixed package launches only its new pair and preserves guide qualifications', async () => {
+  const candidates = readCandidateRows(backend, matrixPackageSha256);
+  const prestate = await readOnlinePrestate('production', backend, onlineFetcher(undefined, true, candidates), matrixPackageSha256);
+  const launched = (payload, candidate) => {
+    if (candidate.operation !== 'new_source_pair') return;
+    if (payload.article) Object.assign(payload.article, { is_indexable: true, sitemap_eligible: true, llms_eligible: true,
+      seo_meta: { hreflang_gate_v1: { enabled: true, policy: 'reciprocal_counterparts_verified' } } });
+    if (payload.meta) Object.assign(payload.meta, { robots: 'index,follow', alternates: Object.fromEntries(['en', 'zh-CN'].map(locale =>
+      [locale, `https://fermatmind.com/${locale === 'en' ? 'en' : 'zh'}/articles/${candidate.identity.slug}`])) });
+  };
+  const renderer = value => {
+    const candidate = candidates.find(item => new URL(value).pathname.endsWith(item.identity.slug) && item.identity.locale ===
+      (new URL(value).pathname.startsWith('/en/') ? 'en' : 'zh-CN'));
+    const output = renderedFixture(candidate);
+    return candidate.operation === 'new_source_pair' ? output.replace('noindex,nofollow,noarchive,nocache', 'index,follow') : output;
+  };
+  const verify = mutate => verifyOnlineCandidates('production', backend, onlineFetcher((payload, candidate) => {
+    launched(payload, candidate); mutate?.(payload, candidate);
+  }, false, candidates), renderer, prestate, matrixPackageSha256);
+  assert.deepEqual(await verify(), { api_readback_count: 4, seo_readback_count: 4, ssr_readback_count: 4, environment: 'production' });
+  await assert.rejects(verify((payload, candidate) => {
+    if (payload.article && candidate.operation === 'existing_public_update') payload.article.is_indexable = true;
+  }), /IQ_ARTICLE_ONLINE_QUALIFICATION_MISMATCH/);
+  await assert.rejects(verify((payload, candidate) => {
+    if (payload.meta && candidate.operation === 'new_source_pair' && candidate.identity.locale === 'en') delete payload.meta.alternates['zh-CN'];
+  }), /IQ_ARTICLE_ONLINE_SEO_MISMATCH/);
 });

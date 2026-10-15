@@ -641,7 +641,7 @@ test('two frozen Ops read projections and their producer select focused consumer
 });
 
 test('IQ Article fixed packages and acceptance repairs select their bound publication', () => {
-  for (const path of ['backend/content_assets/iq_public/articles/20261010-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261010-v1/snapshots/IQ-06/en.json', 'backend/content_assets/iq_public/articles/20261015-seo-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261015-en-parity/manifest.json', 'backend/content_assets/iq_public/articles/20261015-mensa-v1/manifest.json', '.github/trunk/iq-public-article-online-qa.mjs']) {
+  for (const path of ['backend/content_assets/iq_public/articles/20261010-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261010-v1/snapshots/IQ-06/en.json', 'backend/content_assets/iq_public/articles/20261015-seo-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261015-en-parity/manifest.json', 'backend/content_assets/iq_public/articles/20261015-mensa-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261015-matrix-v1/manifest.json', '.github/trunk/iq-public-article-online-qa.mjs']) {
     const result = classifyPaths([path]);
     assert.equal(result.operations.iq_public_articles_publish, true);
     assert.equal(result.operations.iq_public_articles_checks, true);
