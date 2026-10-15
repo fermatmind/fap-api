@@ -805,6 +805,26 @@ final class ScaleRegistrySeeder extends Seeder
         }
     }
 
+    private function applyEnneagramBilingualLandingCopy(array &$attributes): void
+    {
+        if (($attributes['code'] ?? null) !== 'ENNEAGRAM') {
+            return;
+        }
+
+        $package = json_decode(file_get_contents(database_path('data/assessment_enneagram_bilingual_20261015.json')), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($package['locales'] as $locale => $updates) {
+            foreach ($updates as $update) {
+                $collection = data_get($attributes['content_i18n_json'][$locale], $update['collection']);
+                $index = is_array($collection) ? array_search($update['id'], array_column($collection, 'id'), true) : false;
+                if ($index === false) {
+                    throw new \RuntimeException('ENNEAGRAM.'.$locale.'.'.$update['id'].' is missing from the seed baseline.');
+                }
+                $collection[$index][$update['field']] = $update['value'];
+                data_set($attributes['content_i18n_json'][$locale], $update['collection'], $collection);
+            }
+        }
+    }
+
     private function upsertAssessmentPreservingFaq(ScaleRegistryWriter $writer, array $attributes): \App\Models\ScaleRegistry
     {
         $package = json_decode(file_get_contents(database_path('data/assessment_faq_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
@@ -846,6 +866,7 @@ final class ScaleRegistrySeeder extends Seeder
         $attributes['content_i18n_json']['en'] = array_replace($attributes['content_i18n_json']['en'] ?? [], $english['scales'][$attributes['code']]['content']);
         $this->applyRiasecEnglishParity($attributes);
         $this->applyLandingContentSeo($attributes);
+        $this->applyEnneagramBilingualLandingCopy($attributes);
 
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];

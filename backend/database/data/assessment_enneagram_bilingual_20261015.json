@@ -1,0 +1,79 @@
+{
+  "scale_code": "ENNEAGRAM",
+  "locales": {
+    "zh": [
+      {
+        "collection": "faq",
+        "id": "faq-enneagram-free",
+        "field": "a",
+        "expected": "费马当前 105 题与 144 题九型人格测试均可免费完成并查看结果，具体展示以所选版本结果页为准；本站免费范围不代表其他产品或咨询服务也免费。\n\n先读主型，再比较翼型与候选类型，并用具体经历核对。类型解释不能替代对真实行为、处境和个人需要的了解，也不应成为评价他人的标签。",
+        "value": "费马当前 105 题与 144 题九型人格测试均可免费完成并查看结果，具体展示以所选版本结果页为准；本站免费范围不代表其他产品或咨询服务也免费。\n\n先比较靠前的核心类型候选，用具体经历核对；主模式较清楚后，再讨论相邻翼型，也可以暂时不定翼。类型解释不能替代对真实行为、处境和个人需要的了解，也不应成为评价他人的标签。"
+      }
+    ],
+    "en": [
+      {
+        "collection": "why_choose.items",
+        "id": "enneagram-likert-scoring",
+        "field": "body",
+        "expected": "Five-point responses are mapped to x ∈ {−2, −1, 0, 1, 2}. Each item has predefined weights w for relevant types. Raw intensity R = Σ(x × w) ÷ Σ|w|, ranging from −2 to 2. Negative weights reverse an item’s contribution to a type; the denominator sums absolute weights.\n\nProfile100 = round[25 × (R + 2)] produces a 0–100 display score. D = R − mean R across the nine types describes relative prominence within your profile. For R = 0.8, the display score is 70. This is a linear transformation, not the 70th percentile or a 70% probability of belonging to a type.",
+        "value": "Five-point responses are mapped to x ∈ {−2, −1, 0, 1, 2}. Each item has predefined weights w for relevant types. Raw intensity R = Σ(x × w) ÷ Σ|w|, ranging from −2 to 2. Negative weights reverse an item’s contribution to a type; the denominator sums absolute weights.\n\nProfile100 = round[25 × (R + 2)] produces a 0–100 display score. D = R − mean R across the nine types describes relative prominence within your profile. For R = 0.8, the display score is 70. This is a linear transformation, not the 70th percentile or a 70% probability of belonging to a type.\n\nTwo types can share the same integer display score because of rounding while their underlying intensities differ. If the leading intensities themselves tie, retain the tied candidates. A consistently displayed first type does not establish a uniquely determined type."
+      },
+      {
+        "collection": "why_choose.items",
+        "id": "enneagram-forced-scoring",
+        "field": "body",
+        "expected": "Each question compares two descriptions associated with two types. The selected type gains one choice, and both types gain one appearance. Each type appears 32 times in the current paired questionnaire. Its raw score W is the number of selections; Preference100 = round(100 × W ÷ E), where E is the actual number of appearances.\n\nA type selected 20 out of 32 times has a 62.5% selection rate, displayed as 63. The nine scores are not probabilities that sum to 100. Direct comparisons between types are retained to interpret close scores or ties. These relative selection rates and the 105-question intensity scores are not interchangeable scales.",
+        "value": "Each question compares two descriptions associated with two types. The selected type gains one choice, and both types gain one appearance. Each type appears 32 times in the current paired questionnaire. Its raw score W is the number of selections; Preference100 = round(100 × W ÷ E), where E is the actual number of appearances.\n\nA type selected 20 out of 32 times has a 62.5% selection rate, displayed as 63. The nine scores are not probabilities that sum to 100. When leading selection totals tie, the scorer counts the tied types’ actual head-to-head selections. With three or more tied leaders, it uses their mutual comparisons. If those also tie, the result remains unresolved; a consistently displayed first type does not make it a unique conclusion. These relative selection rates and the 105-question intensity scores are not interchangeable scales."
+      },
+      {
+        "collection": "faq",
+        "id": "faq-enneagram-interpretation",
+        "field": "a",
+        "expected": "Read the leading descriptions and compare their central concerns and habitual responses. Close scores warrant uncertainty; a small lead does not prove you belong to one type.\n\nRecord an experience supporting and challenging each candidate, paying attention to different motives behind the same action. Interpret scores and rankings using your version’s definitions, not as statistical probabilities of type membership.",
+        "value": "Start by comparing the leading core-type candidates: their central concerns, recurring motivations and responses. Close scores warrant uncertainty; a small lead does not prove you belong to one type. In the 105-question form, equal rounded display scores can hide different underlying intensities; a true leading-intensity tie should remain open. In the 144-question form, actual head-to-head selections among tied leaders may resolve the lead, or may leave several candidates unresolved. A stable first displayed type is not proof of a unique type.\n\nThe second-highest type is not automatically a wing. If Type 6 leads and Type 3 is second, that does not produce 6w3: Type 6’s adjacent types are 5 and 7. Treat Type 3 as another core candidate to compare. Even when the second type is adjacent, ask whether it modifies the leading pattern or better explains your central motivation. You can leave the wing undecided.\n\nFor each candidate worth keeping, record one experience that supports it and one that challenges it. Compare different motives behind similar behavior. Clarify the core candidates before discussing adjacent wings; these scores and rankings are not probabilities of type membership."
+      },
+      {
+        "collection": "faq",
+        "id": "faq-enneagram-interpretation",
+        "field": "references",
+        "expected": null,
+        "value": [
+          {
+            "href": "/en/personality/enneagram",
+            "label": "Enneagram overview: adjacent wings and sources"
+          },
+          {
+            "href": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "label": "Hook et al. (2021): systematic review of Enneagram research"
+          }
+        ]
+      },
+      {
+        "collection": "faq",
+        "id": "faq-enneagram-interpretation",
+        "field": "related_links",
+        "expected": null,
+        "value": [
+          {
+            "href": "#faq-enneagram-calculation",
+            "label": "Read the scoring explanation for both forms"
+          }
+        ]
+      },
+      {
+        "collection": "faq",
+        "id": "faq-enneagram-calculation",
+        "field": "a",
+        "expected": "Five-point responses are mapped to x ∈ {−2, −1, 0, 1, 2}. Each item has predefined weights w for relevant types. Raw intensity R = Σ(x × w) ÷ Σ|w|, ranging from −2 to 2. Negative weights reverse an item’s contribution to a type; the denominator sums absolute weights.\n\nProfile100 = round[25 × (R + 2)] produces a 0–100 display score. D = R − mean R across the nine types describes relative prominence within your profile. For R = 0.8, the display score is 70. This is a linear transformation, not the 70th percentile or a 70% probability of belonging to a type.\n\nEach question compares two descriptions associated with two types. The selected type gains one choice, and both types gain one appearance. Each type appears 32 times in the current paired questionnaire. Its raw score W is the number of selections; Preference100 = round(100 × W ÷ E), where E is the actual number of appearances.\n\nA type selected 20 out of 32 times has a 62.5% selection rate, displayed as 63. The nine scores are not probabilities that sum to 100. Direct comparisons between types are retained to interpret close scores or ties. These relative selection rates and the 105-question intensity scores are not interchangeable scales.",
+        "value": "Five-point responses are mapped to x ∈ {−2, −1, 0, 1, 2}. Each item has predefined weights w for relevant types. Raw intensity R = Σ(x × w) ÷ Σ|w|, ranging from −2 to 2. Negative weights reverse an item’s contribution to a type; the denominator sums absolute weights.\n\nProfile100 = round[25 × (R + 2)] produces a 0–100 display score. D = R − mean R across the nine types describes relative prominence within your profile. For R = 0.8, the display score is 70. This is a linear transformation, not the 70th percentile or a 70% probability of belonging to a type.\n\nTwo types can share the same integer display score because of rounding while their underlying intensities differ. If the leading intensities themselves tie, retain the tied candidates. A consistently displayed first type does not establish a uniquely determined type.\n\nEach question compares two descriptions associated with two types. The selected type gains one choice, and both types gain one appearance. Each type appears 32 times in the current paired questionnaire. Its raw score W is the number of selections; Preference100 = round(100 × W ÷ E), where E is the actual number of appearances.\n\nA type selected 20 out of 32 times has a 62.5% selection rate, displayed as 63. The nine scores are not probabilities that sum to 100. When leading selection totals tie, the scorer counts the tied types’ actual head-to-head selections. With three or more tied leaders, it uses their mutual comparisons. If those also tie, the result remains unresolved; a consistently displayed first type does not make it a unique conclusion. These relative selection rates and the 105-question intensity scores are not interchangeable scales."
+      },
+      {
+        "collection": "faq",
+        "id": "faq-enneagram-free",
+        "field": "a",
+        "expected": "FermatMind’s current 105-question and 144-question tests and results are free. The selected results page defines its type explanations and further content. This does not cover other Enneagram products or consultation services.\n\nRead the main result and nearby candidates, then record relevant experiences. A description cannot replace understanding actual behavior, circumstances and needs, or justify labeling other people.",
+        "value": "FermatMind’s current 105-question and 144-question tests and results are free. The selected results page defines its type explanations and further content. This does not cover other Enneagram products or consultation services.\n\nCompare the leading core-type candidates and record relevant experiences first. Discuss adjacent wings after the main pattern is clearer; it is fine to leave a wing undecided. A description cannot replace understanding actual behavior, circumstances and needs, or justify labeling other people."
+      }
+    ]
+  }
+}
