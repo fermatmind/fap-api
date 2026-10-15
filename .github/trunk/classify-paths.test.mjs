@@ -640,8 +640,8 @@ test('two frozen Ops read projections and their producer select focused consumer
  assert.equal(classifyPaths([...ops,'backend/app/Http/Middleware/OpsAccessControl.php']).operations.seo_council_orchestration,true);
 });
 
-test('IQ Article publication is fixed-package-only and its implementation selects focused checks', () => {
-  for (const path of ['backend/content_assets/iq_public/articles/20261010-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261010-v1/snapshots/IQ-06/en.json', 'backend/content_assets/iq_public/articles/20261015-seo-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261015-en-parity/manifest.json']) {
+test('IQ Article fixed packages and acceptance repairs select their bound publication', () => {
+  for (const path of ['backend/content_assets/iq_public/articles/20261010-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261010-v1/snapshots/IQ-06/en.json', 'backend/content_assets/iq_public/articles/20261015-seo-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261015-en-parity/manifest.json', '.github/trunk/iq-public-article-online-qa.mjs']) {
     const result = classifyPaths([path]);
     assert.equal(result.operations.iq_public_articles_publish, true);
     assert.equal(result.operations.iq_public_articles_checks, true);

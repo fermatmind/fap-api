@@ -135,6 +135,20 @@ test('robots compares all directives without order or case dependence', () => {
   }
 });
 
+test('staging Article metadata preserves API follow while the HTTP policy prohibits crawling', () => {
+  const staged = html().replace('content="noindex, nofollow, noarchive, nocache"', 'content="noindex, follow, noarchive, nocache"')
+    .replace('</head>', '<meta name="googlebot" content="noindex,follow,noarchive,nocache"></head>');
+  assertSsrCandidate(staged, row, { robots: 'index,follow' }, 'staging', 'noindex, nofollow, noarchive');
+  for (const header of [null, 'noindex, follow, noarchive', 'googlebot: noindex, nofollow, noarchive', 'noindex,nofollow,noarchive,noimageindex']) {
+    assert.throws(() => assertSsrCandidate(staged, row, { robots: 'index,follow' }, 'staging', header), /IQ_ARTICLE_SSR_ROBOTS_MISMATCH/);
+  }
+  assert.throws(() => assertSsrCandidate(staged, row, { robots: 'index,nofollow' }, 'staging', 'noindex,nofollow,noarchive'), /IQ_ARTICLE_SSR_ROBOTS_MISMATCH/);
+  for (const policy of ['index,follow,noarchive,nocache', 'noindex,follow,noarchive']) {
+    assert.throws(() => assertSsrCandidate(staged.replace('noindex, follow, noarchive, nocache', policy), row, { robots: 'index,follow' }, 'staging', 'noindex,nofollow,noarchive'), /IQ_ARTICLE_SSR_ROBOTS_MISMATCH/);
+  }
+  assert.throws(() => assertSsrCandidate(staged, row, { robots: 'index,follow' }, 'production', 'noindex,nofollow,noarchive'), /IQ_ARTICLE_SSR_ROBOTS_MISMATCH/);
+});
+
 test('body order and duplicate occurrences must survive the rendered projection', () => {
   const ordered = { ...row, snapshot: { ...row.snapshot, content_md: 'First step\nSecond step\nFirst step' } };
   const replaceBody = body => html().replace(/(<article[^>]+>)[\s\S]*<\/article>/, `$1${body}</article>`);

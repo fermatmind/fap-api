@@ -151,16 +151,21 @@ export function assertSsrCandidate(html, row, meta, environment = 'production', 
     if (!result.includes('nofollow') && !result.includes('follow')) result.push('follow');
     return result.sort().join(',');
   };
-  // The deployed frontend adds its fixed non-production/uncacheable policy.
-  // Production index/follow authority remains the public API's policy.
-  const projectedPolicy = environment === 'staging' ? 'noindex,nofollow,noarchive,nocache'
+  // Article metadata preserves the API's follow value even on staging. The
+  // staging HTTP header supplies the global nofollow restriction separately.
+  const stagedArticleFollow = environment === 'staging' && surface === 'article'
+    && tokens(meta.robots).includes('follow') && !tokens(meta.robots).includes('nofollow');
+  const projectedPolicy = environment === 'staging' ? `noindex,${stagedArticleFollow ? 'follow' : 'nofollow'},noarchive,nocache`
     : tokens(meta.robots).includes('noindex') ? 'noindex,nofollow,noarchive,nocache' : meta.robots;
   if (dom.robots.length !== 1 || directives(dom.robots[0]) !== directives(projectedPolicy)) throw new Error('IQ_ARTICLE_SSR_ROBOTS_MISMATCH');
   const expected = tokens(projectedPolicy);
+  if (stagedArticleFollow && (responseRobots === null || responseRobots.includes(':')
+    || !tokens(responseRobots).includes('nofollow'))) throw new Error('IQ_ARTICLE_SSR_ROBOTS_MISMATCH');
   for (const source of [...dom.crawler_robots, ...(responseRobots === null ? [] : [responseRobots])]) {
     // Crawler-specific/HTTP restrictions accumulate with the generic meta.
     // Permissive defaults cannot undo an existing noindex or nofollow.
-    if (tokens(source).some(token => !['index', 'follow'].includes(token) && !expected.includes(token)))
+    if (tokens(source).some(token => !['index', 'follow'].includes(token) && !expected.includes(token)
+      && !(environment === 'staging' && token === 'nofollow')))
       throw new Error('IQ_ARTICLE_SSR_ROBOTS_MISMATCH');
   }
   const links = [...row.snapshot.content_md.matchAll(/\[[^\]]+\]\(([^)]+)\)/g)].map(match => match[1]);
