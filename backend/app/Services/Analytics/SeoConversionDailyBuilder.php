@@ -18,6 +18,8 @@ final class SeoConversionDailyBuilder
     /**
      * @var array<string, string>
      */
+    // Legacy result_view is emitted by the result API before its response is
+    // rendered. Only browser view_result can populate the visible-result metric.
     private const EVENT_METRIC_MAP = [
         'landing_pv' => 'landing_pv_count',
         'article_to_test_click' => 'article_to_test_click_count',
@@ -29,7 +31,6 @@ final class SeoConversionDailyBuilder
         'test_start' => 'start_test_count',
         'test_submit' => 'complete_test_count',
         'test_complete' => 'complete_test_count',
-        'result_view' => 'view_result_count',
     ];
 
     /** @var array<string, string> */
@@ -37,7 +38,6 @@ final class SeoConversionDailyBuilder
         'test_start' => 'start_test_count',
         'test_submit' => 'complete_test_count',
         'test_complete' => 'complete_test_count',
-        'result_view' => 'view_result_count',
     ];
 
     /** @var array<string, string> */

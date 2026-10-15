@@ -282,10 +282,10 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertSame(1, (int) $row->start_test_count);
         $this->assertSame(1, (int) $row->complete_test_count);
         $this->assertSame(1, (int) $row->result_ready_count);
-        $this->assertSame(1, (int) $row->view_result_count);
+        $this->assertSame(0, (int) $row->view_result_count);
     }
 
-    public function test_refresh_uses_backend_attempt_events_as_the_real_cro_stage_source(): void
+    public function test_refresh_keeps_backend_durable_stages_separate_from_browser_result_observations(): void
     {
         $day = CarbonImmutable::parse('2026-08-31 10:00:00');
         $attemptId = (string) Str::uuid();
@@ -348,12 +348,25 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertSame(1, (int) $row->start_test_count);
         $this->assertSame(1, (int) $row->complete_test_count);
         $this->assertSame(1, (int) $row->result_ready_count);
-        $this->assertSame(1, (int) $row->view_result_count);
+        $this->assertSame(0, (int) $row->view_result_count);
         $this->assertSame(1, (int) $row->landing_pv_count);
         $this->assertSame(1, (int) $row->article_to_test_click_count);
         $this->assertSame(1, (int) $row->return_public_content_count);
         $this->assertSame('pass', data_get($result, 'readback_receipt.status'));
-        $this->assertNotContains(0, array_values((array) data_get($result, 'readback_receipt.expected_metrics')));
+        $this->assertSame(0, data_get($result, 'readback_receipt.expected_metrics.view_result_count'));
+
+        // Repeated API reads must neither become visible-result observations nor
+        // suppress an independent, privacy-safe browser observation.
+        $this->insertAttemptBoundEvent($attemptId, 'result_view', $day->addMinutes(20), 'BIG5_OCEAN', 'big5_90');
+        $this->insertAttemptBoundEvent($attemptId, 'result_view', $day->addMinutes(21), 'BIG5_OCEAN', 'big5_90');
+        $this->insertSeoEvent(0, 'view_result', $day->addMinutes(22), $publicPayload);
+
+        $result = app(SeoConversionDailyBuilder::class)->refresh($day, $day, [0], false);
+
+        $this->assertSame(1, (int) DB::table('analytics_seo_conversion_daily')->sole()->view_result_count);
+        $this->assertSame(1, data_get($result, 'readback_receipt.expected_metrics.view_result_count'));
+        $this->assertSame('pass', data_get($result, 'readback_receipt.status'));
+        $this->assertSame(3, DB::table('events')->where('event_code', 'result_view')->count());
     }
 
     public function test_refresh_does_not_double_count_browser_stage_mirrors_when_backend_authority_exists(): void
