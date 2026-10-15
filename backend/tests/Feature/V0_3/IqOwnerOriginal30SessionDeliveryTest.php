@@ -19,6 +19,39 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
     use RefreshDatabase;
 
     #[Test]
+    public function all_thirty_questions_follow_requested_locale_without_changing_items_or_assets(): void
+    {
+        $service = app(IqOwnerOriginal30BankService::class);
+        $attempt = $this->createOwnerAttempt('anon_iq_locale');
+        $attempt->locale = 'en';
+        for ($index = 0; $index < 30; $index++) {
+            $english = $service->publicQuestionPayload($attempt, $index, Request::create('/', 'GET', ['locale' => 'en']));
+            $chinese = $service->publicQuestionPayload($attempt, $index, Request::create('/', 'GET', ['locale' => 'zh-CN']));
+            $fallback = $service->publicQuestionPayload($attempt, $index);
+            $en = $english['questions']['items'][0];
+            $zh = $chinese['questions']['items'][0];
+            $this->assertSame('en', $english['locale']);
+            $this->assertSame($en, $fallback['questions']['items'][0]);
+            $this->assertSame('Choose the appropriate shape to replace the missing shape.', $en['title']);
+            $this->assertSame('选择合适的形状来替换缺失的形状。', $zh['title']);
+            $this->assertDoesNotMatchRegularExpression('/\\p{Han}/u', json_encode($en, JSON_UNESCAPED_UNICODE));
+            foreach (['question_id', 'item_id', 'sequence', 'order', 'safe_dimension_aliases'] as $field) {
+                $this->assertSame($zh[$field], $en[$field]);
+            }
+            foreach (['stem', ...array_keys($en['options'])] as $key) {
+                $enMedia = $key === 'stem' ? $en['stem'] : $en['options'][$key];
+                $zhMedia = $key === 'stem' ? $zh['stem'] : $zh['options'][$key];
+                foreach (['src', 'sha256', 'width', 'height'] as $field) {
+                    $this->assertSame($zhMedia[$field], $enMedia[$field]);
+                }
+            }
+            $this->assertPayloadHasNoPrivateIqFields($english);
+        }
+        $attempt->locale = 'zh-CN';
+        $this->assertSame('zh-CN', $service->publicQuestionPayload($attempt, 0)['locale']);
+    }
+
+    #[Test]
     public function owner_original_start_binds_attempt_to_bank_metadata(): void
     {
         (new ScaleRegistrySeeder)->run();
@@ -60,7 +93,7 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         ])->withServerVariables([
             'HTTPS' => 'on',
             'HTTP_HOST' => 'api.fermatmind.com',
-        ])->getJson('/api/v0.3/attempts/'.$attempt->id.'/questions?index=0');
+        ])->getJson('/api/v0.3/attempts/'.$attempt->id.'/questions?index=0&locale=en');
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -75,6 +108,8 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
                 'window_size' => 1,
             ],
         ]);
+        $response->assertJsonPath('locale', 'en');
+        $response->assertJsonPath('questions.items.0.title', 'Choose the appropriate shape to replace the missing shape.');
         $this->assertCount(1, $response->json('questions.items'));
         $this->assertSame('IQOWNER30-Q01', $response->json('questions.items.0.question_id'));
         $this->assertSame(

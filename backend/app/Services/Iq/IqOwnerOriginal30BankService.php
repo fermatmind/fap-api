@@ -95,6 +95,7 @@ final class IqOwnerOriginal30BankService
     public function publicQuestionPayload(Attempt $attempt, int $index, ?Request $request = null): array
     {
         $items = $this->items();
+        $locale = $this->publicLocale($request, $attempt);
         $count = count($items);
         if ($index < 0 || $index >= $count) {
             throw new ApiProblemException(422, 'IQ_QUESTION_INDEX_INVALID', 'question index is out of range.');
@@ -108,6 +109,7 @@ final class IqOwnerOriginal30BankService
         return [
             'ok' => true,
             'schema_version' => 'fm.iq.question_delivery.v1',
+            'locale' => $locale,
             'attempt_id' => (string) $attempt->id,
             'scale_code' => self::SCALE_CODE,
             'scale_code_legacy' => self::LEGACY_SCALE_CODE,
@@ -126,7 +128,7 @@ final class IqOwnerOriginal30BankService
             ],
             'questions' => [
                 'schema_version' => 'fm.iq.owner_image_bank.items.public.v1',
-                'items' => [$this->publicItem($item, $this->publicRequestOrigin(), (string) $attempt->id)],
+                'items' => [$this->publicItem($item, $this->publicRequestOrigin(), (string) $attempt->id, $locale)],
             ],
             'meta' => [
                 'source' => 'attempt_bound_owner_bank',
@@ -371,16 +373,25 @@ final class IqOwnerOriginal30BankService
         ];
     }
 
+    private function publicLocale(?Request $request, Attempt $attempt): string
+    {
+        $requested = trim((string) ($request?->query('locale') ?? ''));
+        $locale = strtolower(str_replace('_', '-', $requested !== '' ? $requested : (string) ($attempt->locale ?? 'zh-CN')));
+
+        return str_starts_with($locale, 'en') ? 'en' : 'zh-CN';
+    }
+
     /**
      * @param  array<string,mixed>  $item
      * @return array<string,mixed>
      */
-    private function publicItem(array $item, string $publicAssetOrigin, string $attemptId): array
+    private function publicItem(array $item, string $publicAssetOrigin, string $attemptId, string $locale): array
     {
+        $sequence = (int) ($item['sequence'] ?? 0);
         $options = [];
         foreach (($item['options'] ?? []) as $option) {
             if (is_array($option)) {
-                $options[] = $this->onlyPublicOptionFields($option, $publicAssetOrigin, $attemptId);
+                $options[] = $this->onlyPublicOptionFields($option, $publicAssetOrigin, $attemptId, $locale, $sequence);
             }
         }
 
@@ -393,11 +404,14 @@ final class IqOwnerOriginal30BankService
             'sequence' => (int) ($item['sequence'] ?? 0),
             'order' => (int) ($item['sequence'] ?? 0),
             'safe_dimension_aliases' => $this->safeDimensionAliases($item),
-            'title' => (string) ($item['title'] ?? ''),
+            'title' => $locale === 'en'
+                ? 'Choose the appropriate shape to replace the missing shape.'
+                : (string) ($item['title'] ?? ''),
             'stem' => $this->onlyPublicMediaFields(
                 is_array($item['stem'] ?? null) ? $item['stem'] : [],
                 $publicAssetOrigin,
-                $attemptId
+                $attemptId,
+                $locale === 'en' ? 'Question '.$sequence.' diagram.' : (string) data_get($item, 'stem.accessibility_label', '')
             ),
             'options' => $options,
         ];
@@ -428,12 +442,14 @@ final class IqOwnerOriginal30BankService
      * @param  array<string,mixed>  $option
      * @return array<string,mixed>
      */
-    private function onlyPublicOptionFields(array $option, string $publicAssetOrigin, string $attemptId): array
+    private function onlyPublicOptionFields(array $option, string $publicAssetOrigin, string $attemptId, string $locale, int $sequence): array
     {
         return [
             'code' => strtoupper(trim((string) ($option['code'] ?? ''))),
             'label' => (string) ($option['label'] ?? $option['code'] ?? ''),
-            ...$this->onlyPublicMediaFields($option, $publicAssetOrigin, $attemptId),
+            ...$this->onlyPublicMediaFields($option, $publicAssetOrigin, $attemptId,
+                $locale === 'en' ? 'Option '.strtoupper((string) ($option['code'] ?? '')).' for question '.$sequence.'.'
+                    : (string) ($option['accessibility_label'] ?? '')),
         ];
     }
 
@@ -441,7 +457,7 @@ final class IqOwnerOriginal30BankService
      * @param  array<string,mixed>  $media
      * @return array<string,mixed>
      */
-    private function onlyPublicMediaFields(array $media, string $publicAssetOrigin, string $attemptId): array
+    private function onlyPublicMediaFields(array $media, string $publicAssetOrigin, string $attemptId, ?string $accessibilityLabel = null): array
     {
         $assets = is_array($media['assets'] ?? null) ? $media['assets'] : [];
         $publicUrl = $this->publicAssetUrl(
@@ -461,7 +477,7 @@ final class IqOwnerOriginal30BankService
             'width' => (int) ($media['width'] ?? 0),
             'height' => (int) ($media['height'] ?? 0),
             'sha256' => (string) ($media['sha256'] ?? ''),
-            'accessibility_label' => (string) ($media['accessibility_label'] ?? ''),
+            'accessibility_label' => $accessibilityLabel ?? (string) ($media['accessibility_label'] ?? ''),
         ];
     }
 
