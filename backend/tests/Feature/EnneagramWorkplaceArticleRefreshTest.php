@@ -471,6 +471,165 @@ final class EnneagramWorkplaceArticleRefreshTest extends TestCase
         return $state;
     }
 
+    public function test_context_links_pair_preserves_protected_fields_in_production(): void
+    {
+        $this->assertContextPublication('production');
+    }
+
+    public function test_context_links_pair_preserves_protected_fields_in_staging(): void
+    {
+        $this->assertContextPublication('staging');
+    }
+
+    private function assertContextPublication(string $environment): void
+    {
+        $this->seedCurrentBaseline($environment);
+        $before = $this->state();
+        $service = app(EnneagramWorkplaceArticleRefresh::class);
+        $this->assertSame(['status' => 'ready', 'changed' => 0], $service->publishContextLinks(true));
+        $this->assertEquals($before, $this->state());
+        $this->assertSame(['status' => 'published', 'changed' => 2], $service->publishContextLinks());
+        $package = json_decode(file_get_contents(base_path(EnneagramWorkplaceArticleRefresh::CONTEXT_PACKAGE)), true);
+        foreach (['zh-CN' => 68, 'en' => 69] as $locale => $id) {
+            $article = Article::withoutGlobalScopes()->with(['publishedRevision', 'seoMeta'])->findOrFail($id);
+            $candidate = $package['candidates'][$locale];
+            $this->assertSame($candidate['content_md'], $article->content_md);
+            $this->assertSame($candidate['seo_description'], $article->publishedRevision->seo_description);
+            $this->assertSame($candidate['seo_description'], $article->seoMeta->seo_description);
+            $this->assertSame($candidate['seo_description'], $article->seoMeta->og_description);
+            $old = (array) $before['articles'][(string) $id];
+            $new = $article->getAttributes();
+            foreach (['content_md', 'content_html', 'source_version_hash', 'translated_from_version_hash',
+                'published_revision_id', 'working_revision_id', 'updated_at', ...($locale === 'en' ? ['cover_image_alt'] : [])] as $field) {
+                unset($old[$field], $new[$field]);
+            }
+            $this->assertSame($old, $new, 'Every non-target Article field must be preserved.');
+            $this->assertSame($candidate['cover_image_alt'] ?? $old['cover_image_alt'], $article->cover_image_alt);
+            $this->assertSame($article->computeSourceVersionHash(), $article->source_version_hash);
+            $this->assertSame(Article::withoutGlobalScopes()->findOrFail(68)->source_version_hash, $article->publishedRevision->source_version_hash);
+            $this->assertSame(EnneagramWorkplaceArticleRefresh::CONTEXT_PACKAGE_SHA256, $article->publishedRevision->authority_package_sha256);
+            $this->getJson('/api/v0.5/articles/enneagram-workplace-friction-core-motivations?locale='.$locale)
+                ->assertOk()->assertJsonPath('article.content_md', $candidate['content_md'])
+                ->assertJsonPath('article.cover_image_alt', $article->cover_image_alt)
+                ->assertJsonPath('article.seo_meta.seo_description', $candidate['seo_description'])
+                ->assertJsonPath('article.seo_meta.og_description', $candidate['seo_description']);
+            $this->getJson('/api/v0.5/articles/enneagram-workplace-friction-core-motivations/seo?locale='.$locale)
+                ->assertOk()->assertJsonPath('meta.description', $candidate['seo_description'])
+                ->assertJsonPath('meta.og.description', $candidate['seo_description'])
+                ->assertJsonPath('meta.twitter.description', $candidate['seo_description']);
+            $this->reviewsForContext($article);
+            $latest = DB::table('content_material_decisions')->where('authority_subject_key', 'article:'.$id)->orderByDesc('id')->first();
+            $this->assertSame($latest->id, DB::transaction(fn () => app(ArticleMaterialDecisionService::class)
+                ->recordPublished($article, $article->publishedRevision, now()))->id);
+        }
+        $after = $this->state();
+        $this->assertSame(['status' => 'unchanged', 'changed' => 0], $service->publishContextLinks());
+        $this->assertEquals($after, $this->state());
+        foreach ($before['revisions'] as $id => $revision) {
+            $old = (array) $revision;
+            $new = (array) DB::table('article_translation_revisions')->find($id);
+            unset($old['revision_status'], $old['updated_at'], $new['revision_status'], $new['updated_at']);
+            $this->assertSame($old, $new, 'Prior revision bytes remain immutable.');
+        }
+    }
+
+    public function test_context_pair_rejects_metadata_note_and_working_revision_drift_without_writes(): void
+    {
+        $this->seedCurrentBaseline();
+        $service = app(EnneagramWorkplaceArticleRefresh::class);
+        foreach ([['article_seo_meta', 'article_id', 69, 'seo_description', 'Concurrent SEO edit'],
+            ['articles', 'id', 69, 'cover_image_alt', 'Concurrent alt edit'],
+            ['editorial_reviews', 'content_id', 69, 'note', 'Owner hold'],
+            ['articles', 'id', 69, 'working_revision_id', 832]] as [$table, $key, $id, $field, $value]) {
+            $query = DB::table($table)->where($key, $id);
+            $old = $query->value($field);
+            $query->update([$field => $value]);
+            $before = $this->state();
+            try {
+                $service->publishContextLinks();
+                $this->fail('Concurrent authority changes must reject the whole pair.');
+            } catch (RuntimeException $error) {
+                $this->assertStringContainsString('Workplace Article', $error->getMessage());
+            }
+            $this->assertEquals($before, $this->state());
+            $query->update([$field => $old]);
+        }
+    }
+
+    public function test_context_second_language_failure_rolls_back_description_alt_and_reviews(): void
+    {
+        $this->seedCurrentBaseline();
+        $before = $this->state();
+        $event = 'eloquent.updating: '.Article::class;
+        Event::listen($event, function (Article $article): void {
+            if ($article->locale === 'en' && $article->isDirty('content_md')) {
+                throw new RuntimeException('injected context second-language failure');
+            }
+        });
+        try {
+            app(EnneagramWorkplaceArticleRefresh::class)->publishContextLinks();
+            $this->fail('Second language failure must reject all writes.');
+        } catch (RuntimeException $error) {
+            $this->assertSame('injected context second-language failure', $error->getMessage());
+        } finally {
+            Event::forget($event);
+        }
+        $this->assertEquals($before, $this->state());
+    }
+
+    public function test_context_cache_failure_after_real_commit_is_closed_without_republication(): void
+    {
+        $this->seedCurrentBaseline();
+        $migration = require base_path('database/migrations/2026_10_16_140000_publish_enneagram_workplace_context_links.php');
+        $this->assertFalse($migration->withinTransaction);
+        $this->mismatchedCacheReceipt = true;
+        try {
+            $migration->up();
+            $this->fail('Invalid cache acknowledgement must fail.');
+        } catch (\DomainException $error) {
+            $this->assertSame('public_content_53_revalidation_failed', $error->getMessage());
+        }
+        $this->assertFalse(DB::connection()->getPdo()->inTransaction());
+        $committed = $this->state();
+        $this->mismatchedCacheReceipt = false;
+        $migration->up();
+        $this->assertEquals($committed, $this->state());
+        DB::table('articles')->where('id', 69)->update(['cover_image_alt' => 'Later owner alt']);
+        $before = $this->state();
+        try {
+            $migration->up();
+            $this->fail('A later owner edit must reject package replay.');
+        } catch (RuntimeException $error) {
+            $this->assertStringContainsString('Workplace Article', $error->getMessage());
+        }
+        $this->assertEquals($before, $this->state());
+    }
+
+    private function reviewsForContext(Article $article): void
+    {
+        app(CmsEditorialReviewAttestationService::class)->assertApprovedEvidence([
+            ['surface_id' => 'article', 'record' => $article],
+            ['surface_id' => 'article_translation_revision', 'record' => $article->publishedRevision],
+        ]);
+    }
+
+    private function seedCurrentBaseline(string $environment = 'production'): void
+    {
+        $this->seedBaseline($environment);
+        app(EnneagramWorkplaceArticleRefresh::class)->publish();
+        $package = json_decode(file_get_contents(base_path(EnneagramWorkplaceArticleRefresh::CONTEXT_PACKAGE)), true);
+        // The previous native publication creates environment-local revision IDs.
+        // Bind this synthetic fixture to the captured current staging/production IDs.
+        Schema::withoutForeignKeyConstraints(function () use ($environment, $package): void {
+            foreach (['zh-CN' => 68, 'en' => 69] as $locale => $id) {
+                $old = DB::table('articles')->where('id', $id)->value('published_revision_id');
+                $new = $package['baselines'][$environment][$locale]['revision']['id'];
+                DB::table('article_translation_revisions')->where('id', $old)->update(['id' => $new]);
+                DB::table('articles')->where('id', $id)->update(['published_revision_id' => $new, 'working_revision_id' => $new]);
+            }
+        });
+    }
+
     private function seedBaseline(string $environment = 'production'): void
     {
         $fixture = json_decode(file_get_contents(base_path('tests/Fixtures/enneagram_workplace_article_refresh_baseline.json')), true)[$environment];
