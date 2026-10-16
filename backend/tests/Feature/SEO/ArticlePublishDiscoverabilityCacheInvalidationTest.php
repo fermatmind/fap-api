@@ -137,16 +137,16 @@ final class ArticlePublishDiscoverabilityCacheInvalidationTest extends TestCase
             'items' => [],
         ];
 
-        Cache::put(SitemapSourceController::CACHE_KEY_FRESH, $payload, SitemapSourceController::FRESH_TTL_SECONDS);
-        Cache::put(SitemapSourceController::CACHE_KEY_STALE, $payload, 86400);
+        Cache::put(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_FRESH), $payload, SitemapSourceController::FRESH_TTL_SECONDS);
+        Cache::put(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_STALE), $payload, 86400);
         Cache::put(SitemapCache::XML_CACHE_KEY, '<urlset></urlset>', SitemapCache::TTL_SECONDS);
         Cache::put(SitemapCache::ETAG_CACHE_KEY, '"stale-etag"', SitemapCache::TTL_SECONDS);
     }
 
     private function assertDiscoverabilityCachesFlushed(): void
     {
-        $this->assertNull(Cache::get(SitemapSourceController::CACHE_KEY_FRESH));
-        $this->assertNotNull(Cache::get(SitemapSourceController::CACHE_KEY_STALE), 'Stale sitemap-source cache must be retained as safety net during gap window.');
+        $this->assertNull(Cache::get(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_FRESH)));
+        $this->assertNotNull(Cache::get(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_STALE)), 'Stale sitemap-source cache must be retained as safety net during gap window.');
         $this->assertNull(Cache::get(SitemapCache::XML_CACHE_KEY));
         $this->assertNull(Cache::get(SitemapCache::ETAG_CACHE_KEY));
     }

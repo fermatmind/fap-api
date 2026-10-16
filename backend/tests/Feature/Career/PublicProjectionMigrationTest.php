@@ -66,6 +66,7 @@ final class PublicProjectionMigrationTest extends TestCase
         Projection::forever($base.':lkg', 'v1');
         Projection::forever($base.':versions:v1', ['body' => '完整正文']);
         Projection::put('seo:sitemap-source:v1:fresh', ['urls' => ['/zh/career/jobs/test-role']], 600);
+        Projection::put('seo:sitemap-source:v2:fresh', ['urls' => ['/en/career/jobs/test-role']], 600);
         Projection::put('career:public-authority:job-index:v3:en:public:pins:v1', true, 172800);
         Projection::put('career:public-authority:directory-read-model:v2:en:pins:v1', true, 172800);
         Projection::forever('career:public-authority:job-index:v3:en:public:activated-at', 1700000000);
@@ -86,12 +87,87 @@ final class PublicProjectionMigrationTest extends TestCase
             \App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY];
         foreach ($keys as $key) {
             Projection::put($key, ['candidate' => true], 600);
-            $this->assertSame(['candidate' => true], Cache::store('public_projection')->get($key));
-            $this->assertNull(Cache::store('redis')->get($key));
+            $this->assertSame(['candidate' => true], Cache::store('public_projection')->get(Projection::physicalKey($key)));
+            $this->assertNull(Cache::store('redis')->get(Projection::physicalKey($key)));
         }
         Projection::put('seo:sitemap-source:v1:fresh', ['legacy' => true], 600);
         $this->assertSame(['candidate' => true], Projection::get($controller::CACHE_KEY_FRESH));
         $this->assertSame(['legacy' => true], Projection::get('seo:sitemap-source:v1:fresh'));
+    }
+
+    public function test_sitemap_generations_survive_old_writers_in_every_store_mode(): void
+    {
+        $originalRoot = base_path();
+        $current = $this->directory.'/current';
+        symlink($this->directory.'/new', $current);
+        $keys = ['seo:sitemap-source:v2:fresh', 'seo:sitemap-source:v2:stale',
+            'seo:sitemap-source:warm-fingerprint:v2'];
+        $lockKey = 'seo:sitemap-source:v2:lock';
+        try {
+            foreach (['legacy', 'mirror', 'primary', 'isolated'] as $mode) {
+                Cache::store('redis')->flush();
+                Cache::store('public_projection')->flush();
+                Projection::writeState(['version' => 1, 'mode' => $mode]);
+                $this->app->setBasePath($this->directory.'/old');
+                foreach ($keys as $key) {
+                    Projection::put($key, ['old' => true], 600);
+                }
+                $oldLock = Projection::lock($lockKey, 60);
+                self::assertTrue($oldLock->get());
+                $literalLock = Cache::lock($lockKey, 60);
+                self::assertTrue($literalLock->get());
+                $oldPhysical = Projection::physicalKey($keys[0]);
+
+                $this->app->setBasePath($this->directory.'/new');
+                foreach ($keys as $key) {
+                    Projection::put($key, ['candidate' => true], 600);
+                    $physical = Projection::physicalKey($key);
+                    self::assertTrue(Projection::selected($physical));
+                    self::assertSame($physical, Projection::physicalKey($physical));
+                    // Simulate the pre-upgrade scheduler writing literal v2 keys.
+                    foreach (['redis', 'public_projection'] as $store) {
+                        Cache::store($store)->put($key, ['old_literal' => true], 600);
+                    }
+                    self::assertSame(['candidate' => true], Projection::get($key));
+                }
+                self::assertNotSame($oldPhysical, Projection::physicalKey($keys[0]));
+                self::assertSame(array_fill_keys($keys, ['candidate' => true]), Projection::many($keys));
+                self::assertFalse(Projection::selected(Projection::physicalKey($lockKey)));
+                $candidateLock = Projection::lock($lockKey, 60);
+                self::assertTrue($candidateLock->get());
+                self::assertTrue($candidateLock->release());
+                self::assertTrue($oldLock->release());
+                self::assertTrue($literalLock->release());
+
+                $candidatePhysical = Projection::physicalKey($keys[0]);
+                $this->app->setBasePath($current);
+                self::assertSame($candidatePhysical, Projection::physicalKey($keys[0]));
+                self::assertSame(['candidate' => true], Projection::get($keys[0]));
+                Projection::forget($keys[0]);
+                self::assertNull(Projection::get($keys[0]));
+                $this->app->setBasePath($this->directory.'/old');
+                self::assertSame(['old' => true], Projection::get($keys[0]));
+                self::assertSame('publication:sentinel', Projection::physicalKey('publication:sentinel'));
+                $ordinaryLock = Cache::lock('publication:sentinel', 60);
+                self::assertTrue($ordinaryLock->get());
+                self::assertFalse(Projection::lock('publication:sentinel', 60)->get());
+                self::assertTrue($ordinaryLock->release());
+            }
+        } finally {
+            $this->app->setBasePath($originalRoot);
+        }
+    }
+
+    public function test_sitemap_generation_rejects_an_unresolvable_runtime_root(): void
+    {
+        $root = base_path();
+        try {
+            $this->app->setBasePath($this->directory.'/missing');
+            $this->expectException(\RuntimeException::class);
+            Projection::get('seo:sitemap-source:v2:fresh');
+        } finally {
+            $this->app->setBasePath($root);
+        }
     }
 
     public function test_career_page_expiry_detection_and_retention_follow_the_serving_and_mirror_stores(): void
@@ -132,6 +208,7 @@ final class PublicProjectionMigrationTest extends TestCase
         config(['public_projection_cache.phase' => 'activate']);
         $this->assertSame('primary', $migration->activate()['status']);
         $this->assertSame(['body' => '完整正文'], Projection::get($base.':versions:v1'));
+        $this->assertSame(['urls' => ['/en/career/jobs/test-role']], Projection::get('seo:sitemap-source:v2:fresh'));
         $this->assertNull(Cache::store('public_projection')->get('limiter:sentinel'));
         $this->assertNull(Cache::store('public_projection')->get('career:public-authority:unclassified-state'));
         $this->assertNull(Cache::store('public_projection')->get('career:public-authority:directory-read-model:v2:en:rebuild-lock'));

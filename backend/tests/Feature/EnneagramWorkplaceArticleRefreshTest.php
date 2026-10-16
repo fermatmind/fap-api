@@ -301,7 +301,7 @@ final class EnneagramWorkplaceArticleRefreshTest extends TestCase
         $cache = Cache::getFacadeRoot();
         $proxy = \Mockery::mock($cache);
         $proxy->shouldReceive('forget')->withAnyArgs()->andReturnUsing(fn ($key) => $cache->forget($key))->byDefault();
-        $proxy->shouldReceive('forget')->with(SitemapSourceController::CACHE_KEY_FRESH)->once()
+        $proxy->shouldReceive('forget')->with(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_FRESH))->once()
             ->andThrow(new RuntimeException('injected first after-commit cache failure'));
         Cache::swap($proxy);
         try {

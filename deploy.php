@@ -732,6 +732,8 @@ test "\$release_revision" = {$quotedExpectedRevision}
 BASH);
 });
 
+// Deployer prepends before hooks: register freshness first so it runs last.
+before('deploy:symlink', 'seo:refresh-sitemap-source-before-activation');
 before('deploy:symlink', 'guard:expected-release-revision');
 
 /**
@@ -3706,20 +3708,13 @@ BASH,
 }
 
 task('seo:warm-sitemap-source-cache', function () {
-    if (deployBooleanOption('a08_gate_only', false) || deployUsesCareerContentPackage()) {
-        writeln('<info>Skipping preactivation sitemap warm for Career package release.</info>');
-
-        return;
-    }
-
     deployWarmSitemapSourceCache();
 });
 
-task('seo:warm-sitemap-source-cache-first-publish', function () {
-    if (deployMode() !== 'career_first_publish') {
-        return;
-    }
-
+task('seo:refresh-sitemap-source-before-activation', function () {
+    // Full candidate guards can consume most of the fresh TTL. Renew the same
+    // verified generation immediately before every runtime-root activation.
+    // This changes derived cache only, not CMS, URL Truth or search authority.
     deployWarmSitemapSourceCache();
 });
 
@@ -5591,7 +5586,6 @@ before('reload:nginx', 'ensure:nginx-dns-resilience');
 after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:career-content-only');
-before('healthcheck:sitemap-source', 'seo:warm-sitemap-source-cache-first-publish');
 after('healthcheck:public', 'healthcheck:sitemap-source');
 after('healthcheck:sitemap-source', 'healthcheck:public-dns');
 after('healthcheck:public-dns', 'healthcheck:career-data-recovery');

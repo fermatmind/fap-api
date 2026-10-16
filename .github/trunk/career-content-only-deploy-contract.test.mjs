@@ -39,11 +39,36 @@ test('dedicated mode preserves parity and atomic publish while excluding unrelat
   assert.match(deploy, /task\('deploy:career-first-publish',[\s\S]*?'prepare:release-bootstrap-cache-access'[\s\S]*?'deploy:publish'/);
   assert.match(deploy, /function deploySkipsAuthorityMutations\(\)[\s\S]*?'career_first_publish'/);
   assert.match(deploy, /task\('career:staging-accountant-'\.\$accountantOperation,[\s\S]*?deployUsesCareerContentPackage\(\)/);
-  assert.match(deploy, /before\('healthcheck:sitemap-source', 'seo:warm-sitemap-source-cache-first-publish'\)/);
+  assert.doesNotMatch(deploy, /seo:warm-sitemap-source-cache-first-publish/);
   assert.match(deploy, /career_content_materialization=incremental/);
   assert.match(deploy, /career_content_materialization=full_fallback/);
   assert.match(deploy, /\.before_sha256/);
   assert.match(deploy, /cp -a "\\\$current\/\."/);
+});
+
+test('all activating modes refresh their own sitemap generation immediately before symlink', () => {
+  const hook = "before('deploy:symlink', 'seo:refresh-sitemap-source-before-activation');";
+  assert.equal(deploy.split(hook).length - 1, 1);
+  for (const guard of ['guard:expected-release-revision', 'guard:public-dns-health', 'guard:queue-reload-capability', 'event-ingest:candidate-verify']) {
+    assert.ok(deploy.indexOf(`before('deploy:symlink', '${guard}');`) > deploy.indexOf(hook));
+  }
+  assert.equal(deploy.slice(0, deploy.indexOf(hook)).includes("before('deploy:symlink'"), false);
+  for (const mode of ['career-content-only', 'career-first-publish', 'code-only']) {
+    const start = deploy.indexOf(`task('deploy:${mode}', [`);
+    const recipe = deploy.slice(start, deploy.indexOf(']);', start));
+    assert.notEqual(start, -1);
+    assert.match(recipe, /'deploy:publish'/);
+    assert.doesNotMatch(recipe, /'seo:warm-sitemap-source-cache'/);
+  }
+  for (const task of ['seo:warm-sitemap-source-cache', 'seo:refresh-sitemap-source-before-activation']) {
+    const start = deploy.indexOf(`task('${task}', function () {`);
+    const warm = deploy.slice(start, deploy.indexOf('\n});', start));
+    assert.notEqual(start, -1);
+    assert.match(warm, /deployWarmSitemapSourceCache\(\)/);
+    assert.doesNotMatch(warm, /deployUsesCareerContentPackage|a08_gate_only/);
+  }
+  assert.match(deploy, /after\('guard:career-discoverability-pre-sitemap', 'seo:warm-sitemap-source-cache'\)/);
+  assert.match(deploy, /after\('seo:warm-sitemap-source-cache', 'guard:career-discoverability-post-sitemap'\)/);
 });
 
 test('Career smoke uses browser compression and committed rollback releases its own lock', () => {

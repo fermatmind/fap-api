@@ -11,6 +11,9 @@ final class PublicProjectionCache
 {
     public static function selected(string $key): bool
     {
+        if (preg_match('~^seo:sitemap-source:(?:v2:(?:fresh|stale)|warm-fingerprint:v2):release:[a-f0-9]{64}$~D', $key) === 1) {
+            return true;
+        }
         if (preg_match('~^career:page:career\.detail\.page\.v1:[a-z0-9-]+:(?:en|zh-CN):[a-f0-9]{64}$~D', $key) === 1) {
             return true;
         }
@@ -90,6 +93,21 @@ final class PublicProjectionCache
         return Cache::store(in_array(self::state()['mode'], ['primary', 'isolated'], true) ? 'public_projection' : null);
     }
 
+    /** Immutable release workers must not overwrite another release's sitemap. */
+    public static function physicalKey(string $key): string
+    {
+        if (! in_array($key, ['seo:sitemap-source:v2:fresh', 'seo:sitemap-source:v2:stale',
+            'seo:sitemap-source:v2:lock', 'seo:sitemap-source:warm-fingerprint:v2'], true)) {
+            return $key;
+        }
+        $root = realpath(base_path());
+        if (! is_string($root) || ! is_dir($root)) {
+            throw new \RuntimeException('Sitemap release root is unavailable.');
+        }
+
+        return $key.':release:'.hash('sha256', $root);
+    }
+
     /** @param list<string> $keys @return array<string,mixed> */
     public static function many(array $keys): array
     {
@@ -100,9 +118,12 @@ final class PublicProjectionCache
             throw new \LogicException('Mixed public projection cache batch is unsupported.');
         }
 
-        return self::state()['mode'] === 'legacy'
-            ? Cache::many($keys)
-            : self::store()->many($keys);
+        $physical = array_map(self::physicalKey(...), $keys);
+        $values = self::state()['mode'] === 'legacy'
+            ? Cache::many($physical)
+            : self::store()->many($physical);
+
+        return array_combine($keys, array_map(static fn (string $key): mixed => $values[$key] ?? null, $physical));
     }
 
     private static int $lockDepth = 0;
@@ -200,6 +221,9 @@ final class PublicProjectionCache
     public static function __callStatic(string $method, array $arguments): mixed
     {
         $key = $arguments[0] ?? null;
+        if (is_string($key)) {
+            $arguments[0] = self::physicalKey($key);
+        }
         if ($method === 'lock' || ! is_string($key) || ! self::selected($key)) {
             return Cache::$method(...$arguments);
         }

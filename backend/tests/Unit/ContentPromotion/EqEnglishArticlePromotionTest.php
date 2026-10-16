@@ -93,11 +93,11 @@ final class EqEnglishArticlePromotionTest extends TestCase
     public function test_exact_reviewed_english_targets_publish_and_rollback_without_changing_sources_or_other_working_drafts(): void
     {
         // Publication and recovery evict derived sitemap reads but must preserve a live warmer's mutex.
-        $sitemapOwner = \Illuminate\Support\Facades\Cache::lock('seo:sitemap-source:v2:lock', 120);
+        $sitemapOwner = \Illuminate\Support\Facades\Cache::lock(\App\Support\PublicProjectionCache::physicalKey('seo:sitemap-source:v2:lock'), 120);
         self::assertTrue($sitemapOwner->get());
         $sitemapBefore = ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 1,
             'items' => [['loc' => 'https://fermatmind.com/en/tests', 'lastmod' => '2026-10-10T18:00:00Z']]];
-        \Illuminate\Support\Facades\Cache::put('seo:sitemap-source:v2:fresh', $sitemapBefore, 600);
+        \Illuminate\Support\Facades\Cache::put(\App\Support\PublicProjectionCache::physicalKey('seo:sitemap-source:v2:fresh'), $sitemapBefore, 600);
         $this->seedSources();
         $control = Article::query()->create(['org_id' => 0, 'slug' => 'eq-test-tool-guide', 'locale' => 'en', 'title' => 'User working draft', 'content_md' => 'User original bytes', 'status' => 'draft', 'is_public' => false]);
         $working = ArticleTranslationRevision::query()->create([
@@ -123,7 +123,7 @@ final class EqEnglishArticlePromotionTest extends TestCase
         self::assertSame(3, $published['published_count']);
         self::assertSame(3, $adapter->liveQa($this->context)['readback_count']);
         self::assertTrue($sitemapOwner->isOwnedByCurrentProcess());
-        self::assertNull(\Illuminate\Support\Facades\Cache::get('seo:sitemap-source:v2:fresh'));
+        self::assertNull(\Illuminate\Support\Facades\Cache::get(\App\Support\PublicProjectionCache::physicalKey('seo:sitemap-source:v2:fresh')));
         $this->previous('content_promotion_preflight_receipt', $adapter->preflight($this->context));
         self::assertSame(0, $adapter->draftImport($this->context)['written_count']);
         foreach (Article::query()->where('locale', 'en')->where('id', '!=', $control->id)->get() as $article) {
@@ -142,7 +142,7 @@ final class EqEnglishArticlePromotionTest extends TestCase
         self::assertSame($workingBefore, $working->fresh()->getAttributes());
         self::assertTrue($adapter->recoverFailedPublication($this->context));
         self::assertTrue($sitemapOwner->isOwnedByCurrentProcess());
-        self::assertNull(\Illuminate\Support\Facades\Cache::get('seo:sitemap-source:v2:fresh'));
+        self::assertNull(\Illuminate\Support\Facades\Cache::get(\App\Support\PublicProjectionCache::physicalKey('seo:sitemap-source:v2:fresh')));
         self::assertTrue($sitemapOwner->release());
     }
 

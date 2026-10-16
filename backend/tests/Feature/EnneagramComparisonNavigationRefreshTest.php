@@ -188,11 +188,11 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
     {
         $this->seedStaging();
         $this->app['env'] = 'staging';
-        Cache::put(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH, 'fixture', 600);
+        Cache::put(\App\Support\PublicProjectionCache::physicalKey(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH), 'fixture', 600);
         DB::statement("CREATE TRIGGER comparison_review_reject BEFORE INSERT ON editorial_reviews
             WHEN NEW.content_id = 224 BEGIN SELECT RAISE(ABORT, 'Fixture after first publish rejection'); END");
         $this->assertRejected();
-        $this->assertSame('fixture', Cache::get(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH));
+        $this->assertSame('fixture', Cache::get(\App\Support\PublicProjectionCache::physicalKey(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH)));
         Http::assertNothingSent();
     }
 

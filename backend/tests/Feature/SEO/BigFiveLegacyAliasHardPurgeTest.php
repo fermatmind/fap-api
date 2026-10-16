@@ -285,8 +285,8 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
             $cache->put('detail-code', 'big_five', 'polarity', 'high-openness', $locale, 0, 'v1', ['stale' => true]);
             $cache->put('detail-slug', 'big_five', 'slug', 'big-five/high-openness', $locale, 0, 'v1', ['stale' => true]);
         }
-        Cache::put(SitemapSourceController::CACHE_KEY_FRESH, ['stale' => true], 600);
-        Cache::put(SitemapSourceController::CACHE_KEY_STALE, ['stale' => true], 600);
+        Cache::put(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_FRESH), ['stale' => true], 600);
+        Cache::put(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_STALE), ['stale' => true], 600);
         Cache::put(SitemapCache::XML_CACHE_KEY, '<stale/>', 600);
         Cache::put(SitemapCache::ETAG_CACHE_KEY, 'stale', 600);
         Cache::put('unrelated:sentinel', 'keep', 600);
@@ -295,7 +295,7 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         $summary = app(BigFiveLegacyAliasHardPurge::class)->run(true, 1, $path, $sha);
 
         self::assertSame('PASS_PURGED', $summary['status']);
-        foreach ([SitemapSourceController::CACHE_KEY_FRESH, SitemapSourceController::CACHE_KEY_STALE, SitemapCache::XML_CACHE_KEY, SitemapCache::ETAG_CACHE_KEY] as $key) {
+        foreach ([\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_FRESH), \App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_STALE), SitemapCache::XML_CACHE_KEY, SitemapCache::ETAG_CACHE_KEY] as $key) {
             self::assertNull(Cache::get($key));
         }
         foreach (['en', 'zh-CN'] as $locale) {

@@ -11,6 +11,7 @@ use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SEO\SitemapGenerator;
+use App\Support\PublicProjectionCache as Projection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -104,8 +105,8 @@ class SitemapSourceCacheTest extends TestCase
         $this->assertGreaterThan(10, $response->json('count'));
         $this->assertContains('https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types', $locs);
         $this->assertContains('https://fermatmind.com/zh/tests/holland-career-interest-test-riasec', $locs);
-        $this->assertNull(Cache::get('seo:sitemap-source:v2:fresh'));
-        $this->assertNull(Cache::get('seo:sitemap-source:v2:stale'));
+        $this->assertNull(Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh')));
+        $this->assertNull(Cache::get(Projection::physicalKey('seo:sitemap-source:v2:stale')));
 
         foreach ($locs as $loc) {
             $this->assertDoesNotMatchRegularExpression(
@@ -159,7 +160,7 @@ class SitemapSourceCacheTest extends TestCase
                 ['loc' => 'https://fermatmind.com/en/career/jobs/stale-test-slug', 'lastmod' => '2026-01-01T00:00:00+00:00'],
             ],
         ];
-        Cache::put('seo:sitemap-source:v2:stale', $stalePayload, 86400);
+        Cache::put(Projection::physicalKey('seo:sitemap-source:v2:stale'), $stalePayload, 86400);
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
@@ -169,7 +170,7 @@ class SitemapSourceCacheTest extends TestCase
 
         $locs = collect($response->json('items'))->pluck('loc')->all();
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/stale-test-slug', $locs);
-        $this->assertNull(Cache::get('seo:sitemap-source:v2:stale'));
+        $this->assertNull(Cache::get(Projection::physicalKey('seo:sitemap-source:v2:stale')));
     }
 
     public function test_stale_cache_miss_uses_short_fallback_cache_control(): void
@@ -183,7 +184,7 @@ class SitemapSourceCacheTest extends TestCase
             'count' => 0,
             'items' => [],
         ];
-        Cache::put('seo:sitemap-source:v2:stale', $stalePayload, 86400);
+        Cache::put(Projection::physicalKey('seo:sitemap-source:v2:stale'), $stalePayload, 86400);
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
@@ -207,8 +208,8 @@ class SitemapSourceCacheTest extends TestCase
         $this->artisan('seo:warm-sitemap-source-cache --json')
             ->assertSuccessful();
 
-        $fresh = Cache::get('seo:sitemap-source:v2:fresh');
-        $stale = Cache::get('seo:sitemap-source:v2:stale');
+        $fresh = Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh'));
+        $stale = Cache::get(Projection::physicalKey('seo:sitemap-source:v2:stale'));
 
         $this->assertIsArray($fresh);
         $this->assertTrue($fresh['ok']);
@@ -217,7 +218,7 @@ class SitemapSourceCacheTest extends TestCase
 
     public function test_deployment_refresh_waits_for_the_actual_scheduler_lock_then_validates_its_own_payload(): void
     {
-        $owner = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        $owner = Cache::lock(Projection::physicalKey('seo:sitemap-source:v2:lock'), 120);
         self::assertTrue($owner->get());
         $this->mockSimpleSitemapAuthority();
         Sleep::fake();
@@ -228,9 +229,9 @@ class SitemapSourceCacheTest extends TestCase
 
         $this->runRefreshIfChanged('rebuilt');
         Sleep::assertSleptTimes(1);
-        self::assertSame('https://fermatmind.com/zh/tests', Cache::get('seo:sitemap-source:v2:fresh')['items'][0]['loc']);
-        self::assertIsArray(Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
-        $next = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        self::assertSame('https://fermatmind.com/zh/tests', Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh'))['items'][0]['loc']);
+        self::assertIsArray(Cache::get(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY)));
+        $next = Cache::lock(Projection::physicalKey('seo:sitemap-source:v2:lock'), 120);
         self::assertTrue($next->get());
         self::assertTrue($next->release());
     }
@@ -239,8 +240,8 @@ class SitemapSourceCacheTest extends TestCase
     {
         Carbon::setTestNow('2026-10-10 18:00:00 UTC');
         $original = $this->originalSitemapPayload();
-        Cache::put('seo:sitemap-source:v2:fresh', $original, 600);
-        $owner = Cache::lock('seo:sitemap-source:v2:lock', 300);
+        Cache::put(Projection::physicalKey('seo:sitemap-source:v2:fresh'), $original, 600);
+        $owner = Cache::lock(Projection::physicalKey('seo:sitemap-source:v2:lock'), 300);
         self::assertTrue($owner->get());
         $this->mock(SitemapGenerator::class)->shouldNotReceive('generateSitemapUrls');
 
@@ -252,9 +253,9 @@ class SitemapSourceCacheTest extends TestCase
         $this->artisan('seo:warm-sitemap-source-cache --refresh-if-changed --json')
             ->expectsOutputToContain('"status":"locked"')->assertFailed();
         Sleep::assertSleptTimes(1);
-        self::assertSame($original, Cache::get('seo:sitemap-source:v2:fresh'));
+        self::assertSame($original, Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh')));
         self::assertTrue($owner->isOwnedByCurrentProcess());
-        self::assertNull(Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
+        self::assertNull(Cache::get(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY)));
         self::assertTrue($owner->release());
     }
 
@@ -262,8 +263,8 @@ class SitemapSourceCacheTest extends TestCase
     {
         Carbon::setTestNow('2026-10-10 18:00:00 UTC');
         $original = $this->originalSitemapPayload();
-        Cache::put('seo:sitemap-source:v2:fresh', $original, 600);
-        $successor = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        Cache::put(Projection::physicalKey('seo:sitemap-source:v2:fresh'), $original, 600);
+        $successor = Cache::lock(Projection::physicalKey('seo:sitemap-source:v2:lock'), 120);
         $this->mock(SitemapGenerator::class)->shouldReceive('generateSitemapUrls')->once()
             ->andReturnUsing(static function () use ($successor): array {
                 Carbon::setTestNow(now()->addSeconds(121));
@@ -273,8 +274,8 @@ class SitemapSourceCacheTest extends TestCase
             });
         $this->artisan('seo:warm-sitemap-source-cache --refresh-if-changed --json')
             ->expectsOutputToContain('"status":"failed"')->assertFailed();
-        self::assertSame($original, Cache::get('seo:sitemap-source:v2:fresh'));
-        self::assertNull(Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
+        self::assertSame($original, Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh')));
+        self::assertNull(Cache::get(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY)));
         self::assertTrue($successor->isOwnedByCurrentProcess());
         self::assertTrue($successor->release());
     }
@@ -283,7 +284,7 @@ class SitemapSourceCacheTest extends TestCase
     {
         Carbon::setTestNow('2026-10-10 18:00:00 UTC');
         $original = $this->originalSitemapPayload();
-        Cache::put('seo:sitemap-source:v2:fresh', $original, 600);
+        Cache::put(Projection::physicalKey('seo:sitemap-source:v2:fresh'), $original, 600);
         $this->mock(SitemapGenerator::class)->shouldReceive('generateSitemapUrls')->once()
             ->andReturnUsing(static function (): array {
                 Carbon::setTestNow(now()->addSeconds(121));
@@ -292,7 +293,7 @@ class SitemapSourceCacheTest extends TestCase
             });
         $this->artisan('seo:warm-sitemap-source-cache --json')
             ->expectsOutputToContain('"status":"failed"')->assertFailed();
-        self::assertSame($original, Cache::get('seo:sitemap-source:v2:fresh'));
+        self::assertSame($original, Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh')));
     }
 
     public function test_deployment_refresh_coordinates_with_a_real_independent_file_lock_owner(): void
@@ -300,20 +301,20 @@ class SitemapSourceCacheTest extends TestCase
         $directory = sys_get_temp_dir().'/sitemap-lock-'.bin2hex(random_bytes(8));
         config(['cache.default' => 'file', 'cache.stores.file.path' => $directory, 'cache.stores.file.lock_path' => $directory]);
         app('cache')->forgetDriver('file');
-        $owner = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        $owner = Cache::lock(Projection::physicalKey('seo:sitemap-source:v2:lock'), 120);
         self::assertTrue($owner->get());
         $this->mockSimpleSitemapAuthority();
         $child = new Process([PHP_BINARY, '-r',
-            'require $argv[1]; $store=new Illuminate\\Cache\\FileStore(new Illuminate\\Filesystem\\Filesystem,$argv[2]); usleep(400000); exit($store->restoreLock("seo:sitemap-source:v2:lock",$argv[3])->release()?0:1);',
-            base_path('vendor/autoload.php'), $directory, $owner->owner(),
+            'require $argv[1]; $store=new Illuminate\\Cache\\FileStore(new Illuminate\\Filesystem\\Filesystem,$argv[2]); usleep(400000); exit($store->restoreLock($argv[4],$argv[3])->release()?0:1);',
+            base_path('vendor/autoload.php'), $directory, $owner->owner(), Projection::physicalKey('seo:sitemap-source:v2:lock'),
         ]);
         $child->setTimeout(10);
         try {
             $child->start();
             $this->runRefreshIfChanged('rebuilt');
             self::assertSame(0, $child->wait());
-            self::assertSame('backend_sitemap_generator', Cache::get('seo:sitemap-source:v2:fresh')['source']);
-            $next = Cache::lock('seo:sitemap-source:v2:lock', 120);
+            self::assertSame('backend_sitemap_generator', Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh'))['source']);
+            $next = Cache::lock(Projection::physicalKey('seo:sitemap-source:v2:lock'), 120);
             self::assertTrue($next->get());
             self::assertTrue($next->release());
         } finally {
@@ -344,8 +345,8 @@ class SitemapSourceCacheTest extends TestCase
         config(['cache.stores.public_projection' => ['driver' => 'array', 'serialize' => false]]);
         app('cache')->forgetDriver('public_projection');
         $legacy = $this->originalSitemapPayload();
-        Cache::put('seo:sitemap-source:v2:fresh', $legacy, 600);
-        $owner = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        Cache::put(Projection::physicalKey('seo:sitemap-source:v2:fresh'), $legacy, 600);
+        $owner = Cache::lock(Projection::physicalKey('seo:sitemap-source:v2:lock'), 120);
         self::assertTrue($owner->get());
         $this->mockSimpleSitemapAuthority();
         Sleep::fake();
@@ -356,11 +357,11 @@ class SitemapSourceCacheTest extends TestCase
             \App\Support\PublicProjectionCache::writeState(['version' => 1, 'mode' => 'isolated']);
             $this->runRefreshIfChanged('rebuilt');
             Sleep::assertSleptTimes(1);
-            self::assertSame($legacy, Cache::get('seo:sitemap-source:v2:fresh'));
-            self::assertSame('https://fermatmind.com/zh/tests', \App\Support\PublicProjectionCache::get('seo:sitemap-source:v2:fresh')['items'][0]['loc']);
-            self::assertNull(Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
-            self::assertIsArray(\App\Support\PublicProjectionCache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
-            $next = Cache::lock('seo:sitemap-source:v2:lock', 120);
+            self::assertSame($legacy, Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh')));
+            self::assertSame('https://fermatmind.com/zh/tests', \App\Support\PublicProjectionCache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh'))['items'][0]['loc']);
+            self::assertNull(Cache::get(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY)));
+            self::assertIsArray(\App\Support\PublicProjectionCache::get(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY)));
+            $next = Cache::lock(Projection::physicalKey('seo:sitemap-source:v2:lock'), 120);
             self::assertTrue($next->get());
             self::assertTrue($next->release());
         } finally {
@@ -382,8 +383,8 @@ class SitemapSourceCacheTest extends TestCase
 
         $this->runRefreshIfChanged('rebuilt');
 
-        $receipt = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
-        $fresh = Cache::get('seo:sitemap-source:v2:fresh');
+        $receipt = Cache::get(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
+        $fresh = Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh'));
         $this->assertIsArray($receipt);
         $this->assertIsArray($fresh);
 
@@ -392,9 +393,9 @@ class SitemapSourceCacheTest extends TestCase
 
         $this->assertSame(
             $receipt,
-            Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY),
+            Cache::get(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY)),
         );
-        $this->assertSame($fresh, Cache::get('seo:sitemap-source:v2:fresh'));
+        $this->assertSame($fresh, Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh')));
     }
 
     public function test_refresh_if_changed_rebuilds_when_published_indexable_authority_changes(): void
@@ -420,10 +421,10 @@ class SitemapSourceCacheTest extends TestCase
         };
         $beforeArticle = $createPublishedArticle('mutex-authority-before');
         $this->runRefreshIfChanged('rebuilt');
-        $before = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
-        self::assertContains('https://fermatmind.com/en/articles/mutex-authority-before', array_column(Cache::get('seo:sitemap-source:v2:fresh')['items'], 'loc'));
+        $before = Cache::get(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
+        self::assertContains('https://fermatmind.com/en/articles/mutex-authority-before', array_column(Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh'))['items'], 'loc'));
 
-        $owner = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        $owner = Cache::lock(Projection::physicalKey('seo:sitemap-source:v2:lock'), 120);
         self::assertTrue($owner->get());
         Sleep::fake();
         Sleep::whenFakingSleep(static function () use ($owner, $beforeArticle, $createPublishedArticle): void {
@@ -434,8 +435,8 @@ class SitemapSourceCacheTest extends TestCase
         });
         $this->runRefreshIfChanged('rebuilt');
         Sleep::assertSleptTimes(1);
-        $after = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
-        $fresh = Cache::get('seo:sitemap-source:v2:fresh');
+        $after = Cache::get(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
+        $fresh = Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh'));
         self::assertNotSame($before['fingerprint_sha256'], $after['fingerprint_sha256']);
         self::assertSame('backend_sitemap_generator', $fresh['source']);
         self::assertContains('https://fermatmind.com/en/articles/mutex-authority-after', array_column($fresh['items'], 'loc'));
@@ -450,19 +451,19 @@ class SitemapSourceCacheTest extends TestCase
 
         $this->runRefreshIfChanged('rebuilt');
 
-        Cache::forever(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY, 'corrupt');
+        Cache::forever(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY), 'corrupt');
         $this->runRefreshIfChanged('rebuilt');
 
         foreach (['cache_schema_version', 'code_fingerprint_sha256'] as $field) {
-            $receipt = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
+            $receipt = Cache::get(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
             $this->assertIsArray($receipt);
             $receipt[$field] = str_repeat('0', 64);
-            Cache::forever(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY, $receipt);
+            Cache::forever(Projection::physicalKey(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY), $receipt);
 
             $this->runRefreshIfChanged('rebuilt');
         }
 
-        Cache::put('seo:sitemap-source:v2:fresh', ['ok' => true, 'count' => 0], 600);
+        Cache::put(Projection::physicalKey('seo:sitemap-source:v2:fresh'), ['ok' => true, 'count' => 0], 600);
         $this->runRefreshIfChanged('rebuilt');
     }
 
@@ -470,18 +471,18 @@ class SitemapSourceCacheTest extends TestCase
     {
         $original = ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 1,
             'items' => [['loc' => 'https://fermatmind.com/zh/tests', 'lastmod' => '2026-01-01T00:00:00Z']]];
-        Cache::put('seo:sitemap-source:v2:fresh', $original, 600);
+        Cache::put(Projection::physicalKey('seo:sitemap-source:v2:fresh'), $original, 600);
         $this->mock(SitemapGenerator::class, function ($mock): void {
             $mock->shouldReceive('generateSitemapUrls')->twice()->andThrow(new \RuntimeException('OOM simulated'));
         });
         $this->artisan('seo:warm-sitemap-source-cache --json')->assertFailed();
-        $this->assertSame($original, Cache::get('seo:sitemap-source:v2:fresh'));
-        $next = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        $this->assertSame($original, Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh')));
+        $next = Cache::lock(Projection::physicalKey('seo:sitemap-source:v2:lock'), 120);
         self::assertTrue($next->get());
         self::assertTrue($next->release());
-        Cache::forget('seo:sitemap-source:v2:fresh');
+        Cache::forget(Projection::physicalKey('seo:sitemap-source:v2:fresh'));
         $this->artisan('seo:warm-sitemap-source-cache --json')->assertFailed();
-        $this->assertNull(Cache::get('seo:sitemap-source:v2:fresh'));
+        $this->assertNull(Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh')));
         self::assertTrue($next->get());
         self::assertTrue($next->release());
         $this->getJson('/api/v0.5/seo/sitemap-source')->assertHeader('X-Fermat-Cache', 'fallback');
@@ -550,7 +551,7 @@ class SitemapSourceCacheTest extends TestCase
         $this->artisan('seo:warm-sitemap-source-cache --json')
             ->assertSuccessful();
 
-        $cached = Cache::get('seo:sitemap-source:v2:fresh');
+        $cached = Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh'));
         $this->assertIsArray($cached);
 
         $locs = collect($cached['items'])->pluck('loc')->all();
@@ -575,7 +576,7 @@ class SitemapSourceCacheTest extends TestCase
         $this->artisan('seo:warm-sitemap-source-cache --json')
             ->assertSuccessful();
 
-        $cached = Cache::get('seo:sitemap-source:v2:fresh');
+        $cached = Cache::get(Projection::physicalKey('seo:sitemap-source:v2:fresh'));
         $this->assertIsArray($cached);
 
         $forbiddenPatterns = [

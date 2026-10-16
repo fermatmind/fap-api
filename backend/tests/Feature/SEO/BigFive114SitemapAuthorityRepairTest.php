@@ -27,8 +27,8 @@ final class BigFive114SitemapAuthorityRepairTest extends TestCase
             '--write' => true,
         ])->assertExitCode(0);
 
-        Cache::put(SitemapSourceController::CACHE_KEY_FRESH, ['old' => true], 600);
-        Cache::put(SitemapSourceController::CACHE_KEY_STALE, ['safety' => true], 600);
+        Cache::put(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_FRESH), ['old' => true], 600);
+        Cache::put(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_STALE), ['safety' => true], 600);
         Cache::put(SitemapCache::XML_CACHE_KEY, '<old/>', 600);
         Cache::put(SitemapCache::ETAG_CACHE_KEY, 'old-etag', 600);
 
@@ -40,8 +40,8 @@ final class BigFive114SitemapAuthorityRepairTest extends TestCase
             ->expectsOutputToContain('discoverability_cache_keys_flushed=seo:sitemap-source:v2:fresh')
             ->assertExitCode(0);
 
-        self::assertNull(Cache::get(SitemapSourceController::CACHE_KEY_FRESH));
-        self::assertSame(['safety' => true], Cache::get(SitemapSourceController::CACHE_KEY_STALE));
+        self::assertNull(Cache::get(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_FRESH)));
+        self::assertSame(['safety' => true], Cache::get(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_STALE)));
         self::assertNull(Cache::get(SitemapCache::XML_CACHE_KEY));
         self::assertNull(Cache::get(SitemapCache::ETAG_CACHE_KEY));
 

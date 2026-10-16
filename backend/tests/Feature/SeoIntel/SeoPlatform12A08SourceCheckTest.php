@@ -112,12 +112,12 @@ final class SeoPlatform12A08SourceCheckTest extends TestCase
     {
         $payload = ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 1,
             'items' => [['loc' => 'https://example.test/zh', 'lastmod' => '2026-09-07']]];
-        Cache::put(SitemapSourceController::CACHE_KEY_FRESH, $payload);
+        Cache::put(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_FRESH), $payload);
         $method = new \ReflectionMethod(Platform12ProductionEvidenceReader::class, 'sitemap');
         $result = $method->invoke(app(Platform12ProductionEvidenceReader::class));
         $this->assertSame(['availability' => 'AVAILABLE', 'observation_count' => 1], $result);
-        $this->assertSame($payload, Cache::get(SitemapSourceController::CACHE_KEY_FRESH));
-        Cache::put(SitemapSourceController::CACHE_KEY_FRESH, [...$payload, 'count' => 2]);
+        $this->assertSame($payload, Cache::get(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_FRESH)));
+        Cache::put(\App\Support\PublicProjectionCache::physicalKey(SitemapSourceController::CACHE_KEY_FRESH), [...$payload, 'count' => 2]);
         $this->expectExceptionMessage('SITEMAP_PROJECTION_INVALID');
         $method->invoke(app(Platform12ProductionEvidenceReader::class));
     }

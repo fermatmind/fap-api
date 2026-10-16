@@ -161,7 +161,7 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
                 throw new RuntimeException('audit_failed');
             }
         });
-        $key = \App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH;
+        $key = \App\Support\PublicProjectionCache::physicalKey(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH);
         \Illuminate\Support\Facades\Cache::put($key, ['unchanged' => 'public-cache'], 300);
         // Resolve after binding the failing audit logger; the native publisher also uses it.
         $this->refused(fn () => app(Workspace::class)->promote($p, Hash::hash($before), $actor->id), 'audit_failed');
@@ -484,7 +484,7 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
                     ->update(['claim_result_json' => json_encode(['status' => 'blocked', 'matches' => []])]);
             }
         });
-        $key = \App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH;
+        $key = \App\Support\PublicProjectionCache::physicalKey(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH);
         \Illuminate\Support\Facades\Cache::put($key, ['unchanged' => 'public-cache'], 300);
         $this->refused(fn () => app(Workspace::class)->promote($p, Hash::hash($before), $actor->id), 'blog_claim_blocked');
         $this->assertSame($before, app(Workspace::class)->snapshot());
