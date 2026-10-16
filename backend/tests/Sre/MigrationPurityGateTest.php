@@ -70,6 +70,8 @@ final class MigrationPurityGateTest extends TestCase
         '2026_10_15_130000_refine_enneagram_bilingual_landing_copy.php',
         // EnneagramContextLinksTest covers exact bilingual FAQ links, atomic conflicts and post-commit cache closeout.
         '2026_10_16_120000_link_enneagram_landing_context_articles.php',
+        // EnneagramContextLinksTest proves exact method-link scope, idempotence and bilingual rollback.
+        '2026_10_16_170000_link_enneagram_public_technical_note.php',
     ];
 
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';

@@ -87,6 +87,62 @@ final class EnneagramContextLinksTest extends TestCase
         return $content;
     }
 
+    public function test_technical_note_links_append_bilingually_and_preserve_existing_answers_and_links(): void
+    {
+        $this->seedContent();
+        $package = json_decode(file_get_contents(database_path('data/assessment_enneagram_technical_note_links_20261016.json')), true, 512, JSON_THROW_ON_ERROR);
+        $baseline = $this->content();
+        foreach (['en', 'zh'] as $locale) {
+            $baseline[$locale]['faq'][] = ['id' => 'faq-enneagram-method', 'a' => 'Preserve method evidence boundary', 'related_links' => [['href' => '#existing', 'label' => 'Existing']]];
+        }
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            DB::table($table)->update(['content_i18n_json' => json_encode($baseline)]);
+        }
+        $migration = require database_path('migrations/2026_10_16_170000_link_enneagram_public_technical_note.php');
+        $migration->up();
+        $migration->up();
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            foreach (DB::table($table)->get() as $row) {
+                $expected = $baseline;
+                if ($row->org_id === 0 && $row->code === 'ENNEAGRAM') {
+                    foreach (['en', 'zh'] as $locale) {
+                        $expected[$locale]['faq'][3]['related_links'][] = $package['locales'][$locale][0]['link'];
+                    }
+                }
+                self::assertJsonValueSame($expected, json_decode($row->content_i18n_json, true));
+            }
+        }
+    }
+
+    public function test_technical_note_conflict_rolls_back_both_locales_and_both_registries(): void
+    {
+        $this->seedContent();
+        $baseline = $this->content();
+        foreach (['en', 'zh'] as $locale) {
+            $baseline[$locale]['faq'][] = ['id' => 'faq-enneagram-method', 'a' => 'Preserve method evidence boundary'];
+        }
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            DB::table($table)->update(['content_i18n_json' => json_encode($baseline)]);
+        }
+        $conflict = $baseline;
+        $conflict['en']['faq'][3]['related_links'] = [['href' => '/en/tests/enneagram-personality-test-nine-types/technical-note', 'label' => 'Later owner navigation']];
+        DB::table('scales_registry_v2')->where('org_id', 0)->where('code', 'ENNEAGRAM')->update(['content_i18n_json' => json_encode($conflict)]);
+        $before = [];
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            $before[$table] = DB::table($table)->get()->toJson();
+        }
+        $this->instance(ScaleRegistryWriter::class, Mockery::mock(ScaleRegistryWriter::class)->shouldNotReceive('invalidatePublicContentProjection')->getMock());
+        try {
+            (require database_path('migrations/2026_10_16_170000_link_enneagram_public_technical_note.php'))->up();
+            self::fail('Expected a conflicting method link to be rejected.');
+        } catch (\RuntimeException $exception) {
+            self::assertStringContainsString('refusing to overwrite', $exception->getMessage());
+        }
+        foreach ($before as $table => $json) {
+            self::assertSame($json, DB::table($table)->get()->toJson());
+        }
+    }
+
     private function seedContent(): void
     {
         foreach (['scales_registry', 'scales_registry_v2'] as $table) {

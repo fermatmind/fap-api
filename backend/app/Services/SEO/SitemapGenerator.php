@@ -10,6 +10,7 @@ use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
+use App\Models\ContentPackRelease;
 use App\Models\ContentPage;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
@@ -25,6 +26,7 @@ use App\Services\Cms\Mbti64CrossTypeComparisonPublicReadModel;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\PersonalityProfileService;
 use App\Services\Cms\TopicProfileSeoService;
+use App\Services\Enneagram\EnneagramTechnicalNoteService;
 use App\Services\Scale\ScaleDiscoverabilityPolicy;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\CanonicalFrontendUrl;
@@ -61,6 +63,7 @@ class SitemapGenerator
         private readonly CareerDatasetPublicationMetadataService $datasetPublicationMetadataService,
         private readonly CareerDirectoryAuthorityService $careerDirectoryAuthorityService,
         private readonly Career1046DiscoverabilityReleaseGate $career1046DiscoverabilityReleaseGate,
+        private readonly EnneagramTechnicalNoteService $enneagramTechnicalNoteService,
     ) {}
 
     public function careerDiscoverabilityCacheIdentity(): string
@@ -240,6 +243,7 @@ class SitemapGenerator
         $rows = $this->scaleRegistry->listActivePublic(0);
 
         $slugDates = [];
+        $technicalNoteUrls = [];
 
         foreach ($rows as $row) {
             if (! is_array($row)) {
@@ -255,6 +259,10 @@ class SitemapGenerator
             $slug = trim((string) ($row['primary_slug'] ?? ''));
             if ($slug === '') {
                 continue;
+            }
+
+            if (($row['code'] ?? null) === 'ENNEAGRAM' && $slug === 'enneagram-personality-test-nine-types') {
+                $technicalNoteUrls = $this->getEnneagramTechnicalNoteUrls($baseUrl, $slug);
             }
 
             if (! array_key_exists($slug, $slugDates)) {
@@ -280,6 +288,40 @@ class SitemapGenerator
                     'slug' => 'tests:'.$segment.':'.$slug,
                     'updated_at' => ($slugDates[$slug] ?? null)?->toDateTimeString(),
                 ];
+            }
+        }
+
+        return array_merge($urls, $technicalNoteUrls);
+    }
+
+    private function getEnneagramTechnicalNoteUrls(string $baseUrl, string $slug): array
+    {
+        $urls = [];
+        foreach (self::SCALE_FRONTEND_LOCALE_SEGMENTS as $locale => $segment) {
+            try {
+                $note = $this->enneagramTechnicalNoteService->contract($locale)['technical_note_v1'] ?? null;
+                if (! is_array($note)
+                    || ($note['canonical_authority_id'] ?? null) !== 'FERMATMIND_ENNEAGRAM_PRIVATE_RESULT_CANONICAL'
+                    || ($note['canonical_locale'] ?? null) !== $locale
+                    || ! is_string($note['canonical_release_id'] ?? null)
+                    || $note['canonical_release_id'] === ''
+                    || ! is_array($note['sections'] ?? null) || $note['sections'] === []) {
+                    return [];
+                }
+                // Use the immutable content release timestamp, never generated_at
+                // (which changes on every API read) or the deployment/file mtime.
+                $publishedAt = ContentPackRelease::query()->whereKey($note['canonical_release_id'])->value('created_at');
+                if ($publishedAt === null) {
+                    return [];
+                }
+                $urls[] = [
+                    'loc' => $baseUrl.'/'.$segment.'/tests/'.$slug.'/technical-note',
+                    'lastmod' => $this->formatLastmod($this->parseUpdatedAt($publishedAt)),
+                    'slug' => 'technical-note:'.$segment.':ENNEAGRAM',
+                    'updated_at' => (string) $publishedAt,
+                ];
+            } catch (\Throwable) {
+                return [];
             }
         }
 
