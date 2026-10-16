@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Services\Scale\ScaleRegistryWriter;
-use App\Support\CanonicalTranslationPayloadHash;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -30,31 +29,55 @@ return new class extends Migration
                 }
 
                 $matched = true;
-                $content = json_decode($row->content_i18n_json ?: '{}', true, 512, JSON_THROW_ON_ERROR);
+                $content = json_decode($row->content_i18n_json ?: '{}', false, 512, JSON_THROW_ON_ERROR);
+                $changed = false;
                 foreach ($package['locales'] as $locale => $updates) {
-                    if (! is_array($content[$locale] ?? null)) {
+                    if (! is_object($content->{$locale} ?? null)) {
                         throw new RuntimeException('ENNEAGRAM.'.$locale.' content is missing.');
                     }
                     foreach ($updates as $update) {
-                        $collection = data_get($content[$locale], $update['collection']);
-                        $index = is_array($collection) ? array_search($update['id'], array_column($collection, 'id'), true) : false;
-                        if ($index === false) {
-                            throw new RuntimeException('ENNEAGRAM.'.$locale.'.'.$update['id'].' is missing.');
+                        $collection = $content->{$locale}->{$update['collection']} ?? null;
+                        if (! is_array($collection)) {
+                            throw new RuntimeException('ENNEAGRAM.'.$locale.' FAQ is malformed.');
                         }
-                        $current = $collection[$index][$update['field']] ?? null;
-                        if (CanonicalTranslationPayloadHash::sameValue($current, $update['value'])) {
-                            continue;
+                        $indices = [];
+                        foreach ($collection as $index => $item) {
+                            if (is_object($item) && ($item->id ?? null) === $update['id']) {
+                                $indices[] = $index;
+                            }
                         }
-                        if (! CanonicalTranslationPayloadHash::sameValue($current, $update['expected'])) {
-                            throw new RuntimeException('ENNEAGRAM.'.$locale.'.'.$update['id'].' changed since review; refusing to overwrite.');
+                        if (count($indices) !== 1) {
+                            throw new RuntimeException('ENNEAGRAM.'.$locale.'.'.$update['id'].' is missing or duplicated; refusing to overwrite.');
                         }
-                        $collection[$index][$update['field']] = $update['value'];
-                        data_set($content[$locale], $update['collection'], $collection);
+                        $item = $collection[$indices[0]];
+                        $current = $item->{$update['field']} ?? [];
+                        if (! is_array($current)) {
+                            throw new RuntimeException('ENNEAGRAM.'.$locale.'.'.$update['id'].' links are malformed; refusing to overwrite.');
+                        }
+                        $found = false;
+                        foreach ($current as $link) {
+                            if (! is_object($link) || ! is_string($link->href ?? null) || ! is_string($link->label ?? null) || trim($link->href) === '' || trim($link->label) === '') {
+                                throw new RuntimeException('ENNEAGRAM.'.$locale.'.'.$update['id'].' link is malformed; refusing to overwrite.');
+                            }
+                            if ($link->href === $update['link']['href']) {
+                                if ($link->label !== $update['link']['label']) {
+                                    throw new RuntimeException('ENNEAGRAM.'.$locale.'.'.$update['id'].' target link changed; refusing to overwrite.');
+                                }
+                                $found = true;
+                            }
+                        }
+                        if (! $found) {
+                            $current[] = (object) $update['link'];
+                            $item->{$update['field']} = $current;
+                            $changed = true;
+                        }
                     }
                 }
-                DB::table($table)->where('org_id', 0)->where('code', 'ENNEAGRAM')->update([
-                    'content_i18n_json' => json_encode($content, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
-                ]);
+                if ($changed) {
+                    DB::table($table)->where('org_id', 0)->where('code', 'ENNEAGRAM')->update([
+                        'content_i18n_json' => json_encode($content, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+                    ]);
+                }
             }
 
             return $matched;

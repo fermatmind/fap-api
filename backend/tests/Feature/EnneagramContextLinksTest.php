@@ -71,9 +71,14 @@ final class EnneagramContextLinksTest extends TestCase
             ];
             foreach ($updates as $update) {
                 $item = ['id' => $update['id'], 'q' => 'Preserve question', 'a' => 'Preserve answer and scoring boundaries'];
-                $value = $published ? $update['value'] : $update['expected'];
-                if ($value !== null) {
-                    $item[$update['field']] = $value;
+                $links = $update['id'] === 'faq-enneagram-interpretation'
+                    ? [['href' => '#faq-enneagram-calculation', 'label' => $locale === 'zh' ? '查看两种题本的计分说明' : 'Read the scoring explanation for both forms']]
+                    : [];
+                if ($published) {
+                    $links[] = $update['link'];
+                }
+                if ($links !== []) {
+                    $item[$update['field']] = $links;
                 }
                 $content[$locale]['faq'][] = $item;
             }
@@ -134,8 +139,7 @@ final class EnneagramContextLinksTest extends TestCase
             $this->assertSame(['faq-enneagram-interpretation', 'faq-enneagram-retest'], array_column($updates, 'id'));
             foreach ($updates as $update) {
                 $this->assertSame('related_links', $update['field']);
-                $this->assertSame($update['expected'] ?? [], array_slice($update['value'], 0, -1));
-                $this->assertStringStartsWith('/'.$locale.'/articles/', $update['value'][array_key_last($update['value'])]['href']);
+                $this->assertStringStartsWith('/'.$locale.'/articles/', $update['link']['href']);
             }
         }
     }
@@ -144,7 +148,7 @@ final class EnneagramContextLinksTest extends TestCase
     {
         $this->seedContent();
         $content = $this->content();
-        $content['en']['faq'][1]['related_links'] = [['href' => '/later-revision', 'label' => 'Later owner edit']];
+        $content['en']['faq'][1]['related_links'] = [['href' => '/en/articles/enneagram-personality-test-explained', 'label' => 'Later owner edit']];
         DB::table('scales_registry_v2')->where('org_id', 0)->where('code', 'ENNEAGRAM')->update(['content_i18n_json' => json_encode($content)]);
         $this->instance(ScaleRegistryWriter::class, Mockery::mock(ScaleRegistryWriter::class)->shouldNotReceive('invalidatePublicContentProjection')->getMock());
 
@@ -156,6 +160,133 @@ final class EnneagramContextLinksTest extends TestCase
         }
         $this->assertSame($this->content(), json_decode(DB::table('scales_registry')->where('org_id', 0)->where('code', 'ENNEAGRAM')->value('content_i18n_json'), true));
         $this->assertSame($content, json_decode(DB::table('scales_registry_v2')->where('org_id', 0)->where('code', 'ENNEAGRAM')->value('content_i18n_json'), true));
+    }
+
+    public function test_existing_non_target_links_are_retained_in_both_registries_and_languages(): void
+    {
+        $this->seedContent();
+        $custom = ['href' => '#existing-context', 'label' => 'Keep environment-specific navigation'];
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            $content = $this->content();
+            foreach (['zh', 'en'] as $locale) {
+                $content[$locale]['faq'][1]['related_links'] = [$custom];
+                // JSON object key order is not an editorial conflict.
+                $link = $this->package()['locales'][$locale][1]['link'];
+                $content[$locale]['faq'][2]['related_links'] = [['label' => $link['label'], 'href' => $link['href'], 'preserve' => 'extra metadata']];
+            }
+            DB::table($table)->where('org_id', 0)->where('code', 'ENNEAGRAM')->update(['content_i18n_json' => json_encode($content)]);
+        }
+        $this->publish();
+        $this->publish();
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            $content = json_decode(DB::table($table)->where('org_id', 0)->where('code', 'ENNEAGRAM')->value('content_i18n_json'), true);
+            foreach (['zh', 'en'] as $locale) {
+                $this->assertSame([$custom, $this->package()['locales'][$locale][0]['link']], $content[$locale]['faq'][1]['related_links']);
+                $this->assertCount(1, $content[$locale]['faq'][2]['related_links']);
+            }
+        }
+    }
+
+    public function test_absent_null_and_empty_lists_receive_only_the_new_context_link(): void
+    {
+        $this->seedContent();
+        foreach (['absent', 'null', 'empty'] as $variant) {
+            foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+                $content = $this->content();
+                foreach (['zh', 'en'] as $locale) {
+                    foreach ([1, 2] as $index) {
+                        if ($variant === 'absent') {
+                            unset($content[$locale]['faq'][$index]['related_links']);
+                        } else {
+                            $content[$locale]['faq'][$index]['related_links'] = $variant === 'null' ? null : [];
+                        }
+                    }
+                }
+                DB::table($table)->where('org_id', 0)->where('code', 'ENNEAGRAM')->update(['content_i18n_json' => json_encode($content)]);
+            }
+            $this->publish();
+            $this->publish();
+            foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+                $content = json_decode(DB::table($table)->where('org_id', 0)->where('code', 'ENNEAGRAM')->value('content_i18n_json'), true);
+                foreach (['zh', 'en'] as $locale) {
+                    foreach ($this->package()['locales'][$locale] as $offset => $update) {
+                        $this->assertSame([$update['link']], $content[$locale]['faq'][$offset + 1]['related_links']);
+                    }
+                }
+            }
+        }
+    }
+
+    public function test_malformed_existing_links_roll_back_without_cache_invalidation(): void
+    {
+        $this->seedContent();
+        $this->instance(ScaleRegistryWriter::class, Mockery::mock(ScaleRegistryWriter::class)->shouldNotReceive('invalidatePublicContentProjection')->getMock());
+        foreach (['malformed', (object) [], ['href' => '/not-a-list'], [['href' => '/missing-label']], [['href' => '', 'label' => 'Empty URL']]] as $malformed) {
+            $content = $this->content();
+            $content['en']['faq'][1]['related_links'] = $malformed;
+            DB::table('scales_registry_v2')->where('org_id', 0)->where('code', 'ENNEAGRAM')->update(['content_i18n_json' => json_encode($content)]);
+            try {
+                $this->publish();
+                $this->fail('Expected malformed link rejection.');
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('malformed; refusing to overwrite', $exception->getMessage());
+            }
+            $this->assertSame($this->content(), json_decode(DB::table('scales_registry')->where('org_id', 0)->where('code', 'ENNEAGRAM')->value('content_i18n_json'), true));
+            $this->assertSame(json_decode(json_encode($content), true), json_decode(DB::table('scales_registry_v2')->where('org_id', 0)->where('code', 'ENNEAGRAM')->value('content_i18n_json'), true));
+        }
+    }
+
+    public function test_preserves_json_object_shapes_and_original_indices_with_unidentified_faqs(): void
+    {
+        $this->seedContent();
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            $content = json_decode(json_encode($this->content()));
+            $content->fr->settings = (object) [];
+            foreach (['zh', 'en'] as $locale) {
+                array_unshift($content->{$locale}->faq, (object) ['q' => 'Unidentified existing question', 'meta' => (object) []]);
+                $content->{$locale}->faq[2]->related_links[0]->meta = (object) [];
+            }
+            DB::table($table)->where('org_id', 0)->where('code', 'ENNEAGRAM')->update(['content_i18n_json' => json_encode($content)]);
+        }
+        $this->publish();
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            $raw = DB::table($table)->where('org_id', 0)->where('code', 'ENNEAGRAM')->value('content_i18n_json');
+            $content = json_decode($raw);
+            $this->assertInstanceOf(\stdClass::class, $content->fr->settings);
+            foreach (['zh', 'en'] as $locale) {
+                $this->assertSame('Unidentified existing question', $content->{$locale}->faq[0]->q);
+                $this->assertObjectNotHasProperty('related_links', $content->{$locale}->faq[0]);
+                $this->assertInstanceOf(\stdClass::class, $content->{$locale}->faq[0]->meta);
+                $this->assertInstanceOf(\stdClass::class, $content->{$locale}->faq[2]->related_links[0]->meta);
+                $this->assertEquals((object) $this->package()['locales'][$locale][0]['link'], $content->{$locale}->faq[2]->related_links[1]);
+                $this->assertEquals((object) $this->package()['locales'][$locale][1]['link'], $content->{$locale}->faq[3]->related_links[0]);
+            }
+            $this->publish();
+            $this->assertSame($raw, DB::table($table)->where('org_id', 0)->where('code', 'ENNEAGRAM')->value('content_i18n_json'));
+        }
+    }
+
+    public function test_missing_or_duplicated_target_id_rolls_back_both_registries(): void
+    {
+        $this->seedContent();
+        $this->instance(ScaleRegistryWriter::class, Mockery::mock(ScaleRegistryWriter::class)->shouldNotReceive('invalidatePublicContentProjection')->getMock());
+        foreach (['missing', 'duplicate'] as $variant) {
+            $content = $this->content();
+            if ($variant === 'missing') {
+                unset($content['en']['faq'][1]['id']);
+            } else {
+                $content['en']['faq'][] = $content['en']['faq'][1];
+            }
+            DB::table('scales_registry_v2')->where('org_id', 0)->where('code', 'ENNEAGRAM')->update(['content_i18n_json' => json_encode($content)]);
+            try {
+                $this->publish();
+                $this->fail('Expected unique target rejection.');
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('missing or duplicated; refusing to overwrite', $exception->getMessage());
+            }
+            $this->assertSame($this->content(), json_decode(DB::table('scales_registry')->where('org_id', 0)->where('code', 'ENNEAGRAM')->value('content_i18n_json'), true));
+            $this->assertSame($content, json_decode(DB::table('scales_registry_v2')->where('org_id', 0)->where('code', 'ENNEAGRAM')->value('content_i18n_json'), true));
+        }
     }
 
     public function test_cache_failure_keeps_committed_links_and_idempotent_reentry_closes_the_cache(): void
@@ -200,24 +331,6 @@ final class EnneagramContextLinksTest extends TestCase
         $seed = new \ReflectionMethod($seeder, 'upsertAssessmentPreservingFaq');
         $attributes = ['code' => 'ENNEAGRAM', 'content_i18n_json' => ['en' => [], 'zh' => []]];
         $seed->invoke($seeder, $writer, $attributes);
-        // Existing production FAQ revisions can differ from fresh-install seed defaults.
-        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
-            $content = json_decode(DB::table($table)->where('code', 'ENNEAGRAM')->value('content_i18n_json'), true);
-            foreach ($this->package()['locales'] as $locale => $updates) {
-                foreach ($updates as $update) {
-                    $index = array_search($update['id'], array_column($content[$locale]['faq'], 'id'), true);
-                    if ($update['expected'] === null) {
-                        unset($content[$locale]['faq'][$index]['related_links']);
-                    } else {
-                        $content[$locale]['faq'][$index]['related_links'] = array_map(
-                            fn (array $link): array => ['label' => $link['label'], 'href' => $link['href']],
-                            $update['expected'],
-                        );
-                    }
-                }
-            }
-            DB::table($table)->where('code', 'ENNEAGRAM')->update(['content_i18n_json' => json_encode($content)]);
-        }
         $this->publish();
         $published = [];
         foreach (['scales_registry', 'scales_registry_v2'] as $table) {
@@ -232,7 +345,7 @@ final class EnneagramContextLinksTest extends TestCase
                     $this->assertSame($published[$table][$locale]['faq'], $actual[$locale]['faq']);
                     foreach ($this->package()['locales'][$locale] as $update) {
                         $item = collect($actual[$locale]['faq'])->firstWhere('id', $update['id']);
-                        $this->assertSame($update['value'], $item['related_links']);
+                        $this->assertContains($update['link'], $item['related_links']);
                     }
                 }
             }
