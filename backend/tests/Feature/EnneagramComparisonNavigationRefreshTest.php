@@ -6,6 +6,8 @@ namespace Tests\Feature;
 
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\EditorialReview;
+use App\Services\Cms\CmsEditorialReviewAttestationService;
 use App\Services\Cms\EnneagramComparisonNavigationRefresh as Refresh;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Cache;
@@ -49,6 +51,7 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
         $this->seedPair();
         $service = app(Refresh::class);
         $before = $this->state();
+        $publicBefore = ['zh-CN' => $this->publicSeo('zh-CN'), 'en' => $this->publicSeo('en')];
         $this->assertSame(['status' => 'ready', 'changed' => 0], $service->publish(true));
         $this->assertEquals($before, $this->state());
         Http::assertNothingSent();
@@ -77,6 +80,7 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
             $this->getJson('/api/v0.5/articles/'.$article->slug.'/seo?locale='.$locale)->assertOk()
                 ->assertJsonPath('meta.robots', $locale === 'zh-CN' ? 'index,follow' : 'noindex,nofollow');
         }
+        $this->assertSame($publicBefore, ['zh-CN' => $this->publicSeo('zh-CN'), 'en' => $this->publicSeo('en')]);
         foreach ($before['editorial_reviews'] as $id => $review) {
             $old = (array) $review;
             $current = (array) DB::table('editorial_reviews')->find($id);
@@ -87,6 +91,9 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
         $after = $this->state();
         $this->assertSame(['status' => 'unchanged', 'changed' => 0], $service->publish());
         $this->assertEquals($after, $this->state());
+        $migration = require database_path('migrations/2026_10_16_190000_preserve_enneagram_comparison_public_seo.php');
+        $migration->up();
+        $this->assertEquals($after, $this->state());
         $this->assertSame(count($before['article_translation_revisions']) + 2, DB::table('article_translation_revisions')->count());
         foreach ($before['article_translation_revisions'] as $id => $row) {
             $old = (array) $row;
@@ -94,7 +101,7 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
             unset($old['updated_at'], $old['revision_status'], $current['updated_at'], $current['revision_status']);
             $this->assertSame($old, $current);
         }
-        Http::assertSentCount(6);
+        Http::assertSentCount(9);
     }
 
     public function test_production_requires_both_languages_and_rejects_source_drift(): void
@@ -145,6 +152,7 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
     {
         $this->seedStaging();
         $before = $this->state();
+        $publicBefore = $this->publicSeo('zh-CN');
         $this->app['env'] = 'staging';
         $this->assertSame(['status' => 'ready', 'changed' => 0], app(Refresh::class)->publish(true));
         $this->assertEquals($before, $this->state());
@@ -152,6 +160,7 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
         $package = json_decode(file_get_contents(base_path(Refresh::PACKAGE)), true);
         $source = Article::withoutGlobalScopes()->with('publishedRevision')->findOrFail(164);
         $english = Article::withoutGlobalScopes()->with(['publishedRevision', 'seoMeta'])->findOrFail(224);
+        $this->assertSame($publicBefore, $this->publicSeo('zh-CN'));
         $this->assertSame('source', $source->translation_status);
         $this->assertSame($package['candidates']['staging']['zh-CN']['content_md'], $source->content_md);
         $this->assertSame($package['candidates']['staging']['en']['content_md'], $english->content_md);
@@ -255,6 +264,98 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
             $this->assertNotSame('', $error->getMessage());
         }
         $this->assertEquals($before, $this->state());
+    }
+
+    public function test_known_staging_public_seo_regression_repairs_atomically_without_rewriting_history(): void
+    {
+        $this->seedStaging();
+        $expected = $this->publicSeo('zh-CN');
+        DB::table('sqlite_sequence')->where('name', 'article_translation_revisions')->update(['seq' => 714]);
+        $this->app['env'] = 'staging';
+        app(Refresh::class)->publish();
+        $source = Article::withoutGlobalScopes()->with(['publishedRevision', 'seoMeta'])->findOrFail(164);
+        $oldId = (int) $source->published_revision_id;
+        // Reproduce the delivered v1 projection: the attested new revision used
+        // canonical DB SEO while the historical public revision had longer copy.
+        $this->attestStagingDescription((string) $source->seoMeta->seo_description);
+        $history = (array) DB::table('article_translation_revisions')->find($oldId);
+        $count = DB::table('article_translation_revisions')->count();
+        DB::statement("CREATE TRIGGER comparison_repair_approval_reject BEFORE UPDATE ON article_translation_revisions
+            WHEN NEW.article_id = 224 AND NEW.revision_status = 'approved'
+            BEGIN SELECT RAISE(ABORT, 'Fixture repair rejection'); END");
+        $this->assertRejected();
+        Http::assertSentCount(3);
+        DB::statement('DROP TRIGGER comparison_repair_approval_reject');
+        $migration = require database_path('migrations/2026_10_16_190000_preserve_enneagram_comparison_public_seo.php');
+        $migration->up();
+        $this->assertSame($expected, $this->publicSeo('zh-CN'));
+        $this->assertSame($count + 2, DB::table('article_translation_revisions')->count());
+        $oldAfter = (array) DB::table('article_translation_revisions')->find($oldId);
+        unset($history['updated_at'], $history['revision_status'], $oldAfter['updated_at'], $oldAfter['revision_status']);
+        $this->assertSame($history, $oldAfter);
+        $after = $this->state();
+        $this->assertSame(['status' => 'unchanged', 'changed' => 0], app(Refresh::class)->publish());
+        $this->assertEquals($after, $this->state());
+    }
+
+    public function test_staging_public_seo_third_state_is_not_repaired_or_overwritten(): void
+    {
+        $this->seedStaging();
+        $this->app['env'] = 'staging';
+        app(Refresh::class)->publish();
+        $this->attestStagingDescription('A separately approved, unrelated description.');
+        $this->assertRejected();
+        Http::assertSentCount(3);
+    }
+
+    public function test_native_public_null_description_is_preserved_instead_of_using_canonical_db_copy(): void
+    {
+        $this->seedPair();
+        DB::table('article_translation_revisions')->where('id', 735)->update(['seo_description' => null]);
+        $before = $this->publicSeo('zh-CN');
+        app(Refresh::class)->publish();
+        $this->assertNull(Article::withoutGlobalScopes()->with('publishedRevision')->findOrFail(164)->publishedRevision->seo_description);
+        $this->assertSame($before, $this->publicSeo('zh-CN'));
+    }
+
+    public function test_correct_replay_rejects_current_editorial_hold_without_writes_or_cache_requests(): void
+    {
+        $this->seedPair();
+        app(Refresh::class)->publish();
+        DB::table('editorial_reviews')->where('content_type', 'article')->where('content_id', 164)
+            ->update(['workflow_state' => 'changes_requested']);
+        $this->assertRejected();
+        Http::assertSentCount(3);
+    }
+
+    private function attestStagingDescription(string $description): void
+    {
+        $source = Article::withoutGlobalScopes()->with('publishedRevision')->findOrFail(164);
+        $source->publishedRevision->forceFill(['seo_description' => $description])->saveQuietly();
+        $source->refresh()->load('publishedRevision');
+        $review = EditorialReview::withoutGlobalScopes()->where('content_type', 'article')->where('content_id', 164)->firstOrFail();
+        app(CmsEditorialReviewAttestationService::class)->bindOrCreateApproved(null, 'cms_article_review',
+            'fixture:staging-public-seo:'.$source->published_revision_id,
+            [['surface_id' => 'article', 'record' => $source],
+                ['surface_id' => 'article_translation_revision', 'record' => $source->publishedRevision],
+                ['surface_id' => 'editorial_review', 'record' => $review]], 1, Refresh::PACKAGE_SHA256);
+    }
+
+    private function publicSeo(string $locale): array
+    {
+        $path = '/api/v0.5/articles/big-five-vs-enneagram-traits-and-motivation-stories';
+        $detail = $this->getJson($path.'?locale='.$locale)->assertOk()->json();
+        $seo = $this->getJson($path.'/seo?locale='.$locale)->assertOk()->json();
+        // Native revision publication/review clocks advance; editorial SEO does not.
+        unset($seo['meta']['big_five_structured_data_v1']['visible_alignment']['dates']['published_at'],
+            $seo['meta']['big_five_structured_data_v1']['visible_alignment']['dates']['reviewed_at']);
+
+        return ['article_seo_meta' => array_intersect_key($detail['article']['seo_meta'],
+            array_flip(['seo_title', 'seo_description', 'og_title', 'og_description', 'robots', 'canonical_url'])),
+            'seo_surface_v1' => array_intersect_key($detail['seo_surface_v1'],
+                array_flip(['title', 'description', 'canonical_url', 'robots_policy', 'alternates', 'og_payload', 'twitter_payload',
+                    'indexability_state', 'sitemap_state', 'llms_exposure_state'])),
+            'meta' => $seo['meta']];
     }
 
     private function state(): array
