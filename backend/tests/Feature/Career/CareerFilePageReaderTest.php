@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
+use App\Domain\Career\Display\CareerPageProjector;
 use App\Services\Career\CareerFilePageReader;
+use App\Support\PublicProjectionCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -33,27 +36,31 @@ final class CareerFilePageReaderTest extends TestCase
         self::assertArrayNotHasKey('truth_layer', $bundle);
         self::assertSame($bundle['career_page']['seo']['title']['text'], $reader->seo($bundle)['meta']['title']);
         $this->travel(2)->days();
-        self::assertSame($bundle['career_page'], \App\Support\PublicProjectionCache::get(
+        $stored = PublicProjectionCache::get(
             CareerFilePageReader::cacheKey($bundle['career_page']),
-        ));
+        );
+        $codec = app(CareerJobDetailCanonicalCacheReader::class);
+        self::assertTrue($codec->isSupportedEnvelope($stored));
+        self::assertSame($bundle['career_page'], $codec->decode($stored));
+        self::assertLessThan(strlen(serialize($bundle['career_page'])), strlen(serialize($stored)));
+        self::assertSame($bundle, $reader->read('actors', 'zh-CN'));
         foreach (DB::getQueryLog() as $query) {
             self::assertStringNotContainsString('career_job_display_assets', $query['query']);
             self::assertStringNotContainsString('career_jobs', $query['query']);
         }
     }
 
-    public function test_missing_editorial_content_preserves_a_normal_english_page(): void
+    public function test_published_english_editorial_content_is_indexable(): void
     {
         $this->publication(true);
         $bundle = app(CareerFilePageReader::class)->read('health-educators', 'en');
-        self::assertSame([], $bundle['career_page']['content']['blocks']);
-        self::assertSame('missing', $bundle['career_page']['hero']['metrics'][4]['availability']);
-        self::assertFalse($bundle['seo_contract']['index_eligible']);
-        self::assertSame('noindex,follow', $bundle['seo_contract']['robots_policy']);
+        self::assertNotEmpty($bundle['career_page']['content']['blocks']);
+        self::assertTrue($bundle['seo_contract']['index_eligible']);
+        self::assertSame('index,follow', $bundle['seo_contract']['robots_policy']);
         $seo = app(CareerFilePageReader::class)->seo($bundle);
-        self::assertSame('noindex,follow', $seo['meta']['robots']);
-        self::assertSame([], $seo['meta']['hreflang']);
-        self::assertSame('excluded', $seo['seo_surface_v1']['sitemap_state']);
+        self::assertSame('index,follow', $seo['meta']['robots']);
+        self::assertSame('/en/career/jobs/health-educators', $seo['meta']['hreflang']['en']);
+        self::assertSame('included', $seo['seo_surface_v1']['sitemap_state']);
         self::assertSame('/en/career/jobs/health-educators', $seo['meta']['canonical']);
     }
 
@@ -65,7 +72,7 @@ final class CareerFilePageReaderTest extends TestCase
         self::assertNotEmpty($middle['career_page']['content']['blocks']);
         self::assertTrue($middle['seo_contract']['index_eligible']);
         self::assertSame('missing', $middle['career_page']['hero']['metrics'][4]['availability']);
-        self::assertArrayNotHasKey('en', $reader->seo($middle)['meta']['hreflang']);
+        self::assertSame('/en/career/jobs/middle-school-teachers', $reader->seo($middle)['meta']['hreflang']['en']);
         $accountant = $reader->read('accountants-and-auditors', 'zh-CN');
         self::assertSame([
             'en' => '/en/career/jobs/accountants-and-auditors',
@@ -77,6 +84,39 @@ final class CareerFilePageReaderTest extends TestCase
     {
         $this->publication(false);
         self::assertNull(app(CareerFilePageReader::class)->read('actors', 'en'));
+    }
+
+    public function test_existing_uncompressed_page_cache_remains_readable(): void
+    {
+        $this->publication(true);
+        $page = app(CareerPageProjector::class)->read('actors', 'en');
+        $key = CareerFilePageReader::cacheKey($page);
+        PublicProjectionCache::forever($key, $page);
+        self::assertSame($page, app(CareerFilePageReader::class)->read('actors', 'en')['career_page']);
+        self::assertSame($page, PublicProjectionCache::get($key));
+    }
+
+    public function test_corrupt_unknown_or_misbound_compressed_cache_falls_back_to_the_file(): void
+    {
+        $this->publication(true);
+        $codec = app(CareerJobDetailCanonicalCacheReader::class);
+        $page = app(CareerPageProjector::class)->read('actors', 'en');
+        $key = CareerFilePageReader::cacheKey($page);
+        $wrongIdentity = $page;
+        $wrongIdentity['subject']['canonical_slug'] = 'wrong-role';
+        $wrongHash = $page;
+        $wrongHash['source_content_sha256'] = str_repeat('0', 64);
+        $stored = $codec->encode($page);
+        foreach ([
+            array_replace($stored, ['sha256' => str_repeat('0', 64)]),
+            array_replace($stored, ['codec' => 'unsupported']),
+            $codec->encode($wrongIdentity),
+            $codec->encode($wrongHash),
+        ] as $invalid) {
+            PublicProjectionCache::forever($key, $invalid);
+            self::assertSame($page, app(CareerFilePageReader::class)->read('actors', 'en')['career_page']);
+            self::assertSame($page, $codec->decode(PublicProjectionCache::get($key)));
+        }
     }
 
     public function test_presence_projection_is_small_and_skips_full_detail_queries_and_cache(): void

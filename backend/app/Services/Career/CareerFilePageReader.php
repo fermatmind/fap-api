@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Career;
 
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
+use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
 use App\Domain\Career\Display\CareerPageProjector;
 use App\Models\Occupation;
 use App\Support\PublicProjectionCache;
@@ -17,6 +18,7 @@ final class CareerFilePageReader
         private readonly CareerPageProjector $pages,
         private readonly PublicCareerAuthorityResponseCache $publication,
         private readonly CareerContentV3CanonicalReader $content,
+        private readonly CareerJobDetailCanonicalCacheReader $codec,
     ) {}
 
     public function read(string $slug, string $locale, bool $cacheWrite = true, bool $presenceOnly = false): ?array
@@ -45,7 +47,7 @@ final class CareerFilePageReader
         $sourceHash = (string) $entry['source_content_sha256'];
         $key = self::cacheKeyFromIdentity($slug, $locale, $sourceHash);
         try {
-            $cached = PublicProjectionCache::get($key);
+            $cached = $this->codec->decode(PublicProjectionCache::get($key));
         } catch (\Throwable) {
             $cached = null;
         }
@@ -59,7 +61,7 @@ final class CareerFilePageReader
                 // a new body produces a new key, so the old immutable value
                 // does not need a time-based expiry.
                 try {
-                    PublicProjectionCache::forever($key, $page);
+                    PublicProjectionCache::forever($key, $this->codec->encode($page));
                 } catch (\Throwable) {
                     // A full/unwritable derived store cannot suppress validated file copy.
                     // Publication/identity and file validation above still fail closed.

@@ -229,7 +229,7 @@ final class CareerCurrentAuthorityParity
                     $counts['encoded']++;
                     $counts['decoded']++;
                     $json = json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-                    $serialized = strlen(serialize($payload));
+                    $serialized = strlen(serialize($stored));
                     $gzip = strlen(base64_decode((string) $stored['payload'], true) ?: '');
                     $bytes['serialized_total'] += $serialized;
                     $bytes['max_single_key'] = max($bytes['max_single_key'], $serialized);
@@ -241,7 +241,7 @@ final class CareerCurrentAuthorityParity
                     if ($includeCapacity && $redisMode === 'disposable') {
                         foreach (['candidate', 'active', 'lkg'] as $version) {
                             $key = $this->payloadKey($slug, $locale, $version);
-                            Cache::forever($key, $payload);
+                            Cache::forever($key, $stored);
                             $redisMemory['disposable_probe_write_count']++;
                             $memoryUsageKeys[] = $key;
                         }

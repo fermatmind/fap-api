@@ -23,8 +23,8 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         self::assertSame(CareerCurrentAuthorityParity::MODE_PACKAGE, $receipt['mode']);
         self::assertSame('pass', $receipt['status']);
         self::assertSame(4, $receipt['architecture_slice']['counts']['locale_pages']);
-        self::assertSame(3, $receipt['architecture_slice']['content_states']['enhanced']);
-        self::assertSame(1, $receipt['architecture_slice']['content_states']['legacy']);
+        self::assertSame(4, $receipt['architecture_slice']['content_states']['enhanced']);
+        self::assertSame(0, $receipt['architecture_slice']['content_states']['legacy']);
         self::assertSame(1046, $receipt['full_scan']['counts']['slugs']);
         self::assertSame(2092, $receipt['full_scan']['counts']['locale_pages']);
         self::assertSame(2092, $receipt['full_scan']['counts']['encoded']);
@@ -70,6 +70,24 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         $this->expectException(\App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure::class);
         $this->expectExceptionMessage('CURRENT_CONTENT_V3_FILE_HASH_MISMATCH');
         $parity->scanFiles($authority);
+    }
+
+    public function test_capacity_accounts_for_the_same_compressed_envelope_as_the_page_cache(): void
+    {
+        $loader = app(\App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader::class);
+        $authority = $loader->indexForPublish(base_path());
+        $pages = app(\App\Domain\Career\Display\CareerPageProjector::class);
+        $codec = app(\App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader::class);
+        $parity = new CareerCurrentAuthorityParity($loader, $codec, $pages);
+        $scan = (new \ReflectionMethod($parity, 'scanPages'))->invoke($parity, $authority, ['actors'], true, 'none');
+        $bytes = 0;
+        foreach (['en', 'zh-CN'] as $locale) {
+            $page = $pages->project($loader->pageFromPublishIndex($authority, 'actors', $locale));
+            $bytes += strlen(serialize($codec->encode($page)));
+        }
+        self::assertSame(2, $scan['counts']['locale_pages']);
+        self::assertSame($bytes, $scan['bytes']['serialized_total']);
+        self::assertSame(3 * $bytes, $scan['bytes']['worst_state_amplification']);
     }
 
     public function test_it_is_deterministic_for_the_same_sha_package_compiler_and_codec(): void
