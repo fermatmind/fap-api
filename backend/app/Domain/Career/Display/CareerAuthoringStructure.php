@@ -259,7 +259,7 @@ final class CareerAuthoringStructure
         }
         $structure = $page['authoring_structure'];
         $schema = self::schema();
-        if ($page['locale'] !== 'zh-CN' || ! is_array($structure)
+        if (! in_array($page['locale'] ?? null, CareerCurrentAuthorityPackage::LOCALES, true) || ! is_array($structure)
             || self::keys($structure) !== ['contract_version', 'inventory', 'module_order', 'slots']
             || ($structure['contract_version'] ?? null) !== self::VERSION
             || ($structure['module_order'] ?? null) !== $schema['module_order']

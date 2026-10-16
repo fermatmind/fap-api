@@ -24,12 +24,41 @@ final class CareerAuthoringStructureTest extends TestCase
 
     private function baseline(): array
     {
-        return (new CareerAuthoringLayout)->baseline($this->page());
+        $baseline = $this->page()['authoring_structure'];
+        unset($baseline['inventory']);
+
+        return $baseline;
     }
 
     private function migrate(array $page): array
     {
         return (new CareerAuthoringLayout)->migrate($page, $this->baseline());
+    }
+
+    public function test_authoring_bindings_support_english_without_changing_inventory(): void
+    {
+        $page = $this->page();
+        $page['locale'] = 'en';
+        CareerAuthoringStructure::assert($page);
+        self::assertSame($page['authoring_structure']['inventory'], CareerAuthoringStructure::inventory($page, $page['authoring_structure']['slots']));
+        self::assertArrayNotHasKey('authoring_structure', CareerAuthoringStructure::publicContent($page));
+    }
+
+    public function test_english_authoring_bindings_still_reject_inventory_drift(): void
+    {
+        $page = $this->page();
+        $page['locale'] = 'en';
+        array_pop($page['authoring_structure']['inventory']);
+        $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+        CareerAuthoringStructure::assert($page);
+    }
+
+    public function test_authoring_bindings_reject_unsupported_locales(): void
+    {
+        $page = $this->page();
+        $page['locale'] = 'fr';
+        $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+        CareerAuthoringStructure::assert($page);
     }
 
     public function test_composed_display_reference_covers_its_exact_source_items(): void

@@ -79,6 +79,26 @@ final class CareerContentV3FactResolverTest extends TestCase
         );
     }
 
+    public function test_english_monthly_derivations_preserve_rounding_and_reject_wrong_values(): void
+    {
+        foreach ([['$83,680', '$6,973', ', rounded'], ['¥78,500', 'Approximately ¥6,540', ', rounded to the nearest ten yuan']] as [$annual, $monthly, $suffix]) {
+            $content = $this->content();
+            $content['locale'] = 'en';
+            $content['fact_register']['facts'][0]['display_value'] = $annual;
+            $content['fact_register']['facts'][1]['display_value'] = $monthly;
+            $content['fact_register']['facts'][1]['derivation'] = '{{fact:bls-us-accountants-wage-median-2025}} ÷ 12'.$suffix;
+            $resolved = (new CareerContentV3FactResolver)->resolve($content);
+            self::assertSame($monthly, $resolved['fact_register']['facts'][1]['display_value']);
+            $content['fact_register']['facts'][1]['display_value'] = '$1';
+            try {
+                (new CareerContentV3FactResolver)->resolve($content);
+                self::fail('Wrong English derived values must fail closed.');
+            } catch (CareerCurrentAuthorityPackageFailure $failure) {
+                self::assertSame('CURRENT_CONTENT_V3_FACT_DERIVATION_INVALID', $failure->safeCode);
+            }
+        }
+    }
+
     /** @return array<string,mixed> */
     private function content(): array
     {

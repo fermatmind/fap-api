@@ -64,7 +64,7 @@ final class CareerContentV3FactResolver
                 continue;
             }
             if (preg_match(
-                '/\A\{\{fact:([a-z0-9]+(?:[._-][a-z0-9]+)*)\}\}\s*÷\s*12，(按十元)?四舍五入\z/u',
+                '/\A\{\{fact:([a-z0-9]+(?:[._-][a-z0-9]+)*)\}\}\s*÷\s*12(?:，(按十元)?四舍五入|, rounded( to the nearest ten yuan)?)\z/u',
                 $derivation,
                 $match,
             ) !== 1) {
@@ -74,7 +74,7 @@ final class CareerContentV3FactResolver
             $derived = $fact['display_value'] ?? null;
             $sourceNumber = $this->number($source);
             $derivedNumber = $this->number($derived);
-            $roundingUnit = ($match[2] ?? '') === '按十元' ? 10 : 1;
+            $roundingUnit = (($match[2] ?? '') === '按十元' || ($match[3] ?? '') !== '') ? 10 : 1;
             $expected = $sourceNumber === null ? null : round(($sourceNumber / 12) / $roundingUnit) * $roundingUnit;
             if ($sourceNumber === null || $derivedNumber === null || $expected !== $derivedNumber) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FACT_DERIVATION_INVALID');
