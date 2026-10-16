@@ -32,6 +32,10 @@ final class EnneagramWorkplaceArticleRefresh
 
     public const PACKAGE_SHA256 = '7c69957baa03ff8f1db01fefa40349500b27d5401b78107b10745f2571fc6e95';
 
+    public const CONTEXT_PACKAGE = 'content_assets/enneagram_public/articles/20261016-workplace-context-links-v1/package.json';
+
+    public const CONTEXT_PACKAGE_SHA256 = '259f05fa4ce8362e476d88217e4753eae91cfeb8438b0cfe8cf17910aee1e278';
+
     private const SLUG = 'enneagram-workplace-friction-core-motivations';
 
     private const GROUP = 'tg_enneagram_workplace_friction_core_motivations_2026v1';
@@ -46,7 +50,16 @@ final class EnneagramWorkplaceArticleRefresh
 
     public function publish(bool $dryRun = false): array
     {
-        $package = $this->package();
+        return $this->publishPackage($this->package(), $dryRun);
+    }
+
+    public function publishContextLinks(bool $dryRun = false): array
+    {
+        return $this->publishPackage($this->package(true), $dryRun);
+    }
+
+    private function publishPackage(array $package, bool $dryRun): array
+    {
         $result = DB::transaction(function () use ($package, $dryRun): array {
             $articles = Article::withoutGlobalScopes()->withTrashed()->where('org_id', 0)
                 ->where('slug', self::SLUG)->whereIn('locale', ['zh-CN', 'en'])
@@ -57,6 +70,7 @@ final class EnneagramWorkplaceArticleRefresh
             if ($articles->count() !== 2) {
                 throw new RuntimeException('Workplace Article pair is incomplete.');
             }
+            $protectedBefore = [];
             $replay = 0;
             foreach (['zh-CN' => 68, 'en' => 69] as $locale => $id) {
                 $article = $articles[$locale];
@@ -79,7 +93,8 @@ final class EnneagramWorkplaceArticleRefresh
                     || $article->content_md !== $revision->content_md) {
                     throw new RuntimeException('Workplace Article identity, hold or working revision drift: '.$locale);
                 }
-                $replay += $revision->authority_package_sha256 === self::PACKAGE_SHA256 ? 1 : 0;
+                $protectedBefore[$locale] = ['article' => $article->getAttributes(), 'seo' => $article->seoMeta->getAttributes()];
+                $replay += $revision->authority_package_sha256 === $package['_sha256'] ? 1 : 0;
             }
             if ($replay === 2) {
                 $this->assertPublished($articles, $package);
@@ -113,10 +128,15 @@ final class EnneagramWorkplaceArticleRefresh
                 $article = $articles[$locale]->fresh(['seoMeta']);
                 $previous = (int) $article->published_revision_id;
                 $candidate = $package['candidates'][$locale];
+                if (isset($candidate['cover_image_alt'])) {
+                    // Alt participates in the Article source hash; set it before
+                    // the native workspace creates the new revision.
+                    $article->forceFill(['cover_image_alt' => $candidate['cover_image_alt']])->saveQuietly();
+                }
                 $revision = $this->workspace->saveWorkingRevision($article, [
                     'title' => $article->title, 'excerpt' => $candidate['excerpt'],
                     'content_md' => $candidate['content_md'], 'seo_title' => $article->seoMeta->seo_title,
-                    'seo_description' => $article->seoMeta->seo_description,
+                    'seo_description' => $candidate['seo_description'] ?? $article->seoMeta->seo_description,
                     'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
                 ], $owner);
                 $sourceHash = (string) $articles['zh-CN']->fresh()->source_version_hash;
@@ -127,7 +147,7 @@ final class EnneagramWorkplaceArticleRefresh
                     $sourceHash = $projection->computeSourceVersionHash();
                 }
                 $revision->forceFill(['source_version_hash' => $sourceHash, 'translated_from_version_hash' => $sourceHash,
-                    'authority_source_package' => self::PACKAGE, 'authority_package_sha256' => self::PACKAGE_SHA256,
+                    'authority_source_package' => $package['_path'], 'authority_package_sha256' => $package['_sha256'],
                     'authority_source_hash' => $candidate['content_sha256'],
                     'authority_metadata_json' => ['review' => $package['review'], 'baseline' => $baseline,
                         'delivery' => 'automatic_trunk_migration']])->saveQuietly();
@@ -149,14 +169,38 @@ final class EnneagramWorkplaceArticleRefresh
                     ?? new EditorialReview(['org_id' => 0, 'content_type' => 'article', 'content_id' => $article->id]);
                 $editorial->forceFill(['workflow_state' => 'approved', 'reviewed_by_admin_user_id' => null,
                     'reviewed_at' => now(), 'last_transition_at' => now(),
-                    'note' => 'Automatic exact-package review: '.self::PACKAGE_SHA256])->save();
+                    'note' => 'Automatic exact-package review: '.$package['_sha256']])->save();
                 $this->reviews->bindOrCreateApproved(null, 'cms_article_review',
                     'enneagram-workplace:'.$article->id.':revision:'.$article->published_revision_id,
                     [['surface_id' => 'article', 'record' => $article],
                         ['surface_id' => 'article_translation_revision', 'record' => $article->publishedRevision],
-                        ['surface_id' => 'editorial_review', 'record' => $editorial]], $owner, self::PACKAGE_SHA256);
+                        ['surface_id' => 'editorial_review', 'record' => $editorial]], $owner, $package['_sha256']);
             }
             $this->assertPublished($articles, $package);
+            if ($package['_context_links']) {
+                foreach ($articles as $locale => $article) {
+                    $before = $protectedBefore[$locale];
+                    $after = ['article' => $article->getAttributes(), 'seo' => $article->seoMeta->getAttributes()];
+                    $allowed = ['excerpt', 'content_md', 'content_html', 'source_version_hash', 'translated_from_version_hash',
+                        'working_revision_id', 'published_revision_id', 'updated_at'];
+                    if (isset($package['candidates'][$locale]['cover_image_alt'])) {
+                        $allowed[] = 'cover_image_alt';
+                    }
+                    foreach ($allowed as $field) {
+                        unset($before['article'][$field], $after['article'][$field]);
+                    }
+                    foreach (['seo_description', 'og_description', 'updated_at'] as $field) {
+                        unset($before['seo'][$field], $after['seo'][$field]);
+                    }
+                    $schema = json_decode($before['seo']['schema_json'], true, 64, JSON_THROW_ON_ERROR);
+                    data_set($schema, 'editorial_package_v1.body_hash', $package['candidates'][$locale]['content_sha256']);
+                    $before['seo']['schema_json'] = $schema;
+                    $after['seo']['schema_json'] = $article->seoMeta->schema_json;
+                    if (! Hash::sameValue($before, $after)) {
+                        throw new RuntimeException('Workplace Article non-target metadata changed.');
+                    }
+                }
+            }
             foreach ($articles as $article) {
                 $article->refresh()->load(['publishedRevision', 'seoMeta']);
                 app(ArticleMaterialDecisionService::class)->recordPublished($article, $article->publishedRevision, now());
@@ -164,10 +208,11 @@ final class EnneagramWorkplaceArticleRefresh
             app(AuditLogger::class)->log(Request::create('/ops/articles/enneagram-workplace-refresh', 'POST'),
                 'enneagram_workplace_bilingual_refresh', 'article', meta: [
                     'actor' => 'automatic_trunk_migration', 'article_ids' => [68, 69],
-                    'package_sha256' => self::PACKAGE_SHA256, 'review' => $package['review'],
+                    'package_sha256' => $package['_sha256'], 'review' => $package['review'],
                     'source_revision_id' => $articles['zh-CN']->published_revision_id,
                     'target_revision_id' => $articles['en']->published_revision_id,
                     'search_submission' => false, 'discoverability_changed' => false, 'media_changed' => false,
+                    'media_alt_changed' => $package['_context_links'],
                 ], reason: 'reviewed_enneagram_workplace_text_update');
 
             return ['status' => 'published', 'changed' => 2];
@@ -200,14 +245,16 @@ final class EnneagramWorkplaceArticleRefresh
         return $result;
     }
 
-    private function package(): array
+    private function package(bool $contextLinks = false): array
     {
-        $bytes = file_get_contents(base_path(self::PACKAGE));
-        if (! is_string($bytes) || ! hash_equals(self::PACKAGE_SHA256, hash('sha256', $bytes))) {
+        $path = $contextLinks ? self::CONTEXT_PACKAGE : self::PACKAGE;
+        $sha = $contextLinks ? self::CONTEXT_PACKAGE_SHA256 : self::PACKAGE_SHA256;
+        $bytes = file_get_contents(base_path($path));
+        if (! is_string($bytes) || ! hash_equals($sha, hash('sha256', $bytes))) {
             throw new RuntimeException('Workplace Article package digest mismatch.');
         }
         $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
-        if ($package['schema'] !== 'enneagram.workplace_article_refresh.v1'
+        if ($package['schema'] !== ($contextLinks ? 'enneagram.workplace_context_links.v1' : 'enneagram.workplace_article_refresh.v1')
             || $package['review']['decision'] !== 'PASS' || $package['review']['role'] !== 'fm_independent_reviewer'
             || array_keys($package['candidates']) !== ['zh-CN', 'en']) {
             throw new RuntimeException('Workplace Article package scope or review mismatch.');
@@ -218,7 +265,7 @@ final class EnneagramWorkplaceArticleRefresh
             }
         }
 
-        return $package;
+        return $package + ['_path' => $path, '_sha256' => $sha, '_context_links' => $contextLinks];
     }
 
     private function baseline($articles, array $package): ?string
@@ -229,10 +276,18 @@ final class EnneagramWorkplaceArticleRefresh
                 $expected = $baseline[$locale];
                 $editorial = EditorialReview::withoutGlobalScopes()->where('org_id', 0)->where('content_type', 'article')
                     ->where('content_id', $article->id)->lockForUpdate()->first();
+                $seo = $article->seoMeta->getAttributes();
+                if ($package['_context_links']) {
+                    $seo = array_intersect_key($seo, $expected['seo']);
+                    $seo['schema_json'] = $article->seoMeta->schema_json;
+                }
+                $noteMatches = $package['_context_links']
+                    ? $editorial?->note === $expected['editorial_review_note']
+                    : ! filled($editorial?->note);
                 $matches = $matches && Hash::sameValue($this->values($article, array_keys($expected['article'])), $expected['article'])
                     && Hash::sameValue($this->values($article->publishedRevision, array_keys($expected['revision'])), $expected['revision'])
-                    && Hash::sameValue($article->seoMeta->getAttributes(), $expected['seo'])
-                    && $editorial?->workflow_state === $expected['editorial_review_state'] && ! filled($editorial?->note);
+                    && Hash::sameValue($seo, $expected['seo'])
+                    && $editorial?->workflow_state === $expected['editorial_review_state'] && $noteMatches;
             }
             if ($matches) {
                 return $name;
@@ -258,20 +313,36 @@ final class EnneagramWorkplaceArticleRefresh
             if (! $expected || $article->content_md !== $package['candidates'][$locale]['content_md']
                 || $article->excerpt !== $package['candidates'][$locale]['excerpt']
                 || $revision->content_md !== $article->content_md || $revision->excerpt !== $article->excerpt
-                || $revision->authority_package_sha256 !== self::PACKAGE_SHA256
+                || $revision->authority_package_sha256 !== $package['_sha256']
                 || $revision->source_version_hash !== $source->source_version_hash
                 || $revision->translated_from_version_hash !== $source->source_version_hash
                 || ($locale === 'en' && ($article->translated_from_version_hash !== $source->source_version_hash
                     || (int) $article->source_article_id !== 68 || $article->source_locale !== 'zh-CN'))) {
                 throw new RuntimeException('Workplace Article public readback failed.');
             }
+            if ($package['_context_links'] && ($revision->seo_description !== $package['candidates'][$locale]['seo_description']
+                || $article->seoMeta->seo_description !== $revision->seo_description
+                || $article->seoMeta->og_description !== $revision->seo_description
+                || (isset($package['candidates'][$locale]['cover_image_alt'])
+                    && $article->cover_image_alt !== $package['candidates'][$locale]['cover_image_alt']))) {
+                throw new RuntimeException('Workplace Article description or alt readback failed.');
+            }
             $protected = array_diff_key($expected['article'], array_flip(['excerpt', 'content_md', 'content_html',
                 'source_article_id', 'source_locale', 'translation_status', 'translated_from_article_id',
                 'source_version_hash', 'translated_from_version_hash', 'working_revision_id', 'published_revision_id', 'updated_at']));
+            if (isset($package['candidates'][$locale]['cover_image_alt'])) {
+                unset($protected['cover_image_alt']);
+            }
             $seo = $article->seoMeta->getAttributes();
             $oldSeo = $expected['seo'];
             unset($seo['updated_at'], $oldSeo['updated_at']);
-            $oldSchema = json_decode($oldSeo['schema_json'], true, 64, JSON_THROW_ON_ERROR);
+            if ($package['_context_links']) {
+                $seo = array_intersect_key($seo, $oldSeo);
+                $oldSeo['seo_description'] = $package['candidates'][$locale]['seo_description'];
+                $oldSeo['og_description'] = $package['candidates'][$locale]['seo_description'];
+            }
+            $oldSchema = is_array($oldSeo['schema_json']) ? $oldSeo['schema_json']
+                : json_decode($oldSeo['schema_json'], true, 64, JSON_THROW_ON_ERROR);
             data_set($oldSchema, 'editorial_package_v1.body_hash', $package['candidates'][$locale]['content_sha256']);
             $oldSeo['schema_json'] = $oldSchema;
             $seo['schema_json'] = $article->seoMeta->schema_json;
