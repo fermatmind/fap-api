@@ -9,8 +9,9 @@ import { buildExecution, publish, recoveryFailure } from './public-content-53-pu
 import { assertDom, pathFor, read } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
+const translationDigest=()=>createHash('sha256').update('fermatmind.public_content_translation.v1\n'+['translation-batch.json','translation-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 function translatedTestsHubDom() {
- const row=readCandidateRows(root).candidates.find(row=>row.page_id==='PAGE-32');
+ const row=readCandidateRows(root,translationDigest()).candidates.find(row=>row.page_id==='PAGE-32');
  const payload=row.snapshot.payload_json;
  const list={'@type':'ItemList',inLanguage:'en',numberOfItems:payload.quickStart.items.length,itemListElement:payload.quickStart.items.map((item,index)=>({'@type':'ListItem',position:index+1,name:item.title,description:item.description,url:'https://fermatmind.com'+item.href}))};
  const cards=[payload.families.items[1].tests[0].description,payload.families.items[0].tests[1].outputLabel];
@@ -35,9 +36,9 @@ test('tests hub JSON-LD must retain the exact translated text, identity, route a
  for(const altered of [html.replace(script,''),html.replace(script,script+script),html.replace('tests-hub-quickstart-en','unrelated-data'),html.replace('application/ld+json','text/javascript'),html.replace(JSON.stringify(list),'{')])
   assert.throws(()=>assertDom(row,altered,before,'production'),/QUICKSTART_JSONLD/);
 });
-test('active full-page package binds only the reviewed eligible English pages',()=>{
- const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
- assert.equal(binding.expected_row_count,9);assert.equal(rows.length,9);
+test('previous translation package remains readable by its own immutable digest',()=>{
+ const rows=readCandidateRows(root,translationDigest()).candidates;
+ assert.equal(rows.length,9);
  assert.equal(new Set(rows.map(row=>row.page_id)).size,9);
  const allowed=['help-about','help-team','help-used-and-mentioned','help-payment-refund','help-unlock-failure','help-result-recovery','tests','tests_category_career','tests_category_personality'];
  assert.deepEqual(rows.map(row=>row.identity.slug).sort(),allowed.sort());
@@ -46,6 +47,36 @@ test('active full-page package binds only the reviewed eligible English pages',(
  assert.ok(rows.find(row=>row.identity.slug==='help-unlock-failure').snapshot.content_md.includes('24 hours'));
  assert.equal(rows.filter(row=>row.staging_source_snapshot).length,3);
  assert.equal(rows.find(row=>row.page_id==='PAGE-32').kind,'surface');
+});
+test('active amendment binds only the reviewed existing article body',()=>{
+ const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
+ assert.equal(binding.expected_row_count,1);assert.equal(rows.length,1);
+ const row=rows[0];assert.equal(row.page_id,'PAGE-04');assert.equal(row.kind,'article');
+ assert.deepEqual(row.identity,{org_id:0,slug:'big-five-conscientiousness-low-procrastination-task-plan',locale:'en'});
+ for(const before of [row.before,row.staging_before]) {
+  assert.equal(row.snapshot.title,before.title);assert.equal(row.snapshot.excerpt,before.excerpt);
+ }
+ assert.ok(row.snapshot.content_md.includes('statistical associations'));
+});
+test('C02 article QA follows stripped CMS markers and still requires actual reader prose',()=>{
+ const source=readCandidateRows(root).candidates[0];
+ const marker='<!-- body_visual:big_five_conscientiousness_task_plan_flow -->';
+ const paragraph='Record a task opportunity when it occurs; do not create tasks just to fill seven days.';
+ assert.ok(source.snapshot.content_md.includes(marker));assert.ok(source.snapshot.content_md.includes(paragraph));
+ // A reader DOM fixture using the actual C02 marker and prose; contract CI
+ // intentionally runs without Composer or a frontend application build.
+ const row={...source,snapshot:{...source.snapshot,content_md:marker+'\n\n'+paragraph}};
+ const url='https://fermatmind.com'+pathFor(row);
+ const html='<html><head><meta charset="utf-8"><link rel="canonical" href="'+url+'"></head><body><main><h1>'+row.snapshot.title+'</h1><p>'+paragraph+'</p></main></body></html>';
+ const before={dom:{canonical:[url],robots:[],alternates:[]}};
+ assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ assert.throws(()=>assertDom(row,html.replace(paragraph,''),before,'production'),/VISIBLE_BODY/);
+ const small={...row,snapshot:{...row.snapshot,content_md:'Before <!-- FM_SLOT:mid_article --> after.\n\n&lt;!-- body_visual:example --&gt;\n\nRequired prose.'}};
+ const visible='<html><head><link rel="canonical" href="'+url+'"></head><body><main><h1>'+row.snapshot.title+'</h1><p>Before after.</p><p>Required prose.</p></main></body></html>';
+ assert.doesNotThrow(()=>assertDom(small,visible,before,'production'));
+ assert.throws(()=>assertDom(small,visible.replace('Required prose.',''),before,'production'),/VISIBLE_BODY/);
+ const unknown={...small,snapshot:{...small.snapshot,content_md:'<!-- unrecognized:marker -->\n\nRequired prose.'}};
+ assert.throws(()=>assertDom(unknown,visible,before,'production'),/VISIBLE_BODY/);
 });
 test('previous immutable 50-row package remains fully validated by its own exact digest',()=>{
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -196,7 +227,7 @@ test('ASCII FAQ control comments stay in the exact API candidate without becomin
 });
 
 test('category acceptance binds metadata and visible sections without mistaking unused final CTA data for DOM prose',()=>{
- for(const row of readCandidateRows(root).candidates.filter(row=>['PAGE-33','PAGE-34'].includes(row.page_id))) {
+ for(const row of readCandidateRows(root,translationDigest()).candidates.filter(row=>['PAGE-33','PAGE-34'].includes(row.page_id))) {
   const payload=row.snapshot.payload_json,path=pathFor(row);
   const strings=value=>typeof value==='string'?[value]:value&&typeof value==='object'?Object.values(value).flatMap(strings):[];
   const copy=['hero','featured','allTests','differences','trust','resources','breadcrumb'].flatMap(key=>strings(payload[key]));

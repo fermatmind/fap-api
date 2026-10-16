@@ -158,7 +158,10 @@ export function assertDom(row,html,before,environment) {
     }
   }
   const copy=row.snapshot.content_md;
-  const lines = copy ? copy.split('\n').map(line=>readerLine(line,row.kind)).filter(line=>line.trim() && !/^[\s|:-]+$/.test(line)).flatMap(line=>line.split('|'))
+  // Match the article reader's stripInternalCmsSlotMarkers. These are CMS
+  // placement instructions, while the API still must retain exact package bytes.
+  const readerCopy = row.kind === 'article' ? copy?.replace(/(?:<!--|&lt;!--)\s*(?:FM_SLOT|body_visual):[\s\S]*?(?:-->|--&gt;)/gi,'') : copy;
+  const lines = readerCopy ? readerCopy.split('\n').map(line=>readerLine(line,row.kind)).filter(line=>line.trim() && !/^[\s|:-]+$/.test(line)).flatMap(line=>line.split('|'))
     : row.kind === 'profile' ? row.snapshot.sections.flatMap(s=>[s.title,s.body_md]).filter(Boolean)
       : translatedTestsHub ? changedStrings(row.before.payload_json.families,row.snapshot.payload_json.families)
         : translatedCategory ? ['hero','featured','allTests','differences','trust','resources','breadcrumb']

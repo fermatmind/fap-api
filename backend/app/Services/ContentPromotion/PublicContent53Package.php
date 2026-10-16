@@ -79,6 +79,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/article-amendment.json')) {
+            $chain = "fermatmind.public_content_article_amendment.v1\n";
+            foreach (['article-amendment.json', 'article-amendment-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readArticleAmendment($root, $expectedSha256);
+            }
+        }
         // Both immutable package identities remain readable; the workflow selects
         // the active translation package and binds its exact digest.
         if (is_file($root.'/'.self::PACKAGE.'/translation-batch.json')) {
@@ -144,6 +153,58 @@ final class PublicContent53Package
         }
 
         return ['candidates' => $package['candidates'], 'package_sha256' => $expectedSha256];
+    }
+
+    /** Body-only amendments retain the existing native CAS, rollback and readers. */
+    private function readArticleAmendment(string $root, string $sha): array
+    {
+        $bytes = $this->bytes($root, 'article-amendment.json');
+        $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $proof = json_decode($this->bytes($root, 'article-amendment-review.json'), true, 64, JSON_THROW_ON_ERROR);
+        $rows = $package['candidates'] ?? [];
+        if (($package['schema'] ?? null) !== 'fermatmind.public_content_article_amendment.v1'
+            || ! is_array($rows) || count($rows) < 1 || count($rows) > 33
+            || ($proof['schema'] ?? null) !== 'fermatmind.public_content_article_amendment.review.v1'
+            || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
+            throw new DomainException('public_content_53_amendment_review_or_scope_invalid');
+        }
+        $seen = [];
+        foreach ($rows as $row) {
+            $id = $row['page_id'] ?? '';
+            $identity = $row['identity'] ?? [];
+            if (! isset(self::TARGETS[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'article'
+                || ($identity['locale'] ?? null) !== 'en'
+                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity']) !== []
+                || ($identity['org_id'] ?? null) !== 0
+                || ['article', $identity['slug'] ?? null, $identity['locale'] ?? null] !== self::TARGETS[$id]
+                || ($proof['pages'][$id] ?? null) !== 'PASS') {
+                throw new DomainException('public_content_53_amendment_identity_invalid');
+            }
+            $seen[$id] = true;
+            foreach (['before', 'staging_before', 'snapshot'] as $version) {
+                $copy = $row[$version] ?? [];
+                $fields = array_keys($copy);
+                sort($fields);
+                if ($fields !== ['content_md', 'excerpt', 'title']
+                    || array_filter($copy, static fn ($value): bool => ! is_string($value) || trim($value) === '')) {
+                    throw new DomainException('public_content_53_amendment_fields_invalid');
+                }
+                foreach (['title', 'excerpt'] as $field) {
+                    if ($copy[$field] !== $row['snapshot'][$field]) {
+                        throw new DomainException('public_content_53_amendment_nonbody_changed');
+                    }
+                }
+            }
+            foreach (['source_identity', 'staging_source_identity'] as $field) {
+                if (! is_array($row[$field] ?? null) || ($row[$field]['translation_group_id'] ?? '') === ''
+                    || ! in_array($row[$field]['source_locale'] ?? '', ['en', 'zh-CN'], true)) {
+                    throw new DomainException('public_content_53_amendment_source_identity_invalid');
+                }
+            }
+        }
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
     }
 
     private function readTranslation(string $root, string $sha): array

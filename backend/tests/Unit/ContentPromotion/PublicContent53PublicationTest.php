@@ -537,6 +537,87 @@ PHP;
         }
     }
 
+    private function amendmentDigest(?string $root = null): string
+    {
+        $chain = "fermatmind.public_content_article_amendment.v1\n";
+        foreach (['article-amendment.json', 'article-amendment-review.json'] as $name) {
+            $chain .= $name."\n".hash_file('sha256', ($root ?? base_path()).'/'.PublicContent53Package::PACKAGE.'/'.$name)."\n";
+        }
+
+        return hash('sha256', $chain);
+    }
+
+    #[DataProvider('environments')]
+    public function test_article_amendment_preserves_other_pages_drafts_and_flags_and_can_restore(string $environment): void
+    {
+        config(['content_promotion.public_content_53_environment' => $environment]);
+        $sha = $this->amendmentDigest();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
+        self::assertCount(1, $rows);
+        $row = $rows[0];
+        $article = $this->article($row['identity'], PublicContent53Package::before($row), $row['source_identity']['translation_group_id'], 'en');
+        $other = $this->article(['org_id' => 0, 'slug' => 'unselected-article', 'locale' => 'en'],
+            ['title' => 'Unselected', 'excerpt' => 'Keep me', 'content_md' => 'Keep original body'], 'other-group', 'en');
+        $otherBefore = $other->fresh()->toArray();
+        $states = app(PublicContent53State::class);
+        $before = $states->read($sha);
+        $states->assertBaseline($rows);
+        $context = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 1, str_repeat('e', 64));
+        $writer = app(PublicContent53Writer::class);
+        $after = DB::transaction(fn () => $writer->publish($context, $before));
+        self::assertSame(1, $after['written_count']);
+        self::assertSame($row['snapshot']['content_md'], $article->fresh()->content_md);
+        self::assertSame($otherBefore, $other->fresh()->toArray());
+        self::assertSame($before['PAGE-04']['working'], $after['state']['PAGE-04']['working']);
+        self::assertSame($before['PAGE-04']['relations'], $after['state']['PAGE-04']['relations']);
+        self::assertSame($before['PAGE-04']['values']['is_indexable'], $after['state']['PAGE-04']['values']['is_indexable']);
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($context, $after['state']))['written_count']);
+        DB::transaction(fn () => $writer->restore($context, $before, $after['state']));
+        self::assertSame($before, $states->read($sha));
+        $newOwner = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('f', 40), str_repeat('b', 64), str_repeat('c', 64), '12346', 1, str_repeat('d', 64), 1, str_repeat('e', 64));
+        self::assertSame(1, DB::transaction(fn () => $writer->publish($newOwner, $before))['written_count']);
+    }
+
+    public function test_article_amendment_rejects_nonbody_changes_and_unreviewed_bytes(): void
+    {
+        $root = sys_get_temp_dir().'/public-content-amendment-'.bin2hex(random_bytes(6));
+        $directory = $root.'/'.PublicContent53Package::PACKAGE;
+        mkdir($directory, 0700, true);
+        $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/article-amendment.json')), true);
+        $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/article-amendment-review.json')), true);
+        try {
+            foreach (['nonbody', 'identity', 'extra-field', 'review'] as $case) {
+                $candidate = $package;
+                $review = $proof;
+                if ($case === 'nonbody') {
+                    $candidate['candidates'][0]['snapshot']['title'] = 'Changed title';
+                } elseif ($case === 'identity') {
+                    $candidate['candidates'][0]['identity']['slug'] = 'unselected-article';
+                } elseif ($case === 'extra-field') {
+                    $candidate['candidates'][0]['snapshot']['is_indexable'] = true;
+                }
+                $bytes = json_encode($candidate, JSON_UNESCAPED_UNICODE);
+                $review['candidate_sha256'] = $case === 'review' ? str_repeat('0', 64) : hash('sha256', $bytes);
+                file_put_contents($directory.'/article-amendment.json', $bytes);
+                file_put_contents($directory.'/article-amendment-review.json', json_encode($review));
+                try {
+                    app(PublicContent53Package::class)->read($root, $this->amendmentDigest($root));
+                    self::fail('Invalid amendment must be rejected');
+                } catch (DomainException $e) {
+                    self::assertStringStartsWith('public_content_53_amendment_', $e->getMessage());
+                }
+            }
+        } finally {
+            unlink($directory.'/article-amendment.json');
+            unlink($directory.'/article-amendment-review.json');
+            rmdir($directory);
+            rmdir($root.'/content_assets');
+            rmdir($root);
+        }
+    }
+
     private function seedTargets(): void
     {
         (new ScaleRegistrySeeder)->run();
