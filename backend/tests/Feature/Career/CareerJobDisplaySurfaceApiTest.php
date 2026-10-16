@@ -53,13 +53,15 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         self::assertStringNotContainsString('display_surface_v1', $encoded);
     }
 
-    public function test_legacy_current_page_keeps_its_public_identity_without_inventing_body_content(): void
+    public function test_published_english_current_page_exposes_its_authored_body(): void
     {
-        $this->getJson('/api/v0.5/career/jobs/health-educators?locale=en')
+        $response = $this->getJson('/api/v0.5/career/jobs/health-educators?locale=en')
             ->assertOk()
-            ->assertJsonPath('career_page.content.content_state', 'legacy')
-            ->assertJsonPath('career_page.content.blocks', [])
+            ->assertJsonPath('career_page.locale', 'en')
+            ->assertJsonPath('career_page.content.content_state', 'enhanced')
             ->assertJsonPath('career_page.subject.canonical_slug', 'health-educators')
+            ->assertJsonPath('seo_contract.index_eligible', true)
             ->assertJsonMissingPath('display_surface_v1');
+        self::assertNotEmpty($response->json('career_page.content.blocks'));
     }
 }

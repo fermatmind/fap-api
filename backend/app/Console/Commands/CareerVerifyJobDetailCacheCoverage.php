@@ -274,7 +274,11 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
             }
         }
 
-        $postRepair = $this->coverageService->inspect($locales)['report'];
+        // With no repair targets there were no writes to invalidate the complete
+        // inspection. Recheck the full cohort whenever any target was repaired.
+        $postRepair = $targets === []
+            ? $inspection['report']
+            : $this->coverageService->inspect($locales)['report'];
         $postRepair['minimum_target_count'] = (int) ($inspection['report']['minimum_target_count'] ?? 0);
         $postRepair['minimum_target_count_met'] = (bool) ($inspection['report']['minimum_target_count_met'] ?? false);
         $postRepair['coverage_status'] = $postRepair['status'];

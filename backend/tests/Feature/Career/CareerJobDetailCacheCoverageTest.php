@@ -539,6 +539,42 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         Queue::assertNothingPushed();
     }
 
+    public function test_sync_repair_reuses_complete_inspection_when_no_targets_need_writes(): void
+    {
+        $this->bindProjection(['one', 'two']);
+        $readiness = new CareerJobDetailExposureReadinessFixture;
+        $this->app->instance(CareerJobDetailCacheCoverageService::class, new CareerJobDetailCacheCoverageService(
+            app(CareerRuntimePublishProjectionVisibility::class),
+            $readiness,
+        ));
+        Queue::fake();
+        $before = Cache::getStore()->all();
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--repair-missing-sync' => true,
+            '--minimum-targets' => 4,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exit);
+        $this->assertSame(1, $readiness->batchCallCount);
+        $this->assertSame(0, $readiness->singleCallCount);
+        $this->assertSame('sync_repair_completed', $report['status']);
+        $this->assertSame('ready', $report['coverage_status']);
+        $this->assertSame(4, $report['expected_target_count']);
+        $this->assertSame(4, $report['eligible_target_count']);
+        $this->assertSame(4, $report['covered_target_count']);
+        $this->assertSame(4, $report['minimum_target_count']);
+        $this->assertTrue($report['minimum_target_count_met']);
+        $this->assertFalse($report['repair']['write_executed']);
+        $this->assertSame(0, $report['repair']['repairable_target_count']);
+        $this->assertSame(0, $report['repair']['cached_target_count']);
+        $this->assertSame(0, $report['repair']['failed_target_count']);
+        $this->assertSame($before, Cache::getStore()->all());
+        Queue::assertNothingPushed();
+    }
+
     public function test_sync_repair_warms_only_missing_targets_and_rechecks_complete_coverage(): void
     {
         $this->createOccupation('missing');
