@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Events\PublicAuthorityChanged;
 use App\Filament\Ops\Support\ContentReleaseAudit;
+use App\Filament\Ops\Support\ContentReleaseFollowUp;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
@@ -13,6 +14,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use App\Support\ArticleSourceTargetSnapshot;
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use RuntimeException;
@@ -31,7 +33,7 @@ final class ArticlePublishService
         private readonly ArticleMaterialDecisionService $materialDecisions,
     ) {}
 
-    public function publishArticle(int $articleId, string $source = 'article_publish_service'): Article
+    public function publishArticle(int $articleId, string $source = 'article_publish_service', bool $dispatchFollowUp = true): Article
     {
         if ($articleId <= 0) {
             throw new InvalidArgumentException('article_id must be positive.');
@@ -72,9 +74,18 @@ final class ArticlePublishService
             return $article->fresh(['publishedRevision']) ?? $article;
         });
 
-        ContentReleaseAudit::log('article', $article, $source);
-        $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
-        $this->dispatchUrlTruthChange($article, 'publish');
+        // Keep the database audit inside a possible outer bilingual transaction.
+        // Only its external follow-up and reader side effects wait for commit.
+        ContentReleaseAudit::log('article', $article, $source, dispatchFollowUp: false);
+        DB::afterCommit(function () use ($article, $source, $dispatchFollowUp): void {
+            if ($dispatchFollowUp) {
+                $request = app()->bound('request') && request() instanceof Request
+                    ? request() : Request::create('/ops/content-release', 'POST');
+                ContentReleaseFollowUp::dispatch('article', $article, $source, $request);
+            }
+            $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
+            $this->dispatchUrlTruthChange($article, 'publish');
+        });
 
         return $article;
     }
