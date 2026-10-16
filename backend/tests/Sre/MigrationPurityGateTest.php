@@ -68,6 +68,8 @@ final class MigrationPurityGateTest extends TestCase
         '2026_09_21_010000_align_riasec_english_landing_parity.php',
         // EnneagramBilingualLandingCopyTest covers exact fields, tenant preservation, idempotence and bilingual conflict rollback.
         '2026_10_15_130000_refine_enneagram_bilingual_landing_copy.php',
+        // EnneagramContextLinksTest covers exact bilingual FAQ links, atomic conflicts and post-commit cache closeout.
+        '2026_10_16_120000_link_enneagram_landing_context_articles.php',
     ];
 
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';

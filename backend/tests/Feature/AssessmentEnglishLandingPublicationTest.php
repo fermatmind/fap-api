@@ -199,6 +199,15 @@ class AssessmentEnglishLandingPublicationTest extends TestCase
                         data_set($expectedEnglish, $update['collection'], $collection);
                     }
                 }
+                if ($code === 'ENNEAGRAM') {
+                    $bilingualCopy = json_decode(file_get_contents(database_path('data/assessment_enneagram_bilingual_20261015.json')), true, 512, JSON_THROW_ON_ERROR);
+                    foreach ($bilingualCopy['locales']['en'] as $update) {
+                        $collection = data_get($expectedEnglish, $update['collection']);
+                        $index = array_search($update['id'], array_column($collection, 'id'), true);
+                        $collection[$index][$update['field']] = $update['value'];
+                        data_set($expectedEnglish, $update['collection'], $collection);
+                    }
+                }
                 $this->assertSame($expectedEnglish, $value['en']);
                 $value['en']['why_choose']['title'] = 'Later English revision';
                 $value['en']['faq'][0]['a'] = 'Later FAQ revision';
