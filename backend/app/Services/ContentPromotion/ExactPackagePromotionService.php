@@ -278,7 +278,7 @@ final class ExactPackagePromotionService
         $iqArticleLaunch = $adapter instanceof IqPublicArticlePromotionAdapter && $context->lane === 'W3'
             && $context->subscope === IqPublicArticlePromotionAdapter::SUBSCOPE
             && (($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256 && $expected === 2)
-                || ($context->packageSha256 === IqPublicArticlePackage::MATRIX_SHA256 && $expected === 4))
+                || (in_array($context->packageSha256, [IqPublicArticlePackage::MATRIX_SHA256, IqPublicArticlePackage::COMPARISON_SHA256], true) && $expected === 4))
             && $phase === 'publish';
         $boundaryCounts = [];
         foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count', 'deploy_mutation_count'] as $boundary) {

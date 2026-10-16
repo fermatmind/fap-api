@@ -1,0 +1,55 @@
+{
+  "reviewer_role": "fm_independent_reviewer",
+  "review_date": "2026-10-16",
+  "independent_review_count": 1,
+  "scope": "Frozen bilingual comparison article IQ-09 and contextual IQ-03 guide link; content only.",
+  "source_commit": "f10cb1445bae5299d324a6c995fb9b2db4f13721",
+  "sources": [
+    "https://www.123test.com/iq-test/",
+    "https://www.arealme.com/iq/en/",
+    "https://www.arealme.com/iq/cn/",
+    "https://test.mensa.no/Home/Test/en",
+    "https://mensa.org.uk/test-your-iq/",
+    "https://mensa.org.uk/mensa-online-iq-test/"
+  ],
+  "limitations": [
+    "Synthetic UX observations are not measurement validation; reviewer did not repeat the four sessions.",
+    "Complete profiles, certificates, paid reports, resume and timer expiry were not tested.",
+    "Rendering, deployment, discovery and ranking are separate acceptance."
+  ],
+  "schema": "iq.article_exact_payload_review.v1",
+  "targets": [
+    {
+      "page_id": "IQ-03",
+      "locale": "zh-CN",
+      "decision": "PASS",
+      "body_sha256": "08af929df00843562952868b38f08056efec15a9adff4a72f0adb8f4ad7bf981",
+      "candidate_json_sha256": "fe41063cc71646d105bfd0354a63d7c621f79337851cb2001554ee03cf2eb9be",
+      "snapshot_json_sha256": "9331403432d05cf83a84fad2cbc4acd885502b1340eb476a6c76d876eb2c041f"
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "en",
+      "decision": "PASS",
+      "body_sha256": "1ff830d1b73975f47186df6a3324444631fae2b6165ad9ca5aae8c494f4f7648",
+      "candidate_json_sha256": "79d77f131a644493f57653af554a022e3b6190d14d0f4847d82fcb2be455f409",
+      "snapshot_json_sha256": "7f4202e9c503160503be1ddfc577b9025531dc74d835475046a4f4ab3839fffa"
+    },
+    {
+      "page_id": "IQ-09",
+      "locale": "zh-CN",
+      "decision": "PASS",
+      "body_sha256": "b42c4d6146d3f284cbef6c2ebdc01a744e393b9c5b2e228bd5c04558529e7725",
+      "candidate_json_sha256": "db95a92a6299cdf48c56532817689327898d5ccf3bdddffc3697e8d64239d760",
+      "snapshot_json_sha256": "608a90c97768afafc22bab369d67c93987415f453fb3cdbaf5724f6887e56b6a"
+    },
+    {
+      "page_id": "IQ-09",
+      "locale": "en",
+      "decision": "PASS",
+      "body_sha256": "e30d7ac6963dc9c3d72bf377f31902e5d2c5c898101322e5827a07714ef55886",
+      "candidate_json_sha256": "d7114cb5e80d03f5251df0c1ea398db3492281d407b10fb5e0dd7120c502ddb8",
+      "snapshot_json_sha256": "f7ad6bdb3087dea62b386304133692035334728ce6af31e6f95c4267ae20598f"
+    }
+  ]
+}

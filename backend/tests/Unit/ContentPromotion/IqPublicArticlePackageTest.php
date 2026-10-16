@@ -33,6 +33,23 @@ final class IqPublicArticlePackageTest extends TestCase
         self::assertSame(4, IqPublicArticlePackage::rowCountForSha(IqPublicArticlePackage::MATRIX_SHA256));
     }
 
+    public function test_comparison_package_retains_the_complete_guide_except_one_contextual_link(): void
+    {
+        $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::COMPARISON_SHA256);
+        $previous = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::MATRIX_SHA256);
+        self::assertSame(['IQ-03', 'IQ-03', 'IQ-09', 'IQ-09'], array_column($rows, 'page_id'));
+        foreach (array_slice($rows, 0, 2) as $index => $guide) {
+            $body = preg_replace('~^(?:If you are choosing between providers|如果你还在挑选网站)[^\n]+\n\n~mu', '', $guide['snapshot']['content_md']);
+            self::assertSame($previous[$index]['snapshot']['content_md'], $body);
+            foreach (['title', 'excerpt', 'seo_title', 'seo_description', 'faq_items'] as $field) {
+                self::assertSame($previous[$index]['snapshot'][$field], $guide['snapshot'][$field]);
+            }
+        }
+        self::assertTrue(IqPublicArticlePackage::launchesDiscoverability(IqPublicArticlePackage::COMPARISON_SHA256, IqPublicArticlePackage::COMPARISON_SLUG));
+        self::assertFalse(IqPublicArticlePackage::launchesDiscoverability(IqPublicArticlePackage::COMPARISON_SHA256, 'iq-test-tool-guide'));
+        self::assertFalse(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::COMPARISON_SHA256, IqPublicArticlePackage::MATRIX_SLUG));
+    }
+
     public function test_mensa_package_is_an_independently_reviewed_pair_without_existing_article_updates(): void
     {
         $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::MENSA_SHA256);

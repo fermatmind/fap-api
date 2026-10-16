@@ -1,0 +1,53 @@
+{
+  "reviewer_role": "fm_independent_reviewer",
+  "review_date": "2026-10-16",
+  "independent_review_count": 1,
+  "scope": "Frozen bilingual comparison article IQ-09 and contextual IQ-03 guide link; content only.",
+  "source_commit": "f10cb1445bae5299d324a6c995fb9b2db4f13721",
+  "sources": [
+    "https://www.123test.com/iq-test/",
+    "https://www.arealme.com/iq/en/",
+    "https://www.arealme.com/iq/cn/",
+    "https://test.mensa.no/Home/Test/en",
+    "https://mensa.org.uk/test-your-iq/",
+    "https://mensa.org.uk/mensa-online-iq-test/"
+  ],
+  "limitations": [
+    "Synthetic UX observations are not measurement validation; reviewer did not repeat the four sessions.",
+    "Complete profiles, certificates, paid reports, resume and timer expiry were not tested.",
+    "Rendering, deployment, discovery and ranking are separate acceptance."
+  ],
+  "schema": "iq.article_source_review.v1",
+  "pages": [
+    {
+      "page_id": "IQ-03",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "decision": "PASS",
+          "body_sha256": "08af929df00843562952868b38f08056efec15a9adff4a72f0adb8f4ad7bf981"
+        },
+        {
+          "locale": "en",
+          "decision": "PASS",
+          "body_sha256": "1ff830d1b73975f47186df6a3324444631fae2b6165ad9ca5aae8c494f4f7648"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-09",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "decision": "PASS",
+          "body_sha256": "b42c4d6146d3f284cbef6c2ebdc01a744e393b9c5b2e228bd5c04558529e7725"
+        },
+        {
+          "locale": "en",
+          "decision": "PASS",
+          "body_sha256": "e30d7ac6963dc9c3d72bf377f31902e5d2c5c898101322e5827a07714ef55886"
+        }
+      ]
+    }
+  ]
+}

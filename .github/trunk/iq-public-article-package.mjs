@@ -15,6 +15,8 @@ export const mensaPackagePath = 'content_assets/iq_public/articles/20261015-mens
 export const mensaPackageSha256 = '32230e74353bab576906b97d58c171579163557354abca3b87888edaecd9811c';
 export const matrixPackagePath = 'content_assets/iq_public/articles/20261015-matrix-v1';
 export const matrixPackageSha256 = 'e6a16981341c69a66e3d2e8f39ba67047acf47f1421313dff913dc1c98e4facf';
+export const comparisonPackagePath = 'content_assets/iq_public/articles/20261016-comparison-v1';
+export const comparisonPackageSha256 = '7cc18306373b74247d410bc00aebee3df675c7b751d8253fd5d683340b1c19f9';
 export const executorPaths = [
   "app/Console/Commands/ContentPromoteExactPackage.php",
   "app/Http/Controllers/API/V0_5/Cms/ArticleController.php",
@@ -54,7 +56,8 @@ export function inspectPackage(backendRoot, expectedPackageSha256 = packageSha25
     : expectedPackageSha256 === seoPackageSha256 ? { path: seoPackagePath, count: 2 }
     : expectedPackageSha256 === parityPackageSha256 ? { path: parityPackagePath, count: 6 }
     : expectedPackageSha256 === mensaPackageSha256 ? { path: mensaPackagePath, count: 2 }
-    : expectedPackageSha256 === matrixPackageSha256 ? { path: matrixPackagePath, count: 4 } : null;
+    : expectedPackageSha256 === matrixPackageSha256 ? { path: matrixPackagePath, count: 4 }
+    : expectedPackageSha256 === comparisonPackageSha256 ? { path: comparisonPackagePath, count: 4 } : null;
   if (!selected || readCandidateRows(root, expectedPackageSha256).length !== selected.count) throw new Error('IQ_ARTICLE_PACKAGE_SCOPE_INVALID');
   const material = executorPaths.map(path => {
     const file = resolve(root, path);
@@ -72,6 +75,11 @@ export function workflowSignature(binding, key, source, run, attempt) {
   return createHmac('sha256', key).update(material).digest('hex');
 }
 export function isIqArticleOnlyPromotionRegistration(before, after) {
+  const comparisonRoot = `        '${comparisonPackagePath}',\n`;
+  if (after.includes(comparisonRoot) && !before.includes(comparisonRoot)) {
+    const without = after.replace(comparisonRoot, '');
+    return without === before || isIqArticleOnlyPromotionRegistration(before, without);
+  }
   const matrixRoot = `        '${matrixPackagePath}',\n`;
   if (after.includes(matrixRoot) && !before.includes(matrixRoot)) {
     const without = after.replace(matrixRoot, '');

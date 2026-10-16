@@ -2,7 +2,7 @@ import { execFileSync, spawn } from 'node:child_process';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readCandidateRows, packageSha256, mensaPackageSha256, matrixPackageSha256 } from './iq-public-article-package.mjs';
+import { readCandidateRows, packageSha256, mensaPackageSha256, matrixPackageSha256, comparisonPackageSha256 } from './iq-public-article-package.mjs';
 import { closeOwnedBrowser } from './eq-new-source-online-qa.mjs';
 
 const clean = value => String(value).replace(/\s+/gu, ' ').trim();
@@ -322,7 +322,7 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     if (!Array.isArray(faqs) || JSON.stringify(faqs.map(item => ({ question: item.question, answer: item.answer }))) !== JSON.stringify(row.snapshot.faq_items)) throw new Error('IQ_ARTICLE_ONLINE_FAQ_MISMATCH');
     const before = prestate[`${row.identity.locale}:${row.identity.slug}`];
     const searchLaunch = expectedPackageSha256 === mensaPackageSha256
-      || (expectedPackageSha256 === matrixPackageSha256 && row.operation === 'new_source_pair');
+      || ([matrixPackageSha256, comparisonPackageSha256].includes(expectedPackageSha256) && row.operation === 'new_source_pair');
     const qualifications = searchLaunch ? { is_indexable: true, sitemap_eligible: true, llms_eligible: true } : before;
     if (!before || Object.entries(before).some(([,value]) => typeof value !== 'boolean') || !qualifications
       || Object.entries(qualifications).some(([key, value]) => typeof value !== 'boolean' || article[key] !== value)) throw new Error('IQ_ARTICLE_ONLINE_QUALIFICATION_MISMATCH');

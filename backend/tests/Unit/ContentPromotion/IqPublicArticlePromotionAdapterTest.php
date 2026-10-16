@@ -27,6 +27,131 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
 
     private array $receiptFiles = [];
 
+    public function test_comparison_mixed_publication_preserves_existing_qualifications_drafts_and_supports_restore_then_new_owner(): void
+    {
+        $this->seedExisting();
+        $this->publish();
+        $guides = Article::query()->where('slug', 'iq-test-tool-guide')->get()->keyBy('id')->map->getAttributes()->all();
+        $controls = Article::query()->where('slug', '!=', 'iq-test-tool-guide')->orderBy('id')->get()->map->getAttributes()->all();
+        $drafts = ArticleTranslationRevision::query()->where('revision_status', ArticleTranslationRevision::STATUS_MACHINE_DRAFT)->orderBy('id')->get()->map->getAttributes()->all();
+        [$adapter, $context] = $this->importComparison();
+        $result = $adapter->publish($context);
+        self::assertSame(4, $result['published_count']);
+        self::assertSame(4, $result['written_count']);
+        foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count'] as $field) {
+            self::assertSame(2, $result[$field]);
+        }
+        $normalize = new \ReflectionMethod(ExactPackagePromotionService::class, 'normalizeResult');
+        $service = app(ExactPackagePromotionService::class);
+        self::assertSame(2, $normalize->invoke($service, $context, $adapter, 'publish', 'content_promotion_publish_receipt', $result, null)['indexability_mutation_count']);
+        foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count'] as $field) {
+            $invalid = $result;
+            $invalid[$field] = 4;
+            try {
+                $normalize->invoke($service, $context, $adapter, 'publish', 'content_promotion_publish_receipt', $invalid, null);
+                self::fail('Guide discoverability must not be released by a mixed content package.');
+            } catch (DomainException $error) {
+                self::assertSame('prohibited_mutation_reported', $error->getMessage());
+            }
+        }
+        self::assertSame(4, $adapter->liveQa($context)['readback_count']);
+        self::assertSame(0, $adapter->publish($context)['indexability_mutation_count']);
+        foreach ($guides as $id => $saved) {
+            $guide = Article::query()->findOrFail($id);
+            foreach (['is_indexable', 'sitemap_eligible', 'llms_eligible', 'working_revision_id'] as $field) {
+                if ($field !== 'working_revision_id' || $saved[$field] !== $saved['published_revision_id']) {
+                    self::assertSame($saved[$field], $guide->getAttributes()[$field]);
+                }
+            }
+        }
+        foreach (Article::query()->where('slug', IqPublicArticlePackage::COMPARISON_SLUG)->get() as $article) {
+            self::assertTrue($article->is_indexable);
+            self::assertTrue($article->sitemap_eligible);
+            self::assertTrue($article->llms_eligible);
+            self::assertSame('index,follow', $article->seoMeta->robots);
+            self::assertTrue(data_get($article->seoMeta->schema_json, 'editorial_package_v1.hreflang_gate_v1.enabled'));
+        }
+        self::assertSame($controls, Article::query()->whereNotIn('slug', ['iq-test-tool-guide', IqPublicArticlePackage::COMPARISON_SLUG])->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertSame($drafts, ArticleTranslationRevision::query()->where('revision_status', ArticleTranslationRevision::STATUS_MACHINE_DRAFT)->orderBy('id')->get()->map->getAttributes()->all());
+        $adapter->rollback($context, $result['rollback_reference']);
+        $adapter->rollback($context, $result['rollback_reference']);
+        foreach ($guides as $id => $saved) {
+            $guide = Article::query()->findOrFail($id);
+            foreach (['content_md', 'published_revision_id', 'working_revision_id', 'is_indexable', 'sitemap_eligible', 'llms_eligible'] as $field) {
+                self::assertSame($saved[$field], $guide->getAttributes()[$field]);
+            }
+        }
+        foreach (Article::query()->where('slug', IqPublicArticlePackage::COMPARISON_SLUG)->get() as $article) {
+            self::assertFalse($article->is_public);
+            self::assertFalse($article->is_indexable);
+            self::assertFalse($article->sitemap_eligible);
+            self::assertFalse($article->llms_eligible);
+        }
+        [$adapter, $newContext] = $this->importComparison('9');
+        self::assertSame(4, $adapter->publish($newContext)['published_count']);
+        self::assertSame(4, $adapter->liveQa($newContext)['readback_count']);
+    }
+
+    public function test_comparison_final_locale_failure_restores_all_four_rows_without_changing_foreign_work(): void
+    {
+        $this->seedExisting();
+        $this->publish();
+        [$adapter, $context] = $this->importComparison();
+        $articles = Article::query()->orderBy('id')->get()->map->getAttributes()->all();
+        $metas = ArticleSeoMeta::query()->orderBy('id')->get()->map->getAttributes()->all();
+        $revisions = ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all();
+        $fail = true;
+        Article::saving(function (Article $article) use (&$fail): void {
+            if ($fail && $article->slug === IqPublicArticlePackage::COMPARISON_SLUG && $article->locale === 'en' && $article->status === 'published') {
+                throw new \RuntimeException('synthetic_comparison_final_locale_failure');
+            }
+        });
+        try {
+            $adapter->publish($context);
+            self::fail('Final locale failure must abort the complete transaction.');
+        } catch (\RuntimeException $error) {
+            self::assertSame('synthetic_comparison_final_locale_failure', $error->getMessage());
+        } finally {
+            $fail = false;
+        }
+        self::assertSame($articles, Article::query()->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertSame($metas, ArticleSeoMeta::query()->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertSame($revisions, ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertTrue($adapter->recoverFailedPublication($context));
+    }
+
+    public function test_comparison_existing_operator_identity_prevents_any_draft_import(): void
+    {
+        $this->seedExisting();
+        $this->publish();
+        Article::query()->create(['org_id' => 0, 'slug' => IqPublicArticlePackage::COMPARISON_SLUG, 'locale' => 'en', 'title' => 'Operator draft', 'content_md' => 'Keep these bytes', 'status' => 'draft']);
+        $before = ArticleTranslationRevision::query()->count();
+        try {
+            $this->importComparison();
+            self::fail('An existing operator identity must not be taken over.');
+        } catch (DomainException $error) {
+            self::assertSame('iq_article_new_identity_collision', $error->getMessage());
+        }
+        self::assertSame($before, ArticleTranslationRevision::query()->count());
+        self::assertSame('Keep these bytes', Article::query()->where('slug', IqPublicArticlePackage::COMPARISON_SLUG)->firstOrFail()->content_md);
+    }
+
+    private function importComparison(string $owner = '8'): array
+    {
+        $context = new PromotionContext(
+            packageDirectory: base_path(IqPublicArticlePackage::COMPARISON_PACKAGE), packageSha256: IqPublicArticlePackage::COMPARISON_SHA256,
+            lane: 'W3', subscope: IqPublicArticlePromotionAdapter::SUBSCOPE, sourceCommit: str_repeat($owner, 40),
+            executorReleaseSha256: str_repeat('b', 64), releasePolicySha256: hash('sha256', PromotionContextFactory::canonicalJson(config('content_promotion.release_policy'))),
+            workflowRunId: $owner === '8' ? '3001' : '3002', workflowRunAttempt: 1, workflowSignature: str_repeat('c', 64),
+            expectedRowCount: 4, idempotencyKey: hash('sha256', 'comparison-'.$owner),
+        );
+        $adapter = app(IqPublicArticlePromotionAdapter::class);
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $this->previous($context, 'cms_draft_import_receipt', $adapter->draftImport($context));
+
+        return [$adapter, $context];
+    }
+
     public function test_matrix_mixed_publication_preserves_existing_qualifications_drafts_and_supports_restore_then_new_owner(): void
     {
         $this->seedExisting();

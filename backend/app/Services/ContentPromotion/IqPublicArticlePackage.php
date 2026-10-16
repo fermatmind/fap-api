@@ -37,6 +37,12 @@ final class IqPublicArticlePackage
 
     public const MATRIX_SLUG = 'matrix-reasoning-rotation-vs-reflection';
 
+    public const COMPARISON_PACKAGE = 'content_assets/iq_public/articles/20261016-comparison-v1';
+
+    public const COMPARISON_SHA256 = '7cc18306373b74247d410bc00aebee3df675c7b751d8253fd5d683340b1c19f9';
+
+    public const COMPARISON_SLUG = 'online-iq-tests-compared';
+
     private const SCHEMA = 'fermatmind.iq_public_article_package.v1';
 
     private const SLUGS = [
@@ -61,6 +67,7 @@ final class IqPublicArticlePackage
             self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => self::PARITY_PACKAGE,
             self::MENSA_SHA256 => self::MENSA_PACKAGE,
             self::MATRIX_SHA256 => self::MATRIX_PACKAGE,
+            self::COMPARISON_SHA256 => self::COMPARISON_PACKAGE,
             default => throw new DomainException('iq_article_package_digest_mismatch'),
         };
     }
@@ -70,7 +77,7 @@ final class IqPublicArticlePackage
         self::pathForSha($sha);
 
         return match ($sha) {
-            self::MATRIX_SHA256 => 4, self::SEO_SHA256, self::MENSA_SHA256 => 2, self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => 6, default => 10
+            self::MATRIX_SHA256, self::COMPARISON_SHA256 => 4, self::SEO_SHA256, self::MENSA_SHA256 => 2, self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => 6, default => 10
         };
     }
 
@@ -79,6 +86,7 @@ final class IqPublicArticlePackage
         return ($sha === self::SHA256 && in_array($slug, self::SLUGS, true))
             || ($sha === self::MENSA_SHA256 && $slug === self::MENSA_SLUG)
             || ($sha === self::MATRIX_SHA256 && in_array($slug, [self::MATRIX_SLUG, self::SLUGS['IQ-03']], true))
+            || ($sha === self::COMPARISON_SHA256 && in_array($slug, [self::COMPARISON_SLUG, self::SLUGS['IQ-03']], true))
             || ($sha === self::SEO_SHA256 && $slug === self::SLUGS['IQ-03'])
             || (in_array($sha, [self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256], true) && in_array($slug, array_intersect_key(self::SLUGS, array_flip(['IQ-02', 'IQ-03', 'IQ-05'])), true));
     }
@@ -86,7 +94,8 @@ final class IqPublicArticlePackage
     public static function launchesDiscoverability(string $sha, string $slug): bool
     {
         return ($sha === self::MENSA_SHA256 && $slug === self::MENSA_SLUG)
-            || ($sha === self::MATRIX_SHA256 && $slug === self::MATRIX_SLUG);
+            || ($sha === self::MATRIX_SHA256 && $slug === self::MATRIX_SLUG)
+            || ($sha === self::COMPARISON_SHA256 && $slug === self::COMPARISON_SLUG);
     }
 
     /** @return list<array<string,mixed>> */
@@ -100,6 +109,7 @@ final class IqPublicArticlePackage
             self::SEO_SHA256 => ['IQ-03' => self::SLUGS['IQ-03']],
             self::MENSA_SHA256 => ['IQ-07' => self::MENSA_SLUG],
             self::MATRIX_SHA256 => ['IQ-03' => self::SLUGS['IQ-03'], 'IQ-08' => self::MATRIX_SLUG],
+            self::COMPARISON_SHA256 => ['IQ-03' => self::SLUGS['IQ-03'], 'IQ-09' => self::COMPARISON_SLUG],
             self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => array_intersect_key(self::SLUGS, array_flip(['IQ-02', 'IQ-03', 'IQ-05'])),
             default => self::SLUGS,
         };
@@ -131,7 +141,7 @@ final class IqPublicArticlePackage
         $boundaries = [
             'preserve_existing_indexability' => true,
             'preserve_foreign_working_revisions' => true,
-            'new_source_pair_indexable' => in_array($expectedSha256, [self::MENSA_SHA256, self::MATRIX_SHA256], true),
+            'new_source_pair_indexable' => in_array($expectedSha256, [self::MENSA_SHA256, self::MATRIX_SHA256, self::COMPARISON_SHA256], true),
             'search_submission' => false,
             'private_payload_write' => false,
             'eq_write' => false,
@@ -173,7 +183,7 @@ final class IqPublicArticlePackage
             $stem = $id.'-'.$locale;
             if (! isset($slugs[$id]) || ! in_array($locale, ['zh-CN', 'en'], true) || isset($seen[$stem])
                 || ($target['slug'] ?? null) !== $slugs[$id]
-                || ($target['operation'] ?? null) !== (in_array($id, ['IQ-06', 'IQ-07', 'IQ-08'], true) ? 'new_source_pair' : 'existing_public_update')) {
+                || ($target['operation'] ?? null) !== (in_array($id, ['IQ-06', 'IQ-07', 'IQ-08', 'IQ-09'], true) ? 'new_source_pair' : 'existing_public_update')) {
                 throw new DomainException('iq_article_package_scope_invalid');
             }
             $seen[$stem] = true;
@@ -194,7 +204,7 @@ final class IqPublicArticlePackage
                 || ($verdicts[0]['snapshot_json_sha256'] ?? null) !== hash('sha256', $files[$stem.'.snapshot.json'])) {
                 throw new DomainException('iq_article_review_unbound');
             }
-            $sourceFile = in_array($id, ['IQ-06', 'IQ-07', 'IQ-08'], true) ? 'iq-publication-three-fresh-result.json' : 'iq-all-source-fresh-result.json';
+            $sourceFile = in_array($id, ['IQ-06', 'IQ-07', 'IQ-08', 'IQ-09'], true) ? 'iq-publication-three-fresh-result.json' : 'iq-all-source-fresh-result.json';
             $sourceReview = json_decode($files[$sourceFile], true, 32, JSON_THROW_ON_ERROR);
             $sourceVerdicts = [];
             foreach ((array) ($sourceReview['pages'] ?? []) as $page) {

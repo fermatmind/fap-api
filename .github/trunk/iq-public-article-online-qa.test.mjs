@@ -5,7 +5,7 @@ import { mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'no
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createServer } from 'node:http';
-import { readCandidateRows, seoPackageSha256, mensaPackageSha256, matrixPackageSha256 } from './iq-public-article-package.mjs';
+import { readCandidateRows, seoPackageSha256, mensaPackageSha256, matrixPackageSha256, comparisonPackageSha256 } from './iq-public-article-package.mjs';
 import { assertSsrCandidate, articleDom, readOnlinePrestate, verifyOnlineCandidates, renderPage } from './iq-public-article-online-qa.mjs';
 
 const row = { identity: { locale: 'en', slug: 'iq-test-tool-guide' }, snapshot: {
@@ -313,9 +313,10 @@ test('diagram acceptance preserves visible line breaks, spaces and every marker'
   }
   assert.throws(() => assertSsrCandidate(original.replace('<pre>', '<pre hidden>'), candidate, meta), /IQ_ARTICLE_SSR_DIAGRAM_MISMATCH/);
 });
-test('matrix mixed package launches only its new pair and preserves guide qualifications', async () => {
-  const candidates = readCandidateRows(backend, matrixPackageSha256);
-  const prestate = await readOnlinePrestate('production', backend, onlineFetcher(undefined, true, candidates), matrixPackageSha256);
+for (const selectedSha of [matrixPackageSha256, comparisonPackageSha256]) {
+ test(`mixed package ${selectedSha.slice(0,8)} launches only its new pair and preserves guide qualifications`, async () => {
+  const candidates = readCandidateRows(backend, selectedSha);
+  const prestate = await readOnlinePrestate('production', backend, onlineFetcher(undefined, true, candidates), selectedSha);
   const launched = (payload, candidate) => {
     if (candidate.operation !== 'new_source_pair') return;
     if (payload.article) Object.assign(payload.article, { is_indexable: true, sitemap_eligible: true, llms_eligible: true,
@@ -331,7 +332,7 @@ test('matrix mixed package launches only its new pair and preserves guide qualif
   };
   const verify = mutate => verifyOnlineCandidates('production', backend, onlineFetcher((payload, candidate) => {
     launched(payload, candidate); mutate?.(payload, candidate);
-  }, false, candidates), renderer, prestate, matrixPackageSha256);
+  }, false, candidates), renderer, prestate, selectedSha);
   assert.deepEqual(await verify(), { api_readback_count: 4, seo_readback_count: 4, ssr_readback_count: 4, environment: 'production' });
   await assert.rejects(verify((payload, candidate) => {
     if (payload.article && candidate.operation === 'existing_public_update') payload.article.is_indexable = true;
@@ -340,3 +341,4 @@ test('matrix mixed package launches only its new pair and preserves guide qualif
     if (payload.meta && candidate.operation === 'new_source_pair' && candidate.identity.locale === 'en') delete payload.meta.alternates['zh-CN'];
   }), /IQ_ARTICLE_ONLINE_SEO_MISMATCH/);
 });
+}
