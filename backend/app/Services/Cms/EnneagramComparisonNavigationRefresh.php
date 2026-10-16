@@ -101,29 +101,47 @@ final class EnneagramComparisonNavigationRefresh
                 throw new RuntimeException('Comparison navigation public pair or working pointer drift.');
             }
 
-            $replay = $articles->filter(fn (Article $a): bool => $a->publishedRevision->authority_package_sha256 === self::PACKAGE_SHA256)->count();
-            if ($replay === 2) {
-                $this->assertPublished($articles, $package);
-
-                return ['status' => 'unchanged', 'changed' => 0];
-            }
-            if ($replay !== 0) {
-                throw new RuntimeException('Comparison navigation partial pair drift.');
-            }
-            $before = [];
             $editorial = [];
             foreach ($articles as $locale => $article) {
                 $id = self::IDS[$locale];
-                $expected = $package['baselines'][$locale];
-                if (! Hash::sameValue($this->values($article, array_keys($expected)), $expected)) {
-                    throw new RuntimeException('Comparison navigation exact baseline drift: '.$locale);
-                }
                 $editorial[$locale] = EditorialReview::withoutGlobalScopes()->where('org_id', 0)
                     ->where('content_type', 'article')->where('content_id', $id)->lockForUpdate()->first();
                 if ((! $initializeEnglish && ! $editorial[$locale])
                     || ($editorial[$locale] && $editorial[$locale]->workflow_state !== 'approved')
                     || (! $article->publishedRevision->approved_at && ! $article->publishedRevision->reviewed_at)) {
                     throw new RuntimeException('Comparison navigation existing editorial hold.');
+                }
+            }
+            $publicSeo = $this->publicSeoTargets($package);
+            $repairStagingSeo = false;
+            $replay = $articles->filter(fn (Article $a): bool => $a->publishedRevision->authority_package_sha256 === self::PACKAGE_SHA256)->count();
+            if ($replay === 2) {
+                $this->assertPublished($articles, $package);
+
+                $repairStagingSeo = $this->stagingSeoRepairRequired($articles, $package, $publicSeo);
+                if (! $repairStagingSeo) {
+                    $this->assertPublicSeo($articles, $publicSeo);
+
+                    return ['status' => 'unchanged', 'changed' => 0];
+                }
+            }
+            if ($replay !== 0 && ! $repairStagingSeo) {
+                throw new RuntimeException('Comparison navigation partial pair drift.');
+            }
+            $before = [];
+            foreach ($articles as $locale => $article) {
+                $id = self::IDS[$locale];
+                $expected = $package['baselines'][$locale];
+                if ($repairStagingSeo) {
+                    // Only the attested, exact old staging projection may
+                    // re-enter native publication after its body was delivered.
+                    $expected['content_md'] = $package['candidates'][$locale]['content_md'];
+                    $expected['content_html'] = null;
+                    $expected['reading_minutes'] = $package['candidates'][$locale]['reading_minutes'];
+                    $expected['published_revision_id'] = (int) $article->published_revision_id;
+                }
+                if (! Hash::sameValue($this->values($article, array_keys($expected)), $expected)) {
+                    throw new RuntimeException('Comparison navigation exact baseline drift: '.$locale);
                 }
                 $before[$locale] = ['article' => $article->getAttributes(), 'seo' => $article->seoMeta->getAttributes()];
             }
@@ -160,13 +178,15 @@ final class EnneagramComparisonNavigationRefresh
                 }
                 $revision = $this->workspace->saveWorkingRevision($article, [
                     'title' => $article->title, 'excerpt' => $article->excerpt,
-                    'content_md' => $candidate['content_md'], 'seo_title' => $article->seoMeta->seo_title,
-                    'seo_description' => $article->seoMeta->seo_description,
+                    'content_md' => $candidate['content_md'], 'seo_title' => $publicSeo[$locale]['seo_title'],
+                    'seo_description' => $publicSeo[$locale]['seo_description'],
                     'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
                 ], $owner);
                 $sourceHash = $locale === 'zh-CN' ? $revision->source_version_hash
                     : $articles['zh-CN']->fresh()->source_version_hash;
-                $revision->forceFill(['source_version_hash' => $sourceHash, 'translated_from_version_hash' => $sourceHash,
+                $revision->forceFill(['seo_title' => $publicSeo[$locale]['seo_title'],
+                    'seo_description' => $publicSeo[$locale]['seo_description'],
+                    'source_version_hash' => $sourceHash, 'translated_from_version_hash' => $sourceHash,
                     'authority_source_package' => self::PACKAGE, 'authority_package_sha256' => self::PACKAGE_SHA256,
                     'authority_source_hash' => $candidate['content_sha256'],
                     'authority_metadata_json' => ['delivery' => 'automatic_trunk_migration',
@@ -186,10 +206,11 @@ final class EnneagramComparisonNavigationRefresh
                 }
                 $article->refresh()->load(['publishedRevision', 'seoMeta']);
                 if (isset($before[$locale])) {
-                    // Native promotion aligns OG with revision SEO fields.
-                    // This navigation-only task retains the existing distinct
-                    // OG copy, including the verified older staging metadata.
+                    // Revision-backed public SEO and canonical DB SEO may
+                    // differ in legacy rows. Preserve both original authorities.
                     $article->seoMeta->forceFill([
+                        'seo_title' => $before[$locale]['seo']['seo_title'],
+                        'seo_description' => $before[$locale]['seo']['seo_description'],
                         'og_title' => $before[$locale]['seo']['og_title'],
                         'og_description' => $before[$locale]['seo']['og_description'],
                     ])->saveQuietly();
@@ -217,6 +238,7 @@ final class EnneagramComparisonNavigationRefresh
                 $articles[$locale] = $article;
             }
             $this->assertPublished($articles, $package);
+            $this->assertPublicSeo($articles, $publicSeo);
             foreach ($articles as $locale => $article) {
                 if ($initializeEnglish && $locale === 'en') {
                     app(ArticleMaterialDecisionService::class)->recordPublished($article, $article->publishedRevision, now());
@@ -281,6 +303,72 @@ final class EnneagramComparisonNavigationRefresh
                 ['surface_id' => 'article', 'record' => $article],
                 ['surface_id' => 'article_translation_revision', 'record' => $article->publishedRevision],
             ]);
+        }
+    }
+
+    private function publicSeoTargets(array $package): array
+    {
+        if ($package['_environment'] === 'staging') {
+            return ['zh-CN' => array_intersect_key($package['staging_source_snapshot']['revisions'][0],
+                array_flip(['seo_title', 'seo_description'])),
+                'en' => array_intersect_key($package['staging_initial_english']['seo'],
+                    array_flip(['seo_title', 'seo_description']))];
+        }
+        $targets = [];
+        foreach (self::IDS as $locale => $id) {
+            $baseline = $package['baselines'][$locale];
+            $revision = ArticleTranslationRevision::withoutGlobalScopes()
+                ->whereKey($baseline['published_revision_id'])->lockForUpdate()->first();
+            if (! $revision || (int) $revision->org_id !== 0 || (int) $revision->article_id !== $id
+                || $revision->locale !== $locale || $revision->content_md !== $baseline['content_md']) {
+                throw new RuntimeException('Comparison navigation original public SEO authority drift.');
+            }
+            $targets[$locale] = $this->values($revision, ['seo_title', 'seo_description']);
+        }
+
+        return $targets;
+    }
+
+    private function stagingSeoRepairRequired($articles, array $package, array $publicSeo): bool
+    {
+        if ($package['_environment'] !== 'staging') {
+            return false;
+        }
+        $fields = ['seo_title', 'seo_description', 'og_title', 'og_description'];
+        $originalDb = $package['staging_source_snapshot']['seo'][0];
+        foreach (['zh-CN' => $originalDb, 'en' => $package['staging_initial_english']['seo']] as $locale => $expected) {
+            if (! Hash::sameValue($this->values($articles[$locale]->seoMeta, $fields),
+                array_intersect_key($expected, array_flip($fields)))) {
+                throw new RuntimeException('Comparison navigation staging canonical SEO drift.');
+            }
+        }
+        if (! Hash::sameValue($this->values($articles['en']->publishedRevision, ['seo_title', 'seo_description']), $publicSeo['en'])) {
+            throw new RuntimeException('Comparison navigation staging English public SEO drift.');
+        }
+        $current = $this->values($articles['zh-CN']->publishedRevision, ['seo_title', 'seo_description']);
+        if (Hash::sameValue($current, $publicSeo['zh-CN'])) {
+            return false;
+        }
+        if (! Hash::sameValue($current, array_intersect_key($originalDb, array_flip(['seo_title', 'seo_description'])))) {
+            throw new RuntimeException('Comparison navigation staging unknown public SEO drift.');
+        }
+
+        foreach (['zh-CN' => 715, 'en' => 716] as $locale => $revisionId) {
+            if ((int) $articles[$locale]->published_revision_id !== $revisionId) {
+                throw new RuntimeException('Comparison navigation staging repair revision drift.');
+            }
+        }
+
+        return true;
+    }
+
+    private function assertPublicSeo($articles, array $publicSeo): void
+    {
+        foreach ($articles as $locale => $article) {
+            if (! Hash::sameValue($this->values($article->fresh(['publishedRevision'])->publishedRevision,
+                ['seo_title', 'seo_description']), $publicSeo[$locale])) {
+                throw new RuntimeException('Comparison navigation public SEO projection drift.');
+            }
         }
     }
 
