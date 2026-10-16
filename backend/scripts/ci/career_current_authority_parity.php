@@ -37,12 +37,14 @@ $emit = static function (array $receipt, string $receiptPath): never {
 };
 
 $failure = static function (string $code, string $releaseSha) use ($emit, $mode, $receiptPath): never {
+    $safeCode = preg_match('/\A[A-Z0-9_]+\z/', $code) === 1 ? $code : 'CAREER_PARITY_FAILED';
+    fwrite(STDERR, $safeCode."\n");
     $emit([
         'contract_version' => $mode === 'package'
             ? 'career.current_authority_package_scan.v1'
             : 'career.current_authority_parity.v2',
         'status' => 'fail',
-        'safe_error_code' => preg_match('/\A[A-Z0-9_]+\z/', $code) === 1 ? $code : 'CAREER_PARITY_FAILED',
+        'safe_error_code' => $safeCode,
         'mode' => $mode,
         'release_sha' => $releaseSha,
         'write_counts' => [
