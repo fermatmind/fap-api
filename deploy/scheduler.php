@@ -3,6 +3,21 @@
 namespace Deployer;
 
 task('scheduler:install-managed-cron', function () {
+    if (currentHost()->getAlias() === 'staging') {
+        // Staging must renew the ten-minute sitemap cache without running the
+        // production scheduler's mail, payment and publication commands.
+        $script = deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/install_staging_sitemap_cron.sh');
+        $sudoPrefix = deployCanSudoWwwData() ? 'sudo -n -u www-data --' : '';
+        run(
+            'php_bin="$(command -v {{bin/php}})"; test -n "$php_bin"; '.$sudoPrefix
+                .' /usr/bin/timeout --signal=TERM --kill-after=5s 30s bash '.$script
+                .' --php-bin="$php_bin"'
+                .' --deploy-path='.deployPlaceholderPathArg('{{deploy_path}}'),
+            timeout: 35,
+        );
+
+        return;
+    }
     if (deployUsesCareerContentPackage()) {
         writeln('<comment>Skip scheduler installation for Career body-only release.</comment>');
 

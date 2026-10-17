@@ -193,7 +193,8 @@ BASH);
     #[Test]
     public function deploy_bounds_queue_reload_and_chains_scheduler_heartbeat(): void
     {
-        $deploy = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
+        $deploy = file_get_contents(dirname(__DIR__, 3).'/deploy.php')
+            .file_get_contents(dirname(__DIR__, 3).'/deploy/scheduler.php');
 
         $this->assertStringContainsString("' --attempts=1'", $deploy);
         $this->assertStringContainsString("' --restart-timeout-seconds=390'", $deploy);
