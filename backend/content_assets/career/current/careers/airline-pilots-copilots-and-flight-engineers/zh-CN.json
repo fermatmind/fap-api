@@ -15989,8 +15989,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.caution_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.caution_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.experiment_heading": {
         "ref": null,
@@ -37455,6 +37461,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.caution_heading": "本页的职业和资格信息适用于哪些地区？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -38078,7 +38085,7 @@
       "text": "航空公司飞行员、副驾驶与飞行工程师：任务、工资与就业前景（O*NET 53-2011）"
     }
   },
-  "source_content_sha256": "db037ad2848fa84ddb46881fe953440a9c6322f228c5ce7293e40a22b2309b7b",
+  "source_content_sha256": "a6e7b21435939f79b38a69d419574ec77b04ecc0bdef2b709452547c1a677685",
   "subject": {
     "canonical_slug": "airline-pilots-copilots-and-flight-engineers",
     "name": "航空公司飞行员、副驾驶与飞行工程师",

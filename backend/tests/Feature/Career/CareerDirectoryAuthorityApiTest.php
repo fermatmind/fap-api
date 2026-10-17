@@ -109,20 +109,34 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
             ->assertNotFound();
     }
 
-    public function test_current_combination_names_reach_detail_directory_and_name_search(): void
+    public function test_current_names_reach_detail_directory_and_name_search(): void
     {
-        $slug = 'drywall-and-ceiling-tile-installers-and-tapers';
-        $title = '石膏板与吊顶板安装工及接缝处理工';
-        $this->createDirectoryOccupation($slug, 'Old installer', '旧安装工', 'construction', 'Construction');
-        $this->publishRuntimeProjection([$slug]);
+        $slugs = [
+            'drywall-and-ceiling-tile-installers-and-tapers',
+            'agents-and-business-managers-of-artists-performers-and-athletes',
+            'airline-pilots-copilots-and-flight-engineers',
+            'animal-control-workers',
+        ];
+        foreach ($slugs as $slug) {
+            $this->createDirectoryOccupation($slug, 'Old name', '旧名称', 'test-family', 'Test family');
+        }
+        $this->publishRuntimeProjection($slugs);
         $this->warmDirectoryAuthority();
-        $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
-            ->assertOk()->assertJsonPath('titles.canonical_zh', $title)
-            ->assertJsonPath('identity.canonical_slug', $slug)
-            ->assertJsonPath('career_page.subject.canonical_slug', $slug);
-        $this->getJson('/api/v0.5/career/directory?locale=zh-CN&q='.urlencode($title))
-            ->assertOk()->assertJsonPath('pagination.total', 1)
-            ->assertJsonPath('items.0.title', $title);
+        $reader = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class);
+        foreach ($slugs as $slug) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $title = $reader->subjectName($slug, $locale);
+                $field = $locale === 'en' ? 'canonical_en' : 'canonical_zh';
+                $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale='.$locale)
+                    ->assertOk()->assertJsonPath('titles.'.$field, $title)
+                    ->assertJsonPath('identity.canonical_slug', $slug)
+                    ->assertJsonPath('career_page.subject.canonical_slug', $slug);
+                $this->getJson('/api/v0.5/career/directory?locale='.$locale.'&q='.urlencode($title))
+                    ->assertOk()->assertJsonPath('pagination.total', 1)
+                    ->assertJsonPath('items.0.title', $title)
+                    ->assertJsonPath('items.0.slug', $slug);
+            }
+        }
     }
 
     public function test_current_source_scope_survives_legacy_transport_cleanup(): void

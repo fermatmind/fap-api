@@ -15989,8 +15989,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.caution_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.caution_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.experiment_heading": {
         "ref": null,
@@ -37455,6 +37461,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which direction are you more likely to fit?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
+      "interface.quick_decision.caution_heading": "Which jurisdictions does this page’s occupation and qualification information cover?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "US salary reference",
@@ -38078,7 +38085,7 @@
       "text": "Airline pilots, copilots, and flight engineers: tasks, wages, and employment outlook (O*NET 53-2011)"
     }
   },
-  "source_content_sha256": "994a555244e18c699856afdf6153eea7a1cb51f7cf659ead90c9658788d14b5f",
+  "source_content_sha256": "dbae5074d4f4c321ed60a58d6df786bd8837e22154aa4b7e6b33d43c6bb76337",
   "subject": {
     "canonical_slug": "airline-pilots-copilots-and-flight-engineers",
     "name": "Airline Pilots, Copilots, and Flight Engineers",

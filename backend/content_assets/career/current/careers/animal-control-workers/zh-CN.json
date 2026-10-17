@@ -15968,8 +15968,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.caution_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.caution_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.experiment_heading": {
         "ref": null,
@@ -37454,6 +37460,7 @@
     "interface": {
       "interface.fit.directions_heading": "怎样核对方向与准备？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.caution_heading": "纸面练习与现场操作有哪些权限边界？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37996,7 +38003,7 @@
       "text": "动物管控员：任务、工资与就业前景（O*NET 33-9011.00）"
     }
   },
-  "source_content_sha256": "91183d0c82ba47697e3593d1b89c487a6cd13c2e0d96d1f5648b3562a7cd094a",
+  "source_content_sha256": "72bcfcaae75da7e784d2e73ea0dc7bd6cb198d597a5f6701cadca6184c35ac88",
   "subject": {
     "canonical_slug": "animal-control-workers",
     "name": "动物管控员",

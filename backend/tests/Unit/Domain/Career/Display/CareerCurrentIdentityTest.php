@@ -16,6 +16,57 @@ use Tests\TestCase;
 
 final class CareerCurrentIdentityTest extends TestCase
 {
+    public function test_selected_current_names_replace_legacy_titles_without_changing_scope(): void
+    {
+        $identity = app(CareerCurrentIdentity::class);
+        $reader = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class);
+        foreach ([
+            'agents-and-business-managers-of-artists-performers-and-athletes',
+            'airline-pilots-copilots-and-flight-engineers',
+            'animal-control-workers',
+        ] as $slug) {
+            self::assertNull($identity->definition($slug));
+            foreach (['en', 'zh-CN'] as $locale) {
+                $title = $reader->subjectName($slug, $locale);
+                $old = [
+                    'identity' => ['canonical_slug' => $slug, 'occupation_uuid' => 'retained-id'],
+                    'title' => 'Old transport name',
+                    'titles' => ['canonical_en' => 'Old name', 'canonical_zh' => '旧名称', 'short_title_zh' => '旧简称', 'search_h1_zh' => '旧搜索名'],
+                    'soc_code' => 'unchanged-code',
+                    'ontology' => ['crosswalks' => [['source_code' => 'retained-crosswalk']]],
+                    'truth_layer' => ['jobs' => 42],
+                    'matched_jobs' => [['canonical_slug' => $slug, 'title' => 'Old recommendation']],
+                    'content_v3' => ['subject' => ['name' => 'Retained body']],
+                ];
+                $projected = $identity->projectPayload($old, $locale);
+                self::assertSame($title, $projected['title']);
+                self::assertSame($reader->subjectName($slug, 'en'), $projected['titles']['canonical_en']);
+                foreach (['canonical_zh', 'short_title_zh', 'search_h1_zh'] as $key) {
+                    self::assertSame($reader->subjectName($slug, 'zh-CN'), $projected['titles'][$key]);
+                }
+                self::assertSame($title, $projected['matched_jobs'][0]['title']);
+                foreach (['identity', 'soc_code', 'ontology', 'truth_layer', 'content_v3'] as $key) {
+                    self::assertSame($old[$key], $projected[$key]);
+                }
+                self::assertSame('Old transport name', $old['title']);
+                self::assertSame($projected, $identity->projectPayload($projected, $locale));
+                self::assertSame($slug, $identity->canonicalQuery($title));
+            }
+        }
+        $unselected = ['canonical_slug' => 'actors', 'title' => 'Unselected name'];
+        self::assertSame($unselected, $identity->projectPayload($unselected, 'zh-CN'));
+        self::assertSame('未匹配职业', $identity->canonicalQuery('未匹配职业'));
+    }
+
+    public function test_selected_name_authority_failure_does_not_return_a_legacy_title(): void
+    {
+        $reader = $this->createStub(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class);
+        $reader->method('authority')->willReturn(['manifest' => []]);
+        $reader->method('subjectName')->willThrowException(new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_PAGE_MISSING'));
+        $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+        (new CareerCurrentIdentity($reader))->projectPayload(['canonical_slug' => 'animal-control-workers', 'title' => '动物工人'], 'zh-CN');
+    }
+
     public function test_public_inventory_binds_storage_and_aliases_to_current_manifest(): void
     {
         $identity = app(CareerCurrentIdentity::class);

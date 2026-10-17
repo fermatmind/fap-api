@@ -15968,8 +15968,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.caution_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.caution_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.experiment_heading": {
         "ref": null,
@@ -37454,6 +37460,7 @@
     "interface": {
       "interface.fit.directions_heading": "How to check the direction and preparation?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
+      "interface.quick_decision.caution_heading": "What are the authority limits of paper exercises and on-site work?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. salary reference",
@@ -37996,7 +38003,7 @@
       "text": "Animal Control Workers: tasks, wages and employment prospects (O*NET 33-9011.00)"
     }
   },
-  "source_content_sha256": "f04a45322f45d30f9dacdea7b405bbe197b357781ec11b0cc1a06fa8cd81e356",
+  "source_content_sha256": "9a39ca1a666e5d1f35e4797811234907c6284b0e2770d014ce365650fb7bfd51",
   "subject": {
     "canonical_slug": "animal-control-workers",
     "name": "Animal Control Worker",
