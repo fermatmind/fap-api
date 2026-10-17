@@ -99,7 +99,7 @@ final class CareerCurrentIdentityTest extends TestCase
         $public = $identity->projectPayload($old, 'zh-CN');
         self::assertSame('retained-id', $public['identity']['occupation_uuid']);
         self::assertSame('石膏板与吊顶板安装工及接缝处理工', $public['titles']['canonical_zh']);
-        self::assertSame('Drywall and Ceiling Tile Installers and Tapers', $public['titles']['canonical_en']);
+        self::assertSame('Drywall and ceiling tile installers and tapers', $public['titles']['canonical_en']);
         self::assertSame(['47-2081.00', '47-2081', '47-2082.00', '47-2082'], array_column($public['ontology']['crosswalks'], 'source_code'));
         self::assertNull($public['truth_layer']['jobs_2024']);
         self::assertArrayNotHasKey('estimatedSalary', $public['structured_data']['occupation']);
