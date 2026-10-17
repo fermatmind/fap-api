@@ -9,6 +9,7 @@ use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Publish\Career1046DiscoverabilityReleaseGate;
 use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
+use App\Services\Career\CareerDirectoryReadModelBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SEO\SitemapGenerator;
 use FilesystemIterator;
@@ -29,6 +30,9 @@ final class Career1046DiscoverabilityReleaseCacheTransitionTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Publication is a valid independent input; these cases isolate the release gate or Current revision.
+        app()->instance(\App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility::class,
+            new \Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true));
         $this->originalStoragePath = storage_path();
         $this->storageRoot = sys_get_temp_dir().'/career-1046-public-surfaces-'.bin2hex(random_bytes(8));
         mkdir($this->storageRoot.'/framework/cache', 0750, true);
@@ -157,7 +161,7 @@ final class Career1046DiscoverabilityReleaseCacheTransitionTest extends TestCase
                     'updated_at' => '2026-08-12 00:00:00',
                 ];
             }
-            $cache->publishDirectoryReadModel($locale, ['items' => $items]);
+            $cache->publishDirectoryReadModel($locale, ['read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'locale' => $locale, 'items' => $items]);
         }
     }
 

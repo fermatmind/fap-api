@@ -7,6 +7,7 @@ namespace Tests\Feature\Console;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Career\CareerDirectoryReadModelBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Cms\Seo13ArticleSchemaReleaseService;
 use App\Services\SEO\SitemapCache;
@@ -271,8 +272,8 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
     private function publishEmptyCareerDirectories(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $cache->publishDirectoryReadModel('en', ['items' => []]);
-        $cache->publishDirectoryReadModel('zh-CN', ['items' => []]);
+        $cache->publishDirectoryReadModel('en', ['read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'locale' => 'en', 'items' => []]);
+        $cache->publishDirectoryReadModel('zh-CN', ['read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'locale' => 'zh-CN', 'items' => []]);
     }
 
     private function publishPublicCanonicalSnapshot(): void

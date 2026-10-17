@@ -6,6 +6,7 @@ namespace Tests\Feature\Console;
 
 use App\Console\Commands\WarmPublicContentReadModels;
 use App\Models\PersonalityProfile;
+use App\Services\Career\CareerDirectoryReadModelBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicReadModelCache;
@@ -97,7 +98,7 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
         $careerCache = app(PublicCareerAuthorityResponseCache::class);
         foreach (['en', 'zh-CN'] as $locale) {
             $careerCache->publishDirectoryReadModel($locale, [
-                'read_model_version' => 'career.directory.read-model.v1',
+                'read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION,
                 'locale' => $locale,
                 'items' => [],
             ]);
@@ -133,7 +134,7 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
 
         $careerCache = app(PublicCareerAuthorityResponseCache::class);
         foreach (['en', 'zh-CN'] as $locale) {
-            $careerCache->publishDirectoryReadModel($locale, ['items' => []]);
+            $careerCache->publishDirectoryReadModel($locale, ['read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'locale' => $locale, 'items' => []]);
         }
 
         $exitCode = Artisan::call('public-content:warm-read-models', [
@@ -160,7 +161,7 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
 
         $careerCache = app(PublicCareerAuthorityResponseCache::class);
         foreach (['en', 'zh-CN'] as $locale) {
-            $careerCache->publishDirectoryReadModel($locale, ['items' => []]);
+            $careerCache->publishDirectoryReadModel($locale, ['read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'locale' => $locale, 'items' => []]);
         }
 
         $exitCode = Artisan::call('public-content:warm-read-models', [
@@ -198,7 +199,7 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
 
         $careerCache = app(PublicCareerAuthorityResponseCache::class);
         foreach (['en', 'zh-CN'] as $locale) {
-            $careerCache->publishDirectoryReadModel($locale, ['items' => []]);
+            $careerCache->publishDirectoryReadModel($locale, ['read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'locale' => $locale, 'items' => []]);
         }
 
         Artisan::registerCommand(new class extends ConsoleCommand

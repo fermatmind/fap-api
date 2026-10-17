@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Services\Career\CareerDirectoryReadModelBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Ops\PublicContentRuntimeMetricsService;
 use Illuminate\Support\Facades\Cache;
@@ -11,6 +12,14 @@ use Tests\TestCase;
 
 final class CareerIndustryDirectoryApiTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Industry aggregation consumes independently published directory members.
+        app()->instance(\App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility::class,
+            new \Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true));
+    }
+
     public function test_it_returns_a_locale_keyed_industry_aggregate_from_the_active_directory_read_model(): void
     {
         $this->putDirectoryVersion('en', 'active-v2', $this->directoryPayload());
@@ -44,7 +53,7 @@ final class CareerIndustryDirectoryApiTest extends TestCase
     public function test_it_falls_back_to_the_last_known_good_version_and_localizes_titles_and_paths(): void
     {
         Cache::forever($this->pointerKey('zh-CN', 'active'), 'missing-active');
-        $this->putDirectoryVersion('zh-CN', 'last-good-v1', $this->directoryPayload(), 'lkg');
+        $this->putDirectoryVersion('zh-CN', 'last-good-v1', $this->directoryPayload('zh-CN'), 'lkg');
 
         $this->getJson('/api/v0.5/career/industries?locale=zh')
             ->assertOk()
@@ -118,18 +127,18 @@ final class CareerIndustryDirectoryApiTest extends TestCase
     }
 
     /** @return array<string, mixed> */
-    private function directoryPayload(): array
+    private function directoryPayload(string $locale = 'en'): array
     {
         return [
-            'read_model_version' => 'career.directory.read-model.v1',
-            'locale' => 'en',
+            'read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION,
+            'locale' => $locale,
             'public_count' => 5,
             'items' => [
-                $this->directoryItem('analysts', 'Analysts', '分析师', 'business-finance', 'Business and Finance', '商业与金融'),
-                $this->directoryItem('actors', 'Actors', '演员', 'arts-media', 'Arts and Media', '艺术与媒体'),
-                $this->directoryItem('auditors', 'Auditors', '审计师', 'business-finance', 'Business and Finance', '商业与金融'),
-                $this->directoryItem('accountants', 'Accountants', '会计师', 'business-finance', 'Business and Finance', '商业与金融'),
-                $this->directoryItem('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance', '商业与金融'),
+                $this->directoryItem('analysts', 'Analysts', '分析师', 'business-finance', 'Business and Finance', '商业与金融', $locale),
+                $this->directoryItem('actors', 'Actors', '演员', 'arts-media', 'Arts and Media', '艺术与媒体', $locale),
+                $this->directoryItem('auditors', 'Auditors', '审计师', 'business-finance', 'Business and Finance', '商业与金融', $locale),
+                $this->directoryItem('accountants', 'Accountants', '会计师', 'business-finance', 'Business and Finance', '商业与金融', $locale),
+                $this->directoryItem('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance', '商业与金融', $locale),
                 'malformed-item',
             ],
         ];
@@ -143,18 +152,19 @@ final class CareerIndustryDirectoryApiTest extends TestCase
         string $familySlug,
         string $familyTitleEn,
         string $familyTitleZh,
+        string $locale,
     ): array {
         return [
             'slug' => $slug,
             'title_en' => $titleEn,
             'title_zh' => $titleZh,
-            'title' => $titleEn,
+            'title' => $locale === 'zh-CN' ? $titleZh : $titleEn,
             'family' => [
                 'slug' => $familySlug,
                 'title_en' => $familyTitleEn,
                 'title_zh' => $familyTitleZh,
             ],
-            'canonical_path' => '/en/career/jobs/'.$slug,
+            'canonical_path' => '/'.($locale === 'zh-CN' ? 'zh' : 'en').'/career/jobs/'.$slug,
             'indexable' => true,
             'detail_ready' => true,
             'search_text' => strtolower($titleEn),

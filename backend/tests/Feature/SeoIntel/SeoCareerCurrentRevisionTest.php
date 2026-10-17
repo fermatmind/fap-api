@@ -8,6 +8,7 @@ use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentIdentity;
+use App\Services\Career\CareerDirectoryReadModelBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource;
 use App\Services\SeoIntel\UrlTruth\EffectivePublicUrlEvaluator;
@@ -23,6 +24,9 @@ final class SeoCareerCurrentRevisionTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Publication is a valid independent input; these cases isolate the release gate or Current revision.
+        app()->instance(\App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility::class,
+            new \Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true));
         $this->root = sys_get_temp_dir().'/seo-career-current-'.bin2hex(random_bytes(8));
         foreach (['actors', 'actuaries'] as $slug) {
             mkdir($this->root.'/content_assets/career/current/careers/'.$slug, 0700, true);
@@ -173,7 +177,7 @@ final class SeoCareerCurrentRevisionTest extends TestCase
             $pointer = (new \ReflectionMethod($cache, 'directoryActiveVersionKey'))->invoke($cache, $locale);
             $key = (new \ReflectionMethod($cache, 'directoryVersionPayloadKey'))->invoke($cache, $locale, 'fixture');
             Cache::forever($pointer, 'fixture');
-            Cache::forever($key, ['items' => array_map(static fn ($slug) => [
+            Cache::forever($key, ['read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'locale' => $locale, 'items' => array_map(static fn ($slug) => [
                 'slug' => $slug, 'canonical_path' => '/'.($locale === 'en' ? 'en' : 'zh').'/career/jobs/'.$slug,
                 'indexable' => true, 'detail_ready' => true,
             ], $slugs)]);

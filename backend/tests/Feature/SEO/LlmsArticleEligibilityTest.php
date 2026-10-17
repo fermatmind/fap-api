@@ -6,6 +6,7 @@ namespace Tests\Feature\SEO;
 
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Career\CareerDirectoryReadModelBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,8 +28,8 @@ final class LlmsArticleEligibilityTest extends TestCase
         $this->createPublishedArticle('included-english-article', 'en', true);
         $this->createPublishedArticle('private-article', 'en', true, false);
         $careerCache = app(PublicCareerAuthorityResponseCache::class);
-        $careerCache->publishDirectoryReadModel('en', ['items' => []]);
-        $careerCache->publishDirectoryReadModel('zh-CN', ['items' => []]);
+        $careerCache->publishDirectoryReadModel('en', ['read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'locale' => 'en', 'items' => []]);
+        $careerCache->publishDirectoryReadModel('zh-CN', ['read_model_version' => CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'locale' => 'zh-CN', 'items' => []]);
 
         $generator = app(SitemapGenerator::class);
         $sitemapLocations = collect($generator->generateUrls())->pluck('loc')->all();
