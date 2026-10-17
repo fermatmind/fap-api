@@ -184,6 +184,10 @@ class SitemapSourceApiTest extends TestCase
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         $slug = 'nurse-practitioners';
+        $occupation = $this->createOccupation($slug, 'Nurse practitioners');
+        \App\Models\IndexState::query()->create([
+            'occupation_id' => $occupation->id, 'index_state' => 'indexed', 'index_eligible' => true, 'canonical_path' => '/career/jobs/'.$slug, 'changed_at' => now(),
+        ]);
         CareerGenerationAuthorityFixture::write([
             $this->projectionItem($slug, 'en', CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE),
             $this->projectionItem($slug, 'zh', CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE),

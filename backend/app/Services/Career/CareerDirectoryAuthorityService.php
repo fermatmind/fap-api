@@ -113,6 +113,8 @@ final class CareerDirectoryAuthorityService
         $items = $this->readyIndexableItems(
             app(CareerCurrentIdentity::class)->projectPayload(is_array($readModel['items'] ?? null) ? $readModel['items'] : [], $publicLocale),
         );
+        $published = $this->responseCache->directoryPublishedSlugs(array_column($items, 'slug'), $publicLocale);
+        $items = array_values(array_filter($items, static fn (array $item): bool => isset($published[$item['slug']])));
 
         return array_map(fn (array $item): array => $this->publicItem($item), $this->withBodyEligibility($items, $publicLocale));
     }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
-use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\IndexState;
@@ -16,6 +15,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Tests\Concerns\UsesCareerDetailCacheFixture;
+use Tests\Fixtures\Career\CareerGenerationAuthorityFixture;
 use Tests\TestCase;
 
 final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
@@ -72,6 +72,8 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         if ($this->materializedProjectionDir !== null && is_dir($this->materializedProjectionDir)) {
             File::deleteDirectory($this->materializedProjectionDir);
         }
+
+        File::deleteDirectory(storage_path('app/private/career_generation_authority'));
 
         parent::tearDown();
     }
@@ -424,6 +426,12 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertIsArray($publishedEn);
 
         $cache = app(PublicCareerAuthorityResponseCache::class);
+        // Model the committed business qualification that the real promotion writes before staging.
+        IndexState::query()->create([
+            'occupation_id' => Occupation::query()->where('canonical_slug', 'actuaries')->value('id'),
+            'index_state' => 'indexed', 'index_eligible' => true,
+            'canonical_path' => '/career/jobs/actuaries', 'changed_at' => now(),
+        ]);
         $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
 
         $this->assertSame('ready', $prepared['status']);
@@ -451,6 +459,12 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $oldVersion = $cache->publishJobDetailReadModel('actuaries', 'en', $this->detailCacheFixture(['fixture' => 'old'], 'actuaries', 'en'));
         Cache::forever($cache->jobDetailNegativeKey('actuaries', 'en'), ['fixture' => 'negative']);
         Cache::forever($cache->jobDetailCacheKey('actuaries', 'en'), $this->detailCacheFixture(['fixture' => 'legacy'], 'actuaries', 'en'));
+        // Model the committed business qualification that the real promotion writes before staging.
+        IndexState::query()->create([
+            'occupation_id' => Occupation::query()->where('canonical_slug', 'actuaries')->value('id'),
+            'index_state' => 'indexed', 'index_eligible' => true,
+            'canonical_path' => '/career/jobs/actuaries', 'changed_at' => now(),
+        ]);
         $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
 
         $activation = $cache->activatePreparedJobDetailPayloadsForExposure([$prepared], true);
@@ -478,6 +492,12 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
 
         $cache = app(PublicCareerAuthorityResponseCache::class);
         $cache->publishJobDetailReadModel('actuaries', 'en', $this->detailCacheFixture(['fixture' => 'old'], 'actuaries', 'en'));
+        // Model the committed business qualification that the real promotion writes before staging.
+        IndexState::query()->create([
+            'occupation_id' => Occupation::query()->where('canonical_slug', 'actuaries')->value('id'),
+            'index_state' => 'indexed', 'index_eligible' => true,
+            'canonical_path' => '/career/jobs/actuaries', 'changed_at' => now(),
+        ]);
         $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
         $activation = $cache->activatePreparedJobDetailPayloadsForExposure([$prepared], true);
         $newerVersion = $cache->publishJobDetailReadModel('actuaries', 'en', $this->detailCacheFixture(['fixture' => 'newer'], 'actuaries', 'en'));
@@ -504,6 +524,12 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertIsArray($publishedEn);
 
         $cache = app(PublicCareerAuthorityResponseCache::class);
+        // Model the committed business qualification that the real promotion writes before staging.
+        IndexState::query()->create([
+            'occupation_id' => Occupation::query()->where('canonical_slug', 'actuaries')->value('id'),
+            'index_state' => 'indexed', 'index_eligible' => true,
+            'canonical_path' => '/career/jobs/actuaries', 'changed_at' => now(),
+        ]);
         $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
         $this->assertSame('pass', $cache->activatePreparedJobDetailPayloadsForExposure([$prepared])['status']);
 
@@ -689,6 +715,12 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertIsArray($publishedEn);
 
         $cache = app(PublicCareerAuthorityResponseCache::class);
+        // Model the committed business qualification that the real promotion writes before staging.
+        IndexState::query()->create([
+            'occupation_id' => Occupation::query()->where('canonical_slug', 'actuaries')->value('id'),
+            'index_state' => 'indexed', 'index_eligible' => true,
+            'canonical_path' => '/career/jobs/actuaries', 'changed_at' => now(),
+        ]);
         $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
         $cache->forgetPreparedJobDetailExposureProjectionSnapshots([$prepared]);
 
@@ -952,12 +984,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     /** @param array<string, mixed> $projection */
     private function writeMaterializedProjection(array $projection): void
     {
-        $this->materializedProjectionDir = storage_path(
-            'app/private/career_runtime_publish_projection/test-stale-candidate-'.uniqid(),
-        );
-        File::ensureDirectoryExists($this->materializedProjectionDir);
-        $path = $this->materializedProjectionDir.'/'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME;
-        File::put($path, json_encode($projection, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-        touch($path, time() + 3600);
+        CareerGenerationAuthorityFixture::write($projection['items']);
+
     }
 }

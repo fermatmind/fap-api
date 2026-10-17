@@ -22,6 +22,14 @@ final class CareerDirectoryReadModelPerformanceTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // These tests isolate body qualification/read-model cost from publication fixtures.
+        $this->app->instance(\App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility::class,
+            new \Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true));
+    }
+
     public function test_installed_corpus_qualification_is_reused_by_fresh_request_readers(): void
     {
         $authority = app(CareerContentV3CanonicalReader::class)->authority();

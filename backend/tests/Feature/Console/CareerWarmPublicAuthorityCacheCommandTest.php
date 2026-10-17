@@ -345,8 +345,8 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
     public function test_directory_versions_switch_atomically_and_fall_back_to_lkg(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $oldPayload = ['public_count' => 1046, 'items' => [['slug' => 'old']]];
-        $newPayload = ['public_count' => 1047, 'items' => [['slug' => 'new']]];
+        $oldPayload = ['locale' => 'zh-CN', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 1046, 'items' => [['slug' => 'old']]];
+        $newPayload = ['locale' => 'zh-CN', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 1047, 'items' => [['slug' => 'new']]];
 
         $oldVersion = $cache->publishDirectoryReadModel('zh-CN', $oldPayload);
         $newVersion = $cache->publishDirectoryReadModel('zh-CN', $newPayload);
@@ -429,8 +429,8 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
     public function test_multi_locale_directory_activation_restores_all_pointers_when_later_locale_fails(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $oldEn = ['public_count' => 1, 'items' => [['slug' => 'old-en']]];
-        $oldZh = ['public_count' => 1, 'items' => [['slug' => 'old-zh']]];
+        $oldEn = ['locale' => 'en', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 1, 'items' => [['slug' => 'old-en']]];
+        $oldZh = ['locale' => 'zh-CN', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 1, 'items' => [['slug' => 'old-zh']]];
         $oldEnVersion = $cache->publishDirectoryReadModel('en', $oldEn);
         $oldZhVersion = $cache->publishDirectoryReadModel('zh-CN', $oldZh);
         $cacheManager = Cache::getFacadeRoot();
@@ -460,8 +460,8 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
 
             try {
                 $cache->publishDirectoryReadModelsAtomically([
-                    'en' => ['public_count' => 2, 'items' => [['slug' => 'new-en']]],
-                    'zh-CN' => ['public_count' => 2, 'items' => [['slug' => 'new-zh']]],
+                    'en' => ['locale' => 'en', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 2, 'items' => [['slug' => 'new-en']]],
+                    'zh-CN' => ['locale' => 'zh-CN', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 2, 'items' => [['slug' => 'new-zh']]],
                 ]);
                 $this->fail('The synthetic second-locale activation should fail.');
             } catch (\RuntimeException $exception) {
@@ -480,9 +480,9 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
     public function test_atomic_directory_activation_stays_committed_when_legacy_cleanup_fails(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $oldEn = ['public_count' => 1, 'items' => [['slug' => 'old-en']]];
-        $newEn = ['public_count' => 2, 'items' => [['slug' => 'new-en']]];
-        $newZh = ['public_count' => 2, 'items' => [['slug' => 'new-zh']]];
+        $oldEn = ['locale' => 'en', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 1, 'items' => [['slug' => 'old-en']]];
+        $newEn = ['locale' => 'en', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 2, 'items' => [['slug' => 'new-en']]];
+        $newZh = ['locale' => 'zh-CN', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 2, 'items' => [['slug' => 'new-zh']]];
         $cache->publishDirectoryReadModel('en', $oldEn);
         $legacyEnKey = PublicCareerAuthorityResponseCache::DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX.':en';
         Cache::forever($legacyEnKey, $oldEn);
@@ -572,8 +572,8 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
             'zh-CN' => ['bundle_kind' => 'career_job_index', 'sentinel' => 'old-zh', 'items' => []],
         ];
         $cache->publishJobIndexReadModelsAtomically($oldJobIndexes);
-        $oldEnVersion = $cache->publishDirectoryReadModel('en', ['public_count' => 0, 'items' => []]);
-        $oldZhVersion = $cache->publishDirectoryReadModel('zh-CN', ['public_count' => 0, 'items' => []]);
+        $oldEnVersion = $cache->publishDirectoryReadModel('en', ['locale' => 'en', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 0, 'items' => []]);
+        $oldZhVersion = $cache->publishDirectoryReadModel('zh-CN', ['locale' => 'zh-CN', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 0, 'items' => []]);
         $cacheManager = Cache::getFacadeRoot();
         $zhDirectoryActiveKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:active';
 
@@ -751,7 +751,7 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
                 $rebuilds++;
                 $jobIndex = ['bundle_kind' => 'career_job_index', 'items' => [['slug' => 'one']]];
                 $cache->publishJobIndexReadModelsAtomically(['en' => $jobIndex]);
-                $cache->publishDirectoryReadModel('en', ['public_count' => 1, 'items' => [['slug' => 'one']]]);
+                $cache->publishDirectoryReadModel('en', ['locale' => 'en', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 1, 'items' => [['slug' => 'one']]]);
 
                 return $jobIndex;
             });
@@ -765,7 +765,7 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
     public function test_failed_rebuild_keeps_serving_previous_version_instead_of_empty_items(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $payload = ['public_count' => 1046, 'items' => [['slug' => 'known-good']]];
+        $payload = ['locale' => 'zh-CN', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 1046, 'items' => [['slug' => 'known-good']]];
         $version = $cache->publishDirectoryReadModel('zh-CN', $payload);
 
         try {
@@ -809,8 +809,8 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->artisan('career:warm-public-authority-cache', ['--verify-only' => true, '--json' => true])
             ->assertExitCode(1);
 
-        $cache->publishDirectoryReadModel('en', ['public_count' => 1, 'items' => [['slug' => 'one']]]);
-        $cache->publishDirectoryReadModel('zh-CN', ['public_count' => 1, 'items' => [['slug' => 'one']]]);
+        $cache->publishDirectoryReadModel('en', ['locale' => 'en', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 1, 'items' => [['slug' => 'one']]]);
+        $cache->publishDirectoryReadModel('zh-CN', ['locale' => 'zh-CN', 'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION, 'public_count' => 1, 'items' => [['slug' => 'one']]]);
 
         $this->artisan('career:warm-public-authority-cache', ['--verify-only' => true, '--json' => true])
             ->expectsOutputToContain('"status": "ready"')

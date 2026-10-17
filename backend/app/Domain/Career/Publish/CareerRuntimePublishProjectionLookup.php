@@ -15,6 +15,26 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
     /** @var array<string, array<string, mixed>>|null */
     private ?array $itemsBySlug = null;
 
+    /** @var array<string,array<string,mixed>> */
+    private array $publicationItems = [];
+
+    private ?string $publicationAuthoritySha256 = null;
+
+    /** Preserve denials and candidates without changing published-only public lookups. */
+    public function publicationItemForSlug(string $slug, string $locale): ?array
+    {
+        $this->hydrate();
+
+        return $this->publicationItems[strtolower(trim($slug)).'|'.$this->normalizeLocale($locale)] ?? null;
+    }
+
+    public function publicationAuthoritySha256(): ?string
+    {
+        $this->hydrate();
+
+        return $this->publicationAuthoritySha256;
+    }
+
     public function __construct(
         private readonly CareerGenerationAuthorityLoader $generationAuthority,
     ) {}
@@ -142,8 +162,12 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
 
         $this->itemsBySlugLocale = [];
         $this->itemsBySlug = [];
-        $projection = $this->generationAuthority->activeProjection();
-        if (! is_array($projection)) {
+        try {
+            // loadStrict retains the same-generation hash-verified LKG behavior.
+            $authority = $this->generationAuthority->loadStrict();
+            $projection = $authority['projection'];
+            $this->publicationAuthoritySha256 = CareerGenerationCanonicalJson::sha256($authority['pointer']);
+        } catch (\Throwable) {
             return;
         }
 
@@ -152,8 +176,7 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
             return;
         }
         foreach ($items as $item) {
-            if (! is_array($item)
-                || ($item['runtime_publish_state'] ?? null) !== CareerRuntimePublishProjectionService::STATE_PUBLISHED) {
+            if (! is_array($item)) {
                 continue;
             }
             $slug = $this->normalizeSlug((string) ($item['slug'] ?? ''));
@@ -161,6 +184,10 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
                 continue;
             }
             $locale = $this->normalizeLocale((string) ($item['locale'] ?? 'en'));
+            $this->publicationItems[$slug.'|'.$locale] = $item;
+            if (($item['runtime_publish_state'] ?? null) !== CareerRuntimePublishProjectionService::STATE_PUBLISHED) {
+                continue;
+            }
             $this->itemsBySlugLocale[$slug.'|'.$locale] = $item;
             $this->itemsBySlug[$slug] ??= $item;
         }
