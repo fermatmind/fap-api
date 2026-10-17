@@ -110,7 +110,7 @@ final class IqArticleHreflangMigrationTest extends TestCase
             ['article_seo_meta', 'canonical_url', 'https://example.invalid/not-this-page'],
             ['article_seo_meta', 'seo_title', 'An unreviewed title'],
             ['article_translation_revisions', 'approved_at', null],
-            ['article_translation_revisions', 'published_at', '2099-01-01 00:00:00'],
+            ['article_translation_revisions', 'published_at', '2030-01-01 00:00:00'],
             ['article_translation_revisions', 'revision_status', 'draft'],
             ['article_translation_revisions', 'content_md', 'Changed after review'],
             ['article_translation_revisions', 'authority_package_sha256', str_repeat('a', 64)],

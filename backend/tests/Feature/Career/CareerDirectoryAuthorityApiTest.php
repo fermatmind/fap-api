@@ -159,7 +159,7 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('authority_version', 'career.directory_authority.v1')
             ->assertJsonPath('bundle_kind', 'career_directory')
-            ->assertJsonPath('public_truth.public_detail_indexable_count', 1)
+            ->assertJsonPath('public_truth.public_detail_indexable_count', 3)
             ->assertJsonPath('public_truth.directory_member_count', 3)
             ->assertJsonPath('public_truth.future_scale_ready', true)
             ->assertJsonPath('pagination.page', 1)
@@ -179,8 +179,8 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
 
         $response->assertJsonPath('items.1.slug', 'actors')
             ->assertJsonPath('items.1.detail_ready', true)
-            ->assertJsonPath('items.1.indexable', false);
-        self::assertSame(['accountants-and-auditors'], array_column(
+            ->assertJsonPath('items.1.indexable', true);
+        self::assertSame(['accountants-and-auditors', 'actors', 'actuaries'], array_column(
             app(\App\Services\Career\CareerDirectoryAuthorityService::class)->indexableItems('en'), 'slug',
         ));
 
@@ -208,6 +208,12 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
 
     public function test_url_truth_accepts_browsable_locale_with_zero_indexable_bodies(): void
     {
+        $reader = $this->getMockBuilder(\Tests\Support\DynamicCareerContentV3CanonicalReader::class)
+            ->setConstructorArgs([app(\App\Domain\Career\Compilation\CareerContentV3Projector::class)])
+            ->onlyMethods(['hasPublicBody'])->getMock();
+        $reader->method('hasPublicBody')->willReturn(false);
+        app()->instance(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class, $reader);
+
         $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance');
         $this->publishRuntimeProjection(['actuaries']);
         $this->warmDirectoryAuthority();
@@ -317,7 +323,7 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         $this->getJson('/api/v0.5/career/directory?locale=en&per_page=100')
             ->assertOk()
             ->assertJsonPath('pagination.total', 1)
-            ->assertJsonPath('items.0.indexable', false)
+            ->assertJsonPath('items.0.indexable', true)
             ->assertJsonPath('items.0.detail_ready', true);
 
         $responseCache = app(PublicCareerAuthorityResponseCache::class);

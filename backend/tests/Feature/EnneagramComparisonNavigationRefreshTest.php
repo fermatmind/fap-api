@@ -128,10 +128,8 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
         $this->seedPair();
         // Fail the actual database approval write in the second language,
         // after the first language's native promotion has completed.
-        DB::statement("CREATE TRIGGER comparison_second_language_reject BEFORE UPDATE ON article_translation_revisions
-            WHEN NEW.article_id = 224 AND NEW.revision_status = 'approved'
-            BEGIN SELECT RAISE(ABORT, 'Fixture second language rejection'); END");
-        $this->assertRejected();
+        $this->rejectDatabaseWrite('comparison_second_language_reject', 'UPDATE', 'article_translation_revisions', "NEW.article_id = 224 AND NEW.revision_status = 'approved'", 'Fixture second language rejection');
+        $this->assertRejected('Fixture second language rejection');
         Http::assertNothingSent();
     }
 
@@ -189,9 +187,8 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
         $this->seedStaging();
         $this->app['env'] = 'staging';
         Cache::put(\App\Support\PublicProjectionCache::physicalKey(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH), 'fixture', 600);
-        DB::statement("CREATE TRIGGER comparison_review_reject BEFORE INSERT ON editorial_reviews
-            WHEN NEW.content_id = 224 BEGIN SELECT RAISE(ABORT, 'Fixture after first publish rejection'); END");
-        $this->assertRejected();
+        $this->rejectDatabaseWrite('comparison_review_reject', 'INSERT', 'editorial_reviews', 'NEW.content_id = 224', 'Fixture after first publish rejection');
+        $this->assertRejected('Fixture after first publish rejection');
         $this->assertSame('fixture', Cache::get(\App\Support\PublicProjectionCache::physicalKey(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH)));
         Http::assertNothingSent();
     }
@@ -200,10 +197,8 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
     {
         $this->seedStaging();
         $this->app['env'] = 'staging';
-        DB::statement("CREATE TRIGGER comparison_publish_audit_reject BEFORE INSERT ON audit_logs
-            WHEN NEW.action = 'content_release_publish' AND NEW.target_id = '224'
-            BEGIN SELECT RAISE(ABORT, 'Fixture first publish audit rejection'); END");
-        $this->assertRejected();
+        $this->rejectDatabaseWrite('comparison_publish_audit_reject', 'INSERT', 'audit_logs', "NEW.action = 'content_release_publish' AND NEW.target_id = '224'", 'Fixture first publish audit rejection');
+        $this->assertRejected('Fixture first publish audit rejection');
         $this->assertFalse(DB::table('articles')->where('id', 224)->exists());
         Http::assertNothingSent();
     }
@@ -254,7 +249,18 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
         $this->assertEquals($after, $this->state());
     }
 
-    private function assertRejected(): void
+    private function rejectDatabaseWrite(string $name, string $event, string $table, string $condition, string $message): void
+    {
+        if (DB::getDriverName() === 'mysql') {
+            DB::unprepared("CREATE TRIGGER {$name} BEFORE {$event} ON {$table} FOR EACH ROW
+                BEGIN IF {$condition} THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '{$message}'; END IF; END");
+        } else {
+            DB::statement("CREATE TRIGGER {$name} BEFORE {$event} ON {$table}
+                WHEN {$condition} BEGIN SELECT RAISE(ABORT, '{$message}'); END");
+        }
+    }
+
+    private function assertRejected(?string $expectedError = null): void
     {
         $before = $this->state();
         try {
@@ -262,6 +268,9 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
             $this->fail('Expected exact scope rejection.');
         } catch (\Exception $error) {
             $this->assertNotSame('', $error->getMessage());
+            if ($expectedError !== null) {
+                $this->assertStringContainsString($expectedError, $error->getMessage());
+            }
         }
         $this->assertEquals($before, $this->state());
     }
@@ -270,7 +279,11 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
     {
         $this->seedStaging();
         $expected = $this->publicSeo('zh-CN');
-        DB::table('sqlite_sequence')->where('name', 'article_translation_revisions')->update(['seq' => 714]);
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement('ALTER TABLE article_translation_revisions AUTO_INCREMENT = 715');
+        } else {
+            DB::table('sqlite_sequence')->where('name', 'article_translation_revisions')->update(['seq' => 714]);
+        }
         $this->app['env'] = 'staging';
         app(Refresh::class)->publish();
         $source = Article::withoutGlobalScopes()->with(['publishedRevision', 'seoMeta'])->findOrFail(164);
@@ -280,10 +293,8 @@ final class EnneagramComparisonNavigationRefreshTest extends TestCase
         $this->attestStagingDescription((string) $source->seoMeta->seo_description);
         $history = (array) DB::table('article_translation_revisions')->find($oldId);
         $count = DB::table('article_translation_revisions')->count();
-        DB::statement("CREATE TRIGGER comparison_repair_approval_reject BEFORE UPDATE ON article_translation_revisions
-            WHEN NEW.article_id = 224 AND NEW.revision_status = 'approved'
-            BEGIN SELECT RAISE(ABORT, 'Fixture repair rejection'); END");
-        $this->assertRejected();
+        $this->rejectDatabaseWrite('comparison_repair_approval_reject', 'UPDATE', 'article_translation_revisions', "NEW.article_id = 224 AND NEW.revision_status = 'approved'", 'Fixture repair rejection');
+        $this->assertRejected('Fixture repair rejection');
         Http::assertSentCount(3);
         DB::statement('DROP TRIGGER comparison_repair_approval_reject');
         $migration = require database_path('migrations/2026_10_16_190000_preserve_enneagram_comparison_public_seo.php');

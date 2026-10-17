@@ -9,6 +9,7 @@ use App\Domain\Career\Display\CareerContentV3PageUpdater;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
 use Illuminate\Filesystem\Filesystem;
+use Tests\Support\CareerCurrentPackageFixture;
 use Tests\TestCase;
 
 final class CareerContentV3PageUpdaterTest extends TestCase
@@ -39,14 +40,12 @@ final class CareerContentV3PageUpdaterTest extends TestCase
 
     public function test_page_state_transitions_refresh_coverage_and_remain_idempotent(): void
     {
-        $root = sys_get_temp_dir().'/career-page-coverage-'.bin2hex(random_bytes(8));
+        $root = CareerCurrentPackageFixture::create(base_path());
         $files = new Filesystem;
         $current = $root.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
-        $files->makeDirectory(dirname($current), 0700, true);
-        $files->copyDirectory(base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH), $current);
-        $files->copy(base_path(CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH), $root.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH);
         $paths = [$current.'/careers/actors/zh-CN.json', $current.'/manifest.json', $root.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH];
         try {
+            app(CareerContentV3PageUpdater::class)->update($root, 'actors', 'zh-CN', true);
             $originalPage = (string) file_get_contents($paths[0]);
             $page = json_decode($originalPage, true, 512, JSON_THROW_ON_ERROR);
             $originalManifest = json_decode((string) file_get_contents($paths[1]), true, 512, JSON_THROW_ON_ERROR);

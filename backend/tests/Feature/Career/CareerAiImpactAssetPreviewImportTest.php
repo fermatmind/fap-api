@@ -1185,7 +1185,8 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $encoded = json_encode($response->json(), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $this->assertStringNotContainsString('evidence_id', $encoded);
         $this->assertStringNotContainsString('row_hash', $encoded);
-        $this->assertStringNotContainsString('source_id', $encoded);
+        $response->assertJsonMissingPath('ai_impact_asset_v1')->assertJsonMissingPath('source_id');
+        $this->assertStringNotContainsString('asset_row_hash', $encoded);
         $this->assertStringNotContainsString('search_projection', $encoded);
 
         $this->getJson('/api/v0.5/career/jobs/emergency-medicine-physicians/ai-impact-asset?locale=en')

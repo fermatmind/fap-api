@@ -12,18 +12,15 @@ use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
 use Illuminate\Filesystem\Filesystem;
 use PHPUnit\Framework\TestCase;
+use Tests\Support\CareerCurrentPackageFixture;
 
 final class CareerAuthoringMigrationTest extends TestCase
 {
     public function test_dry_run_atomic_package_update_repeated_execution_and_corruption(): void
     {
         $files = new Filesystem;
-        $root = sys_get_temp_dir().'/career-authoring-test-'.bin2hex(random_bytes(8));
+        $root = CareerCurrentPackageFixture::create(dirname(__DIR__, 5));
         $current = $root.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
-        $source = dirname(__DIR__, 5);
-        $files->makeDirectory(dirname($current), 0700, true);
-        $files->copyDirectory($source.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH, $current);
-        $files->copy($source.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH, $root.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH);
         try {
             $before = $this->hashes($root);
             $expectedStates = ['enhanced' => 0, 'legacy' => 0];

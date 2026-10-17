@@ -75,7 +75,7 @@ final class ReviewedChineseArticleDiscoverabilityMigrationTest extends TestCase
             $t->boolean('is_indexable')->default(false);
             $t->string('robots')->default('noindex,follow');
             $t->string('canonical_url');
-            $t->text('schema_json')->default('{"keep":"existing gates"}');
+            $t->text('schema_json');
         });
         Schema::create('review_attestations', function (Blueprint $t): void {
             $t->increments('id');
@@ -340,7 +340,7 @@ final class ReviewedChineseArticleDiscoverabilityMigrationTest extends TestCase
                 'article_id' => $id, 'locale' => $locale, 'content_md' => 'Reviewed fixture '.$id,
                 'translated_from_version_hash' => $source ? str_repeat('a', 64) : null,
                 'approved_at' => now()->subDay(), 'published_at' => now()->subDay()]);
-            DB::table('article_seo_meta')->insert(['id' => $id, 'org_id' => $id === 270 ? 7 : 0, 'article_id' => $id,
+            DB::table('article_seo_meta')->insert(['schema_json' => '{"keep":"existing gates"}', 'id' => $id, 'org_id' => $id === 270 ? 7 : 0, 'article_id' => $id,
                 'locale' => $locale, 'canonical_url' => 'https://fermatmind.com/'.($locale === 'zh-CN' ? 'zh' : 'en').'/articles/'.$slug]);
             $this->approve('article', Article::withoutGlobalScopes()->withTrashed()->findOrFail($id));
             $this->approve('article_translation_revision', ArticleTranslationRevision::withoutGlobalScopes()->findOrFail($revision));

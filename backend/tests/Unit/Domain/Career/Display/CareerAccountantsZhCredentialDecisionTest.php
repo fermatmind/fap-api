@@ -57,7 +57,7 @@ final class CareerAccountantsZhCredentialDecisionTest extends TestCase
         self::assertStringNotContainsString('备考小时', $decisionText);
 
         self::assertSame(
-            ['source-16', 'source-18', 'source-19', 'source-20', 'source-21'],
+            ['source-16', 'source-18', 'source-19', 'source-20', 'source-cicpa-cpa-law-effective-2027-revision'],
             $decision['source_refs'],
         );
         self::assertSame($decision['source_refs'], $boundary['source_refs']);
@@ -65,8 +65,8 @@ final class CareerAccountantsZhCredentialDecisionTest extends TestCase
         $enCopyKeys = collect($en['blocks'])
             ->flatMap(static fn (array $block): array => $block['items'])
             ->pluck('copy_key');
-        self::assertFalse($enCopyKeys->contains('career.item.credential-decision'));
-        self::assertFalse($enCopyKeys->contains('career.item.credential-boundary'));
+        self::assertTrue($enCopyKeys->contains('career.item.credential-decision'));
+        self::assertTrue($enCopyKeys->contains('career.item.credential-boundary'));
     }
 
     public function test_credential_sources_are_current_primary_authorities(): void
@@ -81,12 +81,13 @@ final class CareerAccountantsZhCredentialDecisionTest extends TestCase
         self::assertSame('中华人民共和国财政部', $sources['source-18']['publisher']);
         self::assertSame('中国注册会计师协会', $sources['source-19']['publisher']);
         self::assertSame('中国注册会计师协会', $sources['source-20']['publisher']);
-        self::assertSame('现行法律', $sources['source-21']['evidence_type']);
+        self::assertSame('主管部门法律时效解读', $sources['source-cicpa-cpa-law-effective-2027-revision']['evidence_type']);
+        self::assertStringContainsString('2027-01-01', $sources['source-cicpa-cpa-law-effective-2027-revision']['period']);
 
-        foreach (['source-18', 'source-19', 'source-20', 'source-21'] as $sourceId) {
+        foreach (['source-18', 'source-19', 'source-20', 'source-cicpa-cpa-law-effective-2027-revision'] as $sourceId) {
             self::assertSame('中国大陆', $sources[$sourceId]['market']);
             self::assertStringStartsWith('https://', $sources[$sourceId]['url']);
-            self::assertSame('2026-08-29', $sources[$sourceId]['accessed_at']);
+            self::assertSame($sourceId === 'source-cicpa-cpa-law-effective-2027-revision' ? '2026-10-07' : '2026-08-29', $sources[$sourceId]['accessed_at']);
             self::assertNotSame('', $sources[$sourceId]['scope']);
             self::assertNotSame('', $sources[$sourceId]['limitation']);
         }

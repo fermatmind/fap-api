@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Feature\Domain\Career\Display;
 
 use App\Domain\Career\Display\CareerCurrentAuthorityParity;
+use Illuminate\Filesystem\Filesystem;
 use RuntimeException;
+use Tests\Support\CareerCurrentPackageFixture;
 use Tests\TestCase;
 
 final class CareerCurrentAuthorityParityTest extends TestCase
@@ -93,12 +95,17 @@ final class CareerCurrentAuthorityParityTest extends TestCase
     public function test_it_is_deterministic_for_the_same_sha_package_compiler_and_codec(): void
     {
         $parity = app(CareerCurrentAuthorityParity::class);
-        $first = $parity->run(base_path(), CareerCurrentAuthorityParity::MODE_PACKAGE, 'none', str_repeat('b', 40));
-        $second = $parity->run(base_path(), CareerCurrentAuthorityParity::MODE_PACKAGE, 'none', str_repeat('b', 40));
+        $root = CareerCurrentPackageFixture::create(base_path());
+        try {
+            $first = $parity->run($root, CareerCurrentAuthorityParity::MODE_PACKAGE, 'none', str_repeat('b', 40));
+            $second = $parity->run($root, CareerCurrentAuthorityParity::MODE_PACKAGE, 'none', str_repeat('b', 40));
 
-        self::assertSame($first['receipt_digest'], $second['receipt_digest']);
-        self::assertSame($first['full_scan']['aggregate_hashes'], $second['full_scan']['aggregate_hashes']);
-        self::assertSame($first['full_scan']['bytes'], $second['full_scan']['bytes']);
+            self::assertSame($first['receipt_digest'], $second['receipt_digest']);
+            self::assertSame($first['full_scan']['aggregate_hashes'], $second['full_scan']['aggregate_hashes']);
+            self::assertSame($first['full_scan']['bytes'], $second['full_scan']['bytes']);
+        } finally {
+            (new Filesystem)->deleteDirectory($root);
+        }
     }
 
     public function test_deploy_requires_all_2092_production_pages_before_mutations_and_symlink(): void

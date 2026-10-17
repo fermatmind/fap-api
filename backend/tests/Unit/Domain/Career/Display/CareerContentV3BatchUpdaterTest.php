@@ -8,9 +8,7 @@ use App\Domain\Career\Display\CareerContentV3BatchUpdater;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
+use Tests\Support\CareerCurrentPackageFixture;
 use Tests\TestCase;
 
 final class CareerContentV3BatchUpdaterTest extends TestCase
@@ -86,27 +84,10 @@ final class CareerContentV3BatchUpdaterTest extends TestCase
     /** @return array{string,string,list<array{slug:string,locale:string,path:string,sha256:string}>} */
     private function fixture(): array
     {
-        $root = sys_get_temp_dir().'/career-batch-updater-'.bin2hex(random_bytes(8));
-        $sourceCurrent = base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH);
-        $current = $root.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
+        $root = CareerCurrentPackageFixture::create(base_path());
+        $sourceCurrent = $root.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
         $source = $root.'/source';
-        mkdir($current, 0700, true);
         mkdir($source, 0700, true);
-        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($sourceCurrent));
-        /** @var SplFileInfo $file */
-        foreach ($iterator as $file) {
-            if (! $file->isFile()) {
-                continue;
-            }
-            $relative = substr($file->getPathname(), strlen($sourceCurrent) + 1);
-            $target = $current.'/'.$relative;
-            if (! is_dir(dirname($target))) {
-                mkdir(dirname($target), 0700, true);
-            }
-            link($file->getPathname(), $target);
-        }
-        $intent = $root.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH;
-        copy(base_path(CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH), $intent);
 
         $selection = [];
         foreach (['en', 'zh-CN'] as $locale) {

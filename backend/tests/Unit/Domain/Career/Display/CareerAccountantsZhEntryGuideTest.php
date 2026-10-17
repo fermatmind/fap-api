@@ -30,7 +30,7 @@ final class CareerAccountantsZhEntryGuideTest extends TestCase
         }
         $enKeys = collect($en['blocks'])->flatMap(static fn (array $block): array => $block['items'])->pluck('copy_key');
         foreach (['career.item.entry-role-comparison', 'career.item.employer-evidence', 'career.item.entry-work-sample-data', 'career.item.entry-portfolio', 'career.item.seven-day-trial'] as $key) {
-            self::assertFalse($enKeys->contains($key));
+            self::assertTrue($enKeys->contains($key));
         }
     }
 

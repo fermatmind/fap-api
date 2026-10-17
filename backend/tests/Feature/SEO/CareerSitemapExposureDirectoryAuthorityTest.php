@@ -45,6 +45,7 @@ final class CareerSitemapExposureDirectoryAuthorityTest extends TestCase
 
         $this->assertSame([
             'https://fermatmind.com/en/career/jobs/accountants-and-auditors',
+            'https://fermatmind.com/en/career/jobs/actuaries',
             'https://fermatmind.com/zh/career/jobs/accountants-and-auditors',
             'https://fermatmind.com/zh/career/jobs/actuaries',
         ], $locs);

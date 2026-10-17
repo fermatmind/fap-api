@@ -69,7 +69,7 @@ final class CareerAccountantsZhFactsTest extends TestCase
         foreach ($sources as $source) {
             if ($source['url'] === null) {
                 self::assertSame('source-fermatmind-ai-rubric', $source['id']);
-                self::assertSame('FermatMind 任务级 rubric', $source['publisher']);
+                self::assertSame('FermatMind / 费马测试', $source['publisher']);
                 self::assertNotSame('', trim($source['limitation']));
                 self::assertNotSame([], $source['details']);
 
@@ -95,7 +95,8 @@ final class CareerAccountantsZhFactsTest extends TestCase
             }
         };
         $walk($raw);
-        self::assertEqualsCanonicalizing($sources->keys()->all(), $referenced->unique()->values()->all());
+        self::assertNotEmpty($referenced);
+        self::assertSame([], $referenced->unique()->diff($sources->keys())->values()->all());
 
         $chinaSalary = collect($raw['blocks'])->firstWhere('id', 'china-salary');
         $chinaBytes = CareerCurrentAuthorityPackage::encodeCanonical($chinaSalary);

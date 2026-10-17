@@ -19,7 +19,7 @@ final class CareerJobSeoServiceTest extends TestCase
         $job = $this->createJob(['slug' => 'drywall-and-ceiling-tile-installers-and-tapers', 'title' => 'Old installer']);
         $this->createSeoMeta($job, ['seo_title' => 'Old title', 'og_title' => 'Old share title', 'jsonld_overrides_json' => ['estimatedSalary' => 1]]);
         $service = app(CareerJobSeoService::class);
-        foreach (['en' => 'Drywall and Ceiling Tile Installers and Tapers', 'zh-CN' => '石膏板与吊顶板安装工及接缝处理工'] as $locale => $title) {
+        foreach (['en' => 'Drywall and ceiling tile installers and tapers', 'zh-CN' => '石膏板与吊顶板安装工及接缝处理工'] as $locale => $title) {
             $meta = $service->buildMeta($job, $locale, true);
             self::assertSame($title, $meta['title']);
             self::assertSame($title, $meta['og']['title']);

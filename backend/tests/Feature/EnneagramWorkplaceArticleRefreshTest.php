@@ -640,7 +640,10 @@ final class EnneagramWorkplaceArticleRefreshTest extends TestCase
                     continue;
                 }
                 $data = array_intersect_key($data, array_flip(Schema::getColumnListing($table)));
-                foreach ($data as &$value) {
+                foreach ($data as $column => &$value) {
+                    if ($value !== null && str_ends_with($column, '_at') && is_string($value)) {
+                        $value = \Illuminate\Support\Carbon::parse($value)->format(DB::connection()->getQueryGrammar()->getDateFormat());
+                    }
                     if (is_array($value)) {
                         $value = json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
                     }

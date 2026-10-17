@@ -211,7 +211,7 @@ class SitemapSourceApiTest extends TestCase
         $locs = collect($this->getJson('/api/v0.5/seo/sitemap-source')->assertOk()->json('items'))->pluck('loc')->all();
 
         $this->assertContains('https://fermatmind.com/zh/career/jobs/'.$slug, $locs);
-        $this->assertNotContains('https://fermatmind.com/en/career/jobs/'.$slug, $locs);
+        $this->assertContains('https://fermatmind.com/en/career/jobs/'.$slug, $locs);
 
         \App\Support\PublicProjectionCache::forget('career:public-authority:job-detail:v3:'.$slug.':zh-CN:versions:'.$versions['zh-CN']);
         $missing = $controller->buildPayloadFromAuthorityUrls([

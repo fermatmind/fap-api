@@ -590,7 +590,7 @@ final class CareerJobPublicApiTest extends TestCase
 
     public function test_seo_endpoint_uses_each_locale_file_without_database_metadata(): void
     {
-        foreach (['actors' => ['en' => false, 'zh-CN' => true], 'accountants-and-auditors' => ['en' => true, 'zh-CN' => true]] as $slug => $eligibility) {
+        foreach (['actors' => ['en' => true, 'zh-CN' => true], 'accountants-and-auditors' => ['en' => true, 'zh-CN' => true]] as $slug => $eligibility) {
             foreach (['en', 'zh-CN'] as $locale) {
                 $indexable = $eligibility[$locale];
                 $alternates = [];

@@ -11,6 +11,7 @@ use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
 use App\Domain\Career\Display\CareerCurrentIdentity;
 use Illuminate\Filesystem\Filesystem;
+use Tests\Support\CareerCurrentPackageFixture;
 use Tests\TestCase;
 
 final class CareerCurrentIdentityTest extends TestCase
@@ -180,14 +181,12 @@ final class CareerCurrentIdentityTest extends TestCase
 
     public function test_invalid_alias_updates_restore_page_manifest_and_intent_exactly(): void
     {
-        $root = sys_get_temp_dir().'/career-alias-rollback-'.bin2hex(random_bytes(8));
+        $root = CareerCurrentPackageFixture::create(base_path());
         $files = new Filesystem;
         $current = $root.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
-        $files->makeDirectory(dirname($current), 0700, true);
-        $files->copyDirectory(base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH), $current);
-        $files->copy(base_path(CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH), $root.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH);
         $paths = [$current.'/careers/librarians-and-media-collections-specialists/zh-CN.json', $current.'/manifest.json', $root.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH];
         try {
+            app(CareerContentV3PageUpdater::class)->update($root, 'librarians-and-media-collections-specialists', 'zh-CN', true);
             $before = array_map('file_get_contents', $paths);
             $updater = app(CareerContentV3PageUpdater::class);
             foreach ([

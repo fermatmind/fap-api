@@ -13,7 +13,9 @@ use App\Domain\Career\Display\CareerContentV3FactResolver;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerPageProjector;
+use Illuminate\Filesystem\Filesystem;
 use PHPUnit\Framework\TestCase;
+use Tests\Support\CareerCurrentPackageFixture;
 
 final class CareerAuthoringStructureTest extends TestCase
 {
@@ -152,30 +154,35 @@ final class CareerAuthoringStructureTest extends TestCase
         self::assertSame(['overview', 'quick-decision', 'profile', 'direction-comparison', 'ai-impact', 'china-salary', 'us-salary', 'fit', 'risk', 'path', 'market-signals', 'sources'], $page['authoring_structure']['module_order']);
     }
 
-    public function test_all_formal_chinese_pages_migrate_losslessly_and_idempotently(): void
+    public function test_all_fixture_chinese_identities_migrate_losslessly_and_idempotently(): void
     {
-        $root = dirname(__DIR__, 5).'/content_assets/career/current';
-        $manifest = json_decode(file_get_contents($root.'/manifest.json'), true, 512, JSON_THROW_ON_ERROR);
-        $baseline = $this->baseline();
-        $layout = new CareerAuthoringLayout;
-        $package = new CareerContentV3AuthorityPackage;
-        $projector = new CareerPageProjector(new CareerContentV3CanonicalReader($package), $package, new CareerContentV3FactResolver);
-        $states = ['enhanced' => 0, 'legacy' => 0];
-        foreach ($manifest['files'] as $entry) {
-            if ($entry['locale'] !== 'zh-CN') {
-                continue;
+        $fixture = CareerCurrentPackageFixture::create(dirname(__DIR__, 5));
+        $root = $fixture.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
+        try {
+            $manifest = json_decode(file_get_contents($root.'/manifest.json'), true, 512, JSON_THROW_ON_ERROR);
+            $baseline = $this->baseline();
+            $layout = new CareerAuthoringLayout;
+            $package = new CareerContentV3AuthorityPackage;
+            $projector = new CareerPageProjector(new CareerContentV3CanonicalReader($package), $package, new CareerContentV3FactResolver);
+            $states = ['enhanced' => 0, 'legacy' => 0];
+            foreach ($manifest['files'] as $entry) {
+                if ($entry['locale'] !== 'zh-CN') {
+                    continue;
+                }
+                $old = json_decode(file_get_contents($root.'/'.$entry['path']), true, 512, JSON_THROW_ON_ERROR);
+                $new = $layout->migrate($old, $baseline);
+                $states[$old['content_state']]++;
+                self::assertSame(CareerAuthoringStructure::publicContent($old), CareerAuthoringStructure::publicContent($new), $entry['path']);
+                self::assertSame($projector->project($old), $projector->project($new), $entry['path']);
+                self::assertSame($new, $layout->migrate($new, $baseline));
+                self::assertCount(1716, $new['authoring_structure']['slots']);
+                self::assertSame(CareerAuthoringStructure::inventory($new, $new['authoring_structure']['slots']), $new['authoring_structure']['inventory']);
             }
-            $old = json_decode(file_get_contents($root.'/'.$entry['path']), true, 512, JSON_THROW_ON_ERROR);
-            $new = $layout->migrate($old, $baseline);
-            $states[$old['content_state']]++;
-            self::assertSame(CareerAuthoringStructure::publicContent($old), CareerAuthoringStructure::publicContent($new), $entry['path']);
-            self::assertSame($projector->project($old), $projector->project($new), $entry['path']);
-            self::assertSame($new, $layout->migrate($new, $baseline));
-            self::assertCount(1716, $new['authoring_structure']['slots']);
-            self::assertSame(CareerAuthoringStructure::inventory($new, $new['authoring_structure']['slots']), $new['authoring_structure']['inventory']);
+            self::assertSame(1046, array_sum($states));
+            self::assertGreaterThan(0, $states['enhanced']);
+        } finally {
+            (new Filesystem)->deleteDirectory($fixture);
         }
-        self::assertSame(1046, array_sum($states));
-        self::assertGreaterThan(0, $states['enhanced']);
     }
 
     public function test_ambiguous_actor_prose_is_retained_pending_and_not_bound_by_paragraph_order(): void
