@@ -7,6 +7,13 @@ namespace App\Domain\Career\Display;
 /** Each fixed manifest slug is one independent career; locales are language versions. */
 final class CareerCurrentIdentity
 {
+    /** Current names replace misleading legacy titles without changing occupational scope. */
+    private const NAME_PROJECTION_SLUGS = [
+        'agents-and-business-managers-of-artists-performers-and-athletes',
+        'airline-pilots-copilots-and-flight-engineers',
+        'animal-control-workers',
+    ];
+
     public function __construct(private readonly CareerContentV3CanonicalReader $reader) {}
 
     /** @return array<string,string> */
@@ -55,7 +62,12 @@ final class CareerCurrentIdentity
 
     public function name(string $slug, string $locale): ?string
     {
-        return $this->definition($slug) === null ? null : $this->reader->subjectName($slug, $locale);
+        return $this->hasNameProjection($slug) ? $this->reader->subjectName($slug, $locale) : null;
+    }
+
+    private function hasNameProjection(string $slug): bool
+    {
+        return in_array($slug, self::NAME_PROJECTION_SLUGS, true) || $this->definition($slug) !== null;
     }
 
     /** Apply Current identity to public transports; never change stored compatibility rows. */
@@ -73,7 +85,7 @@ final class CareerCurrentIdentity
             $slug = $match[1];
         }
         $definition = $this->definition($slug);
-        if ($definition === null) {
+        if (! $this->hasNameProjection($slug)) {
             return $payload;
         }
         $en = $this->name($slug, 'en');
@@ -99,6 +111,9 @@ final class CareerCurrentIdentity
             if (is_string(data_get($payload, $path))) {
                 data_set($payload, $path, $title);
             }
+        }
+        if ($definition === null) {
+            return $payload;
         }
         // A combination has no single SOC/O*NET code; all members live in crosswalks.
         $singleCode = count($definition['occupations']) === 1 ? $definition['occupations'][0]['code'] : null;
@@ -147,7 +162,7 @@ final class CareerCurrentIdentity
     /** @return list<string> */
     public function searchTerms(string $target): array
     {
-        $terms = $this->definition($target) === null ? [] : [$this->name($target, 'en'), $this->name($target, 'zh-CN')];
+        $terms = $this->hasNameProjection($target) ? [$this->name($target, 'en'), $this->name($target, 'zh-CN')] : [];
         foreach ($this->aliases() as $alias => $canonical) {
             if ($canonical !== $target) {
                 continue;
@@ -162,7 +177,7 @@ final class CareerCurrentIdentity
     public function canonicalQuery(string $query): string
     {
         $normalized = mb_strtolower(trim($query));
-        foreach (array_unique([...array_values($this->aliases()), ...array_keys($this->scopes())]) as $target) {
+        foreach (array_unique([...array_values($this->aliases()), ...array_keys($this->scopes()), ...self::NAME_PROJECTION_SLUGS]) as $target) {
             foreach ($this->searchTerms($target) as $term) {
                 if (mb_strtolower($term) === $normalized) {
                     return $target;

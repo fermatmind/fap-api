@@ -74,6 +74,29 @@ final class CareerSearchApiTest extends TestCase
             ]);
     }
 
+    public function test_selected_current_names_reach_search_without_replacing_identity(): void
+    {
+        $this->app->instance(CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true));
+        $reader = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class);
+        foreach ([
+            'agents-and-business-managers-of-artists-performers-and-athletes',
+            'airline-pilots-copilots-and-flight-engineers',
+            'animal-control-workers',
+        ] as $slug) {
+            $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
+                'slug' => $slug, 'crosswalk_mode' => 'exact',
+            ]));
+            foreach (['en', 'zh-CN'] as $locale) {
+                $title = $reader->subjectName($slug, $locale);
+                $field = $locale === 'en' ? 'canonical_en' : 'canonical_zh';
+                $this->getJson('/api/v0.5/career/search?locale='.$locale.'&q='.urlencode($title))
+                    ->assertOk()->assertJsonPath('items.0.identity.canonical_slug', $slug)
+                    ->assertJsonPath('items.0.titles.'.$field, $title);
+            }
+        }
+    }
+
     public function test_it_rejects_empty_query_conservatively(): void
     {
         $this->getJson('/api/v0.5/career/search?q=')

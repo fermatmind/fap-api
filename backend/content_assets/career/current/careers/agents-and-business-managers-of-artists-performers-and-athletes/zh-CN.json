@@ -15979,16 +15979,34 @@
         "status": "unfilled"
       },
       "interface.quick_decision.caution_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.caution_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.experiment_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.experiment_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -37260,6 +37278,9 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪条相关职业方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.caution_heading": "这些适配说明有哪些使用边界？",
+      "interface.quick_decision.experiment_heading": "哪些行为值得用一次练习观察？",
+      "interface.quick_decision.suit_heading": "哪些工作条件可能持续消耗你？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37790,7 +37811,7 @@
       "text": "艺术家、演艺人员与运动员经纪及业务经理"
     }
   },
-  "source_content_sha256": "8b2665b5639d243b4e3ab43339a7516c0c5bc4e12c45640e17608ad1f83e8881",
+  "source_content_sha256": "b0c46a05b8674fd6579afb9aa753c917b7c7030c29cb58c99e9aa44c1ccb3aea",
   "subject": {
     "canonical_slug": "agents-and-business-managers-of-artists-performers-and-athletes",
     "name": "艺术家、演艺人员与运动员经纪及业务经理",

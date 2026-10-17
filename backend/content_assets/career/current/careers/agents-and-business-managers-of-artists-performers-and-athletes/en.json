@@ -15979,16 +15979,34 @@
         "status": "unfilled"
       },
       "interface.quick_decision.caution_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.caution_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.experiment_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.experiment_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -37260,6 +37278,9 @@
     "interface": {
       "interface.fit.directions_heading": "Which related occupational direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
+      "interface.quick_decision.caution_heading": "What are the limits of this fit guidance?",
+      "interface.quick_decision.experiment_heading": "Which behaviours can you observe in a practice exercise?",
+      "interface.quick_decision.suit_heading": "Which working conditions may be draining for you?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. pay reference",
@@ -37790,7 +37811,7 @@
       "text": "Agents and business managers of artists, performers and athletes"
     }
   },
-  "source_content_sha256": "abe10e32fb6ffd7dc35399bf5b72e0604e98522b120d7b544d83d914ffbe15a0",
+  "source_content_sha256": "8c49b8f51dc05066d16a3e96e38b1e16ad4c50457a0f3c0ab87d4681588ec846",
   "subject": {
     "canonical_slug": "agents-and-business-managers-of-artists-performers-and-athletes",
     "name": "Agents and business managers of artists, performers and athletes",
