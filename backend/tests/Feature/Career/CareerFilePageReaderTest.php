@@ -96,6 +96,22 @@ final class CareerFilePageReaderTest extends TestCase
         self::assertSame($page, PublicProjectionCache::get($key));
     }
 
+    public function test_old_compressed_and_uncompressed_cache_hits_receive_current_link_normalization(): void
+    {
+        $this->publication(true);
+        $page = app(CareerPageProjector::class)->read('actors', 'en');
+        $key = CareerFilePageReader::cacheKey($page);
+        $old = $page;
+        $old['display']['components']['personality_fit_block']['assessments'][0]['cta_href'] = '/zh/tests/holland-career-interest-test-riasec';
+        $old['display']['components']['market_signal_card']['transitions'][0]['target_href'] = '/zh/career/jobs/'.$old['display']['components']['market_signal_card']['transitions'][0]['target_slug'];
+        $codec = app(CareerJobDetailCanonicalCacheReader::class);
+        foreach ([$old, $codec->encode($old)] as $stored) {
+            PublicProjectionCache::forever($key, $stored);
+            self::assertSame($page, app(CareerFilePageReader::class)->read('actors', 'en')['career_page']);
+            self::assertSame($stored, PublicProjectionCache::get($key));
+        }
+    }
+
     public function test_corrupt_unknown_or_misbound_compressed_cache_falls_back_to_the_file(): void
     {
         $this->publication(true);

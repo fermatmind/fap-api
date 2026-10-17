@@ -72,6 +72,9 @@ final class CareerFilePageReader
                 }
             }
         }
+        // Older immutable caches use the same public schema; apply the same
+        // idempotent link projection on hits without rewriting source or cache.
+        $page = $this->pages->normalizeLinks($page);
         $occupation = Occupation::query()->with(['aliases', 'crosswalks'])->where('canonical_slug', $slug)->first();
         $path = '/'.($locale === 'zh-CN' ? 'zh' : 'en').'/career/jobs/'.$slug;
         $indexable = $this->content->hasPublicBody($slug, $locale);

@@ -65,7 +65,7 @@ final class CareerPageProjector
         $hero['ai']['fact'] = $hero['ai']['availability'] === 'available'
             ? $factMap[$hero['ai']['fact_ref']] : null;
 
-        return [
+        return $this->normalizeLinks([
             'contract_version' => self::VERSION,
             'locale' => $content['locale'],
             'subject' => $content['subject'],
@@ -74,7 +74,53 @@ final class CareerPageProjector
             'seo' => $content['seo'],
             'content' => $content,
             ...($display === null ? [] : ['display' => $display]),
-        ];
+        ]);
+    }
+
+    /** Normalize navigation only; locale files and their provenance remain unchanged. */
+    public function normalizeLinks(array $page): array
+    {
+        $segment = ($page['locale'] ?? null) === 'zh-CN' ? 'zh' : 'en';
+        $changes = [];
+        $localize = static function (string $href) use ($segment): string {
+            return preg_replace('#^/(?:en|zh)/(tests|career/jobs)/#', '/'.$segment.'/$1/', $href);
+        };
+        foreach ($page['display']['components']['personality_fit_block']['assessments'] ?? [] as $i => $assessment) {
+            $href = $assessment['cta_href'];
+            $explicit = str_starts_with($href, '/en/')
+                ? preg_match('/英文|英语|English|\(EN\)/iu', $assessment['cta_label'])
+                : preg_match('/中文|Chinese|\(ZH\)/iu', $assessment['cta_label']);
+            $normalized = $explicit ? $href : $localize($href);
+            $page['display']['components']['personality_fit_block']['assessments'][$i]['cta_href'] = $normalized;
+            $changes['career.item.personality-fit-block'][$href] = $normalized;
+        }
+        foreach ($page['display']['components']['personality_fit_block']['directions'] ?? [] as $i => $direction) {
+            if (! isset($direction['target'])) {
+                continue;
+            }
+            $href = $direction['target']['href'];
+            $normalized = $localize($href);
+            $page['display']['components']['personality_fit_block']['directions'][$i]['target']['href'] = $normalized;
+            $changes['career.item.personality-fit-block'][$href] = $normalized;
+        }
+        foreach ($page['display']['components']['market_signal_card']['transitions'] ?? [] as $i => $transition) {
+            $href = $transition['target_href'];
+            $normalized = $localize($href);
+            $page['display']['components']['market_signal_card']['transitions'][$i]['target_href'] = $normalized;
+            $changes['career.item.market-signal-card'][$href] = $normalized;
+        }
+        foreach ($page['content']['blocks'] ?? [] as $b => $block) {
+            foreach ($block['items'] as $i => $item) {
+                if ($item['type'] !== 'links' || ! isset($changes[$item['copy_key']])) {
+                    continue;
+                }
+                foreach ($item['data']['entries'] as $e => $entry) {
+                    $page['content']['blocks'][$b]['items'][$i]['data']['entries'][$e]['url'] = $changes[$item['copy_key']][$entry['url']] ?? $entry['url'];
+                }
+            }
+        }
+
+        return $page;
     }
 
     public static function assertFields(array $content): void

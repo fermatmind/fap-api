@@ -34,7 +34,38 @@ final class CareerPageProjectorTest extends TestCase
             self::assertCount(5, $page['hero']['metrics']);
             self::assertArrayNotHasKey('presentation_v2', $page);
             self::assertArrayNotHasKey('page', $page);
+            self::assertSame($page, $projector->normalizeLinks($page));
+            $prefix = $page['locale'] === 'en' ? '/en/' : '/zh/';
+            foreach ($page['display']['components']['personality_fit_block']['assessments'] ?? [] as $assessment) {
+                $explicit = preg_match('/英文|英语|中文|English|Chinese|\((?:EN|ZH)\)/iu', $assessment['cta_label']);
+                if (! $explicit) {
+                    self::assertStringStartsWith($prefix.'tests/', $assessment['cta_href'], $entry['path']);
+                }
+            }
+            foreach ($page['display']['components']['market_signal_card']['transitions'] ?? [] as $transition) {
+                self::assertSame($prefix.'career/jobs/'.$transition['target_slug'], $transition['target_href'], $entry['path']);
+            }
+            foreach ($page['display']['components']['personality_fit_block']['directions'] ?? [] as $direction) {
+                if (isset($direction['target'])) {
+                    self::assertSame($prefix.'career/jobs/'.$direction['target']['slug'], $direction['target']['href'], $entry['path']);
+                }
+            }
+
         }
+    }
+
+    public function test_explicit_language_and_unrelated_bilingual_navigation_are_preserved(): void
+    {
+        $projector = $this->projector();
+        $page = $projector->read('architectural-and-civil-drafters', 'zh-CN');
+        $assessment = $page['display']['components']['personality_fit_block']['assessments'][1];
+        self::assertSame('查看大五人格（英文）', $assessment['cta_label']);
+        self::assertStringStartsWith('/en/tests/', $assessment['cta_href']);
+        $actors = $projector->read('actors', 'en');
+        $legacy = $actors;
+        $legacy['display']['components']['personality_fit_block']['assessments'][0]['cta_href'] = '/zh/tests/holland-career-interest-test-riasec';
+        self::assertSame($actors, $projector->normalizeLinks($legacy));
+        self::assertSame($actors['display']['components']['source_card'], $projector->normalizeLinks($legacy)['display']['components']['source_card']);
     }
 
     public function test_actor_pay_keeps_hourly_and_historical_project_units(): void
