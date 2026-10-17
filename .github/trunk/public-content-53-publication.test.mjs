@@ -51,18 +51,18 @@ test('previous translation package remains readable by its own immutable digest'
 test('active amendment binds only the reviewed existing article body',()=>{
  const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
  assert.equal(binding.expected_row_count,1);assert.equal(rows.length,1);
- const row=rows[0];assert.equal(row.page_id,'PAGE-04');assert.equal(row.kind,'article');
- assert.deepEqual(row.identity,{org_id:0,slug:'big-five-conscientiousness-low-procrastination-task-plan',locale:'en'});
+ const row=rows[0];assert.equal(row.page_id,'PAGE-54');assert.equal(row.kind,'article');
+ assert.deepEqual(row.identity,{org_id:0,slug:'mbti-full-report-career-relationship-communication',locale:'en'});
  for(const before of [row.before,row.staging_before]) {
   assert.equal(row.snapshot.title,before.title);assert.equal(row.snapshot.excerpt,before.excerpt);
  }
- assert.ok(row.snapshot.content_md.includes('statistical associations'));
+ assert.ok(row.snapshot.content_md.includes('Identify the tool behind the letters'));
+ assert.ok(row.snapshot.content_md.includes('A/T is not a fifth official MBTI preference.'));
 });
 test('C02 article QA follows stripped CMS markers and still requires actual reader prose',()=>{
- const source=readCandidateRows(root).candidates[0];
  const marker='<!-- body_visual:big_five_conscientiousness_task_plan_flow -->';
  const paragraph='Record a task opportunity when it occurs; do not create tasks just to fill seven days.';
- assert.ok(source.snapshot.content_md.includes(marker));assert.ok(source.snapshot.content_md.includes(paragraph));
+ const source={page_id:'PAGE-04',kind:'article',identity:{org_id:0,locale:'en',slug:'big-five-conscientiousness-low-procrastination-task-plan'},snapshot:{title:'Low Conscientiousness in the Big Five',content_md:marker+'\n\n'+paragraph}};
  // A reader DOM fixture using the actual C02 marker and prose; contract CI
  // intentionally runs without Composer or a frontend application build.
  const row={...source,snapshot:{...source.snapshot,content_md:marker+'\n\n'+paragraph}};

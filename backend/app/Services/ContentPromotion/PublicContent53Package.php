@@ -62,6 +62,7 @@ final class PublicContent53Package
         'PAGE-51' => ['page', 'help-for-business-and-research', 'zh-CN'],
         'PAGE-52' => ['page', 'science', 'zh-CN'],
         'PAGE-53' => ['surface', 'tests_category_career', 'zh-CN'],
+        'PAGE-54' => ['article', 'mbti-full-report-career-relationship-communication', 'en'],
     ];
 
     private const TRANSLATION_PAGES = [
