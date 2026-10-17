@@ -1610,15 +1610,25 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                             );
                         }
                         $items = is_array($authorityJobIndex['items'] ?? null) ? $authorityJobIndex['items'] : [];
+                        $slugs = $this->jobIndexSlugs($items);
+                        // Keep complete Current reader validation once per target. Resolve
+                        // publication after that work so the final decision uses fresh state.
+                        $readiness = $this->jobDetailCacheReadinessBatch(array_map(
+                            static fn (string $slug): array => ['slug' => $slug, 'locale' => $locale], $slugs,
+                        ), false);
+                        $publication = $this->publishedProjectionSnapshots($slugs, $locale);
                         $jobIndexes[$locale] = $this->filterJobIndexPayloadForPublicLocale(
                             $authorityJobIndex,
                             $locale,
                             false,
+                            $publication,
                         );
                         $payloads[$locale] = $this->careerDirectoryReadModelBuilder->build(
                             $items,
                             $locale,
-                            fn (string $slug, string $itemLocale): bool => $this->jobDetailCacheIsReady($slug, $itemLocale),
+                            fn (string $slug, string $itemLocale): bool => $this->publicationReadinessIsReady(
+                                $publication[$slug] ?? null, $readiness[$slug.'|'.$itemLocale] ?? [],
+                            ),
                         );
                     }
 
@@ -1854,44 +1864,18 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             && is_array($directoryPayload['items'] ?? null)
                 ? $directoryPayload['items']
                 : [];
-        $projectionItems = [];
+        $missingSlugs = [];
         foreach ($activeItems as $activeItem) {
-            if (! is_array($activeItem)) {
-                continue;
+            $slug = is_array($activeItem) ? strtolower(trim((string) ($activeItem['slug'] ?? ''))) : '';
+            if ($slug !== '' && ! isset($currentSlugs[$slug])) {
+                $missingSlugs[] = $slug;
             }
-
-            $slug = strtolower(trim((string) ($activeItem['slug'] ?? '')));
-            if ($slug === '' || isset($currentSlugs[$slug])) {
-                continue;
+        }
+        $projectionItems = [];
+        foreach ($this->publishedProjectionSnapshots($missingSlugs, $normalizedLocale, true) as $slug => $evidence) {
+            if (($evidence['item']['dataset_visible'] ?? false) === true) {
+                $projectionItems[$slug] = $evidence['item'];
             }
-
-            $detailVersion = Cache::get($this->jobDetailActiveVersionKey($slug, $normalizedLocale));
-            if (! is_string($detailVersion) || $detailVersion === '') {
-                continue;
-            }
-
-            $detailPayload = $this->readStoredJobDetailPayload($this->jobDetailVersionPayloadKey(
-                $slug,
-                $normalizedLocale,
-                $detailVersion,
-            ));
-            $exposureProjection = Cache::get($this->jobDetailExposureProjectionVersionKey(
-                $slug,
-                $normalizedLocale,
-                $detailVersion,
-            ));
-            if (
-                ! is_array($detailPayload)
-                || ! $this->exposureSnapshotHasCurrentAuthority(
-                    $exposureProjection, $slug, $normalizedLocale,
-                    $this->materializedPublicationItem($slug, $normalizedLocale),
-                )
-                || ($exposureProjection['dataset_visible'] ?? false) !== true
-            ) {
-                continue;
-            }
-
-            $projectionItems[$slug] = $exposureProjection;
         }
 
         ksort($projectionItems, SORT_STRING);
@@ -2360,6 +2344,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         array $payload,
         string $publicLocale,
         bool $requireDetailReady = true,
+        ?array $publication = null,
     ): array {
         $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
         $items = array_map(
@@ -2368,21 +2353,44 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 : $item,
             $items,
         );
-        $payload['items'] = array_values(array_filter($items, function (mixed $item) use ($publicLocale, $requireDetailReady): bool {
+        $slugs = $this->jobIndexSlugs($items);
+        $readiness = $requireDetailReady ? $this->jobDetailCacheReadinessBatch(array_map(
+            static fn (string $slug): array => ['slug' => $slug, 'locale' => $publicLocale], $slugs,
+        ), false) : [];
+        $publication ??= $this->publishedProjectionSnapshots($slugs, $publicLocale);
+        $payload['items'] = array_values(array_filter($items, function (mixed $item) use ($publicLocale, $requireDetailReady, $publication, $readiness): bool {
             if (! is_array($item)) {
                 return false;
             }
-
             $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
-            $projectionItem = $this->effectiveJobDetailProjectionItem($slug, $publicLocale);
+            $evidence = $publication[$slug] ?? null;
 
             return $slug !== '' && ! app(CareerCurrentIdentity::class)->isAlias($slug)
-                && $this->detailReadIsPublishedForLocale($slug, $publicLocale)
-                && ($projectionItem['dataset_visible'] ?? false) === true
-                && (! $requireDetailReady || $this->jobDetailCacheIsReady($slug, $publicLocale));
+                && is_array($evidence)
+                && ($evidence['item']['dataset_visible'] ?? false) === true
+                && (! $requireDetailReady || $this->publicationReadinessIsReady($evidence, $readiness[$slug.'|'.$publicLocale] ?? []));
         }));
 
         return $payload;
+    }
+
+    /** @param list<mixed> $items @return list<string> */
+    private function jobIndexSlugs(array $items): array
+    {
+        return array_values(array_unique(array_filter(array_map(
+            static fn (mixed $item): string => is_array($item)
+                ? strtolower(trim((string) data_get($item, 'identity.canonical_slug', ''))) : '', $items,
+        ), static fn (string $slug): bool => preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) === 1
+            && ! app(CareerCurrentIdentity::class)->isAlias($slug))));
+    }
+
+    private function publicationReadinessIsReady(?array $publication, array $readiness): bool
+    {
+        return $publication !== null
+            && in_array($readiness['classification'] ?? '', ['ready_active', 'ready_lkg', 'legacy_migratable'], true)
+            && ($publication['active_version'] === null
+                || (($readiness['classification'] ?? '') === 'ready_active'
+                    && ($readiness['version'] ?? null) === $publication['active_version']));
     }
 
     /** @param array<string, mixed> $payload @return array<string, mixed> */
@@ -2432,15 +2440,25 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         return $this->jobDetailProjectionItemIsPublished($item);
     }
 
-    /** Batch the full directory before pagination; no per-member database reads or display hydration. @return array<string,bool> */
+    /** @return array<string,bool> */
     public function directoryPublishedSlugs(array $slugs, string $locale): array
+    {
+        return array_fill_keys(array_keys($this->publishedProjectionSnapshots($slugs, $locale)), true);
+    }
+
+    /** @return array<string,array{item:array<string,mixed>,active_version:?string}> */
+    private function publishedProjectionSnapshots(array $slugs, string $locale, bool $requireActiveSnapshot = false): array
     {
         $published = [];
         $candidates = [];
         foreach (array_unique($slugs) as $slug) {
             $item = $this->materializedPublicationItem($slug, $locale);
             if ($this->jobDetailProjectionItemIsPublished($item)) {
-                $published[$slug] = true;
+                if ($requireActiveSnapshot) {
+                    $candidates[$slug] = $item;
+                } else {
+                    $published[$slug] = ['item' => $item, 'active_version' => null];
+                }
             } elseif (($item['runtime_publish_state'] ?? null) === CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE) {
                 $candidates[$slug] = $item;
             }
@@ -2461,17 +2479,18 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         if ($versions === []) {
             return $published;
         }
+        $candidateSlugs = array_keys(array_filter($candidates, static fn (array $item): bool => ($item['runtime_publish_state'] ?? null) === CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE));
         try {
             // The correlated subquery uses the same latest-state ordering as the release ledger.
-            $indexes = IndexState::query()->join('occupations', 'occupations.id', '=', 'index_states.occupation_id')
-                ->whereIn('occupations.canonical_slug', array_keys($versions))
+            $indexes = $candidateSlugs === [] ? collect() : IndexState::query()->join('occupations', 'occupations.id', '=', 'index_states.occupation_id')
+                ->whereIn('occupations.canonical_slug', $candidateSlugs)
                 ->where('index_states.id', function ($query): void {
                     $query->select('latest.id')->from('index_states as latest')
                         ->whereColumn('latest.occupation_id', 'occupations.id')
                         ->orderByDesc('latest.changed_at')->orderByDesc('latest.created_at')->orderByDesc('latest.id')->limit(1);
                 })->get(['index_states.*', 'occupations.canonical_slug'])->keyBy('canonical_slug');
         } catch (Throwable) {
-            return $published;
+            $indexes = collect();
         }
         // Bound memory even when an older compatibility payload is large.
         foreach (array_chunk($versions, 32, true) as $chunk) {
@@ -2488,7 +2507,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 if (is_array($payload) && $this->exposureSnapshotHasCurrentAuthority(
                     $snapshot, $slug, $locale, $candidates[$slug], true, $indexes->get($slug),
                 )) {
-                    $published[$slug] = true;
+                    $published[$slug] = ['item' => $snapshot, 'active_version' => $version];
                 }
             }
         }

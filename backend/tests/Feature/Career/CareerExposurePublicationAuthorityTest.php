@@ -184,7 +184,43 @@ final class CareerExposurePublicationAuthorityTest extends TestCase
         $cache->directoryReadModelPayload('en');
     }
 
-    public function test_directory_candidate_qualification_uses_one_query_for_the_whole_member_set(): void
+    public function test_cli_warm_never_restores_candidate_from_stale_or_unreadable_exposure(): void
+    {
+        foreach (['en', 'zh-CN'] as $locale) {
+            foreach (['lkg_only', 'bad_payload', 'old_generation', 'dataset_hidden', 'revoked'] as $failure) {
+                $this->index->forceFill(['index_state' => 'indexed', 'index_eligible' => true])->save();
+                $this->generation('published_candidate');
+                $cache = app(PublicCareerAuthorityResponseCache::class);
+                $version = $this->seedSnapshot($locale);
+                $cache->publishDirectoryReadModel($locale, [
+                    'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION,
+                    'locale' => $locale,
+                    'items' => [['slug' => 'actors', 'canonical_path' => '/career/jobs/actors', 'indexable' => true, 'detail_ready' => true]],
+                ]);
+                if ($failure === 'lkg_only') {
+                    PublicProjectionCache::forever($this->base($locale).':lkg', $version);
+                    PublicProjectionCache::forget($this->base($locale).':active');
+                } elseif ($failure === 'bad_payload') {
+                    PublicProjectionCache::forever($this->base($locale).':versions:'.$version, 'corrupt');
+                } elseif ($failure === 'revoked') {
+                    $this->index->forceFill(['index_state' => 'noindex', 'index_eligible' => false])->save();
+                } else {
+                    $key = $this->base($locale).':exposure-projections:'.$version;
+                    $snapshot = PublicProjectionCache::get($key);
+                    if ($failure === 'old_generation') {
+                        $snapshot['exposure_authority']['generation_sha256'] = str_repeat('0', 64);
+                    } else {
+                        $snapshot['dataset_visible'] = false;
+                    }
+                    PublicProjectionCache::forever($key, $snapshot);
+                }
+                $cache->warmDirectoryReadModels([$locale]);
+                self::assertSame([], $cache->directoryReadModelPayload($locale)['items'], $locale.':'.$failure);
+            }
+        }
+    }
+
+    public function test_candidate_qualification_stays_batched_in_directory_and_cli_warm(): void
     {
         $items = [];
         $slugs = [];
@@ -212,6 +248,28 @@ final class CareerExposurePublicationAuthorityTest extends TestCase
             self::assertCount(64, $cache->directoryPublishedSlugs($slugs, 'en'));
             self::assertCount(1, \Illuminate\Support\Facades\DB::getQueryLog());
             self::assertLessThan(400, (hrtime(true) - $started) / 1_000_000);
+            $queryCounts = [];
+            foreach ([16, 64] as $size) {
+                $cache->publishDirectoryReadModel('en', [
+                    'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION,
+                    'locale' => 'en',
+                    'items' => array_map(static fn (string $slug): array => [
+                        'slug' => $slug, 'canonical_path' => '/en/career/jobs/'.$slug,
+                        'indexable' => true, 'detail_ready' => true,
+                    ], array_slice($slugs, 0, $size)),
+                ]);
+                \Illuminate\Support\Facades\DB::flushQueryLog();
+                $cache->warmDirectoryReadModels(['en']);
+                $queryCounts[] = count(\Illuminate\Support\Facades\DB::getQueryLog());
+                self::assertCount($size, $cache->directoryReadModelPayload('en')['items']);
+                self::assertLessThanOrEqual(10, $queryCounts[array_key_last($queryCounts)]);
+            }
+            self::assertSame($queryCounts[0], $queryCounts[1], 'CLI queries must not grow with the candidate cohort.');
+            IndexState::query()->where('occupation_id', Occupation::query()->where('canonical_slug', $slugs[0])->value('id'))
+                ->update(['index_state' => 'noindex', 'index_eligible' => false]);
+            $cache->warmDirectoryReadModels(['en']);
+            self::assertNotContains($slugs[0], array_column($cache->directoryReadModelPayload('en')['items'], 'slug'));
+            self::assertCount(63, $cache->directoryReadModelPayload('en')['items']);
         } finally {
             \Illuminate\Support\Facades\DB::disableQueryLog();
         }
