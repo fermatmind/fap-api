@@ -30,10 +30,18 @@ final class CareerPageDisplayResolverTest extends TestCase
         $source = $this->source();
         $page = $this->project($source);
         $facts = array_column($source['fact_register']['facts'], null, 'fact_id');
-        self::assertSame($facts[$source['hero']['ai']['fact_ref']]['display_value'], $page['hero']['ai']['fact']['display_value']);
+        self::assertSame('missing', $source['hero']['ai']['availability']);
+        self::assertSame('missing', $page['hero']['ai']['availability']);
+        self::assertNull($page['hero']['ai']['fact_ref']);
+        self::assertNull($page['hero']['ai']['fact']);
         self::assertSame($source['hero']['badges'], $page['hero']['badges']);
         foreach ($source['hero']['metrics'] as $index => $metric) {
-            self::assertSame($facts[$metric['fact_ref']]['display_value'], $page['hero']['metrics'][$index]['fact']['display_value']);
+            self::assertSame($metric['availability'], $page['hero']['metrics'][$index]['availability']);
+            if ($metric['availability'] === 'missing') {
+                self::assertNull($page['hero']['metrics'][$index]['fact']);
+            } else {
+                self::assertSame($facts[$metric['fact_ref']]['display_value'], $page['hero']['metrics'][$index]['fact']['display_value']);
+            }
         }
         self::assertCount(22, $page['display']['components']);
         self::assertCount(10, $page['display']['components']['faq_block']['items']);

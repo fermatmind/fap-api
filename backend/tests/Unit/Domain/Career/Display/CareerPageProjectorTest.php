@@ -94,8 +94,10 @@ final class CareerPageProjectorTest extends TestCase
         self::assertStringContainsString('不等于净新增就业', $market['outlook_evidence'][2]['interpretation']);
         self::assertStringContainsString('78%', $market['direct_answer']);
         $names = ['financial-risk-specialists' => '金融风险专员', 'statisticians' => '统计师', 'insurance-underwriters' => '保险承保人', 'bioinformatics-technicians' => '生物信息技术员'];
+        $transitionNames = $names + ['financial-quantitative-analysts' => '金融量化分析师', 'financial-and-investment-analysts' => '金融与投资分析师', 'data-scientists' => '数据科学家', 'compensation-benefits-and-job-analysis-specialists' => '薪酬、福利与岗位分析专员'];
+        self::assertCount(count($transitionNames), $market['transitions']);
         foreach ($market['transitions'] as $row) {
-            self::assertSame($names[$row['target_slug']], $row['target_title']);
+            self::assertSame($transitionNames[$row['target_slug']], $row['target_title']);
             self::assertSame('/zh/career/jobs/'.$row['target_slug'], $row['target_href']);
             self::assertDoesNotMatchRegularExpression('/31,200|1,500|78%|就业增长/', $row['shared_capabilities'].' '.$row['capability_gaps']);
         }
@@ -132,10 +134,10 @@ final class CareerPageProjectorTest extends TestCase
         self::assertStringContainsString('40.34', $designer);
         self::assertStringContainsString('不能推断均值与中位数相同', $designer);
         self::assertStringNotContainsString('即平均值与中位数在该页面上相同', $designer);
-        $aerospace = CareerCurrentAuthorityPackage::encodeCanonical($projector->read('aerospace-engineers', 'zh-CN'));
-        self::assertStringContainsString('平均每年约 4,500', $aerospace);
-        self::assertStringContainsString('不能理解为净新增', $aerospace);
-        self::assertStringNotContainsString('十年约 4,500', $aerospace);
+        $aerospace = $projector->read('aerospace-engineers', 'zh-CN')['display']['components']['market_signal_card']['outlook_evidence'];
+        self::assertSame('3,800 个/年', $aerospace[2]['value']);
+        self::assertStringContainsString('包含增长和退休、转岗等替代需求，不是每年净增。', $aerospace[2]['interpretation']);
+        self::assertStringContainsString('预计净增5,700人，由68,700增至74,400。', $aerospace[1]['interpretation']);
         $aircraft = CareerCurrentAuthorityPackage::encodeCanonical($projector->read('aircraft-and-avionics-equipment-mechanics-and-technicians', 'zh-CN'));
         self::assertStringContainsString('平均每年约 11,300', $aircraft);
         self::assertStringContainsString('2025—2035', $aircraft);
@@ -154,7 +156,7 @@ final class CareerPageProjectorTest extends TestCase
         $projector = $this->projector();
         foreach ([
             'middle-school-teachers' => ['us_pay' => '64,370', 'us_growth' => '0%', 'us_employment' => '630,100', 'us_openings' => '38,800'],
-            'aerospace-engineers' => ['us_pay' => '134,960', 'us_growth' => '6%', 'us_employment' => '71,600', 'us_openings' => '4,500'],
+            'aerospace-engineers' => ['us_pay' => '134,960', 'us_growth' => '8%', 'us_employment' => '68,700', 'us_openings' => '3,800'],
         ] as $slug => $expected) {
             $page = $projector->read($slug, 'zh-CN');
             $metrics = array_column($page['hero']['metrics'], null, 'key');
@@ -167,8 +169,8 @@ final class CareerPageProjectorTest extends TestCase
             self::assertSame('missing', $page['hero']['ai']['availability']);
         }
         $aerospace = array_column($projector->read('aerospace-engineers', 'zh-CN')['hero']['metrics'], null, 'key');
-        self::assertSame('2024', $aerospace['us_employment']['fact']['period']);
-        self::assertSame('2024—2034', $aerospace['us_openings']['fact']['period']);
+        self::assertSame('2025年', $aerospace['us_employment']['fact']['period']);
+        self::assertSame('2025–2035年', $aerospace['us_openings']['fact']['period']);
         self::assertSame('年均职位空缺', $aerospace['us_openings']['fact']['measure']);
     }
 

@@ -40,15 +40,17 @@ final class CareerContentV3ContractTest extends TestCase
         self::assertSame('legacy', $first['content_state']);
     }
 
-    public function test_v3_preserves_the_installed_legacy_placeholder_without_mutating_identity(): void
+    public function test_v3_preserves_the_installed_english_body_without_mutating_identity(): void
     {
         $reader = app(CareerContentV3CanonicalReader::class);
         $page = $reader->page('actors', 'en');
         $entry = $reader->fileEntry('actors', 'en');
 
-        self::assertSame('legacy', $page['content_state']);
+        self::assertSame('actors', $page['subject']['canonical_slug']);
+        self::assertSame('en', $page['locale']);
+        self::assertSame('enhanced', $page['content_state']);
         self::assertSame($entry['source_content_sha256'], $page['source_content_sha256']);
-        self::assertSame([], $page['blocks']);
+        self::assertCount(13, $page['blocks']);
     }
 
     public function test_projection_is_stable_across_mysql_json_object_key_order(): void
@@ -97,7 +99,7 @@ final class CareerContentV3ContractTest extends TestCase
         );
     }
 
-    public function test_faq_questions_are_replaced_with_stable_frontend_semantic_keys(): void
+    public function test_faq_keeps_stable_frontend_semantic_keys_and_published_english_copy(): void
     {
         $reader = app(CareerContentV3CanonicalReader::class);
         $projection = $reader->page('accountants-and-auditors', 'en');
@@ -110,8 +112,10 @@ final class CareerContentV3ContractTest extends TestCase
             'career.faq.accounting.comparison',
             'career.faq.accounting.ai-replacement',
         ], array_slice(array_column($faq['data']['entries'], 'question_key'), 0, 3));
+        self::assertSame('What exactly do accountants and auditors do each day?', $faq['data']['entries'][0]['question']);
         foreach ($faq['data']['entries'] as $entry) {
-            self::assertArrayNotHasKey('question', $entry);
+            self::assertIsString($entry['question']);
+            self::assertNotSame('', trim($entry['question']));
         }
     }
 

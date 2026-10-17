@@ -78,7 +78,7 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
                     self::assertSame([], $page['blocks']);
                     self::assertNull($page['subject']['summary']);
                 } else {
-                    self::assertSame('zh-CN', $page['locale']);
+                    self::assertSame($locale, $page['locale']);
                     self::assertCount(13, $page['blocks']);
                     self::assertNotEmpty($page['subject']['summary']);
                 }

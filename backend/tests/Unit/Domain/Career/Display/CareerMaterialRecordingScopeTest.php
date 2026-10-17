@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 final class CareerMaterialRecordingScopeTest extends TestCase
 {
-    public function test_material_recording_scope_excludes_order_fillers_and_keeps_english_placeholder(): void
+    public function test_material_recording_scope_excludes_order_fillers_and_keeps_published_english_body(): void
     {
         $slug = 'material-recording-clerks';
         $identity = app(CareerCurrentIdentity::class);
@@ -19,8 +19,8 @@ final class CareerMaterialRecordingScopeTest extends TestCase
         $reader = app(CareerContentV3CanonicalReader::class);
         $en = $reader->page($slug, 'en');
         self::assertSame('Material Recording Clerks', $en['subject']['name']);
-        self::assertSame('legacy', $en['content_state']);
-        self::assertSame([], $en['blocks']);
+        self::assertSame('enhanced', $en['content_state']);
+        self::assertCount(13, $en['blocks']);
         $zh = $reader->page($slug, 'zh-CN');
         self::assertSame('物料记录文员', $zh['subject']['name']);
         self::assertSame('enhanced', $zh['content_state']);
