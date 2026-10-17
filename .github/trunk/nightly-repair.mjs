@@ -15,8 +15,18 @@ export function repairDomains(paths,root=process.cwd(),executionInputs=[]) {
  const highRisk=paths.some(p=>/^backend\/(?:composer\.|database\/|bootstrap\/|app\/(?:Http\/Middleware|Policies|Providers)\/)/.test(p));
  return {php_required:required.size>0,php_files:[...required].sort().map(p=>p.slice(8)),workflow:control,authority:highRisk||paths.some(p=>/^backend\/content_/.test(p)),dependency:paths.some(p=>/^backend\/composer\./.test(p)),security:highRisk};
 }
+// A run count is not a validation boundary: daily/skipped/failed runs can
+// outnumber any fixed window while the last successful PHP proof stays valid.
+export async function* nightlyRunHistory(listRuns,currentRunId) {
+ for(let page=1;;page++) {
+  const runs=await listRuns(page);
+  if(!Array.isArray(runs))throw new Error('NIGHTLY_RUN_INVENTORY_HOLD');
+  for(const run of runs)if(String(run.id)!==String(currentRunId))yield run;
+  if(runs.length<100)return;
+ }
+}
 export async function phpRepairBaseline(runs,listJobs,head,isAncestor) {
- for(const run of runs.slice(0,20)) {
+ for await(const run of runs) {
   if(run.status!=='completed'||!['success','failure'].includes(run.conclusion)||run.head_branch!=='main'||run.run_attempt!==1||!isAncestor(run.head_sha,head))continue;
   const jobs=await listJobs(run.id);
   if(jobs.some(job=>['Full PHPUnit regression and performance contracts','Focused PHPUnit regression and performance contracts'].includes(job.name)&&job.conclusion==='success'))return run.head_sha;
@@ -26,7 +36,7 @@ export async function phpRepairBaseline(runs,listJobs,head,isAncestor) {
 if(import.meta.url===`file://${process.argv[1]}`){
  const pushBase=process.env.PUSH_BEFORE,head=process.env.GITHUB_SHA;
  const api=path=>JSON.parse(execFileSync('gh',['api',`repos/${process.env.GITHUB_REPOSITORY}/${path}`],{encoding:'utf8',timeout:30000,maxBuffer:8*1024*1024}));
- const runs=api('actions/workflows/nightly.yml/runs?status=completed&per_page=100').workflow_runs.filter(run=>String(run.id)!==process.env.GITHUB_RUN_ID);
+ const runs=nightlyRunHistory(page=>api(`actions/workflows/nightly.yml/runs?status=completed&per_page=100&page=${page}`).workflow_runs,process.env.GITHUB_RUN_ID);
  const base=await phpRepairBaseline(runs,id=>{const result=api(`actions/runs/${id}/attempts/1/jobs?per_page=100`);if(result.total_count!==result.jobs?.length)throw new Error('NIGHTLY_JOB_INVENTORY_HOLD');return result.jobs;},head,(a,b)=>/^[a-f0-9]{40}$/.test(a??'')&&spawnSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore'}).status===0);
 
  if(![base,head].every(s=>/^[a-f0-9]{40}$/.test(s??'')&&s!=='0'.repeat(40)))throw new Error('NIGHTLY_REPAIR_BASE_HOLD');

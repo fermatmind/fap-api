@@ -209,7 +209,7 @@ final class ArticleUpdateImageMetadataCommandTest extends TestCase
         $exit = Artisan::call('articles:update-image-metadata', $options);
         $plan = $this->jsonOutput();
         $this->assertSame(0, $exit);
-        $this->assertSame($schema, $article->fresh()->seoMeta->schema_json);
+        $this->assertSame($before['schema_json'], $article->fresh()->seoMeta->schema_json);
         $this->assertNotSame($plan['before'][0]['schema_json_sha256'], $plan['after'][0]['schema_json_sha256']);
         $this->assertSame($plan['before'][0]['schema_non_media_sha256'], $plan['after'][0]['schema_non_media_sha256']);
         $exit = Artisan::call('articles:update-image-metadata', $options + ['--execute' => true]);

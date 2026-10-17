@@ -449,7 +449,12 @@ final class ScaleRegistryFaqEditingTest extends TestCase
     public function test_legacy_query_dependency_error_is_not_treated_as_missing_legacy_table(): void
     {
         Schema::drop('scales_registry');
+        Schema::create('missing_registry_dependency', function ($table): void {
+            $table->integer('org_id');
+            $table->string('code');
+        });
         DB::unprepared('CREATE VIEW scales_registry AS SELECT * FROM missing_registry_dependency');
+        Schema::drop('missing_registry_dependency');
         try {
             Livewire::test(EditScaleRegistry::class, ['record' => 10]);
             self::fail('A missing view dependency must not be swallowed');
@@ -458,12 +463,20 @@ final class ScaleRegistryFaqEditingTest extends TestCase
             while ($cause->getPrevious() !== null) {
                 $cause = $cause->getPrevious();
                 if ($cause instanceof QueryException) {
-                    self::assertSame('no such table: main.missing_registry_dependency', $cause->errorInfo[2]);
+                    if (DB::getDriverName() === 'mysql') {
+                        self::assertSame('HY000', $cause->errorInfo[0]);
+                        self::assertSame(1356, $cause->errorInfo[1]);
+                        self::assertStringContainsString('scales_registry', $cause->errorInfo[2]);
+                    } else {
+                        self::assertSame('no such table: main.missing_registry_dependency', $cause->errorInfo[2]);
+                    }
 
                     return;
                 }
             }
             self::fail('The rendering exception must retain its database cause');
+        } finally {
+            DB::unprepared('DROP VIEW scales_registry');
         }
     }
 

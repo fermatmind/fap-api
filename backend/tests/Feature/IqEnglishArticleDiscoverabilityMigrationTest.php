@@ -42,7 +42,7 @@ final class IqEnglishArticleDiscoverabilityMigrationTest extends TestCase
             $table->integer('source_article_id')->nullable();
             $table->string('translation_group_id');
             $table->string('source_version_hash');
-            $table->text('content_md')->default('Keep current body');
+            $table->text('content_md');
             $table->timestamp('updated_at')->nullable();
         });
         Schema::create('article_translation_revisions', function (Blueprint $table): void {
@@ -51,7 +51,7 @@ final class IqEnglishArticleDiscoverabilityMigrationTest extends TestCase
             $table->integer('org_id')->default(0);
             $table->string('locale')->default('en');
             $table->string('revision_status')->default('published');
-            $table->text('content_md')->default('Reviewed public reasoning guide');
+            $table->text('content_md');
             $table->string('translated_from_version_hash');
             $table->timestamp('approved_at')->nullable();
             $table->timestamp('published_at')->nullable();
@@ -64,7 +64,7 @@ final class IqEnglishArticleDiscoverabilityMigrationTest extends TestCase
             $table->boolean('is_indexable')->default(false);
             $table->string('robots')->nullable()->default('noindex,nofollow');
             $table->string('canonical_url')->nullable();
-            $table->text('schema_json')->default('{"keep":"existing policy"}');
+            $table->text('schema_json');
         });
         $this->app->instance(AuditLogger::class, Mockery::spy(AuditLogger::class));
 
@@ -181,15 +181,15 @@ final class IqEnglishArticleDiscoverabilityMigrationTest extends TestCase
             $source = 2 * $i + 1;
             $english = $source + 1;
             DB::table('articles')->insert([
-                ['id' => $source, 'locale' => 'zh-CN', 'slug' => $slug, 'translation_group_id' => $slug, 'source_version_hash' => str_repeat('a', 64)],
-                ['id' => $english, 'locale' => 'en', 'slug' => $slug, 'translation_group_id' => $slug, 'source_version_hash' => str_repeat('c', 64)],
+                ['id' => $source, 'locale' => 'zh-CN', 'slug' => $slug, 'translation_group_id' => $slug, 'source_version_hash' => str_repeat('a', 64), 'content_md' => 'Keep current body'],
+                ['id' => $english, 'locale' => 'en', 'slug' => $slug, 'translation_group_id' => $slug, 'source_version_hash' => str_repeat('c', 64), 'content_md' => 'Keep current body'],
             ]);
             DB::table('articles')->where('id', $english)->update(['source_article_id' => $source, 'published_revision_id' => 100 + $english,
                 'working_revision_id' => 999, 'updated_at' => '2026-10-10 12:00:00']);
             DB::table('article_translation_revisions')->insert(['id' => 100 + $english, 'article_id' => $english,
-                'translated_from_version_hash' => str_repeat('a', 64), 'approved_at' => '2026-10-10 12:00:00', 'published_at' => '2026-10-10 12:00:00']);
-            DB::table('article_seo_meta')->insert(['id' => 200 + $english, 'article_id' => $english, 'canonical_url' => 'https://fermatmind.com/en/articles/'.$slug]);
+                'content_md' => 'Reviewed public reasoning guide', 'translated_from_version_hash' => str_repeat('a', 64), 'approved_at' => '2026-10-10 12:00:00', 'published_at' => '2026-10-10 12:00:00']);
+            DB::table('article_seo_meta')->insert(['id' => 200 + $english, 'article_id' => $english, 'canonical_url' => 'https://fermatmind.com/en/articles/'.$slug, 'schema_json' => '{"keep":"existing policy"}']);
         }
-        DB::table('articles')->insert(['id' => 20, 'org_id' => 7, 'locale' => 'en', 'slug' => 'iq-test-tool-guide', 'translation_group_id' => 'foreign', 'source_version_hash' => 'keep']);
+        DB::table('articles')->insert(['id' => 20, 'org_id' => 7, 'locale' => 'en', 'slug' => 'iq-test-tool-guide', 'translation_group_id' => 'foreign', 'source_version_hash' => 'keep', 'content_md' => 'Keep current body']);
     }
 }

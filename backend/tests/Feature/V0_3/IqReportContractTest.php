@@ -198,7 +198,7 @@ final class IqReportContractTest extends TestCase
         $token = $this->issueAnonToken($anonId);
         $this->createAttempt($attemptId, $anonId);
         $result = $this->createScoredResult($attemptId, withOwnerBetaStandardScore: true);
-        $originalJson = $result->result_json;
+        $originalJson = $result->fresh()->result_json;
         $headers = ['X-Anon-Id' => $anonId, 'Authorization' => 'Bearer '.$token];
 
         $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report-access")
