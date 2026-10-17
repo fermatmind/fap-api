@@ -5,10 +5,18 @@ export function changedTestPlan(changes, {vitest=false}={}) {
  for(const {status,path} of changes){
   if(!/(?:^|\/)(?:tests?|__tests__)\/|(?:Test\.php|\.test\.[cm]?[jt]sx?|(?:test_[^/]+|[^/]+_test)\.(?:py|sh))$/.test(path))continue;
   if(/(?:fixtures|snapshots)\//.test(path)||/\.(?:json|md|xml|yaml|yml|snap|csv|png)$/.test(path))continue;
-  // This IQ/SH-01 seed trait is a dependency, not an executable test.
-  // Changes must run both real consumers; unknown PHP helpers still fail closed.
-  if(path==='backend/tests/Unit/ContentPromotion/Concerns/SeedsIqEqTopicPrerequisites.php'){
-   plan.php.push('backend/tests/Unit/ContentPromotion/IqEqTopicPrerequisitesTest.php','backend/tests/Unit/ContentPromotion/IqEqTopicPromotionAdapterTest.php');
+  // Known test dependencies execute every real consumer; unknown helpers fail closed.
+  const helperConsumers={
+   'backend/tests/Unit/ContentPromotion/Concerns/SeedsIqEqTopicPrerequisites.php':[
+    'backend/tests/Unit/ContentPromotion/IqEqTopicPrerequisitesTest.php','backend/tests/Unit/ContentPromotion/IqEqTopicPromotionAdapterTest.php',
+   ],
+   'backend/tests/Support/CareerCurrentPackageFixture.php':[
+    'backend/tests/Feature/Domain/Career/Display/CareerCurrentAuthorityParityTest.php',
+    ...['CareerAuthoringMigrationTest','CareerAuthoringStructureTest','CareerContentV3BatchUpdaterTest','CareerContentV3PageUpdaterTest','CareerCurrentIdentityTest'].map(name=>`backend/tests/Unit/Domain/Career/Display/${name}.php`),
+   ],
+  };
+  if(helperConsumers[path]){
+   plan.php.push(...helperConsumers[path]);
    if(status==='D')plan.removed.push(path);
    continue;
   }

@@ -88,3 +88,21 @@ test('IQ topic seed dependency selects both real consumers in each PHP mode and 
  }
  assert.throws(()=>changedTestPlan([{status:'M',path:helper.replace('SeedsIqEqTopicPrerequisites','OtherHelper')}]),/Unsupported changed tests/);
 });
+
+
+test('Career package fixture selects all six executable consumers without accepting unknown Support helpers',()=>{
+ const helper='backend/tests/Support/CareerCurrentPackageFixture.php';
+ const expected=['backend/tests/Feature/Domain/Career/Display/CareerCurrentAuthorityParityTest.php',
+  ...['CareerAuthoringMigrationTest','CareerAuthoringStructureTest','CareerContentV3BatchUpdaterTest','CareerContentV3PageUpdaterTest','CareerCurrentIdentityTest'].map(name=>`backend/tests/Unit/Domain/Career/Display/${name}.php`)].sort();
+ for(const status of ['A','M','D']){
+  const plan=changedTestPlan([{status,path:helper},...expected.map(path=>({status:'M',path}))]);
+  assert.deepEqual(plan.php,expected);
+  assert.deepEqual(plan.removed,status==='D'?[helper]:[]);
+  for(const mode of ['legacy','v2']){
+   const calls=[];runChangedTests(plan,{mode,run:(cmd,args)=>{calls.push({cmd,args});return {status:0};}});
+   assert.deepEqual(calls,[{cmd:'php',args:['artisan','test',...expected.map(path=>path.replace(/^backend\//,'')),'--no-ansi']}]);
+   assert.throws(()=>runChangedTests(plan,{mode,run:()=>({status:1})}),/Changed test execution failed/);
+  }
+ }
+ assert.throws(()=>changedTestPlan([{status:'M',path:helper.replace('CareerCurrentPackageFixture','UnknownFixture')}]),/Unsupported changed tests/);
+});
