@@ -50,7 +50,9 @@ class CareerContentV3CanonicalReader
 
         if (! isset($this->pages[$key])) {
             $raw = $this->package->pageFromIndexForRuntime($index, $slug, $locale);
-            $isolated = $this->isolateInvalidBlocks($raw)['content'];
+            // The fact resolver validates this exact isolated input and its
+            // resolved output. Avoid repeating the same full input validation.
+            $isolated = $this->isolateBlocks($raw)['content'];
             $this->pages[$key] = CareerAuthoringStructure::publicContent(($this->factResolver ?? new CareerContentV3FactResolver)->resolve($isolated));
         }
 
@@ -210,6 +212,15 @@ class CareerContentV3CanonicalReader
      */
     public function isolateInvalidBlocks(array $content): array
     {
+        $result = $this->isolateBlocks($content);
+        CareerContentV3Contract::assert($result['content']);
+
+        return $result;
+    }
+
+    /** @return array{content:array<string,mixed>,isolated_block_ids:list<string>} */
+    private function isolateBlocks(array $content): array
+    {
         if (! is_array($content['blocks'] ?? null) || ! array_is_list($content['blocks'])) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_INVALID');
         }
@@ -233,7 +244,6 @@ class CareerContentV3CanonicalReader
                 $isolated[] = $id;
             }
         }
-        CareerContentV3Contract::assert($content);
 
         return ['content' => $content, 'isolated_block_ids' => $isolated];
     }

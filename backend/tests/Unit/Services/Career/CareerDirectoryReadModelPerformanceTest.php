@@ -68,6 +68,48 @@ final class CareerDirectoryReadModelPerformanceTest extends TestCase
         fwrite(STDOUT, "\ncareer_installed_directory_metrics=".json_encode($observations, JSON_THROW_ON_ERROR)."\n");
     }
 
+    public function test_paged_browsing_resolves_only_visible_names_and_preserves_search_and_full_inventory(): void
+    {
+        $reader = new class(new CareerContentV3AuthorityPackage, base_path()) extends CareerContentV3CanonicalReader
+        {
+            public array $nameReads = [];
+
+            public function subjectName(string $slug, string $locale, ?string $backendRoot = null): string
+            {
+                $this->nameReads[] = $slug.'|'.$locale;
+
+                return parent::subjectName($slug, $locale, $backendRoot);
+            }
+        };
+        app()->instance(CareerCurrentIdentity::class, new CareerCurrentIdentity($reader));
+        $rows = array_map(static fn (string $slug): array => [
+            'identity' => ['canonical_slug' => $slug],
+            'titles' => ['canonical_en' => $slug, 'canonical_zh' => $slug],
+            'seo_contract' => ['index_eligible' => true, 'index_state' => 'indexable', 'robots_policy' => 'index,follow'],
+        ], ['actors', 'animal-control-workers']);
+        $model = app(CareerDirectoryReadModelBuilder::class)->build($rows, 'en', static fn (): bool => true);
+        Cache::forever(PublicCareerAuthorityResponseCache::DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX.':en', $model);
+        $service = new CareerDirectoryAuthorityService(app(PublicCareerAuthorityResponseCache::class), $reader);
+
+        $first = $service->payload('en', perPage: 1);
+        self::assertSame('actors', $first['items'][0]['slug']);
+        self::assertSame([], $reader->nameReads);
+        self::assertSame(2, $first['public_truth']['public_detail_indexable_count']);
+        self::assertSame(2, $first['pagination']['total']);
+
+        $second = $service->payload('en', page: 2, perPage: 1);
+        $expected = app(CareerContentV3CanonicalReader::class)->subjectName('animal-control-workers', 'en');
+        self::assertSame($expected, $second['items'][0]['title']);
+        self::assertSame(['animal-control-workers|en', 'animal-control-workers|zh-CN'], $reader->nameReads);
+
+        $selected = $service->payload('en', query: $expected);
+        self::assertSame(['animal-control-workers'], array_column($selected['items'], 'slug'));
+        self::assertSame($expected, $selected['items'][0]['title']);
+        $all = $service->browseItems('en');
+        self::assertSame(['actors', 'animal-control-workers'], array_column($all, 'slug'));
+        self::assertSame($expected, $all[1]['title']);
+    }
+
     public function test_untrusted_cache_qualification_cannot_override_installed_body_qualification(): void
     {
         $root = sys_get_temp_dir().'/career-directory-qualification-'.bin2hex(random_bytes(8));

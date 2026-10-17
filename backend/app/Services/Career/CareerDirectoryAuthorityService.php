@@ -37,9 +37,9 @@ final class CareerDirectoryAuthorityService
         $page = max(1, $page);
         $perPage = min(100, max(1, $perPage));
 
-        $items = $this->browseItems($publicLocale, $recordCacheState);
-        $publicDetailIndexableCount = count(array_filter($items, static fn (array $item): bool => $item['indexable']));
         $queryNormalized = $this->normalizeFilter($query);
+        $items = $this->directoryItems($publicLocale, $recordCacheState, $queryNormalized !== '');
+        $publicDetailIndexableCount = count(array_filter($items, static fn (array $item): bool => $item['indexable']));
         $familyNormalized = $this->normalizeFilter($family);
 
         $queryFilteredItems = $queryNormalized === ''
@@ -59,9 +59,13 @@ final class CareerDirectoryAuthorityService
 
         $total = count($filteredItems);
         $offset = ($page - 1) * $perPage;
+        $pagedItems = array_slice($filteredItems, $offset, $perPage);
+        if ($queryNormalized === '') {
+            $pagedItems = app(CareerCurrentIdentity::class)->projectPayload($pagedItems, $publicLocale);
+        }
         $pagedItems = array_map(
             fn (array $item): array => $this->publicItem($item),
-            array_slice($filteredItems, $offset, $perPage),
+            $pagedItems,
         );
 
         return [
@@ -108,11 +112,19 @@ final class CareerDirectoryAuthorityService
     /** @return list<array<string, mixed>> */
     public function browseItems(string $locale, bool $recordCacheState = true): array
     {
+        return $this->directoryItems($locale, $recordCacheState, true);
+    }
+
+    /** Keep full membership qualification before pagination; resolve visible names only when needed. */
+    private function directoryItems(string $locale, bool $recordCacheState, bool $projectIdentity): array
+    {
         $publicLocale = $this->normalizePublicLocale($locale);
         $readModel = $this->responseCache->directoryReadModelPayload($publicLocale, $recordCacheState);
-        $items = $this->readyIndexableItems(
-            app(CareerCurrentIdentity::class)->projectPayload(is_array($readModel['items'] ?? null) ? $readModel['items'] : [], $publicLocale),
-        );
+        $items = is_array($readModel['items'] ?? null) ? $readModel['items'] : [];
+        if ($projectIdentity) {
+            $items = app(CareerCurrentIdentity::class)->projectPayload($items, $publicLocale);
+        }
+        $items = $this->readyIndexableItems($items);
         $published = $this->responseCache->directoryPublishedSlugs(array_column($items, 'slug'), $publicLocale);
         $items = array_values(array_filter($items, static fn (array $item): bool => isset($published[$item['slug']])));
 

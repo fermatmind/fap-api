@@ -205,6 +205,49 @@ final class CareerContentV3AuthorityPackageTest extends TestCase
         }
     }
 
+    #[DataProvider('invalidRuntimePageProvider')]
+    public function test_runtime_page_and_public_isolation_keep_full_cross_field_validation(callable $mutate): void
+    {
+        $fixture = $this->fixture();
+        $backend = $fixture.'-backend';
+        mkdir($backend.'/content_assets/career', 0700, true);
+        $root = $backend.'/content_assets/career/current';
+        rename($fixture, $root);
+        try {
+            $page = $this->page('en');
+            $mutate($page);
+            self::write($root.'/careers/actors/en.json', $page);
+            $this->refreshManifest($root);
+            $reader = new CareerContentV3CanonicalReader($this->package(), $backend);
+            foreach (['isolate', 'page'] as $entrypoint) {
+                try {
+                    $entrypoint === 'isolate'
+                        ? $reader->isolateInvalidBlocks($page)
+                        : $reader->page('actors', 'en');
+                    self::fail('Cross-field corruption must fail full validation.');
+                } catch (CareerCurrentAuthorityPackageFailure $failure) {
+                    self::assertNotSame('', $failure->safeCode);
+                }
+            }
+        } finally {
+            $this->deleteDirectory($backend);
+        }
+    }
+
+    /** @return iterable<string,array{callable}> */
+    public static function invalidRuntimePageProvider(): iterable
+    {
+        yield 'invalid display' => [static function (array &$page): void {
+            $page['display'] = ['invalid-display' => true];
+        }];
+        yield 'unknown source binding' => [static function (array &$page): void {
+            $page['blocks'][0]['items'][0]['source_refs'] = ['missing-source'];
+        }];
+        yield 'unknown fact binding' => [static function (array &$page): void {
+            $page['blocks'][0]['items'][0]['fact_refs'] = ['missing-fact'];
+        }];
+    }
+
     public function test_body_qualification_does_not_confuse_display_failure_with_empty_or_invalid_body(): void
     {
         $fixture = $this->fixture();
