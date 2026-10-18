@@ -79,7 +79,7 @@ final class CareerInterestsValuesArticleRelease
         $mediaOptions = ['source_path' => $root.'/media/cover.png', 'translation_group_id' => $manifest['translation_group_id'],
             'asset_key' => 'article.career-interests-values.cover.v1', 'allow_update_existing' => false,
             'alt_text' => array_map(static fn (array $row): string => $row['cover_image_alt'], $candidates),
-            'require_media_runtime' => true];
+            'require_media_runtime' => ! ($dryRun && app()->environment('staging'))];
 
         $result = DB::transaction(function () use ($dryRun, $root, $manifest, $candidates, $owner, $reviews, $mediaOptions): array {
             $existing = Article::withoutGlobalScopes()->withTrashed()->where('org_id', 0)
@@ -177,6 +177,37 @@ final class CareerInterestsValuesArticleRelease
             ], array_keys(self::SLUGS), array_values(self::SLUGS)));
             app(\App\Services\SEO\SeoDiscoverabilityCacheInvalidator::class)->flushArticleDiscoverabilityCaches(false);
         }
+
+        return $result;
+    }
+
+    public function releaseSeo(): array
+    {
+        $result = DB::transaction(function (): array {
+            if ($this->run(true)['status'] !== 'unchanged') {
+                throw new RuntimeException('Interests-values SEO requires the published exact pair.');
+            }
+            $articles = Article::withoutGlobalScopes()->where('org_id', 0)
+                ->whereIn('slug', array_values(self::SLUGS))->orderBy('id')->lockForUpdate()->get();
+            $options = ['--article-ids' => $articles->pluck('id')->implode(','),
+                '--translation-group-id' => $articles->first()->translation_group_id,
+                '--expected-slugs' => $articles->pluck('slug')->implode(','),
+                '--enable-article-schema' => true, '--enable-breadcrumb-schema' => true,
+                '--hold-faq-schema' => true, '--enable-hreflang' => true,
+                '--no-publish' => true, '--no-search' => true, '--no-sitemap-llms-change' => true,
+                '--no-content-change' => true, '--no-revalidation' => true, '--json' => true];
+            foreach (['--dry-run', '--execute'] as $mode) {
+                if (Artisan::call('articles:seo-gate-rollout', $options + [$mode => true]) !== 0) {
+                    throw new RuntimeException('Interests-values native SEO rollout failed: '.Artisan::output());
+                }
+            }
+
+            return ['status' => 'seo_released', 'article_count' => 2];
+        });
+        app(\App\Services\SEO\SeoDiscoverabilityCacheInvalidator::class)->flushArticleDiscoverabilityCaches(false);
+        app(PublicContent53FrontendRevalidator::class)->revalidate(array_map(static fn (string $locale, string $slug): array => [
+            'kind' => 'article', 'identity' => ['org_id' => 0, 'locale' => $locale, 'slug' => $slug],
+        ], array_keys(self::SLUGS), array_values(self::SLUGS)));
 
         return $result;
     }

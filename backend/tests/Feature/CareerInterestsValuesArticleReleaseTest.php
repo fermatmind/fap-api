@@ -72,6 +72,42 @@ final class CareerInterestsValuesArticleReleaseTest extends TestCase
         $this->assertSame(1, ArticleCategory::withoutGlobalScopes()->count());
     }
 
+    public function test_staging_preflight_does_not_write_media_and_live_publish_keeps_runtime_gate(): void
+    {
+        $this->app['env'] = 'staging';
+        config(['fap.media.oss_sync_enabled' => false, 'fap.media.cdn_verify_enabled' => false]);
+        $release = app(Release::class);
+        $this->assertSame('ready_for_media_and_draft_import', $release->run(true)['status']);
+        $this->assertSame(0, Article::withoutGlobalScopes()->count());
+        $this->assertSame(0, MediaAsset::withoutGlobalScopes()->count());
+        Http::assertNothingSent();
+        $this->expectExceptionMessage('media_runtime_not_ready');
+        $release->run();
+    }
+
+    public function test_seo_rollout_uses_native_gates_and_preserves_published_bodies(): void
+    {
+        $release = app(Release::class);
+        $release->run();
+        $before = DB::table('article_translation_revisions')->get()->toJson();
+        foreach (Release::SLUGS as $locale => $slug) {
+            $this->getJson('/api/v0.5/articles/'.$slug.'/seo?locale='.$locale.'&org_id=0')
+                ->assertOk()->assertJsonPath('meta.article_authority_v1.structured_data_eligibility.article.enabled', false);
+        }
+        $this->assertSame(['status' => 'seo_released', 'article_count' => 2], $release->releaseSeo());
+        foreach (Release::SLUGS as $locale => $slug) {
+            $response = $this->getJson('/api/v0.5/articles/'.$slug.'/seo?locale='.$locale.'&org_id=0')
+                ->assertOk()->assertJsonPath('meta.article_authority_v1.structured_data_eligibility.article.enabled', true)
+                ->assertJsonPath('meta.article_authority_v1.structured_data_eligibility.breadcrumb_list.enabled', true)
+                ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.article.@type', 'Article')
+                ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.breadcrumb_list.@type', 'BreadcrumbList');
+            $this->assertStringNotContainsString('FAQPage', $response->getContent());
+        }
+        $this->assertSame($before, DB::table('article_translation_revisions')->get()->toJson());
+        $this->assertSame(['status' => 'seo_released', 'article_count' => 2], $release->releaseSeo());
+        $this->assertSame($before, DB::table('article_translation_revisions')->get()->toJson());
+    }
+
     public function test_existing_unowned_draft_is_never_overwritten(): void
     {
         Article::withoutGlobalScopes()->create(['org_id' => 0, 'locale' => 'zh-CN',

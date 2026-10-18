@@ -13,7 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         if (! app()->environment(['local', 'testing']) && Schema::hasTable('articles')) {
-            app(CareerInterestsValuesArticleRelease::class)->run();
+            // The existing Media Library contract writes only on the production runner.
+            app(CareerInterestsValuesArticleRelease::class)->run(app()->environment('staging'));
         }
     }
 

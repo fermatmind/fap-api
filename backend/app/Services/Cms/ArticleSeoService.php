@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\BigFive\AuthorityV2\StructuredData\BigFiveStructuredDataProjector;
@@ -396,7 +397,8 @@ final class ArticleSeoService
             ),
             'date_published' => $article->published_at?->toAtomString() ?? $revision?->published_at?->toAtomString(),
             'date_modified' => $revision?->updated_at?->toAtomString() ?? $article->updated_at?->toAtomString(),
-            'article_section' => $this->normalizeString($article->category?->name),
+            'article_section' => $this->normalizeString(ArticleCategory::withoutGlobalScopes()
+                ->where('org_id', (int) $article->org_id)->whereKey((int) $article->category_id)->value('name')),
             'author_name' => $this->normalizeString($article->author_name),
             'keywords' => $article->relationLoaded('tags')
                 ? $article->tags->pluck('name')->all()
