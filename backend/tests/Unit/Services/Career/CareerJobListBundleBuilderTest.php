@@ -33,11 +33,14 @@ final class CareerJobListBundleBuilderTest extends TestCase
 
     public function test_it_returns_only_first_wave_indexable_jobs_by_default(): void
     {
+        $this->freezeTime();
         $indexable = $this->compileJobChain(
             CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-index'])
         );
+        $this->travel(1)->seconds();
         $this->compileJobChain(
-            CareerFoundationFixture::seedMissingTruthChain()
+            CareerFoundationFixture::seedMissingTruthChain(),
+            compileRun: $indexable['compileRun'],
         );
 
         $items = app(CareerJobListBundleBuilder::class)->build();
@@ -230,9 +233,9 @@ final class CareerJobListBundleBuilderTest extends TestCase
      * @param  array<string, mixed>|null  $subjectMeta
      * @return array<string, mixed>
      */
-    private function compileJobChain(array $chain, ?\Illuminate\Support\Carbon $compiledAt = null, ?array $subjectMeta = null): array
+    private function compileJobChain(array $chain, ?\Illuminate\Support\Carbon $compiledAt = null, ?array $subjectMeta = null, ?CareerCompileRun $compileRun = null): array
     {
-        $importRun = CareerImportRun::query()->create([
+        $importRun = $compileRun?->importRun ?? CareerImportRun::query()->create([
             'dataset_name' => 'fixture',
             'dataset_version' => 'v1',
             'dataset_checksum' => 'checksum-job-list-'.$chain['occupation']->canonical_slug,
@@ -242,7 +245,7 @@ final class CareerJobListBundleBuilderTest extends TestCase
             'started_at' => now()->subMinutes(10),
             'finished_at' => now()->subMinutes(9),
         ]);
-        $compileRun = CareerCompileRun::query()->create([
+        $compileRun ??= CareerCompileRun::query()->create([
             'import_run_id' => $importRun->id,
             'compiler_version' => CareerRecommendationCompiler::COMPILER_VERSION,
             'scope_mode' => 'first_wave_exact',

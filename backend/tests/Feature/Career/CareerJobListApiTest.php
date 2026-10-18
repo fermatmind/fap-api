@@ -43,8 +43,10 @@ final class CareerJobListApiTest extends TestCase
 
     public function test_it_returns_a_resource_backed_lightweight_job_index(): void
     {
-        $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-index']));
-        $this->compileJobChain(CareerFoundationFixture::seedMissingTruthChain());
+        $this->freezeTime();
+        $compileRun = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-index']));
+        $this->travel(1)->seconds();
+        $this->compileJobChain(CareerFoundationFixture::seedMissingTruthChain(), compileRun: $compileRun);
         $this->markDetailReady('backend-architect-index');
         $this->warmPublicJobIndexes();
 
@@ -516,27 +518,29 @@ final class CareerJobListApiTest extends TestCase
     /**
      * @param  array<string, mixed>  $chain
      */
-    private function compileJobChain(array $chain, int $compileFinishedMinutesAgo = 7): void
+    private function compileJobChain(array $chain, int $compileFinishedMinutesAgo = 7, ?CareerCompileRun $compileRun = null): CareerCompileRun
     {
-        $importRun = CareerImportRun::query()->create([
-            'dataset_name' => 'fixture',
-            'dataset_version' => 'v1',
-            'dataset_checksum' => 'checksum-job-api-'.$chain['occupation']->canonical_slug,
-            'scope_mode' => 'first_wave_exact',
-            'dry_run' => false,
-            'status' => 'completed',
-            'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 3),
-            'finished_at' => now()->subMinutes($compileFinishedMinutesAgo + 2),
-        ]);
-        $compileRun = CareerCompileRun::query()->create([
-            'import_run_id' => $importRun->id,
-            'compiler_version' => CareerRecommendationCompiler::COMPILER_VERSION,
-            'scope_mode' => 'first_wave_exact',
-            'dry_run' => false,
-            'status' => 'completed',
-            'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 1),
-            'finished_at' => now()->subMinutes($compileFinishedMinutesAgo),
-        ]);
+        if ($compileRun === null) {
+            $importRun = CareerImportRun::query()->create([
+                'dataset_name' => 'fixture',
+                'dataset_version' => 'v1',
+                'dataset_checksum' => 'checksum-job-api-'.$chain['occupation']->canonical_slug,
+                'scope_mode' => 'first_wave_exact',
+                'dry_run' => false,
+                'status' => 'completed',
+                'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 3),
+                'finished_at' => now()->subMinutes($compileFinishedMinutesAgo + 2),
+            ]);
+            $compileRun = CareerCompileRun::query()->create([
+                'import_run_id' => $importRun->id,
+                'compiler_version' => CareerRecommendationCompiler::COMPILER_VERSION,
+                'scope_mode' => 'first_wave_exact',
+                'dry_run' => false,
+                'status' => 'completed',
+                'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 1),
+                'finished_at' => now()->subMinutes($compileFinishedMinutesAgo),
+            ]);
+        }
 
         $chain['contextSnapshot']->update([
             'compile_run_id' => $compileRun->id,
@@ -552,8 +556,10 @@ final class CareerJobListApiTest extends TestCase
 
         app(CareerRecommendationCompiler::class)->compile($chain['childProjection'], $chain['occupation'], [
             'compile_run_id' => $compileRun->id,
-            'import_run_id' => $importRun->id,
+            'import_run_id' => $compileRun->import_run_id,
         ]);
+
+        return $compileRun;
     }
 
     private function markDetailReady(string $slug, string $locale = 'zh-CN'): void
