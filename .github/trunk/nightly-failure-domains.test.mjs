@@ -153,6 +153,15 @@ test('full PHPUnit has parent revision history and an empty test environment fil
   assert.ok(fullPhpunit.indexOf('run: touch .env') < fullPhpunit.indexOf('php artisan test --no-ansi'));
 });
 
+test('full PHPUnit exposes its disposable MySQL socket and requires real blog JSON coverage', () => {
+  const section = jobSection('full-phpunit', 'codeql');
+  const directory = '/tmp/mysql-blog-json-fixture-${{ github.run_id }}-${{ github.run_attempt }}';
+  assert.ok(section.includes(`${directory}:/var/run/mysqld`));
+  assert.ok(section.includes(`BLOG_SURFACE_TEST_MYSQL_SOCKET: ${directory}/mysqld.sock`));
+  assert.match(section, /BLOG_SURFACE_TEST_MYSQL_PASSWORD: root/);
+  assert.match(section, /foreach \(\[.*'BlogV1SurfaceProvenanceMysqlTest'.*\] as \$class\)/);
+});
+
 
 test('full PHPUnit rejects empty or malformed JUnit and retains original diagnostics', () => {
   const section = jobSection('full-phpunit', 'codeql');

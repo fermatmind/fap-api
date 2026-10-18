@@ -240,6 +240,8 @@ jobs:
           MYSQL_DATABASE: fap_ci
           MYSQL_ROOT_PASSWORD: root
         ports: ["3306:3306"]
+        volumes:
+          - /tmp/mysql-blog-json-fixture-${{ github.run_id }}-${{ github.run_attempt }}:/var/run/mysqld
         options: --health-cmd="mysqladmin ping -h 127.0.0.1 -proot" --health-interval=10s --health-timeout=5s --health-retries=12
       redis:
         image: redis:6-alpine
@@ -253,6 +255,8 @@ jobs:
       DB_DATABASE: fap_ci
       DB_USERNAME: root
       DB_PASSWORD: root
+      BLOG_SURFACE_TEST_MYSQL_SOCKET: /tmp/mysql-blog-json-fixture-${{ github.run_id }}-${{ github.run_attempt }}/mysqld.sock
+      BLOG_SURFACE_TEST_MYSQL_PASSWORD: root
       REDIS_HOST: 127.0.0.1
       REDIS_PORT: 6379
       SEO_TEST_MYSQL_HOST: 127.0.0.1
@@ -309,7 +313,7 @@ jobs:
           <?php
           $xml = simplexml_load_file(getenv('RUNNER_TEMP').'/nightly-full-phpunit.xml');
           if (! $xml) exit(1);
-          foreach (['SeoIntelGscReadSnapshotMysqlTest', 'SeoIntelGscRunClockMysqlTest', 'SeoPlatform12SchedulerClockMysqlTest', 'DeliveryRedisTopologyTest'] as $class) {
+          foreach (['SeoIntelGscReadSnapshotMysqlTest', 'SeoIntelGscRunClockMysqlTest', 'SeoPlatform12SchedulerClockMysqlTest', 'DeliveryRedisTopologyTest', 'BlogV1SurfaceProvenanceMysqlTest'] as $class) {
               $cases = $xml->xpath('//testcase[contains(@class, "'.$class.'") or contains(@classname, "'.$class.'")]');
               if (! $cases) exit(1);
               foreach ($cases as $case) if (isset($case->skipped) || isset($case->failure) || isset($case->error)) exit(1);

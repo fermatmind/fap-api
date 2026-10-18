@@ -17,15 +17,17 @@ final class CareerCurrentAuthorityManifestRefresherTest extends TestCase
     {
         if ($this->temporaryRoot !== null) {
             $backendRoot = $this->temporaryRoot.'/backend';
-            @unlink($backendRoot.'/content_assets/career/current/assets.jsonl');
-            @unlink($backendRoot.'/content_assets/career/current/manifest.json');
-            @unlink($backendRoot.'/content_assets/career/current/presentation-source-registry.json');
-            @unlink($backendRoot.'/content_assets/career/current/structured-component-source-registry.json');
-            @rmdir($backendRoot.'/content_assets/career/current');
-            @rmdir($backendRoot.'/content_assets/career');
-            @rmdir($backendRoot.'/content_assets');
-            @rmdir($backendRoot);
-            @rmdir($this->temporaryRoot);
+            foreach (['assets.jsonl', 'manifest.json', 'presentation-source-registry.json', 'structured-component-source-registry.json'] as $name) {
+                $path = $backendRoot.'/content_assets/career/current/'.$name;
+                if (is_file($path) || is_link($path)) {
+                    unlink($path);
+                }
+            }
+            foreach ([$backendRoot.'/content_assets/career/current', $backendRoot.'/content_assets/career', $backendRoot.'/content_assets', $backendRoot, $this->temporaryRoot] as $directory) {
+                if (is_dir($directory)) {
+                    rmdir($directory);
+                }
+            }
         }
 
         parent::tearDown();

@@ -19,14 +19,16 @@ final class BlogV1SurfaceProvenanceMysqlTest extends TestCase
     {
         $socket = getenv('BLOG_SURFACE_TEST_MYSQL_SOCKET');
         if (! is_string($socket) || $socket === '') {
-            $this->markTestSkipped('Requires an isolated, no-network MySQL test socket.');
+            $this->markTestSkipped('Requires an isolated MySQL test socket.');
         }
         $this->assertStringContainsString('mysql-blog-json-fixture-', $socket);
-        $pdo = new PDO('mysql:unix_socket='.$socket.';charset=utf8mb4', 'root', '', [
+        $password = getenv('BLOG_SURFACE_TEST_MYSQL_PASSWORD');
+        $pdo = new PDO('mysql:unix_socket='.$socket.';charset=utf8mb4', 'root', is_string($password) ? $password : '', [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_EMULATE_PREPARES => false,
         ]);
         $version = (string) $pdo->query('SELECT VERSION()')->fetchColumn();
         $this->assertStringNotContainsString('MariaDB', $version);
+        $this->assertNull($pdo->query('SELECT DATABASE()')->fetchColumn());
         $records = array_map(static fn (string $locale, int $id): array => [
             'id' => $id, 'org_id' => 0, 'surface_key' => 'articles_index', 'locale' => $locale,
             'owner_admin_user_id' => 1, 'source_sha256' => BlogV1RevisionWorkspace::SOURCE_SHA256,
@@ -91,7 +93,7 @@ final class BlogV1SurfaceProvenanceMysqlTest extends TestCase
         $evidence = getenv('BLOG_SURFACE_TEST_MYSQL_EVIDENCE');
         if (is_string($evidence) && $evidence !== '') {
             file_put_contents($evidence, json_encode([
-                'mysql_version' => $version, 'transport' => 'isolated_private_socket_no_network',
+                'mysql_version' => $version, 'transport' => 'isolated_private_socket',
                 'actual_mysql_json_roundtrip' => true, 'native_audit_cast' => true, 'native_service_guard' => true,
                 'input_record_keys' => array_keys($records[0]), 'mysql_record_keys' => array_keys($actual->meta_json['surface_records'][0]),
                 'old_strict_comparison' => $records === $actual->meta_json['surface_records'],

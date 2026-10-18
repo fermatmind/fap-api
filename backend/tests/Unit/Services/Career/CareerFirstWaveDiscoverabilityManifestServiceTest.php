@@ -35,7 +35,7 @@ final class CareerFirstWaveDiscoverabilityManifestServiceTest extends TestCase
         $this->assertSame(CareerFirstWaveDiscoverabilityManifestService::MANIFEST_VERSION, $manifest['manifest_version']);
         $this->assertSame(CareerFirstWaveDiscoverabilityManifestService::SCOPE, $manifest['scope']);
         $this->assertNotEmpty($manifest['routes']);
-        $this->assertContainsOnly('array', $manifest['routes']);
+        $this->assertContainsOnlyArray($manifest['routes']);
         $this->assertSame(
             ['career_family_hub', 'career_job_detail'],
             $routes->pluck('route_kind')->unique()->sort()->values()->all()
