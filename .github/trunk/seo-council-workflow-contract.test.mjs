@@ -166,3 +166,18 @@ test("A08 runtime persistence uses the existing isolated writer and keeps generi
   assert.match(deployer, /SEO_COUNCIL_RUNTIME_DB_WRITE_PRIVILEGE_MISSING/);
   assert.match(deployer, /after\('guard:no-pending-seo-intel-migrations', 'seo:council-runtime-db-access'\)/);
 });
+
+
+test("Council-only changes do not attempt an empty A08 receipt or upload", () => {
+  const classification = classifyPaths(["backend/lang/en/ops.php"]);
+  assert.equal(classification.operations.seo_council_orchestration, true);
+  assert.equal(classification.operations.a08_scoped_checks, false);
+  assert.deepEqual(classification.operations.a08_scopes, []);
+  const binding = ci.match(/      - name: Bind completed A08 scoped test results\n([\s\S]*?)\n  seo-competitive-evidence:/)?.[1];
+  assert.ok(binding);
+  assert.match(binding, /^        if: needs\.classify\.outputs\.a08_scoped_checks == 'true'\n/);
+  assert.match(binding, /- uses: actions\/upload-artifact@[^\n]+\n        if: needs\.classify\.outputs\.a08_scoped_checks == 'true'\n/);
+  // The full Council check and its closeout remain selected for this change.
+  assert.match(ci, /if: needs\.classify\.outputs\.a08_focused != 'true'/);
+  assert.match(binding, /if-no-files-found: error/);
+});
