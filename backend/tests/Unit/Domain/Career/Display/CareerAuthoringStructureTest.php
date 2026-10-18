@@ -189,6 +189,9 @@ final class CareerAuthoringStructureTest extends TestCase
     {
         $original = $this->page('actors');
         unset($original['authoring_structure']);
+        // Missing-metric behavior is a controlled input, not a claim about current actor data.
+        $original['hero']['ai']['availability'] = 'missing';
+        $original['hero']['ai']['fact_ref'] = null;
         $original['blocks'][0]['items'][0]['data']['paragraphs'][] = '附加段落保留在原内容单元。';
         $page = $this->migrate($original);
         self::assertSame($original['blocks'], $page['blocks']);
@@ -196,6 +199,20 @@ final class CareerAuthoringStructureTest extends TestCase
         self::assertSame('pending_mapping', $page['authoring_structure']['inventory']['item:'.$original['blocks'][0]['items'][0]['id']]['status']);
         self::assertSame('29.05美元/小时', CareerAuthoringStructure::reference($page, $page['authoring_structure']['slots']['hero.us_pay.display_value']['ref']));
         self::assertSame('unfilled', $page['authoring_structure']['slots']['hero.ai.display_value']['status']);
+        self::assertNull($page['authoring_structure']['slots']['hero.ai.display_value']['ref']);
+    }
+
+    public function test_available_ai_metric_is_bound_to_its_exact_source_fact(): void
+    {
+        $original = $this->page('actors');
+        unset($original['authoring_structure']);
+        self::assertSame('available', $original['hero']['ai']['availability']);
+        $page = $this->migrate($original);
+        $slot = $page['authoring_structure']['slots']['hero.ai.display_value'];
+        self::assertSame('mapped', $slot['status']);
+        self::assertSame(['source' => 'fact', 'id' => $original['hero']['ai']['fact_ref'], 'path' => ['display_value']], $slot['ref']);
+        self::assertSame(CareerAuthoringStructure::reference($original, $slot['ref']), CareerAuthoringStructure::reference($page, $slot['ref']));
+        self::assertSame($original['blocks'], $page['blocks']);
     }
 
     public function test_source_identity_can_be_referenced_in_multiple_modules(): void
