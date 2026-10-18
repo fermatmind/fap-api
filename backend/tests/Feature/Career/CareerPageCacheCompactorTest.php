@@ -145,6 +145,52 @@ final class CareerPageCacheCompactorTest extends TestCase
         });
     }
 
+    public static function expiryWindows(): array
+    {
+        return [[1], [2]];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('expiryWindows')]
+    public function test_expiry_between_raw_read_decode_and_readback_does_not_block_maintenance(int $expireOnRead): void
+    {
+        $this->isolatedRedis(function ($store, $redis) use ($expireOnRead): void {
+            $page = $this->page();
+            $key = CareerFilePageReader::cacheKey($page);
+            $store->forever($key, $page);
+            $inner = new class(app('redis'), 'compaction-test:', 'public_projection', $expireOnRead) extends \Illuminate\Cache\RedisStore
+            {
+                private int $reads = 0;
+
+                public function __construct($factory, $prefix, $connection, private readonly int $expireOnRead)
+                {
+                    parent::__construct($factory, $prefix, $connection);
+                }
+
+                public function get($key)
+                {
+                    if (++$this->reads === $this->expireOnRead) {
+                        $this->connection()->client()->pexpire($this->getPrefix().$key, 1);
+                        usleep(5000);
+                    }
+
+                    return parent::get($key);
+                }
+            };
+            Cache::extend('compaction_expiry_test', fn () => new \Illuminate\Cache\Repository($inner));
+            config(['cache.stores.public_projection.driver' => 'compaction_expiry_test']);
+            Cache::purge('public_projection');
+            try {
+                $result = app(CareerPageCacheCompactor::class)->compact();
+                self::assertSame('complete', $result['status']);
+                self::assertSame($expireOnRead - 1, $result['rewritten']);
+                self::assertSame(0, $redis->rawCommand('EXISTS', 'compaction-test:'.$key));
+            } finally {
+                config(['cache.stores.public_projection.driver' => 'redis']);
+                Cache::purge('public_projection');
+            }
+        });
+    }
+
     public function test_production_completion_uses_fresh_memory_and_keeps_the_fixed_capacity_guard(): void
     {
         $this->isolatedRedis(function ($store, $redis): void {

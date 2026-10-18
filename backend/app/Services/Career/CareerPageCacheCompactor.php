@@ -62,12 +62,12 @@ final class CareerPageCacheCompactor
                         return;
                     }
                     $stored = $store->get($key);
+                    if ($raw !== serialize($stored)) {
+                        return; // Expiry or a concurrent replacement wins before decoding.
+                    }
                     $candidate = $this->candidate($stored, $identity[1], $identity[2], $identity[3]);
                     if ($candidate === null) {
                         return;
-                    }
-                    if ($raw !== serialize($stored)) {
-                        return; // Expiry or a concurrent replacement wins.
                     }
                     $encoded = serialize($candidate);
                     if (strlen($encoded) >= strlen($raw)) {
@@ -80,7 +80,8 @@ final class CareerPageCacheCompactor
                     if ($changed === 1) {
                         $this->statistics['rewritten']++;
                         $this->statistics['serialized_bytes_saved'] += strlen($raw) - strlen($encoded);
-                        if ($this->codec->decode($store->get($key)) !== $stored) {
+                        $readback = $store->get($key);
+                        if ($readback !== null && $this->codec->decode($readback) !== $stored) {
                             throw new RuntimeException('CAREER_PAGE_COMPACTION_READBACK_FAILED');
                         }
                     }
