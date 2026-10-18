@@ -222,7 +222,17 @@ export function analyzeCareerContentOnlyFromGit(baseSha, headSha, paths, root = 
   for (let index = 0; index < statusRows.length; index += 2) {
     statuses.push({ status: statusRows[index], path: statusRows[index + 1] });
   }
-  const blob = (ref, path) => git(['show', `${ref}:${path}`], { cwd: root });
+  // JSON validation and byte hashing read each immutable before/after pair.
+  // Keep only that pair so a full batch does not inflate the same blobs twice.
+  const blobs = new Map();
+  const blob = (ref, path) => {
+    const key = `${ref}:${path}`;
+    if (blobs.has(key)) return blobs.get(key);
+    const bytes = git(['show', key], { cwd: root });
+    blobs.set(key, bytes);
+    if (blobs.size > 2) blobs.delete(blobs.keys().next().value);
+    return bytes;
+  };
   return analyzeCareerContentOnly({
     baseSha,
     headSha,
