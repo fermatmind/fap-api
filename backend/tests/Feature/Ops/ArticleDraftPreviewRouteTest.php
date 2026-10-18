@@ -204,6 +204,25 @@ final class ArticleDraftPreviewRouteTest extends TestCase
         );
     }
 
+    public function test_revision_bound_preview_rejects_pointer_and_content_changes(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization();
+        $article = $this->createDraftArticle();
+        $revision = $this->createWorkingRevision($article);
+        $url = \App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace::previewUrl($article->fresh(), (int) $revision->id);
+        $this->withSession($this->opsSession($admin, $org))->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->get($url)->assertOk()->assertHeader('X-Robots-Tag', 'noindex, noarchive, nosnippet');
+        $revision->update(['title' => 'Changed after preview selection']);
+        $this->get($url)->assertStatus(409)->assertDontSee('Changed after preview selection');
+        $this->get('/ops/article-preview/'.$article->id.'?revision='.($revision->id + 100))->assertStatus(409);
+        $this->get('/ops/article-preview/'.$article->id.'?revision[]=1')->assertStatus(422);
+        $this->get('/ops/article-preview/'.$article->id.'?revision_hash=bad')->assertStatus(422);
+        $this->get('/ops/article-preview/'.$article->id)->assertOk()->assertSee('Changed after preview selection');
+        $this->assertFalse((bool) $article->fresh()->is_public);
+        $this->assertNull($article->fresh()->published_revision_id);
+    }
+
     private function createDraftArticle(): Article
     {
         return Article::query()->create([

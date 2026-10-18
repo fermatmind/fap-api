@@ -47,7 +47,12 @@ final class SeoUxImpl05ContentPublishingTest extends TestCase
         $this->assertStringNotContainsString('<form', $workspace);
         $this->assertStringNotContainsString('<input', $workspace);
         $this->assertStringNotContainsString('wire:click', $workspace);
-        $this->assertStringNotContainsString('wire:model', $workspace);
+        $articleWorkspace = (string) file_get_contents(resource_path('views/filament/ops/components/ops-article-content-workspace.blade.php'));
+        $this->assertStringContainsString('ArticleContentWorkspace::class', $articleWorkspace);
+        $this->assertStringContainsString('wire:model.live="contentArticleId"', $articleWorkspace);
+        $this->assertStringContainsString('wire:click="inspectArticlePublication"', $articleWorkspace);
+        $this->assertStringNotContainsString('wire:click="publish', $articleWorkspace);
+        $this->assertStringNotContainsString('<form', $articleWorkspace);
         $this->assertStringNotContainsString('canonical_path', $workspace);
         $this->assertStringNotContainsString('backfill', $workspace);
         $this->assertStringNotContainsString('noindex', $workspace);

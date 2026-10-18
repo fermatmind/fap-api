@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Resources\ArticleResource\Support;
 
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use Filament\Forms\Get;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Carbon;
@@ -27,13 +28,26 @@ final class ArticleWorkspace
         return $baseUrl.'/'.$segment.'/articles/'.rawurlencode($resolvedSlug);
     }
 
-    public static function previewUrl(?Article $record): ?string
+    public static function previewUrl(?Article $record, ?int $revisionId = null): ?string
     {
         if (! $record instanceof Article || ! $record->getKey()) {
             return null;
         }
 
-        return route('ops.articles.preview', ['article' => $record->getKey()]);
+        $revision = $record->workingRevision;
+
+        return route('ops.articles.preview', array_filter([
+            'article' => $record->getKey(), 'revision' => $revisionId,
+            'revision_hash' => $revisionId && $revision && (int) $revision->id === $revisionId ? self::previewFingerprint($revision) : null,
+        ]));
+    }
+
+    public static function previewFingerprint(ArticleTranslationRevision $revision): string
+    {
+        return hash('sha256', json_encode($revision->only([
+            'id', 'article_id', 'org_id', 'locale', 'title', 'excerpt', 'content_md',
+            'seo_title', 'seo_description', 'revision_status', 'updated_at',
+        ]), JSON_THROW_ON_ERROR));
     }
 
     public static function renderEditorialCues(Get $get, ?Article $record = null): Htmlable

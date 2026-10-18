@@ -79,6 +79,11 @@ class SeoOperationsPage extends Page
     #[Url(as: 'automation-view', history: true)]
     public string $activeAutomationSection = 'experiments';
 
+    #[Url(as: 'article', history: true)]
+    public int $contentArticleId = 0;
+
+    public array $articlePublicationPreflight = [];
+
     public string $savedView = 'all';
 
     public string $sortBy = 'priority';
@@ -189,6 +194,54 @@ class SeoOperationsPage extends Page
         $this->reopenExpiredIgnores();
         $this->refreshDashboard($service);
         $this->refreshSeoIntel();
+    }
+
+    public function inspectArticlePublication(): void
+    {
+        if (! ContentAccess::canRead()) {
+            throw new AuthorizationException('Content read permission required.');
+        }
+        $article = app(SeoContentScopeViewModel::class)->articles($this->localeFilter)
+            ->with('workingRevision')->when($this->contentArticleId > 0, fn ($query) => $query->whereKey($this->contentArticleId))
+            ->latest('updated_at')->orderByDesc('id')->firstOrFail();
+        $revision = $article->workingRevision;
+        if (! $revision || (int) $revision->article_id !== (int) $article->id || $revision->locale !== $article->locale || (int) $revision->org_id !== 0) {
+            $this->articlePublicationPreflight = [];
+
+            return;
+        }
+        $binding = ['article_id' => (int) $article->id, 'revision_id' => (int) $revision->id,
+            'fingerprint' => \App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace::previewFingerprint($revision)];
+        if ($article->published_revision_id === $revision->id
+            && (clone app(SeoContentScopeViewModel::class)->articles())->whereKey($article->id)->publiclyReadable()->exists()) {
+            $this->articlePublicationPreflight = $binding + ['state' => 'already_current', 'issues' => []];
+
+            return;
+        }
+        $options = ['--dry-run' => true, '--json' => true];
+        $command = 'articles:publish-controlled';
+        if ($article->published_revision_id) {
+            $command = 'articles:promote-existing-working-revision';
+            $options += ['--article-id' => $article->id, '--working-revision-id' => $revision->id,
+                '--current-published-revision-id' => $article->published_revision_id,
+                '--translation-group-id' => $article->translation_group_id, '--expected-slug' => $article->slug,
+                '--expected-canonical' => \App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace::publicUrl($article->slug, $article->locale)];
+        } else {
+            $options['--article'] = [(string) $article->id];
+        }
+        try {
+            \Illuminate\Support\Facades\Artisan::call($command, $options);
+            $report = json_decode(\Illuminate\Support\Facades\Artisan::output(), true, 32, JSON_THROW_ON_ERROR);
+            $this->articlePublicationPreflight = $binding + [
+                'state' => ($report['ok'] ?? false) ? 'passed' : 'needs_attention',
+                'issues' => array_values(array_unique(array_filter(array_map(
+                    static fn ($issue): ?string => is_array($issue) && preg_match('/^[a-z0-9_]{1,100}$/D', (string) ($issue['code'] ?? '')) ? $issue['code'] : null,
+                    (array) ($report['errors'] ?? [])
+                )))),
+            ];
+        } catch (Throwable) {
+            $this->articlePublicationPreflight = $binding + ['state' => 'unavailable', 'issues' => []];
+        }
     }
 
     public function rendering(): void

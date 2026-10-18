@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Ops;
 
+use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
@@ -38,13 +39,25 @@ final class ArticleDraftPreviewController extends Controller
         $revision = $record->workingRevision instanceof ArticleTranslationRevision
             ? $record->workingRevision
             : null;
+        if ($request->has('revision')) {
+            $expected = $request->query('revision');
+            abort_unless(is_string($expected) && ctype_digit($expected) && (int) $expected > 0, 422);
+            abort_unless($revision && (int) $revision->id === (int) $expected, 409, 'Working revision changed. Reopen the article workspace.');
+        }
+        if ($request->has('revision_hash')) {
+            $expectedHash = $request->query('revision_hash');
+            abort_unless(is_string($expectedHash) && preg_match('/^[a-f0-9]{64}$/D', $expectedHash) === 1, 422);
+            abort_unless($request->has('revision') && $revision
+                && hash_equals(ArticleWorkspace::previewFingerprint($revision), $expectedHash), 409, 'Working revision content changed. Reopen the article workspace.');
+        }
         $seoMeta = $record->seoMeta instanceof ArticleSeoMeta ? $record->seoMeta : null;
 
-        $title = $this->firstNonEmpty($revision?->title, $record->title, 'Untitled article draft');
-        $excerpt = $this->firstNonEmpty($revision?->excerpt, $record->excerpt, '');
-        $contentMd = $this->firstNonEmpty($revision?->content_md, $record->content_md, '');
-        $seoTitle = $this->firstNonEmpty($revision?->seo_title, $seoMeta?->seo_title, $title);
-        $seoDescription = $this->firstNonEmpty($revision?->seo_description, $seoMeta?->seo_description, $excerpt);
+        $boundRevision = $request->has('revision');
+        $title = $this->firstNonEmpty($revision?->title, $boundRevision ? null : $record->title, 'Untitled article draft');
+        $excerpt = $this->firstNonEmpty($revision?->excerpt, $boundRevision ? null : $record->excerpt, '');
+        $contentMd = $this->firstNonEmpty($revision?->content_md, $boundRevision ? null : $record->content_md, '');
+        $seoTitle = $this->firstNonEmpty($revision?->seo_title, $boundRevision ? null : $seoMeta?->seo_title, $title);
+        $seoDescription = $this->firstNonEmpty($revision?->seo_description, $boundRevision ? null : $seoMeta?->seo_description, $excerpt);
         $redacted = $this->redactSensitivePreviewText($contentMd);
         $article15Metadata = is_array($revision?->authority_metadata_json)
             ? (array) ($revision->authority_metadata_json['article15_exact_package_v1'] ?? [])

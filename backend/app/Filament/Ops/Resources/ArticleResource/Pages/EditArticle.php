@@ -86,12 +86,17 @@ class EditArticle extends EditRecord
                 ->url(ArticleResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
+            Action::make('seoContentWorkspace')
+                ->label(__('ops.custom_pages.seo_operations.article_workspace.title'))
+                ->url(fn (): string => \App\Filament\Ops\Pages\SeoOperationsPage::getUrl(['workspace' => 'content', 'article' => $this->getRecord()->id]))
+                ->icon('heroicon-o-arrow-uturn-left')
+                ->color('gray'),
             Action::make('previewDraft')
                 ->label('Preview draft')
-                ->url(fn (): ?string => ArticleWorkspace::previewUrl($this->getRecord()), shouldOpenInNewTab: true)
+                ->url(fn (): ?string => ArticleWorkspace::previewUrl($this->getRecord(), $this->getRecord()->working_revision_id), shouldOpenInNewTab: true)
                 ->icon('heroicon-o-eye')
                 ->color('info')
-                ->visible(fn (): bool => filled(ArticleWorkspace::previewUrl($this->getRecord()))),
+                ->visible(fn (): bool => filled(ArticleWorkspace::previewUrl($this->getRecord(), $this->getRecord()->working_revision_id))),
             Action::make('openPublicUrl')
                 ->label(__('ops.resources.articles.actions.open_public_url'))
                 ->url(fn (): ?string => ArticleWorkspace::publicUrl(
