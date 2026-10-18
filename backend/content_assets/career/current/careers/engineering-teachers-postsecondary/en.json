@@ -26358,7 +26358,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET OnLine: Engineering Teachers, Postsecondary (25-1032.00)｜https://www.onetonline.org/link/summary/25-1032.00; O*NET national wage percentile values (25-1032.00)｜https://www.onetonline.org/link/localwages/25-1032.00; BLS occupational projections (2024—2034)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "O*NET OnLine: Engineering Teachers, Postsecondary (25-1032.00)｜https://www.onetonline.org/link/summary/25-1032.00; O*NET national wage percentile values (25-1032.00)｜https://www.onetonline.org/link/localwages/25-1032.00; BLS occupational projections (2025–2035)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "engineering-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.8",
@@ -31182,13 +31182,12 @@
                 ]
               },
               {
-                "answer": "2024 employment about 50,300, 2024—2034 projected change Much faster than average (7% or higher), projected openings about 4,100; openings include growth and replacements and do not equal a personal appointment probability.",
+                "answer": "BLS reports 50,900 engineering teaching jobs in the 2025 projection base year and projects 54,900 in 2035, a 7.8% increase. Average annual openings are 3,900 for 2025–2035, including growth and replacement demand; openings do not equal an individual’s appointment probability.",
                 "id": "engineering-teachers-postsecondary.faq.5",
                 "question": "What are the U.S. employment prospects?",
                 "question_key": "career.faq.engineering-teachers-postsecondary.q5",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
               },
               {
@@ -31388,16 +31387,16 @@
                 "url": "https://www.onetonline.org/link/details/25-1032.00"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-10-18",
                 "details": [
-                  "Used to verify 2024 base-period employment, 2024—2034 change, and projected openings."
+                  "Employment: 50,900 in 2025 and 54,900 in 2035; 7.8% projected growth and 3,900 average annual openings. BLS Table 1.2 publishes employment and openings in thousands."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
                 "limitation": "Projections are not actual results; openings include growth and replacements, and do not equal an appointment probability.",
                 "market": "United States",
-                "name": "BLS: 2024—2034 occupational projections (Engineering teachers, postsecondary)",
-                "period": "2024—2034 projections; accessed 2026-09-20",
+                "name": "BLS: 2025–2035 occupational projections (Engineering teachers, postsecondary, 25-1032)",
+                "period": "2025 employment base; 2025–2035 projections",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "official projections",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -36459,36 +36458,36 @@
       },
       {
         "derivation": null,
-        "display_value": "About 50,300 (2024)",
+        "display_value": "50,900 people (2025 projection base year)",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "U.S. employment size",
         "occupation_scope": "Engineering Teachers, Postsecondary (O*NET-SOC 25-1032.00; Bright Outlook)",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Much faster than average (7% or higher, 2024—2034, BLS projections)",
+        "display_value": "7.8% projected employment growth (2025–2035, BLS projections)",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "U.S. employment growth",
         "occupation_scope": "Engineering Teachers, Postsecondary (O*NET-SOC 25-1032.00; Bright Outlook)",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 4,100 (2024—2034, BLS projections)",
+        "display_value": "3,900 openings per year on average (2025–2035, BLS projections)",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "U.S. projected openings",
         "occupation_scope": "Engineering Teachers, Postsecondary (O*NET-SOC 25-1032.00; Bright Outlook)",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -36700,14 +36699,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "U.S. O*NET-SOC 25-1032.00: May 2025 median annual wage 109,270 U.S. dollars; 2024 employment about 50,300, 2024—2034 projected Much faster than average (Bright Outlook); includes training and qualification boundaries and mainland China industry proxy description."
+      "text": "Explore engineering teaching duties, entry paths and U.S. career data: $109,270 median pay (May 2025), 50,900 jobs and 7.8% projected growth for 2025–2035."
     },
     "title": {
       "availability": "available",
       "text": "Engineering Teachers, Postsecondary: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "59f5b871186dc8d1f53ca081936823e371665b5bfc65c8eebb5a20e26fb751b0",
+  "source_content_sha256": "e359fafd08e524e37c16f5f531156de835adc97f35ca33f299dc1c2928ea87ff",
   "subject": {
     "canonical_slug": "engineering-teachers-postsecondary",
     "name": "Engineering Teachers, Postsecondary",

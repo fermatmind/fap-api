@@ -131,7 +131,13 @@ final class PublicContent53Writer
     {
         $article = Article::query()->withoutGlobalScopes()->findOrFail($saved['values']['id']);
         $old = $saved['published'];
-        $article->forceFill($row['snapshot'] + ['content_html' => null]);
+        $seoCopy = $row['snapshot']['seo_text'] ?? null;
+        $revisionCopy = $seoCopy !== null
+            ? array_intersect_key($seoCopy, array_flip(['seo_title', 'seo_description']))
+            : $row['snapshot'] + ['content_html' => null];
+        if ($seoCopy === null) {
+            $article->forceFill($revisionCopy);
+        }
         $hash = $article->computeSourceVersionHash();
         $source = Article::query()->withoutGlobalScopes()->findOrFail($old['source_article_id']);
         if ($source->org_id !== $article->org_id || $source->translation_group_id !== $article->translation_group_id || $source->locale !== $old['source_locale']) {
@@ -142,9 +148,9 @@ final class PublicContent53Writer
         foreach (['id', 'created_at', 'updated_at', 'archived_at'] as $key) {
             unset($payload[$key]);
         }
-        $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->create(array_replace($payload, $row['snapshot'], [
+        $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->create(array_replace($payload, $revisionCopy, [
             'revision_number' => (int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number') + 1,
-            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'content_html' => null,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
             'source_version_hash' => $sourceHash, 'translated_from_version_hash' => $sourceHash,
             'supersedes_revision_id' => $old['id'], 'authority_asset_key' => $row['page_id'].':'.$context->sourceCommit,
             'authority_source_package' => PublicContent53Package::PACKAGE, 'authority_source_hash' => $this->states->hash($row['snapshot']),
@@ -161,6 +167,12 @@ final class PublicContent53Writer
             $article->working_revision_id = $revision->id;
         }
         $article->saveQuietly();
+        if ($seoCopy !== null) {
+            if (count($saved['relations']['article_seo_meta']) !== 1) {
+                throw new DomainException('public_content_53_copy_seo_missing');
+            }
+            DB::table('article_seo_meta')->where('id', $saved['relations']['article_seo_meta'][0]['id'])->update($seoCopy);
+        }
         $this->material->recordPublished($article, $revision, now());
     }
 

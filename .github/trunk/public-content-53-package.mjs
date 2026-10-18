@@ -6,6 +6,9 @@ import { canonical } from './iq-public-scale-package.mjs';
 
 export const packagePath = 'content_assets/public_content_53';
 export function packageDigest(backendRoot) {
+  if (existsSync(resolve(backendRoot, packagePath, 'copy-amendment.json'))) {
+    return sha('fermatmind.public_content_copy_amendment.v1\n'+['copy-amendment.json','copy-amendment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
+  }
   if (existsSync(resolve(backendRoot, packagePath, 'guide-amendment.json'))) {
     return sha('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
   }

@@ -51,8 +51,9 @@ $labels=[]; foreach($xp->query('//main//a') as $anchor) { $label=$walk($anchor);
 $values = function($query,$attr=null) use($xp,$walk) { $out=[];foreach($xp->query($query) as $node) $out[]=$attr===null?$walk($node):$node->getAttribute($attr);return $out;};
 $quickstart=[]; foreach($xp->query('//script[@type="application/ld+json" and @id="tests-hub-quickstart-en"]') as $node) $quickstart[]=$node->textContent;
 echo json_encode(['link_labels'=>$labels,'body'=>$values('//main[not(ancestor::main)]'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
- 'tests_quickstart_jsonld'=>$quickstart,
+ 'tests_quickstart_jsonld'=>$quickstart,'article_body'=>$values('//main//article[@data-testid="article-detail-content"]'),
  'title'=>$values('//head/title'),'description'=>$values('//meta[@name="description"]','content'),
+ 'og_title'=>$values('//meta[@property="og:title"]','content'),'og_description'=>$values('//meta[@property="og:description"]','content'),
  'canonical'=>$values('//link[@rel="canonical"]','href'),'robots'=>$values('//meta[@name="robots"]','content'),
  'alternates'=>$values('//link[@rel="alternate"]','href')],JSON_THROW_ON_ERROR);`;
   return JSON.parse(execFileSync('php',['-r',code],{input:html,encoding:'utf8',maxBuffer:3000000,timeout:15000,stdio:['pipe','pipe','pipe']}));
@@ -63,6 +64,7 @@ export function projection(row,data) {
     || (value.slug ?? value.surface_key) !== row.identity.slug || (row.kind !== 'guide' && value.status !== 'published') || value.is_public !== true) throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
   if (row.kind === 'guide' && value.guide_code !== 'from-mbti-to-job-fit') throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
   const result = Object.fromEntries(Object.keys(row.snapshot).filter(key=>Object.hasOwn(value,key)).map(key=>[key,value[key]]));
+  if (row.kind === 'article' && row.snapshot.seo_text) result.seo_text=Object.fromEntries(Object.keys(row.snapshot.seo_text).filter(key=>Object.hasOwn(value.seo_meta ?? {},key)).map(key=>[key,value.seo_meta[key]]));
   if (row.kind === 'profile') Object.assign(result,{sections:data.sections,entry_groups:data.entry_groups,seo_text:{title:data.seo_meta?.seo_title,description:data.seo_meta?.seo_description}});
   return result;
 }
@@ -126,7 +128,18 @@ function readerVariants(line, row, dom, environment) {
 export function assertDom(row,html,before,environment) {
   const dom=domOf(html); const body=compact(dom.body.join(' '));
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
-  if (row.kind !== 'surface' && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
+  if (row.kind !== 'surface' && row.snapshot.title && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
+  if (row.kind === 'article' && row.snapshot.seo_text) {
+    const seo=row.snapshot.seo_text;
+    if (!equal(dom.title.map(compact),[compact(`${seo.seo_title} | FermatMind`)])
+      || !equal(dom.description.map(compact),[compact(seo.seo_description)])
+      || !equal(dom.og_title.map(compact),[compact(seo.og_title)])
+      || !equal(dom.og_description.map(compact),[compact(seo.og_description)]))
+      throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
+    if (dom.article_body.length !== 1 || before.dom.article_body.length !== 1
+      || !equal(dom.h1.map(compact),before.dom.h1.map(compact)) || !equal(dom.article_body.map(compact),before.dom.article_body.map(compact)))
+      throw new Error(`PUBLIC_CONTENT_53_BODY_DRIFT_${row.page_id}`);
+  }
   if (row.kind === 'page' && Object.hasOwn(row.snapshot,'seo_title')) {
     const title = row.snapshot.seo_title || row.snapshot.title;
     const description = row.snapshot.meta_description || row.snapshot.summary;
@@ -168,7 +181,7 @@ export function assertDom(row,html,before,environment) {
       : translatedTestsHub ? changedStrings(row.before.payload_json.families,row.snapshot.payload_json.families)
         : translatedCategory ? ['hero','featured','allTests','differences','trust','resources','breadcrumb']
             .flatMap(key=>changedStrings(row.before.payload_json[key],row.snapshot.payload_json[key]))
-          : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
+          : row.snapshot.seo_text ? [] : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
   for (const [index, line] of lines.entries()) {
     const text=compact(plain(line));
     if (text && !body.includes(text) && !readerVariants(line,row,dom,environment).some(variant=>body.includes(compact(variant))))

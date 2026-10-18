@@ -137,6 +137,9 @@ final class PublicContent53State
             throw new DomainException('public_content_53_public_consumer_unavailable');
         }
         $projection = array_intersect_key($value, $row['snapshot']);
+        if ($row['kind'] === 'article' && isset($row['snapshot']['seo_text'])) {
+            $projection['seo_text'] = array_intersect_key($value['seo_meta'] ?? [], $row['snapshot']['seo_text']);
+        }
         if ($row['kind'] === 'profile') {
             $projection['sections'] = $data['sections'];
             $projection['entry_groups'] = $data['entry_groups'];
@@ -174,6 +177,17 @@ final class PublicContent53State
                 $values = $row['kind'] === 'article' ? $saved['published'] : $saved['values'];
                 $projection = [];
                 foreach ($row['snapshot'] as $field => $_) {
+                    if ($row['kind'] === 'article' && $field === 'seo_text') {
+                        $seoRows = $saved['relations']['article_seo_meta'];
+                        if (count($seoRows) !== 1) {
+                            throw new DomainException('public_content_53_copy_seo_missing');
+                        }
+                        $projection[$field] = array_intersect_key(array_replace($seoRows[0], [
+                            'seo_title' => $values['seo_title'], 'seo_description' => $values['seo_description'],
+                        ]), $row['snapshot']['seo_text']);
+
+                        continue;
+                    }
                     $value = $values[$field] ?? null;
                     if (in_array($field, ['faq_items', 'payload_json'], true)) {
                         $value = is_string($value) ? json_decode($value, true, 64, JSON_THROW_ON_ERROR) : ($value ?? []);

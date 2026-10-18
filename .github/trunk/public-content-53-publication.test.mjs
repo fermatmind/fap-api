@@ -6,9 +6,10 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
-import { assertDom, pathFor, read, projection } from './public-content-53-online-qa.mjs';
+import { assertDom, domOf, pathFor, read, projection } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
+const guideDigest=()=>createHash('sha256').update('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const translationDigest=()=>createHash('sha256').update('fermatmind.public_content_translation.v1\n'+['translation-batch.json','translation-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 function translatedTestsHubDom() {
  const row=readCandidateRows(root,translationDigest()).candidates.find(row=>row.page_id==='PAGE-32');
@@ -50,7 +51,7 @@ test('previous translation package remains readable by its own immutable digest'
 });
 test('previous article amendment still binds only the reviewed existing article body',()=>{
  const binding=inspectPackage(root);const sha=bytes=>createHash('sha256').update(bytes).digest('hex');const digest=sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));const rows=readCandidateRows(root,digest).candidates;
- assert.equal(binding.expected_row_count,1);assert.equal(rows.length,1);
+ assert.equal(binding.expected_row_count,3);assert.equal(rows.length,1);
  const row=rows[0];assert.equal(row.page_id,'PAGE-54');assert.equal(row.kind,'article');
  assert.deepEqual(row.identity,{org_id:0,slug:'mbti-full-report-career-relationship-communication',locale:'en'});
  for(const before of [row.before,row.staging_before]) {
@@ -241,9 +242,9 @@ test('category acceptance binds metadata and visible sections without mistaking 
  }
 });
 
-test('active single-locale guide amendment protects identity and checks real body_md consumer',()=>{
- const row=readCandidateRows(root).candidates[0];assert.equal(row.kind,'guide');
- assert.equal(inspectPackage(root).expected_row_count,1);assert.equal(row.identity.slug,'from-mbti-to-job-fit');
+test('previous single-locale guide amendment protects identity and checks real body_md consumer',()=>{
+ const row=readCandidateRows(root,guideDigest()).candidates[0];assert.equal(row.kind,'guide');
+ assert.equal(row.identity.slug,'from-mbti-to-job-fit');
  assert.ok(['en','zh-CN'].includes(row.identity.locale));
  for(const before of [row.before,row.staging_before]) for(const field of ['title','excerpt']) assert.equal(before[field],row.snapshot[field]);
  const native={...row.identity,...row.snapshot,guide_code:row.identity.slug,is_public:true};
@@ -256,4 +257,20 @@ test('active single-locale guide amendment protects identity and checks real bod
  assert.doesNotThrow(()=>assertDom(small,html,before,'production'));
  assert.throws(()=>assertDom(small,html.replace('<p>Required new answer.</p>','<script>Required new answer.</script>'),before,'production'),/VISIBLE_BODY/);
  assert.throws(()=>assertDom(small,html.replace('href="/en/career/guides/interview-strategy-by-role"','href="/en/career/guides/other"'),before,'production'),/LINK/);
+});
+
+test('active copy amendment binds three native resources and checks metadata plus unchanged reader body',()=>{
+ const rows=readCandidateRows(root).candidates;
+ assert.equal(inspectPackage(root).expected_row_count,3);
+ assert.deepEqual(rows.map(row=>row.page_id),['PAGE-23','PAGE-32','PAGE-34']);
+ const row=rows[0],seo=row.snapshot.seo_text,url='https://fermatmind.com'+pathFor(row);
+ const native={...row.identity,status:'published',is_public:true,seo_meta:seo};
+ assert.deepEqual(projection(row,{ok:true,article:native}),row.snapshot);
+ assert.notDeepEqual(projection(row,{ok:true,article:{...native,seo_meta:{...seo,seo_description:'Stale'}}}),row.snapshot);
+ const html=`<html><head><meta charset="utf-8"><title>${seo.seo_title} | FermatMind</title><meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="${url}"></head><body><main><h1>Seven types of love</h1><article data-testid="article-detail-content"><p>Retain this explanation.</p></article></main></body></html>`;
+ const before={dom:domOf(html)};
+ assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ assert.throws(()=>assertDom(row,html.replaceAll(seo.seo_description,'Old four dimensions'),before,'production'),/METADATA/);
+ assert.throws(()=>assertDom(row,html.replace('Retain this explanation.','Changed explanation.'),before,'production'),/BODY_DRIFT/);
+ assert.throws(()=>assertDom(row,html.replace('<h1>Seven types of love</h1>','<h1>Wrong heading</h1>'),before,'production'),/BODY_DRIFT/);
 });

@@ -620,6 +620,126 @@ PHP;
         }
     }
 
+    private function copyAmendmentDigest(?string $root = null): string
+    {
+        $chain = "fermatmind.public_content_copy_amendment.v1\n";
+        foreach (['copy-amendment.json', 'copy-amendment-review.json'] as $name) {
+            $chain .= $name."\n".hash_file('sha256', ($root ?? base_path()).'/'.PublicContent53Package::PACKAGE.'/'.$name)."\n";
+        }
+
+        return hash('sha256', $chain);
+    }
+
+    #[DataProvider('environments')]
+    public function test_copy_amendment_changes_only_reviewed_metadata_and_cards_and_restores(string $environment): void
+    {
+        config(['content_promotion.public_content_53_environment' => $environment]);
+        $sha = $this->copyAmendmentDigest();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
+        $article = null;
+        foreach ($rows as $row) {
+            $copy = PublicContent53Package::before($row);
+            if ($row['kind'] === 'article') {
+                $article = $this->article($row['identity'], ['title' => 'Visible title', 'excerpt' => 'Original summary', 'content_md' => 'Original body'],
+                    $row['source_identity']['translation_group_id'], $row['source_identity']['source_locale']);
+                $published = ArticleTranslationRevision::query()->findOrFail($article->published_revision_id);
+                $published->forceFill(array_intersect_key($copy['seo_text'], array_flip(['seo_title', 'seo_description'])))->saveQuietly();
+                $article->seoMeta()->update($copy['seo_text']);
+            } else {
+                LandingSurface::query()->create(['org_id' => 0, 'surface_key' => $row['identity']['slug'], 'locale' => 'en',
+                    'title' => 'Tests', 'description' => 'Tests', 'schema_version' => 'v1', 'status' => 'published', 'is_public' => true,
+                    'is_indexable' => true, 'payload_json' => $copy['payload_json']]);
+            }
+        }
+        self::assertInstanceOf(Article::class, $article);
+        $other = $this->article(['org_id' => 0, 'slug' => 'unselected-copy-control', 'locale' => 'en'],
+            ['title' => 'Control', 'excerpt' => 'Keep', 'content_md' => 'Keep control body'], 'control-group', 'en');
+        $otherBefore = $other->fresh()->toArray();
+        $states = app(PublicContent53State::class);
+        $writer = app(PublicContent53Writer::class);
+        $before = $states->read($sha);
+        $states->assertBaseline($rows);
+        $context = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), count($rows), str_repeat('e', 64));
+        $remainingSurfaces = 2;
+        DB::listen(function ($query) use (&$remainingSurfaces): void {
+            if ($remainingSurfaces > 0 && preg_match('/^update [`"]landing_surfaces[`"]/i', $query->sql) === 1 && --$remainingSurfaces === 0) {
+                throw new DomainException('copy_amendment_late_failure');
+            }
+        });
+        try {
+            DB::transaction(fn () => $writer->publish($context, $before));
+            self::fail('A late surface failure must roll back the earlier article revision and SEO update');
+        } catch (DomainException $error) {
+            self::assertSame('copy_amendment_late_failure', $error->getMessage());
+        }
+        self::assertSame(0, $remainingSurfaces);
+        self::assertSame($before, $states->read($sha));
+        $after = DB::transaction(fn () => $writer->publish($context, $before));
+        self::assertSame(3, $after['written_count']);
+        Cache::flush();
+        $states->assertPublished($rows, $after['state']);
+        self::assertSame($otherBefore, $other->fresh()->toArray());
+        $articleRow = array_values(array_filter($rows, static fn (array $row): bool => $row['kind'] === 'article'))[0];
+        $saved = $before[$articleRow['page_id']];
+        self::assertSame($saved['working'], $after['state'][$articleRow['page_id']]['working']);
+        self::assertSame($saved['published'], (array) DB::table('article_translation_revisions')->where('id', $saved['published']['id'])->first());
+        self::assertSame('Original body', $article->fresh()->publishedRevision->content_md);
+        self::assertSame($articleRow['snapshot']['seo_text']['seo_description'], $article->fresh()->publishedRevision->seo_description);
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($context, $after['state']))['written_count']);
+        DB::transaction(fn () => $writer->restore($context, $before, $after['state']));
+        Cache::flush();
+        self::assertSame($before, $states->read($sha));
+        $newOwner = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('f', 40), str_repeat('b', 64), str_repeat('c', 64), '12346', 1, str_repeat('d', 64), count($rows), str_repeat('e', 64));
+        self::assertSame(3, DB::transaction(fn () => $writer->publish($newOwner, $before))['written_count']);
+        $stale = $states->read($sha);
+        DB::table('articles')->where('id', $article->id)->update(['excerpt' => 'Concurrent operator change']);
+        $this->expectExceptionMessage('public_content_53_native_prestate_drift');
+        DB::transaction(fn () => $writer->publish($newOwner, $stale));
+    }
+
+    public function test_copy_amendment_rejects_links_flags_body_and_unreviewed_bytes(): void
+    {
+        $root = sys_get_temp_dir().'/fm-copy-amendment-'.bin2hex(random_bytes(6));
+        $dir = $root.'/'.PublicContent53Package::PACKAGE;
+        mkdir($dir, 0700, true);
+        $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/copy-amendment.json')), true);
+        try {
+            foreach (['link', 'flag', 'body', 'identity', 'review'] as $case) {
+                $candidate = $package;
+                if ($case === 'link') {
+                    $candidate['candidates'][1]['snapshot']['payload_json']['families']['items'][0]['tests'][0]['href'] = '/en/unselected';
+                } elseif ($case === 'flag') {
+                    $candidate['candidates'][1]['snapshot']['payload_json']['seo']['is_indexable'] = true;
+                } elseif ($case === 'body') {
+                    $candidate['candidates'][0]['snapshot']['content_md'] = 'New body';
+                } elseif ($case === 'identity') {
+                    $candidate['candidates'][0]['identity']['slug'] = 'unselected';
+                }
+                $bytes = json_encode($candidate, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+                file_put_contents($dir.'/copy-amendment.json', $bytes);
+                file_put_contents($dir.'/copy-amendment-review.json', json_encode([
+                    'schema' => 'fermatmind.public_content_copy_amendment.review.v1',
+                    'candidate_sha256' => $case === 'review' ? str_repeat('0', 64) : hash('sha256', $bytes),
+                    'verdict' => 'PASS', 'pages' => ['PAGE-23' => 'PASS', 'PAGE-32' => 'PASS', 'PAGE-34' => 'PASS'],
+                ], JSON_THROW_ON_ERROR));
+                try {
+                    app(PublicContent53Package::class)->read($root, $this->copyAmendmentDigest($root));
+                    self::fail('Protected or unreviewed mutation must fail');
+                } catch (DomainException $error) {
+                    self::assertStringStartsWith('public_content_53_copy_', $error->getMessage());
+                }
+            }
+        } finally {
+            unlink($dir.'/copy-amendment.json');
+            unlink($dir.'/copy-amendment-review.json');
+            rmdir($dir);
+            rmdir($root.'/content_assets');
+            rmdir($root);
+        }
+    }
+
     private function seedTargets(): void
     {
         (new ScaleRegistrySeeder)->run();

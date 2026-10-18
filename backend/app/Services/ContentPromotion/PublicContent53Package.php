@@ -80,6 +80,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/copy-amendment.json')) {
+            $chain = "fermatmind.public_content_copy_amendment.v1\n";
+            foreach (['copy-amendment.json', 'copy-amendment-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readCopyAmendment($root, $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/guide-amendment.json')) {
             $chain = "fermatmind.public_content_guide_amendment.v1\n";
             foreach (['guide-amendment.json', 'guide-amendment-review.json'] as $name) {
@@ -212,6 +221,82 @@ final class PublicContent53Package
         }
 
         return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
+    /** Correct existing English search copy and test-card text through native CAS. */
+    private function readCopyAmendment(string $root, string $sha): array
+    {
+        $bytes = $this->bytes($root, 'copy-amendment.json');
+        $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $review = json_decode($this->bytes($root, 'copy-amendment-review.json'), true, 64, JSON_THROW_ON_ERROR);
+        $rows = $package['candidates'] ?? [];
+        if (($package['schema'] ?? null) !== 'fermatmind.public_content_copy_amendment.v1'
+            || ! is_array($rows) || count($rows) < 1 || count($rows) > 3
+            || ($review['schema'] ?? null) !== 'fermatmind.public_content_copy_amendment.review.v1'
+            || ($review['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($review['verdict'] ?? null) !== 'PASS' || count($review['pages'] ?? []) !== count($rows)) {
+            throw new DomainException('public_content_53_copy_review_invalid');
+        }
+        $seen = [];
+        foreach ($rows as $row) {
+            $id = $row['page_id'] ?? '';
+            if (! in_array($id, ['PAGE-23', 'PAGE-32', 'PAGE-34'], true) || isset($seen[$id])
+                || ($row['identity']['org_id'] ?? null) !== 0
+                || [$row['kind'] ?? null, $row['identity']['slug'] ?? null, $row['identity']['locale'] ?? null] !== self::TARGETS[$id]
+                || ($review['pages'][$id] ?? null) !== 'PASS'
+                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity']) !== []) {
+                throw new DomainException('public_content_53_copy_identity_invalid');
+            }
+            $seen[$id] = true;
+            foreach (['before', 'staging_before', 'snapshot'] as $version) {
+                $copy = $row[$version] ?? [];
+                if (array_keys($copy) !== ($row['kind'] === 'article' ? ['seo_text'] : ['payload_json'])) {
+                    throw new DomainException('public_content_53_copy_fields_invalid');
+                }
+                if ($row['kind'] === 'article') {
+                    $fields = array_keys($copy['seo_text'] ?? []);
+                    sort($fields);
+                    if ($fields !== ['og_description', 'og_title', 'seo_description', 'seo_title']
+                        || array_filter($copy['seo_text'], static fn ($v): bool => ! is_string($v) || trim($v) === '')) {
+                        throw new DomainException('public_content_53_copy_fields_invalid');
+                    }
+                } elseif (! is_array($copy['payload_json'] ?? null)) {
+                    throw new DomainException('public_content_53_copy_fields_invalid');
+                }
+            }
+            foreach (['source_identity', 'staging_source_identity'] as $key) {
+                if (! is_array($row[$key] ?? null)
+                    || ($row['kind'] === 'article' && (($row[$key]['translation_group_id'] ?? '') === '' || ! in_array($row[$key]['source_locale'] ?? '', ['en', 'zh-CN'], true)))
+                    || ($row['kind'] === 'surface' && $row[$key] !== [])) {
+                    throw new DomainException('public_content_53_copy_source_invalid');
+                }
+            }
+            if ($row['kind'] === 'surface') {
+                foreach (['before', 'staging_before'] as $version) {
+                    $this->assertCardCopyOnly($row[$version]['payload_json'], $row['snapshot']['payload_json']);
+                }
+            }
+        }
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
+    private function assertCardCopyOnly(mixed $before, mixed $after, string $path = ''): void
+    {
+        if ($before === $after) {
+            return;
+        }
+        if (is_array($before) && is_array($after) && array_keys($before) === array_keys($after)) {
+            foreach ($after as $key => $value) {
+                $this->assertCardCopyOnly($before[$key], $value, ltrim($path.'.'.$key, '.'));
+            }
+
+            return;
+        }
+        if (! is_string($before) || ! is_string($after) || trim($after) === ''
+            || preg_match('/\A(?:families\.items\.\d+\.tests|featured\.items|allTests\.items)\.\d+\.(?:description|durationLabel|questionsLabel|outputLabel|primaryLabel|secondaryLabel)\z/', $path) !== 1) {
+            throw new DomainException('public_content_53_copy_protected_field');
+        }
     }
 
     /** Body-only amendments retain the existing native CAS, rollback and readers. */
