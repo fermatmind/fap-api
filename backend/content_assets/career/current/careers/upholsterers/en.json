@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25585,7 +25588,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First distinguish information tasks such as orders and records from physical tasks such as material processing. Editorial inference: AI can attempt to assist with organization and option comparison, while real measuring, process confirmation, and finished-product inspection still need to be done by people; this page does not give a replacement percentage for this occupation."
+              "First distinguish information tasks such as orders and records from physical tasks such as material processing. Editorial inference: AI can attempt to assist with organization and option comparison, while real measuring, process confirmation, and finished-product inspection still need to be done by people; this page does not give a replacement percentage for this occupation. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "upholsterers.display.ai_impact_table.answer",
@@ -33930,6 +33933,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Pattern-making | Measuring and cutting | Draw the cutting lines to the pattern or specification, distinguish finish lines, seam allowances, and fabric direction, and prepare the applicable cut pieces. — 25/100; weight=1/3; upholsterers.display.responsibilities_block.02[0]",
+                  "Sewing | Assembling covers and cushions | Use sewing equipment you have been trained to operate or hand-stitching to join covers and cushions, and finish edges and joins according to the process. — 0/100; weight=1/3; upholsterers.display.responsibilities_block.03[0]",
+                  "Installation | Filling and upholstered fixing | Smooth the cotton felt or foam filling, fix the cover to the frame according to the process, and check the shape and tension. — 0/100; weight=1/3; upholsterers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39202,7 +39222,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -39352,15 +39372,27 @@
           "nbs",
           "r2-pay-2"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Furniture upholsterers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 51-6093.00 exact occupation basis",
@@ -39411,7 +39443,7 @@
       "text": "Furniture upholsterers"
     }
   },
-  "source_content_sha256": "93280709d64ea434fce07ca56cd50d04e55d901445985c664f73689d25178a4c",
+  "source_content_sha256": "a22faa696e96b840cbeb63d0df52a24606a1d1f6d57faf5fc3832aaa53dda09d",
   "subject": {
     "canonical_slug": "upholsterers",
     "name": "Furniture upholsterers",

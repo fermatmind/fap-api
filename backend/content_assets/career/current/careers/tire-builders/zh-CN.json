@@ -8,6 +8,9 @@
       "fact:china-production-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25470,7 +25473,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：轮胎制造工可复核任务评分、全国采用和AI净就业影响。官方任务与通用方法不签发评分；BLS2025—2035总体增长0.8%、十年净增约200人与年均1900空缺含替补分指标，非AI因果。"
+              "证据不足：轮胎制造工可复核任务评分、全国采用和AI净就业影响。官方任务与通用方法不签发评分；BLS2025—2035总体增长0.8%、十年净增约200人与年均1900空缺含替补分指标，非AI因果。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "tire-builders.display.ai_impact_table.answer",
@@ -32882,6 +32885,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "组合｜部件接合与轮胎构建｜依现场规定处理和组合胎面、帘布等部件，核对接合与排列要求。 — 0/100; weight=1/3; tire-builders.display.responsibilities_block.02[0]",
+                  "操作｜设备监控与过程执行｜在训练范围内操作设备，观察加工情况并按现场安排处理任务。 — 25/100; weight=1/3; tire-builders.display.responsibilities_block.04[0]",
+                  "核对｜尺寸与缺陷检查｜对照规格观察尺寸、接合和表面问题，按职责记录并报告异常。 — 25/100; weight=1/3; tire-builders.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38126,7 +38146,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38287,15 +38307,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "轮胎制造工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "美国51-9197.00设备造胎口径",
@@ -38346,7 +38378,7 @@
       "text": "轮胎制造工"
     }
   },
-  "source_content_sha256": "80907897b43b8faf99f52f4b2d25efd1984b040bcf97d98f9d50987aa4c202c8",
+  "source_content_sha256": "2754380368d25e6416e62d8e8de4a18ae257b1f463fcabe3be27769f64dd9ce7",
   "subject": {
     "canonical_slug": "tire-builders",
     "name": "轮胎制造工",

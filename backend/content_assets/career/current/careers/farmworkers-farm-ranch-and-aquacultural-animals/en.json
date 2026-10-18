@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24112,7 +24115,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round obtained no research on the accuracy, adoption, or efficiency of monitoring tools for this occupation. Record drafts and data lookup are editorial trial directions; the ILO global exposure finding cannot prove that this occupation as a whole is augmented, and no task score is given."
+              "This round obtained no research on the accuracy, adoption, or efficiency of monitoring tools for this occupation. Record drafts and data lookup are editorial trial directions; the ILO global exposure finding cannot prove that this occupation as a whole is augmented, and a separate editorial task-sample estimate is shown. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "farmworkers-farm-ranch-and-aquacultural-animals.ai-impact.ai-impact-table.18",
@@ -31538,6 +31541,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Feeding and watering and grazing — 0/100; weight=1/3; farmworkers-farm-ranch-and-aquacultural-animals.ai-impact.ai-impact-table.95[0]",
+                  "Animal health observation and handling — 25/100; weight=1/3; farmworkers-farm-ranch-and-aquacultural-animals.ai-impact.ai-impact-table.99[0]",
+                  "Production tasks such as milking, egg collection, and shearing — 0/100; weight=1/3; farmworkers-farm-ranch-and-aquacultural-animals.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36446,7 +36466,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -36715,15 +36735,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Farmworkers, Farm, Ranch, and Aquacultural Animals",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Farmworkers, Farm, Ranch, and Aquacultural Animals · official occupational scope",
@@ -36774,7 +36806,7 @@
       "text": "Farmworkers, Farm, Ranch, and Aquacultural Animals"
     }
   },
-  "source_content_sha256": "dab59585ef3db5f2f238b77b81addc3f0822d6818349b705ae86f662fdb4599e",
+  "source_content_sha256": "bb21d3adf702d93c778d5bd6f0391e6aaa64b15032144685dcf980fc8aad5098",
   "subject": {
     "canonical_slug": "farmworkers-farm-ranch-and-aquacultural-animals",
     "name": "Farmworkers, Farm, Ranch, and Aquacultural Animals",

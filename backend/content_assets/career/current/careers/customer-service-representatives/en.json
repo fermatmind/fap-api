@@ -11,6 +11,9 @@
       "fact:employment-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24238,7 +24241,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial judgment: the assistive uses of search, reply drafting, recording and ticket dispatch can be assessed first, with accuracy, permissions and data conditions tested in practice; no efficiency gain is claimed to have been measured on this page. The O*NET automation survey shows 49% moderate, 35% not at all automated and 12% slight, which describes general work automation and is not a generative AI adoption rate. Customer commitments, accounting handling and exceptions are reviewed according to authorization. Insufficient evidence: this page did not obtain causal data on this occupation's AI adoption rate, income or headcount changes."
+              "Editorial judgment: the assistive uses of search, reply drafting, recording and ticket dispatch can be assessed first, with accuracy, permissions and data conditions tested in practice; no efficiency gain is claimed to have been measured on this page. The O*NET automation survey shows 49% moderate, 35% not at all automated and 12% slight, which describes general work automation and is not a generative AI adoption rate. Customer commitments, accounting handling and exceptions are reviewed according to authorization. Insufficient evidence: this page did not obtain causal data on this occupation's AI adoption rate, income or headcount changes. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31625,6 +31628,23 @@
                 "publisher": "Standing Committee of the National People's Congress; the text is carried by the Cyberspace Administration of China",
                 "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Customer communication | Answer calls and reply to inquiries | Communicate with customers by telephone or in person, provide basic or procedure-based information on routine inquiries about products or services, and contact customers to answer inquiries or inform them of claims investigation results and plan adjustments. — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Orders and accounts | Take orders and record changes | Take inquiries or orders, open and close accounts, obtain complaint details, and use a computer to fill in contract forms, change address records or issue service disconnection orders. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Complaint resolution | Resolve service and billing complaints | Resolve service or billing complaints through exchanges, refunds or bill adjustments, review insurance terms to determine whether a loss falls within coverage, and obtain relevant information to determine whether a complaint is valid and why. — 50/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36880,7 +36900,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparing occupational directions",
       "fit": "Occupational fit guide",
@@ -37064,15 +37084,27 @@
         "source_refs": [
           "bls-ooh-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Customer Service Representatives",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Customer service · Call centers · Order and billing handling",
@@ -37123,7 +37155,7 @@
       "text": "Customer Service Representatives"
     }
   },
-  "source_content_sha256": "c1eaebb4850ab85be13cd92cc1622c8ca751fd3a2617b0ca46c13ab0e3a25b3c",
+  "source_content_sha256": "95403211e7f0ae2635b82de2faec897cd6c1a408edc2ba35b5e5cd8695e05d46",
   "subject": {
     "canonical_slug": "customer-service-representatives",
     "name": "Customer Service Representatives",

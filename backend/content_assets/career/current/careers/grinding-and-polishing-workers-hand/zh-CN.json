@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25484,7 +25487,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得51-9022.00精确的生成式AI暴露等级、机器人实际采用/替代率或工资因果数据。O*NET任务与软件提及不支持“中等偏高”“替代明显”或整职业不会被取代；ILO2025为ISCO任务指数，未建立本页精确SOC映射，不断言研究不覆盖。下列辅助候选是编辑建议，须实测质量、投入与权限，不是已采用统计；机械自动化与生成式AI分别评估。 美国51-9022.00使用手工/手持电动工具对金属、木、石、黏土、塑料、玻璃等物件研磨砂磨抛光，含凿修/抛光/修整。17任务13核心4补充已核：检查样板尺寸/按受控条件试验91、研磨清洁89、测量标记87、去毛刺86、标缺陷85、读图84、控制81、装载调整79、维护77、选磨料76、凹槽轮廓锉削67、修锐64、转移61；补充取件80/记录72/施化学品64/清锉黄铜14。重要性非频率或安全许可；手工名称不排除固定设备，材料/参数及放行按实际授权。 BLS当前2025—2035精确职业51-9022就业10.8→8.7千人、变化−19.2%、净变−2.1千人，年均空缺0.7千人来自替换；各项独立取整，EP含自雇（2025占2.5%），不同OEWS工资。预测不是实际招聘、个人结果或AI因果。本轮O*NET已显示2025就业10,800、2025—2035下降档及年均空缺700，与当前BLS周期一致。"
+              "证据不足：本轮未取得51-9022.00精确的生成式AI暴露等级、机器人实际采用/替代率或工资因果数据。O*NET任务与软件提及不支持“中等偏高”“替代明显”或整职业不会被取代；ILO2025为ISCO任务指数，未建立本页精确SOC映射，不断言研究不覆盖。下列辅助候选是编辑建议，须实测质量、投入与权限，不是已采用统计；机械自动化与生成式AI分别评估。 美国51-9022.00使用手工/手持电动工具对金属、木、石、黏土、塑料、玻璃等物件研磨砂磨抛光，含凿修/抛光/修整。17任务13核心4补充已核：检查样板尺寸/按受控条件试验91、研磨清洁89、测量标记87、去毛刺86、标缺陷85、读图84、控制81、装载调整79、维护77、选磨料76、凹槽轮廓锉削67、修锐64、转移61；补充取件80/记录72/施化学品64/清锉黄铜14。重要性非频率或安全许可；手工名称不排除固定设备，材料/参数及放行按实际授权。 BLS当前2025—2035精确职业51-9022就业10.8→8.7千人、变化−19.2%、净变−2.1千人，年均空缺0.7千人来自替换；各项独立取整，EP含自雇（2025占2.5%），不同OEWS工资。预测不是实际招聘、个人结果或AI因果。本轮O*NET已显示2025就业10,800、2025—2035下降档及年均空缺700，与当前BLS周期一致。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "grinding-and-polishing-workers-hand.ai-impact.ai-impact-table.18",
@@ -33060,6 +33063,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor, Employment and Training Administration",
                 "scope": "51-9022.00",
                 "url": "https://www.onetonline.org/link/details/51-9022.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "读图与选料 — 50/100; weight=1/3; grinding-and-polishing-workers-hand.ai-impact.ai-impact-table.95[0]",
+                  "研磨与砂磨与抛光 — 0/100; weight=1/3; grinding-and-polishing-workers-hand.ai-impact.ai-impact-table.99[0]",
+                  "检验与样板比对 — 25/100; weight=1/3; grinding-and-polishing-workers-hand.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37997,7 +38017,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38150,15 +38170,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "手工研磨抛光工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "手工研磨抛光工 · 任务、交付与责任边界",
@@ -38209,7 +38241,7 @@
       "text": "手工研磨抛光工"
     }
   },
-  "source_content_sha256": "4cf8f1994eac7a618d9577fe2c1f3f59097b92ca68cef481ab3f661e94688678",
+  "source_content_sha256": "5fd7863a5c657951ef15ea754eff14eea9ee0c634689ee5546444e77ce191778",
   "subject": {
     "canonical_slug": "grinding-and-polishing-workers-hand",
     "name": "手工研磨抛光工",

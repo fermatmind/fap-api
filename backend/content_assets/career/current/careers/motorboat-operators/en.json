@@ -11,6 +11,9 @@
       "fact:credential-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -13523,6 +13526,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-5022.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Operate engine throttles and steering mechanisms along planned courses, maintaining course with compasses or electronic navigation aids — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Secure boats to docks using mooring lines and release them on departure — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Protect passengers and cargo under safety procedures and direct emergency safety responses — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13713,7 +13733,7 @@
             }
           }
         ],
-        "answer": "Motorboat operators may receive assistance with route and tide information searches, electronic chart and navigation aid reading records, voyage and supply checklist management, equipment maintenance records, and drafting explanatory materials for passengers or crew. Accountable people must still handle actual maneuvering and collision avoidance judgments, on-site safety command and emergency decisions, equipment and hull condition judgments, and on-site responses to navigation hazards. Technological exposure does not equal job replacement.",
+        "answer": "Motorboat operators may receive assistance with route and tide information searches, electronic chart and navigation aid reading records, voyage and supply checklist management, equipment maintenance records, and drafting explanatory materials for passengers or crew. Accountable people must still handle actual maneuvering and collision avoidance judgments, on-site safety command and emergency decisions, equipment and hull condition judgments, and on-site responses to navigation hazards. Technological exposure does not equal job replacement. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 53-5022.00 occupational profile",
@@ -15461,7 +15481,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -15573,15 +15593,27 @@
         "source_refs": [
           "source-pack-onet-localcert"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Motorboat Operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Maneuvering and course keeping",
@@ -15632,7 +15664,7 @@
       "text": "Motorboat Operators"
     }
   },
-  "source_content_sha256": "cafb50a714b6d68029ee96995c50e73410c600d8dec228c4221fc7871051c1b9",
+  "source_content_sha256": "fda38a140623617059220b8b0c4c1ae625bb90b45bd4b16c3091582093990584",
   "subject": {
     "canonical_slug": "motorboat-operators",
     "name": "Motorboat Operators",

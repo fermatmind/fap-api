@@ -38,6 +38,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25079,7 +25082,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "公开资料支持任务、软件关键词、AI暴露方法与就业预测；谱图辅助、汇总、草稿和检索是编辑试用建议，本轮无该职业可靠性或提速实测。BLS表1.2的美国SOC19-2031化学家2025—2035预测：84,900→90,300人，增长6.4%，年均空缺5,900；OOH化学家分项整数为6%（快于平均）。官方净增5.5千人独立舍入，与已舍入两端之差5.4千人不同，不重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招存量、AI归因或逐年实绩。"
+              "公开资料支持任务、软件关键词、AI暴露方法与就业预测；谱图辅助、汇总、草稿和检索是编辑试用建议，本轮无该职业可靠性或提速实测。BLS表1.2的美国SOC19-2031化学家2025—2035预测：84,900→90,300人，增长6.4%，年均空缺5,900；OOH化学家分项整数为6%（快于平均）。官方净增5.5千人独立舍入，与已舍入两端之差5.4千人不同，不重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招存量、AI归因或逐年实绩。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "chemists.ai-impact.ai-impact-table.18",
@@ -32142,6 +32145,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-4031.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "分析与检测｜按方法分析化合物并开展质量控制测试｜使用色谱与光谱或分光光度技术分析有机或无机化合物以确定其化学或物理性质与组成与结构或反应，并开展质量控制测试（对应 O*NET 任务重要度 77、73）。 — 25/100; weight=1/3; chemists.profile.responsibilities-block.1[0]",
+                  "方法开发与改进｜开发或改进产品与方法并改变物质组成｜开发与改进或定制产品与设备与配方与流程或分析方法，通过引入热与光与能量或化学催化剂改变物质组成以进行定量或定性分析（对应任务重要度 80、74）。 — 50/100; weight=1/3; chemists.profile.responsibilities-block.1[1]",
+                  "记录与报告｜汇总分析结果并撰写报告或标准规范｜撰写技术论文或报告，或编制流程与设施与产品或测试的标准与规范，并汇总与分析测试信息以确定工艺或设备运行效率或诊断故障（对应任务重要度 73、71）。 — 75/100; weight=1/3; chemists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37085,7 +37105,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37450,15 +37470,27 @@
         "source_refs": [
           "ch-ooh"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "化学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · IRC",
@@ -37509,7 +37541,7 @@
       "text": "化学家"
     }
   },
-  "source_content_sha256": "eea4109ecc4d511b3b037d6afb072aadc22b92ae90fd309e0b00cb7c308ec1d1",
+  "source_content_sha256": "3e21f3b0d159ac78029d7614aa81420f64624e0cc2ce0be824a0a16a7bb51548",
   "subject": {
     "canonical_slug": "chemists",
     "name": "化学家",

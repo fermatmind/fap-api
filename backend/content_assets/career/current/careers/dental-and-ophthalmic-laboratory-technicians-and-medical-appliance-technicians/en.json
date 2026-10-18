@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24373,7 +24376,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The OOH describes dental technicians using computer programs and 3D printing, and gives a demand projection explanation based on labor-saving technology; long-term prevalence, generative AI adoption, and substitution proportions per process were not verified. CAD/CAM, scanning, and additive manufacturing do not automatically equal GenAI, and work order summaries and design candidates are scenarios pending verification. Laboratory verification and fitting on the model and articulator are kept separate from clinical seating and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience, training, or supervisor approval does not replace physician qualification."
+              "The OOH describes dental technicians using computer programs and 3D printing, and gives a demand projection explanation based on labor-saving technology; long-term prevalence, generative AI adoption, and substitution proportions per process were not verified. CAD/CAM, scanning, and additive manufacturing do not automatically equal GenAI, and work order summaries and design candidates are scenarios pending verification. Laboratory verification and fitting on the model and articulator are kept separate from clinical seating and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience, training, or supervisor approval does not replace physician qualification. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -32066,6 +32069,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-4111.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Verify material, color, occlusion, and contact requirements against the work order and prescription specifications, and clarify missing items before starting work. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Make the die, wax-up, and investment pattern from the model and scan data, complete casting, grinding, porcelain application, and sintering per the process procedures, and record the parameters. — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Verify accuracy and occlusion on the model and articulator per the prescription specifications, with specific inspection items following the product technical requirements; laboratory verification and fitting on the model and articulator are kept separate from clinical seating and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience, training, or supervisor approval does not replace physician qualification. — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37583,7 +37603,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37854,15 +37874,27 @@
         "source_refs": [
           "r5-nbs-manufact"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Dental laboratory technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Dental restoration processing · specification and occlusion verification · documentation",
@@ -37913,7 +37945,7 @@
       "text": "Dental laboratory technicians"
     }
   },
-  "source_content_sha256": "46c934cf083cf083f94f571b1df3cbb181877a892d371f6d76d39f5a01745a30",
+  "source_content_sha256": "026f10e440c6cc5cbb2afc465e298336f2005569ffd98f6e52f74f3c4d7f1c38",
   "subject": {
     "canonical_slug": "dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
     "name": "Dental laboratory technicians",

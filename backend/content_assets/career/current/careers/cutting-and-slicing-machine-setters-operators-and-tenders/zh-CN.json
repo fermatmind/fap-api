@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24319,7 +24322,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "已核实28项任务及一般自动化情境；本轮未取得生成式AI采用率、实测提效、替代时点或收入因果。一般自动化回答含13%完全、17%高度、15%轻度，不是生成式AI比例。工单解析、配方控制、自动送料与视觉检验等是待验证候选；传统工装、数控及控制软件不等于生成式AI。须核材料适配、误差、防护和人工权限。"
+              "已核实28项任务及一般自动化情境；本轮未取得生成式AI采用率、实测提效、替代时点或收入因果。一般自动化回答含13%完全、17%高度、15%轻度，不是生成式AI比例。工单解析、配方控制、自动送料与视觉检验等是待验证候选；传统工装、数控及控制软件不等于生成式AI。须核材料适配、误差、防护和人工权限。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31782,6 +31785,23 @@
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "装设调机｜按规格装刀与设定｜按工单、图纸、规格或样品确定部件、设定与调整，用手工具选装与安装刀片、辊轮与模板，在刀片间放置宽度规块、调平刀片并把楔块插入框架固定。 — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "送料运行｜定位送料与循环｜把原料沿切割线或靠挡块定位，穿料、导向、推入或用大手轮送进，启动水泵把水与磨料循环到刀片或钢索上，并监视运行以发现故障或补料。 — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "检验回调｜量测检验与回调｜用量具、千分尺与秤检查、测量并称重材料或产品以核对规格，剔除不合格材料并回调机器部件，使产品符合标准。 — 25/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37244,7 +37264,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37464,15 +37484,27 @@
         "source_refs": [
           "r5-onet-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "机器铺设工、操作员、看护员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "切割与切片设备操作 · 参数设定 · 检验与记录",
@@ -37523,7 +37555,7 @@
       "text": "切割与切片设备调整工、操作员、看护员"
     }
   },
-  "source_content_sha256": "1be5ff05f9d0c9ecacc4272bfffcb9b018564bfd108674130f349f4237d6b18e",
+  "source_content_sha256": "ff4a926bfade6c17b22cc3636a79579333d60d8504c040d68edfbb663f7b27ec",
   "subject": {
     "canonical_slug": "cutting-and-slicing-machine-setters-operators-and-tenders",
     "name": "切割与切片设备调整工、操作员、看护员",

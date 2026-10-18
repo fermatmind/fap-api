@@ -8,6 +8,9 @@
       "fact:cn-repair-private": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -13563,6 +13566,23 @@
                 "publisher": "FermatMind",
                 "scope": "internal_rubric",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Check the fuel line, filter, and carburetor — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Check compression and wear components — 25/100; weight=1/3; display.ai_impact_table.task_rows.3[0]",
+                  "Record parts replaced, labor hours, and use recommendations — 75/100; weight=1/3; display.ai_impact_table.task_rows.6[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13750,7 +13770,7 @@
             }
           }
         ],
-        "answer": "Service manual retrieval, work orders, and fault prompts can assist technicians; model verification, disassembly inspection, part replacement, test running, and safety release still require human responsibility.",
+        "answer": "Service manual retrieval, work orders, and fault prompts can assist technicians; model verification, disassembly inspection, part replacement, test running, and safety release still require human responsibility. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "Editorial candidates and control suggestions; O*NET task background",
@@ -15516,7 +15536,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15700,15 +15720,27 @@
         "source_refs": [
           "bls-ep-49-3053"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Outdoor power equipment and other small engine mechanic",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Lawn mowers · chainsaws · generators",
@@ -15759,7 +15791,7 @@
       "text": "Small engine repair technician｜duties, salary, and entry"
     }
   },
-  "source_content_sha256": "a44ed39a5648312f204c3cba1b098619d11d5c78019a282e855a60366f6757d2",
+  "source_content_sha256": "0c7ff9428099964a0523118f0d7821603e6c1dbe8479d82588a663820a9ab289",
   "subject": {
     "canonical_slug": "outdoor-power-equipment-and-other-small-engine-mechanics",
     "name": "Outdoor power equipment and other small engine mechanic",

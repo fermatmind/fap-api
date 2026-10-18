@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25035,7 +25038,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Tools may organize waste and monitoring records, check ledgers, and draft documents. Remote-controlled equipment, sensors, and generative AI are distinct technologies. Use at a specific site requires organizational validation and corresponding operational requirements. This page has not obtained AI adoption rates for SOC 47-4041, measured exposure-reduction effects, or causal evidence of AI-driven employment changes. O*NET tasks and context define the work; automation responses are not AI use rates. BLS 2025—2035 projections provide overall demand background and cannot guarantee freedom from replacement."
+              "Direct answer | Tools may organize waste and monitoring records, check ledgers, and draft documents. Remote-controlled equipment, sensors, and generative AI are distinct technologies. Use at a specific site requires organizational validation and corresponding operational requirements. This page has not obtained AI adoption rates for SOC 47-4041, measured exposure-reduction effects, or causal evidence of AI-driven employment changes. O*NET tasks and context define the work; automation responses are not AI use rates. BLS 2025—2035 projections provide overall demand background and cannot guarantee freedom from replacement. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "hazardous-materials-removal-workers.ai-impact.ai-impact-table.18",
@@ -32554,6 +32557,23 @@
                 "publisher": "National Bureau of Statistics of China",
                 "scope": "Water conservancy, environment, and public facility management; employed persons in Chinese urban units, broad industry-section scope",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Identification and Preparation — 25/100; weight=1/3; hazardous-materials-removal-workers.ai-impact.ai-impact-table.95[0]",
+                  "Removal and Decontamination — 0/100; weight=1/3; hazardous-materials-removal-workers.ai-impact.ai-impact-table.99[0]",
+                  "Packaging, Loading, and Disposal — 0/100; weight=1/3; hazardous-materials-removal-workers.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37479,7 +37499,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese Wage Reference",
       "direction-comparison": "Career Direction Comparison",
       "fit": "Career Fit Guide",
@@ -37627,15 +37647,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Hazardous Materials Removal Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure (Not Scored on This Page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Hazardous Materials Removal Workers · Tasks, Deliverables, and Responsibility Boundaries",
@@ -37686,7 +37718,7 @@
       "text": "Hazardous Materials Removal Workers"
     }
   },
-  "source_content_sha256": "d07dfcbaf4beeb96093b33fb06a9c4b2749ee93d2c1ac73a32eefd3b0458fe94",
+  "source_content_sha256": "b8760bb577657d14ab9811ecb1c1c289ce3837e4ee5b387e7472bc59d3c295ae",
   "subject": {
     "canonical_slug": "hazardous-materials-removal-workers",
     "name": "Hazardous Materials Removal Workers",

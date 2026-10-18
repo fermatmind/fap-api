@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25115,7 +25118,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task judgment | Trials of task sheets, material lists, and record drafts may be conducted in an approved environment, manually checking the original information and on-site criteria. No evidence has been obtained on this occupation's generative AI adoption rate, measured efficiency gains, exposure level, or employment causality, and it is not guaranteed that the occupation as a whole will not be substituted. The O*NET detailed page lists 11 software skill categories, and the 9 items on the hot technologies page (Revit, QuickBooks, Access, Excel, Office, PowerPoint, SharePoint, Visio, Word) are a U.S. 2025 recruitment skill directory, with no shares provided for any of them; adoption rates, AI usage rates, or efficiency gains cannot be inferred; Outlook is not listed on the current hot technologies page. The precise BLS 47-3011 projection for 2025—2035 is about 14,100 → 12,500 people, growth -11.7% (OOH about -12%), average annual openings 1,100 including replacements, and self-employment in the base period 1.7%; contraction and replacements coexist, and this is not hiring, net new jobs, or AI causality."
+              "Editorial task judgment | Trials of task sheets, material lists, and record drafts may be conducted in an approved environment, manually checking the original information and on-site criteria. No evidence has been obtained on this occupation's generative AI adoption rate, measured efficiency gains, exposure level, or employment causality, and it is not guaranteed that the occupation as a whole will not be substituted. The O*NET detailed page lists 11 software skill categories, and the 9 items on the hot technologies page (Revit, QuickBooks, Access, Excel, Office, PowerPoint, SharePoint, Visio, Word) are a U.S. 2025 recruitment skill directory, with no shares provided for any of them; adoption rates, AI usage rates, or efficiency gains cannot be inferred; Outlook is not listed on the current hot technologies page. The precise BLS 47-3011 projection for 2025—2035 is about 14,100 → 12,500 people, growth -11.7% (OOH about -12%), average annual openings 1,100 including replacements, and self-employment in the base period 1.7%; contraction and replacements coexist, and this is not hiring, net new jobs, or AI causality. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "helpers-brickmasons-blockmasons-stonemasons-and-tile-and-marble-setters.ai-impact.ai-impact-table.18",
@@ -32601,6 +32604,23 @@
                 "publisher": "Ministry of Housing and Urban-Rural Development",
                 "scope": "Actual building construction special operations in building and municipal engineering",
                 "url": "https://www.mohurd.gov.cn/gongkai/zhengce/gzk/art/2025/art_f3913c15c84e4bbc8d4fb21af3370fb8.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Materials and ratios — 25/100; weight=1/3; helpers-brickmasons-blockmasons-stonemasons-and-tile-and-marble-setters.ai-impact.ai-impact-table.95[0]",
+                  "Cutting and preparation — 0/100; weight=1/3; helpers-brickmasons-blockmasons-stonemasons-and-tile-and-marble-setters.ai-impact.ai-impact-table.99[0]",
+                  "Coordination and material supply — 0/100; weight=1/3; helpers-brickmasons-blockmasons-stonemasons-and-tile-and-marble-setters.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37531,7 +37551,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37679,15 +37699,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Helpers--Brickmasons, Blockmasons, Stonemasons, and Tile and Marble Setters",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Helpers--Brickmasons, Blockmasons, Stonemasons, and Tile and Marble Setters · tasks, deliverables, and responsibility boundaries",
@@ -37738,7 +37770,7 @@
       "text": "Helpers--Brickmasons, Blockmasons, Stonemasons, and Tile and Marble Setters"
     }
   },
-  "source_content_sha256": "ed2f13232865b4f6c6c38881dfa24a4035577b0acda1d4990f049f960537b316",
+  "source_content_sha256": "85fbb5cc8d4d5545212b84964848d0718f88c0039f2c37e6f94605eee9a17e70",
   "subject": {
     "canonical_slug": "helpers-brickmasons-blockmasons-stonemasons-and-tile-and-marble-setters",
     "name": "Helpers--Brickmasons, Blockmasons, Stonemasons, and Tile and Marble Setters",

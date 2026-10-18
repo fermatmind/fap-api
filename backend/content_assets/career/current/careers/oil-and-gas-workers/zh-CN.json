@@ -17,6 +17,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "mapped"
       },
@@ -13720,6 +13723,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "观察仪表与压力变化 — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "调钻速和工具压力 — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "组织连接和升降钻杆 — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13907,7 +13927,7 @@
             }
           }
         ],
-        "answer": "BLS油气组合就业讨论提及自动钻进与远程监测；对本单项，趋势和记录辅助仅作编辑建议，未取得采用或效果实测。现场井控、停工、井队指挥及程序内调整由受训且获授权人员负责。",
+        "answer": "BLS油气组合就业讨论提及自动钻进与远程监测；对本单项，趋势和记录辅助仅作编辑建议，未取得采用或效果实测。现场井控、停工、井队指挥及程序内调整由受训且获授权人员负责。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "职业任务",
@@ -15672,7 +15692,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15796,15 +15816,27 @@
         "source_refs": [
           "bls-2025-35"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "油气旋转钻机操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "油气旋转钻机操作员 · O*NET 47-5012.00",
@@ -15855,7 +15887,7 @@
       "text": "油气旋转钻机操作员：任务、工资与安全路径"
     }
   },
-  "source_content_sha256": "92269dc3e90e0a4ffd61038879a3ce83e752f718ab0c17a2f9ace2b010870a10",
+  "source_content_sha256": "226a1fb88b076cf0eab835fb18cc95d1fb45508b7fe0f7061dd15d07b536d6fe",
   "subject": {
     "canonical_slug": "oil-and-gas-workers",
     "name": "油气旋转钻机操作员",

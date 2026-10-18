@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24975,7 +24978,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: actual GenAI adoption, replacement, or individual unemployment rates for this occupation have not been verified. Literature organization, course drafts, and draft feedback may be considered; actual teaching and research judgments require human review. Employment projections do not establish AI causation."
+              "Insufficient evidence: actual GenAI adoption, replacement, or individual unemployment rates for this occupation have not been verified. Literature organization, course drafts, and draft feedback may be considered; actual teaching and research judgments require human review. Employment projections do not establish AI causation. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "philosophy-and-religion-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -33996,6 +33999,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "US adjacent occupation definitions",
                 "url": "https://www.onetonline.org/link/details/25-4022.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Design syllabi, reading lists, and assignments — 75/100; weight=1/3; philosophy-and-religion-teachers-postsecondary.ai-impact.ai-impact-table.99[0]",
+                  "Lead discussions and clarify arguments — 25/100; weight=1/3; philosophy-and-religion-teachers-postsecondary.ai-impact.ai-impact-table.103[0]",
+                  "Assess assignments and examinations and provide feedback — 75/100; weight=1/3; philosophy-and-religion-teachers-postsecondary.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38901,7 +38921,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -39177,15 +39197,27 @@
           "nbs",
           "editor"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Philosophy and Religion Teachers, Postsecondary",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Courses · Discussions · Assessment",
@@ -39236,7 +39268,7 @@
       "text": "Philosophy and Religion Teachers, Postsecondary"
     }
   },
-  "source_content_sha256": "301fcc630831a2226df2b457b84700b6436ff5e6d6f76f3b6f3babfb67101748",
+  "source_content_sha256": "f133958b062e2ec0ef70f7046feb74a92cafb30cdf59c0cc0ddcfbde2359de81",
   "subject": {
     "canonical_slug": "philosophy-and-religion-teachers-postsecondary",
     "name": "Philosophy and Religion Teachers, Postsecondary",

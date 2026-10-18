@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -25487,7 +25490,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Hazard identification, risk assessment, accident analysis, and product safety review require combining processes, site data, and applicable standards. AI assistance with retrieval, record organization, and report drafts can be explored, but sensors, exposure models, and generative AI are different tools. This page has no measured or causal evidence of AI adoption rates, hours saved, or job replacement in this occupation. O*NET task descriptions cannot establish that efficiency has already improved or that the occupation as a whole will not be replaced."
+              "Direct answer | Hazard identification, risk assessment, accident analysis, and product safety review require combining processes, site data, and applicable standards. AI assistance with retrieval, record organization, and report drafts can be explored, but sensors, exposure models, and generative AI are different tools. This page has no measured or causal evidence of AI adoption rates, hours saved, or job replacement in this occupation. O*NET task descriptions cannot establish that efficiency has already improved or that the occupation as a whole will not be replaced. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.18",
@@ -33006,6 +33009,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "Scientific research and technical services; persons employed in urban units in China, broad industry category scope",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Hazard identification and monitoring — 25/100; weight=1/3; health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.95[0]",
+                  "Risk assessment and compliance review — 50/100; weight=1/3; health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.99[0]",
+                  "Accident investigation and professional support — 50/100; weight=1/3; health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37936,7 +37956,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of career tracks",
       "fit": "Career fit guide",
@@ -38132,15 +38152,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Health and Safety Engineers, Except Mining Safety Engineers and Inspectors",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Health and Safety Engineers, Except Mining Safety Engineers and Inspectors · Tasks, Deliverables, and Responsibility Boundaries",
@@ -38191,7 +38223,7 @@
       "text": "Health and Safety Engineers, Except Mining Safety Engineers and Inspectors"
     }
   },
-  "source_content_sha256": "d2365739e0908c66f32946faa1e2f77ab3d47626ef914d2befd602cac2ded850",
+  "source_content_sha256": "d6225b5fff2e4e8e3e42aa3b8ed854d45c83a792d71554dc8dad41866ae1eb77",
   "subject": {
     "canonical_slug": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors",
     "name": "Health and Safety Engineers, Except Mining Safety Engineers and Inspectors",

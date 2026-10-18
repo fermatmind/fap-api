@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24337,7 +24340,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "已核任务、情境及招聘技术词；代码/特征草稿、报表与实验辅助为编辑待验证候选，本轮未测提效、雇主GenAI采用或替代日期。模型验证须核数据与方法，单位账号不代个人信息合法处理依据；NIST自愿治理与PIPL法定义务分开，预测增长不等于已发生工具因果。"
+              "已核任务、情境及招聘技术词；代码/特征草稿、报表与实验辅助为编辑待验证候选，本轮未测提效、雇主GenAI采用或替代日期。模型验证须核数据与方法，单位账号不代个人信息合法处理依据；NIST自愿治理与PIPL法定义务分开，预测增长不等于已发生工具因果。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31828,6 +31831,23 @@
                 "publisher": "scikit-learn developers",
                 "scope": "contextual",
                 "url": "https://scikit-learn.org/stable/common_pitfalls.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "问题定义与沟通｜识别能由数据分析回答的管理目标为核心；访谈利益相关方为New未给重要度，不能称已评级核心或人人必做。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "数据准备｜清洗/处理与抽样技术为核心，设计调查工具为补充；编辑建议核字段/质量/合法用途，不把可选调查一律写为岗位职责。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "建模与比较｜建立并比较模型｜应用特征选择算法建立模型，用损失函数或解释方差比例等统计性能指标比较模型，并识别关系、趋势或可能影响结果的因素。 — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37248,7 +37268,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37519,15 +37539,27 @@
         "source_refs": [
           "r5-nbs-it"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "数据科学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "数据清洗与建模 · 模型验证 · 可视化与业务解释",
@@ -37578,7 +37610,7 @@
       "text": "数据科学家"
     }
   },
-  "source_content_sha256": "4d49f8eda07e0ba3d319bb2d901b02008a3a139df03fcfcb0d316305ce4e72cc",
+  "source_content_sha256": "d7bfb8a2dc0363f02d77afce128843bb002a770c252480b683fc3c433f462951",
   "subject": {
     "canonical_slug": "data-scientists",
     "name": "数据科学家",

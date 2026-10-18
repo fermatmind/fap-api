@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25609,7 +25612,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未形成可复核的本职任务暴露评分，保持空值。以下将任务背景、AI评价方法和编辑用途分开；工具能产出草稿不等于已采用、已节省工时或岗位被替代。"
+              "证据不足：未形成可复核的本职任务暴露评分，保持空值。以下将任务背景、AI评价方法和编辑用途分开；工具能产出草稿不等于已采用、已节省工时或岗位被替代。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "validation-engineers.display.ai_impact_table.answer",
@@ -33174,6 +33177,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "计划｜需求与验证范围｜确认对象、用途和判据，准备可执行的测试方案。 — 50/100; weight=1/3; validation-engineers.display.responsibilities_block.01[0]",
+                  "执行｜测试与原始记录｜按确认条件开展测试，记录数据及发生的不一致。 — 25/100; weight=1/3; validation-engineers.display.responsibilities_block.03[0]",
+                  "分析｜结果与偏差｜比较预定判据，提出调查和评估事项，保留事实与假设区别。 — 75/100; weight=1/3; validation-engineers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38449,7 +38469,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38597,15 +38617,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "验证工程师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 17-2112.02",
@@ -38656,7 +38688,7 @@
       "text": "验证工程师"
     }
   },
-  "source_content_sha256": "9ce057c76ea651eb35f8400be142f0855fbe0a6e6c3f62eb572a97624afbe585",
+  "source_content_sha256": "bce34d89b79da2e30fd0ca49bbef5317f7f17ede1e5788197a4b761c3716eac6",
   "subject": {
     "canonical_slug": "validation-engineers",
     "name": "验证工程师",

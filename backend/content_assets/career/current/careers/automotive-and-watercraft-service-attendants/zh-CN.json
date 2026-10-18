@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24618,7 +24621,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未得本职业生成AI采用、生产率、替代及就业因果测量，台账检索和日报是编辑候选。ILO介绍扩展摘要、NIST简介仅背景，未完整指数或职业映射，不据缺口断现场责任永不替代。美国53-6031本职业2025就业102,400人、2035预测106,300人，2025—2035增长3.8%（O*NET约4%，平均水平）、净增3,900、年均约12,900空缺。空缺包括增长和替补，不是净增、个人获聘率或中国就业；EP自雇栏为不可得，不能当0。"
+              "证据不足：本轮未得本职业生成AI采用、生产率、替代及就业因果测量，台账检索和日报是编辑候选。ILO介绍扩展摘要、NIST简介仅背景，未完整指数或职业映射，不据缺口断现场责任永不替代。美国53-6031本职业2025就业102,400人、2035预测106,300人，2025—2035增长3.8%（O*NET约4%，平均水平）、净增3,900、年均约12,900空缺。空缺包括增长和替补，不是净增、个人获聘率或中国就业；EP自雇栏为不可得，不能当0。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.18",
@@ -32704,6 +32707,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/49-2092.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "燃料与油液补给｜先确认规格｜按车辆或船艇说明书核对燃料种类与油液规格，加注到指定液位并检查轮胎气压与各类液位，标注加注内容与数量。 — 0/100; weight=1/3; automotive-and-watercraft-service-attendants.profile.responsibilities-block.1[0]",
+                  "检查与小修｜按实际任务范围｜官方包含调整刹车、更换火花塞机油滤芯及轮胎修补更换；具体工具程序和人员条件另核，不从职业名推全系统维修能力。 — 25/100; weight=1/3; automotive-and-watercraft-service-attendants.profile.responsibilities-block.1[1]",
+                  "销售与收银｜让账目可核对｜按型号取件并安装配件，计价收款、找零并出具收据，汇总油品、机油与配件销售日报，交班时核对现金与单据。 — 75/100; weight=1/3; automotive-and-watercraft-service-attendants.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37604,7 +37624,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37932,15 +37952,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "汽车与船艇服务员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 53-6031.00 · Job Zone 1–2 · 少量准备",
@@ -37991,7 +38023,7 @@
       "text": "汽车与船艇服务员"
     }
   },
-  "source_content_sha256": "f30b3b8f09fb75cc632b31ce5444116a698b66118d692334b765cead88720d80",
+  "source_content_sha256": "6f9fb375e8696b36b3cf821f47c42c3eb15b76713a6da58ec0f7b59e3f98277f",
   "subject": {
     "canonical_slug": "automotive-and-watercraft-service-attendants",
     "name": "汽车与船艇服务员",

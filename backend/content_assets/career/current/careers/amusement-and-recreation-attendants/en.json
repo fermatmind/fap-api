@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24866,7 +24869,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, position substitution rate, or wage causal estimates for this occupation were obtained on this page. Ticketing organization, record summarization, and anomaly alerts are only editorially suggested possible uses; on-scene confirmation, operating authorization, and emergency responsibility still follow applicable procedures. The BLS2025–2035 projected growth of 3.7% and about 100,400 average annual openings cannot be used to infer AI-caused job gains or losses."
+              "Insufficient evidence: no AI adoption rate, position substitution rate, or wage causal estimates for this occupation were obtained on this page. Ticketing organization, record summarization, and anomaly alerts are only editorially suggested possible uses; on-scene confirmation, operating authorization, and emergency responsibility still follow applicable procedures. The BLS2025–2035 projected growth of 3.7% and about 100,400 average annual openings cannot be used to infer AI-caused job gains or losses. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.18",
@@ -33044,6 +33047,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Ticketing and admission | verification and fees | sell tickets and collect fees, and admit customers after verifying, collecting, or punching tickets. — 75/100; weight=1/3; amusement-and-recreation-attendants.profile.responsibilities-block.1[0]",
+                  "Equipment operation | rides and devices | operate, drive, or explain mechanical rides and automated equipment, and perform test runs and inspections as required. — 25/100; weight=1/3; amusement-and-recreation-attendants.profile.responsibilities-block.1[2]",
+                  "Customer safety | safety devices and evacuation | fasten customers' safety devices or direct them to fasten them, assist customers on and off rides or animals, and know shutdown and emergency-evacuation procedures. — 0/100; weight=1/3; amusement-and-recreation-attendants.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37945,7 +37965,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -38321,15 +38341,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Amusement and Recreation Attendants",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Recreation-facility on-site service: ticketing and customer guidance · ride operation and safety confirmation · inspection, cleaning, and records",
@@ -38380,7 +38412,7 @@
       "text": "Amusement and recreation attendants: tasks, wages, and employment outlook (O*NET 39-3091, bright outlook)"
     }
   },
-  "source_content_sha256": "3a902cddaf3a57ba1c3816cb0bb54d478e0ebe928c9459fcea202a7e4942cd01",
+  "source_content_sha256": "a8e476d1c259bea1a01ea631eebbc3be3f1ee5c4a26003034c06fa911b03e5d3",
   "subject": {
     "canonical_slug": "amusement-and-recreation-attendants",
     "name": "Amusement and Recreation Attendants",

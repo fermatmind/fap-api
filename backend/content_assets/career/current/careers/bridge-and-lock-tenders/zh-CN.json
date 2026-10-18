@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25110,7 +25113,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数字工具可辅助记录、台账与工单，设备自动化也可能改变部分控制与监测任务。现有资料不能量化本职业生成式AI替代率、净就业影响或消失年份；职业问卷、AI任务暴露和就业预测是不同证据，不能互相代替。"
+              "数字工具可辅助记录、台账与工单，设备自动化也可能改变部分控制与监测任务。现有资料不能量化本职业生成式AI替代率、净就业影响或消失年份；职业问卷、AI任务暴露和就业预测是不同证据，不能互相代替。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.18",
@@ -32651,6 +32654,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/53-7051.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "瞭望与识别｜持续观察航道、桥梁区域与来船动向，识别船舶类型与通行需求｜可复核的瞭望与识别记录。 — 25/100; weight=1/3; bridge-and-lock-tenders.profile.responsibilities-block.1[1]",
+                  "开合与放行｜操作控制杆或阀门开合桥跨、闸门或调节水位，引导船舶进出｜安全完成且留有记录的通行次数。 — 25/100; weight=1/3; bridge-and-lock-tenders.profile.responsibilities-block.1[3]",
+                  "记录与维护｜登记船舶与通行数据、水位与天气，提出并跟踪维修申请，完成日常维护｜完整的通行与维修记录。 — 75/100; weight=1/3; bridge-and-lock-tenders.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37601,7 +37621,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37869,15 +37889,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "桥梁与船闸操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 53-6011.00 · 通航值守与设备操作 · 轮班与户外环境",
@@ -37928,7 +37960,7 @@
       "text": "桥梁与船闸操作员"
     }
   },
-  "source_content_sha256": "6f5eb35d8e13a088a8c927e832a24b698fc9b6ec543c9d39d300c75968060abd",
+  "source_content_sha256": "8a5cf20a6690b5f85ffd135dd5e04ed8e4c51992e7c6860b2767de529a2cf319",
   "subject": {
     "canonical_slug": "bridge-and-lock-tenders",
     "name": "桥梁与船闸操作员",

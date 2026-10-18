@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24585,7 +24588,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮来源支持任务描述、招聘软件信号和总体就业预测，未提供本职业AI采用率、实际裁员或替代日期。订单摘要等是待验证辅助方向，现场核验、卫生和处置职责仍须明确。"
+              "本轮来源支持任务描述、招聘软件信号和总体就业预测，未提供本职业AI采用率、实际裁员或替代日期。订单摘要等是待验证辅助方向，现场核验、卫生和处置职责仍须明确。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.18",
@@ -32595,6 +32598,23 @@
                 "publisher": "Alcohol and Tobacco Tax and Trade Bureau",
                 "scope": "jurisdiction_specific",
                 "url": "https://www.ttb.gov/faqs/alcohol?tid=7"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "核验与合规｜让供酒有依据｜核验顾客身份证件以确认达到购买酒精饮料的年龄要求，并在证件可疑或顾客疑似醉酒时按场所规程处理。 — 25/100; weight=1/3; bartenders.profile.responsibilities-block.1[0]",
+                  "调制与出品｜让产出有规格｜按标准酒谱与顾客要求取料与调制，完成装饰与份量与外观核对后交付。 — 0/100; weight=1/3; bartenders.profile.responsibilities-block.1[1]",
+                  "收款与核对｜让经营可追溯｜为所提供的饮品与食品收款、核对现金收入并按规程完成交班。 — 75/100; weight=1/3; bartenders.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37514,7 +37534,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37885,15 +37905,27 @@
           "ep-current",
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "调酒师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 35-3011.00 · Job Zone 1–2 · 入门准备低 · Bright Outlook",
@@ -37944,7 +37976,7 @@
       "text": "调酒师"
     }
   },
-  "source_content_sha256": "7f50e0b9939f86bb4fef5a87ad273e47f1c1ee900ffa2d95679c2116541c7614",
+  "source_content_sha256": "02aa1a7d1a383f1f98c953d811592d7c15bde1c98c519fb62bac0fd256f787df",
   "subject": {
     "canonical_slug": "bartenders",
     "name": "调酒师",

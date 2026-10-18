@@ -17,6 +17,9 @@
       "fact:content-us-salary-1": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "item:dietitians-and-nutritionists.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -7620,7 +7623,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial governance suggestion: verify the institution's permitted use, applicable population, database source and version, input quality, output validation, error correction and responsibility, and do not write these suggestions as a uniform national clinical operating procedure."
+              "Editorial governance suggestion: verify the institution's permitted use, applicable population, database source and version, input quality, output validation, error correction and responsibility, and do not write these suggestions as a uniform national clinical operating procedure. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "dietitians-and-nutritionists.ai-impact.ai-impact-table.2",
@@ -9231,6 +9234,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "related_occupation",
                 "url": "https://www.onetonline.org/link/details/29-2051.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Organise dietary records and label information — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Complete nutrition assessment and nutrition care plans — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Individual and group nutrition counselling and culturally adapted education — 25/100; weight=1/3; dietitians-and-nutritionists.profile.responsibilities-block.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11800,7 +11820,7 @@
     ],
     "path": "/en/career/jobs/dietitians-and-nutritionists",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -11876,15 +11896,27 @@
         "source_refs": [
           "editorial-safe-exercise-v2"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Dietitians and nutritionists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Nutrition assessment and dietary plans · nutrition consultation and education · programme and food service management",
@@ -11935,7 +11967,7 @@
       "text": "Dietitians and nutritionists"
     }
   },
-  "source_content_sha256": "10ba867ed040598b5a91603786e17a87a92f367e341093f9f726e25e41f37952",
+  "source_content_sha256": "3ebab45e1495f916bea01f8f3b4c459904fa9ea3bf0c8e0143dd2bf0b6e612a7",
   "subject": {
     "canonical_slug": "dietitians-and-nutritionists",
     "name": "Dietitians and nutritionists",

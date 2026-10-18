@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24731,7 +24734,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI and accounting software can assist with extraction, comparison, and document drafts; specific account determination, approval, and filing are still handled according to personnel duties and authorization. BLS expects software automation to reduce staffing demand for this occupation and to increase analysis and consulting tasks, but it cannot be inferred from the fact that responsibility still rests with people that the number of positions will not decrease, nor should this projection be treated as a causal assessment of generative AI alone."
+              "AI and accounting software can assist with extraction, comparison, and document drafts; specific account determination, approval, and filing are still handled according to personnel duties and authorization. BLS expects software automation to reduce staffing demand for this occupation and to increase analysis and consulting tasks, but it cannot be inferred from the fact that responsibility still rests with people that the number of positions will not decrease, nor should this projection be treated as a causal assessment of generative AI alone. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.18",
@@ -32293,6 +32296,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/43-9061.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Voucher and compliance checking | Receive original vouchers, check the authenticity, amount, and period of the transaction, and process them according to policy, procedure, and regulatory requirements | A voucher checking record noting the basis and the open questions. — 75/100; weight=1/3; bookkeeping-accounting-and-auditing-clerks.profile.responsibilities-block.1[0]",
+                  "Entry and posting | Use accounting software to enter the journal, post to the general or subsidiary ledger, summarize debits and credits, and check the balance | Reviewable ledger records and posting traces. — 75/100; weight=1/3; bookkeeping-accounting-and-auditing-clerks.profile.responsibilities-block.1[2]",
+                  "Checking and difference handling | Check amounts, postings, and document coding, perform bank and account reconciliation, and record, trace, and report differences when found | Reconciliation records with difference notes and handling suggestions. — 75/100; weight=1/3; bookkeeping-accounting-and-auditing-clerks.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37232,7 +37252,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37500,15 +37520,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Bookkeeping, Accounting, and Auditing Clerks",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 43-3031.00 · Bright Outlook · accounting and checking responsibility",
@@ -37559,7 +37591,7 @@
       "text": "Bookkeeping, Accounting, and Auditing Clerks"
     }
   },
-  "source_content_sha256": "4b5b3140c10423514acc667aff5c158d67d7e9d1aed52c19235426f69fa004d4",
+  "source_content_sha256": "331418afcf641d5e338941e01f33c2cbd61b4926767022e6c0f5e8ece073cee7",
   "subject": {
     "canonical_slug": "bookkeeping-accounting-and-auditing-clerks",
     "name": "Bookkeeping, Accounting, and Auditing Clerks",

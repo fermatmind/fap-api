@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25115,7 +25118,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no quantified GenAI exposure, adoption rate, efficiency or employment causal evidence was obtained for this occupation 51-8092; the G02 paper draft aid is an editorial mechanism and does not guarantee speed gains, and 11 software categories and a traditional 46% highly automated do not equal GenAI adoption. Real on-site control, judgment and maintenance follow the real procedures and authority, and it is not asserted that they will necessarily or never be replaced."
+              "Insufficient evidence: no quantified GenAI exposure, adoption rate, efficiency or employment causal evidence was obtained for this occupation 51-8092; the G02 paper draft aid is an editorial mechanism and does not guarantee speed gains, and 11 software categories and a traditional 46% highly automated do not equal GenAI adoption. Real on-site control, judgment and maintenance follow the real procedures and authority, and it is not asserted that they will necessarily or never be replaced. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "gas-plant-operators.ai-impact.ai-impact-table.18",
@@ -32608,6 +32611,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "51-8092.00 exact occupation",
                 "url": "https://www.onetonline.org/link/industry/51-8092.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Monitor equipment operation and observe temperature and liquid level and flow meters and perform unit inspections — 50/100; weight=1/3; gas-plant-operators.ai-impact.ai-impact-table.97[0]",
+                  "Test the purity and water content of gas and chemicals and air — 25/100; weight=1/3; gas-plant-operators.ai-impact.ai-impact-table.109[0]",
+                  "Record, review and summarize operating records and test results and meter readings — 75/100; weight=1/3; gas-plant-operators.ai-impact.ai-impact-table.117[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37544,7 +37564,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37692,15 +37712,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Gas Plant Operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Gas Plant Operators · task, deliverable and responsibility boundaries",
@@ -37751,7 +37783,7 @@
       "text": "Gas Plant Operators"
     }
   },
-  "source_content_sha256": "7cf4082cd0977703b1ba0337f60acfbc5903182aee7fda7bce862942884d347c",
+  "source_content_sha256": "b7cc5dc649ae5212a1bade5a2ecd5596f7ba19db4a1bd740530b0a5572fdfa5b",
   "subject": {
     "canonical_slug": "gas-plant-operators",
     "name": "Gas Plant Operators",

@@ -53,6 +53,9 @@
       "fact:current-parent-openings": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25098,7 +25101,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行情比价、合同摘要与记录为编辑辅助场景；本轮未取得农产品采购精确AI替代率或效果数据，任务暴露、自动化及母职业预测分开。"
+              "行情比价、合同摘要与记录为编辑辅助场景；本轮未取得农产品采购精确AI替代率或效果数据，任务暴露、自动化及母职业预测分开。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "buyers-and-purchasing-agents-farm-products.ai-impact.ai-impact-table.18",
@@ -32902,6 +32905,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/13-1021.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "采购与议价｜审查订单与需求、询价并比较报价、与农户谈判生产或采购合同｜采购合同与订单。 — 50/100; weight=1/3; buyers-and-purchasing-agents-farm-products.profile.responsibilities-block.1[0]",
+                  "质量与分级｜检验或测试作物与产品、估计价值并确定等级、识别病害虫害与品质异常｜验收与分级记录。 — 25/100; weight=1/3; buyers-and-purchasing-agents-farm-products.profile.responsibilities-block.1[1]",
+                  "记录与报告｜维护业务交易与产品库存记录、按需向公司或政府机构报告数据｜交易与库存记录及报告。 — 75/100; weight=1/3; buyers-and-purchasing-agents-farm-products.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37809,7 +37829,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38238,15 +38258,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "农产品采购员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 13-1021.00 · 农产品采购 / 合同谈判 / 质量与分级 / 运输储存与记录",
@@ -38297,7 +38329,7 @@
       "text": "农产品采购员"
     }
   },
-  "source_content_sha256": "0ece61f558641313de73e4dc0fa856901a9644235023c642aef5b4e7b61e60a7",
+  "source_content_sha256": "00a530e2d59f664bb1896e6058178c94efd69881b36c36fe73bd2c0a926e1ed1",
   "subject": {
     "canonical_slug": "buyers-and-purchasing-agents-farm-products",
     "name": "农产品采购员",

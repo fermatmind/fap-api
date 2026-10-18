@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24758,7 +24761,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助图纸文字、纸面算术和记录草稿；现场测量、材料核验、工程设计与安全放行由人按授权复核。证据不足：中国大陆与美国47-2171钢筋工独立AI采用率、替代率和工资就业因果效果未核得；跨职业研究不能外推。"
+              "AI可辅助图纸文字、纸面算术和记录草稿；现场测量、材料核验、工程设计与安全放行由人按授权复核。证据不足：中国大陆与美国47-2171钢筋工独立AI采用率、替代率和工资就业因果效果未核得；跨职业研究不能外推。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "reinforcing-iron-and-rebar-workers.ai-impact.ai-impact-table.18",
@@ -32733,6 +32736,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/47-2061.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "读图与清单｜核构件、钢筋直径、形状、数量和位置。｜输出材料与待澄清项清单。 — 50/100; weight=1/3; reinforcing-iron-and-rebar-workers.profile.responsibilities-block.1[0]",
+                  "材料准备｜按批准图纸选择并切弯钢筋。｜保留规格和批次标识。 — 0/100; weight=1/3; reinforcing-iron-and-rebar-workers.profile.responsibilities-block.1[1]",
+                  "定位与固定｜放置钢筋、垫块和钢筋网，按图保持间距。｜提交浇筑前可检查的钢筋布置。 — 0/100; weight=1/3; reinforcing-iron-and-rebar-workers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37641,7 +37661,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37909,15 +37929,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "钢筋工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "钢筋定位与绑扎 · 浇筑前复核",
@@ -37968,7 +38000,7 @@
       "text": "钢筋工：工作内容、工资、就业与入门练习"
     }
   },
-  "source_content_sha256": "8a526d09dabdbf794a71008adaaa8a714e157128ca19a1e1e35b87a92d2185fd",
+  "source_content_sha256": "a2c5ba5fae1cd648afffd9f62b336c09a41d14300f3fe1ee992af1eb87b4399f",
   "subject": {
     "canonical_slug": "reinforcing-iron-and-rebar-workers",
     "name": "钢筋工",

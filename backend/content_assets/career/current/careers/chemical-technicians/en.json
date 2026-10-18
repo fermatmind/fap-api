@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24797,7 +24800,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Assess capability, adoption and position outcomes separately: data compilation or record assistance are suggested uses based on this page's tasks; software hiring keywords do not prove actual deployment. BLS2025–2035 gives overall employment projections without AI attribution: U.S. 19-4031 employment is projected at 60,000→63,000 people, growth of 5% (table 1.2 gives exactly 4.9%), and 7,600 average annual openings, including replacement openings; these are not AI adoption rates, replacement rates or unemployment probabilities."
+              "Assess capability, adoption and position outcomes separately: data compilation or record assistance are suggested uses based on this page's tasks; software hiring keywords do not prove actual deployment. BLS2025–2035 gives overall employment projections without AI attribution: U.S. 19-4031 employment is projected at 60,000→63,000 people, growth of 5% (table 1.2 gives exactly 4.9%), and 7,600 average annual openings, including replacement openings; these are not AI adoption rates, replacement rates or unemployment probabilities. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.18",
@@ -31810,6 +31813,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/51-8091.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Laboratory testing | Perform chemical and physical tests according to validated methods | Perform chemical or physical laboratory tests to assist scientists in qualitative or quantitative analysis, set up and conduct experiments and tests using chromatography, spectroscopy, physical or chemical separation techniques and microscopy, and monitor product quality to ensure compliance with standards and specifications (corresponding O*NET task importance 88, 84, 84). — 25/100; weight=1/3; chemical-technicians.profile.responsibilities-block.1[0]",
+                  "Samples, solutions and reagents | Sampling, pretreatment and preparation of solutions and reagents | Prepare chemical solutions for products or processes according to standard formulas or devise experimental formulas, and develop and conduct sampling and analysis plans to maintain quality standards of raw materials, intermediates or products (corresponding task importance 84, 77). — 0/100; weight=1/3; chemical-technicians.profile.responsibilities-block.1[1]",
+                  "Data and reports | Compile and interpret results and write technical reports | Compile and interpret results of tests and analyses and write technical reports or prepare charts documenting experimental results (corresponding task importance 82, 72). — 75/100; weight=1/3; chemical-technicians.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36749,7 +36769,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Salary Reference",
       "direction-comparison": "Comparison of Career Directions",
       "fit": "Career Suitability Guide",
@@ -37018,15 +37038,27 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Chemical Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · IRC",
@@ -37077,7 +37109,7 @@
       "text": "Chemical Technicians"
     }
   },
-  "source_content_sha256": "011846a89c18728a2be97f3ee1a1236339db2e9c1f7a56baace712e32d07b92a",
+  "source_content_sha256": "e5da1664b268aa9c025337ad192d806a735fc364590b1a1119c9a096fbbe522b",
   "subject": {
     "canonical_slug": "chemical-technicians",
     "name": "Chemical Technicians",

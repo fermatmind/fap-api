@@ -8,6 +8,9 @@
       "fact:credential-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-annual-median-2025": {
         "status": "pending_mapping"
       },
@@ -12381,7 +12384,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试用建议：将AI用于著录、检索、影像预览与报告草拟，并实测错误、复核和工时；本职实际采用及效率未取得。状况判断、材料选择、实物处置与授权仍按专业评审，不以生成建议独立处置。"
+              "编辑试用建议：将AI用于著录、检索、影像预览与报告草拟，并实测错误、复核和工时；本职实际采用及效率未取得。状况判断、材料选择、实物处置与授权仍按专业评审，不以生成建议独立处置。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "museum-technicians-and-conservators.ai-impact.ai-impact-table.9",
@@ -13627,6 +13630,23 @@
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "exact",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "判断物件是否需要修复并选择最安全有效的方法 — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "修复、复原与重新组装文物，设计并制作缺失或破损部件 — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]",
+                  "拍摄物件并把藏品信息录入数据库，维护处理报告 — 75/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -15584,7 +15604,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15708,15 +15728,27 @@
         "source_refs": [
           "source-pack-onet-localcert"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "博物馆技术员与文物修复师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "状况记录与检测",
@@ -15767,7 +15799,7 @@
       "text": "博物馆技术员与文物修复师"
     }
   },
-  "source_content_sha256": "f44ae439f88f594a13ee0922f87f1f829a18d984f002e5fcb4fc58f14e358ba7",
+  "source_content_sha256": "fe56f6b1f5ac8bc0b9793151d903c138fc32431d21b27d09466c3737b3d83301",
   "subject": {
     "canonical_slug": "museum-technicians-and-conservators",
     "name": "博物馆技术员与文物修复师",

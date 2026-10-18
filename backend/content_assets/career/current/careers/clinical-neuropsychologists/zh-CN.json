@@ -89,6 +89,9 @@
       "fact:cneuro-nine-us-wage-p75-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25071,7 +25074,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "APA2026《Responsible Use of AI in Assessment》是作者观点的信息资源，不代表APA正式政策或立场、不建立可执行义务；可用于审慎评估工具的参考，非采用率、提效试验或法定授权。 本轮未取得临床神经心理学家实际AI采用率、持续投入趋势或任务提效试验。"
+              "APA2026《Responsible Use of AI in Assessment》是作者观点的信息资源，不代表APA正式政策或立场、不建立可执行义务；可用于审慎评估工具的参考，非采用率、提效试验或法定授权。 本轮未取得临床神经心理学家实际AI采用率、持续投入趋势或任务提效试验。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "clinical-neuropsychologists.ai-impact.ai-impact-table.18",
@@ -33216,6 +33219,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/details/29-9092.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "评估与诊断｜对患者实施标准化神经心理评估并作出判断｜访谈患者以获取完整病史，实施智力、学业能力、注意、专注、感觉运动功能、语言、学习与记忆等评估，并诊断累及中枢神经系统损伤的疾病（对应 O*NET 任务第一与第三与第四项）。 O*NET任务描述不是中国诊断授权，实际范围另核。 — 25/100; weight=1/3; clinical-neuropsychologists.profile.responsibilities-block.1[0]",
+                  "鉴别与基线｜区分心因性与神经源性表现并建立可比的基线｜区分心因性与神经源性综合征、两种以上疑似脑功能障碍病因，并建立神经行为基线以监测进行性脑病或恢复过程（对应 O*NET 任务第七与第十二项）。 — 50/100; weight=1/3; clinical-neuropsychologists.profile.responsibilities-block.1[1]",
+                  "报告与解释｜把多源证据整合成限度明确的书面报告｜依据心理或神经心理测验、自评量表、评定量表、直接观察或访谈的数据，撰写或准备详细的临床神经心理学报告（对应 O*NET 任务第二项）。 — 75/100; weight=1/3; clinical-neuropsychologists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38136,7 +38156,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38722,15 +38742,27 @@
         "source_refs": [
           "cneuro-nbs-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "临床神经心理学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · IS",
@@ -38781,7 +38813,7 @@
       "text": "临床神经心理学家"
     }
   },
-  "source_content_sha256": "831361808fe41b624bd29c7155bb1143e3c451669d86399d1de66f1df6a306e7",
+  "source_content_sha256": "7b0edb26d325a16ad02ebcf9836701662ada3de8b95df5170d287dd391fcb8d9",
   "subject": {
     "canonical_slug": "clinical-neuropsychologists",
     "name": "临床神经心理学家",

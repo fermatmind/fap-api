@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24354,7 +24357,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Material organization, script drafts, and feedback aggregation can be treated as scenarios pending verification, and actual efficiency gain or adoption was not verified, still less a substitution date. Generative AI, ordinary forms, recommendation algorithms, and video display are kept separate; facts and promotional conditions, physical product and sample safety, and lawful information use are verified separately. The 2026 regulatory notice focuses on AI-fabricated recommendations, endorsements, and images concealing facts to cause misleading impressions, and is not a blanket prohibition of all AI or a blanket requirement to label under that provision."
+              "Material organization, script drafts, and feedback aggregation can be treated as scenarios pending verification, and actual efficiency gain or adoption was not verified, still less a substitution date. Generative AI, ordinary forms, recommendation algorithms, and video display are kept separate; facts and promotional conditions, physical product and sample safety, and lawful information use are verified separately. The 2026 regulatory notice focuses on AI-fabricated recommendations, endorsements, and images concealing facts to cause misleading impressions, and is not a blanket prohibition of all AI or a blanket requirement to label under that provision. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31882,6 +31885,23 @@
                 "publisher": "ILO",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Explaining the demonstration and guiding customers in modifying the product are core, while lectures, films, charts, and slides that provide information are supplementary; specific product safety conditions and operating authority are verified separately, and modification tasks do not automatically authorize repair. — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Customer Q&A and promotion｜answer and prompt purchase｜answer customer questions, provide samples, coupons, promotional materials, or other incentives, and identify interested and eligible customers and give them more information. — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "Sales and records｜sell and keep records｜sell the promoted product and keep sales records, and record and report demonstration-related information (such as the number of customer questions or coupons distributed). — 75/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37403,7 +37423,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37674,15 +37694,27 @@
         "source_refs": [
           "r5-nbs-retail"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Demonstrators and product promoters",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Product demonstration · customer Q&A · promotion and records",
@@ -37733,7 +37765,7 @@
       "text": "Demonstrators and product promoters"
     }
   },
-  "source_content_sha256": "dea316d63120bffa93b1a04dfb3ffa996e16e9f7bece49b7d77cbf76c0d18e4f",
+  "source_content_sha256": "36a527f380475022900fcaf82d5fb8731c753410a687361ab34613436c065ebd",
   "subject": {
     "canonical_slug": "demonstrators-and-product-promoters",
     "name": "Demonstrators and product promoters",

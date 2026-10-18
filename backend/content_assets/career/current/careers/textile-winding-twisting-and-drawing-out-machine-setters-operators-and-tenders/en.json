@@ -8,6 +8,9 @@
       "fact:china-production-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25528,7 +25531,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The priority is information organization: work order checking, count summaries, anomaly summaries and shift handover drafts; on-site status and quality require matching validation. The BLS2025—2035 overall projection for this occupation shows a 10.3% decline and about 2,400 annual openings including replacements, which is not AI causality; this page assigns no single-occupation AI score or substitution rate."
+              "The priority is information organization: work order checking, count summaries, anomaly summaries and shift handover drafts; on-site status and quality require matching validation. The BLS2025—2035 overall projection for this occupation shows a 10.3% decline and about 2,400 annual openings including replacements, which is not AI causality; this page supplies a separate editorial AI impact estimate, without a measured substitution rate. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.ai_impact_table.answer",
@@ -33118,6 +33121,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Prepare | settings and authority | confirm the target machine model training and approval conditions, and do not generalize experience on one winding machine to ability on all drawing equipment. — 25/100; weight=1/3; textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.responsibilities_block.02[0]",
+                  "Monitor | running and products | watch for yarn breaks, defects, shortages and machine behaviour, record the time, machine and material, and report promptly. — 25/100; weight=1/3; textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.responsibilities_block.03[0]",
+                  "Produce | winding and twisting or drawing | operate or tend equipment within the training and authorization scope, maintaining traceability of inputs, products and records. — 25/100; weight=1/3; textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38360,7 +38380,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38520,15 +38540,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Textile winding, twisting and drawing out machine setters, operators and tenders",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 51-6064.00 precise occupational measure",
@@ -38579,7 +38611,7 @@
       "text": "Textile winding, twisting and drawing out machine setters, operators and tenders"
     }
   },
-  "source_content_sha256": "96269cfbe0cb251ab3e5341c23b7babfc6ec4280bab13f63f30bab8ff918102f",
+  "source_content_sha256": "50480b61af63b0d4d97f9ba4c8eb890dfc989945d906ba8f564bf63768fa50d7",
   "subject": {
     "canonical_slug": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders",
     "name": "Textile winding, twisting and drawing out machine setters, operators and tenders",

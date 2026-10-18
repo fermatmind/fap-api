@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24686,7 +24689,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: assistance uses such as appointment drafts, record organization, style references, and inventory summaries can be evaluated, verifying data, permissions, and output first. Insufficient evidence: no AI adoption rate, productivity, or job replacement results for this occupation were obtained this time; task research is not treated as an on-site safety determination."
+              "Editorial suggestion: assistance uses such as appointment drafts, record organization, style references, and inventory summaries can be evaluated, verifying data, permissions, and output first. Insufficient evidence: no AI adoption rate, productivity, or job replacement results for this occupation were obtained this time; task research is not treated as an on-site safety determination. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.18",
@@ -32543,6 +32546,23 @@
                 "publisher": "State Administration for Market Regulation",
                 "scope": "jurisdiction_specific",
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Communication and observation | Give the service a basis | Analyze the customer's hair and other physical features, and confirm the desired styling and care plan and the limiting conditions before starting. — 25/100; weight=1/3; barbers-hairstylists-and-cosmetologists.profile.responsibilities-block.1[0]",
+                  "Cutting and shaping | Give the output a specification | Cut and trim and shape hair or hairpieces according to customer requirements and hair quality and facial features using clippers, scissors, trimmers, and razors. — 0/100; weight=1/3; barbers-hairstylists-and-cosmetologists.profile.responsibilities-block.1[1]",
+                  "Dyeing, permanent waving, and styling | Make the result reproducible | Bleach and dye and tone with applicators or brushes, apply water or setting or straightening or permanent waving solutions and control contact time according to the instructions, and press curls and comb and set using rollers, curling irons, hot combs, and curling wands. — 25/100; weight=1/3; barbers-hairstylists-and-cosmetologists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37444,7 +37464,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37808,15 +37828,27 @@
         "source_refs": [
           "ep-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Hairdressers, Hairstylists, and Cosmetologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 39-5012.00 · Job Zone Three · Medium preparation · Bright Outlook",
@@ -37867,7 +37899,7 @@
       "text": "Hairdressers, Hairstylists, and Cosmetologists"
     }
   },
-  "source_content_sha256": "f55bf8bb13a5f6c764ccfbc15124d26d6975c46a0979fe3b4d08241bccf20c2b",
+  "source_content_sha256": "68b1d62c26369b9b08c35fd3fac792e0946b6411649efa93e5d52e171e8b44fb",
   "subject": {
     "canonical_slug": "barbers-hairstylists-and-cosmetologists",
     "name": "Hairdressers, Hairstylists, and Cosmetologists",

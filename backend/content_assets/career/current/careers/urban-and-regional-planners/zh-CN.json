@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25553,7 +25556,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先区分文字起草、空间分析、公众意见与法定责任。工具可作为受控辅助，但每个数字、图层、政策引用和方案判断都要可核查。本页没有本职中国实际采用率或个人替代概率，不用通用暴露研究代填分数。"
+              "先区分文字起草、空间分析、公众意见与法定责任。工具可作为受控辅助，但每个数字、图层、政策引用和方案判断都要可核查。本页没有本职中国实际采用率或个人替代概率，不用通用暴露研究代填分数。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "urban-and-regional-planners.display.ai_impact_table.answer",
@@ -33259,6 +33262,23 @@
                 "publisher": "FermatMind 职业内容编辑；O*NET仅作任务背景",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-3051.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "资料调查｜调查与数据核对｜现场调查或研究人口、社会经济、法规与物理因素，说明资料时期范围与限制，不将缺失值自动补齐。 — 50/100; weight=1/3; urban-and-regional-planners.display.responsibilities_block.01[0]",
+                  "方案分析｜方案与指标比较｜评估用地与设施选择的可行性和替代方案，解释比较标准及影响，不只凭效果图或一个得分。 — 75/100; weight=1/3; urban-and-regional-planners.display.responsibilities_block.02[0]",
+                  "沟通协调｜公众与专业协调｜组织沟通或会议，回应咨询和不同诉求，与交通建筑经济等专业协调，不虚构公众共识。 — 25/100; weight=1/3; urban-and-regional-planners.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38480,7 +38500,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38632,15 +38652,27 @@
           "r2-pay-2",
           "r2-pay-3"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "城市与区域规划师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 19-3051.00",
@@ -38691,7 +38723,7 @@
       "text": "城市与区域规划师"
     }
   },
-  "source_content_sha256": "d7d29d97ca4e13e5e48a1f4f90d7d0e7352e29d4062864b59ca88cd604a710cd",
+  "source_content_sha256": "281985b7f985fff941d31882b525fca76d51ed0216418e5ee6e827a32cb755e9",
   "subject": {
     "canonical_slug": "urban-and-regional-planners",
     "name": "城市与区域规划师",

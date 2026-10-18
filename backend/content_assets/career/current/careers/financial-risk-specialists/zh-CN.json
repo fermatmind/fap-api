@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24432,7 +24435,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑分析：可在获准的数据环境中试用AI辅助数据清理、代码草拟、图表和文档，并核对误差与复现结果。O*NET提供任务依据，ILO 2023研究提供跨职业任务暴露背景；两者不能证明风险计量岗位工具已成熟、机构普遍采用或岗位净变化。证据不足：本细分职业的AI采用率、生产率效果、就业因果与可复核评分。"
+              "编辑分析：可在获准的数据环境中试用AI辅助数据清理、代码草拟、图表和文档，并核对误差与复现结果。O*NET提供任务依据，ILO 2023研究提供跨职业任务暴露背景；两者不能证明风险计量岗位工具已成熟、机构普遍采用或岗位净变化。证据不足：本细分职业的AI采用率、生产率效果、就业因果与可复核评分。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "financial-risk-specialists.ai-impact.ai-impact-table.18",
@@ -31831,6 +31834,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "方法选择与建模 — 75/100; weight=1/3; financial-risk-specialists.ai-impact.ai-impact-table.95[0]",
+                  "假设设定与参数选取 — 50/100; weight=1/3; financial-risk-specialists.ai-impact.ai-impact-table.99[0]",
+                  "独立验证与稳健性检验 — 75/100; weight=1/3; financial-risk-specialists.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36735,7 +36755,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37004,15 +37024,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "金融风险专家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "金融风险专家 · 官方职业范围（13-2054.00）",
@@ -37063,7 +37095,7 @@
       "text": "金融风险专家"
     }
   },
-  "source_content_sha256": "226a5488c0dc18c25b2e321328f45cfa6550cc2b1741e14d7138afb0f4f9dfbc",
+  "source_content_sha256": "8d7fc63c4f39a691acb6e17eaa162c447dfda8ea9dfed6ee701e2a50a72d789e",
   "subject": {
     "canonical_slug": "financial-risk-specialists",
     "name": "金融风险专家",

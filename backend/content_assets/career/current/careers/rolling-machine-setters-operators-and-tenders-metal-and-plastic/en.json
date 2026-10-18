@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24391,7 +24394,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "There is no credible overall AI substitution rate. AI can assist with work order organization and trend summaries; roll setup, jams, product dimensions, and personnel safety must be verified on site."
+              "There is no credible overall AI substitution rate. AI can assist with work order organization and trend summaries; roll setup, jams, product dimensions, and personnel safety must be verified on site. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "rolling-machine-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.18",
@@ -32155,6 +32158,23 @@
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-4023.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Equipment setup｜Set roll gap, guides, feed, and related parameters as authorized.｜Keep setup and change records. — 25/100; weight=1/3; rolling-machine-setters-operators-and-tenders-metal-and-plastic.profile.responsibilities-block.1[1]",
+                  "Trial rolling and operation｜Start the rolling mill and observe material passage, cycle, and jams.｜Stop and escalate on anomalies. — 25/100; weight=1/3; rolling-machine-setters-operators-and-tenders-metal-and-plastic.profile.responsibilities-block.1[2]",
+                  "Dimension inspection｜Measure thickness, width, and shape with applicable gauges.｜Record samples, instruments, and measured values. — 25/100; weight=1/3; rolling-machine-setters-operators-and-tenders-metal-and-plastic.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37063,7 +37083,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37336,15 +37356,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Rolling Machine Setters, Operators, and Tenders, Metal and Plastic",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Rolling mill setup · operation monitoring · dimension inspection",
@@ -37395,7 +37427,7 @@
       "text": "Rolling Machine Setters, Operators, and Tenders, Metal and Plastic"
     }
   },
-  "source_content_sha256": "5166afb6fc341c3f077fe6267b75bade0b0837868682c7810f1201126b92b596",
+  "source_content_sha256": "4f0091960c5a59708d51ad41fb5124acc83b3bcc4e97648bc4d7f2da8a393052",
   "subject": {
     "canonical_slug": "rolling-machine-setters-operators-and-tenders-metal-and-plastic",
     "name": "Rolling Machine Setters, Operators, and Tenders, Metal and Plastic",

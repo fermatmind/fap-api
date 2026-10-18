@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24286,7 +24289,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI and digital tools can assist with consulting vehicle model information and wiring definitions, organizing fault codes and troubleshooting leads, and drafting repair records. They cannot replace actual vehicle measurements and harness checks, disassembly and routing work, fault root-cause judgments, or delivery conclusions confirmed with customers, and do not bear vehicle safety or warranty responsibility."
+              "AI and digital tools can assist with consulting vehicle model information and wiring definitions, organizing fault codes and troubleshooting leads, and drafting repair records. They cannot replace actual vehicle measurements and harness checks, disassembly and routing work, fault root-cause judgments, or delivery conclusions confirmed with customers, and do not bear vehicle safety or warranty responsibility. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31658,6 +31661,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Consult vehicle model information and wiring definitions — 75/100; weight=1/3; actors.display.ai_impact_table.tasks.1.task[0]",
+                  "Read fault codes and make preliminary localization — 50/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
+                  "Install and commission audio, navigation, or security equipment — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.4.task[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36926,7 +36946,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI effects",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese wage reference",
       "direction-comparison": "Career path comparison",
       "fit": "Occupational fit guide",
@@ -37074,15 +37094,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Electronic equipment installers and repairers, motor vehicles",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of tasks to AI"
+      "label": "AI Impact Score"
     },
     "badges": [
       "In-vehicle communication, audio, security, and navigation equipment installation and repair · O*NET-SOC 49-2096.00",
@@ -37133,7 +37165,7 @@
       "text": "Electronic equipment installers and repairers, motor vehicles: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "25b95dc8d64c769746b9b8c781df8b5d27839fa00df3879464ed6d0dfc1f6c6c",
+  "source_content_sha256": "2e1475ab4b1d4351c3a78e5314c5ec9a9e82aab639c0b694202d390bf8db7f3e",
   "subject": {
     "canonical_slug": "electronic-equipment-installers-and-repairers-motor-vehicles",
     "name": "Electronic equipment installers and repairers, motor vehicles",

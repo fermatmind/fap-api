@@ -23,6 +23,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24304,7 +24307,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Order consolidation, prep forecasting, portion calculation, inventory and records can serve as uses pending verification; sensing, programmed heating, self-service payment, conveyance and generative text are checked separately. A 2025 U.S. Lightcast fast food job-posting table lists Outlook, Excel and Word, each below 1%; a job-posting mention does not equal adoption, an AI rate or proficiency, is not a list of kitchen order and inventory systems, and is not applied to Chinese stores. This round has no fast food cook adoption rate, tool efficiency or employment causality; people must check ingredients, temperature control and exceptions against actual responsibility. BLS table 1.2 fast food cooks 35-2011: 640,500 jobs in 2025 and a projection of 644,100 in 2035, a published net increase of 3,600 and growth of 0.6%, with an average of 86,400 openings per year (including replacement from career changes and exits from the labour force). OOH and O*NET round the growth rate to 1%. This is not the family's 7% growth or short order's 5% decline, and openings are not net increases, current hiring or an individual hiring rate; the self-employment share is not provided in the table and cannot be interpreted as zero."
+              "Order consolidation, prep forecasting, portion calculation, inventory and records can serve as uses pending verification; sensing, programmed heating, self-service payment, conveyance and generative text are checked separately. A 2025 U.S. Lightcast fast food job-posting table lists Outlook, Excel and Word, each below 1%; a job-posting mention does not equal adoption, an AI rate or proficiency, is not a list of kitchen order and inventory systems, and is not applied to Chinese stores. This round has no fast food cook adoption rate, tool efficiency or employment causality; people must check ingredients, temperature control and exceptions against actual responsibility. BLS table 1.2 fast food cooks 35-2011: 640,500 jobs in 2025 and a projection of 644,100 in 2035, a published net increase of 3,600 and growth of 0.6%, with an average of 86,400 openings per year (including replacement from career changes and exits from the labour force). OOH and O*NET round the growth rate to 1%. This is not the family's 7% growth or short order's 5% decline, and openings are not net increases, current hiring or an individual hiring rate; the self-employment share is not provided in the table and cannot be interpreted as zero. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31876,6 +31879,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202604/t20260430_1963472.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Order taking and payment ｜ read the order and check payment ｜ read the order ticket or take a verbal instruction, accept the order and take payment and give change according to store procedure, handling several orders at once and stating the waiting time; if an order is unclear or changed at short notice, confirm with the counter or the customer before cooking. — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Core: washing, cutting, weighing and bulk preparation; Supplemental: mixing ingredients and dough. Specific recipes, zoning and allergen requirements are checked against applicable standards, and not all prep tasks are uniformly marked Core. — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Heating and boxing ｜ operate large-capacity equipment and check quantities ｜ operate large-capacity single-purpose equipment such as grills, fryers and griddles, cook items such as burgers, fried chicken and fries in bulk according to the order quantity, and after checking doneness, core temperature and portion, box, hold or deliver them directly. — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37099,7 +37119,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37325,15 +37345,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Fast food cooks",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Service and operations · fast food preparation and service",
@@ -37384,7 +37416,7 @@
       "text": "Fast food cooks"
     }
   },
-  "source_content_sha256": "ccb90e97d6e0d7a9984f0698e8dfae1876a49ff83ee670af5547890de8f9095a",
+  "source_content_sha256": "91bd41c2a466c04784de1a1bda6940f17e4a0c2104b571715d0188a1b54070e8",
   "subject": {
     "canonical_slug": "cooks-fast-food",
     "name": "Fast food cooks",

@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "mapped"
       },
@@ -13528,6 +13531,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-9023.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "按工单与配方称重或测量物料与配料 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "启动并按规定时间投料与搅拌 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "观察生产与监控设备运行 — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13715,7 +13735,7 @@
             }
           }
         ],
-        "answer": "工具可辅助配料与批次数据整理、记录与设备状态提示，但称量核对、过程判断、异常停机与清洁交接仍由有责任的操作人员与责任人承担。",
+        "answer": "工具可辅助配料与批次数据整理、记录与设备状态提示，但称量核对、过程判断、异常停机与清洁交接仍由有责任的操作人员与责任人承担。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "51-9023.00 本职业档案",
@@ -15458,7 +15478,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15534,15 +15554,27 @@
         "source_refs": [
           "onet-trends"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "机器铺设工、操作员、看护员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "配料与称量核对",
@@ -15593,7 +15625,7 @@
       "text": "混合与搅拌机操作及看护员：工作内容、美国工资与安全 | 费马测试"
     }
   },
-  "source_content_sha256": "05af0cc1f20f76f19af32243d14c42c7047615eecb8fff4ccc60905386a3e193",
+  "source_content_sha256": "8407f36735ba394284ac9a06d2fa07bc61cdd0835aeacad918cf25cccf937aa5",
   "subject": {
     "canonical_slug": "mixing-and-blending-machine-setters-operators-and-tenders",
     "name": "混合与搅拌机操作及看护员",

@@ -8,6 +8,9 @@
       "fact:cn-information-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25607,7 +25610,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST notes that generative AI can produce confidently incorrect outputs and recommends checking citations; it has no telecommunications occupational experiment results. Insufficient evidence: this page has no verifiable basis for task-level ratings and leaves FermatMind scores blank."
+              "NIST notes that generative AI can produce confidently incorrect outputs and recommends checking citations; it has no telecommunications occupational experiment results. Insufficient evidence: this page has no verifiable basis for task-level ratings and shows a separate FermatMind editorial estimate."
             ]
           },
           "id": "telecommunications-engineering-specialists.ai-impact.ai-impact-table.9",
@@ -25639,7 +25642,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not established verifiable task-level AI ratings for telecommunications engineering specialists and leaves scores blank. Supporting uses for organizing requirements, drafting documentation, and forming diagnostic hypotheses can be discussed, but verified efficiency gains cannot be claimed. Keep technical capability, actual organizational adoption, and job outcomes separate; people still verify capacity, configurations, security, and operational permission. This page does not predict an individual's unemployment probability."
+              "Insufficient evidence: this page has not established verifiable task-level AI ratings for telecommunications engineering specialists and shows a separate editorial estimate. Supporting uses for organizing requirements, drafting documentation, and forming diagnostic hypotheses can be discussed, but verified efficiency gains cannot be claimed. Keep technical capability, actual organizational adoption, and job outcomes separate; people still verify capacity, configurations, security, and operational permission. This page does not predict an individual's unemployment probability. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "telecommunications-engineering-specialists.display.ai_impact_table.answer",
@@ -33554,6 +33557,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Design | Requirements and technical specifications | Confirm voice, video, and data requirements, site constraints, and service goals to produce reviewable technical specifications and connection diagrams. — 50/100; weight=1/3; telecommunications-engineering-specialists.display.responsibilities_block.01[0]",
+                  "Design | Capacity, compatibility, and costs | Check link loads, equipment and software compatibility, and cost estimates; compare feasible plans and explain conditions awaiting confirmation. — 75/100; weight=1/3; telecommunications-engineering-specialists.display.responsibilities_block.02[0]",
+                  "Verification | Testing and fault diagnosis | Test hardware and software efficiency, reliability, and compatibility, recording issues, actions taken, and the scope of verification. — 50/100; weight=1/3; telecommunications-engineering-specialists.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38795,7 +38815,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38956,15 +38976,27 @@
         "source_refs": [
           "nbs-information-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Telecommunications Engineering Specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 15-1241.01 telecommunications tasks",
@@ -39015,7 +39047,7 @@
       "text": "Telecommunications Engineering Specialists: Duties, Wage Definitions, and an Entry Experience"
     }
   },
-  "source_content_sha256": "c1793fc909983c60107a85d762f2b07a7fb12cba104bfac54e468612e5914532",
+  "source_content_sha256": "60ae170174c51d48f9eeed1ef03ff0ed65cf4800fe600a5567fb50feb16a420d",
   "subject": {
     "canonical_slug": "telecommunications-engineering-specialists",
     "name": "Telecommunications Engineering Specialists",

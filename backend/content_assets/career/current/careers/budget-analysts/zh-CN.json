@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25106,7 +25109,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得本职业AI采用率或因AI减员比例。编辑建议将工具用于数据汇总、差异初筛与报告草稿，按原数据复核；责任安排不证明岗位数量不会变化。"
+              "证据不足：本轮未取得本职业AI采用率或因AI减员比例。编辑建议将工具用于数据汇总、差异初筛与报告草稿，按原数据复核；责任安排不证明岗位数量不会变化。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.18",
@@ -32289,6 +32292,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/11-3031.01"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "预算估计审查｜审查各部门预算估计的完整性、准确性与合规性，核对口径与假设｜一份注明依据与疑点的审查记录。 — 75/100; weight=1/3; budget-analysts.profile.responsibilities-block.1[0]",
+                  "报告分析｜分析月度预算与会计报告，识别异常与趋势并维持支出控制｜可复核的分析说明与趋势判断。 — 75/100; weight=1/3; budget-analysts.profile.responsibilities-block.1[1]",
+                  "成本与效益分析｜开展成本分析、成本效益比较与替代方案评估｜可复核的分析过程与结论。 — 75/100; weight=1/3; budget-analysts.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37208,7 +37228,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37476,15 +37496,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "预算分析师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 13-2031.00 · 预算估计审查 / 成本与效益分析 / 预算报告与执行跟踪",
@@ -37535,7 +37567,7 @@
       "text": "预算分析师"
     }
   },
-  "source_content_sha256": "d68ebc3cf0425e076c995fabe56897ffed518dff857ca4062e795cccadd89515",
+  "source_content_sha256": "a66720811aeb12d2c80420e931c6a5f662d2bc554d52f6db2a153a88500540a8",
   "subject": {
     "canonical_slug": "budget-analysts",
     "name": "预算分析师",

@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24675,7 +24678,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task assessment | Work orders, materials lists and draft records may be trialed in approved environments, with people checking original information and site criteria. No occupation-specific generative AI adoption rate, measured efficiency gain, exposure level or employment causation has been obtained; this does not guarantee that the occupation as a whole will avoid displacement. O*NET currently lists 4 software skill categories: accounting, Office, project management and Excel. The 2 hot technologies, Excel and Office, are entries in a U.S. 2025 hiring skills directory; neither has a reported share. They do not establish widespread enterprise use, AI adoption or efficiency gains. BLS projections for the exact occupation 47-3014 for 2025—2035 are approximately 7,600→7,700 workers, 1.5% growth, and 700 average annual openings including replacements; base-year self-employment is 1.7%. These are not real-time vacancies, net additions or evidence of AI causation."
+              "Editorial task assessment | Work orders, materials lists and draft records may be trialed in approved environments, with people checking original information and site criteria. No occupation-specific generative AI adoption rate, measured efficiency gain, exposure level or employment causation has been obtained; this does not guarantee that the occupation as a whole will avoid displacement. O*NET currently lists 4 software skill categories: accounting, Office, project management and Excel. The 2 hot technologies, Excel and Office, are entries in a U.S. 2025 hiring skills directory; neither has a reported share. They do not establish widespread enterprise use, AI adoption or efficiency gains. BLS projections for the exact occupation 47-3014 for 2025—2035 are approximately 7,600→7,700 workers, 1.5% growth, and 700 average annual openings including replacements; base-year self-employment is 1.7%. These are not real-time vacancies, net additions or evidence of AI causation. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "helpers-painters-paperhangers-plasterers-and-stucco-masons.ai-impact.ai-impact-table.18",
@@ -32161,6 +32164,23 @@
                 "publisher": "Ministry of Housing and Urban-Rural Development",
                 "scope": "Actual specialized construction work on building and municipal projects",
                 "url": "https://www.mohurd.gov.cn/gongkai/zhengce/gzk/art/2025/art_f3913c15c84e4bbc8d4fb21af3370fb8.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Materials and preparation — 25/100; weight=1/3; helpers-painters-paperhangers-plasterers-and-stucco-masons.ai-impact.ai-impact-table.95[0]",
+                  "Surface preparation — 0/100; weight=1/3; helpers-painters-paperhangers-plasterers-and-stucco-masons.ai-impact.ai-impact-table.99[0]",
+                  "Application assistance — 0/100; weight=1/3; helpers-painters-paperhangers-plasterers-and-stucco-masons.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37091,7 +37111,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37239,15 +37259,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Helpers--Painters, Paperhangers, Plasterers, and Stucco Masons",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Helpers--Painters, Paperhangers, Plasterers, and Stucco Masons · Tasks, deliverables and responsibility boundaries",
@@ -37298,7 +37330,7 @@
       "text": "Helpers--Painters, Paperhangers, Plasterers, and Stucco Masons"
     }
   },
-  "source_content_sha256": "77af8394b0311186957934d016e692f9ba0eee006c3634570f3523f3cb688025",
+  "source_content_sha256": "58765c795e0bd139bb927bfddef846682772a7c284833d2d25a7e323351d98bd",
   "subject": {
     "canonical_slug": "helpers-painters-paperhangers-plasterers-and-stucco-masons",
     "name": "Helpers--Painters, Paperhangers, Plasterers, and Stucco Masons",

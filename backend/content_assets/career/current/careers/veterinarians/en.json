@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25538,7 +25541,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no reviewable task exposure score for this occupation was produced, so it stays blank. The following separates task background, case-screening research, and evaluation methods; a generated draft does not equal an adoption rate, clinical competence, or job replacement."
+              "Insufficient evidence: no reviewable task exposure score for this occupation was produced, so it stays blank. The following separates task background, case-screening research, and evaluation methods; a generated draft does not equal an adoption rate, clinical competence, or job replacement. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "veterinarians.display.ai_impact_table.answer",
@@ -33130,6 +33133,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Examination｜professional assessment data｜Carry out professional examinations under the corresponding qualification and safety arrangements. — 25/100; weight=1/3; veterinarians.display.responsibilities_block.02[0]",
+                  "Judgment｜diagnosis and plan｜Make a professional judgment from the combined evidence and explain the limits. — 50/100; weight=1/3; veterinarians.display.responsibilities_block.03[0]",
+                  "Handling｜treatment and prevention｜Carry out the relevant measures within your authority and coordinate others when necessary. — 25/100; weight=1/3; veterinarians.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38405,7 +38425,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38553,15 +38573,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Veterinarians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 29-1131.00",
@@ -38612,7 +38644,7 @@
       "text": "Veterinarians"
     }
   },
-  "source_content_sha256": "8cddae8fafe72cddad9c76d809c7af3a8ffd1edcba1e21ba8719f9801421c861",
+  "source_content_sha256": "7c4ee47d5650bff87ec89f806bd267e283b09b4ea9128378dc48de16d8ba4057",
   "subject": {
     "canonical_slug": "veterinarians",
     "name": "Veterinarians",

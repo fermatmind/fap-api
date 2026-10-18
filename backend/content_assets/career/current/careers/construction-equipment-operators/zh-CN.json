@@ -29,6 +29,9 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24518,7 +24521,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录、清单、定位和保养提示为编辑待测辅助候选，实际采用、可靠性和净效率仍缺；定位与设备自动控制不自动计生成式AI。BLS表1.2本职业47-2073在2025—2035年总体就业489,500→511,800人，公布净增22,300人、4.6%，年均空缺39,200个含替补。更宽47-2070职业组534,100→555,900、21,800/4.1%/42,500另列，OOH约4%为职业组舍入，不能代本职业。总体含自雇，非AI因果或个人机会保证。"
+              "记录、清单、定位和保养提示为编辑待测辅助候选，实际采用、可靠性和净效率仍缺；定位与设备自动控制不自动计生成式AI。BLS表1.2本职业47-2073在2025—2035年总体就业489,500→511,800人，公布净增22,300人、4.6%，年均空缺39,200个含替补。更宽47-2070职业组534,100→555,900、21,800/4.1%/42,500另列，OOH约4%为职业组舍入，不能代本职业。总体含自雇，非AI因果或个人机会保证。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "construction-equipment-operators.ai-impact.ai-impact-table.18",
@@ -31293,6 +31296,23 @@
                 "publisher": "住房和城乡建设部／湖南省住房和城乡建设厅",
                 "scope": "contextual",
                 "url": "https://zjt.hunan.gov.cn/zjt/c101183/c101184/202601/t20260115_33893734.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "准备｜确认现场与机具条件｜在开挖前确认地下管线、边坡与临边条件，检查燃油与关键部位，并按土质与作业面选择与安装附件。 — 25/100; weight=1/3; construction-equipment-operators.profile.responsibilities-block.1[0]",
+                  "操作｜操作设备完成土方作业｜操作推土机、挖掘机、平地机与装载机等设备，按参照桩与标线完成挖运、移土、摊铺与平整。 — 25/100; weight=1/3; construction-equipment-operators.profile.responsibilities-block.1[1]",
+                  "记录｜记录使用情况并交接｜记录材料与设备使用情况、故障与处理结果，完成作业面移交与班次交接。 — 75/100; weight=1/3; construction-equipment-operators.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36200,7 +36220,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36531,15 +36551,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "操作工程师及其他工程设备操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RCI",
@@ -36590,7 +36622,7 @@
       "text": "操作工程师及其他工程设备操作员"
     }
   },
-  "source_content_sha256": "e5482dea0153b11b61bfda68c867870ebf076ba6c799c996529b1939b4b16cc4",
+  "source_content_sha256": "d4cb6d60013a3feb77f5c4ba70e2c4bcdcaa30490535116f77d344b0763d922b",
   "subject": {
     "canonical_slug": "construction-equipment-operators",
     "name": "操作工程师及其他工程设备操作员",

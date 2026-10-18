@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24314,7 +24317,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得本职业生成AI采用率、替代率或就业因果研究。接入、标记、比较、制图及草稿为编辑试验候选，未验证效果；ILO暴露指数介绍/扩展摘要、NIST风险简介仅跨职业背景，不给出本职业替代结论。当前O*NET与BLS同为19-2021本职业：2025约10,700人、2025—2035增长3%、2035约10,900、官方净增约300、年均约800空缺（增长与替补）。数值独立舍入，不以端点相减改净增；不是个人录用保证或生成AI因果。"
+              "证据不足：本轮未取得本职业生成AI采用率、替代率或就业因果研究。接入、标记、比较、制图及草稿为编辑试验候选，未验证效果；ILO暴露指数介绍/扩展摘要、NIST风险简介仅跨职业背景，不给出本职业替代结论。当前O*NET与BLS同为19-2021本职业：2025约10,700人、2025—2035增长3%、2035约10,900、官方净增约300、年均约800空缺（增长与替补）。数值独立舍入，不以端点相减改净增；不是个人录用保证或生成AI因果。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "atmospheric-scientists-including-meteorologists.ai-impact.ai-impact-table.18",
@@ -32345,6 +32348,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1299.02"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "质量控制｜编辑核对建议｜按实际规程标异常缺测和时效，不凭本页批准停观测或预警；具体异常流程另核。 — 75/100; weight=1/3; atmospheric-scientists-including-meteorologists.profile.responsibilities-block.1[1]",
+                  "分析与建模｜让方法适配问题｜使用或开发数学与计算机模型，解释数据、地图与图表，比较模型分歧、评估物理一致性与局地影响，并区分短期预报与短时临近预报在可预报性上的差异。 — 75/100; weight=1/3; atmospheric-scientists-including-meteorologists.profile.responsibilities-block.1[2]",
+                  "复核与发布｜法律主体与内部职责分开｜中国气象法22条规定公众气象预报、灾害性天气警报由气象主管机构所属台站按职责发布并及时补充订正，其他组织个人不得自行向社会发布；其他部门所属台站可发布本系统专项预报。25条媒体传播使用台站适时信息并标时间和名称，传播不等自行发布。 具体复核上报程序另查业务规程，不能由普通内部授权替代法定台站。 — 25/100; weight=1/3; atmospheric-scientists-including-meteorologists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37245,7 +37265,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37573,15 +37593,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "大气科学家（含气象学家）",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 19-2021.00 · Job Zone Four · 本科为主",
@@ -37632,7 +37664,7 @@
       "text": "大气科学家（含气象学家）"
     }
   },
-  "source_content_sha256": "99f5777573b761faceca02080e11dc57ac2ec0b610e179239d6eafeebb4cd81a",
+  "source_content_sha256": "e961dc5762749d2ac17afa5bd052f3ec9e297946bafd328f34e1e28d88961175",
   "subject": {
     "canonical_slug": "atmospheric-scientists-including-meteorologists",
     "name": "大气科学家（含气象学家）",

@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25553,7 +25556,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本精确网站管理员任务级AI效果评分与替代率因果证据。文字整理、W28题设完成比例和真实维护分开；虚构表没有功能覆盖、请求时间或恢复测试，不证明SLA、安全或生产可发布。"
+              "证据不足：未取得本精确网站管理员任务级AI效果评分与替代率因果证据。文字整理、W28题设完成比例和真实维护分开；虚构表没有功能覆盖、请求时间或恢复测试，不证明SLA、安全或生产可发布。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "web-administrators.display.ai_impact_table.answer",
@@ -33007,6 +33010,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "维护｜环境部署更新｜按范围管理环境、补丁与配置。 — 75/100; weight=1/3; web-administrators.display.responsibilities_block.01[0]",
+                  "诊断｜日志与故障｜定位问题并记录已证与待核原因。 — 75/100; weight=1/3; web-administrators.display.responsibilities_block.02[0]",
+                  "恢复｜备份与验证｜整理计划，测试恢复并处理问题。 — 50/100; weight=1/3; web-administrators.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38252,7 +38272,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38400,15 +38420,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "网站管理员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET15-1299.01",
@@ -38459,7 +38491,7 @@
       "text": "网站管理员：任务、权限与入门体验｜费马测试"
     }
   },
-  "source_content_sha256": "1de26940c158362e485307574cba137960ad30a8adaf86da076d1c53007d6069",
+  "source_content_sha256": "7bd0825df95db6acedb7d56b334f6dc60d36eedc5b2bbe1fb6c6bd2ce485120b",
   "subject": {
     "canonical_slug": "web-administrators",
     "name": "网站管理员",

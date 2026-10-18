@@ -14,6 +14,9 @@
       "fact:cn-transport-reference": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25533,7 +25536,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先区分读数获取、记录辅助和就业预测。自动化可改变记录流程，文本工具的试用建议需逐项测试；本页没有称重计量工AI使用率或独立替代率，也没有可复核任务评分，因此分数留缺失态。"
+              "先区分读数获取、记录辅助和就业预测。自动化可改变记录流程，文本工具的试用建议需逐项测试；本页没有称重计量工AI使用率或独立替代率，也没有可复核任务评分，因此分数另用编辑估算。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "weighers-measurers-checkers-and-samplers-recordkeeping.display.ai_impact_table.answer",
@@ -33016,6 +33019,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "测量｜称重与计量｜按授权使用秤、量具或计数装置，保留相应读数。 — 25/100; weight=1/3; weighers-measurers-checkers-and-samplers-recordkeeping.display.responsibilities_block.02[0]",
+                  "核对｜比较实物和标签｜对照单据、标签及规格，登记数量、损坏或重量差异。 — 25/100; weight=1/3; weighers-measurers-checkers-and-samplers-recordkeeping.display.responsibilities_block.03[0]",
+                  "记录｜保存收发货信息｜将数量、类别、重量和相关结果录入文件或系统。 — 75/100; weight=1/3; weighers-measurers-checkers-and-samplers-recordkeeping.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38249,7 +38269,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38469,15 +38489,27 @@
         "source_refs": [
           "bls-ooh"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "称重计量工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC43-5111.00记录型范围",
@@ -38528,7 +38560,7 @@
       "text": "称重计量工"
     }
   },
-  "source_content_sha256": "23fa9a16a405205fbb66bba425392a23515ec94d0e911ee7cf250070054773c7",
+  "source_content_sha256": "5b30578b7430f270e9e465da1d5e64d812e8aebe7f008e21579273ba11a69ee4",
   "subject": {
     "canonical_slug": "weighers-measurers-checkers-and-samplers-recordkeeping",
     "name": "称重计量工",

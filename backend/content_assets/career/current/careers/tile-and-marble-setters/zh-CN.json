@@ -8,6 +8,9 @@
       "fact:china-production-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25586,7 +25589,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：采用率、施工效果、AI就业净影响及任务评分未核得。BLS2025—2035本职总体增长9.8%、年均约3,300空缺含替补，非AI因果；下面仅以编辑情境说明信息辅助的核查点。"
+              "证据不足：采用率、施工效果、AI就业净影响及任务评分未核得。BLS2025—2035本职总体增长9.8%、年均约3,300空缺含替补，非AI因果；下面仅以编辑情境说明信息辅助的核查点。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "tile-and-marble-setters.display.ai_impact_table.answer",
@@ -33716,6 +33719,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "定位｜测量与排列｜按批准图样和训练使用量具核定位，发现冲突记录后澄清。 — 25/100; weight=1/3; tile-and-marble-setters.display.responsibilities_block.03[0]",
+                  "施工｜铺贴与安装｜在具体材料、工具训练和权限范围内完成工作，不能从纸上模型推导施工动作。 — 0/100; weight=1/3; tile-and-marble-setters.display.responsibilities_block.04[0]",
+                  "复核｜表面与接缝｜检查排列、表面和接缝，质量判定结合实际工程要求与责任分工。 — 25/100; weight=1/3; tile-and-marble-setters.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38964,7 +38984,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -39124,15 +39144,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "瓷砖与石材铺设工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 47-2044.00 精确职业口径",
@@ -39183,7 +39215,7 @@
       "text": "瓷砖与石材铺设工"
     }
   },
-  "source_content_sha256": "5e9ab218938d0967903937c534aba3cbd9b7b765e9ac475212f88d228e058401",
+  "source_content_sha256": "ce35cb1f06ba9f2dac22f3871e5011860903023e454e61e99d2c836c024cf562",
   "subject": {
     "canonical_slug": "tile-and-marble-setters",
     "name": "瓷砖与石材铺设工",

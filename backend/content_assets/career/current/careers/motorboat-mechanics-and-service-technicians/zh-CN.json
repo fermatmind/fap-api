@@ -11,6 +11,9 @@
       "fact:credential-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:onet-code": {
         "status": "mapped"
       },
@@ -13800,6 +13803,23 @@
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "启动发动机并监听冒烟、过度振动或失火等异常，判断运行状态 — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "使用手动工具与量具拆卸并检查发动机，定位故障部件 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "在注水试验池中调整化油器混合比、电气触点与正时；怠速观察温度表判断冷却效果；调整发电机并更换损坏线路 — 25/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13990,7 +14010,7 @@
             }
           }
         ],
-        "answer": "摩托艇机械师与服务技师可以用维修工单与零件目录检索、故障码与检测数据整理、维修记录与保养计划管理、配件库存与报价整理、向客户说明的文稿草拟等形式获得辅助，但故障的现场判断与拆检、机械与电气部件的实际调整、试航中的运行判断、安全隔离与上锁挂牌的执行仍需由有责任的人承担；技术暴露不等于岗位替代。",
+        "answer": "摩托艇机械师与服务技师可以用维修工单与零件目录检索、故障码与检测数据整理、维修记录与保养计划管理、配件库存与报价整理、向客户说明的文稿草拟等形式获得辅助，但故障的现场判断与拆检、机械与电气部件的实际调整、试航中的运行判断、安全隔离与上锁挂牌的执行仍需由有责任的人承担；技术暴露不等于岗位替代。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET 49-3051.00 职业档案",
@@ -15735,7 +15755,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15871,15 +15891,27 @@
         "source_refs": [
           "source-pack-onet-localcert"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "机械师技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "故障诊断与拆检",
@@ -15930,7 +15962,7 @@
       "text": "摩托艇机械师与服务技师"
     }
   },
-  "source_content_sha256": "e234b4f002a5a6a0e3b8a02659f8821e43f6a26813fce2ece6180aee06e2a14e",
+  "source_content_sha256": "18eb5a3096f283a25cc3891f4514a7fa3bc2795329f12514206a6bff3c612346",
   "subject": {
     "canonical_slug": "motorboat-mechanics-and-service-technicians",
     "name": "摩托艇机械师与服务技师",

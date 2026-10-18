@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:isa-us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7541,7 +7544,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Generative AI can assist with organizing key client needs, drafting product comparisons and explanations, and summarizing differences in terms and follow-up records. Licensed or registered personnel remain responsible within their authorization for conclusions on needs and ability to pay, key-term disclosure, suitability judgments, and compliant sales conduct. Task exposure does not mean job replacement or widespread adoption; formal use requires authorization, human review, and an audit trail. This page provides no replacement probability or timetable."
+              "Direct answer | Generative AI can assist with organizing key client needs, drafting product comparisons and explanations, and summarizing differences in terms and follow-up records. Licensed or registered personnel remain responsible within their authorization for conclusions on needs and ability to pay, key-term disclosure, suitability judgments, and compliant sales conduct. Task exposure does not mean job replacement or widespread adoption; formal use requires authorization, human review, and an audit trail. This page provides no replacement probability or timetable. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "insurance-sales-agents.ai-impact.ai-impact-table.2",
@@ -8711,6 +8714,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/41-3021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Contact clients and assess coverage needs — 25/100; weight=1/3; insurance-sales-agents.profile.responsibilities-block.4[0]",
+                  "Compare and explain insurance terms and costs — 75/100; weight=1/3; insurance-sales-agents.profile.responsibilities-block.4[0]",
+                  "Maintain application records and follow up changes — 50/100; weight=1/3; insurance-sales-agents.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11154,7 +11174,7 @@
     ],
     "path": "/en/career/jobs/insurance-sales-agents",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Comparison with neighboring occupations",
       "fit": "Fit signals",
@@ -11230,15 +11250,27 @@
         "source_refs": [
           "onet-isa-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Insurance Sales Representatives",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Insurance Sales Representatives · Authorization, Explanation, and Sales Compliance Boundaries",
@@ -11289,7 +11321,7 @@
       "text": "Evaluating Insurance Sales as a Career: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "cd9682fc2ece67fe445a8db23840affbea2dae468b56dc5d3f538950df3d4110",
+  "source_content_sha256": "9118972398c52fe310ce3e0ca073c9733b6ff69351e3391da0742a653ec6e641",
   "subject": {
     "canonical_slug": "insurance-sales-agents",
     "name": "Insurance Sales Representatives",

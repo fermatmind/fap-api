@@ -53,6 +53,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24807,7 +24810,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no generative-AI deployment rate, substitution rate, or employment causal-effect data for 53-2011 was obtained this round. Verified O*NET tasks involve autopilot and instrument monitoring; the civil aviation bulletin states 55 airlines have applied EFBs, which is evidence of digital application and cannot be treated as generative AI landing. BLS 2025—2035 projection for U.S. 53-2011: 104,600 persons in 2025 and 113,300 persons in 2035, growth of 8.3%, official net increase of 8,700 persons, and average annual job openings of 11,200. Person counts are converted from official thousand-person units; openings include growth, transfer, and labor-force exit demand and cannot be treated as net new jobs or a guarantee of individual hiring, nor extrapolated to China."
+              "Insufficient evidence: no generative-AI deployment rate, substitution rate, or employment causal-effect data for 53-2011 was obtained this round. Verified O*NET tasks involve autopilot and instrument monitoring; the civil aviation bulletin states 55 airlines have applied EFBs, which is evidence of digital application and cannot be treated as generative AI landing. BLS 2025—2035 projection for U.S. 53-2011: 104,600 persons in 2025 and 113,300 persons in 2035, growth of 8.3%, official net increase of 8,700 persons, and average annual job openings of 11,200. Person counts are converted from official thousand-person units; openings include growth, transfer, and labor-force exit demand and cannot be treated as net new jobs or a guarantee of individual hiring, nor extrapolated to China. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.ai-impact.ai-impact-table.18",
@@ -32653,6 +32656,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Preflight preparation | planning and performance | study weather, notices, and route data; formulate flight plans and fuel plans; and complete weight and balance and takeoff performance calculations. — 75/100; weight=1/3; airline-pilots-copilots-and-flight-engineers.profile.responsibilities-block.1[0]",
+                  "Flight manipulation | maneuvers and phases | manipulate the aircraft through taxi, takeoff, climb, cruise, descent, and landing, executing according to standard operating procedures. — 25/100; weight=1/3; airline-pilots-copilots-and-flight-engineers.profile.responsibilities-block.1[2]",
+                  "Communication and coordination | control and crew | maintain communication with air traffic control and fly according to instructions, coordinate with dispatch, maintenance, and cabin crew, and divide labor according to crew resource management. — 25/100; weight=1/3; airline-pilots-copilots-and-flight-engineers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37554,7 +37574,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -38026,15 +38046,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Airline Pilots, Copilots, and Flight Engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Aircraft operation: licenses and operating qualifications · flight planning and operating monitoring · safety and crew coordination",
@@ -38085,7 +38117,7 @@
       "text": "Airline pilots, copilots, and flight engineers: tasks, wages, and employment outlook (O*NET 53-2011)"
     }
   },
-  "source_content_sha256": "dbae5074d4f4c321ed60a58d6df786bd8837e22154aa4b7e6b33d43c6bb76337",
+  "source_content_sha256": "d3c1ebfa60d855d3b6097e5bc7d364e993555ba8793146f088e421cac0cf8138",
   "subject": {
     "canonical_slug": "airline-pilots-copilots-and-flight-engineers",
     "name": "Airline Pilots, Copilots, and Flight Engineers",

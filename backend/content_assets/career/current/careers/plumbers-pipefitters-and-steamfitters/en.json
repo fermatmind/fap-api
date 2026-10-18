@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24735,7 +24738,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Generative AI may assist with summarising recorded text and checking for missing items. Gauges, digital measurement, and image inspection are different technologies, and their capabilities must be verified for the specific system; no tool adoption or displacement rate for 47-2152 was verified on this page. The medium, isolation, connections, and site permits are verified by authorized personnel."
+              "Generative AI may assist with summarising recorded text and checking for missing items. Gauges, digital measurement, and image inspection are different technologies, and their capabilities must be verified for the specific system; no tool adoption or displacement rate for 47-2152 was verified on this page. The medium, isolation, connections, and site permits are verified by authorized personnel. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.18",
@@ -32602,6 +32605,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/47-2061.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Piping installation｜handle fittings, valves, supports, or fixtures according to the approved plan｜record materials and locations. — 0/100; weight=1/3; plumbers-pipefitters-and-steamfitters.profile.responsibilities-block.1[2]",
+                  "System repair｜address defects within the authorized scope｜do not open pressurized or gas systems on your own. — 0/100; weight=1/3; plumbers-pipefitters-and-steamfitters.profile.responsibilities-block.1[3]",
+                  "Inspection and review｜authorized personnel test and accept according to the plan｜record results and unfinished items. — 25/100; weight=1/3; plumbers-pipefitters-and-steamfitters.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37507,7 +37527,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37775,15 +37795,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Plumbers, Pipefitters, and Steamfitters",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Building and industrial piping · installation and repair",
@@ -37834,7 +37866,7 @@
       "text": "Plumber, pipefitter, and steamfitter career guide: tasks, wages, and the apprenticeship path"
     }
   },
-  "source_content_sha256": "80ca95102ba74a76ca53f181b44f25f97db844d40ee892c5c8d8c6787e22c238",
+  "source_content_sha256": "beded6973d715021da0806ec9a07ec67566a390cfa1d81e0e2a93116aa427f3c",
   "subject": {
     "canonical_slug": "plumbers-pipefitters-and-steamfitters",
     "name": "Plumbers, Pipefitters, and Steamfitters",

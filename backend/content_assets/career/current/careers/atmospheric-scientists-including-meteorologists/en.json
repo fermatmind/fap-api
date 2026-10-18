@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24314,7 +24317,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain research on generative AI adoption rates, replacement rates, or employment causation for this occupation. Intake, flagging, comparison, mapping, and drafting are editorial trial candidates whose effects were not verified; the ILO exposure index introduction and extended abstract and the NIST risk brief are only cross-occupational background and do not give a replacement conclusion for this occupation. Both O*NET and BLS currently use 19-2021 for this occupation: about 10,700 in 2025, growth of 3% over 2025—2035, about 10,900 in 2035, an official net increase of about 300, and about 800 openings per year (growth and replacements). The values are rounded independently, and the net increase is not changed by subtracting the endpoints; this is not a guarantee of individual hiring or generative AI causation."
+              "Insufficient evidence: this round did not obtain research on generative AI adoption rates, replacement rates, or employment causation for this occupation. Intake, flagging, comparison, mapping, and drafting are editorial trial candidates whose effects were not verified; the ILO exposure index introduction and extended abstract and the NIST risk brief are only cross-occupational background and do not give a replacement conclusion for this occupation. Both O*NET and BLS currently use 19-2021 for this occupation: about 10,700 in 2025, growth of 3% over 2025—2035, about 10,900 in 2035, an official net increase of about 300, and about 800 openings per year (growth and replacements). The values are rounded independently, and the net increase is not changed by subtracting the endpoints; this is not a guarantee of individual hiring or generative AI causation. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "atmospheric-scientists-including-meteorologists.ai-impact.ai-impact-table.18",
@@ -32345,6 +32348,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1299.02"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Quality control | Editorial verification suggestions | Flag anomalies, missing observations, and timeliness according to the actual procedures; this page does not approve stopping observations or warnings, and the specific anomaly process is verified separately. — 75/100; weight=1/3; atmospheric-scientists-including-meteorologists.profile.responsibilities-block.1[1]",
+                  "Analysis and modeling | Make the method fit the question | Use or develop mathematical and computer models, interpret data, maps, and charts, compare model disagreement, assess physical consistency and local impacts, and distinguish the different predictability of short-range forecasts and nowcasting. — 75/100; weight=1/3; atmospheric-scientists-including-meteorologists.profile.responsibilities-block.1[2]",
+                  "Review and publication | Separate the legal body from internal duties | Article 22 of China's Meteorology Law provides that public weather forecasts and severe weather warnings are issued by observatories under the competent meteorological agencies according to their duties, with timely supplementation and correction, and no other organization or individual may publish them to society on their own; observatories under other departments may issue special forecasts for their own system. Article 25 covers media dissemination using timely information from observatories with the time and name noted, and dissemination does not equal publishing on one's own. The specific review and reporting procedures are found in the operational rules, and ordinary internal authorization cannot replace the statutory observatory. — 25/100; weight=1/3; atmospheric-scientists-including-meteorologists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37245,7 +37265,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -37573,15 +37593,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Atmospheric Scientists, Including Meteorologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 19-2021.00 · Job Zone Four · mostly bachelor's",
@@ -37632,7 +37664,7 @@
       "text": "Atmospheric Scientists, Including Meteorologists"
     }
   },
-  "source_content_sha256": "8aff3bb98f9d723231572075aced4c58e6fcb2092e2afe61e096534d0bf93962",
+  "source_content_sha256": "5143c8b93a296dc140feace9e8b5f1845ae03df08f3ffe6dc27c081c23f3ae2e",
   "subject": {
     "canonical_slug": "atmospheric-scientists-including-meteorologists",
     "name": "Atmospheric Scientists, Including Meteorologists",

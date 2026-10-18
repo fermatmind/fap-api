@@ -17,6 +17,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "mapped"
       },
@@ -13807,6 +13810,23 @@
                 "publisher": "OSHA",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/etools/machine-guarding/introduction/general-requirements"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "确认产品、数量和包装要求 — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "选择正确产品并计数 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "封口并标识目的地 — 0/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13994,7 +14014,7 @@
             }
           }
         ],
-        "answer": "扫码、电子秤和订单匹配可辅助核对；真实产品、错漏、破损、重量和最终交接仍需人员复核。",
+        "answer": "扫码、电子秤和订单匹配可辅助核对；真实产品、错漏、破损、重量和最终交接仍需人员复核。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET 53-7064.00 职业资料",
@@ -15775,7 +15795,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15935,15 +15955,27 @@
         "source_refs": [
           "bls-ep-53-7064"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "包装工、手工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "手工分拣 · 计量装箱 · 封口贴标",
@@ -15994,7 +16026,7 @@
       "text": "手工包装工：工作内容、工资与入行路径"
     }
   },
-  "source_content_sha256": "9c1860a97dec7f612ad13fc467fccb33208cd66875e375d6edb16f405dc04038",
+  "source_content_sha256": "ff400edcde4a713f0671441c2875721653f509ca075c905d779df832659132cb",
   "subject": {
     "canonical_slug": "packers-and-packagers-hand",
     "name": "手工包装工",

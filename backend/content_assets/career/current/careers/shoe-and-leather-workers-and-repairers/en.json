@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24406,7 +24409,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no independent generative AI adoption rate or substitution ratio for 51-6041 was found. Intake records, material retrieval, and explanation drafts can be discussed; material inspection, cutting, stitching, cementing, and physical inspection remain real work. Production machine automation and generative AI are judged separately."
+              "Insufficient evidence: no independent generative AI adoption rate or substitution ratio for 51-6041 was found. Intake records, material retrieval, and explanation drafts can be discussed; material inspection, cutting, stitching, cementing, and physical inspection remain real work. Production machine automation and generative AI are judged separately. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "shoe-and-leather-workers-and-repairers.ai-impact.ai-impact-table.18",
@@ -25957,7 +25960,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check what machines, software, and data tools the target position uses, and judge information assistance, physical processing, and staffing needs separately. This page provides no AI score and does not treat employment projections as substitution ratios."
+              "Check what machines, software, and data tools the target position uses, and judge information assistance, physical processing, and staffing needs separately. This page shows a separate editorial estimate and does not treat employment projections as substitution ratios."
             ]
           },
           "id": "shoe-and-leather-workers-and-repairers.ai-impact.ai-impact-table.122",
@@ -32349,6 +32352,23 @@
                 "publisher": "BLS",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/news.release/ocwage.tn.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Confirm customer specifications, patterns, and material information. — 25/100; weight=1/3; shoe-and-leather-workers-and-repairers.ai-impact.ai-impact-table.95[0]",
+                  "Cut components to the pattern and identify them. — 0/100; weight=1/3; shoe-and-leather-workers-and-repairers.ai-impact.ai-impact-table.103[0]",
+                  "Disassemble, inspect, replace, or rework damaged components. — 0/100; weight=1/3; shoe-and-leather-workers-and-repairers.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37257,7 +37277,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37525,15 +37545,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Shoe and Leather Workers and Repairers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Materials and patterns · stitching and cementing · forming and finishing",
@@ -37584,7 +37616,7 @@
       "text": "Shoe and Leather Workers and Repairers"
     }
   },
-  "source_content_sha256": "9c784d26cc6198e8d48ac6b84257ea7e3987b16e4f64759399eeb1d1711ec618",
+  "source_content_sha256": "3229be0649e574bb306a3f0dd2eeb01e0582e578ea9323868cce11a3b94b8fd0",
   "subject": {
     "canonical_slug": "shoe-and-leather-workers-and-repairers",
     "name": "Shoe and Leather Workers and Repairers",

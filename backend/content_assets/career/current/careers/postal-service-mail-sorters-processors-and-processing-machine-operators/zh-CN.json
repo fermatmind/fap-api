@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24773,7 +24776,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助标签读取提示、分路差异检查和交接草稿；没有证据给出本职业精确采纳率或裁员率。实物核验、设备安全、隐私与最终批次交接由授权人员承担。"
+              "AI可辅助标签读取提示、分路差异检查和交接草稿；没有证据给出本职业精确采纳率或裁员率。实物核验、设备安全、隐私与最终批次交接由授权人员承担。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "postal-service-mail-sorters-processors-and-processing-machine-operators.ai-impact.ai-impact-table.18",
@@ -32599,6 +32602,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/41-2031.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "收件核验｜检查标签、地址与分路信息｜信息不可辨时标待核，不凭猜测让邮件进入错误容器。 — 75/100; weight=1/3; postal-service-mail-sorters-processors-and-processing-machine-operators.profile.responsibilities-block.1[0]",
+                  "设备操作｜在获授权范围装载、监测扫描与分拣设备｜按训练使用，卡件或异常报警时暂停相关步骤并报告。 — 25/100; weight=1/3; postal-service-mail-sorters-processors-and-processing-machine-operators.profile.responsibilities-block.1[2]",
+                  "封袋与搬运｜贴标、装卸并交接邮件容器｜核件数、标签、目的地和实物状态。 — 0/100; weight=1/3; postal-service-mail-sorters-processors-and-processing-machine-operators.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37518,7 +37538,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37822,15 +37842,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "邮政服务邮件分拣员、处理员、机器操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "邮政邮件分拣员 · 实物与设备",
@@ -37881,7 +37913,7 @@
       "text": "邮政服务邮件分拣员、处理员、机器操作员"
     }
   },
-  "source_content_sha256": "10ab44293b7f71654bf0b4dfb7a18a2304a3b123ca2ac26fab4956aefd853df6",
+  "source_content_sha256": "2ddb8be474cacff66304afc110926327c9cc965f0133170f9ee919aa6ba24011",
   "subject": {
     "canonical_slug": "postal-service-mail-sorters-processors-and-processing-machine-operators",
     "name": "邮政服务邮件分拣员、处理员、机器操作员",

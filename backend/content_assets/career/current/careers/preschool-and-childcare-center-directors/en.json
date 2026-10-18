@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24868,7 +24871,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Organizing scheduling differences and drafting parent notices are to-be-verified editorial assistance ideas; this page has not verified job-level adoption effects. Child supervision, staff qualifications, pickup and drop-off, and emergencies still require verification by actually authorized personnel; task exposure research provides no layoff causality for 11-9031."
+              "Organizing scheduling differences and drafting parent notices are to-be-verified editorial assistance ideas; this page has not verified job-level adoption effects. Child supervision, staff qualifications, pickup and drop-off, and emergencies still require verification by actually authorized personnel; task exposure research provides no layoff causality for 11-9031. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "preschool-and-childcare-center-directors.ai-impact.ai-impact-table.18",
@@ -32817,6 +32820,23 @@
                 "publisher": "Standing Committee of the National People's Congress (reposted by the State Administration for Market Regulation)",
                 "scope": "context",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2025/art_f87d2d6e02044a51a8298ef377cbe81b.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Staffing｜Recruit, schedule, and evaluate staff｜Check coverage first when absences occur. — 50/100; weight=1/3; preschool-and-childcare-center-directors.profile.responsibilities-block.1[1]",
+                  "Parent communication｜Convey arrangements and handle feedback｜Protect children's information. — 25/100; weight=1/3; preschool-and-childcare-center-directors.profile.responsibilities-block.1[2]",
+                  "Safe operation｜Check supervision, pickup and drop-off, and emergency procedures｜Per local regulations. — 25/100; weight=1/3; preschool-and-childcare-center-directors.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37740,7 +37760,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38021,15 +38041,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Preschool and Childcare Center Directors",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Center operations · staffing and parent communication",
@@ -38080,7 +38112,7 @@
       "text": "Preschool and Childcare Center Directors"
     }
   },
-  "source_content_sha256": "b592a05024188f40836f04e3e75deab81a87afe801a48ccc0cf6ab5285c7f465",
+  "source_content_sha256": "590e1b3de0d85e8e15a80eff4649f2e0f6d373c36973f28a121357ff041525ad",
   "subject": {
     "canonical_slug": "preschool-and-childcare-center-directors",
     "name": "Preschool and Childcare Center Directors",

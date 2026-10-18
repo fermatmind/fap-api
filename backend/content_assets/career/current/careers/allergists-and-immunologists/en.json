@@ -38,6 +38,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24761,7 +24764,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial judgment: material summarization, literature search, and medical-record first drafts can be assistance candidates, but this page has no evidence on AI adoption rates, medical effects, or job substitution rates for this specialty; technical feasibility, institutional deployment, and hiring changes must be kept separate. BLS Table 1.2 US 'Physicians, All Other (29-1229)' broad scope: 367,400 employed in 2025, projected 380,100 in 2035; 2025–2035 growth 3.4%, official net increase 12,600, average annual openings 9,400. Published endpoints and the net increase are rounded separately; the official net increase must not be rewritten by subtracting endpoints; openings include new positions plus demand from turnover and exits and do not equal net growth. The occupation 29-1229.01 is not listed separately and cannot be extrapolated to mainland China or to a guarantee of individual employment. This is an overall occupational projection and does not decompose AI's contribution."
+              "Editorial judgment: material summarization, literature search, and medical-record first drafts can be assistance candidates, but this page has no evidence on AI adoption rates, medical effects, or job substitution rates for this specialty; technical feasibility, institutional deployment, and hiring changes must be kept separate. BLS Table 1.2 US 'Physicians, All Other (29-1229)' broad scope: 367,400 employed in 2025, projected 380,100 in 2035; 2025–2035 growth 3.4%, official net increase 12,600, average annual openings 9,400. Published endpoints and the net increase are rounded separately; the official net increase must not be rewritten by subtracting endpoints; openings include new positions plus demand from turnover and exits and do not equal net growth. The occupation 29-1229.01 is not listed separately and cannot be extrapolated to mainland China or to a guarantee of individual employment. This is an overall occupational projection and does not decompose AI's contribution. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "allergists-and-immunologists.ai-impact.ai-impact-table.18",
@@ -32669,6 +32672,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "History taking and physical examination | history and signs | record patient histories, perform physical examinations, and evaluate symptoms, triggers, and past history. — 25/100; weight=1/3; allergists-and-immunologists.profile.responsibilities-block.1[0]",
+                  "Allergen testing | skin and challenge | arrange or perform skin-prick, intradermal, patch, and delayed-type hypersensitivity tests, and when necessary conduct nasal, conjunctival, bronchial, oral, food, or drug challenge tests. — 0/100; weight=1/3; allergists-and-immunologists.profile.responsibilities-block.1[1]",
+                  "Diagnosis and differentiation | result interpretation | interpret test results and make differential diagnoses combining clinical data. — 50/100; weight=1/3; allergists-and-immunologists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37588,7 +37608,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -37953,15 +37973,27 @@
         "source_refs": [
           "facilities"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Allergists and Immunologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Clinical specialty care: consultation and differential diagnosis · testing and immunotherapy · evidence-based prescribing and records",
@@ -38012,7 +38044,7 @@
       "text": "Allergists and immunologists: tasks, wages, and employment outlook (O*NET 29-1229.01)"
     }
   },
-  "source_content_sha256": "0a0a45e2d00a517160e767bfbd0c59ec178dccd5c5651e3ea36f9a1d84344bf1",
+  "source_content_sha256": "204f7c38059b35419ba263cd9d38be25679f902a7eac20e7aeae141364d74bf5",
   "subject": {
     "canonical_slug": "allergists-and-immunologists",
     "name": "Allergists and Immunologists",

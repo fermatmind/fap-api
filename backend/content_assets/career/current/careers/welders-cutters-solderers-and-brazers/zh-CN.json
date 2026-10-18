@@ -14,6 +14,9 @@
       "fact:cn-manufacturing-reference": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25470,7 +25473,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分清资料辅助、焊接机器和总体就业预测。本页提出纸面试用方法，未取得任务评分、生成式AI使用率或独立替代率，不填写分数，也不由机器人能力推算手持岗位消失比例。"
+              "先分清资料辅助、焊接机器和总体就业预测。本页提出纸面试用方法，未取得外部实测任务评分、生成式AI使用率或独立替代率，另列编辑估算分数，也不由机器人能力推算手持岗位消失比例。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "welders-cutters-solderers-and-brazers.display.ai_impact_table.answer",
@@ -32992,6 +32995,23 @@
                 "publisher": "O*NET；原始工资BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-4121.00?st=NJ"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "准备｜图纸与工单核对｜辨认规格、材料和当前版本，明确工作要求。 — 50/100; weight=1/3; welders-cutters-solderers-and-brazers.display.responsibilities_block.01[0]",
+                  "执行｜焊接连接与修补｜按指导连接金属部件或填补孔洞、接缝。 — 0/100; weight=1/3; welders-cutters-solderers-and-brazers.display.responsibilities_block.03[0]",
+                  "执行｜热切割与分离｜按任务使用指定设备分离金属部件。 — 0/100; weight=1/3; welders-cutters-solderers-and-brazers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38268,7 +38288,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38452,15 +38472,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "焊接、切割、钎焊与铜焊人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC51-4121.00",
@@ -38511,7 +38543,7 @@
       "text": "焊接、切割、钎焊与铜焊人员"
     }
   },
-  "source_content_sha256": "523fd764009a727b9261f6b7e4b8c90d4cf3eb16434173a6be45ed6533defbde",
+  "source_content_sha256": "a9c668f877a71ab1435397dadbf35df143be4680cc8d93043669fc671e1fc2f4",
   "subject": {
     "canonical_slug": "welders-cutters-solderers-and-brazers",
     "name": "焊接、切割、钎焊与铜焊人员",

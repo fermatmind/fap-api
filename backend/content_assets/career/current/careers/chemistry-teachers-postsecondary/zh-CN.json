@@ -35,6 +35,9 @@
       "fact:ct-openings2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25065,7 +25068,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "公开证据可核职责、招聘软件关键词、AI任务暴露方法及美国就业预测；材料、习题、反馈草拟和数据汇总是编辑试用建议，本轮没有该职业可靠性或提速实测。BLS表1.2的2025—2035年美国SOC25-1052预测：24,900→25,400人，增长2.3%，年均空缺1,700；OOH整数展示为2%（慢于平均）。官方净增0.6千人独立舍入，与两端已舍入数之差0.5千人不同，不能重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招岗位存量或AI替代率。"
+              "公开证据可核职责、招聘软件关键词、AI任务暴露方法及美国就业预测；材料、习题、反馈草拟和数据汇总是编辑试用建议，本轮没有该职业可靠性或提速实测。BLS表1.2的2025—2035年美国SOC25-1052预测：24,900→25,400人，增长2.3%，年均空缺1,700；OOH整数展示为2%（慢于平均）。官方净增0.6千人独立舍入，与两端已舍入数之差0.5千人不同，不能重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招岗位存量或AI替代率。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -31998,6 +32001,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-2031.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "教学与课程｜准备并讲授课程并主持课堂讨论｜为本科生或研究生准备并讲授有机化学与分析化学与化学分离等主题课程，发起与促进与主持课堂讨论，准备课程材料与教学大纲与作业与讲义（对应 O*NET 任务重要度 94、76、84）。 — 50/100; weight=1/3; chemistry-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "实验与安全｜指导实验并建立与监督安全规则｜建立并讲授与监督学生对化学品与设备与其他危险材料安全规则的遵守，指导学生实验室工作，并选择与订购与维护教学与研究用材料与耗材与清洁实验室设施（对应任务重要度 93、88、68、59）。 — 0/100; weight=1/3; chemistry-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "科研与经费｜开展研究并发表成果并申请经费｜在特定领域开展研究并在专业期刊与书籍或电子媒体发表成果，撰写项目申请书以获取外部研究经费，并通过阅读文献与与同事交流与参加专业会议跟进领域发展（对应任务重要度 77、69、73）。 — 50/100; weight=1/3; chemistry-teachers-postsecondary.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36948,7 +36968,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37301,15 +37321,27 @@
         "source_refs": [
           "ct-nbs2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "高校化学教师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · IS",
@@ -37360,7 +37392,7 @@
       "text": "高校化学教师"
     }
   },
-  "source_content_sha256": "b845a6c04ce0bf6e0b5b4a6ab5a25b1928abc7ffad2617fddd05c96b4739c3b9",
+  "source_content_sha256": "9a61754b82d4741f3eddfa519611a973a18b8d117162aed267b341c182d21662",
   "subject": {
     "canonical_slug": "chemistry-teachers-postsecondary",
     "name": "高校化学教师",

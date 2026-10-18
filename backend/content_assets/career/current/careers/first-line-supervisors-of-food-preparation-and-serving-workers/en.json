@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24372,7 +24375,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "You may trial authorized document, record, and scheduling assistance for tasks on this page, testing accuracy and rework. The sources reviewed do not establish widespread adoption, significant efficiency gains, inevitable augmentation, or immunity from replacement for this occupation as a whole."
+              "You may trial authorized document, record, and scheduling assistance for tasks on this page, testing accuracy and rework. The sources reviewed do not establish widespread adoption, significant efficiency gains, inevitable augmentation, or immunity from replacement for this occupation as a whole. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.ai-impact.ai-impact-table.18",
@@ -31773,6 +31776,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Assign tasks, responsibilities, and workstations according to operational needs and specify portions and serving sequences — 50/100; weight=1/3; first-line-supervisors-of-food-preparation-and-serving-workers.ai-impact.ai-impact-table.99[0]",
+                  "Inspect kitchens and dining areas and observe and assess employees and workflows to ensure quality and service — 25/100; weight=1/3; first-line-supervisors-of-food-preparation-and-serving-workers.ai-impact.ai-impact-table.103[0]",
+                  "Total and verify shift cash receipts and record production, operational, and personnel data — 75/100; weight=1/3; first-line-supervisors-of-food-preparation-and-serving-workers.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36675,7 +36695,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -36944,15 +36964,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "First-Line Supervisors of Food Preparation and Serving Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "First-Line Supervisors of Food Preparation and Serving Workers · Official occupational scope (35-1012.00)",
@@ -37003,7 +37035,7 @@
       "text": "First-Line Supervisors of Food Preparation and Serving Workers"
     }
   },
-  "source_content_sha256": "ad7fe802f48133e7c8e8c61885bdf62f54abe0d3e4f5a43beb1fb7396903f613",
+  "source_content_sha256": "22eaf1523c8cf40e2b7bfeb1f1ac9bb169905962c56af69b3b378e6e3e77a8de",
   "subject": {
     "canonical_slug": "first-line-supervisors-of-food-preparation-and-serving-workers",
     "name": "First-Line Supervisors of Food Preparation and Serving Workers",

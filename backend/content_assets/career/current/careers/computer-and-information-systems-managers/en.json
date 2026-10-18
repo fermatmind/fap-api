@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24735,7 +24738,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editor's trial candidates: use fictitious or approved requirements, logs, code and budget materials to assist with summaries, plans, scripts or report drafts; check the originals, environment, tests, omissions and total review time. This round has no research on generative AI reliability, adoption rates, efficiency gains or job-loss causation for this occupation, so no claim is made that it is complete, more reliable or has significantly changed."
+              "Editor's trial candidates: use fictitious or approved requirements, logs, code and budget materials to assist with summaries, plans, scripts or report drafts; check the originals, environment, tests, omissions and total review time. This round has no research on generative AI reliability, adoption rates, efficiency gains or job-loss causation for this occupation, so no claim is made that it is complete, more reliable or has significantly changed. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "computer-and-information-systems-managers.ai-impact.ai-impact-table.18",
@@ -32260,6 +32263,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1299.09"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Projects and delivery｜Plan and coordinate, review staff output and operations and progress reports｜Core items 3, 4 and 13; editorial grouping, not a common task for all positions. — 50/100; weight=1/3; computer-and-information-systems-managers.profile.responsibilities-block.1[1]",
+                  "System and solution review｜Review charts and programs before implementation and assess proposal feasibility and requirements｜Core items 12 and 14; editorial grouping, not a common task for all positions. — 50/100; weight=1/3; computer-and-information-systems-managers.profile.responsibilities-block.1[2]",
+                  "People, budget and procurement｜Recruit, train, supervise or make staffing decisions, budget and equipment procurement｜Core items 7, 15 and 16; editorial grouping, not a common task for all positions. — 25/100; weight=1/3; computer-and-information-systems-managers.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37182,7 +37202,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37652,15 +37672,27 @@
         "source_refs": [
           "systems-review-ooh"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Computer and Information Systems Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · CEI",
@@ -37711,7 +37743,7 @@
       "text": "Computer and Information Systems Managers"
     }
   },
-  "source_content_sha256": "a9c28bc495d0555239673318e49521cf4fe6ded4e0a2fa4abc96f68189c23bd2",
+  "source_content_sha256": "e625e99402b27023e01a3c29e6349f7062b59de8b7b02dffa384da8d63c3eb0b",
   "subject": {
     "canonical_slug": "computer-and-information-systems-managers",
     "name": "Computer and Information Systems Managers",

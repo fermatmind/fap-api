@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25553,7 +25556,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no task-level AI effect score or replacement-rate causal evidence for this detailed web administrator occupation was obtained. Text organization, the W28 problem completion ratio, and real maintenance are kept separate; the fictional table has no functional coverage, request times, or recovery tests and does not prove the SLA, security, or production readiness."
+              "Insufficient evidence: no task-level AI effect score or replacement-rate causal evidence for this detailed web administrator occupation was obtained. Text organization, the W28 problem completion ratio, and real maintenance are kept separate; the fictional table has no functional coverage, request times, or recovery tests and does not prove the SLA, security, or production readiness. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "web-administrators.display.ai_impact_table.answer",
@@ -33007,6 +33010,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Maintenance | Environment deployment and updates | Manage environments, patches, and configuration within scope. — 75/100; weight=1/3; web-administrators.display.responsibilities_block.01[0]",
+                  "Diagnostics | Logs and faults | Locate problems and record proven and pending causes. — 75/100; weight=1/3; web-administrators.display.responsibilities_block.02[0]",
+                  "Recovery | Backup and validation | Organize plans, test recovery, and handle problems. — 50/100; weight=1/3; web-administrators.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38252,7 +38272,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38400,15 +38420,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Web administrators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET15-1299.01",
@@ -38459,7 +38491,7 @@
       "text": "Web administrators: tasks, authority, and entry experience | FermatMind"
     }
   },
-  "source_content_sha256": "b727cc82311ce8aaee463dae2f8e546b762fe96022fd1d5d2c7108490f05797f",
+  "source_content_sha256": "7b8e2a31a917e2d711d3694964f895dbf7161e01c67c97f712a9a395b4a8737f",
   "subject": {
     "canonical_slug": "web-administrators",
     "name": "Web administrators",

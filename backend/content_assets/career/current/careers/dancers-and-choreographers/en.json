@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24299,7 +24302,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Verified materials are task, context and software profiles. This page has not measured adoption, time savings, wage causality or replacement dates. Playback, beat cues, choreography records and material drafts are editorial candidates; ordinary software automation does not equal GenAI. Actual implementation requires checks of erroneous cues, physical and venue conditions, and content permissions. Tools cannot authorize high-risk movements."
+              "Verified materials are task, context and software profiles. This page has not measured adoption, time savings, wage causality or replacement dates. Playback, beat cues, choreography records and material drafts are editorial candidates; ordinary software automation does not equal GenAI. Actual implementation requires checks of erroneous cues, physical and venue conditions, and content permissions. Tools cannot authorize high-risk movements. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31798,6 +31801,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "broader proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Training and fitness | Maintain technique and physical condition | Training, exercise and classes are core; preparing pointe shoes is supplementary and applies only to dance forms requiring them. — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Collaboration with choreographers | Refine and revise steps | Collaborate with choreographers to refine or revise steps, confirm the boundary between choreographic intent and personal adjustments, and implement revisions in rehearsals. — 50/100; weight=1/3; actors.display.responsibilities_block.04[0]",
+                  "Performance and presentation | Perform as choreographed | Perform classical, modern or acrobatic dance, expressing stories, rhythm and sound through the body, and sing or act in addition to dancing when needed. Complete preparation, warm-up and venue checks before going onstage. — 0/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37210,7 +37230,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of occupational directions",
       "fit": "Occupational fit guide",
@@ -37491,15 +37511,27 @@
           "r5-onet-current",
           "r5-bls-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Dancers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Dance performance and choreography · Rehearsals and fitness maintenance · Collaboration with choreographers",
@@ -37550,7 +37582,7 @@
       "text": "Dancers"
     }
   },
-  "source_content_sha256": "ee7d8c400081e1de332f4e852edb315b74a65f98d56bb6fc237405322db0e904",
+  "source_content_sha256": "a6bb9fa8367da1e4ce6cd36fdff31230760e3df05c3bb61e16112b06fd4facd8",
   "subject": {
     "canonical_slug": "dancers-and-choreographers",
     "name": "Dancers",

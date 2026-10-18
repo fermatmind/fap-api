@@ -38,6 +38,9 @@
       "fact:cpso-openings": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25033,7 +25036,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Recruitment keywords from a single year support the presence of office software, not widespread DCS use, efficiency or growth; uses are editorial trial suggestions and effects require separate checks. BLS table 1.2, exact occupation 51-8091: employment in 2025 is 16.7 thousand, projected employment in 2035 is 15.9 thousand, official net change is −0.9 thousand and −5.2% (OOH rounded −5%, declining), and average annual openings are 1.3 thousand, including growth and replacement. Endpoints/net values are rounded separately; do not replace the official net value with a calculation from endpoints. Self-employment '—' is not 0. Typical education is high school/GED, related experience None, and training moderate-term on the job."
+              "Recruitment keywords from a single year support the presence of office software, not widespread DCS use, efficiency or growth; uses are editorial trial suggestions and effects require separate checks. BLS table 1.2, exact occupation 51-8091: employment in 2025 is 16.7 thousand, projected employment in 2035 is 15.9 thousand, official net change is −0.9 thousand and −5.2% (OOH rounded −5%, declining), and average annual openings are 1.3 thousand, including growth and replacement. Endpoints/net values are rounded separately; do not replace the official net value with a calculation from endpoints. Self-employment '—' is not 0. Typical education is high school/GED, related experience None, and training moderate-term on the job. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.18",
@@ -31984,6 +31987,23 @@
                 "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "System operation monitoring | Monitor gauges and alarms and inspect the entire system | Monitor and record gauges, flowmeters, panel lights or other indicators and listen for alarm signals to verify compliance with process conditions; patrol work areas to ensure solutions in tanks or vats do not overflow (corresponding O*NET task importance 96, 92). — 50/100; weight=1/3; chemical-plant-and-system-operators.profile.responsibilities-block.1[0]",
+                  "Parameter regulation | Adjust controls and flow according to formulas and process settings | Adjust equipment unit control settings to change chemical reaction speed, quality or yield, and turn valves to regulate product and byproduct flow through agitator tanks, storage tanks or neutralizer tanks (corresponding task importance 94, 89). — 25/100; weight=1/3; chemical-plant-and-system-operators.profile.responsibilities-block.1[1]",
+                  "Records, calculations and collaboration | Record operating data and calculate tank levels and materials | Record operating data such as process conditions, test results or gauge readings; measure tank levels with calibrated rods; calculate material requirements or yields from formulas; communicate with technical and managerial supervisors about conditions affecting safety, efficiency or product quality; and direct machine operators who regulate material and product flow (corresponding task importance 93, 82, 82, 90, 82). — 75/100; weight=1/3; chemical-plant-and-system-operators.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36931,7 +36951,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Salary Reference",
       "direction-comparison": "Comparison of Career Directions",
       "fit": "Career Fit Guide",
@@ -37300,15 +37320,27 @@
           "cpso-details",
           "cpso-methods"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Chemical Plant Operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RCI",
@@ -37359,7 +37391,7 @@
       "text": "Chemical Plant Operators"
     }
   },
-  "source_content_sha256": "b68f81161054496c56ec691ffd6006822ea137205da6cc51420911c390757e3e",
+  "source_content_sha256": "9a28ca3695294f33da1476d56c5a336a3d764c093ec1b37668db94e261f62d18",
   "subject": {
     "canonical_slug": "chemical-plant-and-system-operators",
     "name": "Chemical Plant Operators",

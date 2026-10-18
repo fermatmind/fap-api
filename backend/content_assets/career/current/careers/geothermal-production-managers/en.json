@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25143,7 +25146,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the exact geothermal manager AI exposure level, adoption, replacement rate, or wage causality was not obtained.\nEditorial task analysis | Log organization, alarm classification, scheduling, and compliance drafts can be explored for tool assistance; this is an analysis based on O*NET tasks, and the AI exposure level, actual adoption, replacement rate, or wage causality for this exact occupation was not obtained. PLC control differs from generative AI, and a software list does not prove AI prevalence. Field status, anomaly handling, and personnel and compliance responsibility are borne by people according to procedures and real authorization. U.S. BLS direct 2025—2035 table, parent occupation SOC11-3051 industrial production managers: 252,100→258,600 positions, a net increase of about 6,500, official growth 2.6%, and annual average openings of about 17,000 including growth and replacement needs from transfers and exits; the 2025 self-employed share is 2.4%, and the projection includes the self-employed. Endpoints are rounded, and OOH shows 3% as a whole percentage. This is not the size of 11-3051.02 geothermal production managers itself, current hiring numbers, or AI causality. This round O*NET already presents 2025 employment and the 2025—2035 trend, consistent with the BLS current period on this page, but the parent occupation and the exact scope must still be distinguished."
+              "Insufficient evidence: the exact geothermal manager AI exposure level, adoption, replacement rate, or wage causality was not obtained.\nEditorial task analysis | Log organization, alarm classification, scheduling, and compliance drafts can be explored for tool assistance; this is an analysis based on O*NET tasks, and the AI exposure level, actual adoption, replacement rate, or wage causality for this exact occupation was not obtained. PLC control differs from generative AI, and a software list does not prove AI prevalence. Field status, anomaly handling, and personnel and compliance responsibility are borne by people according to procedures and real authorization. U.S. BLS direct 2025—2035 table, parent occupation SOC11-3051 industrial production managers: 252,100→258,600 positions, a net increase of about 6,500, official growth 2.6%, and annual average openings of about 17,000 including growth and replacement needs from transfers and exits; the 2025 self-employed share is 2.4%, and the projection includes the self-employed. Endpoints are rounded, and OOH shows 3% as a whole percentage. This is not the size of 11-3051.02 geothermal production managers itself, current hiring numbers, or AI causality. This round O*NET already presents 2025 employment and the 2025—2035 trend, consistent with the BLS current period on this page, but the parent occupation and the exact scope must still be distinguished. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "geothermal-production-managers.ai-impact.ai-impact-table.18",
@@ -32737,6 +32740,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "The parent occupation 11-3051 industrial production manager OOH, not the exact geothermal manager",
                 "url": "https://www.bls.gov/ooh/management/industrial-production-managers.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Operating plan and scheduling — 75/100; weight=1/3; geothermal-production-managers.ai-impact.ai-impact-table.95[0]",
+                  "Preventive maintenance and repair — 25/100; weight=1/3; geothermal-production-managers.ai-impact.ai-impact-table.103[0]",
+                  "Permits, interconnection, and budget — 50/100; weight=1/3; geothermal-production-managers.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37665,7 +37685,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37820,15 +37840,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Geothermal Production Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Geothermal Production Managers · tasks, deliverables, and responsibility boundaries",
@@ -37879,7 +37911,7 @@
       "text": "Geothermal Production Managers"
     }
   },
-  "source_content_sha256": "07946942c5533d0d09f8b29ce1ab0473c3f691b8025cd272a9b45effdc350f84",
+  "source_content_sha256": "d1d30318de25ab36d3432f8e18b8960245a00c19180fb50ba5ad8b9d7112fe2e",
   "subject": {
     "canonical_slug": "geothermal-production-managers",
     "name": "Geothermal Production Managers",

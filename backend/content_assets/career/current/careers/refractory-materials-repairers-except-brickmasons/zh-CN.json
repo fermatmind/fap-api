@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24799,7 +24802,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助工单摘要、尺寸算术和记录整理；本职业没有可核的独立AI采用率、替代率或安全自动放行能力。 证据不足：中国大陆与美国耐火材料修复工岗位级AI采用率、替代率及工资变化的因果估计。"
+              "AI可辅助工单摘要、尺寸算术和记录整理；本职业没有可核的独立AI采用率、替代率或安全自动放行能力。 证据不足：中国大陆与美国耐火材料修复工岗位级AI采用率、替代率及工资变化的因果估计。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "refractory-materials-repairers-except-brickmasons.ai-impact.ai-impact-table.18",
@@ -32761,6 +32764,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/47-2051.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "拆旧与表面准备｜拆除损坏衬里、清理基面。｜保留缺陷位置、范围和清理记录。 — 0/100; weight=1/3; refractory-materials-repairers-except-brickmasons.profile.responsibilities-block.1[1]",
+                  "配料与成形｜按批准配方准备耐火材料并修补或重衬。｜记录批次、用量与施工位置。 — 0/100; weight=1/3; refractory-materials-repairers-except-brickmasons.profile.responsibilities-block.1[2]",
+                  "尺寸与质量复核｜核厚度、覆盖范围和可见缺陷。｜提交测量结果与待工程确认项。 — 25/100; weight=1/3; refractory-materials-repairers-except-brickmasons.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37669,7 +37689,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37950,15 +37970,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "耐火材料、砌砖工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "炉、窑、钢包内衬 · 耐火材料修补",
@@ -38009,7 +38041,7 @@
       "text": "耐火材料修复工（不含砌砖工）"
     }
   },
-  "source_content_sha256": "22f970ef44fab8c9d869f7e2d03260e09be19ff9567fa55cb39f5481e250f133",
+  "source_content_sha256": "f23742b3911ae0a0086160bb4ed4a195dbb33503099b85c14bfd370508d83b0e",
   "subject": {
     "canonical_slug": "refractory-materials-repairers-except-brickmasons",
     "name": "耐火材料修复工（不含砌砖工）",

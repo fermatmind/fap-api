@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24299,7 +24302,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial directions at the task level include material collection and handout and question drafts and format checks and record organization; no measured effect of reducing working hours or improving evaluation for this position was obtained. Course basis and teaching feedback and final scores and recommendations and research results must have clear human responsibility, and provider liability is verified separately by law and contract. Traditional teaching platforms and plagiarism checkers are not generative AI adoption, and task exposure is not job replacement or a wage change."
+              "Editorial trial directions at the task level include material collection and handout and question drafts and format checks and record organization; no measured effect of reducing working hours or improving evaluation for this position was obtained. Course basis and teaching feedback and final scores and recommendations and research results must have clear human responsibility, and provider liability is verified separately by law and contract. Traditional teaching platforms and plagiarism checkers are not generative AI adoption, and task exposure is not job replacement or a wage change. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31713,6 +31716,23 @@
                 "publisher": "Official Chinese government website",
                 "scope": "proxy",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Class preparation and lecturing｜Teach courses against the syllabus｜Write or revise course syllabi and teaching materials, prepare and teach courses such as criminal law and law enforcement and investigative techniques and corrections and judicial administration, and lead classroom discussions and organize case and simulation exercises. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Evaluation and records｜Assign homework and register grades｜Assign homework and papers and exams and grade and score them, register grades and attendance, and maintain teaching files and course evaluation records as the institution requires. — 50/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Fixed office hours and academic and career guidance and recommendation letters and recruitment and registration and employment referral are Core; student club advising is Supplemental, and actual involvement is verified by unit. — 25/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36991,7 +37011,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -37235,15 +37255,27 @@
         "source_refs": [
           "g04-industry"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Postsecondary criminal justice and law enforcement teachers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Education services · postsecondary criminal justice and law enforcement teaching",
@@ -37294,7 +37326,7 @@
       "text": "Postsecondary criminal justice and law enforcement teachers"
     }
   },
-  "source_content_sha256": "51db1b9f01b1304f1f19d5b4f9b97504a25466f6ad972dc8538b73f54c8b10ca",
+  "source_content_sha256": "e7cd4b9bbad31ae35d23a766100ed02f1a4d3f698e75993c69eb51efbc4c63e0",
   "subject": {
     "canonical_slug": "criminal-justice-and-law-enforcement-teachers-postsecondary",
     "name": "Postsecondary criminal justice and law enforcement teachers",

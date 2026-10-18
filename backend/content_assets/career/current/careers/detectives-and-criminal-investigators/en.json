@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24359,7 +24362,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Official tasks support work objects such as record queries, image records, analysis of physical evidence and investigation paperwork; retrieval summaries and assisted drafting are editorial inference in a permitted environment. No specific system AI functions, occupational adoption rates or actual effects were verified, and use is not proven by tasks, software terms or demonstrations. The unique United States Lightcast job postings in 2025 yielded 11 terms: Office 10%, Excel 9%, PowerPoint / Outlook 4% each, Word / SQL 2% each, Access 1%, SAS under 1%, and Photoshop / Linux / Visio NA; recruitment keywords are not AI adoption, actual software usage rates or Chinese job requirements."
+              "Official tasks support work objects such as record queries, image records, analysis of physical evidence and investigation paperwork; retrieval summaries and assisted drafting are editorial inference in a permitted environment. No specific system AI functions, occupational adoption rates or actual effects were verified, and use is not proven by tasks, software terms or demonstrations. The unique United States Lightcast job postings in 2025 yielded 11 terms: Office 10%, Excel 9%, PowerPoint / Outlook 4% each, Word / SQL 2% each, Access 1%, SAS under 1%, and Photoshop / Linux / Visio NA; recruitment keywords are not AI adoption, actual software usage rates or Chinese job requirements. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24631,7 +24634,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page has no reviewable occupational scale or task scoring basis, so it keeps the missing state of the AI data in the Hero and explains the reason in the body; substituting scores from other positions for this occupation would create precision without basis."
+              "The external materials used here supply no measured occupational scale or task scoring basis, so the Hero instead shows the separately defined editorial estimate; substituting scores from other positions for this occupation would create precision without basis."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -32032,6 +32035,23 @@
                 "publisher": "O*NET Resource Center",
                 "scope": "contextual",
                 "url": "https://www.onetcenter.org/IP.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "After taking on a case, verify the facts item by item, cross-verify statements through questioning multiple parties and checking records, and record the content of interviews according to statutory procedure. — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Search for and collect evidence such as fingerprints, and seal, mark, keep and transfer evidence items as required, ensuring the evidence chain is continuous and traceable. — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "Record investigation progress and maintain files, submit reports to superiors or a judge to apply for warrants, and within the scope of authorization prepare and serve search and arrest warrants. — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37318,7 +37338,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37542,15 +37562,27 @@
         "source_refs": [
           "r5-nbs-government"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Detectives and Criminal Investigators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Case investigation and lead verification · scene and evidence preservation · giving evidence and appearing in court",
@@ -37601,7 +37633,7 @@
       "text": "Detectives and Criminal Investigators"
     }
   },
-  "source_content_sha256": "4526ce7379df440ccc4bcc6a2cc7a0c95fb004ff59f41df60e9935fc012dcaa3",
+  "source_content_sha256": "0227d0821cbbecca2fd3384f51b8c4e59f60a88e99dab3008bd3203d2147b619",
   "subject": {
     "canonical_slug": "detectives-and-criminal-investigators",
     "name": "Detectives and Criminal Investigators",

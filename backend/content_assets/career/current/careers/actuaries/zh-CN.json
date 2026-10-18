@@ -83,6 +83,9 @@
       "fact:entry-bachelors-degree": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24676,7 +24679,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得精算任务级采用率、节时效果或裁员因果数据。编辑建议可用AI辅助数据整理、代码草案和报告初稿；假设选择、模型验证和批准责任仍须按组织权限完成。"
+              "证据不足：本轮未取得精算任务级采用率、节时效果或裁员因果数据。编辑建议可用AI辅助数据整理、代码草案和报告初稿；假设选择、模型验证和批准责任仍须按组织权限完成。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actuaries.ai-impact.ai-impact-table.18",
@@ -32477,6 +32480,23 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "整理经验数据｜保单、暴露量和理赔｜确认统计定义、观察期和适用范围，保留输入检查记录。 — 75/100; weight=1/3; actuaries.profile.responsibilities-block.1[0]",
+                  "计算费率与准备金｜经验数据与概率模型｜形成计算结果，解释方法、假设和复算依据。 — 75/100; weight=1/3; actuaries.profile.responsibilities-block.1[2]",
+                  "与业务协作｜核保、理赔、财务与管理人员｜清楚说明技术结果及限制，核对业务问题与产出。 — 50/100; weight=1/3; actuaries.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37412,7 +37432,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38040,15 +38060,27 @@
         "source_refs": [
           "actuaries-ooh-2025-2035"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "精算师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "精算师任务 · 精算师的模型与结果复核 · 精算师的假设与版本记录",
@@ -38099,7 +38131,7 @@
       "text": "精算师"
     }
   },
-  "source_content_sha256": "a7faae700bf09457001db38f9e42956820b453b276c647338aef5dd0f5c1a96d",
+  "source_content_sha256": "b0bad50c08430ed4945a5e6cb2f54c1073aa0f19ceeba2e6091386bcdc6b7698",
   "subject": {
     "canonical_slug": "actuaries",
     "name": "精算师",

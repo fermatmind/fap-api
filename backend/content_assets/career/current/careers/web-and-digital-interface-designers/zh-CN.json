@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25567,7 +25570,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本精确职业任务级AI效果评分及替代率因果资料。文字方案、W29尺寸算术与真实用户测试分开；总宽296只说明给定条件，不给兼容、无障碍或发布保证。"
+              "证据不足：未取得本精确职业任务级AI效果评分及替代率因果资料。文字方案、W29尺寸算术与真实用户测试分开；总宽296只说明给定条件，不给兼容、无障碍或发布保证。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "web-and-digital-interface-designers.display.ai_impact_table.answer",
@@ -33020,6 +33023,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "研究｜需求与反馈｜明确用户任务和设计要求。 — 50/100; weight=1/3; web-and-digital-interface-designers.display.responsibilities_block.01[0]",
+                  "设计｜布局与视觉｜形成概念、层级与规格。 — 75/100; weight=1/3; web-and-digital-interface-designers.display.responsibilities_block.02[0]",
+                  "原型｜交互与状态｜说明导航流程和预期结果。 — 75/100; weight=1/3; web-and-digital-interface-designers.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38265,7 +38285,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38413,15 +38433,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "网页与数字界面设计师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET15-1255.00",
@@ -38472,7 +38504,7 @@
       "text": "网页与数字界面设计师：任务、工资与布局体验｜费马测试"
     }
   },
-  "source_content_sha256": "a984c07cedceb2570914216d8cf6005bdcd3807e0292d883b291c5004a63a1df",
+  "source_content_sha256": "d3fb3997670ae0446f86cc6f8ac24bd7ada7122fc574b85259a0ffef5d7a4174",
   "subject": {
     "canonical_slug": "web-and-digital-interface-designers",
     "name": "网页与数字界面设计师",

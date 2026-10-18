@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24307,7 +24310,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "9 occupational tasks, work context and 2025 recruitment keywords were verified. OCR, field extraction, format verification and drafts are editorial candidates awaiting verification, not efficiency gains or adoption measured on this page. Self-reported automation of 21% high/51% moderate is work context, not GenAI adoption or an automation rate. Projected employment decline cannot prove a particular tool caused it. Actual uses require checking source values, confidence, incorrect and missed changes, and personal information processing bases. Model-generated values cannot fill actual missing data."
+              "9 occupational tasks, work context and 2025 recruitment keywords were verified. OCR, field extraction, format verification and drafts are editorial candidates awaiting verification, not efficiency gains or adoption measured on this page. Self-reported automation of 21% high/51% moderate is work context, not GenAI adoption or an automation rate. Projected employment decline cannot prove a particular tool caused it. Actual uses require checking source values, confidence, incorrect and missed changes, and personal information processing bases. Model-generated values cannot fill actual missing data. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31776,6 +31779,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "broader proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Reading source documents | Enter data by field | Read source documents such as canceled checks, sales reports or bills, and use keyboards or scanners to enter information into specified fields or media such as tapes and disks for subsequent processing. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Comparison and verification | Find entry errors | Compare data with source documents or re-enter in verification format to find errors, and confirm completeness and consistency against field specifications and verification rules. — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "Error handling | Correct or report | Identify and correct data entry errors or report to supervisors when beyond your handling scope, retaining correction bases and processing records to ensure traceability. — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37187,7 +37207,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of occupational directions",
       "fit": "Occupational fit guide",
@@ -37458,15 +37478,27 @@
         "source_refs": [
           "r5-nbs-business"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Data Entry Keyers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Data entry and verification · Comparison with source documents · Records and logs",
@@ -37517,7 +37549,7 @@
       "text": "Data Entry Keyers"
     }
   },
-  "source_content_sha256": "571359d3cb4e8fb8e97a4403645502b0d274249fad106642484ddb1de05874ef",
+  "source_content_sha256": "1bca24c5dac69707f4be1332b766a0fbc247a2a1fdc53340929367b31df95760",
   "subject": {
     "canonical_slug": "data-entry-keyers",
     "name": "Data Entry Keyers",

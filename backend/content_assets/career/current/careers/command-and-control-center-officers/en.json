@@ -77,6 +77,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24789,7 +24792,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Technical capability, actual adoption, and position results are kept separate. Editorial trial candidate: try summaries, formats, or checklist drafts only on materials that have a lawful purpose and tool permission, and check errors, omissions, and total review time; this round obtained no evidence for this occupation's adoption rate, reliability, efficiency gain, or position outcomes. This round has no evidence that any service continuously invests in this occupation or has deployed uniform tools."
+              "Technical capability, actual adoption, and position results are kept separate. Editorial trial candidate: try summaries, formats, or checklist drafts only on materials that have a lawful purpose and tool permission, and check errors, omissions, and total review time; this round obtained no evidence for this occupation's adoption rate, reliability, efficiency gain, or position outcomes. This round has no evidence that any service continuously invests in this occupation or has deployed uniform tools. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "command-and-control-center-officers.ai-impact.ai-impact-table.18",
@@ -32782,6 +32785,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/11-9161.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Surveillance and detection system operation｜Manage the operation of surveillance and detection systems｜Enable the command center to continuously receive usable situational information and keep system availability and degradation status together with the information (corresponding to the duty of managing the operation of surveillance and detection systems in the official O*NET definition). The duties correspond to the definition; the specific recording, drills, degradation notification, and so on are editorial verification recommendations, not verified uniform operating procedures. — 50/100; weight=1/3; command-and-control-center-officers.profile.responsibilities-block.1[1]",
+                  "Emergency plan formulation and implementation｜Formulate and carry out emergency plans by scenario｜Write the objectives, constraints, switch conditions, and responsibilities for scenarios such as natural and wartime disasters into drillable text and revise it after drills (corresponding to the duty of formulating and implementing emergency plans for natural and wartime disasters in the official O*NET definition). The duties correspond to the definition; the specific recording, drills, degradation notification, and so on are editorial verification recommendations, not verified uniform operating procedures. — 50/100; weight=1/3; command-and-control-center-officers.profile.responsibilities-block.1[2]",
+                  "Emergency coordination｜Link the actions of different units and agencies under one set of procedures｜Clarify who notifies whom under what conditions and who decides, and keep coordination and notification records (corresponding to the duty of coordinating emergency response teams and agencies in the official O*NET definition). The duties correspond to the definition; the specific recording, drills, degradation notification, and so on are editorial verification recommendations, not verified uniform operating procedures. — 25/100; weight=1/3; command-and-control-center-officers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37708,7 +37728,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38250,15 +38270,27 @@
           "cc-officer-onet",
           "cc-officer-bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Command and Control Center Officer",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this route gives no score)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Interest code: not collected by O*NET (military occupation)",
@@ -38309,7 +38341,7 @@
       "text": "Command and Control Center Officer"
     }
   },
-  "source_content_sha256": "ad8ad483f1efb16bfb3630ef7fe260cfba02fc85672488192339039410046c1c",
+  "source_content_sha256": "52d371b5a0c8a0d96738e36d36e8b4d37bbe52b526f321bb39f1abaf4f42fa05",
   "subject": {
     "canonical_slug": "command-and-control-center-officers",
     "name": "Command and Control Center Officer",

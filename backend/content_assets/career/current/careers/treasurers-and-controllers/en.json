@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25548,7 +25551,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Keep assistance uses, sample adoption and employment outcomes separate. This page has only a limited historical survey and a general risk method and has formed no reviewable FermatMind occupational task score, so no AI exposure score is filled in; data checking and actual authorisation cannot be handed to a generated result."
+              "Keep assistance uses, sample adoption and employment outcomes separate. This page has only a limited historical survey and a general risk method and has formed no reviewable FermatMind occupational task score, so no AI exposure score is filled in; data checking and actual authorisation cannot be handed to a generated result. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "treasurers-and-controllers.display.ai_impact_table.answer",
@@ -33515,6 +33518,23 @@
                 "publisher": "Ministry of Finance, reposted by the Qinghai regulatory bureau",
                 "scope": "contextual",
                 "url": "https://qh.mof.gov.cn/bszn/zhengcefagui/202607/t20260724_3994228.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Funds monitoring | cash flow and position | check receipts, payments and balances, forecast cash needs and identify shortfalls; distinguish forecast, actual and pending status. — 75/100; weight=1/3; treasurers-and-controllers.display.responsibilities_block.01[0]",
+                  "Funding arrangements | raising and deploying funds | assess funding sources and surplus arrangements and propose a well-grounded option to management; bank relationships and investment activities are checked under organisational authorisation. — 50/100; weight=1/3; treasurers-and-controllers.display.responsibilities_block.02[0]",
+                  "Internal control | duties and processes | establish or improve cash, credit, budget and accounting controls and supervise material checking and variance tracking, without bypassing the separation of duties. — 50/100; weight=1/3; treasurers-and-controllers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38763,7 +38783,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38925,15 +38945,27 @@
           "r2-pay-3",
           "editorial"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Treasurers and controllers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "This occupation O*NET11-3031.01",
@@ -38984,7 +39016,7 @@
       "text": "Treasurers and controllers"
     }
   },
-  "source_content_sha256": "245e546681feeaa5586cb38ec3836f24d828409d8a26eba66a2e26f7f203e89b",
+  "source_content_sha256": "a3c8eaa06ca0f6e038a6a3fdb6d11a1fbfeb4d8de853b9e409e8e865f02a7ff2",
   "subject": {
     "canonical_slug": "treasurers-and-controllers",
     "name": "Treasurers and controllers",

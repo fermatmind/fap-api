@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24769,7 +24772,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not obtained occupation-level AI substitution rate, deployment effectiveness, or job-reduction causal research for 53-2022. O*NET tasks allow the information-verification and recordkeeping steps to be decomposed; software job-posting labels do not equal an AI usage rate. U.S. BLS 53-2022: employment of 15.3 thousand in 2025 and a projected 16.5 thousand in 2035; official net change 1.2 thousand and growth 7.8%, with average annual job openings of 1.5 thousand for 2025—2035. Openings include growth plus demand from separations, transfers, and the like, and do not equal net new jobs; the data are rounded, the growth rate must not be recomputed from the two totals, and the figures cannot be extrapolated as Chinese demand. This is an overall employment projection and cannot be used to attribute changes to AI."
+              "Insufficient evidence: this page has not obtained occupation-level AI substitution rate, deployment effectiveness, or job-reduction causal research for 53-2022. O*NET tasks allow the information-verification and recordkeeping steps to be decomposed; software job-posting labels do not equal an AI usage rate. U.S. BLS 53-2022: employment of 15.3 thousand in 2025 and a projected 16.5 thousand in 2035; official net change 1.2 thousand and growth 7.8%, with average annual job openings of 1.5 thousand for 2025—2035. Openings include growth plus demand from separations, transfers, and the like, and do not equal net new jobs; the data are rounded, the growth rate must not be recomputed from the two totals, and the figures cannot be extrapolated as Chinese demand. This is an overall employment projection and cannot be used to attribute changes to AI. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "airfield-operations-specialists.ai-impact.ai-impact-table.18",
@@ -32591,6 +32594,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Movement-area inspection | field and facilities | conduct daily comprehensive inspections and periodic walk-throughs of runways, taxiways, aprons, and runway strips according to regulations and operations manuals; check surfaces, markings, lighting, and drainage; and record defects and take or report corrective action. — 25/100; weight=1/3; airfield-operations-specialists.profile.responsibilities-block.1[0]",
+                  "Operations coordination | control and maintenance | coordinate communications between air traffic control and maintenance personnel, coordinate with agencies to support airport management activities, and manage runway and taxiway snow-removal coordination. — 50/100; weight=1/3; airfield-operations-specialists.profile.responsibilities-block.1[2]",
+                  "Information relay | weather and plans | U.S. O*NET supplemental/new tasks include messages, weather, flight plans, and airport status information. Actual receipt, relay, or publication must follow position authority; the Chinese side does not grant notice-signing authority on this basis, which is handled by authorized agencies, and operations positions verify source data and status according to the division of labor. — 75/100; weight=1/3; airfield-operations-specialists.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37492,7 +37512,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Comparison of occupational directions",
       "fit": "Occupation fit guide",
@@ -37880,15 +37900,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Airfield Operations Specialist",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Airport operations support: movement-area inspection and access · operations coordination and information publication · safety and emergency response",
@@ -37939,7 +37971,7 @@
       "text": "Airfield Operations Specialists: tasks, wages, and employment outlook (O*NET 53-2022)"
     }
   },
-  "source_content_sha256": "86058751c86824b7c1dfeb3f60e7c49e28fb9a0fc7e3b4a645011d27c0b454e2",
+  "source_content_sha256": "630387311b0e5c19ca3b3191df3d423881e2f7e7e0660941d4341e3132bb7fe1",
   "subject": {
     "canonical_slug": "airfield-operations-specialists",
     "name": "Airfield Operations Specialist",

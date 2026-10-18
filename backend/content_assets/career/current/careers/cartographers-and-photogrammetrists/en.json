@@ -53,6 +53,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24446,7 +24449,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Conclusion: reviewable steps such as data gathering and organizing, drafting source lists and metadata, initial feature extraction screening, first drafts of map annotations and field mapping, and organizing records and explanatory text can be assisted by tools, but there is no official evidence that they replace source determination, coordinate system and projection and units and accuracy statements, feature representation and mapping standard decisions, completeness and accuracy determination, and responsibility attribution for professional signing and release. AI exposure does not equal an automation rate or job disappearance; task exposure, process automation level, and employment numbers are three different concepts."
+              "Conclusion: reviewable steps such as data gathering and organizing, drafting source lists and metadata, initial feature extraction screening, first drafts of map annotations and field mapping, and organizing records and explanatory text can be assisted by tools, but there is no official evidence that they replace source determination, coordinate system and projection and units and accuracy statements, feature representation and mapping standard decisions, completeness and accuracy determination, and responsibility attribution for professional signing and release. AI exposure does not equal an automation rate or job disappearance; task exposure, process automation level, and employment numbers are three different concepts. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "cartographers-and-photogrammetrists.ai-impact.ai-impact-table.18",
@@ -31282,6 +31285,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Source acquisition｜Gathering and checking the aerial photographs and survey records and reports and base maps needed to compile maps｜Source data and version check records. — 75/100; weight=1/3; cartographers-and-photogrammetrists.profile.responsibilities-block.1[0]",
+                  "Feature extraction｜Extracting and editing surface features with aerial photography and remote sensing and stereo plotting methods｜Feature extraction and editing records. — 75/100; weight=1/3; cartographers-and-photogrammetrists.profile.responsibilities-block.1[3]",
+                  "Inspection and updating｜Checking the completeness and accuracy of the final product and revising existing maps and updating databases｜Quality and completeness check and revision records. — 50/100; weight=1/3; cartographers-and-photogrammetrists.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36196,7 +36216,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -36620,15 +36640,27 @@
         "source_refs": [
           "cart-nbs-science-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Cartographers and Photogrammetrists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page gives no score)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 17-1021.00 · data collection and processing / mapping design and production / inspection and data updating",
@@ -36679,7 +36711,7 @@
       "text": "Cartographers and Photogrammetrists"
     }
   },
-  "source_content_sha256": "3143fdd5d473dac6796e519c8dfc6c0bef6239b28186ea4ee25d124ccedc157c",
+  "source_content_sha256": "f51a5d0972d7822033ddbf9a5f3f5847b7e662a499318f2207521cc8b40d5c11",
   "subject": {
     "canonical_slug": "cartographers-and-photogrammetrists",
     "name": "Cartographers and Photogrammetrists",

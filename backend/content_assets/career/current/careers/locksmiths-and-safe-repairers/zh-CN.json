@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7554,7 +7557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试验候选：用虚构工单测试型号资料检索与作业台账整理；钥匙机、锁具数据库或门禁系统存在不等于AI能力、采用或效果。客户授权、结构判断、钥匙及门禁结果须由责任人核验。"
+              "编辑试验候选：用虚构工单测试型号资料检索与作业台账整理；钥匙机、锁具数据库或门禁系统存在不等于AI能力、采用或效果。客户授权、结构判断、钥匙及门禁结果须由责任人核验。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "locksmiths-and-safe-repairers.ai-impact.ai-impact-table.2",
@@ -8680,6 +8683,23 @@
                 "publisher": "济南市公安局",
                 "scope": "中国山东济南",
                 "url": "https://www.jinan.gov.cn/col/col118356/art/2026/art_34ceea4c243b405aadbd27096fb6e6ed.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "判断锁具与保险柜结构 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "配制钥匙或更换锁芯 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "维修保险柜与安装门禁 — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11061,7 +11081,7 @@
     ],
     "path": "/zh/career/jobs/locksmiths-and-safe-repairers",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11221,15 +11241,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "锁匠保险柜",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "开锁与锁具维修",
@@ -11280,7 +11312,7 @@
       "text": "锁匠与保险柜维修人员职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "cc29ba979a70f3e5375acb5fa42d41412d129b1fa5130c47b6a006e87bb153ad",
+  "source_content_sha256": "19d1d7eaf4543cef5d7e291b1e8ae3206fd937e3f120ec642bad85f3c8d85fee",
   "subject": {
     "canonical_slug": "locksmiths-and-safe-repairers",
     "name": "锁匠与保险柜维修人员",

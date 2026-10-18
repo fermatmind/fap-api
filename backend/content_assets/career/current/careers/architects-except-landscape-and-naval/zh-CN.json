@@ -32,6 +32,9 @@
       "fact:entry-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -24797,7 +24800,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS定性指出BIM与AI提高建筑设计效率，并允许建筑师参与整个建造过程和承担新职责；这不是本职业AI采用率、工资因果效应或替代比例。方案初稿、图纸整理、规范检索和估算辅助为本页任务分析，须经项目数据与人员复核。美国BLS现行资料：2025年124,600个岗位，2035年预计129,900个，2025—2035年增长4%、净增5,300个，年均约6,900个空缺。空缺含职业转出和退出劳动力市场的替代需求，不等于净增或个人录用保证。"
+              "BLS定性指出BIM与AI提高建筑设计效率，并允许建筑师参与整个建造过程和承担新职责；这不是本职业AI采用率、工资因果效应或替代比例。方案初稿、图纸整理、规范检索和估算辅助为本页任务分析，须经项目数据与人员复核。美国BLS现行资料：2025年124,600个岗位，2035年预计129,900个，2025—2035年增长4%、净增5,300个，年均约6,900个空缺。空缺含职业转出和退出劳动力市场的替代需求，不等于净增或个人录用保证。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "architects-except-landscape-and-naval.ai-impact.ai-impact-table.18",
@@ -32757,6 +32760,23 @@
                 "publisher": "American Institute of Architects",
                 "scope": "contextual",
                 "url": "https://www.aia.org/sites/default/files/2026-01/Guidance%20for%20the%20Responsible%20Use%20of%20AI%20by%20Architecture%20and%20Design%20Firms.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "方案设计与图纸表达｜把需求转成可核对的设计成果｜与业主沟通功能与空间需求，规划平面布局与流线，准备比例图纸与建筑方案，并用计算机辅助设计软件制作三维或交互式表现。 — 75/100; weight=1/3; architects-except-landscape-and-naval.profile.responsibilities-block.1[0]",
+                  "施工图与合同文件编制｜形成可用于施工与审查的文件｜编制包含美学表现与施工细节的最终施工图，编制结构与材料与色彩与设备与概算与工期信息，并编制施工合同文件与运营维护手册。 — 75/100; weight=1/3; architects-except-landscape-and-naval.profile.responsibilities-block.1[2]",
+                  "施工配合与现场观察｜让设计在建造中落地｜定期到现场观察施工是否符合图纸，管理施工合同，代表业主招标或授予施工合同，并处理施工阶段的澄清与变更。 — 0/100; weight=1/3; architects-except-landscape-and-naval.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37659,7 +37679,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37987,15 +38007,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "建筑师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "设计工作：方案设计与图纸表达 · 专业整合与规范核查 · 施工图与现场配合与签章",
@@ -38046,7 +38078,7 @@
       "text": "建筑师"
     }
   },
-  "source_content_sha256": "4b4a95634203598bd0217a6b126cba26772d9e269d60f3f39063ffa3d307deac",
+  "source_content_sha256": "8c928765118d5e7cbbe24ae64316dbf1f7348fbf8a427baf6742f9cb363542b3",
   "subject": {
     "canonical_slug": "architects-except-landscape-and-naval",
     "name": "建筑师",

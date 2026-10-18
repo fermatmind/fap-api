@@ -35,6 +35,9 @@
       "fact:ct-openings2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24900,7 +24903,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Public evidence supports checking duties, hiring software keywords, AI task exposure methods and U.S. employment projections; drafting materials, exercises and feedback and compiling data are editorial trial suggestions, without measured reliability or speed gains for this occupation in this round. BLS table 1.2 projects U.S. SOC25-1052 for 2025–2035: 24,900→25,400 people, growth 2.3%, and 1,700 average annual openings; OOH displays the integer 2% (slower than average). The official net increase 0.6 thousand is rounded independently and differs from 0.5 thousand obtained by subtracting rounded endpoints; do not recalculate and overwrite it. Openings include growth and replacement needs from occupational transfers and labor force exits, rather than currently advertised job stocks or an AI replacement rate."
+              "Public evidence supports checking duties, hiring software keywords, AI task exposure methods and U.S. employment projections; drafting materials, exercises and feedback and compiling data are editorial trial suggestions, without measured reliability or speed gains for this occupation in this round. BLS table 1.2 projects U.S. SOC25-1052 for 2025–2035: 24,900→25,400 people, growth 2.3%, and 1,700 average annual openings; OOH displays the integer 2% (slower than average). The official net increase 0.6 thousand is rounded independently and differs from 0.5 thousand obtained by subtracting rounded endpoints; do not recalculate and overwrite it. Openings include growth and replacement needs from occupational transfers and labor force exits, rather than currently advertised job stocks or an AI replacement rate. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -31833,6 +31836,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-2031.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Teaching and courses | Prepare and teach courses and moderate discussions | Prepare and deliver undergraduate or graduate courses on organic chemistry, analytical chemistry and chemical separation, initiate, facilitate and moderate discussions, and prepare materials, syllabi, assignments and handouts (O*NET task importance 94, 76, 84). — 50/100; weight=1/3; chemistry-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "Laboratories and safety | Supervise experiments and establish and monitor safety rules | Establish, teach and monitor compliance with safety rules for chemicals, equipment and other hazardous materials, supervise students' laboratory work, select, order and maintain teaching and research materials and supplies, and clean laboratories (task importance 93, 88, 68, 59). — 0/100; weight=1/3; chemistry-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "Research and funding | Conduct and publish research and apply for funding | Conduct research in a particular field and publish findings in professional journals, books or electronic media, write grant proposals for external funding, and keep up with developments through literature, colleagues and conferences (task importance 77, 69, 73). — 50/100; weight=1/3; chemistry-teachers-postsecondary.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36783,7 +36803,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Salary Reference",
       "direction-comparison": "Comparison of Career Directions",
       "fit": "Career Suitability Guide",
@@ -37136,15 +37156,27 @@
         "source_refs": [
           "ct-nbs2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Chemistry Teachers, Postsecondary",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · IS",
@@ -37195,7 +37227,7 @@
       "text": "Chemistry Teachers, Postsecondary"
     }
   },
-  "source_content_sha256": "308bc87b2742c1627f03fd475e58c852274cd479d34041fd3f15423253ce646c",
+  "source_content_sha256": "817971e94f282831f4503dde3f865bf51d591979928beabbceaf91fb2d9d447b",
   "subject": {
     "canonical_slug": "chemistry-teachers-postsecondary",
     "name": "Chemistry Teachers, Postsecondary",

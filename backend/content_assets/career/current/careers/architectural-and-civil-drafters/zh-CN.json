@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24762,7 +24765,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助哪些任务须在具体工具与图纸上验证：标注整理、格式转换、图纸比对、清单初算和文本初稿是本页建议试验的环节。BLS指出CAD/BIM提高效率并可能减少制图需求，同时预计建筑土木制图员2025—2035增长5%；增长预测不能解释为AI替代率或个人就业保证。设计依据、专业冲突、现场数据、校审与注册签章仍须由负责人员确认。"
+              "AI可辅助哪些任务须在具体工具与图纸上验证：标注整理、格式转换、图纸比对、清单初算和文本初稿是本页建议试验的环节。BLS指出CAD/BIM提高效率并可能减少制图需求，同时预计建筑土木制图员2025—2035增长5%；增长预测不能解释为AI替代率或个人就业保证。设计依据、专业冲突、现场数据、校审与注册签章仍须由负责人员确认。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.18",
@@ -32582,6 +32585,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/oes/tables.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "制图与图纸表达｜把设计意图转成可复核的图纸｜使用计算机辅助制图系统或绘图机以及手工绘图工具，按初步概念与草图与工程计算与规格表绘制基础与建筑与结构的粗略及详细比例图，并确定正投影图或等轴测图等呈现方法。 — 75/100; weight=1/3; architectural-and-civil-drafters.profile.responsibilities-block.1[0]",
+                  "数据与规范核对｜让图纸在技术与法规上成立｜分析建筑规范与地方法规与空间与场地要求对建筑设计的影响，审查草图与图纸与规格及其他工程数据是否符合设计概念，并核对尺寸与材料与做法与所依据的标准。 — 75/100; weight=1/3; architectural-and-civil-drafters.profile.responsibilities-block.1[1]",
+                  "现场与测量支持｜获取并核实图纸所需数据｜获取并汇集完成设计所需数据，必要时赴施工现场采集测量数据并开展或监督现场勘测与技术调查，在监督下代表建筑师或工程师驻场核实施工符合设计并就修正提供建议。 — 0/100; weight=1/3; architectural-and-civil-drafters.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37484,7 +37504,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37800,15 +37820,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "建筑土木制图员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "制图工作：图纸表达与数据核对 · 专业配合与规范核查 · 施工图深化与资料编制与现场配合",
@@ -37859,7 +37891,7 @@
       "text": "建筑土木制图员"
     }
   },
-  "source_content_sha256": "5865f977bbbda5e6c3c56e96416a5e1c101c6c7eef68c95ec587678aa8fddd58",
+  "source_content_sha256": "a5153030e7825b14003a9f8faebbb73403bb03a9ecccf29d896dbd51dae0f89d",
   "subject": {
     "canonical_slug": "architectural-and-civil-drafters",
     "name": "建筑土木制图员",

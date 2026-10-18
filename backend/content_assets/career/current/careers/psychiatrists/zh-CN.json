@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24761,7 +24764,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "病历摘要、检索与待核提示可作为受监督试用候选，模型不能独立诊断、处方或处置危机。证据不足：精神科医师机构级AI采用、诊疗效果、岗位因果变化及可复核任务级分数。"
+              "病历摘要、检索与待核提示可作为受监督试用候选，模型不能独立诊断、处方或处置危机。证据不足：精神科医师机构级AI采用、诊疗效果、岗位因果变化及可复核任务级分数。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "psychiatrists.ai-impact.ai-impact-table.18",
@@ -32624,6 +32627,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/21-1014.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "评估｜核体格、精神状态和检查｜形成可追溯判断。 — 50/100; weight=1/3; psychiatrists.profile.responsibilities-block.1[2]",
+                  "治疗｜讨论心理与药物方案｜按执业范围执行。 — 25/100; weight=1/3; psychiatrists.profile.responsibilities-block.1[3]",
+                  "随访｜复核疗效、不良反应和风险｜必要时调整。 — 50/100; weight=1/3; psychiatrists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37529,7 +37549,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37797,15 +37817,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "精神科医师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "精神科医师 · 任务核对",
@@ -37856,7 +37888,7 @@
       "text": "精神科医师"
     }
   },
-  "source_content_sha256": "cde1793348a3bb0c7fbd2a1d1703850ee50752ded2ae26c3bb80e9dec98573ec",
+  "source_content_sha256": "b975b9d4a15103935ab021ca0ddc1cbaba6856c65684270b6c1dbe5f17fd30ab",
   "subject": {
     "canonical_slug": "psychiatrists",
     "name": "精神科医师",

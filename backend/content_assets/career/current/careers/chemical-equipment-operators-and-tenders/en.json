@@ -38,6 +38,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24924,7 +24927,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Technology keywords from a single year of recruitment support the presence of office/ERP tools in roles, not faster digitalization, growing adoption or replacement of the occupation as a whole. Assisted tasks are editorial trial suggestions; efficiency requires separate checks. BLS table 1.2, exact occupation 51-9011: employment in 2025 is 140.8 thousand, projected employment in 2035 is 145.8 thousand, net growth is 5.0 thousand, growth is 3.6% (approximately 3%–4%, average), and average annual openings are 13.9 thousand, including growth and replacement. The self-employment share retains the table's '—' rather than inserting 0. Typical education is high school/GED, related experience is None, and training is moderate-term on the job."
+              "Technology keywords from a single year of recruitment support the presence of office/ERP tools in roles, not faster digitalization, growing adoption or replacement of the occupation as a whole. Assisted tasks are editorial trial suggestions; efficiency requires separate checks. BLS table 1.2, exact occupation 51-9011: employment in 2025 is 140.8 thousand, projected employment in 2035 is 145.8 thousand, net growth is 5.0 thousand, growth is 3.6% (approximately 3%–4%, average), and average annual openings are 13.9 thousand, including growth and replacement. The self-employment share retains the table's '—' rather than inserting 0. Typical education is high school/GED, related experience is None, and training is moderate-term on the job. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "chemical-equipment-operators-and-tenders.ai-impact.ai-impact-table.18",
@@ -31875,6 +31878,23 @@
                 "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Safety and inspection | Inspect along designated routes and implement safety precautions | Inspect equipment, piping, valves and safety systems along inspection routes; observe instruments, alarms and visible or audible abnormalities; do not deliberately sniff for suspected leaks; follow procedures for fire and explosion prevention and personal protection (corresponding O*NET task importance 91, 86, 86). — 25/100; weight=1/3; chemical-equipment-operators-and-tenders.profile.responsibilities-block.1[0]",
+                  "Operation and adjustment | Operate equipment and adjust parameters according to instructions and plant specifications | Check materials, batch numbers, order and quantities; open valves or start pumps, agitators, reactors, blowers or automatic feed systems; regulate temperature, pressure, feed, flow and reaction time within approved ranges (corresponding task importance 85, 85, 82, 82, 78). — 25/100; weight=1/3; chemical-equipment-operators-and-tenders.profile.responsibilities-block.1[1]",
+                  "Records and handover | Record operating data and complete batch and shift handovers | Record temperature, pressure, charging, processing time and test results; explain abnormalities, responses, unfinished matters and equipment status so incoming personnel can reconstruct conditions (corresponding task importance 85). — 75/100; weight=1/3; chemical-equipment-operators-and-tenders.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36824,7 +36844,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China compensation reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -37193,15 +37213,27 @@
         "source_refs": [
           "ceo-ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Chemical Equipment Operators and Tenders",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of tasks to AI (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RCI",
@@ -37252,7 +37284,7 @@
       "text": "Chemical Equipment Operators and Tenders"
     }
   },
-  "source_content_sha256": "57728a8c2a2c49acd0c50124469a364c93a0860a8fd71ca496deff7ab4ce7454",
+  "source_content_sha256": "b93dfbf5e081092bde424393669728945fe2c8cc5904753328e934d94aa38537",
   "subject": {
     "canonical_slug": "chemical-equipment-operators-and-tenders",
     "name": "Chemical Equipment Operators and Tenders",

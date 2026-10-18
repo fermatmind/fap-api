@@ -29,6 +29,9 @@
       "fact:employment-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth-current": {
         "status": "pending_mapping"
       },
@@ -24366,7 +24369,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task judgment: GenAI can be tried on approved data for offline search, report and work order drafts, and check prompts; no adoption rate, effect, replacement measurement, or employer SOP for this occupation was obtained this round. Industrial control, DCS and PLC, predictive maintenance, and generative AI are distinguished; system output cannot automatically confirm equipment or personnel status or permits, and on-site control and shutdown and restart follow formal procedures and authorization."
+              "Editorial task judgment: GenAI can be tried on approved data for offline search, report and work order drafts, and check prompts; no adoption rate, effect, replacement measurement, or employer SOP for this occupation was obtained this round. Industrial control, DCS and PLC, predictive maintenance, and generative AI are distinguished; system output cannot automatically confirm equipment or personnel status or permits, and on-site control and shutdown and restart follow formal procedures and authorization. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "biomass-power-plant-managers.ai-impact.ai-impact-table.18",
@@ -32987,6 +32990,23 @@
                 "publisher": "O*NET",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/17-2199.03"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Site inspection and checks | Give judgments a basis | Go to the site to inspect equipment and safety conditions and check indicators and fuel and emission data, and honestly record anomalies and deviations. — 25/100; weight=1/3; biomass-power-plant-managers.profile.responsibilities-block.1[1]",
+                  "Directing and adjustment | Keep production controllable | Direct operations and maintenance within your authorization and adjust parameters, act within permit limits, and honestly record instructions and their basis and execution. — 25/100; weight=1/3; biomass-power-plant-managers.profile.responsibilities-block.1[2]",
+                  "Records and corrective action | Make results transferable | Record indicators and anomalies and violations and handling and corrective actions and closure, hand over and hold a retrospective to procedure, and track corrective actions; do not selectively record. — 75/100; weight=1/3; biomass-power-plant-managers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38016,7 +38036,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38428,15 +38448,27 @@
         "source_refs": [
           "bls-parent-industry"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Biomass power plant managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 11-3051.04 · Job Zone Four (considerable preparation needed) · education field shows 61% bachelor's degree",
@@ -38487,7 +38519,7 @@
       "text": "Biomass power plant managers"
     }
   },
-  "source_content_sha256": "81d853d39efdc84a51e030fd55defe9b2d603ce95ae2582ba519849635117c78",
+  "source_content_sha256": "ec33d82b4397a9dc330b7350cf4132798f3f29858433f576bc8dce3c70e2d540",
   "subject": {
     "canonical_slug": "biomass-power-plant-managers",
     "name": "Biomass power plant managers",

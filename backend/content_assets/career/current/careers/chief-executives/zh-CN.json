@@ -62,6 +62,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24950,7 +24953,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务与招聘关键词支持选择试用场景，不证明生成式AI在CEO岗位已经提速、实际采用或减少岗位。可评估摘要和文稿辅助，但准确性、隐私、成本与复核负担须在具体工作中检验；ILO暴露指数不等于失业概率。"
+              "任务与招聘关键词支持选择试用场景，不证明生成式AI在CEO岗位已经提速、实际采用或减少岗位。可评估摘要和文稿辅助，但准确性、隐私、成本与复核负担须在具体工作中检验；ILO暴露指数不等于失业概率。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "chief-executives.ai-impact.ai-impact-table.18",
@@ -32078,6 +32081,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3121.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "战略与政策｜确定与制定政策并规划目标｜指导与规划或实施组织的政策与目标或活动，编制供审批的预算，并分析运营以评估绩效或确定可降本与改进的领域（对应 O*NET 任务重要度 81、83、78）。 — 25/100; weight=1/3; chief-executives.profile.responsibilities-block.1[0]",
+                  "财务与资源｜指导财务与预算活动并控制资源｜指导或协调组织的财务或预算活动以为运营提供资金与最大化投资或提升效率（对应任务重要度 88）。 — 50/100; weight=1/3; chief-executives.profile.responsibilities-block.1[1]",
+                  "组织与人事｜任命关键岗位并指导人力资源活动｜指导人力资源活动含批准人力资源计划与选拔高层人员或设立主要部门，任命部门主管或经理并分配或委派职责，并划定时段与明确部门职责与协调各部门职能（对应任务重要度 78、77、75）。 — 25/100; weight=1/3; chief-executives.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37013,7 +37033,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37483,15 +37503,27 @@
         "source_refs": [
           "ce-nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "首席执行官",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · EC",
@@ -37542,7 +37574,7 @@
       "text": "首席执行官"
     }
   },
-  "source_content_sha256": "e2bc5046c85d728e8013561450a21d56d9fa05117bb3d3fe268c6143232d45f4",
+  "source_content_sha256": "a98e1d2a0a50787bb85a0e6807b866fef6848c02625eeacb75e37d1e6a290e42",
   "subject": {
     "canonical_slug": "chief-executives",
     "name": "首席执行官",

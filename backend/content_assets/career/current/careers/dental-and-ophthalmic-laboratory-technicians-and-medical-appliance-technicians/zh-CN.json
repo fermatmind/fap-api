@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24373,7 +24376,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OOH描述牙科技工使用电脑程序和3D打印，并给省工技术的需求预测解释；未核长期普及、生成式AI采用或各工序替代比例。CAD/CAM/扫描/增材制造不自动等于GenAI，工单摘要/设计候选为待验证场景。实验室在模型/咬合架上检验、试配与患者临床戴用调试分开；2026指导原则要求具有专业资质医师戴用调试，技工经验/培训或主管批准不代医师资格。"
+              "OOH描述牙科技工使用电脑程序和3D打印，并给省工技术的需求预测解释；未核长期普及、生成式AI采用或各工序替代比例。CAD/CAM/扫描/增材制造不自动等于GenAI，工单摘要/设计候选为待验证场景。实验室在模型/咬合架上检验、试配与患者临床戴用调试分开；2026指导原则要求具有专业资质医师戴用调试，技工经验/培训或主管批准不代医师资格。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -32066,6 +32069,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-4111.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "按加工单与处方规格核对材料、颜色、咬合与邻接要求，缺项先澄清再开工。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "按模型与扫描数据制作代型、蜡型与熔模，按工艺规程完成铸造、打磨、上瓷与烧结并记录参数。 — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "按处方规格在模型/咬合架上核对精度与咬合，具体检验项按产品技术要求；实验室在模型/咬合架上检验、试配与患者临床戴用调试分开；2026指导原则要求具有专业资质医师戴用调试，技工经验/培训或主管批准不代医师资格。 — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37583,7 +37603,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37854,15 +37874,27 @@
         "source_refs": [
           "r5-nbs-manufact"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "牙科实验室技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "口腔修复体制作 · 规格与咬合核对 · 记录留痕",
@@ -37913,7 +37945,7 @@
       "text": "牙科实验室技术员"
     }
   },
-  "source_content_sha256": "121989401fc28808a5a6c152ddd8f51f075b71954a72d18dedfb5b93505aa7c1",
+  "source_content_sha256": "5e8328f4f7b26d1e3d40fe19e538b94cd3d2538ab18d9101fb8b6627a4d6bf08",
   "subject": {
     "canonical_slug": "dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
     "name": "牙科实验室技术员",

@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24341,7 +24344,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial candidates: drawing information extraction, cutting lists/material estimates, and inspection record organization can be verified on a small scale; they must be verified with on-site dimensions, the approved design, and manual review, no deployment, efficiency, missed-entry reduction, or substitution data for this occupation was obtained, and conventional quantity takeoff, OCR, or mechanical lifting is not equated with generative AI. The O*NET7 software categories include cost, database/business, Office, Windows, OCR scanning, estimating project management, and Word; the Hot3 skills show Office <1% of the denominator of all unique U.S. job postings for this occupation in 2025, and Windows/Word proportions were not given, are not filled in as 0, and do not represent an actual adoption rate. ILO exposure is not layoffs or adoption, and NIST governance is not a construction acceptance regulation."
+              "Editorial candidates: drawing information extraction, cutting lists/material estimates, and inspection record organization can be verified on a small scale; they must be verified with on-site dimensions, the approved design, and manual review, no deployment, efficiency, missed-entry reduction, or substitution data for this occupation was obtained, and conventional quantity takeoff, OCR, or mechanical lifting is not equated with generative AI. The O*NET7 software categories include cost, database/business, Office, Windows, OCR scanning, estimating project management, and Word; the Hot3 skills show Office <1% of the denominator of all unique U.S. job postings for this occupation in 2025, and Windows/Word proportions were not given, are not filled in as 0, and do not represent an actual adoption rate. ILO exposure is not layoffs or adoption, and NIST governance is not a construction acceptance regulation. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31936,6 +31939,23 @@
                 "publisher": "Ministry of Housing and Urban-Rural Development / Beijing Municipal Commission of Housing and Urban-Rural Development",
                 "scope": "industry_proxy",
                 "url": "https://zjw.beijing.gov.cn/bjjs/xxgk/543346069/543346064/743905392/index.shtml"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Study the drawings and specifications to determine the installation method and sequence and materials and tools and measure and lay out and mark — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.1.task[0]",
+                  "Install metal or wood studs and hangers and lath substrate and insulation and moisture barrier — 0/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
+                  "Hoist drywall and ceiling panels and secure with adhesive and nails and screws and install acoustic tiles — 0/100; weight=1/3; actors.display.ai_impact_table.tasks.4.task[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37204,7 +37224,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37496,15 +37516,27 @@
           "r5-safety-current",
           "r5-special"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Drywall and ceiling tile installers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Drywall and ceiling installation · studs and hangers · working at height and joints",
@@ -37555,7 +37587,7 @@
       "text": "Drywall and ceiling tile installers"
     }
   },
-  "source_content_sha256": "e76f7d1bedd5e63f42797bf63c2727c85745d26c92817790c3bba1b854e14f5e",
+  "source_content_sha256": "2e094be4df305337aefa286e4031645364befd5588ee9abc979b7be14e1af42b",
   "subject": {
     "canonical_slug": "drywall-and-ceiling-tile-installers",
     "name": "Drywall and ceiling tile installers",

@@ -8,6 +8,9 @@
       "fact:cn-private": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -13469,6 +13472,23 @@
                 "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/49-9044.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Study drawings and equipment instructions to determine installation and repair sequences — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Dismantle machinery and assemble components and moving parts — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Troubleshoot equipment, electrical, hydraulic, and mechanical system faults — 50/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13656,7 +13676,7 @@
             }
           }
         ],
-        "answer": "Tools can assist equipment information retrieval, measurement records, and maintenance scheduling. Technical personnel remain responsible for on-site leveling, alignment, fault judgment, and safety lockout.",
+        "answer": "Tools can assist equipment information retrieval, measurement records, and maintenance scheduling. Technical personnel remain responsible for on-site leveling, alignment, fault judgment, and safety lockout. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "49-9044.00 occupational profile",
@@ -15399,7 +15419,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15511,15 +15531,27 @@
         "source_refs": [
           "trends"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Millwrights",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Equipment installation and alignment",
@@ -15570,7 +15602,7 @@
       "text": "Millwrights: Duties, U.S. Wages, and Safety | FermatMind"
     }
   },
-  "source_content_sha256": "35dedd23fa70f4cbcb10a8360549d33ffa1d7edfe25adcb30943309654d5d87b",
+  "source_content_sha256": "4e3f80a26ee3bdf027d5da19563c1a999e16b0ebc354060591ddf53c8295228c",
   "subject": {
     "canonical_slug": "millwrights",
     "name": "Millwrights",

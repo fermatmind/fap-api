@@ -8,6 +8,9 @@
       "fact:china-technical-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25513,7 +25516,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可先试指南、模块和测验草稿，由人核事实、学习目标、专业标准与资料用途。美国13-1151本职2025—2035增长10.8%、十年净增约51,100人、年均46,000空缺含转行退休替补，是总体预测而非AI因果。证据不足：本职AI净替代率及可复核FermatMind任务评分，不填分数或个人失业概率。"
+              "可先试指南、模块和测验草稿，由人核事实、学习目标、专业标准与资料用途。美国13-1151本职2025—2035增长10.8%、十年净增约51,100人、年均46,000空缺含转行退休替补，是总体预测而非AI因果。证据不足：本职AI净替代率及可复核FermatMind任务评分，另列编辑估算分数或个人失业概率。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "training-and-development-specialists.display.ai_impact_table.answer",
@@ -33232,6 +33235,23 @@
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "需求｜学习困难与任务诊断｜通过调查访谈或业务沟通核目标、学习者基础与问题来源，形成需求和待核事项。 — 50/100; weight=1/3; training-and-development-specialists.display.responsibilities_block.01[0]",
+                  "设计｜材料与练习开发｜组织或编写指南、手册和模块，核专业内容，将练习与目标及反馈对应。 — 75/100; weight=1/3; training-and-development-specialists.display.responsibilities_block.02[0]",
+                  "实施｜演示与活动引导｜用适合条件的方法呈现信息，引导学习者练习，处理提问并记录活动。 — 25/100; weight=1/3; training-and-development-specialists.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38496,7 +38516,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38681,15 +38701,27 @@
         "source_refs": [
           "china-wage-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "培训与发展专员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 13-1151.00 精确职业口径",
@@ -38740,7 +38772,7 @@
       "text": "培训与发展专员"
     }
   },
-  "source_content_sha256": "8a1efa4152824efa59ce141fc3eb090cf72984a0f6f86ca9a6bf98a3e5a99b2a",
+  "source_content_sha256": "6b1a5586385369a6b7af58f848a5750f151f86bcf0c021d3748c7a879ec9c403",
   "subject": {
     "canonical_slug": "training-and-development-specialists",
     "name": "培训与发展专员",

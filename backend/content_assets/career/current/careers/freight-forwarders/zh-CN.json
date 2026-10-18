@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25486,7 +25489,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得43-5011.01精确生成式AI暴露评分、采用率、任务排序、就业因果或消失年份，不定中高暴露或短期不会替代。编辑辅助候选为资料检索、报价计算、单证比对、状态通知与对账草稿；工具清单不等已采用或效率证据，实际输入、数据和动作权限、原始依据及对外责任须核有效程序。"
+              "证据不足：本轮未取得43-5011.01精确生成式AI暴露评分、采用率、任务排序、就业因果或消失年份，不定中高暴露或短期不会替代。编辑辅助候选为资料检索、报价计算、单证比对、状态通知与对账草稿；工具清单不等已采用或效率证据，实际输入、数据和动作权限、原始依据及对外责任须核有效程序。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "freight-forwarders.ai-impact.ai-impact-table.18",
@@ -33124,6 +33127,23 @@
                 "publisher": "BLS",
                 "scope": "SOC43-5011父类工资非43-5011.01专项",
                 "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=430000&occupation=435011&measure=13&areas=INDUSTRY,STATE,MSA"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "询价与比价 — 75/100; weight=1/3; freight-forwarders.ai-impact.ai-impact-table.95[0]",
+                  "订舱与集拼 — 75/100; weight=1/3; freight-forwarders.ai-impact.ai-impact-table.103[0]",
+                  "异常与索赔 — 50/100; weight=1/3; freight-forwarders.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38058,7 +38078,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38185,15 +38205,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "货运代理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "货运代理 · 任务、交付与责任边界",
@@ -38244,7 +38276,7 @@
       "text": "货运代理"
     }
   },
-  "source_content_sha256": "fac4bb74cf349595d0a7d9c38dc8d80fdbf0b07ca154a1d1b9a7bc077a5cf684",
+  "source_content_sha256": "65a30e6ed1267ed2cadf253d7adab0a83d9d5d3a665c4b8f33bc848b176d826a",
   "subject": {
     "canonical_slug": "freight-forwarders",
     "name": "货运代理",

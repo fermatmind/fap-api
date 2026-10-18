@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24112,7 +24115,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Occupational tasks inform literature, data, and draft trials; ILO2023 is a global potential task exposure study and cannot determine overall augmentation, actual adoption, productivity, or job changes for the environmental economics occupation. This round obtained no precise occupation-level measurement or job causality."
+              "Occupational tasks inform literature, data, and draft trials; ILO2023 is a global potential task exposure study and cannot determine overall augmentation, actual adoption, productivity, or job changes for the environmental economics occupation. This round obtained no precise occupation-level measurement or job causality. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "environmental-economists.ai-impact.ai-impact-table.18",
@@ -31516,6 +31519,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Economic model construction and estimation — 75/100; weight=1/3; environmental-economists.ai-impact.ai-impact-table.103[0]",
+                  "Cost-benefit and scenario analysis — 75/100; weight=1/3; environmental-economists.ai-impact.ai-impact-table.107[0]",
+                  "Explain results to decision-makers and the public — 50/100; weight=1/3; environmental-economists.ai-impact.ai-impact-table.119[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36424,7 +36444,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -36693,15 +36713,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Environmental Economists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Environmental Economists · official occupational scope",
@@ -36752,7 +36784,7 @@
       "text": "Environmental Economists"
     }
   },
-  "source_content_sha256": "3c132b9c29017a66abdea91be9fc74081435bc46e7ea3012d5e0fabff1b4d6ba",
+  "source_content_sha256": "f49faf5d242b06a78b9032bb38b8cb7de961b9d5256852b6cd8b8665350f81e9",
   "subject": {
     "canonical_slug": "environmental-economists",
     "name": "Environmental Economists",

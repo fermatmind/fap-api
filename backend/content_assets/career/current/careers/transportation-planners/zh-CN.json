@@ -8,6 +8,9 @@
       "fact:china-wage-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25469,7 +25472,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "分开草稿能力、真实采用与岗位结果。可用虚构通勤题试验表格整理，但人数、权重、预算和假设必须本人复核。证据不足：未取得本职业可核任务暴露量表及评分，因此不填分。"
+              "分开草稿能力、真实采用与岗位结果。可用虚构通勤题试验表格整理，但人数、权重、预算和假设必须本人复核。证据不足：未取得本职业可核任务暴露量表及评分，因此不填分。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "transportation-planners.display.ai_impact_table.answer",
@@ -33115,6 +33118,23 @@
                 "publisher": "O*NET OnLine；原始BLS OEWS",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localwages/19-3099.00?p=annual&st=CA"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "准备｜定义研究问题｜列区域、目标、指标与研究边界。 — 50/100; weight=1/3; transportation-planners.display.responsibilities_block.01[0]",
+                  "分析｜制作情景比较｜保留基线、公式、预算及各组差异。 — 75/100; weight=1/3; transportation-planners.display.responsibilities_block.03[0]",
+                  "协作｜解释方案取舍｜整理真实意见，说明结论与未知需求。 — 25/100; weight=1/3; transportation-planners.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38382,7 +38402,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38542,15 +38562,27 @@
         "source_refs": [
           "china-wage-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "运输规划师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC19-3099.01任务；统计为SOC19-3099母类",
@@ -38601,7 +38633,7 @@
       "text": "运输规划师"
     }
   },
-  "source_content_sha256": "46bc8ed7387b8c8a8a7bf5f0b5fb20b3eaf2b815835808cf8d12e8c67cddb8ec",
+  "source_content_sha256": "bb8a866f090766df4842906535097aa9ad72658883a8a3e61f4e0aba291b0e76",
   "subject": {
     "canonical_slug": "transportation-planners",
     "name": "运输规划师",

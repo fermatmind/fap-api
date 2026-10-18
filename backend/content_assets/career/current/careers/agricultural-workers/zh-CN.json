@@ -38,6 +38,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24794,7 +24797,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务级编辑讨论：自动化可辅助部分记录或设备作业，实际能力、组织采用与岗位变化须分别核。BLS机械化描述不是本合集AI因果研究；证据不足：未取得AI采用率、替代比例和效果估计，不能预测整体取代或保证全部现场任务永久由人完成。"
+              "任务级编辑讨论：自动化可辅助部分记录或设备作业，实际能力、组织采用与岗位变化须分别核。BLS机械化描述不是本合集AI因果研究；证据不足：未取得AI采用率、替代比例和效果估计，不能预测整体取代或保证全部现场任务永久由人完成。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "agricultural-workers.ai-impact.ai-impact-table.18",
@@ -32722,6 +32725,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent",
                 "url": "https://www.bls.gov/emp/documentation/definitions.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "作物作业｜种植与采收｜按安排整地、播种、移栽、除草、灌溉与采收，按规格分拣与包装。 — 0/100; weight=1/3; agricultural-workers.profile.responsibilities-block.1[0]",
+                  "动物饲养｜喂养与照料｜按计划喂养供水、清理圈舍、赶运畜禽并观察进食与健康状况。 — 0/100; weight=1/3; agricultural-workers.profile.responsibilities-block.1[2]",
+                  "机具操作｜作业与维护｜操作拖拉机、收获机具与灌溉设备，班前检查并做日常保养与清洁。 — 25/100; weight=1/3; agricultural-workers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37623,7 +37643,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38064,15 +38084,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "农业从业人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "任务：种植与采收 · 动物饲养照料 · 机具操作",
@@ -38123,7 +38155,7 @@
       "text": "农业从业人员：职业内容、薪资与就业前景"
     }
   },
-  "source_content_sha256": "8fc217e59fc75e424ac37b12cb140281faf5c4cdcdedd332d15c51bc38dafe12",
+  "source_content_sha256": "6a7843716e32e7af008e242e5d0bcb100483fc3fc283d22f9053fcbe86c8e464",
   "subject": {
     "canonical_slug": "agricultural-workers",
     "name": "农业从业人员",

@@ -11,6 +11,9 @@
       "fact:credential-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "mapped"
       },
@@ -13772,6 +13775,23 @@
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Listen to engine operation, inspect frames and components, or consult customers to determine fault scope, and measure engine performance indicators — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Dismantle engines and repair or replace parts such as magnetos, carburetors, and generators; grind valves and remove carbon deposits — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Accurately record test data, replaced parts, and test-ride results, and manage parts and work orders — 75/100; weight=1/3; display.ai_impact_table.task_rows.6[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13962,7 +13982,7 @@
             }
           }
         ],
-        "answer": "Motorcycle mechanics may receive assistance with repair work orders and parts catalog searches, fault code and test data organization, maintenance plan and parts inventory management, repair documentation summaries, and drafting customer explanations. Accountable people must still handle on-site disassembly, assembly, and diagnostic judgments, torque and calibration execution, test-ride verification, and safety confirmation. Technological exposure does not equal job replacement.",
+        "answer": "Motorcycle mechanics may receive assistance with repair work orders and parts catalog searches, fault code and test data organization, maintenance plan and parts inventory management, repair documentation summaries, and drafting customer explanations. Accountable people must still handle on-site disassembly, assembly, and diagnostic judgments, torque and calibration execution, test-ride verification, and safety confirmation. Technological exposure does not equal job replacement. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 49-3052.00 occupational profile",
@@ -15711,7 +15731,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -15835,15 +15855,27 @@
         "source_refs": [
           "source-pack-onet-localcert"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Motorcycle Mechanics",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Fault diagnosis and disassembly inspection",
@@ -15894,7 +15926,7 @@
       "text": "Motorcycle Mechanics"
     }
   },
-  "source_content_sha256": "1dd85fb161c540181d0a1c5e058fd91f8132bf8e4d9519e56a35be79ed7dd5c2",
+  "source_content_sha256": "3a455a3dd3491d3acb1c1c1cc03e4952409770e668ef341b4131724ea736c902",
   "subject": {
     "canonical_slug": "motorcycle-mechanics",
     "name": "Motorcycle Mechanics",

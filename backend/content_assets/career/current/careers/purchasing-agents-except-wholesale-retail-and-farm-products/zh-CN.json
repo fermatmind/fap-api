@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24756,7 +24759,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本次查阅的ILO、学术论文、WEF与官方职业资料未提供精确采购员13-1023的AI采用率、裁员率或替代年份。任务暴露研究只能说明潜在影响；采购中核规格、比较供应条件、协商和处理履约差异仍需结合产品事实与组织授权。以下工具用途是编辑提出的试用方案，不能当作已经实现的效率提升或岗位结果。"
+              "证据不足：本次查阅的ILO、学术论文、WEF与官方职业资料未提供精确采购员13-1023的AI采用率、裁员率或替代年份。任务暴露研究只能说明潜在影响；采购中核规格、比较供应条件、协商和处理履约差异仍需结合产品事实与组织授权。以下工具用途是编辑提出的试用方案，不能当作已经实现的效率提升或岗位结果。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "purchasing-agents-except-wholesale-retail-and-farm-products.ai-impact.ai-impact-table.18",
@@ -32448,6 +32451,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3071.04"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "提取采购需求的规格和数量 — 75/100; weight=1/3; purchasing-agents-except-wholesale-retail-and-farm-products.ai-impact.ai-impact-table.95[0]",
+                  "整理两家报价的费用覆盖 — 75/100; weight=1/3; purchasing-agents-except-wholesale-retail-and-farm-products.ai-impact.ai-impact-table.99[0]",
+                  "整理延期与质量差异记录 — 50/100; weight=1/3; purchasing-agents-except-wholesale-retail-and-farm-products.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37353,7 +37373,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37621,15 +37641,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "采购员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "采购员 · 任务核对",
@@ -37680,7 +37712,7 @@
       "text": "采购员"
     }
   },
-  "source_content_sha256": "8c474504c50cd6589f8aafabdb3208ea06f08540d90485eb48e2def07c3247ab",
+  "source_content_sha256": "c3c6f7621ddf9e2eb2e2685b7f749365dedfd026f0a4a902c6c3fb22fe071abf",
   "subject": {
     "canonical_slug": "purchasing-agents-except-wholesale-retail-and-farm-products",
     "name": "采购员",

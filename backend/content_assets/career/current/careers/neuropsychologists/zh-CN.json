@@ -23,6 +23,9 @@
       "fact:education-profile": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "mapped"
       },
@@ -13678,6 +13681,23 @@
                 "publisher": "心理治疗规范2013官方PDF",
                 "scope": "contextual",
                 "url": "https://ncmhc.org.cn/channel/downfile/fyxxVjVgP"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "访谈患者与知情者并采集全面病史 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "选择并实施标准化神经心理测验 — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "记分、整合与解释测验剖面 — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13865,7 +13885,7 @@
             }
           }
         ],
-        "answer": "工具可辅助病史与转诊摘要、测验清单核对、报告格式检查与教育材料草稿，但测验选择、施测与记分、剖面解释、诊断结论与报告签发仍由取得资格并在督导体系内工作的人员负责。",
+        "answer": "工具可辅助病史与转诊摘要、测验清单核对、报告格式检查与教育材料草稿，但测验选择、施测与记分、剖面解释、诊断结论与报告签发仍由取得资格并在督导体系内工作的人员负责。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET 19-3039.02 职业档案",
@@ -15614,7 +15634,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15863,15 +15883,27 @@
           "onet-wages",
           "source-pack-onet-details"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "神经心理学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "神经心理测评与临床报告",
@@ -15922,7 +15954,7 @@
       "text": "神经心理学家"
     }
   },
-  "source_content_sha256": "44bfce284f88d1fe540000e23fa639ca1437b5112a66db076be35a909b1dfa3a",
+  "source_content_sha256": "53ca8d45be5e6a7f3396feddde178b19d6fb4bc930cfabdd69f4a78128ea0095",
   "subject": {
     "canonical_slug": "neuropsychologists",
     "name": "神经心理学家",

@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24310,7 +24313,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮核到部分任务档案、Context评分、招聘关键词及规则，未取得本岗AI上线效率实验。材料归集、缺项、比对、模板为编辑可试方向，须验证准确与权限。自动化决定是否复审及通知按法域，不一概说依赖人工。中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。 美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
+              "本轮核到部分任务档案、Context评分、招聘关键词及规则，未取得本岗AI上线效率实验。材料归集、缺项、比对、模板为编辑可试方向，须验证准确与权限。自动化决定是否复审及通知按法域，不一概说依赖人工。中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。 美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31791,6 +31794,23 @@
                 "publisher": "中国政府官方网站",
                 "scope": "proxy",
                 "url": "https://credit.mot.gov.cn/zhengcefagui/202408/t20240807_4147083.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "美国Core：电话或面谈访谈，收集信用报告所需个人财务资料；具体数据取得处理必须当地合法获准。 — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "美国获取银行等信用服务信息并相互提供为Core；公开记录核实为Supplemental；前雇主等核推荐就业健康社会行为为New。征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。 — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "美国汇总分析调查信用资料为Core；预定标准批准新信用为Supplemental；调查建议报告为New。分档非频率或中国授权。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37215,7 +37235,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37459,15 +37479,27 @@
         "source_refs": [
           "r2-pay-3"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "信贷授权员、核查员、文员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "金融与商务服务 · 信贷授权与信用核查",
@@ -37518,7 +37550,7 @@
       "text": "信贷授权员、核查员、文员"
     }
   },
-  "source_content_sha256": "634eddeb51999c001acbd4653e75ba6e2201f5167f4c63ab230e874562aba538",
+  "source_content_sha256": "ddccf3daf70673a995a5504e9e66a8cd186e7f71e4f1a2ec4f983604845a7cde",
   "subject": {
     "canonical_slug": "credit-authorizers-checkers-and-clerks",
     "name": "信贷授权员、核查员、文员",

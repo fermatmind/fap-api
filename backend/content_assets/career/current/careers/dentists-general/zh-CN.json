@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24288,7 +24291,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得牙医大类AI采用或岗位效果资料。BLS列设备和不同专科定义，不证明影像软件、CAD/CAM或导航长期采用；本页任务变化是有条件编辑推演，不是统一官方任务或AI造成就业增长的结论。"
+              "证据不足：未取得牙医大类AI采用或岗位效果资料。BLS列设备和不同专科定义，不证明影像软件、CAD/CAM或导航长期采用；本页任务变化是有条件编辑推演，不是统一官方任务或AI造成就业增长的结论。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -32122,6 +32125,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1022.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "核对主诉、现病史、全身疾病与用药及过敏史、既往口腔治疗记录与影像，缺项先补齐再制定治疗计划。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "完成口内检查与影像判读，形成诊断与治疗计划，向患者说明预期效果、疗程、费用、风险与替代方案并取得知情同意。 — 50/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "在隔离与防护条件下实施麻醉与操作，必要时开具处方或委托技工室制作修复体，并逐次记录操作与用药。 — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37498,7 +37518,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37646,15 +37666,27 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "牙医",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "具体方向分别看 · 临床/报告/人群预防",
@@ -37705,7 +37737,7 @@
       "text": "牙医"
     }
   },
-  "source_content_sha256": "6d5114c8196ec14c4ded9631138cb225830df112038b3bd9601918db7c895868",
+  "source_content_sha256": "0857ab0ab1b62c85742b112fb5c0a32d25f8c38617daa4dbe32790af3d3d0bb3",
   "subject": {
     "canonical_slug": "dentists-general",
     "name": "牙医",

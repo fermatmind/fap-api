@@ -8,6 +8,9 @@
       "fact:cn-transport-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25595,7 +25598,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先区分文字记录辅助、设备自动化和就业结果。编辑建议把AI用于虚构核单问题与摘要草稿，人工复核编号、单位、算式和状态；真实装卸的控制及放行责任仍按现场制度。任务档案、就业预测和通用风险资料都不证明行业采用率，因此本页不填替代分数。"
+              "先区分文字记录辅助、设备自动化和就业结果。编辑建议把AI用于虚构核单问题与摘要草稿，人工复核编号、单位、算式和状态；真实装卸的控制及放行责任仍按现场制度。任务档案、就业预测和通用风险资料都不证明行业采用率，因此本页不填替代分数。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "tank-car-truck-and-ship-loaders.display.ai_impact_table.answer",
@@ -33782,6 +33785,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "核对｜物料与载具识别｜按装卸指令核对载具位置、识别号和物料，检查当前任务对应的记录与条件。 — 25/100; weight=1/3; tank-car-truck-and-ship-loaders.display.responsibilities_block.01[0]",
+                  "装卸｜按程序使用搬运设备｜根据物料、设备及现场授权执行装卸，观察输送状态并与团队协调；本页不给实际设备操作步骤。 — 0/100; weight=1/3; tank-car-truck-and-ship-loaders.display.responsibilities_block.02[0]",
+                  "计量｜数量与取样记录｜岗位可能涉及计量、取样和检测；方法、器具与授权按具体物料程序确定，记录保留单位和批次。 — 50/100; weight=1/3; tank-car-truck-and-ship-loaders.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39033,7 +39053,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -39193,15 +39213,27 @@
         "source_refs": [
           "nbs-transport-context-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "油罐车/卡车/船舶装卸工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 53-7121.00 精确职业口径",
@@ -39252,7 +39284,7 @@
       "text": "油罐车/卡车/船舶装卸工"
     }
   },
-  "source_content_sha256": "3c1d54dde540b2a58e4a78538f4c13c1cbc9d8be4bea149133989e5971cbe258",
+  "source_content_sha256": "d2da878c710d724fb7e5fc723600d80e0c67343eb0093d1155f997f76cec7031",
   "subject": {
     "canonical_slug": "tank-car-truck-and-ship-loaders",
     "name": "铁路罐车、卡车与船舶装卸工",

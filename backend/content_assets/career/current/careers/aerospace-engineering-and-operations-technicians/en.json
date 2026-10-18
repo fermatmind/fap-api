@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24760,7 +24763,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This occupation's tasks include configuring, installing and calibrating instruments, running tests, diagnosing faults, and recording and interpreting data. This page suggests exploring tool assistance for organising, script drafting and record comparison on fictional data; no AI adoption rate, time saved or job-displacement ratio for this occupation was obtained. O*NET's accuracy and protective-equipment context does not constitute a measurement of AI effect; safety boundaries, approval and signing must be verified against the organisation's authority."
+              "This occupation's tasks include configuring, installing and calibrating instruments, running tests, diagnosing faults, and recording and interpreting data. This page suggests exploring tool assistance for organising, script drafting and record comparison on fictional data; no AI adoption rate, time saved or job-displacement ratio for this occupation was obtained. O*NET's accuracy and protective-equipment context does not constitute a measurement of AI effect; safety boundaries, approval and signing must be verified against the organisation's authority. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.18",
@@ -32415,6 +32418,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/17-3021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Test｜Equipment preparation and calibration｜Prepare test equipment to specification, verify the measurement chain and ranges, and record calibration status. — 25/100; weight=1/3; aerospace-engineering-and-operations-technicians.profile.responsibilities-block.1[0]",
+                  "Test｜Test execution and data collection｜Configure acquisition parameters, run the specified operating conditions and collect traceable test data. — 25/100; weight=1/3; aerospace-engineering-and-operations-technicians.profile.responsibilities-block.1[1]",
+                  "Data｜Data verification and anomaly handling｜Verify values, units and periods, record anomalies and provide retest recommendations. — 75/100; weight=1/3; aerospace-engineering-and-operations-technicians.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37321,7 +37341,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -37673,15 +37693,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Aerospace engineering and operations technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RCI",
@@ -37732,7 +37764,7 @@
       "text": "Aerospace engineering and operations technicians"
     }
   },
-  "source_content_sha256": "e53e075dc2b36cdfba9c34280f410514f64e7ca50c6f618bfb012f9e12a6f8c3",
+  "source_content_sha256": "899bb21a9a4bcb0dec800e00253cae8a5da67574a58ca038e80cc58305e2cf3c",
   "subject": {
     "canonical_slug": "aerospace-engineering-and-operations-technicians",
     "name": "Aerospace engineering and operations technicians",

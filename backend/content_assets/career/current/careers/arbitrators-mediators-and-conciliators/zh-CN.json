@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24776,7 +24779,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "SVAMC2024第一版仲裁AI指南为行业建议，依当事人同意和/或仲裁庭、机构采用而适用，不减法定或其他强制规则；关注工具限制、保密、核验输出与证据完整性、仲裁员不委托个人裁决职责及正当程序。 不能证明23-1022采用率、跨任务效果、工资就业因果或中国法定授权；检索、摘要和台账为编辑辅助核问，职业预测不归因AI。"
+              "SVAMC2024第一版仲裁AI指南为行业建议，依当事人同意和/或仲裁庭、机构采用而适用，不减法定或其他强制规则；关注工具限制、保密、核验输出与证据完整性、仲裁员不委托个人裁决职责及正当程序。 不能证明23-1022采用率、跨任务效果、工资就业因果或中国法定授权；检索、摘要和台账为编辑辅助核问，职业预测不归因AI。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.18",
@@ -32586,6 +32589,23 @@
                 "publisher": "Silicon Valley Arbitration & Mediation Center",
                 "scope": "contextual",
                 "url": "https://svamc.org/wp-content/uploads/SVAMC-AI-Guidelines-First-Edition.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "案件材料审查与事实梳理｜先把材料与争点固定下来｜审查索赔申请、合同、证明、出生或死亡证明、医师或雇主记录等材料，与争议方沟通澄清争点并识别各方真实需要与利益。 — 75/100; weight=1/3; arbitrators-mediators-and-conciliators.profile.responsibilities-block.1[0]",
+                  "听证与调解会议主持｜按程序推进并保持中立｜主持听证以获取信息或证据，裁定异议、动议与证据可采性，或主持调解会议并运用调解技巧促进沟通与理解。 — 25/100; weight=1/3; arbitrators-mediators-and-conciliators.profile.responsibilities-block.1[2]",
+                  "裁决与文书撰写｜按规范出具可复核文书｜撰写书面意见或裁决并说明认定事实、依据与理由，撰写案件记录与程序文书，并按要求准备出庭或作证材料。 — 50/100; weight=1/3; arbitrators-mediators-and-conciliators.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37487,7 +37507,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37973,15 +37993,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "仲裁员、调解员与和解员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "争议处理：材料审查与法律适用 · 听证与调解主持 · 裁决或和解协议与案件档案",
@@ -38032,7 +38064,7 @@
       "text": "仲裁员、调解员与和解员"
     }
   },
-  "source_content_sha256": "7b394299320c54c55429f04e236a3be62d6abf82efc20dba326dc9b48dc9e1ee",
+  "source_content_sha256": "deb4fc8aa514495bd84cfcd3e638fcc143595be0e26ef93c38eb03665267484c",
   "subject": {
     "canonical_slug": "arbitrators-mediators-and-conciliators",
     "name": "仲裁员、调解员与和解员",

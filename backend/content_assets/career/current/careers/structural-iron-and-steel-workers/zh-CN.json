@@ -11,6 +11,9 @@
       "fact:cn-construction-private-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25461,7 +25464,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未获得钢结构铁工AI实际采用率、省时或净替代率的职业研究，也未形成可复核FermatMind任务级评分。文字和清单辅助是编辑设想，不填写分数或个人失业概率。"
+              "证据不足：本轮未获得钢结构铁工AI实际采用率、省时或净替代率的职业研究，也未形成可复核FermatMind任务级评分。文字和清单辅助是编辑设想，另列编辑估算分数或个人失业概率。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "structural-iron-and-steel-workers.display.ai_impact_table.answer",
@@ -32589,6 +32592,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "读图｜核图样与构件｜按规格或图样确定梁柱等材料的位置、数量和尺寸，确认当前版本。 — 50/100; weight=1/3; structural-iron-and-steel-workers.display.responsibilities_block.01[0]",
+                  "定位｜参与构件就位｜在获准工序中协作吊起和放置构件，不擅自改变方案或信号约定。 — 0/100; weight=1/3; structural-iron-and-steel-workers.display.responsibilities_block.03[0]",
+                  "连接｜按图样与获准工艺｜按实际方案参与螺栓连接等工作，焊接等专项任务与培训分别核。 — 0/100; weight=1/3; structural-iron-and-steel-workers.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37890,7 +37910,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38063,15 +38083,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "钢结构铁工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "钢结构现场安装",
@@ -38122,7 +38154,7 @@
       "text": "钢结构铁工"
     }
   },
-  "source_content_sha256": "677915a8bbf872e88e71f2e0f593885bcae67385fb90aefec4525452b3790bce",
+  "source_content_sha256": "105fa68e66765dd170b48ea81a17aac9eb81f4e9b769d096bfd1e38d5ca032e6",
   "subject": {
     "canonical_slug": "structural-iron-and-steel-workers",
     "name": "钢结构铁工",

@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24727,7 +24730,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no measurement of this occupation's actual AI adoption rate, efficiency gain, or displacement rate. Retrieval, document first drafts, and ledger organizing can be trialed on fictional materials with errors and review costs checked; task exposure, actual adoption, and employment projections are different objects."
+              "Insufficient evidence: this round obtained no measurement of this occupation's actual AI adoption rate, efficiency gain, or displacement rate. Retrieval, document first drafts, and ledger organizing can be trialed on fictional materials with errors and review costs checked; task exposure, actual adoption, and employment projections are different objects. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "cargo-and-freight-agents.ai-impact.ai-impact-table.18",
@@ -31579,6 +31582,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/43-5032.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Orders and quotations｜Taking orders from customers and confirming deadlines and service requirements, negotiating and arranging transport with shipping or freight companies, and estimating freight charges and giving a solution and quotation｜Inquiry and quotation and booking records. — 75/100; weight=1/3; cargo-and-freight-agents.profile.responsibilities-block.1[0]",
+                  "Documents and compliance｜Determining the transport mode and preparing bills of lading and invoices and other transport documents, checking import and export documents and classifying goods with tariff codes, and arranging cargo insurance｜Bill of lading and document check and classification records. — 75/100; weight=1/3; cargo-and-freight-agents.profile.responsibilities-block.1[1]",
+                  "Receiving and differences｜Checking and tallying received goods against invoices, recording shortages and rejecting damaged goods, and contacting suppliers or the claims department｜Receiving check and shortage and rejection records. — 25/100; weight=1/3; cargo-and-freight-agents.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36496,7 +36516,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -36764,15 +36784,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Cargo and freight",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 43-5011.00 · orders and quotations / documents and compliance / milestones and exceptions",
@@ -36823,7 +36855,7 @@
       "text": "Cargo and freight"
     }
   },
-  "source_content_sha256": "25437f970611497dbc503ad490caea72c50e4745989a7cac019fb55bb627e254",
+  "source_content_sha256": "4fc4a7ea2d7a8d3f27edc9ee3f1d565b6bc4f400d4645e3508a7a21837b38bce",
   "subject": {
     "canonical_slug": "cargo-and-freight-agents",
     "name": "Cargo and freight",

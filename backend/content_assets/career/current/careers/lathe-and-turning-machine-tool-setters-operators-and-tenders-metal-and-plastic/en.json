@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -7575,7 +7578,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the generative AI adoption rate, efficiency gains, and wage causality for lathe operators were not established this round. Conventional CNC, CAM, and in-line monitoring are not the same as generative AI. This round obtained no generative AI adoption rate, efficiency gain, or wage causality for lathe operators; it may be trialed in fictional record organization, with the original records checked item by item, and it must not execute generated programs or change real parameters on model advice. Setup, measurement, safety, and authorization are still verified by the actual responsible person."
+              "Insufficient evidence: the generative AI adoption rate, efficiency gains, and wage causality for lathe operators were not established this round. Conventional CNC, CAM, and in-line monitoring are not the same as generative AI. This round obtained no generative AI adoption rate, efficiency gain, or wage causality for lathe operators; it may be trialed in fictional record organization, with the original records checked item by item, and it must not execute generated programs or change real parameters on model advice. Setup, measurement, safety, and authorization are still verified by the actual responsible person. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.2",
@@ -8996,6 +8999,23 @@
                 "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-2021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Read drawings and set up turning tools — 25/100; weight=1/3; lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.responsibilities-block.4[0]",
+                  "Machine workpieces on a lathe — 25/100; weight=1/3; lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.responsibilities-block.4[0]",
+                  "Measure stopped workpieces and check quality — 25/100; weight=1/3; lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11415,7 +11435,7 @@
     ],
     "path": "/en/career/jobs/lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11587,15 +11607,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Lathe operator",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Lathe operator · turning work, dimensional control, and work safety",
@@ -11646,7 +11678,7 @@
       "text": "Lathe operator career judgment: turning work, dimensional control, and work safety"
     }
   },
-  "source_content_sha256": "e2e8ee5b82830daab013eb2de842db3c6b641f228ec3b7c355f497ecc3491817",
+  "source_content_sha256": "5d2ab058fcb83e8b1c020f16e9935204af427bab6bc5299ed4101a96f41023cf",
   "subject": {
     "canonical_slug": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic",
     "name": "Lathe operator",

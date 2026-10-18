@@ -8,6 +8,9 @@
       "fact:cn-management-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25659,7 +25662,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Separate the text performance in this exercise, real company adoption, business results and employment consequences. This page does not fill in a FermatMind occupational task score, does not predict an individual's probability of unemployment and does not make decisions for a company."
+              "Separate the text performance in this exercise, real company adoption, business results and employment consequences. This page shows a separate FermatMind editorial estimate, does not predict an individual's probability of unemployment and does not make decisions for a company. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "supply-chain-managers.display.ai_impact_table.answer",
@@ -33685,6 +33688,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Planning | Demand and supply coordination | Form a proposal against orders, capacity and material status, noting assumptions, limits and confirmation status. — 75/100; weight=1/3; supply-chain-managers.display.responsibilities_block.01[0]",
+                  "Suppliers | Quality, delivery and negotiation | Evaluate performance, communicate improvements and business terms, and handle contracts under real authority. — 25/100; weight=1/3; supply-chain-managers.display.responsibilities_block.03[0]",
+                  "Metrics | Cost, quality and service | Define consistent metrics for comparison and evaluation, and avoid improvements created by changing the denominator or the reporting period. — 75/100; weight=1/3; supply-chain-managers.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38990,7 +39010,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -39152,15 +39172,27 @@
         "source_refs": [
           "nbs-management-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Supply chain managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "U.S. 11-3071.04 subdivision",
@@ -39211,7 +39243,7 @@
       "text": "Supply chain managers"
     }
   },
-  "source_content_sha256": "ee50a4cd2c1b2bc497d7e57ac0fd0e6999d0fc2ea40ff57558a703e3261249ea",
+  "source_content_sha256": "9ddd88b0012dee28bfd75e25b546ffe70c96c39a56e33a96389e73b6607d1065",
   "subject": {
     "canonical_slug": "supply-chain-managers",
     "name": "Supply chain managers",

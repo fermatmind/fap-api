@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24052,7 +24055,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Code searching, report drafting, and photo archiving assistance can be trialed; on-site determinations, evidence, and decision authority must be verified according to the actual agency and jurisdiction, and actual adoption or efficiency effects have not been verified."
+              "Code searching, report drafting, and photo archiving assistance can be trialed; on-site determinations, evidence, and decision authority must be verified according to the actual agency and jurisdiction, and actual adoption or efficiency effects have not been verified. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "fire-inspectors-and-investigators.ai-impact.ai-impact-table.18",
@@ -31454,6 +31457,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Conduct fire code inspections of buildings and premises and record hazards and violations — 25/100; weight=1/3; fire-inspectors-and-investigators.ai-impact.ai-impact-table.95[0]",
+                  "Examine fire and explosion scenes and collect, seal, and submit physical evidence — 0/100; weight=1/3; fire-inspectors-and-investigators.ai-impact.ai-impact-table.107[0]",
+                  "Analyze evidence and test results to determine the probable cause of fires and explosions — 50/100; weight=1/3; fire-inspectors-and-investigators.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36356,7 +36376,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -36625,15 +36645,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Fire Inspectors and Investigators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Fire Inspectors and Investigators · official occupational scope (33-2021.00)",
@@ -36684,7 +36716,7 @@
       "text": "Fire Inspectors and Investigators"
     }
   },
-  "source_content_sha256": "45cdbb7e991966084723fee720dd495ee82a95b025a0e4948974da96a7645afd",
+  "source_content_sha256": "ebec8038f27da1428ee0a99b8d592508b714f8a1b48c60c38723fe6590c34b15",
   "subject": {
     "canonical_slug": "fire-inspectors-and-investigators",
     "name": "Fire Inspectors and Investigators",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24757,7 +24760,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得制材工单列AI采用率、替代率或消失年份证据。现有研究主要测量跨职业任务暴露或雇主预期，不是本职业裁员率。作为任务级编辑观察，AI可辅助记录摘要、规格检索和异常分类；木料判断、机台状态、护罩与刀具安全、成品尺寸验收仍须受训人员现场核实。"
+              "证据不足：本页未取得制材工单列AI采用率、替代率或消失年份证据。现有研究主要测量跨职业任务暴露或雇主预期，不是本职业裁员率。作为任务级编辑观察，AI可辅助记录摘要、规格检索和异常分类；木料判断、机台状态、护罩与刀具安全、成品尺寸验收仍须受训人员现场核实。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "sawing-machine-setters-operators-and-tenders-wood.ai-impact.ai-impact-table.18",
@@ -32591,6 +32594,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "锯机设置准备｜按设备规程与授权核对锯片、导向、护罩和进料路径，必要时由有权限人员调整。｜输出开机前检查记录，不越权维修。 — 25/100; weight=1/3; sawing-machine-setters-operators-and-tenders-wood.profile.responsibilities-block.1[1]",
+                  "木材锯切与进料｜在获培训授权的范围内操作或看护锯机，按尺寸引导木料并监控设备运行。｜输出切后工件和过程记录。 — 25/100; weight=1/3; sawing-machine-setters-operators-and-tenders-wood.profile.responsibilities-block.1[2]",
+                  "尺寸与外观检验｜用量具核对切割尺寸、直线度或可见缺陷，并标记超差工件。｜输出逐件检验结果和隔离/返工信息。 — 25/100; weight=1/3; sawing-machine-setters-operators-and-tenders-wood.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37499,7 +37519,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37770,15 +37790,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "制材工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "制材工 · 任务拆分 · 结果复核",
@@ -37829,7 +37861,7 @@
       "text": "制材工"
     }
   },
-  "source_content_sha256": "1f7faac1b397e4d52c7b604e26dfbe115476696316db05bd9b2d8eaa5df3a2b2",
+  "source_content_sha256": "6ac000493d6b00366e07fa05beee718c679ed689eebbb153f3abbcaa4959c32c",
   "subject": {
     "canonical_slug": "sawing-machine-setters-operators-and-tenders-wood",
     "name": "制材工",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24755,7 +24758,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得销售工程师AI采用率、替代率或就业因果效果。信息整理可辅助试验，客户需求、真实能力、商业条件和交付仍需人判断。"
+              "证据不足：本页未取得销售工程师AI采用率、替代率或就业因果效果。信息整理可辅助试验，客户需求、真实能力、商业条件和交付仍需人判断。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "sales-engineers.ai-impact.ai-impact-table.18",
@@ -32539,6 +32542,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/sales/sales-engineers.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "技术需求｜核客户工况、接口、性能、预算和验收条件。｜输出需求矩阵与待澄清项，保留未知项。 — 50/100; weight=1/3; sales-engineers.profile.responsibilities-block.1[0]",
+                  "方案建议｜依据产品资料准备针对客户的方案与投标答复。｜输出带版本和限制的技术方案，保留未知项。 — 75/100; weight=1/3; sales-engineers.profile.responsibilities-block.1[1]",
+                  "演示试用｜安排演示、样机或试装并明确测试边界。｜输出演示计划、结果和未覆盖条件，保留未知项。 — 25/100; weight=1/3; sales-engineers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37447,7 +37467,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37715,15 +37735,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "销售工程师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "技术需求 · 方案建议 · 演示试用",
@@ -37774,7 +37806,7 @@
       "text": "销售工程师"
     }
   },
-  "source_content_sha256": "2c0d1011b03d5874a87940076ed2b3c836365157b859fd1f95c5e75cae5bc377",
+  "source_content_sha256": "931eef86db5c782a969cb76f3186cb179a761cb6c7b4818e05ab49b26d168105",
   "subject": {
     "canonical_slug": "sales-engineers",
     "name": "销售工程师",

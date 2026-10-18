@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25316,7 +25319,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no precise generative AI exposure level, adoption or substitution rate or income causality for this occupation was obtained. The detail page's 7 software categories and the hot technologies page's 7 software items are shown separately: Excel27% and Outlook26% are on the hot page, while Access, ASP, Office, PowerPoint and Word are NA. The shares come from 2025 US Lightcast occupation-linked independent job advertisement mentions and are not usage rates, AI adoption rates or ability for this occupation. Editorial trial suggestions are limited to synthetic data tables, retrieval and record drafts, with each value reviewed; optical or weighing sorting differs from generative AI, and widespread adoption or medium-to-high exposure cannot be inferred from software mentions, work context or decline projections. O*NET57 context responses are category responses: standing 79, repetitive motions 73 and handwork 72% continually, face-to-face contact 65, controlled indoor environment 81, PPE76 and strict time limits 60% daily; equipment pace 49% extremely important. Typical weekly hours: 43% more than 40, 40% exactly 40 and 17% fewer than 40; 66% fixed and 24% not fixed. Automation: 11% highly, 31% moderately, 33% slightly and 24% not at all automated, which is not generative AI exposure. Very hot or cold 24% daily and 66% never; it cannot be said that everyone works in cold chains, is a seasonal worker or faces a given accident frequency."
+              "Insufficient evidence: no precise generative AI exposure level, adoption or substitution rate or income causality for this occupation was obtained. The detail page's 7 software categories and the hot technologies page's 7 software items are shown separately: Excel27% and Outlook26% are on the hot page, while Access, ASP, Office, PowerPoint and Word are NA. The shares come from 2025 US Lightcast occupation-linked independent job advertisement mentions and are not usage rates, AI adoption rates or ability for this occupation. Editorial trial suggestions are limited to synthetic data tables, retrieval and record drafts, with each value reviewed; optical or weighing sorting differs from generative AI, and widespread adoption or medium-to-high exposure cannot be inferred from software mentions, work context or decline projections. O*NET57 context responses are category responses: standing 79, repetitive motions 73 and handwork 72% continually, face-to-face contact 65, controlled indoor environment 81, PPE76 and strict time limits 60% daily; equipment pace 49% extremely important. Typical weekly hours: 43% more than 40, 40% exactly 40 and 17% fewer than 40; 66% fixed and 24% not fixed. Automation: 11% highly, 31% moderately, 33% slightly and 24% not at all automated, which is not generative AI exposure. Very hot or cold 24% daily and 66% never; it cannot be said that everyone works in cold chains, is a seasonal worker or faces a given accident frequency. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "graders-and-sorters-agricultural-products.ai-impact.ai-impact-table.18",
@@ -34035,6 +34038,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "45-2041.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/45-2041.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Grading and determination — 50/100; weight=1/3; graders-and-sorters-agricultural-products.ai-impact.ai-impact-table.95[0]",
+                  "Sorting and removal — 25/100; weight=1/3; graders-and-sorters-agricultural-products.ai-impact.ai-impact-table.99[0]",
+                  "Records and traceability — 75/100; weight=1/3; graders-and-sorters-agricultural-products.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38975,7 +38995,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -39123,15 +39143,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Graders and Sorters, Agricultural Products",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Graders and Sorters, Agricultural Products · tasks, deliverables, and responsibility boundaries",
@@ -39182,7 +39214,7 @@
       "text": "Graders and Sorters, Agricultural Products"
     }
   },
-  "source_content_sha256": "f50314a9d28493388528d69a9e8e4b7ce5481807d05d21b4517645512b601ed2",
+  "source_content_sha256": "3dafb266113871a3b825f05748958b123548d980aba357cc40921fe6f3e1f798",
   "subject": {
     "canonical_slug": "graders-and-sorters-agricultural-products",
     "name": "Graders and Sorters, Agricultural Products",

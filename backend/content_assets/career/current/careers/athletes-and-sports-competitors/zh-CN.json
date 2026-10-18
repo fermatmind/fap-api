@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24257,7 +24260,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得本职业AI产品效果、采用率或就业因果。O*NET任务、招聘软件比例和BLS总体预测测量不同对象；ILO介绍/扩展摘要为跨职业暴露方法，NIST简介为自愿跨行业风险背景，未读全文及本职业映射。"
+              "本轮未取得本职业AI产品效果、采用率或就业因果。O*NET任务、招聘软件比例和BLS总体预测测量不同对象；ILO介绍/扩展摘要为跨职业暴露方法，NIST简介为自愿跨行业风险背景，未读全文及本职业映射。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "athletes-and-sports-competitors.ai-impact.ai-impact-table.18",
@@ -32289,6 +32292,23 @@
                 "publisher": "政府公开原文，锡林郭勒盟站点",
                 "scope": "contextual",
                 "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "训练与体能｜O*NET列按计划训练、维持体能及遵循营养计划或咨询健康专业人员；具体负荷和恢复条件须核本人医疗及训练安排。 — 25/100; weight=1/3; athletes-and-sports-competitors.profile.responsibilities-block.1[0]",
+                  "竞赛执行｜O*NET列按规则参赛及接受教练部署；注册、资格及反兴奋剂义务须核具体赛事适用规则。 — 0/100; weight=1/3; athletes-and-sports-competitors.profile.responsibilities-block.1[1]",
+                  "表现复盘｜O*NET列赛后识别优缺点并调整；记录为编辑核对建议，正式记录要求另核。 — 75/100; weight=1/3; athletes-and-sports-competitors.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37192,7 +37212,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37520,15 +37540,27 @@
         "source_refs": [
           "operations"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "运动员与体育竞赛选手",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 27-2021.00 · 无正式学历要求 · 长期在职训练",
@@ -37579,7 +37611,7 @@
       "text": "运动员与体育竞赛选手"
     }
   },
-  "source_content_sha256": "a005363eda7f7d7cc5dd0d28d451934ba66f904445fb82c722be8f20f206ed71",
+  "source_content_sha256": "0e7a68618589834bc7c67fe7f9b74d15caf65c61dedf9fab88ec5f1230acd900",
   "subject": {
     "canonical_slug": "athletes-and-sports-competitors",
     "name": "运动员与体育竞赛选手",

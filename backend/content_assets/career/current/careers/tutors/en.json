@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25470,7 +25473,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tools can be studied for assisting with generating questions, practice, or records, but humans still need to verify the knowledge, learning objectives, and material permissions. The specific math tutoring experiment provides learning result evidence and cannot yield a nationwide adoption rate or a date for teacher replacement."
+              "Tools can be studied for assisting with generating questions, practice, or records, but humans still need to verify the knowledge, learning objectives, and material permissions. The specific math tutoring experiment provides learning result evidence and cannot yield a nationwide adoption rate or a date for teacher replacement. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "tutors.display.ai_impact_table.answer",
@@ -32787,6 +32790,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Material preparation | Examples and practice | Choose materials that fit the objective and starting level, verify answers and difficulty, and avoid content with unclear copyright or unsuited to the grade level. — 75/100; weight=1/3; tutors.display.responsibilities_block.02[0]",
+                  "Teaching support | Explanation and prompts | Use questions, examples, and feedback to support understanding, gradually withdraw support, and protect independent work and academic integrity. — 25/100; weight=1/3; tutors.display.responsibilities_block.03[0]",
+                  "Learning strategies | Methods and plans | Support learning strategies such as reading, note-taking, review, and exam preparation, and adjust the plan with objectives and feedback. — 50/100; weight=1/3; tutors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38027,7 +38047,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38177,15 +38197,27 @@
           "employer",
           "r2-pay-3"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Tutors",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 25-3041.00 exact occupation basis",
@@ -38236,7 +38268,7 @@
       "text": "Tutors"
     }
   },
-  "source_content_sha256": "a6df6fd138d5a38a9da3c396fa5af2cd1b9dcad3be111159300c1adb0b0fe239",
+  "source_content_sha256": "706688d58d2531d31cb879d54a8330145ed4164cb0eebde15ef13552fde78b8f",
   "subject": {
     "canonical_slug": "tutors",
     "name": "Tutors",

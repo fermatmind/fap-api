@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25566,7 +25569,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未形成可复核的本职任务暴露分数，保持空值。任务背景、混合角色调查与评价方法分别解释，生成清单不等实际执行、独立采用率或岗位替代。"
+              "证据不足：未形成可复核的本职任务暴露分数，保持空值。任务背景、混合角色调查与评价方法分别解释，生成清单不等实际执行、独立采用率或岗位替代。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "veterinary-assistants-and-laboratory-animal-caretakers.display.ai_impact_table.answer",
@@ -33379,6 +33382,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "照护｜日常饲养｜按单位安排与规程提供日常照护，关注动物状态。 — 0/100; weight=1/3; veterinary-assistants-and-laboratory-animal-caretakers.display.responsibilities_block.01[0]",
+                  "清洁｜环境与物料｜维护场地和物料卫生，具体处置按培训及单位程序。 — 0/100; weight=1/3; veterinary-assistants-and-laboratory-animal-caretakers.display.responsibilities_block.02[0]",
+                  "观察｜动物与设施｜记录观察到的变化，及时反馈异常，不自行诊断。 — 25/100; weight=1/3; veterinary-assistants-and-laboratory-animal-caretakers.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38655,7 +38675,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38803,15 +38823,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "兽医助理与实验动物照护员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 31-9096.00",
@@ -38862,7 +38894,7 @@
       "text": "兽医助理与实验动物照护员"
     }
   },
-  "source_content_sha256": "acac415852eb10d484d1b8cef3dbe9b1ae7ee09f63da47b8b0c4af16e6495184",
+  "source_content_sha256": "0df67fd707283f57a90a8e275a890099d2a9111c9a2abd81ffaa562da4d98249",
   "subject": {
     "canonical_slug": "veterinary-assistants-and-laboratory-animal-caretakers",
     "name": "兽医助理与实验动物照护员",

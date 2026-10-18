@@ -89,6 +89,9 @@
       "fact:coat-nine-us-wage-p75-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24929,7 +24932,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET software and tasks and recruitment keywords support only the directory and mention information and cannot prove that generative AI can complete the work correctly or that the line invests continuously. Software Skills currently has 10 categories, including robotic painting, maintenance, inventory, MRP, scheduling, timekeeping, and office software; Hot2025 U.S. recruitment for 4 words: Office/Excel each 1%, Outlook/Word Not available, not 0, and the unique-mapping posting mention rate is not a use or AI adoption rate."
+              "O*NET software and tasks and recruitment keywords support only the directory and mention information and cannot prove that generative AI can complete the work correctly or that the line invests continuously. Software Skills currently has 10 categories, including robotic painting, maintenance, inventory, MRP, scheduling, timekeeping, and office software; Hot2025 U.S. recruitment for 4 words: Office/Excel each 1%, Outlook/Word Not available, not 0, and the unique-mapping posting mention rate is not a use or AI adoption rate. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "coating-painting-and-spraying-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.18",
@@ -33958,6 +33961,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/details/51-9192.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Setup and parameter setting｜Set up equipment to process and adjust parameters to a deliverable state｜Start and stop equipment, attach hoses or nozzles and adjust spray dispersion, turn knobs and handwheels and valves or switches to regulate conveyor speed and machine temperature and air pressure and circulation and coating flow, and weigh or measure chemicals and coating or paint before loading (corresponding to the ninth and eleventh and twelfth and eighteenth O*NET tasks). The new tasks also include using heating and ventilation equipment for drying according to the process. — 25/100; weight=1/3; coating-painting-and-spraying-machine-setters-operators-and-tenders.profile.responsibilities-block.1[0]",
+                  "Coating application｜Apply coating or paint to workpiece surfaces at the specified amounts｜Hold or adjust the direction of the spray gun to spray coating, spray primer and decorative or topcoat layers at the specified amounts, apply rust-preventive primer and caulk and seal seams, hand-touch up areas needing repair or that the gun cannot reach with a brush, and move workpieces through or around machine rollers and dryers (corresponding to the second and third and eighth and sixteenth and seventeenth O*NET tasks). The new tasks also include primer repair, body filler leveling, color matching and removal of old paint and oil and rust, and sanding and sealing a fully dried finish. — 0/100; weight=1/3; coating-painting-and-spraying-machine-setters-operators-and-tenders.profile.responsibilities-block.1[1]",
+                  "Appearance and quality judgment｜Identify defects and measure whether samples meet specifications｜Monitor the spray operation to identify defects such as blistering or streaks and correct their causes, observe machine gauges and equipment operation to find deviations from standards, judge paint flow and viscosity and coating quality by visual inspection or a viscometer, inspect and measure and weigh or test samples to confirm they meet specifications, and sand and wax the finished paint surface (corresponding to the fourth and thirteenth and fourteenth and tenth and fifteenth O*NET tasks). — 25/100; weight=1/3; coating-painting-and-spraying-machine-setters-operators-and-tenders.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38920,7 +38940,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -39499,15 +39519,27 @@
         "source_refs": [
           "coat-nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Coating, painting, and spraying machine setters, operators, and tenders",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RC",
@@ -39558,7 +39590,7 @@
       "text": "Coating, painting, and spraying machine setters, operators, and tenders"
     }
   },
-  "source_content_sha256": "5fae9d2bd8e31f13c3c73ee7ffdc6710f88286dffc58d2021163d27ab564d49a",
+  "source_content_sha256": "df06acdc321828520c26b74eeef49da8a83ceb2c7b3b0b6fb3a4f3ed01cb4d2e",
   "subject": {
     "canonical_slug": "coating-painting-and-spraying-machine-setters-operators-and-tenders",
     "name": "Coating, painting, and spraying machine setters, operators, and tenders",

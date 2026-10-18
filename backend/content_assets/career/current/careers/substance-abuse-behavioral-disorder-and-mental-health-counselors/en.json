@@ -11,6 +11,9 @@
       "fact:cn-health-social-private-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25808,7 +25811,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Separate draft quality, institutional adoption, professional service outcomes and employment change. Organizing a fictional plan status is an editorial idea; public tasks and a general framework do not prove clinical safety or a substitution ratio, and without a reliable own-occupation task-level score no value is filled in."
+              "Separate draft quality, institutional adoption, professional service outcomes and employment change. Organizing a fictional plan status is an editorial idea; public tasks and a general framework do not prove clinical safety or a substitution ratio, and without a reliable own-occupation task-level score no value is filled in. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "substance-abuse-behavioral-disorder-and-mental-health-counselors.display.ai_impact_table.answer",
@@ -34209,6 +34212,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Understanding｜Listening and needs checking｜Understand the expression, distinguish the personal account, existing materials and professional opinion, and confirm your own task scope. — 25/100; weight=1/3; substance-abuse-behavioral-disorder-and-mental-health-counselors.display.responsibilities_block.01[0]",
+                  "Service｜Individual, family and group communication｜Provide the service under the corresponding direction and institutional duties, attending to understanding and participation, and do not assume all directions use the same method. — 25/100; weight=1/3; substance-abuse-behavioral-disorder-and-mental-health-counselors.display.responsibilities_block.03[0]",
+                  "Records｜Progress and stage documentation｜Record accurately what happened, the goal changes, the material sources and the arrangements to be confirmed. — 75/100; weight=1/3; substance-abuse-behavioral-disorder-and-mental-health-counselors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39456,7 +39476,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -39630,15 +39650,27 @@
         "source_refs": [
           "nbs-health-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Substance abuse, behavioural disorder and mental health counsellors",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "BLS SOC21-1018 combined three-type identity",
@@ -39689,7 +39721,7 @@
       "text": "Substance abuse, behavioural disorder and mental health counsellors"
     }
   },
-  "source_content_sha256": "4e6347d51b9d39ed4ff520b725424cbaead2e32eaa7e834b2c2b27999c8bc599",
+  "source_content_sha256": "e9a301077fd5f0dfe0e96dd1aa02b2ad5664ae9f5c958bba975f7b26e239cb84",
   "subject": {
     "canonical_slug": "substance-abuse-behavioral-disorder-and-mental-health-counselors",
     "name": "Substance abuse, behavioural disorder and mental health counsellors",

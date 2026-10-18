@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25289,7 +25292,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业生成式AI采用率、生产率、净岗位影响或替代时间表。编辑试用候选是手册检索、维修记录、零件资料和诊断提示；须核实际设备型号、测量结果、故障根因、装配与测试条件。"
+              "证据不足：未取得本职业生成式AI采用率、生产率、净岗位影响或替代时间表。编辑试用候选是手册检索、维修记录、零件资料和诊断提示；须核实际设备型号、测量结果、故障根因、装配与测试条件。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "industrial-machinery-mechanics.ai-impact.ai-impact-table.18",
@@ -32744,6 +32747,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/49-9041.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "维修与保养 — 0/100; weight=1/3; industrial-machinery-mechanics.ai-impact.ai-impact-table.99[0]",
+                  "拆装与检验 — 0/100; weight=1/3; industrial-machinery-mechanics.ai-impact.ai-impact-table.107[0]",
+                  "诊断与测试 — 50/100; weight=1/3; industrial-machinery-mechanics.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37711,7 +37731,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37835,15 +37855,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "工业机械机械师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "工业机械机械师 · 任务、交付与责任边界",
@@ -37894,7 +37926,7 @@
       "text": "工业机械机械师"
     }
   },
-  "source_content_sha256": "dccf413005463f0f12df8d4b31d6d637b61b0aff99174d951c43c44e4be15b37",
+  "source_content_sha256": "505e222ceaffb6c61ee14ae9fcf688e2f004fb969b27857a8a3e4d3317c8639b",
   "subject": {
     "canonical_slug": "industrial-machinery-mechanics",
     "name": "工业机械机械师",

@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24286,7 +24289,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Which steps tools can assist should be verified against actual quality, licensing and efficiency, and no measured deployment for this occupation was obtained; the BLS OOH projects that AI images may compete with illustrators and reduce employment in that subgroup; this is a projection narrative, not a measured replacement of all Fine Artists or Chinese wage causality. Drawing software, ordinary search and format handling do not automatically equal generative AI. Creation, communication and delivery responsibility are checked against the actual parties and the law, and it is not claimed that after adopting tools all system providers bear no responsibility."
+              "Which steps tools can assist should be verified against actual quality, licensing and efficiency, and no measured deployment for this occupation was obtained; the BLS OOH projects that AI images may compete with illustrators and reduce employment in that subgroup; this is a projection narrative, not a measured replacement of all Fine Artists or Chinese wage causality. Drawing software, ordinary search and format handling do not automatically equal generative AI. Creation, communication and delivery responsibility are checked against the actual parties and the law, and it is not claimed that after adopting tools all system providers bear no responsibility. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31653,6 +31656,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-1012.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Create works｜Create with media and software｜Create paintings and illustrations with pen and ink, watercolor, charcoal, oil paint or computer software, and organize visual elements such as line, space, volume, color and perspective to express ideas, emotions or atmosphere. — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Shaping and sculpting｜Make three-dimensional works｜Shape with clay or wax and sculpt clay, stone, wood and metal with abrasives and tools to create sculptures, statues and other three-dimensional works. — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Communication and confirmation｜Communicate with clients and submit for confirmation｜Communicate the nature and content of the work with clients, editors, authors, art directors and other parties, submit preliminary or finished works and project plans for confirmation and revise as needed. — 25/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36857,7 +36877,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -37105,15 +37125,27 @@
           "r2-pay-3",
           "r2-pay-2"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Fine artists (painters, sculptors and illustrators)",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Art and design · original visual work creation",
@@ -37164,7 +37196,7 @@
       "text": "Fine artists (painters, sculptors and illustrators)"
     }
   },
-  "source_content_sha256": "9fb9644651398f2bbe4965a92f74b2fc593f8952913409e6691c621d276098b5",
+  "source_content_sha256": "ba4c8f77bd817c6ebacf01921427da629730ea1f7ab7706039997f0984aa491c",
   "subject": {
     "canonical_slug": "craft-and-fine-artists",
     "name": "Fine artists (painters, sculptors and illustrators)",

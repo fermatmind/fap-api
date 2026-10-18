@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25469,7 +25472,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务分析｜许可非患者病例上试验文书结构及文献检索，核原始病例和指南；本轮无普遍采用、效率或岗位因果，不排序影响先后。Hospitalist是美国以住院照护与协调为主的医师角色，不等同中国住院医师职称或规培阶段。中国依法医师资格、执业注册及注册地点类别范围分别核；处方权在注册执业地点依法取得，特殊药物另有条件。规培、职称与岗位具体权限不能替代注册，不把全部诊疗都写仅上级决定。"
+              "编辑任务分析｜许可非患者病例上试验文书结构及文献检索，核原始病例和指南；本轮无普遍采用、效率或岗位因果，不排序影响先后。Hospitalist是美国以住院照护与协调为主的医师角色，不等同中国住院医师职称或规培阶段。中国依法医师资格、执业注册及注册地点类别范围分别核；处方权在注册执业地点依法取得，特殊药物另有条件。规培、职称与岗位具体权限不能替代注册，不把全部诊疗都写仅上级决定。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "hospitalists.ai-impact.ai-impact-table.18",
@@ -32969,6 +32972,23 @@
                 "publisher": "BLS",
                 "scope": "具体文档用途限定",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "接诊与评估 — 25/100; weight=1/3; hospitalists.ai-impact.ai-impact-table.95[0]",
+                  "诊断与检查 — 50/100; weight=1/3; hospitalists.ai-impact.ai-impact-table.99[0]",
+                  "治疗与用药 — 25/100; weight=1/3; hospitalists.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37933,7 +37953,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38057,15 +38077,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "住院医师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "住院医师 · 任务、交付与责任边界",
@@ -38116,7 +38148,7 @@
       "text": "住院医师"
     }
   },
-  "source_content_sha256": "8486cc8b2ede0ac239d965626bfaf8814d7f143a0e3b2457ed41f2d0b5d5b6aa",
+  "source_content_sha256": "8c4dfd3703229a3ee06c77998e7aea162f0bf03b0877a1fc8a6f9d8ae01a91df",
   "subject": {
     "canonical_slug": "hospitalists",
     "name": "住院医师",

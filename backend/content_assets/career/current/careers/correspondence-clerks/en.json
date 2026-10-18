@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:g04-employment-2025": {
         "status": "pending_mapping"
       },
@@ -24223,7 +24226,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial tool opportunities to be verified: classification prompts, drafts, record compilation and difference alerts; routine template systems are not automatically generative AI and must be checked for real performance, data permissions and review. There is no adoption rate, savings or headcount and wage causality for this occupation, so it is not called measured task change."
+              "Editorial tool opportunities to be verified: classification prompts, drafts, record compilation and difference alerts; routine template systems are not automatically generative AI and must be checked for real performance, data permissions and review. There is no adoption rate, savings or headcount and wage causality for this occupation, so it is not called measured task change. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31556,6 +31559,23 @@
                 "publisher": "O*NET citing BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/43-4021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Reading and handling incoming letters｜read the letter, judge and classify｜read incoming letters, emails and forms, judge the intent and request category, retrieve the relevant records and decide the handling method and reply template, then register and route to the appropriate department. — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Record checking and material assembly｜check completeness and accuracy｜assemble order, billing, account and claim records, check whether the information is complete and accurate, and where needed attach the relevant records to the letter and mark the items to be verified. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Drafting and replying to correspondence｜draft standard replies and confirmation letters｜draft replies to merchandise requests, damage claims, credit inquiries, arrears, billing errors and service complaints, issue confirmation and notification letters, and state the facts and the cited basis. — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36736,7 +36756,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -36926,15 +36946,27 @@
           "bls",
           "g04-trends"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Correspondence clerks",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Office and administrative support · correspondence and record handling",
@@ -36985,7 +37017,7 @@
       "text": "Correspondence clerks"
     }
   },
-  "source_content_sha256": "c1f4011f2fe98dd9505ed560b2836471cd7a271922d346c51c383699adf448cb",
+  "source_content_sha256": "b67dcf8fa6a357be70aaeeafa06a8e5ebc56461a42b23fa4386b3caa08301fff",
   "subject": {
     "canonical_slug": "correspondence-clerks",
     "name": "Correspondence clerks",

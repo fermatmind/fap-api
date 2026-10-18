@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24727,7 +24730,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本次所查跨职业潜在暴露、任务研究、雇主预期与官方职业资料，均未提供质量控制分析师的现场 AI 采用率、裁员率或岗位消失年份。资料检索与初稿整理可作为编辑试用方案，但是否采用、能否提高准确性以及如何承担判定责任都须在具体流程验证。"
+              "证据不足：本次所查跨职业潜在暴露、任务研究、雇主预期与官方职业资料，均未提供质量控制分析师的现场 AI 采用率、裁员率或岗位消失年份。资料检索与初稿整理可作为编辑试用方案，但是否采用、能否提高准确性以及如何承担判定责任都须在具体流程验证。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "quality-control-analysts.ai-impact.ai-impact-table.18",
@@ -32446,6 +32449,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/17-2112.02"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "检测与判定｜按既定方法与规格检测｜对在制品、原材料、环境样品、成品或稳定性样品做常规与非例行分析，并把结果与规格和控制限比较。 — 25/100; weight=1/3; quality-control-analysts.profile.responsibilities-block.1[0]",
+                  "设备与校准｜校准、验证与维护设备｜仪器状态决定数据是否可用，须记录校准与维护并排除故障。 — 25/100; weight=1/3; quality-control-analysts.profile.responsibilities-block.1[1]",
+                  "记录与数据｜完成数据表、设备日志与库存表｜保留原始记录与版本，汇编数据并做相应分析。 — 75/100; weight=1/3; quality-control-analysts.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37351,7 +37371,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37619,15 +37639,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "质量控制分析师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "质量控制分析师 · 任务核对",
@@ -37678,7 +37710,7 @@
       "text": "质量控制分析师"
     }
   },
-  "source_content_sha256": "356aa5154eabae9d290a23c42ab0c76a7ce175ebe5a0ca9ee3316c6ca45fa6d3",
+  "source_content_sha256": "3bab517f3b90f14b2452a1338ab9297816eda651728a3f304f014ed3c5a0ccb1",
   "subject": {
     "canonical_slug": "quality-control-analysts",
     "name": "质量控制分析师",

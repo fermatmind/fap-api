@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24371,7 +24374,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence gap: no actual generative AI adoption, overall substitution rate, reliable clinical effect, or substitution year for general pediatricians was verified. Literature indexing and de-identified material organization in approved environments are editorial trial suggestions; child facts, diagnosis, prescribing, immunization, referral, and guardian communication remain with the authorized team. The BLS 1.5% growth, ten-year net of 0.6 thousand, and annual average 1.0 thousand openings including replacements do not prove AI adoption, individual unemployment, or Chinese demand."
+              "Evidence gap: no actual generative AI adoption, overall substitution rate, reliable clinical effect, or substitution year for general pediatricians was verified. Literature indexing and de-identified material organization in approved environments are editorial trial suggestions; child facts, diagnosis, prescribing, immunization, referral, and guardian communication remain with the authorized team. The BLS 1.5% growth, ten-year net of 0.6 thousand, and annual average 1.0 thousand openings including replacements do not prove AI adoption, individual unemployment, or Chinese demand. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "pediatricians-general.ai-impact.ai-impact-table.18",
@@ -32057,6 +32060,23 @@
                 "publisher": "Fujian Provincial Department of Human Resources and Social Security",
                 "scope": "contextual",
                 "url": "https://rst.fj.gov.cn/zw/ztzl/zxzt/sydwrczp/gccrczpfa/202603/t20260309_7107670.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Pediatric material assessment — 25/100; weight=1/3; pediatricians-general.ai-impact.ai-impact-table.95[0]",
+                  "Pediatric care and prescribing — 50/100; weight=1/3; pediatricians-general.ai-impact.ai-impact-table.107[0]",
+                  "Family communication — 25/100; weight=1/3; pediatricians-general.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36968,7 +36988,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37236,15 +37256,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "General Pediatricians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Common childhood disease · growth and development",
@@ -37295,7 +37327,7 @@
       "text": "Pediatricians"
     }
   },
-  "source_content_sha256": "bc8bc654578d6acd76890ecd489cef9b00f681098e427c3080bacaf8b4670608",
+  "source_content_sha256": "f8d7c0e0b5cd29711cc15537910e14cda57c813c89294534ecec457f945caf65",
   "subject": {
     "canonical_slug": "pediatricians-general",
     "name": "General Pediatricians",

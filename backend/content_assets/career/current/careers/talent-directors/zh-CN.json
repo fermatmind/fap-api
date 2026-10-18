@@ -8,6 +8,9 @@
       "fact:cn-culture-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25467,7 +25470,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可以作为资料整理、邀约草稿和排程核对的试验工具；是否准确、实际采用多少及就业影响分别核实。本页没有可复核的任务级量化评分，不填写分数或失业概率。角色适配与最终推荐须有人工证据和明确权限。"
+              "AI可以作为资料整理、邀约草稿和排程核对的试验工具；是否准确、实际采用多少及就业影响分别核实。既有外部资料未提供可直接采用的实测可复核的任务级量化评分，另列编辑估算分数或失业概率。角色适配与最终推荐须有人工证据和明确权限。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "talent-directors.display.ai_impact_table.answer",
@@ -33430,6 +33433,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "人才检索｜审阅履历与表演材料｜查看照片、履历、录像及可用档期，选择需要邀请试镜的人选。 — 75/100; weight=1/3; talent-directors.display.responsibilities_block.02[0]",
+                  "评价推荐｜形成候选与备选名单｜比较角色适配与试镜表现，按授权选择演员或提交名单供制片人及导演最终决定。 — 50/100; weight=1/3; talent-directors.display.responsibilities_block.04[0]",
+                  "业务协调｜沟通合作条件｜在已明确的项目权限内协调演员、经纪人与制作方；合同承诺交由有权限人员确认。 — 25/100; weight=1/3; talent-directors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38698,7 +38718,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38858,15 +38878,27 @@
         "source_refs": [
           "nbs-culture-context-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "选角与艺人总监",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 27-2012.04 精确职业口径",
@@ -38917,7 +38949,7 @@
       "text": "选角与艺人总监"
     }
   },
-  "source_content_sha256": "aac7c6bbf170d1aeb241f3578d8684452d15bb1f85b44b9e711e1488610db0c2",
+  "source_content_sha256": "d7d197dae07f524bed4cbded8f7ea3833dcbb59b7bc77c22a5eae04f1b00ea4f",
   "subject": {
     "canonical_slug": "talent-directors",
     "name": "选角与艺人总监",

@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25475,7 +25478,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务分析｜材料供应、屋面铺设配合、检查与清理包含现场身体任务，材料记录和资料检索可在许可数据上试验工具辅助。O*NET任务与软件清单不证明已采用、效率提高或低AI暴露；天气74%每日、排班77%不规律是美国职业情境，非AI结果。美国47-3016.00：2025年就业6,100人；2025—2035总体增长类别Little or no change（几乎无变化），预计年均空缺600个，含增长和人员更替。预测非实际招聘、净新增或AI替代因果；不能沿用旧5%—6%和Bright Outlook作当前结论。"
+              "编辑任务分析｜材料供应、屋面铺设配合、检查与清理包含现场身体任务，材料记录和资料检索可在许可数据上试验工具辅助。O*NET任务与软件清单不证明已采用、效率提高或低AI暴露；天气74%每日、排班77%不规律是美国职业情境，非AI结果。美国47-3016.00：2025年就业6,100人；2025—2035总体增长类别Little or no change（几乎无变化），预计年均空缺600个，含增长和人员更替。预测非实际招聘、净新增或AI替代因果；不能沿用旧5%—6%和Bright Outlook作当前结论。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "helpers-roofers.ai-impact.ai-impact-table.18",
@@ -32963,6 +32966,23 @@
                 "publisher": "BLS",
                 "scope": "美国工资定义",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "高处与就位 — 0/100; weight=1/3; helpers-roofers.ai-impact.ai-impact-table.99[0]",
+                  "配合铺设与检修 — 0/100; weight=1/3; helpers-roofers.ai-impact.ai-impact-table.103[0]",
+                  "检查与维护 — 25/100; weight=1/3; helpers-roofers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37896,7 +37916,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38044,15 +38064,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "帮工屋顶工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "帮工屋顶工 · 任务、交付与责任边界",
@@ -38103,7 +38135,7 @@
       "text": "帮工屋顶工"
     }
   },
-  "source_content_sha256": "822cfea657366d3708faf7cadcdb825ffc54374eb6943520c9befbf74c5ad5e4",
+  "source_content_sha256": "7ce9517e8a04cdc152b499e87b90e8df37d0adfdd4aff090d269830061bfb21d",
   "subject": {
     "canonical_slug": "helpers-roofers",
     "name": "帮工屋顶工",

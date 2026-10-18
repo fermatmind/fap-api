@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25037,7 +25040,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not obtained a precise AI exposure score, site adoption rate, or efficiency-effect study for 49-9071 and assigns no exposure level. O*NET supports repair, inspection, and record tasks. Associated deduplicated 2025 recruitment advertisements mention Office5%, Excel and Outlook at 4% each, and Word, PowerPoint, and SAP at 1% each; these are not site prevalence or AI adoption rates. The editorial suggestion is to test record organization and retrieval with G1 synthetic materials, checking accuracy, time spent, and review costs. Actual equipment work requires separate qualifications, organizational authority, and permits."
+              "Insufficient evidence: this page has not obtained a precise AI exposure score, site adoption rate, or efficiency-effect study for 49-9071 and assigns no exposure level. O*NET supports repair, inspection, and record tasks. Associated deduplicated 2025 recruitment advertisements mention Office5%, Excel and Outlook at 4% each, and Word, PowerPoint, and SAP at 1% each; these are not site prevalence or AI adoption rates. The editorial suggestion is to test record organization and retrieval with G1 synthetic materials, checking accuracy, time spent, and review costs. Actual equipment work requires separate qualifications, organizational authority, and permits. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "general-maintenance-and-repair-workers.ai-impact.ai-impact-table.18",
@@ -32542,6 +32545,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "49-9071.00 exact occupation",
                 "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/general-maintenance-and-repair-workers.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inspect, operate, or test machinery and equipment to diagnose mechanical faults — 50/100; weight=1/3; general-maintenance-and-repair-workers.ai-impact.ai-impact-table.99[0]",
+                  "Repair equipment or structures with tools and measuring instruments and adjust functional parts — 0/100; weight=1/3; general-maintenance-and-repair-workers.ai-impact.ai-impact-table.103[0]",
+                  "Complete work orders and ledgers and report and escalate anomalies and matters beyond authority — 75/100; weight=1/3; general-maintenance-and-repair-workers.ai-impact.ai-impact-table.119[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37482,7 +37502,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career-direction comparison",
       "fit": "Career-fit guide",
@@ -37637,15 +37657,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "General Maintenance and Repair Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure: not scored on this page"
+      "label": "AI Impact Score"
     },
     "badges": [
       "General Maintenance and Repair Workers · Tasks, deliverables, and responsibility boundaries",
@@ -37696,7 +37728,7 @@
       "text": "General Maintenance and Repair Workers"
     }
   },
-  "source_content_sha256": "eccb43394028ddfa66d7a8e4d85c1a82c4e8362ed962f1624b32aae00896c553",
+  "source_content_sha256": "43d207688667fe84a8c2802be6cf429d7533f2ca3ed7087be0032cbb7af34d87",
   "subject": {
     "canonical_slug": "general-maintenance-and-repair-workers",
     "name": "General Maintenance and Repair Workers",

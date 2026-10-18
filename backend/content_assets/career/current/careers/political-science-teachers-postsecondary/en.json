@@ -26,6 +26,9 @@
       "fact:cn-region-comparison-gap-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24741,7 +24744,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can help draft syllabi, reading questions, material summaries, and feedback frameworks, but verifying the original text, course objectives, grading, fairness, student information, and academic responsibility remain with the teacher and the institution. The ILO and related studies measure task exposure or capability potential and cannot be turned into an adoption rate, displacement rate, or unemployment timeline for this occupation; the BLS 2025–2035 projection for the precise occupation must be read separately."
+              "AI can help draft syllabi, reading questions, material summaries, and feedback frameworks, but verifying the original text, course objectives, grading, fairness, student information, and academic responsibility remain with the teacher and the institution. The ILO and related studies measure task exposure or capability potential and cannot be turned into an adoption rate, displacement rate, or unemployment timeline for this occupation; the BLS 2025–2035 projection for the precise occupation must be read separately. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "political-science-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32662,6 +32665,23 @@
                 "publisher": "Shanghai University recruitment system",
                 "scope": "contextual",
                 "url": "https://jobs.shu.edu.cn/Ads/Ads?a=6cebd89e-fc48-4103-a736-f8d499076d5e"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Instructional design｜prepare the syllabus, lecture notes, reading material, and assignments｜map learning objectives to class discussion, research method practice, and assessable outputs. — 75/100; weight=1/3; political-science-teachers-postsecondary.profile.responsibilities-block.1[1]",
+                  "Classroom delivery｜lecture, guide discussion, and respond to student questions｜apply a consistent evidentiary standard to different positions and make the distinction between facts, interpretation, and value judgments clear. — 25/100; weight=1/3; political-science-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "Assessment and feedback｜grade papers, assignments, and examinations｜give specific feedback based on the previously announced grading criteria and keep grades and the necessary teaching records. — 75/100; weight=1/3; political-science-teachers-postsecondary.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37604,7 +37624,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37880,15 +37900,27 @@
           "nbs",
           "editor"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Political Science Teachers, Postsecondary",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Postsecondary political science teachers · courses and research",
@@ -37939,7 +37971,7 @@
       "text": "Political Science Teachers, Postsecondary"
     }
   },
-  "source_content_sha256": "834b2b29de4674de66e76455c1cd00cccab35dbbf0ba2fffacda87486fc63d8e",
+  "source_content_sha256": "67c60b527ff2552cfc935d34a71419c051ce8180abf6e7894b6b6495620ef3a9",
   "subject": {
     "canonical_slug": "political-science-teachers-postsecondary",
     "name": "Political Science Teachers, Postsecondary",

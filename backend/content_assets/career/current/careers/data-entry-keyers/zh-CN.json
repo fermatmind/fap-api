@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24307,7 +24310,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "已核9职业任务、工作情境和2025招聘词；OCR、字段提取、格式校验和草稿为编辑待验证候选，非本页实测提效/采用。自报自动化21%高度/51%中度是工作情境，非GenAI采用或自动化率；就业下降预测不能证明某工具造成。真实用途核源值、置信度、误改漏改及个人信息处理依据，不能以模型生成值填真实缺失。"
+              "已核9职业任务、工作情境和2025招聘词；OCR、字段提取、格式校验和草稿为编辑待验证候选，非本页实测提效/采用。自报自动化21%高度/51%中度是工作情境，非GenAI采用或自动化率；就业下降预测不能证明某工具造成。真实用途核源值、置信度、误改漏改及个人信息处理依据，不能以模型生成值填真实缺失。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31776,6 +31779,23 @@
                 "publisher": "国家统计局",
                 "scope": "broader proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "源文件读取｜按字段录入数据｜阅读已注销支票、销售报表或账单等源文件，使用键盘或扫描仪把信息录入指定字段，或录入磁带、磁盘等介质供后续处理。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "比对与校验｜发现录入错误｜把数据与源文件比对，或按校验格式重新录入以发现错误，并按字段规范与校验规则确认录入结果的完整与一致。 — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "错误处置｜更正或上报｜定位并更正数据录入错误，或在超出自身处置范围时向上级报告，保留更正依据与处理记录，保证可追溯。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37187,7 +37207,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37458,15 +37478,27 @@
         "source_refs": [
           "r5-nbs-business"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "数据录入员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "数据录入与核对 · 源文件比对 · 记录与日志",
@@ -37517,7 +37549,7 @@
       "text": "数据录入员"
     }
   },
-  "source_content_sha256": "c6f508f9ec3688d708b5bac94da209b3a0d2bfbc6d346d9a5a3e0c5947d5ee73",
+  "source_content_sha256": "53cd43f82c18008f32925f0cb1b12ebba9c7e78a4ca3ee2a65999d4451e87a15",
   "subject": {
     "canonical_slug": "data-entry-keyers",
     "name": "数据录入员",

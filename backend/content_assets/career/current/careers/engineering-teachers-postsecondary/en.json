@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24112,7 +24115,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist in generating course drafts and problem sets, organizing literature and data, grading objective questions, and checking report formats, but it cannot replace curriculum design and teaching judgment, assessment of student ability and integrity, or responsibility for research conclusions and academic evaluation."
+              "AI can assist in generating course drafts and problem sets, organizing literature and data, grading objective questions, and checking report formats, but it cannot replace curriculum design and teaching judgment, assessment of student ability and integrity, or responsibility for research conclusions and academic evaluation. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "engineering-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -31443,6 +31446,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial rule",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Design course objectives, units, and assessment methods — 75/100; weight=1/3; engineering-teachers-postsecondary.ai-impact.ai-impact-table.95[0]",
+                  "Lecture, organize discussions and laboratories, and answer questions — 25/100; weight=1/3; engineering-teachers-postsecondary.ai-impact.ai-impact-table.99[0]",
+                  "Guide laboratories, design, and project practice — 0/100; weight=1/3; engineering-teachers-postsecondary.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36348,7 +36368,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -36616,15 +36636,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Engineering Teachers, Postsecondary",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Engineering Teachers, Postsecondary · course teaching · research and guidance · O*NET 25-1032.00",
@@ -36675,7 +36707,7 @@
       "text": "Engineering Teachers, Postsecondary: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "1677a0e56829d1685ba7b2209ae07441d994a52fca32250bc3a2445239a8a73f",
+  "source_content_sha256": "59f5b871186dc8d1f53ca081936823e371665b5bfc65c8eebb5a20e26fb751b0",
   "subject": {
     "canonical_slug": "engineering-teachers-postsecondary",
     "name": "Engineering Teachers, Postsecondary",

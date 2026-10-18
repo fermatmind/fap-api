@@ -20,6 +20,9 @@
       "fact:education-profile": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:interest-code": {
         "status": "pending_mapping"
       },
@@ -14061,6 +14064,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Teaching and demonstrating patient care in classrooms, laboratories, and clinical units — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Designing course objectives, materials, and assessment alignment — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Supervising skills practice and directly observing student performance — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -14277,7 +14297,7 @@
             }
           }
         ],
-        "answer": "Digital tools can help generate draft syllabi, fictional cases, questions, and rubrics and categorize anonymized feedback, but nursing evidence verification, clinical observation, pass decisions, and high-consequence assessment must still be borne by authorized teachers.",
+        "answer": "Digital tools can help generate draft syllabi, fictional cases, questions, and rubrics and categorize anonymized feedback, but nursing evidence verification, clinical observation, pass decisions, and high-consequence assessment must still be borne by authorized teachers. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 25-1072.00 detailed occupational profile (tasks and work context)",
@@ -16045,7 +16065,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -16281,15 +16301,27 @@
           "source-pack-onet-localwages",
           "nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "College nursing instructors",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Classroom and clinical unit teaching",
@@ -16340,7 +16372,7 @@
       "text": "Nursing Instructors and Teachers, Postsecondary career profile｜teaching, qualifications, and boundaries"
     }
   },
-  "source_content_sha256": "91f8f7afcd7d0a763549754bfe0c12dc035465b06630806caee24deec1cac38e",
+  "source_content_sha256": "8467bccb96290858a19f5db8fa072ebbaa8b8f783868fc4746167aa51861989a",
   "subject": {
     "canonical_slug": "nursing-instructors-and-teachers-postsecondary",
     "name": "College nursing instructors",

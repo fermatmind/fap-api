@@ -20,6 +20,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25493,7 +25496,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得37-3011.00精确的生成式AI暴露等级、自动设备采用/替代率或工资因果数据；不发布职业替代结论。设备自动化与生成式工具分别评估，下面列编辑辅助候选，效果、成本和实际权限须测试。O*NET自动化51%略微/42%完全不自动化是受访选项，非AI采用率；ILO2025为ISCO任务指数，未建本页精确SOC映射，不断言研究不覆盖。 37-3011.00使用手工或动力工具/设备对物业场地造景或维护，不限地面和观赏植物。19任务中6核心为割草修边90、动力设备87、手工具84、修枝84、清垃圾84、花卉79；13补充含已成坪草坪83、造景71、浇水70、维护69、落叶68、设施66、种植63、培育62、表土61、雪/草皮各60、肥料除草杀虫49、支撑树木46。重要性非频率或许可，任务可重叠，具体职责与批准规程另核。 O*NET41活动/16详细活动/57情境已读；活动机器71、体力55、沟通52、车辆51、信息43、搬运38是重要性，非频率。受访比例：户外65%每天/34%每周但非每天，PPE73%每天，站立64%超过半时、行走35%持续；冷热32%每周但非每天（12%每天），工时61%超40/38%40小时，日程71%固定/26%季节性。问卷非危害浓度、事故率或人人状态。 O*NET详细软件6类别包含IBM Notes、Office、Windows、Excel、Facebook、Word；热门页5项不含IBM Notes，2025美国Lightcast招聘提及Office1%、Excel/Word各不足1%、Facebook/Windows未提供。提及不是采用率、入职统一门槛或不需编程证明，也不证明数字化仅用于记录。 BLS当前2025—2035精确37-3011就业1,188.6→1,244.2千人、增长4.7%、净增55.6千人、年均空缺149.5千人（增长与替换），数值分别取整。EP含自雇（2025占20.2%），不同OEWS工资；预测不是实际招聘或个人结果。本轮O*NET已显示2025就业1,188,600、2025—2035增长档5%—6%和年均空缺149,500；增长档与BLS直接4.7%为不同呈现，不以档位改写精确值，也不混用OOH组合37-3000。"
+              "证据不足：未取得37-3011.00精确的生成式AI暴露等级、自动设备采用/替代率或工资因果数据；不发布职业替代结论。设备自动化与生成式工具分别评估，下面列编辑辅助候选，效果、成本和实际权限须测试。O*NET自动化51%略微/42%完全不自动化是受访选项，非AI采用率；ILO2025为ISCO任务指数，未建本页精确SOC映射，不断言研究不覆盖。 37-3011.00使用手工或动力工具/设备对物业场地造景或维护，不限地面和观赏植物。19任务中6核心为割草修边90、动力设备87、手工具84、修枝84、清垃圾84、花卉79；13补充含已成坪草坪83、造景71、浇水70、维护69、落叶68、设施66、种植63、培育62、表土61、雪/草皮各60、肥料除草杀虫49、支撑树木46。重要性非频率或许可，任务可重叠，具体职责与批准规程另核。 O*NET41活动/16详细活动/57情境已读；活动机器71、体力55、沟通52、车辆51、信息43、搬运38是重要性，非频率。受访比例：户外65%每天/34%每周但非每天，PPE73%每天，站立64%超过半时、行走35%持续；冷热32%每周但非每天（12%每天），工时61%超40/38%40小时，日程71%固定/26%季节性。问卷非危害浓度、事故率或人人状态。 O*NET详细软件6类别包含IBM Notes、Office、Windows、Excel、Facebook、Word；热门页5项不含IBM Notes，2025美国Lightcast招聘提及Office1%、Excel/Word各不足1%、Facebook/Windows未提供。提及不是采用率、入职统一门槛或不需编程证明，也不证明数字化仅用于记录。 BLS当前2025—2035精确37-3011就业1,188.6→1,244.2千人、增长4.7%、净增55.6千人、年均空缺149.5千人（增长与替换），数值分别取整。EP含自雇（2025占20.2%），不同OEWS工资；预测不是实际招聘或个人结果。本轮O*NET已显示2025就业1,188,600、2025—2035增长档5%—6%和年均空缺149,500；增长档与BLS直接4.7%为不同呈现，不以档位改写精确值，也不混用OOH组合37-3000。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "grounds-maintenance-workers.ai-impact.ai-impact-table.18",
@@ -33006,6 +33009,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor, Employment and Training Administration",
                 "scope": "37-3011.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/37-3011.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "草坪与修剪 — 0/100; weight=1/3; grounds-maintenance-workers.ai-impact.ai-impact-table.95[0]",
+                  "种植与造景 — 0/100; weight=1/3; grounds-maintenance-workers.ai-impact.ai-impact-table.103[0]",
+                  "灌溉与施肥与用药 — 25/100; weight=1/3; grounds-maintenance-workers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37940,7 +37960,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38166,15 +38186,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "场地养护人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "场地养护人员 · 任务、交付与责任边界",
@@ -38225,7 +38257,7 @@
       "text": "场地养护人员"
     }
   },
-  "source_content_sha256": "1e337cce97f34d0da2ac37cb942b810153634997aebc320e5efe6251e5043155",
+  "source_content_sha256": "ebf3b3b39366d9d38928480990cc93d2cff7ed79a990295a2272204d5a240eef",
   "subject": {
     "canonical_slug": "grounds-maintenance-workers",
     "name": "场地养护人员",

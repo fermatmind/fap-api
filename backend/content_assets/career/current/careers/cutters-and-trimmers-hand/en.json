@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24309,7 +24312,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "What has been verified is 18 occupational tasks and general work context; this round did not obtain this occupation's generative AI adoption rate, measured efficiency gains or a displacement date. The O*NET general automation responses are 21% high, 20% moderate and 18% slight, not a generative AI ratio. The marker planning, equipment parameters and visual inspection in the table below are candidates proposed by the editor for verification; conventional software, tooling and computer-numeric equipment are not the same as generative AI. Trials must verify material suitability, error, safety protection and human permissions."
+              "What has been verified is 18 occupational tasks and general work context; this round did not obtain this occupation's generative AI adoption rate, measured efficiency gains or a displacement date. The O*NET general automation responses are 21% high, 20% moderate and 18% slight, not a generative AI ratio. The marker planning, equipment parameters and visual inspection in the table below are candidates proposed by the editor for verification; conventional software, tooling and computer-numeric equipment are not the same as generative AI. Trials must verify material suitability, error, safety protection and human permissions. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31791,6 +31794,23 @@
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Cutting preparation | Read the work order and position | Read the work order to determine dimensions, cutting positions and quantities, position and mark on the material using templates, measuring tools or a straightedge, and spread out or secure the material on the cutting table and equipment when necessary. — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Cutting and profiling | Cut with tools and equipment | Cut, form and trim the material with hand tools, shears, hand-held power tools or bench cutting equipment, cut openings or notches as needed, and adjust guides and stops to control cutting depth and width. — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Inspection and packing | Inspect, pack and move | Pick out defects such as spots, stains, scratches, chipped corners and unacceptable shapes and mark them, separate and grade by size, weight, type, condition, colour or colour difference, and count or weigh before bundling, stacking and moving by cart. — 25/100; weight=1/3; actors.display.responsibilities_block.06[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37118,7 +37138,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparing occupational directions",
       "fit": "Occupational fit guide",
@@ -37338,15 +37358,27 @@
         "source_refs": [
           "r5-onet-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Cutters and Trimmers, Hand",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Manual cutting and trimming · Sanding and polishing · Inspection and packing",
@@ -37397,7 +37429,7 @@
       "text": "Cutters and Trimmers, Hand"
     }
   },
-  "source_content_sha256": "a1a93fa320d82ab44e4c46d41b473347a78bba4e7a22600c2e9550ff32fb82f7",
+  "source_content_sha256": "880188d941f2861b3b7fa171bc1613dcd8d15cdff879193ab034b189be23dffe",
   "subject": {
     "canonical_slug": "cutters-and-trimmers-hand",
     "name": "Cutters and Trimmers, Hand",

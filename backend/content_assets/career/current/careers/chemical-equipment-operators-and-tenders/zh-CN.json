@@ -38,6 +38,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24959,7 +24962,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "招聘单年技术关键词支持岗位中出现办公/ERP工具，不证明数字化提速、采用增长或职业整体替代。辅助任务为编辑试用，效率另核。BLS表1.2精确51-9011：2025就业140.8千、2035预测145.8千、净增5.0千、增3.6%（约3%—4%，平均）、年均空缺13.9千，含增长与替补；自雇比例以表中“—”保留，不填0。典型高中/GED、相关经验None、中等期限在岗培训。"
+              "招聘单年技术关键词支持岗位中出现办公/ERP工具，不证明数字化提速、采用增长或职业整体替代。辅助任务为编辑试用，效率另核。BLS表1.2精确51-9011：2025就业140.8千、2035预测145.8千、净增5.0千、增3.6%（约3%—4%，平均）、年均空缺13.9千，含增长与替补；自雇比例以表中“—”保留，不填0。典型高中/GED、相关经验None、中等期限在岗培训。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "chemical-equipment-operators-and-tenders.ai-impact.ai-impact-table.18",
@@ -31910,6 +31913,23 @@
                 "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "安全与巡检｜按路线巡检并落实安全预防措施｜按巡检路线检查设备与管线与阀门与安全设施，观察仪表、报警与可见/可听异常，不主动嗅探疑似泄漏，按规程执行防火防爆与个人防护要求（对应 O*NET 任务重要度 91、86、86）。 — 25/100; weight=1/3; chemical-equipment-operators-and-tenders.profile.responsibilities-block.1[0]",
+                  "操作与调整｜按指令与装置规格操作设备并调整参数｜核对物料与批号与顺序与数量，开阀或启动泵与搅拌器与反应器与鼓风机或自动进料，按批准范围调节温度与压力与进料与流量与反应时间（对应任务重要度 85、85、82、82、78）。 — 25/100; weight=1/3; chemical-equipment-operators-and-tenders.profile.responsibilities-block.1[1]",
+                  "记录与交接｜记录运行数据并完成批次与班次交接｜记录温度与压力与投料与处理时间与检测结果，说明异常与处置与未完成事项与设备状态，使接手人员能够复现（对应任务重要度 85）。 — 75/100; weight=1/3; chemical-equipment-operators-and-tenders.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36859,7 +36879,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37228,15 +37248,27 @@
         "source_refs": [
           "ceo-ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "设备操作员看护员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RCI",
@@ -37287,7 +37319,7 @@
       "text": "化工设备操作与看护员"
     }
   },
-  "source_content_sha256": "d21c8dfced7c5702f6193f6554976e27093eddb128e78e9f4649d754d74049c5",
+  "source_content_sha256": "6587af1e93bea86bbe5fddb55afa562b91ace2098b7a90ea21d0d180abc02b61",
   "subject": {
     "canonical_slug": "chemical-equipment-operators-and-tenders",
     "name": "化工设备操作与看护员",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24379,7 +24382,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task judgement: scheduling, material lists and record structures for fictional material can be trialled as tool-generated drafts and then reviewed item by item by a person; for real works and health data, first verify consent and institutional data authority. O*NET duties, software hiring word frequency and the BLS parent-occupation projection are not AI substitution rate research, so this page does not claim that there will be no wholesale substitution, a role disappearance year or an automation percentage. Responsibility and lawful authority are still implemented according to professional requirements. ILO is only a cross-occupation exposure method official introduction and extended summary, and NIST is only a voluntary organisational risk introduction; this round the complete paper or PDF and adoption and causal research for this occupation were not read."
+              "Editorial task judgement: scheduling, material lists and record structures for fictional material can be trialled as tool-generated drafts and then reviewed item by item by a person; for real works and health data, first verify consent and institutional data authority. O*NET duties, software hiring word frequency and the BLS parent-occupation projection are not AI substitution rate research, so this page does not claim that there will be no wholesale substitution, a role disappearance year or an automation percentage. Responsibility and lawful authority are still implemented according to professional requirements. ILO is only a cross-occupation exposure method official introduction and extended summary, and NIST is only a voluntary organisational risk introduction; this round the complete paper or PDF and adoption and causal research for this occupation were not read. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.18",
@@ -32418,6 +32421,23 @@
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Goals and media｜Choosing media according to therapeutic goals, sensory and motor ability, material risk and cultural background, and stating the boundaries of this session's activity｜An activity plan in which goals, media and activity boundaries correspond one-to-one. — 25/100; weight=1/3; art-therapists.profile.responsibilities-block.1[1]",
+                  "Process and observation｜Conducting guided self-expression, observing the creative process and verbal responses, and discussing the experience with the client without mechanically interpreting symbols in the work as diagnosis｜A process record containing specific observational evidence and the client's own words. — 0/100; weight=1/3; art-therapists.profile.responsibilities-block.1[2]",
+                  "Recording and review｜Recording therapeutic goals, activities and progress, and reviewing with the team according to the approved division of labour｜An editorial example record; it is not guaranteed that all judgements can be fully traced. — 75/100; weight=1/3; art-therapists.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37320,7 +37340,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37652,15 +37672,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Art therapists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 29-1129.01 · supervised practice · record and referral responsibility",
@@ -37711,7 +37743,7 @@
       "text": "Art therapists"
     }
   },
-  "source_content_sha256": "2f7c4af9c85c5a84f9905401a88a1de5e61ccda512ab40cbeed764ddf4fcd2f1",
+  "source_content_sha256": "fad8155fe4b607aa4525bc98a7abd7aae0bac33b7c2096a8e3ebcc1926e94815",
   "subject": {
     "canonical_slug": "art-therapists",
     "name": "Art therapists",

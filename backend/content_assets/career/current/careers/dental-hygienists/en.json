@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24335,7 +24338,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The 4 U.S. recruitment technology terms for the full year 2025: Dentrix5%, with Office, Word, and Excel each below 1%; a recruitment mention share is not long-term prevalence, actual adoption or proficiency rate, or GenAI efficiency gain. The OOH's manual, power, and ultrasonic instruments and some lasers are clinical technology, and whether they involve AI depends on the product function and cannot be judged from a software or device name. U.S. its own 29-1292 employment about 225300 in 2025 → about 243200 in 2035, a net increase of 17900, +8.0%, average annual 15000 openings including replacement rather than net new additions each year, self-employed 1.3%. The current O*NET is also 2025 and 2025—2035, so it is no longer called the old period or a ten-year openings total. The growth projection is not AI causality, an individual hiring probability, or Chinese demand. This round obtained no data on this occupation's own AI adoption, effect, or substitution rate, and growth does not prove that any task has no substitute."
+              "The 4 U.S. recruitment technology terms for the full year 2025: Dentrix5%, with Office, Word, and Excel each below 1%; a recruitment mention share is not long-term prevalence, actual adoption or proficiency rate, or GenAI efficiency gain. The OOH's manual, power, and ultrasonic instruments and some lasers are clinical technology, and whether they involve AI depends on the product function and cannot be judged from a software or device name. U.S. its own 29-1292 employment about 225300 in 2025 → about 243200 in 2035, a net increase of 17900, +8.0%, average annual 15000 openings including replacement rather than net new additions each year, self-employed 1.3%. The current O*NET is also 2025 and 2025—2035, so it is no longer called the old period or a ten-year openings total. The growth projection is not AI causality, an individual hiring probability, or Chinese demand. This round obtained no data on this occupation's own AI adoption, effect, or substitution rate, and growth does not prove that any task has no substitute. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24597,7 +24600,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page has no reviewable scale or task scoring basis for this occupation, so the AI data in the Hero is kept in a missing state with the reason explained in the body; guessing a score from one paper or one model result would create precision without a basis."
+              "The external materials used here supply no measured scale or task scoring basis for this occupation, so the Hero instead shows the separately defined editorial estimate; guessing a score from one paper or one model result would create precision without a basis."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -32153,6 +32156,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1031.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Verify patient identity, medical history, medication and allergy information, and treatment contraindications, and confirm with the dentist first when necessary before starting. — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Complete examination, scaling, root planing, polishing, and fluoride application within the license and institutional authorization, without exceeding authority. — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Accurately record periodontal pocket depth, bleeding and recession, and calculus and plaque distribution to form repeatable records for the dentist's diagnosis. — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37694,7 +37714,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -37965,15 +37985,27 @@
         "source_refs": [
           "r5-nbs-health"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Dental Hygienists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Oral prevention and periodontal care · infection control · patient education",
@@ -38024,7 +38056,7 @@
       "text": "Dental Hygienists"
     }
   },
-  "source_content_sha256": "2e8073d0086d37642213a1b5ba205234f9b2b81ee367598313402fbfb28f37ba",
+  "source_content_sha256": "af0a82b19dd16bb1c537e64ed94ca975674f62cf678029009d6647df3b8fa1c4",
   "subject": {
     "canonical_slug": "dental-hygienists",
     "name": "Dental Hygienists",

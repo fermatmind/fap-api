@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24835,7 +24838,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI最直接可探索的是接单摘要、工单分类、配件清单核对和客户说明草稿。燃油、电气、运动部件的诊断维修与试运行仍须现场受训者判断。没有本职业独立的GenAI采用率或替代率；BLS2025—2035详细职业预测增长2.3%不等于AI净效应。"
+              "AI最直接可探索的是接单摘要、工单分类、配件清单核对和客户说明草稿。燃油、电气、运动部件的诊断维修与试运行仍须现场受训者判断。没有本职业独立的GenAI采用率或替代率；BLS2025—2035详细职业预测增长2.3%不等于AI净效应。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "small-engine-mechanics.ai-impact.ai-impact-table.18",
@@ -32863,6 +32866,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/49-9071.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "检查与诊断｜受训人员按适用流程检查机械、电气或燃油系统。｜将实际测试证据与尚未检查项分开。 — 50/100; weight=1/3; small-engine-mechanics.profile.responsibilities-block.1[1]",
+                  "维修与更换｜依制造商说明和授权更换或修复部件。｜工单记录配件、工时与批准事项，不以网页练习代替训练。 — 0/100; weight=1/3; small-engine-mechanics.profile.responsibilities-block.1[2]",
+                  "维修记录｜记录诊断、已完成工作、时间、配件及未解决问题。｜异常或安全隐患保持待处理并升级。 — 75/100; weight=1/3; small-engine-mechanics.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37771,7 +37791,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38046,15 +38066,27 @@
           "nbs",
           "r2-pay-2"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "户外动力设备与小型发动机机械师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "小型发动机 · 户外动力设备 · 维修记录",
@@ -38105,7 +38137,7 @@
       "text": "户外动力设备与小型发动机机械师"
     }
   },
-  "source_content_sha256": "6517ed916315b3e41bb4fe49e02478c37619c0c4bdfb011a95ebad363959e63e",
+  "source_content_sha256": "5658f973cc3d8a7ea407839808ba05ee43913c0cbaa98ae1a3ae45124826ce9f",
   "subject": {
     "canonical_slug": "small-engine-mechanics",
     "name": "户外动力设备与小型发动机机械师",

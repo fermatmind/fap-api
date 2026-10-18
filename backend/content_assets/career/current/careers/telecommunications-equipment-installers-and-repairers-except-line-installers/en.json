@@ -8,6 +8,9 @@
       "fact:cn-information-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25434,7 +25437,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has no verifiable 49-2022 task-level AI ratings and leaves scores blank. Text assistance with manual questions, record drafts, and test checklists can be explored; diagnostic validity, operational permissions, and safety conditions still require human checks. No individual unemployment probability is predicted."
+              "Insufficient evidence: this page has no verifiable 49-2022 task-level AI ratings and shows a separate editorial estimate. Text assistance with manual questions, record drafts, and test checklists can be explored; diagnostic validity, operational permissions, and safety conditions still require human checks. No individual unemployment probability is predicted. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.display.ai_impact_table.answer",
@@ -32723,6 +32726,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Implementation | Communication equipment installation and setup | Install, adjust, or connect equipment with permission and record changes; specific steps follow applicable procedures. — 0/100; weight=1/3; telecommunications-equipment-installers-and-repairers-except-line-installers.display.responsibilities_block.03[0]",
+                  "Diagnosis | Abnormal readings and fault location | Check test conditions and use drawings and symptoms to narrow suspected scope, collaborating with others. — 50/100; weight=1/3; telecommunications-equipment-installers-and-repairers-except-line-installers.display.responsibilities_block.04[0]",
+                  "Retesting | Repair results and service checks | Test equipment after installation or repair as agreed, recording passed, untested, and abnormal items separately. — 25/100; weight=1/3; telecommunications-equipment-installers-and-repairers-except-line-installers.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38007,7 +38027,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38168,15 +38188,27 @@
         "source_refs": [
           "nbs-information-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Telecommunications Equipment Installers and Repairers, Except Line Installers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET49-2022.00 equipment tasks",
@@ -38227,7 +38259,7 @@
       "text": "Telecommunications Equipment Installers and Repairers, Except Line Installers"
     }
   },
-  "source_content_sha256": "e0ff4e07c19ca18f6c8edd9b0e3f6725f0d551f0b1bd177a4d21533f4ad8f97a",
+  "source_content_sha256": "58010629629a9f96e83ba1d386ff7bd254a56819a01b37bf4b0cad171bb5a76b",
   "subject": {
     "canonical_slug": "telecommunications-equipment-installers-and-repairers-except-line-installers",
     "name": "Telecommunications Equipment Installers and Repairers, Except Line Installers",

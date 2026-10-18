@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:official-code": {
         "status": "mapped"
       },
@@ -13701,6 +13704,23 @@
                 "publisher": "U.S. Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/woodworking/hazards-solutions"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "规划并绘制产品单元、截面或全尺寸样机轮廓 — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "设置和操作带锯、刨床等成形木件 — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]",
+                  "用胶、木销或紧固件组合木件成模型 — 0/100; weight=1/3; display.ai_impact_table.task_rows.5[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13888,7 +13908,7 @@
             }
           }
         ],
-        "answer": "编辑分析：可尝试用生成式工具整理读图问题、标准检索和记录草稿；动手成形、尺寸核对、设备安全和验收仍依现场责任。本页未取得木模工AI采用率、收益或因果岗位结果。",
+        "answer": "编辑分析：可尝试用生成式工具整理读图问题、标准检索和记录草稿；动手成形、尺寸核对、设备安全和验收仍依现场责任。本页未取得木模工AI采用率、收益或因果岗位结果。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "ILO Working Paper 140：Generative AI and Jobs",
@@ -15635,7 +15655,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15723,15 +15743,27 @@
         "source_refs": [
           "onet-summary"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "木模工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "图纸与放样识读",
@@ -15782,7 +15814,7 @@
       "text": "木模工"
     }
   },
-  "source_content_sha256": "0fd401f0c551d537c030019f63ba9b99ce7fbcfce7029e393a706f84dd0dc7b2",
+  "source_content_sha256": "9582d3602bd34cc2045d98eeda4537418ecb50a3ae5d77a14d2fecc594262112",
   "subject": {
     "canonical_slug": "model-makers-wood",
     "name": "木模工",

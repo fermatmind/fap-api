@@ -23,6 +23,9 @@
       "fact:education-profile": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -13633,6 +13636,23 @@
                 "publisher": "Registered nuclear safety engineer qualification system",
                 "scope": "contextual",
                 "url": "https://www.mee.gov.cn/gkml/hbb/gwy/200910/t20091030_180678.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Design reactor cores, shielding, and instrumentation and control equipment — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Monitor operations and identify violations or hazardous practices — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Prepare safety analyses and technical reports — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13820,7 +13840,7 @@
             }
           }
         ],
-        "answer": "Tools may assist with technical document drafts, regulatory searches, data organization and calculation scripts. Qualified engineers and licensed personnel remain responsible for safety conclusions, compliance judgments, change approvals and operating decisions.",
+        "answer": "Tools may assist with technical document drafts, regulatory searches, data organization and calculation scripts. Qualified engineers and licensed personnel remain responsible for safety conclusions, compliance judgments, change approvals and operating decisions. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 17-2161.00 occupational profile",
@@ -15581,7 +15601,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15805,15 +15825,27 @@
           "onet-workforce",
           "bls-ooh"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Nuclear engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Nuclear facility design and safety analysis",
@@ -15864,7 +15896,7 @@
       "text": "Nuclear engineers"
     }
   },
-  "source_content_sha256": "ed9cc0f176697b834013002ba4a44b8bec2be1c980300655e3f5a4143fe294e1",
+  "source_content_sha256": "7b13b061c93b2134e3028940451439fccec9555006085732d3e94d48487937a8",
   "subject": {
     "canonical_slug": "nuclear-engineers",
     "name": "Nuclear engineers",

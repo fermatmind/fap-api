@@ -8,6 +8,9 @@
       "fact:entry-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -7563,7 +7566,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜生成式 AI 可辅助保教活动素材整理、观察记录草拟、教学材料初步检查与排程，但不能独立确认幼儿发展判断、活动现场状态、儿童安全与异常升级，也不能替代对幼儿的最终观察评价与家校沟通。任务暴露不等于岗位替代，也不等于已普遍采用；正式使用需要授权、人工复核与留痕，并须遵守儿童与家庭信息保护要求。本页不给出替代概率或时间表。"
+              "直接回答｜生成式 AI 可辅助保教活动素材整理、观察记录草拟、教学材料初步检查与排程，但不能独立确认幼儿发展判断、活动现场状态、儿童安全与异常升级，也不能替代对幼儿的最终观察评价与家校沟通。任务暴露不等于岗位替代，也不等于已普遍采用；正式使用需要授权、人工复核与留痕，并须遵守儿童与家庭信息保护要求。本页不给出替代概率或时间表。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "kindergarten-teachers-except-special-education.ai-impact.ai-impact-table.2",
@@ -8965,6 +8968,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "准备保教活动 — 75/100; weight=1/3; kindergarten-teachers-except-special-education.profile.responsibilities-block.4[0]",
+                  "组织活动并维护幼儿安全 — 0/100; weight=1/3; kindergarten-teachers-except-special-education.profile.responsibilities-block.4[0]",
+                  "观察记录并与家长沟通 — 50/100; weight=1/3; kindergarten-teachers-except-special-education.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11443,7 +11463,7 @@
     ],
     "path": "/zh/career/jobs/kindergarten-teachers-except-special-education",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11579,15 +11599,27 @@
         "source_refs": [
           "onet-trends"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "幼儿园教师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "幼儿园教师 · 保教、照护与儿童安全边界",
@@ -11638,7 +11670,7 @@
       "text": "幼儿园教师职业判断：保教、照护与儿童安全边界"
     }
   },
-  "source_content_sha256": "bb5295faf7475edaaaacd655e4c2ac2bc1c907699fb1e327464650785467332b",
+  "source_content_sha256": "574779b00c7090ebb1b9e75a37fc5e56429a013ac3d44878d1156074156a3b1b",
   "subject": {
     "canonical_slug": "kindergarten-teachers-except-special-education",
     "name": "幼儿园教师",

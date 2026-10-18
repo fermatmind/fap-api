@@ -5,6 +5,9 @@
       "fact:employment": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -13781,6 +13784,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-4051.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "配料与加料：按炉况与钢种要求核对配料并加料。 — 0/100; weight=1/3; metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2[0]",
+                  "熔化与精炼：监控熔化过程并调整成分与温度。 — 50/100; weight=1/3; metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2[1]",
+                  "取样与调整：取样确认成分并按规程调整。 — 0/100; weight=1/3; metal-refining-furnace-operators-and-tenders.profile.responsibilities-block.2[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13968,7 +13988,7 @@
             }
           }
         ],
-        "answer": "编辑试用建议：整理炉次、成分读数和交班报表；真实采集接口、测量可靠性和模型分析须另行验证。加料、出钢、参数与安全决定按实际职责由人确认；未取得生成式AI采用或可靠效果。",
+        "answer": "编辑试用建议：整理炉次、成分读数和交班报表；真实采集接口、测量可靠性和模型分析须另行验证。加料、出钢、参数与安全决定按实际职责由人确认；未取得生成式AI采用或可靠效果。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "本职业任务",
@@ -15749,7 +15769,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15909,15 +15929,27 @@
         "source_refs": [
           "source-pack-onet-summary"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "金属操作员看护员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "熔炼与精炼操作",
@@ -15968,7 +16000,7 @@
       "text": "金属精炼炉操作员与看护员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "681d2381d9766380d26b88158973fd9cd84b2c5f410c26188d3fb1b30f096814",
+  "source_content_sha256": "b0de41d69d25a925d22b512ada91833e7b3d343b5e46d48a3972e4f66762e18b",
   "subject": {
     "canonical_slug": "metal-refining-furnace-operators-and-tenders",
     "name": "金属精炼炉操作员与看护员",

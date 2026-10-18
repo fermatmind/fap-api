@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:market-employment-2025": {
         "status": "pending_mapping"
       },
@@ -7541,7 +7544,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round obtained no occupational generative AI adoption rate or measured efficiency gains. Organization can be trialed on fictional drawing records, with humans checking units, datums and versions; a CAD list does not demonstrate generative AI."
+              "Insufficient evidence: This round obtained no occupational generative AI adoption rate or measured efficiency gains. Organization can be trialed on fictional drawing records, with humans checking units, datums and versions; a CAD list does not demonstrate generative AI. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.2",
@@ -8720,6 +8723,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-4192.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Check drawings and calculate dimensions — 75/100; weight=1/3; layout-workers-metal-and-plastic.profile.responsibilities-block.4[0]",
+                  "Locate and verify layout marks — 0/100; weight=1/3; layout-workers-metal-and-plastic.profile.responsibilities-block.4[0]",
+                  "Plan machining sequences and hand over records — 50/100; weight=1/3; layout-workers-metal-and-plastic.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11092,7 +11112,7 @@
     ],
     "path": "/en/career/jobs/layout-workers-metal-and-plastic",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11216,15 +11236,27 @@
         "source_refs": [
           "onet-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Layout Workers, Metal and Plastic",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [],
     "metrics": [
@@ -11271,7 +11303,7 @@
       "text": "Layout Worker Career Assessment: Work, Entry and Risk Boundaries"
     }
   },
-  "source_content_sha256": "f241ea10e15082b5ac0763d0acaa10b4918883cf2166b7342bcd751a42de5d49",
+  "source_content_sha256": "8d639c1fd515cccf91cdc07122b8345895826a892b534580da691a4eb5f9e6f1",
   "subject": {
     "canonical_slug": "layout-workers-metal-and-plastic",
     "name": "Layout Workers, Metal and Plastic",

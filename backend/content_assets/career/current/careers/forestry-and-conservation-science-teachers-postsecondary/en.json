@@ -11,6 +11,9 @@
       "fact:employment": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "pending_mapping"
       },
@@ -25148,7 +25151,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no task exposure score, school adoption rate, or employment causal evidence precisely for 25-1043 was obtained, and no medium-high or short-term replacement conclusion is given. Editorial analysis can explore courseware, literature, table checking, and feedback drafts; GIS and statistical software do not equal generative AI. Teaching appropriateness, research conclusions, grading and appeals, safety, and data permissions must still be checked by humans according to real school procedures."
+              "Insufficient evidence: no task exposure score, school adoption rate, or employment causal evidence precisely for 25-1043 was obtained, and no medium-high or short-term replacement conclusion is given. Editorial analysis can explore courseware, literature, table checking, and feedback drafts; GIS and statistical software do not equal generative AI. Teaching appropriateness, research conclusions, grading and appeals, safety, and data permissions must still be checked by humans according to real school procedures. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "forestry-and-conservation-science-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32797,6 +32800,23 @@
                 "publisher": "ILO",
                 "scope": "Global ISCO08 potential task exposure",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Course teaching and lecturing — 50/100; weight=1/3; forestry-and-conservation-science-teachers-postsecondary.ai-impact.ai-impact-table.95[0]",
+                  "Laboratory and field teaching — 0/100; weight=1/3; forestry-and-conservation-science-teachers-postsecondary.ai-impact.ai-impact-table.99[0]",
+                  "Research and academic output — 50/100; weight=1/3; forestry-and-conservation-science-teachers-postsecondary.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37731,7 +37751,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37915,15 +37935,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Forestry and Conservation Science Teachers, Postsecondary",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Forestry and Conservation Science Teachers, Postsecondary · tasks, deliverables, and responsibility boundaries",
@@ -37974,7 +38006,7 @@
       "text": "Forestry and Conservation Science Teachers, Postsecondary"
     }
   },
-  "source_content_sha256": "11c3e86b0c0b45d0a1547c7e1e6bb4e8959adf77ce63ccdd62c52863bccc8ba8",
+  "source_content_sha256": "2380e9598122e2eeee23f02cb8252fad9d4a487fefb4e45b0ee1d09d70adc94b",
   "subject": {
     "canonical_slug": "forestry-and-conservation-science-teachers-postsecondary",
     "name": "Forestry and Conservation Science Teachers, Postsecondary",

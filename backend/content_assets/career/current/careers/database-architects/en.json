@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24349,7 +24352,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial tool candidates: Model/SQL explanations and initial mapping/document checks. Check outputs against actual systems. Actual efficiency gains, adoption or causal income/employment effects have not been measured; do not claim work has already accelerated or platforms have replaced people. In the U.S., 65% report indoor controlled environments daily and 81% sitting continuously; 95% email daily, 48% telephone daily, 43% face-to-face discussions daily/48% weekly or more but not daily, and 48% contact most of the time; 52% time pressure weekly or more but not daily; 57% at 40 hours/43% over 40. 62% Somefreedom and 52% task-priority Somefreedom do not establish data/deployment permissions. These are not Chinese working hours or remote-work rates."
+              "Editorial tool candidates: Model/SQL explanations and initial mapping/document checks. Check outputs against actual systems. Actual efficiency gains, adoption or causal income/employment effects have not been measured; do not claim work has already accelerated or platforms have replaced people. In the U.S., 65% report indoor controlled environments daily and 81% sitting continuously; 95% email daily, 48% telephone daily, 43% face-to-face discussions daily/48% weekly or more but not daily, and 48% contact most of the time; 52% time pressure weekly or more but not daily; 57% at 40 hours/43% over 40. 62% Somefreedom and 52% task-priority Somefreedom do not establish data/deployment permissions. These are not Chinese working hours or remote-work rates. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31843,6 +31846,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://csrc.nist.gov/glossary/term/csf_function"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Architecture strategy and requirements | Clarify requirements and develop strategies | Collaborate with systems architects, software architects and design analysts to understand business or industry needs, develop database architecture strategies during modeling, design and implementation, and write and archive database architecture. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Modeling and design | Design database structures and data models | Design databases supporting business applications to ensure scalability, security, performance and reliability, develop data models for applications, metadata tables, views or related structures, and document and communicate database schemas using accepted notation. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Reliability and performance | Set up backup/recovery and optimize | Set up database clusters, backup or recovery procedures, demonstrate technical database functions such as performance, security and reliability, develop load-balancing procedures to eliminate backup-related downtime, plan and install database management system upgrades, and identify, assess and recommend hardware/software achieving required performance. — 50/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37271,7 +37291,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37542,15 +37562,27 @@
         "source_refs": [
           "r5-nbs-it"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Database architect",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Data architecture and standards · models and integration · scalability and reliability",
@@ -37601,7 +37633,7 @@
       "text": "Database architect"
     }
   },
-  "source_content_sha256": "17a1b9344ad46a3b60b63c1ee14c8cab87cf3a4ef429fae616bbf0ca735551bf",
+  "source_content_sha256": "ac92e7b8ba3c8ba1f1331db1f5ae3a9335cc7b2ab221182d7f18da81e02bb854",
   "subject": {
     "canonical_slug": "database-architects",
     "name": "Database architect",

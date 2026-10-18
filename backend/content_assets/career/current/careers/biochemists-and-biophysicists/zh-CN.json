@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24721,7 +24724,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可作为检索、草稿、数据初筛与记录整理的候选辅助；这是编辑按任务提出的应用判断，本轮没有本职业采用率、实测生产率或整体替代日期。序列/结构计算模型、既有实验自动化与生成式AI须分开评价；O*NET一般自动化情境也不测GenAI。美国19-1021：2025年就业35,200人，2035年预计39,500人；2025—2035年增长12%（远快于平均），净变化约4,300人、年均职位空缺约2,900。空缺包含替换，不是净增岗位或个人录用概率。"
+              "AI可作为检索、草稿、数据初筛与记录整理的候选辅助；这是编辑按任务提出的应用判断，本轮没有本职业采用率、实测生产率或整体替代日期。序列/结构计算模型、既有实验自动化与生成式AI须分开评价；O*NET一般自动化情境也不测GenAI。美国19-1021：2025年就业35,200人，2035年预计39,500人；2025—2035年增长12%（远快于平均），净变化约4,300人、年均职位空缺约2,900。空缺包含替换，不是净增岗位或个人录用概率。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "biochemists-and-biophysicists.ai-impact.ai-impact-table.18",
@@ -32524,6 +32527,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "wage_scope",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "提出假设与设计实验｜让问题可验证｜把研究问题拆成可检验的假设，设计对照与重复与采样方案，并事先评估可行性、风险与所需授权。 — 50/100; weight=1/3; biochemists-and-biophysicists.profile.responsibilities-block.1[0]",
+                  "实施实验与采集数据｜让数据有出处｜在批准的实验室等级与授权范围内按规程操作仪器与试剂，按编号记录原始数据与仪器参数与试剂批次与对照条件。 — 0/100; weight=1/3; biochemists-and-biophysicists.profile.responsibilities-block.1[1]",
+                  "分析数据与复核异常｜让结论可检验｜用公开的方法与可复现的流程分析数据，对异常与阴性结果先复核与复测，而不是先取想要的部分。 — 75/100; weight=1/3; biochemists-and-biophysicists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37422,7 +37442,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37834,15 +37854,27 @@
         "source_refs": [
           "bls-ooh-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "生物化学家与生物物理学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 19-1021.00 · Job Zone Five（需大量准备）· O*NET 标注 Bright Outlook",
@@ -37893,7 +37925,7 @@
       "text": "生物化学家与生物物理学家"
     }
   },
-  "source_content_sha256": "ab6d290ae3cb2a449896afff11eb5e35e99f2e6b3978fb140b69bce87bc8d200",
+  "source_content_sha256": "f082d93dfa5772e05302a5b8bc77ca38f5c5018bd09255417f9864656f1e8562",
   "subject": {
     "canonical_slug": "biochemists-and-biophysicists",
     "name": "生物化学家与生物物理学家",

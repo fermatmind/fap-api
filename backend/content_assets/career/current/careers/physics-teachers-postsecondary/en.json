@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24415,7 +24418,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with worked example drafts, teaching material organization, candidate concept explanations, and low-risk exercise feedback; teachers must still verify physics correctness, learning objectives, grading fairness, student privacy, and laboratory safety. The NIST generative AI profile is risk governance material and does not provide a 25-1054 position replacement rate."
+              "AI can assist with worked example drafts, teaching material organization, candidate concept explanations, and low-risk exercise feedback; teachers must still verify physics correctness, learning objectives, grading fairness, student privacy, and laboratory safety. The NIST generative AI profile is risk governance material and does not provide a 25-1054 position replacement rate. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "physics-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32280,6 +32283,23 @@
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "context",
                 "url": "https://www.onetonline.org/link/summary/25-9044.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Material design｜Choose worked examples, derivations, demonstrations, and experiments｜Note the model assumptions and safety conditions. — 75/100; weight=1/3; physics-teachers-postsecondary.profile.responsibilities-block.1[1]",
+                  "Classroom teaching｜Explain physics concepts and guide discussion｜Check students' actual understanding. — 25/100; weight=1/3; physics-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "Assessment feedback｜Design assignments, examinations, and grading rubrics｜Grade fairly and explain common misconceptions. — 50/100; weight=1/3; physics-teachers-postsecondary.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37185,7 +37205,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37453,15 +37473,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Postsecondary physics teachers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Postsecondary physics teaching · courses and experiments",
@@ -37512,7 +37544,7 @@
       "text": "Postsecondary physics teacher career guide: teaching tasks, wages, and entry paths"
     }
   },
-  "source_content_sha256": "b173c428e3f45910d23c7270407dce1820b9c4fd985004a6d148a0cf7d453172",
+  "source_content_sha256": "8559b77f3b27d7d2c3d017bb957b055c5b5e63d3955bda5bbf901f1d6d1af9e4",
   "subject": {
     "canonical_slug": "physics-teachers-postsecondary",
     "name": "Postsecondary physics teachers",

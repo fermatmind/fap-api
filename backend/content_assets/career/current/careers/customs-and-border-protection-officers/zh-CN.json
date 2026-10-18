@@ -14,6 +14,9 @@
       "fact:employment-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24314,7 +24317,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑判断：可评估证件与申报比对、材料检索、税费规则计算和记录草稿的辅助用途，需实测准确性、偏差、权限与保密条件；本页没有部署成效证据。O*NET受访者报告的一般工作自动化程度50%高度、25%中度、11%轻微，不是生成式AI采用率。资格判断、强制处置、案件和税费争议的责任按法域、机构与岗位授权核对。证据不足：未取得本细类AI对编制、工资的因果数据。"
+              "编辑判断：可评估证件与申报比对、材料检索、税费规则计算和记录草稿的辅助用途，需实测准确性、偏差、权限与保密条件；本页没有部署成效证据。O*NET受访者报告的一般工作自动化程度50%高度、25%中度、11%轻微，不是生成式AI采用率。资格判断、强制处置、案件和税费争议的责任按法域、机构与岗位授权核对。证据不足：未取得本细类AI对编制、工资的因果数据。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31774,6 +31777,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "occupation_group",
                 "url": "https://www.bls.gov/ooh/protective-service/police-and-detectives.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "查验与面谈｜核验人员证件与资格｜查验移民申请、签证与护照并面谈，判断入境、居留与旅行资格，并在发现违规时依法安排后续法律行动。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "货物与行李｜查验合规并抽检｜查验入境或出境货物、行李与随身物品是否符合税收法律与海关规定，抽取商品样品送检并确定应缴关税与税费。 — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "查缉与扣押｜查找并扣押违禁品｜查找并扣押违禁品、未申报商品以及藏匿上述商品的车辆、航空器或船只，并对违反海关或移民法律的人员实施扣留。 — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37261,7 +37281,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37457,15 +37477,27 @@
         "source_refs": [
           "nbs-wage-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "海关与边境保护官员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "口岸执法 · 查验与调查 · 移民与海关",
@@ -37516,7 +37548,7 @@
       "text": "海关与边境保护官员"
     }
   },
-  "source_content_sha256": "7f1bd09cb981aff5be75682e9f2458440312d323840d20891fac135062be7563",
+  "source_content_sha256": "a5b6303f8cbb9d0fd6ce7f19f222a0a254f0266650b378faf007961275f4cf42",
   "subject": {
     "canonical_slug": "customs-and-border-protection-officers",
     "name": "海关与边境保护官员",

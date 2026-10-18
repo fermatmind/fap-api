@@ -38,6 +38,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24621,7 +24624,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Conclusion: area and usage calculation, drafting material lists, first drafts of layout drawings, and organizing records and handover text can be assisted by tools, but there is no official evidence that they replace on-site dimensional verification, substrate condition judgment, laying direction and seam layout decisions, the practical feel and appearance judgment of tensioning and seaming and edging, and responsibility attribution. AI exposure does not equal an automation rate or job disappearance; task exposure, process automation level, and employment numbers are three different concepts."
+              "Conclusion: area and usage calculation, drafting material lists, first drafts of layout drawings, and organizing records and handover text can be assisted by tools, but there is no official evidence that they replace on-site dimensional verification, substrate condition judgment, laying direction and seam layout decisions, the practical feel and appearance judgment of tensioning and seaming and edging, and responsibility attribution. AI exposure does not equal an automation rate or job disappearance; task exposure, process automation level, and employment numbers are three different concepts. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "carpet-installers.ai-impact.ai-impact-table.18",
@@ -31442,6 +31445,23 @@
                 "publisher": "Beijing Municipal Administration for Market Regulation (full regulation text)",
                 "scope": "contextual",
                 "url": "https://scjgj.beijing.gov.cn/cxfw/flfgcxfw/qt/202006/t20200620_1929321.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Measurement and usage｜Studying floor sketches and re-verifying site dimensions, and calculating installation area and material usage｜Measurement and area and usage records. — 50/100; weight=1/3; carpet-installers.profile.responsibilities-block.1[0]",
+                  "Installation and tensioning｜Cutting and laying padding, laying and cutting carpet, and tensioning and fixing with tack strips and a stretcher｜Installation and tensioning records. — 0/100; weight=1/3; carpet-installers.profile.responsibilities-block.1[3]",
+                  "Seams and edging｜Joining seams with sewing or adhesive tape and a heated carpet iron, and installing trim strips and edging and baseboards｜Seam and edging and trim strip records. — 0/100; weight=1/3; carpet-installers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36358,7 +36378,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -36722,15 +36742,27 @@
         "source_refs": [
           "carpet-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Carpet installers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 47-2041.00 · measurement and layout and usage / installation and tensioning / seaming and edging and handover",
@@ -36781,7 +36813,7 @@
       "text": "Carpet installers"
     }
   },
-  "source_content_sha256": "16a8e691bf0c1e123e0e19988499de64b8563d6d89dea97025e932d6e9d53950",
+  "source_content_sha256": "012fe6a5c51fcff5ffa89bd3773e538a27d92880472265651a48db66cc2d9bd6",
   "subject": {
     "canonical_slug": "carpet-installers",
     "name": "Carpet installers",

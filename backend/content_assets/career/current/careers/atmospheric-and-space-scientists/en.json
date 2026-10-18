@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24297,7 +24300,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round did not obtain data on this occupation's AI effects, adoption rates, or employment causation; tasks, software recruitment, and overall projections are different objects. The ILO introduction and extended abstract and the NIST brief are only cross-occupational background, and neither their full text nor this occupation's mapping was read."
+              "This round did not obtain data on this occupation's AI effects, adoption rates, or employment causation; tasks, software recruitment, and overall projections are different objects. The ILO introduction and extended abstract and the NIST brief are only cross-occupational background, and neither their full text nor this occupation's mapping was read. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "atmospheric-and-space-scientists.ai-impact.ai-impact-table.18",
@@ -32344,6 +32347,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1299.02"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Observation and input | O*NET lists observation collection, and China's 2-02-25-01 lists data quality control; metadata verification is an editorial work suggestion, and specific standards follow actual operations. — 50/100; weight=1/3; atmospheric-and-space-scientists.profile.responsibilities-block.1[0]",
+                  "Models and analysis | O*NET lists mathematical and computer models, data interpretation, and climate analysis; handling model disagreement must follow the real process, and this page does not approve a uniform shutdown. — 75/100; weight=1/3; atmospheric-and-space-scientists.profile.responsibilities-block.1[1]",
+                  "Research and expression | Tasks include research reports, maps, and briefings; it is suggested to distinguish raw data, interpretation, and uncertainty, and keeping records does not guarantee a complete review. — 75/100; weight=1/3; atmospheric-and-space-scientists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37244,7 +37264,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -37572,15 +37592,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Atmospheric and Space Scientists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 19-2021.00 · Job Zone Four · mostly bachelor's",
@@ -37631,7 +37663,7 @@
       "text": "Atmospheric and Space Scientists"
     }
   },
-  "source_content_sha256": "5ea773305957103107281055222ced94df9f60557e21bf0b7e89cb9a5de959ef",
+  "source_content_sha256": "421eebd33722abbb59cd4e9663482fbb7ab3ca3f12f289419dfb69f7a573571f",
   "subject": {
     "canonical_slug": "atmospheric-and-space-scientists",
     "name": "Atmospheric and Space Scientists",

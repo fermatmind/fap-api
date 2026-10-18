@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24689,7 +24692,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The occupational materials and ILO research read this round do not give an overall replacement rate or a disappearance year for bicycle repairers. Text organization can be trialed first, and specific mechanical inspection, repair, and delivery are reviewed by those holding the position duties; task exposure does not equal adoption, efficiency, or employment outcomes."
+              "The occupational materials and ILO research read this round do not give an overall replacement rate or a disappearance year for bicycle repairers. Text organization can be trialed first, and specific mechanical inspection, repair, and delivery are reviewed by those holding the position duties; task exposure does not equal adoption, efficiency, or employment outcomes. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.18",
@@ -32748,6 +32751,23 @@
                 "publisher": "Regulation reprint by the State Administration for Market Regulation",
                 "scope": "jurisdiction_specific",
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inspection and location | Make the fault reproducible | Perform visual and functional inspection, locate the fault by symptom, and distinguish adjustable problems from already damaged parts. — 25/100; weight=1/3; bicycle-repairers.profile.responsibilities-block.1[1]",
+                  "Repair and adjustment | Give the result a specification | Disassemble and assemble and adjust and clean and lubricate according to the manufacturer manual and specifications, and install and adjust brakes and shifting and replace tires and inner tubes. — 0/100; weight=1/3; bicycle-repairers.profile.responsibilities-block.1[2]",
+                  "Work orders and parts | Make the process traceable | Open repair work orders and record parts and labor and costs and specifications, and order and verify parts and batches. — 75/100; weight=1/3; bicycle-repairers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37685,7 +37705,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38053,15 +38073,27 @@
         "source_refs": [
           "ep-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Bicycle Repairers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 49-3091.00 · Job Zone 1–2 · Low entry preparation",
@@ -38112,7 +38144,7 @@
       "text": "Bicycle Repairers"
     }
   },
-  "source_content_sha256": "e7b28bbd91067d7c1da3c965f32640210e08eb4a605cc88a53afbc80b62f60a7",
+  "source_content_sha256": "cf2d7e4e2f002ff1cd12785379d31ba22679182aaebba034621d204dea2ee61c",
   "subject": {
     "canonical_slug": "bicycle-repairers",
     "name": "Bicycle Repairers",

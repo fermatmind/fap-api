@@ -8,6 +8,9 @@
       "fact:china-production-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25482,7 +25485,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: reviewable task scores, the national AI adoption rate and net employment causal results for this occupation. Vendor machining suggestions do not prove that mould making and repair testing are completed automatically; the BLS2025—2035 overall decline of 9.2%, the ten-year net reduction of about 5200 people and the average annual 4300 openings that includes replacements are component indicators and do not represent AI-only job cuts or an individual's probability of unemployment."
+              "Insufficient evidence: reviewable task scores, the national AI adoption rate and net employment causal results for this occupation. Vendor machining suggestions do not prove that mould making and repair testing are completed automatically; the BLS2025—2035 overall decline of 9.2%, the ten-year net reduction of about 5200 people and the average annual 4300 openings that includes replacements are component indicators and do not represent AI-only job cuts or an individual's probability of unemployment. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "tool-and-die-makers.display.ai_impact_table.answer",
@@ -33121,6 +33124,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Preparation｜drawing reading and dimensional calculation｜Check the drawing, model and technical requirements, calculate dimensions, shape and tolerances, and plan the machining sequence for the tool or mould. — 75/100; weight=1/3; tool-and-die-makers.display.responsibilities_block.01[0]",
+                  "Machining｜cutting and forming｜Set up and operate conventional or CNC machine tools to turn, mill, grind and drill the parts so that they approach the specified dimensions and surface requirements. — 0/100; weight=1/3; tool-and-die-makers.display.responsibilities_block.03[0]",
+                  "Assembly｜fitting and tool assembly｜Dress, adjust and fit the related parts, and make, repair or modify moulds, jigs, gauges and other tools. — 0/100; weight=1/3; tool-and-die-makers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38387,7 +38407,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Occupational fit guide",
@@ -38571,15 +38591,27 @@
         "source_refs": [
           "china-wage-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Tool and die makers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "The precise O*NET-SOC 51-4111.00 occupational basis",
@@ -38630,7 +38662,7 @@
       "text": "Tool and die makers"
     }
   },
-  "source_content_sha256": "fa82931da2f6483e9a187c82722b124da5a7fb276c3cb1918c66b21bdb86313d",
+  "source_content_sha256": "75a609b56db01a23f0a9bbe48140e8a64c5e57cfab9737154f1014b2ffd1c3db",
   "subject": {
     "canonical_slug": "tool-and-die-makers",
     "name": "Tool and die makers",

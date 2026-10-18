@@ -44,6 +44,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24860,7 +24863,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: actual AI adoption rates or layoff proportions for aerospace engineers as a single occupation, or causal employment data for China, have not been obtained. AI can support requirements retrieval, analysis scripts, parameter exploration, and document drafts, but outputs still require checking units, assumptions, operating conditions, and verification evidence. BLS projects 8% growth for this U.S. occupation over 2025–2035; this does not prove AI will not change jobs."
+              "Insufficient evidence: actual AI adoption rates or layoff proportions for aerospace engineers as a single occupation, or causal employment data for China, have not been obtained. AI can support requirements retrieval, analysis scripts, parameter exploration, and document drafts, but outputs still require checking units, assumptions, operating conditions, and verification evidence. BLS projects 8% growth for this U.S. occupation over 2025–2035; this does not prove AI will not change jobs. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.18",
@@ -32884,6 +32887,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/15-1211.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Design analysis | Build and compare models | Compare aerodynamic, structural, propulsion, or control options, retaining assumptions, units, and boundary conditions. — 75/100; weight=1/3; aerospace-engineers.profile.responsibilities-block.1[1]",
+                  "Testing and verification | Check prototypes and systems | Develop test plans and check whether test conditions correspond to analytical models. — 25/100; weight=1/3; aerospace-engineers.profile.responsibilities-block.1[2]",
+                  "Quality and compliance | Assess fulfillment of requirements | Link analysis or test results to requirements and applicable standards to produce technical reports. — 50/100; weight=1/3; aerospace-engineers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37789,7 +37809,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38357,15 +38377,27 @@
         "source_refs": [
           "source-nbs-science-2025-revision"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Aerospace engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of tasks to AI (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Aerospace engineer tasks · Aerospace engineers' model and result review · Aerospace engineers' assumption and version records",
@@ -38416,7 +38448,7 @@
       "text": "Aerospace engineers"
     }
   },
-  "source_content_sha256": "9cb8eede013e7da9c01d4786b6d390e566198331aa66a8c28e11b1114e08d01e",
+  "source_content_sha256": "6b7b2b68a80cd1603d5359038d6550dfa1b403d0b2ae62f56f6b10ac2646dad2",
   "subject": {
     "canonical_slug": "aerospace-engineers",
     "name": "Aerospace engineers",

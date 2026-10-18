@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24412,7 +24415,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可试验规范检索、图纸核对、计算记录和报告草拟；实际效果须核质量与返工。方案判断与签署由实际获授权人员按制度复核，不把注册资格写成所有岗位统一门槛。"
+              "可试验规范检索、图纸核对、计算记录和报告草拟；实际效果须核质量与返工。方案判断与签署由实际获授权人员按制度复核，不把注册资格写成所有岗位统一门槛。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "fire-prevention-and-protection-engineers.ai-impact.ai-impact-table.18",
@@ -31812,6 +31815,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "审核建筑图纸并核对消防规范符合性 — 75/100; weight=1/3; fire-prevention-and-protection-engineers.ai-impact.ai-impact-table.95[0]",
+                  "设计火灾探测、报警与灭火系统并开展计算 — 75/100; weight=1/3; fire-prevention-and-protection-engineers.ai-impact.ai-impact-table.99[0]",
+                  "对防火门、烟气控制系统等构件与设备开展测试与验证 — 25/100; weight=1/3; fire-prevention-and-protection-engineers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36714,7 +36734,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36983,15 +37003,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "消防与防护工程师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "消防与防护工程师 · 官方职业范围（17-2111.02）",
@@ -37042,7 +37074,7 @@
       "text": "消防与防护工程师"
     }
   },
-  "source_content_sha256": "7f0e53844f0a6b663f0c7e727700e0496d220586a877cb3fe690e47181dba399",
+  "source_content_sha256": "548911b4e48ad6f23d4af42a2f5965b1f2a1b900f68bcf344105ec7208ac35ef",
   "subject": {
     "canonical_slug": "fire-prevention-and-protection-engineers",
     "name": "消防与防护工程师",

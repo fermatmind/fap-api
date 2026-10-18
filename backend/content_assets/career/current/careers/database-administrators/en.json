@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24357,7 +24360,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial tool candidates: SQL/script drafts, log classification and preliminary metric explanations. Validate outputs in the applicable environment; efficiency, adoption and income causation have not been measured. OOH's statement that cloud services may limit DBA demand explains a projection; it cannot be rewritten as GenAI layoffs already occurring or managed automatic tuning for everyone. Among U.S. respondents, 90% report indoor controlled environments daily, 24% sitting for more than half the time, 92% email daily, and 71% contact with others most of the time. 16% report face-to-face discussions weekly or more but not daily, 70% making decisions weekly or more but not daily, and 22% time pressure weekly or more but not daily. 56% report substantial decision freedom, which does not automatically grant data/deployment permissions. Rounded figures are 68% with a typical 40-hour week, 16% over 40, and 15% under 40. These are not Chinese working hours or remote-work shares."
+              "Editorial tool candidates: SQL/script drafts, log classification and preliminary metric explanations. Validate outputs in the applicable environment; efficiency, adoption and income causation have not been measured. OOH's statement that cloud services may limit DBA demand explains a projection; it cannot be rewritten as GenAI layoffs already occurring or managed automatic tuning for everyone. Among U.S. respondents, 90% report indoor controlled environments daily, 24% sitting for more than half the time, 92% email daily, and 71% contact with others most of the time. 16% report face-to-face discussions weekly or more but not daily, 70% making decisions weekly or more but not daily, and 22% time pressure weekly or more but not daily. 56% report substantial decision freedom, which does not automatically grant data/deployment permissions. Rounded figures are 68% with a typical 40-hour week, 16% over 40, and 15% under 40. These are not Chinese working hours or remote-work shares. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31847,6 +31850,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "broader proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Database structure and changes | Maintain databases and data dictionaries | Modify existing databases and database management systems, or direct programmers and analysts to make changes; write logical and physical database descriptions and specify identifiers, develop data models under procedures, and revise data definitions in the corporate data dictionary. — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Performance and capacity | Monitor and resolve performance problems | Select and enter code to monitor database performance and create production databases; identify, investigate and resolve database performance, capacity and scalability issues; identify, assess and recommend hardware or software technologies that achieve the required performance. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Security and permissions | Implement security measures and control access | Plan, coordinate and implement security measures to prevent accidental or unauthorized damage, modification or disclosure of information in computer files; specify users and access levels for each database segment; develop standards and guidance for software use and acquisition and for protecting vulnerable information. — 50/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37227,7 +37247,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparisons",
       "fit": "Career fit guide",
@@ -37498,15 +37518,27 @@
         "source_refs": [
           "r5-nbs-it"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Database administrators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Database design and changes · Performance and capacity · Backup/recovery and permission controls",
@@ -37557,7 +37589,7 @@
       "text": "Database administrators"
     }
   },
-  "source_content_sha256": "4ae41c0e33a87115d3634ee2600d91b1df00335b375ff58af460b0eaa575a5dc",
+  "source_content_sha256": "6d3dba3f5e73061e942549ee5b9241dddd0cdb42a015f6d411307a04cb58d5d3",
   "subject": {
     "canonical_slug": "database-administrators",
     "name": "Database administrators",

@@ -8,6 +8,9 @@
       "fact:cn-finance-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25352,7 +25355,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI is more likely to assist text organization, retrieval, and discrepancy prompts; receipts, payments, verification, and transaction statuses require real system evidence. Insufficient evidence: materials read provide no exact generative AI teller replacement rate, so automation-related employment projections cannot be attributed to one technology."
+              "AI is more likely to assist text organization, retrieval, and discrepancy prompts; receipts, payments, verification, and transaction statuses require real system evidence. Insufficient evidence: materials read provide no exact generative AI teller replacement rate, so automation-related employment projections cannot be attributed to one technology. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "tellers.display.ai_impact_table.answer",
@@ -32461,6 +32464,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Intake | Clarify customer needs | Confirm receipts, payments, or inquiries, checking instructions, vouchers, and identity conditions under institutional requirements; verbal descriptions alone do not complete transactions. — 50/100; weight=1/3; tellers.display.responsibilities_block.01[0]",
+                  "Processing | Cash and instrument receipts and payments | Check amounts, instruments, and processing conditions and execute within your permissions; refer questions or over-limit matters through procedures. — 25/100; weight=1/3; tellers.display.responsibilities_block.02[0]",
+                  "Records | Transaction entry and receipts | Accurately record completed transactions, checking identifiers, amounts, and statuses, and provide corresponding outcomes to customers; pending requests are not completed matters. — 75/100; weight=1/3; tellers.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37722,7 +37742,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37883,15 +37903,27 @@
         "source_refs": [
           "nbs-finance-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Bank Tellers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 43-3071.00",
@@ -37942,7 +37974,7 @@
       "text": "Bank Tellers"
     }
   },
-  "source_content_sha256": "41bea4e897cf6d00cc0138d4452385a442d4507241f15c801fd89d5494be2d16",
+  "source_content_sha256": "424c5ceeefd953a09bf6cbc9e3ccdf20a9c9b5c5afa2f5ef5f765aa39d268894",
   "subject": {
     "canonical_slug": "tellers",
     "name": "Bank Tellers",

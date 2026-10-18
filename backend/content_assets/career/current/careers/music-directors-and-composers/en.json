@@ -14,6 +14,9 @@
       "fact:employment-2025": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth-2025-2035": {
         "status": "pending_mapping"
       },
@@ -14096,6 +14099,23 @@
                 "publisher": "U.S. Copyright Office",
                 "scope": "exact",
                 "url": "https://www.copyright.gov/newsnet/2025/1060.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Study full scores, work backgrounds, and ensemble conditions to develop interpretations of tempo, phrasing, dynamics, and overall style — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Use gestures, speech, and demonstrations to correct rhythm, intonation, balance, and ensemble problems, deciding whether to continue or repeat — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Turn commission objectives, scripts, images, or personal ideas into themes, harmony, rhythm, structure, and orchestration plans — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -14283,7 +14303,7 @@
             }
           }
         ],
-        "answer": "Task exposure does not equal institutional adoption: Candidate generation, transcription, and organization may be assisted, but overall interpretation, playability, emotional and functional judgments, live rehearsal decisions, and rights responsibilities still require people.",
+        "answer": "Task exposure does not equal institutional adoption: Candidate generation, transcription, and organization may be assisted, but overall interpretation, playability, emotional and functional judgments, live rehearsal decisions, and rights responsibilities still require people. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET occupational profile (27-2041.00)",
@@ -16033,7 +16053,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -16145,15 +16165,27 @@
         "source_refs": [
           "source-pack-onet-details"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Music Directors and Composers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Score reading and rehearsal conducting",
@@ -16204,7 +16236,7 @@
       "text": "Music Directors and Composers"
     }
   },
-  "source_content_sha256": "b5188c2ac55f6cb1eb5eb2f00a934aec8ace10731c78f93f3873a39fb75df4d5",
+  "source_content_sha256": "3ac26bfa2f7667000ca07a9d0f3233fe8fde3fd9606ffa3b012d5ba2e77e8439",
   "subject": {
     "canonical_slug": "music-directors-and-composers",
     "name": "Music Directors and Composers",

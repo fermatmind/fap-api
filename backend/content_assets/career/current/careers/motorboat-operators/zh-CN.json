@@ -11,6 +11,9 @@
       "fact:credential-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -13523,6 +13526,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-5022.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "操纵发动机油门与转向机构按预定航向航行，用罗盘或电子助航设备保持航向 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "用系泊缆绳把船固定到码头，并在离泊时解缆 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "按安全程序保障乘客与货物安全，在紧急情况下指挥安全处置 — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13713,7 +13733,7 @@
             }
           }
         ],
-        "answer": "机动船操作员可以用航线与潮汐信息查询、电子海图与助航设备读数记录、航次与补给清单管理、设备维护记录整理、向乘客或船员的说明材料草拟等形式获得辅助，但实际操纵与避让判断、现场安全指挥与应急决策、设备状态与船体状况判断、航行隐患的现场处置仍需由有责任的人承担；技术暴露不等于岗位替代。",
+        "answer": "机动船操作员可以用航线与潮汐信息查询、电子海图与助航设备读数记录、航次与补给清单管理、设备维护记录整理、向乘客或船员的说明材料草拟等形式获得辅助，但实际操纵与避让判断、现场安全指挥与应急决策、设备状态与船体状况判断、航行隐患的现场处置仍需由有责任的人承担；技术暴露不等于岗位替代。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET 53-5022.00 职业档案",
@@ -15461,7 +15481,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15573,15 +15593,27 @@
         "source_refs": [
           "source-pack-onet-localcert"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "机动船操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "操纵与航向保持",
@@ -15632,7 +15664,7 @@
       "text": "机动船操作员"
     }
   },
-  "source_content_sha256": "fb7ffb05d5bb052883958fccff6df1acee11eb01745ab98b2c6ffc609918d844",
+  "source_content_sha256": "4688757ed552e64815df1266ebf0c0ae9cba89323e7cc5bf3a9adefb1375ffa9",
   "subject": {
     "canonical_slug": "motorboat-operators",
     "name": "机动船操作员",

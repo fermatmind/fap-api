@@ -35,6 +35,9 @@
       "fact:current-openings-parent": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24591,7 +24594,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task impact judgment: cleaning, coding, retrieval and documentation may be considered for assistance and must be tested with real tasks; this round did not obtain evidence on GenAI adoption rates, time savings, wage premiums or overall substitution for this occupation. Task automation is not a change in the number of positions."
+              "Editorial task impact judgment: cleaning, coding, retrieval and documentation may be considered for assistance and must be tested with real tasks; this round did not obtain evidence on GenAI adoption rates, time savings, wage premiums or overall substitution for this occupation. Task automation is not a change in the number of positions. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "bioinformatics-technicians.ai-impact.ai-impact-table.18",
@@ -33034,6 +33037,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/15-1221.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Retrieve and analyze quality | Make the input credible | Enter and retrieve data from structural and sequence or mutation or genomic or gene expression databases as authorized and perform quality analysis, recording the source and format and version and validation rules, and do not use data of unknown origin or beyond authorization. — 75/100; weight=1/3; bioinformatics-technicians.profile.responsibilities-block.1[1]",
+                  "Run tools and analyze | Make the results testable | Analyze or manipulate bioinformatics data with software packages or statistical applications or data mining techniques, or develop and apply data mining and machine learning algorithms, implemented and run in a reproducible way. — 75/100; weight=1/3; bioinformatics-technicians.profile.responsibilities-block.1[2]",
+                  "Script and database maintenance | Make the tools dependable | Write query scripts and develop or maintain biological data applications, monitor database performance and carry out maintenance and upgrades and repairs, and truthfully record all changes and problems in the database. — 75/100; weight=1/3; bioinformatics-technicians.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37953,7 +37973,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38365,15 +38385,27 @@
         "source_refs": [
           "bls-industry-2023"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Bioinformatics technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 15-2099.01 · Job Zone Four (considerable preparation needed) · education mainly bachelor's and master's degrees",
@@ -38424,7 +38456,7 @@
       "text": "Bioinformatics technicians"
     }
   },
-  "source_content_sha256": "f1819f888410e5651301145b30eb43fbcf872a14ca0fe1efef02a3223b36444f",
+  "source_content_sha256": "7728889eb5d7db87840687a8a08a7888ed4fc11e00ab5d5a4680ea75e038c408",
   "subject": {
     "canonical_slug": "bioinformatics-technicians",
     "name": "Bioinformatics technicians",

@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24302,7 +24305,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮核到官方任务、情境、招聘关键词及适用规则，未取得本岗生成式AI上线率或效率实验。表格与脚本计算、数据汇总、模板起草及档案筛选是可试验的编辑辅助方向，须在真实授权环境测准确与异常；自动审批与人工复审按适用规则设计，不概括所有结论永远只能人工。适用个人贷款管理办法第21条：审贷分离、授权独立审批；适用线上自动化审批的贷款人应建立人工复审机制作为补充，并设定触发条件，非每笔必须人工决定。贷后发现自动审批不能有效识别风险时，由贷款人停止该流程。流动资金贷款管理办法第20条强调分级审批及转授权边界；二者2024-07-01施行，直接适用境内商业银行等吸收公众存款机构，其他机构按各自规则及参照条款核。"
+              "本轮核到官方任务、情境、招聘关键词及适用规则，未取得本岗生成式AI上线率或效率实验。表格与脚本计算、数据汇总、模板起草及档案筛选是可试验的编辑辅助方向，须在真实授权环境测准确与异常；自动审批与人工复审按适用规则设计，不概括所有结论永远只能人工。适用个人贷款管理办法第21条：审贷分离、授权独立审批；适用线上自动化审批的贷款人应建立人工复审机制作为补充，并设定触发条件，非每笔必须人工决定。贷后发现自动审批不能有效识别风险时，由贷款人停止该流程。流动资金贷款管理办法第20条强调分级审批及转授权边界；二者2024-07-01施行，直接适用境内商业银行等吸收公众存款机构，其他机构按各自规则及参照条款核。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31765,6 +31768,23 @@
                 "publisher": "中国政府官方网站",
                 "scope": "proxy",
                 "url": "https://credit.mot.gov.cn/zhengcefagui/202408/t20240807_4147083.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "信用数据与财报分析｜读取资料并判断风险程度｜分析个人或企业的信用数据与财务报表，判断放贷或授信所涉风险程度，并核对数据时点、口径与完整性。 — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "财务比率与盈利能力测算｜生成比率并测算盈利｜用计算机程序生成财务比率评估客户财务状况，分析收入增长、管理层质量与市场份额等财务数据判断贷款的预期盈利能力。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "报告与申请编制｜编制报告与贷款申请｜编制包含风险程度的报告，完成贷款申请（含信用分析与贷款申请摘要），核对口径后提交贷款委员会等有权机构审批。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37117,7 +37137,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37361,15 +37381,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "信用分析师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "商业与金融服务 · 信贷风险分析",
@@ -37420,7 +37452,7 @@
       "text": "信用分析师"
     }
   },
-  "source_content_sha256": "2469d422269292f286025e8a4af0b6186dea591d1f04ca06176698a415cb2e8d",
+  "source_content_sha256": "a82e8572282e0aa91ed067bfe0c539511d8864adccc9cc4c6a78efd5ddf4f19a",
   "subject": {
     "canonical_slug": "credit-analysts",
     "name": "信用分析师",

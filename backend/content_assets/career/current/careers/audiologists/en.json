@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24302,7 +24305,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain measurements of generative AI adoption rates, product effects, or employment causation for this occupation. Scheduling, medical record organization, data statistics, parameter records, and follow-up reminders are editorial trial candidates. The ILO index introduction and extended abstract and the NIST brief are only cross-occupational background, and neither their full text nor this occupation's mapping was read, so they cannot prove that all clinical responsibility will never be replaced."
+              "Insufficient evidence: this round did not obtain measurements of generative AI adoption rates, product effects, or employment causation for this occupation. Scheduling, medical record organization, data statistics, parameter records, and follow-up reminders are editorial trial candidates. The ILO index introduction and extended abstract and the NIST brief are only cross-occupational background, and neither their full text nor this occupation's mapping was read, so they cannot prove that all clinical responsibility will never be replaced. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "audiologists.ai-impact.ai-impact-table.18",
@@ -32386,6 +32389,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-1042.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Intake and history | Make the information complete first | Take the history related to hearing and balance, previous interventions, and medication use, record the chief complaint and functional needs, and explain the testing process and precautions. — 25/100; weight=1/3; audiologists.profile.responsibilities-block.1[0]",
+                  "Testing and quality control | Editorial verification suggestions | Record the conditions and results against the actual equipment manual and testing protocol; complete testing and retesting protocols were not obtained for this page and no operating approval is provided. China's medical device regulation is now the 2024 amendment: Article 41 provides for Class II business filing with statutory exemptions from filing, and Article 42 for Class III business licensing; the specific product classification is verified separately. Articles 48—52 require use according to the instructions, disinfection for reuse, no reuse of single-use items, and calibration and maintenance of equipment requiring it according to the instructions with records, immediate discontinuation of use and notification for repair when a safety hazard is found, and no continued use below safety standards. — 25/100; weight=1/3; audiologists.profile.responsibilities-block.1[1]",
+                  "Interpretation and referral | Follow the real clinical protocol | Combine the history and test records with uncertainty, and verify the actual referral division of labor; the ASHA referral guidance notes that sudden or fluctuating hearing loss requires prompt ear, nose, and throat evaluation; this page does not provide complete urgent referral procedures, and uniform retesting cannot be required in a way that delays care. — 50/100; weight=1/3; audiologists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37286,7 +37306,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -37614,15 +37634,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Audiologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 29-1181.00 · Job Zone Five · mostly doctorates",
@@ -37673,7 +37705,7 @@
       "text": "Audiologists"
     }
   },
-  "source_content_sha256": "105438a387e29a58496e69078e0780dc85a8e7adda75fb94c6c48966a7665c2a",
+  "source_content_sha256": "7e1233a53e2db6776d8c11194ad6d04c90dc08a8f77926db7c842f98b644b4f6",
   "subject": {
     "canonical_slug": "audiologists",
     "name": "Audiologists",

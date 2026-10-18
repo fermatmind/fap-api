@@ -11,6 +11,9 @@
       "fact:cn-health-private-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25652,7 +25655,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分职业任务、一般研究、真实采用与就业因果。证据支持高层任务背景和风险回查，尚不支持本职采用省时替代百分比；探索仅核虚构纸面输入。"
+              "先分职业任务、一般研究、真实采用与就业因果。证据支持高层任务背景和风险回查，尚不支持本职采用省时替代百分比；探索仅核虚构纸面输入。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "surgical-technologists.display.ai_impact_table.answer",
@@ -33844,6 +33847,23 @@
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "准备｜手术室与材料配合｜O*NET描述按要求准备环境、供应及设备相关工作；需训练和授权，不在探索中操作。 — 0/100; weight=1/3; surgical-technologists.display.responsibilities_block.02[0]",
+                  "协作｜响应团队要求｜听清指令并准确沟通，在监督下完成自身配合任务，职责不同不能互相冒充。 — 0/100; weight=1/3; surgical-technologists.display.responsibilities_block.03[0]",
+                  "执行｜清点与状态记录｜本职有器械材料清点相关职责；实际按专业训练和机构流程，纸面彩色卡不模拟临床清点。 — 25/100; weight=1/3; surgical-technologists.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39101,7 +39121,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -39273,15 +39293,27 @@
         "source_refs": [
           "nbs-health-context-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "外科手术技师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "美国29-2055.00单列",
@@ -39332,7 +39364,7 @@
       "text": "外科手术技师"
     }
   },
-  "source_content_sha256": "1ea852c89123394da792796519590b1cff627f098f9c5f1cdffc9f9e79399cce",
+  "source_content_sha256": "f4f2213b964127fdf9d8becad1ac1a735d664a7e037325040a4401b3dc54c6b3",
   "subject": {
     "canonical_slug": "surgical-technologists",
     "name": "外科手术技师",

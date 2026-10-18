@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24772,7 +24775,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, substitution ratio, or wage/employment causal research has been obtained for this occupation. Automatic riveting, digital tooling, and online measurement are potentially related manufacturing-automation scenarios, not evidence that generative AI has been deployed. BLS overall employment projection for 51-2011, not attributed to AI (2025—2035): employment of 34.4 thousand in 2025 and 32.5 thousand in 2035; official net change -1.9 thousand and growth rate -5.6%, with average annual job openings of 3.1 thousand. Levels, net change, and growth rate each use officially published values, not values recomputed from rounded levels. Openings are a flow that replenishes demand from separations, transfers, and the like, not net new jobs or real-time hiring counts. The projected decline cannot be attributed to AI, nor can the disappearance of positions be presumed; tool outputs must be rechecked against controlled drawings, processes, and authorization."
+              "Insufficient evidence: no AI adoption rate, substitution ratio, or wage/employment causal research has been obtained for this occupation. Automatic riveting, digital tooling, and online measurement are potentially related manufacturing-automation scenarios, not evidence that generative AI has been deployed. BLS overall employment projection for 51-2011, not attributed to AI (2025—2035): employment of 34.4 thousand in 2025 and 32.5 thousand in 2035; official net change -1.9 thousand and growth rate -5.6%, with average annual job openings of 3.1 thousand. Levels, net change, and growth rate each use officially published values, not values recomputed from rounded levels. Openings are a flow that replenishes demand from separations, transfers, and the like, not net new jobs or real-time hiring counts. The projected decline cannot be attributed to AI, nor can the disappearance of positions be presumed; tool outputs must be rechecked against controlled drawings, processes, and authorization. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "aircraft-structure-surfaces-rigging-and-systems-assemblers.ai-impact.ai-impact-table.18",
@@ -32539,6 +32542,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Drawing reading and process | layout and sequence | read drawings, diagrams, and specifications to determine layout, work sequence, and part relationships, and mark identification information. — 50/100; weight=1/3; aircraft-structure-surfaces-rigging-and-systems-assemblers.profile.responsibilities-block.1[0]",
+                  "Positioning and assembly | fixtures and tooling | position and align parts with fixtures, tooling, and measuring instruments, and assemble parts and subassemblies. — 0/100; weight=1/3; aircraft-structure-surfaces-rigging-and-systems-assemblers.profile.responsibilities-block.1[2]",
+                  "Riveting and fastening | structure and skins | rivet, bond, or weld to secure brackets and connectors; install skins and structural members; and join wings, tail assemblies, and fuselages. — 0/100; weight=1/3; aircraft-structure-surfaces-rigging-and-systems-assemblers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37440,7 +37460,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Comparison of occupational directions",
       "fit": "Occupation fit guide",
@@ -37816,15 +37836,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Aircraft Structure, Surfaces, Rigging, and Systems Assemblers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Aerospace manufacturing assembly: drawing reading and tolerances · riveting/fastening and systems commissioning · inspection and recordkeeping",
@@ -37875,7 +37907,7 @@
       "text": "Aircraft Structure, Surfaces, Rigging, and Systems Assemblers: assembly tasks, wages, and declining trend (O*NET 51-2011)"
     }
   },
-  "source_content_sha256": "46f02f86c1e3e5698359c58d994527a140dff003ab28c3ce758dcaa6c4e66bc6",
+  "source_content_sha256": "adff6f65babb01e2cbd1a6210d00864099cffc176193f75e0f1e4a2459ec15f1",
   "subject": {
     "canonical_slug": "aircraft-structure-surfaces-rigging-and-systems-assemblers",
     "name": "Aircraft Structure, Surfaces, Rigging, and Systems Assemblers",

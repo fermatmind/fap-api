@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25009,7 +25012,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verified pharmacy aide GenAI adoption rate, overall substitution rate, or disappearance year. Receiving fields and handover drafts may be conditionally trialed; physical storage and individual medication questions still require people and pharmacists, and barcode inventory systems are not proof of GenAI adoption."
+              "Insufficient evidence: no verified pharmacy aide GenAI adoption rate, overall substitution rate, or disappearance year. Receiving fields and handover drafts may be conditionally trialed; physical storage and individual medication questions still require people and pharmacists, and barcode inventory systems are not proof of GenAI adoption. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "pharmacy-aides.ai-impact.ai-impact-table.18",
@@ -33967,6 +33970,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "United States 25-1071 adjacent definition",
                 "url": "https://www.onetonline.org/link/details/25-1071.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Log quantity, packaging, and batch numbers — 75/100; weight=1/3; pharmacy-aides.ai-impact.ai-impact-table.95[0]",
+                  "Shelve and segregate per the rules — 0/100; weight=1/3; pharmacy-aides.ai-impact.ai-impact-table.99[0]",
+                  "Cashiering and general help — 50/100; weight=1/3; pharmacy-aides.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38872,7 +38892,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -39147,15 +39167,27 @@
           "nbs",
           "editor"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Pharmacy aides",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Receiving · inventory · counter service",
@@ -39206,7 +39238,7 @@
       "text": "Pharmacy aides"
     }
   },
-  "source_content_sha256": "dddbcdc55c4baf385790cdde8f25165bcfc78f918827a6437e7b16f35d905ddd",
+  "source_content_sha256": "8af47d88295c77e858745ca25c071e8b5bbb8a64e68768fac3635d543846d2d9",
   "subject": {
     "canonical_slug": "pharmacy-aides",
     "name": "Pharmacy aides",

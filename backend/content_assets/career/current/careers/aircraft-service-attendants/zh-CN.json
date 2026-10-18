@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24788,7 +24791,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本次未取得本职AI实际采用、替代率或效果研究。编辑提出作业单、计量记录、设备信息与排程的条件性辅助场景；职业任务资料不证明这些场景已部署或有效。真实作业仍按培训、程序和单位授权，不能据预测增长断言AI不会取代岗位。"
+              "本次未取得本职AI实际采用、替代率或效果研究。编辑提出作业单、计量记录、设备信息与排程的条件性辅助场景；职业任务资料不证明这些场景已部署或有效。真实作业仍按培训、程序和单位授权，不能据预测增长断言AI不会取代岗位。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.18",
@@ -32540,6 +32543,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "燃油加注｜软管与油品核对｜用连接加油车的软管为航空器加油，核对油品与数量并按程序完成接地与复核。 — 0/100; weight=1/3; aircraft-service-attendants.profile.responsibilities-block.1[0]",
+                  "除冰作业｜吊篮与除冰液｜从卡车起重机吊起的吊篮中向航空器喷洒除冰液，按指定地点与回收要求作业。 — 0/100; weight=1/3; aircraft-service-attendants.profile.responsibilities-block.1[3]",
+                  "机坪引导｜牵引与信号｜用手势、指挥棒等引导航空器就位，用牵引车把航空器拖至登机口或机库。 — 25/100; weight=1/3; aircraft-service-attendants.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37442,7 +37462,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37830,15 +37850,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "飞机服务服务员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "机坪保障：航空器加油与除冰 · 液体补给与污水处置 · 机坪引导与记录",
@@ -37889,7 +37921,7 @@
       "text": "飞机服务服务员：机坪加油、除冰与地面服务（O*NET 53-6032）"
     }
   },
-  "source_content_sha256": "5481d39e4081e032bfd4910eb6a2947446f4b04ca7557dcb0f2e7b31447eb977",
+  "source_content_sha256": "d8896a4bafa8194109730054cd23bd02e0a6aae7fe469900022d09774d26e763",
   "subject": {
     "canonical_slug": "aircraft-service-attendants",
     "name": "飞机服务服务员",

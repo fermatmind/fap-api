@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24627,7 +24630,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑根据任务提出：检索、文献草稿、台账、核算检查与可视化可试用辅助工具；工艺模拟、传统自动控制与生成式AI应分开。本轮没有本职业采用率、实测效率或整体替代日期；不能用未发现替代证据证明永不替代。美国父职业建筑与工程经理11-9041.00：2025年就业220,900人，2035年预计233,100人；2025—2035增长6%（快于平均），净增约12,200人、年均职位空缺约14,900。空缺含增长与替换，不是生物燃料研发经理独立规模、个人录用率或中国预测。"
+              "编辑根据任务提出：检索、文献草稿、台账、核算检查与可视化可试用辅助工具；工艺模拟、传统自动控制与生成式AI应分开。本轮没有本职业采用率、实测效率或整体替代日期；不能用未发现替代证据证明永不替代。美国父职业建筑与工程经理11-9041.00：2025年就业220,900人，2035年预计233,100人；2025—2035增长6%（快于平均），净增约12,200人、年均职位空缺约14,900。空缺含增长与替换，不是生物燃料研发经理独立规模、个人录用率或中国预测。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "biofuels-biodiesel-technology-and-product-development-managers.ai-impact.ai-impact-table.18",
@@ -32481,6 +32484,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "wage_scope",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "编制实验方案｜让试制有依据｜编制或督导编制生物燃料研发的实验方案，写明原料与条件与检测项与安全与合规边界。 — 50/100; weight=1/3; biofuels-biodiesel-technology-and-product-development-managers.profile.responsibilities-block.1[1]",
+                  "开展试制与中试｜让数据有出处｜在批准的实验与中试条件下按规程操作，按批次与项目编号记录参数与物料与能量核算与检测数据。 — 0/100; weight=1/3; biofuels-biodiesel-technology-and-product-development-managers.profile.responsibilities-block.1[2]",
+                  "分析与复核偏差｜让结论可检验｜用公开的方法与可复现的流程分析数据，对偏差与失败批次先复核与复测，而不是先取想要的指标。 — 75/100; weight=1/3; biofuels-biodiesel-technology-and-product-development-managers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37372,7 +37392,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37845,15 +37865,27 @@
           "onet-wages",
           "editor"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "生物燃料/生物柴油技术与产品开发经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 11-9041.01 · Job Zone Four（需相当准备）· SVP 7.0–<8.0",
@@ -37904,7 +37936,7 @@
       "text": "生物燃料/生物柴油技术与产品开发经理"
     }
   },
-  "source_content_sha256": "ad04c5de22a5cd3b7615ab6d8bf1599698dc9e3b39bedae50494cdae6dd2c004",
+  "source_content_sha256": "0f45db1a6fd0e1731ba157e7d7dc7ef516220d4b581d00a364268de438a10108",
   "subject": {
     "canonical_slug": "biofuels-biodiesel-technology-and-product-development-managers",
     "name": "生物燃料/生物柴油技术与产品开发经理",

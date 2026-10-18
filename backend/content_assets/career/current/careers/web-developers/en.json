@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25567,7 +25570,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no task-level AI effect score or replacement-rate causal data for this detailed occupation was obtained. Drafts, the W30 problem logic, and real code testing are kept separate; the five-case 80% or Person A's 100% does not measure AI time saving, defects, or product security."
+              "Insufficient evidence: no task-level AI effect score or replacement-rate causal data for this detailed occupation was obtained. Drafts, the W30 problem logic, and real code testing are kept separate; the five-case 80% or Person A's 100% does not measure AI time saving, defects, or product security. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "web-developers.display.ai_impact_table.answer",
@@ -33023,6 +33026,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Implementation | Web code | Develop website applications and supporting code. — 75/100; weight=1/3; web-developers.display.responsibilities_block.02[0]",
+                  "Data | Interface integration | Develop databases and application connections per the division of work. — 75/100; weight=1/3; web-developers.display.responsibilities_block.03[0]",
+                  "Testing | Code and compatibility | Verify structure, inputs, and device differences. — 75/100; weight=1/3; web-developers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38268,7 +38288,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38416,15 +38436,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Web Developers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET15-1254.00",
@@ -38475,7 +38507,7 @@
       "text": "Web Developers: duties, wages, and code boundary experience｜FermatMind"
     }
   },
-  "source_content_sha256": "33e0ca5a68de246379375176c3eeaea36fb41740c39af48c4863b499f0cd2304",
+  "source_content_sha256": "0a880becea4fcfc0341ba808226136115029aae3cd4e5c456d5786ebcc654b5a",
   "subject": {
     "canonical_slug": "web-developers",
     "name": "Web Developers",

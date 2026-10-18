@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24838,7 +24841,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page discusses the possible uses of regulatory search, version comparison, and filing drafts; this round obtained no standalone AI adoption rate, substitution rate, or causal wage-change estimate for this occupation, and cross-occupation research is not used to infer enterprise deployment or regulatory acceptance."
+              "This page discusses the possible uses of regulatory search, version comparison, and filing drafts; this round obtained no standalone AI adoption rate, substitution rate, or causal wage-change estimate for this occupation, and cross-occupation research is not used to infer enterprise deployment or regulatory acceptance. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.18",
@@ -32752,6 +32755,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/13-1111.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Strategy planning｜Verify the product classification, target market, and applicable rules.｜Output the regulatory pathway and gap matrix. — 50/100; weight=1/3; regulatory-affairs-managers.profile.responsibilities-block.1[0]",
+                  "Filing review｜Verify the original evidence, labeling, technical documents, and versions.｜Keep missing items pending. — 75/100; weight=1/3; regulatory-affairs-managers.profile.responsibilities-block.1[1]",
+                  "Agency communication｜Organize authorized responses and material submissions.｜Record inquiries, sources, and sign-offs. — 25/100; weight=1/3; regulatory-affairs-managers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37660,7 +37680,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38036,15 +38056,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Regulatory affairs managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Product regulatory strategy · filing plans",
@@ -38095,7 +38127,7 @@
       "text": "Regulatory affairs managers"
     }
   },
-  "source_content_sha256": "793c7f6294f75f7ce590d5e4da92fdffc5632943b208e2a4d8e817d304105fe4",
+  "source_content_sha256": "717b0b782e40e9dde48be0d5b94737e1fd99edcfd257bcd56781c5069937e1c9",
   "subject": {
     "canonical_slug": "regulatory-affairs-managers",
     "name": "Regulatory affairs managers",

@@ -17,6 +17,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "mapped"
       },
@@ -12863,6 +12866,23 @@
                 "publisher": "CDC/NIOSH",
                 "scope": "industry_proxy",
                 "url": "https://www.cdc.gov/niosh/nano/faqs/index.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "按作业指导书操作纳米加工、镀膜或刻蚀设备并记录参数 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "制备、清洗与转移纳米材料样品并控制污染 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "整理测量数据、编写记录并向工程师交接 — 75/100; weight=1/3; display.ai_impact_table.task_rows.5[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13050,7 +13070,7 @@
             }
           }
         ],
-        "answer": "任务暴露不等于已采用：资料检索、参数整理、图像与数据初步处理可被辅助，但设备操作、样品处理、安全停机与结果放行仍由受训人员与授权者承担。",
+        "answer": "任务暴露不等于已采用：资料检索、参数整理、图像与数据初步处理可被辅助，但设备操作、样品处理、安全停机与结果放行仍由受训人员与授权者承担。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET 职业档案（17-3026.01）",
@@ -14829,7 +14849,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15049,15 +15069,27 @@
         "source_refs": [
           "onet-cert"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "纳米技术工程技师与技术人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "纳米设备操作与制程执行",
@@ -15108,7 +15140,7 @@
       "text": "纳米技术工程技师与技术人员"
     }
   },
-  "source_content_sha256": "b86fce37754999be25ffc513e3ee8ca0c615e8f5e0b1d07eb4ab35c33c32b44d",
+  "source_content_sha256": "c08c2674af7afaeb9c5958deed42147c915bcd8426bc0157c1b33712f51c654d",
   "subject": {
     "canonical_slug": "nanotechnology-engineering-technologists-and-technicians",
     "name": "纳米技术工程技师与技术人员",

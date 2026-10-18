@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25484,7 +25487,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no adoption rate, replacement probability, or reviewable scoring basis for this occupation. The tasks checked show that order information handling differs from on-site food service; the US industry interviews and decision-maker survey give technology background only. Seeing how a specific system takes orders, checks food, and authorizes is more useful than one occupational replacement percentage."
+              "Insufficient evidence: this page obtained no adoption rate, replacement probability, or reviewable scoring basis for this occupation. The tasks checked show that order information handling differs from on-site food service; the US industry interviews and decision-maker survey give technology background only. Seeing how a specific system takes orders, checks food, and authorizes is more useful than one occupational replacement percentage. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "waiters-and-waitresses.display.ai_impact_table.answer",
@@ -33295,6 +33298,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Take the order｜listen and repeat｜Record the item names, table number, and quantities accurately, clarify the request, and pass the order to the kitchen. — 50/100; weight=1/3; waiters-and-waitresses.display.responsibilities_block.02[0]",
+                  "Deliver｜check the food and serve｜Check the items, quantities, and delivery location against the order and communicate differences with the kitchen or food runners. — 0/100; weight=1/3; waiters-and-waitresses.display.responsibilities_block.03[0]",
+                  "Follow up｜dining needs and exceptions｜Watch for omissions, collect feedback, and refer complaints or safety questions to the responsible staff. — 25/100; weight=1/3; waiters-and-waitresses.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38571,7 +38591,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38721,15 +38741,27 @@
           "r2-pay-2",
           "r2-pay-3"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Waiters and waitresses",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 35-3031.00",
@@ -38780,7 +38812,7 @@
       "text": "Waiters and waitresses"
     }
   },
-  "source_content_sha256": "dc76932fff6df4f39f1ad15e90483db7dadcd642fc833f7b74cfa5bc9fa3fcbb",
+  "source_content_sha256": "b8af3711eb294642c467b65bb8bbb5d4d17ccb29523fca8309843a366af49a02",
   "subject": {
     "canonical_slug": "waiters-and-waitresses",
     "name": "Waiters and waitresses",

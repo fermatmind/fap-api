@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25676,7 +25679,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本精确职业生成式AI暴露等级、采用/替代率及收入因果。详细页7类软件与热门页7软件项分开：热门Excel27%、Outlook26%，Access/ASP/Office/PowerPoint/Word为NA。比例来自2025美国Lightcast职业关联独立招聘广告提及，非使用率、AI采用率或本职能力。 编辑试用建议限合成数据表、检索和记录草稿，逐值复核；光学/称重分选与生成式AI不同，不能由软件提及、工作情境或下降预测推已广泛采用或中高暴露。 O*NET57情境为类别响应：站立79/重复73/手工72%持续，面谈65/受控室内81/PPE76/严格时限60%每天；设备节拍49%极重要。典型周工时43%>40、40%=40、17%<40；66%固定、24%不固定。自动化11%高度/31%中度/33%轻度/24%完全无，非生成式AI暴露。极热冷24%每天、66%从不；不能说人人冷链、季节工或事故频率。"
+              "证据不足：未取得本精确职业生成式AI暴露等级、采用/替代率及收入因果。详细页7类软件与热门页7软件项分开：热门Excel27%、Outlook26%，Access/ASP/Office/PowerPoint/Word为NA。比例来自2025美国Lightcast职业关联独立招聘广告提及，非使用率、AI采用率或本职能力。 编辑试用建议限合成数据表、检索和记录草稿，逐值复核；光学/称重分选与生成式AI不同，不能由软件提及、工作情境或下降预测推已广泛采用或中高暴露。 O*NET57情境为类别响应：站立79/重复73/手工72%持续，面谈65/受控室内81/PPE76/严格时限60%每天；设备节拍49%极重要。典型周工时43%>40、40%=40、17%<40；66%固定、24%不固定。自动化11%高度/31%中度/33%轻度/24%完全无，非生成式AI暴露。极热冷24%每天、66%从不；不能说人人冷链、季节工或事故频率。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "graders-and-sorters-agricultural-products.ai-impact.ai-impact-table.18",
@@ -34395,6 +34398,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "45-2041.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/45-2041.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "分级与判定 — 50/100; weight=1/3; graders-and-sorters-agricultural-products.ai-impact.ai-impact-table.95[0]",
+                  "分拣与剔除 — 25/100; weight=1/3; graders-and-sorters-agricultural-products.ai-impact.ai-impact-table.99[0]",
+                  "记录与追溯 — 75/100; weight=1/3; graders-and-sorters-agricultural-products.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39335,7 +39355,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -39483,15 +39503,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "农产品分级分拣员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "农产品分级分拣员 · 任务、交付与责任边界",
@@ -39542,7 +39574,7 @@
       "text": "农产品分级分拣员"
     }
   },
-  "source_content_sha256": "f1bf1ce43d10bb9b20403190654a0046a3a7714295f14820fc0fd96d3cd61094",
+  "source_content_sha256": "9743afb26f621144b76ec168f50a1490edf0678aa77a4a160f5f247237516734",
   "subject": {
     "canonical_slug": "graders-and-sorters-agricultural-products",
     "name": "农产品分级分拣员",

@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7554,7 +7557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial tool-trial candidates: use fictional item lists to test registration, inventory reminders, and handover record organization. The existence of registration, scheduling, or monitoring systems does not establish AI capabilities or actual adoption. Responsible personnel confirm items, claim checks, customer communication, and hazard reports under venue rules."
+              "Editorial tool-trial candidates: use fictional item lists to test registration, inventory reminders, and handover record organization. The existence of registration, scheduling, or monitoring systems does not establish AI capabilities or actual adoption. Responsible personnel confirm items, claim checks, customer communication, and hazard reports under venue rules. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "locker-room-coatroom-and-dressing-room-attendants.ai-impact.ai-impact-table.2",
@@ -8613,6 +8616,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Issue and register guest belongings — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Assign lockers and storage spaces — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Clean premises and address hazards — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -10994,7 +11014,7 @@
     ],
     "path": "/en/career/jobs/locker-room-coatroom-and-dressing-room-attendants",
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Pay",
       "direction-comparison": "Compare Related Occupations",
       "fit": "Fit Signals",
@@ -11154,15 +11174,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Locker Room, Coatroom, and Dressing Room Attendants",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Item issue and safeguarding",
@@ -11213,7 +11245,7 @@
       "text": "Evaluating a Career as a Locker Room, Coatroom, and Dressing Room Attendant: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "9a93a89d912864e94526668f34d0b1637e61ea7449db3ebab8a26a2d78ece79a",
+  "source_content_sha256": "4a37b5a4b6a4fa119082a7d8503a32c676fed50e16ebd9592addbbddc6b85355",
   "subject": {
     "canonical_slug": "locker-room-coatroom-and-dressing-room-attendants",
     "name": "Locker Room, Coatroom, and Dressing Room Attendants",

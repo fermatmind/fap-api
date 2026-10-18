@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24300,7 +24303,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page lists case file indexes, timelines, retrieval and non-final documents as AI assistance candidates (editorial judgment). Insufficient evidence: occupational adoption rates, actual productivity and employment effects were not verified. Use must be authorized by the agency and verified against the originals, and the tool acquires no statutory adjudicative authority or final responsibility."
+              "This page lists case file indexes, timelines, retrieval and non-final documents as AI assistance candidates (editorial judgment). Insufficient evidence: occupational adoption rates, actual productivity and employment effects were not verified. Use must be authorized by the agency and verified against the originals, and the tool acquires no statutory adjudicative authority or final responsibility. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "administrative-law-judges-adjudicators-and-hearing-officers.ai-impact.ai-impact-table.18",
@@ -32167,6 +32170,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "United States auxiliary role tasks and educational background; not a basis for Chinese lawyer qualification or adjudicative authority.",
                 "url": "https://www.bls.gov/ooh/legal/paralegals-and-legal-assistants.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Materials｜Pre-hearing case file preparation｜Verify the application, the agency decision, witness statements, medical or employment records, expert opinions, statutes and precedents, and organize locatable issues and evidence. — 75/100; weight=1/3; administrative-law-judges-adjudicators-and-hearing-officers.profile.responsibilities-block.1[0]",
+                  "Hearing｜Hearings and procedural management｜Arrange notices and scheduling, preside over statements, witness examination and evidentiary objections; handle interpretation, technical failures and the parties' opportunity to respond at the same time. — 25/100; weight=1/3; administrative-law-judges-adjudicators-and-hearing-officers.profile.responsibilities-block.1[1]",
+                  "Neutrality｜Neutral adjudicative role｜Not a lawyer representing either party, nor a mediator who merely facilitates settlement; manage the record under the authorized procedure and make or recommend a judgment whose reasons can be stated. — 25/100; weight=1/3; administrative-law-judges-adjudicators-and-hearing-officers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36900,7 +36920,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37312,15 +37332,27 @@
         "source_refs": [
           "alj-ep-2025-2035"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Administrative law judges",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task boundaries"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Procedure, evidence and reasons",
@@ -37371,7 +37403,7 @@
       "text": "Administrative law judges"
     }
   },
-  "source_content_sha256": "1afc232eb51e78e33129800eb015c191c39857bc0c56ff0d7a4e839a66488a5d",
+  "source_content_sha256": "c5121dde065c5adab2ba5c5ac192589163fb940a092d4bdc2d554b0d34319de6",
   "subject": {
     "canonical_slug": "administrative-law-judges-adjudicators-and-hearing-officers",
     "name": "Administrative law judges",

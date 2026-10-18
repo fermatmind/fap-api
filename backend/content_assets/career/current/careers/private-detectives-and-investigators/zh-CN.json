@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24755,7 +24758,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "公开资料摘要、时间线与矛盾提示是编辑辅助设想，未核得本职业采用效果或替代率；资料处理依据、访谈、事实判断与报告责任由具名负责人核。"
+              "公开资料摘要、时间线与矛盾提示是编辑辅助设想，未核得本职业采用效果或替代率；资料处理依据、访谈、事实判断与报告责任由具名负责人核。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "private-detectives-and-investigators.ai-impact.ai-impact-table.18",
@@ -32512,6 +32515,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/202501/P020250116506795831658.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "资料检索｜在授权范围查公开记录或客户提供资料｜逐项记来源、日期和版本。 — 75/100; weight=1/3; private-detectives-and-investigators.profile.responsibilities-block.1[2]",
+                  "访谈核实｜征得适当同意并记录陈述与条件｜不诱导、不把说法直接当事实。 — 25/100; weight=1/3; private-detectives-and-investigators.profile.responsibilities-block.1[3]",
+                  "交叉验证｜比对时间、地点和文件之间的一致与冲突｜矛盾项保留待核状态。 — 75/100; weight=1/3; private-detectives-and-investigators.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37423,7 +37443,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37691,15 +37711,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "私家侦探与调查员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "私家侦探与调查员 · 任务核对",
@@ -37750,7 +37782,7 @@
       "text": "私家侦探与调查员"
     }
   },
-  "source_content_sha256": "4f4d43c205276253c934d3c5da27a9b9667ae49424773296e6ce48e9f6bcc781",
+  "source_content_sha256": "580119aaa168e3091bd8a518e84cfa0f73132ff27da8ac87e7550c8f0cf4f621",
   "subject": {
     "canonical_slug": "private-detectives-and-investigators",
     "name": "私家侦探与调查员",

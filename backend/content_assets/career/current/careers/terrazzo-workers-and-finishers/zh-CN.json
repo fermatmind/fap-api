@@ -8,6 +8,9 @@
       "fact:cn-build-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25390,7 +25393,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页只建议在虚构数量与版本资料中测试文档草稿，材料、设备和质量判断仍需训练与项目依据。缺少专项采用与替代实证，也没有版本化评分量表，因此不提供FermatMind任务暴露分数或替代率。"
+              "本页只建议在虚构数量与版本资料中测试文档草稿，材料、设备和质量判断仍需训练与项目依据。缺少专项采用与替代实证，也没有外部实测的版本化评分量表，因此另列FermatMind编辑估算，不提供实测替代率。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "terrazzo-workers-and-finishers.display.ai_impact_table.answer",
@@ -32946,6 +32949,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "分隔｜图案和分区落实｜按已确认图案设置分隔，注意材料与区域衔接；具体工艺按指导执行。 — 25/100; weight=1/3; terrazzo-workers-and-finishers.display.responsibilities_block.02[0]",
+                  "面层｜配制与铺展｜按确认的材料与工艺条件形成面层，不能照抄纸面数量作为真实配方。 — 0/100; weight=1/3; terrazzo-workers-and-finishers.display.responsibilities_block.03[0]",
+                  "磨整｜表面处理与修补｜在满足材料条件后磨整或修补，定位表面问题并核查结果。 — 0/100; weight=1/3; terrazzo-workers-and-finishers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38228,7 +38248,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38388,15 +38408,27 @@
         "source_refs": [
           "nbs-build-context-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "水磨石工与整修工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 47-2053.00",
@@ -38447,7 +38479,7 @@
       "text": "水磨石工与整修工"
     }
   },
-  "source_content_sha256": "0ece9f391b8de648580537f1f46fbafbf025a3d2ec5e498212f6d81338130be7",
+  "source_content_sha256": "42d8a42f54e94205261932c45d89b6157b9dec96e6e59bdd616e694c17162c53",
   "subject": {
     "canonical_slug": "terrazzo-workers-and-finishers",
     "name": "水磨石工与整修工",

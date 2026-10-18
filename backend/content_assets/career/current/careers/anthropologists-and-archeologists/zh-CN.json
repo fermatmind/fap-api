@@ -38,6 +38,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24711,7 +24714,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑工具情景：可研究文献检索、记录整理、图像初筛及统计/GIS辅助，但须核具体系统能力、资料权限及输出依据。证据不足：本轮已核ONET/BLS，未取得本职业AI采用率、任务级比较效果、工资/就业因果效应或消失年份；任务清单、软件示例和就业预测不能证明替代或永久不可替代。 BLS EP19-3091：2025年10,200人、2035年10,800人，2025—2035年增长6.0%，官方净增600人，年均800个职位空缺，自雇8.9%。空缺含替代需求，不等于净新增或个人录用机会；美国预测不外推中国。 具体研究例：PNAS2024纳斯卡论文报告，在秘鲁纳斯卡区域用AI影像筛选配合6个月田野调查发现303个新具象地画；原文包含现场确认，不是303个都由AI独立确认。该区域、影像对象与研究设计不代表全职业采用率、器物鉴定效果、工资或就业因果。"
+              "编辑工具情景：可研究文献检索、记录整理、图像初筛及统计/GIS辅助，但须核具体系统能力、资料权限及输出依据。证据不足：本轮已核ONET/BLS，未取得本职业AI采用率、任务级比较效果、工资/就业因果效应或消失年份；任务清单、软件示例和就业预测不能证明替代或永久不可替代。 BLS EP19-3091：2025年10,200人、2035年10,800人，2025—2035年增长6.0%，官方净增600人，年均800个职位空缺，自雇8.9%。空缺含替代需求，不等于净新增或个人录用机会；美国预测不外推中国。 具体研究例：PNAS2024纳斯卡论文报告，在秘鲁纳斯卡区域用AI影像筛选配合6个月田野调查发现303个新具象地画；原文包含现场确认，不是303个都由AI独立确认。该区域、影像对象与研究设计不代表全职业采用率、器物鉴定效果、工资或就业因果。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "anthropologists-and-archeologists.ai-impact.ai-impact-table.18",
@@ -32377,6 +32380,23 @@
                 "publisher": "PNAS／PMC开放全文存档",
                 "scope": "contextual",
                 "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11459208/"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "研究设计与资料收集｜先定问题再取材料｜提出并规划研究问题，通过观察、访谈与文件审查收集信息并作出判断，查阅遗址报告与现有文物与地形图识别遗址，研究档案藏品以解释文化模式的起源与发展。 — 50/100; weight=1/3; anthropologists-and-archeologists.profile.responsibilities-block.1[0]",
+                  "田野调查与发掘｜按规程获取第一手资料｜开展考古调查与勘探，清理堆积和提取遗物标本须依具体训练、项目批准和单位程序，本页不授操作能力，用绘图与摄影（具体三维设备另核）记录遗物的确切位置与状况，采集文物并标记出土位置。 — 0/100; weight=1/3; anthropologists-and-archeologists.profile.responsibilities-block.1[1]",
+                  "整理分析与断代鉴定｜把材料变成证据｜清洗、修复与保存文物，描述文物的材料与尺寸与形状与功能与装饰，收集与分析文物及骨骼遗骸，比较不同遗址的考古数据，对遗存进行识别、断代与鉴定并解释其意义。 — 75/100; weight=1/3; anthropologists-and-archeologists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37273,7 +37293,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37626,15 +37646,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "人类学家与考古学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "研究与田野：研究设计与田野调查 · 发掘与资料记录 · 分析与成果发表",
@@ -37685,7 +37717,7 @@
       "text": "人类学家与考古学家"
     }
   },
-  "source_content_sha256": "00c096fe5d4534462f0722811c1e7c9045bbf5f13db077f403f4a19ceca92029",
+  "source_content_sha256": "1b569460fc966839b78b07686c8c9927c6f51201c4c964fcbe6b2ffa0c4c980d",
   "subject": {
     "canonical_slug": "anthropologists-and-archeologists",
     "name": "人类学家与考古学家",

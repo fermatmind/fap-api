@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24624,7 +24627,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得本职业生成式AI采用率、提效、整体替代或就业因果测量。查询、排程、记录与估价是编辑试验候选；职业软件表和任务定义不证明生成AI已部署，也不证明永不替代。"
+              "本轮未取得本职业生成式AI采用率、提效、整体替代或就业因果测量。查询、排程、记录与估价是编辑试验候选；职业软件表和任务定义不证明生成AI已部署，也不证明永不替代。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.18",
@@ -32791,6 +32794,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/53-7061.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "拆装作业｜让操作可控｜用工具拆下破损玻璃与饰条与卡扣与雨刮器，保护周边漆面与内饰，按车型取得并检查替换玻璃。 — 0/100; weight=1/3; automotive-glass-installers-and-repairers.profile.responsibilities-block.1[1]",
+                  "粘接面处理与密封｜让粘接可靠｜清除污物与异物与松散玻璃，处理水汽与污染并保持干燥，涂布底涂并按规程施胶并整理到均匀厚度。 — 0/100; weight=1/3; automotive-glass-installers-and-repairers.profile.responsibilities-block.1[2]",
+                  "检验与记录｜让过程可追溯｜检验密封与外观与配件功能，记录车型与玻璃型号、处理过程、用量与固化条件与检验结果。 — 50/100; weight=1/3; automotive-glass-installers-and-repairers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37695,7 +37715,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38023,15 +38043,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "汽车玻璃安装工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 49-3022.00 · Job Zone 1–2 · 少量准备",
@@ -38082,7 +38114,7 @@
       "text": "汽车玻璃安装工"
     }
   },
-  "source_content_sha256": "781cc09d47dada61e8e7b194a0a323a8e1edfeb89a3746238b8fa60592759e54",
+  "source_content_sha256": "d6bdea9bdda57b28f3e0f0cb94bba71cfeb62931f20ad1c5ebd0ce0d0a8f91ee",
   "subject": {
     "canonical_slug": "automotive-glass-installers-and-repairers",
     "name": "汽车玻璃安装工",

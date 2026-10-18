@@ -56,6 +56,9 @@
       "fact:current-us-industry-gap-3": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25028,7 +25031,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no study of AI adoption rates or replacement effects for business continuity planners was obtained this round, and job disappearance cannot be inferred from task exposure or parent group projections. Editorial judgment: tools can be used for reviewable summarization, aggregation, and recording; approving key service priority, recovery objectives, and resource investment must still follow organizational authorization."
+              "Insufficient evidence: no study of AI adoption rates or replacement effects for business continuity planners was obtained this round, and job disappearance cannot be inferred from task exposure or parent group projections. Editorial judgment: tools can be used for reviewable summarization, aggregation, and recording; approving key service priority, recovery objectives, and resource investment must still follow organizational authorization. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "business-continuity-planners.ai-impact.ai-impact-table.18",
@@ -32382,6 +32385,23 @@
                 "publisher": "DRI International",
                 "scope": "contextual",
                 "url": "https://drii.org/certification/mbcp"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Business impact analysis｜Map internal, external, and third-party dependencies, assess interruption impact, and determine recovery time objectives and resource needs｜A business impact analysis conclusion with data sources and assumptions. — 75/100; weight=1/3; business-continuity-planners.profile.responsibilities-block.1[1]",
+                  "Plan and documentation preparation｜Prepare and maintain continuity plans, procedures, contact lists, and call trees, and manage versions and distribution scope｜Plan documents released by version with distribution records. — 75/100; weight=1/3; business-continuity-planners.profile.responsibilities-block.1[3]",
+                  "Exercises and review｜Design exercise scenarios and injections, organize tabletop or hands-on exercises, record differences, and write a report with recommendations｜An exercise plan and an exercise report. — 25/100; weight=1/3; business-continuity-planners.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37322,7 +37342,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -37767,15 +37787,27 @@
           "wages-current",
           "industry-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Business continuity planners",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 13-1199.04 · business impact analysis / recovery strategy and plans / exercises and remediation closure",
@@ -37826,7 +37858,7 @@
       "text": "Business continuity planners"
     }
   },
-  "source_content_sha256": "84d46ae706c1125ac15cba252641365fc0621edfdee06bb33a16a7083f3e6573",
+  "source_content_sha256": "43597c505f9945de9be70b37dbb5430230b8364bd5f9ed07143f92244f8bf071",
   "subject": {
     "canonical_slug": "business-continuity-planners",
     "name": "Business continuity planners",

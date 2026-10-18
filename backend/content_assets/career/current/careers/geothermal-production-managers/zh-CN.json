@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25503,7 +25506,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得精确地热经理AI暴露等级、采用、替代率或工资因果。 编辑任务分析｜日志整理、报警归类、排班和合规草稿可探索工具辅助；这是基于O*NET任务的分析，未取得本精确职业AI暴露等级、实际采用、替代率或工资因果。PLC控制与生成式AI不同；软件清单不证明AI普及。现场状态、异常处置、人员及合规责任按规程、真实授权由人承担。 美国BLS直接2025—2035表，父职业SOC11-3051工业生产经理：252,100→258,600个岗位，净增约6,500、官方增长2.6%、年均空缺约17,000含增长和转岗/退出替换需求；2025自雇占比2.4%，预测含自雇。端点经舍入，OOH整百分数展示3%。不是11-3051.02地热生产经理自身规模、当前招聘数或AI因果。本轮O*NET已呈2025就业及2025—2035趋势，与本页BLS现期一致，父职业或精确范围仍须区分。"
+              "证据不足：未取得精确地热经理AI暴露等级、采用、替代率或工资因果。 编辑任务分析｜日志整理、报警归类、排班和合规草稿可探索工具辅助；这是基于O*NET任务的分析，未取得本精确职业AI暴露等级、实际采用、替代率或工资因果。PLC控制与生成式AI不同；软件清单不证明AI普及。现场状态、异常处置、人员及合规责任按规程、真实授权由人承担。 美国BLS直接2025—2035表，父职业SOC11-3051工业生产经理：252,100→258,600个岗位，净增约6,500、官方增长2.6%、年均空缺约17,000含增长和转岗/退出替换需求；2025自雇占比2.4%，预测含自雇。端点经舍入，OOH整百分数展示3%。不是11-3051.02地热生产经理自身规模、当前招聘数或AI因果。本轮O*NET已呈2025就业及2025—2035趋势，与本页BLS现期一致，父职业或精确范围仍须区分。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "geothermal-production-managers.ai-impact.ai-impact-table.18",
@@ -33097,6 +33100,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "父职业11-3051工业生产经理OOH，非精确地热经理",
                 "url": "https://www.bls.gov/ooh/management/industrial-production-managers.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "运行计划与排班 — 75/100; weight=1/3; geothermal-production-managers.ai-impact.ai-impact-table.95[0]",
+                  "预防性维护与检修 — 25/100; weight=1/3; geothermal-production-managers.ai-impact.ai-impact-table.103[0]",
+                  "许可与并网与预算 — 50/100; weight=1/3; geothermal-production-managers.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38025,7 +38045,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38180,15 +38200,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "地热生产经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "地热生产经理 · 任务、交付与责任边界",
@@ -38239,7 +38271,7 @@
       "text": "地热生产经理"
     }
   },
-  "source_content_sha256": "c35e53f89cf57e975146d7208ed2b881d3ae97c88db5dbb7397ff484eecf4d83",
+  "source_content_sha256": "ea9fca11fe4f48d2ee3b091b6c6a4a9bf06d5cbdbc01d83e00bbfc9474fd85a3",
   "subject": {
     "canonical_slug": "geothermal-production-managers",
     "name": "地热生产经理",

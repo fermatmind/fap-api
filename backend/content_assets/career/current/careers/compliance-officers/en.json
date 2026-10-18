@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24983,7 +24986,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editor's trial candidates: use fictitious or approved materials to organize material lists, rules comparison, and record and report drafts; check facts, citations, omissions, false positives and total review time against the originals. Insufficient evidence: this round has no research on generative AI reliability, actual adoption rates, efficiency gains or job-loss causation for this occupation, so no claim is made that it is complete or has significantly changed."
+              "Editor's trial candidates: use fictitious or approved materials to organize material lists, rules comparison, and record and report drafts; check facts, citations, omissions, false positives and total review time against the originals. Insufficient evidence: this round has no research on generative AI reliability, actual adoption rates, efficiency gains or job-loss causation for this occupation, so no claim is made that it is complete or has significantly changed. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "compliance-officers.ai-impact.ai-impact-table.18",
@@ -32610,6 +32613,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/13-1032.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Intake and review and evaluation｜Evaluate applications and records and verify that policies and procedures have been documented and implemented and communicated｜Evaluate applications, records or documents to gather information about eligibility or liability issues; advise licensees or other individuals or groups on licensing, permit or pass regulations; confer or interview officials or technical or professional experts or applicants to obtain information or clarify facts related to licensing decisions; and verify that enterprise and regulatory policies and procedures have been documented, implemented and communicated (corresponds to the second, third and sixth O*NET tasks and the sixteenth new task). — 75/100; weight=1/3; compliance-officers.profile.responsibilities-block.1[0]",
+                  "Inspection and site visits｜Visit business premises to verify that valid licenses or permits are displayed and that licensing standards are met｜Visit business premises to verify that valid licenses or permits are displayed and that licensing standards are met (corresponds to the tenth Supplemental O*NET task). — 25/100; weight=1/3; compliance-officers.profile.responsibilities-block.1[1]",
+                  "Reporting and handling｜Prepare reports and report violations to committees or agencies and inform violators of infractions or penalty information｜Prepare reports on activities, evaluations, recommendations or decisions; report violations of laws or regulations to the appropriate committee or agency; and inform violators of infractions or penalty information (corresponds to the fourth, fifth and first O*NET tasks). — 50/100; weight=1/3; compliance-officers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37538,7 +37558,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37981,15 +38001,27 @@
         "source_refs": [
           "officers-review-ooh"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Compliance Officers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · CE",
@@ -38040,7 +38072,7 @@
       "text": "Compliance Officers"
     }
   },
-  "source_content_sha256": "3dbaa99e04a56f4246b970c01cb8abc13913ff663ce26ee06569499badddf49a",
+  "source_content_sha256": "6be7ef084755692d2d714fc8cf7ed5f834889570aa8c031d72febb2f11f390e8",
   "subject": {
     "canonical_slug": "compliance-officers",
     "name": "Compliance Officers",

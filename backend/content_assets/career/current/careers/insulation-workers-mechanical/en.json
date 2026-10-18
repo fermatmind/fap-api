@@ -14,6 +14,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -7564,7 +7567,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Digital tools can assist with reading piping drawings and specifications, estimating material quantities, generating fabrication and construction checklists, and organizing inspection records, but on-site measurement and fabrication judgments, material selection, hanger and fastening safety, work-at-height and confined-space judgments, and legacy material disposal still rest with people. Task exposure does not equal job substitution, nor does it mean it is already widely adopted; formal use requires authorization, human review, and documentation. This page gives no substitution probability or timeline."
+              "Direct answer | Digital tools can assist with reading piping drawings and specifications, estimating material quantities, generating fabrication and construction checklists, and organizing inspection records, but on-site measurement and fabrication judgments, material selection, hanger and fastening safety, work-at-height and confined-space judgments, and legacy material disposal still rest with people. Task exposure does not equal job substitution, nor does it mean it is already widely adopted; formal use requires authorization, human review, and documentation. This page gives no substitution probability or timeline. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "insulation-workers-mechanical.ai-impact.ai-impact-table.2",
@@ -8724,6 +8727,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/47-2132.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Read mechanical piping drawings and specifications — 50/100; weight=1/3; insulation-workers-mechanical.profile.responsibilities-block.4[0]",
+                  "Measure and shape insulation materials — 0/100; weight=1/3; insulation-workers-mechanical.profile.responsibilities-block.4[0]",
+                  "Install fasten wrap and seal insulation — 0/100; weight=1/3; insulation-workers-mechanical.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11133,7 +11153,7 @@
     ],
     "path": "/en/career/jobs/insulation-workers-mechanical",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wages",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11221,15 +11241,27 @@
         "source_refs": [
           "source-pack-onet-localwages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Insulation Workers, Mechanical",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Insulation Workers, Mechanical · specifications, safety, and work boundaries",
@@ -11280,7 +11312,7 @@
       "text": "Insulation Workers, Mechanical occupational judgment: work, entry, and risk boundaries"
     }
   },
-  "source_content_sha256": "8552fd253f435c73858f1eb0da3d2ec51cb3a552fb6b18964475c667ce8c63c9",
+  "source_content_sha256": "17c8ce4d0500381037d9228bda22db71a876a0f99c11145244845b3de7ae6886",
   "subject": {
     "canonical_slug": "insulation-workers-mechanical",
     "name": "Insulation Workers, Mechanical",

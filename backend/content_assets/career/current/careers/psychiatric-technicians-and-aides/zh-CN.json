@@ -29,6 +29,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24768,7 +24771,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可作为交班摘要和记录一致性提示的试用候选；不能独立作医疗决定。证据不足：本页两职业各自的机构采用率、照护效果、岗位变化及可复核任务级分数。跨职业暴露研究不能代填。"
+              "AI可作为交班摘要和记录一致性提示的试用候选；不能独立作医疗决定。证据不足：本页两职业各自的机构采用率、照护效果、岗位变化及可复核任务级分数。跨职业暴露研究不能代填。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "psychiatric-technicians-and-aides.ai-impact.ai-impact-table.18",
@@ -32580,6 +32583,23 @@
                 "publisher": "国家卫生健康委等五部门／新疆卫健委转载",
                 "scope": "jurisdictional",
                 "url": "https://wjw.xinjiang.gov.cn/hfpc/yljggl/201909/4e048082ad714cc4b800ae64af00963a.shtml"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "技师工作｜监测状况并协助治疗活动｜按指令记录反应。 — 25/100; weight=1/3; psychiatric-technicians-and-aides.profile.responsibilities-block.1[2]",
+                  "助理工作｜协助生活、陪同和观察｜及时报告异常。 — 0/100; weight=1/3; psychiatric-technicians-and-aides.profile.responsibilities-block.1[3]",
+                  "交班｜分别记录已执行、已观察和待核事项｜交医护团队复核。 — 75/100; weight=1/3; psychiatric-technicians-and-aides.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37485,7 +37505,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37765,15 +37785,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "精神科技术员与助手",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "精神科技师与护理助理 · 任务核对",
@@ -37824,7 +37856,7 @@
       "text": "精神科技师与护理助理"
     }
   },
-  "source_content_sha256": "b6dbfa1841b2cd10bfd98975b64b3a07dad0bf6c7c4bcf1a09ea368568225a2a",
+  "source_content_sha256": "a28427916d035a8afff04e4d2a54964da4e1c3743e13dfc472ac2abae3b6065f",
   "subject": {
     "canonical_slug": "psychiatric-technicians-and-aides",
     "name": "精神科技师与护理助理",

@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25452,7 +25455,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可探索工单与库存整理，独立复算并保未知；控制诊断软件不等文字AI采用证据。"
+              "可探索工单与库存整理，独立复算并保未知；控制诊断软件不等文字AI采用证据。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "wind-turbine-service-technicians.display.ai_impact_table.answer",
@@ -33080,6 +33083,23 @@
                 "publisher": "U.S. Department of Labor, O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/49-9081.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "诊断｜电机控制｜核故障症状与检测依据。 — 50/100; weight=1/3; wind-turbine-service-technicians.display.responsibilities_block.01[0]",
+                  "维护｜机组及系统｜按范围计划检修保过程记录。 — 0/100; weight=1/3; wind-turbine-service-technicians.display.responsibilities_block.02[0]",
+                  "测试｜部件与结构｜依测试计划配合专业团队。 — 25/100; weight=1/3; wind-turbine-service-technicians.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38378,7 +38398,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38526,15 +38546,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "风力涡轮机服务技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC49-9081.00",
@@ -38585,7 +38617,7 @@
       "text": "风力涡轮机服务技术员"
     }
   },
-  "source_content_sha256": "d15b8710eab9589104b63b65a47aa7fb408a687a77beb9cd754e292b394cbcb4",
+  "source_content_sha256": "f1f2b188daa5e92a8bcb771a179a1aaaa9ef39a28a1e25c272f38f33159ed49f",
   "subject": {
     "canonical_slug": "wind-turbine-service-technicians",
     "name": "风力涡轮机服务技术员",

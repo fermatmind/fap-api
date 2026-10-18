@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24472,7 +24475,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助整理记录、排班、资料检索与缺项检查，但不能替代对伤病者状态、优先级、协议适用性与升级条件的判断，也不承担处置决定与签字责任。"
+              "AI 可辅助整理记录、排班、资料检索与缺项检查，但不能替代对伤病者状态、优先级、协议适用性与升级条件的判断，也不承担处置决定与签字责任。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "emergency-medical-technicians.ai-impact.ai-impact-table.18",
@@ -31803,6 +31806,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial rule",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "完成初步评估并识别危及生命的情况 — 25/100; weight=1/3; emergency-medical-technicians.ai-impact.ai-impact-table.103[0]",
+                  "在授权范围内实施基础急救 — 0/100; weight=1/3; emergency-medical-technicians.ai-impact.ai-impact-table.107[0]",
+                  "形成院前记录并复核关键项 — 75/100; weight=1/3; emergency-medical-technicians.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36711,7 +36731,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36979,15 +36999,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "急诊医疗技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "急诊医疗技术员 · 伤病评估 · 基础急救 · O*NET 29-2042.00",
@@ -37038,7 +37070,7 @@
       "text": "急诊医疗技术员：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "6720510421c71b9e8a3104e41105b3a9ea95b6ced7beba11dce5dbe94bc5dd64",
+  "source_content_sha256": "23eb1e904b5412bf71aa7cbb6ef72a03a7599775ccdd8366056cfcd718206cc6",
   "subject": {
     "canonical_slug": "emergency-medical-technicians",
     "name": "急诊医疗技术员",

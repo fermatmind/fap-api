@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24751,7 +24754,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有可信的整体AI替代率。AI可辅助工单整理和趋势摘要；轧辊设定、卡料、产品尺寸和人员安全须现场核实。"
+              "没有可信的整体AI替代率。AI可辅助工单整理和趋势摘要；轧辊设定、卡料、产品尺寸和人员安全须现场核实。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "rolling-machine-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.18",
@@ -32515,6 +32518,23 @@
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-4023.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "设备设定｜按授权设置辊距、导向、进给与相关参数。｜保留设定和变更记录。 — 25/100; weight=1/3; rolling-machine-setters-operators-and-tenders-metal-and-plastic.profile.responsibilities-block.1[1]",
+                  "试轧与运行｜启动轧机，观察材料通过、周期和卡料。｜对异常停机升级。 — 25/100; weight=1/3; rolling-machine-setters-operators-and-tenders-metal-and-plastic.profile.responsibilities-block.1[2]",
+                  "尺寸检验｜用适用量具测厚度、宽度与形状。｜记录样本、仪器和实测值。 — 25/100; weight=1/3; rolling-machine-setters-operators-and-tenders-metal-and-plastic.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37423,7 +37443,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37696,15 +37716,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "金属轧制工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "轧机设定 · 运行监测 · 尺寸检验",
@@ -37755,7 +37787,7 @@
       "text": "金属轧制工"
     }
   },
-  "source_content_sha256": "f0c6b148c4bd54678fc5ff0f89cf61ac4c89d051bc0cd5668e85cefe36dbe090",
+  "source_content_sha256": "70bca3aba807eefe01a379ce07ce5c1f3dbada60203b7fcde711d6550357d8ec",
   "subject": {
     "canonical_slug": "rolling-machine-setters-operators-and-tenders-metal-and-plastic",
     "name": "金属轧制工",

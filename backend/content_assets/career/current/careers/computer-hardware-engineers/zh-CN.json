@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25002,7 +25005,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "依据硬件职业任务，规格资料检索、代码脚本、测试数据和文档草稿可作为工具辅助候选用途；须在受控工具上测试正确性。证据不足：未取得本职业具体厂商投入、AI采用率、周期缩短或质量提升样本，不能从仿真工具存在推出生成式AI已采用。"
+              "依据硬件职业任务，规格资料检索、代码脚本、测试数据和文档草稿可作为工具辅助候选用途；须在受控工具上测试正确性。证据不足：未取得本职业具体厂商投入、AI采用率、周期缩短或质量提升样本，不能从仿真工具存在推出生成式AI已采用。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.18",
@@ -31735,6 +31738,23 @@
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/202501/P020250116506795831658.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "需求与接口与设计｜评估硬件与软件接口与系统要求并设计硬件与外围设备｜与工程人员商议并查阅规格，评估硬件与软件之间的接口以及整体系统的运行与性能要求；设计并开发计算机硬件与支持外围设备，包括中央处理器与支持逻辑与微处理器与定制集成电路与打印机与磁盘驱动器；并选定硬件与材料并确保符合规格与产品要求（对应 O*NET 任务第三与第二与第九项）。 — 50/100; weight=1/3; computer-hardware-engineers.profile.responsibilities-block.1[0]",
+                  "原型与仿真｜使用工作模型或理论模型构建与测试与修改产品原型｜使用通过计算机仿真构建的工作模型或理论模型来构建、测试并修改产品原型；并装配与改造现有设备以满足特殊需求（对应 O*NET 任务第四与补充任务第一项）。 — 50/100; weight=1/3; computer-hardware-engineers.profile.responsibilities-block.1[2]",
+                  "测试与验证与数据分析｜记录与分析测试数据以验证硬件与外围设备并分析系统能力｜通过记录与分析测试数据来测试与验证硬件与支持外围设备，以确保它们满足规格与要求；存储、检索并处理数据以分析系统能力与需求；并监控设备功能并作出必要修改以确保系统按规格运行（对应 O*NET 任务第六与第十与第十四项）。 — 75/100; weight=1/3; computer-hardware-engineers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36645,7 +36665,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36987,15 +37007,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "计算机硬件工程师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RIC",
@@ -37046,7 +37078,7 @@
       "text": "计算机硬件工程师"
     }
   },
-  "source_content_sha256": "b1cf6764b764bc9b4dcbc96152a83863ddb9b896a780401f0e34a3bdc0700ed8",
+  "source_content_sha256": "0a994ca04b97411b04afd71e9ca2b51f5312d5227427b504fb1b7b2680cb50b4",
   "subject": {
     "canonical_slug": "computer-hardware-engineers",
     "name": "计算机硬件工程师",

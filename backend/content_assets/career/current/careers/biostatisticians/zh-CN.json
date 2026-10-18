@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25144,7 +25147,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑按任务推演：工具可辅助检索、代码、数据字典与图表草稿；当前未核本职业整体替代、采用或节时因果数据，不能断言永不会替代。研究设计、缺失处理和签署责任按适用法规与机构授权核。"
+              "编辑按任务推演：工具可辅助检索、代码、数据字典与图表草稿；当前未核本职业整体替代、采用或节时因果数据，不能断言永不会替代。研究设计、缺失处理和签署责任按适用法规与机构授权核。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.18",
@@ -32812,6 +32815,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2021.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "设计与计划｜与临床或生命科学团队确定终点、比较与人群，计算样本量并预定义分析方法、缺失数据处理与敏感性分析｜与研究方案一致、可复现的统计分析计划。 — 50/100; weight=1/3; biostatisticians.profile.responsibilities-block.1[1]",
+                  "数据与计算｜核对数据编码与缺失，编写可复现的分析代码，保留数据版本、代码与分析日志｜他人可以重跑并得到同一结果的分析资产。 — 75/100; weight=1/3; biostatisticians.profile.responsibilities-block.1[2]",
+                  "推断与解释｜报告效应量与不确定度，做模型诊断与敏感性分析，说明结论能支持到什么程度及限制｜含区间、假设与局限说明的结果报告。 — 75/100; weight=1/3; biostatisticians.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37729,7 +37749,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37997,15 +38017,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "生物统计学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 15-2041.01 · Bright Outlook · 研究与推断责任",
@@ -38056,7 +38088,7 @@
       "text": "生物统计学家"
     }
   },
-  "source_content_sha256": "26597b8484250ebe79ce75d9af15dfcc56cc3ee2d28b7035b52fa417675aea0f",
+  "source_content_sha256": "8e0de4711703b29b229645c1b765035b4b9a62f99e4f5c2b2a11f31344a9415c",
   "subject": {
     "canonical_slug": "biostatisticians",
     "name": "生物统计学家",

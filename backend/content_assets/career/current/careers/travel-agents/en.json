@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25539,7 +25542,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no representative adoption rate, net employment or pay causality or reviewable task score for this occupation, so no hero score is filled in. Distinguish draft capability, actual adoption and occupational outcomes; the BLS United States projection explanation may indicate demand change but gives no personal probability of unemployment."
+              "Insufficient evidence: this round obtained no representative adoption rate, net employment or pay causality or reviewable task score for this occupation, so the Hero shows a separate editorial estimate. Distinguish draft capability, actual adoption and occupational outcomes; the BLS United States projection explanation may indicate demand change but gives no personal probability of unemployment. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "travel-agents.display.ai_impact_table.answer",
@@ -33123,6 +33126,23 @@
                 "publisher": "FermatMind content editing",
                 "scope": "editorial_synthesis",
                 "url": "https://fermatmind.com/zh/career/jobs/travel-agents"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Requirements | clarify travel constraints | check the destination, dates, numbers, budget, transport and accommodation needs with the client, recording hard requirements and preferences. — 50/100; weight=1/3; travel-agents.display.responsibilities_block.01[0]",
+                  "Options | itinerary and cost comparison | calculate quantities and costs from the applicable quote, explain what is included and excluded and the cancellation and change conditions, and do not fill unknowns in as zero. — 75/100; weight=1/3; travel-agents.display.responsibilities_block.02[0]",
+                  "Booking | transport, accommodation and ticketing | book by system or telephone within institutional authority, check dates, identity and availability confirmation status, and review under the process before ticketing. — 75/100; weight=1/3; travel-agents.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38367,7 +38387,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38515,15 +38535,27 @@
         "source_refs": [
           "cn-policy"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Travel advisers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "The United States 41-3041.00 precise occupation",
@@ -38574,7 +38606,7 @@
       "text": "Travel advisers"
     }
   },
-  "source_content_sha256": "acf7763ce6f877445453bcff21bac38804f5503a72bfb49f24663ed8d08684bc",
+  "source_content_sha256": "32c704839ded1e8c1eca97d595840b68bc0ee878f73930b355831f169eb35d57",
   "subject": {
     "canonical_slug": "travel-agents",
     "name": "Travel advisers",

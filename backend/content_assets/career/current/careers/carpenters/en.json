@@ -47,6 +47,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24950,7 +24953,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Conclusion: reviewable steps such as retrieving drawings and specifications, drafting lists, batching calculations, organizing estimate tables, and drafting record text can be assisted by tools, but there is no official evidence that they replace judgments of drawing and site consistency, material usability, installation sequence and forces, plumb and level acceptability, work safety and stop-work and resume-work judgments, and responsibility attribution. AI exposure does not equal an automation rate or job disappearance; task exposure, process automation level, and employment numbers are three different concepts."
+              "Conclusion: reviewable steps such as retrieving drawings and specifications, drafting lists, batching calculations, organizing estimate tables, and drafting record text can be assisted by tools, but there is no official evidence that they replace judgments of drawing and site consistency, material usability, installation sequence and forces, plumb and level acceptability, work safety and stop-work and resume-work judgments, and responsibility attribution. AI exposure does not equal an automation rate or job disappearance; task exposure, process automation level, and employment numbers are three different concepts. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "carpenters.ai-impact.ai-impact-table.18",
@@ -31796,6 +31799,23 @@
                 "publisher": "Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/etools/woodworking/production/wood-dust"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Reading drawings and layout｜Studying drawings and sketches and building plans to determine dimensions and materials, and measuring on site and laying out with chalk lines and marking gauges｜Layout and dimensional records. — 25/100; weight=1/3; carpenters.profile.responsibilities-block.1[0]",
+                  "Installation and construction｜Installing framing and structural members and doors and windows and floors and trim and cabinets and hardware, and anchoring and supporting with nails and bolts and anchor rods｜Installation and fastening and anchoring records. — 0/100; weight=1/3; carpenters.profile.responsibilities-block.1[2]",
+                  "Records and estimates｜Keeping work records and documenting the work, submitting written progress reports, and preparing cost estimates and change explanations for the client or employer｜Work records and progress reports and cost estimates. — 75/100; weight=1/3; carpenters.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36726,7 +36746,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37126,15 +37146,27 @@
         "source_refs": [
           "carpenters-ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Carpenters",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 47-2031.00 · reading drawings and layout and material selection / installation and construction / verification and handover",
@@ -37185,7 +37217,7 @@
       "text": "Carpenters"
     }
   },
-  "source_content_sha256": "519b8b08da9820d9d88c0b4acd8dd3c6d477ad3c13f31ba81e6ea6222ed2f60a",
+  "source_content_sha256": "c9a8f8ca64a59c727f6b7352ed7d4e841d71b49c700cbc31510167d35a10f17e",
   "subject": {
     "canonical_slug": "carpenters",
     "name": "Carpenters",

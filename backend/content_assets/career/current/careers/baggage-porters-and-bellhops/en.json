@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24254,7 +24257,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Generative AI adoption rate and efficiency evidence have still not been obtained; registration retrieval and drafts are editorial trial candidates. The BLS occupational utilization factor table for air transportation support, 488100, notes that changing traveler preferences and self-service bag drop machines reduce demand for skycaps, and for casino hotels, 721120, notes that cutting non-essential services lowers this occupation's share; these are within-industry share projection reasons, not a generative AI adoption rate, a measured headcount reduction, or a replacement conclusion for all hotels."
+              "Generative AI adoption rate and efficiency evidence have still not been obtained; registration retrieval and drafts are editorial trial candidates. The BLS occupational utilization factor table for air transportation support, 488100, notes that changing traveler preferences and self-service bag drop machines reduce demand for skycaps, and for casino hotels, 721120, notes that cutting non-essential services lowers this occupation's share; these are within-industry share projection reasons, not a generative AI adoption rate, a measured headcount reduction, or a replacement conclusion for all hotels. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.18",
@@ -32259,6 +32262,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/43-4081.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Receipt and tagging | Give the handover a basis | Confirm the item count and owner, receive and tag the baggage and claim check, and write out clearly the tag and ownership. — 50/100; weight=1/3; baggage-porters-and-bellhops.profile.responsibilities-block.1[0]",
+                  "Carrying and temporary storage | Give items a destination | Carry suitcases and luggage and parcels by hand or with luggage carts between guest rooms and the loading area and vehicles and the terminal, following the route and time limits. — 0/100; weight=1/3; baggage-porters-and-bellhops.profile.responsibilities-block.1[1]",
+                  "Guest and venue service | Keep the experience smooth | Greet and escort guests to their rooms, provide directions and transportation and facility information, deliver messages and meal orders and run errands, and keep the lobby and entrance area tidy. — 25/100; weight=1/3; baggage-porters-and-bellhops.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37167,7 +37187,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37495,15 +37515,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Baggage Porters and Bellhops",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 39-6011.00 · Job Zone 1–2 · low entry preparation",
@@ -37554,7 +37586,7 @@
       "text": "Baggage Porters and Bellhops"
     }
   },
-  "source_content_sha256": "c25788367d8e907dc852c9d139f89edcc29165bc84af180137b8cb6f90ed090d",
+  "source_content_sha256": "b6ac1192504d00cdc88f796b092864c84edf84b1b3ec15525803e5272ca1d1e3",
   "subject": {
     "canonical_slug": "baggage-porters-and-bellhops",
     "name": "Baggage Porters and Bellhops",

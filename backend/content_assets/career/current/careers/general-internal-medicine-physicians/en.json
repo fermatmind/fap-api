@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25035,7 +25038,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not obtained an AI exposure score, clinical adoption rate, or efficiency-effect study precisely matching 29-1216 and assigns no exposure level. O*NET supports diagnosis, long-term care, and medical-record tasks. In 2025 recruitment advertisements, Epic Systems was mentioned in 4% of associated deduplicated advertisements and four other software items in less than 1% each; these are not clinical prevalence or AI adoption rates. The editorial suggestion is to first test document organization and retrieval using synthetic data and record accuracy, time spent, and review costs. Actual clinical tools require checks against regulation, organizational rules, and practice privileges."
+              "Insufficient evidence: this page has not obtained an AI exposure score, clinical adoption rate, or efficiency-effect study precisely matching 29-1216 and assigns no exposure level. O*NET supports diagnosis, long-term care, and medical-record tasks. In 2025 recruitment advertisements, Epic Systems was mentioned in 4% of associated deduplicated advertisements and four other software items in less than 1% each; these are not clinical prevalence or AI adoption rates. The editorial suggestion is to first test document organization and retrieval using synthetic data and record accuracy, time spent, and review costs. Actual clinical tools require checks against regulation, organizational rules, and practice privileges. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "general-internal-medicine-physicians.ai-impact.ai-impact-table.18",
@@ -32536,6 +32539,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "29-1216.00 exact occupation",
                 "url": "https://www.onetonline.org/link/industry/29-1216.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Take histories, perform physical examinations, and record them in structured form — 25/100; weight=1/3; general-internal-medicine-physicians.ai-impact.ai-impact-table.95[0]",
+                  "Analyze medical records, reports, laboratory results, and examination information to diagnose conditions — 50/100; weight=1/3; general-internal-medicine-physicians.ai-impact.ai-impact-table.99[0]",
+                  "Prescribe or administer medications, treatments, and other specialized medical care — 25/100; weight=1/3; general-internal-medicine-physicians.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37476,7 +37496,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career-direction comparison",
       "fit": "Career-fit guide",
@@ -37626,15 +37646,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "General Internal Medicine Physicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure: not scored on this page"
+      "label": "AI Impact Score"
     },
     "badges": [
       "General Internal Medicine Physicians · Tasks, deliverables, and responsibility boundaries",
@@ -37685,7 +37717,7 @@
       "text": "General Internal Medicine Physicians"
     }
   },
-  "source_content_sha256": "042444b456dfd8182fa1e5d92ea083ee4f75fc94cafa3516461b1aea4766f2bf",
+  "source_content_sha256": "905c885aec11ba29bd54cc9c1a9031add8a5a8f75c46a5b513a2d26b438e71f2",
   "subject": {
     "canonical_slug": "general-internal-medicine-physicians",
     "name": "General Internal Medicine Physicians",

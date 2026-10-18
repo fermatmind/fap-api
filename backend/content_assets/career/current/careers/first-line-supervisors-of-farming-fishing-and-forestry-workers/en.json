@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24012,7 +24015,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Approved materials, records, and scheduling assistance within the tasks on this page can be trialed, and accuracy and rework must be measured; the materials checked do not prove that this occupation has widely adopted them, has clearly gained efficiency, will necessarily be augmented, or will not be replaced as a whole."
+              "Approved materials, records, and scheduling assistance within the tasks on this page can be trialed, and accuracy and rework must be measured; the materials checked do not prove that this occupation has widely adopted them, has clearly gained efficiency, will necessarily be augmented, or will not be replaced as a whole. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "first-line-supervisors-of-farming-fishing-and-forestry-workers.ai-impact.ai-impact-table.18",
@@ -31413,6 +31416,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Assign work and schedule shifts according to the work plan and teach operating methods to workers. — 50/100; weight=1/3; first-line-supervisors-of-farming-fishing-and-forestry-workers.ai-impact.ai-impact-table.99[0]",
+                  "Patrol fields, woodlands, and farming facilities and judge work conditions and progress. — 25/100; weight=1/3; first-line-supervisors-of-farming-fishing-and-forestry-workers.ai-impact.ai-impact-table.103[0]",
+                  "Requisition feed, pesticides and veterinary drugs, implements, and parts, dispatch machinery, and record output and personnel matters. — 75/100; weight=1/3; first-line-supervisors-of-farming-fishing-and-forestry-workers.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36315,7 +36335,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -36584,15 +36604,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "First-Line Supervisors of Farming, Fishing, and Forestry Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "First-Line Supervisors of Farming, Fishing, and Forestry Workers · official occupational scope (45-1011.00)",
@@ -36643,7 +36675,7 @@
       "text": "First-Line Supervisors of Farming, Fishing, and Forestry Workers"
     }
   },
-  "source_content_sha256": "314e85f3212e1945bb453f48300703389909ce4418a2703b706d55568ffa6865",
+  "source_content_sha256": "981db838c1cb25e6601f93a9424eacc72bad59fb812042b816643a620a6d8787",
   "subject": {
     "canonical_slug": "first-line-supervisors-of-farming-fishing-and-forestry-workers",
     "name": "First-Line Supervisors of Farming, Fishing, and Forestry Workers",

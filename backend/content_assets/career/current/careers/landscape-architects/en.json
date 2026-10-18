@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -7547,7 +7550,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Generative AI can trial approved fictional record summaries, scheme text, or list drafts; mentions of conventional CAD/GIS design software differ from generative AI adoption. Check back against the original site, codes, and versions, and do not claim efficiency gains without measurement. Supported tasks under supervision and independent practice are separate, and licensing and sealing follow jurisdictional rules; the model confers no authority, and final professional responsibility cannot rest on outputs alone."
+              "Generative AI can trial approved fictional record summaries, scheme text, or list drafts; mentions of conventional CAD/GIS design software differ from generative AI adoption. Check back against the original site, codes, and versions, and do not claim efficiency gains without measurement. Supported tasks under supervision and independent practice are separate, and licensing and sealing follow jurisdictional rules; the model confers no authority, and final professional responsibility cannot rest on outputs alone. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "landscape-architects.ai-impact.ai-impact-table.2",
@@ -8927,6 +8930,23 @@
                 "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-3011.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Survey terrain and drainage — 0/100; weight=1/3; landscape-architects.profile.responsibilities-block.4[0]",
+                  "Design landscape plans and planting schemes — 75/100; weight=1/3; landscape-architects.profile.responsibilities-block.4[0]",
+                  "Prepare specifications and check construction changes — 50/100; weight=1/3; landscape-architects.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11473,7 +11493,7 @@
     ],
     "path": "/en/career/jobs/landscape-architects",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11561,15 +11581,27 @@
         "source_refs": [
           "source-pack-onet-localwages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Landscape Architect",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Landscape Architect · site design, licensing, and public safety boundaries",
@@ -11620,7 +11652,7 @@
       "text": "Landscape architect career judgment: site design, licensing, and public safety boundaries"
     }
   },
-  "source_content_sha256": "ab324bc52f88fd419ed73d7dffa4e1e438cb76be366ced6ce29d0bba9843aaee",
+  "source_content_sha256": "d9dab56afe89e314ec0fa31266882a10d0919381290cbc6e8300db4cf3e275f8",
   "subject": {
     "canonical_slug": "landscape-architects",
     "name": "Landscape Architect",

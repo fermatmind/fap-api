@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24123,7 +24126,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no independent GenAI adoption rate, substitution rate, or automated skin service effect for 39-5094 skincare specialists was obtained. Record organization, appointment comparison, and product explanation drafts can serve as editorial exploration; real customer contact, hygiene, approved services, medical referrals, and responsibility judgments require people. Image analysis, diagnosis, and lasers are different technologies and authorities and cannot be inferred from text model capability."
+              "Insufficient evidence: no independent GenAI adoption rate, substitution rate, or automated skin service effect for 39-5094 skincare specialists was obtained. Record organization, appointment comparison, and product explanation drafts can serve as editorial exploration; real customer contact, hygiene, approved services, medical referrals, and responsibility judgments require people. Image analysis, diagnosis, and lasers are different technologies and authorities and cannot be inferred from text model capability. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "skincare-specialists.ai-impact.ai-impact-table.18",
@@ -32048,6 +32051,23 @@
                 "publisher": "California Board of Barbering and Cosmetology",
                 "scope": "contextual",
                 "url": "https://www.barbercosmo.ca.gov/applicants/license_requirements.shtml"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Needs communication | Understand the appearance the customer wants to improve, prior services, and preferences, and confirm the scope of this service. | Output a clear service record and pending items; refer serious problems to medical personnel. — 25/100; weight=1/3; skincare-specialists.profile.responsibilities-block.1[0]",
+                  "Facial and body care | Provide cleaning, care, or mask services within local qualifications and agency authorization. | Output services performed and feedback; medical procedures must not be undertaken on the basis of a job title. — 0/100; weight=1/3; skincare-specialists.profile.responsibilities-block.1[2]",
+                  "Appointments and service records | Record customer needs, services provided, feedback, and next steps. | Output times, service scope, and receiver; collect only necessary information. — 75/100; weight=1/3; skincare-specialists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36958,7 +36978,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37226,15 +37246,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Skincare specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Skin care · customer communication · hygiene records",
@@ -37285,7 +37317,7 @@
       "text": "Skincare specialists"
     }
   },
-  "source_content_sha256": "5ab4bc012bddf4c3fc4843c2773d4eac53b5dacdaf2d4540a9ad9c11aceab1aa",
+  "source_content_sha256": "5a415e7112127eabac706b186cd20d538ef2582c6ffb50ced9fb814ce9890895",
   "subject": {
     "canonical_slug": "skincare-specialists",
     "name": "Skincare specialists",

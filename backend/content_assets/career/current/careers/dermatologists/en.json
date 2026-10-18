@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24362,7 +24365,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no reviewable research on AI adoption, clinical effects, replacement or long-term skill change for this subcategory was obtained; this page shows no corresponding score, ratio or date. Occupational tasks, the 2025 recruitment software terms and the employment projection each have their own scope and cannot prove “long-term use” or that skin colour and history cannot be parameterised. The assistance scenarios below are conditional editorial inferences, and their effects need actual validation."
+              "Insufficient evidence: no reviewable research on AI adoption, clinical effects, replacement or long-term skill change for this subcategory was obtained; these sources do not establish measured adoption or substitution rates or dates; the AI Impact Score is a separate editorial task-sample estimate. Occupational tasks, the 2025 recruitment software terms and the employment projection each have their own scope and cannot prove “long-term use” or that skin colour and history cannot be parameterised. The assistance scenarios below are conditional editorial inferences, and their effects need actual validation. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24630,7 +24633,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page did not verify a reliable correspondence between ISCO and SOC dermatology codes or a reviewable score, so the Hero remains in the missing state; this does not mean that no research has any occupational score, and adjacent occupations are not used to fill in. Actual adoption, clinical effects and job outcomes each need their own evidence."
+              "This page did not verify a reliable correspondence between ISCO and SOC dermatology codes or a reviewable score, so the Hero shows a separate editorial estimate; this does not mean that no research has any occupational score, and adjacent occupations are not used to fill in. Actual adoption, clinical effects and job outcomes each need their own evidence."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -32358,6 +32361,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/31-9092.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Verify the chief complaint, course of illness, past history and medication and allergy history, sun and occupational exposure history and family history, and complete a full examination of the skin, hair and nails and record lesion morphology and distribution. — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Form a diagnosis and differential considerations, judge the indications for biopsy and pathology according to standards, and explain the treatment plan, course, risks and alternatives to the patient and obtain informed consent. — 50/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Prescribe topical and systemic medication according to indications and arrange monitoring of outcomes and adverse reactions, and perform biopsy, excision, cryotherapy, laser or phototherapy and similar procedures with a record each time. — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37697,7 +37717,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -37920,15 +37940,27 @@
         "source_refs": [
           "r5-nbs-health"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Dermatologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Receiving patients and morphology recognition · medication and procedures · follow-up and education",
@@ -37979,7 +38011,7 @@
       "text": "Dermatologists"
     }
   },
-  "source_content_sha256": "bc44c4297c365da7a91672eea88304a9d448d680d9a0a2fc8f7f418387ab93e7",
+  "source_content_sha256": "3120f78cfc5f37f62807f617c246c1fc642cd8bc4d120dd91cccdc248d1af302",
   "subject": {
     "canonical_slug": "dermatologists",
     "name": "Dermatologists",

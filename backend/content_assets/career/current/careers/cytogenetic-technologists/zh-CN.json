@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24324,7 +24327,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核实的是30项任务、一般工作情境与招聘关键词。本轮无AI采用率、实测提效、替代时点或收入就业因果。自动扫描、图像定位与核型草排、LIS汇总是编辑待验证候选；一般仪器/信息化不等于生成式AI。应用须验证方法适用性、假阴性/假阳性、版本与人工审核，工具输出不自动取得临床报告权限。"
+              "核实的是30项任务、一般工作情境与招聘关键词。本轮无AI采用率、实测提效、替代时点或收入就业因果。自动扫描、图像定位与核型草排、LIS汇总是编辑待验证候选；一般仪器/信息化不等于生成式AI。应用须验证方法适用性、假阴性/假阳性、版本与人工审核，工具输出不自动取得临床报告权限。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31850,6 +31853,23 @@
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "培养与收获｜无菌培养并收获细胞｜按标本类型与转诊原因选择培养体系或流程，用无菌技术准备标本与培养基并维持其酸碱度与无菌状态，按最优时间顺序与方式（手工或自动化）使用阻滞剂、释放剂与固定液收获细胞。 — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "制片与显带｜制备玻片并使染色体可见｜按标准流程制备细胞培养玻片，选择显带方法以辨识染色体对，染色使染色体在显微镜下可见，把标本与对照加到合适玻片框、运行仪器并产出可分析的结果，用计算机成像系统生成染色体图像。 — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "判读与分析｜计数染色体并识别异常｜在显微镜、光镜或显微摄影系统下观察玻片，计数染色体数目、识别结构异常，把染色体成对排列到核型图；任务档案另列DNA提取、测定与稀释及FISH、aCGH等分析。具体方法按检验申请、经验证的方法适用性、机构规程和人员权限选择；不表示每个病例都并行使用或相互验证。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37326,7 +37346,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37594,15 +37614,27 @@
         "source_refs": [
           "r5-nbs-health"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "细胞遗传学技师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "染色体分析 · 细胞培养与制片 · 结果判读与报告",
@@ -37653,7 +37685,7 @@
       "text": "细胞遗传学技师"
     }
   },
-  "source_content_sha256": "5b8cf48c5459683fe75692cf5616b38e264d01acb9bc77c34a253781018b2607",
+  "source_content_sha256": "b2919d9260f2427f9dd1ee106837de35d849d756ebc152895917630a430eb121",
   "subject": {
     "canonical_slug": "cytogenetic-technologists",
     "name": "细胞遗传学技师",

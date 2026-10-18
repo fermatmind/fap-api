@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7557,7 +7560,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round did not establish generative AI adoption, efficiency gains or pay causation for laundry workers. Conventional equipment programs, barcodes and order tracking are not generative AI. A trial can organize fictional item-count records, checking each against the original cards; do not generate real chemical formulas or equipment parameters or release items based on the output."
+              "Insufficient evidence: This round did not establish generative AI adoption, efficiency gains or pay causation for laundry workers. Conventional equipment programs, barcodes and order tracking are not generative AI. A trial can organize fictional item-count records, checking each against the original cards; do not generate real chemical formulas or equipment parameters or release items based on the output. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.ai-impact.ai-impact-table.2",
@@ -9057,6 +9060,23 @@
                 "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/37-2011.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Check care labels and sort and treat stains — 25/100; weight=1/3; laundry-and-dry-cleaning-workers.profile.responsibilities-block.4[0]",
+                  "Operate washing and drying equipment — 25/100; weight=1/3; laundry-and-dry-cleaning-workers.profile.responsibilities-block.4[0]",
+                  "Press inspect count and package items — 0/100; weight=1/3; laundry-and-dry-cleaning-workers.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11503,7 +11523,7 @@
     ],
     "path": "/en/career/jobs/laundry-and-dry-cleaning-workers",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11615,15 +11635,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Laundry and Dry-Cleaning Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Laundry Workers · Laundry Processes, Chemicals and Work Safety",
@@ -11674,7 +11706,7 @@
       "text": "Laundry Worker Career Assessment: Laundry Processes, Chemicals and Work Safety"
     }
   },
-  "source_content_sha256": "6d2d7d8fab0ed7cf5ecce21d1d81d168e7e0fcaa9f57ea734e3d785cd3953a56",
+  "source_content_sha256": "8c09c32ab037613673230ea012c21342a72281375361e9ffbb373bc4d85741d5",
   "subject": {
     "canonical_slug": "laundry-and-dry-cleaning-workers",
     "name": "Laundry and Dry-Cleaning Workers",

@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25452,7 +25455,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Online sales and CRM are task background; text tools can assist drafts, and product terms are still checked manually. Independent adoption, scores, time savings, and replacement lack evidence and cannot be filled in with sales volume or an overall projection."
+              "Online sales and CRM are task background; text tools can assist drafts, and product terms are still checked manually. Independent adoption, scores, time savings, and replacement lack evidence and cannot be filled in with sales volume or an overall projection. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "wholesale-and-manufacturing-sales-representatives.display.ai_impact_table.answer",
@@ -33045,6 +33048,23 @@
                 "publisher": "U.S. Department of Labor, O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/41-4012.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Needs｜Understand the use and conditions｜Listen to the customer's needs and distinguish what is known from what needs asking. — 25/100; weight=1/3; wholesale-and-manufacturing-sales-representatives.display.responsibilities_block.01[0]",
+                  "Quote｜Product, quantity, and terms｜Check SKU, packaging, and amount and confirm the delivery date per authorization. — 75/100; weight=1/3; wholesale-and-manufacturing-sales-representatives.display.responsibilities_block.03[0]",
+                  "Order｜Prepare contract and order documents｜Check the original basis and approvals and do not fabricate a sale. — 75/100; weight=1/3; wholesale-and-manufacturing-sales-representatives.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38322,7 +38342,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38470,15 +38490,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC41-4012.00",
@@ -38529,7 +38561,7 @@
       "text": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products"
     }
   },
-  "source_content_sha256": "36e46e2aa0fb4ae198a2ba7bf10cff8b148d69e724e7c8d90d51c3ad291f6055",
+  "source_content_sha256": "ab2b96272a08e3300f7cdfd4d529880dc17b0542da53a66c822e47ed54332b44",
   "subject": {
     "canonical_slug": "wholesale-and-manufacturing-sales-representatives",
     "name": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",

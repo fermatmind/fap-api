@@ -20,6 +20,9 @@
       "fact:current-us-growth-exact-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24553,7 +24556,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "日志、检索、分类和草稿为待测辅助候选；本轮未取得职业实际部署、净效率或长期整体替代实证，不保证职业永不消失。BLS表1.2：SOC15-1230合计2025—2035就业903,100→878,800，公布净变化-24,300/-2.7%，年均空缺48,700含替补；网络15-1231为152,500→154,400/+1,900/+1.2%/9,000空缺，用户15-1232为750,600→724,400/-26,200/-3.5%/39,700空缺。总体含自雇，非逐年实际、个人机会或全部变化的AI因果。OOH约-3%是四舍五入。"
+              "日志、检索、分类和草稿为待测辅助候选；本轮未取得职业实际部署、净效率或长期整体替代实证，不保证职业永不消失。BLS表1.2：SOC15-1230合计2025—2035就业903,100→878,800，公布净变化-24,300/-2.7%，年均空缺48,700含替补；网络15-1231为152,500→154,400/+1,900/+1.2%/9,000空缺，用户15-1232为750,600→724,400/-26,200/-3.5%/39,700空缺。总体含自雇，非逐年实际、个人机会或全部变化的AI因果。OOH约-3%是四舍五入。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "computer-support-specialists.ai-impact.ai-impact-table.18",
@@ -31328,6 +31331,23 @@
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/202501/P020250116506795831658.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "网络｜维护与备份网络｜按维护计划检查网络设备与链路，执行数据备份并检查备份可恢复性，把异常与处理动作写入运行记录。 — 75/100; weight=1/3; computer-support-specialists.profile.responsibilities-block.1[0]",
+                  "支持｜受理并解决用户问题｜接收并登记工单，复现用户现象，检查账号、权限与设备，处理或转交并回访确认。 — 50/100; weight=1/3; computer-support-specialists.profile.responsibilities-block.1[2]",
+                  "记录｜记录工单并维护网络技术文档｜记录每天的数据通信事务、问题与补救动作，维护安装与变更文档，并把处理过程写成他人可复核的记录。 — 75/100; weight=1/3; computer-support-specialists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36238,7 +36258,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36534,15 +36554,27 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "计算机支持专员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · CIR",
@@ -36593,7 +36625,7 @@
       "text": "计算机支持专员"
     }
   },
-  "source_content_sha256": "6a9301b88cb76f071cff5ef41fa651dfaa6bb02e89bd2894ca8a133f4e533267",
+  "source_content_sha256": "7b87500abc98e374220705300bfc311b342127c168e89a9dfd086c10c8e90512",
   "subject": {
     "canonical_slug": "computer-support-specialists",
     "name": "计算机支持专员",

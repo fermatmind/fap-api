@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24337,7 +24340,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "元数据草稿、检索摘要翻译展签原型可作编辑试用方向，实际本岗效率采用替代未取；来源真实性记录和发布须人工核。美国情境78不自动化16中度不衡量生成式AI。ICOM2026伦理准则C.1—C.7倡导藏品政策、保存安全、复制品清晰永久标识、征集尽职调查、记录安全和负责的退出馆藏与技术使用；P.6保护工作保密与个人信息。ICOM会员须遵守，非会员作专业参考，不是中国强制法、全部机构程序或本岗AI效率证据；原始法域规则和机构权限另核。"
+              "元数据草稿、检索摘要翻译展签原型可作编辑试用方向，实际本岗效率采用替代未取；来源真实性记录和发布须人工核。美国情境78不自动化16中度不衡量生成式AI。ICOM2026伦理准则C.1—C.7倡导藏品政策、保存安全、复制品清晰永久标识、征集尽职调查、记录安全和负责的退出馆藏与技术使用；P.6保护工作保密与个人信息。ICOM会员须遵守，非会员作专业参考，不是中国强制法、全部机构程序或本岗AI效率证据；原始法域规则和机构权限另核。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31822,6 +31825,23 @@
                 "publisher": "中国政府官方网站",
                 "scope": "proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "Core规划征集保管与展览含主题设计制作安装；保险安排是Supplemental，不把每班必做或法定许可从任务目录推出。 — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "登记编目｜建立并维护记录系统｜建立并维护机构的登记、编目与基础记录系统（多使用数据库），向其他策展人与公众提供馆藏信息，保证条目可检索、可交接并可追溯。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "研究与鉴定｜开展研究并鉴定对象｜在专业领域规划并开展研究项目，研究、检查并测试拟入藏对象以鉴定其来源、构成与历史并评估当前价值，撰写并评审资助申请、期刊论文、机构报告与宣传材料。 — 50/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37112,7 +37132,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37356,15 +37376,27 @@
         "source_refs": [
           "g04-nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "策展人",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "文博与文化机构 · 藏品管理 · 研究、展览与公众解释",
@@ -37415,7 +37447,7 @@
       "text": "策展人"
     }
   },
-  "source_content_sha256": "aa0a0506b071b5f69983775f9605c62d33b20c915810559c4d2111db291a6c4c",
+  "source_content_sha256": "3a71e54eb671dca9af0fa60b70215799c362c20944cef15b2d367e82d915916f",
   "subject": {
     "canonical_slug": "curators",
     "name": "策展人",

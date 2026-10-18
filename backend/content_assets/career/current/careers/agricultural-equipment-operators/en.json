@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24948,7 +24951,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no study of AI adoption rates, efficiency gains, causal wage effects, substitution ratios or job-disappearance years for agricultural equipment operators. The O*NET task material and the BLS employment projection cannot measure these AI outcomes. This section offers paper record trials and condition checks, and does not equate automatic guidance with AI or treat it as deployed."
+              "Insufficient evidence: this page obtained no study of AI adoption rates, efficiency gains, causal wage effects, substitution ratios or job-disappearance years for agricultural equipment operators. The O*NET task material and the BLS employment projection cannot measure these AI outcomes. This section offers paper record trials and condition checks, and does not equate automatic guidance with AI or treat it as deployed. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "agricultural-equipment-operators.ai-impact.ai-impact-table.18",
@@ -33585,6 +33588,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/farming-fishing-and-forestry/agricultural-workers.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Work preparation｜Inspection and hitching｜Walk around the machine to check oil, water and safety devices, hitch the plough, harrow, seeder or sprayer as the job requires, and confirm the connection is secure. — 0/100; weight=1/3; agricultural-equipment-operators.profile.responsibilities-block.1[0]",
+                  "Field work｜Tillage, sowing and harvesting｜Operate the tractor, seeder and combine harvester along the route and to the parameters, keeping the line straight and the headland turns good, and avoiding missed and double work. — 25/100; weight=1/3; agricultural-equipment-operators.profile.responsibilities-block.1[1]",
+                  "Precision work｜Navigation and variable application｜Read prescription maps and navigation data, calibrate sensors, check coverage and save the operation records. — 50/100; weight=1/3; agricultural-equipment-operators.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38523,7 +38543,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -38915,15 +38935,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Agricultural equipment operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Tasks: pre-shift checks · field work · stopping on an anomaly and recording",
@@ -38974,7 +39006,7 @@
       "text": "Agricultural equipment operators: occupational content, pay and employment prospects"
     }
   },
-  "source_content_sha256": "ef7f80569743f793fdeaf9449c3b46bfa6bb3ab8b18a0ba5aa62e7ecc750d335",
+  "source_content_sha256": "8d867fc4d0e170d2c89c69d71574e980c71eec2f672be43b9a2e78a6256fcf45",
   "subject": {
     "canonical_slug": "agricultural-equipment-operators",
     "name": "Agricultural equipment operators",

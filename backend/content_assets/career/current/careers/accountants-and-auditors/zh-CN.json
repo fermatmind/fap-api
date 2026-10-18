@@ -23540,8 +23540,17 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.19.url": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "published-sources",
+          "path": [
+            "data",
+            "entries",
+            18,
+            "url"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "sources.published-sources.title": {
         "ref": null,
@@ -25059,7 +25068,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "定量评分不可得：未取得本职业任务输入、权重、阈值、计算式、方法版本与评分日期，历史分数无法复算，本页不评分。BLS 预计美国会计师和审计师总体就业继续增长，并认为例行任务自动化会提高效率；WEF 雇主预期和审计研究则提示部分岗位或人员结构会变化。凭证识别、匹配对账、异常筛查和文档初稿可由 AI 辅助，但会计政策判断、审计证据评价、职业怀疑及签字责任仍须由专业人员承担。任务能否稳定自动化取决于数据、系统、控制和组织采用方式，不能据此断言所有初级岗位最先被替代。"
+              "历史评分依据未能复算；本轮采用下述独立编辑估算方法。BLS 预计美国会计师和审计师总体就业继续增长，并认为例行任务自动化会提高效率；WEF 雇主预期和审计研究则提示部分岗位或人员结构会变化。凭证识别、匹配对账、异常筛查和文档初稿可由 AI 辅助，但会计政策判断、审计证据评价、职业怀疑及签字责任仍须由专业人员承担。任务能否稳定自动化取决于数据、系统、控制和组织采用方式，不能据此断言所有初级岗位最先被替代。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "ai-impact-table-9",
@@ -32416,13 +32425,20 @@
               },
               {
                 "details": [
-                  "未取得本职业评分的任务输入、权重、阈值、计算式、方法版本与日期，无法从现有材料复算历史数值；本页不发布定量分数。"
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "会计｜账务处理、对账与期末结账｜记录和汇总交易，执行账户及系统对账、差异调节、调整分录和期末结账。 — 75/100; weight=1/3; responsibilities-block-1[1]",
+                  "共有｜财务分析、复核与管理沟通｜分析财务状况、经营成果、现金流和异常变动，解释驱动因素、风险及决策影响。 — 75/100; weight=1/3; responsibilities-block-1[3]",
+                  "审计｜审计证据评价、意见形成与沟通｜评价证据、错报和控制缺陷，形成审计意见，并与管理层和治理层沟通。 — 50/100; weight=1/3; responsibilities-block-1[5]"
                 ],
+                "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "本记录说明历史依据缺口，不是评分方法或效果证据。下方定性任务分析不推导自动化率、岗位消失概率或0—10分。",
-                "name": "FermatMind 历史评分依据缺口",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "url": null
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -37352,7 +37368,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37598,13 +37614,13 @@
         ]
       },
       {
-        "derivation": "未取得本职业任务输入、权重、阈值、计算式、方法版本与评分日期，历史精确分数无法复算；本页仅保留定性任务分析。",
-        "display_value": "暂无可核量化评分",
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
         "fact_id": "fermatmind-accountants-task-exposure",
-        "market": "未取得可复算的本职业评分依据",
-        "measure": "任务级定量评分（本页不评分）",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
         "occupation_scope": "会计师和审计师",
-        "period": "历史评分依据不完整；2026-10-08复核",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -37637,10 +37653,10 @@
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-accountants-task-exposure",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · CEI",
@@ -37691,7 +37707,7 @@
       "text": "会计师和审计师"
     }
   },
-  "source_content_sha256": "b00a2d18424177eb1f774dab6982048aae7bd64a51ea1e2ba4653e910b352a6c",
+  "source_content_sha256": "e48c59f62c8375514368c0d0d1ea940a06cbb2f111948e75a26b7156aba755b2",
   "subject": {
     "canonical_slug": "accountants-and-auditors",
     "name": "会计师和审计师",

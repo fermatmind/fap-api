@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -7551,7 +7554,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | U's wholly fictional materials can be used to test summaries, citation formatting, and draft organization, but this page has no measured adoption or efficiency data for this occupation. Check rule pages word for word; do not let tools turn dates into confirmed facts, invent quotations, or issue decisions. Formal use requires separate checks of court authorization and application writing-sample rules."
+              "Direct answer | U's wholly fictional materials can be used to test summaries, citation formatting, and draft organization, but this page has no measured adoption or efficiency data for this occupation. Check rule pages word for word; do not let tools turn dates into confirmed facts, invent quotations, or issue decisions. Formal use requires separate checks of court authorization and application writing-sample rules. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "judicial-law-clerks.ai-impact.ai-impact-table.2",
@@ -8926,6 +8929,23 @@
                 "publisher": "U.S. District Court, Central District of California",
                 "scope": "exact",
                 "url": "https://www.cacd.uscourts.gov/employment/term-law-clerk-0"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Review pleadings and motions — 75/100; weight=1/3; judicial-law-clerks.profile.responsibilities-block.4[0]",
+                  "Research precedents and prepare memoranda — 75/100; weight=1/3; judicial-law-clerks.profile.responsibilities-block.4[0]",
+                  "Draft and check court opinions and citations — 75/100; weight=1/3; judicial-law-clerks.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11354,7 +11374,7 @@
     ],
     "path": "/en/career/jobs/judicial-law-clerks",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11454,15 +11474,27 @@
         "source_refs": [
           "onet-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Judicial law clerks",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Judicial law clerks · Research and documents, confidentiality and authorization boundaries",
@@ -11513,7 +11545,7 @@
       "text": "Judicial law clerk career assessment: research, confidentiality, and authorization boundaries"
     }
   },
-  "source_content_sha256": "79ff13d49196fb0fc779b5b827fb4f6ffb01a2691bfe5b53e85b09fdaa23b049",
+  "source_content_sha256": "3eb0e59e17b1ff21dd0daacb298cb9f0f3ee13dd38f9d6019c1e5db7f28645f7",
   "subject": {
     "canonical_slug": "judicial-law-clerks",
     "name": "Judicial law clerks",

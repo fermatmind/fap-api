@@ -53,6 +53,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24807,7 +24810,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本次未取得53-2011生成式AI部署率、替代率及就业因果效果资料。已核O*NET任务涉及自动驾驶及仪表监控；民航公报称55家航空公司应用EFB，属于数字化应用证据，不能当成生成式AI落地。BLS 2025—2035年美国53-2011预测：2025年104,600人，2035年113,300人，增长8.3%，官方净增8,700人，年均职位空缺11,200个。人数由官方千人单位换算；空缺含增长、转职和退出劳动力需求，不能当成净新增或个人录用保证，也不外推中国。"
+              "证据不足：本次未取得53-2011生成式AI部署率、替代率及就业因果效果资料。已核O*NET任务涉及自动驾驶及仪表监控；民航公报称55家航空公司应用EFB，属于数字化应用证据，不能当成生成式AI落地。BLS 2025—2035年美国53-2011预测：2025年104,600人，2035年113,300人，增长8.3%，官方净增8,700人，年均职位空缺11,200个。人数由官方千人单位换算；空缺含增长、转职和退出劳动力需求，不能当成净新增或个人录用保证，也不外推中国。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.ai-impact.ai-impact-table.18",
@@ -32653,6 +32656,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "飞行前准备｜计划与性能｜研读天气、通告与航路资料，制定飞行计划与油量方案，完成载重平衡与起飞性能计算。 — 75/100; weight=1/3; airline-pilots-copilots-and-flight-engineers.profile.responsibilities-block.1[0]",
+                  "飞行操纵｜机动与阶段｜操纵航空器完成滑行、起飞、爬升、巡航、下降与着陆，按标准操作程序执行。 — 25/100; weight=1/3; airline-pilots-copilots-and-flight-engineers.profile.responsibilities-block.1[2]",
+                  "通信与协同｜管制与机组｜与空中交通管制保持通信并按指令飞行，与签派、维修和客舱机组协调，按机组资源管理分工。 — 25/100; weight=1/3; airline-pilots-copilots-and-flight-engineers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37554,7 +37574,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38026,15 +38046,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "航空公司飞行员、副驾驶与飞行工程师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "航空器驾驶：执照与运行资格 · 飞行计划与操纵监控 · 安全与机组协同",
@@ -38085,7 +38117,7 @@
       "text": "航空公司飞行员、副驾驶与飞行工程师：任务、工资与就业前景（O*NET 53-2011）"
     }
   },
-  "source_content_sha256": "a6e7b21435939f79b38a69d419574ec77b04ecc0bdef2b709452547c1a677685",
+  "source_content_sha256": "bd659cf636da6067523b1b1b36c7628a0851a753c11f1b22f1db6e8cf343bd7d",
   "subject": {
     "canonical_slug": "airline-pilots-copilots-and-flight-engineers",
     "name": "航空公司飞行员、副驾驶与飞行工程师",

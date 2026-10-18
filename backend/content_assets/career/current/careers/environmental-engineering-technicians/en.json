@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24112,7 +24115,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task materials inform record, retrieval, and draft trials; ILO2023 global potential task exposure cannot determine overall augmentation, adoption, or measured effects for this occupation. On-site sampling, equipment, and safety must follow actual protocols and authorization, and AI drafts do not sign off results."
+              "Task materials inform record, retrieval, and draft trials; ILO2023 global potential task exposure cannot determine overall augmentation, adoption, or measured effects for this occupation. On-site sampling, equipment, and safety must follow actual protocols and authorization, and AI drafts do not sign off results. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "environmental-engineering-technicians.ai-impact.ai-impact-table.18",
@@ -31517,6 +31520,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "On-site sampling and sample handling — 0/100; weight=1/3; environmental-engineering-technicians.ai-impact.ai-impact-table.95[0]",
+                  "Laboratory analysis and test records — 25/100; weight=1/3; environmental-engineering-technicians.ai-impact.ai-impact-table.99[0]",
+                  "Reporting and data submission — 75/100; weight=1/3; environmental-engineering-technicians.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36425,7 +36445,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -36694,15 +36714,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Environmental Engineering Technologists and Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Environmental Engineering Technologists and Technicians · official occupational scope",
@@ -36753,7 +36785,7 @@
       "text": "Environmental Engineering Technologists and Technicians"
     }
   },
-  "source_content_sha256": "b49e5d12c85031eb1f4d824ef5405d7bd27535765f80752aa8c56df2e7a7fbd8",
+  "source_content_sha256": "7cce66f71096d4e53dbf3a0dd3c6afbec40d808badc78fe2926a08854f78a5f6",
   "subject": {
     "canonical_slug": "environmental-engineering-technicians",
     "name": "Environmental Engineering Technologists and Technicians",

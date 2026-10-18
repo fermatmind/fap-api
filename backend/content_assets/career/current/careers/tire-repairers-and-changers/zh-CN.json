@@ -8,6 +8,9 @@
       "fact:china-service-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25577,7 +25580,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职业可复核任务评分、全国AI采用和净就业因果结果。已核案例限车牌与客户记录匹配，维修安全仍需专业确认；BLS2025—2035总体增长3.4%、十年净增约3800人与年均12900空缺含替补分指标，不代表AI影响。"
+              "证据不足：本职业可复核任务评分、全国AI采用和净就业因果结果。已核案例限车牌与客户记录匹配，维修安全仍需专业确认；BLS2025—2035总体增长3.4%、十年净增约3800人与年均12900空缺含替补分指标，不代表AI影响。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "tire-repairers-and-changers.display.ai_impact_table.answer",
@@ -33052,6 +33055,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "拆装｜车轮与轮胎更换｜按具体车辆、设备与培训执行轮胎服务，不以纸面练习代替操作准备。 — 0/100; weight=1/3; tire-repairers-and-changers.display.responsibilities_block.02[0]",
+                  "平衡｜检测与配重任务｜O*NET列有平衡机和配重任务；本页不规定设备设置或配重操作方法。 — 25/100; weight=1/3; tire-repairers-and-changers.display.responsibilities_block.03[0]",
+                  "修补｜轮胎状况与处理｜检查缺陷、处理修补等任务依专业流程进行，不从本页判断损伤可修性。 — 25/100; weight=1/3; tire-repairers-and-changers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38291,7 +38311,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38452,15 +38472,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "轮胎修理与更换工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "美国49-3093.00轮胎服务口径",
@@ -38511,7 +38543,7 @@
       "text": "轮胎修理与更换工"
     }
   },
-  "source_content_sha256": "deb891cf8c2ace5b4ab938d9e6f622b07cd9e827419c2bc32b2fe005285d757c",
+  "source_content_sha256": "328c7551b916e63262ab4a5c3b3f12ddbbc5cf434fc1a7d99d7442e655a62e0a",
   "subject": {
     "canonical_slug": "tire-repairers-and-changers",
     "name": "轮胎修理与更换工",

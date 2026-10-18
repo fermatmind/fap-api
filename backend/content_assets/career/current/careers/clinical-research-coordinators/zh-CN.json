@@ -89,6 +89,9 @@
       "fact:crc-nine-us-wage-p75-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25220,7 +25223,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET支持任务和软件词存在，不证明机构持续投资、CRC生成式AI采用率、工具效果或岗位结果；辅助用途是编辑试用候选，未经研究不当已实现能力。"
+              "O*NET支持任务和软件词存在，不证明机构持续投资、CRC生成式AI采用率、工具效果或岗位结果；辅助用途是编辑试用候选，未经研究不当已实现能力。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "clinical-research-coordinators.ai-impact.ai-impact-table.18",
@@ -33120,6 +33123,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/details/29-1141.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "受试者与方案执行｜按方案安排并执行受试者相关操作｜按方案为受试者安排门诊与操作或住院，实施访谈与生命体征测量与心电图等方案操作，并评估潜在受试者的入选资格（对应 O*NET 任务第一与第二与第三项）。 临床操作按真实资质、方案和授权核。 — 25/100; weight=1/3; clinical-research-coordinators.profile.responsibilities-block.1[0]",
+                  "知情同意与入组｜确保知情同意正确取得并记录｜监督受试者入组以确保知情同意被正确取得与记录，告知患者或照护者研究内容与预期结果，并跟踪入组与退出情况（对应 O*NET 任务第八与第五与第十三与第二十项）。 同意按批准方案及适用规则核。 — 25/100; weight=1/3; clinical-research-coordinators.profile.responsibilities-block.1[1]",
+                  "文件与记录｜准备并维护研究文件与记录｜准备方案工作表与操作手册与不良事件报告与机构审查委员会文件或进展报告，维护病例报告表与药物发放记录与监管表格等研究活动记录（对应 O*NET 任务第四与第九项）。 — 75/100; weight=1/3; clinical-research-coordinators.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38035,7 +38055,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38616,15 +38636,27 @@
         "source_refs": [
           "crc-nbs-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "临床研究协调员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · ICE",
@@ -38675,7 +38707,7 @@
       "text": "临床研究协调员"
     }
   },
-  "source_content_sha256": "7248fd1bd2d4ad51280063efb339835161ef341caa8dbb0b3654d2bb8799ca63",
+  "source_content_sha256": "d95d4bbfe3ec7034cc9114981eb788f20ecbec7c54fe429d39d7be8d021f58a2",
   "subject": {
     "canonical_slug": "clinical-research-coordinators",
     "name": "临床研究协调员",

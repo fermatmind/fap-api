@@ -41,6 +41,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24730,7 +24733,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本次未取得艺术总监的生成式AI采用率、职业工资因果研究或岗位替代概率。概念草稿、版式候选和文书整理是本页建议试验的环节；ILO研究提供跨职业任务暴露方法，本页未建立27-1011.00专属指数映射。BLS的4%预测不能证明AI造成岗位增减。"
+              "证据不足：本次未取得艺术总监的生成式AI采用率、职业工资因果研究或岗位替代概率。概念草稿、版式候选和文书整理是本页建议试验的环节；ILO研究提供跨职业任务暴露方法，本页未建立27-1011.00专属指数映射。BLS的4%预测不能证明AI造成岗位增减。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "art-directors.ai-impact.ai-impact-table.18",
@@ -33159,6 +33162,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1299.09"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "方向与概念｜把目标变成可执行的视觉方向｜读取 brief 并制定版式或呈现方式，指定字体与照片与图形与动画与视频与声音等材料细节，形成团队可一致执行的方向。 — 75/100; weight=1/3; art-directors.profile.responsibilities-block.1[0]",
+                  "产出组织与评审｜让多人产出保持一致｜分派任务、评审中间稿与印前校样，审查美术材料与复制材料是否符合标准与规格，解决跨媒介不一致。 — 50/100; weight=1/3; art-directors.profile.responsibilities-block.1[1]",
+                  "客户与决策者沟通｜让取舍被理解与批准｜与客户确定目标、预算与背景与呈现方式，向客户演示最终版式并取得批准，记录结论与变更范围。 — 25/100; weight=1/3; art-directors.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38058,7 +38078,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38402,15 +38422,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "艺术总监",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "官方职责：方向制定 · 产出组织与评审 · 客户与决策者沟通",
@@ -38461,7 +38493,7 @@
       "text": "艺术总监"
     }
   },
-  "source_content_sha256": "cf6379938f0c1642a7a329c5156fb5c54357dd9e692c21db54e24e76a41c68ef",
+  "source_content_sha256": "7c1162d34b4cf9c0d379bfe625525b688b3027b9149edd7bd7dbdb8bb2534b9b",
   "subject": {
     "canonical_slug": "art-directors",
     "name": "艺术总监",

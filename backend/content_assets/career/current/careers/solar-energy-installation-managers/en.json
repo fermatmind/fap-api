@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24412,7 +24415,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with material classification, plan drafts, budget recalculation and customer communication. Installation management still depends on site information, crew capability, design versions and inspection evidence; tools cannot authorize work to start, professional operations or grid connection. This page is a task-level editorial analysis with no adoption rate, substitution probability or quantitative score for this occupation."
+              "AI can assist with material classification, plan drafts, budget recalculation and customer communication. Installation management still depends on site information, crew capability, design versions and inspection evidence; tools cannot authorize work to start, professional operations or grid connection. This page is a task-level editorial analysis with no adoption rate, substitution probability or quantitative score for this occupation. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "solar-energy-installation-managers.ai-impact.ai-impact-table.18",
@@ -32715,6 +32718,23 @@
                 "publisher": "O*NET / U.S. Department of Labor",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/13-1151.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Prepare budgets and construction schedules — 75/100; weight=1/3; solar-energy-installation-managers.ai-impact.ai-impact-table.103[0]",
+                  "Coordinate installation crews and subcontractors — 25/100; weight=1/3; solar-energy-installation-managers.ai-impact.ai-impact-table.107[0]",
+                  "Arrange inspections and system tests — 25/100; weight=1/3; solar-energy-installation-managers.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37623,7 +37643,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37919,15 +37939,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Solar Energy Installation Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Photovoltaic and solar thermal installation crew management",
@@ -37978,7 +38010,7 @@
       "text": "Solar Energy Installation Managers"
     }
   },
-  "source_content_sha256": "8f458862e7b5205d1dded60e50014eaec17b0bb92610b458295cd12356ae678a",
+  "source_content_sha256": "aad2e2109c03e6e9764f18cef348232b967b9f3f1c4fd100ec8180593e6a4e15",
   "subject": {
     "canonical_slug": "solar-energy-installation-managers",
     "name": "Solar Energy Installation Managers",

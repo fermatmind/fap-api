@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24629,7 +24632,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round did not obtain causal measurements of generative AI adoption, productivity, substitution, or employment for this occupation; estimating, measurement comparison, color matching, and records are editorial candidates. The ILO introduction extended abstract and the NIST brief are background only, and the complete occupational mapping was not read, so it is not concluded from a gap that field tasks will never be replaced."
+              "This round did not obtain causal measurements of generative AI adoption, productivity, substitution, or employment for this occupation; estimating, measurement comparison, color matching, and records are editorial candidates. The ILO introduction extended abstract and the NIST brief are background only, and the complete occupational mapping was not read, so it is not concluded from a gap that field tasks will never be replaced. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "automotive-body-and-glass-repairers.ai-impact.ai-impact-table.18",
@@ -32936,6 +32939,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/51-9022.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Assessment and planning | Establish the extent of damage first | Review the damage report and work order, remove accessories to reach the body, identify damaged panels and materials, prepare or review the repair plan and labor and material costs, and mark the structural and safety parts that need review. — 50/100; weight=1/3; automotive-body-and-glass-repairers.profile.responsibilities-block.1[0]",
+                  "Sheet metal work and shaping | Make dimensions measurable | Remove dents with dollies and hammers and small dents and pits with a pick hammer and punch, fasten the frame and parts to a hydraulic frame machine and straighten to specified dimensions, and record the measurement results. — 0/100; weight=1/3; automotive-body-and-glass-repairers.profile.responsibilities-block.1[1]",
+                  "Welding and replacement | Verify the connection against process and real conditions | Officially this includes welding in replacements and grinding welds; the special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name. — 0/100; weight=1/3; automotive-body-and-glass-repairers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37836,7 +37856,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38164,15 +38184,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Automotive Body and Glass Repairers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 49-3021.00 · Job Zone 1–2 · Little preparation",
@@ -38223,7 +38255,7 @@
       "text": "Automotive Body and Glass Repairers"
     }
   },
-  "source_content_sha256": "53e30ed374c071625c00b1d0042b89d38255e9cd3cc2a6dcfacc5656096b2861",
+  "source_content_sha256": "0534ee5595882da1202df476180dd716c7bc3d07157af9e5b15180f165fc8390",
   "subject": {
     "canonical_slug": "automotive-body-and-glass-repairers",
     "name": "Automotive Body and Glass Repairers",

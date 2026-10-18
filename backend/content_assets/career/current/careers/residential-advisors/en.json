@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24388,7 +24391,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The available material does not support inferring that residential advisors will be wholly replaced by AI. The recording, notification, and activity scheduling listed by O*NET can become software-assisted scenarios; patrols, crisis identification, conflict handling, and referral responsibility still require on-site staff and organizational authorization. The ILO \nexposure research assesses task potential and does not provide an adoption rate or unemployment forecast for this occupation. Insufficient evidence: independent measured AI adoption rates, substitution rates, and causal wage and employment effects for this role (39-9041) in mainland China and the United States were not verified."
+              "The available material does not support inferring that residential advisors will be wholly replaced by AI. The recording, notification, and activity scheduling listed by O*NET can become software-assisted scenarios; patrols, crisis identification, conflict handling, and referral responsibility still require on-site staff and organizational authorization. The ILO \nexposure research assesses task potential and does not provide an adoption rate or unemployment forecast for this occupation. Insufficient evidence: independent measured AI adoption rates, substitution rates, and causal wage and employment effects for this role (39-9041) in mainland China and the United States were not verified. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "residential-advisors.ai-impact.ai-impact-table.18",
@@ -32174,6 +32177,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "US occupational wage survey",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Resident support｜Receive living and interpersonal issues raised by students or residents, and confirm the facts, urgency, and help the organization can provide.｜Record the issue and the follow-up owner, and refer to counseling or medical professionals when it is beyond the position's ability. — 25/100; weight=1/3; residential-advisors.profile.responsibilities-block.1[0]",
+                  "Conflict handling｜Listen to the parties and distinguish known facts from disputes, contacting other staff when necessary.｜Record the outcome of communication, unresolved items, and the escalation path. — 25/100; weight=1/3; residential-advisors.profile.responsibilities-block.1[2]",
+                  "Facilities and supplies｜Patrol common areas, report maintenance and supply needs, and help arrange rooms or supplies as authorized.｜Deliver work orders, supply records, and owner handover; do not write engineering acceptance or procurement contracts as general duties. — 25/100; weight=1/3; residential-advisors.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37082,7 +37102,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37350,15 +37370,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Residential Advisors",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET interests: SCE",
@@ -37409,7 +37441,7 @@
       "text": "Residential Advisors"
     }
   },
-  "source_content_sha256": "2aac6be787cc356e682a909cdf17ba5ff68a48c0872ec62ccc46411ad0ad0614",
+  "source_content_sha256": "01bfbb5e81e072144f1d75055c8c10788dbba99cd587d3dcabb0e46aab62ed56",
   "subject": {
     "canonical_slug": "residential-advisors",
     "name": "Residential Advisors",

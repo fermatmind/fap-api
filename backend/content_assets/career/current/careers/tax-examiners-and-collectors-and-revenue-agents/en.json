@@ -8,6 +8,9 @@
       "fact:cn-public-admin-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25678,7 +25681,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page does not calculate an AI exposure score; without reviewable task weights, methods, and inputs, no score is filled in. Discussion of text assistance is kept separate from judgment about the full occupational employment impact, and no substitution rate is computed from a speed impression."
+              "This page calculates a separate editorial AI impact estimate; without reviewable task weights, methods, and inputs, a separate editorial estimate is shown. Discussion of text assistance is kept separate from judgment about the full occupational employment impact, and no substitution rate is computed from a speed impression."
             ]
           },
           "id": "tax-examiners-and-collectors-and-revenue-agents.ai-impact.ai-impact-table.7",
@@ -25746,7 +25749,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Distinguish text and spreadsheet technical assistance, actual agency adoption, case quality, and occupational employment. NIST supports general information risk, O*NET explains occupational tasks, and BLS provides precise statistics; none of the three constitutes a quantifiable substitution rate or enforcement authorization evidence for this occupation."
+              "Distinguish text and spreadsheet technical assistance, actual agency adoption, case quality, and occupational employment. NIST supports general information risk, O*NET explains occupational tasks, and BLS provides precise statistics; none of the three constitutes a quantifiable substitution rate or enforcement authorization evidence for this occupation. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "tax-examiners-and-collectors-and-revenue-agents.display.ai_impact_table.answer",
@@ -34303,6 +34306,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Review | Return supporting evidence | Check the return and ledger basis, record differences and missing items, and do not directly find a violation from unknowns. — 75/100; weight=1/3; tax-examiners-and-collectors-and-revenue-agents.display.responsibilities_block.02[0]",
+                  "Communication | Request clarification and notify | Explain the issues per duty, contact the taxpayer or representative and record feedback, keeping facts separate from opinions. — 25/100; weight=1/3; tax-examiners-and-collectors-and-revenue-agents.display.responsibilities_block.03[0]",
+                  "Handling | Lawful review or collection | Carry out tasks per actual duties, evidence, and procedure, and do not let AI or an arithmetic difference decide handling automatically. — 50/100; weight=1/3; tax-examiners-and-collectors-and-revenue-agents.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39544,7 +39564,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -39704,15 +39724,27 @@
         "source_refs": [
           "nbs-public-admin-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Tax examiners, collectors, and revenue agents",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 13-2081.00 precise occupational definition",
@@ -39763,7 +39795,7 @@
       "text": "Tax examiners, collectors, and revenue agents"
     }
   },
-  "source_content_sha256": "9765fd1c4efff52b25cd6569c7405ac72380cfc04e00ca0b9a2fed741d51ac13",
+  "source_content_sha256": "6a6cc8cc5ceca79cc21f6824a3f65ad01108fa1e73bdf326189d8d7176d9815f",
   "subject": {
     "canonical_slug": "tax-examiners-and-collectors-and-revenue-agents",
     "name": "Tax examiners, collectors, and revenue agents",

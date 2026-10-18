@@ -17,6 +17,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "mapped"
       },
@@ -13756,6 +13759,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Load the paper roll and thread it through the rollers. — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Set the blades, guides, and tension. — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Measure dimensions and bonding. — 25/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13943,7 +13963,7 @@
             }
           }
         ],
-        "answer": "Scheduling, machine alarms, and image defect prompts can assist; setup, safe shutdown, physical review, and quality release still follow personnel authorization.",
+        "answer": "Scheduling, machine alarms, and image defect prompts can assist; setup, safe shutdown, physical review, and quality release still follow personnel authorization. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET task context for this occupation / editorial verification suggestion.",
@@ -15688,7 +15708,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact.",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference.",
       "direction-comparison": "Occupational direction comparison.",
       "fit": "Career fit guide.",
@@ -15848,15 +15868,27 @@
         "source_refs": [
           "bls-ep-2025-2035"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Paper goods machine setter and operator.",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure."
+      "label": "AI Impact Score"
     },
     "badges": [
       "Paper and paperboard · cutting, folding, forming.",
@@ -15907,7 +15939,7 @@
       "text": "Paper Goods Machine Setters, Operators, and Tenders: work content, wages, and entry paths."
     }
   },
-  "source_content_sha256": "55b5a515a63134ea627caa5bde22623b6e12f5d08a9a7402149f57ea9dbd3ba6",
+  "source_content_sha256": "ec09bebcf46c786271fcd52a99dbfd70bc7f854e5f18d2c3be53be97a798581b",
   "subject": {
     "canonical_slug": "paper-goods-machine-setters-operators-and-tenders",
     "name": "Paper goods machine setter and operator.",

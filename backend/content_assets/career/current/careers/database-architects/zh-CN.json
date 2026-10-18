@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24349,7 +24352,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑工具候选：模型/SQL解释、映射与文档初查，输出需按真实系统核；未测实际提效、采用或收入就业因果，不能写为已经加速或平台已取代人工。美国65%每日可控室内、81%持续坐姿；95%每日邮件、48%每日电话、43%每日面对面/48%每周及以上但非每日，48%大部分时间接触；52%时间压力每周及以上但非每日，57%40小时/43%超40。62%Somefreedom、52%任务优先Somefreedom不代数据/发布权限；非中国工时或远程率。"
+              "编辑工具候选：模型/SQL解释、映射与文档初查，输出需按真实系统核；未测实际提效、采用或收入就业因果，不能写为已经加速或平台已取代人工。美国65%每日可控室内、81%持续坐姿；95%每日邮件、48%每日电话、43%每日面对面/48%每周及以上但非每日，48%大部分时间接触；52%时间压力每周及以上但非每日，57%40小时/43%超40。62%Somefreedom、52%任务优先Somefreedom不代数据/发布权限；非中国工时或远程率。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31843,6 +31846,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://csrc.nist.gov/glossary/term/csf_function"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "架构策略与需求｜澄清需求并制定策略｜与系统架构师、软件架构师与设计分析师协作理解业务或行业需求，在建模、设计与实施阶段制定数据库架构策略，并编写并归档数据库架构。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "建模与设计｜设计库结构与数据模型｜设计支持业务应用的数据库以确保可扩展性、安全性、性能与可靠性，为应用、元数据表、视图或相关结构开发数据模型，并使用公认记号归档并沟通数据库模式。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "可靠性与性能｜设置备份恢复并优化｜设置数据库集群、备份或恢复流程，演示数据库的技术功能（如性能、安全与可靠性），开发负载均衡流程以消除备份造成的停机，规划并安装数据库管理系统软件升级，识别、评估并推荐能达到所需性能的软硬件技术。 — 50/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37271,7 +37291,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37542,15 +37562,27 @@
         "source_refs": [
           "r5-nbs-it"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "数据库架构师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "数据架构与标准 · 模型与集成 · 可扩展性与可靠性",
@@ -37601,7 +37633,7 @@
       "text": "数据库架构师"
     }
   },
-  "source_content_sha256": "198665901ea2e566d056a29290e33f04611cd2b1cfdbf46578e0ac25f68c2ea0",
+  "source_content_sha256": "53f5da5bb7ce9f3ffa25b2ffa75c74f582643705335ceba14ac19ad6f62fea16",
   "subject": {
     "canonical_slug": "database-architects",
     "name": "数据库架构师",

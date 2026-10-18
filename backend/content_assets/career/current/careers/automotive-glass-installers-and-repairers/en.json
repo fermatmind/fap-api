@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24624,7 +24627,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round did not obtain measurements of generative AI adoption rates, efficiency gains, overall substitution, or employment causality for this occupation. Lookup, scheduling, records, and estimating are editorial trial candidates; the occupation software table and task definitions do not prove that generative AI has been deployed, nor that it will never substitute."
+              "This round did not obtain measurements of generative AI adoption rates, efficiency gains, overall substitution, or employment causality for this occupation. Lookup, scheduling, records, and estimating are editorial trial candidates; the occupation software table and task definitions do not prove that generative AI has been deployed, nor that it will never substitute. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.18",
@@ -32791,6 +32794,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/53-7061.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Disassembly and installation work | Keep the operation controllable | Use tools to remove the broken glass and trim and clips and wipers, protect the surrounding paint and interior, and obtain and inspect the replacement glass by vehicle model. — 0/100; weight=1/3; automotive-glass-installers-and-repairers.profile.responsibilities-block.1[1]",
+                  "Bonding surface preparation and sealing | Make the bond reliable | Remove dirt and foreign material and loose glass, handle moisture and contamination and keep the surface dry, apply primer, and apply adhesive per procedure and work it to an even thickness. — 0/100; weight=1/3; automotive-glass-installers-and-repairers.profile.responsibilities-block.1[2]",
+                  "Inspection and records | Make the process traceable | Inspect the seal and appearance and fitting function, and record the vehicle model and glass model, the handling process, quantities used, curing conditions, and inspection results. — 50/100; weight=1/3; automotive-glass-installers-and-repairers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37695,7 +37715,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38023,15 +38043,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Automotive Glass Installers and Repairers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 49-3022.00 · Job Zone 1–2 · Little preparation",
@@ -38082,7 +38114,7 @@
       "text": "Automotive Glass Installers and Repairers"
     }
   },
-  "source_content_sha256": "000b56a6d09a78dabeaf3e44cc486db0a23cc04c7336b36598cfce83ac0c02c3",
+  "source_content_sha256": "589641c749d63f3bba19da5acdd8845aa0b39b9d44e8dc5f05499f5d0347aec9",
   "subject": {
     "canonical_slug": "automotive-glass-installers-and-repairers",
     "name": "Automotive Glass Installers and Repairers",

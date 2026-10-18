@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24770,7 +24773,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助常见问题检索、表单草稿、标签检查提示和异常分类，但没有证据给出邮政服务文员精确采用率或裁员率。资费依据、邮件实物、付款凭证、隐私与最终办理责任仍由获授权人员承担。"
+              "AI可辅助常见问题检索、表单草稿、标签检查提示和异常分类，但没有证据给出邮政服务文员精确采用率或裁员率。资费依据、邮件实物、付款凭证、隐私与最终办理责任仍由获授权人员承担。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "postal-service-clerks.ai-impact.ai-impact-table.18",
@@ -32575,6 +32578,23 @@
                 "publisher": "中国邮政集团有限公司",
                 "scope": "contextual",
                 "url": "https://www.chinapost.com.cn/cn/report/2607/3448-1.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "称重计费｜按邮件重量、尺寸、目的地和服务选项核算｜使用机构现行资费与系统复核金额；本页虚构练习点数不是真实邮资。 — 75/100; weight=1/3; postal-service-clerks.profile.responsibilities-block.1[1]",
+                  "邮件核验｜检查封装、标签、邮资和可寄条件｜发现外观、地址或规则疑问时暂停相关步骤，交有权限人员确认。 — 25/100; weight=1/3; postal-service-clerks.profile.responsibilities-block.1[2]",
+                  "柜台交易｜销售邮票等邮政产品并办理收付款｜给出收据或凭证，核对支付与系统记录，不私自调整标准或承诺额外服务。 — 50/100; weight=1/3; postal-service-clerks.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37494,7 +37514,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37798,15 +37818,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "邮政服务文员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "邮政服务文员 · 邮局柜台收寄与服务",
@@ -37857,7 +37889,7 @@
       "text": "邮政服务文员"
     }
   },
-  "source_content_sha256": "20140810b4a0e2844e5cf4f7858c71fafa546c97bc8a6cfc0557143e39fa219c",
+  "source_content_sha256": "c55dd7b9bb54985d19f6b708dfa76f3ccbfa6a193b75dfe6d2b03f876200332d",
   "subject": {
     "canonical_slug": "postal-service-clerks",
     "name": "邮政服务文员",

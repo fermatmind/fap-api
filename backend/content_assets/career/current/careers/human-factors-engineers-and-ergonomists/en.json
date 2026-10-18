@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25469,7 +25472,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task analysis | Trial coding, statistics, and draft reports on licensed research materials, verifying data and method applicability; this round has no general adoption, efficiency, or job causality, and the order of impact is not ranked. This round did not verify that all human factors engineering positions in China uniformly require a registered engineer or safety certificate for entry, and this is checked separately against the actual field and regulated business. Human factors research and risk recommendations do not automatically confer statutory testing and evaluation authority or design sign-off authority; under Article 26 of the Law on the Prevention and Control of Occupational Diseases, occupational hazard testing and evaluation is carried out by occupational health technical service institutions that hold qualification accreditation, and institutional qualification differs from an individual's education. Ordinary research design and recommendations may be completed under your own real duties."
+              "Editorial task analysis | Trial coding, statistics, and draft reports on licensed research materials, verifying data and method applicability; this round has no general adoption, efficiency, or job causality, and the order of impact is not ranked. This round did not verify that all human factors engineering positions in China uniformly require a registered engineer or safety certificate for entry, and this is checked separately against the actual field and regulated business. Human factors research and risk recommendations do not automatically confer statutory testing and evaluation authority or design sign-off authority; under Article 26 of the Law on the Prevention and Control of Occupational Diseases, occupational hazard testing and evaluation is carried out by occupational health technical service institutions that hold qualification accreditation, and institutional qualification differs from an individual's education. Ordinary research design and recommendations may be completed under your own real duties. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "human-factors-engineers-and-ergonomists.ai-impact.ai-impact-table.18",
@@ -32954,6 +32957,23 @@
                 "publisher": "BLS",
                 "scope": "Document-specific usage limitations",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Data collection — 25/100; weight=1/3; human-factors-engineers-and-ergonomists.ai-impact.ai-impact-table.95[0]",
+                  "User research — 25/100; weight=1/3; human-factors-engineers-and-ergonomists.ai-impact.ai-impact-table.99[0]",
+                  "Analysis and measurement — 75/100; weight=1/3; human-factors-engineers-and-ergonomists.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37918,7 +37938,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38042,15 +38062,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Human Factors Engineers and Ergonomists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not rated on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Human Factors Engineers and Ergonomists · tasks, deliverables, and responsibility boundaries",
@@ -38101,7 +38133,7 @@
       "text": "Human Factors Engineers and Ergonomists"
     }
   },
-  "source_content_sha256": "155710da43afcde9aa2dd62f58815520386b2111600b9868929bcc18dbddf991",
+  "source_content_sha256": "8cac7ce953f7c2698e29ad2fbb054a025af4607efee75df4f4783335978aac7e",
   "subject": {
     "canonical_slug": "human-factors-engineers-and-ergonomists",
     "name": "Human Factors Engineers and Ergonomists",

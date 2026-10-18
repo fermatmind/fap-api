@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25125,7 +25128,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task judgment | Trials of task sheets, material lists, and record drafts may be conducted in an approved environment, manually checking the original information and on-site criteria. No evidence has been obtained on this occupation's generative AI adoption rate, measured efficiency gains, exposure level, or employment causality, and it is not guaranteed that the occupation as a whole will not be substituted. O*NET currently lists 11 software skill categories, including data recording, facility energy management, and building automation; there is no evidence of widespread CMMS adoption. The 7 hot items are U.S. 2025 recruitment mentions: Office and Excel each 2%, Outlook1%, and Word, PowerPoint, SAP, and Windows each below 1%; usage rates, AI adoption, or efficiency gains are not inferred. The precise BLS 49-9098 projection for 2025—2035 is about 97,100 → 102,200 people, growth 5.3%, average annual openings 13,600 including replacements, and self-employment in the base period 1.3%; this is not real-time hiring, net growth, or AI causality. O*NET currently marks Bright Outlook, and the category growth of 5% to 6% is not a precise growth rate."
+              "Editorial task judgment | Trials of task sheets, material lists, and record drafts may be conducted in an approved environment, manually checking the original information and on-site criteria. No evidence has been obtained on this occupation's generative AI adoption rate, measured efficiency gains, exposure level, or employment causality, and it is not guaranteed that the occupation as a whole will not be substituted. O*NET currently lists 11 software skill categories, including data recording, facility energy management, and building automation; there is no evidence of widespread CMMS adoption. The 7 hot items are U.S. 2025 recruitment mentions: Office and Excel each 2%, Outlook1%, and Word, PowerPoint, SAP, and Windows each below 1%; usage rates, AI adoption, or efficiency gains are not inferred. The precise BLS 49-9098 projection for 2025—2035 is about 97,100 → 102,200 people, growth 5.3%, average annual openings 13,600 including replacements, and self-employment in the base period 1.3%; this is not real-time hiring, net growth, or AI causality. O*NET currently marks Bright Outlook, and the category growth of 5% to 6% is not a precise growth rate. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.18",
@@ -32856,6 +32859,23 @@
                 "publisher": "National Bureau of Statistics of China",
                 "scope": "Residential services, repair, and other services; urban unit employees in China, broad industry-category scope",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Installation and replacement — 0/100; weight=1/3; helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.99[0]",
+                  "Inspection and testing — 25/100; weight=1/3; helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.103[0]",
+                  "Connection and adjustment — 0/100; weight=1/3; helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37786,7 +37806,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37934,15 +37954,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Helpers--Installation, Maintenance, and Repair Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Installation, Maintenance, and Repair Workers Helpers · task, delivery, and responsibility boundaries",
@@ -37993,7 +38025,7 @@
       "text": "Helpers--Installation, Maintenance, and Repair Workers"
     }
   },
-  "source_content_sha256": "9d330e4394d585bce31304d6535e56d4785ab2bbbcb91e3d673928723ab50294",
+  "source_content_sha256": "dd365fff0ab0f04b2dee6ab19178d0e758b8c3a044ec6f013d911980eea01d9b",
   "subject": {
     "canonical_slug": "helpers-installation-maintenance-and-repair-workers",
     "name": "Helpers--Installation, Maintenance, and Repair Workers",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24748,7 +24751,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS clearly describes that demand in the medical industry may increase, while automated invoice processing raises productivity and limits the overall growth of this occupation. ILO2025 studies task exposure and considers occupational transformation more likely, but does not give the actual adoption rate or disappearance date for this occupation. The identification, drafting, retrieval and difference triage below are auxiliary uses proposed by the editors according to the tasks and require employer verification of data quality, authority and review; they cannot be regarded as a measured substitution rate or the current process of every institution."
+              "BLS clearly describes that demand in the medical industry may increase, while automated invoice processing raises productivity and limits the overall growth of this occupation. ILO2025 studies task exposure and considers occupational transformation more likely, but does not give the actual adoption rate or disappearance date for this occupation. The identification, drafting, retrieval and difference triage below are auxiliary uses proposed by the editors according to the tasks and require employer verification of data quality, authority and review; they cannot be regarded as a measured substitution rate or the current process of every institution. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.18",
@@ -32733,6 +32736,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "wage_scope",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Obtain and review vouchers | Give every number a basis | Collect source documents by business, check the completeness of the elements and approvals and authorization, and handle vouchers that are untrue or illegal or inaccurately or incompletely recorded according to procedure rather than changing the numbers yourself. — 75/100; weight=1/3; billing-and-posting-clerks.profile.responsibilities-block.1[0]",
+                  "Account for and prepare bills | Make the billing standard clear | Compute amounts according to the contract or rate or procedure, prepare itemized statements and bills or invoices and record the amounts due, and keep the calculation process together with its basis. — 75/100; weight=1/3; billing-and-posting-clerks.profile.responsibilities-block.1[1]",
+                  "Reconcile and handle differences | Make the accounts agree with reality | Periodically check the book records against physical assets and funds and related materials to ensure that the accounts agree with reality and with vouchers and with each other and with statements, and when a difference is found suspend it first, then establish the cause and record the disposition. — 75/100; weight=1/3; billing-and-posting-clerks.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37648,7 +37668,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38048,15 +38068,27 @@
         "source_refs": [
           "bls-ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Billing and posting clerk",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 43-3021.00 · Job Zone 1 to 2 · low entry preparation",
@@ -38107,7 +38139,7 @@
       "text": "Billing and posting clerk"
     }
   },
-  "source_content_sha256": "96e3b704fda48bdc15d57e14a1270136ed31536c0ac3437323d0324db9be3ea1",
+  "source_content_sha256": "1aeb1b254b5a7f63f06c40cf98de07575a693dc6710e3c2c1ca844a06fd25ca3",
   "subject": {
     "canonical_slug": "billing-and-posting-clerks",
     "name": "Billing and posting clerk",

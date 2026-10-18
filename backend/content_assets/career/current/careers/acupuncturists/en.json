@@ -35,6 +35,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -17888,7 +17891,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page has no reviewable acupuncture task rating scale, task-level measurement, or adoption/outcome data, so it provides no AI task score. AI may serve only as an editorial candidate in permitted, traceable information-organizing scenarios with human review; it cannot replace face-to-face assessment, aseptic technique, risk identification, practice boundaries or final responsibility."
+              "The external materials used here supply no measured acupuncture task rating scale, task-level measurement, or adoption/outcome data, so it shows a separate editorial estimate. AI may serve only as an editorial candidate in permitted, traceable information-organizing scenarios with human review; it cannot replace face-to-face assessment, aseptic technique, risk identification, practice boundaries or final responsibility. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "acupuncturists.ai-impact.ai-impact-table.18",
@@ -25485,6 +25488,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "A United States target-occupation task comparison; cannot serve as a basis for Chinese entry or mutual recognition of qualifications.",
                 "url": "https://www.onetonline.org/link/details/29-1299.01"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Assess｜Interviewing and risk identification｜Collect the chief complaint, prior information and current reactions, and identify situations that call for a pause, for more information, or for referral. — 25/100; weight=1/3; acupuncturists.profile.responsibilities-block.1[0]",
+                  "Treat｜Needling services within the authorized scope｜Carry out interventions only within the jurisdictional, qualification and institutional scope, and observe immediate reactions. — 0/100; weight=1/3; acupuncturists.profile.responsibilities-block.1[3]",
+                  "Document｜Follow-up and anomaly traceability｜Record the basis for the assessment, what was done, the reactions, the next arrangements and the items that need to be handed off. — 75/100; weight=1/3; acupuncturists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -30118,7 +30138,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -30506,15 +30526,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Acupuncturists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Patient assessment · safe procedures · documentation and referral",
@@ -30565,7 +30597,7 @@
       "text": "Acupuncturists"
     }
   },
-  "source_content_sha256": "b4fdacc46bdd5b8c85798ed1fadbcff588175e2394662494a160ba679f0d385e",
+  "source_content_sha256": "696785354ff47d0873c7860e83689c8d2df8477f9c9e6769489ebfd542ecd5b1",
   "subject": {
     "canonical_slug": "acupuncturists",
     "name": "Acupuncturists",

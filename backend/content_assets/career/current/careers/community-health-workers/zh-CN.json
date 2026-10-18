@@ -56,6 +56,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25081,7 +25084,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术候选、真实采用、工资和就业结果分别看。本轮未取得该职业AI可靠性、采用率、持续信息系统投入或收入影响实证，招聘软件关键词和BLS预测不能补这些缺口。"
+              "技术候选、真实采用、工资和就业结果分别看。本轮未取得该职业AI可靠性、采用率、持续信息系统投入或收入影响实证，招聘软件关键词和BLS预测不能补这些缺口。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.18",
@@ -32729,6 +32732,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/21-1022.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "健康教育与行为支持｜就自我照护与总体健康与风险预防与卫生与筛查向客户与社区团体提供建议｜就自我照护（如糖尿病管理）、总体健康（如饮食或运动）、风险或预防（如铅中毒、人类免疫缺陷病毒、孕期物质滥用或家庭暴力）、卫生或清洁（如使用牙线或洗手）、诊断性筛查（如乳腺癌筛查、宫颈涂片、青光眼检查或糖尿病筛查）与社会或智力发展向客户或社区团体提供建议；并向个人或家庭教授适当的育儿行为（对应 O*NET 任务第五与第七与第十一与补充任务第十七与第十八与第十九与第二十一项）。 — 50/100; weight=1/3; community-health-workers.profile.responsibilities-block.1[0]",
+                  "转介与资源衔接｜把社区成员转介到所需服务并协助申请社会服务｜把社区成员转介到所需的健康服务；识别或联系高风险或特定目标群体（如少数族裔、低收入群体或孕妇）；协助家庭申请社会服务（包括医疗补助或妇女、婴儿与儿童营养项目）；为社区成员提供与健康服务或信息相关的口译、翻译或文化调解；并陪同或运送客户前往预约的健康服务或转介地点（对应 O*NET 任务第六与补充任务第十六与第二十二与第二十八与第二十九项）。 — 50/100; weight=1/3; community-health-workers.profile.responsibilities-block.1[2]",
+                  "记录与随访与确认行动｜维护客户档案并通过多种方式联系客户确认行动完成｜维护包含计划、记录与相关表单的客户档案；通过当面、电话或书面方式联系客户，确认其已完成所需或建议的行动（对应 O*NET 任务第三与第四项）。 — 75/100; weight=1/3; community-health-workers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37653,7 +37673,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38095,15 +38115,27 @@
         "source_refs": [
           "chw-review-ooh"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "社区健康工作者",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · S",
@@ -38154,7 +38186,7 @@
       "text": "社区健康工作者"
     }
   },
-  "source_content_sha256": "77cc0fed96ec48c2fb3813d2a9dd06f9f66569254e1a586aac1488153186916b",
+  "source_content_sha256": "0d7ff0046265aa7b07919af1b331153f7ac425b23c45660f4f4a6d17a0d75483",
   "subject": {
     "canonical_slug": "community-health-workers",
     "name": "社区健康工作者",

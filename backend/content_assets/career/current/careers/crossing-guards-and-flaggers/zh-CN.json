@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24306,7 +24309,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "排班、记录草稿和交通信息汇总可作为编辑试用方向，实际本岗AI效率、采用、工资或编制因果未取。81%回答工作不自动化是既有工作情境指标，不是生成式AI未来替代率。现场职责、交通设施设置和应急处置仍须核适用法律与方案。"
+              "排班、记录草稿和交通信息汇总可作为编辑试用方向，实际本岗AI效率、采用、工资或编制因果未取。81%回答工作不自动化是既有工作情境指标，不是生成式AI未来替代率。现场职责、交通设施设置和应急处置仍须核适用法律与方案。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31747,6 +31750,23 @@
                 "publisher": "中国政府官方网站",
                 "scope": "proxy",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "Core护送与引导：护送行人、观察车流间隙，在道路、铁路道口及施工场景引导；O*NET美国任务不授予所有中国护学岗位独立拦停权。 — 0/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Core警示：用标志旗帜灯及手势引导或示警；布设标牌、拦停超速提醒及施工绕行为Supplemental，实际许可、批准方案和法域须另核，不等开单执法。 — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Core记录无视信号车辆号牌并报相应部门、向学校报告儿童危险行为；属事实记录与报告，违法认定、处罚及数据处理条件分别核。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36953,7 +36973,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37197,15 +37217,27 @@
         "source_refs": [
           "g04-nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "交通路口警卫旗手",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "行政与支持服务 · 政府 · 交通引导与安全",
@@ -37256,7 +37288,7 @@
       "text": "交通路口警卫旗手"
     }
   },
-  "source_content_sha256": "016a03001f009ff6f63e7a5d5788e909811bec1668cdba795aa7129c51395fd4",
+  "source_content_sha256": "b78f0023fccb826b4ab850dbf0d50356deef5563491f73680779dd5090ee3e29",
   "subject": {
     "canonical_slug": "crossing-guards-and-flaggers",
     "name": "交通路口警卫旗手",

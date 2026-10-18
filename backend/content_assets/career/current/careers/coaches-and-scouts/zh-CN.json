@@ -89,6 +89,9 @@
       "fact:coach-nine-us-wage-p75-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25291,7 +25294,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "公开任务与软件词支持其存在，不证明机构持续投入、模拟训练能力、生成式AI采用、效果或工资结果；拟用工具需独立验证。"
+              "公开任务与软件词支持其存在，不证明机构持续投入、模拟训练能力、生成式AI采用、效果或工资结果；拟用工具需独立验证。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "coaches-and-scouts.ai-impact.ai-impact-table.18",
@@ -33488,6 +33491,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/details/39-9032.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "训练与现场指导｜组织训练并指导技术与策略｜计划、组织并主持训练课，为运动员备战比赛提供训练方向与鼓励与营养建议，根据强项与弱项调整训练方法，并指导运动规则与比赛策略与动作要领（对应 O*NET 任务第一与第二与第三与第四与第五项）。 — 25/100; weight=1/3; coaches-and-scouts.profile.responsibilities-block.1[0]",
+                  "策略与对手分析｜为比赛制定策略并选择队员｜为单场比赛或赛季制定策略并选择队员，分析对手球队的强项与弱项以制定比赛策略，并跟踪与复核运动员与球队与对手球队的记录（对应 O*NET 任务第五与第八与第二十五项）。 — 75/100; weight=1/3; coaches-and-scouts.profile.responsibilities-block.1[1]",
+                  "评估与球探招募｜评估运动员并撰写球探报告｜评估运动员技能并查阅表现记录以判断体能与潜力，通过招募信与面谈与激励识别与招募潜在运动员，并填写详述评估与建议与招募目标的球探报告（对应 O*NET 任务第十与第十九与第二十六项）。 — 50/100; weight=1/3; coaches-and-scouts.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38407,7 +38427,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38989,15 +39009,27 @@
         "source_refs": [
           "coach-nbs-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "教练与球探",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · SER",
@@ -39048,7 +39080,7 @@
       "text": "教练与球探"
     }
   },
-  "source_content_sha256": "16f8832b46f4f450f72187b379ed2dc4e0cc2bb79a3ce55a19cab8da67e3095f",
+  "source_content_sha256": "19b35ce4222eb32033a87d70fb832f52a172ab3940f24c2d12df96e2b1cb1c1b",
   "subject": {
     "canonical_slug": "coaches-and-scouts",
     "name": "教练与球探",

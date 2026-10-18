@@ -38,6 +38,9 @@
       "fact:entry-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -24846,7 +24849,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, substitution rate, wage causality or tool effects for animal scientists were obtained this round. Literature work, cleaning, code and documents are possible editorial uses only and must be checked against the raw data and calculations; it cannot be guaranteed that the occupation will or will not be replaced. Neither employment projections nor software lists prove AI causality. BLS EP19-1011: 3,400 in 2025 and 3,600 in 2035, growth of 5.8% over 2025—2035, an official net increase of 200 and an annual average of 200 openings, with the self-employed accounting for 4.6%; the figures are rounded. Openings include growth and replacement and are not the same as net growth or a guarantee of individual employment."
+              "Insufficient evidence: no AI adoption rate, substitution rate, wage causality or tool effects for animal scientists were obtained this round. Literature work, cleaning, code and documents are possible editorial uses only and must be checked against the raw data and calculations; it cannot be guaranteed that the occupation will or will not be replaced. Neither employment projections nor software lists prove AI causality. BLS EP19-1011: 3,400 in 2025 and 3,600 in 2035, growth of 5.8% over 2025—2035, an official net increase of 200 and an annual average of 200 openings, with the self-employed accounting for 4.6%; the figures are rounded. Openings include growth and replacement and are not the same as net growth or a guarantee of individual employment. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "animal-scientists.ai-impact.ai-impact-table.18",
@@ -32900,6 +32903,23 @@
                 "publisher": "Ministry of Agriculture and Rural Affairs",
                 "scope": "contextual",
                 "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408940.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Nutrition and feed research｜Needs and value｜Studying animals' nutrient requirements and the nutritional value of feed ingredients and taking part in designing and evaluating feed formulations. — 75/100; weight=1/3; animal-scientists.profile.responsibilities-block.1[0]",
+                  "Reproduction and growth research｜Reproductive efficiency and development｜Carrying out research on animal reproduction, growth and development, crossing animals with existing lines or crossing lines to obtain new combinations of target traits. — 25/100; weight=1/3; animal-scientists.profile.responsibilities-block.1[2]",
+                  "Technology development and advice｜Improved methods and recommendations｜Developing improved methods for feeding, housing, hygiene or parasite and disease control and advising producers on improved products and techniques. — 50/100; weight=1/3; animal-scientists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37802,7 +37822,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of occupation directions",
       "fit": "Occupational fit guide",
@@ -38201,15 +38221,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Animal Scientists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Livestock research: trial design and data analysis · genetic evaluation and breeding programmes · publication of conclusions and technology transfer",
@@ -38260,7 +38292,7 @@
       "text": "Animal Scientists: tasks, wages and employment prospects (O*NET 19-1011.00)"
     }
   },
-  "source_content_sha256": "7bebaa70654898d9915c8f654970592e077b00e0d5dad685e92d19c33216dbd2",
+  "source_content_sha256": "7e6333b353b20882494b2383926619a0adc31295b398b0ca1bfdaa1a16125164",
   "subject": {
     "canonical_slug": "animal-scientists",
     "name": "Animal Scientists",

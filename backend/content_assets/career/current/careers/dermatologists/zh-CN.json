@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24362,7 +24365,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本细类AI采用、临床效果、替代或长期技能变化的可复核研究；本页不展示对应分数、比例或日期。职业任务、2025招聘软件词与就业预测各有范围，不能证明“长期使用”或肤色病史不能参数化。以下辅助场景为条件性编辑推演，效果需实际验证。"
+              "证据不足：未取得本细类AI采用、临床效果、替代或长期技能变化的可复核研究；这些资料未能支持实测采用率、替代比例或日期；AI影响度另为任务样本编辑估算。职业任务、2025招聘软件词与就业预测各有范围，不能证明“长期使用”或肤色病史不能参数化。以下辅助场景为条件性编辑推演，效果需实际验证。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24630,7 +24633,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页未核ISCO与SOC皮科代码可靠对应和可复核评分，Hero保持缺失态；这不代表所有研究都没有职业评分，也不借相邻职业代填。实际采用、临床效果和岗位结果还需各自证据。"
+              "本页未核ISCO与SOC皮科代码可靠对应和可复核评分，Hero另列编辑估算；这不代表所有研究都没有职业评分，也不借相邻职业代填。实际采用、临床效果和岗位结果还需各自证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -32358,6 +32361,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/31-9092.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "核对主诉、病程、既往史与用药及过敏史、日晒与职业暴露史、家族史，完成皮肤、毛发与指甲的完整检查并记录皮损形态与分布。 — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "形成诊断与鉴别考虑，按规范判断活检与病理送检指征，向患者说明治疗计划、疗程、风险与替代方案并取得知情同意。 — 50/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "按适应证开具外用与系统用药并安排疗效与不良反应监测，实施活检、切除、冷冻、激光或光疗等操作并逐次记录。 — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37697,7 +37717,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37920,15 +37940,27 @@
         "source_refs": [
           "r5-nbs-health"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "皮肤科医师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "接诊与形态辨识 · 药物治疗与操作 · 随访与宣教",
@@ -37979,7 +38011,7 @@
       "text": "皮肤科医师"
     }
   },
-  "source_content_sha256": "02d3695ce75c68960a496e74e702dcebee04bbf691807131927724af0962b656",
+  "source_content_sha256": "a5be12878b5b0baf4c19cffc38296563cd0a97179655490b648097b7c08dcc1a",
   "subject": {
     "canonical_slug": "dermatologists",
     "name": "皮肤科医师",

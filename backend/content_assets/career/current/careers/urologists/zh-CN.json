@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25607,7 +25610,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文字整理、潜在任务暴露、实际临床采用和就业结果是不同问题。本页只有一般研究与方法背景，未建立泌尿科任务级评分或全国替代率；不用模型输出授予临床能力或权限。"
+              "文字整理、潜在任务暴露、实际临床采用和就业结果是不同问题。本页只有一般研究与方法背景，未建立泌尿科任务级评分或全国替代率；不用模型输出授予临床能力或权限。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "urologists.display.ai_impact_table.answer",
@@ -33763,6 +33766,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "评估｜病史与资料核验｜采集与复核患者病史、记录和检查信息，核身份、时间和不一致，不用生成摘要代替原始资料。 — 25/100; weight=1/3; urologists.display.responsibilities_block.01[0]",
+                  "诊疗｜医学判断与方案解释｜综合诊断信息形成专业诊疗安排，向患者解释并维护待确认事项，具体诊疗依资质和规范。 — 50/100; weight=1/3; urologists.display.responsibilities_block.02[0]",
+                  "治疗｜相应手术及技术工作｜在相应训练和机构授权下开展本职治疗，与团队协作；本页不提供实操教学。 — 0/100; weight=1/3; urologists.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39039,7 +39059,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -39191,15 +39211,27 @@
           "employer",
           "r2-pay-3"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "泌尿科医师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 29-1229.03 任务口径",
@@ -39250,7 +39282,7 @@
       "text": "泌尿科医师"
     }
   },
-  "source_content_sha256": "f48461e928e1c67d41b17f5b3673062ae105b9bcebb2b97999afd552e128ca89",
+  "source_content_sha256": "582db6fb750feb94dbfe5191ab44606a1a13d87146dd7d984b6511b758a9e6c2",
   "subject": {
     "canonical_slug": "urologists",
     "name": "泌尿科医师",

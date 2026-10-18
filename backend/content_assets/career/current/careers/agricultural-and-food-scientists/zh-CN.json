@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24403,7 +24406,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议在虚构数据上试文献、记录、代码和图像候选整理；本页未取得本职业采用率、节省工时或替代效果。技术能力、组织采用、岗位数量与授权责任分别核对。"
+              "编辑建议在虚构数据上试文献、记录、代码和图像候选整理；本页未取得本职业采用率、节省工时或替代效果。技术能力、组织采用、岗位数量与授权责任分别核对。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "agricultural-and-food-scientists.ai-impact.ai-impact-table.18",
@@ -32605,6 +32608,23 @@
                 "publisher": "官方机构",
                 "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_6bff4ef87291497fa72949e1fc88efb5.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "研究设计｜定义问题与假设｜把生产或质量问题转成可检验假设，明确目标总体、对照、重复、指标与排除条件。 — 50/100; weight=1/3; agricultural-and-food-scientists.profile.responsibilities-block.1[0]",
+                  "执行与分析｜采样与检测｜按标准方法采样并记录条件，用统计模型比较处理与对照，保留原始数据、脚本与版本。 — 50/100; weight=1/3; agricultural-and-food-scientists.profile.responsibilities-block.1[1]",
+                  "结果解释｜验证与边界｜用独立数据验证结论，说明适用品种、地区、工艺与时间范围，区分相关与因果。 — 50/100; weight=1/3; agricultural-and-food-scientists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37529,7 +37549,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37930,15 +37950,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "农业与食品科学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "任务：实验设计 · 采样与检测 · 结果解释",
@@ -37989,7 +38021,7 @@
       "text": "农业与食品科学家：职业内容、薪资与就业前景"
     }
   },
-  "source_content_sha256": "0dd4c8665a1b9e1446d39d81f2666fd06593887951ec6d93317a67bba2e94bbf",
+  "source_content_sha256": "482a3103272234ea03d27d7f413765c9febdbe4dfe197318d1289b26c1c75db2",
   "subject": {
     "canonical_slug": "agricultural-and-food-scientists",
     "name": "农业与食品科学家",

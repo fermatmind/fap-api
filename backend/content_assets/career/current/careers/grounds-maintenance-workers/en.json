@@ -20,6 +20,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25218,7 +25221,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no exact generative AI exposure level, automated equipment adoption / substitution rate, or causal wage data have been obtained for 37-3011.00; no occupational replacement conclusion is issued. Assess equipment automation and generative tools separately. Editorial support candidates are listed below; effectiveness, costs, and actual authority require testing. O*NET automation responses of 51% slightly / 42% not at all automated are respondent choices, not AI adoption rates. ILO2025 is an ISCO task index; an exact SOC mapping for this page has not been established, without claiming that the study excludes this occupation. 37-3011.00 uses hand or power tools / equipment to landscape or maintain property grounds, extending beyond ground surfaces and ornamental plants. Of 19 tasks, 6 are core: mowing and edging 90, power equipment 87, hand tools 84, pruning 84, litter removal 84, and flowers 79. The 13 supplemental tasks include established lawns 83, landscaping 71, watering 70, maintenance 69, leaves 68, facilities 66, planting 63, cultivation 62, topsoil 61, snow / sod 60 each, fertilizers / herbicides / insecticides 49, and tree support 46. Importance is not frequency or authorization; tasks may overlap. Verify specific duties and approved procedures separately. O*NET41 activities / 16 detailed activities / 57 contexts have been read. Activity scores for machinery 71, physical activity 55, communication 52, vehicles 51, information 43, and handling 38 indicate importance, not frequency. Respondent proportions: outdoors 65% daily / 34% weekly but not daily; PPE73% daily; standing 64% more than half the time and walking 35% continually; heat / cold 32% weekly but not daily (12% daily); hours 61% over 40 / 38% at 40 hours; schedules 71% regular / 26% seasonal. Survey responses are not hazard concentrations, accident rates, or conditions shared by everyone. O*NET's detailed software list has 6 categories, including IBM Notes, Office, Windows, Excel, Facebook, and Word. Its hot technologies page lists 5, excluding IBM Notes. U.S. Lightcast job postings in 2025 mention Office1%, Excel / Word each below 1%, with no values provided for Facebook / Windows. Mentions are not adoption rates, uniform entry requirements, or proof that programming is unnecessary, nor do they prove that digitalization is used only for records. Current BLS projections for the exact occupation 37-3011 for 2025—2035 show employment of 1,188.6→1,244.2 thousand, growth of 4.7%, a net increase of 55.6 thousand, and 149.5 thousand average annual openings from growth and replacement; the figures are rounded separately. EP includes self-employment (20.2% in 2025), unlike OEWS wage estimates; projections are not actual vacancies or individual outcomes. In this round, O*NET already shows 2025 employment of 1,188,600, a 2025—2035 growth band of 5%—6%, and 149,500 average annual openings. The growth band and the direct BLS value of 4.7% are different presentations; do not replace the exact value with the band or mix it with the OOH combined category 37-3000."
+              "Insufficient evidence: no exact generative AI exposure level, automated equipment adoption / substitution rate, or causal wage data have been obtained for 37-3011.00; no occupational replacement conclusion is issued. Assess equipment automation and generative tools separately. Editorial support candidates are listed below; effectiveness, costs, and actual authority require testing. O*NET automation responses of 51% slightly / 42% not at all automated are respondent choices, not AI adoption rates. ILO2025 is an ISCO task index; an exact SOC mapping for this page has not been established, without claiming that the study excludes this occupation. 37-3011.00 uses hand or power tools / equipment to landscape or maintain property grounds, extending beyond ground surfaces and ornamental plants. Of 19 tasks, 6 are core: mowing and edging 90, power equipment 87, hand tools 84, pruning 84, litter removal 84, and flowers 79. The 13 supplemental tasks include established lawns 83, landscaping 71, watering 70, maintenance 69, leaves 68, facilities 66, planting 63, cultivation 62, topsoil 61, snow / sod 60 each, fertilizers / herbicides / insecticides 49, and tree support 46. Importance is not frequency or authorization; tasks may overlap. Verify specific duties and approved procedures separately. O*NET41 activities / 16 detailed activities / 57 contexts have been read. Activity scores for machinery 71, physical activity 55, communication 52, vehicles 51, information 43, and handling 38 indicate importance, not frequency. Respondent proportions: outdoors 65% daily / 34% weekly but not daily; PPE73% daily; standing 64% more than half the time and walking 35% continually; heat / cold 32% weekly but not daily (12% daily); hours 61% over 40 / 38% at 40 hours; schedules 71% regular / 26% seasonal. Survey responses are not hazard concentrations, accident rates, or conditions shared by everyone. O*NET's detailed software list has 6 categories, including IBM Notes, Office, Windows, Excel, Facebook, and Word. Its hot technologies page lists 5, excluding IBM Notes. U.S. Lightcast job postings in 2025 mention Office1%, Excel / Word each below 1%, with no values provided for Facebook / Windows. Mentions are not adoption rates, uniform entry requirements, or proof that programming is unnecessary, nor do they prove that digitalization is used only for records. Current BLS projections for the exact occupation 37-3011 for 2025—2035 show employment of 1,188.6→1,244.2 thousand, growth of 4.7%, a net increase of 55.6 thousand, and 149.5 thousand average annual openings from growth and replacement; the figures are rounded separately. EP includes self-employment (20.2% in 2025), unlike OEWS wage estimates; projections are not actual vacancies or individual outcomes. In this round, O*NET already shows 2025 employment of 1,188,600, a 2025—2035 growth band of 5%—6%, and 149,500 average annual openings. The growth band and the direct BLS value of 4.7% are different presentations; do not replace the exact value with the band or mix it with the OOH combined category 37-3000. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "grounds-maintenance-workers.ai-impact.ai-impact-table.18",
@@ -32731,6 +32734,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor, Employment and Training Administration",
                 "scope": "37-3011.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/37-3011.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Lawns and Pruning — 0/100; weight=1/3; grounds-maintenance-workers.ai-impact.ai-impact-table.95[0]",
+                  "Planting and Landscaping — 0/100; weight=1/3; grounds-maintenance-workers.ai-impact.ai-impact-table.103[0]",
+                  "Irrigation, Fertilization, and Pesticide Use — 25/100; weight=1/3; grounds-maintenance-workers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37665,7 +37685,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese Wage Reference",
       "direction-comparison": "Career Direction Comparison",
       "fit": "Career Fit Guide",
@@ -37891,15 +37911,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Landscaping and Groundskeeping Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure (Not Scored on This Page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Landscaping and Groundskeeping Workers · Tasks, Deliverables, and Responsibility Boundaries",
@@ -37950,7 +37982,7 @@
       "text": "Landscaping and Groundskeeping Workers"
     }
   },
-  "source_content_sha256": "3c804c598b36d6b80273b336f7a9ae7f04139074c59fae4fff3b4e7739fa409d",
+  "source_content_sha256": "a89a53e82680ee7a4cabf7fc909a1c9b0a2fc40898112c3dd835b73f67573a2e",
   "subject": {
     "canonical_slug": "grounds-maintenance-workers",
     "name": "Landscaping and Groundskeeping Workers",

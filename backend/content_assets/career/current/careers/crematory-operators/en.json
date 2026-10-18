@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:onet-code-39-4012": {
         "status": "pending_mapping"
       },
@@ -7617,7 +7620,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Scheduling and field comparison and log summaries and label search can be listed as editorial trial candidates; this round obtained no generative AI adoption or efficiency or replacement or wage causation for this position. Existing control and management software is not evidence of generative AI; automation authority comes from the actual policy and legal relationship, and model output itself cannot approve a case or an on-site operation."
+              "Scheduling and field comparison and log summaries and label search can be listed as editorial trial candidates; this round obtained no generative AI adoption or efficiency or replacement or wage causation for this position. Existing control and management software is not evidence of generative AI; automation authority comes from the actual policy and legal relationship, and model output itself cannot approve a case or an on-site operation. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "crematory-operators.ai-impact.ai-impact-table.4",
@@ -9278,6 +9281,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/47-5022.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Verify body identity and death and cremation documents — 50/100; weight=1/3; crematory-operators.profile.responsibilities-block.1[0]",
+                  "Carry out authorized cremation and identify ashes correctly — 0/100; weight=1/3; crematory-operators.profile.responsibilities-block.2[0]",
+                  "Inspect and clean equipment and hand over anomalies — 25/100; weight=1/3; crematory-operators.profile.responsibilities-block.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11889,7 +11909,7 @@
     ],
     "path": "/en/career/jobs/crematory-operators",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -12037,15 +12057,27 @@
         "source_refs": [
           "g04-bls-entry"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Crematory operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Personal services · funeral services and crematory operations",
@@ -12096,7 +12128,7 @@
       "text": "Crematory operators"
     }
   },
-  "source_content_sha256": "61e81625c9226bfb1c841df0ed5f2f518ffd668d0c913abd6adf265373ad1440",
+  "source_content_sha256": "9fae69f608f3e0184da82154b3dbfc2a8ac8389d4e21cc78f20fdb1ad7baa401",
   "subject": {
     "canonical_slug": "crematory-operators",
     "name": "Crematory operators",

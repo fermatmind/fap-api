@@ -65,6 +65,9 @@
       "fact:current-parent-wage-p90": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25007,7 +25010,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, efficiency, or replacement effect for this detailed occupation was obtained. Editorial use cases include query drafts, chart suggestions, and querying and summarization; task exposure, process automation, and employment count are kept separate and cannot be used to predict job disappearance. Actual permissions are checked against the organization."
+              "Insufficient evidence: no AI adoption rate, efficiency, or replacement effect for this detailed occupation was obtained. Editorial use cases include query drafts, chart suggestions, and querying and summarization; task exposure, process automation, and employment count are kept separate and cannot be used to predict job disappearance. Actual permissions are checked against the organization. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "business-intelligence-analysts.ai-impact.ai-impact-table.18",
@@ -32462,6 +32465,23 @@
                 "publisher": "Department of Population and Employment Statistics, National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/hd/lyzx/zxgk/202411/t20241115_1957457.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Metrics and basis｜Turn business problems into verifiable metric definitions, granularity, and denominator basis, and record assumptions and data sources｜A reviewable metric definition and basis statement. — 50/100; weight=1/3; business-intelligence-analysts.profile.responsibilities-block.1[0]",
+                  "Data retrieval and quality checks｜Write and review queries, check data lineage and permissions, run quality tests, and explain anomalies｜Query scripts and quality check records. — 75/100; weight=1/3; business-intelligence-analysts.profile.responsibilities-block.1[1]",
+                  "Modeling and visualization｜Build the metric and dimension model and design reports and dashboards, checking usability and non-misleading presentation｜Reviewed reports and dashboards. — 75/100; weight=1/3; business-intelligence-analysts.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37384,7 +37404,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -37861,15 +37881,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Business intelligence analysts",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 15-2051.01 · metric definition and basis / queries and quality checks / reports and dashboards / monitoring and support",
@@ -37920,7 +37952,7 @@
       "text": "Business intelligence analysts"
     }
   },
-  "source_content_sha256": "0c38d8c2fc6fb3d6a804b324a66e99c956f20459a50f65504d3961c7b664bafc",
+  "source_content_sha256": "446d95ab84f0efd31c5d858a8f35291fe2f2e7c53b19c980f4295a91cebadd4c",
   "subject": {
     "canonical_slug": "business-intelligence-analysts",
     "name": "Business intelligence analysts",

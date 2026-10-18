@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25475,7 +25478,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Clinical requirements translation, health information system design, data mapping, and configuration testing are this occupation's tasks. Tools can be tested for assistance with data organization, statistical charts, technical documents, and test drafts, but ordinary software, automation systems, and generative AI are different tools. This page obtained no measured or causal evidence of this occupation's AI adoption rates, hours saved, or job replacement. Task data cannot establish that efficiency has already improved or that the occupation as a whole will not be replaced."
+              "Direct answer | Clinical requirements translation, health information system design, data mapping, and configuration testing are this occupation's tasks. Tools can be tested for assistance with data organization, statistical charts, technical documents, and test drafts, but ordinary software, automation systems, and generative AI are different tools. This page obtained no measured or causal evidence of this occupation's AI adoption rates, hours saved, or job replacement. Task data cannot establish that efficiency has already improved or that the occupation as a whole will not be replaced. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "health-informatics-specialists.ai-impact.ai-impact-table.18",
@@ -32994,6 +32997,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "Information transmission, software and information technology services; persons employed in urban units in China, broad industry category scope",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Requirements and workflow translation — 50/100; weight=1/3; health-informatics-specialists.ai-impact.ai-impact-table.95[0]",
+                  "System, data, and standards design — 75/100; weight=1/3; health-informatics-specialists.ai-impact.ai-impact-table.99[0]",
+                  "Data and evaluation — 75/100; weight=1/3; health-informatics-specialists.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37924,7 +37944,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of career tracks",
       "fit": "Career fit guide",
@@ -38072,15 +38092,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Health Informatics Specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Health Informatics Specialists · Tasks, Deliverables, and Responsibility Boundaries",
@@ -38131,7 +38163,7 @@
       "text": "Health Informatics Specialists"
     }
   },
-  "source_content_sha256": "148e467bf1a4821024244d668a0e6ad0ff4be246d0abf9df0f48a3bac2c9c2cb",
+  "source_content_sha256": "c34083d8d310175c08089cc7cd4f4783eef2129ea0e1cc96d93c93663e096160",
   "subject": {
     "canonical_slug": "health-informatics-specialists",
     "name": "Health Informatics Specialists",

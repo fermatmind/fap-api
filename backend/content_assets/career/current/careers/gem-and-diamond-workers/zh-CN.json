@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25481,7 +25484,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得本职业生成式AI暴露评分、实际采用率或效果研究。直接回答｜本页未取得可精确对应宝石琢磨工的生成式AI暴露评分或效果研究。O*NET描述分级、光学检查、测量与精细加工任务，精确度98%的回答为极其重要，坐姿78%为持续或几乎持续；这些是职业描述，不证明AI效率或替代率。热门技术主体展示0项软件技能（2025美国招聘文本），未解释零项原因。编辑建议从合成数据上的记录整理、资料检索与培训草稿开始试验，测量准确性与耗时；质量标准、授权、输出复核和材料损失责任须另核。技术可行、组织采用与岗位结果分别判断。"
+              "证据不足：本页未取得本职业生成式AI暴露评分、实际采用率或效果研究。直接回答｜本页未取得可精确对应宝石琢磨工的生成式AI暴露评分或效果研究。O*NET描述分级、光学检查、测量与精细加工任务，精确度98%的回答为极其重要，坐姿78%为持续或几乎持续；这些是职业描述，不证明AI效率或替代率。热门技术主体展示0项软件技能（2025美国招聘文本），未解释零项原因。编辑建议从合成数据上的记录整理、资料检索与培训草稿开始试验，测量准确性与耗时；质量标准、授权、输出复核和材料损失责任须另核。技术可行、组织采用与岗位结果分别判断。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "gem-and-diamond-workers.ai-impact.ai-impact-table.18",
@@ -32984,6 +32987,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/51-9071.06"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "用偏光镜与折射仪与显微镜检查表面与内部结构并按体系分配抛光与对称性与净度等级 — 50/100; weight=1/3; gem-and-diamond-workers.ai-impact.ai-impact-table.97[0]",
+                  "把宝石抵住旋转盘与轮与锯切割与成形与研磨并抛光刻面 — 0/100; weight=1/3; gem-and-diamond-workers.ai-impact.ai-impact-table.109[0]",
+                  "按价格指南与市场波动估算批发与零售价值 — 75/100; weight=1/3; gem-and-diamond-workers.ai-impact.ai-impact-table.117[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37924,7 +37944,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38079,15 +38099,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "宝石琢磨工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "宝石琢磨工 · 任务、交付与责任边界",
@@ -38138,7 +38170,7 @@
       "text": "宝石琢磨工"
     }
   },
-  "source_content_sha256": "729ecccbb6b2e4ca5ad1beb6fd7d9beb35d2d6b4b330312b3b99402cfed5da8a",
+  "source_content_sha256": "680a22c38bc3ce6ee798061772ea3e22ffcae69da1be551a11d215490bebc597",
   "subject": {
     "canonical_slug": "gem-and-diamond-workers",
     "name": "宝石琢磨工",

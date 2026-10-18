@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24772,7 +24775,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业 AI 采用率、替代比例或工资/就业因果研究。自动钻铆、数字化工装和在线测量属于可能相关的制造自动化场景，不是生成式 AI 已部署的证据。BLS 51-2011 的总体就业预测，非AI归因（2025—2035年）：2025 年就业 34.4 千人，2035 年 32.5 千人；官方净变化 -1.9 千人、增长率 -5.6%，年均职位空缺 3.1 千个。规模、净变化和增长率分别采用官方公布值，不用取整规模重算。空缺是补充离职、转岗等需求的流量，不是净新增或实时招聘数。 预测下降不能归因于 AI，也不能推定岗位消失；工具输出须按受控图纸、工艺与授权复核。"
+              "证据不足：未取得本职业 AI 采用率、替代比例或工资/就业因果研究。自动钻铆、数字化工装和在线测量属于可能相关的制造自动化场景，不是生成式 AI 已部署的证据。BLS 51-2011 的总体就业预测，非AI归因（2025—2035年）：2025 年就业 34.4 千人，2035 年 32.5 千人；官方净变化 -1.9 千人、增长率 -5.6%，年均职位空缺 3.1 千个。规模、净变化和增长率分别采用官方公布值，不用取整规模重算。空缺是补充离职、转岗等需求的流量，不是净新增或实时招聘数。 预测下降不能归因于 AI，也不能推定岗位消失；工具输出须按受控图纸、工艺与授权复核。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "aircraft-structure-surfaces-rigging-and-systems-assemblers.ai-impact.ai-impact-table.18",
@@ -32539,6 +32542,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "读图与工艺｜布局与顺序｜阅读图纸、图示与规格书以确定布置、作业顺序与零件关系，标记识别信息。 — 50/100; weight=1/3; aircraft-structure-surfaces-rigging-and-systems-assemblers.profile.responsibilities-block.1[0]",
+                  "定位与装配｜型架与工装｜用型架、工装与测量仪器定位与对准部件，装配零件与组件。 — 0/100; weight=1/3; aircraft-structure-surfaces-rigging-and-systems-assemblers.profile.responsibilities-block.1[2]",
+                  "铆接与紧固｜结构与蒙皮｜铆接、胶接或焊接固定支架与连接件，安装蒙皮与结构件，连接机翼、尾翼与机身。 — 0/100; weight=1/3; aircraft-structure-surfaces-rigging-and-systems-assemblers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37440,7 +37460,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37816,15 +37836,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "飞机结构、表面、索具、系统装配工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "航空器制造装配：读图与公差 · 铆接紧固与系统装调 · 检验与记录",
@@ -37875,7 +37907,7 @@
       "text": "飞机结构、表面、索具、系统装配工：装配任务、工资与下降趋势（O*NET 51-2011）"
     }
   },
-  "source_content_sha256": "c2a013e5641a94f60cf8b3bd8240218d365ab1692c7c9d4fd2bef8836077b19d",
+  "source_content_sha256": "38392b1bb02506f3946ce402f7fa9fb2dac4251d3305bb69d1dc26d2db41445c",
   "subject": {
     "canonical_slug": "aircraft-structure-surfaces-rigging-and-systems-assemblers",
     "name": "飞机结构、表面、索具、系统装配工",

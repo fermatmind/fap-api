@@ -8,6 +8,9 @@
       "fact:china-production-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25592,7 +25595,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: adoption rates, construction effects, the net AI employment effect and task scores were not obtained. The BLS2025—2035 overall projection for this occupation shows 9.8% growth and about 3,300 annual openings including replacements, which is not AI causality; the editorial scenarios only explain the human checking points for information assistance."
+              "Insufficient evidence: adoption rates, construction effects, the net AI employment effect and task scores were not obtained. The BLS2025—2035 overall projection for this occupation shows 9.8% growth and about 3,300 annual openings including replacements, which is not AI causality; the editorial scenarios only explain the human checking points for information assistance. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "tile-and-stone-setters.display.ai_impact_table.answer",
@@ -33638,6 +33641,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Position | dimensions and layout | check the positioning and drawing within the corresponding training, and point out the row, column or site location of any conflict. — 25/100; weight=1/3; tile-and-stone-setters.display.responsibilities_block.03[0]",
+                  "Execute | setting and finishing | actual work follows material and tool training and project approved conditions, and no method is derived from the model. — 0/100; weight=1/3; tile-and-stone-setters.display.responsibilities_block.04[0]",
+                  "Re-check | surface and interfaces | check the layout, joints and problem records, with quality judgments following the specific project requirements. — 25/100; weight=1/3; tile-and-stone-setters.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38886,7 +38906,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -39046,15 +39066,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Tile and stone setters",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 47-2044.00 precise occupational measure",
@@ -39105,7 +39137,7 @@
       "text": "Tile and stone setters"
     }
   },
-  "source_content_sha256": "1e04f86c6643537f0aacd9853b940a1bd6b4549584838ee70cfb6375cbb86e3d",
+  "source_content_sha256": "fd8f824811f8f992a90ad9c8f0d8520b55f8ad42c3f2d6e82b1a76557867b317",
   "subject": {
     "canonical_slug": "tile-and-stone-setters",
     "name": "Tile and stone setters",

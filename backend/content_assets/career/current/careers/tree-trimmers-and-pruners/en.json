@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25431,7 +25434,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Distinguish text assistance, actual adoption and employment outcomes. Organising record drafts can be explored, but the professional tree condition, work conditions and authority still need confirmation by the corresponding people. Insufficient evidence: no reviewable FermatMind task-level score for this occupation has been formed, so no score or substitution probability is filled in."
+              "Distinguish text assistance, actual adoption and employment outcomes. Organising record drafts can be explored, but the professional tree condition, work conditions and authority still need confirmation by the corresponding people. Insufficient evidence: no reviewable FermatMind task-level score for this occupation has been formed, so no score or substitution probability is filled in. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "tree-trimmers-and-pruners.display.ai_impact_table.answer",
@@ -32752,6 +32755,23 @@
                 "publisher": "Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/tree-care/hazards-solutions"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Object checking | tree and care goal | confirm the tree number, location and pruning purpose and tell the responsible person where the material is inconsistent. — 25/100; weight=1/3; tree-trimmers-and-pruners.display.responsibilities_block.01[0]",
+                  "Tree care | professional task execution | carry out pruning and care within actual ability and task scope and pass suspected pest or structural problems to a professional to check. — 0/100; weight=1/3; tree-trimmers-and-pruners.display.responsibilities_block.02[0]",
+                  "Tools and equipment | preparation and maintenance | this occupation involves cutting tools, power tools, chipping equipment and vehicle-mounted lifting equipment; actual operation requires the corresponding training and arrangements, and this page gives no practical tutorial. — 0/100; weight=1/3; tree-trimmers-and-pruners.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37997,7 +38017,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38146,15 +38166,27 @@
           "employer",
           "editorial"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Tree trimmers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 37-3013.00 exact occupation basis",
@@ -38205,7 +38237,7 @@
       "text": "Tree trimmers"
     }
   },
-  "source_content_sha256": "0859827b528ab6f3949ae68a14d1273cdb51f7eb6b5230555ec832b2df647a83",
+  "source_content_sha256": "5cd9b4cf706269b1a4457c43a987005045b9b8249012d228f4ad331905bcb579",
   "subject": {
     "canonical_slug": "tree-trimmers-and-pruners",
     "name": "Tree trimmers",

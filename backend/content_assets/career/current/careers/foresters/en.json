@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25134,7 +25137,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no task exposure score, adoption rate, or employment causal evidence precisely for 19-1032, does not set a medium-high rating, and does not predict that it will not be replaced in the short term. Editorial analysis can explore material retrieval, table checking, and report drafts, but GIS, remote sensing, and growth models are not evidence of generative AI adoption; check data permissions and human review before use."
+              "Insufficient evidence: this page obtained no task exposure score, adoption rate, or employment causal evidence precisely for 19-1032, does not set a medium-high rating, and does not predict that it will not be replaced in the short term. Editorial analysis can explore material retrieval, table checking, and report drafts, but GIS, remote sensing, and growth models are not evidence of generative AI adoption; check data permissions and human review before use. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "foresters.ai-impact.ai-impact-table.18",
@@ -32802,6 +32805,23 @@
                 "publisher": "National Forestry and Grassland Administration, republished from the State Council",
                 "scope": "Chinese forest and grassland fire prevention and suppression behavior boundaries",
                 "url": "https://www.forestry.gov.cn/c/www/szxx/650617.jhtml"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Stand survey and mapping — 25/100; weight=1/3; foresters.ai-impact.ai-impact-table.95[0]",
+                  "Management and harvest and afforestation planning — 75/100; weight=1/3; foresters.ai-impact.ai-impact-table.99[0]",
+                  "Regeneration and tending and nurseries — 25/100; weight=1/3; foresters.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37736,7 +37756,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37860,15 +37880,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Foresters",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Foresters · tasks, deliverables, and responsibility boundaries",
@@ -37919,7 +37951,7 @@
       "text": "Foresters"
     }
   },
-  "source_content_sha256": "0b43f55ebfe94c0bc0a9f6be279c228745c0721519ec44ed98159b2e5d8964a1",
+  "source_content_sha256": "0df7ce3bd4e25a588524f0771f4b6979df7b4ec6b2dd56cf7bbbe4f715164f48",
   "subject": {
     "canonical_slug": "foresters",
     "name": "Foresters",

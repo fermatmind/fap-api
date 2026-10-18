@@ -47,6 +47,9 @@
       "fact:cn-teacher-qualification-degree": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:hybrid-feedback-advantage": {
         "status": "pending_mapping"
       },
@@ -24503,7 +24506,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页把三件事分开：工具能否处理某类任务、机构是否真的采用、以及就业结果是否改变。就任务而言，AI 已能生成备课材料与反馈初稿，但 O*NET 的核心任务仍需要教师观察、调整与记录；就采用而言，机构受许可、数据授权、隐私、版权与设备条件约束；就就业而言，BLS 预测 2025—2035 年下降 14%，但没有把这一变化归因于生成式 AI。本职业没有公开的任务级自动化评分，因此不给出替代率或消失年份。"
+              "本页把三件事分开：工具能否处理某类任务、机构是否真的采用、以及就业结果是否改变。就任务而言，AI 已能生成备课材料与反馈初稿，但 O*NET 的核心任务仍需要教师观察、调整与记录；就采用而言，机构受许可、数据授权、隐私、版权与设备条件约束；就就业而言，BLS 预测 2025—2035 年下降 14%，但没有把这一变化归因于生成式 AI。本职业没有公开的任务级自动化评分，因此不给出替代率或消失年份。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors.ai-impact.ai-impact-table.18",
@@ -32940,6 +32943,23 @@
                 "publisher": "教育部",
                 "scope": "legal_boundary",
                 "url": "https://www.moe.gov.cn/s78/A10/moe_918/tnull_11555.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "共有｜改编教材与组织练习｜按语言水平与学习目标改编文本、例句和练习，选择讲授、小组或任务型活动组织课堂练习。 — 75/100; weight=1/3; adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors.profile.responsibilities-block.1[1]",
+                  "共有｜课堂实施与即时反馈｜示范、提问并检查理解，针对错误给出可执行反馈。 — 25/100; weight=1/3; adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors.profile.responsibilities-block.1[2]",
+                  "共有｜评价进展与维护记录｜按课程要求评价作业与测验，记录出勤、能力进展与结业条件，并与项目人员核对结果。 — 50/100; weight=1/3; adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37857,7 +37877,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38401,15 +38421,27 @@
         "source_refs": [
           "onet-253011"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "成人基础教育、成人中等教育、英语作为第二语言",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 暴露·未评分"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · SA",
@@ -38460,7 +38492,7 @@
       "text": "成人基础教育、成人中等教育、英语作为第二语言"
     }
   },
-  "source_content_sha256": "6359a3e5e9a29e2065532b5894a116b3eba9903151ecc46c8fcbeefbaee029ae",
+  "source_content_sha256": "8b67e297cfc9c7f14cbc3c17156dd1d8a5102e07c48f9c8bf390ed4336c35a1b",
   "subject": {
     "canonical_slug": "adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors",
     "name": "成人基础教育、成人中等教育、英语作为第二语言",

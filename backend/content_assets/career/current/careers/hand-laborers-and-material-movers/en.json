@@ -14,6 +14,9 @@
       "fact:employment": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25217,7 +25220,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: occupational materials, ILO task exposure research, and the NIST governance framework read in this round do not provide generative AI adoption rates, replacement proportions, or replacement years for SOC 53-7062. Do not label exposure 'moderate' or guarantee no replacement. Task judgment (editorial inference) | Distinguish equipment substitution of physical handling from generative AI text assistance. BLS OOH notes that high-speed conveying and sorting systems may reduce some labor demand. This is general warehouse automation background, not this occupation's generative AI adoption rate. Tools may assist work orders, quantity summaries, and abnormality summaries within authorization; physical conditions, abnormality reports, and handovers still require verification. O*NET automation responses describe existing work context, not AI exposure scores."
+              "Insufficient evidence: occupational materials, ILO task exposure research, and the NIST governance framework read in this round do not provide generative AI adoption rates, replacement proportions, or replacement years for SOC 53-7062. Do not label exposure 'moderate' or guarantee no replacement. Task judgment (editorial inference) | Distinguish equipment substitution of physical handling from generative AI text assistance. BLS OOH notes that high-speed conveying and sorting systems may reduce some labor demand. This is general warehouse automation background, not this occupation's generative AI adoption rate. Tools may assist work orders, quantity summaries, and abnormality summaries within authorization; physical conditions, abnormality reports, and handovers still require verification. O*NET automation responses describe existing work context, not AI exposure scores. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "hand-laborers-and-material-movers.ai-impact.ai-impact-table.18",
@@ -33224,6 +33227,23 @@
                 "publisher": "National Bureau of Statistics of China",
                 "scope": "Transportation, storage, and postal services; employed persons in Chinese urban units, broad industry-section scope",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Move freight, stock, and materials by hand or using trucks, tractors, or other equipment — 0/100; weight=1/3; hand-laborers-and-material-movers.ai-impact.ai-impact-table.97[0]",
+                  "Pack and repack containers and assemble crates using hand tools and precut lumber — 0/100; weight=1/3; hand-laborers-and-material-movers.ai-impact.ai-impact-table.109[0]",
+                  "Read work orders or receive oral instructions and record piece counts using production sheets or work tickets — 50/100; weight=1/3; hand-laborers-and-material-movers.ai-impact.ai-impact-table.113[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38165,7 +38185,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese Wage Reference",
       "direction-comparison": "Career Direction Comparison",
       "fit": "Career Fit Guide",
@@ -38416,15 +38436,27 @@
         "source_refs": [
           "bls-profiles-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Laborers and Freight, Stock, and Material Movers, Hand",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure (Not Scored on This Page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Laborers and Freight, Stock, and Material Movers, Hand · Tasks, Deliverables, and Responsibility Boundaries",
@@ -38475,7 +38507,7 @@
       "text": "Laborers and Freight, Stock, and Material Movers, Hand"
     }
   },
-  "source_content_sha256": "0728cbf86cf8494b52e04b4359adb9e057786922090bd8e49ab71006c26f0aca",
+  "source_content_sha256": "8ca8c36fe88425df05a4cde41ec35356663e441b31c38af817cd9a582c5ae116",
   "subject": {
     "canonical_slug": "hand-laborers-and-material-movers",
     "name": "Laborers and Freight, Stock, and Material Movers, Hand",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24362,7 +24365,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task impact and control suggestion — conclusion: AI and automation may assist literature search, data organization, statistics, simulation, and document drafts; the sources consulted this round provide no evidence that it will wholly replace requirement, risk, and use scenario confirmation, the definition of plans and verification methods, anomaly and failure and risk judgment, or decisions on design confirmation, release, and handling of human genetic resources and personal information; the spread of tools does not equal a change in the number of positions, and under the O*NET 17-2031.00 occupation definition employment for this occupation grows 8% from 2025—2035 (Much faster than average). The actual adoption, time savings, and replacement proportions for this occupation were not verified, and specific testing, verification, and release follow real systems."
+              "Editorial task impact and control suggestion — conclusion: AI and automation may assist literature search, data organization, statistics, simulation, and document drafts; the sources consulted this round provide no evidence that it will wholly replace requirement, risk, and use scenario confirmation, the definition of plans and verification methods, anomaly and failure and risk judgment, or decisions on design confirmation, release, and handling of human genetic resources and personal information; the spread of tools does not equal a change in the number of positions, and under the O*NET 17-2031.00 occupation definition employment for this occupation grows 8% from 2025—2035 (Much faster than average). The actual adoption, time savings, and replacement proportions for this occupation were not verified, and specific testing, verification, and release follow real systems. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "biomedical-engineers.ai-impact.ai-impact-table.18",
@@ -33573,6 +33576,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/49-9062.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Requirement and risk confirmation | Give the design a basis | Confirm use scenarios and requirements and risks and the regulatory pathway with clinical and market and quality parties, and state in advance the available resources and authorization boundaries. — 50/100; weight=1/3; biomedical-engineers.profile.responsibilities-block.1[0]",
+                  "Experiments and simulation and analysis | Make data trustworthy | Conduct bench or pilot experiments or simulations to plan, honestly record conditions and data and instruments and method versions, and review anomalies and deviations. — 50/100; weight=1/3; biomedical-engineers.profile.responsibilities-block.1[2]",
+                  "Review and assessment | Keep risk controllable | Review risk and compliance and manufacturability and cost constraints, and mark the parts needing retest or review and needing risk assessment. — 50/100; weight=1/3; biomedical-engineers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38470,7 +38490,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38882,15 +38902,27 @@
         "source_refs": [
           "bls-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Bioengineers and biomedical engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 17-2031.00 · Job Zone Four (considerable preparation needed) · marked Bright Outlook · education field shows 43% bachelor's degree",
@@ -38941,7 +38973,7 @@
       "text": "Bioengineers and biomedical engineers"
     }
   },
-  "source_content_sha256": "5d02bcb0ed68e64e41499c2aa69c7f199ecad2d909097d46038ab531017c48dd",
+  "source_content_sha256": "57dae162803c27f48c8253a913b0d5959329a56ffb1ffc588067b5b3322a0205",
   "subject": {
     "canonical_slug": "biomedical-engineers",
     "name": "Bioengineers and biomedical engineers",

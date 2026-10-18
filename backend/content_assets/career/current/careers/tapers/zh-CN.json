@@ -8,6 +8,9 @@
       "fact:cn-construction-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25662,7 +25665,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分文字清单辅助、图像提示、实际施工与就业结果。NIST资料支持核信息风险，O*NET支持任务范围，BLS支持精确统计；它们不提供本职业替代比例。没有可复核任务评分方法与输入，本页不填AI暴露分数。"
+              "先分文字清单辅助、图像提示、实际施工与就业结果。NIST资料支持核信息风险，O*NET支持任务范围，BLS支持精确统计；它们不提供本职业替代比例。没有可复核任务评分方法与输入，本页另列AI影响度编辑估算。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "tapers.display.ai_impact_table.answer",
@@ -34217,6 +34220,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "材料｜核适用条件｜按实际材料说明和现场要求选择嵌缝料或接缝带，疑问交相应负责人确认。 — 25/100; weight=1/3; tapers.display.responsibilities_block.02[0]",
+                  "处理｜在训练范围内完成接缝｜使用工具处理接缝和相关钉螺钉头位置，具体做法按项目及材料要求。 — 0/100; weight=1/3; tapers.display.responsibilities_block.03[0]",
+                  "修整｜观察与反馈调整｜修整表面、检查有关缺陷并按反馈返修；打磨前另核粉尘防护及设备条件。 — 25/100; weight=1/3; tapers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39459,7 +39479,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -39619,15 +39639,27 @@
         "source_refs": [
           "nbs-construction-context-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "包扎工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 47-2082.00 精确职业口径",
@@ -39678,7 +39710,7 @@
       "text": "嵌缝工（墙板接缝处理）"
     }
   },
-  "source_content_sha256": "471b288459e457256b86be0c73371f4c9201bb15bc5150deadbacf2afd512d6e",
+  "source_content_sha256": "cbb34a7ceae63a4557e3f8334ee081de29c7e34aa86c06af1b636e4384a12739",
   "subject": {
     "canonical_slug": "tapers",
     "name": "嵌缝工（墙板接缝处理）",

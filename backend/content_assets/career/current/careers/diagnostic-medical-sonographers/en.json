@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:infection-control": {
         "status": "pending_mapping"
       },
@@ -7575,7 +7578,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Conditions for adoption include an institutionally approved system, clearly defined applicable sites and populations, reliable equipment integration, version validation, audit logs, and trained personnel who can review the output."
+              "Conditions for adoption include an institutionally approved system, clearly defined applicable sites and populations, reliable equipment integration, version validation, audit logs, and trained personnel who can review the output. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.2",
@@ -9050,6 +9053,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "combined_official",
                 "url": "https://www.onetonline.org/link/details/29-2034.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Complete the scan according to protocol and check image quality — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Complete measurements and produce technical records — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Observe and care for the patient's safety and comfort during the examination — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11478,7 +11498,7 @@
     ],
     "path": "/en/career/jobs/diagnostic-medical-sonographers",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -11566,15 +11586,27 @@
         "source_refs": [
           "fda-ultrasound-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Diagnostic medical sonographers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Ultrasound equipment operation · image and measurement review · technical record handover",
@@ -11625,7 +11657,7 @@
       "text": "Diagnostic medical sonographers"
     }
   },
-  "source_content_sha256": "259e9731b83c5a4d84b57a116e34b03d64cd6229e534aa9554a99abb6d861b18",
+  "source_content_sha256": "0b41074d445a0c342fda2108a8747069082f28411ffd7be1b29189fb3ceffbce",
   "subject": {
     "canonical_slug": "diagnostic-medical-sonographers",
     "name": "Diagnostic medical sonographers",

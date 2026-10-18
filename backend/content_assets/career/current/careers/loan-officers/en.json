@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7554,7 +7557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: application-material organization, credit data checks, and document drafts may be controlled tool trials. The existence of credit scoring, underwriting, or CRM software does not establish generative AI functionality or adoption. Responsible personnel must verify repayment capacity, collateral, authorized limits, and terms against policy."
+              "Editorial suggestion: application-material organization, credit data checks, and document drafts may be controlled tool trials. The existence of credit scoring, underwriting, or CRM software does not establish generative AI functionality or adoption. Responsible personnel must verify repayment capacity, collateral, authorized limits, and terms against policy. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "loan-officers.ai-impact.ai-impact-table.2",
@@ -8702,6 +8705,23 @@
                 "publisher": "CFPB",
                 "scope": "U.S. loan officer and mortgage activities",
                 "url": "https://www.consumerfinance.gov/compliance/compliance-resources/mortgage-resources/secure-fair-enforcement-for-mortgage-licensing-act/"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Meet and organize application and financial information — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Assess repayment capacity and collateral — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Approve within authorization or submit for approval — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11083,7 +11103,7 @@
     ],
     "path": "/en/career/jobs/loan-officers",
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Pay",
       "direction-comparison": "Compare Related Occupations",
       "fit": "Fit Signals",
@@ -11243,15 +11263,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Loan Officers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Loan approval and recommendations",
@@ -11302,7 +11334,7 @@
       "text": "Evaluating a Career as a Loan Officer: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "a82c07013a739c2465aeebedd2f87806314604114659574d66c032761b1e57b0",
+  "source_content_sha256": "37876c48acce0ea489308ea74c361d0e04b431b5d413363c924ec69e4e696252",
   "subject": {
     "canonical_slug": "loan-officers",
     "name": "Loan Officers",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24827,7 +24830,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本次未取得本职业全国AI采用、工资或整体替代因果研究。公开文书初稿、记录汇总和差异检索可作为编辑试验，不证明部队已采用；技术能力、部署与就业结果分开。不预测替代比例、减少数量或消失年份。 NIST AI RMF官方简介为自愿组织AI风险管理宽参考，非军队训练/授权法规或本职业成效研究；本轮只读简介，未读框架PDF。"
+              "证据不足：本次未取得本职业全国AI采用、工资或整体替代因果研究。公开文书初稿、记录汇总和差异检索可作为编辑试验，不证明部队已采用；技术能力、部署与就业结果分开。不预测替代比例、减少数量或消失年份。 NIST AI RMF官方简介为自愿组织AI风险管理宽参考，非军队训练/授权法规或本职业成效研究；本轮只读简介，未读框架PDF。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "armored-assault-vehicle-crew-members.ai-impact.ai-impact-table.18",
@@ -32579,6 +32582,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "车辆驾驶与机动｜把车组带到任务要求的位置｜按规定程序驾驶坦克、轻型装甲车辆与两栖突击车辆，在陆地与水域按命令实施机动，保持车辆状态与行驶安全。 — 25/100; weight=1/3; armored-assault-vehicle-crew-members.profile.responsibilities-block.1[0]",
+                  "武器与车载系统操作维护｜让武器与车载系统可用｜操作与维护瞄准与射击系统，操作与维护辅助武器（含机枪与榴弹发射器），按技术规定检查与保养并报告异常。 — 25/100; weight=1/3; armored-assault-vehicle-crew-members.profile.responsibilities-block.1[1]",
+                  "通信与导航｜保持通联与位置掌握｜操作与维护车载通信与导航设备，保持与车组和上级的通联，按程序报告位置与态势。 — 50/100; weight=1/3; armored-assault-vehicle-crew-members.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37481,7 +37501,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37797,15 +37817,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "装甲突击车辆成员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "官方职责：车辆驾驶与机动 · 武器与车载系统操作维护 · 通信与导航",
@@ -37856,7 +37888,7 @@
       "text": "装甲突击车辆成员"
     }
   },
-  "source_content_sha256": "e8518cfd0a0d11b68597159c6faa2bde3a51503456054522bd14d299f2d4a106",
+  "source_content_sha256": "f0bc28070dff476736c2103db237113b121d51f068bc70df30e8cccd3f8413a4",
   "subject": {
     "canonical_slug": "armored-assault-vehicle-crew-members",
     "name": "装甲突击车辆成员",

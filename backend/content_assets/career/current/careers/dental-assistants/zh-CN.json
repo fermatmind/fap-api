@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24364,7 +24367,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮有职业任务、招聘技术词和就业总量预测，未核GenAI实际采用/提效/替代比例；增长不能证明绝无任务替代或保护单个岗位。2025全年美国招聘3技术词：Dentrix14%、Office2%、Excel低于1%；提及占比非长期使用、普及或熟练率，不是GenAI采用/提效。诊所软件、影像设备和感控记录可含多技术，是否有AI看具体产品功能，不按名字一概判断。 美国自身31-9091：2025就业388600→2035约417400，净增28800/+7.4%（OOH圆整7%）；年均53000空缺含替换非每年净新增，自雇0.1%。当前O*NET已为2025/2025—2035，不能再写它仍是旧期或把年均空缺当十年总和。"
+              "本轮有职业任务、招聘技术词和就业总量预测，未核GenAI实际采用/提效/替代比例；增长不能证明绝无任务替代或保护单个岗位。2025全年美国招聘3技术词：Dentrix14%、Office2%、Excel低于1%；提及占比非长期使用、普及或熟练率，不是GenAI采用/提效。诊所软件、影像设备和感控记录可含多技术，是否有AI看具体产品功能，不按名字一概判断。 美国自身31-9091：2025就业388600→2035约417400，净增28800/+7.4%（OOH圆整7%）；年均53000空缺含替换非每年净新增，自雇0.1%。当前O*NET已为2025/2025—2035，不能再写它仍是旧期或把年均空缺当十年总和。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -32162,6 +32165,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-2061.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "在牙医指导下按治疗计划与规程准备器械与材料，并核对灭菌状态、有效期与用途匹配。 — 0/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "接待并准备患者，核对身份与病史过敏信息，测量与记录生命体征，做好术前安抚与沟通。 — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "治疗中按合法岗位权限配合、观察报告异常；患者病情危急应及时通知医师；中国护士在紧急抢救垂危患者时应先实施必要紧急救护，不能写任何异常只能报告禁止救护；其他岗位按训练、合法权限及机构应急流程，不自行诊断或定治疗。 — 0/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37684,7 +37704,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37955,15 +37975,27 @@
         "source_refs": [
           "r5-nbs-health"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "牙科助理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "牙科临床配合 · 感染控制 · 患者照护",
@@ -38014,7 +38046,7 @@
       "text": "牙科助理"
     }
   },
-  "source_content_sha256": "f8f08b0c5e791a2b9b4d9d53446bf8cd3be24b3b34d5a20916e39eca8be59e09",
+  "source_content_sha256": "a17aea1ab50fbd5704b37bddfb7477db1f742ccb80c9fb4fb7d8abb85eb64816",
   "subject": {
     "canonical_slug": "dental-assistants",
     "name": "牙科助理",

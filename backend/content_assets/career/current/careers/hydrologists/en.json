@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25159,7 +25162,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no generative AI adoption rate, net employment effect, or replacement timetable was obtained for hydrologists. Editorial analysis: information retrieval, data and model code, and report drafting are candidates for trials; responsible personnel must check research design, data and model validation, and interpretation of conclusions."
+              "Insufficient evidence: no generative AI adoption rate, net employment effect, or replacement timetable was obtained for hydrologists. Editorial analysis: information retrieval, data and model code, and report drafting are candidates for trials; responsible personnel must check research design, data and model validation, and interpretation of conclusions. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "hydrologists.ai-impact.ai-impact-table.18",
@@ -32614,6 +32617,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/19-2043.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Research design — 50/100; weight=1/3; hydrologists.ai-impact.ai-impact-table.95[0]",
+                  "Data collection — 25/100; weight=1/3; hydrologists.ai-impact.ai-impact-table.99[0]",
+                  "Data analysis and modeling — 75/100; weight=1/3; hydrologists.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37581,7 +37601,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37705,15 +37725,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Hydrologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Hydrologists · Tasks, Deliverables, and Responsibility Boundaries",
@@ -37764,7 +37796,7 @@
       "text": "Hydrologists"
     }
   },
-  "source_content_sha256": "1a22e804dd92bbccdac20efb1768f9c93288bbc9a47aff8ea809e25feeef419b",
+  "source_content_sha256": "4c2bb9dd8bdb7fc9e953ce9bdc9601fc7abac0da01a794db701cfbdec1f241f0",
   "subject": {
     "canonical_slug": "hydrologists",
     "name": "Hydrologists",

@@ -5,6 +5,9 @@
       "fact:employment": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "pending_mapping"
       },
@@ -13750,6 +13753,23 @@
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-2012.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Use test and analysis instruments to locate and troubleshoot faults — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Disassemble faulty equipment and replace defective components — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Retain maintenance, repair, and update records — 75/100; weight=1/3; display.ai_impact_table.task_rows.5[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13990,7 +14010,7 @@
             }
           }
         ],
-        "answer": "Editorial paper trial hypothesis: tools only organize this page's fictional R1/R2/R3 records. Humans recheck M1/M2, the 98 endpoint, 103 exceeding the limit by 1, and pending approval. No validation of clinical equipment, automatic diagnosis, calibration, or release, and no real medical data input. Software recruitment mentions do not establish GenAI adoption, performance, or job replacement.",
+        "answer": "Editorial paper trial hypothesis: tools only organize this page's fictional R1/R2/R3 records. Humans recheck M1/M2, the 98 endpoint, 103 exceeding the limit by 1, and pending approval. No validation of clinical equipment, automatic diagnosis, calibration, or release, and no real medical data input. Software recruitment mentions do not establish GenAI adoption, performance, or job replacement. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "49-9062.00 - Medical Equipment Repairers",
@@ -15993,7 +16013,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Salary Reference",
       "direction-comparison": "Career Direction Comparison",
       "fit": "Career Fit Guide",
@@ -16105,15 +16125,27 @@
         "source_refs": [
           "source-pack-onet-summary"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Medical Equipment Repairers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Testing and Troubleshooting",
@@ -16164,7 +16196,7 @@
       "text": "Medical Equipment Repairers: Work, US Wages, and Entry Paths | FermatMind"
     }
   },
-  "source_content_sha256": "3bf5eedb9d52f57f9dfbdd9eb4cccab4e9fce08ffb912c81bf87e9360db240d7",
+  "source_content_sha256": "27a93f1f2abe647710aa8625c0d9125e1413ba5ad07dd5e060144e1024d340d4",
   "subject": {
     "canonical_slug": "medical-equipment-repairers",
     "name": "Medical Equipment Repairers",

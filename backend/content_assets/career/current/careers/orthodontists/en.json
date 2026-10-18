@@ -8,6 +8,9 @@
       "fact:cn-ortho-private-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -12842,6 +12845,23 @@
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1023.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Examine the dentition, occlusion, and maxillofacial structures, and verify history, imaging, and models. — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Identify malocclusion and select treatment goals and appliances. — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Install and adjust appliances and monitor tooth movement and function. — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13029,7 +13049,7 @@
             }
           }
         ],
-        "answer": "Digital tools can assist with imaging organization, model measurement, patient education, and documentation processes; whether they can be used for specific diagnosis and treatment depends on product validation, organizational adoption, and local rules. Diagnosis, plan selection, appliance adjustment, and efficacy review must still be handled by qualified clinical personnel.",
+        "answer": "Digital tools can assist with imaging organization, model measurement, patient education, and documentation processes; whether they can be used for specific diagnosis and treatment depends on product validation, organizational adoption, and local rules. Diagnosis, plan selection, appliance adjustment, and efficacy review must still be handled by qualified clinical personnel. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET orthodontist tasks",
@@ -14790,7 +14810,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -14974,15 +14994,27 @@
         "source_refs": [
           "nbs-urban-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Orthodontist",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Dentofacial deformity assessment · treatment plan · follow-up adjustment",
@@ -15033,7 +15065,7 @@
       "text": "Orthodontist"
     }
   },
-  "source_content_sha256": "d67aa3fa0db440f27ea29c7c0c6885068dc364b6eb254ee4ea74f2dfef35734a",
+  "source_content_sha256": "fdbd0d185d5e6b4bb4367e2959fc74a009fdda28030be2cd98414299c2a50491",
   "subject": {
     "canonical_slug": "orthodontists",
     "name": "Orthodontist",

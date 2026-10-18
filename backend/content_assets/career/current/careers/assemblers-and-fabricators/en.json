@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24324,7 +24327,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The BLS occupation group statement notes that robots and collaborative robots may reduce demand for some posts, but this cannot be used to infer that this detailed occupation is wholly substituted or that generative AI is a cause. O*NET tasks, software hiring and industry data measure different objects; this round obtained no real AI product effect, adoption rate or employment causality for 51-2092.00. The ILO introduction / extended summary is a cross-occupation exposure method and the NIST introduction is cross-industry voluntary risk background, and the full text or the mapping for this occupation was not read."
+              "The BLS occupation group statement notes that robots and collaborative robots may reduce demand for some posts, but this cannot be used to infer that this detailed occupation is wholly substituted or that generative AI is a cause. O*NET tasks, software hiring and industry data measure different objects; this round obtained no real AI product effect, adoption rate or employment causality for 51-2092.00. The ILO introduction / extended summary is a cross-occupation exposure method and the NIST introduction is cross-industry voluntary risk background, and the full text or the mapping for this occupation was not read. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "assemblers-and-fabricators.ai-impact.ai-impact-table.18",
@@ -32256,6 +32259,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/51-4041.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Work orders and drawings｜O*NET lists checking work orders and drawings to ensure specifications are met; the specific version and material checking rules should be confirmed with the employer. — 50/100; weight=1/3; assemblers-and-fabricators.profile.responsibilities-block.1[0]",
+                  "Assembly and connection｜The BLS occupation group uses tools and machines to assemble; deburring, press fitting, riveting and torque control are examples of specific operations and cannot be treated as uniform tasks for everyone in this occupation. — 0/100; weight=1/3; assemblers-and-fabricators.profile.responsibilities-block.1[2]",
+                  "Quality checks｜O*NET lists checks of product and part quality; the specific inspection decision, marking and isolation and release authority must be checked against the employer's quality system. — 25/100; weight=1/3; assemblers-and-fabricators.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37155,7 +37175,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37483,15 +37503,27 @@
         "source_refs": [
           "operations"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Team assemblers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 51-2092.00 · on-the-job training · quality and safety responsibility",
@@ -37542,7 +37574,7 @@
       "text": "Team assemblers"
     }
   },
-  "source_content_sha256": "8a0600ab45f6da1b1479120ba400030d92c282f9a9ffa9fb593b2800fc95d7b4",
+  "source_content_sha256": "71b31734436c1e2ce867f34874871ce4fea15d307c64ae187b1e66e263c52b9e",
   "subject": {
     "canonical_slug": "assemblers-and-fabricators",
     "name": "Team assemblers",

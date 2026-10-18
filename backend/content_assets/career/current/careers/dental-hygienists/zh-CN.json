@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24335,7 +24338,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025全年美国招聘4技术词：Dentrix5%、Office/Word/Excel各低于1%；招聘提及占比非长期普及、实际采用/熟练率或GenAI提效。OOH手动/动力/超声器械及部分激光属于临床技术，是否AI看产品功能，不能由软件或设备名称判断。 美国自身29-1292就业2025约225300→2035约243200，净增17900/+8.0%，年均15000空缺含替换非每年净新增，自雇1.3%。当前O*NET同为2025/2025—2035，不再称旧期或十年空缺合计。增长预测非AI因果、单人录用概率或中国需求。 本轮未取得自身AI采用、效果或替代率，增长不证明任一任务无替代。"
+              "2025全年美国招聘4技术词：Dentrix5%、Office/Word/Excel各低于1%；招聘提及占比非长期普及、实际采用/熟练率或GenAI提效。OOH手动/动力/超声器械及部分激光属于临床技术，是否AI看产品功能，不能由软件或设备名称判断。 美国自身29-1292就业2025约225300→2035约243200，净增17900/+8.0%，年均15000空缺含替换非每年净新增，自雇1.3%。当前O*NET同为2025/2025—2035，不再称旧期或十年空缺合计。增长预测非AI因果、单人录用概率或中国需求。 本轮未取得自身AI采用、效果或替代率，增长不证明任一任务无替代。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24597,7 +24600,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页没有可复核的本职业量表与任务评分依据，因此保留 Hero 中 AI 数据的缺失态，并在正文说明原因；用一篇论文或一个模型成绩猜分数会制造没有依据的精度。"
+              "本页既有外部资料没有可直接采用的本职业实测任务评分，因此另以本页明示的方法提供AI影响度编辑估算；用一篇论文或一个模型成绩猜分数会制造没有依据的精度。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -32153,6 +32156,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1031.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "核对患者身份、病史、用药与过敏信息以及处置禁忌，必要时先与牙医确认再开始。 — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "按执照与机构授权范围完成检查、洁治、根面平整、抛光与涂氟等处置，不越权操作。 — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "准确记录牙周袋深度、出血与退缩、牙石与菌斑分布，形成可重复、可供牙医诊断的记录。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37694,7 +37714,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37965,15 +37985,27 @@
         "source_refs": [
           "r5-nbs-health"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "口腔卫生师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "口腔预防与牙周护理 · 感染控制 · 患者教育",
@@ -38024,7 +38056,7 @@
       "text": "口腔卫生师"
     }
   },
-  "source_content_sha256": "ca780eb531f915d9628f78c5d51e9f8e742101d0adeee9aa375b5fa3c8c9faf2",
+  "source_content_sha256": "95340cc4988665586fb5b7ac5cbcfc569fa6e8b4848a48a32b3f05d29b05a97b",
   "subject": {
     "canonical_slug": "dental-hygienists",
     "name": "口腔卫生师",

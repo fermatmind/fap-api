@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24692,7 +24695,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the material checked this round contains no AI adoption rate, substitution rate or disappearance year for this occupation. Editorial analysis discusses only fictional documents that may be made public and training records: AI can attempt to organise inspection items, compare two versions of a record and summarise questions to check; these ideas are not evidence of deployment or adoption for this occupation. A duty summary is not AI effectiveness research, and a tool demonstration cannot be used to infer job increases or decreases. Broad reference: the ILO official introduction and extended summary discuss a cross-occupation task exposure method, and the NIST official introduction describes a cross-industry voluntary risk reference; this round the full text or a mapping for this military occupation was not read, and the two cannot fill the occupational adoption and causality gap."
+              "Insufficient evidence: the material checked this round contains no AI adoption rate, substitution rate or disappearance year for this occupation. Editorial analysis discusses only fictional documents that may be made public and training records: AI can attempt to organise inspection items, compare two versions of a record and summarise questions to check; these ideas are not evidence of deployment or adoption for this occupation. A duty summary is not AI effectiveness research, and a tool demonstration cannot be used to infer job increases or decreases. Broad reference: the ILO official introduction and extended summary discuss a cross-occupation task exposure method, and the NIST official introduction describes a cross-industry voluntary risk reference; this round the full text or a mapping for this military occupation was not read, and the two cannot fill the occupational adoption and causality gap. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "artillery-and-missile-crew-members.ai-impact.ai-impact-table.18",
@@ -32583,6 +32586,23 @@
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Weapon system operation｜Carrying out system operation within the authorised scope｜The O*NET summary covers field, air defence and naval crew members; the duties include weapon aiming, firing and firing computer system operation, and it provides no operating parameters or tutorials. — 25/100; weight=1/3; artillery-and-missile-crew-members.profile.responsibilities-block.1[0]",
+                  "Preventive and routine maintenance｜Keeping weapons and related equipment serviceable｜The summary explicitly includes routine maintenance; the specific repair division of labour and authority must be checked against the post system, and not all repair work can be excluded. — 25/100; weight=1/3; artillery-and-missile-crew-members.profile.responsibilities-block.1[1]",
+                  "Radio and wire communications｜Establishing and maintaining communications｜The summary explicitly includes radio and wire communications; navigation, driving and personnel transport are not core duties listed in that summary. — 50/100; weight=1/3; artillery-and-missile-crew-members.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37513,7 +37533,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37829,15 +37849,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Artillery and missile crew members",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "US military occupation classification · field, air defence and naval related crew members",
@@ -37888,7 +37920,7 @@
       "text": "Artillery and missile crew members"
     }
   },
-  "source_content_sha256": "98fadd46edcdc68bb456785b94881c217c54a5c9233adf36850a6b7549068f0a",
+  "source_content_sha256": "4e552410c1fae9cce9046bce3ffba88d625984b3aa9f19c714165fd807430b48",
   "subject": {
     "canonical_slug": "artillery-and-missile-crew-members",
     "name": "Artillery and missile crew members",

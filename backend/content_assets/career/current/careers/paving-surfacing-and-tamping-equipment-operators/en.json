@@ -32,6 +32,9 @@
       "fact:cn-wage-recruitment-gap-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24346,7 +24349,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence gap: no actual AI adoption rate, overall substitution rate, or substitution year for this occupation was verified. O*NET tasks include controlling paving and compacting equipment, coordinating trucks, observing material flow, and checking machine condition. Trialing document search and record organization is an editorial suggestion and cannot use task exposure to prove that on-site equipment is automated. The BLS 2025—2035 figures for this occupation, a 0.9% decline, a net decrease of about 400, and annual average openings of about 3,100 including replacements, are not an AI effect or an individual unemployment probability."
+              "Evidence gap: no actual AI adoption rate, overall substitution rate, or substitution year for this occupation was verified. O*NET tasks include controlling paving and compacting equipment, coordinating trucks, observing material flow, and checking machine condition. Trialing document search and record organization is an editorial suggestion and cannot use task exposure to prove that on-site equipment is automated. The BLS 2025—2035 figures for this occupation, a 0.9% decline, a net decrease of about 400, and annual average openings of about 3,100 including replacements, are not an AI effect or an individual unemployment probability. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "paving-surfacing-and-tamping-equipment-operators.ai-impact.ai-impact-table.18",
@@ -32009,6 +32012,23 @@
                 "publisher": "OSHA",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/preventing-backovers"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Pre-shift inspection — 25/100; weight=1/3; paving-surfacing-and-tamping-equipment-operators.ai-impact.ai-impact-table.99[0]",
+                  "Paving and leveling — 25/100; weight=1/3; paving-surfacing-and-tamping-equipment-operators.ai-impact.ai-impact-table.107[0]",
+                  "Compaction and tamping — 25/100; weight=1/3; paving-surfacing-and-tamping-equipment-operators.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36914,7 +36934,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37206,15 +37226,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Paving, Surfacing, and Tamping Equipment Operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Paving and compaction · equipment and crew collaboration",
@@ -37265,7 +37297,7 @@
       "text": "Equipment operators"
     }
   },
-  "source_content_sha256": "c67d24dfe9fcc4fb3428f5a31e9b0db7ba82f94e35211d40f023a7d9aeeab888",
+  "source_content_sha256": "fad5b09c332366575d9f25c6b356c61af1d57808c26ff7bf212fa2665a2c4cc5",
   "subject": {
     "canonical_slug": "paving-surfacing-and-tamping-equipment-operators",
     "name": "Paving, Surfacing, and Tamping Equipment Operators",

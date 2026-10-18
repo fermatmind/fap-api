@@ -56,6 +56,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25081,7 +25084,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Technical candidates, actual adoption, and wage and employment outcomes are viewed separately. This round obtained no evidence on this occupation's AI reliability, adoption rate, continuous information system investment, or income impact, and recruitment software keywords and BLS projections cannot fill these gaps."
+              "Technical candidates, actual adoption, and wage and employment outcomes are viewed separately. This round obtained no evidence on this occupation's AI reliability, adoption rate, continuous information system investment, or income impact, and recruitment software keywords and BLS projections cannot fill these gaps. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.18",
@@ -32729,6 +32732,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/21-1022.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Health education and behavior support｜Advise clients and community groups on self-care and overall health and risk prevention and hygiene and screening｜Advise clients or community groups on self-care (such as diabetes management), overall health (such as diet or exercise), risk or prevention (such as lead poisoning, human immunodeficiency virus, substance abuse during pregnancy, or domestic violence), hygiene or cleanliness (such as flossing or handwashing), diagnostic screening (such as breast cancer screening, Pap smears, glaucoma tests, or diabetes screening), and social or intellectual development; and teach appropriate parenting behaviors to individuals or families (corresponding to O*NET tasks five, seven, and eleven and supplemental tasks seventeen, eighteen, nineteen, and twenty-one). — 50/100; weight=1/3; community-health-workers.profile.responsibilities-block.1[0]",
+                  "Referral and resource linkage｜Refer community members to needed services and assist with social service applications｜Refer community members to the health services they need; identify or contact high-risk or specific target groups (such as ethnic minorities, low-income groups, or pregnant women); assist families in applying for social services (including Medicaid or the Women, Infants, and Children nutrition program); provide interpretation, translation, or cultural mediation for community members regarding health services or information; and accompany or transport clients to scheduled health services or referral sites (corresponding to O*NET task six and supplemental tasks sixteen, twenty-two, twenty-eight, and twenty-nine). — 50/100; weight=1/3; community-health-workers.profile.responsibilities-block.1[2]",
+                  "Records and follow-up and confirming actions｜Maintain client files and contact clients in various ways to confirm completion of actions｜Maintain client files containing plans, records, and related forms; and contact clients in person, by phone, or in writing to confirm that they have completed the needed or recommended actions (corresponding to O*NET tasks three and four). — 75/100; weight=1/3; community-health-workers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37653,7 +37673,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -38095,15 +38115,27 @@
         "source_refs": [
           "chw-review-ooh"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Community health workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · S",
@@ -38154,7 +38186,7 @@
       "text": "Community health workers"
     }
   },
-  "source_content_sha256": "56c4b68291d0d93b36fc91c90de3fdd1f7dcb9b9ac4c836ab9a824ba9eb69225",
+  "source_content_sha256": "d7ff67b900330084d2586be7a6d2497548adfe74c0ab3711a315e354460ccee6",
   "subject": {
     "canonical_slug": "community-health-workers",
     "name": "Community health workers",

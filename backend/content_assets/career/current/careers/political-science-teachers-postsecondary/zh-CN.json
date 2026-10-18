@@ -26,6 +26,9 @@
       "fact:cn-region-comparison-gap-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24741,7 +24744,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可帮助起草课程大纲、阅读问题、资料摘要和反馈框架，但原文核对、课程目标、评分、公平性、学生信息和学术责任仍由教师与学校承担。ILO 与相关研究测的是任务暴露或能力潜力，不能推成该职业的采用率、替代率或失业时间表；BLS 2025–2035 对精确职业的预测需独立解读。"
+              "AI 可帮助起草课程大纲、阅读问题、资料摘要和反馈框架，但原文核对、课程目标、评分、公平性、学生信息和学术责任仍由教师与学校承担。ILO 与相关研究测的是任务暴露或能力潜力，不能推成该职业的采用率、替代率或失业时间表；BLS 2025–2035 对精确职业的预测需独立解读。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "political-science-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32662,6 +32665,23 @@
                 "publisher": "上海大学招聘系统",
                 "scope": "contextual",
                 "url": "https://jobs.shu.edu.cn/Ads/Ads?a=6cebd89e-fc48-4103-a736-f8d499076d5e"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "教学设计｜编制课程大纲、讲义、阅读材料与作业｜把学习目标对应到课堂讨论、研究方法练习和可评价的产出。 — 75/100; weight=1/3; political-science-teachers-postsecondary.profile.responsibilities-block.1[1]",
+                  "课堂实施｜讲授、引导讨论并回应学生提问｜对不同立场采用一致的证据标准，明确事实、解释和价值判断的区别。 — 25/100; weight=1/3; political-science-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "评价反馈｜批改论文、作业和考试｜依据事先公布的评分标准给出具体反馈，并保存成绩与必要的教学记录。 — 75/100; weight=1/3; political-science-teachers-postsecondary.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37604,7 +37624,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37880,15 +37900,27 @@
           "nbs",
           "editor"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "高校政治学教师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "高校政治学教师 · 课程与研究",
@@ -37939,7 +37971,7 @@
       "text": "高校政治学教师"
     }
   },
-  "source_content_sha256": "4cae5a200303f8bdac14b8a04d3ca622b02bc2debd8b010e142c09878a45885e",
+  "source_content_sha256": "d13130085a238532c0b6d81c35a4c3a1d08b62b358f10b07e8f5118a5c96f054",
   "subject": {
     "canonical_slug": "political-science-teachers-postsecondary",
     "name": "高校政治学教师",

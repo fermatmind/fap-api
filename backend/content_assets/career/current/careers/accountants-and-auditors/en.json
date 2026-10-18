@@ -23540,8 +23540,17 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.19.url": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "published-sources",
+          "path": [
+            "data",
+            "entries",
+            18,
+            "url"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "sources.published-sources.title": {
         "ref": null,
@@ -25059,7 +25068,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Quantitative scoring is unavailable: occupation-specific task inputs, weights, thresholds, calculation formula, method version and scoring date have not been obtained, so historical scores cannot be reproduced and this page does not assign a score. BLS projects continued growth in overall US employment of accountants and auditors and considers that automation of routine tasks will improve efficiency; WEF employer expectations and audit research suggest changes in some roles or staffing structures. AI can assist with voucher recognition, matching and reconciliation, anomaly screening and document drafts, but professional staff must still handle accounting policy judgments, evaluation of audit evidence, professional scepticism and signatory responsibilities. Whether tasks can be reliably automated depends on data, systems, controls and organisational adoption; this does not justify concluding that all junior roles will be replaced first."
+              "The historical score could not be reproduced from the prior records. This page now uses the separately defined editorial task-sample model. BLS projects continued growth in overall US employment of accountants and auditors and considers that automation of routine tasks will improve efficiency; WEF employer expectations and audit research suggest changes in some roles or staffing structures. AI can assist with voucher recognition, matching and reconciliation, anomaly screening and document drafts, but professional staff must still handle accounting policy judgments, evaluation of audit evidence, professional scepticism and signatory responsibilities. Whether tasks can be reliably automated depends on data, systems, controls and organisational adoption; this does not justify concluding that all junior roles will be replaced first. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "ai-impact-table-9",
@@ -32416,13 +32425,20 @@
               },
               {
                 "details": [
-                  "Task inputs, weights, thresholds, calculation formula, method version and date for this occupation's score have not been obtained, so historical values cannot be reproduced from existing materials. This page publishes no quantitative score."
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Accounting | Accounting entries, reconciliation and period-end closing | Record and summarise transactions, reconcile accounts and systems, resolve differences, make adjusting entries and close the period. — 75/100; weight=1/3; responsibilities-block-1[1]",
+                  "Shared | Financial analysis, review and communication with management | Analyse financial position, operating results, cash flows and unusual movements, and explain drivers, risks and implications for decisions. — 75/100; weight=1/3; responsibilities-block-1[3]",
+                  "Auditing | Evaluation of audit evidence, opinion formation and communication | Evaluate evidence, misstatements and control deficiencies, form an audit opinion, and communicate with management and those charged with governance. — 50/100; weight=1/3; responsibilities-block-1[5]"
                 ],
+                "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "This record explains a gap in historical supporting evidence, not a scoring method or evidence of effectiveness. The qualitative task analysis below does not derive an automation rate, probability of jobs disappearing or a 0–10 score.",
-                "name": "FermatMind gap in historical scoring support",
-                "publisher": "FermatMind / Fermat Test",
-                "url": null
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -37352,7 +37368,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay references",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37598,13 +37614,13 @@
         ]
       },
       {
-        "derivation": "Occupation-specific task inputs, weights, thresholds, calculation formula, method version and scoring date have not been obtained, so historical precise scores cannot be reproduced. This page retains only qualitative task analysis.",
-        "display_value": "No verifiable quantitative score available",
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
         "fact_id": "fermatmind-accountants-task-exposure",
-        "market": "No reproducible occupation-specific scoring basis obtained",
-        "measure": "Task-level quantitative scoring (not scored on this page)",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
         "occupation_scope": "Accountants and Auditors",
-        "period": "Historical scoring support is incomplete; reviewed 2026-10-08",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -37637,10 +37653,10 @@
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-accountants-task-exposure",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · CEI",
@@ -37691,7 +37707,7 @@
       "text": "Accountants and Auditors"
     }
   },
-  "source_content_sha256": "eaba571617fc8b158ac20ff85aa592493d9589c00ee2b6151e99c00f99fed44d",
+  "source_content_sha256": "75969242376deda25619984024320fcab2bf52eb6278a63dd0cdbdb249ce3a72",
   "subject": {
     "canonical_slug": "accountants-and-auditors",
     "name": "Accountants and Auditors",

@@ -26,6 +26,9 @@
       "fact:compliance-review-cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24983,7 +24986,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Distinguish tool capability, actual adoption and job outcomes: policy comparison, material organization, sampling lists and report drafts are suggested uses to be verified on this page; technology keywords or task exposure do not prove sustained industry investment or adoption effects."
+              "Distinguish tool capability, actual adoption and job outcomes: policy comparison, material organization, sampling lists and report drafts are suggested uses to be verified on this page; technology keywords or task exposure do not prove sustained industry investment or adoption effects. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "compliance-managers.ai-impact.ai-impact-table.18",
@@ -32394,6 +32397,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/13-1041.04"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Compliance policy and procedures and training｜Develop or direct compliance policies and procedures and verify documentation and implementation and communication and deliver training｜Develop or direct the development or implementation of compliance-related policies and procedures in the organization; verify that all regulatory policies and procedures have been documented, implemented and communicated; distribute written policies and procedures related to compliance activities; provide training to employees on compliance-related topics and policies or procedures; and advise internal management or business partners on the implementation or operation of compliance programs. — 75/100; weight=1/3; compliance-managers.profile.responsibilities-block.1[0]",
+                  "Risk identification and monitoring and review｜Identify compliance issues and monitor the compliance system and conduct periodic internal reviews or audits｜Identify compliance issues that require follow-up or investigation; monitor the compliance system to ensure it is effective; conduct periodic internal reviews or audits to ensure that compliance procedures are followed; design or implement improvements in communicating, monitoring or enforcing compliance standards; verify that software technology is in place to provide adequate oversight and monitoring; and oversee internal reporting systems. — 75/100; weight=1/3; compliance-managers.profile.responsibilities-block.1[1]",
+                  "Internal investigation and disciplinary handling｜Conduct or direct internal investigations and collaborate with human resources on disciplinary matters｜Conduct or direct internal investigations of compliance issues; collaborate with human resources to ensure a consistent disciplinary approach where compliance standards are violated. — 25/100; weight=1/3; compliance-managers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37322,7 +37342,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37640,15 +37660,27 @@
         "source_refs": [
           "compliance-review-nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Compliance Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · CE",
@@ -37699,7 +37731,7 @@
       "text": "Compliance Managers"
     }
   },
-  "source_content_sha256": "2b0bdaa19e0482d203e11c451a8fd6210f5ce27a6fb67c157f20df0e735d5367",
+  "source_content_sha256": "6e566b4c0d1ce7fbf46b750dac4d62098969b897c4c26046742bcd061840fbe0",
   "subject": {
     "canonical_slug": "compliance-managers",
     "name": "Compliance Managers",

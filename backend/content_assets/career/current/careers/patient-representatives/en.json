@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24422,7 +24425,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with service directory search and record summaries, but there is no evidence supporting the disappearance of the entire patient representative job; patient understanding and safety escalation remain human responsibilities."
+              "AI can assist with service directory search and record summaries, but there is no evidence supporting the disappearance of the entire patient representative job; patient understanding and safety escalation remain human responsibilities. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "patient-representatives.ai-impact.ai-impact-table.18",
@@ -32543,6 +32546,23 @@
                 "publisher": "The Fourth Affiliated Hospital of Guangzhou Medical University",
                 "scope": "employer_specific",
                 "url": "https://www.gydfsy.com/TalentRecruitment/info.aspx?itemid=6482&parent="
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Needs intake | Interview patients or representatives to identify service barriers and concerns | Record facts and authorization scope. — 25/100; weight=1/3; patient-representatives.profile.responsibilities-block.1[0]",
+                  "Review and confirm | Verify referral conditions with clinical, administrative, or community resources | Confirm patient understanding. — 25/100; weight=1/3; patient-representatives.profile.responsibilities-block.1[3]",
+                  "Documentation | Record explanations, referrals, and follow-up arrangements | Keep only necessary information. — 75/100; weight=1/3; patient-representatives.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37468,7 +37488,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37806,15 +37826,27 @@
           "patient-nbs-current",
           "patient-industry"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Patient Representatives",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 29-2099.08 · Patient Representatives",
@@ -37865,7 +37897,7 @@
       "text": "Patient representatives: work content, pay basis, and service coordination"
     }
   },
-  "source_content_sha256": "d8083a4ac63db06c399cbf66d084409feebf7c5a02f86861693b39e6bfd9a3ac",
+  "source_content_sha256": "5f44ef66620c0aec5c14303eabd05dd434a71072f629d5c8d55077894b9ec49e",
   "subject": {
     "canonical_slug": "patient-representatives",
     "name": "Patient Representatives",

@@ -41,6 +41,9 @@
       "fact:comm-review-us-openings-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24992,7 +24995,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试用候选：在课程/院校允许范围内，用虚构或获准资料试课程材料、文献条目、反馈或记录草稿整理；对照原文核引用、事实、遗漏、评价依据及复核总耗时。本轮未取得本职业生成式AI可靠性、采用率或提效实证，不能称已完成、较可靠或显著改变。"
+              "编辑试用候选：在课程/院校允许范围内，用虚构或获准资料试课程材料、文献条目、反馈或记录草稿整理；对照原文核引用、事实、遗漏、评价依据及复核总耗时。本轮未取得本职业生成式AI可靠性、采用率或提效实证，不能称已完成、较可靠或显著改变。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "communications-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32390,6 +32393,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/25-9031.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "课程设计与材料准备｜设计课程并准备大纲与作业与讲义｜准备教学大纲、作业与讲义等课程材料；规划、评估并修订课程设置、课程内容、课程材料与教学方法；挑选并获取教材等材料与用品（对应 O*NET 任务第二与第十与第十三与第十九项）。 — 75/100; weight=1/3; communications-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "课堂讲授与讨论主持｜备课并授课并引导课堂讨论｜就公共演讲、媒介批评与口头传统等主题向本科生或研究生备课并授课；发起、引导并主持课堂讨论（对应 O*NET 任务第三与第六项）。 — 25/100; weight=1/3; communications-teachers-postsecondary.profile.responsibilities-block.1[1]",
+                  "作业与考试评价｜评阅作业与论文并编制与实施考试｜评阅并给学生作业、课程论文与试卷评分；编制并实施考试或把该项工作布置给他人；维护学生出勤、成绩与其他要求的记录（对应 O*NET 任务第一与第四与第八项）。 — 50/100; weight=1/3; communications-teachers-postsecondary.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37325,7 +37345,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37706,15 +37726,27 @@
         "source_refs": [
           "comm-review-nbs-wages"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "传播学教师（高等教育）",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · SIA",
@@ -37765,7 +37797,7 @@
       "text": "传播学教师（高等教育）"
     }
   },
-  "source_content_sha256": "96b68947162436eb2ceb4a7e081312223f736bad82a59a8d76fc4a1104a78043",
+  "source_content_sha256": "149356ab2e981043111da15dbf051b599a6c92f7ad3cc6194fe5e6088e228a2c",
   "subject": {
     "canonical_slug": "communications-teachers-postsecondary",
     "name": "传播学教师（高等教育）",

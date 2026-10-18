@@ -53,6 +53,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24739,7 +24742,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页把工具能力、组织采用与就业结果分开：语言与图像模型已能生成文案变体与素材摘要，但 O*NET 的核心任务仍需人完成受众判断、主张取舍、跨团队协调与发布授权；采用还受素材版权、数据授权与平台规则约束；就就业而言，O*NET（2025—2035 年）预测下降（-1% 或更低），BLS（2025—2035 年）另定性提到技术（含 AI）可能削弱需求，均无整体取代的时间或概率。"
+              "本页把工具能力、组织采用与就业结果分开：语言与图像模型已能生成文案变体与素材摘要，但 O*NET 的核心任务仍需人完成受众判断、主张取舍、跨团队协调与发布授权；采用还受素材版权、数据授权与平台规则约束；就就业而言，O*NET（2025—2035 年）预测下降（-1% 或更低），BLS（2025—2035 年）另定性提到技术（含 AI）可能削弱需求，均无整体取代的时间或概率。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.18",
@@ -32609,6 +32612,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/11-2011.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "核心｜界定受众与目标｜研究消费者意见与购买习惯，识别目标受众，并写下活动目标、预算边界与衡量方式。 — 75/100; weight=1/3; advertising-and-promotions-managers.profile.responsibilities-block.1[0]",
+                  "核心｜创意与材料制作｜检查版面与广告文案，编辑脚本、音频、视频与其他促销材料，使其符合规范。 — 75/100; weight=1/3; advertising-and-promotions-managers.profile.responsibilities-block.1[1]",
+                  "常见｜跨部门协调｜协调销售、平面设计、媒体、财务与研究等部门的活动，并与部门负责人讨论合同与媒介选择。 — 25/100; weight=1/3; advertising-and-promotions-managers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37514,7 +37534,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37939,15 +37959,27 @@
         "source_refs": [
           "weforum"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "广告与促销经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "受众与主张证据 · 素材与脚本规格 · 媒介与预算边界",
@@ -37998,7 +38030,7 @@
       "text": "广告与促销经理"
     }
   },
-  "source_content_sha256": "80e395ffaed627c0dd4f389d1aaed0fd24dbdf25c392ff9431723b8968db100d",
+  "source_content_sha256": "f6f648f05b37b4c4962394b3a63ce9bb5ef468b23d0cf41358f339ba6d2025e8",
   "subject": {
     "canonical_slug": "advertising-and-promotions-managers",
     "name": "广告与促销经理",

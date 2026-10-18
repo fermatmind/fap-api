@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-mean-period-current": {
         "status": "pending_mapping"
       },
@@ -25063,7 +25066,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS明确技术包括AI可能减少搭建操作广播系统所需技术员；不能保证故障判断等任务永不变化，也不能从整体预测推出本职业AI替代率。编辑核对：测量输入、异常升级、安全与播出权限按真实系统和岗位确认。"
+              "BLS明确技术包括AI可能减少搭建操作广播系统所需技术员；不能保证故障判断等任务永不变化，也不能从整体预测推出本职业AI替代率。编辑核对：测量输入、异常升级、安全与播出权限按真实系统和岗位确认。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.18",
@@ -32584,6 +32587,23 @@
                 "publisher": "费马测试职业内容编辑组",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/27-4012.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "设备安装与配置｜按手册安装并配置设备，维护台内计算机与网络并做校准｜可复核的配置参数与设备台账。 — 25/100; weight=1/3; broadcast-technicians.profile.responsibilities-block.1[1]",
+                  "播出值守与调整｜监看收发信号与监视器，调节音量、信号强度与清晰度并调整视频保真度｜按班次完成的运行参数记录。 — 50/100; weight=1/3; broadcast-technicians.profile.responsibilities-block.1[2]",
+                  "故障处置与检修｜排查设备故障、做应急修复并跟踪维修落实，按规程保养｜故障处理与检修记录。 — 25/100; weight=1/3; broadcast-technicians.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37553,7 +37573,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37893,15 +37913,27 @@
         "source_refs": [
           "oews2023-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "广播技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 27-4012.00 · 播出链路值守 / 发射与传输 / 设备检修 · 机房与台站",
@@ -37952,7 +37984,7 @@
       "text": "广播技术员"
     }
   },
-  "source_content_sha256": "264e850ab9ccb0823ddfec3b7a0cf6e16b79019a3c2d6589d5289fc64c94a564",
+  "source_content_sha256": "0e9596ab5052507cd8e1be9b9f693d097e6d0ddf401fb46200d4ab9ef1f9a944",
   "subject": {
     "canonical_slug": "broadcast-technicians",
     "name": "广播技术员",

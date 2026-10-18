@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24774,7 +24777,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未核得足病医生专属AI采用率、替代率或任务级评分依据。生成式AI可作为已记录病例文本整理、公开资料检索和病历草稿的编辑试用建议；这些不是临床有效性证据。患者身份、体检、影像化验判读、诊疗和转诊仍须合格医师核实。"
+              "证据不足：未核得足病医生专属AI采用率、替代率或任务级评分依据。生成式AI可作为已记录病例文本整理、公开资料检索和病历草稿的编辑试用建议；这些不是临床有效性证据。患者身份、体检、影像化验判读、诊疗和转诊仍须合格医师核实。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "podiatrists.ai-impact.ai-impact-table.18",
@@ -32654,6 +32657,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/31-9092.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "临床评估｜在授权下体检并核影像或化验｜区分事实与待确认。 — 50/100; weight=1/3; podiatrists.profile.responsibilities-block.1[1]",
+                  "治疗或转诊｜在训练与执照范围内实施｜全身疾病线索交相关医师。 — 25/100; weight=1/3; podiatrists.profile.responsibilities-block.1[3]",
+                  "记录随访｜写明依据、沟通、处置与复查安排｜标记待核事项。 — 75/100; weight=1/3; podiatrists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37560,7 +37580,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37828,15 +37848,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "足病医生",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "足病医生 · 足踝诊疗",
@@ -37887,7 +37919,7 @@
       "text": "足病医生职业指南：足踝诊疗、美国工资与入行路径"
     }
   },
-  "source_content_sha256": "994da5ff9485497240502283e497593ea9e16651117fd92c44891275257622e0",
+  "source_content_sha256": "4ef9863be2960f66e52665431ba9278adaf064ea35f93b47e7d4933bcc09f752",
   "subject": {
     "canonical_slug": "podiatrists",
     "name": "足病医生",

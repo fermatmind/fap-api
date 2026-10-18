@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24752,7 +24755,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The AI-assisted steps this page suggests testing are material categorization, draft plans, cost verification, and meeting summaries, and they must be validated in a specific project. Budget trade-offs, technical changes, staffing, and approvals remain the responsibility of authorized personnel. Current BLS basis: 220,900 jobs in 2025 and 233,100 in 2035, OOH rounded growth 6% (detail 5.5%), net increase 12,200, averaging 14,900 openings per year over 2025—2035. Projections are not AI replacement rates."
+              "The AI-assisted steps this page suggests testing are material categorization, draft plans, cost verification, and meeting summaries, and they must be validated in a specific project. Budget trade-offs, technical changes, staffing, and approvals remain the responsibility of authorized personnel. Current BLS basis: 220,900 jobs in 2025 and 233,100 in 2035, OOH rounded growth 6% (detail 5.5%), net increase 12,200, averaging 14,900 openings per year over 2025—2035. Projections are not AI replacement rates. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "architectural-and-engineering-managers.ai-impact.ai-impact-table.18",
@@ -32538,6 +32541,23 @@
                 "publisher": "American Institute of Architects",
                 "scope": "contextual",
                 "url": "https://www.aia.org/sites/default/files/2026-01/Guidance%20for%20the%20Responsible%20Use%20of%20AI%20by%20Architecture%20and%20Design%20Firms.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Project planning and objectives and scope management｜Turning requirements into a checkable plan｜Define project scope and objectives and main deliverables with clients, prepare budget and schedule and resource plans, assess technical and resource and market feasibility, and explain the main trade-offs and assumptions. — 50/100; weight=1/3; architectural-and-engineering-managers.profile.responsibilities-block.1[0]",
+                  "Cross-disciplinary coordination and team and personnel management｜Keeping multiple parties moving toward the same objective｜Coordinate engineering and R&D disciplines and external stakeholders and organize reviews and decisions, guide recruitment and deployment and evaluation of project personnel, and handle conflicts. — 25/100; weight=1/3; architectural-and-engineering-managers.profile.responsibilities-block.1[1]",
+                  "Budget and contract and schedule management｜Delivering the project under constraints｜Prepare and review budget and tender and contract documents, track schedule and cost and delivery quality, manage expenditures and approvals, and handle changes and claims. — 75/100; weight=1/3; architectural-and-engineering-managers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37441,7 +37461,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37757,15 +37777,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Architectural and Engineering Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Management responsibilities: project planning and objectives and scope management · cross-disciplinary coordination and compliance review · budget and contract and schedule management · team and personnel and standards development",
@@ -37816,7 +37848,7 @@
       "text": "Architectural and Engineering Managers"
     }
   },
-  "source_content_sha256": "dfe2671f4ee6451619601a7002414e5960ab3c77328078f55fd0f5dbb186fc2f",
+  "source_content_sha256": "0e29d1c8e079f4ac6fb07e593117f94c44e5d07ee9e3f23fb30a1d283d4473f4",
   "subject": {
     "canonical_slug": "architectural-and-engineering-managers",
     "name": "Architectural and Engineering Managers",

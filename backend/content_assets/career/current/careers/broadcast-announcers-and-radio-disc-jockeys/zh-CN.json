@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25080,7 +25083,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得27-3011职业级AI采用率或因AI减员比例。BLS明确讨论电台合并、无需现场DJ或使用AI DJ的可能；工具和审查责任安排不保证岗位不变。"
+              "证据不足：本轮未取得27-3011职业级AI采用率或因AI减员比例。BLS明确讨论电台合并、无需现场DJ或使用AI DJ的可能；工具和审查责任安排不保证岗位不变。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.18",
@@ -32438,6 +32441,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/27-2011.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "选题与备稿｜研究背景资料，编写或改写播报材料，按时间档核算字数与时长｜一份注明来源与未核实事项的播出稿件。 — 75/100; weight=1/3; broadcast-announcers-and-radio-disc-jockeys.profile.responsibilities-block.1[0]",
+                  "播出与串联｜按节目单操作播出控制台，播报新闻与商业信息，播放并排播音乐并完成报台与串联｜按节目单完成的播出与完整节目日志。 — 75/100; weight=1/3; broadcast-announcers-and-radio-disc-jockeys.profile.responsibilities-block.1[2]",
+                  "嘉宾访谈｜准备访谈提纲与嘉宾资料，按提纲推进并在偏离时把话题带回｜访谈提纲、嘉宾资料与播出版本说明。 — 25/100; weight=1/3; broadcast-announcers-and-radio-disc-jockeys.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37360,7 +37380,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37628,15 +37648,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "广播主持人电台唱片唱片骑师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 27-3011.00 · 播报与串联 / 访谈与音乐编排 · 室内与固定时间档",
@@ -37687,7 +37719,7 @@
       "text": "广播播音员与电台唱片骑师"
     }
   },
-  "source_content_sha256": "8be830718764127cbf0c4292a1af8d0b5fd7900e6dcc344ec2997eba59c2f5f1",
+  "source_content_sha256": "83c3d3ea606fc091329fba5b6bc4ef3450f43cfcab2e5b2510ba5cb6553a0cb4",
   "subject": {
     "canonical_slug": "broadcast-announcers-and-radio-disc-jockeys",
     "name": "广播播音员与电台唱片骑师",

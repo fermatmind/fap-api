@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24754,7 +24757,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：公共关系经理实际AI采用率、传播质量收益、净岗位影响与可复算任务评分。舆情摘要、问答草稿和分类可作为获准试点候选；事实核查、法律风险、公众承诺和最终发布由获授权人员负责。"
+              "证据不足：公共关系经理实际AI采用率、传播质量收益、净岗位影响与可复算任务评分。舆情摘要、问答草稿和分类可作为获准试点候选；事实核查、法律风险、公众承诺和最终发布由获授权人员负责。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "public-relations-managers.ai-impact.ai-impact-table.18",
@@ -32531,6 +32534,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry context",
                 "url": "https://www.stats.gov.cn/xxgk/tjbz/gjtjbz/202008/P020200811608157848094.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "制定策略｜定目标、核心信息、渠道和衡量指标｜与组织目标一致。 — 50/100; weight=1/3; public-relations-managers.profile.responsibilities-block.1[1]",
+                  "配置资源｜安排团队、预算、发言人和外部协作｜核授权。 — 25/100; weight=1/3; public-relations-managers.profile.responsibilities-block.1[2]",
+                  "审核发布｜核新闻稿、声明和问答口径｜敏感内容升审。 — 75/100; weight=1/3; public-relations-managers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37436,7 +37456,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37704,15 +37724,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "公共关系经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "公共关系经理 · 任务核对",
@@ -37763,7 +37795,7 @@
       "text": "公共关系经理"
     }
   },
-  "source_content_sha256": "2c9b7ae9d70f586b4265fdcd3f17d4bd1e148d0a13da497b9354227cb120be87",
+  "source_content_sha256": "3af5c6e039abbaecac735929ca94ff913e56d9d051b21c83520cf39319a41c89",
   "subject": {
     "canonical_slug": "public-relations-managers",
     "name": "公共关系经理",

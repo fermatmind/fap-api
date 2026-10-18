@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24856,7 +24859,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: AI exposure, adoption/efficiency/employment causality absent. No low-exposure/near-term non-replacement guarantees. Schedules/documents/inventory/version comparisons are trials; field lifting/driving/service/statutory judgments follow jurisdiction/institution duties."
+              "Insufficient evidence: AI exposure, adoption/efficiency/employment causality absent. No low-exposure/near-term non-replacement guarantees. Schedules/documents/inventory/version comparisons are trials; field lifting/driving/service/statutory judgments follow jurisdiction/institution duties. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.18",
@@ -32472,6 +32475,23 @@
                 "publisher": "National law; government republication",
                 "scope": "personal information law",
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Greet/guide/escort, assist limousines/casket closing — 25/100; weight=1/3; funeral-attendants.ai-impact.ai-impact-table.97[0]",
+                  "Move caskets into rooms/chapels, arrange wreaths/lights — 0/100; weight=1/3; funeral-attendants.ai-impact.ai-impact-table.101[0]",
+                  "Clean/drive vehicles, join processions/pallbear/assist parking — 25/100; weight=1/3; funeral-attendants.ai-impact.ai-impact-table.105[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37412,7 +37432,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37621,15 +37641,27 @@
           "census",
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Funeral Attendants",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Funeral attendants · Tasks, deliverables, and responsibility boundaries",
@@ -37680,7 +37712,7 @@
       "text": "Funeral Attendants"
     }
   },
-  "source_content_sha256": "b71dde7c01dddb3da94a665c34051ae8304cd45fcb8f5328c406982bc3ef8549",
+  "source_content_sha256": "5b0f2b6c0f1a63362567e293ab62ff98f125c1e9778f226fb614dca88ebb422b",
   "subject": {
     "canonical_slug": "funeral-attendants",
     "name": "Funeral Attendants",

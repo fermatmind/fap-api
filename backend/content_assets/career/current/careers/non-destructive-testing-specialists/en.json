@@ -17,6 +17,9 @@
       "fact:data-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:interest-code": {
         "status": "pending_mapping"
       },
@@ -13968,6 +13971,23 @@
                 "publisher": "Current ASNT NDT Level II requirements",
                 "scope": "contextual",
                 "url": "https://certification.asnt.org/certification/asnt-ndt-level-ii"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Calibrate and operate inspection equipment — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Perform ultrasonic, radiographic and surface-method inspections — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Interpret results and evaluate defects — 50/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -14155,7 +14175,7 @@
             }
           }
         ],
-        "answer": "Tools and digital equipment may assist with plan drafts, standards searches, record organization and imaging analysis. Qualified personnel must still perform method selection, parameter setting, defect evaluation and report signing according to standards.",
+        "answer": "Tools and digital equipment may assist with plan drafts, standards searches, record organization and imaging analysis. Qualified personnel must still perform method selection, parameter setting, defect evaluation and report signing according to standards. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 17-3029.01 occupational profile",
@@ -15930,7 +15950,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -16129,15 +16149,27 @@
           "onet-wages-17302901",
           "onet-summary-17302901"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Nondestructive testing specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Defect inspection without damaging the object",
@@ -16188,7 +16220,7 @@
       "text": "Nondestructive testing specialists"
     }
   },
-  "source_content_sha256": "cd147f39feb15b9924dc224ffa85c634307b83e522619032e800f8ef104f7cb8",
+  "source_content_sha256": "37c1f3a4d13f045d331b3cd94aafd01575704dc16307a691c580fafa5b089ff2",
   "subject": {
     "canonical_slug": "non-destructive-testing-specialists",
     "name": "Nondestructive testing specialists",

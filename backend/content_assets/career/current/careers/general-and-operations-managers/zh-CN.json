@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25484,7 +25487,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得11-1021精确对应的生成式AI暴露评分、组织采用率或效率效果研究，不给本职业暴露等级。 O*NET任务显示需要分析绩效、排班、跨部门协调与决策；2025年美国招聘广告中Office和Excel各被11%的关联去重广告提及。编辑建议先试验报表汇总、草稿整理与数据核对，并记录准确性、耗时与复核成本。软件提及不是AI采用证据，技术可行、组织采用与就业结果需分别核验。"
+              "证据不足：本页未取得11-1021精确对应的生成式AI暴露评分、组织采用率或效率效果研究，不给本职业暴露等级。 O*NET任务显示需要分析绩效、排班、跨部门协调与决策；2025年美国招聘广告中Office和Excel各被11%的关联去重广告提及。编辑建议先试验报表汇总、草稿整理与数据核对，并记录准确性、耗时与复核成本。软件提及不是AI采用证据，技术可行、组织采用与就业结果需分别核验。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "general-and-operations-managers.ai-impact.ai-impact-table.18",
@@ -33017,6 +33020,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "11-1021.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/11-1021.00#Industries"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成 — 75/100; weight=1/3; general-and-operations-managers.ai-impact.ai-impact-table.95[0]",
+                  "编制员工排班表并分配具体职责并执行人事职能 — 50/100; weight=1/3; general-and-operations-managers.ai-impact.ai-impact-table.103[0]",
+                  "识别成本超支或质量事故或供应中断或客户投诉并界定责任与时限 — 25/100; weight=1/3; general-and-operations-managers.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37957,7 +37977,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38112,15 +38132,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "总经理和运营经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "总经理和运营经理 · 任务、交付与责任边界",
@@ -38171,7 +38203,7 @@
       "text": "总经理和运营经理"
     }
   },
-  "source_content_sha256": "6a3dd9bbde1c6b1b9be318c141a8c19b58ec8f45e0375d437d51b70ca1b9716f",
+  "source_content_sha256": "2c29461fcaeca5c9d950ee04c54bad0945ab51eb2ebee3d1cfd844b2499e9a94",
   "subject": {
     "canonical_slug": "general-and-operations-managers",
     "name": "总经理和运营经理",

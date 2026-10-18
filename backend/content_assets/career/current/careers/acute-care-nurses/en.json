@@ -44,6 +44,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24790,7 +24793,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no task-level AI scoring for acute care nurses, actual hospital adoption, patient outcomes or causal employment displacement data were obtained. AI use is only an editorial candidate for controlled information organization; it does not replace clinical judgment, authorized interventions, anomaly escalation or documentation responsibility."
+              "Insufficient evidence: no task-level AI scoring for acute care nurses, actual hospital adoption, patient outcomes or causal employment displacement data were obtained. AI use is only an editorial candidate for controlled information organization; it does not replace clinical judgment, authorized interventions, anomaly escalation or documentation responsibility. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "acute-care-nurses.ai-impact.ai-impact-table.18",
@@ -32741,6 +32744,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/31-1131.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Assess｜Condition and risk identification｜Collect and verify the patient's status and existing information, and escalate through the institutional pathway when an acute change is found. — 25/100; weight=1/3; acute-care-nurses.profile.responsibilities-block.1[0]",
+                  "Treat｜Fulfil nursing duties lawfully｜Registered nurses handle permitted nursing care according to their duties; they notify the physician immediately of a critical condition and perform the necessary rescue duties in an emergency, and a nurse must not be portrayed as only waiting for instructions. The web exercise provides no procedural steps. — 0/100; weight=1/3; acute-care-nurses.profile.responsibilities-block.1[3]",
+                  "Document｜Traceability, referral and boundaries｜Record the assessment, what was performed, the reactions and the handoff completely; when out of scope or when information is insufficient, stop and hand over to an authorized person. — 75/100; weight=1/3; acute-care-nurses.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37646,7 +37666,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -38166,15 +38186,27 @@
         "source_refs": [
           "source-nbs-health-2025-revision"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Acute care nurses",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Acute status observation · nursing coordination · information handoff",
@@ -38225,7 +38257,7 @@
       "text": "Acute care nurses: duties, qualifications, pay basis and career path"
     }
   },
-  "source_content_sha256": "11ecd883f8da915eea9d6a549b1118469888ee686e8d5ff2f91c98bc7b8798d7",
+  "source_content_sha256": "24ece13cbf55bfe5077623eb934964dea3cd560a7afccfb96dfbdefb4b3c33d6",
   "subject": {
     "canonical_slug": "acute-care-nurses",
     "name": "Acute care nurses",

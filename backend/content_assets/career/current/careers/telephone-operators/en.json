@@ -8,6 +8,9 @@
       "fact:cn-info-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25423,7 +25426,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has no verifiable 43-2021 task-level AI ratings. Directory retrieval and record drafts can be explored, but current versions, unique matches, connection statuses, and information permissions still require implementation; no individual unemployment probability is given."
+              "Insufficient evidence: this page has no verifiable 43-2021 task-level AI ratings. Directory retrieval and record drafts can be explored, but current versions, unique matches, connection statuses, and information permissions still require implementation; no individual unemployment probability is given. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "telephone-operators.display.ai_impact_table.answer",
@@ -32683,6 +32686,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inquiry | Check needs and directory | Restate the requested organization and department, check the current directory, and clarify missing information first. — 75/100; weight=1/3; telephone-operators.display.responsibilities_block.01[0]",
+                  "Inquiry | Clarify names and clues | Check duplicate names, spelling, or location rather than choosing routes from vague abbreviations. — 50/100; weight=1/3; telephone-operators.display.responsibilities_block.02[0]",
+                  "Connection | Connection and status records | Attempt connections through permitted procedures, distinguishing waiting, connected, and handover outcomes. — 75/100; weight=1/3; telephone-operators.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37926,7 +37946,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38086,15 +38106,27 @@
         "source_refs": [
           "nbs-info-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Telephone Operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET43-2021 telephone operations",
@@ -38145,7 +38177,7 @@
       "text": "Telephone Operators"
     }
   },
-  "source_content_sha256": "57a9c9515d4d8ee97d7d2f272ae6954e839c62d331db87ad637ab555fff28ae1",
+  "source_content_sha256": "48c725d2a0c9bbcca9fad5fcf78c0d21b2bdea34029af61cf1054af354938fdf",
   "subject": {
     "canonical_slug": "telephone-operators",
     "name": "Telephone Operators",

@@ -38,6 +38,9 @@
       "fact:employment-setting": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24424,7 +24427,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The official introduction page for UNESCO2023 guidance on generative AI in education and research discusses human-centered validation, data privacy, and course/teaching/research design. Here it provides broad background only, not occupational adoption rates, experimental teaching effects, job replacement, or statutory authorization in China. Editorial tool scenarios still require checking outputs against actual course and research tasks, system capabilities, and information permissions. This round did not obtain occupational adoption rates, comparative task effects, wage/employment causality, or a year of disappearance."
+              "The official introduction page for UNESCO2023 guidance on generative AI in education and research discusses human-centered validation, data privacy, and course/teaching/research design. Here it provides broad background only, not occupational adoption rates, experimental teaching effects, job replacement, or statutory authorization in China. Editorial tool scenarios still require checking outputs against actual course and research tasks, system capabilities, and information permissions. This round did not obtain occupational adoption rates, comparative task effects, wage/employment causality, or a year of disappearance. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "anthropology-and-archeology-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32153,6 +32156,23 @@
                 "publisher": "UNESCO",
                 "scope": "contextual",
                 "url": "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Teaching and course development | Explain the discipline clearly | Prepare and teach undergraduate and graduate anthropology and archeology courses, prepare syllabi, assignments, and lecture notes, initiate and lead classroom discussions, and plan, evaluate, and revise course content and teaching methods. — 50/100; weight=1/3; anthropology-and-archeology-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "Student supervision | Guide students' academic training without guaranteeing learning outcomes | Hold regular office hours to advise students, supervise theses, internships, and research, supervise student laboratory and fieldwork, advise on academic and career development, and write recommendation letters. — 25/100; weight=1/3; anthropology-and-archeology-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "Research and publication | Produce ongoing reviewable outputs | Conduct research in the field and ethnographic fieldwork, publish and present findings in professional journals, monographs, electronic media, or academic conferences, and review manuscripts for scholarly journals and monographs. — 50/100; weight=1/3; anthropology-and-archeology-teachers-postsecondary.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37051,7 +37071,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese wage references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37447,15 +37467,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Anthropology and Archeology Teachers, Postsecondary",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Teaching and research: course design and teaching · Thesis, laboratory, and fieldwork supervision · Research publication and funding applications",
@@ -37506,7 +37538,7 @@
       "text": "Anthropology and Archeology Teachers, Postsecondary"
     }
   },
-  "source_content_sha256": "6051a5ed74a073ea5b07666bce5f462f1c6daea403fd17f04bd1bda0dbcc64fc",
+  "source_content_sha256": "4b57c9355ab73d5c1cf2cb82fad16e4b3437b8446ce79e86968d3829c79b94e8",
   "subject": {
     "canonical_slug": "anthropology-and-archeology-teachers-postsecondary",
     "name": "Anthropology and Archeology Teachers, Postsecondary",

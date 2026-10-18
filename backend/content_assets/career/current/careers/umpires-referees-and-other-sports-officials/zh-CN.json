@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25445,7 +25448,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先区分规则与核分文字辅助、特定足球赛事的越位技术，以及就业结果。已核FIFA部署范围及IFAB人工最终决定，但不能推全国采用、节时、正确率或替代比例；本页没有可复核FermatMind任务评分，不填分数。"
+              "先区分规则与核分文字辅助、特定足球赛事的越位技术，以及就业结果。已核FIFA部署范围及IFAB人工最终决定，但不能推全国采用、节时、正确率或替代比例；既有外部资料未提供可直接采用的实测可复核FermatMind任务评分，另列编辑估算分数。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "umpires-referees-and-other-sports-officials.display.ai_impact_table.answer",
@@ -32794,6 +32797,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "赛中｜观察与临场判断｜选择观察位置，识别规则违反，按规则作出相应判罚或评分。 — 25/100; weight=1/3; umpires-referees-and-other-sports-officials.display.responsibilities_block.03[0]",
+                  "赛中｜信号与沟通｜向参赛者和其他裁判发出信号、说明规则与决定，协调赛事进程。 — 25/100; weight=1/3; umpires-referees-and-other-sports-officials.display.responsibilities_block.04[0]",
+                  "核验｜计时记分与计算｜核对成绩、时间及记录，在公布前检查计算准确性。 — 75/100; weight=1/3; umpires-referees-and-other-sports-officials.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37960,7 +37980,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38114,15 +38134,27 @@
           "employer",
           "ratify"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "裁判、仲裁员与其他体育官员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 27-2023.00 精确职业口径",
@@ -38173,7 +38205,7 @@
       "text": "裁判、仲裁员与其他体育官员"
     }
   },
-  "source_content_sha256": "8d678ed6ae25d5cbac83292e54d557ba73bacb77b9bf2213ff186c6135fb841d",
+  "source_content_sha256": "8126a2760108d8ddb0c6031381700961b0860164e85e50f388a5a1930cc984d7",
   "subject": {
     "canonical_slug": "umpires-referees-and-other-sports-officials",
     "name": "裁判、仲裁员与其他体育官员",

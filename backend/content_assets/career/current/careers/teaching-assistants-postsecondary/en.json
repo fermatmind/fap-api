@@ -8,6 +8,9 @@
       "fact:cn-education-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -26097,7 +26100,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate material explanations, rule-based scoring, and real courses. Preserve original questions, rubrics, submissions, duplicates, blanks, unknowns, and your own corrections, and return course grade and laboratory data authority to the school teaching team; correct output does not prove students learned."
+              "First separate material explanations, rule-based scoring, and real courses. Preserve original questions, rubrics, submissions, duplicates, blanks, unknowns, and your own corrections, and return course grade and laboratory data authority to the school teaching team; correct output does not prove students learned. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "teaching-assistants-postsecondary.display.ai_impact_table.answer",
@@ -35639,6 +35642,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Discussion | question sessions and problem guidance | Organize discussion and review per subject preparation and division, hear questions, explain the basis, and report back to the teacher. — 25/100; weight=1/3; teaching-assistants-postsecondary.display.responsibilities_block.02[0]",
+                  "Checking | assignments, exams, and rubric | Check per condition, preserve responses, corrections, and unknowns, return disputes to the teaching team, and do not change official records on your own. — 75/100; weight=1/3; teaching-assistants-postsecondary.display.responsibilities_block.04[0]",
+                  "Cooperation | observation guidance and laboratory support | Accept teacher observation and feedback; laboratory demonstration and research assistance additionally require subject training and permitted use. — 25/100; weight=1/3; teaching-assistants-postsecondary.display.responsibilities_block.06[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -40880,7 +40900,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -41040,15 +41060,27 @@
         "source_refs": [
           "nbs-education-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Postsecondary teaching assistants",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 25-9044.00 precise occupation definition",
@@ -41099,7 +41131,7 @@
       "text": "Postsecondary teaching assistants"
     }
   },
-  "source_content_sha256": "4af91a5f1a721241375220cd60a3734e56db7090bc555238574c3730652a184b",
+  "source_content_sha256": "41a6580da497b29a44401dca95f7f2469ab420cc7b77e011bdd10c741add1626",
   "subject": {
     "canonical_slug": "teaching-assistants-postsecondary",
     "name": "Postsecondary teaching assistants",

@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25475,7 +25478,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得29-1216精确对应的AI暴露评分、临床采用率或效率效果研究，不给暴露等级。O*NET支持诊断、长期照护与病历记录任务；2025招聘广告中Epic Systems被4%关联去重广告提及，其他四软件各低于1%，不是临床普及率或AI采用。编辑建议先用合成数据试验文书整理与检索，记录准确性、耗时与复核成本；真实临床工具须依监管、机构与执业授权核对。"
+              "证据不足：本页未取得29-1216精确对应的AI暴露评分、临床采用率或效率效果研究，不给暴露等级。O*NET支持诊断、长期照护与病历记录任务；2025招聘广告中Epic Systems被4%关联去重广告提及，其他四软件各低于1%，不是临床普及率或AI采用。编辑建议先用合成数据试验文书整理与检索，记录准确性、耗时与复核成本；真实临床工具须依监管、机构与执业授权核对。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "general-internal-medicine-physicians.ai-impact.ai-impact-table.18",
@@ -32976,6 +32979,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "29-1216.00 exact occupation",
                 "url": "https://www.onetonline.org/link/industry/29-1216.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "采集病史与体格检查并结构化记录 — 25/100; weight=1/3; general-internal-medicine-physicians.ai-impact.ai-impact-table.95[0]",
+                  "分析病历与报告与检验结果与检查信息以诊断病情 — 50/100; weight=1/3; general-internal-medicine-physicians.ai-impact.ai-impact-table.99[0]",
+                  "开具或实施药物与治疗与其他专门医疗照护 — 25/100; weight=1/3; general-internal-medicine-physicians.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37916,7 +37936,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38066,15 +38086,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "普通内科医师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "普通内科医师 · 任务、交付与责任边界",
@@ -38125,7 +38157,7 @@
       "text": "普通内科医师"
     }
   },
-  "source_content_sha256": "5f752ce925a1f781eb865a2b2366d8e6bedc6524272721cf5119e4cd52780ef4",
+  "source_content_sha256": "51c99c9e5b4d8daaa6f673b6dcdfec55e8166734b7ba1c8cd88686f218ac2449",
   "subject": {
     "canonical_slug": "general-internal-medicine-physicians",
     "name": "普通内科医师",

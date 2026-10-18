@@ -17,6 +17,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25133,7 +25136,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no generative AI exposure score, enterprise adoption rate, or employment causal material precisely for 51-4022 was obtained, and no medium-low or short-term non-replacement conclusion is given. The editorial candidates are work order search, record checking, and report drafts; email, machine control, and inventory software do not equal generative AI. On-site setup, observation, inspection, and exception handling are checked against effective procedures and specific authorization, and tool text is not treated as the real situation or as a release."
+              "Insufficient evidence: no generative AI exposure score, enterprise adoption rate, or employment causal material precisely for 51-4022 was obtained, and no medium-low or short-term non-replacement conclusion is given. The editorial candidates are work order search, record checking, and report drafts; email, machine control, and inventory software do not equal generative AI. On-site setup, observation, inspection, and exception handling are checked against effective procedures and specific authorization, and tool text is not treated as the real situation or as a release. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "forging-machine-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.18",
@@ -32690,6 +32693,23 @@
                 "publisher": "ILO",
                 "scope": "Global ISCO08 potential task exposure",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Drawing reading and setup and machine adjustment — 25/100; weight=1/3; forging-machine-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.95[0]",
+                  "Equipment operation and first article — 25/100; weight=1/3; forging-machine-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.99[0]",
+                  "Dimensional inspection and out-of-tolerance parts — 25/100; weight=1/3; forging-machine-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37624,7 +37644,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37808,15 +37828,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Forging Machine Setters, Operators, and Tenders, Metal and Plastic",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Forging Machine Setters, Operators, and Tenders · tasks, deliverables, and responsibility boundaries",
@@ -37867,7 +37899,7 @@
       "text": "Forging Machine Setters, Operators, and Tenders, Metal and Plastic"
     }
   },
-  "source_content_sha256": "d99df2680d8fa643b142a49ed99afe6ffb16af52cf7336a5d5f61657714f2118",
+  "source_content_sha256": "8a92cccd347ecef5abc17056dd23676c6e34aafe77ced87a11d06ba71acc9a31",
   "subject": {
     "canonical_slug": "forging-machine-setters-operators-and-tenders-metal-and-plastic",
     "name": "Forging Machine Setters, Operators, and Tenders, Metal and Plastic",

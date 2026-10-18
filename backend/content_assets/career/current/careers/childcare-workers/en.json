@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24723,7 +24726,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The editor may test schedule checking, checklist reminders, organizing approved records and draft notices; no measurement of model accuracy, actual adoption, time saved or job substitution for this occupation has been obtained. On-site care, emergency protection and statutory reporting are still carried out according to the specific duties. The BLS U.S. SOC39-9011 projection is 1,010,300 people in 2025 to 990,400 people in 2035, a net decrease of 19,900 and a fall of 2% (whole number), with 150,300 openings per year on average over 2025—2035, all of them replacement needs from people moving to other occupations or leaving the labour force. A projection is not year-by-year actual performance, the current hiring stock or AI causality. OOH2025 employment includes 24% self-employed and 17% private households, which differs from the OEWS wage sample that excludes both."
+              "The editor may test schedule checking, checklist reminders, organizing approved records and draft notices; no measurement of model accuracy, actual adoption, time saved or job substitution for this occupation has been obtained. On-site care, emergency protection and statutory reporting are still carried out according to the specific duties. The BLS U.S. SOC39-9011 projection is 1,010,300 people in 2025 to 990,400 people in 2035, a net decrease of 19,900 and a fall of 2% (whole number), with 150,300 openings per year on average over 2025—2035, all of them replacement needs from people moving to other occupations or leaving the labour force. A projection is not year-by-year actual performance, the current hiring stock or AI causality. OOH2025 employment includes 24% self-employed and 17% private households, which differs from the OEWS wage sample that excludes both. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "childcare-workers.ai-impact.ai-impact-table.18",
@@ -33620,6 +33623,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/21-1021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Safety supervision and environment safety｜Maintain a safe play environment and keep line-of-sight supervision｜Maintain a safe play environment (importance 92) and observe and monitor children's play activities (87); keep line-of-sight supervision and the staff ratio within the rules during the shift, check the safety of the activity area and toys and equipment and remove hazards promptly. — 0/100; weight=1/3; childcare-workers.profile.responsibilities-block.1[0]",
+                  "Daily care and health and hygiene｜Carry out dressing and feeding and bathing and toileting and sleep care｜Dress children and change diapers (83), sanitize toys and play equipment (83), help prepare food and serve meals and snacks (76), sanitize bottles and prepare formula (80), instruct children in health and personal habits such as eating and resting and toilet habits (80) and regulate rest periods (71). — 0/100; weight=1/3; childcare-workers.profile.responsibilities-block.1[1]",
+                  "Records and parent communication｜Keep records for each child and communicate with parents or guardians｜Keep records for each child including daily observations and activities and meals and medication information (82), communicate with parents or guardians about daily activities and behaviour and related problems (85), and identify signs of emotional or developmental problems and bring them to parents' or guardians' attention (81). — 75/100; weight=1/3; childcare-workers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38593,7 +38613,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38910,15 +38930,27 @@
         "source_refs": [
           "childcare-nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Childcare workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · SA",
@@ -38969,7 +39001,7 @@
       "text": "Childcare workers"
     }
   },
-  "source_content_sha256": "986f66d0b70070aaca3e236c762241ad8c701bd31bb68e95a96c809fa9985cfa",
+  "source_content_sha256": "f3c5e5e6dd571e6f569d1a6c7f918ff7d4e0df7a8623a9e59231acfb1f6e095f",
   "subject": {
     "canonical_slug": "childcare-workers",
     "name": "Childcare workers",

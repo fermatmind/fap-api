@@ -14,6 +14,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -7589,7 +7592,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI may assist research, summaries, and drafts using approved fictional materials, but outputs must be checked against original records, term versions, and deadlines; widespread occupational adoption, efficiency gains, or replacement probabilities have not been established. Authorized people remain responsible for negotiation identity, handling decisions, and commitments."
+              "AI may assist research, summaries, and drafts using approved fictional materials, but outputs must be checked against original records, term versions, and deadlines; widespread occupational adoption, efficiency gains, or replacement probabilities have not been established. Authorized people remain responsible for negotiation identity, handling decisions, and commitments. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "labor-relations-specialists.ai-impact.ai-impact-table.2",
@@ -8963,6 +8966,23 @@
                 "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/11-3121.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Receive grievances and verify facts — 25/100; weight=1/3; labor-relations-specialists.profile.responsibilities-block.4[0]",
+                  "Check agreements and legal deadlines — 75/100; weight=1/3; labor-relations-specialists.profile.responsibilities-block.4[0]",
+                  "Develop negotiation options and communicate — 25/100; weight=1/3; labor-relations-specialists.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11498,7 +11518,7 @@
     ],
     "path": "/en/career/jobs/labor-relations-specialists",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11646,15 +11666,27 @@
         "source_refs": [
           "onet-trends"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Labor relations specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Labor relations specialists · Dispute handling, agreements, and authorization boundaries",
@@ -11705,7 +11737,7 @@
       "text": "Labor relations specialist career assessment: dispute handling, agreements, and authorization boundaries"
     }
   },
-  "source_content_sha256": "2e9b23f059d93b354812d306f78a2bd0257b546f5b86f6254cbe1ab4a585ecbc",
+  "source_content_sha256": "4876933fd049f180cae91340d6617f70e322990814f31ff6f3e6df57a78bcea0",
   "subject": {
     "canonical_slug": "labor-relations-specialists",
     "name": "Labor relations specialists",

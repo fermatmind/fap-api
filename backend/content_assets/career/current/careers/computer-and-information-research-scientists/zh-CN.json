@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24695,7 +24698,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试用候选：用虚构或获准文献、代码与数据辅助检索整理、原型及写作草稿；对照原件核引用、代码实验、遗漏和复核总耗时。本轮未取得本职业生成式AI可靠性、实际采用率、提效或减岗因果研究，不能称已验证改变。"
+              "编辑试用候选：用虚构或获准文献、代码与数据辅助检索整理、原型及写作草稿；对照原件核引用、代码实验、遗漏和复核总耗时。本轮未取得本职业生成式AI可靠性、实际采用率、提效或减岗因果研究，不能称已验证改变。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "computer-and-information-research-scientists.ai-impact.ai-impact-table.18",
@@ -32350,6 +32353,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1299.08"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "问题界定与理论建模｜分析硬件软件问题；逻辑分析数学模型；可行性｜Core第1、6、7项；编辑分组，任务池非全岗要求。 — 50/100; weight=1/3; computer-and-information-research-scientists.profile.responsibilities-block.1[0]",
+                  "新技术与跨学科｜理论专长创新及VR/HCI/机器人跨学科项目｜Core第2、8项；编辑分组，任务池非全岗要求。 — 50/100; weight=1/3; computer-and-information-research-scientists.profile.responsibilities-block.1[1]",
+                  "系统软件设计与需求｜设计计算机及软件；与用户管理供应商技术人员协商需求｜Core第5、9项；编辑分组，任务池非全岗要求。 — 75/100; weight=1/3; computer-and-information-research-scientists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37284,7 +37304,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37798,15 +37818,27 @@
         "source_refs": [
           "research-review-onet-localwages"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "计算机与信息研究科学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · IC",
@@ -37857,7 +37889,7 @@
       "text": "计算机与信息研究科学家"
     }
   },
-  "source_content_sha256": "bf42f05b94af29f5ab7d7fdc8b0ea8f5ab41799211a1796aadadcb440d3a752a",
+  "source_content_sha256": "716f9b47e646e9703aee87c15b944f171124dc324d52ea5900efd87a21a4592e",
   "subject": {
     "canonical_slug": "computer-and-information-research-scientists",
     "name": "计算机与信息研究科学家",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24401,7 +24404,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not obtained an AI adoption rate, replacement rate or disappearance year specific to 13-1161.01. As a task-level editorial observation, approved tools can assist with anonymous query grouping, content drafts and reports; user needs, fact and brand verification, budget authorization, privacy and experiment interpretation are the responsibility of people. Higher-level employment projections cannot be attributed to AI."
+              "Insufficient evidence: this page has not obtained an AI adoption rate, replacement rate or disappearance year specific to 13-1161.01. As a task-level editorial observation, approved tools can assist with anonymous query grouping, content drafts and reports; user needs, fact and brand verification, budget authorization, privacy and experiment interpretation are the responsibility of people. Higher-level employment projections cannot be attributed to AI. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "search-marketing-strategists.ai-impact.ai-impact-table.18",
@@ -32230,6 +32233,23 @@
                 "publisher": "Google Ads Help",
                 "scope": "contextual",
                 "url": "https://support.google.com/google-ads/answer/6385083?hl=en"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Goals and query research｜Verify the product, audience, search intent and user problems, rather than merely piling up keywords.｜Output the topic and page / ad mapping. — 75/100; weight=1/3; search-marketing-strategists.profile.responsibilities-block.1[0]",
+                  "Paid search planning｜Group keywords, ad creatives, budgets and negative keywords and go live per authorization.｜Output traceable campaign settings and budget guardrails. — 75/100; weight=1/3; search-marketing-strategists.profile.responsibilities-block.1[2]",
+                  "Data measurement｜Verify tracking events, conversion definitions, costs and attribution windows.｜Output a data quality checklist and metrics table. — 75/100; weight=1/3; search-marketing-strategists.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37138,7 +37158,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Occupational fit guide",
@@ -37409,15 +37429,27 @@
           "onet",
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Search marketing strategists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Search marketing strategists · search intent · content and advertising",
@@ -37468,7 +37500,7 @@
       "text": "Search marketing strategists"
     }
   },
-  "source_content_sha256": "24a343a8a6647f63fc0f031367c53c387a8345b8cd8d7c852aae244238dd0b54",
+  "source_content_sha256": "b23b89f56839119ae6ca5e203d5f3e5a3e9896671b032539220d99e1279d7406",
   "subject": {
     "canonical_slug": "search-marketing-strategists",
     "name": "Search marketing strategists",

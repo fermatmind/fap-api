@@ -41,6 +41,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fujian-signal-2026q1": {
         "status": "pending_mapping"
       },
@@ -24782,7 +24785,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no study of AI adoption rates, hours saved, causal wage effects, substitution ratios or job-disappearance years for agricultural engineers. BLS describes some programmers using AI and geospatial technology in agricultural systems, but does not quantify these effects; the occupational employment projection does not measure AI's contribution either. The table below sets out suggested trials and the division of human review, and cannot be used to conclude that efficiency has already improved or that the occupation has been replaced wholesale."
+              "Insufficient evidence: this page obtained no study of AI adoption rates, hours saved, causal wage effects, substitution ratios or job-disappearance years for agricultural engineers. BLS describes some programmers using AI and geospatial technology in agricultural systems, but does not quantify these effects; the occupational employment projection does not measure AI's contribution either. The table below sets out suggested trials and the division of human review, and cannot be used to conclude that efficiency has already improved or that the occupation has been replaced wholesale. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.18",
@@ -32928,6 +32931,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Plans and drawings｜Design and drafting｜Use CAD to design agricultural machinery components, structures, facilities and processing systems, and output drawings, specifications and bills of quantities. — 75/100; weight=1/3; agricultural-engineers.profile.responsibilities-block.1[0]",
+                  "Site survey｜Site and requirements communication｜Go to the site to observe the environment and construction problems, and discuss requirements and necessary changes with farmers, contractors, consultants and other engineers. — 0/100; weight=1/3; agricultural-engineers.profile.responsibilities-block.1[1]",
+                  "Testing and verification｜Equipment and system testing｜Test the performance of agricultural machinery and equipment, and check the differences between design assumptions and measured values for irrigation, drainage, flood control and power distribution systems. — 25/100; weight=1/3; agricultural-engineers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37846,7 +37866,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -38249,15 +38269,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Agricultural engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Tasks: requirements investigation · design calculation · construction and operation supervision",
@@ -38308,7 +38340,7 @@
       "text": "Agricultural engineers: occupational content, pay and employment prospects"
     }
   },
-  "source_content_sha256": "99dee5400119a841ff5f90a35ecafa9dece7317f1c0b9f53ba767961a203d5e8",
+  "source_content_sha256": "265a237e6a692c9c494774918b651c000f32720a6235919373e25ca026db3c88",
   "subject": {
     "canonical_slug": "agricultural-engineers",
     "name": "Agricultural engineers",

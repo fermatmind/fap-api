@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24306,7 +24309,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Scheduling, record drafting, and traffic information aggregation can serve as editorial trial directions, and the actual AI efficiency, adoption, wage, or headcount causality for this position was not obtained. The 81% response that the work is not automated is an existing work-context indicator, not a future generative AI replacement rate. On-site duties, traffic facility setup, and emergency handling must still be verified against applicable law and plans."
+              "Scheduling, record drafting, and traffic information aggregation can serve as editorial trial directions, and the actual AI efficiency, adoption, wage, or headcount causality for this position was not obtained. The 81% response that the work is not automated is an existing work-context indicator, not a future generative AI replacement rate. On-site duties, traffic facility setup, and emergency handling must still be verified against applicable law and plans. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31747,6 +31750,23 @@
                 "publisher": "Official Chinese government website",
                 "scope": "proxy",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Core escort and guidance: escort pedestrians and watch traffic gaps, guiding at roads, railroad crossings, and construction settings; the O*NET US tasks do not grant every Chinese school crossing position independent stopping authority. — 0/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Core warning: guide or warn with signs, flags, lights, and hand signals; placing signs, stopping speeding drivers and reminding them of regulations, and construction detours are Supplemental, and actual permission, approved plans, and jurisdiction must be verified separately and are not equivalent to enforcement by issuing citations. — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Core recording the license plates of vehicles that ignore signals and reporting them to the relevant department, and reporting dangerous behavior by children to the school; this is factual recording and reporting, and the finding of illegality, the penalty, and the data processing conditions are verified separately. — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36953,7 +36973,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -37197,15 +37217,27 @@
         "source_refs": [
           "g04-nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Crossing guards and flaggers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Administrative and support services · government · traffic guidance and safety",
@@ -37256,7 +37288,7 @@
       "text": "Crossing guards and flaggers"
     }
   },
-  "source_content_sha256": "a0b433f44673fe7db5f43ed94c13d12c21e8e5f45798c0d0e01f1d851bf1cccb",
+  "source_content_sha256": "1a4335f275f515238b70712e3af68a03e49cd62c18deb1e8e3c2d6336509364b",
   "subject": {
     "canonical_slug": "crossing-guards-and-flaggers",
     "name": "Crossing guards and flaggers",

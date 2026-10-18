@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25469,7 +25472,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务分析｜许可虚构人事记录上试验归档、报表和政策检索，核现行制度与源数据；本轮无普遍采用、效率或岗位因果，不排序影响先后。人力资源助理本职业排除薪资考勤主责，但可记录周薪缺勤并协助福利；不是一概不能核数据或解释政策。权限内日常政策答复及异常核对本人可处理，超职责争议或专业法律事项转实际负责人；内部权限不免劳动和个保义务。个保法13条依法规章及集体合同实施人力资源管理所必需是处理依据之一，非全部员工信息任意收集或仅内部许可；核目的、最小必要、保存期限。24条自动决策须透明公平，重大权益决定可要求说明并拒绝仅自动决定，非一概禁止工具辅助。"
+              "编辑任务分析｜许可虚构人事记录上试验归档、报表和政策检索，核现行制度与源数据；本轮无普遍采用、效率或岗位因果，不排序影响先后。人力资源助理本职业排除薪资考勤主责，但可记录周薪缺勤并协助福利；不是一概不能核数据或解释政策。权限内日常政策答复及异常核对本人可处理，超职责争议或专业法律事项转实际负责人；内部权限不免劳动和个保义务。个保法13条依法规章及集体合同实施人力资源管理所必需是处理依据之一，非全部员工信息任意收集或仅内部许可；核目的、最小必要、保存期限。24条自动决策须透明公平，重大权益决定可要求说明并拒绝仅自动决定，非一概禁止工具辅助。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "human-resources-assistants-except-payroll-and-timekeeping.ai-impact.ai-impact-table.18",
@@ -32969,6 +32972,23 @@
                 "publisher": "BLS",
                 "scope": "具体文档用途限定",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "记录与档案 — 75/100; weight=1/3; human-resources-assistants-except-payroll-and-timekeeping.ai-impact.ai-impact-table.95[0]",
+                  "员工数据 — 75/100; weight=1/3; human-resources-assistants-except-payroll-and-timekeeping.ai-impact.ai-impact-table.99[0]",
+                  "政策与问询 — 50/100; weight=1/3; human-resources-assistants-except-payroll-and-timekeeping.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37933,7 +37953,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38057,15 +38077,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "人力资源助理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "人力资源助理 · 任务、交付与责任边界",
@@ -38116,7 +38148,7 @@
       "text": "人力资源助理"
     }
   },
-  "source_content_sha256": "94ab00255d5116f6d0be3dc0474ef7d8e11ac9acccce5912d4d53b6e30b3156a",
+  "source_content_sha256": "23d39392fc2cb8737bf75fa139afebec284f2ee1e05581339c2e37acc38ec103",
   "subject": {
     "canonical_slug": "human-resources-assistants-except-payroll-and-timekeeping",
     "name": "人力资源助理",

@@ -56,6 +56,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25087,7 +25090,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑工具试测建议：资料提取、方案草稿、计算核对与记录可作为试用方向，核错误、漏项和总复核工时。本轮没有本职业工具提速或机构采用率证据；软件招聘关键词不证明BIM或生成式AI实际采用。"
+              "编辑工具试测建议：资料提取、方案草稿、计算核对与记录可作为试用方向，核错误、漏项和总复核工时。本轮没有本职业工具提速或机构采用率证据；软件招聘关键词不证明BIM或生成式AI实际采用。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "civil-engineers.ai-impact.ai-impact-table.18",
@@ -32506,6 +32509,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/architects.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "设计与计算｜计算荷载与水力与材料应力并确定设计规格｜计算荷载与坡度要求与流量或材料应力系数以确定设计规格；使用计算机辅助设计与绘图工具规划设计运输或水工系统与结构；设计节能或环境友好的土木结构（对应 O*NET 任务第四与第五与第十一项）。 — 75/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[0]",
+                  "资料与场地分析｜分析测量与地质与航拍资料｜分析测量报告与地图与图纸与蓝图与航拍照片或其他地形或地质数据；指导或参与测量以放样并建立基准点与坡度或标高以指导施工（对应 O*NET 任务第七与第八项）。 — 75/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[2]",
+                  "试验与风险｜测试材料并识别环境风险｜测试土壤或材料以判断基础与混凝土与沥青或钢材的适用性与强度；识别环境风险并为土木工程项目制定风险管理策略；开展交通流或环境条件研究以识别工程问题并评估潜在项目影响（对应 O*NET 任务第十二与第十三与第十四项）。 — 25/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37416,7 +37436,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37853,15 +37873,27 @@
         "source_refs": [
           "civil-ooh-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "土木工程师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RIC",
@@ -37912,7 +37944,7 @@
       "text": "土木工程师"
     }
   },
-  "source_content_sha256": "6fcdd11cbb69ccfe2c3cb910231b955951ec1383f24cc08a308e8b1eecb456e6",
+  "source_content_sha256": "5e3c51df259bdaaa5416358eac06de9cf463f8b1096d20d439887e875264f8b4",
   "subject": {
     "canonical_slug": "civil-engineers",
     "name": "土木工程师",

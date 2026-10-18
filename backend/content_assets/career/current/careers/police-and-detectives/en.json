@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24414,7 +24417,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence is insufficient: no AI adoption rate, displacement rate, or task-level scoring basis for police and criminal investigation roles was obtained. Transcription, retrieval, record organization, and conflict prompts within authorized systems can serve as editorial trial suggestions; authorized personnel must still verify the originals, procedures, privacy, and judgment, and task exposure does not equal an employment outcome."
+              "Evidence is insufficient: no AI adoption rate, displacement rate, or task-level scoring basis for police and criminal investigation roles was obtained. Transcription, retrieval, record organization, and conflict prompts within authorized systems can serve as editorial trial suggestions; authorized personnel must still verify the originals, procedures, privacy, and judgment, and task exposure does not equal an employment outcome. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "police-and-detectives.ai-impact.ai-impact-table.18",
@@ -32206,6 +32209,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/33-1012.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Public response｜carry out on-scene work under authorization and agency procedures｜the student exercise involves no real action. — 0/100; weight=1/3; police-and-detectives.profile.responsibilities-block.1[1]",
+                  "Case investigation｜the investigation role collects, verifies, and organizes evidence within its authority｜procedural requirements follow the jurisdiction. — 25/100; weight=1/3; police-and-detectives.profile.responsibilities-block.1[3]",
+                  "Record and report｜state known facts, open questions, the basis for action, and the responsible person｜contradictions must not be omitted. — 75/100; weight=1/3; police-and-detectives.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37111,7 +37131,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37379,15 +37399,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Police and Detectives",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Lawful authorization · public safety and case facts",
@@ -37438,7 +37470,7 @@
       "text": "Police and detectives: work tasks, wage definitions, and the entry path"
     }
   },
-  "source_content_sha256": "9ec7e49f84e4b84ea9d63f0b2671d77e40afc26282b9b50438f0957de69944e2",
+  "source_content_sha256": "a4bc1e82c90ea07d8634b91fdf5ba519c971b426e616a7bd11cbfd31535efc15",
   "subject": {
     "canonical_slug": "police-and-detectives",
     "name": "Police and Detectives",

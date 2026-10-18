@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24751,7 +24754,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有可靠证据给出机器人技术员17-3024.01整体AI替代率。AI可辅助文档、代码和仿真候选，但机械、电气、传感器、控制器和人机环境的真实联动仍需工程验证及授权。BLS父职业就业预测也不能识别AI单独效果。"
+              "没有可靠证据给出机器人技术员17-3024.01整体AI替代率。AI可辅助文档、代码和仿真候选，但机械、电气、传感器、控制器和人机环境的真实联动仍需工程验证及授权。BLS父职业就业预测也不能识别AI单独效果。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.18",
@@ -32514,6 +32517,23 @@
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "parent_occupation",
                 "url": "https://www.onetonline.org/link/localwages/17-3024.01"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "机电与控制安装｜按授权安装传感器、控制器、接线和末端工具。｜核图纸、版本和测试条件。 — 0/100; weight=1/3; robotics-technicians.profile.responsibilities-block.1[1]",
+                  "故障诊断｜结合报警、电路、机械与反馈系统定位故障。｜提交可复现记录和残余问题。 — 50/100; weight=1/3; robotics-technicians.profile.responsibilities-block.1[2]",
+                  "程序维护｜按工单安装、编程或修理控制器。｜保留变更与回归测试记录。 — 75/100; weight=1/3; robotics-technicians.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37422,7 +37442,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37707,15 +37727,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "机器人技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "机器人系统 · 传感器 · 控制程序",
@@ -37766,7 +37798,7 @@
       "text": "机器人技术员"
     }
   },
-  "source_content_sha256": "cd260e29eebdc241ea1784b6d353d3b95ac97d7e3a922162bd1c0ba6f184f132",
+  "source_content_sha256": "bfdfcbfc19e8c26cdb717050ed7dfff0e9a351ac1719fe483aff8f56269e3e3b",
   "subject": {
     "canonical_slug": "robotics-technicians",
     "name": "机器人技术员",

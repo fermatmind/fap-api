@@ -8,6 +8,9 @@
       "fact:china-production-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25445,7 +25448,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET lists specification reading, equipment setup, inspection and record tasks; it does not measure AI adoption or effects. This page has no recomputable task score yet; this is an editorial status, and neither the software list nor the employment decline percentage is converted into a substitution rate."
+              "O*NET lists specification reading, equipment setup, inspection and record tasks; it does not measure AI adoption or effects. The external materials used here supply no measured task score yet; this is an editorial status, and neither the software list nor the employment decline percentage is converted into a substitution rate."
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.9",
@@ -25476,7 +25479,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Text tools can assist with drafts of specification and re-inspection records, while equipment control and quality approval still require trained and authorized personnel. The BLS 2025—2035 overall projection for this occupation shows a 13.6% decline and about 900 annual openings including replacements; these cannot be attributed to AI alone, and this page still has no job-level AI adoption rate, substitution rate or personal unemployment probability."
+              "Text tools can assist with drafts of specification and re-inspection records, while equipment control and quality approval still require trained and authorized personnel. The BLS 2025—2035 overall projection for this occupation shows a 13.6% decline and about 900 annual openings including replacements; these cannot be attributed to AI alone, and this page still has no job-level AI adoption rate, substitution rate or personal unemployment probability. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.display.ai_impact_table.answer",
@@ -32836,6 +32839,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Prepare | equipment and material confirmation | check the setting conditions, fabric layers or rolls according to the approved process, confirm protection and job authority, and do not treat the exercise as an on-site instruction. — 25/100; weight=1/3; textile-cutting-machine-setters-operators-and-tenders.display.responsibilities_block.02[0]",
+                  "Monitor | cutting process observation | watch equipment running and product changes, and keep the actual settings, inspection readings and anomaly times. — 25/100; weight=1/3; textile-cutting-machine-setters-operators-and-tenders.display.responsibilities_block.03[0]",
+                  "Produce | textile cutting operation | operate cutting equipment within the training and authorization scope, producing specified cut pieces or slit products and maintaining traceability. — 25/100; weight=1/3; textile-cutting-machine-setters-operators-and-tenders.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38078,7 +38098,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38238,15 +38258,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Textile cutting machine setters, operators and tenders",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 51-6062.00 precise occupational measure",
@@ -38297,7 +38329,7 @@
       "text": "Textile cutting machine setters, operators and tenders"
     }
   },
-  "source_content_sha256": "26047489fab63a6ea94896a68f6da7ffb8df6692777bd850b1a8525b530d30f9",
+  "source_content_sha256": "7530dfdcd22c954c540ce27756a379b7a187cbf810c2d37155a4fd2b42d7fb45",
   "subject": {
     "canonical_slug": "textile-cutting-machine-setters-operators-and-tenders",
     "name": "Textile cutting machine setters, operators and tenders",

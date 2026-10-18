@@ -11,6 +11,9 @@
       "fact:cn-manufacturing-private-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25425,7 +25428,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "区分能力设想、实际采用和就业结果。文本可辅助列核对项，但不能自定图样公差、控制设备或确认工件合格；职业评分保持原缺失，不预测个人失业。"
+              "区分能力设想、实际采用和就业结果。文本可辅助列核对项，但不能自定图样公差、控制设备或确认工件合格；职业评分保持原缺失，不预测个人失业。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "structural-metal-fabricators-and-fitters.display.ai_impact_table.answer",
@@ -32611,6 +32614,23 @@
                 "publisher": "上海市人民政府门户网站",
                 "scope": "contextual",
                 "url": "https://www.shanghai.gov.cn/nw17239/20260121/3efd7c8106224a348bd1d2351222c58b.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "准备｜读图与材料要求｜研究工程图样，识别材料和尺寸要求及任务次序，记录不明项。 — 50/100; weight=1/3; structural-metal-fabricators-and-fitters.display.responsibilities_block.01[0]",
+                  "制造｜工序与设备配合｜按训练和权限参与成形切割钻孔等制造，具体设备工艺另核。 — 0/100; weight=1/3; structural-metal-fabricators-and-fitters.display.responsibilities_block.03[0]",
+                  "装配｜定位对齐与连接｜配合部件定位装配及焊接等连接，遵守已确认分工与危险控制。 — 0/100; weight=1/3; structural-metal-fabricators-and-fitters.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37855,7 +37875,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38027,15 +38047,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "结构金属制造工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "结构金属制造装配",
@@ -38086,7 +38118,7 @@
       "text": "结构金属制造工"
     }
   },
-  "source_content_sha256": "a48f5de71c5a540a438262c8bd4c63a563714f02c7cc85174615a29b6356c9a6",
+  "source_content_sha256": "3d96b210a4530f55f7053202e85ef02c84de9c9fb35c4adb9707599b91e963b4",
   "subject": {
     "canonical_slug": "structural-metal-fabricators-and-fitters",
     "name": "结构金属制造工",

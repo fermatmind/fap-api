@@ -41,6 +41,9 @@
       "fact:cs-us-openings": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24713,7 +24716,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no nationwide AI adoption rate or overall replacement causal study for this occupation was obtained. Draft handouts, search and transcription, and grading assistance are editorial trials, verified for sources, course objectives, bias, and permissions; no guarantee can be given that replacement will never occur. The current BLS 25-1062 projection for this occupation: 14,300 jobs in 2025 and 14,700 in 2035, growth of 2.7% over 2025—2035 (OOH rounded 3%), a rounded net increase of about 400, and about 1,000 occupational openings per year. The occupational projection is not AI employment causal evidence. The UNESCO teacher AI competency framework summary provides 15 competencies, five dimensions, and the three Acquire/Deepen/Create training levels as reference, not adoption or measured effects for this occupation or law. The official summary was read earlier the same day in this window; the complete framework PDF was not read."
+              "Insufficient evidence: no nationwide AI adoption rate or overall replacement causal study for this occupation was obtained. Draft handouts, search and transcription, and grading assistance are editorial trials, verified for sources, course objectives, bias, and permissions; no guarantee can be given that replacement will never occur. The current BLS 25-1062 projection for this occupation: 14,300 jobs in 2025 and 14,700 in 2035, growth of 2.7% over 2025—2035 (OOH rounded 3%), a rounded net increase of about 400, and about 1,000 occupational openings per year. The occupational projection is not AI employment causal evidence. The UNESCO teacher AI competency framework summary provides 15 competencies, five dimensions, and the three Acquire/Deepen/Create training levels as reference, not adoption or measured effects for this occupation or law. The official summary was read earlier the same day in this window; the complete framework PDF was not read. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "area-ethnic-and-cultural-studies-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32349,6 +32352,23 @@
                 "publisher": "UNESCO",
                 "scope": "contextual",
                 "url": "https://www.unesco.org/en/articles/ai-competency-framework-teachers"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Teaching and course development｜Making course objectives clear｜Prepare handouts, syllabi, and assignments, teach area and ethnic and cultural courses, lead discussions, and revise courses. — 50/100; weight=1/3; area-ethnic-and-cultural-studies-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "Student advising｜Supporting student growth｜Question sessions, academic and career advice, and supervision of undergraduate and graduate teaching practicum and research. — 25/100; weight=1/3; area-ethnic-and-cultural-studies-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "Research and publication｜Producing reviewable outputs｜Conduct and publish research in the field, read materials, and exchange at conferences to stay current in the discipline. — 75/100; weight=1/3; area-ethnic-and-cultural-studies-teachers-postsecondary.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37251,7 +37271,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37579,15 +37599,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Area, Ethnic, and Cultural Studies Teachers, Postsecondary",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Higher education teaching and research: discussion and courses · assessment and feedback · student advising · research and academic service",
@@ -37638,7 +37670,7 @@
       "text": "Area, Ethnic, and Cultural Studies Teachers, Postsecondary"
     }
   },
-  "source_content_sha256": "b882f9cb2a68cf798bab9f7d6bc71789ac594b121e5151a6b84f9d89c92fb3f4",
+  "source_content_sha256": "6177c859cc2500aa9eaf41113a8f4fb940cc114dd70ee2f3dc4e1ebbeb0e2763",
   "subject": {
     "canonical_slug": "area-ethnic-and-cultural-studies-teachers-postsecondary",
     "name": "Area, Ethnic, and Cultural Studies Teachers, Postsecondary",

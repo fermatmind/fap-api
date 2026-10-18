@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24852,7 +24855,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: GenAI deployment, job replacement, or individual unemployment rates for this occupation have not been verified. Drafting records and organizing materials may be evaluated; this cannot establish that AI already performs real blood collection."
+              "Insufficient evidence: GenAI deployment, job replacement, or individual unemployment rates for this occupation have not been verified. Drafting records and organizing materials may be evaluated; this cannot establish that AI already performs real blood collection. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "phlebotomists.ai-impact.ai-impact-table.18",
@@ -25230,7 +25233,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Separate research methods from evidence of real institutional deployment; this page gives no AI exposure score for phlebotomists."
+              "Separate research methods from evidence of real institutional deployment; this page shows a separate editorial task-sample estimate for phlebotomists."
             ]
           },
           "id": "phlebotomists.ai-impact.ai-impact-table.40",
@@ -33265,6 +33268,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "US 29-2052.00 adjacent definition",
                 "url": "https://www.onetonline.org/link/summary/29-2052.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Identity and request checking — 25/100; weight=1/3; phlebotomists.ai-impact.ai-impact-table.95[0]",
+                  "Performing collection — 0/100; weight=1/3; phlebotomists.ai-impact.ai-impact-table.103[0]",
+                  "Protection and sharps disposal — 0/100; weight=1/3; phlebotomists.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38170,7 +38190,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38446,15 +38466,27 @@
           "nbs",
           "editor"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Phlebotomists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Identity · Samples · Handover",
@@ -38505,7 +38537,7 @@
       "text": "Phlebotomists"
     }
   },
-  "source_content_sha256": "0c7c406355a5e8b626fbc1168cb0df8bcdad12c21fd54a6172606798f8777aea",
+  "source_content_sha256": "04e62e8084ad5bac28a7fe69bddcabbde00732f7340db5324ce08317c87f3f54",
   "subject": {
     "canonical_slug": "phlebotomists",
     "name": "Phlebotomists",

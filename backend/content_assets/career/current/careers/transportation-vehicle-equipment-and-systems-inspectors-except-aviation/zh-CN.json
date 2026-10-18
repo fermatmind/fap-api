@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25377,7 +25380,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业结果层面，BLS父职业2025—2035增长2.2%包含多种影响因素和航空岗位，不可拆出AI造成的本职岗位损失。OECD案例区分任务变化和工作数量，不能把一个案例当全国因果。本页未取得本职代表性净替代或薪酬变化研究，也没有可复核FermatMind评分；保留缺失态，使用具体任务与机构证据讨论下一步，不预测个人失业概率。"
+              "就业结果层面，BLS父职业2025—2035增长2.2%包含多种影响因素和航空岗位，不可拆出AI造成的本职岗位损失。OECD案例区分任务变化和工作数量，不能把一个案例当全国因果。本页未取得本职代表性净替代或薪酬变化研究，也没有可复核FermatMind评分；另列编辑估算，使用具体任务与机构证据讨论下一步，不预测个人失业概率。"
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.ai-impact.ai-impact-table.8",
@@ -25425,7 +25428,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得本职代表性AI采用、净就业因果或可复核任务级评分，Hero保留缺失态。草稿辅助、机构系统采用与岗位结果分别核；OECD有涉及本职的历史案例，NIST仅为通用风险方法，不能给中国替代率。"
+              "证据不足：本页未取得本职代表性AI采用、净就业因果或可复核任务级评分，Hero另列编辑估算。草稿辅助、机构系统采用与岗位结果分别核；OECD有涉及本职的历史案例，NIST仅为通用风险方法，不能给中国替代率。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.ai_impact_table.answer",
@@ -32917,6 +32920,23 @@
                 "publisher": "FermatMind内容编辑",
                 "scope": "editorial_synthesis",
                 "url": "https://www.fermatmind.com/zh/career/jobs/transportation-vehicle-equipment-and-systems-inspectors-except-aviation"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "检查｜缺陷与状态识别｜按适用任务检验车辆设备，识别损坏、机械故障与不符合项，保存观察依据。 — 25/100; weight=1/3; transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.responsibilities_block.02[0]",
+                  "测试｜检测记录与结果比较｜按适用程序取得记录，核单位、设备与方法，比较标准并保留原始结果。 — 25/100; weight=1/3; transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.responsibilities_block.03[0]",
+                  "报告｜记录追溯与复核｜核记录和对象唯一对应，按权限形成报告，更正遵循适用流程，不改原始结果。 — 75/100; weight=1/3; transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38185,7 +38205,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38335,15 +38355,27 @@
           "r2-pay-3",
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "机动车检验工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "美国53-6051.07非航空范围",
@@ -38394,7 +38426,7 @@
       "text": "机动车检验工"
     }
   },
-  "source_content_sha256": "09a09d9787da9518cd2ba2243968c539e19f3d70242d95d7712d7253fef2897b",
+  "source_content_sha256": "28a93ed9a853715e1c91e44c0829bc38a92349ecd81dafdce6f4c052ce5d386f",
   "subject": {
     "canonical_slug": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation",
     "name": "机动车检验工",

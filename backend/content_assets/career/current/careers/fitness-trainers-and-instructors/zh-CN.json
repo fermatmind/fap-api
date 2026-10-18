@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24472,7 +24475,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑分析：可试用获准排期、出勤与器械记录整理；未取得本职业AI影响明显的实测。"
+              "编辑分析：可试用获准排期、出勤与器械记录整理；未取得本职业AI影响明显的实测。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "fitness-trainers-and-instructors.ai-impact.ai-impact-table.18",
@@ -31829,6 +31832,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "在授权范围内完成能力与需求评估、课程与个性化方案设计、带课与私教并形成记录 — 50/100; weight=1/3; fitness-trainers-and-instructors.ai-impact.ai-impact-table.95[0]",
+                  "示范并指导动作技巧与姿势与器械使用与呼吸并给出纠正措施 — 0/100; weight=1/3; fitness-trainers-and-instructors.ai-impact.ai-impact-table.99[0]",
+                  "按标准监测进展与调整方案并应对受伤或肌肉酸痛与转诊 — 50/100; weight=1/3; fitness-trainers-and-instructors.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36737,7 +36757,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37006,15 +37026,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "健身训练师与团课教练",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "健身训练师与团课教练 · 官方职业范围 · 工作闭环",
@@ -37065,7 +37097,7 @@
       "text": "健身训练师与团课教练"
     }
   },
-  "source_content_sha256": "2124f4326d79c5bcafa34d45a6ade43b25768023f4efdaa88095b77b80411ee3",
+  "source_content_sha256": "b00e699c03b10173d27c6cbe5a0c0718538dcf20807157f6fe20cab55a5fe251",
   "subject": {
     "canonical_slug": "fitness-trainers-and-instructors",
     "name": "健身训练师与团课教练",

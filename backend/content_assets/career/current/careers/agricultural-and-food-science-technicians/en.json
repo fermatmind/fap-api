@@ -35,6 +35,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24769,7 +24772,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The agricultural and food directions assist scientists with testing and research. For the food 19-4013 context the responses are 72% making decisions every day, 61% facing strict deadlines every day, 78% considering repetition extremely important, and 56% considering accuracy extremely important. The editors propose exploring record and chart drafts on fictional data; there is still no study of AI adoption, hours saved or displacement in this occupation; the actual method, equipment and authorisation, and production release responsibility, must be checked separately."
+              "The agricultural and food directions assist scientists with testing and research. For the food 19-4013 context the responses are 72% making decisions every day, 61% facing strict deadlines every day, 78% considering repetition extremely important, and 56% considering accuracy extremely important. The editors propose exploring record and chart drafts on fictional data; there is still no study of AI adoption, hours saved or displacement in this occupation; the actual method, equipment and authorisation, and production release responsibility, must be checked separately. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.18",
@@ -32489,6 +32492,23 @@
                 "publisher": "State Administration for Market Regulation",
                 "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/rkjcs/art/2023/art_b97b0b1addbf4e8aaca43cb26f13883b.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Sampling｜Sampling and sample preparation｜Sample, number and prepare samples to the method document, keeping the sample chain consistent with the records. — 0/100; weight=1/3; agricultural-and-food-science-technicians.profile.responsibilities-block.1[0]",
+                  "Testing｜Testing and measurement｜Complete physicochemical, microbiological or observational tests to standard methods and SOPs, and keep the raw records. — 25/100; weight=1/3; agricultural-and-food-science-technicians.profile.responsibilities-block.1[1]",
+                  "Data｜Data processing and quality control｜Record values and units, judge against the quality-control range whether to retest; corrections keep the original record, the reason and the traceability. — 75/100; weight=1/3; agricultural-and-food-science-technicians.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37395,7 +37415,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -37783,15 +37803,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Agricultural and food science technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RCI",
@@ -37842,7 +37874,7 @@
       "text": "Agricultural and food science technicians"
     }
   },
-  "source_content_sha256": "d1d030899f24a26bf8b75c97c7bbb441293ff86dfa35e8fd965c004386aaeb39",
+  "source_content_sha256": "228e633f7738b580ef1e53704dcaa3412f976d08a3dd6bf5a5d75e9fee44abfe",
   "subject": {
     "canonical_slug": "agricultural-and-food-science-technicians",
     "name": "Agricultural and food science technicians",

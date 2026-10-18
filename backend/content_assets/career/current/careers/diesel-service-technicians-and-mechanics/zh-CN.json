@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24331,7 +24334,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS有电脑诊断的职业描述；2025美国招聘关键词6项：Office/Excel各1%，Word/SAP低于1%，AutoCAD/SolidWorks为NA而非0；分母是全部关联本职业代码的唯一招聘帖，不是使用率/AI采用率。BLS描述电脑诊断，不能把普通诊断软件等同生成式AI。 编辑建议对具体工具先核功能/手册及测量依据，再考虑辅助记录和查询。本轮无本职业GenAI采用、提效或替代率，不能写“诊断更快、记录更严”已发生或永远不能替代。"
+              "BLS有电脑诊断的职业描述；2025美国招聘关键词6项：Office/Excel各1%，Word/SAP低于1%，AutoCAD/SolidWorks为NA而非0；分母是全部关联本职业代码的唯一招聘帖，不是使用率/AI采用率。BLS描述电脑诊断，不能把普通诊断软件等同生成式AI。 编辑建议对具体工具先核功能/手册及测量依据，再考虑辅助记录和查询。本轮无本职业GenAI采用、提效或替代率，不能写“诊断更快、记录更严”已发生或永远不能替代。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31775,6 +31778,23 @@
                 "publisher": "人社部等三部门/中国政府网",
                 "scope": "contextual",
                 "url": "https://www.gov.cn/zhengce/zhengceku/202407/P020240731502013926154.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "问诊与诊断：与客户或调度确认故障现象与使用条件，读取故障码与仪表数值，用测试仪器、听音与路试逐项排除，按厂家维修技术信息确认故障原因并给出处理方案。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "拆装与检修：用千斤顶与吊具安全举升与支撑，按手册顺序拆解发动机与总成，检查并测量零部件磨损与配合间隙，修复或更换活塞、轴承、齿轮与阀件等部件。 — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "记录与交付：填写工单与维修记录，写明故障原因、处理方式、更换件与测量值以及仍需观察的项目，试车验证后与客户或服务顾问交接。 — 75/100; weight=1/3; actors.display.responsibilities_block.06[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37060,7 +37080,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37334,15 +37354,27 @@
         "source_refs": [
           "r5-nbs-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "柴油设备维修技师与机械师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "柴油机诊断 · 拆装与大修 · 安全部件复核与试车",
@@ -37393,7 +37425,7 @@
       "text": "柴油设备维修技师与机械师"
     }
   },
-  "source_content_sha256": "f4f5db5f2ac4794bdfa9609c0d11741e7de02a3d6be96352afe24f3908d4f3e6",
+  "source_content_sha256": "9c117152d9a761dd2aefe662b2e259272cd5f622d81c916b7803aaff8cfcae09",
   "subject": {
     "canonical_slug": "diesel-service-technicians-and-mechanics",
     "name": "柴油设备维修技师与机械师",

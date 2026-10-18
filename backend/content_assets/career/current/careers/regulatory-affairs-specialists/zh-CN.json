@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24838,7 +24841,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页讨论法规检索、版本比对和申报草稿的可能用途；本轮未取得本职业独立AI采用率、替代率或工资变化因果估计，不由跨职业研究推企业部署或监管接受。"
+              "本页讨论法规检索、版本比对和申报草稿的可能用途；本轮未取得本职业独立AI采用率、替代率或工资变化因果估计，不由跨职业研究推企业部署或监管接受。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "regulatory-affairs-specialists.ai-impact.ai-impact-table.18",
@@ -32756,6 +32759,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/13-1111.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "策略规划｜核产品分类、目标市场和适用规则。｜输出法规路径与缺口矩阵。 — 50/100; weight=1/3; regulatory-affairs-specialists.profile.responsibilities-block.1[0]",
+                  "申报审阅｜核原始证据、标签、技术文件与版本。｜缺项保持待核。 — 75/100; weight=1/3; regulatory-affairs-specialists.profile.responsibilities-block.1[1]",
+                  "法规更新｜跟踪拟议及生效规则并培训。｜标实施日期和产品适用范围。 — 75/100; weight=1/3; regulatory-affairs-specialists.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37664,7 +37684,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38040,15 +38060,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "法规事务专员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "监管流程协调 · 申报编制审阅",
@@ -38099,7 +38131,7 @@
       "text": "法规事务专员"
     }
   },
-  "source_content_sha256": "68045f707741f58e17318a85543d6e83cc5c0f0f5dca860a0a540adec4154757",
+  "source_content_sha256": "643e0f02016a11a91326227a59808721fe11c27f471c7aabb4d9e4d1a2f15cfd",
   "subject": {
     "canonical_slug": "regulatory-affairs-specialists",
     "name": "法规事务专员",

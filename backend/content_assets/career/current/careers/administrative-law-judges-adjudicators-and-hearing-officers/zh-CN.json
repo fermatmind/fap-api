@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24300,7 +24303,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页把案卷目录、时间线、检索与非最终文书列为AI辅助候选（编辑判断）。证据不足：职业采用率、实际生产率及就业效果未核实。使用须经机关授权并回到原件复核，工具不取得法定裁决权或最终责任。"
+              "本页把案卷目录、时间线、检索与非最终文书列为AI辅助候选（编辑判断）。证据不足：职业采用率、实际生产率及就业效果未核实。使用须经机关授权并回到原件复核，工具不取得法定裁决权或最终责任。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "administrative-law-judges-adjudicators-and-hearing-officers.ai-impact.ai-impact-table.18",
@@ -32167,6 +32170,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "美国辅助岗位Tasks与教育背景，不作为中国律师资格或裁决权限依据。",
                 "url": "https://www.bls.gov/ooh/legal/paralegals-and-legal-assistants.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "材料｜审前案卷准备｜核对申请、机关决定、证人证言、医疗或雇佣记录、专家意见、法律法规和先例，整理可定位的争点与证据。 — 75/100; weight=1/3; administrative-law-judges-adjudicators-and-hearing-officers.profile.responsibilities-block.1[0]",
+                  "听证｜听证与程序管理｜安排通知与排期，主持陈述、证人询问和证据异议；同步处理翻译、技术故障和双方回应机会。 — 25/100; weight=1/3; administrative-law-judges-adjudicators-and-hearing-officers.profile.responsibilities-block.1[1]",
+                  "中立｜中立裁决角色｜不是代理任何一方的律师，也不是只促成和解的调解员；按授权程序管理记录并作出或建议可说明理由的判断。 — 25/100; weight=1/3; administrative-law-judges-adjudicators-and-hearing-officers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36900,7 +36920,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37312,15 +37332,27 @@
         "source_refs": [
           "alj-ep-2025-2035"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "行政法法官",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务边界"
+      "label": "AI影响度"
     },
     "badges": [
       "程序、证据与理由",
@@ -37371,7 +37403,7 @@
       "text": "行政法法官"
     }
   },
-  "source_content_sha256": "c654c690e60467c3c0b133792505589643e3638cae4c57560d152dc97b08ff03",
+  "source_content_sha256": "c3b3c1cb0a4fe62022c841fd3400fe69c4137571458e46553f2d9c3a113bedb5",
   "subject": {
     "canonical_slug": "administrative-law-judges-adjudicators-and-hearing-officers",
     "name": "行政法法官",

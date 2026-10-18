@@ -11,6 +11,9 @@
       "fact:entry-path": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24292,7 +24295,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI and automation tools can assist with literature and manual retrieval, simulation parameter organization, test data analysis, and document drafts; they cannot replace standard conformity judgments, safety and failure analysis, measurement condition confirmation, and design approval."
+              "AI and automation tools can assist with literature and manual retrieval, simulation parameter organization, test data analysis, and document drafts; they cannot replace standard conformity judgments, safety and failure analysis, measurement condition confirmation, and design approval. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31678,6 +31681,23 @@
                 "publisher": "OSHA",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Design delivery: complete the schemes, calculations, and drawings for circuits, control and signal systems, power and distribution equipment, and embedded and communication electronic components so the design is manufacturable, testable, and verifiable. — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Analysis and trade-offs: turn requirement specifications, interface definitions, applicable standards, simulation and test data, and cost and schedule constraints into design parameters, recording assumptions, boundary conditions, and open items. — 50/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Testing and verification: define test criteria and verification plans, record measurement conditions and results each time, handle deviations and retest, and produce traceable reports. — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36966,7 +36986,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37138,15 +37158,27 @@
         "source_refs": [
           "r2-pay-2"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Electrical and Electronics Engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Designing, developing, and testing electrical and electronic equipment, components, and systems · O*NET-SOC 17-2070 (combined framing)",
@@ -37197,7 +37229,7 @@
       "text": "Electrical and Electronics Engineers: duties, pay, and entry paths"
     }
   },
-  "source_content_sha256": "b1102431905cd9ce1255c896530e51cb5b0a15d1408838162e4f65ef428daa04",
+  "source_content_sha256": "90d6ba9b212edd9cea3f26dd97e7ea046804143b3f45b30d78274717021c7b5e",
   "subject": {
     "canonical_slug": "electrical-and-electronics-engineers",
     "name": "Electrical and Electronics Engineers",

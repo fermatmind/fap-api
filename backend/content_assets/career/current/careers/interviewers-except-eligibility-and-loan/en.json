@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7560,7 +7563,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Speech recognition and generative AI can assist with transcribing interview records, prefilling forms, preliminary screening for answer consistency and missing items, and coding suggestions. However, verification of identity and authorization, judgments about respondents' true intentions and inconsistencies, handling personal and medical information, and conclusions involving eligibility or fees remain the responsibility of authorized personnel. Task exposure does not mean job replacement or widespread adoption; formal use requires authorization, human review and records. This page provides no replacement probability or timeline."
+              "Direct answer | Speech recognition and generative AI can assist with transcribing interview records, prefilling forms, preliminary screening for answer consistency and missing items, and coding suggestions. However, verification of identity and authorization, judgments about respondents' true intentions and inconsistencies, handling personal and medical information, and conclusions involving eligibility or fees remain the responsibility of authorized personnel. Task exposure does not mean job replacement or widespread adoption; formal use requires authorization, human review and records. This page provides no replacement probability or timeline. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "interviewers-except-eligibility-and-loan.ai-impact.ai-impact-table.2",
@@ -8741,6 +8744,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/43-4111.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Record answers and complete forms — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Review completeness and contradictory answers — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Classify, code and file according to rules — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11184,7 +11204,7 @@
     ],
     "path": "/en/career/jobs/interviewers-except-eligibility-and-loan",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wages",
       "direction-comparison": "Comparison of adjacent occupations",
       "fit": "Fit signals",
@@ -11260,15 +11280,27 @@
         "source_refs": [
           "wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Interviewers, Except Eligibility and Loan",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of tasks to AI (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Interviewers, Except Eligibility and Loan · Definitions, verification and information protection boundaries",
@@ -11319,7 +11351,7 @@
       "text": "Career assessment for Interviewers, Except Eligibility and Loan: work, entry and risk boundaries"
     }
   },
-  "source_content_sha256": "19b6d34938a202a52f2d79ac04f4a104575014e71a380d984c2ca4da6396373a",
+  "source_content_sha256": "887f2d65af8823fc402ea6c22c1caa2be1b6ecce6e69625bd51df7fc4260f479",
   "subject": {
     "canonical_slug": "interviewers-except-eligibility-and-loan",
     "name": "Interviewers, Except Eligibility and Loan",

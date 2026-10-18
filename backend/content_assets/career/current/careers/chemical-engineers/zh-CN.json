@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25103,7 +25106,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "单年Hot清单支持招聘中出现某些技术关键词，不证明要求在增加或企业采用。数据整理、仿真与文档辅助为编辑试用方向，效率须在真实流程验证；ILO暴露不等就业替代。BLS2025—2035增4.7%（OOH舍入5%）、年均空缺约1100，不是AI效果。"
+              "单年Hot清单支持招聘中出现某些技术关键词，不证明要求在增加或企业采用。数据整理、仿真与文档辅助为编辑试用方向，效率须在真实流程验证；ILO暴露不等就业替代。BLS2025—2035增4.7%（OOH舍入5%）、年均空缺约1100，不是AI效果。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.18",
@@ -31984,6 +31987,23 @@
                 "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "过程诊断｜定位制造过程与实验异常的根因｜用趋势、批次记录、物料与能量衡算与实验复现分离人为、原料、设备与控制四类原因，形成可验证的纠正措施（对应任务重要度 82）。 — 50/100; weight=1/3; chemical-engineers.profile.responsibilities-block.1[1]",
+                  "数据监控｜监控并分析过程与实验数据｜明确测点、采样频率、单位与误差范围，区分正常波动与真实偏移，并留下可追溯的数据与判断记录（对应任务重要度 81）。 — 75/100; weight=1/3; chemical-engineers.profile.responsibilities-block.1[2]",
+                  "设计与放大｜把实验室或中试方案放大为工业工艺｜完成物料与能量衡算、设备选型与条件设定、反应与分离与传热方案、测量与控制方案，并说明放大依据与不确定度（对应任务重要度 65、57、60、59、52）。 — 50/100; weight=1/3; chemical-engineers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36927,7 +36947,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37244,15 +37264,27 @@
         "source_refs": [
           "chem-cn-wage"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "化学工程师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RIC",
@@ -37303,7 +37335,7 @@
       "text": "化学工程师"
     }
   },
-  "source_content_sha256": "ca27a8ac69523fe096bcbb5590dd065559965dd8eb8a65a4f1276dc8b88f0ef2",
+  "source_content_sha256": "a59455fa72e928f5b3aeff98c0cb60c6f89f6bc5382c4931c4edf9edda478e96",
   "subject": {
     "canonical_slug": "chemical-engineers",
     "name": "化学工程师",

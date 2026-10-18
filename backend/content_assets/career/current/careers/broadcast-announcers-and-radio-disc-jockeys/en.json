@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24665,7 +24668,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no occupation-level AI adoption rate or AI-driven staff reduction share for 27-3011. BLS explicitly discusses radio consolidation and the possibility of dispensing with live DJs or using AI DJs; tool arrangements and review responsibility do not guarantee that positions stay the same."
+              "Insufficient evidence: this round obtained no occupation-level AI adoption rate or AI-driven staff reduction share for 27-3011. BLS explicitly discusses radio consolidation and the possibility of dispensing with live DJs or using AI DJs; tool arrangements and review responsibility do not guarantee that positions stay the same. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.18",
@@ -32023,6 +32026,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/27-2011.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Topic selection and script preparation | Research background material, write or rewrite the broadcast material, and calculate the word count and duration for the time slot | A broadcast script noting its sources and unverified items. — 75/100; weight=1/3; broadcast-announcers-and-radio-disc-jockeys.profile.responsibilities-block.1[0]",
+                  "Broadcasting and linking | Operate the broadcast console according to the run sheet, read the news and commercial information, play and schedule music, and complete the station announcement and linking | Broadcast completed according to the run sheet and a complete program log. — 75/100; weight=1/3; broadcast-announcers-and-radio-disc-jockeys.profile.responsibilities-block.1[2]",
+                  "Guest interviews | Prepare the interview outline and guest material, move along the outline, and bring the topic back when it drifts | The interview outline, guest material, and a note on the broadcast version. — 25/100; weight=1/3; broadcast-announcers-and-radio-disc-jockeys.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36945,7 +36965,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37213,15 +37233,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Broadcast Announcers and Radio Disc Jockeys",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 27-3011.00 · announcing and linking / interviews and music scheduling · indoor work and a fixed time slot",
@@ -37272,7 +37304,7 @@
       "text": "Broadcast Announcers and Radio Disc Jockeys"
     }
   },
-  "source_content_sha256": "c3d1fdbd6bf1b3c0fcefe67cc9b0bcc596f048e1c3f33db41202b1c4d734e70e",
+  "source_content_sha256": "2b765c8911be7887655649e3f91f14b3edb5926e69841cc82a691419c357d696",
   "subject": {
     "canonical_slug": "broadcast-announcers-and-radio-disc-jockeys",
     "name": "Broadcast Announcers and Radio Disc Jockeys",

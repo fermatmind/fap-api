@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24288,7 +24291,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮核到任务、软件招聘词和就业预测，未取得本岗生成式AI上线效率实验。资料归集、还款计算、草案与教育文稿可作为编辑试用方向；须验证输入准确、服务与数据权限和个案适用性。传统表格和记录系统不是生成式AI采用证据，任务暴露不是替代日期或薪酬效果。"
+              "本轮核到任务、软件招聘词和就业预测，未取得本岗生成式AI上线效率实验。资料归集、还款计算、草案与教育文稿可作为编辑试用方向；须验证输入准确、服务与数据权限和个案适用性。传统表格和记录系统不是生成式AI采用证据，任务暴露不是替代日期或薪酬效果。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31725,6 +31728,23 @@
                 "publisher": "中国政府官方网站",
                 "scope": "proxy",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_f06d5be45fcf464abe3fbdb9b2b3b37c.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "财务状况评估｜评估收支与资产债务｜面谈或电话访谈客户收集财务信息，通过审阅收入、资产、债务、支出、信用报告等资料评估客户整体财务状况，并核对数据来源与时点。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "美国Core：可用月收入与还款时间测算，债务计划、支出计划或预算及还款排序，并按财务家庭工作变化复核调整。美国FTC所说DMP主要处理无担保债务，与债务和解不同；住房车贷抵押问题另核，不能承诺免除债务。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "咨询与金融教育｜解释知识并推荐资源｜向客户解释信用报告评级、破产法、消费者保护法、工资扣划与催收等一般金融知识，推荐理财、预算与信用方面的教育材料或资源，并开设预算与个人财务管理课程或讲座。 — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37039,7 +37059,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37283,15 +37303,27 @@
         "source_refs": [
           "r2-pay-3"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "信贷咨询顾问",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "教育与社会服务 · 债务管理与信用咨询",
@@ -37342,7 +37374,7 @@
       "text": "信贷咨询顾问"
     }
   },
-  "source_content_sha256": "b8d77a236aa3a55e473ad2a6f631f4ea77dfdee62d139917751e6d0e11297d4c",
+  "source_content_sha256": "4016bc9ee6f3c1aa4beeab980f69d0efaa2fc3c770b3e82bb13a51b40ad686fb",
   "subject": {
     "canonical_slug": "credit-counselors",
     "name": "信贷咨询顾问",

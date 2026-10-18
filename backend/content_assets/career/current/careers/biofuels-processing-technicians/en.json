@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24709,7 +24712,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The editors propose task-based assistance with ledgers, draft records, offline data checks and retrieval. Sensor collection, existing automatic controls, alarms and GenAI are distinct technologies. This round lacks occupation-specific adoption rates, effectiveness experiments or measurements of overall replacement; absence of replacement evidence does not prove replacement will never occur. U.S. broader occupation Plant and System Operators, All Other (51-8099): employment of 14,300 people in 2025, projected at 14,600 in 2035; 2025—2035 growth of 2% (slower than average), net increase of approximately 300 people, and approximately 1,200 annual openings (including growth and replacement). These are not the separate size of 51-8099.01 Biofuels Processing Technicians, a Chinese projection or an individual hiring probability."
+              "The editors propose task-based assistance with ledgers, draft records, offline data checks and retrieval. Sensor collection, existing automatic controls, alarms and GenAI are distinct technologies. This round lacks occupation-specific adoption rates, effectiveness experiments or measurements of overall replacement; absence of replacement evidence does not prove replacement will never occur. U.S. broader occupation Plant and System Operators, All Other (51-8099): employment of 14,300 people in 2025, projected at 14,600 in 2035; 2025—2035 growth of 2% (slower than average), net increase of approximately 300 people, and approximately 1,200 annual openings (including growth and replacement). These are not the separate size of 51-8099.01 Biofuels Processing Technicians, a Chinese projection or an individual hiring probability. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "biofuels-processing-technicians.ai-impact.ai-impact-table.18",
@@ -32462,6 +32465,23 @@
                 "publisher": "BLS",
                 "scope": "wage_scope",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Monitor and adjust | Keep the process within limits | Monitor readings for batch or continuous processes, fine-tune parameters within approved operating limits, and record every adjustment and its basis. — 25/100; weight=1/3; biofuels-processing-technicians.profile.responsibilities-block.1[1]",
+                  "Sample and test | Give judgments a traceable basis | Take samples and perform routine tests or analysis by shift, and record readings, results and flowmeter and instrument status by batch and shift. — 0/100; weight=1/3; biofuels-processing-technicians.profile.responsibilities-block.1[2]",
+                  "Records and handover | Make responsibilities transferable | Truthfully record operations, tests, abnormalities and responses, and complete handovers. For matters beyond your authorization or involving special work, report and transfer them through the authorization chain. — 75/100; weight=1/3; biofuels-processing-technicians.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37367,7 +37387,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -37731,15 +37751,27 @@
         "source_refs": [
           "ep-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Biofuels Processing Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 51-8099.01 · Job Zone 1–2 (Very Little to Some Preparation Needed) · SVP below 6.0",
@@ -37790,7 +37822,7 @@
       "text": "Biofuels Processing Technicians"
     }
   },
-  "source_content_sha256": "37590c63d0cac4f155bb88978c7fb7827cf3924abfcbb9d10779b2cad7e8c3b3",
+  "source_content_sha256": "c52eb22673198a218a00abb10f54057f9f23bcf97077bd8bc80cdcbef9df3ea2",
   "subject": {
     "canonical_slug": "biofuels-processing-technicians",
     "name": "Biofuels Processing Technicians",

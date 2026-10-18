@@ -47,6 +47,9 @@
       "fact:current-parent-industry-2": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25035,7 +25038,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Material estimating, design, programming, machining, and inspection may be affected by different technologies; no substitution-rate or year evidence was obtained this round, and having not obtained it is not treated as proof that automation is impossible."
+              "Material estimating, design, programming, machining, and inspection may be affected by different technologies; no substitution-rate or year evidence was obtained this round, and having not obtained it is not treated as proof that automation is impossible. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "cabinetmakers-and-bench-carpenters.ai-impact.ai-impact-table.18",
@@ -33073,6 +33076,23 @@
                 "publisher": "OSHA",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/etools/woodworking/finishing-chemicals/hazards-solutions"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Reading drawings and layout | measure and mark dimensions and tolerances on paper or on lumber to drawings, confirm the position of structural parts | layout and dimension marking records. — 25/100; weight=1/3; cabinetmakers-and-bench-carpenters.profile.responsibilities-block.1[0]",
+                  "Machining and shaping | cut lumber to the correct size, true joints with hand tools, set up and operate woodworking machines to shape | machined parts within tolerance. — 0/100; weight=1/3; cabinetmakers-and-bench-carpenters.profile.responsibilities-block.1[1]",
+                  "Assembly and reinforcement | apply glue and position, assemble parts and subassemblies, reinforce joints with fasteners | completed units and reinforcement records. — 0/100; weight=1/3; cabinetmakers-and-bench-carpenters.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38002,7 +38022,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38408,15 +38428,27 @@
           "wages-current",
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Cabinetmakers and Bench Carpenters",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page does not score it)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 51-7011.00 · drawing reading and layout / cutting and shaping / joint fitting / assembly and hardware",
@@ -38467,7 +38499,7 @@
       "text": "Cabinetmakers and Bench Carpenters"
     }
   },
-  "source_content_sha256": "48d38dfdd0448a7f37fdc7a7013fbcd0ee4f86ebc9a0b391347ecc4653a7ae45",
+  "source_content_sha256": "d147bf5782bbf1ef36be93ff7288c10a3afd33f2bded1094e8a0b907b60bcde2",
   "subject": {
     "canonical_slug": "cabinetmakers-and-bench-carpenters",
     "name": "Cabinetmakers and Bench Carpenters",

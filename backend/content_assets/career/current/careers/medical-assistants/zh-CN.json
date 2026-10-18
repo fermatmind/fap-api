@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7561,7 +7564,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试验假设：工具只整理本页虚构R1/R2/R3表和交接草稿，人回查A12≠A21、R3待定与Z越权请求；不上传真实病历，不解读生命体征、不生成剂量或诊断。2025招聘软件提及不能验证生成式AI的临床性能、机构采用或岗位替代。"
+              "编辑试验假设：工具只整理本页虚构R1/R2/R3表和交接草稿，人回查A12≠A21、R3待定与Z越权请求；不上传真实病历，不解读生命体征、不生成剂量或诊断。2025招聘软件提及不能验证生成式AI的临床性能、机构采用或岗位替代。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "medical-assistants.ai-impact.ai-impact-table.2",
@@ -8842,6 +8845,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/31-9094.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "测量生命体征并协助检查 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "登记、排程与病历记录 — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "采血并处理标本 — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11279,7 +11299,7 @@
     ],
     "path": "/zh/career/jobs/medical-assistants",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11367,15 +11387,27 @@
         "source_refs": [
           "onet-trends"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "医疗助理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "身份与医嘱核对",
@@ -11426,7 +11458,7 @@
       "text": "医疗助理：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "cff42acc639fb36af9fed91ba37948ea8c0031e0566a8252da42cb8719016d8d",
+  "source_content_sha256": "1549ecd214b0c94a7e77c6e291daf4b03ca2afd9ac3d2fd21c9f2f99021d2e03",
   "subject": {
     "canonical_slug": "medical-assistants",
     "name": "医疗助理",

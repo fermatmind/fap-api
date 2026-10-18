@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25115,7 +25118,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task judgment | Trials of work order organizing, fault material retrieval, and report drafts may be conducted in an approved environment, checking readings, versions, and repair criteria item by item. No evidence has been obtained on this occupation's generative AI adoption rate, measured efficiency gains, exposure level, or employment causality; ordinary control systems differ from AI. The O*NET automation context lists only 12% not at all automated, and adoption rates must not be inferred from the remaining proportion. The O*NET detailed page lists 13 software skill categories; the 8 software items on the hot technologies page come from U.S. 2025 full-year job postings: Office4%, Excel3%, Outlook2%, Word1%, PowerPoint/SAP/AutoCAD below 1%, and the Acrobat share is not provided; a mention is not an enterprise adoption rate, AI usage rate, or measured effect. The U.S. BLS49-9021 projection for 2025—2035: about 440,900 → 489,100 people, growth 10.9% (OOH rounded 11%), average annual openings 40,600 including growth and replacements; self-employment in the base period 6.3%. This is not real-time hiring, net new openings, or AI causality."
+              "Editorial task judgment | Trials of work order organizing, fault material retrieval, and report drafts may be conducted in an approved environment, checking readings, versions, and repair criteria item by item. No evidence has been obtained on this occupation's generative AI adoption rate, measured efficiency gains, exposure level, or employment causality; ordinary control systems differ from AI. The O*NET automation context lists only 12% not at all automated, and adoption rates must not be inferred from the remaining proportion. The O*NET detailed page lists 13 software skill categories; the 8 software items on the hot technologies page come from U.S. 2025 full-year job postings: Office4%, Excel3%, Outlook2%, Word1%, PowerPoint/SAP/AutoCAD below 1%, and the Acrobat share is not provided; a mention is not an enterprise adoption rate, AI usage rate, or measured effect. The U.S. BLS49-9021 projection for 2025—2035: about 440,900 → 489,100 people, growth 10.9% (OOH rounded 11%), average annual openings 40,600 including growth and replacements; self-employment in the base period 6.3%. This is not real-time hiring, net new openings, or AI causality. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "heating-air-conditioning-and-refrigeration-mechanics-and-installers.ai-impact.ai-impact-table.18",
@@ -32617,6 +32620,23 @@
                 "publisher": "Ministry of Emergency Management",
                 "scope": "Special operations within the actual catalog scope in mainland China",
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Taking the order and on-site diagnosis — 50/100; weight=1/3; heating-air-conditioning-and-refrigeration-mechanics-and-installers.ai-impact.ai-impact-table.95[0]",
+                  "Repair and replacement — 0/100; weight=1/3; heating-air-conditioning-and-refrigeration-mechanics-and-installers.ai-impact.ai-impact-table.99[0]",
+                  "Installation and commissioning — 0/100; weight=1/3; heating-air-conditioning-and-refrigeration-mechanics-and-installers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37547,7 +37567,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37695,15 +37715,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Heating, Air Conditioning, and Refrigeration Mechanics and Installers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Heating, Air Conditioning, and Refrigeration Mechanics and Installers · tasks, deliverables, and responsibility boundaries",
@@ -37754,7 +37786,7 @@
       "text": "Heating, Air Conditioning, and Refrigeration Mechanics and Installers"
     }
   },
-  "source_content_sha256": "412111d32160b1af3bcc16da86527017e8070a17d7b419981bdf738d071111b7",
+  "source_content_sha256": "a9ab0c2f80a54383d134feeee1fd56b50265d262540a330387f41a0e8b5777e6",
   "subject": {
     "canonical_slug": "heating-air-conditioning-and-refrigeration-mechanics-and-installers",
     "name": "Heating, Air Conditioning, and Refrigeration Mechanics and Installers",

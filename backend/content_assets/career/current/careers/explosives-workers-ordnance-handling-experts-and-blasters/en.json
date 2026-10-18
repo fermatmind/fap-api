@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24485,7 +24488,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no institutional AI adoption rate, measured efficiency, wage, or employment causal quantity for this occupation was obtained. ILO is a global potential task exposure study, O*NET is a task description, and NIST is a voluntary risk framework; none proves that this occupation has already adopted it or been augmented as a whole. This page does not score tasks."
+              "Insufficient evidence: no institutional AI adoption rate, measured efficiency, wage, or employment causal quantity for this occupation was obtained. ILO is a global potential task exposure study, O*NET is a task description, and NIST is a voluntary risk framework; none proves that this occupation has already adopted it or been augmented as a whole. This page uses a separate editorial estimate for representative core tasks. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "explosives-workers-ordnance-handling-experts-and-blasters.ai-impact.ai-impact-table.18",
@@ -32016,6 +32019,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "47-1011.00",
                 "url": "https://www.onetonline.org/link/summary/47-1011.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Measuring and cleaning holes and charging and wiring — 0/100; weight=1/3; explosives-workers-ordnance-handling-experts-and-blasters.ai-impact.ai-impact-table.95[0]",
+                  "Clearing the area and executing initiation — 0/100; weight=1/3; explosives-workers-ordnance-handling-experts-and-blasters.ai-impact.ai-impact-table.99[0]",
+                  "Explosives collection, handover, and inventory registration — 75/100; weight=1/3; explosives-workers-ordnance-handling-experts-and-blasters.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36924,7 +36944,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37193,15 +37213,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Explosives Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Explosives Workers, Ordnance Handling Experts, and Blasters · official occupational scope · charging and initiation loop",
@@ -37252,7 +37284,7 @@
       "text": "Explosives Workers"
     }
   },
-  "source_content_sha256": "c718ba9842cdc14babd09306401774313214259511005eba5cd86c9fbad4dc66",
+  "source_content_sha256": "b84e90c455b39836a0aac8a8ed5e42fe305ba0121614b28c7431679196b05eb0",
   "subject": {
     "canonical_slug": "explosives-workers-ordnance-handling-experts-and-blasters",
     "name": "Explosives Workers",

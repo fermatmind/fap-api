@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25517,7 +25520,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "There is no screening occupation detection experiment or verifiable task exposure scale supporting a score on this page, so it remains missing; text generation performance cannot be converted into professional screening ability."
+              "There is no screening occupation detection experiment or verifiable task exposure scale supporting a score on this page, so the Hero shows a separate editorial estimate; text generation performance cannot be converted into professional screening ability."
             ]
           },
           "id": "transportation-security-screeners.ai-impact.ai-impact-table.9",
@@ -25545,7 +25548,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate text organisation, professional detection systems, actual adoption and employment outcomes. The task record describes the work object, NIST provides a general risk framework, and no screening detection score or substitution rate is given. This page forms no reviewable task-level score and leaves the score blank; the paper exercise only observes checking and explanation."
+              "First separate text organisation, professional detection systems, actual adoption and employment outcomes. The task record describes the work object, NIST provides a general risk framework, and no screening detection score or substitution rate is given. The external materials used here supply no measured task-level score and shows a separate editorial estimate; the paper exercise only observes checking and explanation. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "transportation-security-screeners.display.ai_impact_table.answer",
@@ -32840,6 +32843,23 @@
                 "publisher": "O*NET OnLine; original BLS OEWS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/33-9093.00?p=annual&st=CA"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Preparation | meet the required conditions | verify qualifications, background check, health and training for the real post, and do not substitute a self-study portfolio. — 25/100; weight=1/3; transportation-security-screeners.display.responsibilities_block.02[0]",
+                  "Execution | stay attentive and communicative | work under rules within authorised tasks, explain clearly and coordinate with colleagues. — 25/100; weight=1/3; transportation-security-screeners.display.responsibilities_block.03[0]",
+                  "Handover | report and follow-up coordination | explain the facts and unsettled points to the relevant responsible person, and complete the handover according to duties. — 25/100; weight=1/3; transportation-security-screeners.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38110,7 +38130,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38258,15 +38278,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Transportation security screeners",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 33-9093.00 precise occupational definition",
@@ -38317,7 +38349,7 @@
       "text": "Transportation security screeners"
     }
   },
-  "source_content_sha256": "b0b8cb1ad4bd326e13175520799a87ebc51d1da861a50565483d8c15f400ccc2",
+  "source_content_sha256": "8da3a5a5b58ed40d23149acba04814d6bcd619fbda1b70d9e00b8be94a567a94",
   "subject": {
     "canonical_slug": "transportation-security-screeners",
     "name": "Transportation security screeners",

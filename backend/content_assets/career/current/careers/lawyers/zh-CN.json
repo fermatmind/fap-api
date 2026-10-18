@@ -29,6 +29,9 @@
       "fact:cn-business-private-2025-revision": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "pending_mapping"
       },
@@ -9697,7 +9700,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得律师七工作方向可比准确率、机构采用率或因果岗位结果。AI可辅助资料索引、合同比较和文书初稿；ABA 512讨论美国模型规则下的能力、保密、客户沟通和监督，不能当中国法律。使用者仍需回到原始事实与现行法源核对，获授权律师承担判断和外发责任。"
+              "证据不足：未取得律师七工作方向可比准确率、机构采用率或因果岗位结果。AI可辅助资料索引、合同比较和文书初稿；ABA 512讨论美国模型规则下的能力、保密、客户沟通和监督，不能当中国法律。使用者仍需回到原始事实与现行法源核对，获授权律师承担判断和外发责任。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "lawyers.ai-impact.ai-impact-table.1",
@@ -12507,6 +12510,23 @@
                 "publisher": "Eloundou、Manning、Mishkin、Rock / arXiv",
                 "scope": "contextual",
                 "url": "https://arxiv.org/abs/2303.10130"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "研究｜事实与法源核对｜输入客户叙述、证据和适用法源，区分原话、已核事实与假设；产出争点及证据清单，不能把缺证据写成定论。 — 75/100; weight=1/3; lawyers.profile.responsibilities-block.2[0]",
+                  "文件｜起草与客户沟通｜按委托起草合同、诉讼文书或内部意见，解释方案、限制及风险；产出有版本、引用和批准人的文件，正式外发须核权限。 — 75/100; weight=1/3; lawyers.profile.responsibilities-block.3[0]",
+                  "代理｜委托与程序推进｜核对委托范围、冲突、诉讼或交易期限，组织谈判及提交；产出期限台账和过程记录，具体出庭与签发按法域及机构授权。 — 25/100; weight=1/3; lawyers.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -15461,7 +15481,7 @@
     ],
     "path": "/zh/career/jobs/lawyers",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -15681,15 +15701,27 @@
         "source_refs": [
           "source-nbs-business-2025-revision"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "律师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [],
     "metrics": [
@@ -15736,7 +15768,7 @@
       "text": "律师职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "c071a51e6c68a9dc3ba7fb6769a768b629458ee891399061dd19c2bd173bf21d",
+  "source_content_sha256": "f3eb7925e748f208f82b6a755c7ab87fa210df0617471414d5de4ad87467a3b4",
   "subject": {
     "canonical_slug": "lawyers",
     "name": "律师",

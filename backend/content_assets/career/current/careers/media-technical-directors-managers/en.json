@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7539,7 +7542,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial suggestion: use only fictional scripts and status records to try AI-assisted log organization, switching-table drafts, and lead retrieval. Check durations, actual states, and permissions individually. O*NET recruitment technology directories do not prove adoption of these GenAI tasks. Tools cannot issue permissions, repair equipment, or replace organizational authorization."
+              "Editorial trial suggestion: use only fictional scripts and status records to try AI-assisted log organization, switching-table drafts, and lead retrieval. Check durations, actual states, and permissions individually. O*NET recruitment technology directories do not prove adoption of these GenAI tasks. Tools cannot issue permissions, repair equipment, or replace organizational authorization. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "media-technical-directors-managers.ai-impact.ai-impact-table.2",
@@ -8747,6 +8750,23 @@
                 "publisher": "National Radio and Television Administration",
                 "scope": "reference",
                 "url": "https://www.nrta.gov.cn/art/2015/5/21/art_1588_43694.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Video source switching and effects execution — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Test equipment and monitor broadcasts — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Act as liaison between engineering and production — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11140,7 +11160,7 @@
     ],
     "path": "/en/career/jobs/media-technical-directors-managers",
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Salaries",
       "direction-comparison": "Adjacent Occupation Comparison",
       "fit": "Fit Signals",
@@ -11216,15 +11236,27 @@
         "source_refs": [
           "wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Media Technical Directors/Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Technical Control and Signal Switching",
@@ -11275,7 +11307,7 @@
       "text": "Media Technical Directors/Managers: Work, US Wages, and Entry Paths | FermatMind"
     }
   },
-  "source_content_sha256": "4461cec43a91b67050af3c0ede5093faf456ffdee87a84b178cf09a07f584729",
+  "source_content_sha256": "42795b31bca06d838aaba7548534b1ab1ef76c878ee558e92262d482fdbc133f",
   "subject": {
     "canonical_slug": "media-technical-directors-managers",
     "name": "Media Technical Directors/Managers",

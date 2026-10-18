@@ -41,6 +41,9 @@
       "fact:comm-review-us-openings-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24992,7 +24995,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial candidate: within the scope permitted by the course and institution, use fictional or approved materials to trial course materials, literature entries, feedback, or record draft organization; verify citations, facts, omissions, evaluation basis, and total review time against the originals. This round obtained no evidence on the reliability, adoption rate, or efficiency gain of generative AI for this occupation, and it cannot be called completed, more reliable, or significantly changed."
+              "Editorial trial candidate: within the scope permitted by the course and institution, use fictional or approved materials to trial course materials, literature entries, feedback, or record draft organization; verify citations, facts, omissions, evaluation basis, and total review time against the originals. This round obtained no evidence on the reliability, adoption rate, or efficiency gain of generative AI for this occupation, and it cannot be called completed, more reliable, or significantly changed. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "communications-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32390,6 +32393,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/25-9031.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Course design and material preparation｜Design courses and prepare syllabi, assignments, and handouts｜Prepare course materials such as syllabi, assignments, and handouts; plan, evaluate, and revise course offerings, course content, course materials, and teaching methods; and select and obtain materials and supplies such as textbooks (corresponding to O*NET tasks two, ten, thirteen, and nineteen). — 75/100; weight=1/3; communications-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "Classroom lecturing and discussion moderation｜Prepare for and teach classes and lead classroom discussion｜Prepare for and teach undergraduate or graduate courses on topics such as public speaking, media criticism, and oral tradition; and initiate, lead, and moderate classroom discussions (corresponding to O*NET tasks three and six). — 25/100; weight=1/3; communications-teachers-postsecondary.profile.responsibilities-block.1[1]",
+                  "Assignment and examination assessment｜Grade assignments and papers and compile and administer examinations｜Read and grade student assignments, course papers, and examinations; compile and administer examinations or assign that work to others; and maintain student attendance, grade, and other required records (corresponding to O*NET tasks one, four, and eight). — 50/100; weight=1/3; communications-teachers-postsecondary.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37325,7 +37345,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37706,15 +37726,27 @@
         "source_refs": [
           "comm-review-nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Communications Teacher, Postsecondary",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page gives no score)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · SIA",
@@ -37765,7 +37797,7 @@
       "text": "Communications Teacher, Postsecondary"
     }
   },
-  "source_content_sha256": "4fb11ad9ddff77c9e5f6933ae21cd96c07aa8fdde53057ea09090fc895d7a7a4",
+  "source_content_sha256": "b458c97dae02f4e4aad4f50f497ade13a4d9942f3ac28d13adc63995d73e2ad2",
   "subject": {
     "canonical_slug": "communications-teachers-postsecondary",
     "name": "Communications Teacher, Postsecondary",

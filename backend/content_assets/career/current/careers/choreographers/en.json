@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24579,7 +24582,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Keep technical tractability, actual adoption and occupation outcomes separate: the assistive uses for material, versions and communication drafts are this page's editorial inference; O*NET software and recruiting keywords cannot prove that teaching has been deployed, that efficiency has improved or that income has changed."
+              "Keep technical tractability, actual adoption and occupation outcomes separate: the assistive uses for material, versions and communication drafts are this page's editorial inference; O*NET software and recruiting keywords cannot prove that teaching has been deployed, that efficiency has improved or that income has changed. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "choreographers.ai-impact.ai-impact-table.18",
@@ -31572,6 +31575,23 @@
                 "publisher": "Public text of the National People's Congress and the State Administration for Market Regulation",
                 "scope": "contextual",
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Creation and material｜Generate movement material and record the creative process｜Try out different dancers and movements and positions, draw influences from other art forms such as drama and visual art and architecture, and record ideas and sketches and references to form reusable material (corresponding to O*NET tasks: trying out different dancers and movements and positions, drawing influences from other art forms, and developing creative ideas and keeping notes and sketches). — 50/100; weight=1/3; choreographers.profile.responsibilities-block.1[0]",
+                  "Rehearsal and direction｜Lead rehearsals and guide dancers' technique and safety｜Direct rehearsals to guide dancers in completing movements and achieving the intended effect, advise on standing and moving and teach correct technique to help prevent injury, and teach rhythm and interpretive movement to students and dancers and other performers (corresponding to tasks: directing rehearsals, instructing on standing and moving, and teaching rhythm and interpretive movement). — 25/100; weight=1/3; choreographers.profile.responsibilities-block.1[1]",
+                  "Presentation and direction｜Direct and stage the presentation｜Direct and stage dance presentations for different entertainment forms; collaborate with performers and production staff to design sets and lighting and costume and other artistic elements; coordinate with the music director to produce the music (corresponding to tasks: directing and staging the presentation, collaborating on artistic elements, and coordinating with the music director). — 25/100; weight=1/3; choreographers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36524,7 +36544,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -36841,15 +36861,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Choreographers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · AS",
@@ -36900,7 +36932,7 @@
       "text": "Choreographers"
     }
   },
-  "source_content_sha256": "7e100c7a496cbf0b88a3b77a337befe0e583ce55c2ff48611471f7c495139b8a",
+  "source_content_sha256": "3a33c720e9ac6d84b9d7b39f4aeaa0bef652614e46a699c820d890943a20d04d",
   "subject": {
     "canonical_slug": "choreographers",
     "name": "Choreographers",

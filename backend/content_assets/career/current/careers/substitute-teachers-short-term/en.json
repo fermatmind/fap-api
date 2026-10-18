@@ -11,6 +11,9 @@
       "fact:cn-education-private-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25607,7 +25610,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Distinguish a draft matching the input, real school adoption, student learning outcomes and employment change. Checking fictional records is editorial exploration, and a task profile does not prove a teaching effect or independent class ability."
+              "Distinguish a draft matching the input, real school adoption, student learning outcomes and employment change. Checking fictional records is editorial exploration, and a task profile does not prove a teaching effect or independent class ability. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "substitute-teachers-short-term.display.ai_impact_table.answer",
@@ -33768,6 +33771,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Taking over｜Original lesson plan and scope check｜Clarify the original activities, materials, class rules and school division of work and understand what may be adjusted. — 50/100; weight=1/3; substitute-teachers-short-term.display.responsibilities_block.01[0]",
+                  "Explaining｜Teaching organization and question time｜Explain the activities, answer questions and assist learning under the corresponding stage and subject and the school requirements. — 25/100; weight=1/3; substitute-teachers-short-term.display.responsibilities_block.02[0]",
+                  "Supervision｜Classroom and extracurricular activities｜Watch order and activity progress under the school arrangement and check duties with the responsible person when they are unclear. — 0/100; weight=1/3; substitute-teachers-short-term.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39072,7 +39092,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -39246,15 +39266,27 @@
         "source_refs": [
           "nbs-education-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Substitute teachers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "U.S. 25-3031 short-term substituting",
@@ -39305,7 +39337,7 @@
       "text": "Substitute teachers"
     }
   },
-  "source_content_sha256": "4a961d4cf23d05c3e675f734e12db38bd514a4219654534a491216cfaaea34ea",
+  "source_content_sha256": "104345e6947632744f3c9f23a1cde4cdbc35f061767e1ec8560660d61894f142",
   "subject": {
     "canonical_slug": "substitute-teachers-short-term",
     "name": "Substitute teachers",

@@ -17,6 +17,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -12987,6 +12990,23 @@
                 "publisher": "FermatMind",
                 "scope": "internal_rubric",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "核面积、壁纸和图案 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "按说明施胶上墙 — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]",
+                  "对齐图案排气 — 0/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13174,7 +13194,7 @@
             }
           }
         ],
-        "answer": "面积估算、裁切排版、工单整理和图像缺陷提示可辅助；真实基层、花纹对齐、高处安全与成品验收由人员负责。",
+        "answer": "面积估算、裁切排版、工单整理和图像缺陷提示可辅助；真实基层、花纹对齐、高处安全与成品验收由人员负责。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET裱糊任务背景／编辑核对建议",
@@ -14940,7 +14960,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15100,15 +15120,27 @@
         "source_refs": [
           "bls-ep-2025-2035"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "裱糊工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "墙面顶棚 · 壁纸织物饰面",
@@ -15159,7 +15191,7 @@
       "text": "裱糊工：壁纸施工、工资与入行路径"
     }
   },
-  "source_content_sha256": "93d9999f030cdfc45b3891490b32e6deb1a53bf0047db432b0824ea71e6536cd",
+  "source_content_sha256": "125c4f1b9bf7dffb0c551975640b1302d3473f740bae6832716f368dc370dc93",
   "subject": {
     "canonical_slug": "paperhangers",
     "name": "裱糊工",

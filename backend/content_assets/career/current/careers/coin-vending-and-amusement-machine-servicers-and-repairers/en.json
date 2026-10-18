@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25128,7 +25131,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task capability, actual adoption, and position outcomes are checked separately. This round obtained no model accuracy rate, sustained remote monitoring investment, or efficiency evidence for this occupation; a catalogue supports software types and does not prove generative AI use."
+              "Task capability, actual adoption, and position outcomes are checked separately. This round obtained no model accuracy rate, sustained remote monitoring investment, or efficiency evidence for this occupation; a catalogue supports software types and does not prove generative AI use. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "coin-vending-and-amusement-machine-servicers-and-repairers.ai-impact.ai-impact-table.18",
@@ -33369,6 +33372,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inspection and testing｜Judge the fault and confirm normal function｜Check the machine and metering devices to determine the cause of the fault and handle small problems such as jammed bills or stuck merchandise, test the machine to confirm normal function, and travel on site to provide maintenance and repair service (corresponding to the second, third, and twelfth O*NET tasks). — 50/100; weight=1/3; coin-vending-and-amusement-machine-servicers-and-repairers.profile.responsibilities-block.1[1]",
+                  "Adjustment and repair｜Adjust and repair the equipment and replace faulty parts｜Adjust and repair coin machines, vending machines, amusement equipment, and metering devices and replace faulty mechanical and electrical parts (using hand tools, soldering irons, and drawings), replace faulty parts (such as a worn magnetic head on a card reader), and adjust machine pressure gauges and thermostats (corresponding to the eighth, fourth, and thirteenth O*NET tasks). — 0/100; weight=1/3; coin-vending-and-amusement-machine-servicers-and-repairers.profile.responsibilities-block.1[2]",
+                  "Records and discrepancy reporting｜Keep maintenance and transaction records and handle discrepancies｜Keep machine maintenance and repair records, record transaction information on forms or in logs and notify designated personnel of discrepancies, and keep records of delivered merchandise and collected money (corresponding to the fifth, ninth, and tenth O*NET tasks). — 75/100; weight=1/3; coin-vending-and-amusement-machine-servicers-and-repairers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38321,7 +38341,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38843,15 +38863,27 @@
         "source_refs": [
           "vending-wage-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Coin, Vending, and Amusement Machine Servicer and Repairer",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page gives no score)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RC",
@@ -38902,7 +38934,7 @@
       "text": "Coin, Vending, and Amusement Machine Servicer and Repairer"
     }
   },
-  "source_content_sha256": "e603af5922724c1ea401ff9084660f8471f993b2749ccb69616ef9d321d3d51a",
+  "source_content_sha256": "8431d0b6a8aaeec15b2f795e9e7a3c6a79fec1e5fa0592ab0e548adfa95448e0",
   "subject": {
     "canonical_slug": "coin-vending-and-amusement-machine-servicers-and-repairers",
     "name": "Coin, Vending, and Amusement Machine Servicer and Repairer",

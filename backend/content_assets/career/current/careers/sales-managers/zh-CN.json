@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24755,7 +24758,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得销售经理AI采用率、替代率或就业因果效果；信息整理可作为辅助试验，客户需求、销售预测、人员和预算决定仍需人复核。"
+              "证据不足：本页未取得销售经理AI采用率、替代率或就业因果效果；信息整理可作为辅助试验，客户需求、销售预测、人员和预算决定仍需人复核。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "sales-managers.ai-impact.ai-impact-table.18",
@@ -32539,6 +32542,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/management/sales-managers.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "销售分析｜复核销售、盈利、客户偏好和机会阶段。｜输出口径清楚的预测与分析，保留未知项。 — 75/100; weight=1/3; sales-managers.profile.responsibilities-block.1[1]",
+                  "团队带教｜安排人员、培训、绩效反馈和任务分工。｜输出带教、反馈与行动计划，保留未知项。 — 25/100; weight=1/3; sales-managers.profile.responsibilities-block.1[2]",
+                  "投诉协调｜澄清客户投诉并协调销售、服务和交付。｜输出事实、责任人与处理交接，保留未知项。 — 25/100; weight=1/3; sales-managers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37447,7 +37467,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37715,15 +37735,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "销售经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "目标与区域 · 销售分析 · 团队带教",
@@ -37774,7 +37806,7 @@
       "text": "销售经理"
     }
   },
-  "source_content_sha256": "5f42bc1fc6dbb8c3339430b74d32b728333a3865785916d6797122d138a520ac",
+  "source_content_sha256": "0a1c15c97a30dcb4489b7fbba86a0cfdc3c6da72f958ebe5fda3a6385b596b4a",
   "subject": {
     "canonical_slug": "sales-managers",
     "name": "销售经理",

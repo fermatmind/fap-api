@@ -8,6 +8,9 @@
       "fact:cn-wage-private": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7542,7 +7545,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial hypothesis: use tools to organize this page's fictional capacity/budget comparison and unresolved items, with humans recalculating 1040 / 1000 and 90% and checking C's pending review and L9. Software recruitment mentions do not establish generative AI adoption, performance, or replacement. Do not upload real patient data or use this problem's outputs to arrange real services, clinical care, or authorization."
+              "Editorial trial hypothesis: use tools to organize this page's fictional capacity/budget comparison and unresolved items, with humans recalculating 1040 / 1000 and 90% and checking C's pending review and L9. Software recruitment mentions do not establish generative AI adoption, performance, or replacement. Do not upload real patient data or use this problem's outputs to arrange real services, clinical care, or authorization. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "medical-and-health-services-managers.ai-impact.ai-impact-table.2",
@@ -8800,6 +8803,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-1021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Prepare budgets and allocate resources — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Recruit, schedule, and evaluate performance — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Analyze operational data and prepare reports — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11218,7 +11238,7 @@
     ],
     "path": "/en/career/jobs/medical-and-health-services-managers",
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Salaries",
       "direction-comparison": "Adjacent Occupation Comparison",
       "fit": "Fit Signals",
@@ -11306,15 +11326,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Medical and Health Services Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Operations Planning and Budgets",
@@ -11365,7 +11397,7 @@
       "text": "Medical and Health Services Managers: Work, US Wages, and Entry Paths | FermatMind"
     }
   },
-  "source_content_sha256": "8df2523a001688ef2e876fae7a77a575b9f96d76d2bd3eff9c6ea9d57be38ac6",
+  "source_content_sha256": "ceccd4d3d7bcd97a077100b779f91a517971f2f6ec6ce2015d53610984620955",
   "subject": {
     "canonical_slug": "medical-and-health-services-managers",
     "name": "Medical and Health Services Managers",

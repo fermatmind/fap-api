@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24620,7 +24623,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得本职业生成AI采用、生产率、替代或就业因果测量；检索、工单、日志及远端提示是编辑试验候选。ILO介绍扩展摘要与NIST简介仅跨职业背景，未读完整指数和本职业映射，不能断所有现场任务永不被替代。"
+              "证据不足：本轮未取得本职业生成AI采用、生产率、替代或就业因果测量；检索、工单、日志及远端提示是编辑试验候选。ILO介绍扩展摘要与NIST简介仅跨职业背景，未读完整指数和本职业映射，不能断所有现场任务永不被替代。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "audiovisual-equipment-installers-and-repairers.ai-impact.ai-impact-table.18",
@@ -32692,6 +32695,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/49-9061.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "现场勘察与定性｜先弄清条件｜按客户或工单确认故障现象或安装需求，查看走线路径、安装位置、供电与接地条件，把方案、可选项与费用讲清楚再动手。 — 25/100; weight=1/3; audiovisual-equipment-installers-and-repairers.profile.responsibilities-block.1[0]",
+                  "安装与固定｜按真实规格核对｜支架、设备、线缆与固定条件按设备说明和实际工程规范核，未取得全部承重验收规程，不把本页当作业批准。 — 0/100; weight=1/3; audiovisual-equipment-installers-and-repairers.profile.responsibilities-block.1[1]",
+                  "检修与更换｜让故障可定位｜查阅电路图与维修手册，定位到具体电路或元件后更换损坏部件与接线，复测并记录处理过程与结论。 — 25/100; weight=1/3; audiovisual-equipment-installers-and-repairers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37592,7 +37612,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37920,15 +37940,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "设备安装工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 49-2097.00 · Job Zone Three · 中等准备",
@@ -37979,7 +38011,7 @@
       "text": "设备安装工"
     }
   },
-  "source_content_sha256": "5f9bfb3630430eafa1d6acfd38276c2655d782149c2e1a48d5bfb851d44d5b20",
+  "source_content_sha256": "ee48a1aed98e6d8297bc81b0d4aed469d4737e06b18fc7200387a2e6bd3a736f",
   "subject": {
     "canonical_slug": "audiovisual-equipment-installers-and-repairers",
     "name": "设备安装工",

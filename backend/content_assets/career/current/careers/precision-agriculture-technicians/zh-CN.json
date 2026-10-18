@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24890,7 +24893,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图层、产量异常说明和报告草稿可作为生成式辅助设想；本页未核岗位级采用效果。遥感分类算法与生成式文本不同，不能把图像识别性能或农业技术员父组+5.4%预测当作生成式替代率。"
+              "图层、产量异常说明和报告草稿可作为生成式辅助设想；本页未核岗位级采用效果。遥感分类算法与生成式文本不同，不能把图像识别性能或农业技术员父组+5.4%预测当作生成式替代率。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "precision-agriculture-technicians.ai-impact.ai-impact-table.18",
@@ -33113,6 +33116,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/details/15-1299.02"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "采集坐标与边界 — 25/100; weight=1/3; precision-agriculture-technicians.ai-impact.ai-impact-table.95[0]",
+                  "土壤天气图层叠加 — 75/100; weight=1/3; precision-agriculture-technicians.ai-impact.ai-impact-table.103[0]",
+                  "遥感影像解释 — 75/100; weight=1/3; precision-agriculture-technicians.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38018,7 +38038,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38287,15 +38307,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "精准农业技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "精准农业 · GIS与地块数据",
@@ -38346,7 +38378,7 @@
       "text": "精准农业技术员"
     }
   },
-  "source_content_sha256": "47bf7b8f71502d085d2520d2d3faf8665a4156d05b8a2db14ab030594b379084",
+  "source_content_sha256": "4709173199af8c8ad138e1f8e383bcacf5df61ca092aa3b0509d185f83a8c2e6",
   "subject": {
     "canonical_slug": "precision-agriculture-technicians",
     "name": "精准农业技术员",

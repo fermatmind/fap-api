@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24402,7 +24405,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, replacement rate or disappearance year has been obtained for the separate 43-6014 general secretary occupation. Text tools can assist with schedule candidates, transcription and summaries; staff verify requests, versions, recipients and authority, and legal, medical and executive specialised materials have their own occupational and authorization boundaries."
+              "Insufficient evidence: no AI adoption rate, replacement rate or disappearance year has been obtained for the separate 43-6014 general secretary occupation. Text tools can assist with schedule candidates, transcription and summaries; staff verify requests, versions, recipients and authority, and legal, medical and executive specialised materials have their own occupational and authorization boundaries. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "secretaries-and-administrative-assistants-except-legal-medical-and-executive.ai-impact.ai-impact-table.18",
@@ -32231,6 +32234,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/43-9061.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Schedule coordination｜Verify attendees, time, meeting room and conflicts.｜Output confirmed invitations and change records. — 75/100; weight=1/3; secretaries-and-administrative-assistants-except-legal-medical-and-executive.profile.responsibilities-block.1[1]",
+                  "Document preparation｜Draft and proofread from the original materials and do not change professional conclusions without authorization.｜Output documents with clear versions. — 75/100; weight=1/3; secretaries-and-administrative-assistants-except-legal-medical-and-executive.profile.responsibilities-block.1[2]",
+                  "Communication and reception｜Answer calls, route questions and follow up on receipts.｜Output accurate communication and handoff records. — 50/100; weight=1/3; secretaries-and-administrative-assistants-except-legal-medical-and-executive.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37139,7 +37159,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37407,15 +37427,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Secretaries and administrative assistants, except legal, medical and executive",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "General secretaries and administrative assistants · O*NET 43-6014",
@@ -37466,7 +37498,7 @@
       "text": "Secretaries and administrative assistants, except legal, medical and executive"
     }
   },
-  "source_content_sha256": "18c0169a35d14ab960b2b9bb7b4795f4d43cbdd5586eb64d3109310f6599bfef",
+  "source_content_sha256": "9bb2e6e63f45d7a7153e31795e94aefc66a37b44f850ab087e28152e92adfd75",
   "subject": {
     "canonical_slug": "secretaries-and-administrative-assistants-except-legal-medical-and-executive",
     "name": "Secretaries and administrative assistants, except legal, medical and executive",

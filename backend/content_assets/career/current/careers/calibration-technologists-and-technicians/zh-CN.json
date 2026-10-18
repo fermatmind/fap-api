@@ -53,6 +53,9 @@
       "fact:current-us-industry-testing": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24888,7 +24891,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得替代率或消失年份证据。检索、数据处理、测量和检测均可能部分自动化，系统能力与人员责任分开，不把缺少证据当不可自动化。"
+              "本轮未取得替代率或消失年份证据。检索、数据处理、测量和检测均可能部分自动化，系统能力与人员责任分开，不把缺少证据当不可自动化。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "calibration-technologists-and-technicians.ai-impact.ai-impact-table.18",
@@ -32690,6 +32693,23 @@
                 "publisher": "费马测试",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/17-3028.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "校准与检测｜与已知标准比对压力温度湿度等条件测量值，执行校准测试并记录读数｜校准与检测原始记录。 — 25/100; weight=1/3; calibration-technologists-and-technicians.profile.responsibilities-block.1[1]",
+                  "数据分析与偏差判定｜分析测试数据以识别缺陷或确定校准要求，说明偏差与不确定度｜偏差与不确定度说明。 — 75/100; weight=1/3; calibration-technologists-and-technicians.profile.responsibilities-block.1[3]",
+                  "报告与交接｜撰写并提交校准测试结果报告，整理标准器与量具状态记录，完成交接与归档｜校准报告与交接说明。 — 75/100; weight=1/3; calibration-technologists-and-technicians.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37597,7 +37617,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38026,15 +38046,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "校准技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 17-3028.00 · 校准与检测 / 尺寸与外观核对 / 拆装与维护 / 记录与报告",
@@ -38085,7 +38117,7 @@
       "text": "校准技术员"
     }
   },
-  "source_content_sha256": "459b564e505baf17617f1f6edbce49a7612d6035418e219d85b7ec12a9875031",
+  "source_content_sha256": "20d231b9e4033fdffd0d135e1473302cf4b197b88cfcb9e5c5ba97c10dfe140e",
   "subject": {
     "canonical_slug": "calibration-technologists-and-technicians",
     "name": "校准技术员",

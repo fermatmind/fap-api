@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:official-code": {
         "status": "pending_mapping"
       },
@@ -7578,7 +7581,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | FermatMind recommends trialing assistance with sketch explanations, weight recalculations, and anomaly summaries using fictional work orders, checking fixed inputs item by item. Do not claim efficiency gains before measuring benefits. BLS outlook discusses how 3D printing and robotic polishing may raise productivity and reduce demand; this is an industry projection, not measured generative AI adoption."
+              "Direct answer | FermatMind recommends trialing assistance with sketch explanations, weight recalculations, and anomaly summaries using fictional work orders, checking fixed inputs item by item. Do not claim efficiency gains before measuring benefits. BLS outlook discusses how 3D printing and robotic polishing may raise productivity and reduce demand; this is an industry projection, not measured generative AI adoption. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.ai-impact.ai-impact-table.2",
@@ -9018,6 +9021,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/51-9071.06"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Confirm jewelry specifications and materials — 50/100; weight=1/3; jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.4[0]",
+                  "Cut form set and assemble jewelry — 0/100; weight=1/3; jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.4[0]",
+                  "Polish inspect and document handovers — 25/100; weight=1/3; jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11323,7 +11343,7 @@
     ],
     "path": "/en/career/jobs/jewelers-and-precious-stone-and-metal-workers",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Comparison with neighboring occupations",
       "fit": "Fit signals",
@@ -11411,15 +11431,27 @@
         "source_refs": [
           "source-pack-onet-summary"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Jewelers and Precious Stone and Metal Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Jewelers and Precious Stone and Metal Workers · Materials, Precision, and Appraisal Boundaries",
@@ -11470,7 +11502,7 @@
       "text": "Evaluating Jewelry and Precious Metal Work as a Career: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "e55b586b79202a1f723dccd99a128698056a8953f5986e0551e28e0c69561eab",
+  "source_content_sha256": "2c3cd710d68acd3152d1080efe75a1060c6423d424341bc314ba975f947da035",
   "subject": {
     "canonical_slug": "jewelers-and-precious-stone-and-metal-workers",
     "name": "Jewelers and Precious Stone and Metal Workers",

@@ -8,6 +8,9 @@
       "fact:china-production-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25509,7 +25512,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职业可复核任务评分、全国AI采用率与净就业因果数据。特定设备修整监测、测量和补偿功能不证明普遍部署或整岗替代；BLS2025—2035总体下降6.8%、十年净减约400人与年均500空缺含替补分指标，非AI独立减员或个人失业概率。"
+              "证据不足：本职业可复核任务评分、全国AI采用率与净就业因果数据。特定设备修整监测、测量和补偿功能不证明普遍部署或整岗替代；BLS2025—2035总体下降6.8%、十年净减约400人与年均500空缺含替补分指标，非AI独立减员或个人失业概率。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "tool-grinders-filers-and-sharpeners.display.ai_impact_table.answer",
@@ -33340,6 +33343,23 @@
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "准备｜砂轮与磨床设置｜按规格选择、安装及修整砂轮，设置磨削或抛光设备；具体操作遵守培训与现场授权。 — 25/100; weight=1/3; tool-grinders-filers-and-sharpeners.display.responsibilities_block.02[0]",
+                  "加工｜过程监控与异常停止｜监控设备运行，按规定调整；出现问题停机并说明已观察到的异常。 — 25/100; weight=1/3; tool-grinders-filers-and-sharpeners.display.responsibilities_block.03[0]",
+                  "精修｜形面与齿形处理｜使用规定手工工具锉修表面，核算切削工具齿数、宽度与角度，并检查结果。 — 0/100; weight=1/3; tool-grinders-filers-and-sharpeners.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38758,7 +38778,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38945,15 +38965,27 @@
         "source_refs": [
           "china-wage-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "工具磨削、锉削与刃磨工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 51-4194.00 精确职业口径",
@@ -39004,7 +39036,7 @@
       "text": "工具磨削、锉削与刃磨工"
     }
   },
-  "source_content_sha256": "60679a9724e453049287a9f083949dbd3724f306dab9148313f2bafa4ac6ab18",
+  "source_content_sha256": "4ad7ee58b7f7e9fb0533d3e2c1a79d179715e853d3686bfa0d012f165c6d5f8e",
   "subject": {
     "canonical_slug": "tool-grinders-filers-and-sharpeners",
     "name": "工具磨削、锉削与刃磨工",

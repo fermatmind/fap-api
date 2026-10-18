@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25077,7 +25080,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑按任务推演：数字工具及自动化设备可能辅助读图、放样、数据记录与文档整理；BLS描述部分自动制造/焊接与仍需人工的装配维护。本轮已读资料没有本职业AI整体替代、采用率或节时因果统计，不推永不替代；实物检查与责任依真实岗位和授权核。"
+              "编辑按任务推演：数字工具及自动化设备可能辅助读图、放样、数据记录与文档整理；BLS描述部分自动制造/焊接与仍需人工的装配维护。本轮已读资料没有本职业AI整体替代、采用率或节时因果统计，不推永不替代；实物检查与责任依真实岗位和授权核。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.18",
@@ -32597,6 +32600,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/51-8021.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "读图与准备｜研究图纸确定部件位置、关系与尺寸，核对材料、工艺与安全作业条件｜一份注明依据与未决问题的作业准备确认。 — 25/100; weight=1/3; boilermakers.profile.responsibilities-block.1[0]",
+                  "装配与对准｜定位、对准并固定结构件或板件到锅炉框架、罐体或槽体，按图纸控制公差｜装配到位并留有检查记录的组件。 — 0/100; weight=1/3; boilermakers.profile.responsibilities-block.1[2]",
+                  "连接与安装｜进行胀接、铆接或焊接，安装人孔手孔接管阀件与仪表，配合吊装就位｜符合连接工艺要求的接头与安装件。 — 0/100; weight=1/3; boilermakers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37498,7 +37518,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37766,15 +37786,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "锅炉制造与安装工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 47-2011.00 · 压力容器制造与安装 · 现场安全责任",
@@ -37825,7 +37857,7 @@
       "text": "锅炉制造与安装工"
     }
   },
-  "source_content_sha256": "12486e72d933dfb825338a80c495cec09607d9e20b7730c621687693dff7cd02",
+  "source_content_sha256": "aecea170343bf6748637f1b53599c904d3274848a4b42ad94f04ebe307aa9b0e",
   "subject": {
     "canonical_slug": "boilermakers",
     "name": "锅炉制造与安装工",

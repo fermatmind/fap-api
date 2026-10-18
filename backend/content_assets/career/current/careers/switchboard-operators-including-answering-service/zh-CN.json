@@ -8,6 +8,9 @@
       "fact:cn-office-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25320,7 +25323,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得总机接线员代表性生成式AI采用率、净省时、替代率或FermatMind可复核任务评分；不填写分数。"
+              "证据不足：未取得总机接线员代表性生成式AI采用率、净省时、替代率或FermatMind可复核任务评分；另列编辑估算分数。"
             ]
           },
           "id": "switchboard-operators-including-answering-service.ai-impact.ai-impact-table.3",
@@ -25439,7 +25442,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "分清工具能力、组织实际采用与就业结果。摘要、听写或目录建议只是候选，人工需核来意、号码、时间、公开权限和业务状态；本页没有本职净效应或个人失业预测。"
+              "分清工具能力、组织实际采用与就业结果。摘要、听写或目录建议只是候选，人工需核来意、号码、时间、公开权限和业务状态；本页没有本职净效应或个人失业预测。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "switchboard-operators-including-answering-service.display.ai_impact_table.answer",
@@ -33004,6 +33007,23 @@
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "接听｜需求澄清与复述｜清晰问候，听清来意和接收对象，确认必要信息，避免凭声音或猜测判断身份。 — 50/100; weight=1/3; switchboard-operators-including-answering-service.display.responsibilities_block.02[0]",
+                  "操作｜电话转接与忙线处理｜操作获准系统路由，忙线依流程留信或联系责任人，不擅自承诺业务结果。 — 75/100; weight=1/3; switchboard-operators-including-answering-service.display.responsibilities_block.03[0]",
+                  "记录｜留言时间与交接状态｜准确记录来意、时间、回联信息和请求，区分已转接、待接收与已解决。 — 75/100; weight=1/3; switchboard-operators-including-answering-service.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38245,7 +38265,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38405,15 +38425,27 @@
         "source_refs": [
           "nbs-office-context-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "总机接线员（含应答服务）",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 43-2011.00 精确职业",
@@ -38464,7 +38496,7 @@
       "text": "总机接线员（含应答服务）"
     }
   },
-  "source_content_sha256": "fcac2bc4a40ba71644795141128a35287975956a42535ab5251507e43e6d9dee",
+  "source_content_sha256": "c3d8b6c5c6c9ff4596801e299dbbd730d62e463ce218a4d1fc8ac23e05d90d7d",
   "subject": {
     "canonical_slug": "switchboard-operators-including-answering-service",
     "name": "总机接线员（含应答服务）",

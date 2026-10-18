@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24708,7 +24711,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI may assist with nonsensitive information searches, terminology organization, and draft records; no separately reported adoption or replacement rate evidence exists for this occupation. Functional assessment, diagnosis, prescribing, patient communication, and final signing remain authorized clinical personnel's responsibility. ILO measures potential task exposure, while WHO and NIST provide governance requirements; none establish that a tool is safe and effective in rehabilitation care."
+              "AI may assist with nonsensitive information searches, terminology organization, and draft records; no separately reported adoption or replacement rate evidence exists for this occupation. Functional assessment, diagnosis, prescribing, patient communication, and final signing remain authorized clinical personnel's responsibility. ILO measures potential task exposure, while WHO and NIST provide governance requirements; none establish that a tool is safe and effective in rehabilitation care. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "physical-medicine-and-rehabilitation-physicians.ai-impact.ai-impact-table.18",
@@ -32839,6 +32842,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Functional assessment | Examine mobility, strength, and related functions | Record functional baselines, measurement methods, pain, and daily activity limitations so the same indicators can support reassessment. — 25/100; weight=1/3; physical-medicine-and-rehabilitation-physicians.profile.responsibilities-block.1[1]",
+                  "Plan development | Set short- and long-term rehabilitation goals | Discuss plans and applicable conditions with patients, therapists, and nursing staff. — 50/100; weight=1/3; physical-medicine-and-rehabilitation-physicians.profile.responsibilities-block.1[2]",
+                  "Treatment coordination | Arrange medical and rehabilitation services within practice authority | Clarify physician medical plans, therapist implementation tasks, and each party's review responsibilities; hand over contraindications and escalation conditions. — 25/100; weight=1/3; physical-medicine-and-rehabilitation-physicians.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37744,7 +37764,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37916,15 +37936,27 @@
         "source_refs": [
           "bls-physicians-surgeons-ooh-2026"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Physical Medicine and Rehabilitation Physicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Physical medicine and rehabilitation physicians · Task review",
@@ -37975,7 +38007,7 @@
       "text": "Physical Medicine and Rehabilitation Physicians"
     }
   },
-  "source_content_sha256": "6625cc6e48a0d47e8e2f6b58a81e0c976eb03510f7682ea7e9825ef90425b7b7",
+  "source_content_sha256": "d8b0c9d4af1833d31909319a295cc6cc0c43fad0555471a763f55cac2765885e",
   "subject": {
     "canonical_slug": "physical-medicine-and-rehabilitation-physicians",
     "name": "Physical Medicine and Rehabilitation Physicians",

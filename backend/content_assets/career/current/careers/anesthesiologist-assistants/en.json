@@ -44,6 +44,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fl-aa-license-rule": {
         "status": "pending_mapping"
       },
@@ -24811,7 +24814,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, substitution rate, or wage causal estimates for this occupation were obtained on this page. Record organization, alarm summarization, and trend presentation are only editorially suggested possible assistance uses and do not prove deployment or clinical effectiveness; anesthesia operations and supervision obligations follow applicable regulations. The BLS parent occupation's 2025–2035 growth of 21% cannot explain AI-caused job gains or losses."
+              "Insufficient evidence: no AI adoption rate, substitution rate, or wage causal estimates for this occupation were obtained on this page. Record organization, alarm summarization, and trend presentation are only editorially suggested possible assistance uses and do not prove deployment or clinical effectiveness; anesthesia operations and supervision obligations follow applicable regulations. The BLS parent occupation's 2025–2035 growth of 21% cannot explain AI-caused job gains or losses. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.18",
@@ -32681,6 +32684,23 @@
                 "publisher": "State Council; reposted by the Beijing Municipal Health Commission",
                 "scope": "contextual",
                 "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230408_2993021.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Airway management | intubation and ventilation | deliver airway management interventions, including endotracheal intubation, fiberoptic intubation, or ventilatory support. — 0/100; weight=1/3; anesthesiologist-assistants.profile.responsibilities-block.1[0]",
+                  "Patient monitoring | cardiovascular and respiratory | assist monitoring of ECG, direct arterial pressure, central venous pressure, arterial blood gases, hematocrit, temperature, respiration, blood pressure, and heart rate. — 50/100; weight=1/3; anesthesiologist-assistants.profile.responsibilities-block.1[1]",
+                  "Anesthesia delivery | medications and depth | administer anesthetics, adjuncts, and medications under anesthesiologist direction and control anesthetic depth during surgery. — 25/100; weight=1/3; anesthesiologist-assistants.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37583,7 +37603,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -38020,15 +38040,27 @@
         "source_refs": [
           "ooh"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Anesthesiologist Assistants",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Operating-room clinical operations: airway management and medication · intraoperative monitoring and equipment calibration · emergency life support and recovery records",
@@ -38079,7 +38111,7 @@
       "text": "Anesthesiologist assistants: tasks, wages, and employment outlook (O*NET 29-1071.01)"
     }
   },
-  "source_content_sha256": "17adc9846971db01fead350460730d6b6040b0e24aa28d832b66852aadd9fa73",
+  "source_content_sha256": "d4ac60a2bfd7b656c234fd45f930047a853bda60126655ab238c4707675ae397",
   "subject": {
     "canonical_slug": "anesthesiologist-assistants",
     "name": "Anesthesiologist Assistants",

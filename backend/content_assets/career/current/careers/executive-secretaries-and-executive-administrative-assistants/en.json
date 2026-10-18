@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24112,7 +24115,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Official tasks provide assisted candidates and do not prove that tools have been adopted or produce benefits in institutions. The ILO2023 global potential exposure is higher for clerical categories, and this cannot be used to judge occupation-wide augmentation or job reduction for this occupation; this page gives no scoring without a rubric."
+              "Official tasks provide assisted candidates and do not prove that tools have been adopted or produce benefits in institutions. The ILO2023 global potential exposure is higher for clerical categories, and this cannot be used to judge occupation-wide augmentation or job reduction for this occupation; this page gives no scoring without a rubric. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.ai-impact.ai-impact-table.18",
@@ -31683,6 +31686,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent occupation comparison",
                 "url": "https://www.onetonline.org/link/summary/43-1011.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Task priorities and authorization confirmation — 50/100; weight=1/3; executive-secretaries-and-executive-administrative-assistants.ai-impact.ai-impact-table.95[0]",
+                  "Document and data preparation — 75/100; weight=1/3; executive-secretaries-and-executive-administrative-assistants.ai-impact.ai-impact-table.99[0]",
+                  "Meeting and travel arrangements — 75/100; weight=1/3; executive-secretaries-and-executive-administrative-assistants.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36591,7 +36611,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -36860,15 +36880,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Executive Secretaries and Executive Administrative Assistants",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Executive Secretaries and Executive Administrative Assistants · Official occupational scope · High-level administrative support",
@@ -36919,7 +36951,7 @@
       "text": "Executive Secretaries and Executive Administrative Assistants"
     }
   },
-  "source_content_sha256": "4427bf2392dd80ceb78158dd5cb2c3c95d00a1714c843f2a40a7ff3fef873c9b",
+  "source_content_sha256": "91039f023c4879cbbb187c18a3d50a4784a1de3e7a251ccfe44492d796c0a89e",
   "subject": {
     "canonical_slug": "executive-secretaries-and-executive-administrative-assistants",
     "name": "Executive Secretaries and Executive Administrative Assistants",

@@ -23,6 +23,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24289,7 +24292,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task observation points: recipe conversion, order sequencing, inventory expiry and records can explore tool assistance; units, batches and equipment conditions must be verified, and it cannot be said that this job has widely adopted them. On-site seasoning, portions, hygiene and exception responsibility are still checked against the position; technology exposure, adoption and employment causality are separated, and this round has no causal data for this job."
+              "Editorial task observation points: recipe conversion, order sequencing, inventory expiry and records can explore tool assistance; units, batches and equipment conditions must be verified, and it cannot be said that this job has widely adopted them. On-site seasoning, portions, hygiene and exception responsibility are still checked against the position; technology exposure, adoption and employment causality are separated, and this round has no causal data for this job. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31860,6 +31863,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202604/t20260430_1963472.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Recipe and ingredients ｜ weigh ingredients to the recipe ｜ weigh, measure and mix ingredients to the menu and recipe, check portions and ingredients against the restaurant's output standards, and confirm with the supervisor before adjusting when the menu or recipe changes. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Cutting and prep ｜ prepare ingredients in the service sequence ｜ wash, peel and cut fruit and vegetables, portion and trim beef, pork, poultry and fish and shellfish, group for use according to the range and service sequence and label the time. — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Season and cook to recipe or experience, stir, and collaborate at peaks; baking bread and pastries is also Core. Editorial control suggestion: check safe temperature and time against the applicable dish, equipment and current rules and confirm with a food thermometer; sensory tasting or piercing with a utensil can serve as an observation of texture but cannot prove that suspect food is uncontaminated or safe. For exceptions, first hold back the affected food, and resuming requires an applicable basis; a supervisor's agreement does not equal safety; this round obtained no complete stop-and-resume procedure for every dish. — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37066,7 +37086,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37282,15 +37302,27 @@
           "bls-projections",
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Restaurant cooks",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Service and catering · restaurant back-of-house output",
@@ -37341,7 +37373,7 @@
       "text": "Restaurant cooks"
     }
   },
-  "source_content_sha256": "80aa9d6afe039f3b749852b9e89f13e088e4134889741e816528aaa8af86877c",
+  "source_content_sha256": "c4afe63327c804afb2ce63c72d10ab56ccc4108526d88f4673ec8bb1dc082e89",
   "subject": {
     "canonical_slug": "cooks-restaurant",
     "name": "Restaurant cooks",

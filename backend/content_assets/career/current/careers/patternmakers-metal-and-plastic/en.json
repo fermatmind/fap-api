@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24452,7 +24455,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Generative AI can be a candidate aid for explanations and records; CAD/CAM and CNC are different technologies. An overall net employment decline does not prove causation by generative AI and cannot imply an individual's unemployment."
+              "Generative AI can be a candidate aid for explanations and records; CAD/CAM and CNC are different technologies. An overall net employment decline does not prove causation by generative AI and cannot imply an individual's unemployment. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "patternmakers-metal-and-plastic.ai-impact.ai-impact-table.18",
@@ -32744,6 +32747,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "combined_official",
                 "url": "https://www.bls.gov/ooh/production/metal-and-plastic-machine-workers.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Needs intake | Verify drawing version, sample parts, materials, and tolerances | Do not machine from verbal memory. — 50/100; weight=1/3; patternmakers-metal-and-plastic.profile.responsibilities-block.1[0]",
+                  "Output | Machine and assemble patterns, core boxes, or templates | Leave identification and measurement records. — 0/100; weight=1/3; patternmakers-metal-and-plastic.profile.responsibilities-block.1[2]",
+                  "Review and confirm | Compare against specification using calipers, micrometers, and similar tools | Record re-measurement when out of tolerance. — 25/100; weight=1/3; patternmakers-metal-and-plastic.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37669,7 +37689,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38011,15 +38031,27 @@
           "pattern-nbs-current",
           "pattern-industry"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Patternmakers, Metal and Plastic",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 51-4062.00 · Metal and Plastic Patternmaking",
@@ -38070,7 +38102,7 @@
       "text": "Metal and plastic patternmakers: work content, pay, and process safety"
     }
   },
-  "source_content_sha256": "631174e44d16ec50ca0a0916210d71f7bd46e370a1358f00af505a6b293cab4d",
+  "source_content_sha256": "d93d9f0c9e0edc1a8cd64f8f31b7b4cb54a61ec9fb37dd73a17286b1bc3e87b3",
   "subject": {
     "canonical_slug": "patternmakers-metal-and-plastic",
     "name": "Patternmakers, Metal and Plastic",

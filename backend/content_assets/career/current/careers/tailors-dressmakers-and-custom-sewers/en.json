@@ -8,6 +8,9 @@
       "fact:cn-production-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25319,7 +25322,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: representative generative AI adoption rates, net time savings, substitution rates, or reviewable FermatMind task scores for tailors were not obtained; no score is filled in."
+              "Insufficient evidence: representative generative AI adoption rates, net time savings, substitution rates, or reviewable FermatMind task scores for tailors were not obtained; a separate editorial estimate is shown."
             ]
           },
           "id": "tailors-dressmakers-and-custom-sewers.ai-impact.ai-impact-table.3",
@@ -25438,7 +25441,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Distinguish candidate capability, actual organizational use, and employment outcomes. Models can assist with organizing or drafting, while measurements, materials, physical items, and confirmation must be checked; this page has no tailor AI net effect or individual substitution forecast."
+              "Distinguish candidate capability, actual organizational use, and employment outcomes. Models can assist with organizing or drafting, while measurements, materials, physical items, and confirmation must be checked; this page has no tailor AI net effect or individual substitution forecast. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "tailors-dressmakers-and-custom-sewers.display.ai_impact_table.answer",
@@ -32993,6 +32996,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Preparation | Measurement and requirement records | Take client or garment measurements and check style, materials, and the alteration agreement; record units, finished-product requirements, and unconfirmed items separately. — 25/100; weight=1/3; tailors-dressmakers-and-custom-sewers.display.responsibilities_block.01[0]",
+                  "Making | Cutting, assembly, and sewing | Lay out and cut, baste or machine-sew the assembly, and maintain proportion and drape; real tool operation requires instruction and actual craft. — 0/100; weight=1/3; tailors-dressmakers-and-custom-sewers.display.responsibilities_block.03[0]",
+                  "Alteration | Fit adjustment and component repair | Check the available allowance, let out or take in seams, alter hems, and replace components, and check at the fitting whether the problem is solved. — 0/100; weight=1/3; tailors-dressmakers-and-custom-sewers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38234,7 +38254,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -38394,15 +38414,27 @@
         "source_refs": [
           "nbs-production-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Tailors, Dressmakers, and Custom Sewers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 51-6052.00 exact occupation",
@@ -38453,7 +38485,7 @@
       "text": "Tailors, Dressmakers, and Custom Sewers"
     }
   },
-  "source_content_sha256": "f2e3a32e9d051b5e21d3a260eb0ea802322d438b7be252d40c9058dbe395167c",
+  "source_content_sha256": "e6f03b0983c64750d25ed20f8026f8d259ef19241a5cd258f45b9bcfbd7369ed",
   "subject": {
     "canonical_slug": "tailors-dressmakers-and-custom-sewers",
     "name": "Tailors, Dressmakers, and Custom Sewers",

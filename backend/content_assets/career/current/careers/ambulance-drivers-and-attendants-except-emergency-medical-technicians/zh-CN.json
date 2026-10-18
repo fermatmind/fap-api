@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24767,7 +24770,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑判断：资料整理、路线信息及检查台账可作为辅助候选；本页没有该职业AI采用率、效果或替代率证据。安全驾驶、搬运与交接须按人员资格及机构制度执行。BLS Table 1.2 的美国精确职业 53-3011：2025 年就业14,300人，2035 年预计14,100人；2025—2035年增长率-1.3%，官方净减200人，年均空缺1,400个。人数由官方千人单位换算；空缺包括人员流动与退出产生的需求，不等于净新增。该表不证明下降由自动化或某种服务模式造成，也不能外推中国大陆或个人录用。"
+              "编辑判断：资料整理、路线信息及检查台账可作为辅助候选；本页没有该职业AI采用率、效果或替代率证据。安全驾驶、搬运与交接须按人员资格及机构制度执行。BLS Table 1.2 的美国精确职业 53-3011：2025 年就业14,300人，2035 年预计14,100人；2025—2035年增长率-1.3%，官方净减200人，年均空缺1,400个。人数由官方千人单位换算；空缺包括人员流动与退出产生的需求，不等于净新增。该表不证明下降由自动化或某种服务模式造成，也不能外推中国大陆或个人录用。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.ai-impact.ai-impact-table.18",
@@ -32667,6 +32670,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/healthcare/emts-and-paramedics.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "出车准备｜调度与检查｜按调度出车，检查车辆、担架与固定装置、耗材与消毒状态。 — 25/100; weight=1/3; ambulance-drivers-and-attendants-except-emergency-medical-technicians.profile.responsibilities-block.1[0]",
+                  "驾驶与运输｜安全驾驶｜驾驶救护车或协助驾驶员运送患病、受伤或康复期人员，遵守交通法规与特种车辆使用规定。 — 25/100; weight=1/3; ambulance-drivers-and-attendants-except-emergency-medical-technicians.profile.responsibilities-block.1[2]",
+                  "患者搬抬｜担架与固定｜将患者安置在担架上并配合抬入救护车，按需约束有暴力倾向的患者。 — 0/100; weight=1/3; ambulance-drivers-and-attendants-except-emergency-medical-technicians.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37587,7 +37607,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38024,15 +38044,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "救护车司机服务员、急诊医疗技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "运输保障：安全驾驶与出车检查 · 患者搬抬与固定 · 清洁消毒与记录",
@@ -38083,7 +38115,7 @@
       "text": "救护车司机与随车人员（不含急救医疗技术员）：任务、工资与下降的就业趋势（O*NET 53-3011）"
     }
   },
-  "source_content_sha256": "569d1df7198574111c3e28d3dfaf5853dbc38881cce9b0d7a1d3c9625ff000aa",
+  "source_content_sha256": "3f1677835106f8b656fa9b9d0c18594cfca72403b0cb3bc3c06f20a357560a5a",
   "subject": {
     "canonical_slug": "ambulance-drivers-and-attendants-except-emergency-medical-technicians",
     "name": "救护车司机服务员、急诊医疗技术员",

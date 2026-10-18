@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25091,7 +25094,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI与财务软件可辅助提取、比对和文档草稿；具体科目判断、审批和报送仍按人员职责和授权办理。BLS预计软件自动化使本职业用人需求下降并增加分析咨询任务，不能由责任仍在人身上推断岗位不会减少，也不把此预测当生成式AI单独因果评估。"
+              "AI与财务软件可辅助提取、比对和文档草稿；具体科目判断、审批和报送仍按人员职责和授权办理。BLS预计软件自动化使本职业用人需求下降并增加分析咨询任务，不能由责任仍在人身上推断岗位不会减少，也不把此预测当生成式AI单独因果评估。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.18",
@@ -32653,6 +32656,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/43-9061.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "凭证与合规核对｜接收原始凭证，核对业务真实性、金额与期间，并按政策、规程与法规要求处理｜一份注明依据与未决问题的凭证核对记录。 — 75/100; weight=1/3; bookkeeping-accounting-and-auditing-clerks.profile.responsibilities-block.1[0]",
+                  "录入与过账｜使用会计软件录入日记账，过入总账或明细账，汇总借贷并核对余额｜可复核的账簿记录与过账痕迹。 — 75/100; weight=1/3; bookkeeping-accounting-and-auditing-clerks.profile.responsibilities-block.1[2]",
+                  "核对与差异处理｜核对金额、过账与单据编码，做银行对账与往来核对，发现差异时记录、追查并报告｜含差异说明与处理建议的对账记录。 — 75/100; weight=1/3; bookkeeping-accounting-and-auditing-clerks.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37592,7 +37612,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37860,15 +37880,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "簿记、会计与审计文员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 43-3031.00 · Bright Outlook · 账务与核对责任",
@@ -37919,7 +37951,7 @@
       "text": "簿记、会计与审计文员"
     }
   },
-  "source_content_sha256": "916b76fcb8284302e9926fb9e3b3bbbe94ca22437167d48d201ae1a61e539b03",
+  "source_content_sha256": "183194acfec7b020a36764292d32f054201f52878b12b4045c97e4934af395bc",
   "subject": {
     "canonical_slug": "bookkeeping-accounting-and-auditing-clerks",
     "name": "簿记、会计与审计文员",

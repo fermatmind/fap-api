@@ -23,6 +23,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24289,7 +24292,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑按任务提出待验证工具机会：点单排序、效期库存、记录对账及程序加热；需核真实设备数据和安全条件，不能称本岗已普遍采用或自动完成。现场熟度份量、批次效期、交付和异常责任按岗位核；暴露、采用和就业因果分开。"
+              "编辑按任务提出待验证工具机会：点单排序、效期库存、记录对账及程序加热；需核真实设备数据和安全条件，不能称本岗已普遍采用或自动完成。现场熟度份量、批次效期、交付和异常责任按岗位核；暴露、采用和就业因果分开。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31876,6 +31879,23 @@
                 "publisher": "FoodSafety.gov",
                 "scope": "contextual",
                 "url": "https://www.foodsafety.gov/keep-food-safe/4-steps-to-food-safety"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "点单与作业排序｜接收点单并安排顺序｜直接接收顾客点单并按要求记录，把同一批要一起上桌的菜品排在一起，按加工时限安排先后顺序。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Core煎烤炸薯条鸡蛋煎饼等短时食品；汉堡或肉排烧烤装饰为Supplemental，实际岗位可承担。编辑控制建议：按适用菜品设备及现行要求核安全温度时间，用食品温度计确认；顾客熟度偏好、感官和定时设定不能证明食安，疑似污染不得试吃。异常暂缓受影响食品，恢复须适用安全依据，主管同意不等于安全；本轮未取得各菜品完整中止恢复程序。 — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "装盘与交付｜从保温餐台取餐并交付｜从保温餐台或加工台取餐装盘，按点单核对份量与配料，在餐桌或柜台交付并处理漏单与错单。 — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37082,7 +37102,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37298,15 +37318,27 @@
           "bls-projections",
           "bls"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "简餐厨师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "服务与餐饮 · 柜台与简餐档口出品",
@@ -37357,7 +37389,7 @@
       "text": "简餐厨师"
     }
   },
-  "source_content_sha256": "7099ed639661a2850380d74518528360fb4d1401995b74bb2b15c2afcc5ff97a",
+  "source_content_sha256": "b5a9179a6d00b79d97cf32570dfaef741786189f4e0f8d13ca9155a54d83d44d",
   "subject": {
     "canonical_slug": "cooks-short-order",
     "name": "简餐厨师",

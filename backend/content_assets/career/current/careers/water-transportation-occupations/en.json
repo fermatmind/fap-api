@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25567,7 +25570,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: distinguish text drafts, navigation equipment, and actual vessel operation. W25 can only test the given static calculation and the scope of the conclusion, and real watchkeeping, data applicability, qualifications, and sailing judgments still require professionals. This page has not obtained an occupation-task-level effect score or a replacement ratio, so no score is filled in."
+              "Insufficient evidence: distinguish text drafts, navigation equipment, and actual vessel operation. W25 can only test the given static calculation and the scope of the conclusion, and real watchkeeping, data applicability, qualifications, and sailing judgments still require professionals. This page has not obtained an occupation-task-level effect score or a replacement ratio, so a separate editorial estimate is shown. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "water-transportation-occupations.display.ai_impact_table.answer",
@@ -33073,6 +33076,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Planning | Route and environmental data | Plan the voyage by combining vessel, weather, water depth, and tide data, and clarify the conditions. — 75/100; weight=1/3; water-transportation-occupations.display.responsibilities_block.01[0]",
+                  "Watchkeeping | Position and continuous monitoring | Monitor heading, speed, and position, maintain lookout and communication, and report changes according to your duties. — 25/100; weight=1/3; water-transportation-occupations.display.responsibilities_block.02[0]",
+                  "Maneuvering coordination | Berthing and narrow channels | Coordinate actual vessel movements with the port, pilots, and crew, following qualification authority and procedures. — 25/100; weight=1/3; water-transportation-occupations.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38318,7 +38338,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38466,15 +38486,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Captains, mates, and pilots of water vessels",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 53-5021.00",
@@ -38525,7 +38557,7 @@
       "text": "Captains, mates, and pilots of water vessels: duties, wage bases, and entry conditions"
     }
   },
-  "source_content_sha256": "bce62b1343950d7d64e96507736d0144006e98a98dfdadd841ee990669fafd22",
+  "source_content_sha256": "f5ba76e81225f6400a3d7a49a7dd732f18435cb30919fc117a82954d81121734",
   "subject": {
     "canonical_slug": "water-transportation-occupations",
     "name": "Captains, mates, and pilots of water vessels",

@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24299,7 +24302,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务层面的编辑试用方向包括资料归集、讲义题目草稿、格式检查与记录整理；尚未取得本岗减少工时或改善评价的实测效果。课程依据、讲授反馈、最终评分、推荐及研究成果须明确人工责任，工具提供者的责任另按法律合同核。传统教学平台和查重软件不等生成式AI采用，任务暴露不等岗位替代或工资变化。"
+              "任务层面的编辑试用方向包括资料归集、讲义题目草稿、格式检查与记录整理；尚未取得本岗减少工时或改善评价的实测效果。课程依据、讲授反馈、最终评分、推荐及研究成果须明确人工责任，工具提供者的责任另按法律合同核。传统教学平台和查重软件不等生成式AI采用，任务暴露不等岗位替代或工资变化。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31713,6 +31716,23 @@
                 "publisher": "中国政府官方网站",
                 "scope": "proxy",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "备课与讲授｜按大纲讲授课程｜编写或修订课程大纲与教学材料，备课并讲授刑法、执法与侦查技术、惩教与司法行政等课程，主持课堂讨论、组织案例与模拟演练。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "评价与记录｜布置作业并登记成绩｜布置作业、论文与考试并批改评分，登记成绩与出勤，按院校要求维护教学档案与课程评价记录。 — 50/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "固定办公时间、学业职业指导、推荐信及招生注册就业推荐为Core；学生社团指导为Supplemental，实际承担按单位核。 — 25/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36991,7 +37011,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37235,15 +37255,27 @@
         "source_refs": [
           "g04-industry"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "高校刑事司法与执法教师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "教育服务 · 高校刑事司法与执法教学",
@@ -37294,7 +37326,7 @@
       "text": "高校刑事司法与执法教师"
     }
   },
-  "source_content_sha256": "5fa789eed8c80367de188c3d3197c3f88331ad72c5b496c1b5f739e1d9e4a722",
+  "source_content_sha256": "b1d075681c1c2bee2896e7842cf8a4418e8aafc87bed2bc848b0b151dfcf5047",
   "subject": {
     "canonical_slug": "criminal-justice-and-law-enforcement-teachers-postsecondary",
     "name": "高校刑事司法与执法教师",

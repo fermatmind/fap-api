@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24309,7 +24312,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no causal research on AI adoption rates, teaching effects, wages or job numbers for this occupation was obtained this time. Lecture drafts, reference lists and comment summaries are editorial trial candidates only; the ILO official introduction provides only a cross-occupation task exposure method and the NIST introduction is a voluntary organisational risk reference. The 2025—2035 occupational employment projection is not an AI substitution forecast and cannot be used to assert that change is certain or that substitution will not occur."
+              "Insufficient evidence: no causal research on AI adoption rates, teaching effects, wages or job numbers for this occupation was obtained this time. Lecture drafts, reference lists and comment summaries are editorial trial candidates only; the ILO official introduction provides only a cross-occupation task exposure method and the NIST introduction is a voluntary organisational risk reference. The 2025—2035 occupational employment projection is not an AI substitution forecast and cannot be used to assert that change is certain or that substitution will not occur. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "art-drama-and-music-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32338,6 +32341,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/27-2041.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Teaching and curriculum building｜Explaining the subject and techniques clearly｜Preparing and teaching drama, music and art courses for undergraduate and graduate students, preparing syllabi and assignments and lecture notes and repertoire and plays, initiating and leading class discussions and studio and rehearsal activities, and planning, evaluating and revising course content and teaching methods. — 50/100; weight=1/3; art-drama-and-music-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "Supervising students｜Supporting learning and research according to the division of labour｜Maintaining office hours, tutoring courses, internships, research and rehearsals, and providing academic and career advice; no recommendation-letter duty is added from the current task list. — 25/100; weight=1/3; art-drama-and-music-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "Creation and research and publication｜Some roles carry research｜Supplementary tasks include conducting research in the field and publishing in professional journals, books or electronic media; journal peer review is not written as a duty verified this time. — 50/100; weight=1/3; art-drama-and-music-teachers-postsecondary.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37207,7 +37227,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37535,15 +37555,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Postsecondary art, drama and music teachers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Teaching and creation: course design and lecturing and demonstration · graduation works and rehearsal and performance supervision · creation or research and performance and publication",
@@ -37594,7 +37626,7 @@
       "text": "Postsecondary art, drama and music teachers"
     }
   },
-  "source_content_sha256": "cc927b702c97fd6aad63e41cad1ea1b6836423863f2c4af224a28ce928a27a70",
+  "source_content_sha256": "a2f06d6303fa162efbd4dea2f2cc0a9ca7f4dc37e8660671d725ca9bee4f7b8b",
   "subject": {
     "canonical_slug": "art-drama-and-music-teachers-postsecondary",
     "name": "Postsecondary art, drama and music teachers",

@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25124,7 +25127,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round has not obtained a precise generative AI exposure level, actual robot adoption / substitution rate, or wage causality data for 51-9022.00. The O*NET tasks and software mentions do not support moderately high, clearly substituted, or that the whole occupation will not be replaced; ILO2025 is an ISCO task index, no precise SOC mapping for this page has been established, and it is not asserted that the study does not cover it. The following assistance candidates are editorial advice and require measured quality and investment and authorization; they are not adopted statistics. Mechanical automation and generative AI are assessed separately. U.S. 51-9022.00 uses hand and hand-held power tools to grind, sand, and polish objects made of metal, wood, stone, clay, plastics, glass, and so on, including chipping / polishing / finishing. The 17 tasks, 13 core and 4 supplementary, have been verified: checking template dimensions / testing under controlled conditions 91, grinding and cleaning 89, measuring and marking 87, deburring 86, marking defects 85, reading drawings 84, controlling 81, loading and adjusting 79, maintaining 77, selecting abrasives 76, filing grooves and contours 67, sharpening 64, transferring 61; supplementary removing parts 80 / recording 72 / applying chemicals 64 / cleaning brass from files 14. Importance is not frequency or a safety license; the hand designation does not exclude fixed equipment, and materials / parameters and release follow actual authorization. BLS current 2025—2035 employment for the precise occupation 51-9022 goes from 10.8→8.7 thousand, a change of −19.2%, a net change of −2.1 thousand, and an average of 0.7 thousand annual openings from replacements; each figure is rounded independently, and EP includes self-employment (2.5% in 2025) and differs from OEWS wages. Projections are not actual hiring, individual outcomes, or AI causality. The current O*NET already shows 2025 employment of 10,800, a declining category for 2025—2035, and an average of 700 annual openings, consistent with the current BLS period."
+              "Insufficient evidence: this round has not obtained a precise generative AI exposure level, actual robot adoption / substitution rate, or wage causality data for 51-9022.00. The O*NET tasks and software mentions do not support moderately high, clearly substituted, or that the whole occupation will not be replaced; ILO2025 is an ISCO task index, no precise SOC mapping for this page has been established, and it is not asserted that the study does not cover it. The following assistance candidates are editorial advice and require measured quality and investment and authorization; they are not adopted statistics. Mechanical automation and generative AI are assessed separately. U.S. 51-9022.00 uses hand and hand-held power tools to grind, sand, and polish objects made of metal, wood, stone, clay, plastics, glass, and so on, including chipping / polishing / finishing. The 17 tasks, 13 core and 4 supplementary, have been verified: checking template dimensions / testing under controlled conditions 91, grinding and cleaning 89, measuring and marking 87, deburring 86, marking defects 85, reading drawings 84, controlling 81, loading and adjusting 79, maintaining 77, selecting abrasives 76, filing grooves and contours 67, sharpening 64, transferring 61; supplementary removing parts 80 / recording 72 / applying chemicals 64 / cleaning brass from files 14. Importance is not frequency or a safety license; the hand designation does not exclude fixed equipment, and materials / parameters and release follow actual authorization. BLS current 2025—2035 employment for the precise occupation 51-9022 goes from 10.8→8.7 thousand, a change of −19.2%, a net change of −2.1 thousand, and an average of 0.7 thousand annual openings from replacements; each figure is rounded independently, and EP includes self-employment (2.5% in 2025) and differs from OEWS wages. Projections are not actual hiring, individual outcomes, or AI causality. The current O*NET already shows 2025 employment of 10,800, a declining category for 2025—2035, and an average of 700 annual openings, consistent with the current BLS period. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "grinding-and-polishing-workers-hand.ai-impact.ai-impact-table.18",
@@ -32700,6 +32703,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor, Employment and Training Administration",
                 "scope": "51-9022.00",
                 "url": "https://www.onetonline.org/link/details/51-9022.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Drawing reading and material selection — 50/100; weight=1/3; grinding-and-polishing-workers-hand.ai-impact.ai-impact-table.95[0]",
+                  "Grinding and sanding and polishing — 0/100; weight=1/3; grinding-and-polishing-workers-hand.ai-impact.ai-impact-table.99[0]",
+                  "Inspection and template comparison — 25/100; weight=1/3; grinding-and-polishing-workers-hand.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37637,7 +37657,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37790,15 +37810,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Grinding and Polishing Workers, Hand",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Grinding and Polishing Workers, Hand · tasks, deliverables, and responsibility boundaries",
@@ -37849,7 +37881,7 @@
       "text": "Grinding and Polishing Workers, Hand"
     }
   },
-  "source_content_sha256": "e68ec6eba042e44660a06b8503e1dd4d9210a6baf53335ee39b85b98fc66e0d9",
+  "source_content_sha256": "0071b05ea8f599777bbfae714fbd8230c4bd8e2389a95f3585ad7a9e13a661d0",
   "subject": {
     "canonical_slug": "grinding-and-polishing-workers-hand",
     "name": "Grinding and Polishing Workers, Hand",

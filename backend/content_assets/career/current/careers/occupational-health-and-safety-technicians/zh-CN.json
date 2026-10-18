@@ -5,6 +5,9 @@
       "fact:cn-service-assist-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -13522,6 +13525,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "采集工作环境数据 — 0/100; weight=1/3; occupational-health-and-safety-technicians.profile.definition-block.1[0]",
+                  "实施并评价危害限制项目 — 25/100; weight=1/3; occupational-health-and-safety-technicians.profile.definition-block.1[0]",
+                  "检查采样仪器并记录异常 — 50/100; weight=1/3; occupational-health-and-safety-technicians.profile.definition-block.1[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13709,7 +13729,7 @@
             }
           }
         ],
-        "answer": "AI可辅助整理巡查、采样与整改记录；是否采用、采样是否有效、控制是否落实，仍要按现场证据和授权程序核实。现有资料不能给出技术员岗位替代率。 美国19-5012单项2025—2035总体预测增长19.4%、年均3,800空缺含替补，另作就业背景，非AI造成的变化或个人失业概率。",
+        "answer": "AI可辅助整理巡查、采样与整改记录；是否采用、采样是否有效、控制是否落实，仍要按现场证据和授权程序核实。现有资料不能给出技术员岗位替代率。 美国19-5012单项2025—2035总体预测增长19.4%、年均3,800空缺含替补，另作就业背景，非AI造成的变化或个人失业概率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "ILO数字化与AI在职业安全健康中的作用",
@@ -15465,7 +15485,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15565,15 +15585,27 @@
         "source_refs": [
           "bls-ep-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "作业健康技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "职业健康与安全技术员 · O*NET 19-5012.00",
@@ -15624,7 +15656,7 @@
       "text": "职业健康与安全技术员：职责、工资与入门路径"
     }
   },
-  "source_content_sha256": "308dcb819b6dadc9f89f03c46430da02d435842381d7799d18d4f6247e69d797",
+  "source_content_sha256": "d22323bc1ac1833fe84bbe10795d3db9b052ea19ff7e19265e5833e021319905",
   "subject": {
     "canonical_slug": "occupational-health-and-safety-technicians",
     "name": "职业健康与安全技术员",

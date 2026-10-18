@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24483,7 +24486,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑分析｜食品配料、混合、取样和清洁需要实物操作。可优先评估用工具整理批次记录、检索规程或汇总检测数据，但传统自动化、传感器看板和生成式 AI 是不同技术。本页没有本职业的实测采用率、替代率或量化暴露评分；任务描述只能支持试用方向，不能保证短期岗位不变。"
+              "编辑分析｜食品配料、混合、取样和清洁需要实物操作。可优先评估用工具整理批次记录、检索规程或汇总检测数据，但传统自动化、传感器看板和生成式 AI 是不同技术。本页没有本职业的实测采用率、替代率或量化暴露评分；任务描述只能支持试用方向，不能保证短期岗位不变。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "food-batchmakers.ai-impact.ai-impact-table.18",
@@ -31976,6 +31979,23 @@
                 "publisher": "BLS",
                 "scope": "SOC513092雇员全国及职业行业工资",
                 "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=510000&occupation=513092&measure=13&areas=INDUSTRY,STATE,MSA"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "混合与搅拌设定与启动 — 0/100; weight=1/3; food-batchmakers.ai-impact.ai-impact-table.103[0]",
+                  "过程监控与调节 — 25/100; weight=1/3; food-batchmakers.ai-impact.ai-impact-table.107[0]",
+                  "记录与交接与上报 — 75/100; weight=1/3; food-batchmakers.ai-impact.ai-impact-table.119[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36866,7 +36886,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37135,15 +37155,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "食品批量制作工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "食品批量制作工 · 官方职业范围 · 工作闭环",
@@ -37194,7 +37226,7 @@
       "text": "食品批量制作工"
     }
   },
-  "source_content_sha256": "c6b48b1aa546c526fd00223cc314fe0b187df51da6c00ebf8504df4d340e51f8",
+  "source_content_sha256": "3071d2241c17e163e0ab1cd1427f6894329a452ac73dbc4f51443ef557ca9942",
   "subject": {
     "canonical_slug": "food-batchmakers",
     "name": "食品批量制作工",

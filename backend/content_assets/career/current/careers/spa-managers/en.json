@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24342,7 +24345,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can help organize appointments, classify complaints, write handover summaries or draft business reports, but this page has no evidence of spa managers' actual adoption rate or layoff causality. O*NET describes operational tasks and does not prove AI effects; cross-occupation exposure studies discuss potential task impact and do not predict a disappearance year for this occupation. Scheduling still requires checking qualifications, facilities and time slots; cash still requires recalculation, and services and health claims still require confirmation by the corresponding people."
+              "AI can help organize appointments, classify complaints, write handover summaries or draft business reports, but this page has no evidence of spa managers' actual adoption rate or layoff causality. O*NET describes operational tasks and does not prove AI effects; cross-occupation exposure studies discuss potential task impact and do not predict a disappearance year for this occupation. Scheduling still requires checking qualifications, facilities and time slots; cash still requires recalculation, and services and health claims still require confirmation by the corresponding people. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "spa-managers.ai-impact.ai-impact-table.18",
@@ -33550,6 +33553,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Appointment time slot and staff matching — 75/100; weight=1/3; spa-managers.ai-impact.ai-impact-table.95[0]",
+                  "Customer enquiries and complaint classification — 25/100; weight=1/3; spa-managers.ai-impact.ai-impact-table.99[0]",
+                  "Cash daily close-out and differences — 75/100; weight=1/3; spa-managers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38459,7 +38479,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38763,15 +38783,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Spa managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Spa operations · appointments, staff and facilities",
@@ -38822,7 +38854,7 @@
       "text": "Spa managers"
     }
   },
-  "source_content_sha256": "a487251e5f170ad3a27f9e437f8e23175b98b9873d6051d7e9c39c654b955f2f",
+  "source_content_sha256": "8edb8903e4da68e37f4100d395527e7afa1cc1c9cd915367661d8e49d5b11939",
   "subject": {
     "canonical_slug": "spa-managers",
     "name": "Spa managers",

@@ -17,6 +17,9 @@
       "fact:entry-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -12743,6 +12746,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Download digital keys to unlock film files and import films, advertisements, and trailers into servers or projection equipment — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Start projectors and open shutters to project, monitor picture and sound quality, and switch between two projectors when necessary — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Replace xenon lamps, clean projectors and lenses, and lubricate mechanisms; replace worn sprockets or report major repair needs — 0/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -12933,7 +12953,7 @@
             }
           }
         ],
-        "answer": "Motion picture projectionists may receive assistance with organizing schedules and screening data, managing equipment condition and maintenance records, classifying fault logs, checking digital content and key lists, and analyzing simple audiovisual parameter records. Accountable people must still judge actual equipment conditions and make on-site adjustments, subjectively assess picture and sound quality, physically calibrate screens and optical systems, handle faults, and operate safely. Technological exposure does not equal job replacement.",
+        "answer": "Motion picture projectionists may receive assistance with organizing schedules and screening data, managing equipment condition and maintenance records, classifying fault logs, checking digital content and key lists, and analyzing simple audiovisual parameter records. Accountable people must still judge actual equipment conditions and make on-site adjustments, subjectively assess picture and sound quality, physically calibrate screens and optical systems, handle faults, and operate safely. Technological exposure does not equal job replacement. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 39-3021.00 occupational profile",
@@ -14697,7 +14717,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -14871,15 +14891,27 @@
           "source-pack-onet-localcert",
           "source-pack-onet-localtraining"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Motion Picture Projectionists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Pre-screening checks and calibration",
@@ -14930,7 +14962,7 @@
       "text": "Motion Picture Projectionists"
     }
   },
-  "source_content_sha256": "dc5cc6fbf659e2acffc2b8c44f2798433b3d4e24d0570f1d0637560e60707a50",
+  "source_content_sha256": "8720ac79d35a2b08ae40b3bfb5d19e5bab51bfbf09cae85e79402641d3756050",
   "subject": {
     "canonical_slug": "motion-picture-projectionists",
     "name": "Motion Picture Projectionists",

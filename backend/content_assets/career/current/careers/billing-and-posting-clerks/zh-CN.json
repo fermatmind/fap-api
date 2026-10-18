@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24748,7 +24751,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS明确描述医疗行业需求可能增加，同时自动发票处理提高生产率、限制本职业总体增长。ILO2025研究测任务暴露，认为职业转型更可能，但未给本职业实际采用率或消失日期。以下识别、草稿、检索与差异初筛为编辑按任务提出的辅助用途，需雇主验证数据质量、权限与复核，不能视为已测替代率或每家机构现行流程。"
+              "BLS明确描述医疗行业需求可能增加，同时自动发票处理提高生产率、限制本职业总体增长。ILO2025研究测任务暴露，认为职业转型更可能，但未给本职业实际采用率或消失日期。以下识别、草稿、检索与差异初筛为编辑按任务提出的辅助用途，需雇主验证数据质量、权限与复核，不能视为已测替代率或每家机构现行流程。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.18",
@@ -32733,6 +32736,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "wage_scope",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "取得与审核凭证｜让每个数字有依据｜按业务归集原始凭证，核对要素与审批与授权完整性，对不真实或不合法或记载不准确不完整的凭证按规程处理而不自行改数。 — 75/100; weight=1/3; billing-and-posting-clerks.profile.responsibilities-block.1[0]",
+                  "核算与编制账单｜让计费口径清楚｜按合同或费率或规程核算金额，编制分项对账单与账单或发票并登记应收金额，把计算过程与依据一并留存。 — 75/100; weight=1/3; billing-and-posting-clerks.profile.responsibilities-block.1[1]",
+                  "对账与差异处理｜让账实相符｜定期把账簿记录与实物与款项及有关资料核对，保证账实与账证与账账与账表相符，发现差异先挂起再查明原因并记录处置。 — 75/100; weight=1/3; billing-and-posting-clerks.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37648,7 +37668,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38048,15 +38068,27 @@
         "source_refs": [
           "bls-ooh-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "账单过账文员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 43-3021.00 · Job Zone 1–2 · 入门准备低",
@@ -38107,7 +38139,7 @@
       "text": "账单过账文员"
     }
   },
-  "source_content_sha256": "6f1c49ae7b62c650533d055007c13c7bdeeae5806ec1d256c3998b2a7b7ae49f",
+  "source_content_sha256": "d652bb0a39fabff5c4496e6be9e4aedc0450134dd396998760a161428a4e0cbf",
   "subject": {
     "canonical_slug": "billing-and-posting-clerks",
     "name": "账单过账文员",

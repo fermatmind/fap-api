@@ -14,6 +14,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -7550,7 +7553,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: Test search-term/bibliography organization, record drafts and question classification. No occupational adoption, time-saving or job-outcome evidence obtained. Responsible people must still verify identity/permissions, shelving and equipment handling."
+              "Editorial suggestion: Test search-term/bibliography organization, record drafts and question classification. No occupational adoption, time-saving or job-outcome evidence obtained. Responsible people must still verify identity/permissions, shelving and equipment handling. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "library-technicians.ai-impact.ai-impact-table.2",
@@ -8751,6 +8754,23 @@
                 "publisher": "American Library Association",
                 "scope": "U.S. library professional ethics",
                 "url": "https://www.ala.org/tools/ethics"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Handle loans/returns and register readers — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Classify/sort/shelve and assist searches — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Process and repair collection materials — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11173,7 +11193,7 @@
     ],
     "path": "/en/career/jobs/library-technicians",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11321,15 +11341,27 @@
         "source_refs": [
           "onet-cert"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Library Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Loans, returns and shelving",
@@ -11380,7 +11412,7 @@
       "text": "Library Technician Career Assessment: Work, Entry and Risk Boundaries"
     }
   },
-  "source_content_sha256": "7498b6e0d6b545dd506ce5e0d1712a48caa9d7c61014dae6ec5088f17760aed0",
+  "source_content_sha256": "5f11928af4d173041ba7013bb45f0a094acac628cc12ea10f5677f7bc05b9f82",
   "subject": {
     "canonical_slug": "library-technicians",
     "name": "Library Technicians",

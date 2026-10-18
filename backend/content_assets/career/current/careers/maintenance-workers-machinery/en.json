@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7543,7 +7546,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task hypothesis: distinguish CMMS and vibration and temperature monitoring from generative AI. The latter may organize fictional lubrication / maintenance record drafts; no adoption rates or job outcomes were obtained for this occupation. Trained personnel verify equipment condition, lubricating materials, shutdown isolation, and maintenance acceptance. Automated text cannot replace on-site inspections or machinery repair authorization."
+              "Editorial task hypothesis: distinguish CMMS and vibration and temperature monitoring from generative AI. The latter may organize fictional lubrication / maintenance record drafts; no adoption rates or job outcomes were obtained for this occupation. Trained personnel verify equipment condition, lubricating materials, shutdown isolation, and maintenance acceptance. Automated text cannot replace on-site inspections or machinery repair authorization. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "maintenance-workers-machinery.ai-impact.ai-impact-table.2",
@@ -8665,6 +8668,23 @@
                 "publisher": "OSHA",
                 "scope": "industry_proxy",
                 "url": "https://www.osha.gov/hazcom"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Lubricate and perform routine maintenance according to plan — 0/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Dismantle, inspect, and replace parts — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Start, observe, and judge abnormalities — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11092,7 +11112,7 @@
     ],
     "path": "/en/career/jobs/maintenance-workers-machinery",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11204,15 +11224,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Machinery Maintenance Worker",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Lubrication and routine maintenance",
@@ -11263,7 +11295,7 @@
       "text": "Assessing Machinery Maintenance Workers: Work, Entry Paths, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "d39775c37c25a2c3285b2c46da0c6f60e0c7eb36b75f9ef90f499b59a3502c5c",
+  "source_content_sha256": "761b5b0fe34c78ae31575535682cdd469b8e71400ab3c048260f0f6e6b7a6c4b",
   "subject": {
     "canonical_slug": "maintenance-workers-machinery",
     "name": "Machinery Maintenance Worker",

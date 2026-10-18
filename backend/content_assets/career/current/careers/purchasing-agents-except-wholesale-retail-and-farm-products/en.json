@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24396,7 +24399,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the ILO, academic papers, WEF, and official occupational data consulted this time do not provide the AI adoption rate, layoff rate, or replacement year for the precise purchasing agent occupation 13-1023. Task exposure research can only indicate potential impact; verifying specifications, comparing supply conditions, negotiating, and handling performance differences in purchasing still require product facts and organizational authorization. The following tool uses are trial proposals from the editors and cannot be treated as realized efficiency gains or position outcomes."
+              "Insufficient evidence: the ILO, academic papers, WEF, and official occupational data consulted this time do not provide the AI adoption rate, layoff rate, or replacement year for the precise purchasing agent occupation 13-1023. Task exposure research can only indicate potential impact; verifying specifications, comparing supply conditions, negotiating, and handling performance differences in purchasing still require product facts and organizational authorization. The following tool uses are trial proposals from the editors and cannot be treated as realized efficiency gains or position outcomes. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "purchasing-agents-except-wholesale-retail-and-farm-products.ai-impact.ai-impact-table.18",
@@ -32088,6 +32091,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3071.04"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Extract the specification and quantity of the purchasing request — 75/100; weight=1/3; purchasing-agents-except-wholesale-retail-and-farm-products.ai-impact.ai-impact-table.95[0]",
+                  "Organize the cost coverage of two quotes — 75/100; weight=1/3; purchasing-agents-except-wholesale-retail-and-farm-products.ai-impact.ai-impact-table.99[0]",
+                  "Organize delay and quality difference records — 50/100; weight=1/3; purchasing-agents-except-wholesale-retail-and-farm-products.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36993,7 +37013,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupational fit guide",
@@ -37261,15 +37281,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Purchasing Agents",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Purchasing Agents · task checklist",
@@ -37320,7 +37352,7 @@
       "text": "Purchasing Agents"
     }
   },
-  "source_content_sha256": "3483e5d8bac005960aa151bcd50a255d3e103557b7008c16d0751d691652dcfc",
+  "source_content_sha256": "6d7ece44c44389f85c72e7faabe41946bb9ba076216c12cd7832d29c96d67f81",
   "subject": {
     "canonical_slug": "purchasing-agents-except-wholesale-retail-and-farm-products",
     "name": "Purchasing Agents",

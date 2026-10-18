@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7559,7 +7562,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: digital tools may help organize drawings, work orders, and defect records. Personnel with applicable qualifications and authorization still verify outage permission, equipment status, and site safety under procedures. Tools do not automatically grant work authority."
+              "Editorial suggestion: digital tools may help organize drawings, work orders, and defect records. Personnel with applicable qualifications and authorization still verify outage permission, equipment status, and site safety under procedures. Tools do not automatically grant work authority. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "line-installers-and-repairers.ai-impact.ai-impact-table.2",
@@ -8697,6 +8700,23 @@
                 "publisher": "Ministry of Emergency Management",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Organize work orders and defect records — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Installation, maintenance, and fault handling — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Shutdown, voltage-testing, and energized-work judgments — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11112,7 +11132,7 @@
     ],
     "path": "/en/career/jobs/line-installers-and-repairers",
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Pay",
       "direction-comparison": "Compare Related Occupations",
       "fit": "Fit Signals",
@@ -11272,15 +11292,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Electrical Power-Line Installers and Repairers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Overhead and underground lines",
@@ -11331,7 +11363,7 @@
       "text": "Evaluating a Career in Electrical Power-Line Installation and Repair: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "0938871b22f122ab73bc55644895732ff24a5bf260303c3533d27bd0b6e0e3f7",
+  "source_content_sha256": "9b06f665c5d6ee221db7eef533b7b59c4d3cba0e9c4a72407b336e07fe40e2f3",
   "subject": {
     "canonical_slug": "line-installers-and-repairers",
     "name": "Electrical Power-Line Installers and Repairers",

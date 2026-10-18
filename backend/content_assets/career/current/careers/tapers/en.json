@@ -8,6 +8,9 @@
       "fact:cn-construction-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25662,7 +25665,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate text checklist assistance, image prompts, actual construction, and employment outcomes. NIST material supports checking information risk, O*NET supports task scope, and BLS supports precise statistics; none of them provides a substitution rate for this occupation. Without a reviewable task scoring method and inputs, this page does not fill in an AI exposure score."
+              "First separate text checklist assistance, image prompts, actual construction, and employment outcomes. NIST material supports checking information risk, O*NET supports task scope, and BLS supports precise statistics; none of them provides a substitution rate for this occupation. Without a reviewable task scoring method and inputs, this page shows a separate editorial AI impact estimate. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "tapers.display.ai_impact_table.answer",
@@ -34217,6 +34220,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Materials | Check applicable conditions | Select joint compound or joint tape per the actual material instructions and site requirements, and refer questions to the responsible person. — 25/100; weight=1/3; tapers.display.responsibilities_block.02[0]",
+                  "Treatment | Complete seams within the training scope | Use tools to treat seams and related nail and screw head positions, with the specific method per the project and material requirements. — 0/100; weight=1/3; tapers.display.responsibilities_block.03[0]",
+                  "Finishing | Observation and feedback adjustment | Finish surfaces, check related defects, and rework on feedback; check dust protection and equipment conditions separately before sanding. — 25/100; weight=1/3; tapers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39459,7 +39479,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -39619,15 +39639,27 @@
         "source_refs": [
           "nbs-construction-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Tapers (wallboard seam treatment)",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 47-2082.00 precise occupational definition",
@@ -39678,7 +39710,7 @@
       "text": "Tapers (wallboard seam treatment)"
     }
   },
-  "source_content_sha256": "5fdb9a8713025c56d483e25456a6e1504608706b2da331c80a0f958290c0f868",
+  "source_content_sha256": "1489795965411328c5875dc2f040f6e9c0b155850468bfe991241db05798581f",
   "subject": {
     "canonical_slug": "tapers",
     "name": "Tapers (wallboard seam treatment)",

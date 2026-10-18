@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25475,7 +25478,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务分析｜备课资料、题目与反馈初稿可在学校许可内试验；内容需教师核学科与课程依据。课堂实施、评价、秩序和学生支持的权限另核。O*NET任务与软件提及不证明AI已采用、节省时间或学习效果，也不给低暴露评级。美国25-2031.00：2025年就业1,087,500人，2025—2035增长Little or no change（几乎无变化），预计年均空缺63,500个，含增长与人员更替。总体预测非当前招聘、净新增或AI因果，不推个人结果。"
+              "编辑任务分析｜备课资料、题目与反馈初稿可在学校许可内试验；内容需教师核学科与课程依据。课堂实施、评价、秩序和学生支持的权限另核。O*NET任务与软件提及不证明AI已采用、节省时间或学习效果，也不给低暴露评级。美国25-2031.00：2025年就业1,087,500人，2025—2035增长Little or no change（几乎无变化），预计年均空缺63,500个，含增长与人员更替。总体预测非当前招聘、净新增或AI因果，不推个人结果。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "high-school-teachers.ai-impact.ai-impact-table.18",
@@ -32991,6 +32994,23 @@
                 "publisher": "教育部",
                 "scope": "具体发布或法源，限定对象用途",
                 "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/tnull_1314.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "目标与课程 — 75/100; weight=1/3; high-school-teachers.ai-impact.ai-impact-table.95[0]",
+                  "教学实施 — 25/100; weight=1/3; high-school-teachers.ai-impact.ai-impact-table.99[0]",
+                  "评价与反馈 — 50/100; weight=1/3; high-school-teachers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37924,7 +37944,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38072,15 +38092,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "高中教师（不含特殊与职业技术教育）",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "高中教师（不含特殊与职业技术教育） · 任务、交付与责任边界",
@@ -38131,7 +38163,7 @@
       "text": "高中教师（不含特殊与职业技术教育）"
     }
   },
-  "source_content_sha256": "f93e014a7a40d00951a04ae0257d9a5d3ebdbc001dbef3d7542613940c441f9c",
+  "source_content_sha256": "00cf2c48a8cf9365cda2b042450d35653d5d96f9c430fefc1cb8f9fb187d641e",
   "subject": {
     "canonical_slug": "high-school-teachers",
     "name": "高中教师（不含特殊与职业技术教育）",

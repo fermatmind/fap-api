@@ -11,6 +11,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7553,7 +7556,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: test lighting visualization, cue drafts, and equipment lists offline; distinguish console automation from generative AI. No occupational adoption rates or testing time-saving effects have been established. Appropriately authorized personnel must verify structures, power, and on-site acceptance."
+              "Editorial suggestion: test lighting visualization, cue drafts, and equipment lists offline; distinguish console automation from generative AI. No occupational adoption rates or testing time-saving effects have been established. Appropriately authorized personnel must verify structures, power, and on-site acceptance. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "lighting-technicians.ai-impact.ai-impact-table.2",
@@ -8667,6 +8670,23 @@
                 "publisher": "OSHA",
                 "scope": "Verify separately by exact occupation or broad group and jurisdiction",
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Arrange lighting positions and generate cues — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Setup, wiring, and focusing — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "On-site operation and safety checks — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -10885,7 +10905,7 @@
     ],
     "path": "/en/career/jobs/lighting-technicians",
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Pay",
       "direction-comparison": "Compare Related Occupations",
       "fit": "Fit Signals",
@@ -11033,15 +11053,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Lighting Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Fixture and console setup",
@@ -11092,7 +11124,7 @@
       "text": "Evaluating a Career as a Lighting Technician: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "15fb0b0244e43b75def44cb9ffeb9fa22da7a34faedec1deb1c585a2ece78a47",
+  "source_content_sha256": "8bfecccacb2f6110c53d922c73d35861c049711859ec450bd27fa0613485081a",
   "subject": {
     "canonical_slug": "lighting-technicians",
     "name": "Lighting Technicians",

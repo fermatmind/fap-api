@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24371,7 +24374,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence is insufficient: no AI adoption rate, displacement rate, or task-level scoring basis for this occupation was obtained. Record drafts, time and place extraction, and public material organization remain editorially proposed tasks awaiting verification; ILO exposure and BLS projections cannot prove an AI employment causal effect, and on-scene judgment, public communication, procedures, and enforcement responsibility rest with authorized personnel."
+              "Evidence is insufficient: no AI adoption rate, displacement rate, or task-level scoring basis for this occupation was obtained. Record drafts, time and place extraction, and public material organization remain editorially proposed tasks awaiting verification; ILO exposure and BLS projections cannot prove an AI employment causal effect, and on-scene judgment, public communication, procedures, and enforcement responsibility rest with authorized personnel. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "police-and-sheriff-s-patrol-officers.ai-impact.ai-impact-table.18",
@@ -32116,6 +32119,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/33-9032.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Public response｜carry out on-scene work under authorization and agency procedures｜the student exercise involves no real action. — 0/100; weight=1/3; police-and-sheriff-s-patrol-officers.profile.responsibilities-block.1[1]",
+                  "On-scene verification｜establish the circumstances of an incident or traffic accident within one's duties and authority, and record statements and observations｜criminal investigation specialists have a separate division of labor. — 25/100; weight=1/3; police-and-sheriff-s-patrol-officers.profile.responsibilities-block.1[3]",
+                  "Record and report｜state known facts, open questions, the basis for action, and the responsible person｜contradictions must not be omitted. — 75/100; weight=1/3; police-and-sheriff-s-patrol-officers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37022,7 +37042,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37290,15 +37310,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Police and Sheriff's Patrol Officers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Lawful authorization · patrol and public response",
@@ -37349,7 +37381,7 @@
       "text": "Police and sheriff's patrol officers: work tasks, US wages, and the entry path"
     }
   },
-  "source_content_sha256": "4202cecd4663e1067bd370c334cd75af2ba587b2f27db497df210171af931334",
+  "source_content_sha256": "8eaeba5391d537ee4b35b8b3d521e87825d409d73c5e2dd6343ce91ef08edc41",
   "subject": {
     "canonical_slug": "police-and-sheriff-s-patrol-officers",
     "name": "Police and Sheriff's Patrol Officers",

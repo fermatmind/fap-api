@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:nine-cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -24702,7 +24705,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET lists office, database, scheduling and outreach software and recruiting keywords; these cannot prove that organisational adoption rises year by year, how much tools speed things up, or AI employment effects. In mainland China the Code of online conduct for religious clergy prohibits using AI to proselytise; publishing religious information online, preaching, training and activities must be checked against the specific rules on permits, subjects and channels, and human review or organisational authorisation does not by itself make publication lawful. The tool suggestions below are limited to fictional internal administrative drafts that contain no doctrinal outreach and no real personal data; they do not automatically generate, publish or disseminate religious teaching."
+              "O*NET lists office, database, scheduling and outreach software and recruiting keywords; these cannot prove that organisational adoption rises year by year, how much tools speed things up, or AI employment effects. In mainland China the Code of online conduct for religious clergy prohibits using AI to proselytise; publishing religious information online, preaching, training and activities must be checked against the specific rules on permits, subjects and channels, and human review or organisational authorisation does not by itself make publication lawful. The tool suggestions below are limited to fictional internal administrative drafts that contain no doctrinal outreach and no real personal data; they do not automatically generate, publish or disseminate religious teaching. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.18",
@@ -31794,6 +31797,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "adjacent",
                 "url": "https://www.bls.gov/ooh/community-and-social-service/marriage-and-family-therapists.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Ceremony and teaching | lead worship and ceremonies and preach doctrine | pray and promote spirituality; prepare and deliver sermons or other addresses; recite scriptures; organise and lead regular religious services; lead special ceremonies such as weddings and funerals and confirmations; administer religious rites or sacraments (corresponds to O*NET tasks one, two, three, four, fifteen and eight). — 25/100; weight=1/3; clergy.profile.responsibilities-block.1[0]",
+                  "Spiritual companionship and counselling | provide spiritual and emotional counselling to individuals and groups | provide counselling on spiritual and emotional and personal needs; visit homes and hospitals and prisons to offer comfort and support; respond to requests for help in emergencies or crises; refer those in need to community support services or psychologists or doctors (corresponds to O*NET tasks seven, ten, fourteen and eighteen). — 0/100; weight=1/3; clergy.profile.responsibilities-block.1[1]",
+                  "Community communication and outreach | share religious topics through writing and speaking and teaching | write articles or give addresses or teach on religious topics; organise or take part in interfaith and community and civic and educational or recreational activities; seek to expand the congregation (corresponds to O*NET tasks six, nineteen and sixteen). — 75/100; weight=1/3; clergy.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36725,7 +36745,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37054,15 +37074,27 @@
         "source_refs": [
           "nine-iag-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Clergy",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · SE",
@@ -37113,7 +37145,7 @@
       "text": "Clergy"
     }
   },
-  "source_content_sha256": "5039a61ee62980a3d09fbf59abb98a24d8ffccae1441cfcaae6f70f8ad39f501",
+  "source_content_sha256": "bc5160678ae6b1dcdf9bddb56034e190f3206549fbbb1f446c36667e6ea2c52a",
   "subject": {
     "canonical_slug": "clergy",
     "name": "Clergy",

@@ -38,6 +38,9 @@
       "fact:cpso-openings": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25033,7 +25036,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "招聘单年关键词支持办公软件出现，不证明DCS普及、效率或增长；用途是编辑试用，效果另核。BLS表1.2精确51-8091：2025就业16.7千、2035预测15.9千，官方净变化−0.9千、−5.2%（OOH舍入−5%，下降），年均空缺1.3千，含增长与替补；端点/净值分别舍入，不据端点重算覆盖官方净值。自雇“—”非0。典型高中/GED、相关经验None、中等期限在岗培训。"
+              "招聘单年关键词支持办公软件出现，不证明DCS普及、效率或增长；用途是编辑试用，效果另核。BLS表1.2精确51-8091：2025就业16.7千、2035预测15.9千，官方净变化−0.9千、−5.2%（OOH舍入−5%，下降），年均空缺1.3千，含增长与替补；端点/净值分别舍入，不据端点重算覆盖官方净值。自雇“—”非0。典型高中/GED、相关经验None、中等期限在岗培训。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.18",
@@ -31984,6 +31987,23 @@
                 "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "系统运行监控｜监控仪表与报警并巡检整套系统｜监控并记录仪表、流量计、面板灯或其他指示并倾听报警信号以核实工艺条件符合性，巡检作业区以确保罐体或槽内溶液不会溢出（对应 O*NET 任务重要度 96、92）。 — 50/100; weight=1/3; chemical-plant-and-system-operators.profile.responsibilities-block.1[0]",
+                  "参数调节｜按配方与工艺设定调整控制与流量｜调整设备单元的控制设定以改变化学反应速度、质量或收率，转动阀门以调节产品与副产物通过搅拌罐与储罐或中和罐的流量（对应任务重要度 94、89）。 — 25/100; weight=1/3; chemical-plant-and-system-operators.profile.responsibilities-block.1[1]",
+                  "记录与计算与协作｜记录运行数据并完成罐位与物料计算｜记录工艺条件与检测结果或仪表读数等运行数据，使用校准杆测量罐体液位，按配方计算物料需求量或收率，与技术与管理监督人员沟通影响安全效率或产品质量的状况，并指导调节物料与产品流量的机械操作人员（对应任务重要度 93、82、82、90、82）。 — 75/100; weight=1/3; chemical-plant-and-system-operators.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36931,7 +36951,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37300,15 +37320,27 @@
           "cpso-details",
           "cpso-methods"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "化工装置操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RCI",
@@ -37359,7 +37391,7 @@
       "text": "化工装置操作员"
     }
   },
-  "source_content_sha256": "1e902d879d45281e37d39d86102dee00fff06afd8be4d2af899cad4533efe9b5",
+  "source_content_sha256": "9f8daa75ca9c0e36e805d1efdffa478a76fb5f824f5315b4487ceebbc4f37e10",
   "subject": {
     "canonical_slug": "chemical-plant-and-system-operators",
     "name": "化工装置操作员",

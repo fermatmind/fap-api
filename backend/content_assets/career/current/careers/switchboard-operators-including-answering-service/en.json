@@ -8,6 +8,9 @@
       "fact:cn-office-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25320,7 +25323,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no representative generative AI adoption rate, net time saving, substitution rate or reviewable FermatMind task score for switchboard operators was obtained; no score is filled in."
+              "Insufficient evidence: no representative generative AI adoption rate, net time saving, substitution rate or reviewable FermatMind task score for switchboard operators was obtained; a separate editorial estimate is shown."
             ]
           },
           "id": "switchboard-operators-including-answering-service.ai-impact.ai-impact-table.3",
@@ -25439,7 +25442,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Distinguish tool ability, actual organisational adoption and employment outcomes. Summaries, dictation or directory suggestions are only candidates, and people must check the purpose, number, time, public permission and business status; this page has no net effect for this occupation or a personal unemployment forecast."
+              "Distinguish tool ability, actual organisational adoption and employment outcomes. Summaries, dictation or directory suggestions are only candidates, and people must check the purpose, number, time, public permission and business status; this page has no net effect for this occupation or a personal unemployment forecast. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "switchboard-operators-including-answering-service.display.ai_impact_table.answer",
@@ -33004,6 +33007,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Answering | Clarifying and restating the request | Greet clearly, hear the purpose and the recipient, confirm the necessary information, and avoid judging identity from the voice or by guessing. — 50/100; weight=1/3; switchboard-operators-including-answering-service.display.responsibilities_block.02[0]",
+                  "Operation | Call transfer and busy line handling | Operate the approved system routing, take a message or contact the responsible person through the process when the line is busy, and do not promise business outcomes on your own. — 75/100; weight=1/3; switchboard-operators-including-answering-service.display.responsibilities_block.03[0]",
+                  "Records | Message time and handover status | Record the purpose, time, contact details and request accurately and distinguish transferred, awaiting receipt and resolved. — 75/100; weight=1/3; switchboard-operators-including-answering-service.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38245,7 +38265,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -38405,15 +38425,27 @@
         "source_refs": [
           "nbs-office-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Switchboard operator (including answering service)",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 43-2011.00 exact occupation",
@@ -38464,7 +38496,7 @@
       "text": "Switchboard operator (including answering service)"
     }
   },
-  "source_content_sha256": "0c8ee500d01db4355ff8a3928d4c1c8f26cc115ef613c2e4626d035fcdf1c059",
+  "source_content_sha256": "4f69acdbf592661678041205d195159d746688dd76b4da9d2ff2d295000b921e",
   "subject": {
     "canonical_slug": "switchboard-operators-including-answering-service",
     "name": "Switchboard operator (including answering service)",

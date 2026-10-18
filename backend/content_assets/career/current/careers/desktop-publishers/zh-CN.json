@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24365,7 +24368,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业设计版面、处理图文、校样与转换交付文件。模板、检查和批处理的辅助用途可以讨论，但具体软件是否使用规则、机器学习或生成模型须看实施文档。本页将编辑推演、招聘代理、任务暴露和总体就业预测分开，不用关键词证明已经普遍使用。"
+              "本职业设计版面、处理图文、校样与转换交付文件。模板、检查和批处理的辅助用途可以讨论，但具体软件是否使用规则、机器学习或生成模型须看实施文档。本页将编辑推演、招聘代理、任务暴露和总体就业预测分开，不用关键词证明已经普遍使用。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24640,7 +24643,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页没有可复核的职业量表与任务评分依据，因此保留 Hero 中 AI 数据的缺失态并在正文说明原因；用其他岗位的分数代替本职业会制造没有依据的精度。"
+              "本页既有外部资料没有可直接采用的实测任务评分，因此另以本页明示的方法提供AI影响度编辑估算；用其他岗位的分数代替本职业会制造没有依据的精度。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -32085,6 +32088,23 @@
                 "publisher": "O*NET Resource Center",
                 "scope": "contextual",
                 "url": "https://www.onetcenter.org/IP.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "按设计规格与版面要求执行排版，逐项核对字体、字号、栏宽、间距与对齐，不擅自改动已确认的设计。 — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "导入并处理文本与美术元素，核对文本完整性与图像分辨率、色彩模式，确认素材来源与使用授权是否清楚。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "逐页检查初步与最终校样，发现错别字、错位、图文不搭与页序问题及时更正并留痕。 — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37369,7 +37389,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37598,15 +37618,27 @@
         "source_refs": [
           "r5-nbs-culture"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "桌面出版专员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "版面排版 · 图文处理与分色 · 印前交付",
@@ -37657,7 +37689,7 @@
       "text": "桌面出版专员"
     }
   },
-  "source_content_sha256": "a88be5478b37dee17d7013681a3f71900b4ea0b6029daff0a7466132d587c46e",
+  "source_content_sha256": "055ef707096f02d9ace04cfc5fdcbcf7553963aee2ab2e72d5102e051ed9febe",
   "subject": {
     "canonical_slug": "desktop-publishers",
     "name": "桌面出版专员",

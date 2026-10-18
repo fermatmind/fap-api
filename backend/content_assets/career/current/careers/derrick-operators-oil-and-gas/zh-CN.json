@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24374,7 +24377,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国47-5011本细类：2025年10,700→2035年10,900，官方净增200；BLS表1.2增长1.6%，O*NET趋势页取整2%，年均空缺900含增长与更替，自雇0.5%。BLS OOH四细类47-5011/47-5012/47-5013/47-5071合计112,700→115,100、增长2%、净增2,400、年均空缺9,900；合计不等47-5010三职业小计，也不等本细类。预测非个人录用率或AI净效应。 BLS自动钻井、机器人和远程监测属合组方向讨论，未量化本细类生成式AI效果；记录整理为编辑推演。"
+              "美国47-5011本细类：2025年10,700→2035年10,900，官方净增200；BLS表1.2增长1.6%，O*NET趋势页取整2%，年均空缺900含增长与更替，自雇0.5%。BLS OOH四细类47-5011/47-5012/47-5013/47-5071合计112,700→115,100、增长2%、净增2,400、年均空缺9,900；合计不等47-5010三职业小计，也不等本细类。预测非个人录用率或AI净效应。 BLS自动钻井、机器人和远程监测属合组方向讨论，未量化本细类生成式AI效果；记录整理为编辑推演。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24640,7 +24643,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得47-5011逐项可复核的生成式AI职业评分与版本化量表；保持Hero缺失态。热门软件词条和相邻职业分数不能替代该依据。"
+              "证据不足：本轮未取得47-5011逐项可复核的生成式AI职业评分与版本化量表；Hero另列编辑估算。热门软件词条和相邻职业分数不能替代该依据。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -32227,6 +32230,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/49-3042.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "按规定检查井架、天车、缆绳与固定夹具，检查泵、泥浆罐与相关设备，确认安全带等防护装备与作业条件后方可作业。 — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "启动并监听泥浆泵，按方案称量粘土并与水和化学品混合配制钻井泥浆，监测并调整黏度与密度，填写泥浆报告。 — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "起下钻时扶稳管柱、引导管段进出吊卡，按指挥完成协同动作，站位避开危险区域。 — 0/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37511,7 +37531,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37739,15 +37759,27 @@
         "source_refs": [
           "r5-nbs-mining"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "石油天然气井架操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "设备检查 · 泥浆循环与参数 · 钻台协同",
@@ -37798,7 +37830,7 @@
       "text": "石油天然气井架操作员"
     }
   },
-  "source_content_sha256": "fef7b418ccf25824d496545d624eeaaca657645a32a9091aab9dd09b731260ae",
+  "source_content_sha256": "940567bec51e8dbd8679ea592723ff3f9118683f7c79322790f24ac074d00df0",
   "subject": {
     "canonical_slug": "derrick-operators-oil-and-gas",
     "name": "石油天然气井架操作员",

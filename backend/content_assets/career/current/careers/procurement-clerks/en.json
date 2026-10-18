@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24755,7 +24758,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The following auxiliary applications are editorial ideas, and no measured adoption rate or effect for this occupation was verified. AI can help with order entry, quote table organization, and delivery reminders; it cannot be used to derive this occupation's substitution rate. Supplier selection, approvals, discrepancy handling, and payments are the responsibility of authorized personnel."
+              "The following auxiliary applications are editorial ideas, and no measured adoption rate or effect for this occupation was verified. AI can help with order entry, quote table organization, and delivery reminders; it cannot be used to derive this occupation's substitution rate. Supplier selection, approvals, discrepancy handling, and payments are the responsibility of authorized personnel. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "procurement-clerks.ai-impact.ai-impact-table.18",
@@ -32510,6 +32513,23 @@
                 "publisher": "Communications Administration of Guangdong Province",
                 "scope": "contextual",
                 "url": "https://gdca.miit.gov.cn/zwgk/zcwj/flfg/art/2021/art_1f7ffcec321a49129dc852fbba74e4c8.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Requisition and quote check — 75/100; weight=1/3; procurement-clerks.ai-impact.ai-impact-table.95[0]",
+                  "Delivery date coordination — 50/100; weight=1/3; procurement-clerks.ai-impact.ai-impact-table.99[0]",
+                  "Receipt discrepancy records — 75/100; weight=1/3; procurement-clerks.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37421,7 +37441,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37689,15 +37709,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Procurement clerks",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Procurement clerks · task check",
@@ -37748,7 +37780,7 @@
       "text": "Procurement clerks"
     }
   },
-  "source_content_sha256": "693a449924eb60bc0b8397222a8d693f1c207857de4d793c8144635ad9323698",
+  "source_content_sha256": "c1c8509ca90b23b1b496dc927a2c8cff9fc9454ef0beef8b70b99bec7b6a0942",
   "subject": {
     "canonical_slug": "procurement-clerks",
     "name": "Procurement clerks",

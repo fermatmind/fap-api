@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:g5-employment-2025": {
         "status": "pending_mapping"
       },
@@ -24283,7 +24286,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "What can be discussed are candidate tasks: tools may help find classification bases, compare documents and calculate taxes, while the final declaration still requires verifying the jurisdiction, authorization, the facts about the goods and the applicable provisions. The seven task changes are editorial projections and there is as yet no measured deployment result for this occupation. The O*NET general automation survey is 40% high and 40% moderate, not a generative AI adoption or displacement ratio; causal evidence on whether jobs and wages are affected is still lacking."
+              "What can be discussed are candidate tasks: tools may help find classification bases, compare documents and calculate taxes, while the final declaration still requires verifying the jurisdiction, authorization, the facts about the goods and the applicable provisions. The seven task changes are editorial projections and there is as yet no measured deployment result for this occupation. The O*NET general automation survey is 40% high and 40% moderate, not a generative AI adoption or displacement ratio; causal evidence on whether jobs and wages are affected is still lacking. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31908,6 +31911,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Classification and documents | Classify under the tariff schedule and prepare documents | Classify merchandise under the tariff coding system, prepare and process import and export documents that comply with customs laws, and obtain and compile customs invoices, certificates of origin and freight control documents. — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Tax handling | Calculate and handle duties and taxes | Calculate and track the duties and taxes owed and quote under the federal tariff schedule and excise taxes, pay amounts on behalf of clients, and apply for duty concessions, refunds and rebates. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Client consultation | Explain restrictions and quotas | Explain import and export restrictions, the tariff system, insurance requirements and quotas to importers and exporters, and point out compliant paths to reduce duties and taxes. — 50/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37488,7 +37508,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparing occupational directions",
       "fit": "Occupational fit guide",
@@ -37672,15 +37692,27 @@
         "source_refs": [
           "g5-onet-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Customs Brokers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Customs declaration and customs affairs · Documents and taxes · Import and export compliance",
@@ -37731,7 +37763,7 @@
       "text": "Customs Brokers"
     }
   },
-  "source_content_sha256": "ac44fdc69f636563457b8a2b8af45b0bba0ac1db996859a73be0acadcb5308e4",
+  "source_content_sha256": "1eeada50df602d2b990d565315bd85947fa10f205cc300d074b12f42348a39fb",
   "subject": {
     "canonical_slug": "customs-brokers",
     "name": "Customs Brokers",

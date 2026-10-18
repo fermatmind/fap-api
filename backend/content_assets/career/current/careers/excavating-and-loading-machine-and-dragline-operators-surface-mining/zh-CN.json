@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24476,7 +24479,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑候选：资料检索、记录草稿和统计复算可尝试辅助并逐项验证。证据不足：未取得本职业AI采用率、收益、任务时间占比或岗位变化的实测数据。ILO 2023研究评估全球潜在任务暴露，不证明本职业影响有限或整体增强；缺少可复核评分依据，不评分。"
+              "编辑候选：资料检索、记录草稿和统计复算可尝试辅助并逐项验证。证据不足：未取得本职业AI采用率、收益、任务时间占比或岗位变化的实测数据。ILO 2023研究评估全球潜在任务暴露，不证明本职业影响有限或整体增强；缺少可复核评分依据，另列编辑估算。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "excavating-and-loading-machine-and-dragline-operators-surface-mining.ai-impact.ai-impact-table.18",
@@ -32102,6 +32105,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent occupation 53-7011.00",
                 "url": "https://www.onetonline.org/link/summary/53-7011.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "设备操作与开挖装载 — 25/100; weight=1/3; excavating-and-loading-machine-and-dragline-operators-surface-mining.ai-impact.ai-impact-table.99[0]",
+                  "设备状态判断与异常处置 — 25/100; weight=1/3; excavating-and-loading-machine-and-dragline-operators-surface-mining.ai-impact.ai-impact-table.103[0]",
+                  "标高与坡度检查 — 25/100; weight=1/3; excavating-and-loading-machine-and-dragline-operators-surface-mining.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37010,7 +37030,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37280,15 +37300,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "机器操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "机器操作员 · 露天采矿挖掘与装载机械 · 官方职业范围",
@@ -37339,7 +37371,7 @@
       "text": "机器操作员"
     }
   },
-  "source_content_sha256": "6d3168eb90d8198bdb3c9ba7b22463b45ca890f9d785e65f4e9004356f0d807b",
+  "source_content_sha256": "c7168660de170eab70144fa2ef9a3ecb10575a83efda70d8a25b0c6b6721cd0b",
   "subject": {
     "canonical_slug": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
     "name": "机器操作员",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24739,7 +24742,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务判断：排程、材料清单和虚构资料记录结构可尝试用工具生成草稿，再由人逐条复核；真实作品和健康资料先核同意及机构数据权限。O*NET 职责、软件招聘词频和 BLS 父职业预测均不是 AI 取代率研究，因此本页不宣称不会整体取代、岗位消失年份或自动化百分比。责任与合法权限仍按专业要求落实。 ILO仅跨职业暴露方法官方介绍及扩展摘要，NIST仅自愿组织风险简介，本轮未读完整论文/PDF或本职业采用与因果研究。"
+              "编辑任务判断：排程、材料清单和虚构资料记录结构可尝试用工具生成草稿，再由人逐条复核；真实作品和健康资料先核同意及机构数据权限。O*NET 职责、软件招聘词频和 BLS 父职业预测均不是 AI 取代率研究，因此本页不宣称不会整体取代、岗位消失年份或自动化百分比。责任与合法权限仍按专业要求落实。 ILO仅跨职业暴露方法官方介绍及扩展摘要，NIST仅自愿组织风险简介，本轮未读完整论文/PDF或本职业采用与因果研究。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.18",
@@ -32778,6 +32781,23 @@
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "目标与媒介｜根据治疗目标、感官与动作能力、材料风险与文化背景选择媒介，并说明本次活动的边界｜目标、媒介与活动边界一一对应的活动方案。 — 25/100; weight=1/3; art-therapists.profile.responsibilities-block.1[1]",
+                  "过程与观察｜开展有引导的自我表达，观察创作过程与言语反应，与来访者讨论体验而不把作品符号机械解释为诊断｜含具体观察依据与来访者原话的过程记录。 — 0/100; weight=1/3; art-therapists.profile.responsibilities-block.1[2]",
+                  "记录与复盘｜记录治疗目标、活动和进展，按获准分工与团队复盘｜编辑记录示例，不保证所有判断可完整追溯。 — 75/100; weight=1/3; art-therapists.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37680,7 +37700,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38012,15 +38032,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "艺术治疗师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 29-1129.01 · 受督导实践 · 记录与转介责任",
@@ -38071,7 +38103,7 @@
       "text": "艺术治疗师"
     }
   },
-  "source_content_sha256": "4e175d5d7a1d0c8b5737b6573bc01a9e4356a673d01d2b6eec6050ac1b212283",
+  "source_content_sha256": "9211157fc0e00bdd76cd64254da989a680beb2463019508170c7db39080daeb9",
   "subject": {
     "canonical_slug": "art-therapists",
     "name": "艺术治疗师",

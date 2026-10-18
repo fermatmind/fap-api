@@ -8,6 +8,9 @@
       "fact:cn-ophthalmic-health-private-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "mapped"
       },
@@ -12706,6 +12709,23 @@
                 "publisher": "FermatMind",
                 "scope": "internal_rubric",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Verify patient identity and record ocular and systemic history. — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Measure near and distance vision per procedure and record left and right eyes. — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Operate devices such as OCT to record ocular structural data. — 50/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -12893,7 +12913,7 @@
             }
           }
         ],
-        "answer": "Tools can assist with history summary drafts, imaging organization, and examination record proofreading; patient identity, examination result verification, and the authorization responsibility for medication and anomaly referral must be verified by authorized personnel.",
+        "answer": "Tools can assist with history summary drafts, imaging organization, and examination record proofreading; patient identity, examination result verification, and the authorization responsibility for medication and anomaly referral must be verified by authorized personnel. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "Occupational tasks",
@@ -14668,7 +14688,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -14816,15 +14836,27 @@
         "source_refs": [
           "bls-2025-35-29-2057"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Ophthalmic medical technician",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Ophthalmic medical technician · O*NET 29-2057.00",
@@ -14875,7 +14907,7 @@
       "text": "Ophthalmic medical technician: work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "46ac005cf96ab1fabf588f007b9f920cbc6f95a2c7eaadfbfbce1952d8b77bd0",
+  "source_content_sha256": "7a4543e7cb8b9505cec9c955537f1f6aa3cf43053359404102df5e7bab5fc636",
   "subject": {
     "canonical_slug": "ophthalmic-medical-technicians",
     "name": "Ophthalmic medical technician",

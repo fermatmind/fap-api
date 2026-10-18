@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25469,7 +25472,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务分析｜许可虚构人事数据上试验政策检索与方案汇报草稿，核实际制度及民主程序；本轮无普遍采用、效率或岗位因果，不排序影响先后。HR经理负责政策执行、人员配置、纪律程序与合规建议，按本人实际管理权限履行，不一概由法务高层董事会代决定。超权限事项提交真实负责人；劳动合同法4条切身利益制度须履行民主程序及公示告知，内部批准不代法律条件；解除劳动关系另核法定事由程序。个保法13条依法规章及集体合同实施人力资源管理所必需是处理依据之一，非全部员工信息任意收集或仅内部许可；核目的、最小必要、保存期限。24条自动决策须透明公平，重大权益决定可要求说明并拒绝仅自动决定，非一概禁止工具辅助。"
+              "编辑任务分析｜许可虚构人事数据上试验政策检索与方案汇报草稿，核实际制度及民主程序；本轮无普遍采用、效率或岗位因果，不排序影响先后。HR经理负责政策执行、人员配置、纪律程序与合规建议，按本人实际管理权限履行，不一概由法务高层董事会代决定。超权限事项提交真实负责人；劳动合同法4条切身利益制度须履行民主程序及公示告知，内部批准不代法律条件；解除劳动关系另核法定事由程序。个保法13条依法规章及集体合同实施人力资源管理所必需是处理依据之一，非全部员工信息任意收集或仅内部许可；核目的、最小必要、保存期限。24条自动决策须透明公平，重大权益决定可要求说明并拒绝仅自动决定，非一概禁止工具辅助。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "human-resources-managers.ai-impact.ai-impact-table.18",
@@ -32969,6 +32972,23 @@
                 "publisher": "BLS",
                 "scope": "具体文档用途限定",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "政策与制度 — 75/100; weight=1/3; human-resources-managers.ai-impact.ai-impact-table.95[0]",
+                  "员工关系 — 25/100; weight=1/3; human-resources-managers.ai-impact.ai-impact-table.103[0]",
+                  "纪律与配置 — 25/100; weight=1/3; human-resources-managers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37933,7 +37953,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38057,15 +38077,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "人力资源经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "人力资源经理 · 任务、交付与责任边界",
@@ -38116,7 +38148,7 @@
       "text": "人力资源经理"
     }
   },
-  "source_content_sha256": "38bb606ecfd3ead95093e5ba0cbb175f0d2b19b7956255c9a9fe7c9b9cdfaae5",
+  "source_content_sha256": "844e81964ab29e217971b5d7c8a8601d9c5c813ac68442e18faa230d2d3f4c74",
   "subject": {
     "canonical_slug": "human-resources-managers",
     "name": "人力资源经理",

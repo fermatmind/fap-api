@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -23852,7 +23855,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page provides no substitution rate: task and adoption data for this detailed category were not obtained. Editorial trial opportunities for material organization and work record assistance may be proposed, but the target unit's permission must be checked first and quality then verified; the fact that O*NET does not collect data does not prove that no other public task material exists."
+              "This page provides no substitution rate: task and adoption data for this detailed category were not obtained. Editorial trial opportunities for material organization and work record assistance may be proposed, but the target unit's permission must be checked first and quality then verified; the fact that O*NET does not collect data does not prove that no other public task material exists. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "first-line-supervisors-of-air-crew-members.ai-impact.ai-impact-table.18",
@@ -31244,6 +31247,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Editorial example (not verified as a target unit responsibility): assign crew positions and duties and complete the briefing. Actual permission, quality, and effects must be verified separately. — 25/100; weight=1/3; first-line-supervisors-of-air-crew-members.ai-impact.ai-impact-table.99[0]",
+                  "Editorial example (not verified as a target unit responsibility): monitor equipment and communication and mission system status and record deviations. Actual permission, quality, and effects must be verified separately. — 50/100; weight=1/3; first-line-supervisors-of-air-crew-members.ai-impact.ai-impact-table.103[0]",
+                  "Editorial example (not verified as a target unit responsibility): organize mission and training records and complete handover. Actual permission, quality, and effects must be verified separately. — 75/100; weight=1/3; first-line-supervisors-of-air-crew-members.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36146,7 +36166,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -36415,15 +36435,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "First-Line Supervisors of Air Crew Members",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this entry does not publish a score: this occupation has no public task list to break down)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "First-Line Supervisors of Air Crew Members · official occupational scope (55-2011.00)",
@@ -36474,7 +36506,7 @@
       "text": "First-Line Supervisors of Air Crew Members"
     }
   },
-  "source_content_sha256": "45f482f97ad432fecb7c8b8e32e89fc73d495e684c2c79c2462002231ddcd680",
+  "source_content_sha256": "47317b076b5b261fd72b897d33dc7b01f2df7d5e583d8b4858692ef79dd1403b",
   "subject": {
     "canonical_slug": "first-line-supervisors-of-air-crew-members",
     "name": "First-Line Supervisors of Air Crew Members",

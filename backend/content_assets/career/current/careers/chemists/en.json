@@ -38,6 +38,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25079,7 +25082,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The public materials support the tasks, software keywords, AI exposure method and employment projection; spectrum assistance, compiling, drafting and retrieval are suggested editorial trials, and no measured reliability or time saving for this occupation was obtained this round. The BLS Table 1.2 U.S. SOC19-2031 chemist projection for 2025—2035 is 84,900 → 90,300 people, growth of 6.4%, and 5,900 openings per year on average; the OOH chemist sub-item rounds to 6% (faster than average). The official net increase of 5.5 thousand is rounded independently and differs from the 5.4 thousand difference between the two rounded endpoints, and is not recalculated to override it. Openings include growth and replacement demand such as transfers and exits from the labour force, and are not the stock of active vacancies, an AI attribution or year-by-year actuals."
+              "The public materials support the tasks, software keywords, AI exposure method and employment projection; spectrum assistance, compiling, drafting and retrieval are suggested editorial trials, and no measured reliability or time saving for this occupation was obtained this round. The BLS Table 1.2 U.S. SOC19-2031 chemist projection for 2025—2035 is 84,900 → 90,300 people, growth of 6.4%, and 5,900 openings per year on average; the OOH chemist sub-item rounds to 6% (faster than average). The official net increase of 5.5 thousand is rounded independently and differs from the 5.4 thousand difference between the two rounded endpoints, and is not recalculated to override it. Openings include growth and replacement demand such as transfers and exits from the labour force, and are not the stock of active vacancies, an AI attribution or year-by-year actuals. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "chemists.ai-impact.ai-impact-table.18",
@@ -32142,6 +32145,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-4031.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Analysis and testing｜analysing compounds to method and conducting quality control tests｜analysing organic or inorganic compounds using chromatography and spectroscopy or spectrophotometry techniques to determine their chemical or physical properties, composition, structure or reactions, and conducting quality control tests (corresponding to O*NET task importance 77 and 73). — 25/100; weight=1/3; chemists.profile.responsibilities-block.1[0]",
+                  "Method development and improvement｜developing or improving products and methods and changing the composition of substances｜developing, improving or customising products, equipment, formulas, processes or analytical methods and changing the composition of substances by introducing heat, light, energy or chemical catalysts for quantitative or qualitative analysis (corresponding to task importance 80 and 74). — 50/100; weight=1/3; chemists.profile.responsibilities-block.1[1]",
+                  "Records and reporting｜compiling analytical results and writing reports or standards and specifications｜writing technical papers or reports or preparing standards and specifications for processes, facilities, products or tests, and compiling and analysing test information to determine process or equipment operating efficiency or to diagnose malfunctions (corresponding to task importance 73 and 71). — 75/100; weight=1/3; chemists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37085,7 +37105,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -37450,15 +37470,27 @@
         "source_refs": [
           "ch-ooh"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Chemists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page gives no score)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · IRC",
@@ -37509,7 +37541,7 @@
       "text": "Chemists"
     }
   },
-  "source_content_sha256": "9fa826eeb4af4da59dc6f31c12f754073716760a0751178b33eb1f7757721622",
+  "source_content_sha256": "734eafdc093ea462b7b9efb506fb8698f39b54d560b17d6d037e8c873964aa8b",
   "subject": {
     "canonical_slug": "chemists",
     "name": "Chemists",

@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24364,7 +24367,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round has occupational tasks, recruitment technology terms, and employment-total projections, but did not verify actual GenAI adoption, efficiency gain, or substitution ratios; growth cannot prove that no task substitution exists or protect any individual position. The 3 U.S. recruitment technology terms for the full year 2025: Dentrix14%, Office2%, and Excel below 1%; a mention share is not long-term use, prevalence, or proficiency rate, nor GenAI adoption or efficiency gain. Clinic software, imaging equipment, and infection control records may contain multiple technologies, and whether there is AI depends on the specific product function and is not judged by name alone. U.S. its own 31-9091: 2025 employment 388600 → about 417400 in 2035, a net increase of 28800, +7.4% (OOH rounds to 7%); the average annual 53000 openings include replacement rather than net new additions each year, and self-employment is 0.1%. The current O*NET is already 2025 and 2025—2035, so it cannot be written that it is still the old period or that the average annual openings are a ten-year total."
+              "This round has occupational tasks, recruitment technology terms, and employment-total projections, but did not verify actual GenAI adoption, efficiency gain, or substitution ratios; growth cannot prove that no task substitution exists or protect any individual position. The 3 U.S. recruitment technology terms for the full year 2025: Dentrix14%, Office2%, and Excel below 1%; a mention share is not long-term use, prevalence, or proficiency rate, nor GenAI adoption or efficiency gain. Clinic software, imaging equipment, and infection control records may contain multiple technologies, and whether there is AI depends on the specific product function and is not judged by name alone. U.S. its own 31-9091: 2025 employment 388600 → about 417400 in 2035, a net increase of 28800, +7.4% (OOH rounds to 7%); the average annual 53000 openings include replacement rather than net new additions each year, and self-employment is 0.1%. The current O*NET is already 2025 and 2025—2035, so it cannot be written that it is still the old period or that the average annual openings are a ten-year total. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -32162,6 +32165,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-2061.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Prepare instruments and materials per the treatment plan and procedures under the dentist's direction, and verify the sterilization status, expiry date, and match to use. — 0/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Receive and prepare the patient, verify identity and medical history and allergy information, measure and record vital signs, and provide pre-treatment reassurance and communication. — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "During treatment, assist within the lawful position authority and observe and report anomalies; when a patient's condition is critical, notify the physician promptly; in China, nurses should first provide necessary emergency rescue when urgently rescuing a dying patient, and it cannot be written that any anomaly may only be reported and rescue is prohibited; other positions follow their training, lawful authority, and institutional emergency procedures, and do not diagnose or set treatment themselves. — 0/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37684,7 +37704,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37955,15 +37975,27 @@
         "source_refs": [
           "r5-nbs-health"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Dental assistants",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Dental clinical assistance · infection control · patient care",
@@ -38014,7 +38046,7 @@
       "text": "Dental assistants"
     }
   },
-  "source_content_sha256": "4bde2bb0e73a33ecb47ecb60ffbb4c063b93141421f127221e8dd73b24b4c0f8",
+  "source_content_sha256": "74dcb1fe920b3b26c8649d2aa9fbc18e8909607c4c9eb2d34287a59db7c11d64",
   "subject": {
     "canonical_slug": "dental-assistants",
     "name": "Dental assistants",

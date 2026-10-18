@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25475,7 +25478,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务判断｜工单、台账、检验汇总可在获准环境试验辅助；没有本职业生成式AI采用率、实测提效或就业因果证据。普通控制仪表、MES/ERP和生成式AI不同。O*NET自动化情境32%中等、27%略微、41%完全不自动化，属于响应分布，不能变为AI暴露等级。BLS51-4191美国2025—2035预测：约14,400→13,000人，变化-9.5%，年均空缺约1,100个含替换；基期自雇2.6%。预测非实时招聘，不能归因为生成式AI或套中国。"
+              "编辑任务判断｜工单、台账、检验汇总可在获准环境试验辅助；没有本职业生成式AI采用率、实测提效或就业因果证据。普通控制仪表、MES/ERP和生成式AI不同。O*NET自动化情境32%中等、27%略微、41%完全不自动化，属于响应分布，不能变为AI暴露等级。BLS51-4191美国2025—2035预测：约14,400→13,000人，变化-9.5%，年均空缺约1,100个含替换；基期自雇2.6%。预测非实时招聘，不能归因为生成式AI或套中国。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.18",
@@ -32961,6 +32964,23 @@
                 "publisher": "应急管理部",
                 "scope": "特种作业目录范围内实际作业人员；中国大陆",
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "装炉与备料 — 0/100; weight=1/3; heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.95[0]",
+                  "加热与温控 — 50/100; weight=1/3; heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.99[0]",
+                  "硬度与外观检验 — 25/100; weight=1/3; heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37891,7 +37911,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38039,15 +38059,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "金属热处理工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "金属热处理工 · 任务、交付与责任边界",
@@ -38098,7 +38130,7 @@
       "text": "金属热处理工"
     }
   },
-  "source_content_sha256": "a245acfdd53936b4dd66bd51c3ccc6a7ad8802ac3fd07577b6d710250aa9385c",
+  "source_content_sha256": "6d90569a7c3b447623e667b309c1146140ac9b138106ef5eb39449eb7af8be1c",
   "subject": {
     "canonical_slug": "heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic",
     "name": "金属热处理工",

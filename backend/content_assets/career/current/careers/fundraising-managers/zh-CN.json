@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25480,7 +25483,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职AI量化暴露、实际采用及就业因果未取得。检索、预算草稿、影片脚本与版本对照为基于17任务的编辑试用用途，需核原依据，不评中高、明显加速或永久不可替代。"
+              "证据不足：本职AI量化暴露、实际采用及就业因果未取得。检索、预算草稿、影片脚本与版本对照为基于17任务的编辑试用用途，需核原依据，不评中高、明显加速或永久不可替代。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "fundraising-managers.ai-impact.ai-impact-table.18",
@@ -33051,6 +33054,23 @@
                 "publisher": "全国人大常委会；政府转载",
                 "scope": "charity law",
                 "url": "https://www.jiangyin.gov.cn/doc/2023/12/29/1345017.shtml"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "制定募资策略与预算并设定目标与优先顺序 — 50/100; weight=1/3; fundraising-managers.ai-impact.ai-impact-table.97[0]",
+                  "维护客户与政府与媒体关系并拓展募资机会 — 25/100; weight=1/3; fundraising-managers.ai-impact.ai-impact-table.109[0]",
+                  "监控进度与成本并核对披露与合规与复盘 — 75/100; weight=1/3; fundraising-managers.ai-impact.ai-impact-table.121[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37993,7 +38013,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38149,15 +38169,27 @@
           "hr",
           "oews-method"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "筹款经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "筹款经理 · 任务、交付与责任边界",
@@ -38208,7 +38240,7 @@
       "text": "筹款经理"
     }
   },
-  "source_content_sha256": "7b5ce2ae0c59d7c270bbfcd000cf83bbae09e01c7130bfa628249d19ae25f721",
+  "source_content_sha256": "1307328e3c2ad67c8cd813f88c802e628844d9a33a7bb94e617cb4c564333f08",
   "subject": {
     "canonical_slug": "fundraising-managers",
     "name": "筹款经理",

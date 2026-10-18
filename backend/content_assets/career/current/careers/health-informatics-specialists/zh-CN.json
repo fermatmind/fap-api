@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25475,7 +25478,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜临床需求转译、健康信息系统设计、数据映射与配置测试是本职业任务。可以试验工具辅助数据整理、统计图表与技术文档与测试草稿，但普通软件、自动化系统和生成式AI是不同工具。本页未取得本职业AI采用率、节省工时或岗位替代的实测和因果证据，不能由任务资料断言已经提效或整体不会被取代。"
+              "直接回答｜临床需求转译、健康信息系统设计、数据映射与配置测试是本职业任务。可以试验工具辅助数据整理、统计图表与技术文档与测试草稿，但普通软件、自动化系统和生成式AI是不同工具。本页未取得本职业AI采用率、节省工时或岗位替代的实测和因果证据，不能由任务资料断言已经提效或整体不会被取代。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "health-informatics-specialists.ai-impact.ai-impact-table.18",
@@ -32994,6 +32997,23 @@
                 "publisher": "国家统计局",
                 "scope": "信息传输、软件和信息技术服务业；中国城镇单位就业人员，行业门类宽口径",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "需求与工作流转译 — 50/100; weight=1/3; health-informatics-specialists.ai-impact.ai-impact-table.95[0]",
+                  "系统与数据与标准设计 — 75/100; weight=1/3; health-informatics-specialists.ai-impact.ai-impact-table.99[0]",
+                  "数据与评估 — 75/100; weight=1/3; health-informatics-specialists.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37924,7 +37944,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38072,15 +38092,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "健康信息学专家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "健康信息学专家 · 任务、交付与责任边界",
@@ -38131,7 +38163,7 @@
       "text": "健康信息学专家"
     }
   },
-  "source_content_sha256": "21c2c7be787e9c155f0e24e35331b3f434c225ece23219ccfa45d4149b0743f2",
+  "source_content_sha256": "f61bb1a3ffc0acd06b8246377bcf44488e98b233915edf38554907152ea505ea",
   "subject": {
     "canonical_slug": "health-informatics-specialists",
     "name": "健康信息学专家",

@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7545,7 +7548,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task hypothesis: validated CAD, calculation, or simulation tools may support vessel analysis, while generative AI may draft documents using fictional materials. Traditional CFD / structural simulation is not equivalent to generative AI. No occupational adoption rates or job outcomes were obtained. Verify standards versions, boundary conditions, engineering calculations, and tests; automated text cannot replace approved designs or statutory certificates."
+              "Editorial task hypothesis: validated CAD, calculation, or simulation tools may support vessel analysis, while generative AI may draft documents using fictional materials. Traditional CFD / structural simulation is not equivalent to generative AI. No occupational adoption rates or job outcomes were obtained. Verify standards versions, boundary conditions, engineering calculations, and tests; automated text cannot replace approved designs or statutory certificates. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "marine-engineers-and-naval-architects.ai-impact.ai-impact-table.2",
@@ -8691,6 +8694,23 @@
                 "publisher": "IMO",
                 "scope": "exact",
                 "url": "https://www.imo.org/en/ourwork/msas/pages/surveysandcertification.aspx"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Analyze stability, structures, and performance — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Develop design options and prepare documents — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Participate in and evaluate dock and sea trials — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11124,7 +11144,7 @@
     ],
     "path": "/en/career/jobs/marine-engineers-and-naval-architects",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wages",
       "direction-comparison": "Comparison with adjacent occupations",
       "fit": "Fit signals",
@@ -11236,15 +11256,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Marine Engineers and Naval Architects",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Hull and system design",
@@ -11295,7 +11327,7 @@
       "text": "Evaluating a Career as a Marine Engineer or Naval Architect: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "db351645069ba60a7dbc848b552f1bc5543cf5ebc92e9799ba8cca7f83b0272c",
+  "source_content_sha256": "23bc14a94b46b0badaa8f7a0641c4f35334db236185be18f8cdafbccba36f5b6",
   "subject": {
     "canonical_slug": "marine-engineers-and-naval-architects",
     "name": "Marine Engineers and Naval Architects",

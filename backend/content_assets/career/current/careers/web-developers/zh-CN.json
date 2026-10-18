@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25567,7 +25570,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本精确职业任务级AI效果评分与替代率因果资料。草案、W30题设逻辑和真实代码测试分开；五例80%或甲100%不测AI节时、漏洞或产品安全。"
+              "证据不足：未取得本精确职业任务级AI效果评分与替代率因果资料。草案、W30题设逻辑和真实代码测试分开；五例80%或甲100%不测AI节时、漏洞或产品安全。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "web-developers.display.ai_impact_table.answer",
@@ -33023,6 +33026,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "实现｜网页代码｜开发网站应用和支持代码。 — 75/100; weight=1/3; web-developers.display.responsibilities_block.02[0]",
+                  "数据｜接口集成｜按分工开发数据库与应用连接。 — 75/100; weight=1/3; web-developers.display.responsibilities_block.03[0]",
+                  "测试｜代码与兼容｜核结构、输入和设备差异。 — 75/100; weight=1/3; web-developers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38268,7 +38288,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38416,15 +38436,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "网页开发人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET15-1254.00",
@@ -38475,7 +38507,7 @@
       "text": "网页开发人员：职责、工资与代码边界体验｜费马测试"
     }
   },
-  "source_content_sha256": "7de5554e286b0cc44b83eafc4f603f824874cf8d08370f521c00dfe433101603",
+  "source_content_sha256": "cfb41c8517b2e212a4b564bcf28e3edf3f120e407858fc59e09cb254e623383e",
   "subject": {
     "canonical_slug": "web-developers",
     "name": "网页开发人员",

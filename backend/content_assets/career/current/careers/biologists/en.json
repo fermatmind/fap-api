@@ -29,6 +29,9 @@
       "fact:employment-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth-current": {
         "status": "pending_mapping"
       },
@@ -24383,7 +24386,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round did not obtain GenAI adoption, performance improvement or employment causal evidence for this occupation; the stages above are editorial scenario suggestions. Research methods, sample and data authority, conclusions and publication are still checked separately, and posting mentions and parent occupation projections cannot serve as AI evidence."
+              "This round did not obtain GenAI adoption, performance improvement or employment causal evidence for this occupation; the stages above are editorial scenario suggestions. Research methods, sample and data authority, conclusions and publication are still checked separately, and posting mentions and parent occupation projections cannot serve as AI evidence. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "biologists.ai-impact.ai-impact-table.18",
@@ -33285,6 +33288,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/19-1042.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Confirm the question and hypothesis | Give the research a basis | Write the research question and hypothesis and expected outputs clearly with collaborators, and state the available sampling conditions and the permit and safety and ethics boundaries in advance. — 50/100; weight=1/3; biologists.profile.responsibilities-block.1[0]",
+                  "Design and collect | Make the evidence comparable | Design sampling or experiments according to the plan and assess representativeness and environmental impact, collect samples and data according to permit and safety requirements and truthfully record methods and environmental conditions. — 25/100; weight=1/3; biologists.profile.responsibilities-block.1[1]",
+                  "Analyze and review | Make the conclusions testable | Analyze data with suitable methods, review anomalies and deviations and controls first, mark the parts needing re-measurement or review and state the methodological limitations and uncertainty. — 75/100; weight=1/3; biologists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38358,7 +38378,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38770,15 +38790,27 @@
         "source_refs": [
           "bls-industry-2023"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Biologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 19-1029.04 · Job Zone Five (extensive preparation needed) · education field shows 55% master's, 23% bachelor's, and 22% postdoctoral training",
@@ -38829,7 +38861,7 @@
       "text": "Biologists"
     }
   },
-  "source_content_sha256": "ece099f5b6cb536f959e0385dd82882601f94b6dad81fa350f4819a870c6eeff",
+  "source_content_sha256": "5b82d5db6a18c727e6d530d212bc70bc606604e78d98aa38d37ecc2ef253e29a",
   "subject": {
     "canonical_slug": "biologists",
     "name": "Biologists",

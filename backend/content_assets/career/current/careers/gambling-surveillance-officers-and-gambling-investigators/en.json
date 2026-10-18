@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25115,7 +25118,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no quantitative generative AI exposure, adoption rate, efficiency, and employment causality evidence for this occupation was obtained. Time correction and log drafts from synthesized observation text may be tried as an editorial mechanism. Seven O*NET software categories: FileMaker Pro / iView Systems query interfaces, Outlook email, Paint imaging, Office suite, PowerPoint, Excel, Word; directory examples are not universal adoption, a programming requirement, or a GenAI adoption rate."
+              "Insufficient evidence: no quantitative generative AI exposure, adoption rate, efficiency, and employment causality evidence for this occupation was obtained. Time correction and log drafts from synthesized observation text may be tried as an editorial mechanism. Seven O*NET software categories: FileMaker Pro / iView Systems query interfaces, Outlook email, Paint imaging, Office suite, PowerPoint, Excel, Word; directory examples are not universal adoption, a programming requirement, or a GenAI adoption rate. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.ai-impact.ai-impact-table.18",
@@ -32640,6 +32643,23 @@
                 "publisher": "Ministry of Justice regulations database",
                 "scope": "Jurisdictional boundary",
                 "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=292"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Continuously observe multi-channel screens and identify cheating and theft — 75/100; weight=1/3; gambling-surveillance-officers-and-gambling-investigators.ai-impact.ai-impact-table.101[0]",
+                  "Review video surveillance recordings and reconstruct brief anomalies — 75/100; weight=1/3; gambling-surveillance-officers-and-gambling-investigators.ai-impact.ai-impact-table.109[0]",
+                  "Establish and maintain the observation log and preserve video and logs and evidence — 75/100; weight=1/3; gambling-surveillance-officers-and-gambling-investigators.ai-impact.ai-impact-table.117[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37580,7 +37600,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37731,15 +37751,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Gambling Surveillance Officers and Gambling Investigators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Gambling Surveillance Officers and Gambling Investigators · tasks, deliverables, and responsibility boundaries",
@@ -37790,7 +37822,7 @@
       "text": "Gambling Surveillance Officers and Gambling Investigators"
     }
   },
-  "source_content_sha256": "729e871b8cb17f4c89daa80ef3b186b98c59cf0ef35f1093eff12e316f5dd004",
+  "source_content_sha256": "f24dd45dbac416336c8296774598bf02795e7070ce0a188714b17c897cf1bf94",
   "subject": {
     "canonical_slug": "gambling-surveillance-officers-and-gambling-investigators",
     "name": "Gambling Surveillance Officers and Gambling Investigators",

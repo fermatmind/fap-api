@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24795,7 +24798,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可以辅助整理公开房源字段、客户需求纪要、带看日程和沟通初稿；目前没有证据证明房地产销售代理会在某年整体消失。交易真实性、客户授权、合同与资金节点仍需有权人员核验。ILO的任务暴露研究衡量的是潜在影响，不能换算成某家机构的采用率或个人失业概率。"
+              "AI可以辅助整理公开房源字段、客户需求纪要、带看日程和沟通初稿；目前没有证据证明房地产销售代理会在某年整体消失。交易真实性、客户授权、合同与资金节点仍需有权人员核验。ILO的任务暴露研究衡量的是潜在影响，不能换算成某家机构的采用率或个人失业概率。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "real-estate-sales-agents.ai-impact.ai-impact-table.18",
@@ -32854,6 +32857,23 @@
                 "publisher": "World Economic Forum",
                 "scope": "contextual",
                 "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/in-full/"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "客户需求｜访谈预算、区域、用途、时间和硬性条件。｜输出匿名需求卡，区分客户口头表达与已确认条件。 — 25/100; weight=1/3; real-estate-sales-agents.profile.responsibilities-block.1[1]",
+                  "房源匹配与带看｜筛选房源、安排时间、现场记录疑点。｜输出比较表与带看纪要，不保证交易资格或贷款获批。 — 50/100; weight=1/3; real-estate-sales-agents.profile.responsibilities-block.1[2]",
+                  "报价与谈判｜提交真实授权范围内的报价或要约，记录双方回复。｜输出条件版本表，不把口头议价当签署合同。 — 25/100; weight=1/3; real-estate-sales-agents.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37762,7 +37782,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38031,15 +38051,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "房地产销售",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "房地产销售代理 · 房源核验 · 客户匹配",
@@ -38090,7 +38122,7 @@
       "text": "房地产销售"
     }
   },
-  "source_content_sha256": "0a58448e6e320f0bdd3a98ab24e69142f75a0387dc449ab2d957bf1812bdacf2",
+  "source_content_sha256": "7b3672696945987cdad5529b153be3df9bc7c2fd932abadd140d954e41bb8721",
   "subject": {
     "canonical_slug": "real-estate-sales-agents",
     "name": "房地产销售",

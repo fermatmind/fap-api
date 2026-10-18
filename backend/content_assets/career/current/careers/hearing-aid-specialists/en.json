@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25475,7 +25478,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial judgment at the task level: test record organization, inventory retrieval, and appointment ledgers can be trialed for assistance in an approved environment; no AI adoption rate, measured efficiency gain, or employment causality for this occupation was obtained, and ordinary software and audiometric equipment are not equated with generative AI. O*NET lists 11 tasks, 9 Core and 2 Supplemental, with the latter two requiring assistance or execution under the supervision of an audiologist; task registration does not confer legal authority. U.S. BLS29-2092 projection 2025—2035: employment about 11,200→13,400, growth 19.4%, about 900 average annual openings (including growth and replacement), with self-employment at 0.5% in the base period; not real-time hiring, AI causality, or outcomes for positions in China."
+              "Editorial judgment at the task level: test record organization, inventory retrieval, and appointment ledgers can be trialed for assistance in an approved environment; no AI adoption rate, measured efficiency gain, or employment causality for this occupation was obtained, and ordinary software and audiometric equipment are not equated with generative AI. O*NET lists 11 tasks, 9 Core and 2 Supplemental, with the latter two requiring assistance or execution under the supervision of an audiologist; task registration does not confer legal authority. U.S. BLS29-2092 projection 2025—2035: employment about 11,200→13,400, growth 19.4%, about 900 average annual openings (including growth and replacement), with self-employment at 0.5% in the base period; not real-time hiring, AI causality, or outcomes for positions in China. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "hearing-aid-specialists.ai-impact.ai-impact-table.18",
@@ -33010,6 +33013,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "Wholesale and retail trade; urban unit employees in China, broad industry category scope",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Hearing testing and screening — 25/100; weight=1/3; hearing-aid-specialists.ai-impact.ai-impact-table.95[0]",
+                  "Selection and fitting and adjustment — 25/100; weight=1/3; hearing-aid-specialists.ai-impact.ai-impact-table.99[0]",
+                  "Ear impressions and ear molds and shells — 0/100; weight=1/3; hearing-aid-specialists.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37940,7 +37960,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38088,15 +38108,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Hearing Aid Specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Hearing Aid Specialists · tasks, deliverables, and responsibility boundaries",
@@ -38147,7 +38179,7 @@
       "text": "Hearing Aid Specialists"
     }
   },
-  "source_content_sha256": "c9f32b83affa71ff675c7643aefc9876cf4754396e2dfd8051c235094a6095ea",
+  "source_content_sha256": "8faad97e57d75ebbfdb4d252bb79067b1e2564ad1e53301844a847b0b189d2a6",
   "subject": {
     "canonical_slug": "hearing-aid-specialists",
     "name": "Hearing Aid Specialists",

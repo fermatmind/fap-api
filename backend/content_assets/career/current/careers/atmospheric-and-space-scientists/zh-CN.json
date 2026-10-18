@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24297,7 +24300,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得本职业AI效果、采用率及就业因果资料；任务、软件招聘及总体预测是不同对象。ILO介绍/扩展摘要与NIST简介仅跨职业背景，未读全文或本职业映射。"
+              "本轮未取得本职业AI效果、采用率及就业因果资料；任务、软件招聘及总体预测是不同对象。ILO介绍/扩展摘要与NIST简介仅跨职业背景，未读全文或本职业映射。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "atmospheric-and-space-scientists.ai-impact.ai-impact-table.18",
@@ -32344,6 +32347,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1299.02"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "观测与输入｜O*NET列观测采集，中国2-02-25-01列数据质控；元数据核对为编辑工作建议，具体标准按实际业务。 — 50/100; weight=1/3; atmospheric-and-space-scientists.profile.responsibilities-block.1[0]",
+                  "模型与分析｜O*NET列数学计算机模型、数据解释及气候分析；模型分歧处理须核真实流程，本页不批准统一停运。 — 75/100; weight=1/3; atmospheric-and-space-scientists.profile.responsibilities-block.1[1]",
+                  "研究与表达｜任务含研究报告、图件及简报，建议区分原始数据、解释和不确定性，不保证记录即可完整复核。 — 75/100; weight=1/3; atmospheric-and-space-scientists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37244,7 +37264,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37572,15 +37592,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "大气与空间科学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 19-2021.00 · Job Zone Four · 本科为主",
@@ -37631,7 +37663,7 @@
       "text": "大气与空间科学家"
     }
   },
-  "source_content_sha256": "d9e847b572511e282cc1c79158b1e1910cc2d9c3da075a971401e00745f38adf",
+  "source_content_sha256": "6cc50fe2ad181efa57f21bbe1f02e0b04ec8737ed2be0845ab4b40995b0d7023",
   "subject": {
     "canonical_slug": "atmospheric-and-space-scientists",
     "name": "大气与空间科学家",

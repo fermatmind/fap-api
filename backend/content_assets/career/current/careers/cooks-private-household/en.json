@@ -23,6 +23,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24301,7 +24304,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Menu organisation, purchasing reminders, bookkeeping and scheduling are uses pending verification; sensing, programmed heating and generative text are checked separately, and the net effect must be measured. The 2025 U.S. Lightcast private household cook job-posting data list only Intuit QuickBooks and WordPress, with the proportion for both marked “Not available”, and they cannot be filled in as 0 or below 1%. These are job-posting signals for bookkeeping and website software, not a list of kitchen purchasing software, an AI rate or an adoption rate. This round has no adoption rate, efficiency or employment causality for this job; people check dietary restrictions, temperature control and exceptions against their actual duties. BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
+              "Menu organisation, purchasing reminders, bookkeeping and scheduling are uses pending verification; sensing, programmed heating and generative text are checked separately, and the net effect must be measured. The 2025 U.S. Lightcast private household cook job-posting data list only Intuit QuickBooks and WordPress, with the proportion for both marked “Not available”, and they cannot be filled in as 0 or below 1%. These are job-posting signals for bookkeeping and website software, not a list of kitchen purchasing software, an AI rate or an adoption rate. This round has no adoption rate, efficiency or employment causality for this job; people check dietary restrictions, temperature control and exceptions against their actual duties. BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31872,6 +31875,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-2051.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Menu and purchasing ｜ draw up the menu to the employer's needs ｜ plan menus to the employer's taste, dietary and nutritional restrictions and dining frequency, arrange dishes for family banquets, holiday meals and luncheons, and confirm with the employer before adjusting when the menu or the number of diners changes. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Core: trimming, cutting and cooking vegetables and meat, baking and exploring new dishes; the literal “wash” task does not mean all raw meat must be rinsed. U.S. FoodSafety.gov household guidance lists clean, separate, confirm cooking with a thermometer, and chill promptly, and states explicitly not to wash raw meat, poultry, eggs and seafood so as to avoid spreading contamination. It is U.S. household food-safety guidance, not Chinese law; this page has no complete temperature handling procedure for every dish, and exceptions are held back until an applicable basis is obtained, since the employer's agreement cannot prove food safety. — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "Tidying, storage and reheating ｜ tidy the kitchen and keep instructions ｜ store, tidy and clean the kitchen and cookware, cool, package, label and freeze food as needed, write reheating methods, and maintain raw-cooked zoning and cleaning and disinfection. — 25/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37113,7 +37133,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37330,15 +37350,27 @@
           "bls-projections",
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Private household cooks",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Service and catering · household meals and personal chefs",
@@ -37389,7 +37421,7 @@
       "text": "Private household cooks"
     }
   },
-  "source_content_sha256": "90af5cdcac42f9678918c3fd5367d97a37e04d4b249e38951b8aa69ee2391726",
+  "source_content_sha256": "6903c318a7120bf3b2e48f5a7bbb01e0d0580d0f395bba80e7d532097a242d58",
   "subject": {
     "canonical_slug": "cooks-private-household",
     "name": "Private household cooks",

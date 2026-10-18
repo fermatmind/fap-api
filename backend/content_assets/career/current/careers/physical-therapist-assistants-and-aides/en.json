@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24141,7 +24144,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with public materials, appointments, and draft records, but there is no evidence that it can safely replace PTA on-site treatment or aide cleaning and patient flow. The United States BLS combined occupation 31-2020 is projected to grow 17.3% overall from 2025 to 2035, not AI attribution; model capability, institutional adoption, workload, and employment outcomes are verified separately."
+              "AI can assist with public materials, appointments, and draft records, but there is no evidence that it can safely replace PTA on-site treatment or aide cleaning and patient flow. The United States BLS combined occupation 31-2020 is projected to grow 17.3% overall from 2025 to 2035, not AI attribution; model capability, institutional adoption, workload, and employment outcomes are verified separately. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "physical-therapist-assistants-and-aides.ai-impact.ai-impact-table.18",
@@ -31900,6 +31903,23 @@
                 "publisher": "Eloundou et al. / arXiv",
                 "scope": "cross_occupation_task_exposure",
                 "url": "https://arxiv.org/abs/2303.10130"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "PTA treatment progress records — 75/100; weight=1/3; physical-therapist-assistants-and-aides.ai-impact.ai-impact-table.99[0]",
+                  "Exercise and transfer assistance — 0/100; weight=1/3; physical-therapist-assistants-and-aides.ai-impact.ai-impact-table.111[0]",
+                  "Treatment area cleaning and equipment preparation — 0/100; weight=1/3; physical-therapist-assistants-and-aides.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36805,7 +36825,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37073,15 +37093,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Physical therapist assistants and aides",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Physical therapist assistants and aides · task verification",
@@ -37132,7 +37164,7 @@
       "text": "Physical therapist assistants and aides"
     }
   },
-  "source_content_sha256": "d0fa26023454625eaf503cb57c9161e9614b2770d3d4e25d4073ded8b08d2898",
+  "source_content_sha256": "ec05bf6f81e59d6a4bce781f7d6bab2d714e6ef0006ae51163dd3ca466b38aab",
   "subject": {
     "canonical_slug": "physical-therapist-assistants-and-aides",
     "name": "Physical therapist assistants and aides",

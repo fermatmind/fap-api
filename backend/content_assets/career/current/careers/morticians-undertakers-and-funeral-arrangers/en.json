@@ -11,6 +11,9 @@
       "fact:credential-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "mapped"
       },
@@ -12863,6 +12866,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Interview families or other authorized people to confirm details such as obituary wording, casket selection, and service plans — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Supervise preparation and care of remains, transport them from the place of death, and perform embalming when necessary — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Plan and coordinate funerals, burials, or cremations, arranging clergy, pallbearers, flowers, lighting, and casket placement — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13053,7 +13073,7 @@
             }
           }
         ],
-        "answer": "Morticians, undertakers, and funeral arrangers may receive assistance with organizing schedules and transportation plans, document checklists and draft forms, cost estimates and accounts, draft obituaries and ceremony scripts, and customer communication records. Accountable people must still handle judgments about family emotions and wishes, the condition of remains and embalming, legal document authenticity and filings, religious and ceremonial arrangements, and final confirmation of fees and contracts. Technological exposure does not equal job replacement.",
+        "answer": "Morticians, undertakers, and funeral arrangers may receive assistance with organizing schedules and transportation plans, document checklists and draft forms, cost estimates and accounts, draft obituaries and ceremony scripts, and customer communication records. Accountable people must still handle judgments about family emotions and wishes, the condition of remains and embalming, legal document authenticity and filings, religious and ceremonial arrangements, and final confirmation of fees and contracts. Technological exposure does not equal job replacement. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 39-4031.00 occupational profile",
@@ -14802,7 +14822,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -14926,15 +14946,27 @@
         "source_refs": [
           "source-pack-onet-localcert"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Morticians, Undertakers, and Funeral Arrangers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Family communication and funeral arrangements",
@@ -14985,7 +15017,7 @@
       "text": "Morticians, Undertakers, and Funeral Arrangers"
     }
   },
-  "source_content_sha256": "1f903a887c64c45d99e3023cd11db92da4be3549e62d165feb315e92723bd65d",
+  "source_content_sha256": "9d483a73a94c3a5bdd954a268fdc073f6eda3809937c8483e14bb610f26e9253",
   "subject": {
     "canonical_slug": "morticians-undertakers-and-funeral-arrangers",
     "name": "Morticians, Undertakers, and Funeral Arrangers",

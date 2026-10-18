@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24773,7 +24776,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Requirements organization, draft models, and parameter comparisons may serve as tool trials; optical simulation, fixed automation, and generative AI are different technologies. This page has no verified occupational AI adoption rate, replacement share, or individual unemployment probability; parent category overall employment projections do not isolate AI causation."
+              "Requirements organization, draft models, and parameter comparisons may serve as tool trials; optical simulation, fixed automation, and generative AI are different technologies. This page has no verified occupational AI adoption rate, replacement share, or individual unemployment probability; parent category overall employment projections do not isolate AI causation. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "photonics-engineers.ai-impact.ai-impact-table.18",
@@ -25388,7 +25391,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First test requirement extraction, model explanations, or discrepancy lists; retain actual inputs and check units and boundary conditions. This page gives no score; tool benefits and errors require validation through separate permitted projects."
+              "First test requirement extraction, model explanations, or discrepancy lists; retain actual inputs and check units and boundary conditions. This page gives a separate editorial task-sample estimate; tool benefits and errors require validation through separate permitted projects."
             ]
           },
           "id": "photonics-engineers.ai-impact.ai-impact-table.61",
@@ -32850,6 +32853,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/17-2061.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Analyze photonic system performance requirements. — 50/100; weight=1/3; photonics-engineers.ai-impact.ai-impact-table.95[0]",
+                  "Develop or test photonic models. — 75/100; weight=1/3; photonics-engineers.ai-impact.ai-impact-table.99[0]",
+                  "Develop and test photonic prototypes. — 25/100; weight=1/3; photonics-engineers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37756,7 +37776,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38032,15 +38052,27 @@
           "nbs",
           "editor"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Photonics Engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Optical design · Prototype validation",
@@ -38091,7 +38123,7 @@
       "text": "Photonics Engineers"
     }
   },
-  "source_content_sha256": "b7cc1d81eac519abf22bac8cbac46e58725922ff2e455f327c4dd8aa5884178d",
+  "source_content_sha256": "03452ce7ea9139cb00c97b4e5832124e1c992492197b96a18a18857aa5060dc4",
   "subject": {
     "canonical_slug": "photonics-engineers",
     "name": "Photonics Engineers",

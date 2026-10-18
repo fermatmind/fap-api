@@ -29,6 +29,9 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24962,7 +24965,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "日志、工单、命令及文档草稿是待测试辅助候选；本轮没有具体雇主部署/持续投入、正确率或效率实证，不能从招聘词推实际采用或岗位变化。"
+              "日志、工单、命令及文档草稿是待测试辅助候选；本轮没有具体雇主部署/持续投入、正确率或效率实证，不能从招聘词推实际采用或岗位变化。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "computer-network-support-specialists.ai-impact.ai-impact-table.18",
@@ -31710,6 +31713,23 @@
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/202501/P020250116506795831658.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "网络运行维护与安全｜备份网络数据并配置安全设置与访问权限并维护网络活动日志｜备份网络数据；为群组或个人配置安全设置或访问权限；分析并报告网络安全事件或未遂事件；安装含安全或防火墙软件在内的网络软件；维护网络活动日志（对应 O*NET 任务第一与第二与第三与第七与第二十二项）。 — 75/100; weight=1/3; computer-network-support-specialists.profile.responsibilities-block.1[0]",
+                  "故障诊断与用户支持｜用诊断工具定位网络问题并为用户排查与提供电话支持｜用诊断测试软件与设备识别网络问题的原因；为个人或用户组排查网络或连通性问题；提供与网络或连通性相关的电话支持；记录服务台请求与解决方案（对应 O*NET 任务第四与第八与第九与第二十四项）。 — 50/100; weight=1/3; computer-network-support-specialists.profile.responsibilities-block.1[1]",
+                  "线缆与例行维护与维修｜安装与维修网络线缆含光纤并执行例行维护与维修｜执行网络组件或设备的例行维护或标准维修；安装或维修网络线缆，包括光纤线缆；用标准诊断测试设备与程序测试计算机软件或硬件；测试维修后的项目以确认运转正常（对应 O*NET 任务第十二与第十六与第十五与第二十项）。 — 0/100; weight=1/3; computer-network-support-specialists.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36620,7 +36640,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36962,15 +36982,27 @@
         "source_refs": [
           "bls-current-projections"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "计算机网络支持专家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · CIR",
@@ -37021,7 +37053,7 @@
       "text": "计算机网络支持专家"
     }
   },
-  "source_content_sha256": "0cb7df4ed9f0f731ac62298ab3202215a169d33a58d32f3f23948faa3f6c2ffd",
+  "source_content_sha256": "7503181549838e56329b59fd1003a00d4cf89d4e98d4993e8e278e9c10262224",
   "subject": {
     "canonical_slug": "computer-network-support-specialists",
     "name": "计算机网络支持专家",

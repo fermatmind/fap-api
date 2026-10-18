@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24794,7 +24797,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS notes qualitatively that BIM and AI improve the efficiency of architectural design and allow architects to take part in the whole construction process and take on new duties; this is not an AI adoption rate, a wage causal effect or a substitution ratio for this occupation. Scheme drafts, drawing organization, standards search and estimating assistance are the task analysis on this page and must be reviewed against project data and by personnel. Current U.S. BLS data: 124,600 posts in 2025 and a projected 129,900 in 2035, growth of 4% over 2025—2035, a net increase of 5,300 and about 6,900 annual openings. Openings include replacement demand from occupational exits and labour force withdrawals and are not the same as the net increase or a guarantee of individual hiring."
+              "BLS notes qualitatively that BIM and AI improve the efficiency of architectural design and allow architects to take part in the whole construction process and take on new duties; this is not an AI adoption rate, a wage causal effect or a substitution ratio for this occupation. Scheme drafts, drawing organization, standards search and estimating assistance are the task analysis on this page and must be reviewed against project data and by personnel. Current U.S. BLS data: 124,600 posts in 2025 and a projected 129,900 in 2035, growth of 4% over 2025—2035, a net increase of 5,300 and about 6,900 annual openings. Openings include replacement demand from occupational exits and labour force withdrawals and are not the same as the net increase or a guarantee of individual hiring. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "architects.ai-impact.ai-impact-table.18",
@@ -32755,6 +32758,23 @@
                 "publisher": "American Institute of Architects",
                 "scope": "contextual",
                 "url": "https://www.aia.org/sites/default/files/2026-01/Guidance%20for%20the%20Responsible%20Use%20of%20AI%20by%20Architecture%20and%20Design%20Firms.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Scheme design and drawing expression｜Turning requirements into checkable design outputs｜Communicating with clients about functional and spatial requirements, planning floor layouts and circulation, preparing scale drawings and architectural schemes, and using computer-aided design software to produce three-dimensional or interactive presentations. — 75/100; weight=1/3; architects.profile.responsibilities-block.1[0]",
+                  "Construction drawings and contract documents｜Producing documents usable for construction and review｜Preparing final construction drawings that include aesthetic presentation and construction detail, compiling information on structure, materials, colours, equipment, budget estimates and construction periods, and preparing construction contract documents and operation and maintenance manuals. — 75/100; weight=1/3; architects.profile.responsibilities-block.1[2]",
+                  "Construction support and on-site observation｜Making the design work on site｜Visiting the site regularly to observe whether construction matches the drawings, administering the construction contract, tendering or awarding the construction contract on the client's behalf, and handling clarifications and changes during construction. — 0/100; weight=1/3; architects.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37657,7 +37677,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Occupational fit guide",
@@ -37973,15 +37993,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+0)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Architects, Except Landscape and Naval",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page does not score)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Design work: scheme design and drawing presentation · specialist integration and code checking · construction drawings and site coordination and sealing",
@@ -38032,7 +38064,7 @@
       "text": "Architects, Except Landscape and Naval"
     }
   },
-  "source_content_sha256": "c4dd79787857f48c25b387ce72c5629dca6589b2a561ccf64fb8993bdc999ab4",
+  "source_content_sha256": "c33ce34774ce5970565dbdc5b472b3a8e4c75c12ab48fd31d97a7f32596d098d",
   "subject": {
     "canonical_slug": "architects",
     "name": "Architects, Except Landscape and Naval",

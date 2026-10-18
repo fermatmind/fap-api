@@ -47,6 +47,9 @@
       "fact:current-parent-industry-3": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25068,7 +25071,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Order estimation, shift reminders, and labels and records are editorial assisted scenarios; this round obtained no AI replacement ratio or effect statistics for this exact occupation. Task exposure, automation, and employment projections are kept separate."
+              "Order estimation, shift reminders, and labels and records are editorial assisted scenarios; this round obtained no AI replacement ratio or effect statistics for this exact occupation. Task exposure, automation, and employment projections are kept separate. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "butchers-and-meat-cutters.ai-impact.ai-impact-table.18",
@@ -32640,6 +32643,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/51-3021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Cutting and processing｜Cut, trim, debone, tie, and grind meat to specification, and handle special cuts requested by customers｜Retail portion meat delivered to specification. — 0/100; weight=1/3; butchers-and-meat-cutters.profile.responsibilities-block.1[0]",
+                  "Receiving and storage｜Receive and inspect incoming meat, check the certificates and temperature, and store it as required to keep quality｜Receiving inspection and storage records. — 25/100; weight=1/3; butchers-and-meat-cutters.profile.responsibilities-block.1[1]",
+                  "Weighing and labeling｜Wrap, weigh, label, and price according to the rules so that the transaction information is clear and checkable｜Weighing and labeling records. — 50/100; weight=1/3; butchers-and-meat-cutters.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37545,7 +37565,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -37950,15 +37970,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Butchers and meat cutters",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 51-3021.00 · cutting and trimming / weighing and labeling / display and replenishment / hygiene and equipment checks",
@@ -38009,7 +38041,7 @@
       "text": "Butchers and meat cutters"
     }
   },
-  "source_content_sha256": "9b4537bb422f41a196397c38a1b14b22239f6b96c124ad121ef757b884ada9eb",
+  "source_content_sha256": "895ae487c1436354bc5ee13e8d859713ad84d25b58058e55cece00a164d9a5f8",
   "subject": {
     "canonical_slug": "butchers-and-meat-cutters",
     "name": "Butchers and meat cutters",

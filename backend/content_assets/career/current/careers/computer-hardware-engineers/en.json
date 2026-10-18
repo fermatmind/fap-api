@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25002,7 +25005,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Based on the hardware occupational tasks, specification retrieval, code scripts, test data and document drafts can serve as tool assistance candidates; correctness must be tested on controlled tools. Insufficient evidence: no sample of specific manufacturer investment, AI adoption rates, cycle reduction or quality improvement for this occupation was obtained, and the existence of simulation tools cannot be used to infer that generative AI has been adopted."
+              "Based on the hardware occupational tasks, specification retrieval, code scripts, test data and document drafts can serve as tool assistance candidates; correctness must be tested on controlled tools. Insufficient evidence: no sample of specific manufacturer investment, AI adoption rates, cycle reduction or quality improvement for this occupation was obtained, and the existence of simulation tools cannot be used to infer that generative AI has been adopted. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.18",
@@ -31735,6 +31738,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/202501/P020250116506795831658.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Requirements and interfaces and design｜Evaluate hardware and software interfaces and system requirements and design hardware and peripherals｜Confer with engineering staff and review specifications to evaluate the interface between hardware and software and the operational and performance requirements of the overall system; design and develop computer hardware and support peripherals, including central processing units and support logic and microprocessors and custom integrated circuits and printers and disk drives; and select hardware and materials and ensure they meet specifications and product requirements (corresponds to the third, second and ninth O*NET tasks). — 50/100; weight=1/3; computer-hardware-engineers.profile.responsibilities-block.1[0]",
+                  "Prototypes and simulation｜Build, test and modify product prototypes using working or theoretical models｜Build, test and modify product prototypes using working or theoretical models constructed with computer simulation; and assemble and modify existing equipment to meet special needs (corresponds to the fourth O*NET task and the first Supplemental task). — 50/100; weight=1/3; computer-hardware-engineers.profile.responsibilities-block.1[2]",
+                  "Testing and verification and data analysis｜Record and analyze test data to verify hardware and peripherals and analyze system capability｜Test and verify hardware and support peripherals by recording and analyzing test data to ensure they meet specifications and requirements; store, retrieve and manipulate data to analyze system capabilities and requirements; and monitor equipment functioning and make necessary modifications to ensure the system operates to specifications (corresponds to the sixth, tenth and fourteenth O*NET tasks). — 75/100; weight=1/3; computer-hardware-engineers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36645,7 +36665,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -36987,15 +37007,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Computer hardware engineer",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RIC",
@@ -37046,7 +37078,7 @@
       "text": "Computer hardware engineer"
     }
   },
-  "source_content_sha256": "7f6cb3b85b7e523aec0b53b2347a0533f52fcf730a6a86d4cdb669370779860c",
+  "source_content_sha256": "436556209317385bfbeca73edebcaa99ce4e198213bc800d65ab60a355173246",
   "subject": {
     "canonical_slug": "computer-hardware-engineers",
     "name": "Computer hardware engineer",

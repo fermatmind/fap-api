@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24532,7 +24535,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence is insufficient: no independent AI adoption, substitution or net employment effect for 21-1029 was verified, and this category also has no separate O*NET task data. Resource information and record drafts are editorial candidate uses; real materials, service authorization, professional judgment and referral procedures must be verified by the appropriate personnel, and the 2.3% growth cannot be attributed to AI."
+              "Evidence is insufficient: no independent AI adoption, substitution or net employment effect for 21-1029 was verified, and this category also has no separate O*NET task data. Resource information and record drafts are editorial candidate uses; real materials, service authorization, professional judgment and referral procedures must be verified by the appropriate personnel, and the 2.3% growth cannot be attributed to AI. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "social-workers.ai-impact.ai-impact-table.18",
@@ -32937,6 +32940,23 @@
                 "publisher": "BLS",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/community-and-social-service/social-workers.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Needs communication (category background)｜Learn about the needs and support service recipients express.｜The BLS social work category includes needs and situation assessment, which does not prove that every 21-1029 position is the same. — 25/100; weight=1/3; social-workers.profile.responsibilities-block.1[0]",
+                  "Resource information (category background)｜Find community services and state the sources.｜Food, care or employment information is not the same as benefit eligibility approval. — 75/100; weight=1/3; social-workers.profile.responsibilities-block.1[1]",
+                  "Referral coordination (category background)｜Connect related services according to position and authorization.｜Confirm consent, agency requirements and acceptance status, and do not write a suggestion as already completed. — 50/100; weight=1/3; social-workers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37849,7 +37869,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -38126,15 +38146,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Social Workers, All Other",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "21-1029 · not separately listed in other social work detailed categories",
@@ -38185,7 +38217,7 @@
       "text": "Social Workers, All Other"
     }
   },
-  "source_content_sha256": "a5b2b8aed06875a72ad7717dc931a913af318338f7dc14040b6f88b20dfd6b7c",
+  "source_content_sha256": "e332cf96804d76175a43de0e4e4a92bd836233788a2af1ed3ae4cb254349bd44",
   "subject": {
     "canonical_slug": "social-workers",
     "name": "Social Workers, All Other",

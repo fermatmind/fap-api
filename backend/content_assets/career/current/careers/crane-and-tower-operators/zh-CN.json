@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -7607,7 +7610,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑可验证检索、日志整理和纸面预演是否改善任务，尚未取得本岗现场采用、效率或工资因果实测；模拟器和控制软件不必然生成式AI。2025年Lightcast全美本岗招聘热门表列Excel、Office、Outlook、Windows，比例未提供不填0；不测生成式AI采用、现场部署或替代率。"
+              "编辑可验证检索、日志整理和纸面预演是否改善任务，尚未取得本岗现场采用、效率或工资因果实测；模拟器和控制软件不必然生成式AI。2025年Lightcast全美本岗招聘热门表列Excel、Office、Outlook、Windows，比例未提供不填0；不测生成式AI采用、现场部署或替代率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.2",
@@ -9194,6 +9197,23 @@
                 "publisher": "官方原文",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/49-9096.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "读取吊装计划和受控载荷资料，确认设备配置、吊物重量、幅度与落点。 — 50/100; weight=1/3; crane-and-tower-operators.profile.responsibilities-block.1[0]",
+                  "检查地面、机构附件与钢缆，按职责维护；确认适用信号与现场隔离。美国施工1926.1419通常同一时刻一人给信号，但任何人可发停机或紧急停机信号。需要信号的作业若通讯中断，应安全停止，恢复通讯并给出且理解正确指令后再继续；视线受限须适当信号安排，不等一概禁止盲吊。 — 25/100; weight=1/3; crane-and-tower-operators.profile.responsibilities-block.2[0]",
+                  "按制造商和现场受控程序平稳吊运落位，必要调整维修及时报告与交接；检查异常停止使用、消除故障隐患后方可恢复。 — 0/100; weight=1/3; crane-and-tower-operators.profile.responsibilities-block.3[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11587,7 +11607,7 @@
     ],
     "path": "/zh/career/jobs/crane-and-tower-operators",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -11687,15 +11707,27 @@
         "source_refs": [
           "crane-wage-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "起重机与塔吊操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "运输与物料搬运 · 起重与塔吊操作",
@@ -11746,7 +11778,7 @@
       "text": "起重机与塔吊操作员"
     }
   },
-  "source_content_sha256": "82acdc6f66c6c61f657a2b4dbc3addff2f4aa2425800a862d41d31ef1c511e9b",
+  "source_content_sha256": "9b7dbb7421d9b9fe2e76e739e0c72cabe2f8925bc284f348e86e881235d9ab6a",
   "subject": {
     "canonical_slug": "crane-and-tower-operators",
     "name": "起重机与塔吊操作员",

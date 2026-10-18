@@ -14,6 +14,9 @@
       "fact:entry-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -12612,6 +12615,23 @@
                 "publisher": "State Administration for Market Regulation (host of the legal text)",
                 "scope": "jurisdiction_law",
                 "url": "https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_d337c3291e8b40459ca03dea54395856.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Write true product descriptions, images, and prices — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Synchronize inventory, variants, and sellable status — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Arrange packing, logistics, and delivery — 25/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -12799,7 +12819,7 @@
             }
           }
         ],
-        "answer": "AI can draft product copy, categorize inquiries, and flag inventory abnormalities; real products, prices, delivery, refunds, and fund records must be verified by the operator.",
+        "answer": "AI can draft product copy, categorize inquiries, and flag inventory abnormalities; real products, prices, delivery, refunds, and fund records must be verified by the operator. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "Occupational tasks",
@@ -14595,7 +14615,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -14731,15 +14751,27 @@
         "source_refs": [
           "bls-parent-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Online retail merchants",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Online retail merchants · O*NET 13-1199.06",
@@ -14790,7 +14822,7 @@
       "text": "Online retail merchants: product selection, fulfillment, profit, and risk"
     }
   },
-  "source_content_sha256": "5acfbd80cdcd3a2f177f4f80f4a35023a0211a21de98b0515a4c9b046982c917",
+  "source_content_sha256": "e9cd2cd250ccf3e5214c9b0b5d22bbb3d52f1cf3f8ce131b7a17b13e354a42ea",
   "subject": {
     "canonical_slug": "online-merchants",
     "name": "Online retail merchants",

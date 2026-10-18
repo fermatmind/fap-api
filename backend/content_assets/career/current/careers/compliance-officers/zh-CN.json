@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24983,7 +24986,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试用候选：用虚构或获准资料整理材料清单、规则比对、记录与报告草稿；对照原件核事实、引用、遗漏、误报及复核总耗时。证据不足：本轮无本职业生成式AI可靠性、实际采用率、提效或减岗因果研究，不能称已完成或显著改变。"
+              "编辑试用候选：用虚构或获准资料整理材料清单、规则比对、记录与报告草稿；对照原件核事实、引用、遗漏、误报及复核总耗时。证据不足：本轮无本职业生成式AI可靠性、实际采用率、提效或减岗因果研究，不能称已完成或显著改变。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "compliance-officers.ai-impact.ai-impact-table.18",
@@ -32610,6 +32613,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/13-1032.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "受理与审查与评估｜评估申请与记录并核实政策与程序已记录与实施与传达｜评估申请、记录或文件以收集资格或责任问题的信息；就许可与执照或通行证相关规定向持证人或其他个人或团体提供建议；与官员或技术或专业专家或申请人商谈或面谈以获取信息或澄清与许可决定相关的事实；并核实企业与监管政策与程序已被记录、实施并传达（对应 O*NET 任务第二与第三与第六与新增任务第十六项）。 — 75/100; weight=1/3; compliance-officers.profile.responsibilities-block.1[0]",
+                  "检查与走访｜走访经营场所核实有效执照或许可已展示且许可标准得到遵守｜走访经营场所核实有效执照或许可已展示且许可标准得到遵守（对应 O*NET 任务补充任务第十项）。 — 25/100; weight=1/3; compliance-officers.profile.responsibilities-block.1[1]",
+                  "报告与处置｜编制报告并向委员会或机构报告违规并告知违规者违规事项或处罚信息｜编制活动、评估、建议或决定的报告；向适当的委员会或机构报告违反法律或规章的行为；并告知违规者违规事项或处罚信息（对应 O*NET 任务第四与第五与第一项）。 — 50/100; weight=1/3; compliance-officers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37538,7 +37558,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37981,15 +38001,27 @@
         "source_refs": [
           "officers-review-ooh"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "合规专员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · CE",
@@ -38040,7 +38072,7 @@
       "text": "合规专员"
     }
   },
-  "source_content_sha256": "739e76300220e3ed743da8cd17b03f6def9011b335acaf5a4e62a1ba0d8fa473",
+  "source_content_sha256": "4a74020157d8c923502813873b36035edfb9f816d9216011484098691621ad96",
   "subject": {
     "canonical_slug": "compliance-officers",
     "name": "合规专员",

@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:mohrss-cn-health-p10-2025": {
         "status": "pending_mapping"
       },
@@ -24575,7 +24578,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page keeps three things separate: whether a tool can handle a class of tasks, whether institutions actually adopt it, and whether employment outcomes change. On tasks, language models can already generate draft records, scale summaries, and literature abstracts, but O*NET's core tasks still require the practitioner to conduct interviews, observe, diagnose, and make prescribing decisions; on adoption, institutions are bound by licensing, data authorization, patient privacy, and equipment conditions; on employment, BLS projects registered nurse employment to grow 6% over 2025—2035 but does not attribute the change to generative AI."
+              "This page keeps three things separate: whether a tool can handle a class of tasks, whether institutions actually adopt it, and whether employment outcomes change. On tasks, language models can already generate draft records, scale summaries, and literature abstracts, but O*NET's core tasks still require the practitioner to conduct interviews, observe, diagnose, and make prescribing decisions; on adoption, institutions are bound by licensing, data authorization, patient privacy, and equipment conditions; on employment, BLS projects registered nurse employment to grow 6% over 2025—2035 but does not attribute the change to generative AI. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.18",
@@ -33365,6 +33368,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "parent",
                 "url": "https://www.onetonline.org/link/localwages/29-1141.02"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Shared | Assessment and diagnosis | Complete a mental status examination and risk assessment from the chief complaint and history of present illness, distinguish physiological from psychological factors, and produce a written diagnosis and differential per diagnostic criteria. — 50/100; weight=1/3; advanced-practice-psychiatric-nurses.profile.responsibilities-block.1[0]",
+                  "Shared | Treatment planning and medication management | Within state regulation and collaborative agreements, develop treatment plans, prescribe psychiatric medication, monitor efficacy and adverse effects, and record the basis for adjustments. — 25/100; weight=1/3; advanced-practice-psychiatric-nurses.profile.responsibilities-block.1[1]",
+                  "Shared | Psychotherapy and intervention delivery | Provide individual, group, or family psychotherapy for acute and chronic psychiatric disorders, evaluating effect by course of treatment and adjusting the plan. — 25/100; weight=1/3; advanced-practice-psychiatric-nurses.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38284,7 +38304,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of occupational directions",
       "fit": "Occupational fit guide",
@@ -38492,15 +38512,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Psychiatric nurse",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · SI",
@@ -38551,7 +38583,7 @@
       "text": "Psychiatric nurse"
     }
   },
-  "source_content_sha256": "c57f0f2370a7e48f0680e4db866286f5482079be9fe8cd91c07c40feb13a7edc",
+  "source_content_sha256": "fd3ffb01345fba4302ef38bcbb93a2e213dd402a2044475878d6d0ac1904d23b",
   "subject": {
     "canonical_slug": "advanced-practice-psychiatric-nurses",
     "name": "Psychiatric nurse",

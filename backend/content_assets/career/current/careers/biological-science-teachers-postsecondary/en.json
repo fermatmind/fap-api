@@ -38,6 +38,9 @@
       "fact:employment-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth-current": {
         "status": "pending_mapping"
       },
@@ -24731,7 +24734,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The materials read in this round do not provide an overall substitution rate or disappearance year for this occupation. Lesson materials/examination questions/search drafts are assistive scenarios proposed by the editors, and their accuracy, fairness and privacy must be verified; course and student assessment and laboratory safety duties are borne according to school authorization. UNESCO advocates a human-centered approach, ethical validation and instructional design."
+              "The materials read in this round do not provide an overall substitution rate or disappearance year for this occupation. Lesson materials/examination questions/search drafts are assistive scenarios proposed by the editors, and their accuracy, fairness and privacy must be verified; course and student assessment and laboratory safety duties are borne according to school authorization. UNESCO advocates a human-centered approach, ethical validation and instructional design. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "biological-science-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -33170,6 +33173,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/25-1052.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Course objectives and instructional design | Give teaching a basis | Write the course objectives and teaching content and assessment methods clearly according to learners' foundations and disciplinary requirements, and state the laboratory safety and academic integrity boundaries in advance. — 75/100; weight=1/3; biological-science-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "Teaching and classroom facilitation | Make learning happen | Teach according to the course plan and facilitate discussion and demonstrate standard practice, adjust the teaching pace according to student feedback, and do not omit safety and standards requirements. — 25/100; weight=1/3; biological-science-teachers-postsecondary.profile.responsibilities-block.1[1]",
+                  "Laboratory teaching and safety | Make operations controllable | Complete hazard identification and risk assessment and control and emergency response preparation according to the school's laboratory safety system, and prepare laboratory materials and guide student experiments within the authorized scope. — 0/100; weight=1/3; biological-science-teachers-postsecondary.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38089,7 +38109,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38537,15 +38557,27 @@
         "source_refs": [
           "nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Postsecondary biological science teachers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 25-1042.00 · Job Zone Five (extensive preparation needed) · marked Bright Outlook",
@@ -38596,7 +38628,7 @@
       "text": "Postsecondary biological science teachers"
     }
   },
-  "source_content_sha256": "7c7a0eb6d7af83141fba8661fc6aa4500a0667ba5c0b84d5533e9eadb564134b",
+  "source_content_sha256": "18db50407d9ec6c9e3bcbb17ddf3f008f8433ff0be4e9ec0080f9409fbdc8406",
   "subject": {
     "canonical_slug": "biological-science-teachers-postsecondary",
     "name": "Postsecondary biological science teachers",

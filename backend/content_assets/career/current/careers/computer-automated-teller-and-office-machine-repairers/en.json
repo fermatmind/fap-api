@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25047,7 +25050,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page distinguishes tool capability, actual adoption and job outcomes. Fault code classification, material retrieval and record drafts are suggested assistive uses derived from the occupational tasks and must be tested on the same models, versions and real work orders; insufficient evidence: no verifiable sample of manufacturer investment, AI adoption rates or repair effects for this occupation was obtained."
+              "This page distinguishes tool capability, actual adoption and job outcomes. Fault code classification, material retrieval and record drafts are suggested assistive uses derived from the occupational tasks and must be tested on the same models, versions and real work orders; insufficient evidence: no verifiable sample of manufacturer investment, AI adoption rates or repair effects for this occupation was obtained. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "computer-automated-teller-and-office-machine-repairers.ai-impact.ai-impact-table.18",
@@ -31812,6 +31815,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/202501/P020250116506795831658.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "On-site diagnosis and fault localization｜Travel to customer sites and test by symptom to localize the fault｜Travel to customers' stores or offices to repair equipment or provide emergency repair service; talk with customers to establish the details of the equipment problem; disassemble machines to inspect wires and gears and bearings and similar parts for wear or defects; use oscilloscopes and signal generators and ammeters and voltmeters or specialized diagnostic software to test parts or circuits to locate defects; and read blueprints and charts and schematics to determine equipment settings or adjustment parameters (corresponds to the first, fifth, sixth, sixteenth and nineteenth O*NET tasks). — 50/100; weight=1/3; computer-automated-teller-and-office-machine-repairers.profile.responsibilities-block.1[0]",
+                  "Repair and replacement and adjustment｜Repair or replace electrical and mechanical parts and adjust and calibrate to specifications｜Use hand tools and power tools or soldering equipment to repair, adjust or replace electrical or mechanical parts; reassemble machines after making repairs or replacing parts; align, adjust or calibrate equipment to specifications; and clean, oil or adjust mechanical parts to maintain operating efficiency and prevent failures (corresponds to the eighth, second, twentieth and seventeenth O*NET tasks). — 0/100; weight=1/3; computer-automated-teller-and-office-machine-repairers.profile.responsibilities-block.1[1]",
+                  "Installation and configuration and updates｜Install and configure new equipment and operating system software and peripherals｜Install and configure new equipment, including operating system software or peripherals; reinstall software programs or adjust existing software settings to fix equipment faults; and update existing equipment, such as installing updated circuit boards or adding memory (corresponds to the eleventh, thirteenth and fourteenth O*NET tasks). — 50/100; weight=1/3; computer-automated-teller-and-office-machine-repairers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36719,7 +36739,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37000,15 +37020,27 @@
           "onet-localwages",
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Computer, Automated Teller, and Office Machine Repairers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RC",
@@ -37059,7 +37091,7 @@
       "text": "Computer, Automated Teller, and Office Machine Repairers"
     }
   },
-  "source_content_sha256": "0377fd42c7b89155f711032bcc2edce2f055c146d5da47fa8955bcfec278c4cc",
+  "source_content_sha256": "310b3dccf3536dfea71e839ff3f9f77455213c2723bc7d5c9f239e12dd171f73",
   "subject": {
     "canonical_slug": "computer-automated-teller-and-office-machine-repairers",
     "name": "Computer, Automated Teller, and Office Machine Repairers",

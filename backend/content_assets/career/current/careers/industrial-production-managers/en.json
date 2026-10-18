@@ -20,6 +20,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25332,7 +25335,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "No occupation-specific evidence has been obtained for generative AI adoption rates, productivity, net job effects, or a replacement timetable. Organizing information and drafting for production quality, schedule-resource tradeoffs, and team coordination are editorial trial candidates; actual data, methods, and responsibilities must be checked."
+              "No occupation-specific evidence has been obtained for generative AI adoption rates, productivity, net job effects, or a replacement timetable. Organizing information and drafting for production quality, schedule-resource tradeoffs, and team coordination are editorial trial candidates; actual data, methods, and responsibilities must be checked. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "industrial-production-managers.ai-impact.ai-impact-table.18",
@@ -32787,6 +32790,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/11-3051.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Production coordination — 25/100; weight=1/3; industrial-production-managers.ai-impact.ai-impact-table.99[0]",
+                  "Scheduling and resources — 75/100; weight=1/3; industrial-production-managers.ai-impact.ai-impact-table.103[0]",
+                  "Personnel management — 25/100; weight=1/3; industrial-production-managers.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37754,7 +37774,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37950,15 +37970,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Industrial Production Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Industrial Production Managers · Tasks, delivery, and responsibility boundaries",
@@ -38009,7 +38041,7 @@
       "text": "Industrial Production Managers"
     }
   },
-  "source_content_sha256": "cd9bd976d932d7edf4dfbe7a19fa6806f2fec2b1799a67c95db50e3fc1b6c2c7",
+  "source_content_sha256": "497ca96cc01b06e698f45ab0857945dde5bedd003c48bec6e2040d1ae59fa518",
   "subject": {
     "canonical_slug": "industrial-production-managers",
     "name": "Industrial Production Managers",

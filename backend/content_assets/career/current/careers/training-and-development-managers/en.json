@@ -8,6 +8,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25474,7 +25477,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "You can first try an interview outline, a course and a test draft, with people checking facts, the evaluation basis and permission. The United States 11-3131 standalone grows 6.4% over 2025—2035, with a ten-year net increase of about 3,200 people and 4,100 average annual openings including career change and retirement replacement, which is an overall projection rather than AI causation. Insufficient evidence: the standalone AI net replacement rate for this occupation and a reviewable FermatMind task score, so no score or personal unemployment probability is filled in."
+              "You can first try an interview outline, a course and a test draft, with people checking facts, the evaluation basis and permission. The United States 11-3131 standalone grows 6.4% over 2025—2035, with a ten-year net increase of about 3,200 people and 4,100 average annual openings including career change and retirement replacement, which is an overall projection rather than AI causation. Insufficient evidence: the standalone AI net replacement rate for this occupation and a reviewable FermatMind task score, so no score or personal unemployment probability is filled in. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "training-and-development-managers.display.ai_impact_table.answer",
@@ -33100,6 +33103,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Diagnosis | needs and business gaps | Identify the knowledge and skill gaps of the target employees through interviews, surveys and task material, and raise a list of training and non-training issues. — 50/100; weight=1/3; training-and-development-managers.display.responsibilities_block.01[0]",
+                  "Organisation | instructors and implementation arrangements | Select and support instructors, coordinate learning time and enrolment, and organise onboarding, job skills or development programmes. — 25/100; weight=1/3; training-and-development-managers.display.responsibilities_block.03[0]",
+                  "Evaluation | programme and instructor effectiveness | Check the evaluation basis, pairing and gaps, analyse performance and feedback, and give course or implementation improvement suggestions. — 50/100; weight=1/3; training-and-development-managers.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38362,7 +38382,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38547,15 +38567,27 @@
         "source_refs": [
           "china-wage-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Training and development managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 11-3131.00 precise occupational basis",
@@ -38606,7 +38638,7 @@
       "text": "Training and development managers"
     }
   },
-  "source_content_sha256": "b1f9f0dd0d4bb33e246f500b79bd520f069fed2565f0ceb6f608e4adcaed3cbd",
+  "source_content_sha256": "7bd8e7d38885c588a238c4168958760a7552394a1271c3c93910a81a90421454",
   "subject": {
     "canonical_slug": "training-and-development-managers",
     "name": "Training and development managers",

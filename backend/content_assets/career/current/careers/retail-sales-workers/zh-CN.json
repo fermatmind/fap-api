@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24766,7 +24769,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现有研究不能给出零售销售人员被AI整体替代的比例或时间。工具可辅助商品检索、比较和话术草稿；真实价格、库存、零件适配、支付与售后承诺仍需人员按系统和授权核实。BLS就业预测不测AI因果效应。"
+              "现有研究不能给出零售销售人员被AI整体替代的比例或时间。工具可辅助商品检索、比较和话术草稿；真实价格、库存、零件适配、支付与售后承诺仍需人员按系统和授权核实。BLS就业预测不测AI因果效应。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "retail-sales-workers.ai-impact.ai-impact-table.18",
@@ -32589,6 +32592,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "BLS官方组合：零售销售员＋零件销售员",
                 "url": "https://www.bls.gov/ooh/sales/retail-sales-workers.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "需求澄清｜询问用途、尺寸、预算和限制，不先推预设商品。｜记录顾客关键要求与未确认条件，方便后续核对。 — 25/100; weight=1/3; retail-sales-workers.profile.responsibilities-block.1[0]",
+                  "商品建议｜比较官方规格、功能、价格与适配条件，演示获准功能。｜给出两到三个可解释选择，不作未经核实的效果承诺。 — 50/100; weight=1/3; retail-sales-workers.profile.responsibilities-block.1[1]",
+                  "库存与陈列｜按岗位安排补货、核货位、检查商品状态或跟进配送。｜记缺货和异常，不把系统库存当实时承诺。 — 0/100; weight=1/3; retail-sales-workers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37491,7 +37511,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37759,15 +37779,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "零售销售人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "顾客需求 · 商品建议",
@@ -37818,7 +37850,7 @@
       "text": "零售销售人员"
     }
   },
-  "source_content_sha256": "2931f1be53471070eff58af3046b00135df2cde0759c7f7466991a0749aee5d6",
+  "source_content_sha256": "7e154c618ba8b1b2454703f2692ad014922a10ebc14cfd2a2e80ee91b5e0b645",
   "subject": {
     "canonical_slug": "retail-sales-workers",
     "name": "零售销售人员",

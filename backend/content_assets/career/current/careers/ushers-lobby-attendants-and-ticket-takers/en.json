@@ -8,6 +8,9 @@
       "fact:china-tianjin-internship": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25505,7 +25508,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: first distinguish ticket automation, generative text assistance, and on-site service. The available official materials support the task structure and the projection mechanism for a specific industry, but cannot yet give a generative AI adoption rate or replacement proportion for this occupation. No reviewable FermatMind task-level score has been produced, so no AI score is filled in the hero."
+              "Insufficient evidence: first distinguish ticket automation, generative text assistance, and on-site service. The available official materials support the task structure and the projection mechanism for a specific industry, but cannot yet give a generative AI adoption rate or replacement proportion for this occupation. No reviewable FermatMind task-level score has been produced, so no AI score is filled in the hero. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "ushers-lobby-attendants-and-ticket-takers.display.ai_impact_table.answer",
@@ -32894,6 +32897,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Entry | Inspecting and verifying tickets | Check the ticket's date, performance, and zone under authorization, carry out scanning or manual inspection, and route the anomalies that need ticketing review. — 75/100; weight=1/3; ushers-lobby-attendants-and-ticket-takers.display.responsibilities_block.02[0]",
+                  "Ushering | Helping the audience find their seats | Confirm the hall zone, row, and seat number, explain the available route, and for special assistance ask first and contact the corresponding service staff. — 0/100; weight=1/3; ushers-lobby-attendants-and-ticket-takers.display.responsibilities_block.03[0]",
+                  "On site | Observing and reporting order anomalies | When a seating dispute, passageway obstruction, or risk is found, state the location and the situation, and contact the supervisor or security under the established procedure. — 25/100; weight=1/3; ushers-lobby-attendants-and-ticket-takers.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38171,7 +38191,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38333,15 +38353,27 @@
         "source_refs": [
           "employer"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Ushers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 39-3031.00 exact occupation basis",
@@ -38392,7 +38424,7 @@
       "text": "Ushers"
     }
   },
-  "source_content_sha256": "2b460f4738656072c257e873b9d0260639b08dc4552fef2c9b09f13ec8b8dcb1",
+  "source_content_sha256": "29c8d0ebae190fed84758e3efe0b88b713db813c16eae5deaa08b1e8e9dcb44a",
   "subject": {
     "canonical_slug": "ushers-lobby-attendants-and-ticket-takers",
     "name": "Ushers",

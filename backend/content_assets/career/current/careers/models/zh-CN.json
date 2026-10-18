@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment": {
         "status": "mapped"
       },
@@ -13521,6 +13524,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/41-9012.00#WorkContext"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "按摄影师与艺术指导要求摆姿势，为杂志或广告呈现服装与形象 — 0/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "试穿样品或成衣并展示款式细节、面料与配饰 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "整理并维护作品集、打印模卡、参加试镜与 go-see 争取工作 — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13708,7 +13728,7 @@
             }
           }
         ],
-        "answer": "生成式 AI 已可生成写实人物、替换背景与服装，或由单张照片扩展出多套图像，直接影响广告与电商图像的生产方式；但技术可行不等于已获得肖像、素材再利用或数字替身的授权。选角、使用范围、期限、报酬与最终素材仍须由客户与模特本人核对，行业层面的岗位与收入结果证据仍然有限。",
+        "answer": "生成式 AI 已可生成写实人物、替换背景与服装，或由单张照片扩展出多套图像，直接影响广告与电商图像的生产方式；但技术可行不等于已获得肖像、素材再利用或数字替身的授权。选角、使用范围、期限、报酬与最终素材仍须由客户与模特本人核对，行业层面的岗位与收入结果证据仍然有限。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "ILO Working Paper 140：Generative AI and Jobs（2025）",
@@ -15451,7 +15471,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15539,15 +15559,27 @@
         "source_refs": [
           "onet-wages"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "模特",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "镜头与舞台呈现",
@@ -15598,7 +15630,7 @@
       "text": "模特：工作内容、美国工资与入行路径 | 费马测试"
     }
   },
-  "source_content_sha256": "e9146316470e6aa0d9e91cbff9d4258e0e93209201ee0f19756d6ff0af38df74",
+  "source_content_sha256": "72bbbb3d61c0e3cc25f3e2cfaf24fbda7e01f6c1ccf3d53d87bde2634eb0a39a",
   "subject": {
     "canonical_slug": "models",
     "name": "模特",

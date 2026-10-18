@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24787,7 +24790,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现有研究衡量任务潜在暴露或雇主预期，不给本职采用率、替代率或失业时间表。配件目录检索、记录与回复可作为作者辅助候选；库存、匹配、交期与退换承诺仍须核原记录并由获授权人员承担。美国精确SOC41-2022：2025就业273,300人，2035预测281,600人，净增8,300人、3.0%；2025—2035年均30,000个空缺含转职及退出劳动力的替补，不等于净新增。总体预测不是AI采用、替代或个人失业概率，不推中国需求。"
+              "现有研究衡量任务潜在暴露或雇主预期，不给本职采用率、替代率或失业时间表。配件目录检索、记录与回复可作为作者辅助候选；库存、匹配、交期与退换承诺仍须核原记录并由获授权人员承担。美国精确SOC41-2022：2025就业273,300人，2035预测281,600人，净增8,300人、3.0%；2025—2035年均30,000个空缺含转职及退出劳动力的替补，不等于净新增。总体预测不是AI采用、替代或个人失业概率，不推中国需求。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "parts-salespersons.ai-impact.ai-impact-table.18",
@@ -32856,6 +32859,23 @@
                 "publisher": "全国人大常委会／工业和信息化部公开",
                 "scope": "regulatory_reference",
                 "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "整理车型、旧件和用途关键词 — 50/100; weight=1/3; parts-salespersons.ai-impact.ai-impact-table.95[0]",
+                  "对照目录编号和候选 — 75/100; weight=1/3; parts-salespersons.ai-impact.ai-impact-table.99[0]",
+                  "数量单价运费与税费 — 75/100; weight=1/3; parts-salespersons.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37782,7 +37802,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38168,15 +38188,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "零部件销售员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 41-2022.00 · 零部件销售",
@@ -38227,7 +38259,7 @@
       "text": "零部件销售员：工作内容、工资与配件适配风险"
     }
   },
-  "source_content_sha256": "d23e8a7fa52b7959f685c09df20fa15f56c2c0a01b3676414521953937229592",
+  "source_content_sha256": "228987b0ea16239859cdd71f1064e2a8e22c8db29cbff94f07ca00e92bdbbe8c",
   "subject": {
     "canonical_slug": "parts-salespersons",
     "name": "零部件销售员",

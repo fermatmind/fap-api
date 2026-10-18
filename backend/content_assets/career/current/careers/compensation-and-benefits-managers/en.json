@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24742,7 +24745,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Distinguish technical capability, enterprise adoption, and job outcomes: this page proposes editorial experiment suggestions for cleaning, calculation, report drafts, and text organization; recruitment keywords and task exposure do not prove sustained industry investment, adoption, or income causation."
+              "Distinguish technical capability, enterprise adoption, and job outcomes: this page proposes editorial experiment suggestions for cleaning, calculation, report drafts, and text organization; recruitment keywords and task exposure do not prove sustained industry investment, adoption, or income causation. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.18",
@@ -32231,6 +32234,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/13-1111.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Compensation system design and market benchmarking | Analyze compensation policies and regulations and market wage rates and develop competitive compensation plans | Analyze compensation policies, government regulations, and prevailing market wage rates to develop competitive compensation plans (corresponding to the fourth O*NET task). — 75/100; weight=1/3; compensation-and-benefits-managers.profile.responsibilities-block.1[0]",
+                  "Benefit policy design and price comparison | Design and evaluate and modify benefit policies and work with brokers to study benefit issues | Design, evaluate, and modify benefit policies to ensure programs are current, competitive, and in compliance with legal requirements; work with brokers and study benefit issues to identify and implement benefits that improve employees' quality of life; contract with vendors for available employee services (corresponding to the second and fifth O*NET tasks and the twentieth supplemental task). — 75/100; weight=1/3; compensation-and-benefits-managers.profile.responsibilities-block.1[2]",
+                  "Communication and Q&A and tool support | Inform employees about benefits and compensation and personnel policies and support benefit selection and compensation decision tools | Direct the preparation and distribution of written and verbal information to inform employees of benefits and compensation and personnel policies; coordinate between benefit vendors and employees and help resolve employee benefit-related issues or adopt suggestions; manage the design and development of benefit selection tools and guide managers in making compensation decisions (corresponding to the first and eighth and sixth O*NET tasks). — 25/100; weight=1/3; compensation-and-benefits-managers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37155,7 +37175,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -37497,15 +37517,27 @@
         "source_refs": [
           "cb-review-ooh"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Compensation and benefits managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · ECS",
@@ -37556,7 +37588,7 @@
       "text": "Compensation and benefits managers"
     }
   },
-  "source_content_sha256": "e22e8febdc47902305c75c11084d0724bf0e177879845f007ebcc78f9da52b4e",
+  "source_content_sha256": "b9d2806c1d5cb4d306887ee1de650538ad1941e6bd52baa9497ccead517bd17d",
   "subject": {
     "canonical_slug": "compensation-and-benefits-managers",
     "name": "Compensation and benefits managers",

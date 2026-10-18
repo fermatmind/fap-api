@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25115,7 +25118,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task judgment | Trials of waybill, route material, and log organizing may be conducted in an approved environment and the actual effect checked; no evidence has been obtained on this occupation's generative AI adoption, efficiency gains, exposure level, or employment causality. Navigation/ELD, level 0—2 driver assistance, generative AI, and higher-level automated driving are judged separately; NHTSA0—level 2 drivers stay attentive and are responsible for driving, and it cannot be inferred from this that higher-level systems will never change the occupation. O*NET lists 14 software skill categories, and the 6 items on the hot technologies page come from U.S. 2025 full-year job postings: SAP1%, and Office/Excel/Outlook/Word/Windows below 1%; this is not an enterprise adoption rate, AI usage rate, or measured efficiency gain. The U.S. BLS53-3032 projection for 2025—2035 is about 2,221,200 → 2,305,000 people, growth 3.8% (OOH about 4%), average annual openings 214,500 including replacements; self-employment in the base period 7.3%. This is not real-time hiring, net new openings, or generative AI causality."
+              "Editorial task judgment | Trials of waybill, route material, and log organizing may be conducted in an approved environment and the actual effect checked; no evidence has been obtained on this occupation's generative AI adoption, efficiency gains, exposure level, or employment causality. Navigation/ELD, level 0—2 driver assistance, generative AI, and higher-level automated driving are judged separately; NHTSA0—level 2 drivers stay attentive and are responsible for driving, and it cannot be inferred from this that higher-level systems will never change the occupation. O*NET lists 14 software skill categories, and the 6 items on the hot technologies page come from U.S. 2025 full-year job postings: SAP1%, and Office/Excel/Outlook/Word/Windows below 1%; this is not an enterprise adoption rate, AI usage rate, or measured efficiency gain. The U.S. BLS53-3032 projection for 2025—2035 is about 2,221,200 → 2,305,000 people, growth 3.8% (OOH about 4%), average annual openings 214,500 including replacements; self-employment in the base period 7.3%. This is not real-time hiring, net new openings, or generative AI causality. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "heavy-and-tractor-trailer-truck-drivers.ai-impact.ai-impact-table.18",
@@ -32632,6 +32635,23 @@
                 "publisher": "USDOT",
                 "scope": "Level 0—2 driving assistance responsibility note, not position adoption or employment causality",
                 "url": "https://www.nhtsa.gov/vehicle-safety/driver-assistance-technologies"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Cargo securement and trailer coupling — 0/100; weight=1/3; heavy-and-tractor-trailer-truck-drivers.ai-impact.ai-impact-table.99[0]",
+                  "Driving and in-transit monitoring — 25/100; weight=1/3; heavy-and-tractor-trailer-truck-drivers.ai-impact.ai-impact-table.103[0]",
+                  "Records and logs — 75/100; weight=1/3; heavy-and-tractor-trailer-truck-drivers.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37562,7 +37582,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37710,15 +37730,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Heavy and Tractor-Trailer Truck Drivers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Heavy and Tractor-Trailer Truck Drivers · tasks, deliverables, and responsibility boundaries",
@@ -37769,7 +37801,7 @@
       "text": "Heavy and Tractor-Trailer Truck Drivers"
     }
   },
-  "source_content_sha256": "b7479a6b63f55e5259f02d5c16529a9972446a18228c03b21003e5c1263b7dcc",
+  "source_content_sha256": "62c32941af07ed36d1ab9e3ac87a3a10105b365e21510e2bb578a3f1febac18c",
   "subject": {
     "canonical_slug": "heavy-and-tractor-trailer-truck-drivers",
     "name": "Heavy and Tractor-Trailer Truck Drivers",

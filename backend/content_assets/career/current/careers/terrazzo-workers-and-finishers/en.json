@@ -8,6 +8,9 @@
       "fact:cn-build-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25390,7 +25393,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page only suggests testing document drafts on fictional quantity and version material; material, equipment, and quality judgments still require training and project bases. Specific adoption and substitution evidence is lacking, and there is no versioned scoring scale, so no FermatMind task exposure score or substitution rate is provided."
+              "This page only suggests testing document drafts on fictional quantity and version material; material, equipment, and quality judgments still require training and project bases. Specific adoption and substitution evidence is lacking, and there is no versioned scoring scale, so no FermatMind task exposure score or substitution rate is provided. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "terrazzo-workers-and-finishers.display.ai_impact_table.answer",
@@ -32946,6 +32949,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Dividers | Implementing patterns and zones | Set dividers according to the confirmed pattern, paying attention to the material and the area joint; the specific technique is carried out under guidance. — 25/100; weight=1/3; terrazzo-workers-and-finishers.display.responsibilities_block.02[0]",
+                  "Surface layer | Mixing and spreading | Form the surface layer according to the confirmed material and process conditions, and do not copy the paper quantity as a real mix. — 0/100; weight=1/3; terrazzo-workers-and-finishers.display.responsibilities_block.03[0]",
+                  "Grinding | Surface treatment and repair | Grind or repair after the material conditions are met, locate surface problems, and check the results. — 0/100; weight=1/3; terrazzo-workers-and-finishers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38228,7 +38248,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -38388,15 +38408,27 @@
         "source_refs": [
           "nbs-build-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Terrazzo workers and finishers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 47-2053.00",
@@ -38447,7 +38479,7 @@
       "text": "Terrazzo workers and finishers"
     }
   },
-  "source_content_sha256": "bbd83e9f0201aefd2eec5821febdaaef2b8b2e80e75eb6ebf7e59c63d28a7604",
+  "source_content_sha256": "96d272272e92816e274df4ae0b2d116ea659b8036d24f4ccc25a919a33390b2a",
   "subject": {
     "canonical_slug": "terrazzo-workers-and-finishers",
     "name": "Terrazzo workers and finishers",

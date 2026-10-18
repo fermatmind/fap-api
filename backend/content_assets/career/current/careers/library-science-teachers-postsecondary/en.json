@@ -11,6 +11,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -7557,7 +7560,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: Test assistance with literature retrieval, teaching-material and feedback drafts. No occupational adoption, time-saving or job-outcome evidence is established. Teachers must verify sources, grading and student-information permissions."
+              "Editorial suggestion: Test assistance with literature retrieval, teaching-material and feedback drafts. No occupational adoption, time-saving or job-outcome evidence is established. Teachers must verify sources, grading and student-information permissions. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "library-science-teachers-postsecondary.ai-impact.ai-impact-table.2",
@@ -8750,6 +8753,23 @@
                 "publisher": "Ministry of Education; published by Beijing Municipal Government",
                 "scope": "bounded",
                 "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59345.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Design and teach courses — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Review assignments and theses — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Conduct research and write — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11201,7 +11221,7 @@
     ],
     "path": "/en/career/jobs/library-science-teachers-postsecondary",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11337,15 +11357,27 @@
         "source_refs": [
           "onet-education"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Library Science Teachers, Postsecondary",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Teaching and course design",
@@ -11396,7 +11428,7 @@
       "text": "Postsecondary Library Science Teacher Career Assessment: Work, Entry and Risk Boundaries"
     }
   },
-  "source_content_sha256": "2a913da48a6a00087e6eb36d730fa5f21188a94ffa5dae44308738614bb60723",
+  "source_content_sha256": "d691c7844482a1214d7fbfded669a07515f997630953f4a44f8f2155aec67d15",
   "subject": {
     "canonical_slug": "library-science-teachers-postsecondary",
     "name": "Library Science Teachers, Postsecondary",

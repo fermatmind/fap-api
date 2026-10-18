@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25400,7 +25403,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate technical capability, actual adoption and employment outcomes. Text assistance can serve as a draft pending verification, and transport and inventory automation must be verified against the specific system and site; this page forms no reviewable occupational task-level score and fills in no FermatMind score or personal probability of unemployment."
+              "First separate technical capability, actual adoption and employment outcomes. Text assistance can serve as a draft pending verification, and transport and inventory automation must be verified against the specific system and site; the external materials used here supply no measured occupational task-level score and fills in a separate FermatMind editorial estimate, without a personal probability of unemployment. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.ai_impact_table.answer",
@@ -32548,6 +32551,23 @@
                 "publisher": "O*NET OnLine; original BLS OEWS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/11-3071.00?p=annual&st=CA"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Planning | demand and resource analysis | check orders, inventory, service deadlines, transport capacity and in-warehouse capability, keeping the units, period and pending conditions. — 75/100; weight=1/3; transportation-storage-and-distribution-managers.display.responsibilities_block.01[0]",
+                  "Organisation | people and team management | assign work to subordinates and communicate goals, and organise recruitment, training and performance feedback according to the post. — 25/100; weight=1/3; transportation-storage-and-distribution-managers.display.responsibilities_block.02[0]",
+                  "Operations | transport and warehousing coordination | work with sales, finance, purchasing and carriers, tracking inventory, service performance and cross-department anomalies. — 50/100; weight=1/3; transportation-storage-and-distribution-managers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37833,7 +37853,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37983,15 +38003,27 @@
           "nbs",
           "china-employer-2026"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Transportation, storage and distribution managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 11-3071.00 precise occupational definition",
@@ -38042,7 +38074,7 @@
       "text": "Transportation, storage and distribution managers"
     }
   },
-  "source_content_sha256": "687df20d01c1798b29a9dffc91360c29a3c67543685294f21091ee9ed5174508",
+  "source_content_sha256": "ae74f82795cf261db4a00196514fd410813f645251390327a373c7295031131e",
   "subject": {
     "canonical_slug": "transportation-storage-and-distribution-managers",
     "name": "Transportation, storage and distribution managers",

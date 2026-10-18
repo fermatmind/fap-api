@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7554,7 +7557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial candidate: use fictional room-status, accounting, and shift information to test statistical organization, schedule comparisons, and draft pricing options. The presence of property or revenue systems does not demonstrate generative AI adoption or revenue improvement. Responsible personnel verify room status, pricing policies, complaints, and staffing arrangements."
+              "Editorial trial candidate: use fictional room-status, accounting, and shift information to test statistical organization, schedule comparisons, and draft pricing options. The presence of property or revenue systems does not demonstrate generative AI adoption or revenue improvement. Responsible personnel verify room status, pricing policies, complaints, and staffing arrangements. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "lodging-managers.ai-impact.ai-impact-table.2",
@@ -8664,6 +8667,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "US lodging managers",
                 "url": "https://www.bls.gov/ooh/management/lodging-managers.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Manage room status and accounts — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Arrange schedules and train employees — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Handle guest complaints — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11045,7 +11065,7 @@
     ],
     "path": "/en/career/jobs/lodging-managers",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Comparison with adjacent occupations",
       "fit": "Fit signals",
@@ -11205,15 +11225,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Lodging Manager",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Front-desk and housekeeping coordination",
@@ -11264,7 +11296,7 @@
       "text": "Lodging Manager Career Assessment: Work, Entry Paths, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "edb3a8157a0aaca1284f5ac7ef537354878838f9276359788e9aaf9f6bb8ef1e",
+  "source_content_sha256": "6d65d920cb2bfca149cdbbc96f8da59aa9396ac9e6716c9f19a932a04a72604a",
   "subject": {
     "canonical_slug": "lodging-managers",
     "name": "Lodging Manager",

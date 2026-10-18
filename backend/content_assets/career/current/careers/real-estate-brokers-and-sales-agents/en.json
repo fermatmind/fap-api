@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24765,7 +24768,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Cross-occupation research provides potential task exposure and employer expectations and does not measure on-the-job adoption, efficiency, wages, or layoffs in this occupation. The editorial analysis can try assessing draft materials, regulatory retrieval, and transaction comparison; the authenticity of listings, negotiation promises, compliance, and fund responsibility must still be checked against the jurisdiction and the position."
+              "Cross-occupation research provides potential task exposure and employer expectations and does not measure on-the-job adoption, efficiency, wages, or layoffs in this occupation. The editorial analysis can try assessing draft materials, regulatory retrieval, and transaction comparison; the authenticity of listings, negotiation promises, compliance, and fund responsibility must still be checked against the jurisdiction and the position. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.18",
@@ -32669,6 +32672,23 @@
                 "publisher": "BLS / DRE / Ministry of Housing and Urban-Rural Development / eCFR / O*NET (see the specific links)",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/details/23-2093.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Listing agreement and property verification — 25/100; weight=1/3; real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.95[0]",
+                  "Listings and pricing — 75/100; weight=1/3; real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.99[0]",
+                  "Closing and fees — 75/100; weight=1/3; real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37577,7 +37597,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37849,15 +37869,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Real Estate Brokers and Sales Agents",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Real estate brokers and sales agents · task breakdown · result review",
@@ -37908,7 +37940,7 @@
       "text": "Real Estate Brokers and Sales Agents"
     }
   },
-  "source_content_sha256": "c095824b5c17664b3d72f15450c6ff77151c20cb308c6350612c26dbdff77392",
+  "source_content_sha256": "92c8c580116acb7798424ac70a786629f0be2ab695f261e6e1b08577b479b358",
   "subject": {
     "canonical_slug": "real-estate-brokers-and-sales-agents",
     "name": "Real Estate Brokers and Sales Agents",

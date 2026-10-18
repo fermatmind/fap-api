@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24831,7 +24834,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with retrieving sorting rules, organizing ledgers, and drafting handoffs; machine vision and generative AI are different technologies. On-site materials, hazard signs, and equipment resumption are still verified by authorized personnel. Insufficient evidence: position-level AI adoption rates, substitution rates, and causal wage-change estimates for recycling and reclamation workers in mainland China and the United States."
+              "AI can assist with retrieving sorting rules, organizing ledgers, and drafting handoffs; machine vision and generative AI are different technologies. On-site materials, hazard signs, and equipment resumption are still verified by authorized personnel. Insufficient evidence: position-level AI adoption rates, substitution rates, and causal wage-change estimates for recycling and reclamation workers in mainland China and the United States. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "recycling-and-reclamation-workers.ai-impact.ai-impact-table.18",
@@ -32934,6 +32937,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/material-moving-machine-operators.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inbound inspection and sorting standard check — 25/100; weight=1/3; recycling-and-reclamation-workers.ai-impact.ai-impact-table.95[0]",
+                  "Impurity check and quality review — 25/100; weight=1/3; recycling-and-reclamation-workers.ai-impact.ai-impact-table.107[0]",
+                  "Baling and moving equipment collaboration — 25/100; weight=1/3; recycling-and-reclamation-workers.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37842,7 +37862,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38238,15 +38258,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Recycling and reclamation workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Material identification · sorting · baling handoff",
@@ -38297,7 +38329,7 @@
       "text": "Recycling and reclamation workers"
     }
   },
-  "source_content_sha256": "81cb34f1e8baf2381da716515b7821b846fb8b70ddb1582553173c45e604e0fd",
+  "source_content_sha256": "ec621f33643c3e33dc1242469fa70e9d325d6a9abe514e7d3de1f956f1b530e2",
   "subject": {
     "canonical_slug": "recycling-and-reclamation-workers",
     "name": "Recycling and reclamation workers",

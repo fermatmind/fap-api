@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24887,7 +24890,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "参数换算/注释/清单/文档是需测试候选，未取得职业级能力/效率/实际部署实证。软件清单、招聘热词和雇主使用不能混同。"
+              "参数换算/注释/清单/文档是需测试候选，未取得职业级能力/效率/实际部署实证。软件清单、招聘热词和雇主使用不能混同。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "computer-numerically-controlled-tool-programmers.ai-impact.ai-impact-table.18",
@@ -31680,6 +31683,23 @@
                 "publisher": "OSHA",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "读图与工艺规划｜分析工单与图纸与规格与设计数据并确定工序顺序与刀具｜分析工单与图纸与蓝图与规格与印制电路板图形胶片与设计数据，以计算尺寸与刀具选择与机床转速与进给；确定加工工序顺序并选择把工件加工成目标形状所需的合适刀具；把车间工单分组以提高材料利用率并减少装夹时间；并为工件订购刀具（对应 O*NET 任务第二与第一与第十与第十四项）。 — 50/100; weight=1/3; computer-numerically-controlled-tool-programmers.profile.responsibilities-block.1[0]",
+                  "程序编写与存储｜用控制器语言编写程序并存储到介质并传送数据｜用机床控制器的语言编写程序并把程序存储到纸带与磁带或磁盘等介质上；输入计算机指令以存储或检索零件图形与图形显示或程序并把数据传送到其他介质（对应 O*NET 任务第四与第六项）。 — 75/100; weight=1/3; computer-numerically-controlled-tool-programmers.profile.responsibilities-block.1[2]",
+                  "仿真与程序验证｜在试运行或仿真中验证程序并按错误修改并重测｜在试运行时观察机床或进行计算机仿真，以确保程序与机床正常运行并产出符合规格的零件；修改程序或纸带以消除错误并重新测试以确认问题已解决；把编码纸带或计算机打印输出与原始零件规格与图纸比对以验证指令是否准确（对应 O*NET 任务第三与第七与第十一项）。 — 50/100; weight=1/3; computer-numerically-controlled-tool-programmers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36590,7 +36610,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36876,15 +36896,27 @@
           "onet-localwages",
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "数控机床程序员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · CRI",
@@ -36935,7 +36967,7 @@
       "text": "数控机床程序员"
     }
   },
-  "source_content_sha256": "ba8e6547cccf160878ab97226d99713b6a5d388ed6aca884e9902aa823bb5342",
+  "source_content_sha256": "b85209102477e7e1156494287c5ac680f0d86f9802b6ea9a31336f4df412e710",
   "subject": {
     "canonical_slug": "computer-numerically-controlled-tool-programmers",
     "name": "数控机床程序员",

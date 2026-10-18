@@ -8,6 +8,9 @@
       "fact:entry": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -7573,7 +7576,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: Actual generative AI adoption, efficiency gains and wage causation for this occupation are unestablished. Draft materials and search summaries may be proposed as controlled trials, requiring checks of original texts, legal-provision versions, course objectives and grading standards. Technology mentions do not prove GenAI use, and task exposure does not equal replacement."
+              "Insufficient evidence: Actual generative AI adoption, efficiency gains and wage causation for this occupation are unestablished. Draft materials and search summaries may be proposed as controlled trials, requiring checks of original texts, legal-provision versions, course objectives and grading standards. Technology mentions do not prove GenAI use, and task exposure does not equal replacement. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "law-teachers-postsecondary.ai-impact.ai-impact-table.2",
@@ -8853,6 +8856,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "bounded",
                 "url": "https://www.onetonline.org/link/summary/25-1062.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Prepare syllabi and teaching materials — 75/100; weight=1/3; law-teachers-postsecondary.profile.responsibilities-block.4[0]",
+                  "Teach law and lead discussions — 25/100; weight=1/3; law-teachers-postsecondary.profile.responsibilities-block.4[0]",
+                  "Prepare assessments and give feedback — 75/100; weight=1/3; law-teachers-postsecondary.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11185,7 +11205,7 @@
     ],
     "path": "/en/career/jobs/law-teachers-postsecondary",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11370,15 +11390,27 @@
         "source_refs": [
           "review-bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Law Teachers, Postsecondary",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Postsecondary Law Teachers · Teaching, Academic Standards and Practice Boundaries",
@@ -11429,7 +11461,7 @@
       "text": "Postsecondary Law Teacher Career Assessment: Teaching, Academic Standards and Practice Boundaries"
     }
   },
-  "source_content_sha256": "3aa34db3523c7760d6607238fa4496cf1d8eca7ad48051db0665c38d305a207d",
+  "source_content_sha256": "9b620e488824cbe2aa58f49dd2ffccb1fd43e33aa4fefb23c17f7f340777259e",
   "subject": {
     "canonical_slug": "law-teachers-postsecondary",
     "name": "Law Teachers, Postsecondary",

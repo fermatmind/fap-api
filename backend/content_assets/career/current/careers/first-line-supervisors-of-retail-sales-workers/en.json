@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24112,7 +24115,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial analysis: approved sales, inventory, shrinkage, and customer flow record organization and price tag drafting can be trialed with manual checking; the adoption rate or effect measurement for this occupation was not obtained."
+              "Editorial analysis: approved sales, inventory, shrinkage, and customer flow record organization and price tag drafting can be trialed with manual checking; the adoption rate or effect measurement for this occupation was not obtained. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "first-line-supervisors-of-retail-sales-workers.ai-impact.ai-impact-table.18",
@@ -31517,6 +31520,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Develop scheduling according to customer flow and sales targets and assign employees to specific duties and keep schedule and time card records — 75/100; weight=1/3; first-line-supervisors-of-retail-sales-workers.ai-impact.ai-impact-table.95[0]",
+                  "Provide customer service by greeting and assisting customers and responding to inquiries and complaints and direct and supervise employees engaged in sales and inventory-taking and reconciling cash receipts and services — 25/100; weight=1/3; first-line-supervisors-of-retail-sales-workers.ai-impact.ai-impact-table.99[0]",
+                  "Take inventory and reorder when inventory drops to a specified level and review inventory and sales records to prepare reports and handle discrepancies and shrinkage and returns — 75/100; weight=1/3; first-line-supervisors-of-retail-sales-workers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36425,7 +36445,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -36694,15 +36714,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "First-Line Supervisors of Retail Sales Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "First-Line Supervisors of Retail Sales Workers · official occupational scope (41-1011.00)",
@@ -36753,7 +36785,7 @@
       "text": "First-Line Supervisors of Retail Sales Workers"
     }
   },
-  "source_content_sha256": "54013c4ea391b793d89b7e031e24b90b41edf697b1573a736168dae393883afc",
+  "source_content_sha256": "0e42ccbc4fce36b666e2c4c7ad01145a2478773287ae644d964f04e3c4f5a8fc",
   "subject": {
     "canonical_slug": "first-line-supervisors-of-retail-sales-workers",
     "name": "First-Line Supervisors of Retail Sales Workers",

@@ -29,6 +29,9 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24554,7 +24557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Requirements, configuration, documentation, test cases and logs are editorial candidates for assistance awaiting testing; actual reliability, adoption and net efficiency have not been obtained. BLS Table 1.2 SOC15-1299, Other Computer Occupations (2025–2035), gives overall employment 471,200→495,300, published net change +24,200/+5.1%, and 27,000 average annual openings including replacement; subtracting rounded endpoints does not replace published net change. All are parent-category context, not independent employment for 15-1299.08, individual opportunities or AI causation."
+              "Requirements, configuration, documentation, test cases and logs are editorial candidates for assistance awaiting testing; actual reliability, adoption and net efficiency have not been obtained. BLS Table 1.2 SOC15-1299, Other Computer Occupations (2025–2035), gives overall employment 471,200→495,300, published net change +24,200/+5.1%, and 27,000 average annual openings including replacement; subtracting rounded endpoints does not replace published net change. All are parent-category context, not independent employment for 15-1299.08, individual opportunities or AI causation. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "computer-systems-engineers-architects.ai-impact.ai-impact-table.18",
@@ -31281,6 +31284,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localcert/15-1299.08"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Requirements | Communicate and Confirm System Requirements | Communicate with employees or clients to confirm the system's functional, data and interface requirements, and document them as a checklist that can be verified. — 50/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[0]",
+                  "Design | Design System and Integration Architecture | Design systems engineering, systems integration or distributed system architectures, define functional standards and interfaces, and ensure component compatibility. — 75/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[2]",
+                  "Verification | Verify Stability, Security and Scalability | Use tests and models to verify stability, interoperability, portability, security and scalability, recording results and applicability. — 75/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36188,7 +36208,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Wage Reference",
       "direction-comparison": "Comparison of Occupational Directions",
       "fit": "Occupational Suitability Guide",
@@ -36519,15 +36539,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Computer Systems Engineers and Architects",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of Tasks to AI (Not Scored on This Page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · Unpublished",
@@ -36578,7 +36610,7 @@
       "text": "Computer Systems Engineers and Architects"
     }
   },
-  "source_content_sha256": "4508fff3194bb7cc6fd079804183b0cb9fc8d2dfdf5009ddfd3ce2175845d909",
+  "source_content_sha256": "59515f1b3b1f97506e5e6956446733703c169148dbde3e3f9bfa60141627baec",
   "subject": {
     "canonical_slug": "computer-systems-engineers-architects",
     "name": "Computer Systems Engineers and Architects",

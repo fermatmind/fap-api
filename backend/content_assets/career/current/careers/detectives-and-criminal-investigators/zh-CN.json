@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24359,7 +24362,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方任务支持查询记录、影像记录、分析物证及调查文书等工作对象；检索摘要和辅助起草是获准环境下的编辑推演。未核具体系统AI功能、职业采用率或实际效果，不以任务、软件词条或演示证明已使用。2025美国Lightcast唯一招聘帖11词条：Office10%、Excel9%、PowerPoint/Outlook各4%、Word/SQL各2%、Access1%、SAS不足1%、Photoshop/Linux/Visio NA；招聘关键词非AI采用、实际软件使用率或中国职位要求。"
+              "官方任务支持查询记录、影像记录、分析物证及调查文书等工作对象；检索摘要和辅助起草是获准环境下的编辑推演。未核具体系统AI功能、职业采用率或实际效果，不以任务、软件词条或演示证明已使用。2025美国Lightcast唯一招聘帖11词条：Office10%、Excel9%、PowerPoint/Outlook各4%、Word/SQL各2%、Access1%、SAS不足1%、Photoshop/Linux/Visio NA；招聘关键词非AI采用、实际软件使用率或中国职位要求。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24631,7 +24634,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页没有可复核的职业量表与任务评分依据，因此保留 Hero 中 AI 数据的缺失态并在正文说明原因；用其他岗位的分数代替本职业会制造没有依据的精度。"
+              "本页既有外部资料没有可直接采用的实测任务评分，因此另以本页明示的方法提供AI影响度编辑估算；用其他岗位的分数代替本职业会制造没有依据的精度。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -32032,6 +32035,23 @@
                 "publisher": "O*NET Resource Center",
                 "scope": "contextual",
                 "url": "https://www.onetcenter.org/IP.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "受理案件后逐项核实事实，通过多方询问与查阅记录交叉验证陈述，并按法定程序记录访谈内容。 — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "搜寻并收集指纹等证据，按规定封存、标记、保管并移交证据物项，保证证据链连续可追溯。 — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "记录调查进展并维护档案，向上级或法官提交报告申请令状，在授权范围内准备与送达搜查令、逮捕令。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37318,7 +37338,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37542,15 +37562,27 @@
         "source_refs": [
           "r5-nbs-government"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "侦探刑事调查员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "案件调查与线索核实 · 现场与证据保全 · 出证与出庭",
@@ -37601,7 +37633,7 @@
       "text": "侦探刑事调查员"
     }
   },
-  "source_content_sha256": "88cc972ed6668ad7f3b3b3d0c43ada3acfc4f811bd3b5dcbe64a1a37a5061839",
+  "source_content_sha256": "f086c4c40814aba8ccfbe94366ee50fef28af3a54c09f61090b47c5e7dce81c6",
   "subject": {
     "canonical_slug": "detectives-and-criminal-investigators",
     "name": "侦探刑事调查员",

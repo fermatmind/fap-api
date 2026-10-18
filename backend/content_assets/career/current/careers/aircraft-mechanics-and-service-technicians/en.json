@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24799,7 +24802,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial judgement: document retrieval, record organisation and measurement-data comparison can serve as assistance steps, and whether a specific tool may be approved depends on the organisation and the airworthiness requirements. The current sources contain no AI substitution rate, actual adoption rate or causal employment study for this occupation; a substitution conclusion cannot be drawn from the task list or the BLS projection. The maintenance release is carried out under the personnel and organisation authority of the jurisdiction concerned."
+              "Editorial judgement: document retrieval, record organisation and measurement-data comparison can serve as assistance steps, and whether a specific tool may be approved depends on the organisation and the airworthiness requirements. The current sources contain no AI substitution rate, actual adoption rate or causal employment study for this occupation; a substitution conclusion cannot be drawn from the task list or the BLS projection. The maintenance release is carried out under the personnel and organisation authority of the jurisdiction concerned. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "aircraft-mechanics-and-service-technicians.ai-impact.ai-impact-table.18",
@@ -32583,6 +32586,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inspection and diagnosis｜Manual and criteria｜Read and interpret the maintenance manual, service bulletins and specifications and determine the feasibility and method of repairing or replacing the fault. — 50/100; weight=1/3; aircraft-mechanics-and-service-technicians.profile.responsibilities-block.1[0]",
+                  "Repair and overhaul｜Dismantling and reconditioning｜Replace or repair worn, defective or damaged parts, dismantle and reassemble engines and recondition the airframe structure and the components of each system. — 0/100; weight=1/3; aircraft-mechanics-and-service-technicians.profile.responsibilities-block.1[2]",
+                  "Records and coordination｜Logs and aviation materials｜Maintain all preventive and corrective maintenance logs, take inventory of and requisition aviation materials, and coordinate the installation and calibration of heavy components with other trades. — 75/100; weight=1/3; aircraft-mechanics-and-service-technicians.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37485,7 +37505,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -37897,15 +37917,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Aircraft mechanics and service technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Aviation airworthiness maintenance: inspection and release to the manual · precision measurement and non-destructive testing · records and airworthiness responsibility",
@@ -37956,7 +37988,7 @@
       "text": "Aircraft mechanic and service technician: tasks, pay and licence boundary (O*NET 49-3011)"
     }
   },
-  "source_content_sha256": "38267978564b8bf0ba51aba81b8bd6252c9aae2531d3f50881f1fcd9a3dd8034",
+  "source_content_sha256": "784b88ffabb73b9694a676da6691ee1aefffcd42ee9c600405523fc3cdadf54b",
   "subject": {
     "canonical_slug": "aircraft-mechanics-and-service-technicians",
     "name": "Aircraft mechanics and service technicians",

@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25235,7 +25238,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: Quantified occupational AI exposure, organizational adoption, efficiency, and employment causation were not obtained. No medium-high rating or guarantee against short-term replacement is given. Fictional quotation, scheduling, inventory, and version drafts are editorial trials; verify actual family, service, data, and legal responsibilities separately."
+              "Insufficient evidence: Quantified occupational AI exposure, organizational adoption, efficiency, and employment causation were not obtained. No medium-high rating or guarantee against short-term replacement is given. Fictional quotation, scheduling, inventory, and version drafts are editorial trials; verify actual family, service, data, and legal responsibilities separately. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.18",
@@ -32831,6 +32834,23 @@
                 "publisher": "State Administration for Market Regulation",
                 "scope": "Scope of supported claims",
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Discuss and arrange funeral details with families and provide advice and comfort — 25/100; weight=1/3; funeral-home-managers.ai-impact.ai-impact-table.97[0]",
+                  "Schedule funerals, burials, or cremations and allocate venues, personnel, and suppliers — 75/100; weight=1/3; funeral-home-managers.ai-impact.ai-impact-table.101[0]",
+                  "Direct and supervise staff, schedule hours, recruit, and develop skills — 25/100; weight=1/3; funeral-home-managers.ai-impact.ai-impact-table.113[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37773,7 +37793,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37975,15 +37995,27 @@
           "ep",
           "oews-method"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Funeral home managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Funeral home managers · Tasks, deliverables, and responsibility boundaries",
@@ -38034,7 +38066,7 @@
       "text": "Funeral home managers"
     }
   },
-  "source_content_sha256": "b63088a176f8f3b05be36779fcf17d647d0ef086608549de5b896e560de46ff2",
+  "source_content_sha256": "c20886cee92e7584bfbab60db084613d0e12ef5d2d9d70aeedec6aaa5b1b8994",
   "subject": {
     "canonical_slug": "funeral-home-managers",
     "name": "Funeral home managers",

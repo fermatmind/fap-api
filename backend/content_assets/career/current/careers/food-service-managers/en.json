@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24133,7 +24136,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task analysis | this page does not provide a generative AI exposure level, adoption rate or replacement date for this occupation. Based on O*NET tasks, text tools may assist with handovers, training materials and complaint summaries; scheduling, inventory, statistical analysis or routing may also use different technologies and cannot all be called generative AI. On-site food service, personnel management and safety compliance handling must be carried out per institutional rules, and tool outputs must be checked. General exposure research does not prove that this occupation has adopted them or that jobs have decreased."
+              "Task analysis | this page does not provide a generative AI exposure level, adoption rate or replacement date for this occupation. Based on O*NET tasks, text tools may assist with handovers, training materials and complaint summaries; scheduling, inventory, statistical analysis or routing may also use different technologies and cannot all be called generative AI. On-site food service, personnel management and safety compliance handling must be carried out per institutional rules, and tool outputs must be checked. General exposure research does not prove that this occupation has adopted them or that jobs have decreased. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "food-service-managers.ai-impact.ai-impact-table.18",
@@ -31663,6 +31666,23 @@
                 "publisher": "International Labour Organization",
                 "scope": "Generative AI: general potential task exposure method",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Scheduling and customer flow forecasting — 75/100; weight=1/3; food-service-managers.ai-impact.ai-impact-table.95[0]",
+                  "Food preparation and hygiene and fire safety supervision — 25/100; weight=1/3; food-service-managers.ai-impact.ai-impact-table.103[0]",
+                  "Cost and pricing and budget accounting — 75/100; weight=1/3; food-service-managers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36535,7 +36555,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -36805,15 +36825,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Food service managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Food service managers · official occupational scope · work closed loop",
@@ -36864,7 +36896,7 @@
       "text": "Food service managers"
     }
   },
-  "source_content_sha256": "8ee937847246c86fc6fdfd43a04c75d421908e1393372846563461dda8e5214d",
+  "source_content_sha256": "2cca804500f2f97ff965304ccbecf50a9d48b0d365eeba0134bf1dca3f034beb",
   "subject": {
     "canonical_slug": "food-service-managers",
     "name": "Food service managers",

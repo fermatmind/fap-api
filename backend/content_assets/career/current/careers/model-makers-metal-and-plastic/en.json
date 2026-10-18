@@ -8,6 +8,9 @@
       "fact:cn-production-wage": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -13495,6 +13498,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-4061.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Determine machining sequences, clamping, and tooling, and select cutting tools and parameters — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Turn, mill, drill, grind, and otherwise machine to specified dimensions — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]",
+                  "Use precision instruments to measure and record dimensions, geometric tolerances, and fits — 25/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13682,7 +13702,7 @@
             }
           }
         ],
-        "answer": "Metal and plastic modelmakers may use CAD/CAM, simulation, and CNC programming to assist drawing checks, draft operations and programs, measurement record organization, and variant exploration. Accountable people must still verify dimensional decisions, first-article inspection, machine tool authorization, anomaly shutdowns, and quality conclusions. Technology exposure does not equal job replacement.",
+        "answer": "Metal and plastic modelmakers may use CAD/CAM, simulation, and CNC programming to assist drawing checks, draft operations and programs, measurement record organization, and variant exploration. Accountable people must still verify dimensional decisions, first-article inspection, machine tool authorization, anomaly shutdowns, and quality conclusions. Technology exposure does not equal job replacement. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 51-4061.00 occupational profile",
@@ -15425,7 +15445,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Compare career directions",
       "fit": "Career fit guide",
@@ -15537,15 +15557,27 @@
         "source_refs": [
           "nbs-wage-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Modelmakers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Drawing and tolerance interpretation",
@@ -15596,7 +15628,7 @@
       "text": "Metal and plastic modelmakers"
     }
   },
-  "source_content_sha256": "d9b8484943f00993c9ce8fbdf019200f464dba36acd3f828e8148526d238b195",
+  "source_content_sha256": "3bad72838ce8aa41f28a1ca0a7e630b630489579197df51699a8954bee00b808",
   "subject": {
     "canonical_slug": "model-makers-metal-and-plastic",
     "name": "Modelmakers",

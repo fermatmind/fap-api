@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24352,7 +24355,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。 本轮未取得29-2051可复核生成式AI采用率、节时效果、营养建议准确性或岗位工资因果。现有软件清单、招聘词、任务情境与就业预测不能证明已经提速、多数机构采用或永不替代；软件计算、设备自动化与生成式AI分别核。ILO2025摘要复用同批已读版本，未核该细类与ISCO映射和暴露评分；NIST AI RMF1.0为自愿治理框架，不规定中国膳食操作权限。"
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。 本轮未取得29-2051可复核生成式AI采用率、节时效果、营养建议准确性或岗位工资因果。现有软件清单、招聘词、任务情境与就业预测不能证明已经提速、多数机构采用或永不替代；软件计算、设备自动化与生成式AI分别核。ILO2025摘要复用同批已读版本，未核该细类与ISCO映射和暴露评分；NIST AI RMF1.0为自愿治理框架，不规定中国膳食操作权限。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31872,6 +31875,23 @@
                 "publisher": "国家统计局",
                 "scope": "context",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "监测与记录：按餐次观察并记录患者的进食量与进食方式，按规程测量并登记体重与相关指标，观察并记录与饮食相关的异常表现。 — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "菜单与膳食配置：按营养需求与既定指南协助计划菜单与膳食，按食谱制作主餐并核算团体份量，分析并标准化食谱、测试新产品与核算成本。 — 50/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "治疗饮食执行：按医嘱饮食类别与限制核对治疗饮食与特殊膳食的配置与份量，核对分发对象，规范管理医疗膳食业务并记录。 — 25/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37154,7 +37174,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37441,15 +37461,27 @@
         "source_refs": [
           "r5-nbs-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "膳食技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "进食与体重监测 · 营养评估协助 · 膳食配置与宣教",
@@ -37500,7 +37532,7 @@
       "text": "膳食技术员"
     }
   },
-  "source_content_sha256": "de9e35842461ca7419b3e3df332b722e923965dd966592c89c53cf351b9aedc4",
+  "source_content_sha256": "2be4f4d3962c0548d26fafa4df8ee0fdce684ae90fa2ad28a4931dc56fa5534e",
   "subject": {
     "canonical_slug": "dietetic-technicians",
     "name": "膳食技术员",

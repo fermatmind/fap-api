@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24728,7 +24731,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no nationwide AI adoption or replacement causal data for this occupation was obtained. The ICA one-page resource sheet summarizing a recorded interview of 2024-06-17 discusses the opportunities and risks of describing large-scale digital collections and lists metadata and description standards for further reading; the complete interview or the listed standards were not read, and this does not prove tool effects. Transcription, candidate descriptions, and retrieval are editorial trial directions, verified against originals and permitted uses."
+              "Insufficient evidence: no nationwide AI adoption or replacement causal data for this occupation was obtained. The ICA one-page resource sheet summarizing a recorded interview of 2024-06-17 discusses the opportunities and risks of describing large-scale digital collections and lists metadata and description standards for further reading; the complete interview or the listed standards were not read, and this does not prove tool effects. Transcription, candidate descriptions, and retrieval are editorial trial directions, verified against originals and permitted uses. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "archivists.ai-impact.ai-impact-table.18",
@@ -32628,6 +32631,23 @@
                 "publisher": "Society of American Archivists",
                 "scope": "contextual",
                 "url": "https://www2.archivists.org/statements/saa-core-values-statement-and-code-of-ethics"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Appraisal of value and retention periods｜Proposing recommendations based on policy｜Appraise the authenticity and preservation value of historical materials; materials past their retention period are appraised under the applicable rules and cannot be destroyed on one's own initiative. — 50/100; weight=1/3; archivists.profile.responsibilities-block.1[1]",
+                  "Arrangement and description｜Making record relationships traceable｜Establish classification, catalogs, and descriptions, maintain unique identifiers and retrieval locations, and do not write guesses as original information. — 75/100; weight=1/3; archivists.profile.responsibilities-block.1[2]",
+                  "Access and reference services｜Helping researchers according to permissions｜Implement access rules, find relevant archives and explain usage restrictions, and submit difficult reviews to the responsible unit. — 50/100; weight=1/3; archivists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37533,7 +37553,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37885,15 +37905,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Archivists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Archival work: acquisition and arrangement · description and appraisal · preservation and digital migration · open access and public service",
@@ -37944,7 +37976,7 @@
       "text": "Archivists"
     }
   },
-  "source_content_sha256": "73618e7deeddd024f5d73f37526ea11923d9601e4ef7476852938f952f97dfb8",
+  "source_content_sha256": "18aa19033559432b39a7d7177acf0c74fd6c0e4b5c52d06b98bd7999177f5732",
   "subject": {
     "canonical_slug": "archivists",
     "name": "Archivists",

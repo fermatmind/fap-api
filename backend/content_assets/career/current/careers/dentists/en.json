@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24343,7 +24346,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 U.S. recruitment contained 4 terms, with Dentrix4% and Office, eClinicalWorks EHR and Excel each below 1%; recruitment wording is not actual adoption or GenAI efficiency gains, and not listing scanning or CAD does not prove they are not used. The OOH descriptions of imaging, lasers and digital scanning do not provide generative AI effects."
+              "2025 U.S. recruitment contained 4 terms, with Dentrix4% and Office, eClinicalWorks EHR and Excel each below 1%; recruitment wording is not actual adoption or GenAI efficiency gains, and not listing scanning or CAD does not prove they are not used. The OOH descriptions of imaging, lasers and digital scanning do not provide generative AI effects. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -32262,6 +32265,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/31-9092.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Form a diagnosis from the chief complaint, history and examination findings, identify contraindications and risks, and add examinations or refer when necessary, without drawing conclusions from impressions. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Explain the treatment plan and alternatives, risks and prognosis to the patient and obtain informed consent, and record the medical history and the basis for procedures completely. — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Perform anesthesia, fillings, root canal treatment, extractions and periodontal treatment and similar procedures under protection and isolation, prescribing medication and commissioning restoration fabrication when necessary. — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37779,7 +37799,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -38050,15 +38070,27 @@
         "source_refs": [
           "r5-nbs-health"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Dentists, General",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Diagnostic judgment · plan and informed consent · records and follow-up",
@@ -38109,7 +38141,7 @@
       "text": "Dentists, General"
     }
   },
-  "source_content_sha256": "d73a3cb7996b44fb881ab0c7446c0c1da2f8d88ebf029b6d83ea74dec6f73b09",
+  "source_content_sha256": "d90a12f0ca18e3477080b6df1db1f594ba703fff54c5e652bca16ec9d74cb2b3",
   "subject": {
     "canonical_slug": "dentists",
     "name": "Dentists, General",

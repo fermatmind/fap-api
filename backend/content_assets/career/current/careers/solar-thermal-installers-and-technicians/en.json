@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24419,7 +24422,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no actual AI adoption rate, replacement ratio or wage causality for this occupation was obtained. Documentation tools may assist with lists, but collectors, piping and controls and on-site work and function judgments require real training and responsibility, and no disappearance year can be given."
+              "Insufficient evidence: no actual AI adoption rate, replacement ratio or wage causality for this occupation was obtained. Documentation tools may assist with lists, but collectors, piping and controls and on-site work and function judgments require real training and responsibility, and no disappearance year can be given. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "solar-thermal-installers-and-technicians.ai-impact.ai-impact-table.18",
@@ -32663,6 +32666,23 @@
                 "publisher": "O*NET / U.S. Department of Labor",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/17-2071.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Collection and supports｜Take part in collector installation, positioning and roof penetration protection per project requirements.｜Hand over installation records and anomalies; paper explanations do not replace structural confirmation. — 0/100; weight=1/3; solar-thermal-installers-and-technicians.profile.responsibilities-block.1[1]",
+                  "Piping and circulation｜Install and maintain piping, pumps, heat exchange and insulation and similar objects.｜Hand over the actual status and inspection records, working per manufacturer and local rules. — 0/100; weight=1/3; solar-thermal-installers-and-technicians.profile.responsibilities-block.1[2]",
+                  "Function and maintenance｜Record system function, leaks and operating parameter checks per applicable requirements.｜Hand over actual results, the basis and anomalies, and do not invent tests that were not done. — 25/100; weight=1/3; solar-thermal-installers-and-technicians.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37571,7 +37591,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37871,15 +37891,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Solar thermal installers and technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Solar hot water · collection, storage and circulation",
@@ -37930,7 +37962,7 @@
       "text": "Solar thermal installers and technicians"
     }
   },
-  "source_content_sha256": "c3fd366f24b023a8c0d97dfbc5223291563e6d2ab1549ba5e24d085c5455db98",
+  "source_content_sha256": "231bdc1f1de5859196dd8d796170d51d1dec8aea98d801d490abe05df0b6b840",
   "subject": {
     "canonical_slug": "solar-thermal-installers-and-technicians",
     "name": "Solar thermal installers and technicians",

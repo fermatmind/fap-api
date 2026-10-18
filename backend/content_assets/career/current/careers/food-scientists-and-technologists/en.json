@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24248,7 +24251,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task analysis | Literature retrieval, data analysis, statistics, and report drafts are possible assistance areas; research design, field experiments, conclusion review, and authorization need procedural controls. No measured occupational exposure level, adoption rate, significant efficiency effect, or replacement rate is available. Do not label exposure medium-high. Check task feasibility, organizational adoption, and job outcomes separately."
+              "Task analysis | Literature retrieval, data analysis, statistics, and report drafts are possible assistance areas; research design, field experiments, conclusion review, and authorization need procedural controls. No measured occupational exposure level, adoption rate, significant efficiency effect, or replacement rate is available. Do not label exposure medium-high. Check task feasibility, organizational adoption, and job outcomes separately. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "food-scientists-and-technologists.ai-impact.ai-impact-table.18",
@@ -31741,6 +31744,23 @@
                 "publisher": "BLS",
                 "scope": "SOC191012 national employee wages and occupational wages by industry",
                 "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=190000&occupation=191012&measure=13&areas=INDUSTRY,STATE,MSA"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Experimental design, sampling, and testing — 25/100; weight=1/3; food-scientists-and-technologists.ai-impact.ai-impact-table.99[0]",
+                  "Data analysis and statistics — 75/100; weight=1/3; food-scientists-and-technologists.ai-impact.ai-impact-table.103[0]",
+                  "Product, process, and packaging development — 50/100; weight=1/3; food-scientists-and-technologists.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36619,7 +36639,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -36888,15 +36908,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Food Scientists and Technologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored here)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Food Scientists and Technologists · Official scope · Complete workflow",
@@ -36947,7 +36979,7 @@
       "text": "Food Scientists and Technologists"
     }
   },
-  "source_content_sha256": "71af08ef1026657a304df106a148036597e56d0403307a12d1929e4530d9e572",
+  "source_content_sha256": "bfbe884d72acb9f147dfc59501f499bdbdacc3dc44cdd2a59808f997a20439d1",
   "subject": {
     "canonical_slug": "food-scientists-and-technologists",
     "name": "Food Scientists and Technologists",

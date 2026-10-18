@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25609,7 +25612,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no reviewable task exposure score for this occupation was produced, so it stays blank. The following separates task background, AI evaluation methods, and editorial use; a tool producing a draft does not mean it has been adopted, has saved hours, or has replaced the job."
+              "Insufficient evidence: no reviewable task exposure score for this occupation was produced, so it stays blank. The following separates task background, AI evaluation methods, and editorial use; a tool producing a draft does not mean it has been adopted, has saved hours, or has replaced the job. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "validation-engineers.display.ai_impact_table.answer",
@@ -33174,6 +33177,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Plan｜requirements and validation scope｜Confirm the object, purpose, and criteria, and prepare an executable test protocol. — 50/100; weight=1/3; validation-engineers.display.responsibilities_block.01[0]",
+                  "Execute｜testing and original records｜Run tests under the confirmed conditions and record the data and any inconsistencies that occur. — 25/100; weight=1/3; validation-engineers.display.responsibilities_block.03[0]",
+                  "Analyze｜results and deviations｜Compare against the specified criteria, raise investigation and assessment items, and keep facts distinct from assumptions. — 75/100; weight=1/3; validation-engineers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38449,7 +38469,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38597,15 +38617,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Validation engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 17-2112.02",
@@ -38656,7 +38688,7 @@
       "text": "Validation engineers"
     }
   },
-  "source_content_sha256": "412b78e253b9e3adbcf7536bfba2dfb379ecbc093e9655477b1db5d82e11933b",
+  "source_content_sha256": "7684c4b7d6f0d764f15a6a039ba7b921329a2ced0a77f6201a35863ff6b2f710",
   "subject": {
     "canonical_slug": "validation-engineers",
     "name": "Validation engineers",

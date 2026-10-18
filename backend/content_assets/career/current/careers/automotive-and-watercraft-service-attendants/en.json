@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24618,7 +24621,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence gap: this round did not obtain causal measurements of generative AI adoption, productivity, substitution, or employment for this occupation, and the ledger retrieval and daily report are editorial candidates. The ILO introduction extended abstract and the NIST brief are background only, and the full index or occupational mapping was not read, so it is not concluded from a gap that on-site responsibility will never be replaced. The U.S. 53-6031 occupation had 102,400 jobs in 2025 and is projected at 106,300 in 2035, growing 3.8% from 2025 to 2035 (about 4% according to O*NET, average), a net gain of 3,900, and about 12,900 openings per year. Openings include growth and replacements and are not the net gain, an individual hiring rate, or Chinese employment; the EP self-employment column is not available and cannot be treated as 0."
+              "Evidence gap: this round did not obtain causal measurements of generative AI adoption, productivity, substitution, or employment for this occupation, and the ledger retrieval and daily report are editorial candidates. The ILO introduction extended abstract and the NIST brief are background only, and the full index or occupational mapping was not read, so it is not concluded from a gap that on-site responsibility will never be replaced. The U.S. 53-6031 occupation had 102,400 jobs in 2025 and is projected at 106,300 in 2035, growing 3.8% from 2025 to 2035 (about 4% according to O*NET, average), a net gain of 3,900, and about 12,900 openings per year. Openings include growth and replacements and are not the net gain, an individual hiring rate, or Chinese employment; the EP self-employment column is not available and cannot be treated as 0. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.18",
@@ -32704,6 +32707,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/49-2092.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Fuel and fluid supply | Confirm specifications first | Verify the fuel type and fluid specifications against the vehicle or boat manual, fill to the specified level, check tire pressure and all fluid levels, and note what was added and how much. — 0/100; weight=1/3; automotive-and-watercraft-service-attendants.profile.responsibilities-block.1[0]",
+                  "Inspection and minor repair | According to the actual task scope | Officially this includes adjusting brakes, replacing spark plugs and oil filters, and tire repair and replacement; the specific tool procedures and personnel conditions should be verified separately, and whole-system repair ability is not inferred from the occupation name. — 25/100; weight=1/3; automotive-and-watercraft-service-attendants.profile.responsibilities-block.1[1]",
+                  "Sales and cashiering | Make the accounts checkable | Take the part by model and install the accessory, price it, collect payment, make change and issue a receipt, compile the daily fuel, oil, and accessory sales report, and reconcile cash and receipts at shift handover. — 75/100; weight=1/3; automotive-and-watercraft-service-attendants.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37604,7 +37624,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37932,15 +37952,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Automotive and Watercraft Service Attendants",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 53-6031.00 · Job Zone 1–2 · Little preparation",
@@ -37991,7 +38023,7 @@
       "text": "Automotive and Watercraft Service Attendants"
     }
   },
-  "source_content_sha256": "174dfef9b334115b94926443a2bfcfb68f9c5c4e69667347a4d4707aa198a186",
+  "source_content_sha256": "afcc5fe5d3e059e62a1605aa56539c3df727a2398d42848c7de91f67bf2f4ebb",
   "subject": {
     "canonical_slug": "automotive-and-watercraft-service-attendants",
     "name": "Automotive and Watercraft Service Attendants",

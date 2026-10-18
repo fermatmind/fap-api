@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24293,7 +24296,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: existing sources provide no credible proportion of sheet metal workers replaced by AI. Generative AI may help with drawing explanations, material lists, nesting ideas, or record drafts; shearing and bending, joining, installation, dimensional inspection, and on-site safety depend on equipment, materials, and trained personnel."
+              "Insufficient evidence: existing sources provide no credible proportion of sheet metal workers replaced by AI. Generative AI may help with drawing explanations, material lists, nesting ideas, or record drafts; shearing and bending, joining, installation, dimensional inspection, and on-site safety depend on equipment, materials, and trained personnel. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "sheet-metal-workers.ai-impact.ai-impact-table.18",
@@ -32237,6 +32240,23 @@
                 "publisher": "U.S. Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/hazfinder/text-version/manufacturing"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Read and review approved sheet metal part drawings and sheet specifications. — 50/100; weight=1/3; sheet-metal-workers.ai-impact.ai-impact-table.95[0]",
+                  "Fabricate thin metal sheets. — 0/100; weight=1/3; sheet-metal-workers.ai-impact.ai-impact-table.103[0]",
+                  "Join and assemble sheet metal parts. — 0/100; weight=1/3; sheet-metal-workers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37145,7 +37165,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37414,15 +37434,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Sheet Metal Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Sheet Metal Workers · Drawing reading and measurement · Cutting and bending",
@@ -37473,7 +37505,7 @@
       "text": "Sheet Metal Workers"
     }
   },
-  "source_content_sha256": "63904f126d40c736e969a2537168380b68cba6accd6c31fd68d905c8462d7241",
+  "source_content_sha256": "2c8e52062f9b4773332524047acfd8f8d214e8d1489893400ae35599a7e81dce",
   "subject": {
     "canonical_slug": "sheet-metal-workers",
     "name": "Sheet Metal Workers",

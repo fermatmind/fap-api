@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24321,7 +24324,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial candidates: retrieval, draft lecture topics, draft econometric code, and record organization can be tested on approved materials; the O*NET software profile is not equal to GenAI deployment. The denominator is all unique U.S. postings across occupations in 2025 as Hot, with Office2% and Excel1%, and the remaining 9 items were not given and are not filled in as 0. There is no adoption/efficiency/net employment evidence for this occupation; ILO exposure is not layoffs, the UNESCO teacher competency framework is not Chinese law, and NIST governance is not institutional authorization. Ministry of Education Order No. 40 applies to scientific research and related activities at higher education institutions: the school is the prevention and handling body, and the academic committee investigates/determines according to law; teachers guide students on academic norms and review theses when necessary, and a personal or AI plagiarism check score cannot be used for direct determination. Reports are handled by the designated receiving department, and personnel who contact the materials keep confidentiality; investigation, defense, determination, handling, and review follow the procedures. The specific rules for course grading/examination cheating are verified separately, and the research measures cannot be generalized to all grade disputes."
+              "Editorial candidates: retrieval, draft lecture topics, draft econometric code, and record organization can be tested on approved materials; the O*NET software profile is not equal to GenAI deployment. The denominator is all unique U.S. postings across occupations in 2025 as Hot, with Office2% and Excel1%, and the remaining 9 items were not given and are not filled in as 0. There is no adoption/efficiency/net employment evidence for this occupation; ILO exposure is not layoffs, the UNESCO teacher competency framework is not Chinese law, and NIST governance is not institutional authorization. Ministry of Education Order No. 40 applies to scientific research and related activities at higher education institutions: the school is the prevention and handling body, and the academic committee investigates/determines according to law; teachers guide students on academic norms and review theses when necessary, and a personal or AI plagiarism check score cannot be used for direct determination. Reports are handled by the designated receiving department, and personnel who contact the materials keep confidentiality; investigation, defense, determination, handling, and review follow the procedures. The specific rules for course grading/examination cheating are verified separately, and the research measures cannot be generalized to all grade disputes. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31904,6 +31907,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/25-1062.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Verify the program of study and course objectives and write and revise the syllabus and teaching calendar and prepare lecture notes and cases and problem sets and datasets — 75/100; weight=1/3; actors.display.ai_impact_table.tasks.1.task[0]",
+                  "Lecture according to the syllabus and organize classroom discussion and group exercises and adjust according to the students' foundation — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
+                  "Conduct economic research and write papers and monographs and keep up with the literature and academic conferences — 75/100; weight=1/3; actors.display.ai_impact_table.tasks.5.task[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37173,7 +37193,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37435,15 +37455,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Postsecondary economics teachers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Economics courses · teaching and research · assessment and academic service",
@@ -37494,7 +37526,7 @@
       "text": "Postsecondary economics teachers"
     }
   },
-  "source_content_sha256": "2d91e761f2b7c7ae94d00a01e40fe2e56c74116a2bd4ef645d72d293f4c51f0a",
+  "source_content_sha256": "0cc62e7a10c1a9840c7ee89d56aa3d0f41e294606e2f67ccdbb514daaada77f0",
   "subject": {
     "canonical_slug": "economics-teachers-postsecondary",
     "name": "Postsecondary economics teachers",

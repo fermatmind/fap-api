@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -7607,7 +7610,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial: verify whether search, log organizing and paper rehearsal improve tasks; no measured field adoption, efficiency or wage causality for this occupation has been obtained; simulators and control software are not necessarily generative AI. The 2025 Lightcast top recruitment list for this occupation in the US shows Excel, Office, Outlook and Windows, with no proportions provided and 0 not filled in; it does not measure generative AI adoption, field deployment or replacement rates."
+              "Editorial: verify whether search, log organizing and paper rehearsal improve tasks; no measured field adoption, efficiency or wage causality for this occupation has been obtained; simulators and control software are not necessarily generative AI. The 2025 Lightcast top recruitment list for this occupation in the US shows Excel, Office, Outlook and Windows, with no proportions provided and 0 not filled in; it does not measure generative AI adoption, field deployment or replacement rates. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.2",
@@ -9194,6 +9197,23 @@
                 "publisher": "Official source text",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/49-9096.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Read the lift plan and controlled load data and confirm the equipment configuration, load weight, radius and landing point. — 50/100; weight=1/3; crane-and-tower-operators.profile.responsibilities-block.1[0]",
+                  "Inspect the ground, machine attachments and cables and carry out maintenance within your duties; confirm the applicable signals and site isolation. US construction 1926.1419 normally has one person giving signals at a time, but anyone may give a stop or emergency stop signal. If communication is interrupted during an operation requiring signals, stop safely, restore communication, and continue only after the correct instruction has been given and understood; restricted visibility requires an appropriate signal arrangement and does not mean all blind lifts are prohibited. — 25/100; weight=1/3; crane-and-tower-operators.profile.responsibilities-block.2[0]",
+                  "Lift and land smoothly according to the manufacturer and controlled site procedures, and report and hand over necessary adjustments and repairs promptly; if an inspection reveals an abnormality, stop using the equipment and resume only after the fault and hazard have been eliminated. — 0/100; weight=1/3; crane-and-tower-operators.profile.responsibilities-block.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11587,7 +11607,7 @@
     ],
     "path": "/en/career/jobs/crane-and-tower-operators",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -11687,15 +11707,27 @@
         "source_refs": [
           "crane-wage-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Crane and tower crane operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Transportation and material moving · lifting and tower crane operation",
@@ -11746,7 +11778,7 @@
       "text": "Crane and tower crane operators"
     }
   },
-  "source_content_sha256": "f19be7d3eb65cd99c8da6750ff83f7f2f9ee3fa00400b1de09f57ca5ce9b57f7",
+  "source_content_sha256": "7ee1228ac831eb416e42806f36c969bbc8fa8ff8f357fae3301929d111c96467",
   "subject": {
     "canonical_slug": "crane-and-tower-operators",
     "name": "Crane and tower crane operators",

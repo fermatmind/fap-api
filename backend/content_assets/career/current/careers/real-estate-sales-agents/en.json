@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24795,7 +24798,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist in organizing public listing fields, client needs notes, showing schedules, and draft communications; there is currently no evidence that real estate sales agents will disappear entirely in a given year. Transaction authenticity, client authorization, and contract and fund milestones still need verification by authorized personnel. The ILO task exposure study measures potential impact and cannot be converted into an adoption rate for one institution or an individual's probability of unemployment."
+              "AI can assist in organizing public listing fields, client needs notes, showing schedules, and draft communications; there is currently no evidence that real estate sales agents will disappear entirely in a given year. Transaction authenticity, client authorization, and contract and fund milestones still need verification by authorized personnel. The ILO task exposure study measures potential impact and cannot be converted into an adoption rate for one institution or an individual's probability of unemployment. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "real-estate-sales-agents.ai-impact.ai-impact-table.18",
@@ -32854,6 +32857,23 @@
                 "publisher": "World Economic Forum",
                 "scope": "contextual",
                 "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/in-full/"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Client needs｜Interview about budget, area, purpose, timing, and hard requirements.｜Output an anonymized needs card that separates what the client says from confirmed conditions. — 25/100; weight=1/3; real-estate-sales-agents.profile.responsibilities-block.1[1]",
+                  "Listing matching and showings｜Screen listings, arrange times, and record doubts on site.｜Output a comparison table and showing notes, without guaranteeing transaction eligibility or loan approval. — 50/100; weight=1/3; real-estate-sales-agents.profile.responsibilities-block.1[2]",
+                  "Offers and negotiation｜Submit offers or bids within the actually authorized scope and record both parties' replies.｜Output a version table of conditions and do not treat oral bargaining as a signed contract. — 25/100; weight=1/3; real-estate-sales-agents.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37762,7 +37782,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38031,15 +38051,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Real Estate Sales Agents",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Real estate sales agents · listing verification · client matching",
@@ -38090,7 +38122,7 @@
       "text": "Real Estate Sales Agents"
     }
   },
-  "source_content_sha256": "2c2202a5fcbe11b9b2b87a4848e3011b577ee7b351a5a7dd69cf032cdd3ab9bd",
+  "source_content_sha256": "80f5fa9037b5b990dcdf851e5c201c9d1d626c8b20e0776a42b2dbd9f49bfc2e",
   "subject": {
     "canonical_slug": "real-estate-sales-agents",
     "name": "Real Estate Sales Agents",

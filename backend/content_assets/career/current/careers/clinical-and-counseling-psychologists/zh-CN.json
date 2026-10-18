@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25103,7 +25106,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得本职业软件提速、实际AI采用或持续投入调查。任务结构支持提出检索、计分核对、记录整理与草稿试测建议，不能据软件目录推普及趋势、工资或岗位变化。"
+              "本轮未取得本职业软件提速、实际AI采用或持续投入调查。任务结构支持提出检索、计分核对、记录整理与草稿试测建议，不能据软件目录推普及趋势、工资或岗位变化。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "clinical-and-counseling-psychologists.ai-impact.ai-impact-table.18",
@@ -32709,6 +32712,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/25-1066.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "评估与诊断｜以访谈与测评形成可复核的个案概念｜通过观察与访谈与心理测验收集信息，评估对自己或他人造成伤害的风险，识别心理与情绪与行为问题并作出诊断（O*NET对应任务；美国口径，具体资格与权限另核）。 — 25/100; weight=1/3; clinical-and-counseling-psychologists.profile.responsibilities-block.1[0]",
+                  "干预与治疗｜实施多种方法并监测效果｜使用心理治疗与行为矫正与压力管理治疗与游戏治疗等方法，制定并实施个别化治疗计划并写明类型与频次与强度与时长，评估治疗效果与诊断的准确性与完整性并按需修正（O*NET对应任务；美国口径，具体资格与权限另核）。 — 25/100; weight=1/3; clinical-and-counseling-psychologists.profile.responsibilities-block.1[2]",
+                  "记录与文书｜把过程与判断写成可复核记录｜记录会谈与进展与建议与治疗计划，撰写来访者报告并保存必需文书（O*NET对应任务；美国口径，具体资格与权限另核）。 — 75/100; weight=1/3; clinical-and-counseling-psychologists.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37631,7 +37651,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38206,15 +38226,27 @@
         "source_refs": [
           "psych-nbs-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "临床与咨询心理学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · SI",
@@ -38265,7 +38297,7 @@
       "text": "临床与咨询心理学家"
     }
   },
-  "source_content_sha256": "878d947de795e0d0d8da960bd3b302b6e51bc42909abcec90d071c41daf8c6a3",
+  "source_content_sha256": "5b3cdff2346f937956f03c6ae80fe16ce81b0a119504df2fc223be8b15222c67",
   "subject": {
     "canonical_slug": "clinical-and-counseling-psychologists",
     "name": "临床与咨询心理学家",

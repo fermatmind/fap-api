@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24399,7 +24402,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with record organization and source retrieval; automated fingerprint systems can also offer candidate matches, but the two technologies are not the same kind of tool. NIST states that candidate results are still evaluated by identification personnel. The existing exposure research does not provide an overall displacement rate for this occupation and cannot prove that an agency has adopted it or that the position will disappear."
+              "AI can assist with record organization and source retrieval; automated fingerprint systems can also offer candidate matches, but the two technologies are not the same kind of tool. NIST states that candidate results are still evaluated by identification personnel. The existing exposure research does not provide an overall displacement rate for this occupation and cannot prove that an agency has adopted it or that the position will disappear. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.18",
@@ -32193,6 +32196,23 @@
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/25-4011.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Scene records｜photograph evidence and record the scene｜verify the evidence numbers and photo index, keep the original record, and do not fill in scene facts by inference. — 25/100; weight=1/3; police-identification-and-records-officers.profile.responsibilities-block.1[0]",
+                  "Authorized comparison｜classify and identify fingerprints within training and authorization｜use agency-approved systems and procedures, and distinguish candidate matches, review results, and cases that cannot yet be determined. — 75/100; weight=1/3; police-identification-and-records-officers.profile.responsibilities-block.1[2]",
+                  "Reports and explanations｜submit reports and explain the basis and limitations｜explain the work record and the scope of conclusions to supervisors, the laboratory, or the court, and accept review or questioning. — 75/100; weight=1/3; police-identification-and-records-officers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37098,7 +37118,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37370,15 +37390,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Police Identification and Records Officers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Evidence preservation · traceable records",
@@ -37429,7 +37461,7 @@
       "text": "Police identification and records officers: work tasks, evidence boundaries, and the entry path"
     }
   },
-  "source_content_sha256": "f6884ddf44f861d4dbd975519c199b9577d6311e8e2005b9920dee9245992749",
+  "source_content_sha256": "a91c96ae8555308e63169039f7775ccc24afbd16c844dd180ab566ed2a3a4218",
   "subject": {
     "canonical_slug": "police-identification-and-records-officers",
     "name": "Police Identification and Records Officers",

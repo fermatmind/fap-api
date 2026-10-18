@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -7583,7 +7586,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Based on investment research, valuation, trading and disclosure tasks, the editorial suggestion is to first trial assistance with data organization, scenario calculations and summary drafts using fictional materials. Generative AI risks involving errors, privacy and information integrity require review under the NIST framework; this is not an empirical finding of efficiency gains or adoption rates in this occupation. Fund decisions still follow specific institutional authorization; this page provides no replacement probability or timeline."
+              "Direct answer | Based on investment research, valuation, trading and disclosure tasks, the editorial suggestion is to first trial assistance with data organization, scenario calculations and summary drafts using fictional materials. Generative AI risks involving errors, privacy and information integrity require review under the NIST framework; this is not an empirical finding of efficiency gains or adoption rates in this occupation. Fund decisions still follow specific institutional authorization; this page provides no replacement probability or timeline. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "investment-fund-managers.ai-impact.ai-impact-table.2",
@@ -8779,6 +8782,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/13-1141.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Research valuations and develop investment strategies — 75/100; weight=1/3; investment-fund-managers.profile.responsibilities-block.4[0]",
+                  "Execute transactions and monitor risk — 50/100; weight=1/3; investment-fund-managers.profile.responsibilities-block.4[0]",
+                  "Review performance and prepare compliance disclosures — 75/100; weight=1/3; investment-fund-managers.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -10926,7 +10946,7 @@
     ],
     "path": "/en/career/jobs/investment-fund-managers",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wages",
       "direction-comparison": "Comparison of adjacent occupations",
       "fit": "Fit signals",
@@ -11051,15 +11071,27 @@
         "source_refs": [
           "source-pack-onet-summary"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Investment Fund Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of tasks to AI (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Investment Fund Managers · Authorization, fiduciary and disclosure boundaries",
@@ -11110,7 +11142,7 @@
       "text": "Career assessment for investment fund managers: work, entry and risk boundaries"
     }
   },
-  "source_content_sha256": "b04a69b393f6be6917ca991ffbaa80ebbae0c7e0c58b5da82080117395a54787",
+  "source_content_sha256": "72771424ab7ceba1c622fdfb3a9a382bbe93a7b4049e7b0eba94359c70d184a2",
   "subject": {
     "canonical_slug": "investment-fund-managers",
     "name": "Investment Fund Managers",

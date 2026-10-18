@@ -26,6 +26,9 @@
       "fact:education-profile": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "mapped"
       },
@@ -12922,6 +12925,23 @@
                 "publisher": "Corresponds to the official / professional body",
                 "scope": "exact",
                 "url": "https://www.aanp.org/news-feed/aanp-and-npcb-your-membership-association-or-your-certification-board"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Collect history and record symptoms and physical examination findings — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Organize test results and past records to support diagnosis — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Prescribe and monitor medications and identify adverse reactions — 25/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13109,7 +13129,7 @@
             }
           }
         ],
-        "answer": "Digital tools can assist with medical record summaries, test result organization, and patient education material preparation, but diagnosis, prescribing, result release, and anomaly escalation must still be re-checked by responsible personnel.",
+        "answer": "Digital tools can assist with medical record summaries, test result organization, and patient education material preparation, but diagnosis, prescribing, result release, and anomaly escalation must still be re-checked by responsible personnel. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 29-1171.00 detailed occupation profile (tasks and work context)",
@@ -14870,7 +14890,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15143,15 +15163,27 @@
           "bls-ooh",
           "mohrss-wage"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Nurse Practitioners",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Diagnosing and treating acute, episodic, or chronic illness",
@@ -15202,7 +15234,7 @@
       "text": "Nurse Practitioners occupation profile | tasks, wages, admission, and boundaries"
     }
   },
-  "source_content_sha256": "b8a0b611fb6aafd6d65cdaa92b6327d786f12f32616fa6ae70acfbfa723d6b4c",
+  "source_content_sha256": "4663f64a4fc949bc221376e8a28c0f4c4b0ff80d160ef7a1964ad75b3fe5b001",
   "subject": {
     "canonical_slug": "nurse-practitioners",
     "name": "Nurse Practitioners",

@@ -20,6 +20,9 @@
       "fact:data-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:interest-code": {
         "status": "pending_mapping"
       },
@@ -13872,6 +13875,23 @@
                 "publisher": "Corresponds to the official issuing body",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/nuclear-technicians.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Operate and test nuclear equipment according to procedure — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Measure radiation and calculate dose and operating factors — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Collect and test air, water, gas, or solid samples — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -14059,7 +14079,7 @@
             }
           }
         ],
-        "answer": "Tools can assist with ledger organization, procedure retrieval, and report compilation, but the credibility judgment of readings, the conclusions of equipment testing, decontamination handling, and isolation confirmation are still completed by personnel who have passed training assessment and are within the authorized scope.",
+        "answer": "Tools can assist with ledger organization, procedure retrieval, and report compilation, but the credibility judgment of readings, the conclusions of equipment testing, decontamination handling, and isolation confirmation are still completed by personnel who have passed training assessment and are within the authorized scope. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 19-4051.00 occupation profile",
@@ -15810,7 +15830,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -16048,15 +16068,27 @@
           "nbs-wages",
           "onet-education"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Nuclear Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Nuclear equipment operation, surveillance testing, and maintenance",
@@ -16107,7 +16139,7 @@
       "text": "Nuclear Technicians"
     }
   },
-  "source_content_sha256": "e81b5595b59bc6a347039618844d3caee884a05465003f182377384b031509e8",
+  "source_content_sha256": "82260d008b618159219776ec0d07885f6f06ef578a6f5290a32a058194b9cd96",
   "subject": {
     "canonical_slug": "nuclear-technicians",
     "name": "Nuclear Technicians",

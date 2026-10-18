@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24828,7 +24831,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可探索月报摘要、指标核对、预算表查漏和伙伴沟通草稿；真实服务、参与者资格、预算批准与专业判断仍由有权限人员负责。证据不足：未核得本职业独立GenAI采用率、替代率或因果就业数据；BLS7.2%增长不能归因AI。"
+              "可探索月报摘要、指标核对、预算表查漏和伙伴沟通草稿；真实服务、参与者资格、预算批准与专业判断仍由有权限人员负责。证据不足：未核得本职业独立GenAI采用率、替代率或因果就业数据；BLS7.2%增长不能归因AI。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "social-and-community-service-managers.ai-impact.ai-impact-table.18",
@@ -32802,6 +32805,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/13-1151.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "项目与预算｜制定目标、进度、预算及参与者政策。｜审批权依董事会、主管或合同，不凭职位名签支出。 — 75/100; weight=1/3; social-and-community-service-managers.profile.responsibilities-block.1[1]",
+                  "团队与志愿者｜招募、培训、排班并评价服务人员。｜管理职责与社工、咨询或医疗专业资格分开。 — 25/100; weight=1/3; social-and-community-service-managers.profile.responsibilities-block.1[2]",
+                  "伙伴与转介｜协调社区机构、资助方和服务衔接。｜转介建议不证明对方已接收或服务完成。 — 25/100; weight=1/3; social-and-community-service-managers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37710,7 +37730,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37983,15 +38003,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "社会与社区服务经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "社区需求 · 项目预算 · 团队与服务质量",
@@ -38042,7 +38074,7 @@
       "text": "社会与社区服务经理"
     }
   },
-  "source_content_sha256": "d2e5a3587eabe1746a10a3329f8a285a9957b0db9ff84a27c4752de6b98786cd",
+  "source_content_sha256": "b14349d4a4752640df5519938d23d011a4db7cd82318688889d5747379e5e180",
   "subject": {
     "canonical_slug": "social-and-community-service-managers",
     "name": "社会与社区服务经理",

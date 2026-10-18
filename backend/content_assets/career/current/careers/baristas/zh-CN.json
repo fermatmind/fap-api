@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24705,7 +24708,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：可评估点单文字、库存摘要、菜单说明与记录草稿等辅助用途，先实测准确性、数据权限及人工复核。证据不足：本次已核来源未给出咖啡师AI采用率、生产率或替代结果。饮品制作、温度异常和过敏原处置仍按现场规程。"
+              "编辑建议：可评估点单文字、库存摘要、菜单说明与记录草稿等辅助用途，先实测准确性、数据权限及人工复核。证据不足：本次已核来源未给出咖啡师AI采用率、生产率或替代结果。饮品制作、温度异常和过敏原处置仍按现场规程。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.18",
@@ -32609,6 +32612,23 @@
                 "publisher": "U.S. Food and Drug Administration",
                 "scope": "jurisdiction_specific",
                 "url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies?lv=true"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "接单与确认｜让服务有依据｜接收顾客订单并复述确认，把订单转达给其他同事准备，说明可行范围与等待时间。 — 75/100; weight=1/3; baristas.profile.responsibilities-block.1[0]",
+                  "饮品制作与出品｜让产出有规格｜按配方与标准程序称量与研磨与萃取，制作并出品热的或冷的饮品与菜单项目。 — 0/100; weight=1/3; baristas.profile.responsibilities-block.1[1]",
+                  "收银与门店运营｜让经营可运转｜收取与处理顾客付款、订购与接收与补货并整理陈列，在授权范围内回应顾客要求并记录异常。 — 75/100; weight=1/3; baristas.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37509,7 +37529,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37877,15 +37897,27 @@
         "source_refs": [
           "ep-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "咖啡师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 35-3023.01 · Job Zone 1–2 · 入门准备低 · Bright Outlook",
@@ -37936,7 +37968,7 @@
       "text": "咖啡师"
     }
   },
-  "source_content_sha256": "3d9da35fca2756cb70d4e3dfd596baea72b6ef24495fb6c4c830b61280623430",
+  "source_content_sha256": "c600cccc056d04ebb1a8a2371c2a77433393a1879bade0537a91d38b498c871c",
   "subject": {
     "canonical_slug": "baristas",
     "name": "咖啡师",

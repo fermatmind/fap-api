@@ -65,6 +65,9 @@
       "fact:current-parent-wage-p90": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25007,7 +25010,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本细分职业AI采用率、效率或替代效果。编辑用例包括查询草稿、图表建议、问数与摘要；任务暴露、流程自动化及就业数量分开，不能据此预测岗位消失。实际权限按组织核。"
+              "证据不足：未取得本细分职业AI采用率、效率或替代效果。编辑用例包括查询草稿、图表建议、问数与摘要；任务暴露、流程自动化及就业数量分开，不能据此预测岗位消失。实际权限按组织核。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "business-intelligence-analysts.ai-impact.ai-impact-table.18",
@@ -32462,6 +32465,23 @@
                 "publisher": "国家统计局人口和就业统计司",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/hd/lyzx/zxgk/202411/t20241115_1957457.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "指标与口径｜把业务问题转成可验证的指标定义、粒度与分母口径，并记录假设与数据来源｜可复核的指标定义与口径说明。 — 50/100; weight=1/3; business-intelligence-analysts.profile.responsibilities-block.1[0]",
+                  "取数与质量检查｜编写并复核查询、核对数据血缘与权限、执行质量测试并解释异常｜查询脚本与质量检查记录。 — 75/100; weight=1/3; business-intelligence-analysts.profile.responsibilities-block.1[1]",
+                  "建模与可视化｜建立指标与维度模型、设计报表与仪表板并检查可用性与不误导性｜经复核的报表与仪表板。 — 75/100; weight=1/3; business-intelligence-analysts.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37384,7 +37404,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37861,15 +37881,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "分析师商业",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 15-2051.01 · 指标定义与口径 / 查询与质量检查 / 报表与仪表板 / 监控与支持",
@@ -37920,7 +37952,7 @@
       "text": "分析师商业"
     }
   },
-  "source_content_sha256": "09671809d79ed06144f9696aa45d0913c1dcaf8a056c3b5ca76c130671f9793f",
+  "source_content_sha256": "fa1a2c0af4d86c898cae35577d49adad2a12389c6ca57036801d184e841587fd",
   "subject": {
     "canonical_slug": "business-intelligence-analysts",
     "name": "分析师商业",

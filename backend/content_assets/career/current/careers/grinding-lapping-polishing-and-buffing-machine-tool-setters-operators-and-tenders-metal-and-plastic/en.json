@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25115,7 +25118,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no precise generative AI exposure level, actual robot adoption / substitution rate, or wage causality data for 51-4033.00 has been obtained; no moderately high, clearly substituted, or whole-occupation-will-not-be-replaced is published. The current BLS OOH discussion of the metal and plastic machine worker group covers CNC / robots saving labor and demand changes, which is a projection explanation, not actual adoption statistics for this precise occupation; ILO2025 is an ISCO task index, no precise SOC mapping for this page has been established, and it is not said to be non-covering. Equipment automation and generative tools are assessed separately, and the following are editorial assistance candidates whose specific quality / cost / authorization must be measured. U.S. 51-4033.00 sets up, operates, or tends grinding-related machine tools to remove stock or burrs from metal / plastic, sharpen edges and corners, and polish / hone / grind. 18 tasks, 14 core and 4 supplementary: measuring and laying out with precision measuring tools 87, inspecting finished products 83 / adjusting controls 83, observing 82, starting up / reading drawings / hoisting and clamping 81 each, indexing control / tool selection 80 each, mounting / grinding operation 79 each, indexing calculation 78, repairing or replacing parts or notifying engineering 75, lubricating and cooling 71; supplementary inventory 81 / air cylinders 79 / shims 74 / threading and feeding 70. Importance is not frequency or a safety license; setup and operation may be divided, and batch work is not a defining requirement. BLS current 2025—2035 employment for the precise 51-4033 goes from 68.5→61.1 thousand, a change of −10.8%, a net change of −7.4 thousand, and an average of 4.5 thousand annual openings from replacements; the figures are each rounded independently, and EP includes self-employment (1.9% in 2025) and differs from OEWS wages. Projections are not actual hiring, individual outcomes, or AI causality. The current O*NET already shows 2025 employment of 68,500, a declining category for 2025—2035, and an average of 4,500 annual openings, consistent with the current BLS period."
+              "Insufficient evidence: no precise generative AI exposure level, actual robot adoption / substitution rate, or wage causality data for 51-4033.00 has been obtained; no moderately high, clearly substituted, or whole-occupation-will-not-be-replaced is published. The current BLS OOH discussion of the metal and plastic machine worker group covers CNC / robots saving labor and demand changes, which is a projection explanation, not actual adoption statistics for this precise occupation; ILO2025 is an ISCO task index, no precise SOC mapping for this page has been established, and it is not said to be non-covering. Equipment automation and generative tools are assessed separately, and the following are editorial assistance candidates whose specific quality / cost / authorization must be measured. U.S. 51-4033.00 sets up, operates, or tends grinding-related machine tools to remove stock or burrs from metal / plastic, sharpen edges and corners, and polish / hone / grind. 18 tasks, 14 core and 4 supplementary: measuring and laying out with precision measuring tools 87, inspecting finished products 83 / adjusting controls 83, observing 82, starting up / reading drawings / hoisting and clamping 81 each, indexing control / tool selection 80 each, mounting / grinding operation 79 each, indexing calculation 78, repairing or replacing parts or notifying engineering 75, lubricating and cooling 71; supplementary inventory 81 / air cylinders 79 / shims 74 / threading and feeding 70. Importance is not frequency or a safety license; setup and operation may be divided, and batch work is not a defining requirement. BLS current 2025—2035 employment for the precise 51-4033 goes from 68.5→61.1 thousand, a change of −10.8%, a net change of −7.4 thousand, and an average of 4.5 thousand annual openings from replacements; the figures are each rounded independently, and EP includes self-employment (1.9% in 2025) and differs from OEWS wages. Projections are not actual hiring, individual outcomes, or AI causality. The current O*NET already shows 2025 employment of 68,500, a declining category for 2025—2035, and an average of 4,500 annual openings, consistent with the current BLS period. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.18",
@@ -32630,6 +32633,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor, Employment and Training Administration",
                 "scope": "51-4033.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/51-4033.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Machine setup — 25/100; weight=1/3; grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.99[0]",
+                  "Operation and tending — 25/100; weight=1/3; grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.103[0]",
+                  "Inspection and defect handling — 25/100; weight=1/3; grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37561,7 +37581,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37714,15 +37734,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Grinder · tasks, deliverables, and responsibility boundaries",
@@ -37773,7 +37805,7 @@
       "text": "Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders, Metal and Plastic"
     }
   },
-  "source_content_sha256": "2b2c1b6b19f68facd10732432b574880cc8c7959f281ccdbdd05d55699fe8de3",
+  "source_content_sha256": "5a8906cbd398f4174c0a330315b4fac3d62b97d271372b85d6d4e3acd1825419",
   "subject": {
     "canonical_slug": "grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
     "name": "Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders, Metal and Plastic",

@@ -53,6 +53,9 @@
       "fact:current-exact-openings": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25039,7 +25042,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "FDA医院心脏遥测分类列持续自动分析ECG、异常检测与报警，同时要求现场合格人员审查和立即通知响应者；另有2026-09-03获授予的ACS AI ECG模型登记。仅证明相应技术/监管事实，不能推出所有AI或生成式AI能力、准确率、机构部署率及岗位替代率。 工具辅助候选与实际自动执行范围分开判断，责任存在不能推出操作都手动或个人岗位必保留。"
+              "FDA医院心脏遥测分类列持续自动分析ECG、异常检测与报警，同时要求现场合格人员审查和立即通知响应者；另有2026-09-03获授予的ACS AI ECG模型登记。仅证明相应技术/监管事实，不能推出所有AI或生成式AI能力、准确率、机构部署率及岗位替代率。 工具辅助候选与实际自动执行范围分开判断，责任存在不能推出操作都手动或个人岗位必保留。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.18",
@@ -32794,6 +32797,23 @@
                 "publisher": "费马测试",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/29-2031.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "检查执行｜核对医嘱与患者身份与检查项目，向患者解释并准备与摆放体位，贴放电极或探头并采集波形或影像｜检查记录与波形或影像数据。 — 25/100; weight=1/3; cardiovascular-technologists-and-technicians.profile.responsibilities-block.1[0]",
+                  "患者监测与安全｜在检查过程中持续观察心电图与生命体征并识别伪差与异常，维持无菌区与防护要求｜监测与异常记录。 — 50/100; weight=1/3; cardiovascular-technologists-and-technicians.profile.responsibilities-block.1[1]",
+                  "记录与报告流转｜获取并记录患者身份与病史与检查结果，转录与录入并分发报告供医师判读｜报告转录与分发记录。 — 75/100; weight=1/3; cardiovascular-technologists-and-technicians.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37722,7 +37742,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38151,15 +38171,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "心血管技师与技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 29-2031.00 · 检查执行 / 患者监测与安全 / 记录与质控",
@@ -38210,7 +38242,7 @@
       "text": "心血管技师与技术员"
     }
   },
-  "source_content_sha256": "671f4b4205be883969bb518233810191ca51e38f1e2409007599e73c382d5f3c",
+  "source_content_sha256": "bfc258e7a2c8940a2eca7fe36de1f78acc14bd2f2dcef760a8c5f391384bbf6a",
   "subject": {
     "canonical_slug": "cardiovascular-technologists-and-technicians",
     "name": "心血管技师与技术员",

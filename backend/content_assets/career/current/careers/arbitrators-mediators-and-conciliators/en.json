@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24776,7 +24779,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The SVAMC2024 first edition of arbitration AI guidelines is industry advice, applicable according to the agreement of the parties and/or adoption by the tribunal or institution, and does not reduce statutory or other mandatory rules; it addresses tool limitations, confidentiality, verification of output and evidence integrity, the arbitrator not delegating personal adjudication duties and due process. It cannot prove the adoption rate for 23-1022, cross-task effects, wage and employment causality or Chinese statutory authorization; search, summaries and ledgers are editorial assistance checks, and the occupational projection is not attributed to AI."
+              "The SVAMC2024 first edition of arbitration AI guidelines is industry advice, applicable according to the agreement of the parties and/or adoption by the tribunal or institution, and does not reduce statutory or other mandatory rules; it addresses tool limitations, confidentiality, verification of output and evidence integrity, the arbitrator not delegating personal adjudication duties and due process. It cannot prove the adoption rate for 23-1022, cross-task effects, wage and employment causality or Chinese statutory authorization; search, summaries and ledgers are editorial assistance checks, and the occupational projection is not attributed to AI. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.18",
@@ -32586,6 +32589,23 @@
                 "publisher": "Silicon Valley Arbitration & Mediation Center",
                 "scope": "contextual",
                 "url": "https://svamc.org/wp-content/uploads/SVAMC-AI-Guidelines-First-Edition.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Case material review and fact organisation｜Fixing the materials and the issues first｜Reviewing claim applications, contracts, certificates, birth or death certificates and medical or employer records and similar materials, communicating with the disputing parties to clarify the issues and identifying each party's real needs and interests. — 75/100; weight=1/3; arbitrators-mediators-and-conciliators.profile.responsibilities-block.1[0]",
+                  "Chairing hearings and mediation meetings｜Advancing under procedures while staying neutral｜Chairing hearings to obtain information or evidence and ruling on objections, motions and the admissibility of evidence, or chairing mediation meetings and using mediation techniques to promote communication and understanding. — 25/100; weight=1/3; arbitrators-mediators-and-conciliators.profile.responsibilities-block.1[2]",
+                  "Awards and document writing｜Issuing reviewable documents to standard｜Writing written opinions or awards stating the facts found, the basis and the reasons, writing case records and procedural documents, and preparing court or testimony materials as required. — 50/100; weight=1/3; arbitrators-mediators-and-conciliators.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37487,7 +37507,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of occupation directions",
       "fit": "Occupational fit guide",
@@ -37973,15 +37993,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Arbitrators, Mediators, and Conciliators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Dispute handling: material review and application of the law · chairing hearings and mediation · awards or settlement agreements and case files",
@@ -38032,7 +38064,7 @@
       "text": "Arbitrators, Mediators, and Conciliators"
     }
   },
-  "source_content_sha256": "0f6c3645f53d5dbdc0b9e4d2d323835d056ff5a43e0b468d9d9c0ab8d184f723",
+  "source_content_sha256": "ece17ad5ddeb048a42783435d351955b650ed6e4c9e00a0070a3ab44c1aaeb25",
   "subject": {
     "canonical_slug": "arbitrators-mediators-and-conciliators",
     "name": "Arbitrators, Mediators, and Conciliators",

@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25310,7 +25313,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not obtained a separate generative AI exposure rating, adoption rate or causal employment effect for 17-1022.01. Tasks support testing data organization, code and report drafts; assess traditional adjustment software, automation and GenAI separately. The 17 software skills come from deduplicated U.S. recruitment advertisements in 2025 associated with 17-1022.01; all shares are marked unavailable and cannot be treated as 0. They include ArcGIS, AutoCAD, MicroStation and SQL; mentions are not usage prevalence, AI adoption rates or universal requirements. People remain responsible for datums, observation checks and quality conclusions under professional standards; retaining responsibility does not guarantee unchanged future job counts."
+              "Insufficient evidence: this page has not obtained a separate generative AI exposure rating, adoption rate or causal employment effect for 17-1022.01. Tasks support testing data organization, code and report drafts; assess traditional adjustment software, automation and GenAI separately. The 17 software skills come from deduplicated U.S. recruitment advertisements in 2025 associated with 17-1022.01; all shares are marked unavailable and cannot be treated as 0. They include ArcGIS, AutoCAD, MicroStation and SQL; mentions are not usage prevalence, AI adoption rates or universal requirements. People remain responsible for datums, observation checks and quality conclusions under professional standards; retaining responsibility does not guarantee unchanged future job counts. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "geodetic-surveyors.ai-impact.ai-impact-table.18",
@@ -32843,6 +32846,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "SOC17-1022 parent group",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/surveyors.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Plan or direct surveys and establish control networks and observation plans — 50/100; weight=1/3; geodetic-surveyors.ai-impact.ai-impact-table.99[0]",
+                  "Survey large areas of the Earth's surface using satellite observations, GNSS, LIDAR, leveling and related methods — 25/100; weight=1/3; geodetic-surveyors.ai-impact.ai-impact-table.103[0]",
+                  "Calculate precise horizontal and vertical positions of points, perform adjustment and compute control-network coordinates — 75/100; weight=1/3; geodetic-surveyors.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37779,7 +37799,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impacts",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37934,15 +37954,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Geodetic surveyors",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Geodetic surveyors · Tasks, deliverables and responsibility boundaries",
@@ -37993,7 +38025,7 @@
       "text": "Geodetic surveyors"
     }
   },
-  "source_content_sha256": "289e529bda31ec9751106b85434a1d12008e5157f6c328452fefb00cad83dded",
+  "source_content_sha256": "ed9d0d32d3a653ff98cfb105b83e248146f70b2be84211e7614a1bb0b977715e",
   "subject": {
     "canonical_slug": "geodetic-surveyors",
     "name": "Geodetic surveyors",

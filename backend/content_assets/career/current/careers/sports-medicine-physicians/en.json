@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24948,7 +24951,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: empirical evidence of sports medicine physicians' actual AI adoption effects and net job substitution was not obtained. Fictional document formats can be explored, but real professional judgment, licensure and institutional authority must still be met."
+              "Insufficient evidence: empirical evidence of sports medicine physicians' actual AI adoption effects and net job substitution was not obtained. Fictional document formats can be explored, but real professional judgment, licensure and institutional authority must still be met. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "sports-medicine-physicians.ai-impact.ai-impact-table.18",
@@ -34242,6 +34245,23 @@
                 "publisher": "American Medical Association",
                 "scope": "contextual",
                 "url": "https://www.ama-assn.org/system/files/ama-ai-principles.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Professional assessment | Take a history and assess sports-related injury and illness. | This page does not teach examination or diagnostic methods. — 25/100; weight=1/3; sports-medicine-physicians.profile.responsibilities-block.1[1]",
+                  "Treatment and prevention | Form treatment, prevention and activity-related professional recommendations. | Do not approve an athlete's return to play based on paper status. — 25/100; weight=1/3; sports-medicine-physicians.profile.responsibilities-block.1[3]",
+                  "Records and learning | Maintain professional records and continue learning. | A document draft does not substitute for the physician's own review and signature. — 75/100; weight=1/3; sports-medicine-physicians.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39176,7 +39196,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -39489,15 +39509,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Sports medicine physicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Physician professional judgment · Jurisdictional practice",
@@ -39548,7 +39580,7 @@
       "text": "Sports medicine physicians"
     }
   },
-  "source_content_sha256": "f0c181d004200f7407e51c6c836738f5fda3a2d86362b18e28211edfe54e65bd",
+  "source_content_sha256": "7b072c3148a7af72fa0c7cc693c60e79963984e57d7308de5bec2d1f8310c152",
   "subject": {
     "canonical_slug": "sports-medicine-physicians",
     "name": "Sports medicine physicians",

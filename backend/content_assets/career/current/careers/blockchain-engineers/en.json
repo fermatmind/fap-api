@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25197,7 +25200,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial reasoning from the tasks: tools can assist code and test drafts and log and document organization; the materials read this round give no causal data on overall replacement, adoption, or time savings for this occupation, so perpetual non-replacement cannot be inferred. Protocol, permission, security, and release responsibility are still verified by the actual jurisdiction and institutional authorization, and task exposure, adoption rates, and employment counts are kept separate."
+              "Editorial reasoning from the tasks: tools can assist code and test drafts and log and document organization; the materials read this round give no causal data on overall replacement, adoption, or time savings for this occupation, so perpetual non-replacement cannot be inferred. Protocol, permission, security, and release responsibility are still verified by the actual jurisdiction and institutional authorization, and task exposure, adoption rates, and employment counts are kept separate. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.18",
@@ -32913,6 +32916,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1241.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Protocol and design | Design and validate cryptographic protocols, and design blockchain design patterns that make transactions secure, transparent, and tamper-resistant | Reviewable protocol and design pattern descriptions. — 50/100; weight=1/3; blockchain-engineers.profile.responsibilities-block.1[1]",
+                  "Implementation and data model | Write maintainable code using object-oriented principles, update client and server applications, and design and implement data repositories and logging | Code and data models that others can reproduce and review. — 75/100; weight=1/3; blockchain-engineers.profile.responsibilities-block.1[2]",
+                  "Testing and risk assessment | Test the security and performance of the infrastructure, run peer-to-peer network tests, and assess threats such as untested code and unprotected keys | A testing and assessment report including coverage and limitation statements. — 75/100; weight=1/3; blockchain-engineers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37817,7 +37837,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38085,15 +38105,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Blockchain engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 15-1299.07 · Bright Outlook · security and release responsibility",
@@ -38144,7 +38176,7 @@
       "text": "Blockchain engineers"
     }
   },
-  "source_content_sha256": "5264491bc5eee55771e650907ec259eb0cae8df05eab53bdb6f06b2c4c3b4111",
+  "source_content_sha256": "93e3f8d279bc0b64065877abce3c83702c66bf1a33784727c1130461cb2a8d90",
   "subject": {
     "canonical_slug": "blockchain-engineers",
     "name": "Blockchain engineers",

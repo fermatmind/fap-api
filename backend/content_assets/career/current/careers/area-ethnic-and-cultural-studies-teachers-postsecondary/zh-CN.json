@@ -41,6 +41,9 @@
       "fact:cs-us-openings": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24713,7 +24716,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业全国AI采用率或整体替代因果研究。讲义初稿、检索转写、评分辅助是编辑试验，核来源、课程目标、偏差和权限；不能保证永不替代。BLS现行25-1062本职业预测：2025年14,300个岗位、2035年14,700个，2025—2035增长2.7%（OOH取整3%），取整净增约400个，年均约1,000个职业空缺。职业预测不是AI就业因果证据。 UNESCO教师AI能力框架简介提供15能力、五维及Acquire/Deepen/Create三级培训参考，非本职业采用/实测效果或法律。本窗口同日已读官方简介，未读完整框架PDF。"
+              "证据不足：未取得本职业全国AI采用率或整体替代因果研究。讲义初稿、检索转写、评分辅助是编辑试验，核来源、课程目标、偏差和权限；不能保证永不替代。BLS现行25-1062本职业预测：2025年14,300个岗位、2035年14,700个，2025—2035增长2.7%（OOH取整3%），取整净增约400个，年均约1,000个职业空缺。职业预测不是AI就业因果证据。 UNESCO教师AI能力框架简介提供15能力、五维及Acquire/Deepen/Create三级培训参考，非本职业采用/实测效果或法律。本窗口同日已读官方简介，未读完整框架PDF。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "area-ethnic-and-cultural-studies-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32349,6 +32352,23 @@
                 "publisher": "UNESCO",
                 "scope": "contextual",
                 "url": "https://www.unesco.org/en/articles/ai-competency-framework-teachers"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "教学与课程建设｜讲清课程目标｜准备讲义大纲与作业，讲授地区族群文化课程，引导讨论并修订课程。 — 50/100; weight=1/3; area-ethnic-and-cultural-studies-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "学生指导｜支持学生成长｜答疑、学业职业建议，监督本科研究生的教学实习和研究。 — 25/100; weight=1/3; area-ethnic-and-cultural-studies-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "研究与发表｜形成可核成果｜开展本领域研究并发表，阅读资料会议交流保持学科跟进。 — 75/100; weight=1/3; area-ethnic-and-cultural-studies-teachers-postsecondary.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37251,7 +37271,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37579,15 +37599,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "高校地区、民族和文化研究教师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "高校教学与研究：讨论与课程 · 考核与反馈 · 学生指导 · 研究与学术服务",
@@ -37638,7 +37670,7 @@
       "text": "高校地区、民族和文化研究教师"
     }
   },
-  "source_content_sha256": "6e08d003bf205991800796a368fb2234b25f801238863b8acbf88c270fc5783f",
+  "source_content_sha256": "87c92f6ff0071184f4edc54cb6781d37d58993f4e1d4dd285461588cc56b8659",
   "subject": {
     "canonical_slug": "area-ethnic-and-cultural-studies-teachers-postsecondary",
     "name": "高校地区、民族和文化研究教师",

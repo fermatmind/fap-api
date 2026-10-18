@@ -8,6 +8,9 @@
       "fact:china-technical-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25484,7 +25487,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: comparable AI adoption rate, task effect and employment causal data for traffic technicians, so the score stays missing. Record organisation, format, charts and handover drafts are editorial trial suggestions; automated counting, text generation and signal control are different capabilities, and data quality, missing segments, site permission and engineering review are still checked by people. The United States 53-6041 standalone grows 4.0% over 2025—2035, with a ten-year net increase of about 300 people and 900 average annual openings including replacements, not an independent AI effect."
+              "Insufficient evidence: comparable AI adoption rate, task effect and employment causal data for traffic technicians, so the score stays missing. Record organisation, format, charts and handover drafts are editorial trial suggestions; automated counting, text generation and signal control are different capabilities, and data quality, missing segments, site permission and engineering review are still checked by people. The United States 53-6041 standalone grows 4.0% over 2025—2035, with a ten-year net increase of about 300 people and 900 average annual openings including replacements, not an independent AI effect. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "traffic-technicians.display.ai_impact_table.answer",
@@ -33251,6 +33254,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Record collection | counting and measurement | Collect traffic volume, speed or delay data according to the approved procedure, and record the equipment and source. — 25/100; weight=1/3; traffic-technicians.display.responsibilities_block.02[0]",
+                  "Quality review | gaps and duplicates | Check time continuity, classification, counting anomalies and reasons for corrections, and keep the original values. — 75/100; weight=1/3; traffic-technicians.display.responsibilities_block.03[0]",
+                  "Organisation and analysis | charts and reports | Prepare traceable statistics and notes to help engineers understand the data. — 75/100; weight=1/3; traffic-technicians.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38516,7 +38536,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38703,15 +38723,27 @@
         "source_refs": [
           "china-wage-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Traffic technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET53-6041.00 traffic technician",
@@ -38762,7 +38794,7 @@
       "text": "Traffic technicians"
     }
   },
-  "source_content_sha256": "509f25dc9b4623322c0976f8e32ca93df366918124db0b5390e8cccbf9375990",
+  "source_content_sha256": "2889a749469c4eed56b0a0ea8b6363b8b044b77de8dd3ea3624a7dd43156bd76",
   "subject": {
     "canonical_slug": "traffic-technicians",
     "name": "Traffic technicians",

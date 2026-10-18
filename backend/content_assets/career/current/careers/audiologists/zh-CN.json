@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24662,7 +24665,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得本职业生成AI采用率、产品效果或就业因果测量。预约、病历整理、数据统计、参数记录与随访提示为编辑试验候选。ILO指数介绍/扩展摘要与NIST简介仅跨职业背景，未读全文或本职业映射，不能证明全部临床责任永不被替代。"
+              "证据不足：本轮未取得本职业生成AI采用率、产品效果或就业因果测量。预约、病历整理、数据统计、参数记录与随访提示为编辑试验候选。ILO指数介绍/扩展摘要与NIST简介仅跨职业背景，未读全文或本职业映射，不能证明全部临床责任永不被替代。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "audiologists.ai-impact.ai-impact-table.18",
@@ -32746,6 +32749,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-1042.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "接诊与病史｜先让信息完整｜采集听力与平衡相关病史、既往干预与用药情况，记录主诉与功能区需求，并说明检测流程与注意事项。 — 25/100; weight=1/3; audiologists.profile.responsibilities-block.1[0]",
+                  "检测与质控｜编辑核对建议｜对照实际设备说明书与检测规程记录条件结果；本页未取得完整检测与复测规程，不提供操作批准。中国医疗器械条例现为2024修正：41条二类经营备案有法定免备案情形，42条三类经营许可；具体产品分类另核。48—52条按说明书操作规范使用、重复使用消毒、一次性不得重用、需要校准维护的设备依说明书并记录，发现安全隐患立即停用通知检修，未达安全标准不得继续用。 — 25/100; weight=1/3; audiologists.profile.responsibilities-block.1[1]",
+                  "判读与转诊｜按真实临床规程｜结合病史检测记录不确定性、核实际转诊分工；ASHA转诊指南提示突发或波动听损等需尽快寻求耳鼻喉科评估；本页未提供完整急转规程，不能统一要求先重复检测而延误。 — 50/100; weight=1/3; audiologists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37646,7 +37666,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37974,15 +37994,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "听力学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 29-1181.00 · Job Zone Five · 博士为主",
@@ -38033,7 +38065,7 @@
       "text": "听力学家"
     }
   },
-  "source_content_sha256": "9260b5dc4b92e8994be7db596d2dc051bbd0491b600015874311b2465587101f",
+  "source_content_sha256": "b0c00abf73e9c2c0362bde4e90f56afe148fe4bd84da631379e79b4bf1f017de",
   "subject": {
     "canonical_slug": "audiologists",
     "name": "听力学家",

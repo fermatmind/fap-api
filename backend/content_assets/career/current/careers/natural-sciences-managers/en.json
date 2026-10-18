@@ -14,6 +14,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "mapped"
       },
@@ -12694,6 +12697,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/management/natural-sciences-managers.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Set research directions, stage objectives, and annual plans — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Compile and execute project budgets, and monitor funding and equipment use — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Recruit, train, guide, and evaluate researcher performance — 25/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -12881,7 +12901,7 @@
             }
           }
         ],
-        "answer": "Task exposure is not equal to adoption: materials retrieval, progress organizing, data aggregation, and report drafting can be assisted, but direction trade-offs, resource allocation, personnel evaluation, and compliance judgments still rest with responsible managers.",
+        "answer": "Task exposure is not equal to adoption: materials retrieval, progress organizing, data aggregation, and report drafting can be assisted, but direction trade-offs, resource allocation, personnel evaluation, and compliance judgments still rest with responsible managers. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET occupation profile (11-9121.00)",
@@ -14653,7 +14673,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -14849,15 +14869,27 @@
         "source_refs": [
           "worker-cn-authority-boundary"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Natural sciences managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Research project planning and budgeting",
@@ -14908,7 +14940,7 @@
       "text": "Natural sciences managers"
     }
   },
-  "source_content_sha256": "131215e2f187c2382b29494e667c8d20be1c25c90f9b243f1fa6ea91b6ca7bc2",
+  "source_content_sha256": "ca82b0484fd6feb591331d62fb216c24ff8544cf77eee933f08e8b14f366d675",
   "subject": {
     "canonical_slug": "natural-sciences-managers",
     "name": "Natural sciences managers",

@@ -8,6 +8,9 @@
       "fact:cn-science-context-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25407,7 +25410,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET定义材料组织、术语规范和技术修订任务；不能由任务档案推出模型效果。证据不足：本页FermatMind任务级AI暴露评分未建立，不填分数。"
+              "O*NET定义材料组织、术语规范和技术修订任务；不能由任务档案推出模型效果。证据不足：本页FermatMind任务级AI暴露评分未建立，另列编辑估算分数。"
             ]
           },
           "id": "technical-writers.ai-impact.ai-impact-table.9",
@@ -25437,7 +25440,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分草稿能力、真实采用、文档效果与就业结果。O*NET定任务，BLS提供美国预测解释，NIST定通用生成风险；本页的文档检查步骤是编辑建议，未有单职业准确率或节时测量。"
+              "先分草稿能力、真实采用、文档效果与就业结果。O*NET定任务，BLS提供美国预测解释，NIST定通用生成风险；本页的文档检查步骤是编辑建议，未有单职业准确率或节时测量。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "technical-writers.display.ai_impact_table.answer",
@@ -32805,6 +32808,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "研究｜读者与规格｜确定任务、读者前提及当前产品版本，研究样品规范并向技术人员澄清矛盾。 — 50/100; weight=1/3; technical-writers.display.responsibilities_block.01[0]",
+                  "组织｜步骤与术语｜按顺序清晰简洁安排说明，保持入口名称、对象和术语一致。 — 75/100; weight=1/3; technical-writers.display.responsibilities_block.02[0]",
+                  "表达｜帮助与图示｜编写操作维护材料或在线帮助，选择能支持理解的图示并核来源用途。 — 75/100; weight=1/3; technical-writers.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38043,7 +38063,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38204,15 +38224,27 @@
         "source_refs": [
           "nbs-science-context-context-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "技术写作者",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 27-3042.00 精确职业口径",
@@ -38263,7 +38295,7 @@
       "text": "技术写作者"
     }
   },
-  "source_content_sha256": "c3727d8bc5a6a7c8e1a26a5ee2fb4f5147c8a01468b122c11d02898c601ebb05",
+  "source_content_sha256": "5fdc8f856ac364c26ed923db27cb01dd3acd80940343a1a5c4caad1fceaf9533",
   "subject": {
     "canonical_slug": "technical-writers",
     "name": "技术写作者",

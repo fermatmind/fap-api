@@ -8,6 +8,9 @@
       "fact:entry-path": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "pending_mapping"
       },
@@ -7590,7 +7593,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial candidate, adoption or efficiency for this occupation not verified: test data cleaning code, variable notes, charts, and report drafts on approved materials and check item by item against the raw data."
+              "Editorial candidate, adoption or efficiency for this occupation not verified: test data cleaning code, variable notes, charts, and report drafts on approved materials and check item by item against the raw data. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "economists.ai-impact.ai-impact-table.2",
@@ -9066,6 +9069,23 @@
                 "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/15-2041.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Research data in fields such as finance, labor, and agriculture. — 75/100; weight=1/3; economists.profile.responsibilities-block.1[0]",
+                  "Use mathematical models and statistical techniques to explain phenomena and predict trends. — 75/100; weight=1/3; economists.profile.responsibilities-block.1[1]",
+                  "Assess policy impacts and provide consulting on economic relationships. — 50/100; weight=1/3; economists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11497,7 +11517,7 @@
     ],
     "path": "/en/career/jobs/economists",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -11597,15 +11617,27 @@
         "source_refs": [
           "onet-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Economists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Economic research and policy evaluation · statistical and econometric methods · reports and consulting",
@@ -11656,7 +11688,7 @@
       "text": "Economists"
     }
   },
-  "source_content_sha256": "81b73e574397cb20ce4759502458c4223e29e0dfbd7d41f8a1b3d3ecaf26ae4a",
+  "source_content_sha256": "4ef91ec7312d33a9004a7975a27701f06dbccc09c523705fb7b0c520b968da08",
   "subject": {
     "canonical_slug": "economists",
     "name": "Economists",

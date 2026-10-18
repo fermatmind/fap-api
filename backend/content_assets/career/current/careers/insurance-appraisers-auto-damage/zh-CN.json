@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:ia-cn-all-wage": {
         "status": "pending_mapping"
       },
@@ -7545,7 +7548,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜图像识别和生成式工具可辅助照片整理、损伤候选识别、零件检索与报告草稿，但事故因果、隐蔽损伤、维修可行性、保单责任和最终授权仍需要可审计证据与人工复核；AI 输出不得直接成为未经授权的赔付结论。任务暴露不等于整岗自动化，也不等于已普遍采用；本页不给出替代概率或时间表。"
+              "直接回答｜图像识别和生成式工具可辅助照片整理、损伤候选识别、零件检索与报告草稿，但事故因果、隐蔽损伤、维修可行性、保单责任和最终授权仍需要可审计证据与人工复核；AI 输出不得直接成为未经授权的赔付结论。任务暴露不等于整岗自动化，也不等于已普遍采用；本页不给出替代概率或时间表。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "insurance-appraisers-auto-damage.ai-impact.ai-impact-table.2",
@@ -8708,6 +8711,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/13-1032.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "检查记录车辆损伤 — 25/100; weight=1/3; insurance-appraisers-auto-damage.profile.responsibilities-block.4[0]",
+                  "按工时零件资料估价 — 75/100; weight=1/3; insurance-appraisers-auto-damage.profile.responsibilities-block.4[0]",
+                  "澄清维修差异并提交报告 — 50/100; weight=1/3; insurance-appraisers-auto-damage.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11134,7 +11154,7 @@
     ],
     "path": "/zh/career/jobs/insurance-appraisers-auto-damage",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11222,15 +11242,27 @@
         "source_refs": [
           "ia-updates"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "保险评估师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "保险评估师 · 损伤证据、估价与责任边界",
@@ -11281,7 +11313,7 @@
       "text": "保险评估师职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "a4cfd521bb584dd054cd34704ca23f0640574f37edae96a287ce6a31ab2a5140",
+  "source_content_sha256": "1e00e3d79744fab133d03d50eb83687c1ccd230dde9bed80b39600efdb494de9",
   "subject": {
     "canonical_slug": "insurance-appraisers-auto-damage",
     "name": "保险评估师",

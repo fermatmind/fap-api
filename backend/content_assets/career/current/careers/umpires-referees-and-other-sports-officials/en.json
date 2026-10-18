@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25445,7 +25448,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First distinguish text assistance for rules and score checks, the offside technology used in a specific football event, and employment outcomes. The FIFA deployment scope and the IFAB human final decision have been verified, but they cannot be used to infer national adoption, time saving, accuracy rates, or replacement percentages; this page has no reviewable FermatMind task score, so no score is filled in."
+              "First distinguish text assistance for rules and score checks, the offside technology used in a specific football event, and employment outcomes. The FIFA deployment scope and the IFAB human final decision have been verified, but they cannot be used to infer national adoption, time saving, accuracy rates, or replacement percentages; the external materials used here supply no measured FermatMind task score, so a separate editorial estimate is shown. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "umpires-referees-and-other-sports-officials.display.ai_impact_table.answer",
@@ -32794,6 +32797,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "During competition | Observation and on-site judgment | Choose an observation position, identify rule violations, and apply the corresponding penalty or score under the rules. — 25/100; weight=1/3; umpires-referees-and-other-sports-officials.display.responsibilities_block.03[0]",
+                  "During competition | Signals and communication | Give signals to participants and other officials, explain the rules and decisions, and coordinate the progress of the event. — 25/100; weight=1/3; umpires-referees-and-other-sports-officials.display.responsibilities_block.04[0]",
+                  "Verification | Timing, scoring, and calculation | Check results, times, and records, and check calculation accuracy before publication. — 75/100; weight=1/3; umpires-referees-and-other-sports-officials.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37960,7 +37980,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38114,15 +38134,27 @@
           "employer",
           "ratify"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Officials, referees, and other sports officials",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 27-2023.00 exact occupation basis",
@@ -38173,7 +38205,7 @@
       "text": "Officials, referees, and other sports officials"
     }
   },
-  "source_content_sha256": "1cf0e29e1a56d1214706b83032e268298754925b70fe8499744b0dab41d13d1a",
+  "source_content_sha256": "8906cfbab546d6a29d70f810a675ed79a7a2fe6488731348beb841ccdc3e7762",
   "subject": {
     "canonical_slug": "umpires-referees-and-other-sports-officials",
     "name": "Officials, referees, and other sports officials",

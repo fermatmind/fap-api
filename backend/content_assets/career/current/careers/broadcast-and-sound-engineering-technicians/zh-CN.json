@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25125,7 +25128,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI与自动化可能改变记录、素材处理及设备运行。BLS群体页指出技术进步可能使广播、灯光与音响系统用更少技术员运作，同时视频会议与数字标牌增加音视频技术员需求；这些分工不同，不能概括成职业永不被替代。证据不足：未取得27-4011职业级AI采用率或因AI减少岗位的比例。"
+              "AI与自动化可能改变记录、素材处理及设备运行。BLS群体页指出技术进步可能使广播、灯光与音响系统用更少技术员运作，同时视频会议与数字标牌增加音视频技术员需求；这些分工不同，不能概括成职业永不被替代。证据不足：未取得27-4011职业级AI采用率或因AI减少岗位的比例。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "broadcast-and-sound-engineering-technicians.ai-impact.ai-impact-table.18",
@@ -32545,6 +32548,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/17-3024.01"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "搭建与逐段测试｜按信号流程搭建并逐段测试通道，确认接口、电平与备份路径｜逐段测试通过的通道清单与测试记录。 — 0/100; weight=1/3; broadcast-and-sound-engineering-technicians.profile.responsibilities-block.1[1]",
+                  "现场值守与操作｜值守调音台与切换台，控制灯光与声音，按流程切换视频源｜可复现的运行参数与值守记录。 — 25/100; weight=1/3; broadcast-and-sound-engineering-technicians.profile.responsibilities-block.1[2]",
+                  "录制与素材管理｜按要求录制与编辑素材，压缩、数字化并规范存储｜素材清单与存储位置说明。 — 75/100; weight=1/3; broadcast-and-sound-engineering-technicians.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37446,7 +37466,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37714,15 +37734,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "音频与视频技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "音频与视频技术员 · O*NET-SOC 27-4011.00",
@@ -37773,7 +37805,7 @@
       "text": "音频与视频技术员"
     }
   },
-  "source_content_sha256": "814deccce00ed08d0b0fc2c1f73c30bfec3c644f8d14428cf27e9a0f51c1f7c7",
+  "source_content_sha256": "3523d23d3b5f49a98d5f7bf0161b68d616d97b50257a34a89fc888d3acf12622",
   "subject": {
     "canonical_slug": "broadcast-and-sound-engineering-technicians",
     "name": "音频与视频技术员",

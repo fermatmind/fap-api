@@ -53,6 +53,9 @@
       "fact:current-parent-openings": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25098,7 +25101,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Market price comparison, contract summaries, and records are editorial assisted scenarios; this round obtained no precise AI replacement ratio or effect data for farm products purchasing, and task exposure, automation, and the parent occupation projection are kept separate."
+              "Market price comparison, contract summaries, and records are editorial assisted scenarios; this round obtained no precise AI replacement ratio or effect data for farm products purchasing, and task exposure, automation, and the parent occupation projection are kept separate. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "buyers-and-purchasing-agents-farm-products.ai-impact.ai-impact-table.18",
@@ -32902,6 +32905,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/13-1021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Purchasing and bargaining｜Review orders and demand, inquire and compare quotes, and negotiate production or purchase contracts with farmers｜Purchase contracts and orders. — 50/100; weight=1/3; buyers-and-purchasing-agents-farm-products.profile.responsibilities-block.1[0]",
+                  "Quality and grading｜Inspect or test crops and products, estimate value and determine grade, and identify disease, pests, and quality anomalies｜Acceptance and grading records. — 25/100; weight=1/3; buyers-and-purchasing-agents-farm-products.profile.responsibilities-block.1[1]",
+                  "Records and reporting｜Maintain business transaction and product inventory records and report data to the company or government agencies as needed｜Transaction and inventory records and reports. — 75/100; weight=1/3; buyers-and-purchasing-agents-farm-products.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37809,7 +37829,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -38238,15 +38258,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Farm products buyers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 13-1021.00 · farm products purchasing / contract negotiation / quality and grading / transport, storage, and records",
@@ -38297,7 +38329,7 @@
       "text": "Farm products buyers"
     }
   },
-  "source_content_sha256": "41e224cf63154ac255b0e71625401d8b4f9ad098ea89e0cb3a5f39d5607cee21",
+  "source_content_sha256": "e8675d7d8beb5503c20a6bb719f255bd48e485de4999234717003e9370a73a8d",
   "subject": {
     "canonical_slug": "buyers-and-purchasing-agents-farm-products",
     "name": "Farm products buyers",

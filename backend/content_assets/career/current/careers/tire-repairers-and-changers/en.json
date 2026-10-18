@@ -8,6 +8,9 @@
       "fact:china-service-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25577,7 +25580,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: reviewable task scores, national AI adoption and net employment causal results for this occupation. The case checked is limited to licence plate and customer record matching, and repair safety still requires professional confirmation; the BLS2025—2035 overall growth of 3.4%, the ten-year net increase of about 3800 people and the average annual 12900 openings that includes replacements are component indicators and do not represent an AI effect."
+              "Insufficient evidence: reviewable task scores, national AI adoption and net employment causal results for this occupation. The case checked is limited to licence plate and customer record matching, and repair safety still requires professional confirmation; the BLS2025—2035 overall growth of 3.4%, the ten-year net increase of about 3800 people and the average annual 12900 openings that includes replacements are component indicators and do not represent an AI effect. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "tire-repairers-and-changers.display.ai_impact_table.answer",
@@ -33052,6 +33055,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Mounting and dismounting｜wheel and tire replacement｜Carry out tire service according to the specific vehicle, equipment and training, and do not let paper practice stand in for operating preparation. — 0/100; weight=1/3; tire-repairers-and-changers.display.responsibilities_block.02[0]",
+                  "Balancing｜testing and counterweight tasks｜O*NET lists balancing machines and counterweight tasks; this page does not specify equipment settings or counterweight operating methods. — 25/100; weight=1/3; tire-repairers-and-changers.display.responsibilities_block.03[0]",
+                  "Repair｜tire condition and handling｜Tasks such as checking defects and carrying out repairs follow a professional process, and this page is not used to judge whether damage can be repaired. — 25/100; weight=1/3; tire-repairers-and-changers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38291,7 +38311,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Occupational fit guide",
@@ -38452,15 +38472,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Tire repairers and changers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "The United States 49-3093.00 tire service scope",
@@ -38511,7 +38543,7 @@
       "text": "Tire repairers and changers"
     }
   },
-  "source_content_sha256": "4df4f498292251d03c0ba01dedac6cd8fece9588b10f958180e758405507254e",
+  "source_content_sha256": "61cf8d9d8d059568f39a6053fee9115f5b8ea71115a7c6ea566b44148a867312",
   "subject": {
     "canonical_slug": "tire-repairers-and-changers",
     "name": "Tire repairers and changers",

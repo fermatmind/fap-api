@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24395,7 +24398,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Existing research does not support inferring that retail loss prevention specialists will be wholly replaced by AI. Software can assist with discrepancy tables, surveillance indexing, and incident drafts; on-site safety, fact checking, personal contact, and investigative authorization remain with people. Neither the ILO task exposure research nor the broader-occupation-group BLS employment projection is an AI adoption or layoff rate for this occupation."
+              "Existing research does not support inferring that retail loss prevention specialists will be wholly replaced by AI. Software can assist with discrepancy tables, surveillance indexing, and incident drafts; on-site safety, fact checking, personal contact, and investigative authorization remain with people. Neither the ILO task exposure research nor the broader-occupation-group BLS employment projection is an AI adoption or layoff rate for this occupation. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "retail-loss-prevention-specialists.ai-impact.ai-impact-table.18",
@@ -32163,6 +32166,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inventory discrepancy checking｜Compare sales, returns, transfers, and count records to identify anomalous items and periods.｜Produce a discrepancy list with sources and to-check items, and do not label a discrepancy as theft. — 75/100; weight=1/3; retail-loss-prevention-specialists.profile.responsibilities-block.1[0]",
+                  "Store patrols｜Check how procedures are carried out at entrances and exits, shelves, warehouses, and high-loss areas.｜Record visible risks, locations, and times, and eliminate personal danger first. — 25/100; weight=1/3; retail-loss-prevention-specialists.profile.responsibilities-block.1[1]",
+                  "Safety handling and escalation｜Act per employer protocols when suspected theft, conflict, or violence risk arises.｜Notify authorized personnel and necessary emergency services, and do not expand detention or investigative authority on your own. — 25/100; weight=1/3; retail-loss-prevention-specialists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37065,7 +37085,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37342,15 +37362,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Retail Loss Prevention Specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Merchandise loss investigation · inventory discrepancy checking",
@@ -37401,7 +37433,7 @@
       "text": "Retail Loss Prevention Specialists"
     }
   },
-  "source_content_sha256": "7eb0fb57d93581594f0240d414c4c28e397a244053d297ab7e4611fc04988c68",
+  "source_content_sha256": "a16753a682328b2c34155560707db19d722587341b58af5fa2e785d7576e9698",
   "subject": {
     "canonical_slug": "retail-loss-prevention-specialists",
     "name": "Retail Loss Prevention Specialists",

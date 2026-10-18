@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24472,7 +24475,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑分析：可在获准的数据范围内试用工具整理文献、制作数据分析草稿或修复方案初稿，并逐项回查。O*NET提供任务依据，ILO 2023论文评估潜在任务暴露；两者未测量环境修复规划师实际采用率、效果或裁员。本页不提供未建立可复核量表的任务评分。"
+              "编辑分析：可在获准的数据范围内试用工具整理文献、制作数据分析草稿或修复方案初稿，并逐项回查。O*NET提供任务依据，ILO 2023论文评估潜在任务暴露；两者未测量环境修复规划师实际采用率、效果或裁员。本页不提供未建立可复核量表的任务评分。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "environmental-restoration-planners.ai-impact.ai-impact-table.18",
@@ -31877,6 +31880,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "恢复目标与指标设定 — 50/100; weight=1/3; environmental-restoration-planners.ai-impact.ai-impact-table.95[0]",
+                  "GIS 与生态分析 — 75/100; weight=1/3; environmental-restoration-planners.ai-impact.ai-impact-table.103[0]",
+                  "现场检查与实施指导 — 25/100; weight=1/3; environmental-restoration-planners.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36785,7 +36805,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37054,15 +37074,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "环境修复规划师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "环境修复规划师 · 官方职业范围",
@@ -37113,7 +37145,7 @@
       "text": "环境修复规划师"
     }
   },
-  "source_content_sha256": "7389a11f0ba5d95f4fdbe1339dc185d745529f4064fe1f3ff9d721e3c9a7a5f3",
+  "source_content_sha256": "c9a790bbee72c294dcba4c85b59832fdc8b7bc70e9e68839da5e091a771ca4ab",
   "subject": {
     "canonical_slug": "environmental-restoration-planners",
     "name": "环境修复规划师",

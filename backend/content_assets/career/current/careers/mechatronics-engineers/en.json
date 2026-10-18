@@ -11,6 +11,9 @@
       "fact:cn-national-nonprivate-wage": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7550,7 +7553,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial judgment: AI can be trialed for logic drafting, code, and data organization in isolated simulations. Outputs must be validated against original requirements and abnormal conditions; O*NET task lists are not evidence of adoption. Safety and delivery responsibilities must be checked against the specific role and authorization."
+              "Editorial judgment: AI can be trialed for logic drafting, code, and data organization in isolated simulations. Outputs must be validated against original requirements and abnormal conditions; O*NET task lists are not evidence of adoption. Safety and delivery responsibilities must be checked against the specific role and authorization. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "mechatronics-engineers.ai-impact.ai-impact-table.2",
@@ -8672,6 +8675,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Control logic and programs — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "System commissioning and validation — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Fault analysis and correction — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11051,7 +11071,7 @@
     ],
     "path": "/en/career/jobs/mechatronics-engineers",
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Salaries",
       "direction-comparison": "Adjacent Occupation Comparison",
       "fit": "Fit Signals",
@@ -11151,15 +11171,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Mechatronics Engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Automation and Control Systems",
@@ -11210,7 +11242,7 @@
       "text": "Mechatronics Engineers: Work, US Wages, and Entry Paths | FermatMind"
     }
   },
-  "source_content_sha256": "6ef79763557bb78267ea5b31bbd475570629fc3fd1bd9fedc94f2edd505e03b6",
+  "source_content_sha256": "1314c252ac1c359cb4aef03b5cf80be5108de6ca80a7f5219b2e3762a14bf386",
   "subject": {
     "canonical_slug": "mechatronics-engineers",
     "name": "Mechatronics Engineers",

@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24364,7 +24367,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Document and route candidate assistance can be discussed, but no substitution date can be given and no efficiency gain can be claimed. Navigation and dispatch optimization, code scanning, electronic payment, on-board diagnostics, driver assistance, and generative AI are different systems; the actual vehicle model, operating authorization, and results must be verified. The O*NET time pressure and error consequence items are context answers and do not prove adoption of any system or job loss."
+              "Document and route candidate assistance can be discussed, but no substitution date can be given and no efficiency gain can be claimed. Navigation and dispatch optimization, code scanning, electronic payment, on-board diagnostics, driver assistance, and generative AI are different systems; the actual vehicle model, operating authorization, and results must be verified. The O*NET time pressure and error consequence items are context answers and do not prove adoption of any system or job loss. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31988,6 +31991,23 @@
                 "publisher": "ILO",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Route execution｜follow regulations and drive the route｜follow traffic laws and established traffic and transport procedures, read maps and follow written or verbal geographic guidance, and drive vehicles with a capacity under three tons to move materials between designated destinations. — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Loading, unloading, and verification｜verify against documents and load/unload｜verify the loaded contents against the shipping documents and load and unload the truck, van, or car, confirming the number of pieces and markings before handover. — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "Maintaining logs and cargo and bill records is core, while using and maintaining on-board weighing and measuring tools is supplementary; specific statutory records are verified per business. — 75/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37436,7 +37456,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37707,15 +37727,27 @@
         "source_refs": [
           "r5-nbs-transport"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Light truck drivers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Transport and delivery · vehicle inspection · cargo and document verification",
@@ -37766,7 +37798,7 @@
       "text": "Light truck drivers"
     }
   },
-  "source_content_sha256": "1ec7adc2333353875cf5f83ccb3beba27954bbcf718b37c77763fce61ad698df",
+  "source_content_sha256": "66ba281b88ee31579e2a7a377fc866712b08b2c06ae7aae14094918718a3c3bc",
   "subject": {
     "canonical_slug": "delivery-truck-drivers-and-driver-sales-workers",
     "name": "Light truck drivers",

@@ -14,6 +14,9 @@
       "fact:employment-current-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24301,7 +24304,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The editors propose tool opportunities to be verified based on tasks: parameter recording, trend alerts, batch traceability and program control; routine automation does not automatically count as generative AI and must be checked against real equipment inputs, performance and safety conditions. On-site status, product sampling, blockage clearing and assembly and exception responsibility are verified per position; there is no adoption rate or headcount and wage causal data for this occupation."
+              "The editors propose tool opportunities to be verified based on tasks: parameter recording, trend alerts, batch traceability and program control; routine automation does not automatically count as generative AI and must be checked against real equipment inputs, performance and safety conditions. On-site status, product sampling, blockage clearing and assembly and exception responsibility are verified per position; there is no adoption rate or headcount and wage causal data for this occupation. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31707,6 +31710,23 @@
                 "publisher": "OSHA",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/control-hazardous-energy"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Monitoring and adjustment｜read instruments and maintain specified conditions｜read control panel scales and pressure, temperature, flow and current instruments, adjust controllers and valves to maintain feed rate, product consistency, temperature, air pressure and machine speed, and adjust equipment speed and air intake when necessary. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Loading and removal｜weigh and load and remove on time｜weigh or meter materials according to process requirements and load them into tanks, hoppers and similar equipment, put containers in or take them out, monitor the freezing and cooling process and remove at specified times. — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "Sampling and testing｜sample to test product characteristics｜sample and test characteristics such as specific gravity, acidity and sugar content according to the method, using instruments such as hydrometers, pH meters or refractometers, and enter the results on the record sheet. — 0/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36911,7 +36931,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37122,15 +37142,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Cooling and freezing equipment operators and tenders",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Production and equipment · cooling, freezing and low-temperature processing",
@@ -37181,7 +37213,7 @@
       "text": "Cooling and freezing equipment operators and tenders"
     }
   },
-  "source_content_sha256": "ae81078de3803f2d98cb44ddc463e2765a40cd86cef8d3d2500302baed0716f9",
+  "source_content_sha256": "c8bcb7671715b947d8d0b87d89633bde0e122718d25f319e629c26e74f6b7ced",
   "subject": {
     "canonical_slug": "cooling-and-freezing-equipment-operators-and-tenders",
     "name": "Cooling and freezing equipment operators and tenders",

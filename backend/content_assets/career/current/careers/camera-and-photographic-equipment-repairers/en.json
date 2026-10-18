@@ -53,6 +53,9 @@
       "fact:current-us-industry-gap-3": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24943,7 +24946,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round obtained no substitution-rate or disappearance-year evidence; retrieval, data, inspection, diagnosis, and part of adjustment may all be affected by technology, and lack of evidence cannot be used to prove that automation is impossible."
+              "This round obtained no substitution-rate or disappearance-year evidence; retrieval, data, inspection, diagnosis, and part of adjustment may all be affected by technology, and lack of evidence cannot be used to prove that automation is impossible. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "camera-and-photographic-equipment-repairers.ai-impact.ai-impact-table.18",
@@ -32609,6 +32612,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/49-9061.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Drawing reading and diagnosis | read engineering drawings, diagrams, instructions, and specifications, and determine the fault scope by combining the equipment with developed film or laboratory reports | fault diagnosis and criteria confirmation records. — 50/100; weight=1/3; camera-and-photographic-equipment-repairers.profile.responsibilities-block.1[0]",
+                  "Disassembly and condition records | use hand tools to disassemble equipment to reach faulty areas, recording appearance, part positions, and customer equipment settings before disassembly | disassembly and condition records. — 0/100; weight=1/3; camera-and-photographic-equipment-repairers.profile.responsibilities-block.1[1]",
+                  "Testing and calibration | use precision gauges to test performance, focus, aperture, mounts, and film transport mechanisms, and use timing instruments to calibrate light meters, shutters, and lens barrels | test and calibration data records. — 25/100; weight=1/3; camera-and-photographic-equipment-repairers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37515,7 +37535,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37948,15 +37968,27 @@
           "wages-current",
           "industry-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Camera and Photographic Equipment Repairers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page does not score it)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 49-9061.00 · disassembly and adjustment / testing and calibration / diagnosis and modification / reassembly and delivery",
@@ -38007,7 +38039,7 @@
       "text": "Camera and Photographic Equipment Repairers"
     }
   },
-  "source_content_sha256": "a66703e21adaa7e57c2b040f1e67460991778dc291f84f19d68e59fd5b7d0610",
+  "source_content_sha256": "7faee306cc94e0e1d1fbd57fb0173f2d1b871017779e3bc0ca831bca3f41e2d8",
   "subject": {
     "canonical_slug": "camera-and-photographic-equipment-repairers",
     "name": "Camera and Photographic Equipment Repairers",

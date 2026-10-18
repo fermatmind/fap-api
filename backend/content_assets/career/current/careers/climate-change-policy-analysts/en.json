@@ -89,6 +89,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24729,7 +24732,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round obtained tasks, recruiting software keywords and the parent occupation projection, but not AI adoption rates, investment trends or speed-up trials for climate policy posts. The following gives only testable directions and cannot be used to predict job numbers or income."
+              "This round obtained tasks, recruiting software keywords and the parent occupation projection, but not AI adoption rates, investment trends or speed-up trials for climate policy posts. The following gives only testable directions and cannot be used to predict job numbers or income. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "climate-change-policy-analysts.ai-impact.ai-impact-table.18",
@@ -32349,6 +32352,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/19-3094.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Research and analysis | collect and distil climate-related research and policy material | collect and review climate-related research from government agencies and laboratories and other organisations; analyse and distil climate-related research conclusions to provide to legislators and regulatory agencies and other stakeholders; study the policies and practices and procedures of climate or environmental management (corresponds to O*NET tasks seven, four and ten). — 75/100; weight=1/3; climate-change-policy-analysts.profile.responsibilities-block.1[0]",
+                  "Policy recommendations | propose policy or legislative recommendations for climate and environmental management | propose legislative recommendations for climate or environmental management; propose new or revised policies involving traditional and alternative fuel use and freight transport and other climate-related factors; and review existing policy or legislation to identify environmental impacts (corresponds to O*NET tasks five, two and eight). — 50/100; weight=1/3; climate-change-policy-analysts.profile.responsibilities-block.1[1]",
+                  "Written outputs | write research reports and briefs and testimony | write research reports and memoranda and briefs and testimony or other written material to explain environmental issues such as climate change to governments or environmental groups; write reports or academic papers to communicate research findings (corresponds to O*NET tasks three and eleven). — 75/100; weight=1/3; climate-change-policy-analysts.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37250,7 +37270,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37825,15 +37845,27 @@
         "source_refs": [
           "climate-nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Climate change policy analysts",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · IEC",
@@ -37884,7 +37916,7 @@
       "text": "Climate change policy analysts"
     }
   },
-  "source_content_sha256": "34b4041ae20599ba95f58456a928fe5dcaa7a375f4abd22ae8d7272974a38bd8",
+  "source_content_sha256": "ccc65fec4bf4b2d9dbd17b020f292ceffab10c938ffbb599d9a84c0c6076cf01",
   "subject": {
     "canonical_slug": "climate-change-policy-analysts",
     "name": "Climate change policy analysts",

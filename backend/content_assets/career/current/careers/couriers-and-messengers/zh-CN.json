@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24307,7 +24310,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑待验证机会：路线规划派单、电子面单状态通知、柜体及自助寄取；常规数字化不等GenAI，未取本岗采用率、节约量、编制或工资因果。中国未经用户同意不得代确认或投柜站，具体品类与确认方式依法核。"
+              "编辑待验证机会：路线规划派单、电子面单状态通知、柜体及自助寄取；常规数字化不等GenAI，未取本岗采用率、节约量、编制或工资因果。中国未经用户同意不得代确认或投柜站，具体品类与确认方式依法核。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31671,6 +31674,23 @@
                 "publisher": "全国人大常委会；国家网信办转载",
                 "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "规划路线｜安排省时顺序｜规划并遵循最省时的投递路线，兼顾收件时间窗与路况，减少空驶与重复往返。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "美国Core除文件包裹取送也含医疗记录标本及药品；具体品类运输条件与培训需按实际规则核，不由任务档案授予医疗操作权限。 — 0/100; weight=1/3; actors.display.responsibilities_block.04[0]",
+                  "记录物品及回应为Core，签名与安排付款、送后联系单位为Supplemental；中国确认收件按法规和用户约定。中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。 — 75/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36878,7 +36898,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37113,15 +37133,27 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "快递员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "运输与物料搬运 · 取送与投递",
@@ -37172,7 +37204,7 @@
       "text": "快递员"
     }
   },
-  "source_content_sha256": "9e1c7a4ab2cb86c62b8638bc5cb348b0ea1a864fff2443558cefb4fef574a644",
+  "source_content_sha256": "bbbe6a04ff1d113d5117375602bce6140060cd517d6917cc8dc7f031c75096e6",
   "subject": {
     "canonical_slug": "couriers-and-messengers",
     "name": "快递员",

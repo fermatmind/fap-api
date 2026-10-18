@@ -11,6 +11,9 @@
       "fact:cn-transport-private-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25679,7 +25682,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate fictional text checking, real operating adoption, automatic train operation systems and employment consequences. This page does not fill in a FermatMind task score, does not predict an individual's probability of unemployment and does not verify train control."
+              "First separate fictional text checking, real operating adoption, automatic train operation systems and employment consequences. This page shows a separate FermatMind editorial estimate, does not predict an individual's probability of unemployment and does not verify train control. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "subway-and-streetcar-operators.display.ai_impact_table.answer",
@@ -33882,6 +33885,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Operations | Rail passenger transport duties | Complete passenger tasks according to the post and unit rules; formal training and assessment define the scope, and this page does not provide operating instruction. — 25/100; weight=1/3; subway-and-streetcar-operators.display.responsibilities_block.01[0]",
+                  "Observation | Attention to the environment and information | The occupational tasks require attention to operation-related information; the post specifics and fitness for the job must be formally checked. — 25/100; weight=1/3; subway-and-streetcar-operators.display.responsibilities_block.02[0]",
+                  "Communication | Reporting to supervisors and dispatch | Report delays and equipment problems accurately; a pending item must not be written as an operating approval. — 25/100; weight=1/3; subway-and-streetcar-operators.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39205,7 +39225,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -39379,15 +39399,27 @@
         "source_refs": [
           "nbs-transport-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Subway and streetcar operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "U.S. 53-4041 rail passenger transport",
@@ -39438,7 +39470,7 @@
       "text": "Subway and streetcar operators"
     }
   },
-  "source_content_sha256": "292dbc7c04f4ec3b0edc15df7eac3a2abbc5ef69090fad9e24b065ca7345cef7",
+  "source_content_sha256": "48a9eeb982feb91d8b239572072eccde550ddb7326bf3896caaebc446f818fdc",
   "subject": {
     "canonical_slug": "subway-and-streetcar-operators",
     "name": "Subway and streetcar operators",

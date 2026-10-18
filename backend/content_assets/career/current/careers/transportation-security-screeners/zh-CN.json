@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25545,7 +25548,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分文字整理、专业检测系统、实际采用和就业结果。任务档案说明工作对象，NIST提供通用风险框架，不给安检检测成绩或替代比例。本页未形成可复核任务级评分，不填分数；纸面练习只观察核对与说明。"
+              "先分文字整理、专业检测系统、实际采用和就业结果。任务档案说明工作对象，NIST提供通用风险框架，不给安检检测成绩或替代比例。既有外部资料未提供可直接采用的实测可复核任务级评分，另列编辑估算分数；纸面练习只观察核对与说明。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "transportation-security-screeners.display.ai_impact_table.answer",
@@ -32840,6 +32843,23 @@
                 "publisher": "O*NET OnLine；原始BLS OEWS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/33-9093.00?p=annual&st=CA"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "准备｜完成规定条件｜按真实岗位核资格、背景审查、健康与培训，不以自学作品替代。 — 25/100; weight=1/3; transportation-security-screeners.display.responsibilities_block.02[0]",
+                  "执行｜保持注意与沟通｜在已授权任务内依规工作，清楚说明并与同事协作。 — 25/100; weight=1/3; transportation-security-screeners.display.responsibilities_block.03[0]",
+                  "交接｜报告与后续协作｜向相应责任人说明事实和未确定项，依职责完成交接。 — 25/100; weight=1/3; transportation-security-screeners.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38110,7 +38130,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38258,15 +38278,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "运输安检员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 33-9093.00 精确职业口径",
@@ -38317,7 +38349,7 @@
       "text": "运输安检员"
     }
   },
-  "source_content_sha256": "bc762b6fd68ef60860fd3aad8b0bf27e7ea6e7c04f4151d66a2a3efdf98a051e",
+  "source_content_sha256": "a6891d602e73031c17b118ef97b74d9b7ad6d0e611142470c9364bd2b2a69c5e",
   "subject": {
     "canonical_slug": "transportation-security-screeners",
     "name": "运输安检员",

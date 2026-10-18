@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25334,7 +25337,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Material organisation and communication drafts can be explored, while on-site service and confirmation still need people. This page has no reviewable task-level score, so on insufficient evidence it fills in no adoption rate, substitution rate or FermatMind score."
+              "Material organisation and communication drafts can be explored, while on-site service and confirmation still need people. The external materials used here supply no measured task-level score, so on insufficient evidence it fills in a separate editorial estimate, without adoption or substitution rates. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "travel-guides.display.ai_impact_table.answer",
@@ -32394,6 +32397,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Planning | researching routes and itineraries | arrange tourist activities using destination and route knowledge and check opening hours and key constraints. — 75/100; weight=1/3; travel-guides.display.responsibilities_block.01[0]",
+                  "Service | explaining arrangements and group members' needs | explain the meeting, activities and restrictions and respond to special needs and questions. — 25/100; weight=1/3; travel-guides.display.responsibilities_block.03[0]",
+                  "Execution | following the itinerary and changes | deliver the confirmed arrangements, identify delays and service problems and coordinate and report within authority. — 25/100; weight=1/3; travel-guides.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37637,7 +37657,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37792,15 +37812,27 @@
           "employer",
           "r2-pay-3"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Travel guides",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 39-7012.00 precise occupational definition",
@@ -37851,7 +37883,7 @@
       "text": "Travel guides"
     }
   },
-  "source_content_sha256": "6406868e13b31ce8aef0d3c3ce84b11b8d37102dd49816fd4688885ef0da619b",
+  "source_content_sha256": "7754c5991423ecd57c3a114c8a6ebe1cf4df5f2ec036e79cc95697b9177a09d0",
   "subject": {
     "canonical_slug": "travel-guides",
     "name": "Travel guides",

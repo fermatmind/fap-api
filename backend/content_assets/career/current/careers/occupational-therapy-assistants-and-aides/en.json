@@ -8,6 +8,9 @@
       "fact:cn-health-private-wage-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-aide-employment-2024": {
         "status": "mapped"
       },
@@ -13610,6 +13613,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "broader_group",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Assistants observe the response to dressing training — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Assistants lead activities per the therapist's plan — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Aides set up and clean the treatment area — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13797,7 +13817,7 @@
             }
           }
         ],
-        "answer": "Tools can organize de-identified record drafts, scheduling, and activity materials; the assistant's on-site observation and the therapist's plan cannot be replaced by tools, and aides cannot implement treatment based on tool suggestions either. The 31-2010 overall 20.1% and average annual 8,600 including replacement are employment background only, not AI adoption or replacement or personal unemployment probability.",
+        "answer": "Tools can organize de-identified record drafts, scheduling, and activity materials; the assistant's on-site observation and the therapist's plan cannot be replaced by tools, and aides cannot implement treatment based on tool suggestions either. The 31-2010 overall 20.1% and average annual 8,600 including replacement are employment background only, not AI adoption or replacement or personal unemployment probability. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "BLS duties",
@@ -15572,7 +15592,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15684,15 +15704,27 @@
         "source_refs": [
           "bls-ep-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Occupational therapy assistants and aides",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Two U.S. post types: 31-2011 assistants / 31-2012 aides",
@@ -15743,7 +15775,7 @@
       "text": "Occupational therapy assistants and aides: duty, wage, and qualification differences"
     }
   },
-  "source_content_sha256": "94f84d795a234e1153486ba0ed708471b2bc044ba4a4be2d5525bb97c2a1f746",
+  "source_content_sha256": "6784ce4b6633918efd438473721a5df7b58a2a3263132b880bd4c89c1ed3e81f",
   "subject": {
     "canonical_slug": "occupational-therapy-assistants-and-aides",
     "name": "Occupational therapy assistants and aides",

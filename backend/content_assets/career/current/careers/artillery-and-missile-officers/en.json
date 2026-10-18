@@ -41,6 +41,9 @@
       "fact:entry-armor-training": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -24825,7 +24828,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task analysis: drafting public, non-sensitive documents, organising tables and reviewing fictional training records may receive tool assistance; this round did not verify the AI adoption rate, actual deployment effects or employment impact research for 55-1014, so it cannot be asserted that a type of post will be replaced or definitely will not be. The actual post technical conditions and decision authority should be checked with the relevant institution. The broad references are the ILO cross-occupation exposure method introduction and extended summary and the NIST cross-industry voluntary risk introduction, and the complete paper or PDF and the mapping for this military occupation were not read; they cannot fill the adoption and causality gap."
+              "Editorial task analysis: drafting public, non-sensitive documents, organising tables and reviewing fictional training records may receive tool assistance; this round did not verify the AI adoption rate, actual deployment effects or employment impact research for 55-1014, so it cannot be asserted that a type of post will be replaced or definitely will not be. The actual post technical conditions and decision authority should be checked with the relevant institution. The broad references are the ILO cross-occupation exposure method introduction and extended summary and the NIST cross-industry voluntary risk introduction, and the complete paper or PDF and the mapping for this military occupation were not read; they cannot fill the adoption and causality gap. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.18",
@@ -32728,6 +32731,23 @@
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Deployment and personnel management｜Duty check｜Planning and selecting targets and coordinating the deployment of field and air defence artillery missile units. — 25/100; weight=1/3; artillery-and-missile-officers.profile.responsibilities-block.1[0]",
+                  "Fire control communications｜Duty check｜Directing the establishment and operation of fire control communication systems. — 50/100; weight=1/3; artillery-and-missile-officers.profile.responsibilities-block.1[1]",
+                  "Facility security｜Duty check｜Overseeing the security of weapon storage and launch facilities. — 25/100; weight=1/3; artillery-and-missile-officers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37630,7 +37650,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38002,15 +38022,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Artillery and missile officers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Official duties: field / air defence deployment · strategic missiles · nuclear ammunition and facilities · system maintenance",
@@ -38061,7 +38093,7 @@
       "text": "Artillery and missile officers"
     }
   },
-  "source_content_sha256": "28137917a2c954357554e3081fdf4c384483d9dda58e646913d5c0577f32bf72",
+  "source_content_sha256": "bc9e8fdf54588baa7e9260cc71dbf1fea9d86599328d6b66d716addc55d71a4c",
   "subject": {
     "canonical_slug": "artillery-and-missile-officers",
     "name": "Artillery and missile officers",

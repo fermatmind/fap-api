@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:g04-employment-2025": {
         "status": "pending_mapping"
       },
@@ -24287,7 +24290,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer: this round can verify the task catalogue and software keywords, but did not obtain agency AI deployment or net employment effects. Editorial candidate mechanisms: monitoring and access control systems, detainee management record systems, incident logs and report templates, and scheduling and roll call assistance tools may assist with transcription and compilation, with the effect requiring validation in actual processes; but roll call and counting and facility patrol, searches and contraband judgment, conflict control and the use of force, injury and risk identification, and communication with detainees and their families still depend on on-site personnel and are constrained by law and agency procedure. Technical exposure is not equal to organizational adoption, still less job disappearance or income change."
+              "Direct answer: this round can verify the task catalogue and software keywords, but did not obtain agency AI deployment or net employment effects. Editorial candidate mechanisms: monitoring and access control systems, detainee management record systems, incident logs and report templates, and scheduling and roll call assistance tools may assist with transcription and compilation, with the effect requiring validation in actual processes; but roll call and counting and facility patrol, searches and contraband judgment, conflict control and the use of force, injury and risk identification, and communication with detainees and their families still depend on on-site personnel and are constrained by law and agency procedure. Technical exposure is not equal to organizational adoption, still less job disappearance or income change. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31704,6 +31707,23 @@
                 "publisher": "FermatMind",
                 "scope": "contextual",
                 "url": "https://www.fermatmind.com/"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Supervision and counting｜roll call and monitor detainees｜confirm the presence of each detainee by roll call and count by shift, monitor behavior in housing areas, work and activities, and correct violations and maintain order according to procedures. — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Searches and contraband handling｜search people, places and property｜search people and vehicles, clear and search cells for contraband, inspect mail, and when weapons, drugs or similar contraband are found, preserve the evidence and transfer it according to procedures. — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "Records and paperwork｜document and write reports｜record identity, charges and incidents, maintain the daily log, and submit oral and written reports to supervisors on detainees' work quality, violations and abnormalities. — 75/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36893,7 +36913,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37083,15 +37103,27 @@
           "bls",
           "g04-trends"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Correctional officers and bailiffs",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Protective service · correctional facilities and courtroom order",
@@ -37142,7 +37174,7 @@
       "text": "Correctional officers and bailiffs"
     }
   },
-  "source_content_sha256": "155575f168e23cb30951563f027aceafb6d31a3906d979e32a91f91d8859914f",
+  "source_content_sha256": "253668183fe34a8c61c7c0f12ea6413079a5b32f22e56f0180cf67a71c14330a",
   "subject": {
     "canonical_slug": "correctional-officers",
     "name": "Correctional officers and bailiffs",

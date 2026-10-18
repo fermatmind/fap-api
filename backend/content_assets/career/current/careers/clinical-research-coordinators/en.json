@@ -89,6 +89,9 @@
       "fact:crc-nine-us-wage-p75-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24860,7 +24863,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET supports the existence of tasks and software words but does not prove sustained institutional investment, CRC generative AI adoption rates, tool effects, or job outcomes; the assistive uses are editorial trial candidates and are not treated as capabilities already achieved without research."
+              "O*NET supports the existence of tasks and software words but does not prove sustained institutional investment, CRC generative AI adoption rates, tool effects, or job outcomes; the assistive uses are editorial trial candidates and are not treated as capabilities already achieved without research. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "clinical-research-coordinators.ai-impact.ai-impact-table.18",
@@ -32760,6 +32763,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/details/29-1141.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Participants and protocol execution｜Arrange and perform participant-related procedures per protocol｜Arrange clinic visits and procedures or hospitalization for participants per protocol, conduct protocol procedures such as interviews and vital sign measurement and electrocardiograms, and assess the eligibility of potential participants (corresponding to the first and second and third O*NET tasks). Clinical procedures are checked against real qualifications, the protocol, and authorization. — 25/100; weight=1/3; clinical-research-coordinators.profile.responsibilities-block.1[0]",
+                  "Informed consent and enrollment｜Ensure that informed consent is properly obtained and documented｜Oversee participant enrollment to ensure that informed consent is properly obtained and documented, inform patients or caregivers of the study content and expected results, and track enrollment and withdrawal (corresponding to the eighth and fifth and thirteenth and twentieth O*NET tasks). Consent is checked against the approved protocol and applicable rules. — 25/100; weight=1/3; clinical-research-coordinators.profile.responsibilities-block.1[1]",
+                  "Documents and records｜Prepare and maintain study documents and records｜Prepare protocol worksheets and operations manuals and adverse event reports and institutional review board documents or progress reports, and maintain study activity records such as case report forms and drug dispensing records and regulatory forms (corresponding to the fourth and ninth O*NET tasks). — 75/100; weight=1/3; clinical-research-coordinators.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37675,7 +37695,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -38256,15 +38276,27 @@
         "source_refs": [
           "crc-nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Clinical research coordinators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · ICE",
@@ -38315,7 +38347,7 @@
       "text": "Clinical research coordinators"
     }
   },
-  "source_content_sha256": "045129e3b2de43e7b6e6b56c0d5e524030f5a68d10c48c414b454f3bc67a62ff",
+  "source_content_sha256": "4c51ae4d481aa3b489ef6949b0751622c3269cb0b0c2882827b42c3bf5537d51",
   "subject": {
     "canonical_slug": "clinical-research-coordinators",
     "name": "Clinical research coordinators",

@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -7554,7 +7557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "For actual machine maintenance, check hazardous energy control against the actual applicability scope of 1910.147; check Subpart S for electrical exposure and other industries/jurisdictions separately. Paper exploration does not constitute operating authorization; tools cannot replace training, qualifications, employer authority, or site judgment."
+              "For actual machine maintenance, check hazardous energy control against the actual applicability scope of 1910.147; check Subpart S for electrical exposure and other industries/jurisdictions separately. Paper exploration does not constitute operating authorization; tools cannot replace training, qualifications, employer authority, or site judgment. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "electro-mechanical-technicians.ai-impact.ai-impact-table.2",
@@ -9158,6 +9161,23 @@
                 "publisher": "Ministry of Emergency Management",
                 "scope": "contextual",
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Assemble, install, repair and replace electromechanical components to drawings — 0/100; weight=1/3; electro-mechanical-technicians.profile.work-context-block.1[0]",
+                  "Test and calibrate using instruments and diagnose electromechanical faults — 50/100; weight=1/3; electro-mechanical-technicians.profile.work-context-block.1[0]",
+                  "Organize test, measurement, repair and safety handover records — 75/100; weight=1/3; electro-mechanical-technicians.profile.career-quick-answers-block.1[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11556,7 +11576,7 @@
     ],
     "path": "/en/career/jobs/electro-mechanical-technicians",
     "section_titles": {
-      "ai-impact": "AI effects",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese wage reference",
       "direction-comparison": "Career path comparison",
       "fit": "Occupational fit guide",
@@ -11632,15 +11652,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Electro-mechanical and mechatronics technologists and technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of tasks to AI"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Electro-mechanical and mechatronics technologists and technicians · assembly and testing · measurement records",
@@ -11691,7 +11723,7 @@
       "text": "Electro-mechanical and mechatronics technologists and technicians"
     }
   },
-  "source_content_sha256": "af02fb02e88a53e58e6e230353a0a84af0f7674349dc31273ef6876551bbdedc",
+  "source_content_sha256": "77509e309f4e916ec1fa8f697206a7d30599959716d96ca1570f4562382d2781",
   "subject": {
     "canonical_slug": "electro-mechanical-technicians",
     "name": "Electro-mechanical and mechatronics technologists and technicians",

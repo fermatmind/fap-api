@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -7585,7 +7588,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Before adoption, define approved documents, data permissions, human review, and procedures for discontinuing use."
+              "Before adoption, define approved documents, data permissions, human review, and procedures for discontinuing use. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "electromechanical-equipment-assemblers.ai-impact.ai-impact-table.2",
@@ -8875,6 +8878,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Position, align, fasten and wire assemblies — 0/100; weight=1/3; electromechanical-equipment-assemblers.profile.responsibilities-block.2[0]",
+                  "Measure, inspect, test and adjust physical assemblies — 25/100; weight=1/3; electromechanical-equipment-assemblers.profile.responsibilities-block.2[0]",
+                  "Organize tolerance, test, defect and handover records — 75/100; weight=1/3; electromechanical-equipment-assemblers.profile.responsibilities-block.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11326,7 +11346,7 @@
     ],
     "path": "/en/career/jobs/electromechanical-equipment-assemblers",
     "section_titles": {
-      "ai-impact": "AI effects",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese wage reference",
       "direction-comparison": "Career path comparison",
       "fit": "Occupational fit guide",
@@ -11403,15 +11423,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Electromechanical equipment assemblers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of tasks to AI"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Electromechanical equipment assemblers · component assembly and wiring · dimension and torque checks",
@@ -11462,7 +11494,7 @@
       "text": "Electromechanical equipment assemblers"
     }
   },
-  "source_content_sha256": "59721636c32debd202b8d003ed3d31908d14c3556e9fbb2ec49241525dcdccf0",
+  "source_content_sha256": "64424741631d7c4df9cfff24c896c147b87b28b9fdad3fcf63cdc2e5ecf0ed2f",
   "subject": {
     "canonical_slug": "electromechanical-equipment-assemblers",
     "name": "Electromechanical equipment assemblers",

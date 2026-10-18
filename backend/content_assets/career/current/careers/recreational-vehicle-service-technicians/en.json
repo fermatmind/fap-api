@@ -29,6 +29,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24760,7 +24763,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with manual lookup, work order organization, and generating hypotheses to test; existing materials provide no actual adoption rate or substitution probability for 49-3092. Vehicle testing, hazard isolation, repair, and handover must be verified by personnel according to their authority."
+              "AI can assist with manual lookup, work order organization, and generating hypotheses to test; existing materials provide no actual adoption rate or substitution probability for 49-3092. Vehicle testing, hazard isolation, repair, and handover must be verified by personnel according to their authority. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "recreational-vehicle-service-technicians.ai-impact.ai-impact-table.18",
@@ -32818,6 +32821,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/49-3051.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Customer repair request and work order summary — 75/100; weight=1/3; recreational-vehicle-service-technicians.ai-impact.ai-impact-table.95[0]",
+                  "Water supply and gas piping diagnosis — 50/100; weight=1/3; recreational-vehicle-service-technicians.ai-impact.ai-impact-table.103[0]",
+                  "Stove and vehicle air conditioning faults — 25/100; weight=1/3; recreational-vehicle-service-technicians.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37723,7 +37743,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38003,15 +38023,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Recreational vehicle service technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RV system diagnosis · repair · function retest",
@@ -38062,7 +38094,7 @@
       "text": "Recreational vehicle service technicians"
     }
   },
-  "source_content_sha256": "53250393bb8f2a58cbcc6c8122d6e9b333b69f021d507fd4b117ef152bcaccce",
+  "source_content_sha256": "254a23d1e32f4e1194a7af19376b397c7f391ff82b2d4a75a1b1489fe08b9820",
   "subject": {
     "canonical_slug": "recreational-vehicle-service-technicians",
     "name": "Recreational vehicle service technicians",

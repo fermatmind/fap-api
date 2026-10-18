@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25462,7 +25465,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with records and questions, but this page has no adoption rate, repair effect, or job replacement rate evidence for watch and clock repair. Mechanical and electronic testing, plan confirmation, and actual technique still need professional checking; no reviewable task score has been produced, so no score is entered for now."
+              "AI can assist with records and questions, but this page has no adoption rate, repair effect, or job replacement rate evidence for watch and clock repair. Mechanical and electronic testing, plan confirmation, and actual technique still need professional checking; no reviewable task score has been produced, so a separate editorial estimate is shown for now. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "watch-and-clock-repairers.display.ai_impact_table.answer",
@@ -32840,6 +32843,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inspection｜fault and part condition｜Observe damage, wear, or position problems with applicable tools and tests, separating confirmed results from causes still to be found. — 25/100; weight=1/3; watch-and-clock-repairers.display.responsibilities_block.02[0]",
+                  "Repair｜cleaning, restoration, and adjustment｜Within training and authorization, disassemble, clean, lubricate, repair, or replace parts and adjust the timekeeping mechanism per the documentation. — 0/100; weight=1/3; watch-and-clock-repairers.display.responsibilities_block.04[0]",
+                  "Review｜timekeeping, function, and appearance testing｜Record the conditions and results and re-check the agreed items; water resistance or other untested checks must not be marked as passing. — 25/100; weight=1/3; watch-and-clock-repairers.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38115,7 +38135,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38263,15 +38283,27 @@
         "source_refs": [
           "cn-rule"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Watch and clock repairers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 49-9064.00｜China 4-12-04-03",
@@ -38322,7 +38354,7 @@
       "text": "Watch and clock repairers: work content, wages, qualifications, and entry experience"
     }
   },
-  "source_content_sha256": "b357fbeeee66ce076f4be861c1cc328edbe8f99117bbc04a0387491da2112f00",
+  "source_content_sha256": "261a8644bd30a29e1fd534cd77720a6c1d41153d9365e2374658ada13b29e607",
   "subject": {
     "canonical_slug": "watch-and-clock-repairers",
     "name": "Watch and clock repairers",

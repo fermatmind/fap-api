@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24728,7 +24731,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业全国AI采用或替代因果数据。ICA一页资源表概述2024-06-17录制访谈讨论大规模数字馆藏描述机会风险，列元数据与描述标准进一步阅读；未读完整访谈或所列标准，不证明工具效果。转录、候选描述和检索是编辑试验方向，按原件与允许用途核。"
+              "证据不足：未取得本职业全国AI采用或替代因果数据。ICA一页资源表概述2024-06-17录制访谈讨论大规模数字馆藏描述机会风险，列元数据与描述标准进一步阅读；未读完整访谈或所列标准，不证明工具效果。转录、候选描述和检索是编辑试验方向，按原件与允许用途核。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "archivists.ai-impact.ai-impact-table.18",
@@ -32628,6 +32631,23 @@
                 "publisher": "Society of American Archivists",
                 "scope": "contextual",
                 "url": "https://www2.archivists.org/statements/saa-core-values-statement-and-code-of-ethics"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "价值鉴定与期限｜依据政策提出建议｜鉴定历史材料真实性与保存价值；到期材料按适用规定鉴定，不能自行销毁。 — 50/100; weight=1/3; archivists.profile.responsibilities-block.1[1]",
+                  "整理与著录｜让记录关系可追踪｜建立分类、目录和描述，维护唯一标识与检索位置，不把猜测写成原始信息。 — 75/100; weight=1/3; archivists.profile.responsibilities-block.1[2]",
+                  "开放与参考服务｜按权限帮助查询｜落实利用规则，查找相关档案并说明使用限制，疑难审核提交责任单位。 — 50/100; weight=1/3; archivists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37533,7 +37553,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37885,15 +37905,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "档案管理员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "档案工作：收集与整理 · 著录与鉴定 · 保存与数字迁移 · 开放利用与公众服务",
@@ -37944,7 +37976,7 @@
       "text": "档案管理员"
     }
   },
-  "source_content_sha256": "4ede6b89f1e98941077627a970b5862c430a8b7f71848a1622064c7a076e289a",
+  "source_content_sha256": "c9adeacf2cf00abdf0dbf72c98895bfc44355822834bacff771172adc147def9",
   "subject": {
     "canonical_slug": "archivists",
     "name": "档案管理员",

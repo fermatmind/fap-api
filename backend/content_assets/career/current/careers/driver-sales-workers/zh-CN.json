@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24351,7 +24354,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "路线订单、销量库存提示、对账及记录整理属编辑待验证应用，传统路线规划/商务软件不等GenAI；软件目录7类通信IBM Domino、路线账务数据库、库存、地图路线、Office、bMobile项目/销售、Excel。Hot2技能Excel/Office各低于1%，2025美国本职业所有唯一招聘为分母，不是有技能广告内比例、不是0使用/0AI。ILO任务暴露/NIST治理不提供本职业采用/替代概率或提效实测。"
+              "路线订单、销量库存提示、对账及记录整理属编辑待验证应用，传统路线规划/商务软件不等GenAI；软件目录7类通信IBM Domino、路线账务数据库、库存、地图路线、Office、bMobile项目/销售、Excel。Hot2技能Excel/Office各低于1%，2025美国本职业所有唯一招聘为分母，不是有技能广告内比例、不是0使用/0AI。ILO任务暴露/NIST治理不提供本职业采用/替代概率或提效实测。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31872,6 +31875,23 @@
                 "publisher": "政府公开/转载",
                 "scope": "general_legislation",
                 "url": "https://gxs.pingliang.gov.cn/zfxxgk/fdzdgknr/zcjd/sjzcjd/art/2025/art_c7c32dfcb9c14ca9acce3ed581b209b7.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "按路线驾驶并在交付点交付与签收 — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
+                  "介绍新产品与价格变动并接单与上货与陈列促销 — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.3.task[0]",
+                  "记录销售与配送信息并完成结算与对账 — 75/100; weight=1/3; actors.display.ai_impact_table.tasks.6.task[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37149,7 +37169,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37439,15 +37459,27 @@
           "r5-traffic",
           "r5-food"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "司机兼销售员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "路线配送与销售 · 交付与收款 · 车辆与食品安全",
@@ -37498,7 +37530,7 @@
       "text": "司机兼销售员"
     }
   },
-  "source_content_sha256": "dafb195b663ade76524e04d23b689640858ca27e74442d7e742cf007fcd7e7c5",
+  "source_content_sha256": "cb1f1e10a58e467180ec1030422fb4c3a9cc0ecabffd68fac4762c0d70fe58ec",
   "subject": {
     "canonical_slug": "driver-sales-workers",
     "name": "司机兼销售员",

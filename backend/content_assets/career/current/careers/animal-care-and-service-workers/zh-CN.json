@@ -38,6 +38,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24755,7 +24758,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业AI采用率、效果、替代率或工资因果。记录整理与预约提醒仅编辑可能用途；BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。不能将预测增长归因AI，亦不能据此断言不会被替代。"
+              "证据不足：未取得本职业AI采用率、效果、替代率或工资因果。记录整理与预约提醒仅编辑可能用途；BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。不能将预测增长归因AI，亦不能据此断言不会被替代。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.18",
@@ -32675,6 +32678,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "日常饲喂与清洁｜按时间表照护｜按时间表与喂食说明饲喂与喂水，清洗布草并清洁、消毒与维护动物居所与设备。 — 0/100; weight=1/3; animal-care-and-service-workers.profile.responsibilities-block.1[0]",
+                  "动物美容｜洗浴与修剪｜执行洗浴、刷毛、剪毛修毛、剪指甲与清洁耳朵等美容工作，并与客户讨论美容需求。 — 0/100; weight=1/3; animal-care-and-service-workers.profile.responsibilities-block.1[2]",
+                  "记录与领养｜信息与安置｜收集并记录体重与身体状况与治疗与进食量，为流浪或弃养动物寻找领养家庭。 — 50/100; weight=1/3; animal-care-and-service-workers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37576,7 +37596,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37928,15 +37948,27 @@
         "source_refs": [
           "facilities"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "动物照护与服务人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "动物照护与服务：饲喂清洁与保定 · 美容与养护 · 动物观察与记录",
@@ -37987,7 +38019,7 @@
       "text": "动物照护与服务人员：任务、工资与就业前景（O*NET 39-2021.00）"
     }
   },
-  "source_content_sha256": "a2a42c9b672b6848cbd333a7e58b8f13e09a616a00b8b6338e03e24463098717",
+  "source_content_sha256": "e1d3f9cb55ee478ab5646d989469564b5b76067331d12deebbe88c821728774c",
   "subject": {
     "canonical_slug": "animal-care-and-service-workers",
     "name": "动物照护与服务人员",

@@ -11,6 +11,9 @@
       "fact:credential-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "mapped"
       },
@@ -12863,6 +12866,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "与家属或其他授权人员面谈，确认讣告措辞、棺木选择与服务计划等细节 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "监督遗体的准备与照料，从死亡地点接运遗体，必要时执行防腐处理 — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "规划并协调葬礼、土葬或火化，安排神职人员、扶柩人、花饰、灯光与棺木摆放 — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13053,7 +13073,7 @@
             }
           }
         ],
-        "answer": "殡葬师、殡仪承办人、殡葬安排员可以用日程与运输排程整理、文件清单与表单草拟、费用估算与账目整理、讣告与仪式流程文稿草拟、客户沟通记录整理等形式获得辅助，但家属情绪与意愿判断、遗体状态与防腐操作、法律文件的真实性与申报、宗教与礼仪安排、费用与合同的最终确认仍需由有责任的人承担；技术暴露不等于岗位替代。",
+        "answer": "殡葬师、殡仪承办人、殡葬安排员可以用日程与运输排程整理、文件清单与表单草拟、费用估算与账目整理、讣告与仪式流程文稿草拟、客户沟通记录整理等形式获得辅助，但家属情绪与意愿判断、遗体状态与防腐操作、法律文件的真实性与申报、宗教与礼仪安排、费用与合同的最终确认仍需由有责任的人承担；技术暴露不等于岗位替代。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET 39-4031.00 职业档案",
@@ -14802,7 +14822,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -14926,15 +14946,27 @@
         "source_refs": [
           "source-pack-onet-localcert"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "殡葬师、殡仪承办人、殡葬安排员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "家属沟通与葬礼安排",
@@ -14985,7 +15017,7 @@
       "text": "殡葬师、殡仪承办人、殡葬安排员"
     }
   },
-  "source_content_sha256": "6e4bfa5b18e28113d6125411d4e35767d86e87b8fc4c3a2323778b75b63efe5f",
+  "source_content_sha256": "e027b59d9395b23ba251466ba5857b64cb775b5bbf8b5e711edb08a5a30c6e25",
   "subject": {
     "canonical_slug": "morticians-undertakers-and-funeral-arrangers",
     "name": "殡葬师、殡仪承办人、殡葬安排员",

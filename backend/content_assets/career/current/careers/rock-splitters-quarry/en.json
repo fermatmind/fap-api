@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24391,7 +24394,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "There is no reliable evidence to give an overall AI substitution rate or timeline for rock splitters. Tools may help retrieve equipment instructions and organize inspection checklists and handover records; dimensions and weights, rock strata grain, split lines, pneumatic pick, wedge set, and cutting tool condition, on-site warnings, and danger zones must be verified by qualified personnel together with the site. BLS employment projections also cannot identify changes caused by AI alone."
+              "There is no reliable evidence to give an overall AI substitution rate or timeline for rock splitters. Tools may help retrieve equipment instructions and organize inspection checklists and handover records; dimensions and weights, rock strata grain, split lines, pneumatic pick, wedge set, and cutting tool condition, on-site warnings, and danger zones must be verified by qualified personnel together with the site. BLS employment projections also cannot identify changes caused by AI alone. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "rock-splitters-quarry.ai-impact.ai-impact-table.18",
@@ -32162,6 +32165,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Rock mass and dimension verification｜Observe the grain, cracks, and target block dimensions, and mark unknowns.｜Deliver the basis for the marked lines and a list of shutdown issues. — 25/100; weight=1/3; rock-splitters-quarry.profile.responsibilities-block.1[0]",
+                  "Drilling, grooving, and wedging｜Work along the marked lines per training and process sequence, and watch crack propagation.｜Stop work immediately for abnormal cracks, tool failure, or people entering. — 0/100; weight=1/3; rock-splitters-quarry.profile.responsibilities-block.1[3]",
+                  "Block separation and quality inspection｜Verify stone stability, dimensions, and new cracks; handling is performed by authorized personnel.｜Record blocks ready for handover and blocks pending disposal. — 25/100; weight=1/3; rock-splitters-quarry.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37070,7 +37090,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37351,15 +37371,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Rock Splitters, Quarry",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Stone specifications · split lines · pneumatic pick, wedge set, and cutting tool competence",
@@ -37410,7 +37442,7 @@
       "text": "Rock Splitters, Quarry"
     }
   },
-  "source_content_sha256": "0d0da083764c0a95d506327aaf2fad4aca31e808ab4e0a7d64df82881106b2cb",
+  "source_content_sha256": "a74b232a6815def18605ab017480c59af9ca6d1e4fb267a88d994af286d5a6dc",
   "subject": {
     "canonical_slug": "rock-splitters-quarry",
     "name": "Rock Splitters, Quarry",

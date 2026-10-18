@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25553,7 +25556,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本精确安装职业任务级AI效果评分及替代因果证据。文字整理、题设核量与现场测试施工分开；W27不含材料性能、通风设备与能耗，不能填职业评分、替代率或节能保证。"
+              "证据不足：未取得本精确安装职业任务级AI效果评分及替代因果证据。文字整理、题设核量与现场测试施工分开；W27不含材料性能、通风设备与能耗，不能填职业评分、替代率或节能保证。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "weatherization-installers-and-technicians.display.ai_impact_table.answer",
@@ -33027,6 +33030,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "检查｜房屋改造需要｜识别维修、更换和节能改造问题。 — 25/100; weight=1/3; weatherization-installers-and-technicians.display.responsibilities_block.01[0]",
+                  "诊断｜漏风与气流信息｜经过训练使用相应测试设备并记录结果。 — 25/100; weight=1/3; weatherization-installers-and-technicians.display.responsibilities_block.02[0]",
+                  "安装｜围护保温密封｜按授权范围完成材料和门窗相关工作。 — 0/100; weight=1/3; weatherization-installers-and-technicians.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38272,7 +38292,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38420,15 +38440,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "安装工技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 47-4099.03",
@@ -38479,7 +38511,7 @@
       "text": "安装工技术员：住宅节能改造任务、工资口径与准备"
     }
   },
-  "source_content_sha256": "b54a5c00e1007f9e8b156026c202aac88015dcd3deef67e8adac1f914de66e63",
+  "source_content_sha256": "d3c8d0a239370038c62b04b3399ad17b3a1ad01188e670b8152ad2f5e1b0d450",
   "subject": {
     "canonical_slug": "weatherization-installers-and-technicians",
     "name": "安装工技术员",

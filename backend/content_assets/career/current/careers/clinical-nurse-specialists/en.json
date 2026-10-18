@@ -89,6 +89,9 @@
       "fact:cns-nine-us-wage-p75-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24716,7 +24719,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET provides tasks and a software directory, and the Hot recruitment shares are unavailable; this round did not obtain CNS actual AI adoption rates, sustained investment trends, clinical effects, or position income causation, and directories cannot replace that evidence."
+              "O*NET provides tasks and a software directory, and the Hot recruitment shares are unavailable; this round did not obtain CNS actual AI adoption rates, sustained investment trends, clinical effects, or position income causation, and directories cannot replace that evidence. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "clinical-nurse-specialists.ai-impact.ai-impact-table.18",
@@ -32610,6 +32613,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/details/29-1161.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Advanced nursing assessment and planning｜Assess patient needs and form a care plan｜Observe, interview, and assess patients to identify care needs, complete a comprehensive health assessment, form differential judgments, perform specialty examinations, or prescribe medication or treatment, and collaborate with other medical professionals (corresponding to the ninth and twelfth and second O*NET tasks). Diagnosis, examinations, and prescribing are checked against the actual practicing state's qualifications and are not authorized by the task list. — 50/100; weight=1/3; clinical-nurse-specialists.profile.responsibilities-block.1[0]",
+                  "Specialty direct and indirect care｜Provide specialized care within a designated specialty｜Provide specialized direct and indirect care within a designated specialty (such as obstetrics, neurology, oncology, or neonatal care) and collaborate with other medical professionals and service providers to ensure optimal patient care (corresponding to the first and second O*NET tasks). — 0/100; weight=1/3; clinical-nurse-specialists.profile.responsibilities-block.1[1]",
+                  "Quality and process improvement｜Evaluate and improve nursing practice and organizational systems｜Evaluate the quality and effectiveness of nursing practice or organizational systems, design the corresponding evaluation plan, and make improvement recommendations for system defects (corresponding to the eighth and thirteenth O*NET tasks). — 50/100; weight=1/3; clinical-nurse-specialists.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37528,7 +37548,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -38109,15 +38129,27 @@
         "source_refs": [
           "cns-nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Clinical nurse specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · SIC",
@@ -38168,7 +38200,7 @@
       "text": "Clinical nurse specialists"
     }
   },
-  "source_content_sha256": "a8a340934fa6c64b5a4a8d91d15eeff2182b7d102108f4571abb9cdf2d2764c7",
+  "source_content_sha256": "08a74ad97082b571127a4f5f1febadf96af1c66f705f60966868241d17268d34",
   "subject": {
     "canonical_slug": "clinical-nurse-specialists",
     "name": "Clinical nurse specialists",

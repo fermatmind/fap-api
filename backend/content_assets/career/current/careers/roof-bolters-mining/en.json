@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24751,7 +24754,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "There is no reliable AI substitution rate for this occupation. AI can assist with retrieving support plans and organizing inspections and handover; roof stability, gas and ventilation, drilling, bolt tightening, and personnel refuge must be verified on site by qualified personnel."
+              "There is no reliable AI substitution rate for this occupation. AI can assist with retrieving support plans and organizing inspections and handover; roof stability, gas and ventilation, drilling, bolt tightening, and personnel refuge must be verified on site by qualified personnel. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "roof-bolters-mining.ai-impact.ai-impact-table.18",
@@ -32516,6 +32519,23 @@
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "methodology",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Roof inspection｜Observe the roof, ribs, and loose rock.｜Mark danger zones and escalate per procedure. — 25/100; weight=1/3; roof-bolters-mining.profile.responsibilities-block.1[0]",
+                  "Bolt hole drilling｜Verify hole positions and spacing per the approved plan.｜Record deviations. — 0/100; weight=1/3; roof-bolters-mining.profile.responsibilities-block.1[3]",
+                  "Bolt installation｜Insert resin or mechanical bolts and tighten.｜Verify materials and installation sequence. — 0/100; weight=1/3; roof-bolters-mining.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37424,7 +37444,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37693,15 +37713,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Roof Bolters, Mining",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Underground roof · bolt hole drilling · bolt installation",
@@ -37752,7 +37784,7 @@
       "text": "Roof Bolters, Mining"
     }
   },
-  "source_content_sha256": "87a461cb3ef1334e45260f142bec023e29625d6c0767f52464a5f0251d3df38c",
+  "source_content_sha256": "49e6e00f60b1bb9a15547ba2ec997a7fff2d5183cfee158579ac8f7b9b30bbac",
   "subject": {
     "canonical_slug": "roof-bolters-mining",
     "name": "Roof Bolters, Mining",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24391,7 +24394,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "There is no reliable evidence for an overall AI substitution rate for robotics engineers 17-2199.08. AI can assist with documentation, code, and simulation candidates, but real coupling among mechanical, electrical, sensors, controllers, and the human-machine environment still requires engineering verification and authorization. BLS parent occupation employment projections also cannot identify AI effects alone."
+              "There is no reliable evidence for an overall AI substitution rate for robotics engineers 17-2199.08. AI can assist with documentation, code, and simulation candidates, but real coupling among mechanical, electrical, sensors, controllers, and the human-machine environment still requires engineering verification and authorization. BLS parent occupation employment projections also cannot identify AI effects alone. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "robotics-engineers.ai-impact.ai-impact-table.18",
@@ -32170,6 +32173,23 @@
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "parent_occupation",
                 "url": "https://www.onetonline.org/link/localwages/17-2199.08"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Mechatronics and control design｜Design the combination of sensors, actuators, control programs, and end-of-arm tooling.｜State versions, limits, and trade-offs. — 75/100; weight=1/3; robotics-engineers.profile.responsibilities-block.1[1]",
+                  "Prototype build and integration｜Connect hardware, software, and communication interfaces and manage configuration.｜Record a reproducible prototype state. — 25/100; weight=1/3; robotics-engineers.profile.responsibilities-block.1[2]",
+                  "Testing and verification｜Verify performance and boundaries with benches, simulation, and authorized physical machine environments.｜Stop testing on anomalies and record evidence. — 25/100; weight=1/3; robotics-engineers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37078,7 +37098,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37347,15 +37367,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Robotics Engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Robotic systems · sensors · control programs",
@@ -37406,7 +37438,7 @@
       "text": "Robotics Engineers"
     }
   },
-  "source_content_sha256": "542b1efb8d54b1355a35749a03545f88878bbac9e2da34707440a91c3745614f",
+  "source_content_sha256": "61b0eddf6ff5e711905ca1c9ad0161c255d8f494330a3d0441d40fa7711fd43f",
   "subject": {
     "canonical_slug": "robotics-engineers",
     "name": "Robotics Engineers",

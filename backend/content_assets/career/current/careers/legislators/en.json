@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7538,7 +7541,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: Test retrieval, summaries and draft assistance on isolated materials, checking each source. No occupational adoption, performance or job-effect evidence was obtained; officeholders retain responsibility for positions, votes and accountability."
+              "Editorial suggestion: Test retrieval, summaries and draft assistance on isolated materials, checking each source. No occupational adoption, performance or job-effect evidence was obtained; officeholders retain responsibility for positions, votes and accountability. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "legislators.ai-impact.ai-impact-table.2",
@@ -8762,6 +8765,23 @@
                 "publisher": "House Committee on Ethics",
                 "scope": "U.S. House of Representatives",
                 "url": "https://ethics.house.gov/manual/member-voting-and-other-official-activities-on-matters-of-personal-interest/"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Hear constituent concerns and gather evidence — 25/100; weight=1/3; legislators.profile.responsibilities-block.4[0]",
+                  "Draft legislation and estimate impacts — 75/100; weight=1/3; legislators.profile.responsibilities-block.4[0]",
+                  "Debate vote and negotiate with stakeholders — 25/100; weight=1/3; legislators.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11076,7 +11096,7 @@
     ],
     "path": "/en/career/jobs/legislators",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11142,15 +11162,27 @@
         "source_refs": [
           "bls-ooh-legislators"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Legislators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Public procedures and accountability",
@@ -11201,7 +11233,7 @@
       "text": "Legislator Career Assessment: Work, Entry and Risk Boundaries"
     }
   },
-  "source_content_sha256": "58b79b7d90e31f64c0f02577194b9fbf084081e077e075c5ff7441e2de558538",
+  "source_content_sha256": "9b4398a0b1d3e236b3c79b35a6ebe5cc7ece0c5edbcd4b8ddf01fd888535c1ff",
   "subject": {
     "canonical_slug": "legislators",
     "name": "Legislators",

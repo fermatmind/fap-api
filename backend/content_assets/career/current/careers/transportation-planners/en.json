@@ -8,6 +8,9 @@
       "fact:china-wage-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25469,7 +25472,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Separate draft capability, real adoption and job outcomes. The fictional commuting prompt can be used to trial table organisation, but the numbers, weights, budget and assumptions must be checked by you. Insufficient evidence: no reviewable task exposure scale and score for this occupation was obtained, so no score is filled in."
+              "Separate draft capability, real adoption and job outcomes. The fictional commuting prompt can be used to trial table organisation, but the numbers, weights, budget and assumptions must be checked by you. Insufficient evidence: no reviewable task exposure scale and score for this occupation was obtained, so a separate editorial estimate is shown. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "transportation-planners.display.ai_impact_table.answer",
@@ -33115,6 +33118,23 @@
                 "publisher": "O*NET OnLine; original BLS OEWS",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localwages/19-3099.00?p=annual&st=CA"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Preparation | define the research question | List the area, objectives, indicators and research boundary. — 50/100; weight=1/3; transportation-planners.display.responsibilities_block.01[0]",
+                  "Analysis | produce the scenario comparison | Keep the baseline, formulas, budget and each group's differences. — 75/100; weight=1/3; transportation-planners.display.responsibilities_block.03[0]",
+                  "Collaboration | explain the scheme trade-offs | Organise the real opinions and state the conclusions and the unknown needs. — 25/100; weight=1/3; transportation-planners.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38382,7 +38402,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38542,15 +38562,27 @@
         "source_refs": [
           "china-wage-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Transportation planners",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC19-3099.01 tasks; the statistics use the SOC19-3099 parent group",
@@ -38601,7 +38633,7 @@
       "text": "Transportation planners"
     }
   },
-  "source_content_sha256": "df8e1fbb34cd45e7a4051eb8e7b86771fad0ace9191d10d814c3868aa4712ad6",
+  "source_content_sha256": "d50a9f667cb96a99909c4ab73003ba633ab8dde6a6fc1c848c932f65326917a9",
   "subject": {
     "canonical_slug": "transportation-planners",
     "name": "Transportation planners",

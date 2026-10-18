@@ -38,6 +38,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24728,7 +24731,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得动物训练师职业专属AI采用率、替代率、工具效果或工资因果研究。记录整理、草稿和排班是编辑提出的可能用途，不宣称已部署或会改变就业。ONET软件示例、77%受访称未自动化与EP增长4.2%均不证明AI因果。"
+              "证据不足：本轮未取得动物训练师职业专属AI采用率、替代率、工具效果或工资因果研究。记录整理、草稿和排班是编辑提出的可能用途，不宣称已部署或会改变就业。ONET软件示例、77%受访称未自动化与EP增长4.2%均不证明AI因果。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.18",
@@ -32479,6 +32482,23 @@
                 "publisher": "黑龙江省通信管理局官方转载",
                 "scope": "exact",
                 "url": "https://hljca.miit.gov.cn/gzcy/zjdc/art/2023/art_41a6f2089a524beebf4895c01ac240d7.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "行为评估与训练计划｜读懂动物再定方案｜评估动物的性格、能力与训练适宜性，了解其年龄、健康与既往训练史，具体目标和训练方法依本人实际训练、职责及机构程序，本页仅描述任务。 — 25/100; weight=1/3; animal-trainers.profile.responsibilities-block.1[0]",
+                  "基础与进阶训练执行｜用信号分步塑造行为｜用口令、手势、缰绳、马刺等指令引导动物逐步完成目标行为，按表演或比赛的既定标准训练，并纠正踢人、脱缰、抗拒装鞍等不良习惯。 — 0/100; weight=1/3; animal-trainers.profile.responsibilities-block.1[1]",
+                  "客户沟通与教学｜把方法教出去｜向动物主人说明训练原理与家庭作业，教主人自己训练犬只，教视障人士与导盲犬配合，组织或举办动物表演；动物福利说明与现场方法另按实际岗位核。 — 25/100; weight=1/3; animal-trainers.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37377,7 +37397,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37733,15 +37753,27 @@
         "source_refs": [
           "operations"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "动物训练师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "工作动物训练：行为评估与方案设计 · 训练执行与安全控制 · 客户交付与记录",
@@ -37792,7 +37824,7 @@
       "text": "动物训练师"
     }
   },
-  "source_content_sha256": "430f0f32838e2ff6f3ac78e92ea2efe81f11470d9789690a5a2d120c2bbff2dc",
+  "source_content_sha256": "e925ba9c57d79ae62e4a11a58f616ffe445af93c020850d0010c2245223b884b",
   "subject": {
     "canonical_slug": "animal-trainers",
     "name": "动物训练师",

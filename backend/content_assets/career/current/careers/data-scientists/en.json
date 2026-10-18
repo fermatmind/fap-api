@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24337,7 +24340,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tasks, work context and technology terms in recruitment have been verified. Code/feature drafts, reporting and experimental assistance are editorial candidates awaiting validation. This round did not measure efficiency gains, employer GenAI adoption or replacement dates. Model validation requires checking data and methods; employer accounts do not replace lawful grounds for processing personal information. Separate voluntary NIST governance from statutory PIPL duties; projected growth is not an observed causal effect of tools."
+              "Tasks, work context and technology terms in recruitment have been verified. Code/feature drafts, reporting and experimental assistance are editorial candidates awaiting validation. This round did not measure efficiency gains, employer GenAI adoption or replacement dates. Model validation requires checking data and methods; employer accounts do not replace lawful grounds for processing personal information. Separate voluntary NIST governance from statutory PIPL duties; projected growth is not an observed causal effect of tools. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31828,6 +31831,23 @@
                 "publisher": "scikit-learn developers",
                 "scope": "contextual",
                 "url": "https://scikit-learn.org/stable/common_pitfalls.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Problem definition and communication | Identifying management objectives that data analysis can address is Core; interviewing stakeholders is New without an importance rating, so it cannot be described as rated Core or mandatory for everyone. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Data preparation | Cleaning/processing and sampling techniques are Core; designing survey instruments is Supplemental. Editors suggest checking fields/quality/lawful purposes, rather than uniformly treating optional surveys as job responsibilities. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Modeling and comparison | Build and compare models | Apply feature selection algorithms to build models, compare models using statistical performance metrics such as loss functions or the proportion of variance explained, and identify relationships, trends or factors that may affect outcomes. — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37248,7 +37268,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career track comparison",
       "fit": "Career fit guide",
@@ -37519,15 +37539,27 @@
         "source_refs": [
           "r5-nbs-it"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Data Scientists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Data cleaning and modeling · model validation · visualization and business interpretation",
@@ -37578,7 +37610,7 @@
       "text": "Data Scientists"
     }
   },
-  "source_content_sha256": "65c2a6da05d68da215172bf1cf1ae55d431e3254e99e9a48a636681836dfd6fa",
+  "source_content_sha256": "8f2f160af5f801982cc903c123abc42c2310c7ffb5b0b26a38c1539013038054",
   "subject": {
     "canonical_slug": "data-scientists",
     "name": "Data Scientists",

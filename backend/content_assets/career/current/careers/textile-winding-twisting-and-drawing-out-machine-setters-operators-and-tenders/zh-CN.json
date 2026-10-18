@@ -8,6 +8,9 @@
       "fact:china-production-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25528,7 +25531,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先讨论信息整理：工单核对、计数汇总、异常摘要和交班草稿；现场状态及质量须匹配验证。BLS2025—2035本职总体下降10.3%、年均约2,400空缺含替补，非AI因果；本页不赋单职业AI分数或替代率。"
+              "优先讨论信息整理：工单核对、计数汇总、异常摘要和交班草稿；现场状态及质量须匹配验证。BLS2025—2035本职总体下降10.3%、年均约2,400空缺含替补，非AI因果；本页另列AI影响度编辑估算，不提供实测替代率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.ai_impact_table.answer",
@@ -33118,6 +33121,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "准备｜设定与权限｜确认目标机型训练和批准条件，不能把一种卷绕机经验泛化为全部牵伸设备能力。 — 25/100; weight=1/3; textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.responsibilities_block.02[0]",
+                  "监控｜运行与产品｜观察断头、缺陷、短缺及机器表现，记录时间、机台和材料，及时报告。 — 25/100; weight=1/3; textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.responsibilities_block.03[0]",
+                  "生产｜卷绕加捻或牵伸｜在训练授权范围内操作或看护设备，保持输入、产品与记录追溯。 — 25/100; weight=1/3; textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38360,7 +38380,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38520,15 +38540,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "纺织、机器铺设工、操作员、看护员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 51-6064.00 精确职业口径",
@@ -38579,7 +38611,7 @@
       "text": "纺织卷绕、加捻与牵伸设备设定员、操作员与看护员"
     }
   },
-  "source_content_sha256": "52c173c4b3de3fd0986f3c9b06fa2f3eec7fbcb1aace397a19185972397aed54",
+  "source_content_sha256": "1a88944e8f33e84900891128756048cdc7d801e15d75c10563c65dd0039448e6",
   "subject": {
     "canonical_slug": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders",
     "name": "纺织卷绕、加捻与牵伸设备设定员、操作员与看护员",

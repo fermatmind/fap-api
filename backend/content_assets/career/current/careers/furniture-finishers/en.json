@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25131,7 +25134,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: quantitative AI exposure, adoption, efficiency, and employment causality for this occupation were not obtained. Editors may try synthesized work orders and record drafts, but a significant speedup, a moderate level, or a substitution timeline has not been proven. The 22 tasks, 13 core and 9 supplemental, and the 4 software categories only describe current materials and do not predict that the future will always be human; real materials, process quality, and hazardous work are verified according to authorized procedures."
+              "Insufficient evidence: quantitative AI exposure, adoption, efficiency, and employment causality for this occupation were not obtained. Editors may try synthesized work orders and record drafts, but a significant speedup, a moderate level, or a substitution timeline has not been proven. The 22 tasks, 13 core and 9 supplemental, and the 4 software categories only describe current materials and do not predict that the future will always be human; real materials, process quality, and hazardous work are verified according to authorized procedures. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "furniture-finishers.ai-impact.ai-impact-table.18",
@@ -32700,6 +32703,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "The Woodworkers group and the 51-7021 this-occupation row are kept separate",
                 "url": "https://www.bls.gov/ooh/production/woodworkers.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Examine furniture to determine the extent of damage and decide on the repair or restoration approach — 25/100; weight=1/3; furniture-finishers.ai-impact.ai-impact-table.97[0]",
+                  "Fill cracks, repair breakage and warping, and sand and shape — 0/100; weight=1/3; furniture-finishers.ai-impact.ai-impact-table.105[0]",
+                  "Brush and spray or hand rub and distress and print and gild — 0/100; weight=1/3; furniture-finishers.ai-impact.ai-impact-table.113[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37676,7 +37696,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37872,15 +37892,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Furniture Finishers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Furniture Finishers · tasks, deliverables, and responsibility boundaries",
@@ -37931,7 +37963,7 @@
       "text": "Furniture Finishers"
     }
   },
-  "source_content_sha256": "4db8cf01db7f61e4f2a29c41d3761037447738651e0133c5741d4c8195e69b5e",
+  "source_content_sha256": "5e122896e2f9645f84bf1b37e4454c9686e6306c9cbf1b9395eadf5e87d7bb45",
   "subject": {
     "canonical_slug": "furniture-finishers",
     "name": "Furniture Finishers",

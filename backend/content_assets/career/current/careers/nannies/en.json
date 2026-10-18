@@ -17,6 +17,9 @@
       "fact:entry-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -13669,6 +13672,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/39-9011.01"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Teach children safe behavior, remove hazards, and establish rules and boundaries — 0/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Organize age-appropriate games, reading, crafts, and outdoor activities — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Regularly discuss children's activities and development with parents and document the day — 50/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13856,7 +13876,7 @@
             }
           }
         ],
-        "answer": "Task exposure does not establish institutional adoption: Information searches, activity ideas, and record organization can be assisted, but judgments of children's condition, safety responses, first aid, and parent communication remain caregivers' responsibilities.",
+        "answer": "Task exposure does not establish institutional adoption: Information searches, activity ideas, and record organization can be assisted, but judgments of children's condition, safety responses, first aid, and parent communication remain caregivers' responsibilities. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET occupational profile (39-9011.01)",
@@ -15605,7 +15625,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15777,15 +15797,27 @@
         "source_refs": [
           "mohrss-wage"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Nannies",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Daily care and safety",
@@ -15836,7 +15868,7 @@
       "text": "Nannies"
     }
   },
-  "source_content_sha256": "60e2d49890b67eac7fe651327ea24d942fd251ae6f87680bfd676e7cda3a2f98",
+  "source_content_sha256": "081c07ae3398b2f66134cf87feba02b4c1cf37dd24468f82bc055b5a9725a9c2",
   "subject": {
     "canonical_slug": "nannies",
     "name": "Nannies",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24736,7 +24739,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "GIA2024 \"Classification of Gem Materials Using Machine Learning\" studies the origin classification of natural alexandrite, the treatment of laboratory-grown CVD diamonds and the origin classification of natural seawater pearls, using reference samples and instrument data to assist existing microscopic, spectroscopic and geochemical methods; some overlapping samples are still hard to classify. This is a gemmological laboratory classification case, not evidence of valuation or of full deployment. This round still lacks the 13-2022 adoption rate, cross-task effects, wage and employment causality and a disappearance year."
+              "GIA2024 \"Classification of Gem Materials Using Machine Learning\" studies the origin classification of natural alexandrite, the treatment of laboratory-grown CVD diamonds and the origin classification of natural seawater pearls, using reference samples and instrument data to assist existing microscopic, spectroscopic and geochemical methods; some overlapping samples are still hard to classify. This is a gemmological laboratory classification case, not evidence of valuation or of full deployment. This round still lacks the 13-2022 adoption rate, cross-task effects, wage and employment causality and a disappearance year. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "appraisers-of-personal-and-business-property.ai-impact.ai-impact-table.18",
@@ -32414,6 +32417,23 @@
                 "publisher": "GIA Gems & Gemology (Hardman and others)",
                 "scope": "contextual",
                 "url": "https://www.gia.edu/gems-gemology/fall-2024-machine-learning"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Subject examination and photographic records｜Fixing the physical characteristics of the subject｜Examining personal or business property on site, photographing the subject, recording physical characteristics such as dimensions, quality and design, and checking whether the subject matches the legal description or certification. — 0/100; weight=1/3; appraisers-of-personal-and-business-property.profile.responsibilities-block.1[0]",
+                  "Value type and value calculation｜Choosing the right basis of value for the need｜Determining the value type such as fair value, replacement value or liquidation value according to the owner's or client's needs, and choosing methods and parameters accordingly. — 50/100; weight=1/3; appraisers-of-personal-and-business-property.profile.responsibilities-block.1[2]",
+                  "Reports and subject descriptions｜Issuing a reviewable report to standard｜Writing and submitting appraisal reports for subjects such as jewellery, artworks, antiques, collectibles and equipment, writing an accurate description of the subject, and explaining the methods, basis and limitations. — 75/100; weight=1/3; appraisers-of-personal-and-business-property.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37314,7 +37334,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of occupation directions",
       "fit": "Occupational fit guide",
@@ -37654,15 +37674,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Appraisers of Personal and Business Property",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Valuation work: subject examination and certification checks · comparable cases and value type calculation · appraisal reports and database records",
@@ -37713,7 +37745,7 @@
       "text": "Appraisers of Personal and Business Property"
     }
   },
-  "source_content_sha256": "c8471a086c19d9ef33fd0972e2efb4499ac34b6331921af46204048839e353fe",
+  "source_content_sha256": "8237e8374c4244cdb01bfd3d171ecfe8231d32b7b85407e9a2841f5001b70e4c",
   "subject": {
     "canonical_slug": "appraisers-of-personal-and-business-property",
     "name": "Appraisers of Personal and Business Property",

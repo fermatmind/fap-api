@@ -56,6 +56,9 @@
       "fact:cs-us-wage-p75-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25195,7 +25198,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可优先评估摘要、报告草稿与指标整理等辅助用途；未取得CSO职业级AI采用、准确率、节省时间或裁员实测。任务、软件关键词和ILO暴露指数不能替代这类证据；须核输入、计算、权限及复核负担。"
+              "可优先评估摘要、报告草稿与指标整理等辅助用途；未取得CSO职业级AI采用、准确率、节省时间或裁员实测。任务、软件关键词和ILO暴露指数不能替代这类证据；须核输入、计算、权限及复核负担。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "chief-sustainability-officers.ai-impact.ai-impact-table.18",
@@ -34100,6 +34103,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-4042.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "战略与执行｜制定或执行可持续战略并监控成效｜制定或执行应对能源使用与资源节约与回收与减排与废弃物消除与运输与教育与建筑设计等议题的战略，并监控与评估可持续项目的有效性（对应 O*NET 任务重要度 84、85）。 — 50/100; weight=1/3; chief-sustainability-officers.profile.responsibilities-block.1[0]",
+                  "数据与文件｜维护项目文件与预算以支撑决策｜建立并维护可持续项目文件如进度与预算（对应任务重要度 71）。 — 75/100; weight=1/3; chief-sustainability-officers.profile.responsibilities-block.1[2]",
+                  "报告与披露｜编写可持续与影响报告并分发｜为供应商与员工与学术界与媒体与政府与公共利益团体等编写可持续报告与演示或提案，并编写与分发财务或环境影响报告（对应任务重要度 76、58）。 — 75/100; weight=1/3; chief-sustainability-officers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39065,7 +39085,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -39508,15 +39528,27 @@
         "source_refs": [
           "cs-nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "首席可持续发展官",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · EIC",
@@ -39567,7 +39599,7 @@
       "text": "首席可持续发展官"
     }
   },
-  "source_content_sha256": "fd5ff12611b582b20694bf1f78647bbaf29a004e33fb1545a36aa5c82d6dd00d",
+  "source_content_sha256": "801f835593382b917211b4e8ea13ed0ec010546b8c3f14326556e748b2f438d8",
   "subject": {
     "canonical_slug": "chief-sustainability-officers",
     "name": "首席可持续发展官",

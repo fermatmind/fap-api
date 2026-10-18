@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:market-employment-2025": {
         "status": "pending_mapping"
       },
@@ -7561,7 +7564,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial hypothesis: tools only organize this page's fictional D2 inspection table and handover drafts; humans recalculate −1 / +1 / +2 and check Q's material and G4 pending review. Do not use real patient data or generate clinical prescriptions, processing parameters, or fitting release conclusions. Official software lists include CAD/CAM, but Hot Technologies recruitment mentions do not establish generative AI adoption, performance, or automated manufacturing."
+              "Editorial trial hypothesis: tools only organize this page's fictional D2 inspection table and handover drafts; humans recalculate −1 / +1 / +2 and check Q's material and G4 pending review. Do not use real patient data or generate clinical prescriptions, processing parameters, or fitting release conclusions. Official software lists include CAD/CAM, but Hot Technologies recruitment mentions do not establish generative AI adoption, performance, or automated manufacturing. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "medical-appliance-technicians.ai-impact.ai-impact-table.2",
@@ -8771,6 +8774,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/49-9062.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Fabricate and assemble devices according to prescriptions — 0/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Measure and produce models and drawings — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Adjust fit and repair devices — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11177,7 +11197,7 @@
     ],
     "path": "/en/career/jobs/medical-appliance-technicians",
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Salaries",
       "direction-comparison": "Adjacent Occupation Comparison",
       "fit": "Fit Signals",
@@ -11289,15 +11309,27 @@
         "source_refs": [
           "onet-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Medical Appliance Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Prescription Interpretation, Fabrication, and Assembly",
@@ -11348,7 +11380,7 @@
       "text": "Medical Appliance Technicians: Work, US Wages, and Entry Paths | FermatMind"
     }
   },
-  "source_content_sha256": "79a9ea3f372b54b29f1124d78a9110bc88e111ebd22c73833d273e1c649d2a67",
+  "source_content_sha256": "c88c5d6de4c05a7e79039acdbff2e8ff92d69a3487d797960d586c125102b0fa",
   "subject": {
     "canonical_slug": "medical-appliance-technicians",
     "name": "Medical Appliance Technicians",

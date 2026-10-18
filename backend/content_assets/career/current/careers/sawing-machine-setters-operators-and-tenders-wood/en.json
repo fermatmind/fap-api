@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24397,7 +24400,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not obtained evidence of AI adoption rates, replacement rates or a disappearance year specific to sawing machine setters, operators and tenders, wood. Existing research mainly measures cross-occupation task exposure or employer expectations, not layoff rates in this occupation. As a task-level editorial observation, AI can help with record summaries, specification retrieval and anomaly classification; lumber judgment, machine state, guard and blade safety and acceptance of finished dimensions must still be verified on site by trained staff."
+              "Insufficient evidence: this page has not obtained evidence of AI adoption rates, replacement rates or a disappearance year specific to sawing machine setters, operators and tenders, wood. Existing research mainly measures cross-occupation task exposure or employer expectations, not layoff rates in this occupation. As a task-level editorial observation, AI can help with record summaries, specification retrieval and anomaly classification; lumber judgment, machine state, guard and blade safety and acceptance of finished dimensions must still be verified on site by trained staff. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "sawing-machine-setters-operators-and-tenders-wood.ai-impact.ai-impact-table.18",
@@ -32231,6 +32234,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Saw setup preparation｜Check blades, guides, guards and the feed path against equipment procedures and authority, with adjustment by authorized staff when needed.｜Output a pre-start inspection record, without repairing beyond authority. — 25/100; weight=1/3; sawing-machine-setters-operators-and-tenders-wood.profile.responsibilities-block.1[1]",
+                  "Wood sawing and feeding｜Within the scope of authorized training, operate or tend the saw, guide lumber to dimension and monitor equipment operation.｜Output cut workpieces and process records. — 25/100; weight=1/3; sawing-machine-setters-operators-and-tenders-wood.profile.responsibilities-block.1[2]",
+                  "Dimension and appearance inspection｜Use measuring tools to check cut dimensions, straightness or visible defects and mark out-of-tolerance workpieces.｜Output per-piece inspection results and isolation / rework information. — 25/100; weight=1/3; sawing-machine-setters-operators-and-tenders-wood.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37139,7 +37159,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Occupational fit guide",
@@ -37410,15 +37430,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Sawing machine setters, operators and tenders, wood",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Sawing machine operator · task breakdown · outcome review",
@@ -37469,7 +37501,7 @@
       "text": "Sawing machine setters, operators and tenders, wood"
     }
   },
-  "source_content_sha256": "08f3e3db7ee678e0cf1a464447ba50ceb5893f95483616504a210a8a444c7348",
+  "source_content_sha256": "6c30eaae0ba97a3e39262a63e01315a2eeb8bdd5a4f63fed4f297da1efae0548",
   "subject": {
     "canonical_slug": "sawing-machine-setters-operators-and-tenders-wood",
     "name": "Sawing machine setters, operators and tenders, wood",

@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24364,7 +24367,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可讨论文书和路线候选辅助，不能据此给替代时点或宣称已有提效。导航/调度优化、扫码、电子支付、车载诊断、辅助驾驶与生成式AI是不同系统；须核实际车型、运行授权与结果。O*NET时间压力和错误后果是情境回答，不证明任何系统采用或岗位损失。"
+              "可讨论文书和路线候选辅助，不能据此给替代时点或宣称已有提效。导航/调度优化、扫码、电子支付、车载诊断、辅助驾驶与生成式AI是不同系统；须核实际车型、运行授权与结果。O*NET时间压力和错误后果是情境回答，不证明任何系统采用或岗位损失。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31988,6 +31991,23 @@
                 "publisher": "ILO",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "线路执行｜遵守法规并按线行驶｜遵守交通法规并遵循既定的交通与运输程序，阅读地图并遵循书面或口头的地理指引，驾驶载重三吨以下的车辆在指定目的地之间运送物资。 — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "装卸与核对｜按单据核实并装卸｜根据装运单据核实库存装载的内容，并装卸卡车、货车或汽车，确认件数与标识后再交接。 — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "维护日志货物账单记录为核心，使用维护车载称重计量工具为补充；具体法定记录按业务核。 — 75/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37436,7 +37456,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37707,15 +37727,27 @@
         "source_refs": [
           "r5-nbs-transport"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "轻型卡车司机",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "运输与投递 · 车辆检查 · 货物与单据核对",
@@ -37766,7 +37798,7 @@
       "text": "轻型卡车司机"
     }
   },
-  "source_content_sha256": "2232e3e6fe144759bf514dd9e63a5be9dbe54a0f3abb3c3ffe35c3cbd481ccc5",
+  "source_content_sha256": "2dab2f88da65c89bfc8ca8fcf59f1eb68dd31e3fe756cefe0078e4eaf56e11f6",
   "subject": {
     "canonical_slug": "delivery-truck-drivers-and-driver-sales-workers",
     "name": "轻型卡车司机",

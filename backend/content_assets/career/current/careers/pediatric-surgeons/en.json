@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24358,7 +24361,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence gap: no actual generative AI adoption, overall substitution rate, reliable clinical effect, or substitution year for this occupation was verified. O*NET tasks include pediatric assessment, family communication, surgery, and postoperative monitoring; literature indexing and material organization in approved environments are editorial trial suggestions, and patient facts, diagnosis, consent, and surgery remain with the authorized team. The BLS 2.0% growth, net 0.0 thousand, and annual average 0.0 thousand openings including replacements are an overall rounded projection, not AI adoption, individual unemployment, or Chinese demand."
+              "Evidence gap: no actual generative AI adoption, overall substitution rate, reliable clinical effect, or substitution year for this occupation was verified. O*NET tasks include pediatric assessment, family communication, surgery, and postoperative monitoring; literature indexing and material organization in approved environments are editorial trial suggestions, and patient facts, diagnosis, consent, and surgery remain with the authorized team. The BLS 2.0% growth, net 0.0 thousand, and annual average 0.0 thousand openings including replacements are an overall rounded projection, not AI adoption, individual unemployment, or Chinese demand. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "pediatric-surgeons.ai-impact.ai-impact-table.18",
@@ -31982,6 +31985,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/202501/P020250116506795831658.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Pediatric material assessment — 50/100; weight=1/3; pediatric-surgeons.ai-impact.ai-impact-table.95[0]",
+                  "Surgical performance — 0/100; weight=1/3; pediatric-surgeons.ai-impact.ai-impact-table.107[0]",
+                  "Family communication — 25/100; weight=1/3; pediatric-surgeons.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36893,7 +36913,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37161,15 +37181,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Pediatric Surgeons",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Pediatric surgical assessment · multidisciplinary consultation",
@@ -37220,7 +37252,7 @@
       "text": "Surgeons"
     }
   },
-  "source_content_sha256": "1514b2aced446b387175fd17c6cfebb85b3a259fc1e64321afc246c220fcde6d",
+  "source_content_sha256": "f1f9d2c02b53aca79a235505d69f7764bc87730e74b8f869c089d3b7653376d5",
   "subject": {
     "canonical_slug": "pediatric-surgeons",
     "name": "Pediatric Surgeons",

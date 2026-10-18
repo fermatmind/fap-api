@@ -17,6 +17,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:interest-code": {
         "status": "pending_mapping"
       },
@@ -13804,6 +13807,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2199.09"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "使用三维 CAD 设计纳米材料、器件或纳米系统并确定工艺路线 — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "合成、加工或表征纳米材料并记录工艺参数 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "建立模型分析纳米尺度物理与器件行为 — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13991,7 +14011,7 @@
             }
           }
         ],
-        "answer": "任务暴露不等于已采用：文献检索、数据整理、仿真后处理与文档草拟可被辅助，但实验设计判断、表征结果解释、安全授权与最终技术放行仍由有责任的人承担。",
+        "answer": "任务暴露不等于已采用：文献检索、数据整理、仿真后处理与文档草拟可被辅助，但实验设计判断、表征结果解释、安全授权与最终技术放行仍由有责任的人承担。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET 职业档案（17-2199.09）",
@@ -15742,7 +15762,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15950,15 +15970,27 @@
         "source_refs": [
           "onet-cert"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "纳米系统工程师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "纳米尺度材料与器件设计",
@@ -16009,7 +16041,7 @@
       "text": "纳米系统工程师"
     }
   },
-  "source_content_sha256": "fbdcdcbd5ad1afa79e4da7c7fc7582740ced2225bd7f44beeca798fbffb0801d",
+  "source_content_sha256": "a26cee101aa55c2f26de38d1e1212342bf4182c75e65cc53e917209f47bfa357",
   "subject": {
     "canonical_slug": "nanosystems-engineers",
     "name": "纳米系统工程师",

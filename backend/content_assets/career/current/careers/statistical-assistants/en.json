@@ -29,6 +29,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24778,7 +24781,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist statistical assistants with code, field mapping and report drafts, but the exposure research read on this page does not prove this occupation's actual adoption or unemployment rate. Before use, confirm the data licence and processing rules; after use, review with independent formulas, source records and validation samples. This page does not establish a reviewable task scoring scale, so it provides no substitution rate, year of disappearance or task score."
+              "AI can assist statistical assistants with code, field mapping and report drafts, but the exposure research read on this page does not prove this occupation's actual adoption or unemployment rate. Before use, confirm the data licence and processing rules; after use, review with independent formulas, source records and validation samples. The external materials do not supply a measured task scoring scale, so it shows a separate editorial task-sample estimate, without a substitution rate or year of disappearance. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "statistical-assistants.ai-impact.ai-impact-table.18",
@@ -32739,6 +32742,23 @@
                 "publisher": "Publicity Department of the Party Committee of Sun Yat-sen University",
                 "scope": "related",
                 "url": "https://xcb.sysu.edu.cn/zytz/1380195.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Field mapping and type checking — 75/100; weight=1/3; statistical-assistants.ai-impact.ai-impact-table.95[0]",
+                  "Generate summary formulas according to the rules — 75/100; weight=1/3; statistical-assistants.ai-impact.ai-impact-table.103[0]",
+                  "Generate charts and explanatory text — 75/100; weight=1/3; statistical-assistants.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37647,7 +37667,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational track comparison",
       "fit": "Occupational fit guide",
@@ -37967,15 +37987,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Statistical assistants",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Data preparation and statistical calculation",
@@ -38026,7 +38058,7 @@
       "text": "Statistical assistants"
     }
   },
-  "source_content_sha256": "7dadfbecb6264ff55d043d5216440ed9e2408e2a374c85d1e6e8522fe3ab0d7f",
+  "source_content_sha256": "3f377da8f901076e3654cae43dce7cf9d29687d2279a7cee8ba4e8626d94a85a",
   "subject": {
     "canonical_slug": "statistical-assistants",
     "name": "Statistical assistants",

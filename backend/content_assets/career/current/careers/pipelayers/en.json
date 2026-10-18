@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24418,7 +24421,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Generative AI may assist in organizing existing inspection records, shift summaries, and public material drafts, with the actual effect requiring validation; digital measurement assistance for position and elevation records is not generative text automation. Tool output cannot authorize trench entry or replace joint acceptance. The ILO task exposure study does not provide an actual 47-2151 replacement rate; the BLS overall projection does not separate out the AI contribution."
+              "Generative AI may assist in organizing existing inspection records, shift summaries, and public material drafts, with the actual effect requiring validation; digital measurement assistance for position and elevation records is not generative text automation. Tool output cannot authorize trench entry or replace joint acceptance. The ILO task exposure study does not provide an actual 47-2151 replacement rate; the BLS overall projection does not separate out the AI contribution. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "pipelayers.ai-impact.ai-impact-table.18",
@@ -32367,6 +32370,23 @@
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "context",
                 "url": "https://www.onetonline.org/link/summary/49-3042.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Trench preparation｜Verify the subgrade and protection status according to the plan｜Do not enter when there are danger signs. — 25/100; weight=1/3; pipelayers.profile.responsibilities-block.1[1]",
+                  "Pipe positioning｜Place the pipe section at the drawing position and elevation｜Hoisting is carried out by authorized personnel. — 0/100; weight=1/3; pipelayers.profile.responsibilities-block.1[2]",
+                  "Joint connection｜Connect and seal according to the specified method｜Record materials and inspection results. — 0/100; weight=1/3; pipelayers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37272,7 +37292,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37540,15 +37560,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Pipelayers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Pipe laying · trenches and joints",
@@ -37599,7 +37631,7 @@
       "text": "Pipelayer career guide: trenches, pipe connection, wages, and entry paths"
     }
   },
-  "source_content_sha256": "3f6a3ee8e8fbeef137bc601d5358968af04c473120757ac2d1d66f3068487f7b",
+  "source_content_sha256": "db231c5ba8663dda36f9122cdf67b232f4070ecc5feb9e6668e4020e043ca3c1",
   "subject": {
     "canonical_slug": "pipelayers",
     "name": "Pipelayers",

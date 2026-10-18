@@ -14,6 +14,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -7565,7 +7568,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial assistance candidates | Lesson materials, quizzes, and draft feedback may be tested using entirely fictional V inputs, checking curriculum, arithmetic, and grounds item by item; no efficiency or learning effects have been measured on this page. Real student information, classroom supervision, and assessment follow school permission, data rules, and human review; task exposure cannot establish adoption."
+              "Editorial assistance candidates | Lesson materials, quizzes, and draft feedback may be tested using entirely fictional V inputs, checking curriculum, arithmetic, and grounds item by item; no efficiency or learning effects have been measured on this page. Real student information, classroom supervision, and assessment follow school permission, data rules, and human review; task exposure cannot establish adoption. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "kindergarten-and-elementary-school-teachers.ai-impact.ai-impact-table.2",
@@ -8930,6 +8933,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/25-2012.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Design and prepare learning activities — 75/100; weight=1/3; kindergarten-and-elementary-school-teachers.profile.responsibilities-block.4[0]",
+                  "Teach groups and individuals and manage the classroom — 25/100; weight=1/3; kindergarten-and-elementary-school-teachers.profile.responsibilities-block.4[0]",
+                  "Observe learning and provide feedback — 50/100; weight=1/3; kindergarten-and-elementary-school-teachers.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11210,7 +11230,7 @@
     ],
     "path": "/en/career/jobs/kindergarten-and-elementary-school-teachers",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11360,15 +11380,27 @@
         "source_refs": [
           "onet-trends"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Elementary school teachers, except special education",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Elementary school teachers, except special education · Teaching, classroom, and student safety boundaries",
@@ -11419,7 +11451,7 @@
       "text": "Elementary school teacher, except special education, career assessment: teaching, classroom, and student safety boundaries"
     }
   },
-  "source_content_sha256": "19ab1809d9f93d16b068b9a6b6070d198af40614133d2058cef0398062631560",
+  "source_content_sha256": "769e268a7eb8cbc80955c3cd2959f5a869d51364e74b3cc96c1191f36da994ee",
   "subject": {
     "canonical_slug": "kindergarten-and-elementary-school-teachers",
     "name": "Elementary school teachers, except special education",

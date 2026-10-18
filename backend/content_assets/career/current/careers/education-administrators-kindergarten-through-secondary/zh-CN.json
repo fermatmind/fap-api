@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24346,7 +24349,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "试验候选：可考虑成绩数据整理、课程资料摘要、预算排课及报告草稿等可复核用途；本轮未取得本职业采用、提效或替代实证。传统信息系统与生成式AI分开核；实际使用须核原始数据、效果、合法基础、安全与岗位权限，工具不自动取得管理决定或法律责任。"
+              "试验候选：可考虑成绩数据整理、课程资料摘要、预算排课及报告草稿等可复核用途；本轮未取得本职业采用、提效或替代实证。传统信息系统与生成式AI分开核；实际使用须核原始数据、效果、合法基础、安全与岗位权限，工具不自动取得管理决定或法律责任。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -32074,6 +32077,23 @@
                 "publisher": "FermatMind本轮作者",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "观察教学并审阅学习材料并与教师共同制定课程标准与绩效目标与学校改进计划 — 50/100; weight=1/3; actors.display.ai_impact_table.tasks.1.task[0]",
+                  "为学生提供学业与行为与出勤指导并执行纪律与出勤规则 — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.3.task[0]",
+                  "编制与提交预算并确定经费与物资分配并授权采购 — 50/100; weight=1/3; actors.display.ai_impact_table.tasks.5.task[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37363,7 +37383,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37610,15 +37630,27 @@
         "source_refs": [
           "r5-ooh-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "教育行政管理者、幼儿园中等教育",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "教学与课程领导 · 人事与家校 · 预算与运营与合规",
@@ -37669,7 +37701,7 @@
       "text": "教育行政管理者、幼儿园至中等教育"
     }
   },
-  "source_content_sha256": "de574254151f74ea4177e192f7bc119c81e45f8980137d2c2705c3a979c91c8c",
+  "source_content_sha256": "247d262c30929cd8936339f916644c4f9ca545c92ae09c71d3d94df696d61dbf",
   "subject": {
     "canonical_slug": "education-administrators-kindergarten-through-secondary",
     "name": "教育行政管理者、幼儿园至中等教育",

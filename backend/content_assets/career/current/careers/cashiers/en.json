@@ -59,6 +59,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24872,7 +24875,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Conclusion: reviewable steps such as candidate item recognition, prompts for price and promotion checks, calculating change and totals, and organizing reconciliation sheets and anomaly lists can be assisted by tools, but there is no official evidence that this replaces responsibility for physical identification and weighing and pricing double-checks, refund and discount authorization, age and identity verification, customer dispute handling and discrepancy determination. AI exposure is not the same as automation rate or job disappearance; task exposure, the degree of process automation and employment numbers are three different concepts."
+              "Conclusion: reviewable steps such as candidate item recognition, prompts for price and promotion checks, calculating change and totals, and organizing reconciliation sheets and anomaly lists can be assisted by tools, but there is no official evidence that this replaces responsibility for physical identification and weighing and pricing double-checks, refund and discount authorization, age and identity verification, customer dispute handling and discrepancy determination. AI exposure is not the same as automation rate or job disappearance; task exposure, the degree of process automation and employment numbers are three different concepts. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "cashiers.ai-impact.ai-impact-table.18",
@@ -31768,6 +31771,23 @@
                 "publisher": "FDA",
                 "scope": "contextual",
                 "url": "https://www.fda.gov/tobacco-products/retail-sales-tobacco-products/tobacco-21"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Checkout and settlement｜receiving payment by cash, bank card, mobile payment and vouchers and checking items, prices, promotions and tax amounts｜payment, change and payment voucher records. — 75/100; weight=1/3; cashiers.profile.responsibilities-block.1[0]",
+                  "Customer service｜greeting and directing customers, answering questions about products, processes and policies and helping customers find items｜customer enquiry and guidance records. — 50/100; weight=1/3; cashiers.profile.responsibilities-block.1[2]",
+                  "Reconciliation and handover｜counting the starting till at the start of the shift and checking the total transaction amount and total sales and preparing reports｜till count and shift reconciliation records. — 75/100; weight=1/3; cashiers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36697,7 +36717,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -37145,15 +37165,27 @@
         "source_refs": [
           "cash-nbs-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Cashiers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page gives no score)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 41-2011.00 · checkout and settlement / customer service, returns and exchanges / reconciliation and shift handover",
@@ -37204,7 +37236,7 @@
       "text": "Cashiers"
     }
   },
-  "source_content_sha256": "8235b093b2a360986cbdb09453acf5ef6dd156e8cd4106baf5f99770cd8028f7",
+  "source_content_sha256": "ca1607ecdd382c86616d620e9067f55173cc792bfd6d796399ac71943d77d9bb",
   "subject": {
     "canonical_slug": "cashiers",
     "name": "Cashiers",

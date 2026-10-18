@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24374,7 +24377,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. 47-5011 this subcategory: 2025 10,700 → 2035 10,900, an official net increase of 200; BLS Table 1.2 shows 1.6% growth, the O*NET trend page rounds to 2%, with 900 openings per year on average including growth and replacement, and 0.5% self-employed. The BLS OOH four subcategories 47-5011/47-5012/47-5013/47-5071 combined 112,700 → 115,100, growth 2%, a net increase of 2,400 and 9,900 openings per year on average; the combined figure is neither the 47-5010 three-occupation subtotal nor this subcategory. The projection is not an individual hiring rate or a net AI effect. BLS automatic drilling, robotics and remote monitoring are combined-group direction discussions and do not quantify generative AI effects for this subcategory; record organisation is an editorial inference."
+              "U.S. 47-5011 this subcategory: 2025 10,700 → 2035 10,900, an official net increase of 200; BLS Table 1.2 shows 1.6% growth, the O*NET trend page rounds to 2%, with 900 openings per year on average including growth and replacement, and 0.5% self-employed. The BLS OOH four subcategories 47-5011/47-5012/47-5013/47-5071 combined 112,700 → 115,100, growth 2%, a net increase of 2,400 and 9,900 openings per year on average; the combined figure is neither the 47-5010 three-occupation subtotal nor this subcategory. The projection is not an individual hiring rate or a net AI effect. BLS automatic drilling, robotics and remote monitoring are combined-group direction discussions and do not quantify generative AI effects for this subcategory; record organisation is an editorial inference. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24640,7 +24643,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain an item-by-item reviewable generative AI occupational score or versioned scale for 47-5011; the Hero remains in the missing state. Popular software terms and adjacent occupation scores cannot substitute for that basis."
+              "Insufficient evidence: this round did not obtain an item-by-item reviewable generative AI occupational score or versioned scale for 47-5011; the Hero shows a separate editorial estimate. Popular software terms and adjacent occupation scores cannot substitute for that basis."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -32227,6 +32230,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/49-3042.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inspect the derrick, crown block, cables and clamps as required, inspect the pumps, mud tanks and related equipment, and confirm that safety harnesses and other protective equipment and operating conditions are in place before working. — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Start and monitor the mud pumps, weigh clay and mix it with water and chemicals to prepare drilling mud according to the plan, monitor and adjust viscosity and density, and complete the mud report. — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "During tripping, steady the pipe and guide pipe sections in and out of the elevators, complete coordinated actions as directed, and stand clear of hazardous areas. — 0/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37511,7 +37531,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37739,15 +37759,27 @@
         "source_refs": [
           "r5-nbs-mining"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Derrick Operators, Oil and Gas",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Equipment checks · mud circulation and parameters · drill floor coordination",
@@ -37798,7 +37830,7 @@
       "text": "Derrick Operators, Oil and Gas"
     }
   },
-  "source_content_sha256": "929141d89ed65f84421c7531da70888744746c1385d78b788d5ee8980d4959a7",
+  "source_content_sha256": "330d85c40409e1cb766113bad9f58707ca8a10905834a2fb4e4fd1f18a18b035",
   "subject": {
     "canonical_slug": "derrick-operators-oil-and-gas",
     "name": "Derrick Operators, Oil and Gas",

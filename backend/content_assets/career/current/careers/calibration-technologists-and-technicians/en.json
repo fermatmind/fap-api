@@ -53,6 +53,9 @@
       "fact:current-us-industry-testing": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24548,7 +24551,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round obtained no substitution-rate or disappearance-year evidence. Retrieval, data processing, measurement, and testing may all be partly automated; system capability and personnel responsibility are kept separate, and lack of evidence is not treated as proof that automation is impossible."
+              "This round obtained no substitution-rate or disappearance-year evidence. Retrieval, data processing, measurement, and testing may all be partly automated; system capability and personnel responsibility are kept separate, and lack of evidence is not treated as proof that automation is impossible. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "calibration-technologists-and-technicians.ai-impact.ai-impact-table.18",
@@ -32350,6 +32353,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/17-3028.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Calibration and testing | compare measurements of conditions such as pressure, temperature, and humidity against known standards, perform calibration tests, and record readings | calibration and test raw records. — 25/100; weight=1/3; calibration-technologists-and-technicians.profile.responsibilities-block.1[1]",
+                  "Data analysis and deviation judgment | analyze test data to identify defects or determine calibration requirements, and explain deviations and uncertainty | deviation and uncertainty notes. — 75/100; weight=1/3; calibration-technologists-and-technicians.profile.responsibilities-block.1[3]",
+                  "Reporting and handover | write and submit calibration test result reports, compile status records for reference standards and gauges, and complete handover and filing | calibration reports and handover notes. — 75/100; weight=1/3; calibration-technologists-and-technicians.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37257,7 +37277,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37686,15 +37706,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Calibration Technologists and Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page does not score it)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 17-3028.00 · calibration and testing / dimension and appearance checks / disassembly and maintenance / records and reports",
@@ -37745,7 +37777,7 @@
       "text": "Calibration Technologists and Technicians"
     }
   },
-  "source_content_sha256": "7bd3e3faa3e71dc2376a1ef15529b3754873e9ed4176cf8467c45ad856598219",
+  "source_content_sha256": "f1f1779a3333a202ee973d26ad9cb90b48e9fb5575f23a3e21225ee665115178",
   "subject": {
     "canonical_slug": "calibration-technologists-and-technicians",
     "name": "Calibration Technologists and Technicians",

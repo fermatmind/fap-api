@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24415,7 +24418,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with retrieval, summarization, text coding suggestions, drafting code, and writing structure; the existing evidence cannot give political scientists a reliable “displacement rate.” Research questions, samples, measurement, ethics, and conclusions remain human responsibilities."
+              "AI can assist with retrieval, summarization, text coding suggestions, drafting code, and writing structure; the existing evidence cannot give political scientists a reliable “displacement rate.” Research questions, samples, measurement, ethics, and conclusions remain human responsibilities. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "political-scientists.ai-impact.ai-impact-table.18",
@@ -24618,7 +24621,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Compares O*NET occupational tasks with assistable steps; this page gives no overall AI score for the occupation."
+              "Compares O*NET occupational tasks with assistable steps; this page shows a separate editorial task-sample estimate."
             ]
           },
           "id": "political-scientists.ai-impact.ai-impact-table.32",
@@ -32194,6 +32197,23 @@
                 "publisher": "Zhejiang University Human Resources Office",
                 "scope": "contextual",
                 "url": "https://hr.zju.edu.cn/cn/29047/list.psp"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Problem inputs｜define the testable question within institutions, policy, or public opinion｜state the research objects, time, region, concepts, and required decisions, and do not treat a position as a problem definition. — 50/100; weight=1/3; political-scientists.profile.responsibilities-block.1[0]",
+                  "Material acquisition｜obtain original policy, literature, survey, or election material with permission｜record the source, sampling, variable definitions, and missing values, and protect respondents and institutional confidentiality. — 75/100; weight=1/3; political-scientists.profile.responsibilities-block.1[1]",
+                  "Method and analysis｜compare institutional mechanisms, code texts, or analyze data｜test alternative explanations and robustness, and avoid writing a correlation directly as a causal policy effect. — 75/100; weight=1/3; political-scientists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37106,7 +37126,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37374,15 +37394,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Political Scientists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Political scientists · political institution and policy research",
@@ -37433,7 +37465,7 @@
       "text": "Political Scientists"
     }
   },
-  "source_content_sha256": "cebe74bfd88262e8998bc4984410e7aab14f7ccce4634897a5514a3a9bf44e90",
+  "source_content_sha256": "ef09e6a5d9fc1b2cac85379a3a262a77d5eb8a8ba4a7b5f4c6b7b8c641666808",
   "subject": {
     "canonical_slug": "political-scientists",
     "name": "Political Scientists",

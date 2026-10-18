@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:g5-employment-2025": {
         "status": "pending_mapping"
       },
@@ -24283,7 +24286,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可讨论的是任务候选：工具可能帮助查找归类依据、比对单证和计算税费，最终申报仍要核对法域、授权、货物事实与适用条款。七项任务变化为编辑推演，尚无本职业部署成效实测。O*NET一般自动化调查为40%高度、40%中度，不是生成式AI采用或替代比例；是否影响岗位和工资仍缺因果证据。"
+              "可讨论的是任务候选：工具可能帮助查找归类依据、比对单证和计算税费，最终申报仍要核对法域、授权、货物事实与适用条款。七项任务变化为编辑推演，尚无本职业部署成效实测。O*NET一般自动化调查为40%高度、40%中度，不是生成式AI采用或替代比例；是否影响岗位和工资仍缺因果证据。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31908,6 +31911,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "归类与单证｜按税则归类并编制单证｜按税则编码制度对商品归类，编制与处理符合海关法规的进出口单证，并索取与汇总海关发票、原产地证与货运管制文件。 — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "税费处理｜计算并处理关税税费｜计算并追踪应缴关税与税费、按联邦税则与消费税报价，代客户支付款项，并申请关税减让、退税与退款。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "客户咨询｜解释限制与配额｜向进口商与出口商解释进口出口限制、税则制度、保险要求与配额，并提示减少关税与税费的合规路径。 — 50/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37488,7 +37508,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37672,15 +37692,27 @@
         "source_refs": [
           "g5-onet-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "海关经纪人",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "报关与关务 · 单证与税费 · 进出口合规",
@@ -37731,7 +37763,7 @@
       "text": "海关经纪人"
     }
   },
-  "source_content_sha256": "b8444844390cf0ed8e6cb94482645903fa159b9619c264f5ea21ca68d2f70b28",
+  "source_content_sha256": "e00f8298ee172643b55d2caf31661aa794ba523a1688b5bc5f8f77b264bab065",
   "subject": {
     "canonical_slug": "customs-brokers",
     "name": "海关经纪人",

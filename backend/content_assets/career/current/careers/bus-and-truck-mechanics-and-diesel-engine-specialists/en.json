@@ -20,6 +20,9 @@
       "fact:employment-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth-current": {
         "status": "pending_mapping"
       },
@@ -25001,7 +25004,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial usage example: organizing digital diagnostic data, measurement records, and information retrieval can assist repair personnel in verification; no measured AI efficiency gain or wholesale replacement evidence for this occupation was obtained in this round. Fault judgment, applicable safety review, and completion conclusions must be handled per actual duties; task exposure, process automation, and employment numbers are judged separately."
+              "Editorial usage example: organizing digital diagnostic data, measurement records, and information retrieval can assist repair personnel in verification; no measured AI efficiency gain or wholesale replacement evidence for this occupation was obtained in this round. Fault judgment, applicable safety review, and completion conclusions must be handled per actual duties; task exposure, process automation, and employment numbers are judged separately. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.18",
@@ -32686,6 +32689,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/49-3031.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Diagnosis and measurement | Take readings and measurements, listen and test, and judge the root cause per the manual | A reproducible diagnostic conclusion and basis. — 50/100; weight=1/3; bus-and-truck-mechanics-and-diesel-engine-specialists.profile.responsibilities-block.1[1]",
+                  "Disassembly and repair | Disassemble and assemble in sequence, replace or repair components, and adjust to specification | Repair process records and a replaced parts list. — 0/100; weight=1/3; bus-and-truck-mechanics-and-diesel-engine-specialists.profile.responsibilities-block.1[2]",
+                  "Road test and handover | Verify by road test, fill in repair and completion records and the settlement list, and explain on delivery | Road test records, settlement, and delivery documents. — 50/100; weight=1/3; bus-and-truck-mechanics-and-diesel-engine-specialists.profile.responsibilities-block.1[5]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37641,7 +37661,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38022,15 +38042,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Bus and Truck Mechanics and Diesel Engine Specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page does not score it)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 49-3031.00 · diesel engine diagnosis / disassembly and adjustment / safety system review and road testing",
@@ -38081,7 +38113,7 @@
       "text": "Bus and Truck Mechanics and Diesel Engine Specialists"
     }
   },
-  "source_content_sha256": "6560cca55a56bf20de1eb9580b3b3ab7224f65420b843f9263fdc1ced8d2adb0",
+  "source_content_sha256": "aac162848c34f207ee253410bf70e1c5a96c98f2218b8c2a4199571b690383d7",
   "subject": {
     "canonical_slug": "bus-and-truck-mechanics-and-diesel-engine-specialists",
     "name": "Bus and Truck Mechanics and Diesel Engine Specialists",

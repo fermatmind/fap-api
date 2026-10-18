@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24307,7 +24310,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The editorial trial directions are monitoring information summaries and handover and record drafts, and the actual effect was not obtained; bedside assessment and order verification and nursing and rescue must be completed per law and actual duties. A directory and traditional alarm systems and task exposure cannot prove generative AI adoption or saved working hours or job replacement."
+              "The editorial trial directions are monitoring information summaries and handover and record drafts, and the actual effect was not obtained; bedside assessment and order verification and nursing and rescue must be completed per law and actual duties. A directory and traditional alarm systems and task exposure cannot prove generative AI adoption or saved working hours or job replacement. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31808,6 +31811,23 @@
                 "publisher": "Official Chinese government website",
                 "scope": "proxy",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Continuous assessment and monitoring｜Evaluate vital sign and laboratory data｜Evaluate patient vital sign or laboratory data to judge the need for emergency intervention, monitor the condition and indicators such as sepsis or shock and take corresponding interventions, and compile and analyze monitoring and diagnostic data. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Order execution and life support nursing｜Execute per orders and standards｜Administer medication by intravenous and injection and oral and gastric tube routes, monitor intake and output and fluid and electrolyte balance, infuse blood and blood products and observe transfusion reactions, and set up and monitor equipment such as ECG monitoring and ventilators and alarms and oxygen therapy devices and transducers and pressure monitoring lines. — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Records and handover｜Record and hand over per standards｜Record the history and assessment findings and treatment plan and interventions and outcomes or plan revisions, hand over to the next shift and the interdisciplinary team in a structured way, and take part in patient care conferences. — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37177,7 +37197,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -37421,15 +37441,27 @@
         "source_refs": [
           "g04-industry"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Critical care nurses",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Health care and social assistance · critical care specialty nursing",
@@ -37480,7 +37512,7 @@
       "text": "Critical care nurses"
     }
   },
-  "source_content_sha256": "8f89e20a3ecd7e49e80e646eb983bc9512b3b62922c61646f40e30948b94ce2f",
+  "source_content_sha256": "5d8bd57faa225047565cc0d58dca22b51e7df7c613525431423e1821f0694ca9",
   "subject": {
     "canonical_slug": "critical-care-nurses",
     "name": "Critical care nurses",

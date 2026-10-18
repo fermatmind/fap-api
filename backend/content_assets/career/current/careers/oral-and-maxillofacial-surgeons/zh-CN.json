@@ -8,6 +8,9 @@
       "fact:cn-oms-private-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -13572,6 +13575,23 @@
                 "publisher": "AAOMS",
                 "scope": "exact",
                 "url": "https://aaoms.org/wp-content/uploads/2024/07/impacted_third_molars.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "核症状、口腔颌面影像和全身风险。 — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "定手术范围、麻醉和会诊方案。 — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "按资质完成拔牙、颌骨或软组织手术。 — 0/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13759,7 +13779,7 @@
             }
           }
         ],
-        "answer": "编辑分析：可在获准系统中试验病历文本整理和待核问题列表；影像判读、手术计划和临床操作须按医疗器械适用范围及专业权限核验，本页未取得本职业AI采用率或效果实测。",
+        "answer": "编辑分析：可在获准系统中试验病历文本整理和待核问题列表；影像判读、手术计划和临床操作须按医疗器械适用范围及专业权限核验，本页未取得本职业AI采用率或效果实测。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "职业任务",
@@ -15519,7 +15539,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15631,15 +15651,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "外科医师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "口腔颌面外科医生 · O*NET 29-1022.00",
@@ -15690,7 +15722,7 @@
       "text": "口腔颌面外科医生：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "031a54d69afe1dae7209c8b18d85bae6573eaa3e98f4530460f94721e5535492",
+  "source_content_sha256": "547a771ebdb95a7f8e36ad2d7ed293b430647916cd78c217d0e7046de67aa8c8",
   "subject": {
     "canonical_slug": "oral-and-maxillofacial-surgeons",
     "name": "口腔颌面外科医生",

@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7544,7 +7547,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务假设：普通预约/库存系统与生成式AI分开，后者可能草拟虚构服务资料；未取得本职业采用率或岗位结果。真实健康资料须有权限，手法、安全和转介由实际合格服务者负责，不以自动文本作诊断或替代就医。"
+              "编辑任务假设：普通预约/库存系统与生成式AI分开，后者可能草拟虚构服务资料；未取得本职业采用率或岗位结果。真实健康资料须有权限，手法、安全和转介由实际合格服务者负责，不以自动文本作诊断或替代就医。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "massage-therapists.ai-impact.ai-impact-table.2",
@@ -8708,6 +8711,23 @@
                 "publisher": "BLS",
                 "scope": "target occupation",
                 "url": "https://www.bls.gov/ooh/healthcare/chiropractors.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "管理预约并维护记录 — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "评估并实施手法治疗 — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "识别禁忌并转介 — 25/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11154,7 +11174,7 @@
     ],
     "path": "/zh/career/jobs/massage-therapists",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11266,15 +11286,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "按摩治疗师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "按摩与软组织治疗",
@@ -11325,7 +11357,7 @@
       "text": "按摩治疗师职业判断：工作、入行与执业边界"
     }
   },
-  "source_content_sha256": "f6be7a33cae7966f98210429c90fb23dd98659fa0bb4465c1ff11b3bd7c95d00",
+  "source_content_sha256": "9cbfa0e4c5eb0ed0924537f5d507b883d57d7ae67eee658c93df72fd6c12a136",
   "subject": {
     "canonical_slug": "massage-therapists",
     "name": "按摩治疗师",

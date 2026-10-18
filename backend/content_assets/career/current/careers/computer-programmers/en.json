@@ -17,6 +17,9 @@
       "fact:current-us-growth-exact-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24570,7 +24573,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Code / comments / use cases / documentation are candidates requiring testing; this round did not obtain occupation-level reliability / efficiency / employer AI adoption results, and software job posting wording does not prove deployment or working hour changes."
+              "Code / comments / use cases / documentation are candidates requiring testing; this round did not obtain occupation-level reliability / efficiency / employer AI adoption results, and software job posting wording does not prove deployment or working hour changes. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "computer-programmers.ai-impact.ai-impact-table.18",
@@ -31318,6 +31321,23 @@
                 "publisher": "Ministry of Human Resources and Social Security / Ministry of Industry and Information Technology",
                 "scope": "contextual",
                 "url": "https://chinajob.mohrss.gov.cn/h5/c/2022-08-05/357338.shtml"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Specification clarification and program writing | Clarify program intent with business and engineering and technical staff and write and review and rewrite programs | Communicate with management and engineering and technical staff to clarify program intent and identify problems and propose changes; write and analyze and review and rewrite programs, using workflow charts and diagrams and applying knowledge of computer capabilities and subject matter and symbolic logic; and prepare detailed workflow charts and diagrams describing input and output and logical operation and convert them into a series of instructions (corresponding to O*NET tasks five and one and seven). — 75/100; weight=1/3; computer-programmers.profile.responsibilities-block.1[0]",
+                  "Error correction and validation | Correct errors by modifying and rechecking and trial run programs and software applications | Correct errors by making appropriate changes and then rechecking the program to ensure the desired results are produced; trial run programs and software applications to confirm they produce the required information and the instructions are correct; and troubleshoot whether networks and workstations and system central processing units or peripherals respond to program instructions (corresponding to O*NET tasks two and six and twelve). — 75/100; weight=1/3; computer-programmers.profile.responsibilities-block.1[1]",
+                  "Program revision and maintenance | Perform or direct revisions and repairs and expansions of existing programs and write and maintain programs | Perform or direct revisions and repair and expansion of existing programs to increase operating efficiency or adapt to new requirements; write and update and maintain computer programs or software packages that handle specific tasks (corresponding to O*NET tasks three and four). — 75/100; weight=1/3; computer-programmers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36228,7 +36248,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -36526,15 +36546,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Computer programmer",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · CIR",
@@ -36585,7 +36617,7 @@
       "text": "Computer programmer"
     }
   },
-  "source_content_sha256": "f15e1632805a28cb7f11352fd7405039021eaecee21a872d08b22fc54c695647",
+  "source_content_sha256": "88175bb59907321d5566f120495c3887a34c6e29fe2359449837f1c67879edc3",
   "subject": {
     "canonical_slug": "computer-programmers",
     "name": "Computer programmer",

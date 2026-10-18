@@ -11,6 +11,9 @@
       "fact:cn-construction-private-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25433,7 +25436,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence gap: this round obtained no stonemason AI adoption rate, net hours saved or substitution rate study, and no reviewable task score for this occupation was produced. Text organization and calculation assistance are editorial ideas; positioning, alignment, joints and safety still require actual verification."
+              "Evidence gap: this round obtained no stonemason AI adoption rate, net hours saved or substitution rate study, and no reviewable task score for this occupation was produced. Text organization and calculation assistance are editorial ideas; positioning, alignment, joints and safety still require actual verification. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "stonemasons.display.ai_impact_table.answer",
@@ -32573,6 +32576,23 @@
                 "publisher": "Ministry of Human Resources and Social Security and Ministry of Housing and Urban-Rural Development",
                 "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202304/W020230414729511788159.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Reading drawings｜Check the layout and datum｜Read the drawing, dimensions and on-site layout and confirm the current version and positioning basis. — 50/100; weight=1/3; stonemasons.display.responsibilities_block.01[0]",
+                  "Installation｜Form the stone structure｜Place stone or precast masonry to the layout, with materials, mortar and connection methods confirmed by the actual plan. — 0/100; weight=1/3; stonemasons.display.responsibilities_block.03[0]",
+                  "Checking｜Inspect position and discrepancies｜Check the position, alignment and joints against the drawing, and record and hand over any non-conformity. — 25/100; weight=1/3; stonemasons.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37868,7 +37888,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38041,15 +38061,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Stonemasons",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Stone structures and on-site installation",
@@ -38100,7 +38132,7 @@
       "text": "Stonemasons"
     }
   },
-  "source_content_sha256": "9e0686cb28dba2bfe503ebdc6065b1f400923a4e81498972167001d8d177a838",
+  "source_content_sha256": "bfe613cfbdeb7b42d505f11bcc34fff452d73320f881cf6880d3137ee2eae46b",
   "subject": {
     "canonical_slug": "stonemasons",
     "name": "Stonemasons",

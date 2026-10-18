@@ -35,6 +35,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24754,7 +24757,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得麻醉医师AI采用率、替代率或工资因果估计。记录整理、趋势汇总与提示仅为编辑可能用途，不证明已部署或临床有效；资格与诊疗责任按适用法律和机构制度。EP增长预测不能归因于AI。"
+              "证据不足：本页未取得麻醉医师AI采用率、替代率或工资因果估计。记录整理、趋势汇总与提示仅为编辑可能用途，不证明已部署或临床有效；资格与诊疗责任按适用法律和机构制度。EP增长预测不能归因于AI。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.18",
@@ -32583,6 +32586,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "术前评估｜风险与病史｜检查患者、采集病史，借助诊断性检查评估外科、产科与其他医疗操作中的风险。 — 50/100; weight=1/3; anesthesiologists.profile.responsibilities-block.1[0]",
+                  "麻醉实施｜方式与方法｜在操作中经局部、静脉、脊髓或骶管等方式实施麻醉或镇静，并与其他医师会诊确定方式与方法。 — 25/100; weight=1/3; anesthesiologists.profile.responsibilities-block.1[1]",
+                  "术中监测｜状态与不良反应｜在麻醉前、中、后监测患者，记录麻醉种类、剂量与患者状态并对不良反应或并发症作出处置。 — 50/100; weight=1/3; anesthesiologists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37480,7 +37500,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37985,15 +38005,27 @@
           "ep",
           "ooh"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "麻醉医师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "围术期诊疗：麻醉方案与风险管理 · 气道与生命体征管理 · 异常处置与复苏交接",
@@ -38044,7 +38076,7 @@
       "text": "麻醉科医师：任务、工资与就业前景（O*NET 29-1211.00）"
     }
   },
-  "source_content_sha256": "684346ee87f96e1e9ec91c016cd8e1fcb5f61abbba9e6ca5ae0e07ab6c50bc1a",
+  "source_content_sha256": "b915fd3d973945e74dd0c517965edfb10beaa5230aea5949ac7f756c046161fc",
   "subject": {
     "canonical_slug": "anesthesiologists",
     "name": "麻醉医师",

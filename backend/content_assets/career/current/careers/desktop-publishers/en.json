@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24365,7 +24368,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This occupation designs page layouts, processes graphics and text, proofs and converts delivery files. The auxiliary uses of templates, checking and batch processing can be discussed, but whether specific software uses rules, machine learning or generative models must be checked in the implementation documentation. This page keeps editorial inference, recruitment proxies, task exposure and overall employment projections separate, and does not use keywords to prove widespread use."
+              "This occupation designs page layouts, processes graphics and text, proofs and converts delivery files. The auxiliary uses of templates, checking and batch processing can be discussed, but whether specific software uses rules, machine learning or generative models must be checked in the implementation documentation. This page keeps editorial inference, recruitment proxies, task exposure and overall employment projections separate, and does not use keywords to prove widespread use. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24640,7 +24643,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page has no reviewable occupational scale or task scoring basis, so it keeps the missing state of the AI data in the Hero and explains the reason in the body; substituting scores from other positions for this occupation would create precision without basis."
+              "The external materials used here supply no measured occupational scale or task scoring basis, so the Hero instead shows the separately defined editorial estimate; substituting scores from other positions for this occupation would create precision without basis."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -32085,6 +32088,23 @@
                 "publisher": "O*NET Resource Center",
                 "scope": "contextual",
                 "url": "https://www.onetcenter.org/IP.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Execute layout according to design specifications and page requirements, verify fonts, type sizes, column widths, spacing and alignment item by item, and do not change a confirmed design without authorization. — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Import and process text and art elements, verify text completeness as well as image resolution and color mode, and confirm whether the source of materials and the usage authorization are clear. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Check preliminary and final proofs page by page, and promptly correct and document typos, misplacement, mismatched graphics and text, and page order problems. — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37369,7 +37389,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37598,15 +37618,27 @@
         "source_refs": [
           "r5-nbs-culture"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Desktop Publishers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Page layout · graphic and image processing and separations · prepress delivery",
@@ -37657,7 +37689,7 @@
       "text": "Desktop Publishers"
     }
   },
-  "source_content_sha256": "c600d88b55d6bf856a43529277ab8cc0e3672f76eafdf62ec645d41d1409ce58",
+  "source_content_sha256": "c7fe5ae7330569bbf610a8eb9930a35b5888fedeea48c366222116baef7b449f",
   "subject": {
     "canonical_slug": "desktop-publishers",
     "name": "Desktop Publishers",

@@ -11,6 +11,9 @@
       "fact:entry": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "pending_mapping"
       },
@@ -12678,6 +12681,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/27-1026.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Draw the display design and signage — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Build models and install the display — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]",
+                  "Arrange merchandise, signage, and lighting — 25/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -12865,7 +12885,7 @@
             }
           }
         ],
-        "answer": "Editorial trial suggestion: draft effect drawings, materials lists, and display notes; real dimensions, merchandise, brand approval, building, and safety are verified by people. No generative AI adoption rate, reliable effect, or job causality evidence for this occupation was obtained.",
+        "answer": "Editorial trial suggestion: draft effect drawings, materials lists, and display notes; real dimensions, merchandise, brand approval, building, and safety are verified by people. No generative AI adoption rate, reliable effect, or job causality evidence for this occupation was obtained. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "Display tasks",
@@ -14608,7 +14628,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -14768,15 +14788,27 @@
         "source_refs": [
           "source-pack-onet-summary"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Merchandise displayers and window trimmers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Display creativity and design",
@@ -14827,7 +14859,7 @@
       "text": "Merchandise displayers and window trimmers: work content, U.S. wages, and entry | FermatMind"
     }
   },
-  "source_content_sha256": "3aa03b45505ee292a60d3f568d8eeb4530bc4f8f35fa2417ae95732b9b3462c9",
+  "source_content_sha256": "94dae62f2d45f1e3c10f3758ac0602d65265e5fb8a6e4b0b15944057b0908e94",
   "subject": {
     "canonical_slug": "merchandise-displayers-and-window-trimmers",
     "name": "Merchandise displayers and window trimmers",

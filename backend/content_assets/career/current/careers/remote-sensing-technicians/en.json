@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24782,7 +24785,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Generative AI can assist with metadata summaries, scripts, and document drafts; remote sensing specialist models and traditional algorithms each require product quality and method validation, and not all automated processing should be attributed to generative AI. Insufficient evidence: independent AI adoption rates, substitution rates, and causal wage and employment effects for remote sensing technicians (19-4099.03) in mainland China and the United States were not verified; cross-occupation research cannot be extrapolated."
+              "Generative AI can assist with metadata summaries, scripts, and document drafts; remote sensing specialist models and traditional algorithms each require product quality and method validation, and not all automated processing should be attributed to generative AI. Insufficient evidence: independent AI adoption rates, substitution rates, and causal wage and employment effects for remote sensing technicians (19-4099.03) in mainland China and the United States were not verified; cross-occupation research cannot be extrapolated. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "remote-sensing-technicians.ai-impact.ai-impact-table.18",
@@ -32683,6 +32686,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/15-1251.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Equipment and quality｜Calibrate remote sensing equipment and monitor raw data and acquisition systems.｜Record quality anomalies and adjustments. — 25/100; weight=1/3; remote-sensing-technicians.profile.responsibilities-block.1[1]",
+                  "Image processing｜Adjust display and processing routines, correct tilt or atmospheric effects, and mosaic imagery.｜Keep products, parameters, and code versions. — 75/100; weight=1/3; remote-sensing-technicians.profile.responsibilities-block.1[2]",
+                  "Verification and field｜Check completeness and accuracy, and ground-truth with GPS, photos, and notes when needed.｜Save supporting materials and open items. — 25/100; weight=1/3; remote-sensing-technicians.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37591,7 +37611,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37955,15 +37975,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Remote Sensing Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Spatial data collection and image processing",
@@ -38014,7 +38046,7 @@
       "text": "Remote sensing technicians: collection, image processing, and entry paths"
     }
   },
-  "source_content_sha256": "d767e2b7a3295e531c25f36ab4ab75adc772dd4656e5e47010ea9907558ec68c",
+  "source_content_sha256": "4eb76f890b0bf60d77251c31688eecbe9f94959783a8662814e70269684d756e",
   "subject": {
     "canonical_slug": "remote-sensing-technicians",
     "name": "Remote Sensing Technicians",

@@ -56,6 +56,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24907,7 +24910,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial tool pilot suggestion: material extraction, scheme drafts, calculation checking and records can be directions for trials, checking errors, omissions and total review hours. In this round there is no evidence of tool speed-up or institutional adoption for this occupation; software recruiting keywords do not prove actual BIM or generative AI adoption."
+              "Editorial tool pilot suggestion: material extraction, scheme drafts, calculation checking and records can be directions for trials, checking errors, omissions and total review hours. In this round there is no evidence of tool speed-up or institutional adoption for this occupation; software recruiting keywords do not prove actual BIM or generative AI adoption. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "civil-engineers.ai-impact.ai-impact-table.18",
@@ -32326,6 +32329,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/architects.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Design and calculation｜Calculate loads and hydraulics and material stresses and determine design specifications｜Calculate loads and slope requirements and flows or material stress factors to determine design specifications; use computer-aided design and drafting tools to plan and design transport or hydraulic systems and structures; design energy-efficient or environmentally friendly civil structures (corresponding to the fourth and fifth and eleventh O*NET tasks). — 75/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[0]",
+                  "Data and site analysis｜Analyse survey and geological and aerial data｜Analyse survey reports and maps and drawings and blueprints and aerial photographs or other topographic or geological data; direct or take part in surveys to set out and establish benchmarks and slopes or elevations to guide construction (corresponding to the seventh and eighth O*NET tasks). — 75/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[2]",
+                  "Testing and risk｜Test materials and identify environmental risks｜Test soils or materials to judge the suitability and strength of foundations and concrete and asphalt or steel; identify environmental risks and develop risk management strategies for civil engineering projects; carry out traffic flow or environmental condition studies to identify engineering problems and assess potential project impacts (corresponding to the twelfth and thirteenth and fourteenth O*NET tasks). — 25/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37236,7 +37256,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37673,15 +37693,27 @@
         "source_refs": [
           "civil-ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Civil engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RIC",
@@ -37732,7 +37764,7 @@
       "text": "Civil engineers"
     }
   },
-  "source_content_sha256": "dd40e0e5ab6e994e1e07e9ec9fc3c96c7dd943983a496aaacd7fc4282f1aad5f",
+  "source_content_sha256": "60323a0415ac5ad107839e9c4a2055f4939c854b25b51739b4eac0442ed458ba",
   "subject": {
     "canonical_slug": "civil-engineers",
     "name": "Civil engineers",

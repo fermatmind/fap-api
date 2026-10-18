@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24270,7 +24273,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The sketch drafts, layer naming, dimension and material table checking, interface comparison and version retrieval on this page are editorial proposals to be verified; CAD and BIM and conventional automation are not GenAI. Hot26 software keywords: AutoCAD44%, Revit38%, Office19%, Civil3D18%, SketchUp12%, Excel10%, MicroStation8%, with Photoshop and Creative Cloud at 7% each; the denominator is all unique job advertisements linked to this detailed occupation in the United States in 2025, not advertisements that mention only the skill, and this is not a deployment rate or adoption rate or a measured efficiency gain. ILO exposure and job outcomes are kept separate; NIST is a risk governance method, and neither proves the substitution probability for this occupation. The Chinese mainland Regulations on the Administration of Engineering Construction Survey and Design, 2017 revision, as republished by the government has been checked: Articles 7—8 require units to undertake work within the scope permitted by their qualification grade; Article 9 prohibits unregistered persons from acting in the name of registered practitioners; Article 10 separates the employment relationships of registered personnel and other professional and technical personnel, so it cannot be said uniformly that only registered persons may draw or that drafters have no quality responsibility. Articles 25—27 concern the basis and depth of documents and material indicators; Article 28 requires modification by the original unit or another qualified unit with its written consent, with major modifications additionally requiring approval; Article 30 concerns the unit explaining the design intent; Articles 44—45 concern specific exclusions and separate military rules. The actual types of individual sign-off and drawing review rules were not exhaustively checked, and foreign task descriptions cannot be treated as Chinese authorization."
+              "The sketch drafts, layer naming, dimension and material table checking, interface comparison and version retrieval on this page are editorial proposals to be verified; CAD and BIM and conventional automation are not GenAI. Hot26 software keywords: AutoCAD44%, Revit38%, Office19%, Civil3D18%, SketchUp12%, Excel10%, MicroStation8%, with Photoshop and Creative Cloud at 7% each; the denominator is all unique job advertisements linked to this detailed occupation in the United States in 2025, not advertisements that mention only the skill, and this is not a deployment rate or adoption rate or a measured efficiency gain. ILO exposure and job outcomes are kept separate; NIST is a risk governance method, and neither proves the substitution probability for this occupation. The Chinese mainland Regulations on the Administration of Engineering Construction Survey and Design, 2017 revision, as republished by the government has been checked: Articles 7—8 require units to undertake work within the scope permitted by their qualification grade; Article 9 prohibits unregistered persons from acting in the name of registered practitioners; Article 10 separates the employment relationships of registered personnel and other professional and technical personnel, so it cannot be said uniformly that only registered persons may draw or that drafters have no quality responsibility. Articles 25—27 concern the basis and depth of documents and material indicators; Article 28 requires modification by the original unit or another qualified unit with its written consent, with major modifications additionally requiring approval; Article 30 concerns the unit explaining the design intent; Articles 44—45 concern specific exclusions and separate military rules. The actual types of individual sign-off and drawing review rules were not exhaustively checked, and foreign task descriptions cannot be treated as Chinese authorization. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31705,6 +31708,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/17-2071.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Draw plans and details to standard and determine projection and drawing output order — 75/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
+                  "Coordinate structural and electrical and mechanical design and confirm versions — 50/100; weight=1/3; actors.display.ai_impact_table.tasks.3.task[0]",
+                  "Check consistency among drawings and specifications and sketches — 75/100; weight=1/3; actors.display.ai_impact_table.tasks.5.task[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36976,7 +36996,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37261,15 +37281,27 @@
         "source_refs": [
           "r5-nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Architectural and civil drafters",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Architectural and civil drafting · layers and naming · dimensions and materials and verification",
@@ -37320,7 +37352,7 @@
       "text": "Architectural and civil drafters"
     }
   },
-  "source_content_sha256": "38648f45df8fc61f2ded3b10a407dea306a3955127a93f835d55fa67d6575a9b",
+  "source_content_sha256": "cce07c3838d7ec126e71b5838b4b8ad8dd918311cd0c17111994ba7d1404072b",
   "subject": {
     "canonical_slug": "drafters",
     "name": "Architectural and civil drafters",

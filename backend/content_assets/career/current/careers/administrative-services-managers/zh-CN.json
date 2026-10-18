@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24755,7 +24758,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页将文档、摘要与检索列为可探索的辅助任务（编辑建议），没有取得本职业任务间实际效果比较。ILO及学术研究的跨职业任务暴露不等于采用、裁员或整体替代预测。记录管理、供应商协调、预算与异常处理仍按真实岗位权限由人核实和负责，本页不给替代率或时间表。"
+              "本页将文档、摘要与检索列为可探索的辅助任务（编辑建议），没有取得本职业任务间实际效果比较。ILO及学术研究的跨职业任务暴露不等于采用、裁员或整体替代预测。记录管理、供应商协调、预算与异常处理仍按真实岗位权限由人核实和负责，本页不给替代率或时间表。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "administrative-services-managers.ai-impact.ai-impact-table.18",
@@ -32469,6 +32472,23 @@
                 "publisher": "美国劳工部 O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/25-4011.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "需求输入｜收集用量、库存与部门需求｜包含供应商报价、合同到期日、投诉记录与预算余额；缺预算或需求确认时先补信息，不凭印象承诺。 — 75/100; weight=1/3; administrative-services-managers.profile.responsibilities-block.1[0]",
+                  "结果输出｜形成采购或服务建议与排期｜每项写明接收人、验收依据和需要批准的事项，使他人可据此执行。 — 50/100; weight=1/3; administrative-services-managers.profile.responsibilities-block.1[2]",
+                  "复核确认｜由使用部门与财务按授权确认｜使用部门确认服务是否可用，财务复核付款依据，合同与个人信息问题交由相应专业人员处理。 — 25/100; weight=1/3; administrative-services-managers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37374,7 +37394,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37642,15 +37662,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "行政服务经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "办公支持 · 预算执行 · 记录管理",
@@ -37701,7 +37733,7 @@
       "text": "行政服务经理"
     }
   },
-  "source_content_sha256": "f0d14be2a853f91398050bdecf59508341cc68afffe32654fcc501fbdfbfc7a4",
+  "source_content_sha256": "77d83c1c1a1aea79f8a694998eb382121f902be92c5e20a0c32872e41e5530a9",
   "subject": {
     "canonical_slug": "administrative-services-managers",
     "name": "行政服务经理",

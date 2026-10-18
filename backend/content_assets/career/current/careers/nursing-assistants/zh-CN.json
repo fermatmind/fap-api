@@ -23,6 +23,9 @@
       "fact:education-profile": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:interest-code": {
         "status": "pending_mapping"
       },
@@ -13203,6 +13206,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "协助完成沐浴、穿衣、如厕与进食饮水 — 0/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "按医护指示测量并记录生命体征与摄入排出量 — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "使用轮椅、担架或可移动床转运患者 — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13390,7 +13410,7 @@
             }
           }
         ],
-        "answer": "数字工具可辅助记录、交班草稿与学习；实际照护和异常上报仍须受训人员负责。美国给药任务另核州规则与授权；中国医疗机构：2020通知第十八项要求医疗护理员在医务人员指导下提供生活照护、辅助活动，严禁从事医疗护理专业技术工作；2025免陪照护试点不是这项机构范围禁令的唯一依据。机构授权与技能等级均不能解除该禁令；居家等其他场景须另核服务范围。",
+        "answer": "数字工具可辅助记录、交班草稿与学习；实际照护和异常上报仍须受训人员负责。美国给药任务另核州规则与授权；中国医疗机构：2020通知第十八项要求医疗护理员在医务人员指导下提供生活照护、辅助活动，严禁从事医疗护理专业技术工作；2025免陪照护试点不是这项机构范围禁令的唯一依据。机构授权与技能等级均不能解除该禁令；居家等其他场景须另核服务范围。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET 31-1131.00 详细职业档案（任务与工作情境）",
@@ -15149,7 +15169,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15409,15 +15429,27 @@
           "onet-wages",
           "mohrss-wage"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "护理员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "日常生活照护与患者转运",
@@ -15468,7 +15500,7 @@
       "text": "护理员（Nursing Assistants）职业画像｜任务、薪资、准入与边界"
     }
   },
-  "source_content_sha256": "b7ca141bfd22a7cf8426e51250ec3216caf77f72eb371da2f5a690bb0747ffe2",
+  "source_content_sha256": "b12e4ea5f8a43971d32402cee7966966c1df7479ba71d9d541191fb020b86b96",
   "subject": {
     "canonical_slug": "nursing-assistants",
     "name": "护理员",

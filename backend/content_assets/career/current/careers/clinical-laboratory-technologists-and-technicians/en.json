@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:lab-cn-health-social-nonprivate-2025": {
         "status": "pending_mapping"
       },
@@ -24710,7 +24713,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET supports tasks and recruitment keywords, and BLS describes automated equipment and notes in its projection that automation may suppress demand; this cannot prove generative AI speed-ups, sustained institutional investment, or adoption rates. The test directions below are editorial suggestions."
+              "O*NET supports tasks and recruitment keywords, and BLS describes automated equipment and notes in its projection that automation may suppress demand; this cannot prove generative AI speed-ups, sustained institutional investment, or adoption rates. The test directions below are editorial suggestions. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "clinical-laboratory-technologists-and-technicians.ai-impact.ai-impact-table.18",
@@ -32612,6 +32615,23 @@
                 "publisher": "O*NET",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/31-9097.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Specimen collection and processing｜Collect and receive and process specimens per procedure｜Collect and study blood samples to determine cell counts and morphology and blood type or transfusion compatibility, receive and label and process various specimens, and record anomalies (corresponding to the fifth and first O*NET tasks). — 0/100; weight=1/3; clinical-laboratory-technologists-and-technicians.profile.responsibilities-block.1[0]",
+                  "Testing operations｜Complete routine and complex tests per procedure｜Analyze the chemical composition or reactions of biological materials, perform chemical analyses of body fluids such as blood and urine and cerebrospinal fluid to determine normal or abnormal components, and set up and clean and maintain laboratory equipment (corresponding to the first and third and sixth O*NET tasks). — 25/100; weight=1/3; clinical-laboratory-technologists-and-technicians.profile.responsibilities-block.1[1]",
+                  "Result verification｜Check the accuracy of test results｜Analyze laboratory findings to verify result accuracy, identify abnormal values and repeat or confirm them per procedure, and when necessary investigate the instrument and reagents and operational steps (corresponding to the second O*NET task). — 50/100; weight=1/3; clinical-laboratory-technologists-and-technicians.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37544,7 +37564,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -38127,15 +38147,27 @@
         "source_refs": [
           "lab-nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Medical and clinical laboratory technologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · IRC",
@@ -38186,7 +38218,7 @@
       "text": "Medical and clinical laboratory technologists"
     }
   },
-  "source_content_sha256": "c8c13de425a41b43d624fa6ce3e373bf25ee6e625cfd928215621ab3898db8ee",
+  "source_content_sha256": "831ddd41c07b5c42f48701cf1096ffb2395ea02fe1619f7d89c0806d4414c41c",
   "subject": {
     "canonical_slug": "clinical-laboratory-technologists-and-technicians",
     "name": "Medical and clinical laboratory technologists",

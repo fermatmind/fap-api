@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24820,7 +24823,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not obtained generative-AI actual adoption rates, effect sizes, or job-substitution causal evidence for the two pilot categories, nor reviewable AI task ratings. O*NET lists autopilot and flight management computers, which are existing automation tasks; they cannot be collectively called generative AI. The change judgments below are editorial analysis except where explicit occupational data is cited; BLS employment projections do not prove that AI creates or reduces jobs."
+              "Insufficient evidence: this page has not obtained generative-AI actual adoption rates, effect sizes, or job-substitution causal evidence for the two pilot categories, nor reviewable AI task ratings. O*NET lists autopilot and flight management computers, which are existing automation tasks; they cannot be collectively called generative AI. The change judgments below are editorial analysis except where explicit occupational data is cited; BLS employment projections do not prove that AI creates or reduces jobs. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "airline-and-commercial-pilots.ai-impact.ai-impact-table.18",
@@ -32706,6 +32709,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Preflight preparation | planning and performance | study weather, notices, and route data; formulate flight plans and fuel plans; and complete weight and balance and takeoff performance calculations. — 75/100; weight=1/3; airline-and-commercial-pilots.profile.responsibilities-block.1[0]",
+                  "Flight manipulation | maneuvers and phases | manipulate the aircraft through taxi, takeoff, climb, cruise, descent, and landing, executing according to standard operating procedures. — 25/100; weight=1/3; airline-and-commercial-pilots.profile.responsibilities-block.1[2]",
+                  "Communication and coordination | control and crew | maintain communication with air traffic control and fly according to instructions, coordinate with dispatch, maintenance, and cabin crew, and divide labor according to crew resource management. — 25/100; weight=1/3; airline-and-commercial-pilots.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37602,7 +37622,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Comparison of occupational directions",
       "fit": "Occupation fit guide",
@@ -38004,15 +38024,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Airline and Commercial Pilots",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Aircraft operation: licenses and operating qualifications · flight planning and manipulation monitoring · safety and crew coordination",
@@ -38063,7 +38095,7 @@
       "text": "Airline and Commercial Pilots: tasks, wages for the two categories, and employment outlook (O*NET 53-2011/53-2012)"
     }
   },
-  "source_content_sha256": "a5e48c7410ed1457c878d5d94e179509b55641edbbfb55dfef619d84f6e51d35",
+  "source_content_sha256": "db58f2226a2c5a135147ac98165d5cf8932992f1b030581059442b1bd133df62",
   "subject": {
     "canonical_slug": "airline-and-commercial-pilots",
     "name": "Airline and Commercial Pilots",

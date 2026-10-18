@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24307,7 +24310,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试用方向为监护信息汇总、交接及记录草稿，实际效果未取得；床旁评估、医嘱核对、护理及救护须依法律和实际职责完成。目录、传统报警系统、任务暴露均不能证明生成式AI采用、节省工时或岗位替代。"
+              "编辑试用方向为监护信息汇总、交接及记录草稿，实际效果未取得；床旁评估、医嘱核对、护理及救护须依法律和实际职责完成。目录、传统报警系统、任务暴露均不能证明生成式AI采用、节省工时或岗位替代。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31808,6 +31811,23 @@
                 "publisher": "中国政府官方网站",
                 "scope": "proxy",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "持续评估与监护｜评测生命体征与检验数据｜评测患者生命体征或检验数据以判断紧急干预需要，监测病情与脓毒症或休克等指征并采取相应干预，编制并分析监护与诊断数据。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "医嘱执行与生命支持护理｜按医嘱与规范执行｜经静脉、注射、口服或胃管等途径给药，监测出入量与体液电解质平衡，输注血液与血制品并观察输血反应，设置并监护心电监护、呼吸机与报警、氧疗装置、换能器与压力监测管路等设备。 — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "记录与交接｜按规范记录并交接｜记录病史与评估发现、治疗计划、干预与结果或计划修订，按结构化方式向下一班与跨专业团队交接并参与患者照护会议。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37177,7 +37197,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37421,15 +37441,27 @@
         "source_refs": [
           "g04-industry"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "重症护理护士",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "医疗与社会援助 · 重症监护专科护理",
@@ -37480,7 +37512,7 @@
       "text": "重症护理护士"
     }
   },
-  "source_content_sha256": "9bce6e001b68416fda444f038fc470284101368ece132d7624835825731faea6",
+  "source_content_sha256": "b10bb4d2bc3b38e665261b26408703a838bc66b649dc888c110c50f895dc7d22",
   "subject": {
     "canonical_slug": "critical-care-nurses",
     "name": "重症护理护士",

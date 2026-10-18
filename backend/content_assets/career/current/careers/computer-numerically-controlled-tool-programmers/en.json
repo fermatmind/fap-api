@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24527,7 +24530,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Parameter conversion / annotation / checklists / documentation are candidates requiring testing, and no occupation-level capability / efficiency / actual deployment evidence was obtained. Software lists, job posting hot words and employer usage must not be conflated."
+              "Parameter conversion / annotation / checklists / documentation are candidates requiring testing, and no occupation-level capability / efficiency / actual deployment evidence was obtained. Software lists, job posting hot words and employer usage must not be conflated. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "computer-numerically-controlled-tool-programmers.ai-impact.ai-impact-table.18",
@@ -31320,6 +31323,23 @@
                 "publisher": "OSHA",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Drawing reading and process planning | Analyze work orders and drawings and specifications and design data and determine the operation sequence and tools | Analyze work orders and drawings and blueprints and specifications and printed circuit board artwork films and design data to calculate dimensions and tool selection and machine speeds and feeds; determine the sequence of machining operations and select the appropriate tools needed to machine the workpiece into the target shape; group shop work orders to improve material utilization and reduce setup time; and order tooling for workpieces (corresponding to O*NET tasks two and one and ten and fourteen). — 50/100; weight=1/3; computer-numerically-controlled-tool-programmers.profile.responsibilities-block.1[0]",
+                  "Program writing and storage | Write programs in the controller language and store them on media and transfer data | Write programs in the machine controller language and store the programs on media such as paper tape and magnetic tape or disks; enter computer instructions to store or retrieve part graphics and graphic displays or programs and transfer data to other media (corresponding to O*NET tasks four and six). — 75/100; weight=1/3; computer-numerically-controlled-tool-programmers.profile.responsibilities-block.1[2]",
+                  "Simulation and program validation | Validate programs in trial runs or simulation and modify for errors and re-test | Observe the machine during trial runs or perform computer simulation to ensure the program and machine run correctly and produce parts that meet specifications; modify programs or paper tape to eliminate errors and re-test to confirm the problem is resolved; and compare encoded paper tape or computer printouts with the original part specifications and drawings to verify that the instructions are accurate (corresponding to O*NET tasks three and seven and eleven). — 50/100; weight=1/3; computer-numerically-controlled-tool-programmers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36230,7 +36250,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -36516,15 +36536,27 @@
           "onet-localwages",
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Numerically controlled machine tool programmer",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · CRI",
@@ -36575,7 +36607,7 @@
       "text": "Numerically controlled machine tool programmer"
     }
   },
-  "source_content_sha256": "956db1c5156257c5a90714045145bd05a28880ebbd71d21e7e299ec95cfce96c",
+  "source_content_sha256": "d7de0aac74db90a2847ed99473633342298541b23b2f72a3417c39e28178ca83",
   "subject": {
     "canonical_slug": "computer-numerically-controlled-tool-programmers",
     "name": "Numerically controlled machine tool programmer",

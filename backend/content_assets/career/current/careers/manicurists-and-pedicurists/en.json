@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7544,7 +7547,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task hypothesis: validated tools may assist with appointments, inventory records, or style references, while generative AI may draft communications using fictional material. Ordinary scheduling software is not equivalent to generative AI. This page has not obtained studies of AI adoption or job outcomes in nail services; product and health advice still requires human verification."
+              "Editorial task hypothesis: validated tools may assist with appointments, inventory records, or style references, while generative AI may draft communications using fictional material. Ordinary scheduling software is not equivalent to generative AI. This page has not obtained studies of AI adoption or job outcomes in nail services; product and health advice still requires human verification. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "manicurists-and-pedicurists.ai-impact.ai-impact-table.2",
@@ -8706,6 +8709,23 @@
                 "publisher": "OSHA",
                 "scope": "exact",
                 "url": "https://www.osha.gov/nail-salons/chemical-hazards"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Manage appointments and maintain service and inventory records — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Advise clients on care and products — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Clean, shape, color, and decorate nails — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11145,7 +11165,7 @@
     ],
     "path": "/en/career/jobs/manicurists-and-pedicurists",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wages",
       "direction-comparison": "Comparison with adjacent occupations",
       "fit": "Fit signals",
@@ -11257,15 +11277,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Manicurists and Pedicurists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Nail cleaning and shaping",
@@ -11316,7 +11348,7 @@
       "text": "Evaluating a Career as a Manicurist or Pedicurist: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "31e0a1c375811e642a67c81f3c9ebcbfecd7c7e952c969d99401b7dfdbfe2975",
+  "source_content_sha256": "b93c617340fa911bf246c72604d4436b1495b02ee0220601e288bb81809e033b",
   "subject": {
     "canonical_slug": "manicurists-and-pedicurists",
     "name": "Manicurists and Pedicurists",

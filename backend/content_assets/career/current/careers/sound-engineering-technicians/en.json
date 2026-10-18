@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24424,7 +24427,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no actual AI adoption rate, replacement ratio or wage causality for this occupation was obtained. The BLS outlook discusses technology, including the possibility that AI reduces some staffing needs, but this is not a separate measured AI causality; on-site sound and quality responsibility must still be checked."
+              "Insufficient evidence: no actual AI adoption rate, replacement ratio or wage causality for this occupation was obtained. The BLS outlook discusses technology, including the possibility that AI reduces some staffing needs, but this is not a separate measured AI causality; on-site sound and quality responsibility must still be checked. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "sound-engineering-technicians.ai-impact.ai-impact-table.18",
@@ -32704,6 +32707,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Equipment and preparation｜Select and prepare microphones and recording equipment and carry out the checks the task requires.｜Hand over equipment status and issue records; actual operation requires training. — 0/100; weight=1/3; sound-engineering-technicians.profile.responsibilities-block.1[1]",
+                  "Recording and logs｜Record voices, music and sound effects and keep records.｜Hand over the material and recording logs, keeping original files separate from post-production versions. — 50/100; weight=1/3; sound-engineering-technicians.profile.responsibilities-block.1[2]",
+                  "Mixing and editing｜Separate and combine sounds and edit productions.｜Hand over revised files and the basis; a paper format check does not replace auditioning. — 75/100; weight=1/3; sound-engineering-technicians.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37612,7 +37632,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37912,15 +37932,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Sound engineering technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Sound production · recording, mixing and synchronization",
@@ -37971,7 +38003,7 @@
       "text": "Sound engineering technicians"
     }
   },
-  "source_content_sha256": "68bb98b930322f181a908a4c845cf1a3b36d8e628df66ab0a9e741d7ec6760bb",
+  "source_content_sha256": "2c85a8d0ffbe0ccd66e3138e75faca810ee62cb4eba2b44ccbefcd1e1d53a62a",
   "subject": {
     "canonical_slug": "sound-engineering-technicians",
     "name": "Sound engineering technicians",

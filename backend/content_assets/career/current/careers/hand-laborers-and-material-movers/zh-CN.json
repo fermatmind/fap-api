@@ -14,6 +14,9 @@
       "fact:employment": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25657,7 +25660,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮所阅职业资料、ILO任务暴露研究和NIST治理框架未给出SOC 53-7062的生成式AI采用率、替代比例或替代年份；不写“中等暴露”或保证不会被替代。 任务判断（编辑推断）｜实体搬运的设备替代与生成式AI的文本辅助应分开。BLS OOH指出高速输送与分拣系统可减少部分人工需求；这是一般仓储自动化背景，不是本职业生成式AI采用率。工单、数量汇总、异常摘要可在授权范围内用工具辅助，实物状态、异常上报与交接仍需核实。O*NET自动化程度回答是既有工作情境，不是AI暴露评分。"
+              "证据不足：本轮所阅职业资料、ILO任务暴露研究和NIST治理框架未给出SOC 53-7062的生成式AI采用率、替代比例或替代年份；不写“中等暴露”或保证不会被替代。 任务判断（编辑推断）｜实体搬运的设备替代与生成式AI的文本辅助应分开。BLS OOH指出高速输送与分拣系统可减少部分人工需求；这是一般仓储自动化背景，不是本职业生成式AI采用率。工单、数量汇总、异常摘要可在授权范围内用工具辅助，实物状态、异常上报与交接仍需核实。O*NET自动化程度回答是既有工作情境，不是AI暴露评分。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "hand-laborers-and-material-movers.ai-impact.ai-impact-table.18",
@@ -33664,6 +33667,23 @@
                 "publisher": "国家统计局",
                 "scope": "交通运输、仓储和邮政业；中国城镇单位就业人员，行业门类宽口径",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "用手工或借助卡车与拖拉机或其他设备搬运货物与库存与物料 — 0/100; weight=1/3; hand-laborers-and-material-movers.ai-impact.ai-impact-table.97[0]",
+                  "包装与重新包装容器并使用手工工具与预切木材组装板条箱 — 0/100; weight=1/3; hand-laborers-and-material-movers.ai-impact.ai-impact-table.109[0]",
+                  "阅读工单或接收口头指令并用生产单或工票记录件数 — 50/100; weight=1/3; hand-laborers-and-material-movers.ai-impact.ai-impact-table.113[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38605,7 +38625,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38856,15 +38876,27 @@
         "source_refs": [
           "bls-profiles-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "人工搬运、货运与物料搬运工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "人工搬运、货运与物料搬运工 · 任务、交付与责任边界",
@@ -38915,7 +38947,7 @@
       "text": "人工搬运、货运与物料搬运工"
     }
   },
-  "source_content_sha256": "2a029de7e04568461a8bbf139981de724347acaf41c47050b87ec76bcc5bdc60",
+  "source_content_sha256": "6a69f6a5f98f5cab1bbbd2eea29b7740efc97db0a5f37b246b0bb69b01990221",
   "subject": {
     "canonical_slug": "hand-laborers-and-material-movers",
     "name": "人工搬运、货运与物料搬运工",

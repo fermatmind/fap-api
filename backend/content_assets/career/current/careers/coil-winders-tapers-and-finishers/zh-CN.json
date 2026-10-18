@@ -77,6 +77,9 @@
       "fact:coil-nine-us-wage-p75-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25190,7 +25193,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把技术能力、实际采用与岗位结果分开看：工单解析、检查清单与记录草稿是本页建议的可能辅助用途；本轮未取得该职业生成式AI采用率或效果研究。任务页、关键词与暴露指数不能证明企业已持续投入，也不能推断收入和岗位数量。"
+              "把技术能力、实际采用与岗位结果分开看：工单解析、检查清单与记录草稿是本页建议的可能辅助用途；本轮未取得该职业生成式AI采用率或效果研究。任务页、关键词与暴露指数不能证明企业已持续投入，也不能推断收入和岗位数量。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.18",
@@ -33238,6 +33241,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/details/51-4033.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "绕制作业与设备看护｜按工单把导线绕成符合规格的线圈｜操作或看护绕线机绕制用于电气元件与电气设备的线圈，选择并装载工件与零件等材料到绕制设备，按节拍看护运行，并停机用工具取下已完成部件（对应 O*NET 任务第一与第五与第七项）。 — 25/100; weight=1/3; coil-winders-tapers-and-finishers.profile.responsibilities-block.1[0]",
+                  "端头与绝缘处理｜完成线圈端头加工与绝缘装配｜用手工具接装、改接并修剪导线与绝缘与线圈等材料，用钳子与刮线器剪断、剥皮并弯折线圈端部的导线端头，并用片状绝缘衬垫槽口并把线圈嵌入槽内（对应 O*NET 任务第二与第三与第九项）。 — 0/100; weight=1/3; coil-winders-tapers-and-finishers.profile.responsibilities-block.1[1]",
+                  "检查测试与质量确认｜量测与电测确认电气部件可用｜用测量装置检查与测试电机与电枢与定子等已绕线电气部件并记录测试结果（对应 O*NET 任务第八项）。 — 25/100; weight=1/3; coil-winders-tapers-and-finishers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38193,7 +38213,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38716,15 +38736,27 @@
         "source_refs": [
           "coil-wage-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RC",
@@ -38775,7 +38807,7 @@
       "text": "线圈绕线工、包扎工、修整工"
     }
   },
-  "source_content_sha256": "6581ca7caad5b80f47da42bd358998a4360696f5bf0dc6a0f6f14222a80b481d",
+  "source_content_sha256": "a659d0819bdf320c8d066894ef56b7209c13483ab7ab9162eb4091303ab3a093",
   "subject": {
     "canonical_slug": "coil-winders-tapers-and-finishers",
     "name": "线圈绕线工、包扎工、修整工",

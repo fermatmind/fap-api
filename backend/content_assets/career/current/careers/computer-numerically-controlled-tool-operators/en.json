@@ -29,6 +29,9 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24582,7 +24585,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Program annotation, conversion, checklists and records are assistance candidates pending testing. There are no occupation-level AI effect, employer deployment or sustained investment samples, and job posting wording does not prove adoption rate or per-piece time changes."
+              "Program annotation, conversion, checklists and records are assistance candidates pending testing. There are no occupation-level AI effect, employer deployment or sustained investment samples, and job posting wording does not prove adoption rate or per-piece time changes. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "computer-numerically-controlled-tool-operators.ai-impact.ai-impact-table.18",
@@ -31360,6 +31363,23 @@
                 "publisher": "Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Fixturing and alignment and program preparation | Read drawings and program specifications and fixture and align tools and fixtures and workpieces and set parameters | Read program specifications or drawings to determine and set machine operation and machining sequence and finished dimensions and numerical control sequence; use tools and precision measuring instruments to install and align and tighten tools and attachments and fixtures and workpieces; calculate machine speeds and feed ratios and cutting dimensions and positions; modify machine programs on the computer and enter new specification parameters; enter initial part dimensions into the machine control panel; and write simple programs (corresponding to O*NET tasks four and three and eight and seven and nineteen and seventeen). — 0/100; weight=1/3; computer-numerically-controlled-tool-operators.profile.responsibilities-block.1[0]",
+                  "Machining execution and operation monitoring | Set up and operate numerically controlled machine tools or robots and monitor operation by sound and gauges | Set up and operate computer-controlled machine tools or robots to complete machining operations; listen to machine running sounds to identify problems such as dull tools or excessive vibration and adjust the machine; monitor machine operation and panel displays and compare readings with specifications to find faults; adjust feed and speed or change tools or adjust controls when automatic programming fails or the machine breaks down; stop the machine to remove finished parts or change tools and fixtures and workpieces; and insert control instructions to start machining (corresponding to O*NET tasks two and six and thirteen and twelve and five and fifteen). — 25/100; weight=1/3; computer-numerically-controlled-tool-operators.profile.responsibilities-block.1[1]",
+                  "Program adjustment and data transmission | Modify cutting programs for machining problems and transmit commands over the network | Modify cutting programs to deal with problems encountered during machining and save the modified programs; transmit commands from the server to the numerical control module over a computer network link; and prepare fixturing for subsequent tasks while the machine is running (corresponding to O*NET tasks sixteen and nine and twenty). — 75/100; weight=1/3; computer-numerically-controlled-tool-operators.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36270,7 +36290,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -36612,15 +36632,27 @@
         "source_refs": [
           "bls-current-projections"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Numerically controlled machine tool operator",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RCI",
@@ -36671,7 +36703,7 @@
       "text": "Numerically controlled machine tool operator"
     }
   },
-  "source_content_sha256": "306179a322b6845a88384e2f1de72cff41d6676a793348c42f1c7237fcdf32fd",
+  "source_content_sha256": "ca9fb9f8fe2ece6faf42aa36aba2311b8302858b4bb54235679cda638fd54167",
   "subject": {
     "canonical_slug": "computer-numerically-controlled-tool-operators",
     "name": "Numerically controlled machine tool operator",

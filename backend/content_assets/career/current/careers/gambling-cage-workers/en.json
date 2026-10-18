@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25127,7 +25130,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain quantitative generative AI exposure, adoption rate, efficiency, and employment causality evidence for this occupation. Editorial task mechanism: queries and synthesized reconciliation and handover drafts may be tried with AI assistance; scanning and calculating and cashier terminals are ordinary digital automation. Actual approved adoption, quantified efficiency, and employment outcomes are judged separately, and no quantitative level or efficiency conclusion is given."
+              "Insufficient evidence: this round did not obtain quantitative generative AI exposure, adoption rate, efficiency, and employment causality evidence for this occupation. Editorial task mechanism: queries and synthesized reconciliation and handover drafts may be tried with AI assistance; scanning and calculating and cashier terminals are ordinary digital automation. Actual approved adoption, quantified efficiency, and employment outcomes are judged separately, and no quantitative level or efficiency conclusion is given. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "gambling-cage-workers.ai-impact.ai-impact-table.18",
@@ -32624,6 +32627,23 @@
                 "publisher": "Nevada Legislature",
                 "scope": "Nevada gaming employee",
                 "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Verify customer identity and eligibility and disclose casino operating and transaction information — 25/100; weight=1/3; gambling-cage-workers.ai-impact.ai-impact-table.97[0]",
+                  "Receive and pay cash and chips and tickets and convert chips and tickets to currency — 25/100; weight=1/3; gambling-cage-workers.ai-impact.ai-impact-table.101[0]",
+                  "Count funds and reconcile the daily summary and prepare and make bank deposits — 75/100; weight=1/3; gambling-cage-workers.ai-impact.ai-impact-table.113[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37564,7 +37584,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37769,15 +37789,27 @@
           "oews",
           "r2-pay-3"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Gambling Cage Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Gambling Cage Workers · tasks, deliverables, and responsibility boundaries",
@@ -37828,7 +37860,7 @@
       "text": "Gambling Cage Workers"
     }
   },
-  "source_content_sha256": "2db96814fe1f7dddd718290c98220db7d8b0047938eaac9d469910589c05166a",
+  "source_content_sha256": "d270a695cc2365364a519d6ee3340f61fb4779e646b8385031fe7659db4dafa1",
   "subject": {
     "canonical_slug": "gambling-cage-workers",
     "name": "Gambling Cage Workers",

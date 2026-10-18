@@ -8,6 +8,9 @@
       "fact:cn-transport-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -26015,7 +26018,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate text schedule checking, navigation and dispatch, and vehicle control. Keep the original booking, vehicle, and time slots, duplicates, and unknowns, and real business safety, training, and permits are checked by the corresponding responsible personnel; a tool does not turn a plan into completion."
+              "First separate text schedule checking, navigation and dispatch, and vehicle control. Keep the original booking, vehicle, and time slots, duplicates, and unknowns, and real business safety, training, and permits are checked by the corresponding responsible personnel; a tool does not turn a plan into completion. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "taxi-drivers-and-chauffeurs.display.ai_impact_table.answer",
@@ -35453,6 +35456,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Preparation | Booking and scheduling | Confirm the agreed time, location, and passenger needs, obtain the actual arrangement information, and refer unclear needs to the responsible person. — 75/100; weight=1/3; taxi-drivers-and-chauffeurs.display.responsibilities_block.01[0]",
+                  "Driving | Pickup per agreement and rules | Pick up and drop off per traffic safety rules, and do not ignore road, vehicle, or safety status for a time slot or pressure. — 25/100; weight=1/3; taxi-drivers-and-chauffeurs.display.responsibilities_block.03[0]",
+                  "Service | Boarding, alighting, and special needs | Assist passengers and luggage, with special equipment used per approved training; transport service does not confer medical or emergency authority. — 0/100; weight=1/3; taxi-drivers-and-chauffeurs.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -40694,7 +40714,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -40854,15 +40874,27 @@
         "source_refs": [
           "nbs-transport-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Shuttle Drivers and Chauffeurs",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC 53-3053.00 precise occupation definition",
@@ -40913,7 +40945,7 @@
       "text": "Shuttle Drivers and Chauffeurs"
     }
   },
-  "source_content_sha256": "f6ee16caa65da3885427b824a70e6a0298b94b08bf70099de6848a4cc264e668",
+  "source_content_sha256": "8fd79b0f18511f2af383f085baf22ee65055a174f4d76e0fb43ec98c83e83a9f",
   "subject": {
     "canonical_slug": "taxi-drivers-and-chauffeurs",
     "name": "Shuttle Drivers and Chauffeurs",

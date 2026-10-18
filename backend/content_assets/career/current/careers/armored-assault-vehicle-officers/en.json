@@ -41,6 +41,9 @@
       "fact:entry-armor-training": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -24738,7 +24741,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain causal research on AI adoption, performance, or position counts for armored officers. Trials are limited to publicly approved or fictional documents; O*NET supports only the occupational duties and collection boundary. Access to the original 2023 US autonomous weapons policy page and its full text failed this round, so the current human-machine division of labor is not signed off on that basis. The NIST AI RMF official summary already read is a broad reference for voluntary organizational risk management, not military authorization or effect research for this occupation."
+              "Insufficient evidence: this round did not obtain causal research on AI adoption, performance, or position counts for armored officers. Trials are limited to publicly approved or fictional documents; O*NET supports only the occupational duties and collection boundary. Access to the original 2023 US autonomous weapons policy page and its full text failed this round, so the current human-machine division of labor is not signed off on that basis. The NIST AI RMF official summary already read is a broad reference for voluntary organizational risk management, not military authorization or effect research for this occupation. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.18",
@@ -32601,6 +32604,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Armored unit command｜The core object is vehicle units｜Command tank, light armored, and amphibious assault vehicle units in land or water combat environments. — 25/100; weight=1/3; armored-assault-vehicle-officers.profile.responsibilities-block.1[0]",
+                  "Operational planning｜Developing and executing plans｜O*NET explicitly includes the tactical employment of armored vehicle units, and the summary gives no specific options or technical steps. — 50/100; weight=1/3; armored-assault-vehicle-officers.profile.responsibilities-block.1[1]",
+                  "Branch coordination｜Coordinating related units｜Coordinate with infantry, artillery, and air support, and do not derive specific weapons employment permissions from the summary. — 25/100; weight=1/3; armored-assault-vehicle-officers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37503,7 +37523,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37883,15 +37903,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Armored Assault Vehicle Officers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Official duties: element command and operational planning · crew and system employment direction · branch coordination",
@@ -37942,7 +37974,7 @@
       "text": "Armored Assault Vehicle Officers"
     }
   },
-  "source_content_sha256": "3df8282479e94d0b404e560cc90e9eb1c1c472a196131dcd7741ca2040f3c317",
+  "source_content_sha256": "4dddece329e3446bdf68f61636c064898d53b33594449e858113fe167005e824",
   "subject": {
     "canonical_slug": "armored-assault-vehicle-officers",
     "name": "Armored Assault Vehicle Officers",

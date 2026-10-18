@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24352,7 +24355,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The O*NET detailed page lists nutrition science software such as Nutritionist Pro and The Food Processor, catering databases, ERP, Computrition NCM / MEDITECH and medical record software, which demonstrates occupational technology examples rather than the functions or adoption rates of individual products; the 2025 United States recruitment keywords are Office4%, Excel2%, Outlook2%, Word1%, PowerPoint under 1%, and MEDITECH / Access Not available rather than 0, with the denominator being all unique job postings associated with this occupation, not software users or postings that contain technology. This round did not obtain a reviewable generative AI adoption rate, time-saving effect, accuracy of nutrition advice or job wage causation for 29-2051. The existing software list, recruitment terms, task context and employment projection cannot prove that work is already faster, that most institutions have adopted it, or that replacement can never occur; software calculation, equipment automation and generative AI are verified separately. The ILO2025 summary reuses the version read in the same batch, and the mapping of this narrow occupation to ISCO and its exposure score were not verified; the NIST AI RMF1.0 is a voluntary governance framework and does not set Chinese dietary operating authority."
+              "The O*NET detailed page lists nutrition science software such as Nutritionist Pro and The Food Processor, catering databases, ERP, Computrition NCM / MEDITECH and medical record software, which demonstrates occupational technology examples rather than the functions or adoption rates of individual products; the 2025 United States recruitment keywords are Office4%, Excel2%, Outlook2%, Word1%, PowerPoint under 1%, and MEDITECH / Access Not available rather than 0, with the denominator being all unique job postings associated with this occupation, not software users or postings that contain technology. This round did not obtain a reviewable generative AI adoption rate, time-saving effect, accuracy of nutrition advice or job wage causation for 29-2051. The existing software list, recruitment terms, task context and employment projection cannot prove that work is already faster, that most institutions have adopted it, or that replacement can never occur; software calculation, equipment automation and generative AI are verified separately. The ILO2025 summary reuses the version read in the same batch, and the mapping of this narrow occupation to ISCO and its exposure score were not verified; the NIST AI RMF1.0 is a voluntary governance framework and does not set Chinese dietary operating authority. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31872,6 +31875,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "context",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Monitoring and recording: observe and record the patient's intake and eating method by meal, measure and register weight and related indicators according to procedure, and observe and record diet-related abnormal findings. — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Menus and meal arrangement: assist in planning menus and meals according to nutritional needs and established guidelines, prepare main meals according to recipes and calculate group portions, and analyze and standardise recipes, test new products and calculate costs. — 50/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "Therapeutic diet execution: verify the arrangement and portions of therapeutic diets and special meals against the ordered diet category and restrictions, verify the recipients, and manage the medical diet business in a standardised way with records. — 25/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37154,7 +37174,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37441,15 +37461,27 @@
         "source_refs": [
           "r5-nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Dietetic technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Intake and weight monitoring · nutrition assessment assistance · meal arrangement and teaching",
@@ -37500,7 +37532,7 @@
       "text": "Dietetic technicians"
     }
   },
-  "source_content_sha256": "fa8c761440146f685f585bc1b6646ef268da7c14dc90722495073c126ef0765d",
+  "source_content_sha256": "b32f9a408039904333d32c82214dcd82b3825481b24daa362f7f1c7a4be8f178",
   "subject": {
     "canonical_slug": "dietetic-technicians",
     "name": "Dietetic technicians",

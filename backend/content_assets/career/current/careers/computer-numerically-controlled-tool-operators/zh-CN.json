@@ -29,6 +29,9 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24942,7 +24945,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "程序注释、换算、清单及记录是待测试候选用途。没有职业级AI效果、雇主部署或持续投入样本，招聘词不证明采用率或单件工时变化。"
+              "程序注释、换算、清单及记录是待测试候选用途。没有职业级AI效果、雇主部署或持续投入样本，招聘词不证明采用率或单件工时变化。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "computer-numerically-controlled-tool-operators.ai-impact.ai-impact-table.18",
@@ -31720,6 +31723,23 @@
                 "publisher": "Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "装夹与找正与程序准备｜读图纸与程序规格并装夹找正刀具与夹具与工件并设定参数｜阅读程序规格或图纸以确定并设定机床操作与加工顺序与成品尺寸与数控顺序；用工具与精密量具安装与找正与紧固刀具与附件与夹具与工件；计算机床转速与进给比与切削尺寸与位置；在计算机上修改机床程序并录入新的规格参数；把初始零件尺寸输入机床控制面板；并编写简单程序（对应 O*NET 任务第四与第三与第八与第七与第十九与第十七项）。 — 0/100; weight=1/3; computer-numerically-controlled-tool-operators.profile.responsibilities-block.1[0]",
+                  "加工执行与运行监控｜装夹并操作数控机床或机器人并以听声与看表监控运行｜装夹并操作计算机控制的机床或机器人以完成加工工序；监听机床运转声音以识别刀具变钝或振动过大等问题并调整机床；监控机床运行与面板显示并把读数与规格比较以发现故障；在自动编程出错或机床故障时调整进给与转速或更换刀具或调整控制；停机以取下成品或更换刀具与夹具与工件；并插入控制指令以启动加工（对应 O*NET 任务第二与第六与第十三与第十二与第五与第十五项）。 — 25/100; weight=1/3; computer-numerically-controlled-tool-operators.profile.responsibilities-block.1[1]",
+                  "程序调整与数据传输｜按加工问题修改切削程序并通过网络传送命令｜修改切削程序以应对加工中遇到的问题并保存修改后的程序；通过计算机网络链路把命令从服务器传送到数控模块；并在机床运转时为后续任务做装夹准备（对应 O*NET 任务第十六与第九与第二十项）。 — 75/100; weight=1/3; computer-numerically-controlled-tool-operators.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36630,7 +36650,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36972,15 +36992,27 @@
         "source_refs": [
           "bls-current-projections"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "数控机床操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RCI",
@@ -37031,7 +37063,7 @@
       "text": "数控机床操作员"
     }
   },
-  "source_content_sha256": "16768ac49c3859716b9c2c783f11b3025d5f82199dce7a2d7381a10fa32df05c",
+  "source_content_sha256": "d9739e532b60ac7f3cc1bda5f2b2006429b385c923a9f4c5ae2e33de85ee65d0",
   "subject": {
     "canonical_slug": "computer-numerically-controlled-tool-operators",
     "name": "数控机床操作员",

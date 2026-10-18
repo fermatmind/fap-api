@@ -11,6 +11,9 @@
       "fact:cn-national-nonprivate-wage": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7570,7 +7573,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试用建议：核测试记录草拟、资料检索及数据比对的错误、权限和复核成本；任务资料不证明生成式工具可靠处理测试数据、已普遍采用或影响岗位。"
+              "编辑试用建议：核测试记录草拟、资料检索及数据比对的错误、权限和复核成本；任务资料不证明生成式工具可靠处理测试数据、已普遍采用或影响岗位。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.2",
@@ -8690,6 +8693,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/mechanical-engineering-technicians.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "搭建测试台并运行试验 — 0/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "记录数据并分析失效 — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "设计工装夹具与专用设备 — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11257,7 +11277,7 @@
     ],
     "path": "/zh/career/jobs/mechanical-engineering-technicians",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11357,15 +11377,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "机械工程技师与技术员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "机械系统装配与测试",
@@ -11416,7 +11448,7 @@
       "text": "机械工程技师与技术员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "29c1884b6c88ba1e3a445797b3e0ed5eb0751230870602c1b37f677a08d0dd4d",
+  "source_content_sha256": "efd4d0f4f204e8cb7977f22af2e8cbcc2f48c2d13690ea670fbff8d239641011",
   "subject": {
     "canonical_slug": "mechanical-engineering-technicians",
     "name": "机械工程技师与技术员",

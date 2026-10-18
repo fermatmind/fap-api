@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25263,7 +25266,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑可测试排班核对、清单提醒、获准记录整理及通知草稿；未取得本职业模型准确率、实际采用、节省时间或岗位替代实测。现场照护、紧急保护和法定报告仍按具体职责执行。BLS美国SOC39-9011预测2025年1,010,300人→2035年990,400人，净减19,900、下降2%（整数），2025—2035年均空缺150,300，全部为转往其他职业或退出劳动力的替补需求。预测非逐年实绩、当前招聘存量或AI因果。OOH2025就业含24%自雇、17%私人家庭，与排除这两类的OEWS工资样本不同。"
+              "编辑可测试排班核对、清单提醒、获准记录整理及通知草稿；未取得本职业模型准确率、实际采用、节省时间或岗位替代实测。现场照护、紧急保护和法定报告仍按具体职责执行。BLS美国SOC39-9011预测2025年1,010,300人→2035年990,400人，净减19,900、下降2%（整数），2025—2035年均空缺150,300，全部为转往其他职业或退出劳动力的替补需求。预测非逐年实绩、当前招聘存量或AI因果。OOH2025就业含24%自雇、17%私人家庭，与排除这两类的OEWS工资样本不同。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "childcare-workers.ai-impact.ai-impact-table.18",
@@ -34160,6 +34163,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/21-1021.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "安全看护与环境安全｜维护安全的游戏环境并保持视线看护｜维护安全的游戏环境（重要度 92）并观察与监控儿童的游戏活动（87）；在岗期间保持符合规定的视线看护与人数比例，检查活动区与玩具与设备的安全状况并及时排除隐患。 — 0/100; weight=1/3; childcare-workers.profile.responsibilities-block.1[0]",
+                  "日常照料与健康卫生｜执行穿衣与喂食与洗澡与如厕与睡眠照料｜给儿童穿衣并更换尿布（83）、对玩具与游戏设备消毒（83）、协助准备食物并提供餐食与点心（76）、对奶瓶消毒并配制配方奶（80）、指导饮食与休息与如厕等健康和个人习惯（80）并规范休息时间（71）。 — 0/100; weight=1/3; childcare-workers.profile.responsibilities-block.1[1]",
+                  "记录与家长沟通｜为每个儿童保存记录并与父母或监护人沟通｜为每个儿童保存记录包括日常观察与活动与餐食与用药信息（82）、就日常活动与行为及相关问题与父母或监护人沟通（85）、识别情绪或发育问题的迹象并提请父母或监护人注意（81）。 — 75/100; weight=1/3; childcare-workers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39133,7 +39153,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -39450,15 +39470,27 @@
         "source_refs": [
           "childcare-nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "儿童照护人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · SA",
@@ -39509,7 +39541,7 @@
       "text": "儿童照护人员"
     }
   },
-  "source_content_sha256": "4db84fb17f900ec3ee2d6b39448f859dc8b5b829e449ca10ddfc2c3efd9c4a14",
+  "source_content_sha256": "9bdc52eef4e7881101b333a659e261f813315b7e6500d2d6b883babfb82c0989",
   "subject": {
     "canonical_slug": "childcare-workers",
     "name": "儿童照护人员",

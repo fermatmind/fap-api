@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25035,7 +25038,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no separate generative AI exposure level, adoption rate, or causal wage or employment effect has been obtained for this occupation. ONet work activities—analysis 90, computers 89, information processing 88, getting information 86 and interpretation 80—provide task context, not a basis for medium or high exposure. Among unique U.S. job advertisements linked by ONet to this occupation from month 1, day 1 to month 12, day 31 in 2025, ArcGIS72%, Python38%, SQL25% and AutoCAD18% are listed; the other 10 entries are NA. The denominator is linked, deduplicated advertisements, not worker usage, AI adoption, ability scores or uniform entry conditions. Searches, cleaning suggestions, code, mapping and text drafts can be trialed in authorized environments, with effects verified through actual correctness, time and review costs. Responsibilities still follow project and jurisdictional arrangements. Direct BLS Table 1.2: employment in this occupation 19-3092 in both 2025 and 2035 is rounded to approximately 1,500 people, with a change of −2.1%. Rounded endpoints cannot establish zero net change or an exact number of people lost. Average annual openings of approximately 100 in 2025–2035 are explained by OOH as entirely replacement needs from occupational transfers or exits from the labor force, not net new jobs or current vacancies. The self-employed share is shown as unavailable and cannot be treated as 0."
+              "Insufficient evidence: no separate generative AI exposure level, adoption rate, or causal wage or employment effect has been obtained for this occupation. ONet work activities—analysis 90, computers 89, information processing 88, getting information 86 and interpretation 80—provide task context, not a basis for medium or high exposure. Among unique U.S. job advertisements linked by ONet to this occupation from month 1, day 1 to month 12, day 31 in 2025, ArcGIS72%, Python38%, SQL25% and AutoCAD18% are listed; the other 10 entries are NA. The denominator is linked, deduplicated advertisements, not worker usage, AI adoption, ability scores or uniform entry conditions. Searches, cleaning suggestions, code, mapping and text drafts can be trialed in authorized environments, with effects verified through actual correctness, time and review costs. Responsibilities still follow project and jurisdictional arrangements. Direct BLS Table 1.2: employment in this occupation 19-3092 in both 2025 and 2035 is rounded to approximately 1,500 people, with a change of −2.1%. Rounded endpoints cannot establish zero net change or an exact number of people lost. Average annual openings of approximately 100 in 2025–2035 are explained by OOH as entirely replacement needs from occupational transfers or exits from the labor force, not net new jobs or current vacancies. The self-employed share is shown as unavailable and cannot be treated as 0. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "geographers.ai-impact.ai-impact-table.18",
@@ -32569,6 +32572,23 @@
                 "publisher": "Ministry of Science and Technology and nine other departments",
                 "scope": "China science and technology ethical review",
                 "url": "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/gfxwj/gfxwj2023/202310/t20231008_188309.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Question and data-definition confirmation — 50/100; weight=1/3; geographers.ai-impact.ai-impact-table.95[0]",
+                  "Spatial analysis and statistics — 75/100; weight=1/3; geographers.ai-impact.ai-impact-table.107[0]",
+                  "Cartography and visualization — 75/100; weight=1/3; geographers.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37505,7 +37525,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impacts",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37660,15 +37680,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Geographers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Geographers · Tasks, deliverables and responsibility boundaries",
@@ -37719,7 +37751,7 @@
       "text": "Geographers"
     }
   },
-  "source_content_sha256": "51a7842b76dea319c4e5fdadf2a4f009d2a07d558b7560de8ec1404b1769b1c5",
+  "source_content_sha256": "3fb743f93d5054a85b7a34356c4ced7c5246f0979190d536b1c847b179e02d61",
   "subject": {
     "canonical_slug": "geographers",
     "name": "Geographers",

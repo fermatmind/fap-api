@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7544,7 +7547,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task hypothesis: distinguish appointment management from generative AI, which may draft summaries of fictional material. No occupational adoption rates or job outcomes were obtained. Real session data requires checking confidentiality, consent, and organizational authorization, and people must still check records. AI does not independently diagnose, treat, or manage crises; cross-border practice requires checking the actual jurisdiction."
+              "Editorial task hypothesis: distinguish appointment management from generative AI, which may draft summaries of fictional material. No occupational adoption rates or job outcomes were obtained. Real session data requires checking confidentiality, consent, and organizational authorization, and people must still check records. AI does not independently diagnose, treat, or manage crises; cross-border practice requires checking the actual jurisdiction. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "marriage-and-family-therapists.ai-impact.ai-impact-table.2",
@@ -8707,6 +8710,23 @@
                 "publisher": "BLS",
                 "scope": "target occupation",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/psychologists.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Organize case records and summaries — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Diagnose and provide treatment — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Recognize and manage crisis risks — 25/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11154,7 +11174,7 @@
     ],
     "path": "/en/career/jobs/marriage-and-family-therapists",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wages",
       "direction-comparison": "Comparison with adjacent occupations",
       "fit": "Fit signals",
@@ -11266,15 +11286,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Marriage and Family Therapists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Diagnosis and treatment",
@@ -11325,7 +11357,7 @@
       "text": "Evaluating a Career as a Marriage and Family Therapist: Work, Entry, and Practice Boundaries"
     }
   },
-  "source_content_sha256": "b9328d5ff7e2d6b6a12e0ad78197a0bbfe3a88b28db12cdc11b0c963dc8a6f87",
+  "source_content_sha256": "b76910b02d064371c3c029190e922ece70355d73bf29fdd1a9d2b1b78fde2e21",
   "subject": {
     "canonical_slug": "marriage-and-family-therapists",
     "name": "Marriage and Family Therapists",

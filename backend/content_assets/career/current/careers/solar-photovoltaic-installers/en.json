@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24411,7 +24414,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no actual AI adoption rate, replacement ratio or wage causality for this occupation was obtained, so no disappearance year can be given. Tools can assist with material lists and draft records; real objects, on-site work, inspection judgment and approval still require the corresponding personnel."
+              "Insufficient evidence: no actual AI adoption rate, replacement ratio or wage causality for this occupation was obtained, so no disappearance year can be given. Tools can assist with material lists and draft records; real objects, on-site work, inspection judgment and approval still require the corresponding personnel. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "solar-photovoltaic-installers.ai-impact.ai-impact-table.18",
@@ -32527,6 +32530,23 @@
                 "publisher": "O*NET / U.S. Department of Labor",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/13-1082.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Drawings and materials｜Check the current drawings and the models and quantities of components and supports, and register mismatches.｜Output version and material gap records and do not record unknowns as confirmed. — 50/100; weight=1/3; solar-photovoltaic-installers.profile.responsibilities-block.1[0]",
+                  "Assembly and installation｜Assemble supports and photovoltaic modules according to confirmed requirements, within the authorized scope.｜Output actual work and anomaly records; operations require training and supervision. — 0/100; weight=1/3; solar-photovoltaic-installers.profile.responsibilities-block.1[1]",
+                  "Inspection and testing｜Take part in inspection and testing per job responsibilities, and pass anomalies to the corresponding professionals.｜Output inspection records and unfinished items; do not judge compliance from a count. — 25/100; weight=1/3; solar-photovoltaic-installers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37435,7 +37455,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37727,15 +37747,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Solar photovoltaic installers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Components and supports · photovoltaic installation and maintenance",
@@ -37786,7 +37818,7 @@
       "text": "Solar photovoltaic installers"
     }
   },
-  "source_content_sha256": "223af38ae1709420de02e449f82e149b1e3b8a3cae734e82cdf61131240f750e",
+  "source_content_sha256": "c44d7b892aa73bde8eebaee5cd37f6131085adbde19a2ece81c72ff5a9b05829",
   "subject": {
     "canonical_slug": "solar-photovoltaic-installers",
     "name": "Solar photovoltaic installers",

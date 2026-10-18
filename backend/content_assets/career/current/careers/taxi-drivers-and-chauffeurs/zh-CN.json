@@ -8,6 +8,9 @@
       "fact:cn-transport-context-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -26015,7 +26018,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分文字计划核对、导航调度与车辆控制。保原预约车辆时段、重复和未知，真实业务安全、训练及许可由相应责任人员核；工具不把计划变成完成。"
+              "先分文字计划核对、导航调度与车辆控制。保原预约车辆时段、重复和未知，真实业务安全、训练及许可由相应责任人员核；工具不把计划变成完成。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "taxi-drivers-and-chauffeurs.display.ai_impact_table.answer",
@@ -35453,6 +35456,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "准备｜预约与排程｜确认约定时间地点和乘客需求，取得实际安排信息，未明需求回责任人。 — 75/100; weight=1/3; taxi-drivers-and-chauffeurs.display.responsibilities_block.01[0]",
+                  "驾驶｜按约接送与规则｜依交通安全规则接送，不因时段或催促忽略道路车辆安全状态。 — 25/100; weight=1/3; taxi-drivers-and-chauffeurs.display.responsibilities_block.03[0]",
+                  "服务｜上下车与特殊需求｜协助乘客与行李，专用设备依获准训练使用；运输服务不代医疗急救权限。 — 0/100; weight=1/3; taxi-drivers-and-chauffeurs.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -40694,7 +40714,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -40854,15 +40874,27 @@
         "source_refs": [
           "nbs-transport-context-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "出租车、接驳车司机与专职司机",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 53-3053.00 精确职业口径",
@@ -40913,7 +40945,7 @@
       "text": "接驳车司机与专职司机"
     }
   },
-  "source_content_sha256": "3dd2e70b4aa9e1b7c0615546719a546faa4de210c7cf7de176bbcc1fc73aaf6f",
+  "source_content_sha256": "b88995b40d534dff9211a49ea78e46e2774436dce1e86d511fe9f677d4cdccc3",
   "subject": {
     "canonical_slug": "taxi-drivers-and-chauffeurs",
     "name": "接驳车司机与专职司机",

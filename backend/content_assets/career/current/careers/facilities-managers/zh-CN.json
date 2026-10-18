@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24755,7 +24758,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO140和《GPTs are GPTs》讨论全球/美国任务潜在暴露，WEF是雇主预期；均不证明设施经理已采用、实际收益、整体增强或被替代。文档核对只是编辑待验证候选，本轮未取得职业采用及工资就业因果。"
+              "ILO140和《GPTs are GPTs》讨论全球/美国任务潜在暴露，WEF是雇主预期；均不证明设施经理已采用、实际收益、整体增强或被替代。文档核对只是编辑待验证候选，本轮未取得职业采用及工资就业因果。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "facilities-managers.ai-impact.ai-impact-table.18",
@@ -32512,6 +32515,23 @@
                 "publisher": "美国劳工统计局",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "维护计划｜把设备状态、预防性维护窗口和使用方限制转成可执行排期。｜输出计划版本、停机窗口、责任人和回查点。 — 75/100; weight=1/3; facilities-managers.profile.responsibilities-block.1[1]",
+                  "承包商交付｜核对服务范围、报价、现场许可和专业资质，组织作业并收集测试证据。｜输出范围比较、工单、照片、测试结果和验收记录。 — 25/100; weight=1/3; facilities-managers.profile.responsibilities-block.1[2]",
+                  "安全与连续性｜识别消防、用电、结构、环境和关键设施风险，协调封闭、替代路线或停机。｜输出风险升级单；专业安全结论交给有资质和权限的责任人。 — 25/100; weight=1/3; facilities-managers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37418,7 +37438,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37686,15 +37706,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "设施经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "设施运行 · 维护维修 · 建设改造",
@@ -37745,7 +37777,7 @@
       "text": "设施经理"
     }
   },
-  "source_content_sha256": "9fcda6a7bcba86caf98319e05d6fc448e1372b8568b6e5211dacbbd7c2b1e3e1",
+  "source_content_sha256": "8edf969a9e7a0c0f328ce72e4843970c663ca4399c0788269c5e73c62e6c4af3",
   "subject": {
     "canonical_slug": "facilities-managers",
     "name": "设施经理",

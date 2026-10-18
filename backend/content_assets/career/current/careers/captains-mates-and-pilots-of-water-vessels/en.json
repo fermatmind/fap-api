@@ -53,6 +53,9 @@
       "fact:current-us-parent-industry-3": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24726,7 +24729,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The non-mandatory IMO2026 MASS rules apply to cargo ships under SOLAS Chapter 1 and cover autonomous actions, remote operation, risk assessment, communications and cyber security, and remote operation centres, with the captain retaining overall responsibility, including when not on board. The existence of responsibility does not mean every manoeuvre must be executed by on-site human hands, nor does it mean full adoption has occurred or that individual positions will not be replaced. \nThe information retrieval, draft, and reminder examples on this page are editorial scenarios and were not measured for efficiency; task exposure, deployment, and employment numbers are judged separately."
+              "The non-mandatory IMO2026 MASS rules apply to cargo ships under SOLAS Chapter 1 and cover autonomous actions, remote operation, risk assessment, communications and cyber security, and remote operation centres, with the captain retaining overall responsibility, including when not on board. The existence of responsibility does not mean every manoeuvre must be executed by on-site human hands, nor does it mean full adoption has occurred or that individual positions will not be replaced. \nThe information retrieval, draft, and reminder examples on this page are editorial scenarios and were not measured for efficiency; task exposure, deployment, and employment numbers are judged separately. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.18",
@@ -32475,6 +32478,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/53-5021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Passage plan | consult charts, tides, weather, and notices to mariners, prepare the passage plan, and set abort conditions and alternates | passage plan and abort condition records. — 75/100; weight=1/3; captains-mates-and-pilots-of-water-vessels.profile.responsibilities-block.1[0]",
+                  "Watchkeeping and monitoring | stand navigational watches at specified periods, continuously monitor instruments, sea state, and other vessels' movements, and check against checklists | watch and rest records. — 25/100; weight=1/3; captains-mates-and-pilots-of-water-vessels.profile.responsibilities-block.1[1]",
+                  "Manoeuvring and docking and undocking | manoeuvre the vessel with standard orders and read-back confirmation, and complete docking and undocking, narrow-water operations, and towing and barge manoeuvring | manoeuvring and order read-back records. — 25/100; weight=1/3; captains-mates-and-pilots-of-water-vessels.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37389,7 +37409,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37818,15 +37838,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Captains, Mates, and Pilots of Water Vessels",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page does not score it)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 53-5021.00 · navigation and manoeuvring / watchkeeping and monitoring / management and compliance",
@@ -37877,7 +37909,7 @@
       "text": "Captains, Mates, and Pilots of Water Vessels"
     }
   },
-  "source_content_sha256": "98d7200bee378f9a373617a9d7a3b62904b898bcd428b0185b20fd5ee5b3a5d6",
+  "source_content_sha256": "908f90e8d9b9dcf74883647f3b4ef7a7c5082fe2ed8ca49601468247bb7b91c7",
   "subject": {
     "canonical_slug": "captains-mates-and-pilots-of-water-vessels",
     "name": "Captains, Mates, and Pilots of Water Vessels",

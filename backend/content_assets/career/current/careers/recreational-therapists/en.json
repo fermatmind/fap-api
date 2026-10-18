@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24791,7 +24794,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Existing task exposure research supports that text retrieval and summarization may change and does not support an overall replacement rate for recreational therapists. Patient assessment, goal and activity fit, on-site observation, anomaly escalation, and the final medical record are still borne by authorized personnel. This page has no actual AI adoption experiment for this occupation and gives no layoff rate, individual unemployment probability, or year of disappearance."
+              "Existing task exposure research supports that text retrieval and summarization may change and does not support an overall replacement rate for recreational therapists. Patient assessment, goal and activity fit, on-site observation, anomaly escalation, and the final medical record are still borne by authorized personnel. This page has no actual AI adoption experiment for this occupation and gives no layoff rate, individual unemployment probability, or year of disappearance. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "recreational-therapists.ai-impact.ai-impact-table.18",
@@ -32998,6 +33001,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/31-2011.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Patient assessment｜Learn about function, interests, and limitations from the medical record, observation, the patient, and the team.｜Record traceable needs and contraindications. — 25/100; weight=1/3; recreational-therapists.profile.responsibilities-block.1[0]",
+                  "Activity delivery｜Use arts, exercise, or social activities to support rehabilitation under authorization.｜Adjust the difficulty according to the response. — 0/100; weight=1/3; recreational-therapists.profile.responsibilities-block.1[2]",
+                  "Outcome records｜Record participation, responses, progress, and regression.｜Used by the team to assess and revise the plan. — 75/100; weight=1/3; recreational-therapists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37906,7 +37926,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38175,15 +38195,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Recreational Therapists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Patient assessment · therapeutic activities · progress records",
@@ -38234,7 +38266,7 @@
       "text": "Recreational Therapists"
     }
   },
-  "source_content_sha256": "3b721db69a4b6e3c5f74902a30c9aeb8bf90cc7ecc5afdc95df0ea8beaea7ea3",
+  "source_content_sha256": "96c2f07ba4945f412d84ae5b73ef8848d10c2cd7aba2b9179b2df223c7e4795a",
   "subject": {
     "canonical_slug": "recreational-therapists",
     "name": "Recreational Therapists",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24727,7 +24730,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the cross-occupational potential exposure, task research, employer expectations, and official occupational data consulted this time do not provide the site AI adoption rate, layoff rate, or position disappearance year for quality control analysts. Data retrieval and draft organization can be an editorial trial proposal, but whether it is adopted, whether it improves accuracy, and how judgment responsibility is borne must be verified in a specific process."
+              "Insufficient evidence: the cross-occupational potential exposure, task research, employer expectations, and official occupational data consulted this time do not provide the site AI adoption rate, layoff rate, or position disappearance year for quality control analysts. Data retrieval and draft organization can be an editorial trial proposal, but whether it is adopted, whether it improves accuracy, and how judgment responsibility is borne must be verified in a specific process. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "quality-control-analysts.ai-impact.ai-impact-table.18",
@@ -32446,6 +32449,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/17-2112.02"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Testing and judgment | Test using established methods and specifications | Perform routine and non-routine analyses on in-process materials, raw materials, environmental samples, finished products, or stability samples and compare results with specifications and control limits. — 25/100; weight=1/3; quality-control-analysts.profile.responsibilities-block.1[0]",
+                  "Equipment and calibration | Calibrate, verify, and maintain equipment | Instrument status determines whether data is usable, and calibration and maintenance must be recorded and faults eliminated. — 25/100; weight=1/3; quality-control-analysts.profile.responsibilities-block.1[1]",
+                  "Records and data | Complete data sheets, equipment logs, and inventory tables | Retain original records and versions, compile data, and perform the corresponding analysis. — 75/100; weight=1/3; quality-control-analysts.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37351,7 +37371,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparing career directions",
       "fit": "Career fit guide",
@@ -37619,15 +37639,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Quality Control Analysts",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Quality control analyst · task check",
@@ -37678,7 +37710,7 @@
       "text": "Quality Control Analysts"
     }
   },
-  "source_content_sha256": "84862964dac70feae909827222af4b4152db7857f3fb86a413738a366f859f36",
+  "source_content_sha256": "17758ef0841bdd22776b6d9c5eb03e0dcd50027b88503a29015c2f2444fa4e20",
   "subject": {
     "canonical_slug": "quality-control-analysts",
     "name": "Quality Control Analysts",

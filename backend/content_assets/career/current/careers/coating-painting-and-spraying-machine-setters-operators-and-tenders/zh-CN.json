@@ -89,6 +89,9 @@
       "fact:coat-nine-us-wage-p75-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25289,7 +25292,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET软件和任务、招聘关键词只支持目录及提及信息，不能证明生成式AI能正确完成或产线持续投入。Software Skills现10类，含机器人涂装、维护、库存、MRP、排程、工时和办公软件；Hot2025美国招聘4词Office/Excel各1%，Outlook/Word Not available非0，唯一映射招聘提及率不是使用或AI采用率。"
+              "O*NET软件和任务、招聘关键词只支持目录及提及信息，不能证明生成式AI能正确完成或产线持续投入。Software Skills现10类，含机器人涂装、维护、库存、MRP、排程、工时和办公软件；Hot2025美国招聘4词Office/Excel各1%，Outlook/Word Not available非0，唯一映射招聘提及率不是使用或AI采用率。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "coating-painting-and-spraying-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.18",
@@ -34318,6 +34321,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/details/51-9192.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "调机与参数设定｜按工艺设定设备并把参数调到可交付状态｜启停设备，接装软管或喷嘴并调整喷雾分散，转动旋钮与手轮与阀门或开关调节输送速度与机器温度与空气压力与循环与涂料流量，并在加料前称量或计量化学品与涂料或油漆（对应 O*NET 任务第九与第十一与第十二与第十八项）。 新任务还包括按工艺配合加热与通风设备干燥。 — 25/100; weight=1/3; coating-painting-and-spraying-machine-setters-operators-and-tenders.profile.responsibilities-block.1[0]",
+                  "涂覆作业｜按规定用量把涂料或油漆施加到工件表面｜握持或调整喷枪方向喷涂料，按规定用量喷涂底漆与装饰性或面漆涂层，涂刷防锈底漆并做接缝填缝与密封，用刷子手工补涂需要修补或喷枪够不到的部位，并把工件穿过或绕过机器滚筒与干燥器（对应 O*NET 任务第二与第三与第八与第十六与第十七项）。 新任务还含修补底漆、车身填料平整、调色与旧漆/油锈清理、充分干燥漆面砂磨封层。 — 0/100; weight=1/3; coating-painting-and-spraying-machine-setters-operators-and-tenders.profile.responsibilities-block.1[1]",
+                  "外观与质量判定｜识别缺陷并量测样品是否符合规格｜监控喷涂作业以识别起泡或条纹等缺陷并纠正成因，观察机器仪表与设备运行以发现偏离标准的偏差，通过目视检查或黏度计判断油漆流量与黏度与涂层质量，检查、测量、称量或测试样品以确认符合规格，并对成品漆面做打磨与上蜡（对应 O*NET 任务第四与第十三与第十四与第十与第十五项）。 — 25/100; weight=1/3; coating-painting-and-spraying-machine-setters-operators-and-tenders.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39280,7 +39300,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -39859,15 +39879,27 @@
         "source_refs": [
           "coat-nbs-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "机器铺设工、操作员、看护员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RC",
@@ -39918,7 +39950,7 @@
       "text": "涂装、油漆与喷涂机器操作员"
     }
   },
-  "source_content_sha256": "7f3013db1a4e0ad8ae4100e0e9eb0e950b294e0c1eb0f23daea6e4170bde8adc",
+  "source_content_sha256": "bb05c36f9d6419756f9992c0f783199ffaf944eb9811a566f67fd0237703c754",
   "subject": {
     "canonical_slug": "coating-painting-and-spraying-machine-setters-operators-and-tenders",
     "name": "涂装、油漆与喷涂机器操作员",

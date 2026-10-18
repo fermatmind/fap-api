@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-mean-period-current": {
         "status": "pending_mapping"
       },
@@ -24703,7 +24706,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS explicitly notes that technology, including AI, may reduce the number of technicians needed to set up and operate broadcast systems; it cannot be guaranteed that tasks such as fault judgment will never change, nor can this occupation's AI substitution rate be derived from the overall projection. Editorial checking: measurement inputs, abnormality escalation, and safety and broadcast authority are confirmed against the real system and position."
+              "BLS explicitly notes that technology, including AI, may reduce the number of technicians needed to set up and operate broadcast systems; it cannot be guaranteed that tasks such as fault judgment will never change, nor can this occupation's AI substitution rate be derived from the overall projection. Editorial checking: measurement inputs, abnormality escalation, and safety and broadcast authority are confirmed against the real system and position. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.18",
@@ -32224,6 +32227,23 @@
                 "publisher": "FermatMind career content editorial team",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/27-4012.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Equipment installation and configuration | Install and configure equipment according to the manual, and maintain and calibrate the in-station computers and network | Reviewable configuration parameters and the equipment ledger. — 25/100; weight=1/3; broadcast-technicians.profile.responsibilities-block.1[1]",
+                  "Broadcast watch duty and adjustment | Monitor the outgoing and incoming signal and the monitors, and adjust volume, signal strength, and clarity and adjust video fidelity | Operating parameter records completed by shift. — 50/100; weight=1/3; broadcast-technicians.profile.responsibilities-block.1[2]",
+                  "Fault handling and servicing | Troubleshoot equipment faults, perform emergency repairs, and track the repair to completion, and maintain equipment according to procedures | Fault handling and servicing records. — 25/100; weight=1/3; broadcast-technicians.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37193,7 +37213,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37533,15 +37553,27 @@
         "source_refs": [
           "oews2023-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Broadcast Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page does not score it)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 27-4012.00 · broadcast chain watch duty / transmitting and transmission / equipment maintenance · server rooms and stations",
@@ -37592,7 +37624,7 @@
       "text": "Broadcast Technicians"
     }
   },
-  "source_content_sha256": "c07cd5471611a7dea707bab0d8ab9360c9f751481d3719f6ad9492ba2963d2bf",
+  "source_content_sha256": "3e366e86fd831118c9d52d51550a7176c17fae58ff1ba9f88dcfe0d43e7e82bb",
   "subject": {
     "canonical_slug": "broadcast-technicians",
     "name": "Broadcast Technicians",

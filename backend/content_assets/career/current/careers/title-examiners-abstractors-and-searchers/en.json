@@ -8,6 +8,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25471,7 +25474,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the general AI adoption rate, task scores and net employment causal results for this occupation. Index abstracts can serve as a support idea, but the correspondence to the original text, the search coverage and the professional authority still need checking; the BLS2025—2035 overall growth of 2.1%, the ten-year net increase of about 1300 people and the average annual 5300 openings that includes replacements are component indicators, not an AI effect."
+              "Insufficient evidence: the general AI adoption rate, task scores and net employment causal results for this occupation. Index abstracts can serve as a support idea, but the correspondence to the original text, the search coverage and the professional authority still need checking; the BLS2025—2035 overall growth of 2.1%, the ten-year net increase of about 1300 people and the average annual 5300 openings that includes replacements are component indicators, not an AI effect. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "title-examiners-abstractors-and-searchers.display.ai_impact_table.answer",
@@ -33172,6 +33175,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Searching｜finding public and private records｜Look up material within the permitted scope, keep the record numbers and sources, and do not extend the use of customer information. — 75/100; weight=1/3; title-examiners-abstractors-and-searchers.display.responsibilities_block.02[0]",
+                  "Checking｜examining descriptions and restrictions｜Compare the legal description, rights holders, mortgages and other document conditions, and mark the contradictions. — 50/100; weight=1/3; title-examiners-abstractors-and-searchers.display.responsibilities_block.03[0]",
+                  "Abstracts｜organising legal and insurance details｜Keep the original restrictions, periods and sources, and avoid a definitive tone that goes beyond the evidence. — 75/100; weight=1/3; title-examiners-abstractors-and-searchers.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38420,7 +38440,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Occupational fit guide",
@@ -38581,15 +38601,27 @@
         "source_refs": [
           "china-wage-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Title examiners, abstractors and searchers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "The United States 23-2093.00 title material scope",
@@ -38640,7 +38672,7 @@
       "text": "Title examiners, abstractors and searchers"
     }
   },
-  "source_content_sha256": "8e0b894da250ebc33bc79ee1822e02ce85db779e551fc7384726df6380c0406d",
+  "source_content_sha256": "6bf3bf2eb6ec1a8fb160bf71ad9d4fd928153732ea5a7754d5c06486d86f6107",
   "subject": {
     "canonical_slug": "title-examiners-abstractors-and-searchers",
     "name": "Title examiners, abstractors and searchers",

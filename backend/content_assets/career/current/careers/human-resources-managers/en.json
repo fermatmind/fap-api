@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25469,7 +25472,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task analysis | On permitted fictional personnel data, trial policy search and plan reporting drafts, and check them against the actual rules and democratic procedures; this round provides no universal adoption, efficiency, or job causality, and does not rank the order of impacts. An HR manager is responsible for policy execution, staffing, disciplinary procedures, and compliance advice, acting within their own actual management authority, and matters are not all decided instead by legal, senior management, or the board. Matters beyond authority are submitted to the genuine responsible person; Article 4 of the Labor Contract Law requires democratic procedures plus disclosure and notification for rules affecting immediate interests, and internal approval does not substitute for legal conditions; terminating a labor relationship requires checking the statutory grounds and procedure separately. Article 13 of the Personal Information Protection Law makes processing necessary for implementing human resources management in accordance with lawfully adopted rules and collective contracts one of the bases for processing, not a license to arbitrarily collect any employee information or to rely on internal permission alone; check the purpose, minimum necessity, and retention period. Article 24 requires automated decision-making to be transparent and fair, and decisions on significant rights and interests may be explained on request and refused where made solely automatically, rather than being banned across the board when tools assist."
+              "Editorial task analysis | On permitted fictional personnel data, trial policy search and plan reporting drafts, and check them against the actual rules and democratic procedures; this round provides no universal adoption, efficiency, or job causality, and does not rank the order of impacts. An HR manager is responsible for policy execution, staffing, disciplinary procedures, and compliance advice, acting within their own actual management authority, and matters are not all decided instead by legal, senior management, or the board. Matters beyond authority are submitted to the genuine responsible person; Article 4 of the Labor Contract Law requires democratic procedures plus disclosure and notification for rules affecting immediate interests, and internal approval does not substitute for legal conditions; terminating a labor relationship requires checking the statutory grounds and procedure separately. Article 13 of the Personal Information Protection Law makes processing necessary for implementing human resources management in accordance with lawfully adopted rules and collective contracts one of the bases for processing, not a license to arbitrarily collect any employee information or to rely on internal permission alone; check the purpose, minimum necessity, and retention period. Article 24 requires automated decision-making to be transparent and fair, and decisions on significant rights and interests may be explained on request and refused where made solely automatically, rather than being banned across the board when tools assist. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "human-resources-managers.ai-impact.ai-impact-table.18",
@@ -32969,6 +32972,23 @@
                 "publisher": "BLS",
                 "scope": "Specific document usage limits",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Policy and rules — 75/100; weight=1/3; human-resources-managers.ai-impact.ai-impact-table.95[0]",
+                  "Employee relations — 25/100; weight=1/3; human-resources-managers.ai-impact.ai-impact-table.103[0]",
+                  "Discipline and staffing — 25/100; weight=1/3; human-resources-managers.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37933,7 +37953,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -38057,15 +38077,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Human Resources Manager",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Human Resources Manager · task, delivery, and responsibility boundaries",
@@ -38116,7 +38148,7 @@
       "text": "Human Resources Manager"
     }
   },
-  "source_content_sha256": "05c26d3bd04c9fea8575cb5f1a5ce6161977daf17ea60fa8cfa49c51dc073116",
+  "source_content_sha256": "1c24c6a8905bb83904003d364fde612d1d8453377e6f7a971d8572e48928ceee",
   "subject": {
     "canonical_slug": "human-resources-managers",
     "name": "Human Resources Manager",

@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24300,7 +24303,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑待验证机会：文档录入检索、表单校验与会议辅助，常规数字化不等GenAI；本轮无采用率、节约量或编制工资因果。人工复核须在法定权限内，不把中国书记员当独立裁判或许可决定人员。"
+              "编辑待验证机会：文档录入检索、表单校验与会议辅助，常规数字化不等GenAI；本轮无采用率、节约量或编制工资因果。人工复核须在法定权限内，不把中国书记员当独立裁判或许可决定人员。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31666,6 +31669,23 @@
                 "publisher": "全国人大常委会；国家网信办转载",
                 "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "法院文书｜检查并记录案件文书｜接收并检查提交给法院的法律文书是否符合法律与法院程序，记录案件处置结果、法院命令与费用支付安排。 — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "公众咨询｜回答程序与出庭咨询｜回答公众关于司法程序、出庭、审判日期、休庭、未执行逮捕令、传票、作证传票、证人费或罚款支付等方面的咨询，并就出庭时间作出指示。 — 50/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "美国市政文件维护保管为Core，法令公告、公共通知、议程与会议记录为Supplemental，具体分工另核。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36872,7 +36892,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37107,15 +37127,27 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "法院、市政、执照文员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "办公与行政支持 · 记录与受理",
@@ -37166,7 +37198,7 @@
       "text": "法院、市政、执照文员"
     }
   },
-  "source_content_sha256": "fcd859d0c8316bb58af1b7f63fa6ea3a928119d0a9f0244342bac53abf3a7ee0",
+  "source_content_sha256": "0f3aecefd7487e01119e6a4f95620d9a1fd79355910ef2aa1d36d8ee8ad083b4",
   "subject": {
     "canonical_slug": "court-municipal-and-license-clerks",
     "name": "法院、市政、执照文员",

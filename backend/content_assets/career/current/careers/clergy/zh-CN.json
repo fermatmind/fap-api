@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:nine-cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -25062,7 +25065,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET列出办公、数据库、日程与传播软件及招聘关键词；它们不能证明机构采用逐年增加、工具提速幅度或AI就业效果。中国大陆《宗教教职人员网络行为规范》禁止利用AI传教；互联网宗教信息发布、讲经讲道、培训及活动须按许可、主体与渠道等具体规定核，人工复核或机构授权不自动使发布合法。以下工具建议限不含教义传播及真实个人资料的虚构内部行政草稿；不自动生成、发布或传播宗教教导。"
+              "O*NET列出办公、数据库、日程与传播软件及招聘关键词；它们不能证明机构采用逐年增加、工具提速幅度或AI就业效果。中国大陆《宗教教职人员网络行为规范》禁止利用AI传教；互联网宗教信息发布、讲经讲道、培训及活动须按许可、主体与渠道等具体规定核，人工复核或机构授权不自动使发布合法。以下工具建议限不含教义传播及真实个人资料的虚构内部行政草稿；不自动生成、发布或传播宗教教导。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.18",
@@ -32154,6 +32157,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "adjacent",
                 "url": "https://www.bls.gov/ooh/community-and-social-service/marriage-and-family-therapists.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "仪式与教导｜主持礼拜与仪式并宣讲教义｜祈祷并倡导灵性；准备并宣讲讲道或其他讲话；诵读经书；组织并主持例行宗教仪式；主持婚礼与葬礼与坚信礼等特别仪式；施行宗教礼仪或圣事（对应 O*NET 任务第一与第二与第三与第四与第十五与第八项）。 — 25/100; weight=1/3; clergy.profile.responsibilities-block.1[0]",
+                  "精神陪伴与辅导｜为个人与群体提供精神与情感辅导｜就精神与情感与个人需要提供辅导；到住所与医院与监狱探访以提供慰藉与支持；在紧急情况或危机中回应求助；把需要的人转介给社区支持服务或心理学家或医生（对应 O*NET 任务第七与第十与第十四与第十八项）。 — 0/100; weight=1/3; clergy.profile.responsibilities-block.1[1]",
+                  "社群沟通与传播｜通过写作与演讲与教学分享宗教议题｜就宗教议题撰写文章或发表演讲或教学；组织或参与跨宗教与社区与公民与教育或娱乐活动；设法扩充堂会成员（对应 O*NET 任务第六与第十九与第十六项）。 — 75/100; weight=1/3; clergy.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37085,7 +37105,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37414,15 +37434,27 @@
         "source_refs": [
           "nine-iag-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "神职人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · SE",
@@ -37473,7 +37505,7 @@
       "text": "神职人员"
     }
   },
-  "source_content_sha256": "35a758f368cca0202c6a2bb91008b1dd8e14a5d214b145cf73e05e4551692738",
+  "source_content_sha256": "21f0892168a9b677f56f5d70d0b7fd8782ee4bd2befeddbd4fb00201588c6c40",
   "subject": {
     "canonical_slug": "clergy",
     "name": "神职人员",

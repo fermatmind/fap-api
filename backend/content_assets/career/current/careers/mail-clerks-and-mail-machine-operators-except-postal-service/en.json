@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7543,7 +7546,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task hypothesis: distinguish address rules, fixed postage calculations, and mail machinery control from generative AI. The latter may organize fictional abnormality record drafts; no adoption rates or job outcomes were obtained for this occupation. Addresses / charges, mail privacy, and machine safety require verification. Generated text does not directly control machinery or confer troubleshooting authority."
+              "Editorial task hypothesis: distinguish address rules, fixed postage calculations, and mail machinery control from generative AI. The latter may organize fictional abnormality record drafts; no adoption rates or job outcomes were obtained for this occupation. Addresses / charges, mail privacy, and machine safety require verification. Generated text does not directly control machinery or confer troubleshooting authority. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "mail-clerks-and-mail-machine-operators-except-postal-service.ai-impact.ai-impact-table.2",
@@ -8658,6 +8661,23 @@
                 "publisher": "OSHA",
                 "scope": "industry_proxy",
                 "url": "https://www.osha.gov/control-hazardous-energy"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Sort and distribute incoming mail by route — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Operate and adjust mail machines — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Weigh, check rates, and apply postage — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11068,7 +11088,7 @@
     ],
     "path": "/en/career/jobs/mail-clerks-and-mail-machine-operators-except-postal-service",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11180,15 +11200,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Mail Clerks and Mail Machine Operators, Except Postal Service",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Incoming and outgoing mail processing",
@@ -11239,7 +11271,7 @@
       "text": "Assessing Mail Clerks and Mail Machine Operators: Work, Entry Paths, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "c69a0e1c8e6e0cfaddaf60775fcb69725226d5ecb18d2814e0039572526430e7",
+  "source_content_sha256": "0cbc3b0e9305ca21553a606f8e5cc756b8b050a83aa19056fd73cb1b0c0e0b43",
   "subject": {
     "canonical_slug": "mail-clerks-and-mail-machine-operators-except-postal-service",
     "name": "Mail Clerks and Mail Machine Operators, Except Postal Service",

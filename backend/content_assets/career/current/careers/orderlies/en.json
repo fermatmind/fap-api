@@ -14,6 +14,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "mapped"
       },
@@ -13728,6 +13731,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Check mobility, fall risk, line and tube, and isolation requirements. — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Transfer patients safely according to training and staffing requirements. — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]",
+                  "Accompany patients to examination, treatment, or surgical areas. — 0/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13915,7 +13935,7 @@
             }
           }
         ],
-        "answer": "Editorial suggestion: tools can assist with transport scheduling, handover checklists, and supply prompts; patient movement, emergency handling, and clinical judgment are still handled by trained and authorized personnel per care team instructions, and task documents do not prove AI adoption or replacement proportions.",
+        "answer": "Editorial suggestion: tools can assist with transport scheduling, handover checklists, and supply prompts; patient movement, emergency handling, and clinical judgment are still handled by trained and authorized personnel per care team instructions, and task documents do not prove AI adoption or replacement proportions. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "Occupational tasks",
@@ -15664,7 +15684,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15777,15 +15797,27 @@
         "source_refs": [
           "bls-2025-35-31-1132"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Hospital orderly (patient transport)",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Hospital orderly (patient transport) · O*NET 31-1132.00",
@@ -15836,7 +15868,7 @@
       "text": "Hospital orderly (patient transport): work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "8fd65726f2c3444145c713dbc740fc4de39b763cf6f7aec0c7f59c1e4b232f4e",
+  "source_content_sha256": "cdfb2ca89ef3a7dd9f9a614c83d53adc4bb796832f8dac337c94b2176f29dd5a",
   "subject": {
     "canonical_slug": "orderlies",
     "name": "Hospital orderly (patient transport)",

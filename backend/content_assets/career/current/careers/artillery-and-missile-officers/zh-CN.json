@@ -41,6 +41,9 @@
       "fact:entry-armor-training": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -24825,7 +24828,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务分析：公开、非敏感文书的草拟、表格整理和虚构训练记录复盘可能得到工具辅助；本轮没有核实 55-1014 的 AI 采用率、实际部署效果或就业影响研究，不能据此断言会取代或一定不会取代某类岗位。实际岗位技术条件和决策权限应向所属机构核对。 宽参考为ILO跨职业暴露方法介绍及扩展摘要、NIST跨行业自愿风险简介，未读完整论文/PDF或本军职映射；不能补采用及因果缺口。"
+              "编辑任务分析：公开、非敏感文书的草拟、表格整理和虚构训练记录复盘可能得到工具辅助；本轮没有核实 55-1014 的 AI 采用率、实际部署效果或就业影响研究，不能据此断言会取代或一定不会取代某类岗位。实际岗位技术条件和决策权限应向所属机构核对。 宽参考为ILO跨职业暴露方法介绍及扩展摘要、NIST跨行业自愿风险简介，未读完整论文/PDF或本军职映射；不能补采用及因果缺口。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.18",
@@ -32728,6 +32731,23 @@
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "部署与人员管理｜职责核对｜规划、选定目标并协调野战与防空炮兵导弹单位的部署。 — 25/100; weight=1/3; artillery-and-missile-officers.profile.responsibilities-block.1[0]",
+                  "火控通信｜职责核对｜指导火控通信系统的建立和运行。 — 50/100; weight=1/3; artillery-and-missile-officers.profile.responsibilities-block.1[1]",
+                  "设施安全｜职责核对｜监督武器储存与发射设施安全。 — 25/100; weight=1/3; artillery-and-missile-officers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37630,7 +37650,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38002,15 +38022,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "火炮导弹官",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "官方职责：野战／防空部署 · 战略导弹 · 核弹药及设施 · 系统维护",
@@ -38061,7 +38093,7 @@
       "text": "火炮导弹官"
     }
   },
-  "source_content_sha256": "09b65882e25a2097289bb0b3d64067d1b1b5d2aa98df342416a4fe9d3cad7ab2",
+  "source_content_sha256": "6ee4e903f48cc2c9540f6b5b97473f41485a18223d88884a20e32f72526415e3",
   "subject": {
     "canonical_slug": "artillery-and-missile-officers",
     "name": "火炮导弹官",

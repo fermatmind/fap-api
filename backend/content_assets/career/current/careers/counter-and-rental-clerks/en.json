@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:g04-employment-2025": {
         "status": "pending_mapping"
       },
@@ -24208,7 +24211,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial opportunities to be verified: online booking, cashier and rental systems, spreadsheet contracts, and catalogue and inventory lookup; routine digitalization is not generative AI. Actual pricing, recording, physical status, service suitability and exceptions must be checked, and no deployment savings, adoption rate or staffing and wage causality was obtained for this occupation, so it cannot be called measured change."
+              "Editorial opportunities to be verified: online booking, cashier and rental systems, spreadsheet contracts, and catalogue and inventory lookup; routine digitalization is not generative AI. Actual pricing, recording, physical status, service suitability and exceptions must be checked, and no deployment savings, adoption rate or staffing and wage causality was obtained for this occupation, so it cannot be called measured change. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31515,6 +31518,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/41-3021.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Reception inquiries｜greet customers and understand needs｜Greet walk-in and telephone customers, understand the type, quality and quantity of the rental or service they need, describe item availability and operation, and advise on use and care. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Billing and collection｜calculate fees and collect payment｜Calculate the fees and deposits for products and services according to the price list and collect payment, issue documents, handle change and vouchers, and keep payments and records consistent. — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]",
+                  "Inspecting and adjusting items, marking items pending alteration, cleaning, storage or repair, and preparing displays are Core; allocating sports and leisure equipment is Supplemental, and it is not called core daily work for every position. — 25/100; weight=1/3; actors.display.responsibilities_block.06[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36704,7 +36724,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -36927,15 +36947,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Counter and rental clerks",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Sales and related services · counter rental and intake",
@@ -36986,7 +37018,7 @@
       "text": "Counter and rental clerks"
     }
   },
-  "source_content_sha256": "290a0792c9bc937177b2bfdb5673c04f6ef423c712d30ac77b955aa70945fce4",
+  "source_content_sha256": "de2633af19d480486964ca0545af938f1d81d9a92d57447d84a027b153978820",
   "subject": {
     "canonical_slug": "counter-and-rental-clerks",
     "name": "Counter and rental clerks",

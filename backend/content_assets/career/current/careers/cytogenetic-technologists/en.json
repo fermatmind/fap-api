@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24324,7 +24327,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "What was verified is 30 tasks, general work context and posting keywords. This round has no AI adoption rate, measured efficiency gain, displacement date or income and employment causation. Automatic scanning, image localisation and preliminary karyotype arrangement and LIS summarisation are editorial candidates awaiting verification; general instruments and information systems are not generative AI. Application requires validating method suitability, false negatives and false positives, version and human review, and tool output does not automatically acquire clinical reporting authority."
+              "What was verified is 30 tasks, general work context and posting keywords. This round has no AI adoption rate, measured efficiency gain, displacement date or income and employment causation. Automatic scanning, image localisation and preliminary karyotype arrangement and LIS summarisation are editorial candidates awaiting verification; general instruments and information systems are not generative AI. Application requires validating method suitability, false negatives and false positives, version and human review, and tool output does not automatically acquire clinical reporting authority. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31850,6 +31853,23 @@
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Culture and harvest | Culture aseptically and harvest cells | Select the culture system or process according to specimen type and referral reason, prepare the specimen and medium using aseptic technique and maintain their pH and sterility, and harvest cells in the optimal time sequence and manner (manual or automated) using blocking agents, releasing agents and fixatives. — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Slide preparation and banding | Prepare slides and make chromosomes visible | Prepare cell culture slides according to the standard process, select a banding method to identify chromosome pairs, stain so that chromosomes are visible under the microscope, apply the specimen and control to suitable slide frames, run the instrument and produce analysable results, and generate chromosome images with a computer imaging system. — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "Interpretation and analysis | Count chromosomes and identify abnormalities | Observe the slides under a microscope, light microscope or photomicrography system, count chromosome numbers, identify structural abnormalities and arrange chromosomes in pairs on a karyogram; the task profile also lists DNA extraction, measurement and dilution and analyses such as FISH and aCGH. The specific method is chosen according to the test request, the validated applicability of the method, institutional procedures and staff permissions; this does not mean that every case uses them in parallel or cross-validates them. — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37326,7 +37346,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparing occupational directions",
       "fit": "Occupational fit guide",
@@ -37594,15 +37614,27 @@
         "source_refs": [
           "r5-nbs-health"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Cytogenetic Technologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Chromosome analysis · Cell culture and slide preparation · Result interpretation and reporting",
@@ -37653,7 +37685,7 @@
       "text": "Cytogenetic Technologists"
     }
   },
-  "source_content_sha256": "b86bd2452d5379138b5a95e2f3d7375891125603bfceff5b05b05daa380bf87c",
+  "source_content_sha256": "9cb8e9d3325134a3e43bef8dfd718f66818ba162f2f53b2170bb2ae9fdfc973e",
   "subject": {
     "canonical_slug": "cytogenetic-technologists",
     "name": "Cytogenetic Technologists",

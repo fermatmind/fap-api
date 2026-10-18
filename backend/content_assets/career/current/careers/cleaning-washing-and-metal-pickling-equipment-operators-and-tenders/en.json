@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24743,7 +24746,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task, software and recruiting-term material was obtained, but no speed-up trial for this occupation or production automation adoption trend was obtained; instruments, control systems, mechanisation and generative AI are checked separately, and no technology trend is inferred from the task list."
+              "Task, software and recruiting-term material was obtained, but no speed-up trial for this occupation or production automation adoption trend was obtained; instruments, control systems, mechanisation and generative AI are checked separately, and no technology trend is inferred from the task list. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.ai-impact.ai-impact-table.18",
@@ -32275,6 +32278,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Solution and agent management | dose to the process requirement and maintain concentration | add specified amounts of chemical agents to the equipment at set times to maintain solution level and concentration; measure and weigh or mix cleaning solutions with measuring tanks and calibrated rods or pipettes; empty and clean and refill machines or tanks at designed intervals (corresponds to O*NET tasks one, eight and four). — 25/100; weight=1/3; cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.profile.responsibilities-block.1[0]",
+                  "Equipment operation and parameter control | set and monitor temperature and cycle time | set controls to regulate temperature and cycle duration and start conveyors and pumps and agitators and machines; watch the machine run and the instruments or thermometers and adjust the controls as needed to hold the specified conditions (corresponds to O*NET tasks three and two). — 25/100; weight=1/3; cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.profile.responsibilities-block.1[1]",
+                  "Sampling and testing | take samples for analysis and test the solution against specification | draw samples for laboratory analysis, or test the solution against specification on site (such as acidity or specific gravity) (corresponds to O*NET task nine). — 0/100; weight=1/3; cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37194,7 +37214,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37736,15 +37756,27 @@
         "source_refs": [
           "pickle-nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Cleaning, washing and metal pickling equipment operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RC",
@@ -37795,7 +37827,7 @@
       "text": "Cleaning, washing and metal pickling equipment operators"
     }
   },
-  "source_content_sha256": "1a2edac4e471b6caeefdd5c2dceba197de0f26c22e49da130d7fcd0a7fc49629",
+  "source_content_sha256": "dfbce558a70ea9656e1f6703bc865b3c173876d620f404d36759c7f7294f5bc4",
   "subject": {
     "canonical_slug": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders",
     "name": "Cleaning, washing and metal pickling equipment operators",

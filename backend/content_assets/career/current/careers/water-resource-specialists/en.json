@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25566,7 +25569,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: distinguish generative text assistance, professional hydrological models, and job outcomes. You can first use W24 fictional materials to practice draft review; real data permissions, model applicability, technical review, and approval still require the relevant staff. This page has not obtained a reviewable occupation-task-level rating, specialist adoption, or replacement ratio, so no score is filled in."
+              "Insufficient evidence: distinguish generative text assistance, professional hydrological models, and job outcomes. You can first use W24 fictional materials to practice draft review; real data permissions, model applicability, technical review, and approval still require the relevant staff. This page has not obtained a reviewable occupation-task-level rating, specialist adoption, or replacement ratio, so a separate editorial estimate is shown. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "water-resource-specialists.display.ai_impact_table.answer",
@@ -33088,6 +33091,23 @@
                 "publisher": "Discover Civil Engineering／Springer Nature",
                 "scope": "contextual",
                 "url": "https://link.springer.com/article/10.1007/s44290-026-00474-2"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Survey | Water quantity and quality data | Collect and verify regional supply, demand, monitoring, and project data, indicating spatial and temporal scope, units, and sources. — 25/100; weight=1/3; water-resource-specialists.display.responsibilities_block.01[0]",
+                  "Modeling | Hydrologic, hydraulic, and water quality analysis | Choose applicable methods and assumptions, test data and model conditions, and explain outputs and limitations. — 75/100; weight=1/3; water-resource-specialists.display.responsibilities_block.02[0]",
+                  "Planning | Watershed and water use strategies | Compare supply, conservation, protection, and restoration options, and clarify constraints and affected parties. — 50/100; weight=1/3; water-resource-specialists.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38333,7 +38353,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38481,15 +38501,27 @@
         "source_refs": [
           "editorial"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Water resource specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 11-9121.02",
@@ -38540,7 +38572,7 @@
       "text": "Water resource specialists: tasks, broader wage reference, and a water quantity option experience"
     }
   },
-  "source_content_sha256": "500204acab346156601fe03dc2ac9a6931d26b31451c76ca4c3e5c26490c3357",
+  "source_content_sha256": "ca324e916200a83901049e9b02145bb402e5b426520a028989a6bc380cf6df3c",
   "subject": {
     "canonical_slug": "water-resource-specialists",
     "name": "Water resource specialists",

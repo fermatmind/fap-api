@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -7554,7 +7557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | China's Supreme People's Court 2022 opinion positions judicial AI as an auxiliary reference, with adjudication and responsibility retained by judicial personnel; users may choose to use or terminate it. Search, material organization, and drafts may support bounded trials. This page has no measurements of generative AI adoption, efficiency gains, or replacement rates in this occupation."
+              "Direct answer | China's Supreme People's Court 2022 opinion positions judicial AI as an auxiliary reference, with adjudication and responsibility retained by judicial personnel; users may choose to use or terminate it. Search, material organization, and drafts may support bounded trials. This page has no measurements of generative AI adoption, efficiency gains, or replacement rates in this occupation. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.ai-impact.ai-impact-table.2",
@@ -9000,6 +9003,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/23-1011.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Conduct hearings and rule on evidence — 25/100; weight=1/3; judges-magistrate-judges-and-magistrates.profile.responsibilities-block.4[0]",
+                  "Research laws and precedents — 75/100; weight=1/3; judges-magistrate-judges-and-magistrates.profile.responsibilities-block.4[0]",
+                  "Determine facts and draft reasons — 50/100; weight=1/3; judges-magistrate-judges-and-magistrates.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11344,7 +11364,7 @@
     ],
     "path": "/en/career/jobs/judges-magistrate-judges-and-magistrates",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Comparison with neighboring occupations",
       "fit": "Fit signals",
@@ -11432,15 +11452,27 @@
         "source_refs": [
           "bls-ooh-judges"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Judges",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Judges · Jurisdiction, Procedure, and Ethics Boundaries",
@@ -11491,7 +11523,7 @@
       "text": "Evaluating Judges as a Career: Judicial Authority, Procedure, and Boundaries"
     }
   },
-  "source_content_sha256": "2b8c8c9ab84aaee4c9de4fe060d6f770d5da549e5bdc557f13a9ba52ab3205b3",
+  "source_content_sha256": "f5662c173c725663792d2142ec9e36089de3effeadd99c53073c26297bca7fa4",
   "subject": {
     "canonical_slug": "judges-magistrate-judges-and-magistrates",
     "name": "Judges",

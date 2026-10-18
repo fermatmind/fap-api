@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25475,7 +25478,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得51-4033.00精确的生成式AI暴露等级、机器人实际采用/替代率或工资因果数据；不发布“中等偏高”“替代明显”或整职业不会被取代。BLS当前OOH金属塑料机床工组合讨论CNC/机器人节省劳动力及需求变化，是预测解释，非本精确职业实际采用统计；ILO2025为ISCO任务指数，未建本页精确SOC映射，不说不覆盖。设备自动化与生成式工具分别评估，下面是编辑辅助候选，具体质量/成本/权限须实测。 美国51-4033.00设定、操作或照管研磨相关机床，对金属/塑料去余量或毛刺、修锐边角、抛光/珩磨/研磨。18任务14核心4补充：精密量具测量布局87，检成品83/调控制83，观察82，启动/读图/起吊装夹各81，分度控制/选工具各80，安装/操作研磨各79，分度计算78，修换零件或通知工程75，润滑冷却71；补充库存81/气缸79/垫块74/穿线进给70。重要性非频率、非安全许可；设定与操作可以分工，批量非定义必要条件。 BLS当前2025—2035精确51-4033就业68.5→61.1千人、变化−10.8%、净变−7.4千人、年均空缺4.5千人来自替换；数值各独立取整，EP含自雇（2025占1.9%），不同OEWS工资。预测不是实际招聘、个人结果或AI因果。本轮O*NET已呈2025就业68,500、2025—2035下降档与年均空缺4,500，与BLS现期一致。"
+              "证据不足：未取得51-4033.00精确的生成式AI暴露等级、机器人实际采用/替代率或工资因果数据；不发布“中等偏高”“替代明显”或整职业不会被取代。BLS当前OOH金属塑料机床工组合讨论CNC/机器人节省劳动力及需求变化，是预测解释，非本精确职业实际采用统计；ILO2025为ISCO任务指数，未建本页精确SOC映射，不说不覆盖。设备自动化与生成式工具分别评估，下面是编辑辅助候选，具体质量/成本/权限须实测。 美国51-4033.00设定、操作或照管研磨相关机床，对金属/塑料去余量或毛刺、修锐边角、抛光/珩磨/研磨。18任务14核心4补充：精密量具测量布局87，检成品83/调控制83，观察82，启动/读图/起吊装夹各81，分度控制/选工具各80，安装/操作研磨各79，分度计算78，修换零件或通知工程75，润滑冷却71；补充库存81/气缸79/垫块74/穿线进给70。重要性非频率、非安全许可；设定与操作可以分工，批量非定义必要条件。 BLS当前2025—2035精确51-4033就业68.5→61.1千人、变化−10.8%、净变−7.4千人、年均空缺4.5千人来自替换；数值各独立取整，EP含自雇（2025占1.9%），不同OEWS工资。预测不是实际招聘、个人结果或AI因果。本轮O*NET已呈2025就业68,500、2025—2035下降档与年均空缺4,500，与BLS现期一致。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.18",
@@ -32990,6 +32993,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor, Employment and Training Administration",
                 "scope": "51-4033.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/51-4033.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "机床设定 — 25/100; weight=1/3; grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.99[0]",
+                  "操作与看护 — 25/100; weight=1/3; grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.103[0]",
+                  "检验与缺陷处置 — 25/100; weight=1/3; grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37921,7 +37941,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38074,15 +38094,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "磨工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "磨工 · 任务、交付与责任边界",
@@ -38133,7 +38165,7 @@
       "text": "磨工"
     }
   },
-  "source_content_sha256": "61d4e1e53f157c362da7abde1d05292b6d8b660481e00ba24224324f92bb2dcd",
+  "source_content_sha256": "873febd9f8b937665f8962795b5dfef7c6bec8cc18714cbc62358ae40fc97af9",
   "subject": {
     "canonical_slug": "grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
     "name": "磨工",

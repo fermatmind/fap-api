@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24298,7 +24301,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Monitoring, in-line weighing, and record drafting can serve as editorial trial directions, and this round obtained no generative AI adoption, labor-hour saving, or position income causality for this position. Automation Context28% high, 36% moderate, 11% light, and 25% no automation is an existing context, not a generative AI adoption rate or future replacement; on-site process, quality, and safety duties follow the real procedure and authority."
+              "Monitoring, in-line weighing, and record drafting can serve as editorial trial directions, and this round obtained no generative AI adoption, labor-hour saving, or position income causality for this position. Automation Context28% high, 36% moderate, 11% light, and 25% no automation is an existing context, not a generative AI adoption rate or future replacement; on-site process, quality, and safety duties follow the real procedure and authority. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31760,6 +31763,23 @@
                 "publisher": "Official Chinese government website",
                 "scope": "proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Setup and adjustment｜Set up and adjust machines per specifications｜Read the work order to determine production specifications, set mill grinding fineness and machine parameters per specifications, load materials into the machine and add or mix chemicals and ingredients, and use the controls to start, stop, or adjust crushing, grinding, polishing, or mixing equipment. — 25/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Core observing operation, watching pumps and conveyors, checking chain and auger wear, and clearing blockages with tools; clearing blockages with tools is not the same as reaching into a hazardous area while running, and the actual energy control and authorization must be verified separately. — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Core weighing and measuring at intervals and visual and tactile inspection; testing samples with test equipment and taking samples to the laboratory are Supplemental, and sampling contact must respect the real process and hazard conditions. — 25/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36968,7 +36988,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -37212,15 +37232,27 @@
         "source_refs": [
           "g04-nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Crushing, grinding, and polishing machine setters, operators, and tenders",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Manufacturing · mining, quarrying, and oil and gas extraction · crushing, grinding, and polishing equipment operation",
@@ -37271,7 +37303,7 @@
       "text": "Crushing, grinding, and polishing machine setters, operators, and tenders"
     }
   },
-  "source_content_sha256": "bc2d726e3ff85348000e2e67adf36f373ba633f112a43910c95be25029849152",
+  "source_content_sha256": "02952a10d8dc5577498c0a9bf25c19fd7f04eae8513f3f0f61869afd127c775b",
   "subject": {
     "canonical_slug": "crushing-grinding-and-polishing-machine-setters-operators-and-tenders",
     "name": "Crushing, grinding, and polishing machine setters, operators, and tenders",

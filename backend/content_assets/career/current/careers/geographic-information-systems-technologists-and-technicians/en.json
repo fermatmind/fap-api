@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25200,7 +25203,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No separate generative AI exposure level, actual adoption rate, or causal employment or wage effect has been obtained for 15-1299.02. The 65 hot technologies come from deduplicated linked U.S. job advertisements from 2025-01-01 to 12-31: ArcGIS75%, Python34%, SQL22%, Office14%, Excel14%, JavaScript13%, and AutoCAD10%; 23 items are below 1%, and 9 have no share provided. These are not practitioner adoption rates, AI effects, or uniform Chinese entry requirements. Data organization, queries, scripts, or map drafts may be trialed in authorized environments, checking quality and cost individually. Working with computers at 86 and high accuracy requirements describe tasks and do not justify a medium or high exposure score."
+              "Insufficient evidence: No separate generative AI exposure level, actual adoption rate, or causal employment or wage effect has been obtained for 15-1299.02. The 65 hot technologies come from deduplicated linked U.S. job advertisements from 2025-01-01 to 12-31: ArcGIS75%, Python34%, SQL22%, Office14%, Excel14%, JavaScript13%, and AutoCAD10%; 23 items are below 1%, and 9 have no share provided. These are not practitioner adoption rates, AI effects, or uniform Chinese entry requirements. Data organization, queries, scripts, or map drafts may be trialed in authorized environments, checking quality and cost individually. Working with computers at 86 and high accuracy requirements describe tasks and do not justify a medium or high exposure score. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "geographic-information-systems-technologists-and-technicians.ai-impact.ai-impact-table.18",
@@ -32723,6 +32726,23 @@
                 "publisher": "GIS Certification Institute",
                 "scope": "GISP certification",
                 "url": "https://www.gisci.org/Want-to-be-a-GISP/Portfolio"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Data review and loading — 75/100; weight=1/3; geographic-information-systems-technologists-and-technicians.ai-impact.ai-impact-table.99[0]",
+                  "Coordinate, topology, and field quality checks — 75/100; weight=1/3; geographic-information-systems-technologists-and-technicians.ai-impact.ai-impact-table.103[0]",
+                  "Spatial analysis and statistics — 75/100; weight=1/3; geographic-information-systems-technologists-and-technicians.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37659,7 +37679,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Pay Reference",
       "direction-comparison": "Career Direction Comparison",
       "fit": "Career Fit Guide",
@@ -37814,15 +37834,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Geographic Information Systems Technologists and Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Geographic Information Systems Technologists and Technicians · Tasks, Deliverables, and Responsibility Boundaries",
@@ -37873,7 +37905,7 @@
       "text": "Geographic Information Systems Technologists and Technicians"
     }
   },
-  "source_content_sha256": "bf62b5b43e5b6a535ee59ad4dfdf2fe40c3ba11bb9842b056037c5e008e62647",
+  "source_content_sha256": "80e4467f1b5bb9d325a1fdbf7d4964165eb89ff2728508c8c8558193193225de",
   "subject": {
     "canonical_slug": "geographic-information-systems-technologists-and-technicians",
     "name": "Geographic Information Systems Technologists and Technicians",

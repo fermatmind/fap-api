@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25255,7 +25258,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task analysis | Permitted or fictional registers, parameters, and quality materials can be organized experimentally; specimen preparation, technical quality control, and pathology diagnosis have separate authorities. Software mentions and work context do not establish AI adoption, efficiency, or a moderate-exposure rating. Broader U.S. parent occupation Clinical Laboratory Technologists and Technicians: employment of 343,000 in 2025; Average growth (3% to 4%) for 2025–2035; 20,800 average annual openings from growth and replacement. These are not projections for 29-2012.01 itself, current vacancies, or evidence of AI causation and do not predict individual outcomes."
+              "Editorial task analysis | Permitted or fictional registers, parameters, and quality materials can be organized experimentally; specimen preparation, technical quality control, and pathology diagnosis have separate authorities. Software mentions and work context do not establish AI adoption, efficiency, or a moderate-exposure rating. Broader U.S. parent occupation Clinical Laboratory Technologists and Technicians: employment of 343,000 in 2025; Average growth (3% to 4%) for 2025–2035; 20,800 average annual openings from growth and replacement. These are not projections for 29-2012.01 itself, current vacancies, or evidence of AI causation and do not predict individual outcomes. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "histology-technicians.ai-impact.ai-impact-table.18",
@@ -32752,6 +32755,23 @@
                 "publisher": "O*NET",
                 "scope": "Limits on specific document uses",
                 "url": "https://www.onetonline.org/link/localwages/29-2012.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Specimens and preparation — 0/100; weight=1/3; histology-technicians.ai-impact.ai-impact-table.95[0]",
+                  "Sectioning and mounting — 0/100; weight=1/3; histology-technicians.ai-impact.ai-impact-table.99[0]",
+                  "Staining and coverslipping — 25/100; weight=1/3; histology-technicians.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37685,7 +37705,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career-direction comparison",
       "fit": "Career-fit guide",
@@ -37833,15 +37853,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Histology Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Histology Technicians · Tasks, deliverables, and responsibility boundaries",
@@ -37892,7 +37924,7 @@
       "text": "Histology Technicians"
     }
   },
-  "source_content_sha256": "c31f005ac24af589424078d7452430193271d488aca32b350e59a1f029dcc3c7",
+  "source_content_sha256": "333072ebb35a0c13c329c79abfd9d9296563d4a495d655544623e13be9dd5dd4",
   "subject": {
     "canonical_slug": "histology-technicians",
     "name": "Histology Technicians",

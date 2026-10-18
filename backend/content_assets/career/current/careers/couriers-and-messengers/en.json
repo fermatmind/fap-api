@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24307,7 +24310,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial opportunities to be verified: route planning and dispatch, electronic waybill status notification, and lockers and self-service sending and collection; routine digitalization is not GenAI, and no adoption rate, savings, staffing or wage causality was obtained for this occupation. In China, without the user's consent one may not confirm on their behalf or place items in lockers or stations, and the specific categories and confirmation methods are checked under the law."
+              "Editorial opportunities to be verified: route planning and dispatch, electronic waybill status notification, and lockers and self-service sending and collection; routine digitalization is not GenAI, and no adoption rate, savings, staffing or wage causality was obtained for this occupation. In China, without the user's consent one may not confirm on their behalf or place items in lockers or stations, and the specific categories and confirmation methods are checked under the law. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31671,6 +31674,23 @@
                 "publisher": "Standing Committee of the National People's Congress; reposted by the Cyberspace Administration of China",
                 "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Route planning｜arranging a time-saving sequence｜Plan and follow the most time-saving delivery route, taking recipient time windows and road conditions into account and reducing empty running and repeated trips. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "In addition to documents and parcels, U.S. Core also includes picking up and delivering medical records, specimens and medicines; the specific transport conditions and training for these categories must be checked against the actual rules, and the task profile does not grant medical practice authority. — 0/100; weight=1/3; actors.display.responsibilities_block.04[0]",
+                  "Recording items and responses is Core, while obtaining signatures and arranging payment and contacting the unit after delivery are Supplemental; in China, confirming receipt follows the regulations and the user's agreement. Articles 27–28 of China's Measures for the Administration of the Express Delivery Market: inform the recipient of the right of inspection, and for obviously damaged or fragile items inform them they may inspect the contents or refuse acceptance; a signature or other legible and preservable express confirmation can prove receipt, and where face-to-face handover is not possible the method must be agreed with the user, and without consent one may not confirm on the user's behalf or place the item in a smart locker or service station. Collection of payments on behalf of others applies only where the actual business requires it and is not required every time. — 75/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36878,7 +36898,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37113,15 +37133,27 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Couriers and messengers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Transportation and material moving · pickup, delivery and handover",
@@ -37172,7 +37204,7 @@
       "text": "Couriers and messengers"
     }
   },
-  "source_content_sha256": "c0e73f276ab1c29f443fbf249f696b391592a09ca0ab06747879826a8e6b06da",
+  "source_content_sha256": "0b5b628b95e98ab59401fe66799294352b51961697098c8603d7019e8c247d10",
   "subject": {
     "canonical_slug": "couriers-and-messengers",
     "name": "Couriers and messengers",

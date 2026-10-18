@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25130,7 +25133,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Health information system design support, patient information abstraction and registration, and classification coding and statistics are tasks of this occupation. Tool-assisted data organization, statistical charts, and material drafts can be trialed, but ordinary software, automated systems, and generative AI are different tools. This page has not obtained measured or causal evidence on this occupation's AI adoption rate, hours saved, or job displacement, and the task materials alone cannot support the assertion that efficiency gains have already occurred or that the occupation as a whole will not be replaced."
+              "Direct answer | Health information system design support, patient information abstraction and registration, and classification coding and statistics are tasks of this occupation. Tool-assisted data organization, statistical charts, and material drafts can be trialed, but ordinary software, automated systems, and generative AI are different tools. This page has not obtained measured or causal evidence on this occupation's AI adoption rate, hours saved, or job displacement, and the task materials alone cannot support the assertion that efficiency gains have already occurred or that the occupation as a whole will not be replaced. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.18",
@@ -32649,6 +32652,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "Health and social work; urban unit employees in China, broad industry category scope",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Medical records and coding — 75/100; weight=1/3; health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.95[0]",
+                  "Registration and indexes and retrieval — 75/100; weight=1/3; health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.99[0]",
+                  "Statistics and reporting — 75/100; weight=1/3; health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37579,7 +37599,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37787,15 +37807,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Health Information Technologists and Medical Registrars",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Health Information Technologists and Medical Registrars · tasks, deliverables, and responsibility boundaries",
@@ -37846,7 +37878,7 @@
       "text": "Health Information Technologists and Medical Registrars"
     }
   },
-  "source_content_sha256": "af61b24d679a8cb0acebbefa324200d53bc6d9e30681cca77bb26c5e088c537a",
+  "source_content_sha256": "e73b28632b17f05cd22184a59088c1cb02a1d6036b4d18f73effdfb0c985c7e7",
   "subject": {
     "canonical_slug": "health-information-technologists-and-medical-registrars",
     "name": "Health Information Technologists and Medical Registrars",

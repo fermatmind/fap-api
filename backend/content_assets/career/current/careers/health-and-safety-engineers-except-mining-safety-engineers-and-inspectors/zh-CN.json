@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -25487,7 +25490,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜危害识别、风险评估、事故分析和产品安全评审需要结合工艺、现场数据与适用标准。可以考察 AI 对检索、记录整理与报告草稿的辅助，但传感器、暴露模型和生成式 AI 是不同工具。本页没有本职业 AI 采用率、节省工时或岗位替代的实测/因果证据，不能由 O*NET 任务描述断言已经提效或职业整体不会被取代。"
+              "直接回答｜危害识别、风险评估、事故分析和产品安全评审需要结合工艺、现场数据与适用标准。可以考察 AI 对检索、记录整理与报告草稿的辅助，但传感器、暴露模型和生成式 AI 是不同工具。本页没有本职业 AI 采用率、节省工时或岗位替代的实测/因果证据，不能由 O*NET 任务描述断言已经提效或职业整体不会被取代。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.18",
@@ -33006,6 +33009,23 @@
                 "publisher": "国家统计局",
                 "scope": "科学研究和技术服务业；中国城镇单位就业人员，行业门类宽口径",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "危害识别与监测 — 25/100; weight=1/3; health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.95[0]",
+                  "风险评估与合规评审 — 50/100; weight=1/3; health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.99[0]",
+                  "事故调查与专业支持 — 50/100; weight=1/3; health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37936,7 +37956,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38132,15 +38152,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "健康与安全工程师（矿山安全工程师与检查员除外）",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "健康与安全工程师（矿山安全工程师与检查员除外） · 任务、交付与责任边界",
@@ -38191,7 +38223,7 @@
       "text": "健康与安全工程师（矿山安全工程师与检查员除外）"
     }
   },
-  "source_content_sha256": "024a79938b787e47d41968074baa57aa823439360bf44857b9b6e2bd2f68b1ae",
+  "source_content_sha256": "184c5da0939a2dab28ae3f1a0def18069a135d66f66079f2a504fb87abff68ae",
   "subject": {
     "canonical_slug": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors",
     "name": "健康与安全工程师（矿山安全工程师与检查员除外）",

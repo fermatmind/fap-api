@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24423,7 +24426,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no separate 25-2031 measured AI accuracy, time-saving effect, institutional adoption rate, replacement rate or disappearance year has been obtained. Task-level editorial trials can use fictional lesson plans, questions and feedback drafts; subject accuracy, classroom teaching, assessment, student privacy and safety responsibility are still reviewed by people under school rules. Potential exposure does not mean deployment."
+              "Insufficient evidence: no separate 25-2031 measured AI accuracy, time-saving effect, institutional adoption rate, replacement rate or disappearance year has been obtained. Task-level editorial trials can use fictional lesson plans, questions and feedback drafts; subject accuracy, classroom teaching, assessment, student privacy and safety responsibility are still reviewed by people under school rules. Potential exposure does not mean deployment. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.18",
@@ -32323,6 +32326,23 @@
                 "publisher": "Full legal text reposted by the Cyberspace Administration of China",
                 "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Curriculum objectives｜Verify curriculum requirements, student foundations and this lesson's content.｜Output observable learning objectives and a lesson plan. — 75/100; weight=1/3; secondary-school-teachers-except-special-and-career-technical-education.profile.responsibilities-block.1[0]",
+                  "Teaching organisation｜Explain, discuss, demonstrate and practise while maintaining classroom order.｜Output activities students can join and classroom records. — 25/100; weight=1/3; secondary-school-teachers-except-special-and-career-technical-education.profile.responsibilities-block.1[1]",
+                  "Learning assessment｜Design questions, assignments or tests aligned with the objectives and check the answers.｜Output feedback, misconceptions and improvement suggestions. — 50/100; weight=1/3; secondary-school-teachers-except-special-and-career-technical-education.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37231,7 +37251,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Occupational fit guide",
@@ -37585,15 +37605,27 @@
         "source_refs": [
           "revision-teacher-nbs2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Secondary school teachers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Secondary subject teachers · lesson preparation and teaching · learning assessment",
@@ -37644,7 +37676,7 @@
       "text": "Secondary school teachers"
     }
   },
-  "source_content_sha256": "2ae326f7189ad7a318de0cdda6ce333c364ab121bfa2de1f2fcb3fa044e1639b",
+  "source_content_sha256": "2d48a9a9b559ff7bd3990867e07e53734d4c669331fd5e27546ecdeff84c9e32",
   "subject": {
     "canonical_slug": "secondary-school-teachers-except-special-and-career-technical-education",
     "name": "Secondary school teachers",

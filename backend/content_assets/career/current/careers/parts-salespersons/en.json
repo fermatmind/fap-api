@@ -32,6 +32,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24427,7 +24430,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Existing research measures potential task exposure or employer expectations and does not give this occupation's adoption rate, replacement rate, or job-loss timetable. Parts catalog search, records, and replies can serve as author assistance candidates; stock, matching, lead time, and return commitments must still be verified against the original records and borne by authorized personnel. U.S. precise SOC41-2022: 2025 employment 273,300 people, 2035 projection 281,600 people, a net increase of 8,300 people, 3.0%; over 2025—2035 an annual average of 30,000 openings including replacements for transfers and labor force exits, which does not equal net additions. Overall projections are not AI adoption, replacement, or individual job-loss probability, and are not extrapolated to Chinese demand."
+              "Existing research measures potential task exposure or employer expectations and does not give this occupation's adoption rate, replacement rate, or job-loss timetable. Parts catalog search, records, and replies can serve as author assistance candidates; stock, matching, lead time, and return commitments must still be verified against the original records and borne by authorized personnel. U.S. precise SOC41-2022: 2025 employment 273,300 people, 2035 projection 281,600 people, a net increase of 8,300 people, 3.0%; over 2025—2035 an annual average of 30,000 openings including replacements for transfers and labor force exits, which does not equal net additions. Overall projections are not AI adoption, replacement, or individual job-loss probability, and are not extrapolated to Chinese demand. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "parts-salespersons.ai-impact.ai-impact-table.18",
@@ -32496,6 +32499,23 @@
                 "publisher": "Standing Committee of the National People's Congress / Ministry of Industry and Information Technology public disclosure.",
                 "scope": "regulatory_reference",
                 "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Organize vehicle model, old part, and use keywords. — 50/100; weight=1/3; parts-salespersons.ai-impact.ai-impact-table.95[0]",
+                  "Check against the catalog number and candidates. — 75/100; weight=1/3; parts-salespersons.ai-impact.ai-impact-table.99[0]",
+                  "Quantity, unit price, freight, and tax. — 75/100; weight=1/3; parts-salespersons.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37422,7 +37442,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact.",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference.",
       "direction-comparison": "Occupational direction comparison.",
       "fit": "Career fit guide.",
@@ -37808,15 +37828,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Parts salesperson.",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)."
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 41-2022.00 · parts sales.",
@@ -37867,7 +37899,7 @@
       "text": "Parts salesperson: work content, wages, and parts fitment risk."
     }
   },
-  "source_content_sha256": "539744eeb516ed43a002796de55895a961a3a03a3f300e84d06b570bc5544b28",
+  "source_content_sha256": "ecd7a41c40e70a66309b5312ba09626d32b738b7d4c6c8914d32daa6972f51b7",
   "subject": {
     "canonical_slug": "parts-salespersons",
     "name": "Parts salesperson.",

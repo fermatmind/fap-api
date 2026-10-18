@@ -14,6 +14,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -7557,7 +7560,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Digital tools can assist with reading drawings and specifications, estimating material quantities, generating cutting and construction checklists, and organizing inspection records. However, judgments about measurement and cutting, material selection, support and fastening safety, work at height and in confined spaces, and disposal of older materials remain human responsibilities. Task exposure does not mean job replacement or widespread adoption; formal use requires authorization, human review, and records. This page gives no replacement probability or timetable."
+              "Direct answer | Digital tools can assist with reading drawings and specifications, estimating material quantities, generating cutting and construction checklists, and organizing inspection records. However, judgments about measurement and cutting, material selection, support and fastening safety, work at height and in confined spaces, and disposal of older materials remain human responsibilities. Task exposure does not mean job replacement or widespread adoption; formal use requires authorization, human review, and records. This page gives no replacement probability or timetable. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "insulation-workers.ai-impact.ai-impact-table.2",
@@ -8717,6 +8720,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/47-2132.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Read insulation drawings and specifications — 50/100; weight=1/3; insulation-workers.profile.responsibilities-block.4[0]",
+                  "Measure and cut insulation materials — 0/100; weight=1/3; insulation-workers.profile.responsibilities-block.4[0]",
+                  "Install fasten wrap and seal insulation — 0/100; weight=1/3; insulation-workers.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11143,7 +11163,7 @@
     ],
     "path": "/en/career/jobs/insulation-workers",
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Wages",
       "direction-comparison": "Adjacent Occupation Comparison",
       "fit": "Fit Signals",
@@ -11279,15 +11299,27 @@
         "source_refs": [
           "onet-trends"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Mechanical Insulation Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Mechanical Insulation Workers · Specifications, Safety, and Work Boundaries",
@@ -11338,7 +11370,7 @@
       "text": "Mechanical Insulation Worker Career Decisions: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "40e63344bca75ee673de18066738ac60eb96a357450d3982b55580c492dd5deb",
+  "source_content_sha256": "ae572590a3572b14a6aa0b6bc7293dd0b571724b44eb21a75f6a01220dee6e60",
   "subject": {
     "canonical_slug": "insulation-workers",
     "name": "Mechanical Insulation Workers",

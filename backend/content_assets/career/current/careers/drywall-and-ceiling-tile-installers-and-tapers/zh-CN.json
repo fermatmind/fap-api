@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:r5-submedian-1": {
         "status": "pending_mapping"
       },
@@ -7557,7 +7560,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑推演：可起草排板检查单或交接记录，但不能确认现场尺寸、节点、防火体系或可施工性。"
+              "编辑推演：可起草排板检查单或交接记录，但不能确认现场尺寸、节点、防火体系或可施工性。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.2",
@@ -9359,6 +9362,23 @@
                 "publisher": "O*NET / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/47-2131.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "整理房间尺寸与材料清单 — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "执行安装与嵌缝核心任务 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "形成检查与交接记录 — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11692,7 +11712,7 @@
     ],
     "path": "/zh/career/jobs/drywall-and-ceiling-tile-installers-and-tapers",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -11794,15 +11814,27 @@
           "repair-current-us",
           "r5-oews-concepts"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "石膏板与吊顶板安装工",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "石膏板与吊顶板安装 · 接缝贴带与嵌缝 · 吊顶网格与高处作业",
@@ -11853,7 +11885,7 @@
       "text": "石膏板与吊顶板安装工及接缝处理工"
     }
   },
-  "source_content_sha256": "15be23f3fd0bab1c4a5fcd98982a107de1f24b747cfc85366869d21553b13ac4",
+  "source_content_sha256": "5f9f84c4fe430b94f1709e0eb685f3f73c0571a6726421d55bb42414d6d384b9",
   "subject": {
     "canonical_slug": "drywall-and-ceiling-tile-installers-and-tapers",
     "name": "石膏板与吊顶板安装工及接缝处理工",

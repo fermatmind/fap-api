@@ -8,6 +8,9 @@
       "fact:china-service-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25489,7 +25492,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职业可比AI采用率、任务效果与净就业因果数据，评分保持缺失。资料摘要、草稿与路线比较为编辑试用建议；事实、时间、游客信息和服务责任仍人核。美国39-7010合并2025—2035总体增长6.3%、十年净增约3,900与年均11,900空缺含替补，非本页子类独立或AI因果。"
+              "证据不足：本职业可比AI采用率、任务效果与净就业因果数据，评分保持缺失。资料摘要、草稿与路线比较为编辑试用建议；事实、时间、游客信息和服务责任仍人核。美国39-7010合并2025—2035总体增长6.3%、十年净增约3,900与年均11,900空缺含替补，非本页子类独立或AI因果。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "tour-and-travel-guides.display.ai_impact_table.answer",
@@ -33651,6 +33654,23 @@
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "安排｜路线与参观节奏｜结合已确认开放情况和团体需要排站点，列时间与未知，具体路线按实际规则核。 — 75/100; weight=1/3; tour-and-travel-guides.display.responsibilities_block.02[0]",
+                  "沟通｜讲解与问题回应｜说明地点要点，听清参观者问题；不清楚时如实登记并找对应人员确认。 — 25/100; weight=1/3; tour-and-travel-guides.display.responsibilities_block.03[0]",
+                  "服务｜引导与规则说明｜组织参观、说明集合与注意事项，观察游客活动，不能以服务身份越过专业与授权边界。 — 25/100; weight=1/3; tour-and-travel-guides.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38915,7 +38935,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -39099,15 +39119,27 @@
         "source_refs": [
           "china-wage-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "导游与陪同人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "美国O*NET 39-7011.00导览身份",
@@ -39158,7 +39190,7 @@
       "text": "导游与陪同人员"
     }
   },
-  "source_content_sha256": "f6c84892fdde2bde855ff5b45a64f492ec05b2e3ce8ec762e00ecf038c9942c2",
+  "source_content_sha256": "d804cc3a880fc1f15f9ebd9a4d1eb10d52094a8aad721d81ae527db6b767378a",
   "subject": {
     "canonical_slug": "tour-and-travel-guides",
     "name": "导游与陪同人员",

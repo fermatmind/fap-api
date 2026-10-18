@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:g04-employment-2025": {
         "status": "pending_mapping"
       },
@@ -24208,7 +24211,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑待验证机会：在线预订、收银租赁系统、电子表格合同、目录与库存查询；常规数字化不等生成式AI。实际计价、记录、实物状态、服务适配及例外需核，未取得本岗部署节约量、采用率或编制工资因果，不能称已有变化实测。"
+              "编辑待验证机会：在线预订、收银租赁系统、电子表格合同、目录与库存查询；常规数字化不等生成式AI。实际计价、记录、实物状态、服务适配及例外需核，未取得本岗部署节约量、采用率或编制工资因果，不能称已有变化实测。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31515,6 +31518,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/41-3021.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "接待咨询｜迎接客户并了解需求｜迎接到店与来电客户，了解所需租赁或服务的类型质量与数量，介绍租赁物品的可用性、操作方法，并建议使用与保养方式。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "计费收款｜计算费用与收款｜按价格表计算商品与服务的费用与押金并收款，开具单据，处理找零与凭证，保持款项与记录一致。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]",
+                  "检查调整、标记待修改清洗寄存维修及准备陈列为Core；体育休闲器材分配Supplemental，不称每岗核心日常。 — 25/100; weight=1/3; actors.display.responsibilities_block.06[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36704,7 +36724,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36927,15 +36947,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "柜台租赁文员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "销售与相关服务 · 柜台租赁与受理",
@@ -36986,7 +37018,7 @@
       "text": "柜台租赁文员"
     }
   },
-  "source_content_sha256": "079b488d5fa1a3ec8d2fc475e654e9e634a132137037880d4ec1f8e07d328ebb",
+  "source_content_sha256": "460193cc327601f8181b88f874708226a53376e0d25ea676a037be567b345571",
   "subject": {
     "canonical_slug": "counter-and-rental-clerks",
     "name": "柜台租赁文员",

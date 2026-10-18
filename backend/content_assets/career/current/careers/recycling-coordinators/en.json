@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24791,7 +24794,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with draft scheduling, ticket reconciliation, and handoff text; on-site facts and authorization are reviewed by people. Insufficient evidence: position-level AI adoption rates, substitution rates, and causal wage-change estimates for recycling coordinators in mainland China and the United States."
+              "AI can assist with draft scheduling, ticket reconciliation, and handoff text; on-site facts and authorization are reviewed by people. Insufficient evidence: position-level AI adoption rates, substitution rates, and causal wage-change estimates for recycling coordinators in mainland China and the United States. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "recycling-coordinators.ai-impact.ai-impact-table.18",
@@ -32724,6 +32727,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/53-7051.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Program scheduling｜Arrange routes and staffing by collection point, drop-off point, and service window.｜Output the daily sheet and substitution conditions. — 75/100; weight=1/3; recycling-coordinators.profile.responsibilities-block.1[0]",
+                  "Collection ledger｜Record quantities received, transferred, and delivered to the processor.｜Keep tickets, batches, and discrepancy notes. — 75/100; weight=1/3; recycling-coordinators.profile.responsibilities-block.1[2]",
+                  "On-site supervision｜Check site safety, sorting quality, and service flow.｜Hand hazards or equipment problems to authorized personnel. — 25/100; weight=1/3; recycling-coordinators.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37632,7 +37652,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38028,15 +38048,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Recycling coordinators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Curbside collection · drop-off points · staffing and route coordination",
@@ -38087,7 +38119,7 @@
       "text": "Recycling coordinators"
     }
   },
-  "source_content_sha256": "7f3269c993ffcfd673a98c45bb4964c7857057e964f92a3a40349d70e8ea5015",
+  "source_content_sha256": "4401218c812069c406453164ddcb3348dd573754ff8435bf4170f1943a366d09",
   "subject": {
     "canonical_slug": "recycling-coordinators",
     "name": "Recycling coordinators",

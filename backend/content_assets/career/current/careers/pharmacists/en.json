@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24450,7 +24453,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verified pharmacist generative AI adoption rate, overall substitution rate, or disappearance year. The ASHP 2025 report that nearly three quarters of surveyed hospitals use EHR automatic verification for some orders involves rule-based algorithms and cannot be taken as a pharmacist GenAI adoption rate or general exemption from review. Prescription review and patient medication responsibility are verified per jurisdiction and organizational policy."
+              "Insufficient evidence: no verified pharmacist generative AI adoption rate, overall substitution rate, or disappearance year. The ASHP 2025 report that nearly three quarters of surveyed hospitals use EHR automatic verification for some orders involves rule-based algorithms and cannot be taken as a pharmacist GenAI adoption rate or general exemption from review. Prescription review and patient medication responsibility are verified per jurisdiction and organizational policy. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "pharmacists.ai-impact.ai-impact-table.18",
@@ -32844,6 +32847,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "Teach health specialty courses including pharmacy, and possibly research",
                 "url": "https://www.onetonline.org/link/summary/25-1071.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Verify the patient and prescription version — 50/100; weight=1/3; pharmacists.ai-impact.ai-impact-table.95[0]",
+                  "Check current medications and prescribed drugs — 75/100; weight=1/3; pharmacists.ai-impact.ai-impact-table.103[0]",
+                  "Verify the drug, strength, route, and label — 50/100; weight=1/3; pharmacists.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37749,7 +37769,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -38025,15 +38045,27 @@
           "pharm-cn-industry",
           "editor"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Pharmacists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Prescription review · medication safety",
@@ -38084,7 +38116,7 @@
       "text": "Pharmacists"
     }
   },
-  "source_content_sha256": "fe61cd33d62b8541240bfde31370264b11b9259730a605be79bb37b640afe8c0",
+  "source_content_sha256": "eca82818fd972fb5cdfc17d6aa4c949a9785c6b4e6db912553865e41702d4317",
   "subject": {
     "canonical_slug": "pharmacists",
     "name": "Pharmacists",

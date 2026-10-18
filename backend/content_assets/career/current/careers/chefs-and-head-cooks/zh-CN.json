@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25079,7 +25082,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮资料没有本职业整体被AI替代的实证或消失年份。成本、排期与台账辅助为结合任务的编辑分析，效率须在具体流程验证；自动设备与现场判断可能结合，实际控制点与责任按法域和岗位落实。暴露、自动化、就业是不同测量对象。"
+              "本轮资料没有本职业整体被AI替代的实证或消失年份。成本、排期与台账辅助为结合任务的编辑分析，效率须在具体流程验证；自动设备与现场判断可能结合，实际控制点与责任按法域和岗位落实。暴露、自动化、就业是不同测量对象。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "chefs-and-head-cooks.ai-impact.ai-impact-table.18",
@@ -32065,6 +32068,23 @@
                 "publisher": "中国官方公开原文",
                 "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "出品组织｜编排生产排期与人员分工并按标准配方组织备制与烹调｜生产计划与出品标准与记录。 — 25/100; weight=1/3; chefs-and-head-cooks.profile.responsibilities-block.1[1]",
+                  "质量检查｜检查所收产品与生鲜与熟制食品的数量与质量并处理不合格品｜验收与质量检查记录。 — 25/100; weight=1/3; chefs-and-head-cooks.profile.responsibilities-block.1[2]",
+                  "菜单与成本｜分析配方并按食材与人工与间接费用定价并核算毛利｜菜单成本与定价与毛利记录。 — 75/100; weight=1/3; chefs-and-head-cooks.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37001,7 +37021,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37317,15 +37337,27 @@
         "source_refs": [
           "chef-ooh-pay"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "主厨与厨师长",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 35-1011.00 · 厨房出品与班组 / 菜单与成本与采购 / 卫生与合规与带教",
@@ -37376,7 +37408,7 @@
       "text": "主厨与厨师长"
     }
   },
-  "source_content_sha256": "ab1c464fbf66a2f55d06618f9e08be2011816e520b896a5ea21c60d3e0b5d176",
+  "source_content_sha256": "442ab9f4a3a84cda5096bd04f0a8f58d74ac477b12e6bef1a0ac03c29eab08d3",
   "subject": {
     "canonical_slug": "chefs-and-head-cooks",
     "name": "主厨与厨师长",

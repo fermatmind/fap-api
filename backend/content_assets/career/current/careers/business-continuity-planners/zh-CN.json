@@ -56,6 +56,9 @@
       "fact:current-us-industry-gap-3": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25028,7 +25031,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得业务连续性规划师的AI采用率或替代效果研究，不能从任务暴露或母类预测推断岗位消失。编辑判断：工具可用于可复核的归纳、汇总与记录；批准关键服务优先级、恢复目标和资源投入仍须遵守组织授权。"
+              "证据不足：本轮未取得业务连续性规划师的AI采用率或替代效果研究，不能从任务暴露或母类预测推断岗位消失。编辑判断：工具可用于可复核的归纳、汇总与记录；批准关键服务优先级、恢复目标和资源投入仍须遵守组织授权。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "business-continuity-planners.ai-impact.ai-impact-table.18",
@@ -32382,6 +32385,23 @@
                 "publisher": "DRI International",
                 "scope": "contextual",
                 "url": "https://drii.org/certification/mbcp"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "业务影响分析｜梳理内外部与第三方依赖，评估中断影响并确定恢复时间目标与资源需求｜含数据来源与假设的业务影响分析结论。 — 75/100; weight=1/3; business-continuity-planners.profile.responsibilities-block.1[1]",
+                  "计划与文档编制｜编制并维护连续性计划、程序、联系清单与呼叫树，管理版本与分发范围｜按版本发布的计划文档与分发记录。 — 75/100; weight=1/3; business-continuity-planners.profile.responsibilities-block.1[3]",
+                  "演练与复盘｜设计演练场景与注入、组织桌面或实操演练、记录差异并撰写含建议的报告｜演练方案与演练报告。 — 25/100; weight=1/3; business-continuity-planners.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37322,7 +37342,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37767,15 +37787,27 @@
           "wages-current",
           "industry-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "业务连续性规划师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 13-1199.04 · 业务影响分析 / 恢复策略与计划 / 演练与整改闭环",
@@ -37826,7 +37858,7 @@
       "text": "业务连续性规划师"
     }
   },
-  "source_content_sha256": "d0cf86e3ce85f51f3f8090fc3906eba311743885f6b22599b1f235b1dc32b737",
+  "source_content_sha256": "2fe770798d5e46b44845d8b2150eca2e1c76c6d741527292d9eb39c7225a068e",
   "subject": {
     "canonical_slug": "business-continuity-planners",
     "name": "业务连续性规划师",

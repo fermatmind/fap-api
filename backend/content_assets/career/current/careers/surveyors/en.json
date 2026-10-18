@@ -8,6 +8,9 @@
       "fact:cn-professional-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25528,7 +25531,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Parts that may change include material organising, calculation script drafts and report expression, but tool output cannot be treated as a valid ownership record or certified result. BLS notes that drones improve some surveying efficiency and that human review and interpretation are still needed; this is not evidence of generative AI adoption."
+              "Parts that may change include material organising, calculation script drafts and report expression, but tool output cannot be treated as a valid ownership record or certified result. BLS notes that drones improve some surveying efficiency and that human review and interpretation are still needed; this is not evidence of generative AI adoption. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "surveyors.display.ai_impact_table.answer",
@@ -33334,6 +33337,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Material | Ownership and existing survey check | Consult deeds, ownership and existing survey records and identify inconsistencies in descriptions, versions and point positions. — 75/100; weight=1/3; surveyors.display.responsibilities_block.01[0]",
+                  "Observation | Point and elevation records | Organise or carry out position, elevation and terrain surveys and keep the instrument and site records. — 0/100; weight=1/3; surveyors.display.responsibilities_block.03[0]",
+                  "Calculation | Accuracy and document consistency | Check the survey and calculations, maintain the sketches, maps and reports, locate differences and refer them for review. — 75/100; weight=1/3; surveyors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38581,7 +38601,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38741,15 +38761,27 @@
         "source_refs": [
           "nbs-professional-context-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Surveyors",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "The precise occupation O*NET-SOC 17-1022.00",
@@ -38800,7 +38832,7 @@
       "text": "Surveyors"
     }
   },
-  "source_content_sha256": "3c69b983b99006a1fc11e0d298af88fc77bbb9980346f7e9d7c213fe9d37045a",
+  "source_content_sha256": "96ce1f26c7119bebac69bf9b9c512bae6869be7680a89be10e06d4350759fc04",
   "subject": {
     "canonical_slug": "surveyors",
     "name": "Surveyors",

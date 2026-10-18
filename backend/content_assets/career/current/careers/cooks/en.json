@@ -26,6 +26,9 @@
       "fact:family-p90-hour-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24215,7 +24218,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Records consolidation, order summarisation and recipe calculation can serve as tool uses pending verification; traditional sensing and control, kitchen machinery and generative text tools must be considered separately. A 2025 U.S. Lightcast fast food cook job-posting table lists Outlook, Excel and Word, each below 1%; this is a share of job-posting mentions, not a software adoption rate, an AI rate or a list of kitchen order and inventory systems, and it does not represent the whole family or Chinese job postings. This round obtained no family adoption rate, effectiveness or job-displacement causality, and ingredient and food-safety judgements must be checked against actual responsibility. The BLS cook family had 2,705,800 jobs in 2025 and is projected to reach 2,889,000 by 2035, growth of 7%, a published net increase of 183,200 and an average of 393,200 openings per year (including replacements). Growth by segment: restaurants 12%, private households 5%, other 5%, institution and cafeteria 3%, fast food 1% and short order -5%; it is not uniform growth across the six segments, nor a decline in both fast food and short order. Counts and percentages are rounded, and openings are not net increases, current hiring or an individual hiring rate."
+              "Records consolidation, order summarisation and recipe calculation can serve as tool uses pending verification; traditional sensing and control, kitchen machinery and generative text tools must be considered separately. A 2025 U.S. Lightcast fast food cook job-posting table lists Outlook, Excel and Word, each below 1%; this is a share of job-posting mentions, not a software adoption rate, an AI rate or a list of kitchen order and inventory systems, and it does not represent the whole family or Chinese job postings. This round obtained no family adoption rate, effectiveness or job-displacement causality, and ingredient and food-safety judgements must be checked against actual responsibility. The BLS cook family had 2,705,800 jobs in 2025 and is projected to reach 2,889,000 by 2035, growth of 7%, a published net increase of 183,200 and an average of 393,200 openings per year (including replacements). Growth by segment: restaurants 12%, private households 5%, other 5%, institution and cafeteria 3%, fast food 1% and short order -5%; it is not uniform growth across the six segments, nor a decline in both fast food and short order. Counts and percentages are rounded, and openings are not net increases, current hiring or an individual hiring rate. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31848,6 +31851,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/35-3011.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Preparation and cutting | Receive ingredients and weigh and cut to recipe | Check ingredient freshness and storage temperature, weigh, wash, peel, cut and portion to the recipe, handle meat, seafood, vegetables and fruit, and isolate allergen-related ingredients as required. — 0/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Heating and serving | Heat by order and re-check doneness | Choose pan-frying, stir-frying, roasting, steaming, deep-frying and baking and similar methods to heat by order, adjust the temperature of stoves, ovens, grills and steamers, re-check doneness by tasting, smelling and piercing with an implement, and after portioning, plating and garnishing hand over to the food runner or directly to the customer. — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Stock and records | Check stock and record truthfully | Take stock of and requisition ingredients and kitchen supplies, rotate storage on a first-in-first-out basis, record output, waste, temperature control and stock data, and report shortages, losses and anomalies to the supervisor. — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37052,7 +37072,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37290,15 +37310,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Cooks (occupational family)",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Service and operations · food preparation and service",
@@ -37349,7 +37381,7 @@
       "text": "Cooks (occupational family)"
     }
   },
-  "source_content_sha256": "bf2c967977e10d5c721a6ac3b0db79d61f38ba08e0f0a81a8176eb5aaba3f016",
+  "source_content_sha256": "6466ccc884016f1cf48d80a292ae56d62007d9d90e190cd3ba6e084580a428d0",
   "subject": {
     "canonical_slug": "cooks",
     "name": "Cooks (occupational family)",

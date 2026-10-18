@@ -38,6 +38,9 @@
       "fact:employment-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth-current": {
         "status": "pending_mapping"
       },
@@ -24731,7 +24734,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮已读资料不提供本职业整体替代率或消失年份。课件/试题/检索草稿是编辑提出的辅助场景，具体准确性、公平性及隐私须验证；课程和学生评价、实验安全职责按学校授权承担。UNESCO倡导以人为本、伦理验证与教学设计。"
+              "本轮已读资料不提供本职业整体替代率或消失年份。课件/试题/检索草稿是编辑提出的辅助场景，具体准确性、公平性及隐私须验证；课程和学生评价、实验安全职责按学校授权承担。UNESCO倡导以人为本、伦理验证与教学设计。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "biological-science-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -33170,6 +33173,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/25-1052.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "课程目标与教学设计｜让教学有依据｜依据学习者基础与学科要求写清课程目标与教学内容与评价方式，并事先说明实验安全与学术诚信边界。 — 75/100; weight=1/3; biological-science-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "授课与课堂引导｜让学习可发生｜按课程计划讲授与引导讨论与示范规范操作，按学生反馈调整讲授节奏，不省略安全与规范要求。 — 25/100; weight=1/3; biological-science-teachers-postsecondary.profile.responsibilities-block.1[1]",
+                  "实验教学与安全｜让操作可控制｜按学校实验室安全制度完成危险源辨识与风险评估与控制与应急处置准备，在授权范围内准备实验材料并指导学生实验。 — 0/100; weight=1/3; biological-science-teachers-postsecondary.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38089,7 +38109,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38537,15 +38557,27 @@
         "source_refs": [
           "nbs-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "高校生物科学教师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 25-1042.00 · Job Zone Five（需要大量准备）· 标注 Bright Outlook",
@@ -38596,7 +38628,7 @@
       "text": "高校生物科学教师"
     }
   },
-  "source_content_sha256": "e1f29ebe2e085624aec95c76593c5f75ed60f803984a6e028b70eed0ef975deb",
+  "source_content_sha256": "d92f047df4087d73e54199641de5591c19cd45b47b6cdbd0c62a79a88106e705",
   "subject": {
     "canonical_slug": "biological-science-teachers-postsecondary",
     "name": "高校生物科学教师",

@@ -29,6 +29,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24404,7 +24407,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, displacement rate or disappearance year for the standalone 33-9032 occupation was obtained. Tools can organize rosters, patrol checklists and incident drafts; access verification, on-site observation, conflict handling and reporting are the responsibility of staff acting within authority."
+              "Insufficient evidence: no AI adoption rate, displacement rate or disappearance year for the standalone 33-9032 occupation was obtained. Tools can organize rosters, patrol checklists and incident drafts; access verification, on-site observation, conflict handling and reporting are the responsibility of staff acting within authority. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "security-guards.ai-impact.ai-impact-table.18",
@@ -32252,6 +32255,23 @@
                 "publisher": "State Administration for Market Regulation (publishing State Council administrative regulations)",
                 "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_d6183810037a43c88fca676b346ca190.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Access control | Verify people, vehicles and visitors per the authorization list and rules. | Output accurate records. — 50/100; weight=1/3; security-guards.profile.responsibilities-block.1[1]",
+                  "Patrol and monitoring | Observe doors, windows, passages, facilities and unusual behaviour. | Output observations with clear time and place. — 25/100; weight=1/3; security-guards.profile.responsibilities-block.1[2]",
+                  "Emergency response | Notify police, fire or medical staff with authority per training and procedure. | Output notification and handover records. — 25/100; weight=1/3; security-guards.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37160,7 +37180,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37440,15 +37460,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Security Guards",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Security Guards · O*NET 33-9032",
@@ -37499,7 +37531,7 @@
       "text": "Security Guards"
     }
   },
-  "source_content_sha256": "243dea26ccb0d5d9abad743f3be1bdbdc2034df7cf14a30e855029b30c5677af",
+  "source_content_sha256": "e54e1dc82950488b4ebe762686e54d21deb1ef701d89c05238faab59f4d5b7c7",
   "subject": {
     "canonical_slug": "security-guards",
     "name": "Security Guards",

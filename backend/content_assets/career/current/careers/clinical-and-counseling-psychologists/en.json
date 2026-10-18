@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24743,7 +24746,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round obtained no survey of software speed-up, actual AI adoption or sustained investment for this occupation. The task structure supports suggesting trials of searching, scoring checks, record tidying and drafts, but a software list cannot be used to infer a penetration trend, wages or job changes."
+              "This round obtained no survey of software speed-up, actual AI adoption or sustained investment for this occupation. The task structure supports suggesting trials of searching, scoring checks, record tidying and drafts, but a software list cannot be used to infer a penetration trend, wages or job changes. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "clinical-and-counseling-psychologists.ai-impact.ai-impact-table.18",
@@ -32349,6 +32352,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/25-1066.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Assessment and diagnosis | form a reviewable case conceptualisation through interviews and testing | collect information through observation and interviews and psychological tests, assess the risk of harm to self or others, and identify psychological and emotional and behavioural problems and make a diagnosis (corresponds to an O*NET task; US basis, with specific qualifications and authority checked separately). — 25/100; weight=1/3; clinical-and-counseling-psychologists.profile.responsibilities-block.1[0]",
+                  "Intervention and treatment | apply multiple methods and monitor effectiveness | use methods such as psychotherapy and behaviour modification and stress management therapy and play therapy, develop and implement an individualised treatment plan stating type and frequency and intensity and duration, and evaluate treatment effectiveness and the accuracy and completeness of the diagnosis and revise as needed (corresponds to an O*NET task; US basis, with specific qualifications and authority checked separately). — 25/100; weight=1/3; clinical-and-counseling-psychologists.profile.responsibilities-block.1[2]",
+                  "Recording and documentation | write the process and judgements into a reviewable record | record sessions and progress and recommendations and treatment plans, write client reports and keep the necessary documents (corresponds to an O*NET task; US basis, with specific qualifications and authority checked separately). — 75/100; weight=1/3; clinical-and-counseling-psychologists.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37271,7 +37291,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37846,15 +37866,27 @@
         "source_refs": [
           "psych-nbs-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Clinical and counselling psychologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · SI",
@@ -37905,7 +37937,7 @@
       "text": "Clinical and counselling psychologists"
     }
   },
-  "source_content_sha256": "516925f25bd5ca0f75dc4dc50cfa3ebcb379699afd192bf36ca229081f321e8f",
+  "source_content_sha256": "a25965c8a4e1bd6fd72074ebdfee4bd45a17e7f281a36a03b28a5eff362c1363",
   "subject": {
     "canonical_slug": "clinical-and-counseling-psychologists",
     "name": "Clinical and counselling psychologists",

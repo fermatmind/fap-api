@@ -5,6 +5,9 @@
       "fact:adjacent-boundary": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -12575,6 +12578,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/mining-and-geological-engineers.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Collect and interpret geological, borehole, and deposit data to assess sites and reserves — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Select and plan extraction methods based on safety, cost, and deposit characteristics — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Inspect unsafe structures, equipment, and operations and implement mine safety plans — 25/100; weight=1/3; display.ai_impact_table.task_rows.5[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -12762,7 +12782,7 @@
             }
           }
         ],
-        "answer": "Tools can assist geological data organization, reserve estimation, option comparison, and records, but responsible engineers or safety leads retain mining method trade-offs, ventilation and support decisions, safety release, and compliance sign-off.",
+        "answer": "Tools can assist geological data organization, reserve estimation, option comparison, and records, but responsible engineers or safety leads retain mining method trade-offs, ventilation and support decisions, safety release, and compliance sign-off. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "17-2151.00 occupational profile",
@@ -14505,7 +14525,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Compare career directions",
       "fit": "Career fit guide",
@@ -14593,15 +14613,27 @@
         "source_refs": [
           "source-pack-onet-localwages"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Mining and Geological Engineers, Including Mining Safety Engineers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Geological surveys and reserve assessment",
@@ -14652,7 +14684,7 @@
       "text": "Mining and Geological Engineers, Including Mining Safety Engineers: Duties, U.S. Wages, and Safety | FermatMind"
     }
   },
-  "source_content_sha256": "4c739737b775687c71b870b6f86f23825f71733b9053f925bfe994d6a20dd114",
+  "source_content_sha256": "578616e088c104d00adbecdff0ce079eb8fe8c21a2876c6f2934f1761383bd66",
   "subject": {
     "canonical_slug": "mining-and-geological-engineers-including-mining-safety-engineers",
     "name": "Mining and Geological Engineers, Including Mining Safety Engineers",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24472,7 +24475,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑分析：可试用获准的渔获、许可与维护记录整理；导航、探鱼和天气系统不自动等于生成式AI，本页未取得AI影响明显的测量。"
+              "编辑分析：可试用获准的渔获、许可与维护记录整理；导航、探鱼和天气系统不自动等于生成式AI，本页未取得AI影响明显的测量。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "fishers-and-related-fishing-workers.ai-impact.ai-impact-table.18",
@@ -31830,6 +31833,23 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "在目标水域或林区按许可与配额与安全规定开展作业并起获与分类渔获或猎物 — 0/100; weight=1/3; fishers-and-related-fishing-workers.ai-impact.ai-impact-table.95[0]",
+                  "按规程操作与维护船只或车辆与设备与渔具或陷阱并保持可用与安全 — 25/100; weight=1/3; fishers-and-related-fishing-workers.ai-impact.ai-impact-table.99[0]",
+                  "靠岸后卸货并称重与分级与交接与销售或交付加工并记录 — 0/100; weight=1/3; fishers-and-related-fishing-workers.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36738,7 +36758,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37007,15 +37027,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "渔猎从业人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "渔猎从业人员 · 官方职业范围 · 工作闭环",
@@ -37066,7 +37098,7 @@
       "text": "渔猎从业人员"
     }
   },
-  "source_content_sha256": "0c9710dffa7298da7c61c034929e349aea97470614dbdfb5556b18ed5aee3106",
+  "source_content_sha256": "c8c2e38547b84734d663a7cb6013c1a7decbf0f1d8abe31a2fd2ec250d964220",
   "subject": {
     "canonical_slug": "fishers-and-related-fishing-workers",
     "name": "渔猎从业人员",

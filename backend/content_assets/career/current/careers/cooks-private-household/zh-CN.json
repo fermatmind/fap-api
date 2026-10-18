@@ -23,6 +23,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24301,7 +24304,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "菜单整理、采购提醒、记账和排期是待验证用途；传感、程序加热与生成式文本分别核，净效果须测。2025美国Lightcast私人家庭厨师招聘仅列Intuit QuickBooks和WordPress，两项比例Not available，不能填0或低于1%。是记账和网站软件招聘信号，非厨房采购软件清单、AI率或采用率。本轮没有本岗采用率、效率或就业因果；人依实际职责核膳食限制、温控及异常。BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
+              "菜单整理、采购提醒、记账和排期是待验证用途；传感、程序加热与生成式文本分别核，净效果须测。2025美国Lightcast私人家庭厨师招聘仅列Intuit QuickBooks和WordPress，两项比例Not available，不能填0或低于1%。是记账和网站软件招聘信号，非厨房采购软件清单、AI率或采用率。本轮没有本岗采用率、效率或就业因果；人依实际职责核膳食限制、温控及异常。BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31872,6 +31875,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-2051.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "菜单与采购｜按雇主需求拟定菜单｜按雇主口味、膳食与营养限制与用餐频次拟定菜单，为家宴、节日餐与午餐会安排菜式，菜单或人数变更时先与雇主确认再调整。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Core修整切配烹制蔬菜肉类、烘焙及探索新菜；“wash”任务字面不等于要求冲洗所有生肉。美国FoodSafety.gov家庭指导列清洁、分开、温度计确认烹熟及及时冷藏；明确不清洗生肉禽蛋海鲜以免传播污染。是美国家庭食品安全指导，不是中国法律；本页无完整各菜品温度处置程序，异常暂缓并取得适用依据，雇主同意不能证明食品安全。 — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]",
+                  "整理储存与再加热｜整理厨房并留存说明｜储存、整理与清洁厨房与炊具，按需冷却、包装、标注与冷冻食品，写明再加热方法，保持生熟分区与清洗消毒。 — 25/100; weight=1/3; actors.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37113,7 +37133,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37330,15 +37350,27 @@
           "bls-projections",
           "bls"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "私人家庭厨师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "服务与餐饮 · 家庭餐食与个人厨师",
@@ -37389,7 +37421,7 @@
       "text": "私人家庭厨师"
     }
   },
-  "source_content_sha256": "4dffcca976a6ac0608e926df89c4b738f2e55a1253bc081b2635be60e2f850d2",
+  "source_content_sha256": "a0498db17445035d23e8204a043f436b576192aa91740f14034ec78ae3fc70cb",
   "subject": {
     "canonical_slug": "cooks-private-household",
     "name": "私人家庭厨师",

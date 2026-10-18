@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24780,7 +24783,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得本职业AI采用率、替代率或就业因果研究。讲义初稿、题库、文献整理与数据处理可作为编辑试验候选，未验证效果。BLS2025—2035增长2.4%、年均约800空缺是总体预测；ILO暴露框架、NIST风险简介与UNESCO教育科研指南介绍只提供跨职业背景。"
+              "证据不足：本轮未取得本职业AI采用率、替代率或就业因果研究。讲义初稿、题库、文献整理与数据处理可作为编辑试验候选，未验证效果。BLS2025—2035增长2.4%、年均约800空缺是总体预测；ILO暴露框架、NIST风险简介与UNESCO教育科研指南介绍只提供跨职业背景。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "atmospheric-earth-marine-and-space-sciences-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32740,6 +32743,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/25-1022.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "教学与课程建设｜把学科知识与观测方法讲清楚｜为本科生与研究生准备并讲授大气、地球、海洋与空间科学课程，准备教学大纲与作业与讲义与实验方案，发起与引导课堂讨论与实验室与野外教学活动，规划与评估与修订课程内容与教学方法。 — 50/100; weight=1/3; atmospheric-earth-marine-and-space-sciences-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "指导学生｜把学生带到能独立做观测与研究的程度｜维持固定答疑时间辅导学生，指导学位论文与观测与实验，指导学生的实验室与野外教学实践，为学生的学业与职业发展提供建议并撰写推荐信。 — 25/100; weight=1/3; atmospheric-earth-marine-and-space-sciences-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "研究与发表｜持续产出可复核成果｜在本领域开展观测与数据研究，在专业期刊与专著或学术会议发表成果，为专业期刊审稿。 — 50/100; weight=1/3; atmospheric-earth-marine-and-space-sciences-teachers-postsecondary.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37642,7 +37662,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37974,15 +37994,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "高校大气、地球、海洋和空间科学教师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 25-1051.00 · Job Zone Five · 研究生学历为主",
@@ -38033,7 +38065,7 @@
       "text": "高校大气、地球、海洋和空间科学教师"
     }
   },
-  "source_content_sha256": "de4fa0daf957b8ba117fc28b499ea697c18fcd8c8b0e39bbaf467c7f1ac07dc0",
+  "source_content_sha256": "94cfda51d9c20b543d89e55b691508689874f62116d78a05243264ffb430efc1",
   "subject": {
     "canonical_slug": "atmospheric-earth-marine-and-space-sciences-teachers-postsecondary",
     "name": "高校大气、地球、海洋和空间科学教师",

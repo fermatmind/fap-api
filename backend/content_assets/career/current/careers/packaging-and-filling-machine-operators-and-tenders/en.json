@@ -14,6 +14,9 @@
       "fact:ergonomic-risk": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:guarding-risk": {
         "status": "pending_mapping"
       },
@@ -13632,6 +13635,23 @@
                 "publisher": "FermatMind",
                 "scope": "internal_rubric",
                 "url": null
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Monitor flow and weight — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Check seals and batch numbers — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Respond to blockages and alarms — 25/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13819,7 +13839,7 @@
             }
           }
         ],
-        "answer": "Vision, weighing, and alarm aggregation can assist inspection; first-article confirmation, anomaly isolation, equipment safety, and batch release are the responsibility of authorized personnel.",
+        "answer": "Vision, weighing, and alarm aggregation can assist inspection; first-article confirmation, anomaly isolation, equipment safety, and batch release are the responsibility of authorized personnel. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "Editorial control suggestion; O*NET task background",
@@ -15589,7 +15609,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15797,15 +15817,27 @@
         "source_refs": [
           "bls-ep-51-9111"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Packaging and filling machine operator",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Packaging and filling · equipment monitoring · batch quality",
@@ -15856,7 +15888,7 @@
       "text": "Packaging and filling machine operator: work content, salary, and safety boundaries"
     }
   },
-  "source_content_sha256": "fceb4a2815ed567958147d8e0abe1a57e6bafa41adc250accb53f6546ea8e73e",
+  "source_content_sha256": "ec4e25015f6f536dbad274eb67222e05a30924c07c76419f1fb761f0d2a2caee",
   "subject": {
     "canonical_slug": "packaging-and-filling-machine-operators-and-tenders",
     "name": "Packaging and filling machine operator",

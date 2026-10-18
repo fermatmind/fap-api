@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24473,7 +24476,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial analysis: organizing medical record information, literature retrieval, and patient education drafts may be trial directions after institutional authorization. The ILO2023 study analyzes global task exposure and does not demonstrate AI diagnostic effectiveness, actual adoption rates, or overall augmentation for this occupation; this page provides no task scores."
+              "Editorial analysis: organizing medical record information, literature retrieval, and patient education drafts may be trial directions after institutional authorization. The ILO2023 study analyzes global task exposure and does not demonstrate AI diagnostic effectiveness, actual adoption rates, or overall augmentation for this occupation; this page gives a separate editorial task-sample estimate. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "family-medicine-physicians.ai-impact.ai-impact-table.18",
@@ -31915,6 +31918,23 @@
                 "publisher": "Beijing Municipal Health Commission (original legal text)",
                 "scope": "Physician qualifications and practice registration, principally checking Articles 9–14",
                 "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "History-taking and clinical decisions — 50/100; weight=1/3; family-medicine-physicians.ai-impact.ai-impact-table.95[0]",
+                  "Physical examination and clinical management — 0/100; weight=1/3; family-medicine-physicians.ai-impact.ai-impact-table.99[0]",
+                  "Follow-up and assessment of changes in condition — 25/100; weight=1/3; family-medicine-physicians.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36823,7 +36843,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37092,15 +37112,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Family Medicine Physicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Family Medicine Physicians · Official occupational scope",
@@ -37151,7 +37183,7 @@
       "text": "Family Medicine Physicians"
     }
   },
-  "source_content_sha256": "4325d6a32cdee198eff0dd61fa2a22f555719a11a7ce53c6d7981232983219f3",
+  "source_content_sha256": "6285b005f34de7b92f86ae8d2cd939d5d070dba1f9c389d2782f182e0c4db2d7",
   "subject": {
     "canonical_slug": "family-medicine-physicians",
     "name": "Family Medicine Physicians",

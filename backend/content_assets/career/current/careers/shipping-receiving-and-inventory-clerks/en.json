@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24381,7 +24384,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no separate generative AI adoption or replacement proportion for this occupation was verified. Generative AI may assist document summaries, field extraction, and draft irregularity explanations, but does not see all goods or automatically obtain inventory adjustment authority. Barcodes, RFID, automated warehousing, and specialized software are different technologies; BLS job projections are not generative AI replacement rates either."
+              "Insufficient evidence: no separate generative AI adoption or replacement proportion for this occupation was verified. Generative AI may assist document summaries, field extraction, and draft irregularity explanations, but does not see all goods or automatically obtain inventory adjustment authority. Barcodes, RFID, automated warehousing, and specialized software are different technologies; BLS job projections are not generative AI replacement rates either. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "shipping-receiving-and-inventory-clerks.ai-impact.ai-impact-table.18",
@@ -32369,6 +32372,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/43-4151.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Check received goods against documents. — 25/100; weight=1/3; shipping-receiving-and-inventory-clerks.ai-impact.ai-impact-table.95[0]",
+                  "Maintain inventory records and stocktake discrepancies. — 75/100; weight=1/3; shipping-receiving-and-inventory-clerks.ai-impact.ai-impact-table.103[0]",
+                  "Prepare shipping documents and labels. — 75/100; weight=1/3; shipping-receiving-and-inventory-clerks.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37277,7 +37297,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37545,15 +37565,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Shipping, Receiving, and Inventory Clerks",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Shipping and receiving verification · SKUs and quantities · Inventory records",
@@ -37604,7 +37636,7 @@
       "text": "Shipping, Receiving, and Inventory Clerks"
     }
   },
-  "source_content_sha256": "271ff7ad36e97fac3eb2d57753bdaf85aff675f030a4eaaea738aebf78c61071",
+  "source_content_sha256": "4a271f2966474ef1e57fec51745f6bb651df1ea08aaffe20098ec3ed89b55663",
   "subject": {
     "canonical_slug": "shipping-receiving-and-inventory-clerks",
     "name": "Shipping, Receiving, and Inventory Clerks",

@@ -26,6 +26,9 @@
       "fact:family-p90-hour-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24215,7 +24218,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录整理、订单汇总及配方计算可作为待验证的工具用途；传统传感控制、厨房机械与生成式文本工具需分开。2025美国Lightcast快餐厨师招聘表列Outlook、Excel、Word，各低于1%；这是招聘提及比例，非软件采用率、AI率或厨房点单库存系统清单，不代表全家族或中国招聘。本轮未取得家族采用率、效能或岗位替代因果，食材和食安判断须按实际责任核。BLS厨师家族2025年就业2,705,800、2035年预测2,889,000，增长7%、公布净增183,200、年均空缺393,200（含替换）。细分增长：餐厅12%、家庭5%、其他5%、机构食堂3%、快餐1%、简餐-5%；不是六类统一增长或快餐与简餐均下降。人数与百分比有舍入，空缺不是净增、当前招聘或个人录用率。"
+              "记录整理、订单汇总及配方计算可作为待验证的工具用途；传统传感控制、厨房机械与生成式文本工具需分开。2025美国Lightcast快餐厨师招聘表列Outlook、Excel、Word，各低于1%；这是招聘提及比例，非软件采用率、AI率或厨房点单库存系统清单，不代表全家族或中国招聘。本轮未取得家族采用率、效能或岗位替代因果，食材和食安判断须按实际责任核。BLS厨师家族2025年就业2,705,800、2035年预测2,889,000，增长7%、公布净增183,200、年均空缺393,200（含替换）。细分增长：餐厅12%、家庭5%、其他5%、机构食堂3%、快餐1%、简餐-5%；不是六类统一增长或快餐与简餐均下降。人数与百分比有舍入，空缺不是净增、当前招聘或个人录用率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31848,6 +31851,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/35-3011.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "备料与切配｜验收食材并按配方称量与切配｜检查食材新鲜度与储存温度，按配方称量、清洗、去皮、切配与分份，处理肉类、水产、蔬菜与水果，并按要求隔离过敏原相关原料。 — 0/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "加热与出餐｜按订单加热并复核成熟度｜按订单选择煎、炒、烤、蒸、炸与烘烤等方式加热，调节炉灶、烤箱、烤架与蒸箱温度，凭品尝、闻味与器具穿刺复核成熟度，分份、装盘与点缀后交给传菜或直接交付顾客。 — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "库存与记录｜核对库存并如实记录｜盘点和领用食材与厨房用品，按先进先出轮换储存，记录产量、废弃、温控与库存数据，并向主管报告短缺、损耗与异常。 — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37052,7 +37072,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37290,15 +37310,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "厨师（职业家族）",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "服务与运营 · 食品制备与出餐",
@@ -37349,7 +37381,7 @@
       "text": "厨师（职业家族）"
     }
   },
-  "source_content_sha256": "2afa8bb9cbfda2264f82bc06b3ff55f956e5549595b09db481e9b3f09d996062",
+  "source_content_sha256": "b3638609fb0c185bdf78de821b21f2310f9e3f194a49e167fa4d88f9aceec6f4",
   "subject": {
     "canonical_slug": "cooks",
     "name": "厨师（职业家族）",

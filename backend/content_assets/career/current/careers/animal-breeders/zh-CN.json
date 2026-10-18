@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24729,7 +24732,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得动物繁育员AI采用率、繁殖效果、替代率或工资因果估计。记录整理与候选比较仅编辑可能用途，不证明已部署或有效；当前EP增长预测不能归因于AI。"
+              "证据不足：本页未取得动物繁育员AI采用率、繁殖效果、替代率或工资因果估计。记录整理与候选比较仅编辑可能用途，不证明已部署或有效；当前EP增长预测不能归因于AI。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.18",
@@ -32601,6 +32604,23 @@
                 "publisher": "O*NET My Next Move（BLS 2025工资数据）",
                 "scope": "exact",
                 "url": "https://www.mynextmove.org/vets/profile/wages/45-2021.00?p=hourly&s=KY"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "日常饲养与圈舍｜饲喂与清洁｜饲喂与饮水动物，清洁与消毒圈舍、笼具与场地，修建笼舍与围栏并调整舍温。 — 0/100; weight=1/3; animal-breeders.profile.responsibilities-block.1[0]",
+                  "繁育与配种｜选择与人工授精｜依据血统、性状与后代目标选择配种动物与精液样本，并将精液注入母畜实施配种。 — 25/100; weight=1/3; animal-breeders.profile.responsibilities-block.1[1]",
+                  "标识与记录｜系谱与生产数据｜打耳号或耳标标识个体，记录体重与生长曲线与日粮以及发情、产仔、配种与精液使用记录。 — 75/100; weight=1/3; animal-breeders.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37502,7 +37522,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37905,15 +37925,27 @@
           "ep",
           "ooh"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "动物饲养员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "动物繁育：选择与配种 · 人工授精与精液处理 · 系谱与生产记录",
@@ -37964,7 +37996,7 @@
       "text": "动物繁育员：任务、工资与就业前景（O*NET 45-2021.00）"
     }
   },
-  "source_content_sha256": "a2ea1d662a832d211d1d297c71562e470e16fc3a7e0c1706a3932966928a4b27",
+  "source_content_sha256": "0cfdc40872f3f7ab57908fa5588ce59582e9b9e2905bd350e53a7f6de19d20d9",
   "subject": {
     "canonical_slug": "animal-breeders",
     "name": "动物饲养员",

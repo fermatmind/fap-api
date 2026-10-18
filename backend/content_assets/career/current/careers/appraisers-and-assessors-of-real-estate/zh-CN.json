@@ -38,6 +38,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24770,7 +24773,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国CFPB2024自动估值模型规则介绍：针对发起抵押贷款及二级市场发行人在特定主要住所抵押交易使用的AVM，质量控制涉及估计可信度、防操纵、利益冲突、抽样测试与反歧视。AVM不等于全部生成式AI；只作对应自动估值背景，不作中国授权、全职业采用率或效果实验。 本轮未取得职业AI采用率、任务比较效果、工资就业因果或消失年份。EP13-2020组合预测与13-2023任务分开，不由软件或法规推全面替代。"
+              "美国CFPB2024自动估值模型规则介绍：针对发起抵押贷款及二级市场发行人在特定主要住所抵押交易使用的AVM，质量控制涉及估计可信度、防操纵、利益冲突、抽样测试与反歧视。AVM不等于全部生成式AI；只作对应自动估值背景，不作中国授权、全职业采用率或效果实验。 本轮未取得职业AI采用率、任务比较效果、工资就业因果或消失年份。EP13-2020组合预测与13-2023任务分开，不由软件或法规推全面替代。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "appraisers-and-assessors-of-real-estate.ai-impact.ai-impact-table.18",
@@ -32529,6 +32532,23 @@
                 "publisher": "美国CFPB",
                 "scope": "contextual",
                 "url": "https://www.consumerfinance.gov/rules-policy/final-rules/quality-control-standards-for-automated-valuation-models/"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "现场查勘与证据记录｜把现场事实固定下来｜按查勘要点查看房产位置与结构与环境，检查新建与重大改建工程，拍摄内外部照片，绘制宗地图与平面示意，访谈承包商、业主与经纪人以补足资料，并核对建筑规范与分区条例对价值的影响。 — 0/100; weight=1/3; appraisers-and-assessors-of-real-estate.profile.responsibilities-block.1[1]",
+                  "市场调查与数据分析｜用数据支撑判断｜收集并分析成交价格、建造成本与租金与空置率数据，识别本地房地产市场趋势，考察地块与社区及周边学校与商业与公园等配套，分析收益性物业的收入与运营费用记录。 — 75/100; weight=1/3; appraisers-and-assessors-of-real-estate.profile.responsibilities-block.1[2]",
+                  "价值测算与报告编制｜按规范出具可复核结论｜选择并运用市场比较法、收益法与成本法测算价值，估算重置成本与折旧并考虑可比成交与收益潜力，测算最终价值结论，并按估价规范编制书面报告说明方法与依据，必要时在法庭就价值作证。 — 75/100; weight=1/3; appraisers-and-assessors-of-real-estate.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37429,7 +37449,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37787,15 +37807,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "评估师评估员房地产",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "估值作业：资料核对与现场查勘 · 可比案例与参数测算 · 估价报告与档案记录",
@@ -37846,7 +37878,7 @@
       "text": "房地产估价师与评估员"
     }
   },
-  "source_content_sha256": "2a76e9d09d6f2f9c04e51070ce84f2f8eb9565c93d64a13e97a4504a782ef566",
+  "source_content_sha256": "5e7c47cca844eed735f5ea9114e1616c09ed89c93dfac10f63dde6687492acdf",
   "subject": {
     "canonical_slug": "appraisers-and-assessors-of-real-estate",
     "name": "房地产估价师与评估员",

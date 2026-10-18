@@ -38,6 +38,9 @@
       "fact:entry-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -24734,7 +24737,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得本职业AI采用率、工资/就业因果效果与消失年份。已核BLS OOH将机构整合、部分电台可能不用现场DJ或采用AI DJ列为展望解释；不是已测采用率、全部替代或工资因果证明。技术能力、部署、机构职责和就业结果分开，不作永久不可替代判断。 BLS EP27-3011预测2025—2035下降7.6%，官方净减1700人、年空缺2000；不全部归因AI。"
+              "证据不足：本轮未取得本职业AI采用率、工资/就业因果效果与消失年份。已核BLS OOH将机构整合、部分电台可能不用现场DJ或采用AI DJ列为展望解释；不是已测采用率、全部替代或工资因果证明。技术能力、部署、机构职责和就业结果分开，不作永久不可替代判断。 BLS EP27-3011预测2025—2035下降7.6%，官方净减1700人、年空缺2000；不全部归因AI。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.18",
@@ -32568,6 +32571,23 @@
                 "publisher": "教育部",
                 "scope": "contextual",
                 "url": "https://www.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_zk/zk_xwcbdl/xwcbdl_gbysl/202502/P020250207549510438568.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "内容准备与编排｜先定内容再上麦｜研究背景资料准备节目与采访，撰写与编辑脚本与视频脚本，与制作人按节目定位与听众口味选择节目内容，开发故事线并维护音乐库。 — 75/100; weight=1/3; announcers.profile.responsibilities-block.1[0]",
+                  "在播呈现与串联｜稳定输出并控制时长｜朗读新闻快讯，报台并开场或结束节目（即兴或使用记忆稿与脚本），播报与点评音乐、天气与交通，发出网络提示信号并按时间档控制各段时长。 — 75/100; weight=1/3; announcers.profile.responsibilities-block.1[1]",
+                  "采访与访谈｜把嘉宾讲清楚｜采访嘉宾关于其经历、工作或时事话题，寻找并确认嘉宾，主持专题讨论与谈话节目，必要时在电话中与听众或观众交流。 — 25/100; weight=1/3; announcers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37466,7 +37486,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37849,15 +37869,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "广播主持人与电台DJ",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "在播呈现：稿件准备与核对 · 直播或录播呈现与临场应变 · 节目串联与嘉宾采访",
@@ -37908,7 +37940,7 @@
       "text": "广播主持人与电台DJ"
     }
   },
-  "source_content_sha256": "4adb8b38828b2ac3d4318c19f6a11a0ac61f74c59f70de36620a9525dd3553c7",
+  "source_content_sha256": "d91340c9c0b04cf95d45ed8fa7a3cd9b620dfa964f8e71767cffa45ed6bb6580",
   "subject": {
     "canonical_slug": "announcers",
     "name": "广播主持人与电台DJ",

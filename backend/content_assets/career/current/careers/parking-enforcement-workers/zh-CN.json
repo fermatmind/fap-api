@@ -5,6 +5,9 @@
       "fact:china-enforcement-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -13608,6 +13611,23 @@
                 "publisher": "FermatMind editorial guidance",
                 "scope": "editorial_guidance",
                 "url": "https://www.onetonline.org/link/summary/33-3041.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "核车牌和许可 — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "拍照记地点时间 — 25/100; weight=1/3; display.ai_impact_table.task_rows.3[0]",
+                  "按程序写告知 — 75/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13795,7 +13815,7 @@
             }
           }
         ],
-        "answer": "识别系统可提示候选违停；开具告知前仍须核现场标志、时间、许可、照片与授权范围。",
+        "answer": "识别系统可提示候选违停；开具告知前仍须核现场标志、时间、许可、照片与授权范围。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET任务背景与作者建议",
@@ -15563,7 +15583,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15748,15 +15768,27 @@
           "nbs-reference-2025",
           "urban-enforcement-authority"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "停车执法员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 33-3041.00 · 停车执法",
@@ -15807,7 +15839,7 @@
       "text": "停车执法员：巡查、工资与执法边界"
     }
   },
-  "source_content_sha256": "929a2a2be3a8183401031a11b4f61b06dc207a6095e778ea0c2bff2890e0e6ce",
+  "source_content_sha256": "7cdf1f95a6e3144fff6254b5a4fac18008a9de84178aa00033892c48d8945c80",
   "subject": {
     "canonical_slug": "parking-enforcement-workers",
     "name": "停车执法员",

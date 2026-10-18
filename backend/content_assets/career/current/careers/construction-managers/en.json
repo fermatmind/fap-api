@@ -29,6 +29,9 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24328,7 +24331,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial candidates pending testing include schedule comparisons, cost prompts, minutes and checklist drafts; reliability, adoption and net efficiency were not obtained. Compliance, safety and signing are handled under real authorization. BLS table 1.2 for 11-9021 construction managers shows 2025—2035 employment 609,100→664,300, a published net increase of 55,200 people, growth 9.1%, and 49,700 average annual openings including transfers and exits; the OOH rounds growth for the same occupation to 9%. Net increase, openings and target-year employment are not interchangeable, and they do not prove individual hiring or the degree of AI substitution."
+              "Editorial candidates pending testing include schedule comparisons, cost prompts, minutes and checklist drafts; reliability, adoption and net efficiency were not obtained. Compliance, safety and signing are handled under real authorization. BLS table 1.2 for 11-9021 construction managers shows 2025—2035 employment 609,100→664,300, a published net increase of 55,200 people, growth 9.1%, and 49,700 average annual openings including transfers and exits; the OOH rounds growth for the same occupation to 9%. Net increase, openings and target-year employment are not interchangeable, and they do not prove individual hiring or the degree of AI substitution. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "construction-managers.ai-impact.ai-impact-table.18",
@@ -31080,6 +31083,23 @@
                 "publisher": "Ministry of Housing and Urban-Rural Development／Beijing Municipal Government",
                 "scope": "contextual",
                 "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201610/t20161020_781395.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Plan | Prepare the schedule and construction methods | Study the technical documents to determine construction methods, plan, schedule and coordinate project activities to meet milestones, and adjust the plan when delays or emergencies occur. — 75/100; weight=1/3; construction-managers.profile.responsibilities-block.1[0]",
+                  "Budget | Prepare budgets and track costs | Prepare and submit budget estimates, progress reports and cost tracking reports, and check cost deviations against the contract and quantity scope. — 75/100; weight=1/3; construction-managers.profile.responsibilities-block.1[1]",
+                  "Organization | Organize resources and supervise work | Determine labour requirements and arrange crews and subcontractors to enter site, directly supervise construction and related work, and organize the procurement and delivery of materials and equipment. — 25/100; weight=1/3; construction-managers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -35987,7 +36007,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -36325,15 +36345,27 @@
           "bls-projections",
           "bls-outlook"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Construction Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · ECR",
@@ -36384,7 +36416,7 @@
       "text": "Construction Managers"
     }
   },
-  "source_content_sha256": "46f54e51687a0e81c859415b9e83c6d759bf7bedbc3220266f81f70c96c43737",
+  "source_content_sha256": "c3dac3dd71072cd26d70b40e8619fcd3426eea875f1fee420326df8adf1351bc",
   "subject": {
     "canonical_slug": "construction-managers",
     "name": "Construction Managers",

@@ -23,6 +23,9 @@
       "fact:content-us-salary-1": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25130,7 +25133,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no precise generative AI exposure level, adoption rate, substitution rate or income causality for 51-9195.04 was obtained. Editorial task analysis: assistance may be explored for sketches, record organization, and inventory and document drafts; effects must be checked by comparing the original draft with the tool-assisted draft, and automation or ordinary software must not be equated with generative AI. The detailed occupation page lists 4 software categories — Billing, Outlook, Inventory control and Excel; the hot technologies page lists only Excel and Outlook, and the 2025 US job-posting mention shares are all NA. Software entries do not prove widespread use, actual adoption rates, AI use or productivity gains."
+              "Insufficient evidence: no precise generative AI exposure level, adoption rate, substitution rate or income causality for 51-9195.04 was obtained. Editorial task analysis: assistance may be explored for sketches, record organization, and inventory and document drafts; effects must be checked by comparing the original draft with the tool-assisted draft, and automation or ordinary software must not be equated with generative AI. The detailed occupation page lists 4 software categories — Billing, Outlook, Inventory control and Excel; the hot technologies page lists only Excel and Outlook, and the 2025 US job-posting mention shares are all NA. Software entries do not prove widespread use, actual adoption rates, AI use or productivity gains. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.18",
@@ -32677,6 +32680,23 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "51-9195.00 exact occupation",
                 "url": "https://www.onetonline.org/link/summary/51-9195.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Heating and gathering — 0/100; weight=1/3; glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.95[0]",
+                  "Forming, bending and joining — 0/100; weight=1/3; glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.99[0]",
+                  "Inspection and records — 50/100; weight=1/3; glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37611,7 +37631,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -37825,15 +37845,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Glass Blowers, Molders, Benders, and Finishers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Glass Blowers, Molders, Benders, and Finishers: tasks, deliverables and responsibility boundaries",
@@ -37884,7 +37916,7 @@
       "text": "Glass Blowers, Molders, Benders, and Finishers"
     }
   },
-  "source_content_sha256": "cd296f0e78dd30741802996bec673c997a4e1c1cb9b2b1c0097c8af023b7cdf4",
+  "source_content_sha256": "036c327a709525527cdb4a98fd7ccc653d27487b73b3249ba5270ede94c0547a",
   "subject": {
     "canonical_slug": "glass-blowers-molders-benders-and-finishers",
     "name": "Glass Blowers, Molders, Benders, and Finishers",

@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24468,7 +24471,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Monthly report summaries, indicator checks, budget spreadsheet gap checks and partner communication drafts can be explored; real services, participant eligibility, budget approval and professional judgment remain the responsibility of authorized persons. Evidence is insufficient: no independent GenAI adoption rate, substitution rate or causal employment data for this occupation was verified; BLS7.2% growth cannot be attributed to AI."
+              "Monthly report summaries, indicator checks, budget spreadsheet gap checks and partner communication drafts can be explored; real services, participant eligibility, budget approval and professional judgment remain the responsibility of authorized persons. Evidence is insufficient: no independent GenAI adoption rate, substitution rate or causal employment data for this occupation was verified; BLS7.2% growth cannot be attributed to AI. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "social-and-community-service-managers.ai-impact.ai-impact-table.18",
@@ -32442,6 +32445,23 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/13-1151.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Programs and budgets｜Set goals, schedules, budgets and participant policies.｜Approval authority depends on the board, supervisor or contract; spending is not signed off on the basis of a job title. — 75/100; weight=1/3; social-and-community-service-managers.profile.responsibilities-block.1[1]",
+                  "Team and volunteers｜Recruit, train, schedule and evaluate service personnel.｜Management duties are separate from social work, counseling or medical professional credentials. — 25/100; weight=1/3; social-and-community-service-managers.profile.responsibilities-block.1[2]",
+                  "Partners and referrals｜Coordinate community agencies, funders and service connections.｜A referral suggestion does not prove that the other party accepted it or that service was completed. — 25/100; weight=1/3; social-and-community-service-managers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37350,7 +37370,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland wage reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37623,15 +37643,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Social and Community Service Managers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Community needs · program budgets · teams and service quality",
@@ -37682,7 +37714,7 @@
       "text": "Social and Community Service Managers"
     }
   },
-  "source_content_sha256": "a308362853c15d5dbad713a79693de93d29b3f5f9fe3a22a9964665fa87c4f9d",
+  "source_content_sha256": "10b45ac9adf8ac26976942b3f14318d61493c823cdccb88de048a9ee82641421",
   "subject": {
     "canonical_slug": "social-and-community-service-managers",
     "name": "Social and Community Service Managers",

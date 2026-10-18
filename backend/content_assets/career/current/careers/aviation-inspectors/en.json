@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24302,7 +24305,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round obtained no causal measurement of generative AI adoption rate, efficiency gain, or headcount reduction for aviation inspectors. Document retrieval, data comparison, and report drafts are editorial trial candidates and need actual measurement; overall employment projections cannot be attributed to AI."
+              "This round obtained no causal measurement of generative AI adoption rate, efficiency gain, or headcount reduction for aviation inspectors. Document retrieval, data comparison, and report drafts are editorial trial candidates and need actual measurement; overall employment projections cannot be attributed to AI. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.18",
@@ -32431,6 +32434,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2111.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Record review and verification | Make the basis clear | Pull work orders and maintenance records and flight logs, verify whether inspections and overhauls were performed on schedule, and write out clearly the item inspected and the basis documents. — 75/100; weight=1/3; aviation-inspectors.profile.responsibilities-block.1[0]",
+                  "On-site inspection and evidence gathering | Make findings traceable | Check maintenance work and aircraft condition against the checklist, inspect landing gear and tires and fuselage and wings and engine exteriors for damage or corrosion, and record findings and evidence. — 25/100; weight=1/3; aviation-inspectors.profile.responsibilities-block.1[1]",
+                  "Determination and signing | Make the authority clear | Record the conformity conclusion per appointment and duties. Airworthiness certificate issuance by an FAA inspector or authorized representative is verified separately from the mechanic IA's specific return-to-service approval and annual inspection, and is not automatically inferred from a company quality-inspection position or education. — 25/100; weight=1/3; aviation-inspectors.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37333,7 +37353,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37661,15 +37681,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Aviation Inspectors",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 53-6051.01 · Job Zone Three · medium preparation",
@@ -37720,7 +37752,7 @@
       "text": "Aviation Inspectors"
     }
   },
-  "source_content_sha256": "35e1d4258c2af5cbfcde68a811fb0b022557037a68455503b4fbe72676b623b6",
+  "source_content_sha256": "4e97add674b7dd9503ec87184992869663047da66a7e09527e0b748af43b035f",
   "subject": {
     "canonical_slug": "aviation-inspectors",
     "name": "Aviation Inspectors",

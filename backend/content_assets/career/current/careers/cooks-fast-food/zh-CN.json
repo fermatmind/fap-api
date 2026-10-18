@@ -23,6 +23,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24304,7 +24307,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "点单整理、备料预测、份量计算、库存和记录可作为待验证用途；传感、程序加热、自助支付、传送与生成式文本分别核。2025美国Lightcast快餐招聘表列Outlook、Excel、Word，各低于1%；招聘提及不等于采用、AI率或熟练度，也不是厨房点单库存系统清单，不套中国门店。本轮没有快餐厨师采用率、工具效率或就业因果；人须按实际责任核食材、温控与异常。BLS表1.2快餐厨师35-2011：2025就业640,500人、2035预测644,100人，公布净增3,600人、增长0.6%，年均空缺86,400个（含转职业及退出劳动市场等替换）。OOH及O*NET将增速四舍五入为1%。不是家族增长7%或简餐下降5%，空缺不是净增、当前招聘或个人录用率；自雇比例表中为未提供，不能解释为零。"
+              "点单整理、备料预测、份量计算、库存和记录可作为待验证用途；传感、程序加热、自助支付、传送与生成式文本分别核。2025美国Lightcast快餐招聘表列Outlook、Excel、Word，各低于1%；招聘提及不等于采用、AI率或熟练度，也不是厨房点单库存系统清单，不套中国门店。本轮没有快餐厨师采用率、工具效率或就业因果；人须按实际责任核食材、温控与异常。BLS表1.2快餐厨师35-2011：2025就业640,500人、2035预测644,100人，公布净增3,600人、增长0.6%，年均空缺86,400个（含转职业及退出劳动市场等替换）。OOH及O*NET将增速四舍五入为1%。不是家族增长7%或简餐下降5%，空缺不是净增、当前招聘或个人录用率；自雇比例表中为未提供，不能解释为零。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31876,6 +31879,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202604/t20260430_1963472.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "点单与收款｜读取点单并核对收款｜读取点单条或接收口头指令，接受点单并按门店程序收款与找零，同时处理多张订单并说明等待时间；发现点单不清或临时变更时，先与柜台或顾客确认再制作。 — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Core清洗切配、称量与批量准备；Supplemental混合配料和面团。具体配方、分区与过敏原要求按适用标准核，不把所有备料任务统一标Core。 — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "加热与装盒｜操作大容量设备并核对数量｜操作烤架、油炸锅与煎板等大容量单一用途设备，按订单数量批量烹制汉堡、炸鸡与薯条等品项，核对熟度、中心温度与份量后装盒、保温或直接交付。 — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37099,7 +37119,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37325,15 +37345,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "快餐厨师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "服务与运营 · 快餐食品制备与出餐",
@@ -37384,7 +37416,7 @@
       "text": "快餐厨师"
     }
   },
-  "source_content_sha256": "413dae94683aa552c4e358d7a900e8a8c55a58736ef395f9d78f05d0b553260e",
+  "source_content_sha256": "df0da73e55c611fb92c09af2055e1c2daa6594187f48f478bff0f429eaf8d058",
   "subject": {
     "canonical_slug": "cooks-fast-food",
     "name": "快餐厨师",

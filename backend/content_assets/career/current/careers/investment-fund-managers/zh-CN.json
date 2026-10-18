@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -7583,7 +7586,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜基于投资研究、估值、交易与披露任务，编辑建议先在虚构材料中试验数据整理、情景计算与摘要草稿辅助。生成式AI的错误、隐私和信息完整性风险须按NIST框架复核；这不是本职业效率提升或采用率的实证结论。基金决策仍按具体机构授权处理，本页不给出替代概率或时间表。"
+              "直接回答｜基于投资研究、估值、交易与披露任务，编辑建议先在虚构材料中试验数据整理、情景计算与摘要草稿辅助。生成式AI的错误、隐私和信息完整性风险须按NIST框架复核；这不是本职业效率提升或采用率的实证结论。基金决策仍按具体机构授权处理，本页不给出替代概率或时间表。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "investment-fund-managers.ai-impact.ai-impact-table.2",
@@ -8779,6 +8782,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/13-1141.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "研究估值并制定投资策略 — 75/100; weight=1/3; investment-fund-managers.profile.responsibilities-block.4[0]",
+                  "执行交易并监控风险 — 50/100; weight=1/3; investment-fund-managers.profile.responsibilities-block.4[0]",
+                  "复核业绩与合规披露 — 75/100; weight=1/3; investment-fund-managers.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -10926,7 +10946,7 @@
     ],
     "path": "/zh/career/jobs/investment-fund-managers",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11051,15 +11071,27 @@
         "source_refs": [
           "source-pack-onet-summary"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "投资基金经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "投资基金经理 · 授权、受托与披露边界",
@@ -11110,7 +11142,7 @@
       "text": "投资基金经理职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "088f10840720cdb7ab6a4fed1a75e3e836cdd92b44aa7ed402e3060eeba646a7",
+  "source_content_sha256": "d6cbcc84ef9a23585f3b641e21697812c961f27fa5884e329e25075e6254f11c",
   "subject": {
     "canonical_slug": "investment-fund-managers",
     "name": "投资基金经理",

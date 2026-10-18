@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24736,7 +24739,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "GIA2024《Classification of Gem Materials Using Machine Learning》研究天然变石产地、实验室培育CVD钻石处理及天然海水珍珠产地分类，以参考样本及仪器数据辅助既有显微/光谱/地球化学方法；部分重叠样本仍难分类。 这是宝石实验室分类案例，不是估价或全面部署证据。本轮仍缺13-2022职业采用率、跨任务效果、工资就业因果与消失年份。"
+              "GIA2024《Classification of Gem Materials Using Machine Learning》研究天然变石产地、实验室培育CVD钻石处理及天然海水珍珠产地分类，以参考样本及仪器数据辅助既有显微/光谱/地球化学方法；部分重叠样本仍难分类。 这是宝石实验室分类案例，不是估价或全面部署证据。本轮仍缺13-2022职业采用率、跨任务效果、工资就业因果与消失年份。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "appraisers-of-personal-and-business-property.ai-impact.ai-impact-table.18",
@@ -32414,6 +32417,23 @@
                 "publisher": "GIA Gems & Gemology（Hardman等）",
                 "scope": "contextual",
                 "url": "https://www.gia.edu/gems-gemology/fall-2024-machine-learning"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "标的查验与照片记录｜把标的物理特征固定下来｜实地查验个人或商业财产，为标的拍照，记录尺寸、品质与设计等物理特征，并核对标的与法定描述或认证是否一致。 — 0/100; weight=1/3; appraisers-of-personal-and-business-property.profile.responsibilities-block.1[0]",
+                  "价值类型与价值测算｜按需求选择正确的价值口径｜按业主或委托人的需要确定公允价值、重置价值或清算价值等价值类型，并据此选择方法与参数。 — 50/100; weight=1/3; appraisers-of-personal-and-business-property.profile.responsibilities-block.1[2]",
+                  "报告与标的描述｜按规范出具可复核报告｜撰写并提交珠宝、艺术品、古董、收藏品与设备等标的的评估报告，写出准确的标的描述，并说明方法、依据与限制条件。 — 75/100; weight=1/3; appraisers-of-personal-and-business-property.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37314,7 +37334,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37654,15 +37674,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "个人与商业财产评估师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "估值作业：标的查验与认证核对 · 可比案例与价值类型测算 · 评估报告与数据库记录",
@@ -37713,7 +37745,7 @@
       "text": "个人与商业财产评估师"
     }
   },
-  "source_content_sha256": "cad7ff333c5749c6a616fd772bc637822cd88d4cedf5648e5cb395b2e268d278",
+  "source_content_sha256": "23055ec7228f33b15a2d7e8b5e69f4d98ced7b691260f30f64732505da3c5d90",
   "subject": {
     "canonical_slug": "appraisers-of-personal-and-business-property",
     "name": "个人与商业财产评估师",

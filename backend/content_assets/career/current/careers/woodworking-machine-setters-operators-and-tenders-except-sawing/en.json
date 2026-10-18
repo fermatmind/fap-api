@@ -5,6 +5,9 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25452,7 +25455,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Exploring the organization of specification and inspection data is possible, checking ranges independently and keeping missing measurements; machine control or CAD requirements do not prove text AI adoption."
+              "Exploring the organization of specification and inspection data is possible, checking ranges independently and keeping missing measurements; machine control or CAD requirements do not prove text AI adoption. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "woodworking-machine-setters-operators-and-tenders-except-sawing.display.ai_impact_table.answer",
@@ -33090,6 +33093,23 @@
                 "publisher": "U.S. Department of Labor, O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-7042.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Setup | machines and tools | check the scope according to formal training. — 25/100; weight=1/3; woodworking-machine-setters-operators-and-tenders-except-sawing.display.responsibilities_block.02[0]",
+                  "Monitoring | running process | observe deviations and abnormal-situation records. — 25/100; weight=1/3; woodworking-machine-setters-operators-and-tenders-except-sawing.display.responsibilities_block.03[0]",
+                  "Inspection | shape and dimensions | check workpiece specifications and missing measurements. — 25/100; weight=1/3; woodworking-machine-setters-operators-and-tenders-except-sawing.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38379,7 +38399,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -38527,15 +38547,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Machine setters, operators, and tenders",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET-SOC51-7042.00",
@@ -38586,7 +38618,7 @@
       "text": "Machine setters, operators, and tenders"
     }
   },
-  "source_content_sha256": "e7dfb3dc10b73d315e83ad62d06a46f2101fa32ba33e551e097e60e80797b3b5",
+  "source_content_sha256": "80aec405a262382bd8e1a0eb3476d867b1f3d6d2ce1325b44fc32565415707c8",
   "subject": {
     "canonical_slug": "woodworking-machine-setters-operators-and-tenders-except-sawing",
     "name": "Machine setters, operators, and tenders",

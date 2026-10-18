@@ -8,6 +8,9 @@
       "fact:china-service-wide-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25489,7 +25492,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the comparable AI adoption rate, task effects and net employment causal data for this occupation, and the score remains missing. Material summaries, drafts and route comparisons are editorial trial suggestions; the facts, times, visitor information and service responsibility are still checked by people. The combined United States 39-7010 2025—2035 overall growth of 6.3%, the ten-year net increase of about 3,900 and the average annual 11,900 openings including replacements are not independent for this page's sub-category or AI causation."
+              "Insufficient evidence: the comparable AI adoption rate, task effects and net employment causal data for this occupation, and the score remains missing. Material summaries, drafts and route comparisons are editorial trial suggestions; the facts, times, visitor information and service responsibility are still checked by people. The combined United States 39-7010 2025—2035 overall growth of 6.3%, the ten-year net increase of about 3,900 and the average annual 11,900 openings including replacements are not independent for this page's sub-category or AI causation. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "tour-and-travel-guides.display.ai_impact_table.answer",
@@ -33651,6 +33654,23 @@
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Arranging｜route and visit pace｜Arrange the stops together with the confirmed opening status and the group's needs, list the times and the unknowns, and check the specific route against the actual rules. — 75/100; weight=1/3; tour-and-travel-guides.display.responsibilities_block.02[0]",
+                  "Communicating｜commentary and responding to questions｜Explain the key points of the location and listen carefully to the visitors' questions; when unclear, register them truthfully and ask the corresponding person to confirm. — 25/100; weight=1/3; tour-and-travel-guides.display.responsibilities_block.03[0]",
+                  "Service｜guidance and explaining the rules｜Organise the visit, explain the assembly and the points to note, and observe visitor activity, without crossing professional and authorisation boundaries in a service capacity. — 25/100; weight=1/3; tour-and-travel-guides.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38915,7 +38935,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Occupational fit guide",
@@ -39099,15 +39119,27 @@
         "source_refs": [
           "china-wage-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Tour guides and escorts",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "United States O*NET 39-7011.00 guiding identity",
@@ -39158,7 +39190,7 @@
       "text": "Tour guides and escorts"
     }
   },
-  "source_content_sha256": "d5ab2fa4d0e79948d385bb8eee2884e331806ead9866b8f9a5626697834413fb",
+  "source_content_sha256": "bb060bb6ca7952b732d378bd4d4b2680377c0e649318afebf0f48b65449cf683",
   "subject": {
     "canonical_slug": "tour-and-travel-guides",
     "name": "Tour guides and escorts",

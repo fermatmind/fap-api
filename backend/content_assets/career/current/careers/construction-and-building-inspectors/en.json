@@ -29,6 +29,9 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24483,7 +24486,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Provision retrieval, checklists, records and drawing comparisons are editorial candidates for assistance pending testing; this round obtained no occupational adoption, accuracy or net efficiency data. BLS Table 1.2 SOC47-4011 overall employment is 153,900 people in 2025 and 153,900 in 2035, published net change 0, change rate 0.0% and average annual openings 14,800 (including replacement for departures/retirement). Overall employment includes self-employment; openings are not net new jobs, projections do not guarantee individual opportunities and do not explain AI causation."
+              "Provision retrieval, checklists, records and drawing comparisons are editorial candidates for assistance pending testing; this round obtained no occupational adoption, accuracy or net efficiency data. BLS Table 1.2 SOC47-4011 overall employment is 153,900 people in 2025 and 153,900 in 2035, published net change 0, change rate 0.0% and average annual openings 14,800 (including replacement for departures/retirement). Overall employment includes self-employment; openings are not net new jobs, projections do not guarantee individual opportunities and do not explain AI causation. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "construction-and-building-inspectors.ai-impact.ai-impact-table.18",
@@ -31228,6 +31231,23 @@
                 "publisher": "Ministry of Housing and Urban-Rural Development / People's Government of Beijing",
                 "scope": "contextual",
                 "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202310/t20231017_3280758.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Review | Check Drawings and Permit Materials | Check drawings, sites, codes and construction methods and provide opinions; permit issuance belongs to appropriately responsible/authorized roles, not all Chinese testing or construction supervision roles. — 75/100; weight=1/3; construction-and-building-inspectors.profile.responsibilities-block.1[0]",
+                  "Inspect | Check Construction Quality at Checkpoints | Inspect buildings, structures, electrical circuits, plumbing, sewers, heating and foundations during construction and after completion; verify materials/installation techniques against designs and codes. — 25/100; weight=1/3; construction-and-building-inspectors.profile.responsibilities-block.1[1]",
+                  "Measure | Measure and Verify Key Indicators | Use surveying instruments, measuring tools and testing equipment to measure dimensions, verify levelness, alignment and elevations, and supplement inspection records with photographs and raw readings. — 0/100; weight=1/3; construction-and-building-inspectors.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36135,7 +36155,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Wage Reference",
       "direction-comparison": "Comparison of Occupational Directions",
       "fit": "Occupational Suitability Guide",
@@ -36466,15 +36486,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Construction and Building Inspector",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of Tasks to AI (Not Scored on This Page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · RCI",
@@ -36525,7 +36557,7 @@
       "text": "Construction and Building Inspector"
     }
   },
-  "source_content_sha256": "f8c0853ee19272184fbfae83fbba90d35b5d6a43e11343cb96f83e11dda1c496",
+  "source_content_sha256": "ee0e1dfbf23cd16297beaabfa352c0261d6647f5c1e95d4eb77e45b222ff1e82",
   "subject": {
     "canonical_slug": "construction-and-building-inspectors",
     "name": "Construction and Building Inspector",

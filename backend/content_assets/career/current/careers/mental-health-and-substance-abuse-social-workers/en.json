@@ -5,6 +5,9 @@
       "fact:employment": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -12782,6 +12785,23 @@
                 "publisher": "National Bureau of Statistics of China",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Interview clients and assess their conditions, needs, and risks — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Develop and adjust service or treatment plans — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "Provide counseling and support to clients and family members — 25/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -12969,7 +12989,7 @@
             }
           }
         ],
-        "answer": "Editorial trial suggestion: Evaluate information organization and reminder tools, but actual occupational generative AI adoption rates or validated effects were not obtained. Case assessment, intervention, safety judgment, and confidentiality remain responsibilities under jurisdictional and job permissions.",
+        "answer": "Editorial trial suggestion: Evaluate information organization and reminder tools, but actual occupational generative AI adoption rates or validated effects were not obtained. Case assessment, intervention, safety judgment, and confidentiality remain responsibilities under jurisdictional and job permissions. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "21-1023.00 - Mental Health and Substance Abuse Social Workers",
@@ -14715,7 +14735,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Compare career directions",
       "fit": "Career fit guide",
@@ -14875,15 +14895,27 @@
         "source_refs": [
           "source-pack-onet-summary"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Mental Health and Substance Abuse Social Workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Assessment and case management",
@@ -14934,7 +14966,7 @@
       "text": "Mental Health and Substance Abuse Social Workers: Duties, U.S. Pay, and Entry | FermatMind"
     }
   },
-  "source_content_sha256": "a4ec51ff84ba21222892d54d5cfd4cd525ac6cf9cea372851837cfe455e41bf8",
+  "source_content_sha256": "fbaaa8d927237badf64a0543c5e619527943d54c17c593c4785c156da71a3015",
   "subject": {
     "canonical_slug": "mental-health-and-substance-abuse-social-workers",
     "name": "Mental Health and Substance Abuse Social Workers",

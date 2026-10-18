@@ -68,6 +68,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24524,7 +24527,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OOH expects technology to be able to automate some tasks in the combined occupational group, such as damage photo assessment and amount estimation, and expects AI to raise productivity; this is an outlook judgment, not a measured institutional adoption rate or effect for this occupation. Editorial advice is to trial documents and drafts, and software keywords do not prove actual use."
+              "BLS OOH expects technology to be able to automate some tasks in the combined occupational group, such as damage photo assessment and amount estimation, and expects AI to raise productivity; this is an outlook judgment, not a measured institutional adoption rate or effect for this occupation. Editorial advice is to trial documents and drafts, and software keywords do not prove actual use. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "claims-adjusters-appraisers-examiners-and-investigators.ai-impact.ai-impact-table.18",
@@ -31961,6 +31964,23 @@
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Clause checking and liability judgment｜Review claim forms and records to determine insurance liability｜Review claim forms and other records to determine the scope of insurance liability; check police reports and medical records and bills or property damage material to determine the degree of liability (corresponding to the first and sixth O*NET tasks). — 75/100; weight=1/3; claims-adjusters-appraisers-examiners-and-investigators.profile.responsibilities-block.1[0]",
+                  "Evidence collection and analysis｜Analyse the investigation findings and report conclusions｜Analyse the information collected in the investigation and report conclusions and recommendations; verify and analyse the data used to settle the claim to ensure that the claim is valid and settled under company practices and procedures (corresponding to the second and fifth O*NET tasks). — 75/100; weight=1/3; claims-adjusters-appraisers-examiners-and-investigators.profile.responsibilities-block.1[1]",
+                  "Communication and consultation｜Contact claimants and lawyers and relevant parties｜Tasks 8 and 9 cover interviewing to correct errors and verify, item 13 covers conferring with legal counsel, and item 18 covers contacting relevant parties for additional material; the last two items, verifying background information and negotiating claims, are given no importance score. The appearance of a task does not grant authority to obtain medical, credit or background material, and the basis for processing and the scope of the commission are checked separately. — 25/100; weight=1/3; claims-adjusters-appraisers-examiners-and-investigators.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36869,7 +36889,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37354,15 +37374,27 @@
         "source_refs": [
           "claim-wage-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Claims adjusters, examiners and investigators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · CEI",
@@ -37413,7 +37445,7 @@
       "text": "Claims adjusters, examiners and investigators"
     }
   },
-  "source_content_sha256": "0013e778844710315312894e0c4c1116cf83d733433a8bb48e959b6ec2c23915",
+  "source_content_sha256": "7a1d50138c73c17a97d132aa30f35b30d5c72948d47f6e371f25f19c5608d4db",
   "subject": {
     "canonical_slug": "claims-adjusters-appraisers-examiners-and-investigators",
     "name": "Claims adjusters, examiners and investigators",

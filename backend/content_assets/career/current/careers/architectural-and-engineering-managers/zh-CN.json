@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24752,7 +24755,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页建议试验的AI辅助环节是资料归类、计划初稿、成本校验和会议摘要，须在具体项目验证。预算取舍、技术变更、人员安排和审批仍由授权人员负责。BLS当前口径：2025年220,900个岗位，2035年233,100个，OOH取整增长6%（明细5.5%）、净增12,200个，2025—2035年均14,900个空缺。预测不是AI替代率。"
+              "本页建议试验的AI辅助环节是资料归类、计划初稿、成本校验和会议摘要，须在具体项目验证。预算取舍、技术变更、人员安排和审批仍由授权人员负责。BLS当前口径：2025年220,900个岗位，2035年233,100个，OOH取整增长6%（明细5.5%）、净增12,200个，2025—2035年均14,900个空缺。预测不是AI替代率。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "architectural-and-engineering-managers.ai-impact.ai-impact-table.18",
@@ -32538,6 +32541,23 @@
                 "publisher": "American Institute of Architects",
                 "scope": "contextual",
                 "url": "https://www.aia.org/sites/default/files/2026-01/Guidance%20for%20the%20Responsible%20Use%20of%20AI%20by%20Architecture%20and%20Design%20Firms.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "项目规划与目标与范围管理｜把需求转成可核对的计划｜与客户确定项目范围与目标与主要交付物，编制预算与进度与资源计划，评估技术与资源与市场可行性并说明主要取舍与假设。 — 50/100; weight=1/3; architectural-and-engineering-managers.profile.responsibilities-block.1[0]",
+                  "跨专业协调与团队与人员管理｜让多方在同一目标下推进｜协调各工程与研发专业与外部相关方并组织评审与决策，指导项目人员的招聘与配置与评价并处理冲突。 — 25/100; weight=1/3; architectural-and-engineering-managers.profile.responsibilities-block.1[1]",
+                  "预算与合同与进度管理｜让项目在约束下交付｜编制与审核预算与投标与合同文件，跟踪进度与成本与交付质量，管理支出与审批并处理变更与索赔。 — 75/100; weight=1/3; architectural-and-engineering-managers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37441,7 +37461,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37757,15 +37777,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "建筑与工程经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "管理职责：项目规划与目标与范围管理 · 跨专业协调与合规审查 · 预算与合同与进度管理 · 团队与人员与标准建设",
@@ -37816,7 +37848,7 @@
       "text": "建筑与工程经理"
     }
   },
-  "source_content_sha256": "014c45f35fe541bd465dab5afddae4f28bfdddab67af61ba05840230a43404a7",
+  "source_content_sha256": "bbfeaa31be24b71ce72a86996a4d4aea2680c30ffb6ab4bda5e4ef32bdc81e2a",
   "subject": {
     "canonical_slug": "architectural-and-engineering-managers",
     "name": "建筑与工程经理",

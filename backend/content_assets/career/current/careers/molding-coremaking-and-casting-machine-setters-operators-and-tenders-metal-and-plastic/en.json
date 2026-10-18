@@ -11,6 +11,9 @@
       "fact:cn-production-wage": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -13506,6 +13509,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-4072.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Clean and lubricate mold interiors, fill defects, connect cooling water lines, select coolants, and preheat tools and molds — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Observe continuous automated equipment operation and instruments and gauges to record temperatures, pressures, and injection cycles, adjusting for jams or faults — 50/100; weight=1/3; display.ai_impact_table.task_rows.3[0]",
+                  "Inspect product surface and dimensional defects visually and with instruments to confirm compliance with specifications — 25/100; weight=1/3; display.ai_impact_table.task_rows.5[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13696,7 +13716,7 @@
             }
           }
         ],
-        "answer": "Casting workers may use work order and process sheet organization, parameter conversions, temperature and pressure curve records, and defect and measurement data organization tools to assist forming and review. Accountable people must still verify mold and material conditions, parameter settings, first-article confirmation, dimensional and appearance conformity, anomaly shutdowns, and handover. Technology exposure does not equal job replacement.",
+        "answer": "Casting workers may use work order and process sheet organization, parameter conversions, temperature and pressure curve records, and defect and measurement data organization tools to assist forming and review. Accountable people must still verify mold and material conditions, parameter settings, first-article confirmation, dimensional and appearance conformity, anomaly shutdowns, and handover. Technology exposure does not equal job replacement. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET 51-4072.00 occupational profile",
@@ -15439,7 +15459,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Compare career directions",
       "fit": "Career fit guide",
@@ -15551,15 +15571,27 @@
         "source_refs": [
           "mohrss-wage"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Casting workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Work order interpretation and mold selection and installation",
@@ -15610,7 +15642,7 @@
       "text": "Casting workers"
     }
   },
-  "source_content_sha256": "b61a5234d33363ff6aa96f97f00fb4960dff1ffaedbbb6ee1d896b5fef8d859e",
+  "source_content_sha256": "a5d371a4d82628f4ca77fe198becb29c4cbd4d5a9f8b719cd5265416ae971548",
   "subject": {
     "canonical_slug": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
     "name": "Casting workers",

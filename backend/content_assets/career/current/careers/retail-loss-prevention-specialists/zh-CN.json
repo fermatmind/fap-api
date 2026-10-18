@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24755,7 +24758,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能从现有研究推断零售防损专员会被AI整体替代。软件可辅助差异表、监控索引和事件草稿；现场安全、事实核对、人员接触及调查授权仍由人承担。ILO任务暴露研究和BLS较宽职业组就业预测都不是本职业AI采用率或裁员率。"
+              "不能从现有研究推断零售防损专员会被AI整体替代。软件可辅助差异表、监控索引和事件草稿；现场安全、事实核对、人员接触及调查授权仍由人承担。ILO任务暴露研究和BLS较宽职业组就业预测都不是本职业AI采用率或裁员率。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "retail-loss-prevention-specialists.ai-impact.ai-impact-table.18",
@@ -32523,6 +32526,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "statistical_method",
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "库存差异核查｜比对销售、退货、调拨与盘点记录，识别异常商品和时段。｜输出带来源与待核项的差异清单，不把差异直接定性为盗窃。 — 75/100; weight=1/3; retail-loss-prevention-specialists.profile.responsibilities-block.1[0]",
+                  "门店巡查｜查看出入口、货架、仓库及高损耗区域的程序执行情况。｜记录可见风险、位置和时间，优先消除人身危险。 — 25/100; weight=1/3; retail-loss-prevention-specialists.profile.responsibilities-block.1[1]",
+                  "安全处置与升级｜遇疑似盗窃、冲突或暴力风险时按雇主预案行动。｜通知有权限人员和必要的应急机构，不自行扩大拦截或调查权。 — 25/100; weight=1/3; retail-loss-prevention-specialists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37425,7 +37445,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37702,15 +37722,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "零售防损专员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "商品损耗调查 · 库存差异核查",
@@ -37761,7 +37793,7 @@
       "text": "零售防损专员"
     }
   },
-  "source_content_sha256": "3e71fcf5ed88d22bbfe71bbb9bac88b5ae97e25e1289aac704d5e9c995858467",
+  "source_content_sha256": "047d172a9637d935d35c2aa08f8c625116f761b1a62c2433a2e337d4e48ccff5",
   "subject": {
     "canonical_slug": "retail-loss-prevention-specialists",
     "name": "零售防损专员",

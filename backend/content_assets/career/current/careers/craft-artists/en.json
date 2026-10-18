@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24287,7 +24290,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial: verify whether design, search and display tools improve actual tasks; no measured deployment, efficiency or income for this occupation was obtained; ordinary software and machine processing are not necessarily generative AI, and material and production quality and copyright and delivery responsibility are checked against the actual parties and contract law."
+              "Editorial: verify whether design, search and display tools improve actual tasks; no measured deployment, efficiency or income for this occupation was obtained; ordinary software and machine processing are not necessarily generative AI, and material and production quality and copyright and delivery responsibility are checked against the actual parties and contract law. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31652,6 +31655,23 @@
                 "publisher": "U.S. Consumer Product Safety Commission",
                 "scope": "contextual",
                 "url": "https://www.cpsc.gov/s3fs-public/blk_media_5015_0.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Ideation and material selection｜Determine the concept and select materials｜Determine the object to be made and the creative concept, select materials by characteristics such as strength, color, texture, balance, weight, dimensions and ductility, and set the material, dimension and surface treatment specifications. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Drawings and prototyping｜Draw schematics and make samples and prototypes｜Draw a draft or schematic of the object to be made, make samples or templates that guide production, first produce a prototype or model, and also use specialist software to produce design drawings. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Production and forming｜Cut and form, assemble and process｜Cut, form, assemble, cast or otherwise process materials by hand methods, hand tools, power tools or machines, and make functional or decorative objects with a variety of methods and materials. — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36856,7 +36876,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -37104,15 +37124,27 @@
           "r2-pay-3",
           "r2-pay-2"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Craft artists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Art and design · handmade functional and decorative works",
@@ -37163,7 +37195,7 @@
       "text": "Craft artists"
     }
   },
-  "source_content_sha256": "e5215936a425463f7e8eb641e41166742f27a8124c5db0659544f715713fac92",
+  "source_content_sha256": "cc45d5dc670faa5f6020e8239f9ace48d2f16fdc5e7ce24d87cc94089a36d866",
   "subject": {
     "canonical_slug": "craft-artists",
     "name": "Craft artists",

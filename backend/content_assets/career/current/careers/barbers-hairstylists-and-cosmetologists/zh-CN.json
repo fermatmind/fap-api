@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24686,7 +24689,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：可评估预约草稿、记录整理、款式参考与库存摘要等辅助用途，先核数据、权限和输出。证据不足：本次未取得该职业AI采用率、生产率或岗位替代结果；不将任务研究当现场安全判定。"
+              "编辑建议：可评估预约草稿、记录整理、款式参考与库存摘要等辅助用途，先核数据、权限和输出。证据不足：本次未取得该职业AI采用率、生产率或岗位替代结果；不将任务研究当现场安全判定。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.18",
@@ -32543,6 +32546,23 @@
                 "publisher": "国家市场监督管理总局",
                 "scope": "jurisdiction_specific",
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "沟通与观察｜让服务有依据｜分析顾客头发与其他身体特征，确认想要的造型与护理方案与限制条件后再动手。 — 25/100; weight=1/3; barbers-hairstylists-and-cosmetologists.profile.responsibilities-block.1[0]",
+                  "剪修与塑形｜让产出有规格｜按顾客要求与发质与面部特征用推剪与剪刀与修剪器与剃刀剪断与修剪与塑形头发或发片。 — 0/100; weight=1/3; barbers-hairstylists-and-cosmetologists.profile.responsibilities-block.1[1]",
+                  "染烫与造型｜让效果可复现｜用涂抹器或刷子漂白与染色与调色，施用水或定型与拉直或烫发溶液并按说明控制接触时间，用卷发筒与卷发器与热梳与卷发棒压卷并梳理定型。 — 25/100; weight=1/3; barbers-hairstylists-and-cosmetologists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37444,7 +37464,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37808,15 +37828,27 @@
         "source_refs": [
           "ep-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "美发师、发型师与美容师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 39-5012.00 · Job Zone Three · 中等准备 · Bright Outlook",
@@ -37867,7 +37899,7 @@
       "text": "美发师、发型师与美容师"
     }
   },
-  "source_content_sha256": "d858cd2fae749c589690036a93dfc845ba72f56255e9d30e0eafd29596f80f7e",
+  "source_content_sha256": "25f657bc96bd56f16fe6f30653df9b050c08f37251b278539641385f26de830b",
   "subject": {
     "canonical_slug": "barbers-hairstylists-and-cosmetologists",
     "name": "美发师、发型师与美容师",

@@ -17,6 +17,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:interest-code": {
         "status": "pending_mapping"
       },
@@ -13787,6 +13790,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/summary/29-1129.02"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Assess clients' perceptual, sensory, emotional, communication, musical, physical, cognitive, social, and spiritual abilities, and set treatment goals — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Design and deliver music therapy experiences such as playing instruments, singing, improvisation, and listening — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Document assessments, treatment plans, case summaries, and progress reports — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13974,7 +13994,7 @@
             }
           }
         ],
-        "answer": "Editorial trial suggestion: Try documentation/material assistance only with institutional authorization, necessary consent, and data protection in place. Appropriately qualified and authorized personnel are responsible for assessment, intervention, safety, and records. MT-BC professional certification does not equate to state licensure; adoption and outcome evidence has not been obtained.",
+        "answer": "Editorial trial suggestion: Try documentation/material assistance only with institutional authorization, necessary consent, and data protection in place. Appropriately qualified and authorized personnel are responsible for assessment, intervention, safety, and records. MT-BC professional certification does not equate to state licensure; adoption and outcome evidence has not been obtained. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET occupational profile (29-1129.02)",
@@ -15723,7 +15743,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15895,15 +15915,27 @@
         "source_refs": [
           "bls-therapists-all-other"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Music Therapists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Assessment and treatment design",
@@ -15954,7 +15986,7 @@
       "text": "Music Therapists"
     }
   },
-  "source_content_sha256": "c37ed31c3400f00645333369c616076a6b8fc9219f3b8071495e600ef1f22c67",
+  "source_content_sha256": "b9c738480da42bdd0f8d7a2fe891cefe55d298ecab4ca3bf1487db48d13e52c8",
   "subject": {
     "canonical_slug": "music-therapists",
     "name": "Music Therapists",

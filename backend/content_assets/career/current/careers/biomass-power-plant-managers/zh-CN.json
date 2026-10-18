@@ -29,6 +29,9 @@
       "fact:employment-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth-current": {
         "status": "pending_mapping"
       },
@@ -24446,7 +24449,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务判断：GenAI可在获准数据内尝试离线检索、报表/工单草稿与核对提示；本轮未取得本职业采用率、效果、替代测量或雇主SOP。工业控制、DCS/PLC、预测性维护与生成式AI区分；系统输出不能自动确认设备/人员状态或许可，现场控制与停复机按正式规程及授权。"
+              "编辑任务判断：GenAI可在获准数据内尝试离线检索、报表/工单草稿与核对提示；本轮未取得本职业采用率、效果、替代测量或雇主SOP。工业控制、DCS/PLC、预测性维护与生成式AI区分；系统输出不能自动确认设备/人员状态或许可，现场控制与停复机按正式规程及授权。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "biomass-power-plant-managers.ai-impact.ai-impact-table.18",
@@ -33067,6 +33070,23 @@
                 "publisher": "O*NET",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/summary/17-2199.03"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "现场检查与核对｜让判断有依据｜到现场检查设备与安全条件并核对指标与燃料与排放数据，如实记录异常与偏差。 — 25/100; weight=1/3; biomass-power-plant-managers.profile.responsibilities-block.1[1]",
+                  "指挥与调整｜让生产可控｜按授权指挥运行与检修并调整参数，在许可范围内处置并如实记录指令与依据与执行情况。 — 25/100; weight=1/3; biomass-power-plant-managers.profile.responsibilities-block.1[2]",
+                  "记录与整改｜让结果可交接｜记录指标与异常与违规与处置与整改与闭环情况，按规程交接与复盘并跟踪整改，不选择性记录。 — 75/100; weight=1/3; biomass-power-plant-managers.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38096,7 +38116,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38508,15 +38528,27 @@
         "source_refs": [
           "bls-parent-industry"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "生物质电厂经理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 11-3051.04 · Job Zone Four（需要相当准备）· 学历字段为学士学位 61%",
@@ -38567,7 +38599,7 @@
       "text": "生物质电厂经理"
     }
   },
-  "source_content_sha256": "6a27887dd96ae54d444a09137fb5d7b8d103f08669ae1c92ce6a26c189efbf22",
+  "source_content_sha256": "5ef61dbb8a6398c3c714158e395fb6b0507fdfa8f9fa5d4881c6a40a4f18f243",
   "subject": {
     "canonical_slug": "biomass-power-plant-managers",
     "name": "生物质电厂经理",

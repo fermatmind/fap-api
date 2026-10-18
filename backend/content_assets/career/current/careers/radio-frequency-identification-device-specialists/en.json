@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24480,7 +24483,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page has not obtained generative AI exposure rankings or on-site adoption measurements for individual RFID specialist tasks. Authorized requirements organization, field comparison and report drafts are editorial trial candidates. People review site selection, testing and system integration; cross-occupation research does not compare proportions of impact."
+              "This page has not obtained generative AI exposure rankings or on-site adoption measurements for individual RFID specialist tasks. Authorized requirements organization, field comparison and report drafts are editorial trial candidates. People review site selection, testing and system integration; cross-occupation research does not compare proportions of impact. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.ai-impact.ai-impact-table.18",
@@ -32195,6 +32198,23 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/17-2199.08"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Requirements Analysis and Scope Definition — 50/100; weight=1/3; radio-frequency-identification-device-specialists.ai-impact.ai-impact-table.95[0]",
+                  "Tag Selection and Layout Design — 50/100; weight=1/3; radio-frequency-identification-device-specialists.ai-impact.ai-impact-table.99[0]",
+                  "System Integration and Interface Connection — 75/100; weight=1/3; radio-frequency-identification-device-specialists.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37100,7 +37120,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Pay Reference",
       "direction-comparison": "Career Direction Comparison",
       "fit": "Career Suitability Guide",
@@ -37368,15 +37388,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Radio Frequency Identification Device Specialist",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Task Exposure (Not Scored on This Page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RFID Specialist · Task Verification",
@@ -37427,7 +37459,7 @@
       "text": "Radio Frequency Identification Device Specialist"
     }
   },
-  "source_content_sha256": "8e2a3bc9a3ab5288d70404b4a7232950a0b67b0ade71645721c2f9e4bae6eb94",
+  "source_content_sha256": "d1f39872e3b641be670669c04105f2b2b19067fd0874776bf7a00f5a9a72a6d6",
   "subject": {
     "canonical_slug": "radio-frequency-identification-device-specialists",
     "name": "Radio Frequency Identification Device Specialist",

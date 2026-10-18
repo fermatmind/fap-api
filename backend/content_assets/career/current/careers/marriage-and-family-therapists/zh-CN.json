@@ -14,6 +14,9 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7544,7 +7547,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务假设：预约管理与生成式AI分开；后者可能草拟虚构材料摘要，未取得本职业采用率或岗位结果。真实会谈数据须核保密、同意与机构授权，记录仍由人员检查；AI不自主诊断、治疗或处理危机，跨境执业须核实际法域。"
+              "编辑任务假设：预约管理与生成式AI分开；后者可能草拟虚构材料摘要，未取得本职业采用率或岗位结果。真实会谈数据须核保密、同意与机构授权，记录仍由人员检查；AI不自主诊断、治疗或处理危机，跨境执业须核实际法域。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "marriage-and-family-therapists.ai-impact.ai-impact-table.2",
@@ -8707,6 +8710,23 @@
                 "publisher": "BLS",
                 "scope": "target occupation",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/psychologists.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "整理个案记录与摘要 — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "诊断并实施治疗 — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "识别并处理危机风险 — 25/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11154,7 +11174,7 @@
     ],
     "path": "/zh/career/jobs/marriage-and-family-therapists",
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11266,15 +11286,27 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "婚姻与家庭治疗师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "诊断与治疗",
@@ -11325,7 +11357,7 @@
       "text": "婚姻与家庭治疗师职业判断：工作、入行与执业边界"
     }
   },
-  "source_content_sha256": "8a76d58e8b921db472e3a77896ff97a05da0c9faa5c272deb7899b4a9e1482b1",
+  "source_content_sha256": "4e90ef5ddb0673b5485d47e11fe4ab03451e1b15460dae1ea26078383501e4a8",
   "subject": {
     "canonical_slug": "marriage-and-family-therapists",
     "name": "婚姻与家庭治疗师",

@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24351,7 +24354,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Route orders, sales and inventory prompts, reconciliation, and record organization are editorial applications pending verification, and conventional route planning and business software is not GenAI; the software catalog has 7 categories: communications IBM Domino, route accounting database, inventory, map routing, Office, bMobile project/sales, Excel. The Hot2 skills Excel/Office are each below 1%, and the denominator is all unique U.S. job postings for this occupation in 2025, not a proportion within postings that list the skill and not 0 use / 0 AI. ILO task exposure / NIST governance do not provide adoption/substitution probabilities or measured efficiency for this occupation."
+              "Route orders, sales and inventory prompts, reconciliation, and record organization are editorial applications pending verification, and conventional route planning and business software is not GenAI; the software catalog has 7 categories: communications IBM Domino, route accounting database, inventory, map routing, Office, bMobile project/sales, Excel. The Hot2 skills Excel/Office are each below 1%, and the denominator is all unique U.S. job postings for this occupation in 2025, not a proportion within postings that list the skill and not 0 use / 0 AI. ILO task exposure / NIST governance do not provide adoption/substitution probabilities or measured efficiency for this occupation. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31872,6 +31875,23 @@
                 "publisher": "Government disclosure / reprints",
                 "scope": "general_legislation",
                 "url": "https://gxs.pingliang.gov.cn/zfxxgk/fdzdgknr/zcjd/sjzcjd/art/2025/art_c7c32dfcb9c14ca9acce3ed581b209b7.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Drive along the route and deliver and obtain sign-off at the delivery point — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
+                  "Introduce new products and price changes and take orders and stock shelves and set up promotional displays — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.3.task[0]",
+                  "Record sales and delivery information and complete settlement and reconciliation — 75/100; weight=1/3; actors.display.ai_impact_table.tasks.6.task[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37149,7 +37169,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37439,15 +37459,27 @@
           "r5-traffic",
           "r5-food"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Driver/sales workers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Route delivery and sales · delivery and payment collection · vehicle and food safety",
@@ -37498,7 +37530,7 @@
       "text": "Driver/sales workers"
     }
   },
-  "source_content_sha256": "e000eee5ae7bf02b51fa68599009f5732736b3dedd18e5161769cab9ce8c8d5b",
+  "source_content_sha256": "105e9019d7e8171b616cc39eb06f0c14e9a6f4529d291c3b98b02d4749a88d58",
   "subject": {
     "canonical_slug": "driver-sales-workers",
     "name": "Driver/sales workers",

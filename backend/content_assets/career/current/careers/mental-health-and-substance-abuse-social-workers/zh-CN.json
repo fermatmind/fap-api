@@ -5,6 +5,9 @@
       "fact:employment": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -12782,6 +12785,23 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "面谈服务对象并评估其状况、需求与风险 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "制定并调整服务或治疗计划 — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
+                  "为服务对象及其家庭成员提供咨询与支持 — 25/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -12969,7 +12989,7 @@
             }
           }
         ],
-        "answer": "编辑试用建议：可评估资料整理与提醒工具，但未取得本职业生成式AI真实采用率或效果验证；个案评估、干预、安全判断和保密仍按法域及岗位权限承担。",
+        "answer": "编辑试用建议：可评估资料整理与提醒工具，但未取得本职业生成式AI真实采用率或效果验证；个案评估、干预、安全判断和保密仍按法域及岗位权限承担。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "21-1023.00 - Mental Health and Substance Abuse Social Workers",
@@ -14715,7 +14735,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -14875,15 +14895,27 @@
         "source_refs": [
           "source-pack-onet-summary"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "健康物质滥用工人",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "评估与个案管理",
@@ -14934,7 +14966,7 @@
       "text": "心理健康与物质滥用社会工作者：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "7cbaded4ff33e7d62cacf04291cd5ae188eba63091d87a7011abda60b92e7cb6",
+  "source_content_sha256": "8a75c8b1a3b9950bcf83a3d26cc8cc8d36fdd4fe4a11a04db796142a024107c5",
   "subject": {
     "canonical_slug": "mental-health-and-substance-abuse-social-workers",
     "name": "心理健康与物质滥用社会工作者",

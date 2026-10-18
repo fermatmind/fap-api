@@ -8,6 +8,9 @@
       "fact:entry-path": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -7613,7 +7616,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Conditions for adoption: object IDs, versions, data formats, instrument records, and the permission model are reliable."
+              "Conditions for adoption: object IDs, versions, data formats, instrument records, and the permission model are reliable. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "electrical-and-electronics-engineering-technicians.ai-impact.ai-impact-table.2",
@@ -9080,6 +9083,23 @@
                 "publisher": "Ministry of Emergency Management of the People's Republic of China",
                 "scope": "specific_operation_requirement",
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Compare drawing and BOM versions — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Set up instruments and organize readings — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "Locate deviations and reproduce anomalies — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11493,7 +11513,7 @@
     ],
     "path": "/en/career/jobs/electrical-and-electronics-engineering-technicians",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -11641,15 +11661,27 @@
         "source_refs": [
           "ed-work"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Electrical and Electronic Engineering Technologists and Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Engineering input, assembly and testing, maintenance and troubleshooting, and recording · O*NET 17-3023.00",
@@ -11700,7 +11732,7 @@
       "text": "Electrical and Electronic Engineering Technologists and Technicians"
     }
   },
-  "source_content_sha256": "f0406639aec801579ca23b14a4413a338be190d5044165cf3d714729232b98c5",
+  "source_content_sha256": "3bae04081faf250e3dd2d175e24e5619467b1f402f49a53388b617b4710a4529",
   "subject": {
     "canonical_slug": "electrical-and-electronics-engineering-technicians",
     "name": "Electrical and Electronic Engineering Technologists and Technicians",

@@ -14,6 +14,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25106,7 +25109,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate or AI-attributed headcount reduction proportion for this occupation was obtained in this round. Editorially use tools for data aggregation, initial variance screening, and draft reports, verified against the original data; responsibility arrangements do not prove that the number of positions will not change."
+              "Insufficient evidence: no AI adoption rate or AI-attributed headcount reduction proportion for this occupation was obtained in this round. Editorially use tools for data aggregation, initial variance screening, and draft reports, verified against the original data; responsibility arrangements do not prove that the number of positions will not change. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.18",
@@ -32289,6 +32292,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/11-3031.01"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Budget estimate review | Review the completeness, accuracy, and compliance of each department's budget estimates and verify bases and assumptions | A review record noting the basis and doubtful points. — 75/100; weight=1/3; budget-analysts.profile.responsibilities-block.1[0]",
+                  "Report analysis | Analyze monthly budget and accounting reports, identify anomalies and trends, and maintain expenditure control | A reviewable analysis statement and trend judgment. — 75/100; weight=1/3; budget-analysts.profile.responsibilities-block.1[1]",
+                  "Cost and benefit analysis | Conduct cost analysis, cost-benefit comparison, and alternative option assessment | A reviewable analysis process and conclusions. — 75/100; weight=1/3; budget-analysts.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37208,7 +37228,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37476,15 +37496,27 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Budget Analysts",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page does not score it)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 13-2031.00 · budget estimate review / cost and benefit analysis / budget reporting and execution tracking",
@@ -37535,7 +37567,7 @@
       "text": "Budget Analysts"
     }
   },
-  "source_content_sha256": "0e5d6f10425ae11f79e1b9bbb2513a3da6ec1d6e292ef3415cd1a7f555dce7de",
+  "source_content_sha256": "8374e935078e12f52cb06f76bf71cb950ac227ee78b5da0ec96dd8630b609fb7",
   "subject": {
     "canonical_slug": "budget-analysts",
     "name": "Budget Analysts",

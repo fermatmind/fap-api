@@ -29,6 +29,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24764,7 +24767,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得33-9032独立职业的AI采用率、替代率或消失年份。工具可整理排班、巡查清单与事件草稿；出入核验、现场观察、冲突应对和报告由人员按授权负责。"
+              "证据不足：未取得33-9032独立职业的AI采用率、替代率或消失年份。工具可整理排班、巡查清单与事件草稿；出入核验、现场观察、冲突应对和报告由人员按授权负责。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "security-guards.ai-impact.ai-impact-table.18",
@@ -32612,6 +32615,23 @@
                 "publisher": "国家市场监督管理总局（公开国务院行政法规）",
                 "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_d6183810037a43c88fca676b346ca190.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "出入控制｜按授权名单和规则核人员、车辆和访客。｜输出准确记录。 — 50/100; weight=1/3; security-guards.profile.responsibilities-block.1[1]",
+                  "巡查监控｜观察门窗、通道、设施和异常行为。｜输出时间地点明确的观察。 — 25/100; weight=1/3; security-guards.profile.responsibilities-block.1[2]",
+                  "应急响应｜按培训和程序通知警务、消防或医疗等有权人员。｜输出通知与移交记录。 — 25/100; weight=1/3; security-guards.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37520,7 +37540,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37800,15 +37820,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "安全警卫",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "安全警卫 · O*NET 33-9032",
@@ -37859,7 +37891,7 @@
       "text": "安全警卫"
     }
   },
-  "source_content_sha256": "77761c5b9bc8d79741872a77eeeb164f98239d694828b111b98e8accbc16313b",
+  "source_content_sha256": "9781301ec616dd97ad216bf79073d2dffb9401d77ef9ffa5f975b57af25c4f8a",
   "subject": {
     "canonical_slug": "security-guards",
     "name": "安全警卫",

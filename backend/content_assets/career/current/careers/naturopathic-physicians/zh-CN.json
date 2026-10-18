@@ -17,6 +17,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:interest-code": {
         "status": "pending_mapping"
       },
@@ -13572,6 +13575,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "采集症状、既往史、处方药、非处方药、补充剂与过敏信息 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "在执照范围内完成体格或功能检查并整合检验与影像结果 — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
+                  "核对草药、补充剂与处方药的相互作用和禁忌 — 75/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -13759,7 +13779,7 @@
             }
           }
         ],
-        "answer": "任务暴露不等于替代：病史整理、文献检索、随访草稿与清单核对可被辅助，但诊断判断、处方、相互作用判定、授权签署与转诊决定必须由有执照的人承担。",
+        "answer": "任务暴露不等于替代：病史整理、文献检索、随访草稿与清单核对可被辅助，但诊断判断、处方、相互作用判定、授权签署与转诊决定必须由有执照的人承担。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET 职业档案（29-1299.01）",
@@ -15514,7 +15534,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15699,15 +15719,27 @@
         "source_refs": [
           "china-physician-law"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "自然疗法医师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "病史与用药核对",
@@ -15758,7 +15790,7 @@
       "text": "自然疗法医师"
     }
   },
-  "source_content_sha256": "60eb40aa9f5994d2acee9ff387a7a5b016a2d908d0996bd1bfae74786f33c7e6",
+  "source_content_sha256": "2508c3de54c3bc00477cc9aea75ce332795888cd8dff7f267db4fdc719e0a8fb",
   "subject": {
     "canonical_slug": "naturopathic-physicians",
     "name": "自然疗法医师",

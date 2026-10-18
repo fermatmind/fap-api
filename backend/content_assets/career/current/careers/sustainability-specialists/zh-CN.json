@@ -8,6 +8,9 @@
       "fact:cn-professional-reference-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25461,7 +25464,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "区分草稿辅助、真实岗位要求与就业结果。AI可提供待核文字或公式；本页没有本职采用和因果结果数值，因此不填评分、替代概率或降薪比例。"
+              "区分草稿辅助、真实岗位要求与就业结果。AI可提供待核文字或公式；本页没有本职采用和因果结果数值，因此另列编辑估算、替代概率或降薪比例。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "sustainability-specialists.display.ai_impact_table.answer",
@@ -32896,6 +32899,23 @@
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "指标｜指标定义｜创建和监测可持续指标，核计算、分母及范围。 — 75/100; weight=1/3; sustainability-specialists.display.responsibilities_block.02[0]",
+                  "方案｜方案与条件｜比较成本效益、技术可行性和接受程度，审查修改提案政策。 — 50/100; weight=1/3; sustainability-specialists.display.responsibilities_block.03[0]",
+                  "推进｜资源与反馈｜协调专业人员与部门，争取资源或资助，支持项目调整。 — 25/100; weight=1/3; sustainability-specialists.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38143,7 +38163,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38303,15 +38323,27 @@
         "source_refs": [
           "nbs-professional-context-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "可持续发展专员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 13-1199.05 精确身份",
@@ -38362,7 +38394,7 @@
       "text": "可持续发展专员"
     }
   },
-  "source_content_sha256": "b3585e38c7303aeace04082f5c988b5d1cd3d61586fd929e2d741ca833afa21f",
+  "source_content_sha256": "c522a3440dbf50df59cca47421d0de671287c17e103876486eb082a57e9be2d9",
   "subject": {
     "canonical_slug": "sustainability-specialists",
     "name": "可持续发展专员",

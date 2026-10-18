@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -23670,7 +23673,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET suggests records/deviation assistance; separate automation/dashboards/AI. No measured exposure/adoption/replacement/year; tasks not outcomes."
+              "O*NET suggests records/deviation assistance; separate automation/dashboards/AI. No measured exposure/adoption/replacement/year; tasks not outcomes. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "food-cooking-machine-operators-and-tenders.ai-impact.ai-impact-table.18",
@@ -31178,6 +31181,23 @@
                 "publisher": "BLS",
                 "scope": "SOC513093 employee national/industry wages",
                 "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=510000&occupation=513093&measure=13&areas=INDUSTRY,STATE,MSA"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Setup/start — 25/100; weight=1/3; food-cooking-machine-operators-and-tenders.ai-impact.ai-impact-table.99[0]",
+                  "Feed/stir — 0/100; weight=1/3; food-cooking-machine-operators-and-tenders.ai-impact.ai-impact-table.103[0]",
+                  "Monitoring/adjustment — 25/100; weight=1/3; food-cooking-machine-operators-and-tenders.ai-impact.ai-impact-table.107[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36050,7 +36070,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Direction comparison",
       "fit": "Fit guide",
@@ -36322,15 +36342,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Food Cooking Machine Operators and Tenders",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI exposure (unscored)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Cooking Operators/Tenders · Official scope · Complete workflow",
@@ -36381,7 +36413,7 @@
       "text": "Food Cooking Machine Operators and Tenders"
     }
   },
-  "source_content_sha256": "6de437ad5d975290ab41616660c57be2d033d2ed505513e28678ae978e29dbe1",
+  "source_content_sha256": "6a1803cadb7525ccae395e6c22e2f32d64ee2054813c1563c2ab4197b6768d5c",
   "subject": {
     "canonical_slug": "food-cooking-machine-operators-and-tenders",
     "name": "Food Cooking Machine Operators and Tenders",

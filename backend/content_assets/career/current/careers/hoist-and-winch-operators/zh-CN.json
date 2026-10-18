@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -25481,7 +25484,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务分析｜设备规程检索与记录草稿可试验，核手册和现场；没有已采用、效率、影响顺序或替代率实测。实际操作与作业授权另核。"
+              "编辑任务分析｜设备规程检索与记录草稿可试验，核手册和现场；没有已采用、效率、影响顺序或替代率实测。实际操作与作业授权另核。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "hoist-and-winch-operators.ai-impact.ai-impact-table.18",
@@ -32951,6 +32954,23 @@
                 "publisher": "BLS",
                 "scope": "具体文档用途限定",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "载荷与索具核对 — 25/100; weight=1/3; hoist-and-winch-operators.ai-impact.ai-impact-table.99[0]",
+                  "卷筒操作 — 0/100; weight=1/3; hoist-and-winch-operators.ai-impact.ai-impact-table.103[0]",
+                  "信号与现场配合 — 25/100; weight=1/3; hoist-and-winch-operators.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37921,7 +37941,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38093,15 +38113,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "卷扬机操作员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "卷扬机操作员 · 任务、交付与责任边界",
@@ -38152,7 +38184,7 @@
       "text": "卷扬机操作员"
     }
   },
-  "source_content_sha256": "ff905be824ea7e69bd166f9ef6288ab88eca3752f39487296a926262672df838",
+  "source_content_sha256": "67f770d4ba2c27ccb40d8b6a00dfeeadf987f22d7e0ac7fc2889b6dcdf4900e3",
   "subject": {
     "canonical_slug": "hoist-and-winch-operators",
     "name": "卷扬机操作员",

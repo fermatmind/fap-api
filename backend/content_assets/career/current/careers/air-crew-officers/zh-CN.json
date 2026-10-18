@@ -38,6 +38,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24781,7 +24784,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得55-1011空勤军官AI采用率、替代比例或效果研究。下面仅为编辑条件场景：记录整理、状态提示和资料汇总可能获工具辅助，可靠性与采用须另核，不预测岗位消失或编制变化。"
+              "证据不足：未取得55-1011空勤军官AI采用率、替代比例或效果研究。下面仅为编辑条件场景：记录整理、状态提示和资料汇总可能获工具辅助，可靠性与采用须另核，不预测岗位消失或编制变化。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "air-crew-officers.ai-impact.ai-impact-table.18",
@@ -32590,6 +32593,23 @@
                 "publisher": "Office of the Federal Register / eCFR；FAA条文",
                 "scope": "cross_occupation",
                 "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-61/subpart-B/section-61.73"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "任务与指挥｜带领机组｜按任务命令分配机组岗位职责，组织飞行前简报与飞行后复盘，对任务内决策负责。 — 25/100; weight=1/3; air-crew-officers.profile.responsibilities-block.1[0]",
+                  "通信与雷达｜操作与链路｜操作机上通信与雷达设备，建立卫星链路并按任务要求执行电子对抗与干扰。 — 50/100; weight=1/3; air-crew-officers.profile.responsibilities-block.1[1]",
+                  "设备检查｜飞行前中后｜执行并组织机上设备检查；异常记录与处置须按实际手册及岗位授权。 — 25/100; weight=1/3; air-crew-officers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37492,7 +37512,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37859,15 +37879,27 @@
         "source_refs": [
           "facilities"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "空勤军官",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "军职军官：任务执行与指挥 · 系统运用 · 设备检查 · 空投指挥",
@@ -37918,7 +37950,7 @@
       "text": "空勤军官（军人职业·军官）：任务、指挥与数据边界"
     }
   },
-  "source_content_sha256": "8044f47ee7b616702085ac0853390fd3a66bc3dda29d7f51bbeaba2b041740fc",
+  "source_content_sha256": "56da86c516b806792d79109af2b0809ff0ecd58e18cb7acc70dc9417f18694f2",
   "subject": {
     "canonical_slug": "air-crew-officers",
     "name": "空勤军官",

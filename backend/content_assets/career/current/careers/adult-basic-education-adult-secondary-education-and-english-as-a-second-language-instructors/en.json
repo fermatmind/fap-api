@@ -47,6 +47,9 @@
       "fact:cn-teacher-qualification-degree": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:hybrid-feedback-advantage": {
         "status": "pending_mapping"
       },
@@ -24503,7 +24506,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page keeps three things separate: whether a tool can handle a class of tasks, whether institutions actually adopt it, and whether employment outcomes change. On tasks, AI can already generate lesson materials and draft feedback, but O*NET's core tasks still require instructors to observe, adjust, and record; on adoption, institutions are bound by licensing, data authorization, privacy, copyright, and equipment conditions; on employment, BLS projects a 14% decline over 2025—2035, but does not attribute this change to generative AI. This occupation has no public task-level automation score, so no substitution rate or disappearance year is given."
+              "This page keeps three things separate: whether a tool can handle a class of tasks, whether institutions actually adopt it, and whether employment outcomes change. On tasks, AI can already generate lesson materials and draft feedback, but O*NET's core tasks still require instructors to observe, adjust, and record; on adoption, institutions are bound by licensing, data authorization, privacy, copyright, and equipment conditions; on employment, BLS projects a 14% decline over 2025—2035, but does not attribute this change to generative AI. This occupation has no public task-level automation score, so no substitution rate or disappearance year is given. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors.ai-impact.ai-impact-table.18",
@@ -32940,6 +32943,23 @@
                 "publisher": "Ministry of Education",
                 "scope": "legal_boundary",
                 "url": "https://www.moe.gov.cn/s78/A10/moe_918/tnull_11555.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Shared | Adapt materials and organize practice | Adapt texts, example sentences, and exercises to language level and learning goals, and organize classroom practice through lecture, group, or task-based activities. — 75/100; weight=1/3; adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors.profile.responsibilities-block.1[1]",
+                  "Shared | Deliver instruction and give immediate feedback | Demonstrate, question, and check understanding, and give actionable feedback on errors. — 25/100; weight=1/3; adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors.profile.responsibilities-block.1[2]",
+                  "Shared | Evaluate progress and maintain records | Evaluate assignments and tests per course requirements, record attendance, skill progress, and completion conditions, and check results with program staff. — 50/100; weight=1/3; adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37857,7 +37877,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of occupational directions",
       "fit": "Occupational fit guide",
@@ -38401,15 +38421,27 @@
         "source_refs": [
           "onet-253011"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Adult Basic Education, Adult Secondary Education, and English as a Second Language",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI exposure · not scored"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · SA",
@@ -38460,7 +38492,7 @@
       "text": "Adult Basic Education, Adult Secondary Education, and English as a Second Language"
     }
   },
-  "source_content_sha256": "8efced8b618e4a814cfd62642848ed7bb11e6431ea73fe1059150182456ff315",
+  "source_content_sha256": "f13d89bfdf246aae4ff16246737c258fe6fe07760d7faca6e55e6cda6ba1b626",
   "subject": {
     "canonical_slug": "adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors",
     "name": "Adult Basic Education, Adult Secondary Education, and English as a Second Language",

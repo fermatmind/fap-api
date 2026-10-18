@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25495,7 +25498,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得精确职业45-4011的生成式AI暴露评分、采用率或岗位替代因果结果，不给出中低等级。编辑建议先在虚构记录整理、地图与报告草稿中试验并核对原输入；技术能力、实际采用和就业结果分别判断。现场操作及安全责任须按真实岗位授权处理。"
+              "证据不足：本页未取得精确职业45-4011的生成式AI暴露评分、采用率或岗位替代因果结果，不给出中低等级。编辑建议先在虚构记录整理、地图与报告草稿中试验并核对原输入；技术能力、实际采用和就业结果分别判断。现场操作及安全责任须按真实岗位授权处理。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "forest-and-conservation-workers.ai-impact.ai-impact-table.18",
@@ -33164,6 +33167,23 @@
                 "publisher": "国家林业和草原局转载国务院",
                 "scope": "中国森林草原防灭火行为与主体",
                 "url": "https://www.forestry.gov.cn/c/www/szxx/650617.jhtml"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "苗木准备与栽植 — 0/100; weight=1/3; forest-and-conservation-workers.ai-impact.ai-impact-table.95[0]",
+                  "除草与间伐与清理 — 0/100; weight=1/3; forest-and-conservation-workers.ai-impact.ai-impact-table.99[0]",
+                  "调查协助与规程告知 — 25/100; weight=1/3; forest-and-conservation-workers.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38098,7 +38118,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38222,15 +38242,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "8%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "森林与自然保护从业人员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "森林与自然保护从业人员 · 任务、交付与责任边界",
@@ -38281,7 +38313,7 @@
       "text": "森林与自然保护从业人员"
     }
   },
-  "source_content_sha256": "425519d6febc80b8ab96af8cc1fbef064c3edc7d7cd6f465e3f64f08b39bbb3d",
+  "source_content_sha256": "094349da2f659eca5ccb38dda2ee6781b594a1a034bf302c6be8267b88c72aa9",
   "subject": {
     "canonical_slug": "forest-and-conservation-workers",
     "name": "森林与自然保护从业人员",

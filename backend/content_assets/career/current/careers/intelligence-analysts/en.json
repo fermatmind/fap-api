@@ -14,6 +14,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -7556,7 +7559,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | AI can assist with multi-source information search and deduplication, classification of text and communication records, initial pattern and anomaly screening, and drafting charts and reports. People remain responsible within their authorization for defining intelligence questions, judging source reliability, cross-checking conclusions, gaps and alternative hypotheses, external sharing, and action recommendations. Task exposure does not mean job replacement or widespread adoption; formal use requires authorization, human review, and an audit trail. This page provides no replacement probability or timetable."
+              "Direct answer | AI can assist with multi-source information search and deduplication, classification of text and communication records, initial pattern and anomaly screening, and drafting charts and reports. People remain responsible within their authorization for defining intelligence questions, judging source reliability, cross-checking conclusions, gaps and alternative hypotheses, external sharing, and action recommendations. Task exposure does not mean job replacement or widespread adoption; formal use requires authorization, human review, and an audit trail. This page provides no replacement probability or timetable. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "intelligence-analysts.ai-impact.ai-impact-table.2",
@@ -8751,6 +8754,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/33-3021.06"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Collect and link information from multiple sources — 75/100; weight=1/3; intelligence-analysts.profile.responsibilities-block.4[0]",
+                  "Check timeliness and alternative hypotheses — 50/100; weight=1/3; intelligence-analysts.profile.responsibilities-block.4[0]",
+                  "Prepare assessments and share within authorization — 75/100; weight=1/3; intelligence-analysts.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11116,7 +11136,7 @@
     ],
     "path": "/en/career/jobs/intelligence-analysts",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Comparison with neighboring occupations",
       "fit": "Fit signals",
@@ -11252,15 +11272,27 @@
         "source_refs": [
           "onet-trends"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Intelligence Analysts",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Intelligence Analysts · Sources, Verification, and Confidentiality Boundaries",
@@ -11311,7 +11343,7 @@
       "text": "Evaluating Intelligence Analysis as a Career: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "58e50f8ca8e7dcb315950b97743b75140bc068d7580e3e160b9f5a1e1aaa86ae",
+  "source_content_sha256": "490ccbd2f153a35db0f4a621ab144aa63320cd98a67c407d4f369cef84edddc0",
   "subject": {
     "canonical_slug": "intelligence-analysts",
     "name": "Intelligence Analysts",

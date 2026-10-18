@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24852,7 +24855,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS explains that equipment and control room modernization and smart grids can automate some tasks; using generative tools to organize the three positions' logs is only a to-be-verified idea, with no job-level adoption or effect evidence. Nuclear, dispatch, and unit operation each follow their own position's training, procedures, and authorization."
+              "BLS explains that equipment and control room modernization and smart grids can automate some tasks; using generative tools to organize the three positions' logs is only a to-be-verified idea, with no job-level adoption or effect evidence. Nuclear, dispatch, and unit operation each follow their own position's training, procedures, and authorization. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "power-plant-operators-distributors-and-dispatchers.ai-impact.ai-impact-table.18",
@@ -32911,6 +32914,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/49-2095.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Nuclear operation｜Check systems｜Check reactor and safety systems. — 25/100; weight=1/3; power-plant-operators-distributors-and-dispatchers.profile.responsibilities-block.1[0]",
+                  "Grid dispatch｜Check the network｜Check line and load sources. — 50/100; weight=1/3; power-plant-operators-distributors-and-dispatchers.profile.responsibilities-block.1[1]",
+                  "Plant operation｜Check units｜Check output and instrument sources. — 25/100; weight=1/3; power-plant-operators-distributors-and-dispatchers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37818,7 +37838,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Chinese mainland pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38123,15 +38143,27 @@
         "source_refs": [
           "employer"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Power Plant Operators, Distributors, and Dispatchers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Power operation · three-position combined group",
@@ -38182,7 +38214,7 @@
       "text": "Power Plant Operators, Distributors, and Dispatchers"
     }
   },
-  "source_content_sha256": "fcb291d1594c5488ebead42058ac6332f13a5f42166f3dfcfac1fa5590f80afa",
+  "source_content_sha256": "91e5643ed6b166da464edb05440e3fd42776ec80fe6cf33821928d4b270bcdfa",
   "subject": {
     "canonical_slug": "power-plant-operators-distributors-and-dispatchers",
     "name": "Power Plant Operators, Distributors, and Dispatchers",

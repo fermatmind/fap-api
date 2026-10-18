@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25224,7 +25227,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: Quantified occupational generative-AI exposure, adoption rates, efficiency effects, and employment causation were not obtained. Editorial trials can start with fictional reading tables, work-order text comparisons, ledger drafts, and training materials, checking every input and missing item manually. O*NET lists tasks and software categories, not proven adoption or substantial speed gains. On-site control, sample determinations, maintenance, and anomaly responses follow specific procedures and authority; generated text cannot automatically confer authority."
+              "Insufficient evidence: Quantified occupational generative-AI exposure, adoption rates, efficiency effects, and employment causation were not obtained. Editorial trials can start with fictional reading tables, work-order text comparisons, ledger drafts, and training materials, checking every input and missing item manually. O*NET lists tasks and software categories, not proven adoption or substantial speed gains. On-site control, sample determinations, maintenance, and anomaly responses follow specific procedures and authority; generated text cannot automatically confer authority. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.18",
@@ -32844,6 +32847,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "51-9051.00 industry distribution",
                 "url": "https://www.onetonline.org/link/industry/51-9051.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Start, set, and adjust heating equipment to specifications and monitor instruments and panel lights — 50/100; weight=1/3; furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.97[0]",
+                  "Load and remove materials and products and calculate and weigh charges — 0/100; weight=1/3; furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.101[0]",
+                  "Record instrument readings, test results, and shift output — 75/100; weight=1/3; furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.117[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37802,7 +37822,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38003,15 +38023,27 @@
           "onet-wages",
           "onet-industry"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Furnace, kiln, oven, drier, and kettle operators and tenders",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Furnace, kiln, oven, drier, and kettle operators and tenders · Tasks, deliverables, and responsibility boundaries",
@@ -38062,7 +38094,7 @@
       "text": "Furnace, kiln, oven, drier, and kettle operators and tenders"
     }
   },
-  "source_content_sha256": "2f412134aaa352c56977afd1ed7ffb166266736c9909cbbe3ca1d2fb09db4429",
+  "source_content_sha256": "a675d933a0536f0e261d22f84191a99cd54c0f9ed8b32eed09570f8e9ff062c9",
   "subject": {
     "canonical_slug": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders",
     "name": "Furnace, kiln, oven, drier, and kettle operators and tenders",

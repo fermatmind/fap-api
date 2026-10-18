@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25484,7 +25487,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未建立29-9092精确GenAI暴露评分、实际采用率或提效幅度。编辑建议试验文献检索、资料整理与文书草稿，核原材料和权限。BLS2025—2035增长10.4%、年均300空缺含增长与替换，不能当GenAI独立效应；软件招聘提及不是采用率。"
+              "证据不足：本页未建立29-9092精确GenAI暴露评分、实际采用率或提效幅度。编辑建议试验文献检索、资料整理与文书草稿，核原材料和权限。BLS2025—2035增长10.4%、年均300空缺含增长与替换，不能当GenAI独立效应；软件招聘提及不是采用率。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "genetic-counselors.ai-impact.ai-impact-table.18",
@@ -33035,6 +33038,23 @@
                 "publisher": "国家卫生健康委员会",
                 "scope": "China medical records",
                 "url": "https://www.nhc.gov.cn/wjw/c100175/201002/b1bec53d90f243e0861529723f00221a.shtml"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "分析遗传信息以识别处于特定疾病或综合征风险的患者或家庭 — 75/100; weight=1/3; genetic-counselors.ai-impact.ai-impact-table.99[0]",
+                  "与患者与家庭讨论检测方案及其风险与收益与局限 — 25/100; weight=1/3; genetic-counselors.ai-impact.ai-impact-table.103[0]",
+                  "评估患者的心理或情绪需求并提出转诊建议 — 25/100; weight=1/3; genetic-counselors.ai-impact.ai-impact-table.115[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37971,7 +37991,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38126,15 +38146,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "遗传咨询师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "遗传咨询师 · 任务、交付与责任边界",
@@ -38185,7 +38217,7 @@
       "text": "遗传咨询师"
     }
   },
-  "source_content_sha256": "88ad9fb8e53143ec17e252abd72f1bae4af249191bd989eba0276fabd5152ce7",
+  "source_content_sha256": "e982049545dc04ce49aa3f3f7e3ee31b31cbd7aa048f5f91c0e3c7788437f621",
   "subject": {
     "canonical_slug": "genetic-counselors",
     "name": "遗传咨询师",

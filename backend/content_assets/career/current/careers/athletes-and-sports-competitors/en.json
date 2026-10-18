@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24257,7 +24260,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round obtained no AI product effect, adoption rate or employment causality for this occupation. O*NET tasks, hiring software proportions and the overall BLS projection measure different objects; the ILO introduction / extended summary is a cross-occupation exposure method and the NIST introduction is voluntary cross-industry risk background, and the full text and the mapping for this occupation were not read."
+              "This round obtained no AI product effect, adoption rate or employment causality for this occupation. O*NET tasks, hiring software proportions and the overall BLS projection measure different objects; the ILO introduction / extended summary is a cross-occupation exposure method and the NIST introduction is voluntary cross-industry risk background, and the full text and the mapping for this occupation were not read. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "athletes-and-sports-competitors.ai-impact.ai-impact-table.18",
@@ -32289,6 +32292,23 @@
                 "publisher": "Government-published original text, Xilingol League site",
                 "scope": "contextual",
                 "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Training and physical condition｜O*NET lists training as planned, maintaining fitness and following a nutrition plan or consulting health professionals; the specific load and recovery conditions must be checked against your own medical and training arrangements. — 25/100; weight=1/3; athletes-and-sports-competitors.profile.responsibilities-block.1[0]",
+                  "Competition execution｜O*NET lists competing according to the rules and accepting deployment by the coach; registration, eligibility and anti-doping obligations must be checked against the rules applicable to the specific event. — 0/100; weight=1/3; athletes-and-sports-competitors.profile.responsibilities-block.1[1]",
+                  "Performance review｜O*NET lists identifying strengths and weaknesses after the competition and adjusting; the record is an editorial check suggestion, and the formal record requirements are checked separately. — 75/100; weight=1/3; athletes-and-sports-competitors.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37192,7 +37212,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37520,15 +37540,27 @@
         "source_refs": [
           "operations"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Athletes and sports competitors",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 27-2021.00 · no formal education requirement · long-term on-the-job training",
@@ -37579,7 +37611,7 @@
       "text": "Athletes and sports competitors"
     }
   },
-  "source_content_sha256": "02887450947819e7aac604dfc3723b00f2ca82d7de60365e32b2fe9388c1ca4d",
+  "source_content_sha256": "e6b20de6b0124c8e2ee0a4882ff0687e6e25af2825fccbbae710d1912be4c972",
   "subject": {
     "canonical_slug": "athletes-and-sports-competitors",
     "name": "Athletes and sports competitors",

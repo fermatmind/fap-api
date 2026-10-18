@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24773,7 +24776,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Trial work order organization, label comparison, and draft handovers; fixed equipment automation, simulation, and GenAI differ. This page has no verified occupational adoption rate, replacement share, or individual unemployment probability; parent category overall projections do not isolate AI causation."
+              "Trial work order organization, label comparison, and draft handovers; fixed equipment automation, simulation, and GenAI differ. This page has no verified occupational adoption rate, replacement share, or individual unemployment probability; parent category overall projections do not isolate AI causation. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "photonics-technicians.ai-impact.ai-impact-table.18",
@@ -25433,7 +25436,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First trial work order organization, condition differences, and draft handovers with permitted materials; preserve original data and human checks. This page gives no score."
+              "First trial work order organization, condition differences, and draft handovers with permitted materials; preserve original data and human checks. This page gives a separate editorial task-sample estimate."
             ]
           },
           "id": "photonics-technicians.ai-impact.ai-impact-table.61",
@@ -33079,6 +33082,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "Semiconductor crystal and wafer manufacturing processes; used for task comparison, not recognition of training or authority",
                 "url": "https://www.onetonline.org/link/details/51-9141.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Assemble devices and retain batch records. — 0/100; weight=1/3; photonics-technicians.ai-impact.ai-impact-table.99[0]",
+                  "Calculate or record photonics test data. — 75/100; weight=1/3; photonics-technicians.ai-impact.ai-impact-table.107[0]",
+                  "Test under test plans and perform failure analysis. — 25/100; weight=1/3; photonics-technicians.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37985,7 +38005,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38257,15 +38277,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Photonics Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Assembly · Testing · Maintenance",
@@ -38316,7 +38348,7 @@
       "text": "Photonics Technicians"
     }
   },
-  "source_content_sha256": "0e3314863a6641c1229d5a759945b8c4b0aeaeac578c25ecd271986f2049a81b",
+  "source_content_sha256": "5cdeabee4124a149f7e474b22deff5c6bb5dfc4702728cfab0b663aa6ec89f73",
   "subject": {
     "canonical_slug": "photonics-technicians",
     "name": "Photonics Technicians",

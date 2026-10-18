@@ -29,6 +29,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24404,7 +24407,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, displacement rate or disappearance year for the standalone 49-2098 occupation was obtained. Tools can organize equipment documentation and test drafts; wiring, energizing, alarm triggering, fault judgment and acceptance are verified on site by authorized staff."
+              "Insufficient evidence: no AI adoption rate, displacement rate or disappearance year for the standalone 49-2098 occupation was obtained. Tools can organize equipment documentation and test drafts; wiring, energizing, alarm triggering, fault judgment and acceptance are verified on site by authorized staff. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.ai-impact.ai-impact-table.18",
@@ -32232,6 +32235,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/49-2022.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Wiring and installation | Secure cables, control panels, detectors and cameras per code. | Output installation records with marked points. — 0/100; weight=1/3; security-and-fire-alarm-systems-installers.profile.responsibilities-block.1[1]",
+                  "System programming | Set device addresses, zones and notification parameters. | Output a reviewed configuration version. — 75/100; weight=1/3; security-and-fire-alarm-systems-installers.profile.responsibilities-block.1[2]",
+                  "Function testing | Verify circuits, sensors, audible and visual alarms and backup batteries. | Output item-by-item test results. — 25/100; weight=1/3; security-and-fire-alarm-systems-installers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37140,7 +37160,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37420,15 +37440,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Security and Fire Alarm Systems Installers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Security and Fire Alarm Systems Installers · O*NET 49-2098",
@@ -37479,7 +37511,7 @@
       "text": "Security and Fire Alarm Systems Installers"
     }
   },
-  "source_content_sha256": "a6bafbe0054529a0f86581aef9f54474628c423b5a41ec5b8c1a98486bce5844",
+  "source_content_sha256": "49f5cce4ceb3174a5890e51164f2c322d0b2ee4dfdfbbaa6aedf188315cc362f",
   "subject": {
     "canonical_slug": "security-and-fire-alarm-systems-installers",
     "name": "Security and Fire Alarm Systems Installers",

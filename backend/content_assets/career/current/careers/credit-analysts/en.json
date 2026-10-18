@@ -14,6 +14,9 @@
       "fact:employment-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24302,7 +24305,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round checked the official tasks, context, recruitment keywords and applicable rules, and obtained no generative AI deployment rate or efficiency experiment for this occupation. Spreadsheet and script calculation, data summarization, template drafting and file screening are experimental editorial assist directions and must be tested for accuracy and anomalies in a real authorized environment; automated approval and manual re-review are designed according to applicable rules, and it is not generalized that all conclusions must forever be made by a person. Article 21 of the applicable Personal Loan Administration Measures: separation of credit review and lending, and independent authorized approval; lenders using online automated approval should establish a manual re-review mechanism as a supplement and set trigger conditions, and not every loan must be decided by a person. If after lending an automated approval is found unable to effectively identify risk, the lender stops that process. Article 20 of the Working Capital Loan Administration Measures emphasizes tiered approval and the boundaries of delegated authority; both took effect on 2024-07-01 and apply directly to domestic commercial banks and similar deposit-taking institutions, while other institutions are checked against their own rules and reference clauses."
+              "This round checked the official tasks, context, recruitment keywords and applicable rules, and obtained no generative AI deployment rate or efficiency experiment for this occupation. Spreadsheet and script calculation, data summarization, template drafting and file screening are experimental editorial assist directions and must be tested for accuracy and anomalies in a real authorized environment; automated approval and manual re-review are designed according to applicable rules, and it is not generalized that all conclusions must forever be made by a person. Article 21 of the applicable Personal Loan Administration Measures: separation of credit review and lending, and independent authorized approval; lenders using online automated approval should establish a manual re-review mechanism as a supplement and set trigger conditions, and not every loan must be decided by a person. If after lending an automated approval is found unable to effectively identify risk, the lender stops that process. Article 20 of the Working Capital Loan Administration Measures emphasizes tiered approval and the boundaries of delegated authority; both took effect on 2024-07-01 and apply directly to domestic commercial banks and similar deposit-taking institutions, while other institutions are checked against their own rules and reference clauses. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31765,6 +31768,23 @@
                 "publisher": "Official Chinese government website",
                 "scope": "proxy",
                 "url": "https://credit.mot.gov.cn/zhengcefagui/202408/t20240807_4147083.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Credit data and financial statement analysis｜Read the materials and judge the degree of risk｜Analyze personal or corporate credit data and financial statements, judge the degree of risk involved in lending or credit, and check the time point, basis and completeness of the data. — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Financial ratios and profitability calculation｜Generate ratios and calculate profitability｜Use computer programs to generate financial ratios to assess the client's financial condition, and analyze financial data such as revenue growth, management quality and market share to judge the loan's expected profitability. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Report and application preparation｜Prepare reports and loan applications｜Prepare reports including the degree of risk, complete loan applications (including credit analysis and the loan application summary), and after checking the bases submit them to the loan committee or another authorized body for approval. — 75/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37117,7 +37137,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -37361,15 +37381,27 @@
         "source_refs": [
           "oews"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "75%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Credit analysts",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Business and financial services · credit risk analysis",
@@ -37420,7 +37452,7 @@
       "text": "Credit analysts"
     }
   },
-  "source_content_sha256": "e08951e3f8d413191ad63e4ba422f16ac8d2913bd28771ccc04a7c71785a2f03",
+  "source_content_sha256": "dafe50c85b898ae3dfd1002c17aa2b7be6169763b6b4d3916897f00be5c58f39",
   "subject": {
     "canonical_slug": "credit-analysts",
     "name": "Credit analysts",

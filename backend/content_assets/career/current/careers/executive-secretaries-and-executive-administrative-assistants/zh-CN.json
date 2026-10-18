@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24472,7 +24475,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "职业任务提供辅助候选，不证明工具在机构已采用或有收益。ILO2023全球潜在暴露中文员类较高，不能据此判本职业整体增强或岗位减少；本页不作无量表评分。"
+              "职业任务提供辅助候选，不证明工具在机构已采用或有收益。ILO2023全球潜在暴露中文员类较高，不能据此判本职业整体增强或岗位减少；本页另用本页明示的编辑模型估算。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.ai-impact.ai-impact-table.18",
@@ -32043,6 +32046,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent occupation comparison",
                 "url": "https://www.onetonline.org/link/summary/43-1011.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "任务优先级与授权确认 — 50/100; weight=1/3; executive-secretaries-and-executive-administrative-assistants.ai-impact.ai-impact-table.95[0]",
+                  "文档与数据准备 — 75/100; weight=1/3; executive-secretaries-and-executive-administrative-assistants.ai-impact.ai-impact-table.99[0]",
+                  "会议与差旅安排 — 75/100; weight=1/3; executive-secretaries-and-executive-administrative-assistants.ai-impact.ai-impact-table.103[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36951,7 +36971,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37220,15 +37240,27 @@
         "source_refs": [
           "nbs-wages-2025"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "执行执行行政助理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "执行秘书与执行行政助理 · 官方职业范围 · 高阶行政支持",
@@ -37279,7 +37311,7 @@
       "text": "执行秘书与执行行政助理"
     }
   },
-  "source_content_sha256": "df94110ca652d67bfe1221c1e16ca80deb66698d1500e9c98f384b15f0420234",
+  "source_content_sha256": "b0dbe7e3f5207e935d1e581ac8340965498d48fd75bd5ab934bd552cf49d0167",
   "subject": {
     "canonical_slug": "executive-secretaries-and-executive-administrative-assistants",
     "name": "执行秘书与执行行政助理",

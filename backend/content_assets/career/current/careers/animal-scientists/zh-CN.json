@@ -38,6 +38,9 @@
       "fact:entry-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -24846,7 +24849,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得动物科学家AI采用率、替代率、工资因果或工具效果。文献、清洗、代码及文稿仅编辑可能用途，须核原始数据与计算；不能保证会或不会替代。就业预测、软件清单都不证明AI因果。BLS EP19-1011：2025年3,400人、2035年3,600人，2025—2035增长5.8%，官方净增200人，年均200个空缺，自雇占4.6%；人数已取整。空缺包含增长与替代，不等净增或个人就业保证。"
+              "证据不足：本轮未取得动物科学家AI采用率、替代率、工资因果或工具效果。文献、清洗、代码及文稿仅编辑可能用途，须核原始数据与计算；不能保证会或不会替代。就业预测、软件清单都不证明AI因果。BLS EP19-1011：2025年3,400人、2035年3,600人，2025—2035增长5.8%，官方净增200人，年均200个空缺，自雇占4.6%；人数已取整。空缺包含增长与替代，不等净增或个人就业保证。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "animal-scientists.ai-impact.ai-impact-table.18",
@@ -32900,6 +32903,23 @@
                 "publisher": "农业农村部",
                 "scope": "contextual",
                 "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408940.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "营养与饲料研究｜需要与价值｜研究动物的营养需要与饲料原料的营养价值，并参与饲料配方设计与评价。 — 75/100; weight=1/3; animal-scientists.profile.responsibilities-block.1[0]",
+                  "繁殖与生长研究｜繁殖效率与发育｜开展动物繁殖、生长与发育研究，将动物与现有品系杂交或品系间杂交以获得目标性状的新组合。 — 25/100; weight=1/3; animal-scientists.profile.responsibilities-block.1[2]",
+                  "技术开发与咨询｜改进方法与建议｜开发饲喂、圈舍、卫生或寄生虫与疾病控制方面的改进方法，并就改进产品与技术向生产者提供建议。 — 50/100; weight=1/3; animal-scientists.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37802,7 +37822,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38201,15 +38221,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "动物科学家",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "家畜科研：试验设计与数据分析 · 遗传评估与选育方案 · 结论发表与技术转化",
@@ -38260,7 +38292,7 @@
       "text": "动物科学家：任务、工资与就业前景（O*NET 19-1011.00）"
     }
   },
-  "source_content_sha256": "d0e499e08554228055f5d4d72b9fdad03d8b0262d5684f89f0e9e578eebef263",
+  "source_content_sha256": "ab0f203173dd498163f154ff8e174860120804da8035f54cb156a98f1a310f3e",
   "subject": {
     "canonical_slug": "animal-scientists",
     "name": "动物科学家",

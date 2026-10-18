@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24970,7 +24973,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the actual generative AI adoption, effects and job substitution rate for special forces officers were not obtained; public duties and general methods serve only as scope background and do not imply military system deployment or command authorization."
+              "Insufficient evidence: the actual generative AI adoption, effects and job substitution rate for special forces officers were not obtained; public duties and general methods serve only as scope background and do not imply military system deployment or command authorization. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.18",
@@ -34677,6 +34680,23 @@
                 "publisher": "Ministry of National Defense of the People's Republic of China",
                 "scope": "context",
                 "url": "https://www.mod.gov.cn/gfbw/fgwx/flfg/4890799_2.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Team leadership | Organize a specialist team within formal appointment and command authority. | Submit approved objectives and division of labor, and do not confer command authority from an occupation name. — 25/100; weight=1/3; special-forces-officers.profile.responsibilities-block.1[0]",
+                  "Information assessment | Assess the mission information and limits described in the public summary. | Submit the basis for judgment and uncertainties, and provide no reconnaissance or intelligence collection tutorial. — 50/100; weight=1/3; special-forces-officers.profile.responsibilities-block.1[1]",
+                  "Planning and resources | Plan within approved objectives and coordinate personnel and resources. | Submit limits, alternatives and pending items; the P exercise is only a fictional classroom plan. — 50/100; weight=1/3; special-forces-officers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -39588,7 +39608,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -39885,15 +39905,27 @@
           "nbs",
           "special-forces-officers"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Special forces officers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Military occupation · Special forces officers",
@@ -39944,7 +39976,7 @@
       "text": "Special forces officers"
     }
   },
-  "source_content_sha256": "951a5a447ef75a4de0f15de2e39d5cee7666d8f063e0a4b7a6a272d3166b813c",
+  "source_content_sha256": "2c60ba7c95c6f8f73a065909c4af5dd11913549ef6082c896ff3dd28b8c2721e",
   "subject": {
     "canonical_slug": "special-forces-officers",
     "name": "Special forces officers",

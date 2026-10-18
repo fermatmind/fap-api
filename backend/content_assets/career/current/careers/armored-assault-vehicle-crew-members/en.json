@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -24827,7 +24830,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain nationwide AI adoption, wage, or overall replacement causal research for this occupation. Public document drafts, record summaries, and difference searches can serve as editorial trials and do not prove that the force has adopted them; technical capability, deployment, and employment outcomes are kept separate. No replacement rate, reduction number, or year of disappearance is predicted. The NIST AI RMF official summary is a broad reference for voluntary organizational AI risk management, not military training or authorization law or effect research for this occupation; this round read the summary only, not the framework PDF."
+              "Insufficient evidence: this round did not obtain nationwide AI adoption, wage, or overall replacement causal research for this occupation. Public document drafts, record summaries, and difference searches can serve as editorial trials and do not prove that the force has adopted them; technical capability, deployment, and employment outcomes are kept separate. No replacement rate, reduction number, or year of disappearance is predicted. The NIST AI RMF official summary is a broad reference for voluntary organizational AI risk management, not military training or authorization law or effect research for this occupation; this round read the summary only, not the framework PDF. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "armored-assault-vehicle-crew-members.ai-impact.ai-impact-table.18",
@@ -32579,6 +32582,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Vehicle driving and maneuver｜Getting the crew to the position the mission requires｜Drive tanks, light armored vehicles, and amphibious assault vehicles per the prescribed procedures, maneuver on land and water as ordered, and keep the vehicle serviceable and driving safe. — 25/100; weight=1/3; armored-assault-vehicle-crew-members.profile.responsibilities-block.1[0]",
+                  "Weapon and onboard system operation and maintenance｜Keeping weapons and onboard systems usable｜Operate and maintain aiming and firing systems, operate and maintain auxiliary weapons (including machine guns and grenade launchers), and inspect and service per the technical rules and report anomalies. — 25/100; weight=1/3; armored-assault-vehicle-crew-members.profile.responsibilities-block.1[1]",
+                  "Communications and navigation｜Maintaining contact and position awareness｜Operate and maintain onboard communications and navigation equipment, keep contact with the crew and higher command, and report position and situation per procedure. — 50/100; weight=1/3; armored-assault-vehicle-crew-members.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37481,7 +37501,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37797,15 +37817,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Armored Assault Vehicle Crew Members",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Official duties: vehicle driving and maneuver · weapon and onboard system operation and maintenance · communications and navigation",
@@ -37856,7 +37888,7 @@
       "text": "Armored Assault Vehicle Crew Members"
     }
   },
-  "source_content_sha256": "a2e8034ed159d9c606aa5738538ccf7bcf3ee07a4ef9238c9538ab20c087edc8",
+  "source_content_sha256": "32cf8d46d68f6ef984b30b2b1893ebbe91ef1560d87d49682fbc9ad31335c4e3",
   "subject": {
     "canonical_slug": "armored-assault-vehicle-crew-members",
     "name": "Armored Assault Vehicle Crew Members",

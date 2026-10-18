@@ -29,6 +29,9 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24558,7 +24561,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Data/GIS/reports/provisions are editorial candidates for assistance to be tested; actual reliability, adoption and net efficiency have not been obtained. BLS Table 1.2 SOC19-1031 (2025–2035) standalone overall employment 27,700→29,200, published net change +1,500/+5.3%, average annual openings 2,100 including replacement. Conservation scientists and foresters combined 19-1030 are 40,900→42,700/published +1,700/+4.3%/3,000 openings; OOH approximately 4 is rounded. Do not mix the scopes or replace published changes with subtraction of rounded endpoints. Overall figures include self-employment and are not AI causation or individual opportunities."
+              "Data/GIS/reports/provisions are editorial candidates for assistance to be tested; actual reliability, adoption and net efficiency have not been obtained. BLS Table 1.2 SOC19-1031 (2025–2035) standalone overall employment 27,700→29,200, published net change +1,500/+5.3%, average annual openings 2,100 including replacement. Conservation scientists and foresters combined 19-1030 are 40,900→42,700/published +1,700/+4.3%/3,000 openings; OOH approximately 4 is rounded. Do not mix the scopes or replace published changes with subtraction of rounded endpoints. Overall figures include self-employment and are not AI causation or individual opportunities. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "conservation-scientists.ai-impact.ai-impact-table.18",
@@ -31288,6 +31291,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/19-1031.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Survey | Conduct Soil and Resource Surveys | Survey soil, water and vegetation, collect terrain and land-use data, and read geographic information data to support judgments. — 0/100; weight=1/3; conservation-scientists.profile.responsibilities-block.1[0]",
+                  "Analysis | Analyze Data to Establish Causes | Organize and analyze survey and monitoring data to establish causes and extent of erosion, degradation or management problems. — 75/100; weight=1/3; conservation-scientists.profile.responsibilities-block.1[1]",
+                  "Design | Develop Conservation Plans and Specifications | Develop soil conservation, vegetation restoration and rangeland improvement plans, calculate design specifications and state applicable conditions. — 50/100; weight=1/3; conservation-scientists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36195,7 +36215,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China Wage Reference",
       "direction-comparison": "Comparison of Occupational Directions",
       "fit": "Occupational Suitability Guide",
@@ -36526,15 +36546,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Conservation Scientist",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of Tasks to AI (Not Scored on This Page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "RIASEC · IRC",
@@ -36585,7 +36617,7 @@
       "text": "Conservation Scientist"
     }
   },
-  "source_content_sha256": "d97a96da2dfe61420345cdcc79b022456e8b93264e3e339fc363a87878d4dd90",
+  "source_content_sha256": "4df13faaf753a66b82c1832de42b5801dd6b7d182f32735bcd329898603ca994",
   "subject": {
     "canonical_slug": "conservation-scientists",
     "name": "Conservation Scientist",

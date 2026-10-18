@@ -29,6 +29,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24404,7 +24407,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, displacement rate or disappearance year for the standalone 13-1199.07 occupation was obtained. Tools can organize threat lists and remediation drafts; on-site evidence, vulnerability judgments, control verification and residual risk acceptance are the responsibility of authorized staff."
+              "Insufficient evidence: no AI adoption rate, displacement rate or disappearance year for the standalone 13-1199.07 occupation was obtained. Tools can organize threat lists and remediation drafts; on-site evidence, vulnerability judgments, control verification and residual risk acceptance are the responsibility of authorized staff. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "security-management-specialists.ai-impact.ai-impact-table.18",
@@ -32233,6 +32236,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/33-1091.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Threat identification | Collect on-site, incident and system evidence. | Output a threat and vulnerability list. — 25/100; weight=1/3; security-management-specialists.profile.responsibilities-block.1[1]",
+                  "Risk analysis | Verify existing controls, impact and uncertainty. | Output a risk ranking. — 50/100; weight=1/3; security-management-specialists.profile.responsibilities-block.1[2]",
+                  "Control design | Propose access control, surveillance, alarm and process countermeasures. | Output options and rationale. — 50/100; weight=1/3; security-management-specialists.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37141,7 +37161,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37421,15 +37441,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Security Management Specialists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Security Management Specialists · O*NET 13-1199.07",
@@ -37480,7 +37512,7 @@
       "text": "Security Management Specialists"
     }
   },
-  "source_content_sha256": "0cf9697f4a068c2e4602187a545cc8c4ef219657e022a7f8cfd8368039b91a70",
+  "source_content_sha256": "fbe924bf46989c86d69d2eacf24dde9aba62ad90b19f105d2c82304660172816",
   "subject": {
     "canonical_slug": "security-management-specialists",
     "name": "Security Management Specialists",

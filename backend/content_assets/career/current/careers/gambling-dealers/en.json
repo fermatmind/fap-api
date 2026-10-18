@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25127,7 +25130,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain quantitative generative AI exposure, adoption rate, efficiency, and employment causality evidence for this occupation. Using synthesized materials to make record and handover drafts may be tried as an editorial mechanism; ordinary scanning and computing equipment is not generative AI. Examples of the six O*NET software categories: Apache Spark business intelligence analysis, Slack cloud sharing, Apache Hadoop database management, Email software email, Microsoft Office office suite, Excel spreadsheets; directory examples are not universal adoption, a programming requirement, or an AI adoption rate."
+              "Insufficient evidence: this round did not obtain quantitative generative AI exposure, adoption rate, efficiency, and employment causality evidence for this occupation. Using synthesized materials to make record and handover drafts may be tried as an editorial mechanism; ordinary scanning and computing equipment is not generative AI. Examples of the six O*NET software categories: Apache Spark business intelligence analysis, Slack cloud sharing, Apache Hadoop database management, Email software email, Microsoft Office office suite, Excel spreadsheets; directory examples are not universal adoption, a programming requirement, or an AI adoption rate. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "gambling-dealers.ai-impact.ai-impact-table.18",
@@ -32621,6 +32624,23 @@
                 "publisher": "Nevada Legislature",
                 "scope": "gaming regulations and registration",
                 "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Check the condition of the cards and equipment and open and control the table according to the rules — 25/100; weight=1/3; gambling-dealers.ai-impact.ai-impact-table.97[0]",
+                  "Dispense cards or dice according to the rules and compare hands to determine the winner — 0/100; weight=1/3; gambling-dealers.ai-impact.ai-impact-table.105[0]",
+                  "Pay winnings or collect losing stakes according to the rules and exchange chips — 50/100; weight=1/3; gambling-dealers.ai-impact.ai-impact-table.109[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37561,7 +37581,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37759,15 +37779,27 @@
         "source_refs": [
           "r2-pay-3"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "25%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Gambling Dealers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Gambling Dealers · tasks, deliverables, and responsibility boundaries",
@@ -37818,7 +37850,7 @@
       "text": "Gambling Dealers"
     }
   },
-  "source_content_sha256": "be38e6eb6052ccb6f1a9eec4d5c5151cb77f8011148b9000652fc54c1d1ec381",
+  "source_content_sha256": "7c4c9d15ab5c291c7d3dcd649523c1cda181c3254f5553629de74fdbb41264ff",
   "subject": {
     "canonical_slug": "gambling-dealers",
     "name": "Gambling Dealers",

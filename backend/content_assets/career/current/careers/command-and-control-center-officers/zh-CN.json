@@ -77,6 +77,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24789,7 +24792,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力、实际采用与岗位結果分开。编辑试用候选：仅在确有合法用途和工具许可的资料上试摘要、格式或清单草稿，核错误、遗漏及复核总耗时；本轮未取得本职业采用率、可靠性、提效或岗位结果实证。 本轮没有各军种持续投资本职业或统一工具部署证据。"
+              "技术能力、实际采用与岗位結果分开。编辑试用候选：仅在确有合法用途和工具许可的资料上试摘要、格式或清单草稿，核错误、遗漏及复核总耗时；本轮未取得本职业采用率、可靠性、提效或岗位结果实证。 本轮没有各军种持续投资本职业或统一工具部署证据。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "command-and-control-center-officers.ai-impact.ai-impact-table.18",
@@ -32782,6 +32785,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/11-9161.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "监视与探测系统运行｜管理监视与探测系统的运行｜使指挥中心能够持续获得可用的态势信息，并把系统可用性与降级状态随信息一并保留（对应 O*NET 官方定义中「管理监视与探测系统的运行」一项职责）。 其中职责对应定义；具体记录、演练、降级通报等为编辑核对建议，非已核统一作业程序。 — 50/100; weight=1/3; command-and-control-center-officers.profile.responsibilities-block.1[1]",
+                  "应急计划制定与实施｜按情景制定并落实应急预案｜把自然灾害与战时灾害等情景的目标、约束、切换条件与责任写成可演练的文本，并在演练后修正（对应 O*NET 官方定义中「制定并实施自然灾害与战时灾害的应急预案」一项职责）。 其中职责对应定义；具体记录、演练、降级通报等为编辑核对建议，非已核统一作业程序。 — 50/100; weight=1/3; command-and-control-center-officers.profile.responsibilities-block.1[2]",
+                  "应急协调｜把不同单位与机构的行动衔接在同一套程序之下｜明确谁在什么条件下通知谁、由谁决策，并保留协调与通报记录（对应 O*NET 官方定义中「协调应急响应团队与机构」一项职责）。 其中职责对应定义；具体记录、演练、降级通报等为编辑核对建议，非已核统一作业程序。 — 25/100; weight=1/3; command-and-control-center-officers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37708,7 +37728,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38250,15 +38270,27 @@
           "cc-officer-onet",
           "cc-officer-bls"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "指挥控制中心军官",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本条路由不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "兴趣代码：O*NET 未采集（军事职业）",
@@ -38309,7 +38341,7 @@
       "text": "指挥控制中心军官"
     }
   },
-  "source_content_sha256": "2b1e1c9fede3b0f0760308946fab874eeafcbdf9d342db26aabf41a9e47d66d5",
+  "source_content_sha256": "65680ca18a935e2043e83fd4d97cdaa1d704925c9b471e7623aae1b188850ec5",
   "subject": {
     "canonical_slug": "command-and-control-center-officers",
     "name": "指挥控制中心军官",

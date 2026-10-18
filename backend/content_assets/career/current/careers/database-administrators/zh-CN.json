@@ -8,6 +8,9 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24357,7 +24360,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑工具候选：SQL/脚本草稿、日志归类和初步指标解释，须在适用环境核输出，未测提效/采用/收入因果。OOH云服务可能限制DBA需求是预测解释，不能写为已经发生的GenAI裁员或人人托管自动调优。美国受访90%每日可控室内、24%超过半时间坐姿、92%每日邮件、71%大部分时间接触他人；16%面对面每周及以上但非每日、70%做决定每周及以上但非每日、22%时间压力每周及以上但非每日。56%决策自由很大不自动赋予数据/上线权限；68%典型40小时/16%超40/15%少于40取整，非中国工时或远程比例。"
+              "编辑工具候选：SQL/脚本草稿、日志归类和初步指标解释，须在适用环境核输出，未测提效/采用/收入因果。OOH云服务可能限制DBA需求是预测解释，不能写为已经发生的GenAI裁员或人人托管自动调优。美国受访90%每日可控室内、24%超过半时间坐姿、92%每日邮件、71%大部分时间接触他人；16%面对面每周及以上但非每日、70%做决定每周及以上但非每日、22%时间压力每周及以上但非每日。56%决策自由很大不自动赋予数据/上线权限；68%典型40小时/16%超40/15%少于40取整，非中国工时或远程比例。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31847,6 +31850,23 @@
                 "publisher": "国家统计局",
                 "scope": "broader proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "库结构与变更｜维护数据库与数据字典｜修改现有数据库与数据库管理系统，或指导程序员与分析人员完成变更；编写逻辑与物理数据库描述并指定标识符，按流程开发数据模型，并修订公司数据字典中的数据定义。 — 75/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "性能与容量｜监测并解决性能问题｜选择并输入代码监测数据库性能并创建生产数据库；识别、调查并解决数据库性能、容量与可扩展性问题；识别、评估并推荐能达到所需性能的硬件或软件技术。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "安全与权限｜实施安全措施并控制访问｜规划、协调并实施安全措施，防止计算机文件中的信息被意外或未经授权地损坏、修改或泄露；为数据库的每个片段指定用户与访问级别；制定软件使用与采购以及保护脆弱信息的标准与指南。 — 50/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37227,7 +37247,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37498,15 +37518,27 @@
         "source_refs": [
           "r5-nbs-it"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "数据库管理员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "数据库设计与变更 · 性能与容量 · 备份恢复与权限控制",
@@ -37557,7 +37589,7 @@
       "text": "数据库管理员"
     }
   },
-  "source_content_sha256": "f55e57ea6f69b118da8f5849b2e8c55c1ad9e9722f6095e776e0d9436f2f5263",
+  "source_content_sha256": "ae348cf86268d1095c11100f2a797c25b4cba7c70cde677f19cd5b4b97665c68",
   "subject": {
     "canonical_slug": "database-administrators",
     "name": "数据库管理员",

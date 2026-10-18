@@ -38,6 +38,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24711,7 +24714,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial tool scenarios: explore literature retrieval, record organization, initial image screening, and statistical/GIS assistance, but verify specific system capabilities, material permissions, and the basis of outputs. Insufficient evidence: this round checked ONET/BLS but obtained no occupation-specific AI adoption rate, task-level comparative effects, causal effects on wages/employment, or disappearance year; task lists, software examples, and employment projections do not prove replacement or permanent irreplaceability. BLS EP19-3091: 10,200 people in 2025 and 10,800 in 2035, growth of 6.0% over 2025–2035, an official net increase of 600 people, 800 annual average job openings, and 8.9% self-employed. Openings include replacement needs and do not equal net new jobs or an individual's chance of being hired; US projections are not extrapolated to China. Specific research example: the PNAS2024 Nasca paper reports discovering 303 new figurative geoglyphs in Peru's Nasca region using AI image screening with 6 months of field surveys. The original includes field confirmation; not all 303 were independently confirmed by AI. The region, image subjects, and research design do not represent occupation-wide adoption, artifact-identification effects, or causal effects on wages or employment."
+              "Editorial tool scenarios: explore literature retrieval, record organization, initial image screening, and statistical/GIS assistance, but verify specific system capabilities, material permissions, and the basis of outputs. Insufficient evidence: this round checked ONET/BLS but obtained no occupation-specific AI adoption rate, task-level comparative effects, causal effects on wages/employment, or disappearance year; task lists, software examples, and employment projections do not prove replacement or permanent irreplaceability. BLS EP19-3091: 10,200 people in 2025 and 10,800 in 2035, growth of 6.0% over 2025–2035, an official net increase of 600 people, 800 annual average job openings, and 8.9% self-employed. Openings include replacement needs and do not equal net new jobs or an individual's chance of being hired; US projections are not extrapolated to China. Specific research example: the PNAS2024 Nasca paper reports discovering 303 new figurative geoglyphs in Peru's Nasca region using AI image screening with 6 months of field surveys. The original includes field confirmation; not all 303 were independently confirmed by AI. The region, image subjects, and research design do not represent occupation-wide adoption, artifact-identification effects, or causal effects on wages or employment. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "anthropologists-and-archeologists.ai-impact.ai-impact-table.18",
@@ -32377,6 +32380,23 @@
                 "publisher": "PNAS/PMC open full-text archive",
                 "scope": "contextual",
                 "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11459208/"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Research design and information collection | Define questions before collecting materials | Formulate and plan research questions, collect information and make judgments through observation, interviews, and document review, identify sites through site reports, existing artifacts, and topographic maps, and study archival collections to explain the origins and development of cultural patterns. — 50/100; weight=1/3; anthropologists-and-archeologists.profile.responsibilities-block.1[0]",
+                  "Field surveys and excavation | Obtain primary information under procedures | Conduct archeological surveys and exploration. Clearing deposits and recovering artifacts and specimens requires specific training, project approval, and organizational procedures; this page does not confer operational ability. Record artifacts' exact locations and condition through drawings and photography (verify specific three-dimensional equipment separately), collect cultural relics, and mark their excavation locations. — 0/100; weight=1/3; anthropologists-and-archeologists.profile.responsibilities-block.1[1]",
+                  "Processing, analysis, dating, and identification | Turn materials into evidence | Clean, restore, and preserve artifacts, describe their materials, dimensions, shape, function, and decoration, collect and analyze artifacts and skeletal remains, compare archeological data across sites, identify and date remains, and interpret their significance. — 75/100; weight=1/3; anthropologists-and-archeologists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37273,7 +37293,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37626,15 +37646,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Anthropologists and Archeologists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Research and fieldwork: research design and field surveys · excavation and materials recording · analysis and publication of outputs",
@@ -37685,7 +37717,7 @@
       "text": "Anthropologists and Archeologists"
     }
   },
-  "source_content_sha256": "c7cff50f7da0780052397fc791c49d19a650a1b0a8137a599c004ae8a0518d14",
+  "source_content_sha256": "426acf800aeecc9ba13b446810809d600b9cf4e0bf0cca85c3486adb218eda18",
   "subject": {
     "canonical_slug": "anthropologists-and-archeologists",
     "name": "Anthropologists and Archeologists",

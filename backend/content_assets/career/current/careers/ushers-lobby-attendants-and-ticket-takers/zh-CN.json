@@ -8,6 +8,9 @@
       "fact:china-tianjin-internship": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -25505,7 +25508,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：先区分票务自动化、生成式文字辅助和现场服务。已有官方材料支持任务结构及特定行业的预测机制，尚不能给出本职业生成式AI采用率或替代比例。未形成可复核的FermatMind任务级评分，hero不填AI分数。"
+              "证据不足：先区分票务自动化、生成式文字辅助和现场服务。已有官方材料支持任务结构及特定行业的预测机制，尚不能给出本职业生成式AI采用率或替代比例。未形成可复核的FermatMind任务级评分，hero不填AI分数。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "ushers-lobby-attendants-and-ticket-takers.display.ai_impact_table.answer",
@@ -32894,6 +32897,23 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "入场｜检查并核验票证｜按授权核对票面日期、场次和区域，执行扫码或人工检查，分流需要票务复核的异常。 — 75/100; weight=1/3; ushers-lobby-attendants-and-ticket-takers.display.responsibilities_block.02[0]",
+                  "引座｜帮助观众找到座位｜确认厅区、排号与座号，说明可用路线；需要特殊协助时先询问并联系对应服务人员。 — 0/100; weight=1/3; ushers-lobby-attendants-and-ticket-takers.display.responsibilities_block.03[0]",
+                  "现场｜观察并报告秩序异常｜发现座位争议、通道障碍或风险时说明位置和情况，按既定流程联系主管或安保。 — 25/100; weight=1/3; ushers-lobby-attendants-and-ticket-takers.display.responsibilities_block.05[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -38171,7 +38191,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38333,15 +38353,27 @@
         "source_refs": [
           "employer"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "引座员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET-SOC 39-3031.00 精确职业口径",
@@ -38392,7 +38424,7 @@
       "text": "引座员"
     }
   },
-  "source_content_sha256": "63af8761b742e8bf05e5664f6e7d3b5feb9ef2748a18c342bf247c100d28a822",
+  "source_content_sha256": "5d572b80064cc1f6bd4fa743251a802559341a88fd73f2bca6d5a210ceb2f53d",
   "subject": {
     "canonical_slug": "ushers-lobby-attendants-and-ticket-takers",
     "name": "引座员",

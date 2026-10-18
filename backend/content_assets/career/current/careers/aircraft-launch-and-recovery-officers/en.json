@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24563,7 +24566,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task analysis: document retrieval, the summarising of inspection records and the collation of test data are discussable assistance scenarios; this cannot establish that the armed forces have adopted them or that they necessarily reduce errors. Insufficient evidence: no AI adoption rate, effect measurement or establishment causal study for this occupation was obtained. The O*NET occupational tasks support the task objects, not a substitution probability; the human-machine division of work and the decision authority in a specific post must be checked against the formal rules."
+              "Editorial task analysis: document retrieval, the summarising of inspection records and the collation of test data are discussable assistance scenarios; this cannot establish that the armed forces have adopted them or that they necessarily reduce errors. Insufficient evidence: no AI adoption rate, effect measurement or establishment causal study for this occupation was obtained. The O*NET occupational tasks support the task objects, not a substitution probability; the human-machine division of work and the decision authority in a specific post must be checked against the formal rules. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "aircraft-launch-and-recovery-officers.ai-impact.ai-impact-table.18",
@@ -32281,6 +32284,23 @@
                 "publisher": "FermatMind; the link is O*NET task background",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/55-1012.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Readiness and safety supervision｜Arresting and catapult equipment｜Supervise the readiness state and safety condition of arresting gear, catapult equipment, barriers and visual landing-aid systems. — 25/100; weight=1/3; aircraft-launch-and-recovery-officers.profile.responsibilities-block.1[0]",
+                  "System planning and testing｜Design and development coordination｜Plan and coordinate the design, development and testing of launch and recovery systems, evaluate design proposals and give technical advice. — 50/100; weight=1/3; aircraft-launch-and-recovery-officers.profile.responsibilities-block.1[2]",
+                  "Specifications and technical documentation｜Installation and operation｜Prepare installation specifications for catapults and arresting gear, and prepare operating technical documentation and instructions for landing-aid equipment. — 75/100; weight=1/3; aircraft-launch-and-recovery-officers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37178,7 +37198,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -37566,15 +37586,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Aircraft launch and recovery officers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Military occupation (officer): launch and arrest systems · readiness and safety supervision · specifications and training",
@@ -37625,7 +37657,7 @@
       "text": "Aircraft launch and recovery officers (military occupation · officer): tasks, readiness and the data boundary"
     }
   },
-  "source_content_sha256": "f6df72573f6828034d08fcddd6e35f5d06f8e2697d75f85be5592859c0eac4c5",
+  "source_content_sha256": "4594f863541931322fdb1447b0f9b63c14f0f00ef7f803acc4186c9db21e05a6",
   "subject": {
     "canonical_slug": "aircraft-launch-and-recovery-officers",
     "name": "Aircraft launch and recovery officers",

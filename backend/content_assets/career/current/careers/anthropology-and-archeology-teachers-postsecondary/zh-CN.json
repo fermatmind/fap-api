@@ -38,6 +38,9 @@
       "fact:employment-setting": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24754,7 +24757,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "UNESCO2023教育与研究生成式AI指南的官方介绍页讨论以人为中心的验证、数据隐私及课程/教学/研究设计。这里仅用作宽口径背景，不是本职业采用率、教学效果实验、岗位替代或中国法定授权。 编辑工具情景仍须按实际课程、研究任务、系统能力与信息权限核输出；本轮未取得本职业采用率、任务比较效果、工资/就业因果或消失年份。"
+              "UNESCO2023教育与研究生成式AI指南的官方介绍页讨论以人为中心的验证、数据隐私及课程/教学/研究设计。这里仅用作宽口径背景，不是本职业采用率、教学效果实验、岗位替代或中国法定授权。 编辑工具情景仍须按实际课程、研究任务、系统能力与信息权限核输出；本轮未取得本职业采用率、任务比较效果、工资/就业因果或消失年份。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "anthropology-and-archeology-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -32483,6 +32486,23 @@
                 "publisher": "UNESCO",
                 "scope": "contextual",
                 "url": "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "教学与课程建设｜把学科讲清楚｜为本科生与研究生准备并讲授人类学与考古学课程，准备教学大纲与作业与讲义，发起与引导课堂讨论，规划与评估与修订课程内容与教学方法。 — 50/100; weight=1/3; anthropology-and-archeology-teachers-postsecondary.profile.responsibilities-block.1[0]",
+                  "指导学生｜指导学生的学术训练，不保证学习结果｜维持固定答疑时间辅导学生，指导学位论文与实习与研究，指导学生的实验与田野工作，为学生的学业与职业发展提供建议并撰写推荐信。 — 25/100; weight=1/3; anthropology-and-archeology-teachers-postsecondary.profile.responsibilities-block.1[2]",
+                  "科研与发表｜持续产出可复核成果｜在本领域开展研究并开展民族志田野研究，在专业期刊与专著与电子媒体或学术会议发表与展示成果，为学术期刊与专著审稿。 — 50/100; weight=1/3; anthropology-and-archeology-teachers-postsecondary.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37381,7 +37401,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37777,15 +37797,27 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "高校人类学和考古学教师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "教学与科研：课程设计与讲授 · 论文与实验与田野指导 · 科研发表与经费申请",
@@ -37836,7 +37868,7 @@
       "text": "高校人类学和考古学教师"
     }
   },
-  "source_content_sha256": "628e563263bd99751b93e88ea28be24c6584d0a8c34e2fc30766f2013b4328b9",
+  "source_content_sha256": "3a27f654809a731ab7403caac8388654270a99cef0f665cafbb8128463829d38",
   "subject": {
     "canonical_slug": "anthropology-and-archeology-teachers-postsecondary",
     "name": "高校人类学和考古学教师",

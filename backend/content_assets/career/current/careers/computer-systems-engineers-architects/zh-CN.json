@@ -29,6 +29,9 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24554,7 +24557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需求、配置、文档、用例及日志为编辑待测辅助候选，实际可靠性、采用与净效率未取得。BLS表1.2 SOC15-1299其他计算机类（2025—2035）总体就业471,200→495,300，公布净变化+24,200/+5.1%、年均空缺27,000含替补；舍入端点相减不替代公布净变化。均为父类背景非15-1299.08独立就业、个人机会或AI因果。"
+              "需求、配置、文档、用例及日志为编辑待测辅助候选，实际可靠性、采用与净效率未取得。BLS表1.2 SOC15-1299其他计算机类（2025—2035）总体就业471,200→495,300，公布净变化+24,200/+5.1%、年均空缺27,000含替补；舍入端点相减不替代公布净变化。均为父类背景非15-1299.08独立就业、个人机会或AI因果。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "computer-systems-engineers-architects.ai-impact.ai-impact-table.18",
@@ -31281,6 +31284,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localcert/15-1299.08"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "需求｜沟通并确认系统需求｜与员工或客户沟通，确认系统要满足的功能、数据与接口要求，并把需求写成可核对的清单。 — 50/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[0]",
+                  "设计｜设计系统与集成架构｜设计系统工程、系统集成或分布式系统架构，定义功能标准与接口，并确保组件兼容。 — 75/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[2]",
+                  "验证｜验证稳定性与安全扩展性｜通过测试与模型验证稳定性、互操作性、可移植性、安全性与可扩展性，记录结果与适用范围。 — 75/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36188,7 +36208,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36519,15 +36539,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "67%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "工程师计算机",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · 未公布",
@@ -36578,7 +36610,7 @@
       "text": "计算机系统工程师与架构师"
     }
   },
-  "source_content_sha256": "0de83e4e5f84006586dc570d0b787ff23c664e78786ffd3c9140a938f560307a",
+  "source_content_sha256": "962d75c50b2715636d8882bdf99d2470442aa9e39e2596783dcbc5d466aaf574",
   "subject": {
     "canonical_slug": "computer-systems-engineers-architects",
     "name": "计算机系统工程师与架构师",

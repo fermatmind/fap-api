@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24796,7 +24799,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "摄影的选片、编辑或资料整理可作为辅助工具试用环节；现场拍摄、需求沟通与权利判断仍需人员负责。BLS预计部分图库照片受生成图像影响，但没有给出摄影师个人被替代概率或AI导致净减就业的份额。"
+              "摄影的选片、编辑或资料整理可作为辅助工具试用环节；现场拍摄、需求沟通与权利判断仍需人员负责。BLS预计部分图库照片受生成图像影响，但没有给出摄影师个人被替代概率或AI导致净减就业的份额。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "photographers.ai-impact.ai-impact-table.18",
@@ -33053,6 +33056,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3031.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "任务执行｜拍摄人物、风景、商品或其他对象，设计光线与构图，并使用编辑软件交付图像或照片｜按岗位范围和制度。 — 50/100; weight=1/3; photographers.profile.responsibilities-block.1[1]",
+                  "质量复核｜核可追溯原片、选片、修图版本和按用途交付的图像与原始资料是否一致｜保留差异。 — 75/100; weight=1/3; photographers.profile.responsibilities-block.1[2]",
+                  "沟通协作｜与客户、被摄者、造型、编辑和制作团队沟通｜写明待回复事项。 — 25/100; weight=1/3; photographers.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37959,7 +37979,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38231,15 +38251,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "摄影师",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "构图·光线·交付",
@@ -38290,7 +38322,7 @@
       "text": "摄影师"
     }
   },
-  "source_content_sha256": "2f4ba3dff559c1493b8c5954d31225baaf00688a0777d6eb50ddca9d0ce8bbaa",
+  "source_content_sha256": "eaa3fb9185f04a2da8606871f397723ea6ac10d072b8d929b535068c9a9b2d9a",
   "subject": {
     "canonical_slug": "photographers",
     "name": "摄影师",

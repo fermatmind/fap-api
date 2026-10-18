@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25115,7 +25118,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the exact generative AI exposure level, actual adoption rate, job replacement probability, or wage causal effect for the two SOC components was not obtained. Unit conversion, statistics, charts, and report drafts can be trialed in an authorized environment and reviewed against the original sample records, methods, calculations, and quality conditions; a software mention is not AI exposure."
+              "Insufficient evidence: the exact generative AI exposure level, actual adoption rate, job replacement probability, or wage causal effect for the two SOC components was not obtained. Unit conversion, statistics, charts, and report drafts can be trialed in an authorized environment and reviewed against the original sample records, methods, calculations, and quality conditions; a software mention is not AI exposure. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "geological-and-petroleum-technicians.ai-impact.ai-impact-table.18",
@@ -32621,6 +32624,23 @@
                 "publisher": "O*NET / U.S. Department of Labor ETA",
                 "scope": "19-4043.00 exact occupation",
                 "url": "https://www.onetonline.org/link/industry/19-4043.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Field sampling and measurement — 0/100; weight=1/3; geological-and-petroleum-technicians.ai-impact.ai-impact-table.103[0]",
+                  "Sample preparation and testing — 25/100; weight=1/3; geological-and-petroleum-technicians.ai-impact.ai-impact-table.107[0]",
+                  "Data entry and quality validation — 75/100; weight=1/3; geological-and-petroleum-technicians.ai-impact.ai-impact-table.111[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37557,7 +37577,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37712,15 +37732,27 @@
           "oews",
           "arxiv"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Geological and Hydrologic Technicians",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Geological and Hydrologic Technicians · tasks, deliverables, and responsibility boundaries",
@@ -37771,7 +37803,7 @@
       "text": "Geological and Hydrologic Technicians"
     }
   },
-  "source_content_sha256": "0883c8c971467a78e86f75a79250fd51e4db7dee124d34955e52255c40b9ff96",
+  "source_content_sha256": "6ef362f3b2089f7f0de9eb2e58143332a1eed3540133b6e3e1c4cb53065bb7c3",
   "subject": {
     "canonical_slug": "geological-and-petroleum-technicians",
     "name": "Geological and Hydrologic Technicians",

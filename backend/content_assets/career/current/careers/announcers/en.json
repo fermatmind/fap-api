@@ -38,6 +38,9 @@
       "fact:entry-boundary": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -24734,7 +24737,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain this occupation’s AI adoption rate, causal effects on wages/employment, or year of disappearance. The checked BLS OOH lists institutional consolidation and the possibility of some stations not using live DJs or using AI DJs as explanations for the outlook; this is not measured adoption, complete replacement, or proof of wage causation. Distinguish technical capability, deployment, institutional responsibilities, and employment outcomes; make no judgment of permanent irreplaceability. BLS EP27-3011 projects a decline of 7.6% over 2025–2035, an official net decrease of 1700 people, and 2000 annual openings; do not attribute all of it to AI."
+              "Insufficient evidence: this round did not obtain this occupation’s AI adoption rate, causal effects on wages/employment, or year of disappearance. The checked BLS OOH lists institutional consolidation and the possibility of some stations not using live DJs or using AI DJs as explanations for the outlook; this is not measured adoption, complete replacement, or proof of wage causation. Distinguish technical capability, deployment, institutional responsibilities, and employment outcomes; make no judgment of permanent irreplaceability. BLS EP27-3011 projects a decline of 7.6% over 2025–2035, an official net decrease of 1700 people, and 2000 annual openings; do not attribute all of it to AI. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.18",
@@ -32568,6 +32571,23 @@
                 "publisher": "Ministry of Education",
                 "scope": "contextual",
                 "url": "https://www.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_zk/zk_xwcbdl/xwcbdl_gbysl/202502/P020250207549510438568.pdf"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Content preparation and sequencing | Decide the content before going on mic | Research background materials to prepare programs and interviews, write and edit scripts and video scripts, select program content with producers based on program positioning and audience tastes, develop storylines, and maintain the music library. — 75/100; weight=1/3; announcers.profile.responsibilities-block.1[0]",
+                  "On-air presentation and links | Deliver consistently and control duration | Read news bulletins, identify the station and open or close programs (improvising or using memorized material and scripts), announce and comment on music, weather, and traffic, send network cue signals, and control segment lengths according to time slots. — 75/100; weight=1/3; announcers.profile.responsibilities-block.1[1]",
+                  "Interviews and conversations | Present guests clearly | Interview guests about their experiences, work, or current affairs, find and confirm guests, host panel discussions and talk programs, and communicate with listeners or viewers by telephone when necessary. — 25/100; weight=1/3; announcers.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37466,7 +37486,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland Chinese salary references",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37849,15 +37869,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "58%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Broadcast Announcers and Radio DJs",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "Exposure of tasks to AI (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "On-air presentation: script preparation and checking · Live or recorded presentation and on-the-spot responses · Program links and guest interviews",
@@ -37908,7 +37940,7 @@
       "text": "Broadcast Announcers and Radio DJs"
     }
   },
-  "source_content_sha256": "c10eb087febf0f61af6e14a408699fa612010c9064b55e0323d1de9c87a38a2e",
+  "source_content_sha256": "c2c9fd19cbaba2c0d0b69fbf93651d1e00c798f899fd3d12d9b4105c54c60fbf",
   "subject": {
     "canonical_slug": "announcers",
     "name": "Broadcast Announcers and Radio DJs",

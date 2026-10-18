@@ -14,6 +14,9 @@
       "fact:employment-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -24314,7 +24317,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial judgment: the assistive uses of document and declaration matching, material search, duty and tax rule computation and record drafting can be assessed, requiring practical testing of accuracy, bias, permissions and confidentiality conditions; this page has no evidence of deployment results. The general work automation level reported by O*NET respondents is 50% high, 25% moderate and 11% slight, which is not a generative AI adoption rate. Responsibility for qualification judgments, coercive handling, and case and tax disputes is verified against the jurisdiction, agency and position authorization. Insufficient evidence: no causal data on AI's effect on headcount or wages for this subcategory was obtained."
+              "Editorial judgment: the assistive uses of document and declaration matching, material search, duty and tax rule computation and record drafting can be assessed, requiring practical testing of accuracy, bias, permissions and confidentiality conditions; this page has no evidence of deployment results. The general work automation level reported by O*NET respondents is 50% high, 25% moderate and 11% slight, which is not a generative AI adoption rate. Responsibility for qualification judgments, coercive handling, and case and tax disputes is verified against the jurisdiction, agency and position authorization. Insufficient evidence: no causal data on AI's effect on headcount or wages for this subcategory was obtained. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -31774,6 +31777,23 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "occupation_group",
                 "url": "https://www.bls.gov/ooh/protective-service/police-and-detectives.htm"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inspection and interviews | Verify personal documents and eligibility | Examine immigration applications, visas and passports and conduct interviews to determine eligibility for entry, stay and travel, and arrange follow-up legal action according to law when violations are found. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
+                  "Goods and baggage | Inspect for compliance and take samples | Inspect inbound or outbound goods, baggage and personal effects for compliance with tax law and customs rules, draw product samples for testing and determine the duties and taxes owed. — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "Detection and seizure | Locate and seize contraband | Locate and seize contraband, undeclared merchandise and the vehicles, aircraft or vessels concealing them, and detain people who violate customs or immigration law. — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37261,7 +37281,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparing occupational directions",
       "fit": "Occupational fit guide",
@@ -37457,15 +37477,27 @@
         "source_refs": [
           "nbs-wage-2025"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Customs and Border Protection Officers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Port enforcement · Inspection and investigation · Immigration and customs",
@@ -37516,7 +37548,7 @@
       "text": "Customs and Border Protection Officers"
     }
   },
-  "source_content_sha256": "5698adbaef84572e56adf8e1ebf425d73a54f32f0e00a515d2be236fac58e8b9",
+  "source_content_sha256": "c7f84ff89a2ee9c33e6f1098f2e56d345c6960973ccb538ee086f556a378f8a6",
   "subject": {
     "canonical_slug": "customs-and-border-protection-officers",
     "name": "Customs and Border Protection Officers",

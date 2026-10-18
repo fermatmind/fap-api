@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24772,7 +24775,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "生成式AI可辅助背景线索、转录索引、结构与脚本草稿；原件、来源、引语及现场素材仍需核实，不补造采访事实。证据不足：中国大陆与美国27-3023新闻分析师、记者与新闻工作者独立AI采用率、替代率及工资就业因果效果未核得；跨职业研究不能外推。"
+              "生成式AI可辅助背景线索、转录索引、结构与脚本草稿；原件、来源、引语及现场素材仍需核实，不补造采访事实。证据不足：中国大陆与美国27-3023新闻分析师、记者与新闻工作者独立AI采用率、替代率及工资就业因果效果未核得；跨职业研究不能外推。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "reporters-correspondents-and-broadcast-news-analysts.ai-impact.ai-impact-table.18",
@@ -32842,6 +32845,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/15-2051.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "选题与背景｜辨公共价值和信息缺口。｜列资料、采访问题和核查计划。 — 50/100; weight=1/3; reporters-correspondents-and-broadcast-news-analysts.profile.responsibilities-block.1[0]",
+                  "采访与调查｜按职责取得记录和公开材料。｜核来源身份、时间与语境。 — 25/100; weight=1/3; reporters-correspondents-and-broadcast-news-analysts.profile.responsibilities-block.1[1]",
+                  "写作与视听｜组织稿件、评论或脚本，拍摄影像并可承担播报。｜事实、归因和评论分开，核素材语境。 — 75/100; weight=1/3; reporters-correspondents-and-broadcast-news-analysts.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37750,7 +37770,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38018,15 +38038,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "新闻分析师、记者与新闻工作者",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "采访 · 调查 · 事实核查",
@@ -38077,7 +38109,7 @@
       "text": "新闻分析师、记者与新闻工作者：采访、核查与入行路径"
     }
   },
-  "source_content_sha256": "b49321821899fbfa21fd4a366a33cb074750d36bb52f4f171b094cc7e899d821",
+  "source_content_sha256": "316b1c3943682d99b79c0ccc66db32922b5b4065af663f7fd5af3b206ed9a860",
   "subject": {
     "canonical_slug": "reporters-correspondents-and-broadcast-news-analysts",
     "name": "新闻分析师、记者与新闻工作者",

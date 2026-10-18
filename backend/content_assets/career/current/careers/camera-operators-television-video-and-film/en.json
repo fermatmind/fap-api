@@ -53,6 +53,9 @@
       "fact:current-us-industry-3": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24571,7 +24574,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "It cannot be confirmed that only recording has changed: the BLS clearly notes that studio robotic cameras are common and one person can control multiple cameras; role merging, robotic cameras, and amateur material may hold down camera operator growth. This cannot be attributed to generative AI or guarantee that there will be no overall replacement; this round has no measured AI adoption, benefit, or replacement rate for this occupation."
+              "It cannot be confirmed that only recording has changed: the BLS clearly notes that studio robotic cameras are common and one person can control multiple cameras; role merging, robotic cameras, and amateur material may hold down camera operator growth. This cannot be attributed to generative AI or guarantee that there will be no overall replacement; this round has no measured AI adoption, benefit, or replacement rate for this occupation. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "camera-operators-television-video-and-film.ai-impact.ai-impact-table.18",
@@ -32252,6 +32255,23 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/27-4031.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Storyboard execution | read the storyboard and work order, confirm the shot intent, camera positions, and movement plan with the director and director of photography, and produce an executable shot list | shot list and shot plan confirmation records. — 50/100; weight=1/3; camera-operators-television-video-and-film.profile.responsibilities-block.1[0]",
+                  "On-set shooting execution | shoot to composition and movement requirements, adjust focus, exposure, and lighting, operate zoom and camera movement to keep the image steady, and confirm technical standards by playback | continuity and material number records. — 25/100; weight=1/3; camera-operators-television-video-and-film.profile.responsibilities-block.1[2]",
+                  "Editorial material management suggestion | after reviewing and checking the numbering, back up, verify, and hand over per project rules, without assuming a uniform dual-backup system | records of the specific number of copies and retention checked. — 75/100; weight=1/3; camera-operators-television-video-and-film.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37159,7 +37179,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37588,15 +37608,27 @@
         "source_refs": [
           "ooh-current"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Camera Operators",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (this page does not score it)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "O*NET 27-4031.00 · shooting and on-set execution / equipment and image technology / material and technical handover",
@@ -37647,7 +37679,7 @@
       "text": "Camera Operators"
     }
   },
-  "source_content_sha256": "1e8a51eb3af497c5185fcde828e1eff3785ce5bde396c2f0612666659e488cd0",
+  "source_content_sha256": "a433f399cffefedf5c2daf4de1ae9645c61d796155400191e0922ae796f9a21e",
   "subject": {
     "canonical_slug": "camera-operators-television-video-and-film",
     "name": "Camera Operators",

@@ -8,6 +8,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -25469,7 +25472,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务分析｜可在许可非患者材料上试验记录、排程和沟通草稿，核原始观察。无本职业采用效率与替代因果，不排序影响先后。美国31-1121.00受持照护理人员指导的任务描述不授中国权限。中国医疗护理员属辅助服务，不属卫生专业技术人员，不得从事医疗护理专业技术性工作；机构安排或培训不能授其给药、伤口治疗等专业权限。护士执业须注册，居家岗位须核实际服务和法定身份。"
+              "编辑任务分析｜可在许可非患者材料上试验记录、排程和沟通草稿，核原始观察。无本职业采用效率与替代因果，不排序影响先后。美国31-1121.00受持照护理人员指导的任务描述不授中国权限。中国医疗护理员属辅助服务，不属卫生专业技术人员，不得从事医疗护理专业技术性工作；机构安排或培训不能授其给药、伤口治疗等专业权限。护士执业须注册，居家岗位须核实际服务和法定身份。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.18",
@@ -32969,6 +32972,23 @@
                 "publisher": "BLS",
                 "scope": "具体文档用途限定",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "日常照护与个人护理 — 0/100; weight=1/3; home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.95[0]",
+                  "健康状态观察 — 25/100; weight=1/3; home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.99[0]",
+                  "记录与交班 — 75/100; weight=1/3; home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.119[0]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37933,7 +37953,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38057,15 +38077,27 @@
         "source_refs": [
           "nbs"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "居家健康助理",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "居家健康助理 · 任务、交付与责任边界",
@@ -38116,7 +38148,7 @@
       "text": "居家健康助理"
     }
   },
-  "source_content_sha256": "ddaa462f7043d660261649177a076ff7faa6878f2112b78bdcab35098370c52c",
+  "source_content_sha256": "0fcd27c2cb35e906df29ed05e20cf098984036a24892a2ed0ec810ccba0b6a96",
   "subject": {
     "canonical_slug": "home-health-aides-and-personal-care-aides",
     "name": "居家健康助理",

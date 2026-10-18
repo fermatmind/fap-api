@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:ia-cn-all-wage": {
         "status": "pending_mapping"
       },
@@ -7545,7 +7548,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Image recognition and generative tools can assist with organizing photos, identifying possible damage, finding parts, and drafting reports. However, accident causation, hidden damage, repair feasibility, policy liability, and final authorization still require auditable evidence and human review; AI output must not directly become an unauthorized settlement conclusion. Task exposure does not mean whole-job automation or widespread adoption; this page provides no replacement probability or timetable."
+              "Direct answer | Image recognition and generative tools can assist with organizing photos, identifying possible damage, finding parts, and drafting reports. However, accident causation, hidden damage, repair feasibility, policy liability, and final authorization still require auditable evidence and human review; AI output must not directly become an unauthorized settlement conclusion. Task exposure does not mean whole-job automation or widespread adoption; this page provides no replacement probability or timetable. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "insurance-appraisers-auto-damage.ai-impact.ai-impact-table.2",
@@ -8708,6 +8711,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/13-1032.00"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Inspect and document vehicle damage — 25/100; weight=1/3; insurance-appraisers-auto-damage.profile.responsibilities-block.4[0]",
+                  "Estimate repairs using labor and parts data — 75/100; weight=1/3; insurance-appraisers-auto-damage.profile.responsibilities-block.4[0]",
+                  "Clarify repair differences and prepare reports — 50/100; weight=1/3; insurance-appraisers-auto-damage.profile.responsibilities-block.4[0]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -11134,7 +11154,7 @@
     ],
     "path": "/en/career/jobs/insurance-appraisers-auto-damage",
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Comparison with neighboring occupations",
       "fit": "Fit signals",
@@ -11222,15 +11242,27 @@
         "source_refs": [
           "ia-updates"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Insurance Appraisers",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Insurance Appraisers · Damage Evidence, Appraisal, and Responsibility Boundaries",
@@ -11281,7 +11313,7 @@
       "text": "Evaluating Insurance Appraisal as a Career: Work, Entry, and Risk Boundaries"
     }
   },
-  "source_content_sha256": "093a59bf6faeb5eaedf6f4e1ec34e1853524b89beaf46156e2a262958505b76b",
+  "source_content_sha256": "5548682b22f51d6782ef4337ccb8ab32481d0a50099ba17cda3b5915575fe8b9",
   "subject": {
     "canonical_slug": "insurance-appraisers-auto-damage",
     "name": "Insurance Appraisers",

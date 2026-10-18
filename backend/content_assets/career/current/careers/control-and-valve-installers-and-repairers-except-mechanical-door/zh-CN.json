@@ -29,6 +29,9 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24787,7 +24790,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "信息处理工具为编辑候选，采用、可靠性、净效率与替代程度未取得。BLS表1.2本职业49-9012：2025—2035就业50,400→52,600人，公布净增2,200人、增长4.3%，年均空缺3,600含替换（原表千人单位）；就业规模、净增与空缺分开，不推招聘或AI因果。"
+              "信息处理工具为编辑候选，采用、可靠性、净效率与替代程度未取得。BLS表1.2本职业49-9012：2025—2035就业50,400→52,600人，公布净增2,200人、增长4.3%，年均空缺3,600含替换（原表千人单位）；就业规模、净增与空缺分开，不推招聘或AI因果。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "control-and-valve-installers-and-repairers-except-mechanical-door.ai-impact.ai-impact-table.18",
@@ -31586,6 +31589,23 @@
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/202501/P020250116506795831658.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "补充任务（不覆盖全部岗位）｜检测｜检验与测试设备功能｜检查阀门与机械控制装置部件的缺陷、凹陷与松动，用测试设备检验电表、继电器与电源，测试阀门与调压器的泄漏与温度压力设定准确性。 — 25/100; weight=1/3; control-and-valve-installers-and-repairers-except-mechanical-door.profile.responsibilities-block.1[1]",
+                  "核心拆修与润滑｜维修机械控制装置或阀门、润滑运动表面为Core；换具体部件另属Supplemental。美国1910.147限其覆盖的设备维护危险能量；排除电力公用事业独占控制的发输配及相关计量设施、建筑等，用电电危害另按subpartS。适用检修由authorized employee按能量程序控制并验证；不统一所有法域任务“上锁并挂牌”。 — 0/100; weight=1/3; control-and-valve-installers-and-repairers-except-mechanical-door.profile.responsibilities-block.1[3]",
+                  "记录｜维护记录为Core，抄表与安装数据为Supplemental；按实际任务记测试、材料与维修，不能当所有岗位办理结算。 — 75/100; weight=1/3; control-and-valve-installers-and-repairers-except-mechanical-door.profile.responsibilities-block.1[4]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -36493,7 +36513,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36825,15 +36845,27 @@
         "source_refs": [
           "bls-projections"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "33%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "控制与阀门安装维修工（非机械门类）",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RC",
@@ -36884,7 +36916,7 @@
       "text": "控制与阀门安装维修工（非机械门类）"
     }
   },
-  "source_content_sha256": "1b8e76aed575df248cfcd2a7f546701c606ab7457b7e620480f02859d7ecb99c",
+  "source_content_sha256": "4212c47b3600537d9a3a10747f6d10450103d41d8594d94c46c5be90002ccf47",
   "subject": {
     "canonical_slug": "control-and-valve-installers-and-repairers-except-mechanical-door",
     "name": "控制与阀门安装维修工（非机械门类）",

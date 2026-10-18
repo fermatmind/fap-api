@@ -32,6 +32,9 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24403,7 +24406,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: trial the organising of literature, records, code and image candidates on fictional data; this page obtained no adoption rate, hours saved or substitution effect for this occupation. Technical capability, organisational adoption, number of positions and authorisation responsibility are checked separately."
+              "Editorial suggestion: trial the organising of literature, records, code and image candidates on fictional data; this page obtained no adoption rate, hours saved or substitution effect for this occupation. Technical capability, organisational adoption, number of positions and authorisation responsibility are checked separately. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "agricultural-and-food-scientists.ai-impact.ai-impact-table.18",
@@ -32605,6 +32608,23 @@
                 "publisher": "Official body",
                 "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_6bff4ef87291497fa72949e1fc88efb5.html"
+              },
+              {
+                "details": [
+                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
+                  "Research design｜Define the question and hypothesis｜Turn a production or quality problem into a testable hypothesis, specifying the target population, control, replicates, metrics and exclusion conditions. — 50/100; weight=1/3; agricultural-and-food-scientists.profile.responsibilities-block.1[0]",
+                  "Execution and analysis｜Sampling and testing｜Sample by standard methods and record conditions, compare treatment with control using statistical models, and keep raw data, scripts and versions. — 50/100; weight=1/3; agricultural-and-food-scientists.profile.responsibilities-block.1[1]",
+                  "Result interpretation｜Verification and boundaries｜Verify conclusions with independent data, state the applicable breed, region, process and time range, and separate correlation from causation. — 50/100; weight=1/3; agricultural-and-food-scientists.profile.responsibilities-block.1[2]"
+                ],
+                "evidence_type": "Editorial model estimation method",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "name": "FermatMind AI Impact Score estimation method v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "Three representative core tasks of this occupation",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37529,7 +37549,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI impact",
+      "ai-impact": "AI Impact Score",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -37930,15 +37950,27 @@
         "source_refs": [
           "bls"
         ]
+      },
+      {
+        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "50%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "Not region-specific; depends on organizational context",
+        "measure": "AI Impact Score (editorial estimate)",
+        "occupation_scope": "Agricultural and food scientists",
+        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI task exposure (not scored on this page)"
+      "label": "AI Impact Score"
     },
     "badges": [
       "Tasks: experimental design · sampling and testing · result interpretation",
@@ -37989,7 +38021,7 @@
       "text": "Agricultural and food scientists: occupational content, pay and employment prospects"
     }
   },
-  "source_content_sha256": "177272cd91959debab446fde40878d66db3cb878233402550e0d147003a641c5",
+  "source_content_sha256": "ce18a79ee08cba425c516ef518800f6fdfde3e64cebdbcf1a06864bbbe8eb550",
   "subject": {
     "canonical_slug": "agricultural-and-food-scientists",
     "name": "Agricultural and food scientists",

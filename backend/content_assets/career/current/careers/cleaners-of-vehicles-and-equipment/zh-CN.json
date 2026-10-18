@@ -68,6 +68,9 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -25087,7 +25090,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "已取得任务、软件类别与招聘关键词，未取得本职业提速试验或机构自动化采用趋势。BLS将清洁工需求与汽车修理维护服务需求相联系；不把其他搬运子职业自动化判断套本职业，更不把机械化统称生成式AI。"
+              "已取得任务、软件类别与招聘关键词，未取得本职业提速试验或机构自动化采用趋势。BLS将清洁工需求与汽车修理维护服务需求相联系；不把其他搬运子职业自动化判断套本职业，更不把机械化统称生成式AI。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "cleaners-of-vehicles-and-equipment.ai-impact.ai-impact-table.18",
@@ -32511,6 +32514,23 @@
                 "publisher": "NIST",
                 "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "清洗作业｜按标准清洗车辆与机械与设备｜冲洗并把物件放上晾干架或用布与刮水器与空气压缩机吹干表面；用刮刀与刷子与清洁剂与消毒剂与酸与磨料与吸尘器与软管擦洗与刮除与喷射机械零件与设备与车辆；把物件预浸或冲洗（对应 O*NET 任务第一与第五与第九项）。 — 0/100; weight=1/3; cleaners-of-vehicles-and-equipment.profile.responsibilities-block.1[0]",
+                  "设备操作与调节｜操作清洗设备并调节压力与流量｜按按钮启动清洗设备；转动阀门或手柄以调节喷枪喷嘴的水与空气与蒸汽与磨料压力或流量；连接软管或管线到泵或其他设备；转动阀门或断开软管以排出机械或罐体中的水与清洗液与蒸汽（对应 O*NET 任务第十四与第十一与第十五与第十项）。 — 25/100; weight=1/3; cleaners-of-vehicles-and-equipment.profile.responsibilities-block.1[2]",
+                  "检查与合规｜检查清洁度与损坏与合规性｜检查零件与设备与车辆是否清洁与损坏以及是否符合标准或法规；监测清洗机运行并在故障时停机或通知主管（对应 O*NET 任务第六与第十三项）。 — 25/100; weight=1/3; cleaners-of-vehicles-and-equipment.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37419,7 +37439,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37904,15 +37924,27 @@
         "source_refs": [
           "clean-wage-current"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "17%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "清洁工设备",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "RIASEC · RC",
@@ -37963,7 +37995,7 @@
       "text": "车辆与设备清洁工"
     }
   },
-  "source_content_sha256": "c8a93ba3f5b224c73982303d8a516f4af71577cbc6fc8bcf52dfeadbbf7b5229",
+  "source_content_sha256": "70be230b34138a1dab896dde6083cb52001b08c32809437b08d92d9de0eeea3a",
   "subject": {
     "canonical_slug": "cleaners-of-vehicles-and-equipment",
     "name": "车辆与设备清洁工",

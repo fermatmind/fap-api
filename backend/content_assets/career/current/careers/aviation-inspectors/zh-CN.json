@@ -26,6 +26,9 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
+      "fact:fermatmind-ai-impact-estimate": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -24662,7 +24665,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得航空检查员生成式AI采用率、提效或减员因果测量。资料检索、数据比对和报告草稿是编辑试验候选，需实测；总体就业预测不能归因于AI。"
+              "本轮未取得航空检查员生成式AI采用率、提效或减员因果测量。资料检索、数据比对和报告草稿是编辑试验候选，需实测；总体就业预测不能归因于AI。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.18",
@@ -32791,6 +32794,23 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2111.00"
+              },
+              {
+                "details": [
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
+                  "调阅与核对｜让依据明确｜调阅工作单与维修记录与飞行日志，核对检修与大修是否按期执行，把受检对象与依据文件写清。 — 75/100; weight=1/3; aviation-inspectors.profile.responsibilities-block.1[0]",
+                  "现场检查与取证｜让发现可追溯｜按检查清单核对机务工作与航空器状态，检查起落架与轮胎与机身与机翼与发动机外部是否有损伤或腐蚀，记录发现与证据。 — 25/100; weight=1/3; aviation-inspectors.profile.responsibilities-block.1[1]",
+                  "判定与签署｜让权限清楚｜按任命与职责记录符合性结论。FAA检查员或获授权代表的适航证签发，与机械师IA的特定恢复使用批准及年度检查分别核权，不由公司质检职位或学历自动推出。 — 25/100; weight=1/3; aviation-inspectors.profile.responsibilities-block.1[3]"
+                ],
+                "evidence_type": "编辑模型估算方法",
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "name": "FermatMind AI影响度估算方法 v1",
+                "period": "2026-10-18",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "本职业三项代表核心任务",
+                "url": "#career-ai-assessment-method"
               }
             ]
           },
@@ -37693,7 +37713,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI 影响",
+      "ai-impact": "AI影响度",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38021,15 +38041,27 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+        "display_value": "42%",
+        "fact_id": "fermatmind-ai-impact-estimate",
+        "market": "不限定单一地区；依赖具体组织场景",
+        "measure": "AI影响度（编辑估算）",
+        "occupation_scope": "航空检查员",
+        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI 任务暴露（本页不评分）"
+      "label": "AI影响度"
     },
     "badges": [
       "O*NET 53-6051.01 · Job Zone Three · 中等准备",
@@ -38080,7 +38112,7 @@
       "text": "航空检查员"
     }
   },
-  "source_content_sha256": "63b825a11b99733842a791e2f86d8f312b6df9b876a6a33b3db01d5e173fa930",
+  "source_content_sha256": "120f830abc4b59cadefe9738394e9a499ac8863c4ff9f1cf34ce81564b826426",
   "subject": {
     "canonical_slug": "aviation-inspectors",
     "name": "航空检查员",
