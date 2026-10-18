@@ -222,8 +222,9 @@ class EditScaleRegistry extends EditRecord
                             (string) $record->primary_slug, ...(array) $record->slugs_json,
                         ])));
                         $this->faqSaveReceipt['status'] = 'APPLIED';
-                    } catch (\Throwable) {
+                    } catch (\Throwable $exception) {
                         // The previous content commit remains authoritative; retry cache only.
+                        report($exception);
                     }
                 } else {
                     $this->faqSaveReceipt = ['status' => 'UNCHANGED'];

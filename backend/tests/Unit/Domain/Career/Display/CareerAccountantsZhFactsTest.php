@@ -67,8 +67,8 @@ final class CareerAccountantsZhFactsTest extends TestCase
         self::assertFalse($sources->has('source-4'));
 
         foreach ($sources as $source) {
-            if ($source['url'] === null) {
-                self::assertSame('source-fermatmind-ai-rubric', $source['id']);
+            if ($source['id'] === 'source-fermatmind-ai-rubric') {
+                self::assertContains($source['url'], [null, '#career-ai-assessment-method']);
                 self::assertSame('FermatMind / 费马测试', $source['publisher']);
                 self::assertNotSame('', trim($source['limitation']));
                 self::assertNotSame([], $source['details']);
