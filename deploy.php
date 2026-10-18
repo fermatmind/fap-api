@@ -5535,6 +5535,7 @@ if ! sudo -n -u www-data -- env \
   CAREER_PARITY_ACTIVE_BACKEND_ROOT='{{career_parity_active_backend_root}}' \
   CAREER_PARITY_MODE=production-preactivation \
   CAREER_PARITY_REDIS_MODE=readonly \
+  CAREER_PARITY_COMPACT_PAGE_CACHE=1 \
   CAREER_PARITY_RECEIPT_PATH="$receipt_path" \
   {{bin/php}} -d memory_limit=1024M '{{release_path}}/backend/scripts/ci/career_current_authority_parity.php' >/dev/null; then
   safe_error_code="$(sudo -n -u www-data -- jq -r '.safe_error_code // "CAREER_PARITY_FAILED"' "$receipt_path" 2>/dev/null || true)"

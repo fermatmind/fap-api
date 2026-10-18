@@ -58,6 +58,9 @@ final class CareerCurrentAuthorityParity
             || ($mode === self::MODE_PACKAGE && ! in_array($redisMode, ['none', 'disposable'], true))) {
             throw new RuntimeException('CAREER_PARITY_MODE_REDIS_MISMATCH');
         }
+        if ($mode === self::MODE_PRODUCTION_PREACTIVATION) {
+            return $this->completeProduction($this->validateProductionFiles($backendRoot, $releaseSha, $activeSha));
+        }
         $databaseMutationCount = 0;
         $cacheMutationCount = 0;
         DB::listen(static function (QueryExecuted $query) use (&$databaseMutationCount): void {
@@ -65,28 +68,13 @@ final class CareerCurrentAuthorityParity
                 $databaseMutationCount++;
             }
         });
-        if ($mode === self::MODE_PRODUCTION_PREACTIVATION) {
-            foreach ([KeyWritten::class, KeyForgotten::class, CacheFlushed::class] as $event) {
-                Event::listen($event, static function () use (&$cacheMutationCount): void {
-                    $cacheMutationCount++;
-                });
-            }
-        }
 
         $authority = $this->loader->indexForPublish($backendRoot);
         $slugs = $authority['slugs'];
         $this->assertAuthorityShape($authority);
         $redis = $this->redisContract($redisMode);
-        if ($mode === self::MODE_PRODUCTION_PREACTIVATION) {
-            // Validate installed authority, not optional cache coverage or a second
-            // full display/codec compilation. CI owns that complete offline scan.
-            $full = $this->scanFiles($authority);
-            $slice = null;
-            self::assertCapacityWithinBudget(0, $redis['used_memory_bytes'], self::LOCKED_CAREER_BUDGET_BYTES);
-        } else {
-            $full = $this->scanPages($authority, $slugs, true, $redisMode, true);
-            $slice = $this->scanPages($authority, self::PACKAGE_SLICE_SLUGS, false, 'none');
-        }
+        $full = $this->scanPages($authority, $slugs, true, $redisMode, true);
+        $slice = $this->scanPages($authority, self::PACKAGE_SLICE_SLUGS, false, 'none');
         if ($databaseMutationCount !== 0) {
             throw new RuntimeException('CAREER_PARITY_DATABASE_WRITE_DETECTED');
         }
@@ -94,6 +82,56 @@ final class CareerCurrentAuthorityParity
             throw new RuntimeException('CAREER_PARITY_CACHE_WRITE_DETECTED');
         }
 
+        return $this->receipt($authority, $full, $slice, $redis, $mode, $releaseSha, $activeSha);
+    }
+
+    /** Validate immutable files before any separate cache maintenance; never projects or writes caches. */
+    public function validateProductionFiles(string $backendRoot, string $releaseSha, string $activeSha): array
+    {
+        if (preg_match('/\A[0-9a-f]{40}\z/', $releaseSha) !== 1
+            || preg_match('/\A[0-9a-f]{40}\z/', $activeSha) !== 1) {
+            throw new RuntimeException('CAREER_PARITY_RELEASE_SHA_INVALID');
+        }
+        $databaseWrites = 0;
+        $cacheWrites = 0;
+        DB::listen(static function (QueryExecuted $query) use (&$databaseWrites): void {
+            if (preg_match('/\A(?:insert|update|delete|replace|alter|create|drop|truncate|rename)\b/i', ltrim($query->sql)) === 1) {
+                $databaseWrites++;
+            }
+        });
+        foreach ([KeyWritten::class, KeyForgotten::class, CacheFlushed::class] as $event) {
+            Event::listen($event, static function () use (&$cacheWrites): void {
+                $cacheWrites++;
+            });
+        }
+        $this->redisContract('readonly'); // Verify store configuration before inspecting the package.
+        $authority = $this->loader->indexForPublish($backendRoot);
+        $this->assertAuthorityShape($authority);
+        $full = $this->scanFiles($authority);
+        if ($databaseWrites !== 0 || $cacheWrites !== 0) {
+            throw new RuntimeException('CAREER_PARITY_FILE_VALIDATION_WRITE_DETECTED');
+        }
+
+        return compact('authority', 'full', 'releaseSha', 'activeSha');
+    }
+
+    /** Re-read actual memory after optional, separately accounted cache maintenance. */
+    public function completeProduction(array $validated): array
+    {
+        ['authority' => $authority, 'full' => $full, 'releaseSha' => $releaseSha, 'activeSha' => $activeSha] = $validated;
+        $this->assertAuthorityShape($authority);
+        if (($full['counts']['verified_files'] ?? null) !== 2092 || ($full['cache_write_count'] ?? null) !== 0) {
+            throw new RuntimeException('CAREER_PARITY_FILE_VALIDATION_INCOMPLETE');
+        }
+        $redis = $this->redisContract('readonly');
+        self::assertCapacityWithinBudget(0, $redis['used_memory_bytes'], self::LOCKED_CAREER_BUDGET_BYTES);
+
+        return $this->receipt($authority, $full, null, $redis, self::MODE_PRODUCTION_PREACTIVATION, $releaseSha, $activeSha);
+    }
+
+    private function receipt(array $authority, array $full, ?array $slice, array $redis, string $mode, string $releaseSha, string $activeSha): array
+    {
+        $slugs = $authority['slugs'];
         $zeroWrites = [
             'database_write_count' => 0,
             'cache_write_count' => 0,
