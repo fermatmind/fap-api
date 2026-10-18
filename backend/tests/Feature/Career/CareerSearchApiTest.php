@@ -86,6 +86,8 @@ final class CareerSearchApiTest extends TestCase
         ] as $slug) {
             $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
                 'slug' => $slug, 'crosswalk_mode' => 'exact',
+                'identity_id' => 'identity-'.substr(hash('sha256', $slug), 0, 32),
+                'trigger_assessment_id' => 'assessment-'.substr(hash('sha256', $slug), 0, 32),
             ]));
             foreach (['en', 'zh-CN'] as $locale) {
                 $title = $reader->subjectName($slug, $locale);

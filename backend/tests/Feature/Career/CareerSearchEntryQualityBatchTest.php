@@ -372,14 +372,15 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         $this->assertSame(50, app(CareerSearchEntryQualityBatchPlanner::class)->build()['candidate_count']);
     }
 
-    public function test_bulk_publication_snapshot_preserves_same_version_active_exposure_authority(): void
+    public function test_bulk_publication_snapshot_rejects_candidate_exposure_without_current_authority(): void
     {
         $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
         $materializedCandidate = [
             $slug.'|en' => [
                 'slug' => $slug,
                 'locale' => 'en',
-                'runtime_publish_state' => 'candidate',
+                'runtime_publish_state' => 'published_candidate',
+                'public_resolution_type' => 'public_canonical_job',
                 'detail_route_enabled' => false,
                 'robots_indexable' => false,
                 'release_gate_pass' => false,
@@ -411,12 +412,13 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
             ],
         );
 
+        // A ready cache snapshot alone cannot grant current generation/IndexState authority.
         $this->assertSame(
-            [$slug => ['en' => true]],
+            [$slug => ['en' => false]],
             $responseCache->jobDetailPublishedSnapshot([$slug], ['en']),
         );
         $publication = $responseCache->jobDetailPublicationSnapshot([$slug], ['en']);
-        $this->assertTrue($publication[$slug]['en']['published']);
+        $this->assertFalse($publication[$slug]['en']['published']);
         $this->assertSame('ready_active', $publication[$slug]['en']['classification']);
         $this->assertIsString($publication[$slug]['en']['version']);
         $this->assertSame($slug, data_get($publication[$slug]['en']['payload'], 'identity.canonical_slug'));
