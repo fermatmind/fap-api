@@ -9,6 +9,16 @@ use Tests\TestCase;
 
 final class PersonalityCurrentAtComparisonRuntimeTest extends TestCase
 {
+    private function currentAggregate(): string
+    {
+        // Content edits rotate the manifest digest without changing these route contracts.
+        $manifest = json_decode(file_get_contents(base_path('content_assets/personality_public/current/manifest.json')), true, 512, JSON_THROW_ON_ERROR);
+        $aggregate = $manifest['aggregate_sha256'];
+        self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/D', $aggregate);
+
+        return $aggregate;
+    }
+
     public function test_at_comparison_is_served_from_the_per_page_current_authority(): void
     {
         $response = $this->getJson('/api/v0.5/personality/comparisons/intj-a-vs-intj-t?locale=zh-CN&org_id=0&scale_code=MBTI');
@@ -22,7 +32,7 @@ final class PersonalityCurrentAtComparisonRuntimeTest extends TestCase
 
         $response->assertOk()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
-            ->assertHeader('X-Fermat-Content-Aggregate', '2523f2e1d312f3790e7a237222e8422788a8b55b5a96dad7037c63e39330460b')
+            ->assertHeader('X-Fermat-Content-Aggregate', $this->currentAggregate())
             ->assertExactJson(['ok' => true, ...$expected['payload']]);
     }
 

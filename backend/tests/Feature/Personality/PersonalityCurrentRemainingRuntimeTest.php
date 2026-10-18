@@ -9,7 +9,15 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '2523f2e1d312f3790e7a237222e8422788a8b55b5a96dad7037c63e39330460b';
+    private function currentAggregate(): string
+    {
+        // Content edits rotate the manifest digest without changing these route contracts.
+        $manifest = json_decode(file_get_contents(base_path('content_assets/personality_public/current/manifest.json')), true, 512, JSON_THROW_ON_ERROR);
+        $aggregate = $manifest['aggregate_sha256'];
+        self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/D', $aggregate);
+
+        return $aggregate;
+    }
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -19,7 +27,7 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
         $this->getJson($url)
             ->assertOk()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
-            ->assertHeader('X-Fermat-Content-Aggregate', self::AGGREGATE)
+            ->assertHeader('X-Fermat-Content-Aggregate', $this->currentAggregate())
             ->assertExactJson(['ok' => true, ...$expected['payload']]);
     }
 
@@ -161,7 +169,7 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
         $this->getJson('/api/v0.5/personality?locale=zh-CN&org_id=0&scale_code=MBTI&per_page=100')
             ->assertOk()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
-            ->assertHeader('X-Fermat-Content-Aggregate', self::AGGREGATE)
+            ->assertHeader('X-Fermat-Content-Aggregate', $this->currentAggregate())
             ->assertJsonPath('sections.0.section_key', 'quick_answer')
             ->assertJsonPath('sections.4.section_key', 'sources_and_method')
             ->assertJsonPath('seo_meta.canonical_url', 'https://fermatmind.com/zh/personality')
@@ -183,7 +191,7 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
         $this->getJson('/api/v0.5/personality/comparisons?locale=zh-CN&org_id=0&scale_code=MBTI')
             ->assertOk()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
-            ->assertHeader('X-Fermat-Content-Aggregate', self::AGGREGATE)
+            ->assertHeader('X-Fermat-Content-Aggregate', $this->currentAggregate())
             ->assertJsonCount(16, 'at_comparisons')
             ->assertJsonCount(7, 'cross_type_comparisons')
             ->assertJsonPath('at_comparisons.0.slug', 'intj-a-vs-intj-t')
