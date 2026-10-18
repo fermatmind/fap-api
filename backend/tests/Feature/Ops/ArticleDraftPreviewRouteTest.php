@@ -231,6 +231,22 @@ final class ArticleDraftPreviewRouteTest extends TestCase
         $this->assertNull($article->fresh()->published_revision_id);
     }
 
+    public function test_conflict_page_normalizes_production_and_ops_chinese_locale(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization();
+        $article = $this->createDraftArticle();
+        $revision = $this->createWorkingRevision($article);
+        $url = ArticleWorkspace::previewUrl($article->fresh(), (int) $revision->id);
+        $revision->update(['title' => 'Changed selected revision']);
+        app()->setLocale('zh-CN');
+        $this->withSession(array_replace($this->opsSession($admin, $org), ['ops_locale' => 'zh-CN']))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get($url)->assertStatus(409)->assertSee('预览版本已过期')
+            ->assertSee('返回该文章工作区')->assertSee('lang="zh-CN"', false)
+            ->assertDontSee('ops.custom_pages.')->assertDontSee('Changed selected revision');
+    }
+
     private function createDraftArticle(): Article
     {
         return Article::query()->create([

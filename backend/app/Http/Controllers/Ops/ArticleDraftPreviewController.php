@@ -115,6 +115,7 @@ final class ArticleDraftPreviewController extends Controller
     private function revisionConflict(Article $article): Response
     {
         return response()->view('ops.article-preview-conflict', [
+            'previewLocale' => str_starts_with(strtolower((string) session('ops_locale', $article->locale)), 'zh') ? 'zh_CN' : 'en',
             'articleId' => (int) $article->id,
             'workspaceUrl' => url('/ops/seo-operations').'?workspace=content&article='.(int) $article->id,
         ], 409, [

@@ -90,7 +90,7 @@ final class ArticleSeoReleaseStatus
     private static function check(string $key, string $label, array $checks, string $nullableOkState = 'hold'): array
     {
         $check = (array) ($checks[$key] ?? []);
-        $ok = $check['ok'] ?? false;
+        $ok = array_key_exists('ok', $check) ? $check['ok'] : false;
         $issues = (array) ($check['issues'] ?? []);
         $state = match ($ok) {
             true => 'success',

@@ -64,6 +64,15 @@ final class ArticleSeoReleaseStatusPanelTest extends TestCase
         $this->assertStringContainsString('indexnow#58:accepted / baidu_push#59:accepted', $html);
         $this->assertStringContainsString('php artisan articles:release-closeout --article-id=53 --expected-slug=', $html);
         $this->assertStringNotContainsString('production_write_attempted', $html);
+        $document = new \DOMDocument;
+        @$document->loadHTML($html);
+        $xpath = new \DOMXPath($document);
+        foreach (['Public HTML smoke', 'GSC manual request', 'D1 / D7 / D14 observation'] as $label) {
+            $row = $xpath->query('//div[contains(@class, "ops-article-workspace-seo__item")][.//span[text()="'.$label.'"]]')->item(0);
+            $this->assertNotNull($row);
+            $this->assertStringContainsString('manual', $row->textContent);
+            $this->assertStringNotContainsString('danger', $row->textContent);
+        }
     }
 
     public function test_search_queue_gap_is_distinct_from_published_content_record(): void
@@ -74,7 +83,10 @@ final class ArticleSeoReleaseStatusPanelTest extends TestCase
             {
                 return [
                     'ok' => false, 'decision' => ArticleReleaseCloseoutService::BLOCKED_SEARCH_QUEUE_GAP,
-                    'checks' => ['article' => ['status' => 'published', 'is_public' => true, 'published_revision_id' => 886]],
+                    'checks' => [
+                        'article' => ['status' => 'published', 'is_public' => true, 'published_revision_id' => 886],
+                        'public_html_smoke' => ['ok' => false, 'state' => 'failed'],
+                    ],
                     'issues' => [['code' => 'search_channel_queue_missing', 'message' => 'Search queue missing']],
                 ];
             }
@@ -86,6 +98,12 @@ final class ArticleSeoReleaseStatusPanelTest extends TestCase
         $this->assertStringContainsString('BLOCKED_SEARCH_QUEUE_GAP', $html);
         $this->assertStringContainsString('search_channel_queue_missing', $html);
         $this->assertStringNotContainsString('wire:click', $html);
+        $document = new \DOMDocument;
+        @$document->loadHTML($html);
+        $xpath = new \DOMXPath($document);
+        $row = $xpath->query('//div[contains(@class, "ops-article-workspace-seo__item")][.//span[text()="Public HTML smoke"]]')->item(0);
+        $this->assertStringContainsString('danger', $row->textContent);
+        $this->assertStringNotContainsString('manual', $row->textContent);
     }
 
     public function test_panel_falls_back_to_blocked_status_when_status_source_is_unavailable(): void
