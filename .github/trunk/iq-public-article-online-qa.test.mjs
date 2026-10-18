@@ -5,8 +5,8 @@ import { mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'no
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createServer } from 'node:http';
-import { readCandidateRows, seoPackageSha256, mensaPackageSha256, matrixPackageSha256, comparisonPackageSha256 } from './iq-public-article-package.mjs';
-import { assertSsrCandidate, articleDom, readOnlinePrestate, verifyOnlineCandidates, renderPage } from './iq-public-article-online-qa.mjs';
+import { readCandidateRows, seoPackageSha256, mensaPackageSha256, matrixPackageSha256, comparisonPackageSha256, xorPackageSha256 } from './iq-public-article-package.mjs';
+import { assertSsrCandidate, articleDom, readOnlinePrestate, verifyOnlineCandidates, renderPage, xorPublicSnapshots } from './iq-public-article-online-qa.mjs';
 
 const row = { identity: { locale: 'en', slug: 'iq-test-tool-guide' }, snapshot: {
   title: 'IQ practice guide', seo_title: 'IQ Practice and Limits', seo_description: 'Use reasoning practice with clear limits.',
@@ -342,3 +342,20 @@ for (const selectedSha of [matrixPackageSha256, comparisonPackageSha256]) {
   }), /IQ_ARTICLE_ONLINE_SEO_MISMATCH/);
 });
 }
+
+test('XOR public baseline rejects target copy drift and source or comparison changes',async()=>{
+ const target=readCandidateRows(backend,xorPackageSha256)[0];let change=null;
+ const fetcher=async url=>{
+  const u=new URL(url),locale=u.searchParams.get('locale'),seo=u.pathname.endsWith('/seo');
+  const slug=u.pathname.split('/').at(seo?-2:-1);const item=[target,...target.controls].find(x=>x.identity.slug===slug && x.identity.locale===locale);
+  const snapshot=structuredClone(item===target?item.before:item.snapshot);
+  if(change && change.slug===slug && change.locale===locale)snapshot[change.field]='Unreviewed change';
+  const value=seo?{meta:{title:snapshot.seo_title,description:snapshot.seo_description,robots:'index,follow'}}:
+   {ok:true,article:{...item.identity,...snapshot,status:'published',is_public:true,is_indexable:true,sitemap_eligible:true,llms_eligible:true,published_revision_id:1},answer_surface_v1:{faq_blocks:snapshot.faq_items}};
+  return new Response(JSON.stringify(value),{status:200,headers:{'content-type':'application/json'}});
+ };
+ const controls=await xorPublicSnapshots('production',backend,fetcher);assert.equal(Object.keys(controls).length,3);
+ for(const mutation of [{slug:'iq-test-tool-guide',locale:'en',field:'content_md'},{slug:'iq-test-tool-guide',locale:'zh-CN',field:'seo_title'},{slug:'online-iq-tests-compared',locale:'en',field:'content_md'}]) {
+  change=mutation;await assert.rejects(()=>xorPublicSnapshots('production',backend,fetcher),/IQ_ARTICLE_XOR_(?:REVIEWED_BEFORE|CONTROL)_DRIFT/);
+ }
+});

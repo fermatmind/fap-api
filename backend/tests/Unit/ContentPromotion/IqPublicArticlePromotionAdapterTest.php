@@ -136,6 +136,118 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         self::assertSame('Keep these bytes', Article::query()->where('slug', IqPublicArticlePackage::COMPARISON_SLUG)->firstOrFail()->content_md);
     }
 
+    private function xorContext(): PromotionContext
+    {
+        return new PromotionContext(
+            base_path(IqPublicArticlePackage::XOR_PACKAGE), IqPublicArticlePackage::XOR_SHA256,
+            'W3', IqPublicArticlePromotionAdapter::SUBSCOPE, str_repeat('6', 40), str_repeat('b', 64),
+            hash('sha256', PromotionContextFactory::canonicalJson(config('content_promotion.release_policy'))),
+            '4001', 1, str_repeat('c', 64), 1, str_repeat('6', 64),
+        );
+    }
+
+    private function xorBaseline(): array
+    {
+        $this->seedExisting();
+        $this->publish();
+        [$adapter, $comparison] = $this->importComparison();
+        $adapter->publish($comparison);
+        $context = $this->xorContext();
+        $rows = app(IqPublicArticlePackage::class)->read(base_path(), IqPublicArticlePackage::XOR_SHA256);
+
+        return [$adapter, $context, $rows];
+    }
+
+    public function test_xor_single_locale_roundtrip_keeps_controls_foreign_draft_and_all_seo_copy(): void
+    {
+        [$adapter, $context, $rows] = $this->xorBaseline();
+        $state = new \ReflectionMethod($adapter, 'state');
+        $before = $state->invoke($adapter, $rows, false);
+        $key = 'en:iq-test-tool-guide';
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $draft = $adapter->draftImport($context);
+        self::assertSame(1, $draft['written_count']);
+        $this->previous($context, 'cms_draft_import_receipt', $draft);
+        $result = $adapter->publish($context);
+        self::assertSame(1, $result['published_count']);
+        self::assertSame(0, $result['indexability_mutation_count']);
+        self::assertSame(1, $adapter->liveQa($context)['readback_count']);
+        $after = $state->invoke($adapter, $rows, false);
+        self::assertSame($before[$key]['controls'], $after[$key]['controls']);
+        self::assertSame($before[$key]['article']['working_revision_id'], $after[$key]['article']['working_revision_id']);
+        foreach (['seo_title', 'seo_description', 'og_title', 'og_description', 'canonical_url', 'robots', 'is_indexable'] as $field) {
+            self::assertSame($before[$key]['seo'][$field], $after[$key]['seo'][$field]);
+        }
+        $priorSchema = $before[$key]['seo']['schema_json'];
+        $schema = $after[$key]['seo']['schema_json'];
+        unset($priorSchema['editorial_package_v1']['iq_article_exact_package_v1'], $schema['editorial_package_v1']['iq_article_exact_package_v1']);
+        self::assertSame($priorSchema, $schema);
+        $adapter->rollback($context, $result['rollback_reference']);
+        $adapter->rollback($context, $result['rollback_reference']);
+        $restored = $state->invoke($adapter, $rows, false);
+        self::assertSame($before[$key]['controls'], $restored[$key]['controls']);
+        foreach (['content_md', 'published_revision_id', 'working_revision_id'] as $field) {
+            self::assertSame($before[$key]['article'][$field], $restored[$key]['article'][$field]);
+        }
+    }
+
+    public function test_xor_refuses_reviewed_body_and_control_seo_drift_before_import(): void
+    {
+        [$adapter, $context] = $this->xorBaseline();
+        $article = Article::query()->where('slug', 'iq-test-tool-guide')->where('locale', 'en')->firstOrFail();
+        DB::table('articles')->where('id', $article->id)->update(['content_md' => 'Concurrent public body']);
+        DB::table('article_translation_revisions')->where('id', $article->published_revision_id)->update(['content_md' => 'Concurrent public body']);
+        try {
+            $adapter->preflight($context);
+            self::fail('Reviewed body drift must be rejected');
+        } catch (DomainException $error) {
+            self::assertSame('iq_article_xor_reviewed_before_drift', $error->getMessage());
+        }
+        DB::table('articles')->where('id', $article->id)->update(['content_md' => $article->content_md]);
+        DB::table('article_translation_revisions')->where('id', $article->published_revision_id)->update(['content_md' => $article->content_md]);
+        $source = Article::query()->where('slug', 'iq-test-tool-guide')->where('locale', 'zh-CN')->firstOrFail();
+        DB::table('article_seo_meta')->where('article_id', $source->id)->update(['seo_title' => 'Concurrent SEO']);
+        $this->expectExceptionMessage('iq_article_xor_reviewed_control_drift');
+        $adapter->preflight($context);
+    }
+
+    public function test_xor_control_working_pointer_drift_after_preflight_is_not_overwritten(): void
+    {
+        [$adapter, $context] = $this->xorBaseline();
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $source = Article::query()->where('slug', 'iq-test-tool-guide')->where('locale', 'zh-CN')->firstOrFail();
+        $draft = ArticleTranslationRevision::query()->findOrFail($source->published_revision_id)->replicate(['authority_asset_key', 'authority_source_package', 'authority_source_hash', 'authority_package_sha256', 'authority_metadata_json']);
+        $draft->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT, 'revision_number' => 99, 'published_at' => null])->saveQuietly();
+        $source->forceFill(['working_revision_id' => $draft->id])->saveQuietly();
+        $this->expectExceptionMessage('iq_article_prestate_drift');
+        $adapter->draftImport($context);
+    }
+
+    public function test_xor_unexpected_control_mutation_aborts_the_complete_write_transaction(): void
+    {
+        [$adapter, $context, $rows] = $this->xorBaseline();
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $this->previous($context, 'cms_draft_import_receipt', $adapter->draftImport($context));
+        $state = new \ReflectionMethod($adapter, 'state');
+        $before = $state->invoke($adapter, $rows, false);
+        $control = Article::query()->where('slug', IqPublicArticlePackage::COMPARISON_SLUG)->where('locale', 'en')->firstOrFail();
+        $armed = true;
+        Article::saved(function (Article $article) use (&$armed, $control): void {
+            if ($armed && $article->slug === 'iq-test-tool-guide' && $article->locale === 'en') {
+                DB::table('article_seo_meta')->where('article_id', $control->id)->update(['seo_title' => 'Injected observer mutation']);
+            }
+        });
+        try {
+            $adapter->publish($context);
+            self::fail('Control mutation must abort');
+        } catch (DomainException $error) {
+            self::assertSame('iq_article_xor_control_mutation', $error->getMessage());
+        } finally {
+            $armed = false;
+        }
+        self::assertSame($before, $state->invoke($adapter, $rows, false));
+    }
+
     private function importComparison(string $owner = '8'): array
     {
         $context = new PromotionContext(

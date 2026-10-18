@@ -43,6 +43,10 @@ final class IqPublicArticlePackage
 
     public const COMPARISON_SLUG = 'online-iq-tests-compared';
 
+    public const XOR_PACKAGE = 'content_assets/iq_public/articles/20261018-xor-v1';
+
+    public const XOR_SHA256 = 'fc117893d3acca6af457db61aceb66b7767782e941444a5dc9b07fc9d90ed477';
+
     private const SCHEMA = 'fermatmind.iq_public_article_package.v1';
 
     private const SLUGS = [
@@ -62,6 +66,7 @@ final class IqPublicArticlePackage
     public static function pathForSha(string $sha): string
     {
         return match ($sha) {
+            self::XOR_SHA256 => self::XOR_PACKAGE,
             self::SHA256 => self::PACKAGE,
             self::SEO_SHA256 => self::SEO_PACKAGE,
             self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => self::PARITY_PACKAGE,
@@ -77,13 +82,14 @@ final class IqPublicArticlePackage
         self::pathForSha($sha);
 
         return match ($sha) {
-            self::MATRIX_SHA256, self::COMPARISON_SHA256 => 4, self::SEO_SHA256, self::MENSA_SHA256 => 2, self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => 6, default => 10
+            self::XOR_SHA256 => 1, self::MATRIX_SHA256, self::COMPARISON_SHA256 => 4, self::SEO_SHA256, self::MENSA_SHA256 => 2, self::PARITY_SHA256, self::PREVIOUS_PARITY_SHA256 => 6, default => 10
         };
     }
 
     public static function supportsPublishedDigest(?string $sha, string $slug): bool
     {
-        return ($sha === self::SHA256 && in_array($slug, self::SLUGS, true))
+        return ($sha === self::XOR_SHA256 && $slug === self::SLUGS['IQ-03'])
+            || ($sha === self::SHA256 && in_array($slug, self::SLUGS, true))
             || ($sha === self::MENSA_SHA256 && $slug === self::MENSA_SLUG)
             || ($sha === self::MATRIX_SHA256 && in_array($slug, [self::MATRIX_SLUG, self::SLUGS['IQ-03']], true))
             || ($sha === self::COMPARISON_SHA256 && in_array($slug, [self::COMPARISON_SLUG, self::SLUGS['IQ-03']], true))
@@ -106,7 +112,7 @@ final class IqPublicArticlePackage
         }
         $package = self::pathForSha($expectedSha256);
         $slugs = match ($expectedSha256) {
-            self::SEO_SHA256 => ['IQ-03' => self::SLUGS['IQ-03']],
+            self::XOR_SHA256, self::SEO_SHA256 => ['IQ-03' => self::SLUGS['IQ-03']],
             self::MENSA_SHA256 => ['IQ-07' => self::MENSA_SLUG],
             self::MATRIX_SHA256 => ['IQ-03' => self::SLUGS['IQ-03'], 'IQ-08' => self::MATRIX_SLUG],
             self::COMPARISON_SHA256 => ['IQ-03' => self::SLUGS['IQ-03'], 'IQ-09' => self::COMPARISON_SLUG],
@@ -127,11 +133,11 @@ final class IqPublicArticlePackage
         }
         $bytes = $this->bytes($directory, 'manifest.json');
         $manifest = json_decode($bytes, true, 32, JSON_THROW_ON_ERROR);
-        $expectedFiles = $expectedSha256 === self::SEO_SHA256
+        $expectedFiles = in_array($expectedSha256, [self::SEO_SHA256, self::XOR_SHA256], true)
             ? ['iq-all-source-fresh-result.json', 'iq-article-exact-payload-review.json']
             : self::REVIEW_FILES;
         foreach (array_keys($slugs) as $id) {
-            foreach (['zh-CN', 'en'] as $locale) {
+            foreach (($expectedSha256 === self::XOR_SHA256 ? ['en'] : ['zh-CN', 'en']) as $locale) {
                 foreach (['md', 'json', 'snapshot.json'] as $extension) {
                     $expectedFiles[] = $id.'-'.$locale.'.'.$extension;
                 }
@@ -181,7 +187,7 @@ final class IqPublicArticlePackage
             $id = $target['page_id'] ?? '';
             $locale = $target['locale'] ?? '';
             $stem = $id.'-'.$locale;
-            if (! isset($slugs[$id]) || ! in_array($locale, ['zh-CN', 'en'], true) || isset($seen[$stem])
+            if (! isset($slugs[$id]) || ! in_array($locale, $expectedSha256 === self::XOR_SHA256 ? ['en'] : ['zh-CN', 'en'], true) || isset($seen[$stem])
                 || ($target['slug'] ?? null) !== $slugs[$id]
                 || ($target['operation'] ?? null) !== (in_array($id, ['IQ-06', 'IQ-07', 'IQ-08', 'IQ-09'], true) ? 'new_source_pair' : 'existing_public_update')) {
                 throw new DomainException('iq_article_package_scope_invalid');
@@ -220,10 +226,37 @@ final class IqPublicArticlePackage
                 || ($sourceVerdicts[0]['body_sha256'] ?? null) !== hash('sha256', $files[$stem.'.md'])) {
                 throw new DomainException('iq_article_source_review_unbound');
             }
+            $amendment = [];
+            if ($expectedSha256 === self::XOR_SHA256) {
+                $before = $target['before'] ?? [];
+                $this->assertSnapshot($before, $input, (string) ($before['content_md'] ?? ''), $locale);
+                foreach (array_diff(self::SNAPSHOT_FIELDS, ['content_md']) as $field) {
+                    if ($snapshot[$field] !== $before[$field]) {
+                        throw new DomainException('iq_article_xor_nonbody_changed');
+                    }
+                }
+                $controls = $manifest['controls'] ?? [];
+                $identities = [
+                    ['org_id' => 0, 'slug' => self::SLUGS['IQ-03'], 'locale' => 'zh-CN'],
+                    ['org_id' => 0, 'slug' => self::COMPARISON_SLUG, 'locale' => 'zh-CN'],
+                    ['org_id' => 0, 'slug' => self::COMPARISON_SLUG, 'locale' => 'en'],
+                ];
+                if (! is_array($controls) || array_column($controls, 'identity') !== $identities) {
+                    throw new DomainException('iq_article_xor_controls_invalid');
+                }
+                foreach ($controls as $control) {
+                    $copy = $control['snapshot'] ?? [];
+                    $this->assertSnapshot($copy, ['metadata' => ['title' => $copy['seo_title'] ?? null,
+                        'description' => $copy['seo_description'] ?? null], 'faq_items' => $copy['faq_items'] ?? null],
+                        (string) ($copy['content_md'] ?? ''), $control['identity']['locale']);
+                }
+                $amendment = ['before' => $before, 'controls' => $controls];
+            }
             $targets[] = [
                 'page_id' => $id, 'identity' => $identity, 'operation' => $target['operation'], 'snapshot' => $snapshot,
                 'body_sha256' => hash('sha256', $files[$stem.'.md']), 'metadata_sha256' => hash('sha256', $files[$stem.'.json']),
                 'snapshot_sha256' => hash('sha256', $files[$stem.'.snapshot.json']),
+                ...$amendment,
             ];
         }
 

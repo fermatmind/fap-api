@@ -253,13 +253,20 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                         $metadata['hreflang_gate_v1'] = self::LAUNCH_HREFLANG_GATE;
                     }
                     $schema['editorial_package_v1'] = $metadata;
-                    $seo->forceFill([
+                    $seo->forceFill($context->packageSha256 === IqPublicArticlePackage::XOR_SHA256 ? ['schema_json' => $schema] : [
                         'seo_title' => $row['snapshot']['seo_title'], 'og_title' => $row['snapshot']['seo_title'],
                         'seo_description' => $row['snapshot']['seo_description'], 'og_description' => $row['snapshot']['seo_description'], 'schema_json' => $schema,
                         ...(IqPublicArticlePackage::launchesDiscoverability($context->packageSha256, $article->slug) ? ['is_indexable' => true, 'robots' => 'index,follow'] : []),
                     ])->saveQuietly();
                     $this->decisions->recordPublished($article, $revision, $now, 'publish', $reference);
                     $written++;
+                }
+                if ($context->packageSha256 === IqPublicArticlePackage::XOR_SHA256) {
+                    $after = $this->state($rows, true);
+                    $key = $this->key($rows[0]);
+                    if (! $this->sameJson($after[$key]['controls'], $admittedState[$key]['controls'])) {
+                        throw new DomainException('iq_article_xor_control_mutation');
+                    }
                 }
                 $this->assertPublished($rows, $context);
             }, 3);
@@ -312,6 +319,13 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
         $this->assertExecution((array) $snapshot->meta_json, $context);
         $before = array_column((array) data_get($snapshot->meta_json, 'rows'), null, 'key');
         DB::transaction(function () use ($rows, $context, $before, $rollbackReference): void {
+            if ($context->packageSha256 === IqPublicArticlePackage::XOR_SHA256) {
+                $current = $this->state($rows, true);
+                $key = $this->key($rows[0]);
+                if (! $this->sameJson($current[$key]['controls'], $before[$key]['controls'])) {
+                    throw new DomainException('iq_article_xor_rollback_control_drift');
+                }
+            }
             foreach ($rows as $row) {
                 $saved = $before[$this->key($row)] ?? null;
                 $article = $this->article($row, true);
@@ -497,20 +511,75 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
             $seo = $article ? $this->seo($article, $lock) : null;
             $revisions = $article ? ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)
                 ->where(static function ($query) use ($article): void {
-                    $query->whereIn('id', array_filter([$article->published_revision_id, $article->working_revision_id]))->orWhereIn('authority_package_sha256', [IqPublicArticlePackage::SHA256, IqPublicArticlePackage::SEO_SHA256, IqPublicArticlePackage::PARITY_SHA256, IqPublicArticlePackage::MENSA_SHA256, IqPublicArticlePackage::MATRIX_SHA256, IqPublicArticlePackage::COMPARISON_SHA256]);
+                    $query->whereIn('id', array_filter([$article->published_revision_id, $article->working_revision_id]))->orWhereIn('authority_package_sha256', [IqPublicArticlePackage::SHA256, IqPublicArticlePackage::SEO_SHA256, IqPublicArticlePackage::PARITY_SHA256, IqPublicArticlePackage::MENSA_SHA256, IqPublicArticlePackage::MATRIX_SHA256, IqPublicArticlePackage::COMPARISON_SHA256, IqPublicArticlePackage::XOR_SHA256]);
                 })->orderBy('id')->when($lock, static fn ($query) => $query->lockForUpdate())->get()->map->getAttributes()->all() : [];
             $seoAttributes = $seo?->getAttributes();
             if ($seoAttributes) {
                 $seoAttributes['schema_json'] = $seo->schema_json;
             }
             $state[$this->key($row)] = ['key' => $this->key($row), 'article' => $article?->getAttributes(), 'seo' => $seoAttributes, 'revisions' => $revisions];
+            if (isset($row['controls'])) {
+                $state[$this->key($row)]['controls'] = $this->state($row['controls'], $lock);
+            }
         }
 
         return $state;
     }
 
+    /** Reviewed public copy is checked again inside both existing write transactions. */
+    private function assertXorBaseline(array $rows, array $state, PromotionContext $context): void
+    {
+        if ($context->packageSha256 !== IqPublicArticlePackage::XOR_SHA256) {
+            return;
+        }
+        $row = $rows[0];
+        $saved = $state[$this->key($row)];
+        $published = array_values(array_filter($saved['revisions'], static fn (array $revision): bool => (int) $revision['id'] === (int) ($saved['article']['published_revision_id'] ?? 0)));
+        $owned = count($published) === 1 && ($published[0]['authority_package_sha256'] ?? null) === $context->packageSha256
+            && ($published[0]['authority_asset_key'] ?? null) === $this->key($row)
+            && $this->sameJson(json_decode($published[0]['authority_metadata_json'] ?? '{}', true, 32, JSON_THROW_ON_ERROR)['snapshot'] ?? null, $row['snapshot']);
+        if (! $this->sameJson($this->nativeSnapshot($saved), $owned ? $row['snapshot'] : $row['before'])
+            || data_get($saved, 'seo.schema_json.editorial_package_v1.answer_surface_policy') !== 'editor_supplied'
+            || data_get($saved, 'seo.schema_json.editorial_package_v1.answer_surface_visibility') !== 'visible'
+            || data_get($saved, 'seo.og_title') !== $row['snapshot']['seo_title']
+            || data_get($saved, 'seo.og_description') !== $row['snapshot']['seo_description']) {
+            throw new DomainException('iq_article_xor_reviewed_before_drift');
+        }
+        foreach ($row['controls'] as $control) {
+            if (! $this->sameJson($this->nativeSnapshot($saved['controls'][$this->key($control)]), $control['snapshot'])) {
+                throw new DomainException('iq_article_xor_reviewed_control_drift');
+            }
+        }
+    }
+
+    private function nativeSnapshot(array $saved): array
+    {
+        $article = $saved['article'];
+        $published = array_values(array_filter($saved['revisions'], static fn (array $revision): bool => (int) $revision['id'] === (int) ($article['published_revision_id'] ?? 0)));
+        if (! is_array($article) || count($published) !== 1 || $published[0]['revision_status'] !== ArticleTranslationRevision::STATUS_PUBLISHED
+            || $article['status'] !== 'published' || ! $article['is_public'] || ! is_array($saved['seo'])
+            || in_array($article['lifecycle_state'] ?? null, [Article::LIFECYCLE_ARCHIVED, Article::LIFECYCLE_SOFT_DELETED], true)) {
+            throw new DomainException('iq_article_xor_public_baseline_missing');
+        }
+        foreach (['published_at', 'scheduled_at'] as $field) {
+            if (($article[$field] ?? null) !== null && strtotime($article[$field]) > time()) {
+                throw new DomainException('iq_article_xor_future_publication');
+            }
+        }
+        foreach (['title', 'excerpt', 'content_md'] as $field) {
+            if ($article[$field] !== $published[0][$field]) {
+                throw new DomainException('iq_article_xor_native_projection_drift');
+            }
+        }
+
+        return [...Arr::only($published[0], ['title', 'excerpt', 'content_md']),
+            'seo_title' => $saved['seo']['seo_title'], 'seo_description' => $saved['seo']['seo_description'],
+            'faq_items' => data_get($saved, 'seo.schema_json.editorial_package_v1.answer_surface_v1.faq_items')];
+    }
+
     private function assertPreflight(array $rows, array $state, PromotionContext $context): void
     {
+        $this->assertXorBaseline($rows, $state, $context);
         foreach ($rows as $row) {
             $saved = $state[$this->key($row)];
             $article = $saved['article'];
@@ -560,6 +629,9 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
 
     private function assertPublished(array $rows, PromotionContext $context): void
     {
+        if ($context->packageSha256 === IqPublicArticlePackage::XOR_SHA256) {
+            $this->assertXorBaseline($rows, $this->state($rows, false), $context);
+        }
         $owner = null;
         foreach ($rows as $row) {
             $article = $this->article($row, false);
@@ -637,6 +709,9 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
 
     private function sourceRow(array $rows, array $row): array
     {
+        if (isset($row['controls'])) {
+            return ['page_id' => $row['page_id'], ...$row['controls'][0]];
+        }
         foreach ($rows as $source) {
             if ($source['page_id'] === $row['page_id'] && $source['identity']['locale'] === 'zh-CN') {
                 return $source;

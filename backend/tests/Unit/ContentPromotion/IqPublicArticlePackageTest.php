@@ -14,6 +14,27 @@ final class IqPublicArticlePackageTest extends TestCase
 {
     private ?string $temporaryRoot = null;
 
+    public function test_xor_package_is_one_english_body_with_unchanged_metadata_faq_and_fixed_controls(): void
+    {
+        $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::XOR_SHA256);
+        self::assertCount(1, $rows);
+        $row = $rows[0];
+        self::assertSame(['org_id' => 0, 'slug' => 'iq-test-tool-guide', 'locale' => 'en'], $row['identity']);
+        foreach (['title', 'excerpt', 'seo_title', 'seo_description', 'faq_items'] as $field) {
+            self::assertSame($row['before'][$field], $row['snapshot'][$field]);
+        }
+        self::assertCount(3, $row['controls']);
+        self::assertTrue(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::XOR_SHA256, 'iq-test-tool-guide'));
+        self::assertFalse(IqPublicArticlePackage::supportsPublishedDigest(IqPublicArticlePackage::XOR_SHA256, 'online-iq-tests-compared'));
+        self::assertFalse(IqPublicArticlePackage::launchesDiscoverability(IqPublicArticlePackage::XOR_SHA256, 'iq-test-tool-guide'));
+        self::assertSame(1, IqPublicArticlePackage::rowCountForSha(IqPublicArticlePackage::XOR_SHA256));
+        $previous = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::COMPARISON_SHA256);
+        self::assertSame($previous[1]['snapshot'], $row['before']);
+        self::assertSame($previous[0]['snapshot'], $row['controls'][0]['snapshot']);
+        self::assertSame($previous[2]['snapshot'], $row['controls'][1]['snapshot']);
+        self::assertSame($previous[3]['snapshot'], $row['controls'][2]['snapshot']);
+    }
+
     public function test_matrix_package_binds_only_its_new_pair_and_preserves_the_three_existing_guide_examples(): void
     {
         $rows = $this->reader()->read(dirname(__DIR__, 3), IqPublicArticlePackage::MATRIX_SHA256);

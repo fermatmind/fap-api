@@ -4,7 +4,7 @@ import { createHash, createHmac } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, seoPackageSha256, seoPackagePath, parityPackageSha256, parityPackagePath, mensaPackageSha256, mensaPackagePath, matrixPackageSha256, matrixPackagePath, comparisonPackageSha256, comparisonPackagePath, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
+import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, seoPackageSha256, seoPackagePath, parityPackageSha256, parityPackagePath, mensaPackageSha256, mensaPackagePath, matrixPackageSha256, matrixPackagePath, comparisonPackageSha256, comparisonPackagePath, xorPackageSha256, xorPackagePath, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
 import { buildExecution, publish, recoveryFailure, acceptOnline } from './iq-public-article-publish.mjs';
 
 const backend = fileURLToPath(new URL('../../backend/', import.meta.url));
@@ -45,7 +45,7 @@ test('a version upgrade admits only its fixed package root without broadening ca
   assert.equal(isIqArticleOnlyPromotionRegistration(before, after), true);
   assert.equal(isIqArticleOnlyPromotionRegistration(before, `${after}\n`), false);
   const cli = readFileSync(new URL('./iq-public-article-publish.mjs', import.meta.url), 'utf8');
-  assert.match(cli, /buildExecution\(env, resolve\('backend'\), comparisonPackageSha256\)/);
+  assert.match(cli, /buildExecution\(env, resolve\('backend'\), xorPackageSha256\)/);
 });
 test('the historical Mensa package remains bound to its bilingual pair', () => {
   const current = buildExecution(env, backend, mensaPackageSha256);
@@ -206,4 +206,13 @@ test('recover receipts with another or missing executor cannot authorize code LK
     const result = { ...recovery(), executor_release_sha256: executor };
     assert.equal(recoveryFailure(execution(), () => ({status:0,stdout:JSON.stringify(result)})).receipt.recovery_completed, false);
   }
+});
+
+test('XOR publication binds one existing English body and retains three read-only controls',()=>{
+ const binding=inspectPackage(backend,xorPackageSha256);const rows=readCandidateRows(backend,xorPackageSha256);
+ assert.equal(binding.package_path,xorPackagePath);assert.equal(binding.expected_row_count,1);
+ assert.deepEqual(rows.map(x=>[x.page_id,x.identity.locale,x.operation]),[['IQ-03','en','existing_public_update']]);
+ const row=rows[0];for(const field of ['title','excerpt','seo_title','seo_description','faq_items'])assert.deepEqual(row.snapshot[field],row.before[field]);
+ assert.equal(row.controls.length,3);assert.ok(row.snapshot.content_md.includes('XOR stands for **exclusive OR**'));
+ const after=readFileSync(`${backend}/config/content_promotion.php`,'utf8');assert.equal(isIqArticleOnlyPromotionRegistration(after.replace(`        '${xorPackagePath}',\n`,''),after),true);
 });

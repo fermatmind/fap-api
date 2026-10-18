@@ -2,7 +2,7 @@ import { execFileSync, spawn } from 'node:child_process';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readCandidateRows, packageSha256, mensaPackageSha256, matrixPackageSha256, comparisonPackageSha256 } from './iq-public-article-package.mjs';
+import { readCandidateRows, packageSha256, mensaPackageSha256, matrixPackageSha256, comparisonPackageSha256, xorPackageSha256 } from './iq-public-article-package.mjs';
 import { closeOwnedBrowser } from './eq-new-source-online-qa.mjs';
 
 const clean = value => String(value).replace(/\s+/gu, ' ').trim();
@@ -199,8 +199,30 @@ async function read(url, type, fetcher, allowAbsent = false, captureHeaders = nu
   if (bytes.length > 2000000) throw new Error('IQ_ARTICLE_ONLINE_PAYLOAD_LIMIT');
   return bytes;
 }
+export async function xorPublicSnapshots(environment, backendRoot, fetcher = fetch, published = false) {
+  const [api] = hosts(environment); const row = readCandidateRows(backendRoot, xorPackageSha256)[0]; const controls = {};
+  for (const item of [row, ...row.controls]) {
+    const suffix=`${item.identity.slug}?locale=${item.identity.locale}&org_id=0`;
+    const payload=JSON.parse(await read(`${api}/api/v0.5/articles/${suffix}`,'application/json',fetcher));
+    const seo=JSON.parse(await read(`${api}/api/v0.5/articles/${item.identity.slug}/seo?locale=${item.identity.locale}&org_id=0`,'application/json',fetcher));
+    const article=payload.article, meta=seo.meta;
+    if(payload.ok!==true || !article || article.org_id!==0 || article.slug!==item.identity.slug || article.locale!==item.identity.locale || article.status!=='published' || article.is_public!==true)
+      throw new Error('IQ_ARTICLE_XOR_CONTROL_DRIFT');
+    const snapshot={title:article.title,excerpt:article.excerpt,content_md:article.content_md,seo_title:meta?.title,seo_description:meta?.description,
+      faq_items:payload.answer_surface_v1?.faq_blocks?.map(({question,answer})=>({question,answer}))};
+    const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+    if(item===row) {
+      if(!equal(snapshot,row.snapshot) && (published || !equal(snapshot,row.before))) throw new Error('IQ_ARTICLE_XOR_REVIEWED_BEFORE_DRIFT');
+    } else {
+      if(!equal(snapshot,item.snapshot)) throw new Error('IQ_ARTICLE_XOR_CONTROL_DRIFT');
+      controls[`${item.identity.locale}:${item.identity.slug}`]={snapshot,flags:Object.fromEntries(['is_indexable','sitemap_eligible','llms_eligible','published_revision_id'].map(k=>[k,article[k]])),meta};
+    }
+  }
+  return controls;
+}
 export async function readOnlinePrestate(environment, backendRoot, fetcher = fetch, expectedPackageSha256 = packageSha256) {
   const [api] = hosts(environment); const result = {};
+  if(expectedPackageSha256===xorPackageSha256) result.__xor_controls=await xorPublicSnapshots(environment,backendRoot,fetcher);
   for (const row of readCandidateRows(backendRoot, expectedPackageSha256)) {
     const bytes = await read(`${api}/api/v0.5/articles/${row.identity.slug}?locale=${row.identity.locale}&org_id=0`, 'application/json', fetcher, row.operation === 'new_source_pair');
     const article = bytes === null ? null : JSON.parse(bytes).article;
@@ -341,6 +363,10 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     await read(`${web}${path}`, 'text/html', fetcher, false, headers => { responseRobots = headers.get('x-robots-tag'); });
     const verifyDOM = html => assertSsrCandidate(html, row, seo.meta, environment, responseRobots);
     verifyDOM(await renderer(`${web}${path}`, { verifyDOM }));
+  }
+  if(expectedPackageSha256===xorPackageSha256) {
+    const controls=await xorPublicSnapshots(environment,backendRoot,fetcher,true);
+    if(!prestate.__xor_controls || JSON.stringify(controls)!==JSON.stringify(prestate.__xor_controls)) throw new Error('IQ_ARTICLE_XOR_CONTROL_DRIFT');
   }
   return { api_readback_count: rows.length, seo_readback_count: rows.length, ssr_readback_count: rows.length, environment };
 }
