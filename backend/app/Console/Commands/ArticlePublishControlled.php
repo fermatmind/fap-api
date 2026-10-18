@@ -242,7 +242,7 @@ final class ArticlePublishControlled extends Command
             ? (array) data_get($seoMeta->schema_json, 'editorial_package_v1', [])
             : [];
         $bodyHash = $revision instanceof ArticleTranslationRevision
-            ? hash('sha256', preg_replace("/\r\n?/", "\n", trim((string) $revision->content_md)))
+            ? app(\App\Services\Cms\EditorialPackage\EditorialPackageDraftImporter::class)->normalizedBodyHash((string) $revision->content_md)
             : '';
         $claimStatus = (string) data_get($import?->claim_result_json, 'status', '');
         $claimMatches = is_array(data_get($import?->claim_result_json, 'matches'))

@@ -495,6 +495,17 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame((int) $revision->id, (int) $article->published_revision_id);
     }
 
+    public function test_editorial_opening_prose_does_not_require_template_labels(): void
+    {
+        $body = "Readers can enjoy an activity while rejecting the conditions of a particular job.\n\n## Compare the actual work\n\nAsk about an ordinary week rather than relying on a job title.";
+        $file = $this->writePackage($this->editorialPackage(['body_markdown' => $body]));
+        $this->artisan('articles:import-editorial-package', ['--file' => $file, '--dry-run' => true])
+            ->expectsOutputToContain('errors_count=0')->assertExitCode(0);
+        $file = $this->writePackage($this->editorialPackage(['body_markdown' => "## Compare the actual work\n\nOnly a section with no introduction."]));
+        $this->artisan('articles:import-editorial-package', ['--file' => $file, '--dry-run' => true])
+            ->expectsOutputToContain('editorial_summary_required')->assertExitCode(1);
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      * @return array<string, mixed>

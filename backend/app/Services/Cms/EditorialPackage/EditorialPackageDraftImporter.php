@@ -614,11 +614,11 @@ final class EditorialPackageDraftImporter
         }
 
         if ($package['content_track'] === 'editorial_journal') {
-            if (! str_contains($headingText, 'executive summary') && ! str_contains($headingText, '执行摘要')) {
-                $errors[] = $this->issue('body_markdown', 'editorial_summary_required', 'editorial_journal requires an executive summary.');
-            }
-            if (! str_contains($body, 'Evidence Note')) {
-                $errors[] = $this->issue('body_markdown', 'editorial_evidence_note_required', 'editorial_journal requires an Evidence Note.');
+            // A reviewed editorial may orient readers in its opening prose.
+            // Literal template labels do not prove a summary or source quality.
+            $opening = trim((string) preg_split('/^#{1,6}\\s/mu', $body, 2)[0]);
+            if ($opening === '' && ! str_contains($headingText, 'executive summary') && ! str_contains($headingText, '执行摘要')) {
+                $errors[] = $this->issue('body_markdown', 'editorial_summary_required', 'editorial_journal requires introductory prose or a summary section.');
             }
             if ($package['claim_boundary_notes'] === []) {
                 $errors[] = $this->issue('claim_boundary_notes', 'claim_boundary_required', 'editorial_journal requires claim boundary notes.');
@@ -1286,7 +1286,7 @@ final class EditorialPackageDraftImporter
         ];
     }
 
-    private function normalizedBodyHash(string $body): string
+    public function normalizedBodyHash(string $body): string
     {
         return hash('sha256', $this->normalizeText($body));
     }
