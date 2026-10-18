@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\ArticleSeoMeta;
 use App\Models\EditorialReview;
 use App\Models\MediaAsset;
@@ -57,6 +58,17 @@ final class CareerInterestsValuesArticleRelease
             }
             $candidates[$locale] = $candidate;
         }
+        // Both public locales use this existing CMS entity; localized labels
+        // are reader projections, not permission to create another category.
+        $category = ArticleCategory::withoutGlobalScopes()->where('org_id', 0)
+            ->where('slug', 'career-exploration')->where('is_active', true)->first();
+        if (! $category) {
+            throw new RuntimeException('Interests-values canonical category unavailable.');
+        }
+        foreach ($candidates as &$candidate) {
+            $candidate['category'] = $category->name;
+        }
+        unset($candidate);
         $owner = (int) config('review_governance.solo_owner_admin_user_id');
         $reviews = app(CmsEditorialReviewAttestationService::class);
         if (! $reviews->isConfiguredSoloOwner($owner)) {
@@ -187,7 +199,8 @@ final class CareerInterestsValuesArticleRelease
                 || $article->publishedRevision?->content_md !== rtrim($candidate['body_markdown'])
                 || $article->publishedRevision?->authority_package_sha256 !== self::SHA256
                 || $article->publishedRevision?->seo_title !== $candidate['seo_title']
-                || $article->seoMeta?->canonical_url !== $candidate['canonical']) {
+                || $article->seoMeta?->canonical_url !== $candidate['canonical']
+                || ArticleCategory::withoutGlobalScopes()->where('org_id', 0)->whereKey($article->category_id)->value('slug') !== 'career-exploration') {
                 throw new RuntimeException('Interests-values pair readback or collision failed.');
             }
         }

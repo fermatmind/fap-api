@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\MediaAsset;
 use App\Services\Cms\CareerInterestsValuesArticleRelease as Release;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -29,6 +30,7 @@ final class CareerInterestsValuesArticleReleaseTest extends TestCase
             'ops.content_release_observability.hmac_revalidation_secret' => 'fixture-only-secret']);
         AdminUser::query()->create(['id' => 1, 'name' => 'Fixture owner', 'email' => 'owner@example.test',
             'password' => 'fixture-only-password', 'is_active' => 1]);
+        ArticleCategory::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => 'career-exploration', 'name' => '职业探索', 'is_active' => true]);
         Http::preventStrayRequests();
         Http::fake(function ($request) {
             if (str_contains($request->url(), '/api/content-release/revalidate')) {
@@ -58,6 +60,7 @@ final class CareerInterestsValuesArticleReleaseTest extends TestCase
                 ->assertJsonPath('article.title', $candidate['title']);
             $article = Article::withoutGlobalScopes()->where('slug', $slug)->firstOrFail();
             $this->assertSame(Release::SHA256, $article->publishedRevision->authority_package_sha256);
+            $this->assertSame('career-exploration', ArticleCategory::withoutGlobalScopes()->findOrFail($article->category_id)->slug);
             $this->assertTrue($article->sitemap_eligible);
             $this->assertTrue($article->llms_eligible);
             $this->assertSame($candidate['cover_image_alt'], $article->cover_image_alt);
@@ -66,6 +69,7 @@ final class CareerInterestsValuesArticleReleaseTest extends TestCase
         $this->assertSame(['status' => 'unchanged', 'changed' => 0], $service->run());
         $this->assertSame($before, DB::table('article_translation_revisions')->get()->toJson());
         $this->assertSame(1, MediaAsset::withoutGlobalScopes()->count());
+        $this->assertSame(1, ArticleCategory::withoutGlobalScopes()->count());
     }
 
     public function test_existing_unowned_draft_is_never_overwritten(): void
