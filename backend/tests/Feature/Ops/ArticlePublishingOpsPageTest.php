@@ -9,6 +9,7 @@ use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
 use App\Models\EditorialReview;
 use App\Models\Organization;
@@ -91,6 +92,7 @@ final class ArticlePublishingOpsPageTest extends TestCase
             'robots' => 'index,follow',
             'is_indexable' => true,
         ]);
+        $this->createApprovedRevision($publishReady, $admin);
         EditorialReview::query()->withoutGlobalScopes()->create([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
@@ -215,6 +217,106 @@ final class ArticlePublishingOpsPageTest extends TestCase
             ->assertSet('releaseRows.0.title', 'Selected org release failure')
             ->assertSee('Selected org release failure')
             ->assertDontSee('Foreign org release failure');
+    }
+
+    public function test_drafts_precede_published_metadata_gaps_and_links_keep_selected_article(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization('CMS queue priority');
+        $draft = $this->createArticle('old-draft', 'en', 'Old actionable draft', [
+            'updated_at' => now()->subYear(),
+        ]);
+        for ($i = 0; $i < 13; $i++) {
+            $this->createArticle('published-'.$i, 'en', 'Published '.$i, [
+                'status' => 'published', 'is_public' => true,
+            ]);
+        }
+        $this->withSession($this->opsSession($admin, $org))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+        Livewire::test(ArticlePublishingOpsPage::class)
+            ->assertSet('queueRows.0.title', 'Old actionable draft')
+            ->assertSet('queueRows.0.review_status', 'Review not recorded')
+            ->assertSet('queueRows.0.edit_url', null)
+            ->assertSet('queueRows.0.workspace_url', url('/ops/seo-operations').'?workspace=content&article='.$draft->id)
+            ->assertSee('Old actionable draft')
+            ->assertSet('queueFields.3.value', '0');
+    }
+
+    public function test_article_approval_cannot_make_an_unapproved_working_revision_ready(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization('CMS revision review');
+        $article = $this->createArticle('revision-review', 'en', 'Revision review');
+        ArticleSeoMeta::query()->create([
+            'org_id' => 0, 'article_id' => $article->id, 'locale' => 'en',
+            'seo_title' => 'Old SEO', 'seo_description' => 'Old description',
+            'canonical_url' => 'https://example.test/en/articles/revision-review',
+            'robots' => 'index,follow', 'og_title' => 'OG', 'og_description' => 'OG description',
+            'og_image_url' => 'https://example.test/cover.svg',
+        ]);
+        $revision = $this->createApprovedRevision($article, $admin);
+        EditorialReview::query()->create([
+            'id' => (string) Str::uuid(), 'org_id' => 0, 'content_type' => 'article',
+            'content_id' => $article->id, 'workflow_state' => EditorialReview::STATE_APPROVED,
+            'last_transition_at' => now()->addMinute(), 'reviewed_at' => now(),
+        ]);
+        $this->withSession($this->opsSession($admin, $org))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+        Livewire::test(ArticlePublishingOpsPage::class)->assertSet('queueFields.3.value', '1');
+        $revision->update(['revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT]);
+        Livewire::test(ArticlePublishingOpsPage::class)->assertSet('queueFields.3.value', '0')
+            ->assertSet('queueRows.0.next_action', 'Submit review')
+            ->assertSet('queueRows.0.revision_status', 'machine_draft')
+            ->assertSee('Article workflow: Approved');
+        $revision->update(['revision_status' => ArticleTranslationRevision::STATUS_APPROVED, 'excerpt' => '', 'seo_title' => '']);
+        Livewire::test(ArticlePublishingOpsPage::class)->assertSet('dailyHealthFields.2.value', '1')
+            ->assertSet('queueRows.0.next_action', 'Complete metadata')
+            ->assertSet('queueFields.3.value', '0');
+        $article->seoMeta->update(['seo_title' => null, 'seo_description' => null]);
+        $revision->update(['excerpt' => 'Current excerpt', 'seo_title' => 'Current title', 'seo_description' => 'Current description']);
+        Livewire::test(ArticlePublishingOpsPage::class)->assertSet('dailyHealthFields.2.value', '0')
+            ->assertSet('queueFields.3.value', '1');
+        $revision->update(['content_md' => '']);
+        Livewire::test(ArticlePublishingOpsPage::class)->assertSet('queueFields.3.value', '0');
+        $this->assertNotEmpty($article->fresh()->content_md);
+        $this->assertNull($article->seoMeta->fresh()->seo_title);
+    }
+
+    public function test_published_article_with_pending_revision_precedes_old_published_gaps(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization('CMS published update');
+        for ($i = 0; $i < 13; $i++) {
+            $this->createArticle('old-gap-'.$i, 'en', 'Old published gap '.$i, ['status' => 'published']);
+        }
+        $article = $this->createArticle('pending-update', 'en', 'Pending published update', ['status' => 'published']);
+        $published = $this->createApprovedRevision($article, $admin);
+        $working = $published->replicate();
+        $working->revision_number = 2;
+        $working->revision_status = ArticleTranslationRevision::STATUS_MACHINE_DRAFT;
+        $working->save();
+        $article->update(['published_revision_id' => $published->id, 'working_revision_id' => $working->id, 'updated_at' => now()->subYear()]);
+        $this->withSession($this->opsSession($admin, $org))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+        Livewire::test(ArticlePublishingOpsPage::class)
+            ->assertSet('queueRows.0.title', 'Pending published update')
+            ->assertSet('queueRows.0.revision_id', $working->id);
+    }
+
+    private function createApprovedRevision(Article $article, AdminUser $admin): ArticleTranslationRevision
+    {
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $article->id,
+            'translation_group_id' => $article->translation_group_id, 'locale' => $article->locale,
+            'source_locale' => $article->locale, 'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+            'title' => $article->title, 'excerpt' => $article->excerpt, 'content_md' => $article->content_md,
+            'seo_title' => 'Current SEO', 'seo_description' => 'Current description',
+            'reviewed_by' => $admin->id, 'reviewed_at' => now(), 'approved_at' => now(),
+        ]);
+        $article->update(['working_revision_id' => $revision->id]);
+
+        return $revision;
     }
 
     private function createArticle(string $slug, string $locale, string $title, array $overrides = []): Article

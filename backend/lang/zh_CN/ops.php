@@ -1669,6 +1669,15 @@ return [
                 ],
             ],
             'article_workspace' => [
+                'cms_record' => 'CMS 内容记录',
+                'public_flag' => '公开标记',
+                'search_closeout' => '搜索与交付收尾',
+                'search_closeout_hint' => '以下收尾状态单独记录搜索和证据缺口。缺少提交记录不代表内容发布失败；未提供线上 smoke 证据时，公开 HTML 仍为未核。仅正文变化不触发新的搜索提交。',
+
+                'preview_expired' => '预览版本已过期',
+                'preview_expired_hint' => '所选 revision 或正文已发生变化。请返回该文章工作区，核对当前版本后重新打开预览。',
+                'return_to_article' => '返回该文章工作区',
+
                 'latest' => '最近更新的 Article',
                 'preflight' => '发布预检（只读）',
                 'already_current' => '当前版本已发布，无需重复发布',
@@ -2423,6 +2432,8 @@ return [
             ],
         ],
         'article_publishing_ops' => [
+            'article_workflow' => '文章审核流程',
+            'review_unrecorded' => '未记录审核',
             'eyebrow' => 'SEO 日常运营',
             'title' => '文章发布运营',
             'description' => '统一查看 Editorial Package 导入、文章审核、发布前缺口、发布后刷新失败和 7/14/28 天复盘队列。',
@@ -2453,7 +2464,7 @@ return [
                 'review_pending_hint' => 'Editorial review workflow 中等待人工审核的文章。',
                 'claim_blocked' => 'Claim 阻断',
                 'claim_blocked_hint' => '被 claim boundary linter 阻断的导入记录。',
-                'publish_ready' => '可发布',
+                'publish_ready' => '审核与基础检查通过',
                 'publish_ready_hint' => '已审批且无基础 checklist 缺口的草稿。',
                 'today_zh_drafts' => '今日中文草稿',
                 'today_zh_drafts_hint' => '今天创建的 zh-CN 草稿文章。',
@@ -2488,12 +2499,13 @@ return [
                 'imported_at' => '导入时间',
             ],
             'next_actions' => [
+                'inspect_revision' => '核对已发布版与工作版',
                 'fix_claims' => '修正 claim boundary',
                 'complete_metadata' => '补齐 metadata',
                 'complete_media' => '补齐 cover/alt',
                 'complete_references' => '补齐 references',
                 'complete_graph' => '补齐 graph edges',
-                'ready_to_publish' => '可进入发布',
+                'ready_to_publish' => '运行发布预检',
                 'await_review' => '等待审核',
                 'submit_review' => '提交审核',
             ],

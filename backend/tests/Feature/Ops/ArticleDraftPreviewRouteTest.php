@@ -214,7 +214,15 @@ final class ArticleDraftPreviewRouteTest extends TestCase
         $this->withSession($this->opsSession($admin, $org))->actingAs($admin, (string) config('admin.guard', 'admin'));
         $this->get($url)->assertOk()->assertHeader('X-Robots-Tag', 'noindex, noarchive, nosnippet');
         $revision->update(['title' => 'Changed after preview selection']);
-        $this->get($url)->assertStatus(409)->assertDontSee('Changed after preview selection');
+        $conflict = $this->get($url)->assertStatus(409)
+            ->assertSee('Preview expired')->assertSee('Return to this Article')
+            ->assertSee('/ops/seo-operations?workspace=content&amp;article='.$article->id, false)
+            ->assertHeader('X-Robots-Tag', 'noindex, noarchive, nosnippet')
+            ->assertHeader('Referrer-Policy', 'no-referrer')
+            ->assertDontSee('Changed after preview selection')->assertDontSee('Article Row Draft Title')
+            ->assertDontSee('rel="canonical"', false);
+        $this->assertStringContainsString('no-store', (string) $conflict->headers->get('Cache-Control'));
+        $this->assertStringContainsString('private', (string) $conflict->headers->get('Cache-Control'));
         $this->get('/ops/article-preview/'.$article->id.'?revision='.($revision->id + 100))->assertStatus(409);
         $this->get('/ops/article-preview/'.$article->id.'?revision[]=1')->assertStatus(422);
         $this->get('/ops/article-preview/'.$article->id.'?revision_hash=bad')->assertStatus(422);

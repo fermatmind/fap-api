@@ -66,6 +66,28 @@ final class ArticleSeoReleaseStatusPanelTest extends TestCase
         $this->assertStringNotContainsString('production_write_attempted', $html);
     }
 
+    public function test_search_queue_gap_is_distinct_from_published_content_record(): void
+    {
+        $this->app->instance(ArticleReleaseCloseoutService::class, new class
+        {
+            public function inspect(int $articleId, string $expectedSlug, ?array $publicSmoke = null): array
+            {
+                return [
+                    'ok' => false, 'decision' => ArticleReleaseCloseoutService::BLOCKED_SEARCH_QUEUE_GAP,
+                    'checks' => ['article' => ['status' => 'published', 'is_public' => true, 'published_revision_id' => 886]],
+                    'issues' => [['code' => 'search_channel_queue_missing', 'message' => 'Search queue missing']],
+                ];
+            }
+        });
+        $html = (string) ArticleSeoReleaseStatus::render($this->article());
+        $this->assertStringContainsString('CMS content record', $html);
+        $this->assertStringContainsString('#886', $html);
+        $this->assertStringContainsString('Missing submission records do not mean publication failed', $html);
+        $this->assertStringContainsString('BLOCKED_SEARCH_QUEUE_GAP', $html);
+        $this->assertStringContainsString('search_channel_queue_missing', $html);
+        $this->assertStringNotContainsString('wire:click', $html);
+    }
+
     public function test_panel_falls_back_to_blocked_status_when_status_source_is_unavailable(): void
     {
         $this->app->instance(ArticleReleaseCloseoutService::class, new class

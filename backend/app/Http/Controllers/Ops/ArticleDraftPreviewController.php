@@ -42,13 +42,17 @@ final class ArticleDraftPreviewController extends Controller
         if ($request->has('revision')) {
             $expected = $request->query('revision');
             abort_unless(is_string($expected) && ctype_digit($expected) && (int) $expected > 0, 422);
-            abort_unless($revision && (int) $revision->id === (int) $expected, 409, 'Working revision changed. Reopen the article workspace.');
+            if (! $revision || (int) $revision->id !== (int) $expected) {
+                return $this->revisionConflict($record);
+            }
         }
         if ($request->has('revision_hash')) {
             $expectedHash = $request->query('revision_hash');
             abort_unless(is_string($expectedHash) && preg_match('/^[a-f0-9]{64}$/D', $expectedHash) === 1, 422);
-            abort_unless($request->has('revision') && $revision
-                && hash_equals(ArticleWorkspace::previewFingerprint($revision), $expectedHash), 409, 'Working revision content changed. Reopen the article workspace.');
+            if (! $request->has('revision') || ! $revision
+                || ! hash_equals(ArticleWorkspace::previewFingerprint($revision), $expectedHash)) {
+                return $this->revisionConflict($record);
+            }
         }
         $seoMeta = $record->seoMeta instanceof ArticleSeoMeta ? $record->seoMeta : null;
 
@@ -102,6 +106,18 @@ final class ArticleDraftPreviewController extends Controller
 
         return response($html, 200, [
             'Content-Type' => 'text/html; charset=UTF-8',
+            'X-Robots-Tag' => 'noindex, noarchive, nosnippet',
+            'Cache-Control' => 'no-store, private',
+            'Referrer-Policy' => 'no-referrer',
+        ]);
+    }
+
+    private function revisionConflict(Article $article): Response
+    {
+        return response()->view('ops.article-preview-conflict', [
+            'articleId' => (int) $article->id,
+            'workspaceUrl' => url('/ops/seo-operations').'?workspace=content&article='.(int) $article->id,
+        ], 409, [
             'X-Robots-Tag' => 'noindex, noarchive, nosnippet',
             'Cache-Control' => 'no-store, private',
             'Referrer-Policy' => 'no-referrer',

@@ -1,4 +1,13 @@
 <div class="ops-article-workspace-seo-release">
+    @php($copy = 'ops.custom_pages.seo_operations.article_workspace')
+    <p>
+        <strong>{{ __($copy.'.cms_record') }}</strong>:
+        {{ $publication['status'] ?? '—' }} ·
+        {{ __($copy.'.public_flag') }}: {{ isset($publication['is_public']) ? ($publication['is_public'] ? 'yes' : 'no') : '—' }} ·
+        {{ __($copy.'.published_revision_id') }} #{{ $publication['published_revision_id'] ?? '—' }}
+    </p>
+    <p>{{ __($copy.'.search_closeout_hint') }}</p>
+    <strong>{{ __($copy.'.search_closeout') }}</strong>
     <div class="ops-article-workspace-seo-release__header">
         <x-filament.ops.shared.status-pill
             :label="$decision"

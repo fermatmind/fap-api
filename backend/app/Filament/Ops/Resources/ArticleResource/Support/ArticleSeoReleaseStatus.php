@@ -21,6 +21,7 @@ final class ArticleSeoReleaseStatus
         $payload = self::closeoutPayload($record);
 
         return new HtmlString((string) view('filament.ops.articles.partials.seo-release-status', [
+            'publication' => (array) data_get($payload, 'checks.article', []),
             'decision' => (string) ($payload['decision'] ?? ArticleReleaseCloseoutService::BLOCKED_OPERATOR_INPUT),
             'ok' => (bool) ($payload['ok'] ?? false),
             'canonicalUrl' => $payload['canonical_url'] ?? null,
@@ -68,6 +69,7 @@ final class ArticleSeoReleaseStatus
 
         return [
             self::check('article', 'Content', $checks),
+            self::check('editorial_completeness', 'Published editorial completeness', $checks),
             self::check('seo_meta', 'Title, meta, canonical, robots', $checks),
             self::check('media', 'Cover, OG image, body visuals', $checks),
             self::check('taxonomy', 'Category and tags', $checks),
@@ -111,6 +113,7 @@ final class ArticleSeoReleaseStatus
     private static function summary(string $key, array $check): string
     {
         return match ($key) {
+            'editorial_completeness' => isset($check['ok']) ? ($check['ok'] ? 'passed' : 'needs attention') : 'not checked',
             'article' => sprintf(
                 '%s / public=%s / indexable=%s',
                 (string) ($check['status'] ?? 'unknown'),

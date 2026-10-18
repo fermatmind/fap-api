@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
+use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\EditorialReviewChecklist;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
+use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
 use App\Models\EditorialReview;
 use Filament\Pages\Page;
@@ -58,6 +60,7 @@ final class ArticlePublishingOpsPage extends Page
             ->withoutGlobalScopes()
             ->where('org_id', 0)
             ->with(['seoMeta', 'workingRevision'])
+            ->orderByRaw("CASE WHEN status IN ('draft', 'review_pending') THEN 0 WHEN working_revision_id <> published_revision_id THEN 1 ELSE 2 END")
             ->latest('updated_at')
             ->limit(500)
             ->get();
@@ -67,6 +70,7 @@ final class ArticlePublishingOpsPage extends Page
             ->withoutGlobalScopes()
             ->where('org_id', 0)
             ->latest('created_at')
+            ->orderByDesc('id')
             ->limit(200)
             ->get();
 
@@ -123,7 +127,7 @@ final class ArticlePublishingOpsPage extends Page
         ];
 
         $this->queueRows = $articles
-            ->filter(fn (Article $article): bool => (string) $article->status !== 'published' || $this->isPublishReady($article) || $this->missingMetadata($article) !== [])
+            ->filter(fn (Article $article): bool => (string) $article->status !== 'published' || ($article->working_revision_id && (int) $article->working_revision_id !== (int) $article->published_revision_id) || $this->missingMetadata($article) !== [])
             ->take(12)
             ->map(fn (Article $article): array => $this->articleQueueRow($article, $imports))
             ->values()
@@ -203,6 +207,11 @@ final class ArticlePublishingOpsPage extends Page
      */
     private function missingMetadata(Article $article): array
     {
+        $revision = $article->workingRevision;
+        if ($revision && ((int) $revision->article_id !== (int) $article->id
+            || (int) $revision->org_id !== (int) $article->org_id || $revision->locale !== $article->locale)) {
+            return ['working_revision_identity'];
+        }
         $missing = [];
         foreach ([
             'seo_title' => 'seo_title',
@@ -210,12 +219,15 @@ final class ArticlePublishingOpsPage extends Page
             'canonical_url' => 'canonical',
             'robots' => 'robots',
         ] as $field => $label) {
-            if (! filled(data_get($article->seoMeta, $field))) {
+            $value = in_array($field, ['seo_title', 'seo_description'], true) && $article->workingRevision
+                ? $article->workingRevision->{$field}
+                : data_get($article->seoMeta, $field);
+            if (! filled($value)) {
                 $missing[] = $label;
             }
         }
 
-        if (! filled($article->excerpt)) {
+        if (! filled($article->workingRevision ? $article->workingRevision->excerpt : $article->excerpt)) {
             $missing[] = 'excerpt';
         }
 
@@ -224,11 +236,26 @@ final class ArticlePublishingOpsPage extends Page
 
     private function isPublishReady(Article $article): bool
     {
+        $revision = $article->workingRevision;
+        if (! $revision || (int) $revision->article_id !== (int) $article->id
+            || (int) $revision->org_id !== (int) $article->org_id || $revision->locale !== $article->locale) {
+            return false;
+        }
         $review = EditorialReviewAudit::latestState('article', $article);
+        $current = clone $article;
+        $current->forceFill($revision->only(['title', 'excerpt', 'content_md']));
+        $seo = $article->seoMeta ? clone $article->seoMeta : null;
+        $seo?->forceFill($revision->only(['seo_title', 'seo_description']));
+        $current->setRelation('seoMeta', $seo);
 
         return (string) $article->status === 'draft'
             && ($review['state'] ?? null) === EditorialReviewAudit::STATE_APPROVED
-            && EditorialReviewChecklist::missing('article', $article) === [];
+            && $revision->revision_status === ArticleTranslationRevision::STATUS_APPROVED
+            && $revision->reviewed_by > 0
+            && $revision->reviewed_at !== null
+            && $revision->approved_at !== null
+            && $this->missingMetadata($article) === []
+            && EditorialReviewChecklist::missing('article', $current) === [];
     }
 
     private function articleQueueRow(Article $article, Collection $imports): array
@@ -241,6 +268,10 @@ final class ArticlePublishingOpsPage extends Page
 
         return [
             'title' => (string) $article->title,
+            'workspace_url' => url('/ops/seo-operations').'?workspace=content&article='.(int) $article->id,
+            'edit_url' => ArticleResource::canEdit($article) ? ArticleResource::getUrl('edit', ['record' => $article->id], panel: 'ops') : null,
+            'revision_id' => $article->working_revision_id,
+            'revision_status' => $article->workingRevision?->revision_status ?? 'untracked',
             'slug' => (string) $article->slug,
             'locale' => (string) $article->locale,
             'content_track' => (string) ($latestImport?->content_track ?? data_get($article->cover_image_variants, 'editorial_package_v1.content_track', 'unknown')),
@@ -250,7 +281,7 @@ final class ArticlePublishingOpsPage extends Page
             'media_status' => (string) data_get($latestImport, 'media_json.status', filled($article->cover_image_url) && filled($article->cover_image_alt) ? 'complete' : 'missing'),
             'references_status' => (string) data_get($latestImport, 'references_json.status', 'untracked'),
             'graph_status' => (string) data_get($latestImport, 'graph_json.status', 'untracked'),
-            'review_status' => (string) ($review['label'] ?? __('ops.custom_pages.common.filters.ready')),
+            'review_status' => (string) ($review['label'] ?? __('ops.custom_pages.article_publishing_ops.review_unrecorded')),
             'next_action' => $this->nextAction($article, $latestImport, $missingMetadata, $review),
             'updated_at' => optional($article->updated_at)?->toDateTimeString() ?? '',
         ];
@@ -282,7 +313,11 @@ final class ArticlePublishingOpsPage extends Page
             return __('ops.custom_pages.article_publishing_ops.next_actions.complete_graph');
         }
 
-        if (($review['state'] ?? null) === EditorialReviewAudit::STATE_APPROVED && (string) $article->status !== 'published') {
+        if ((string) $article->status === 'published') {
+            return __('ops.custom_pages.article_publishing_ops.next_actions.inspect_revision');
+        }
+
+        if ($this->isPublishReady($article)) {
             return __('ops.custom_pages.article_publishing_ops.next_actions.ready_to_publish');
         }
 

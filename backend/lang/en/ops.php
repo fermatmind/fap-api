@@ -1669,6 +1669,15 @@ return [
                 ],
             ],
             'article_workspace' => [
+                'cms_record' => 'CMS content record',
+                'public_flag' => 'Public flag',
+                'search_closeout' => 'Search and release closeout',
+                'search_closeout_hint' => 'The closeout below tracks search and evidence gaps separately from the CMS publication record. Missing submission records do not mean publication failed. Public HTML is unverified until smoke evidence is supplied. A body-only change does not authorize a new search submission.',
+
+                'preview_expired' => 'Preview expired',
+                'preview_expired_hint' => 'The selected revision or its content has changed. Return to the article workspace and select the current revision for a fresh preview.',
+                'return_to_article' => 'Return to this Article',
+
                 'latest' => 'Most recently updated Article',
                 'preflight' => 'Publication preflight (read only)',
                 'already_current' => 'This revision is already published; no republish needed',
@@ -2423,6 +2432,8 @@ return [
             ],
         ],
         'article_publishing_ops' => [
+            'article_workflow' => 'Article workflow',
+            'review_unrecorded' => 'Review not recorded',
             'eyebrow' => 'Daily SEO operations',
             'title' => 'Article Publishing Ops',
             'description' => 'One place for Editorial Package imports, article review, pre-publish gaps, post-release refresh failures, and 7/14/28-day review due items.',
@@ -2453,7 +2464,7 @@ return [
                 'review_pending_hint' => 'Articles waiting for human review in the editorial workflow.',
                 'claim_blocked' => 'Claim blocked',
                 'claim_blocked_hint' => 'Imports blocked by the claim boundary linter.',
-                'publish_ready' => 'Publish-ready',
+                'publish_ready' => 'Review and basic checks passed',
                 'publish_ready_hint' => 'Approved drafts with no basic checklist gaps.',
                 'today_zh_drafts' => 'Today zh drafts',
                 'today_zh_drafts_hint' => 'zh-CN draft articles created today.',
@@ -2488,12 +2499,13 @@ return [
                 'imported_at' => 'Imported at',
             ],
             'next_actions' => [
+                'inspect_revision' => 'Inspect published / working revisions',
                 'fix_claims' => 'Fix claim boundary',
                 'complete_metadata' => 'Complete metadata',
                 'complete_media' => 'Complete cover/alt',
                 'complete_references' => 'Complete references',
                 'complete_graph' => 'Complete graph edges',
-                'ready_to_publish' => 'Ready to publish',
+                'ready_to_publish' => 'Run publication preflight',
                 'await_review' => 'Await review',
                 'submit_review' => 'Submit review',
             ],

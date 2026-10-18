@@ -47,19 +47,27 @@
                         @forelse ($queueRows as $row)
                             <tr>
                                 <td>
-                                    <strong>{{ $row['title'] }}</strong>
-                                    <div class="ops-table-meta">/{{ $row['slug'] }}</div>
+                                    <a href="{{ $row['workspace_url'] }}"><strong>{{ $row['title'] }}</strong></a>
+                                    <div class="ops-table-meta">/{{ $row['slug'] }} · #{{ $row['revision_id'] ?? '—' }}</div>
                                 </td>
                                 <td>{{ $row['locale'] }}</td>
                                 <td>{{ $row['content_track'] }}</td>
-                                <td>{{ $row['article_status'] }} · {{ $row['review_status'] }}</td>
+                                <td>
+                                    {{ $row['article_status'] }} · {{ $row['revision_status'] }}
+                                    <div class="ops-table-meta">{{ __('ops.custom_pages.article_publishing_ops.article_workflow') }}: {{ $row['review_status'] }}</div>
+                                </td>
                                 <td>
                                     {{ __('ops.custom_pages.article_publishing_ops.table.claim') }}: {{ $row['claim_status'] }}<br>
                                     {{ __('ops.custom_pages.article_publishing_ops.table.media') }}: {{ $row['media_status'] }}<br>
                                     {{ __('ops.custom_pages.article_publishing_ops.table.references') }}: {{ $row['references_status'] }}<br>
                                     {{ __('ops.custom_pages.article_publishing_ops.table.graph') }}: {{ $row['graph_status'] }}
                                 </td>
-                                <td>{{ $row['next_action'] }}</td>
+                                <td>
+                                    <a href="{{ $row['workspace_url'] }}">{{ $row['next_action'] }}</a>
+                                    @if ($row['edit_url'])
+                                        <div><a href="{{ $row['edit_url'] }}">{{ __('ops.custom_pages.seo_operations.article_workspace.edit') }}</a></div>
+                                    @endif
+                                </td>
                             </tr>
                         @empty
                             <tr>
