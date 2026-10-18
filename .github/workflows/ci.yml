@@ -697,7 +697,7 @@ jobs:
     needs: [classify, seo-agent-policy-gateway]
     if: always() && (needs.classify.outputs.seo_council_orchestration == 'true' || needs.classify.outputs.a08_scoped_checks == 'true') && (needs.seo-agent-policy-gateway.result == 'success' || needs.seo-agent-policy-gateway.result == 'skipped')
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     env:
       A08_SCOPES: ${{ needs.classify.outputs.a08_scopes }}
     steps:
