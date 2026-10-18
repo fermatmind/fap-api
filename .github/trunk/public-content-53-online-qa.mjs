@@ -69,14 +69,19 @@ export function projection(row,data) {
   return result;
 }
 const apiPath = row => `/api/v0.5/${{article:'articles',page:'content-pages',surface:'landing-surfaces',profile:'topics',guide:'career-guides'}[row.kind]}/${row.identity.slug}?locale=${row.identity.locale}&org_id=0`;
-export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch) {
+export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,renderer=renderPage) {
   const [api,web] = hosts(environment); const result={};
   const rows = readCandidateRows(backendRoot).candidates;
   for (const row of rows) {
     const data=parseApi(await read(api+apiPath(row),fetcher));const value=projection(row,data);
     if (!equal(value,environment === 'staging' ? row.staging_before : row.before) && !equal(value,row.snapshot)) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DRIFT_${row.page_id}`);
     const native=data[row.kind];
-    result[row.page_id]={id:native.id,flags:Object.fromEntries(['is_indexable','sitemap_eligible','llms_eligible','translation_group_id','source_locale'].filter(k=>Object.hasOwn(native,k)).map(k=>[k,native[k]])),dom:domOf(await read(web+pathFor(row),fetcher))};
+    // Metadata-only Article updates compare the unchanged reader body before and
+    // after publication. Raw Next.js streams can contain only its initial chunk;
+    // capture the same hydrated, visibility-aware DOM used by post-publication QA.
+    const html=row.kind === 'article' && row.snapshot.seo_text
+      ? await renderer(web+pathFor(row),{surface:'article'}) : await read(web+pathFor(row),fetcher);
+    result[row.page_id]={id:native.id,flags:Object.fromEntries(['is_indexable','sitemap_eligible','llms_eligible','translation_group_id','source_locale'].filter(k=>Object.hasOwn(native,k)).map(k=>[k,native[k]])),dom:domOf(html)};
   }
   return result;
 }

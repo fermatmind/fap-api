@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
-import { assertDom, domOf, pathFor, read, projection } from './public-content-53-online-qa.mjs';
+import { assertDom, domOf, pathFor, read, projection, readOnlinePrestate } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 const guideDigest=()=>createHash('sha256').update('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
@@ -273,4 +273,42 @@ test('active copy amendment binds three native resources and checks metadata plu
  assert.throws(()=>assertDom(row,html.replaceAll(seo.seo_description,'Old four dimensions'),before,'production'),/METADATA/);
  assert.throws(()=>assertDom(row,html.replace('Retain this explanation.','Changed explanation.'),before,'production'),/BODY_DRIFT/);
  assert.throws(()=>assertDom(row,html.replace('<h1>Seven types of love</h1>','<h1>Wrong heading</h1>'),before,'production'),/BODY_DRIFT/);
+});
+
+
+function streamedArticlePrestateFixture() {
+ const rows=readCandidateRows(root).candidates,row=rows.find(row=>row.page_id==='PAGE-23');
+ const body='<p>Keep the complete explanation.</p><p>Keep the streamed continuation too.</p>';
+ const html=seo=>`<html><head><meta charset="utf-8"><title>${seo.seo_title} | FermatMind</title><meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}"></head><body><main><h1>Seven types of love</h1><article data-testid="article-detail-content">${body}</article></main></body></html>`;
+ const before=html(row.staging_before.seo_text),after=html(row.snapshot.seo_text);
+ const raw=before.replace('<p>Keep the streamed continuation too.</p>','');
+ const requests=[];
+ const fetcher=async url=>{
+  requests.push(url);
+  if(!url.includes('/api/v0.5/')) return {status:200,text:async()=>raw};
+  const index=rows.findIndex(item=>url.includes('/'+item.identity.slug+'?')),item=rows[index];
+  assert.ok(item);
+  const native={...item.identity,...item.staging_before,id:index+1,status:'published',is_public:true};
+  if(item.kind==='article') native.seo_meta=item.staging_before.seo_text;
+  return {status:200,text:async()=>JSON.stringify({ok:true,[item.kind]:native})};
+ };
+ return {row,before,after,raw,fetcher,requests};
+}
+
+test('metadata-only Article prestate uses the same rendered reader as post-publication QA',async()=>{
+ const f=streamedArticlePrestateFixture(),renders=[];
+ const prestate=await readOnlinePrestate('staging',root,f.fetcher,async(url,options)=>{
+  renders.push({url,surface:options.surface});return f.before;
+ });
+ assert.doesNotThrow(()=>assertDom(f.row,f.after,prestate[f.row.page_id],'staging'));
+ assert.deepEqual(renders,[{url:'https://staging.fermatmind.com'+pathFor(f.row),surface:'article'}]);
+ assert.equal(f.requests.filter(url=>!url.includes('/api/v0.5/') && url.includes('/articles/')).length,0);
+ assert.throws(()=>assertDom(f.row,f.after,{dom:domOf(f.raw)},'staging'),/BODY_DRIFT/);
+ assert.throws(()=>assertDom(f.row,f.after.replace('streamed continuation','changed continuation'),prestate[f.row.page_id],'staging'),/BODY_DRIFT/);
+});
+
+test('prestate renderer failure propagates without a raw HTML fallback',async()=>{
+ const f=streamedArticlePrestateFixture();
+ await assert.rejects(readOnlinePrestate('staging',root,f.fetcher,async()=>{throw new Error('render unavailable');}),/render unavailable/);
+ assert.equal(f.requests.length,1);
 });
