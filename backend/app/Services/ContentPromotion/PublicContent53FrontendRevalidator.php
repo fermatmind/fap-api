@@ -27,6 +27,9 @@ final class PublicContent53FrontendRevalidator
                     'path_scope' => 'article_detail_only', 'published_revision_id' => $article->published_revision_id,
                     'content_sha256' => hash('sha256', (string) $article->publishedRevision->content_md)];
                 $tags = ['article-detail:'.$row['identity']['locale'].':'.$slug, 'article-seo:'.$row['identity']['locale'].':'.$slug];
+            } elseif ($row['kind'] === 'guide' && $slug === 'from-mbti-to-job-fit') {
+                $paths = ["/$segment/career/guides/$slug"];
+                $content = ['type' => 'public_content_53'];
             } elseif ($row['kind'] === 'profile') {
                 $paths = ["/$segment/topics/$slug"];
                 $content = ['type' => 'public_content_53'];

@@ -80,6 +80,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/guide-amendment.json')) {
+            $chain = "fermatmind.public_content_guide_amendment.v1\n";
+            foreach (['guide-amendment.json', 'guide-amendment-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readGuideAmendment($root, $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/article-amendment.json')) {
             $chain = "fermatmind.public_content_article_amendment.v1\n";
             foreach (['article-amendment.json', 'article-amendment-review.json'] as $name) {
@@ -154,6 +163,55 @@ final class PublicContent53Package
         }
 
         return ['candidates' => $package['candidates'], 'package_sha256' => $expectedSha256];
+    }
+
+    /** One existing guide locale, with title, summary and route protected. */
+    private function readGuideAmendment(string $root, string $sha): array
+    {
+        $bytes = $this->bytes($root, 'guide-amendment.json');
+        $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $proof = json_decode($this->bytes($root, 'guide-amendment-review.json'), true, 64, JSON_THROW_ON_ERROR);
+        $rows = $package['candidates'] ?? [];
+        if (($package['schema'] ?? null) !== 'fermatmind.public_content_guide_amendment.v1'
+            || ! is_array($rows) || count($rows) !== 1
+            || ($proof['schema'] ?? null) !== 'fermatmind.public_content_guide_amendment.review.v1'
+            || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== 1) {
+            throw new DomainException('public_content_53_guide_review_invalid');
+        }
+        $row = $rows[0];
+        $identity = $row['identity'] ?? [];
+        $keys = array_keys($identity);
+        sort($keys);
+        if (($row['kind'] ?? null) !== 'guide' || ($row['page_id'] ?? null) !== 'MBTI-GUIDE'
+            || $keys !== ['locale', 'org_id', 'slug'] || ($identity['org_id'] ?? null) !== 0
+            || ($identity['slug'] ?? null) !== 'from-mbti-to-job-fit'
+            || ! in_array($identity['locale'] ?? null, ['zh-CN', 'en'], true)
+            || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity']) !== []
+            || ($proof['pages']['MBTI-GUIDE'] ?? null) !== 'PASS') {
+            throw new DomainException('public_content_53_guide_identity_invalid');
+        }
+        foreach (['before', 'staging_before', 'snapshot'] as $version) {
+            $copy = $row[$version] ?? [];
+            $fields = array_keys($copy);
+            sort($fields);
+            if ($fields !== ['body_md', 'excerpt', 'title']
+                || array_filter($copy, static fn ($value): bool => ! is_string($value) || trim($value) === '')) {
+                throw new DomainException('public_content_53_guide_fields_invalid');
+            }
+            foreach (['title', 'excerpt'] as $field) {
+                if ($copy[$field] !== ($row['snapshot'][$field] ?? null)) {
+                    throw new DomainException('public_content_53_guide_nonbody_changed');
+                }
+            }
+        }
+        foreach (['source_identity', 'staging_source_identity'] as $field) {
+            if (($row[$field] ?? null) !== ['guide_code' => 'from-mbti-to-job-fit']) {
+                throw new DomainException('public_content_53_guide_source_identity_invalid');
+            }
+        }
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
     }
 
     /** Body-only amendments retain the existing native CAS, rollback and readers. */

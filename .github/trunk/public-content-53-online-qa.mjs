@@ -10,6 +10,7 @@ const plain = x => /^\s*```[\w-]*\s*$/.test(x) ? '' : x.replace(/!\[[^\]]*\]\([^
   .replace(/^\s*(?:>\s*)+|^\s*(?:#{1,6}\s*|[-*+]\s+|\d+[.)]\s+)/g,'').replace(/[*`_]/g,'');
 export const pathFor = row => {
   const {slug,locale} = row.identity; const segment = locale === 'en' ? 'en' : 'zh';
+  if (row.kind === 'guide') return `/${segment}/career/guides/${slug}`;
   if (row.kind === 'article') return `/${segment}/articles/${slug}`;
   if (row.kind === 'profile') return `/${segment}/topics/${slug}`;
   if (row.kind === 'surface') return `/${segment}/tests${slug === 'tests' ? '' : '/category/'+slug.replace('tests_category_','')}`;
@@ -58,13 +59,14 @@ echo json_encode(['link_labels'=>$labels,'body'=>$values('//main[not(ancestor::m
 }
 export function projection(row,data) {
   const value = data[row.kind];
-  if (data.ok !== true || !value || value.locale !== row.identity.locale || (['article','profile'].includes(row.kind) && value.org_id !== 0)
-    || (value.slug ?? value.surface_key) !== row.identity.slug || value.status !== 'published' || value.is_public !== true) throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
+  if (data.ok !== true || !value || value.locale !== row.identity.locale || (['article','profile','guide'].includes(row.kind) && value.org_id !== 0)
+    || (value.slug ?? value.surface_key) !== row.identity.slug || (row.kind !== 'guide' && value.status !== 'published') || value.is_public !== true) throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
+  if (row.kind === 'guide' && value.guide_code !== 'from-mbti-to-job-fit') throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
   const result = Object.fromEntries(Object.keys(row.snapshot).filter(key=>Object.hasOwn(value,key)).map(key=>[key,value[key]]));
   if (row.kind === 'profile') Object.assign(result,{sections:data.sections,entry_groups:data.entry_groups,seo_text:{title:data.seo_meta?.seo_title,description:data.seo_meta?.seo_description}});
   return result;
 }
-const apiPath = row => `/api/v0.5/${{article:'articles',page:'content-pages',surface:'landing-surfaces',profile:'topics'}[row.kind]}/${row.identity.slug}?locale=${row.identity.locale}&org_id=0`;
+const apiPath = row => `/api/v0.5/${{article:'articles',page:'content-pages',surface:'landing-surfaces',profile:'topics',guide:'career-guides'}[row.kind]}/${row.identity.slug}?locale=${row.identity.locale}&org_id=0`;
 export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch) {
   const [api,web] = hosts(environment); const result={};
   const rows = readCandidateRows(backendRoot).candidates;
@@ -157,7 +159,7 @@ export function assertDom(row,html,before,environment) {
         throw new Error(`PUBLIC_CONTENT_53_QUICKSTART_JSONLD_PAGE-32_ITEM_${index+1}`);
     }
   }
-  const copy=row.snapshot.content_md;
+  const copy=row.kind === 'guide' ? row.snapshot.body_md : row.snapshot.content_md;
   // Match the article reader's stripInternalCmsSlotMarkers. These are CMS
   // placement instructions, while the API still must retain exact package bytes.
   const readerCopy = row.kind === 'article' ? copy?.replace(/(?:<!--|&lt;!--)\s*(?:FM_SLOT|body_visual):[\s\S]*?(?:-->|--&gt;)/gi,'') : copy;

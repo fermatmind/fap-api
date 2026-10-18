@@ -7,6 +7,8 @@ namespace Tests\Unit\ContentPromotion;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\CareerGuide;
+use App\Models\CareerGuideRevision;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
@@ -661,5 +663,184 @@ PHP;
                 }
             }
         }
+    }
+
+    private function guideDigest(): string
+    {
+        $chain = "fermatmind.public_content_guide_amendment.v1\n";
+        foreach (['guide-amendment.json', 'guide-amendment-review.json'] as $name) {
+            $chain .= $name."\n".hash_file('sha256', base_path(PublicContent53Package::PACKAGE.'/'.$name))."\n";
+        }
+
+        return hash('sha256', $chain);
+    }
+
+    private function guideContext(): PromotionContext
+    {
+        return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->guideDigest(), 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 1, str_repeat('e', 64));
+    }
+
+    private function seedGuide(): array
+    {
+        $row = app(PublicContent53Package::class)->read(base_path(), $this->guideDigest())['candidates'][0];
+        foreach (['en', 'zh-CN'] as $locale) {
+            $copy = $locale === $row['identity']['locale'] ? $row['before'] : ['title' => 'Other language', 'excerpt' => 'Keep this summary', 'body_md' => 'Keep this body'];
+            $guide = CareerGuide::query()->withoutGlobalScopes()->create(array_replace($row['identity'], ['locale' => $locale,
+                'guide_code' => 'from-mbti-to-job-fit', 'status' => 'published', 'is_public' => true, 'is_indexable' => true,
+                'published_at' => now()->subDay(), 'lifecycle_state' => 'active'], $copy));
+            DB::table('career_guide_seo_meta')->insert(['career_guide_id' => $guide->id, 'seo_title' => 'Protected SEO',
+                'canonical_url' => 'https://fermatmind.com/'.($locale === 'en' ? 'en' : 'zh').'/career/guides/'.$guide->slug]);
+        }
+
+        return $row;
+    }
+
+    public function test_native_body_roundtrip_preserves_other_locale_seo_maps_and_immutable_history(): void
+    {
+        $row = $this->seedGuide();
+        $states = app(PublicContent53State::class);
+        $writer = app(PublicContent53Writer::class);
+        $before = $states->read($this->guideDigest());
+        $states->assertBaseline([$row]);
+        $published = DB::transaction(fn () => $writer->publish($this->guideContext(), $before));
+        self::assertSame(1, $published['written_count']);
+        $states->assertPublished([$row], $published['state']);
+        self::assertSame($before['MBTI-GUIDE']['counterpart'], $published['state']['MBTI-GUIDE']['counterpart']);
+        self::assertSame($before['MBTI-GUIDE']['controls'], $published['state']['MBTI-GUIDE']['controls']);
+        self::assertSame(1, CareerGuideRevision::query()->count());
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($this->guideContext(), $published['state']))['written_count']);
+        DB::transaction(fn () => $writer->restore($this->guideContext(), $before, $published['state']));
+        $restored = $states->read($this->guideDigest());
+        self::assertSame($before['MBTI-GUIDE']['values'], $restored['MBTI-GUIDE']['values']);
+        self::assertSame($before['MBTI-GUIDE']['controls'], $restored['MBTI-GUIDE']['controls']);
+        self::assertSame($published['state']['MBTI-GUIDE']['revisions'], $restored['MBTI-GUIDE']['revisions']);
+        DB::transaction(fn () => $writer->restore($this->guideContext(), $before, $published['state']));
+        self::assertSame(1, CareerGuideRevision::query()->count());
+    }
+
+    public function test_concurrent_other_language_edit_prevents_publish_and_is_not_overwritten(): void
+    {
+        $row = $this->seedGuide();
+        $states = app(PublicContent53State::class);
+        $before = $states->read($this->guideDigest());
+        DB::table('career_guides')->where('locale', $row['identity']['locale'] === 'en' ? 'zh-CN' : 'en')->update(['body_md' => 'Concurrent edit']);
+        $this->expectExceptionMessage('public_content_53_native_prestate_drift');
+        DB::transaction(fn () => app(PublicContent53Writer::class)->publish($this->guideContext(), $before));
+    }
+
+    public function test_concurrent_seo_edit_prevents_rollback(): void
+    {
+        $this->seedGuide();
+        $states = app(PublicContent53State::class);
+        $writer = app(PublicContent53Writer::class);
+        $before = $states->read($this->guideDigest());
+        $after = DB::transaction(fn () => $writer->publish($this->guideContext(), $before))['state'];
+        DB::table('career_guide_seo_meta')->update(['seo_title' => 'Concurrent edit']);
+        $this->expectExceptionMessage('public_content_53_rollback_concurrent_state');
+        DB::transaction(fn () => $writer->restore($this->guideContext(), $before, $after));
+    }
+
+    public function test_invalid_review_identity_body_and_title_changes_fail_closed(): void
+    {
+        $source = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/guide-amendment.json')), true);
+        $mutations = [
+            static function (&$p): void {
+                $p['candidates'][] = $p['candidates'][0];
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['identity']['slug'] = 'other-guide';
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['identity']['locale'] = 'fr';
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['identity']['org_id'] = 1;
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['snapshot']['title'] = 'Changed';
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['snapshot']['body_md'] = '';
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['snapshot']['is_indexable'] = false;
+            },
+        ];
+        $root = sys_get_temp_dir().'/public-guide-'.bin2hex(random_bytes(8));
+        $dir = $root.'/'.PublicContent53Package::PACKAGE;
+        mkdir($dir, 0700, true);
+        try {
+            foreach ($mutations as $mutate) {
+                $package = $source;
+                $mutate($package);
+                $bytes = json_encode($package, JSON_THROW_ON_ERROR);
+                file_put_contents($dir.'/guide-amendment.json', $bytes);
+                file_put_contents($dir.'/guide-amendment-review.json', json_encode(['schema' => 'fermatmind.public_content_guide_amendment.review.v1', 'candidate_sha256' => hash('sha256', $bytes), 'verdict' => 'PASS', 'pages' => ['MBTI-GUIDE' => 'PASS']]));
+                $chain = "fermatmind.public_content_guide_amendment.v1\n";
+                foreach (['guide-amendment.json', 'guide-amendment-review.json'] as $name) {
+                    $chain .= $name."\n".hash_file('sha256', $dir.'/'.$name)."\n";
+                }
+                try {
+                    (new PublicContent53Package)->read($root, hash('sha256', $chain));
+                    self::fail('Invalid amendment must fail');
+                } catch (DomainException $error) {
+                    self::assertStringStartsWith('public_content_53_guide_', $error->getMessage());
+                }
+            }
+        } finally {
+            unlink($dir.'/guide-amendment.json');
+            unlink($dir.'/guide-amendment-review.json');
+            rmdir($dir);
+            rmdir(dirname($dir));
+            rmdir($root);
+        }
+    }
+
+    public function test_guide_scheduling_lifecycle_and_mapping_drift_fail_closed(): void
+    {
+        $row = $this->seedGuide();
+        $states = app(PublicContent53State::class);
+        $where = $row['identity'];
+        foreach ([['scheduled_at' => now()->addDay()], ['published_at' => now()->addDay()], ['lifecycle_state' => 'archived']] as $change) {
+            $old = (array) DB::table('career_guides')->where($where)->first();
+            DB::table('career_guides')->where($where)->update($change);
+            try {
+                $states->read($this->guideDigest());
+                self::fail('Guide hold must reject publication');
+            } catch (DomainException $error) {
+                self::assertContains($error->getMessage(), ['public_content_53_future_publication', 'public_content_53_guide_lifecycle_hold']);
+            }
+            DB::table('career_guides')->where($where)->update($old);
+        }
+        $article = Article::query()->create(['org_id' => 0, 'slug' => 'guide-control', 'locale' => $where['locale'], 'title' => 'Map control', 'content_md' => 'Map fixture body', 'status' => 'draft']);
+        DB::table('career_guide_article_map')->insert(['career_guide_id' => DB::table('career_guides')->where($where)->value('id'), 'article_id' => $article->id, 'sort_order' => 1]);
+        $before = $states->read($this->guideDigest());
+        DB::table('career_guide_article_map')->update(['sort_order' => 2]);
+        $this->expectExceptionMessage('public_content_53_native_prestate_drift');
+        DB::transaction(fn () => app(PublicContent53Writer::class)->publish($this->guideContext(), $before));
+    }
+
+    public function test_late_guide_revision_failure_rolls_back_body_atomically(): void
+    {
+        $this->seedGuide();
+        $states = app(PublicContent53State::class);
+        $before = $states->read($this->guideDigest());
+        $armed = true;
+        DB::listen(function ($query) use (&$armed): void {
+            if ($armed && preg_match('/^insert into [`"]career_guide_revisions[`"]/i', $query->sql) === 1) {
+                $armed = false;
+                throw new DomainException('injected_guide_revision_failure');
+            }
+        });
+        try {
+            DB::transaction(fn () => app(PublicContent53Writer::class)->publish($this->guideContext(), $before));
+            self::fail('Late failure must abort');
+        } catch (DomainException $error) {
+            self::assertSame('injected_guide_revision_failure', $error->getMessage());
+        }
+        self::assertFalse($armed);
+        self::assertSame($before, $states->read($this->guideDigest()));
+        self::assertSame(0, CareerGuideRevision::query()->count());
     }
 }

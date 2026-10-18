@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\ContentPromotion;
 
 use App\Http\Controllers\API\V0_5\Cms\ArticleController;
+use App\Http\Controllers\API\V0_5\Cms\CareerGuideController;
 use App\Http\Controllers\API\V0_5\Cms\ContentPageController;
 use App\Http\Controllers\API\V0_5\Cms\LandingSurfaceController;
 use App\Http\Controllers\API\V0_5\Cms\TopicController;
@@ -28,7 +29,7 @@ final class PublicContent53State
         }
         $state = [];
         foreach ($this->package->read(base_path(), $sha)['candidates'] as $row) {
-            $table = ['article' => 'articles', 'page' => 'content_pages', 'surface' => 'landing_surfaces', 'profile' => 'topic_profiles'][$row['kind']];
+            $table = ['article' => 'articles', 'page' => 'content_pages', 'surface' => 'landing_surfaces', 'profile' => 'topic_profiles', 'guide' => 'career_guides'][$row['kind']];
             $where = $row['identity'];
             if ($row['kind'] === 'surface') {
                 $where['surface_key'] = $where['slug'];
@@ -46,7 +47,19 @@ final class PublicContent53State
                 }
             }
             $saved = ['table' => $table, 'values' => $values, 'relations' => []];
-            if ($row['kind'] === 'article') {
+            if ($row['kind'] === 'guide') {
+                if (! in_array($values['lifecycle_state'] ?? null, [null, 'active'], true)) {
+                    throw new DomainException('public_content_53_guide_lifecycle_hold');
+                }
+                $saved['revisions'] = $this->query('career_guide_revisions', ['career_guide_id' => $values['id']], $lock);
+                $saved['controls'] = $this->guideControls($values, $lock);
+                $other = $this->query('career_guides', array_replace($where, ['locale' => $where['locale'] === 'en' ? 'zh-CN' : 'en']), $lock);
+                if (count($other) !== 1) {
+                    throw new DomainException('public_content_53_guide_counterpart_missing');
+                }
+                $saved['counterpart'] = ['values' => $other[0], 'controls' => $this->guideControls($other[0], $lock),
+                    'revisions' => $this->query('career_guide_revisions', ['career_guide_id' => $other[0]['id']], $lock)];
+            } elseif ($row['kind'] === 'article') {
                 $published = $this->query('article_translation_revisions', ['id' => $values['published_revision_id'] ?? 0], $lock);
                 $working = $this->query('article_translation_revisions', ['id' => $values['working_revision_id'] ?? 0], $lock);
                 if (count($published) !== 1 || count($working) !== 1) {
@@ -112,9 +125,9 @@ final class PublicContent53State
 
     public function projection(array $row): array
     {
-        $paths = ['article' => 'articles', 'page' => 'content-pages', 'surface' => 'landing-surfaces', 'profile' => 'topics'];
+        $paths = ['article' => 'articles', 'page' => 'content-pages', 'surface' => 'landing-surfaces', 'profile' => 'topics', 'guide' => 'career-guides'];
         $controllers = ['article' => ArticleController::class, 'page' => ContentPageController::class,
-            'surface' => LandingSurfaceController::class, 'profile' => TopicController::class];
+            'surface' => LandingSurfaceController::class, 'profile' => TopicController::class, 'guide' => CareerGuideController::class];
         $request = Request::create('/api/v0.5/'.$paths[$row['kind']].'/'.$row['identity']['slug'], 'GET', ['org_id' => 0, 'locale' => $row['identity']['locale']]);
         $response = app($controllers[$row['kind']])->show($request, $row['identity']['slug']);
         $data = $response->getData(true);
@@ -198,10 +211,27 @@ final class PublicContent53State
         return hash('sha256', PromotionContextFactory::canonicalJson($value));
     }
 
-    private function query(string $table, array $where, bool $lock): array
+    private function guideControls(array $values, bool $lock): array
     {
-        $query = DB::table($table)->where($where)->orderBy('id');
+        $result = ['seo' => $this->query('career_guide_seo_meta', ['career_guide_id' => $values['id']], $lock)];
+        foreach (['career_guide_job_map', 'career_guide_article_map', 'career_guide_personality_map'] as $table) {
+            $result[$table] = $this->query($table, ['career_guide_id' => $values['id']], $lock, false);
+        }
 
-        return ($lock ? $query->lockForUpdate() : $query)->get()->map(static fn (object $record): array => (array) $record)->all();
+        return $result;
+    }
+
+    private function query(string $table, array $where, bool $lock, bool $hasId = true): array
+    {
+        $query = DB::table($table)->where($where);
+        if ($hasId) {
+            $query->orderBy('id');
+        }
+        $rows = ($lock ? $query->lockForUpdate() : $query)->get()->map(static fn (object $record): array => (array) $record)->all();
+        if (! $hasId) {
+            usort($rows, static fn (array $a, array $b): int => strcmp(PromotionContextFactory::canonicalJson($a), PromotionContextFactory::canonicalJson($b)));
+        }
+
+        return $rows;
     }
 }

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPromotion;
 
+use App\Filament\Ops\Resources\CareerGuideResource\Support\CareerGuideWorkspace;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
+use App\Models\CareerGuide;
+use App\Models\CareerGuideRevision;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
@@ -43,6 +46,7 @@ final class PublicContent53Writer
                 continue;
             }
             match ($row['kind']) {
+                'guide' => $this->guide($row, $saved, $context),
                 'article' => $this->article($row, $saved, $context),
                 'page' => $this->page($row, $saved, $context),
                 'surface' => $this->surface($row, $saved),
@@ -51,14 +55,29 @@ final class PublicContent53Writer
             $written++;
         }
 
-        return ['written_count' => $written, 'state' => $this->states->read($context->packageSha256, true)];
+        $after = $this->states->read($context->packageSha256, true);
+        foreach ($before as $id => $saved) {
+            if ($saved['table'] !== 'career_guides') {
+                continue;
+            }
+            $protected = $after[$id];
+            foreach (['body_md', 'body_html', 'updated_at'] as $field) {
+                $protected['values'][$field] = $saved['values'][$field];
+            }
+            $protected['revisions'] = $saved['revisions'];
+            if ($this->states->hash($protected) !== $this->states->hash($saved)) {
+                throw new DomainException('public_content_53_guide_protected_state_changed');
+            }
+        }
+
+        return ['written_count' => $written, 'state' => $after];
     }
 
     public function restore(PromotionContext $context, array $before, array $after): void
     {
         $this->assertContext($context);
         $current = $this->states->read($context->packageSha256, true);
-        if ($this->states->hash($current) === $this->states->hash($before)) {
+        if ($this->businessHash($current) === $this->businessHash($before)) {
             return;
         }
         if ($this->states->hash($current) !== $this->states->hash($after)) {
@@ -77,9 +96,35 @@ final class PublicContent53Writer
                 $this->material->recordPublished($article, $revision, now(), 'rollback');
             }
         }
-        if ($this->states->hash($this->states->read($context->packageSha256, true)) !== $this->states->hash($before)) {
+        if ($this->businessHash($this->states->read($context->packageSha256, true)) !== $this->businessHash($before)) {
             throw new DomainException('public_content_53_rollback_readback');
         }
+    }
+
+    private function businessHash(array $state): string
+    {
+        foreach ($state as &$saved) {
+            if ($saved['table'] === 'career_guides') {
+                unset($saved['revisions']);
+            }
+        }
+        unset($saved);
+
+        return $this->states->hash($state);
+    }
+
+    private function guide(array $row, array $saved, PromotionContext $context): void
+    {
+        $guide = CareerGuide::query()->withoutGlobalScopes()->findOrFail($saved['values']['id']);
+        $guide->forceFill(['body_md' => $row['snapshot']['body_md'], 'body_html' => null])->saveQuietly();
+        $snapshot = CareerGuideWorkspace::snapshotPayload($guide);
+        $snapshot['promotion'] = ['source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId,
+            'package_sha256' => $context->packageSha256, 'approval_kind' => 'verified_automated_exact_package'];
+        CareerGuideRevision::query()->create([
+            'career_guide_id' => $guide->id, 'revision_no' => CareerGuideWorkspace::nextRevisionNo($guide),
+            'snapshot_json' => $snapshot, 'note' => 'verified-automated-exact-package:'.$context->packageSha256,
+            'created_by_admin_user_id' => null, 'created_at' => now(),
+        ]);
     }
 
     private function article(array $row, array $saved, PromotionContext $context): void

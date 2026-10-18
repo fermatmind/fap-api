@@ -6,6 +6,9 @@ import { canonical } from './iq-public-scale-package.mjs';
 
 export const packagePath = 'content_assets/public_content_53';
 export function packageDigest(backendRoot) {
+  if (existsSync(resolve(backendRoot, packagePath, 'guide-amendment.json'))) {
+    return sha('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
+  }
   if (existsSync(resolve(backendRoot, packagePath, 'article-amendment.json'))) {
     return sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
   }
@@ -17,13 +20,18 @@ export function packageDigest(backendRoot) {
 }
 export const executorPaths = [
   "app/Console/Commands/ContentPromoteExactPackage.php",
+  "app/Filament/Ops/Resources/CareerGuideResource/Support/CareerGuideWorkspace.php",
   "app/Http/Controllers/API/V0_5/Cms/ArticleController.php",
+  "app/Http/Controllers/API/V0_5/Cms/CareerGuideController.php",
   "app/Http/Controllers/API/V0_5/Cms/ContentPageController.php",
   "app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php",
   "app/Http/Controllers/API/V0_5/Cms/TopicController.php",
   "app/Models/Article.php",
   "app/Models/ArticleSeoMeta.php",
   "app/Models/ArticleTranslationRevision.php",
+  "app/Models/CareerGuide.php",
+  "app/Models/CareerGuideRevision.php",
+  "app/Models/CareerGuideSeoMeta.php",
   "app/Models/CmsTranslationRevision.php",
   "app/Models/ContentPage.php",
   "app/Models/LandingSurface.php",
@@ -32,6 +40,8 @@ export const executorPaths = [
   "app/Models/TopicProfileRevision.php",
   "app/Models/TopicProfileSection.php",
   "app/Models/TopicProfileSeoMeta.php",
+  "app/Services/Cms/CareerGuideSeoService.php",
+  "app/Services/Cms/CareerGuideService.php",
   "app/Services/ContentPromotion/Adapters/PublicContent53PromotionAdapter.php",
   "app/Services/ContentPromotion/ExactPackagePathGuard.php",
   "app/Services/ContentPromotion/ExactPackagePromotionService.php",

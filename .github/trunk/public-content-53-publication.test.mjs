@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
-import { assertDom, pathFor, read } from './public-content-53-online-qa.mjs';
+import { assertDom, pathFor, read, projection } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 const translationDigest=()=>createHash('sha256').update('fermatmind.public_content_translation.v1\n'+['translation-batch.json','translation-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
@@ -48,8 +48,8 @@ test('previous translation package remains readable by its own immutable digest'
  assert.equal(rows.filter(row=>row.staging_source_snapshot).length,3);
  assert.equal(rows.find(row=>row.page_id==='PAGE-32').kind,'surface');
 });
-test('active amendment binds only the reviewed existing article body',()=>{
- const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
+test('previous article amendment still binds only the reviewed existing article body',()=>{
+ const binding=inspectPackage(root);const sha=bytes=>createHash('sha256').update(bytes).digest('hex');const digest=sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));const rows=readCandidateRows(root,digest).candidates;
  assert.equal(binding.expected_row_count,1);assert.equal(rows.length,1);
  const row=rows[0];assert.equal(row.page_id,'PAGE-54');assert.equal(row.kind,'article');
  assert.deepEqual(row.identity,{org_id:0,slug:'mbti-full-report-career-relationship-communication',locale:'en'});
@@ -239,4 +239,21 @@ test('category acceptance binds metadata and visible sections without mistaking 
   assert.throws(()=>assertDom(row,html.replace(payload.seo.description,'Old SEO summary'),before,'production'),/METADATA/);
   for(const [index,item] of payload.differences.items.entries()) if(item.description !== row.before.payload_json.differences.items[index].description) assert.throws(()=>assertDom(row,html.replaceAll('<p>'+item.description+'</p>',''),before,'production'),/VISIBLE_BODY/);
  }
+});
+
+test('active single-locale guide amendment protects identity and checks real body_md consumer',()=>{
+ const row=readCandidateRows(root).candidates[0];assert.equal(row.kind,'guide');
+ assert.equal(inspectPackage(root).expected_row_count,1);assert.equal(row.identity.slug,'from-mbti-to-job-fit');
+ assert.ok(['en','zh-CN'].includes(row.identity.locale));
+ for(const before of [row.before,row.staging_before]) for(const field of ['title','excerpt']) assert.equal(before[field],row.snapshot[field]);
+ const native={...row.identity,...row.snapshot,guide_code:row.identity.slug,is_public:true};
+ assert.deepEqual(projection(row,{ok:true,guide:native}),row.snapshot);
+ for(const patch of [{org_id:1},{guide_code:'other'},{locale:'fr'},{slug:'other'},{is_public:false}])
+  assert.throws(()=>projection(row,{ok:true,guide:{...native,...patch}}),/IDENTITY_DRIFT/);
+ const small={...row,snapshot:{title:'Career choices',body_md:'Required new answer.\n\n[Interview practice](/en/career/guides/interview-strategy-by-role)'}};
+ const url='https://fermatmind.com'+pathFor(small);const before={dom:{canonical:[url],robots:[],alternates:[]}};
+ const html=`<html><head><link rel="canonical" href="${url}"></head><body><main><h1>Career choices</h1><p>Required new answer.</p><a href="/en/career/guides/interview-strategy-by-role">Interview practice</a></main></body></html>`;
+ assert.doesNotThrow(()=>assertDom(small,html,before,'production'));
+ assert.throws(()=>assertDom(small,html.replace('<p>Required new answer.</p>','<script>Required new answer.</script>'),before,'production'),/VISIBLE_BODY/);
+ assert.throws(()=>assertDom(small,html.replace('href="/en/career/guides/interview-strategy-by-role"','href="/en/career/guides/other"'),before,'production'),/LINK/);
 });
