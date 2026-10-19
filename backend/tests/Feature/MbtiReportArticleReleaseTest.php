@@ -121,6 +121,34 @@ final class MbtiReportArticleReleaseTest extends TestCase
         $this->assertSame(6, MbtiReportArticleRelease::faqLimit($article, $metadata, 6));
     }
 
+    public function test_approved_legacy_staging_source_label_is_normalized_but_pending_states_are_held(): void
+    {
+        $this->seedBaseline('staging');
+        $this->app->detectEnvironment(fn () => 'staging');
+        DB::table('articles')->where('id', 10)->update(['translation_status' => 'approved']);
+        $this->assertRejected();
+        \App\Models\EditorialReview::query()->create(['org_id' => 0, 'content_type' => 'article', 'content_id' => 10,
+            'workflow_state' => 'approved', 'reviewed_at' => now()]);
+        foreach (['machine_draft', 'human_review', 'stale', 'archived', 'unknown'] as $state) {
+            DB::table('articles')->where('id', 10)->update(['translation_status' => $state]);
+            $this->assertRejected();
+        }
+        foreach (['', 'approved', 'published'] as $state) {
+            DB::table('articles')->where('id', 10)->update(['translation_status' => $state]);
+            $this->assertSame(['status' => 'ready', 'changed' => 0], app(MbtiReportArticleRelease::class)->publish(true));
+        }
+        DB::table('articles')->where('id', 10)->update(['translation_status' => 'approved']);
+        $this->assertSame(['status' => 'published', 'changed' => 2], app(MbtiReportArticleRelease::class)->publish());
+        $this->assertSame('source', DB::table('articles')->where('id', 10)->value('translation_status'));
+    }
+
+    public function test_production_does_not_normalize_legacy_source_labels(): void
+    {
+        $this->seedBaseline();
+        DB::table('articles')->where('id', 10)->update(['translation_status' => 'approved']);
+        $this->assertRejected();
+    }
+
     private function assertRejected(): void
     {
         $state = fn () => json_encode(array_map(fn ($table) => DB::table($table)->orderBy('id')->get()->all(), [

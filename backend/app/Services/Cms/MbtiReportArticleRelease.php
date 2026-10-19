@@ -86,8 +86,15 @@ final class MbtiReportArticleRelease
                         throw new RuntimeException('MBTI article SEO baseline drift: '.$field);
                     }
                 }
-                if (! $article->isSourceArticle() && ! (app()->environment('staging') && $article->translation_status === 'published')) {
-                    throw new RuntimeException('MBTI article source identity drift.');
+                // Legacy staging labels are not lineage. Accept only non-pending labels
+                // on an already approved, exact published source; never normalize a hold.
+                $legacySourceStatus = app()->environment('staging') && $review?->workflow_state === 'approved'
+                    && in_array($article->translation_status, [null, '', Article::TRANSLATION_STATUS_APPROVED, Article::TRANSLATION_STATUS_PUBLISHED], true);
+                if (! $article->isSourceArticle() && ! $legacySourceStatus) {
+                    throw new RuntimeException('MBTI article source identity drift: '.json_encode([
+                        'article_id' => $article->id, 'translation_status' => $article->translation_status,
+                        'revision_id' => $revision->id, 'review_state' => $review?->workflow_state,
+                    ], JSON_THROW_ON_ERROR));
                 }
                 if (! app(ArticleEditorialCompletenessGate::class)->inspect($article->locale, $body, ['body' => $body])['ok']) {
                     throw new RuntimeException('MBTI article completeness failed.');
