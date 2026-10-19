@@ -13,9 +13,9 @@ use PHPUnit\Framework\TestCase;
 
 final class CareerPageDisplayResolverTest extends TestCase
 {
-    private function source(): array
+    private function source(string $slug = 'accountants-and-auditors'): array
     {
-        return json_decode(file_get_contents(dirname(__DIR__, 5).'/content_assets/career/current/careers/accountants-and-auditors/zh-CN.json'), true, 512, JSON_THROW_ON_ERROR);
+        return json_decode(file_get_contents(dirname(__DIR__, 5).'/content_assets/career/current/careers/'.$slug.'/zh-CN.json'), true, 512, JSON_THROW_ON_ERROR);
     }
 
     private function project(array $source): array
@@ -30,10 +30,11 @@ final class CareerPageDisplayResolverTest extends TestCase
         $source = $this->source();
         $page = $this->project($source);
         $facts = array_column($source['fact_register']['facts'], null, 'fact_id');
-        self::assertSame('missing', $source['hero']['ai']['availability']);
-        self::assertSame('missing', $page['hero']['ai']['availability']);
-        self::assertNull($page['hero']['ai']['fact_ref']);
-        self::assertNull($page['hero']['ai']['fact']);
+        self::assertSame('available', $source['hero']['ai']['availability']);
+        self::assertSame([
+            ...$source['hero']['ai'],
+            'fact' => $facts[$source['hero']['ai']['fact_ref']],
+        ], $page['hero']['ai']);
         self::assertSame($source['hero']['badges'], $page['hero']['badges']);
         foreach ($source['hero']['metrics'] as $index => $metric) {
             self::assertSame($metric['availability'], $page['hero']['metrics'][$index]['availability']);
@@ -52,19 +53,39 @@ final class CareerPageDisplayResolverTest extends TestCase
 
     public function test_formal_actor_file_projects_complete_content_without_internal_authoring_fields(): void
     {
-        $source = json_decode(file_get_contents(dirname(__DIR__, 5).'/content_assets/career/current/careers/actors/zh-CN.json'), true, 512, JSON_THROW_ON_ERROR);
+        $source = $this->source('actors');
         $page = $this->project($source);
+        $facts = array_column($source['fact_register']['facts'], null, 'fact_id');
         self::assertSame($source['source_content_sha256'], $page['source_content_sha256']);
         self::assertSame('actors', $page['subject']['canonical_slug']);
         self::assertSame('zh-CN', $page['locale']);
         self::assertSame($source['blocks'], $page['content']['blocks']);
         self::assertCount(22, $page['display']['components']);
         self::assertCount(10, $page['display']['components']['faq_block']['items']);
-        self::assertSame('missing', $page['hero']['ai']['availability']);
+        self::assertSame('available', $source['hero']['ai']['availability']);
+        self::assertSame([
+            ...$source['hero']['ai'],
+            'fact' => $facts[$source['hero']['ai']['fact_ref']],
+        ], $page['hero']['ai']);
         self::assertCount(3, $page['hero']['badges']);
         self::assertStringNotContainsString('authoring_structure', json_encode($page));
         self::assertStringNotContainsString('"$item"', json_encode($page['display']));
         self::assertStringNotContainsString('"$join"', json_encode($page['display']));
+    }
+
+    public function test_missing_ai_metric_does_not_expose_an_unselected_registered_fact(): void
+    {
+        foreach (['accountants-and-auditors', 'actors'] as $slug) {
+            $source = $this->source($slug);
+            self::assertContains($source['hero']['ai']['fact_ref'], array_column($source['fact_register']['facts'], 'fact_id'));
+            // Missing data is a controlled input, not the current publication state.
+            $source['hero']['ai']['availability'] = 'missing';
+            $source['hero']['ai']['fact_ref'] = null;
+
+            $page = $this->project($source);
+
+            self::assertSame([...$source['hero']['ai'], 'fact' => null], $page['hero']['ai']);
+        }
     }
 
     public function test_editing_one_formal_file_field_updates_display_without_database_or_frontend_copy(): void
