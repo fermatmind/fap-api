@@ -34,12 +34,14 @@ final class CareerInterestPracticeReleaseTest extends TestCase
     {
         $this->seedBaseline();
         $beforeSeo = DB::table('article_seo_meta')->get()->toJson();
+        $searchFingerprint = app(\App\Services\Cms\ArticleMaterialDecisionService::class)->currentSearchFingerprint(\App\Models\Article::withoutGlobalScopes()->findOrFail(40));
         $beforeGuide = (array) DB::table('career_guides')->find(12);
         $old = (array) DB::table('article_translation_revisions')->find(774);
         $service = app(CareerInterestPracticeRelease::class);
         $this->assertSame(['status' => 'ready', 'changed' => 0], $service->publish(true));
         $this->assertSame(['status' => 'published', 'changed' => 2], $service->publish());
         $this->assertSame($beforeSeo, DB::table('article_seo_meta')->get()->toJson());
+        $this->assertSame($searchFingerprint, app(\App\Services\Cms\ArticleMaterialDecisionService::class)->currentSearchFingerprint(\App\Models\Article::withoutGlobalScopes()->findOrFail(40)));
         $this->assertSame(1, DB::table('career_guide_revisions')->count());
         $this->assertSame(2, DB::table('article_translation_revisions')->count());
         $after = (array) DB::table('article_translation_revisions')->find(774);
