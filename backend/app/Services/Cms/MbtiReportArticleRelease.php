@@ -24,7 +24,7 @@ final class MbtiReportArticleRelease
 {
     public const ROOT = 'content_assets/mbti_report_articles/20261019';
 
-    public const SHA256 = '352fa4d22e6bc62e39bfc33564e0e3b702d2f6f4350f41ceeba778fe4cf7479a';
+    public const SHA256 = 'ec30c99cd7bf66c4c022ea3de71b0d384f36e6ced0ca07d747420bda8c379d8a';
 
     public function publish(bool $dryRun = false): array
     {
@@ -221,6 +221,13 @@ final class MbtiReportArticleRelease
             if (basename($file) !== $file || ! hash_equals($sha, hash_file('sha256', base_path(self::ROOT.'/'.$file)))) {
                 throw new RuntimeException('MBTI article reviewed input drift.');
             }
+        }
+
+        $reviewed = json_decode(file_get_contents(base_path(self::ROOT.'/publication-metadata.json')), true, 64, JSON_THROW_ON_ERROR);
+        $fields = array_flip(['identity', 'file', 'title', 'excerpt', 'seo_title', 'seo_description', 'faq_items']);
+        $reader = array_map(fn ($row) => array_intersect_key($row, $fields), $package['articles']);
+        if (PromotionContextFactory::canonicalJson($reader) !== PromotionContextFactory::canonicalJson($reviewed['articles'])) {
+            throw new RuntimeException('MBTI article reviewed metadata drift.');
         }
 
         return $package;
