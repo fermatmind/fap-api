@@ -121,7 +121,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
         $schedule->command('seo:refresh-llms-full-cache')->preventOverlapsUsing($maintenanceMutex)->everyThirtyMinutes()->withoutOverlapping(10)->environments('production');
         $schedule->command('cache:public-projection retire')->preventOverlapsUsing($maintenanceMutex)->everyFiveMinutes()->withoutOverlapping(5);
         $schedule->command('seo:warm-sitemap-source-cache --json')->preventOverlapsUsing($maintenanceMutex)->everyFiveMinutes()->withoutOverlapping(5);
-        $schedule->command('articles:indexnow-candidates --execute --limit=100')
+        $schedule->command('articles:indexnow-candidates --channels=indexnow,baidu_push --execute --limit=100')
             ->everyTenMinutes()
             ->withoutOverlapping(15)
             ->onOneServer()

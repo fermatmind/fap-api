@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\TestCase;
 
@@ -146,7 +147,13 @@ final class ArticleMaterialDecisionTest extends TestCase
         self::assertSame((string) $initial->search_surface_fingerprint, (string) $changed->search_surface_fingerprint);
     }
 
-    public function test_indexnow_candidate_planning_uses_exact_public_url_and_skips_body_only_changes(): void
+    public static function queueStates(): array
+    {
+        return [['new'], ['pending'], ['approved']];
+    }
+
+    #[DataProvider('queueStates')]
+    public function test_indexnow_candidate_planning_uses_exact_public_url_and_skips_body_only_changes(string $queueState): void
     {
         $article = $this->draftArticle('zh-CN', 'indexnow-candidate');
         $article->seoMeta->forceFill(['canonical_url' => '/zh/articles/indexnow-candidate'])->saveQuietly();
@@ -196,7 +203,7 @@ final class ArticleMaterialDecisionTest extends TestCase
             'is_private_flow' => false,
             'first_seen_at' => now(),
             'last_seen_at' => now(),
-            'metadata_json' => json_encode(['claim_safe' => true, 'publication_state' => 'published', 'source_table' => 'articles'], JSON_THROW_ON_ERROR),
+            'metadata_json' => json_encode(['claim_safe' => true, 'publication_state' => 'published', 'source_table' => 'articles', 'content_hash' => ContentMaterialDecision::query()->latest('id')->value('search_surface_fingerprint')], JSON_THROW_ON_ERROR),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -230,6 +237,7 @@ final class ArticleMaterialDecisionTest extends TestCase
             (int) $bodyRevision->id,
             dispatchFollowUp: false,
         );
+        $this->syncSearchFingerprint($url);
         $metadataChanged = $this->indexNowPlan((int) $article->id);
         self::assertSame(1, $metadataChanged['candidate_count']);
         self::assertSame('search_surface_changed', $metadataChanged['items'][0]['reason']);
@@ -248,6 +256,7 @@ final class ArticleMaterialDecisionTest extends TestCase
             'seo_intel.search_channel_queue.live_submission.indexnow.key_location' => 'https://fermatmind.com/fixture-indexnow-key.txt',
         ]);
         $seo = $article->fresh()->seoMeta;
+        $seo->forceFill(['updated_at' => now()->addSecond()])->saveQuietly();
         $title = htmlspecialchars((string) $seo->seo_title, ENT_QUOTES | ENT_HTML5);
         $description = htmlspecialchars((string) $seo->seo_description, ENT_QUOTES | ENT_HTML5);
         Http::fake([
@@ -256,6 +265,15 @@ final class ArticleMaterialDecisionTest extends TestCase
                 .'</head><body><main><h1>Article title</h1>'.str_repeat('Current public article body. ', 20).'</main></body></html>', 200),
             'api.indexnow.org/*' => Http::response('', 202),
         ]);
+        $queue = app(\App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner::class);
+        $writer = app(\App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueWriteService::class);
+        $planned = $queue->plan('indexnow', 'article', 1, $url)['planned_items'];
+        if ($queueState !== 'new') {
+            $written = $writer->write($planned);
+            if ($queueState === 'approved') {
+                DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $written['queue_item_ids'][0])->update(['approval_state' => 'approved']);
+            }
+        }
         $submitted = $this->indexNowPlan((int) $article->id, true);
         self::assertSame(1, $submitted['submitted_count']);
         self::assertSame('provider_accepted', $submitted['items'][0]['state']);
@@ -269,15 +287,92 @@ final class ArticleMaterialDecisionTest extends TestCase
         $repeated = $this->indexNowPlan((int) $article->id, true);
         self::assertSame(0, $repeated['submitted_count'], json_encode($repeated, JSON_THROW_ON_ERROR));
         Http::assertSentCount(2);
+
+        // A racing/stale writer must never reset an accepted queue item.
+        $writer->write($planned);
+        self::assertSame('submitted', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->value('execution_state'));
+        foreach (['submit_failed', 'submitting', 'platform_action_required', 'provider_security_hold'] as $state) {
+            DB::connection('seo_intel')->table('seo_search_channel_queue_items')->update(['execution_state' => $state]);
+            $held = $this->indexNowPlan((int) $article->id, true);
+            self::assertSame(0, $held['submitted_count']);
+            self::assertSame('already_queued', $held['items'][0]['state']);
+            Http::assertSentCount(2);
+        }
+
+        config([
+            'seo_intel.article_baidu_auto_enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.baidu.endpoint' => 'http://data.zz.baidu.com/urls',
+            'seo_intel.search_channel_queue.live_submission.baidu.site' => 'https://fermatmind.com',
+            'seo_intel.search_channel_queue.live_submission.baidu.token' => 'fixture-baidu-token',
+        ]);
+        $baidu = $this->indexNowPlan((int) $article->id, true, 'baidu_push');
+        self::assertSame('provider_security_hold', $baidu['items'][0]['state']);
+        self::assertFalse($baidu['search_submission_attempted']);
+        self::assertSame(1, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->where('event_type', 'search_channel_provider_security_hold_recorded')->count());
+        Http::assertSentCount(3); // Only the public HTML read; zero credential-bearing HTTP.
+        $this->indexNowPlan((int) $article->id, true, 'baidu_push');
+        Http::assertSentCount(3);
+    }
+
+    public function test_exact_article_source_carries_current_search_fingerprint_and_excludes_other_articles_and_locales(): void
+    {
+        $article = $this->draftArticle('en', 'exact-source');
+        app(ArticlePublishService::class)->publishArticle((int) $article->id);
+        $other = $this->draftArticle('en', 'other-source');
+        app(ArticlePublishService::class)->publishArticle((int) $other->id);
+        $source = app(\App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource::class);
+        $records = $source->candidatesForArticle((string) $article->id, 'en');
+        self::assertCount(1, $records);
+        self::assertSame((string) $article->id, $records[0]->entityIdOrSlug);
+        self::assertSame(app(ArticleMaterialDecisionService::class)->currentSearchFingerprint($article->fresh()), $records[0]->metadata['content_hash']);
+        self::assertSame([], $source->candidatesForArticle((string) $article->id, 'zh-CN'));
+        app(ArticlePublishService::class)->unpublishArticle((int) $article->id);
+        self::assertSame([], $source->candidatesForArticle((string) $article->id, 'en'));
+    }
+
+    private function syncSearchFingerprint(string $url): void
+    {
+        DB::connection('seo_intel')->table('seo_urls')->where('canonical_url', $url)->update([
+            'metadata_json' => json_encode(['claim_safe' => true, 'publication_state' => 'published', 'source_table' => 'articles',
+                'content_hash' => ContentMaterialDecision::query()->latest('id')->value('search_surface_fingerprint')], JSON_THROW_ON_ERROR),
+        ]);
+    }
+
+    public function test_current_seo_writer_records_decision_and_audit_timestamps_do_not_create_changes(): void
+    {
+        $article = $this->draftArticle('en', 'current-seo');
+        app(ArticlePublishService::class)->publishArticle((int) $article->id);
+        $initial = ContentMaterialDecision::query()->latest('id')->firstOrFail();
+        $workspace = app(\App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoMetaWorkspace::class);
+        $workspace->save($article->fresh(), ['og_title' => 'New semantic metadata']);
+        $changed = ContentMaterialDecision::query()->latest('id')->firstOrFail();
+        self::assertNotSame($initial->search_surface_fingerprint, $changed->search_surface_fingerprint);
+        self::assertSame($initial->authority_revision, $changed->authority_revision);
+        self::assertSame($changed->search_surface_fingerprint, app(ArticleMaterialDecisionService::class)->currentSearchFingerprint($article->fresh()));
+        $workspace->save($article->fresh(), ['og_title' => 'New semantic metadata']);
+        self::assertSame(2, ContentMaterialDecision::query()->count());
+        $seo = $article->fresh()->seoMeta;
+        $schema = $seo->schema_json;
+        $schema['verified_at'] = '2026-10-19T01:00:00Z';
+        $schema['nested']['recorded_at'] = '2026-10-19T01:00:00Z';
+        $seo->forceFill(['schema_json' => $schema])->saveQuietly();
+        DB::transaction(fn () => app(ArticleMaterialDecisionService::class)->recordCurrentPublished($article->fresh()));
+        $before = ContentMaterialDecision::query()->latest('id')->firstOrFail();
+        $schema['verified_at'] = '2026-10-20T01:00:00Z';
+        $schema['nested']['recorded_at'] = '2026-10-20T01:00:00Z';
+        $seo->forceFill(['schema_json' => $schema])->saveQuietly();
+        DB::transaction(fn () => app(ArticleMaterialDecisionService::class)->recordCurrentPublished($article->fresh()));
+        self::assertSame($before->id, ContentMaterialDecision::query()->latest('id')->value('id'));
     }
 
     /** @return array<string, mixed> */
-    private function indexNowPlan(int $articleId, bool $execute = false): array
+    private function indexNowPlan(int $articleId, bool $execute = false, string $channels = 'indexnow'): array
     {
         $output = new BufferedOutput;
         $exitCode = Artisan::call('articles:indexnow-candidates', [
             '--article-id' => $articleId,
             '--execute' => $execute,
+            '--channels' => $channels,
         ], $output);
         $raw = $output->fetch();
         self::assertSame(0, $exitCode, $raw);

@@ -759,7 +759,7 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[Test]
-    public function writer_returns_existing_queue_item_id_when_update_or_insert_matches_existing_idempotency_key(): void
+    public function writer_preserves_existing_queue_item_when_idempotency_key_matches(): void
     {
         $plannedItem = $this->plannedQueueItem([
             'canonical_url' => 'https://fermatmind.com/zh/articles/requeue-existing',
@@ -773,7 +773,8 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
         $this->assertSame([1], $firstWrite['queue_item_ids'] ?? null);
         $this->assertSame([1], $secondWrite['queue_item_ids'] ?? null);
         $this->assertSame(1, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
-        $this->assertSame(2, $secondWrite['queue_items'][0]['batch_id'] ?? null);
+        $this->assertSame(1, $secondWrite['queue_items'][0]['batch_id'] ?? null);
+        $this->assertSame(0, $secondWrite['written_items']);
         $this->assertSame('indexnow', $secondWrite['queue_items'][0]['channel'] ?? null);
     }
 

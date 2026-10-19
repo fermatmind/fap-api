@@ -25,6 +25,25 @@ final class ArticleMaterialDecisionService
         private readonly MaterialFingerprintV1 $fingerprint,
     ) {}
 
+    public function recordCurrentPublished(Article $article): ?ContentMaterialDecision
+    {
+        if ($article->status !== 'published' || ! $article->is_public || ! $article->published_revision_id) {
+            return null;
+        }
+
+        $revision = ArticleTranslationRevision::withoutGlobalScopes()->findOrFail($article->published_revision_id);
+
+        return $this->recordPublished($article, $revision, now());
+    }
+
+    public function currentSearchFingerprint(Article $article): string
+    {
+        $revision = ArticleTranslationRevision::withoutGlobalScopes()->findOrFail($article->published_revision_id);
+        $this->assertPublishedAuthority($article, $revision);
+
+        return $this->fingerprint->searchSurfaceFingerprint($this->materialPayload($article, $revision, false));
+    }
+
     public function recordPublished(
         Article $article,
         ArticleTranslationRevision $revision,
@@ -147,14 +166,14 @@ final class ArticleMaterialDecisionService
     /**
      * @return array<string, mixed>
      */
-    private function materialPayload(Article $article, ArticleTranslationRevision $revision): array
+    private function materialPayload(Article $article, ArticleTranslationRevision $revision, bool $lock = true): array
     {
         $seo = ArticleSeoMeta::query()
             ->withoutGlobalScopes()
             ->where('org_id', $article->org_id)
             ->where('article_id', $article->id)
             ->where('locale', $article->locale)
-            ->lockForUpdate()
+            ->when($lock, static fn ($query) => $query->lockForUpdate())
             ->first();
         $metadata = is_array($revision->authority_metadata_json)
             ? $revision->authority_metadata_json
@@ -416,6 +435,8 @@ final class ArticleMaterialDecisionService
             'generated_at',
             'published_at',
             'updated_at',
+            'verified_at',
+            'recorded_at',
         ];
         foreach ($excluded as $key) {
             unset($value[$key]);

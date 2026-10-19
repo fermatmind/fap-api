@@ -39,6 +39,12 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
         return PublicAuthorityCandidateResolver::resolve($records);
     }
 
+    /** @return list<UrlTruthInventoryRecord> */
+    public function candidatesForArticle(string $entityIdentity, string $locale): array
+    {
+        return PublicAuthorityCandidateResolver::resolve($this->backendAuthority->candidatesForArticle($entityIdentity, $locale));
+    }
+
     /** @return array<string,mixed> */
     public function metadata(): array
     {

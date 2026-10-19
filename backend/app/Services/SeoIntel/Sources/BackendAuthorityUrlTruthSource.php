@@ -8,6 +8,7 @@ use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\CareerGuide;
+use App\Models\ContentMaterialDecision;
 use App\Models\ContentPage;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
@@ -33,6 +34,21 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         $this->requireComplete = true;
         try {
             return $this->candidates();
+        } finally {
+            $this->requireComplete = $previous;
+        }
+    }
+
+    /** Read one Article without scanning unrelated authority families. @return list<UrlTruthInventoryRecord> */
+    public function candidatesForArticle(string $entityIdentity, string $locale): array
+    {
+        if (preg_match('/\A[1-9][0-9]*\z/', $entityIdentity) !== 1 || ! in_array($locale, ['en', 'zh-CN'], true)) {
+            throw new \InvalidArgumentException('Article URL Truth identity is invalid.');
+        }
+        $previous = $this->requireComplete;
+        $this->requireComplete = true;
+        try {
+            return $this->articleCandidates($entityIdentity, $locale);
         } finally {
             $this->requireComplete = $previous;
         }
@@ -132,7 +148,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
     /**
      * @return list<UrlTruthInventoryRecord>
      */
-    private function articleCandidates(): array
+    private function articleCandidates(?string $entityIdentity = null, ?string $locale = null): array
     {
         $this->articlesAttempted = true;
 
@@ -141,12 +157,19 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ->withoutGlobalScope(TenantScope::class)
                 ->with(['seoMeta', 'publishedRevision'])
                 ->where('org_id', 0)
+                ->when($entityIdentity !== null, static fn ($query) => $query->whereKey($entityIdentity))
+                ->when($locale !== null, static fn ($query) => $query->where('locale', $locale))
                 ->publiclySitemapEligible()
                 ->where('llms_eligible', true)
                 ->whereIn('locale', ['en', 'zh-CN'])
                 ->orderBy('locale')
                 ->orderBy('slug')
                 ->get();
+            $decisions = \App\Support\SchemaBaseline::tableExists('content_material_decisions')
+                ? ContentMaterialDecision::query()->where('org_id', 0)->where('family', 'article')
+                    ->whereIn('authority_subject_key', $articles->map(static fn (Article $article): string => 'article:'.$article->id))
+                    ->latest('id')->get()->unique('authority_subject_key')->keyBy('authority_subject_key')
+                : collect();
         } catch (\Throwable $exception) {
             if ($this->requireComplete) {
                 throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
@@ -163,6 +186,13 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             }
 
             $seoMeta = $article->seoMeta instanceof ArticleSeoMeta ? $article->seoMeta : null;
+            $decision = $decisions->get('article:'.$article->id);
+            $searchFingerprint = $decision instanceof ContentMaterialDecision
+                && $decision->publication_state === 'published'
+                && (string) $decision->authority_revision === (string) $article->published_revision_id
+                && $decision->locale === $article->locale
+                && preg_match('/\A[a-f0-9]{64}\z/', (string) $decision->search_surface_fingerprint) === 1
+                    ? (string) $decision->search_surface_fingerprint : null;
             $path = $this->articleCanonicalPath($article, $seoMeta);
             if ($path === null) {
                 continue;
@@ -195,6 +225,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                     'sitemap_eligible' => true,
                     'llms_eligible' => true,
                     'publication_state' => 'published',
+                    'content_hash' => $searchFingerprint,
                     'robots' => 'index',
                 ],
                 attributes: [

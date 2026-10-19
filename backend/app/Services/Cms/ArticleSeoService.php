@@ -59,7 +59,7 @@ final class ArticleSeoService
             $ogTitle = Str::limit($title, 90, '');
             $ogDescription = Str::limit($this->normalizeWhitespace($descSource), 200, '');
 
-            return ArticleSeoMeta::query()
+            $seo = ArticleSeoMeta::query()
                 ->withoutGlobalScopes()
                 ->updateOrCreate(
                     [
@@ -77,6 +77,9 @@ final class ArticleSeoService
                         'robots' => (bool) $article->is_indexable ? 'index,follow' : 'noindex,nofollow',
                     ]
                 );
+            app(ArticleMaterialDecisionService::class)->recordCurrentPublished($article);
+
+            return $seo;
         });
     }
 
