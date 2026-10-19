@@ -33,6 +33,7 @@ CMS pages: the homepage, career test category and AI-coach article.
 The source is [BLS occupational projections, Table 1.2](https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm),
 2025–2035. Employment and opening counts in that table are expressed in thousands.
 Annual average openings include replacement needs; they are not net job growth.
+Figures below are converted to individual jobs and annual openings.
 
 | Career page | Statistical occupation | Employment, 2025 → 2035 | Growth | Annual average openings |
 | --- | --- | --- | --- | --- |
@@ -52,9 +53,10 @@ use existing frontend copy. Header/footer page blocks are another copy consumer.
 Article and career metadata have different brand handling, so a brand suffix in
 an article's stored SEO title alone does not prove a duplicate rendered title.
 
-An older projection period is not itself an error. The audit found 503 career
-assets with historical projection facts, 681 with historical periods in prose
-and 181 with historical periods in SEO fields. Explicitly scoped historical
-material was retained rather than relabelled as fresh data. The other 71 public
+An older projection period is not itself an error. A historical-period string
+in raw block JSON can also come from an internal reference ID, even when the
+referenced fact has a newer period. Such matches do not establish stale visible
+prose. Explicitly scoped historical material was retained rather than relabelled
+as fresh data. The other 71 public
 articles had no equivalent title/body count mismatch in this focused review;
 that is not a review of every scientific claim or a guarantee of search ranking.
