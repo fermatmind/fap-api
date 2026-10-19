@@ -5,6 +5,27 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 const sha = value => /^[a-f0-9]{40}$/.test(value ?? '');
 
+// Artifact reads are idempotent. A transient GitHub download failure must not
+// require replaying CI or any deployment; binding/digest failures still stop.
+export function downloadProductionArtifact(repository, artifact, {
+  request = () => execFileSync('gh', ['api', `repos/${repository}/actions/artifacts/${artifact.id}/zip`], {
+    timeout: 30000, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 32 * 1024 * 1024,
+  }),
+  wait = milliseconds => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, milliseconds),
+} = {}) {
+  if (artifact.expired || !/^sha256:[a-f0-9]{64}$/.test(artifact.digest ?? '')) throw new Error('Invalid production artifact digest');
+  let bytes;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try { bytes = request(); break; }
+    catch (error) {
+      if (attempt === 2 || !/\bHTTP (?:429|500|502|503|504)\b/.test(String(error.stderr ?? ''))) throw error;
+      wait((attempt + 1) * 1000);
+    }
+  }
+  if (`sha256:${createHash('sha256').update(bytes).digest('hex')}` !== artifact.digest) throw new Error('Production artifact digest mismatch');
+  return bytes;
+}
+
 export function verifyProductionBinding({ run, artifact, timing, outcome, ci, receipt, job }) {
   const candidate = artifact.name.replace(/^trunk-production-/, '');
   if (!sha(candidate) || timing.schema_version !== 'fermatmind.trunk-delivery-timing.v1'
@@ -34,11 +55,7 @@ export function githubProductionEvidence(repository) {
     return result.artifacts;
   };
   const readArchive = artifact => {
-    if (artifact.expired || !/^sha256:[a-f0-9]{64}$/.test(artifact.digest ?? '')) throw new Error('Invalid production artifact digest');
-    const bytes = execFileSync('gh', ['api', `repos/${repository}/actions/artifacts/${artifact.id}/zip`], {
-      timeout: 30000, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 32 * 1024 * 1024,
-    });
-    if (`sha256:${createHash('sha256').update(bytes).digest('hex')}` !== artifact.digest) throw new Error('Production artifact digest mismatch');
+    const bytes = downloadProductionArtifact(repository, artifact);
     const temp = mkdtempSync(join(tmpdir(), 'production-evidence-'));
     try {
       const zip = join(temp, 'artifact.zip'); writeFileSync(zip, bytes);
