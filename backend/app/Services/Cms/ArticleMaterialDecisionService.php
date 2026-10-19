@@ -435,8 +435,6 @@ final class ArticleMaterialDecisionService
             'generated_at',
             'published_at',
             'updated_at',
-            'verified_at',
-            'recorded_at',
         ];
         foreach ($excluded as $key) {
             unset($value[$key]);

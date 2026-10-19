@@ -17,6 +17,7 @@ use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueProviderHoldRecorder;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueWriteService;
 use App\Support\SchemaBaseline;
+use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -217,6 +218,10 @@ final class ArticleIndexNowCandidates extends Command
 
             return ['state' => 'pending_public_html_verification', 'issues' => [], 'idempotency_key' => $key, 'existing_id' => (int) $existing->id];
         }
+        $legacy = $this->legacySubmissionCoverage($article, $decision, $url, $channel);
+        if ($legacy !== null) {
+            return $legacy;
+        }
         $planned = $plan['planned_items'][0] ?? null;
         if ((int) ($plan['planned_queue_count'] ?? 0) !== 1 || ! is_array($planned)
             || ($planned['idempotency_key'] ?? null) !== $key
@@ -225,6 +230,57 @@ final class ArticleIndexNowCandidates extends Command
         }
 
         return ['state' => 'pending_public_html_verification', 'issues' => [], 'idempotency_key' => $key, 'planned_item' => $planned];
+    }
+
+    /** @return array<string, mixed>|null */
+    private function legacySubmissionCoverage(Article $article, ContentMaterialDecision $decision, string $url, string $channel): ?array
+    {
+        $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
+        $legacy = $connection->table('seo_search_channel_queue_items')
+            ->where('canonical_url', $url)->where('locale', $article->locale)
+            ->where('entity_id', (string) $article->id)->where('page_entity_type', 'article')
+            ->where('source_authority', 'backend_cms')->where('channel', $channel)
+            ->where('approval_state', 'approved')->where('execution_state', 'submitted')
+            ->whereNull('content_hash')->get();
+        $held = false;
+        foreach ($legacy as $item) {
+            $events = $connection->table('seo_search_channel_queue_events')->where('queue_item_id', $item->id);
+            $response = (clone $events)->where('event_type', 'bounded_live_submission_response')->latest('id')->first();
+            $started = $response === null ? null : (clone $events)->where('event_type', 'bounded_live_submission_started')
+                ->where('id', '<', $response->id)->latest('id')->first();
+            $responsePayload = json_decode((string) ($response->event_payload ?? '{}'), true);
+            $startedPayload = json_decode((string) ($started->event_payload ?? '{}'), true);
+            $hash = hash('sha256', $url);
+            if ($item->eligibility_state !== 'eligible' || $item->indexability_state !== 'indexable'
+                || $item->claim_boundary_state !== 'claim_safe' || (bool) $item->private_flow
+                || $item->url_hash !== $hash || $response === null || $started === null
+                || ($responsePayload['channel'] ?? null) !== $channel || ($responsePayload['url_hash'] ?? null) !== $hash
+                || ($startedPayload['channel'] ?? null) !== $channel || ($startedPayload['url_hash'] ?? null) !== $hash
+                || ($responsePayload['submission_status'] ?? null) !== 'accepted'
+                || ($responsePayload['execution_state'] ?? null) !== 'submitted'
+                || (int) ($responsePayload['http_status'] ?? 0) < 200 || (int) ($responsePayload['http_status'] ?? 0) >= 300
+                || $decision->material_changed_at === null
+                || trim((string) $started->created_at) === '' || trim((string) $response->created_at) === '') {
+                $held = true;
+
+                continue;
+            }
+            try {
+                $changedAt = CarbonImmutable::parse($decision->getRawOriginal('material_changed_at'), 'UTC');
+                $startedAt = CarbonImmutable::parse($started->created_at, 'UTC');
+                $responseAt = CarbonImmutable::parse($response->created_at, 'UTC');
+                if ($startedAt->lte($responseAt) && $startedAt->gt($changedAt)) {
+                    return ['state' => 'already_submitted', 'issues' => [], 'queue_item_id' => (int) $item->id];
+                }
+                if ($startedAt->gt($responseAt) || $responseAt->gte($changedAt)) {
+                    $held = true;
+                }
+            } catch (Throwable) {
+                $held = true;
+            }
+        }
+
+        return $held ? ['state' => 'held', 'issues' => ['legacy_submission_coverage_unproven']] : null;
     }
 
     /**

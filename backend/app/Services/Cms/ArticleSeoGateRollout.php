@@ -371,23 +371,33 @@ final class ArticleSeoGateRollout
             $package['faq_schema_enabled'] = false;
         }
 
+        $gate = is_array($package['hreflang_gate_v1'] ?? null) ? $package['hreflang_gate_v1'] : [];
+        $held = (bool) ($package['hreflang_hold'] ?? false);
         if ((bool) ($options['enable_hreflang'] ?? false)) {
             unset($package['hreflang_hold']);
-            $package['hreflang_gate_v1'] = [
-                'enabled' => true,
-                'policy' => 'reciprocal_counterparts_verified',
-                'verified_by' => 'articles:seo-gate-rollout',
-                'verified_at' => now()->toIso8601String(),
-            ];
+            if ($held || ($gate['enabled'] ?? null) !== true
+                || ($gate['policy'] ?? null) !== 'reciprocal_counterparts_verified'
+                || isset($gate['reason'])) {
+                $package['hreflang_gate_v1'] = [
+                    'enabled' => true,
+                    'policy' => 'reciprocal_counterparts_verified',
+                    'verified_by' => 'articles:seo-gate-rollout',
+                    'verified_at' => now()->toIso8601String(),
+                ];
+            }
         } elseif ((bool) ($options['no_hreflang_policy'] ?? false)) {
+            $reason = trim((string) ($options['hreflang_policy_reason'] ?? 'no_verified_reciprocal_counterpart'));
             unset($package['hreflang_hold']);
-            $package['hreflang_gate_v1'] = [
-                'enabled' => false,
-                'policy' => 'no_hreflang',
-                'reason' => trim((string) ($options['hreflang_policy_reason'] ?? 'no_verified_reciprocal_counterpart')),
-                'recorded_by' => 'articles:seo-gate-rollout',
-                'recorded_at' => now()->toIso8601String(),
-            ];
+            if ($held || ($gate['enabled'] ?? null) !== false || ($gate['policy'] ?? null) !== 'no_hreflang'
+                || ($gate['reason'] ?? null) !== $reason) {
+                $package['hreflang_gate_v1'] = [
+                    'enabled' => false,
+                    'policy' => 'no_hreflang',
+                    'reason' => $reason,
+                    'recorded_by' => 'articles:seo-gate-rollout',
+                    'recorded_at' => now()->toIso8601String(),
+                ];
+            }
         }
 
         $schema['editorial_package_v1'] = $package;

@@ -291,6 +291,19 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
         $this->assertTrue($payload['ok']);
         $this->assertSame('reciprocal_counterparts_verified', data_get($payload, 'after.0.schema_gates.hreflang_gate_v1.policy'));
         $this->assertSame('reciprocal_counterparts_verified', data_get($payload, 'after.1.schema_gates.hreflang_gate_v1.policy'));
+        $execute = [
+            '--article-ids' => $zh->id.','.$en->id, '--translation-group-id' => $groupId,
+            '--expected-slugs' => 'eq-test-tool-guide,eq-test-tool-guide', '--enable-hreflang' => true,
+            '--execute' => true, '--json' => true, '--no-publish' => true, '--no-search' => true,
+            '--no-sitemap-llms-change' => true, '--no-content-change' => true, '--no-revalidation' => true,
+        ];
+        self::assertSame(0, Artisan::call('articles:seo-gate-rollout', $execute), Artisan::output());
+        $before = [$zh->fresh()->seoMeta->schema_json, $en->fresh()->seoMeta->schema_json];
+        $this->travel(1)->day();
+        self::assertSame(0, Artisan::call('articles:seo-gate-rollout', $execute), Artisan::output());
+        self::assertSame($before, [$zh->fresh()->seoMeta->schema_json, $en->fresh()->seoMeta->schema_json]);
+        $this->travelBack();
+
     }
 
     public function test_enable_hreflang_blocks_simultaneous_translation_group_change(): void
@@ -328,6 +341,32 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
         $this->assertErrorCode($payload, 'hreflang_translation_group_change_conflict');
         $this->assertSame($oldGroupId, (string) $zh->refresh()->translation_group_id);
         $this->assertSame($oldGroupId, (string) $en->refresh()->translation_group_id);
+    }
+
+    public function test_repeated_gate_execution_preserves_full_gate_audit_and_material_decision(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $article = $this->createArticle(['slug' => 'no-op-gate']);
+        $this->createSeoMeta($article);
+        $options = [
+            '--article-ids' => (string) $article->id,
+            '--translation-group-id' => 'article-group', '--expected-slugs' => 'no-op-gate',
+            '--no-hreflang-policy' => true, '--execute' => true, '--json' => true,
+            '--no-publish' => true, '--no-search' => true, '--no-sitemap-llms-change' => true,
+            '--no-content-change' => true, '--no-revalidation' => true,
+        ];
+        self::assertSame(0, Artisan::call('articles:seo-gate-rollout', $options), Artisan::output());
+        $first = $article->fresh()->seoMeta->schema_json;
+        $decisionCount = \App\Models\ContentMaterialDecision::query()->count();
+        $this->travel(1)->day();
+        self::assertSame(0, Artisan::call('articles:seo-gate-rollout', $options), Artisan::output());
+        self::assertSame($first, $article->fresh()->seoMeta->schema_json);
+        self::assertSame($decisionCount, \App\Models\ContentMaterialDecision::query()->count());
+        $options['--hreflang-policy-reason'] = 'updated_explicit_policy';
+        self::assertSame(0, Artisan::call('articles:seo-gate-rollout', $options), Artisan::output());
+        self::assertNotSame($first, $article->fresh()->seoMeta->schema_json);
+        self::assertSame($decisionCount + 1, \App\Models\ContentMaterialDecision::query()->count());
+        $this->travelBack();
     }
 
     public function test_execute_requires_all_safety_flags(): void

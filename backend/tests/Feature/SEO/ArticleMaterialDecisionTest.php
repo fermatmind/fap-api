@@ -149,7 +149,7 @@ final class ArticleMaterialDecisionTest extends TestCase
 
     public static function queueStates(): array
     {
-        return [['new'], ['pending'], ['approved']];
+        return array_map(static fn (string $state): array => [$state], ['new', 'pending', 'approved', 'legacy_covered', 'legacy_before', 'legacy_crossing', 'legacy_same_second', 'legacy_missing', 'legacy_mismatch']);
     }
 
     #[DataProvider('queueStates')]
@@ -213,6 +213,46 @@ final class ArticleMaterialDecisionTest extends TestCase
         self::assertSame('initial_publish', $initial['items'][0]['reason']);
         self::assertSame(hash('sha256', $url), $initial['items'][0]['url_hash']);
         self::assertFalse($initial['writes_attempted']);
+
+        if (str_starts_with($queueState, 'legacy_')) {
+            $queue = app(\App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner::class);
+            $writer = app(\App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueWriteService::class);
+            $id = $writer->write($queue->plan('indexnow', 'article', 1, $url)['planned_items'])['queue_item_ids'][0];
+            $connection = DB::connection('seo_intel');
+            $connection->table('seo_search_channel_queue_items')->where('id', $id)->update([
+                'content_hash' => null, 'idempotency_key' => hash('sha256', 'legacy'),
+                'approval_state' => 'approved', 'execution_state' => 'submitted', 'updated_at' => now()->addDay(),
+            ]);
+            $changedAt = ContentMaterialDecision::query()->latest('id')->firstOrFail()->material_changed_at;
+            [$start, $response] = match ($queueState) {
+                'legacy_before' => [-3, -2],
+                'legacy_crossing' => [-1, 1],
+                'legacy_same_second' => [0, 0],
+                default => [1, 2],
+            };
+            if ($queueState !== 'legacy_missing') {
+                foreach (['bounded_live_submission_started' => $start, 'bounded_live_submission_response' => $response] as $type => $offset) {
+                    $connection->table('seo_search_channel_queue_events')->insert([
+                        'queue_item_id' => $id, 'event_type' => $type, 'actor_type' => 'system',
+                        'event_payload' => json_encode(['channel' => 'indexnow', 'url_hash' => $queueState === 'legacy_mismatch' ? str_repeat('0', 64) : hash('sha256', $url),
+                            'submission_status' => 'accepted', 'execution_state' => 'submitted', 'http_status' => 200], JSON_THROW_ON_ERROR),
+                        'created_at' => $changedAt->copy()->addSeconds($offset),
+                    ]);
+                }
+            }
+            $before = [$connection->table('seo_search_channel_queue_items')->get()->toJson(), $connection->table('seo_search_channel_queue_events')->get()->toJson()];
+            $result = $this->indexNowPlan((int) $article->id);
+            self::assertSame($queueState === 'legacy_before' ? 1 : 0, $result['candidate_count'], json_encode($result));
+            self::assertSame(match ($queueState) {
+                'legacy_covered' => 'already_submitted',
+                'legacy_before' => 'pending_public_html_verification',
+                default => 'held',
+            }, $result['items'][0]['state']);
+            self::assertSame($before, [$connection->table('seo_search_channel_queue_items')->get()->toJson(), $connection->table('seo_search_channel_queue_events')->get()->toJson()]);
+            self::assertFalse($result['search_submission_attempted']);
+
+            return;
+        }
 
         $currentRevisionId = (int) $article->fresh()->published_revision_id;
         $bodyRevision = $this->approvedRevision($article->fresh(), 2, ['content_md' => "## New body\n\nSubstantially revised content."]);
@@ -360,7 +400,7 @@ final class ArticleMaterialDecisionTest extends TestCase
         ]);
     }
 
-    public function test_current_seo_writer_records_decision_and_audit_timestamps_do_not_create_changes(): void
+    public function test_current_seo_writer_records_decision_and_preserves_v1_schema_hash_algorithm(): void
     {
         $article = $this->draftArticle('en', 'current-seo');
         app(ArticlePublishService::class)->publishArticle((int) $article->id);
@@ -384,7 +424,7 @@ final class ArticleMaterialDecisionTest extends TestCase
         $schema['nested']['recorded_at'] = '2026-10-20T01:00:00Z';
         $seo->forceFill(['schema_json' => $schema])->saveQuietly();
         DB::transaction(fn () => app(ArticleMaterialDecisionService::class)->recordCurrentPublished($article->fresh()));
-        self::assertSame($before->id, ContentMaterialDecision::query()->latest('id')->value('id'));
+        self::assertNotSame($before->search_surface_fingerprint, ContentMaterialDecision::query()->latest('id')->value('search_surface_fingerprint'));
     }
 
     /** @return array<string, mixed> */
