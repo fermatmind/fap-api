@@ -70,9 +70,16 @@ final class CareerInterestPracticeRelease
                 return ['status' => 'unchanged', 'changed' => 0];
             }
             $baseline = $package['baselines'][app()->environment('staging') ? 'staging' : 'prod'];
-            if ((int) $revision->id !== $baseline['article_revision_id']
-                || ! hash_equals($baseline['article_body_sha256'], hash('sha256', $article->content_md))
-                || ! hash_equals($baseline['guide_body_sha256'], hash('sha256', $guide->body_md))) {
+            $originalBaseline = (int) $revision->id === $baseline['article_revision_id']
+                && hash_equals($baseline['article_body_sha256'], hash('sha256', $article->content_md))
+                && hash_equals($baseline['guide_body_sha256'], hash('sha256', $guide->body_md));
+            // A queued earlier release may publish the first package before this refinement.
+            $previousPackage = $revision->authority_source_package === self::ROOT
+                && $revision->authority_package_sha256 === '4359c2efc6ccc89a0a7ccfcc2e87dccd3a074f9e1267a65b96c733764b9694c9'
+                && $revision->authority_source_hash === $package['files']['article.md']
+                && hash_equals($package['files']['article.md'], hash('sha256', $article->content_md))
+                && hash_equals('999895252d709247d6b0baa6f8733a41eb9b04dc5176d895b8c93f94c6bc92c2', hash('sha256', $guide->body_md));
+            if (! $originalBaseline && ! $previousPackage) {
                 throw new RuntimeException('Career practice baseline drift.');
             }
             $owner = (int) config('review_governance.solo_owner_admin_user_id');

@@ -75,6 +75,43 @@ final class CareerInterestPracticeReleaseTest extends TestCase
         $this->assertRejected();
     }
 
+    public function test_followup_migration_promotes_the_exact_preceding_package_and_is_idempotent(): void
+    {
+        $this->seedPreviousPackage();
+        $migration = require base_path('database/migrations/2026_10_19_170000_complete_career_interest_practice_clip_selection.php');
+        $migration->up();
+        $this->assertSame(file_get_contents(base_path(CareerInterestPracticeRelease::ROOT.'/guide.md')), DB::table('career_guides')->find(12)->body_md);
+        $article = \App\Models\Article::withoutGlobalScopes()->findOrFail(40);
+        $this->assertSame(CareerInterestPracticeRelease::SHA256, $article->publishedRevision->authority_package_sha256);
+        $this->assertSame(3, DB::table('article_translation_revisions')->count());
+        $migration->up();
+        $this->assertSame(3, DB::table('article_translation_revisions')->count());
+    }
+
+    public function test_previous_package_does_not_allow_foreign_guide_edits_or_missing_provenance(): void
+    {
+        $this->seedPreviousPackage();
+        DB::table('article_translation_revisions')->where('revision_status', 'published')->update(['authority_package_sha256' => 'foreign-package']);
+        $this->assertRejected();
+        DB::table('article_translation_revisions')->where('revision_status', 'published')->update(['authority_package_sha256' => '4359c2efc6ccc89a0a7ccfcc2e87dccd3a074f9e1267a65b96c733764b9694c9']);
+        DB::table('career_guides')->where('id', 12)->update(['body_md' => 'Concurrent owner edit']);
+        $this->assertRejected();
+    }
+
+    private function seedPreviousPackage(): void
+    {
+        $this->seedBaseline();
+        app(CareerInterestPracticeRelease::class)->publish();
+        DB::table('article_translation_revisions')->where('revision_status', 'published')->update(['authority_package_sha256' => '4359c2efc6ccc89a0a7ccfcc2e87dccd3a074f9e1267a65b96c733764b9694c9']);
+        $body = str_replace(
+            '初版四个镜头的片内选段依次为 0–3、0–5、0–7、0–5 秒，总长 20 秒；修改版依次为 0–2、0–4、0–5、0–4 秒，总长 15 秒，保留先后顺序。',
+            '初版选段为 3＋5＋7＋5＝20 秒；修改版为 2＋4＋5＋4＝15 秒，保留先后顺序。',
+            file_get_contents(base_path(CareerInterestPracticeRelease::ROOT.'/guide.md')),
+        );
+        $this->assertSame('999895252d709247d6b0baa6f8733a41eb9b04dc5176d895b8c93f94c6bc92c2', hash('sha256', $body));
+        DB::table('career_guides')->where('id', 12)->update(['body_md' => $body]);
+    }
+
     public function test_audit_failure_rolls_back_both_bodies_and_native_history(): void
     {
         $this->seedBaseline();
