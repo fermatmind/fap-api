@@ -560,6 +560,7 @@ class ArticleController extends Controller
             (int) ($article->published_revision_id ?? 0),
         ) ? 8 : 6;
         $faqLimit = IqPublicArticleFaqProjection::limit($article, $metadata, $faqLimit);
+        $faqLimit = \App\Services\Cms\MbtiReportArticleRelease::faqLimit($article, $metadata, $faqLimit);
         $blocks = [];
 
         foreach ($faqItems as $index => $item) {
