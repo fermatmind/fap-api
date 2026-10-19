@@ -168,7 +168,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             $decisions = \App\Support\SchemaBaseline::tableExists('content_material_decisions')
                 ? ContentMaterialDecision::query()->where('org_id', 0)->where('family', 'article')
                     ->whereIn('authority_subject_key', $articles->map(static fn (Article $article): string => 'article:'.$article->id))
-                    ->latest('id')->get()->unique('authority_subject_key')->keyBy('authority_subject_key')
+                    ->latest('id')->get()->groupBy('authority_subject_key')
                 : collect();
         } catch (\Throwable $exception) {
             if ($this->requireComplete) {
@@ -186,13 +186,24 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             }
 
             $seoMeta = $article->seoMeta instanceof ArticleSeoMeta ? $article->seoMeta : null;
-            $decision = $decisions->get('article:'.$article->id);
+            $history = $decisions->get('article:'.$article->id, collect())->values();
+            $decision = $history->first();
             $searchFingerprint = $decision instanceof ContentMaterialDecision
                 && $decision->publication_state === 'published'
                 && (string) $decision->authority_revision === (string) $article->published_revision_id
                 && $decision->locale === $article->locale
                 && preg_match('/\A[a-f0-9]{64}\z/', (string) $decision->search_surface_fingerprint) === 1
                     ? (string) $decision->search_surface_fingerprint : null;
+            $notificationId = null;
+            if ($searchFingerprint !== null) {
+                $gate = app(\App\Services\SeoIntel\SearchChannelQueue\ArticleIndexNowChangeGate::class);
+                foreach ($history as $index => $item) {
+                    if ($gate->shouldNotify($gate->reason($item, $history->get($index + 1)))) {
+                        $notificationId = (int) $item->id;
+                        break;
+                    }
+                }
+            }
             $path = $this->articleCanonicalPath($article, $seoMeta);
             if ($path === null) {
                 continue;
@@ -226,6 +237,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                     'llms_eligible' => true,
                     'publication_state' => 'published',
                     'content_hash' => $searchFingerprint,
+                    'article_search_decision_id' => $notificationId,
                     'robots' => 'index',
                 ],
                 attributes: [

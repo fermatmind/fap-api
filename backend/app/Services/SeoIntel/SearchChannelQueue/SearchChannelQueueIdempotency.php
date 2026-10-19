@@ -37,7 +37,7 @@ final class SearchChannelQueueIdempotency
      *     stale_submitted_items:list<array{id:int, approval_state:string, execution_state:string, stale_reason:string}>
      * }
      */
-    public function duplicateStatus(string $canonicalUrl, string $locale, string $channel, mixed $sourceLastmod = null, ?string $sourceContentHash = null): array
+    public function duplicateStatus(string $canonicalUrl, string $locale, string $channel, mixed $sourceLastmod = null, ?string $sourceContentHash = null, ?string $sourceVersion = null): array
     {
         $connectionName = (string) config('seo_intel.connection', 'seo_intel');
 
@@ -52,14 +52,14 @@ final class SearchChannelQueueIdempotency
                 ->where('locale', $locale)
                 ->where('channel', $channel)
                 ->orderByDesc('id')
-                ->get(['id', 'approval_state', 'execution_state', 'lastmod', 'content_hash', 'updated_at']);
+                ->get(['id', 'approval_state', 'execution_state', 'lastmod', 'content_hash', 'updated_at', 'idempotency_key']);
 
             $sourceTimestamp = $this->timestamp($sourceLastmod);
             $normalizedSourceContentHash = $this->normalizedContentHash($sourceContentHash);
             $staleSubmittedItems = [];
 
             foreach ($rows as $row) {
-                $staleReason = $this->submittedItemStaleReason($row, $sourceTimestamp, $normalizedSourceContentHash);
+                $staleReason = $this->submittedItemStaleReason($row, $sourceTimestamp, $normalizedSourceContentHash, $sourceVersion === null ? null : $this->key($canonicalUrl, $locale, $channel, $sourceVersion));
                 if ($staleReason !== null) {
                     $staleSubmittedItems[] = [
                         'id' => (int) $row->id,
@@ -90,10 +90,14 @@ final class SearchChannelQueueIdempotency
         }
     }
 
-    private function submittedItemStaleReason(object $row, ?int $sourceTimestamp, ?string $sourceContentHash): ?string
+    private function submittedItemStaleReason(object $row, ?int $sourceTimestamp, ?string $sourceContentHash, ?string $expectedKey): ?string
     {
         if ((string) $row->execution_state !== 'submitted') {
             return null;
+        }
+
+        if ($expectedKey !== null && ! hash_equals($expectedKey, (string) $row->idempotency_key)) {
+            return 'existing_submitted_item_stale_by_source_version';
         }
 
         $itemContentHash = $this->normalizedContentHash($row->content_hash ?? null);

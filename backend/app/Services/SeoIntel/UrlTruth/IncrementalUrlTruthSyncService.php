@@ -125,6 +125,7 @@ final class IncrementalUrlTruthSyncService
                 || $fresh[0]->sourceAuthority !== $record->sourceAuthority
                 || $fresh[0]->entitySource !== $record->entitySource
                 || ($fresh[0]->metadata['content_hash'] ?? null) !== ($record->metadata['content_hash'] ?? null)
+                || ($fresh[0]->metadata['article_search_decision_id'] ?? null) !== ($record->metadata['article_search_decision_id'] ?? null)
                 || $this->evaluator->evaluate($fresh[0]) !== $this->evaluator->evaluate($record)) {
                 throw new RuntimeException('incremental URL Truth authority changed during synchronization.');
             }
@@ -208,7 +209,8 @@ final class IncrementalUrlTruthSyncService
         if ($record->pageEntityType === 'article') {
             $metadata = json_decode((string) $connection->table('seo_urls')
                 ->where('canonical_url_hash', $record->canonicalUrlHash())->where('locale', $record->locale)->value('metadata_json'), true);
-            $metadataMatches = ($metadata['content_hash'] ?? null) === ($record->metadata['content_hash'] ?? null);
+            $metadataMatches = ($metadata['content_hash'] ?? null) === ($record->metadata['content_hash'] ?? null)
+                && ($metadata['article_search_decision_id'] ?? null) === ($record->metadata['article_search_decision_id'] ?? null);
         }
 
         return $urlCount === 1 && $bindingCount === 1 && $metadataMatches;
