@@ -1,13 +1,16 @@
 {
   "schema": "fermatmind.public_content_copy_amendment.review.v1",
-  "candidate_sha256": "dc4d67105d33a3f67f0d2853500dceeb6e51a24b41481ed3cefbbcdf29577afb",
+  "candidate_sha256": "b92fd7a5ccb4f8e40cee7ea6b3970e7d9585467ac4f092e16207a65dd6ebf9d3",
   "verdict": "PASS",
   "pages": {
     "PAGE-23": "PASS",
     "PAGE-32": "PASS",
-    "PAGE-34": "PASS"
+    "PAGE-34": "PASS",
+    "PAGE-33": "PASS",
+    "PAGE-HOME": "PASS",
+    "PAGE-17": "PASS"
   },
-  "reviewer": "/root/content_review",
-  "reviewed_at_utc": "2026-10-18T15:04:00.513314+00:00",
-  "scope": "Three English CMS content deltas only; engineering, deployment and search outcomes require separate verification."
+  "reviewer": "/root/shared_cms_review",
+  "reviewed_at_utc": "2026-10-19T02:44:14Z",
+  "scope": "Six fixed English CMS identities: three unchanged accepted rows, two corrected landing surfaces and one article title/SEO amendment. Frozen content and implementation reviewed; deployment and search outcomes verified separately."
 }

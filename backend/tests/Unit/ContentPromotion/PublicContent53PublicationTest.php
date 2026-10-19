@@ -12,6 +12,7 @@ use App\Models\CareerGuideRevision;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
+use App\Models\PageBlock;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
 use App\Models\TopicProfileEntry;
@@ -595,6 +596,12 @@ PHP;
                 $review = $proof;
                 if ($case === 'nonbody') {
                     $candidate['candidates'][0]['snapshot']['title'] = 'Changed title';
+                } elseif ($case === 'home_link') {
+                    $candidate['candidates'][4]['snapshot']['payload_json']['header']['groups'][0]['links'][2]['href'] = '/en/unselected';
+                } elseif ($case === 'home_block') {
+                    $candidate['candidates'][4]['snapshot']['block_copy']['header']['groups'][0]['links'][2]['title'] = 'Unreviewed title';
+                } elseif ($case === 'home_block_missing') {
+                    unset($candidate['candidates'][4]['snapshot']['block_copy']['footer']);
                 } elseif ($case === 'identity') {
                     $candidate['candidates'][0]['identity']['slug'] = 'unselected-article';
                 } elseif ($case === 'extra-field') {
@@ -640,15 +647,20 @@ PHP;
         foreach ($rows as $row) {
             $copy = PublicContent53Package::before($row);
             if ($row['kind'] === 'article') {
-                $article = $this->article($row['identity'], ['title' => 'Visible title', 'excerpt' => 'Original summary', 'content_md' => 'Original body'],
+                $created = $this->article($row['identity'], ['title' => $copy['title'] ?? 'Visible title', 'excerpt' => 'Original summary', 'content_md' => 'Original body'],
                     $row['source_identity']['translation_group_id'], $row['source_identity']['source_locale']);
-                $published = ArticleTranslationRevision::query()->findOrFail($article->published_revision_id);
+                $article ??= $created;
+                $published = ArticleTranslationRevision::query()->findOrFail($created->published_revision_id);
                 $published->forceFill(array_intersect_key($copy['seo_text'], array_flip(['seo_title', 'seo_description'])))->saveQuietly();
-                $article->seoMeta()->update($copy['seo_text']);
+                $created->seoMeta()->update($copy['seo_text']);
             } else {
-                LandingSurface::query()->create(['org_id' => 0, 'surface_key' => $row['identity']['slug'], 'locale' => 'en',
+                $surface = LandingSurface::query()->create(['org_id' => 0, 'surface_key' => $row['identity']['slug'], 'locale' => 'en',
                     'title' => 'Tests', 'description' => 'Tests', 'schema_version' => 'v1', 'status' => 'published', 'is_public' => true,
                     'is_indexable' => true, 'payload_json' => $copy['payload_json']]);
+                foreach ($copy['block_copy'] ?? [] as $key => $payload) {
+                    PageBlock::query()->create(['landing_surface_id' => $surface->id, 'block_key' => $key,
+                        'block_type' => 'homepage_section', 'payload_json' => $payload, 'sort_order' => $key === 'header' ? 7 : 8, 'is_enabled' => true]);
+                }
             }
         }
         self::assertInstanceOf(Article::class, $article);
@@ -676,7 +688,7 @@ PHP;
         self::assertSame(0, $remainingSurfaces);
         self::assertSame($before, $states->read($sha));
         $after = DB::transaction(fn () => $writer->publish($context, $before));
-        self::assertSame(3, $after['written_count']);
+        self::assertSame(count($rows), $after['written_count']);
         Cache::flush();
         $states->assertPublished($rows, $after['state']);
         self::assertSame($otherBefore, $other->fresh()->toArray());
@@ -692,7 +704,7 @@ PHP;
         self::assertSame($before, $states->read($sha));
         $newOwner = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
             str_repeat('f', 40), str_repeat('b', 64), str_repeat('c', 64), '12346', 1, str_repeat('d', 64), count($rows), str_repeat('e', 64));
-        self::assertSame(3, DB::transaction(fn () => $writer->publish($newOwner, $before))['written_count']);
+        self::assertSame(count($rows), DB::transaction(fn () => $writer->publish($newOwner, $before))['written_count']);
         $stale = $states->read($sha);
         DB::table('articles')->where('id', $article->id)->update(['excerpt' => 'Concurrent operator change']);
         $this->expectExceptionMessage('public_content_53_native_prestate_drift');
@@ -706,7 +718,7 @@ PHP;
         mkdir($dir, 0700, true);
         $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/copy-amendment.json')), true);
         try {
-            foreach (['link', 'flag', 'body', 'identity', 'review'] as $case) {
+            foreach (['link', 'flag', 'body', 'identity', 'review', 'home_link', 'home_block', 'home_block_missing'] as $case) {
                 $candidate = $package;
                 if ($case === 'link') {
                     $candidate['candidates'][1]['snapshot']['payload_json']['families']['items'][0]['tests'][0]['href'] = '/en/unselected';
@@ -714,6 +726,12 @@ PHP;
                     $candidate['candidates'][1]['snapshot']['payload_json']['seo']['is_indexable'] = true;
                 } elseif ($case === 'body') {
                     $candidate['candidates'][0]['snapshot']['content_md'] = 'New body';
+                } elseif ($case === 'home_link') {
+                    $candidate['candidates'][4]['snapshot']['payload_json']['header']['groups'][0]['links'][2]['href'] = '/en/unselected';
+                } elseif ($case === 'home_block') {
+                    $candidate['candidates'][4]['snapshot']['block_copy']['header']['groups'][0]['links'][2]['title'] = 'Unreviewed title';
+                } elseif ($case === 'home_block_missing') {
+                    unset($candidate['candidates'][4]['snapshot']['block_copy']['footer']);
                 } elseif ($case === 'identity') {
                     $candidate['candidates'][0]['identity']['slug'] = 'unselected';
                 }
@@ -722,7 +740,7 @@ PHP;
                 file_put_contents($dir.'/copy-amendment-review.json', json_encode([
                     'schema' => 'fermatmind.public_content_copy_amendment.review.v1',
                     'candidate_sha256' => $case === 'review' ? str_repeat('0', 64) : hash('sha256', $bytes),
-                    'verdict' => 'PASS', 'pages' => ['PAGE-23' => 'PASS', 'PAGE-32' => 'PASS', 'PAGE-34' => 'PASS'],
+                    'verdict' => 'PASS', 'pages' => array_fill_keys(array_column($candidate['candidates'], 'page_id'), 'PASS'),
                 ], JSON_THROW_ON_ERROR));
                 try {
                     app(PublicContent53Package::class)->read($root, $this->copyAmendmentDigest($root));

@@ -133,10 +133,12 @@ final class PublicContent53Writer
         $old = $saved['published'];
         $seoCopy = $row['snapshot']['seo_text'] ?? null;
         $revisionCopy = $seoCopy !== null
-            ? array_intersect_key($seoCopy, array_flip(['seo_title', 'seo_description']))
+            ? array_intersect_key($seoCopy, array_flip(['seo_title', 'seo_description'])) + array_intersect_key($row['snapshot'], ['title' => true])
             : $row['snapshot'] + ['content_html' => null];
         if ($seoCopy === null) {
             $article->forceFill($revisionCopy);
+        } elseif (isset($row['snapshot']['title'])) {
+            $article->forceFill(['title' => $row['snapshot']['title']]);
         }
         $hash = $article->computeSourceVersionHash();
         $source = Article::query()->withoutGlobalScopes()->findOrFail($old['source_article_id']);
@@ -214,7 +216,13 @@ final class PublicContent53Writer
 
     private function surface(array $row, array $saved): void
     {
-        LandingSurface::query()->withoutGlobalScopes()->findOrFail($saved['values']['id'])->forceFill($row['snapshot'])->saveQuietly();
+        $copy = $row['snapshot'];
+        unset($copy['block_copy']);
+        LandingSurface::query()->withoutGlobalScopes()->findOrFail($saved['values']['id'])->forceFill($copy)->saveQuietly();
+        foreach ($row['snapshot']['block_copy'] ?? [] as $key => $payload) {
+            DB::table('page_blocks')->where('landing_surface_id', $saved['values']['id'])->where('block_key', $key)
+                ->update(['payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)]);
+        }
     }
 
     private function topic(array $row, array $saved, PromotionContext $context): void

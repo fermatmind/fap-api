@@ -8281,7 +8281,7 @@
                 ]
               },
               {
-                "answer": "US Producers and Directors (27-2012) combined scope: approximately 167,000 employed in 2024, projected approximately 175,200 in 2034, faster-than-average growth over 2024—2034 (approximately 5%), and approximately 12,800 average annual openings including replacement demand. These are combined-scope statistical projections, not separate occupational demand or an individual's hiring probability.",
+                "answer": "U.S. Producers and Directors (27-2012) combined scope: 181,000 employed in 2025, projected 188,300 in 2035, 4.0% growth for 2025–2035, and 12,100 average annual openings including replacement demand. These are combined-scope statistical projections, not separate occupational demand or an individual’s hiring probability.",
                 "id": "media-programming-directors.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.media-programming-directors.outlook-transition",
@@ -8627,6 +8627,21 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-10-19",
+                "details": [
+                  "Employment and annual openings are in thousands in the original table."
+                ],
+                "evidence_type": "official employment projections",
+                "id": "bls-ep-2025-2035-current",
+                "limitation": "Projections are not observed outcomes or an individual hiring probability; annual openings include replacement needs.",
+                "market": "United States",
+                "name": "BLS Occupational Projections Table 1.2, 2025–2035",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent occupation: Producers and Directors 27-2012",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -11070,39 +11085,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "167,000 people (combined scope)",
+        "derivation": "BLS Table 1.2, 2025–2035; 27-2012 parent occupation, not this specialty separately.",
+        "display_value": "181,000 people (2025; Producers and Directors combined scope)",
         "fact_id": "us-employment-2024",
         "market": "United States (Producers and Directors 27-2012 Combined Scope)",
-        "measure": "2024 employment level (combined scope)",
+        "measure": "Employment base",
         "occupation_scope": "O*NET 27-2012 combined scope, not 27-2012.03 separately",
-        "period": "2024; accessed 2026-09-25",
+        "period": "2025",
         "source_refs": [
-          "source-pack-onet-localtrends"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": "O*NET national employment trends page: projected faster-than-average growth over 2024—2034 (approximately 5%).",
-        "display_value": "Faster than average (approximately 5%, 2024—2034; combined scope)",
+        "derivation": "BLS Table 1.2, 2025–2035; 27-2012 parent occupation, not this specialty separately.",
+        "display_value": "4.0% projected employment growth (2025–2035; combined scope)",
         "fact_id": "us-growth",
         "market": "United States (Producers and Directors 27-2012 Combined Scope)",
-        "measure": "Projected employment growth (combined scope)",
+        "measure": "Projected employment growth",
         "occupation_scope": "O*NET 27-2012 combined scope, not this occupation separately",
-        "period": "2024—2034; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-localtrends"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": "Estimated openings over the projection period, including replacement demand.",
-        "display_value": "Approximately 12,800 openings per year (2024—2034; combined scope)",
+        "derivation": "BLS Table 1.2, 2025–2035; 27-2012 parent occupation, not this specialty separately.",
+        "display_value": "12,100 openings per year on average (2025–2035; combined scope)",
         "fact_id": "us-openings",
         "market": "United States (Producers and Directors 27-2012 Combined Scope)",
-        "measure": "Projected openings (annual average, combined scope)",
+        "measure": "Average annual openings, including growth and replacement",
         "occupation_scope": "O*NET 27-2012 combined scope, not this occupation separately",
-        "period": "2024—2034; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-localtrends"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
@@ -11142,19 +11157,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "US Employment Growth"
+        "label": "U.S. employment growth (2025–2035) · parent occupation"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "US Employment Level"
+        "label": "U.S. employment (2025) · parent occupation"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "US Average Annual Openings"
+        "label": "U.S. average annual openings (2025–2035) · parent occupation"
       },
       {
         "availability": "missing",
@@ -11168,14 +11183,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Media programming directors (O*NET 27-2012.03) handle radio/television schedules, content review, and broadcast compliance. US BLS 2025 Producers and Directors (27-2012) combined-scope median annual wage: USD 90,360. Combined-scope employment in 2024: approximately 167,000; projected faster-than-average growth over 2024—2034 (approximately 5%). Includes work context, risks, and entry paths."
+      "text": "Explore media programming work, broadcast compliance and entry paths. U.S. Producers and Directors combined data: 181,000 jobs in 2025, 4.0% projected growth and 12,100 average annual openings for 2025–2035; not separate statistics for this specialty."
     },
     "title": {
       "availability": "available",
-      "text": "Media Programming Directors: Work, US Wages, and Entry Paths | FermatMind"
+      "text": "Media Programming Directors: Work, US Wages, and Entry Paths"
     }
   },
-  "source_content_sha256": "c33591b1b2da74b212c1b24e89949488696f8ec22245f2a991f9d1484f407c22",
+  "source_content_sha256": "f0160d4e657f866ea1295ea5f8b1b979ced7619f7a94d1804aa02bad56e14a47",
   "subject": {
     "canonical_slug": "media-programming-directors",
     "name": "Media Programming Directors",

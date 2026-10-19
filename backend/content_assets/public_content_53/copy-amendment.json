@@ -2646,6 +2646,2661 @@
       },
       "source_identity": {},
       "staging_source_identity": {}
+    },
+    {
+      "page_id": "PAGE-33",
+      "kind": "surface",
+      "identity": {
+        "org_id": 0,
+        "slug": "tests_category_career",
+        "locale": "en"
+      },
+      "before": {
+        "payload_json": {
+          "seo": {
+            "title": "Career & Direction Tests",
+            "description": "A hub of assessments for career interests, work styles, and career decision clues, helping you decide more quickly where to start."
+          },
+          "hero": {
+            "body": "Combine career interests, work styles, and ability clues to inform major selection, judgments about roles, and the next steps in career exploration.",
+            "title": "Career & Direction Tests",
+            "points": [
+              "Interest signals answer direction first",
+              "Personality and style help you understand ways of working",
+              "Ability-focused tests work best as supporting signals"
+            ],
+            "eyebrow": "Category Hub"
+          },
+          "slug": "career",
+          "trust": {
+            "items": [
+              {
+                "body": "Use reports to structure discussion, clarify tendencies, and decide the next move instead of treating them as final labels.",
+                "title": "Results support judgment. They do not define a person."
+              },
+              {
+                "body": "Start with your question and a test version, complete it anonymously, then decide whether to provide more information.",
+                "title": "You can start anonymously"
+              },
+              {
+                "body": "Emotional and state-related results are structured references only. They cannot replace professional diagnosis or treatment, legal advice, or formal assessment for high-risk decisions.",
+                "title": "Not a substitute for medical, legal, or diagnostic advice"
+              },
+              {
+                "body": "Use results in learning plans, career discussions, collaboration adjustments, and periodic reviews, rather than stopping after a single score.",
+                "title": "Results can be reviewed and applied in real situations"
+              }
+            ],
+            "title": "Method, boundary, and use"
+          },
+          "allTests": {
+            "body": "This list includes the direct career-interest entry and supporting tests that sharpen career judgment.",
+            "items": [
+              {
+                "key": "holland-career-interest-test-riasec",
+                "href": "/en/tests/holland-career-interest-test-riasec",
+                "title": "Holland Career Interest Test (RIASEC)",
+                "description": "When you need a first look at your career interest direction, industry preferences, and clues for getting started.",
+                "detailsHref": "/en/tests/holland-career-interest-test-riasec",
+                "outputLabel": "RIASEC interest structure and primary and secondary codes",
+                "primaryLabel": "Start test",
+                "durationLabel": "8 / 18 min",
+                "previewVariant": "matrix",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "label": "60-question standard",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "label": "140-question enhanced",
+                    "form_code": "riasec_140"
+                  }
+                ],
+                "questionsLabel": "60 / 140 questions",
+                "secondaryLabel": "View career tests",
+                "scientificBasis": "Based on Holland Code"
+              },
+              {
+                "key": "big-five-personality-test-ocean-model",
+                "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                "title": "Big Five Personality Test",
+                "description": "When you need a more stable, dimensional understanding of your trait structure at work, under stress, and in relationships.",
+                "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                "outputLabel": "Five-factor trait distribution, strengths and weaknesses, and application suggestions",
+                "primaryLabel": "Standard",
+                "durationLabel": "10-18 min",
+                "previewVariant": "radar",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "meta": "A quick Big Five read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                    "meta": "A deeper trait read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "90 / 120 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Big Five"
+              },
+              {
+                "key": "mbti-personality-test-16-personality-types",
+                "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                "title": "MBTI Personality Test",
+                "description": "When you want to start with your overall personality style, preference patterns, and natural tendencies in collaboration.",
+                "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                "outputLabel": "Type profile, preference explanations, and contextual interpretations",
+                "primaryLabel": "Standard",
+                "durationLabel": "12-20 min",
+                "previewVariant": "summary",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "meta": "A fast type preference read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                    "meta": "A more complete type read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "93-144 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Jungian-inspired typology"
+              },
+              {
+                "key": "iq-test-intelligence-quotient-assessment",
+                "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                "title": "IQ Test",
+                "description": "When you want to examine reasoning performance, problem-handling speed, and clues to cognitive strengths.",
+                "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                "outputLabel": "Ability baseline, reasoning profile, and reference notes",
+                "primaryLabel": "Start test",
+                "durationLabel": "20 min",
+                "previewVariant": "matrix",
+                "questionsLabel": "30 original visual items",
+                "secondaryLabel": "View details"
+              },
+              {
+                "key": "eq-test-emotional-intelligence-assessment",
+                "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+                "title": "EQ Test",
+                "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+                "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+                "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+                "primaryLabel": "Start test",
+                "durationLabel": "10 min",
+                "previewVariant": "bars",
+                "questionsLabel": "60 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on EQ framework"
+              }
+            ],
+            "title": "All tests commonly used in this category",
+            "kicker": "All Tests in Category"
+          },
+          "featured": {
+            "body": "Career direction should not rely on one score alone. Start by combining interest, style, and ability signals.",
+            "items": [
+              {
+                "key": "holland-career-interest-test-riasec",
+                "href": "/en/tests/holland-career-interest-test-riasec",
+                "title": "Holland Career Interest Test (RIASEC)",
+                "description": "When your main question is which kinds of work activities, task environments, and job content you tend to prefer.",
+                "detailsHref": "/en/tests/holland-career-interest-test-riasec",
+                "outputLabel": "Interest profile, top codes, and direction signals",
+                "primaryLabel": "Start test",
+                "durationLabel": "8 / 18 min",
+                "previewVariant": "matrix",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "label": "60-question standard",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "label": "140-question enhanced",
+                    "form_code": "riasec_140"
+                  }
+                ],
+                "questionsLabel": "60 / 140 questions",
+                "secondaryLabel": "View career tests",
+                "scientificBasis": "Based on Holland Code"
+              },
+              {
+                "key": "big-five-personality-test-ocean-model",
+                "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                "title": "Big Five Personality Test",
+                "description": "When you need a more stable, dimensional understanding of your trait structure at work, under stress, and in relationships.",
+                "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                "outputLabel": "Five-factor trait distribution, strengths and weaknesses, and application suggestions",
+                "primaryLabel": "Standard",
+                "durationLabel": "10-18 min",
+                "previewVariant": "radar",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "meta": "A quick Big Five read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                    "meta": "A deeper trait read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "90 / 120 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Big Five"
+              },
+              {
+                "key": "mbti-personality-test-16-personality-types",
+                "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                "title": "MBTI Personality Test",
+                "description": "When you want to start with your overall personality style, preference patterns, and natural tendencies in collaboration.",
+                "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                "outputLabel": "Type profile, preference explanations, and contextual interpretations",
+                "primaryLabel": "Standard",
+                "durationLabel": "12-20 min",
+                "previewVariant": "summary",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "meta": "A fast type preference read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                    "meta": "A more complete type read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "93-144 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Jungian-inspired typology"
+              }
+            ],
+            "title": "Start with the entries that help career decisions most directly.",
+            "kicker": "Featured Tests"
+          },
+          "finalCta": {
+            "body": "If you want the most direct starting point for career direction, RIASEC is usually the better first move.",
+            "title": "Start with career interest first, then add style and ability signals.",
+            "primaryHref": "/en/tests/holland-career-interest-test-riasec",
+            "primaryLabel": "Start career direction tests"
+          },
+          "resources": {
+            "body": "Putting results back into real career context matters more than reading scores alone.",
+            "items": [
+              {
+                "key": "how-to-find-right-career-direction",
+                "href": "/en/career/guides/how-to-find-right-career-direction",
+                "title": "How to Find a Better-Fit Career Direction",
+                "typeLabel": "Guide",
+                "description": "Bring interest, capability, and real constraints into one career decision frame."
+              },
+              {
+                "key": "from-mbti-to-job-fit",
+                "href": "/en/career/guides/from-mbti-to-job-fit",
+                "title": "How to Use MBTI for Career Fit",
+                "typeLabel": "Guide",
+                "description": "Translate personality language into role and work-environment fit decisions."
+              },
+              {
+                "key": "big5-for-career-decisions",
+                "href": "/en/career/guides/big5-for-career-decisions",
+                "title": "Using Big Five for Career Decisions",
+                "typeLabel": "Guide",
+                "description": "A better support layer if you prefer trait dimensions over type language in career decisions."
+              }
+            ],
+            "title": "Further reading to support career judgment",
+            "kicker": "Related Guides"
+          },
+          "breadcrumb": [
+            {
+              "href": "/en/tests",
+              "path": "/en/tests",
+              "label": "Tests"
+            },
+            {
+              "path": "/en/tests/category/career",
+              "label": "Career & Direction"
+            }
+          ],
+          "differences": {
+            "body": "Selection becomes easier once you know what question each test actually answers.",
+            "items": [
+              {
+                "title": "RIASEC is the direct interest lens",
+                "description": "It is the clearest route when the question is which kinds of work activity attract you most."
+              },
+              {
+                "title": "Big Five and MBTI focus more on work style and long-term tendencies",
+                "description": "They are better for supporting judgments about work environments, collaboration styles, and perceived role fit than for deciding a career direction on their own."
+              },
+              {
+                "title": "IQ and EQ are supporting signals",
+                "description": "Ability and emotional ability results work better as a way to refine your judgment, helping you see real differences in execution, communication, and problem handling."
+              }
+            ],
+            "title": "Career-relevant tests operate at different layers.",
+            "kicker": "How These Tests Differ"
+          }
+        }
+      },
+      "staging_before": {
+        "payload_json": {
+          "seo": {
+            "title": "Career & Direction Tests",
+            "description": "A hub of assessments for career interests, work styles, and career decision clues, helping you decide more quickly where to start."
+          },
+          "hero": {
+            "body": "Combine career interests, work styles, and ability clues to inform major selection, judgments about roles, and the next steps in career exploration.",
+            "title": "Career & Direction Tests",
+            "points": [
+              "Interest signals answer direction first",
+              "Personality and style help you understand ways of working",
+              "Ability-focused tests work best as supporting signals"
+            ],
+            "eyebrow": "Category Hub"
+          },
+          "slug": "career",
+          "trust": {
+            "items": [
+              {
+                "body": "Use reports to structure discussion, clarify tendencies, and decide the next move instead of treating them as final labels.",
+                "title": "Results support judgment. They do not define a person."
+              },
+              {
+                "body": "Start with your question and a test version, complete it anonymously, then decide whether to provide more information.",
+                "title": "You can start anonymously"
+              },
+              {
+                "body": "Emotional and state-related results are structured references only. They cannot replace professional diagnosis or treatment, legal advice, or formal assessment for high-risk decisions.",
+                "title": "Not a substitute for medical, legal, or diagnostic advice"
+              },
+              {
+                "body": "Use results in learning plans, career discussions, collaboration adjustments, and periodic reviews, rather than stopping after a single score.",
+                "title": "Results can be reviewed and applied in real situations"
+              }
+            ],
+            "title": "Method, boundary, and use"
+          },
+          "allTests": {
+            "body": "This list includes the direct career-interest entry and supporting tests that sharpen career judgment.",
+            "items": [
+              {
+                "key": "holland-career-interest-test-riasec",
+                "href": "/en/tests/holland-career-interest-test-riasec",
+                "title": "Holland Career Interest Test (RIASEC)",
+                "description": "When you need a first look at your career interest direction, industry preferences, and clues for getting started.",
+                "detailsHref": "/en/tests/holland-career-interest-test-riasec",
+                "outputLabel": "RIASEC interest structure and primary and secondary codes",
+                "primaryLabel": "Start test",
+                "durationLabel": "8 / 18 min",
+                "previewVariant": "matrix",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "label": "60-question standard",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "label": "140-question enhanced",
+                    "form_code": "riasec_140"
+                  }
+                ],
+                "questionsLabel": "60 / 140 questions",
+                "secondaryLabel": "View career tests",
+                "scientificBasis": "Based on Holland Code"
+              },
+              {
+                "key": "big-five-personality-test-ocean-model",
+                "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                "title": "Big Five Personality Test",
+                "description": "When you need a more stable, dimensional understanding of your trait structure at work, under stress, and in relationships.",
+                "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                "outputLabel": "Five-factor trait distribution, strengths and weaknesses, and application suggestions",
+                "primaryLabel": "Standard",
+                "durationLabel": "10-18 min",
+                "previewVariant": "radar",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "meta": "A quick Big Five read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                    "meta": "A deeper trait read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "90 / 120 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Big Five"
+              },
+              {
+                "key": "mbti-personality-test-16-personality-types",
+                "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                "title": "MBTI Personality Test",
+                "description": "When you want to start with your overall personality style, preference patterns, and natural tendencies in collaboration.",
+                "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                "outputLabel": "Type profile, preference explanations, and contextual interpretations",
+                "primaryLabel": "Standard",
+                "durationLabel": "12-20 min",
+                "previewVariant": "summary",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "meta": "A fast type preference read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                    "meta": "A more complete type read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "93-144 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Jungian-inspired typology"
+              },
+              {
+                "key": "iq-test-intelligence-quotient-assessment",
+                "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                "title": "IQ Test",
+                "description": "When you want to examine reasoning performance, problem-handling speed, and clues to cognitive strengths.",
+                "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                "outputLabel": "Ability baseline, reasoning profile, and reference notes",
+                "primaryLabel": "Start test",
+                "durationLabel": "20 min",
+                "previewVariant": "matrix",
+                "questionsLabel": "30 original visual items",
+                "secondaryLabel": "View details"
+              },
+              {
+                "key": "eq-test-emotional-intelligence-assessment",
+                "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+                "title": "EQ Test",
+                "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+                "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+                "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+                "primaryLabel": "Start test",
+                "durationLabel": "10 min",
+                "previewVariant": "bars",
+                "questionsLabel": "60 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on EQ framework"
+              }
+            ],
+            "title": "All tests commonly used in this category",
+            "kicker": "All Tests in Category"
+          },
+          "featured": {
+            "body": "Career direction should not rely on one score alone. Start by combining interest, style, and ability signals.",
+            "items": [
+              {
+                "key": "holland-career-interest-test-riasec",
+                "href": "/en/tests/holland-career-interest-test-riasec",
+                "title": "Holland Career Interest Test (RIASEC)",
+                "description": "When your main question is which kinds of work activities, task environments, and job content you tend to prefer.",
+                "detailsHref": "/en/tests/holland-career-interest-test-riasec",
+                "outputLabel": "Interest profile, top codes, and direction signals",
+                "primaryLabel": "Start test",
+                "durationLabel": "8 / 18 min",
+                "previewVariant": "matrix",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "label": "60-question standard",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "label": "140-question enhanced",
+                    "form_code": "riasec_140"
+                  }
+                ],
+                "questionsLabel": "60 / 140 questions",
+                "secondaryLabel": "View career tests",
+                "scientificBasis": "Based on Holland Code"
+              },
+              {
+                "key": "big-five-personality-test-ocean-model",
+                "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                "title": "Big Five Personality Test",
+                "description": "When you need a more stable, dimensional understanding of your trait structure at work, under stress, and in relationships.",
+                "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                "outputLabel": "Five-factor trait distribution, strengths and weaknesses, and application suggestions",
+                "primaryLabel": "Standard",
+                "durationLabel": "10-18 min",
+                "previewVariant": "radar",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "meta": "A quick Big Five read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                    "meta": "A deeper trait read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "90 / 120 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Big Five"
+              },
+              {
+                "key": "mbti-personality-test-16-personality-types",
+                "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                "title": "MBTI Personality Test",
+                "description": "When you want to start with your overall personality style, preference patterns, and natural tendencies in collaboration.",
+                "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                "outputLabel": "Type profile, preference explanations, and contextual interpretations",
+                "primaryLabel": "Standard",
+                "durationLabel": "12-20 min",
+                "previewVariant": "summary",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "meta": "A fast type preference read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                    "meta": "A more complete type read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "93-144 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Jungian-inspired typology"
+              }
+            ],
+            "title": "Start with the entries that help career decisions most directly.",
+            "kicker": "Featured Tests"
+          },
+          "finalCta": {
+            "body": "If you want the most direct starting point for career direction, RIASEC is usually the better first move.",
+            "title": "Start with career interest first, then add style and ability signals.",
+            "primaryHref": "/en/tests/holland-career-interest-test-riasec",
+            "primaryLabel": "Start career direction tests"
+          },
+          "resources": {
+            "body": "Putting results back into real career context matters more than reading scores alone.",
+            "items": [
+              {
+                "key": "how-to-find-right-career-direction",
+                "href": "/en/career/guides/how-to-find-right-career-direction",
+                "title": "How to Find a Better-Fit Career Direction",
+                "typeLabel": "Guide",
+                "description": "Bring interest, capability, and real constraints into one career decision frame."
+              },
+              {
+                "key": "from-mbti-to-job-fit",
+                "href": "/en/career/guides/from-mbti-to-job-fit",
+                "title": "How to Use MBTI for Career Fit",
+                "typeLabel": "Guide",
+                "description": "Translate personality language into role and work-environment fit decisions."
+              },
+              {
+                "key": "big5-for-career-decisions",
+                "href": "/en/career/guides/big5-for-career-decisions",
+                "title": "Using Big Five for Career Decisions",
+                "typeLabel": "Guide",
+                "description": "A better support layer if you prefer trait dimensions over type language in career decisions."
+              }
+            ],
+            "title": "Further reading to support career judgment",
+            "kicker": "Related Guides"
+          },
+          "breadcrumb": [
+            {
+              "href": "/en/tests",
+              "path": "/en/tests",
+              "label": "Tests"
+            },
+            {
+              "path": "/en/tests/category/career",
+              "label": "Career & Direction"
+            }
+          ],
+          "differences": {
+            "body": "Selection becomes easier once you know what question each test actually answers.",
+            "items": [
+              {
+                "title": "RIASEC is the direct interest lens",
+                "description": "It is the clearest route when the question is which kinds of work activity attract you most."
+              },
+              {
+                "title": "Big Five and MBTI focus more on work style and long-term tendencies",
+                "description": "They are better for supporting judgments about work environments, collaboration styles, and perceived role fit than for deciding a career direction on their own."
+              },
+              {
+                "title": "IQ and EQ are supporting signals",
+                "description": "Ability and emotional ability results work better as a way to refine your judgment, helping you see real differences in execution, communication, and problem handling."
+              }
+            ],
+            "title": "Career-relevant tests operate at different layers.",
+            "kicker": "How These Tests Differ"
+          }
+        }
+      },
+      "snapshot": {
+        "payload_json": {
+          "seo": {
+            "title": "Career & Direction Tests",
+            "description": "A hub of assessments for career interests, work styles, and career decision clues, helping you decide more quickly where to start."
+          },
+          "hero": {
+            "body": "Combine career interests, work styles, and ability clues to inform major selection, judgments about roles, and the next steps in career exploration.",
+            "title": "Career & Direction Tests",
+            "points": [
+              "Interest signals answer direction first",
+              "Personality and style help you understand ways of working",
+              "Ability-focused tests work best as supporting signals"
+            ],
+            "eyebrow": "Category Hub"
+          },
+          "slug": "career",
+          "trust": {
+            "items": [
+              {
+                "body": "Use reports to structure discussion, clarify tendencies, and decide the next move instead of treating them as final labels.",
+                "title": "Results support judgment. They do not define a person."
+              },
+              {
+                "body": "Start with your question and a test version, complete it anonymously, then decide whether to provide more information.",
+                "title": "You can start anonymously"
+              },
+              {
+                "body": "Emotional and state-related results are structured references only. They cannot replace professional diagnosis or treatment, legal advice, or formal assessment for high-risk decisions.",
+                "title": "Not a substitute for medical, legal, or diagnostic advice"
+              },
+              {
+                "body": "Use results in learning plans, career discussions, collaboration adjustments, and periodic reviews, rather than stopping after a single score.",
+                "title": "Results can be reviewed and applied in real situations"
+              }
+            ],
+            "title": "Method, boundary, and use"
+          },
+          "allTests": {
+            "body": "This list includes the direct career-interest entry and supporting tests that sharpen career judgment.",
+            "items": [
+              {
+                "key": "holland-career-interest-test-riasec",
+                "href": "/en/tests/holland-career-interest-test-riasec",
+                "title": "Holland Career Interest Test (RIASEC)",
+                "description": "When you need a first look at your career interest direction, industry preferences, and clues for getting started.",
+                "detailsHref": "/en/tests/holland-career-interest-test-riasec",
+                "outputLabel": "RIASEC interest structure and primary and secondary codes",
+                "primaryLabel": "Start test",
+                "durationLabel": "8 / 18 min",
+                "previewVariant": "matrix",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "label": "60-question standard",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "label": "140-question enhanced",
+                    "form_code": "riasec_140"
+                  }
+                ],
+                "questionsLabel": "60 / 140 questions",
+                "secondaryLabel": "View career tests",
+                "scientificBasis": "Based on Holland Code"
+              },
+              {
+                "key": "big-five-personality-test-ocean-model",
+                "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                "title": "Big Five Personality Test",
+                "description": "When you need a more stable, dimensional understanding of your trait structure at work, under stress, and in relationships.",
+                "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                "outputLabel": "Five-factor trait distribution, strengths and weaknesses, and application suggestions",
+                "primaryLabel": "Standard",
+                "durationLabel": "About 11 / 15 min",
+                "previewVariant": "radar",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "meta": "A quick Big Five read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                    "meta": "A deeper trait read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "90 / 120 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Big Five"
+              },
+              {
+                "key": "mbti-personality-test-16-personality-types",
+                "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                "title": "MBTI Personality Test",
+                "description": "When you want to start with your overall personality style, preference patterns, and natural tendencies in collaboration.",
+                "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                "outputLabel": "Type profile, preference explanations, and contextual interpretations",
+                "primaryLabel": "Standard",
+                "durationLabel": "About 10 / 15 min",
+                "previewVariant": "summary",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "meta": "A fast type preference read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                    "meta": "A more complete type read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "93 / 144 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Jungian-inspired typology"
+              },
+              {
+                "key": "iq-test-intelligence-quotient-assessment",
+                "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                "title": "IQ Test",
+                "description": "Complete 30 original visual matrix reasoning questions in about 20 minutes. Review your score, answer accuracy and result explanations.",
+                "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                "outputLabel": "Model-converted score, reference proportion and answer accuracy; not a professional IQ assessment",
+                "primaryLabel": "Start test",
+                "durationLabel": "20 min",
+                "previewVariant": "matrix",
+                "questionsLabel": "30 original visual items",
+                "secondaryLabel": "View details"
+              },
+              {
+                "key": "eq-test-emotional-intelligence-assessment",
+                "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+                "title": "EQ Test",
+                "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+                "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+                "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+                "primaryLabel": "Start test",
+                "durationLabel": "10 min",
+                "previewVariant": "bars",
+                "questionsLabel": "60 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on EQ framework"
+              }
+            ],
+            "title": "All tests commonly used in this category",
+            "kicker": "All Tests in Category"
+          },
+          "featured": {
+            "body": "Career direction should not rely on one score alone. Start by combining interest, style, and ability signals.",
+            "items": [
+              {
+                "key": "holland-career-interest-test-riasec",
+                "href": "/en/tests/holland-career-interest-test-riasec",
+                "title": "Holland Career Interest Test (RIASEC)",
+                "description": "When your main question is which kinds of work activities, task environments, and job content you tend to prefer.",
+                "detailsHref": "/en/tests/holland-career-interest-test-riasec",
+                "outputLabel": "Interest profile, top codes, and direction signals",
+                "primaryLabel": "Start test",
+                "durationLabel": "8 / 18 min",
+                "previewVariant": "matrix",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "label": "60-question standard",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "label": "140-question enhanced",
+                    "form_code": "riasec_140"
+                  }
+                ],
+                "questionsLabel": "60 / 140 questions",
+                "secondaryLabel": "View career tests",
+                "scientificBasis": "Based on Holland Code"
+              },
+              {
+                "key": "big-five-personality-test-ocean-model",
+                "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                "title": "Big Five Personality Test",
+                "description": "When you need a more stable, dimensional understanding of your trait structure at work, under stress, and in relationships.",
+                "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+                "outputLabel": "Five-factor trait distribution, strengths and weaknesses, and application suggestions",
+                "primaryLabel": "Standard",
+                "durationLabel": "About 11 / 15 min",
+                "previewVariant": "radar",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                    "meta": "A quick Big Five read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                    "meta": "A deeper trait read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "90 / 120 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Big Five"
+              },
+              {
+                "key": "mbti-personality-test-16-personality-types",
+                "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                "title": "MBTI Personality Test",
+                "description": "When you want to start with your overall personality style, preference patterns, and natural tendencies in collaboration.",
+                "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+                "outputLabel": "Type profile, preference explanations, and contextual interpretations",
+                "primaryLabel": "Standard",
+                "durationLabel": "About 10 / 15 min",
+                "previewVariant": "summary",
+                "primaryActions": [
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                    "meta": "A fast type preference read.",
+                    "label": "Standard"
+                  },
+                  {
+                    "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                    "meta": "A more complete type read.",
+                    "label": "Pro"
+                  }
+                ],
+                "questionsLabel": "93 / 144 questions",
+                "secondaryLabel": "View details",
+                "scientificBasis": "Based on Jungian-inspired typology"
+              }
+            ],
+            "title": "Start with the entries that help career decisions most directly.",
+            "kicker": "Featured Tests"
+          },
+          "finalCta": {
+            "body": "If you want the most direct starting point for career direction, RIASEC is usually the better first move.",
+            "title": "Start with career interest first, then add style and ability signals.",
+            "primaryHref": "/en/tests/holland-career-interest-test-riasec",
+            "primaryLabel": "Start career direction tests"
+          },
+          "resources": {
+            "body": "Putting results back into real career context matters more than reading scores alone.",
+            "items": [
+              {
+                "key": "how-to-find-right-career-direction",
+                "href": "/en/career/guides/how-to-find-right-career-direction",
+                "title": "How to Find a Better-Fit Career Direction",
+                "typeLabel": "Guide",
+                "description": "Bring interest, capability, and real constraints into one career decision frame."
+              },
+              {
+                "key": "from-mbti-to-job-fit",
+                "href": "/en/career/guides/from-mbti-to-job-fit",
+                "title": "How to Use MBTI for Career Fit",
+                "typeLabel": "Guide",
+                "description": "Translate personality language into role and work-environment fit decisions."
+              },
+              {
+                "key": "big5-for-career-decisions",
+                "href": "/en/career/guides/big5-for-career-decisions",
+                "title": "Using Big Five for Career Decisions",
+                "typeLabel": "Guide",
+                "description": "A better support layer if you prefer trait dimensions over type language in career decisions."
+              }
+            ],
+            "title": "Further reading to support career judgment",
+            "kicker": "Related Guides"
+          },
+          "breadcrumb": [
+            {
+              "href": "/en/tests",
+              "path": "/en/tests",
+              "label": "Tests"
+            },
+            {
+              "path": "/en/tests/category/career",
+              "label": "Career & Direction"
+            }
+          ],
+          "differences": {
+            "body": "Selection becomes easier once you know what question each test actually answers.",
+            "items": [
+              {
+                "title": "RIASEC is the direct interest lens",
+                "description": "It is the clearest route when the question is which kinds of work activity attract you most."
+              },
+              {
+                "title": "Big Five and MBTI focus more on work style and long-term tendencies",
+                "description": "They are better for supporting judgments about work environments, collaboration styles, and perceived role fit than for deciding a career direction on their own."
+              },
+              {
+                "title": "IQ and EQ are supporting signals",
+                "description": "Ability and emotional ability results work better as a way to refine your judgment, helping you see real differences in execution, communication, and problem handling."
+              }
+            ],
+            "title": "Career-relevant tests operate at different layers.",
+            "kicker": "How These Tests Differ"
+          }
+        }
+      },
+      "source_identity": {},
+      "staging_source_identity": {}
+    },
+    {
+      "page_id": "PAGE-HOME",
+      "kind": "surface",
+      "identity": {
+        "org_id": 0,
+        "slug": "home",
+        "locale": "en"
+      },
+      "before": {
+        "payload_json": {
+          "seo": {
+            "title": "FermatMind",
+            "description": "FermatMind provides clear, reusable assessment results for personality, ability, and career direction.",
+            "familyListTitle": "FermatMind lightweight exploration paths",
+            "quickStartListTitle": "FermatMind core assessment entry points",
+            "familyListDescription": "Lightweight homepage paths for all assessments, career exploration, fun experiments, and data method notes.",
+            "organizationDescription": "FermatMind provides structured assessments for self-understanding, ability review, career direction, and collaboration judgment.",
+            "quickStartListDescription": "Core homepage entry points including MBTI, Big Five, IQ, Holland career interest, Enneagram, and depression-anxiety assessment."
+          },
+          "hero": {
+            "body": "Begin with the most-used entry points, then use the result for learning, collaboration, and career judgment.",
+            "brand": "FermatMind",
+            "title": "Understand yourself before the next step.",
+            "eyebrow": "FermatMind",
+            "subhead": "Start with a clear, reusable assessment result for personality, ability, and career direction.",
+            "trustRail": [
+              "Clear result structure",
+              "Transparent method boundaries",
+              "Anonymous start available"
+            ],
+            "primaryCta": "Start MBTI test",
+            "primaryHref": "/tests/mbti-personality-test-16-personality-types",
+            "tertiaryCta": "Explore careers",
+            "secondaryCta": "View all assessments",
+            "tertiaryHref": "/career",
+            "secondaryHref": "/tests"
+          },
+          "trust": {
+            "body": "The homepage keeps only essential trust information. Method and privacy details are one step away.",
+            "items": [
+              {
+                "title": "Free and reliable",
+                "summary": "Core assessments are built around self-knowledge, career judgment, and capability growth.",
+                "paragraphs": [
+                  "Free and reliable"
+                ]
+              },
+              {
+                "href": "/about",
+                "title": "We take your privacy seriously.",
+                "summary": "Start without an account, then decide whether to save results or go deeper.",
+                "hrefLabel": "Read method notes",
+                "paragraphs": [
+                  "We take your privacy seriously."
+                ]
+              },
+              {
+                "href": "/privacy",
+                "title": "Many users take multiple tests",
+                "summary": "Personality, ability, and state entries help you review change over time.",
+                "hrefLabel": "View privacy policy",
+                "paragraphs": [
+                  "Many users take multiple tests"
+                ]
+              }
+            ],
+            "title": "Start first, go deeper when needed.",
+            "kicker": "TRUST",
+            "methodHref": "/about",
+            "methodLabel": "View method and privacy"
+          },
+          "footer": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "label": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "label": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/tests/iq-test-intelligence-quotient-assessment",
+                    "meta": "Cognition practice",
+                    "label": "Start practice",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Practice 30 original visual and numeric reasoning items. Raw score only until norm authority is available.",
+                    "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "durationLabel": "20 min",
+                    "primaryActions": [
+                      {
+                        "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "label": "EQ"
+                  }
+                ],
+                "title": "Top assessments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/help",
+                    "label": "Help Center"
+                  },
+                  {
+                    "href": "/privacy",
+                    "label": "Privacy policy"
+                  },
+                  {
+                    "href": "/terms",
+                    "label": "Terms"
+                  }
+                ],
+                "title": "Support and policy"
+              }
+            ],
+            "tailnote": "See the Micro. Lead the Macro.",
+            "supportEmailLabel": "Support"
+          },
+          "header": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "title": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "title": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
+                    "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "Start 30-item practice",
+                    "durationLabel": "20 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions",
+                    "secondaryLabel": "View boundaries"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "title": "EQ"
+                  }
+                ],
+                "title": "Core assessments"
+              }
+            ],
+            "testsBody": "Personality, ability, emotion, and career direction all begin here.",
+            "testsLabel": "Assessments",
+            "testsTitle": "Start from one assessment.",
+            "browseAllHref": "/tests",
+            "browseAllLabel": "View all assessments"
+          },
+          "results": {
+            "body": "The result brings type, differences, and next-step suggestions onto one page so you can keep judging clearly.",
+            "title": "What you get back is more than a label.",
+            "kicker": "RESULT PROMISE",
+            "previews": [
+              {
+                "tone": "traits",
+                "title": "Type",
+                "metrics": [
+                  "Type preference"
+                ]
+              },
+              {
+                "tone": "career",
+                "title": "Differences",
+                "metrics": [
+                  "Key differences"
+                ]
+              },
+              {
+                "tone": "state",
+                "title": "Next step",
+                "metrics": [
+                  "Action guidance"
+                ]
+              }
+            ],
+            "exampleHref": "/personality",
+            "exampleLabel": "View result example"
+          },
+          "families": {
+            "body": "Secondary paths stay lightweight instead of taking over the homepage.",
+            "items": [
+              {
+                "links": [
+                  {
+                    "href": "/tests",
+                    "title": "View all assessments"
+                  }
+                ],
+                "title": "All assessments",
+                "description": "See every available assessment entry.",
+                "exploreHref": "/tests",
+                "exploreLabel": "View all assessments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/career",
+                    "title": "Explore careers"
+                  }
+                ],
+                "title": "Career exploration",
+                "description": "Put results back into career direction.",
+                "exploreHref": "/career",
+                "exploreLabel": "Explore careers"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/fun/sbti",
+                    "title": "More tests / fun experiments"
+                  }
+                ],
+                "title": "Fun experiments",
+                "description": "SBTI and lightweight experiments live here.",
+                "exploreHref": "/fun/sbti",
+                "exploreLabel": "More tests / fun experiments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/about",
+                    "title": "View data method"
+                  }
+                ],
+                "title": "Data method",
+                "description": "Read method, boundary, and privacy notes.",
+                "exploreHref": "/about",
+                "exploreLabel": "View data method"
+              }
+            ],
+            "title": "Keep exploring without delaying the start.",
+            "kicker": "MORE PATHS"
+          },
+          "quickStart": {
+            "body": "Six common entry points stay visible. Question-count and version choices move to each test page.",
+            "items": [
+              {
+                "href": "/tests/mbti-personality-test-16-personality-types",
+                "meta": "Personality test",
+                "label": "Start test",
+                "title": "MBTI Personality Test",
+                "description": "Understand your type preference and decision style quickly."
+              },
+              {
+                "href": "/tests/big-five-personality-test-ocean-model",
+                "meta": "Personality test",
+                "label": "Start test",
+                "title": "Big Five Personality Test",
+                "description": "Read your stable traits across five dimensions."
+              },
+              {
+                "href": "/tests/enneagram-personality-test-nine-types",
+                "meta": "Personality test",
+                "label": "Start test",
+                "title": "Enneagram Test",
+                "description": "Understand behavior patterns through motivation and stress response."
+              },
+              {
+                "key": "holland-career-interest-test-riasec",
+                "href": "/tests/holland-career-interest-test-riasec",
+                "meta": "Career interest",
+                "label": "Start test",
+                "title": "Holland Career Interest Test",
+                "description": "Start from interest structure and career direction.",
+                "detailsHref": "/tests/holland-career-interest-test-riasec",
+                "durationLabel": "8 / 18 min",
+                "primaryActions": [
+                  {
+                    "href": "/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "label": "60-question standard",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "href": "/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "label": "140-question enhanced",
+                    "form_code": "riasec_140"
+                  }
+                ],
+                "questionsLabel": "60 / 140 questions"
+              },
+              {
+                "key": "iq-test-intelligence-quotient-assessment",
+                "href": "/tests/iq-test-intelligence-quotient-assessment",
+                "meta": "Cognition practice",
+                "label": "Start practice",
+                "media": {
+                  "alt": "Original IQ reasoning practice card",
+                  "source": "media_library_required",
+                  "status": "metadata_only_no_frontend_asset",
+                  "variants": {
+                    "og_asset_key": "iq-owner-original-30-og",
+                    "card_asset_key": "iq-owner-original-30-card",
+                    "report_cover_asset_key": "iq-full-report-cover"
+                  },
+                  "asset_key": "iq-owner-original-30-card",
+                  "authority": "backend_cms_media_library",
+                  "fallback_allowed": false
+                },
+                "title": "IQ Reasoning Practice",
+                "description": "Practice 30 original visual and numeric reasoning items. Raw score only until norm authority is available.",
+                "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+                "claim_policy": {
+                  "copy_boundary": "raw score and original reasoning practice only",
+                  "norm_authority_required": true,
+                  "percentile_claims_enabled": false,
+                  "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                  "iq_estimate_claims_enabled": false
+                },
+                "durationLabel": "20 min",
+                "primaryActions": [
+                  {
+                    "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                    "label": "Owner original 30",
+                    "form_code": "IQ_OWNER_ORIGINAL_30"
+                  }
+                ],
+                "questionsLabel": "30 questions"
+              },
+              {
+                "href": "/tests/clinical-depression-anxiety-assessment-professional-edition",
+                "meta": "Professional version",
+                "label": "Start test",
+                "title": "Depression and Anxiety Assessment",
+                "description": "Review depression and anxiety dimensions with a fuller recent-state reference."
+              }
+            ],
+            "title": "Start from one clear question.",
+            "kicker": "CORE TESTS"
+          },
+          "secondaryExplore": {
+            "items": [
+              {
+                "href": "/tests",
+                "title": "View all assessments",
+                "description": "Complete assessment entry"
+              },
+              {
+                "href": "/career",
+                "title": "Explore careers",
+                "description": "Career direction and paths"
+              },
+              {
+                "href": "/fun/sbti",
+                "title": "More tests / fun experiments",
+                "description": "SBTI and lightweight experiments"
+              },
+              {
+                "href": "/about",
+                "title": "View data method",
+                "description": "Method, boundaries, and privacy"
+              }
+            ],
+            "title": "Use these only when you need a different path.",
+            "kicker": "Keep browsing"
+          }
+        },
+        "block_copy": {
+          "header": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "title": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "title": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
+                    "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "Start 30-item practice",
+                    "durationLabel": "20 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions",
+                    "secondaryLabel": "View boundaries"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "title": "EQ"
+                  }
+                ],
+                "title": "Core assessments"
+              }
+            ],
+            "testsBody": "Personality, ability, emotion, and career direction all begin here.",
+            "testsLabel": "Assessments",
+            "testsTitle": "Start from one assessment.",
+            "browseAllHref": "/tests",
+            "browseAllLabel": "View all assessments"
+          },
+          "footer": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "label": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "label": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/tests/iq-test-intelligence-quotient-assessment",
+                    "meta": "Cognition practice",
+                    "label": "Start practice",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Practice 30 original visual and numeric reasoning items. Raw score only until norm authority is available.",
+                    "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "durationLabel": "20 min",
+                    "primaryActions": [
+                      {
+                        "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "label": "EQ"
+                  }
+                ],
+                "title": "Top assessments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/help",
+                    "label": "Help Center"
+                  },
+                  {
+                    "href": "/privacy",
+                    "label": "Privacy policy"
+                  },
+                  {
+                    "href": "/terms",
+                    "label": "Terms"
+                  }
+                ],
+                "title": "Support and policy"
+              }
+            ],
+            "tailnote": "See the Micro. Lead the Macro.",
+            "supportEmailLabel": "Support"
+          }
+        }
+      },
+      "staging_before": {
+        "payload_json": {
+          "seo": {
+            "title": "FermatMind",
+            "description": "FermatMind provides clear, reusable assessment results for personality, ability, and career direction.",
+            "familyListTitle": "FermatMind lightweight exploration paths",
+            "quickStartListTitle": "FermatMind core assessment entry points",
+            "familyListDescription": "Lightweight homepage paths for all assessments, career exploration, fun experiments, and data method notes.",
+            "organizationDescription": "FermatMind provides structured assessments for self-understanding, ability review, career direction, and collaboration judgment.",
+            "quickStartListDescription": "Core homepage entry points including MBTI, Big Five, IQ, Holland career interest, Enneagram, and depression-anxiety assessment."
+          },
+          "hero": {
+            "body": "Begin with the most-used entry points, then use the result for learning, collaboration, and career judgment.",
+            "brand": "FermatMind",
+            "title": "Understand yourself before the next step.",
+            "eyebrow": "FermatMind",
+            "subhead": "Start with a clear, reusable assessment result for personality, ability, and career direction.",
+            "trustRail": [
+              "Clear result structure",
+              "Transparent method boundaries",
+              "Anonymous start available"
+            ],
+            "primaryCta": "Start MBTI test",
+            "primaryHref": "/tests/mbti-personality-test-16-personality-types",
+            "tertiaryCta": "Explore careers",
+            "secondaryCta": "View all assessments",
+            "tertiaryHref": "/career",
+            "secondaryHref": "/tests"
+          },
+          "trust": {
+            "body": "The homepage keeps only essential trust information. Method and privacy details are one step away.",
+            "items": [
+              {
+                "title": "Free and reliable",
+                "summary": "Core assessments are built around self-knowledge, career judgment, and capability growth.",
+                "paragraphs": [
+                  "Free and reliable"
+                ]
+              },
+              {
+                "href": "/about",
+                "title": "We take your privacy seriously.",
+                "summary": "Start without an account, then decide whether to save results or go deeper.",
+                "hrefLabel": "Read method notes",
+                "paragraphs": [
+                  "We take your privacy seriously."
+                ]
+              },
+              {
+                "href": "/privacy",
+                "title": "Many users take multiple tests",
+                "summary": "Personality, ability, and state entries help you review change over time.",
+                "hrefLabel": "View privacy policy",
+                "paragraphs": [
+                  "Many users take multiple tests"
+                ]
+              }
+            ],
+            "title": "Start first, go deeper when needed.",
+            "kicker": "TRUST",
+            "methodHref": "/about",
+            "methodLabel": "View method and privacy"
+          },
+          "footer": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "label": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "label": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/tests/iq-test-intelligence-quotient-assessment",
+                    "meta": "Cognition practice",
+                    "label": "Start practice",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Practice 30 original visual and numeric reasoning items. Raw score only until norm authority is available.",
+                    "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "durationLabel": "20 min",
+                    "primaryActions": [
+                      {
+                        "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "label": "EQ"
+                  }
+                ],
+                "title": "Top assessments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/help",
+                    "label": "Help Center"
+                  },
+                  {
+                    "href": "/privacy",
+                    "label": "Privacy policy"
+                  },
+                  {
+                    "href": "/terms",
+                    "label": "Terms"
+                  }
+                ],
+                "title": "Support and policy"
+              }
+            ],
+            "tailnote": "See the Micro. Lead the Macro.",
+            "supportEmailLabel": "Support"
+          },
+          "header": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "title": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "title": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
+                    "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "Start 30-item practice",
+                    "durationLabel": "20 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions",
+                    "secondaryLabel": "View boundaries"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "title": "EQ"
+                  }
+                ],
+                "title": "Core assessments"
+              }
+            ],
+            "testsBody": "Personality, ability, emotion, and career direction all begin here.",
+            "testsLabel": "Assessments",
+            "testsTitle": "Start from one assessment.",
+            "browseAllHref": "/tests",
+            "browseAllLabel": "View all assessments"
+          },
+          "results": {
+            "body": "The result brings type, differences, and next-step suggestions onto one page so you can keep judging clearly.",
+            "title": "What you get back is more than a label.",
+            "kicker": "RESULT PROMISE",
+            "previews": [
+              {
+                "tone": "traits",
+                "title": "Type",
+                "metrics": [
+                  "Type preference"
+                ]
+              },
+              {
+                "tone": "career",
+                "title": "Differences",
+                "metrics": [
+                  "Key differences"
+                ]
+              },
+              {
+                "tone": "state",
+                "title": "Next step",
+                "metrics": [
+                  "Action guidance"
+                ]
+              }
+            ],
+            "exampleHref": "/personality",
+            "exampleLabel": "View result example"
+          },
+          "families": {
+            "body": "Secondary paths stay lightweight instead of taking over the homepage.",
+            "items": [
+              {
+                "links": [
+                  {
+                    "href": "/tests",
+                    "title": "View all assessments"
+                  }
+                ],
+                "title": "All assessments",
+                "description": "See every available assessment entry.",
+                "exploreHref": "/tests",
+                "exploreLabel": "View all assessments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/career",
+                    "title": "Explore careers"
+                  }
+                ],
+                "title": "Career exploration",
+                "description": "Put results back into career direction.",
+                "exploreHref": "/career",
+                "exploreLabel": "Explore careers"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/fun/sbti",
+                    "title": "More tests / fun experiments"
+                  }
+                ],
+                "title": "Fun experiments",
+                "description": "SBTI and lightweight experiments live here.",
+                "exploreHref": "/fun/sbti",
+                "exploreLabel": "More tests / fun experiments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/about",
+                    "title": "View data method"
+                  }
+                ],
+                "title": "Data method",
+                "description": "Read method, boundary, and privacy notes.",
+                "exploreHref": "/about",
+                "exploreLabel": "View data method"
+              }
+            ],
+            "title": "Keep exploring without delaying the start.",
+            "kicker": "MORE PATHS"
+          },
+          "quickStart": {
+            "body": "Six common entry points stay visible. Question-count and version choices move to each test page.",
+            "items": [
+              {
+                "href": "/tests/mbti-personality-test-16-personality-types",
+                "meta": "Personality test",
+                "label": "Start test",
+                "title": "MBTI Personality Test",
+                "description": "Understand your type preference and decision style quickly."
+              },
+              {
+                "href": "/tests/big-five-personality-test-ocean-model",
+                "meta": "Personality test",
+                "label": "Start test",
+                "title": "Big Five Personality Test",
+                "description": "Read your stable traits across five dimensions."
+              },
+              {
+                "href": "/tests/enneagram-personality-test-nine-types",
+                "meta": "Personality test",
+                "label": "Start test",
+                "title": "Enneagram Test",
+                "description": "Understand behavior patterns through motivation and stress response."
+              },
+              {
+                "key": "holland-career-interest-test-riasec",
+                "href": "/tests/holland-career-interest-test-riasec",
+                "meta": "Career interest",
+                "label": "Start test",
+                "title": "Holland Career Interest Test",
+                "description": "Start from interest structure and career direction.",
+                "detailsHref": "/tests/holland-career-interest-test-riasec",
+                "durationLabel": "8 / 18 min",
+                "primaryActions": [
+                  {
+                    "href": "/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "label": "60-question standard",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "href": "/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "label": "140-question enhanced",
+                    "form_code": "riasec_140"
+                  }
+                ],
+                "questionsLabel": "60 / 140 questions"
+              },
+              {
+                "key": "iq-test-intelligence-quotient-assessment",
+                "href": "/tests/iq-test-intelligence-quotient-assessment",
+                "meta": "Cognition practice",
+                "label": "Start practice",
+                "media": {
+                  "alt": "Original IQ reasoning practice card",
+                  "source": "media_library_required",
+                  "status": "metadata_only_no_frontend_asset",
+                  "variants": {
+                    "og_asset_key": "iq-owner-original-30-og",
+                    "card_asset_key": "iq-owner-original-30-card",
+                    "report_cover_asset_key": "iq-full-report-cover"
+                  },
+                  "asset_key": "iq-owner-original-30-card",
+                  "authority": "backend_cms_media_library",
+                  "fallback_allowed": false
+                },
+                "title": "IQ Reasoning Practice",
+                "description": "Practice 30 original visual and numeric reasoning items. Raw score only until norm authority is available.",
+                "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+                "claim_policy": {
+                  "copy_boundary": "raw score and original reasoning practice only",
+                  "norm_authority_required": true,
+                  "percentile_claims_enabled": false,
+                  "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                  "iq_estimate_claims_enabled": false
+                },
+                "durationLabel": "20 min",
+                "primaryActions": [
+                  {
+                    "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                    "label": "Owner original 30",
+                    "form_code": "IQ_OWNER_ORIGINAL_30"
+                  }
+                ],
+                "questionsLabel": "30 questions"
+              },
+              {
+                "href": "/tests/clinical-depression-anxiety-assessment-professional-edition",
+                "meta": "Professional version",
+                "label": "Start test",
+                "title": "Depression and Anxiety Assessment",
+                "description": "Review depression and anxiety dimensions with a fuller recent-state reference."
+              }
+            ],
+            "title": "Start from one clear question.",
+            "kicker": "CORE TESTS"
+          },
+          "secondaryExplore": {
+            "items": [
+              {
+                "href": "/tests",
+                "title": "View all assessments",
+                "description": "Complete assessment entry"
+              },
+              {
+                "href": "/career",
+                "title": "Explore careers",
+                "description": "Career direction and paths"
+              },
+              {
+                "href": "/fun/sbti",
+                "title": "More tests / fun experiments",
+                "description": "SBTI and lightweight experiments"
+              },
+              {
+                "href": "/about",
+                "title": "View data method",
+                "description": "Method, boundaries, and privacy"
+              }
+            ],
+            "title": "Use these only when you need a different path.",
+            "kicker": "Keep browsing"
+          }
+        },
+        "block_copy": {
+          "header": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "title": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "title": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Use 30 original visual-spatial, pattern, and numeric reasoning items. Current output is raw score and dimension reference only.",
+                    "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "Raw score, dimension performance, and stability notes; no formal IQ or percentile claim",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "Start 30-item practice",
+                    "durationLabel": "20 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions",
+                    "secondaryLabel": "View boundaries"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "title": "EQ"
+                  }
+                ],
+                "title": "Core assessments"
+              }
+            ],
+            "testsBody": "Personality, ability, emotion, and career direction all begin here.",
+            "testsLabel": "Assessments",
+            "testsTitle": "Start from one assessment.",
+            "browseAllHref": "/tests",
+            "browseAllLabel": "View all assessments"
+          },
+          "footer": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "label": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "label": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/tests/iq-test-intelligence-quotient-assessment",
+                    "meta": "Cognition practice",
+                    "label": "Start practice",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Practice 30 original visual and numeric reasoning items. Raw score only until norm authority is available.",
+                    "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "durationLabel": "20 min",
+                    "primaryActions": [
+                      {
+                        "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "label": "EQ"
+                  }
+                ],
+                "title": "Top assessments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/help",
+                    "label": "Help Center"
+                  },
+                  {
+                    "href": "/privacy",
+                    "label": "Privacy policy"
+                  },
+                  {
+                    "href": "/terms",
+                    "label": "Terms"
+                  }
+                ],
+                "title": "Support and policy"
+              }
+            ],
+            "tailnote": "See the Micro. Lead the Macro.",
+            "supportEmailLabel": "Support"
+          }
+        }
+      },
+      "snapshot": {
+        "payload_json": {
+          "seo": {
+            "title": "FermatMind",
+            "description": "FermatMind provides clear, reusable assessment results for personality, ability, and career direction.",
+            "familyListTitle": "FermatMind lightweight exploration paths",
+            "quickStartListTitle": "FermatMind core assessment entry points",
+            "familyListDescription": "Lightweight homepage paths for all assessments, career exploration, fun experiments, and data method notes.",
+            "organizationDescription": "FermatMind provides structured assessments for self-understanding, ability review, career direction, and collaboration judgment.",
+            "quickStartListDescription": "Core homepage entry points including MBTI, Big Five, IQ, Holland career interest, Enneagram, and depression-anxiety assessment."
+          },
+          "hero": {
+            "body": "Begin with the most-used entry points, then use the result for learning, collaboration, and career judgment.",
+            "brand": "FermatMind",
+            "title": "Understand yourself before the next step.",
+            "eyebrow": "FermatMind",
+            "subhead": "Start with a clear, reusable assessment result for personality, ability, and career direction.",
+            "trustRail": [
+              "Clear result structure",
+              "Transparent method boundaries",
+              "Anonymous start available"
+            ],
+            "primaryCta": "Start MBTI test",
+            "primaryHref": "/tests/mbti-personality-test-16-personality-types",
+            "tertiaryCta": "Explore careers",
+            "secondaryCta": "View all assessments",
+            "tertiaryHref": "/career",
+            "secondaryHref": "/tests"
+          },
+          "trust": {
+            "body": "The homepage keeps only essential trust information. Method and privacy details are one step away.",
+            "items": [
+              {
+                "title": "Free and reliable",
+                "summary": "Core assessments are built around self-knowledge, career judgment, and capability growth.",
+                "paragraphs": [
+                  "Free and reliable"
+                ]
+              },
+              {
+                "href": "/about",
+                "title": "We take your privacy seriously.",
+                "summary": "Start without an account, then decide whether to save results or go deeper.",
+                "hrefLabel": "Read method notes",
+                "paragraphs": [
+                  "We take your privacy seriously."
+                ]
+              },
+              {
+                "href": "/privacy",
+                "title": "Many users take multiple tests",
+                "summary": "Personality, ability, and state entries help you review change over time.",
+                "hrefLabel": "View privacy policy",
+                "paragraphs": [
+                  "Many users take multiple tests"
+                ]
+              }
+            ],
+            "title": "Start first, go deeper when needed.",
+            "kicker": "TRUST",
+            "methodHref": "/about",
+            "methodLabel": "View method and privacy"
+          },
+          "footer": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "label": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "label": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/tests/iq-test-intelligence-quotient-assessment",
+                    "meta": "Cognition practice",
+                    "label": "Start practice",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Complete 30 original visual matrix reasoning questions in about 20 minutes. Review your score, answer accuracy and result explanations.",
+                    "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "durationLabel": "20 min",
+                    "primaryActions": [
+                      {
+                        "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "label": "EQ"
+                  }
+                ],
+                "title": "Top assessments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/help",
+                    "label": "Help Center"
+                  },
+                  {
+                    "href": "/privacy",
+                    "label": "Privacy policy"
+                  },
+                  {
+                    "href": "/terms",
+                    "label": "Terms"
+                  }
+                ],
+                "title": "Support and policy"
+              }
+            ],
+            "tailnote": "See the Micro. Lead the Macro.",
+            "supportEmailLabel": "Support"
+          },
+          "header": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "title": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "title": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Complete 30 original visual matrix reasoning questions in about 20 minutes. Review your score, answer accuracy and result explanations.",
+                    "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "Model-converted score, reference proportion and answer accuracy; not a professional IQ assessment",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "Start 30-item practice",
+                    "durationLabel": "20 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions",
+                    "secondaryLabel": "View boundaries"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "title": "EQ"
+                  }
+                ],
+                "title": "Core assessments"
+              }
+            ],
+            "testsBody": "Personality, ability, emotion, and career direction all begin here.",
+            "testsLabel": "Assessments",
+            "testsTitle": "Start from one assessment.",
+            "browseAllHref": "/tests",
+            "browseAllLabel": "View all assessments"
+          },
+          "results": {
+            "body": "The result brings type, differences, and next-step suggestions onto one page so you can keep judging clearly.",
+            "title": "What you get back is more than a label.",
+            "kicker": "RESULT PROMISE",
+            "previews": [
+              {
+                "tone": "traits",
+                "title": "Type",
+                "metrics": [
+                  "Type preference"
+                ]
+              },
+              {
+                "tone": "career",
+                "title": "Differences",
+                "metrics": [
+                  "Key differences"
+                ]
+              },
+              {
+                "tone": "state",
+                "title": "Next step",
+                "metrics": [
+                  "Action guidance"
+                ]
+              }
+            ],
+            "exampleHref": "/personality",
+            "exampleLabel": "View result example"
+          },
+          "families": {
+            "body": "Secondary paths stay lightweight instead of taking over the homepage.",
+            "items": [
+              {
+                "links": [
+                  {
+                    "href": "/tests",
+                    "title": "View all assessments"
+                  }
+                ],
+                "title": "All assessments",
+                "description": "See every available assessment entry.",
+                "exploreHref": "/tests",
+                "exploreLabel": "View all assessments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/career",
+                    "title": "Explore careers"
+                  }
+                ],
+                "title": "Career exploration",
+                "description": "Put results back into career direction.",
+                "exploreHref": "/career",
+                "exploreLabel": "Explore careers"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/fun/sbti",
+                    "title": "More tests / fun experiments"
+                  }
+                ],
+                "title": "Fun experiments",
+                "description": "SBTI and lightweight experiments live here.",
+                "exploreHref": "/fun/sbti",
+                "exploreLabel": "More tests / fun experiments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/about",
+                    "title": "View data method"
+                  }
+                ],
+                "title": "Data method",
+                "description": "Read method, boundary, and privacy notes.",
+                "exploreHref": "/about",
+                "exploreLabel": "View data method"
+              }
+            ],
+            "title": "Keep exploring without delaying the start.",
+            "kicker": "MORE PATHS"
+          },
+          "quickStart": {
+            "body": "Six common entry points stay visible. Question-count and version choices move to each test page.",
+            "items": [
+              {
+                "href": "/tests/mbti-personality-test-16-personality-types",
+                "meta": "Personality test",
+                "label": "Start test",
+                "title": "MBTI Personality Test",
+                "description": "Understand your type preference and decision style quickly."
+              },
+              {
+                "href": "/tests/big-five-personality-test-ocean-model",
+                "meta": "Personality test",
+                "label": "Start test",
+                "title": "Big Five Personality Test",
+                "description": "Read your stable traits across five dimensions."
+              },
+              {
+                "href": "/tests/enneagram-personality-test-nine-types",
+                "meta": "Personality test",
+                "label": "Start test",
+                "title": "Enneagram Test",
+                "description": "Understand behavior patterns through motivation and stress response."
+              },
+              {
+                "key": "holland-career-interest-test-riasec",
+                "href": "/tests/holland-career-interest-test-riasec",
+                "meta": "Career interest",
+                "label": "Start test",
+                "title": "Holland Career Interest Test",
+                "description": "Start from interest structure and career direction.",
+                "detailsHref": "/tests/holland-career-interest-test-riasec",
+                "durationLabel": "8 / 18 min",
+                "primaryActions": [
+                  {
+                    "href": "/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "label": "60-question standard",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "href": "/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "label": "140-question enhanced",
+                    "form_code": "riasec_140"
+                  }
+                ],
+                "questionsLabel": "60 / 140 questions"
+              },
+              {
+                "key": "iq-test-intelligence-quotient-assessment",
+                "href": "/tests/iq-test-intelligence-quotient-assessment",
+                "meta": "Cognition practice",
+                "label": "Start practice",
+                "media": {
+                  "alt": "Original IQ reasoning practice card",
+                  "source": "media_library_required",
+                  "status": "metadata_only_no_frontend_asset",
+                  "variants": {
+                    "og_asset_key": "iq-owner-original-30-og",
+                    "card_asset_key": "iq-owner-original-30-card",
+                    "report_cover_asset_key": "iq-full-report-cover"
+                  },
+                  "asset_key": "iq-owner-original-30-card",
+                  "authority": "backend_cms_media_library",
+                  "fallback_allowed": false
+                },
+                "title": "IQ Reasoning Practice",
+                "description": "Complete 30 original visual matrix reasoning questions in about 20 minutes. Review your score, answer accuracy and result explanations.",
+                "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+                "claim_policy": {
+                  "copy_boundary": "raw score and original reasoning practice only",
+                  "norm_authority_required": true,
+                  "percentile_claims_enabled": false,
+                  "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                  "iq_estimate_claims_enabled": false
+                },
+                "durationLabel": "20 min",
+                "primaryActions": [
+                  {
+                    "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                    "label": "Owner original 30",
+                    "form_code": "IQ_OWNER_ORIGINAL_30"
+                  }
+                ],
+                "questionsLabel": "30 questions"
+              },
+              {
+                "href": "/tests/clinical-depression-anxiety-assessment-professional-edition",
+                "meta": "Professional version",
+                "label": "Start test",
+                "title": "Depression and Anxiety Assessment",
+                "description": "Review depression and anxiety dimensions with a fuller recent-state reference."
+              }
+            ],
+            "title": "Start from one clear question.",
+            "kicker": "CORE TESTS"
+          },
+          "secondaryExplore": {
+            "items": [
+              {
+                "href": "/tests",
+                "title": "View all assessments",
+                "description": "Complete assessment entry"
+              },
+              {
+                "href": "/career",
+                "title": "Explore careers",
+                "description": "Career direction and paths"
+              },
+              {
+                "href": "/fun/sbti",
+                "title": "More tests / fun experiments",
+                "description": "SBTI and lightweight experiments"
+              },
+              {
+                "href": "/about",
+                "title": "View data method",
+                "description": "Method, boundaries, and privacy"
+              }
+            ],
+            "title": "Use these only when you need a different path.",
+            "kicker": "Keep browsing"
+          }
+        },
+        "block_copy": {
+          "header": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "title": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "title": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Complete 30 original visual matrix reasoning questions in about 20 minutes. Review your score, answer accuracy and result explanations.",
+                    "detailsHref": "/en/tests/iq-test-intelligence-quotient-assessment",
+                    "outputLabel": "Model-converted score, reference proportion and answer accuracy; not a professional IQ assessment",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "primaryLabel": "Start 30-item practice",
+                    "durationLabel": "20 min",
+                    "previewVariant": "matrix",
+                    "primaryActions": [
+                      {
+                        "href": "/en/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions",
+                    "secondaryLabel": "View boundaries"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "title": "EQ"
+                  }
+                ],
+                "title": "Core assessments"
+              }
+            ],
+            "testsBody": "Personality, ability, emotion, and career direction all begin here.",
+            "testsLabel": "Assessments",
+            "testsTitle": "Start from one assessment.",
+            "browseAllHref": "/tests",
+            "browseAllLabel": "View all assessments"
+          },
+          "footer": {
+            "groups": [
+              {
+                "links": [
+                  {
+                    "href": "/tests/mbti-personality-test-16-personality-types",
+                    "label": "MBTI"
+                  },
+                  {
+                    "href": "/tests/big-five-personality-test-ocean-model",
+                    "label": "Big Five"
+                  },
+                  {
+                    "key": "iq-test-intelligence-quotient-assessment",
+                    "href": "/tests/iq-test-intelligence-quotient-assessment",
+                    "meta": "Cognition practice",
+                    "label": "Start practice",
+                    "media": {
+                      "alt": "Original IQ reasoning practice card",
+                      "source": "media_library_required",
+                      "status": "metadata_only_no_frontend_asset",
+                      "variants": {
+                        "og_asset_key": "iq-owner-original-30-og",
+                        "card_asset_key": "iq-owner-original-30-card",
+                        "report_cover_asset_key": "iq-full-report-cover"
+                      },
+                      "asset_key": "iq-owner-original-30-card",
+                      "authority": "backend_cms_media_library",
+                      "fallback_allowed": false
+                    },
+                    "title": "IQ Reasoning Practice",
+                    "description": "Complete 30 original visual matrix reasoning questions in about 20 minutes. Review your score, answer accuracy and result explanations.",
+                    "detailsHref": "/tests/iq-test-intelligence-quotient-assessment",
+                    "claim_policy": {
+                      "copy_boundary": "raw score and original reasoning practice only",
+                      "norm_authority_required": true,
+                      "percentile_claims_enabled": false,
+                      "deferred_norm_authority_pr": "IQ-SCORE-30-01",
+                      "iq_estimate_claims_enabled": false
+                    },
+                    "durationLabel": "20 min",
+                    "primaryActions": [
+                      {
+                        "href": "/tests/iq-test-intelligence-quotient-assessment/take",
+                        "label": "Owner original 30",
+                        "form_code": "IQ_OWNER_ORIGINAL_30"
+                      }
+                    ],
+                    "questionsLabel": "30 questions"
+                  },
+                  {
+                    "href": "/tests/eq-test-emotional-intelligence-assessment",
+                    "label": "EQ"
+                  }
+                ],
+                "title": "Top assessments"
+              },
+              {
+                "links": [
+                  {
+                    "href": "/help",
+                    "label": "Help Center"
+                  },
+                  {
+                    "href": "/privacy",
+                    "label": "Privacy policy"
+                  },
+                  {
+                    "href": "/terms",
+                    "label": "Terms"
+                  }
+                ],
+                "title": "Support and policy"
+              }
+            ],
+            "tailnote": "See the Micro. Lead the Macro.",
+            "supportEmailLabel": "Support"
+          }
+        }
+      },
+      "source_identity": {},
+      "staging_source_identity": {}
+    },
+    {
+      "page_id": "PAGE-17",
+      "kind": "article",
+      "identity": {
+        "org_id": 0,
+        "slug": "how-16-personality-types-talk-to-an-ai-coach",
+        "locale": "en"
+      },
+      "before": {
+        "title": "How the 16 Personality Types Talk to an AI Coach",
+        "seo_text": {
+          "seo_title": "How 16 Personality Types Use AI Coaches",
+          "seo_description": "Eight AI-coach use patterns, safer prompts, risky prompts, and when to return to real-world feedback or professional support.",
+          "og_title": "How 16 Personality Types Use AI Coaches",
+          "og_description": "Eight AI-coach use patterns, safer prompts, risky prompts, and when to return to real-world feedback or professional support."
+        }
+      },
+      "staging_before": {
+        "title": "How the 16 Personality Types Talk to an AI Coach",
+        "seo_text": {
+          "seo_title": "How 16 Personality Types Use AI Coaches",
+          "seo_description": "Eight AI-coach use patterns, safer prompts, risky prompts, and when to return to real-world feedback or professional support.",
+          "og_title": "How 16 Personality Types Use AI Coaches",
+          "og_description": "Eight AI-coach use patterns, safer prompts, risky prompts, and when to return to real-world feedback or professional support."
+        }
+      },
+      "snapshot": {
+        "title": "How to Use an AI Coach: Eight Patterns, Prompts and Limits",
+        "seo_text": {
+          "seo_title": "AI Coaches: Eight Use Patterns, Prompts and Limits",
+          "seo_description": "Eight AI-coach use patterns, safer prompts, risky prompts, and when to return to real-world feedback or professional support.",
+          "og_title": "AI Coaches: Eight Use Patterns, Prompts and Limits",
+          "og_description": "Eight AI-coach use patterns, safer prompts, risky prompts, and when to return to real-world feedback or professional support."
+        }
+      },
+      "source_identity": {
+        "translation_group_id": "article-14",
+        "source_locale": "zh-CN"
+      },
+      "staging_source_identity": {
+        "translation_group_id": "article-14",
+        "source_locale": "zh-CN"
+      }
     }
   ]
 }

@@ -33,10 +33,10 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-industry-wage-education-2025": {
         "status": "pending_mapping"
@@ -51,7 +51,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
         "status": "mapped"
@@ -23791,13 +23791,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Official and industry signals | The O*NET 53-2031.00 summary page and BLS databases provide U.S. occupational outlook figures: 2024—2034 growth 7% or higher (much faster than average), 19,800 openings over the projection period, and median annual wages of USD 63,580 in 2025. This scope cannot establish Chinese aviation recruitment demand or guarantee individual hiring or pay."
+              "BLS projects Flight Attendants employment from 133,700 in 2025 to 145,500 in 2035, growth of 8.8%, with 18,500 openings per year on average including replacement demand. These U.S. projections do not establish Chinese recruitment demand or guarantee individual hiring or pay."
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -26598,12 +26597,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Employment 131,650 people (OEWS May 2025; BLS occupational projection 2024 base year 130,800 people)"
+              "{{fact:us-employment-2025}}"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "internal-rubric"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -26612,13 +26611,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Original historical records of OEWS131650 and 2024 projection 130800 were not retrieved again. Boundary | Current 2025 projection 133700 differs from OEWS. Overall projections include self-employment/unpaid family work, but their counts in this occupation must not be inferred."
+              "BLS Employment Projections base-year employment is distinct from the OEWS payroll employment estimate."
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -26627,12 +26625,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth 7% or higher (much faster than average, 2024—2034, BLS projection)"
+              "{{fact:us-growth-2025-2035}}"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "internal-rubric"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -26641,12 +26639,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS Employment Projections, with growth describing relative change over the projection period. Boundary | Does not represent recruitment promises by any company or region."
+              "Projected growth for 2025–2035 is 8.8%; it is not a prediction of AI effects."
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "internal-rubric"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -26655,12 +26653,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Approximately 19,800 openings over the projection period (2024—2034, including replacement demand)"
+              "{{fact:us-openings-2025-2035}}"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "internal-rubric"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -26669,13 +26667,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Current 2025 employment 133700, 2025—2035 growth 9%, and average annual openings 18500 are not net new jobs or a ten-year total. Original 2024—2034 records are historical; the original 19800 unit has not been rechecked against the older table, and magnitude cannot justify claiming a total. Boundary | Openings include growth and replacement, not individual hiring guarantees."
+              "Scope | Annual average including growth and replacement, not a ten-year total or an individual hiring probability; BLS Employment Projections | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -30530,12 +30527,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 (BLS Employment Projections)"
+              "2025–2035 (BLS Employment Projections)"
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.10",
           "source_refs": [
-            "internal-rubric"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -30572,12 +30569,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Employment scale, growth rates, and projection-period openings"
+              "Employment, projected growth and average annual openings"
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.13",
           "source_refs": [
-            "internal-rubric"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -30600,12 +30597,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Approximately 130,800 employed (2024 base year; OEWS May 2025 approximately 131,650); growth 7% or higher (much faster than average); approximately 19,800 openings over the projection period (total magnitude)"
+              "BLS projects Flight Attendants employment from 133,700 in 2025 to 145,500 in 2035, growth of 8.8%, with 18,500 openings per year on average including replacement demand. These U.S. projections do not establish Chinese recruitment demand or guarantee individual hiring or pay."
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.15",
           "source_refs": [
-            "internal-rubric"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -31243,13 +31240,13 @@
                 ]
               },
               {
-                "answer": "BLS OEWS (May 2025): median annual wage USD 63,580, mean USD 77,440, percentiles USD 35,110 / 51,760 / 95,640 / 136,430, approximately 131,650 employed. OEWS does not publish this occupation’s median hourly wage; this page makes no conversion. BLS Employment Projections (2024—2034): growth 7% or higher (much faster than average), approximately 19,800 openings over the projection period, including replacement demand and representing a projection-period total.",
+                "answer": "BLS OEWS (May 2025): median annual wage USD 63,580, mean USD 77,440, percentiles USD 35,110 / 51,760 / 95,640 / 136,430, approximately 131,650 employed. OEWS does not publish this occupation’s median hourly wage; this page makes no conversion. BLS Employment Projections (2025–2035): employment from 133,700 to 145,500, growth of 8.8%, and 18,500 average annual openings including growth and replacement needs. Openings are an annual average, not a ten-year total.",
                 "id": "flight-attendants.faq.3",
                 "question": "What are U.S. flight attendant wages and employment?",
                 "question_key": "career.faq.flight-attendants.q3",
                 "source_refs": [
                   "bls-oews-2025",
-                  "bls-projections-2025-35"
+                  "bls-ep-2025-2035-current"
                 ]
               },
               {
@@ -31484,10 +31481,10 @@
                 "url": "https://www.onetonline.org/link/details/53-2031.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-10-19",
                 "details": [
-                  "Table row 53-2031: 2025 employment 34.9 thousand, 2035 employment 36.1 thousand, approximately 1.1 thousand net increase, approximately 3.2% growth, and approximately 1.1 thousand average annual openings.",
-                  "Projections are occupational statistics, not individual hiring probabilities."
+                  "Table 1.2 row 53-2031: 2025 employment 133.7 thousand, 2035 employment 145.5 thousand, 8.8% growth and 18.5 thousand average annual openings.",
+                  "Annual openings include growth and replacement needs; they are not a ten-year total or individual hiring probability."
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
@@ -31496,7 +31493,7 @@
                 "name": "U.S. Bureau of Labor Statistics：2025–2035 Occupational Projections and Characteristics",
                 "period": "2025–2035 projections",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "53-2031 Emergency medicine physicians",
+                "scope": "53-2031 Flight Attendants",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
@@ -31562,6 +31559,21 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-10-19",
+                "details": [
+                  "Employment and annual openings are in thousands in the original table."
+                ],
+                "evidence_type": "official employment projections",
+                "id": "bls-ep-2025-2035-current",
+                "limitation": "Projections are not observed outcomes or an individual hiring probability; annual openings include replacement needs.",
+                "market": "United States",
+                "name": "BLS Occupational Projections Table 1.2, Flight Attendants 53-2031, 2025–2035",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -34574,7 +34586,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "Employment · Projection-period openings",
+            "指标": "Employment · Average annual openings",
             "数值": {
               "$item": "flight-attendants.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -36525,39 +36537,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Approximately 130,800 people (2024, BLS occupational projection base year, presented through O*NET; OEWS May 2025 approximately 131,650 people)",
+        "derivation": "BLS Table 1.2, 2025–2035, Flight Attendants 53-2031. Employment and annual openings converted from thousands.",
+        "display_value": "133,700 people (2025)",
         "fact_id": "us-employment-2025",
         "market": "US",
-        "measure": "Employment scale",
+        "measure": "Employment base",
         "occupation_scope": "Flight Attendants; 53-2031.00",
         "period": "2025",
         "source_refs": [
-          "bls-projections-2025-35"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Growth 7% or higher (much faster than average, 2024—2034, BLS projection presented through O*NET)",
+        "derivation": "BLS Table 1.2, 2025–2035, Flight Attendants 53-2031. Employment and annual openings converted from thousands.",
+        "display_value": "8.8% projected employment growth (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
-        "measure": "Employment growth rate",
+        "measure": "Projected employment growth",
         "occupation_scope": "Flight Attendants; 53-2031.00",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-projections-2025-35"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Approximately 19,800 openings (2024—2034 projection-period total, including replacement demand; no annual-average expression on this page)",
+        "derivation": "BLS Table 1.2, 2025–2035, Flight Attendants 53-2031. Employment and annual openings converted from thousands.",
+        "display_value": "18,500 openings per year on average (2025–2035)",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
-        "measure": "Average annual job openings",
+        "measure": "Average annual openings, including growth and replacement",
         "occupation_scope": "Flight Attendants; 53-2031.00",
-        "period": "2025–2035 projection",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-projections-2025-35"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
@@ -36747,7 +36759,7 @@
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment scale (2025 projection base year)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
@@ -36774,7 +36786,7 @@
       "text": "Flight Attendants"
     }
   },
-  "source_content_sha256": "8f82cbe9a16c3a3e3a7d3d2cac628e1802cf52e39215cfbbd27ee3a0c1762110",
+  "source_content_sha256": "65e2ea0671eb8d525cf44ad5198c056067ba33f1a6cc6cc1fdfb95fb0a1ee7e6",
   "subject": {
     "canonical_slug": "flight-attendants",
     "name": "Flight Attendants",

@@ -51,7 +51,7 @@ test('previous translation package remains readable by its own immutable digest'
 });
 test('previous article amendment still binds only the reviewed existing article body',()=>{
  const binding=inspectPackage(root);const sha=bytes=>createHash('sha256').update(bytes).digest('hex');const digest=sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));const rows=readCandidateRows(root,digest).candidates;
- assert.equal(binding.expected_row_count,3);assert.equal(rows.length,1);
+ assert.equal(binding.expected_row_count,6);assert.equal(rows.length,1);
  const row=rows[0];assert.equal(row.page_id,'PAGE-54');assert.equal(row.kind,'article');
  assert.deepEqual(row.identity,{org_id:0,slug:'mbti-full-report-career-relationship-communication',locale:'en'});
  for(const before of [row.before,row.staging_before]) {
@@ -259,10 +259,10 @@ test('previous single-locale guide amendment protects identity and checks real b
  assert.throws(()=>assertDom(small,html.replace('href="/en/career/guides/interview-strategy-by-role"','href="/en/career/guides/other"'),before,'production'),/LINK/);
 });
 
-test('active copy amendment binds three native resources and checks metadata plus unchanged reader body',()=>{
+test('active copy amendment binds six native resources and checks metadata plus unchanged reader body',()=>{
  const rows=readCandidateRows(root).candidates;
- assert.equal(inspectPackage(root).expected_row_count,3);
- assert.deepEqual(rows.map(row=>row.page_id),['PAGE-23','PAGE-32','PAGE-34']);
+ assert.equal(inspectPackage(root).expected_row_count,6);
+ assert.deepEqual(rows.map(row=>row.page_id),['PAGE-23','PAGE-32','PAGE-34','PAGE-33','PAGE-HOME','PAGE-17']);
  const row=rows[0],seo=row.snapshot.seo_text,url='https://fermatmind.com'+pathFor(row);
  const native={...row.identity,status:'published',is_public:true,seo_meta:seo};
  assert.deepEqual(projection(row,{ok:true,article:native}),row.snapshot);
@@ -290,6 +290,7 @@ function streamedArticlePrestateFixture() {
   assert.ok(item);
   const native={...item.identity,...item.staging_before,id:index+1,status:'published',is_public:true};
   if(item.kind==='article') native.seo_meta=item.staging_before.seo_text;
+  if(item.staging_before.block_copy) native.page_blocks=Object.entries(item.staging_before.block_copy).map(([block_key,payload_json])=>({block_key,payload_json,is_enabled:true}));
   return {status:200,text:async()=>JSON.stringify({ok:true,[item.kind]:native})};
  };
  return {row,before,after,raw,fetcher,requests};
@@ -301,7 +302,7 @@ test('metadata-only Article prestate uses the same rendered reader as post-publi
   renders.push({url,surface:options.surface});return f.before;
  });
  assert.doesNotThrow(()=>assertDom(f.row,f.after,prestate[f.row.page_id],'staging'));
- assert.deepEqual(renders,[{url:'https://staging.fermatmind.com'+pathFor(f.row),surface:'article'}]);
+ assert.deepEqual(renders,readCandidateRows(root).candidates.filter(row=>row.kind==='article').map(row=>({url:'https://staging.fermatmind.com'+pathFor(row),surface:'article'})));
  assert.equal(f.requests.filter(url=>!url.includes('/api/v0.5/') && url.includes('/articles/')).length,0);
  assert.throws(()=>assertDom(f.row,f.after,{dom:domOf(f.raw)},'staging'),/BODY_DRIFT/);
  assert.throws(()=>assertDom(f.row,f.after.replace('streamed continuation','changed continuation'),prestate[f.row.page_id],'staging'),/BODY_DRIFT/);
@@ -311,4 +312,32 @@ test('prestate renderer failure propagates without a raw HTML fallback',async()=
  const f=streamedArticlePrestateFixture();
  await assert.rejects(readOnlinePrestate('staging',root,f.fetcher,async()=>{throw new Error('render unavailable');}),/render unavailable/);
  assert.equal(f.requests.length,1);
+});
+
+test('home copy is consumed by ItemList while the visible IQ card retains the actual reader contract',()=>{
+ const row=readCandidateRows(root).candidates.find(row=>row.page_id==='PAGE-HOME');
+ const items=row.snapshot.payload_json.quickStart.items;
+ const list={'@type':'ItemList','@id':'https://fermatmind.com/en#quickstart-itemlist',inLanguage:'en',numberOfItems:items.length,
+  itemListElement:items.map((item,index)=>({'@type':'ListItem',position:index+1,name:item.title,description:item.description,url:'https://fermatmind.com'+(item.href.startsWith('/en/')?item.href:'/en'+item.href)}))};
+ const card='Explore visual reasoning with 30 original matrix questions. See your correct-answer count and accuracy.';
+ const detail='The current FermatMind IQ test is an original 30-question visual matrix reasoning exercise. Review your performance on this form; it does not replace a professional intelligence assessment.';
+ const html=`<html><head><meta charset="utf-8"><link rel="canonical" href="https://fermatmind.com/en"><script type="application/ld+json">${JSON.stringify(list)}</script></head><body><main><h1>Understand yourself</h1><article><a href="/en/tests/iq-test-intelligence-quotient-assessment/take">${card}<span>30 questions</span><span>20 min</span></a><p>${detail}</p></article></main></body></html>`;
+ const before={dom:domOf(html)};
+ assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ assert.throws(()=>assertDom(row,html.replace(row.snapshot.payload_json.quickStart.items[4].description,'Raw score only'),before,'production'),/HOME_JSONLD/);
+ assert.throws(()=>assertDom(row,html.replace(card,'Raw score only'),before,'production'),/HOME_IQ_CARD/);
+ assert.throws(()=>assertDom(row,html.replace('30 questions','60 questions'),before,'production'),/HOME_IQ_CARD/);
+ const native={surface_key:'home',locale:'en',status:'published',is_public:true,...row.snapshot,
+  page_blocks:Object.entries(row.snapshot.block_copy).map(([block_key,payload_json])=>({block_key,payload_json,is_enabled:true}))};
+ assert.deepEqual(projection(row,{ok:true,surface:native}),row.snapshot);
+ assert.throws(()=>projection(row,{ok:true,surface:{...native,page_blocks:[]}}),/BLOCK_IDENTITY_DRIFT/);
+});
+
+test('reviewed AI-coach heading changes while its explanatory body stays protected',()=>{
+ const row=readCandidateRows(root).candidates.find(row=>row.page_id==='PAGE-17'),seo=row.snapshot.seo_text;
+ const html=`<html><head><meta charset="utf-8"><title>${seo.seo_title} | FermatMind</title><meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}"></head><body><main><h1>${row.snapshot.title}</h1><article data-testid="article-detail-content"><p>Eight illustrative patterns and their limits.</p></article></main></body></html>`;
+ const before={dom:domOf(html.replace(row.snapshot.title,row.before.title))};
+ assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ assert.throws(()=>assertDom(row,html.replace(row.snapshot.title,row.before.title),before,'production'),/H1/);
+ assert.throws(()=>assertDom(row,html.replace('Eight illustrative patterns','Sixteen validated types'),before,'production'),/BODY_DRIFT/);
 });

@@ -57,7 +57,7 @@
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-industry-wage-education-2025": {
         "status": "pending_mapping"
@@ -20351,12 +20351,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 employment: 15,300 people"
+              "{{fact:us-employment-2025}}"
             ]
           },
           "id": "acupuncturists.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet-wages"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -20379,12 +20379,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024–2034: 7% or more (faster than average)"
+              "{{fact:us-growth-2025-2035}}"
             ]
           },
           "id": "acupuncturists.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet-wages"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -20393,12 +20393,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This is a range label; do not rewrite it as an exact 7%."
+              "BLS projects growth of 8.6% for 2025–2035; this projection is not an individual hiring probability."
             ]
           },
           "id": "acupuncturists.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet-wages"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -20407,12 +20407,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024–2034 average of 900 openings per year"
+              "{{fact:us-openings-2025-2035}}"
             ]
           },
           "id": "acupuncturists.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet-wages"
+            "bls-ep-2025-2035-current"
           ],
           "type": "prose"
         },
@@ -25505,6 +25505,21 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-10-19",
+                "details": [
+                  "Employment and annual openings are in thousands in the original table."
+                ],
+                "evidence_type": "official employment projections",
+                "id": "bls-ep-2025-2035-current",
+                "limitation": "Projections are not observed outcomes or an individual hiring probability; annual openings include replacement needs.",
+                "market": "United States",
+                "name": "BLS Occupational Projections Table 1.2, 2025–2035",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -30228,39 +30243,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "15,300 people",
+        "derivation": "BLS Table 1.2, 2025–2035; 29-1291 Acupuncturists.",
+        "display_value": "14,800 people (2025)",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "United States employment base",
+        "measure": "Employment base",
         "occupation_scope": "O*NET 29-1291.00 acupuncturists",
-        "period": "2024 employment; BLS 2024–2034 projection as shown by O*NET",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "7% or more (a faster-than-average range label)",
+        "derivation": "BLS Table 1.2, 2025–2035; 29-1291 Acupuncturists.",
+        "display_value": "8.6% projected employment growth (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Projected employment growth range",
+        "measure": "Projected employment growth",
         "occupation_scope": "O*NET 29-1291.00 acupuncturists",
-        "period": "2024–2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 900 job openings per year",
+        "derivation": "BLS Table 1.2, 2025–2035; 29-1291 Acupuncturists.",
+        "display_value": "800 openings per year on average (2025–2035)",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Average annual openings arising from growth and replacement needs",
+        "measure": "Average annual openings, including growth and replacement",
         "occupation_scope": "O*NET 29-1291.00 acupuncturists",
-        "period": "2024–2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
@@ -30564,19 +30579,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "United States employment growth"
+        "label": "U.S. employment growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "United States number employed"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "United States average annual job openings"
+        "label": "U.S. average annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -30597,7 +30612,7 @@
       "text": "Acupuncturists"
     }
   },
-  "source_content_sha256": "696785354ff47d0873c7860e83689c8d2df8477f9c9e6769489ebfd542ecd5b1",
+  "source_content_sha256": "a2167d0fc1cb2a9a222337d4c50f1a0122c16d27e7acfd814f256373a5558e1a",
   "subject": {
     "canonical_slug": "acupuncturists",
     "name": "Acupuncturists",

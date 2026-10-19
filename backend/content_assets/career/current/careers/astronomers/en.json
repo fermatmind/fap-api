@@ -36,13 +36,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +63,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -31508,7 +31508,7 @@
                 "question_key": "career.faq.astronomers.7"
               },
               {
-                "answer": "The data shown by O*NET give about 1,800 employed in 19-2011.00 for this occupation in 2024, projected growth of 1%—2% for 2024—2034 and about 100 job openings over the projection period; the BLS Occupational Outlook Handbook gives, on the combined physicists and astronomers measure, 7% growth for 2025—2035 and about 1,500 openings per year on average. Directions one can transfer to include computer and information research scientists, mathematicians, statisticians, data scientists, physicists, atmospheric and space scientists, geoscientists and postsecondary physics teachers, but the method requirements and responsibility boundaries of each direction differ.",
+                "answer": "BLS projects Astronomers employment from 2,400 in 2025 to 2,600 in 2035, a 7.8% increase, with about 100 openings per year on average including growth and replacement needs. Annual openings are not the net increase over ten years or an individual hiring probability.",
                 "id": "astronomers.faq.8",
                 "question": "How should the outlook and transfers for astronomers be judged?",
                 "question_key": "career.faq.astronomers.8"
@@ -32318,6 +32318,21 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-10-19",
+                "details": [
+                  "Employment and annual openings are in thousands in the original table."
+                ],
+                "evidence_type": "official employment projections",
+                "id": "bls-ep-2025-2035-current",
+                "limitation": "Projections are not observed outcomes or an individual hiring probability; annual openings include replacement needs.",
+                "market": "United States",
+                "name": "BLS Occupational Projections Table 1.2, 2025–2035",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -37308,39 +37323,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1,800 people",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "2,400 people (2025)",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Number employed in 2024 (19-2011.00 occupation-specific measure)",
+        "measure": "Employment base",
         "occupation_scope": "Astronomers",
-        "period": "2024; accessed 2026-09-15",
+        "period": "2025",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1%—2% (slower than average)",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "7.8% projected employment growth (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "2024—2034 employment growth rate",
+        "measure": "Projected employment growth",
         "occupation_scope": "Astronomers",
-        "period": "2024—2034; accessed 2026-09-15",
+        "period": "2025–2035",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "100 net new jobs",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "100 openings per year on average (2025–2035)",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Job openings over the 2024—2034 projection period",
+        "measure": "Average annual openings, including growth and replacement",
         "occupation_scope": "Astronomers",
-        "period": "2024—2034; accessed 2026-09-15",
+        "period": "2025–2035",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
@@ -37584,19 +37599,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "US employment growth (occupation-specific measure)"
+        "label": "U.S. employment growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "US number employed (occupation-specific measure)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "US job openings over the projection period (2025—2035)"
+        "label": "U.S. average annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37617,7 +37632,7 @@
       "text": "Astronomers"
     }
   },
-  "source_content_sha256": "ed261134070f2b4441345832276cfe9aaa6332e5d7fc3094284a12b85d04ccf2",
+  "source_content_sha256": "f2ea90a135f973cd4a505e2c120307d76191b718aeab7a7d4a8f6b7972c0c35a",
   "subject": {
     "canonical_slug": "astronomers",
     "name": "Astronomers",

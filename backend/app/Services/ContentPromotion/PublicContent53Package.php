@@ -12,6 +12,7 @@ final class PublicContent53Package
     public const PACKAGE = 'content_assets/public_content_53';
 
     private const TARGETS = [
+        'PAGE-HOME' => ['surface', 'home', 'en'],
         'PAGE-02' => ['page', 'about', 'en'],
         'PAGE-03' => ['article', 'best-valentines-date-by-personality-and-relationship-science', 'en'],
         'PAGE-04' => ['article', 'big-five-conscientiousness-low-procrastination-task-plan', 'en'],
@@ -231,7 +232,7 @@ final class PublicContent53Package
         $review = json_decode($this->bytes($root, 'copy-amendment-review.json'), true, 64, JSON_THROW_ON_ERROR);
         $rows = $package['candidates'] ?? [];
         if (($package['schema'] ?? null) !== 'fermatmind.public_content_copy_amendment.v1'
-            || ! is_array($rows) || count($rows) < 1 || count($rows) > 3
+            || ! is_array($rows) || count($rows) < 1 || count($rows) > 6
             || ($review['schema'] ?? null) !== 'fermatmind.public_content_copy_amendment.review.v1'
             || ($review['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
             || ($review['verdict'] ?? null) !== 'PASS' || count($review['pages'] ?? []) !== count($rows)) {
@@ -240,7 +241,7 @@ final class PublicContent53Package
         $seen = [];
         foreach ($rows as $row) {
             $id = $row['page_id'] ?? '';
-            if (! in_array($id, ['PAGE-23', 'PAGE-32', 'PAGE-34'], true) || isset($seen[$id])
+            if (! in_array($id, ['PAGE-17', 'PAGE-23', 'PAGE-32', 'PAGE-33', 'PAGE-34', 'PAGE-HOME'], true) || isset($seen[$id])
                 || ($row['identity']['org_id'] ?? null) !== 0
                 || [$row['kind'] ?? null, $row['identity']['slug'] ?? null, $row['identity']['locale'] ?? null] !== self::TARGETS[$id]
                 || ($review['pages'][$id] ?? null) !== 'PASS'
@@ -250,10 +251,13 @@ final class PublicContent53Package
             $seen[$id] = true;
             foreach (['before', 'staging_before', 'snapshot'] as $version) {
                 $copy = $row[$version] ?? [];
-                if (array_keys($copy) !== ($row['kind'] === 'article' ? ['seo_text'] : ['payload_json'])) {
+                if (array_keys($copy) !== ($row['kind'] === 'article' ? ($id === 'PAGE-17' ? ['title', 'seo_text'] : ['seo_text']) : ($id === 'PAGE-HOME' ? ['payload_json', 'block_copy'] : ['payload_json']))) {
                     throw new DomainException('public_content_53_copy_fields_invalid');
                 }
                 if ($row['kind'] === 'article') {
+                    if ($id === 'PAGE-17' && (! is_string($copy['title']) || trim($copy['title']) === '')) {
+                        throw new DomainException('public_content_53_copy_fields_invalid');
+                    }
                     $fields = array_keys($copy['seo_text'] ?? []);
                     sort($fields);
                     if ($fields !== ['og_description', 'og_title', 'seo_description', 'seo_title']
@@ -273,12 +277,40 @@ final class PublicContent53Package
             }
             if ($row['kind'] === 'surface') {
                 foreach (['before', 'staging_before'] as $version) {
-                    $this->assertCardCopyOnly($row[$version]['payload_json'], $row['snapshot']['payload_json']);
+                    if ($id === 'PAGE-HOME') {
+                        $this->assertHomeCopyOnly($row[$version]['payload_json'], $row['snapshot']['payload_json']);
+                        if (array_keys($row[$version]['block_copy'] ?? []) !== ['header', 'footer']
+                            || array_keys($row['snapshot']['block_copy'] ?? []) !== ['header', 'footer']) {
+                            throw new DomainException('public_content_53_copy_fields_invalid');
+                        }
+                        $this->assertHomeCopyOnly($row[$version]['block_copy'], $row['snapshot']['block_copy']);
+                    } else {
+                        $this->assertCardCopyOnly($row[$version]['payload_json'], $row['snapshot']['payload_json']);
+                    }
                 }
             }
         }
 
         return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
+    private function assertHomeCopyOnly(mixed $before, mixed $after, string $path = ''): void
+    {
+        if ($before === $after) {
+            return;
+        }
+        if (is_array($before) && is_array($after) && array_keys($before) === array_keys($after)) {
+            foreach ($after as $key => $value) {
+                $this->assertHomeCopyOnly($before[$key], $value, ltrim($path.'.'.$key, '.'));
+            }
+
+            return;
+        }
+        if (! is_string($before) || ! is_string($after) || trim($after) === ''
+            || ! in_array($path, ['header.groups.0.links.2.description', 'header.groups.0.links.2.outputLabel',
+                'footer.groups.0.links.2.description', 'quickStart.items.4.description'], true)) {
+            throw new DomainException('public_content_53_copy_protected_field');
+        }
     }
 
     private function assertCardCopyOnly(mixed $before, mixed $after, string $path = ''): void

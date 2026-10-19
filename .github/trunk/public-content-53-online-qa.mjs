@@ -13,7 +13,7 @@ export const pathFor = row => {
   if (row.kind === 'guide') return `/${segment}/career/guides/${slug}`;
   if (row.kind === 'article') return `/${segment}/articles/${slug}`;
   if (row.kind === 'profile') return `/${segment}/topics/${slug}`;
-  if (row.kind === 'surface') return `/${segment}/tests${slug === 'tests' ? '' : '/category/'+slug.replace('tests_category_','')}`;
+  if (row.kind === 'surface') return slug === 'home' ? `/${segment}` : `/${segment}/tests${slug === 'tests' ? '' : '/category/'+slug.replace('tests_category_','')}`;
   return `/${segment}/${slug.startsWith('help-') ? 'help/'+slug.slice(5) : slug}`;
 };
 const hosts = env => {
@@ -50,7 +50,9 @@ $walk = function($node) use (&$walk) {
 $labels=[]; foreach($xp->query('//main//a') as $anchor) { $label=$walk($anchor); if (trim($label)!=='') $labels[$anchor->getAttribute('href')][]=$label; }
 $values = function($query,$attr=null) use($xp,$walk) { $out=[];foreach($xp->query($query) as $node) $out[]=$attr===null?$walk($node):$node->getAttribute($attr);return $out;};
 $quickstart=[]; foreach($xp->query('//script[@type="application/ld+json" and @id="tests-hub-quickstart-en"]') as $node) $quickstart[]=$node->textContent;
+$homeJsonLd=[]; foreach($xp->query('//script[@type="application/ld+json"]') as $node) $homeJsonLd[]=$node->textContent;
 echo json_encode(['link_labels'=>$labels,'body'=>$values('//main[not(ancestor::main)]'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
+ 'home_jsonld'=>$homeJsonLd,'home_iq_cards'=>$values('//main//article[.//a[contains(@href,"iq-test-intelligence-quotient-assessment")]]'),
  'tests_quickstart_jsonld'=>$quickstart,'article_body'=>$values('//main//article[@data-testid="article-detail-content"]'),
  'title'=>$values('//head/title'),'description'=>$values('//meta[@name="description"]','content'),
  'og_title'=>$values('//meta[@property="og:title"]','content'),'og_description'=>$values('//meta[@property="og:description"]','content'),
@@ -64,6 +66,13 @@ export function projection(row,data) {
     || (value.slug ?? value.surface_key) !== row.identity.slug || (row.kind !== 'guide' && value.status !== 'published') || value.is_public !== true) throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
   if (row.kind === 'guide' && value.guide_code !== 'from-mbti-to-job-fit') throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
   const result = Object.fromEntries(Object.keys(row.snapshot).filter(key=>Object.hasOwn(value,key)).map(key=>[key,value[key]]));
+  if (row.kind === 'surface' && row.snapshot.block_copy) {
+    result.block_copy=Object.fromEntries(['header','footer'].map(key=>{
+      const blocks=(value.page_blocks ?? []).filter(block=>block.block_key === key && block.is_enabled === true);
+      if(blocks.length !== 1) throw new Error('PUBLIC_CONTENT_53_BLOCK_IDENTITY_DRIFT');
+      return [key,blocks[0].payload_json];
+    }));
+  }
   if (row.kind === 'article' && row.snapshot.seo_text) result.seo_text=Object.fromEntries(Object.keys(row.snapshot.seo_text).filter(key=>Object.hasOwn(value.seo_meta ?? {},key)).map(key=>[key,value.seo_meta[key]]));
   if (row.kind === 'profile') Object.assign(result,{sections:data.sections,entry_groups:data.entry_groups,seo_text:{title:data.seo_meta?.seo_title,description:data.seo_meta?.seo_description}});
   return result;
@@ -142,7 +151,7 @@ export function assertDom(row,html,before,environment) {
       || !equal(dom.og_description.map(compact),[compact(seo.og_description)]))
       throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
     if (dom.article_body.length !== 1 || before.dom.article_body.length !== 1
-      || !equal(dom.h1.map(compact),before.dom.h1.map(compact)) || !equal(dom.article_body.map(compact),before.dom.article_body.map(compact)))
+      || !equal(dom.h1.map(compact),row.snapshot.title ? [compact(row.snapshot.title)] : before.dom.h1.map(compact)) || !equal(dom.article_body.map(compact),before.dom.article_body.map(compact)))
       throw new Error(`PUBLIC_CONTENT_53_BODY_DRIFT_${row.page_id}`);
   }
   if (row.kind === 'page' && Object.hasOwn(row.snapshot,'seo_title')) {
@@ -177,6 +186,33 @@ export function assertDom(row,html,before,environment) {
         throw new Error(`PUBLIC_CONTENT_53_QUICKSTART_JSONLD_PAGE-32_ITEM_${index+1}`);
     }
   }
+  const home = row.kind === 'surface' && row.identity.slug === 'home';
+  if (home) {
+    // The homepage renders fixed explanatory cards, while CMS quickStart copy
+    // feeds its ItemList. Verify both actual consumers rather than requiring
+    // JSON-LD descriptions to appear as visible prose.
+    let lists;
+    try { lists=dom.home_jsonld.map(text=>JSON.parse(text)).filter(list=>list?.['@type'] === 'ItemList' && list['@id'] === 'https://fermatmind.com/en#quickstart-itemlist'); }
+    catch { throw new Error('PUBLIC_CONTENT_53_HOME_JSONLD'); }
+    const item=row.snapshot.payload_json.quickStart.items.find(item=>item.href.includes('iq-test-intelligence-quotient-assessment')),list=lists[0];
+    if (lists.length !== 1 || list.inLanguage !== 'en' || !Array.isArray(list.itemListElement) || list.numberOfItems !== list.itemListElement.length)
+      throw new Error('PUBLIC_CONTENT_53_HOME_JSONLD');
+    // The existing visibility filter can omit other tests; bind the changed IQ
+    // entry rather than requiring hidden products to reappear in this ItemList.
+    const expected=internalTarget(item?.href,environment);
+    if (expected && !expected.pathname.startsWith('/en/')) expected.pathname='/en'+expected.pathname;
+    const matches=list.itemListElement.filter(entry=>internalTarget(entry?.url,environment)?.pathname === expected?.pathname);
+    const entry=matches[0],actual=internalTarget(entry?.url,environment);
+    if (!item || !expected || !actual || matches.length !== 1 || entry['@type'] !== 'ListItem' || !Number.isInteger(entry.position) || entry.position < 1
+      || entry.name !== item.title || entry.description !== item.description || actual.search !== expected.search || actual.hash !== expected.hash)
+      throw new Error('PUBLIC_CONTENT_53_HOME_JSONLD');
+    const iq=compact(dom.home_iq_cards.join(' '));
+    if (dom.home_iq_cards.length !== 1 || ![
+      'Explore visual reasoning with 30 original matrix questions. See your correct-answer count and accuracy.',
+      'The current FermatMind IQ test is an original 30-question visual matrix reasoning exercise. Review your performance on this form; it does not replace a professional intelligence assessment.',
+      '30 questions','20 min',
+    ].every(text=>iq.includes(compact(text)))) throw new Error('PUBLIC_CONTENT_53_HOME_IQ_CARD');
+  }
   const copy=row.kind === 'guide' ? row.snapshot.body_md : row.snapshot.content_md;
   // Match the article reader's stripInternalCmsSlotMarkers. These are CMS
   // placement instructions, while the API still must retain exact package bytes.
@@ -186,6 +222,7 @@ export function assertDom(row,html,before,environment) {
       : translatedTestsHub ? changedStrings(row.before.payload_json.families,row.snapshot.payload_json.families)
         : translatedCategory ? ['hero','featured','allTests','differences','trust','resources','breadcrumb']
             .flatMap(key=>changedStrings(row.before.payload_json[key],row.snapshot.payload_json[key]))
+          : home ? []
           : row.snapshot.seo_text ? [] : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
   for (const [index, line] of lines.entries()) {
     const text=compact(plain(line));
