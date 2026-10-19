@@ -189,6 +189,8 @@ final class CareerPageProjectorTest extends TestCase
             'middle-school-teachers' => ['us_pay' => '64,370', 'us_growth' => '0%', 'us_employment' => '630,100', 'us_openings' => '38,800'],
             'aerospace-engineers' => ['us_pay' => '134,960', 'us_growth' => '8%', 'us_employment' => '68,700', 'us_openings' => '3,800'],
         ] as $slug => $expected) {
+            $source = json_decode(file_get_contents(dirname(__DIR__, 5).'/content_assets/career/current/careers/'.$slug.'/zh-CN.json'), true, 512, JSON_THROW_ON_ERROR);
+            $facts = array_column($source['fact_register']['facts'], null, 'fact_id');
             $page = $projector->read($slug, 'zh-CN');
             $metrics = array_column($page['hero']['metrics'], null, 'key');
             foreach ($expected as $key => $value) {
@@ -197,7 +199,11 @@ final class CareerPageProjectorTest extends TestCase
             }
             self::assertSame('missing', $metrics['china_pay']['availability']);
             self::assertNull($metrics['china_pay']['fact']);
-            self::assertSame('missing', $page['hero']['ai']['availability']);
+            self::assertSame('available', $source['hero']['ai']['availability']);
+            self::assertSame([
+                ...$source['hero']['ai'],
+                'fact' => $facts[$source['hero']['ai']['fact_ref']],
+            ], $page['hero']['ai']);
         }
         $aerospace = array_column($projector->read('aerospace-engineers', 'zh-CN')['hero']['metrics'], null, 'key');
         self::assertSame('2025年', $aerospace['us_employment']['fact']['period']);
