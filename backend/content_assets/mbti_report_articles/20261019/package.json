@@ -3,7 +3,7 @@
   "authorization": "将两篇最终稿更新到原来的中英文文章并发布，保留原URL和图片；完成线上正文、标题摘要、内链和FAQ验收。",
   "files": {
     "zh.md": "d8398907147bf8bc493f3b6eaf8ae72e995d362958682a1975f9fe624c3c5582",
-    "en.md": "a51d45c945683014adda70a4729e8d1d0bf39bb7a5fd1b3a2aeec1e01834bf80",
+    "en.md": "5bf2b497cc7706a9e60b580835a89b65be5040fd4ca8742bf7beeed4387f784e",
     "independent-review.md": "a4ffd362ef6a001b42250e722c85dd7176f8cd6a63bd4b4218ed1eaf5242285a",
     "mbti-review.md": "910481c89099ba7430f31a2b83078a0a68d5a01f023ad085060ae4c548691753"
   },
@@ -339,5 +339,11 @@
         }
       }
     }
-  ]
+  ],
+  "format_normalization": {
+    "en.md": {
+      "reviewed_sha256": "a51d45c945683014adda70a4729e8d1d0bf39bb7a5fd1b3a2aeec1e01834bf80",
+      "operation": "Remove one final blank line only; preserve all reader content."
+    }
+  }
 }

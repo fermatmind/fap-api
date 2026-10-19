@@ -352,4 +352,3 @@ Compare the report with real behavior, ask for feedback, and test one small acti
 - [The Myers-Briggs Company: MBTI Facts](https://www.themyersbriggs.com/en-us/support/mbti-facts) — the official assessment’s development purpose and its restriction against hiring selection.
 
 Provider descriptions establish the definitions and intended uses of their own instruments. They do not establish the reliability, validity or cross-version equivalence of FermatMind’s questionnaire.
-

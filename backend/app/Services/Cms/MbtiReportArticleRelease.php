@@ -24,7 +24,7 @@ final class MbtiReportArticleRelease
 {
     public const ROOT = 'content_assets/mbti_report_articles/20261019';
 
-    public const SHA256 = '5a8a3ad41936a7043ed5e6c1fe39a88827a756a4234698039c1e4e2aa532c613';
+    public const SHA256 = '352fa4d22e6bc62e39bfc33564e0e3b702d2f6f4350f41ceeba778fe4cf7479a';
 
     public function publish(bool $dryRun = false): array
     {
