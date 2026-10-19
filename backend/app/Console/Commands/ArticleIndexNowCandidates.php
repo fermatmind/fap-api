@@ -188,12 +188,13 @@ final class ArticleIndexNowCandidates extends Command
             || (int) ($plan['eligible_count'] ?? 0) !== 1) {
             return $blocked;
         }
-        $key = app(SearchChannelQueueIdempotency::class)->key($url, (string) $article->locale, $channel, 'content:'.$decision->search_surface_fingerprint);
+        $key = app(SearchChannelQueueIdempotency::class)->key($url, (string) $article->locale, $channel, 'article-decision:'.$decision->id.':content:'.$decision->search_surface_fingerprint);
         $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
         $truth = $connection->table('seo_urls')->where('canonical_url', $url)->where('page_entity_type', 'article')->where('locale', $article->locale)->get();
         $metadata = json_decode((string) ($truth->first()->metadata_json ?? '{}'), true);
         if ($truth->count() !== 1 || (string) $truth->first()->entity_id_or_slug !== (string) $article->id
-            || ($metadata['content_hash'] ?? null) !== $decision->search_surface_fingerprint) {
+            || ($metadata['content_hash'] ?? null) !== $decision->search_surface_fingerprint
+            || (int) ($metadata['article_search_decision_id'] ?? 0) !== (int) $decision->id) {
             return $blocked;
         }
         $existing = $connection->table('seo_search_channel_queue_items')->where('idempotency_key', $key)->first();

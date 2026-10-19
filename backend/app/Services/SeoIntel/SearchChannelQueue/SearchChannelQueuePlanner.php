@@ -144,6 +144,7 @@ final class SearchChannelQueuePlanner
                     channel: $selectedChannel,
                     sourceLastmod: $row['lastmod_at'] ?? null,
                     sourceContentHash: $this->contentHash($row),
+                    sourceVersion: $this->articleEventVersion($row),
                 );
                 $duplicate = $duplicateStatus['blocking_item'];
 
@@ -280,12 +281,21 @@ final class SearchChannelQueuePlanner
     {
         $contentHash = $this->contentHash($row);
         if ($contentHash !== null) {
-            return 'content:'.$contentHash;
+            return $this->articleEventVersion($row) ?? 'content:'.$contentHash;
         }
 
         $lastmod = trim((string) ($row['lastmod_at'] ?? ''));
 
         return $lastmod === '' ? null : 'lastmod:'.$lastmod;
+    }
+
+    private function articleEventVersion(array $row): ?string
+    {
+        $id = (int) ($this->metadata($row)['article_search_decision_id'] ?? 0);
+        $hash = $this->contentHash($row);
+
+        return ($row['page_entity_type'] ?? null) === 'article' && $id > 0 && $hash !== null
+            ? 'article-decision:'.$id.':content:'.$hash : null;
     }
 
     /**

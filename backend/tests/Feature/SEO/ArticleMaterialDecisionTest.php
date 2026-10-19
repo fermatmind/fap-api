@@ -203,7 +203,7 @@ final class ArticleMaterialDecisionTest extends TestCase
             'is_private_flow' => false,
             'first_seen_at' => now(),
             'last_seen_at' => now(),
-            'metadata_json' => json_encode(['claim_safe' => true, 'publication_state' => 'published', 'source_table' => 'articles', 'content_hash' => ContentMaterialDecision::query()->latest('id')->value('search_surface_fingerprint')], JSON_THROW_ON_ERROR),
+            'metadata_json' => json_encode(['claim_safe' => true, 'publication_state' => 'published', 'source_table' => 'articles', 'article_search_decision_id' => ContentMaterialDecision::query()->latest('id')->value('id'), 'content_hash' => ContentMaterialDecision::query()->latest('id')->value('search_surface_fingerprint')], JSON_THROW_ON_ERROR),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -288,15 +288,31 @@ final class ArticleMaterialDecisionTest extends TestCase
         self::assertSame(0, $repeated['submitted_count'], json_encode($repeated, JSON_THROW_ON_ERROR));
         Http::assertSentCount(2);
 
+        $workspace = app(\App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoMetaWorkspace::class);
+        $originalTitle = $article->fresh()->seoMeta->og_title;
+        $workspace->save($article->fresh(), ['og_title' => 'Surface B']);
+        $this->syncSearchFingerprint($url);
+        self::assertSame(1, $this->indexNowPlan((int) $article->id, true)['submitted_count']);
+        $workspace->save($article->fresh(), ['og_title' => $originalTitle]);
+        $this->syncSearchFingerprint($url);
+        self::assertSame(1, $this->indexNowPlan((int) $article->id, true)['submitted_count']);
+        app(ArticlePublishService::class)->unpublishArticle((int) $article->id);
+        app(ArticlePublishService::class)->publishArticle((int) $article->id);
+        $this->syncSearchFingerprint($url);
+        self::assertSame(1, $this->indexNowPlan((int) $article->id, true)['submitted_count']);
+        self::assertSame(4, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('execution_state', 'submitted')->count());
+        self::assertSame(0, $this->indexNowPlan((int) $article->id, true)['submitted_count']);
+        Http::assertSentCount(8);
+
         // A racing/stale writer must never reset an accepted queue item.
         $writer->write($planned);
         self::assertSame('submitted', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->value('execution_state'));
         foreach (['submit_failed', 'submitting', 'platform_action_required', 'provider_security_hold'] as $state) {
-            DB::connection('seo_intel')->table('seo_search_channel_queue_items')->update(['execution_state' => $state]);
+            DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->max('id'))->update(['execution_state' => $state]);
             $held = $this->indexNowPlan((int) $article->id, true);
             self::assertSame(0, $held['submitted_count']);
             self::assertSame('already_queued', $held['items'][0]['state']);
-            Http::assertSentCount(2);
+            Http::assertSentCount(8);
         }
 
         config([
@@ -309,9 +325,9 @@ final class ArticleMaterialDecisionTest extends TestCase
         self::assertSame('provider_security_hold', $baidu['items'][0]['state']);
         self::assertFalse($baidu['search_submission_attempted']);
         self::assertSame(1, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->where('event_type', 'search_channel_provider_security_hold_recorded')->count());
-        Http::assertSentCount(3); // Only the public HTML read; zero credential-bearing HTTP.
+        Http::assertSentCount(9); // Only the public HTML read; zero credential-bearing HTTP.
         $this->indexNowPlan((int) $article->id, true, 'baidu_push');
-        Http::assertSentCount(3);
+        Http::assertSentCount(9);
     }
 
     public function test_exact_article_source_carries_current_search_fingerprint_and_excludes_other_articles_and_locales(): void
@@ -326,6 +342,12 @@ final class ArticleMaterialDecisionTest extends TestCase
         self::assertSame((string) $article->id, $records[0]->entityIdOrSlug);
         self::assertSame(app(ArticleMaterialDecisionService::class)->currentSearchFingerprint($article->fresh()), $records[0]->metadata['content_hash']);
         self::assertSame([], $source->candidatesForArticle((string) $article->id, 'zh-CN'));
+        $body = $this->approvedRevision($article->fresh(), 2, ['content_md' => 'Only the body changed.']);
+        $article->forceFill(['working_revision_id' => $body->id])->saveQuietly();
+        app(ArticlePublishService::class)->promoteExistingWorkingRevision((int) $article->id, (int) $body->id, (int) $article->fresh()->published_revision_id, dispatchFollowUp: false);
+        $bodyRecords = $source->candidatesForArticle((string) $article->id, 'en');
+        self::assertSame($records[0]->metadata['content_hash'], $bodyRecords[0]->metadata['content_hash']);
+        self::assertSame($records[0]->metadata['article_search_decision_id'], $bodyRecords[0]->metadata['article_search_decision_id']);
         app(ArticlePublishService::class)->unpublishArticle((int) $article->id);
         self::assertSame([], $source->candidatesForArticle((string) $article->id, 'en'));
     }
@@ -334,7 +356,7 @@ final class ArticleMaterialDecisionTest extends TestCase
     {
         DB::connection('seo_intel')->table('seo_urls')->where('canonical_url', $url)->update([
             'metadata_json' => json_encode(['claim_safe' => true, 'publication_state' => 'published', 'source_table' => 'articles',
-                'content_hash' => ContentMaterialDecision::query()->latest('id')->value('search_surface_fingerprint')], JSON_THROW_ON_ERROR),
+                'article_search_decision_id' => ContentMaterialDecision::query()->latest('id')->value('id'), 'content_hash' => ContentMaterialDecision::query()->latest('id')->value('search_surface_fingerprint')], JSON_THROW_ON_ERROR),
         ]);
     }
 
