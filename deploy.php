@@ -3702,6 +3702,12 @@ BASH,
         deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_sitemap_source_cache_refresh.sh'),
     ));
 
+    foreach (preg_split('/\R/', $output) ?: [] as $line) {
+        if (str_starts_with($line, 'sitemap_source_cache_fingerprint=')) {
+            writeln($line);
+        }
+    }
+
     if (preg_match('/sitemap_source_cache_warm_status=(verified_unchanged|rebuilt)/', $output, $match) === 1) {
         invoke('seo:sitemap-source-cache-'.$match[1]);
     }
