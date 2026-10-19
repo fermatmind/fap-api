@@ -23,13 +23,14 @@ final class ArticlePublicFeedTest extends TestCase
         $this->article('chinese', ['locale' => 'zh-CN']);
         $this->article('private', ['is_public' => false]);
         $this->article('draft', ['status' => 'draft']);
-        $this->article('future', ['published_at' => '2100-01-01']);
-        $this->article('scheduled', ['scheduled_at' => '2100-01-01']);
+        $this->travelTo(now()->setDate(2026, 10, 19));
+        $this->article('future', ['published_at' => now()->addYear()]);
+        $this->article('scheduled', ['scheduled_at' => now()->addYear()]);
         $this->article('undated', ['published_at' => null]);
         $this->article('tenant', ['org_id' => 8]);
         $this->article('draft-revision', [], ['revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT]);
         $this->article('source-revision', [], ['revision_status' => ArticleTranslationRevision::STATUS_SOURCE]);
-        $this->article('future-revision', [], ['published_at' => '2100-01-01']);
+        $this->article('future-revision', [], ['published_at' => now()->addYear()]);
         $this->article('wrong-language-revision', [], ['locale' => 'zh-CN']);
         $this->article('wrong-org-revision', [], ['org_id' => 8]);
         $this->article('unknown-revision')->forceFill(['published_revision_id' => null])->saveQuietly();
@@ -55,7 +56,7 @@ final class ArticlePublicFeedTest extends TestCase
         $draft->forceFill(['revision_number' => 2, 'revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT,
             'title' => 'PRIVATE WORKING TITLE', 'content_md' => 'PRIVATE ANSWERS'])->save();
         $article->forceFill(['working_revision_id' => $draft->id, 'title' => 'PRIVATE PROJECTION',
-            'excerpt' => 'PRIVATE EXCERPT', 'updated_at' => '2099-01-01'])->saveQuietly();
+            'excerpt' => 'PRIVATE EXCERPT', 'updated_at' => now()->addDay()])->saveQuietly();
         $article->publishedRevision->forceFill(['reviewed_at' => now(), 'updated_at' => now()])->saveQuietly();
         $this->assertSame($original, $this->getJson('/api/v0.5/articles-feed?locale=en')->assertOk()->json('items.0'));
         $article->forceFill(['is_public' => false, 'status' => 'draft'])->saveQuietly();

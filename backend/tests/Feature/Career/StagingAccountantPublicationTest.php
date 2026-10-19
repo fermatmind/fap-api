@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
+use App\Domain\Career\Display\CareerContentV3FactResolver;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerPageProjector;
 use App\Domain\Career\Publish\CareerGenerationAuthorityLoader;
 use App\Domain\Career\Publish\CareerStagingAccountantPublication;
@@ -96,6 +100,7 @@ final class StagingAccountantPublicationTest extends TestCase
 
     public function test_accountant_without_an_ai_score_publishes_the_exact_file_page(): void
     {
+        $this->useFileWithoutAiScore(CareerStagingAccountantPublication::SLUG);
         $page = $this->app->make(CareerPageProjector::class)->read(CareerStagingAccountantPublication::SLUG, 'zh-CN');
         self::assertSame('missing', $page['hero']['ai']['availability']);
         self::assertNull($page['hero']['ai']['fact_ref']);
@@ -203,6 +208,8 @@ final class StagingAccountantPublicationTest extends TestCase
         $publisher = $this->publisher();
         $publisher->publish($sha, static function (): void {});
         $accountant = $this->loader()->loadStrict();
+        $this->useFileWithoutAiScore('actors');
+        $publisher = $this->publisher();
         $verify = static function (array $page): void {
             self::assertSame('missing', $page['hero']['ai']['availability']);
             CareerStagingAccountantPublication::assertResponse(200, ['bundle_kind' => 'career_job_detail',
@@ -273,5 +280,28 @@ final class StagingAccountantPublicationTest extends TestCase
     public static function invalidResponses(): array
     {
         return array_map(static fn (string $case): array => [$case], ['locale', 'body', 'display', 'score', 'hash']);
+    }
+
+    /** Missing-score behavior uses a hash-bound synthetic file, never today's editorial metrics. */
+    private function useFileWithoutAiScore(string $slug): void
+    {
+        $package = app(CareerContentV3AuthorityPackage::class);
+        $index = app(CareerContentV3CanonicalReader::class)->authority();
+        $page = $package->pageFromIndex($index, $slug, 'zh-CN');
+        $page['hero']['ai']['availability'] = 'missing';
+        $page['hero']['ai']['fact_ref'] = null;
+        unset($page['source_content_sha256']);
+        $page['source_content_sha256'] = CareerCurrentAuthorityPackage::hashValue($page);
+        $bytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($page);
+        $root = $this->temporaryStorage.'/missing-score';
+        File::ensureDirectoryExists($root);
+        file_put_contents($root.'/page.json', $bytes);
+        $entry = array_replace($index['entries'][$slug]['zh-CN'], [
+            'path' => 'page.json', 'bytes' => strlen($bytes), 'sha256' => hash('sha256', $bytes),
+            'source_content_sha256' => $page['source_content_sha256'],
+        ]);
+        $reader = $this->createMock(CareerContentV3CanonicalReader::class);
+        $reader->method('authority')->willReturn(['root' => $root, 'entries' => [$slug => ['zh-CN' => $entry]]]);
+        $this->app->instance(CareerPageProjector::class, new CareerPageProjector($reader, $package, new CareerContentV3FactResolver));
     }
 }

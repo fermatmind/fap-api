@@ -226,7 +226,8 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         $this->assertStringContainsString("task('fap:reclaim-stale-serialized-ci-lock'", $deploy);
         $this->assertStringContainsString("before('deploy:lock', 'fap:reclaim-stale-serialized-ci-lock')", $deploy);
         $this->assertStringContainsString('$minimumAgeSeconds = 300;', $deploy);
-        $this->assertStringContainsString("trim((string) file_get_contents(\$lockPath)) !== 'ci'", $deploy);
+        $this->assertStringContainsString("trim(\$lockContents) !== 'ci' && ! \$emptyFailedWrite", $deploy);
+        $this->assertStringContainsString('Deploy lock owner is active or unverified.', $deploy);
         $closeoutCommand = (string) file_get_contents(app_path('Console/Commands/SeoWeeklyDecisionCloseout.php'));
         $this->assertStringContainsString('waiting_for_natural_scheduler_receipt', $closeoutCommand);
         $this->assertStringContainsString('$nextHeartbeat = time() + 30', $closeoutCommand);

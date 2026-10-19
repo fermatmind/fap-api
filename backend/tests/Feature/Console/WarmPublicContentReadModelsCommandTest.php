@@ -14,7 +14,6 @@ use Illuminate\Console\Command as ConsoleCommand;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\File;
 use ReflectionMethod;
 use Tests\TestCase;
 
@@ -43,10 +42,15 @@ final class WarmPublicContentReadModelsCommandTest extends TestCase
         $this->assertSame(['L1', 'L2', 'L3'], array_column($report['entries'], 'priority'));
         $this->assertSame(WarmPublicContentReadModels::PAYLOAD_BUDGET_BYTES, $report['payload_budget_bytes']);
         $this->assertSame('unchanged', Cache::get('sentinel'));
-        $this->assertStringContainsString(
-            "public-content:warm-read-models --verify-only --json')->everyTenMinutes()->withoutOverlapping()",
-            File::get(base_path('bootstrap/app.php')),
-        );
+        $events = collect(app(\Illuminate\Console\Scheduling\Schedule::class)->events())
+            ->filter(fn ($event) => str_contains($event->command ?? '', 'public-content:warm-read-models --verify-only --json'));
+        // Laravel's static Artisan bootstrappers may retain earlier test applications.
+        $this->assertNotEmpty($events);
+        foreach ($events as $event) {
+            $this->assertSame('*/10 * * * *', $event->expression);
+            $this->assertTrue($event->runInBackground);
+            $this->assertTrue($event->withoutOverlapping);
+        }
     }
 
     public function test_it_rejects_conflicting_modes_and_write_acknowledgements_on_read_only_modes(): void

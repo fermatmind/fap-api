@@ -16,7 +16,11 @@ final class SchedulerHeartbeatService
 
     private const FUTURE_TOLERANCE_SECONDS = 5;
 
-    public function __construct(private readonly ?string $path = null, private readonly ?string $release = null) {}
+    public function __construct(
+        private readonly ?string $path = null,
+        private readonly ?string $release = null,
+        private readonly string $tickId = 'local',
+    ) {}
 
     public static function schedulerContractRevision(): string
     {
@@ -44,7 +48,7 @@ final class SchedulerHeartbeatService
         $now ??= CarbonImmutable::now('UTC');
         $previous = $this->readRaw();
         $release = $this->releaseSha();
-        $tick = getenv('FM_SCHEDULER_TICK_ID') ?: 'local';
+        $tick = $this->tickId;
         if (($previous['release_sha'] ?? null) !== $release) {
             $previous = null;
         }

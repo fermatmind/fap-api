@@ -10,7 +10,7 @@ use RuntimeException;
 
 final class SchedulerDispatchBudget
 {
-    public static function attach(Event $event): void
+    public static function attach(Event $event, ?int $deadline = null): void
     {
         if ($event instanceof CallbackEvent) {
             return;
@@ -33,9 +33,8 @@ final class SchedulerDispatchBudget
 
             return;
         }
-        $event->before(static function () use ($event, $command): void {
-            $deadline = getenv('FM_SCHEDULER_DEADLINE');
-            if ($deadline === false) {
+        $event->before(static function () use ($event, $command, $deadline): void {
+            if ($deadline === null) {
                 return;
             }
             $remaining = (int) $deadline - time() - 1;

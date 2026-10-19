@@ -194,7 +194,7 @@ final class EnneagramArticleRefresh
                 'translation_group_id' => self::GROUP, 'enable_hreflang' => true, 'execute' => true,
                 'no_publish' => true, 'no_search' => true, 'no_sitemap_llms_change' => true,
                 'no_content_change' => true, 'no_revalidation' => true,
-            ]);
+            ], notifyAuthorityChange: false); // Native promotions already notify once after the outer commit.
             if (! $gate['ok']) {
                 throw new RuntimeException('Enneagram Article native reciprocal SEO gate failed.');
             }

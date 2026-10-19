@@ -206,6 +206,7 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         $article = $this->article();
+        $article->publishedRevision->forceFill(['revision_status' => 'published'])->saveQuietly();
         $beforeArticle = $article->getAttributes();
         $beforeHistory = Updater::state($article)['history'];
         $article->seoMeta->delete();

@@ -819,12 +819,15 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
 
     public function test_runtime_schedule_verifies_directory_cache_without_rebuilding(): void
     {
-        $schedule = file_get_contents(base_path('bootstrap/app.php'));
-
-        $this->assertIsString($schedule);
-        $this->assertStringContainsString(
-            "career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping()",
-            $schedule,
-        );
+        Artisan::all(); // Boots the same schedule registration as schedule:run.
+        $events = collect(app(\Illuminate\Console\Scheduling\Schedule::class)->events())
+            ->filter(fn ($event) => str_contains($event->command ?? '', 'career:warm-public-authority-cache --verify-only --json'));
+        // Laravel's static Artisan bootstrappers may retain earlier test applications.
+        $this->assertNotEmpty($events);
+        foreach ($events as $event) {
+            $this->assertSame('*/10 * * * *', $event->expression);
+            $this->assertTrue($event->runInBackground);
+            $this->assertTrue($event->withoutOverlapping);
+        }
     }
 }

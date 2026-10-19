@@ -26,6 +26,21 @@ final class SchedulerHeartbeatServiceTest extends TestCase
     }
 
     #[Test]
+    public function bootstrap_reads_tick_identity_for_each_process_without_cached_configuration(): void
+    {
+        config(['ops.scheduler_tick_id' => 'stale-cached-tick']);
+        putenv('FM_SCHEDULER_TICK_ID=synthetic-current-tick');
+        try {
+            $service = app(SchedulerHeartbeatService::class);
+            $payload = $service->record('completed', 0);
+            $this->assertSame('synthetic-current-tick', $payload['completed_tick_id']);
+        } finally {
+            putenv('FM_SCHEDULER_TICK_ID');
+            @unlink(storage_path('app/ops/scheduler-heartbeat.json'));
+        }
+    }
+
+    #[Test]
     public function completed_zero_exit_code_is_the_only_healthy_state(): void
     {
         $service = new SchedulerHeartbeatService($this->path);

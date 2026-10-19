@@ -22,6 +22,12 @@ foreach ($runtimeDirs as $dir) {
 }
 
 $app = Application::configure(basePath: dirname(__DIR__))
+    // Per-process scheduler inputs must not be frozen in Laravel's config cache.
+    ->withBindings([
+        \App\Services\Ops\SchedulerHeartbeatService::class => static fn () => new \App\Services\Ops\SchedulerHeartbeatService(
+            tickId: getenv('FM_SCHEDULER_TICK_ID') ?: 'local',
+        ),
+    ])
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         api: __DIR__.'/../routes/api.php',
@@ -172,7 +178,8 @@ $app = Application::configure(basePath: dirname(__DIR__))
             app(\App\Services\Ops\PublicContentRuntimeMetricsService::class)->rollupPending();
         })->name('public-content-runtime:aggregate-rollup')->everyMinute()->withoutOverlapping(2);
         foreach ($schedule->events() as $event) {
-            \App\Services\Ops\SchedulerDispatchBudget::attach($event);
+            $deadline = getenv('FM_SCHEDULER_DEADLINE');
+            \App\Services\Ops\SchedulerDispatchBudget::attach($event, $deadline === false ? null : (int) $deadline);
         }
     })
     ->withMiddleware(function (Middleware $middleware) {

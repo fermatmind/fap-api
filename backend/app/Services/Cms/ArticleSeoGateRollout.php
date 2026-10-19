@@ -28,7 +28,7 @@ final class ArticleSeoGateRollout
      * @param  array<string,mixed>  $options
      * @return array<string,mixed>
      */
-    public function run(array $options): array
+    public function run(array $options, bool $notifyAuthorityChange = true): array
     {
         $execute = (bool) ($options['execute'] ?? false);
         $dryRun = ! $execute;
@@ -97,7 +97,7 @@ final class ArticleSeoGateRollout
             return $this->summary(true, true, 'would_rollout_article_seo_gates', $articleIds, $translationGroupId, $before, $after, [], $warnings);
         }
 
-        DB::transaction(function () use ($articleIds, $expectedSlugs, $translationGroupId, $options, &$after): void {
+        DB::transaction(function () use ($articleIds, $expectedSlugs, $translationGroupId, $options, $notifyAuthorityChange, &$after): void {
             $locked = $this->resolveArticles($articleIds, true);
             $errors = [];
             $warnings = [];
@@ -111,7 +111,7 @@ final class ArticleSeoGateRollout
             foreach ($locked as $article) {
                 $this->apply($article, $options);
                 $decision = app(ArticleMaterialDecisionService::class)->recordCurrentPublished($article);
-                if ($decision !== null) {
+                if ($decision !== null && $notifyAuthorityChange) {
                     event(new \App\Events\PublicAuthorityChanged(
                         'article', (string) $article->id, (string) $article->locale,
                         (string) $decision->material_fingerprint, 'authority_revision',
