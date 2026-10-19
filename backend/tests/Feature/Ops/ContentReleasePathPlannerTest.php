@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Filament\Ops\Support\ContentReleaseFollowUp;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
@@ -13,7 +14,9 @@ use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ContentReleasePathPlanner;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class ContentReleasePathPlannerTest extends TestCase
@@ -54,6 +57,69 @@ final class ContentReleasePathPlannerTest extends TestCase
         $this->assertContains('/zh/career/guides/career-decision-guide', $paths);
         $this->assertContains('/llms.txt', $paths);
         $this->assertContains('/llms-full.txt', $paths);
+    }
+
+    public function test_bilingual_cms_follow_up_reads_final_metadata_only_after_commit(): void
+    {
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        $baselineLevel = DB::transactionLevel();
+        Http::fake(function () use ($baselineLevel) {
+            $this->assertSame($baselineLevel, DB::transactionLevel(), 'HTTP must not hold the publication transaction.');
+            $this->assertSame(2, Article::withoutGlobalScopes()->where('content_md', 'Final committed body')->count());
+
+            return Http::response(['ok' => true], 200);
+        });
+        DB::transaction(function (): void {
+            foreach (['zh-CN', 'en'] as $locale) {
+                $article = $this->persistedArticleWithSeoMeta($locale);
+                ContentReleaseAudit::log('article', $article, 'synthetic-native-revision');
+                $article->forceFill(['content_md' => 'Final committed body'])->saveQuietly();
+                $article->seoMeta->forceFill(['schema_json' => ['editorial_package_v1' => ['target_topics' => ['mbti']]]])->saveQuietly();
+            }
+            Http::assertNothingSent();
+        });
+        Http::assertSentCount(2);
+        foreach (['zh', 'en'] as $locale) {
+            Http::assertSent(fn ($request) => in_array('/'.$locale.'/topics/mbti', $request['cache_signal']['paths'], true));
+        }
+        Http::assertNotSent(fn ($request) => collect($request['cache_signal']['paths'])->contains(
+            fn ($path) => str_contains($path, '/career/jobs/') || $path === '/sitemap.xml',
+        ));
+    }
+
+    public function test_rolled_back_article_publication_does_not_refresh_public_caches(): void
+    {
+        Http::fake();
+        DB::beginTransaction();
+        $article = $this->persistedArticleWithSeoMeta('en');
+        ContentReleaseAudit::log('article', $article, 'synthetic-rolled-back-revision');
+        DB::rollBack();
+
+        Http::assertNothingSent();
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->where('action', 'content_release_publish')->count());
+    }
+
+    #[DataProvider('revalidationFailures')]
+    public function test_cache_http_failure_is_recorded_after_data_commits(int $status, mixed $body): void
+    {
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        Http::fake(['*' => Http::response($body, $status)]);
+        $article = DB::transaction(function (): Article {
+            $article = $this->persistedArticleWithSeoMeta('en');
+            ContentReleaseAudit::log('article', $article, 'synthetic-cache-failure');
+
+            return $article;
+        });
+        $this->assertNotNull($article->fresh());
+        $this->assertTrue(AuditLog::withoutGlobalScopes()->where('action', 'content_release_cache_signal')->where('result', 'failed')->exists());
+        $this->assertFalse(AuditLog::withoutGlobalScopes()->where('action', 'content_release_cache_signal')->where('result', 'success')->exists());
+    }
+
+    public static function revalidationFailures(): array
+    {
+        return [[503, ['ok' => false]], [200, ['ok' => false]], [200, 'invalid acknowledgement']];
     }
 
     public function test_plans_en_article_default_paths(): void

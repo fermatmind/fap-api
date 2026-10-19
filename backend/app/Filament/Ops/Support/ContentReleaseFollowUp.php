@@ -261,6 +261,11 @@ final class ContentReleaseFollowUp
             }
 
             $receipt = $response->json();
+            if ($action === 'content_release_cache_signal'
+                && data_get($payload, 'content.type') === 'article'
+                && (! is_array($receipt) || ($receipt['ok'] ?? null) !== true)) {
+                throw new \RuntimeException('Article cache revalidation was not acknowledged.');
+            }
             if ($expectedReceipt !== null) {
                 if (! is_array($receipt) || ! self::receiptMatches($receipt, $expectedReceipt)) {
                     throw new \RuntimeException('Cache revalidation receipt did not match the exact requested scope.');

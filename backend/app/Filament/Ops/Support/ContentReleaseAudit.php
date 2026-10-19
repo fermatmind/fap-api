@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Support;
 
+use App\Models\Article;
 use App\Models\ContentPage;
 use App\Models\InterpretationGuide;
 use App\Models\SupportArticle;
 use App\Services\Audit\AuditLogger;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 final class ContentReleaseAudit
 {
@@ -50,7 +52,17 @@ final class ContentReleaseAudit
         );
 
         if ($dispatchFollowUp) {
-            ContentReleaseFollowUp::dispatch($type, $record, $source, $request);
+            if ($type === 'article' && $record instanceof Article) {
+                // CMS revision publication does not need an application release.
+                // HTTP revalidation must see the final committed body/FAQ/SEO and
+                // must never hold the publication transaction or run on rollback.
+                DB::afterCommit(static function () use ($type, $record, $source, $request): void {
+                    $current = $record->fresh(['publishedRevision', 'seoMeta']) ?? $record;
+                    ContentReleaseFollowUp::dispatch($type, $current, $source, $request);
+                });
+            } else {
+                ContentReleaseFollowUp::dispatch($type, $record, $source, $request);
+            }
         }
     }
 
