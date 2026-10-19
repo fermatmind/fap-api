@@ -1,0 +1,38 @@
+{
+  "schema": "career_interest_practice.v1",
+  "scope": {
+    "article": {
+      "id": 40,
+      "org_id": 0,
+      "slug": "riasec-holland-career-interest-test-explained",
+      "locale": "zh-CN"
+    },
+    "guide": {
+      "id": 12,
+      "org_id": 0,
+      "slug": "how-to-find-right-career-direction",
+      "locale": "zh-CN"
+    }
+  },
+  "baselines": {
+    "prod": {
+      "article_body_sha256": "01513c6b86eece734982638caa816282b283e39b6d4caa28c830d613f6d51950",
+      "article_revision_id": 774,
+      "guide_body_sha256": "3105b72cca84d39fba67bf58ad2646c3f31da212b63100074377be94cddfb638"
+    },
+    "staging": {
+      "article_body_sha256": "cb798b138747bdf0a00e9b786045b8354492b3df18824b0419b1d4b7cc2c61e8",
+      "article_revision_id": 69,
+      "guide_body_sha256": "d5e65bc52e59b42dca1533ef4a02d46c5556429d14382cc7003f1c214e44446c"
+    }
+  },
+  "files": {
+    "guide.md": "999895252d709247d6b0baa6f8733a41eb9b04dc5176d895b8c93f94c6bc92c2",
+    "article.md": "4021ffc9083e38d25548e8960acda1753b60d22f325af830295e7d8f31642336"
+  },
+  "sources": [
+    "https://fermatmind.com/zh/career/jobs/actors",
+    "https://fermatmind.com/zh/career/jobs/film-and-video-editors"
+  ],
+  "example_anchor": "career-guide-body-markdown-block-21"
+}
