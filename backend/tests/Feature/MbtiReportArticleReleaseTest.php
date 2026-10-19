@@ -154,6 +154,50 @@ final class MbtiReportArticleReleaseTest extends TestCase
         $this->assertSame(2, DB::table('articles')->where('translation_status', 'source')->count());
     }
 
+    public function test_json_object_key_reordering_preserves_publication_and_faq_projection(): void
+    {
+        $this->seedBaseline();
+        // Emulate MySQL JSON storage: object keys may be reordered, array order stays.
+        foreach ([\App\Models\ArticleSeoMeta::class => 'schema_json', ArticleTranslationRevision::class => 'authority_metadata_json'] as $model => $field) {
+            $model::retrieved(static function ($record) use ($field): void {
+                $value = $record->getAttribute($field);
+                if (is_array($value)) {
+                    $attrs = $record->getAttributes();
+                    $attrs[$field] = \App\Services\ContentPromotion\PromotionContextFactory::canonicalJson($value);
+                    $record->setRawAttributes($attrs, true);
+                }
+            });
+        }
+        $service = app(MbtiReportArticleRelease::class);
+        $this->assertSame(['status' => 'published', 'changed' => 2], $service->publish());
+        $this->assertSame(['status' => 'unchanged', 'changed' => 0], $service->publish());
+        $article = Article::withoutGlobalScopes()->with(['publishedRevision', 'seoMeta'])->findOrFail(61);
+        $metadata = $article->seoMeta->schema_json['editorial_package_v1'];
+        $this->assertSame(8, MbtiReportArticleRelease::faqLimit($article, $metadata, 6));
+        $metadata['answer_surface_v1']['faq_items'] = array_reverse($metadata['answer_surface_v1']['faq_items']);
+        $this->assertSame(6, MbtiReportArticleRelease::faqLimit($article, $metadata, 6));
+        $metadata = $article->seoMeta->schema_json['editorial_package_v1'];
+        array_pop($metadata['answer_surface_v1']['faq_items']);
+        $this->assertSame(6, MbtiReportArticleRelease::faqLimit($article, $metadata, 6));
+        $metadata = $article->seoMeta->schema_json['editorial_package_v1'];
+        $metadata['answer_surface_v1']['faq_items'][0]['answer'] .= ' changed';
+        $this->assertSame(6, MbtiReportArticleRelease::faqLimit($article, $metadata, 6));
+    }
+
+    public function test_real_media_change_still_rejects_the_entire_publication(): void
+    {
+        $this->seedBaseline();
+        $changed = false;
+        Article::updated(static function ($article) use (&$changed): void {
+            if ((int) $article->id === 10 && $article->isDirty('title')) {
+                $changed = true;
+                DB::table('articles')->where('id', 10)->update(['cover_image_url' => 'https://example.test/changed.jpg']);
+            }
+        });
+        $this->assertRejected();
+        $this->assertTrue($changed);
+    }
+
     private function assertRejected(): void
     {
         $state = fn () => json_encode(array_map(fn ($table) => DB::table($table)->orderBy('id')->get()->all(), [

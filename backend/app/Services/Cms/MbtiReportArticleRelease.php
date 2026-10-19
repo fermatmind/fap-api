@@ -72,7 +72,7 @@ final class MbtiReportArticleRelease
                 if ($revision->authority_package_sha256 === self::SHA256 && $article->content_md === $body
                     && $article->title === $row['title'] && $article->excerpt === $row['excerpt']
                     && $seo->seo_title === $row['seo_title'] && $seo->seo_description === $row['seo_description']
-                    && data_get($seo->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items') === $row['faq_items']) {
+                    && self::sameFaq(data_get($seo->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'), $row['faq_items'])) {
                     continue;
                 }
                 $baseline = $row['baselines'][app()->environment('staging') ? 'staging' : 'production'];
@@ -159,11 +159,18 @@ final class MbtiReportArticleRelease
                         ['surface_id' => 'editorial_review', 'record' => $review]], $owner, self::SHA256);
                 $attestations->assertApprovedEvidence([['surface_id' => 'article', 'record' => $article],
                     ['surface_id' => 'article_translation_revision', 'record' => $article->publishedRevision]]);
-                if ($this->protectedArticle($article) !== $protectedArticle || $this->protectedSeo($article->seoMeta) !== $protectedSeo
-                    || $article->content_md !== $body || $article->title !== $row['title'] || $article->excerpt !== $row['excerpt']
-                    || $article->seoMeta->seo_title !== $row['seo_title'] || $article->seoMeta->seo_description !== $row['seo_description']
-                    || data_get($article->seoMeta->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items') !== $row['faq_items']) {
-                    throw new RuntimeException('MBTI article public or protected-field readback failed.');
+                $checks = [
+                    'protected_article' => $this->protectedArticle($article) === $protectedArticle,
+                    'protected_seo' => $this->protectedSeo($article->seoMeta) === $protectedSeo,
+                    'body' => $article->content_md === $body, 'title' => $article->title === $row['title'],
+                    'excerpt' => $article->excerpt === $row['excerpt'], 'seo_title' => $article->seoMeta->seo_title === $row['seo_title'],
+                    'seo_description' => $article->seoMeta->seo_description === $row['seo_description'],
+                    'faq_items' => self::sameFaq(data_get($article->seoMeta->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'), $row['faq_items']),
+                ];
+                if (in_array(false, $checks, true)) {
+                    throw new RuntimeException('MBTI article public or protected-field readback failed: '.json_encode([
+                        'article_id' => $article->id, 'failed_checks' => array_keys(array_filter($checks, fn ($ok) => ! $ok)),
+                    ], JSON_THROW_ON_ERROR));
                 }
                 app(AuditLogger::class)->log(Request::create('/ops/mbti-report-articles', 'POST'), 'mbti_report_articles_reviewed_update', 'article',
                     meta: ['article_id' => $article->id, 'package_sha256' => self::SHA256, 'previous_revision_id' => $priorRevision,
@@ -195,7 +202,7 @@ final class MbtiReportArticleRelease
             || $revision->authority_package_sha256 !== self::SHA256 || $revision->authority_source_package !== self::ROOT
             || ($binding['package_sha256'] ?? null) !== self::SHA256 || ($binding['revision_id'] ?? null) !== (int) $article->published_revision_id
             || ($binding['body_sha256'] ?? null) !== hash('sha256', (string) $revision->content_md)
-            || data_get($revision->authority_metadata_json, 'faq_items') !== $faqs || ! is_array($faqs)
+            || ! self::sameFaq(data_get($revision->authority_metadata_json, 'faq_items'), $faqs) || ! is_array($faqs)
             || ! array_is_list($faqs) || count($faqs) !== ($article->locale === 'en' ? 8 : 6)) {
             return $default;
         }
@@ -219,11 +226,21 @@ final class MbtiReportArticleRelease
         return $package;
     }
 
+    private static function sameFaq(mixed $actual, mixed $expected): bool
+    {
+        return is_array($actual) && is_array($expected) && array_is_list($actual) && array_is_list($expected)
+            && PromotionContextFactory::canonicalJson($actual) === PromotionContextFactory::canonicalJson($expected);
+    }
+
     private function protectedArticle(Article $article): array
     {
-        return array_intersect_key($article->getAttributes(), array_flip(['id', 'org_id', 'slug', 'locale', 'translation_group_id',
+        $protected = array_intersect_key($article->getAttributes(), array_flip(['id', 'org_id', 'slug', 'locale', 'translation_group_id',
             'cover_image_url', 'cover_image_alt', 'cover_image_width', 'cover_image_height', 'cover_image_variants',
             'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at', 'related_test_slug', 'lifecycle_state', 'lifecycle_note']));
+        $variants = $article->cover_image_variants;
+        $protected['cover_image_variants'] = is_array($variants) ? PromotionContextFactory::canonicalJson($variants) : $variants;
+
+        return $protected;
     }
 
     private function protectedSeo(ArticleSeoMeta $seo): array
