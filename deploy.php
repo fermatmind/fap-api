@@ -5146,10 +5146,11 @@ if (! is_string($lockContents)) {
     fwrite(STDERR, "deploy lock could not be read\n");
     exit(3);
 }
-// A full filesystem can create the file but fail to write even "ci". No
-// metadata was installed in that case; retain the same serialized/age boundary.
-$emptyFailedWrite = $lockContents === '' && ! file_exists($metaPath) && ! is_link($metaPath);
+// A full filesystem can truncate the lock before writing "ci". Both forms
+// must pass the same age and (when present) old CI-owner metadata checks below.
+$emptyFailedWrite = $lockContents === '';
 if (trim($lockContents) !== 'ci' && ! $emptyFailedWrite) {
+    fwrite(STDERR, 'lock_bytes='.strlen($lockContents).' metadata_present='.(int) (file_exists($metaPath) || is_link($metaPath))."\n");
     fwrite(STDERR, "deploy lock is not CI-owned\n");
     exit(3);
 }

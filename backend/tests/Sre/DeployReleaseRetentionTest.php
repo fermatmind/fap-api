@@ -11,7 +11,7 @@ use Symfony\Component\Process\Process;
 final class DeployReleaseRetentionTest extends TestCase
 {
     #[Test]
-    public function only_old_empty_locks_without_metadata_are_reclaimed(): void
+    public function empty_lock_recovery_requires_the_existing_age_and_ci_owner_checks(): void
     {
         $source = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
         $start = strpos($source, "    \$reclaimScript = <<<'PHP'\n");
@@ -23,11 +23,19 @@ final class DeployReleaseRetentionTest extends TestCase
         $root = sys_get_temp_dir().'/fap-lock-'.bin2hex(random_bytes(8));
         mkdir($root, 0700);
         try {
-            foreach ([['', 600, false, true], ['', 0, false, false], ['', 600, true, false], [' ', 600, false, false], ['operator', 600, false, false]] as [$contents, $age, $metadata, $success]) {
+            foreach ([
+                ['', 600, false, true],
+                ['', 0, false, false],
+                ['', 600, [], false],
+                ['', 600, ['run_id' => '888', 'run_attempt' => '1'], true],
+                ['', 600, ['run_id' => '999', 'run_attempt' => '1'], false],
+                [' ', 600, false, false],
+                ['operator', 600, false, false],
+            ] as [$contents, $age, $metadata, $success]) {
                 file_put_contents($root.'/lock', $contents);
                 touch($root.'/lock', time() - $age);
-                if ($metadata) {
-                    file_put_contents($root.'/meta', '{}');
+                if ($metadata !== false) {
+                    file_put_contents($root.'/meta', json_encode($metadata));
                 }
                 $process = new Process([PHP_BINARY, '-r', $script, $root.'/lock', $root.'/meta', '999', '1']);
                 $process->run();
