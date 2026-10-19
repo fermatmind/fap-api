@@ -24,6 +24,9 @@ set -euo pipefail
 printf '%s\n' "$*" >> "$FAKE_TICK_LOG"
 if [[ "$*" == *"ops:scheduler-heartbeat-record"* && "${FAKE_HEARTBEAT_BLOCK:-false}" == true ]]; then sleep 20; fi
 if [[ "$*" == *"artisan schedule:run"* ]]; then
+  if [[ "${FAKE_BACKGROUND_SLEEP:-0}" != 0 ]]; then
+    (sleep "$FAKE_BACKGROUND_SLEEP"; touch "$FAKE_BACKGROUND_MARKER") >/dev/null 2>&1 &
+  fi
   sleep "${FAKE_SCHEDULE_SLEEP:-0}"
   exit "${FAKE_SCHEDULE_EXIT:-0}"
 fi
@@ -91,6 +94,33 @@ PYTHON);
         $this->assertSame(9, $process->getExitCode());
         $this->assertStringContainsString('--status=started', $log);
         $this->assertStringContainsString('--status=completed --exit-code=9', $log);
+    }
+
+    #[Test]
+    public function background_events_do_not_hold_the_dispatcher_lock_after_foreground_completion(): void
+    {
+        $marker = $this->temporaryDirectory.'/background-finished';
+        $first = $this->process([
+            'FAKE_BACKGROUND_SLEEP' => '2',
+            'FAKE_BACKGROUND_MARKER' => $marker,
+        ]);
+        $first->run();
+        $this->assertTrue($first->isSuccessful(), $first->getErrorOutput());
+        $this->assertFileDoesNotExist($marker);
+
+        $next = $this->process();
+        $next->run();
+        $this->assertTrue($next->isSuccessful(), $next->getErrorOutput());
+        $this->assertFileDoesNotExist($marker);
+        $log = (string) file_get_contents($this->temporaryDirectory.'/tick.log');
+        $this->assertSame(2, substr_count($log, 'artisan schedule:run'));
+        $this->assertStringNotContainsString('--status=overlap', $log);
+
+        $deadline = microtime(true) + 3;
+        while (! is_file($marker) && microtime(true) < $deadline) {
+            usleep(20_000);
+        }
+        $this->assertFileExists($marker);
     }
 
     #[Test]

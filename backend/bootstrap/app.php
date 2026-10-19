@@ -135,6 +135,9 @@ $app = Application::configure(basePath: dirname(__DIR__))
         }
         $schedule->command('seo:runtime-probe-scheduled --trigger=scheduled --json')
             ->everyTenMinutes()
+            // HTTP calibration can exceed a minute; its own receipt and mutex
+            // remain authoritative without blocking the scheduler dispatcher.
+            ->runInBackground()
             ->withoutOverlapping()
             ->onOneServer();
         $schedule->command('seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250')

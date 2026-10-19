@@ -50,7 +50,9 @@ record_heartbeat() {
 }
 record_heartbeat --status=started
 set +e
-"$php_bin" artisan schedule:run --no-interaction --no-ansi
+# The wrapper owns the dispatcher lock. Background events must not inherit it
+# after the foreground schedule:run process has finished.
+"$php_bin" artisan schedule:run --no-interaction --no-ansi 9>&-
 schedule_rc=$?
 set -e
 if [[ -f "$overlap_path" ]]; then

@@ -151,6 +151,15 @@ final class SeoPlatform07ScheduledRuntimeProbeReceiptTest extends TestCase
 
         $this->assertIsArray($event);
         $this->assertSame('*/10 * * * *', $event['expression'] ?? null);
+
+        $this->artisan('schedule:list', ['--json' => true])->assertSuccessful();
+        $scheduled = collect(app(\Illuminate\Console\Scheduling\Schedule::class)->events())->first(
+            fn ($candidate): bool => str_contains((string) $candidate->command, 'seo:runtime-probe-scheduled'),
+        );
+        $this->assertNotNull($scheduled);
+        $this->assertTrue($scheduled->runInBackground);
+        $this->assertTrue($scheduled->withoutOverlapping);
+        $this->assertTrue($scheduled->onOneServer);
     }
 
     #[Test]

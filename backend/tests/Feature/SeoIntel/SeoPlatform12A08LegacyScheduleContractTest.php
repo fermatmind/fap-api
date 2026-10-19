@@ -52,7 +52,6 @@ final class SeoPlatform12A08LegacyScheduleContractTest extends TestCase
         foreach ([
             ['seo:weekly-decisions --trigger=scheduled --json', "weeklyOn(4, '13:45')"],
             ['analytics:refresh-seo-conversion-daily --trigger=scheduled --json', "dailyAt('05:50')"],
-            ['seo:runtime-probe-scheduled --trigger=scheduled --json', 'everyTenMinutes()'],
             ['seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250', "timezone('Asia/Shanghai')\n            ->dailyAt('06:10')"],
         ] as [$command, $cadence]) {
             preg_match('/command\(\''.preg_quote($command, '/').'\'\)([^;]+);/', $source, $matches);
