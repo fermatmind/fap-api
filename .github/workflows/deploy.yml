@@ -513,7 +513,7 @@ jobs:
       - name: Install Career release-intent verifier dependencies
         if: steps.receipt.outputs.career_current == 'true'
         working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
       - id: career-current
         name: Bind Career Current package operation
         if: steps.receipt.outputs.career_current == 'true'

@@ -1212,7 +1212,7 @@ task('rollback:healthcheck', [
  * ======================================================
  */
 task('deploy:vendors', function () {
-    run('cd '.deployPlaceholderPathArg('{{release_path}}', 'backend').' && COMPOSER_PROCESS_TIMEOUT=900 {{bin/composer}} install --no-interaction --prefer-dist --optimize-autoloader --no-dev');
+    run('cd '.deployPlaceholderPathArg('{{release_path}}', 'backend').' && COMPOSER_PROCESS_TIMEOUT=900 bash scripts/ci/composer_install.sh {{bin/composer}} --no-interaction --prefer-dist --optimize-autoloader --no-dev');
 });
 
 /**

@@ -29,6 +29,62 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
 
     private const CANONICAL = '/zh/articles/eq-test-tool-guide';
 
+    public function test_native_login_mfa_preview_and_review_bind_the_exact_isolated_revision(): void
+    {
+        config(['admin.panel_enabled' => true, 'admin.totp.enabled' => true]);
+        \Filament\Facades\Filament::setCurrentPanel(app(\Filament\PanelRegistry::class)->get('ops'));
+        $password = 'Isolated-test-password-42!';
+        $actor = \App\Models\AdminUser::query()->create([
+            'name' => 'isolated-test-owner', 'email' => 'isolated-owner@example.test',
+            'password' => bcrypt($password), 'is_active' => 1,
+        ]);
+        $permission = \App\Models\Permission::query()->firstOrCreate(
+            ['name' => 'admin.owner'], ['guard_name' => 'admin']
+        );
+        $role = \App\Models\Role::query()->create(['name' => 'isolated-test-owner', 'guard_name' => 'admin']);
+        $role->permissions()->attach($permission);
+        $actor->roles()->attach($role);
+        $org = \App\Models\Organization::query()->create([
+            'name' => 'Isolated acceptance', 'owner_user_id' => 0, 'status' => 'active',
+            'domain' => 'isolated.example.test', 'timezone' => 'UTC', 'locale' => 'zh-CN',
+        ]);
+        config(['review_governance.solo_owner_admin_user_id' => (int) $actor->id]);
+        $totp = app(\App\Services\Auth\AdminTotpService::class);
+        $secret = $totp->generateSecret();
+        $totp->enableForUser($actor, $secret, []);
+        $article = $this->createExistingArticleWithWorkingRevision(['working_revision_status' => 'human_review']);
+        $revision = $article->workingRevision;
+        $revision->forceFill(['reviewed_by' => null, 'reviewed_at' => null, 'approved_at' => null])->save();
+        $article->refresh();
+        $preview = \App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace::previewUrl($article, (int) $revision->id);
+
+        $this->get($preview)->assertUnauthorized();
+        \Livewire\Livewire::test(\App\Filament\Ops\Pages\OpsLogin::class)
+            ->fillForm(['email' => $actor->email, 'password' => $password])
+            ->call('authenticate')->assertHasNoFormErrors();
+        $this->assertAuthenticatedAs($actor, 'admin');
+        $this->get($preview)->assertRedirect(route('filament.ops.pages.two-factor-challenge'));
+        $code = (new ReflectionMethod($totp, 'totpAt'))->invoke($totp, $secret, (int) floor(time() / 30));
+        \Livewire\Livewire::test(\App\Filament\Ops\Pages\TwoFactorChallenge::class)
+            ->set('code', $code)->call('verify')->assertRedirect('/ops/select-org');
+        $this->assertSame((int) $actor->id, session('ops_admin_totp_verified_user_id'));
+        \Livewire\Livewire::test(\App\Filament\Ops\Pages\SelectOrgPage::class)
+            ->call('selectOrg', (int) $org->id)->assertRedirect('/ops');
+        $this->get($preview)->assertOk()->assertSee($revision->title)
+            ->assertHeader('X-Robots-Tag', 'noindex, noarchive, nosnippet');
+
+        $approved = app(\App\Services\Cms\ArticleTranslationWorkflowService::class)
+            ->approveEditorialWorkingRevision($article, (int) $actor->id);
+        $this->assertSame('approved', $approved->revision_status);
+        $this->assertSame((int) $actor->id, (int) $approved->reviewed_by);
+        $this->assertNotNull($approved->approved_at);
+        $reviews = app(\App\Services\Cms\CmsEditorialReviewAttestationService::class);
+        $this->assertTrue($reviews->hasApprovedEvidence('article', $article->fresh()));
+        $this->assertTrue($reviews->hasApprovedEvidence('article_translation_revision', $approved));
+        $this->get($preview)->assertConflict();
+        $this->assertNotSame((int) $approved->id, (int) $article->fresh()->published_revision_id);
+    }
+
     private function revalidationOptions(Article $article, array $extra = []): array
     {
         return $this->commandOptions($article, array_merge([

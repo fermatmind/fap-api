@@ -103,7 +103,7 @@ test("worker reload precedes queue and Big Five delivery smoke", () => {
 test("remote Composer scripts have a bounded deployment timeout", () => {
   assert.match(
     deployer,
-    /task\('deploy:vendors',[\s\S]+COMPOSER_PROCESS_TIMEOUT=900 \{\{bin\/composer\}\} install/,
+    /task\('deploy:vendors',[\s\S]+COMPOSER_PROCESS_TIMEOUT=900 bash scripts\/ci\/composer_install\.sh \{\{bin\/composer\}\}/,
   );
 });
 

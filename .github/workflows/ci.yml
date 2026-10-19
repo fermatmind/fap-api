@@ -191,7 +191,7 @@ jobs:
         if: needs.classify.outputs.content_pack_checks == 'true' || needs.classify.outputs.personality_current_authority_release == 'true'
         working-directory: backend
         run: |
-          composer install --no-interaction --prefer-dist --no-progress
+          bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
           cp -n .env.example .env || true
           php artisan key:generate --force
           if [ '${{ needs.classify.outputs.personality_current_authority_release }}' = true ]; then php artisan personality:current-manifest; fi
@@ -239,7 +239,7 @@ jobs:
             sudo apt-get update -qq
             sudo apt-get install -y --no-install-recommends redis-server
           fi
-          composer install --no-interaction --prefer-dist --no-progress
+          bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
           cp -n .env.example .env || true
           php artisan key:generate --force
       - name: Validate expand-only migrations
@@ -369,7 +369,7 @@ jobs:
         if: needs.classify.outputs.big5_tests == 'true'
         working-directory: backend
         run: |
-          composer install --no-interaction --prefer-dist --no-progress
+          bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
           cp -n .env.example .env || true
           php artisan key:generate --force
           bash scripts/ci/prepare_sqlite.sh
@@ -400,7 +400,7 @@ jobs:
           CAREER_PARITY_RELEASE_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          composer install --no-interaction --prefer-dist --no-progress
+          bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
           cp -n .env.example .env || true
           php artisan key:generate --force
           bash scripts/ci/verify_career_current_authority_parity.sh > career-current-authority-parity.json
@@ -551,7 +551,7 @@ jobs:
           tools: composer:v2
       - name: Install backend dependencies
         working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
       - name: Verify contracts and focused 11B boundaries
         working-directory: backend
         run: |
@@ -629,7 +629,7 @@ jobs:
           extensions: sodium
       - name: Install backend dependencies
         working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
       - name: Verify 11C contracts, boundaries, and closeout
         working-directory: backend
         run: |
@@ -716,7 +716,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends redis-server
       - name: Install backend dependencies
         working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
       - name: Run deterministic A08 software consumers
         if: needs.classify.outputs.a08_focused == 'true'
         working-directory: backend
@@ -1104,7 +1104,7 @@ jobs:
         working-directory: backend
         run: |
           set -euo pipefail
-          composer install --no-interaction --prefer-dist --no-progress
+          bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
           php scripts/seo/export_seo_agent_evidence_contracts.php --check
           php scripts/seo/export_seo_council_contracts.php --check
           boundary_tests=()

@@ -337,7 +337,7 @@ jobs:
           tools: composer:v2
           extensions: mbstring, intl, pdo_sqlite, sqlite3, pdo_mysql, redis
       - working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
       - name: Install CI verification tools
         run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ripgrep
       - run: bash backend/scripts/ci_verify_mbti.sh
@@ -403,7 +403,7 @@ jobs:
         working-directory: backend
         run: touch .env
       - working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
       - name: Prepare dedicated disposable topology database
         working-directory: backend
         run: |
