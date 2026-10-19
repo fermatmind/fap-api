@@ -5201,6 +5201,56 @@ PHP;
     }
 });
 
+/** Retain the live/LKG and prepared candidates even after repeated failed releases. */
+function deployReleaseRetentionCandidates(array $releases, int $keep, array $protected): array
+{
+    foreach (array_merge($releases, $protected) as $release) {
+        if (! is_string($release) || preg_match('/\A[a-zA-Z0-9][a-zA-Z0-9._-]*\z/D', $release) !== 1) {
+            throw new \RuntimeException('Invalid managed release identity.');
+        }
+    }
+    if ($keep < 1 || $protected === []) {
+        return [];
+    }
+
+    return array_values(array_diff(array_slice($releases, $keep), $protected));
+}
+
+task('fap:prune-retained-releases-before-materialization', function () {
+    $releases = get('releases_list');
+    $keep = (int) get('keep_releases');
+    if (count($releases) <= $keep || ! test('[ -L {{current_path}} ]')) {
+        return;
+    }
+
+    // Resolve rollback before deleting anything; an ambiguous live/LKG fails closed.
+    $current = trim(run('basename "$(readlink -f {{current_path}})"'));
+    $rollback = (string) get('rollback_candidate');
+    if (! in_array($current, $releases, true) || ! in_array($rollback, $releases, true)) {
+        throw new \RuntimeException('Managed live/rollback release identity is unavailable.');
+    }
+    $protected = [$current, $rollback];
+    if (test('[ -L {{deploy_path}}/release ]')) {
+        $protected[] = trim(run('basename "$(readlink -f {{deploy_path}}/release)"'));
+    }
+    $remove = deployReleaseRetentionCandidates($releases, $keep, $protected);
+    run('test "$(readlink -f {{current_path}})" = "$(readlink -f {{deploy_path}}/releases)/'.$current.'"');
+    $sudo = get('cleanup_use_sudo') ? 'sudo -n ' : '';
+    foreach ($remove as $name) {
+        $path = deployPlaceholderPathArg('{{deploy_path}}', 'releases/'.$name);
+        run('test -d '.$path.' && test ! -L '.$path
+            .' && test "$(readlink -f '.$path.')" = "$(readlink -f {{deploy_path}}/releases)/'.$name.'"'
+            .' && test "$(readlink -f '.$path.')" != "$(readlink -f {{current_path}})"');
+    }
+    foreach ($remove as $name) {
+        run($sudo.'rm -rf -- '.deployPlaceholderPathArg('{{deploy_path}}', 'releases/'.$name));
+    }
+    set('releases_list', array_values(array_diff($releases, $remove)));
+    writeln('<info>Pre-materialization retention removed '.count($remove).' inactive releases.</info>');
+    run('df -Pk {{deploy_path}} | awk \'NR==2 {print "deploy_available_kib=" $4}\'');
+    run('df -Pi {{deploy_path}} | awk \'NR==2 {print "deploy_available_inodes=" $4}\'');
+});
+
 task('fap:write-deploy-lock-metadata', function () {
     $metadata = getenv('DEPLOY_LOCK_METADATA');
 
@@ -5479,6 +5529,7 @@ before('deploy:shared', 'fap:seed_shared_content_packages');
 
 before('deploy:lock', 'fap:reclaim-stale-serialized-ci-lock');
 after('deploy:lock', 'fap:write-deploy-lock-metadata');
+before('deploy:release', 'fap:prune-retained-releases-before-materialization');
 after('deploy:unlock', 'fap:remove-deploy-lock-metadata');
 
 after('deploy:update_code', 'release:prune-non-runtime-source');
