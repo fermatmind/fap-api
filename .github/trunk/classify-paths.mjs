@@ -235,6 +235,10 @@ export function classifyPaths(inputPaths) {
       "backend/app/PersonalityCms/DesktopClone/MbtiZhResultContentPackage.php",
       "backend/scripts/deploy/publish_mbti_zh_result_staging.sh",
     ].includes(path)),
+    mbti_report_articles_closeout: paths.some((path) =>
+      path.startsWith("backend/content_assets/mbti_report_articles/")
+      || ["backend/app/Services/Cms/MbtiReportArticleRelease.php", "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php",
+        "backend/app/Services/Cms/ArticleSeoService.php", "backend/database/migrations/2026_10_19_160000_publish_reviewed_mbti_report_articles.php"].includes(path)),
     mbti_trait_content_publish: paths.some((path) =>
       /^backend\/content_assets\/personality_public\/mbti_trait_(?:explanations|overviews)\.zh-CN\.v1\.json$/.test(path)
       || path === "backend/app/Services/Cms/MbtiTraitExplanations.php"

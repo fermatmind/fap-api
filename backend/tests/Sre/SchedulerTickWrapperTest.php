@@ -27,6 +27,7 @@ if [[ "$*" == *"artisan schedule:run"* ]]; then
   if [[ "${FAKE_BACKGROUND_SLEEP:-0}" != 0 ]]; then
     (sleep "$FAKE_BACKGROUND_SLEEP"; touch "$FAKE_BACKGROUND_MARKER") >/dev/null 2>&1 &
   fi
+  if [[ "${FAKE_EVENT_FAILURE:-false}" == true ]]; then printf failed > "$FM_SCHEDULER_FAILURE_FILE"; fi
   sleep "${FAKE_SCHEDULE_SLEEP:-0}"
   exit "${FAKE_SCHEDULE_EXIT:-0}"
 fi
@@ -47,10 +48,11 @@ import signal
 import subprocess
 import sys
 args = sys.argv[1:]
-assert args[:3] == ['--signal=TERM', '--kill-after=5s', '10s']
+assert args[0] == '--signal=TERM'
+assert args[2] in ['10s', '55s']
 process = subprocess.Popen(args[3:], start_new_session=True)
 try:
-    sys.exit(process.wait(timeout=float(os.environ.get('FAKE_PROBE_TIMEOUT', '10'))))
+    sys.exit(process.wait(timeout=float(os.environ.get('FAKE_DISPATCH_TIMEOUT' if args[2] == '55s' else 'FAKE_PROBE_TIMEOUT', '10'))))
 except subprocess.TimeoutExpired:
     os.killpg(process.pid, signal.SIGKILL)
     process.wait()
@@ -129,7 +131,8 @@ PYTHON);
         $blocked = $this->process(['FAKE_HEARTBEAT_BLOCK' => 'true', 'FAKE_PROBE_TIMEOUT' => '0.2']);
         $blocked->run();
         $this->assertSame(124, $blocked->getExitCode());
-        $this->assertStringNotContainsString('artisan schedule:run', (string) file_get_contents($this->temporaryDirectory.'/tick.log'));
+        $log = is_file($this->temporaryDirectory.'/tick.log') ? file_get_contents($this->temporaryDirectory.'/tick.log') : '';
+        $this->assertStringNotContainsString('artisan schedule:run', $log);
 
         $next = $this->process();
         $next->run();
@@ -151,6 +154,27 @@ PYTHON);
         $this->assertSame($before, file_get_contents($this->temporaryDirectory.'/tick.log'));
         $owner->wait();
         $this->assertTrue($owner->isSuccessful(), $owner->getErrorOutput());
+    }
+
+    #[Test]
+    public function stuck_dispatcher_is_bounded_failed_and_releases_its_lock(): void
+    {
+        $first = $this->process(['FAKE_SCHEDULE_SLEEP' => '20', 'FAKE_DISPATCH_TIMEOUT' => '0.2']);
+        $first->run();
+        $this->assertSame(124, $first->getExitCode());
+        $this->assertStringContainsString('--status=completed --exit-code=124', file_get_contents($this->temporaryDirectory.'/tick.log'));
+        $next = $this->process();
+        $next->run();
+        $this->assertTrue($next->isSuccessful());
+    }
+
+    #[Test]
+    public function laravel_caught_event_failure_cannot_be_recorded_as_success(): void
+    {
+        $process = $this->process(['FAKE_EVENT_FAILURE' => 'true']);
+        $process->run();
+        $this->assertSame(1, $process->getExitCode());
+        $this->assertStringContainsString('--status=completed --exit-code=1', file_get_contents($this->temporaryDirectory.'/tick.log'));
     }
 
     /** @param array<string, string> $environment */

@@ -18,7 +18,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: recovery-${{ github.repository }}
+  group: trunk-deploy-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:
@@ -28,6 +28,7 @@ jobs:
     timeout-minutes: 45
     environment: production
     env:
+      GH_TOKEN: ${{ github.token }}
       DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
       DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}

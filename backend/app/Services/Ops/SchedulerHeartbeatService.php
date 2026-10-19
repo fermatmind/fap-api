@@ -10,13 +10,13 @@ use RuntimeException;
 
 final class SchedulerHeartbeatService
 {
-    public const CONTRACT_VERSION = 'ops.scheduler_heartbeat.v2';
+    public const CONTRACT_VERSION = 'ops.scheduler_heartbeat.v3';
 
     public const RUNNER = 'cron_schedule_run';
 
     private const FUTURE_TOLERANCE_SECONDS = 5;
 
-    public function __construct(private readonly ?string $path = null) {}
+    public function __construct(private readonly ?string $path = null, private readonly ?string $release = null) {}
 
     public static function schedulerContractRevision(): string
     {
@@ -43,6 +43,11 @@ final class SchedulerHeartbeatService
 
         $now ??= CarbonImmutable::now('UTC');
         $previous = $this->readRaw();
+        $release = $this->releaseSha();
+        $tick = getenv('FM_SCHEDULER_TICK_ID') ?: 'local';
+        if (($previous['release_sha'] ?? null) !== $release) {
+            $previous = null;
+        }
         $lastCompletedAt = is_array($previous) && is_string($previous['last_completed_at'] ?? null)
             ? $previous['last_completed_at']
             : null;
@@ -62,6 +67,11 @@ final class SchedulerHeartbeatService
             'schema_version' => self::CONTRACT_VERSION,
             'scheduler_contract_revision' => self::schedulerContractRevision(),
             'runner' => self::RUNNER,
+            'scope' => 'dispatcher',
+            'release_sha' => $release,
+            'tick_id' => $tick,
+            'completed_release_sha' => $event === 'completed' ? $release : ($previous['completed_release_sha'] ?? null),
+            'completed_tick_id' => $event === 'completed' ? $tick : ($previous['completed_tick_id'] ?? null),
             'observed_at' => $now->format('Y-m-d\TH:i:s\Z'),
             'last_completed_at' => $lastCompletedAt,
             'last_exit_code' => $lastExitCode,
@@ -87,7 +97,7 @@ final class SchedulerHeartbeatService
         $expectedKeys = [
             'schema_version',
             'scheduler_contract_revision',
-            'runner',
+            'runner', 'scope', 'release_sha', 'tick_id', 'completed_release_sha', 'completed_tick_id',
             'observed_at',
             'last_completed_at',
             'last_exit_code',
@@ -100,6 +110,10 @@ final class SchedulerHeartbeatService
             || ($payload['schema_version'] ?? null) !== self::CONTRACT_VERSION
             || ($payload['scheduler_contract_revision'] ?? null) !== self::schedulerContractRevision()
             || ($payload['runner'] ?? null) !== self::RUNNER
+            || ($payload['scope'] ?? null) !== 'dispatcher'
+            || ($payload['release_sha'] ?? null) !== $this->releaseSha()
+            || ($payload['completed_release_sha'] ?? null) !== $this->releaseSha()
+            || ! is_string($payload['tick_id'] ?? null) || ! is_string($payload['completed_tick_id'] ?? null)
             || ! is_string($payload['observed_at'] ?? null)
             || ! is_string($payload['last_completed_at'] ?? null)
             || ! is_int($payload['last_exit_code'] ?? null)
@@ -149,7 +163,8 @@ final class SchedulerHeartbeatService
                 'age_seconds' => max(0, $age),
             ]);
         }
-        if ($status !== 'healthy' || ($payload['last_exit_code'] ?? null) !== 0) {
+        if ($status !== 'healthy' || ($payload['last_exit_code'] ?? null) !== 0
+            || $payload['tick_id'] !== $payload['completed_tick_id']) {
             return $this->failure('failed', $payload, $age);
         }
 
@@ -209,12 +224,30 @@ final class SchedulerHeartbeatService
             'reason' => $reason,
             'scheduler_contract_revision' => self::schedulerContractRevision(),
             'runner' => self::RUNNER,
+            'scope' => 'dispatcher',
+            'release_sha' => $payload['release_sha'] ?? null,
+            'completed_release_sha' => $payload['completed_release_sha'] ?? null,
+            'completed_tick_id' => $payload['completed_tick_id'] ?? null,
+            'tick_id' => $payload['tick_id'] ?? null,
             'observed_at' => is_string($payload['observed_at'] ?? null) ? $payload['observed_at'] : null,
             'last_completed_at' => is_string($payload['last_completed_at'] ?? null) ? $payload['last_completed_at'] : null,
             'last_exit_code' => is_int($payload['last_exit_code'] ?? null) ? $payload['last_exit_code'] : null,
             'status' => is_string($payload['status'] ?? null) ? $payload['status'] : null,
             'age_seconds' => $age,
         ];
+    }
+
+    private function releaseSha(): string
+    {
+        $sha = $this->release ?? trim((string) @file_get_contents(base_path('../REVISION')));
+        if (preg_match('/^[a-f0-9]{40}$/D', $sha) !== 1) {
+            if (app()->environment(['local', 'testing'])) {
+                return str_repeat('0', 40);
+            }
+            throw new RuntimeException('Scheduler release identity is unavailable.');
+        }
+
+        return $sha;
     }
 
     private function heartbeatPath(): string

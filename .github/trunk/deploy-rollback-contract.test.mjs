@@ -134,6 +134,8 @@ test("LKG recovery rebuilds the exact revision, re-reads REVISION, and emits a s
       lkg_sha: lkgSha,
       safe_restored: lkgSha,
       status: "restored",
+      content_contract: JSON.stringify({selected:false}),
+      content_verified: "true",
       GITHUB_RUN_ID: "123",
       GITHUB_RUN_ATTEMPT: "2",
       rollback_command_succeeded: "true",
@@ -146,6 +148,7 @@ test("LKG recovery rebuilds the exact revision, re-reads REVISION, and emits a s
   const payload = JSON.parse(readFileSync(join(root, "lkg-rollback-receipt.json"), "utf8"));
   assert.deepEqual(Object.keys(payload).sort(), [
     "candidate_sha",
+    "content_contract",
     "incident",
     "lkg_sha",
     "restored_sha",
@@ -161,4 +164,6 @@ test("LKG recovery rebuilds the exact revision, re-reads REVISION, and emits a s
   assert.equal(payload.rollback.restoration_completed, true);
   assert.equal(payload.incident.restoration_mismatch, false);
   assert.equal(payload.sanitized, true);
+  assert.deepEqual(payload.content_contract, {selected:false});
+  assert.equal(payload.incident.content_contract_mismatch, false);
 });

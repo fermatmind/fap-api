@@ -180,13 +180,62 @@ final class MbtiReportArticleRelease
 
             return ['status' => 'published', 'changed' => count($prepared)];
         });
-        if (! $dryRun && $result['status'] !== 'absent') {
-            app(PublicContent53FrontendRevalidator::class)->revalidate(array_map(
-                fn (array $row) => ['kind' => 'article', 'identity' => array_diff_key($row['identity'], ['id' => true])], $package['articles'],
-            ));
-        }
 
         return $result;
+    }
+
+    /** Cache delivery belongs after activation, never inside migration accounting. */
+    public function closeout(): array
+    {
+        $package = $this->package();
+        $rows = [];
+        foreach ($package['articles'] as $row) {
+            $article = Article::withoutGlobalScopes()->with(['publishedRevision', 'seoMeta'])->where($row['identity'])->firstOrFail();
+            $revision = $article->publishedRevision;
+            if (! $revision || $revision->revision_status !== 'published' || ! $article->is_public || $article->status !== 'published') {
+                throw new RuntimeException('Reviewed article publication is not ready for closeout.');
+            }
+            if ($revision->authority_package_sha256 !== self::SHA256) {
+                if (in_array((int) $revision->id, array_column($row['baselines'], 'revision_id'), true)) {
+                    throw new RuntimeException('Reviewed article publication has not been applied.');
+                }
+
+                // A later native publication supersedes this fixed release. Never
+                // overwrite it or keep applying an obsolete package on every deploy.
+                continue;
+            }
+            $metadata = (array) data_get($article->seoMeta?->schema_json, 'editorial_package_v1', []);
+            if ($article->content_md !== file_get_contents(base_path(self::ROOT.'/'.$row['file']))
+                || $article->title !== $row['title'] || $article->excerpt !== $row['excerpt']
+                || $article->seoMeta?->seo_title !== $row['seo_title'] || $article->seoMeta?->seo_description !== $row['seo_description']
+                || self::faqLimit($article, $metadata, 0) !== count($row['faq_items'])
+                || ! self::sameFaq(data_get($metadata, 'answer_surface_v1.faq_items'), $row['faq_items'])) {
+                throw new RuntimeException('Reviewed article authority readback failed.');
+            }
+            $rows[] = $row;
+        }
+        if ($rows === []) {
+            return ['status' => 'superseded', 'article_count' => 0, 'faq_counts' => []];
+        }
+        app(PublicContent53FrontendRevalidator::class)->revalidate(array_map(
+            fn (array $row) => ['kind' => 'article', 'identity' => array_diff_key($row['identity'], ['id' => true])], $rows,
+        ));
+        foreach ($rows as $row) {
+            $url = rtrim((string) config('app.url'), '/').'/api/v0.5/articles/'.$row['identity']['slug'];
+            $response = \Illuminate\Support\Facades\Http::acceptJson()->connectTimeout(5)->timeout(15)->withoutRedirecting()
+                ->get($url, ['locale' => $row['identity']['locale'], 'org_id' => 0]);
+            $article = $response->json('article');
+            $faq = $response->json('answer_surface_v1.faq_blocks');
+            if (! $response->successful() || ! is_array($article) || ! is_array($faq)
+                || ($article['title'] ?? null) !== $row['title'] || ($article['excerpt'] ?? null) !== $row['excerpt']
+                || ($article['content_md'] ?? null) !== file_get_contents(base_path(self::ROOT.'/'.$row['file']))
+                || ! self::sameFaq(array_map(fn ($item) => array_intersect_key($item, array_flip(['question', 'answer'])), $faq), $row['faq_items'])) {
+                throw new RuntimeException('Reviewed article activated API readback failed.');
+            }
+        }
+
+        return ['status' => $rows === [] ? 'superseded' : 'verified', 'article_count' => count($rows),
+            'faq_counts' => array_map(fn ($row) => count($row['faq_items']), $rows)];
     }
 
     /** Only the exact native published revisions may expose their complete reviewed FAQ list. */

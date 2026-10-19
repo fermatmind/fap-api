@@ -15,6 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
+  GH_TOKEN: ${{ github.token }}
   DEPLOYER_VERSION: "7.5.12"
   DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
   DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
@@ -1477,6 +1478,8 @@ jobs:
       SEO_INTEL_DRY_RUN_DEFAULT: ${{ vars.SEO_INTEL_DRY_RUN_DEFAULT }}
       SEO_INTEL_ALLOW_EXTERNAL_API_CALLS: ${{ vars.SEO_INTEL_ALLOW_EXTERNAL_API_CALLS }}
     steps:
+      - name: Record production job deadline
+        run: echo "PRODUCTION_JOB_STARTED_EPOCH=$(date -u +%s)" >> "$GITHUB_ENV"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
@@ -1792,6 +1795,12 @@ jobs:
           if test '${{ needs.policy.outputs.career_current }}' = true; then deploy_timeout=60m; fi
           if test '${{ fromJSON(needs.policy.outputs.classification).operations.career_cache }}' = true; then deploy_timeout=60m; fi
           if test "$production_council_closeout" = true; then deploy_timeout=60m; fi
+          # Retain the existing child limit and reserve a full 30m LKG rebuild
+          # plus every selected post-activation consumer and final checks.
+          deploy_minutes="${deploy_timeout%m}"
+          remaining=$((7200 - $(date -u +%s) + PRODUCTION_JOB_STARTED_EPOCH))
+          required="$(node .github/trunk/production-release-budget.mjs "$deploy_minutes" '${{ needs.policy.outputs.operations }}')"
+          test "$remaining" -ge "$required"
           set +e
           timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task" production -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="$release" -o deploy_mode="$deploy_mode" \
@@ -1825,12 +1834,16 @@ jobs:
             fi
             export DEPLOY_SHA="$lkg_sha" DEPLOY_REVISION="$lkg_sha" DEPLOY_MODE=code_only DEPLOY_INCIDENT_RECOVERY=true
             set +e
-            php /tmp/dep.phar deploy:code-only production -f deploy.php --revision "$lkg_sha" \
+            timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy:code-only production -f deploy.php --revision "$lkg_sha" \
               -o release_name="lkg-${lkg_sha:0:12}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
               -o deploy_mode=code_only --no-interaction
             rollback_rc=$?
             set -e
 
+            content_contract='{"selected":false}'
+            if [ '${{ fromJSON(needs.policy.outputs.classification).operations.mbti_report_articles_closeout }}' = true ]; then
+              content_contract="$(node .github/trunk/mbti-report-article-readback.mjs "$lkg_sha" || true)"
+            fi
             restored="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
             safe_restored=""
             if [[ "$restored" =~ ^[0-9a-f]{40}$ ]]; then safe_restored="$restored"; fi
@@ -1851,11 +1864,19 @@ jobs:
               if [ "$rollback_rc" -ne 0 ]; then status=restored_smoke_failed; fi
             fi
 
+            content_verified="$(printf '%s' "$content_contract" | jq -r '.selected == false or .ok == true')"
+            if [ "$content_verified" != true ]; then
+              rollback_healthchecks_succeeded=false
+              if [ "$restoration_completed" = true ]; then status=restored_content_mismatch; fi
+            fi
+
             jq -n \
               --arg candidate_sha "$candidate_sha" \
               --arg lkg_sha "$lkg_sha" \
               --arg restored_sha "$safe_restored" \
               --arg status "$status" \
+              --argjson content_contract "$content_contract" \
+              --argjson content_verified "$content_verified" \
               --arg run_id "$GITHUB_RUN_ID" \
               --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
               --argjson rollback_command_succeeded "$rollback_command_succeeded" \
@@ -1866,10 +1887,11 @@ jobs:
                 workflow:{run_id:$run_id,run_attempt:$run_attempt},
                 candidate_sha:$candidate_sha,lkg_sha:$lkg_sha,
                 restored_sha:(if $restored_sha == "" then null else $restored_sha end),
+                content_contract:$content_contract,
                 rollback:{command_succeeded:$rollback_command_succeeded,
                   healthchecks_succeeded:$rollback_healthchecks_succeeded,
                   restoration_completed:$restoration_completed},
-                incident:{restoration_mismatch:$restoration_mismatch},sanitized:true}' \
+                incident:{restoration_mismatch:$restoration_mismatch,content_contract_mismatch:($content_verified | not)},sanitized:true}' \
               > lkg-rollback-receipt.json
 
             if [ "$restoration_completed" != true ]; then
@@ -2613,29 +2635,36 @@ jobs:
             fi
             export DEPLOY_SHA="$lkg_sha" DEPLOY_REVISION="$lkg_sha" DEPLOY_MODE=code_only DEPLOY_INCIDENT_RECOVERY=true
           set +e
-          php /tmp/dep.phar deploy:code-only production -f deploy.php --revision "$lkg_sha" \
+          timeout --signal=TERM --kill-after=30s 30m php /tmp/dep.phar deploy:code-only production -f deploy.php --revision "$lkg_sha" \
             -o release_name="lkg-${lkg_sha:0:12}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -o deploy_mode=code_only --no-interaction
           rollback_rc=$?
           set -e
           restored="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
+          content_contract='{"selected":false}'
+          if [ '${{ fromJSON(needs.policy.outputs.classification).operations.mbti_report_articles_closeout }}' = true ]; then
+            content_contract="$(node .github/trunk/mbti-report-article-readback.mjs "$lkg_sha" || true)"
+          fi
           rollback_ok=false
           restored_ok=false
           if [ "$rollback_rc" -eq 0 ]; then rollback_ok=true; fi
           if [ "$restored" = "$lkg_sha" ]; then restored_ok=true; fi
+          content_verified="$(printf '%s' "$content_contract" | jq -r '.selected == false or .ok == true')"
           jq -n --arg candidate "$candidate_sha" --arg lkg "$lkg_sha" \
             --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" \
             --argjson rollback_ok "$rollback_ok" --argjson restored_ok "$restored_ok" \
+            --argjson content_contract "$content_contract" --argjson content_verified "$content_verified" \
             '{schema_version:"fermatmind.deploy_lkg_rollback.v1",
-              status:(if $rollback_ok and $restored_ok then "restored" else "restoration_failed" end),
+              status:(if $rollback_ok and $restored_ok and $content_verified then "restored" elif $rollback_ok and $restored_ok then "restored_content_mismatch" else "restoration_failed" end),
               workflow:{run_id:$run,run_attempt:$attempt},candidate_sha:$candidate,
-              lkg_sha:$lkg,restored_sha:(if $restored_ok then $lkg else null end),
-              rollback:{command_succeeded:$rollback_ok,healthchecks_succeeded:$rollback_ok,
+              lkg_sha:$lkg,restored_sha:(if $restored_ok then $lkg else null end),content_contract:$content_contract,
+              rollback:{command_succeeded:$rollback_ok,healthchecks_succeeded:($rollback_ok and $content_verified),
               restoration_completed:$restored_ok},
-              incident:{restoration_mismatch:($restored_ok | not)},sanitized:true}' > lkg-rollback-receipt.json
+              incident:{restoration_mismatch:($restored_ok | not),content_contract_mismatch:($content_verified | not)},sanitized:true}' > lkg-rollback-receipt.json
           test "$rollback_ok" = true
           test "$restored_ok" = true
+          test "$content_verified" = true
       - name: Upload Career Current publish receipt
         if: always() && steps.career-publish.outcome != 'skipped'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7

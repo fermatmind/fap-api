@@ -64,6 +64,62 @@ final class MbtiReportArticleReleaseTest extends TestCase
         $this->assertSame(4, DB::table('article_translation_revisions')->count());
     }
 
+    public function test_cache_delivery_failure_does_not_undo_or_republish_committed_articles(): void
+    {
+        $this->seedBaseline();
+        $service = app(MbtiReportArticleRelease::class);
+        $service->publish();
+        Http::assertNothingSent();
+        $revisions = DB::table('articles')->pluck('published_revision_id', 'id')->all();
+        Http::swap(new \Illuminate\Http\Client\Factory);
+        Http::preventStrayRequests();
+        Http::fake(['frontend.example.test/*' => Http::response([], 503)]);
+        try {
+            $service->closeout();
+            $this->fail('Cache failure must fail closeout.');
+        } catch (\DomainException $error) {
+            $this->assertSame('public_content_53_revalidation_http_503', $error->getMessage());
+        }
+        $this->assertSame($revisions, DB::table('articles')->pluck('published_revision_id', 'id')->all());
+        $this->assertSame(['status' => 'unchanged', 'changed' => 0], $service->publish(true));
+        $this->fakeActivatedReadback();
+        $this->artisan('articles:closeout-reviewed-mbti-reports')->assertSuccessful();
+        $this->assertSame($revisions, DB::table('articles')->pluck('published_revision_id', 'id')->all());
+        $this->assertSame(4, DB::table('article_translation_revisions')->count());
+    }
+
+    public function test_old_reader_truncated_faq_cannot_pass_activated_closeout(): void
+    {
+        $this->seedBaseline();
+        app(MbtiReportArticleRelease::class)->publish();
+        $this->fakeActivatedReadback(truncate: true);
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('activated API readback failed');
+        app(MbtiReportArticleRelease::class)->closeout();
+    }
+
+    private function fakeActivatedReadback(bool $truncate = false): void
+    {
+        config(['app.url' => 'https://api.example.test']);
+        Http::swap(new \Illuminate\Http\Client\Factory);
+        Http::preventStrayRequests();
+        Http::fake(function ($request) use ($truncate) {
+            if (str_starts_with($request->url(), 'https://frontend.example.test/')) {
+                $body = $request->data();
+                $key = $body['content']['locale'].':'.$body['content']['slug'];
+
+                return Http::response(['ok' => true, 'revalidated_paths' => $body['cache_signal']['paths'], 'rejected_paths' => [],
+                    'invalidated_tags' => ['article-detail:'.$key, 'article-seo:'.$key]]);
+            }
+            $data = $this->getJson(str_replace('https://api.example.test', '', $request->url()))->assertOk()->json();
+            if ($truncate) {
+                $data['answer_surface_v1']['faq_blocks'] = array_slice($data['answer_surface_v1']['faq_blocks'], 0, 6);
+            }
+
+            return Http::response($data);
+        });
+    }
+
     public function test_foreign_draft_and_concurrent_body_change_are_rejected_without_writes(): void
     {
         $this->seedBaseline();

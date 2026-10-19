@@ -125,37 +125,6 @@ while read -r name state _; do
   fi
 done <<< "$supervisor_status"
 
-legacy_programs="$(printf '%s' "$legacy_programs" | awk 'NF { seen[$0]=1 } END { for (item in seen) print item }' | sort)"
-while IFS= read -r program; do
-  [[ -n "$program" ]] || continue
-  "$timeout_bin" --signal=TERM --kill-after=5s 30s "$sudo_bin" -n "$supervisorctl_bin" stop "$program" >/dev/null 2>&1 \
-    || fail legacy_supervisor_stop_failed
-  set +e
-  stopped_status="$("$sudo_bin" -n "$supervisorctl_bin" status "$program" 2>/dev/null)"
-  stopped_rc=$?
-  set -e
-  [[ "$stopped_rc" -eq 0 || "$stopped_rc" -eq 3 || "$stopped_rc" -eq 4 ]] || fail legacy_supervisor_status_failed
-  if awk -v expected="$program" '($1 == expected || index($1, expected ":") == 1) && $2 == "RUNNING" { running=1 } END { exit(running ? 0 : 1) }' <<< "$stopped_status"; then
-    fail legacy_supervisor_still_running
-  fi
-done <<< "$legacy_programs"
-
-while IFS= read -r pid; do
-  [[ -n "$pid" ]] || continue
-  owned_by_supervisor=false
-  while read -r name state pid_label supervisor_pid _; do
-    [[ "$state" == RUNNING && "$pid_label" == pid ]] || continue
-    supervisor_pid="${supervisor_pid%,}"
-    if [[ "$supervisor_pid" =~ ^[1-9][0-9]*$ ]] && process_descends_from "$pid" "$supervisor_pid"; then
-      owned_by_supervisor=true
-      break
-    fi
-  done <<< "$supervisor_status"
-  if [[ "$owned_by_supervisor" == false ]]; then
-    "$sudo_bin" -n /bin/kill -TERM "$pid" >/dev/null 2>&1 || fail legacy_process_stop_failed
-  fi
-done <<< "$legacy_pids"
-
 if [[ "$required" == false ]]; then
   printf 'scheduler_refresh_optional_skip reason=cron_not_required\n'
   exit 0
@@ -224,5 +193,36 @@ installed="$("$crontab_bin" -l 2>/dev/null)" || fail crontab_verify_failed
 # Install and verify the replacement first, then atomically comment only the
 # exact legacy system entry. Retain its original text for incident rollback.
 "${legacy_cron_command[@]}" || fail legacy_system_cron_retirement_failed
+
+legacy_programs="$(printf '%s' "$legacy_programs" | awk 'NF { seen[$0]=1 } END { for (item in seen) print item }' | sort)"
+while IFS= read -r program; do
+  [[ -n "$program" ]] || continue
+  "$timeout_bin" --signal=TERM --kill-after=5s 30s "$sudo_bin" -n "$supervisorctl_bin" stop "$program" >/dev/null 2>&1 \
+    || fail legacy_supervisor_stop_failed
+  set +e
+  stopped_status="$("$sudo_bin" -n "$supervisorctl_bin" status "$program" 2>/dev/null)"
+  stopped_rc=$?
+  set -e
+  [[ "$stopped_rc" -eq 0 || "$stopped_rc" -eq 3 || "$stopped_rc" -eq 4 ]] || fail legacy_supervisor_status_failed
+  if awk -v expected="$program" '($1 == expected || index($1, expected ":") == 1) && $2 == "RUNNING" { running=1 } END { exit(running ? 0 : 1) }' <<< "$stopped_status"; then
+    fail legacy_supervisor_still_running
+  fi
+done <<< "$legacy_programs"
+
+while IFS= read -r pid; do
+  [[ -n "$pid" ]] || continue
+  owned_by_supervisor=false
+  while read -r name state pid_label supervisor_pid _; do
+    [[ "$state" == RUNNING && "$pid_label" == pid ]] || continue
+    supervisor_pid="${supervisor_pid%,}"
+    if [[ "$supervisor_pid" =~ ^[1-9][0-9]*$ ]] && process_descends_from "$pid" "$supervisor_pid"; then
+      owned_by_supervisor=true
+      break
+    fi
+  done <<< "$supervisor_status"
+  if [[ "$owned_by_supervisor" == false ]]; then
+    "$sudo_bin" -n /bin/kill -TERM "$pid" >/dev/null 2>&1 || fail legacy_process_stop_failed
+  fi
+done <<< "$legacy_pids"
 
 printf 'scheduler_refresh_pass revision=%s mode=cron_schedule_run\n' "$active_revision"

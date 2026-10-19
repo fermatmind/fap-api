@@ -20,12 +20,13 @@ final class SchedulerHeartbeatDeployGateTest extends TestCase
         mkdir($this->directory, 0700);
         mkdir($this->directory.'/release', 0700);
         symlink($this->directory.'/release', $this->directory.'/current');
+        file_put_contents($this->directory.'/release/REVISION', str_repeat('a', 40));
         $this->executable('date', <<<'BASH'
 #!/usr/bin/env bash
 count="$(cat "$FAKE_CLOCK_FILE" 2>/dev/null || printf 0)"
 count="$((count + 1))"
 printf '%s\n' "$count" > "$FAKE_CLOCK_FILE"
-if [[ "$count" -le 2 ]]; then printf '100\n'; else printf '200\n'; fi
+if [[ "$count" -le 3 ]]; then printf '100\n'; else printf '200\n'; fi
 BASH);
         $this->executable('stat', '#!/usr/bin/env bash'."\n".'printf "%s\\n" "${FAKE_ACTIVATION_EPOCH:-90}"'."\n");
         $this->executable('sleep', "#!/usr/bin/env bash\nexit 0\n");
@@ -73,6 +74,15 @@ BASH);
         );
     }
 
+    public function test_an_old_release_finishing_after_activation_is_rejected(): void
+    {
+        $process = $this->gate('1970-01-01T00:01:35Z', true, 0);
+        file_put_contents($this->directory.'/release/REVISION', str_repeat('b', 40));
+        $process->run();
+        $this->assertFalse($process->isSuccessful());
+        $this->assertStringContainsString('scheduler_last_check=', $process->getErrorOutput());
+    }
+
     public function test_missing_activation_symlink_fails_closed(): void
     {
         unlink($this->directory.'/current');
@@ -104,7 +114,7 @@ BASH);
         return new Process(['bash', '-c', $script], $this->directory, [
             'PATH' => $this->directory.':'.getenv('PATH'),
             'FAKE_CLOCK_FILE' => $this->directory.'/clock',
-            'FAKE_HEARTBEAT' => json_encode(['ok' => $healthy, 'observed_at' => $observedAt], JSON_THROW_ON_ERROR),
+            'FAKE_HEARTBEAT' => json_encode(['ok' => $healthy, 'observed_at' => $observedAt, 'last_completed_at' => $observedAt, 'release_sha' => str_repeat('a', 40), 'completed_release_sha' => str_repeat('a', 40), 'completed_tick_id' => 'fixture-tick'], JSON_THROW_ON_ERROR),
             'FAKE_CHECK_EXIT' => (string) $checkerExit,
             'FAKE_ACTIVATION_EPOCH' => $activationEpoch,
             'REAL_PHP' => PHP_BINARY,

@@ -95,6 +95,21 @@ final class SchedulerHeartbeatServiceTest extends TestCase
     }
 
     #[Test]
+    public function old_release_completion_and_new_release_start_cannot_share_success(): void
+    {
+        $now = CarbonImmutable::parse('2026-10-19T10:00:00Z');
+        $old = new SchedulerHeartbeatService($this->path, str_repeat('a', 40));
+        $new = new SchedulerHeartbeatService($this->path, str_repeat('b', 40));
+        $old->record('completed', 0, $now);
+        $this->assertFalse($new->check(180, $now)['ok']);
+        $new->record('started', null, $now->addSecond());
+        $this->assertFalse($new->check(180, $now->addSecond())['ok']);
+        $new->record('completed', 0, $now->addSeconds(2));
+        $this->assertTrue($new->check(180, $now->addSeconds(2))['ok']);
+        $this->assertFalse($old->check(180, $now->addSeconds(2))['ok']);
+    }
+
+    #[Test]
     public function malformed_or_wrong_revision_heartbeat_fails_closed(): void
     {
         $service = new SchedulerHeartbeatService($this->path);

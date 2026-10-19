@@ -143,7 +143,8 @@ final class PublicContentRuntimeMetricsService
         }
 
         $processed = 0;
-        while ($start->lessThanOrEqualTo($lastClosedMinute) && $processed < 1440) {
+        $deadline = hrtime(true) + 5_000_000_000;
+        while ($start->lessThanOrEqualTo($lastClosedMinute) && $processed < 1440 && hrtime(true) < $deadline) {
             $minuteId = $start->format('YmdHi');
             $this->rollupMinute($store, $minuteId);
             $store->put(

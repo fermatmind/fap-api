@@ -5122,6 +5122,21 @@ task('fap:reclaim-stale-serialized-ci-lock', function () {
         throw new \RuntimeException('Serialized deploy lock recovery requires numeric run ownership.');
     }
 
+    // Workflow serialization is necessary but an old lock must also belong to
+    // a completed run. Fail closed on unavailable GitHub ownership evidence.
+    $owner = trim(run('php -r '.deployShellArg('$p=$argv[1]; if (is_file($p) && !is_link($p)) { $j=json_decode(file_get_contents($p),true); if (is_array($j)) echo (string)($j["run_id"] ?? ""); }')
+        .' '.deployShellArg('{{deploy_path}}/'.get('deploy_lock_metadata_path'))));
+    if ($owner !== '' && $owner !== $runId) {
+        if (preg_match('/\A[1-9][0-9]*\z/', $owner) !== 1) {
+            throw new \RuntimeException('Deploy lock owner is invalid.');
+        }
+        $repository = (string) getenv('GITHUB_REPOSITORY');
+        if (preg_match('/\A[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\z/', $repository) !== 1
+            || trim(runLocally('gh api '.deployShellArg('repos/'.$repository.'/actions/runs/'.$owner).' --jq .status')) !== 'completed') {
+            throw new \RuntimeException('Deploy lock owner is active or unverified.');
+        }
+    }
+
     $lockPath = '{{deploy_path}}/.dep/deploy.lock';
     $metaPath = '{{deploy_path}}/'.get('deploy_lock_metadata_path');
     $reclaimScript = <<<'PHP'
@@ -5238,20 +5253,31 @@ task('fap:prune-retained-releases-before-materialization', function () {
     }
     $releases = get('releases_list');
     $keep = (int) get('keep_releases');
-    if (count($releases) <= $keep || ! test('[ -L {{current_path}} ]')) {
+    if (! test('[ -L {{current_path}} ]')) {
         return;
     }
 
-    // Resolve rollback before deleting anything; an ambiguous live/LKG fails closed.
+    // Capture live before activation even when no deletion is needed.
     $current = trim(run('basename "$(readlink -f {{current_path}})"'));
-    $rollback = (string) get('rollback_candidate');
-    if (! in_array($current, $releases, true) || ! in_array($rollback, $releases, true)) {
-        throw new \RuntimeException('Managed live/rollback release identity is unavailable.');
+    if (! in_array($current, $releases, true)) {
+        throw new \RuntimeException('Managed live release identity is unavailable.');
     }
-    $protected = [$current, $rollback];
+    $protected = array_values(array_unique(array_merge([$current], get('fap_retention_protected', []))));
     if (test('[ -L {{deploy_path}}/release ]')) {
         $protected[] = trim(run('basename "$(readlink -f {{deploy_path}}/release)"'));
     }
+    set('fap_retention_protected', $protected);
+    if (count($releases) <= $keep) {
+        return;
+    }
+    // Resolve rollback only when pruning is necessary; an initial/oldest live
+    // release can have no older rollback candidate in the native recipe.
+    $rollback = (string) get('rollback_candidate');
+    if (! in_array($rollback, $releases, true)) {
+        throw new \RuntimeException('Managed rollback release identity is unavailable.');
+    }
+    $protected[] = $rollback;
+    set('fap_retention_protected', array_values(array_unique($protected)));
     $remove = deployReleaseRetentionCandidates($releases, $keep, $protected);
     run('test "$(readlink -f {{current_path}})" = "$(readlink -f {{deploy_path}}/releases)/'.$current.'"');
     $sudo = get('cleanup_use_sudo') ? 'sudo -n ' : '';
@@ -5265,9 +5291,34 @@ task('fap:prune-retained-releases-before-materialization', function () {
         run($sudo.'rm -rf -- '.deployPlaceholderPathArg('{{deploy_path}}', 'releases/'.$name));
     }
     set('releases_list', array_values(array_diff($releases, $remove)));
-    writeln('<info>Pre-materialization retention removed '.count($remove).' inactive releases.</info>');
+    writeln('<info>Managed retention removed '.count($remove).' inactive releases.</info>');
     run('df -Pk {{deploy_path}} | awk \'NR==2 {print "deploy_available_kib=" $4}\'');
     run('df -Pi {{deploy_path}} | awk \'NR==2 {print "deploy_available_inodes=" $4}\'');
+});
+
+// Use the same protection after activation; the upstream cleanup slices by age
+// and can otherwise delete a healthy release preserved before materialization.
+task('deploy:cleanup', function () {
+    invoke('fap:prune-retained-releases-before-materialization');
+    run('if [ -L {{deploy_path}}/release ]; then rm -- {{deploy_path}}/release; else test ! -e {{deploy_path}}/release; fi');
+});
+
+task('fap:check-release-capacity', function () {
+    $tree = runLocally('git ls-tree -rl '.deployShellArg((string) get('revision')));
+    $sourceBytes = 0;
+    $sourceFiles = 0;
+    foreach (explode("\n", $tree) as $line) {
+        if (preg_match('/^[0-9]+ blob [a-f0-9]+\s+([0-9]+)\t/', $line, $match) === 1) {
+            $sourceBytes += (int) $match[1];
+            $sourceFiles++;
+        }
+    }
+    if ($sourceBytes < 1 || $sourceFiles < 1) {
+        throw new \RuntimeException('Exact candidate capacity inventory is unavailable.');
+    }
+    $script = file_get_contents(__DIR__.'/backend/scripts/deploy/check_release_capacity.py');
+    writeln(run('python3 -c '.deployShellArg($script).' '.deployPlaceholderPathArg('{{deploy_path}}')
+        .' '.(string) $sourceBytes.' '.(string) $sourceFiles.' '.(getenv('DEPLOY_INCIDENT_RECOVERY') === 'true' ? '1' : '2')));
 });
 
 task('fap:write-deploy-lock-metadata', function () {
@@ -5548,6 +5599,7 @@ before('deploy:shared', 'fap:seed_shared_content_packages');
 
 before('deploy:lock', 'fap:reclaim-stale-serialized-ci-lock');
 after('fap:reclaim-stale-serialized-ci-lock', 'fap:prune-retained-releases-before-materialization');
+after('fap:prune-retained-releases-before-materialization', 'fap:check-release-capacity');
 after('deploy:lock', 'fap:write-deploy-lock-metadata');
 after('deploy:unlock', 'fap:remove-deploy-lock-metadata');
 
@@ -5639,6 +5691,17 @@ after('guard:career-runtime-projection-authority', 'prepare:cache-lifecycle-stor
 after('prepare:cache-lifecycle-storage', 'cache:prepare-public-projection');
 after('cache:prepare-public-projection', 'career:prune-public-cache-versions');
 after('deploy:success', 'cache:accept-public-projection');
+// Activation precedes this cache/readback operation; migrations may already be recorded.
+task('mbti:closeout-reviewed-articles', function () {
+    if (get('deploy_mode') === 'code_only' || ! deployOperation('mbti_report_articles_closeout') || ! in_array(currentHost()->getAlias(), ['staging', 'production'], true)) {
+        return;
+    }
+    run('timeout --signal=TERM --kill-after=5s 400s {{bin/php}} '
+        .deployPlaceholderPathArg('{{current_path}}', 'backend/artisan')
+        .' articles:closeout-reviewed-mbti-reports --no-interaction --no-ansi', timeout: 410);
+});
+after('cache:accept-public-projection', 'mbti:closeout-reviewed-articles');
+
 after('career:prune-public-cache-versions', 'career:repair-published-detail-cache-coverage');
 after('career:repair-published-detail-cache-coverage', 'guard:career-detail-cache-coverage');
 after('guard:career-detail-cache-coverage', 'career:warm-public-authority-cache');

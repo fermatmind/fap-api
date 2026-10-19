@@ -55,6 +55,13 @@ $app = Application::configure(basePath: dirname(__DIR__))
         \App\Console\Commands\ActivateBigFiveReportUnlockCommerce::class,
     ])
     ->withSchedule(function (Schedule $schedule): void {
+        // schedule:run catches event failures; preserve the failure for its wrapper.
+        \Illuminate\Support\Facades\Event::listen(\Illuminate\Console\Events\ScheduledTaskFailed::class, static function ($event): void {
+            $path = getenv('FM_SCHEDULER_FAILURE_FILE');
+            if (is_file((string) $path) && is_string($path) && str_starts_with($path, storage_path('app/ops/scheduler-failure-'))) {
+                file_put_contents($path, 'failed', LOCK_EX);
+            }
+        });
         // Keep the exact weekly natural tick ahead of other due work so a slow
         // minute/5/10/15-minute task cannot push receipt creation off-slot.
         $schedule->command('seo:weekly-decisions --trigger=scheduled --json')
@@ -71,13 +78,13 @@ $app = Application::configure(basePath: dirname(__DIR__))
                 ->name('seo-council-scheduled:platform12')
                 ->onOneServer();
         }
-        $schedule->command('storage:prune --execute --scope=reports_backups --strategy=strict')->dailyAt('03:10')->withoutOverlapping();
-        $schedule->command('storage:prune --execute --scope=content_releases_retention')->dailyAt('03:20')->withoutOverlapping();
-        $schedule->command('storage:prune --execute --scope=legacy_private_private_cleanup')->dailyAt('03:30')->withoutOverlapping();
-        $schedule->command('storage:inventory --json')->weeklyOn(1, '04:10')->withoutOverlapping();
-        $schedule->command('storage:control-plane-snapshot --json')->dailyAt('04:20')->withoutOverlapping();
+        $schedule->command('storage:prune --execute --scope=reports_backups --strategy=strict')->runInBackground()->dailyAt('03:10')->withoutOverlapping();
+        $schedule->command('storage:prune --execute --scope=content_releases_retention')->runInBackground()->dailyAt('03:20')->withoutOverlapping();
+        $schedule->command('storage:prune --execute --scope=legacy_private_private_cleanup')->runInBackground()->dailyAt('03:30')->withoutOverlapping();
+        $schedule->command('storage:inventory --json')->runInBackground()->weeklyOn(1, '04:10')->withoutOverlapping();
+        $schedule->command('storage:control-plane-snapshot --json')->runInBackground()->dailyAt('04:20')->withoutOverlapping();
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
-        $schedule->command('email:outbox-send --limit=50')->everyMinute()->withoutOverlapping();
+        $schedule->command('email:outbox-send --limit=50')->runInBackground()->everyMinute()->withoutOverlapping();
         $schedule->command('commerce:compensate-pending-orders --provider=alipay --include-created --only-stale --limit=10 --older-than-minutes=60')->everyTenMinutes()->withoutOverlapping();
         $schedule->command('commerce:repair-paid-orders --limit=50')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('commerce:repair-post-commit-failed --limit=50')->everyFiveMinutes()->withoutOverlapping();
@@ -86,7 +93,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
             ->everyFiveMinutes()
             ->withoutOverlapping(10)
             ->onOneServer();
-        $schedule->command('analytics:refresh-access-test-statistics --scheduled-history')
+        $schedule->command('analytics:refresh-access-test-statistics --scheduled-history')->runInBackground()
             ->dailyAt('02:15')
             ->timezone('Asia/Shanghai')
             ->withoutOverlapping(120)
@@ -117,11 +124,11 @@ $app = Application::configure(basePath: dirname(__DIR__))
         $schedule->command('norms:eq60:drift-check --from=active --to=candidate')->monthlyOn(1, '05:00')->withoutOverlapping();
         // Recovery work must remain schedulable when Redis cannot allocate locks.
         $maintenanceMutex = (new \Illuminate\Console\Scheduling\CacheEventMutex(app(\Illuminate\Contracts\Cache\Factory::class)))->useStore('file');
-        $schedule->command('career:prune-public-cache-versions --apply --pressure')->preventOverlapsUsing($maintenanceMutex)->everyFiveMinutes()->withoutOverlapping(5);
-        $schedule->command('seo:refresh-llms-full-cache')->preventOverlapsUsing($maintenanceMutex)->everyThirtyMinutes()->withoutOverlapping(10)->environments('production');
-        $schedule->command('cache:public-projection retire')->preventOverlapsUsing($maintenanceMutex)->everyFiveMinutes()->withoutOverlapping(5);
-        $schedule->command('seo:warm-sitemap-source-cache --json')->preventOverlapsUsing($maintenanceMutex)->everyFiveMinutes()->withoutOverlapping(5);
-        $schedule->command('articles:indexnow-candidates --channels=indexnow,baidu_push --execute --limit=100')
+        $schedule->command('career:prune-public-cache-versions --apply --pressure')->runInBackground()->preventOverlapsUsing($maintenanceMutex)->everyFiveMinutes()->withoutOverlapping(5);
+        $schedule->command('seo:refresh-llms-full-cache')->runInBackground()->preventOverlapsUsing($maintenanceMutex)->everyThirtyMinutes()->withoutOverlapping(10)->environments('production');
+        $schedule->command('cache:public-projection retire')->runInBackground()->preventOverlapsUsing($maintenanceMutex)->everyFiveMinutes()->withoutOverlapping(5);
+        $schedule->command('seo:warm-sitemap-source-cache --json')->runInBackground()->preventOverlapsUsing($maintenanceMutex)->everyFiveMinutes()->withoutOverlapping(5);
+        $schedule->command('articles:indexnow-candidates --channels=indexnow,baidu_push --execute --limit=100')->runInBackground()
             ->everyTenMinutes()
             ->withoutOverlapping(15)
             ->onOneServer()
@@ -145,15 +152,15 @@ $app = Application::configure(basePath: dirname(__DIR__))
             ->dailyAt('06:10')
             ->withoutOverlapping()
             ->onOneServer();
-        $schedule->command('career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping();
-        $schedule->command('public-content:warm-read-models --verify-only --json')->everyTenMinutes()->withoutOverlapping();
+        $schedule->command('career:warm-public-authority-cache --verify-only --json')->runInBackground()->everyTenMinutes()->withoutOverlapping();
+        $schedule->command('public-content:warm-read-models --verify-only --json')->runInBackground()->everyTenMinutes()->withoutOverlapping();
         if ((bool) config('public_content_observability.probe.enabled')) {
             $schedule->command('public-content:probe-delivery --json')
                 ->everyFiveMinutes()
                 ->withoutOverlapping(10)
                 ->onOneServer();
         }
-        $schedule->command('career:runtime-slo-check --lightweight --json')->everyFiveMinutes()->withoutOverlapping();
+        $schedule->command('career:runtime-slo-check --lightweight --json')->runInBackground()->everyFiveMinutes()->withoutOverlapping();
         if ((bool) config('ops.career_runtime_slo.repair_missing_enabled', false)) {
             $repairBatchSize = min(500, max(1, (int) config('ops.career_runtime_slo.repair_batch_size', 100)));
             $minimumTargets = max(1, (int) config('ops.career_runtime_slo.minimum_detail_target_count', 2092));
@@ -163,7 +170,10 @@ $app = Application::configure(basePath: dirname(__DIR__))
         }
         $schedule->call(static function (): void {
             app(\App\Services\Ops\PublicContentRuntimeMetricsService::class)->rollupPending();
-        })->name('public-content-runtime:aggregate-rollup')->everyMinute()->withoutOverlapping();
+        })->name('public-content-runtime:aggregate-rollup')->everyMinute()->withoutOverlapping(2);
+        foreach ($schedule->events() as $event) {
+            \App\Services\Ops\SchedulerDispatchBudget::attach($event);
+        }
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([

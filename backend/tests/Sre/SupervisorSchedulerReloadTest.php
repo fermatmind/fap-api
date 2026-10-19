@@ -111,7 +111,7 @@ BASH);
     }
 
     #[Test]
-    public function exact_repository_supervisor_schedule_work_is_stopped_before_cron_install(): void
+    public function exact_repository_supervisor_schedule_work_is_stopped_after_cron_install(): void
     {
         $this->addSupervisorScheduleWork(true);
         $process = $this->runScript(['FAKE_SUPERVISOR_SCHEDULER' => 'true']);
@@ -254,6 +254,15 @@ BASH);
         $this->assertFalse($process->isSuccessful());
         $this->assertSame($original, file_get_contents($this->temporaryDirectory.'/system-cron'));
         $this->assertFileDoesNotExist($this->temporaryDirectory.'/crontab-state');
+    }
+
+    #[Test]
+    public function failed_cron_install_leaves_legacy_supervisor_running(): void
+    {
+        $this->addSupervisorScheduleWork(true);
+        $process = $this->runScript(['FAKE_SUPERVISOR_SCHEDULER' => 'true', 'FAKE_CRONTAB_WRITE_ERROR' => 'true']);
+        $this->assertFalse($process->isSuccessful());
+        $this->assertFileDoesNotExist($this->temporaryDirectory.'/stop-log');
     }
 
     private function addSupervisorScheduleWork(bool $owned): void
