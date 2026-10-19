@@ -26,7 +26,7 @@ final class CareerInterestPracticeRelease
 {
     public const ROOT = 'content_assets/career_interest_practice/20261019';
 
-    public const SHA256 = '4359c2efc6ccc89a0a7ccfcc2e87dccd3a074f9e1267a65b96c733764b9694c9';
+    public const SHA256 = 'c4a16ae15419525d46e8a380d016967b3d3f8576ac540c45cfca4dfde8c12470';
 
     public function publish(bool $dryRun = false): array
     {
