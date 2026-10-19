@@ -121,32 +121,37 @@ final class MbtiReportArticleReleaseTest extends TestCase
         $this->assertSame(6, MbtiReportArticleRelease::faqLimit($article, $metadata, 6));
     }
 
-    public function test_approved_legacy_staging_source_label_is_normalized_but_pending_states_are_held(): void
+    public function test_reviewed_legacy_source_uses_revision_authority_and_preserves_holds(): void
     {
         $this->seedBaseline('staging');
         $this->app->detectEnvironment(fn () => 'staging');
-        DB::table('articles')->where('id', 10)->update(['translation_status' => 'approved']);
-        $this->assertRejected();
-        \App\Models\EditorialReview::query()->create(['org_id' => 0, 'content_type' => 'article', 'content_id' => 10,
-            'workflow_state' => 'approved', 'reviewed_at' => now()]);
-        foreach (['machine_draft', 'human_review', 'stale', 'archived', 'unknown'] as $state) {
+        foreach (['', 'machine_draft', 'human_review', 'stale', 'archived', 'unknown'] as $state) {
             DB::table('articles')->where('id', 10)->update(['translation_status' => $state]);
             $this->assertRejected();
         }
-        foreach (['', 'approved', 'published'] as $state) {
+        DB::table('articles')->where('id', 10)->update(['translation_status' => 'approved']);
+        $revision = DB::table('article_translation_revisions')->where('id', 440)->first();
+        DB::table('article_translation_revisions')->where('id', 440)->update(['reviewed_at' => null, 'approved_at' => null]);
+        $this->assertRejected();
+        DB::table('article_translation_revisions')->where('id', 440)->update(['reviewed_at' => $revision->reviewed_at]);
+        $hold = \App\Models\EditorialReview::query()->create(['org_id' => 0, 'content_type' => 'article', 'content_id' => 10,
+            'workflow_state' => 'human_review']);
+        $this->assertRejected();
+        $hold->delete();
+        foreach (['approved', 'published'] as $state) {
             DB::table('articles')->where('id', 10)->update(['translation_status' => $state]);
             $this->assertSame(['status' => 'ready', 'changed' => 0], app(MbtiReportArticleRelease::class)->publish(true));
         }
-        DB::table('articles')->where('id', 10)->update(['translation_status' => 'approved']);
         $this->assertSame(['status' => 'published', 'changed' => 2], app(MbtiReportArticleRelease::class)->publish());
         $this->assertSame('source', DB::table('articles')->where('id', 10)->value('translation_status'));
     }
 
-    public function test_production_does_not_normalize_legacy_source_labels(): void
+    public function test_production_uses_the_same_reviewed_revision_source_authority(): void
     {
         $this->seedBaseline();
-        DB::table('articles')->where('id', 10)->update(['translation_status' => 'approved']);
-        $this->assertRejected();
+        DB::table('articles')->whereIn('id', [10, 61])->update(['translation_status' => 'approved']);
+        $this->assertSame(['status' => 'published', 'changed' => 2], app(MbtiReportArticleRelease::class)->publish());
+        $this->assertSame(2, DB::table('articles')->where('translation_status', 'source')->count());
     }
 
     private function assertRejected(): void
@@ -181,7 +186,8 @@ final class MbtiReportArticleReleaseTest extends TestCase
                 'source_article_id' => $model->id, 'translation_group_id' => $model->translation_group_id, 'locale' => $model->locale,
                 'source_locale' => $model->locale, 'revision_number' => 1, 'revision_status' => 'published', 'source_version_hash' => $hash,
                 'translated_from_version_hash' => $hash, 'title' => $row['title'], 'excerpt' => $row['excerpt'], 'content_md' => $row['content_md'],
-                'seo_title' => $seo['seo_title'], 'seo_description' => $seo['seo_description'], 'published_at' => now()])->save();
+                'seo_title' => $seo['seo_title'], 'seo_description' => $seo['seo_description'],
+                'reviewed_at' => $row['last_reviewed_at'], 'published_at' => now()])->save();
             DB::table('articles')->where('id', $model->id)->update(['working_revision_id' => $revisionId, 'published_revision_id' => $revisionId, 'source_version_hash' => $hash]);
             $seo = array_intersect_key($seo, array_flip(Schema::getColumnListing('article_seo_meta')));
             $seo['schema_json'] = ['editorial_package_v1' => ['answer_surface_policy' => 'editor_supplied', 'answer_surface_visibility' => 'visible',

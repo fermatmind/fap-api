@@ -86,11 +86,11 @@ final class MbtiReportArticleRelease
                         throw new RuntimeException('MBTI article SEO baseline drift: '.$field);
                     }
                 }
-                // Legacy staging labels are not lineage. Accept only non-pending labels
-                // on an already approved, exact published source; never normalize a hold.
-                $legacySourceStatus = app()->environment('staging') && $review?->workflow_state === 'approved'
-                    && in_array($article->translation_status, [null, '', Article::TRANSLATION_STATUS_APPROVED, Article::TRANSLATION_STATUS_PUBLISHED], true);
-                if (! $article->isSourceArticle() && ! $legacySourceStatus) {
+                // Public Article review authority is the published revision, not the
+                // optional later EditorialReview row. Preserve explicit review holds.
+                $reviewedLegacySource = in_array($article->translation_status, [Article::TRANSLATION_STATUS_APPROVED, Article::TRANSLATION_STATUS_PUBLISHED], true)
+                    && ($revision->reviewed_at !== null || $revision->approved_at !== null);
+                if (! $article->isSourceArticle() && ! $reviewedLegacySource) {
                     throw new RuntimeException('MBTI article source identity drift: '.json_encode([
                         'article_id' => $article->id, 'translation_status' => $article->translation_status,
                         'revision_id' => $revision->id, 'review_state' => $review?->workflow_state,
