@@ -85,6 +85,12 @@ final class SeoCurrentPublicAuthorityPrecedenceTest extends TestCase
         } catch (RuntimeException $exception) {
             $this->assertSame('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', $exception->getMessage());
         }
+        try {
+            $source->candidatesForArticle('272', 'zh-CN');
+            $this->fail('Missing Article schema must never become a retirement set.');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', $exception->getMessage());
+        }
         // Other read-only consumers retain their existing partial-source behavior.
         $this->assertIsArray($source->candidates());
     }

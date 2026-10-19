@@ -110,6 +110,13 @@ final class ArticleSeoGateRollout
 
             foreach ($locked as $article) {
                 $this->apply($article, $options);
+                $decision = app(ArticleMaterialDecisionService::class)->recordCurrentPublished($article);
+                if ($decision !== null) {
+                    event(new \App\Events\PublicAuthorityChanged(
+                        'article', (string) $article->id, (string) $article->locale,
+                        (string) $decision->material_fingerprint, 'authority_revision',
+                    ));
+                }
             }
 
             $fresh = $this->resolveArticles($articleIds);

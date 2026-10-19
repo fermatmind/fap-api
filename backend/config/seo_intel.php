@@ -441,6 +441,7 @@ return [
     'indexnow_enabled' => env('SEO_INTEL_INDEXNOW_ENABLED', false),
     'indexnow_live_api_enabled' => env('SEO_INTEL_INDEXNOW_LIVE_API_ENABLED', false),
     'article_indexnow_auto_enabled' => env('SEO_INTEL_ARTICLE_INDEXNOW_AUTO_ENABLED', true),
+    'article_baidu_auto_enabled' => env('SEO_INTEL_ARTICLE_BAIDU_AUTO_ENABLED', true),
     'baidu_source_engine' => 'baidu',
     'indexnow_source_engine' => 'bing_indexnow',
     'baidu_foundation' => [

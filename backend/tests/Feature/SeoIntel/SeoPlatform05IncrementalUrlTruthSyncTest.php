@@ -380,11 +380,16 @@ final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
         ]);
         config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false,
             'seo_council.connection' => 'seo_intel', 'seo_intel.public_canonical_host' => 'https://fermatmind.com']);
-        $source = new \App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
+        $source = app(\App\Services\SeoIntel\Sources\UrlTruthInventorySource::class);
         $service = new IncrementalUrlTruthSyncService($source, new EffectivePublicUrlEvaluator, new UrlTruthInventoryRecordWriter);
         $job = new SyncPublicAuthorityUrlTruth('article', (string) $article->id, 'en', 'old-delayed-event', 'publish', true);
         $job->handle($service);
         $first = DB::connection('seo_intel')->table('seo_urls')->value('authority_revision');
+        $decision = DB::transaction(fn () => app(\App\Services\Cms\ArticleMaterialDecisionService::class)->recordCurrentPublished($article->fresh()));
+        // Same public revision, newly available semantic search fingerprint must be written.
+        $job->handle($service);
+        $metadata = json_decode(DB::connection('seo_intel')->table('seo_urls')->value('metadata_json'), true);
+        self::assertSame($decision->search_surface_fingerprint, $metadata['content_hash']);
         $article->forceFill(['updated_at' => now()->addDay(), 'title' => 'Private working title'])->saveQuietly();
         $job->handle($service);
         self::assertSame($first, DB::connection('seo_intel')->table('seo_urls')->value('authority_revision'));

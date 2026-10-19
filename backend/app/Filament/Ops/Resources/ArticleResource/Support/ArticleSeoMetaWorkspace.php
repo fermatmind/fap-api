@@ -6,6 +6,8 @@ namespace App\Filament\Ops\Resources\ArticleResource\Support;
 
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
+use App\Services\Cms\ArticleMaterialDecisionService;
+use Illuminate\Support\Facades\DB;
 
 final class ArticleSeoMetaWorkspace
 {
@@ -23,16 +25,21 @@ final class ArticleSeoMetaWorkspace
 
         // Ops resolves the editable article independently of the selected tenant.
         // Keep the SEO lookup bound to that article's exact ownership and locale.
-        ArticleSeoMeta::query()->withoutGlobalScopes()->updateOrCreate(
-            [
-                'org_id' => (int) $article->org_id,
-                'article_id' => (int) $article->id,
-                'locale' => (string) $article->locale,
-            ],
-            array_merge($seoPayload, [
-                'is_indexable' => (bool) $article->is_indexable,
-            ])
-        );
+        DB::transaction(function () use ($article, $seoPayload): void {
+            $locked = Article::withoutGlobalScopes()->where('org_id', $article->org_id)
+                ->lockForUpdate()->findOrFail($article->id);
+            ArticleSeoMeta::query()->withoutGlobalScopes()->updateOrCreate(
+                [
+                    'org_id' => (int) $locked->org_id,
+                    'article_id' => (int) $locked->id,
+                    'locale' => (string) $locked->locale,
+                ],
+                array_merge($seoPayload, [
+                    'is_indexable' => (bool) $locked->is_indexable,
+                ])
+            );
+            app(ArticleMaterialDecisionService::class)->recordCurrentPublished($locked);
+        });
     }
 
     /**

@@ -58,9 +58,9 @@ final class SearchChannelQueueWriteService
             ]);
 
             foreach ($items as $item) {
-                $connection->table('seo_search_channel_queue_items')->updateOrInsert(
-                    ['idempotency_key' => $item['idempotency_key']],
+                $inserted = $connection->table('seo_search_channel_queue_items')->insertOrIgnore(
                     [
+                        'idempotency_key' => $item['idempotency_key'],
                         'batch_id' => $batchId,
                         'canonical_url' => $item['canonical_url'],
                         'locale' => $item['locale'],
@@ -87,32 +87,31 @@ final class SearchChannelQueueWriteService
                     ],
                 );
 
-                $queueItemId = $connection->table('seo_search_channel_queue_items')
-                    ->where('idempotency_key', $item['idempotency_key'])
-                    ->value('id');
-                $normalizedQueueItemId = is_numeric($queueItemId) ? (int) $queueItemId : null;
+                $queueItem = $connection->table('seo_search_channel_queue_items')
+                    ->where('idempotency_key', $item['idempotency_key'])->first();
+                $normalizedQueueItemId = $queueItem === null ? null : (int) $queueItem->id;
 
                 if ($normalizedQueueItemId !== null) {
                     $queueItemIds[] = $normalizedQueueItemId;
                     $queueItems[] = [
                         'id' => $normalizedQueueItemId,
-                        'batch_id' => (int) $batchId,
+                        'batch_id' => (int) $queueItem->batch_id,
                         'channel' => (string) $item['channel'],
                         'canonical_url' => (string) $item['canonical_url'],
-                        'approval_state' => (string) $item['approval_state'],
-                        'execution_state' => (string) $item['execution_state'],
+                        'approval_state' => (string) $queueItem->approval_state,
+                        'execution_state' => (string) $queueItem->execution_state,
                     ];
                 }
 
-                $this->events->log($connection, $normalizedQueueItemId, (int) $batchId, 'queue_item_planned', [
+                $this->events->log($connection, $normalizedQueueItemId, (int) $batchId, $inserted === 1 ? 'queue_item_planned' : 'queue_item_existing_preserved', [
                     'channel' => $channel,
                     'url_hash' => $item['url_hash'],
                     'eligibility_state' => $item['eligibility_state'],
-                    'approval_state' => $item['approval_state'],
-                    'execution_state' => $item['execution_state'],
+                    'approval_state' => $queueItem?->approval_state,
+                    'execution_state' => $queueItem?->execution_state,
                 ]);
 
-                $writtenItems++;
+                $writtenItems += $inserted;
             }
         }
 

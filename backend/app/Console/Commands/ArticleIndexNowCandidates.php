@@ -7,21 +7,28 @@ namespace App\Console\Commands;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ContentMaterialDecision;
+use App\Services\Cms\ArticleMaterialDecisionService;
 use App\Services\SeoIntel\SearchChannelQueue\ArticleIndexNowChangeGate;
 use App\Services\SeoIntel\SearchChannelQueue\ArticleIndexNowPublicVerifier;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueApprovalExecutor;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueBoundedLiveExecutor;
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueIdempotency;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner;
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueProviderHoldRecorder;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueWriteService;
 use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
+/**
+ * @review-surface search_submission_queue_approval
+ */
 final class ArticleIndexNowCandidates extends Command
 {
     protected $signature = 'articles:indexnow-candidates
         {--article-id= : Restrict to one exact article id}
+        {--channels=indexnow : Comma-separated indexnow,baidu_push channels}
         {--limit=20 : Maximum recent article decisions to inspect, 1..100}
         {--execute : Verify public HTML, then queue and submit exact changed URLs}';
 
@@ -38,7 +45,8 @@ final class ArticleIndexNowCandidates extends Command
         $execute = (bool) $this->option('execute');
         $limit = filter_var($this->option('limit'), FILTER_VALIDATE_INT);
         $articleId = $this->option('article-id');
-        if (! is_int($limit) || $limit < 1 || $limit > 100
+        $channels = array_values(array_unique(explode(',', (string) $this->option('channels'))));
+        if ($channels === [] || array_diff($channels, ['indexnow', 'baidu_push']) !== [] || ! is_int($limit) || $limit < 1 || $limit > 100
             || ($articleId !== null && (filter_var($articleId, FILTER_VALIDATE_INT) === false || (int) $articleId < 1))) {
             $this->line((string) json_encode(['status' => 'blocked', 'issue' => 'invalid_scope'], JSON_THROW_ON_ERROR));
 
@@ -136,45 +144,22 @@ final class ArticleIndexNowCandidates extends Command
                 continue;
             }
 
-            $plan = $queue->plan('indexnow', 'article', 1, $canonicalUrl);
-            $candidate = $plan['selected_candidate'] ?? null;
-            $ready = (int) ($plan['planned_queue_count'] ?? 0) === 1
-                && is_array($candidate)
-                && ($candidate['canonical_url'] ?? null) === $canonicalUrl
-                && ($candidate['source_authority'] ?? null) === 'backend_cms';
-            $plannedItem = $plan['planned_items'][0] ?? null;
-            if ($ready && is_array($plannedItem)) {
-                $alreadyQueued = $this->existingExactQueueItem((string) ($plannedItem['idempotency_key'] ?? ''));
-                if ($alreadyQueued !== null) {
-                    $items[] = [
-                        ...$base,
-                        'state' => match ($alreadyQueued) {
-                            'submitted' => 'already_submitted',
-                            'source_unavailable' => 'execution_blocked',
-                            default => 'already_queued',
-                        },
-                        'url_hash' => hash('sha256', $canonicalUrl),
-                        'issues' => $alreadyQueued === 'submitted' ? [] : [$alreadyQueued === 'source_unavailable' ? 'queue_source_unavailable' : 'existing_queue_item_'.$alreadyQueued],
-                    ];
-
-                    continue;
-                }
-            }
-            if ($ready && $execute) {
-                $items[] = [
-                    ...$base,
-                    'url_hash' => hash('sha256', $canonicalUrl),
-                    ...$this->executeCandidate($article, $current, $canonicalUrl, $plan, $queue, $public, $writer, $approval, $live),
-                ];
+            $metadata = json_decode((string) ($truth->first()->metadata_json ?? '{}'), true);
+            if (($metadata['content_hash'] ?? null) !== $current->search_surface_fingerprint) {
+                $items[] = [...$base, 'issues' => ['url_truth_search_surface_not_current']];
 
                 continue;
             }
-            $items[] = [
-                ...$base,
-                'state' => $ready ? 'pending_public_html_verification' : 'held',
-                'url_hash' => hash('sha256', $canonicalUrl),
-                'issues' => $ready ? [] : ['indexnow_queue_plan_not_ready'],
-            ];
+
+            foreach ($channels as $channel) {
+                $plan = $this->articlePlan($queue, $article, $current, $canonicalUrl, $channel);
+                $state = $plan['state'];
+                $item = [...$base, 'channel' => $channel, 'state' => $state, 'url_hash' => hash('sha256', $canonicalUrl), 'issues' => $plan['issues']];
+                if ($state === 'pending_public_html_verification' && $execute) {
+                    $item = [...$item, ...$this->executeCandidate($article, $current, $canonicalUrl, $plan, $queue, $public, $writer, $approval, $live, $channel)];
+                }
+                $items[] = $item;
+            }
         }
 
         $payload = [
@@ -192,21 +177,53 @@ final class ArticleIndexNowCandidates extends Command
         return $payload['status'] === 'success' ? self::SUCCESS : self::FAILURE;
     }
 
-    private function existingExactQueueItem(string $idempotencyKey): ?string
+    /** @return array<string, mixed> */
+    private function articlePlan(SearchChannelQueuePlanner $queue, Article $article, ContentMaterialDecision $decision, string $url, string $channel): array
     {
-        if ($idempotencyKey === '') {
-            return null;
+        $plan = $queue->plan($channel, 'article', 1, $url);
+        $candidate = $plan['selected_candidate'] ?? null;
+        $blocked = ['state' => 'held', 'issues' => ['exact_queue_plan_not_ready']];
+        if (! is_array($candidate) || ($candidate['canonical_url'] ?? null) !== $url
+            || ($candidate['source_authority'] ?? null) !== 'backend_cms'
+            || (int) ($plan['eligible_count'] ?? 0) !== 1) {
+            return $blocked;
+        }
+        $key = app(SearchChannelQueueIdempotency::class)->key($url, (string) $article->locale, $channel, 'content:'.$decision->search_surface_fingerprint);
+        $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
+        $truth = $connection->table('seo_urls')->where('canonical_url', $url)->where('page_entity_type', 'article')->where('locale', $article->locale)->get();
+        $metadata = json_decode((string) ($truth->first()->metadata_json ?? '{}'), true);
+        if ($truth->count() !== 1 || (string) $truth->first()->entity_id_or_slug !== (string) $article->id
+            || ($metadata['content_hash'] ?? null) !== $decision->search_surface_fingerprint) {
+            return $blocked;
+        }
+        $existing = $connection->table('seo_search_channel_queue_items')->where('idempotency_key', $key)->first();
+        if ($existing !== null) {
+            if ((string) $existing->canonical_url !== $url || (string) $existing->locale !== (string) $article->locale
+                || (string) $existing->entity_id !== (string) $article->id || (string) $existing->page_entity_type !== 'article'
+                || (string) $existing->source_authority !== 'backend_cms' || (string) $existing->channel !== $channel
+                || (string) $existing->content_hash !== (string) $decision->search_surface_fingerprint) {
+                return $blocked;
+            }
+            if ((string) $existing->execution_state === 'submitted') {
+                return ['state' => 'already_submitted', 'issues' => []];
+            }
+            $duplicate = $plan['blocked_items'][0]['duplicate_queue_item_id'] ?? null;
+            if ((int) $duplicate !== (int) $existing->id
+                || (string) $existing->execution_state !== 'dry_run_ready'
+                || ! in_array((string) $existing->approval_state, ['pending', 'approved'], true)) {
+                return ['state' => 'already_queued', 'issues' => ['existing_queue_item_'.(string) $existing->execution_state]];
+            }
+
+            return ['state' => 'pending_public_html_verification', 'issues' => [], 'idempotency_key' => $key, 'existing_id' => (int) $existing->id];
+        }
+        $planned = $plan['planned_items'][0] ?? null;
+        if ((int) ($plan['planned_queue_count'] ?? 0) !== 1 || ! is_array($planned)
+            || ($planned['idempotency_key'] ?? null) !== $key
+            || ($planned['content_hash'] ?? null) !== $decision->search_surface_fingerprint) {
+            return $blocked;
         }
 
-        $connectionName = (string) config('seo_intel.connection', 'seo_intel');
-        try {
-            $state = DB::connection($connectionName)->table('seo_search_channel_queue_items')
-                ->where('idempotency_key', $idempotencyKey)->value('execution_state');
-
-            return is_string($state) ? $state : null;
-        } catch (Throwable) {
-            return 'source_unavailable';
-        }
+        return ['state' => 'pending_public_html_verification', 'issues' => [], 'idempotency_key' => $key, 'planned_item' => $planned];
     }
 
     /**
@@ -223,9 +240,10 @@ final class ArticleIndexNowCandidates extends Command
         SearchChannelQueueWriteService $writer,
         SearchChannelQueueApprovalExecutor $approval,
         SearchChannelQueueBoundedLiveExecutor $live,
+        string $channel,
     ): array {
-        if (! (bool) config('seo_intel.article_indexnow_auto_enabled', false)) {
-            return ['state' => 'execution_blocked', 'issues' => ['article_indexnow_auto_disabled']];
+        if (! (bool) config('seo_intel.article_'.($channel === 'indexnow' ? 'indexnow' : 'baidu').'_auto_enabled', false)) {
+            return ['state' => 'execution_blocked', 'issues' => ['article_channel_auto_disabled']];
         }
 
         $seo = ArticleSeoMeta::query()->withoutGlobalScopes()
@@ -250,28 +268,42 @@ final class ArticleIndexNowCandidates extends Command
             return ['state' => 'execution_blocked', 'public_html_checked' => true, 'issues' => ['article_changed_during_public_verification']];
         }
 
-        $planned = $plan['planned_items'] ?? [];
-        $replanned = $queue->plan('indexnow', 'article', 1, $canonicalUrl);
-        if (! is_array($planned) || count($planned) !== 1 || ! is_array($planned[0])
-            || ($planned[0]['canonical_url'] ?? null) !== $canonicalUrl
-            || ($planned[0]['channel'] ?? null) !== 'indexnow'
-            || (int) ($replanned['planned_queue_count'] ?? 0) !== 1
-            || ($replanned['planned_items'][0]['idempotency_key'] ?? null) !== ($planned[0]['idempotency_key'] ?? null)) {
-            return ['state' => 'execution_blocked', 'public_html_checked' => true, 'issues' => ['exact_queue_plan_missing']];
+        $replanned = $this->articlePlan($queue, $freshArticle, $decision, $canonicalUrl, $channel);
+        if ($replanned['state'] !== 'pending_public_html_verification'
+            || ($replanned['idempotency_key'] ?? null) !== ($plan['idempotency_key'] ?? null)) {
+            return ['state' => 'execution_blocked', 'public_html_checked' => true, 'issues' => ['exact_queue_plan_changed']];
         }
 
         try {
-            $written = $writer->write([$planned[0]]);
-            $id = (int) ($written['queue_item_ids'][0] ?? 0);
+            $id = (int) ($replanned['existing_id'] ?? 0);
+            if ($id < 1) {
+                $written = $writer->write([$replanned['planned_item']]);
+                $id = (int) ($written['queue_item_ids'][0] ?? 0);
+            }
             if ($id < 1) {
                 return ['state' => 'execution_blocked', 'public_html_checked' => true, 'writes_attempted' => true, 'issues' => ['queue_write_failed']];
             }
-            $phrase = $approval->approvalPhrase([$id], ['indexnow']);
-            $approved = $approval->approve([$id], ['indexnow'], null, hash('sha256', $phrase), 'article-indexnow-auto', false);
-            if (($approved['status'] ?? null) !== 'success') {
-                return ['state' => 'execution_blocked', 'public_html_checked' => true, 'writes_attempted' => true, 'queue_item_id' => $id, 'issues' => ['queue_approval_failed']];
+            $item = DB::connection((string) config('seo_intel.connection', 'seo_intel'))->table('seo_search_channel_queue_items')->find($id);
+            if ($item?->approval_state === 'pending' && $item?->execution_state === 'dry_run_ready') {
+                $phrase = $approval->approvalPhrase([$id], [$channel]);
+                $approved = $approval->approve([$id], [$channel], null, hash('sha256', $phrase), 'article-search-auto', false);
+                if (($approved['status'] ?? null) !== 'success') {
+                    return ['state' => 'execution_blocked', 'public_html_checked' => true, 'writes_attempted' => true, 'queue_item_id' => $id, 'issues' => ['queue_approval_failed']];
+                }
             }
-            $submitted = $live->submitVerifiedArticle($id, (int) $article->id, $canonicalUrl);
+            if ($channel === 'baidu_push') {
+                $hold = $this->recordTransportHold($id);
+                if ($hold !== null) {
+                    return $hold;
+                }
+            }
+            $submitted = $live->submitVerifiedArticle($id, (int) $article->id, $canonicalUrl, $channel);
+            if ($channel === 'baidu_push' && ($submitted['status'] ?? null) !== 'success') {
+                $hold = $this->recordTransportHold($id);
+                if ($hold !== null) {
+                    return [...$hold, 'search_submission_attempted' => (bool) ($submitted['search_submission_attempted'] ?? false)];
+                }
+            }
 
             return [
                 'state' => ($submitted['status'] ?? null) === 'success' ? 'provider_accepted' : 'submission_failed',
@@ -286,6 +318,22 @@ final class ArticleIndexNowCandidates extends Command
         } catch (Throwable) {
             return ['state' => 'execution_blocked', 'public_html_checked' => true, 'writes_attempted' => true, 'issues' => ['queue_execution_unavailable']];
         }
+    }
+
+    /** @return array<string, mixed>|null */
+    private function recordTransportHold(int $id): ?array
+    {
+        $recorder = app(SearchChannelQueueProviderHoldRecorder::class);
+        $probe = $recorder->record([$id], ['baidu_push'], 'transport_security_unavailable', null, null, 'article-search-auto', true);
+        if (($probe['status'] ?? null) !== 'success') {
+            return null;
+        }
+        $phrase = $recorder->approvalPhrase([$id], ['baidu_push'], 'transport_security_unavailable');
+        $hold = $recorder->record([$id], ['baidu_push'], 'transport_security_unavailable', null, hash('sha256', $phrase), 'article-search-auto', false);
+
+        return ['state' => ($hold['status'] ?? null) === 'success' ? 'provider_security_hold' : 'execution_blocked',
+            'queue_item_id' => $id, 'public_html_checked' => true, 'writes_attempted' => true,
+            'search_submission_attempted' => false, 'issues' => ['transport_security_unavailable'], 'indexing_status' => 'not_verified'];
     }
 
     /** @return list<string> */
@@ -307,9 +355,14 @@ final class ArticleIndexNowCandidates extends Command
             || strtolower((string) preg_replace('/\s+/', '', (string) $seo->robots)) !== 'index,follow'
             || ! in_array((string) $seo->canonical_url, [$path, 'https://fermatmind.com'.$path], true)) {
             $issues[] = 'seo_meta_not_canonical_indexable';
-        } elseif ($seo->updated_at !== null && $decision->created_at !== null
-            && $seo->updated_at->greaterThan($decision->created_at)) {
-            $issues[] = 'seo_meta_newer_than_material_decision';
+        } else {
+            try {
+                if (! hash_equals((string) $decision->search_surface_fingerprint, app(ArticleMaterialDecisionService::class)->currentSearchFingerprint($article))) {
+                    $issues[] = 'seo_surface_differs_from_material_decision';
+                }
+            } catch (Throwable) {
+                $issues[] = 'current_search_surface_unavailable';
+            }
         }
 
         return $issues;

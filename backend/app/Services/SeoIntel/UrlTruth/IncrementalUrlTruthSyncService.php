@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\UrlTruth;
 
+use App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource;
 use App\Services\SeoIntel\Sources\UrlTruthInventorySource;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use App\Services\SeoIntel\UrlTruthInventoryRecordWriter;
@@ -46,7 +47,7 @@ final class IncrementalUrlTruthSyncService
         }
 
         $matches = array_values(array_filter(
-            $this->authority->candidates(),
+            $this->authorityCandidates($pageEntityType, $entityIdentity, $locale),
             static fn (UrlTruthInventoryRecord $record): bool => $record->pageEntityType === $pageEntityType
                 && (string) $record->entityIdOrSlug === $entityIdentity
                 && $record->locale === $locale,
@@ -117,12 +118,13 @@ final class IncrementalUrlTruthSyncService
             }
 
             $this->writer->write([$record]);
-            $fresh = array_values(array_filter($this->authority->candidates(), static fn (UrlTruthInventoryRecord $candidate): bool => $candidate->pageEntityType === $pageEntityType
+            $fresh = array_values(array_filter($this->authorityCandidates($pageEntityType, $entityIdentity, $locale), static fn (UrlTruthInventoryRecord $candidate): bool => $candidate->pageEntityType === $pageEntityType
                 && (string) $candidate->entityIdOrSlug === $entityIdentity
                 && $candidate->locale === $locale));
             if (count($fresh) !== 1 || $fresh[0]->canonicalUrl !== $record->canonicalUrl
                 || $fresh[0]->sourceAuthority !== $record->sourceAuthority
                 || $fresh[0]->entitySource !== $record->entitySource
+                || ($fresh[0]->metadata['content_hash'] ?? null) !== ($record->metadata['content_hash'] ?? null)
                 || $this->evaluator->evaluate($fresh[0]) !== $this->evaluator->evaluate($record)) {
                 throw new RuntimeException('incremental URL Truth authority changed during synchronization.');
             }
@@ -132,6 +134,14 @@ final class IncrementalUrlTruthSyncService
 
             return $this->receipt('synced', $pageEntityType, $locale, $revision, $change, true);
         });
+    }
+
+    /** @return list<UrlTruthInventoryRecord> */
+    private function authorityCandidates(string $pageEntityType, string $entityIdentity, string $locale): array
+    {
+        return $pageEntityType === 'article' && $this->authority instanceof CurrentPublicUrlAuthoritySource
+            ? $this->authority->candidatesForArticle($entityIdentity, $locale)
+            : $this->authority->candidates();
     }
 
     private function assertScopedIdentity(string $type, string $identity, string $locale, string $change): bool
@@ -194,7 +204,14 @@ final class IncrementalUrlTruthSyncService
             ->where('authority_revision', $revision)
             ->count();
 
-        return $urlCount === 1 && $bindingCount === 1;
+        $metadataMatches = true;
+        if ($record->pageEntityType === 'article') {
+            $metadata = json_decode((string) $connection->table('seo_urls')
+                ->where('canonical_url_hash', $record->canonicalUrlHash())->where('locale', $record->locale)->value('metadata_json'), true);
+            $metadataMatches = ($metadata['content_hash'] ?? null) === ($record->metadata['content_hash'] ?? null);
+        }
+
+        return $urlCount === 1 && $bindingCount === 1 && $metadataMatches;
     }
 
     /** @return array<string,mixed> */

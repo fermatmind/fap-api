@@ -37,6 +37,8 @@ final class SeoIntelSearchChannelBoundedLiveExecutorTest extends TestCase
             'seo_intel.search_channel_queue.live_submission.baidu.site' => 'https://fermatmind.com',
             'seo_intel.search_channel_queue.live_submission.baidu.token' => 'secret-baidu-token',
             'seo_intel.search_channel_queue.live_submission.indexnow.endpoint' => 'https://api.indexnow.test/indexnow',
+            'seo_intel.search_channel_queue.live_submission.indexnow.allowed_endpoint_hosts' => ['api.indexnow.test'],
+            'seo_intel.search_channel_queue.live_submission.baidu.allowed_endpoint_hosts' => ['data.zz.baidu.test'],
             'seo_intel.search_channel_queue.live_submission.indexnow.key' => 'secret-indexnow-key',
             'seo_intel.search_channel_queue.live_submission.indexnow.key_location' => 'https://fermatmind.com/indexnow.txt',
             'seo_intel.search_channel_queue.approved_source_authorities' => [
@@ -159,6 +161,31 @@ final class SeoIntelSearchChannelBoundedLiveExecutorTest extends TestCase
         $duplicate = $executor->submitVerifiedArticle($id, 123, $url);
         self::assertSame('blocked', $duplicate['status']);
         Http::assertSentCount(1);
+    }
+
+    #[Test]
+    public function verified_baidu_article_lane_requires_secure_allowed_transport_and_positive_provider_count(): void
+    {
+        config(['seo_intel.article_baidu_auto_enabled' => true]);
+        $url = 'https://fermatmind.com/zh/articles/baidu-candidate';
+        $id = $this->seedQueueItem(['canonical_url' => $url, 'locale' => 'zh-CN', 'entity_id' => '123', 'channel' => 'baidu_push']);
+        $executor = app(SearchChannelQueueBoundedLiveExecutor::class);
+        Http::fake(['data.zz.baidu.test/*' => Http::sequence()->push(['success' => 1], 200)->push(['success' => 0, 'error' => 400], 200)]);
+        config(['seo_intel.search_channel_queue.live_submission.baidu.endpoint' => 'http://data.zz.baidu.test/urls']);
+        self::assertSame('blocked', $executor->submitVerifiedArticle($id, 123, $url, 'baidu_push')['status']);
+        Http::assertNothingSent();
+        config(['seo_intel.search_channel_queue.live_submission.baidu.endpoint' => 'https://unapproved.example/urls']);
+        self::assertSame('blocked', $executor->submitVerifiedArticle($id, 123, $url, 'baidu_push')['status']);
+        Http::assertNothingSent();
+        config(['seo_intel.search_channel_queue.live_submission.baidu.endpoint' => 'https://data.zz.baidu.test/urls']);
+        self::assertSame('success', $executor->submitVerifiedArticle($id, 123, $url, 'baidu_push')['status']);
+        self::assertSame('submitted', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $id)->value('execution_state'));
+        self::assertSame('blocked', $executor->submitVerifiedArticle($id, 123, $url, 'baidu_push')['status']);
+        Http::assertSentCount(1);
+
+        $failedId = $this->seedQueueItem(['canonical_url' => $url.'-failed', 'locale' => 'zh-CN', 'entity_id' => '124', 'channel' => 'baidu_push']);
+        self::assertSame('failed', $executor->submitVerifiedArticle($failedId, 124, $url.'-failed', 'baidu_push')['status']);
+        self::assertSame('submit_failed', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $failedId)->value('execution_state'));
     }
 
     #[Test]

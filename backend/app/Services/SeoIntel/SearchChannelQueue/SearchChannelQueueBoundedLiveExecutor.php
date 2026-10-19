@@ -282,15 +282,15 @@ final class SearchChannelQueueBoundedLiveExecutor
      *
      * @return array<string, mixed>
      */
-    public function submitVerifiedArticle(int $queueItemId, int $articleId, string $canonicalUrl): array
+    public function submitVerifiedArticle(int $queueItemId, int $articleId, string $canonicalUrl, string $channel = 'indexnow'): array
     {
-        if (! (bool) config('seo_intel.article_indexnow_auto_enabled', false)) {
+        if (! in_array($channel, ['indexnow', 'baidu_push'], true) || ! (bool) config('seo_intel.article_'.($channel === 'indexnow' ? 'indexnow' : 'baidu').'_auto_enabled', false)) {
             return ['status' => 'blocked', 'issues' => ['article_indexnow_auto_disabled']];
         }
 
         $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
         $item = $connection->table('seo_search_channel_queue_items')->where('id', $queueItemId)->first();
-        if ($item === null || (string) $item->channel !== 'indexnow'
+        if ($item === null || (string) $item->channel !== $channel
             || (string) $item->page_entity_type !== 'article'
             || (string) $item->entity_id !== (string) $articleId
             || (string) $item->canonical_url !== $canonicalUrl
@@ -298,12 +298,19 @@ final class SearchChannelQueueBoundedLiveExecutor
             return ['status' => 'blocked', 'issues' => ['article_indexnow_scope_mismatch']];
         }
 
-        $issues = $this->validateItem($item, ['indexnow']);
+        $issues = $this->validateItem($item, [$channel]);
+        if (in_array($channel, ['indexnow', 'baidu_push'], true)) {
+            $provider = $channel === 'indexnow' ? 'indexnow' : 'baidu';
+            $endpointHost = strtolower((string) parse_url((string) config('seo_intel.search_channel_queue.live_submission.'.$provider.'.endpoint'), PHP_URL_HOST));
+            if (! in_array($endpointHost, config('seo_intel.search_channel_queue.live_submission.'.$provider.'.allowed_endpoint_hosts', []), true)) {
+                $issues[] = 'provider_endpoint_host_not_allowed';
+            }
+        }
         if ($issues !== []) {
             return ['status' => 'blocked', 'issues' => $issues];
         }
 
-        return $this->submitOne($item, 'article-indexnow-auto', hash('sha256', 'article-indexnow-auto:'.$queueItemId), 'verified_article');
+        return $this->submitOne($item, 'article-search-auto', hash('sha256', 'article-search-auto:'.$queueItemId), 'verified_article');
     }
 
     /**
@@ -633,6 +640,7 @@ final class SearchChannelQueueBoundedLiveExecutor
 
         try {
             $response = Http::timeout(max(1, (int) config('seo_intel.search_channel_queue.live_submission.baidu.timeout_seconds', 10)))
+                ->withoutRedirecting()
                 ->withBody($canonicalUrl, 'text/plain')
                 ->post($endpointWithQuery);
 
