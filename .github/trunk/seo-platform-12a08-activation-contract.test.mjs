@@ -125,9 +125,9 @@ test('pause, generation, pending counts and exact SHA must be preserved',()=>{
 test('existing workflows publish completed scoped evidence without runtime operations',()=>{
  const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
  assert.doesNotMatch(deploy,/workflow_dispatch:|seo:council-runtime (?:resume|pause)|seo:council-scheduled --acceptance/);
- assert.match(deploy,/needs: \[policy, staging, production\]/);
+ assert.doesNotMatch(deploy,/a08-evidence:/);
  assert.match(deploy,/seo_council_runtime_closeout=false/);
- assert.match(deploy,/seo-council-a08-activation-\$\{\{/);
+ assert.match(readFileSync(new URL('../workflows/nightly.yml',import.meta.url),'utf8'),/seo-council-a08-activation-\$\{\{/);
  const ci=readFileSync(new URL('../workflows/ci.yml',import.meta.url),'utf8');
  assert.match(ci,/--log-junit=/);assert.match(ci,/scoped-receipt/);
  assert.match(ci,/Install Redis server for public projection contracts[\s\S]*?apt-get install -y --no-install-recommends redis-server/);
@@ -142,12 +142,12 @@ test('existing workflows publish completed scoped evidence without runtime opera
  assert.match(evidence,/NIGHTLY_NOT_A_RELEASE_DEPENDENCY/);
 });
 test('A08 activation gate skips only unavailable evidence and fails closed otherwise',()=>{
- const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
- const a08=deploy.split('  a08-evidence:\n')[1].split('\n  docs-only:')[0];
- const block=a08.match(/      - name: Build current-SHA software activation preserving operational history\n        id: a08_activation\n        run: \|\n((?: {10}.*\n)+)/)?.[1];
+ const nightly=readFileSync(new URL('../workflows/nightly.yml',import.meta.url),'utf8');
+ const a08=nightly.split('  a08-evidence:\n')[1].split('\n  repair-scope:')[0];
+ const block=a08.match(/      - name: Build current-SHA software activation preserving operational history\n        id: a08_activation\n        if: steps\.source\.outputs\.disposition == 'BUILD'\n        run: \|\n((?: {10}.*\n)+)/)?.[1];
  assert.ok(block,'activation build step must expose a guarded run block');
  const script=block.split('\n').filter(Boolean).map(line=>line.slice(10)).join('\n');
- for(const name of ['Start existing production transport','Publish validated data-only evidence and verify unchanged runtime']) {
+ for(const name of ['Publish validated data-only evidence and verify unchanged runtime']) {
   const step=a08.split(`      - name: ${name}\n`)[1]?.split('\n      - ')[0];
   assert.match(step ?? '',/if: steps\.a08_activation\.outputs\.ready == 'true'/);
  }
@@ -166,9 +166,9 @@ test('A08 activation gate skips only unavailable evidence and fails closed other
    return {result,output:readFileSync(output,'utf8'),summary:kind==='unavailable'?readFileSync(summary,'utf8'):null};
   };
   const unavailable=run('unavailable');
-  assert.equal(unavailable.result.status,0);assert.equal(unavailable.output,'ready=false\n');
-  assert.match(unavailable.result.stdout,/::notice title=A08 skipped::/);
-  assert.match(unavailable.summary,/SKIPPED_NO_AUTHORIZED_ACTIVATION/);
+  assert.equal(unavailable.result.status,1);assert.equal(unavailable.output,'ready=false\n');
+  assert.match(unavailable.result.stdout,/::notice title=A08 HOLD::/);
+  assert.match(unavailable.summary,/HOLD_NO_AUTHORIZED_ACTIVATION/);
   const ready=run('ready');assert.equal(ready.result.status,0);assert.equal(ready.output,'ready=true\n');
   for(const kind of ['partial','empty','inconsistent','unexpected','error']) {
    const failed=run(kind);assert.notEqual(failed.result.status,0,`${kind} must fail closed`);assert.equal(failed.output,'');

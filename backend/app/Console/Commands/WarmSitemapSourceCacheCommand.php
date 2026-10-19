@@ -30,11 +30,14 @@ final class WarmSitemapSourceCacheCommand extends Command
         {--refresh-if-changed : Verify the exact authority fingerprint and rebuild only when it changed}
         {--json : Emit JSON output}';
 
+    private array $fingerprintDiagnostics = [];
+
     protected $description = 'Warm the SEO sitemap-source fresh and stale caches outside the HTTP request path.';
 
     public function handle(): int
     {
         $start = microtime(true);
+        $this->fingerprintDiagnostics = [];
 
         try {
             $lock = Cache::lock(SitemapSourceController::CACHE_KEY_LOCK, SitemapSourceController::LOCK_TTL_SECONDS);
@@ -107,6 +110,15 @@ final class WarmSitemapSourceCacheCommand extends Command
         $fingerprint = $this->buildFingerprint($authorityUrls);
         $cachedFingerprint = Cache::get(self::FINGERPRINT_CACHE_KEY);
         $cachedPayload = Cache::get(SitemapSourceController::CACHE_KEY_FRESH);
+        $this->fingerprintDiagnostics = [
+            'input_sha256' => $fingerprint['fingerprint_sha256'],
+            'previous_input_sha256' => is_array($cachedFingerprint) ? ($cachedFingerprint['fingerprint_sha256'] ?? null) : null,
+            'changed_components' => array_values(array_filter(array_keys($fingerprint),
+                fn (string $key): bool => $key !== 'fingerprint_sha256'
+                    && (! is_array($cachedFingerprint) || ($cachedFingerprint[$key] ?? null) !== $fingerprint[$key]))),
+            'cached_receipt_valid' => $this->fingerprintReceiptMatches($cachedFingerprint, $fingerprint),
+            'cached_payload_readable' => $this->cachePayloadIsReadable($cachedPayload),
+        ];
 
         if (
             $this->fingerprintReceiptMatches($cachedFingerprint, $fingerprint)
@@ -316,6 +328,7 @@ final class WarmSitemapSourceCacheCommand extends Command
                 'status' => $status,
                 'count' => $count,
                 'elapsed_seconds' => $elapsed,
+                'fingerprint_diagnostics' => $this->fingerprintDiagnostics,
             ];
             if ($error !== null && $error !== '') {
                 $payload['error'] = $error;

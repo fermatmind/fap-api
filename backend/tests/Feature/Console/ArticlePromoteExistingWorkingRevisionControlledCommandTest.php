@@ -29,6 +29,185 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
 
     private const CANONICAL = '/zh/articles/eq-test-tool-guide';
 
+    private function revalidationOptions(Article $article, array $extra = []): array
+    {
+        return $this->commandOptions($article, array_merge([
+            '--execute' => true,
+            '--confirm' => $this->expectedConfirmation((int) $article->id, (int) $article->working_revision_id),
+            '--preview-approved' => true, '--schema-hold' => true, '--hreflang-hold' => true,
+            '--search-hold' => true, '--no-sitemap' => true, '--no-llms' => true,
+            '--revalidate-after-commit' => true, '--json' => true,
+        ], $extra));
+    }
+
+    public function test_single_target_revalidation_runs_once_after_commit_and_repeat_does_not_publish_again(): void
+    {
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $target = (int) $article->working_revision_id;
+        $baseline = \Illuminate\Support\Facades\DB::transactionLevel();
+        Http::fake(function ($request) use ($article, $target, $baseline) {
+            $this->assertSame($baseline, \Illuminate\Support\Facades\DB::transactionLevel());
+            $this->assertSame($target, (int) $article->fresh()->published_revision_id);
+            $this->assertContains(self::CANONICAL, $request['cache_signal']['paths']);
+
+            return Http::response(self::frontendArticleSuccessReceipt());
+        });
+        $options = $this->revalidationOptions($article);
+        $this->assertSame(0, Artisan::call('articles:promote-existing-working-revision', $options));
+        $payload = $this->jsonOutput();
+        $this->assertSame('committed', $payload['publication']);
+        $this->assertSame('success', $payload['cache_closeout']);
+        Http::assertSentCount(1);
+        $count = ArticleTranslationRevision::withoutGlobalScopes()->count();
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $options));
+        $this->assertSame($count, ArticleTranslationRevision::withoutGlobalScopes()->count());
+        Http::assertSentCount(1);
+        $this->getJson('/api/v0.5/articles/'.self::SLUG.'?org_id=0&locale=zh-CN')
+            ->assertOk()->assertJsonPath('article.title', $article->fresh()->title);
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('cacheCloseoutFailures')]
+    public function test_cache_failure_is_reported_as_committed_without_repromoting(int $status, mixed $body): void
+    {
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        Http::fake(['*' => Http::response($body, $status)]);
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $target = (int) $article->working_revision_id;
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->revalidationOptions($article)));
+        $payload = $this->jsonOutput();
+        $this->assertFalse($payload['ok']);
+        $this->assertSame('committed', $payload['publication']);
+        $this->assertSame('failed', $payload['cache_closeout']);
+        $this->assertSame($target, (int) $article->fresh()->published_revision_id);
+        Http::assertSentCount(1);
+    }
+
+    public function test_native_post_commit_failure_keeps_the_publication_committed_and_prevents_repeat(): void
+    {
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        Http::fake();
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $target = (int) $article->working_revision_id;
+        $options = $this->revalidationOptions($article);
+        \Illuminate\Support\Facades\File::partialMock()
+            ->shouldReceive('ensureDirectoryExists')->once()
+            ->andThrow(new RuntimeException('Public projection mutation lock unavailable.'));
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $options));
+        $payload = $this->jsonOutput();
+        $this->assertFalse($payload['ok']);
+        $this->assertSame('committed', $payload['publication']);
+        $this->assertSame((int) $article->id, $payload['promoted_article_id']);
+        $this->assertSame('failed', $payload['cache_closeout']);
+        $this->assertSame($target, (int) $article->fresh()->published_revision_id);
+        $this->assertErrorCode($payload, 'committed_promotion_closeout_failed');
+        $count = ArticleTranslationRevision::withoutGlobalScopes()->count();
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $options));
+        $this->assertSame($count, ArticleTranslationRevision::withoutGlobalScopes()->count());
+        Http::assertNothingSent();
+    }
+
+    // Captures the existing frontend article consumer's native response shape,
+    // including its implicit cross-locale paths (observed on staging).
+    private static function frontendArticleSuccessReceipt(): array
+    {
+        return ['ok' => true, 'revalidated_paths' => [
+            '/zh', '/zh/articles', '/zh/articles/eq-test-tool-guide', '/llms.txt', '/llms-full.txt',
+            '/en/articles', '/en/articles/eq-test-tool-guide',
+        ], 'rejected_paths' => [], 'invalidated_tags' => [
+            'article-detail:zh-CN:eq-test-tool-guide', 'article-seo:zh-CN:eq-test-tool-guide',
+        ]];
+    }
+
+    public function test_new_mode_transaction_failure_rolls_back_and_sends_no_http(): void
+    {
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        Http::fake();
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $published = (int) $article->published_revision_id;
+        $target = (int) $article->working_revision_id;
+        $baseline = \Illuminate\Support\Facades\DB::transactionLevel();
+        $entered = false;
+        $dispatcher = ArticleTranslationRevision::getEventDispatcher();
+        ArticleTranslationRevision::setEventDispatcher(clone $dispatcher);
+        try {
+            ArticleTranslationRevision::updating(function (ArticleTranslationRevision $revision) use ($article, $target, $baseline, &$entered): void {
+                if ((int) $revision->id === $target && $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED) {
+                    $this->assertGreaterThan($baseline, \Illuminate\Support\Facades\DB::transactionLevel());
+                    // The article pointer was written before this revision event.
+                    $this->assertSame($target, (int) $article->fresh()->published_revision_id);
+                    $entered = true;
+                    throw new RuntimeException('Synthetic transaction failure.');
+                }
+            });
+            $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->revalidationOptions($article)));
+            $this->assertTrue($entered);
+            $payload = $this->jsonOutput();
+            $this->assertFalse($payload['ok']);
+            $this->assertSame('not_committed', $payload['publication']);
+            $this->assertNull($payload['promoted_article_id']);
+            $this->assertSame($published, (int) $article->fresh()->published_revision_id);
+            $this->assertSame(ArticleTranslationRevision::STATUS_APPROVED, $article->fresh()->workingRevision->revision_status);
+            Http::assertNothingSent();
+        } finally {
+            ArticleTranslationRevision::setEventDispatcher($dispatcher);
+        }
+    }
+
+    public static function cacheCloseoutFailures(): array
+    {
+        $missing = self::frontendArticleSuccessReceipt();
+        array_pop($missing['revalidated_paths']);
+        $extra = self::frontendArticleSuccessReceipt();
+        $extra['revalidated_paths'][] = '/en/tests/unrequested';
+
+        return [[503, ['ok' => false]], [200, ['ok' => false]], [200, 'invalid acknowledgement'],
+            [200, ['ok' => true]], [200, $missing], [200, $extra]];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('configuredCacheSecrets')]
+    public function test_new_mode_uses_the_existing_sender_secret_precedence(string $hmac, string $legacy, string $effective): void
+    {
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.hmac_revalidation_secret' => $hmac,
+            'ops.content_release_observability.cache_invalidation_secret' => $legacy]);
+        Http::fake(function ($request) use ($effective) {
+            $timestamp = $request->header('X-FM-Content-Release-Timestamp')[0];
+            $nonce = $request->header('X-FM-Content-Release-Nonce')[0];
+            $this->assertSame('sha256='.hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$request->body(), $effective),
+                $request->header('X-FM-Content-Release-Signature')[0]);
+
+            return Http::response(self::frontendArticleSuccessReceipt());
+        });
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $this->assertSame(0, Artisan::call('articles:promote-existing-working-revision', $this->revalidationOptions($article)));
+        $this->assertSame('success', $this->jsonOutput()['cache_closeout']);
+        Http::assertSentCount(1);
+    }
+
+    public static function configuredCacheSecrets(): array
+    {
+        return [['hmac-fixture', '', 'hmac-fixture'], ['', 'legacy-fixture', 'legacy-fixture'],
+            ['hmac-fixture', 'legacy-fixture', 'hmac-fixture']];
+    }
+
+    public function test_missing_configuration_and_conflicting_modes_fail_before_promotion(): void
+    {
+        Http::fake();
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $published = (int) $article->published_revision_id;
+        foreach ([[], ['--no-revalidation' => true]] as $extra) {
+            $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->revalidationOptions($article, $extra)));
+            $this->assertSame('not_committed', $this->jsonOutput()['publication']);
+            $this->assertSame($published, (int) $article->fresh()->published_revision_id);
+        }
+        Http::assertNothingSent();
+    }
+
     public function test_dry_run_accepts_approved_existing_article_working_revision_without_writes(): void
     {
         $article = $this->createExistingArticleWithWorkingRevision();

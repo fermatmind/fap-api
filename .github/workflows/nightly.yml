@@ -1,7 +1,10 @@
 name: Nightly
-run-name: "${{ github.event_name == 'push' && 'Focused evidence repair' || github.event.schedule == '17 18 * * *' && 'Daily operations' || 'Weekly full checks' }} · ${{ github.sha }}"
+run-name: "${{ github.event_name == 'workflow_run' && 'Independent A08 evidence' || github.event_name == 'push' && 'Focused evidence repair' || github.event.schedule == '17 18 * * *' && 'Daily operations' || 'Weekly full checks' }} · ${{ github.sha }}"
 
 on:
+  workflow_run:
+    workflows: [Deploy]
+    types: [completed]
   # Repair affected evidence domains; scheduled weekly checks remain complete.
   push:
     branches: [main]
@@ -23,10 +26,124 @@ permissions:
   security-events: write
 
 concurrency:
-  group: nightly-${{ github.repository }}-${{ github.event_name }}-${{ github.event.schedule }}
-  cancel-in-progress: true
+  group: nightly-${{ github.repository }}-${{ github.event_name }}-${{ github.event_name == 'workflow_run' && github.event.workflow_run.id || github.event.schedule }}
+  cancel-in-progress: ${{ github.event_name == 'push' || github.event.schedule == '37 18 * * 0' }}
 
 jobs:
+
+  a08-evidence:
+    name: Publish A08 software evidence with operations independent
+    if: github.event_name == 'workflow_run' || (github.event_name == 'schedule' && github.event.schedule == '17 18 * * *')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    env:
+      TARGET: production
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      GH_TOKEN: ${{ github.token }}
+      A08_GATE_ONLY: 'false'
+      SOURCE_DEPLOY_RUN_ID: ${{ github.event.workflow_run.id }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify exact producer SHA has successful main CI
+        run: node .github/trunk/seo-platform-12a08-source.mjs --verify-producer
+      - name: Start existing production transport
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          eval "$(ssh-agent -s)" >/dev/null
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Observe current software and select original completed Deploy
+        id: source
+        run: |
+          bash backend/scripts/deploy/seo_a08_transport.sh state a08-current.json
+          node .github/trunk/seo-platform-12a08-source.mjs
+      # Keep the trusted producer checkout. Fingerprints read DEPLOY_SHA's Git
+      # objects directly, including when current has rolled back to an old SHA.
+      - name: Fetch exact-SHA completed job and artifact evidence
+        if: steps.source.outputs.disposition == 'BUILD'
+        run: node .github/trunk/seo-platform-12a08-evidence-download.mjs
+      - name: Build current-SHA software activation preserving operational history
+        id: a08_activation
+        if: steps.source.outputs.disposition == 'BUILD'
+        run: |
+          set -euo pipefail
+          build_output="$(node .github/trunk/seo-platform-12a08-release.mjs build a08-release-input.json)"
+          if [[ "$build_output" == A08_EVIDENCE_UNAVAILABLE_NO_AUTHORIZATION ]]; then
+            if [[ -e activation.json || -e activation.json.sha256 ]]; then
+              echo 'A08_ACTIVATION_UNEXPECTED_FILES' >&2
+              exit 1
+            fi
+            echo 'ready=false' >> "$GITHUB_OUTPUT"
+            echo "::notice title=A08 HOLD::No authorized activation evidence for $DEPLOY_SHA; controlled transitions were not run."
+            echo "A08: HOLD_NO_AUTHORIZED_ACTIVATION for $DEPLOY_SHA; controlled transitions were not run." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          elif [[ -z "$build_output" ]]; then
+            if [[ ! -s activation.json || ! -s activation.json.sha256 ]]; then
+              echo 'A08_ACTIVATION_INCOMPLETE' >&2
+              exit 1
+            fi
+            echo 'ready=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'A08_BUILD_OUTPUT_UNEXPECTED' >&2
+            exit 1
+          fi
+      - name: Publish validated data-only evidence and verify unchanged runtime
+        if: steps.a08_activation.outputs.ready == 'true'
+        run: |
+          set -euo pipefail
+          bash backend/scripts/deploy/seo_a08_transport.sh state a08-install-before.json
+          node --input-type=module - <<'JS'
+          import {readFileSync,writeFileSync} from 'node:fs';
+          const observed=JSON.parse(readFileSync('a08-install-before.json'));
+          const sourceState=JSON.parse(readFileSync('a08-current.json'));
+          const keys=['sha','generation','version_vector_hash','lock_identity','release_id'];
+          const expected=Object.fromEntries(keys.map(k=>[k,sourceState[k]]));
+          if(keys.some(k=>!Object.hasOwn(expected,k) || expected[k] !== observed[k]) || expected.sha !== process.env.DEPLOY_SHA) throw new Error('A08_CURRENT_SUPERSEDED');
+          writeFileSync('activation-install.json',JSON.stringify({schema_version:'seo.a08_install_request.v1',manifest:readFileSync('activation.json','utf8'),expected}));
+          JS
+          bash backend/scripts/deploy/seo_a08_transport.sh install activation-install.json
+          bash backend/scripts/deploy/seo_a08_transport.sh state a08-install-after.json
+          node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-install-before.json a08-install-after.json "$DEPLOY_SHA"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: steps.a08_activation.outputs.ready == 'true'
+        with:
+          name: seo-council-a08-activation-${{ env.DEPLOY_SHA }}-${{ github.run_id }}
+          path: |
+            activation.json
+            activation.json.sha256
+            a08-install-before.json
+            a08-install-after.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Record independent A08 verdict
+        if: always()
+        run: |
+          echo "A08 software evidence result: ${{ job.status }}; source: ${{ steps.source.outputs.disposition }}" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: a08-source-${{ github.run_id }}
+          path: |
+            a08-source.json
+            a08-producer.json
+          if-no-files-found: warn
+          retention-days: 90
+
   repair-scope:
     name: Select push repair consumers; schedules retain their full scope
     if: github.event_name == 'push'
@@ -588,6 +705,7 @@ jobs:
   nightly-summary:
     name: Final failure-domain receipt
     needs:
+      - a08-evidence
       - repair-scope
       - authority-contract
       - full-phpunit
@@ -596,10 +714,11 @@ jobs:
       - codeql
       - scheduler-evidence-monitor
       - gsc-read-model-sync
-    if: always() && (github.event_name == 'push' || (github.event_name == 'schedule' && (github.event.schedule == '17 18 * * *' || github.event.schedule == '37 18 * * 0')))
+    if: always() && (github.event_name == 'workflow_run' || github.event_name == 'push' || (github.event_name == 'schedule' && (github.event.schedule == '17 18 * * *' || github.event.schedule == '37 18 * * 0')))
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
+      A08_RESULT: ${{ needs.a08-evidence.result }}
       SCHEDULE: ${{ github.event.schedule }}
       EVENT_NAME: ${{ github.event_name }}
       REPAIR_SCOPE: ${{ toJSON(needs.repair-scope.outputs) }}
@@ -617,6 +736,7 @@ jobs:
           set -euo pipefail
           mkdir -p artifacts/nightly-summary
           jq -n \
+            --arg a08 "$A08_RESULT" \
             --argjson repair "$REPAIR_SCOPE" \
             --arg sha "$GITHUB_SHA" \
             --arg schedule "$SCHEDULE" \
@@ -635,9 +755,10 @@ jobs:
               workflow_sha: $sha,
               schedule: $schedule,
               event: $event,
-              check_scope: (if $daily then "daily_operations" elif $event == "push" then "focused_evidence_repair" elif $weekly then "weekly_full_checks" else "unknown" end),
+              check_scope: (if $event == "workflow_run" then "independent_a08" elif $daily then "daily_operations" elif $event == "push" then "focused_evidence_repair" elif $weekly then "weekly_full_checks" else "unknown" end),
               production_rollback_requested: false,
               domains: {
+                a08_software_evidence: {result: $a08, required: ($daily or $event == "workflow_run")},
                 authority_contract: {result: $authority, required: ($weekly or ($event == "push" and $repair.authority == "true"))},
                 full_phpunit: {result: $full_phpunit, required: ($weekly or ($event == "push" and $repair.php_required == "true"))},
                 dependency_audit: {result: $dependency, required: ($weekly or ($event == "push" and $repair.dependency == "true"))},
@@ -647,7 +768,7 @@ jobs:
                 gsc_readonly_sync: {result: $gsc, required: $daily}
               }
             } |
-            .status = (if (($daily or $weekly or $event == "push") and
+            .status = (if (($daily or $weekly or $event == "push" or $event == "workflow_run") and
               (.domains | all(.[]; if .required then .result == "success" else .result == "skipped" end)))
               then "pass" else "fail" end)
           ' > artifacts/nightly-summary/receipt.json

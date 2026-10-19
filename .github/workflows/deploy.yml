@@ -2689,7 +2689,7 @@ jobs:
         run: |
           jq -n --arg sha "$DEPLOY_SHA" --arg pushed "$PUSHED_AT" --arg ci "$CI_COMPLETED_AT" \
             --arg completed "$(date -u +%Y-%m-%dT%H:%M:%SZ)" --arg run "$GITHUB_RUN_ID" \
-            --arg repository "$GITHUB_REPOSITORY" --arg ci_run '${{ github.event.workflow_run.id }}' --arg outcome '${{ steps.activation.outcome }}' \
+            --arg repository "$GITHUB_REPOSITORY" --arg ci_run '${{ github.event.workflow_run.id }}' --arg outcome '${{ job.status }}' \
             '{schema_version:"fermatmind.trunk-delivery-timing.v1",sha:$sha,pushed_at:$pushed,ci_completed_at:$ci,repository:$repository,ci_run_id:$ci_run,deploy_run_attempt:1,production_outcome:$outcome,production_smoke_completed_at:(if $outcome == "success" then $completed else null end),deploy_run_id:$run}' \
             > trunk-delivery-timing.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -2917,87 +2917,6 @@ jobs:
         with:
           name: mbti-zh-result-authority-publish-${{ github.run_id }}-${{ github.run_attempt }}
           path: artifacts/mbti-zh-result-authority-publish
-          if-no-files-found: error
-          retention-days: 90
-
-  a08-evidence:
-    name: Publish A08 software evidence with operations independent
-    needs: [policy, staging, production]
-    if: needs.production.result == 'success' && needs.production.outputs.skipped != 'true' && needs.policy.outputs.career_content_only != 'true' && needs.policy.outputs.career_first_publish != 'true'
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    environment: production
-    env:
-      TARGET: production
-      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
-      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
-      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
-      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
-      GH_TOKEN: ${{ github.token }}
-      A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
-    steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-        with:
-          ref: ${{ github.event.workflow_run.head_sha }}
-          fetch-depth: 0
-      - name: Fetch exact-SHA completed job and artifact evidence
-        env:
-          CI_RUN_ID: ${{ github.event.workflow_run.id }}
-        run: node .github/trunk/seo-platform-12a08-evidence-download.mjs
-      - name: Build current-SHA software activation preserving operational history
-        id: a08_activation
-        run: |
-          set -euo pipefail
-          build_output="$(node .github/trunk/seo-platform-12a08-release.mjs build a08-release-input.json)"
-          if [[ "$build_output" == A08_EVIDENCE_UNAVAILABLE_NO_AUTHORIZATION ]]; then
-            if [[ -e activation.json || -e activation.json.sha256 ]]; then
-              echo 'A08_ACTIVATION_UNEXPECTED_FILES' >&2
-              exit 1
-            fi
-            echo 'ready=false' >> "$GITHUB_OUTPUT"
-            echo "::notice title=A08 skipped::No authorized activation evidence for $DEPLOY_SHA; controlled transitions were not run."
-            echo "A08: SKIPPED_NO_AUTHORIZED_ACTIVATION for $DEPLOY_SHA; controlled transitions were not run." >> "$GITHUB_STEP_SUMMARY"
-          elif [[ -z "$build_output" ]]; then
-            if [[ ! -s activation.json || ! -s activation.json.sha256 ]]; then
-              echo 'A08_ACTIVATION_INCOMPLETE' >&2
-              exit 1
-            fi
-            echo 'ready=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'A08_BUILD_OUTPUT_UNEXPECTED' >&2
-            exit 1
-          fi
-      - name: Start existing production transport
-        if: steps.a08_activation.outputs.ready == 'true'
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-        run: |
-          set -euo pipefail
-          eval "$(ssh-agent -s)" >/dev/null
-          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
-          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
-          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
-          install -d -m 700 ~/.ssh
-          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-      - name: Publish validated data-only evidence and verify unchanged runtime
-        if: steps.a08_activation.outputs.ready == 'true'
-        run: |
-          set -euo pipefail
-          bash backend/scripts/deploy/seo_a08_transport.sh state a08-install-before.json
-          bash backend/scripts/deploy/seo_a08_transport.sh install activation.json
-          bash backend/scripts/deploy/seo_a08_transport.sh state a08-install-after.json
-          node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-install-before.json a08-install-after.json "$DEPLOY_SHA"
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        if: steps.a08_activation.outputs.ready == 'true'
-        with:
-          name: seo-council-a08-activation-${{ github.event.workflow_run.head_sha }}
-          path: |
-            activation.json
-            activation.json.sha256
-            a08-install-before.json
-            a08-install-after.json
           if-no-files-found: error
           retention-days: 90
 

@@ -99,8 +99,11 @@ export function build({checks, sha, ci, jobs, staging, production, artifactDiges
   for (const [environment, state] of Object.entries({staging, production})) {
     const name = environment === 'staging' ? 'Staging exact-SHA deploy and smoke' : 'Production exact-SHA activation, smoke, and LKG fallback';
     const job = jobs.find(job => job.name === name);
-    if (!job || job.status !== 'completed' || job.conclusion !== 'success' || !job.completed_at
-      || state.sha !== sha || !state.business_guards_closed || !state.operations_readonly) throw new Error('A08_DEPLOY_JOB_HOLD');
+    const invalid=!job ? 'missing_job' : job.status !== 'completed' ? 'job_status'
+      : job.conclusion !== 'success' ? 'job_conclusion' : !job.completed_at ? 'completed_at'
+      : state.sha !== sha ? 'state_sha' : !state.business_guards_closed ? 'business_guards'
+      : !state.operations_readonly ? 'operations_readonly' : null;
+    if(invalid) throw new Error(`A08_DEPLOY_JOB_HOLD:${environment}:${invalid}`);
     validation[environment] = {sha, environment, check_scope: 'deployment_smoke_and_readonly_state', status: 'pass',
       completed_job: true, run_id: job.run_id, job_id: job.id, completed_at: job.completed_at,
       artifact_digest: artifactDigests[environment], pause_preserved: true, business_guards_closed: true};

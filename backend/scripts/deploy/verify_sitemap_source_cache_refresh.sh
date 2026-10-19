@@ -68,6 +68,7 @@ if [ "$command_status" -eq 0 ]; then
       printf 'sitemap_source_cache_warm_status=%s\n' "$result_status"
       printf 'sitemap_source_cache_warm_count=%s\n' "$result_count"
       printf 'sitemap_source_cache_warm_strict=%s\n' "$strict"
+      printf '%s' "$result_json" | jq -c '.fingerprint_diagnostics // {} | {input_sha256,previous_input_sha256,changed_components,cached_receipt_valid,cached_payload_readable}' | sed 's/^/sitemap_source_cache_fingerprint=/'
       exit 0
     fi
 

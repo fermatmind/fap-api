@@ -16,6 +16,9 @@ try {
     $runtime = app(Platform12RuntimeControl::class);
     $activation = app(App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::class)->inspect();
     $status = $runtime->status();
+    $atomicPath = config('seo_council.activation_receipt_path').'.atomic.json';
+    $envelope = is_file($atomicPath) && ! is_link($atomicPath) && filesize($atomicPath) <= 131072
+        ? json_decode(file_get_contents($atomicPath), true) : null;
     if (($status['state'] ?? null) === 'SHARED_CACHE_HOLD') {
         throw new RuntimeException('A08_SHARED_CACHE_HOLD');
     }
@@ -37,6 +40,11 @@ try {
         throw new RuntimeException('A08_OPERATIONS_READ_HOLD');
     }
     $capability = app(App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder::class)->snapshot();
+    // This candidate script is also bootstrapped by an older current release.
+    // Keep the lock identity calculation independent of newly deployed classes.
+    $runtimeStore = (string) config('seo_council.runtime_cache_store');
+    $lockIdentity = hash('sha256', serialize([$runtimeStore, config('cache.stores.'.$runtimeStore),
+        config('cache.prefix'), config('database.redis')]));
     echo json_encode(['schema_version' => 'seo.a08_readonly_state.v2', 'environment' => app()->environment(),
         'sha' => trim(file_get_contents(dirname(getcwd()).'/REVISION')), 'paused' => $raw['paused'] ?? true,
         'gate_only' => getenv('A08_GATE_ONLY') === 'true' && ($raw['paused'] ?? true) && $selected === [],
@@ -46,6 +54,10 @@ try {
         'post12_agent_write_enabled' => false, '28_day_clock' => 'NOT_STARTED',
         'runtime_status' => array_intersect_key($status, array_flip(['a08_gate_policy', 'gate_software_delivery', 'public_gate', 'effective_enabled_missions'])),
         'activation' => $activation['manifest'] ?? null,
+        'activation_state' => $activation['state'],
+        'activation_fence' => $envelope['installation_fence'] ?? null,
+        'lock_identity' => $lockIdentity,
+        'release_id' => basename(dirname(getcwd())),
         'version_vector' => $capability['version_vector'], 'version_vector_hash' => $capability['version_vector_hash']], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)."\n";
 } catch (Throwable) {
     fwrite(STDERR, "A08_READONLY_STATE_HOLD\n");

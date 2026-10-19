@@ -26,6 +26,23 @@ elif [[ "$mode" = acceptance || "$mode" = staging-safety ]]; then
   ssh "${ssh_args[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "set -e; cd $q_path/current/backend; $identity_cmd php scripts/deploy/seo_a08_acceptance.php" < "$output" > "${3:?}"
 else
   [[ "$DEPLOY_SHA" =~ ^[a-f0-9]{40}$ ]]
-  # The deployed installer validates exact SHA/hash/schema and never changes runtime cache.
-  ssh "${ssh_args[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "set -e; cd $q_path/current/backend; $identity_cmd php scripts/deploy/seo_a08_install.php" < "$output"
+  # Run this trusted producer's fenced installer against current's native
+  # bootstrap/runtime lock. No script files are written to the old release.
+  python3 - "$output" <<'PY_INSTALL' | ssh "${ssh_args[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "set -e; cd $q_path/current/backend; $identity_cmd env A08_DEPLOY_ROOT=$q_path php"
+import base64
+from pathlib import Path
+import sys
+request = Path(sys.argv[1]).read_bytes()
+if len(request) > 131072:
+    raise SystemExit('A08_INSTALL_REQUEST_HOLD')
+def php_source(path):
+    source = Path(path).read_bytes()
+    if not source.startswith(b'<?php'):
+        raise SystemExit('A08_INSTALL_SOURCE_HOLD')
+    return base64.b64encode(source[5:]).decode('ascii')
+print("<?php require getcwd().'/vendor/autoload.php';")
+print("eval(base64_decode('" + php_source('backend/app/Services/SeoCouncil/Platform12/Platform12ActivationInstallFence.php') + "'));")
+print("$a08RequestBytes=base64_decode('" + base64.b64encode(request).decode('ascii') + "');")
+print("eval(base64_decode('" + php_source('backend/scripts/deploy/seo_a08_install.php') + "'));")
+PY_INSTALL
 fi

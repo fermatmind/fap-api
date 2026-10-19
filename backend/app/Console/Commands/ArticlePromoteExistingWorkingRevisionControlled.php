@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Filament\Ops\Support\ContentReleaseFollowUp;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
@@ -11,9 +12,11 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticleEditorialCompletenessGate;
 use App\Services\Cms\ArticlePublishService;
+use App\Services\Cms\ContentReleasePathPlanner;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Throwable;
 
@@ -65,6 +68,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         {--schema-hold : Confirm schema generation/enqueue stays held}
         {--hreflang-hold : Confirm hreflang enablement stays held}
         {--search-hold : Confirm search enqueue stays held}
+        {--revalidate-after-commit : Refresh only the committed single-article paths through the existing transport}
         {--no-revalidation : Confirm no frontend/API revalidation will be triggered}
         {--no-sitemap : Confirm sitemap eligibility will not be changed}
         {--no-llms : Confirm llms eligibility will not be changed}
@@ -82,6 +86,12 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 
     public function handle(ArticlePublishService $publisher, AuditLogger $auditLogger): int
     {
+        if ((bool) $this->option('revalidate-after-commit')
+            && ((string) $this->option('blog-v1-file') !== '' || trim((string) $this->option('batch')) !== '')) {
+            $this->emitSummary(['ok' => false, 'errors' => [$this->issue('mode', 'single_target_mode_required', 'Revalidation is restricted to the existing single-target lane.')]]);
+
+            return self::FAILURE;
+        }
         if ((string) $this->option('blog-v1-file') !== '') {
             return $this->handleBlogV1();
         }
@@ -99,6 +109,16 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         $confirmation = trim((string) $this->option('confirm'));
 
         $errors = [];
+        $revalidate = (bool) $this->option('revalidate-after-commit');
+        $endpoints = array_values(array_filter(array_map('trim', (array) config('ops.content_release_observability.cache_invalidation_urls', []))));
+        if ($revalidate && (bool) $this->option('no-revalidation')) {
+            $errors[] = $this->issue('mode', 'revalidation_mode_conflict', 'Choose one revalidation mode.');
+        }
+        $effectiveSecret = trim((string) config('ops.content_release_observability.hmac_revalidation_secret', ''))
+            ?: trim((string) config('ops.content_release_observability.cache_invalidation_secret', ''));
+        if ($revalidate && ($endpoints === [] || $effectiveSecret === '')) {
+            $errors[] = $this->issue('revalidation', 'revalidation_configuration_missing', 'The existing cache transport must be configured before promotion.');
+        }
 
         if ($dryRun && $execute) {
             $errors[] = $this->issue('mode', 'dry_run_execute_conflict', 'Choose either --dry-run or --execute, not both.');
@@ -169,6 +189,8 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             'plan' => $plan,
             'errors' => $errors,
             'promoted_article_id' => null,
+            'publication' => 'not_committed',
+            'cache_closeout' => $revalidate ? 'pending' : 'held',
         ];
 
         if ($errors === [] && $execute) {
@@ -183,9 +205,53 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                         $lockedArticle,
                         $lockedRevision,
                     ),
+                    onCommitted: function (Article $committed) use (&$summary): void {
+                        $summary['publication'] = 'committed';
+                        $summary['promoted_article_id'] = (int) $committed->id;
+                    },
                 );
 
                 $this->logPromotion($auditLogger, $article, $plan, $confirmation);
+                if ($revalidate) {
+                    DB::afterCommit(function () use ($article, $endpoints, &$summary): void {
+                        try {
+                            $record = $article->fresh(['publishedRevision', 'seoMeta']);
+                            $paths = app(ContentReleasePathPlanner::class)->paths('article', $record);
+                            if ($paths === []) {
+                                throw new RuntimeException('No committed article paths were resolved.');
+                            }
+                            // The existing frontend article consumer appends both
+                            // locale list/detail defaults. Match that exact native
+                            // response, rather than accepting an arbitrary superset.
+                            $receiptPaths = array_values(array_unique([
+                                ...$paths, '/zh/articles', '/en/articles',
+                                '/zh/articles/'.$record->slug, '/en/articles/'.$record->slug,
+                                '/llms.txt', '/llms-full.txt',
+                            ]));
+                            $receipts = ContentReleaseFollowUp::dispatchExplicitPaths(
+                                'article', $record, $paths, 'controlled_existing_article_working_revision_promotion',
+                                Request::create('/ops/articles/controlled-promotion', 'POST'),
+                                broadcast: false, throwOnFailure: true,
+                                expectedCacheReceipt: [
+                                    'revalidated_paths' => $receiptPaths,
+                                    'rejected_paths' => [],
+                                    'invalidated_tags' => [
+                                        'article-detail:'.$record->locale.':'.$record->slug,
+                                        'article-seo:'.$record->locale.':'.$record->slug,
+                                    ],
+                                ],
+                            );
+                            if (count($receipts) !== count($endpoints)) {
+                                throw new RuntimeException('Cache endpoint acknowledgement is missing.');
+                            }
+                            $summary['cache_closeout'] = 'success';
+                        } catch (Throwable) {
+                            $summary['ok'] = false;
+                            $summary['cache_closeout'] = 'failed';
+                            $summary['errors'][] = $this->issue('revalidation', 'committed_cache_closeout_failed', 'Publication committed; cache closeout failed. Do not repeat promotion.');
+                        }
+                    });
+                }
 
                 $summary['promoted_article_id'] = (int) $article->id;
                 $summary['plan'] = $this->preflight(
@@ -194,18 +260,24 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                     $currentPublishedRevisionId,
                     afterPromotion: true
                 );
-            } catch (RuntimeException|\InvalidArgumentException $exception) {
-                $errors[] = $this->issue(
+            } catch (Throwable $exception) {
+                $committed = $summary['publication'] === 'committed';
+                $summary['ok'] = false;
+                if ($committed && $revalidate) {
+                    $summary['cache_closeout'] = 'failed';
+                }
+                $summary['errors'][] = $this->issue(
                     'promotion',
-                    'promotion_failed',
-                    $exception->getMessage(),
+                    $committed ? 'committed_promotion_closeout_failed' : 'promotion_failed',
+                    $committed ? 'Publication committed; native closeout failed. Do not repeat promotion.' : $exception->getMessage(),
                     ['article_id' => $articleId, 'working_revision_id' => $workingRevisionId]
                 );
-                $summary['ok'] = false;
-                $summary['errors'] = $errors;
             }
         }
 
+        if ($execute && $revalidate && $summary['cache_closeout'] === 'pending') {
+            $summary['ok'] = false;
+        }
         $this->emitSummary($summary);
 
         return ($summary['ok'] ?? false) ? self::SUCCESS : self::FAILURE;
@@ -1454,7 +1526,10 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
      */
     private function requiredHoldOptions(): array
     {
-        return ['schema-hold', 'hreflang-hold', 'search-hold', 'no-revalidation', 'no-sitemap', 'no-llms'];
+        $options = ['schema-hold', 'hreflang-hold', 'search-hold', 'no-revalidation', 'no-sitemap', 'no-llms'];
+
+        return (bool) $this->option('revalidate-after-commit')
+            ? array_values(array_diff($options, ['no-revalidation'])) : $options;
     }
 
     /**

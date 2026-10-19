@@ -8,6 +8,12 @@ import { isIqEqTopicOnlyPromotionRegistration, isIqEqTopicOnlyContextFactoryChan
 import { isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 // Resolve actual PHP consumers through App symbols and literal configuration reads.
 // Dynamic container bindings, routes, schema, bootstrap and dependency inputs are shared.
+export function executionDependencyText(path, body) {
+  if(path !== 'backend/app/Console/Commands/CareerPublicResolutionTypeMatrix.php')return body;
+  // These literal owner_paths are returned policy metadata, never opened or
+  // executed. Keep the declaring file, real imports and all unknown expressions.
+  return body.replace(/('owner_paths'\s*=>\s*)\[((?:\s*'app\/[^'\n]+'\s*,?\s*)+)\]/g, '$1[]');
+}
 export function phpConsumers(root = process.cwd()) {
   root=execFileSync('git',['rev-parse','--show-toplevel'],{cwd:root}).toString().trim();
   const files = execFileSync('git', ['ls-files', '-z', 'backend/app', 'backend/config', 'backend/tests'], {cwd:root}).toString().split('\0').filter(p=>p.endsWith('.php'));
@@ -27,12 +33,12 @@ export function phpConsumers(root = process.cwd()) {
     for (const group of body.matchAll(/use\s+((?:App|Tests)\\[\w\\]+)\{([^}]+)\}/g)) for(const member of group[2].split(',')) {
       const file=symbols.get(group[1]+member.trim().split(/\s+as\s+/)[0]);if(file)imports.push(file);
     }
-    for(const match of body.matchAll(/(['"])((?:backend\/)?(?:app|config|resources|content_assets|content_packs|scripts|tests|\.github)\/[^'"\n]+)\1/g)) {
+    for(const match of executionDependencyText(path,body).matchAll(/(['"])((?:backend\/)?(?:app|config|resources|content_assets|content_packs|scripts|tests|\.github)\/[^'"\n]+)\1/g)) {
       const file=sources.has(match[2])?match[2]:'backend/'+match[2]; if(existsSync(`${root}/${file}`)) imports.push(file);
     }
     if (/\$this->(?:get|post|put|delete|patch)(?:Json)?\(/.test(body)) imports.push('backend/routes/api.php');
     const ns = /namespace\s+((?:App|Tests)\\[\w\\]+)\s*;/.exec(body)?.[1];
-    for (const [symbol,file] of byNamespace.get(ns) ?? []) if (new RegExp(`\\b${symbol.split('\\').at(-1)}\\b`).test(body)) imports.push(file);
+    for (const [symbol,file] of byNamespace.get(ns) ?? []) if (new RegExp(`\\b${symbol.split('\\').at(-1)}\\b`).test(executionDependencyText(path,body))) imports.push(file);
     for (const match of body.matchAll(/\bconfig\(\s*['"]([\w-]+)(?:\.[^'"]*)?['"]/g)) {
       const config=`backend/config/${match[1]}.php`; if(sources.has(config)) imports.push(config);
     }

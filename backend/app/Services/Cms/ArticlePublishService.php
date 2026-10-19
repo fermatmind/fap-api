@@ -132,6 +132,7 @@ final class ArticlePublishService
         ?Closure $transactionGuard = null,
         bool $recordReleaseAudit = true,
         bool $invalidateDiscoverabilityCaches = true,
+        ?Closure $onCommitted = null,
     ): Article {
         if ($articleId <= 0) {
             throw new InvalidArgumentException('article_id must be positive.');
@@ -287,6 +288,12 @@ final class ArticlePublishService
 
             return $article->fresh(['publishedRevision', 'workingRevision', 'seoMeta']) ?? $article;
         });
+
+        // Record the commit before any audit/cache/event side effect can fail.
+        // An enclosing controlled cohort still owns the real commit boundary.
+        if ($onCommitted !== null) {
+            DB::afterCommit(fn () => $onCommitted($article));
+        }
 
         if ($recordReleaseAudit) {
             ContentReleaseAudit::log('article', $article, $source, $dispatchFollowUp);

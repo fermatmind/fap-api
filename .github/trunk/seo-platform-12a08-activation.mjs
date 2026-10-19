@@ -22,7 +22,7 @@ export const COMMON_DEPENDENCIES = [
   'backend/app/Support/', 'backend/app/Services/Auth/', 'backend/app/Providers/', 'backend/app/Services/SeoAgentPolicyGateway/', 'backend/app/Services/SeoAgentGovernance/',
   'backend/app/Services/SeoAgentEvidence/', 'backend/app/Services/SeoCouncil/', 'backend/resources/seo-agent/',
   'backend/scripts/deploy/',
-  '.github/trunk/seo-platform-12a08-activation.mjs', '.github/trunk/seo-platform-12a08-release.mjs',
+  '.github/trunk/seo-platform-12a08-source.mjs', '.github/trunk/seo-platform-12a08-activation.mjs', '.github/trunk/seo-platform-12a08-release.mjs',
   '.github/trunk/nightly-relevance.mjs', '.github/trunk/impact-consumers.mjs', '.github/trunk/nightly-repair.mjs',
   'deploy/scheduler.php', '.github/trunk/seo-platform-12a08-transition.mjs', '.github/trunk/seo-platform-12a08-evidence-download.mjs', '.github/workflows/ci.yml', '.github/workflows/deploy.yml', '.github/workflows/nightly.yml', 'deploy.php',
 ];

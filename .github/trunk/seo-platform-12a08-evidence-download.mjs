@@ -45,9 +45,9 @@ if (process.argv[2] === '--nightly-revalidation-paths') {
   process.exit(0);
 }
 const ci = api(`actions/runs/${process.env.CI_RUN_ID}`);
-const jobs = api(`actions/runs/${process.env.GITHUB_RUN_ID}/jobs?per_page=100`).jobs;
+const jobs = api(`actions/runs/${process.env.SOURCE_DEPLOY_RUN_ID}/jobs?per_page=100`).jobs;
 const artifactDigests = {};
-for (const [kind,run,name] of [['checks',ci.id,`a08-scoped-checks-${sha}`],['staging',process.env.GITHUB_RUN_ID,`trunk-staging-${sha}`],['production',process.env.GITHUB_RUN_ID,`trunk-production-${sha}`]]) {
+for (const [kind,run,name] of [['checks',ci.id,`a08-scoped-checks-${sha}`],['staging',process.env.SOURCE_DEPLOY_RUN_ID,`trunk-staging-${sha}`],['production',process.env.SOURCE_DEPLOY_RUN_ID,`trunk-production-${sha}`]]) {
   const artifacts = api(`actions/runs/${run}/artifacts?per_page=100`).artifacts.filter(a => a.name === name && !a.expired);
   if (kind === 'checks' && artifacts.length === 0) { artifactDigests.checks = null; continue; }
   if (artifacts.length !== 1 || !/^sha256:[a-f0-9]{64}$/.test(artifacts[0].digest)) throw new Error('ARTIFACT_BINDING_HOLD');

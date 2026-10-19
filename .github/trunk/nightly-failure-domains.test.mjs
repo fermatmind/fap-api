@@ -57,11 +57,12 @@ test('final receipt reports every domain and fails closed without rolling back p
 const dailySchedule = '17 18 * * *';
 const weeklySchedule = '37 18 * * 0';
 const weeklyResults = ['AUTHORITY_RESULT', 'FULL_PHPUNIT_RESULT', 'DEPENDENCY_RESULT', 'WORKFLOW_RESULT', 'SECURITY_RESULT'];
-const dailyResults = ['SCHEDULER_RESULT', 'GSC_RESULT'];
+const dailyResults = ['A08_RESULT', 'SCHEDULER_RESULT', 'GSC_RESULT'];
 
 test('daily operations and weekly complete checks have independent schedules and concurrency', () => {
   assert.deepEqual([...workflow.matchAll(/- cron: "([^"]+)"/g)].map((match) => match[1]), [dailySchedule, weeklySchedule]);
-  assert.match(workflow, /group: nightly-\$\{\{ github\.repository \}\}-\$\{\{ github\.event_name \}\}-\$\{\{ github\.event\.schedule \}\}/);
+  assert.match(workflow, /group: nightly-.*github\.event\.workflow_run\.id/);
+  assert.match(workflow, /cancel-in-progress: \$\{\{ github\.event_name == 'push' \|\| github\.event\.schedule == '37 18 \* \* 0' \}\}/);
   for (const [job, next] of [
     ['dependency-audit', 'workflow-contracts'],
     ['workflow-contracts', 'authority-contract'],
@@ -75,7 +76,7 @@ test('daily operations and weekly complete checks have independent schedules and
   for (const [job, next] of [['scheduler-evidence-monitor', 'dependency-audit'], ['gsc-read-model-sync', 'nightly-summary']]) {
     assert.ok(jobSection(job, next).includes(`if: github.event_name == 'schedule' && github.event.schedule == '${dailySchedule}'`));
   }
-  assert.ok(jobSection('nightly-summary').includes(`if: always() && (github.event_name == 'push' || (github.event_name == 'schedule' && (github.event.schedule == '${dailySchedule}' || github.event.schedule == '${weeklySchedule}')))`));
+  assert.ok(jobSection('nightly-summary').includes(`if: always() && (github.event_name == 'workflow_run' || github.event_name == 'push' || (github.event_name == 'schedule' && (github.event.schedule == '${dailySchedule}' || github.event.schedule == '${weeklySchedule}')))`));
   assert.doesNotMatch(workflow, /workflow_dispatch:/);
   assert.equal((workflow.match(/continue-on-error: true/g) ?? []).length, 1);
   assert.match(jobSection('full-phpunit', 'codeql'), /id: full-tests[\s\S]*continue-on-error: true[\s\S]*steps\.full-tests\.outcome != 'success'/);
@@ -218,3 +219,14 @@ test('only complete-evidence implementation and producer repair changes trigger 
 });
 
 test('Nightly preserves the main disposable database and binds topology consumers to their separate database',()=>{const section=jobSection('full-phpunit','codeql');assert.match(section,/MYSQL_DATABASE: fap_ci/);assert.match(section,/SEO_TEST_MYSQL_DATABASE: seo_operations_nightly_test/);assert.match(section,/CREATE DATABASE seo_operations_nightly_test/);assert.match(section,/fetch-depth: 0/);});
+
+
+test('A08-only summary cannot confer PHP success and A08 failure stays visible',()=>{
+  const overrides=Object.fromEntries([...weeklyResults,...dailyResults].map(k=>[k,'skipped']));
+  Object.assign(overrides,{EVENT_NAME:'workflow_run',REPAIR_SCOPE:'{}',A08_RESULT:'success'});
+  const receipt=runSummary('',overrides);
+  assert.equal(receipt.status,'pass');
+  assert.equal(receipt.check_scope,'independent_a08');
+  assert.deepEqual(receipt.domains.full_phpunit,{result:'skipped',required:false});
+  assert.equal(runSummary('',{...overrides,A08_RESULT:'failure'}).status,'fail');
+});
