@@ -5141,7 +5141,15 @@ if (is_link($lockPath) || ! is_file($lockPath)) {
     exit(2);
 }
 
-if (trim((string) file_get_contents($lockPath)) !== 'ci') {
+$lockContents = file_get_contents($lockPath);
+if (! is_string($lockContents)) {
+    fwrite(STDERR, "deploy lock could not be read\n");
+    exit(3);
+}
+// A full filesystem can create the file but fail to write even "ci". No
+// metadata was installed in that case; retain the same serialized/age boundary.
+$emptyFailedWrite = $lockContents === '' && ! file_exists($metaPath) && ! is_link($metaPath);
+if (trim($lockContents) !== 'ci' && ! $emptyFailedWrite) {
     fwrite(STDERR, "deploy lock is not CI-owned\n");
     exit(3);
 }
@@ -5217,6 +5225,16 @@ function deployReleaseRetentionCandidates(array $releases, int $keep, array $pro
 }
 
 task('fap:prune-retained-releases-before-materialization', function () {
+    // The workflow-level deployment lock must precede filesystem housekeeping:
+    // ENOSPC can prevent creation of Deployer's own lock file.
+    if (getenv('TRUNK_DEPLOY_SERIALIZED') !== 'true') {
+        return;
+    }
+    foreach (['DEPLOY_LOCK_RUN_ID', 'DEPLOY_LOCK_RUN_ATTEMPT'] as $ownerField) {
+        if (preg_match('/\A[1-9][0-9]*\z/', (string) getenv($ownerField)) !== 1) {
+            throw new \RuntimeException('Serialized release retention requires numeric run ownership.');
+        }
+    }
     $releases = get('releases_list');
     $keep = (int) get('keep_releases');
     if (count($releases) <= $keep || ! test('[ -L {{current_path}} ]')) {
@@ -5528,8 +5546,8 @@ before('deploy:prepare', 'ensure:phpredis');
 before('deploy:shared', 'fap:seed_shared_content_packages');
 
 before('deploy:lock', 'fap:reclaim-stale-serialized-ci-lock');
+after('fap:reclaim-stale-serialized-ci-lock', 'fap:prune-retained-releases-before-materialization');
 after('deploy:lock', 'fap:write-deploy-lock-metadata');
-before('deploy:release', 'fap:prune-retained-releases-before-materialization');
 after('deploy:unlock', 'fap:remove-deploy-lock-metadata');
 
 after('deploy:update_code', 'release:prune-non-runtime-source');
