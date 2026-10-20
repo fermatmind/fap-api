@@ -3044,6 +3044,29 @@ BASH);
     });
 });
 
+/** Only bounded numeric diagnostics are exposed; the receipt and error handling stay unchanged. */
+function emitUrlTruthPerformance(string $output): void
+{
+    foreach (preg_split('/\R/', $output) ?: [] as $line) {
+        if (str_starts_with($line, 'url_truth_performance=') || str_starts_with($line, 'url_truth_source_performance=')) {
+            writeln($line);
+        }
+    }
+}
+
+function runUrlTruthWithPerformance(string $command): void
+{
+    try {
+        $output = run($command, timeout: 1800);
+    } catch (\Deployer\Exception\RunException $exception) {
+        emitUrlTruthPerformance($exception->getOutput()."\n".$exception->getErrorOutput());
+        // Preserve the native failure identity/code without forwarding its full captured payload.
+        throw new \Deployer\Exception\RunException($exception->getHost(), $exception->getCommand(),
+            $exception->getExitCode(), '', '');
+    }
+    emitUrlTruthPerformance($output);
+}
+
 task('seo:url-truth-controlled-reconcile', function () {
     if (! deployOperation('url_truth')) {
         writeln('Skip unchanged seo:url-truth-controlled-reconcile consumer.');
@@ -3055,8 +3078,9 @@ task('seo:url-truth-controlled-reconcile', function () {
     }
 
     within('{{release_path}}/backend', function (): void {
-        run(<<<'BASH'
+        runUrlTruthWithPerformance(<<<'BASH'
 set -euo pipefail
+{
 plan="$({{bin/php}} artisan seo-intel:url-truth-controlled-reconcile --no-http --max-records=5000 --batch-size=250 --json --no-interaction --no-ansi)"
 printf '%s\n' "$plan"
 plan_hash="$(printf '%s' "$plan" | {{bin/php}} -r '$p=json_decode(stream_get_contents(STDIN),true,flags:JSON_THROW_ON_ERROR); $h=$p["plan"]["plan_hash"]??""; if (($p["status"]??null)!=="success" || !preg_match("/^[a-f0-9]{64}$/D",$h)) exit(41); echo $h;')"
@@ -3110,7 +3134,8 @@ $ok = ($payload["schema_version"] ?? null) === "seo-platform-controlled-url-trut
                 && $detectorMaterialized > 0));
 exit($ok ? 0 : 1);
 ' || exit 43
-BASH, timeout: 1800);
+} 2>&1
+BASH);
     });
 });
 
