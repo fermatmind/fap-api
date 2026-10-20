@@ -799,7 +799,7 @@ class ArticleResource extends Resource
     /**
      * @return array{cover_image_url: ?string, cover_image_alt: ?string, cover_image_width: ?int, cover_image_height: ?int, cover_image_variants: array<string, array<string, mixed>>}
      */
-    private static function articleCoverPayload(MediaAsset $asset): array
+    public static function articleCoverPayload(MediaAsset $asset): array
     {
         $asset->loadMissing('variants');
         if (! self::isArticleCoverReady($asset)) {

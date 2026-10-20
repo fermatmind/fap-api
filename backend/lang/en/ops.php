@@ -3125,6 +3125,17 @@ return [
             ],
         ],
         'articles' => [
+            'editorial_import' => [
+                'action' => 'Import editorial draft package',
+                'description' => 'Import into this private draft using the native editorial importer. Review and controlled publication remain separate.',
+                'baseline' => 'Current draft baseline',
+                'baseline_helper' => 'Use this object as the transport target. Any revision, metadata, or previous-import change requires a fresh baseline.',
+                'input' => 'Reviewed package transport JSON',
+                'helper' => 'Use article.editorial-draft.transport.v1 with target, media_asset_id, package_base64 and the SHA-256 of the exact package bytes. Select an existing published and verified Media Library cover.',
+                'rejected' => 'Draft package rejected: :code',
+                'success' => 'Editorial package imported into private draft',
+                'result' => 'Working revision :revision · :status. The article remains private and unindexed.',
+            ],
             'label' => 'Article',
             'plural' => 'Articles',
             'list_subheading' => 'Content workspace for drafting, publishing, and SEO-ready editorial updates.',

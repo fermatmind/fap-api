@@ -7,11 +7,16 @@ namespace App\Filament\Ops\Resources\ArticleResource\Pages;
 use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoMetaWorkspace;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
+use App\Filament\Ops\Support\ArticleEditorialPackageWorkspace;
+use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Textarea;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Validation\ValidationException;
 
 class EditArticle extends EditRecord
 {
@@ -97,6 +102,42 @@ class EditArticle extends EditRecord
                 ->icon('heroicon-o-eye')
                 ->color('info')
                 ->visible(fn (): bool => filled(ArticleWorkspace::previewUrl($this->getRecord(), $this->getRecord()->working_revision_id))),
+            Action::make('importEditorialPackage')
+                ->label(__('ops.resources.articles.editorial_import.action'))
+                ->icon('heroicon-o-arrow-down-tray')
+                ->color('gray')
+                ->visible(fn (): bool => ContentAccess::canWrite() && ArticleEditorialPackageWorkspace::isPrivateDraft($this->getRecord()) && $this->getRecord()->working_revision_id !== null)
+                ->modalDescription(__('ops.resources.articles.editorial_import.description'))
+                ->modalSubmitActionLabel(__('ops.resources.articles.editorial_import.action'))
+                ->form([
+                    Textarea::make('target_snapshot')
+                        ->label(__('ops.resources.articles.editorial_import.baseline'))
+                        ->default(fn (): string => json_encode(app(ArticleEditorialPackageWorkspace::class)->baseline($this->getRecord()), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR))
+                        ->helperText(__('ops.resources.articles.editorial_import.baseline_helper'))
+                        ->readOnly()
+                        ->dehydrated(false)
+                        ->rows(8),
+                    Textarea::make('package_json')
+                        ->label(__('ops.resources.articles.editorial_import.input'))
+                        ->helperText(__('ops.resources.articles.editorial_import.helper'))
+                        ->required()
+                        ->maxLength(ArticleEditorialPackageWorkspace::MAX_INPUT_BYTES)
+                        ->rows(12),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        $result = app(ArticleEditorialPackageWorkspace::class)->import($this->getRecord(), (string) $data['package_json']);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.package_json' => $exception->errors()['package_json'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    Notification::make()
+                        ->title(__('ops.resources.articles.editorial_import.success'))
+                        ->body(__('ops.resources.articles.editorial_import.result', ['revision' => $result['working_revision_id'], 'status' => $result['working_revision_status']]))
+                        ->success()->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
             Action::make('openPublicUrl')
                 ->label(__('ops.resources.articles.actions.open_public_url'))
                 ->url(fn (): ?string => ArticleWorkspace::publicUrl(

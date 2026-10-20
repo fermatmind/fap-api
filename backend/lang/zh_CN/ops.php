@@ -3125,6 +3125,17 @@ return [
             ],
         ],
         'articles' => [
+            'editorial_import' => [
+                'action' => '导入文章草稿包',
+                'description' => '使用原生文章导入器更新这篇私有草稿。审核和受控发布仍分别完成。',
+                'baseline' => '当前草稿基线',
+                'baseline_helper' => '将此对象作为导入传输包的 target。修订、元数据或既有导入记录变化后，应重新获取基线。',
+                'input' => '已审定内容包的传输 JSON',
+                'helper' => '使用 article.editorial-draft.transport.v1，包含 target、media_asset_id、package_base64 和原始内容包字节的 SHA-256。封面应已在媒体库发布并完成验证。',
+                'rejected' => '草稿包导入已拒绝：:code',
+                'success' => '文章内容包已导入私有草稿',
+                'result' => '工作修订 :revision · :status。文章保持私有且不索引。',
+            ],
             'label' => '文章',
             'plural' => '文章',
             'list_subheading' => '用于撰写、发布与维护 SEO 就绪文章的内容工作区。',
