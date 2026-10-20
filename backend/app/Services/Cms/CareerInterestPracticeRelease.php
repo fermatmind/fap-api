@@ -12,6 +12,7 @@ use App\Models\EditorialReview;
 use App\Services\Audit\AuditLogger;
 use App\Services\ContentPromotion\PublicContent53FrontendRevalidator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
@@ -65,8 +66,13 @@ final class CareerInterestPracticeRelease
                 || ($review && $review->workflow_state !== 'approved')) {
                 throw new RuntimeException('Career practice published revision or editorial hold drift.');
             }
-            if ($article->content_md === $bodies['article.md'] && $guide->body_md === $bodies['guide.md']
-                && $revision->authority_package_sha256 === self::SHA256) {
+            $currentPackage = $revision->authority_source_package === self::ROOT
+                && $revision->authority_package_sha256 === self::SHA256
+                && $revision->authority_source_hash === $package['files']['article.md']
+                && $article->content_md === $bodies['article.md'] && $guide->body_md === $bodies['guide.md'];
+            $seo = $article->seoMeta;
+            if ($currentPackage && $revision->seo_title === $seo?->seo_title
+                && $revision->seo_description === $seo?->seo_description) {
                 return ['status' => 'unchanged', 'changed' => 0];
             }
             $baseline = $package['baselines'][app()->environment('staging') ? 'staging' : 'prod'];
@@ -79,7 +85,7 @@ final class CareerInterestPracticeRelease
                 && $revision->authority_source_hash === $package['files']['article.md']
                 && hash_equals($package['files']['article.md'], hash('sha256', $article->content_md))
                 && hash_equals('999895252d709247d6b0baa6f8733a41eb9b04dc5176d895b8c93f94c6bc92c2', hash('sha256', $guide->body_md));
-            if (! $originalBaseline && ! $previousPackage) {
+            if (! $originalBaseline && ! $previousPackage && ! $currentPackage) {
                 throw new RuntimeException('Career practice baseline drift.');
             }
             $owner = (int) config('review_governance.solo_owner_admin_user_id');
@@ -96,17 +102,17 @@ final class CareerInterestPracticeRelease
             if (! $article->isSourceArticle()) {
                 $article->forceFill(['translation_status' => Article::TRANSLATION_STATUS_SOURCE])->saveQuietly();
             }
-            $beforeSeo = $article->seoMeta?->getAttributes();
+            $beforeSeo = Arr::except($article->seoMeta?->getAttributes() ?? [], ['updated_at']);
             $previous = (int) $revision->id;
             $revision = app(ArticleTranslationRevisionWorkspace::class)->saveWorkingRevision($article, [
                 'title' => $article->title, 'excerpt' => $article->excerpt, 'content_md' => $bodies['article.md'],
                 'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
             ], $owner);
-            // Body-only: do not propagate historical revision SEO text into current metadata.
+            // Public SEO prefers revision fields. Snapshot current metadata, not historical revision text.
             $projection = clone $article;
             $projection->forceFill(['content_md' => $bodies['article.md'], 'content_html' => null]);
             $sourceHash = $projection->computeSourceVersionHash();
-            $revision->forceFill(['seo_title' => null, 'seo_description' => null,
+            $revision->forceFill(['seo_title' => $seo?->seo_title, 'seo_description' => $seo?->seo_description,
                 'source_version_hash' => $sourceHash, 'translated_from_version_hash' => $sourceHash,
                 'authority_source_package' => self::ROOT, 'authority_package_sha256' => self::SHA256,
                 'authority_source_hash' => $package['files']['article.md'],
@@ -124,11 +130,14 @@ final class CareerInterestPracticeRelease
                     ['surface_id' => 'editorial_review', 'record' => $review]], $owner, self::SHA256);
             $reviews->assertApprovedEvidence([['surface_id' => 'article', 'record' => $article],
                 ['surface_id' => 'article_translation_revision', 'record' => $article->publishedRevision]]);
-            $guide->body_md = $bodies['guide.md'];
-            $guide->save();
-            CareerGuideWorkspace::createRevision($guide, 'Owner-authorized body update '.self::SHA256);
+            $guideChanged = $guide->body_md !== $bodies['guide.md'];
+            if ($guideChanged) {
+                $guide->body_md = $bodies['guide.md'];
+                $guide->save();
+                CareerGuideWorkspace::createRevision($guide, 'Owner-authorized body update '.self::SHA256);
+            }
             if ($article->content_md !== $bodies['article.md'] || $guide->fresh()->body_md !== $bodies['guide.md']
-                || $article->seoMeta?->getAttributes() !== $beforeSeo) {
+                || Arr::except($article->seoMeta?->getAttributes() ?? [], ['updated_at']) !== $beforeSeo) {
                 throw new RuntimeException('Career practice body or protected SEO readback failed.');
             }
             app(AuditLogger::class)->log(Request::create('/ops/career-interest-practice', 'POST'),
@@ -136,7 +145,7 @@ final class CareerInterestPracticeRelease
                     'package_sha256' => self::SHA256, 'previous_revision_id' => $previous,
                     'published_revision_id' => $revision->id, 'search_submission' => false], reason: 'Owner-authorized body-only practice links and example');
 
-            return ['status' => 'published', 'changed' => 2];
+            return ['status' => 'published', 'changed' => $guideChanged ? 2 : 1];
         });
         if (! $dryRun && $result['status'] !== 'absent') {
             app(PublicContent53FrontendRevalidator::class)->revalidate([

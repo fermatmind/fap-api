@@ -33,14 +33,19 @@ final class CareerInterestPracticeReleaseTest extends TestCase
     public function test_both_bodies_publish_with_native_revisions_and_preserve_metadata_and_history(): void
     {
         $this->seedBaseline();
-        $beforeSeo = DB::table('article_seo_meta')->get()->toJson();
+        $beforeSeo = DB::table('article_seo_meta')->get()->map(fn ($row) => \Illuminate\Support\Arr::except((array) $row, ['updated_at']))->toJson();
+        $beforePublicSeo = app(\App\Services\Cms\ArticleSeoService::class)->buildSeoPayload(\App\Models\Article::withoutGlobalScopes()->findOrFail(40));
         $searchFingerprint = app(\App\Services\Cms\ArticleMaterialDecisionService::class)->currentSearchFingerprint(\App\Models\Article::withoutGlobalScopes()->findOrFail(40));
         $beforeGuide = (array) DB::table('career_guides')->find(12);
         $old = (array) DB::table('article_translation_revisions')->find(774);
         $service = app(CareerInterestPracticeRelease::class);
         $this->assertSame(['status' => 'ready', 'changed' => 0], $service->publish(true));
         $this->assertSame(['status' => 'published', 'changed' => 2], $service->publish());
-        $this->assertSame($beforeSeo, DB::table('article_seo_meta')->get()->toJson());
+        $this->assertSame($beforeSeo, DB::table('article_seo_meta')->get()->map(fn ($row) => \Illuminate\Support\Arr::except((array) $row, ['updated_at']))->toJson());
+        $afterPublicSeo = $this->getJson('/api/v0.5/articles/riasec-holland-career-interest-test-explained/seo?locale=zh-CN')->assertOk()->json('meta');
+        foreach (['title', 'description', 'canonical', 'robots', 'alternates'] as $field) {
+            $this->assertSame($beforePublicSeo[$field], $afterPublicSeo[$field], $field);
+        }
         $this->assertSame($searchFingerprint, app(\App\Services\Cms\ArticleMaterialDecisionService::class)->currentSearchFingerprint(\App\Models\Article::withoutGlobalScopes()->findOrFail(40)));
         $this->assertSame(1, DB::table('career_guide_revisions')->count());
         $this->assertSame(2, DB::table('article_translation_revisions')->count());
@@ -96,6 +101,23 @@ final class CareerInterestPracticeReleaseTest extends TestCase
         DB::table('article_translation_revisions')->where('revision_status', 'published')->update(['authority_package_sha256' => '4359c2efc6ccc89a0a7ccfcc2e87dccd3a074f9e1267a65b96c733764b9694c9']);
         DB::table('career_guides')->where('id', 12)->update(['body_md' => 'Concurrent owner edit']);
         $this->assertRejected();
+    }
+
+    public function test_migration_repairs_missing_revision_seo_without_rewriting_guide_or_metadata(): void
+    {
+        $this->seedBaseline();
+        app(CareerInterestPracticeRelease::class)->publish();
+        DB::table('article_translation_revisions')->where('revision_status', 'published')
+            ->update(['seo_title' => null, 'seo_description' => null]);
+        $beforeGuide = DB::table('career_guide_revisions')->get()->toJson();
+        $migration = require base_path('database/migrations/2026_10_20_120000_preserve_career_practice_public_seo.php');
+        $migration->up();
+        $this->getJson('/api/v0.5/articles/riasec-holland-career-interest-test-explained/seo?locale=zh-CN')->assertOk()
+            ->assertJsonPath('meta.title', 'RIASEC 是什么？霍兰德职业兴趣测试解释');
+        $this->assertSame($beforeGuide, DB::table('career_guide_revisions')->get()->toJson());
+        $this->assertSame(3, DB::table('article_translation_revisions')->count());
+        $migration->up();
+        $this->assertSame(3, DB::table('article_translation_revisions')->count());
     }
 
     private function seedPreviousPackage(): void
