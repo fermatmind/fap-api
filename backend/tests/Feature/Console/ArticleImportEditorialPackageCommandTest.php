@@ -12,6 +12,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleBodyHeadingGuard;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use RuntimeException;
 use Tests\TestCase;
 
 final class ArticleImportEditorialPackageCommandTest extends TestCase
@@ -493,6 +494,182 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame('Existing title', (string) $article->title);
         $this->assertSame('Existing body', (string) $article->content_md);
         $this->assertSame((int) $revision->id, (int) $article->published_revision_id);
+    }
+
+    public function test_reimport_preserves_same_cover_variants_dimensions_and_explicit_og_but_refreshes_editorial_fields(): void
+    {
+        $package = $this->editorialPackage();
+        [$article, $seo, $variants] = $this->draftWithCover($package);
+        $otherSeoId = DB::table('article_seo_meta')->insertGetId([
+            'org_id' => 41, 'article_id' => (int) $article->id, 'locale' => 'en',
+            'og_image_url' => 'https://assets.fermatmind.com/other-tenant.jpg',
+        ]);
+        $otherSeo = ArticleSeoMeta::query()->withoutGlobalScopes()->findOrFail($otherSeoId);
+        $otherBefore = $otherSeo->getRawOriginal();
+        $package['cover_image_alt'] = 'Updated package alt';
+        $package['body_markdown'] .= "\n\nA newly reviewed observation.";
+        $path = $this->writePackage($package);
+
+        $this->artisan('articles:import-editorial-package', ['--file' => $path])
+            ->expectsOutputToContain('action=will_update')->assertExitCode(0);
+
+        $article->refresh();
+        foreach ($variants as $key => $variant) {
+            $this->assertSame($variant, $article->cover_image_variants[$key]);
+        }
+        $this->assertSame(1600, $article->cover_image_width);
+        $this->assertSame(900, $article->cover_image_height);
+        $this->assertSame('https://assets.fermatmind.com/cover-og.jpg', $seo->refresh()->og_image_url);
+        $this->assertSame($otherBefore, $otherSeo->refresh()->getRawOriginal());
+        $this->assertSame('Updated package alt', $article->cover_image_alt);
+        $this->assertSame(app(ArticleBodyHeadingGuard::class)->downgradeMarkdownH1ToH2($package['body_markdown']), $article->content_md);
+        $metadata = $article->cover_image_variants['editorial_package_v1'];
+        foreach (['references', 'answer_surface_v1', 'cta_slots', 'cover_image_prompt', 'cover_image_style_tag'] as $key) {
+            $this->assertSame($package[$key], $metadata[$key]);
+        }
+        $this->assertArrayNotHasKey('body_visual_image_url', $metadata);
+        $this->assertArrayNotHasKey('unknown_old_metadata', $article->cover_image_variants);
+        $this->assertSame('draft', $article->status);
+        $this->assertFalse($article->is_public);
+        $this->assertFalse($article->is_indexable);
+        $this->assertNull($article->published_revision_id);
+        $this->assertSame('noindex,nofollow', $seo->robots);
+        $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale=zh-CN')->assertNotFound();
+
+        $revisionId = $article->working_revision_id;
+        $this->artisan('articles:import-editorial-package', ['--file' => $path])->assertExitCode(0);
+        $this->assertSame($revisionId, $article->refresh()->working_revision_id);
+        $this->assertSame($variants['hero'], $article->cover_image_variants['hero']);
+        $this->assertSame(1, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_changing_cover_does_not_inherit_old_variants_dimensions_or_og(): void
+    {
+        $package = $this->editorialPackage();
+        [$article, $seo] = $this->draftWithCover($package);
+        $package['cover_image'] = 'https://assets.fermatmind.com/replacement.jpg';
+        $path = $this->writePackage($package);
+
+        $this->artisan('articles:import-editorial-package', ['--file' => $path])->assertExitCode(0);
+
+        $article->refresh();
+        $this->assertSame($package['cover_image'], $article->cover_image_url);
+        $this->assertSame($package['cover_image'], $article->cover_image_variants['hero']);
+        foreach (['card', 'og', 'thumbnail', 'preload'] as $key) {
+            $this->assertArrayNotHasKey($key, $article->cover_image_variants);
+        }
+        $this->assertNull($article->cover_image_width);
+        $this->assertNull($article->cover_image_height);
+        $this->assertSame($package['cover_image'], $seo->refresh()->og_image_url);
+    }
+
+    public function test_legacy_string_hero_reimports_without_a_media_library_bundle(): void
+    {
+        $package = $this->editorialPackage();
+        $path = $this->writePackage($package);
+        $this->artisan('articles:import-editorial-package', ['--file' => $path])->assertExitCode(0);
+        $this->artisan('articles:import-editorial-package', ['--file' => $path])->assertExitCode(0);
+        $article = Article::query()->withoutGlobalScopes()->firstOrFail();
+        $this->assertSame($package['cover_image'], $article->cover_image_variants['hero']);
+        $this->assertNull($article->cover_image_width);
+        $this->assertNull($article->cover_image_height);
+        $this->assertSame(1, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_invalid_existing_cover_variants_fail_without_any_partial_write(): void
+    {
+        foreach ([
+            ['url' => 'https://127.0.0.1/private.jpg', 'width' => 800, 'height' => 450],
+            ['url' => 'https://assets.fermatmind.com/card.jpg', 'width' => 0, 'height' => 450],
+        ] as $index => $invalid) {
+            $package = $this->editorialPackage(['slug' => 'invalid-cover-'.$index]);
+            [$article, $seo, $variants] = $this->draftWithCover($package);
+            $variants['card'] = $invalid;
+            $article->forceFill(['cover_image_variants' => $variants])->save();
+            $before = $article->refresh()->getRawOriginal();
+            $seoBefore = $seo->getRawOriginal();
+            $importCount = ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count();
+            $categoryCount = ArticleCategory::query()->withoutGlobalScopes()->count();
+            $package['category'] = 'Must roll back category '.$index;
+            $path = $this->writePackage($package);
+
+            $this->artisan('articles:import-editorial-package', ['--file' => $path])
+                ->expectsOutputToContain('Existing draft cover variant')->assertExitCode(1);
+
+            $this->assertSame($before, $article->refresh()->getRawOriginal());
+            $this->assertSame($seoBefore, $seo->refresh()->getRawOriginal());
+            $this->assertSame($importCount, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+            $this->assertSame($categoryCount, ArticleCategory::query()->withoutGlobalScopes()->count());
+            $this->assertSame(0, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        }
+    }
+
+    public function test_seo_save_failure_rolls_back_article_media_revision_and_import_record(): void
+    {
+        $package = $this->editorialPackage();
+        [$article, $seo] = $this->draftWithCover($package);
+        $before = $article->refresh()->getRawOriginal();
+        $seoBefore = $seo->getRawOriginal();
+        $dispatcher = ArticleSeoMeta::getEventDispatcher();
+        ArticleSeoMeta::setEventDispatcher(clone $dispatcher);
+        ArticleSeoMeta::saving(function (ArticleSeoMeta $model) use ($article): void {
+            if ((int) $model->article_id === (int) $article->id) {
+                throw new RuntimeException('Injected SEO save failure');
+            }
+        });
+        try {
+            $path = $this->writePackage($package);
+            $this->artisan('articles:import-editorial-package', ['--file' => $path])
+                ->expectsOutputToContain('Injected SEO save failure')->assertExitCode(1);
+        } finally {
+            ArticleSeoMeta::setEventDispatcher($dispatcher);
+        }
+        $this->assertSame($before, $article->refresh()->getRawOriginal());
+        $this->assertSame($seoBefore, $seo->refresh()->getRawOriginal());
+        $this->assertSame(0, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, DB::table('article_tag_map')->count());
+    }
+
+    /**
+     * @return array{Article, ArticleSeoMeta, array<string, array<string, mixed>>}
+     */
+    private function draftWithCover(array $package): array
+    {
+        $category = ArticleCategory::query()->withoutGlobalScopes()->firstOrCreate(
+            ['org_id' => 0, 'slug' => 'cover-fixture'],
+            ['name' => 'Cover fixture', 'is_active' => true],
+        );
+        $variants = [];
+        foreach (['hero' => [1600, 900], 'card' => [800, 450], 'og' => [1200, 630], 'thumbnail' => [400, 225], 'preload' => [64, 36]] as $key => [$width, $height]) {
+            $variants[$key] = [
+                'url' => $key === 'hero' ? $package['cover_image'] : 'https://assets.fermatmind.com/cover-'.$key.'.jpg',
+                'width' => $width, 'height' => $height, 'mime_type' => 'image/jpeg',
+            ];
+        }
+        $article = Article::query()->withoutGlobalScopes()->create([
+            'org_id' => 0, 'category_id' => (int) $category->id,
+            'slug' => $package['slug'], 'locale' => $package['locale'],
+            'title' => 'Old draft', 'excerpt' => 'Old excerpt', 'content_md' => 'Old draft body',
+            'cover_image_url' => $package['cover_image'], 'cover_image_alt' => 'Old alt',
+            'cover_image_width' => 1600, 'cover_image_height' => 900,
+            'cover_image_variants' => $variants + [
+                'unknown_old_metadata' => 'Do not carry',
+                'editorial_package_v1' => [
+                    'references' => [['url' => 'https://old.example.com']],
+                    'answer_surface_v1' => ['quick_answer' => 'Old answer'],
+                    'cta_slots' => [['label' => 'Old CTA']],
+                    'body_visual_image_url' => 'https://assets.fermatmind.com/old-body.jpg',
+                ],
+            ],
+            'status' => 'draft', 'is_public' => false, 'is_indexable' => false,
+        ]);
+        $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->create([
+            'org_id' => 0, 'article_id' => (int) $article->id, 'locale' => $package['locale'],
+            'og_image_url' => 'https://assets.fermatmind.com/cover-og.jpg',
+        ]);
+
+        return [$article->refresh(), $seo->refresh(), $variants];
     }
 
     public function test_editorial_opening_prose_does_not_require_template_labels(): void

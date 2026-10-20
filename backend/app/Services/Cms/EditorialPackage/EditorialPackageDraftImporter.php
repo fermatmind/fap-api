@@ -14,6 +14,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Services\Cms\EditorialPackage\Config\EvergreenAnchors;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -239,7 +240,15 @@ final class EditorialPackageDraftImporter
         return DB::transaction(function () use ($plan, $package): array {
             $category = $this->resolveCategory((string) $package['category']);
             $tags = $this->resolveTags($package['tags']);
-            $article = $this->existingArticle($package);
+            $article = $this->existingArticle($package, true);
+            $seo = $article instanceof Article
+                ? ArticleSeoMeta::query()->withoutGlobalScopes()
+                    ->where('org_id', 0)
+                    ->where('article_id', (int) $article->id)
+                    ->where('locale', (string) $package['locale'])
+                    ->lockForUpdate()->first()
+                : null;
+            $cover = $this->draftCoverMetadata($article, $seo, $package, $plan);
             $primaryTestSlug = $this->primaryTestSlug($package);
             $translationGroupId = $this->nullableString($package['translation_group_id']);
 
@@ -263,9 +272,9 @@ final class EditorialPackageDraftImporter
                     'content_html' => null,
                     'cover_image_url' => (string) $package['cover_image'],
                     'cover_image_alt' => (string) $package['cover_image_alt'],
-                    'cover_image_width' => null,
-                    'cover_image_height' => null,
-                    'cover_image_variants' => $this->editorialMetadata($package, $plan),
+                    'cover_image_width' => $cover['width'],
+                    'cover_image_height' => $cover['height'],
+                    'cover_image_variants' => $cover['variants'],
                     'related_test_slug' => $primaryTestSlug,
                     'status' => 'draft',
                     'is_public' => false,
@@ -288,7 +297,9 @@ final class EditorialPackageDraftImporter
                     'content_html' => null,
                     'cover_image_url' => (string) $package['cover_image'],
                     'cover_image_alt' => (string) $package['cover_image_alt'],
-                    'cover_image_variants' => $this->editorialMetadata($package, $plan),
+                    'cover_image_width' => $cover['width'],
+                    'cover_image_height' => $cover['height'],
+                    'cover_image_variants' => $cover['variants'],
                     'related_test_slug' => $primaryTestSlug,
                     'status' => 'draft',
                     'is_public' => false,
@@ -324,7 +335,7 @@ final class EditorialPackageDraftImporter
                     'canonical_url' => $package['canonical'] ?: null,
                     'og_title' => (string) $package['seo_title'],
                     'og_description' => (string) $package['meta_description'],
-                    'og_image_url' => (string) $package['cover_image'],
+                    'og_image_url' => $cover['og_image_url'],
                     'robots' => 'noindex,nofollow',
                     'schema_json' => [
                         'editorial_package_v1' => $this->editorialMetadata($package, $plan)['editorial_package_v1'],
@@ -758,13 +769,14 @@ final class EditorialPackageDraftImporter
         return $this->containsAny($window, self::CLAIM_BOUNDARY_CONTEXT_TERMS);
     }
 
-    private function existingArticle(array $package): ?Article
+    private function existingArticle(array $package, bool $lock = false): ?Article
     {
         return Article::query()
             ->withoutGlobalScopes()
             ->where('org_id', 0)
             ->where('locale', (string) $package['locale'])
             ->where('slug', (string) $package['slug'])
+            ->when($lock, fn ($query) => $query->lockForUpdate())
             ->first();
     }
 
@@ -1156,6 +1168,56 @@ final class EditorialPackageDraftImporter
         return $intendedStatus === 'review_pending'
             ? ArticleTranslationRevision::STATUS_HUMAN_REVIEW
             : ArticleTranslationRevision::STATUS_MACHINE_DRAFT;
+    }
+
+    /**
+     * @return array{variants: array<string, mixed>, width: ?int, height: ?int, og_image_url: string}
+     */
+    private function draftCoverMetadata(?Article $article, ?ArticleSeoMeta $seo, array $package, array $plan): array
+    {
+        $coverUrl = (string) $package['cover_image'];
+        $cover = [
+            'variants' => $this->editorialMetadata($package, $plan),
+            'width' => null,
+            'height' => null,
+            'og_image_url' => $coverUrl,
+        ];
+        if (! $article instanceof Article
+            || (string) $article->cover_image_url !== $coverUrl
+            || $this->isCoverImagePlaceholder($coverUrl)
+            || PublicMediaUrlGuard::sanitizeNullableUrl($coverUrl) === null) {
+            return $cover;
+        }
+
+        // Carry only media fields; the new package owns all editorial metadata.
+        $existing = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
+        foreach (['hero', 'card', 'og', 'thumbnail', 'preload'] as $key) {
+            if (! array_key_exists($key, $existing)) {
+                continue;
+            }
+            $variant = $existing[$key];
+            $url = PublicMediaUrlGuard::sanitizeNullableUrl(is_array($variant) ? ($variant['url'] ?? null) : $variant);
+            if ($url === null || ($key === 'hero' && $url !== $coverUrl)) {
+                throw new RuntimeException('Existing draft cover variant is invalid: '.$key);
+            }
+            if (is_array($variant)) {
+                if ((int) ($variant['width'] ?? 0) <= 0 || (int) ($variant['height'] ?? 0) <= 0) {
+                    throw new RuntimeException('Existing draft cover variant dimensions are invalid: '.$key);
+                }
+                $variant = array_intersect_key($variant, array_flip(['url', 'width', 'height', 'mime_type']));
+                $variant['url'] = $url;
+            } else {
+                $variant = $url;
+            }
+            $cover['variants'][$key] = $variant;
+        }
+        if ((int) $article->cover_image_width > 0 && (int) $article->cover_image_height > 0) {
+            $cover['width'] = (int) $article->cover_image_width;
+            $cover['height'] = (int) $article->cover_image_height;
+        }
+        $cover['og_image_url'] = PublicMediaUrlGuard::sanitizeNullableUrl($seo?->og_image_url) ?? $coverUrl;
+
+        return $cover;
     }
 
     /**
