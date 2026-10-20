@@ -122,7 +122,7 @@ final class CareerDirectoryAuthorityService
         $payload = $this->responseCache->directoryReadModelPayload($publicLocale, false);
         $items = array_values(array_filter((array) ($payload['items'] ?? []), static fn ($item): bool => is_array($item) && ($item['slug'] ?? null) === $slug));
         $items = $this->readyIndexableItems($items);
-        if ($items === [] || ! isset($this->responseCache->directoryPublishedSlugs([$slug], $publicLocale)[$slug])) {
+        if ($items === [] || ! isset($this->responseCache->directoryPublishedSlugs([$slug], $publicLocale, true)[$slug])) {
             return null;
         }
         if (count($items) !== 1) {

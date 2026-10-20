@@ -27,6 +27,20 @@ final class SeoCurrentPublicAuthorityPrecedenceTest extends TestCase
         }
     }
 
+    public function test_global_incremental_legacy_family_keeps_the_existing_authority_path(): void
+    {
+        config(['seo_intel.enabled' => false, 'seo_intel.write_enabled' => true]);
+        $source = app(CurrentPublicUrlAuthoritySource::class);
+        $service = new \App\Services\SeoIntel\UrlTruth\IncrementalUrlTruthSyncService(
+            $source, new EffectivePublicUrlEvaluator, new \App\Services\SeoIntel\UrlTruthInventoryRecordWriter,
+        );
+        $method = new \ReflectionMethod($service, 'authorityCandidates');
+        $records = $method->invoke($service, 'landing_surface', '1', 'en');
+        self::assertNotEmpty($records);
+        self::assertSame(array_map(fn ($record) => $record->canonicalUrl, $source->candidates()),
+            array_map(fn ($record) => $record->canonicalUrl, $records));
+    }
+
     public function test_formal_static_authority_wins_canary_in_both_source_orders(): void
     {
         foreach (['/', '/en', '/en/tests', '/zh/tests'] as $path) {

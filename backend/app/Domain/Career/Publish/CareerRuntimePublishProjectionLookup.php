@@ -20,6 +20,19 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
 
     private ?string $publicationAuthoritySha256 = null;
 
+    /** Maintenance re-reads must distinguish unavailable authority from a valid unpublished identity. */
+    public function refreshPublicationAuthority(): void
+    {
+        $this->itemsBySlugLocale = null;
+        $this->itemsBySlug = null;
+        $this->publicationItems = [];
+        $this->publicationAuthoritySha256 = null;
+        $this->hydrate();
+        if ($this->publicationAuthoritySha256 === null) {
+            throw new \RuntimeException('PUBLIC_AUTHORITY_CAREER_UNDETERMINED');
+        }
+    }
+
     /** Preserve denials and candidates without changing published-only public lookups. */
     public function publicationItemForSlug(string $slug, string $locale): ?array
     {

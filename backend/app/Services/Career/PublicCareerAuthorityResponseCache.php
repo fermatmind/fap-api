@@ -2441,8 +2441,15 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     }
 
     /** @return array<string,bool> */
-    public function directoryPublishedSlugs(array $slugs, string $locale): array
+    public function directoryPublishedSlugs(array $slugs, string $locale, bool $freshAuthority = false): array
     {
+        if ($freshAuthority) {
+            if (! $this->runtimePublishProjection instanceof CareerRuntimePublishProjectionLookup) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_CAREER_UNDETERMINED');
+            }
+            $this->runtimePublishProjection->refreshPublicationAuthority();
+        }
+
         return array_fill_keys(array_keys($this->publishedProjectionSnapshots($slugs, $locale)), true);
     }
 

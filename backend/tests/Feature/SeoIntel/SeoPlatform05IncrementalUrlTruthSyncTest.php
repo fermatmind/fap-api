@@ -27,6 +27,7 @@ final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
     protected function tearDown(): void
     {
         DB::purge('seo_intel');
+        \Illuminate\Support\Facades\File::deleteDirectory(storage_path('app/private/career_generation_authority'));
         parent::tearDown();
     }
 
@@ -47,6 +48,62 @@ final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
         self::assertSame([], $source->candidatesForEntity('career_guide', (string) $guide->id, 'zh-CN'));
         $guide->forceFill(['is_public' => false])->saveQuietly();
         self::assertSame([], $source->candidatesForEntity('career_guide', (string) $guide->id, 'en'));
+    }
+
+    public function test_real_generation_unavailable_preserves_existing_truth_and_transaction_change_rolls_back(): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true,
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com']);
+        $package = app(\App\Domain\Career\Display\CareerContentV3AuthorityPackage::class);
+        $index = $package->manifestIndex(base_path());
+        $slug = 'accountants-and-auditors';
+        $item = ['slug' => $slug, 'locale' => 'en', 'runtime_publish_state' => 'published',
+            'public_resolution_type' => 'public_canonical_job', 'detail_route_enabled' => true,
+            'robots_indexable' => true, 'release_gate_pass' => true, 'canonical_self' => true, 'blockers' => []];
+        \Tests\Fixtures\Career\CareerGenerationAuthorityFixture::write([$item]);
+        $reader = \Mockery::mock(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class);
+        $reader->shouldReceive('forgetLoadedAuthority')->andReturnNull();
+        $reader->shouldReceive('authority')->andReturn($index);
+        $reader->shouldReceive('hasPublicBody')->with($slug, 'en')->andReturnTrue();
+        app()->instance(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class, $reader);
+        \App\Support\PublicProjectionCache::put(\App\Services\Career\PublicCareerAuthorityResponseCache::DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX.':en', [
+            'read_model_version' => \App\Services\Career\CareerDirectoryReadModelBuilder::READ_MODEL_VERSION,
+            'locale' => 'en', 'items' => [['slug' => $slug, 'indexable' => true, 'detail_ready' => true]],
+        ], 60);
+        $source = app(\App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource::class);
+        $service = new IncrementalUrlTruthSyncService($source, new EffectivePublicUrlEvaluator, new UrlTruthInventoryRecordWriter);
+        self::assertSame('synced', $service->sync('career_job', $slug, 'en', 'old-event', 'publish')['status']);
+        $connection = DB::connection('seo_intel');
+        $before = [$connection->table('seo_urls')->get()->toJson(), $connection->table('seo_url_entities')->get()->toJson()];
+        \Illuminate\Support\Facades\File::deleteDirectory(storage_path('app/private/career_generation_authority'));
+        try {
+            $service->sync('career_job', $slug, 'en', 'delayed-event', 'publish');
+            self::fail('Unavailable generation cannot retire Truth.');
+        } catch (\RuntimeException $exception) {
+            self::assertSame('PUBLIC_AUTHORITY_CAREER_UNDETERMINED', $exception->getMessage());
+        }
+        self::assertSame($before, [$connection->table('seo_urls')->get()->toJson(), $connection->table('seo_url_entities')->get()->toJson()]);
+
+        \Tests\Fixtures\Career\CareerGenerationAuthorityFixture::write([$item]);
+        $connection->table('seo_url_entities')->update(['binding_status' => 'retired', 'current_binding_key' => null]);
+        $before = [$connection->table('seo_urls')->get()->toJson(), $connection->table('seo_url_entities')->get()->toJson()];
+        $armed = true;
+        DB::listen(function ($query) use (&$armed, $item): void {
+            if ($armed && preg_match('/^(insert|update).*seo_url_entities/i', $query->sql)) {
+                $armed = false;
+                $item['runtime_publish_state'] = 'blocked';
+                \Tests\Fixtures\Career\CareerGenerationAuthorityFixture::write([$item]);
+            }
+        });
+        try {
+            $service->sync('career_job', $slug, 'en', 'new-event', 'publish');
+            self::fail('Generation change must roll back the Truth transaction.');
+        } catch (\RuntimeException $exception) {
+            self::assertStringContainsString('authority changed', $exception->getMessage());
+        }
+        self::assertFalse($armed);
+        self::assertSame($before, [$connection->table('seo_urls')->get()->toJson(), $connection->table('seo_url_entities')->get()->toJson()]);
     }
 
     public function test_publish_rerun_and_retire_are_atomic_idempotent_and_url_truth_only(): void

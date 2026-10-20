@@ -141,6 +141,7 @@ final class IncrementalUrlTruthSyncService
     private function authorityCandidates(string $pageEntityType, string $entityIdentity, string $locale): array
     {
         return $this->authority instanceof CurrentPublicUrlAuthoritySource
+            && in_array($pageEntityType, ['article', 'career_guide', 'career_job'], true)
             ? $this->authority->candidatesForEntity($pageEntityType, $entityIdentity, $locale)
             : $this->authority->candidates();
     }
