@@ -3125,6 +3125,14 @@ return [
             ],
         ],
         'articles' => [
+            'seo_release' => [
+                'action' => '释放已发布文章 SEO',
+                'description' => '适用于没有其他语言对应页的已发布文章：通过原生命令启用 Article 与 Breadcrumb schema、保留 FAQ schema hold、记录独立语言策略并释放 sitemap/llms 资格。正文、版本及搜索提交保持不变。',
+                'preflight' => '原生 schema 与公开清单预检',
+                'reviewed' => '我已核对该保存版本的公开页面、canonical、可见正文与媒体。',
+                'success' => '文章 SEO 资格已释放，公开缓存已刷新',
+                'cache_failed' => 'SEO 资格已提交，但收尾失败。请勿重复释放；请检查既有诊断。',
+            ],
             'cover_alt' => [
                 'action' => '更新已发布头图替代文本',
                 'description' => '通过原生媒体更新器仅修改当前头图描述。保留图片、尺寸、正文、源版本及发布指针，提交后刷新受影响的公开页面。',

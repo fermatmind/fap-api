@@ -213,6 +213,37 @@ class EditArticle extends EditRecord
                     $notification->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
                 }),
+            // @review-surface article
+            Action::make('releasePublishedSeo')
+                ->label(__('ops.resources.articles.seo_release.action'))
+                ->icon('heroicon-o-globe-alt')
+                ->visible(fn (): bool => ContentAccess::canRelease() && (int) $this->getRecord()->org_id === 0
+                    && $this->getRecord()->published_revision_id !== null
+                    && (! $this->getRecord()->sitemap_eligible || ! $this->getRecord()->llms_eligible))
+                ->modalDescription(__('ops.resources.articles.seo_release.description'))
+                ->fillForm(fn (): array => app(ArticleControlledPublicationWorkspace::class)->prepareSeoRelease($this->getRecord()))
+                ->form([
+                    Textarea::make('target_hash')->label(__('ops.resources.articles.controlled_publish.snapshot'))->readOnly()->required()->rows(2),
+                    Textarea::make('preflight')->label(__('ops.resources.articles.seo_release.preflight'))->readOnly()->dehydrated(false)->rows(14),
+                    Checkbox::make('public_page_reviewed')->label(__('ops.resources.articles.seo_release.reviewed'))->accepted(),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        $result = app(ArticleControlledPublicationWorkspace::class)->releaseSeo($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.public_page_reviewed' => $exception->errors()['preview_approved'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    $notification = Notification::make();
+                    if ($result['ok']) {
+                        $notification->title(__('ops.resources.articles.seo_release.success'))->success();
+                    } else {
+                        $notification->title(__('ops.resources.articles.seo_release.cache_failed'))->warning()->persistent();
+                    }
+                    $notification->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
             Action::make('updatePublishedCoverAlt')
                 ->label(__('ops.resources.articles.cover_alt.action'))
                 ->icon('heroicon-o-photo')

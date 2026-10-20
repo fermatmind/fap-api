@@ -4,17 +4,131 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Support;
 
+use App\Events\PublicAuthorityChanged;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Models\Article;
 use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 /** @review-surface article */
 final class ArticleControlledPublicationWorkspace
 {
+    public function prepareSeoRelease(Article $selected): array
+    {
+        $article = $this->seoReleaseArticle($selected);
+
+        return [
+            'target_hash' => ArticleSourceTargetSnapshot::publicationHash($article),
+            'preflight' => json_encode($this->seoReleasePlans($article, true), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+            'public_page_reviewed' => false,
+        ];
+    }
+
+    /** Release one standalone, already-published article through both native commands. */
+    public function releaseSeo(Article $selected, array $data): array
+    {
+        $article = $this->seoReleaseArticle($selected);
+        if (($data['public_page_reviewed'] ?? false) !== true) {
+            $this->reject('public_page_review_required');
+        }
+        if (! ContentReleaseFollowUp::articleCacheConfigured()) {
+            $this->reject('article_cache_configuration_required');
+        }
+        $committed = false;
+        try {
+            Event::defer(function () use ($article, $data, &$committed): void {
+                DB::transaction(function () use ($article, $data): void {
+                    try {
+                        ArticleSourceTargetSnapshot::assertPublicationHash($article, (string) ($data['target_hash'] ?? ''), true);
+                    } catch (\RuntimeException $exception) {
+                        if ($exception->getMessage() !== 'article_publication_state_changed') {
+                            throw $exception;
+                        }
+                        $this->reject('article_publication_state_changed');
+                    }
+                    $locked = $this->seoReleaseArticle($article, true);
+                    foreach ($this->seoReleasePlans($locked, false) as $plan) {
+                        if (! ($plan['ok'] ?? false)) {
+                            $this->reject(implode(', ', array_column((array) ($plan['errors'] ?? []), 'code')) ?: 'native_seo_release_rejected');
+                        }
+                    }
+                    app(\App\Services\Audit\AuditLogger::class)->log(\Illuminate\Http\Request::create('/ops/articles/native-seo-release', 'POST'), 'article_native_seo_released', 'article', (string) $locked->id,
+                        ['published_revision_id' => $locked->published_revision_id, 'before_sha256' => $data['target_hash'],
+                            'schema' => ['Article', 'BreadcrumbList'], 'faq_schema' => 'hold',
+                            'hreflang_policy' => 'no_verified_reciprocal_counterpart', 'search_submission' => false],
+                        reason: 'native_article_seo_release', result: 'success');
+                });
+                $committed = true;
+            }, [PublicAuthorityChanged::class]);
+        } catch (\Throwable $exception) {
+            if (! $committed) {
+                throw $exception;
+            }
+
+            return ['ok' => false, 'seo_release' => 'committed', 'cache_closeout' => 'failed'];
+        }
+        try {
+            app(\App\Services\SEO\SeoDiscoverabilityCacheInvalidator::class)->flushArticleDiscoverabilityCaches();
+            ContentReleaseFollowUp::dispatchArticlePathsStrict($article->fresh(['publishedRevision', 'seoMeta']), 'article_native_seo_released', includeDiscoverability: true);
+
+            return ['ok' => true, 'seo_release' => 'committed', 'cache_closeout' => 'success'];
+        } catch (\Throwable) {
+            return ['ok' => false, 'seo_release' => 'committed', 'cache_closeout' => 'failed'];
+        }
+    }
+
+    private function seoReleaseArticle(Article $selected, bool $lock = false): Article
+    {
+        $article = $this->selected($selected);
+        if ($article->status !== 'published' || ! $article->is_public || ! $article->is_indexable
+            || $article->published_revision_id === null || $article->working_revision_id !== $article->published_revision_id
+            || ($article->sitemap_eligible && $article->llms_eligible)) {
+            $this->reject('article_seo_release_state_invalid');
+        }
+        $siblings = Article::withoutGlobalScopes()->where('org_id', 0)
+            ->where('translation_group_id', $article->translation_group_id)->whereKeyNot($article->id)
+            ->when($lock, fn ($query) => $query->lockForUpdate())->get(['id']);
+        if ($siblings->isNotEmpty()) {
+            $this->reject('article_seo_single_locale_required');
+        }
+
+        return $article;
+    }
+
+    private function seoReleasePlans(Article $article, bool $dryRun): array
+    {
+        $gate = ['--article-ids' => (string) $article->id, '--translation-group-id' => (string) $article->translation_group_id,
+            '--expected-slugs' => (string) $article->slug, '--enable-article-schema' => true,
+            '--enable-breadcrumb-schema' => true, '--hold-faq-schema' => true,
+            '--no-hreflang-policy' => true, '--hreflang-policy-reason' => 'no_verified_reciprocal_counterpart', '--json' => true];
+        $feeds = ['--article-id' => (string) $article->id, '--expected-slug' => (string) $article->slug, '--json' => true];
+        if ($dryRun) {
+            $gate['--dry-run'] = $feeds['--dry-run'] = true;
+        } else {
+            $gate += ['--execute' => true, '--no-publish' => true, '--no-search' => true,
+                '--no-sitemap-llms-change' => true, '--no-content-change' => true, '--no-revalidation' => true];
+            $feeds += ['--execute' => true, '--no-content-change' => true, '--no-publish' => true,
+                '--no-search' => true, '--no-schema-hreflang' => true, '--no-revalidation' => true,
+                '--confirm' => "I explicitly approve articles:discoverability-release execute for article id {$article->id} slug {$article->slug} after dry-run passes."];
+        }
+        $plans = [];
+        foreach (['articles:seo-gate-rollout' => $gate, 'articles:discoverability-release' => $feeds] as $command => $options) {
+            $output = new BufferedOutput;
+            Artisan::call($command, $options, $output);
+            $plan = json_decode(trim($output->fetch()), true, 64, JSON_THROW_ON_ERROR);
+            $plans[] = $plan;
+            if (! ($plan['ok'] ?? false)) {
+                break;
+            }
+        }
+
+        return $plans;
+    }
+
     public function prepareCoverAlt(Article $selected): array
     {
         $article = $this->selected($selected);

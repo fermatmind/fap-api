@@ -3125,6 +3125,14 @@ return [
             ],
         ],
         'articles' => [
+            'seo_release' => [
+                'action' => 'Release published article SEO',
+                'description' => 'For a published article with no language counterpart: enable Article and Breadcrumb schema, retain the FAQ schema hold, record the independent-language policy, and release sitemap/llms eligibility through the native commands. Content, revisions and search submissions stay unchanged.',
+                'preflight' => 'Native schema and discoverability plans',
+                'reviewed' => 'I checked the published page, canonical, visible content and media for this saved version.',
+                'success' => 'Article SEO released and public caches refreshed',
+                'cache_failed' => 'SEO eligibility committed, but closeout failed. Do not repeat the release; inspect the existing diagnostics.',
+            ],
             'cover_alt' => [
                 'action' => 'Update published cover alt',
                 'description' => 'Change only the current cover description through the native media updater. Keep the image, dimensions, body, source version and publication pointers. Refresh the affected public readers after commit.',

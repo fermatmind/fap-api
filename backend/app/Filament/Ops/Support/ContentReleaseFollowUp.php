@@ -20,7 +20,7 @@ final class ContentReleaseFollowUp
     }
 
     /** Strict closeout for an already committed native article publication. */
-    public static function dispatchArticlePathsStrict(\App\Models\Article $article, string $source): void
+    public static function dispatchArticlePathsStrict(\App\Models\Article $article, string $source, bool $includeDiscoverability = false): void
     {
         if (! self::articleCacheConfigured()) {
             throw new \RuntimeException('Article cache transport is not configured.');
@@ -28,6 +28,9 @@ final class ContentReleaseFollowUp
         $paths = app(ContentReleasePathPlanner::class)->paths('article', $article);
         if ($paths === []) {
             throw new \RuntimeException('No committed article paths were resolved.');
+        }
+        if ($includeDiscoverability) {
+            $paths[] = '/sitemap.xml';
         }
         $receipts = self::dispatchExplicitPaths('article', $article, $paths, $source,
             Request::create('/ops/articles/controlled-publication', 'POST'),
