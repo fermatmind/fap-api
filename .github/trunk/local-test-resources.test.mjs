@@ -138,3 +138,13 @@ test('real MySQL command TERM stops its child and removes its owned container', 
  const proof=JSON.parse(readFileSync(join(dir,'ready'),'utf8'));p.kill('SIGTERM');assert.equal(await ended,143,stderr);assert.equal(existsSync(proof.root),false);assert.notEqual(spawnSync('docker',['inspect',proof.container]).status,0);assert.throws(()=>process.kill(proof.pid,0));
  }finally{if(p?.exitCode===null)p.kill('SIGTERM');rmSync(dir,{recursive:true,force:true});}
 });
+
+test('existing classifier job provisions and verifies native tools before its contract tests',()=>{
+ const ci=readFileSync(join(root,'.github/workflows/ci.yml'),'utf8').split('\n  hygiene:')[0];
+ const setup=ci.indexOf('- name: Install classifier contract test tools');const tests=ci.indexOf('- name: Test classifier and migration policy');
+ assert.ok(setup>0&&setup<tests);
+ const block=ci.slice(setup,tests);
+ for(const pkg of ['bash','coreutils','curl','grep','sed','lsof','diffutils','procps','mawk','debianutils','php-cli','php-sqlite3','composer','ripgrep'])assert.match(block,new RegExp('(?: |^)'+pkg+'(?: |\\n)'));
+ assert.match(block,/require_tools\.sh rg php composer curl grep sed lsof cmp/);
+ assert.match(block,/extension_loaded\("pdo_sqlite"\)/);assert.doesNotMatch(block,/\|\| true|continue-on-error/);
+});
