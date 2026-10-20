@@ -41,7 +41,7 @@
 ## Focused server deployment
 
 - Ordinary staging/production releases perform exact-SHA admission, installed-artifact integrity, compatible migrations, atomic activation, worker reload, bounded health and affected-reader smoke, and automatic LKG recovery.
-- Ordinary deployment must not run full Career coverage/repair scans, cache compaction or prewarming, full discoverability inventory checks, or whole-site URL Truth snapshot/reconciliation. Keep valid caches; file-backed cold reads remain authoritative. Native revision-bound events own incremental URL Truth synchronization.
+- Ordinary deployment must not run full Career coverage/repair scans, cache compaction or prewarming, full discoverability inventory checks, whole-site URL Truth snapshot/reconciliation, or generic CMS/directory inventory checks (including sitemap HTTP requests that rebuild the whole inventory). Keep valid caches; file-backed cold reads remain authoritative. Native revision-bound events own incremental URL Truth synchronization.
 - Full schema/codec/identity compatibility checks belong to classifier-selected CI; full regression and consistency diagnostics belong to Nightly. Explicit content publication, real URL-set changes and recovery retain their scoped transactional, cache activation and acceptance requirements; unrelated maintenance is never added to ordinary deployment.
 - A focused reader or installed-integrity failure is a deployment failure. Preserve the existing exact-SHA staging gate, hard execution budgets, immutable receipts and mutually exclusive automatic LKG branches; never skip necessary acceptance to meet a timing target.
 

@@ -3820,6 +3820,11 @@ task('seo:refresh-sitemap-source-before-activation', function () {
 });
 
 task('guard:public-content-release', function () {
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: guard:public-content-release.');
+
+        return;
+    }
     $strictCareerFlag = filter_var((string) (getenv('DEPLOY_PUBLIC_CONTENT_STRICT_CAREER') ?: ''), FILTER_VALIDATE_BOOLEAN)
         ? ' --strict-career'
         : '';
@@ -4785,6 +4790,11 @@ task('healthcheck:career-content-only', function () {
 });
 
 task('healthcheck:sitemap-source', function () {
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: healthcheck:sitemap-source.');
+
+        return;
+    }
     $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
     $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
     $url = deployHttpsUrlArg($host, '/api/v0.5/seo/sitemap-source');

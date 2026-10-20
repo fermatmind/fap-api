@@ -330,7 +330,8 @@ test('actual ordinary deployment task bodies cannot call full maintenance transp
     'career:warm-public-authority-cache','career:rebuild-directory-after-detail-repair',
     'guard:career-discoverability-pre-sitemap','guard:career-discoverability-post-sitemap',
     'seo:url-truth-reconciliation-receipt','seo:url-truth-controlled-reconcile',
-    'seo:warm-sitemap-source-cache','seo:refresh-sitemap-source-before-activation'];
+    'seo:warm-sitemap-source-cache','seo:refresh-sitemap-source-before-activation',
+    'guard:public-content-release','healthcheck:sitemap-source'];
   for (const name of names) {
     const task=deployer.split(`task('${name}', function () {`)[1]?.split('\n});')[0];
     assert.ok(task, name);
