@@ -3125,6 +3125,15 @@ return [
             ],
         ],
         'articles' => [
+            'package_import' => [
+                'action' => 'Import reviewed update package',
+                'description' => 'Validate the exact package and current revision locks, then update only the working revision. The published revision stays unchanged. Preview and editorial review are required again.',
+                'input' => 'Native update package JSON',
+                'helper' => 'Paste the bounded article.existing-update.transport.v1 package, including its manifest and base64 file bytes. Server paths and archives are not accepted.',
+                'rejected' => 'Import stopped: :code. Check the package and current revision before trying again.',
+                'success' => 'Working revision imported',
+                'result' => 'Working revision :revision now needs editorial review. Published revision :published is unchanged.',
+            ],
             'editorial_import' => [
                 'action' => 'Import editorial draft package',
                 'description' => 'Import into this private draft using the native editorial importer. Review and controlled publication remain separate.',

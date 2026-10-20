@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoMetaWorkspace;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Filament\Ops\Support\ArticleEditorialPackageWorkspace;
+use App\Filament\Ops\Support\ArticleExistingPackageWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
@@ -136,6 +137,41 @@ class EditArticle extends EditRecord
                         ->title(__('ops.resources.articles.editorial_import.success'))
                         ->body(__('ops.resources.articles.editorial_import.result', ['revision' => $result['working_revision_id'], 'status' => $result['working_revision_status']]))
                         ->success()->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            Action::make('importExistingPackage')
+                ->label(__('ops.resources.articles.package_import.action'))
+                ->icon('heroicon-o-arrow-down-tray')
+                ->color('gray')
+                ->visible(fn (): bool => ContentAccess::canWrite()
+                    && (int) $this->getRecord()->org_id === 0
+                    && $this->getRecord()->published_revision_id !== null)
+                ->modalDescription(__('ops.resources.articles.package_import.description'))
+                ->modalSubmitActionLabel(__('ops.resources.articles.package_import.action'))
+                ->form([
+                    Textarea::make('package_json')
+                        ->label(__('ops.resources.articles.package_import.input'))
+                        ->helperText(__('ops.resources.articles.package_import.helper'))
+                        ->required()
+                        ->maxLength(ArticleExistingPackageWorkspace::MAX_INPUT_BYTES)
+                        ->rows(12),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        $result = app(ArticleExistingPackageWorkspace::class)->import($this->getRecord(), (string) $data['package_json']);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.package_json' => $exception->errors()['package_json'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    Notification::make()
+                        ->title(__('ops.resources.articles.package_import.success'))
+                        ->body(__('ops.resources.articles.package_import.result', [
+                            'revision' => $result['working_revision_id'],
+                            'published' => $result['published_revision_id'],
+                        ]))
+                        ->success()
+                        ->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
                 }),
             Action::make('openPublicUrl')

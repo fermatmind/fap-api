@@ -3125,6 +3125,15 @@ return [
             ],
         ],
         'articles' => [
+            'package_import' => [
+                'action' => '导入已审更新包',
+                'description' => '核对完整包与当前版本后，仅更新工作版本。已发布版本保持不变；导入后须重新预览和编辑审核。',
+                'input' => '原生更新包 JSON',
+                'helper' => '粘贴 article.existing-update.transport.v1 包，包含清单及 base64 文件原始字节。不接受服务器路径或压缩包。',
+                'rejected' => '导入已停止：:code。请核对包与当前版本后再操作。',
+                'success' => '工作版本已导入',
+                'result' => '工作版本 :revision 需要重新编辑审核；已发布版本 :published 保持不变。',
+            ],
             'editorial_import' => [
                 'action' => '导入文章草稿包',
                 'description' => '使用原生文章导入器更新这篇私有草稿。审核和受控发布仍分别完成。',
