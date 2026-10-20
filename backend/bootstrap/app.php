@@ -156,6 +156,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
         $schedule->command('seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250')
             ->timezone('Asia/Shanghai')
             ->dailyAt('06:10')
+            ->runInBackground()
             ->withoutOverlapping()
             ->onOneServer();
         $schedule->command('career:warm-public-authority-cache --verify-only --json')->runInBackground()->everyTenMinutes()->withoutOverlapping();

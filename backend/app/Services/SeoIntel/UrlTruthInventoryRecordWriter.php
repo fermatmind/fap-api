@@ -30,12 +30,137 @@ final class UrlTruthInventoryRecordWriter
             && \App\Support\SchemaBaseline::columnExists('seo_urls', 'authority_revision', $schema->getConnection()->getName());
 
         return $connection->transaction(function () use ($connection, $hardenedSchema, $records): int {
+            if ($hardenedSchema && $this->touchStableBatch($connection, $records)) {
+                return count($records);
+            }
             foreach ($records as $record) {
                 $this->writeRecord($connection, $record, $hardenedSchema);
             }
 
             return count($records);
         });
+    }
+
+    /** Stable batches still perform both writes; only the database round trips change. */
+    private function touchStableBatch(mixed $connection, array $records): bool
+    {
+        if ($records === [] || count($records) > 250) {
+            return false;
+        }
+        $identities = [];
+        $urlKeys = [];
+        foreach ($records as $record) {
+            $identity = $this->currentBindingKey($record);
+            $urlKey = $record->locale.'|'.$record->canonicalUrlHash();
+            if (! $this->isCurrent($record) || ! $record->entityIdOrSlug
+                || isset($identities[$identity]) || isset($urlKeys[$urlKey])) {
+                return false;
+            }
+            $identities[$identity] = true;
+            $urlKeys[$urlKey] = true;
+        }
+
+        // Read all historical rows of these identities, not just their current bindings.
+        $scope = static function ($query) use ($records): void {
+            foreach ($records as $record) {
+                $query->orWhere(static fn ($q) => $q->where('page_entity_type', $record->pageEntityType)
+                    ->where('entity_id_or_slug', $record->entityIdOrSlug)->where('locale', $record->locale));
+            }
+        };
+        $urls = $connection->table('seo_urls')->where($scope)->orderBy('id')->lockForUpdate()->get();
+        $entities = $connection->table('seo_url_entities')->where($scope)->orderByDesc('id')->lockForUpdate()->get();
+        $urlIds = [];
+        $entityIds = [];
+        foreach ($records as $record) {
+            $identity = $this->currentBindingKey($record);
+            $hash = $record->canonicalUrlHash();
+            $sameIdentity = static fn ($row): bool => $row->page_entity_type === $record->pageEntityType
+                && (string) $row->entity_id_or_slug === $record->entityIdOrSlug && $row->locale === $record->locale;
+            $identityUrls = $urls->filter($sameIdentity);
+            $identityEntities = $entities->filter($sameIdentity);
+            $url = $identityUrls->firstWhere('canonical_url_hash', $hash);
+            $entity = $identityEntities->first(static fn ($row): bool => $row->canonical_url_hash === $hash && $row->binding_status === 'current');
+            if ($url === null || $entity === null || $entity->current_binding_key !== $identity) {
+                return false;
+            }
+            $trace = $this->traceability($record);
+            if (! $this->matchesValues($connection, $url, $trace + [
+                'canonical_url' => $record->canonicalUrl, 'cluster' => $record->cluster,
+                'source_authority' => $record->sourceAuthority, 'indexability_state' => $record->indexabilityState,
+                'lastmod_at' => $record->lastmodAt, 'lastmod_source' => $record->lastmodSource,
+                'is_private_flow' => $record->isPrivateFlow,
+                'metadata_json' => json_encode($record->metadata, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES),
+            ]) || ! $this->matchesValues($connection, $entity, $trace + [
+                'entity_source' => $record->entitySource, 'authority_status' => $record->authorityStatus,
+                'source_updated_at' => $record->sourceUpdatedAt,
+                'attributes_json' => json_encode($record->attributes, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES),
+                'retired_at' => null, 'superseded_by_id' => null,
+            ])) {
+                return false;
+            }
+            foreach ($identityUrls as $old) {
+                if ($old->canonical_url_hash !== $hash && $old->indexability_state === 'indexable') {
+                    return false;
+                }
+            }
+            foreach ($identityEntities as $old) {
+                if ((int) $old->id !== (int) $entity->id && ($old->current_binding_key !== null
+                    || ($old->binding_status === 'superseded_canonical' && (int) $old->superseded_by_id !== (int) $entity->id))) {
+                    return false;
+                }
+            }
+            $urlIds[] = $url->id;
+            $entityIds[] = $entity->id;
+        }
+        $now = now();
+        $connection->table('seo_urls')->whereIn('id', $urlIds)->update(['last_seen_at' => $now, 'updated_at' => $now]);
+        $connection->table('seo_url_entities')->whereIn('id', $entityIds)->update(['updated_at' => $now]);
+
+        return true;
+    }
+
+    private function matchesValues(mixed $connection, object $row, array $values): bool
+    {
+        foreach ($values as $column => $value) {
+            $expected = $connection->prepareBindings([$value])[0];
+            $actual = $row->{$column};
+            if ($connection->getDriverName() === 'mysql' && str_ends_with($column, '_json') && $actual !== null) {
+                $actualJson = $this->normalizedJson($actual);
+                $expectedJson = $this->normalizedJson($expected);
+                if ($actualJson === null || $expectedJson === null || $actualJson !== $expectedJson) {
+                    return false;
+                }
+            } elseif (($actual === null) !== ($expected === null) || (string) $actual !== (string) $expected) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /** Ignore JSON object key order only; never coerce values or collapse objects into arrays. */
+    private function normalizedJson(string $json): ?string
+    {
+        $lossless = true;
+        $normalize = static function (mixed $value) use (&$normalize, &$lossless): mixed {
+            // PHP floats (including overflowing JSON integers) cannot prove exact JSON equality.
+            // Keep their original write path rather than adding a numeric parser.
+            if (is_float($value)) {
+                $lossless = false;
+            }
+            if ($value instanceof \stdClass) {
+                $properties = get_object_vars($value);
+                ksort($properties, SORT_STRING);
+
+                return (object) array_map($normalize, $properties);
+            }
+
+            return is_array($value) ? array_map($normalize, $value) : $value;
+        };
+
+        $normalized = $normalize(json_decode($json, flags: JSON_THROW_ON_ERROR));
+
+        return $lossless ? json_encode($normalized, JSON_THROW_ON_ERROR) : null;
     }
 
     private function writeRecord(mixed $connection, UrlTruthInventoryRecord $record, bool $hardenedSchema): void

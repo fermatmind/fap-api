@@ -33,8 +33,18 @@ final class SeoPlatformControlledUrlTruthReconcileCommand extends Command
             || ($this->option('execute') && $this->option('no-http') && $expected === '');
         try {
             $operation = function () use ($source, $service, $maintenance, $expected): array {
-                $records = $source->candidates();
-                $metadata = $source->metadata();
+                $started = hrtime(true);
+                try {
+                    $records = $source->candidates();
+                    $metadata = $source->metadata();
+                } finally {
+                    if (! app()->runningUnitTests()) {
+                        @fwrite(STDERR, 'url_truth_source_performance='.json_encode([
+                            'elapsed_ms' => round((hrtime(true) - $started) / 1e6, 3),
+                            'record_count' => isset($records) ? count($records) : null,
+                        ]).PHP_EOL);
+                    }
+                }
                 if ($maintenance) {
                     if (! $this->option('execute') || $expected !== '') {
                         throw new \RuntimeException('URL_TRUTH_MAINTENANCE_MODE_INVALID');

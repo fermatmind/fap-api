@@ -43,6 +43,48 @@ final class ControlledUrlTruthReconciliationService
         ?string $expectedPlanHash = null,
         ?callable $authorityReadback = null,
     ): array {
+        $started = hrtime(true);
+        $performance = ['mode' => $execute ? 'execute' : 'plan', 'record_count' => count($authorityRecords),
+            'batch_count' => 0, 'truth_query_count' => 0, 'phases_ms' => []];
+        $connection = $this->connection();
+        $dispatcher = $connection->getEventDispatcher();
+        if ($dispatcher !== null) {
+            $measuredDispatcher = clone $dispatcher;
+            $measuredDispatcher->listen(\Illuminate\Database\Events\QueryExecuted::class,
+                static function () use (&$performance): void {
+                    $performance['truth_query_count']++;
+                });
+            $connection->setEventDispatcher($measuredDispatcher);
+        }
+        try {
+            return $this->reconcile($authorityRecords, $sourceMetadata, $execute, $probeHttp,
+                $maxRecords, $batchSize, $expectedPlanHash, $authorityReadback, $performance);
+        } finally {
+            if ($dispatcher !== null) {
+                $connection->setEventDispatcher($dispatcher);
+            }
+            $performance['total_ms'] = round((hrtime(true) - $started) / 1e6, 3);
+            // Diagnostic stderr is separate from the immutable JSON receipt and its hashes.
+            if (PHP_SAPI === 'cli' && ! app()->runningUnitTests()) {
+                @fwrite(STDERR, 'url_truth_performance='.json_encode($performance, JSON_UNESCAPED_SLASHES).PHP_EOL);
+            }
+        }
+    }
+
+    private function timed(array &$performance, string $phase, callable $operation): mixed
+    {
+        $start = hrtime(true);
+        try {
+            return $operation();
+        } finally {
+            $performance['phases_ms'][$phase] = ($performance['phases_ms'][$phase] ?? 0)
+                + round((hrtime(true) - $start) / 1e6, 3);
+        }
+    }
+
+    private function reconcile(array $authorityRecords, array $sourceMetadata, bool $execute, bool $probeHttp,
+        int $maxRecords, int $batchSize, ?string $expectedPlanHash, ?callable $authorityReadback, array &$performance): array
+    {
         $maxRecords = min(10000, max(1, $maxRecords));
         $batchSize = min(250, max(1, $batchSize));
         if (count($authorityRecords) > $maxRecords) {
@@ -52,12 +94,13 @@ final class ControlledUrlTruthReconciliationService
             return $this->blocked('url_truth_hardened_schema_unavailable', $execute, $maxRecords, $batchSize);
         }
 
-        [$accepted, $rejectionCounts, $sourceConflicts] = $this->classifyAuthority($authorityRecords);
+        [$accepted, $rejectionCounts, $sourceConflicts] = $this->timed($performance, 'classify', fn () => $this->classifyAuthority($authorityRecords));
         $artifact = $this->artifact($accepted, $sourceMetadata, $maxRecords, $batchSize);
-        $before = $this->plan($accepted, $rejectionCounts, $sourceConflicts);
+        $before = $this->timed($performance, 'plan', fn () => $this->plan($accepted, $rejectionCounts, $sourceConflicts));
         $before['plan_hash'] = $this->planHash($artifact, $before);
         $batches = $this->batches($accepted, $batchSize);
-        $evidence = $this->consumerEvidence($batches, $probeHttp);
+        $performance['batch_count'] = count($batches);
+        $evidence = $this->timed($performance, 'http', fn () => $this->consumerEvidence($batches, $probeHttp));
         $detector = $this->sitemapAuthorityDetector($accepted, $artifact, $evidence, false);
 
         if (! $execute) {
@@ -83,35 +126,37 @@ final class ControlledUrlTruthReconciliationService
             return $this->blocked('authority_readback_required', true, $maxRecords, $batchSize, $artifact, $before);
         }
 
-        [$batchReceipts, $idempotency, $detector] = $this->connection()->transaction(function () use ($accepted, $artifact, $batches, $evidence, $expectedPlanHash, $authorityReadback, $maxRecords, $batchSize): array {
-            $locked = $this->plan($accepted, [], 0, true);
+        [$batchReceipts, $idempotency, $detector] = $this->connection()->transaction(function () use ($accepted, $artifact, $batches, $evidence, $expectedPlanHash, $authorityReadback, $maxRecords, $batchSize, &$performance): array {
+            $locked = $this->timed($performance, 'locked_plan', fn () => $this->plan($accepted, [], 0, true));
             // Rejection counts belong to the frozen source, not mutable Truth.
             if (! hash_equals($expectedPlanHash, $this->planHash($artifact, $locked))) {
                 throw new RuntimeException('URL_TRUTH_PLAN_CHANGED');
             }
-            $this->assertAuthorityUnchanged($authorityReadback, $artifact, $maxRecords, $batchSize);
+            $this->timed($performance, 'authority_readback', fn () => $this->assertAuthorityUnchanged($authorityReadback, $artifact, $maxRecords, $batchSize));
             $batchReceipts = [];
             foreach ($batches as $batch) {
                 $records = array_map(static fn (array $item): UrlTruthInventoryRecord => $item['record'], $batch['items']);
-                $this->retireReplacedBindings($batch['items']);
-                $this->writer->write($records);
-                $readback = $this->batchReadback($batch, $evidence);
+                $this->timed($performance, 'first_write', function () use ($batch, $records): void {
+                    $this->retireReplacedBindings($batch['items']);
+                    $this->writer->write($records);
+                });
+                $readback = $this->timed($performance, 'batch_readback', fn () => $this->batchReadback($batch, $evidence));
                 if (! $readback['database_readback_ok']) {
                     throw new RuntimeException('URL_TRUTH_BATCH_READBACK_FAILED');
                 }
                 $batchReceipts[] = $readback;
             }
-            $retired = $this->retireOrphans($accepted);
+            $retired = $this->timed($performance, 'retire_orphans', fn () => $this->retireOrphans($accepted));
 
             // Execute the exact same accepted input again. Semantic planning after this pass must remain a no-op.
             foreach ($batches as $batch) {
-                $this->writer->write(array_map(
+                $this->timed($performance, 'second_write', fn () => $this->writer->write(array_map(
                     static fn (array $item): UrlTruthInventoryRecord => $item['record'],
                     $batch['items'],
-                ));
+                )));
             }
 
-            $rerun = $this->plan($accepted, [], 0);
+            $rerun = $this->timed($performance, 'final_plan', fn () => $this->plan($accepted, [], 0));
             $privateLeakage = $this->privateLeakageCount();
             $bindingConflicts = $this->currentBindingConflictCount();
             $idempotency = [
@@ -132,8 +177,8 @@ final class ControlledUrlTruthReconciliationService
             if (! $idempotency['passed']) {
                 throw new RuntimeException('URL_TRUTH_IDEMPOTENCY_FAILED');
             }
-            $detector = $this->sitemapAuthorityDetector($accepted, $artifact, $evidence, true);
-            $this->assertAuthorityUnchanged($authorityReadback, $artifact, $maxRecords, $batchSize);
+            $detector = $this->timed($performance, 'detector', fn () => $this->sitemapAuthorityDetector($accepted, $artifact, $evidence, true));
+            $this->timed($performance, 'authority_readback', fn () => $this->assertAuthorityUnchanged($authorityReadback, $artifact, $maxRecords, $batchSize));
 
             return [$batchReceipts, $idempotency, $detector];
         });
@@ -487,7 +532,17 @@ final class ControlledUrlTruthReconciliationService
             ->where('is_private_flow', false)
             ->count();
         $bindings = $connection->table('seo_url_entities')->whereIn('current_binding_key', $identities)->count();
-        $semantic = $this->plan($batch['items'], [], 0);
+        $truthRows = $connection->table('seo_urls')->where('locale', $batch['locale'])
+            ->whereIn('canonical_url_hash', $hashes)->get()->keyBy('canonical_url_hash');
+        $bindingRows = $connection->table('seo_url_entities')->whereIn('current_binding_key', $identities)
+            ->get()->keyBy('current_binding_key');
+        $semanticCount = 0;
+        foreach ($batch['items'] as $item) {
+            $row = $truthRows->get($item['hash']);
+            if ($row !== null && $this->semanticallyCurrent($row, $bindingRows->get($item['identity']), $item)) {
+                $semanticCount++;
+            }
+        }
         $consumerMissing = [];
         $normalizedHashes = array_map(static fn (array $item): string => hash('sha256', rtrim($item['record']->canonicalUrl, '/')), $batch['items']);
         foreach (($evidence['consumer_urls'] ?? []) as $name => $urls) {
@@ -505,7 +560,7 @@ final class ControlledUrlTruthReconciliationService
             'url_truth_readback' => $truth,
             'current_binding_readback' => $bindings,
             'database_readback_ok' => $truth === $batch['record_count'] && $bindings === $batch['record_count']
-                && $semantic['counts']['no_change'] === $batch['record_count'],
+                && $semanticCount === $batch['record_count'],
             'consumer_missing' => $consumerMissing,
             'runtime_canonical_evidence_state' => (string) data_get($evidence, 'live_http.state', 'measurement_hold'),
         ];
@@ -724,13 +779,21 @@ final class ControlledUrlTruthReconciliationService
 
     private function retireReplacedBindings(array $items): void
     {
-        foreach ($items as $item) {
-            $this->connection()->table('seo_url_entities')->where('locale', $item['record']->locale)
-                ->where('canonical_url_hash', $item['hash'])->whereNotNull('current_binding_key')
-                ->where('current_binding_key', '!=', $item['identity'])->update([
+        foreach (array_chunk($items, 200) as $chunk) {
+            $query = $this->connection()->table('seo_url_entities')->whereNotNull('current_binding_key')
+                ->where(function ($query) use ($chunk): void {
+                    foreach ($chunk as $item) {
+                        $query->orWhere(static fn ($q) => $q->where('locale', $item['record']->locale)
+                            ->where('canonical_url_hash', $item['hash'])->where('current_binding_key', '!=', $item['identity']));
+                    }
+                });
+            $ids = $query->orderBy('id')->lockForUpdate()->pluck('id');
+            if ($ids->isNotEmpty()) {
+                $this->connection()->table('seo_url_entities')->whereIn('id', $ids)->update([
                     'current_binding_key' => null, 'binding_status' => 'superseded_canonical',
                     'retired_at' => now(), 'updated_at' => now(),
                 ]);
+            }
         }
     }
 
