@@ -32,6 +32,29 @@ test('normal and failed-smoke restoration budgets leave time inside the job', ()
     requiredSeconds(30,{eq_new_source_articles_publish:true}));
 });
 
+test('pending IQ publication fits the production job with matching remaining budget', () => {
+  const workflow = read('../workflows/deploy.yml');
+  const production = workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
+  assert.ok(production);
+  const jobSeconds = Number(production.match(/^    timeout-minutes: (\d+)$/m)?.[1]) * 60;
+  const remainingSeconds = Number(production.match(/remaining=\$\(\((\d+) - \$\(date/)?.[1]);
+  assert.equal(remainingSeconds, jobSeconds);
+  const operations = classifyPaths(['backend/content_assets/iq_public/entry/20261009-v1/IQ-01-en.md']).operations;
+  assert.equal(operations.iq_public_scale_publish, true);
+  const required = requiredSeconds(30, operations);
+  assert.equal(required, 7560);
+  assert.ok(jobSeconds - 60 >= required, 'reserve a minute of setup before admitting the pending IQ publication');
+  const admission = production.match(/          remaining=\$\(\([\s\S]*?          test "\$remaining" -ge "\$required"/)?.[0];
+  assert.ok(admission);
+  const script = admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/, `'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
+  const runAdmission = elapsed => spawnSync('bash', ['-eu', '-c', script], {encoding:'utf8', env:{...process.env,
+    deploy_minutes:'30', PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
+  }});
+  const admitted = runAdmission(60);
+  assert.equal(admitted.status, 0, admitted.stderr);
+  assert.notEqual(runAdmission(jobSeconds-required+60).status, 0, 'actual workflow must still refuse admission when recovery no longer fits');
+});
+
 test('article cache closeout is selected only for its existing content and readers', () => {
   assert.equal(classifyPaths(['backend/app/Services/Cms/MbtiReportArticleRelease.php']).operations.mbti_report_articles_closeout,true);
   assert.equal(classifyPaths(['backend/content_assets/mbti_report_articles/20261019/en.md']).operations.mbti_report_articles_closeout,true);
