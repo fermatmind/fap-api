@@ -12,6 +12,27 @@ use Illuminate\Support\Facades\DB;
 
 final class ArticleImageMetadataUpdater
 {
+    /** Preserve the selected image and all editorial overrides when changing alt only. */
+    public function updateCoverAlt(Article $selected, string $alt): void
+    {
+        DB::transaction(function () use ($selected, $alt): void {
+            $article = Article::withoutGlobalScopes()->with(['seoMeta' => fn ($query) => $query->withoutGlobalScopes()])
+                ->whereKey($selected->getKey())->lockForUpdate()->firstOrFail();
+            $errors = [];
+            $this->validateArticleLock([$article], [(int) $article->id], (string) $selected->translation_group_id, $errors);
+            if ($errors !== [] || trim($alt) === '' || mb_strlen($alt) > 255) {
+                throw new \RuntimeException('published_article_cover_alt_rejected');
+            }
+            $updates = ['cover_image_alt' => trim($alt)];
+            $variants = $article->cover_image_variants;
+            if (is_array(data_get($variants, 'editorial_package_v1.social_image_metadata'))) {
+                $variants['editorial_package_v1']['social_image_metadata']['alt_text'] = trim($alt);
+                $updates['cover_image_variants'] = $variants;
+            }
+            $article->forceFill($updates)->saveQuietly();
+        });
+    }
+
     private const REQUIRED_VARIANTS = ['hero', 'card', 'thumbnail', 'og', 'preload'];
 
     private const BODY_VISUAL_FIELDS = ['body_visual_asset_key', 'body_visual_image_url', 'body_visual_fallback_authorized'];

@@ -3125,6 +3125,12 @@ return [
             ],
         ],
         'articles' => [
+            'cover_alt' => [
+                'action' => 'Update published cover alt',
+                'description' => 'Change only the current cover description through the native media updater. Keep the image, dimensions, body, source version and publication pointers. Refresh the affected public readers after commit.',
+                'success' => 'Cover alt updated and public cache refreshed',
+                'cache_failed' => 'Cover alt saved; cache closeout failed. Inspect release diagnostics before another update.',
+            ],
             'controlled_publish' => [
                 'action' => 'Publish through native controls',
                 'description' => 'Uses the existing controlled command for this saved revision. Complete editorial review and open its authenticated preview first. Preflight below assumes new-article indexing; indexing and claim acknowledgements still require your selection. Existing article updates preserve search and URL inventory controls.',

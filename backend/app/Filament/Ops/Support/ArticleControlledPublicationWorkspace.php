@@ -8,12 +8,53 @@ use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Models\Article;
 use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 /** @review-surface article */
 final class ArticleControlledPublicationWorkspace
 {
+    public function prepareCoverAlt(Article $selected): array
+    {
+        $article = $this->selected($selected);
+        abort_unless($article->is_public && $article->published_revision_id !== null, 422);
+
+        return ['target_hash' => ArticleSourceTargetSnapshot::publicationHash($article), 'cover_image_alt' => $article->cover_image_alt];
+    }
+
+    /** Use the existing media-only updater; retain body, pointers and source identity. */
+    public function updateCoverAlt(Article $selected, array $data): array
+    {
+        $article = $this->selected($selected);
+        $alt = trim((string) ($data['cover_image_alt'] ?? ''));
+        if ($alt === '' || mb_strlen($alt) > 255) {
+            throw ValidationException::withMessages(['cover_image_alt' => __('validation.between.string', ['attribute' => 'alt', 'min' => 1, 'max' => 255])]);
+        }
+        if (! ContentReleaseFollowUp::articleCacheConfigured()) {
+            throw ValidationException::withMessages(['cover_image_alt' => 'article_cache_configuration_required']);
+        }
+        DB::transaction(function () use ($article, $data, $alt): void {
+            try {
+                ArticleSourceTargetSnapshot::assertPublicationHash($article, (string) ($data['target_hash'] ?? ''), true);
+            } catch (\RuntimeException $exception) {
+                throw ValidationException::withMessages(['cover_image_alt' => $exception->getMessage()]);
+            }
+            $record = $article->fresh(['seoMeta']);
+            app(\App\Services\Cms\ArticleImageMetadataUpdater::class)->updateCoverAlt($record, $alt);
+            app(\App\Services\Audit\AuditLogger::class)->log(request(), 'article_cover_alt_updated', 'article', (string) $record->id,
+                ['published_revision_id' => $record->published_revision_id, 'before_sha256' => hash('sha256', (string) $record->cover_image_alt), 'after_sha256' => hash('sha256', $alt)],
+                reason: 'native_article_media_metadata', result: 'success');
+        });
+        try {
+            ContentReleaseFollowUp::dispatchArticlePathsStrict($article->fresh(['publishedRevision', 'seoMeta']), 'article_cover_alt_updated');
+
+            return ['ok' => true, 'metadata' => 'committed', 'cache_closeout' => 'success'];
+        } catch (\Throwable) {
+            return ['ok' => false, 'metadata' => 'committed', 'cache_closeout' => 'failed'];
+        }
+    }
+
     public function prepare(Article $selected): array
     {
         $article = $this->selected($selected);

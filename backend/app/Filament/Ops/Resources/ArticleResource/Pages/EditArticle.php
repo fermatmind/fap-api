@@ -213,6 +213,34 @@ class EditArticle extends EditRecord
                     $notification->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
                 }),
+            Action::make('updatePublishedCoverAlt')
+                ->label(__('ops.resources.articles.cover_alt.action'))
+                ->icon('heroicon-o-photo')
+                ->color('gray')
+                ->visible(fn (): bool => ContentAccess::canRelease() && (int) $this->getRecord()->org_id === 0 && $this->getRecord()->published_revision_id !== null)
+                ->modalDescription(__('ops.resources.articles.cover_alt.description'))
+                ->fillForm(fn (): array => app(ArticleControlledPublicationWorkspace::class)->prepareCoverAlt($this->getRecord()))
+                ->form([
+                    Textarea::make('target_hash')->label(__('ops.resources.articles.controlled_publish.snapshot'))->readOnly()->required()->rows(2),
+                    Textarea::make('cover_image_alt')->label(__('ops.resources.articles.fields.cover_image_alt'))->required()->maxLength(255)->rows(3),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        $result = app(ArticleControlledPublicationWorkspace::class)->updateCoverAlt($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.cover_image_alt' => $exception->errors()['cover_image_alt'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    $notification = Notification::make();
+                    if ($result['ok']) {
+                        $notification->title(__('ops.resources.articles.cover_alt.success'))->success();
+                    } else {
+                        $notification->title(__('ops.resources.articles.cover_alt.cache_failed'))->warning()->persistent();
+                    }
+                    $notification->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
             Action::make('openPublicUrl')
                 ->label(__('ops.resources.articles.actions.open_public_url'))
                 ->url(fn (): ?string => ArticleWorkspace::publicUrl(
