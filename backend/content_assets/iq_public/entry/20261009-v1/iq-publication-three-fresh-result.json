@@ -6,76 +6,108 @@
       "locales": [
         {
           "locale": "en",
-          "body_sha256": "bd4387ab5c537c32a1097b3aab13d71fd7ab139032b36243bfbf10e225a6914e",
-          "candidate_json_sha256": "8514cf155e51a57daab482db17c7bd1476f62422299f122c03618e9c91f9ee27",
+          "body_sha256": "28632aca838c27c6ab25dbfe9e6394b39242938c04b25d3374a5f503afd2ca85",
+          "candidate_json_sha256": "a0f28f99c4c4e670936956f14ac7ca1ba4859848af3f01dfb7e96c5a3c863385",
           "decision": "PASS",
           "findings": [],
-          "copy_review": {
-            "reviewer": "fm_independent_reviewer",
-            "task": "iq_copy_review",
-            "frozen_index_sha256": "7723898898b411bdc51f1f789df55ef0292166c46ee62aa8c799914186752bdb",
-            "scope": "Approved current-model copy, bilingual correspondence, 31-row math, FAQ/metadata consistency; not population validation or publication."
-          },
+          "reviewer": "fm_independent_reviewer",
+          "scope": "IQ-01 English public entry line 47 clarification; full candidate context, frozen scoring reference, numeric consistency and unchanged fields.",
+          "source_checks": [
+            {
+              "source": "IqBetaReferenceScore.php:7,29-51,81-92",
+              "result": "Designed N(100,15) reference, not a population norm; clarification and existing examples agree with the implementation."
+            },
+            {
+              "source": "baseline-en.md / candidate-en.md:47",
+              "result": "One added sentence only; links, 30 questions, estimated duration and free scope unchanged."
+            },
+            {
+              "source": "baseline-en.json / candidate-en.json:4-82",
+              "result": "Only candidate_sha256 changed; metadata, FAQ, entry_fields, identity and locale are byte-identical."
+            },
+            {
+              "source": "review-input/hashes.json",
+              "result": "All six frozen input hashes and both body bindings match."
+            }
+          ],
+          "unverified": [
+            "Publication, current runtime identity, visible page and free flow.",
+            "External links and unchanged external scientific sources.",
+            "Deployment, indexing, ranking and growth."
+          ],
           "previous_review": {
             "locale": "en",
-            "body_sha256": "33fe71b88ecafb09598d7994863146a1745f953b44b45a1617567d1bcd38ef45",
-            "candidate_json_sha256": "1cac8a6a1bd0a0854bedd2e5a849a0dbd10e11c9a114a254757ba073ba036879",
+            "body_sha256": "bd4387ab5c537c32a1097b3aab13d71fd7ab139032b36243bfbf10e225a6914e",
+            "candidate_json_sha256": "8514cf155e51a57daab482db17c7bd1476f62422299f122c03618e9c91f9ee27",
             "decision": "PASS",
             "findings": [],
-            "translation_review": {
+            "copy_review": {
               "reviewer": "fm_independent_reviewer",
-              "task": "iq_translation_review",
-              "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
-              "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
-              "verdict": "PASS"
+              "task": "iq_copy_review",
+              "frozen_index_sha256": "7723898898b411bdc51f1f789df55ef0292166c46ee62aa8c799914186752bdb",
+              "scope": "Approved current-model copy, bilingual correspondence, 31-row math, FAQ/metadata consistency; not population validation or publication."
             },
             "previous_review": {
               "locale": "en",
               "body_sha256": "33fe71b88ecafb09598d7994863146a1745f953b44b45a1617567d1bcd38ef45",
-              "candidate_json_sha256": "da22750f1d8086933a91b6c2c4431e67a80256439004f3852edf0b6a0d8cfc77",
+              "candidate_json_sha256": "1cac8a6a1bd0a0854bedd2e5a849a0dbd10e11c9a114a254757ba073ba036879",
               "decision": "PASS",
               "findings": [],
               "translation_review": {
                 "reviewer": "fm_independent_reviewer",
                 "task": "iq_translation_review",
                 "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
-                "frozen_manifest_sha256": "041d78687f0497e50724fbe282c410ccc94ce93a5bd1d701eab7fd90592c5110",
+                "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
                 "verdict": "PASS"
               },
               "previous_review": {
                 "locale": "en",
-                "body_sha256": "67cf9abcb1b6a1feb6917edaf078f1dd924f581cda5ff56ed362e0698ccd421c",
-                "candidate_json_sha256": "4d879c1c07db2c3fb2d491848f886586b5d94f42a1ac3cb818c3b6e5aeaab80e",
+                "body_sha256": "33fe71b88ecafb09598d7994863146a1745f953b44b45a1617567d1bcd38ef45",
+                "candidate_json_sha256": "da22750f1d8086933a91b6c2c4431e67a80256439004f3852edf0b6a0d8cfc77",
                 "decision": "PASS",
                 "findings": [],
-                "source_checks": [
-                  {
-                    "candidate_location": "publication-review-input/IQ-01-en.md:3-13；JSON metadata及11项FAQ",
-                    "source_location": "research/current/IQ-01-en-lookup.json：forms、capabilities、commercial；IQ-01-en-ssr.txt:98-99,125",
-                    "result": "冻结API提供30题、estimated_minutes=20、free_only和FREE；正文准确写为预计时间，没有将20分钟写成硬时限，没有借legacy代码宣称Raven或Mensa身份。标题、摘要、正文和FAQ一致。"
-                  },
-                  {
-                    "candidate_location": "publication-review-input/IQ-01-en.md:17-29",
-                    "source_location": "候选内完整教学网格",
-                    "result": "逐行逐列复核数量与方向，缺项为五个向下箭头。错误规则与错误答案均有具体反例；正文明确这是教学示例，并承认有限网格不能排除所有想象规则。"
-                  },
-                  {
-                    "candidate_location": "publication-review-input/IQ-01-en.md:33-45；FAQ计分、Beta及截断条目",
-                    "source_location": "research/source-current/fap-api/backend/app/Services/Assessment/IqBetaStandardScore.php:19-29,59-76；Iq/IqOwnerOriginal30BankService.php:188-194；research/current/IQ-01-en-ssr.txt:71-77",
-                    "result": "源码与公开原始投影支持公式和资格边界。独立重算18/30=60%；R=8时z=1.4277286、Beta=121；R=0为62；R=11为144；所有整数R=12至30均截断为145。正文没有把模拟基线称为人口常模或百分位，也没有承诺报告界面必然显示Beta。"
-                  },
-                  {
-                    "candidate_location": "publication-review-input/IQ-01-en.md:49-59",
-                    "source_location": "research/original-source-extracts-v2/standards-2014.txt：PDF第21-23页、第113-114页",
-                    "result": "效度与具体解释、用途相联系；年龄资格和跨年龄比较需要相应证据。正文没有转借外部工具效度，下一步可执行，重复提分没有被解释为一般智力增长。"
-                  }
-                ],
-                "unverified": [
-                  "未实际完成30题作答、提交或报告读取；冻结测试源码只是实现证据，本轮没有运行该测试。",
-                  "未枚举生产release snapshot全部题目、核私有答案键或当前生产计分配置；题数和商业范围按冻结API原始响应判断。",
-                  "教学示例是否绝对未与所有题库偶合，没有进行跨题库查重；其内部推理正确。",
-                  "CTA、内链当前可访问性、桌面/手机呈现、CMS接受及生产状态不在本轮范围。"
-                ]
+                "translation_review": {
+                  "reviewer": "fm_independent_reviewer",
+                  "task": "iq_translation_review",
+                  "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+                  "frozen_manifest_sha256": "041d78687f0497e50724fbe282c410ccc94ce93a5bd1d701eab7fd90592c5110",
+                  "verdict": "PASS"
+                },
+                "previous_review": {
+                  "locale": "en",
+                  "body_sha256": "67cf9abcb1b6a1feb6917edaf078f1dd924f581cda5ff56ed362e0698ccd421c",
+                  "candidate_json_sha256": "4d879c1c07db2c3fb2d491848f886586b5d94f42a1ac3cb818c3b6e5aeaab80e",
+                  "decision": "PASS",
+                  "findings": [],
+                  "source_checks": [
+                    {
+                      "candidate_location": "publication-review-input/IQ-01-en.md:3-13；JSON metadata及11项FAQ",
+                      "source_location": "research/current/IQ-01-en-lookup.json：forms、capabilities、commercial；IQ-01-en-ssr.txt:98-99,125",
+                      "result": "冻结API提供30题、estimated_minutes=20、free_only和FREE；正文准确写为预计时间，没有将20分钟写成硬时限，没有借legacy代码宣称Raven或Mensa身份。标题、摘要、正文和FAQ一致。"
+                    },
+                    {
+                      "candidate_location": "publication-review-input/IQ-01-en.md:17-29",
+                      "source_location": "候选内完整教学网格",
+                      "result": "逐行逐列复核数量与方向，缺项为五个向下箭头。错误规则与错误答案均有具体反例；正文明确这是教学示例，并承认有限网格不能排除所有想象规则。"
+                    },
+                    {
+                      "candidate_location": "publication-review-input/IQ-01-en.md:33-45；FAQ计分、Beta及截断条目",
+                      "source_location": "research/source-current/fap-api/backend/app/Services/Assessment/IqBetaStandardScore.php:19-29,59-76；Iq/IqOwnerOriginal30BankService.php:188-194；research/current/IQ-01-en-ssr.txt:71-77",
+                      "result": "源码与公开原始投影支持公式和资格边界。独立重算18/30=60%；R=8时z=1.4277286、Beta=121；R=0为62；R=11为144；所有整数R=12至30均截断为145。正文没有把模拟基线称为人口常模或百分位，也没有承诺报告界面必然显示Beta。"
+                    },
+                    {
+                      "candidate_location": "publication-review-input/IQ-01-en.md:49-59",
+                      "source_location": "research/original-source-extracts-v2/standards-2014.txt：PDF第21-23页、第113-114页",
+                      "result": "效度与具体解释、用途相联系；年龄资格和跨年龄比较需要相应证据。正文没有转借外部工具效度，下一步可执行，重复提分没有被解释为一般智力增长。"
+                    }
+                  ],
+                  "unverified": [
+                    "未实际完成30题作答、提交或报告读取；冻结测试源码只是实现证据，本轮没有运行该测试。",
+                    "未枚举生产release snapshot全部题目、核私有答案键或当前生产计分配置；题数和商业范围按冻结API原始响应判断。",
+                    "教学示例是否绝对未与所有题库偶合，没有进行跨题库查重；其内部推理正确。",
+                    "CTA、内链当前可访问性、桌面/手机呈现、CMS接受及生产状态不在本轮范围。"
+                  ]
+                }
               }
             }
           }
