@@ -142,6 +142,7 @@ function get($key, $default = null) { return $GLOBALS['config'][$key] ?? $defaul
 ${deploy.slice(deploy.indexOf('function deployOperation('), deploy.indexOf("\nset('sentry_release'"))}
 function set($key, $value) { $GLOBALS['config'][$key] = $value; }
 function currentHost() { return new class { function getAlias() { return $GLOBALS['host']; } }; }
+function deployMode() { return $GLOBALS['input']['mode'] ?? 'maintenance'; }
 function deploySkipsAuthorityMutations() { return $GLOBALS['input']['skip'] ?? false; }
 function deployCareerDetailMinimumTargets($host) { return 1; }
 function deployPlaceholderPathArg($root, $suffix) { return $root.'/'.$suffix; }
@@ -177,7 +178,7 @@ function coverageReport(slugs = 1046, writes = false) {
   };
 }
 
-test('standard deploy consumes complete post-repair coverage once without a redundant remote scan', () => {
+test('explicit maintenance consumes complete post-repair coverage once without a redundant remote scan', () => {
   for (const host of ['production', 'staging']) {
     for (const writes of [false, true]) {
       const result = coverageTasks({ host, report: coverageReport(host === 'production' ? 1046 : 30, writes) });
@@ -297,4 +298,14 @@ test('content-only and other non-mutating deploy modes retain the existing skip'
   const result = coverageTasks({ skip: true });
   assert.equal(result.error, null);
   assert.deepEqual(result.commands, []);
+});
+
+
+test('ordinary staging and production never scan or repair complete Career coverage', () => {
+  for (const host of ['staging', 'production']) {
+    const result = coverageTasks({host, mode:'standard', command_error:true});
+    assert.equal(result.error, null);
+    assert.deepEqual(result.commands, []);
+    assert.equal(result.coverage, null);
+  }
 });

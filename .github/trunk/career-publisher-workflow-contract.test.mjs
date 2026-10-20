@@ -322,3 +322,43 @@ test('actual state acceptance rejects drift and routes it to the existing late r
     } finally {sim.close();}
   }
 });
+
+
+test('actual ordinary deployment task bodies cannot call full maintenance transports', () => {
+  const names = ['career:repair-published-detail-cache-coverage','guard:career-detail-cache-coverage',
+    'guard:career-runtime-projection-authority','career:prune-public-cache-versions',
+    'career:warm-public-authority-cache','career:rebuild-directory-after-detail-repair',
+    'guard:career-discoverability-pre-sitemap','guard:career-discoverability-post-sitemap',
+    'seo:url-truth-reconciliation-receipt','seo:url-truth-controlled-reconcile',
+    'seo:warm-sitemap-source-cache','seo:refresh-sitemap-source-before-activation'];
+  for (const name of names) {
+    const task=deployer.split(`task('${name}', function () {`)[1]?.split('\n});')[0];
+    assert.ok(task, name);
+    const run=spawnSync('php',['-r',`namespace Deployer;
+function deployMode(){return 'standard';}
+function writeln($message){}
+function run(...$args){throw new \\RuntimeException('FULL_MAINTENANCE_CALLED');}
+$task=function(){${task}};$task();echo 'focused';`],{encoding:'utf8'});
+    assert.equal(run.status,0,`${name}: ${run.stderr}`);
+    assert.equal(run.stdout,'focused',name);
+  }
+});
+
+test('ordinary Career reader smoke executes and propagates transport failures', () => {
+  const task=deployer.split("task('healthcheck:career-content-only', function () {")[1].split('\n});')[0];
+  for(const fail of [false,true]){
+    const run=spawnSync('php',['-r',`namespace Deployer;
+function deployUsesCareerContentPackage(){return false;}
+function deployOperation($name){return $name==='career_cache';}
+function get($key,$default=null){return $key==='healthcheck_host'?'example.test':$default;}
+function deploySafeHost($value,$label){return $value;}
+function deployCurlResolveArg(...$args){return '';}
+function deployHttpsUrlArg($host,$path){return $path;}
+function deployShellArg($value){return $value;}
+function run($command){if(${fail?'true':'false'})throw new \\RuntimeException('READER_SMOKE_FAILED');echo "checked\\n";}
+$task=function(){${task}};$task();`],{encoding:'utf8'});
+    if(fail){assert.notEqual(run.status,0);assert.match(run.stderr,/READER_SMOKE_FAILED/);}
+    else {assert.equal(run.status,0,run.stderr);assert.equal(run.stdout.trim().split('\n').length,2);}
+  }
+  assert.doesNotMatch(deployer,/CAREER_PARITY_COMPACT_PAGE_CACHE=1/);
+});

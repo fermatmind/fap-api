@@ -811,6 +811,12 @@ before('deploy:symlink', 'guard:public-dns-health');
  * L1 runtime activation.
  */
 task('guard:career-detail-cache-coverage', function () {
+    // Ordinary releases verify affected readers; full maintenance is not deployment.
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: guard:career-detail-cache-coverage.');
+
+        return;
+    }
     if (! deployOperation('career_cache')) {
         writeln('Skip unchanged guard:career-detail-cache-coverage consumer.');
 
@@ -874,6 +880,12 @@ task('guard:career-detail-cache-coverage', function () {
  * read-only gate below as the activation authority.
  */
 task('career:repair-published-detail-cache-coverage', function () {
+    // Ordinary releases verify affected readers; full maintenance is not deployment.
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: career:repair-published-detail-cache-coverage.');
+
+        return;
+    }
     if (! deployOperation('career_cache')) {
         writeln('Skip unchanged career:repair-published-detail-cache-coverage consumer.');
 
@@ -936,6 +948,12 @@ before('deploy:symlink', 'guard:queue-reload-capability');
  * closed when the shared private authority artifact is missing or malformed.
  */
 task('guard:career-runtime-projection-authority', function () {
+    // Ordinary releases verify affected readers; full maintenance is not deployment.
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: guard:career-runtime-projection-authority.');
+
+        return;
+    }
     if (! deployOperation('career_cache')) {
         writeln('Skip unchanged guard:career-runtime-projection-authority consumer.');
 
@@ -968,6 +986,12 @@ BASH,
  * candidates or consume production Redis capacity.
  */
 task('career:rebuild-directory-after-detail-repair', function () {
+    // Ordinary releases verify affected readers; full maintenance is not deployment.
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: career:rebuild-directory-after-detail-repair.');
+
+        return;
+    }
     if (! deployOperation('career_cache')) {
         writeln('Skip unchanged career:rebuild-directory-after-detail-repair');
 
@@ -994,6 +1018,12 @@ task('career:rebuild-directory-after-detail-repair', function () {
 });
 
 task('guard:career-discoverability-pre-sitemap', function () {
+    // Ordinary releases verify affected readers; full maintenance is not deployment.
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: guard:career-discoverability-pre-sitemap.');
+
+        return;
+    }
     if (! deployOperation('career_cache')) {
         writeln('Skip unchanged guard:career-discoverability-pre-sitemap consumer.');
 
@@ -1010,6 +1040,12 @@ task('guard:career-discoverability-pre-sitemap', function () {
 });
 
 task('guard:career-discoverability-post-sitemap', function () {
+    // Ordinary releases verify affected readers; full maintenance is not deployment.
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: guard:career-discoverability-post-sitemap.');
+
+        return;
+    }
     if (! deployOperation('career_cache')) {
         writeln('Skip unchanged guard:career-discoverability-post-sitemap consumer.');
 
@@ -2970,6 +3006,12 @@ BASH);
 });
 
 task('seo:url-truth-reconciliation-receipt', function () {
+    // Ordinary releases verify affected readers; full maintenance is not deployment.
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: seo:url-truth-reconciliation-receipt.');
+
+        return;
+    }
     if (! deployOperation('url_truth')) {
         writeln('Skip unchanged seo:url-truth-reconciliation-receipt consumer.');
 
@@ -3068,6 +3110,12 @@ function runUrlTruthWithPerformance(string $command): void
 }
 
 task('seo:url-truth-controlled-reconcile', function () {
+    // Ordinary releases verify affected readers; full maintenance is not deployment.
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: seo:url-truth-controlled-reconcile.');
+
+        return;
+    }
     if (! deployOperation('url_truth')) {
         writeln('Skip unchanged seo:url-truth-controlled-reconcile consumer.');
 
@@ -3521,6 +3569,12 @@ task('cache:accept-public-projection', function () {
 });
 
 task('career:prune-public-cache-versions', function () {
+    // Ordinary releases verify affected readers; full maintenance is not deployment.
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: career:prune-public-cache-versions.');
+
+        return;
+    }
     if (! deployOperation('career_cache')) {
         writeln('Skip unchanged career:prune-public-cache-versions');
 
@@ -3535,6 +3589,12 @@ task('career:prune-public-cache-versions', function () {
 });
 
 task('career:warm-public-authority-cache', function () {
+    // Ordinary releases verify affected readers; full maintenance is not deployment.
+    if (deployMode() === 'standard') {
+        writeln('Skip full maintenance during ordinary deployment: career:warm-public-authority-cache.');
+
+        return;
+    }
     if (! deployOperation('career_cache')) {
         writeln('Skip unchanged career:warm-public-authority-cache consumer.');
 
@@ -3739,10 +3799,20 @@ BASH,
 }
 
 task('seo:warm-sitemap-source-cache', function () {
+    if (deployMode() === 'standard') {
+        writeln('Skip sitemap prewarming during ordinary deployment.');
+
+        return;
+    }
     deployWarmSitemapSourceCache();
 });
 
 task('seo:refresh-sitemap-source-before-activation', function () {
+    if (deployMode() === 'standard') {
+        writeln('Skip sitemap prewarming during ordinary deployment.');
+
+        return;
+    }
     // Full candidate guards can consume most of the fresh TTL. Renew the same
     // verified generation immediately before every runtime-root activation.
     // This changes derived cache only, not CMS, URL Truth or search authority.
@@ -4697,7 +4767,7 @@ task('healthcheck:public', function () {
 });
 
 task('healthcheck:career-content-only', function () {
-    if (! deployUsesCareerContentPackage()) {
+    if (! deployUsesCareerContentPackage() && ! deployOperation('career_cache')) {
         return;
     }
 
@@ -4721,7 +4791,7 @@ task('healthcheck:sitemap-source', function () {
     $jq = deployShellArg(
         '.ok==true and .count >= 1 and (.source=="backend_sitemap_generator" or .source=="backend_sitemap_generator_fallback")'
     );
-    $cmd = "curl -fsS {$resolveArg}{$url} | jq -e {$jq}";
+    $cmd = "curl -fsS --max-time 120 {$resolveArg}{$url} | jq -e {$jq}";
     run($cmd);
 });
 
@@ -5688,7 +5758,6 @@ if ! sudo -n -u www-data -- env \
   CAREER_PARITY_ACTIVE_BACKEND_ROOT='{{career_parity_active_backend_root}}' \
   CAREER_PARITY_MODE=production-preactivation \
   CAREER_PARITY_REDIS_MODE=readonly \
-  CAREER_PARITY_COMPACT_PAGE_CACHE=1 \
   CAREER_PARITY_RECEIPT_PATH="$receipt_path" \
   {{bin/php}} -d memory_limit=1024M '{{release_path}}/backend/scripts/ci/career_current_authority_parity.php' >/dev/null; then
   safe_error_code="$(sudo -n -u www-data -- jq -r '.safe_error_code // "CAREER_PARITY_FAILED"' "$receipt_path" 2>/dev/null || true)"

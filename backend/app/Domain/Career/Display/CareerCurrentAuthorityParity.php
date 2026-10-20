@@ -174,23 +174,28 @@ final class CareerCurrentAuthorityParity
         return $receipt;
     }
 
-    /** Validate every installed JSON against the manifest and body contract without projecting it. */
+    /** CI validates schema/body/codec. Production verifies the exact installed manifest-bound bytes. */
     public function scanFiles(array $authority): array
     {
         $hashes = [];
         $bytes = 0;
         foreach ($authority['slugs'] as $slug) {
             foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                $content = $this->loader->pageFromPublishIndex($authority, $slug, $locale);
-                $hashes[] = $content['source_content_sha256'];
-                $bytes += $authority['entries'][$slug][$locale]['bytes'];
-                unset($content);
+                $entry = $authority['entries'][$slug][$locale];
+                $path = $authority['root'].'/'.$entry['path'];
+                if (! is_file($path) || is_link($path) || filesize($path) !== $entry['bytes']
+                    || ! hash_equals($entry['sha256'], hash_file('sha256', $path))) {
+                    throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_HASH_MISMATCH');
+                }
+                $hashes[] = $entry['source_content_sha256'];
+                $bytes += $entry['bytes'];
             }
         }
 
         return [
             'status' => 'pass',
             'delivery_mode' => 'file_authoritative',
+            'validation_method' => 'ci_validated_installed_bytes',
             'counts' => ['slugs' => count($authority['slugs']), 'locales' => 2,
                 'locale_pages' => count($hashes), 'verified_files' => count($hashes)],
             'source_semantic_aggregate_sha256' => CareerCurrentAuthorityPackage::hashValue($hashes),
