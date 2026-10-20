@@ -200,6 +200,9 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
 
     public function test_native_login_mfa_preview_and_review_bind_the_exact_isolated_revision(): void
     {
+        // Exercise real login/MFA without coupling this article test to a Redis
+        // daemon. The distributed limiter's key semantics have their own suite.
+        \Illuminate\Support\Facades\Redis::shouldReceive('del')->times(4)->andReturn(1);
         config(['admin.panel_enabled' => true, 'admin.totp.enabled' => true]);
         \Filament\Facades\Filament::setCurrentPanel(app(\Filament\PanelRegistry::class)->get('ops'));
         $password = 'Isolated-test-password-42!';
