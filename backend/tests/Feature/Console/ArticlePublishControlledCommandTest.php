@@ -27,6 +27,188 @@ final class ArticlePublishControlledCommandTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_editor_owner_runs_the_native_new_article_command_with_exact_saved_state(): void
+    {
+        $this->loginPublisher();
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/api/content-release/revalidate'], 'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        Http::fake(['*' => Http::response(self::frontendArticleReceipt())]);
+        $article = $this->createControlledDraft();
+        $target = (int) $article->working_revision_id;
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $prepared = $workspace->prepare($article);
+        $this->assertTrue(json_decode($prepared['preflight'], true)['ok']);
+        \Filament\Facades\Filament::setCurrentPanel(app(\Filament\PanelRegistry::class)->get('ops'));
+        \Livewire\Livewire::test(\App\Filament\Ops\Resources\ArticleResource\Pages\EditArticle::class, ['record' => $article->id])
+            ->callAction('publishControlled', ['target_hash' => $prepared['target_hash'], 'preview_approved' => true, 'make_indexable' => true])
+            ->assertHasNoActionErrors()->assertRedirect()
+            ->assertNotified(__('ops.resources.articles.controlled_publish.success'));
+        $this->assertSame($target, (int) $article->fresh()->published_revision_id);
+        $this->assertTrue($article->fresh()->is_public);
+        $this->assertTrue($article->fresh()->is_indexable);
+        $this->assertDatabaseHas('audit_logs', ['action' => 'codex_controlled_article_publish', 'actor_admin_id' => auth('admin')->id()]);
+    }
+
+    #[DataProvider('newArticleCacheFailures')]
+    public function test_editor_new_article_reports_committed_cache_failures_without_republishing(string $case): void
+    {
+        $this->loginPublisher();
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/api/content-release/revalidate'], 'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        $article = $this->createControlledDraft();
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $prepared = $workspace->prepare($article);
+        if ($case === 'post_commit_exception') {
+            \Illuminate\Support\Facades\File::partialMock()->shouldReceive('ensureDirectoryExists')->once()
+                ->andThrow(new RuntimeException('Synthetic post-commit reader failure.'));
+        }
+        Http::fake(['*' => Http::response($case === 'bad_receipt' ? ['ok' => true] : ['ok' => false], $case === 'http_503' ? 503 : 200)]);
+        $data = ['target_hash' => $prepared['target_hash'], 'preview_approved' => true, 'make_indexable' => true];
+        $result = $workspace->publish($article, $data);
+        $this->assertFalse($result['ok']);
+        $this->assertSame('committed', $result['publication']);
+        $this->assertSame('failed', $result['cache_closeout']);
+        $this->assertSame((int) $article->working_revision_id, (int) $article->fresh()->published_revision_id);
+        try {
+            $workspace->publish($article, $data);
+            $this->fail('A committed publication must not replay its old snapshot.');
+        } catch (\Illuminate\Validation\ValidationException $exception) {
+            $this->assertStringContainsString('article_publication_state_changed', $exception->getMessage());
+        }
+        $this->assertDatabaseCount('article_translation_revisions', 1);
+    }
+
+    public static function newArticleCacheFailures(): array
+    {
+        return [['http_503'], ['bad_receipt'], ['post_commit_exception']];
+    }
+
+    public function test_editor_new_article_rejects_missing_cache_configuration_before_publication(): void
+    {
+        $this->loginPublisher();
+        config(['ops.content_release_observability.cache_invalidation_urls' => []]);
+        $article = $this->createControlledDraft();
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $prepared = $workspace->prepare($article);
+        $this->assertFalse(json_decode($prepared['preflight'], true)['ok']);
+        try {
+            $workspace->publish($article, ['target_hash' => $prepared['target_hash'], 'preview_approved' => true, 'make_indexable' => true]);
+            $this->fail('A missing cache transport must block the new path.');
+        } catch (\Illuminate\Validation\ValidationException $exception) {
+            $this->assertStringContainsString('single_article_cache_configuration_required', $exception->getMessage());
+        }
+        $this->assertNull($article->fresh()->published_revision_id);
+    }
+
+    private static function frontendArticleReceipt(): array
+    {
+        return ['ok' => true, 'revalidated_paths' => [
+            '/zh', '/zh/articles', '/zh/articles/controlled-publish-draft', '/llms.txt', '/llms-full.txt',
+            '/zh/topics/mbti', '/zh/tests/holland-career-interest-test-riasec',
+            '/en/articles', '/en/articles/controlled-publish-draft',
+        ], 'rejected_paths' => [], 'invalidated_tags' => [
+            'article-detail:zh-CN:controlled-publish-draft', 'article-seo:zh-CN:controlled-publish-draft',
+        ]];
+    }
+
+    #[DataProvider('editorRejects')]
+    public function test_editor_rejects_invalid_authority_or_preconditions_without_publication(string $case): void
+    {
+        $this->loginPublisher();
+        $article = $this->createControlledDraft();
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $prepared = $workspace->prepare($article);
+        $data = ['target_hash' => $prepared['target_hash'], 'preview_approved' => true, 'make_indexable' => true];
+        if ($case === 'no_preview') {
+            $data['preview_approved'] = false;
+        } elseif ($case === 'stale_body') {
+            $article->workingRevision->forceFill(['content_md' => $article->workingRevision->content_md."\n\nChanged."])->saveQuietly();
+        } elseif ($case === 'stale_seo') {
+            $article->seoMeta->forceFill(['og_title' => 'Changed metadata'])->saveQuietly();
+        } elseif ($case === 'foreign_org') {
+            $article->forceFill(['org_id' => 91])->saveQuietly();
+        } elseif ($case === 'bad_locale') {
+            $article->forceFill(['locale' => 'fr'])->saveQuietly();
+        } elseif ($case === 'no_mfa') {
+            session()->forget('ops_admin_totp_verified_user_id');
+        } elseif ($case === 'writer' || $case === 'reader') {
+            $this->loginPublisher('admin.content.'.($case === 'writer' ? 'write' : 'read'));
+        } elseif ($case === 'unreviewed') {
+            $article->workingRevision->forceFill(['revision_status' => 'human_review'])->saveQuietly();
+            $data['target_hash'] = \App\Support\ArticleSourceTargetSnapshot::publicationHash($article);
+        } elseif ($case === 'missing_import') {
+            ArticleEditorialPackageImport::withoutGlobalScopes()->where('article_id', $article->id)->delete();
+            $data['target_hash'] = \App\Support\ArticleSourceTargetSnapshot::publicationHash($article);
+        }
+        try {
+            $workspace->publish($article, $data);
+            $this->fail('Publication must reject '.$case);
+        } catch (\Illuminate\Validation\ValidationException|\Symfony\Component\HttpKernel\Exception\HttpException $exception) {
+            $this->assertNull($article->fresh()->published_revision_id);
+            $this->assertFalse($article->fresh()->is_public);
+        }
+    }
+
+    public static function editorRejects(): array
+    {
+        return array_map(fn ($case) => [$case], ['no_preview', 'stale_body', 'stale_seo', 'foreign_org', 'bad_locale', 'no_mfa', 'writer', 'reader', 'unreviewed', 'missing_import']);
+    }
+
+    public function test_native_transaction_rejects_metadata_changed_after_editor_preflight(): void
+    {
+        $article = $this->createControlledDraft();
+        $hash = \App\Support\ArticleSourceTargetSnapshot::publicationHash($article);
+        $command = app(ArticlePublishControlled::class);
+        $plan = (new ReflectionMethod($command, 'preflightArticle'))->invoke($command, (int) $article->id, [], true);
+        $article->seoMeta->forceFill(['og_title' => 'Concurrent edit'])->saveQuietly();
+        try {
+            (new ReflectionMethod($command, 'publishPlannedArticle'))->invoke($command, $plan,
+                app(ArticlePublishService::class), app(AuditLogger::class), 'unused-after-conflict', true, $hash);
+            $this->fail('The transaction must reject a changed snapshot.');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('article_publication_state_changed', $exception->getMessage());
+        }
+        $this->assertNull($article->fresh()->published_revision_id);
+        $this->assertFalse($article->fresh()->is_indexable);
+    }
+
+    public function test_legacy_batch_reports_only_the_current_failed_target_as_uncommitted(): void
+    {
+        $this->fakeContentReleaseEndpoint();
+        $first = $this->createControlledDraft(['slug' => 'first-controlled-draft']);
+        $second = $this->createControlledDraft(['slug' => 'second-controlled-draft']);
+        $dispatcher = ArticleTranslationRevision::getEventDispatcher();
+        ArticleTranslationRevision::setEventDispatcher(clone $dispatcher);
+        try {
+            ArticleTranslationRevision::updating(function ($revision) use ($second): void {
+                if ((int) $revision->id === (int) $second->working_revision_id && $revision->revision_status === 'published') {
+                    throw new RuntimeException('Synthetic second-target transaction failure.');
+                }
+            });
+            $this->assertSame(1, Artisan::call('articles:publish-controlled', [
+                '--article' => [(string) $first->id, (string) $second->id], '--make-indexable' => true, '--json' => true,
+                '--confirm' => "I explicitly approve Codex to publish article ids {$first->id},{$second->id} after preflight passes.",
+            ]));
+            $result = json_decode(Artisan::output(), true, 64, JSON_THROW_ON_ERROR);
+            $this->assertSame([(int) $first->id], $result['published_article_ids']);
+            $this->assertSame('publish_preflight_failed', $result['errors'][0]['code']);
+            $this->assertStringContainsString('Synthetic second-target transaction failure', $result['errors'][0]['message']);
+            $this->assertTrue($first->fresh()->is_public);
+            $this->assertNull($second->fresh()->published_revision_id);
+        } finally {
+            ArticleTranslationRevision::setEventDispatcher($dispatcher);
+        }
+    }
+
+    private function loginPublisher(string $permission = 'admin.owner'): void
+    {
+        config(['admin.totp.enabled' => true]);
+        $role = \App\Models\Role::create(['name' => 'publisher-'.uniqid()]);
+        $role->permissions()->attach(\App\Models\Permission::firstOrCreate(['name' => $permission], ['description' => $permission]));
+        $admin = \App\Models\AdminUser::create(['name' => 'Publisher', 'email' => uniqid().'@example.test', 'password' => 'test-only-password', 'is_active' => true]);
+        $admin->roles()->attach($role);
+        $this->actingAs($admin, 'admin');
+        session(['ops_admin_totp_verified_user_id' => (int) $admin->id]);
+    }
+
     #[DataProvider('taxonomyContexts')]
     public function test_preflight_uses_the_selected_articles_taxonomy_org_instead_of_ops_context(string $case): void
     {

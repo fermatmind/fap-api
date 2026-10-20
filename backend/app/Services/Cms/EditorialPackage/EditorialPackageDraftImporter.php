@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use RuntimeException;
 
+/** @review-surface article */
 final class EditorialPackageDraftImporter
 {
     private const CONTENT_TRACKS = ['evergreen_knowledge', 'editorial_journal'];

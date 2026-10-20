@@ -3125,7 +3125,20 @@ return [
             ],
         ],
         'articles' => [
+            'controlled_publish' => [
+                'action' => 'Publish through native controls',
+                'description' => 'Uses the existing controlled command for this saved revision. Complete editorial review and open its authenticated preview first. Preflight below assumes new-article indexing; indexing and claim acknowledgements still require your selection. Existing article updates preserve search and URL inventory controls.',
+                'snapshot' => 'Saved article state',
+                'preflight' => 'Native preflight and exact preview URL',
+                'preview' => 'I checked the authenticated preview for this exact saved revision and approve publication.',
+                'claims' => 'I acknowledge the boundary-context claim warnings shown by native preflight.',
+                'indexable' => 'Make this new article indexable during native publication.',
+                'rejected' => 'Publication stopped: :code. Reload the saved article and check its review and preview.',
+                'success' => 'Native publication completed',
+                'cache_failed' => 'Publication committed; cache closeout failed. Do not repeat publication. Inspect the existing release diagnostics.',
+            ],
             'package_import' => [
+                'baseline_helper' => 'Copy this saved state into the transport manifest expected_article_state_sha256. Changes to title, body, revision, SEO, media or taxonomy require a fresh snapshot.',
                 'action' => 'Import reviewed update package',
                 'description' => 'Validate the exact package and current revision locks, then update only the working revision. The published revision stays unchanged. Preview and editorial review are required again.',
                 'input' => 'Native update package JSON',

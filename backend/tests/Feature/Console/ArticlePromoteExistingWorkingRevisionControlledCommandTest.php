@@ -32,6 +32,104 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
 
     private const CANONICAL = '/zh/articles/eq-test-tool-guide';
 
+    public function test_editor_promotes_existing_revision_and_distinguishes_committed_cache_failure(): void
+    {
+        $this->loginPublisher();
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        Http::fake(['*' => Http::response(['ok' => false], 503)]);
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $target = (int) $article->working_revision_id;
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $prepared = $workspace->prepare($article);
+        $this->assertTrue(json_decode($prepared['preflight'], true)['ok']);
+        $data = ['target_hash' => $prepared['target_hash'], 'preview_approved' => true];
+        $result = $workspace->publish($article, $data);
+        $this->assertFalse($result['ok']);
+        $this->assertSame('committed', $result['publication']);
+        $this->assertSame('failed', $result['cache_closeout']);
+        $this->assertSame($target, (int) $article->fresh()->published_revision_id);
+        Http::assertSentCount(1);
+        try {
+            $workspace->publish($article, $data);
+            $this->fail('A committed promotion cannot replay its old snapshot.');
+        } catch (\Illuminate\Validation\ValidationException $exception) {
+            $this->assertStringContainsString('article_publication_state_changed', $exception->getMessage());
+        }
+        Http::assertSentCount(1);
+    }
+
+    public function test_existing_native_transaction_rejects_a_stale_editor_snapshot(): void
+    {
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $published = (int) $article->published_revision_id;
+        $hash = \App\Support\ArticleSourceTargetSnapshot::publicationHash($article);
+        $article->seoMeta->forceFill(['og_title' => 'Concurrent metadata edit'])->saveQuietly();
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, [
+            '--expected-article-state-sha256' => $hash,
+            '--execute' => true, '--confirm' => $this->expectedConfirmation((int) $article->id, (int) $article->working_revision_id),
+            '--preview-approved' => true, '--schema-hold' => true, '--hreflang-hold' => true,
+            '--search-hold' => true, '--no-revalidation' => true, '--no-sitemap' => true, '--no-llms' => true, '--json' => true,
+        ])));
+        $payload = $this->jsonOutput();
+        $this->assertSame('not_committed', $payload['publication']);
+        $this->assertStringContainsString('article_publication_state_changed', json_encode($payload));
+        $this->assertSame($published, (int) $article->fresh()->published_revision_id);
+    }
+
+    public function test_failed_editor_promotion_restores_then_new_owner_can_publish_without_losing_history(): void
+    {
+        $this->loginPublisher();
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        Http::fake(['*' => Http::response(self::frontendArticleSuccessReceipt())]);
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $old = $article->publishedRevision->getRawOriginal();
+        $candidate = $article->workingRevision->getRawOriginal();
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $prepared = $workspace->prepare($article);
+        $dispatcher = ArticleTranslationRevision::getEventDispatcher();
+        ArticleTranslationRevision::setEventDispatcher(clone $dispatcher);
+        try {
+            ArticleTranslationRevision::updating(function ($revision) use ($candidate): void {
+                if ((int) $revision->id === (int) $candidate['id'] && $revision->revision_status === 'published') {
+                    throw new RuntimeException('Synthetic transaction failure after pointer write.');
+                }
+            });
+            try {
+                $workspace->publish($article, ['target_hash' => $prepared['target_hash'], 'preview_approved' => true]);
+                $this->fail('Failed transaction must be rejected.');
+            } catch (\Illuminate\Validation\ValidationException) {
+                $this->assertSame((int) $old['id'], (int) $article->fresh()->published_revision_id);
+                $this->assertSame($candidate, $article->fresh()->workingRevision->getRawOriginal());
+                $this->assertSame($old, $article->fresh()->publishedRevision->getRawOriginal());
+                Http::assertNothingSent();
+            }
+        } finally {
+            ArticleTranslationRevision::setEventDispatcher($dispatcher);
+        }
+        $this->loginPublisher();
+        $next = $workspace->prepare($article);
+        $result = $workspace->publish($article, ['target_hash' => $next['target_hash'], 'preview_approved' => true]);
+        $this->assertTrue($result['ok']);
+        $this->assertSame('success', $result['cache_closeout']);
+        $this->assertSame((int) $candidate['id'], (int) $article->fresh()->published_revision_id);
+        $this->assertSame(\Illuminate\Support\Arr::except([...$old, 'revision_status' => 'stale'], ['updated_at']), \Illuminate\Support\Arr::except(ArticleTranslationRevision::withoutGlobalScopes()->findOrFail($old['id'])->getRawOriginal(), ['updated_at']));
+        $this->assertDatabaseCount('article_translation_revisions', 2);
+        Http::assertSentCount(1);
+    }
+
+    private function loginPublisher(): void
+    {
+        config(['admin.totp.enabled' => true]);
+        $role = \App\Models\Role::create(['name' => 'publisher-'.uniqid()]);
+        $role->permissions()->attach(\App\Models\Permission::firstOrCreate(['name' => 'admin.owner'], ['description' => 'Owner']));
+        $admin = \App\Models\AdminUser::create(['name' => 'Publisher', 'email' => uniqid().'@example.test', 'password' => 'test-only-password', 'is_active' => true]);
+        $admin->roles()->attach($role);
+        $this->actingAs($admin, 'admin');
+        session(['ops_admin_totp_verified_user_id' => (int) $admin->id]);
+    }
+
     #[DataProvider('taxonomyContexts')]
     public function test_preflight_uses_the_selected_articles_taxonomy_org_instead_of_ops_context(string $case): void
     {
@@ -91,7 +189,7 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
         $article->refresh();
         $this->assertSame($revisionId, (int) $article->published_revision_id);
         $this->assertTrue($article->is_public);
-        $this->assertSame([...$oldPublished, 'revision_status' => ArticleTranslationRevision::STATUS_STALE], ArticleTranslationRevision::withoutGlobalScopes()->findOrFail($oldPublished['id'])->getRawOriginal());
+        $this->assertSame(\Illuminate\Support\Arr::except([...$oldPublished, 'revision_status' => ArticleTranslationRevision::STATUS_STALE], ['updated_at']), \Illuminate\Support\Arr::except(ArticleTranslationRevision::withoutGlobalScopes()->findOrFail($oldPublished['id'])->getRawOriginal(), ['updated_at']));
         Http::assertNothingSent();
     }
 

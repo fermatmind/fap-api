@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Filament\Ops\Support\ContentReleaseFollowUp;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
@@ -11,6 +12,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticleEditorialCompletenessGate;
 use App\Services\Cms\ArticlePublishService;
+use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +25,8 @@ final class ArticlePublishControlled extends Command
 {
     protected $signature = 'articles:publish-controlled
         {--article=* : Article id to publish}
+        {--expected-article-state-sha256= : Optional single-article editor snapshot, rechecked under the native transaction lock}
+        {--revalidate-after-commit : Require strict cache closeout for one native article publication}
         {--translation-locks= : Exact reviewed translation publication package}
         {--translation-sha256= : Exact translation package digest}
         {--preview-approved : Authenticated preview passed for the locked translation revision}
@@ -42,6 +46,11 @@ final class ArticlePublishControlled extends Command
 
     public function handle(ArticlePublishService $publisher, AuditLogger $auditLogger): int
     {
+        if ($this->option('translation-locks') !== null && ($this->option('revalidate-after-commit') || $this->option('expected-article-state-sha256') !== null)) {
+            $this->line(json_encode(['ok' => false, 'errors' => ['single_article_mode_required']], JSON_THROW_ON_ERROR));
+
+            return self::FAILURE;
+        }
         if ($this->option('translation-locks') !== null) {
             try {
                 $file = (string) $this->option('translation-locks');
@@ -79,6 +88,7 @@ final class ArticlePublishControlled extends Command
         $acknowledgedWarnings = $this->acknowledgedWarningIds();
         $dryRun = (bool) $this->option('dry-run');
         $makeIndexable = (bool) $this->option('make-indexable');
+        $strictCloseout = (bool) $this->option('revalidate-after-commit');
         $expectedConfirmation = $this->expectedConfirmation($articleIds);
         $confirmation = trim((string) $this->option('confirm'));
 
@@ -87,6 +97,13 @@ final class ArticlePublishControlled extends Command
 
         if ($articleIds === []) {
             $errors[] = $this->issue('article', 'missing_article', 'At least one --article id is required.');
+        }
+
+        if ($this->option('expected-article-state-sha256') !== null && count($articleIds) !== 1) {
+            $errors[] = $this->issue('state', 'single_article_state_required', 'An editor snapshot must bind exactly one article.');
+        }
+        if ($strictCloseout && (count($articleIds) !== 1 || ! ContentReleaseFollowUp::articleCacheConfigured())) {
+            $errors[] = $this->issue('revalidation', 'single_article_cache_configuration_required', 'Strict closeout requires one article and the existing configured cache transport.');
         }
 
         if (! $dryRun && ! hash_equals($expectedConfirmation, $confirmation)) {
@@ -116,25 +133,44 @@ final class ArticlePublishControlled extends Command
             'articles' => $plans,
             'errors' => $errors,
             'published_article_ids' => [],
+            'publication' => 'not_committed',
+            'cache_closeout' => $strictCloseout ? 'pending' : 'legacy',
         ];
 
         if ($errors === [] && ! $dryRun) {
             $publishedIds = [];
             foreach ($plans as $plan) {
+                $currentTargetCommitted = false;
                 try {
-                    $publishedIds[] = $this->publishPlannedArticle($plan, $publisher, $auditLogger, $expectedConfirmation, $makeIndexable);
-                } catch (RuntimeException $exception) {
+                    $publishedIds[] = $this->publishPlannedArticle($plan, $publisher, $auditLogger, $expectedConfirmation, $makeIndexable, $this->option('expected-article-state-sha256'), $strictCloseout,
+                        function (int $id) use (&$summary, &$publishedIds, &$currentTargetCommitted): void {
+                            $currentTargetCommitted = true;
+                            $summary['publication'] = 'committed';
+                            $publishedIds[] = $id;
+                        });
+                    if ($strictCloseout) {
+                        ContentReleaseFollowUp::dispatchArticlePathsStrict(Article::withoutGlobalScopes()->with(['publishedRevision', 'seoMeta'])->findOrFail((int) $plan['article_id']), 'controlled_codex_publish');
+                        $summary['cache_closeout'] = 'success';
+                    }
+                } catch (\Throwable $exception) {
+                    if (! $strictCloseout && ! $exception instanceof RuntimeException) {
+                        throw $exception;
+                    }
+                    $committed = $currentTargetCommitted;
+                    if ($strictCloseout && $committed) {
+                        $summary['cache_closeout'] = 'failed';
+                    }
                     $errors[] = $this->issue(
                         'publish',
-                        'publish_preflight_failed',
-                        $exception->getMessage(),
+                        $committed ? 'committed_publication_closeout_failed' : 'publish_preflight_failed',
+                        $committed ? 'Publication committed; native closeout failed. Do not repeat publication.' : $exception->getMessage(),
                         ['article_id' => (int) ($plan['article_id'] ?? 0)]
                     );
                     break;
                 }
             }
 
-            $summary['published_article_ids'] = $publishedIds;
+            $summary['published_article_ids'] = array_values(array_unique($publishedIds));
             $summary['errors'] = $errors;
             $summary['ok'] = $errors === [];
         }
@@ -454,11 +490,20 @@ final class ArticlePublishControlled extends Command
         ArticlePublishService $publisher,
         AuditLogger $auditLogger,
         string $confirmation,
-        bool $makeIndexable
+        bool $makeIndexable,
+        ?string $expectedArticleState = null,
+        bool $strictCloseout = false,
+        ?\Closure $onCommitted = null,
     ): int {
         $articleId = (int) $plan['article_id'];
 
-        $article = DB::transaction(function () use ($articleId, $plan, $publisher, $makeIndexable): Article {
+        $article = DB::transaction(function () use ($articleId, $plan, $publisher, $makeIndexable, $expectedArticleState, $strictCloseout, $onCommitted): Article {
+            if ($expectedArticleState !== null) {
+                ArticleSourceTargetSnapshot::assertPublicationHash(
+                    Article::withoutGlobalScopes()->findOrFail($articleId),
+                    $expectedArticleState, true,
+                );
+            }
             $acknowledgedWarnings = ((bool) ($plan['claim_warning_acknowledged'] ?? false)) ? [$articleId] : [];
             $revalidatedPlan = $this->preflightArticle($articleId, $acknowledgedWarnings, $makeIndexable, lockForUpdate: true);
 
@@ -494,7 +539,11 @@ final class ArticlePublishControlled extends Command
                     ]);
             }
 
-            return $publisher->publishArticle($articleId, 'controlled_codex_publish');
+            if ($onCommitted !== null) {
+                DB::afterCommit(fn () => $onCommitted($articleId));
+            }
+
+            return $publisher->publishArticle($articleId, 'controlled_codex_publish', dispatchFollowUp: ! $strictCloseout);
         });
 
         $auditLogger->log(

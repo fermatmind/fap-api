@@ -21,6 +21,7 @@ use Illuminate\Validation\ValidationException;
 use JsonException;
 use RuntimeException;
 
+/** @review-surface article */
 final class ArticleEditorialPackageWorkspace
 {
     public const MAX_INPUT_BYTES = 1000000;

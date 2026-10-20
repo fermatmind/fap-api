@@ -14,6 +14,41 @@ use Illuminate\Support\Facades\Http;
 
 final class ContentReleaseFollowUp
 {
+    public static function articleCacheConfigured(): bool
+    {
+        return self::cacheInvalidationUrls() !== [] && self::cacheInvalidationSecret() !== '';
+    }
+
+    /** Strict closeout for an already committed native article publication. */
+    public static function dispatchArticlePathsStrict(\App\Models\Article $article, string $source): void
+    {
+        if (! self::articleCacheConfigured()) {
+            throw new \RuntimeException('Article cache transport is not configured.');
+        }
+        $paths = app(ContentReleasePathPlanner::class)->paths('article', $article);
+        if ($paths === []) {
+            throw new \RuntimeException('No committed article paths were resolved.');
+        }
+        $receipts = self::dispatchExplicitPaths('article', $article, $paths, $source,
+            Request::create('/ops/articles/controlled-publication', 'POST'),
+            broadcast: false, throwOnFailure: true,
+            expectedCacheReceipt: [
+                'revalidated_paths' => array_values(array_unique([
+                    ...$paths, '/zh/articles', '/en/articles',
+                    '/zh/articles/'.$article->slug, '/en/articles/'.$article->slug,
+                    '/llms.txt', '/llms-full.txt',
+                ])),
+                'rejected_paths' => [],
+                'invalidated_tags' => [
+                    'article-detail:'.$article->locale.':'.$article->slug,
+                    'article-seo:'.$article->locale.':'.$article->slug,
+                ],
+            ]);
+        if (count($receipts) !== count(self::cacheInvalidationUrls())) {
+            throw new \RuntimeException('Article cache acknowledgement is missing.');
+        }
+    }
+
     public static function dispatch(string $type, object $record, string $source, Request $request): void
     {
         $payload = self::payload($type, $record, $source);

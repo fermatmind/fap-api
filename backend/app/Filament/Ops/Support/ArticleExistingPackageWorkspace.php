@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Support;
 
 use App\Models\Article;
 use App\Services\Cms\SeoContentPackage\SeoContentPackageExistingArticleUpdater;
+use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -43,6 +44,11 @@ final class ArticleExistingPackageWorkspace
 
             return DB::transaction(function () use ($selected, $manifest, $root): array {
                 $article = Article::withoutGlobalScopes()->whereKey($selected->getKey())->lockForUpdate()->firstOrFail();
+                try {
+                    ArticleSourceTargetSnapshot::assertPublicationHash($article, (string) ($manifest['expected_article_state_sha256'] ?? ''), true);
+                } catch (\RuntimeException) {
+                    $this->require(false, 'article_update_baseline_changed');
+                }
                 $this->assertTarget($article, $manifest);
                 $options = $this->options($root, $manifest);
                 $plan = $this->updater->planFromDirectory($options);

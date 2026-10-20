@@ -13,6 +13,7 @@ use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticleEditorialCompletenessGate;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ContentReleasePathPlanner;
+use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -57,6 +58,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         {--expected-state-sha256= : Execute-only immutable preflight state lock}
         {--expected-revision-set-sha256= : Execute-only immutable revision-set lock}
         {--article-id= : Exact already-published article id}
+        {--expected-article-state-sha256= : Optional single-article editor snapshot, rechecked under the native transaction lock}
         {--working-revision-id= : Exact approved working revision id to promote}
         {--current-published-revision-id= : Exact currently-published revision id lock}
         {--translation-group-id= : Expected translation group lock}
@@ -201,10 +203,12 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                     $currentPublishedRevisionId,
                     'controlled_existing_article_working_revision_promotion',
                     dispatchFollowUp: false,
-                    transactionGuard: fn (Article $lockedArticle, ArticleTranslationRevision $lockedRevision) => $this->assertEditorialCompleteness(
-                        $lockedArticle,
-                        $lockedRevision,
-                    ),
+                    transactionGuard: function (Article $lockedArticle, ArticleTranslationRevision $lockedRevision): void {
+                        if ($this->option('expected-article-state-sha256') !== null) {
+                            ArticleSourceTargetSnapshot::assertPublicationHash($lockedArticle, (string) $this->option('expected-article-state-sha256'), true);
+                        }
+                        $this->assertEditorialCompleteness($lockedArticle, $lockedRevision);
+                    },
                     onCommitted: function (Article $committed) use (&$summary): void {
                         $summary['publication'] = 'committed';
                         $summary['promoted_article_id'] = (int) $committed->id;

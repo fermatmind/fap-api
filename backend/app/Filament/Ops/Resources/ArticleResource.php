@@ -30,6 +30,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
+/** @review-surface article */
 class ArticleResource extends Resource
 {
     protected static ?string $model = Article::class;

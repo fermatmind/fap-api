@@ -7,12 +7,14 @@ namespace App\Filament\Ops\Resources\ArticleResource\Pages;
 use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoMetaWorkspace;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
+use App\Filament\Ops\Support\ArticleControlledPublicationWorkspace;
 use App\Filament\Ops\Support\ArticleEditorialPackageWorkspace;
 use App\Filament\Ops\Support\ArticleExistingPackageWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
@@ -149,6 +151,11 @@ class EditArticle extends EditRecord
                 ->modalDescription(__('ops.resources.articles.package_import.description'))
                 ->modalSubmitActionLabel(__('ops.resources.articles.package_import.action'))
                 ->form([
+                    Textarea::make('target_snapshot')
+                        ->label(__('ops.resources.articles.controlled_publish.snapshot'))
+                        ->default(fn (): string => \App\Support\ArticleSourceTargetSnapshot::publicationHash($this->getRecord()))
+                        ->helperText(__('ops.resources.articles.package_import.baseline_helper'))
+                        ->readOnly()->dehydrated(false)->rows(2),
                     Textarea::make('package_json')
                         ->label(__('ops.resources.articles.package_import.input'))
                         ->helperText(__('ops.resources.articles.package_import.helper'))
@@ -172,6 +179,38 @@ class EditArticle extends EditRecord
                         ]))
                         ->success()
                         ->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            // @review-surface article
+            Action::make('publishControlled')
+                ->label(__('ops.resources.articles.controlled_publish.action'))
+                ->icon('heroicon-o-check-badge')
+                ->visible(fn (): bool => ContentAccess::canRelease() && (int) $this->getRecord()->org_id === 0)
+                ->modalDescription(__('ops.resources.articles.controlled_publish.description'))
+                ->fillForm(fn (): array => app(ArticleControlledPublicationWorkspace::class)->prepare($this->getRecord()))
+                ->form([
+                    Textarea::make('target_hash')->label(__('ops.resources.articles.controlled_publish.snapshot'))->readOnly()->required()->rows(2),
+                    Textarea::make('preflight')->label(__('ops.resources.articles.controlled_publish.preflight'))->readOnly()->dehydrated(false)->rows(12),
+                    Checkbox::make('preview_approved')->label(__('ops.resources.articles.controlled_publish.preview'))->accepted(),
+                    Checkbox::make('acknowledge_claims')->label(__('ops.resources.articles.controlled_publish.claims')),
+                    Checkbox::make('make_indexable')->label(__('ops.resources.articles.controlled_publish.indexable'))
+                        ->visible(fn (): bool => $this->getRecord()->published_revision_id === null),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        $result = app(ArticleControlledPublicationWorkspace::class)->publish($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.preview_approved' => $exception->errors()['preview_approved'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    $notification = Notification::make();
+                    if ($result['ok'] ?? false) {
+                        $notification->title(__('ops.resources.articles.controlled_publish.success'))->success();
+                    } else {
+                        $notification->title(__('ops.resources.articles.controlled_publish.cache_failed'))->warning()->persistent();
+                    }
+                    $notification->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
                 }),
             Action::make('openPublicUrl')

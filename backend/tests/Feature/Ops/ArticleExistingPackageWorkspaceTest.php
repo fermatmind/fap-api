@@ -56,7 +56,7 @@ final class ArticleExistingPackageWorkspaceTest extends TestCase
             app(ArticleExistingPackageWorkspace::class)->import($article, $input);
             $this->fail('Stale revision must not be imported twice.');
         } catch (ValidationException $exception) {
-            $this->assertStringContainsString('target_mismatch:expected_working_revision_id', $exception->getMessage());
+            $this->assertStringContainsString('article_update_baseline_changed', $exception->getMessage());
         }
         $this->assertDatabaseCount('article_editorial_package_imports', 1);
         $this->assertDatabaseCount('article_translation_revisions', 2);
@@ -152,6 +152,36 @@ final class ArticleExistingPackageWorkspaceTest extends TestCase
         ]);
     }
 
+    #[DataProvider('metadataChanges')]
+    public function test_transport_rejects_metadata_edits_even_when_body_and_pointers_are_unchanged(string $field): void
+    {
+        $this->login();
+        $article = $this->article();
+        // Import once to create an isolated working revision, then freeze a new transport.
+        $workspace = app(ArticleExistingPackageWorkspace::class);
+        $workspace->import($article, $this->transport($article));
+        $article->refresh()->load(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $input = $this->transport($article);
+        $body = $article->workingRevision->content_md;
+        $pointer = $article->working_revision_id;
+        $article->workingRevision->forceFill([$field => 'Concurrent editorial change'])->saveQuietly();
+        try {
+            $workspace->import($article, $input);
+            $this->fail('The old transport must not overwrite concurrent '.$field);
+        } catch (ValidationException $exception) {
+            $this->assertStringContainsString('article_update_baseline_changed', $exception->getMessage());
+        }
+        $this->assertSame('Concurrent editorial change', $article->fresh()->workingRevision->{$field});
+        $this->assertSame($body, $article->fresh()->workingRevision->content_md);
+        $this->assertSame($pointer, $article->fresh()->working_revision_id);
+        $this->assertDatabaseCount('article_editorial_package_imports', 1);
+    }
+
+    public static function metadataChanges(): array
+    {
+        return [['title'], ['excerpt'], ['seo_title'], ['seo_description']];
+    }
+
     public function test_native_transaction_failure_rolls_back_revision_and_import_gate_and_removes_inputs(): void
     {
         $this->login();
@@ -193,7 +223,7 @@ final class ArticleExistingPackageWorkspaceTest extends TestCase
             'review/claim_gate.md' => "claim_gate_status: not_reviewed\n",
             'review/operator_review.md' => "operator_review_required: true\n",
         ];
-        $manifest = ['article_id' => $article->id, 'org_id' => 0, 'expected_org_id' => 0, 'locale' => 'en', 'expected_slug' => $slug, 'expected_canonical' => $route, 'translation_group_id' => $group, 'expected_working_revision_id' => $article->working_revision_id, 'expected_published_revision_id' => $article->published_revision_id, 'expected_working_body_sha256' => hash('sha256', $article->workingRevision->getRawOriginal('content_md')), 'expected_published_body_sha256' => hash('sha256', $article->publishedRevision->getRawOriginal('content_md')), 'files' => []];
+        $manifest = ['expected_article_state_sha256' => \App\Support\ArticleSourceTargetSnapshot::publicationHash($article), 'article_id' => $article->id, 'org_id' => 0, 'expected_org_id' => 0, 'locale' => 'en', 'expected_slug' => $slug, 'expected_canonical' => $route, 'translation_group_id' => $group, 'expected_working_revision_id' => $article->working_revision_id, 'expected_published_revision_id' => $article->published_revision_id, 'expected_working_body_sha256' => hash('sha256', $article->workingRevision->getRawOriginal('content_md')), 'expected_published_body_sha256' => hash('sha256', $article->publishedRevision->getRawOriginal('content_md')), 'files' => []];
         $mutations = ['wrong_article' => ['article_id', 9999], 'wrong_org' => ['expected_org_id', 1], 'wrong_locale' => ['locale', 'zh-CN'], 'wrong_group' => ['translation_group_id', 'other-group'], 'old_pointer' => ['expected_working_revision_id', 9999], 'working_hash' => ['expected_working_body_sha256', str_repeat('0', 64)], 'published_hash' => ['expected_published_body_sha256', str_repeat('0', 64)]];
         if (isset($mutations[$case])) {
             [$key, $value] = $mutations[$case];

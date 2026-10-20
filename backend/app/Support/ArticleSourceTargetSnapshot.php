@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Models\Article;
+use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,35 @@ use RuntimeException;
 
 final class ArticleSourceTargetSnapshot
 {
+    /** Selected article state, shared by the editor and native transaction guards. */
+    public static function publicationHash(Article $selected, bool $lock = false): string
+    {
+        $article = Article::withoutGlobalScopes()->whereKey($selected->getKey())
+            ->when($lock, fn ($query) => $query->lockForUpdate())->firstOrFail();
+        $revision = ArticleTranslationRevision::withoutGlobalScopes()->whereKey($article->working_revision_id)
+            ->when($lock, fn ($query) => $query->lockForUpdate())->first();
+        $seo = ArticleSeoMeta::withoutGlobalScopes()->where('article_id', $article->id)->orderBy('id')
+            ->when($lock, fn ($query) => $query->lockForUpdate())->get();
+        $import = ArticleEditorialPackageImport::withoutGlobalScopes()->where('article_id', $article->id)->latest('id')
+            ->when($lock, fn ($query) => $query->lockForUpdate())->first();
+
+        return CanonicalTranslationPayloadHash::hash([
+            'article' => $article->getAttributes(),
+            'revision' => $revision?->getAttributes(),
+            'seo' => $seo->map(fn ($row) => $row->getAttributes())->all(),
+            'import' => $import?->getAttributes(),
+            'tags' => self::tagsHash($article, $lock),
+        ]);
+    }
+
+    public static function assertPublicationHash(Article $article, string $expected, bool $lock = false): void
+    {
+        if (preg_match('/^[a-f0-9]{64}$/D', $expected) !== 1
+            || ! hash_equals($expected, self::publicationHash($article, $lock))) {
+            throw new RuntimeException('article_publication_state_changed');
+        }
+    }
+
     public static function tagsHash(Article $target, bool $lock = false): string
     {
         $query = DB::table('article_tag_map')->where('article_id', $target->id)->orderBy('org_id')->orderBy('tag_id');
