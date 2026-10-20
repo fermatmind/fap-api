@@ -46,21 +46,31 @@ final class SeoPlatform12A08LegacyScheduleContractTest extends TestCase
             ->expectsOutput('{"status":"SCHEDULED_IDENTITY_HOLD","execution_allowed":false}')->assertFailed();
     }
 
-    public function test_existing_schedules_remain_serial_with_truth_maintenance_before_natural_m2(): void
+    public function test_existing_schedules_keep_cadence_and_locks_with_bounded_background_truth_maintenance(): void
     {
         $source = file_get_contents(base_path('bootstrap/app.php'));
         foreach ([
-            ['seo:weekly-decisions --trigger=scheduled --json', "weeklyOn(4, '13:45')"],
-            ['analytics:refresh-seo-conversion-daily --trigger=scheduled --json', "dailyAt('05:50')"],
-            ['seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250', "timezone('Asia/Shanghai')\n            ->dailyAt('06:10')"],
-        ] as [$command, $cadence]) {
+            ['seo:weekly-decisions --trigger=scheduled --json', "weeklyOn(4, '13:45')", false],
+            ['analytics:refresh-seo-conversion-daily --trigger=scheduled --json', "dailyAt('05:50')", false],
+            ['seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250', "timezone('Asia/Shanghai')\n            ->dailyAt('06:10')", true],
+        ] as [$command, $cadence, $background]) {
             preg_match('/command\(\''.preg_quote($command, '/').'\'\)([^;]+);/', $source, $matches);
             $this->assertNotEmpty($matches);
             $this->assertStringContainsString($cadence, $matches[1]);
             $this->assertStringContainsString('withoutOverlapping(', $matches[1]);
             $this->assertStringContainsString('onOneServer()', $matches[1]);
-            $this->assertStringNotContainsString('runInBackground()', $matches[1]);
+            if ($background) {
+                $this->assertStringContainsString('runInBackground()', $matches[1]);
+            } else {
+                $this->assertStringNotContainsString('runInBackground()', $matches[1]);
+            }
         }
+        $m2 = collect(app(\App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::class)->missions())
+            ->firstWhere('mission_id', 'seo.platform12.daily_url_truth_reconciliation');
+        $this->assertSame('daily:ALL:06:25', $m2['natural_slot']);
+        $this->assertSame('Asia/Shanghai', $m2['timezone']);
+        $this->assertSame(0, array_sum($m2['budgets']));
+        $this->assertSame('HOLD', $m2['failure_policy']['terminal_state']);
         $this->assertMatchesRegularExpression('/command\("seo-intel:gsc-sync[^;]+dailyAt\(\'05:20\'\)[^;]+withoutOverlapping\(120\)[^;]+onOneServer\(\)/', $source);
     }
 
