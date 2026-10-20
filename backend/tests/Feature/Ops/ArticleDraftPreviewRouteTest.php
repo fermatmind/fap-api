@@ -167,6 +167,61 @@ final class ArticleDraftPreviewRouteTest extends TestCase
         $this->assertStringContainsString('no-store', (string) $response->headers->get('Cache-Control'));
     }
 
+    public function test_preview_preserves_public_source_slugs_while_redacting_private_route_segments(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization();
+        $article = $this->createDraftArticle();
+        $revision = $this->createWorkingRevision($article);
+        $publicLinks = [
+            'Official instrument' => 'https://www.myersbriggs.org/my-mbti-personality-type/take-the-mbti-instrument/',
+            'Result guide' => 'https://example.org/results-overview?topic=personality#reading',
+            'History guide' => '/history-of-personality',
+            'Taking notes' => '/en/tests/example/take-notes',
+        ];
+        $links = [];
+        foreach ($publicLinks as $label => $href) {
+            $links[] = '['.$label.']('.$href.')';
+        }
+        $revision->update(['content_md' => implode("\n\n", [
+            ...$links,
+            '[Private result](https://fermatmind.com/results/synthetic-result-identifier)',
+            '[Private order](/order/synthetic-order-identifier)',
+            '[Private payment](/payment?payment_intent=synthetic-payment-identifier)',
+            '[Private take](/en/tests/example/take?session_id=synthetic-session-identifier)',
+            '[Private absolute take](https://fermatmind.com/en/tests/example/take?token=synthetic-access-token)',
+        ])]);
+        $before = $revision->fresh()->getAttributes();
+
+        $response = $this->withSession($this->opsSession($admin, $org))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get(ArticleWorkspace::previewUrl($article->fresh(), (int) $revision->id))
+            ->assertOk()
+            ->assertHeader('X-Robots-Tag', 'noindex, noarchive, nosnippet');
+        $document = new \DOMDocument;
+        @$document->loadHTML($response->getContent());
+        $xpath = new \DOMXPath($document);
+        $hrefs = [];
+        foreach ($xpath->query('//section[@class="body"]//a') as $link) {
+            $hrefs[$link->textContent] = $link->getAttribute('href');
+        }
+        $expectedLinks = $publicLinks;
+        $expectedLinks['Taking notes'] = 'https://fermatmind.com/en/tests/example/take-notes';
+        foreach ($expectedLinks as $label => $href) {
+            $this->assertSame($href, $hrefs[$label]);
+        }
+        foreach (['synthetic-result-identifier', 'synthetic-order-identifier', 'synthetic-payment-identifier', 'synthetic-session-identifier', 'synthetic-access-token'] as $privateValue) {
+            $response->assertDontSee($privateValue, false);
+        }
+        $this->assertStringContainsString('redacted-private-url', $hrefs['Private result']);
+        $response->assertDontSee('href="/en/tests/example/take?', false)
+            ->assertDontSee('href="https://fermatmind.com/en/tests/example/take?', false);
+        $this->assertSame($before, $revision->fresh()->getAttributes());
+        $this->assertNull($article->fresh()->published_revision_id);
+        $this->assertFalse((bool) $article->fresh()->is_public);
+    }
+
     public function test_preview_fails_closed_for_an_invalid_frontend_origin(): void
     {
         config(['app.frontend_url' => 'https://user:password@fermatmind.com?token=secret']);

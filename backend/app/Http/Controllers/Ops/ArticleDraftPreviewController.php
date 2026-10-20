@@ -131,10 +131,11 @@ final class ArticleDraftPreviewController extends Controller
     private function redactSensitivePreviewText(string $value): array
     {
         $count = 0;
+        // Private route names must be whole path segments, not public slug prefixes.
         $patterns = [
-            '#https?://[^\s)>\"]*/(?:result|results|orders?|payment|pay|share|history|take)(?:/[^\s)>\"]*)?#i',
-            '#(?<![A-Za-z0-9_-])/(?:result|results|orders?|payment|pay|share|history)(?:/[^\s)>\"]*)?#i',
-            '#(?<![A-Za-z0-9_-])/(?:en|zh)/tests/[A-Za-z0-9_-]+/take(?:/[^\s)>\"]*)?#i',
+            '~https?://[^\s)>\"]*/(?:result|results|orders?|payment|pay|share|history|take)(?=[/?#\s)>\"]|$)(?:/[^\s)>\"]*)?~i',
+            '~(?<![A-Za-z0-9_-])/(?:result|results|orders?|payment|pay|share|history)(?=[/?#\s)>\"]|$)(?:/[^\s)>\"]*)?~i',
+            '~(?<![A-Za-z0-9_-])/(?:en|zh)/tests/[A-Za-z0-9_-]+/take(?=[/?#\s)>\"]|$)(?:/[^\s)>\"]*)?~i',
         ];
 
         foreach ($patterns as $pattern) {
