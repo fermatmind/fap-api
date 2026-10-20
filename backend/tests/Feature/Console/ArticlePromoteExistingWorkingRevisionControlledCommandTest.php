@@ -12,9 +12,12 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticlePublishService;
+use App\Support\OrgContext;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionMethod;
 use RuntimeException;
 use Tests\TestCase;
@@ -28,6 +31,74 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
     private const SLUG = 'eq-test-tool-guide';
 
     private const CANONICAL = '/zh/articles/eq-test-tool-guide';
+
+    #[DataProvider('taxonomyContexts')]
+    public function test_preflight_uses_the_selected_articles_taxonomy_org_instead_of_ops_context(string $case): void
+    {
+        $article = $this->createExistingArticleWithWorkingRevision();
+        if ($case === 'foreign_rows') {
+            $category = ArticleCategory::withoutGlobalScopes()->create(['org_id' => 91, 'slug' => 'foreign-category', 'name' => 'Foreign category']);
+            $tag = ArticleTag::withoutGlobalScopes()->create(['org_id' => 91, 'slug' => 'foreign-tag', 'name' => 'Foreign tag']);
+            $article->forceFill(['category_id' => $category->id])->saveQuietly();
+            $article->tags()->detach();
+            $article->tags()->attach($tag->id, ['org_id' => 91]);
+        } elseif (in_array($case, ['mixed_foreign_pivot', 'mixed_foreign_tag'], true)) {
+            $tag = ArticleTag::withoutGlobalScopes()->create(['org_id' => $case === 'mixed_foreign_tag' ? 91 : 0, 'slug' => 'extra-tag', 'name' => 'Extra tag']);
+            $article->tags()->attach($tag->id, ['org_id' => $case === 'mixed_foreign_pivot' ? 91 : 0]);
+        } elseif ($case === 'mixed_dangling') {
+            DB::table('article_tag_map')->insert(['org_id' => 0, 'article_id' => $article->id, 'tag_id' => 999999, 'created_at' => now()]);
+        } elseif ($case === 'foreign_pivot') {
+            DB::table('article_tag_map')->where('article_id', $article->id)->update(['org_id' => 91]);
+        } elseif ($case === 'missing') {
+            $article->forceFill(['category_id' => null])->saveQuietly();
+            $article->tags()->detach();
+        }
+        $before = $article->fresh()->getRawOriginal();
+        $links = DB::table('article_tag_map')->where('article_id', $article->id)->orderBy('tag_id')->get()->toArray();
+        app(OrgContext::class)->set(91, null, 'admin');
+        Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, ['--dry-run' => true, '--json' => true]));
+        $plan = $this->jsonOutput();
+        $codes = array_column($plan['errors'], 'code');
+        if ($case === 'valid') {
+            $this->assertTrue($plan['ok'], json_encode($plan['errors']));
+            $this->assertNotContains('category_missing', $codes);
+            $this->assertNotContains('tags_missing', $codes);
+        } elseif (str_starts_with($case, 'mixed_')) {
+            $this->assertContains('tag_binding_invalid', $codes);
+        } else {
+            $this->assertContains('tags_missing', $codes);
+            if ($case !== 'foreign_pivot') {
+                $this->assertContains('category_missing', $codes);
+            }
+        }
+        $this->assertSame($before, $article->fresh()->getRawOriginal());
+        $this->assertEquals($links, DB::table('article_tag_map')->where('article_id', $article->id)->orderBy('tag_id')->get()->toArray());
+    }
+
+    public function test_controlled_execution_accepts_global_taxonomy_under_another_ops_tenant(): void
+    {
+        Http::fake();
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $revisionId = (int) $article->working_revision_id;
+        $oldPublished = $article->publishedRevision->getRawOriginal();
+        app(OrgContext::class)->set(91, null, 'admin');
+        $this->assertSame(0, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, [
+            '--execute' => true, '--confirm' => $this->expectedConfirmation((int) $article->id, $revisionId),
+            '--preview-approved' => true, '--schema-hold' => true, '--hreflang-hold' => true,
+            '--search-hold' => true, '--no-revalidation' => true, '--no-sitemap' => true, '--no-llms' => true,
+            '--json' => true,
+        ])), Artisan::output());
+        $article->refresh();
+        $this->assertSame($revisionId, (int) $article->published_revision_id);
+        $this->assertTrue($article->is_public);
+        $this->assertSame([...$oldPublished, 'revision_status' => ArticleTranslationRevision::STATUS_STALE], ArticleTranslationRevision::withoutGlobalScopes()->findOrFail($oldPublished['id'])->getRawOriginal());
+        Http::assertNothingSent();
+    }
+
+    public static function taxonomyContexts(): array
+    {
+        return [['valid'], ['foreign_rows'], ['foreign_pivot'], ['missing'], ['mixed_foreign_pivot'], ['mixed_foreign_tag'], ['mixed_dangling']];
+    }
 
     public function test_native_login_mfa_preview_and_review_bind_the_exact_isolated_revision(): void
     {

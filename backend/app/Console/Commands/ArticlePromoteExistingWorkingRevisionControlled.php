@@ -1172,7 +1172,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
     ): array {
         $article = Article::query()
             ->withoutGlobalScopes()
-            ->with(['workingRevision', 'publishedRevision', 'seoMeta', 'category', 'tags'])
+            ->with(['workingRevision', 'publishedRevision', 'seoMeta'])
             ->find($articleId);
 
         if (! $article instanceof Article) {
@@ -1182,6 +1182,15 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 'errors' => [$this->issue('article', 'article_not_found', 'Article not found.', ['article_id' => $articleId])],
             ];
         }
+
+        // Article authority is independent of the operator's active tenant.
+        // Keep every taxonomy row and pivot bound to the selected article org.
+        $article->load([
+            'category' => fn ($query) => $query->withoutGlobalScopes()->where('article_categories.org_id', (int) $article->org_id),
+            'tags' => fn ($query) => $query->withoutGlobalScopes()
+                ->where('article_tags.org_id', (int) $article->org_id)
+                ->where('article_tag_map.org_id', (int) $article->org_id),
+        ]);
 
         $workingRevision = ArticleTranslationRevision::query()
             ->withoutGlobalScopes()
@@ -1398,6 +1407,20 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 
         if ($article->tags->count() <= 0) {
             $errors[] = $this->issue('tags', 'tags_missing', 'Article tags must be present.');
+        }
+
+        $invalidTagBinding = DB::table('article_tag_map as tag_links')
+            ->leftJoin('article_tags as tag_rows', 'tag_rows.id', '=', 'tag_links.tag_id')
+            ->where('tag_links.article_id', (int) $article->id)
+            ->where(function ($query) use ($article): void {
+                $query->where('tag_links.org_id', '!=', (int) $article->org_id)
+                    ->orWhereNull('tag_links.org_id')
+                    ->orWhereNull('tag_rows.id')
+                    ->orWhere('tag_rows.org_id', '!=', (int) $article->org_id)
+                    ->orWhereNull('tag_rows.org_id');
+            })->exists();
+        if ($invalidTagBinding) {
+            $errors[] = $this->issue('tags', 'tag_binding_invalid', 'Every article tag association must reference an existing tag in the article organization.');
         }
 
         if (! $seoMeta instanceof ArticleSeoMeta) {
