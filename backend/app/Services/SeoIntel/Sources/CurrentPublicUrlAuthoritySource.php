@@ -45,6 +45,47 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
         return PublicAuthorityCandidateResolver::resolve($this->backendAuthority->candidatesForArticle($entityIdentity, $locale));
     }
 
+    /** @return list<UrlTruthInventoryRecord> */
+    public function candidatesForEntity(string $type, string $identity, string $locale): array
+    {
+        return match ($type) {
+            'article' => $this->candidatesForArticle($identity, $locale),
+            'career_guide' => PublicAuthorityCandidateResolver::resolve($this->backendAuthority->candidatesForCareerGuide($identity, $locale)),
+            'career_job' => $this->candidatesForCareerJob($identity, $locale),
+            default => throw new \InvalidArgumentException('Unsupported incremental URL Truth family.'),
+        };
+    }
+
+    /** @return list<UrlTruthInventoryRecord> */
+    private function candidatesForCareerJob(string $slug, string $locale): array
+    {
+        if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1 || ! in_array($locale, ['en', 'zh-CN'], true)) {
+            throw new \InvalidArgumentException('Career Job URL Truth identity is invalid.');
+        }
+        $this->careerCurrentReader->forgetLoadedAuthority();
+        $index = $this->careerCurrentReader->authority();
+        if (! isset($index['entries'][$slug][$locale]) || $this->careerAuthority->indexableItem($slug, $locale) === null) {
+            return [];
+        }
+        $page = $this->careerCurrentAuthority->pageFromIndexForRuntime($index, $slug, $locale);
+        if (! CareerContentV3CanonicalReader::sourceHasPublicBody($page)) {
+            throw new \RuntimeException('PUBLIC_AUTHORITY_CAREER_BODY_MISMATCH');
+        }
+        $revision = $index['entries'][$slug][$locale]['sha256'];
+        $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+
+        return [new UrlTruthInventoryRecord(
+            canonicalUrl: $this->canonicalUrl('/'.$segment.'/career/jobs/'.$slug),
+            locale: $locale, pageEntityType: 'career_job', entityIdOrSlug: $slug,
+            sourceAuthority: 'career_runtime_publish_projection', indexabilityState: 'indexable',
+            lastmodSource: 'career_directory_authority_revision', cluster: 'career',
+            entitySource: 'career_directory_authority', authorityStatus: 'published_approved',
+            metadata: ['publication_state' => 'published', 'robots' => 'index,follow', 'canonical_self' => true,
+                'sitemap_eligible' => true, 'llms_eligible' => true, 'authority_revision' => $revision],
+            attributes: ['authority_revision' => $revision],
+        )];
+    }
+
     /** @return array<string,mixed> */
     public function metadata(): array
     {

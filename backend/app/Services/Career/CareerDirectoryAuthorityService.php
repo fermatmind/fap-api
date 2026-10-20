@@ -115,6 +115,23 @@ final class CareerDirectoryAuthorityService
         return $this->directoryItems($locale, $recordCacheState, true);
     }
 
+    /** Qualify only the requested identity against the existing directory and publication projection. */
+    public function indexableItem(string $slug, string $locale): ?array
+    {
+        $publicLocale = $this->normalizePublicLocale($locale);
+        $payload = $this->responseCache->directoryReadModelPayload($publicLocale, false);
+        $items = array_values(array_filter((array) ($payload['items'] ?? []), static fn ($item): bool => is_array($item) && ($item['slug'] ?? null) === $slug));
+        $items = $this->readyIndexableItems($items);
+        if ($items === [] || ! isset($this->responseCache->directoryPublishedSlugs([$slug], $publicLocale)[$slug])) {
+            return null;
+        }
+        if (count($items) !== 1) {
+            throw new \RuntimeException('PUBLIC_AUTHORITY_CAREER_IDENTITY_AMBIGUOUS');
+        }
+
+        return $this->content->hasPublicBody($slug, $publicLocale) ? $this->publicItem($items[0]) : null;
+    }
+
     /** Keep full membership qualification before pagination; resolve visible names only when needed. */
     private function directoryItems(string $locale, bool $recordCacheState, bool $projectIdentity): array
     {

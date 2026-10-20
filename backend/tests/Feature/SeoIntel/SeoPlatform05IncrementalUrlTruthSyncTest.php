@@ -30,6 +30,25 @@ final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
         parent::tearDown();
     }
 
+    public function test_one_guide_never_reads_other_authority_families(): void
+    {
+        $guide = CareerGuide::create(['org_id' => 0, 'guide_code' => 'bounded-guide', 'slug' => 'bounded-guide',
+            'locale' => 'en', 'title' => 'Bounded guide', 'status' => 'published', 'is_public' => true, 'is_indexable' => true]);
+        $queries = [];
+        DB::listen(function ($query) use (&$queries): void {
+            $queries[] = $query->sql;
+        });
+        $source = app(\App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource::class);
+        $records = $source->candidatesForEntity('career_guide', (string) $guide->id, 'en');
+        self::assertCount(1, $records);
+        self::assertSame((string) $guide->id, $records[0]->entityIdOrSlug);
+        self::assertCount(1, $queries);
+        self::assertStringContainsString('career_guides', $queries[0]);
+        self::assertSame([], $source->candidatesForEntity('career_guide', (string) $guide->id, 'zh-CN'));
+        $guide->forceFill(['is_public' => false])->saveQuietly();
+        self::assertSame([], $source->candidatesForEntity('career_guide', (string) $guide->id, 'en'));
+    }
+
     public function test_publish_rerun_and_retire_are_atomic_idempotent_and_url_truth_only(): void
     {
         $this->prepareSchema();

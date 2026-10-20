@@ -140,8 +140,8 @@ final class IncrementalUrlTruthSyncService
     /** @return list<UrlTruthInventoryRecord> */
     private function authorityCandidates(string $pageEntityType, string $entityIdentity, string $locale): array
     {
-        return $pageEntityType === 'article' && $this->authority instanceof CurrentPublicUrlAuthoritySource
-            ? $this->authority->candidatesForArticle($entityIdentity, $locale)
+        return $this->authority instanceof CurrentPublicUrlAuthoritySource
+            ? $this->authority->candidatesForEntity($pageEntityType, $entityIdentity, $locale)
             : $this->authority->candidates();
     }
 

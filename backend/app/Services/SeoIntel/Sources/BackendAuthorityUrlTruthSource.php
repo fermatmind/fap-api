@@ -54,6 +54,21 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         }
     }
 
+    /** @return list<UrlTruthInventoryRecord> */
+    public function candidatesForCareerGuide(string $entityIdentity, string $locale): array
+    {
+        if (preg_match('/\A[1-9][0-9]*\z/', $entityIdentity) !== 1 || ! in_array($locale, ['en', 'zh-CN'], true)) {
+            throw new \InvalidArgumentException('Career Guide URL Truth identity is invalid.');
+        }
+        $previous = $this->requireComplete;
+        $this->requireComplete = true;
+        try {
+            return $this->careerGuideCandidates($entityIdentity, $locale);
+        } finally {
+            $this->requireComplete = $previous;
+        }
+    }
+
     private bool $scaleCatalogAttempted = false;
 
     private bool $scaleCatalogAvailable = false;
@@ -319,12 +334,14 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
     }
 
     /** @return list<UrlTruthInventoryRecord> */
-    private function careerGuideCandidates(): array
+    private function careerGuideCandidates(?string $entityIdentity = null, ?string $locale = null): array
     {
         try {
             $guides = CareerGuide::query()
                 ->withoutGlobalScopes()
                 ->where('org_id', 0)
+                ->when($entityIdentity !== null, fn ($query) => $query->where('id', (int) $entityIdentity))
+                ->when($locale !== null, fn ($query) => $query->where('locale', $locale))
                 ->publishedPublic()
                 ->indexable()
                 ->whereIn('locale', CareerGuide::SUPPORTED_LOCALES)
