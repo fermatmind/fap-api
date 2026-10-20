@@ -14,6 +14,13 @@ export const CATEGORIES = [
   "infrastructure_deployment",
 ];
 
+// These entrypoints run validation only; none is called by the server release path.
+const VALIDATION_SCRIPTS = new Set([
+  "backend/scripts/ci/ensure_mysql.sh",
+  "backend/scripts/ci/prepare_sqlite.sh",
+  "backend/scripts/ci_verify_mbti.sh",
+]);
+
 const normalize = (path) => path.replace(/^\.\//, "").replaceAll("\\", "/");
 const matches = (path, expressions) => expressions.some((expression) => expression.test(path));
 
@@ -359,7 +366,7 @@ export function classifyPaths(inputPaths) {
     ]);
 
     const selected = [];
-    if (path.startsWith(".agents/") || (docsOnly && (!seoCouncilControlPlane || testPath))) {
+    if (VALIDATION_SCRIPTS.has(path) || path.startsWith(".agents/") || (docsOnly && (!seoCouncilControlPlane || testPath))) {
       // Repository Skills are instructions and static helpers. Domain words in
       // their names or prose must not promote a rules-only change to runtime.
       // Documentation paths remain evidence even when their filenames contain

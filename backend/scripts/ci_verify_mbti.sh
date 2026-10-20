@@ -10,6 +10,49 @@ SCRIPT_DIR="$(cd "${SCRIPT_PATH%/*}" && pwd)"
 # shellcheck source=backend/scripts/ci/require_tools.sh
 source "${SCRIPT_DIR}/ci/require_tools.sh"
 require_tools rg php composer curl grep sed lsof cmp
+source "${SCRIPT_DIR}/ci/test_resources.sh"
+
+ENV_CREATED=0
+SERVE_PID=""
+SERVE_IDENTITY=""
+cleanup_legacy_alias() {
+  if [[ "${ALIAS_CREATED:-0}" == 1 && -L "$ALIAS_ABS" ]]; then
+    echo "[CI] cleanup legacy alias: $ALIAS_ABS"
+    rm -f "$ALIAS_ABS"
+  fi
+}
+
+cleanup_env_file() {
+  if [[ "${ENV_CREATED:-0}" == "1" && -f ".env" ]]; then
+    echo "[CI] cleanup temp env: $BACKEND_DIR/.env"
+    rm -f ".env"
+  fi
+}
+
+cleanup() {
+  local ec=$?
+  trap - EXIT INT TERM
+
+  stop_server_if_running
+
+  cleanup_legacy_alias
+  cleanup_env_file
+  fm_test_cleanup
+  exit "$ec"
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+stop_server_if_running() {
+  if [[ -n "${SERVE_PID:-}" ]]; then
+    fm_test_stop_server "$SERVE_PID" "${SERVE_IDENTITY:-}"
+    wait "$SERVE_PID" 2>/dev/null || true
+    SERVE_PID=""
+  fi
+}
+
+fm_test_init
 
 BACKEND_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 REPO_DIR="$(cd "${BACKEND_DIR}/.." && pwd)"
@@ -32,7 +75,7 @@ case "$CI_VERIFY_TOPOLOGY" in
       exit 18
     }
     export DB_CONNECTION=sqlite
-    export DB_DATABASE="${CI_VERIFY_SQLITE_DATABASE:-/tmp/fap-ci.sqlite}"
+    export DB_DATABASE="${CI_VERIFY_SQLITE_DATABASE:-${FM_TEST_RESOURCE_ROOT:-/tmp}/fap-ci.sqlite}"
     export QUEUE_CONNECTION=sync
     export FAP_ATTEMPT_WRITE_CONNECTION=sqlite
     export CACHE_STORE=array
@@ -40,6 +83,10 @@ case "$CI_VERIFY_TOPOLOGY" in
     export MBTI_RESPONSE_CACHE_STORE=array
     ;;
   mysql8-redis6)
+    [[ "${GITHUB_ACTIONS:-false}" == true ]] || {
+      echo "[CI][FAIL] fixed MySQL/Redis parity topology is restricted to GitHub CI; local tests require task-owned resources" >&2
+      exit 73
+    }
     [[ "$CI_VERIFY_PARITY_ONLY" == "1" ]] || {
       echo "[CI][FAIL] mysql8-redis6 topology is supported only by parity-only mode" >&2
       exit 18
@@ -99,9 +146,6 @@ CURL_AUTH=()
 # -----------------------------
 cd "$BACKEND_DIR"
 
-ENV_CREATED=0
-SERVE_PID=""
-
 prepare_ci_database() {
   if [[ "$CI_VERIFY_TOPOLOGY" == "sqlite-sync" ]]; then
     bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
@@ -150,12 +194,14 @@ verify_parity_services() {
   '
 }
 
-# Ensure .env exists + key before any artisan
-if [[ ! -f ".env" ]]; then
-  cp -a .env.example .env
-  ENV_CREATED=1
+# Local runs use the isolated exported key; never rewrite a developer's .env.
+if [[ "${GITHUB_ACTIONS:-false}" == true ]]; then
+  if [[ ! -f ".env" ]]; then
+    cp -a .env.example .env
+    ENV_CREATED=1
+  fi
+  php artisan key:generate --force >/dev/null 2>&1 || true
 fi
-php artisan key:generate --force >/dev/null 2>&1 || true
 
 if [[ "$CONTENT_PACKS_INDEX_ARTIFACT_ENABLED" == "true" || "$CONTENT_PACKS_INDEX_ARTIFACT_ENABLED" == "1" ]]; then
   ARTIFACT_PATH="$CONTENT_PACKS_INDEX_ARTIFACT_PATH"
@@ -453,7 +499,7 @@ Illuminate\Support\Facades\DB::table("scales_registry")
 # Defaults (override via env)
 # -----------------------------
 HOST="${HOST:-127.0.0.1}"
-PORT="${PORT:-1827}"                       # ✅ avoid 8000 collisions by default
+PORT="${PORT:-$(if [[ "${GITHUB_ACTIONS:-false}" == true ]]; then echo 1827; else fm_test_free_port; fi)}"
 API="http://${HOST}:${PORT}"
 
 REGION="${REGION:-CN_MAINLAND}"
@@ -600,7 +646,9 @@ wait_health() {
   local url="$1"
   local tries="${2:-80}"   # ~16s if sleep 0.2
   for i in $(seq 1 "$tries"); do
+    kill -0 "$SERVE_PID" 2>/dev/null || return 1
     if curl -fsS "$url" >/dev/null 2>&1; then
+      fm_test_port_owned "$PORT" "$SERVE_PID" || return 1
       return 0
     fi
     sleep 0.2
@@ -635,44 +683,12 @@ CANON_REL="default/${REGION}/${LOCALE}/${LEGACY_DIR}"
 CANON_ABS="$CONTENT_ROOT/$CANON_REL"
 ALIAS_ABS="$CONTENT_ROOT/$LEGACY_DIR"
 
-cleanup_legacy_alias() {
-  if [[ -L "$ALIAS_ABS" ]]; then
-    echo "[CI] cleanup legacy alias: $ALIAS_ABS"
-    rm -f "$ALIAS_ABS"
-  fi
-}
-
-cleanup_env_file() {
-  if [[ "${ENV_CREATED:-0}" == "1" && -f ".env" ]]; then
-    echo "[CI] cleanup temp env: $BACKEND_DIR/.env"
-    rm -f ".env"
-  fi
-}
-
-cleanup() {
-  local ec=$?
-  trap - EXIT INT TERM
-
-  stop_server_if_running
-
-  cleanup_legacy_alias
-  cleanup_env_file
-  exit "$ec"
-}
-trap cleanup EXIT INT TERM
-
-stop_server_if_running() {
-  if [[ -n "${SERVE_PID:-}" ]]; then
-    kill "$SERVE_PID" >/dev/null 2>&1 || true
-    wait "$SERVE_PID" 2>/dev/null || true
-    SERVE_PID=""
-  fi
-}
 
 if [[ -d "$CANON_ABS" ]]; then
   if [[ ! -e "$ALIAS_ABS" ]]; then
     echo "[CI] create legacy alias: $ALIAS_ABS -> $CANON_REL"
     (cd "$CONTENT_ROOT" && ln -s "$CANON_REL" "$LEGACY_DIR")
+    ALIAS_CREATED=1
   else
     echo "[CI] legacy alias exists: $ALIAS_ABS"
   fi
@@ -886,16 +902,15 @@ fi
 
 if [[ "$RUN_MBTI_SMOKE" == "1" ]]; then
   # -----------------------------
-  # Start server (force clean port first)
+  # Refuse foreign listeners; never stop another task to acquire a port.
   # -----------------------------
-  lsof -ti "tcp:${PORT}" | xargs -r kill -9 || true
-  if lsof -ti "tcp:${PORT}" >/dev/null 2>&1; then
-    fail "port already in use: ${PORT}. Stop your local server or set PORT=18xxx"
-  fi
+  fm_test_require_free_port "$PORT" || exit $?
 
   echo "[CI] starting server: php artisan serve --host=$HOST --port=$PORT"
-  CACHE_STORE=file php artisan serve --host="$HOST" --port="$PORT" >"$SERVE_LOG" 2>&1 &
+  CACHE_STORE=file php artisan serve --host="$HOST" --port="$PORT" --tries=1 >"$SERVE_LOG" 2>&1 &
   SERVE_PID=$!
+  SERVE_IDENTITY="$(fm_test_process_identity "$SERVE_PID")"
+  [[ "${SERVE_IDENTITY%% *}" == "$$" ]] || exit 11
 
   echo "[CI] waiting for health: $API/api/healthz"
   wait_health "$API/api/healthz" 100 || {

@@ -10,9 +10,16 @@ export NO_COLOR=1
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 REPO_DIR="$(cd "$BACKEND_DIR/.." && pwd)"
+source "$SCRIPT_DIR/test_resources.sh"
+fm_test_init
 
 export DB_CONNECTION="${DB_CONNECTION:-sqlite}"
-export DB_DATABASE="${DB_DATABASE:-/tmp/fap-ci.sqlite}"
+export DB_DATABASE="${DB_DATABASE:-${FM_TEST_RESOURCE_ROOT:-/tmp}/fap-ci.sqlite}"
+if [[ "${GITHUB_ACTIONS:-false}" != true ]] && ! fm_test_sqlite_path_owned; then
+  echo "[prepare_sqlite] refusing a database outside this task resource directory" >&2
+  fm_test_cleanup
+  exit 73
+fi
 
 reset_sqlite_db() {
   rm -f "$DB_DATABASE" "$DB_DATABASE-shm" "$DB_DATABASE-wal" "$DB_DATABASE-journal" || true
