@@ -296,6 +296,12 @@ jobs:
         with:
           node-version: 24
       - run: bash backend/scripts/ci/guard_no_committed_secrets.sh
+      - name: Install classifier contract test tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends --no-upgrade bash coreutils curl grep sed lsof diffutils procps mawk debianutils php-cli php-sqlite3 composer ripgrep
+          bash backend/scripts/ci/require_tools.sh rg php composer curl grep sed lsof cmp awk ps which
+          php -r 'if (!extension_loaded("pdo_sqlite")) { fwrite(STDERR, "pdo_sqlite is required for classifier contract tests\n"); exit(1); }'
       - run: node --test .github/trunk/*.test.mjs
 
   authority-contract:
