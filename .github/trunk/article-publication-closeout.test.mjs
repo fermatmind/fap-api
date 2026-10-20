@@ -1,12 +1,14 @@
 import assert from 'node:assert/strict';
 import {readFileSync,mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
-import {spawnSync} from 'node:child_process';
+import {spawnSync,execFileSync} from 'node:child_process';
 import {resolve} from 'node:path';
 import {readback} from './mbti-report-article-readback.mjs';
 import test from 'node:test';
 import {classifyPaths} from './classify-paths.mjs';
 import {requiredSeconds} from './production-release-budget.mjs';
+import {classifyRelease} from './classify-release.mjs';
+import {selectOperations} from './impact-consumers.mjs';
 
 const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
 
@@ -23,8 +25,8 @@ test('recovery and admitted deploy serialize production mutations together', () 
 test('normal and failed-smoke restoration budgets leave time inside the job', () => {
   const deploy = read('../workflows/deploy.yml');
   assert.equal((deploy.match(/timeout --signal=TERM --kill-after=30s 30m php \/tmp\/dep.phar deploy:code-only/g) ?? []).length, 2);
-  assert.equal(requiredSeconds(60,{}),6300);
-  assert.equal(requiredSeconds(60,{eq_new_source_articles_publish:true}),8900);
+  assert.equal(requiredSeconds(60,{}),6360);
+  assert.equal(requiredSeconds(60,{eq_new_source_articles_publish:true}),8960);
   assert.ok(requiredSeconds(60,{public_content_53_publish:true})>7200);
   assert.ok(requiredSeconds(30,{eq_new_source_articles_publish:true,iq_eq_topic_publish:true})>
     requiredSeconds(30,{eq_new_source_articles_publish:true}));
@@ -85,4 +87,31 @@ test('both restoration receipts keep code recovery separate from a failed articl
       assert.equal(receipt.incident.content_contract_mismatch,true);
     } finally {rmSync(directory,{recursive:true,force:true});}
   }
+});
+
+
+test('the real pending Career release retains its consumers and fits with recovery and kill grace', () => {
+  const production = '444e525c80d171f4a5070509ed0defb439646834';
+  const candidate = '21f43566fccc0f06578c37147b69c1c20d17eb20';
+  const pending = execFileSync('git', ['diff', '--name-only', production, candidate], {encoding:'utf8'}).trim().split('\n');
+  const patch = ['.github/workflows/deploy.yml', '.github/trunk/production-release-budget.mjs',
+    '.github/trunk/article-publication-closeout.test.mjs', '.github/trunk/career-publisher-workflow-contract.test.mjs'];
+  const release = classifyRelease({pushBase:candidate,head:'a'.repeat(40),baseline:{sha:production,runId:39368597477},
+    isAncestor:()=>true,diffPaths:base=>base===candidate?patch:pending});
+  Object.assign(release.operations, selectOperations(release.paths));
+  assert.equal(release.scope.validation_base_sha,production);
+  for (const name of ['publisher_required','career_current_authority_release','career_cache','url_truth','big5_tests','mbti_modes']) {
+    assert.equal(release.operations[name],true,name);
+  }
+  for (const name of ['big5_private_publish','riasec_private_publish','enneagram_private_publish','eq60_private_publish']) {
+    assert.equal(release.operations[name],false,name);
+  }
+  const required=requiredSeconds(60,release.operations);
+  assert.equal(required,3600+30+1800+30+900);
+  assert.ok(7200-50 >= required);
+  assert.ok(7200-841 < required);
+  assert.ok(requiredSeconds(60,{...release.operations,eq_new_source_articles_publish:true})>7200);
+  assert.throws(()=>requiredSeconds(30,release.operations),/CAREER_FORWARD_BUDGET_INVALID/);
+  assert.throws(()=>requiredSeconds(60,{career_current_authority_release:'true'}),/OPERATION_INVALID/);
+  assert.throws(()=>requiredSeconds(60,null),/OPERATIONS_INVALID/);
 });

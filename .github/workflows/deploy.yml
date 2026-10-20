@@ -1656,7 +1656,7 @@ jobs:
             stop_owned_pid "$tunnel_pid" "ssh -N"
             stop_owned_pid "$proxy_pid" "gsc_restricted_connect_proxy.mjs"
             if [ "$competitive_evidence" = true ]; then
-              "${ssh_base[@]}" "rm -f '$remote_key' '$remote_env' '$remote_writer_env' '$remote_tmp/config.php' '$remote_writer_config'; rmdir '$remote_tmp' 2>/dev/null || true" \
+              timeout --signal=TERM --kill-after=5s 30s "${ssh_base[@]}" "rm -f '$remote_key' '$remote_env' '$remote_writer_env' '$remote_tmp/config.php' '$remote_writer_config'; rmdir '$remote_tmp' 2>/dev/null || true" \
                 >/dev/null 2>&1 || true
             fi
             rm -f "$local_key" "$local_env" "$local_writer_env"
@@ -1795,13 +1795,18 @@ jobs:
           if test '${{ needs.policy.outputs.career_current }}' = true; then deploy_timeout=60m; fi
           if test '${{ fromJSON(needs.policy.outputs.classification).operations.career_cache }}' = true; then deploy_timeout=60m; fi
           if test "$production_council_closeout" = true; then deploy_timeout=60m; fi
-          # Retain the existing child limit and reserve a full 30m LKG rebuild
-          # plus every selected post-activation consumer and final checks.
+          # One forward deadline includes Deployer, installed Career readback,
+          # and required state checks. LKG and closeout remain outside it.
           deploy_minutes="${deploy_timeout%m}"
           remaining=$((7200 - $(date -u +%s) + PRODUCTION_JOB_STARTED_EPOCH))
           required="$(node .github/trunk/production-release-budget.mjs "$deploy_minutes" '${{ needs.policy.outputs.operations }}')"
           test "$remaining" -ge "$required"
+          PRODUCTION_FORWARD_DEADLINE=$(( $(date -u +%s) + deploy_minutes * 60 ))
+          echo "PRODUCTION_FORWARD_DEADLINE=$PRODUCTION_FORWARD_DEADLINE" >> "$GITHUB_ENV"
+          forward_remaining=$((PRODUCTION_FORWARD_DEADLINE - $(date -u +%s)))
+          test "$forward_remaining" -gt 0
           set +e
+          deploy_timeout="${forward_remaining}s"
           timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task" production -f deploy.php --revision "$DEPLOY_SHA" \
             -o release_name="$release" -o deploy_mode="$deploy_mode" \
             -o verify_api_certbot_renewal='${{ needs.policy.outputs.infrastructure }}' \
@@ -1822,14 +1827,14 @@ jobs:
           deploy_rc=$?
           set -e
           if [ "$deploy_rc" -eq 0 ]; then exit 0; fi
-          current="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 \
+          current="$(timeout --signal=TERM --kill-after=5s 30s ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
           if [ "$current" = "$DEPLOY_SHA" ]; then
             echo "Production activation committed but smoke failed; rebuilding and restoring the exact LKG once."
-            php /tmp/dep.phar fap:deploy-unlock-owned production -f deploy.php --no-interaction
+            timeout --signal=TERM --kill-after=5s 120s php /tmp/dep.phar fap:deploy-unlock-owned production -f deploy.php --no-interaction
             export EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE=""
             event_lkg="$DEPLOY_PATH/releases/trunk-${candidate_sha:0:12}-${GITHUB_RUN_ID}/backend/.event-ingest/lkg.json"
-            if ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "test -f '$event_lkg'"; then
+            if timeout --signal=TERM --kill-after=5s 30s ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "test -f '$event_lkg'"; then
               export EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE="$event_lkg"
             fi
             export DEPLOY_SHA="$lkg_sha" DEPLOY_REVISION="$lkg_sha" DEPLOY_MODE=code_only DEPLOY_INCIDENT_RECOVERY=true
@@ -1842,9 +1847,9 @@ jobs:
 
             content_contract='{"selected":false}'
             if [ '${{ fromJSON(needs.policy.outputs.classification).operations.mbti_report_articles_closeout }}' = true ]; then
-              content_contract="$(node .github/trunk/mbti-report-article-readback.mjs "$lkg_sha" || true)"
+              content_contract="$(timeout --signal=TERM --kill-after=5s 60s node .github/trunk/mbti-report-article-readback.mjs "$lkg_sha" || true)"
             fi
-            restored="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
+            restored="$(timeout --signal=TERM --kill-after=5s 30s ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
             safe_restored=""
             if [[ "$restored" =~ ^[0-9a-f]{40}$ ]]; then safe_restored="$restored"; fi
 
@@ -1906,9 +1911,16 @@ jobs:
           trap - EXIT HUP INT TERM
           exit "$deploy_rc"
       - name: Read production competitive evidence receipt
+        id: production-competitive
         if: always() && steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_competitive_evidence == 'true'
         shell: bash
         run: |
+          forward_remaining=$((PRODUCTION_FORWARD_DEADLINE - $(date -u +%s)))
+          if [ "$forward_remaining" -le 0 ]; then
+            echo 'Production forward deadline exhausted.' >&2
+            exit 124
+          fi
+          timeout --signal=TERM --kill-after=30s "${forward_remaining}s" bash -euo pipefail <<'PRODUCTION_FORWARD'
           set -euo pipefail
           receipt=seo-competitive-evidence-production.json
           printf -v q_path '%q' "$DEPLOY_PATH"
@@ -1936,10 +1948,18 @@ jobs:
             and .cro_measurement.hold_reason == "NONE"
             and .external_calls == 0 and .production_permissions == 0
           ' "$receipt" >/dev/null
+          PRODUCTION_FORWARD
       - name: Read production SEO Evidence closeout receipt
+        id: production-evidence
         if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_agent_evidence_boundary == 'true'
         shell: bash
         run: |
+          forward_remaining=$((PRODUCTION_FORWARD_DEADLINE - $(date -u +%s)))
+          if [ "$forward_remaining" -le 0 ]; then
+            echo 'Production forward deadline exhausted.' >&2
+            exit 124
+          fi
+          timeout --signal=TERM --kill-after=30s "${forward_remaining}s" bash -euo pipefail <<'PRODUCTION_FORWARD'
           set -euo pipefail
           receipt=seo-agent-evidence-boundary-production.json
           printf -v q_path '%q' "$DEPLOY_PATH"
@@ -1979,10 +1999,18 @@ jobs:
             }
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
+          PRODUCTION_FORWARD
       - name: Read production Policy Gateway closeout receipt
+        id: production-policy
         if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_agent_policy_gateway == 'true'
         shell: bash
         run: |
+          forward_remaining=$((PRODUCTION_FORWARD_DEADLINE - $(date -u +%s)))
+          if [ "$forward_remaining" -le 0 ]; then
+            echo 'Production forward deadline exhausted.' >&2
+            exit 124
+          fi
+          timeout --signal=TERM --kill-after=30s "${forward_remaining}s" bash -euo pipefail <<'PRODUCTION_FORWARD'
           set -euo pipefail
           receipt=seo-agent-policy-gateway-production.json
           printf -v q_path '%q' "$DEPLOY_PATH"
@@ -2024,10 +2052,18 @@ jobs:
             ]
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
+          PRODUCTION_FORWARD
       - name: Read production SEO Council closeout receipt
+        id: production-council
         if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.seo_council_runtime_closeout == 'true' && needs.policy.outputs.seo_competitive_evidence == 'true'
         shell: bash
         run: |
+          forward_remaining=$((PRODUCTION_FORWARD_DEADLINE - $(date -u +%s)))
+          if [ "$forward_remaining" -le 0 ]; then
+            echo 'Production forward deadline exhausted.' >&2
+            exit 124
+          fi
+          timeout --signal=TERM --kill-after=30s "${forward_remaining}s" bash -euo pipefail <<'PRODUCTION_FORWARD'
           set -euo pipefail
           receipt=seo-council-orchestration-production.json
           printf -v q_path '%q' "$DEPLOY_PATH"
@@ -2227,11 +2263,18 @@ jobs:
             and .platform11_lifecycle.execution_allowed == false
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
+          PRODUCTION_FORWARD
       - id: career-parity
         name: Read production preactivation Career parity receipt
         if: needs.policy.outputs.career_current == 'true' && steps.baseline.outputs.skip != 'true'
         shell: bash
         run: |
+          forward_remaining=$((PRODUCTION_FORWARD_DEADLINE - $(date -u +%s)))
+          if [ "$forward_remaining" -le 0 ]; then
+            echo 'Production forward deadline exhausted.' >&2
+            exit 124
+          fi
+          timeout --signal=TERM --kill-after=30s "${forward_remaining}s" bash -euo pipefail <<'PRODUCTION_FORWARD'
           set -euo pipefail
           receipt=career-current-authority-production-preactivation-parity.json
           printf -v q_path '%q' "$DEPLOY_PATH"
@@ -2266,11 +2309,18 @@ jobs:
               and ([.write_counts[]] | all(. == 0))
               and (.receipt_digest | test("^[0-9a-f]{64}$"))
             ' "$receipt" >/dev/null
+          PRODUCTION_FORWARD
       - id: career-publish
         name: Stream Career Current publisher and validate receipt
         if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_current_release == 'true' && needs.policy.outputs.career_current == 'true'
         shell: bash
         run: |
+          forward_remaining=$((PRODUCTION_FORWARD_DEADLINE - $(date -u +%s)))
+          if [ "$forward_remaining" -le 0 ]; then
+            echo 'Production forward deadline exhausted.' >&2
+            exit 124
+          fi
+          timeout --signal=TERM --kill-after=30s "${forward_remaining}s" bash -euo pipefail <<'PRODUCTION_FORWARD'
           set -euo pipefail
           dir=artifacts/career-current-authority-publish
           receipt="$dir/receipt.json"
@@ -2453,6 +2503,22 @@ jobs:
               --before="$RUNNER_TEMP/career-first-publish-seo-before.json" \
               > "$dir/first-publish-seo.json"
           fi
+          PRODUCTION_FORWARD
+      - name: Verify production A08 pause and read-only Operations preservation
+        id: production-state
+        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
+        env:
+          A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
+        run: |
+          forward_remaining=$((PRODUCTION_FORWARD_DEADLINE - $(date -u +%s)))
+          if [ "$forward_remaining" -le 0 ]; then
+            echo 'Production forward deadline exhausted.' >&2
+            exit 124
+          fi
+          timeout --signal=TERM --kill-after=30s "${forward_remaining}s" bash -euo pipefail <<'PRODUCTION_FORWARD'
+          bash backend/scripts/deploy/seo_a08_transport.sh state a08-production-after.json
+          node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-production-before.json a08-production-after.json "$DEPLOY_SHA"
+          PRODUCTION_FORWARD
       - id: eq-source-publish
         name: Publish exact reviewed EQ Chinese source articles
         if: steps.baseline.outputs.skip != 'true' && fromJSON(needs.policy.outputs.classification).operations.eq_new_source_articles_publish == true
@@ -2559,7 +2625,8 @@ jobs:
           if-no-files-found: error
           retention-days: 30
       - name: Restore exact LKG after Career publisher failure
-        if: failure() && (steps.career-publish.outcome == 'failure' || steps.eq-source-publish.outcome == 'failure' || steps.eq-existing-publish.outcome == 'failure' || steps.eq-english-publish.outcome == 'failure' || steps.iq-public-publish.outcome == 'failure' || steps.iq-article-publish.outcome == 'failure' || steps.iq-topic-publish.outcome == 'failure' || steps.public-content-53-publish.outcome == 'failure')
+        if: failure() && steps.activation.outcome == 'success' && (steps.career-parity.outcome == 'failure' || steps.production-state.outcome == 'failure' || steps.production-competitive.outcome == 'failure' || steps.production-evidence.outcome == 'failure' || steps.production-policy.outcome == 'failure' || steps.production-council.outcome == 'failure' || steps.career-publish.outcome == 'failure' || steps.eq-source-publish.outcome == 'failure' || steps.eq-existing-publish.outcome == 'failure' || steps.eq-english-publish.outcome == 'failure' || steps.iq-public-publish.outcome == 'failure' || steps.iq-article-publish.outcome == 'failure' || steps.iq-topic-publish.outcome == 'failure' || steps.public-content-53-publish.outcome == 'failure')
+        timeout-minutes: 36
         shell: bash
         run: |
           set -euo pipefail
@@ -2625,12 +2692,12 @@ jobs:
           lkg_sha='${{ steps.baseline.outputs.active }}'
           [[ "$candidate_sha" =~ ^[0-9a-f]{40}$ ]]
           [[ "$lkg_sha" =~ ^[0-9a-f]{40}$ ]]
-          current="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+          current="$(timeout --signal=TERM --kill-after=5s 30s ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
           test "$current" = "$candidate_sha"
           export EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE=""
             event_lkg="$DEPLOY_PATH/releases/trunk-${candidate_sha:0:12}-${GITHUB_RUN_ID}/backend/.event-ingest/lkg.json"
-            if ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "test -f '$event_lkg'"; then
+            if timeout --signal=TERM --kill-after=5s 30s ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "test -f '$event_lkg'"; then
               export EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE="$event_lkg"
             fi
             export DEPLOY_SHA="$lkg_sha" DEPLOY_REVISION="$lkg_sha" DEPLOY_MODE=code_only DEPLOY_INCIDENT_RECOVERY=true
@@ -2640,11 +2707,11 @@ jobs:
             -o deploy_mode=code_only --no-interaction
           rollback_rc=$?
           set -e
-          restored="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+          restored="$(timeout --signal=TERM --kill-after=5s 30s ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
           content_contract='{"selected":false}'
           if [ '${{ fromJSON(needs.policy.outputs.classification).operations.mbti_report_articles_closeout }}' = true ]; then
-            content_contract="$(node .github/trunk/mbti-report-article-readback.mjs "$lkg_sha" || true)"
+            content_contract="$(timeout --signal=TERM --kill-after=5s 60s node .github/trunk/mbti-report-article-readback.mjs "$lkg_sha" || true)"
           fi
           rollback_ok=false
           restored_ok=false
@@ -2666,6 +2733,7 @@ jobs:
           test "$restored_ok" = true
           test "$content_verified" = true
       - name: Upload Career Current publish receipt
+        timeout-minutes: 2
         if: always() && steps.career-publish.outcome != 'skipped'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
@@ -2674,14 +2742,8 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-      - name: Verify production A08 pause and read-only Operations preservation
-        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
-        env:
-          A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
-        run: |
-          bash backend/scripts/deploy/seo_a08_transport.sh state a08-production-after.json
-          node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-production-before.json a08-production-after.json "$DEPLOY_SHA"
       - name: Persist push-to-production timing receipt
+        timeout-minutes: 1
         if: always()
         env:
           PUSHED_AT: ${{ github.event.workflow_run.created_at }}
@@ -2693,6 +2755,7 @@ jobs:
             '{schema_version:"fermatmind.trunk-delivery-timing.v1",sha:$sha,pushed_at:$pushed,ci_completed_at:$ci,repository:$repository,ci_run_id:$ci_run,deploy_run_attempt:1,production_outcome:$outcome,production_smoke_completed_at:(if $outcome == "success" then $completed else null end),deploy_run_id:$run}' \
             > trunk-delivery-timing.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        timeout-minutes: 2
         if: always()
         with:
           name: trunk-production-${{ github.event.workflow_run.head_sha }}
