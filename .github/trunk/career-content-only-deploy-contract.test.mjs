@@ -261,10 +261,12 @@ test('Career cache and Current production budgets preserve complete mixed-scope 
   ]) {
     const script = budget
       .replaceAll('${{ needs.policy.outputs.career_current }}', String(current))
-      .replaceAll('${{ fromJSON(needs.policy.outputs.classification).operations.career_cache }}', String(cache));
-    const actual = execFileSync('bash', ['-c', `${script}\nprintf '%s' "$deploy_timeout"`], {
+      .replaceAll('${{ fromJSON(needs.policy.outputs.classification).operations.career_cache }}', String(cache))
+      .replaceAll('${{ needs.policy.outputs.operations }}', Buffer.from(JSON.stringify({career_current_authority_release:current})).toString('base64'));
+    const actual = execFileSync('bash', ['-eu', '-c', `${script}\nprintf '%s' "$deploy_timeout"`], {
       encoding: 'utf8',
-      env: { ...process.env, competitive_evidence: String(competitive), production_council_closeout: String(council) },
+      env: { ...process.env, competitive_evidence: String(competitive), production_council_closeout: String(council),
+        PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)),GITHUB_ENV:'/dev/null' },
     });
     assert.equal(actual, expected);
   }
