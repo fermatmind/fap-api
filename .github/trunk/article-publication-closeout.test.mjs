@@ -9,6 +9,7 @@ import {classifyPaths} from './classify-paths.mjs';
 import {requiredSeconds} from './production-release-budget.mjs';
 import {classifyRelease} from './classify-release.mjs';
 import {selectOperations} from './impact-consumers.mjs';
+import {readCandidateRows} from './public-content-53-package.mjs';
 
 const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
 
@@ -53,6 +54,37 @@ test('pending IQ publication fits the production job with matching remaining bud
   const admitted = runAdmission(60);
   assert.equal(admitted.status, 0, admitted.stderr);
   assert.notEqual(runAdmission(jobSeconds-required+60).status, 0, 'actual workflow must still refuse admission when recovery no longer fits');
+});
+
+test('the selected ten-page CMS package fits with full Career and recovery allowances', () => {
+  const workflow = read('../workflows/deploy.yml');
+  const production = workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
+  const jobSeconds = Number(production.match(/^    timeout-minutes: (\d+)$/m)?.[1]) * 60;
+  assert.equal(Number(production.match(/remaining=\$\(\((\d+) - \$\(date/)?.[1]),jobSeconds);
+  const rows = readCandidateRows(resolve('backend')).candidates;
+  assert.equal(rows.length,10);
+  const operations = classifyPaths(['backend/content_assets/public_content_53/seo-alignment.json',
+    'backend/content_assets/career/career_current_authority_release.v1.json']).operations;
+  assert.equal(operations.public_content_53_publish,true);
+  assert.equal(operations.career_current_authority_release,true);
+  const required = requiredSeconds(60,operations,rows.length);
+  assert.equal(required,6360+1600+10*540);
+  assert.ok(9000 < 6360+26000,'the former lane-wide reserve rejected before Deployer started');
+  assert.ok(jobSeconds-300 >= required,'retain setup, full forward work, LKG and closeout');
+  assert.ok(requiredSeconds(60,operations,53) > jobSeconds,'an oversized package must still be refused');
+  for (const count of [0,-1,1.5,NaN,Infinity,'10']) {
+    assert.throws(()=>requiredSeconds(60,operations,count),/PUBLIC_CONTENT_ROW_COUNT_INVALID/);
+  }
+  const admission = production.match(/          remaining=\$\(\([\s\S]*?          test "\$remaining" -ge "\$required"[^\n]*/)?.[0];
+  assert.ok(admission);
+  const script = admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/,`'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
+  const run = elapsed => spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
+    deploy_minutes:'60',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
+  }});
+  assert.equal(run(300).status,0);
+  const late = run(jobSeconds-required+60);
+  assert.notEqual(late.status,0);
+  assert.match(late.stderr,/Production budget insufficient/);
 });
 
 test('article cache closeout is selected only for its existing content and readers', () => {

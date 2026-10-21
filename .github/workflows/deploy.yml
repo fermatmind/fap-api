@@ -1442,7 +1442,7 @@ jobs:
     needs: [policy, staging]
     if: needs.staging.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 240
     environment: production
     env:
       ASSETS_SHA256: ${{ needs.policy.outputs.career_current_assets_sha256 }}
@@ -1798,9 +1798,9 @@ jobs:
           # One forward deadline includes Deployer, installed Career readback,
           # and required state checks. LKG and closeout remain outside it.
           deploy_minutes="${deploy_timeout%m}"
-          remaining=$((9000 - $(date -u +%s) + PRODUCTION_JOB_STARTED_EPOCH))
+          remaining=$((14400 - $(date -u +%s) + PRODUCTION_JOB_STARTED_EPOCH))
           required="$(node .github/trunk/production-release-budget.mjs "$deploy_minutes" '${{ needs.policy.outputs.operations }}')"
-          test "$remaining" -ge "$required"
+          test "$remaining" -ge "$required" || { echo "Production budget insufficient: remaining=${remaining}s required=${required}s" >&2; exit 1; }
           PRODUCTION_FORWARD_DEADLINE=$(( $(date -u +%s) + deploy_minutes * 60 ))
           echo "PRODUCTION_FORWARD_DEADLINE=$PRODUCTION_FORWARD_DEADLINE" >> "$GITHUB_ENV"
           forward_remaining=$((PRODUCTION_FORWARD_DEADLINE - $(date -u +%s)))
