@@ -174,12 +174,28 @@ final class PublicContent53State
     {
         foreach ($rows as $row) {
             $saved = $state[$row['page_id']];
+            $beforeCopy = PublicContent53Package::before($row);
+            $candidateCopy = $row['snapshot'];
+            $nativeBefore = PublicContent53Package::nativeBlocks($row, false);
+            if ($nativeBefore !== null) {
+                $native = $this->blockCopy($saved['relations']['page_blocks'], array_keys($nativeBefore));
+                if ($this->hash($native) !== $this->hash($nativeBefore)
+                    && $this->hash($native) !== $this->hash(PublicContent53Package::nativeBlocks($row, true))) {
+                    throw new DomainException('public_content_53_locked_copy_drift');
+                }
+                // The API derives empty family items; its projection is checked
+                // separately. Compare raw compatibility copy against its own baseline.
+                unset($beforeCopy['block_copy'], $candidateCopy['block_copy']);
+            }
             if ($row['kind'] === 'profile') {
                 $projection = $this->projection($row); // Topic readers have no cache.
             } else {
                 $values = $row['kind'] === 'article' ? $saved['published'] : $saved['values'];
                 $projection = [];
                 foreach ($row['snapshot'] as $field => $_) {
+                    if ($nativeBefore !== null && $field === 'block_copy') {
+                        continue;
+                    }
                     if ($row['kind'] === 'surface' && $field === 'block_copy') {
                         $projection[$field] = $this->blockCopy($saved['relations']['page_blocks'], array_keys($row['snapshot']['block_copy']));
 
@@ -203,7 +219,7 @@ final class PublicContent53State
                     $projection[$field] = $value;
                 }
             }
-            if ($this->hash($projection) !== $this->hash(PublicContent53Package::before($row)) && $this->hash($projection) !== $this->hash($row['snapshot'])) {
+            if ($this->hash($projection) !== $this->hash($beforeCopy) && $this->hash($projection) !== $this->hash($candidateCopy)) {
                 throw new DomainException('public_content_53_locked_copy_drift');
             }
             foreach ((PublicContent53Package::environment() === 'staging' ? $row['staging_source_identity'] : $row['source_identity']) as $field => $expected) {
@@ -224,6 +240,10 @@ final class PublicContent53State
         foreach ($rows as $row) {
             if ($this->hash($this->projection($row)) !== $this->hash($row['snapshot'])) {
                 throw new DomainException('public_content_53_public_readback_drift');
+            }
+            $native = PublicContent53Package::nativeBlocks($row, true);
+            if ($native !== null && $this->hash($this->blockCopy($state[$row['page_id']]['relations']['page_blocks'], array_keys($native))) !== $this->hash($native)) {
+                throw new DomainException('public_content_53_native_block_readback_drift');
             }
         }
     }

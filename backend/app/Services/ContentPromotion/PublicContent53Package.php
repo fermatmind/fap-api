@@ -268,10 +268,50 @@ final class PublicContent53Package
                 || array_keys($row['identity']) !== ['org_id', 'slug', 'locale']
                 || [$row['kind'] ?? null, $row['identity']['slug'] ?? null, $row['identity']['locale'] ?? null] !== self::SEO_ALIGNMENT_TARGETS[$id]
                 || ($review['pages'][$id] ?? null) !== 'PASS'
-                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity', 'staging_bootstrap', 'staging_snapshot']) !== []) {
+                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity', 'staging_bootstrap', 'staging_snapshot', 'native_blocks']) !== []) {
                 throw new DomainException('public_content_53_alignment_identity_invalid');
             }
             $seen[$id] = true;
+            if ($row['kind'] === 'surface') {
+                $blocks = $row['native_blocks'] ?? null;
+                if (! is_array($blocks) || array_keys($blocks) !== ['before', 'snapshot', 'staging_before', 'staging_snapshot']) {
+                    throw new DomainException('public_content_53_alignment_native_blocks_invalid');
+                }
+                foreach (['before', 'snapshot', 'staging_before', 'staging_snapshot'] as $version) {
+                    if (! is_array($blocks[$version]) || array_keys($blocks[$version]) !== ['hero', 'families']
+                        || ! is_array($blocks[$version]['hero']) || ! is_array($blocks[$version]['families'])) {
+                        throw new DomainException('public_content_53_alignment_native_blocks_invalid');
+                    }
+                }
+                foreach (['' => 'snapshot', 'staging_' => 'staging_snapshot'] as $prefix => $version) {
+                    $this->assertAlignmentSurface($blocks[$prefix.'before'], $blocks[$version]);
+                    $public = $row[$version] ?? $row['snapshot'];
+                    if (($blocks[$version]['hero']['title'] ?? null) !== $public['payload_json']['hero']['title']) {
+                        throw new DomainException('public_content_53_alignment_native_blocks_invalid');
+                    }
+                    $expected = [];
+                    foreach ($public['payload_json']['families']['items'] as $family) {
+                        foreach ($family['tests'] ?? [] as $card) {
+                            if (($card['key'] ?? null) === 'eq-test-emotional-intelligence-assessment') {
+                                $expected[] = array_intersect_key($card, array_flip(['title', 'description', 'outputLabel']));
+                            }
+                        }
+                    }
+                    $actual = [];
+                    foreach ($blocks[$version]['families']['items'] ?? [] as $family) {
+                        foreach ($family['tests'] ?? [] as $card) {
+                            if (($card['key'] ?? null) === 'eq-test-emotional-intelligence-assessment') {
+                                $actual[] = array_intersect_key($card, array_flip(['title', 'description', 'outputLabel']));
+                            }
+                        }
+                    }
+                    if (count($actual) !== 2 || PromotionContextFactory::canonicalJson($actual) !== PromotionContextFactory::canonicalJson($expected)) {
+                        throw new DomainException('public_content_53_alignment_native_blocks_invalid');
+                    }
+                }
+            } elseif (isset($row['native_blocks'])) {
+                throw new DomainException('public_content_53_alignment_native_blocks_invalid');
+            }
             if (isset($row['staging_bootstrap'])) {
                 $bootstrap = $row['staging_bootstrap'];
                 if ($id !== 'PAGE-60' || $row['staging_before'] !== $row['before']
@@ -726,6 +766,17 @@ final class PublicContent53Package
     public static function before(array $row): array
     {
         return self::environment() === 'staging' ? $row['staging_before'] : $row['before'];
+    }
+
+    /** Raw compatibility blocks are distinct from the public API's derived items. */
+    public static function nativeBlocks(array $row, bool $candidate): ?array
+    {
+        if (! isset($row['native_blocks'])) {
+            return null;
+        }
+        $prefix = self::environment() === 'staging' ? 'staging_' : '';
+
+        return $row['native_blocks'][$prefix.($candidate ? 'snapshot' : 'before')];
     }
 
     private function bytes(string|false $root, string $name): string

@@ -293,7 +293,7 @@ final class PublicContent53Writer
         $copy = $row['snapshot'];
         unset($copy['block_copy']);
         LandingSurface::query()->withoutGlobalScopes()->findOrFail($saved['values']['id'])->forceFill($copy)->saveQuietly();
-        foreach ($row['snapshot']['block_copy'] ?? [] as $key => $payload) {
+        foreach (PublicContent53Package::nativeBlocks($row, true) ?? $row['snapshot']['block_copy'] ?? [] as $key => $payload) {
             DB::table('page_blocks')->where('landing_surface_id', $saved['values']['id'])->where('block_key', $key)
                 ->update(['payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)]);
         }

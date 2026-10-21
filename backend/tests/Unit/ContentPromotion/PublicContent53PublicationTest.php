@@ -858,7 +858,7 @@ PHP;
             } elseif ($row['kind'] === 'surface') {
                 $surface = LandingSurface::query()->create(['org_id' => 0, 'surface_key' => $row['identity']['slug'], 'locale' => $row['identity']['locale'],
                     'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'schema_version' => 'v1'] + array_diff_key($copy, ['block_copy' => true]));
-                foreach ($copy['block_copy'] as $key => $payload) {
+                foreach (PublicContent53Package::nativeBlocks($row, false) ?? $copy['block_copy'] as $key => $payload) {
                     PageBlock::query()->create(['landing_surface_id' => $surface->id, 'block_key' => $key,
                         'block_type' => 'tests_section', 'payload_json' => $payload, 'sort_order' => 1, 'is_enabled' => true]);
                 }
@@ -902,11 +902,32 @@ PHP;
         self::assertSame(10, $after['written_count']);
         Cache::flush();
         $states->assertPublished($rows, $after['state']);
+        foreach (array_filter($rows, fn ($row) => $row['kind'] === 'surface') as $row) {
+            $surfaceId = $after['state'][$row['page_id']]['values']['id'];
+            $native = json_decode(DB::table('page_blocks')->where('landing_surface_id', $surfaceId)->where('block_key', 'families')->value('payload_json'), true);
+            self::assertSame(PublicContent53Package::nativeBlocks($row, true)['families'], $native);
+            self::assertCount(12, array_merge(...array_column($native['items'], 'tests')));
+            $projection = $states->projection($row);
+            self::assertSame([], $projection['block_copy']['families']['items']);
+        }
         foreach ($before as $id => $saved) {
             if ($saved['table'] === 'articles') {
                 self::assertSame($saved['working'], $after['state'][$id]['working']);
                 self::assertSame($saved['published'], (array) DB::table('article_translation_revisions')->where('id', $saved['published']['id'])->first());
             }
+        }
+        $drifted = $after['state'];
+        foreach ($drifted['PAGE-61']['relations']['page_blocks'] as &$block) {
+            if ($block['block_key'] === 'families') {
+                $block['payload_json'] = json_encode(['items' => []]);
+            }
+        }
+        unset($block);
+        try {
+            $states->assertPublished($rows, $drifted);
+            self::fail('Public projection equality must not conceal raw native readback drift');
+        } catch (DomainException $error) {
+            self::assertSame('public_content_53_native_block_readback_drift', $error->getMessage());
         }
         self::assertSame($control, Article::query()->findOrFail($control['id'])->toArray());
         self::assertSame(0, DB::transaction(fn () => $writer->publish($this->alignmentContext(), $after['state']))['written_count']);
@@ -919,6 +940,24 @@ PHP;
         DB::table('article_seo_meta')->where('article_id', $again['state']['PAGE-55']['values']['id'])->update(['seo_title' => 'Concurrent operator edit']);
         $this->expectExceptionMessage('public_content_53_rollback_concurrent_state');
         DB::transaction(fn () => $writer->restore($this->alignmentContext('f'), $before, $again['state']));
+    }
+
+    public function test_alignment_rejects_raw_compatibility_drift_hidden_by_public_projection(): void
+    {
+        $rows = $this->seedAlignment();
+        $states = app(PublicContent53State::class);
+        $before = $states->read($this->alignmentDigest());
+        $states->assertLockedBaseline($rows, $before);
+        $surfaceId = $before['PAGE-61']['values']['id'];
+        $block = DB::table('page_blocks')->where('landing_surface_id', $surfaceId)->where('block_key', 'families')->first();
+        $copy = json_decode($block->payload_json, true);
+        $copy['items'][0]['tests'][0]['href'] = '/zh/concurrent-operator-change';
+        DB::table('page_blocks')->where('id', $block->id)->update(['payload_json' => json_encode($copy)]);
+        Cache::flush();
+        $surface = array_values(array_filter($rows, fn ($row) => $row['page_id'] === 'PAGE-61'))[0];
+        self::assertSame([], $states->projection($surface)['block_copy']['families']['items']);
+        $this->expectExceptionMessage('public_content_53_locked_copy_drift');
+        $states->assertLockedBaseline($rows, $states->read($this->alignmentDigest()));
     }
 
     public function test_staging_only_initialization_keeps_a_real_baseline_and_never_overwrites_existing_holds(): void
@@ -973,6 +1012,29 @@ PHP;
                 $p['candidates'][6]['staging_snapshot']['payload_json']['families']['items'][0]['tests'][0]['href'] = '/en/foreign';
             },
         ];
+        $mutations[] = static function (&$p): void {
+            unset($p['candidates'][6]['native_blocks']);
+        };
+        $mutations[] = static function (&$p): void {
+            $p['candidates'][6]['native_blocks']['snapshot']['families']['items'][0]['tests'][0]['href'] = '/zh/foreign';
+        };
+        $mutations[] = static function (&$p): void {
+            array_pop($p['candidates'][6]['native_blocks']['staging_snapshot']['families']['items']);
+        };
+        $mutations[] = static function (&$p): void {
+            $p['candidates'][6]['native_blocks']['snapshot']['hero']['title'] = 'Unmatched title';
+        };
+        $mutations[] = static function (&$p): void {
+            foreach ($p['candidates'][6]['native_blocks']['snapshot']['families']['items'] as &$family) {
+                foreach ($family['tests'] as &$card) {
+                    if ($card['key'] === 'eq-test-emotional-intelligence-assessment') {
+                        $card['description'] = 'Copy differs from the primary surface';
+                    }
+                }
+                unset($card);
+            }
+            unset($family);
+        };
         $root = sys_get_temp_dir().'/public-alignment-'.bin2hex(random_bytes(8));
         $dir = $root.'/'.PublicContent53Package::PACKAGE;
         mkdir($dir, 0700, true);
