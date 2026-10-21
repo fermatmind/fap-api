@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Security;
 
+use App\Http\Controllers\API\V0_3\AccountController;
 use App\Http\Controllers\API\V0_3\AttemptReadController;
 use App\Http\Controllers\API\V0_3\MbtiAttributionEventController;
 use Illuminate\Routing\Route;
@@ -22,6 +23,11 @@ final class SecurityGuardrailsTest extends TestCase
         '/api/v0.2/{any?}',
         '/api/v0.3/webhooks/payment/{provider}',
         '/api/v0.3/auth/guest',
+        // Account bootstrap verifies signed Google credentials or one-time email proofs, not an existing session.
+        '/api/v0.3/auth/google/challenge',
+        '/api/v0.3/auth/google',
+        '/api/v0.3/auth/google/link-email',
+        '/api/v0.3/auth/account/confirm-email',
         '/api/v0.3/auth/wx_phone',
         '/api/v0.3/auth/phone/send_code',
         '/api/v0.3/auth/phone/verify',
@@ -612,6 +618,20 @@ final class SecurityGuardrailsTest extends TestCase
             '/Route::post\(\s*[\'"]\/auth\/guest[\'"]\s*,\s*AuthGuestV03Controller::class\s*\)\s*->\s*middleware\(\s*\\\\App\\\\Http\\\\Middleware\\\\ResolveAnonId::class\s*\)\s*;/s',
             $source
         );
+    }
+
+    public function test_public_account_bootstrap_routes_keep_exact_controller_and_auth_throttle(): void
+    {
+        foreach ([
+            '/api/v0.3/auth/google/challenge' => 'challenge',
+            '/api/v0.3/auth/google' => 'google',
+            '/api/v0.3/auth/google/link-email' => 'sendGoogleLink',
+            '/api/v0.3/auth/account/confirm-email' => 'confirmEmail',
+        ] as $path => $action) {
+            $route = app('router')->getRoutes()->match(request()->create($path, 'POST'));
+            $this->assertSame(AccountController::class.'@'.$action, $route->getActionName());
+            $this->assertContains('throttle:api_auth', $route->gatherMiddleware());
+        }
     }
 
     public function test_v02_routes_use_deprecated_410_contract(): void
