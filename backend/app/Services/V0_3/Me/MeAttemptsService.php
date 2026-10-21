@@ -357,6 +357,7 @@ class MeAttemptsService
             'scale_version' => (string) ($attempt->scale_version ?? 'v0.2'),
             'type_code' => (string) ($result?->type_code ?? $attempt->type_code ?? ''),
             'has_result' => $result instanceof Result,
+            'is_submitted' => ! empty($attempt->submitted_at),
             'question_count' => (int) ($attempt->question_count ?? 0),
             'region' => (string) ($attempt->region ?? 'CN_MAINLAND'),
             'locale' => (string) ($attempt->locale ?? 'zh-CN'),

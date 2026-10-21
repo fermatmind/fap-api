@@ -236,10 +236,27 @@ final class AccountCenterTest extends TestCase
         $response = $this->withToken($this->token($user))->getJson('/api/v0.3/me/attempts?page_size=50')->assertOk()->assertJsonCount(6, 'items');
         foreach ($response->json('items') as $item) {
             $this->assertTrue($item['has_result']);
+            $this->assertTrue($item['is_submitted']);
             $this->assertSame(4, $item['question_count']);
             $this->assertSame('/result/'.$item['attempt_id'], $item['access_summary']['actions']['page_href']);
             $this->assertArrayHasKey('pdf_href', $item['access_summary']['actions']);
         }
+    }
+
+    public function test_history_exposes_real_submission_state_even_with_legacy_date_fallback(): void
+    {
+        $user = User::factory()->create();
+        [$draft] = $this->attempt();
+        [$submitted] = $this->attempt();
+        $draft->update(['user_id' => (string) $user->id, 'submitted_at' => null]);
+        $submitted->update(['user_id' => (string) $user->id]);
+        $response = $this->withToken($this->token($user))->getJson('/api/v0.3/me/attempts?page_size=50')->assertOk()->assertJsonCount(2, 'items');
+        $rows = collect($response->json('items'))->keyBy('attempt_id');
+        $this->assertFalse($rows[$draft->id]['is_submitted']);
+        $this->assertFalse($rows[$draft->id]['has_result']);
+        $this->assertNotEmpty($rows[$draft->id]['submitted_at']);
+        $this->assertTrue($rows[$submitted->id]['is_submitted']);
+        $this->assertFalse($rows[$submitted->id]['has_result']);
     }
 
     public function test_membership_order_recovery_preserves_award_id_expiry_and_refund_statistics(): void
