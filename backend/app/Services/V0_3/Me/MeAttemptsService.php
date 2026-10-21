@@ -356,6 +356,8 @@ class MeAttemptsService
             'scale_code' => (string) ($attempt->scale_code ?? 'MBTI'),
             'scale_version' => (string) ($attempt->scale_version ?? 'v0.2'),
             'type_code' => (string) ($result?->type_code ?? $attempt->type_code ?? ''),
+            'has_result' => $result instanceof Result,
+            'question_count' => (int) ($attempt->question_count ?? 0),
             'region' => (string) ($attempt->region ?? 'CN_MAINLAND'),
             'locale' => (string) ($attempt->locale ?? 'zh-CN'),
             'result_summary' => [
@@ -1301,7 +1303,7 @@ class MeAttemptsService
 
     private function shouldIncludeAccessSummary(Attempt $attempt): bool
     {
-        return in_array(strtoupper(trim((string) ($attempt->scale_code ?? ''))), ['BIG5_OCEAN', 'MBTI', 'ENNEAGRAM'], true);
+        return in_array(strtoupper(trim((string) ($attempt->scale_code ?? ''))), ['BIG5_OCEAN', 'MBTI', 'ENNEAGRAM', 'RIASEC', 'EQ_60', 'IQ_RAVEN', 'IQ_INTELLIGENCE_QUOTIENT'], true);
     }
 
     private function supportsPageEntry(string $accessState, string $reportState): bool

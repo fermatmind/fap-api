@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'google_login' => [
+        'client_id' => env('GOOGLE_LOGIN_CLIENT_ID', ''),
+        'frontend_url' => env('FRONTEND_URL', 'https://fermatmind.com'),
+    ],
 
     /*
     |--------------------------------------------------------------------------

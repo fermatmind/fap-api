@@ -90,6 +90,25 @@ final class MembershipService
         return $this->activeGrant($orgId, $userId, $anonId) !== null;
     }
 
+    /** Called only after purchase-email proof assigned the actual order rows in the same transaction. */
+    public function linkEarnedMembershipForVerifiedOrders(int $orgId, string $userId, string $anonId): void
+    {
+        if ($anonId === '') {
+            return;
+        }
+        $orders = $this->eligibleReportOrders($orgId, null, $anonId)->lockForUpdate()->get(['user_id']);
+        if ($orders->count() < (int) config('membership.automatic_annual_report_count', 5)
+            || $orders->contains(fn ($order): bool => (string) $order->user_id !== $userId)) {
+            return;
+        }
+        DB::table('benefit_grants')->where('org_id', $orgId)
+            ->where('benefit_code', strtoupper((string) config('membership.benefit_code', 'FERMAT_MEMBER')))
+            ->where('scope', 'org')->whereNull('order_no')->where('benefit_type', 'membership')
+            ->where('benefit_ref', $anonId)->where('meta_json->granted_via', 'five_paid_reports')
+            ->where(fn (Builder $query) => $query->whereNull('user_id')->orWhere('user_id', $anonId))
+            ->update(['user_id' => $userId, 'updated_at' => now()]);
+    }
+
     private function grantEarnedAnnual(int $orgId, ?string $userId, ?string $anonId, int $paidReportCount): void
     {
         if ($paidReportCount < (int) config('membership.automatic_annual_report_count', 5)
@@ -116,6 +135,13 @@ final class MembershipService
                 ->where('benefit_ref', $actorRef)
                 ->lockForUpdate()
                 ->first();
+            // Ownership can move from an anonymous purchaser to a verified account.
+            // Preserve the original award and expiry instead of issuing a second annual term.
+            if ($existing === null && $userId !== '') {
+                $existing = DB::table('benefit_grants')->where('org_id', $orgId)->where('user_id', $userId)
+                    ->where('benefit_type', 'membership')->whereNull('order_no')
+                    ->where('meta_json->granted_via', 'five_paid_reports')->lockForUpdate()->first();
+            }
             if ($existing !== null) {
                 if (strtolower(trim((string) ($existing->status ?? ''))) === 'revoked') {
                     DB::table('benefit_grants')->where('id', $existing->id)->update([

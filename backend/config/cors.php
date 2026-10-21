@@ -6,7 +6,9 @@ $allowedFrontendOrigins = [
     'https://www.fermatmind.com',
     'https://staging.fermatmind.com',
 ];
-$runtimeFrontendOrigin = in_array($frontendOrigin, $allowedFrontendOrigins, true)
+$isLocalPreview = env('APP_ENV') === 'local'
+    && preg_match('~^http://(?:localhost|127\.0\.0\.1)(?::[0-9]{1,5})?$~D', $frontendOrigin) === 1;
+$runtimeFrontendOrigin = $isLocalPreview || in_array($frontendOrigin, $allowedFrontendOrigins, true)
     ? $frontendOrigin
     : null;
 

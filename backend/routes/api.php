@@ -195,6 +195,10 @@ Route::prefix('v0.3')->middleware([
         ->name('api.v0_3.webhooks.payment');
 
     Route::middleware('throttle:api_auth')->group(function () {
+        Route::post('/auth/google/challenge', [\App\Http\Controllers\API\V0_3\AccountController::class, 'challenge']);
+        Route::post('/auth/google', [\App\Http\Controllers\API\V0_3\AccountController::class, 'google']);
+        Route::post('/auth/google/link-email', [\App\Http\Controllers\API\V0_3\AccountController::class, 'sendGoogleLink']);
+        Route::post('/auth/account/confirm-email', [\App\Http\Controllers\API\V0_3\AccountController::class, 'confirmEmail']);
         Route::post('/auth/guest', AuthGuestV03Controller::class)
             ->middleware(\App\Http\Middleware\ResolveAnonId::class);
 
@@ -213,6 +217,12 @@ Route::prefix('v0.3')->middleware([
         ->name('api.v0_3.claim.report');
 
     Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
+        Route::get('/me/account', [\App\Http\Controllers\API\V0_3\AccountController::class, 'show']);
+        Route::patch('/me/account', [\App\Http\Controllers\API\V0_3\AccountController::class, 'update']);
+        Route::post('/me/account/logout', [\App\Http\Controllers\API\V0_3\AccountController::class, 'logout']);
+        Route::get('/me/account/orders', [\App\Http\Controllers\API\V0_3\AccountController::class, 'orders']);
+        Route::post('/me/account/recover-email', [\App\Http\Controllers\API\V0_3\AccountController::class, 'recoverEmail'])->middleware('throttle:api_auth');
+        Route::post('/me/attempts/link-anon', [\App\Http\Controllers\API\V0_3\AccountController::class, 'linkAttempts'])->middleware('throttle:api_auth');
         Route::get('/me/attempts', [MeV03Controller::class, 'attempts']);
         Route::get('/me/relationships/mbti', [MbtiCompareInviteController::class, 'indexPrivate']);
         Route::get('/me/relationships/mbti/{inviteId}', [MbtiCompareInviteController::class, 'showPrivate'])

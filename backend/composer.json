@@ -9,10 +9,11 @@
   ],
   "license": "MIT",
   "require": {
-    "ext-sodium": "*",
     "php": "^8.4",
+    "ext-sodium": "*",
     "aws/aws-sdk-php": "^3.393",
     "filament/filament": "^3.3.56",
+    "firebase/php-jwt": "^7.2",
     "guzzlehttp/guzzle": "^7.0",
     "laravel/framework": "^12.0",
     "laravel/tinker": "^3.0.2",
