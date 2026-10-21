@@ -13,6 +13,8 @@ final class MigrationPurityGateTest extends TestCase
      * @var list<string>
      */
     private const LEGACY_FILE_ALLOWLIST = [
+        // ReviewedZhReliabilityIndexabilityMigrationTest covers exact copy/readiness, isolation and atomic audit rollback.
+        '2026_10_21_220000_activate_reviewed_zh_reliability_indexability.php',
         // IqArticleHreflangMigrationTest covers pinned bilingual authority, native gates and atomic metadata-only writes.
         '2026_10_15_080000_activate_iq_article_hreflang.php',
         // ReviewedChineseArticleDiscoverabilityMigrationTest covers native review, source locks and metadata-only rollback.
