@@ -7,8 +7,13 @@ namespace App\Filament\Ops\Resources\PersonalityProfileResource\Pages;
 use App\Filament\Ops\Resources\PersonalityProfileResource;
 use App\Filament\Ops\Resources\PersonalityProfileResource\Support\PersonalityWorkspace;
 use App\Filament\Ops\Resources\PersonalityVariantCloneContentResource;
+use App\Filament\Ops\Support\MbtiEnglishResultGuidanceWorkspace;
 use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileVariantRevision;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Textarea;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
 
@@ -39,6 +44,8 @@ class EditPersonalityProfile extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            $this->resultGuidanceAction(),
+            $this->resultGuidanceAction(true),
             Action::make('desktopTemplates')
                 ->label(__('ops.resources.personality_profiles.actions.desktop_templates'))
                 ->url(PersonalityProfileResource::desktopTemplatesUrl($this->getRecord()))
@@ -51,6 +58,42 @@ class EditPersonalityProfile extends EditRecord
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
         ];
+    }
+
+    private function resultGuidanceAction(bool $restore = false): Action
+    {
+        $zh = str_starts_with(app()->getLocale(), 'zh');
+        $label = $restore
+            ? ($zh ? '恢复上次英文阅读提示' : 'Restore previous English guidance')
+            : ($zh ? '更新英文结果阅读提示' : 'Update English result guidance');
+
+        return Action::make($restore ? 'restoreEnglishResultGuidance' : 'updateEnglishResultGuidance')
+            ->label($label)
+            ->color('gray')
+            ->visible(function () use ($restore): bool {
+                $profile = $this->getRecord();
+
+                return $profile->locale === 'en' && $profile->status === 'published' && $profile->is_public
+                    && PersonalityProfileResource::canEdit($profile)
+                    && (! $restore || PersonalityProfileVariantRevision::query()
+                        ->whereIn('personality_profile_variant_id', $profile->variants()->select('id'))
+                        ->where('note', 'English result reading guidance: update')->exists());
+            })
+            ->modalHeading($label)
+            ->modalDescription($zh
+                ? '预览所选档案 A/T 结果中两处阅读提示的差异。提交将直接更新这两处正文；其他章节、中文、公开人格页和搜索设置保持原状。'
+                : 'Preview the two reading prompts in this profile’s A/T results. Submitting updates these prompts directly; other chapters, Chinese content, public profile pages and search settings are preserved.')
+            ->fillForm(fn (): array => app(MbtiEnglishResultGuidanceWorkspace::class)->prepare($this->getRecord(), $restore))
+            ->form([
+                Hidden::make('target_hash')->required(),
+                Textarea::make('preview')->label($zh ? '正文差异' : 'Copy changes')->rows(16)->readOnly()->dehydrated(false),
+            ])
+            ->action(function (array $data) use ($restore, $zh): void {
+                $result = app(MbtiEnglishResultGuidanceWorkspace::class)->commit($this->getRecord(), (string) ($data['target_hash'] ?? ''), $restore);
+                Notification::make()->success()->title($zh
+                    ? '已更新 '.$result['updated_sections'].' 个结果章节'
+                    : 'Updated '.$result['updated_sections'].' result sections')->send();
+            });
     }
 
     protected function getSaveFormAction(): Action

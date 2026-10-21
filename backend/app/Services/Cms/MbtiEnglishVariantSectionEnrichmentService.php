@@ -10,6 +10,10 @@ use InvalidArgumentException;
 
 final class MbtiEnglishVariantSectionEnrichmentService
 {
+    public const OVERVIEW_READER_GUIDANCE = 'Use these descriptions as questions to check against your own experience. Pick one statement that fits and one that does not, and write down a recent example of each. Use those examples to choose a communication or work habit to try. They do not determine which job or relationship is right for you.';
+
+    public const PREFERENCE_READER_GUIDANCE = 'Compare this preference with your usual behavior across more than one situation. Your result describes a tendency, rather than an ability or a rule for every decision.';
+
     /**
      * @return list<string>
      */
@@ -100,7 +104,7 @@ final class MbtiEnglishVariantSectionEnrichmentService
         $variant = (array) $context['variant'];
 
         return match ($sectionKey) {
-            'overview' => "{$label} describes a {$base['identity']} pattern with {$variant['identity']} identity signals. You are usually at your best when {$base['best_when']}.\n\nThis page is meant to answer practical search intent: what this type is, how the {$context['variant_code']} side changes the pattern, what relationships tend to need, which work environments fit, and when taking the test can clarify your next move.",
+            'overview' => "{$label} describes a {$base['identity']} pattern with {$variant['identity']} identity signals. You are usually at your best when {$base['best_when']}.\n\n".self::OVERVIEW_READER_GUIDANCE,
             'trait_overview' => "{$label} combines {$context['energy_phrase']}, {$context['information_phrase']}, {$context['decision_phrase']}, and {$context['rhythm_phrase']}. The {$context['variant_code']} variant adds {$variant['state']} rather than creating a separate personality type.",
             'career.summary' => "{$label} usually does its best work when the role rewards {$base['career_anchor']} and gives enough room for {$base['work_need']}. The {$context['variant_label']} side changes how you handle feedback: {$variant['career_signal']}.\n\nUse this section as a starting filter, then test the fit against your skills, industry, education, and real work history.",
             'career.upgrade_suggestions' => "For {$label}, career growth should be built around small experiments instead of a fixed job title. Start by choosing one role cluster, one work-environment condition, and one feedback habit that fits the {$context['variant_code']} pattern.",
@@ -195,7 +199,7 @@ final class MbtiEnglishVariantSectionEnrichmentService
             'summary' => (string) $context[$kind.'_phrase'],
             'description' => $axisId === 'AT'
                 ? 'A/T describes identity-state differences; it does not replace the four-letter base type.'
-                : 'This preference shapes search intent around traits, relationships, career fit, and daily decisions.',
+                : self::PREFERENCE_READER_GUIDANCE,
             'source' => 'cms_english_enrichment',
             'side' => $letter,
             'state' => 'authored_enrichment',
