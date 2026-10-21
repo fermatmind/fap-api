@@ -1035,6 +1035,11 @@ PHP;
             }
             unset($family);
         };
+        foreach (['seo_title' => 60, 'seo_description' => 160, 'og_title' => 90, 'og_description' => 200] as $field => $limit) {
+            $mutations[] = static function (&$p) use ($field, $limit): void {
+                $p['candidates'][5]['snapshot']['seo_text'][$field] = str_repeat('界', $limit + 1);
+            };
+        }
         $root = sys_get_temp_dir().'/public-alignment-'.bin2hex(random_bytes(8));
         $dir = $root.'/'.PublicContent53Package::PACKAGE;
         mkdir($dir, 0700, true);

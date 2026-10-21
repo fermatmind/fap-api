@@ -351,6 +351,11 @@ final class PublicContent53Package
                         || array_filter($seo, static fn ($v): bool => ! is_string($v) || trim($v) === '')) {
                         throw new DomainException('public_content_53_alignment_fields_invalid');
                     }
+                    foreach (['seo_title' => 60, 'seo_description' => 160, 'og_title' => 90, 'og_description' => 200] as $field => $limit) {
+                        if (mb_strlen($seo[$field]) > $limit) {
+                            throw new DomainException('public_content_53_alignment_seo_capacity_invalid');
+                        }
+                    }
                 }
                 if ($row['kind'] === 'surface') {
                     $candidate = $version === 'staging_before' ? ($row['staging_snapshot'] ?? $row['snapshot']) : $row['snapshot'];
