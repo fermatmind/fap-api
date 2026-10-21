@@ -923,6 +923,86 @@
                 ]
             }
         },
+        "/api/v0.3/auth/account/confirm-email": {
+            "post": {
+                "operationId": "post_api_v0_3_auth_account_confirm_email",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@confirmEmail",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
+        "/api/v0.3/auth/google": {
+            "post": {
+                "operationId": "post_api_v0_3_auth_google",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@google",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
+        "/api/v0.3/auth/google/challenge": {
+            "post": {
+                "operationId": "post_api_v0_3_auth_google_challenge",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@challenge",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
+        "/api/v0.3/auth/google/link-email": {
+            "post": {
+                "operationId": "post_api_v0_3_auth_google_link_email",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@sendGoogleLink",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
         "/api/v0.3/auth/guest": {
             "post": {
                 "operationId": "post_api_v0_3_auth_guest",
@@ -1337,6 +1417,105 @@
                 "x-laravel-name": "api.v0_3.local_report_sessions.store"
             }
         },
+        "/api/v0.3/me/account": {
+            "get": {
+                "operationId": "get_api_v0_3_me_account",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ]
+            },
+            "patch": {
+                "operationId": "patch_api_v0_3_me_account",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@update",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ]
+            }
+        },
+        "/api/v0.3/me/account/logout": {
+            "post": {
+                "operationId": "post_api_v0_3_me_account_logout",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@logout",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ]
+            }
+        },
+        "/api/v0.3/me/account/orders": {
+            "get": {
+                "operationId": "get_api_v0_3_me_account_orders",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@orders",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ]
+            }
+        },
+        "/api/v0.3/me/account/recover-email": {
+            "post": {
+                "operationId": "post_api_v0_3_me_account_recover_email",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@recoverEmail",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
         "/api/v0.3/me/attempts": {
             "get": {
                 "operationId": "get_api_v0_3_me_attempts",
@@ -1354,6 +1533,27 @@
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth"
+                ]
+            }
+        },
+        "/api/v0.3/me/attempts/link-anon": {
+            "post": {
+                "operationId": "post_api_v0_3_me_attempts_link_anon",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@linkAttempts",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
                 ]
             }
         },
