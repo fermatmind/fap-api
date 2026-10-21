@@ -14,6 +14,7 @@ class GoogleLoginVerifier
 {
     public function verify(string $credential, string $nonce): array
     {
+        abort_unless(config('services.google_login.enabled'), 503, 'Google login is not enabled.');
         $clientId = trim((string) config('services.google_login.client_id'));
         abort_if($clientId === '', 503, 'Google login is not configured.');
         try {

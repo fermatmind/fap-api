@@ -29,13 +29,13 @@ final class AccountCenterTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        config(['fap.rate_limits.bypass_in_test_env' => true, 'services.google_login.client_id' => 'account-test.apps.googleusercontent.com']);
+        config(['fap.rate_limits.bypass_in_test_env' => true, 'services.google_login.enabled' => true, 'services.google_login.client_id' => 'account-test.apps.googleusercontent.com']);
         Mail::mailer('array')->getSymfonyTransport()->flush();
     }
 
     public function test_email_signup_requires_one_time_proof_and_repeat_signin_keeps_the_account(): void
     {
-        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'New@Example.Test', 'locale' => 'en'])->assertOk()->assertJsonPath('verification_email_sent', true);
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'New@Example.Test', 'locale' => 'en'])->assertOk()->assertJsonPath('verification_email_captured', true)->assertJsonPath('verification_email_sent', false);
         $this->assertDatabaseCount('users', 0);
         $proof = $this->emailProof();
         $session = $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $proof])->assertOk()->assertJsonPath('status', 'authenticated')->assertJsonPath('account.google_connected', false)->assertJsonPath('account.email', 'new@example.test')->assertJsonPath('account.locale', 'en');
@@ -90,9 +90,9 @@ final class AccountCenterTest extends TestCase
         $this->assertDatabaseHas('attempt_email_bindings', ['attempt_id' => $attempt->id, 'bound_user_id' => null]);
     }
 
-    public function test_email_login_never_reports_log_transport_as_a_sent_email_in_staging(): void
+    public function test_email_login_never_reports_log_transport_as_a_sent_email_in_production(): void
     {
-        $this->app->instance('env', 'staging');
+        $this->app->instance('env', 'production');
         config(['mail.default' => 'log']);
         $this->postJson('/api/v0.3/auth/account/email', ['email' => 'new@example.test'])->assertStatus(503);
         $this->assertDatabaseCount('users', 0);
@@ -101,10 +101,11 @@ final class AccountCenterTest extends TestCase
     public function test_email_signin_is_rate_limited_without_disclosing_account_existence(): void
     {
         config(['fap.rate_limits.bypass_in_test_env' => false]);
+        $email = 'limited-'.Str::uuid().'@example.test';
         foreach (range(1, 3) as $ignored) {
-            $this->postJson('/api/v0.3/auth/account/email', ['email' => 'limited@example.test'])->assertOk()->assertJsonPath('verification_email_sent', true);
+            $this->postJson('/api/v0.3/auth/account/email', ['email' => $email])->assertOk()->assertJsonPath('verification_email_captured', true);
         }
-        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'limited@example.test'])->assertStatus(429);
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => $email])->assertStatus(429);
         $this->assertDatabaseCount('users', 0);
     }
 
@@ -112,6 +113,15 @@ final class AccountCenterTest extends TestCase
     {
         Mail::shouldReceive('raw')->once()->andThrow(new \RuntimeException('test delivery failure'));
         $this->postJson('/api/v0.3/auth/account/email', ['email' => 'new@example.test'])->assertStatus(503);
+        $this->assertDatabaseCount('users', 0);
+    }
+
+    public function test_staging_test_mail_is_explicitly_captured_and_not_reported_as_delivered(): void
+    {
+        $this->app->instance('env', 'staging');
+        config(['mail.default' => 'log']);
+        Mail::shouldReceive('raw')->once()->andReturn(null);
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'stage-preview@example.test'])->assertOk()->assertJsonPath('verification_email_sent', false)->assertJsonPath('verification_email_captured', true);
         $this->assertDatabaseCount('users', 0);
     }
 
@@ -127,6 +137,18 @@ final class AccountCenterTest extends TestCase
         $this->assertDatabaseCount('identities', 1);
         $this->assertDatabaseCount('users', 1);
         $this->withToken($first->json('fm_token'))->getJson('/api/v0.3/me/account')->assertOk()->assertJsonPath('account.id', $first->json('account.id'));
+    }
+
+    public function test_disabled_google_never_advertises_login_or_fetches_google_and_email_remains_available(): void
+    {
+        config(['services.google_login.enabled' => false]);
+        Http::preventStrayRequests();
+        $this->postJson('/api/v0.3/auth/google/challenge')->assertOk()->assertExactJson(['ok' => true, 'configured' => false]);
+        $this->postJson('/api/v0.3/auth/google', ['credential' => 'unused', 'challenge_id' => str_repeat('x', 64)])->assertStatus(503);
+        $this->postJson('/api/v0.3/auth/google/link-email', ['verification_ticket' => str_repeat('x', 64)])->assertStatus(503);
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'new@example.test'])->assertOk();
+        $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $this->emailProof()])->assertOk()->assertJsonPath('account.google_connected', false);
+        Http::assertNothingSent();
     }
 
     public function test_google_email_collision_requires_email_confirmation_without_silent_merge(): void

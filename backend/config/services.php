@@ -2,6 +2,8 @@
 
 return [
     'google_login' => [
+        // Enable only after the server can retrieve Google's rotating signing keys.
+        'enabled' => (bool) env('GOOGLE_LOGIN_ENABLED', false),
         // Public GIS Web client identifier; environments may override or disable it.
         'client_id' => env('GOOGLE_LOGIN_CLIENT_ID', '22036884493-nhio1fl88npsj09eva2895ra1eq95tl9.apps.googleusercontent.com'),
         'frontend_url' => env('FRONTEND_URL', 'https://fermatmind.com'),

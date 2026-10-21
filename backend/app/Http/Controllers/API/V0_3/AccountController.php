@@ -32,13 +32,15 @@ final class AccountController extends Controller
             'email_hash' => app(PiiCipher::class)->emailHash($email), 'locale' => $data['locale'] ?? 'zh',
         ], $data['locale'] ?? 'zh');
 
-        return $this->reply(['verification_email_sent' => true]);
+        $captured = in_array(config('mail.default'), ['log', 'array'], true);
+
+        return $this->reply(['verification_email_sent' => ! $captured, 'verification_email_captured' => $captured]);
     }
 
     public function challenge(): JsonResponse
     {
         $clientId = trim((string) config('services.google_login.client_id'));
-        if ($clientId === '') {
+        if (! config('services.google_login.enabled') || $clientId === '') {
             return $this->reply(['configured' => false]);
         }
         $id = Str::random(64);
@@ -50,6 +52,7 @@ final class AccountController extends Controller
 
     public function google(Request $request, GoogleLoginVerifier $verifier): JsonResponse
     {
+        abort_unless(config('services.google_login.enabled'), 503, 'Google login is not enabled. Use email sign-in.');
         $data = $request->validate(['credential' => 'required|string|max:16000', 'challenge_id' => 'required|string|size:64', 'locale' => 'nullable|in:zh,en']);
         $key = 'account:login:'.hash('sha256', $data['challenge_id']);
 
@@ -106,6 +109,7 @@ final class AccountController extends Controller
 
     public function sendGoogleLink(Request $request): JsonResponse
     {
+        abort_unless(config('services.google_login.enabled'), 503, 'Google login is not enabled. Use email sign-in.');
         $data = $request->validate(['verification_ticket' => 'required|string|size:64', 'locale' => 'nullable|in:zh,en']);
         $key = 'account:link-ticket:'.hash('sha256', $data['verification_ticket']);
         $payload = Cache::get($key);
@@ -162,6 +166,7 @@ final class AccountController extends Controller
                 return $this->session($id, 'email');
             }
             if ($payload['purpose'] === 'google_link') {
+                abort_unless(config('services.google_login.enabled'), 503, 'Google login is not enabled. Use email sign-in.');
                 DB::transaction(fn () => $this->bindGoogle($payload['user_id'], $payload['claims']));
                 Cache::forget($key);
 
@@ -257,7 +262,8 @@ final class AccountController extends Controller
 
     private function sendVerification(string $email, array $payload, string $locale): void
     {
-        abort_if(! app()->environment(['local', 'testing']) && in_array(config('mail.default'), ['log', 'array'], true), 503, 'Email sign-in is temporarily unavailable. Please try again later.');
+        $captureAllowed = app()->environment(['local', 'testing']) || (app()->environment('staging') && config('mail.default') === 'log');
+        abort_if(! $captureAllowed && in_array(config('mail.default'), ['log', 'array'], true), 503, 'Email sign-in is temporarily unavailable. Please try again later.');
         $limitKey = 'account:email-send:'.hash('sha256', ($payload['user_id'] ?? '').'|'.$email);
         $bypass = app()->environment('testing') && config('fap.rate_limits.bypass_in_test_env');
         abort_if(! $bypass && RateLimiter::tooManyAttempts($limitKey, 3), 429, 'Please wait before requesting another verification email.');
