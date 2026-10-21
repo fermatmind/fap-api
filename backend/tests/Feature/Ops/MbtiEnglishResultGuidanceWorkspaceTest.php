@@ -15,6 +15,7 @@ use App\Models\PersonalityProfileVariantSection;
 use App\Models\Role;
 use App\Services\Cms\MbtiEnglishVariantSectionEnrichmentService as Copy;
 use App\Services\Mbti\Adapters\MbtiPersonalityProfileAuthoritySourceAdapter;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
@@ -85,6 +86,22 @@ final class MbtiEnglishResultGuidanceWorkspaceTest extends TestCase
         $adapter = app(MbtiPersonalityProfileAuthoritySourceAdapter::class);
         $authority = $adapter->overlayVariant($adapter->fromBaseProfile($profile->fresh()), $variant);
         $this->assertStringContainsString(Copy::OVERVIEW_READER_GUIDANCE, $authority['sections']['overview']['body_md']);
+    }
+
+    public function test_global_restore_action_remains_visible_in_a_selected_tenant_workspace(): void
+    {
+        $admin = $this->login();
+        $profile = $this->profile();
+        $workspace = app(MbtiEnglishResultGuidanceWorkspace::class);
+        $workspace->commit($profile, $workspace->prepare($profile)['target_hash']);
+        app(OrgContext::class)->set(77, (int) $admin->id, 'admin');
+        Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+        Livewire::test(EditPersonalityProfile::class, ['record' => $profile->id])
+            ->assertActionVisible('restoreEnglishResultGuidance')
+            ->callAction('restoreEnglishResultGuidance', $workspace->prepare($profile, true))
+            ->assertHasNoActionErrors();
+        $this->assertSame(4, PersonalityProfileVariantRevision::count());
+        $this->assertSame(4, $workspace->commit($profile, $workspace->prepare($profile)['target_hash'])['updated_sections']);
     }
 
     public function test_stale_preview_rejects_whole_update_without_creating_history(): void

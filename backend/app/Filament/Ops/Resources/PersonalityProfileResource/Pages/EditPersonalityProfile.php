@@ -76,7 +76,7 @@ class EditPersonalityProfile extends EditRecord
                 return $profile->locale === 'en' && $profile->status === 'published' && $profile->is_public
                     && PersonalityProfileResource::canEdit($profile)
                     && (! $restore || PersonalityProfileVariantRevision::query()
-                        ->whereIn('personality_profile_variant_id', $profile->variants()->select('id'))
+                        ->whereIn('personality_profile_variant_id', $profile->variants()->withoutGlobalScopes()->where('org_id', 0)->select('id'))
                         ->where('note', 'English result reading guidance: update')->exists());
             })
             ->modalHeading($label)
