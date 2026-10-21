@@ -55,6 +55,7 @@ $walk = function($node) use (&$walk) {
 };
 $labels=[]; foreach($xp->query('//main//a') as $anchor) { $label=$walk($anchor); if (trim($label)!=='') $labels[$anchor->getAttribute('href')][]=$label; }
 $values = function($query,$attr=null) use($xp,$walk) { $out=[];foreach($xp->query($query) as $node) $out[]=$attr===null?$walk($node):$node->getAttribute($attr);return $out;};
+$alternateEntries=[]; foreach($xp->query('//link[@rel="alternate"]') as $node) $alternateEntries[]=['href'=>$node->getAttribute('href'),'type'=>$node->getAttribute('type'),'hreflang'=>$node->getAttribute('hreflang')];
 $quickstart=[]; foreach($xp->query('//script[@type="application/ld+json" and @id="tests-hub-quickstart-en"]') as $node) $quickstart[]=$node->textContent;
 $homeJsonLd=[]; foreach($xp->query('//script[@type="application/ld+json"]') as $node) $homeJsonLd[]=$node->textContent;
 echo json_encode(['link_labels'=>$labels,'body'=>$values('//main[not(ancestor::main)]'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
@@ -63,7 +64,7 @@ echo json_encode(['link_labels'=>$labels,'body'=>$values('//main[not(ancestor::m
  'title'=>$values('//head/title'),'description'=>$values('//meta[@name="description"]','content'),
  'og_title'=>$values('//meta[@property="og:title"]','content'),'og_description'=>$values('//meta[@property="og:description"]','content'),
  'canonical'=>$values('//link[@rel="canonical"]','href'),'robots'=>$values('//meta[@name="robots"]','content'),
- 'alternates'=>$values('//link[@rel="alternate"]','href')],JSON_THROW_ON_ERROR);`;
+ 'alternates'=>$values('//link[@rel="alternate"]','href'),'alternate_entries'=>$alternateEntries],JSON_THROW_ON_ERROR);`;
   return JSON.parse(execFileSync('php',['-r',code],{input:html,encoding:'utf8',maxBuffer:3000000,timeout:15000,stdio:['pipe','pipe','pipe']}));
 }
 export function projection(row,data) {
@@ -100,7 +101,10 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
       ? await renderer(web+pathFor(row),{surface:'article'}) : await read(web+pathFor(row),fetcher);
     result[row.page_id]={id:native.id,flags:Object.fromEntries(['is_indexable','sitemap_eligible','llms_eligible','translation_group_id','source_locale'].filter(k=>Object.hasOwn(native,k)).map(k=>[k,native[k]])),dom:domOf(html)};
   }
-  if (environment === 'staging' && result['PAGE-60']?.missing && result['PAGE-59']) result['PAGE-59'].counterpartWasMissing=true;
+  if (environment === 'staging' && result['PAGE-60']?.missing) {
+    if (!result['PAGE-59']?.dom) throw new Error('PUBLIC_CONTENT_53_STAGING_REFERENCE_REQUIRED');
+    result['PAGE-60'].stagingReferenceDom=result['PAGE-59'].dom;
+  }
   return result;
 }
 function changedStrings(before,after) {
@@ -245,14 +249,30 @@ export function assertDom(row,html,before,environment) {
     if (text && !body.includes(text) && !readerVariants(line,row,dom,environment).some(variant=>body.includes(compact(variant))))
       throw new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_${row.page_id}_ITEM_${index + 1}`);
   }
-  const initializedPair = environment === 'staging' && ((row.page_id === 'PAGE-60' && before.missing === true && row.staging_bootstrap)
-    || (row.page_id === 'PAGE-59' && before.counterpartWasMissing === true));
+  const initializedStaging = environment === 'staging' && row.page_id === 'PAGE-60' && before.missing === true && row.staging_bootstrap;
   if (dom.canonical.length !== 1 || (!before.missing && (!equal(dom.canonical,before.dom.canonical) || !equal(dom.robots,before.dom.robots)))
-    || (!initializedPair && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
-  if (initializedPair) {
-    const paths=['/en/articles/ocean-traits-what-the-five-letters-mean','/zh/articles/ocean-traits-what-the-five-letters-mean'];
-    if (dom.robots.length !== 1 || !dom.robots.every(value=>/^index,\s*follow$/i.test(value)) || !paths.every(path=>dom.alternates.some(href=>internalTarget(href,environment)?.pathname === path))
-      || dom.alternates.some(href=>!paths.includes(internalTarget(href,environment)?.pathname))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
+    || (!initializedStaging && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
+  if (initializedStaging) {
+    // The staging Article template deliberately omits hreflang and retains
+    // noindex. Bind the missing locale to the observed counterpart policy;
+    // only its existing localized Atom feed changes language.
+    const reference=before.stagingReferenceDom;
+    const requiredRobots=value=>{
+      const tokens=value.toLowerCase().split(',').map(token=>token.trim());
+      return tokens.includes('noindex') && tokens.includes('follow') && !tokens.includes('index');
+    };
+    const sourceFeed='/zh/articles/feed.xml',targetFeed='/en/articles/feed.xml';
+    const atom=entry=>entry && entry.type.toLowerCase() === 'application/atom+xml' && entry.hreflang.trim() === '';
+    const expectedFeed=reference?.alternates.length === 1 ? internalTarget(reference.alternates[0],environment) : null;
+    if (expectedFeed) expectedFeed.pathname=targetFeed;
+    if (!reference || reference.robots.length !== 1 || !reference.robots.every(requiredRobots)
+      || !equal(dom.robots,reference.robots) || reference.alternates.length !== 1 || dom.alternates.length !== 1
+      || internalTarget(reference.alternates[0],environment)?.pathname !== sourceFeed
+      || internalTarget(dom.alternates[0],environment)?.pathname !== targetFeed
+      || dom.alternates[0] !== expectedFeed?.href
+      || reference.alternate_entries?.length !== 1 || dom.alternate_entries.length !== 1
+      || !atom(reference.alternate_entries[0]) || !atom(dom.alternate_entries[0]))
+      throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
   }
   const path=pathFor(row);const url=new URL(dom.canonical[0]);
   if (url.protocol !== 'https:' || !['fermatmind.com','www.fermatmind.com',...(environment === 'staging' ? ['staging.fermatmind.com']:[])].includes(url.hostname)

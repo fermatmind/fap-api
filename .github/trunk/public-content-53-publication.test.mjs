@@ -373,13 +373,17 @@ test('combined article body and search changes require the complete new visible 
  assert.throws(()=>assertDom(row,html.replace('A necessary qualification.',''),before,'production'),/VISIBLE_BODY/);
  assert.throws(()=>assertDom(row,html.replaceAll(seo.seo_title,'Stale search title'),before,'production'),/METADATA/);
  assert.throws(()=>assertDom(row,html.replace(`<h1>${row.snapshot.title}</h1>`,'<h1>Old heading</h1>'),before,'production'),/H1/);
- const pair=['/en/articles/ocean-traits-what-the-five-letters-mean','/zh/articles/ocean-traits-what-the-five-letters-mean'];
- const paired=html.replace('</head>',pair.map(path=>`<link rel="alternate" href="https://fermatmind.com${path}">`).join('')+'</head>');
- assert.doesNotThrow(()=>assertDom(row,paired,{missing:true},'staging'));
- assert.throws(()=>assertDom(row,paired.replace('content="index, follow"','content="noindex, follow"'),{missing:true},'staging'),/DISCOVERABILITY/);
- assert.throws(()=>assertDom(row,paired.replace('</head>','<link rel="alternate" href="https://external.invalid/en/articles/foreign"></head>'),{missing:true},'staging'),/DISCOVERABILITY/);
- assert.throws(()=>assertDom(row,paired.replace('<meta name="robots" content="index, follow">',''),{missing:true},'staging'),/DISCOVERABILITY/);
- assert.throws(()=>assertDom(row,paired,{missing:true},'production'));
+ const stagingHtml=html.replace('content="index, follow"','content="noindex, follow, noarchive, nocache"').replace('</head>','<link rel="alternate" type="application/atom+xml" href="https://fermatmind.com/en/articles/feed.xml"></head>');
+ const stagingBefore={missing:true,stagingReferenceDom:{robots:['noindex, follow, noarchive, nocache'],alternates:['https://fermatmind.com/zh/articles/feed.xml'],alternate_entries:[{href:'https://fermatmind.com/zh/articles/feed.xml',type:'application/atom+xml',hreflang:''}]}};
+ assert.doesNotThrow(()=>assertDom(row,stagingHtml,stagingBefore,'staging'));
+ for(const altered of [stagingHtml.replace('type="application/atom+xml"','type="text/html"'),stagingHtml.replace('type="application/atom+xml"','type="application/atom+xml" hreflang="zh-CN"'),stagingHtml.replace('/en/articles/feed.xml','/en/articles/feed.xml?unexpected=1'),stagingHtml.replace('/en/articles/feed.xml','/en/articles/feed.xml#unexpected')])
+  assert.throws(()=>assertDom(row,altered,stagingBefore,'staging'),/DISCOVERABILITY/);
+ assert.throws(()=>assertDom(row,stagingHtml.replace('content="noindex, follow, noarchive, nocache"','content="index, follow"'),stagingBefore,'staging'),/DISCOVERABILITY/);
+ assert.throws(()=>assertDom(row,stagingHtml.replace('</head>','<link rel="alternate" href="https://external.invalid/en/articles/foreign"></head>'),stagingBefore,'staging'),/DISCOVERABILITY/);
+ assert.throws(()=>assertDom(row,stagingHtml.replace('https://fermatmind.com/en/articles/feed.xml','https://fermatmind.com/en/articles/foreign'),stagingBefore,'staging'),/DISCOVERABILITY/);
+ assert.throws(()=>assertDom(row,stagingHtml,{missing:true},'staging'),/DISCOVERABILITY/);
+ assert.throws(()=>assertDom(row,stagingHtml,stagingBefore,'production'));
+
 });
 
 test('missing baseline permission is limited to a native not-found response',async()=>{
@@ -388,4 +392,25 @@ test('missing baseline permission is limited to a native not-found response',asy
  await assert.rejects(read('https://staging-api.fermatmind.com/example',missing),/RESPONSE_INVALID/);
  for(const payload of ['<html>proxy error</html>',JSON.stringify({ok:false,error_code:'FORBIDDEN'}),JSON.stringify({ok:true})])
   await assert.rejects(read('https://staging-api.fermatmind.com/example',async()=>({status:404,text:async()=>payload}),true),/INVALID/);
+});
+
+test('staging missing locale binds its actual published counterpart metadata; other missing rows still fail',async()=>{
+ const rows=readCandidateRows(root).candidates;
+ const fetcher=async url=>{
+  if(!url.includes('/api/v0.5/')) return {status:200,text:async()=>'<html><head></head><main>Existing surface</main></html>'};
+  const u=new URL(url),row=rows.find(r=>u.pathname.endsWith('/'+r.identity.slug) && u.searchParams.get('locale')===r.identity.locale);
+  assert.ok(row);
+  if(row.page_id==='PAGE-60')return {status:404,text:async()=>JSON.stringify({ok:false,error_code:'NOT_FOUND'})};
+  const native={...row.identity,...row.staging_before,id:Number(row.page_id.slice(5)),status:'published',is_public:true};
+  if(row.kind==='article')native.seo_meta=row.staging_before.seo_text;
+  if(row.kind==='surface')native.page_blocks=Object.entries(row.staging_before.block_copy).map(([block_key,payload_json])=>({block_key,payload_json,is_enabled:true}));
+  return {status:200,text:async()=>JSON.stringify({ok:true,[row.kind]:native})};
+ };
+ const renderer=async()=>'<html><head><meta name="robots" content="noindex, follow, noarchive, nocache"><link rel="alternate" type="application/atom+xml" href="https://fermatmind.com/zh/articles/feed.xml"></head><main><h1>Existing article</h1></main></html>';
+ const state=await readOnlinePrestate('staging',root,fetcher,renderer);
+ assert.equal(state['PAGE-60'].missing,true);
+ assert.deepEqual(state['PAGE-60'].stagingReferenceDom,state['PAGE-59'].dom);
+ assert.deepEqual(state['PAGE-60'].stagingReferenceDom.robots,['noindex, follow, noarchive, nocache']);
+ await assert.rejects(readOnlinePrestate('production',root,async url=>url.includes('/articles/ocean-traits-what-the-five-letters-mean?locale=en')?{status:404,text:async()=>JSON.stringify({ok:false,error_code:'NOT_FOUND'})}:fetcher(url),renderer),/PRESTATE_DRIFT|RESPONSE_INVALID/);
+ await assert.rejects(readOnlinePrestate('staging',root,async()=>({status:404,text:async()=>JSON.stringify({ok:false,error_code:'NOT_FOUND'})}),renderer),/RESPONSE_INVALID/);
 });
