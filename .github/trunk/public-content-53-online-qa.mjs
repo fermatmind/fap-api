@@ -20,7 +20,7 @@ const hosts = env => {
   if (!['staging','production'].includes(env)) throw new Error('PUBLIC_CONTENT_53_ENV_INVALID');
   return env === 'staging' ? ['https://staging-api.fermatmind.com','https://staging.fermatmind.com'] : ['https://api.fermatmind.com','https://fermatmind.com'];
 };
-export async function read(url, fetcher) {
+export async function read(url, fetcher, allowStagingBootstrap404 = false) {
   let response, bytes;
   try { response = await fetcher(url, {redirect:'error',signal:AbortSignal.timeout(15000),headers:{'Cache-Control':'no-cache'}}); }
   catch (error) {
@@ -28,10 +28,16 @@ export async function read(url, fetcher) {
     const known = new Set(['UND_ERR_SOCKET','UND_ERR_CONNECT_TIMEOUT','UND_ERR_HEADERS_TIMEOUT','ECONNRESET','ENOTFOUND','TimeoutError','AbortError']);
     throw new Error('PUBLIC_CONTENT_53_API_TRANSPORT_' + (known.has(code) ? code.toUpperCase() : 'FAILED'));
   }
-  if (response.status !== 200) throw new Error('PUBLIC_CONTENT_53_RESPONSE_INVALID');
+  if (response.status !== 200 && !(response.status === 404 && allowStagingBootstrap404)) throw new Error('PUBLIC_CONTENT_53_RESPONSE_INVALID');
   try { bytes = await response.text(); }
   catch { throw new Error('PUBLIC_CONTENT_53_API_BODY_TRANSPORT_FAILED'); }
   if (bytes.length > 2500000) throw new Error('PUBLIC_CONTENT_53_RESPONSE_LIMIT');
+  if (response.status === 404) {
+    let data;
+    try { data=JSON.parse(bytes); } catch { throw new Error('PUBLIC_CONTENT_53_API_JSON_INVALID'); }
+    if (data.ok !== false || data.error_code !== 'NOT_FOUND') throw new Error('PUBLIC_CONTENT_53_RESPONSE_INVALID');
+    return null;
+  }
   return bytes;
 }
 const parseApi = bytes => {
@@ -67,7 +73,7 @@ export function projection(row,data) {
   if (row.kind === 'guide' && value.guide_code !== 'from-mbti-to-job-fit') throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
   const result = Object.fromEntries(Object.keys(row.snapshot).filter(key=>Object.hasOwn(value,key)).map(key=>[key,value[key]]));
   if (row.kind === 'surface' && row.snapshot.block_copy) {
-    result.block_copy=Object.fromEntries(['header','footer'].map(key=>{
+    result.block_copy=Object.fromEntries(Object.keys(row.snapshot.block_copy).map(key=>{
       const blocks=(value.page_blocks ?? []).filter(block=>block.block_key === key && block.is_enabled === true);
       if(blocks.length !== 1) throw new Error('PUBLIC_CONTENT_53_BLOCK_IDENTITY_DRIFT');
       return [key,blocks[0].payload_json];
@@ -78,11 +84,13 @@ export function projection(row,data) {
   return result;
 }
 const apiPath = row => `/api/v0.5/${{article:'articles',page:'content-pages',surface:'landing-surfaces',profile:'topics',guide:'career-guides'}[row.kind]}/${row.identity.slug}?locale=${row.identity.locale}&org_id=0`;
-export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,renderer=renderPage) {
+export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,renderer=renderPage,packageSha256) {
   const [api,web] = hosts(environment); const result={};
-  const rows = readCandidateRows(backendRoot).candidates;
+  const rows = readCandidateRows(backendRoot,packageSha256).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
   for (const row of rows) {
-    const data=parseApi(await read(api+apiPath(row),fetcher));const value=projection(row,data);
+    const bytes=await read(api+apiPath(row),fetcher,environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap);
+    if (bytes === null) { result[row.page_id]={missing:true};continue; }
+    const data=parseApi(bytes);const value=projection(row,data);
     if (!equal(value,environment === 'staging' ? row.staging_before : row.before) && !equal(value,row.snapshot)) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DRIFT_${row.page_id}`);
     const native=data[row.kind];
     // Metadata-only Article updates compare the unchanged reader body before and
@@ -92,6 +100,7 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
       ? await renderer(web+pathFor(row),{surface:'article'}) : await read(web+pathFor(row),fetcher);
     result[row.page_id]={id:native.id,flags:Object.fromEntries(['is_indexable','sitemap_eligible','llms_eligible','translation_group_id','source_locale'].filter(k=>Object.hasOwn(native,k)).map(k=>[k,native[k]])),dom:domOf(html)};
   }
+  if (environment === 'staging' && result['PAGE-60']?.missing && result['PAGE-59']) result['PAGE-59'].counterpartWasMissing=true;
   return result;
 }
 function changedStrings(before,after) {
@@ -150,8 +159,8 @@ export function assertDom(row,html,before,environment) {
       || !equal(dom.og_title.map(compact),[compact(seo.og_title)])
       || !equal(dom.og_description.map(compact),[compact(seo.og_description)]))
       throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
-    if (dom.article_body.length !== 1 || before.dom.article_body.length !== 1
-      || !equal(dom.h1.map(compact),row.snapshot.title ? [compact(row.snapshot.title)] : before.dom.h1.map(compact)) || !equal(dom.article_body.map(compact),before.dom.article_body.map(compact)))
+    if (!Object.hasOwn(row.snapshot,'content_md') && (dom.article_body.length !== 1 || before.dom.article_body.length !== 1
+      || !equal(dom.h1.map(compact),row.snapshot.title ? [compact(row.snapshot.title)] : before.dom.h1.map(compact)) || !equal(dom.article_body.map(compact),before.dom.article_body.map(compact))))
       throw new Error(`PUBLIC_CONTENT_53_BODY_DRIFT_${row.page_id}`);
   }
   if (row.kind === 'page' && Object.hasOwn(row.snapshot,'seo_title')) {
@@ -170,6 +179,13 @@ export function assertDom(row,html,before,environment) {
       throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
   }
   const translatedTestsHub = row.kind === 'surface' && row.page_id === 'PAGE-32' && row.identity.slug === 'tests' && row.identity.locale === 'en' && row.source_snapshot;
+  const alignmentTestsHub = row.kind === 'surface' && ['PAGE-61','PAGE-62'].includes(row.page_id) && row.identity.slug === 'tests';
+  if (alignmentTestsHub) {
+    const seo=row.snapshot.payload_json.seo;
+    if (!equal(dom.title.map(compact),[compact(`${seo.title} | FermatMind`)])
+      || !equal(dom.description.map(compact),[compact(seo.description)])
+      || compact(dom.h1[0]) !== compact(row.snapshot.payload_json.hero.title)) throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
+  }
   if (translatedTestsHub) {
     // TestsHubExperience renders family test cards. tests/page.tsx consumes
     // quickStart exclusively in its named ItemList JSON-LD, not visible prose.
@@ -219,7 +235,7 @@ export function assertDom(row,html,before,environment) {
   const readerCopy = row.kind === 'article' ? copy?.replace(/(?:<!--|&lt;!--)\s*(?:FM_SLOT|body_visual):[\s\S]*?(?:-->|--&gt;)/gi,'') : copy;
   const lines = readerCopy ? readerCopy.split('\n').map(line=>readerLine(line,row.kind)).filter(line=>line.trim() && !/^[\s|:-]+$/.test(line)).flatMap(line=>line.split('|'))
     : row.kind === 'profile' ? row.snapshot.sections.flatMap(s=>[s.title,s.body_md]).filter(Boolean)
-      : translatedTestsHub ? changedStrings(row.before.payload_json.families,row.snapshot.payload_json.families)
+      : translatedTestsHub || alignmentTestsHub ? changedStrings(row.before.payload_json.families,row.snapshot.payload_json.families)
         : translatedCategory ? ['hero','featured','allTests','differences','trust','resources','breadcrumb']
             .flatMap(key=>changedStrings(row.before.payload_json[key],row.snapshot.payload_json[key]))
           : home ? []
@@ -229,8 +245,15 @@ export function assertDom(row,html,before,environment) {
     if (text && !body.includes(text) && !readerVariants(line,row,dom,environment).some(variant=>body.includes(compact(variant))))
       throw new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_${row.page_id}_ITEM_${index + 1}`);
   }
-  if (dom.canonical.length !== 1 || !equal(dom.canonical,before.dom.canonical) || !equal(dom.robots,before.dom.robots)
-    || !equal(dom.alternates,before.dom.alternates)) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
+  const initializedPair = environment === 'staging' && ((row.page_id === 'PAGE-60' && before.missing === true && row.staging_bootstrap)
+    || (row.page_id === 'PAGE-59' && before.counterpartWasMissing === true));
+  if (dom.canonical.length !== 1 || (!before.missing && (!equal(dom.canonical,before.dom.canonical) || !equal(dom.robots,before.dom.robots)))
+    || (!initializedPair && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
+  if (initializedPair) {
+    const paths=['/en/articles/ocean-traits-what-the-five-letters-mean','/zh/articles/ocean-traits-what-the-five-letters-mean'];
+    if (dom.robots.length !== 1 || !dom.robots.every(value=>/^index,\s*follow$/i.test(value)) || !paths.every(path=>dom.alternates.some(href=>internalTarget(href,environment)?.pathname === path))
+      || dom.alternates.some(href=>!paths.includes(internalTarget(href,environment)?.pathname))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
+  }
   const path=pathFor(row);const url=new URL(dom.canonical[0]);
   if (url.protocol !== 'https:' || !['fermatmind.com','www.fermatmind.com',...(environment === 'staging' ? ['staging.fermatmind.com']:[])].includes(url.hostname)
     || url.pathname !== path || url.search || url.hash) throw new Error(`PUBLIC_CONTENT_53_CANONICAL_${row.page_id}`);
@@ -246,10 +269,13 @@ export function assertDom(row,html,before,environment) {
 }
 export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fetch,renderer=renderPage,prestate) {
   const [api,web]=hosts(environment);if(!prestate) throw new Error('PUBLIC_CONTENT_53_PRESTATE_REQUIRED');
-  const rows = readCandidateRows(backendRoot).candidates;
+  const rows = readCandidateRows(backendRoot).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
   for (const row of rows) {
     const data=parseApi(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
-    if(!before || !equal(projection(row,data),row.snapshot) || native.id !== before.id || Object.entries(before.flags).some(([k,v])=>!equal(native[k],v))) throw new Error(`PUBLIC_CONTENT_53_NATIVE_READBACK_${row.page_id}`);
+    const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
+    if(!before || !equal(projection(row,data),row.snapshot)
+      || (createdStaging ? native.is_indexable !== row.staging_bootstrap.is_indexable || native.translation_group_id !== row.staging_source_identity.translation_group_id
+        : native.id !== before.id || Object.entries(before.flags).some(([k,v])=>!equal(native[k],v)))) throw new Error(`PUBLIC_CONTENT_53_NATIVE_READBACK_${row.page_id}`);
     // One publication only. Existing 300-second public fetch caches can settle
     // while exact candidate DOM assertions remain strict and bounded.
     const deadline=Date.now()+360000;let last;

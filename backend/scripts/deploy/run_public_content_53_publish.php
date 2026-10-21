@@ -152,6 +152,7 @@ try {
     }
     $previous = '';
     $completed = [];
+    $stagingInitialized = \Illuminate\Support\Facades\DB::transaction(fn () => $app->make(\App\Services\ContentPromotion\PublicContent53Writer::class)->initializeStagingBaseline($context));
     foreach (['preflight', 'draft-import', 'publish', 'live-qa'] as $phase) {
         config(['content_promotion.execution.previous_receipt' => $previous]);
         if ($phase === 'publish') {
@@ -170,6 +171,7 @@ try {
         'source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId,
         'workflow_run_attempt' => 1, 'package_sha256' => $context->packageSha256,
         'published_count' => $expectedCount, 'phases' => $completed,
+        'staging_initialized_count' => $stagingInitialized,
         'elapsed_seconds' => round(microtime(true) - $started, 3), 'sanitized' => true,
     ], JSON_THROW_ON_ERROR).PHP_EOL;
 } catch (Throwable $error) {

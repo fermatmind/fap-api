@@ -6,10 +6,23 @@ namespace App\Services\ContentPromotion;
 
 use DomainException;
 
-/** Exact reviewed native content packages. No writes. */
+/** Exact reviewed native content packages. No writes. @review-surface article */
 final class PublicContent53Package
 {
     public const PACKAGE = 'content_assets/public_content_53';
+
+    private const SEO_ALIGNMENT_TARGETS = [
+        'PAGE-55' => ['article', 'career-confusion-test-map', 'zh-CN'],
+        'PAGE-56' => ['article', 'choose-career-using-personality-tests', 'en'],
+        'PAGE-57' => ['article', 'career-interest-vs-personality-test-differences', 'zh-CN'],
+        'PAGE-58' => ['article', 'career-interest-test-vs-personality-test', 'en'],
+        'PAGE-59' => ['article', 'ocean-traits-what-the-five-letters-mean', 'zh-CN'],
+        'PAGE-60' => ['article', 'ocean-traits-what-the-five-letters-mean', 'en'],
+        'PAGE-61' => ['surface', 'tests', 'zh-CN'],
+        'PAGE-62' => ['surface', 'tests', 'en'],
+        'PAGE-63' => ['page', 'reliability-validity', 'zh-CN'],
+        'PAGE-64' => ['page', 'reliability-validity', 'en'],
+    ];
 
     private const TARGETS = [
         'PAGE-HOME' => ['surface', 'home', 'en'],
@@ -81,6 +94,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/seo-alignment.json')) {
+            $chain = "fermatmind.public_content_seo_alignment.v1\n";
+            foreach (['seo-alignment.json', 'seo-alignment-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readSeoAlignment($root, $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/copy-amendment.json')) {
             $chain = "fermatmind.public_content_copy_amendment.v1\n";
             foreach (['copy-amendment.json', 'copy-amendment-review.json'] as $name) {
@@ -224,7 +246,138 @@ final class PublicContent53Package
         return ['candidates' => $rows, 'package_sha256' => $sha];
     }
 
-    /** Correct existing English search copy and test-card text through native CAS. */
+    /** Correct existing bilingual search copy and test-card text through native CAS. */
+    private function readSeoAlignment(string $root, string $sha): array
+    {
+        $bytes = $this->bytes($root, 'seo-alignment.json');
+        $data = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $review = json_decode($this->bytes($root, 'seo-alignment-review.json'), true, 64, JSON_THROW_ON_ERROR);
+        $rows = $data['candidates'] ?? [];
+        if (($data['schema'] ?? null) !== 'fermatmind.public_content_seo_alignment.v1'
+            || ! is_array($rows) || count($rows) !== count(self::SEO_ALIGNMENT_TARGETS)
+            || ($review['schema'] ?? null) !== 'fermatmind.public_content_seo_alignment.review.v1'
+            || ($review['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($review['verdict'] ?? null) !== 'PASS' || count($review['pages'] ?? []) !== count($rows)) {
+            throw new DomainException('public_content_53_alignment_review_invalid');
+        }
+        $seen = [];
+        foreach ($rows as $row) {
+            $id = $row['page_id'] ?? '';
+            if (! isset(self::SEO_ALIGNMENT_TARGETS[$id]) || isset($seen[$id])
+                || ($row['identity']['org_id'] ?? null) !== 0
+                || array_keys($row['identity']) !== ['org_id', 'slug', 'locale']
+                || [$row['kind'] ?? null, $row['identity']['slug'] ?? null, $row['identity']['locale'] ?? null] !== self::SEO_ALIGNMENT_TARGETS[$id]
+                || ($review['pages'][$id] ?? null) !== 'PASS'
+                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity', 'staging_bootstrap', 'staging_snapshot']) !== []) {
+                throw new DomainException('public_content_53_alignment_identity_invalid');
+            }
+            $seen[$id] = true;
+            if (isset($row['staging_bootstrap'])) {
+                $bootstrap = $row['staging_bootstrap'];
+                if ($id !== 'PAGE-60' || $row['staging_before'] !== $row['before']
+                    || array_keys($bootstrap) !== ['source_slug', 'source_locale', 'author_name', 'reading_minutes', 'is_indexable']
+                    || $bootstrap['source_slug'] !== 'ocean-traits-what-the-five-letters-mean' || $bootstrap['source_locale'] !== 'zh-CN'
+                    || ($bootstrap['author_name'] !== null && (! is_string($bootstrap['author_name']) || trim($bootstrap['author_name']) === ''))
+                    || ! is_int($bootstrap['reading_minutes']) || $bootstrap['reading_minutes'] < 1 || $bootstrap['is_indexable'] !== true) {
+                    throw new DomainException('public_content_53_alignment_bootstrap_invalid');
+                }
+            }
+            foreach (['before', 'staging_before', 'snapshot'] as $version) {
+                $copy = $row[$version] ?? null;
+                $fields = is_array($copy) ? array_keys($copy) : [];
+                sort($fields);
+                $expected = match ($row['kind']) {
+                    'article' => ['content_md', 'excerpt', 'seo_text', 'title'],
+                    'surface' => ['block_copy', 'description', 'payload_json', 'title'],
+                    'page' => ['content_md', 'faq_items', 'meta_description', 'seo_title', 'summary', 'title'],
+                };
+                if ($fields !== $expected) {
+                    throw new DomainException('public_content_53_alignment_fields_invalid');
+                }
+                if (array_filter(array_intersect_key($copy, array_flip(['title', 'content_md'])), static fn ($v): bool => ! is_string($v) || trim($v) === '')) {
+                    throw new DomainException('public_content_53_alignment_fields_invalid');
+                }
+                foreach ($copy as $field => $value) {
+                    if (in_array($field, ['seo_text', 'payload_json', 'faq_items', 'block_copy'], true) ? ! is_array($value)
+                        : (! is_string($value) && ! ($value === null && in_array($field, ['summary', 'meta_description', 'seo_title'], true)))) {
+                        throw new DomainException('public_content_53_alignment_fields_invalid');
+                    }
+                }
+                if ($row['kind'] === 'article') {
+                    $seo = $copy['seo_text'];
+                    $keys = array_keys($seo);
+                    sort($keys);
+                    if ($keys !== ['og_description', 'og_title', 'seo_description', 'seo_title']
+                        || array_filter($seo, static fn ($v): bool => ! is_string($v) || trim($v) === '')) {
+                        throw new DomainException('public_content_53_alignment_fields_invalid');
+                    }
+                }
+                if ($row['kind'] === 'surface') {
+                    $candidate = $version === 'staging_before' ? ($row['staging_snapshot'] ?? $row['snapshot']) : $row['snapshot'];
+                    $this->assertAlignmentSurface($copy['payload_json'], $candidate['payload_json']);
+                    if (array_keys($copy['block_copy']) !== ['hero', 'families']) {
+                        throw new DomainException('public_content_53_alignment_fields_invalid');
+                    }
+                    $this->assertAlignmentSurface($copy['block_copy'], $candidate['block_copy']);
+                }
+            }
+            if (isset($row['staging_snapshot']) && ($row['kind'] !== 'surface' || array_keys($row['staging_snapshot']) !== array_keys($row['snapshot']))) {
+                throw new DomainException('public_content_53_alignment_fields_invalid');
+            }
+            if (isset($row['staging_snapshot'])) {
+                foreach (['title', 'description'] as $field) {
+                    if ($row['staging_snapshot'][$field] !== $row['snapshot'][$field]) {
+                        throw new DomainException('public_content_53_alignment_fields_invalid');
+                    }
+                }
+            }
+            foreach (['source_identity', 'staging_source_identity'] as $field) {
+                if (! is_array($row[$field] ?? null)
+                    || ($row['kind'] !== 'article' && $row[$field] !== [])
+                    || ($row['kind'] === 'article' && (array_keys($row[$field]) !== ['translation_group_id', 'source_locale']
+                        || trim((string) $row[$field]['translation_group_id']) === '' || ! in_array($row[$field]['source_locale'], ['zh-CN', 'en'], true)))) {
+                    throw new DomainException('public_content_53_alignment_source_invalid');
+                }
+            }
+        }
+
+        if (function_exists('config') && self::environment() === 'staging') {
+            foreach ($rows as &$row) {
+                $row['snapshot'] = $row['staging_snapshot'] ?? $row['snapshot'];
+            }
+            unset($row);
+        }
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
+    private function assertAlignmentSurface(mixed $before, mixed $after, string $path = '', string $card = ''): void
+    {
+        if ($before === $after) {
+            return;
+        }
+        if (is_array($before) && is_array($after) && array_keys($before) === array_keys($after)) {
+            $card = is_string($before['key'] ?? null) ? $before['key'] : $card;
+            foreach ($after as $key => $value) {
+                $this->assertAlignmentSurface($before[$key], $value, ltrim($path.'.'.$key, '.'), $card);
+            }
+
+            return;
+        }
+        $field = substr($path, strrpos('.'.$path, '.'));
+        if (! is_string($before) || ! is_string($after) || trim($after) === ''
+            || (! in_array($path, ['hero.title', 'seo.title', 'seo.description'], true)
+                && ! ($card === 'eq-test-emotional-intelligence-assessment' && in_array($field, ['title', 'description', 'outputLabel'], true)))) {
+            throw new DomainException('public_content_53_alignment_surface_protected');
+        }
+    }
+
+    public static function stagingBootstrap(array $row): bool
+    {
+        return self::environment() === 'staging' && ($row['page_id'] ?? null) === 'PAGE-60'
+            && isset($row['staging_bootstrap']);
+    }
+
     private function readCopyAmendment(string $root, string $sha): array
     {
         $bytes = $this->bytes($root, 'copy-amendment.json');

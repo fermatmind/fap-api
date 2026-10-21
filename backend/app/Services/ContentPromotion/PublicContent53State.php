@@ -138,7 +138,7 @@ final class PublicContent53State
         }
         $projection = array_intersect_key($value, $row['snapshot']);
         if ($row['kind'] === 'surface' && isset($row['snapshot']['block_copy'])) {
-            $projection['block_copy'] = $this->blockCopy($value['page_blocks']);
+            $projection['block_copy'] = $this->blockCopy($value['page_blocks'], array_keys($row['snapshot']['block_copy']));
         }
         if ($row['kind'] === 'article' && isset($row['snapshot']['seo_text'])) {
             $projection['seo_text'] = array_intersect_key($value['seo_meta'] ?? [], $row['snapshot']['seo_text']);
@@ -181,7 +181,7 @@ final class PublicContent53State
                 $projection = [];
                 foreach ($row['snapshot'] as $field => $_) {
                     if ($row['kind'] === 'surface' && $field === 'block_copy') {
-                        $projection[$field] = $this->blockCopy($saved['relations']['page_blocks']);
+                        $projection[$field] = $this->blockCopy($saved['relations']['page_blocks'], array_keys($row['snapshot']['block_copy']));
 
                         continue;
                     }
@@ -233,10 +233,10 @@ final class PublicContent53State
         return hash('sha256', PromotionContextFactory::canonicalJson($value));
     }
 
-    private function blockCopy(array $blocks): array
+    private function blockCopy(array $blocks, array $keys): array
     {
         $result = [];
-        foreach (['header', 'footer'] as $key) {
+        foreach ($keys as $key) {
             $matches = array_values(array_filter($blocks, static fn (array $block): bool => $block['block_key'] === $key));
             if (count($matches) !== 1 || ! (bool) $matches[0]['is_enabled']) {
                 throw new DomainException('public_content_53_copy_block_missing');

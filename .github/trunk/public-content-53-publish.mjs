@@ -87,10 +87,12 @@ export async function publish(execution, execute = request => transport(executio
       || output.source_commit !== execution.request.source_commit || output.workflow_run_id !== execution.request.workflow_run_id
       || output.workflow_run_attempt !== 1 || output.package_sha256 !== execution.binding.package_sha256
       || output.published_count !== execution.binding.expected_row_count || output.sanitized !== true
+      || (output.staging_initialized_count !== undefined && (!Number.isInteger(output.staging_initialized_count) || output.staging_initialized_count < 0 || output.staging_initialized_count > (execution.binding.environment === 'staging' ? 1 : 0)))
       || output.phases?.map(row => row.phase).join('|') !== 'preflight|draft-import|publish|live-qa'
       || output.phases.some(row => row.readback_count !== execution.binding.expected_row_count || !/^[a-f0-9]{64}$/.test(row.receipt_sha256))) throw new Error('PUBLIC_CONTENT_53_PUBLICATION_RESPONSE_INVALID');
     return { schema: output.schema, ok: true, source_commit: output.source_commit, workflow_run_id: output.workflow_run_id,
       workflow_run_attempt: 1, package_sha256: output.package_sha256, published_count: execution.binding.expected_row_count,
+      ...(output.staging_initialized_count === undefined ? {} : {staging_initialized_count:output.staging_initialized_count}),
       phases: output.phases.map(row => ({ phase: row.phase, receipt_sha256: row.receipt_sha256, readback_count: execution.binding.expected_row_count })), sanitized: true };
   } catch (cause) {
     throw await recoveryFailure(execution, execute, cause);

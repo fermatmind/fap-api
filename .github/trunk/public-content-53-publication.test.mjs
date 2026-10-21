@@ -11,6 +11,7 @@ import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 const guideDigest=()=>createHash('sha256').update('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const translationDigest=()=>createHash('sha256').update('fermatmind.public_content_translation.v1\n'+['translation-batch.json','translation-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
+const copyDigest=()=>createHash('sha256').update('fermatmind.public_content_copy_amendment.v1\n'+['copy-amendment.json','copy-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 function translatedTestsHubDom() {
  const row=readCandidateRows(root,translationDigest()).candidates.find(row=>row.page_id==='PAGE-32');
  const payload=row.snapshot.payload_json;
@@ -51,7 +52,7 @@ test('previous translation package remains readable by its own immutable digest'
 });
 test('previous article amendment still binds only the reviewed existing article body',()=>{
  const binding=inspectPackage(root);const sha=bytes=>createHash('sha256').update(bytes).digest('hex');const digest=sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));const rows=readCandidateRows(root,digest).candidates;
- assert.equal(binding.expected_row_count,6);assert.equal(rows.length,1);
+ assert.equal(binding.expected_row_count,10);assert.equal(rows.length,1);
  const row=rows[0];assert.equal(row.page_id,'PAGE-54');assert.equal(row.kind,'article');
  assert.deepEqual(row.identity,{org_id:0,slug:'mbti-full-report-career-relationship-communication',locale:'en'});
  for(const before of [row.before,row.staging_before]) {
@@ -259,9 +260,9 @@ test('previous single-locale guide amendment protects identity and checks real b
  assert.throws(()=>assertDom(small,html.replace('href="/en/career/guides/interview-strategy-by-role"','href="/en/career/guides/other"'),before,'production'),/LINK/);
 });
 
-test('active copy amendment binds six native resources and checks metadata plus unchanged reader body',()=>{
- const rows=readCandidateRows(root).candidates;
- assert.equal(inspectPackage(root).expected_row_count,6);
+test('previous copy amendment binds six native resources and checks metadata plus unchanged reader body',()=>{
+ const rows=readCandidateRows(root,copyDigest()).candidates;
+ assert.equal(inspectPackage(root).expected_row_count,10);
  assert.deepEqual(rows.map(row=>row.page_id),['PAGE-23','PAGE-32','PAGE-34','PAGE-33','PAGE-HOME','PAGE-17']);
  const row=rows[0],seo=row.snapshot.seo_text,url='https://fermatmind.com'+pathFor(row);
  const native={...row.identity,status:'published',is_public:true,seo_meta:seo};
@@ -277,7 +278,7 @@ test('active copy amendment binds six native resources and checks metadata plus 
 
 
 function streamedArticlePrestateFixture() {
- const rows=readCandidateRows(root).candidates,row=rows.find(row=>row.page_id==='PAGE-23');
+ const rows=readCandidateRows(root,copyDigest()).candidates,row=rows.find(row=>row.page_id==='PAGE-23');
  const body='<p>Keep the complete explanation.</p><p>Keep the streamed continuation too.</p>';
  const html=seo=>`<html><head><meta charset="utf-8"><title>${seo.seo_title} | FermatMind</title><meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}"></head><body><main><h1>Seven types of love</h1><article data-testid="article-detail-content">${body}</article></main></body></html>`;
  const before=html(row.staging_before.seo_text),after=html(row.snapshot.seo_text);
@@ -300,9 +301,9 @@ test('metadata-only Article prestate uses the same rendered reader as post-publi
  const f=streamedArticlePrestateFixture(),renders=[];
  const prestate=await readOnlinePrestate('staging',root,f.fetcher,async(url,options)=>{
   renders.push({url,surface:options.surface});return f.before;
- });
+ },copyDigest());
  assert.doesNotThrow(()=>assertDom(f.row,f.after,prestate[f.row.page_id],'staging'));
- assert.deepEqual(renders,readCandidateRows(root).candidates.filter(row=>row.kind==='article').map(row=>({url:'https://staging.fermatmind.com'+pathFor(row),surface:'article'})));
+ assert.deepEqual(renders,readCandidateRows(root,copyDigest()).candidates.filter(row=>row.kind==='article').map(row=>({url:'https://staging.fermatmind.com'+pathFor(row),surface:'article'})));
  assert.equal(f.requests.filter(url=>!url.includes('/api/v0.5/') && url.includes('/articles/')).length,0);
  assert.throws(()=>assertDom(f.row,f.after,{dom:domOf(f.raw)},'staging'),/BODY_DRIFT/);
  assert.throws(()=>assertDom(f.row,f.after.replace('streamed continuation','changed continuation'),prestate[f.row.page_id],'staging'),/BODY_DRIFT/);
@@ -310,12 +311,12 @@ test('metadata-only Article prestate uses the same rendered reader as post-publi
 
 test('prestate renderer failure propagates without a raw HTML fallback',async()=>{
  const f=streamedArticlePrestateFixture();
- await assert.rejects(readOnlinePrestate('staging',root,f.fetcher,async()=>{throw new Error('render unavailable');}),/render unavailable/);
+ await assert.rejects(readOnlinePrestate('staging',root,f.fetcher,async()=>{throw new Error('render unavailable');},copyDigest()),/render unavailable/);
  assert.equal(f.requests.length,1);
 });
 
 test('home copy is consumed by ItemList while the visible IQ card retains the actual reader contract',()=>{
- const row=readCandidateRows(root).candidates.find(row=>row.page_id==='PAGE-HOME');
+ const row=readCandidateRows(root,copyDigest()).candidates.find(row=>row.page_id==='PAGE-HOME');
  const items=row.snapshot.payload_json.quickStart.items;
  const list={'@type':'ItemList','@id':'https://fermatmind.com/en#quickstart-itemlist',inLanguage:'en',numberOfItems:items.length,
   itemListElement:items.map((item,index)=>({'@type':'ListItem',position:index+1,name:item.title,description:item.description,url:'https://fermatmind.com'+(item.href.startsWith('/en/')?item.href:'/en'+item.href)}))};
@@ -334,10 +335,57 @@ test('home copy is consumed by ItemList while the visible IQ card retains the ac
 });
 
 test('reviewed AI-coach heading changes while its explanatory body stays protected',()=>{
- const row=readCandidateRows(root).candidates.find(row=>row.page_id==='PAGE-17'),seo=row.snapshot.seo_text;
+ const row=readCandidateRows(root,copyDigest()).candidates.find(row=>row.page_id==='PAGE-17'),seo=row.snapshot.seo_text;
  const html=`<html><head><meta charset="utf-8"><title>${seo.seo_title} | FermatMind</title><meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}"></head><body><main><h1>${row.snapshot.title}</h1><article data-testid="article-detail-content"><p>Eight illustrative patterns and their limits.</p></article></main></body></html>`;
  const before={dom:domOf(html.replace(row.snapshot.title,row.before.title))};
  assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
  assert.throws(()=>assertDom(row,html.replace(row.snapshot.title,row.before.title),before,'production'),/H1/);
  assert.throws(()=>assertDom(row,html.replace('Eight illustrative patterns','Sixteen validated types'),before,'production'),/BODY_DRIFT/);
+});
+
+test('bilingual alignment binds exactly ten native identities and preserves other assessment cards',()=>{
+ const rows=readCandidateRows(root).candidates;
+ assert.equal(inspectPackage(root).expected_row_count,10);
+ assert.deepEqual(rows.map(row=>row.page_id),Array.from({length:10},(_,i)=>`PAGE-${i+55}`));
+ assert.equal(rows.filter(row=>row.kind==='article').length,6);
+ assert.equal(rows.filter(row=>row.kind==='surface').length,2);
+ assert.equal(rows.filter(row=>row.kind==='page').length,2);
+ for(const row of rows.filter(row=>row.kind==='surface')) {
+  const cards=payload=>payload.families.items.flatMap(f=>f.tests ?? []).filter(c=>/mbti|iq-test/.test(c.key));
+  assert.deepEqual(cards(row.before.payload_json),cards(row.snapshot.payload_json));
+  assert.deepEqual(row.before.payload_json.seo.iq_ramp_authority,row.snapshot.payload_json.seo.iq_ramp_authority);
+  assert.deepEqual(Object.keys(row.snapshot.block_copy),['hero','families']);
+  assert.deepEqual(row.snapshot.block_copy.hero,row.snapshot.payload_json.hero);
+  const {items,...familyCopy}=row.snapshot.block_copy.families;
+  assert.deepEqual(items,row.before.block_copy.families.items);
+  for(const [key,value] of Object.entries(familyCopy)) assert.deepEqual(value,row.snapshot.payload_json.families[key]);
+ }
+});
+
+test('combined article body and search changes require the complete new visible body',()=>{
+ const source=readCandidateRows(root).candidates.find(row=>row.page_id==='PAGE-60');
+ const row={...source,snapshot:{...source.snapshot,content_md:'New supported answer.\n\nA necessary qualification.'}};
+ const seo=row.snapshot.seo_text,url='https://fermatmind.com'+pathFor(row);
+ const head=`<meta charset="utf-8"><title>${seo.seo_title} | FermatMind</title><meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="${url}"><meta name="robots" content="index, follow">`;
+ const html=`<html><head>${head}</head><body><main><h1>${row.snapshot.title}</h1><article data-testid="article-detail-content"><p>New supported answer.</p><p>A necessary qualification.</p></article></main></body></html>`;
+ const before={dom:domOf(html.replace('New supported answer.','Previous answer.'))};
+ assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ assert.throws(()=>assertDom(row,html.replace('A necessary qualification.',''),before,'production'),/VISIBLE_BODY/);
+ assert.throws(()=>assertDom(row,html.replaceAll(seo.seo_title,'Stale search title'),before,'production'),/METADATA/);
+ assert.throws(()=>assertDom(row,html.replace(`<h1>${row.snapshot.title}</h1>`,'<h1>Old heading</h1>'),before,'production'),/H1/);
+ const pair=['/en/articles/ocean-traits-what-the-five-letters-mean','/zh/articles/ocean-traits-what-the-five-letters-mean'];
+ const paired=html.replace('</head>',pair.map(path=>`<link rel="alternate" href="https://fermatmind.com${path}">`).join('')+'</head>');
+ assert.doesNotThrow(()=>assertDom(row,paired,{missing:true},'staging'));
+ assert.throws(()=>assertDom(row,paired.replace('content="index, follow"','content="noindex, follow"'),{missing:true},'staging'),/DISCOVERABILITY/);
+ assert.throws(()=>assertDom(row,paired.replace('</head>','<link rel="alternate" href="https://external.invalid/en/articles/foreign"></head>'),{missing:true},'staging'),/DISCOVERABILITY/);
+ assert.throws(()=>assertDom(row,paired.replace('<meta name="robots" content="index, follow">',''),{missing:true},'staging'),/DISCOVERABILITY/);
+ assert.throws(()=>assertDom(row,paired,{missing:true},'production'));
+});
+
+test('missing baseline permission is limited to a native not-found response',async()=>{
+ const missing=async()=>({status:404,text:async()=>JSON.stringify({ok:false,error_code:'NOT_FOUND'})});
+ assert.equal(await read('https://staging-api.fermatmind.com/example',missing,true),null);
+ await assert.rejects(read('https://staging-api.fermatmind.com/example',missing),/RESPONSE_INVALID/);
+ for(const payload of ['<html>proxy error</html>',JSON.stringify({ok:false,error_code:'FORBIDDEN'}),JSON.stringify({ok:true})])
+  await assert.rejects(read('https://staging-api.fermatmind.com/example',async()=>({status:404,text:async()=>payload}),true),/INVALID/);
 });

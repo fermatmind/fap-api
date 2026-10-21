@@ -6,6 +6,7 @@ namespace App\Services\ContentPromotion;
 
 use App\Filament\Ops\Resources\CareerGuideResource\Support\CareerGuideWorkspace;
 use App\Models\Article;
+use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\CareerGuide;
 use App\Models\CareerGuideRevision;
@@ -29,6 +30,43 @@ final class PublicContent53Writer
         private readonly ContentPageTranslationAdapter $pages,
         private readonly ContentPagePublishGate $pageGate,
     ) {}
+
+    /** Initialize only the absent staging counterpart from its reviewed live baseline. */
+    public function initializeStagingBaseline(PromotionContext $context): int
+    {
+        $this->assertContext($context);
+        if (PublicContent53Package::environment() !== 'staging') {
+            return 0;
+        }
+        foreach ($this->package->read(base_path(), $context->packageSha256)['candidates'] as $row) {
+            if (! PublicContent53Package::stagingBootstrap($row)) {
+                continue;
+            }
+
+            return DB::transaction(function () use ($row, $context): int {
+                if (DB::table('articles')->where($row['identity'])->lockForUpdate()->exists()) {
+                    return 0; // Existing holds, drafts and source drift remain preflight failures.
+                }
+                $sources = DB::table('articles')->where('org_id', 0)->where('locale', 'zh-CN')
+                    ->where('slug', $row['staging_bootstrap']['source_slug'])->lockForUpdate()->get();
+                if ($sources->count() !== 1 || $sources[0]->status !== 'published' || ! $sources[0]->is_public
+                    || $sources[0]->deleted_at !== null
+                    || $sources[0]->translation_group_id !== $row['staging_source_identity']['translation_group_id']) {
+                    throw new DomainException('public_content_53_staging_source_unavailable');
+                }
+                if (DB::table('articles')->where('org_id', 0)->where('locale', 'en')
+                    ->where('translation_group_id', $sources[0]->translation_group_id)->exists()) {
+                    throw new DomainException('public_content_53_staging_identity_collision');
+                }
+                $row['snapshot'] = $row['staging_before'];
+                $this->article($row, ['staging_missing' => true, 'source' => [(array) $sources[0]]], $context);
+
+                return 1;
+            }, 3);
+        }
+
+        return 0;
+    }
 
     public function publish(PromotionContext $context, array $before): array
     {
@@ -129,16 +167,46 @@ final class PublicContent53Writer
 
     private function article(array $row, array $saved, PromotionContext $context): void
     {
-        $article = Article::query()->withoutGlobalScopes()->findOrFail($saved['values']['id']);
-        $old = $saved['published'];
+        $creating = ($saved['staging_missing'] ?? false) === true;
+        if ($creating) {
+            if (! PublicContent53Package::stagingBootstrap($row)) {
+                throw new DomainException('public_content_53_staging_bootstrap_invalid');
+            }
+            $source = Article::query()->withoutGlobalScopes()->findOrFail($saved['source'][0]['id']);
+            $sourceRevision = $source->publishedRevision;
+            if (! $sourceRevision instanceof ArticleTranslationRevision || ! $sourceRevision->isPubliclyReadableForArticle($source)) {
+                throw new DomainException('public_content_53_staging_source_unavailable');
+            }
+            $article = $source->replicate();
+            $article->forceFill([
+                'locale' => 'en', 'slug' => $row['identity']['slug'], 'source_article_id' => $source->id,
+                'source_locale' => 'zh-CN', 'translated_from_article_id' => $source->id,
+                'translation_status' => 'published', 'published_revision_id' => null, 'working_revision_id' => null,
+                'is_indexable' => $row['staging_bootstrap']['is_indexable'],
+                'author_name' => $row['staging_bootstrap']['author_name'], 'reading_minutes' => $row['staging_bootstrap']['reading_minutes'],
+                'cover_image_alt' => $row['snapshot']['title'],
+            ])->saveQuietly();
+            $old = $sourceRevision->getAttributes();
+            $sourceSeo = ArticleSeoMeta::query()->where('article_id', $source->id)->firstOrFail();
+            $seo = $sourceSeo->replicate();
+            $seo->forceFill(['article_id' => $article->id, 'locale' => 'en',
+                'canonical_url' => '/en/articles/'.$article->slug, 'schema_json' => [],
+                'is_indexable' => $row['staging_bootstrap']['is_indexable']])->saveQuietly();
+            $saved['relations']['article_seo_meta'] = [$seo->getAttributes()];
+        } else {
+            $article = Article::query()->withoutGlobalScopes()->findOrFail($saved['values']['id']);
+            $old = $saved['published'];
+        }
         $seoCopy = $row['snapshot']['seo_text'] ?? null;
         $revisionCopy = $seoCopy !== null
-            ? array_intersect_key($seoCopy, array_flip(['seo_title', 'seo_description'])) + array_intersect_key($row['snapshot'], ['title' => true])
+            ? array_intersect_key($seoCopy, array_flip(['seo_title', 'seo_description']))
+                + array_intersect_key($row['snapshot'], array_flip(['title', 'excerpt', 'content_md']))
+                + (array_key_exists('content_md', $row['snapshot']) ? ['content_html' => null] : [])
             : $row['snapshot'] + ['content_html' => null];
         if ($seoCopy === null) {
             $article->forceFill($revisionCopy);
-        } elseif (isset($row['snapshot']['title'])) {
-            $article->forceFill(['title' => $row['snapshot']['title']]);
+        } else {
+            $article->forceFill(array_intersect_key($revisionCopy, array_flip(['title', 'excerpt', 'content_md', 'content_html'])));
         }
         $hash = $article->computeSourceVersionHash();
         $source = Article::query()->withoutGlobalScopes()->findOrFail($old['source_article_id']);
@@ -147,6 +215,12 @@ final class PublicContent53Writer
         }
         $sourceHash = $source->id === $article->id ? $hash : $source->source_version_hash;
         $payload = $old;
+        if ($creating) {
+            $payload['article_id'] = $article->id;
+            $payload['locale'] = 'en';
+            $payload['source_article_id'] = $source->id;
+            $payload['source_locale'] = 'zh-CN';
+        }
         foreach (['id', 'created_at', 'updated_at', 'archived_at'] as $key) {
             unset($payload[$key]);
         }
@@ -154,7 +228,7 @@ final class PublicContent53Writer
             'revision_number' => (int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number') + 1,
             'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
             'source_version_hash' => $sourceHash, 'translated_from_version_hash' => $sourceHash,
-            'supersedes_revision_id' => $old['id'], 'authority_asset_key' => $row['page_id'].':'.$context->sourceCommit,
+            'supersedes_revision_id' => $creating ? null : $old['id'], 'authority_asset_key' => $row['page_id'].':'.$context->sourceCommit.($creating ? ':staging-baseline' : ''),
             'authority_source_package' => PublicContent53Package::PACKAGE, 'authority_source_hash' => $this->states->hash($row['snapshot']),
             'authority_package_sha256' => $context->packageSha256,
             'authority_metadata_json' => ['source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId, 'approval_kind' => 'verified_automated_exact_package'],
@@ -165,7 +239,7 @@ final class PublicContent53Writer
         if ($source->id !== $article->id) {
             $article->translated_from_version_hash = $sourceHash;
         }
-        if ($saved['values']['working_revision_id'] === $old['id']) {
+        if ($creating || $saved['values']['working_revision_id'] === $old['id']) {
             $article->working_revision_id = $revision->id;
         }
         $article->saveQuietly();

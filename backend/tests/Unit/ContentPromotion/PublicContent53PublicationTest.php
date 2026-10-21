@@ -803,6 +803,185 @@ PHP;
         }
     }
 
+    private function alignmentDigest(): string
+    {
+        $chain = "fermatmind.public_content_seo_alignment.v1\n";
+        foreach (['seo-alignment.json', 'seo-alignment-review.json'] as $name) {
+            $chain .= $name."\n".hash_file('sha256', base_path(PublicContent53Package::PACKAGE.'/'.$name))."\n";
+        }
+
+        return hash('sha256', $chain);
+    }
+
+    private function alignmentContext(string $owner = 'a'): PromotionContext
+    {
+        return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->alignmentDigest(), 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat($owner, 40), str_repeat('b', 64), str_repeat('c', 64), $owner === 'a' ? '12345' : '12346', 1, str_repeat('d', 64), 10, str_repeat('e', 64));
+    }
+
+    private function seedAlignment(bool $missingStagingCounterpart = false): array
+    {
+        $rows = app(PublicContent53Package::class)->read(base_path(), $this->alignmentDigest())['candidates'];
+        foreach ($rows as $row) {
+            if ($missingStagingCounterpart && $row['page_id'] === 'PAGE-60') {
+                continue;
+            }
+            $copy = PublicContent53Package::before($row);
+            if ($row['kind'] === 'article') {
+                $source = PublicContent53Package::environment() === 'staging' ? $row['staging_source_identity'] : $row['source_identity'];
+                $created = $this->article($row['identity'], array_intersect_key($copy, array_flip(['title', 'excerpt', 'content_md'])) + array_intersect_key($copy['seo_text'], array_flip(['seo_title', 'seo_description'])),
+                    $source['translation_group_id'], $source['source_locale']);
+                $created->seoMeta()->update($copy['seo_text']);
+                $created->forceFill(['is_indexable' => true])->saveQuietly();
+            } elseif ($row['kind'] === 'surface') {
+                $surface = LandingSurface::query()->create(['org_id' => 0, 'surface_key' => $row['identity']['slug'], 'locale' => $row['identity']['locale'],
+                    'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'schema_version' => 'v1'] + array_diff_key($copy, ['block_copy' => true]));
+                foreach ($copy['block_copy'] as $key => $payload) {
+                    PageBlock::query()->create(['landing_surface_id' => $surface->id, 'block_key' => $key,
+                        'block_type' => 'tests_section', 'payload_json' => $payload, 'sort_order' => 1, 'is_enabled' => true]);
+                }
+            } else {
+                ContentPage::query()->create($row['identity'] + $copy + ['path' => '/'.($row['identity']['locale'] === 'en' ? 'en' : 'zh').'/'.$row['identity']['slug'],
+                    'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'review_state' => 'approved',
+                    'publish_allowed' => true, 'operator_approval_required' => false, 'claim_gate_status' => 'passed']);
+            }
+        }
+
+        return $rows;
+    }
+
+    #[DataProvider('environments')]
+    public function test_bilingual_alignment_is_atomic_preserves_drafts_and_republishes_after_rollback(string $environment): void
+    {
+        config(['content_promotion.public_content_53_environment' => $environment]);
+        $rows = $this->seedAlignment();
+        $states = app(PublicContent53State::class);
+        $writer = app(PublicContent53Writer::class);
+        $before = $states->read($this->alignmentDigest());
+        $states->assertBaseline($rows);
+        $control = $this->article(['org_id' => 0, 'slug' => 'unselected-alignment-control', 'locale' => 'en'],
+            ['title' => 'Keep', 'excerpt' => 'Keep', 'content_md' => 'Keep this unrelated article'], 'control', 'en')->fresh()->toArray();
+        $armed = true;
+        DB::listen(function ($query) use (&$armed): void {
+            if ($armed && preg_match('/^update [`"]content_pages[`"]/i', $query->sql) === 1) {
+                $armed = false;
+                throw new DomainException('alignment_late_failure');
+            }
+        });
+        try {
+            DB::transaction(fn () => $writer->publish($this->alignmentContext(), $before));
+            self::fail('A later content-page failure must roll back earlier native writes');
+        } catch (DomainException $error) {
+            self::assertSame('alignment_late_failure', $error->getMessage());
+        }
+        self::assertFalse($armed);
+        self::assertSame($before, $states->read($this->alignmentDigest()));
+        $after = DB::transaction(fn () => $writer->publish($this->alignmentContext(), $before));
+        self::assertSame(10, $after['written_count']);
+        Cache::flush();
+        $states->assertPublished($rows, $after['state']);
+        foreach ($before as $id => $saved) {
+            if ($saved['table'] === 'articles') {
+                self::assertSame($saved['working'], $after['state'][$id]['working']);
+                self::assertSame($saved['published'], (array) DB::table('article_translation_revisions')->where('id', $saved['published']['id'])->first());
+            }
+        }
+        self::assertSame($control, Article::query()->findOrFail($control['id'])->toArray());
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($this->alignmentContext(), $after['state']))['written_count']);
+        DB::transaction(fn () => $writer->restore($this->alignmentContext(), $before, $after['state']));
+        Cache::flush();
+        self::assertSame($before, $states->read($this->alignmentDigest()));
+        $again = DB::transaction(fn () => $writer->publish($this->alignmentContext('f'), $before));
+        Cache::flush();
+        $states->assertPublished($rows, $again['state']);
+        DB::table('article_seo_meta')->where('article_id', $again['state']['PAGE-55']['values']['id'])->update(['seo_title' => 'Concurrent operator edit']);
+        $this->expectExceptionMessage('public_content_53_rollback_concurrent_state');
+        DB::transaction(fn () => $writer->restore($this->alignmentContext('f'), $before, $again['state']));
+    }
+
+    public function test_staging_only_initialization_keeps_a_real_baseline_and_never_overwrites_existing_holds(): void
+    {
+        config(['content_promotion.public_content_53_environment' => 'staging']);
+        $rows = $this->seedAlignment(true);
+        $writer = app(PublicContent53Writer::class);
+        self::assertSame(1, DB::transaction(fn () => $writer->initializeStagingBaseline($this->alignmentContext())));
+        self::assertSame(0, DB::transaction(fn () => $writer->initializeStagingBaseline($this->alignmentContext())));
+        $states = app(PublicContent53State::class);
+        $before = $states->read($this->alignmentDigest());
+        $states->assertBaseline($rows);
+        $after = DB::transaction(fn () => $writer->publish($this->alignmentContext(), $before));
+        Cache::flush();
+        $states->assertPublished($rows, $after['state']);
+        DB::transaction(fn () => $writer->restore($this->alignmentContext(), $before, $after['state']));
+        Cache::flush();
+        self::assertSame($before, $states->read($this->alignmentDigest()));
+        DB::table('articles')->where('id', $before['PAGE-60']['values']['id'])->update(['status' => 'draft']);
+        self::assertSame(0, DB::transaction(fn () => $writer->initializeStagingBaseline($this->alignmentContext())));
+        $this->expectExceptionMessage('public_content_53_identity_or_hold');
+        $states->read($this->alignmentDigest());
+    }
+
+    public function test_production_never_initializes_a_missing_counterpart(): void
+    {
+        config(['content_promotion.public_content_53_environment' => 'production']);
+        $this->seedAlignment(true);
+        self::assertSame(0, DB::transaction(fn () => app(PublicContent53Writer::class)->initializeStagingBaseline($this->alignmentContext())));
+        self::assertFalse(Article::query()->where('locale', 'en')->where('slug', 'ocean-traits-what-the-five-letters-mean')->exists());
+        $this->expectExceptionMessage('public_content_53_identity_or_hold');
+        app(PublicContent53State::class)->read($this->alignmentDigest());
+    }
+
+    public function test_alignment_rejects_unreviewed_routes_empty_body_and_foreign_initialization(): void
+    {
+        $source = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/seo-alignment.json')), true);
+        $mutations = [
+            static function (&$p): void {
+                $p['candidates'][0]['snapshot']['content_md'] = '';
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['identity']['org_id'] = 1;
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['staging_bootstrap'] = $p['candidates'][5]['staging_bootstrap'];
+            },
+            static function (&$p): void {
+                $p['candidates'][6]['snapshot']['payload_json']['families']['items'][0]['tests'][0]['href'] = '/en/foreign';
+            },
+            static function (&$p): void {
+                $p['candidates'][6]['staging_snapshot']['payload_json']['families']['items'][0]['tests'][0]['href'] = '/en/foreign';
+            },
+        ];
+        $root = sys_get_temp_dir().'/public-alignment-'.bin2hex(random_bytes(8));
+        $dir = $root.'/'.PublicContent53Package::PACKAGE;
+        mkdir($dir, 0700, true);
+        try {
+            foreach ($mutations as $mutate) {
+                $package = $source;
+                $mutate($package);
+                $bytes = json_encode($package, JSON_THROW_ON_ERROR);
+                file_put_contents($dir.'/seo-alignment.json', $bytes);
+                file_put_contents($dir.'/seo-alignment-review.json', json_encode(['schema' => 'fermatmind.public_content_seo_alignment.review.v1', 'candidate_sha256' => hash('sha256', $bytes),
+                    'verdict' => 'PASS', 'pages' => array_fill_keys(array_column($source['candidates'], 'page_id'), 'PASS')]));
+                $chain = "fermatmind.public_content_seo_alignment.v1\n";
+                foreach (['seo-alignment.json', 'seo-alignment-review.json'] as $name) {
+                    $chain .= $name."\n".hash_file('sha256', $dir.'/'.$name)."\n";
+                }
+                try {
+                    (new PublicContent53Package)->read($root, hash('sha256', $chain));
+                    self::fail('Out-of-scope alignment must fail even with a rebound test-only review');
+                } catch (DomainException $error) {
+                    self::assertStringStartsWith('public_content_53_alignment_', $error->getMessage());
+                }
+            }
+        } finally {
+            unlink($dir.'/seo-alignment.json');
+            unlink($dir.'/seo-alignment-review.json');
+            rmdir($dir);
+            rmdir(dirname($dir));
+            rmdir($root);
+        }
+    }
+
     private function guideDigest(): string
     {
         $chain = "fermatmind.public_content_guide_amendment.v1\n";
