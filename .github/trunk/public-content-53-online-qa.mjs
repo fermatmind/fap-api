@@ -153,6 +153,7 @@ function readerVariants(line, row, dom, environment) {
   return variants;
 }
 export function assertDom(row,html,before,environment) {
+  const reviewedBefore=environment === 'staging' ? (row.staging_before ?? row.before) : row.before;
   const dom=domOf(html); const body=compact(dom.body.join(' '));
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
   if (row.kind !== 'surface' && row.snapshot.title && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
@@ -239,11 +240,11 @@ export function assertDom(row,html,before,environment) {
   const readerCopy = row.kind === 'article' ? copy?.replace(/(?:<!--|&lt;!--)\s*(?:FM_SLOT|body_visual):[\s\S]*?(?:-->|--&gt;)/gi,'') : copy;
   const lines = readerCopy ? readerCopy.split('\n').map(line=>readerLine(line,row.kind)).filter(line=>line.trim() && !/^[\s|:-]+$/.test(line)).flatMap(line=>line.split('|'))
     : row.kind === 'profile' ? row.snapshot.sections.flatMap(s=>[s.title,s.body_md]).filter(Boolean)
-      : translatedTestsHub || alignmentTestsHub ? changedStrings(row.before.payload_json.families,row.snapshot.payload_json.families)
+      : translatedTestsHub || alignmentTestsHub ? changedStrings(reviewedBefore.payload_json.families,row.snapshot.payload_json.families)
         : translatedCategory ? ['hero','featured','allTests','differences','trust','resources','breadcrumb']
-            .flatMap(key=>changedStrings(row.before.payload_json[key],row.snapshot.payload_json[key]))
+            .flatMap(key=>changedStrings(reviewedBefore.payload_json[key],row.snapshot.payload_json[key]))
           : home ? []
-          : row.snapshot.seo_text ? [] : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
+          : row.snapshot.seo_text ? [] : changedStrings(reviewedBefore,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
   for (const [index, line] of lines.entries()) {
     const text=compact(plain(line));
     if (text && !body.includes(text) && !readerVariants(line,row,dom,environment).some(variant=>body.includes(compact(variant))))

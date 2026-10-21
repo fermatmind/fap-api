@@ -414,3 +414,27 @@ test('staging missing locale binds its actual published counterpart metadata; ot
  await assert.rejects(readOnlinePrestate('production',root,async url=>url.includes('/articles/ocean-traits-what-the-five-letters-mean?locale=en')?{status:404,text:async()=>JSON.stringify({ok:false,error_code:'NOT_FOUND'})}:fetcher(url),renderer),/PRESTATE_DRIFT|RESPONSE_INVALID/);
  await assert.rejects(readOnlinePrestate('staging',root,async()=>({status:404,text:async()=>JSON.stringify({ok:false,error_code:'NOT_FOUND'})}),renderer),/RESPONSE_INVALID/);
 });
+
+
+test('alignment DOM deltas use the selected environment baseline without requiring retained staging action URLs',()=>{
+ for(const source of readCandidateRows(root).candidates.filter(row=>['PAGE-61','PAGE-62'].includes(row.page_id))) {
+  for(const environment of ['staging','production']) {
+   const row={...source,snapshot:environment==='staging'?source.staging_snapshot:source.snapshot};
+   const payload=row.snapshot.payload_json,seo=payload.seo;
+   const card=payload.families.items.flatMap(f=>f.tests).find(c=>c.key==='eq-test-emotional-intelligence-assessment');
+   const url='https://fermatmind.com'+pathFor(row);
+   const prose=[card.title,card.description,card.outputLabel];
+   const html=`<html><head><meta charset="utf-8"><title>${seo.title} | FermatMind</title><meta name="description" content="${seo.description}"><link rel="canonical" href="${url}"></head><body><main><h1>${payload.hero.title}</h1>${prose.map(x=>'<p>'+x+'</p>').join('')}</main></body></html>`;
+   const before={dom:domOf(html)};
+   assert.doesNotThrow(()=>assertDom(row,html,before,environment));
+   for(const text of prose) assert.throws(()=>assertDom(row,html.replace('<p>'+text+'</p>',''),before,environment),/VISIBLE_BODY/);
+   const changed=structuredClone(row);
+   for(const family of changed.snapshot.payload_json.families.items) for(const item of family.tests) {
+    if(item.key==='eq-test-emotional-intelligence-assessment') item.description=card.description+' /'+(row.identity.locale==='en'?'en':'zh')+'/method-boundaries';
+   }
+   assert.throws(()=>assertDom(changed,html,before,environment),/LINK/);
+   const linked=html.replace('<p>'+card.description+'</p>','<p>'+card.description+' <a href="/'+(row.identity.locale==='en'?'en':'zh')+'/method-boundaries">Read method boundaries</a></p>');
+   assert.doesNotThrow(()=>assertDom(changed,linked,{dom:domOf(linked)},environment));
+  }
+ }
+});
