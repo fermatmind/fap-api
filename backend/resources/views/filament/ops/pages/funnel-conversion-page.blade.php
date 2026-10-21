@@ -293,11 +293,11 @@
                 <div class="grid gap-4 md:grid-cols-3">
                     <article class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                         <div class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">PDF download attempts</div>
-                        <div class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ $this->formatInt((int) ($pdfPanel['downloads'] ?? 0)) }}</div>
+                        <div class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ $this->formatInt($pdfPanel['downloads'] ?? null) }}</div>
                     </article>
                     <article class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                         <div class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">PDF readiness gap</div>
-                        <div class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ $this->formatInt((int) ($pdfPanel['readiness_gap'] ?? 0)) }}</div>
+                        <div class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ $this->formatInt($pdfPanel['readiness_gap'] ?? null) }}</div>
                     </article>
                     <article class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                         <div class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Download / ready</div>
@@ -336,11 +336,11 @@
                 <div class="grid gap-4 md:grid-cols-3">
                     <article class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                         <div class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Share generated attempts</div>
-                        <div class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ $this->formatInt((int) ($sharePanel['generated'] ?? 0)) }}</div>
+                        <div class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ $this->formatInt($sharePanel['generated'] ?? null) }}</div>
                     </article>
                     <article class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                         <div class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Share click attempts</div>
-                        <div class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ $this->formatInt((int) ($sharePanel['clicks'] ?? 0)) }}</div>
+                        <div class="mt-3 text-2xl font-semibold tracking-tight text-slate-950">{{ $this->formatInt($sharePanel['clicks'] ?? null) }}</div>
                     </article>
                     <article class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                         <div class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Click / generated</div>

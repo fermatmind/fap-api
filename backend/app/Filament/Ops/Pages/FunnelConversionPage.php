@@ -292,8 +292,12 @@ class FunnelConversionPage extends Page
         ];
     }
 
-    public function formatInt(int $value): string
+    public function formatInt(?int $value): string
     {
+        if ($value === null) {
+            return (string) __('ops.pages.funnel_conversion.provider_freshness.unknown_value');
+        }
+
         return number_format($value);
     }
 
@@ -319,14 +323,14 @@ class FunnelConversionPage extends Page
         $this->conversionRows = [];
         $this->localeComparison = [];
         $this->pdfPanel = [
-            'downloads' => 0,
-            'readiness_gap' => 0,
+            'downloads' => null,
+            'readiness_gap' => null,
             'download_rate' => null,
             'trend' => [],
         ];
         $this->sharePanel = [
-            'generated' => 0,
-            'clicks' => 0,
+            'generated' => null,
+            'clicks' => null,
             'click_rate' => null,
             'trend' => [],
         ];

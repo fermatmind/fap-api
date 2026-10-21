@@ -278,6 +278,86 @@ final class FunnelConversionPageTest extends TestCase
         );
     }
 
+    #[\PHPUnit\Framework\Attributes\DataProvider('trailingPanelStates')]
+    public function test_trailing_counts_distinguish_missing_rows_from_real_zeroes(
+        string $locale,
+        bool $hasRows,
+        int $downloads,
+        int $gap,
+        int $generated,
+        int $clicks,
+    ): void {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_MENU_COMMERCE,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Trailing Metrics Org');
+
+        if ($hasRows) {
+            DB::table('analytics_funnel_daily')->insert([
+                'day' => now()->toDateString(),
+                'org_id' => 0,
+                'scale_code' => 'MBTI',
+                'locale' => 'en',
+                'started_attempts' => 10,
+                'submitted_attempts' => 8,
+                'first_view_attempts' => 7,
+                'order_created_attempts' => 0,
+                'paid_attempts' => 0,
+                'paid_revenue_cents' => 0,
+                'unlocked_attempts' => $downloads + $gap,
+                'report_ready_attempts' => $downloads + $gap,
+                'pdf_download_attempts' => $downloads,
+                'share_generated_attempts' => $generated,
+                'share_click_attempts' => $clicks,
+                'last_refreshed_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        $response = $this->withSession([
+            ...$this->opsSession($admin, $selectedOrg),
+            'ops_locale' => $locale,
+            'ops_locale_explicit' => true,
+        ])->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/funnel-conversion?scope=global_org0')
+            ->assertOk();
+
+        $unknown = $locale === 'en' ? 'Unknown' : '未知';
+        foreach ([
+            'PDF download attempts' => $downloads,
+            'PDF readiness gap' => $gap,
+            'Share generated attempts' => $generated,
+            'Share click attempts' => $clicks,
+        ] as $label => $value) {
+            $matched = preg_match(
+                '~<article[^>]*>\s*<div[^>]*>'.preg_quote($label, '~').'</div>\s*<div[^>]*>([^<]*)</div>~u',
+                $response->getContent(),
+                $matches,
+            );
+            $this->assertSame(1, $matched, $label);
+            $this->assertSame($hasRows ? (string) $value : $unknown, trim($matches[1]), $label);
+        }
+
+        if (! $hasRows) {
+            $response->assertSee('No analytics_funnel_daily rows match the current scope');
+        }
+        $this->assertSame((int) $selectedOrg->id, (int) session('ops_org_id'));
+    }
+
+    public static function trailingPanelStates(): array
+    {
+        return [
+            'English missing rows' => ['en', false, 0, 0, 0, 0],
+            'Chinese missing rows' => ['zh_CN', false, 0, 0, 0, 0],
+            'English real zeroes' => ['en', true, 0, 0, 0, 0],
+            'Chinese real zeroes' => ['zh_CN', true, 0, 0, 0, 0],
+            'English real counts' => ['en', true, 3, 2, 4, 1],
+            'Chinese real counts' => ['zh_CN', true, 3, 2, 4, 1],
+        ];
+    }
+
     /** @param array<string,int> $metrics @return array<string,mixed> */
     private function degradedProvider(string $provider, array $metrics): array
     {
