@@ -87,6 +87,33 @@ test('the selected ten-page CMS package fits with full Career and recovery allow
   assert.match(late.stderr,/Production budget insufficient/);
 });
 
+test('the pending bilingual CMS and Career release retains other-window content and fits its actual budget', () => {
+  const production = 'b03c2bdad63404e3ddf45e05ea95f7d649567c46';
+  const paused = '7fa8c6e292e1f2c15ea8740c69accb74407b8240';
+  const pending = execFileSync('git',['diff','--name-only',production,paused],{encoding:'utf8'}).trim().split('\n');
+  const correction = ['.github/trunk/article-publication-closeout.test.mjs'];
+  const release = classifyRelease({pushBase:paused,head:'d'.repeat(40),baseline:{sha:production,runId:39554707386},
+    isAncestor:()=>true,diffPaths:base=>base===paused?correction:pending});
+  Object.assign(release.operations,selectOperations(release.paths));
+  for (const operation of ['public_content_53_publish','career_current_authority_release','personality_current_authority_release']) {
+    assert.equal(release.operations[operation],true,operation);
+  }
+  for (const path of ['backend/content_assets/career/current/careers/actuaries/en.json',
+    'backend/content_assets/career/current/careers/actuaries/zh-CN.json',
+    'backend/content_assets/personality_public/current/pages/mbti/profile/isfp/en.json',
+    'backend/content_assets/personality_public/current/pages/mbti/profile/isfp/zh-CN.json']) {
+    assert.ok(release.paths.includes(path),path);
+  }
+  assert.equal(release.scope.validation_base_sha,production);
+  const count = readCandidateRows(resolve('backend')).candidates.length;
+  assert.equal(count,10);
+  const required = requiredSeconds(60,release.operations,count);
+  assert.equal(required,13360);
+  assert.ok(14400-300 >= required);
+  assert.ok(requiredSeconds(60,{...release.operations,iq_public_articles_publish:true},count)>14400,
+    'a genuinely larger mixed publication must not borrow this package budget');
+});
+
 test('article cache closeout is selected only for its existing content and readers', () => {
   assert.equal(classifyPaths(['backend/app/Services/Cms/MbtiReportArticleRelease.php']).operations.mbti_report_articles_closeout,true);
   assert.equal(classifyPaths(['backend/content_assets/mbti_report_articles/20261019/en.md']).operations.mbti_report_articles_closeout,true);
