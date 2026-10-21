@@ -813,6 +813,28 @@ PHP;
         return hash('sha256', $chain);
     }
 
+    public function test_alignment_can_be_counted_after_composer_autoload_before_laravel_bootstrap(): void
+    {
+        $script = <<<'PHP'
+require 'vendor/autoload.php';
+if (! function_exists('config') || app()->bound('config')) {
+    throw new RuntimeException('Expected Composer helpers without bootstrapped config.');
+}
+$package = (new App\Services\ContentPromotion\PublicContent53Package)->read(getcwd(), $argv[1]);
+echo json_encode(['count' => count($package['candidates']), 'snapshot' => $package['candidates'][6]['snapshot']], JSON_THROW_ON_ERROR);
+PHP;
+        $process = new Process([PHP_BINARY, '-r', $script, $this->alignmentDigest()], base_path(), ['PUBLIC_CONTENT_53_ENVIRONMENT' => 'staging']);
+        $process->mustRun();
+        $result = json_decode($process->getOutput(), true, flags: JSON_THROW_ON_ERROR);
+        self::assertSame(10, $result['count']);
+        config(['content_promotion.public_content_53_environment' => 'production']);
+        $rows = app(PublicContent53Package::class)->read(base_path(), $this->alignmentDigest())['candidates'];
+        self::assertSame($rows[6]['snapshot'], $result['snapshot']);
+        config(['content_promotion.public_content_53_environment' => 'staging']);
+        $staging = app(PublicContent53Package::class)->read(base_path(), $this->alignmentDigest())['candidates'];
+        self::assertSame($rows[6]['staging_snapshot'], $staging[6]['snapshot']);
+    }
+
     private function alignmentContext(string $owner = 'a'): PromotionContext
     {
         return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->alignmentDigest(), 'W3', 'PUBLIC-CONTENT-53',

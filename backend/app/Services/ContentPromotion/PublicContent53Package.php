@@ -341,7 +341,9 @@ final class PublicContent53Package
             }
         }
 
-        if (function_exists('config') && self::environment() === 'staging') {
+        // The deploy driver counts the package after Composer autoload but before
+        // Laravel bootstraps. Helpers exist then, while the config binding does not.
+        if (function_exists('app') && app()->bound('config') && self::environment() === 'staging') {
             foreach ($rows as &$row) {
                 $row['snapshot'] = $row['staging_snapshot'] ?? $row['snapshot'];
             }
