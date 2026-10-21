@@ -347,19 +347,21 @@ $task=function(){${task}};$task();echo 'focused';`],{encoding:'utf8'});
 
 test('ordinary Career reader smoke executes and propagates transport failures', () => {
   const task=deployer.split("task('healthcheck:career-content-only', function () {")[1].split('\n});')[0];
-  for(const fail of [false,true]){
+  for(const environment of ['staging','production'])for(const failAt of [0,1,2]){
     const run=spawnSync('php',['-r',`namespace Deployer;
 function deployUsesCareerContentPackage(){return false;}
 function deployOperation($name){return $name==='career_cache';}
+function currentHost(){return new class {function getAlias(){return '${environment}';}};}
 function get($key,$default=null){return $key==='healthcheck_host'?'example.test':$default;}
 function deploySafeHost($value,$label){return $value;}
 function deployCurlResolveArg(...$args){return '';}
 function deployHttpsUrlArg($host,$path){return $path;}
 function deployShellArg($value){return $value;}
-function run($command){if(${fail?'true':'false'})throw new \\RuntimeException('READER_SMOKE_FAILED');echo "checked\\n";}
-$task=function(){${task}};$task();`],{encoding:'utf8'});
-    if(fail){assert.notEqual(run.status,0);assert.match(run.stderr,/READER_SMOKE_FAILED/);}
-    else {assert.equal(run.status,0,run.stderr);assert.equal(run.stdout.trim().split('\n').length,2);}
+function run($command){static $calls=0;if(++$calls===${failAt})throw new \\RuntimeException('READER_SMOKE_FAILED');echo $command."\\n";}
+$task=function(){${task}};$task();`],{encoding:'utf8',env:{...process.env,PUBLIC_WEB_BASE_URL_STG:''}});
+    if(failAt){assert.notEqual(run.status,0);assert.match(run.stderr,/READER_SMOKE_FAILED/);}
+    else {assert.equal(run.status,0,run.stderr);assert.equal(run.stdout.trim().split('\n').length,2);
+      assert.ok(run.stdout.includes(`https://${environment==='staging'?'staging.':''}fermatmind.com/zh/career/jobs/accountants-and-auditors`));}
   }
   assert.doesNotMatch(deployer,/CAREER_PARITY_COMPACT_PAGE_CACHE=1/);
 });

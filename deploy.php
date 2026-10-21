@@ -4782,7 +4782,12 @@ task('healthcheck:career-content-only', function () {
     $jq = deployShellArg('.identity.canonical_slug == "accountants-and-auditors" and .career_page.locale == "zh-CN" and .career_page.contract_version == "career.detail.page.v1"');
     run("curl -fsS --max-time 15 {$resolveArg}{$url} | jq -e {$jq} >/dev/null");
 
-    $publicWebBaseUrl = rtrim(trim((string) get('public_web_base_url', 'https://fermatmind.com')), '/');
+    // This reader smoke must validate the same environment as its API check.
+    // The shared public_web_base_url also serves the legacy report-delivery probe.
+    $publicWebBaseUrl = currentHost()->getAlias() === 'staging'
+        ? (getenv('PUBLIC_WEB_BASE_URL_STG') ?: 'https://staging.fermatmind.com')
+        : (string) get('public_web_base_url', 'https://fermatmind.com');
+    $publicWebBaseUrl = rtrim(trim($publicWebBaseUrl), '/');
     if (preg_match('#\Ahttps://[A-Za-z0-9.-]+(?::[0-9]+)?\z#D', $publicWebBaseUrl) !== 1) {
         throw new \RuntimeException('public_web_base_url must be an HTTPS origin');
     }
