@@ -315,6 +315,40 @@ test('prestate renderer failure propagates without a raw HTML fallback',async()=
  assert.equal(f.requests.length,1);
 });
 
+test('one failed read-only browser can reopen the same prestate without a raw HTML fallback',async()=>{
+ const f=streamedArticlePrestateFixture(),renders=[];
+ const result=await readOnlinePrestate('staging',root,f.fetcher,async(url,options)=>{
+  renders.push({url,surface:options.surface});
+  if(renders.length===1) throw new Error('IQ_ARTICLE_ONLINE_RENDER_FAILED');
+  return f.before;
+ },copyDigest());
+ assert.deepEqual(renders[0],renders[1]);
+ assert.equal(renders.length,readCandidateRows(root,copyDigest()).candidates.filter(row=>row.kind==='article').length+1);
+ assert.equal(f.requests.filter(url=>!url.includes('/api/v0.5/')&&url.includes('/articles/')).length,0);
+ assert.doesNotThrow(()=>assertDom(f.row,f.after,result[f.row.page_id],'staging'));
+ assert.throws(()=>assertDom(f.row,f.after.replace('streamed continuation','missing continuation'),result[f.row.page_id],'staging'),/BODY_DRIFT/);
+});
+
+test('persistent prestate browser failure stops after two reads with a safe page identity',async()=>{
+ const f=streamedArticlePrestateFixture();let attempts=0;
+ const first=readCandidateRows(root,copyDigest()).candidates[0];
+ await assert.rejects(readOnlinePrestate('staging',root,f.fetcher,async()=>{
+  attempts++;throw new Error('IQ_ARTICLE_ONLINE_RENDER_FAILED');
+ },copyDigest()),{message:'PUBLIC_CONTENT_53_PRESTATE_BROWSER_FAILED_'+first.page_id});
+ assert.equal(attempts,2);
+ assert.equal(f.requests.length,1);
+});
+
+test('unparseable prestate DOM fails immediately with its page identity',async()=>{
+ const f=streamedArticlePrestateFixture();let attempts=0;
+ const first=readCandidateRows(root,copyDigest()).candidates[0];
+ await assert.rejects(readOnlinePrestate('staging',root,f.fetcher,async()=>{
+  attempts++;return '';
+ },copyDigest()),{message:'PUBLIC_CONTENT_53_PRESTATE_DOM_FAILED_'+first.page_id});
+ assert.equal(attempts,1);
+ assert.equal(f.requests.length,1);
+});
+
 test('home copy is consumed by ItemList while the visible IQ card retains the actual reader contract',()=>{
  const row=readCandidateRows(root,copyDigest()).candidates.find(row=>row.page_id==='PAGE-HOME');
  const items=row.snapshot.payload_json.quickStart.items;

@@ -85,6 +85,17 @@ export function projection(row,data) {
   return result;
 }
 const apiPath = row => `/api/v0.5/${{article:'articles',page:'content-pages',surface:'landing-surfaces',profile:'topics',guide:'career-guides'}[row.kind]}/${row.identity.slug}?locale=${row.identity.locale}&org_id=0`;
+async function renderPrestate(row,url,renderer) {
+  // This runs before publication transport. A failed isolated browser may be
+  // read once more; no API, native write, DOM assertion or recovery is retried.
+  for (let attempt=0;attempt<2;attempt++) {
+    try { return await renderer(url,{surface:'article'}); }
+    catch (error) {
+      if (error?.message !== 'IQ_ARTICLE_ONLINE_RENDER_FAILED') throw error;
+      if (attempt === 1) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_BROWSER_FAILED_${row.page_id}`);
+    }
+  }
+}
 export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,renderer=renderPage,packageSha256) {
   const [api,web] = hosts(environment); const result={};
   const rows = readCandidateRows(backendRoot,packageSha256).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
@@ -98,8 +109,11 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
     // after publication. Raw Next.js streams can contain only its initial chunk;
     // capture the same hydrated, visibility-aware DOM used by post-publication QA.
     const html=row.kind === 'article' && row.snapshot.seo_text
-      ? await renderer(web+pathFor(row),{surface:'article'}) : await read(web+pathFor(row),fetcher);
-    result[row.page_id]={id:native.id,flags:Object.fromEntries(['is_indexable','sitemap_eligible','llms_eligible','translation_group_id','source_locale'].filter(k=>Object.hasOwn(native,k)).map(k=>[k,native[k]])),dom:domOf(html)};
+      ? await renderPrestate(row,web+pathFor(row),renderer) : await read(web+pathFor(row),fetcher);
+    let dom;
+    try { dom=domOf(html); }
+    catch { throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DOM_FAILED_${row.page_id}`); }
+    result[row.page_id]={id:native.id,flags:Object.fromEntries(['is_indexable','sitemap_eligible','llms_eligible','translation_group_id','source_locale'].filter(k=>Object.hasOwn(native,k)).map(k=>[k,native[k]])),dom};
   }
   if (environment === 'staging' && result['PAGE-60']?.missing) {
     if (!result['PAGE-59']?.dom) throw new Error('PUBLIC_CONTENT_53_STAGING_REFERENCE_REQUIRED');

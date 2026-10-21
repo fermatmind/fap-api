@@ -3,7 +3,8 @@
 // Other publishers remain outside the forward deadline: their allowances
 // include business execution/recovery and bounded reader settlement.
 // Count the verified selected package, not the historical lane name. Each
-// public page reserves 540s for prestate, API/DOM parsing and the existing
+// public page reserves 600s for prestate (up to two read-only browsers),
+// API/DOM parsing and the existing
 // 360s cache-settlement loop (including its final bounded browser attempt).
 // Both 800s publication/recovery SSH limits remain reserved separately.
 import {readCandidateRows} from './public-content-53-package.mjs';
@@ -25,7 +26,7 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
   if (operations.career_current_authority_release && deployMinutes !== 60) throw new Error('CAREER_FORWARD_BUDGET_INVALID');
   if (operations.public_content_53_publish) {
     if (!Number.isSafeInteger(publicContentRows) || publicContentRows < 1) throw new Error('PUBLIC_CONTENT_ROW_COUNT_INVALID');
-    consumers.public_content_53_publish = 1600 + publicContentRows * 540;
+    consumers.public_content_53_publish = 1600 + publicContentRows * 600;
   }
   return deployMinutes*60 + 1800 + 900 + 60 + Object.entries(consumers)
     .reduce((sum,[name,seconds])=>sum+(operations[name] === true ? seconds : 0),0);

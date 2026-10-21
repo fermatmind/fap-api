@@ -68,7 +68,7 @@ test('the selected ten-page CMS package fits with full Career and recovery allow
   assert.equal(operations.public_content_53_publish,true);
   assert.equal(operations.career_current_authority_release,true);
   const required = requiredSeconds(60,operations,rows.length);
-  assert.equal(required,6360+1600+10*540);
+  assert.equal(required,6360+1600+10*600);
   assert.ok(9000 < 6360+26000,'the former lane-wide reserve rejected before Deployer started');
   assert.ok(jobSeconds-300 >= required,'retain setup, full forward work, LKG and closeout');
   assert.ok(requiredSeconds(60,operations,53) > jobSeconds,'an oversized package must still be refused');
@@ -108,7 +108,7 @@ test('the pending bilingual CMS and Career release retains other-window content 
   const count = readCandidateRows(resolve('backend')).candidates.length;
   assert.equal(count,10);
   const required = requiredSeconds(60,release.operations,count);
-  assert.equal(required,13360);
+  assert.equal(required,13960);
   assert.ok(14400-300 >= required);
   assert.ok(requiredSeconds(60,{...release.operations,iq_public_articles_publish:true},count)>14400,
     'a genuinely larger mixed publication must not borrow this package budget');
