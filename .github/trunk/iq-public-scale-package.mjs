@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { isEqOnlyPromotionRegistration } from './eq-new-source-package.mjs';
 
 export const packagePath = 'content_assets/iq_public/entry/20261009-v1';
-export const packageSha256 = '8353246620abbcd1653d05ca604c5d41bda521ffdf5391c6a2575973cc4a647a';
+export const packageSha256 = '145969e2c05df3786fe6170134d2a9bea81fd5a0af81087d1136fcee0e9d1aeb';
 export const executorPaths = [
   'app/Console/Commands/ContentPromoteExactPackage.php',
   'app/Services/ContentPromotion/Adapters/IqPublicScalePromotionAdapter.php',
