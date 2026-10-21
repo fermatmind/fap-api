@@ -22,6 +22,19 @@ use Illuminate\Support\Str;
 
 final class AccountController extends Controller
 {
+    public function emailLogin(Request $request): JsonResponse
+    {
+        $data = $request->validate(['email' => 'required|email|max:254', 'locale' => 'nullable|in:zh,en']);
+        abort_if($this->currentPublicUserId($request) !== null, 409, 'Sign out before signing in to another account.');
+        $email = mb_strtolower(trim($data['email']));
+        $this->sendVerification($email, [
+            'purpose' => 'email_login', 'email' => $email,
+            'email_hash' => app(PiiCipher::class)->emailHash($email), 'locale' => $data['locale'] ?? 'zh',
+        ], $data['locale'] ?? 'zh');
+
+        return $this->reply(['verification_email_sent' => true]);
+    }
+
     public function challenge(): JsonResponse
     {
         $clientId = trim((string) config('services.google_login.client_id'));
@@ -121,6 +134,33 @@ final class AccountController extends Controller
         return Cache::lock($key.':lock', 10)->block(2, function () use ($key, $request, $linker): JsonResponse {
             $payload = Cache::get($key);
             abort_unless(is_array($payload), 422, 'Verification link expired or already used.');
+            if ($payload['purpose'] === 'email_login') {
+                $currentId = $this->currentPublicUserId($request);
+                $id = Cache::lock('account:email-login:'.$payload['email_hash'], 15)->block(2, function () use ($payload, $currentId, $linker): string {
+                    return DB::transaction(function () use ($payload, $currentId, $linker): string {
+                        $users = DB::table('users')->where(function ($query) use ($payload): void {
+                            $query->whereRaw('LOWER(email) = ?', [$payload['email']])->orWhere('email_hash', $payload['email_hash']);
+                        })->lockForUpdate()->get();
+                        abort_if($users->count() > 1, 409, 'Email belongs to more than one account. Contact support.');
+                        $user = $users->first();
+                        abort_if($currentId !== null && (! $user || $currentId !== (string) $user->id), 409, 'Sign out before switching accounts.');
+                        $id = $user ? (string) $user->id : (string) DB::table('users')->insertGetId([
+                            'name' => 'FermatMind', 'email' => $payload['email'], 'email_verified_at' => now(),
+                            'email_hash' => $payload['email_hash'], 'email_enc' => app(PiiCipher::class)->encrypt($payload['email']),
+                            'password' => Hash::make(Str::random(64)), 'created_at' => now(), 'updated_at' => now(),
+                        ]);
+                        $bound = app(IdentityService::class)->bind($id, 'email', $payload['email_hash'], ['preferred_locale' => $payload['locale']]);
+                        abort_unless($bound['ok'], (int) ($bound['status'] ?? 409), 'Email identity could not be linked.');
+                        $linker->linkEmail($id, $payload['email_hash']);
+                        DB::table('users')->where('id', $id)->update(['email_verified_at' => now(), 'updated_at' => now()]);
+
+                        return $id;
+                    });
+                });
+                Cache::forget($key);
+
+                return $this->session($id, 'email');
+            }
             if ($payload['purpose'] === 'google_link') {
                 DB::transaction(fn () => $this->bindGoogle($payload['user_id'], $payload['claims']));
                 Cache::forget($key);
@@ -150,8 +190,8 @@ final class AccountController extends Controller
         $data = $request->validate(['name' => 'required|string|max:100', 'locale' => 'required|in:zh,en']);
         DB::transaction(function () use ($userId, $data): void {
             DB::table('users')->where('id', $userId)->update(['name' => trim($data['name']), 'updated_at' => now()]);
-            $identity = DB::table('identities')->where('user_id', $userId)->where('provider', 'google')->lockForUpdate()->first();
-            if ($identity) {
+            $identities = DB::table('identities')->where('user_id', $userId)->whereIn('provider', ['google', 'email'])->lockForUpdate()->get();
+            foreach ($identities as $identity) {
                 $meta = json_decode($identity->meta_json ?? '{}', true) ?: [];
                 $meta['preferred_locale'] = $data['locale'];
                 DB::table('identities')->where('id', $identity->id)->update(['meta_json' => json_encode($meta), 'updated_at' => now()]);
@@ -201,21 +241,23 @@ final class AccountController extends Controller
         $user = DB::table('users')->where('id', $id)->first();
         abort_unless($user, 401);
         $identity = DB::table('identities')->where('user_id', $id)->where('provider', 'google')->first();
-        $meta = $identity ? (json_decode($identity->meta_json ?? '{}', true) ?: []) : [];
+        $preferences = $identity ?? DB::table('identities')->where('user_id', $id)->where('provider', 'email')->first();
+        $meta = $preferences ? (json_decode($preferences->meta_json ?? '{}', true) ?: []) : [];
 
         return ['id' => $id, 'name' => $user->name, 'email' => $user->email, 'google_connected' => $identity !== null, 'locale' => $meta['preferred_locale'] ?? 'zh'];
     }
 
-    private function session(string $id): JsonResponse
+    private function session(string $id, string $provider = 'google'): JsonResponse
     {
         $account = $this->account($id);
-        $session = app(FmTokenService::class)->issueForUser($id, ['provider' => 'google', 'org_id' => 0, 'role' => 'public']);
+        $session = app(FmTokenService::class)->issueForUser($id, ['provider' => $provider, 'org_id' => 0, 'role' => 'public']);
 
         return $this->reply(['status' => 'authenticated', 'fm_token' => $session['token'], 'expires_at' => $session['expires_at'], 'account' => $account]);
     }
 
     private function sendVerification(string $email, array $payload, string $locale): void
     {
+        abort_if(! app()->environment(['local', 'testing']) && in_array(config('mail.default'), ['log', 'array'], true), 503, 'Email sign-in is temporarily unavailable. Please try again later.');
         $limitKey = 'account:email-send:'.hash('sha256', ($payload['user_id'] ?? '').'|'.$email);
         $bypass = app()->environment('testing') && config('fap.rate_limits.bypass_in_test_env');
         abort_if(! $bypass && RateLimiter::tooManyAttempts($limitKey, 3), 429, 'Please wait before requesting another verification email.');
@@ -226,16 +268,29 @@ final class AccountController extends Controller
         $key = 'account:email:'.hash('sha256', $token);
         Cache::put($key, $payload, now()->addMinutes(15));
         $url = rtrim((string) config('services.google_login.frontend_url'), '/').'/'.$locale.'/account#verify='.$token;
-        $subject = $locale === 'zh' ? '确认费马账号关联' : 'Confirm your FermatMind account link';
-        $body = $locale === 'zh'
+        $login = $payload['purpose'] === 'email_login';
+        $subject = $login
+            ? ($locale === 'zh' ? '登录你的费马账号' : 'Sign in to FermatMind')
+            : ($locale === 'zh' ? '确认费马账号关联' : 'Confirm your FermatMind account link');
+        $body = $login ? ($locale === 'zh'
+            ? "打开链接并确认即可登录费马测试。首次使用的邮箱将在验证后创建账号。链接15分钟内有效，仅可使用一次。若非本人操作，请忽略。\n\n".$url
+            : "Open this link and confirm to sign in to FermatMind. A verified new email creates an account. This link expires in 15 minutes and can be used once. Ignore it if you did not request it.\n\n".$url) : ($locale === 'zh'
             ? "请确认你发起了费马账号关联。打开链接后需再次确认，链接15分钟内有效。若非本人操作，请忽略。\n\n".$url
-            : "Confirm the FermatMind account link you requested. Open this link and confirm to continue. It expires in 15 minutes. Ignore this message if you did not request it.\n\n".$url;
+            : "Confirm the FermatMind account link you requested. Open this link and confirm to continue. It expires in 15 minutes. Ignore this message if you did not request it.\n\n".$url);
         try {
             Mail::raw($body, fn ($mail) => $mail->to($email)->subject($subject));
         } catch (\Throwable) {
             Cache::forget($key);
             abort(503, 'Verification email could not be sent. Try again later.');
         }
+    }
+
+    private function currentPublicUserId(Request $request): ?string
+    {
+        $actor = app(FmTokenService::class)->validateToken($request->bearerToken() ?? '');
+        abort_if(($actor['ok'] ?? false) && (int) ($actor['org_id'] ?? -1) !== 0, 403, 'Use a public site session.');
+
+        return ($actor['ok'] ?? false) && ! empty($actor['user_id']) ? (string) $actor['user_id'] : null;
     }
 
     private function validatedBearerUserId(Request $request): string

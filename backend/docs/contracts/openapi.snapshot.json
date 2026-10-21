@@ -943,6 +943,26 @@
                 ]
             }
         },
+        "/api/v0.3/auth/account/email": {
+            "post": {
+                "operationId": "post_api_v0_3_auth_account_email",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AccountController@emailLogin",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
         "/api/v0.3/auth/google": {
             "post": {
                 "operationId": "post_api_v0_3_auth_google",

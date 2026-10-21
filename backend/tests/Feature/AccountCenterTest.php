@@ -33,6 +33,88 @@ final class AccountCenterTest extends TestCase
         Mail::mailer('array')->getSymfonyTransport()->flush();
     }
 
+    public function test_email_signup_requires_one_time_proof_and_repeat_signin_keeps_the_account(): void
+    {
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'New@Example.Test', 'locale' => 'en'])->assertOk()->assertJsonPath('verification_email_sent', true);
+        $this->assertDatabaseCount('users', 0);
+        $proof = $this->emailProof();
+        $session = $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $proof])->assertOk()->assertJsonPath('status', 'authenticated')->assertJsonPath('account.google_connected', false)->assertJsonPath('account.email', 'new@example.test')->assertJsonPath('account.locale', 'en');
+        $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $proof])->assertUnprocessable();
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'new@example.test'])->assertOk();
+        $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $this->emailProof()])->assertOk()->assertJsonPath('account.id', $session->json('account.id'));
+        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('identities', 1);
+        $this->withToken($session->json('fm_token'))->patchJson('/api/v0.3/me/account', ['name' => 'Email owner', 'locale' => 'zh'])->assertOk()->assertJsonPath('account.locale', 'zh');
+    }
+
+    public function test_email_signin_reuses_existing_user_and_claims_only_verified_assets(): void
+    {
+        $user = User::factory()->create(['email' => 'owner@example.test']);
+        [$attempt] = $this->attempt();
+        $grant = $this->grant($attempt);
+        $this->binding($attempt, 'owner@example.test');
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'owner@example.test'])->assertOk();
+        $session = $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $this->emailProof()])->assertOk()->assertJsonPath('account.id', (string) $user->id);
+        $this->assertDatabaseHas('attempts', ['id' => $attempt->id, 'user_id' => (string) $user->id]);
+        $this->assertDatabaseHas('benefit_grants', ['id' => $grant, 'user_id' => (string) $user->id, 'status' => 'active']);
+        $this->assertDatabaseCount('users', 1);
+        $this->withToken($session->json('fm_token'))->getJson('/api/v0.3/me/account')->assertOk();
+    }
+
+    public function test_forged_expired_and_cross_account_email_login_proofs_fail_closed(): void
+    {
+        $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => str_repeat('z', 64)])->assertUnprocessable();
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'new@example.test'])->assertOk();
+        $proof = $this->emailProof();
+        $other = User::factory()->create();
+        $this->withToken($this->token($other))->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $proof])->assertConflict();
+        $this->assertDatabaseCount('users', 1);
+        $this->travel(16)->minutes();
+        $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $proof])->assertUnprocessable();
+        $tenant = app(FmTokenService::class)->issueForUser((string) $other->id, ['org_id' => 9])['token'];
+        $this->withToken($tenant)->postJson('/api/v0.3/auth/account/email', ['email' => 'other@example.test'])->assertForbidden();
+        $this->withToken('')->postJson('/api/v0.3/auth/account/email', ['email' => 'other@example.test'])->assertOk();
+        $this->withToken($tenant)->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $this->emailProof()])->assertForbidden();
+    }
+
+    public function test_email_signup_rolls_back_all_ownership_changes_on_conflict(): void
+    {
+        $other = User::factory()->create();
+        [$attempt] = $this->attempt();
+        $this->binding($attempt, 'new@example.test');
+        DB::table('attempts')->where('id', $attempt->id)->update(['user_id' => (string) $other->id]);
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'new@example.test'])->assertOk();
+        $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $this->emailProof()])->assertConflict();
+        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('identities', 0);
+        $this->assertDatabaseHas('attempt_email_bindings', ['attempt_id' => $attempt->id, 'bound_user_id' => null]);
+    }
+
+    public function test_email_login_never_reports_log_transport_as_a_sent_email_in_staging(): void
+    {
+        $this->app->instance('env', 'staging');
+        config(['mail.default' => 'log']);
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'new@example.test'])->assertStatus(503);
+        $this->assertDatabaseCount('users', 0);
+    }
+
+    public function test_email_signin_is_rate_limited_without_disclosing_account_existence(): void
+    {
+        config(['fap.rate_limits.bypass_in_test_env' => false]);
+        foreach (range(1, 3) as $ignored) {
+            $this->postJson('/api/v0.3/auth/account/email', ['email' => 'limited@example.test'])->assertOk()->assertJsonPath('verification_email_sent', true);
+        }
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'limited@example.test'])->assertStatus(429);
+        $this->assertDatabaseCount('users', 0);
+    }
+
+    public function test_failed_email_delivery_cannot_create_a_user_or_report_success(): void
+    {
+        Mail::shouldReceive('raw')->once()->andThrow(new \RuntimeException('test delivery failure'));
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'new@example.test'])->assertStatus(503);
+        $this->assertDatabaseCount('users', 0);
+    }
+
     public function test_google_first_and_repeat_login_use_same_identity_and_one_time_challenge(): void
     {
         $this->googleVerifier();

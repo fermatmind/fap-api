@@ -195,6 +195,7 @@ Route::prefix('v0.3')->middleware([
         ->name('api.v0_3.webhooks.payment');
 
     Route::middleware('throttle:api_auth')->group(function () {
+        Route::post('/auth/account/email', [\App\Http\Controllers\API\V0_3\AccountController::class, 'emailLogin']);
         Route::post('/auth/google/challenge', [\App\Http\Controllers\API\V0_3\AccountController::class, 'challenge']);
         Route::post('/auth/google', [\App\Http\Controllers\API\V0_3\AccountController::class, 'google']);
         Route::post('/auth/google/link-email', [\App\Http\Controllers\API\V0_3\AccountController::class, 'sendGoogleLink']);

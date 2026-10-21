@@ -28,6 +28,7 @@ final class SecurityGuardrailsTest extends TestCase
         '/api/v0.3/auth/google',
         '/api/v0.3/auth/google/link-email',
         '/api/v0.3/auth/account/confirm-email',
+        '/api/v0.3/auth/account/email',
         '/api/v0.3/auth/wx_phone',
         '/api/v0.3/auth/phone/send_code',
         '/api/v0.3/auth/phone/verify',
@@ -627,6 +628,7 @@ final class SecurityGuardrailsTest extends TestCase
             '/api/v0.3/auth/google' => 'google',
             '/api/v0.3/auth/google/link-email' => 'sendGoogleLink',
             '/api/v0.3/auth/account/confirm-email' => 'confirmEmail',
+            '/api/v0.3/auth/account/email' => 'emailLogin',
         ] as $path => $action) {
             $route = app('router')->getRoutes()->match(request()->create($path, 'POST'));
             $this->assertSame(AccountController::class.'@'.$action, $route->getActionName());
