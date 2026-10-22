@@ -12,6 +12,51 @@ final class CareerAttributionEventIngestTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_planning_hub_clicks_persist_each_bilingual_start_and_next_action(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+        $actions = [
+            'select_start_no_direction', 'select_start_candidates', 'select_start_target',
+            'choose_exploration_tool', 'explore_without_test', 'continue_from_results',
+            'open_direction_guide', 'open_planning_worksheet', 'plan_target_validation', 'open_action_worksheet',
+        ];
+        foreach (['en', 'zh'] as $locale) {
+            foreach ($actions as $action) {
+                $path = "/$locale/career/guides";
+                $payload = ['locale' => $locale, 'entry_surface' => 'career_guides', 'source_page_type' => 'landing',
+                    'target_action' => $action, 'landing_path' => $path, 'route_family' => 'landing',
+                    'subject_kind' => 'none', 'query_mode' => 'non_query'];
+                $anon = "planning_{$locale}_{$action}";
+                $this->withToken('ingest_test_token')->postJson('/api/v0.5/career/attribution/events', [
+                    'eventName' => 'career_support_link_click', 'anonymousId' => $anon, 'path' => $path, 'payload' => $payload,
+                ])->assertStatus(202)->assertJsonPath('event_code', 'career_support_link_click');
+                $row = DB::table('events')->where('anon_id', $anon)->first();
+                $this->assertNotNull($row);
+                $meta = json_decode((string) $row->meta_json, true);
+                foreach (['entry_surface', 'source_page_type', 'target_action', 'landing_path', 'route_family', 'subject_kind', 'query_mode'] as $key) {
+                    $this->assertSame($payload[$key], $meta[$key]);
+                }
+                $this->assertArrayNotHasKey('raw_payload', $meta);
+            }
+        }
+    }
+
+    public function test_planning_hub_does_not_broaden_unrelated_or_completion_event_scope(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+        $payload = ['locale' => 'en', 'entry_surface' => 'career_guides', 'source_page_type' => 'landing',
+            'target_action' => 'select_start_candidates', 'landing_path' => '/en/career/guides',
+            'route_family' => 'landing', 'subject_kind' => 'none', 'query_mode' => 'non_query'];
+        foreach ([['entry_surface' => 'career_landing'], ['source_page_type' => 'job_detail'],
+            ['route_family' => 'job_detail'], ['landing_path' => '/en/career'], ['subject_kind' => 'job_slug', 'subject_key' => 'actors'],
+            ['query_mode' => 'query'], ['target_action' => 'planning_completed'], ['target_action' => 'open_support_link'],
+            ['environment' => 'production'], ['consent_state' => 'granted']] as $change) {
+            $this->withToken('ingest_test_token')->postJson('/api/v0.5/career/attribution/events', [
+                'eventName' => 'career_support_link_click', 'path' => '/en/career/guides', 'payload' => array_replace($payload, $change),
+            ])->assertStatus(422);
+        }
+    }
+
     public function test_ingest_endpoint_persists_career_event_with_normalized_dimensions(): void
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');
