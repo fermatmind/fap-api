@@ -9,6 +9,9 @@ export function packageDigest(backendRoot) {
   if (existsSync(resolve(backendRoot, packagePath, 'riasec-code-samples.json'))) {
     return sha('fermatmind.riasec_code_samples.v1\n'+['riasec-code-samples.json','riasec-code-samples-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
   }
+  if (existsSync(resolve(backendRoot, packagePath, 'career-planning.json'))) {
+    return sha('fermatmind.public_content_career_planning.v1\n'+['career-planning.json','career-planning-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
+  }
   if (existsSync(resolve(backendRoot, packagePath, 'riasec-amendment.json'))) {
     return sha('fermatmind.public_content_article_amendment.v1\n'+['riasec-amendment.json','riasec-amendment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
   }

@@ -10,6 +10,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\CareerGuide;
 use App\Models\CareerGuideRevision;
+use App\Models\CareerGuideSeoMeta;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
@@ -80,10 +81,11 @@ final class PublicContent53Writer
         $this->states->assertLockedBaseline($rows, $before);
         usort($rows, static fn (array $a, array $b): int => ($a['identity']['locale'] === 'en') <=> ($b['identity']['locale'] === 'en'));
         $written = [];
+        $created = 0;
         foreach ($rows as $row) {
             $saved = $before[$row['page_id']];
             if (($row['new_article'] ?? false) && (($saved['missing'] ?? false) || ($saved['retained_draft'] ?? false))) {
-                app(RiasecCodeSampleArticles::class)->create($row, $context);
+                $created += app(RiasecCodeSampleArticles::class)->create($row, $context) ? 1 : 0;
                 $written[$row['page_id']] = true;
 
                 continue;
@@ -101,7 +103,7 @@ final class PublicContent53Writer
             $written[$row['page_id']] = true;
         }
 
-        app(RiasecCodeSampleArticles::class)->enableGates($rows);
+        app(RiasecCodeSampleArticles::class)->enableGates($rows, $written);
         foreach ($this->enableReviewedHreflang($rows) as $pageId) {
             $written[$pageId] = true;
         }
@@ -115,13 +117,21 @@ final class PublicContent53Writer
             foreach (['body_md', 'body_html', 'updated_at'] as $field) {
                 $protected['values'][$field] = $saved['values'][$field];
             }
+            $row = collect($rows)->firstWhere('page_id', $id);
+            if (isset($row['snapshot']['seo_text'])) {
+                $protected['values']['excerpt'] = $saved['values']['excerpt'];
+                foreach (array_keys($row['snapshot']['seo_text']) as $field) {
+                    $protected['controls']['seo'][0][$field] = $saved['controls']['seo'][0][$field];
+                }
+                $protected['controls']['seo'][0]['updated_at'] = $saved['controls']['seo'][0]['updated_at'];
+            }
             $protected['revisions'] = $saved['revisions'];
             if ($this->states->hash($protected) !== $this->states->hash($saved)) {
                 throw new DomainException('public_content_53_guide_protected_state_changed');
             }
         }
 
-        return ['written_count' => count($written), 'state' => $after];
+        return ['written_count' => count($written), 'created_count' => $created, 'state' => $after];
     }
 
     /** The package selects only an already-public, verified translation pair. */
@@ -186,6 +196,11 @@ final class PublicContent53Writer
                     $this->restoreValues($table, $record);
                 }
             }
+            if ($saved['table'] === 'career_guides') {
+                foreach ($saved['controls']['seo'] as $record) {
+                    $this->restoreValues('career_guide_seo_meta', $record);
+                }
+            }
             if ($saved['table'] === 'articles') {
                 $article = Article::query()->withoutGlobalScopes()->findOrFail($saved['values']['id']);
                 $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail($saved['published']['id']);
@@ -218,7 +233,12 @@ final class PublicContent53Writer
     private function guide(array $row, array $saved, PromotionContext $context): void
     {
         $guide = CareerGuide::query()->withoutGlobalScopes()->findOrFail($saved['values']['id']);
-        $guide->forceFill(['body_md' => $row['snapshot']['body_md'], 'body_html' => null])->saveQuietly();
+        $guide->forceFill(['body_md' => $row['snapshot']['body_md'], 'body_html' => null,
+            'excerpt' => $row['snapshot']['excerpt']])->saveQuietly();
+        if (isset($row['snapshot']['seo_text'])) {
+            CareerGuideSeoMeta::query()->where('career_guide_id', $guide->id)->firstOrFail()
+                ->forceFill($row['snapshot']['seo_text'])->saveQuietly();
+        }
         $snapshot = CareerGuideWorkspace::snapshotPayload($guide);
         $snapshot['promotion'] = ['source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId,
             'package_sha256' => $context->packageSha256, 'approval_kind' => 'verified_automated_exact_package'];

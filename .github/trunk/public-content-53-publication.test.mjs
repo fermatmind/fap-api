@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { executorPaths, inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
-import { assertDom, domOf, pathFor, read, projection, readOnlinePrestate } from './public-content-53-online-qa.mjs';
+import { assertNewArticleDiscovery, assertDom, domOf, pathFor, read, projection, readOnlinePrestate } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 const riasecDigest=()=>createHash('sha256').update('fermatmind.public_content_article_amendment.v1\n'+['riasec-amendment.json','riasec-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
@@ -538,10 +538,40 @@ test('new sample SEO requires exact reciprocal routes, environment robots, schem
  const slug=row.identity.slug;
  const cn=`https://fermatmind.com/zh/articles/${slug}`,en=`https://fermatmind.com/en/articles/${slug}`;
  const alt=`<link rel="alternate" hreflang="en" href="${en}"><link rel="alternate" hreflang="zh-CN" href="${cn}"><link rel="alternate" hreflang="x-default" href="${en}">`;
- const html=`<html><head><meta charset="utf-8"><title>Code exploration | FermatMind</title><meta name="description" content="Explore tasks."><meta property="og:title" content="Code exploration"><meta property="og:description" content="Explore tasks."><link rel="canonical" href="${cn}"><meta name="robots" content="index,follow">${alt}<script type="application/ld+json">{"@type":"Article"}</script><script type="application/ld+json">{"@type":"BreadcrumbList"}</script></head><body><main><h1>Code exploration</h1><h2>Try a task</h2><p>Keep the result.</p></main></body></html>`;
+ const html=`<html><head><meta charset="utf-8"><title>Code exploration | FermatMind</title><meta name="description" content="Explore tasks."><meta property="og:title" content="Code exploration"><meta property="og:description" content="Explore tasks."><link rel="canonical" href="${cn}"><meta name="robots" content="index,follow">${alt}<script type="application/ld+json">{"@type":"Article","@id":"${cn}#article","url":"${cn}","mainEntityOfPage":"${cn}","headline":"Code exploration"}</script><script type="application/ld+json">{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"${cn}"}]}</script></head><body><main><h1>Code exploration</h1><h2>Try a task</h2><p>Keep the result.</p></main></body></html>`;
  assert.doesNotThrow(()=>assertDom(row,html,{missing:true},'production'));
  assert.doesNotThrow(()=>assertDom(row,html.replace('index,follow','noindex,follow'),{missing:true},'staging'));
- for(const changed of [html.replace(alt,''),html.replace('hreflang="zh-CN"','hreflang="fr"'),html.replace('"@type":"Article"','"@type":"Thing"'),html.replace('index,follow','noindex,follow')])
+ for(const changed of [html.replace(alt,''),html.replace('hreflang="zh-CN"','hreflang="fr"'),html.replace('"@type":"Article"','"@type":"Thing","name":"Article BreadcrumbList"'),html.replace('index,follow','noindex,follow')])
   assert.throws(()=>assertDom(row,changed,{missing:true},'production'),/NEW_ARTICLE_SEO/);
  assert.throws(()=>assertDom(row,html.replace('<p>Keep the result.</p>','<script>Keep the result.</script>'),{missing:true},'production'),/VISIBLE_BODY/);
+});
+
+
+test('career planning selects only the two reviewed English guides and their independent SEO copy',()=>{
+ const digest=createHash('sha256').update('fermatmind.public_content_career_planning.v1\n'+['career-planning.json','career-planning-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
+ const rows=readCandidateRows(root,digest).candidates;
+ assert.deepEqual(rows.map(row=>[row.kind,row.identity.slug,row.identity.locale]),[
+  ['guide','how-to-find-right-career-direction','en'],['guide','career-transition-playbook','en'],
+ ]);
+ assert.notEqual(rows[0].snapshot.body_md,rows[1].snapshot.body_md);
+ assert.notEqual(rows[0].snapshot.seo_text.seo_description,rows[1].snapshot.seo_text.seo_description);
+ for(const row of rows) {
+  const data={ok:true,guide:{...row.identity,...row.snapshot,guide_code:row.identity.slug,is_public:true},seo_meta:row.snapshot.seo_text};
+  assert.deepEqual(projection(row,data),row.snapshot);
+  assert.throws(()=>projection(row,{...data,guide:{...data.guide,guide_code:'another-guide'}}),/IDENTITY/);
+ }
+});
+
+test('sample discovery requires real archive anchors and cannot pass from serialized script paths',()=>{
+ const rows=readCandidateRows(root).candidates;
+ const sitemap='<urlset>'+rows.map(row=>`<url><loc>https://fermatmind.com${pathFor(row)}</loc></url>`).join('')+'</urlset>';
+ const llms=rows.map(row=>'https://fermatmind.com'+pathFor(row)).join('\n');
+ const archive=locale=>'<html><body><main>'+rows.filter(row=>row.identity.locale===locale).map(row=>`<a href="${pathFor(row)}">${row.identity.slug}</a>`).join('')+'</main></body></html>';
+ const documents={sitemap,llms,archiveEn:archive('en'),archiveZh:archive('zh-CN')};
+ assert.doesNotThrow(()=>assertNewArticleDiscovery(rows,documents));
+ for(const key of ['archiveEn','archiveZh']) {
+  const bad='<html><body><main><script>'+rows.map(row=>JSON.stringify(pathFor(row))).join('')+'</script></main></body></html>';
+  assert.throws(()=>assertNewArticleDiscovery(rows,{...documents,[key]:bad}),/NEW_ARTICLE_DISCOVERY/);
+ }
+ assert.throws(()=>assertNewArticleDiscovery(rows,{...documents,sitemap:sitemap.replace(pathFor(rows[0]),'/en/articles/unrelated')}),/NEW_ARTICLE_DISCOVERY/);
 });

@@ -71,7 +71,7 @@ export function projection(row,data) {
   const value = data[row.kind];
   if (data.ok !== true || !value || value.locale !== row.identity.locale || (['article','profile','guide'].includes(row.kind) && value.org_id !== 0)
     || (value.slug ?? value.surface_key) !== row.identity.slug || (row.kind !== 'guide' && value.status !== 'published') || value.is_public !== true) throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
-  if (row.kind === 'guide' && value.guide_code !== 'from-mbti-to-job-fit') throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
+  if (row.kind === 'guide' && value.guide_code !== row.source_identity.guide_code) throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
   const result = Object.fromEntries(Object.keys(row.snapshot).filter(key=>Object.hasOwn(value,key)).map(key=>[key,value[key]]));
   if (row.kind === 'surface' && row.snapshot.block_copy) {
     result.block_copy=Object.fromEntries(Object.keys(row.snapshot.block_copy).map(key=>{
@@ -80,6 +80,7 @@ export function projection(row,data) {
       return [key,blocks[0].payload_json];
     }));
   }
+  if (row.kind === 'guide' && row.snapshot.seo_text) result.seo_text=Object.fromEntries(Object.keys(row.snapshot.seo_text).map(key=>[key,data.seo_meta?.[key]]));
   if (row.kind === 'article' && row.snapshot.seo_text) result.seo_text=Object.fromEntries(Object.keys(row.snapshot.seo_text).filter(key=>Object.hasOwn(value.seo_meta ?? {},key)).map(key=>[key,value.seo_meta[key]]));
   if (row.kind === 'profile') Object.assign(result,{sections:data.sections,entry_groups:data.entry_groups,seo_text:{title:data.seo_meta?.seo_title,description:data.seo_meta?.seo_description}});
   return result;
@@ -171,14 +172,14 @@ export function assertDom(row,html,before,environment) {
   const dom=domOf(html); const body=compact(dom.body.join(' '));
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
   if (row.kind !== 'surface' && row.snapshot.title && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
-  if (row.kind === 'article' && row.snapshot.seo_text) {
+  if (['article','guide'].includes(row.kind) && row.snapshot.seo_text) {
     const seo=row.snapshot.seo_text;
     if (!equal(dom.title.map(compact),[compact(`${seo.seo_title} | FermatMind`)])
       || !equal(dom.description.map(compact),[compact(seo.seo_description)])
       || !equal(dom.og_title.map(compact),[compact(seo.og_title)])
       || !equal(dom.og_description.map(compact),[compact(seo.og_description)]))
       throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
-    if (!Object.hasOwn(row.snapshot,'content_md') && (dom.article_body.length !== 1 || before.dom.article_body.length !== 1
+    if (row.kind === 'article' && !Object.hasOwn(row.snapshot,'content_md') && (dom.article_body.length !== 1 || before.dom.article_body.length !== 1
       || !equal(dom.h1.map(compact),row.snapshot.title ? [compact(row.snapshot.title)] : before.dom.h1.map(compact)) || !equal(dom.article_body.map(compact),before.dom.article_body.map(compact))))
       throw new Error(`PUBLIC_CONTENT_53_BODY_DRIFT_${row.page_id}`);
   }
@@ -270,9 +271,16 @@ export function assertDom(row,html,before,environment) {
     const languages=dom.alternate_entries.filter(entry=>entry.hreflang).map(entry=>[entry.hreflang,entry.href]).sort();
     const expected=[['en',`https://fermatmind.com/en/articles/${row.identity.slug}`],['zh-CN',`https://fermatmind.com/zh/articles/${row.identity.slug}`],['x-default',`https://fermatmind.com/en/articles/${row.identity.slug}`]].sort();
     const robots=dom.robots.join(',').toLowerCase().split(',').map(x=>x.trim());
-    const jsonld=dom.home_jsonld.flatMap(bytes=>{try { const value=JSON.parse(bytes);return JSON.stringify(value); } catch { return []; }}).join(' ');
+    const nodes=[];
+    const walk=value=>{if(!value || typeof value !== 'object')return;if(!Array.isArray(value) && Object.hasOwn(value,'@type'))nodes.push(value);for(const child of Object.values(value))walk(child);};
+    for(const bytes of dom.home_jsonld) {try {walk(JSON.parse(bytes));} catch {throw new Error(`PUBLIC_CONTENT_53_NEW_ARTICLE_SEO_${row.page_id}`);}}
+    const typed=(node,type)=>[node['@type']].flat().includes(type);
+    const identity=value=>typeof value === 'string'?value:value?.['@id'];
+    const url='https://fermatmind.com'+pathFor(row);
+    const article=nodes.some(node=>typed(node,'Article') && node.url === url && identity(node.mainEntityOfPage) === url && node['@id'] === url+'#article' && compact(node.headline) === compact(row.snapshot.seo_text.seo_title));
+    const breadcrumb=nodes.some(node=>typed(node,'BreadcrumbList') && Array.isArray(node.itemListElement) && identity(node.itemListElement.at(-1)?.item) === url);
     if (!equal(languages,expected) || (environment === 'production' ? !robots.includes('index') || robots.includes('noindex') : !robots.includes('noindex'))
-      || !jsonld.includes('Article') || !jsonld.includes('BreadcrumbList')) throw new Error(`PUBLIC_CONTENT_53_NEW_ARTICLE_SEO_${row.page_id}`);
+      || !article || !breadcrumb) throw new Error(`PUBLIC_CONTENT_53_NEW_ARTICLE_SEO_${row.page_id}`);
   }
   const reviewedHreflang = row.enable_hreflang === true;
   if (reviewedHreflang) {
@@ -323,6 +331,15 @@ export function assertDom(row,html,before,environment) {
       || cta.searchParams.get('target_test_slug') !== 'big-five-personality-test-ocean-model' || cta.searchParams.get('source_slug') !== 'big-five') throw new Error('PUBLIC_CONTENT_53_BIG5_TRACKING');
   }
 }
+export function assertNewArticleDiscovery(rows,documents,environment='production') {
+  const {sitemap,llms,archiveEn,archiveZh}=documents;
+  const links={en:domOf(archiveEn).links,'zh-CN':domOf(archiveZh).links};
+  for(const row of rows) {
+    const path=pathFor(row),url='https://fermatmind.com'+path;
+    if (!sitemap.includes(`<loc>${url}</loc>`) || !llms.includes(url)
+      || !links[row.identity.locale].some(href=>internalTarget(href,environment)?.pathname === path)) throw new Error('PUBLIC_CONTENT_53_NEW_ARTICLE_DISCOVERY');
+  }
+}
 export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fetch,renderer=renderPage,prestate) {
   const [api,web]=hosts(environment);if(!prestate) throw new Error('PUBLIC_CONTENT_53_PRESTATE_REQUIRED');
   const rows = readCandidateRows(backendRoot).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
@@ -345,13 +362,11 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
   }
   const newRows=rows.filter(row=>row.new_article);
   if (newRows.length && environment === 'production') {
-    const urls=newRows.map(row=>'https://fermatmind.com'+pathFor(row));
     const deadline=Date.now()+360000;
     while(true) {
       try {
         const [sitemap,llms,archiveEn,archiveZh]=await Promise.all(['/sitemap.xml','/llms.txt','/en/articles','/zh/articles'].map(path=>read(web+path,fetcher)));
-        if (!urls.every(url=>sitemap.includes(`<loc>${url}</loc>`) && llms.includes(url))
-          || !newRows.every(row=>(row.identity.locale === 'en'?archiveEn:archiveZh).includes(pathFor(row)))) throw new Error('PUBLIC_CONTENT_53_NEW_ARTICLE_DISCOVERY');
+        assertNewArticleDiscovery(newRows,{sitemap,llms,archiveEn,archiveZh},environment);
         break;
       } catch(error) {if(Date.now()>=deadline) throw new Error('PUBLIC_CONTENT_53_NEW_ARTICLE_DISCOVERY');await new Promise(resolve=>setTimeout(resolve,10000));}
     }

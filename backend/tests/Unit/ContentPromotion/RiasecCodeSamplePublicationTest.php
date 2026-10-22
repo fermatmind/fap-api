@@ -54,6 +54,7 @@ final class RiasecCodeSamplePublicationTest extends TestCase
         $states->assertBaseline($rows);
         $after = DB::transaction(fn () => $writer->publish($context, $before));
         self::assertSame(6, $after['written_count']);
+        self::assertSame(6, $after['created_count']);
         Cache::flush();
         $states->assertPublished($rows, $after['state']);
         foreach ($rows as $row) {
@@ -79,6 +80,7 @@ final class RiasecCodeSamplePublicationTest extends TestCase
         $states->assertBaseline($rows);
         $republished = DB::transaction(fn () => $writer->publish($this->context('f'), $private));
         self::assertSame(6, $republished['written_count']);
+        self::assertSame(0, $republished['created_count']);
         self::assertSame(12, DB::table('article_translation_revisions')->count());
         Cache::flush();
         $states->assertPublished($rows, $republished['state']);
@@ -116,6 +118,67 @@ final class RiasecCodeSamplePublicationTest extends TestCase
         self::assertSame('Keep this draft', DB::table('articles')->value('content_md'));
     }
 
+    public static function privateSeoEdits(): array
+    {
+        return [['seo_description'], ['canonical_url'], ['robots'], ['og_image_url'], ['schema_hold'], ['hreflang_hold']];
+    }
+
+    #[DataProvider('privateSeoEdits')]
+    public function test_private_seo_edits_before_a_new_preflight_are_preserved(string $field): void
+    {
+        Event::fake([PublicAuthorityChanged::class]);
+        $context = $this->context();
+        $states = app(PublicContent53State::class);
+        $writer = app(PublicContent53Writer::class);
+        $before = $states->read($context->packageSha256);
+        $after = DB::transaction(fn () => $writer->publish($context, $before));
+        DB::transaction(fn () => $writer->restore($context, $before, $after['state']));
+        $seo = \App\Models\ArticleSeoMeta::withoutGlobalScopes()->firstOrFail();
+        if (str_ends_with($field, '_hold')) {
+            $schema = $seo->schema_json;
+            $schema['editorial_package_v1'][$field] = true;
+            $seo->forceFill(['schema_json' => $schema])->saveQuietly();
+        } else {
+            $seo->forceFill([$field => 'Operator private edit'])->saveQuietly();
+        }
+        $edited = $seo->fresh()->getAttributes();
+        try {
+            $states->read($context->packageSha256);
+            self::fail('Pre-existing private SEO edit must remain protected');
+        } catch (DomainException $error) {
+            self::assertSame('public_content_53_identity_or_hold', $error->getMessage());
+        }
+        self::assertSame($edited, $seo->fresh()->getAttributes());
+    }
+
+    public function test_published_holds_are_preserved_and_unchanged_content_does_not_reset_gates(): void
+    {
+        Event::fake([PublicAuthorityChanged::class]);
+        $context = $this->context();
+        $states = app(PublicContent53State::class);
+        $writer = app(PublicContent53Writer::class);
+        $before = $states->read($context->packageSha256);
+        DB::transaction(fn () => $writer->publish($context, $before));
+        $seo = \App\Models\ArticleSeoMeta::withoutGlobalScopes()->firstOrFail();
+        $schema = $seo->schema_json;
+        $schema['editorial_package_v1']['article_schema_enabled'] = false;
+        $seo->forceFill(['schema_json' => $schema])->saveQuietly();
+        $current = $states->read($context->packageSha256);
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($context, $current))['written_count']);
+        self::assertFalse(data_get($seo->fresh()->schema_json, 'editorial_package_v1.article_schema_enabled'));
+        foreach (['schema_hold', 'hreflang_hold'] as $field) {
+            $schema['editorial_package_v1'][$field] = true;
+            $seo->forceFill(['schema_json' => $schema])->saveQuietly();
+            try {
+                $states->read($context->packageSha256);
+                self::fail('Standing hold must be protected');
+            } catch (DomainException $error) {
+                self::assertSame('public_content_53_riasec_code_sample_operator_hold', $error->getMessage());
+            }
+            self::assertTrue(data_get($seo->fresh()->schema_json, 'editorial_package_v1.'.$field));
+        }
+    }
+
     public static function publicationOutcomes(): array
     {
         return [['success'], ['cache'], ['receipt']];
@@ -146,6 +209,7 @@ final class RiasecCodeSamplePublicationTest extends TestCase
         mkdir($directory, 0700);
         $service = app(\App\Services\ContentPromotion\ExactPackagePromotionService::class);
         $previous = '';
+        $publicationReference = '';
         try {
             foreach (['preflight', 'draft-import', 'publish', 'live-qa'] as $phase) {
                 config(['content_promotion.execution.previous_receipt' => $previous]);
@@ -169,9 +233,25 @@ final class RiasecCodeSamplePublicationTest extends TestCase
                     self::assertSame($phase === 'publish' ? 6 : 0, $result['receipt'][$key]);
                 }
                 self::assertSame(0, $result['receipt']['search_mutation_count']);
+                if ($phase === 'publish') {
+                    $publicationReference = $result['receipt']['rollback_reference'];
+                }
                 $previous = $path;
             }
             self::assertSame('success', $outcome);
+            app(\App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter::class)->rollback($context, $publicationReference);
+            $context = $this->context('f');
+            $previous = '';
+            foreach (['preflight', 'draft-import', 'publish', 'live-qa'] as $phase) {
+                config(['content_promotion.execution.previous_receipt' => $previous]);
+                $result = $service->execute($context, $phase, $directory.'/resume-'.$phase.'.json');
+                if ($phase === 'publish') {
+                    self::assertSame(0, $result['receipt']['created_count']);
+                    self::assertSame(6, $result['receipt']['updated_count']);
+                    self::assertSame(6, $result['receipt']['indexability_mutation_count']);
+                }
+                $previous = $result['path'];
+            }
         } finally {
             foreach (glob($directory.'/*') as $file) {
                 unlink($file);
@@ -195,7 +275,7 @@ final class RiasecCodeSamplePublicationTest extends TestCase
             DB::transaction(fn () => $writer->publish($context, $private));
             self::fail('CAS must preserve concurrent edits');
         } catch (DomainException $error) {
-            self::assertSame('public_content_53_native_prestate_drift', $error->getMessage());
+            self::assertSame('public_content_53_identity_or_hold', $error->getMessage());
         }
         self::assertSame(1, DB::table('article_seo_meta')->where('seo_description', 'Concurrent private SEO edit')->count());
     }

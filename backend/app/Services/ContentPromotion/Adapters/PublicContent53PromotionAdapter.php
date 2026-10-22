@@ -122,7 +122,7 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
             throw new DomainException('public_content_53_cache_closeout_failed', previous: $error);
         }
 
-        return $this->result($context, $published['written_count'], $context->expectedRowCount, $published['reference'], $published['state']);
+        return $this->result($context, $published['written_count'], $context->expectedRowCount, $published['reference'], $published['state'], $published['created_count'] ?? 0);
     }
 
     public function liveQa(PromotionContext $context): array
@@ -250,14 +250,14 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
         app(\App\Services\ContentPromotion\PublicContent53FrontendRevalidator::class)->revalidate($rows);
     }
 
-    private function result(PromotionContext $context, int $written, int $published, ?string $reference, array $state): array
+    private function result(PromotionContext $context, int $written, int $published, ?string $reference, array $state, int $created = 0): array
     {
         $result = PromotionAdapterResultFactory::make($context, $written, $context->expectedRowCount, $published, $reference, [
             'indexability_mutation_count' => 0, 'sitemap_mutation_count' => 0, 'llms_mutation_count' => 0, 'search_mutation_count' => 0, 'deploy_mutation_count' => 0,
         ]) + ['target_state_sha256' => $this->states->hash($state)];
         if ($published > 0 && $written > 0 && \App\Services\ContentPromotion\RiasecCodeSampleArticles::matchesContext($context)) {
-            $result['created_count'] = $written;
-            $result['updated_count'] = 0;
+            $result['created_count'] = $created;
+            $result['updated_count'] = $written - $created;
             foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count'] as $field) {
                 $result[$field] = $written;
             }

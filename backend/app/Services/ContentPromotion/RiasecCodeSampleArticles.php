@@ -79,7 +79,7 @@ final class RiasecCodeSampleArticles
         return ['translation_group_id' => $groups[substr($slug, 0, 3)], 'source_locale' => 'zh-CN'];
     }
 
-    public function create(array $row, PromotionContext $context): void
+    public function create(array $row, PromotionContext $context): bool
     {
         $existing = Article::query()->withoutGlobalScopes()->where($row['identity'])->lockForUpdate()->first();
         if (DB::transactionLevel() < 1 || ($existing && ! self::isRestored($existing->getRawOriginal(), $context->packageSha256))) {
@@ -119,14 +119,18 @@ final class RiasecCodeSampleArticles
             'robots' => 'index,follow', 'is_indexable' => true, ...$seo]);
         $decision = app(ArticleMaterialDecisionService::class)->recordPublished($article, $revision, now());
         event(new \App\Events\PublicAuthorityChanged('article', (string) $article->id, $article->locale, $decision->material_fingerprint, 'publish'));
+
+        return $existing === null;
     }
 
-    public function enableGates(array $rows): void
+    public function enableGates(array $rows, array $written): void
     {
         $groups = [];
         foreach ($rows as $row) {
-            if ($row['new_article'] ?? false) {
-                $groups[$row['identity']['slug']][] = Article::query()->withoutGlobalScopes()->where($row['identity'])->firstOrFail();
+            if (($row['new_article'] ?? false) && isset($written[$row['page_id']])) {
+                $article = Article::query()->withoutGlobalScopes()->where($row['identity'])->firstOrFail();
+                self::assertNoHold($article->seoMeta);
+                $groups[$row['identity']['slug']][] = $article;
             }
         }
         foreach ($groups as $slug => $articles) {
@@ -162,9 +166,20 @@ final class RiasecCodeSampleArticles
         }
     }
 
+    public static function assertNoHold(?ArticleSeoMeta $seo): void
+    {
+        $schema = $seo?->schema_json ?? [];
+        if (! $seo || data_get($schema, 'editorial_package_v1.schema_hold') || data_get($schema, 'editorial_package_v1.hreflang_hold')) {
+            throw new DomainException('public_content_53_riasec_code_sample_operator_hold');
+        }
+    }
+
     public static function isRestored(array $values, string $sha): bool
     {
-        if (($values['deleted_at'] ?? null) !== null || ($values['scheduled_at'] ?? null) !== null
+        if (($values['author_name'] ?? null) !== 'FermatMind' || ($values['related_test_slug'] ?? null) !== 'holland-career-interest-test-riasec'
+            || ! in_array($values['content_html'] ?? null, [null, ''], true)
+            || ($values['translation_status'] ?? null) !== (($values['locale'] ?? '') === 'en' ? Article::TRANSLATION_STATUS_PUBLISHED : Article::TRANSLATION_STATUS_SOURCE)
+            || ($values['deleted_at'] ?? null) !== null || ($values['scheduled_at'] ?? null) !== null
             || ! in_array($values['lifecycle_state'] ?? null, [null, 'active'], true)
             || ($values['status'] ?? '') !== 'draft' || ($values['published_revision_id'] ?? null) !== null
             || ($values['is_public'] ?? true) || ($values['is_indexable'] ?? true)
@@ -172,6 +187,26 @@ final class RiasecCodeSampleArticles
             return false;
         }
         $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->find($values['working_revision_id'] ?? 0);
+        $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $values['id'])->first();
+        $schema = $seo?->schema_json ?? [];
+        $package = $schema['editorial_package_v1'] ?? [];
+        $gate = $package['hreflang_gate_v1'] ?? [];
+        $allowedSchema = ['article_schema_enabled' => true, 'breadcrumb_schema_enabled' => true,
+            'hreflang_gate_v1' => ['enabled' => true, 'policy' => 'reciprocal_counterparts_verified',
+                'verified_by' => 'articles:seo-gate-rollout', 'verified_at' => $gate['verified_at'] ?? null]];
+        if (! $seo || $seo->org_id !== 0 || $seo->locale !== $values['locale'] || $seo->og_image_url !== null
+            || $seo->is_indexable || $seo->robots !== 'noindex,follow'
+            || $seo->canonical_url !== '/'.($values['locale'] === 'en' ? 'en' : 'zh').'/articles/'.$values['slug']
+            || ! is_string($gate['verified_at'] ?? null)
+            || app(PublicContent53State::class)->hash($schema) !== app(PublicContent53State::class)->hash(['editorial_package_v1' => $allowedSchema])) {
+            return false;
+        }
+        $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
+        $row = collect($rows)->first(static fn ($row): bool => $row['identity']['slug'] === $values['slug'] && $row['identity']['locale'] === $values['locale']);
+        if (! $row || app(PublicContent53State::class)->hash(array_intersect_key($seo->getAttributes(), $row['snapshot']['seo_text']))
+            !== app(PublicContent53State::class)->hash($row['snapshot']['seo_text'])) {
+            return false;
+        }
 
         return $revision && in_array($values['slug'] ?? '', self::SLUGS, true)
             && ($values['translation_group_id'] ?? '') === self::sourceIdentity($values['slug'])['translation_group_id']
