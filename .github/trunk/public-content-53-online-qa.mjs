@@ -265,7 +265,7 @@ export function assertDom(row,html,before,environment) {
       throw new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_${row.page_id}_ITEM_${index + 1}`);
   }
   const initializedStaging = environment === 'staging' && row.page_id === 'PAGE-60' && before.missing === true && row.staging_bootstrap;
-  const reviewedHreflang = row.enable_hreflang === true && environment === 'production';
+  const reviewedHreflang = row.enable_hreflang === true;
   if (reviewedHreflang) {
     const cn='https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice';
     const en='https://fermatmind.com/en/articles/mbti-vs-holland-code-career-choice';

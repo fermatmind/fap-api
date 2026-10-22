@@ -508,6 +508,10 @@ test('reviewed MBTI comparison adds only the exact reciprocal hreflang pair and 
  assert.doesNotThrow(()=>assertDom(row,complete,before,'production'));
  for(const altered of [html,complete.replace('hreflang="zh-CN"','hreflang="fr"'),complete.replace('/en/articles/mbti-vs-holland-code-career-choice','/en/articles/other'),complete.replace('application/atom+xml','text/html'),complete.replace('index, follow','noindex, follow')])
   assert.throws(()=>assertDom(row,altered,before,'production'),/DISCOVERABILITY/);
- assert.doesNotThrow(()=>assertDom(row,html,before,'staging'));
- assert.throws(()=>assertDom(row,complete,before,'staging'),/DISCOVERABILITY/);
+ const stagingHtml=html.replace('index, follow','noindex, follow, noarchive, nocache');
+ const stagingBefore={dom:domOf(stagingHtml)};
+ const stagingComplete=stagingHtml.replace('</head>',alternates+'</head>');
+ assert.doesNotThrow(()=>assertDom(row,stagingComplete,stagingBefore,'staging'));
+ for(const altered of [stagingHtml,stagingComplete.replace('hreflang="zh-CN"','hreflang="fr"'),stagingComplete.replace('/en/articles/mbti-vs-holland-code-career-choice','/en/articles/other'),stagingComplete.replace('application/atom+xml','text/html'),stagingComplete.replace('noindex, follow, noarchive, nocache','index, follow'),stagingComplete.replace(cn,cn+'?different=1')])
+  assert.throws(()=>assertDom(row,altered,stagingBefore,'staging'),/DISCOVERABILITY/);
 });
