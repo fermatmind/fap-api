@@ -79,6 +79,7 @@ final class CareerAttributionEventMapper
      * @var array<string, string>
      */
     private const SOURCE_PAGE_TYPE_ALIASES = [
+        'career_landing' => 'landing',
         'career_job_index' => 'job_index',
         'career_job_detail' => 'job_detail',
         'career_recommendation_index' => 'recommendation_index',

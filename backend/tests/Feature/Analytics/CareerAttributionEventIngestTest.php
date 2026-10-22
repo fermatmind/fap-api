@@ -57,6 +57,52 @@ final class CareerAttributionEventIngestTest extends TestCase
         }
     }
 
+    public function test_ingest_endpoint_accepts_bilingual_landing_alias_without_changing_event_identity(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        foreach (['zh', 'en'] as $locale) {
+            foreach (['career_landing', 'landing'] as $sourcePageType) {
+                $anonymousId = "landing_{$locale}_{$sourcePageType}";
+                $path = "/{$locale}/career";
+                $response = $this->withHeaders([
+                    'Authorization' => 'Bearer ingest_test_token',
+                ])->postJson('/api/v0.5/career/attribution/events', [
+                    'eventName' => 'career_landing_view',
+                    'anonymousId' => $anonymousId,
+                    'requestId' => "request_{$anonymousId}",
+                    'path' => $path,
+                    'payload' => [
+                        'entry_surface' => 'career_landing',
+                        'source_page_type' => $sourcePageType,
+                        'target_action' => 'view_surface',
+                        'landing_path' => $path,
+                        'route_family' => 'landing',
+                        'subject_kind' => 'none',
+                        'query_mode' => 'non_query',
+                        'locale' => $locale,
+                    ],
+                ]);
+
+                $response->assertStatus(202)
+                    ->assertJsonPath('ok', true)
+                    ->assertJsonPath('event_code', 'career_landing_view');
+
+                $rows = DB::table('events')->where('anon_id', $anonymousId)->get();
+                $this->assertCount(1, $rows);
+                $row = $rows->first();
+                $this->assertSame('career_landing_view', $row->event_code);
+                $this->assertSame($locale, $row->locale);
+                $this->assertSame('CAREER', $row->scale_code);
+                $this->assertSame("request_{$anonymousId}", $row->request_id);
+                $meta = json_decode((string) $row->meta_json, true);
+                $this->assertSame('landing', $meta['source_page_type']);
+                $this->assertSame('career_landing', $meta['entry_surface']);
+                $this->assertSame($path, $meta['landing_path']);
+            }
+        }
+    }
+
     public function test_ingest_endpoint_persists_career_event_with_normalized_dimensions(): void
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');
