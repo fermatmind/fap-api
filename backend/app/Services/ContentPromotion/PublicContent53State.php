@@ -141,8 +141,8 @@ final class PublicContent53State
         if ($row['kind'] === 'surface' && isset($row['snapshot']['block_copy'])) {
             $projection['block_copy'] = $this->blockCopy($value['page_blocks'], array_keys($row['snapshot']['block_copy']));
         }
-        if ($row['kind'] === 'article' && isset($row['snapshot']['seo_text'])) {
-            $projection['seo_text'] = array_intersect_key($value['seo_meta'] ?? [], $row['snapshot']['seo_text']);
+        if (in_array($row['kind'], ['article', 'guide'], true) && isset($row['snapshot']['seo_text'])) {
+            $projection['seo_text'] = array_intersect_key(($row['kind'] === 'guide' ? $data['seo_meta'] : $value['seo_meta']) ?? [], $row['snapshot']['seo_text']);
         }
         if ($row['kind'] === 'profile') {
             $projection['sections'] = $data['sections'];
@@ -199,6 +199,15 @@ final class PublicContent53State
                     }
                     if ($row['kind'] === 'surface' && $field === 'block_copy') {
                         $projection[$field] = $this->blockCopy($saved['relations']['page_blocks'], array_keys($row['snapshot']['block_copy']));
+
+                        continue;
+                    }
+                    if ($row['kind'] === 'guide' && $field === 'seo_text') {
+                        $seoRows = $saved['controls']['seo'];
+                        if (count($seoRows) !== 1) {
+                            throw new DomainException('public_content_53_copy_seo_missing');
+                        }
+                        $projection[$field] = array_intersect_key($seoRows[0], $row['snapshot']['seo_text']);
 
                         continue;
                     }

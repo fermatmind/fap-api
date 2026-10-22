@@ -101,6 +101,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/career-planning.json')) {
+            $chain = "fermatmind.public_content_career_planning.v1\n";
+            foreach (['career-planning.json', 'career-planning-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readCareerPlanning($root, $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/riasec-amendment.json')) {
             $chain = "fermatmind.public_content_article_amendment.v1\n";
             foreach (['riasec-amendment.json', 'riasec-amendment-review.json'] as $name) {
@@ -214,6 +223,58 @@ final class PublicContent53Package
     }
 
     /** One existing guide locale, with title, summary and route protected. */
+    /** Two existing English guides; URL, publication state and Chinese copies stay locked. */
+    private function readCareerPlanning(string $root, string $sha): array
+    {
+        $bytes = $this->bytes($root, 'career-planning.json');
+        $data = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $proof = json_decode($this->bytes($root, 'career-planning-review.json'), true, 64, JSON_THROW_ON_ERROR);
+        $targets = ['CAREER-DIRECTION' => 'how-to-find-right-career-direction', 'CAREER-TRANSITION' => 'career-transition-playbook'];
+        $rows = $data['candidates'] ?? [];
+        if (($data['schema'] ?? null) !== 'fermatmind.public_content_career_planning.v1'
+            || ! is_array($rows) || count($rows) !== 2
+            || ($proof['schema'] ?? null) !== 'fermatmind.public_content_career_planning.review.v1'
+            || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== 2) {
+            throw new DomainException('public_content_53_career_review_invalid');
+        }
+        $seen = [];
+        foreach ($rows as $row) {
+            $id = $row['page_id'] ?? '';
+            if (! isset($targets[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'guide'
+                || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => $targets[$id], 'locale' => 'en']
+                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity']) !== []
+                || ($proof['pages'][$id] ?? null) !== 'PASS') {
+                throw new DomainException('public_content_53_career_identity_invalid');
+            }
+            $seen[$id] = true;
+            foreach (['before', 'staging_before', 'snapshot'] as $version) {
+                $copy = $row[$version] ?? [];
+                $keys = array_keys($copy);
+                sort($keys);
+                if ($keys !== ['body_md', 'excerpt', 'seo_text', 'title'] || ! is_array($copy['seo_text'])
+                    || array_keys($copy['seo_text']) !== ['seo_title', 'seo_description', 'og_title', 'og_description', 'twitter_title', 'twitter_description']
+                    || array_filter(array_merge(array_intersect_key($copy, array_flip(['body_md', 'excerpt', 'title'])), $copy['seo_text']),
+                        static fn ($value): bool => ! is_string($value) || trim($value) === '')
+                    || $copy['title'] !== $row['before']['title']) {
+                    throw new DomainException('public_content_53_career_fields_invalid');
+                }
+                foreach ($copy['seo_text'] as $field => $value) {
+                    if (mb_strlen($value) > (str_contains($field, 'title') ? 60 : 160)) {
+                        throw new DomainException('public_content_53_career_seo_length');
+                    }
+                }
+            }
+            foreach (['source_identity', 'staging_source_identity'] as $field) {
+                if (($row[$field] ?? null) !== ['guide_code' => $targets[$id]]) {
+                    throw new DomainException('public_content_53_career_source_invalid');
+                }
+            }
+        }
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
     private function readGuideAmendment(string $root, string $sha): array
     {
         $bytes = $this->bytes($root, 'guide-amendment.json');

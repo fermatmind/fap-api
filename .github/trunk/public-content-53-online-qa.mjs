@@ -71,7 +71,7 @@ export function projection(row,data) {
   const value = data[row.kind];
   if (data.ok !== true || !value || value.locale !== row.identity.locale || (['article','profile','guide'].includes(row.kind) && value.org_id !== 0)
     || (value.slug ?? value.surface_key) !== row.identity.slug || (row.kind !== 'guide' && value.status !== 'published') || value.is_public !== true) throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
-  if (row.kind === 'guide' && value.guide_code !== 'from-mbti-to-job-fit') throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
+  if (row.kind === 'guide' && value.guide_code !== row.source_identity.guide_code) throw new Error('PUBLIC_CONTENT_53_IDENTITY_DRIFT');
   const result = Object.fromEntries(Object.keys(row.snapshot).filter(key=>Object.hasOwn(value,key)).map(key=>[key,value[key]]));
   if (row.kind === 'surface' && row.snapshot.block_copy) {
     result.block_copy=Object.fromEntries(Object.keys(row.snapshot.block_copy).map(key=>{
@@ -80,6 +80,7 @@ export function projection(row,data) {
       return [key,blocks[0].payload_json];
     }));
   }
+  if (row.kind === 'guide' && row.snapshot.seo_text) result.seo_text=Object.fromEntries(Object.keys(row.snapshot.seo_text).map(key=>[key,data.seo_meta?.[key]]));
   if (row.kind === 'article' && row.snapshot.seo_text) result.seo_text=Object.fromEntries(Object.keys(row.snapshot.seo_text).filter(key=>Object.hasOwn(value.seo_meta ?? {},key)).map(key=>[key,value.seo_meta[key]]));
   if (row.kind === 'profile') Object.assign(result,{sections:data.sections,entry_groups:data.entry_groups,seo_text:{title:data.seo_meta?.seo_title,description:data.seo_meta?.seo_description}});
   return result;
@@ -171,14 +172,14 @@ export function assertDom(row,html,before,environment) {
   const dom=domOf(html); const body=compact(dom.body.join(' '));
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
   if (row.kind !== 'surface' && row.snapshot.title && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
-  if (row.kind === 'article' && row.snapshot.seo_text) {
+  if (['article','guide'].includes(row.kind) && row.snapshot.seo_text) {
     const seo=row.snapshot.seo_text;
     if (!equal(dom.title.map(compact),[compact(`${seo.seo_title} | FermatMind`)])
       || !equal(dom.description.map(compact),[compact(seo.seo_description)])
       || !equal(dom.og_title.map(compact),[compact(seo.og_title)])
       || !equal(dom.og_description.map(compact),[compact(seo.og_description)]))
       throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
-    if (!Object.hasOwn(row.snapshot,'content_md') && (dom.article_body.length !== 1 || before.dom.article_body.length !== 1
+    if (row.kind === 'article' && !Object.hasOwn(row.snapshot,'content_md') && (dom.article_body.length !== 1 || before.dom.article_body.length !== 1
       || !equal(dom.h1.map(compact),row.snapshot.title ? [compact(row.snapshot.title)] : before.dom.h1.map(compact)) || !equal(dom.article_body.map(compact),before.dom.article_body.map(compact))))
       throw new Error(`PUBLIC_CONTENT_53_BODY_DRIFT_${row.page_id}`);
   }
