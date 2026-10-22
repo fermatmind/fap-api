@@ -1617,6 +1617,173 @@ PHP;
         self::assertSame($before, $states->read($this->planningDigest()));
     }
 
+    private function englishGuidesDigest(?string $root = null): string
+    {
+        $chain = "fermatmind.public_content_english_career_guides.v1\n";
+        foreach (['english-career-guides.json', 'english-career-guides-review.json'] as $name) {
+            $chain .= $name."\n".hash_file('sha256', ($root ?? base_path()).'/'.PublicContent53Package::PACKAGE.'/'.$name)."\n";
+        }
+
+        return hash('sha256', $chain);
+    }
+
+    private function englishGuidesContext(string $owner = 'a'): PromotionContext
+    {
+        $count = count(app(PublicContent53Package::class)->read(base_path(), $this->englishGuidesDigest())['candidates']);
+
+        return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->englishGuidesDigest(), 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat($owner, 40), str_repeat('b', 64), str_repeat('c', 64), $owner === 'a' ? '12345' : '12346', 1, str_repeat('d', 64), $count, str_repeat('e', 64));
+    }
+
+    private function seedEnglishGuides(): array
+    {
+        $rows = app(PublicContent53Package::class)->read(base_path(), $this->englishGuidesDigest())['candidates'];
+        foreach ($rows as $row) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $copy = $locale === 'en' ? array_diff_key($row['before'], ['seo_text' => true])
+                    : ['title' => 'Protected Chinese title', 'excerpt' => 'Protected summary', 'body_md' => 'Protected Chinese body'];
+                $guide = CareerGuide::query()->withoutGlobalScopes()->create(array_replace($row['identity'], ['locale' => $locale,
+                    'guide_code' => $row['identity']['slug'], 'status' => 'published', 'is_public' => true, 'is_indexable' => true,
+                    'published_at' => now()->subDay(), 'lifecycle_state' => 'active'], $copy));
+                DB::table('career_guide_seo_meta')->insert(['career_guide_id' => $guide->id,
+                    'canonical_url' => 'https://fermatmind.com/'.($locale === 'en' ? 'en' : 'zh').'/career/guides/'.$guide->slug,
+                    'robots' => 'index,follow'] + $row['before']['seo_text']);
+                CareerGuideRevision::query()->create(['career_guide_id' => $guide->id, 'revision_no' => 1,
+                    'snapshot_json' => ['guide' => ['body_md' => 'Protected saved history']],
+                    'note' => 'Protected operator revision', 'created_at' => now()->subDay()]);
+            }
+        }
+
+        return $rows;
+    }
+
+    #[DataProvider('environments')]
+    public function test_english_guides_publish_restore_and_new_owner_republish_preserves_native_controls(string $environment): void
+    {
+        config(['content_promotion.public_content_53_environment' => $environment]);
+        $rows = $this->seedEnglishGuides();
+        $states = app(PublicContent53State::class);
+        $writer = app(PublicContent53Writer::class);
+        $before = $states->read($this->englishGuidesDigest());
+        $states->assertBaseline($rows);
+        $published = DB::transaction(fn () => $writer->publish($this->englishGuidesContext(), $before));
+        self::assertSame(count($rows), $published['written_count']);
+        $states->assertPublished($rows, $published['state']);
+        foreach ($before as $id => $saved) {
+            self::assertSame($saved['counterpart'], $published['state'][$id]['counterpart']);
+            self::assertSame($saved['revisions'][0], $published['state'][$id]['revisions'][0]);
+            self::assertCount(2, $published['state'][$id]['revisions']);
+            self::assertSame($saved['controls']['seo'][0]['canonical_url'], $published['state'][$id]['controls']['seo'][0]['canonical_url']);
+        }
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($this->englishGuidesContext(), $published['state']))['written_count']);
+        DB::transaction(fn () => $writer->restore($this->englishGuidesContext(), $before, $published['state']));
+        $restored = $states->read($this->englishGuidesDigest());
+        foreach ($before as $id => $saved) {
+            self::assertSame($saved['values'], $restored[$id]['values']);
+            self::assertSame($saved['controls'], $restored[$id]['controls']);
+            self::assertCount(2, $restored[$id]['revisions']);
+        }
+        $republished = DB::transaction(fn () => $writer->publish($this->englishGuidesContext('f'), $restored));
+        self::assertSame(count($rows), $republished['written_count']);
+        $states->assertPublished($rows, $republished['state']);
+        foreach ($republished['state'] as $saved) {
+            self::assertCount(3, $saved['revisions']);
+        }
+    }
+
+    public function test_english_guides_late_revision_failure_rolls_back_the_entire_batch(): void
+    {
+        $rows = $this->seedEnglishGuides();
+        $states = app(PublicContent53State::class);
+        $before = $states->read($this->englishGuidesDigest());
+        $inserted = 0;
+        DB::listen(function ($query) use (&$inserted, $rows): void {
+            if (preg_match('/^insert into [`"]career_guide_revisions[`"]/i', $query->sql) === 1 && ++$inserted === count($rows)) {
+                throw new DomainException('injected_last_english_guide_revision_failure');
+            }
+        });
+        try {
+            DB::transaction(fn () => app(PublicContent53Writer::class)->publish($this->englishGuidesContext(), $before));
+            self::fail('The whole batch must roll back');
+        } catch (DomainException $error) {
+            self::assertSame('injected_last_english_guide_revision_failure', $error->getMessage());
+        }
+        self::assertSame($before, $states->read($this->englishGuidesDigest()));
+    }
+
+    public function test_english_guides_reject_concurrent_native_history_changes(): void
+    {
+        $this->seedEnglishGuides();
+        $states = app(PublicContent53State::class);
+        $before = $states->read($this->englishGuidesDigest());
+        $saved = reset($before);
+        DB::table('career_guide_revisions')->where('id', $saved['revisions'][0]['id'])->update(['note' => 'Concurrent history change']);
+        $this->expectExceptionMessage('public_content_53_native_prestate_drift');
+        DB::transaction(fn () => app(PublicContent53Writer::class)->publish($this->englishGuidesContext(), $before));
+    }
+
+    public function test_english_guides_rebound_review_cannot_broaden_scope_or_rewrite_mbti_body(): void
+    {
+        $source = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/english-career-guides.json')), true);
+        $mutations = [
+            static function (&$p): void {
+                $p['candidates'][0]['identity']['slug'] = 'how-to-find-right-career-direction';
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['identity']['locale'] = 'zh-CN';
+            },
+            static function (&$p): void {
+                $p['candidates'][1] = $p['candidates'][0];
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['snapshot']['title'] = 'Another title';
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['snapshot']['seo_text']['seo_title'] = 'Another SEO title';
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['snapshot']['seo_text']['canonical_url'] = '/en/other';
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['snapshot']['seo_text']['seo_description'] = str_repeat('x', 161);
+            },
+            static function (&$p): void {
+                $row = &$p['candidates'][0];
+                $row['identity']['slug'] = 'from-mbti-to-job-fit';
+                $row['page_id'] = 'EN-GUIDE-from-mbti-to-job-fit';
+                $row['source_identity'] = $row['staging_source_identity'] = ['guide_code' => 'from-mbti-to-job-fit'];
+                $row['snapshot']['body_md'] = $row['before']['body_md'].'Unexpected body rewrite';
+            },
+        ];
+        $root = sys_get_temp_dir().'/english-guides-'.bin2hex(random_bytes(8));
+        $dir = $root.'/'.PublicContent53Package::PACKAGE;
+        mkdir($dir, 0700, true);
+        try {
+            foreach ($mutations as $mutate) {
+                $package = $source;
+                $mutate($package);
+                $bytes = json_encode($package, JSON_THROW_ON_ERROR);
+                file_put_contents($dir.'/english-career-guides.json', $bytes);
+                $proof = ['schema' => 'fermatmind.public_content_english_career_guides.review.v1',
+                    'candidate_sha256' => hash('sha256', $bytes), 'verdict' => 'PASS',
+                    'pages' => array_fill_keys(array_column($package['candidates'], 'page_id'), 'PASS')];
+                file_put_contents($dir.'/english-career-guides-review.json', json_encode($proof));
+                try {
+                    (new PublicContent53Package)->read($root, $this->englishGuidesDigest($root));
+                    self::fail('A rebound review must not change the fixed scope');
+                } catch (DomainException $error) {
+                    self::assertStringStartsWith('public_content_53_english_guides_', $error->getMessage());
+                }
+            }
+        } finally {
+            unlink($dir.'/english-career-guides.json');
+            unlink($dir.'/english-career-guides-review.json');
+            rmdir($dir);
+            rmdir(dirname($dir));
+            rmdir($root);
+        }
+    }
+
     public function test_planning_package_rejects_rebound_out_of_scope_identity_and_fields(): void
     {
         $source = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/career-planning.json')), true);

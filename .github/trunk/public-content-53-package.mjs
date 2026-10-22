@@ -7,6 +7,7 @@ import { canonical } from './iq-public-scale-package.mjs';
 export const packagePath = 'content_assets/public_content_53';
 // Selection comes from the existing exact-range classifier, never file presence.
 const packages = {
+  'english-career-guides': ['fermatmind.public_content_english_career_guides.v1', ['english-career-guides.json','english-career-guides-review.json']],
   'riasec-code-samples': ['fermatmind.riasec_code_samples.v1', ['riasec-code-samples.json','riasec-code-samples-review.json']],
   'career-planning': ['fermatmind.public_content_career_planning.v1', ['career-planning.json','career-planning-review.json']],
   'riasec-amendment': ['fermatmind.public_content_article_amendment.v1', ['riasec-amendment.json','riasec-amendment-review.json']],

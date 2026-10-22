@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { classifyPaths } from './classify-paths.mjs';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
@@ -671,4 +672,50 @@ test('guide metadata accepts a streamed document title and still rejects missing
  assert.doesNotThrow(()=>assertDom(row,html.replace('<title>','<title data-iq-qa-hidden="true">'),before,'production'));
  for(const altered of [html.replace(title,''),html.replace(title,'<title>Stale title</title>'),html.replace(title,title+title),html.replace('</head>',title+'</head>'),html.replace(title,`<template>${title}</template>`),html.replace(title,`<script type="application/json">${JSON.stringify(title)}</script>`)])
   assert.throws(()=>assertDom(row,altered,before,'production'),/METADATA/);
+});
+
+
+test('selected English guide batch selects only its reviewed identities and native guide projections',()=>{
+ const source=JSON.parse(readFileSync(resolve(root,'content_assets/public_content_53/english-career-guides.json'),'utf8'));
+ const digest=packageDigest(root,'english-career-guides');
+ const rows=readCandidateRows(root,digest).candidates;
+ const paths=['backend/content_assets/public_content_53/english-career-guides.json','backend/content_assets/public_content_53/english-career-guides-review.json'];
+ const operations=classifyPaths(paths).operations;
+ assert.equal(operations.public_content_53_publish,true);
+ assert.equal(operations.public_content_53_package,'english-career-guides');
+ assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/riasec-code-samples.json']),/MULTIPLE_PACKAGES/);
+ assert.notEqual(digest,packageDigest(root,'riasec-code-samples'));
+ assert.deepEqual(rows,source.candidates);
+ assert.equal(inspectPackage(root,'english-career-guides').expected_row_count,source.candidates.length);
+ assert.ok(rows.length>=2 && rows.length<=4);
+ assert.equal(new Set(rows.map(row=>row.identity.slug)).size,rows.length);
+ for(const row of rows){
+  assert.equal(row.kind,'guide');assert.equal(row.identity.locale,'en');
+  assert.ok(!['how-to-find-right-career-direction','career-transition-playbook','iq-eq-balance-at-work'].includes(row.identity.slug));
+  assert.equal(row.snapshot.title,row.before.title);
+  const data={ok:true,guide:{...row.identity,...row.snapshot,guide_code:row.identity.slug,is_public:true},seo_meta:row.snapshot.seo_text};
+  assert.deepEqual(projection(row,data),row.snapshot);
+  assert.throws(()=>projection(row,{...data,guide:{...data.guide,guide_code:'wrong-guide'}}),/IDENTITY/);
+  assert.notDeepEqual(projection(row,{...data,seo_meta:{...data.seo_meta,seo_description:'Stale generic summary'}}),row.snapshot);
+  for(const field of ['seo_title','og_title','twitter_title'])assert.equal(row.snapshot.seo_text[field],row.before.seo_text[field]);
+  for(const field of ['seo_description','og_description','twitter_description'])assert.ok(row.snapshot.seo_text[field].length<=160);
+  if(row.identity.slug==='from-mbti-to-job-fit')assert.equal(row.snapshot.body_md,row.before.body_md);
+ }
+});
+
+
+test('English guide diagnostics cover exactly the 17 selected identities without exposing unsafe text',async()=>{
+ const slugs=["annual-career-review-system","big5-for-career-decisions","build-five-year-career-roadmap","build-portfolio-for-career-switch","career-growth-with-manager","career-risk-management","cross-industry-move-strategy","first-90-days-in-new-role","from-mbti-to-job-fit","how-to-choose-college-major","improve-workplace-competitiveness","interview-strategy-by-role","leader-track-vs-expert-track","networking-that-actually-works","personal-brand-for-professionals","prevent-burnout-while-growing","salary-negotiation-framework"];
+ const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123'},binding:{package_sha256:'b'.repeat(64),executor_release_sha256:'c'.repeat(64)}};
+ const failed=()=>({status:1,stdout:JSON.stringify({ok:false,error_code:'public_content_53_revalidation_failed'})});
+ for(const slug of slugs){
+  const code=`PUBLIC_CONTENT_53_VISIBLE_BODY_EN-GUIDE-${slug}_ITEM_14`;
+  const error=await recoveryFailure(execution,failed,new Error(code));
+  assert.equal(error.receipt.error_code,code);
+ }
+ for(const suffix of ['not-in-this-task','how-to-find-right-career-direction','career-transition-playbook','iq-eq-balance-at-work','annual-career-review-system/secret','annual-career-review-system?token=secret']){
+  const error=await recoveryFailure(execution,failed,new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_EN-GUIDE-${suffix}_ITEM_14`));
+  assert.equal(error.receipt.error_code,'PUBLIC_CONTENT_53_PUBLICATION_FAILED');
+  assert.ok(!JSON.stringify(error.receipt).includes('secret'));
+ }
 });

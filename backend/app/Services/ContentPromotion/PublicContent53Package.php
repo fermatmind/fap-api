@@ -11,6 +11,15 @@ final class PublicContent53Package
 {
     public const PACKAGE = 'content_assets/public_content_53';
 
+    private const ENGLISH_CAREER_GUIDES = [
+        'annual-career-review-system', 'big5-for-career-decisions', 'build-five-year-career-roadmap',
+        'build-portfolio-for-career-switch', 'career-growth-with-manager', 'career-risk-management',
+        'cross-industry-move-strategy', 'first-90-days-in-new-role', 'from-mbti-to-job-fit',
+        'how-to-choose-college-major', 'improve-workplace-competitiveness', 'interview-strategy-by-role',
+        'leader-track-vs-expert-track', 'networking-that-actually-works', 'personal-brand-for-professionals',
+        'prevent-burnout-while-growing', 'salary-negotiation-framework',
+    ];
+
     private const RIASEC_AMENDMENT_TARGETS = [
         'PAGE-65' => ['article', 'riasec-holland-career-interest-test-explained', 'zh-CN'],
         'PAGE-66' => ['article', 'what-is-riasec-holland-code-career-interest-test', 'en'],
@@ -101,6 +110,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/english-career-guides.json')) {
+            $chain = "fermatmind.public_content_english_career_guides.v1\n";
+            foreach (['english-career-guides.json', 'english-career-guides-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readEnglishCareerGuides($root, $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/riasec-code-samples.json')) {
             $chain = "fermatmind.riasec_code_samples.v1\n";
             foreach (['riasec-code-samples.json', 'riasec-code-samples-review.json'] as $name) {
@@ -231,7 +249,64 @@ final class PublicContent53Package
         return ['candidates' => $package['candidates'], 'package_sha256' => $expectedSha256];
     }
 
-    /** One existing guide locale, with title, summary and route protected. */
+    /** Small batches within the selected English guide set, using the native guide writer. */
+    private function readEnglishCareerGuides(string $root, string $sha): array
+    {
+        $bytes = $this->bytes($root, 'english-career-guides.json');
+        $data = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $proof = json_decode($this->bytes($root, 'english-career-guides-review.json'), true, 64, JSON_THROW_ON_ERROR);
+        $rows = $data['candidates'] ?? [];
+        if (($data['schema'] ?? null) !== 'fermatmind.public_content_english_career_guides.v1'
+            || ! is_array($rows) || ! array_is_list($rows) || count($rows) < 2 || count($rows) > 4
+            || ($proof['schema'] ?? null) !== 'fermatmind.public_content_english_career_guides.review.v1'
+            || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
+            throw new DomainException('public_content_53_english_guides_review_invalid');
+        }
+        $seen = [];
+        foreach ($rows as $row) {
+            $slug = $row['identity']['slug'] ?? '';
+            $id = 'EN-GUIDE-'.$slug;
+            if (! in_array($slug, self::ENGLISH_CAREER_GUIDES, true) || isset($seen[$slug])
+                || ($row['page_id'] ?? null) !== $id || ($row['kind'] ?? null) !== 'guide'
+                || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => $slug, 'locale' => 'en']
+                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity']) !== []
+                || ($proof['pages'][$id] ?? null) !== 'PASS') {
+                throw new DomainException('public_content_53_english_guides_identity_invalid');
+            }
+            $seen[$slug] = true;
+            foreach (['before', 'staging_before', 'snapshot'] as $version) {
+                $copy = $row[$version] ?? [];
+                $keys = is_array($copy) ? array_keys($copy) : [];
+                sort($keys);
+                if ($keys !== ['body_md', 'excerpt', 'seo_text', 'title'] || ! is_array($copy['seo_text'])
+                    || array_keys($copy['seo_text']) !== ['seo_title', 'seo_description', 'og_title', 'og_description', 'twitter_title', 'twitter_description']
+                    || array_filter(array_merge(array_intersect_key($copy, array_flip(['body_md', 'excerpt', 'title'])), $copy['seo_text']),
+                        static fn ($value): bool => ! is_string($value) || trim($value) === '')
+                    || $copy['title'] !== $row['before']['title']) {
+                    throw new DomainException('public_content_53_english_guides_fields_invalid');
+                }
+                foreach ($copy['seo_text'] as $field => $value) {
+                    $title = str_contains($field, 'title');
+                    if (mb_strlen($value) > ($title ? 60 : 160)
+                        || ($title && $value !== $row['snapshot']['seo_text'][$field])) {
+                        throw new DomainException('public_content_53_english_guides_seo_invalid');
+                    }
+                }
+                if ($slug === 'from-mbti-to-job-fit' && $copy['body_md'] !== $row['snapshot']['body_md']) {
+                    throw new DomainException('public_content_53_english_guides_mbti_body_changed');
+                }
+            }
+            foreach (['source_identity', 'staging_source_identity'] as $field) {
+                if (($row[$field] ?? null) !== ['guide_code' => $slug]) {
+                    throw new DomainException('public_content_53_english_guides_source_invalid');
+                }
+            }
+        }
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
     /** Two existing English guides; URL, publication state and Chinese copies stay locked. */
     private function readCareerPlanning(string $root, string $sha): array
     {
