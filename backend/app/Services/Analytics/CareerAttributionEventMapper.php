@@ -163,7 +163,9 @@ final class CareerAttributionEventMapper
             $routeFamily,
             $subjectKind,
             $queryMode,
-            (string) ($payload['target_action'] ?? '')
+            (string) ($payload['target_action'] ?? ''),
+            (string) ($payload['entry_surface'] ?? ''),
+            $this->normalizePath($payload['landing_path'] ?? null) ?? $path,
         );
 
         $meta = [
@@ -205,6 +207,8 @@ final class CareerAttributionEventMapper
         string $subjectKind,
         string $queryMode,
         string $targetActionRaw,
+        string $entrySurface,
+        string $landingPath,
     ): void {
         $targetAction = strtolower(trim($targetActionRaw));
 
@@ -271,6 +275,17 @@ final class CareerAttributionEventMapper
         }
 
         if ($eventCode === 'career_support_link_click') {
+            if ($entrySurface === 'career_guides'
+                && $sourcePageType === 'landing' && $routeFamily === 'landing'
+                && in_array($landingPath, ['/en/career/guides', '/zh/career/guides'], true)
+                && $subjectKind === 'none' && $queryMode === 'non_query'
+                && in_array($targetAction, [
+                    'select_start_no_direction', 'select_start_candidates', 'select_start_target',
+                    'choose_exploration_tool', 'explore_without_test', 'continue_from_results',
+                    'open_direction_guide', 'open_planning_worksheet', 'plan_target_validation', 'open_action_worksheet',
+                ], true)) {
+                return;
+            }
             if (! in_array($sourcePageType, ['job_detail', 'recommendation_detail'], true)) {
                 throw ValidationException::withMessages([
                     'payload.source_page_type' => 'payload.source_page_type is not supported for career_support_link_click.',
