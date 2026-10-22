@@ -67,7 +67,7 @@ test('actual production admission enforces the restored cap and elapsed setup ti
 });
 
 
-test('the actual four-page publication admits with full forward, recovery and settlement budgets',()=>{
+test('the actual six-page publication admits with full forward, recovery and settlement budgets',()=>{
  const workflow=read('../workflows/deploy.yml');
  const production=workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
  const admission=production.match(/          remaining=\$\(\([\s\S]*?          test "\$remaining" -ge "\$required"[^\n]*/)?.[0];
@@ -75,7 +75,7 @@ test('the actual four-page publication admits with full forward, recovery and se
  const operations={public_content_53_publish:true};
  const script=admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/,`'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
  const run=elapsed=>spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
-  deploy_minutes:'60',PRODUCTION_JOB_BUDGET_SECONDS:'10800',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed)}});
+  deploy_minutes:'35',PRODUCTION_JOB_BUDGET_SECONDS:'10800',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed)}});
  assert.equal(run(180).status,0);
  const late=run(441);
  assert.notEqual(late.status,0);

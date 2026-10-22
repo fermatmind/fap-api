@@ -20,7 +20,7 @@ export const IQ_PUBLIC_SCALE_BUDGET_SECONDS = Math.ceil(
     + 4 * IQ_HTTP_READ_TIMEOUT_MS + 2 * (45000 + 30000 + 6500 + 30000)) / 1000 + 120,
 );
 
-export function requiredSeconds(deployMinutes, operations, publicContentRows = 53) {
+export function requiredSeconds(deployMinutes, operations, publicContentRows = 53, newArticleDiscovery = false) {
   if (![30,35,60].includes(deployMinutes)) throw new Error('DEPLOY_BUDGET_INVALID');
   if (!operations || typeof operations !== 'object' || Array.isArray(operations)) throw new Error('OPERATIONS_INVALID');
   const consumers = {
@@ -37,7 +37,7 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
   if (operations.career_current_authority_release && deployMinutes !== 60) throw new Error('CAREER_FORWARD_BUDGET_INVALID');
   if (operations.public_content_53_publish) {
     if (!Number.isSafeInteger(publicContentRows) || publicContentRows < 1) throw new Error('PUBLIC_CONTENT_ROW_COUNT_INVALID');
-    consumers.public_content_53_publish = 1600 + publicContentRows * 600;
+    consumers.public_content_53_publish = 1600 + publicContentRows * 600 + (newArticleDiscovery ? 360 : 0);
   }
   return deployMinutes*60 + 1800 + 900 + 60 + Object.entries(consumers)
     .reduce((sum,[name,seconds])=>sum+(operations[name] === true ? seconds : 0),0);
@@ -45,6 +45,7 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
 
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const operations = JSON.parse(Buffer.from(process.argv[3], 'base64').toString());
-  const count = operations.public_content_53_publish === true ? readCandidateRows('backend').candidates.length : undefined;
-  process.stdout.write(String(requiredSeconds(Number(process.argv[2]),operations,count))+'\n');
+  const rows = operations.public_content_53_publish === true ? readCandidateRows('backend').candidates : [];
+  const count = rows.length || undefined;
+  process.stdout.write(String(requiredSeconds(Number(process.argv[2]),operations,count,rows.some(row=>row.new_article)))+'\n');
 }

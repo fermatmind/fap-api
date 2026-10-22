@@ -280,9 +280,17 @@ final class ExactPackagePromotionService
             && (($context->packageSha256 === IqPublicArticlePackage::MENSA_SHA256 && $expected === 2)
                 || (in_array($context->packageSha256, [IqPublicArticlePackage::MATRIX_SHA256, IqPublicArticlePackage::COMPARISON_SHA256], true) && $expected === 4))
             && $phase === 'publish';
+        $riasecSamples = $adapter instanceof \App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter
+            && $phase === 'publish' && RiasecCodeSampleArticles::matchesContext($context);
         $boundaryCounts = [];
         foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count', 'deploy_mutation_count'] as $boundary) {
             $allowed = $iqArticleLaunch && $written > 0 && in_array($boundary, ['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count'], true) ? 2 : 0;
+            if ($riasecSamples && $written > 0 && in_array($boundary, ['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count'], true)) {
+                if ($written !== 6) {
+                    throw new DomainException('riasec_code_sample_partial_publication');
+                }
+                $allowed = 6;
+            }
             if (! is_int($result[$boundary] ?? null) || $result[$boundary] !== $allowed
                 || ($iqArticleLaunch && ! in_array($written, [0, $expected], true))) {
                 throw new DomainException('prohibited_mutation_reported');

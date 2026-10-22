@@ -4,11 +4,12 @@ import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
+import { executorPaths, inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
 import { assertDom, domOf, pathFor, read, projection, readOnlinePrestate } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
+const riasecDigest=()=>createHash('sha256').update('fermatmind.public_content_article_amendment.v1\n'+['riasec-amendment.json','riasec-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const guideDigest=()=>createHash('sha256').update('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const translationDigest=()=>createHash('sha256').update('fermatmind.public_content_translation.v1\n'+['translation-batch.json','translation-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const copyDigest=()=>createHash('sha256').update('fermatmind.public_content_copy_amendment.v1\n'+['copy-amendment.json','copy-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
@@ -53,7 +54,7 @@ test('previous translation package remains readable by its own immutable digest'
 });
 test('previous article amendment still binds only the reviewed existing article body',()=>{
  const binding=inspectPackage(root);const sha=bytes=>createHash('sha256').update(bytes).digest('hex');const digest=sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));const rows=readCandidateRows(root,digest).candidates;
- assert.equal(binding.expected_row_count,4);assert.equal(rows.length,1);
+ assert.equal(binding.expected_row_count,6);assert.equal(rows.length,1);
  const row=rows[0];assert.equal(row.page_id,'PAGE-54');assert.equal(row.kind,'article');
  assert.deepEqual(row.identity,{org_id:0,slug:'mbti-full-report-career-relationship-communication',locale:'en'});
  for(const before of [row.before,row.staging_before]) {
@@ -263,7 +264,7 @@ test('previous single-locale guide amendment protects identity and checks real b
 
 test('previous copy amendment binds six native resources and checks metadata plus unchanged reader body',()=>{
  const rows=readCandidateRows(root,copyDigest()).candidates;
- assert.equal(inspectPackage(root).expected_row_count,4);
+ assert.equal(inspectPackage(root).expected_row_count,6);
  assert.deepEqual(rows.map(row=>row.page_id),['PAGE-23','PAGE-32','PAGE-34','PAGE-33','PAGE-HOME','PAGE-17']);
  const row=rows[0],seo=row.snapshot.seo_text,url='https://fermatmind.com'+pathFor(row);
  const native={...row.identity,status:'published',is_public:true,seo_meta:seo};
@@ -381,7 +382,7 @@ test('reviewed AI-coach heading changes while its explanatory body stays protect
 test('bilingual alignment binds exactly ten native identities and preserves other assessment cards',()=>{
  const digest=createHash('sha256').update('fermatmind.public_content_seo_alignment.v1\n'+['seo-alignment.json','seo-alignment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
  const rows=readCandidateRows(root,digest).candidates;
- assert.equal(inspectPackage(root).expected_row_count,4);
+ assert.equal(inspectPackage(root).expected_row_count,6);
  assert.deepEqual(rows.map(row=>row.page_id),Array.from({length:10},(_,i)=>`PAGE-${i+55}`));
  assert.equal(rows.filter(row=>row.kind==='article').length,6);
  assert.equal(rows.filter(row=>row.kind==='surface').length,2);
@@ -476,8 +477,8 @@ test('alignment DOM deltas use the selected environment baseline without requiri
 });
 
 
-test('RIASEC publication selects four reviewed native bodies with exact bilingual slugs',()=>{
- const rows=readCandidateRows(root).candidates;
+test('previous RIASEC publication selects four reviewed native bodies with exact bilingual slugs',()=>{
+ const rows=readCandidateRows(root,riasecDigest()).candidates;
  assert.deepEqual(rows.map(row=>[row.page_id,row.identity.slug,row.identity.locale]),[
   ['PAGE-65','riasec-holland-career-interest-test-explained','zh-CN'],
   ['PAGE-66','what-is-riasec-holland-code-career-interest-test','en'],
@@ -497,7 +498,7 @@ test('RIASEC publication selects four reviewed native bodies with exact bilingua
 
 
 test('reviewed MBTI comparison adds only the exact reciprocal hreflang pair and preserves feeds',()=>{
- const source=readCandidateRows(root).candidates.find(row=>row.page_id==='PAGE-67');
+ const source=readCandidateRows(root,riasecDigest()).candidates.find(row=>row.page_id==='PAGE-67');
  const row={...source,snapshot:{title:'Comparison',content_md:'Interest and preference.'}};
  const cn='https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice';
  const en='https://fermatmind.com/en/articles/mbti-vs-holland-code-career-choice';
@@ -514,4 +515,33 @@ test('reviewed MBTI comparison adds only the exact reciprocal hreflang pair and 
  assert.doesNotThrow(()=>assertDom(row,stagingComplete,stagingBefore,'staging'));
  for(const altered of [stagingHtml,stagingComplete.replace('hreflang="zh-CN"','hreflang="fr"'),stagingComplete.replace('/en/articles/mbti-vs-holland-code-career-choice','/en/articles/other'),stagingComplete.replace('application/atom+xml','text/html'),stagingComplete.replace('noindex, follow, noarchive, nocache','index, follow'),stagingComplete.replace(cn,cn+'?different=1')])
   assert.throws(()=>assertDom(row,altered,stagingBefore,'staging'),/DISCOVERABILITY/);
+});
+
+test('the selected sample package contains exactly three independent bilingual Article identities',()=>{
+ const rows=readCandidateRows(root).candidates;
+ assert.equal(rows.length,6);
+ assert.equal(new Set(rows.map(row=>row.identity.slug)).size,3);
+ for(const code of ['ric','iar','sae']) {
+  const pair=rows.filter(row=>row.identity.slug===`${code}-holland-code-career-exploration`);
+  assert.deepEqual(pair.map(row=>row.identity.locale).sort(),['en','zh-CN']);
+  assert.equal(pair[0].source_identity.translation_group_id,pair[1].source_identity.translation_group_id);
+  assert.ok(pair.every(row=>row.new_article===true && Object.keys(row.before).length===0 && Object.keys(row.staging_before).length===0));
+ }
+ const source=readFileSync(resolve(root,'scripts/deploy/run_public_content_53_publish.php'),'utf8');
+ const serverPaths=[...source.matchAll(/        '(app\/[^']+|config\/content_promotion.php|scripts\/deploy\/run_public_content_53_publish.php)',/g)].map(m=>m[1]).sort();
+ assert.deepEqual(executorPaths,serverPaths);
+});
+
+test('new sample SEO requires exact reciprocal routes, environment robots, schema and visible prose',()=>{
+ const source=readCandidateRows(root).candidates[0];
+ const row={...source,snapshot:{title:'Code exploration',excerpt:'A sample.',content_md:'## Try a task\n\nKeep the result.',seo_text:{seo_title:'Code exploration',seo_description:'Explore tasks.',og_title:'Code exploration',og_description:'Explore tasks.'}}};
+ const slug=row.identity.slug;
+ const cn=`https://fermatmind.com/zh/articles/${slug}`,en=`https://fermatmind.com/en/articles/${slug}`;
+ const alt=`<link rel="alternate" hreflang="en" href="${en}"><link rel="alternate" hreflang="zh-CN" href="${cn}"><link rel="alternate" hreflang="x-default" href="${en}">`;
+ const html=`<html><head><meta charset="utf-8"><title>Code exploration | FermatMind</title><meta name="description" content="Explore tasks."><meta property="og:title" content="Code exploration"><meta property="og:description" content="Explore tasks."><link rel="canonical" href="${cn}"><meta name="robots" content="index,follow">${alt}<script type="application/ld+json">{"@type":"Article"}</script><script type="application/ld+json">{"@type":"BreadcrumbList"}</script></head><body><main><h1>Code exploration</h1><h2>Try a task</h2><p>Keep the result.</p></main></body></html>`;
+ assert.doesNotThrow(()=>assertDom(row,html,{missing:true},'production'));
+ assert.doesNotThrow(()=>assertDom(row,html.replace('index,follow','noindex,follow'),{missing:true},'staging'));
+ for(const changed of [html.replace(alt,''),html.replace('hreflang="zh-CN"','hreflang="fr"'),html.replace('"@type":"Article"','"@type":"Thing"'),html.replace('index,follow','noindex,follow')])
+  assert.throws(()=>assertDom(row,changed,{missing:true},'production'),/NEW_ARTICLE_SEO/);
+ assert.throws(()=>assertDom(row,html.replace('<p>Keep the result.</p>','<script>Keep the result.</script>'),{missing:true},'production'),/VISIBLE_BODY/);
 });

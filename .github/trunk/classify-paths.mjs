@@ -202,7 +202,7 @@ export function classifyPaths(inputPaths) {
       || /^\.github\/(?:trunk\/|workflows\/(?:ci|deploy)\.yml$)/.test(path));
   const operations = {
     public_content_53_publish: paths.some(path => path.startsWith("backend/content_assets/public_content_53/")),
-    public_content_53_checks: paths.some(path => /PublicContent53|public.content.53/.test(path)),
+    public_content_53_checks: paths.some(path => /PublicContent53|RiasecCodeSample|public.content.53/.test(path)),
     iq_eq_topic_publish: paths.some(path => path.startsWith("backend/content_assets/iq_public/topics/20261010-v1/")),
     iq_eq_topic_checks: paths.some(path => path.startsWith("backend/content_assets/iq_public/topics/") || /IqEqTopic/.test(path) || /iq-eq-topic/.test(path) || path === "backend/scripts/deploy/run_iq_eq_topic_publish.php"),
     iq_public_articles_publish: paths.some(path => path === ".github/trunk/iq-public-article-online-qa.mjs" || ["backend/content_assets/iq_public/articles/20261010-v1/", "backend/content_assets/iq_public/articles/20261015-seo-v1/", "backend/content_assets/iq_public/articles/20261015-en-parity/", "backend/content_assets/iq_public/articles/20261015-mensa-v1/", "backend/content_assets/iq_public/articles/20261015-matrix-v1/", "backend/content_assets/iq_public/articles/20261016-comparison-v1/", "backend/content_assets/iq_public/articles/20261018-xor-v1/"].some(prefix => path.startsWith(prefix))),

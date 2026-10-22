@@ -37,6 +37,20 @@ final class PublicContent53State
                 unset($where['slug']);
             }
             $records = $this->query($table, $where, $lock);
+            if (($row['new_article'] ?? false) && $records === []) {
+                $state[$row['page_id']] = ['table' => 'articles', 'missing' => true, 'values' => [], 'relations' => []];
+
+                continue;
+            }
+            if (($row['new_article'] ?? false) && count($records) === 1 && RiasecCodeSampleArticles::isRestored($records[0], $sha)) {
+                $values = $records[0];
+                $state[$row['page_id']] = ['table' => 'articles', 'retained_draft' => true, 'values' => $values,
+                    'working' => $this->query('article_translation_revisions', ['id' => $values['working_revision_id']], $lock),
+                    'source' => $this->query('articles', ['id' => $values['source_article_id'] ?? $values['id']], $lock),
+                    'relations' => ['article_seo_meta' => $this->query('article_seo_meta', ['article_id' => $values['id']], $lock)]];
+
+                continue;
+            }
             if (count($records) !== 1 || $records[0]['status'] !== 'published' || ! (bool) $records[0]['is_public']
                 || ($records[0]['deleted_at'] ?? null) !== null) {
                 throw new DomainException('public_content_53_identity_or_hold');
@@ -156,11 +170,25 @@ final class PublicContent53State
     public function assertBaseline(array $rows): void
     {
         foreach ($rows as $row) {
+            if (($row['new_article'] ?? false) && ! DB::table('articles')->where($row['identity'])->exists()) {
+                continue;
+            }
             if (isset($row['source_snapshot'])) {
                 $source = $row;
                 $source['identity']['locale'] = 'zh-CN';
                 if ($this->hash($this->projection($source)) !== $this->hash(PublicContent53Package::source($row))) {
                     throw new DomainException('public_content_53_translation_public_source_drift');
+                }
+            }
+            if ($row['new_article'] ?? false) {
+                $existing = DB::table('articles')->where($row['identity'])->first();
+                if ($existing && RiasecCodeSampleArticles::isRestored((array) $existing, (string) ArticleTranslationRevision::query()->withoutGlobalScopes()->find($existing->working_revision_id)?->authority_package_sha256)) {
+                    $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail($existing->working_revision_id);
+                    if ($revision->authority_source_hash !== $this->hash($row['snapshot'])) {
+                        throw new DomainException('riasec_code_sample_restored_copy_drift');
+                    }
+
+                    continue;
                 }
             }
             $projection = $this->projection($row);
@@ -175,6 +203,9 @@ final class PublicContent53State
     {
         foreach ($rows as $row) {
             $saved = $state[$row['page_id']];
+            if (($row['new_article'] ?? false) && (($saved['missing'] ?? false) || ($saved['retained_draft'] ?? false))) {
+                continue;
+            }
             $beforeCopy = PublicContent53Package::before($row);
             $candidateCopy = $row['snapshot'];
             $nativeBefore = PublicContent53Package::nativeBlocks($row, false);
@@ -228,7 +259,7 @@ final class PublicContent53State
             if ($this->hash($projection) !== $this->hash($beforeCopy) && $this->hash($projection) !== $this->hash($candidateCopy)) {
                 throw new DomainException('public_content_53_locked_copy_drift');
             }
-            foreach ((PublicContent53Package::environment() === 'staging' ? $row['staging_source_identity'] : $row['source_identity']) as $field => $expected) {
+            foreach ((PublicContent53Package::environment() === 'staging' ? ($row['staging_source_identity'] ?? $row['source_identity']) : $row['source_identity']) as $field => $expected) {
                 // Revision numbers are environment-local; the current revision
                 // and all source bindings are locked in the private state CAS.
                 if (in_array($field, ['id', 'published_revision_id', 'source_article_id'], true)) {
