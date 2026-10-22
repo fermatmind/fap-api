@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { downloadProductionArtifact } from './production-evidence.mjs';
+import { downloadProductionArtifact, readProductionCI, verifyProductionBinding } from './production-evidence.mjs';
 
 const bytes = Buffer.from('immutable artifact fixture');
 const artifact = {id: 1, expired: false, digest: `sha256:${createHash('sha256').update(bytes).digest('hex')}`};
@@ -37,4 +37,45 @@ test('expired or malformed authority never downloads; corrupt bytes never retry'
     request: () => { calls++; return Buffer.from('corrupt'); }, wait: () => assert.fail('must not retry corruption'),
   }), /digest mismatch/);
   assert.equal(calls, 1);
+});
+
+const candidate = 'a'.repeat(40);
+const ciRun = () => ({id:7,head_sha:candidate,head_branch:'main',event:'push',run_attempt:1,
+  status:'completed',conclusion:'success',created_at:'2026-10-22T13:48:40Z'});
+
+test('a receipt-bound CI is read by its exact run ID without consulting the run list', () => {
+  const timing = {schema_version:'fermatmind.trunk-delivery-timing.v1',sha:candidate,ci_run_id:'7',
+    deploy_run_id:'8',deploy_run_attempt:1,production_outcome:'success',production_smoke_completed_at:'2026-10-22T14:43:47Z'};
+  const ci = readProductionCI(candidate,timing,path=>{
+    assert.equal(path,'actions/runs/7');
+    return ciRun();
+  });
+  assert.equal(verifyProductionBinding({run:{id:8,run_attempt:1,head_sha:'b'.repeat(40)},
+    artifact:{name:`trunk-production-${candidate}`},timing,ci,job:{conclusion:'success'},
+    receipt:{schema_version:'fermatmind.trunk-validation.v1',sha:candidate,ci_run_id:7,result:'success',classification:{deploy:true}}}),candidate);
+});
+
+test('the exact CI lookup rejects wrong identity, SHA, event, branch, state and attempt', () => {
+  for(const mutation of [{id:8},{head_sha:'b'.repeat(40)},{head_branch:'other'},{event:'pull_request'},
+    {status:'in_progress'},{conclusion:'failure'},{run_attempt:2}]) {
+    assert.throws(()=>readProductionCI(candidate,{ci_run_id:7},path=>{
+      assert.equal(path,'actions/runs/7');return {...ciRun(),...mutation};
+    }),/Invalid production CI binding/);
+  }
+  for(const id of ['',0,-1,'../7','7?head_sha=other']) {
+    assert.throws(()=>readProductionCI(candidate,{ci_run_id:id},()=>assert.fail('must not request an invalid run ID')),/Invalid production CI binding/);
+  }
+  assert.throws(()=>readProductionCI(candidate,{ci_run_id:7},path=>{
+    assert.equal(path,'actions/runs/7');throw new Error('exact run unavailable');
+  }),/exact run unavailable/);
+});
+
+test('legacy timing uses one exact-SHA and timestamp match and still rejects missing or ambiguous evidence', () => {
+  const timing={pushed_at:ciRun().created_at};
+  assert.equal(readProductionCI(candidate,timing,()=>({workflow_runs:[
+    {...ciRun(),id:9,head_sha:'b'.repeat(40)},ciRun(),{...ciRun(),id:10,created_at:'2026-10-22T13:48:41Z'},
+  ]})).id,7);
+  for(const workflow_runs of [[],[ciRun(),{...ciRun(),id:8}]]) {
+    assert.throws(()=>readProductionCI(candidate,timing,()=>({workflow_runs})),/Ambiguous production CI binding/);
+  }
 });
