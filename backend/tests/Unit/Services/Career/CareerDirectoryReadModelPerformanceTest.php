@@ -16,6 +16,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use Tests\TestCase;
 
 final class CareerDirectoryReadModelPerformanceTest extends TestCase
@@ -30,6 +32,9 @@ final class CareerDirectoryReadModelPerformanceTest extends TestCase
             new \Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true));
     }
 
+    // Measure cold requests independently of allocations from earlier suite discovery/tests.
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
     public function test_installed_corpus_qualification_is_reused_by_fresh_request_readers(): void
     {
         $authority = app(CareerContentV3CanonicalReader::class)->authority();
@@ -51,7 +56,7 @@ final class CareerDirectoryReadModelPerformanceTest extends TestCase
                 $times[] = $this->elapsedMs($started);
                 self::assertArrayNotHasKey('body_qualification', $payload);
             }
-            self::assertLessThan(400, max($times), 'Installed-corpus request exceeded the existing cold-request budget.');
+            self::assertLessThan(400, max($times), 'Installed-corpus request exceeded the existing cold-request budget. '.json_encode(['locale' => $locale, 'request_ms' => $times], JSON_THROW_ON_ERROR));
             $observations[$locale] = ['request_ms' => $times, 'indexable' => $payload['public_truth']['public_detail_indexable_count']];
             // The installed corpus can legitimately gain or lose authored locale bodies.
             // Check source semantics outside the timed request instead of freezing editorial state.
