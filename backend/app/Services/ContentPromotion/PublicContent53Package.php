@@ -101,6 +101,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/riasec-code-samples.json')) {
+            $chain = "fermatmind.riasec_code_samples.v1\n";
+            foreach (['riasec-code-samples.json', 'riasec-code-samples-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return RiasecCodeSampleArticles::package($this->bytes($root, 'riasec-code-samples.json'), $this->bytes($root, 'riasec-code-samples-review.json'), $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/career-planning.json')) {
             $chain = "fermatmind.public_content_career_planning.v1\n";
             foreach (['career-planning.json', 'career-planning-review.json'] as $name) {

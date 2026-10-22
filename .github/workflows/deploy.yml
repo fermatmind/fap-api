@@ -578,6 +578,7 @@ jobs:
     timeout-minutes: 120
     environment: staging
     env:
+      PUBLIC_CONTENT_53_PACKAGE_NAME: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_package }}
       TARGET: staging
       DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.STAGING_DEPLOY_PORT }}
@@ -1445,6 +1446,7 @@ jobs:
     timeout-minutes: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 180 || 120 }}
     environment: production
     env:
+      PUBLIC_CONTENT_53_PACKAGE_NAME: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_package }}
       PRODUCTION_JOB_BUDGET_SECONDS: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 10800 || 7200 }}
       ASSETS_SHA256: ${{ needs.policy.outputs.career_current_assets_sha256 }}
       SOURCE_MERGE_SHA: ${{ needs.policy.outputs.career_current_source_merge_sha }}

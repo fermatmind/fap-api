@@ -346,7 +346,7 @@ jobs:
         if: fromJSON(needs.classify.outputs.classification).operations.public_content_53_checks == true
         working-directory: backend
         run: |
-          php artisan test tests/Unit/ContentPromotion/PublicContent53PublicationTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Unit/ContentPromotion/PromotionBootstrapSignatureTest.php tests/Feature/V0_3/EnneagramTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_5/TopicsPublicApiTest.php --no-ansi
+          php artisan test tests/Unit/ContentPromotion/PublicContent53PublicationTest.php tests/Unit/ContentPromotion/RiasecCodeSamplePublicationTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Unit/ContentPromotion/PromotionBootstrapSignatureTest.php tests/Feature/V0_3/EnneagramTechnicalNoteContractTest.php tests/Feature/V0_3/RiasecTechnicalNoteContractTest.php tests/Feature/V0_5/TopicsPublicApiTest.php --no-ansi
           node --test ../.github/trunk/public-content-53-publication.test.mjs
       - name: Execute changed PHP JS Python and Shell tests with inherited FEATURE inputs
         if: needs.classify.outputs.tests_changed == 'true'

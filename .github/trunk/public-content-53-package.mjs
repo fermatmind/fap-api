@@ -1,34 +1,33 @@
 import { createHash, createHmac } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { readFileSync, realpathSync, lstatSync, existsSync } from 'node:fs';
+import { readFileSync, realpathSync, lstatSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { canonical } from './iq-public-scale-package.mjs';
 
 export const packagePath = 'content_assets/public_content_53';
-export function packageDigest(backendRoot) {
-  if (existsSync(resolve(backendRoot, packagePath, 'career-planning.json'))) {
-    return sha('fermatmind.public_content_career_planning.v1\n'+['career-planning.json','career-planning-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
-  }
-  if (existsSync(resolve(backendRoot, packagePath, 'riasec-amendment.json'))) {
-    return sha('fermatmind.public_content_article_amendment.v1\n'+['riasec-amendment.json','riasec-amendment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
-  }
-  if (existsSync(resolve(backendRoot, packagePath, 'seo-alignment.json'))) {
-    return sha('fermatmind.public_content_seo_alignment.v1\n'+['seo-alignment.json','seo-alignment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
-  }
-  if (existsSync(resolve(backendRoot, packagePath, 'copy-amendment.json'))) {
-    return sha('fermatmind.public_content_copy_amendment.v1\n'+['copy-amendment.json','copy-amendment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
-  }
-  if (existsSync(resolve(backendRoot, packagePath, 'guide-amendment.json'))) {
-    return sha('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
-  }
-  if (existsSync(resolve(backendRoot, packagePath, 'article-amendment.json'))) {
-    return sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
-  }
-  if (existsSync(resolve(backendRoot, packagePath, 'translation-batch.json'))) {
-    return sha('fermatmind.public_content_translation.v1\n'+['translation-batch.json','translation-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
-  }
-  const names = ['assets.json','independent-review.json','enneagram_metrics.en.json','enneagram_public_copy.en.json','riasec_technical_note.en.json'];
-  return sha('fermatmind.public_content_53.v1\n'+names.map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
+// Selection comes from the existing exact-range classifier, never file presence.
+const packages = {
+  'riasec-code-samples': ['fermatmind.riasec_code_samples.v1', ['riasec-code-samples.json','riasec-code-samples-review.json']],
+  'career-planning': ['fermatmind.public_content_career_planning.v1', ['career-planning.json','career-planning-review.json']],
+  'riasec-amendment': ['fermatmind.public_content_article_amendment.v1', ['riasec-amendment.json','riasec-amendment-review.json']],
+  'seo-alignment': ['fermatmind.public_content_seo_alignment.v1', ['seo-alignment.json','seo-alignment-review.json']],
+  'copy-amendment': ['fermatmind.public_content_copy_amendment.v1', ['copy-amendment.json','copy-amendment-review.json']],
+  'guide-amendment': ['fermatmind.public_content_guide_amendment.v1', ['guide-amendment.json','guide-amendment-review.json']],
+  'article-amendment': ['fermatmind.public_content_article_amendment.v1', ['article-amendment.json','article-amendment-review.json']],
+  'translation-batch': ['fermatmind.public_content_translation.v1', ['translation-batch.json','translation-review.json']],
+  assets: ['fermatmind.public_content_53.v1', ['assets.json','independent-review.json','enneagram_metrics.en.json','enneagram_public_copy.en.json','riasec_technical_note.en.json']],
+};
+export function selectPublicContentPackage(paths) {
+  const selected=Object.entries(packages).filter(([, [, names]])=>names.some(name=>paths.includes(`backend/${packagePath}/${name}`))).map(([name])=>name);
+  if (selected.length > 1) throw new Error('PUBLIC_CONTENT_53_MULTIPLE_PACKAGES_REQUIRE_SERIAL_RELEASE');
+  if (!selected.length && paths.some(path=>path.startsWith(`backend/${packagePath}/`))) throw new Error('PUBLIC_CONTENT_53_PACKAGE_SELECTION_UNKNOWN');
+  return selected[0] ?? null;
+}
+export function packageDigest(backendRoot, selection = process.env.PUBLIC_CONTENT_53_PACKAGE_NAME) {
+  const entry=Object.hasOwn(packages,selection ?? '') ? packages[selection] : null;
+  if (!entry) throw new Error('PUBLIC_CONTENT_53_PACKAGE_SELECTION_REQUIRED');
+  const [schema,names]=entry;
+  return sha(schema+'\n'+names.map(name=>`${name}\n${sha(readFileSync(resolve(backendRoot,packagePath,name)))}\n`).join(''));
 }
 export const executorPaths = [
   "app/Console/Commands/ContentPromoteExactPackage.php",
@@ -71,18 +70,19 @@ export const executorPaths = [
   "app/Services/ContentPromotion/PublicContent53Package.php",
   "app/Services/ContentPromotion/PublicContent53State.php",
   "app/Services/ContentPromotion/PublicContent53Writer.php",
+  "app/Services/ContentPromotion/RiasecCodeSampleArticles.php",
   "config/content_promotion.php",
   "scripts/deploy/run_public_content_53_publish.php"
 ];
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 export function readCandidateRows(backendRoot, digest = packageDigest(backendRoot)) {
-  const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2]), JSON_THROW_ON_ERROR);';
+  const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/RiasecCodeSampleArticles.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2]), JSON_THROW_ON_ERROR);';
   return JSON.parse(execFileSync('php', ['-r', code, realpathSync(backendRoot), digest], { encoding: 'utf8', timeout: 30000, maxBuffer: 4000000, stdio: ['pipe', 'pipe', 'pipe'] }));
 }
-export function inspectPackage(backendRoot) {
+export function inspectPackage(backendRoot, selection = process.env.PUBLIC_CONTENT_53_PACKAGE_NAME) {
   const root = realpathSync(backendRoot);
-  const packageSha256 = packageDigest(root);
-  const count = readCandidateRows(root).candidates.length;
+  const packageSha256 = packageDigest(root,selection);
+  const count = readCandidateRows(root,packageSha256).candidates.length;
   const material = executorPaths.map(path => {
     const file = resolve(root, path);
     const stat = lstatSync(file);

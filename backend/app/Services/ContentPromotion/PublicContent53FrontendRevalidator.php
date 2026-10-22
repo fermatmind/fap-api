@@ -16,16 +16,30 @@ final class PublicContent53FrontendRevalidator
     {
         [$endpoint, $secret] = $this->configuration();
         $rateLimitWaited = false;
-        foreach ($rows as $row) {
+        $requests = $rows;
+        if (array_filter($rows, static fn ($row): bool => ($row['new_article'] ?? false) === true)) {
+            $requests[] = ['kind' => 'discovery', 'identity' => ['locale' => 'en', 'slug' => 'articles']];
+        }
+        foreach ($requests as $row) {
             $segment = $row['identity']['locale'] === 'en' ? 'en' : 'zh';
             $slug = $row['identity']['slug'];
             $tags = [];
-            if ($row['kind'] === 'article') {
+            if ($row['kind'] === 'discovery') {
+                $paths = ['/en/articles', '/zh/articles', '/sitemap.xml', '/llms.txt', '/llms-full.txt'];
+                $content = ['type' => 'public_content_53'];
+            } elseif ($row['kind'] === 'article') {
                 $article = Article::query()->withoutGlobalScopes()->where($row['identity'])->firstOrFail();
+                $revision = $article->publishedRevision;
+                if (! $revision && ($row['new_article'] ?? false) && RiasecCodeSampleArticles::isRestored($article->getRawOriginal(), (string) $article->workingRevision?->authority_package_sha256)) {
+                    $revision = $article->workingRevision;
+                }
+                if (! $revision) {
+                    throw new DomainException('public_content_53_revalidation_revision_missing');
+                }
                 $paths = ["/$segment/articles/$slug"];
                 $content = ['type' => 'article', 'slug' => $slug, 'locale' => $row['identity']['locale'],
-                    'path_scope' => 'article_detail_only', 'published_revision_id' => $article->published_revision_id,
-                    'content_sha256' => hash('sha256', (string) $article->publishedRevision->content_md)];
+                    'path_scope' => 'article_detail_only', 'published_revision_id' => $revision->id,
+                    'content_sha256' => hash('sha256', (string) $revision->content_md)];
                 $tags = ['article-detail:'.$row['identity']['locale'].':'.$slug, 'article-seo:'.$row['identity']['locale'].':'.$slug];
             } elseif ($row['kind'] === 'guide' && $slug === 'from-mbti-to-job-fit') {
                 $paths = ["/$segment/career/guides/$slug"];

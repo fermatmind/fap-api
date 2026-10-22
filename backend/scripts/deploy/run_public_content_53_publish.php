@@ -86,6 +86,7 @@ try {
         'app/Services/ContentPromotion/PublicContent53Package.php',
         'app/Services/ContentPromotion/PublicContent53State.php',
         'app/Services/ContentPromotion/PublicContent53Writer.php',
+        'app/Services/ContentPromotion/RiasecCodeSampleArticles.php',
         'config/content_promotion.php',
         'scripts/deploy/run_public_content_53_publish.php',
     ];
