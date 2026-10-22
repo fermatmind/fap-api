@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 /** The six reviewed Article identities in the existing transaction. @review-surface article */
 final class RiasecCodeSampleArticles
 {
+    private const SEO_LIMITS = ['seo_title' => 60, 'seo_description' => 160, 'og_title' => 90, 'og_description' => 200];
+
     public const SLUGS = ['ric-holland-code-career-exploration', 'iar-holland-code-career-exploration', 'sae-holland-code-career-exploration'];
 
     public static function package(string $bytes, string $review, string $sha): array
@@ -52,6 +54,7 @@ final class RiasecCodeSampleArticles
                 || $copyFields !== ['content_md', 'excerpt', 'seo_text', 'title']
                 || $seoFields !== ['og_description', 'og_title', 'seo_description', 'seo_title']
                 || array_filter(array_merge(array_diff_key($copy, ['seo_text' => true]), $seo), static fn ($value): bool => ! is_string($value) || trim($value) === '')
+                || array_filter($seo, static fn ($value, $field): bool => mb_strlen($value) > self::SEO_LIMITS[$field], ARRAY_FILTER_USE_BOTH)
                 || preg_match('/^# /m', $copy['content_md']) === 1) {
                 throw new DomainException('public_content_53_riasec_code_samples_identity_or_fields_invalid');
             }
