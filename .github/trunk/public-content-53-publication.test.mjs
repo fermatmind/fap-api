@@ -1,17 +1,18 @@
 import test from 'node:test';
+import { classifyPaths } from './classify-paths.mjs';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
+import { selectPublicContentPackage, packageDigest, executorPaths, inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
-import { assertDom, domOf, pathFor, read, projection, readOnlinePrestate } from './public-content-53-online-qa.mjs';
+import { assertNewArticleDiscovery, assertDom, domOf, pathFor, read, projection, readOnlinePrestate } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
+process.env.PUBLIC_CONTENT_53_PACKAGE_NAME='riasec-code-samples';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
-const planningDigest=()=>createHash('sha256').update('fermatmind.public_content_career_planning.v1\n'+['career-planning.json','career-planning-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
-const guideDigest=()=>createHash('sha256').update('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const riasecDigest=()=>createHash('sha256').update('fermatmind.public_content_article_amendment.v1\n'+['riasec-amendment.json','riasec-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
+const guideDigest=()=>createHash('sha256').update('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const translationDigest=()=>createHash('sha256').update('fermatmind.public_content_translation.v1\n'+['translation-batch.json','translation-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const copyDigest=()=>createHash('sha256').update('fermatmind.public_content_copy_amendment.v1\n'+['copy-amendment.json','copy-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const alignmentDigest=()=>createHash('sha256').update('fermatmind.public_content_seo_alignment.v1\n'+['seo-alignment.json','seo-alignment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
@@ -115,7 +116,7 @@ test('public signature configuration does not make the package a private publish
  assert.equal(publishers.has('backend/app/Services/ContentPromotion/PublicContent53Package.php'),false);
 });
 test('publication transport fails closed and recovers malformed phase counts',async()=>{
- const env={PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
+ const env={PUBLIC_CONTENT_53_PACKAGE_NAME:'riasec-code-samples',PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
  const execution=buildExecution(env,root);assert.ok(execution.args.includes('StrictHostKeyChecking=yes'));assert.ok(execution.args.includes('ServerAliveInterval=15'));assert.ok(execution.args.includes('ServerAliveCountMax=8'));assert.ok(execution.args.includes('TCPKeepAlive=yes'));
  let recovery=0;
  await assert.rejects(()=>publish(execution,async request=>{if(request.mode==='recover'){recovery++;return {status:0,stdout:JSON.stringify({ok:true,mode:'recover',restored:false,recovery_status:'not_required',source_commit:request.source_commit,workflow_run_id:request.workflow_run_id,workflow_run_attempt:1,package_sha256:request.package_sha256,executor_release_sha256:request.executor_release_sha256,sanitized:true})};}return {status:0,stdout:'{}'};}),error=>error.receipt.recovery_completed === true);
@@ -476,7 +477,7 @@ test('alignment DOM deltas use the selected environment baseline without requiri
 });
 
 
-test('RIASEC publication selects four reviewed native bodies with exact bilingual slugs',()=>{
+test('previous RIASEC publication selects four reviewed native bodies with exact bilingual slugs',()=>{
  const rows=readCandidateRows(root,riasecDigest()).candidates;
  assert.deepEqual(rows.map(row=>[row.page_id,row.identity.slug,row.identity.locale]),[
   ['PAGE-65','riasec-holland-career-interest-test-explained','zh-CN'],
@@ -516,9 +517,39 @@ test('reviewed MBTI comparison adds only the exact reciprocal hreflang pair and 
   assert.throws(()=>assertDom(row,altered,stagingBefore,'staging'),/DISCOVERABILITY/);
 });
 
+test('the selected sample package contains exactly three independent bilingual Article identities',()=>{
+ const rows=readCandidateRows(root).candidates;
+ assert.equal(rows.length,6);
+ assert.equal(new Set(rows.map(row=>row.identity.slug)).size,3);
+ for(const code of ['ric','iar','sae']) {
+  const pair=rows.filter(row=>row.identity.slug===`${code}-holland-code-career-exploration`);
+  assert.deepEqual(pair.map(row=>row.identity.locale).sort(),['en','zh-CN']);
+  assert.equal(pair[0].source_identity.translation_group_id,pair[1].source_identity.translation_group_id);
+  assert.ok(pair.every(row=>row.new_article===true && Object.keys(row.before).length===0 && Object.keys(row.staging_before).length===0));
+ }
+ const source=readFileSync(resolve(root,'scripts/deploy/run_public_content_53_publish.php'),'utf8');
+ const serverPaths=[...source.matchAll(/        '(app\/[^']+|config\/content_promotion.php|scripts\/deploy\/run_public_content_53_publish.php)',/g)].map(m=>m[1]).sort();
+ assert.deepEqual(executorPaths,serverPaths);
+});
+
+test('new sample SEO requires exact reciprocal routes, environment robots, schema and visible prose',()=>{
+ const source=readCandidateRows(root).candidates[0];
+ const row={...source,snapshot:{title:'Code exploration',excerpt:'A sample.',content_md:'## Try a task\n\nKeep the result.',seo_text:{seo_title:'Code exploration',seo_description:'Explore tasks.',og_title:'Code exploration',og_description:'Explore tasks.'}}};
+ const slug=row.identity.slug;
+ const cn=`https://fermatmind.com/zh/articles/${slug}`,en=`https://fermatmind.com/en/articles/${slug}`;
+ const alt=`<link rel="alternate" hreflang="en" href="${en}"><link rel="alternate" hreflang="zh-CN" href="${cn}"><link rel="alternate" hreflang="x-default" href="${en}">`;
+ const html=`<html><head><meta charset="utf-8"><title>Code exploration | FermatMind</title><meta name="description" content="Explore tasks."><meta property="og:title" content="Code exploration"><meta property="og:description" content="Explore tasks."><link rel="canonical" href="${cn}"><meta name="robots" content="index,follow">${alt}<script type="application/ld+json">{"@type":"Article","@id":"${cn}#article","url":"${cn}","mainEntityOfPage":"${cn}","headline":"Code exploration"}</script><script type="application/ld+json">{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"${cn}"}]}</script></head><body><main><h1>Code exploration</h1><h2>Try a task</h2><p>Keep the result.</p></main></body></html>`;
+ assert.doesNotThrow(()=>assertDom(row,html,{missing:true},'production'));
+ assert.doesNotThrow(()=>assertDom(row,html.replace('index,follow','noindex,follow'),{missing:true},'staging'));
+ for(const changed of [html.replace(alt,''),html.replace('hreflang="zh-CN"','hreflang="fr"'),html.replace('"@type":"Article"','"@type":"Thing","name":"Article BreadcrumbList"'),html.replace('index,follow','noindex,follow')])
+  assert.throws(()=>assertDom(row,changed,{missing:true},'production'),/NEW_ARTICLE_SEO/);
+ assert.throws(()=>assertDom(row,html.replace('<p>Keep the result.</p>','<script>Keep the result.</script>'),{missing:true},'production'),/VISIBLE_BODY/);
+});
+
 
 test('career planning selects only the two reviewed English guides and their independent SEO copy',()=>{
- const rows=readCandidateRows(root,planningDigest()).candidates;
+ const digest=createHash('sha256').update('fermatmind.public_content_career_planning.v1\n'+['career-planning.json','career-planning-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
+ const rows=readCandidateRows(root,digest).candidates;
  assert.deepEqual(rows.map(row=>[row.kind,row.identity.slug,row.identity.locale]),[
   ['guide','how-to-find-right-career-direction','en'],['guide','career-transition-playbook','en'],
  ]);
@@ -531,12 +562,69 @@ test('career planning selects only the two reviewed English guides and their ind
  }
 });
 
-
-test('active English guide batch selects only its reviewed identities and native guide projections',()=>{
- const source=JSON.parse(readFileSync(resolve(root,'content_assets/public_content_53/english-career-guides.json'),'utf8'));
+test('sample discovery requires real archive anchors and cannot pass from serialized script paths',()=>{
  const rows=readCandidateRows(root).candidates;
+ const sitemap='<urlset>'+rows.map(row=>`<url><loc>https://fermatmind.com${pathFor(row)}</loc></url>`).join('')+'</urlset>';
+ const llms=rows.map(row=>'https://fermatmind.com'+pathFor(row)).join('\n');
+ const archive=locale=>'<html><body><main>'+rows.filter(row=>row.identity.locale===locale).map(row=>`<a href="${pathFor(row)}">${row.identity.slug}</a>`).join('')+'</main></body></html>';
+ const documents={sitemap,llms,archiveEn:archive('en'),archiveZh:archive('zh-CN')};
+ assert.doesNotThrow(()=>assertNewArticleDiscovery(rows,documents));
+ for(const key of ['archiveEn','archiveZh']) {
+  const bad='<html><body><main><script>'+rows.map(row=>JSON.stringify(pathFor(row))).join('')+'</script></main></body></html>';
+  assert.throws(()=>assertNewArticleDiscovery(rows,{...documents,[key]:bad}),/NEW_ARTICLE_DISCOVERY/);
+ }
+ assert.throws(()=>assertNewArticleDiscovery(rows,{...documents,sitemap:sitemap.replace(pathFor(rows[0]),'/en/articles/unrelated')}),/NEW_ARTICLE_DISCOVERY/);
+});
+
+
+test('exact changed paths select a single package through transport, QA and workflow budgets',()=>{
+ const env={PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
+ for(const [name,file,count] of [['riasec-code-samples','riasec-code-samples.json',6],['career-planning','career-planning.json',2],['guide-amendment','guide-amendment-review.json',1]]) {
+  const selected=selectPublicContentPackage(['backend/content_assets/public_content_53/'+file]);
+  assert.equal(selected,name);
+  const execution=buildExecution({...env,PUBLIC_CONTENT_53_PACKAGE_NAME:selected},root);
+  assert.equal(execution.binding.package_sha256,packageDigest(root,name));
+  assert.equal(execution.request.package_sha256,execution.binding.package_sha256);
+  assert.equal(execution.binding.expected_row_count,count);
+  assert.equal(readCandidateRows(root,execution.request.package_sha256).candidates.length,count);
+ }
+ assert.equal(selectPublicContentPackage(['backend/app/Services/ContentPromotion/PublicContent53Package.php']),null);
+ assert.throws(()=>selectPublicContentPackage(['backend/content_assets/public_content_53/riasec-code-samples.json','backend/content_assets/public_content_53/career-planning.json']),/MULTIPLE_PACKAGES/);
+ assert.throws(()=>selectPublicContentPackage(['backend/content_assets/public_content_53/unknown.json']),/SELECTION_UNKNOWN/);
+ assert.throws(()=>buildExecution(env,root),/SELECTION_REQUIRED/);
+ const workflow=readFileSync(resolve(root,'../.github/workflows/deploy.yml'),'utf8');
+ assert.equal(workflow.split('PUBLIC_CONTENT_53_PACKAGE_NAME: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_package }}').length-1,2);
+ const publisher=readFileSync(resolve(root,'../.github/trunk/public-content-53-publish.mjs'),'utf8');
+ assert.match(publisher,/readOnlinePrestate\([^;]+execution.binding.package_sha256\)/);
+ assert.match(publisher,/verifyOnlineCandidates\([^;]+execution.binding.package_sha256\)/);
+});
+
+test('guide metadata accepts a streamed document title and still rejects missing, stale, duplicate or inert titles',()=>{
+ const source=readCandidateRows(root,packageDigest(root,'career-planning')).candidates[0];
+ const row={...source,snapshot:{...source.snapshot,body_md:'Required visible planning advice.'}};
+ const seo=row.snapshot.seo_text,title=`<title>${seo.seo_title} | FermatMind</title>`;
+ const metadata=`<meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}"><meta name="robots" content="index, follow">`;
+ const html=`<html><head>${metadata}</head><body>${title}<main><h1>${row.snapshot.title}</h1><p>Required visible planning advice.</p></main></body></html>`;
+ const before={dom:domOf(html)};
+ assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ assert.doesNotThrow(()=>assertDom(row,html.replace('<title>','<title data-iq-qa-hidden="true">'),before,'production'));
+ for(const altered of [html.replace(title,''),html.replace(title,'<title>Stale title</title>'),html.replace(title,title+title),html.replace('</head>',title+'</head>'),html.replace(title,`<template>${title}</template>`),html.replace(title,`<script type="application/json">${JSON.stringify(title)}</script>`)])
+  assert.throws(()=>assertDom(row,altered,before,'production'),/METADATA/);
+});
+
+
+test('selected English guide batch selects only its reviewed identities and native guide projections',()=>{
+ const source=JSON.parse(readFileSync(resolve(root,'content_assets/public_content_53/english-career-guides.json'),'utf8'));
+ const digest=packageDigest(root,'english-career-guides');
+ const rows=readCandidateRows(root,digest).candidates;
+ const paths=['backend/content_assets/public_content_53/english-career-guides.json','backend/content_assets/public_content_53/english-career-guides-review.json'];
+ const operations=classifyPaths(paths).operations;
+ assert.equal(operations.public_content_53_publish,true);
+ assert.equal(operations.public_content_53_package,'english-career-guides');
+ assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/riasec-code-samples.json']),/MULTIPLE_PACKAGES/);
+ assert.notEqual(digest,packageDigest(root,'riasec-code-samples'));
  assert.deepEqual(rows,source.candidates);
- assert.equal(inspectPackage(root).expected_row_count,source.candidates.length);
+ assert.equal(inspectPackage(root,'english-career-guides').expected_row_count,source.candidates.length);
  assert.ok(rows.length>=2 && rows.length<=4);
  assert.equal(new Set(rows.map(row=>row.identity.slug)).size,rows.length);
  for(const row of rows){
@@ -551,17 +639,4 @@ test('active English guide batch selects only its reviewed identities and native
   for(const field of ['seo_description','og_description','twitter_description'])assert.ok(row.snapshot.seo_text[field].length<=160);
   if(row.identity.slug==='from-mbti-to-job-fit')assert.equal(row.snapshot.body_md,row.before.body_md);
  }
-});
-
-test('guide metadata accepts a streamed document title and still rejects missing, stale, duplicate or inert titles',()=>{
- const source=readCandidateRows(root).candidates[0];
- const row={...source,snapshot:{...source.snapshot,body_md:'Required visible planning advice.'}};
- const seo=row.snapshot.seo_text,title=`<title>${seo.seo_title} | FermatMind</title>`;
- const metadata=`<meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}"><meta name="robots" content="index, follow">`;
- const html=`<html><head>${metadata}</head><body>${title}<main><h1>${row.snapshot.title}</h1><p>Required visible planning advice.</p></main></body></html>`;
- const before={dom:domOf(html)};
- assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
- assert.doesNotThrow(()=>assertDom(row,html.replace('<title>','<title data-iq-qa-hidden="true">'),before,'production'));
- for(const altered of [html.replace(title,''),html.replace(title,'<title>Stale title</title>'),html.replace(title,title+title),html.replace('</head>',title+'</head>'),html.replace(title,`<template>${title}</template>`),html.replace(title,`<script type="application/json">${JSON.stringify(title)}</script>`)])
-  assert.throws(()=>assertDom(row,altered,before,'production'),/METADATA/);
 });

@@ -12,7 +12,8 @@ export function buildExecution(env, backendRoot) {
     || !/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(env.DEPLOY_USER ?? '')
     || !/^[a-zA-Z0-9][a-zA-Z0-9.:-]*$/.test(env.DEPLOY_HOST ?? '')
     || !/^[1-9][0-9]{0,4}$/.test(env.DEPLOY_PORT ?? '') || Number(env.DEPLOY_PORT) > 65535) throw new Error('PUBLIC_CONTENT_53_TRANSPORT_IDENTITY_INVALID');
-  const binding = { ...inspectPackage(backendRoot), environment: env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT };
+  if (!env.PUBLIC_CONTENT_53_PACKAGE_NAME) throw new Error('PUBLIC_CONTENT_53_PACKAGE_SELECTION_REQUIRED');
+  const binding = { ...inspectPackage(backendRoot,env.PUBLIC_CONTENT_53_PACKAGE_NAME), environment: env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT };
   const request = {
     source_commit: env.DEPLOY_SHA, workflow_run_id: env.GITHUB_RUN_ID,
     workflow_run_attempt: Number(env.GITHUB_RUN_ATTEMPT), package_sha256: binding.package_sha256,
@@ -116,11 +117,11 @@ async function cli() {
     mkdirSync(directory, { recursive: true, mode: 0o700 });
     if (execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim() !== env.DEPLOY_SHA) throw new Error('PUBLIC_CONTENT_53_CHECKOUT_SHA_MISMATCH');
     execution = buildExecution(env, resolve('backend'));
-    const prestate = await readOnlinePrestate(env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT, resolve('backend'));
+    const prestate = await readOnlinePrestate(env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT, resolve('backend'),fetch,undefined,execution.binding.package_sha256);
     transportStarted = true;
     const receipt = await publish(execution);
     try {
-      receipt.online_acceptance = await verifyOnlineCandidates(env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT, resolve('backend'), fetch, undefined, prestate);
+      receipt.online_acceptance = await verifyOnlineCandidates(env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT, resolve('backend'), fetch, undefined, prestate,execution.binding.package_sha256);
     } catch (cause) {
       throw await recoveryFailure(execution, undefined, cause);
     }

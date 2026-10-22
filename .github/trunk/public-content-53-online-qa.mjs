@@ -102,7 +102,7 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
   const [api,web] = hosts(environment); const result={};
   const rows = readCandidateRows(backendRoot,packageSha256).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
   for (const row of rows) {
-    const bytes=await read(api+apiPath(row),fetcher,environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap);
+    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
     if (bytes === null) { result[row.page_id]={missing:true};continue; }
     const data=parseApi(bytes);const value=projection(row,data);
     if (!equal(value,environment === 'staging' ? row.staging_before : row.before) && !equal(value,row.snapshot)) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DRIFT_${row.page_id}`);
@@ -267,6 +267,22 @@ export function assertDom(row,html,before,environment) {
       throw new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_${row.page_id}_ITEM_${index + 1}`);
   }
   const initializedStaging = environment === 'staging' && row.page_id === 'PAGE-60' && before.missing === true && row.staging_bootstrap;
+  const newArticle = row.new_article === true;
+  if (newArticle) {
+    const languages=dom.alternate_entries.filter(entry=>entry.hreflang).map(entry=>[entry.hreflang,entry.href]).sort();
+    const expected=[['en',`https://fermatmind.com/en/articles/${row.identity.slug}`],['zh-CN',`https://fermatmind.com/zh/articles/${row.identity.slug}`],['x-default',`https://fermatmind.com/en/articles/${row.identity.slug}`]].sort();
+    const robots=dom.robots.join(',').toLowerCase().split(',').map(x=>x.trim());
+    const nodes=[];
+    const walk=value=>{if(!value || typeof value !== 'object')return;if(!Array.isArray(value) && Object.hasOwn(value,'@type'))nodes.push(value);for(const child of Object.values(value))walk(child);};
+    for(const bytes of dom.home_jsonld) {try {walk(JSON.parse(bytes));} catch {throw new Error(`PUBLIC_CONTENT_53_NEW_ARTICLE_SEO_${row.page_id}`);}}
+    const typed=(node,type)=>[node['@type']].flat().includes(type);
+    const identity=value=>typeof value === 'string'?value:value?.['@id'];
+    const url='https://fermatmind.com'+pathFor(row);
+    const article=nodes.some(node=>typed(node,'Article') && node.url === url && identity(node.mainEntityOfPage) === url && node['@id'] === url+'#article' && compact(node.headline) === compact(row.snapshot.seo_text.seo_title));
+    const breadcrumb=nodes.some(node=>typed(node,'BreadcrumbList') && Array.isArray(node.itemListElement) && identity(node.itemListElement.at(-1)?.item) === url);
+    if (!equal(languages,expected) || (environment === 'production' ? !robots.includes('index') || robots.includes('noindex') : !robots.includes('noindex'))
+      || !article || !breadcrumb) throw new Error(`PUBLIC_CONTENT_53_NEW_ARTICLE_SEO_${row.page_id}`);
+  }
   const reviewedHreflang = row.enable_hreflang === true;
   if (reviewedHreflang) {
     const cn='https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice';
@@ -280,7 +296,7 @@ export function assertDom(row,html,before,environment) {
       throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
   }
   if (dom.canonical.length !== 1 || (!before.missing && (!equal(dom.canonical,before.dom.canonical) || !equal(dom.robots,before.dom.robots)))
-    || (!initializedStaging && !reviewedHreflang && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
+    || (!newArticle && !initializedStaging && !reviewedHreflang && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
   if (initializedStaging) {
     // The staging Article template deliberately omits hreflang and retains
     // noindex. Bind the missing locale to the observed counterpart policy;
@@ -316,22 +332,45 @@ export function assertDom(row,html,before,environment) {
       || cta.searchParams.get('target_test_slug') !== 'big-five-personality-test-ocean-model' || cta.searchParams.get('source_slug') !== 'big-five') throw new Error('PUBLIC_CONTENT_53_BIG5_TRACKING');
   }
 }
-export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fetch,renderer=renderPage,prestate) {
+export function assertNewArticleDiscovery(rows,documents,environment='production') {
+  const {sitemap,llms,archiveEn,archiveZh}=documents;
+  const links={en:domOf(archiveEn).links,'zh-CN':domOf(archiveZh).links};
+  for(const row of rows) {
+    const path=pathFor(row),url='https://fermatmind.com'+path;
+    if (!sitemap.includes(`<loc>${url}</loc>`) || !llms.includes(url)
+      || !links[row.identity.locale].some(href=>internalTarget(href,environment)?.pathname === path)) throw new Error('PUBLIC_CONTENT_53_NEW_ARTICLE_DISCOVERY');
+  }
+}
+export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fetch,renderer=renderPage,prestate,packageSha256) {
   const [api,web]=hosts(environment);if(!prestate) throw new Error('PUBLIC_CONTENT_53_PRESTATE_REQUIRED');
-  const rows = readCandidateRows(backendRoot).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
+  const rows = readCandidateRows(backendRoot,packageSha256).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
   for (const row of rows) {
     const data=parseApi(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
     const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
+    const createdArticle = row.new_article === true && before?.missing === true;
+    if (row.new_article === true && (!['is_indexable','sitemap_eligible','llms_eligible'].every(key=>native[key] === true)
+      || native.translation_group_id !== row.source_identity.translation_group_id || !Number.isInteger(native.published_revision_id))) throw new Error(`PUBLIC_CONTENT_53_NEW_ARTICLE_QUALIFICATION_${row.page_id}`);
     if(!before || !equal(projection(row,data),row.snapshot)
       || (createdStaging ? native.is_indexable !== row.staging_bootstrap.is_indexable || native.translation_group_id !== row.staging_source_identity.translation_group_id
-        : native.id !== before.id || Object.entries(before.flags).some(([k,v])=>!equal(native[k],v)))) throw new Error(`PUBLIC_CONTENT_53_NATIVE_READBACK_${row.page_id}`);
+        : !createdArticle && (native.id !== before.id || Object.entries(before.flags).some(([k,v])=>!equal(native[k],v))))) throw new Error(`PUBLIC_CONTENT_53_NATIVE_READBACK_${row.page_id}`);
     // One publication only. Existing 300-second public fetch caches can settle
     // while exact candidate DOM assertions remain strict and bounded.
     const deadline=Date.now()+360000;let last;
     while (true) {
-      try { const verifyDOM=html=>assertDom(row,html,before,environment);verifyDOM(await renderer(web+pathFor(row),{surface:'public_page',verifyDOM}));break; }
+      try { const verifyDOM=html=>assertDom(row,html,before,environment);if(row.new_article) verifyDOM(await read(web+pathFor(row),fetcher));verifyDOM(await renderer(web+pathFor(row),{surface:'public_page',verifyDOM}));break; }
       catch(error) {last=error?.message?.startsWith('PUBLIC_CONTENT_53_') ? error : new Error(`PUBLIC_CONTENT_53_BROWSER_FAILED_${row.page_id}`);if(Date.now()>=deadline) throw last;await new Promise(resolve=>setTimeout(resolve,10000));}
     }
   }
-  return {environment,api_readback_count:rows.length,dom_readback_count:rows.length};
+  const newRows=rows.filter(row=>row.new_article);
+  if (newRows.length && environment === 'production') {
+    const deadline=Date.now()+360000;
+    while(true) {
+      try {
+        const [sitemap,llms,archiveEn,archiveZh]=await Promise.all(['/sitemap.xml','/llms.txt','/en/articles','/zh/articles'].map(path=>read(web+path,fetcher)));
+        assertNewArticleDiscovery(newRows,{sitemap,llms,archiveEn,archiveZh},environment);
+        break;
+      } catch(error) {if(Date.now()>=deadline) throw new Error('PUBLIC_CONTENT_53_NEW_ARTICLE_DISCOVERY');await new Promise(resolve=>setTimeout(resolve,10000));}
+    }
+  }
+  return {environment,api_readback_count:rows.length,dom_readback_count:rows.length,raw_html_readback_count:newRows.length,discovery_readback_count:environment === 'production'?newRows.length:0};
 }

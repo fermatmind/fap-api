@@ -90,11 +90,9 @@ test('an oversized ten-page CMS and Career package is refused without borrowing 
   const run = elapsed => spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
     deploy_minutes:'60',PRODUCTION_JOB_BUDGET_SECONDS:String(jobSeconds),PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
   }});
-  assert.equal(run(300).status,0,'the active four-page package keeps full recovery within its selected job cap');
-  const activeRequired = requiredSeconds(60,operations,readCandidateRows(resolve('backend')).candidates.length);
-  const late = run(jobSeconds-activeRequired+60);
-  assert.notEqual(late.status,0);
-  assert.match(late.stderr,/Production budget insufficient/);
+  const refused=run(300);
+  assert.notEqual(refused.status,0,'the selected ten-page package must not borrow the unrelated small package budget');
+  assert.match(refused.stderr,/Production budget insufficient/);
 });
 
 test('the historical ten-page CMS and Career release still exceeds the publication cap', () => {

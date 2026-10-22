@@ -81,8 +81,15 @@ final class PublicContent53Writer
         $this->states->assertLockedBaseline($rows, $before);
         usort($rows, static fn (array $a, array $b): int => ($a['identity']['locale'] === 'en') <=> ($b['identity']['locale'] === 'en'));
         $written = [];
+        $created = 0;
         foreach ($rows as $row) {
             $saved = $before[$row['page_id']];
+            if (($row['new_article'] ?? false) && (($saved['missing'] ?? false) || ($saved['retained_draft'] ?? false))) {
+                $created += app(RiasecCodeSampleArticles::class)->create($row, $context) ? 1 : 0;
+                $written[$row['page_id']] = true;
+
+                continue;
+            }
             if ($this->states->hash($this->states->projection($row)) === $this->states->hash($row['snapshot'])) {
                 continue;
             }
@@ -96,6 +103,7 @@ final class PublicContent53Writer
             $written[$row['page_id']] = true;
         }
 
+        app(RiasecCodeSampleArticles::class)->enableGates($rows, $written);
         foreach ($this->enableReviewedHreflang($rows) as $pageId) {
             $written[$pageId] = true;
         }
@@ -123,7 +131,7 @@ final class PublicContent53Writer
             }
         }
 
-        return ['written_count' => count($written), 'state' => $after];
+        return ['written_count' => count($written), 'created_count' => $created, 'state' => $after];
     }
 
     /** The package selects only an already-public, verified translation pair. */
@@ -168,13 +176,20 @@ final class PublicContent53Writer
     {
         $this->assertContext($context);
         $current = $this->states->read($context->packageSha256, true);
-        if ($this->businessHash($current) === $this->businessHash($before)) {
+        $alreadyPrivate = count(array_filter($before, static fn ($saved): bool => ($saved['missing'] ?? false) || ($saved['retained_draft'] ?? false))) === count($before)
+            && count(array_filter($current, static fn ($saved): bool => ($saved['retained_draft'] ?? false))) === count($before);
+        if ($alreadyPrivate || $this->businessHash($current) === $this->businessHash($before)) {
             return;
         }
         if ($this->states->hash($current) !== $this->states->hash($after)) {
             throw new DomainException('public_content_53_rollback_concurrent_state');
         }
-        foreach ($before as $saved) {
+        foreach ($before as $id => $saved) {
+            if (($saved['missing'] ?? false) || ($saved['retained_draft'] ?? false)) {
+                app(RiasecCodeSampleArticles::class)->unpublish($after[$id], $context);
+
+                continue;
+            }
             $this->restoreValues($saved['table'], $saved['values']);
             foreach ($saved['relations'] as $table => $records) {
                 foreach ($records as $record) {
@@ -192,7 +207,13 @@ final class PublicContent53Writer
                 $this->material->recordPublished($article, $revision, now(), 'rollback');
             }
         }
-        if ($this->businessHash($this->states->read($context->packageSha256, true)) !== $this->businessHash($before)) {
+        $restored = $this->states->read($context->packageSha256, true);
+        foreach ($before as $id => $saved) {
+            if (($saved['missing'] ?? false) || ($saved['retained_draft'] ?? false)) {
+                unset($restored[$id], $before[$id]);
+            }
+        }
+        if ($this->businessHash($restored) !== $this->businessHash($before)) {
             throw new DomainException('public_content_53_rollback_readback');
         }
     }

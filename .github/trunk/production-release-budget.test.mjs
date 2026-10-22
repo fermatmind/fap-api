@@ -74,13 +74,13 @@ test('the selected reviewed package admits with full forward, recovery and settl
  const production=workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
  const admission=production.match(/          remaining=\$\(\([\s\S]*?          test "\$remaining" -ge "\$required"[^\n]*/)?.[0];
  assert.ok(admission);
- const operations={public_content_53_publish:true};
+ const operations={public_content_53_publish:true,public_content_53_package:'riasec-code-samples'};
  const script=admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/,`'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
  const run=elapsed=>spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
-  deploy_minutes:'60',PRODUCTION_JOB_BUDGET_SECONDS:'10800',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed)}});
+  deploy_minutes:'35',PRODUCTION_JOB_BUDGET_SECONDS:'10800',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed)}});
  assert.equal(run(180).status,0);
- const rows=inspectPackage(fileURLToPath(new URL('../../backend',import.meta.url))).expected_row_count;
- const firstLateElapsed=10800-requiredSeconds(60,operations,rows)+1;
+ const rows=inspectPackage(fileURLToPath(new URL('../../backend',import.meta.url)),'riasec-code-samples').expected_row_count;
+ const firstLateElapsed=10800-requiredSeconds(35,operations,rows,true)+1;
  const late=run(firstLateElapsed);
  assert.notEqual(late.status,0);
  assert.match(late.stderr,/Production budget insufficient/);
