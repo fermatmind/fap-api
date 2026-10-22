@@ -330,7 +330,7 @@ test('actual ordinary deployment task bodies cannot call full maintenance transp
     'career:warm-public-authority-cache','career:rebuild-directory-after-detail-repair',
     'guard:career-discoverability-pre-sitemap','guard:career-discoverability-post-sitemap',
     'seo:url-truth-reconciliation-receipt','seo:url-truth-controlled-reconcile',
-    'seo:warm-sitemap-source-cache','seo:refresh-sitemap-source-before-activation',
+    'seo:warm-sitemap-source-cache',
     'guard:public-content-release','healthcheck:sitemap-source'];
   for (const name of names) {
     const task=deployer.split(`task('${name}', function () {`)[1]?.split('\n});')[0];
@@ -342,6 +342,28 @@ function run(...$args){throw new \\RuntimeException('FULL_MAINTENANCE_CALLED');}
 $task=function(){${task}};$task();echo 'focused';`],{encoding:'utf8'});
     assert.equal(run.status,0,`${name}: ${run.stderr}`);
     assert.equal(run.stdout,'focused',name);
+  }
+});
+
+test('ordinary sitemap activation carries compatible authority and rebuilds only when handoff is unavailable', () => {
+  const task = deployer.split("task('seo:refresh-sitemap-source-before-activation', function () {")[1].split('\n});')[0];
+  for (const carried of [true, false]) for (const rebuildFails of [false, true]) {
+    const result = spawnSync('php', ['-r', `namespace Deployer;
+function deployMode(){return 'standard';}
+function deployCanSudoWwwData(){return true;}
+function deployPlaceholderPathArg($root,$suffix){return $root.'/'.$suffix;}
+function writeln($message){}
+function run($command,$timeout){
+  if(!str_contains($command,'artisan seo:carry-sitemap-source-cache') || $timeout !== 35)throw new \\RuntimeException('UNEXPECTED_TRANSPORT');
+  echo 'carry;';return 'sitemap_handoff=${carried ? 'carried' : 'rebuild_required'}';
+}
+function deployWarmSitemapSourceCache(){echo 'rebuild;';${rebuildFails ? "throw new \\RuntimeException('SITEMAP_REBUILD_FAILED');" : ''}}
+$task=function(){${task}};
+try {$task();echo 'activate';}catch(\\Throwable $error){fwrite(STDERR,$error->getMessage());exit(1);}`], { encoding: 'utf8' });
+    assert.equal(result.status === 0, carried || !rebuildFails, result.stderr);
+    if (carried) assert.equal(result.stdout, 'carry;activate', 'no full maintenance on compatible release');
+    else if (rebuildFails) assert.equal(result.stdout, 'carry;rebuild;', 'failed source never reaches activation');
+    else assert.equal(result.stdout, 'carry;rebuild;activate');
   }
 });
 

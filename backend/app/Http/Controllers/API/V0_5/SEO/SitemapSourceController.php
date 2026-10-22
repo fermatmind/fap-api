@@ -135,8 +135,11 @@ class SitemapSourceController extends Controller
     /**
      * @param  array{ok: bool, source: string, count: int, items: list<array{loc: string, lastmod: string}>}  $payload
      */
-    public function storeCache(array $payload): void
+    public function storeCache(array $payload, int $ttlSeconds = self::FRESH_TTL_SECONDS): void
     {
+        if ($ttlSeconds < 1 || $ttlSeconds > self::FRESH_TTL_SECONDS) {
+            throw new \RuntimeException('Sitemap candidate freshness is invalid.');
+        }
         if (($payload['ok'] ?? null) !== true || ($payload['source'] ?? null) !== 'backend_sitemap_generator'
             || ! is_array($payload['items'] ?? null) || count($payload['items']) < 1
             || ($payload['count'] ?? null) !== count($payload['items'])) {
@@ -156,7 +159,7 @@ class SitemapSourceController extends Controller
             }
             $seen[$loc] = true;
         }
-        if (! Cache::put(self::CACHE_KEY_FRESH, $payload, self::FRESH_TTL_SECONDS)) {
+        if (! Cache::put(self::CACHE_KEY_FRESH, $payload, $ttlSeconds)) {
             throw new \RuntimeException('Sitemap authority cache write failed.');
         }
         if (Cache::get(self::CACHE_KEY_FRESH) !== $payload) {

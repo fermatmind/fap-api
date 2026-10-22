@@ -3809,9 +3809,21 @@ task('seo:warm-sitemap-source-cache', function () {
 
 task('seo:refresh-sitemap-source-before-activation', function () {
     if (deployMode() === 'standard') {
-        writeln('Skip sitemap prewarming during ordinary deployment.');
+        // Fast releases carry a still-fresh compatible snapshot into their own key.
+        // Changed inputs or unavailable authority must rebuild before activation, never publish fallback.
+        $sudoPrefix = deployCanSudoWwwData() ? 'sudo -n -u www-data --' : '';
+        $result = run(sprintf(
+            'cd %s && if %s /usr/bin/timeout --signal=TERM --kill-after=5s 25s {{bin/php}} artisan seo:carry-sitemap-source-cache --previous-backend=%s --no-interaction --no-ansi; then echo sitemap_handoff=carried; else echo sitemap_handoff=rebuild_required; fi',
+            deployPlaceholderPathArg('{{release_path}}', 'backend'),
+            $sudoPrefix,
+            deployPlaceholderPathArg('{{current_path}}', 'backend'),
+        ), timeout: 35);
+        if (str_contains($result, 'sitemap_handoff=carried')) {
+            writeln('Sitemap source fresh cache carried into candidate; no inventory regeneration.');
 
-        return;
+            return;
+        }
+        writeln('Sitemap source requires candidate regeneration before activation.');
     }
     // Full candidate guards can consume most of the fresh TTL. Renew the same
     // verified generation immediately before every runtime-root activation.
