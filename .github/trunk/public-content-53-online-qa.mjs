@@ -55,13 +55,14 @@ $walk = function($node) use (&$walk) {
 };
 $labels=[]; foreach($xp->query('//main//a') as $anchor) { $label=$walk($anchor); if (trim($label)!=='') $labels[$anchor->getAttribute('href')][]=$label; }
 $values = function($query,$attr=null) use($xp,$walk) { $out=[];foreach($xp->query($query) as $node) $out[]=$attr===null?$walk($node):$node->getAttribute($attr);return $out;};
+$documentTitles=[]; foreach($xp->query('/html/head/title | /html/body/title') as $node) $documentTitles[]=$node->textContent;
 $alternateEntries=[]; foreach($xp->query('//link[@rel="alternate"]') as $node) $alternateEntries[]=['href'=>$node->getAttribute('href'),'type'=>$node->getAttribute('type'),'hreflang'=>$node->getAttribute('hreflang')];
 $quickstart=[]; foreach($xp->query('//script[@type="application/ld+json" and @id="tests-hub-quickstart-en"]') as $node) $quickstart[]=$node->textContent;
 $homeJsonLd=[]; foreach($xp->query('//script[@type="application/ld+json"]') as $node) $homeJsonLd[]=$node->textContent;
 echo json_encode(['link_labels'=>$labels,'body'=>$values('//main[not(ancestor::main)]'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
  'home_jsonld'=>$homeJsonLd,'home_iq_cards'=>$values('//main//article[.//a[contains(@href,"iq-test-intelligence-quotient-assessment")]]'),
  'tests_quickstart_jsonld'=>$quickstart,'article_body'=>$values('//main//article[@data-testid="article-detail-content"]'),
- 'title'=>$values('/html/head/title | /html/body/title'),'description'=>$values('//meta[@name="description"]','content'),
+ 'title'=>$documentTitles,'description'=>$values('//meta[@name="description"]','content'),
  'og_title'=>$values('//meta[@property="og:title"]','content'),'og_description'=>$values('//meta[@property="og:description"]','content'),
  'canonical'=>$values('//link[@rel="canonical"]','href'),'robots'=>$values('//meta[@name="robots"]','content'),
  'alternates'=>$values('//link[@rel="alternate"]','href'),'alternate_entries'=>$alternateEntries],JSON_THROW_ON_ERROR);`;
