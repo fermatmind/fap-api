@@ -6,6 +6,9 @@ import { canonical } from './iq-public-scale-package.mjs';
 
 export const packagePath = 'content_assets/public_content_53';
 export function packageDigest(backendRoot) {
+  if (existsSync(resolve(backendRoot, packagePath, 'english-career-guides.json'))) {
+    return sha('fermatmind.public_content_english_career_guides.v1\n'+['english-career-guides.json','english-career-guides-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
+  }
   if (existsSync(resolve(backendRoot, packagePath, 'career-planning.json'))) {
     return sha('fermatmind.public_content_career_planning.v1\n'+['career-planning.json','career-planning-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
   }

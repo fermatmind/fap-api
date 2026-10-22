@@ -4,11 +4,12 @@ import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
+import { inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
 import { assertDom, domOf, pathFor, read, projection, readOnlinePrestate } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
+const planningDigest=()=>createHash('sha256').update('fermatmind.public_content_career_planning.v1\n'+['career-planning.json','career-planning-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const guideDigest=()=>createHash('sha256').update('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const riasecDigest=()=>createHash('sha256').update('fermatmind.public_content_article_amendment.v1\n'+['riasec-amendment.json','riasec-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const translationDigest=()=>createHash('sha256').update('fermatmind.public_content_translation.v1\n'+['translation-batch.json','translation-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
@@ -517,7 +518,7 @@ test('reviewed MBTI comparison adds only the exact reciprocal hreflang pair and 
 
 
 test('career planning selects only the two reviewed English guides and their independent SEO copy',()=>{
- const rows=readCandidateRows(root).candidates;
+ const rows=readCandidateRows(root,planningDigest()).candidates;
  assert.deepEqual(rows.map(row=>[row.kind,row.identity.slug,row.identity.locale]),[
   ['guide','how-to-find-right-career-direction','en'],['guide','career-transition-playbook','en'],
  ]);
@@ -527,5 +528,27 @@ test('career planning selects only the two reviewed English guides and their ind
   const data={ok:true,guide:{...row.identity,...row.snapshot,guide_code:row.identity.slug,is_public:true},seo_meta:row.snapshot.seo_text};
   assert.deepEqual(projection(row,data),row.snapshot);
   assert.throws(()=>projection(row,{...data,guide:{...data.guide,guide_code:'another-guide'}}),/IDENTITY/);
+ }
+});
+
+
+test('active English guide batch selects only its reviewed identities and native guide projections',()=>{
+ const source=JSON.parse(readFileSync(resolve(root,'content_assets/public_content_53/english-career-guides.json'),'utf8'));
+ const rows=readCandidateRows(root).candidates;
+ assert.deepEqual(rows,source.candidates);
+ assert.equal(inspectPackage(root).expected_row_count,source.candidates.length);
+ assert.ok(rows.length>=2 && rows.length<=4);
+ assert.equal(new Set(rows.map(row=>row.identity.slug)).size,rows.length);
+ for(const row of rows){
+  assert.equal(row.kind,'guide');assert.equal(row.identity.locale,'en');
+  assert.ok(!['how-to-find-right-career-direction','career-transition-playbook','iq-eq-balance-at-work'].includes(row.identity.slug));
+  assert.equal(row.snapshot.title,row.before.title);
+  const data={ok:true,guide:{...row.identity,...row.snapshot,guide_code:row.identity.slug,is_public:true},seo_meta:row.snapshot.seo_text};
+  assert.deepEqual(projection(row,data),row.snapshot);
+  assert.throws(()=>projection(row,{...data,guide:{...data.guide,guide_code:'wrong-guide'}}),/IDENTITY/);
+  assert.notDeepEqual(projection(row,{...data,seo_meta:{...data.seo_meta,seo_description:'Stale generic summary'}}),row.snapshot);
+  for(const field of ['seo_title','og_title','twitter_title'])assert.equal(row.snapshot.seo_text[field],row.before.seo_text[field]);
+  for(const field of ['seo_description','og_description','twitter_description'])assert.ok(row.snapshot.seo_text[field].length<=160);
+  if(row.identity.slug==='from-mbti-to-job-fit')assert.equal(row.snapshot.body_md,row.before.body_md);
  }
 });
