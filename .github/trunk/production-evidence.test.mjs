@@ -40,7 +40,7 @@ test('expired or malformed authority never downloads; corrupt bytes never retry'
 });
 
 const candidate = 'a'.repeat(40);
-const ciRun = () => ({id:7,head_sha:candidate,head_branch:'main',event:'push',run_attempt:1,
+const ciRun = () => ({id:7,path:'.github/workflows/ci.yml',head_sha:candidate,head_branch:'main',event:'push',run_attempt:1,
   status:'completed',conclusion:'success',created_at:'2026-10-22T13:48:40Z'});
 
 test('a receipt-bound CI is read by its exact run ID without consulting the run list', () => {
@@ -56,7 +56,7 @@ test('a receipt-bound CI is read by its exact run ID without consulting the run 
 });
 
 test('the exact CI lookup rejects wrong identity, SHA, event, branch, state and attempt', () => {
-  for(const mutation of [{id:8},{head_sha:'b'.repeat(40)},{head_branch:'other'},{event:'pull_request'},
+  for(const mutation of [{id:8},{path:'.github/workflows/nightly.yml'},{head_sha:'b'.repeat(40)},{head_branch:'other'},{event:'pull_request'},
     {status:'in_progress'},{conclusion:'failure'},{run_attempt:2}]) {
     assert.throws(()=>readProductionCI(candidate,{ci_run_id:7},path=>{
       assert.equal(path,'actions/runs/7');return {...ciRun(),...mutation};
