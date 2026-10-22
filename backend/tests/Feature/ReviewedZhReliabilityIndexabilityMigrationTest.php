@@ -20,6 +20,7 @@ final class ReviewedZhReliabilityIndexabilityMigrationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->travelTo(\Illuminate\Support\Carbon::parse('2026-10-21 12:00:00'));
         $this->originalConnection = DB::getDefaultConnection();
         $connection = DB::connection()->getConfig();
         $connection['prefix'] = 'zh_reliability_index_'.bin2hex(random_bytes(6)).'_';
@@ -64,6 +65,7 @@ final class ReviewedZhReliabilityIndexabilityMigrationTest extends TestCase
         DB::purge('zh_reliability_index_fixture');
         DB::setDefaultConnection($this->originalConnection);
         Schema::clearResolvedInstance('db.schema');
+        $this->travelBack();
         parent::tearDown();
     }
 
@@ -112,7 +114,7 @@ final class ReviewedZhReliabilityIndexabilityMigrationTest extends TestCase
             'missing revision' => ['working_revision_id' => 99, 'published_revision_id' => 99],
             'changed copy' => ['content_md' => 'Unreviewed replacement'],
             'different canonical' => ['canonical_path' => '/science'],
-            'future publication' => ['published_at' => '2999-01-01'],
+            'future publication' => ['published_at' => '2026-10-22 12:00:00'],
         ]);
     }
 

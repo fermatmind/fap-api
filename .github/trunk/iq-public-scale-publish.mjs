@@ -27,8 +27,9 @@ export function buildExecution(env, backendRoot) {
   args.push('-p', env.DEPLOY_PORT, `${env.DEPLOY_USER}@${env.DEPLOY_HOST}`, command);
   return { binding, request, args };
 }
+export const IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS = 800000;
 const transport = (execution, request) => spawnSync('ssh', execution.args, {
-  input: JSON.stringify(request), encoding: 'utf8', timeout: 800000, maxBuffer: 262144,
+  input: JSON.stringify(request), encoding: 'utf8', timeout: IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS, maxBuffer: 262144,
   stdio: ['pipe', 'pipe', 'pipe'],
 });
 const failureTypes = new Set(['Error', 'TypeError', 'SyntaxError', 'RangeError']);

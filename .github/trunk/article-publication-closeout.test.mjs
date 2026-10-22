@@ -43,7 +43,8 @@ test('pending IQ publication fits the production job with matching remaining bud
   const operations = classifyPaths(['backend/content_assets/iq_public/entry/20261009-v1/IQ-01-en.md']).operations;
   assert.equal(operations.iq_public_scale_publish, true);
   const required = requiredSeconds(30, operations);
-  assert.equal(required, 7560);
+  assert.equal(required, 6593);
+  assert.equal(jobSeconds, 7200);
   assert.ok(jobSeconds - 60 >= required, 'reserve a minute of setup before admitting the pending IQ publication');
   const admission = production.match(/          remaining=\$\(\([\s\S]*?          test "\$remaining" -ge "\$required"/)?.[0];
   assert.ok(admission);
@@ -56,7 +57,7 @@ test('pending IQ publication fits the production job with matching remaining bud
   assert.notEqual(runAdmission(jobSeconds-required+60).status, 0, 'actual workflow must still refuse admission when recovery no longer fits');
 });
 
-test('the selected ten-page CMS package fits with full Career and recovery allowances', () => {
+test('an oversized ten-page CMS and Career package is refused without borrowing recovery', () => {
   const workflow = read('../workflows/deploy.yml');
   const production = workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
   const jobSeconds = Number(production.match(/^    timeout-minutes: (\d+)$/m)?.[1]) * 60;
@@ -70,7 +71,7 @@ test('the selected ten-page CMS package fits with full Career and recovery allow
   const required = requiredSeconds(60,operations,rows.length);
   assert.equal(required,6360+1600+10*600);
   assert.ok(9000 < 6360+26000,'the former lane-wide reserve rejected before Deployer started');
-  assert.ok(jobSeconds-300 >= required,'retain setup, full forward work, LKG and closeout');
+  assert.ok(jobSeconds-300 < required,'the original 120m cap cannot admit this combination with full recovery');
   assert.ok(requiredSeconds(60,operations,53) > jobSeconds,'an oversized package must still be refused');
   for (const count of [0,-1,1.5,NaN,Infinity,'10']) {
     assert.throws(()=>requiredSeconds(60,operations,count),/PUBLIC_CONTENT_ROW_COUNT_INVALID/);
@@ -81,13 +82,14 @@ test('the selected ten-page CMS package fits with full Career and recovery allow
   const run = elapsed => spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
     deploy_minutes:'60',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
   }});
-  assert.equal(run(300).status,0);
+  assert.notEqual(run(300).status,0);
+  assert.match(run(300).stderr,/Production budget insufficient/);
   const late = run(jobSeconds-required+60);
   assert.notEqual(late.status,0);
   assert.match(late.stderr,/Production budget insufficient/);
 });
 
-test('the pending bilingual CMS and Career release retains other-window content and fits its actual budget', () => {
+test('the historical bilingual CMS and Career release retains its consumers and exceeds the restored cap', () => {
   const production = 'b03c2bdad63404e3ddf45e05ea95f7d649567c46';
   const paused = '7fa8c6e292e1f2c15ea8740c69accb74407b8240';
   const pending = execFileSync('git',['diff','--name-only',production,paused],{encoding:'utf8'}).trim().split('\n');
@@ -109,8 +111,8 @@ test('the pending bilingual CMS and Career release retains other-window content 
   assert.equal(count,10);
   const required = requiredSeconds(60,release.operations,count);
   assert.equal(required,13960);
-  assert.ok(14400-300 >= required);
-  assert.ok(requiredSeconds(60,{...release.operations,iq_public_articles_publish:true},count)>14400,
+  assert.ok(7200-300 < required);
+  assert.ok(requiredSeconds(60,{...release.operations,iq_public_articles_publish:true},count)>7200,
     'a genuinely larger mixed publication must not borrow this package budget');
 });
 

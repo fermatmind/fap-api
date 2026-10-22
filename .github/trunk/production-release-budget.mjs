@@ -8,6 +8,17 @@
 // 360s cache-settlement loop (including its final bounded browser attempt).
 // Both 800s publication/recovery SSH limits remain reserved separately.
 import {readCandidateRows} from './public-content-53-package.mjs';
+import {IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS} from './iq-public-scale-publish.mjs';
+import {IQ_CANDIDATE_READ_TIMEOUT_MS, IQ_HTTP_READ_TIMEOUT_MS} from './iq-public-scale-online-qa.mjs';
+
+// Two locales: API + HTML per locale, then a real browser and final assertion.
+// Keep the shared reader unchanged. Its 45s timer can overrun by one synchronous
+// 30s DOM assertion; browser shutdown takes <=6.5s, and final DOM QA another 30s.
+// Source contracts bind those shared limits; 120s covers local package/setup work.
+export const IQ_PUBLIC_SCALE_BUDGET_SECONDS = Math.ceil(
+  (2 * IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS + IQ_CANDIDATE_READ_TIMEOUT_MS
+    + 4 * IQ_HTTP_READ_TIMEOUT_MS + 2 * (45000 + 30000 + 6500 + 30000)) / 1000 + 120,
+);
 
 export function requiredSeconds(deployMinutes, operations, publicContentRows = 53) {
   if (![30,35,60].includes(deployMinutes)) throw new Error('DEPLOY_BUDGET_INVALID');
@@ -16,7 +27,7 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
     eq_new_source_articles_publish: 2600,
     eq_existing_public_pages_publish: 6000,
     eq_new_english_articles_publish: 2600,
-    iq_public_scale_publish: 3000,
+    iq_public_scale_publish: IQ_PUBLIC_SCALE_BUDGET_SECONDS,
     iq_public_articles_publish: 8000,
     iq_eq_topic_publish: 3000,
   };

@@ -6,6 +6,8 @@ import { packageSha256, packagePath } from './iq-public-scale-package.mjs';
 import { articleDom, assertSsrCandidate as assertPublicSurface, renderPage } from './iq-public-article-online-qa.mjs';
 
 export { renderPage };
+export const IQ_CANDIDATE_READ_TIMEOUT_MS = 30000;
+export const IQ_HTTP_READ_TIMEOUT_MS = 15000;
 const slug = 'iq-test-intelligence-quotient-assessment';
 const headings = { en: 'Free IQ Test', zh: '免费智商测试（IQ）' }; // Bound product UI heading; reviewed SEO comes from the immutable package.
 export function ssrMainText(html) {
@@ -50,7 +52,7 @@ export function readCandidateRows(backendRoot) {
   // The PHP reader validates all exact package bytes before metadata is read.
   const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/IqPublicEntryPackage.php"; echo json_encode((new App\\Services\\ContentPromotion\\IqPublicEntryPackage)->read($argv[1],$argv[2]), JSON_THROW_ON_ERROR);';
   const root = resolve(backendRoot);
-  const rows = JSON.parse(execFileSync('php', ['-r', code, root, packageSha256], { encoding: 'utf8', timeout: 30000, maxBuffer: 262144, stdio: ['pipe', 'pipe', 'pipe'] }));
+  const rows = JSON.parse(execFileSync('php', ['-r', code, root, packageSha256], { encoding: 'utf8', timeout: IQ_CANDIDATE_READ_TIMEOUT_MS, maxBuffer: 262144, stdio: ['pipe', 'pipe', 'pipe'] }));
   return rows.map(row => ({ ...row, metadata: JSON.parse(readFileSync(resolve(root, packagePath, `IQ-01-${row.identity.locale}.json`), 'utf8')).metadata }));
 }
 export async function verifyOnlineCandidates(environment, backendRoot, fetcher = fetch, renderer = renderPage) {
@@ -61,7 +63,7 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     const surface = type === 'application/json' ? 'API' : 'PAGE';
     let response, bytes;
     try {
-      response = await fetcher(url, { redirect: 'error', signal: AbortSignal.timeout(15000), headers: { 'Cache-Control': 'no-cache' } });
+      response = await fetcher(url, { redirect: 'error', signal: AbortSignal.timeout(IQ_HTTP_READ_TIMEOUT_MS), headers: { 'Cache-Control': 'no-cache' } });
       if (response.status !== 200 || !response.headers.get('content-type')?.includes(type)) throw new Error('IQ_ONLINE_RESPONSE_INVALID');
       bytes = await response.text();
     } catch (error) {

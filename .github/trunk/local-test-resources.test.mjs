@@ -150,3 +150,17 @@ test('every existing trunk contract job provisions native tools before its tests
  assert.match(block,/extension_loaded\("pdo_sqlite"\)/);assert.doesNotMatch(block,/\|\| true|continue-on-error/);
  }
 });
+
+
+test('Nightly workflow contracts fetch the historical commits used by release regressions',()=>{
+ const source=readFileSync(join(root,'.github/workflows/nightly.yml'),'utf8');
+ const job=source.match(/\n  workflow-contracts:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
+ assert.ok(job);
+ const checkout=job.slice(job.indexOf('- uses: actions/checkout@'),job.indexOf('- uses: actions/setup-node@'));
+ assert.match(checkout,/fetch-depth: 0/);
+ assert.match(checkout,/persist-credentials: false/);
+ const ci=readFileSync(join(root,'.github/workflows/ci.yml'),'utf8');
+ const classify=ci.match(/\n  classify:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
+ assert.ok(classify);
+ assert.match(classify.slice(0,classify.indexOf('- uses: actions/setup-node@')),/fetch-depth: 0/);
+});

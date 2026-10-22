@@ -88,7 +88,7 @@ final class ArticlePublishedCoverAltWorkspaceTest extends TestCase
         $data = $workspace->prepareCoverAlt($article);
         $data['cover_image_alt'] = '中文图示说明';
         $this->assertTrue($workspace->updateCoverAlt($article, $data)['ok']);
-        $this->assertSame($payload['cover_image_variants'], $article->fresh()->cover_image_variants);
+        $this->assertJsonValueSame($payload['cover_image_variants'], $article->fresh()->cover_image_variants);
         $this->assertSame('中文图示说明', $article->fresh()->cover_image_alt);
     }
 

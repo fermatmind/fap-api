@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_5;
 
 use App\Services\Cms\MbtiTraitExplanations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 final class MbtiTraitExplanationsTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $migration = require database_path('migrations/2026_09_12_180000_create_mbti_trait_catalogs_table.php');
-        $migration->up();
-    }
+    use RefreshDatabase;
 
     private function publish(): MbtiTraitExplanations
     {

@@ -525,7 +525,7 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame(app(ArticleBodyHeadingGuard::class)->downgradeMarkdownH1ToH2($package['body_markdown']), $article->content_md);
         $metadata = $article->cover_image_variants['editorial_package_v1'];
         foreach (['references', 'answer_surface_v1', 'cta_slots', 'cover_image_prompt', 'cover_image_style_tag'] as $key) {
-            $this->assertSame($package[$key], $metadata[$key]);
+            $this->assertJsonValueSame($package[$key], $metadata[$key]);
         }
         $this->assertArrayNotHasKey('body_visual_image_url', $metadata);
         $this->assertArrayNotHasKey('unknown_old_metadata', $article->cover_image_variants);
