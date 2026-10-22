@@ -54,7 +54,7 @@ export function readProductionCI(candidate, timing, api) {
     // The immutable timing receipt already identifies the exact CI run. A
     // filtered run-list response is not authority for whether that run exists.
     const ci = api(`actions/runs/${id}`);
-    if (!valid(ci) || String(ci.id) !== id) throw new Error('Invalid production CI binding');
+    if (!valid(ci) || ci.path !== '.github/workflows/ci.yml' || String(ci.id) !== id) throw new Error('Invalid production CI binding');
     return ci;
   }
   // Retain the timestamp-bound compatibility path for older timing receipts.
