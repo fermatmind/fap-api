@@ -47,13 +47,51 @@ jobs:
       A08_GATE_ONLY: 'false'
       SOURCE_DEPLOY_RUN_ID: ${{ github.event.workflow_run.id }}
     steps:
+      # workflow_run's default-branch tip can be ahead of its completed Deploy.
+      # Qualify producer code independently; the source step still binds the
+      # actual installed SHA and original Deploy evidence, including rollback.
+      - name: Select CI-qualified producer on this main history
+        id: producer
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            const repository = `${context.repo.owner}/${context.repo.repo}`;
+            if (repository !== 'fermatmind/fap-api' || !/^[a-f0-9]{40}$/.test(context.sha)) throw new Error('A08_PRODUCER_IDENTITY_HOLD');
+            const {data} = await github.rest.actions.listWorkflowRuns({
+              ...context.repo, workflow_id: 'ci.yml', branch: 'main', event: 'push', status: 'success', per_page: 100,
+            });
+            for (const run of data.workflow_runs) {
+              if (run.repository?.full_name !== repository || run.path !== '.github/workflows/ci.yml'
+                  || run.head_branch !== 'main' || run.event !== 'push' || run.run_attempt !== 1
+                  || run.status !== 'completed' || run.conclusion !== 'success' || !/^[a-f0-9]{40}$/.test(run.head_sha ?? '')) continue;
+              const {data: comparison} = await github.rest.repos.compareCommits({
+                ...context.repo, base: run.head_sha, head: context.sha,
+              });
+              if (!['ahead', 'identical'].includes(comparison.status)) continue;
+              core.setOutput('sha', run.head_sha);
+              return;
+            }
+            throw new Error('A08_PRODUCER_CI_HOLD');
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ steps.producer.outputs.sha }}
           fetch-depth: 0
           persist-credentials: false
       - name: Verify exact producer SHA has successful main CI
-        run: node .github/trunk/seo-platform-12a08-source.mjs --verify-producer
+        env:
+          A08_PRODUCER_SHA: ${{ steps.producer.outputs.sha }}
+        run: |
+          node --input-type=module - <<'JS'
+          import {execFileSync} from 'node:child_process';
+          import {appendFileSync, writeFileSync} from 'node:fs';
+          import {verifyProducer} from './.github/trunk/seo-platform-12a08-source.mjs';
+          const repository = process.env.GITHUB_REPOSITORY;
+          const api = path => JSON.parse(execFileSync('gh', ['api', `repos/${repository}/${path}`], {encoding: 'utf8', timeout: 30000, maxBuffer: 16*1024*1024}));
+          const proof = verifyProducer({repository, sha: process.env.A08_PRODUCER_SHA,
+            checkedOutSha: execFileSync('git', ['rev-parse', 'HEAD'], {encoding: 'utf8'}).trim(), api});
+          writeFileSync('a08-producer.json', JSON.stringify(proof)+'\n');
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY, `A08 producer: ${proof.producer_sha}; successful CI: ${proof.ci_run_id}\n`);
+          JS
       - name: Start existing production transport
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
