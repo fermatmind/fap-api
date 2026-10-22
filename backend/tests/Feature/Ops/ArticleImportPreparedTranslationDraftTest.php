@@ -7,6 +7,9 @@ namespace Tests\Feature\Ops;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
+use App\Services\Audit\AuditLogger;
+use App\Support\ArticleSourceTargetSnapshot;
+use App\Support\CanonicalTranslationPayloadHash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
@@ -234,6 +237,160 @@ final class ArticleImportPreparedTranslationDraftTest extends TestCase
                 unlink($path);
             }
         }
+    }
+
+    public function test_refresh_preserves_identity_history_and_metadata_and_binds_current_source_without_provider(): void
+    {
+        [$source, $target] = $this->privateDraft();
+        $this->assertFalse(app(\App\Services\Cms\ArticleTranslationWorkflowService::class)->canGenerateMachineDraft());
+        $oldRevision = $target->workingRevision;
+        $oldBytes = $oldRevision->getAttributes();
+        $seo = $target->seoMeta->getAttributes();
+        $source->forceFill(['content_md' => "# 中文源文\n\n已修订的完整来源正文。"])->save();
+        $source->publishedRevision->forceFill(['content_md' => $source->content_md, 'source_version_hash' => $source->source_version_hash])->save();
+        $source = $source->fresh();
+        $sourceBytes = $source->getAttributes();
+        [$path, $sha, $confirm] = $this->refreshPackage($source, $target);
+        try {
+            $code = Artisan::call('articles:import-prepared-translation-draft', [
+                '--file' => $path, '--sha256' => $sha, '--dry-run' => true,
+            ]);
+            $this->assertSame(0, $code, Artisan::output());
+            $this->assertSame($oldRevision->id, $target->fresh()->working_revision_id);
+            $this->assertSame(0, Artisan::call('articles:import-prepared-translation-draft', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $target = $target->fresh(['workingRevision', 'seoMeta']);
+            $this->assertSame(2, Article::withoutGlobalScopes()->count());
+            $this->assertNotSame($oldRevision->id, $target->working_revision_id);
+            $this->assertSame($oldRevision->id, $target->workingRevision->supersedes_revision_id);
+            $this->assertSame(2, $target->workingRevision->revision_number);
+            $this->assertSame($source->source_version_hash, $target->translated_from_version_hash);
+            $this->assertSame($source->source_version_hash, $target->workingRevision->translated_from_version_hash);
+            $this->assertFalse(app(\App\Services\Cms\ArticleTranslationRevisionWorkspace::class)->isWorkingRevisionStale($target));
+            $this->assertSame($oldBytes, $oldRevision->fresh()->getAttributes());
+            $this->assertSame($sourceBytes, $source->fresh()->getAttributes());
+            $this->assertSame($seo, $target->seoMeta->getAttributes());
+            $this->assertSame('machine_draft', $target->workingRevision->revision_status);
+            $this->assertFalse($target->is_public);
+            $this->assertFalse($target->is_indexable);
+            $this->assertFalse($target->sitemap_eligible);
+            $this->assertFalse($target->llms_eligible);
+            $this->assertNull($target->published_revision_id);
+            $count = ArticleTranslationRevision::withoutGlobalScopes()->count();
+            $this->assertSame(1, Artisan::call('articles:import-prepared-translation-draft', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $this->assertSame($count, ArticleTranslationRevision::withoutGlobalScopes()->count());
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_refresh_rejects_source_target_and_history_drift_without_writing(): void
+    {
+        foreach (['source', 'source_revision_hash', 'target', 'history'] as $drift) {
+            [$source, $target] = $this->privateDraft('refresh-drift-'.$drift);
+            [$path, $sha, $confirm] = $this->refreshPackage($source, $target);
+            try {
+                match ($drift) {
+                    'source' => $source->forceFill(['excerpt' => '来源已更新'])->save(),
+                    'source_revision_hash' => $source->publishedRevision->forceFill(['source_version_hash' => str_repeat('f', 64)])->save(),
+                    'target' => $target->forceFill(['cover_image_alt' => 'A concurrent editorial change'])->saveQuietly(),
+                    'history' => ArticleTranslationRevision::query()->create([
+                        'org_id' => 0, 'article_id' => $target->id, 'source_article_id' => $source->id,
+                        'translation_group_id' => $source->translation_group_id, 'locale' => 'en', 'source_locale' => 'zh-CN',
+                        'revision_number' => 0, 'revision_status' => 'archived', 'title' => 'Prior draft', 'content_md' => 'Prior body',
+                    ]),
+                };
+                $before = [Article::withoutGlobalScopes()->count(), ArticleTranslationRevision::withoutGlobalScopes()->count(), AuditLog::withoutGlobalScopes()->count()];
+                $this->assertSame(1, Artisan::call('articles:import-prepared-translation-draft', [
+                    '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+                ]));
+                $this->assertSame($before, [Article::withoutGlobalScopes()->count(), ArticleTranslationRevision::withoutGlobalScopes()->count(), AuditLog::withoutGlobalScopes()->count()]);
+            } finally {
+                unlink($path);
+            }
+        }
+    }
+
+    public function test_refresh_cannot_replace_reviewed_public_scheduled_or_indexable_targets(): void
+    {
+        foreach (['reviewed', 'public', 'scheduled', 'indexable', 'sitemap', 'deleted'] as $case) {
+            [$source, $target] = $this->privateDraft('refresh-boundary-'.$case);
+            match ($case) {
+                'reviewed' => $target->workingRevision->forceFill(['reviewed_at' => now()])->save(),
+                'public' => $target->forceFill(['is_public' => true])->saveQuietly(),
+                'scheduled' => $target->forceFill(['scheduled_at' => now()->addDay()])->saveQuietly(),
+                'indexable' => $target->forceFill(['is_indexable' => true])->saveQuietly(),
+                'sitemap' => $target->forceFill(['sitemap_eligible' => true])->saveQuietly(),
+                'deleted' => $target->delete(),
+            };
+            [$path, $sha] = $this->refreshPackage($source, $target);
+            try {
+                $this->assertSame(1, Artisan::call('articles:import-prepared-translation-draft', [
+                    '--file' => $path, '--sha256' => $sha, '--dry-run' => true,
+                ]));
+                $this->assertContains('private_unreviewed_target_required', json_decode(Artisan::output(), true)['errors']);
+            } finally {
+                unlink($path);
+            }
+        }
+    }
+
+    public function test_refresh_audit_failure_rolls_back_row_and_new_revision(): void
+    {
+        [$source, $target] = $this->privateDraft('refresh-rollback');
+        [$path, $sha, $confirm] = $this->refreshPackage($source, $target);
+        $before = $target->getAttributes();
+        $revisions = ArticleSourceTargetSnapshot::sourceRevisions($target);
+        $this->mock(AuditLogger::class, function ($mock): void {
+            $mock->shouldReceive('log')->once()->andThrow(new \RuntimeException('injected audit failure'));
+        });
+        try {
+            $this->assertSame(1, Artisan::call('articles:import-prepared-translation-draft', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $this->assertSame($before, $target->fresh()->getAttributes());
+            $this->assertSame($revisions, ArticleSourceTargetSnapshot::sourceRevisions($target));
+            $this->assertContains('execute_or_readback_failed', json_decode(Artisan::output(), true)['errors']);
+        } finally {
+            unlink($path);
+        }
+    }
+
+    /** @return array{Article, Article} */
+    private function privateDraft(string $slug = 'refresh-current-source'): array
+    {
+        $source = $this->source($slug);
+        [$path, $sha, $confirm] = $this->package($source);
+        try {
+            $this->assertSame(0, Artisan::call('articles:import-prepared-translation-draft', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+        } finally {
+            unlink($path);
+        }
+
+        return [$source, Article::withoutGlobalScopes()->where('locale', 'en')->where('slug', $slug)->firstOrFail()];
+    }
+
+    /** @return array{string, string, string} */
+    private function refreshPackage(Article $source, Article $target): array
+    {
+        [$path] = $this->package($source);
+        $package = json_decode(file_get_contents($path), true, 32, JSON_THROW_ON_ERROR);
+        $package['schema'] = 'fermat_article_translation_draft_refresh_v1';
+        $package['target'] = [
+            'article_id' => $target->id, 'working_revision_id' => $target->working_revision_id,
+            'publication_sha256' => ArticleSourceTargetSnapshot::publicationHash($target),
+            'history_sha256' => CanonicalTranslationPayloadHash::hash(ArticleSourceTargetSnapshot::sourceRevisions($target)),
+        ];
+        file_put_contents($path, json_encode($package, JSON_THROW_ON_ERROR));
+        $sha = hash_file('sha256', $path);
+
+        return [$path, $sha, sprintf('Refresh private English draft for source %d in group %s with package %s.',
+            $source->id, $source->translation_group_id, $sha)];
     }
 
     private function source(string $slug, string $locale = 'zh-CN'): Article

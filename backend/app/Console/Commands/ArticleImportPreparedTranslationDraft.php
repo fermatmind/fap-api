@@ -9,6 +9,8 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
 use App\Services\Audit\AuditLogger;
+use App\Support\ArticleSourceTargetSnapshot;
+use App\Support\CanonicalTranslationPayloadHash;
 use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
@@ -65,7 +67,9 @@ final class ArticleImportPreparedTranslationDraft extends Command
                     $source = $locked['source'];
                     $copy = $package['translation'];
                     $sourceHash = (string) $source->source_version_hash;
-                    $target = Article::query()->create([
+                    $existing = $locked['target'] ?? null;
+                    $oldHistory = $existing ? ArticleSourceTargetSnapshot::sourceRevisions($existing, [], true) : null;
+                    $target = $existing ?? Article::query()->create([
                         'org_id' => 0,
                         'slug' => (string) $source->slug,
                         'locale' => $copy['locale'],
@@ -97,7 +101,10 @@ final class ArticleImportPreparedTranslationDraft extends Command
                         'translation_group_id' => (string) $source->translation_group_id,
                         'locale' => $copy['locale'],
                         'source_locale' => (string) $source->locale,
-                        'revision_number' => 1,
+                        'revision_number' => $existing
+                            ? ((int) ArticleTranslationRevision::withoutGlobalScopes()->where('article_id', $target->id)->max('revision_number')) + 1
+                            : 1,
+                        'supersedes_revision_id' => $existing?->working_revision_id,
                         'revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT,
                         'source_version_hash' => $sourceHash,
                         'translated_from_version_hash' => $sourceHash,
@@ -113,15 +120,35 @@ final class ArticleImportPreparedTranslationDraft extends Command
                             'editorial_review_state' => 'pending',
                         ],
                     ]);
-                    $target->forceFill(['working_revision_id' => (int) $revision->id])->saveQuietly();
-                    ArticleSeoMeta::query()->create([
-                        'org_id' => 0,
-                        'article_id' => (int) $target->id,
-                        'locale' => $copy['locale'],
-                        'seo_title' => $copy['seo_title'],
-                        'seo_description' => $copy['seo_description'],
-                        'is_indexable' => false,
-                    ]);
+                    $target->forceFill([
+                        'working_revision_id' => (int) $revision->id,
+                        'source_version_hash' => $sourceHash,
+                        'translated_from_version_hash' => $sourceHash,
+                        'title' => $copy['title'],
+                        'excerpt' => $copy['excerpt'],
+                        'content_md' => $copy['content_md'],
+                    ])->saveQuietly();
+                    if (! $existing) {
+                        ArticleSeoMeta::query()->create([
+                            'org_id' => 0,
+                            'article_id' => (int) $target->id,
+                            'locale' => $copy['locale'],
+                            'seo_title' => $copy['seo_title'],
+                            'seo_description' => $copy['seo_description'],
+                            'is_indexable' => false,
+                        ]);
+                    } elseif ($seo = $target->seoMeta()->first()) {
+                        $seo->fill(['seo_title' => $copy['seo_title'], 'seo_description' => $copy['seo_description']]);
+                        if ($seo->isDirty()) {
+                            $seo->save();
+                        }
+                    }
+
+                    if ($existing && CanonicalTranslationPayloadHash::hash($oldHistory) !== CanonicalTranslationPayloadHash::hash(
+                        ArticleSourceTargetSnapshot::sourceRevisions($target, [(int) $revision->id], true)
+                    )) {
+                        throw new RuntimeException('draft_history_changed');
+                    }
 
                     $readback = $target->fresh(['workingRevision', 'seoMeta']);
                     if (! $readback instanceof Article
@@ -132,6 +159,9 @@ final class ArticleImportPreparedTranslationDraft extends Command
                         || (bool) $readback->is_public || (bool) $readback->is_indexable
                         || (bool) $readback->sitemap_eligible || (bool) $readback->llms_eligible
                         || ! hash_equals($sourceHash, (string) $readback->translated_from_version_hash)
+                        || ! hash_equals($sourceHash, (string) $readback->source_version_hash)
+                        || $readback->title !== $copy['title'] || $readback->excerpt !== $copy['excerpt']
+                        || $readback->content_md !== $copy['content_md']
                         || ! hash_equals(hash('sha256', $copy['content_md']), hash('sha256', (string) $readback->workingRevision?->content_md))
                         || (string) $readback->workingRevision?->revision_status !== ArticleTranslationRevision::STATUS_MACHINE_DRAFT
                         || (bool) $readback->seoMeta?->is_indexable) {
@@ -148,6 +178,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
                             'source_article_id' => (int) $source->id,
                             'target_article_id' => (int) $target->id,
                             'working_revision_id' => (int) $revision->id,
+                            'supersedes_revision_id' => $revision->supersedes_revision_id,
                             'translation_group_id' => (string) $source->translation_group_id,
                             'source_version_hash' => $sourceHash,
                             'source_content_sha256' => $package['source']['content_sha256'],
@@ -208,8 +239,9 @@ final class ArticleImportPreparedTranslationDraft extends Command
             throw new RuntimeException('package_sha256_mismatch');
         }
         $package = json_decode($bytes, true, 32, JSON_THROW_ON_ERROR);
-        if (! is_array($package) || array_keys($package) !== ['schema', 'source', 'translation']
-            || $package['schema'] !== 'fermat_article_translation_draft_v1'
+        $refresh = ($package['schema'] ?? null) === 'fermat_article_translation_draft_refresh_v1';
+        if (! is_array($package) || array_keys($package) !== ($refresh ? ['schema', 'source', 'translation', 'target'] : ['schema', 'source', 'translation'])
+            || (! $refresh && $package['schema'] !== 'fermat_article_translation_draft_v1')
             || ! is_array($package['source']) || ! is_array($package['translation'])
             || array_keys($package['source']) !== [
                 'article_id', 'translation_group_id', 'slug', 'locale', 'source_version_hash',
@@ -219,6 +251,14 @@ final class ArticleImportPreparedTranslationDraft extends Command
                 'locale', 'title', 'excerpt', 'content_md', 'seo_title', 'seo_description',
             ]) {
             throw new RuntimeException('package_schema_invalid');
+        }
+        if ($refresh && (! is_array($package['target'])
+            || array_keys($package['target']) !== ['article_id', 'working_revision_id', 'publication_sha256', 'history_sha256']
+            || ! is_int($package['target']['article_id']) || $package['target']['article_id'] <= 0
+            || ! is_int($package['target']['working_revision_id']) || $package['target']['working_revision_id'] <= 0
+            || ! preg_match('/^[0-9a-f]{64}$/D', (string) $package['target']['publication_sha256'])
+            || ! preg_match('/^[0-9a-f]{64}$/D', (string) $package['target']['history_sha256']))) {
+            throw new RuntimeException('target_lock_invalid');
         }
         $source = $package['source'];
         $copy = $package['translation'];
@@ -284,11 +324,12 @@ final class ArticleImportPreparedTranslationDraft extends Command
             $errors[] = 'source_lock_mismatch';
         }
         $published = ArticleTranslationRevision::query()->withoutGlobalScopes()
-            ->whereKey($sourceLock['published_revision_id'])->first();
+            ->whereKey($sourceLock['published_revision_id'])->when($lock, fn ($query) => $query->lockForUpdate())->first();
         if (! $published instanceof ArticleTranslationRevision
             || (int) $published->article_id !== (int) $source->id
             || (int) $published->source_article_id !== (int) $source->id
             || (string) $published->locale !== $sourceLock['locale']
+            || ! hash_equals((string) $source->source_version_hash, (string) $published->source_version_hash)
             || ! in_array((string) $published->revision_status, [
                 ArticleTranslationRevision::STATUS_SOURCE,
                 ArticleTranslationRevision::STATUS_PUBLISHED,
@@ -309,12 +350,38 @@ final class ArticleImportPreparedTranslationDraft extends Command
         if ($lock) {
             $collisions->lockForUpdate();
         }
-        if ($collisions->exists()) {
+        $target = null;
+        if (isset($package['target'])) {
+            $matches = $collisions->get();
+            $target = $matches->first();
+            $working = $target ? ArticleTranslationRevision::withoutGlobalScopes()->whereKey($target->working_revision_id)
+                ->when($lock, fn ($query) => $query->lockForUpdate())->first() : null;
+            if ($matches->count() !== 1 || ! $target instanceof Article || $target->id !== $package['target']['article_id']
+                || $target->deleted_at !== null || ! in_array($target->lifecycle_state, [null, Article::LIFECYCLE_ACTIVE], true)
+                || $target->slug !== $source->slug || $target->translation_group_id !== $source->translation_group_id
+                || (int) $target->source_article_id !== (int) $source->id || (int) $target->translated_from_article_id !== (int) $source->id
+                || $target->status !== 'draft' || $target->translation_status !== Article::TRANSLATION_STATUS_MACHINE_DRAFT
+                || $target->is_public || $target->is_indexable || $target->sitemap_eligible || $target->llms_eligible
+                || $target->published_revision_id !== null || $target->published_at !== null || $target->scheduled_at !== null
+                || ! $working instanceof ArticleTranslationRevision || $working->id !== $package['target']['working_revision_id']
+                || (int) $working->article_id !== (int) $target->id || (int) $working->source_article_id !== (int) $source->id
+                || $working->locale !== $target->locale || $working->translation_group_id !== $source->translation_group_id
+                || $working->revision_status !== ArticleTranslationRevision::STATUS_MACHINE_DRAFT
+                || $working->reviewed_at !== null || $working->approved_at !== null || $working->published_at !== null) {
+                $errors[] = 'private_unreviewed_target_required';
+            } elseif (! hash_equals($package['target']['publication_sha256'], ArticleSourceTargetSnapshot::publicationHash($target, $lock))
+                || ! hash_equals($package['target']['history_sha256'], CanonicalTranslationPayloadHash::hash(
+                    ArticleSourceTargetSnapshot::sourceRevisions($target, [], $lock)
+                ))) {
+                $errors[] = 'target_lock_mismatch';
+            }
+        } elseif ($collisions->exists()) {
             $errors[] = $package['translation']['locale'] === 'en' ? 'english_identity_collision' : 'target_identity_collision';
         }
 
         return [
             'source' => $source,
+            'target' => $target,
             'errors' => $errors,
             'source_version_hash' => (string) $source->source_version_hash,
             'published_revision_id' => (int) $source->published_revision_id,
@@ -340,7 +407,9 @@ final class ArticleImportPreparedTranslationDraft extends Command
     private function confirmation(array $package): string
     {
         return sprintf(
-            'Import private %s draft for source %d in group %s with package %s.',
+            isset($package['target'])
+                ? 'Refresh private %s draft for source %d in group %s with package %s.'
+                : 'Import private %s draft for source %d in group %s with package %s.',
             $package['translation']['locale'] === 'en' ? 'English' : 'zh-CN',
             $package['source']['article_id'],
             $package['source']['translation_group_id'],
