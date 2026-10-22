@@ -613,6 +613,46 @@ PHP;
         self::assertSame(4, DB::transaction(fn () => $writer->publish($newOwner, $before))['written_count']);
     }
 
+    public static function legacyArticleBodies(): array
+    {
+        return [['staging', 'headings'], ['staging', 'newlines'], ['production', 'headings'], ['production', 'newlines']];
+    }
+
+    #[DataProvider('legacyArticleBodies')]
+    public function test_riasec_legacy_native_markdown_matches_reader_but_real_copy_drift_is_rejected(string $environment, string $format): void
+    {
+        config(['content_promotion.public_content_53_environment' => $environment]);
+        $sha = $this->riasecAmendmentDigest();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
+        $this->seedRiasecAmendment($rows, $environment);
+        $article = Article::query()->where($rows[0]['identity'])->firstOrFail();
+        $body = PublicContent53Package::before($rows[0])['content_md'];
+        $native = $format === 'headings' ? preg_replace('/^## /m', '# ', $body) : str_replace("\n", "\r\n", $body);
+        self::assertNotSame($body, $native);
+        DB::table('article_translation_revisions')->where('id', $article->published_revision_id)->update(['content_md' => $native]);
+        $states = app(PublicContent53State::class);
+        $before = $states->read($sha);
+        $states->assertBaseline($rows);
+        $context = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 4, str_repeat('e', 64));
+        $writer = app(PublicContent53Writer::class);
+        $after = DB::transaction(fn () => $writer->publish($context, $before));
+        self::assertSame(4, $after['written_count']);
+        $states->assertPublished($rows, $after['state']);
+        DB::transaction(fn () => $writer->restore($context, $before, $after['state']));
+        self::assertSame($before, $states->read($sha));
+        self::assertSame($native, DB::table('article_translation_revisions')->where('id', $article->published_revision_id)->value('content_md'));
+        DB::table('article_translation_revisions')->where('id', $article->published_revision_id)->update(['content_md' => $native."\nUnreviewed copy change"]);
+        $drifted = $states->read($sha);
+        try {
+            DB::transaction(fn () => $writer->publish($context, $drifted));
+            self::fail('Visible copy drift must remain rejected');
+        } catch (DomainException $error) {
+            self::assertSame('public_content_53_locked_copy_drift', $error->getMessage());
+        }
+        self::assertSame($drifted, $states->read($sha));
+    }
+
     public static function riasecHreflangOnlyOutcomes(): array
     {
         return [['success'], ['cache'], ['receipt']];

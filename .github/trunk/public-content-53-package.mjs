@@ -49,6 +49,7 @@ export const executorPaths = [
   "app/Models/TopicProfileRevision.php",
   "app/Models/TopicProfileSection.php",
   "app/Models/TopicProfileSeoMeta.php",
+  "app/Services/Cms/ArticleBodyHeadingGuard.php",
   "app/Services/Cms/ArticleSeoGateRollout.php",
   "app/Services/Cms/CareerGuideSeoService.php",
   "app/Services/Cms/CareerGuideService.php",

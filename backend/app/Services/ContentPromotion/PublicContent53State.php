@@ -13,6 +13,7 @@ use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
+use App\Services\Cms\ArticleBodyHeadingGuard;
 use DomainException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -213,6 +214,11 @@ final class PublicContent53State
                         continue;
                     }
                     $value = $values[$field] ?? null;
+                    if ($row['kind'] === 'article' && $field === 'content_md') {
+                        // Match the public reader's legacy heading/newline projection.
+                        // The full raw revision remains in the locked CAS/rollback state.
+                        $value = app(ArticleBodyHeadingGuard::class)->downgradeMarkdownH1ToH2((string) $value);
+                    }
                     if (in_array($field, ['faq_items', 'payload_json'], true)) {
                         $value = is_string($value) ? json_decode($value, true, 64, JSON_THROW_ON_ERROR) : ($value ?? []);
                     }
