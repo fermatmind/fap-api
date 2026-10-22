@@ -50,17 +50,34 @@ test('all selected publisher combinations add independently without sharing reco
 test('actual production admission enforces the restored cap and elapsed setup time',()=>{
   const workflow=read('../workflows/deploy.yml');
   const production=workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
-  assert.match(production,/timeout-minutes: 120/);
+  assert.ok(production.includes('timeout-minutes: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 180 || 120 }}'));
+  assert.ok(production.includes('PRODUCTION_JOB_BUDGET_SECONDS: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 10800 || 7200 }}'));
   const admission=production.match(/          remaining=\$\(\([\s\S]*?          test "\$remaining" -ge "\$required"[^\n]*/)?.[0];
   assert.ok(admission);
-  assert.match(admission,/remaining=\$\(\(7200 -/);
+  assert.match(admission,/remaining=\$\(\(PRODUCTION_JOB_BUDGET_SECONDS -/);
   const operations=classifyPaths(['backend/content_assets/iq_public/entry/20261009-v1/IQ-01-en.md']).operations;
   assert.equal(operations.iq_public_scale_publish,true);
   const script=admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/,`'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
   const run=elapsed=>spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
-    deploy_minutes:'30',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed)}});
+    deploy_minutes:'30',PRODUCTION_JOB_BUDGET_SECONDS:'7200',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed)}});
   assert.equal(run(60).status,0);
   const late=run(608);
   assert.notEqual(late.status,0);
   assert.match(late.stderr,/Production budget insufficient/);
+});
+
+
+test('the actual four-page publication admits with full forward, recovery and settlement budgets',()=>{
+ const workflow=read('../workflows/deploy.yml');
+ const production=workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
+ const admission=production.match(/          remaining=\$\(\([\s\S]*?          test "\$remaining" -ge "\$required"[^\n]*/)?.[0];
+ assert.ok(admission);
+ const operations={public_content_53_publish:true};
+ const script=admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/,`'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
+ const run=elapsed=>spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
+  deploy_minutes:'60',PRODUCTION_JOB_BUDGET_SECONDS:'10800',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed)}});
+ assert.equal(run(180).status,0);
+ const late=run(441);
+ assert.notEqual(late.status,0);
+ assert.match(late.stderr,/Production budget insufficient/);
 });

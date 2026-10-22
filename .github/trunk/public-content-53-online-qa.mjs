@@ -265,8 +265,20 @@ export function assertDom(row,html,before,environment) {
       throw new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_${row.page_id}_ITEM_${index + 1}`);
   }
   const initializedStaging = environment === 'staging' && row.page_id === 'PAGE-60' && before.missing === true && row.staging_bootstrap;
+  const reviewedHreflang = row.enable_hreflang === true && environment === 'production';
+  if (reviewedHreflang) {
+    const cn='https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice';
+    const en='https://fermatmind.com/en/articles/mbti-vs-holland-code-career-choice';
+    const expected=[['en',en],['zh-CN',cn],['x-default',en]].sort();
+    const entries=dom.alternate_entries;
+    const languages=entries.filter(entry=>entry.hreflang).map(entry=>[entry.hreflang,entry.href]).sort();
+    const feeds=entries.filter(entry=>!entry.hreflang);
+    const beforeFeeds=before.dom.alternate_entries.filter(entry=>!entry.hreflang);
+    if (!['PAGE-67','PAGE-68'].includes(row.page_id) || !equal(languages,expected) || !equal(feeds,beforeFeeds))
+      throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
+  }
   if (dom.canonical.length !== 1 || (!before.missing && (!equal(dom.canonical,before.dom.canonical) || !equal(dom.robots,before.dom.robots)))
-    || (!initializedStaging && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
+    || (!initializedStaging && !reviewedHreflang && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
   if (initializedStaging) {
     // The staging Article template deliberately omits hreflang and retains
     // noindex. Bind the missing locale to the observed counterpart policy;

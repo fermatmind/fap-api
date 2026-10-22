@@ -6,6 +6,9 @@ import { canonical } from './iq-public-scale-package.mjs';
 
 export const packagePath = 'content_assets/public_content_53';
 export function packageDigest(backendRoot) {
+  if (existsSync(resolve(backendRoot, packagePath, 'riasec-amendment.json'))) {
+    return sha('fermatmind.public_content_article_amendment.v1\n'+['riasec-amendment.json','riasec-amendment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
+  }
   if (existsSync(resolve(backendRoot, packagePath, 'seo-alignment.json'))) {
     return sha('fermatmind.public_content_seo_alignment.v1\n'+['seo-alignment.json','seo-alignment-review.json'].map(name => `${name}\n${sha(readFileSync(resolve(backendRoot, packagePath, name)))}\n`).join(''));
   }
@@ -46,6 +49,7 @@ export const executorPaths = [
   "app/Models/TopicProfileRevision.php",
   "app/Models/TopicProfileSection.php",
   "app/Models/TopicProfileSeoMeta.php",
+  "app/Services/Cms/ArticleSeoGateRollout.php",
   "app/Services/Cms/CareerGuideSeoService.php",
   "app/Services/Cms/CareerGuideService.php",
   "app/Services/ContentPromotion/Adapters/PublicContent53PromotionAdapter.php",
