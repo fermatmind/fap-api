@@ -11,6 +11,13 @@ final class PublicContent53Package
 {
     public const PACKAGE = 'content_assets/public_content_53';
 
+    private const RIASEC_AMENDMENT_TARGETS = [
+        'PAGE-65' => ['article', 'riasec-holland-career-interest-test-explained', 'zh-CN'],
+        'PAGE-66' => ['article', 'what-is-riasec-holland-code-career-interest-test', 'en'],
+        'PAGE-67' => ['article', 'mbti-vs-holland-career-choice', 'zh-CN'],
+        'PAGE-68' => ['article', 'mbti-vs-holland-code-career-choice', 'en'],
+    ];
+
     private const SEO_ALIGNMENT_TARGETS = [
         'PAGE-55' => ['article', 'career-confusion-test-map', 'zh-CN'],
         'PAGE-56' => ['article', 'choose-career-using-personality-tests', 'en'],
@@ -94,6 +101,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/riasec-amendment.json')) {
+            $chain = "fermatmind.public_content_article_amendment.v1\n";
+            foreach (['riasec-amendment.json', 'riasec-amendment-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readArticleAmendment($root, $expectedSha256, 'riasec-amendment');
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/seo-alignment.json')) {
             $chain = "fermatmind.public_content_seo_alignment.v1\n";
             foreach (['seo-alignment.json', 'seo-alignment-review.json'] as $name) {
@@ -532,11 +548,11 @@ final class PublicContent53Package
     }
 
     /** Body-only amendments retain the existing native CAS, rollback and readers. */
-    private function readArticleAmendment(string $root, string $sha): array
+    private function readArticleAmendment(string $root, string $sha, string $name = 'article-amendment'): array
     {
-        $bytes = $this->bytes($root, 'article-amendment.json');
+        $bytes = $this->bytes($root, $name.'.json');
         $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
-        $proof = json_decode($this->bytes($root, 'article-amendment-review.json'), true, 64, JSON_THROW_ON_ERROR);
+        $proof = json_decode($this->bytes($root, $name.'-review.json'), true, 64, JSON_THROW_ON_ERROR);
         $rows = $package['candidates'] ?? [];
         if (($package['schema'] ?? null) !== 'fermatmind.public_content_article_amendment.v1'
             || ! is_array($rows) || count($rows) < 1 || count($rows) > 33
@@ -545,20 +561,33 @@ final class PublicContent53Package
             || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
             throw new DomainException('public_content_53_amendment_review_or_scope_invalid');
         }
+        $targets = $name === 'riasec-amendment' ? self::RIASEC_AMENDMENT_TARGETS : self::TARGETS;
+        if ($name === 'riasec-amendment' && count($rows) !== count($targets)) {
+            throw new DomainException('public_content_53_amendment_review_or_scope_invalid');
+        }
         $seen = [];
         foreach ($rows as $row) {
             $id = $row['page_id'] ?? '';
             $identity = $row['identity'] ?? [];
-            if (! isset(self::TARGETS[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'article'
-                || ($identity['locale'] ?? null) !== 'en'
-                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity']) !== []
+            $riasec = $name === 'riasec-amendment';
+            $allowed = ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity'];
+            if ($riasec) {
+                $allowed = array_merge($allowed, ['staging_snapshot', 'enable_hreflang']);
+            }
+            if (! isset($targets[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'article'
+                || ($name !== 'riasec-amendment' && ($identity['locale'] ?? null) !== 'en')
+                || array_diff(array_keys($row), $allowed) !== []
                 || ($identity['org_id'] ?? null) !== 0
-                || ['article', $identity['slug'] ?? null, $identity['locale'] ?? null] !== self::TARGETS[$id]
+                || ['article', $identity['slug'] ?? null, $identity['locale'] ?? null] !== $targets[$id]
                 || ($proof['pages'][$id] ?? null) !== 'PASS') {
                 throw new DomainException('public_content_53_amendment_identity_invalid');
             }
             $seen[$id] = true;
-            foreach (['before', 'staging_before', 'snapshot'] as $version) {
+            if ($riasec && (($row['enable_hreflang'] ?? null) !== in_array($id, ['PAGE-67', 'PAGE-68'], true)
+                || ($row['staging_snapshot']['content_md'] ?? null) !== ($row['snapshot']['content_md'] ?? null))) {
+                throw new DomainException('public_content_53_amendment_identity_invalid');
+            }
+            foreach ($riasec ? ['before', 'staging_before', 'snapshot', 'staging_snapshot'] : ['before', 'staging_before', 'snapshot'] as $version) {
                 $copy = $row[$version] ?? [];
                 $fields = array_keys($copy);
                 sort($fields);
@@ -567,7 +596,8 @@ final class PublicContent53Package
                     throw new DomainException('public_content_53_amendment_fields_invalid');
                 }
                 foreach (['title', 'excerpt'] as $field) {
-                    if ($copy[$field] !== $row['snapshot'][$field]) {
+                    $candidate = $riasec && in_array($version, ['staging_before', 'staging_snapshot'], true) ? $row['staging_snapshot'] : $row['snapshot'];
+                    if ($copy[$field] !== $candidate[$field]) {
                         throw new DomainException('public_content_53_amendment_nonbody_changed');
                     }
                 }
@@ -578,6 +608,13 @@ final class PublicContent53Package
                     throw new DomainException('public_content_53_amendment_source_identity_invalid');
                 }
             }
+        }
+
+        if ($name === 'riasec-amendment' && function_exists('app') && app()->bound('config') && self::environment() === 'staging') {
+            foreach ($rows as &$row) {
+                $row['snapshot'] = $row['staging_snapshot'];
+            }
+            unset($row);
         }
 
         return ['candidates' => $rows, 'package_sha256' => $sha];

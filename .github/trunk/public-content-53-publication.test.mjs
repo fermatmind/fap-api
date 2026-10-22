@@ -12,6 +12,7 @@ const root=fileURLToPath(new URL('../../backend',import.meta.url));
 const guideDigest=()=>createHash('sha256').update('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const translationDigest=()=>createHash('sha256').update('fermatmind.public_content_translation.v1\n'+['translation-batch.json','translation-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const copyDigest=()=>createHash('sha256').update('fermatmind.public_content_copy_amendment.v1\n'+['copy-amendment.json','copy-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
+const alignmentDigest=()=>createHash('sha256').update('fermatmind.public_content_seo_alignment.v1\n'+['seo-alignment.json','seo-alignment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 function translatedTestsHubDom() {
  const row=readCandidateRows(root,translationDigest()).candidates.find(row=>row.page_id==='PAGE-32');
  const payload=row.snapshot.payload_json;
@@ -52,7 +53,7 @@ test('previous translation package remains readable by its own immutable digest'
 });
 test('previous article amendment still binds only the reviewed existing article body',()=>{
  const binding=inspectPackage(root);const sha=bytes=>createHash('sha256').update(bytes).digest('hex');const digest=sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));const rows=readCandidateRows(root,digest).candidates;
- assert.equal(binding.expected_row_count,10);assert.equal(rows.length,1);
+ assert.equal(binding.expected_row_count,4);assert.equal(rows.length,1);
  const row=rows[0];assert.equal(row.page_id,'PAGE-54');assert.equal(row.kind,'article');
  assert.deepEqual(row.identity,{org_id:0,slug:'mbti-full-report-career-relationship-communication',locale:'en'});
  for(const before of [row.before,row.staging_before]) {
@@ -262,7 +263,7 @@ test('previous single-locale guide amendment protects identity and checks real b
 
 test('previous copy amendment binds six native resources and checks metadata plus unchanged reader body',()=>{
  const rows=readCandidateRows(root,copyDigest()).candidates;
- assert.equal(inspectPackage(root).expected_row_count,10);
+ assert.equal(inspectPackage(root).expected_row_count,4);
  assert.deepEqual(rows.map(row=>row.page_id),['PAGE-23','PAGE-32','PAGE-34','PAGE-33','PAGE-HOME','PAGE-17']);
  const row=rows[0],seo=row.snapshot.seo_text,url='https://fermatmind.com'+pathFor(row);
  const native={...row.identity,status:'published',is_public:true,seo_meta:seo};
@@ -378,8 +379,9 @@ test('reviewed AI-coach heading changes while its explanatory body stays protect
 });
 
 test('bilingual alignment binds exactly ten native identities and preserves other assessment cards',()=>{
- const rows=readCandidateRows(root).candidates;
- assert.equal(inspectPackage(root).expected_row_count,10);
+ const digest=createHash('sha256').update('fermatmind.public_content_seo_alignment.v1\n'+['seo-alignment.json','seo-alignment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
+ const rows=readCandidateRows(root,digest).candidates;
+ assert.equal(inspectPackage(root).expected_row_count,4);
  assert.deepEqual(rows.map(row=>row.page_id),Array.from({length:10},(_,i)=>`PAGE-${i+55}`));
  assert.equal(rows.filter(row=>row.kind==='article').length,6);
  assert.equal(rows.filter(row=>row.kind==='surface').length,2);
@@ -397,7 +399,7 @@ test('bilingual alignment binds exactly ten native identities and preserves othe
 });
 
 test('combined article body and search changes require the complete new visible body',()=>{
- const source=readCandidateRows(root).candidates.find(row=>row.page_id==='PAGE-60');
+ const source=readCandidateRows(root,alignmentDigest()).candidates.find(row=>row.page_id==='PAGE-60');
  const row={...source,snapshot:{...source.snapshot,content_md:'New supported answer.\n\nA necessary qualification.'}};
  const seo=row.snapshot.seo_text,url='https://fermatmind.com'+pathFor(row);
  const head=`<meta charset="utf-8"><title>${seo.seo_title} | FermatMind</title><meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="${url}"><meta name="robots" content="index, follow">`;
@@ -429,7 +431,7 @@ test('missing baseline permission is limited to a native not-found response',asy
 });
 
 test('staging missing locale binds its actual published counterpart metadata; other missing rows still fail',async()=>{
- const rows=readCandidateRows(root).candidates;
+ const rows=readCandidateRows(root,alignmentDigest()).candidates;
  const fetcher=async url=>{
   if(!url.includes('/api/v0.5/')) return {status:200,text:async()=>'<html><head></head><main>Existing surface</main></html>'};
   const u=new URL(url),row=rows.find(r=>u.pathname.endsWith('/'+r.identity.slug) && u.searchParams.get('locale')===r.identity.locale);
@@ -441,17 +443,17 @@ test('staging missing locale binds its actual published counterpart metadata; ot
   return {status:200,text:async()=>JSON.stringify({ok:true,[row.kind]:native})};
  };
  const renderer=async()=>'<html><head><meta name="robots" content="noindex, follow, noarchive, nocache"><link rel="alternate" type="application/atom+xml" href="https://fermatmind.com/zh/articles/feed.xml"></head><main><h1>Existing article</h1></main></html>';
- const state=await readOnlinePrestate('staging',root,fetcher,renderer);
+ const state=await readOnlinePrestate('staging',root,fetcher,renderer,alignmentDigest());
  assert.equal(state['PAGE-60'].missing,true);
  assert.deepEqual(state['PAGE-60'].stagingReferenceDom,state['PAGE-59'].dom);
  assert.deepEqual(state['PAGE-60'].stagingReferenceDom.robots,['noindex, follow, noarchive, nocache']);
- await assert.rejects(readOnlinePrestate('production',root,async url=>url.includes('/articles/ocean-traits-what-the-five-letters-mean?locale=en')?{status:404,text:async()=>JSON.stringify({ok:false,error_code:'NOT_FOUND'})}:fetcher(url),renderer),/PRESTATE_DRIFT|RESPONSE_INVALID/);
- await assert.rejects(readOnlinePrestate('staging',root,async()=>({status:404,text:async()=>JSON.stringify({ok:false,error_code:'NOT_FOUND'})}),renderer),/RESPONSE_INVALID/);
+ await assert.rejects(readOnlinePrestate('production',root,async url=>url.includes('/articles/ocean-traits-what-the-five-letters-mean?locale=en')?{status:404,text:async()=>JSON.stringify({ok:false,error_code:'NOT_FOUND'})}:fetcher(url),renderer,alignmentDigest()),/PRESTATE_DRIFT|RESPONSE_INVALID/);
+ await assert.rejects(readOnlinePrestate('staging',root,async()=>({status:404,text:async()=>JSON.stringify({ok:false,error_code:'NOT_FOUND'})}),renderer,alignmentDigest()),/RESPONSE_INVALID/);
 });
 
 
 test('alignment DOM deltas use the selected environment baseline without requiring retained staging action URLs',()=>{
- for(const source of readCandidateRows(root).candidates.filter(row=>['PAGE-61','PAGE-62'].includes(row.page_id))) {
+ for(const source of readCandidateRows(root,alignmentDigest()).candidates.filter(row=>['PAGE-61','PAGE-62'].includes(row.page_id))) {
   for(const environment of ['staging','production']) {
    const row={...source,snapshot:environment==='staging'?source.staging_snapshot:source.snapshot};
    const payload=row.snapshot.payload_json,seo=payload.seo;
@@ -471,4 +473,41 @@ test('alignment DOM deltas use the selected environment baseline without requiri
    assert.doesNotThrow(()=>assertDom(changed,linked,{dom:domOf(linked)},environment));
   }
  }
+});
+
+
+test('RIASEC publication selects four reviewed native bodies with exact bilingual slugs',()=>{
+ const rows=readCandidateRows(root).candidates;
+ assert.deepEqual(rows.map(row=>[row.page_id,row.identity.slug,row.identity.locale]),[
+  ['PAGE-65','riasec-holland-career-interest-test-explained','zh-CN'],
+  ['PAGE-66','what-is-riasec-holland-code-career-interest-test','en'],
+  ['PAGE-67','mbti-vs-holland-career-choice','zh-CN'],
+  ['PAGE-68','mbti-vs-holland-code-career-choice','en'],
+ ]);
+ for(const row of rows) {
+  for(const [baseline,candidate] of [[row.before,row.snapshot],[row.staging_before,row.staging_snapshot]]) {
+   assert.equal(candidate.title,baseline.title);
+   assert.equal(candidate.excerpt,baseline.excerpt);
+  }
+  assert.equal(row.snapshot.content_md,row.staging_snapshot.content_md);
+  assert.notEqual(row.snapshot.content_md,row.before.content_md);
+  assert.ok(row.snapshot.content_md.includes(`/${row.identity.locale==='en'?'en':'zh'}/career/tests`));
+ }
+});
+
+
+test('reviewed MBTI comparison adds only the exact reciprocal hreflang pair and preserves feeds',()=>{
+ const source=readCandidateRows(root).candidates.find(row=>row.page_id==='PAGE-67');
+ const row={...source,snapshot:{title:'Comparison',content_md:'Interest and preference.'}};
+ const cn='https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice';
+ const en='https://fermatmind.com/en/articles/mbti-vs-holland-code-career-choice';
+ const html=`<html><head><meta charset="utf-8"><link rel="canonical" href="${cn}"><meta name="robots" content="index, follow"><link rel="alternate" type="application/atom+xml" href="https://fermatmind.com/zh/articles/feed.xml"></head><body><main><h1>Comparison</h1><p>Interest and preference.</p></main></body></html>`;
+ const before={dom:domOf(html)};
+ const alternates=`<link rel="alternate" hreflang="en" href="${en}"><link rel="alternate" hreflang="zh-CN" href="${cn}"><link rel="alternate" hreflang="x-default" href="${en}">`;
+ const complete=html.replace('</head>',alternates+'</head>');
+ assert.doesNotThrow(()=>assertDom(row,complete,before,'production'));
+ for(const altered of [html,complete.replace('hreflang="zh-CN"','hreflang="fr"'),complete.replace('/en/articles/mbti-vs-holland-code-career-choice','/en/articles/other'),complete.replace('application/atom+xml','text/html'),complete.replace('index, follow','noindex, follow')])
+  assert.throws(()=>assertDom(row,altered,before,'production'),/DISCOVERABILITY/);
+ assert.doesNotThrow(()=>assertDom(row,html,before,'staging'));
+ assert.throws(()=>assertDom(row,complete,before,'staging'),/DISCOVERABILITY/);
 });

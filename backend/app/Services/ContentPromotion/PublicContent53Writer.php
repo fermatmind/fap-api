@@ -15,6 +15,7 @@ use App\Models\ContentPage;
 use App\Models\LandingSurface;
 use App\Models\TopicProfileRevision;
 use App\Services\Cms\ArticleMaterialDecisionService;
+use App\Services\Cms\ArticleSeoGateRollout;
 use App\Services\Cms\ContentPagePublishGate;
 use App\Services\Cms\ContentPageTranslationAdapter;
 use DomainException;
@@ -27,6 +28,7 @@ final class PublicContent53Writer
         private readonly PublicContent53Package $package,
         private readonly PublicContent53State $states,
         private readonly ArticleMaterialDecisionService $material,
+        private readonly ArticleSeoGateRollout $articleSeoGate,
         private readonly ContentPageTranslationAdapter $pages,
         private readonly ContentPagePublishGate $pageGate,
     ) {}
@@ -93,6 +95,8 @@ final class PublicContent53Writer
             $written++;
         }
 
+        $this->enableReviewedHreflang($rows);
+
         $after = $this->states->read($context->packageSha256, true);
         foreach ($before as $id => $saved) {
             if ($saved['table'] !== 'career_guides') {
@@ -109,6 +113,42 @@ final class PublicContent53Writer
         }
 
         return ['written_count' => $written, 'state' => $after];
+    }
+
+    /** The package selects only an already-public, verified translation pair. */
+    private function enableReviewedHreflang(array $rows): void
+    {
+        $selected = array_values(array_filter($rows, static fn (array $row): bool => ($row['enable_hreflang'] ?? false) === true));
+        if ($selected === []) {
+            return;
+        }
+        $ids = [];
+        $slugs = [];
+        $needsChange = false;
+        foreach ($selected as $row) {
+            $article = Article::query()->withoutGlobalScopes()->where($row['identity'])->firstOrFail();
+            $schema = $article->seoMeta?->schema_json ?? [];
+            // A standing operator hold is not a missing default gate.
+            if (data_get($schema, 'editorial_package_v1.hreflang_hold') === true) {
+                throw new DomainException('public_content_53_hreflang_operator_hold');
+            }
+            $needsChange = $needsChange || data_get($schema, 'editorial_package_v1.hreflang_gate_v1.enabled') !== true;
+            $ids[] = $article->id;
+            $slugs[] = $article->slug;
+        }
+        if (! $needsChange) {
+            return;
+        }
+        $result = $this->articleSeoGate->run([
+            'article_ids' => implode(',', $ids), 'expected_slugs' => implode(',', $slugs),
+            'translation_group_id' => $selected[0]['source_identity']['translation_group_id'],
+            'enable_hreflang' => true, 'execute' => true,
+            'no_publish' => true, 'no_search' => true, 'no_sitemap_llms_change' => true,
+            'no_content_change' => true, 'no_revalidation' => true,
+        ], false);
+        if (($result['ok'] ?? false) !== true) {
+            throw new DomainException('public_content_53_hreflang_pair_invalid');
+        }
     }
 
     public function restore(PromotionContext $context, array $before, array $after): void

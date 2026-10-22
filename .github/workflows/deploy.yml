@@ -1442,9 +1442,10 @@ jobs:
     needs: [policy, staging]
     if: needs.staging.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 180 || 120 }}
     environment: production
     env:
+      PRODUCTION_JOB_BUDGET_SECONDS: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 10800 || 7200 }}
       ASSETS_SHA256: ${{ needs.policy.outputs.career_current_assets_sha256 }}
       SOURCE_MERGE_SHA: ${{ needs.policy.outputs.career_current_source_merge_sha }}
       MANIFEST_SHA256: ${{ needs.policy.outputs.career_current_manifest_sha256 }}
@@ -1798,7 +1799,7 @@ jobs:
           # One forward deadline includes Deployer, installed Career readback,
           # and required state checks. LKG and closeout remain outside it.
           deploy_minutes="${deploy_timeout%m}"
-          remaining=$((7200 - $(date -u +%s) + PRODUCTION_JOB_STARTED_EPOCH))
+          remaining=$((PRODUCTION_JOB_BUDGET_SECONDS - $(date -u +%s) + PRODUCTION_JOB_STARTED_EPOCH))
           required="$(node .github/trunk/production-release-budget.mjs "$deploy_minutes" '${{ needs.policy.outputs.operations }}')"
           test "$remaining" -ge "$required" || { echo "Production budget insufficient: remaining=${remaining}s required=${required}s" >&2; exit 1; }
           PRODUCTION_FORWARD_DEADLINE=$(( $(date -u +%s) + deploy_minutes * 60 ))

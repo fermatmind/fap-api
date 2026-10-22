@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {readFileSync,mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {spawnSync,execFileSync} from 'node:child_process';
@@ -12,6 +13,14 @@ import {selectOperations} from './impact-consumers.mjs';
 import {readCandidateRows} from './public-content-53-package.mjs';
 
 const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
+const alignmentDigest = () => createHash('sha256').update('fermatmind.public_content_seo_alignment.v1\n'+['seo-alignment.json','seo-alignment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve('backend/content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
+
+function productionBudget(production, publication) {
+  const condition='fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish';
+  assert.ok(production.includes('timeout-minutes: ${{ '+condition+' && 180 || 120 }}'));
+  assert.ok(production.includes('PRODUCTION_JOB_BUDGET_SECONDS: ${{ '+condition+' && 10800 || 7200 }}'));
+  return publication ? 10800 : 7200;
+}
 
 test('recovery and admitted deploy serialize production mutations together', () => {
   const deploy = read('../workflows/deploy.yml');
@@ -37,9 +46,8 @@ test('pending IQ publication fits the production job with matching remaining bud
   const workflow = read('../workflows/deploy.yml');
   const production = workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
   assert.ok(production);
-  const jobSeconds = Number(production.match(/^    timeout-minutes: (\d+)$/m)?.[1]) * 60;
-  const remainingSeconds = Number(production.match(/remaining=\$\(\((\d+) - \$\(date/)?.[1]);
-  assert.equal(remainingSeconds, jobSeconds);
+  const jobSeconds = productionBudget(production,false);
+  assert.match(production,/remaining=\$\(\(PRODUCTION_JOB_BUDGET_SECONDS -/);
   const operations = classifyPaths(['backend/content_assets/iq_public/entry/20261009-v1/IQ-01-en.md']).operations;
   assert.equal(operations.iq_public_scale_publish, true);
   const required = requiredSeconds(30, operations);
@@ -50,7 +58,7 @@ test('pending IQ publication fits the production job with matching remaining bud
   assert.ok(admission);
   const script = admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/, `'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
   const runAdmission = elapsed => spawnSync('bash', ['-eu', '-c', script], {encoding:'utf8', env:{...process.env,
-    deploy_minutes:'30', PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
+    deploy_minutes:'30', PRODUCTION_JOB_BUDGET_SECONDS:String(jobSeconds), PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
   }});
   const admitted = runAdmission(60);
   assert.equal(admitted.status, 0, admitted.stderr);
@@ -60,9 +68,9 @@ test('pending IQ publication fits the production job with matching remaining bud
 test('an oversized ten-page CMS and Career package is refused without borrowing recovery', () => {
   const workflow = read('../workflows/deploy.yml');
   const production = workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
-  const jobSeconds = Number(production.match(/^    timeout-minutes: (\d+)$/m)?.[1]) * 60;
-  assert.equal(Number(production.match(/remaining=\$\(\((\d+) - \$\(date/)?.[1]),jobSeconds);
-  const rows = readCandidateRows(resolve('backend')).candidates;
+  const jobSeconds = productionBudget(production,true);
+  assert.match(production,/remaining=\$\(\(PRODUCTION_JOB_BUDGET_SECONDS -/);
+  const rows = readCandidateRows(resolve('backend'),alignmentDigest()).candidates;
   assert.equal(rows.length,10);
   const operations = classifyPaths(['backend/content_assets/public_content_53/seo-alignment.json',
     'backend/content_assets/career/career_current_authority_release.v1.json']).operations;
@@ -80,16 +88,16 @@ test('an oversized ten-page CMS and Career package is refused without borrowing 
   assert.ok(admission);
   const script = admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/,`'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
   const run = elapsed => spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
-    deploy_minutes:'60',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
+    deploy_minutes:'60',PRODUCTION_JOB_BUDGET_SECONDS:String(jobSeconds),PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
   }});
-  assert.notEqual(run(300).status,0);
-  assert.match(run(300).stderr,/Production budget insufficient/);
-  const late = run(jobSeconds-required+60);
+  assert.equal(run(300).status,0,'the active four-page package keeps full recovery within its selected job cap');
+  const activeRequired = requiredSeconds(60,operations,readCandidateRows(resolve('backend')).candidates.length);
+  const late = run(jobSeconds-activeRequired+60);
   assert.notEqual(late.status,0);
   assert.match(late.stderr,/Production budget insufficient/);
 });
 
-test('the historical bilingual CMS and Career release retains its consumers and exceeds the restored cap', () => {
+test('the historical ten-page CMS and Career release still exceeds the publication cap', () => {
   const production = 'b03c2bdad63404e3ddf45e05ea95f7d649567c46';
   const paused = '7fa8c6e292e1f2c15ea8740c69accb74407b8240';
   const pending = execFileSync('git',['diff','--name-only',production,paused],{encoding:'utf8'}).trim().split('\n');
@@ -107,12 +115,12 @@ test('the historical bilingual CMS and Career release retains its consumers and 
     assert.ok(release.paths.includes(path),path);
   }
   assert.equal(release.scope.validation_base_sha,production);
-  const count = readCandidateRows(resolve('backend')).candidates.length;
+  const count = readCandidateRows(resolve('backend'),alignmentDigest()).candidates.length;
   assert.equal(count,10);
   const required = requiredSeconds(60,release.operations,count);
   assert.equal(required,13960);
-  assert.ok(7200-300 < required);
-  assert.ok(requiredSeconds(60,{...release.operations,iq_public_articles_publish:true},count)>7200,
+  assert.ok(10800-300 < required);
+  assert.ok(requiredSeconds(60,{...release.operations,iq_public_articles_publish:true},count)>10800,
     'a genuinely larger mixed publication must not borrow this package budget');
 });
 
