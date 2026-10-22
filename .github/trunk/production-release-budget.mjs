@@ -7,7 +7,7 @@
 // API/DOM parsing and the existing
 // 360s cache-settlement loop (including its final bounded browser attempt).
 // Both 800s publication/recovery SSH limits remain reserved separately.
-import {readCandidateRows} from './public-content-53-package.mjs';
+import {readCandidateRows,packageDigest} from './public-content-53-package.mjs';
 import {IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS} from './iq-public-scale-publish.mjs';
 import {IQ_CANDIDATE_READ_TIMEOUT_MS, IQ_HTTP_READ_TIMEOUT_MS} from './iq-public-scale-online-qa.mjs';
 
@@ -45,7 +45,7 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
 
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const operations = JSON.parse(Buffer.from(process.argv[3], 'base64').toString());
-  const rows = operations.public_content_53_publish === true ? readCandidateRows('backend').candidates : [];
+  const rows = operations.public_content_53_publish === true ? readCandidateRows('backend',packageDigest('backend',operations.public_content_53_package)).candidates : [];
   const count = rows.length || undefined;
   process.stdout.write(String(requiredSeconds(Number(process.argv[2]),operations,count,rows.some(row=>row.new_article)))+'\n');
 }

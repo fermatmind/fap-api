@@ -4,10 +4,11 @@ import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { executorPaths, inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
+import { selectPublicContentPackage, packageDigest, executorPaths, inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
 import { assertNewArticleDiscovery, assertDom, domOf, pathFor, read, projection, readOnlinePrestate } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
+process.env.PUBLIC_CONTENT_53_PACKAGE_NAME='riasec-code-samples';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 const riasecDigest=()=>createHash('sha256').update('fermatmind.public_content_article_amendment.v1\n'+['riasec-amendment.json','riasec-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 const guideDigest=()=>createHash('sha256').update('fermatmind.public_content_guide_amendment.v1\n'+['guide-amendment.json','guide-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
@@ -114,7 +115,7 @@ test('public signature configuration does not make the package a private publish
  assert.equal(publishers.has('backend/app/Services/ContentPromotion/PublicContent53Package.php'),false);
 });
 test('publication transport fails closed and recovers malformed phase counts',async()=>{
- const env={PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
+ const env={PUBLIC_CONTENT_53_PACKAGE_NAME:'riasec-code-samples',PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
  const execution=buildExecution(env,root);assert.ok(execution.args.includes('StrictHostKeyChecking=yes'));assert.ok(execution.args.includes('ServerAliveInterval=15'));assert.ok(execution.args.includes('ServerAliveCountMax=8'));assert.ok(execution.args.includes('TCPKeepAlive=yes'));
  let recovery=0;
  await assert.rejects(()=>publish(execution,async request=>{if(request.mode==='recover'){recovery++;return {status:0,stdout:JSON.stringify({ok:true,mode:'recover',restored:false,recovery_status:'not_required',source_commit:request.source_commit,workflow_run_id:request.workflow_run_id,workflow_run_attempt:1,package_sha256:request.package_sha256,executor_release_sha256:request.executor_release_sha256,sanitized:true})};}return {status:0,stdout:'{}'};}),error=>error.receipt.recovery_completed === true);
@@ -572,4 +573,27 @@ test('sample discovery requires real archive anchors and cannot pass from serial
   assert.throws(()=>assertNewArticleDiscovery(rows,{...documents,[key]:bad}),/NEW_ARTICLE_DISCOVERY/);
  }
  assert.throws(()=>assertNewArticleDiscovery(rows,{...documents,sitemap:sitemap.replace(pathFor(rows[0]),'/en/articles/unrelated')}),/NEW_ARTICLE_DISCOVERY/);
+});
+
+
+test('exact changed paths select a single package through transport, QA and workflow budgets',()=>{
+ const env={PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
+ for(const [name,file,count] of [['riasec-code-samples','riasec-code-samples.json',6],['career-planning','career-planning.json',2],['guide-amendment','guide-amendment-review.json',1]]) {
+  const selected=selectPublicContentPackage(['backend/content_assets/public_content_53/'+file]);
+  assert.equal(selected,name);
+  const execution=buildExecution({...env,PUBLIC_CONTENT_53_PACKAGE_NAME:selected},root);
+  assert.equal(execution.binding.package_sha256,packageDigest(root,name));
+  assert.equal(execution.request.package_sha256,execution.binding.package_sha256);
+  assert.equal(execution.binding.expected_row_count,count);
+  assert.equal(readCandidateRows(root,execution.request.package_sha256).candidates.length,count);
+ }
+ assert.equal(selectPublicContentPackage(['backend/app/Services/ContentPromotion/PublicContent53Package.php']),null);
+ assert.throws(()=>selectPublicContentPackage(['backend/content_assets/public_content_53/riasec-code-samples.json','backend/content_assets/public_content_53/career-planning.json']),/MULTIPLE_PACKAGES/);
+ assert.throws(()=>selectPublicContentPackage(['backend/content_assets/public_content_53/unknown.json']),/SELECTION_UNKNOWN/);
+ assert.throws(()=>buildExecution(env,root),/SELECTION_REQUIRED/);
+ const workflow=readFileSync(resolve(root,'../.github/workflows/deploy.yml'),'utf8');
+ assert.equal(workflow.split('PUBLIC_CONTENT_53_PACKAGE_NAME: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_package }}').length-1,2);
+ const publisher=readFileSync(resolve(root,'../.github/trunk/public-content-53-publish.mjs'),'utf8');
+ assert.match(publisher,/readOnlinePrestate\([^;]+execution.binding.package_sha256\)/);
+ assert.match(publisher,/verifyOnlineCandidates\([^;]+execution.binding.package_sha256\)/);
 });

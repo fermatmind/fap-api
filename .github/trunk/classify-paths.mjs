@@ -2,6 +2,7 @@
 
 import { inRuntimeScope, selectedScopes } from './seo-platform-12a08-activation.mjs';
 import { readFileSync } from "node:fs";
+import {selectPublicContentPackage} from "./public-content-53-package.mjs";
 
 export const CATEGORIES = [
   "docs_rules_tests_only",
@@ -200,8 +201,10 @@ export function classifyPaths(inputPaths) {
       || /^backend\/app\/Console\/Commands\/SeoCouncil(?:Runtime|SourceCheck|Scheduled)Command\.php$/.test(path)
       || /^backend\/(?:tests\/|lang\/(?:en|zh_CN)\/seo-council\.php$|resources\/views\/filament\/ops\/components\/ops-(?:system-health|trace-drilldown)-workspace\.blade\.php$)/.test(path)
       || /^\.github\/(?:trunk\/|workflows\/(?:ci|deploy)\.yml$)/.test(path));
+  const publicContentPackage = selectPublicContentPackage(paths);
   const operations = {
-    public_content_53_publish: paths.some(path => path.startsWith("backend/content_assets/public_content_53/")),
+    public_content_53_publish: publicContentPackage !== null,
+    public_content_53_package: publicContentPackage,
     public_content_53_checks: paths.some(path => /PublicContent53|RiasecCodeSample|public.content.53/.test(path)),
     iq_eq_topic_publish: paths.some(path => path.startsWith("backend/content_assets/iq_public/topics/20261010-v1/")),
     iq_eq_topic_checks: paths.some(path => path.startsWith("backend/content_assets/iq_public/topics/") || /IqEqTopic/.test(path) || /iq-eq-topic/.test(path) || path === "backend/scripts/deploy/run_iq_eq_topic_publish.php"),
