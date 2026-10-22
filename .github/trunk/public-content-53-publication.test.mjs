@@ -539,6 +539,7 @@ test('guide metadata accepts a streamed document title and still rejects missing
  const html=`<html><head>${metadata}</head><body>${title}<main><h1>${row.snapshot.title}</h1><p>Required visible planning advice.</p></main></body></html>`;
  const before={dom:domOf(html)};
  assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ assert.doesNotThrow(()=>assertDom(row,html.replace('<title>','<title data-iq-qa-hidden="true">'),before,'production'));
  for(const altered of [html.replace(title,''),html.replace(title,'<title>Stale title</title>'),html.replace(title,title+title),html.replace('</head>',title+'</head>'),html.replace(title,`<template>${title}</template>`),html.replace(title,`<script type="application/json">${JSON.stringify(title)}</script>`)])
   assert.throws(()=>assertDom(row,altered,before,'production'),/METADATA/);
 });
