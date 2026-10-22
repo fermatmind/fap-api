@@ -597,3 +597,15 @@ test('exact changed paths select a single package through transport, QA and work
  assert.match(publisher,/readOnlinePrestate\([^;]+execution.binding.package_sha256\)/);
  assert.match(publisher,/verifyOnlineCandidates\([^;]+execution.binding.package_sha256\)/);
 });
+
+test('guide metadata accepts a streamed document title and still rejects missing, stale, duplicate or inert titles',()=>{
+ const source=readCandidateRows(root,packageDigest(root,'career-planning')).candidates[0];
+ const row={...source,snapshot:{...source.snapshot,body_md:'Required visible planning advice.'}};
+ const seo=row.snapshot.seo_text,title=`<title>${seo.seo_title} | FermatMind</title>`;
+ const metadata=`<meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}"><meta name="robots" content="index, follow">`;
+ const html=`<html><head>${metadata}</head><body>${title}<main><h1>${row.snapshot.title}</h1><p>Required visible planning advice.</p></main></body></html>`;
+ const before={dom:domOf(html)};
+ assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ for(const altered of [html.replace(title,''),html.replace(title,'<title>Stale title</title>'),html.replace(title,title+title),html.replace('</head>',title+'</head>'),html.replace(title,`<template>${title}</template>`),html.replace(title,`<script type="application/json">${JSON.stringify(title)}</script>`)])
+  assert.throws(()=>assertDom(row,altered,before,'production'),/METADATA/);
+});
