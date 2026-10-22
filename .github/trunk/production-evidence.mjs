@@ -45,6 +45,25 @@ export function verifyProductionBinding({ run, artifact, timing, outcome, ci, re
   return candidate;
 }
 
+export function readProductionCI(candidate, timing, api) {
+  const valid = ci => ci?.head_sha === candidate && ci.head_branch === 'main' && ci.event === 'push'
+    && ci.run_attempt === 1 && ci.status === 'completed' && ci.conclusion === 'success';
+  if (timing.ci_run_id != null) {
+    const id = String(timing.ci_run_id);
+    if (!/^[1-9][0-9]*$/.test(id)) throw new Error('Invalid production CI binding');
+    // The immutable timing receipt already identifies the exact CI run. A
+    // filtered run-list response is not authority for whether that run exists.
+    const ci = api(`actions/runs/${id}`);
+    if (!valid(ci) || String(ci.id) !== id) throw new Error('Invalid production CI binding');
+    return ci;
+  }
+  // Retain the timestamp-bound compatibility path for older timing receipts.
+  const cis = api(`actions/workflows/ci.yml/runs?head_sha=${candidate}&event=push&per_page=100`).workflow_runs
+    .filter(ci => valid(ci) && ci.created_at === timing.pushed_at);
+  if (cis.length !== 1) throw new Error('Ambiguous production CI binding');
+  return cis[0];
+}
+
 export function githubProductionEvidence(repository) {
   const api = path => JSON.parse(execFileSync('gh', ['api', `repos/${repository}/${path}`], {
     encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 8 * 1024 * 1024,
@@ -78,11 +97,7 @@ export function githubProductionEvidence(repository) {
     const read = readArchive(artifact);
     const timing = read('trunk-delivery-timing.json');
     const candidate = artifact.name.slice('trunk-production-'.length);
-    const cis = api(`actions/workflows/ci.yml/runs?head_sha=${candidate}&event=push&per_page=100`).workflow_runs
-      .filter(ci => ci.head_branch === 'main' && ci.run_attempt === 1 && ci.status === 'completed' && ci.conclusion === 'success'
-        && (timing.ci_run_id != null ? String(ci.id) === String(timing.ci_run_id) : ci.created_at === timing.pushed_at));
-    if (cis.length !== 1) throw new Error('Ambiguous production CI binding');
-    const ci = cis[0];
+    const ci = readProductionCI(candidate, timing, api);
     const validations = artifacts(ci.id).filter(a => a.name === `trunk-validation-${candidate}`);
     if (validations.length !== 1) throw new Error('Ambiguous CI validation artifact');
     const receipt = readArchive(validations[0])('trunk-validation.json');
