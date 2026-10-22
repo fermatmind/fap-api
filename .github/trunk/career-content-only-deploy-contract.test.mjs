@@ -266,7 +266,7 @@ test('Career cache and Current production budgets preserve complete mixed-scope 
     const actual = execFileSync('bash', ['-eu', '-c', `${script}\nprintf '%s' "$deploy_timeout"`], {
       encoding: 'utf8',
       env: { ...process.env, competitive_evidence: String(competitive), production_council_closeout: String(council),
-        PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)),GITHUB_ENV:'/dev/null' },
+        PRODUCTION_JOB_BUDGET_SECONDS:'7200',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)),GITHUB_ENV:'/dev/null' },
     });
     assert.equal(actual, expected);
   }

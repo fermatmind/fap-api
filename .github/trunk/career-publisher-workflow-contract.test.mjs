@@ -178,7 +178,7 @@ function simulation() {
       *) case "$*" in *REVISION*) cat "$SIM_ROOT/current";; *) exit 1;; esac;;
     esac\n`);
   const env={...process.env,PATH:join(root,'bin')+':'+process.env.PATH,SIM_ROOT:root,RUNNER_TEMP:root,
-    GITHUB_ENV:join(root,'github-env'),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',PRODUCTION_JOB_STARTED_EPOCH:'100',
+    GITHUB_ENV:join(root,'github-env'),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',PRODUCTION_JOB_BUDGET_SECONDS:'7200',PRODUCTION_JOB_STARTED_EPOCH:'100',
     PRODUCTION_FORWARD_DEADLINE:'3700',DEPLOY_SHA:candidateSha,DEPLOY_PATH:'/managed',DEPLOY_PORT:'22',
     DEPLOY_USER:'test',DEPLOY_HOST:'test',ASSETS_SHA256:hashes.assets,SOURCE_MERGE_SHA:lkgSha,
     MANIFEST_SHA256:hashes.manifest,VERSIONLESS_PROJECTION_SHA256:hashes.projection,OPERATION_KEY:hashes.operation,
