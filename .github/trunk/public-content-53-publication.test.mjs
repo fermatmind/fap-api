@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { selectPublicContentPackage, packageDigest, executorPaths, inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
-import { assertNewArticleDiscovery, assertDom, domOf, pathFor, read, projection, readOnlinePrestate } from './public-content-53-online-qa.mjs';
+import { assertNewArticleDiscovery, assertDom, domOf, pathFor, read, projection, readOnlinePrestate, verifyOnlineCandidates } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 process.env.PUBLIC_CONTENT_53_PACKAGE_NAME='riasec-code-samples';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
@@ -138,6 +138,16 @@ test('publication retains bounded page diagnostics and separate recovery errors 
  assert.equal(error.receipt.error_code,'PUBLIC_CONTENT_53_VISIBLE_BODY_PAGE-02_ITEM_14');
  assert.equal(error.receipt.recovery_error_code,'public_content_53_revalidation_http_429');
  assert.equal(error.receipt.recovery_completed,false);
+ for(const id of ['RIASEC-RIC-zh-CN','RIASEC-IAR-en','RIASEC-SAE-en','EN-GUIDE-annual-career-review-system','EN-GUIDE-build-five-year-career-roadmap','EN-GUIDE-build-portfolio-for-career-switch','EN-GUIDE-cross-industry-move-strategy']) {
+  for(const diagnostic of [`PUBLIC_CONTENT_53_NEW_ARTICLE_SEO_${id}`,`PUBLIC_CONTENT_53_VISIBLE_BODY_${id}_ITEM_14`]) {
+   const sample=await recoveryFailure(execution,failed,new Error(diagnostic));
+   assert.equal(sample.receipt.error_code,diagnostic);
+  }
+ }
+ const unknown=await recoveryFailure(execution,failed,new Error('PUBLIC_CONTENT_53_VISIBLE_BODY_RIASEC-XYZ-en'));
+ assert.equal(unknown.receipt.error_code,'PUBLIC_CONTENT_53_PUBLICATION_FAILED');
+ const unknownGuide=await recoveryFailure(execution,failed,new Error('PUBLIC_CONTENT_53_VISIBLE_BODY_EN-GUIDE-other-guide'));
+ assert.equal(unknownGuide.receipt.error_code,'PUBLIC_CONTENT_53_PUBLICATION_FAILED');
  const unsafe=await recoveryFailure(execution,failed,new Error('https://private.invalid/token=secret'));
  assert.equal(unsafe.receipt.error_code,'PUBLIC_CONTENT_53_PUBLICATION_FAILED');
  assert.ok(!JSON.stringify(unsafe.receipt).includes('secret'));
@@ -156,6 +166,13 @@ test('API transport errors retain only recognized causes without endpoint or res
  await assert.rejects(()=>read('https://example.invalid',async()=>{throw new TypeError('private endpoint',{cause:{code:'UND_ERR_SOCKET'}})}),/PUBLIC_CONTENT_53_API_TRANSPORT_UND_ERR_SOCKET/);
  await assert.rejects(()=>read('https://example.invalid',async()=>{throw new Error('private body')}),/PUBLIC_CONTENT_53_API_TRANSPORT_FAILED/);
  await assert.rejects(()=>read('https://example.invalid',async()=>({status:200,text:async()=>{throw new Error('private response body')}})),/PUBLIC_CONTENT_53_API_BODY_TRANSPORT_FAILED/);
+});
+test('HTML-only Article reads retain strict transport while requesting a complete crawler body',async()=>{
+ let request;
+ assert.equal(await read('https://example.invalid/article',async(_url,options)=>{request=options;return {status:200,text:async()=>'<main>Complete article</main>'};},false,{'User-Agent':'facebookexternalhit/1.1'}),'<main>Complete article</main>');
+ assert.equal(request.headers['User-Agent'],'facebookexternalhit/1.1');
+ assert.equal(request.headers['Cache-Control'],'no-cache');
+ assert.equal(request.redirect,'error');
 });
 test('inline citation labels and their rendered bibliography remain required visible copy',()=>{
  const row={page_id:'PAGE-08',kind:'article',identity:{locale:'en',slug:'trait-evidence'},snapshot:{title:'Trait evidence',content_md:'Trait dimensions are continuous.[^1]\n\n[^1]: John, O. P. (2008). *Trait taxonomy*. Guilford Press.'}};
@@ -543,6 +560,51 @@ test('new sample SEO requires exact reciprocal routes, environment robots, schem
  for(const changed of [html.replace(alt,''),html.replace('hreflang="zh-CN"','hreflang="fr"'),html.replace('"@type":"Article"','"@type":"Thing","name":"Article BreadcrumbList"'),html.replace('index,follow','noindex,follow')])
   assert.throws(()=>assertDom(row,changed,{missing:true},'production'),/NEW_ARTICLE_SEO/);
  assert.throws(()=>assertDom(row,html.replace('<p>Keep the result.</p>','<script>Keep the result.</script>'),{missing:true},'production'),/VISIBLE_BODY/);
+ const completed=html.replace('<h2>Try a task</h2>','<article data-testid="article-detail-content"><h2>Try a task</h2>').replace('</main>','</article></main>');
+ const streamed=completed.replace('<body>','<body><main>Loading article</main><div hidden id="S:3">').replace('</body>','</div></body>');
+ assert.doesNotThrow(()=>assertDom(row,streamed,{missing:true},'production',{articleSsr:true}));
+ assert.throws(()=>assertDom(row,streamed,{missing:true},'production'),/DOM_STRUCTURE/);
+ assert.doesNotThrow(()=>assertDom(row,completed,{missing:true},'production'));
+ const unfinished=streamed.replace('<p>Keep the result.</p>','<template id="P:b"></template>').replace('</body>','<div hidden id="S:b"><p>Keep the result.</p></div></body>');
+ assert.throws(()=>assertDom(row,unfinished,{missing:true},'production',{articleSsr:true}),/VISIBLE_BODY/);
+ for(const absent of [completed.replace(/<main>[\s\S]*<\/main>/,'<main>Loading article</main>'),completed.replace(/<main>[\s\S]*<\/main>/,'<main>Loading article</main><script>Keep the result.</script>')])
+  assert.throws(()=>assertDom(row,absent,{missing:true},'production',{articleSsr:true}),/DOM_STRUCTURE/);
+ assert.throws(()=>assertDom(row,completed.replace('<article data-testid=', '<article data-iq-qa-hidden="true" data-testid='),{missing:true},'production'),/VISIBLE_BODY/);
+});
+
+test('six new Article acceptance keeps API, complete raw HTML and strict browser modes separate',async()=>{
+ const rows=readCandidateRows(root).candidates;
+ const escape=text=>text.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+ const pages=new Map(rows.map(row=>{
+  const seo=row.snapshot.seo_text,url='https://fermatmind.com'+pathFor(row),slug=row.identity.slug;
+  const links=[...row.snapshot.content_md.matchAll(/\[[^\]]+\]\((\/(?:en|zh)\/[^)]+)\)/g)].map(match=>`<a href="${escape(match[1])}">Destination</a>`).join('');
+  const text=row.snapshot.content_md.replace(/\[([^\]]+)\]\([^)]+\)/g,'$1');
+  const head=`<meta charset="utf-8"><title>${escape(seo.seo_title)} | FermatMind</title><meta name="description" content="${escape(seo.seo_description)}"><meta property="og:title" content="${escape(seo.og_title)}"><meta property="og:description" content="${escape(seo.og_description)}"><link rel="canonical" href="${url}"><meta name="robots" content="noindex,follow">`
+   +[['en','en'],['zh-CN','zh'],['x-default','en']].map(([lang,segment])=>`<link rel="alternate" hreflang="${lang}" href="https://fermatmind.com/${segment}/articles/${slug}">`).join('')
+   +`<script type="application/ld+json">${JSON.stringify({'@type':'Article','@id':url+'#article',url,mainEntityOfPage:url,headline:seo.seo_title})}</script><script type="application/ld+json">${JSON.stringify({'@type':'BreadcrumbList',itemListElement:[{item:url}]})}</script>`;
+  const main=`<main><h1>${escape(row.snapshot.title)}</h1><article data-testid="article-detail-content"><pre>${escape(text)}</pre>${links}</article></main>`;
+  return [pathFor(row),{row,html:`<html><head>${head}</head><body>${main}</body></html>`,stream:`<html><head>${head}</head><body><main>Loading</main><div hidden id="S:3">${main}</div></body></html>`}];
+ }));
+ let apiReads=0,rawReads=0,browserReads=0;
+ const fetcher=async(url,options)=>{
+  const parsed=new URL(url);
+  if(parsed.hostname==='staging-api.fermatmind.com') {
+   assert.equal(options.headers['User-Agent'],undefined);apiReads++;
+   const row=rows.find(row=>url.includes('/'+row.identity.slug+'?') && parsed.searchParams.get('locale')===row.identity.locale);
+   return {status:200,text:async()=>JSON.stringify({ok:true,article:{...row.identity,...row.snapshot,status:'published',is_public:true,seo_meta:row.snapshot.seo_text,is_indexable:true,sitemap_eligible:true,llms_eligible:true,translation_group_id:row.source_identity.translation_group_id,published_revision_id:1}})};
+  }
+  assert.equal(options.headers['User-Agent'],'facebookexternalhit/1.1');rawReads++;
+  return {status:200,text:async()=>pages.get(parsed.pathname).stream};
+ };
+ const renderer=async(url,options)=>{
+  assert.equal(options.surface,'public_page');assert.equal(options.headers,undefined);browserReads++;
+  const page=pages.get(new URL(url).pathname);
+  assert.throws(()=>options.verifyDOM(page.stream),/DOM_STRUCTURE/);
+  options.verifyDOM(page.html);return page.html;
+ };
+ const result=await verifyOnlineCandidates('staging',root,fetcher,renderer,Object.fromEntries(rows.map(row=>[row.page_id,{missing:true}])),packageDigest(root));
+ assert.deepEqual([apiReads,rawReads,browserReads],[6,6,6]);
+ assert.deepEqual([result.api_readback_count,result.raw_html_readback_count,result.dom_readback_count],[6,6,6]);
 });
 
 

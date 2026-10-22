@@ -44,7 +44,7 @@ const parseResponse = bytes => {
     throw error;
   }
 };
-const diagnosticCode = error => /^(?:PUBLIC_CONTENT_53_[A-Z0-9_]+(?:_PAGE-[0-9]{2}(?:_ITEM_[0-9]{1,4})?)?|public_content_53_[a-z0-9_]+)$/.test(error?.message ?? '') ? error.message : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED';
+const diagnosticCode = error => /^(?:PUBLIC_CONTENT_53_[A-Z0-9_]+(?:_(?:PAGE-[0-9]{2}|RIASEC-(?:RIC|IAR|SAE)-(?:zh-CN|en)|EN-GUIDE-(?:annual-career-review-system|build-five-year-career-roadmap|build-portfolio-for-career-switch|cross-industry-move-strategy))(?:_ITEM_[0-9]{1,4})?)?|public_content_53_[a-z0-9_]+)$/.test(error?.message ?? '') ? error.message : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED';
 export async function recoveryFailure(execution, execute = request => transport(execution, request), cause) {
   let completed = false;
   let recoveryCode;
