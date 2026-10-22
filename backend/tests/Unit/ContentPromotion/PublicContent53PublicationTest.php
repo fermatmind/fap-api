@@ -550,12 +550,12 @@ PHP;
         return hash('sha256', $chain);
     }
 
-    private function seedRiasecAmendment(array $rows, string $environment): void
+    private function seedRiasecAmendment(array $rows, string $environment, bool $candidateBody = false): void
     {
         $sources = [];
         foreach ($rows as $row) {
             $identity = $environment === 'staging' ? $row['staging_source_identity'] : $row['source_identity'];
-            $article = $this->article($row['identity'], PublicContent53Package::before($row), $identity['translation_group_id'], $identity['source_locale']);
+            $article = $this->article($row['identity'], $candidateBody ? $row['snapshot'] : PublicContent53Package::before($row), $identity['translation_group_id'], $identity['source_locale']);
             if ($row['enable_hreflang']) {
                 $article->forceFill(['is_indexable' => true])->saveQuietly();
             }
@@ -611,6 +611,78 @@ PHP;
         $newOwner = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
             str_repeat('f', 40), str_repeat('b', 64), str_repeat('c', 64), '12346', 1, str_repeat('d', 64), 4, str_repeat('e', 64));
         self::assertSame(4, DB::transaction(fn () => $writer->publish($newOwner, $before))['written_count']);
+    }
+
+    public static function riasecHreflangOnlyOutcomes(): array
+    {
+        return [['success'], ['cache'], ['receipt']];
+    }
+
+    #[DataProvider('riasecHreflangOnlyOutcomes')]
+    public function test_riasec_hreflang_only_write_is_counted_and_restored_on_closeout_failure(string $outcome): void
+    {
+        config(['content_promotion.public_content_53_environment' => 'production',
+            'ops.content_release_observability.hmac_revalidation_url' => 'https://staging.fermatmind.com/api/content-release/revalidate',
+            'ops.content_release_observability.hmac_revalidation_secret' => 'test-only-secret']);
+        $sha = $this->riasecAmendmentDigest();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
+        $this->seedRiasecAmendment($rows, 'production', true);
+        $states = app(PublicContent53State::class);
+        $before = $states->read($sha);
+        $revisions = ArticleTranslationRevision::query()->count();
+        $failed = false;
+        Http::preventStrayRequests();
+        Http::fake(function ($request) use ($outcome, &$failed) {
+            if ($outcome === 'cache' && ! $failed) {
+                $failed = true;
+
+                return Http::response(['ok' => false], 500);
+            }
+            $payload = $request->data();
+            $content = $payload['content'];
+            $tags = ['article-detail:'.$content['locale'].':'.$content['slug'], 'article-seo:'.$content['locale'].':'.$content['slug']];
+
+            return Http::response(['ok' => true, 'revalidated_paths' => $payload['cache_signal']['paths'],
+                'rejected_paths' => [], 'invalidated_tags' => $tags]);
+        });
+        $context = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 4, str_repeat('e', 64));
+        $directory = sys_get_temp_dir().'/riasec-hreflang-only-'.bin2hex(random_bytes(8));
+        mkdir($directory, 0700);
+        $service = app(ExactPackagePromotionService::class);
+        $previous = '';
+        try {
+            foreach (['preflight', 'draft-import'] as $phase) {
+                config(['content_promotion.execution.previous_receipt' => $previous]);
+                $previous = $service->execute($context, $phase, $directory.'/'.$phase.'.json')['path'];
+            }
+            config(['content_promotion.execution.previous_receipt' => $previous]);
+            $path = $directory.'/publish.json';
+            if ($outcome === 'receipt') {
+                file_put_contents($path, 'Immutable existing receipt');
+            }
+            try {
+                $result = $service->execute($context, 'publish', $path);
+                self::assertSame('success', $outcome);
+                self::assertSame(2, $result['receipt']['written_count']);
+                self::assertSame(4, $result['receipt']['readback_count']);
+                app(PublicContent53PromotionAdapter::class)->rollback($context, $result['receipt']['rollback_reference']);
+            } catch (DomainException $error) {
+                self::assertSame($outcome === 'cache' ? 'public_content_53_cache_closeout_failed'
+                    : 'public_content_53_receipt_failed_rollback_succeeded', $error->getMessage());
+                self::assertNotSame('success', $outcome);
+            }
+            if ($outcome === 'cache') {
+                self::assertTrue($failed);
+            }
+            self::assertSame($before, $states->read($sha));
+            self::assertSame($revisions, ArticleTranslationRevision::query()->count());
+        } finally {
+            foreach (glob($directory.'/*') as $file) {
+                unlink($file);
+            }
+            rmdir($directory);
+        }
     }
 
     public static function riasecPublicationFailures(): array

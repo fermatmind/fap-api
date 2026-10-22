@@ -79,7 +79,7 @@ final class PublicContent53Writer
         $rows = $this->package->read(base_path(), $context->packageSha256)['candidates'];
         $this->states->assertLockedBaseline($rows, $before);
         usort($rows, static fn (array $a, array $b): int => ($a['identity']['locale'] === 'en') <=> ($b['identity']['locale'] === 'en'));
-        $written = 0;
+        $written = [];
         foreach ($rows as $row) {
             $saved = $before[$row['page_id']];
             if ($this->states->hash($this->states->projection($row)) === $this->states->hash($row['snapshot'])) {
@@ -92,10 +92,12 @@ final class PublicContent53Writer
                 'surface' => $this->surface($row, $saved),
                 'profile' => $this->topic($row, $saved, $context),
             };
-            $written++;
+            $written[$row['page_id']] = true;
         }
 
-        $this->enableReviewedHreflang($rows);
+        foreach ($this->enableReviewedHreflang($rows) as $pageId) {
+            $written[$pageId] = true;
+        }
 
         $after = $this->states->read($context->packageSha256, true);
         foreach ($before as $id => $saved) {
@@ -112,15 +114,15 @@ final class PublicContent53Writer
             }
         }
 
-        return ['written_count' => $written, 'state' => $after];
+        return ['written_count' => count($written), 'state' => $after];
     }
 
     /** The package selects only an already-public, verified translation pair. */
-    private function enableReviewedHreflang(array $rows): void
+    private function enableReviewedHreflang(array $rows): array
     {
         $selected = array_values(array_filter($rows, static fn (array $row): bool => ($row['enable_hreflang'] ?? false) === true));
         if ($selected === []) {
-            return;
+            return [];
         }
         $ids = [];
         $slugs = [];
@@ -137,7 +139,7 @@ final class PublicContent53Writer
             $slugs[] = $article->slug;
         }
         if (! $needsChange) {
-            return;
+            return [];
         }
         $result = $this->articleSeoGate->run([
             'article_ids' => implode(',', $ids), 'expected_slugs' => implode(',', $slugs),
@@ -149,6 +151,8 @@ final class PublicContent53Writer
         if (($result['ok'] ?? false) !== true) {
             throw new DomainException('public_content_53_hreflang_pair_invalid');
         }
+
+        return array_column($selected, 'page_id');
     }
 
     public function restore(PromotionContext $context, array $before, array $after): void
