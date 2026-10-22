@@ -35,6 +35,31 @@ final class RiasecCodeSamplePublicationTest extends TestCase
             str_repeat($commit, 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 6, str_repeat('e', 64));
     }
 
+    public function test_seo_storage_limits_reject_overflow_before_native_writes(): void
+    {
+        $candidate = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/riasec-code-samples.json')), true, 64, JSON_THROW_ON_ERROR);
+        $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/riasec-code-samples-review.json')), true, 64, JSON_THROW_ON_ERROR);
+        foreach (['seo_title' => 60, 'seo_description' => 160, 'og_title' => 90, 'og_description' => 200] as $field => $limit) {
+            foreach (['a', '测'] as $character) {
+                foreach ([$limit, $limit + 1] as $length) {
+                    $copy = $candidate;
+                    $copy['candidates'][1]['snapshot']['seo_text'][$field] = str_repeat($character, $length);
+                    $bytes = json_encode($copy, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+                    $proof['candidate_sha256'] = hash('sha256', $bytes);
+                    try {
+                        $parsed = \App\Services\ContentPromotion\RiasecCodeSampleArticles::package($bytes, json_encode($proof, JSON_THROW_ON_ERROR), str_repeat('f', 64));
+                        self::assertSame($limit, $length, $field.' overflow was accepted');
+                        self::assertCount(6, $parsed['candidates']);
+                    } catch (DomainException $error) {
+                        self::assertSame($limit + 1, $length, $field.' valid value was rejected');
+                        self::assertSame('public_content_53_riasec_code_samples_identity_or_fields_invalid', $error->getMessage());
+                    }
+                }
+            }
+        }
+        self::assertSame(0, DB::table('articles')->count());
+    }
+
     public static function environments(): array
     {
         return [['staging'], ['production']];
@@ -94,7 +119,7 @@ final class RiasecCodeSamplePublicationTest extends TestCase
         $before = $states->read($context->packageSha256);
         $armed = true;
         DB::listen(function ($query) use (&$armed): void {
-            if ($armed && str_contains($query->sql, 'insert into "article_translation_revisions"') && DB::table('articles')->count() >= 4) {
+            if ($armed && str_contains(str_replace(['"', '`'], '', $query->sql), 'insert into article_translation_revisions') && DB::table('articles')->count() >= 4) {
                 $armed = false;
                 throw new DomainException('injected_late_sample_failure');
             }
