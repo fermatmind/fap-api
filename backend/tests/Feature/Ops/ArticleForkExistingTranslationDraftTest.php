@@ -28,7 +28,7 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
 
     public static function existingAndStalePairs(): array
     {
-        return [...array_map(static fn (array $pair): array => [...$pair, false], self::readerPublishedPairs()), ...array_map(static fn (array $pair): array => [...$pair, false, true], self::readerPublishedPairs()), ...array_map(static fn (array $pair): array => [...$pair, false, true], self::cms5RebasePairs()), ...array_map(static fn (array $pair): array => [...$pair, false, true], self::cms2RebasePairs()), [3, 188, false], [11, 26, false], [4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true], [40, 41, false, true], [40, 41, false, true, true], [8, 200, false], [46, 47, false], [48, 49, false], [58, 192, false]];
+        return [...array_map(static fn (array $pair): array => [...$pair, false], self::readerPublishedPairs()), ...array_map(static fn (array $pair): array => [...$pair, false, true], self::readerPublishedPairs()), ...array_map(static fn (array $pair): array => [...$pair, false, true], self::cms5RebasePairs()), ...array_map(static fn (array $pair): array => [...$pair, false, true], self::cms2RebasePairs()), [3, 188, false], [11, 26, false], [4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true], [40, 41, false, true], [40, 41, false, true, true], [8, 200, false], [46, 47, false], [48, 49, false], [58, 192, false], [1, 186, false], [162, 222, false], [184, 253, false]];
     }
 
     #[DataProvider('existingAndStalePairs')]

@@ -16,6 +16,7 @@ use App\Models\EditorialReview;
 use App\Services\Cms\CmsEditorialReviewAttestationService as Reviews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class ReviewedTranslationPublicationTest extends TestCase
@@ -139,6 +140,94 @@ final class ReviewedTranslationPublicationTest extends TestCase
         $this->assertSame(1, $this->runPublish($p, true));
         $this->assertFalse($t->fresh()->is_public);
         $this->assertSame(0, AuditLog::count());
+    }
+
+    public static function existingIndexability(): array
+    {
+        return [[false], [true]];
+    }
+
+    #[DataProvider('existingIndexability')]
+    public function test_existing_translation_switches_only_reviewed_version_and_preserves_eligibility(bool $indexable): void
+    {
+        [$s, $t, $p, $published] = $this->existingFixture($indexable);
+        $sourceBefore = F::sourceHash($s);
+        $targetBefore = F::targetHash($s);
+        $historyBefore = $published->fresh()->getAttributes();
+        $this->assertSame(0, $this->runPublish($p), Artisan::output());
+        $this->assertSame($targetBefore, F::targetHash($s));
+        $this->assertSame($published->content_md, $t->fresh()->content_md);
+        $this->assertSame(0, $this->runPublish($p, true), Artisan::output());
+        $this->assertSame($p['working_revision_id'], $t->fresh()->published_revision_id);
+        $this->assertSame($t->workingRevision->content_md, $t->fresh()->content_md);
+        $this->assertSame($indexable, $t->fresh()->is_indexable);
+        $this->assertSame($indexable, $t->seoMeta->fresh()->is_indexable);
+        $this->assertSame($indexable ? 'index,follow' : 'noindex,nofollow', $t->seoMeta->fresh()->robots);
+        $this->assertFalse($t->fresh()->sitemap_eligible);
+        $this->assertFalse($t->fresh()->llms_eligible);
+        $this->assertSame($historyBefore, $published->fresh()->getAttributes());
+        $this->assertSame($sourceBefore, F::sourceHash($s->fresh()));
+        $this->assertSame(1, $this->runPublish($p, true));
+    }
+
+    public function test_existing_translation_rejects_wrong_public_lock_projection_and_indexability_override(): void
+    {
+        [$s, $t, $p] = $this->existingFixture(false);
+        $before = F::targetHash($s);
+        $this->assertSame(1, $this->runPublish($p, true, ['--make-indexable' => true]));
+        $this->assertSame(1, $this->runPublish([...$p, 'target_published_revision_id' => $p['working_revision_id']], true));
+        $missing = $p;
+        unset($missing['target_published_revision_id']);
+        $this->assertSame(1, $this->runPublish($missing, true));
+        $this->assertSame(1, $this->runPublish($p, true, ['--preview-approved' => false]));
+        $this->assertSame($before, F::targetHash($s));
+        $t->forceFill(['content_md' => 'Unversioned public edit'])->saveQuietly();
+        $p['target_snapshot_hash'] = F::targetHash($s);
+        $this->assertSame(1, $this->runPublish($p, true));
+        $this->assertSame($p['target_snapshot_hash'], F::targetHash($s));
+        $this->assertSame(0, AuditLog::count());
+    }
+
+    public function test_existing_translation_audit_failure_restores_old_public_revision_and_copy(): void
+    {
+        [$s, $t, $p, $published] = $this->existingFixture(false);
+        $before = F::targetHash($s);
+        $this->mock(\App\Services\Audit\AuditLogger::class, function ($mock): void {
+            $mock->shouldReceive('log')->andThrow(new \RuntimeException('audit_unavailable'));
+        });
+        $this->assertSame(1, $this->runPublish($p, true));
+        $this->assertSame($before, F::targetHash($s));
+        $this->assertSame($published->id, $t->fresh()->published_revision_id);
+        $this->assertSame($published->content_md, $t->fresh()->content_md);
+    }
+
+    private function existingFixture(bool $indexable): array
+    {
+        [$s, $t, $p] = $this->fixture();
+        $working = $t->workingRevision;
+        $working->forceFill(['revision_number' => 2])->saveQuietly();
+        $published = ArticleTranslationRevision::create([
+            'org_id' => 0, 'article_id' => $t->id, 'source_article_id' => $s->id,
+            'translation_group_id' => $s->translation_group_id, 'locale' => 'en', 'source_locale' => 'zh-CN',
+            'revision_number' => 1, 'revision_status' => 'published', 'title' => 'Previous English title',
+            'excerpt' => 'Previous excerpt', 'content_md' => "## Previous public copy\n\nhttps://doi.org/example",
+            'source_version_hash' => str_repeat('a', 64), 'translated_from_version_hash' => str_repeat('a', 64),
+            'published_at' => now()->subDay(),
+        ]);
+        $t->forceFill([
+            'status' => 'published', 'is_public' => true, 'translation_status' => 'published',
+            'is_indexable' => $indexable, 'sitemap_eligible' => false, 'llms_eligible' => false,
+            'title' => $published->title, 'excerpt' => $published->excerpt, 'content_md' => $published->content_md,
+            'published_revision_id' => $published->id, 'published_at' => $published->published_at,
+        ])->saveQuietly();
+        $t->seoMeta->forceFill(['is_indexable' => $indexable, 'robots' => $indexable ? 'index,follow' : 'noindex,nofollow'])->saveQuietly();
+        app(Reviews::class)->bindOrCreateApproved(null, 'cms_article_review', 'test:existing:'.$working->id,
+            [['surface_id' => 'article_translation_revision', 'record' => $working->fresh()]], (int) auth((string) config('admin.guard', 'admin'))->id());
+        $p['schema'] = 'reviewed_existing_article_translation_publication_v1';
+        $p['target_published_revision_id'] = (int) $published->id;
+        $p['target_snapshot_hash'] = F::targetHash($s);
+
+        return [$s, $t->fresh(), $p, $published];
     }
 
     private function fixture(string $sourceLocale = 'zh-CN'): array

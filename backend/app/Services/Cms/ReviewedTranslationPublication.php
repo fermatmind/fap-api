@@ -20,13 +20,17 @@ final readonly class ReviewedTranslationPublication
     public function run(array $p, bool $execute, bool $previewApproved, string $confirmation, bool $indexable): array
     {
         $keys = array_keys($p);
+        $existing = ($p['schema'] ?? null) === 'reviewed_existing_article_translation_publication_v1';
         $expected = ['schema', 'source_id', 'target_id', 'source_published_revision_id', 'working_revision_id', 'source_snapshot_hash', 'target_snapshot_hash', 'body_sha256'];
+        if ($existing) {
+            $expected[] = 'target_published_revision_id';
+        }
         sort($keys);
         sort($expected);
-        if ($keys !== $expected || $p['schema'] !== 'reviewed_article_translation_publication_v1') {
+        if ($keys !== $expected || (! $existing && $p['schema'] !== 'reviewed_article_translation_publication_v1')) {
             throw new RuntimeException('translation_package_invalid');
         }
-        foreach (['source_id', 'target_id', 'source_published_revision_id', 'working_revision_id'] as $k) {
+        foreach (['source_id', 'target_id', 'source_published_revision_id', 'working_revision_id', ...$existing ? ['target_published_revision_id'] : []] as $k) {
             if (! is_int($p[$k]) || $p[$k] < 1) {
                 throw new RuntimeException('translation_identity_invalid');
             }
@@ -35,6 +39,9 @@ final readonly class ReviewedTranslationPublication
             if (! is_string($p[$k]) || ! preg_match('/^[a-f0-9]{64}$/', $p[$k])) {
                 throw new RuntimeException('translation_hash_invalid');
             }
+        }
+        if ($existing && $indexable) {
+            throw new RuntimeException('existing_translation_indexability_change_forbidden');
         }
         $phrase = 'I explicitly approve Codex to publish article id '.$p['target_id'].' after preflight passes.';
         if ($execute && (! $previewApproved || ! hash_equals($phrase, $confirmation))) {
@@ -49,7 +56,7 @@ final readonly class ReviewedTranslationPublication
             throw new RuntimeException('translation_operator_unavailable');
         }
 
-        return DB::transaction(function () use ($p, $phrase, $indexable): array {
+        return DB::transaction(function () use ($p, $phrase, $indexable, $existing): array {
             [$s, $t] = $this->snapshot($p, true);
             $sourceHash = Fingerprint::sourceHash($s, true);
             $history = $this->history($t, $p['working_revision_id']);
@@ -65,6 +72,11 @@ final readonly class ReviewedTranslationPublication
                 || $revision->revision_status !== 'published' || hash('sha256', $revision->content_md) !== $p['body_sha256']
                 || Fingerprint::sourceHash($s->fresh(), true) !== $sourceHash || $this->history($t, $p['working_revision_id']) !== $history) {
                 throw new RuntimeException('translation_publication_readback_failed');
+            }
+            if ($existing && ((bool) $t->is_indexable !== (bool) $restore['article']['is_indexable']
+                || (bool) $t->seoMeta->is_indexable !== (bool) $restore['seo']['is_indexable']
+                || $t->seoMeta->robots !== $restore['seo']['robots'])) {
+                throw new RuntimeException('existing_translation_indexability_changed');
             }
             $this->audit->log(Request::create('/ops/articles/publish-controlled', 'POST'), 'codex_controlled_translation_publish', 'article', (string) $t->id,
                 ['confirmation_sha256' => hash('sha256', $phrase), 'locks' => $p, 'restore_fields' => $restore,
@@ -82,23 +94,32 @@ final readonly class ReviewedTranslationPublication
 
     private function snapshot(array $p, bool $lock): array
     {
+        $existing = $p['schema'] === 'reviewed_existing_article_translation_publication_v1';
         $q = Article::withoutGlobalScopes()->where('org_id', 0)->whereIn('id', [$p['source_id'], $p['target_id']])->orderBy('id');
         $rows = ($lock ? $q->lockForUpdate() : $q)->get()->keyBy('id');
         $s = $rows->get($p['source_id']);
         $t = $rows->get($p['target_id']);
         if (! $s instanceof Article || ! $t instanceof Article || ! in_array($s->locale, ['en', 'zh-CN'], true) || ! in_array($t->locale, ['en', 'zh-CN'], true) || $s->locale === $t->locale || ! $s->isSourceArticle()
             || $s->published_revision_id !== $p['source_published_revision_id'] || $s->working_revision_id !== $s->published_revision_id
-            || $t->working_revision_id !== $p['working_revision_id'] || $t->published_revision_id !== null || $t->status !== 'draft' || $t->is_public
+            || $t->working_revision_id !== $p['working_revision_id']
+            || ($existing
+                ? ($t->published_revision_id !== $p['target_published_revision_id'] || $t->working_revision_id === $t->published_revision_id || $t->status !== 'published' || ! $t->is_public)
+                : ($t->published_revision_id !== null || $t->status !== 'draft' || $t->is_public))
             || $t->source_article_id !== $s->id || $t->translation_group_id !== $s->translation_group_id
             || Fingerprint::sourceHash($s, $lock) !== $p['source_snapshot_hash'] || Fingerprint::targetHash($s, $lock) !== $p['target_snapshot_hash']) {
             throw new RuntimeException('translation_snapshot_drift');
         }
-        $t->load(['workingRevision', 'seoMeta', 'category', 'tags']);
+        $t->load(['workingRevision', 'publishedRevision', 'seoMeta', 'category', 'tags']);
         $s->load('publishedRevision');
+        $projection = $existing ? $t->publishedRevision : $t->workingRevision;
         if (! $t->workingRevision instanceof ArticleTranslationRevision || $t->workingRevision->revision_status !== 'approved'
             || hash('sha256', $t->workingRevision->content_md) !== $p['body_sha256']
-            || $t->title !== $t->workingRevision->title || $t->excerpt !== $t->workingRevision->excerpt
-            || $t->content_md !== $t->workingRevision->content_md
+            || ! $projection instanceof ArticleTranslationRevision
+            || ($existing && ((int) $projection->org_id !== (int) $t->org_id || (int) $projection->article_id !== (int) $t->id
+                || (int) $projection->source_article_id !== (int) $s->id || $projection->locale !== $t->locale
+                || $projection->translation_group_id !== $t->translation_group_id || $projection->revision_status !== 'published'))
+            || $t->title !== $projection->title || $t->excerpt !== $projection->excerpt
+            || $t->content_md !== $projection->content_md
             || ! $this->reviews->hasApprovedEvidence('article_translation_revision', $t->workingRevision)
             || ! $s->publishedRevision instanceof ArticleTranslationRevision
             || ! $this->reviews->hasApprovedEvidence('article_translation_revision', $s->publishedRevision) || ! $this->workflow->preflight($t)['ok']) {
