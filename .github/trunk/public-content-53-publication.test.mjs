@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
+import { readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
 import { assertDom, domOf, pathFor, read, projection, readOnlinePrestate } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
@@ -53,8 +53,8 @@ test('previous translation package remains readable by its own immutable digest'
  assert.equal(rows.find(row=>row.page_id==='PAGE-32').kind,'surface');
 });
 test('previous article amendment still binds only the reviewed existing article body',()=>{
- const binding=inspectPackage(root);const sha=bytes=>createHash('sha256').update(bytes).digest('hex');const digest=sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));const rows=readCandidateRows(root,digest).candidates;
- assert.equal(binding.expected_row_count,2);assert.equal(rows.length,1);
+ const sha=bytes=>createHash('sha256').update(bytes).digest('hex');const digest=sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));const rows=readCandidateRows(root,digest).candidates;
+ assert.equal(rows.length,1);
  const row=rows[0];assert.equal(row.page_id,'PAGE-54');assert.equal(row.kind,'article');
  assert.deepEqual(row.identity,{org_id:0,slug:'mbti-full-report-career-relationship-communication',locale:'en'});
  for(const before of [row.before,row.staging_before]) {
@@ -264,7 +264,6 @@ test('previous single-locale guide amendment protects identity and checks real b
 
 test('previous copy amendment binds six native resources and checks metadata plus unchanged reader body',()=>{
  const rows=readCandidateRows(root,copyDigest()).candidates;
- assert.equal(inspectPackage(root).expected_row_count,2);
  assert.deepEqual(rows.map(row=>row.page_id),['PAGE-23','PAGE-32','PAGE-34','PAGE-33','PAGE-HOME','PAGE-17']);
  const row=rows[0],seo=row.snapshot.seo_text,url='https://fermatmind.com'+pathFor(row);
  const native={...row.identity,status:'published',is_public:true,seo_meta:seo};
@@ -382,7 +381,6 @@ test('reviewed AI-coach heading changes while its explanatory body stays protect
 test('bilingual alignment binds exactly ten native identities and preserves other assessment cards',()=>{
  const digest=createHash('sha256').update('fermatmind.public_content_seo_alignment.v1\n'+['seo-alignment.json','seo-alignment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
  const rows=readCandidateRows(root,digest).candidates;
- assert.equal(inspectPackage(root).expected_row_count,2);
  assert.deepEqual(rows.map(row=>row.page_id),Array.from({length:10},(_,i)=>`PAGE-${i+55}`));
  assert.equal(rows.filter(row=>row.kind==='article').length,6);
  assert.equal(rows.filter(row=>row.kind==='surface').length,2);

@@ -6,6 +6,8 @@ import {requiredSeconds, IQ_PUBLIC_SCALE_BUDGET_SECONDS} from './production-rele
 import {IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS} from './iq-public-scale-publish.mjs';
 import {IQ_CANDIDATE_READ_TIMEOUT_MS, IQ_HTTP_READ_TIMEOUT_MS} from './iq-public-scale-online-qa.mjs';
 import {classifyPaths} from './classify-paths.mjs';
+import {inspectPackage} from './public-content-53-package.mjs';
+import {fileURLToPath} from 'node:url';
 
 const read = path => readFileSync(new URL(path, import.meta.url),'utf8');
 test('IQ allowance preserves both publication transports and actual reader limits',()=>{
@@ -67,7 +69,7 @@ test('actual production admission enforces the restored cap and elapsed setup ti
 });
 
 
-test('the actual four-page publication admits with full forward, recovery and settlement budgets',()=>{
+test('the selected reviewed package admits with full forward, recovery and settlement budgets',()=>{
  const workflow=read('../workflows/deploy.yml');
  const production=workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
  const admission=production.match(/          remaining=\$\(\([\s\S]*?          test "\$remaining" -ge "\$required"[^\n]*/)?.[0];
@@ -77,7 +79,9 @@ test('the actual four-page publication admits with full forward, recovery and se
  const run=elapsed=>spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
   deploy_minutes:'60',PRODUCTION_JOB_BUDGET_SECONDS:'10800',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed)}});
  assert.equal(run(180).status,0);
- const late=run(441);
+ const rows=inspectPackage(fileURLToPath(new URL('../../backend',import.meta.url))).expected_row_count;
+ const firstLateElapsed=10800-requiredSeconds(60,operations,rows)+1;
+ const late=run(firstLateElapsed);
  assert.notEqual(late.status,0);
  assert.match(late.stderr,/Production budget insufficient/);
 });
