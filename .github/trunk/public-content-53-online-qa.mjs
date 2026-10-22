@@ -20,9 +20,9 @@ const hosts = env => {
   if (!['staging','production'].includes(env)) throw new Error('PUBLIC_CONTENT_53_ENV_INVALID');
   return env === 'staging' ? ['https://staging-api.fermatmind.com','https://staging.fermatmind.com'] : ['https://api.fermatmind.com','https://fermatmind.com'];
 };
-export async function read(url, fetcher, allowStagingBootstrap404 = false) {
+export async function read(url, fetcher, allowStagingBootstrap404 = false, headers = {}) {
   let response, bytes;
-  try { response = await fetcher(url, {redirect:'error',signal:AbortSignal.timeout(15000),headers:{'Cache-Control':'no-cache'}}); }
+  try { response = await fetcher(url, {redirect:'error',signal:AbortSignal.timeout(15000),headers:{'Cache-Control':'no-cache',...headers}}); }
   catch (error) {
     const code = error?.cause?.code ?? error?.name;
     const known = new Set(['UND_ERR_SOCKET','UND_ERR_CONNECT_TIMEOUT','UND_ERR_HEADERS_TIMEOUT','ECONNRESET','ENOTFOUND','TimeoutError','AbortError']);
@@ -43,11 +43,17 @@ export async function read(url, fetcher, allowStagingBootstrap404 = false) {
 const parseApi = bytes => {
   try { return JSON.parse(bytes); } catch { throw new Error('PUBLIC_CONTENT_53_API_JSON_INVALID'); }
 };
-export function domOf(html) {
+export function domOf(html, {articleSsr=false}={}) {
   const code = String.raw`
 $doc = new DOMDocument; libxml_use_internal_errors(true);
 if (!$doc->loadHTML(stream_get_contents(STDIN), LIBXML_NONET)) throw new RuntimeException('invalid DOM');
 $xp = new DOMXPath($doc);
+// A completed Next.js stream still contains its loading main and a hidden
+// React transport segment. Raw acceptance selects the real Article subtree;
+// the separate browser pass retains the unique visible-main requirement.
+$mainQuery = $argv[1] === 'article_ssr'
+ ? '//main[not(ancestor::main) and .//article[@data-testid="article-detail-content"]]'
+ : '//main[not(ancestor::main)]';
 $walk = function($node) use (&$walk) {
  if ($node instanceof DOMElement && (in_array($node->tagName,['script','style','template','noscript']) || $node->getAttribute('data-iq-qa-hidden') === 'true' || $node->hasAttribute('hidden') || $node->getAttribute('aria-hidden') === 'true')) return '';
  if ($node instanceof DOMText) return $node->nodeValue;
@@ -59,14 +65,14 @@ $documentTitles=[]; foreach($xp->query('/html/head/title | /html/body/title') as
 $alternateEntries=[]; foreach($xp->query('//link[@rel="alternate"]') as $node) $alternateEntries[]=['href'=>$node->getAttribute('href'),'type'=>$node->getAttribute('type'),'hreflang'=>$node->getAttribute('hreflang')];
 $quickstart=[]; foreach($xp->query('//script[@type="application/ld+json" and @id="tests-hub-quickstart-en"]') as $node) $quickstart[]=$node->textContent;
 $homeJsonLd=[]; foreach($xp->query('//script[@type="application/ld+json"]') as $node) $homeJsonLd[]=$node->textContent;
-echo json_encode(['link_labels'=>$labels,'body'=>$values('//main[not(ancestor::main)]'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
+echo json_encode(['link_labels'=>$labels,'body'=>$values($mainQuery),'h1'=>$values($mainQuery.'//h1'),'links'=>$values($mainQuery.'//a','href'),
  'home_jsonld'=>$homeJsonLd,'home_iq_cards'=>$values('//main//article[.//a[contains(@href,"iq-test-intelligence-quotient-assessment")]]'),
  'tests_quickstart_jsonld'=>$quickstart,'article_body'=>$values('//main//article[@data-testid="article-detail-content"]'),
  'title'=>$documentTitles,'description'=>$values('//meta[@name="description"]','content'),
  'og_title'=>$values('//meta[@property="og:title"]','content'),'og_description'=>$values('//meta[@property="og:description"]','content'),
  'canonical'=>$values('//link[@rel="canonical"]','href'),'robots'=>$values('//meta[@name="robots"]','content'),
  'alternates'=>$values('//link[@rel="alternate"]','href'),'alternate_entries'=>$alternateEntries],JSON_THROW_ON_ERROR);`;
-  return JSON.parse(execFileSync('php',['-r',code],{input:html,encoding:'utf8',maxBuffer:3000000,timeout:15000,stdio:['pipe','pipe','pipe']}));
+  return JSON.parse(execFileSync('php',['-r',code,articleSsr?'article_ssr':'dom'],{input:html,encoding:'utf8',maxBuffer:3000000,timeout:15000,stdio:['pipe','pipe','pipe']}));
 }
 export function projection(row,data) {
   const value = data[row.kind];
@@ -168,9 +174,9 @@ function readerVariants(line, row, dom, environment) {
   }
   return variants;
 }
-export function assertDom(row,html,before,environment) {
+export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   const reviewedBefore=environment === 'staging' ? (row.staging_before ?? row.before) : row.before;
-  const dom=domOf(html); const body=compact(dom.body.join(' '));
+  const dom=domOf(html,{articleSsr}); const body=compact(dom.body.join(' '));
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
   if (row.kind !== 'surface' && row.snapshot.title && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
   if (['article','guide'].includes(row.kind) && row.snapshot.seo_text) {
@@ -357,7 +363,13 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     // while exact candidate DOM assertions remain strict and bounded.
     const deadline=Date.now()+360000;let last;
     while (true) {
-      try { const verifyDOM=html=>assertDom(row,html,before,environment);if(row.new_article) verifyDOM(await read(web+pathFor(row),fetcher));verifyDOM(await renderer(web+pathFor(row),{surface:'public_page',verifyDOM}));break; }
+      try {
+        const verifyDOM=html=>assertDom(row,html,before,environment);
+        // Request Next's complete HTML-only crawler body instead of unfinished
+        // $RS placeholders. Ordinary Chrome still verifies final visibility.
+        if(row.new_article) assertDom(row,await read(web+pathFor(row),fetcher,false,{'User-Agent':'facebookexternalhit/1.1'}),before,environment,{articleSsr:true});
+        verifyDOM(await renderer(web+pathFor(row),{surface:'public_page',verifyDOM}));break;
+      }
       catch(error) {last=error?.message?.startsWith('PUBLIC_CONTENT_53_') ? error : new Error(`PUBLIC_CONTENT_53_BROWSER_FAILED_${row.page_id}`);if(Date.now()>=deadline) throw last;await new Promise(resolve=>setTimeout(resolve,10000));}
     }
   }
