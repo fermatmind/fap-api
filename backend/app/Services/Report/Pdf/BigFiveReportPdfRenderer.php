@@ -10,7 +10,7 @@ use RuntimeException;
 
 final class BigFiveReportPdfRenderer
 {
-    public const SURFACE_VERSION = 'big5.private_result_pdf.v2';
+    public const SURFACE_VERSION = 'big5.private_result_pdf.v3';
 
     private const SECTIONS = [
         'hero_summary' => ['结果摘要', 'Result summary'],
@@ -52,7 +52,7 @@ final class BigFiveReportPdfRenderer
     public function html(array $report, string $locale, bool $locked): string
     {
         $language = str_starts_with(strtolower($locale), 'zh') ? 0 : 1;
-        $precise = ! $locked && ($report['norms']['comparison_allowed'] ?? false) === true;
+        $precise = ! $locked && ($report['norms']['show_precise_percentiles'] ?? false) === true;
         $html = '<!doctype html><html><head><meta charset="utf-8"><style>'
             .'body{font-family:sans-serif;color:#172033;font-size:11pt;line-height:1.6}'
             .'h1{font-size:25pt;color:#123d34}h2{font-size:18pt;border-bottom:2px solid #d9eadf;padding-bottom:8px;page-break-after:avoid}'

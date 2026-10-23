@@ -17,7 +17,7 @@ final class BigFiveReportPdfContentTest extends TestCase
     {
         $fixture = json_decode(file_get_contents(base_path('tests/Fixtures/big5_engine/expected_live_bridge_report_payload.json')), true, 512, JSON_THROW_ON_ERROR);
 
-        return ['sections' => $fixture['big5_report_engine_v2']['sections'], 'norms' => ['comparison_allowed' => true]];
+        return ['sections' => $fixture['big5_report_engine_v2']['sections'], 'norms' => ['comparison_allowed' => true, 'show_precise_percentiles' => true]];
     }
 
     public function test_full_pdf_contains_real_report_copy_and_excludes_internal_fields(): void
@@ -80,6 +80,17 @@ final class BigFiveReportPdfContentTest extends TestCase
         }
         $this->assertStringNotContainsString('PRIVATE_LEGACY_ID', $html);
         $this->assertStringNotContainsString('LEGACY_PAID_CONTENT', $renderer->html($report, 'zh-CN', true));
+    }
+
+    public function test_provisional_norms_do_not_expose_precise_percentiles(): void
+    {
+        $report = $this->report();
+        $renderer = app(BigFiveReportPdfRenderer::class);
+        $this->assertStringContainsString('百分位：', $renderer->html($report, 'zh-CN', false));
+        $report['norms']['show_precise_percentiles'] = false;
+        $html = $renderer->html($report, 'zh-CN', false);
+        $this->assertStringNotContainsString('百分位：', $html);
+        $this->assertStringContainsString('五维总览', $html);
     }
 
     public function test_metadata_only_cache_is_replaced_by_multipage_pdf_with_embedded_fonts(): void
