@@ -307,16 +307,18 @@ final class PublicContent53Package
         return ['candidates' => $rows, 'package_sha256' => $sha];
     }
 
-    /** Selected core planning guides; URL, publication state and the other locale stay locked. */
+    /** Selected planning guides; URL, SEO, publication state and the other locale stay locked. */
     private function readCareerPlanning(string $root, string $sha): array
     {
         $bytes = $this->bytes($root, 'career-planning.json');
         $data = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
         $proof = json_decode($this->bytes($root, 'career-planning-review.json'), true, 64, JSON_THROW_ON_ERROR);
-        $targets = ['CAREER-DIRECTION' => 'how-to-find-right-career-direction', 'CAREER-TRANSITION' => 'career-transition-playbook'];
+        $legacyTargets = ['CAREER-DIRECTION' => 'how-to-find-right-career-direction', 'CAREER-TRANSITION' => 'career-transition-playbook'];
+        $applicationTargets = ['CAREER-BIG5' => 'big5-for-career-decisions', 'CAREER-RISK' => 'career-risk-management', 'CAREER-FIRST90' => 'first-90-days-in-new-role'];
+        $targets = $legacyTargets + $applicationTargets;
         $rows = $data['candidates'] ?? [];
         if (($data['schema'] ?? null) !== 'fermatmind.public_content_career_planning.v1'
-            || ! is_array($rows) || count($rows) < 1 || count($rows) > 2
+            || ! is_array($rows) || count($rows) < 1 || count($rows) > 3
             || ($proof['schema'] ?? null) !== 'fermatmind.public_content_career_planning.review.v1'
             || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
             || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
@@ -328,6 +330,7 @@ final class PublicContent53Package
             $locale = $row['identity']['locale'] ?? null;
             if (! isset($targets[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'guide'
                 || ! in_array($locale, ['en', 'zh-CN'], true)
+                || ($locale === 'en' && ! isset($legacyTargets[$id]))
                 || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => $targets[$id], 'locale' => $locale]
                 || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity']) !== []
                 || ($proof['pages'][$id] ?? null) !== 'PASS') {
@@ -352,7 +355,8 @@ final class PublicContent53Package
                 }
             }
             if ($locale === 'zh-CN') {
-                foreach (['title', 'excerpt', 'seo_text'] as $field) {
+                $lockedFields = isset($applicationTargets[$id]) ? ['title', 'seo_text'] : ['title', 'excerpt', 'seo_text'];
+                foreach ($lockedFields as $field) {
                     if ($row['snapshot'][$field] !== $row['before'][$field]
                         || $row['staging_before'][$field] !== $row['before'][$field]) {
                         throw new DomainException('public_content_53_career_nonbody_changed');

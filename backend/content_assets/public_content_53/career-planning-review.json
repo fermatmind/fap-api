@@ -1,30 +1,19 @@
 {
   "schema": "fermatmind.public_content_career_planning.review.v1",
-  "candidate_sha256": "acc6c9ab621671fe54db74d4d9cd78e7a9346c2d49bce4f56f5ab3716b05e8f5",
+  "candidate_sha256": "1f2e0509c3c129f22e447e54ae6df5280a5297784523563d29717cbf90e654a5",
   "verdict": "PASS",
   "pages": {
-    "CAREER-TRANSITION": "PASS"
+    "CAREER-BIG5": "PASS",
+    "CAREER-RISK": "PASS",
+    "CAREER-FIRST90": "PASS"
   },
   "reviewer_role": "fm_independent_reviewer",
   "reviewed_at": "2026-10-23",
+  "reviewed_manifest_sha256": "fe4d24df1f3b0c8de5521c37a144c5e115a7554b398bee7f0c7213bfc827d2b4",
   "reviewed_body_sha256": {
-    "career-transition-playbook.zh-CN.md": "668d6142166a74af31bbcb00b23983cd362d0fc3678c79adaea3510e0b1acaac"
+    "big5-for-career-decisions.zh-CN.md": "c1efed5c1ebda1746a69cf33ec8a1d83ffe6bea9e433cc4e788b5271d5997d93",
+    "career-risk-management.zh-CN.md": "d6c7e104defc9db695f540a62aaf763141aab96323dc0f30ab3b9f5ea47175af",
+    "first-90-days-in-new-role.zh-CN.md": "b641d464169e696d1a148bc3298d61412e240f73d4978fd990f0d8b289db108e"
   },
-  "review_scope": "Frozen Chinese existing-guide body only; title, excerpt, SEO, identity and English counterpart remain protected. Native write, deployment and online acceptance are separately verified.",
-  "review_history": [
-    {
-      "version": "v1",
-      "verdict": "RETURN",
-      "body_sha256": "9e10f9ea7af397ba49ff05a14daff3b07f3ccdd497840658eed95ef97a8cc63a",
-      "issues": [
-        "Information interviews and practice do not establish interview eligibility.",
-        "Worked example omitted actual choices, time, costs and review date."
-      ]
-    },
-    {
-      "version": "v2",
-      "verdict": "PASS",
-      "body_sha256": "668d6142166a74af31bbcb00b23983cd362d0fc3678c79adaea3510e0b1acaac"
-    }
-  ]
+  "review_scope": "Frozen Chinese body and selected summary copy; existing title, SEO, identities and English counterparts remain protected. Native write and public acceptance verified separately."
 }

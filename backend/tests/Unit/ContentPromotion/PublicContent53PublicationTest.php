@@ -1610,7 +1610,7 @@ PHP;
         });
         try {
             DB::transaction(fn () => app(PublicContent53Writer::class)->publish($this->planningContext(), $before));
-            self::fail('Late revision failure must roll back both guides');
+            self::fail('Late revision failure must roll back every selected guide');
         } catch (DomainException $error) {
             self::assertSame('injected_second_planning_revision_failure', $error->getMessage());
         }
@@ -1838,6 +1838,15 @@ PHP;
                 $p['candidates'][1] = $p['candidates'][0];
             },
             static function (&$p): void {
+                $row = &$p['candidates'][0];
+                $row['page_id'] = 'CAREER-TRANSITION';
+                $row['identity']['slug'] = 'career-transition-playbook';
+                foreach (['source_identity', 'staging_source_identity'] as $field) {
+                    $row[$field] = ['guide_code' => 'career-transition-playbook'];
+                }
+                $row['snapshot']['excerpt'] = 'Unreviewed legacy guide summary';
+            },
+            static function (&$p): void {
                 $p['candidates'][0]['snapshot']['title'] = 'Changed identity promise';
             },
             static function (&$p): void {
@@ -1847,7 +1856,10 @@ PHP;
                 $p['candidates'][0]['snapshot']['seo_text']['seo_description'] = str_repeat('x', 161);
             },
             static function (&$p): void {
-                $p['candidates'][0]['snapshot']['excerpt'] = 'Unreviewed summary change';
+                $p['candidates'][0]['snapshot']['excerpt'] = [];
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['identity']['locale'] = 'en';
             },
             static function (&$p): void {
                 $p['candidates'][0]['snapshot']['seo_text']['seo_description'] = 'Unreviewed short SEO';
