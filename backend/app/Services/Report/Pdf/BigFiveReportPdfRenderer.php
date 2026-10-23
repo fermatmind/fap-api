@@ -63,14 +63,18 @@ final class BigFiveReportPdfRenderer
         $count = 0;
         // Only the gate-selected sections are reader content. The _meta engine may contain full, locked material.
         foreach ((array) ($report['sections'] ?? []) as $section) {
-            $key = $section['section_key'] ?? '';
-            if (! isset(self::SECTIONS[$key]) || ($section['status'] ?? '') === 'locked'
-                || ($locked && ! in_array($key, ['hero_summary', 'domains_overview', 'methodology_and_access'], true))) {
+            $canonical = isset($section['section_key']);
+            $key = $section['section_key'] ?? $section['key'] ?? '';
+            $title = self::SECTIONS[$key][$language] ?? $section['title'] ?? '';
+            if (! is_string($title) || trim($title) === '' || ($section['status'] ?? '') === 'locked'
+                || ($locked && ($canonical
+                    ? ! in_array($key, ['hero_summary', 'domains_overview', 'methodology_and_access'], true)
+                    : ($section['access_level'] ?? 'free') === 'paid'))) {
                 continue;
             }
-            $html .= '<section'.($count++ > 0 ? ' class="chapter"' : '').'><h2>'.self::SECTIONS[$key][$language].'</h2>';
+            $html .= '<section'.($count++ > 0 ? ' class="chapter"' : '').'><h2>'.$this->escape($title).'</h2>';
             foreach ((array) ($section['blocks'] ?? []) as $block) {
-                $copy = is_array($block['resolved_copy'] ?? null) ? $block['resolved_copy'] : [];
+                $copy = is_array($block['resolved_copy'] ?? null) ? $block['resolved_copy'] : ($canonical ? [] : $block);
                 $trait = (string) data_get($block, 'analytics.trait_code', '');
                 $html .= '<div class="block">';
                 if (($block['kind'] ?? '') === 'trait_atomic' && isset(self::DOMAINS[$trait])) {
@@ -117,7 +121,7 @@ final class BigFiveReportPdfRenderer
                 $html .= '<p>'.nl2br($this->escape($copy[$field])).'</p>';
             }
         }
-        foreach (['strengths', 'costs', 'items'] as $field) {
+        foreach (['strengths', 'costs', 'items', 'bullets', 'tips', 'tags'] as $field) {
             $value = $copy[$field] ?? [];
             if (is_string($value)) {
                 $html .= '<p>'.$this->escape($value).'</p>';

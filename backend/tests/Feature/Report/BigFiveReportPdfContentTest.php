@@ -63,6 +63,25 @@ final class BigFiveReportPdfContentTest extends TestCase
         $this->assertStringNotContainsString('LOCKED_BLOCK_SECRET', app(BigFiveReportPdfRenderer::class)->html($report, 'en', false));
     }
 
+    public function test_immutable_legacy_snapshot_remains_readable_without_recomposing_it(): void
+    {
+        $report = ['sections' => [
+            ['key' => 'summary', 'title' => '原报告摘要', 'access_level' => 'free', 'blocks' => [
+                ['title' => '原标题', 'body' => '原解释正文', 'bullets' => ['原建议'], 'provenance' => 'PRIVATE_LEGACY_ID'],
+            ]],
+            ['key' => 'facets_deepdive', 'title' => '原付费章节', 'access_level' => 'paid', 'blocks' => [
+                ['body' => 'LEGACY_PAID_CONTENT'],
+            ]],
+        ]];
+        $renderer = app(BigFiveReportPdfRenderer::class);
+        $html = $renderer->html($report, 'zh-CN', false);
+        foreach (['原报告摘要', '原标题', '原解释正文', '原建议', 'LEGACY_PAID_CONTENT'] as $text) {
+            $this->assertStringContainsString($text, $html);
+        }
+        $this->assertStringNotContainsString('PRIVATE_LEGACY_ID', $html);
+        $this->assertStringNotContainsString('LEGACY_PAID_CONTENT', $renderer->html($report, 'zh-CN', true));
+    }
+
     public function test_metadata_only_cache_is_replaced_by_multipage_pdf_with_embedded_fonts(): void
     {
         Storage::fake('local');
