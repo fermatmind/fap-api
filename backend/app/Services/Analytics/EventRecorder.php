@@ -26,17 +26,23 @@ final class EventRecorder
 
     public function record(string $eventCode, ?int $userId, array $meta = [], array $context = []): void
     {
+        $this->recordConfirmed($eventCode, $userId, $meta, $context);
+    }
+
+    /** Existing fire-and-forget callers keep their contract; ingest must check durability. */
+    public function recordConfirmed(string $eventCode, ?int $userId, array $meta = [], array $context = []): bool
+    {
         if (! \App\Support\SchemaBaseline::hasTable('events')) {
-            return;
+            return false;
         }
 
         $meta = $this->validateBigFiveEventMeta($eventCode, $meta);
         if ($meta === null) {
-            return;
+            return false;
         }
         $meta = $this->validateEnneagramEventMeta($eventCode, $meta);
         if ($meta === null) {
-            return;
+            return false;
         }
 
         $meta = $this->sanitizeMetaForStorage($eventCode, $meta);
@@ -56,7 +62,7 @@ final class EventRecorder
         $occurredAt = $this->resolveOccurredAt($context['occurred_at'] ?? null);
         $now = now();
         $payload = [
-            'id' => (string) Str::uuid(),
+            'id' => $context['_event_id'] ?? (string) Str::uuid(),
             'event_code' => $eventCode,
             'event_name' => $eventCode,
             'org_id' => $context['org_id'] ?? 0,
@@ -98,7 +104,17 @@ final class EventRecorder
         }
 
         try {
-            Event::create($payload);
+            if (isset($context['_event_id'])) {
+                // Public ingest authenticates its own org-bound envelope and
+                // has no user tenant context. Keep both the deterministic ID
+                // and explicit org predicate on the idempotency lookup.
+                Event::withoutGlobalScopes()->where('org_id', $payload['org_id'])
+                    ->firstOrCreate(['id' => $payload['id']], $payload);
+            } else {
+                Event::create($payload);
+            }
+
+            return true;
         } catch (\Throwable $e) {
             Log::warning('EVENT_RECORDER_WRITE_FAILED', [
                 'event_code' => $eventCode,
@@ -107,6 +123,8 @@ final class EventRecorder
                 'user_id' => $userId,
                 'exception' => $e,
             ]);
+
+            return false;
         }
     }
 

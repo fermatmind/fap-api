@@ -11,6 +11,94 @@ use Illuminate\Support\Facades\DB;
 
 final class CareerAttributionDailyBuilder
 {
+    /** Live action detail complements the historical daily table without rewriting it. */
+    public function actions(int $orgId, string $from, string $to, bool $includeQa = false): array
+    {
+        $fromAt = CarbonImmutable::parse($from, 'Asia/Shanghai')->startOfDay()->utc();
+        $toAt = CarbonImmutable::parse($to, 'Asia/Shanghai')->addDay()->startOfDay()->utc();
+        $policy = app(AnalyticsTrafficExclusionPolicy::class);
+        $rows = [];
+        $excluded = 0;
+        $toolRuns = [];
+        $firstV2 = null;
+        foreach (DB::table('events')->where('org_id', $orgId)->where('scale_code', 'CAREER')
+            ->whereIn('event_name', CareerAttributionEventMapper::ALLOWED_EVENT_NAMES)
+            ->where('occurred_at', '>=', $fromAt)->where('occurred_at', '<', $toAt)
+            ->orderBy('id')->cursor() as $event) {
+            $meta = json_decode((string) $event->meta_json, true) ?: [];
+            $isQa = $policy->isExcludedSeoConversionEvent($event, $meta)
+                || in_array($meta['traffic_quality'] ?? null, ['qa', 'internal', 'bot'], true)
+                || ($meta['utm_source'] ?? null) === 'fermatmind_qa';
+            if ($isQa && ! $includeQa) {
+                $excluded++;
+
+                continue;
+            }
+            $action = (string) ($meta['target_action'] ?? '');
+            $bucket = in_array($action, CareerAttributionEventMapper::DETAIL_ACTIONS, true) ? $action
+                : (in_array($action, ['open_next_step_link', 'open_transition_cta', 'open_primary_cta', 'open_support_link'], true)
+                    ? 'historical_unspecified' : 'other_or_unknown');
+            if (($meta['action_contract_version'] ?? null) === CareerAttributionEventMapper::ACTION_CONTRACT_VERSION) {
+                $firstV2 = $firstV2 === null ? $event->created_at : min($firstV2, $event->created_at);
+            }
+            $dimensions = [
+                'day' => CarbonImmutable::parse($event->occurred_at, 'UTC')->setTimezone('Asia/Shanghai')->toDateString(),
+                'locale' => $event->locale,
+                'event_name' => $event->event_name,
+                'target_action' => preg_match('/\A[a-z0-9_]{1,128}\z/', $action) ? $action : 'unknown',
+                'action_bucket' => $bucket,
+                'output_format' => in_array($meta['output_format'] ?? null, ['text', 'markdown', 'print'], true) ? $meta['output_format'] : 'none',
+                'resource_key' => in_array($meta['resource_key'] ?? null, ['onet_interest_profiler', 'mynextmove', 'onet_online', 'england_profiles', 'england_courses', 'england_skills', 'england_support'], true) ? $meta['resource_key'] : 'unknown',
+                'traffic_scope' => $isQa ? 'qa_or_excluded' : 'eligible_or_unknown',
+            ];
+            foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'] as $key) {
+                $value = (string) ($meta[$key] ?? '');
+                $dimensions[$key] = preg_match('/\A[A-Za-z0-9._-]{1,96}\z/', $value) ? $value : 'unknown';
+            }
+            $key = json_encode($dimensions);
+            $rows[$key] ??= $dimensions + ['event_count' => 0, 'identified_run_count' => 0, 'unknown_run_count' => 0, '__runs' => []];
+            $rows[$key]['event_count']++;
+            $run = (string) ($meta['tool_run_id'] ?? '');
+            if (\Illuminate\Support\Str::isUuid($run)) {
+                $rows[$key]['__runs'][$run] = true;
+                $toolRuns[$event->event_name][$run] = true;
+            } else {
+                $rows[$key]['unknown_run_count']++;
+            }
+        }
+        $final = array_values(array_map(static function (array $row): array {
+            $row['identified_run_count'] = count($row['__runs']);
+            unset($row['__runs']);
+
+            return $row;
+        }, $rows));
+        $tools = [];
+        foreach (CareerAttributionEventMapper::TOOL_EVENTS as $event) {
+            $entry = str_starts_with($event, 'career_compare_') ? 'career_compare_entered' : 'career_worksheet_entered';
+            $runs = $toolRuns[$event] ?? [];
+            $entries = $toolRuns[$entry] ?? [];
+            $tools[$event] = [
+                'distinct_observed_runs' => count($runs),
+                'matched_entered_runs' => count(array_intersect_key($runs, $entries)),
+                'unmatched_runs' => count(array_diff_key($runs, $entries)),
+                'entered_denominator' => count($entries),
+            ];
+        }
+
+        return [
+            'ok' => true, 'schema_version' => 'career.action-read-model.v2',
+            'action_contract_version' => CareerAttributionEventMapper::ACTION_CONTRACT_VERSION,
+            'from' => $from, 'to' => $to, 'org_id' => $orgId,
+            'as_of' => now()->toIso8601String(), 'reporting_timezone' => 'Asia/Shanghai',
+            'definition_first_received_at_in_scope' => $firstV2,
+            'historical_policy' => 'retain_original_D0_and_unspecified_actions_no_backfill',
+            'qa_included' => $includeQa, 'excluded_event_count' => $excluded,
+            'rows' => $final, 'tools' => $tools,
+            'tool_window' => 'observations_in_selected_calendar_interval_not_test_attempts',
+            'read_only' => true,
+        ];
+    }
+
     /**
      * @param  list<int>  $orgIds
      * @return array{rows:list<array<string,mixed>>,attempted_rows:int,org_scope:list<int>,from:string,to:string}

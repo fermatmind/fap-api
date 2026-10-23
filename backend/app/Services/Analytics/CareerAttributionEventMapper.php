@@ -8,10 +8,24 @@ use Illuminate\Validation\ValidationException;
 
 final class CareerAttributionEventMapper
 {
+    public const ACTION_CONTRACT_VERSION = 'career.actions.v2';
+
+    public const DETAIL_ACTIONS = [
+        'choose_career_assessment', 'browse_career_options', 'plan_career_action', 'start_riasec_test',
+    ];
+
+    public const TOOL_EVENTS = [
+        'career_compare_entered', 'career_compare_succeeded',
+        'career_worksheet_entered', 'career_worksheet_started',
+        'career_worksheet_output_requested', 'career_worksheet_copy_succeeded',
+        'career_worksheet_download_requested', 'career_worksheet_print_requested',
+    ];
+
     /**
      * @var list<string>
      */
     public const ALLOWED_EVENT_NAMES = [
+        ...self::TOOL_EVENTS,
         'career_landing_view',
         'career_job_index_view',
         'career_job_detail_view',
@@ -42,6 +56,7 @@ final class CareerAttributionEventMapper
      * @var list<string>
      */
     private const ALLOWED_ROUTE_FAMILIES = [
+        'compare', 'worksheet',
         'landing',
         'jobs',
         'jobs_search',
@@ -66,6 +81,7 @@ final class CareerAttributionEventMapper
      * @var list<string>
      */
     private const ALLOWED_SOURCE_PAGE_TYPES = [
+        'career_compare', 'career_worksheet',
         'landing',
         'job_index',
         'job_detail',
@@ -156,6 +172,11 @@ final class CareerAttributionEventMapper
             'query_mode'
         );
         $subjectKey = $this->normalizeSubjectKey($payload['subject_key'] ?? null, $subjectKind);
+        $officialResource = $eventCode === 'career_support_link_click' && ($payload['target_action'] ?? null) === 'open_official_resource';
+        if ($officialResource !== isset($payload['resource_key'])) {
+            throw ValidationException::withMessages(['payload.resource_key' => 'Resource identity is required only for official resource clicks.']);
+        }
+        $this->validateToolScope($eventCode, $payload, $subjectKind, $queryMode);
         $blockedClaimKind = $this->normalizeBlockedClaimKind($eventCode, $payload['blocked_claim_kind'] ?? null);
         $this->validateClaimBlockedEventScope($eventCode, $sourcePageType, $routeFamily, $subjectKind);
         $this->validateConversionEventScope(
@@ -170,6 +191,7 @@ final class CareerAttributionEventMapper
         );
 
         $meta = [
+            'action_contract_version' => self::ACTION_CONTRACT_VERSION,
             'entry_surface' => $this->normalizeOptionalString($payload['entry_surface'] ?? null, 128) ?? 'unknown',
             'source_page_type' => $sourcePageType,
             'target_action' => $this->normalizeOptionalString($payload['target_action'] ?? null, 128),
@@ -179,6 +201,15 @@ final class CareerAttributionEventMapper
             'subject_key' => $subjectKey,
             'query_mode' => $queryMode,
         ];
+
+        foreach (['tool_run_id', 'output_format', 'resource_key', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'traffic_quality'] as $key) {
+            if (isset($payload[$key]) && $payload[$key] !== '') {
+                $meta[$key] = $payload[$key];
+            }
+        }
+        // Client timestamps are diagnostic only. Receipt time is the trusted
+        // occurrence clock for public Career observations.
+        $meta['client_occurred_at'] = $columns['occurred_at'] ?? null;
 
         if ($blockedClaimKind !== null) {
             $meta['blocked_claim_kind'] = $blockedClaimKind;
@@ -194,7 +225,7 @@ final class CareerAttributionEventMapper
                 'request_id' => $columns['request_id'] ?? null,
                 'channel' => 'web',
                 'locale' => $this->normalizeLocale($columns['locale'] ?? null, $path),
-                'occurred_at' => $columns['occurred_at'] ?? null,
+                'occurred_at' => now(),
                 'scale_code' => 'CAREER',
                 'scale_code_v2' => 'CAREER',
             ],
@@ -268,7 +299,7 @@ final class CareerAttributionEventMapper
                     'payload.query_mode' => 'payload.query_mode must be non_query for career_job_detail_cta_click.',
                 ]);
             }
-            if (! in_array($targetAction, ['open_next_step_link', 'open_transition_cta', 'open_primary_cta'], true)) {
+            if (! in_array($targetAction, [...self::DETAIL_ACTIONS, 'open_next_step_link', 'open_transition_cta', 'open_primary_cta'], true)) {
                 throw ValidationException::withMessages([
                     'payload.target_action' => 'payload.target_action is not supported for career_job_detail_cta_click.',
                 ]);
@@ -276,6 +307,13 @@ final class CareerAttributionEventMapper
         }
 
         if ($eventCode === 'career_support_link_click') {
+            if ($entrySurface === 'career_tests_official_tools'
+                && $sourcePageType === 'landing' && $routeFamily === 'landing'
+                && in_array($landingPath, ['/en/career/tests', '/zh/career/tests'], true)
+                && $subjectKind === 'none' && $queryMode === 'non_query'
+                && $targetAction === 'open_official_resource') {
+                return;
+            }
             if ($entrySurface === 'career_guides'
                 && $sourcePageType === 'landing' && $routeFamily === 'landing'
                 && in_array($landingPath, ['/en/career/guides', '/zh/career/guides'], true)
@@ -346,6 +384,43 @@ final class CareerAttributionEventMapper
                     'payload.target_action' => 'payload.target_action must be submit_feedback for career_feedback_submit.',
                 ]);
             }
+        }
+    }
+
+    private function validateToolScope(string $eventCode, array $payload, string $subjectKind, string $queryMode): void
+    {
+        $isTool = in_array($eventCode, self::TOOL_EVENTS, true);
+        if (! $isTool) {
+            if (isset($payload['tool_run_id']) || isset($payload['output_format'])) {
+                throw ValidationException::withMessages(['payload.tool_run_id' => 'Tool fields require a tool event.']);
+            }
+
+            return;
+        }
+        $compare = str_starts_with($eventCode, 'career_compare_');
+        $surface = $compare ? 'career_compare' : 'career_worksheet';
+        $family = $compare ? 'compare' : 'worksheet';
+        $locale = $this->normalizeLocale($payload['locale'] ?? null, (string) ($payload['landing_path'] ?? '/'));
+        $publicLocale = in_array($locale, ['zh', 'zh-cn'], true) ? 'zh' : 'en';
+        $path = $compare ? "/$publicLocale/career/compare" : "/$publicLocale/holland-test/pdf-download";
+        if (($payload['source_page_type'] ?? null) !== $surface
+            || ($payload['entry_surface'] ?? null) !== $surface
+            || ($payload['route_family'] ?? null) !== $family
+            || ($payload['landing_path'] ?? null) !== $path
+            || ($payload['target_action'] ?? null) !== substr($eventCode, 7)
+            || $subjectKind !== 'none' || $queryMode !== 'non_query'
+            || ! is_string($payload['tool_run_id'] ?? null)
+            || ! \Illuminate\Support\Str::isUuid($payload['tool_run_id'])) {
+            throw ValidationException::withMessages(['payload' => 'Invalid Career tool scope.']);
+        }
+        $output = str_contains($eventCode, 'output_') || str_contains($eventCode, 'copy_')
+            || str_contains($eventCode, 'download_') || str_contains($eventCode, 'print_');
+        $format = $payload['output_format'] ?? null;
+        if (($output && ! in_array($format, ['text', 'markdown', 'print'], true))
+            || (! $output && $format !== null)
+            || ($eventCode === 'career_worksheet_print_requested' && $format !== 'print')
+            || (in_array($eventCode, ['career_worksheet_copy_succeeded', 'career_worksheet_download_requested'], true) && $format === 'print')) {
+            throw ValidationException::withMessages(['payload.output_format' => 'Invalid output format for this stage.']);
         }
     }
 

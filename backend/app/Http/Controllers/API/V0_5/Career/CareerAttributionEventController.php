@@ -9,7 +9,9 @@ use App\Services\Analytics\CareerAttributionEventMapper;
 use App\Services\Analytics\EventRecorder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use Ramsey\Uuid\Uuid;
 
 final class CareerAttributionEventController extends Controller
 {
@@ -41,6 +43,9 @@ final class CareerAttributionEventController extends Controller
         'query_text',
         'locale',
         'blocked_claim_kind',
+        'tool_run_id', 'output_format',
+        'resource_key',
+        'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'traffic_quality',
     ];
 
     public function __construct(
@@ -67,6 +72,14 @@ final class CareerAttributionEventController extends Controller
             'payload.query_text' => ['nullable', 'string', 'max:128'],
             'payload.locale' => ['nullable', 'string', 'max:16', 'in:en,zh,zh-cn,zh-CN'],
             'payload.blocked_claim_kind' => ['nullable', 'string', 'max:64', 'regex:/\A[a-z0-9]+(?:_[a-z0-9]+)*\z/'],
+            'payload.tool_run_id' => ['nullable', 'uuid'],
+            'payload.output_format' => ['nullable', 'in:text,markdown,print'],
+            'payload.resource_key' => ['nullable', 'in:onet_interest_profiler,mynextmove,onet_online,england_profiles,england_courses,england_skills,england_support'],
+            'payload.utm_source' => ['nullable', 'string', 'max:96', 'regex:/\A[a-zA-Z0-9._-]+\z/'],
+            'payload.utm_medium' => ['nullable', 'string', 'max:32', 'regex:/\A[a-zA-Z0-9._-]+\z/'],
+            'payload.utm_campaign' => ['nullable', 'string', 'max:96', 'regex:/\A[a-zA-Z0-9._-]+\z/'],
+            'payload.utm_content' => ['nullable', 'string', 'max:96', 'regex:/\A[a-zA-Z0-9._-]+\z/'],
+            'payload.traffic_quality' => ['nullable', 'in:qa,internal,bot,unknown,production_user'],
             'anonymousId' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'sessionId' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'requestId' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
@@ -75,16 +88,37 @@ final class CareerAttributionEventController extends Controller
         ]);
 
         $mapped = $this->mapper->map($data, $this->resolveOrgId($request));
-
-        $this->eventRecorder->record(
+        $requestId = trim((string) ($data['requestId'] ?? ''));
+        $fingerprint = hash('sha256', json_encode([$data['eventName'], $data['payload'], $data['anonymousId'] ?? null, $data['path'] ?? null], JSON_THROW_ON_ERROR));
+        if ($requestId !== '') {
+            $mapped['context']['_event_id'] = Uuid::uuid5(Uuid::NAMESPACE_URL, 'career:'.$mapped['context']['org_id'].':'.$requestId)->toString();
+            $mapped['meta']['ingest_fingerprint'] = $fingerprint;
+        }
+        $confirmed = $this->eventRecorder->recordConfirmed(
             $mapped['event_code'],
             null,
             $mapped['meta'],
             $mapped['context'],
         );
 
+        if (! $confirmed) {
+            return response()->json(['ok' => false, 'error_code' => 'EVENT_WRITE_FAILED'], 503);
+        }
+        if ($requestId !== '') {
+            $row = DB::table('events')->where('org_id', $mapped['context']['org_id'])
+                ->where('id', $mapped['context']['_event_id'])->first();
+            if ($row === null) {
+                return response()->json(['ok' => false, 'error_code' => 'EVENT_WRITE_FAILED'], 503);
+            }
+            $stored = json_decode((string) ($row->meta_json ?? '{}'), true);
+            if (($stored['ingest_fingerprint'] ?? null) !== $fingerprint) {
+                return response()->json(['ok' => false, 'error_code' => 'IDEMPOTENCY_CONFLICT'], 409);
+            }
+        }
+
         return response()->json([
             'ok' => true,
+            'persisted' => true,
             'event_code' => $mapped['event_code'],
             'org_id' => (int) ($mapped['context']['org_id'] ?? 0),
         ], 202);

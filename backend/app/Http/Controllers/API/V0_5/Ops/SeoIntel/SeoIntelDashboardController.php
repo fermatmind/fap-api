@@ -81,6 +81,19 @@ final class SeoIntelDashboardController
         ));
     }
 
+    public function careerActions(Request $request, \App\Services\Analytics\CareerAttributionDailyBuilder $builder): JsonResponse
+    {
+        $data = $request->validate([
+            'from' => ['required', 'date_format:Y-m-d'],
+            'to' => ['required', 'date_format:Y-m-d', 'after_or_equal:from'],
+            'include_qa' => ['sometimes', 'boolean'],
+        ]);
+
+        abort_if(\Carbon\CarbonImmutable::parse($data['from'])->diffInDays(\Carbon\CarbonImmutable::parse($data['to'])) > 92, 422, 'Report window exceeds 93 days.');
+
+        return response()->json($builder->actions($this->trustedOrgId($request), $data['from'], $data['to'], (bool) ($data['include_qa'] ?? false)));
+    }
+
     public function experimentLedger(Request $request): JsonResponse
     {
         $page = max(1, (int) $request->query('page', 1));

@@ -316,6 +316,26 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
     /**
      * @param  list<string>  $permissions
      */
+    #[Test]
+    public function career_action_readout_uses_the_existing_ops_permission_and_trusted_org(): void
+    {
+        $uri = '/api/v0.5/ops/seo-intel/career-actions?from=2026-10-23&to=2026-10-23';
+        $this->getJson($uri)->assertUnauthorized();
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+        DB::table('events')->insert([
+            'id' => (string) Str::uuid(), 'org_id' => 99, 'event_code' => 'career_job_detail_cta_click',
+            'event_name' => 'career_job_detail_cta_click', 'scale_code' => 'CAREER',
+            'occurred_at' => '2026-10-23 04:00:00', 'created_at' => '2026-10-23 04:00:00',
+            'meta_json' => json_encode(['target_action' => 'plan_career_action']),
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson($uri.'&org_id=99&include_qa=1')->assertOk()
+            ->assertJsonPath('org_id', 0)->assertJsonPath('rows', [])
+            ->assertJsonPath('read_only', true);
+        $this->getJson('/api/v0.5/ops/seo-intel/career-actions?from=invalid&to=2026-10-23')->assertStatus(422);
+        $this->getJson('/api/v0.5/ops/seo-intel/career-actions?from=2026-01-01&to=2026-10-23')->assertStatus(422);
+    }
+
     private function createAdminWithPermissions(array $permissions): AdminUser
     {
         $admin = AdminUser::query()->create([
