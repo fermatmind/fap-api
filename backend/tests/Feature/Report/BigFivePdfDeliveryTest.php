@@ -162,7 +162,8 @@ final class BigFivePdfDeliveryTest extends TestCase
 
         $pdf = (string) $response->getContent();
         $this->assertStringStartsWith('%PDF-1.4', $pdf);
-        $this->assertStringContainsString('FermatMind Report', $pdf);
+        $this->assertStringContainsString('/FontFile2', $pdf);
+        $response->assertHeader('X-Pdf-Surface-Version', 'big5.private_result_pdf.v2');
 
         $this->assertGreaterThan(
             0,

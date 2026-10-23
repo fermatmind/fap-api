@@ -129,7 +129,7 @@ final class ReportPdfDocumentService
             $authority = data_get($gate, 'report._meta.big5_private_result_authority');
 
             return [
-                'pdf_surface_version' => 'big5.private_result_pdf.v1',
+                'pdf_surface_version' => BigFiveReportPdfRenderer::SURFACE_VERSION,
                 'scale_code' => 'BIG5_OCEAN',
                 'form_code' => null,
                 'form_label' => null,
@@ -408,9 +408,10 @@ final class ReportPdfDocumentService
         $qualityPolicy = is_array($report['quality'] ?? null) ? $report['quality'] : [];
         $normEvidence = is_array($report['norms'] ?? null) ? $report['norms'] : [];
 
-        $pdfBinary = $scaleCode === 'MBTI'
-            ? $this->buildMbtiDocument($attempt, $result, $locked, $variant)
-            : $this->buildDocument(
+        $pdfBinary = match ($scaleCode) {
+            'BIG5_OCEAN' => app(BigFiveReportPdfRenderer::class)->render($report, (string) $attempt->locale, $locked),
+            'MBTI' => $this->buildMbtiDocument($attempt, $result, $locked, $variant),
+            default => $this->buildDocument(
                 (string) $attempt->id,
                 (string) ($attempt->scale_code ?? ''),
                 $locked,
@@ -420,7 +421,8 @@ final class ReportPdfDocumentService
                 $sections,
                 $qualityPolicy,
                 $normEvidence,
-            );
+            ),
+        };
         $this->artifactStore->put($path, $pdfBinary);
 
         return [
@@ -439,7 +441,9 @@ final class ReportPdfDocumentService
         $meta = is_array($summary['meta'] ?? null) ? $summary['meta'] : [];
         $hash = trim((string) ($meta['pack_release_manifest_hash'] ?? ''));
         if ($hash !== '') {
-            return $hash;
+            return strtoupper((string) $attempt->scale_code) === 'BIG5_OCEAN'
+                ? $hash.'-'.BigFiveReportPdfRenderer::SURFACE_VERSION
+                : $hash;
         }
 
         $resultPayload = is_array($result?->result_json ?? null) ? $result?->result_json : [];
@@ -451,6 +455,10 @@ final class ReportPdfDocumentService
         ));
 
         $hash = $hash !== '' ? $hash : 'nohash';
+
+        if (strtoupper((string) $attempt->scale_code) === 'BIG5_OCEAN') {
+            return $hash.'-'.BigFiveReportPdfRenderer::SURFACE_VERSION;
+        }
 
         if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {
             return self::mbtiReportPdfSurfaceManifestHash($hash);

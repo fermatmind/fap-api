@@ -22,6 +22,11 @@ final class ReportPdfArtifactStore
      */
     public function legacyPaths(string $scaleCode, string $attemptId, string $manifestHash, string $variant): array
     {
+        // Big Five v1 PDFs were metadata-only and cannot satisfy the reader report contract.
+        if (strtoupper(trim($scaleCode)) === 'BIG5_OCEAN') {
+            return [];
+        }
+
         return $this->artifactStore->pdfLegacyPaths($scaleCode, $attemptId, $manifestHash, $variant);
     }
 
