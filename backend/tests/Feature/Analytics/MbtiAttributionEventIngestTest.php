@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Analytics;
 
+use App\Services\Analytics\AccessTestDailyBuilder;
+use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -65,6 +67,48 @@ final class MbtiAttributionEventIngestTest extends TestCase
         $this->assertDatabaseMissing('events', [
             'analytics_ip_hash' => str_repeat('f', 64),
         ]);
+    }
+
+    public function test_browser_request_ids_are_accepted_and_access_totals_increase(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+        $day = CarbonImmutable::parse('2026-10-23', 'Asia/Shanghai');
+
+        foreach (['203.0.113.42', '203.0.113.43'] as $index => $ip) {
+            $requestId = 'browser-page-view-'.$index;
+            $this->withServerVariables(['REMOTE_ADDR' => $ip, 'HTTP_USER_AGENT' => 'Mozilla/5.0'])
+                ->withHeaders(['Origin' => 'https://fermatmind.com', 'X-Request-Id' => 'transport-'.$index])
+                ->postJson('/api/v0.5/seo/attribution/events', [
+                    'requestId' => $requestId,
+                    'eventName' => 'landing_pv',
+                    'path' => '/zh',
+                    'timestamp' => '2026-10-23T14:00:00Z',
+                    'payload' => ['url' => '/zh', 'locale' => 'zh', 'page_type' => 'home'],
+                ])->assertStatus(202);
+
+            $this->assertDatabaseHas('events', ['event_name' => 'landing_pv', 'request_id' => $requestId]);
+            app(AccessTestDailyBuilder::class)->refresh($day, $day, [0]);
+            $this->assertDatabaseHas('analytics_access_test_daily', [
+                'day' => '2026-10-23', 'org_id' => 0, 'scale_code' => '*', 'form_code' => '*', 'locale' => '*',
+                'valid_visit_ips' => $index + 1, 'valid_page_views' => $index + 1,
+            ]);
+        }
+    }
+
+    public function test_browser_ingest_rejects_invalid_request_ids_and_unknown_envelope_fields(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+        $envelope = ['eventName' => 'landing_pv', 'path' => '/zh', 'payload' => ['url' => '/zh', 'locale' => 'zh']];
+
+        foreach (['bad id', 'person@example.com', str_repeat('a', 129), ['not-a-string']] as $requestId) {
+            $this->withHeaders(['Origin' => 'https://fermatmind.com'])
+                ->postJson('/api/v0.5/seo/attribution/events', ['requestId' => $requestId, ...$envelope])
+                ->assertStatus(422)->assertJsonStructure(['details' => ['requestId']]);
+        }
+        $this->withHeaders(['Origin' => 'https://fermatmind.com'])
+            ->postJson('/api/v0.5/seo/attribution/events', ['unexpected' => 'value', ...$envelope])
+            ->assertStatus(422)->assertJsonStructure(['details' => ['unexpected']]);
+        $this->assertSame(0, DB::table('events')->count());
     }
 
     public function test_browser_ingest_cannot_submit_other_events_or_omit_the_allowed_origin(): void

@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Widgets;
 
 use App\Filament\Ops\Support\OpsMetricsAccess;
 use App\Support\SchemaBaseline;
+use Carbon\CarbonImmutable;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\DB;
@@ -44,7 +45,9 @@ final class AccessTestStatisticsWidget extends BaseWidget
 
         $description = __('ops.widgets.access_test_status', [
             'status' => (string) $row->coverage_status,
-            'time' => (string) ($row->last_successful_refresh_at ?? ''),
+            'time' => empty($row->last_successful_refresh_at) ? '' : CarbonImmutable::parse((string) $row->last_successful_refresh_at, 'UTC')
+                ->setTimezone('Asia/Shanghai')
+                ->format('Y-m-d H:i:s').' (UTC+08:00)',
         ]);
 
         return [

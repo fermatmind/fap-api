@@ -21,6 +21,7 @@ final class MbtiAttributionEventController extends Controller
      * @var list<string>
      */
     private const TOP_LEVEL_KEYS = [
+        'requestId',
         'eventName',
         'payload',
         'anonymousId',
@@ -175,6 +176,7 @@ final class MbtiAttributionEventController extends Controller
         }
 
         $data = $request->validate([
+            'requestId' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'eventName' => ['required', 'string', 'max:64'],
             'payload' => ['nullable', 'array'],
             'payload.entry_surface' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
@@ -364,7 +366,8 @@ final class MbtiAttributionEventController extends Controller
         }
 
         if (SchemaBaseline::hasColumn('events', 'request_id') && empty($attributes['request_id'])) {
-            $attributes['request_id'] = $this->normalizeOptionalString($request->header('X-Request-Id'), 128);
+            $attributes['request_id'] = $this->normalizeOptionalString($data['requestId'] ?? null, 128)
+                ?? $this->normalizeOptionalString($request->header('X-Request-Id'), 128);
         }
 
         if (SchemaBaseline::hasColumn('events', 'analytics_rule_version')) {
