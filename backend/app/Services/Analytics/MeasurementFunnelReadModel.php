@@ -24,6 +24,30 @@ final class MeasurementFunnelReadModel
         private readonly AnalyticsFunnelDailyBuilder $reportingWindow,
     ) {}
 
+    /** Preserve the calendar report while exposing a separately named cohort. */
+    public function startCohort(int $orgId, string $from, string $to, array $scales = [], array $locales = [], ?string $asOf = null, ?array $previous = null): array
+    {
+        try {
+            $cohort = app(MeasurementStartCohortReadModel::class)->report($orgId, $from, $to, $scales, $locales, $asOf, $previous);
+            if (($cohort['ok'] ?? false) === true) {
+                $daily = $this->report($orgId, $from, $to, $scales, $locales);
+                $cohort['calendar_activity'] = [
+                    'definition_version' => self::SCHEMA_VERSION,
+                    'unit' => 'independent_calendar_day_stage_counts_not_cohort_conversions',
+                    'as_of' => now()->toIso8601String(),
+                    'totals' => $daily['totals'] ?? null,
+                    'status' => $daily['status'] ?? 'blocked',
+                    'result_visible' => 'see_existing_seo_conversion_daily_view_result_count',
+                ];
+            }
+
+            return $cohort;
+        } catch (Throwable) {
+            return ['ok' => false, 'schema_version' => MeasurementStartCohortReadModel::VERSION,
+                'issues' => ['cohort_source_unavailable'], 'read_only' => true];
+        }
+    }
+
     /**
      * @param  list<string>  $scaleCodes
      * @param  list<string>  $locales

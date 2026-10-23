@@ -16,6 +16,9 @@ final class MeasurementFunnelReportCommand extends Command
         {--org= : Required non-negative organization id}
         {--scale=* : Optional repeatable scale-code filter}
         {--locale=* : Optional repeatable locale filter}
+        {--cohort : Read the fixed-start 168-hour cohort instead of calendar activity}
+        {--as-of= : Optional cohort observation cutoff in ISO 8601}
+        {--previous-snapshot= : Optional prior privacy-safe cohort JSON report for revision comparison}
         {--json : Emit machine-readable JSON}';
 
     protected $description = 'Read an organization-scoped privacy-safe backend measurement funnel without database or external writes.';
@@ -39,13 +42,32 @@ final class MeasurementFunnelReportCommand extends Command
         }
 
         try {
-            $report = $readModel->report(
+            $arguments = [
                 $orgId,
                 (string) $this->option('from'),
                 (string) $this->option('to'),
                 $this->arrayOption('scale'),
                 $this->arrayOption('locale'),
-            );
+            ];
+            if ((bool) $this->option('cohort')) {
+                $previous = null;
+                $path = trim((string) $this->option('previous-snapshot'));
+                if ($path !== '') {
+                    if (! is_file($path) || filesize($path) > 4 * 1024 * 1024) {
+                        throw new \InvalidArgumentException('Invalid previous snapshot.');
+                    }
+                    $previous = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+                    if (! is_array($previous)) {
+                        throw new \InvalidArgumentException('Invalid previous snapshot.');
+                    }
+                }
+                $report = $readModel->startCohort(...[...$arguments, $this->option('as-of') ?: null, $previous]);
+            } else {
+                if ($this->option('as-of') || $this->option('previous-snapshot')) {
+                    throw new \InvalidArgumentException('Cohort options require --cohort.');
+                }
+                $report = $readModel->report(...$arguments);
+            }
         } catch (Throwable) {
             $report = [
                 'schema_version' => MeasurementFunnelReadModel::SCHEMA_VERSION,
@@ -73,6 +95,18 @@ final class MeasurementFunnelReportCommand extends Command
                 JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
             ));
         } else {
+            if (($report['schema_version'] ?? null) === \App\Services\Analytics\MeasurementStartCohortReadModel::VERSION) {
+                foreach (['status', 'definition_version', 'as_of', 'snapshot_version'] as $field) {
+                    $this->line($field.'='.(string) ($report[$field] ?? 'unknown'));
+                }
+                foreach ((array) ($report['totals'] ?? []) as $metric => $value) {
+                    $this->line($metric.'='.(string) $value);
+                }
+                $this->line('finalized=false');
+                $this->line('processing_grace_hours=unknown');
+
+                return;
+            }
             $this->line('status='.(string) ($report['status'] ?? 'blocked'));
             $this->line('row_count='.(string) ($report['row_count'] ?? 0));
             foreach ([

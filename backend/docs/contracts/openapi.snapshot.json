@@ -5103,6 +5103,33 @@
                 "x-laravel-name": "api.v0_5.ops.seo_intel.production_closeout"
             }
         },
+        "/api/v0.5/ops/seo-intel/start-cohort": {
+            "get": {
+                "operationId": "api.v0_5.ops.seo_intel.start_cohort",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Ops\\SeoIntel\\SeoIntelDashboardController@startCohort",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureAdminTotpVerified",
+                    "App\\Http\\Middleware\\OpsAccessControl",
+                    "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
+                ],
+                "x-laravel-name": "api.v0_5.ops.seo_intel.start_cohort"
+            }
+        },
         "/api/v0.5/ops/seo-intel/technical-health": {
             "get": {
                 "operationId": "api.v0_5.ops.seo_intel.technical_health",

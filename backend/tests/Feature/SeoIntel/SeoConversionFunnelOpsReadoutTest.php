@@ -336,6 +336,18 @@ final class SeoConversionFunnelOpsReadoutTest extends TestCase
         $this->getJson('/api/v0.5/ops/seo-intel/career-actions?from=2026-01-01&to=2026-10-23')->assertStatus(422);
     }
 
+    #[Test]
+    public function start_cohort_uses_the_existing_ops_authority_and_never_accepts_query_tenant_override(): void
+    {
+        $uri = '/api/v0.5/ops/seo-intel/start-cohort?from=2026-10-01&to=2026-10-01';
+        $this->getJson($uri)->assertUnauthorized();
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson($uri.'&org_id=99')->assertOk()->assertJsonPath('scope.org_id', 0)
+            ->assertJsonPath('totals.started_count', 0)->assertJsonPath('maturity.finalized', false);
+        $this->getJson('/api/v0.5/ops/seo-intel/start-cohort?from=bad&to=2026-10-01')->assertStatus(422);
+    }
+
     private function createAdminWithPermissions(array $permissions): AdminUser
     {
         $admin = AdminUser::query()->create([

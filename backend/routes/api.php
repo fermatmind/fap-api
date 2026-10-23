@@ -708,6 +708,8 @@ Route::prefix('v0.5')->group(function () {
                 ->name('api.v0_5.ops.seo_intel.conversion_funnel');
             Route::get('/career-actions', [SeoIntelDashboardController::class, 'careerActions'])
                 ->name('api.v0_5.ops.seo_intel.career_actions');
+            Route::get('/start-cohort', [SeoIntelDashboardController::class, 'startCohort'])
+                ->name('api.v0_5.ops.seo_intel.start_cohort');
             Route::get('/experiment-ledger', [SeoIntelDashboardController::class, 'experimentLedger'])
                 ->name('api.v0_5.ops.seo_intel.experiment_ledger');
             Route::get('/weekly-decisions', [SeoIntelDashboardController::class, 'weeklyDecisions'])

@@ -94,6 +94,22 @@ final class SeoIntelDashboardController
         return response()->json($builder->actions($this->trustedOrgId($request), $data['from'], $data['to'], (bool) ($data['include_qa'] ?? false)));
     }
 
+    public function startCohort(Request $request, \App\Services\Analytics\MeasurementFunnelReadModel $model): JsonResponse
+    {
+        $data = $request->validate([
+            'from' => ['required', 'date_format:Y-m-d'],
+            'to' => ['required', 'date_format:Y-m-d', 'after_or_equal:from'],
+            'scale' => ['sometimes', 'array'], 'scale.*' => ['string', 'max:64'],
+            'locale' => ['sometimes', 'array'], 'locale.*' => ['in:en,zh,zh-CN,zh-cn'],
+            'as_of' => ['sometimes', 'date', 'before_or_equal:now'],
+        ]);
+        abort_if(\Carbon\CarbonImmutable::parse($data['from'])->diffInDays(\Carbon\CarbonImmutable::parse($data['to'])) > 92, 422, 'Report window exceeds 93 days.');
+        $report = $model->startCohort($this->trustedOrgId($request), $data['from'], $data['to'],
+            $data['scale'] ?? [], $data['locale'] ?? [], $data['as_of'] ?? null);
+
+        return response()->json($report, ($report['ok'] ?? false) ? 200 : 422);
+    }
+
     public function experimentLedger(Request $request): JsonResponse
     {
         $page = max(1, (int) $request->query('page', 1));
