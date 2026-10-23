@@ -18,7 +18,7 @@ jobs:
   classify:
     name: classify exact SHA
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     outputs:
       base_sha: ${{ steps.classify.outputs.base_sha }}
       deploy: ${{ steps.classify.outputs.deploy }}

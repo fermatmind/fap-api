@@ -80,6 +80,8 @@ final class ArticleHreflangWorkspaceTest extends TestCase
             'draft' => $zh->update(['working_revision_id' => null]),
             'missing' => $zh->update(['translation_group_id' => 'different-group']),
             'private' => $zh->update(['is_public' => false]),
+            'robots_hold' => $zh->seoMeta->update(['robots' => 'noindex,follow']),
+            'future' => $zh->update(['published_at' => now()->addDay()]),
             'noindex' => $zh->update(['is_indexable' => false]),
             'missing_seo' => $zh->seoMeta->delete(),
             'invalid_slug' => $zh->update(['slug' => 'invalid/path']),
@@ -103,7 +105,7 @@ final class ArticleHreflangWorkspaceTest extends TestCase
 
     public static function rejectedCases(): array
     {
-        return array_map(static fn (string $case): array => [$case], ['stale', 'draft', 'missing', 'private', 'noindex', 'missing_seo', 'invalid_slug', 'invalid_url', 'duplicate', 'writer', 'mfa', 'cache', 'review']);
+        return array_map(static fn (string $case): array => [$case], ['stale', 'draft', 'missing', 'private', 'robots_hold', 'future', 'noindex', 'missing_seo', 'invalid_slug', 'invalid_url', 'duplicate', 'writer', 'mfa', 'cache', 'review']);
     }
 
     public function test_audit_failure_rolls_back_both_native_gate_writes(): void

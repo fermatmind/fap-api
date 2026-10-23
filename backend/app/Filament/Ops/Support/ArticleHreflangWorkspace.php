@@ -100,10 +100,13 @@ final class ArticleHreflangWorkspace
         $locales = array_map(static fn (Article $article): string => $article->locale, $pair);
         sort($locales);
         $this->require($locales === ['en', 'zh-CN'], 'article_hreflang_exact_pair_required');
+        $this->require(Article::withoutGlobalScopes()->publiclyIndexable()->whereIn('id', array_map(static fn (Article $article): int => $article->id, $pair))->count() === 2, 'article_hreflang_public_pair_required');
         foreach ($pair as $article) {
             $canonical = app(ArticleSeoService::class)->buildCanonicalUrl($article->slug, $article->locale);
             $this->require(preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $article->slug) === 1
                 && $canonical !== null && in_array($article->seoMeta?->canonical_url, [$canonical, parse_url($canonical, PHP_URL_PATH)], true), 'article_hreflang_canonical_required');
+            $robots = array_map('trim', explode(',', strtolower((string) $article->seoMeta?->robots)));
+            $this->require(! in_array('noindex', $robots, true), 'article_hreflang_noindex_target');
             $this->require((int) $article->id !== 15 && $article->deleted_at === null && $article->status === 'published'
                 && $article->is_public && $article->is_indexable && $article->seoMeta !== null
                 && $article->publishedRevision !== null && $article->working_revision_id === $article->published_revision_id,
