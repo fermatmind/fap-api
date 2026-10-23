@@ -10,11 +10,13 @@ use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Filament\Ops\Support\ArticleControlledPublicationWorkspace;
 use App\Filament\Ops\Support\ArticleEditorialPackageWorkspace;
 use App\Filament\Ops\Support\ArticleExistingPackageWorkspace;
+use App\Filament\Ops\Support\ArticlePublishedFaqWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
@@ -268,6 +270,40 @@ class EditArticle extends EditRecord
                         $notification->title(__('ops.resources.articles.cover_alt.success'))->success();
                     } else {
                         $notification->title(__('ops.resources.articles.cover_alt.cache_failed'))->warning()->persistent();
+                    }
+                    $notification->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            Action::make('updatePublishedFaq')
+                ->label(__('ops.resources.articles.published_faq.action'))
+                ->icon('heroicon-o-chat-bubble-left-right')
+                ->color('gray')
+                ->visible(fn (): bool => ArticlePublishedFaqWorkspace::canUpdate() && (int) $this->getRecord()->org_id === 0
+                    && $this->getRecord()->published_revision_id !== null
+                    && $this->getRecord()->working_revision_id === $this->getRecord()->published_revision_id)
+                ->modalDescription(__('ops.resources.articles.published_faq.description'))
+                ->fillForm(fn (): array => app(ArticlePublishedFaqWorkspace::class)->prepare($this->getRecord()))
+                ->form([
+                    Textarea::make('target_hash')->label(__('ops.resources.articles.controlled_publish.snapshot'))->readOnly()->required()->rows(2),
+                    Repeater::make('faq_items')->label(__('ops.resources.articles.published_faq.items'))
+                        ->schema([
+                            Textarea::make('question')->label(__('ops.resources.articles.published_faq.question'))->readOnly()->required()->rows(2),
+                            Textarea::make('answer')->label(__('ops.resources.articles.published_faq.answer'))->required()->maxLength(10000)->rows(5),
+                        ])->addable(false)->deletable(false)->reorderable(false)->minItems(1)->maxItems(6),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        $result = app(ArticlePublishedFaqWorkspace::class)->update($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.faq_items' => $exception->errors()['faq_items'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    $notification = Notification::make();
+                    if ($result['ok']) {
+                        $notification->title(__('ops.resources.articles.published_faq.success'))->success();
+                    } else {
+                        $notification->title(__('ops.resources.articles.published_faq.cache_failed'))->warning()->persistent();
                     }
                     $notification->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));

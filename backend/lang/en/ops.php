@@ -3133,6 +3133,15 @@ return [
                 'success' => 'Article SEO released and public caches refreshed',
                 'cache_failed' => 'SEO eligibility committed, but closeout failed. Do not repeat the release; inspect the existing diagnostics.',
             ],
+            'published_faq' => [
+                'action' => 'Update published FAQ answers',
+                'description' => 'Review the existing questions and edit their answers through native reader metadata controls. Question order, text revisions, SEO, media and public eligibility stay unchanged.',
+                'items' => 'Existing public FAQ',
+                'question' => 'Question',
+                'answer' => 'Answer',
+                'success' => 'FAQ answers updated and public cache refreshed',
+                'cache_failed' => 'FAQ answers saved; cache closeout failed. Do not repeat the update; inspect the public reader.',
+            ],
             'cover_alt' => [
                 'action' => 'Update published cover alt',
                 'description' => 'Change only the current cover description through the native media updater. Keep the image, dimensions, body, source version and publication pointers. Refresh the affected public readers after commit.',
