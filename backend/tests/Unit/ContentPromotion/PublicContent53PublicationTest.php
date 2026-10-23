@@ -1530,7 +1530,7 @@ PHP;
     private function planningContext(): PromotionContext
     {
         return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->planningDigest(), 'W3', 'PUBLIC-CONTENT-53',
-            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 2, str_repeat('e', 64));
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), count(app(PublicContent53Package::class)->read(base_path(), $this->planningDigest())['candidates']), str_repeat('e', 64));
     }
 
     private function seedPlanningGuides(): array
@@ -1538,8 +1538,8 @@ PHP;
         $rows = app(PublicContent53Package::class)->read(base_path(), $this->planningDigest())['candidates'];
         foreach ($rows as $row) {
             foreach (['en', 'zh-CN'] as $locale) {
-                $copy = $locale === 'en' ? array_diff_key($row['before'], ['seo_text' => true])
-                    : ['title' => 'Protected Chinese title', 'excerpt' => 'Protected summary', 'body_md' => 'Protected Chinese body'];
+                $copy = $locale === $row['identity']['locale'] ? array_diff_key($row['before'], ['seo_text' => true])
+                    : ['title' => 'Protected counterpart title', 'excerpt' => 'Protected summary', 'body_md' => 'Protected counterpart body'];
                 $guide = CareerGuide::query()->withoutGlobalScopes()->create(array_replace($row['identity'], ['locale' => $locale,
                     'guide_code' => $row['identity']['slug'], 'status' => 'published', 'is_public' => true, 'is_indexable' => true,
                     'published_at' => now()->subDay(), 'lifecycle_state' => 'active'], $copy));
@@ -1563,7 +1563,7 @@ PHP;
         $before = $states->read($this->planningDigest());
         $states->assertBaseline($rows);
         $published = DB::transaction(fn () => $writer->publish($this->planningContext(), $before));
-        self::assertSame(2, $published['written_count']);
+        self::assertSame(count($rows), $published['written_count']);
         $states->assertPublished($rows, $published['state']);
         foreach ($before as $id => $old) {
             self::assertSame($old['counterpart'], $published['state'][$id]['counterpart']);
@@ -1580,7 +1580,7 @@ PHP;
             self::assertCount(2, $restored[$id]['revisions']);
         }
         $republished = DB::transaction(fn () => $writer->publish($this->planningContext(), $restored));
-        self::assertSame(2, $republished['written_count']);
+        self::assertSame(count($rows), $republished['written_count']);
         $states->assertPublished($rows, $republished['state']);
         foreach ($republished['state'] as $saved) {
             self::assertCount(3, $saved['revisions']);
@@ -1592,19 +1592,19 @@ PHP;
         $this->seedPlanningGuides();
         $states = app(PublicContent53State::class);
         $before = $states->read($this->planningDigest());
-        DB::table('career_guide_seo_meta')->where('career_guide_id', $before['CAREER-DIRECTION']['values']['id'])->update(['seo_description' => 'Concurrent draft edit']);
+        DB::table('career_guide_seo_meta')->where('career_guide_id', $before[array_key_first($before)]['values']['id'])->update(['seo_description' => 'Concurrent draft edit']);
         $this->expectExceptionMessage('public_content_53_native_prestate_drift');
         DB::transaction(fn () => app(PublicContent53Writer::class)->publish($this->planningContext(), $before));
     }
 
-    public function test_planning_guides_late_second_revision_failure_rolls_back_both_bodies_and_seo(): void
+    public function test_planning_guides_late_revision_failure_rolls_back_selected_bodies_and_seo(): void
     {
         $this->seedPlanningGuides();
         $states = app(PublicContent53State::class);
         $before = $states->read($this->planningDigest());
         $inserted = 0;
-        DB::listen(function ($query) use (&$inserted): void {
-            if (preg_match('/^insert into [`"]career_guide_revisions[`"]/i', $query->sql) === 1 && ++$inserted === 2) {
+        DB::listen(function ($query) use (&$inserted, $before): void {
+            if (preg_match('/^insert into [`"]career_guide_revisions[`"]/i', $query->sql) === 1 && ++$inserted === count($before)) {
                 throw new DomainException('injected_second_planning_revision_failure');
             }
         });
@@ -1784,6 +1784,46 @@ PHP;
         }
     }
 
+    public function test_planning_reader_retains_legacy_two_english_guides_compatibility(): void
+    {
+        $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/career-planning.json')), true);
+        $template = $package['candidates'][0];
+        $package['candidates'] = [];
+        foreach (['CAREER-DIRECTION' => 'how-to-find-right-career-direction', 'CAREER-TRANSITION' => 'career-transition-playbook'] as $id => $slug) {
+            $row = $template;
+            $row['page_id'] = $id;
+            $row['identity'] = ['org_id' => 0, 'slug' => $slug, 'locale' => 'en'];
+            foreach (['source_identity', 'staging_source_identity'] as $field) {
+                $row[$field] = ['guide_code' => $slug];
+            }
+            $package['candidates'][] = $row;
+        }
+        $root = sys_get_temp_dir().'/legacy-planning-'.bin2hex(random_bytes(8));
+        $dir = $root.'/'.PublicContent53Package::PACKAGE;
+        mkdir($dir, 0700, true);
+        try {
+            $bytes = json_encode($package, JSON_THROW_ON_ERROR);
+            file_put_contents($dir.'/career-planning.json', $bytes);
+            file_put_contents($dir.'/career-planning-review.json', json_encode([
+                'schema' => 'fermatmind.public_content_career_planning.review.v1',
+                'candidate_sha256' => hash('sha256', $bytes), 'verdict' => 'PASS',
+                'pages' => ['CAREER-DIRECTION' => 'PASS', 'CAREER-TRANSITION' => 'PASS'],
+            ]));
+            $chain = "fermatmind.public_content_career_planning.v1\n";
+            foreach (['career-planning.json', 'career-planning-review.json'] as $name) {
+                $chain .= $name."\n".hash_file('sha256', $dir.'/'.$name)."\n";
+            }
+            $read = (new PublicContent53Package)->read($root, hash('sha256', $chain));
+            self::assertSame($package['candidates'], $read['candidates']);
+        } finally {
+            unlink($dir.'/career-planning.json');
+            unlink($dir.'/career-planning-review.json');
+            rmdir($dir);
+            rmdir(dirname($dir));
+            rmdir($root);
+        }
+    }
+
     public function test_planning_package_rejects_rebound_out_of_scope_identity_and_fields(): void
     {
         $source = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/career-planning.json')), true);
@@ -1792,7 +1832,7 @@ PHP;
                 $p['candidates'][0]['identity']['slug'] = 'other-guide';
             },
             static function (&$p): void {
-                $p['candidates'][0]['identity']['locale'] = 'zh-CN';
+                $p['candidates'][0]['identity']['locale'] = 'fr';
             },
             static function (&$p): void {
                 $p['candidates'][1] = $p['candidates'][0];
@@ -1806,6 +1846,12 @@ PHP;
             static function (&$p): void {
                 $p['candidates'][0]['snapshot']['seo_text']['seo_description'] = str_repeat('x', 161);
             },
+            static function (&$p): void {
+                $p['candidates'][0]['snapshot']['excerpt'] = 'Unreviewed summary change';
+            },
+            static function (&$p): void {
+                $p['candidates'][0]['snapshot']['seo_text']['seo_description'] = 'Unreviewed short SEO';
+            },
         ];
         $root = sys_get_temp_dir().'/career-planning-'.bin2hex(random_bytes(8));
         $dir = $root.'/'.PublicContent53Package::PACKAGE;
@@ -1817,7 +1863,7 @@ PHP;
                 $bytes = json_encode($package, JSON_THROW_ON_ERROR);
                 file_put_contents($dir.'/career-planning.json', $bytes);
                 file_put_contents($dir.'/career-planning-review.json', json_encode(['schema' => 'fermatmind.public_content_career_planning.review.v1',
-                    'candidate_sha256' => hash('sha256', $bytes), 'verdict' => 'PASS', 'pages' => ['CAREER-DIRECTION' => 'PASS', 'CAREER-TRANSITION' => 'PASS']]));
+                    'candidate_sha256' => hash('sha256', $bytes), 'verdict' => 'PASS', 'pages' => array_fill_keys(array_column($package['candidates'], 'page_id'), 'PASS')]));
                 $chain = "fermatmind.public_content_career_planning.v1\n";
                 foreach (['career-planning.json', 'career-planning-review.json'] as $name) {
                     $chain .= $name."\n".hash_file('sha256', $dir.'/'.$name)."\n";

@@ -609,14 +609,14 @@ test('six new Article acceptance keeps API, complete raw HTML and strict browser
 });
 
 
-test('career planning selects only the two reviewed English guides and their independent SEO copy',()=>{
+test('career planning selects only the reviewed Chinese transition body and preserves its SEO copy',()=>{
  const digest=createHash('sha256').update('fermatmind.public_content_career_planning.v1\n'+['career-planning.json','career-planning-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
  const rows=readCandidateRows(root,digest).candidates;
  assert.deepEqual(rows.map(row=>[row.kind,row.identity.slug,row.identity.locale]),[
-  ['guide','how-to-find-right-career-direction','en'],['guide','career-transition-playbook','en'],
+  ['guide','career-transition-playbook','zh-CN'],
  ]);
- assert.notEqual(rows[0].snapshot.body_md,rows[1].snapshot.body_md);
- assert.notEqual(rows[0].snapshot.seo_text.seo_description,rows[1].snapshot.seo_text.seo_description);
+ assert.notEqual(rows[0].snapshot.body_md,rows[0].before.body_md);
+ assert.deepEqual(rows[0].snapshot.seo_text,rows[0].before.seo_text);
  for(const row of rows) {
   const data={ok:true,guide:{...row.identity,...row.snapshot,guide_code:row.identity.slug,is_public:true},seo_meta:row.snapshot.seo_text};
   assert.deepEqual(projection(row,data),row.snapshot);
@@ -641,7 +641,7 @@ test('sample discovery requires real archive anchors and cannot pass from serial
 
 test('exact changed paths select a single package through transport, QA and workflow budgets',()=>{
  const env={PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
- for(const [name,file,count] of [['riasec-code-samples','riasec-code-samples.json',6],['career-planning','career-planning.json',2],['guide-amendment','guide-amendment-review.json',1]]) {
+ for(const [name,file,count] of [['riasec-code-samples','riasec-code-samples.json',6],['career-planning','career-planning.json',1],['guide-amendment','guide-amendment-review.json',1]]) {
   const selected=selectPublicContentPackage(['backend/content_assets/public_content_53/'+file]);
   assert.equal(selected,name);
   const execution=buildExecution({...env,PUBLIC_CONTENT_53_PACKAGE_NAME:selected},root);
@@ -666,7 +666,7 @@ test('guide metadata accepts a streamed document title and still rejects missing
  const row={...source,snapshot:{...source.snapshot,body_md:'Required visible planning advice.'}};
  const seo=row.snapshot.seo_text,title=`<title>${seo.seo_title} | FermatMind</title>`;
  const metadata=`<meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}"><meta name="robots" content="index, follow">`;
- const html=`<html><head>${metadata}</head><body>${title}<main><h1>${row.snapshot.title}</h1><p>Required visible planning advice.</p></main></body></html>`;
+ const html=`<html><head><meta charset="utf-8">${metadata}</head><body>${title}<main><h1>${row.snapshot.title}</h1><p>Required visible planning advice.</p></main></body></html>`;
  const before={dom:domOf(html)};
  assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
  assert.doesNotThrow(()=>assertDom(row,html.replace('<title>','<title data-iq-qa-hidden="true">'),before,'production'));

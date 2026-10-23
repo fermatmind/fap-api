@@ -307,7 +307,7 @@ final class PublicContent53Package
         return ['candidates' => $rows, 'package_sha256' => $sha];
     }
 
-    /** Two existing English guides; URL, publication state and Chinese copies stay locked. */
+    /** Selected core planning guides; URL, publication state and the other locale stay locked. */
     private function readCareerPlanning(string $root, string $sha): array
     {
         $bytes = $this->bytes($root, 'career-planning.json');
@@ -316,17 +316,19 @@ final class PublicContent53Package
         $targets = ['CAREER-DIRECTION' => 'how-to-find-right-career-direction', 'CAREER-TRANSITION' => 'career-transition-playbook'];
         $rows = $data['candidates'] ?? [];
         if (($data['schema'] ?? null) !== 'fermatmind.public_content_career_planning.v1'
-            || ! is_array($rows) || count($rows) !== 2
+            || ! is_array($rows) || count($rows) < 1 || count($rows) > 2
             || ($proof['schema'] ?? null) !== 'fermatmind.public_content_career_planning.review.v1'
             || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
-            || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== 2) {
+            || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
             throw new DomainException('public_content_53_career_review_invalid');
         }
         $seen = [];
         foreach ($rows as $row) {
             $id = $row['page_id'] ?? '';
+            $locale = $row['identity']['locale'] ?? null;
             if (! isset($targets[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'guide'
-                || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => $targets[$id], 'locale' => 'en']
+                || ! in_array($locale, ['en', 'zh-CN'], true)
+                || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => $targets[$id], 'locale' => $locale]
                 || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity']) !== []
                 || ($proof['pages'][$id] ?? null) !== 'PASS') {
                 throw new DomainException('public_content_53_career_identity_invalid');
@@ -346,6 +348,14 @@ final class PublicContent53Package
                 foreach ($copy['seo_text'] as $field => $value) {
                     if (mb_strlen($value) > (str_contains($field, 'title') ? 60 : 160)) {
                         throw new DomainException('public_content_53_career_seo_length');
+                    }
+                }
+            }
+            if ($locale === 'zh-CN') {
+                foreach (['title', 'excerpt', 'seo_text'] as $field) {
+                    if ($row['snapshot'][$field] !== $row['before'][$field]
+                        || $row['staging_before'][$field] !== $row['before'][$field]) {
+                        throw new DomainException('public_content_53_career_nonbody_changed');
                     }
                 }
             }
