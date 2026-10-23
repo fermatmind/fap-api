@@ -13,6 +13,7 @@ use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Access\AttemptUnlockProjectionRepairService;
 use App\Services\Analytics\EventRecorder;
+use App\Services\Analytics\ResultVisibilityObservation;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
 use App\Services\Attempts\ResultProcessingTimingService;
@@ -481,7 +482,45 @@ class AttemptReadController extends Controller
             $responsePayload = IqResultPayloadRedactor::redactAnswerKeys($responsePayload);
         }
 
+        $responsePayload['result_visibility_receipt'] = app(ResultVisibilityObservation::class)->issue($attempt, $result);
+
         return $this->privateNoStoreJson($this->withProcessingTiming($responsePayload, $orgId, $id));
+    }
+
+    /** Owner-authenticated acknowledgment, separate from public analytics ingress. */
+    public function observeResult(Request $request, string $id): JsonResponse
+    {
+        if (array_diff(array_keys($request->all()), ['receipt', 'consent_state']) !== []) {
+            throw \Illuminate\Validation\ValidationException::withMessages(['payload' => 'Unexpected observation fields.']);
+        }
+        $data = $request->validate([
+            'receipt' => ['required', 'string', 'max:4096'],
+            'consent_state' => ['required', 'in:granted'],
+        ]);
+        $attempt = $this->ownedAttemptQuery($request, $id)->first();
+        if (! $attempt || ! in_array(strtoupper((string) $attempt->scale_code), ResultVisibilityObservation::SCALES, true)) {
+            throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
+        }
+        $orgId = (int) $attempt->org_id;
+        $this->enforceEmailBindingForRead($request, $orgId, $attempt, (string) $attempt->scale_code);
+        $result = Result::query()->where('org_id', $orgId)->where('attempt_id', $id)->first();
+        $proof = $result ? app(ResultVisibilityObservation::class)->verify($data['receipt'], $attempt, $result) : null;
+        if ($proof === null) {
+            throw new ApiProblemException(422, 'INVALID_OBSERVATION_RECEIPT', 'invalid result observation receipt.');
+        }
+        $received = now()->utc();
+        $persisted = $this->eventRecorder->recordConfirmed(ResultVisibilityObservation::EVENT, null, [
+            'measurement_observation' => [
+                'version' => ResultVisibilityObservation::VERSION, 'consent_state' => 'granted',
+                'server_read_at' => $proof['read_at'], 'server_received_at' => $received->toISOString(),
+            ],
+        ], [
+            '_event_id' => (string) \Ramsey\Uuid\Uuid::uuid5(\Ramsey\Uuid\Uuid::NAMESPACE_URL, 'result-visible:'.$orgId.':'.$proof['nonce']),
+            'org_id' => $orgId, 'attempt_id' => $id, 'anon_id' => $attempt->anon_id,
+            'scale_code' => $attempt->scale_code, 'locale' => $attempt->locale, 'occurred_at' => $received,
+        ]);
+
+        return $this->privateNoStoreJson(['ok' => $persisted, 'persisted' => $persisted], $persisted ? 202 : 503);
     }
 
     /**
@@ -786,6 +825,8 @@ class AttemptReadController extends Controller
         if (IqResultPayloadRedactor::isIqScale($responseCodes['scale_code_legacy'], $responseCodes['scale_code_v2'])) {
             $responsePayload = IqResultPayloadRedactor::redactAnswerKeys($responsePayload);
         }
+
+        $responsePayload['result_visibility_receipt'] = app(ResultVisibilityObservation::class)->issue($attempt, $result);
 
         return $this->privateNoStoreJson($this->withProcessingTiming($responsePayload, $orgId, $id));
     }

@@ -11,7 +11,7 @@ use Throwable;
 /** A start-bound view of the existing attempt/result/event authorities. */
 final class MeasurementStartCohortReadModel
 {
-    public const VERSION = 'measurement.start-cohort.168h.v1';
+    public const VERSION = 'measurement.start-cohort.168h.v2';
 
     public function __construct(
         private readonly MeasurementAttributionDimensions $dimensions,
@@ -41,7 +41,7 @@ final class MeasurementStartCohortReadModel
         sort($locales);
         $scope = ['org_id' => $orgId, 'from' => $from, 'to' => $to, 'scales' => $scales, 'locales' => $locales];
         $scopeHash = hash('sha256', json_encode($scope));
-        if ($previous !== null && (($previous['schema_version'] ?? null) !== self::VERSION
+        if ($previous !== null && (! in_array($previous['schema_version'] ?? null, [self::VERSION, 'measurement.start-cohort.168h.v1'], true)
             || ($previous['scope_hash'] ?? null) !== $scopeHash || ! isset($previous['as_of'], $previous['snapshot_version'], $previous['totals']))) {
             return ['ok' => false, 'schema_version' => self::VERSION, 'issues' => ['incompatible_previous_snapshot'], 'read_only' => true];
         }
@@ -84,8 +84,8 @@ final class MeasurementStartCohortReadModel
                 $results[$result->attempt_id] ??= $result;
             }
             foreach (DB::table('events')->where('org_id', $orgId)->whereIn('attempt_id', $chunk)
-                ->where('event_code', 'view_result')->where('created_at', '<=', $cutoff)->orderBy('created_at')
-                ->get(['id', 'attempt_id', 'anon_id', 'session_id', 'request_id', 'occurred_at', 'created_at', 'meta_json']) as $event) {
+                ->whereIn('event_code', ['view_result', ResultVisibilityObservation::EVENT])->where('created_at', '<=', $cutoff)->orderBy('created_at')
+                ->get(['id', 'attempt_id', 'anon_id', 'session_id', 'request_id', 'event_code', 'occurred_at', 'created_at', 'meta_json']) as $event) {
                 $meta = json_decode((string) $event->meta_json, true) ?: [];
                 if ($this->exclusions->isExcludedSeoConversionEvent($event, $meta)
                     || in_array(data_get($meta, 'raw_payload.traffic_quality'), ['qa', 'internal', 'bot'], true)) {
@@ -104,13 +104,24 @@ final class MeasurementStartCohortReadModel
 
                     continue;
                 }
+                $readAt = $at;
+                if ($event->event_code === ResultVisibilityObservation::EVENT) {
+                    $readAt = $this->time($observation['server_read_at'] ?? null);
+                    $at = $this->time($observation['server_received_at'] ?? null);
+                    if (($observation['version'] ?? null) !== ResultVisibilityObservation::VERSION
+                        || $readAt === null || $at === null || $at->greaterThan($cutoff) || $readAt->greaterThan($at)) {
+                        $coverage['visible_clock_unverified']++;
+
+                        continue;
+                    }
+                }
                 if (isset($visible[$event->attempt_id])) {
                     $coverage['visible_duplicate_events']++;
                     if ($at->greaterThanOrEqualTo($visible[$event->attempt_id]['at'])) {
                         continue;
                     }
                 }
-                $visible[$event->attempt_id] = ['at' => $at, 'received' => $this->time($event->created_at)];
+                $visible[$event->attempt_id] = ['at' => $at, 'read_at' => $readAt, 'received' => $this->time($event->created_at)];
             }
         }
         foreach ($ids as $attemptId => $attempt) {
@@ -119,6 +130,7 @@ final class MeasurementStartCohortReadModel
             $result = $results[$attemptId] ?? null;
             $ready = $this->time($result->computed_at ?? null);
             $seen = $visible[$attemptId]['at'] ?? null;
+            $readAt = $visible[$attemptId]['read_at'] ?? null;
             $deadline = $started->addHours(168);
             $elapsed = $deadline->lessThanOrEqualTo($cutoff);
             $dimensions = $this->dimensions->aggregateDimensions($this->dimensions->fromAttempt($attempt));
@@ -137,7 +149,7 @@ final class MeasurementStartCohortReadModel
             $row[$elapsed ? 'window_elapsed_count' : 'window_open_count']++;
             $validSubmit = $submitted !== null && $submitted->greaterThanOrEqualTo($started) && $submitted->lessThanOrEqualTo($cutoff);
             $validReady = $validSubmit && $ready !== null && $ready->greaterThanOrEqualTo($submitted) && $ready->lessThanOrEqualTo($cutoff);
-            $validVisible = $validReady && $seen !== null && $seen->greaterThanOrEqualTo($ready) && $seen->lessThanOrEqualTo($cutoff);
+            $validVisible = $validReady && $seen !== null && $readAt->greaterThanOrEqualTo($ready) && $seen->lessThanOrEqualTo($cutoff);
             if (($submitted !== null && ! $validSubmit && $submitted->lessThanOrEqualTo($cutoff))
                 || ($ready !== null && ! $validReady && $ready->lessThanOrEqualTo($cutoff))
                 || ($seen !== null && ! $validVisible)) {
@@ -155,6 +167,9 @@ final class MeasurementStartCohortReadModel
                     }
                 }
             }
+            if ($validVisible && $readAt->lessThanOrEqualTo($deadline) && $seen->greaterThan($deadline)) {
+                $row['visible_d7_boundary_unknown_count']++;
+            }
             $row['visible_not_observed_or_unverifiable_count'] += $validVisible ? 0 : 1;
             foreach (['starts' => [$started, $this->time($attempt->created_at)], 'results' => [$ready, $this->time($result->created_at ?? null)], 'visible' => [$seen, $visible[$attemptId]['received'] ?? null]] as $kind => [$businessAt, $receivedAt]) {
                 if ($previousCutoff !== null && $businessAt !== null && $receivedAt !== null
@@ -162,7 +177,7 @@ final class MeasurementStartCohortReadModel
                     $coverage['late_received_'.$kind.'_since_previous']++;
                 }
             }
-            hash_update($source, json_encode([$attemptId, $dimensions, $started, $submitted, $ready, $seen]));
+            hash_update($source, json_encode([$attemptId, $dimensions, $started, $submitted, $ready, $seen, $readAt]));
             unset($row);
         }
         $coverage['visible_unlinked_events'] = DB::table('events')->where('org_id', $orgId)->where('event_code', 'view_result')
@@ -188,7 +203,7 @@ final class MeasurementStartCohortReadModel
         ];
         foreach (['visible_from_started_d7', 'visible_from_ready_d7'] as $metric) {
             $rates[$metric]['observed_lower_bound'] = $rates[$metric]['value'];
-            if ($totals['visible_not_observed_or_unverifiable_count'] > 0) {
+            if ($totals['visible_not_observed_or_unverifiable_count'] > 0 || $totals['visible_d7_boundary_unknown_count'] > 0) {
                 $rates[$metric]['value'] = null;
                 $rates[$metric]['status'] = 'visibility_coverage_incomplete_not_a_nonreading_rate';
             }
@@ -210,23 +225,23 @@ final class MeasurementStartCohortReadModel
 
         return [
             'ok' => true, 'status' => 'provisional', 'schema_version' => self::VERSION, 'definition_version' => self::VERSION,
-            'scope' => $scope, 'scope_hash' => $scopeHash, 'as_of' => $cutoff->toIso8601String(),
-            'snapshot_version' => hash('sha256', json_encode([self::VERSION, $scopeHash, $cutoff->toIso8601String(), $sourceHash, $totals, $coverage])),
+            'scope' => $scope, 'scope_hash' => $scopeHash, 'as_of' => $cutoff->toISOString(),
+            'snapshot_version' => hash('sha256', json_encode([self::VERSION, $scopeHash, $cutoff->toISOString(), $sourceHash, $totals, $coverage])),
             'source_fingerprint' => $sourceHash, 'source_tables' => ['attempts', 'results', 'events'],
             'analysis_unit' => 'distinct_server_persisted_attempt_id_started_in_half_open_interval',
             'window_hours' => 168, 'deadline_boundary' => 'started_at_plus_168h_inclusive',
             'reporting_timezone' => $window['reporting_timezone'], 'window_utc_start' => $window['window_utc_start'], 'window_utc_end_exclusive' => $window['window_utc_end_exclusive'],
             'quality_policy' => 'include_all_eligible_starts_do_not_condition_denominator_on_future_result_quality',
-            'stage_definitions' => ['submit_succeeded' => 'durable_attempt_submitted_at', 'result_ready' => 'valid_result_computed_at_after_submission', 'result_visible' => 'consented_browser_view_result_server_receipt_after_ready_not_legacy_result_view'],
+            'stage_definitions' => ['submit_succeeded' => 'durable_attempt_submitted_at', 'result_ready' => 'valid_result_computed_at_after_submission', 'result_visible' => 'consented_owner_native_read_to_ack_interval_or_legacy_browser_receipt_after_ready_not_API_read'],
             'unlinked_coverage_scope' => 'visible_events_received_in_selected_calendar_interval_not_assigned_to_cohort',
-            'clock_policy' => ['start_submit_ready' => 'server_business_timestamps', 'visible' => 'server_receipt_observation_not_client_clock', 'received' => 'created_at', 'processed' => 'not_independently_recorded'],
+            'clock_policy' => ['start_submit_ready' => 'server_business_timestamps', 'visible' => 'native_server_read_to_ack_interval_D7_upper_bound_or_legacy_receipt_not_client_clock', 'received' => 'created_at', 'processed' => 'not_independently_recorded'],
             'maturity' => ['status' => $totals['started_count'] === 0 ? 'no_observed_eligible_starts' : ($totals['window_open_count'] > 0 ? 'window_open' : 'window_elapsed_provisional'),
                 'last_entrant_full_window_at' => $toAt->addHours(168)->toIso8601String(), 'processing_grace_hours' => null,
                 'processing_grace_evidence' => 'no_verified_ingest_watermark_or_delay_bound', 'finalized' => false],
             'rows' => array_values($rows), 'totals' => $totals, 'rates' => $rates, 'coverage' => $coverage,
             'revision' => ['previous_snapshot_version' => $previous['snapshot_version'] ?? null, 'delta' => $delta,
                 'late_arrival_evidence' => $lateEvidence,
-                'reason' => $previous === null ? 'initial_observation' : ($sourceHash === ($previous['source_fingerprint'] ?? null) ? 'window_elapsed_or_cutoff_changed' : 'source_facts_changed_recomputed'),
+                'reason' => $previous !== null && $previous['schema_version'] !== self::VERSION ? 'definition_changed_to_owner_interval_v2' : ($previous === null ? 'initial_observation' : ($sourceHash === ($previous['source_fingerprint'] ?? null) ? 'window_elapsed_or_cutoff_changed' : 'source_facts_changed_recomputed')),
                 'denominator_revisable' => true, 'unclassified_correction_cause' => $previous !== null && $delta !== [] && $sourceHash !== ($previous['source_fingerprint'] ?? null) ? 'not_inferable_without_source_history' : null],
             'limitations' => ['missing_visible_observation_does_not_prove_unread', 'canonical_SEO_events_have_no_authoritative_attempt_link', 'D12_completion_is_cumulative_only', 'late_within_window_server_facts_can_revise_snapshots'],
             'read_only' => true,
@@ -235,7 +250,7 @@ final class MeasurementStartCohortReadModel
 
     private function emptyMetrics(): array
     {
-        $metrics = ['started_count' => 0, 'window_elapsed_count' => 0, 'window_open_count' => 0, 'visible_not_observed_or_unverifiable_count' => 0];
+        $metrics = ['started_count' => 0, 'window_elapsed_count' => 0, 'window_open_count' => 0, 'visible_d7_boundary_unknown_count' => 0, 'visible_not_observed_or_unverifiable_count' => 0];
         foreach (['submit_succeeded', 'result_ready', 'result_visible'] as $stage) {
             foreach (['cumulative_count', 'd7_count', 'elapsed_d7_count'] as $suffix) {
                 $metrics[$stage.'_'.$suffix] = 0;

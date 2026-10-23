@@ -310,6 +310,10 @@ Route::prefix('v0.3')->middleware([
                 ->middleware('uuid:id')
                 ->defaults('public_realm', true)
                 ->name('api.v0_3.attempts.show');
+            Route::post('/attempts/{id}/result-observation', [AttemptReadController::class, 'observeResult'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'throttle:api_track'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.result_observation');
             Route::get('/attempts/{id}/result', [AttemptReadController::class, 'result'])
                 ->middleware('uuid:id')
                 ->defaults('public_realm', true)

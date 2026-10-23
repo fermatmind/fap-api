@@ -168,6 +168,29 @@ final class MeasurementStartCohortReadModelTest extends TestCase
         $this->assertNull($report['rates']['visible_from_started_d7']['value']);
     }
 
+    public function test_native_interval_crossing_d7_is_unknown_and_late_ack_is_not_backdated(): void
+    {
+        $start = CarbonImmutable::parse('2026-10-01T01:00:00Z');
+        foreach (['inside', 'crossing', 'outside'] as $kind) {
+            $id = (string) Str::uuid();
+            $this->insertAttempt($id, 81, 'en', $start, $start->addHour());
+            $this->insertResult($id, 81, $start->addHours(2));
+            $read = $start->addHours($kind === 'outside' ? 169 : 167);
+            $ack = $start->addHours($kind === 'inside' ? 168 : 169);
+            DB::table('events')->insert(['id' => (string) Str::uuid(), 'org_id' => 81,
+                'event_code' => 'result_visible_observed', 'event_name' => 'result_visible_observed', 'attempt_id' => $id,
+                'occurred_at' => $ack, 'created_at' => $ack, 'meta_json' => json_encode(['measurement_observation' => [
+                    'version' => 'result-visible.owner-interval.v1', 'consent_state' => 'granted', 'server_read_at' => $read->toISOString(), 'server_received_at' => $ack->toISOString(),
+                ]])]);
+        }
+        $report = $this->report();
+        $this->assertSame(3, $report['totals']['result_visible_cumulative_count']);
+        $this->assertSame(1, $report['totals']['result_visible_d7_count']);
+        $this->assertSame(1, $report['totals']['visible_d7_boundary_unknown_count']);
+        $this->assertNull($report['rates']['visible_from_started_d7']['value']);
+        $this->assertSame('measurement.start-cohort.168h.v2', $report['definition_version']);
+    }
+
     private function report(string $cutoff = '2026-10-15T00:00:00Z'): array
     {
         return app(MeasurementStartCohortReadModel::class)->report(81, '2026-10-01', '2026-10-01', ['MBTI'], ['en'], $cutoff);
