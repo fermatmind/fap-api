@@ -120,6 +120,34 @@ final class CareerGuidePublicApiTest extends TestCase
             ->assertJsonPath('items.0.title', 'Tenant Guide');
     }
 
+    public function test_planning_guides_offer_localized_actions_without_a_default_test(): void
+    {
+        foreach (['zh-CN' => 'zh', 'en' => 'en'] as $locale => $segment) {
+            foreach ([
+                'how-to-find-right-career-direction' => '/career',
+                'career-transition-playbook' => '/career/guides',
+            ] as $slug => $path) {
+                $this->createGuide([
+                    'guide_code' => $slug,
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'status' => CareerGuide::STATUS_PUBLISHED,
+                    'is_public' => true,
+                    'published_at' => now()->subDay(),
+                ]);
+
+                $response = $this->getJson('/api/v0.5/career-guides/'.$slug.'?locale='.$locale)
+                    ->assertOk()
+                    ->assertJsonPath('landing_surface_v1.start_test_target', null)
+                    ->assertJsonPath('landing_surface_v1.content_continue_target', '/'.$segment.$path)
+                    ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/'.$segment.$path)
+                    ->assertJsonPath('answer_surface_v1.next_step_blocks.0.kind', 'content_continue');
+
+                $this->assertStringNotContainsString('/tests/', json_encode($response->json('answer_surface_v1.next_step_blocks')));
+            }
+        }
+    }
+
     public function test_detail_returns_guide_related_summaries_industry_slugs_and_resolved_seo_meta(): void
     {
         config(['app.frontend_url' => 'https://www.fermatmind.com']);

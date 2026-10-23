@@ -169,7 +169,26 @@ final class CareerGuideController extends Controller
         $relatedArticles = $this->careerGuideService->relatedArticlesPayload($guide);
         $relatedProfiles = $this->careerGuideService->relatedPersonalityProfilesPayload($guide);
         $isIqEqGuide = (int) $guide->org_id === 0 && $guide->slug === 'iq-eq-balance-at-work';
-        $testTarget = '/'.$segment.'/tests/'.($isIqEqGuide
+        $planningNextStep = (int) $guide->org_id === 0 ? match ($guide->slug) {
+            'how-to-find-right-career-direction' => [
+                'key' => 'explore_occupations',
+                'label' => $locale === 'zh-CN'
+                    ? '查看真实职业任务与入行要求'
+                    : 'Browse real job tasks and entry requirements',
+                'href' => '/'.$segment.'/career',
+                'kind' => 'content_continue',
+            ],
+            'career-transition-playbook' => [
+                'key' => 'plan_transition',
+                'label' => $locale === 'zh-CN'
+                    ? '比较职业路径，安排一次小规模转型验证'
+                    : 'Compare career paths and plan one small transition experiment',
+                'href' => '/'.$segment.'/career/guides',
+                'kind' => 'content_continue',
+            ],
+            default => null,
+        } : null;
+        $testTarget = $planningNextStep !== null ? null : '/'.$segment.'/tests/'.($isIqEqGuide
             ? 'eq-test-emotional-intelligence-assessment'
             : 'mbti-personality-test-16-personality-types');
 
@@ -189,13 +208,13 @@ final class CareerGuideController extends Controller
             'continue_reading_keys' => ['career_job', 'article_detail', 'personality_profile'],
             'start_test_target' => $testTarget,
             'result_resume_target' => null,
-            'content_continue_target' => trim((string) (($relatedJobs[0]['slug'] ?? null) !== null
+            'content_continue_target' => $planningNextStep['href'] ?? trim((string) (($relatedJobs[0]['slug'] ?? null) !== null
                 ? '/'.$segment.'/career/jobs/'.rawurlencode((string) $relatedJobs[0]['slug'])
                 : (($relatedArticles[0]['slug'] ?? null) !== null
                     ? '/'.$segment.'/articles/'.rawurlencode((string) $relatedArticles[0]['slug'])
                     : ''))),
             'cta_bundle' => array_values(array_filter([
-                [
+                $planningNextStep ?? [
                     'key' => 'start_test',
                     'label' => $isIqEqGuide
                         ? ($locale === 'zh-CN' ? '开始 EQ 自评' : 'Take the EQ self-report')
