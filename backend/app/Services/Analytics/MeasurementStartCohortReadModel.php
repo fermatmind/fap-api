@@ -11,7 +11,7 @@ use Throwable;
 /** A start-bound view of the existing attempt/result/event authorities. */
 final class MeasurementStartCohortReadModel
 {
-    public const VERSION = 'measurement.start-cohort.168h.v2';
+    public const VERSION = 'measurement.start-cohort.168h.v3';
 
     public function __construct(
         private readonly MeasurementAttributionDimensions $dimensions,
@@ -41,7 +41,7 @@ final class MeasurementStartCohortReadModel
         sort($locales);
         $scope = ['org_id' => $orgId, 'from' => $from, 'to' => $to, 'scales' => $scales, 'locales' => $locales];
         $scopeHash = hash('sha256', json_encode($scope));
-        if ($previous !== null && (! in_array($previous['schema_version'] ?? null, [self::VERSION, 'measurement.start-cohort.168h.v1'], true)
+        if ($previous !== null && (! in_array($previous['schema_version'] ?? null, [self::VERSION, 'measurement.start-cohort.168h.v2', 'measurement.start-cohort.168h.v1'], true)
             || ($previous['scope_hash'] ?? null) !== $scopeHash || ! isset($previous['as_of'], $previous['snapshot_version'], $previous['totals']))) {
             return ['ok' => false, 'schema_version' => self::VERSION, 'issues' => ['incompatible_previous_snapshot'], 'read_only' => true];
         }
@@ -63,7 +63,7 @@ final class MeasurementStartCohortReadModel
         $rows = [];
         $source = hash_init('sha256');
         $coverage = ['unknown_form_attempts' => 0, 'unknown_pack_attempts' => 0, 'excluded_qa_attempts' => 0, 'visible_unlinked_events' => 0, 'visible_clock_unverified' => 0,
-            'visible_consent_unknown' => 0, 'visible_duplicate_events' => 0, 'invalid_stage_chronology' => 0,
+            'visible_consent_unknown' => 0, 'legacy_visible_link_unverified' => 0, 'visible_duplicate_events' => 0, 'invalid_stage_chronology' => 0,
             'late_received_starts_since_previous' => 0, 'late_received_results_since_previous' => 0, 'late_received_visible_since_previous' => 0];
         $ids = [];
         foreach ($attempts as $attempt) {
@@ -91,6 +91,11 @@ final class MeasurementStartCohortReadModel
                     || in_array(data_get($meta, 'raw_payload.traffic_quality'), ['qa', 'internal', 'bot'], true)) {
                     continue;
                 }
+                if ($event->event_code !== ResultVisibilityObservation::EVENT) {
+                    $coverage['legacy_visible_link_unverified']++;
+
+                    continue;
+                }
                 $observation = $meta['measurement_observation'] ?? [];
                 $consent = $observation['consent_state'] ?? data_get($meta, 'raw_payload.consent_state', 'unknown');
                 if ($consent !== 'granted') {
@@ -98,22 +103,13 @@ final class MeasurementStartCohortReadModel
 
                     continue;
                 }
-                $at = $this->time($event->created_at);
-                if ($at === null || $at->greaterThan($cutoff)) {
+                $readAt = $this->time($observation['server_read_at'] ?? null);
+                $at = $this->time($observation['server_received_at'] ?? null);
+                if (($observation['version'] ?? null) !== ResultVisibilityObservation::VERSION
+                    || $readAt === null || $at === null || $at->greaterThan($cutoff) || $readAt->greaterThan($at)) {
                     $coverage['visible_clock_unverified']++;
 
                     continue;
-                }
-                $readAt = $at;
-                if ($event->event_code === ResultVisibilityObservation::EVENT) {
-                    $readAt = $this->time($observation['server_read_at'] ?? null);
-                    $at = $this->time($observation['server_received_at'] ?? null);
-                    if (($observation['version'] ?? null) !== ResultVisibilityObservation::VERSION
-                        || $readAt === null || $at === null || $at->greaterThan($cutoff) || $readAt->greaterThan($at)) {
-                        $coverage['visible_clock_unverified']++;
-
-                        continue;
-                    }
                 }
                 if (isset($visible[$event->attempt_id])) {
                     $coverage['visible_duplicate_events']++;
@@ -232,16 +228,16 @@ final class MeasurementStartCohortReadModel
             'window_hours' => 168, 'deadline_boundary' => 'started_at_plus_168h_inclusive',
             'reporting_timezone' => $window['reporting_timezone'], 'window_utc_start' => $window['window_utc_start'], 'window_utc_end_exclusive' => $window['window_utc_end_exclusive'],
             'quality_policy' => 'include_all_eligible_starts_do_not_condition_denominator_on_future_result_quality',
-            'stage_definitions' => ['submit_succeeded' => 'durable_attempt_submitted_at', 'result_ready' => 'valid_result_computed_at_after_submission', 'result_visible' => 'consented_owner_native_read_to_ack_interval_or_legacy_browser_receipt_after_ready_not_API_read'],
+            'stage_definitions' => ['submit_succeeded' => 'durable_attempt_submitted_at', 'result_ready' => 'valid_result_computed_at_after_submission', 'result_visible' => 'consented_owner_native_read_to_ack_interval_after_ready_only'],
             'unlinked_coverage_scope' => 'visible_events_received_in_selected_calendar_interval_not_assigned_to_cohort',
-            'clock_policy' => ['start_submit_ready' => 'server_business_timestamps', 'visible' => 'native_server_read_to_ack_interval_D7_upper_bound_or_legacy_receipt_not_client_clock', 'received' => 'created_at', 'processed' => 'not_independently_recorded'],
+            'clock_policy' => ['start_submit_ready' => 'server_business_timestamps', 'visible' => 'native_server_read_to_ack_interval_D7_upper_bound_not_client_clock', 'received' => 'created_at', 'processed' => 'not_independently_recorded'],
             'maturity' => ['status' => $totals['started_count'] === 0 ? 'no_observed_eligible_starts' : ($totals['window_open_count'] > 0 ? 'window_open' : 'window_elapsed_provisional'),
                 'last_entrant_full_window_at' => $toAt->addHours(168)->toIso8601String(), 'processing_grace_hours' => null,
                 'processing_grace_evidence' => 'no_verified_ingest_watermark_or_delay_bound', 'finalized' => false],
             'rows' => array_values($rows), 'totals' => $totals, 'rates' => $rates, 'coverage' => $coverage,
             'revision' => ['previous_snapshot_version' => $previous['snapshot_version'] ?? null, 'delta' => $delta,
                 'late_arrival_evidence' => $lateEvidence,
-                'reason' => $previous !== null && $previous['schema_version'] !== self::VERSION ? 'definition_changed_to_owner_interval_v2' : ($previous === null ? 'initial_observation' : ($sourceHash === ($previous['source_fingerprint'] ?? null) ? 'window_elapsed_or_cutoff_changed' : 'source_facts_changed_recomputed')),
+                'reason' => $previous !== null && $previous['schema_version'] !== self::VERSION ? 'definition_changed_to_native_owner_interval_v3' : ($previous === null ? 'initial_observation' : ($sourceHash === ($previous['source_fingerprint'] ?? null) ? 'window_elapsed_or_cutoff_changed' : 'source_facts_changed_recomputed')),
                 'denominator_revisable' => true, 'unclassified_correction_cause' => $previous !== null && $delta !== [] && $sourceHash !== ($previous['source_fingerprint'] ?? null) ? 'not_inferable_without_source_history' : null],
             'limitations' => ['missing_visible_observation_does_not_prove_unread', 'canonical_SEO_events_have_no_authoritative_attempt_link', 'D12_completion_is_cumulative_only', 'late_within_window_server_facts_can_revise_snapshots'],
             'read_only' => true,

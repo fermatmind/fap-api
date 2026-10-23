@@ -119,7 +119,8 @@ final class MeasurementStartCohortReadModelTest extends TestCase
         $this->assertSame(1, $report['totals']['window_open_count']);
         $this->assertNull($report['rates']['ready_from_started_d7']['value']);
         $this->assertSame(0, $report['coverage']['visible_clock_unverified']);
-        $this->assertSame(2, $report['coverage']['visible_consent_unknown']);
+        $this->assertSame(1, $report['coverage']['visible_consent_unknown']);
+        $this->assertSame(1, $report['coverage']['legacy_visible_link_unverified']);
         $this->assertSame(0, $report['totals']['result_visible_cumulative_count']);
         $this->assertSame(1, $report['totals']['visible_not_observed_or_unverifiable_count']);
         $this->assertSame('2026-10-14T16:00:00+00:00', $report['maturity']['last_entrant_full_window_at']);
@@ -188,7 +189,22 @@ final class MeasurementStartCohortReadModelTest extends TestCase
         $this->assertSame(1, $report['totals']['result_visible_d7_count']);
         $this->assertSame(1, $report['totals']['visible_d7_boundary_unknown_count']);
         $this->assertNull($report['rates']['visible_from_started_d7']['value']);
-        $this->assertSame('measurement.start-cohort.168h.v2', $report['definition_version']);
+        $this->assertSame('measurement.start-cohort.168h.v3', $report['definition_version']);
+    }
+
+    public function test_legacy_raw_attempt_claim_with_granted_consent_cannot_enter_owner_cohort(): void
+    {
+        $start = CarbonImmutable::parse('2026-10-01T01:00:00Z');
+        $id = (string) Str::uuid();
+        $this->insertAttempt($id, 81, 'en', $start, $start->addHour());
+        $this->insertResult($id, 81, $start->addHours(2));
+        DB::table('events')->insert(['id' => (string) Str::uuid(), 'org_id' => 81, 'event_code' => 'view_result',
+            'event_name' => 'view_result', 'attempt_id' => $id, 'occurred_at' => $start->addHours(3), 'created_at' => $start->addHours(3),
+            'meta_json' => json_encode(['raw_payload' => ['consent_state' => 'granted']])]);
+        $report = $this->report();
+        $this->assertSame(0, $report['totals']['result_visible_cumulative_count']);
+        $this->assertSame(1, $report['coverage']['legacy_visible_link_unverified']);
+        $this->assertNull($report['rates']['visible_from_started_d7']['value']);
     }
 
     private function report(string $cutoff = '2026-10-15T00:00:00Z'): array
@@ -198,8 +214,9 @@ final class MeasurementStartCohortReadModelTest extends TestCase
 
     private function visible(?string $attemptId, CarbonImmutable $at, bool $trusted = true, string $consent = 'granted'): void
     {
-        $meta = $trusted ? ['measurement_observation' => ['version' => 'server-received-observation.v1', 'server_received_at' => $at->toIso8601String(), 'consent_state' => $consent]] : [];
-        DB::table('events')->insert(['id' => (string) Str::uuid(), 'org_id' => 81, 'event_name' => 'view_result', 'event_code' => 'view_result',
+        $native = $trusted && $attemptId !== null;
+        $meta = $native ? ['measurement_observation' => ['version' => 'result-visible.owner-interval.v1', 'server_read_at' => $at->toISOString(), 'server_received_at' => $at->toISOString(), 'consent_state' => $consent]] : [];
+        DB::table('events')->insert(['id' => (string) Str::uuid(), 'org_id' => 81, 'event_name' => $native ? 'result_visible_observed' : 'view_result', 'event_code' => $native ? 'result_visible_observed' : 'view_result',
             'attempt_id' => $attemptId, 'occurred_at' => '2031-01-01 00:00:00', 'created_at' => $at, 'meta_json' => json_encode($meta)]);
     }
 }
