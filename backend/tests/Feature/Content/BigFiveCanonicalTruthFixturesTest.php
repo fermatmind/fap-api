@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Report\BigFiveReportComposer;
 use App\Services\Report\ReportAccess;
+use App\Services\Report\ReportSnapshotStore;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -203,6 +204,13 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
         $history->assertStatus(200);
         $historyPayload = (array) $history->json();
 
+        $this->withHeaders($headers)->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf')
+            ->assertStatus(409)->assertJsonPath('error_code', 'REPORT_NOT_READY');
+        $snapshot = app(ReportSnapshotStore::class)->createSnapshotForAttempt([
+            'org_id' => 0, 'attempt_id' => $attemptId, 'user_id' => (string) $userId,
+            'anon_id' => $anonId, 'org_role' => 'public', 'trigger_source' => 'test_report_ready',
+        ]);
+        $this->assertTrue($snapshot['ok']);
         $pdf = $this->withHeaders($headers)->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf');
         $pdf->assertStatus(200);
         $pdfBody = (string) $pdf->getContent();

@@ -3069,6 +3069,10 @@ class AttemptReadController extends Controller
             abort($status, (string) ($gate['message'] ?? 'report generation failed.'));
         }
 
+        if ($scaleCode === 'BIG5_OCEAN' && (bool) ($gate['generating'] ?? false)) {
+            throw new ApiProblemException(409, 'REPORT_NOT_READY', 'Report is still generating. Please retry shortly.');
+        }
+
         $variant = $this->reportPdfDocumentService->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $locked = (bool) ($gate['locked'] ?? false);
         $pdfMetadata = $this->reportPdfDocumentService->metadata($attempt, $gate, $result);
