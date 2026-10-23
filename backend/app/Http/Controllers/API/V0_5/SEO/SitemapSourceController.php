@@ -37,6 +37,10 @@ class SitemapSourceController extends Controller
         '/zh',
         '/en/tests',
         '/zh/tests',
+        '/en/career',
+        '/zh/career',
+        '/en/holland-test/pdf-download',
+        '/zh/holland-test/pdf-download',
         '/en/tests/mbti-personality-test-16-personality-types',
         '/zh/tests/mbti-personality-test-16-personality-types',
         '/en/tests/big-five-personality-test',
@@ -119,7 +123,9 @@ class SitemapSourceController extends Controller
             ->filter(fn (string $path): bool => ! $this->isPrivateFallbackPath($path))
             ->map(fn (string $path): array => [
                 'loc' => $path === '/' ? $baseUrl : $baseUrl.$path,
-                'lastmod' => self::FALLBACK_LASTMOD,
+                'lastmod' => in_array($path, ['/en/career', '/zh/career', '/en/holland-test/pdf-download', '/zh/holland-test/pdf-download'], true)
+                    ? ''
+                    : self::FALLBACK_LASTMOD,
             ])
             ->values()
             ->all();
@@ -153,7 +159,8 @@ class SitemapSourceController extends Controller
                 || ($parts['host'] ?? '') !== parse_url($this->fallbackBaseUrl(), PHP_URL_HOST)
                 || isset($parts['query']) || isset($parts['fragment']) || isset($parts['user'])
                 || $this->isPrivateFallbackPath($parts['path'] ?? '/')
-                || ! is_string($item['lastmod'] ?? null) || strtotime($item['lastmod']) === false
+                || ! is_string($item['lastmod'] ?? null)
+                || ($item['lastmod'] !== '' && strtotime($item['lastmod']) === false)
                 || isset($seen[$loc])) {
                 throw new \RuntimeException('Sitemap candidate contains an invalid or duplicate public URL.');
             }

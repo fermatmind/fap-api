@@ -302,6 +302,7 @@ class SitemapGeneratorTest extends TestCase
             'https://fermatmind.com/en/career/guides',
             'https://fermatmind.com/en/career/recommendations',
             'https://fermatmind.com/en/career/tests',
+            'https://fermatmind.com/en/holland-test/pdf-download',
             'https://fermatmind.com/en/support',
             'https://fermatmind.com/en/tests',
             'https://fermatmind.com/en/tests/category/career',
@@ -311,6 +312,7 @@ class SitemapGeneratorTest extends TestCase
             'https://fermatmind.com/zh/career/guides',
             'https://fermatmind.com/zh/career/recommendations',
             'https://fermatmind.com/zh/career/tests',
+            'https://fermatmind.com/zh/holland-test/pdf-download',
             'https://fermatmind.com/zh/support',
             'https://fermatmind.com/zh/tests',
             'https://fermatmind.com/zh/tests/category/career',
@@ -320,6 +322,30 @@ class SitemapGeneratorTest extends TestCase
         }
 
         $this->assertStringNotContainsString('https://fermatmind.com/en/help/about', $xml);
+    }
+
+    public function test_static_discovery_targets_are_unique_and_do_not_invent_lastmod(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $generator = app(SitemapGenerator::class);
+        $read = new \ReflectionMethod($generator, 'getStaticIndexUrls');
+        $first = $read->invoke($generator);
+        $this->travel(2)->days();
+        $second = $read->invoke($generator);
+        $this->travelBack();
+        self::assertSame($first, $second);
+        foreach (['/en/career', '/zh/career', '/en/holland-test/pdf-download', '/zh/holland-test/pdf-download'] as $path) {
+            $rows = array_values(array_filter($first, static fn (array $row): bool => $row['loc'] === 'https://fermatmind.com'.$path));
+            self::assertCount(1, $rows);
+            self::assertArrayNotHasKey('lastmod', $rows[0]);
+            self::assertArrayNotHasKey('updated_at', $rows[0]);
+        }
+        $xml = (new \ReflectionMethod($generator, 'buildXml'))->invoke($generator, $first);
+        self::assertStringNotContainsString('<lastmod>', $xml);
+        self::assertStringNotContainsString('.pdf</loc>', $xml);
+        foreach ($first as $row) {
+            self::assertNull(parse_url($row['loc'], PHP_URL_QUERY));
+        }
     }
 
     public function test_generate_includes_released_bilingual_big_five_public_content_assets_only(): void

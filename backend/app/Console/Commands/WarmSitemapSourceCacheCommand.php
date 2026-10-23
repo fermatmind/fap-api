@@ -180,8 +180,8 @@ final class WarmSitemapSourceCacheCommand extends Command
                 return [
                     'slug' => $slug,
                     'loc' => trim((string) ($url['loc'] ?? '')),
-                    // Static entry timestamps are generated with now(); their paths
-                    // and the generator code hash are the actual authority identity.
+                    // Static routes have no content timestamp; their paths and
+                    // generator code hash are the actual authority identity.
                     'lastmod' => str_starts_with($slug, 'static-index:')
                         ? self::PUBLIC_ENUMERATION_AUTHORITY_VERSION
                         : trim((string) ($url['lastmod'] ?? '')),
@@ -263,7 +263,8 @@ final class WarmSitemapSourceCacheCommand extends Command
             && count($items) === $payload['count']
             && collect($items)->every(static fn (mixed $item): bool => is_array($item)
                 && trim((string) ($item['loc'] ?? '')) !== ''
-                && trim((string) ($item['lastmod'] ?? '')) !== '');
+                && is_string($item['lastmod'] ?? null)
+                && ($item['lastmod'] === '' || strtotime($item['lastmod']) !== false));
     }
 
     /**

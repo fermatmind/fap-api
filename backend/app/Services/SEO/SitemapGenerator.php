@@ -1280,7 +1280,8 @@ class SitemapGenerator
             return [];
         }
 
-        $updatedAt = now('UTC');
+        // These product routes have no authoritative content revision timestamp.
+        // Generation and deployment time must not masquerade as substantive updates.
         $paths = [
             '/',
             '/en',
@@ -1289,6 +1290,7 @@ class SitemapGenerator
             '/en/career/guides',
             '/en/career/recommendations',
             '/en/career/tests',
+            '/en/holland-test/pdf-download',
             '/en/support',
             '/en/tests',
             '/en/tests/category/career',
@@ -1298,6 +1300,7 @@ class SitemapGenerator
             '/zh/career/guides',
             '/zh/career/recommendations',
             '/zh/career/tests',
+            '/zh/holland-test/pdf-download',
             '/zh/support',
             '/zh/tests',
             '/zh/tests/category/career',
@@ -1306,9 +1309,7 @@ class SitemapGenerator
 
         return array_map(static fn (string $path): array => [
             'loc' => $baseUrl.$path,
-            'lastmod' => $updatedAt->toAtomString(),
             'slug' => 'static-index:'.($path === '/' ? 'root' : trim(str_replace('/', ':', $path), ':')),
-            'updated_at' => $updatedAt->toDateTimeString(),
         ], $paths);
     }
 
@@ -1416,13 +1417,12 @@ class SitemapGenerator
             }
 
             $lastmod = trim((string) ($row['lastmod'] ?? ''));
-            if ($lastmod === '') {
-                $lastmod = '1970-01-01';
-            }
 
             $lines[] = '  <url>';
             $lines[] = '    <loc>'.htmlspecialchars($loc, ENT_XML1).'</loc>';
-            $lines[] = '    <lastmod>'.htmlspecialchars($lastmod, ENT_XML1).'</lastmod>';
+            if ($lastmod !== '') {
+                $lines[] = '    <lastmod>'.htmlspecialchars($lastmod, ENT_XML1).'</lastmod>';
+            }
             $lines[] = '    <changefreq>weekly</changefreq>';
             $lines[] = '    <priority>0.7</priority>';
             $lines[] = '  </url>';

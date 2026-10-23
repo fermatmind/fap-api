@@ -88,6 +88,45 @@ class SitemapSourceCacheTest extends TestCase
         parent::tearDown();
     }
 
+    public function test_static_targets_without_lastmod_survive_cache_publication_and_unchanged_refresh(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $generator = app(SitemapGenerator::class);
+        $urls = (new \ReflectionMethod($generator, 'getStaticIndexUrls'))->invoke($generator);
+        $this->mock(SitemapGenerator::class, function ($mock) use ($urls): void {
+            $mock->makePartial()->shouldReceive('generateSitemapUrls')->andReturn($urls);
+        });
+        $this->artisan('seo:warm-sitemap-source-cache --refresh-if-changed --json')->assertSuccessful();
+        $first = $this->getJson('/api/v0.5/seo/sitemap-source')->assertOk()->json('items');
+        $this->travel(1)->minutes();
+        $this->artisan('seo:warm-sitemap-source-cache --refresh-if-changed --json')->assertSuccessful();
+        $second = $this->getJson('/api/v0.5/seo/sitemap-source')->assertOk()->json('items');
+        $this->travelBack();
+        self::assertSame($first, $second);
+        foreach (['/en/career', '/zh/career', '/en/holland-test/pdf-download', '/zh/holland-test/pdf-download'] as $path) {
+            $rows = array_values(array_filter($second, static fn (array $row): bool => $row['loc'] === 'https://fermatmind.com'.$path));
+            self::assertCount(1, $rows);
+            self::assertSame('', $rows[0]['lastmod']);
+        }
+    }
+
+    public function test_invalid_nonempty_lastmod_cannot_replace_a_valid_cache(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $controller = app(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::class);
+        $valid = ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 1,
+            'items' => [['loc' => 'https://fermatmind.com/en/career', 'lastmod' => '']]];
+        $controller->storeCache($valid);
+        $invalid = $valid;
+        $invalid['items'][0]['lastmod'] = 'invalid';
+        try {
+            $controller->storeCache($invalid);
+            self::fail('Invalid lastmod must be rejected.');
+        } catch (\RuntimeException) {
+            self::assertSame($valid, Cache::get(Projection::physicalKey($controller::CACHE_KEY_FRESH)));
+        }
+    }
+
     public function test_empty_cache_returns_safe_fallback_without_http_regeneration(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -102,6 +141,11 @@ class SitemapSourceCacheTest extends TestCase
 
         $locs = collect($response->json('items'))->pluck('loc')->all();
 
+        foreach (['/en/career', '/zh/career', '/en/holland-test/pdf-download', '/zh/holland-test/pdf-download'] as $path) {
+            $rows = array_values(array_filter($response->json('items'), static fn (array $row): bool => $row['loc'] === 'https://fermatmind.com'.$path));
+            self::assertCount(1, $rows);
+            self::assertSame('', $rows[0]['lastmod']);
+        }
         $this->assertGreaterThan(10, $response->json('count'));
         $this->assertContains('https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types', $locs);
         $this->assertContains('https://fermatmind.com/zh/tests/holland-career-interest-test-riasec', $locs);
