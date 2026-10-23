@@ -10,6 +10,7 @@ use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Filament\Ops\Support\ArticleControlledPublicationWorkspace;
 use App\Filament\Ops\Support\ArticleEditorialPackageWorkspace;
 use App\Filament\Ops\Support\ArticleExistingPackageWorkspace;
+use App\Filament\Ops\Support\ArticleHreflangWorkspace;
 use App\Filament\Ops\Support\ArticlePublishedFaqWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
@@ -270,6 +271,35 @@ class EditArticle extends EditRecord
                         $notification->title(__('ops.resources.articles.cover_alt.success'))->success();
                     } else {
                         $notification->title(__('ops.resources.articles.cover_alt.cache_failed'))->warning()->persistent();
+                    }
+                    $notification->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            Action::make('releaseHreflangPair')
+                ->label(__('ops.resources.articles.hreflang_release.action'))
+                ->icon('heroicon-o-language')
+                ->color('gray')
+                ->visible(fn (): bool => app(ArticleHreflangWorkspace::class)->available($this->getRecord()))
+                ->modalDescription(__('ops.resources.articles.hreflang_release.description'))
+                ->fillForm(fn (): array => app(ArticleHreflangWorkspace::class)->prepare($this->getRecord()))
+                ->form([
+                    Textarea::make('target_hash')->label(__('ops.resources.articles.controlled_publish.snapshot'))->readOnly()->required()->rows(2),
+                    Textarea::make('preflight')->label(__('ops.resources.articles.controlled_publish.preflight'))->readOnly()->rows(12),
+                    Checkbox::make('pair_reviewed')->label(__('ops.resources.articles.hreflang_release.reviewed'))->accepted()->required(),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        $result = app(ArticleHreflangWorkspace::class)->release($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.pair_reviewed' => $exception->errors()['pair_reviewed'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    $notification = Notification::make();
+                    if ($result['ok']) {
+                        $notification->title(__('ops.resources.articles.hreflang_release.success'))->success();
+                    } else {
+                        $notification->title(__('ops.resources.articles.hreflang_release.cache_failed'))->warning()->persistent();
                     }
                     $notification->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));

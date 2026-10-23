@@ -3133,6 +3133,13 @@ return [
                 'success' => '文章 SEO 资格已释放，公开缓存已刷新',
                 'cache_failed' => 'SEO 资格已提交，但收尾失败。请勿重复释放；请检查既有诊断。',
             ],
+            'hreflang_release' => [
+                'action' => '释放已核实的语言配对',
+                'description' => '通过原生互返校验，为当前已发布的中英文语言对启用 hreflang。正文、FAQ、Schema、URL 与公开资格保持不变。',
+                'reviewed' => '已核对两个公开语言页面及其规范 URL。',
+                'success' => '语言配对已释放，公开缓存已刷新',
+                'cache_failed' => '语言配对已保存，但缓存收尾失败。请勿重复释放；请核对两个公开页面。',
+            ],
             'published_faq' => [
                 'action' => '更新已发布 FAQ 答案',
                 'description' => '核对现有问题，通过原生读者元数据控制更新答案。问题顺序、正文版本、SEO、媒体与公开资格保持不变。',

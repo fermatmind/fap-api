@@ -3133,6 +3133,13 @@ return [
                 'success' => 'Article SEO released and public caches refreshed',
                 'cache_failed' => 'SEO eligibility committed, but closeout failed. Do not repeat the release; inspect the existing diagnostics.',
             ],
+            'hreflang_release' => [
+                'action' => 'Release verified language pair',
+                'description' => 'Enable hreflang for this published English/Chinese pair through native reciprocal validation. Content, FAQ, schema, URLs and public eligibility remain unchanged.',
+                'reviewed' => 'I checked both public language pages and their canonical targets.',
+                'success' => 'Language pair released and public caches refreshed',
+                'cache_failed' => 'Language pair saved; cache closeout failed. Do not repeat the release. Check both public pages.',
+            ],
             'published_faq' => [
                 'action' => 'Update published FAQ answers',
                 'description' => 'Review the existing questions and edit their answers through native reader metadata controls. Question order, text revisions, SEO, media and public eligibility stay unchanged.',
