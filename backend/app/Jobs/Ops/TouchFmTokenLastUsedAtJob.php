@@ -25,7 +25,11 @@ class TouchFmTokenLastUsedAtJob implements ShouldBeUnique, ShouldQueue
 
     public int $uniqueFor = 300;
 
-    public function __construct(public string $tokenHash) {}
+    public function __construct(public string $tokenHash)
+    {
+        $this->onConnection('database');
+        $this->onQueue('ops');
+    }
 
     public function uniqueId(): string
     {

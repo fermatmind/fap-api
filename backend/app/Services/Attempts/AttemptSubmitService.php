@@ -17,6 +17,7 @@ use App\Services\Scale\ScaleIdentityRuntimePolicy;
 use App\Services\Scale\ScaleIdentityWriteProjector;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
 
 class AttemptSubmitService
@@ -48,10 +49,10 @@ class AttemptSubmitService
         $this->postCommitStage = new AttemptSubmitPostCommitService($this);
     }
 
-    public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto): array
+    public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto, ?CarbonInterface $receivedAt = null): array
     {
         $guarded = $this->guardStage->handle($ctx, $attemptId, $dto);
-        $canonicalized = $this->canonicalizeStage->handle($guarded);
+        $canonicalized = $this->canonicalizeStage->handle($guarded, $receivedAt);
         $scored = $this->scoreStage->handle($canonicalized);
         $tx = $this->txStage->handle($ctx, $canonicalized, $scored);
 

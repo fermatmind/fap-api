@@ -10,6 +10,17 @@ use Illuminate\Support\Carbon;
 
 final class AttemptDurationResolver
 {
+    public const MAX_DURATION_MS = 2_147_483_647;
+
+    public function normalizeClientMilliseconds(int $durationMs, int $serverSeconds): int
+    {
+        if ($durationMs >= 0 && $durationMs <= self::MAX_DURATION_MS) {
+            return $durationMs;
+        }
+
+        return (int) min(self::MAX_DURATION_MS, max(0, $serverSeconds) * 1000);
+    }
+
     public function resolveServerSeconds(Attempt $attempt): int
     {
         return $this->resolveServerSecondsFromValues($attempt->started_at, $attempt->submitted_at);
@@ -24,7 +35,7 @@ final class AttemptDurationResolver
             return 0;
         }
 
-        return max(0, $submitted->diffInSeconds($started));
+        return (int) max(0, $started->diffInSeconds($submitted, false));
     }
 
     private function normalizeToCarbon(mixed $value): ?CarbonInterface

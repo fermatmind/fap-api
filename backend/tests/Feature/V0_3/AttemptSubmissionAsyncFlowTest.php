@@ -62,6 +62,43 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
         (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
+    public function test_overflow_duration_recovers_failed_submission_using_original_received_time(): void
+    {
+        $this->freezeTime();
+        config()->set('fap.features.submit_async_v2', true);
+        $this->seedScales();
+        $anonId = 'anon-duration-recovery';
+        $token = $this->issueAnonToken($anonId);
+        $start = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+            'anon_id' => $anonId,
+        ])->assertOk();
+        $attemptId = (string) $start->json('attempt_id');
+        $this->travel(616)->seconds();
+        $receivedAt = now()->copy();
+        Queue::fake();
+        $payload = ['attempt_id' => $attemptId, 'answers' => $this->demoAnswers(), 'duration_ms' => 2_952_103_728];
+        $first = $this->withHeaders(['X-Anon-Id' => $anonId, 'Authorization' => 'Bearer '.$token])
+            ->postJson('/api/v0.3/attempts/submit', $payload)->assertStatus(202);
+        $submissionId = (string) $first->json('submission_id');
+        DB::table('attempt_submissions')->where('id', $submissionId)->update([
+            'state' => 'failed', 'error_code' => 'SUBMISSION_JOB_TERMINAL_FAILURE', 'finished_at' => now(),
+        ]);
+        $this->travel(8)->hours();
+        $retry = $this->postJson('/api/v0.3/attempts/submit', $payload)->assertStatus(202);
+        $this->assertSame($submissionId, $retry->json('submission_id'));
+        $service = app(AttemptSubmissionService::class);
+        $service->process($submissionId);
+        $service->process($submissionId);
+        $this->assertDatabaseHas('attempt_submissions', ['id' => $submissionId, 'state' => 'succeeded']);
+        $attempt = DB::table('attempts')->where('id', $attemptId)->first();
+        $this->assertSame(616000, (int) $attempt->duration_ms);
+        $this->assertSame($receivedAt->toDateTimeString(), $attempt->submitted_at);
+        $this->assertSame(1, DB::table('results')->where('attempt_id', $attemptId)->count());
+        $stored = DB::table('attempt_submissions')->where('id', $submissionId)->value('request_payload_json');
+        $this->assertSame($this->demoAnswers(), json_decode($stored, true)['answers']);
+    }
+
     public function test_submit_async_ack_and_status_endpoint(): void
     {
         config()->set('fap.features.submit_async_v2', true);

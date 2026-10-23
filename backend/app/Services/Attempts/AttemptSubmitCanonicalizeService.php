@@ -4,12 +4,13 @@ namespace App\Services\Attempts;
 
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
+use Carbon\CarbonInterface;
 
 class AttemptSubmitCanonicalizeService
 {
     public function __construct(private AttemptSubmitService $core) {}
 
-    public function handle(array $guarded): array
+    public function handle(array $guarded, ?CarbonInterface $receivedAt = null): array
     {
         /** @var Attempt $attempt */
         $attempt = $guarded['attempt'];
@@ -50,8 +51,9 @@ class AttemptSubmitCanonicalizeService
         $bankId = trim((string) ($attemptMeta['bank_id'] ?? ''));
         $scoringSpecVersion = trim((string) ($attempt->scoring_spec_version ?? ''));
         $normVersion = trim((string) ($attempt->norm_version ?? ''));
-        $submittedAt = now();
+        $submittedAt = $receivedAt ?? now();
         $serverDurationSeconds = $this->core->durationResolver()->resolveServerSecondsFromValues($attempt->started_at, $submittedAt);
+        $durationMs = $this->core->durationResolver()->normalizeClientMilliseconds($durationMs, $serverDurationSeconds);
         $experiments = $this->core->resolveScoreExperiments($orgId, $actorAnonId, $actorUserId);
 
         $scoreContext = [
@@ -79,6 +81,7 @@ class AttemptSubmitCanonicalizeService
         ];
 
         return array_merge($guarded, [
+            'duration_ms' => $durationMs,
             'merged_answers' => $mergedAnswers,
             'answers_digest' => $answersDigest,
             'submitted_at' => $submittedAt,

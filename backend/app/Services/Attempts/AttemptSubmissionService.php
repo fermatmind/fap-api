@@ -14,6 +14,7 @@ use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Queue\MaxAttemptsExceededException;
 use Illuminate\Queue\TimeoutExceededException;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Throwable;
@@ -302,7 +303,12 @@ final class AttemptSubmissionService
         );
 
         try {
-            $result = $this->attemptSubmitService->submit($ctx, $attemptId, SubmitAttemptDTO::fromArray($payload));
+            $result = $this->attemptSubmitService->submit(
+                $ctx,
+                $attemptId,
+                SubmitAttemptDTO::fromArray($payload),
+                Carbon::parse($row->created_at),
+            );
             $this->markSucceeded($submissionId, $result);
         } catch (ApiProblemException $e) {
             $this->markFailed($submissionId, $e->errorCode(), $e->getMessage());
