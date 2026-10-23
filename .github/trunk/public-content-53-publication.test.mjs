@@ -663,7 +663,7 @@ test('exact changed paths select a single package through transport, QA and work
 
 test('guide metadata accepts a streamed document title and still rejects missing, stale, duplicate or inert titles',()=>{
  const source=readCandidateRows(root,packageDigest(root,'career-planning')).candidates[0];
- const row={...source,snapshot:{...source.snapshot,body_md:'Required visible planning advice.'}};
+ const row={...source,snapshot:{...source.snapshot,body_md:'Required visible planning advice.',seo_text:{...source.snapshot.seo_text,seo_title:'Required planning guide'}}};
  const seo=row.snapshot.seo_text,title=`<title>${seo.seo_title} | FermatMind</title>`;
  const metadata=`<meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}"><meta name="robots" content="index, follow">`;
  const html=`<html><head><meta charset="utf-8">${metadata}</head><body>${title}<main><h1>${row.snapshot.title}</h1><p>Required visible planning advice.</p></main></body></html>`;
@@ -672,6 +672,26 @@ test('guide metadata accepts a streamed document title and still rejects missing
  assert.doesNotThrow(()=>assertDom(row,html.replace('<title>','<title data-iq-qa-hidden="true">'),before,'production'));
  for(const altered of [html.replace(title,''),html.replace(title,'<title>Stale title</title>'),html.replace(title,title+title),html.replace('</head>',title+'</head>'),html.replace(title,`<template>${title}</template>`),html.replace(title,`<script type="application/json">${JSON.stringify(title)}</script>`)])
   assert.throws(()=>assertDom(row,altered,before,'production'),/METADATA/);
+});
+
+
+test('guide document titles follow the published CMS brand normalizer without accepting stale or duplicate titles',()=>{
+ const source=readCandidateRows(root,packageDigest(root,'career-planning')).candidates[0];
+ for(const [cmsTitle,documentTitle] of [
+  ['Career planning','Career planning | FermatMind'],
+  ['Career planning | FermatMind','Career planning | FermatMind'],
+  ['职业转型行动手册｜FermatMind','职业转型行动手册 | FermatMind'],
+  ['职业转型行动手册｜费马测试','职业转型行动手册 | FermatMind'],
+  ['Career planning | FermatMind ｜ FermatMind','Career planning | FermatMind'],
+ ]){
+  const row={...source,snapshot:{...source.snapshot,body_md:'Required planning advice.',seo_text:{...source.snapshot.seo_text,seo_title:cmsTitle}}};
+  const seo=row.snapshot.seo_text,title=`<title>${documentTitle}</title>`;
+  const html=`<html><head><meta charset="utf-8">${title}<meta name="description" content="${seo.seo_description}"><meta property="og:title" content="${seo.og_title}"><meta property="og:description" content="${seo.og_description}"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}"><meta name="robots" content="index, follow"></head><body><main><h1>${row.snapshot.title}</h1><p>Required planning advice.</p></main></body></html>`;
+  const before={dom:domOf(html)};
+  assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+  for(const altered of [html.replace(title,''),html.replace(title,'<title>Stale title</title>'),html.replace(title,title+title),html.replace(title,`<title>${documentTitle} | FermatMind</title>`)])
+   assert.throws(()=>assertDom(row,altered,before,'production'),/METADATA/);
+ }
 });
 
 

@@ -5,6 +5,14 @@ import { renderPage } from './iq-public-article-online-qa.mjs';
 
 const equal = (a,b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
 const compact = x => String(x ?? '').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'');
+// Mirror fap-web's resolveCareerGuideMetadataTitle: a CMS-owned brand suffix
+// is normalized once instead of receiving the locale layout suffix again.
+const guideDocumentTitle = sourceTitle => {
+  const title=sourceTitle.trim();
+  return /[|｜]\s*(?:FermatMind|费马测试)\s*$/i.test(title)
+    ? title.replace(/(?:\s*[|｜]\s*(?:FermatMind|费马测试))+\s*$/i,' | FermatMind')
+    : `${sourceTitle} | FermatMind`;
+};
 const plain = x => /^\s*```[\w-]*\s*$/.test(x) ? '' : x.replace(/!\[[^\]]*\]\([^)]*\)/g,'').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1')
   .replace(/^\s*\[\^([0-9A-Za-z-]+)\]:\s*/,'$1 ').replace(/\[\^([0-9A-Za-z-]+)\]/g,'$1')
   .replace(/^\s*(?:>\s*)+|^\s*(?:#{1,6}\s*|[-*+]\s+|\d+[.)]\s+)/g,'').replace(/[*`_]/g,'');
@@ -181,7 +189,7 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   if (row.kind !== 'surface' && row.snapshot.title && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
   if (['article','guide'].includes(row.kind) && row.snapshot.seo_text) {
     const seo=row.snapshot.seo_text;
-    if (!equal(dom.title.map(compact),[compact(`${seo.seo_title} | FermatMind`)])
+    if (!equal(dom.title.map(compact),[compact(row.kind === 'guide' ? guideDocumentTitle(seo.seo_title) : `${seo.seo_title} | FermatMind`)])
       || !equal(dom.description.map(compact),[compact(seo.seo_description)])
       || !equal(dom.og_title.map(compact),[compact(seo.og_title)])
       || !equal(dom.og_description.map(compact),[compact(seo.og_description)]))
