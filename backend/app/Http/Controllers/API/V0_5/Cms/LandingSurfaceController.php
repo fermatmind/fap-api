@@ -17,6 +17,7 @@ use App\Support\CanonicalFrontendUrl;
 use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -372,6 +373,8 @@ final class LandingSurfaceController extends Controller
             return [];
         }
 
+        $materialUpdatedAt = $article->getAttribute('recommendation_material_changed_at');
+
         $seoMeta = PublicMediaUrlGuard::sanitizeArrayFields(
             $article->seoMeta?->toArray(),
             ['og_image_url', 'twitter_image_url']
@@ -412,6 +415,9 @@ final class LandingSurfaceController extends Controller
             'is_public' => (bool) $article->is_public,
             'is_indexable' => (bool) $article->is_indexable,
             'published_at' => $article->published_at?->toISOString(),
+            'material_updated_at' => $materialUpdatedAt !== null
+                ? Carbon::parse($materialUpdatedAt)->toISOString()
+                : $article->published_at?->toISOString(),
             'created_at' => $article->created_at?->toISOString(),
             'updated_at' => $revision->updated_at?->toISOString() ?? $article->updated_at?->toISOString(),
             'published_revision_id' => (int) $revision->id,

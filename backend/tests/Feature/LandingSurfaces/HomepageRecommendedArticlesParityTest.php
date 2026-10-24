@@ -95,6 +95,8 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
             array_column(array_column($items, 'article'), 'slug'),
         );
         $this->assertSame($originalDate, $items[0]['article']['published_at']);
+        $this->assertSame('2026-05-26T00:00:00.000000Z', $items[0]['article']['material_updated_at']);
+        $this->assertSame('2026-05-15T00:00:00.000000Z', $items[1]['article']['material_updated_at']);
         $this->assertSame($originalDate, $updated->fresh()->published_at->toISOString());
         $this->assertSame($updated->published_revision_id, $items[0]['article']['published_revision_id']);
         $this->assertArrayNotHasKey('recommendation_material_changed_at', $items[0]['article']);
@@ -128,6 +130,7 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
         }
         $items = $this->recommendedItems($locale);
         $this->assertSame(['material-change', 'unchanged-republish'], array_column(array_column($items, 'article'), 'slug'));
+        $this->assertSame('2026-05-15T00:00:00.000000Z', $items[1]['article']['material_updated_at']);
     }
 
     private function recommendedItems(string $locale): array
