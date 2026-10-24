@@ -10,6 +10,7 @@ const packages = {
   'english-career-guides': ['fermatmind.public_content_english_career_guides.v1', ['english-career-guides.json','english-career-guides-review.json']],
   'riasec-code-samples': ['fermatmind.riasec_code_samples.v1', ['riasec-code-samples.json','riasec-code-samples-review.json']],
   'career-planning': ['fermatmind.public_content_career_planning.v1', ['career-planning.json','career-planning-review.json']],
+  'iar-amendment': ['fermatmind.public_content_article_amendment.v1', ['iar-amendment.json','iar-amendment-review.json']],
   'riasec-amendment': ['fermatmind.public_content_article_amendment.v1', ['riasec-amendment.json','riasec-amendment-review.json']],
   'seo-alignment': ['fermatmind.public_content_seo_alignment.v1', ['seo-alignment.json','seo-alignment-review.json']],
   'copy-amendment': ['fermatmind.public_content_copy_amendment.v1', ['copy-amendment.json','copy-amendment-review.json']],

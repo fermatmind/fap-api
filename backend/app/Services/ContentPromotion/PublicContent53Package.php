@@ -27,6 +27,11 @@ final class PublicContent53Package
         'PAGE-68' => ['article', 'mbti-vs-holland-code-career-choice', 'en'],
     ];
 
+    private const IAR_AMENDMENT_TARGETS = [
+        'IAR-ZH' => ['article', 'iar-holland-code-career-exploration', 'zh-CN'],
+        'IAR-EN' => ['article', 'iar-holland-code-career-exploration', 'en'],
+    ];
+
     private const SEO_ALIGNMENT_TARGETS = [
         'PAGE-55' => ['article', 'career-confusion-test-map', 'zh-CN'],
         'PAGE-56' => ['article', 'choose-career-using-personality-tests', 'en'],
@@ -137,6 +142,15 @@ final class PublicContent53Package
             }
             if (hash_equals($expectedSha256, hash('sha256', $chain))) {
                 return $this->readCareerPlanning($root, $expectedSha256);
+            }
+        }
+        if (is_file($root.'/'.self::PACKAGE.'/iar-amendment.json')) {
+            $chain = "fermatmind.public_content_article_amendment.v1\n";
+            foreach (['iar-amendment.json', 'iar-amendment-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readArticleAmendment($root, $expectedSha256, 'iar-amendment');
             }
         }
         if (is_file($root.'/'.self::PACKAGE.'/riasec-amendment.json')) {
@@ -722,21 +736,25 @@ final class PublicContent53Package
             || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
             throw new DomainException('public_content_53_amendment_review_or_scope_invalid');
         }
-        $targets = $name === 'riasec-amendment' ? self::RIASEC_AMENDMENT_TARGETS : self::TARGETS + ['PAGE-AI-ZH' => self::AI_METHOD_TARGET];
-        if ($name === 'riasec-amendment' && count($rows) !== count($targets)) {
+        $targets = match ($name) {
+            'riasec-amendment' => self::RIASEC_AMENDMENT_TARGETS,
+            'iar-amendment' => self::IAR_AMENDMENT_TARGETS,
+            default => self::TARGETS + ['PAGE-AI-ZH' => self::AI_METHOD_TARGET],
+        };
+        if (in_array($name, ['riasec-amendment', 'iar-amendment'], true) && count($rows) !== count($targets)) {
             throw new DomainException('public_content_53_amendment_review_or_scope_invalid');
         }
         $seen = [];
         foreach ($rows as $row) {
             $id = $row['page_id'] ?? '';
             $identity = $row['identity'] ?? [];
-            $riasec = $name === 'riasec-amendment';
+            $riasec = in_array($name, ['riasec-amendment', 'iar-amendment'], true);
             $allowed = ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity'];
             if ($riasec) {
                 $allowed = array_merge($allowed, ['staging_snapshot', 'enable_hreflang']);
             }
             if (! isset($targets[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'article'
-                || ($name !== 'riasec-amendment' && $id !== 'PAGE-AI-ZH' && ($identity['locale'] ?? null) !== 'en')
+                || (! $riasec && $id !== 'PAGE-AI-ZH' && ($identity['locale'] ?? null) !== 'en')
                 || array_diff(array_keys($row), $allowed) !== []
                 || ($identity['org_id'] ?? null) !== 0
                 || ['article', $identity['slug'] ?? null, $identity['locale'] ?? null] !== $targets[$id]
@@ -771,7 +789,7 @@ final class PublicContent53Package
             }
         }
 
-        if ($name === 'riasec-amendment' && function_exists('app') && app()->bound('config') && self::environment() === 'staging') {
+        if (in_array($name, ['riasec-amendment', 'iar-amendment'], true) && function_exists('app') && app()->bound('config') && self::environment() === 'staging') {
             foreach ($rows as &$row) {
                 $row['snapshot'] = $row['staging_snapshot'];
             }

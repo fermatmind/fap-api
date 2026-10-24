@@ -1945,4 +1945,107 @@ PHP;
             rmdir($root);
         }
     }
+
+    private function iarDigest(?string $root = null): string
+    {
+        $chain = "fermatmind.public_content_article_amendment.v1\n";
+        foreach (['iar-amendment.json', 'iar-amendment-review.json'] as $name) {
+            $chain .= $name."\n".hash_file('sha256', ($root ?? base_path()).'/'.PublicContent53Package::PACKAGE.'/'.$name)."\n";
+        }
+
+        return hash('sha256', $chain);
+    }
+
+    #[DataProvider('environments')]
+    public function test_iar_pair_native_publish_preserves_drafts_seo_and_restore_new_owner(string $environment): void
+    {
+        config(['content_promotion.public_content_53_environment' => $environment]);
+        $sha = $this->iarDigest();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
+        self::assertCount(2, $rows);
+        $this->seedRiasecAmendment($rows, $environment);
+        $states = app(PublicContent53State::class);
+        $before = $states->read($sha);
+        $context = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 2, str_repeat('e', 64));
+        $writer = app(PublicContent53Writer::class);
+        $revisions = ArticleTranslationRevision::query()->count();
+        try {
+            DB::transaction(function () use ($writer, $context, $before): void {
+                $writer->publish($context, $before);
+                throw new DomainException('synthetic_transaction_failure');
+            });
+            self::fail('Injected transaction failure must roll back both locale writes');
+        } catch (DomainException $error) {
+            self::assertSame('synthetic_transaction_failure', $error->getMessage());
+        }
+        self::assertSame($before, $states->read($sha));
+        self::assertSame($revisions, ArticleTranslationRevision::query()->count());
+        $after = DB::transaction(fn () => $writer->publish($context, $before));
+        self::assertSame(2, $after['written_count']);
+        $states->assertPublished($rows, $after['state']);
+        foreach ($rows as $row) {
+            $id = $row['page_id'];
+            self::assertSame($before[$id]['working'], $after['state'][$id]['working']);
+            self::assertSame($before[$id]['relations'], $after['state'][$id]['relations']);
+            self::assertSame($before[$id]['values']['is_indexable'], $after['state'][$id]['values']['is_indexable']);
+        }
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($context, $after['state']))['written_count']);
+        DB::transaction(fn () => $writer->restore($context, $before, $after['state']));
+        self::assertSame($before, $states->read($sha));
+        $newOwner = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('f', 40), str_repeat('b', 64), str_repeat('c', 64), '12346', 1, str_repeat('d', 64), 2, str_repeat('e', 64));
+        self::assertSame(2, DB::transaction(fn () => $writer->publish($newOwner, $before))['written_count']);
+        $baseline = $states->read($sha);
+        Article::query()->where('locale', 'en')->where('slug', 'iar-holland-code-career-exploration')->firstOrFail()
+            ->forceFill(['content_md' => 'Concurrent operator edit'])->saveQuietly();
+        $drifted = $states->read($sha);
+        try {
+            DB::transaction(fn () => $writer->publish($newOwner, $baseline));
+            self::fail('Concurrent copy drift must fail closed');
+        } catch (DomainException $error) {
+            self::assertSame('public_content_53_native_prestate_drift', $error->getMessage());
+        }
+        self::assertSame($drifted, $states->read($sha));
+    }
+
+    public function test_iar_pair_rejects_missing_language_foreign_identity_and_nonbody_changes(): void
+    {
+        $root = sys_get_temp_dir().'/iar-pair-'.bin2hex(random_bytes(6));
+        $directory = $root.'/'.PublicContent53Package::PACKAGE;
+        mkdir($directory, 0700, true);
+        $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/iar-amendment.json')), true);
+        $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/iar-amendment-review.json')), true);
+        try {
+            foreach (['missing-language', 'foreign-slug', 'locale', 'title', 'hreflang', 'staging-body', 'review'] as $case) {
+                $candidate = $package;
+                $review = $proof;
+                match ($case) {
+                    'missing-language' => array_pop($candidate['candidates']),
+                    'foreign-slug' => $candidate['candidates'][0]['identity']['slug'] = 'graphic-designers',
+                    'locale' => $candidate['candidates'][0]['identity']['locale'] = 'en',
+                    'title' => $candidate['candidates'][0]['snapshot']['title'] = 'Unreviewed title',
+                    'hreflang' => $candidate['candidates'][0]['enable_hreflang'] = true,
+                    'staging-body' => $candidate['candidates'][0]['staging_snapshot']['content_md'] = 'Unreviewed staging copy',
+                    default => null,
+                };
+                $bytes = json_encode($candidate, JSON_UNESCAPED_UNICODE);
+                $review['candidate_sha256'] = $case === 'review' ? str_repeat('0', 64) : hash('sha256', $bytes);
+                file_put_contents($directory.'/iar-amendment.json', $bytes);
+                file_put_contents($directory.'/iar-amendment-review.json', json_encode($review));
+                try {
+                    app(PublicContent53Package::class)->read($root, $this->iarDigest($root));
+                    self::fail('Unselected content or fields must be rejected');
+                } catch (DomainException $error) {
+                    self::assertStringStartsWith('public_content_53_amendment_', $error->getMessage());
+                }
+            }
+        } finally {
+            unlink($directory.'/iar-amendment.json');
+            unlink($directory.'/iar-amendment-review.json');
+            rmdir($directory);
+            rmdir($root.'/content_assets');
+            rmdir($root);
+        }
+    }
 }

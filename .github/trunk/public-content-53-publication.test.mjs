@@ -752,3 +752,24 @@ test('page control recognition retains non-control comments and surrounding pros
  }
  assert.doesNotThrow(()=>assertDom({...row,snapshot:{...row.snapshot,content_md:' \t<!-- FAQ_control:v2 /start-1 --> \t'}},html,before,'production'));
 });
+
+test('IAR body-only amendment selects exactly the existing bilingual pair',()=>{
+ const binding=inspectPackage(root,'iar-amendment');
+ const rows=readCandidateRows(root,binding.package_sha256).candidates;
+ assert.equal(binding.expected_row_count,2);
+ assert.deepEqual(rows.map(row=>[row.page_id,row.identity.slug,row.identity.locale]),[
+  ['IAR-ZH','iar-holland-code-career-exploration','zh-CN'],
+  ['IAR-EN','iar-holland-code-career-exploration','en'],
+ ]);
+ for(const row of rows){
+  assert.equal(row.enable_hreflang,false);
+  assert.equal(row.snapshot.title,row.before.title);assert.equal(row.snapshot.excerpt,row.before.excerpt);
+  assert.equal(row.staging_snapshot.title,row.staging_before.title);assert.equal(row.staging_snapshot.excerpt,row.staging_before.excerpt);
+  assert.equal(row.snapshot.content_md,row.staging_snapshot.content_md);
+  const locale=row.identity.locale==='en'?'en':'zh';
+  for(const path of ['/career/compare','/holland-test/pdf-download','/career/jobs/industrial-designers','/career/jobs/architects-except-landscape-and-naval'])assert.ok(row.snapshot.content_md.includes('/'+locale+path));
+  assert.ok(!row.before.content_md.includes('/'+locale+'/career/compare'));
+ }
+ assert.equal(selectPublicContentPackage(['backend/content_assets/public_content_53/iar-amendment.json']),'iar-amendment');
+ assert.throws(()=>selectPublicContentPackage(['backend/content_assets/public_content_53/iar-amendment.json','backend/content_assets/public_content_53/copy-amendment.json']),/MULTIPLE_PACKAGES/);
+});
