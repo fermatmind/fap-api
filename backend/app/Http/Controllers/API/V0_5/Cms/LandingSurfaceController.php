@@ -11,6 +11,7 @@ use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Models\LandingSurface;
 use App\Models\PageBlock;
+use App\Services\Cms\ArticlePublicListQuery;
 use App\Services\Cms\ArticleSeoService;
 use App\Support\CanonicalFrontendUrl;
 use App\Support\PublicMediaUrlGuard;
@@ -27,6 +28,7 @@ final class LandingSurfaceController extends Controller
 
     public function __construct(
         private readonly ArticleSeoService $articleSeoService,
+        private readonly ArticlePublicListQuery $articlePublicListQuery,
     ) {}
 
     public function show(Request $request, string $surfaceKey): JsonResponse
@@ -313,7 +315,9 @@ final class LandingSurfaceController extends Controller
             ->where('is_indexable', true)
             ->publiclyReadable()
             ->whereHas('publishedRevision')
-            ->orderByDesc('published_at')
+            ->select('articles.*')
+            ->selectSub($this->articlePublicListQuery->materialChangedAtSubquery(), 'recommendation_material_changed_at')
+            ->orderByRaw('COALESCE(recommendation_material_changed_at, articles.published_at) DESC')
             ->orderByDesc('id')
             ->get()
             ->filter(fn (Article $article): bool => $this->isRecommendedArticleRenderEligible($article))

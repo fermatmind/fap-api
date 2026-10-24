@@ -9,9 +9,11 @@ use App\Models\ArticleCategory;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
+use App\Models\ContentMaterialDecision;
 use App\Models\LandingSurface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class HomepageRecommendedArticlesParityTest extends TestCase
@@ -60,6 +62,101 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
 
         $this->assertRecommendedArticlesAreRenderEligible('en', $this->enSlugs);
         $this->assertRecommendedArticlesAreRenderEligible('zh-CN', $this->zhSlugs);
+    }
+
+    public static function locales(): array
+    {
+        return [['zh-CN'], ['en']];
+    }
+
+    #[DataProvider('locales')]
+    public function test_material_update_reaches_homepage_without_changing_original_publication_date(string $locale): void
+    {
+        Carbon::setTestNow('2026-05-27T00:00:00Z');
+        $this->createHomeSurface($locale);
+        $recent = [];
+        for ($i = 0; $i < 7; $i++) {
+            $recent[] = $this->createArticle('recent-'.$i, $locale, true);
+        }
+        $updated = $this->createArticle('how-16-personality-types-talk-to-an-ai-coach', $locale, true);
+        $originalDate = '2026-04-01T00:00:00.000000Z';
+        $updated->forceFill(['published_at' => $originalDate])->saveQuietly();
+        $this->recordMaterialDecision($updated, '2026-05-26T00:00:00Z');
+
+        // Ordinary saves, stale revisions and another tenant/language cannot boost recency.
+        $recent[0]->forceFill(['updated_at' => now()])->saveQuietly();
+        $this->recordMaterialDecision($recent[0], '2026-05-27T00:00:00Z', ['authority_revision' => '999999']);
+        $this->recordMaterialDecision($recent[1], '2026-05-27T00:00:00Z', ['org_id' => 99]);
+        $this->recordMaterialDecision($recent[2], '2026-05-27T00:00:00Z', ['locale' => $locale === 'en' ? 'zh-CN' : 'en']);
+
+        $items = $this->recommendedItems($locale);
+        $this->assertSame(
+            [$updated->slug, 'recent-6', 'recent-5', 'recent-4', 'recent-3', 'recent-2'],
+            array_column(array_column($items, 'article'), 'slug'),
+        );
+        $this->assertSame($originalDate, $items[0]['article']['published_at']);
+        $this->assertSame($originalDate, $updated->fresh()->published_at->toISOString());
+        $this->assertSame($updated->published_revision_id, $items[0]['article']['published_revision_id']);
+        $this->assertArrayNotHasKey('recommendation_material_changed_at', $items[0]['article']);
+    }
+
+    #[DataProvider('locales')]
+    public function test_identical_republish_keeps_material_recency_and_filters_nonpublic_articles(string $locale): void
+    {
+        Carbon::setTestNow('2026-05-27T00:00:00Z');
+        $this->createHomeSurface($locale);
+        $unchanged = $this->createArticle('unchanged-republish', $locale, true);
+        $this->recordMaterialDecision($unchanged, '2026-05-15T00:00:00Z');
+        $this->recordMaterialDecision($unchanged, '2026-05-15T00:00:00Z', [
+            'material_changed' => false,
+            'decision_code' => 'unchanged_republish',
+        ]);
+        $changed = $this->createArticle('material-change', $locale, true);
+        $this->recordMaterialDecision($changed, '2026-05-26T00:00:00Z');
+        foreach (['private', 'unindexable', 'future', 'incomplete'] as $state) {
+            $excluded = $this->createArticle('excluded-'.$state, $locale, $state !== 'incomplete');
+            $excluded->forceFill(match ($state) {
+                'private' => ['is_public' => false],
+                'unindexable' => ['is_indexable' => false],
+                'future' => ['published_at' => '2026-05-28T00:00:00Z'],
+                default => [],
+            })->saveQuietly();
+            if ($state === 'future') {
+                $excluded->publishedRevision->forceFill(['published_at' => '2026-05-28T00:00:00Z'])->saveQuietly();
+            }
+            $this->recordMaterialDecision($excluded, '2026-05-27T00:00:00Z');
+        }
+        $items = $this->recommendedItems($locale);
+        $this->assertSame(['material-change', 'unchanged-republish'], array_column(array_column($items, 'article'), 'slug'));
+    }
+
+    private function recommendedItems(string $locale): array
+    {
+        $response = $this->getJson('/api/v0.5/landing-surfaces/home?locale='.$locale.'&org_id=0')->assertOk();
+        $block = collect($response->json('surface.page_blocks'))->firstWhere('block_key', 'recommended_articles');
+
+        return $block['payload_json']['items'];
+    }
+
+    private function recordMaterialDecision(Article $article, string $changedAt, array $overrides = []): void
+    {
+        ContentMaterialDecision::query()->create(array_replace([
+            'org_id' => $article->org_id,
+            'family' => 'article',
+            'locale' => $article->locale,
+            'authority_subject_key' => (string) $article->id,
+            'public_identity' => '/'.$article->locale.'/articles/'.$article->slug,
+            'authority_revision_kind' => 'article_translation_revision',
+            'authority_revision' => (string) $article->published_revision_id,
+            'material_fingerprint' => hash('sha256', $article->slug),
+            'publication_state' => 'published',
+            'operation' => 'publish',
+            'decision_code' => 'material_change',
+            'material_changed' => true,
+            'material_changed_at' => $changedAt,
+            'evidence_ref' => 'homepage-recency-test',
+            'decision_key' => hash('sha256', $article->id.'|'.ContentMaterialDecision::query()->count()),
+        ], $overrides));
     }
 
     private function createHomeSurface(string $locale): void

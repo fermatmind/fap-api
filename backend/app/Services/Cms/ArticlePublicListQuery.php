@@ -15,10 +15,10 @@ use Illuminate\Database\Query\JoinClause;
 
 final class ArticlePublicListQuery
 {
-    /** Fresh, bounded feed reads never use the list's stale/LKG payload. */
-    public function feed(int $orgId, string $locale): \Illuminate\Database\Eloquent\Collection
+    /** Material recency belongs to the current published revision, never a draft or row touch. */
+    public function materialChangedAtSubquery(): Builder
     {
-        $changedAt = ContentMaterialDecision::query()
+        return ContentMaterialDecision::query()
             ->select('material_changed_at')
             ->whereColumn('org_id', 'articles.org_id')
             ->whereColumn('locale', 'articles.locale')
@@ -27,10 +27,15 @@ final class ArticlePublicListQuery
             ->whereColumn('authority_revision', 'articles.published_revision_id')
             ->where('publication_state', 'published')
             ->orderByDesc('id')->limit(1);
+    }
+
+    /** Fresh, bounded feed reads never use the list's stale/LKG payload. */
+    public function feed(int $orgId, string $locale): \Illuminate\Database\Eloquent\Collection
+    {
         $articles = $this->publicQuery(['org_id' => $orgId])
             ->where('articles.locale', $locale)
             ->whereNotNull('articles.published_at')
-            ->selectSub($changedAt, 'feed_material_changed_at')
+            ->selectSub($this->materialChangedAtSubquery(), 'feed_material_changed_at')
             ->orderByRaw('COALESCE(feed_material_changed_at, list_revision.published_at, articles.published_at) DESC')
             ->orderByDesc('articles.id')->limit(100)->get();
         $this->hydrate($articles);
