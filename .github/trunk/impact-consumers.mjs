@@ -12,7 +12,39 @@ export function executionDependencyText(path, body) {
   if(path !== 'backend/app/Console/Commands/CareerPublicResolutionTypeMatrix.php')return body;
   // These literal owner_paths are returned policy metadata, never opened or
   // executed. Keep the declaring file, real imports and all unknown expressions.
-  return body.replace(/('owner_paths'\s*=>\s*)\[((?:\s*'app\/[^'\n]+'\s*,?\s*)+)\]/g, '$1[]');
+  const replacements = [];
+  for (const match of body.matchAll(/'owner_paths'\s*=>\s*\[/g)) {
+    let cursor = match.index + match[0].length;
+    const skipWhitespace = () => { while (cursor < body.length && /\s/u.test(body[cursor])) cursor++; };
+    while (cursor < body.length) {
+      skipWhitespace();
+      if (!body.startsWith("'app/", cursor)) break;
+      cursor += 5;
+      const start = cursor;
+      while (cursor < body.length && !["'", "\\", "\n", "\r"].includes(body[cursor])) cursor++;
+      if (cursor === start || body[cursor] !== "'") break;
+      cursor++;
+      skipWhitespace();
+      if (body[cursor] === ',') { cursor++; skipWhitespace(); }
+      else if (body[cursor] !== ']') break;
+      if (body[cursor] === ']') {
+        const end = cursor;
+        cursor++;
+        skipWhitespace();
+        if (cursor < body.length && ![',', ']'].includes(body[cursor])) break;
+        replacements.push([match.index + match[0].length, end]);
+        break;
+      }
+    }
+  }
+  let previous = 0;
+  const parts = [];
+  for (const [start, end] of replacements) {
+    parts.push(body.slice(previous, start));
+    previous = end;
+  }
+  parts.push(body.slice(previous));
+  return parts.join('');
 }
 export function phpConsumers(root = process.cwd()) {
   root=execFileSync('git',['rev-parse','--show-toplevel'],{cwd:root}).toString().trim();

@@ -146,7 +146,9 @@ function changedStrings(before,after) {
 // ContentPageTemplate. Ordinary headings and their reader copy remain required.
 function readerLine(line, kind) {
   if (kind !== 'page') return line;
-  if (/^\s*<!--[A-Za-z0-9:_ /-]+-->\s*$/.test(line)) return '';
+  const control = line.trim();
+  if (control.startsWith('<!--') && control.endsWith('-->')
+    && /^[A-Za-z0-9:_ /-]+$/.test(control.slice(4,-3))) return '';
   const markers = new Set(['content_md','content_html','visible_faq_items']);
   const normalize = value => value.trim().replace(/^[`*_]+|[`*_]+$/g,'').toLowerCase().replace(/[\s-]+/g,'_');
   const heading = /^\s*#{1,6}\s+(.+?)\s*$/.exec(line);

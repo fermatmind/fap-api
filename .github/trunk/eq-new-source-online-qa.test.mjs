@@ -58,3 +58,19 @@ test('owned browser refusing close and TERM is killed before its profile is remo
  assert.equal(child.signalCode,'SIGKILL');
  assert.equal(existsSync(profile),false);
 });
+
+test('DOM text titles preserve literal entities and reject different titles',async()=>{
+ const titles=['普通中文与 "quotes" & signs','&lt;','&amp;lt;','&#38;lt;','&#x26;amp;lt;'];
+ const escape=text=>text.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+ for(const title of titles) {
+  const row={snapshot:{title,seo_title:'Fixture',seo_description:'Description',content_md:'Body.'}};
+  const page=`<html><head><meta charset="utf-8"><title>Fixture | FermatMind</title><meta name="description" content="Description"></head><body><h1>${escape(title)}</h1><article data-testid="article-detail-content">Body.</article></body></html>`;
+  const actual=await renderedDocument('data:text/html;charset=utf-8,'+encodeURIComponent(page));
+  assert.deepEqual(actual.headings,[title]);
+  assert.doesNotThrow(()=>assertSsrCandidate(actual,row));
+  for(const wrong of ['<','&lt;','&amp;lt;','&#38;lt;','&#x26;amp;lt;'].filter(value=>value!==title)) {
+   assert.throws(()=>assertSsrCandidate({...actual,headings:[wrong]},row),/EQ_SSR_TITLE_MISMATCH/);
+  }
+  assert.doesNotThrow(()=>assertSsrCandidate({...actual,headings:[' \n'+title+'\t ']},row));
+ }
+});

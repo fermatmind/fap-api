@@ -222,18 +222,19 @@ test('canonical identity rejects another HTTPS port in SSR and actual API readba
 });
 
 for (const mountedShell of [false, true]) for (const surface of ['article', 'entry', 'topic']) test(`real Chrome waits for the visible ${surface} copy ${mountedShell ? 'inside an already visible shell' : 'after the initial document loads'}`, async () => {
-  const content = surface === 'article'
+  const content = (surface === 'article'
     ? '<article data-testid="article-detail-content"><p>Reviewed article copy.</p></article>'
     : surface === 'entry'
       ? '<main data-test-landing-read-source="cms"><p>Reviewed entry copy.</p></main>'
-      : '<main><section id="overview"><p>Reviewed topic copy.</p></section><section id="faq"><p>Reviewed topic FAQ.</p></section></main>';
+      : '<main><section id="overview"><p>Reviewed topic copy.</p></section><section id="faq"><p>Reviewed topic FAQ.</p></section></main>') + '<!-- </script><p>Script boundary sentinel.</p> -->';
   const server = createServer((_request, response) => {
     response.writeHead(200, { 'Content-Type': 'text/html' });
-    response.end(`<html><body><div id="mount">${mountedShell ? content.replace(/Reviewed[^<]+/g, 'Loading copy.') : 'Loading copy'}</div><script>setTimeout(() => document.getElementById('mount').innerHTML = ${JSON.stringify(content)}, 2500)</script></body></html>`);
+    response.end(`<html><body><div id="mount">${mountedShell ? content.replace(/Reviewed[^<]+/g, 'Loading copy.') : 'Loading copy'}</div><script>setTimeout(() => document.getElementById('mount').innerHTML = ${JSON.stringify(content).replaceAll('<', '\\u003c')}, 2500)</script></body></html>`);
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   try {
     const verifyDOM = html => {
+      assert.ok(html.includes('<!-- </script><p>Script boundary sentinel.</p> -->'));
       assert.match(articleDom(html, surface).body, new RegExp(`Reviewed ${surface} copy`));
       if (surface === 'topic') assert.match(articleDom(html, 'topic_faq').body, /Reviewed topic FAQ/);
     };

@@ -740,3 +740,13 @@ test('English guide diagnostics cover exactly the 17 selected identities without
   assert.ok(!JSON.stringify(error.receipt).includes('secret'));
  }
 });
+
+test('page control recognition retains non-control comments and surrounding prose',()=>{
+ const row={page_id:'PAGE-HELP-PAYMENT',kind:'page',identity:{locale:'en',slug:'help-payment-refund'},snapshot:{title:'Payment',content_md:''}};
+ const before={dom:{canonical:['https://fermatmind.com/en/help/payment-refund'],robots:[],alternates:[]}};
+ const html='<html><head><link rel="canonical" href="https://fermatmind.com/en/help/payment-refund"></head><body><main><h1>Payment</h1></main></body></html>';
+ for(const copy of ['<!-- faq:start --> Required prose.', 'Required prose. <!-- faq:end -->','<!-- required\nprose -->','<!-- 中文正文 -->','<!-- unknown=marker -->','<!----> Required copy']) {
+  assert.throws(()=>assertDom({...row,snapshot:{...row.snapshot,content_md:copy}},html,before,'production'),/VISIBLE_BODY/,copy);
+ }
+ assert.doesNotThrow(()=>assertDom({...row,snapshot:{...row.snapshot,content_md:' \t<!-- FAQ_control:v2 /start-1 --> \t'}},html,before,'production'));
+});

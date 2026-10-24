@@ -4,9 +4,9 @@ import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import { packagePath } from './eq-new-source-package.mjs';
 
-const decode = text => text.replace(/&#(x[0-9a-f]+|[0-9]+);/gi, (_, value) => String.fromCodePoint(value[0].toLowerCase() === 'x' ? parseInt(value.slice(1),16) : Number(value)))
-  .replaceAll('&amp;','&').replaceAll('&quot;','"').replaceAll('&#39;',"'").replaceAll('&lt;','<').replaceAll('&gt;','>').replaceAll('&nbsp;',' ');
-const plain = text => decode(text).replace(/\s+/gu,' ').trim();
+// Both inputs are text: the browser already extracted DOM textContent, and the
+// snapshot title is source text. Entity decoding here would merge distinct titles.
+const plain = text => text.replace(/\s+/gu,' ').trim();
 export function expectedVisibleBody(markdown) {
   return markdown.split('\n').filter(line => line.trim() && !/^[\s|:-]+$/.test(line))
     .map(line => line.replace(/^\s*(?:#{1,6}\s+|[-*+]\s+|[0-9]+[.)]\s+)/,'')
