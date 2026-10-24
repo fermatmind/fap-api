@@ -11,6 +11,7 @@ use App\Filament\Ops\Support\ArticleControlledPublicationWorkspace;
 use App\Filament\Ops\Support\ArticleEditorialPackageWorkspace;
 use App\Filament\Ops\Support\ArticleExistingPackageWorkspace;
 use App\Filament\Ops\Support\ArticleHreflangWorkspace;
+use App\Filament\Ops\Support\ArticleManualSourceReviewWorkspace;
 use App\Filament\Ops\Support\ArticlePublishedFaqWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
@@ -182,6 +183,31 @@ class EditArticle extends EditRecord
                         ]))
                         ->success()
                         ->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            // @review-surface article_translation_revision
+            Action::make('confirmManualSourceReview')
+                ->label('确认人工译文源版本')
+                ->icon('heroicon-o-language')
+                ->visible(fn (): bool => ContentAccess::canWrite() && ! $this->getRecord()->isSourceArticle()
+                    && $this->getRecord()->workingRevision?->revision_status === \App\Models\ArticleTranslationRevision::STATUS_HUMAN_REVIEW)
+                ->modalDescription('核对两份完整预览后，将当前未批准人工译文绑定到当前已发布源文。正文、发布指针和导入记录保持不变，随后仍须编辑审核和原生发布校验。')
+                ->fillForm(fn (): array => app(ArticleManualSourceReviewWorkspace::class)->prepare($this->getRecord()))
+                ->form([
+                    Textarea::make('source_hash')->label('源文状态')->readOnly()->required()->rows(2),
+                    Textarea::make('target_hash')->label('译文状态')->readOnly()->required()->rows(2),
+                    Textarea::make('review_context')->label('待核对版本与预览')->readOnly()->dehydrated(false)->rows(8),
+                    Checkbox::make('source_reviewed')->label('已核对这两份完整预览，人工译文与当前源文相符')->accepted(),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        app(ArticleManualSourceReviewWorkspace::class)->confirm($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.source_reviewed' => $exception->errors()['source_reviewed'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    Notification::make()->title('人工译文源版本已确认；仍需编辑审核')->success()->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
                 }),
             // @review-surface article
@@ -388,6 +414,7 @@ class EditArticle extends EditRecord
             'seo_title' => $record->seoMeta?->seo_title ?? $revisionState['seo_title'] ?? null,
             'seo_description' => $record->seoMeta?->seo_description ?? $revisionState['seo_description'] ?? null,
             'canonical_url' => $record->seoMeta?->canonical_url,
+            'robots' => $record->seoMeta?->robots,
             'og_title' => $record->seoMeta?->og_title,
             'og_description' => $record->seoMeta?->og_description,
             'og_image_url' => $record->seoMeta?->og_image_url,
@@ -415,6 +442,7 @@ class EditArticle extends EditRecord
             'seo_title' => $data['seo_title'] ?? null,
             'seo_description' => $data['seo_description'] ?? null,
             'canonical_url' => $data['canonical_url'] ?? null,
+            ...array_intersect_key($data, ['robots' => true]),
             'og_title' => $data['og_title'] ?? null,
             'og_description' => $data['og_description'] ?? null,
             'og_image_url' => $data['og_image_url'] ?? null,
@@ -433,6 +461,7 @@ class EditArticle extends EditRecord
             $data['seo_description'],
             $data['working_revision_status'],
             $data['canonical_url'],
+            $data['robots'],
             $data['og_title'],
             $data['og_description'],
             $data['og_image_url']

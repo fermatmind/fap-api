@@ -392,6 +392,17 @@ class ArticleResource extends Resource
                                     ->label(__('ops.resources.articles.fields.canonical_url'))
                                     ->maxLength(255)
                                     ->helperText(__('ops.resources.articles.helpers.canonical_url')),
+                                Forms\Components\Select::make('robots')
+                                    ->label('Robots')
+                                    ->visible(fn (string $operation): bool => $operation === 'edit')
+                                    ->dehydrated(fn (string $operation): bool => $operation === 'edit')
+                                    ->options([
+                                        'index,follow' => 'index,follow',
+                                        'noindex,follow' => 'noindex,follow',
+                                        'noindex,nofollow' => 'noindex,nofollow',
+                                        'index,nofollow' => 'index,nofollow',
+                                    ])
+                                    ->helperText('保存后立即更新文章 SEO；索引与发布资格仍由原生校验决定。'),
                                 Forms\Components\TextInput::make('og_title')
                                     ->label(__('ops.resources.articles.fields.og_title'))
                                     ->maxLength(90)
