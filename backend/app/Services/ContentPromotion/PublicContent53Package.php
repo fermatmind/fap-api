@@ -769,7 +769,8 @@ final class PublicContent53Package
             }
             $seen[$id] = true;
             if ($aiGate && (($row['enable_hreflang'] ?? null) !== true
-                || $row['before'] !== $row['snapshot'] || $row['staging_before'] !== $row['snapshot']
+                || PromotionContextFactory::canonicalJson($row['before'] ?? []) !== PromotionContextFactory::canonicalJson($row['snapshot'] ?? [])
+                || PromotionContextFactory::canonicalJson($row['staging_before'] ?? []) !== PromotionContextFactory::canonicalJson($row['snapshot'] ?? [])
                 || ($row['source_identity']['translation_group_id'] ?? null) !== 'article-14'
                 || ($row['staging_source_identity']['translation_group_id'] ?? null) !== 'article-14')) {
                 throw new DomainException('public_content_53_amendment_gate_only_invalid');

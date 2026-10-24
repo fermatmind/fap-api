@@ -952,10 +952,13 @@ PHP;
         $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/article-amendment.json')), true);
         $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/article-amendment-review.json')), true);
         try {
-            foreach (['nonbody', 'identity', 'extra-field', 'review', 'wrong-locale', 'unselected-chinese', 'missing-language', 'missing-gate', 'body-change', 'old-baseline', 'group'] as $case) {
+            foreach (['nonbody', 'identity', 'extra-field', 'review', 'wrong-locale', 'unselected-chinese', 'missing-language', 'missing-gate', 'body-change', 'old-baseline', 'group', 'key-order'] as $case) {
                 $candidate = $package;
                 $review = $proof;
-                if ($case === 'missing-language') {
+                if ($case === 'key-order') {
+                    $candidate['candidates'][0]['before'] = array_reverse($candidate['candidates'][0]['before'], true);
+                    $candidate['candidates'][1]['staging_before'] = array_reverse($candidate['candidates'][1]['staging_before'], true);
+                } elseif ($case === 'missing-language') {
                     array_pop($candidate['candidates']);
                     unset($review['pages']['PAGE-17']);
                 } elseif ($case === 'missing-gate') {
@@ -992,8 +995,12 @@ PHP;
                 file_put_contents($directory.'/article-amendment-review.json', json_encode($review));
                 try {
                     app(PublicContent53Package::class)->read($root, $this->amendmentDigest($root));
+                    if ($case === 'key-order') {
+                        continue;
+                    }
                     self::fail('Invalid amendment must be rejected');
                 } catch (DomainException $e) {
+                    self::assertNotSame('key-order', $case, $e->getMessage());
                     self::assertStringStartsWith('public_content_53_amendment_', $e->getMessage());
                 }
             }
