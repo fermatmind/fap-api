@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {nightlyRunHistory,phpRepairBaseline} from './nightly-repair.mjs';
+import {nightlyRunHistory,phpRepairBaseline,repairDomains} from './nightly-repair.mjs';
+
+import {mkdtempSync,writeFileSync,rmSync,readFileSync,chmodSync,mkdirSync} from 'node:fs';
+import {execFileSync,spawnSync} from 'node:child_process';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
 
 const head='b'.repeat(40),base='a'.repeat(40);
 const run=(id,extra={})=>({id,head_sha:head,status:'completed',conclusion:'failure',head_branch:'main',run_attempt:1,...extra});
@@ -40,4 +45,60 @@ test('missing history, API errors and missing PHP job inventory fail closed',asy
   await assert.rejects(phpRepairBaseline(nightlyRunHistory(listRuns,1),()=>php('success'),head,()=>true),/INVENTORY_HOLD|API unavailable/);
  }
  await assert.rejects(phpRepairBaseline([run(1)],()=>[],head,()=>true),/NIGHTLY_PHP_BASE_HOLD/);
+});
+
+test('JS/TS scan inputs and configuration select security without broad PHP checks',()=>{
+ const root=mkdtempSync(join(tmpdir(),'nightly-scan-inputs-'));
+ try {
+  execFileSync('git',['init','-q'],{cwd:root});writeFileSync(join(root,'README.md'),'fixture');execFileSync('git',['add','README.md'],{cwd:root});
+  const workflowSource=readFileSync(new URL('../workflows/nightly.yml',import.meta.url),'utf8');
+  const push=workflowSource.split('    paths:\n')[1].split('  schedule:')[0];
+  writeFileSync(join(root,'.git/info/exclude'),[...push.matchAll(/- '([^']+)'/g)].map(match=>match[1]).join('\n'));
+  const triggered=path=>spawnSync('git',['-c','core.excludesFile=/dev/null','check-ignore','--no-index',path],{cwd:root}).status===0;
+  const plan=paths=>repairDomains(paths,root);
+  for(const path of ['.github/trunk/impact-consumers.mjs','.github/trunk/eq-new-source-online-qa.mjs',
+   '.github/trunk/public-content-53-online-qa.mjs','.github/trunk/iq-public-article-online-qa.test.mjs',
+   'new/unknown-name.ts','index.js','test.cjs','test.jsx','view.tsx','module.mts','module.cts','page.html','component.vue',
+   '.github/codeql/unknown-config.yml','queries/custom.ql','queries/model.qll','queries/suite.qls','package.json','nested/package-lock.json','pnpm-lock.yaml','tsconfig.build.json','.gitignore']) {
+   const result=plan([path]);assert.ok(triggered(path),path+': push trigger');assert.equal(result.security,true,path);assert.equal(result.semgrep,false,path);
+   for(const key of ['php_required','authority','dependency'])assert.equal(result[key],false,path+': '+key);
+  }
+  for(const path of ['docs/guide.md','backend/content_assets/package/assets.json','backend/lang/en/messages.php','README.md']) {
+   const result=plan([path]);assert.equal(triggered(path),false,path+': push trigger');assert.equal(result.security,false,path);
+   assert.equal(result.php_required,false,path);assert.equal(result.dependency,false,path);
+  }
+  for(const path of ['.github/workflows/nightly.yml','.semgrepignore','backend/.semgrep.yml','backend/.semgrep.yaml','backend/app/Policies/Unknown.php']) {
+   const result=plan([path]);assert.equal(result.security,true,path);assert.equal(result.semgrep,true,path);
+  }
+  const workflow=plan(['.github/workflows/ci.yml']);assert.equal(workflow.security,true);assert.equal(workflow.workflow,true);assert.equal(workflow.php_required,false);
+  // A PHP-skipped repair must not make every later PHP test re-scan old JS.
+  const later=repairDomains(['old.mjs','backend/tests/Unit/ChangedTest.php'],root,[],['backend/tests/Unit/ChangedTest.php']);
+  assert.equal(later.security,false);assert.equal(later.php_required,true);
+ } finally {rmSync(root,{recursive:true,force:true});}
+});
+
+test('push scan selection uses the actual diff and rejects missing or non-forward push baselines',()=>{
+ const root=mkdtempSync(join(tmpdir(),'nightly-push-scan-'));
+ try {
+  const git=args=>execFileSync('git',args,{cwd:root,encoding:'utf8'}).trim();
+  git(['init','-q']);writeFileSync(join(root,'README.md'),'fixture');git(['add','README.md']);
+  const commit=()=>git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture']);
+  commit();const base=git(['rev-parse','HEAD']);writeFileSync(join(root,'new.mjs'),'export const value=1;');git(['add','new.mjs']);commit();const head=git(['rev-parse','HEAD']);
+  mkdirSync(join(root,'bin'));
+  const gh=join(root,'bin/gh');
+  writeFileSync(gh,`#!${process.execPath}
+const path=process.argv.at(-1);
+process.stdout.write(JSON.stringify(path.includes('/jobs?')?{total_count:1,jobs:[{name:'Focused PHPUnit regression and performance contracts',conclusion:'success'}]}:{workflow_runs:[{id:2,head_sha:'${base}',status:'completed',conclusion:'success',head_branch:'main',run_attempt:1}]}));
+`);chmodSync(gh,0o755);
+  const script=new URL('./nightly-repair.mjs',import.meta.url).pathname;
+  const execute=(before,sha=head)=>spawnSync(process.execPath,[script],{cwd:root,encoding:'utf8',timeout:10000,
+   env:{...process.env,PATH:join(root,'bin')+':'+process.env.PATH,GITHUB_SHA:sha,PUSH_BEFORE:before,GITHUB_RUN_ID:'1',GITHUB_REPOSITORY:'fixture/repo',GITHUB_OUTPUT:join(root,'outputs')}});
+  const accepted=execute(base);assert.equal(accepted.status,0,accepted.stderr);
+  const receipt=JSON.parse(readFileSync(join(root,'nightly-repair.json')));
+  assert.equal(receipt.security,true);assert.deepEqual(receipt.scan_paths,['new.mjs']);
+  assert.match(readFileSync(join(root,'outputs'),'utf8'),/security=true/);
+  for(const [before,sha] of [['',head],['0'.repeat(40),head],['unknown',head],[head,base]]) {
+   const failed=execute(before,sha);assert.notEqual(failed.status,0);assert.match(failed.stderr,/NIGHTLY_(?:REPAIR|PUSH)_BASE_HOLD/);
+  }
+ } finally {rmSync(root,{recursive:true,force:true});}
 });

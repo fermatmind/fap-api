@@ -8,11 +8,43 @@ on:
   # Repair affected evidence domains; scheduled weekly checks remain complete.
   push:
     branches: [main]
+    # Keep source/config patterns aligned with nightly-repair codeqlInput.
     paths:
-      - '.github/workflows/nightly.yml'
-      - '.github/trunk/seo-platform-12a08-evidence-download.mjs'
-      - '.github/trunk/seo-platform-12a08-release.mjs'
-      - '.github/trunk/nightly-*.mjs'
+      - '.github/workflows/**'
+      - '.github/codeql/**'
+      - '**/*.js'
+      - '**/*.jsx'
+      - '**/*.mjs'
+      - '**/*.cjs'
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/*.mts'
+      - '**/*.cts'
+      - '**/*.es'
+      - '**/*.es6'
+      - '**/*.htm'
+      - '**/*.html'
+      - '**/*.xhtm'
+      - '**/*.xhtml'
+      - '**/*.vue'
+      - '**/*.hbs'
+      - '**/*.ejs'
+      - '**/*.njk'
+      - '**/package.json'
+      - '**/package-lock.json'
+      - '**/npm-shrinkwrap.json'
+      - '**/yarn.lock'
+      - '**/pnpm-lock.yaml'
+      - '**/tsconfig*.json'
+      - '**/qlpack.yml'
+      - '**/codeql-pack.lock.yml'
+      - '**/*.ql'
+      - '**/*.qll'
+      - '**/*.qls'
+      - '**/.gitignore'
+      - '**/.semgrepignore'
+      - '**/.semgrep.yml'
+      - '**/.semgrep.yaml'
       - 'backend/tests/**'
   schedule:
     # Daily operations: 02:17 Asia/Shanghai.
@@ -193,6 +225,7 @@ jobs:
       authority: ${{ steps.scope.outputs.authority }}
       dependency: ${{ steps.scope.outputs.dependency }}
       security: ${{ steps.scope.outputs.security }}
+      semgrep: ${{ steps.scope.outputs.semgrep }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
@@ -525,6 +558,7 @@ jobs:
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - name: Blocking Semgrep scan
+        if: github.event_name == 'schedule' || needs.repair-scope.outputs.semgrep == 'true'
         env:
           SEMGREP_VERSION: "1.150.0"
           SEMGREP_SETUPTOOLS_VERSION: "80.9.0"

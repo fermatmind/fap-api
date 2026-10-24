@@ -197,16 +197,14 @@ test('full PHPUnit rejects empty or malformed JUnit and retains original diagnos
 });
 
 
-test('only complete-evidence implementation and producer repair changes trigger an automatic repair run', () => {
+test('source and scan configuration pushes enter focused repair without changing schedules', () => {
   const push = workflow.split('  push:\n')[1].split('  schedule:')[0];
   assert.match(push, /branches: \[main\]/);
-  assert.deepEqual([...push.matchAll(/- '([^']+)'/g)].map(match => match[1]), [
-    '.github/workflows/nightly.yml',
-    '.github/trunk/seo-platform-12a08-evidence-download.mjs',
-    '.github/trunk/seo-platform-12a08-release.mjs',
-    '.github/trunk/nightly-*.mjs',
-    'backend/tests/**',
-  ]);
+  const patterns=[...push.matchAll(/- '([^']+)'/g)].map(match=>match[1]);
+  for(const pattern of ['.github/workflows/**','.github/codeql/**','backend/tests/**',
+    ...['js','jsx','mjs','cjs','ts','tsx','mts','cts','es','es6','htm','html','xhtm','xhtml','vue','hbs','ejs','njk','ql','qll','qls'].map(ext=>'**/*.'+ext),
+    ...['package.json','package-lock.json','npm-shrinkwrap.json','yarn.lock','pnpm-lock.yaml','tsconfig*.json','qlpack.yml','codeql-pack.lock.yml','.gitignore','.semgrepignore','.semgrep.yml','.semgrep.yaml'].map(name=>'**/'+name)]) assert.ok(patterns.includes(pattern),pattern);
+  assert.ok(!patterns.includes('**') && !patterns.includes('**/*.json') && !patterns.includes('docs/**'));
   const receipt = runSummary('', { EVENT_NAME: 'push' });
   assert.equal(receipt.status, 'pass');
   assert.equal(receipt.check_scope, 'focused_evidence_repair');
@@ -229,4 +227,19 @@ test('A08-only summary cannot confer PHP success and A08 failure stays visible',
   assert.equal(receipt.check_scope,'independent_a08');
   assert.deepEqual(receipt.domains.full_phpunit,{result:'skipped',required:false});
   assert.equal(runSummary('',{...overrides,A08_RESULT:'failure'}).status,'fail');
+});
+
+test('JS push scans retain the existing CodeQL category and avoid unrelated Semgrep',()=>{
+ const security=jobSection('codeql','gsc-read-model-sync');
+ assert.match(jobSection('repair-scope','scheduler-evidence-monitor'),/semgrep: \$\{\{ steps.scope.outputs.semgrep \}\}/);
+ assert.match(security,/name: Blocking Semgrep scan\s+if: github.event_name == 'schedule' \|\| needs.repair-scope.outputs.semgrep == 'true'/);
+ assert.match(security,/languages: javascript-typescript/);
+ assert.match(security,/github\/codeql-action\/analyze@/);
+ assert.doesNotMatch(security,/category:|continue-on-error:/);
+ const notRequired=Object.fromEntries([...weeklyResults,...dailyResults].map(key=>[key,'skipped']));
+ const overrides={...notRequired,EVENT_NAME:'push',REPAIR_SCOPE:JSON.stringify({security:'true'}),SECURITY_RESULT:'success'};
+ const receipt=runSummary('',overrides);
+ assert.equal(receipt.status,'pass');
+ assert.deepEqual(receipt.domains.full_phpunit,{result:'skipped',required:false});
+ for(const result of ['failure','cancelled','skipped','']) assert.equal(runSummary('',{...overrides,SECURITY_RESULT:result}).status,'fail');
 });
