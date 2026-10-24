@@ -54,12 +54,15 @@ test('previous translation package remains readable by its own immutable digest'
  assert.equal(rows.filter(row=>row.staging_source_snapshot).length,3);
  assert.equal(rows.find(row=>row.page_id==='PAGE-32').kind,'surface');
 });
-test('AI method amendment binds the two reviewed existing language bodies only',()=>{
+test('AI method gate-only amendment binds the current published language bodies',()=>{
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');const digest=sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));const rows=readCandidateRows(root,digest).candidates;
  assert.deepEqual(rows.map(row=>row.page_id),['PAGE-AI-ZH','PAGE-17']);
  assert.deepEqual(rows.map(row=>row.identity),['zh-CN','en'].map(locale=>({org_id:0,slug:'how-16-personality-types-talk-to-an-ai-coach',locale})));
  for(const row of rows) {
   assert.equal(row.kind,'article');
+  assert.equal(row.enable_hreflang,true);
+  assert.deepEqual(row.before,row.snapshot);
+  assert.deepEqual(row.staging_before,row.snapshot);
   assert.deepEqual(Object.keys(row.snapshot).sort(),['content_md','excerpt','title']);
   for(const before of [row.before,row.staging_before]) {
    assert.equal(row.snapshot.title,before.title);assert.equal(row.snapshot.excerpt,before.excerpt);
@@ -772,4 +775,22 @@ test('IAR body-only amendment selects exactly the existing bilingual pair',()=>{
  }
  assert.equal(selectPublicContentPackage(['backend/content_assets/public_content_53/iar-amendment.json']),'iar-amendment');
  assert.throws(()=>selectPublicContentPackage(['backend/content_assets/public_content_53/iar-amendment.json','backend/content_assets/public_content_53/copy-amendment.json']),/MULTIPLE_PACKAGES/);
+});
+
+
+test('AI method hreflang acceptance requires its exact reciprocal pair and keeps canonical, robots and Atom feeds',()=>{
+ const slug='how-16-personality-types-talk-to-an-ai-coach';
+ const en=`https://fermatmind.com/en/articles/${slug}`,cn=`https://fermatmind.com/zh/articles/${slug}`;
+ for(const [id,locale,url] of [['PAGE-AI-ZH','zh-CN',cn],['PAGE-17','en',en]]) {
+  const row={page_id:id,kind:'article',enable_hreflang:true,identity:{org_id:0,locale,slug},snapshot:{title:'Guide',content_md:'Keep current prose.'}};
+  const html=`<html><head><link rel="canonical" href="${url}"><meta name="robots" content="index, follow"><link rel="alternate" type="application/atom+xml" href="https://fermatmind.com/${locale==='en'?'en':'zh'}/articles/feed.xml"></head><body><main><h1>Guide</h1><p>Keep current prose.</p></main></body></html>`;
+  const before={dom:domOf(html)};
+  const links=`<link REL="Alternate other" hrefLang="en" href="${en}"><link rel="alternate" hreflang="zh-CN" href="${cn}"><link rel="alternate" hreflang="x-default" href="${en}">`;
+  const complete=html.replace('</head>',links+'</head>');
+  assert.doesNotThrow(()=>assertDom(row,complete,before,'production'));
+  for(const altered of [html,complete.replace('hreflang="zh-CN"','hreflang="fr"'),complete.replace('hreflang="x-default"','hreflang="zh"'),complete.replace('application/atom+xml','text/html'),complete.replace('index, follow','noindex, follow'),complete.replace('Keep current prose.','')])
+   assert.throws(()=>assertDom(row,altered,before,'production'));
+  const staging=complete.replace('index, follow','noindex, follow, noarchive, nocache');
+  assert.doesNotThrow(()=>assertDom(row,staging,{dom:domOf(html.replace('index, follow','noindex, follow, noarchive, nocache'))},'staging'));
+ }
 });

@@ -70,7 +70,15 @@ $walk = function($node) use (&$walk) {
 $labels=[]; foreach($xp->query('//main//a') as $anchor) { $label=$walk($anchor); if (trim($label)!=='') $labels[$anchor->getAttribute('href')][]=$label; }
 $values = function($query,$attr=null) use($xp,$walk) { $out=[];foreach($xp->query($query) as $node) $out[]=$attr===null?$walk($node):$node->getAttribute($attr);return $out;};
 $documentTitles=[]; foreach($xp->query('/html/head/title | /html/body/title') as $node) $documentTitles[]=$node->textContent;
-$alternateEntries=[]; foreach($xp->query('//link[@rel="alternate"]') as $node) $alternateEntries[]=['href'=>$node->getAttribute('href'),'type'=>$node->getAttribute('type'),'hreflang'=>$node->getAttribute('hreflang')];
+$alternateEntries=[]; $canonicalLinks=[]; $alternateLinks=[];
+foreach($xp->query('//link') as $node) {
+ $rel=preg_split('/\s+/',strtolower(trim($node->getAttribute('rel'))));
+ if (in_array('canonical',$rel,true)) $canonicalLinks[]=$node->getAttribute('href');
+ if (in_array('alternate',$rel,true)) {
+  $alternateLinks[]=$node->getAttribute('href');
+  $alternateEntries[]=['href'=>$node->getAttribute('href'),'type'=>$node->getAttribute('type'),'hreflang'=>$node->getAttribute('hreflang')];
+ }
+}
 $quickstart=[]; foreach($xp->query('//script[@type="application/ld+json" and @id="tests-hub-quickstart-en"]') as $node) $quickstart[]=$node->textContent;
 $homeJsonLd=[]; foreach($xp->query('//script[@type="application/ld+json"]') as $node) $homeJsonLd[]=$node->textContent;
 echo json_encode(['link_labels'=>$labels,'body'=>$values($mainQuery),'h1'=>$values($mainQuery.'//h1'),'links'=>$values($mainQuery.'//a','href'),
@@ -78,8 +86,8 @@ echo json_encode(['link_labels'=>$labels,'body'=>$values($mainQuery),'h1'=>$valu
  'tests_quickstart_jsonld'=>$quickstart,'article_body'=>$values('//main//article[@data-testid="article-detail-content"]'),
  'title'=>$documentTitles,'description'=>$values('//meta[@name="description"]','content'),
  'og_title'=>$values('//meta[@property="og:title"]','content'),'og_description'=>$values('//meta[@property="og:description"]','content'),
- 'canonical'=>$values('//link[@rel="canonical"]','href'),'robots'=>$values('//meta[@name="robots"]','content'),
- 'alternates'=>$values('//link[@rel="alternate"]','href'),'alternate_entries'=>$alternateEntries],JSON_THROW_ON_ERROR);`;
+ 'canonical'=>$canonicalLinks,'robots'=>$values('//meta[@name="robots"]','content'),
+ 'alternates'=>$alternateLinks,'alternate_entries'=>$alternateEntries],JSON_THROW_ON_ERROR);`;
   return JSON.parse(execFileSync('php',['-r',code,articleSsr?'article_ssr':'dom'],{input:html,encoding:'utf8',maxBuffer:3000000,timeout:15000,stdio:['pipe','pipe','pipe']}));
 }
 export function projection(row,data) {
@@ -301,14 +309,15 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   }
   const reviewedHreflang = row.enable_hreflang === true;
   if (reviewedHreflang) {
-    const cn='https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice';
-    const en='https://fermatmind.com/en/articles/mbti-vs-holland-code-career-choice';
+    const aiPair=['PAGE-AI-ZH','PAGE-17'].includes(row.page_id) && row.identity.slug === 'how-16-personality-types-talk-to-an-ai-coach';
+    const cn='https://fermatmind.com/zh/articles/'+(aiPair ? row.identity.slug : 'mbti-vs-holland-career-choice');
+    const en='https://fermatmind.com/en/articles/'+(aiPair ? row.identity.slug : 'mbti-vs-holland-code-career-choice');
     const expected=[['en',en],['zh-CN',cn],['x-default',en]].sort();
     const entries=dom.alternate_entries;
     const languages=entries.filter(entry=>entry.hreflang).map(entry=>[entry.hreflang,entry.href]).sort();
     const feeds=entries.filter(entry=>!entry.hreflang);
     const beforeFeeds=before.dom.alternate_entries.filter(entry=>!entry.hreflang);
-    if (!['PAGE-67','PAGE-68'].includes(row.page_id) || !equal(languages,expected) || !equal(feeds,beforeFeeds))
+    if ((!aiPair && !['PAGE-67','PAGE-68'].includes(row.page_id)) || !equal(languages,expected) || !equal(feeds,beforeFeeds))
       throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
   }
   if (dom.canonical.length !== 1 || (!before.missing && (!equal(dom.canonical,before.dom.canonical) || !equal(dom.robots,before.dom.robots)))

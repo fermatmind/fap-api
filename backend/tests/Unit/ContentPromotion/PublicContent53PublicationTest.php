@@ -655,16 +655,16 @@ PHP;
 
     public static function riasecHreflangOnlyOutcomes(): array
     {
-        return [['success'], ['cache'], ['receipt']];
+        return [['success', 'riasec'], ['cache', 'riasec'], ['receipt', 'riasec'], ['success', 'ai'], ['cache', 'ai'], ['receipt', 'ai']];
     }
 
     #[DataProvider('riasecHreflangOnlyOutcomes')]
-    public function test_riasec_hreflang_only_write_is_counted_and_restored_on_closeout_failure(string $outcome): void
+    public function test_reviewed_hreflang_only_write_is_counted_and_restored_on_closeout_failure(string $outcome, string $package): void
     {
         config(['content_promotion.public_content_53_environment' => 'production',
             'ops.content_release_observability.hmac_revalidation_url' => 'https://staging.fermatmind.com/api/content-release/revalidate',
             'ops.content_release_observability.hmac_revalidation_secret' => 'test-only-secret']);
-        $sha = $this->riasecAmendmentDigest();
+        $sha = $package === 'ai' ? $this->amendmentDigest() : $this->riasecAmendmentDigest();
         $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
         $this->seedRiasecAmendment($rows, 'production', true);
         $states = app(PublicContent53State::class);
@@ -686,7 +686,7 @@ PHP;
                 'rejected_paths' => [], 'invalidated_tags' => $tags]);
         });
         $context = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
-            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 4, str_repeat('e', 64));
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), count($rows), str_repeat('e', 64));
         $directory = sys_get_temp_dir().'/riasec-hreflang-only-'.bin2hex(random_bytes(8));
         mkdir($directory, 0700);
         $service = app(ExactPackagePromotionService::class);
@@ -705,7 +705,7 @@ PHP;
                 $result = $service->execute($context, 'publish', $path);
                 self::assertSame('success', $outcome);
                 self::assertSame(2, $result['receipt']['written_count']);
-                self::assertSame(4, $result['receipt']['readback_count']);
+                self::assertSame(count($rows), $result['receipt']['readback_count']);
                 app(PublicContent53PromotionAdapter::class)->rollback($context, $result['receipt']['rollback_reference']);
             } catch (DomainException $error) {
                 self::assertSame($outcome === 'cache' ? 'public_content_53_cache_closeout_failed'
@@ -824,9 +824,14 @@ PHP;
         $sha = $this->amendmentDigest();
         $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
         self::assertCount(2, $rows);
+        $this->seedRiasecAmendment($rows, $environment);
         $articles = [];
         foreach ($rows as $row) {
-            $articles[$row['page_id']] = $this->article($row['identity'], PublicContent53Package::before($row), $row['source_identity']['translation_group_id'], $row['source_identity']['source_locale']);
+            $articles[$row['page_id']] = Article::query()->where($row['identity'])->firstOrFail();
+            $articles[$row['page_id']]->seoMeta->forceFill(['schema_json' => [
+                'editorial_package_v1' => ['faq_schema_enabled' => false],
+                'faq' => [['question' => 'Keep FAQ?', 'answer' => 'Keep this answer.']],
+            ]])->saveQuietly();
         }
         $other = $this->article(['org_id' => 0, 'slug' => 'unselected-article', 'locale' => 'en'],
             ['title' => 'Unselected', 'excerpt' => 'Keep me', 'content_md' => 'Keep original body'], 'other-group', 'en');
@@ -843,8 +848,16 @@ PHP;
             $id = $row['page_id'];
             self::assertSame($row['snapshot']['content_md'], $articles[$id]->fresh()->content_md);
             self::assertSame($before[$id]['working'], $after['state'][$id]['working']);
-            self::assertSame($before[$id]['relations'], $after['state'][$id]['relations']);
-            self::assertSame($before[$id]['values']['is_indexable'], $after['state'][$id]['values']['is_indexable']);
+            self::assertSame($before[$id]['published'], $after['state'][$id]['published']);
+            self::assertSame($before[$id]['values'], $after['state'][$id]['values']);
+            $oldSeo = $before[$id]['relations']['article_seo_meta'][0];
+            $newSeo = $after['state'][$id]['relations']['article_seo_meta'][0];
+            $schema = json_decode($newSeo['schema_json'], true);
+            self::assertTrue(data_get($schema, 'editorial_package_v1.hreflang_gate_v1.enabled'));
+            unset($schema['editorial_package_v1']['hreflang_gate_v1']);
+            self::assertSame(json_decode($oldSeo['schema_json'], true), $schema);
+            unset($oldSeo['schema_json'], $oldSeo['updated_at'], $newSeo['schema_json'], $newSeo['updated_at']);
+            self::assertSame($oldSeo, $newSeo);
         }
         $states->assertPublished($rows, $after['state']);
         self::assertSame($otherBefore, $other->fresh()->toArray());
@@ -856,21 +869,19 @@ PHP;
         self::assertSame(2, DB::transaction(fn () => $writer->publish($newOwner, $before))['written_count']);
     }
 
-    public function test_article_amendment_rolls_back_second_locale_failure_and_rejects_concurrent_edits(): void
+    public function test_article_amendment_rolls_back_second_gate_failure_and_rejects_concurrent_edits(): void
     {
         $sha = $this->amendmentDigest();
         $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
-        foreach ($rows as $row) {
-            $this->article($row['identity'], PublicContent53Package::before($row), $row['source_identity']['translation_group_id'], $row['source_identity']['source_locale']);
-        }
+        $this->seedRiasecAmendment($rows, 'production');
         $states = app(PublicContent53State::class);
         $before = $states->read($sha);
         $context = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
             str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), count($rows), str_repeat('e', 64));
-        $inserted = 0;
-        DB::listen(function ($query) use (&$inserted): void {
-            if (preg_match('/^insert into [`"]article_translation_revisions[`"]/i', $query->sql) === 1 && ++$inserted === 2) {
-                throw new DomainException('injected_second_locale_failure');
+        $updated = 0;
+        DB::listen(function ($query) use (&$updated): void {
+            if (preg_match('/^update [`"]article_seo_meta[`"]/i', $query->sql) === 1 && ++$updated === 2) {
+                throw new DomainException('injected_second_gate_failure');
             }
         });
         $writer = app(PublicContent53Writer::class);
@@ -878,9 +889,9 @@ PHP;
             DB::transaction(fn () => $writer->publish($context, $before));
             self::fail('Second locale failure must roll back the first locale');
         } catch (DomainException $error) {
-            self::assertSame('injected_second_locale_failure', $error->getMessage());
+            self::assertSame('injected_second_gate_failure', $error->getMessage());
         }
-        self::assertSame(2, $inserted);
+        self::assertSame(2, $updated);
         self::assertSame($before, $states->read($sha));
         DB::table('article_translation_revisions')->where('id', $before[$rows[0]['page_id']]['published']['id'])->update(['content_md' => 'Concurrent operator edit']);
         $changed = $states->read($sha);
@@ -893,6 +904,46 @@ PHP;
         self::assertSame($changed, $states->read($sha));
     }
 
+    public static function aiGateFailures(): array
+    {
+        return [['hold'], ['noindex'], ['unpublished'], ['missing-revision']];
+    }
+
+    #[DataProvider('aiGateFailures')]
+    public function test_article_amendment_gate_rejects_ineligible_pair_without_writes(string $case): void
+    {
+        config(['content_promotion.public_content_53_environment' => 'production']);
+        $sha = $this->amendmentDigest();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
+        $this->seedRiasecAmendment($rows, 'production');
+        $target = Article::query()->where($rows[1]['identity'])->firstOrFail();
+        if ($case === 'hold') {
+            $target->seoMeta->forceFill(['schema_json' => ['editorial_package_v1' => ['hreflang_hold' => true]]])->saveQuietly();
+        } elseif ($case === 'noindex') {
+            $target->forceFill(['is_indexable' => false])->saveQuietly();
+        } elseif ($case === 'unpublished') {
+            $target->forceFill(['status' => 'draft'])->saveQuietly();
+        } else {
+            $target->forceFill(['published_revision_id' => null])->saveQuietly();
+        }
+        $articles = Article::query()->orderBy('id')->get()->toArray();
+        $seo = ArticleSeoMeta::query()->orderBy('id')->get()->toArray();
+        $revisions = ArticleTranslationRevision::query()->orderBy('id')->get()->toArray();
+        try {
+            $states = app(PublicContent53State::class);
+            $before = $states->read($sha);
+            $context = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
+                str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 2, str_repeat('e', 64));
+            DB::transaction(fn () => app(PublicContent53Writer::class)->publish($context, $before));
+            self::fail('Ineligible pair must be rejected');
+        } catch (DomainException $error) {
+            self::assertStringStartsWith('public_content_53_', $error->getMessage());
+        }
+        self::assertSame($articles, Article::query()->orderBy('id')->get()->toArray());
+        self::assertSame($seo, ArticleSeoMeta::query()->orderBy('id')->get()->toArray());
+        self::assertSame($revisions, ArticleTranslationRevision::query()->orderBy('id')->get()->toArray());
+    }
+
     public function test_article_amendment_rejects_nonbody_changes_and_unreviewed_bytes(): void
     {
         $root = sys_get_temp_dir().'/public-content-amendment-'.bin2hex(random_bytes(6));
@@ -901,10 +952,21 @@ PHP;
         $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/article-amendment.json')), true);
         $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/article-amendment-review.json')), true);
         try {
-            foreach (['nonbody', 'identity', 'extra-field', 'review', 'wrong-locale', 'unselected-chinese'] as $case) {
+            foreach (['nonbody', 'identity', 'extra-field', 'review', 'wrong-locale', 'unselected-chinese', 'missing-language', 'missing-gate', 'body-change', 'old-baseline', 'group'] as $case) {
                 $candidate = $package;
                 $review = $proof;
-                if ($case === 'nonbody') {
+                if ($case === 'missing-language') {
+                    array_pop($candidate['candidates']);
+                    unset($review['pages']['PAGE-17']);
+                } elseif ($case === 'missing-gate') {
+                    unset($candidate['candidates'][1]['enable_hreflang']);
+                } elseif ($case === 'body-change') {
+                    $candidate['candidates'][0]['snapshot']['content_md'] .= 'Changed body';
+                } elseif ($case === 'old-baseline') {
+                    $candidate['candidates'][0]['before']['content_md'] = 'Old body';
+                } elseif ($case === 'group') {
+                    $candidate['candidates'][0]['source_identity']['translation_group_id'] = 'other-group';
+                } elseif ($case === 'nonbody') {
                     $candidate['candidates'][0]['snapshot']['title'] = 'Changed title';
                 } elseif ($case === 'home_link') {
                     $candidate['candidates'][4]['snapshot']['payload_json']['header']['groups'][0]['links'][2]['href'] = '/en/unselected';

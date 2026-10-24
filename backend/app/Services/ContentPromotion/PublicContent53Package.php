@@ -722,7 +722,7 @@ final class PublicContent53Package
         }
     }
 
-    /** Body-only amendments retain the existing native CAS, rollback and readers. */
+    /** Body amendments and the exact AI gate-only pair retain native CAS and rollback. */
     private function readArticleAmendment(string $root, string $sha, string $name = 'article-amendment'): array
     {
         $bytes = $this->bytes($root, $name.'.json');
@@ -744,6 +744,10 @@ final class PublicContent53Package
         if (in_array($name, ['riasec-amendment', 'iar-amendment'], true) && count($rows) !== count($targets)) {
             throw new DomainException('public_content_53_amendment_review_or_scope_invalid');
         }
+        $aiGate = $name === 'article-amendment' && count(array_filter($rows, static fn (array $row): bool => array_key_exists('enable_hreflang', $row))) > 0;
+        if ($aiGate && (count($rows) !== 2 || array_diff(['PAGE-AI-ZH', 'PAGE-17'], array_column($rows, 'page_id')) !== [])) {
+            throw new DomainException('public_content_53_amendment_identity_invalid');
+        }
         $seen = [];
         foreach ($rows as $row) {
             $id = $row['page_id'] ?? '';
@@ -752,6 +756,8 @@ final class PublicContent53Package
             $allowed = ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity'];
             if ($riasec) {
                 $allowed = array_merge($allowed, ['staging_snapshot', 'enable_hreflang']);
+            } elseif ($aiGate) {
+                $allowed[] = 'enable_hreflang';
             }
             if (! isset($targets[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'article'
                 || (! $riasec && $id !== 'PAGE-AI-ZH' && ($identity['locale'] ?? null) !== 'en')
@@ -762,6 +768,12 @@ final class PublicContent53Package
                 throw new DomainException('public_content_53_amendment_identity_invalid');
             }
             $seen[$id] = true;
+            if ($aiGate && (($row['enable_hreflang'] ?? null) !== true
+                || $row['before'] !== $row['snapshot'] || $row['staging_before'] !== $row['snapshot']
+                || ($row['source_identity']['translation_group_id'] ?? null) !== 'article-14'
+                || ($row['staging_source_identity']['translation_group_id'] ?? null) !== 'article-14')) {
+                throw new DomainException('public_content_53_amendment_gate_only_invalid');
+            }
             if ($riasec && (($row['enable_hreflang'] ?? null) !== in_array($id, ['PAGE-67', 'PAGE-68'], true)
                 || ($row['staging_snapshot']['content_md'] ?? null) !== ($row['snapshot']['content_md'] ?? null))) {
                 throw new DomainException('public_content_53_amendment_identity_invalid');
