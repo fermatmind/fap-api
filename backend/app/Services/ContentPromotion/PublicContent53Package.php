@@ -95,6 +95,8 @@ final class PublicContent53Package
         'PAGE-54' => ['article', 'mbti-full-report-career-relationship-communication', 'en'],
     ];
 
+    private const AI_METHOD_TARGET = ['article', 'how-16-personality-types-talk-to-an-ai-coach', 'zh-CN'];
+
     private const TRANSLATION_PAGES = [
         'PAGE-02' => 'about', 'PAGE-25' => 'careers', 'PAGE-26' => 'charter',
         'PAGE-27' => 'help-faq', 'PAGE-28' => 'help-for-business-and-research',
@@ -720,7 +722,7 @@ final class PublicContent53Package
             || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
             throw new DomainException('public_content_53_amendment_review_or_scope_invalid');
         }
-        $targets = $name === 'riasec-amendment' ? self::RIASEC_AMENDMENT_TARGETS : self::TARGETS;
+        $targets = $name === 'riasec-amendment' ? self::RIASEC_AMENDMENT_TARGETS : self::TARGETS + ['PAGE-AI-ZH' => self::AI_METHOD_TARGET];
         if ($name === 'riasec-amendment' && count($rows) !== count($targets)) {
             throw new DomainException('public_content_53_amendment_review_or_scope_invalid');
         }
@@ -734,7 +736,7 @@ final class PublicContent53Package
                 $allowed = array_merge($allowed, ['staging_snapshot', 'enable_hreflang']);
             }
             if (! isset($targets[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'article'
-                || ($name !== 'riasec-amendment' && ($identity['locale'] ?? null) !== 'en')
+                || ($name !== 'riasec-amendment' && $id !== 'PAGE-AI-ZH' && ($identity['locale'] ?? null) !== 'en')
                 || array_diff(array_keys($row), $allowed) !== []
                 || ($identity['org_id'] ?? null) !== 0
                 || ['article', $identity['slug'] ?? null, $identity['locale'] ?? null] !== $targets[$id]

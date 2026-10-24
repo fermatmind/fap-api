@@ -823,9 +823,11 @@ PHP;
         config(['content_promotion.public_content_53_environment' => $environment]);
         $sha = $this->amendmentDigest();
         $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
-        self::assertCount(1, $rows);
-        $row = $rows[0];
-        $article = $this->article($row['identity'], PublicContent53Package::before($row), $row['source_identity']['translation_group_id'], 'en');
+        self::assertCount(2, $rows);
+        $articles = [];
+        foreach ($rows as $row) {
+            $articles[$row['page_id']] = $this->article($row['identity'], PublicContent53Package::before($row), $row['source_identity']['translation_group_id'], $row['source_identity']['source_locale']);
+        }
         $other = $this->article(['org_id' => 0, 'slug' => 'unselected-article', 'locale' => 'en'],
             ['title' => 'Unselected', 'excerpt' => 'Keep me', 'content_md' => 'Keep original body'], 'other-group', 'en');
         $otherBefore = $other->fresh()->toArray();
@@ -833,21 +835,62 @@ PHP;
         $before = $states->read($sha);
         $states->assertBaseline($rows);
         $context = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
-            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 1, str_repeat('e', 64));
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), count($rows), str_repeat('e', 64));
         $writer = app(PublicContent53Writer::class);
         $after = DB::transaction(fn () => $writer->publish($context, $before));
-        self::assertSame(1, $after['written_count']);
-        self::assertSame($row['snapshot']['content_md'], $article->fresh()->content_md);
+        self::assertSame(2, $after['written_count']);
+        foreach ($rows as $row) {
+            $id = $row['page_id'];
+            self::assertSame($row['snapshot']['content_md'], $articles[$id]->fresh()->content_md);
+            self::assertSame($before[$id]['working'], $after['state'][$id]['working']);
+            self::assertSame($before[$id]['relations'], $after['state'][$id]['relations']);
+            self::assertSame($before[$id]['values']['is_indexable'], $after['state'][$id]['values']['is_indexable']);
+        }
+        $states->assertPublished($rows, $after['state']);
         self::assertSame($otherBefore, $other->fresh()->toArray());
-        self::assertSame($before[$row['page_id']]['working'], $after['state'][$row['page_id']]['working']);
-        self::assertSame($before[$row['page_id']]['relations'], $after['state'][$row['page_id']]['relations']);
-        self::assertSame($before[$row['page_id']]['values']['is_indexable'], $after['state'][$row['page_id']]['values']['is_indexable']);
         self::assertSame(0, DB::transaction(fn () => $writer->publish($context, $after['state']))['written_count']);
         DB::transaction(fn () => $writer->restore($context, $before, $after['state']));
         self::assertSame($before, $states->read($sha));
         $newOwner = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
-            str_repeat('f', 40), str_repeat('b', 64), str_repeat('c', 64), '12346', 1, str_repeat('d', 64), 1, str_repeat('e', 64));
-        self::assertSame(1, DB::transaction(fn () => $writer->publish($newOwner, $before))['written_count']);
+            str_repeat('f', 40), str_repeat('b', 64), str_repeat('c', 64), '12346', 1, str_repeat('d', 64), count($rows), str_repeat('e', 64));
+        self::assertSame(2, DB::transaction(fn () => $writer->publish($newOwner, $before))['written_count']);
+    }
+
+    public function test_article_amendment_rolls_back_second_locale_failure_and_rejects_concurrent_edits(): void
+    {
+        $sha = $this->amendmentDigest();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $sha)['candidates'];
+        foreach ($rows as $row) {
+            $this->article($row['identity'], PublicContent53Package::before($row), $row['source_identity']['translation_group_id'], $row['source_identity']['source_locale']);
+        }
+        $states = app(PublicContent53State::class);
+        $before = $states->read($sha);
+        $context = new PromotionContext(base_path(PublicContent53Package::PACKAGE), $sha, 'W3', 'PUBLIC-CONTENT-53',
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), count($rows), str_repeat('e', 64));
+        $inserted = 0;
+        DB::listen(function ($query) use (&$inserted): void {
+            if (preg_match('/^insert into [`"]article_translation_revisions[`"]/i', $query->sql) === 1 && ++$inserted === 2) {
+                throw new DomainException('injected_second_locale_failure');
+            }
+        });
+        $writer = app(PublicContent53Writer::class);
+        try {
+            DB::transaction(fn () => $writer->publish($context, $before));
+            self::fail('Second locale failure must roll back the first locale');
+        } catch (DomainException $error) {
+            self::assertSame('injected_second_locale_failure', $error->getMessage());
+        }
+        self::assertSame(2, $inserted);
+        self::assertSame($before, $states->read($sha));
+        DB::table('article_translation_revisions')->where('id', $before[$rows[0]['page_id']]['published']['id'])->update(['content_md' => 'Concurrent operator edit']);
+        $changed = $states->read($sha);
+        try {
+            DB::transaction(fn () => $writer->publish($context, $before));
+            self::fail('Concurrent content must be preserved');
+        } catch (DomainException $error) {
+            self::assertSame('public_content_53_native_prestate_drift', $error->getMessage());
+        }
+        self::assertSame($changed, $states->read($sha));
     }
 
     public function test_article_amendment_rejects_nonbody_changes_and_unreviewed_bytes(): void
@@ -858,7 +901,7 @@ PHP;
         $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/article-amendment.json')), true);
         $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/article-amendment-review.json')), true);
         try {
-            foreach (['nonbody', 'identity', 'extra-field', 'review'] as $case) {
+            foreach (['nonbody', 'identity', 'extra-field', 'review', 'wrong-locale', 'unselected-chinese'] as $case) {
                 $candidate = $package;
                 $review = $proof;
                 if ($case === 'nonbody') {
@@ -869,6 +912,13 @@ PHP;
                     $candidate['candidates'][4]['snapshot']['block_copy']['header']['groups'][0]['links'][2]['title'] = 'Unreviewed title';
                 } elseif ($case === 'home_block_missing') {
                     unset($candidate['candidates'][4]['snapshot']['block_copy']['footer']);
+                } elseif ($case === 'wrong-locale') {
+                    $candidate['candidates'][0]['identity']['locale'] = 'en';
+                } elseif ($case === 'unselected-chinese') {
+                    $candidate['candidates'][0]['page_id'] = 'PAGE-45';
+                    $candidate['candidates'][0]['identity']['slug'] = 'mbti-full-report-career-relationship-communication';
+                    unset($review['pages']['PAGE-AI-ZH']);
+                    $review['pages']['PAGE-45'] = 'PASS';
                 } elseif ($case === 'identity') {
                     $candidate['candidates'][0]['identity']['slug'] = 'unselected-article';
                 } elseif ($case === 'extra-field') {

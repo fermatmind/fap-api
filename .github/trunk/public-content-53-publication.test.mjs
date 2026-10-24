@@ -54,16 +54,18 @@ test('previous translation package remains readable by its own immutable digest'
  assert.equal(rows.filter(row=>row.staging_source_snapshot).length,3);
  assert.equal(rows.find(row=>row.page_id==='PAGE-32').kind,'surface');
 });
-test('previous article amendment still binds only the reviewed existing article body',()=>{
+test('AI method amendment binds the two reviewed existing language bodies only',()=>{
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');const digest=sha('fermatmind.public_content_article_amendment.v1\n'+['article-amendment.json','article-amendment-review.json'].map(name=>`${name}\n${sha(readFileSync(resolve(root,'content_assets/public_content_53',name)))}\n`).join(''));const rows=readCandidateRows(root,digest).candidates;
- assert.equal(rows.length,1);
- const row=rows[0];assert.equal(row.page_id,'PAGE-54');assert.equal(row.kind,'article');
- assert.deepEqual(row.identity,{org_id:0,slug:'mbti-full-report-career-relationship-communication',locale:'en'});
- for(const before of [row.before,row.staging_before]) {
-  assert.equal(row.snapshot.title,before.title);assert.equal(row.snapshot.excerpt,before.excerpt);
+ assert.deepEqual(rows.map(row=>row.page_id),['PAGE-AI-ZH','PAGE-17']);
+ assert.deepEqual(rows.map(row=>row.identity),['zh-CN','en'].map(locale=>({org_id:0,slug:'how-16-personality-types-talk-to-an-ai-coach',locale})));
+ for(const row of rows) {
+  assert.equal(row.kind,'article');
+  assert.deepEqual(Object.keys(row.snapshot).sort(),['content_md','excerpt','title']);
+  for(const before of [row.before,row.staging_before]) {
+   assert.equal(row.snapshot.title,before.title);assert.equal(row.snapshot.excerpt,before.excerpt);
+  }
+  assert.ok(row.snapshot.content_md.includes(row.identity.locale==='en'?'Synthetic exercise: turn an interest clue':'合成案例：把兴趣线索'));
  }
- assert.ok(row.snapshot.content_md.includes('Identify the tool behind the letters'));
- assert.ok(row.snapshot.content_md.includes('A/T is not a fifth official MBTI preference.'));
 });
 test('C02 article QA follows stripped CMS markers and still requires actual reader prose',()=>{
  const marker='<!-- body_visual:big_five_conscientiousness_task_plan_flow -->';
