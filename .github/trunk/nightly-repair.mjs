@@ -44,15 +44,20 @@ export async function phpRepairBaseline(runs,listJobs,head,isAncestor) {
 if(import.meta.url===`file://${process.argv[1]}`){
  const pushBase=process.env.PUSH_BEFORE,head=process.env.GITHUB_SHA;
  const api=path=>JSON.parse(execFileSync('gh',['api',`repos/${process.env.GITHUB_REPOSITORY}/${path}`],{encoding:'utf8',timeout:30000,maxBuffer:8*1024*1024}));
- const runs=nightlyRunHistory(page=>api(`actions/workflows/nightly.yml/runs?status=completed&per_page=100&page=${page}`).workflow_runs,process.env.GITHUB_RUN_ID);
- const base=await phpRepairBaseline(runs,id=>{const result=api(`actions/runs/${id}/attempts/1/jobs?per_page=100`);if(result.total_count!==result.jobs?.length)throw new Error('NIGHTLY_JOB_INVENTORY_HOLD');return result.jobs;},head,(a,b)=>/^[a-f0-9]{40}$/.test(a??'')&&spawnSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore'}).status===0);
-
- if(![base,head,pushBase].every(s=>/^[a-f0-9]{40}$/.test(s??'')&&s!=='0'.repeat(40)))throw new Error('NIGHTLY_REPAIR_BASE_HOLD');
+ if(![pushBase,head].every(s=>/^[a-f0-9]{40}$/.test(s??'')&&s!=='0'.repeat(40)))throw new Error('NIGHTLY_REPAIR_BASE_HOLD');
  if(spawnSync('git',['merge-base','--is-ancestor',pushBase,head],{stdio:'ignore'}).status!==0)throw new Error('NIGHTLY_PUSH_BASE_HOLD');
- // PHP retains its unresolved consumer union; JS scan selection follows the
- // actual push, so a PHP-skipped run cannot strand the JS scan baseline.
- const scanPaths=execFileSync('git',['diff','--name-only','-z',pushBase,head]).toString().split('\0').filter(Boolean);
- const paths=execFileSync('git',['diff','--name-only','-z',base,head]).toString().split('\0').filter(Boolean),plan=repairDomains(paths,process.cwd(),nightlyExecutionInputs(base,head),scanPaths);
+ const changed=(a,b)=>execFileSync('git',['diff','--name-only','-z',a,b]).toString().split('\0').filter(Boolean);
+ const scanPaths=changed(pushBase,head);
+ // Only a push with actual PHP/authority/dependency consumers repairs the
+ // unresolved PHP union. JS-only scans must not repeatedly inherit that union.
+ let base=pushBase,paths=scanPaths,plan=repairDomains(paths,process.cwd(),nightlyExecutionInputs(base,head));
+ if(plan.php_required||plan.authority||plan.dependency) {
+  const runs=nightlyRunHistory(page=>api(`actions/workflows/nightly.yml/runs?status=completed&per_page=100&page=${page}`).workflow_runs,process.env.GITHUB_RUN_ID);
+  base=await phpRepairBaseline(runs,id=>{const result=api(`actions/runs/${id}/attempts/1/jobs?per_page=100`);if(result.total_count!==result.jobs?.length)throw new Error('NIGHTLY_JOB_INVENTORY_HOLD');return result.jobs;},head,(a,b)=>/^[a-f0-9]{40}$/.test(a??'')&&spawnSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore'}).status===0);
+  if(!/^[a-f0-9]{40}$/.test(base??''))throw new Error('NIGHTLY_REPAIR_BASE_HOLD');
+  paths=changed(base,head);
+  plan=repairDomains(paths,process.cwd(),nightlyExecutionInputs(base,head),scanPaths);
+ }
  writeFileSync('nightly-repair.json',JSON.stringify({sha:head,base,push_base:pushBase,paths,scan_paths:scanPaths,...plan})+'\n');
  for(const key of ['php_required','workflow','authority','dependency','security','semgrep'])appendFileSync(process.env.GITHUB_OUTPUT,`${key}=${plan[key]}\n`);
  appendFileSync(process.env.GITHUB_OUTPUT,`php_files=${JSON.stringify(plan.php_files)}\n`);

@@ -88,15 +88,25 @@ test('push scan selection uses the actual diff and rejects missing or non-forwar
   const gh=join(root,'bin/gh');
   writeFileSync(gh,`#!${process.execPath}
 const path=process.argv.at(-1);
+if(process.env.FIXTURE_NO_PHP_HISTORY==='true')throw new Error('Unexpected PHP history lookup');
 process.stdout.write(JSON.stringify(path.includes('/jobs?')?{total_count:1,jobs:[{name:'Focused PHPUnit regression and performance contracts',conclusion:'success'}]}:{workflow_runs:[{id:2,head_sha:'${base}',status:'completed',conclusion:'success',head_branch:'main',run_attempt:1}]}));
 `);chmodSync(gh,0o755);
   const script=new URL('./nightly-repair.mjs',import.meta.url).pathname;
-  const execute=(before,sha=head)=>spawnSync(process.execPath,[script],{cwd:root,encoding:'utf8',timeout:10000,
-   env:{...process.env,PATH:join(root,'bin')+':'+process.env.PATH,GITHUB_SHA:sha,PUSH_BEFORE:before,GITHUB_RUN_ID:'1',GITHUB_REPOSITORY:'fixture/repo',GITHUB_OUTPUT:join(root,'outputs')}});
+  const execute=(before,sha=head,refuseHistory=true)=>spawnSync(process.execPath,[script],{cwd:root,encoding:'utf8',timeout:10000,
+   env:{...process.env,PATH:join(root,'bin')+':'+process.env.PATH,GITHUB_SHA:sha,PUSH_BEFORE:before,GITHUB_RUN_ID:'1',GITHUB_REPOSITORY:'fixture/repo',GITHUB_OUTPUT:join(root,'outputs'),FIXTURE_NO_PHP_HISTORY:refuseHistory?'true':'false'}});
   const accepted=execute(base);assert.equal(accepted.status,0,accepted.stderr);
   const receipt=JSON.parse(readFileSync(join(root,'nightly-repair.json')));
   assert.equal(receipt.security,true);assert.deepEqual(receipt.scan_paths,['new.mjs']);
+  assert.equal(receipt.base,base);assert.equal(receipt.php_required,false);assert.equal(receipt.authority,false);
   assert.match(readFileSync(join(root,'outputs'),'utf8'),/security=true/);
+  mkdirSync(join(root,'backend/tests/Unit'),{recursive:true});writeFileSync(join(root,'backend/tests/Unit/ChangedTest.php'),'<?php class ChangedTest {}');
+  git(['add','backend/tests/Unit/ChangedTest.php']);commit();const phpHead=git(['rev-parse','HEAD']);
+  const repaired=execute(head,phpHead,false);assert.equal(repaired.status,0,repaired.stderr);
+  const phpReceipt=JSON.parse(readFileSync(join(root,'nightly-repair.json')));
+  assert.equal(phpReceipt.base,base);assert.equal(phpReceipt.push_base,head);
+  assert.ok(phpReceipt.paths.includes('new.mjs'));assert.equal(phpReceipt.security,false);
+  assert.deepEqual(phpReceipt.php_files,['tests/Unit/ChangedTest.php']);
+  const missingProof=execute(head,phpHead);assert.notEqual(missingProof.status,0);assert.match(missingProof.stderr,/Unexpected PHP history lookup/);
   for(const [before,sha] of [['',head],['0'.repeat(40),head],['unknown',head],[head,base]]) {
    const failed=execute(before,sha);assert.notEqual(failed.status,0);assert.match(failed.stderr,/NIGHTLY_(?:REPAIR|PUSH)_BASE_HOLD/);
   }
