@@ -24,7 +24,7 @@ final class ReportPdfDocumentService
 
     public const MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION = 'mbti.snapshot.print_layout.v1';
 
-    public const MBTI_RESULT_PAGE_SNAPSHOT_PRINT_ASSET_HASH = 'sha256:a70492a63d613895db0586e8541e2d56a4ba902d5d4bce922c337a839b6b6d46';
+    public const MBTI_RESULT_PAGE_SNAPSHOT_PRINT_ASSET_HASH = 'sha256:845eb8bb158e07c265c33fa90569bee0c6fcd44bdcb9947773f2a0773ebdb72c';
 
     public const RESULT_PAGE_EXPORT_ENGINE = 'gotenberg_chromium';
 

@@ -536,6 +536,25 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertStatus(404);
     }
 
+    #[DataProvider('pdfEndpoints')]
+    public function test_expired_owner_token_cannot_export_a_private_mbti_pdf(string $endpoint): void
+    {
+        $this->seedScales();
+        Storage::fake('local');
+        Http::fake();
+        $attemptId = (string) Str::uuid();
+        $anon = 'synthetic_expired_pdf_owner';
+        $token = $this->issueAnonToken($anon);
+        $this->createAttempt($attemptId, 'MBTI', $anon);
+        $this->createResult($attemptId);
+        DB::table('fm_tokens')->where('token_hash', hash('sha256', $token))->update(['expires_at' => now()->subMinute()]);
+        $response = $this->withHeaders(['Authorization' => 'Bearer '.$token, 'X-Anon-Id' => $anon])
+            ->get("/api/v0.3/attempts/{$attemptId}/{$endpoint}");
+        $this->assertContains($response->status(), [401, 404]);
+        $this->assertNotSame('application/pdf', $response->headers->get('Content-Type'));
+        Http::assertNothingSent();
+    }
+
     public function test_public_mbti_result_page_pdf_uses_strict_gotenberg_surface(): void
     {
         $this->seedScales();
@@ -582,7 +601,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_snapshot');
         $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_snapshot.v4');
         $pdf->assertHeader('X-Pdf-Render-Version', 'mbti.snapshot.print_layout.v1');
-        $pdf->assertHeader('X-Pdf-Print-Asset-Hash', 'sha256:a70492a63d613895db0586e8541e2d56a4ba902d5d4bce922c337a839b6b6d46');
+        $pdf->assertHeader('X-Pdf-Print-Asset-Hash', 'sha256:845eb8bb158e07c265c33fa90569bee0c6fcd44bdcb9947773f2a0773ebdb72c');
         $pdf->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
         $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
         $this->assertNotSame('', (string) $pdf->headers->get('X-Gotenberg-Trace'));
@@ -814,7 +833,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_snapshot');
         $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_snapshot.v4');
         $pdf->assertHeader('X-Pdf-Render-Version', 'mbti.snapshot.print_layout.v1');
-        $pdf->assertHeader('X-Pdf-Print-Asset-Hash', 'sha256:a70492a63d613895db0586e8541e2d56a4ba902d5d4bce922c337a839b6b6d46');
+        $pdf->assertHeader('X-Pdf-Print-Asset-Hash', 'sha256:845eb8bb158e07c265c33fa90569bee0c6fcd44bdcb9947773f2a0773ebdb72c');
         $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
         $pdf->assertHeader('X-Pdf-Error-Stage', 'gotenberg.convert_url');
         $this->assertStringContainsString('X-Gotenberg-Trace', (string) $pdf->headers->get('Access-Control-Expose-Headers'));
@@ -921,7 +940,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_snapshot');
         $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_snapshot.v4');
         $pdf->assertHeader('X-Pdf-Render-Version', 'mbti.snapshot.print_layout.v1');
-        $pdf->assertHeader('X-Pdf-Print-Asset-Hash', 'sha256:a70492a63d613895db0586e8541e2d56a4ba902d5d4bce922c337a839b6b6d46');
+        $pdf->assertHeader('X-Pdf-Print-Asset-Hash', 'sha256:845eb8bb158e07c265c33fa90569bee0c6fcd44bdcb9947773f2a0773ebdb72c');
         $pdf->assertHeader('X-Pdf-Artifact-Cache', 'HIT');
         $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
         $this->assertStringContainsString('cached chromium export', (string) $pdf->getContent());

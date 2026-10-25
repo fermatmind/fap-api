@@ -11,7 +11,7 @@ return [
     'result_print_token_secret' => env('GOTENBERG_RESULT_PRINT_TOKEN_SECRET', ''),
     'result_print_asset_hash' => env(
         'GOTENBERG_RESULT_PRINT_ASSET_HASH',
-        'sha256:a70492a63d613895db0586e8541e2d56a4ba902d5d4bce922c337a839b6b6d46'
+        'sha256:845eb8bb158e07c265c33fa90569bee0c6fcd44bdcb9947773f2a0773ebdb72c'
     ),
     'timeout_seconds' => (int) env('GOTENBERG_TIMEOUT_SECONDS', 60),
     'connect_timeout_seconds' => (int) env('GOTENBERG_CONNECT_TIMEOUT_SECONDS', 5),
