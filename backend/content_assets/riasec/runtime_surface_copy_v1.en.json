@@ -1,0 +1,110 @@
+{
+  "schema_version": "riasec.runtime_surface_copy.v1",
+  "locale": "en",
+  "content_version": "riasec_runtime_surface_copy_v1.en",
+  "frontend_fallback_allowed": false,
+  "supported_unordered_key": "R_I_A",
+  "dimension_reading_lines": {
+    "R": {
+      "label": "Realistic",
+      "short": "hands-on",
+      "focus": "tangible objects, tools, on-site conditions, materials, and visible results",
+      "action": "work with tangible objects, tools, or on-site conditions"
+    },
+    "I": {
+      "label": "Investigative",
+      "short": "inquiry",
+      "focus": "questions, evidence, mechanisms, variables, and ways of explaining",
+      "action": "analyze questions, evidence, variables, or ways of explaining"
+    },
+    "A": {
+      "label": "Artistic",
+      "short": "expression",
+      "focus": "expression, style, narrative, form, and experience",
+      "action": "try different approaches to expression, style, narrative, or form"
+    }
+  },
+  "top3_ordered_templates": {
+    "strategy_label": "{shorts}: three clues to observe",
+    "activity_chain": "Observe in order: first {first_action}; then {second_action}; finally {third_action}.",
+    "core_reading": "These three leading interest dimensions indicate that {labels} activities stand relatively high in this response. {code} only sets a reading order: {first_label} is the initial observation entry point, with {second_label} and {third_label} as additional entry points. It cannot establish a personality identity, ability level, or career conclusion.",
+    "positive_value": "The value of this content is to break the clues into observable small tasks: {first_label} focuses on {first_focus}; {second_label} focuses on {second_focus}; {third_label} focuses on {third_focus}. Whichever comes first only indicates which activity to gather evidence from first. These clues offer exploration questions, not job answers.",
+    "first_experiment": "Spend 30 minutes on a low-risk observation: first include an activity involving {first_short}, then one involving {second_short}, and finally one involving {third_short}. Record only which part you most want to continue.",
+    "ordered_code_handling": "{code} is the ordered three-letter code for this assessment: the first dimension, {first_label}, is the initial observation entry point; the second, {second_label}, and the third, {third_label}, are additional entry points. The order changes what to ask first and what to explore next. It is not a fixed identity, an ability conclusion, or a career answer.",
+    "low_risk_validation": "Low-risk observation: choose a small task that accommodates {first_short}, {second_short}, and {third_short} clues. Record the three activities separately and look only at activity preferences and evidence of wanting to continue.",
+    "primary_activity_chain": "Start with the first dimension, {first_label}: use it as the initial observation entry point and look for small-task evidence involving {first_focus}.",
+    "secondary_support_line": "Then consider the second dimension, {second_label}: use it as an additional observation entry point and record whether {second_focus} make the task more appealing.",
+    "tertiary_stabilizer": "The third dimension, {third_label}, is only an additional clue: observe whether {third_focus} help distinguish more specific task conditions.",
+    "activity_sequence": [
+      "Initial observation entry point: {first_action}",
+      "Second observation entry point: {second_action}",
+      "Third observation entry point: {third_action}"
+    ],
+    "free_page_teaser": "The {labels} interest clues can be observed in the order {code} without rushing to a career answer."
+  },
+  "scope": "Only R_I_A and its six orders; no new 20-group or 120-code editorial expansion.",
+  "generic_slots": {
+    "layer_140q": {
+      "task_activity_card": {
+        "title": "Task activity card",
+        "question": "Which work activities do you actually enjoy?",
+        "summary": "This card breaks interests down into more specific task activities, helping distinguish interest in the problem itself from the image suggested by a job title.",
+        "what_user_sees": [
+          "Task activities that more readily attract your interest",
+          "Task activities that may reduce your interest",
+          "One small task worth observing first"
+        ],
+        "layer_state": "140q_completed_state",
+        "applicable_form_codes": [
+          "riasec_140"
+        ],
+        "user_visible_boundary": "140Q provides clues about tasks, environments, and role responsibilities. It only makes observation of daily work more specific; it does not rewrite 60Q, compare raw scores, or provide job conclusions."
+      },
+      "environment_card": {
+        "title": "Work environment card",
+        "question": "In which settings do these activities still interest you?",
+        "summary": "The same task can feel different in different settings. This card helps separate interest in the task from day-to-day working conditions.",
+        "what_user_sees": [
+          "Quiet, in-depth inquiry versus real-world feedback",
+          "Collaborative support versus a focus on results",
+          "Open expression versus process constraints"
+        ],
+        "layer_state": "140q_completed_state",
+        "applicable_form_codes": [
+          "riasec_140"
+        ],
+        "user_visible_boundary": "140Q provides clues about tasks, environments, and role responsibilities. It only makes observation of daily work more specific; it does not rewrite 60Q, compare raw scores, or provide job conclusions."
+      },
+      "role_responsibility_card": {
+        "title": "Role responsibility card",
+        "question": "Which responsibilities are you willing to take on at work?",
+        "summary": "Enjoying a task does not mean enjoying the responsibilities of the job that contains it. This card helps you consider whether you want to define problems, express answers, support understanding, move implementation forward, or maintain processes.",
+        "what_user_sees": [
+          "Define problems",
+          "Express answers",
+          "Support understanding",
+          "Move implementation forward",
+          "Maintain processes"
+        ],
+        "layer_state": "140q_completed_state",
+        "applicable_form_codes": [
+          "riasec_140"
+        ],
+        "user_visible_boundary": "140Q provides clues about tasks, environments, and role responsibilities. It only makes observation of daily work more specific; it does not rewrite 60Q, compare raw scores, or provide job conclusions."
+      },
+      "140q_cta": {
+        "title": "Do you enjoy the task itself, or the actual day-to-day work?",
+        "summary": "60Q has already provided the interest structure for this response. 140Q only separates observation into tasks, environments, and role responsibilities, offering more clues about day-to-day work. It is not a version for correcting this result, and it does not repair, overturn, or override 60Q.",
+        "button_label": "View 140Q contextual clues",
+        "applicable_form_codes": [
+          "riasec_60"
+        ],
+        "contextual_detail_only": true,
+        "accuracy_upgrade_claim_allowed": false,
+        "overrides_60q_result": false,
+        "layer_state": "unavailable",
+        "user_visible_boundary": "140Q provides clues about tasks, environments, and role responsibilities. It only makes observation of daily work more specific; it does not rewrite 60Q, compare raw scores, or provide job conclusions."
+      }
+    }
+  }
+}

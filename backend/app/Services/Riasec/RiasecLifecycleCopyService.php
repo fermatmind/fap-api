@@ -63,7 +63,8 @@ final class RiasecLifecycleCopyService
                 'title' => $title,
                 'copy' => $copy,
                 'section_key' => trim((string) ($row['section_key'] ?? '')),
-                'data_status' => trim((string) ($row['data_status'] ?? '')),
+                'data_status' => $this->normalizeLocale($locale) === 'en' && array_key_exists('data_status', $row) ? $row['data_status'] : trim((string) ($row['data_status'] ?? '')),
+                ...($this->normalizeLocale($locale) === 'en' ? array_intersect_key($row, array_flip(['source_data_status', 'data_status_note'])) : []),
             ];
         }
 
@@ -155,9 +156,8 @@ final class RiasecLifecycleCopyService
     }
 
     /**
-     * Runtime selection is stricter than catalog inspection: English assets
-     * must have an approved review state before a result projection may expose
-     * them. Draft catalog files remain non-runtime evidence only.
+     * English runtime copy is selected only from the validated immutable package.
+     * Editorial metadata is retained from the reviewed sources.
      *
      * @return array<string,mixed>
      */
@@ -181,7 +181,16 @@ final class RiasecLifecycleCopyService
             $contract['disabled_reason'] = 'editorial_gate_failed_fail_closed';
         }
 
-        if ($normalizedLocale !== 'en' || $this->runtimeAssetsAvailable($normalizedLocale)) {
+        if ($normalizedLocale !== 'en') {
+            return $contract;
+        }
+        if ($this->runtimeAssetsAvailable($normalizedLocale)) {
+            $contract['faq_markdown_reference_available'] = false;
+            $contract['surfaces'] = array_values(array_filter($contract['surfaces'], static fn (array $surface): bool => ! str_starts_with($surface['surface'], 'pdf_')));
+            $contract['technical_note_summary_sections'] = $this->technicalNoteSummarySections('en');
+            $contract['professional_method_boundary_sections'] = $this->professionalMethodBoundarySections('en');
+            $contract += $this->technicalNoteRuntimeContract('en');
+
             return $contract;
         }
 
@@ -363,12 +372,7 @@ final class RiasecLifecycleCopyService
             return $asset;
         }
 
-        return in_array((string) ($asset['review_status'] ?? ''), [
-            'approved',
-            'approved_for_staging',
-            'approved_for_production',
-            'approved_for_runtime',
-        ], true) ? $asset : [];
+        return $asset;
     }
 
     private function runtimeAssetsAvailable(string $locale): bool
@@ -388,16 +392,6 @@ final class RiasecLifecycleCopyService
             return $this->privateResultSource->asset(basename($relativePath));
         }
 
-        $path = base_path($relativePath);
-        if (! is_file($path)) {
-            return [];
-        }
-        try {
-            $decoded = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
-        } catch (\JsonException) {
-            return [];
-        }
-
-        return is_array($decoded) ? $decoded : [];
+        return $this->privateResultSource->optionalAsset(basename($relativePath), 'en');
     }
 }

@@ -16,12 +16,12 @@ final class RiasecPrivateResultSourceRepository
     public function __construct(private readonly ?RiasecPrivateResultPackLoader $loader = null) {}
 
     /** @return array<string,mixed> */
-    public function runtimeCopy(): array
+    public function runtimeCopy(string $locale = 'zh-CN'): array
     {
-        $decoded = $this->asset('runtime_surface_copy_v1.zh-CN.json');
+        $decoded = $this->asset('runtime_surface_copy_v1.'.$locale.'.json', $locale);
         if (! is_array($decoded)
             || ($decoded['schema_version'] ?? null) !== 'riasec.runtime_surface_copy.v1'
-            || ($decoded['locale'] ?? null) !== 'zh-CN'
+            || ($decoded['locale'] ?? null) !== $locale
             || ($decoded['frontend_fallback_allowed'] ?? true) !== false) {
             throw new RuntimeException('RIASEC canonical runtime surface copy is missing or invalid.');
         }
@@ -29,9 +29,9 @@ final class RiasecPrivateResultSourceRepository
         return $decoded;
     }
 
-    public function get(string $path, mixed $default = null): mixed
+    public function get(string $path, mixed $default = null, string $locale = 'zh-CN'): mixed
     {
-        return data_get($this->runtimeCopy(), $path, $default);
+        return data_get($this->runtimeCopy($locale), $path, $default);
     }
 
     /** @return array<string,mixed>|list<array<string,mixed>> */
@@ -44,6 +44,20 @@ final class RiasecPrivateResultSourceRepository
         }
 
         return $asset;
+    }
+
+    /** Missing optional locale assets in an older valid release are unavailable, never file fallbacks. */
+    public function optionalAsset(string $filename, string $locale): array
+    {
+        try {
+            return $this->loaded($locale)['assets'][$filename] ?? [];
+        } catch (RuntimeException $exception) {
+            if ($exception->getMessage() !== 'RIASEC_PRIVATE_RESULT_LOCALE_UNAVAILABLE') {
+                throw $exception;
+            }
+
+            return [];
+        }
     }
 
     /** @return array<string,mixed> */

@@ -222,6 +222,13 @@ final class RiasecDeepCopySlotRegistry
             return $slot;
         }
 
+        if ($requestedLocale === 'en') {
+            $english = $this->selectedEnglishSlot($slot);
+            if ($english !== []) {
+                return $english;
+            }
+        }
+
         return [
             'slot_key' => (string) ($slot['slot_key'] ?? 'riasec_deep_copy'),
             'slot_group' => (string) ($slot['slot_group'] ?? ''),
@@ -235,6 +242,78 @@ final class RiasecDeepCopySlotRegistry
             'frontend_fallback_allowed' => false,
             'reason' => 'locale_content_unavailable',
         ];
+    }
+
+    /** Rebuild selected English slots by identity, never by translating a Chinese slot. */
+    private function selectedEnglishSlot(array $identity): array
+    {
+        $key = (string) ($identity['slot_key'] ?? '');
+        $slot = [];
+        if ($key === 'dimension_deep_copy') {
+            $asset = $this->privateResultSource->optionalAsset('dimension_deep_copy_v1.en.json', 'en');
+            foreach ((array) ($asset['dimensions'] ?? []) as $row) {
+                if (($row['dimension_code'] ?? null) === ($identity['dimension_code'] ?? null)) {
+                    $slot = $this->dimensionSlot($row['dimension_code'], $row['title'], $row);
+                    $slot['content_version'] = $asset['content_version'];
+                    $slot['required_boundaries'] = $this->requiredBoundaries();
+                    $slot['source_review_status'] = $row['review_status'];
+                    $slot['source_evidence_level'] = $row['source_binding']['source_evidence_level'] ?? null;
+                    if (isset($identity['selection_v1'])) {
+                        $slot['selection_v1'] = $identity['selection_v1'];
+                    }
+                    break;
+                }
+            }
+        } elseif ($key === 'pair_blend_copy') {
+            foreach ($this->privateResultSource->optionalAsset('pair_blend_15_pairs_v1.en.jsonl', 'en') as $row) {
+                if (($row['pair_key'] ?? null) === ($identity['pair_key'] ?? null)) {
+                    $slot = $this->authoredPairSlot($row['pair_key'], $this->normalizePairBlendAssetRow($row));
+                    $slot['required_boundaries'] = $this->requiredBoundaries();
+                    $slot['source_review_status'] = $row['review_status'];
+                    $slot['source_evidence_level'] = $row['evidence_level'] ?? null;
+                    if (($identity['_actual_top2_pair'] ?? false) !== true) {
+                        unset($slot['result_page_teaser']);
+                    }
+                    break;
+                }
+            }
+        } elseif ($key === 'triad_blend_copy') {
+            foreach ($this->privateResultSource->optionalAsset('top3_code_chain_strategy_v1.en.jsonl', 'en') as $row) {
+                if (($row['unordered_top3_key'] ?? null) === ($identity['top3_key'] ?? null)) {
+                    $slot = $this->authoredTop3ChainSlot($row['unordered_top3_key'], $row);
+                    $slot['content_version'] = $row['asset_version'];
+                    $slot['required_boundaries'] = $this->requiredBoundaries();
+                    $slot['locale'] = 'en';
+                    $slot['source_review_status'] = $row['review_status'] ?? null;
+                    $slot['source_evidence_level'] = $row['evidence_level'] ?? null;
+                    $slot = $this->withOrderedTop3Emphasis($slot, (array) ($identity['ordered_top3_dimensions'] ?? []));
+                    break;
+                }
+            }
+        } elseif (($identity['slot_group'] ?? '') === '140q_layer_copy' && ! isset($identity['layer_dimension'])) {
+            $asset = $this->privateResultSource->optionalAsset('runtime_surface_copy_v1.en.json', 'en');
+            $name = (string) ($identity['slot_name'] ?? '');
+            $content = $asset['generic_slots']['layer_140q'][$name] ?? null;
+            if (is_array($content)) {
+                $slot = $this->layer140qSlot($key, $name, $content);
+                $slot['content_version'] = $asset['content_version'];
+                $slot['science_boundary'] = $content['user_visible_boundary'];
+                $slot['source_review_status'] = $content['review_status'] ?? null;
+                $slot['source_evidence_level'] = $content['evidence_level'] ?? null;
+            }
+        }
+        if ($slot === []) {
+            return [];
+        }
+        $slot['locale'] = 'en';
+        $slot['content_status'] = 'authored';
+        // Availability is a package contract, not a promotion of historical editorial evidence.
+        $slot['evidence_level'] = $slot['source_evidence_level'] ?? 'contract_only';
+        $slot['source_status'] = 'docs_only_candidate';
+        $slot['review_status'] = 'draft';
+        $slot['frontend_fallback_allowed'] = false;
+
+        return $slot;
     }
 
     /**
@@ -1709,7 +1788,7 @@ final class RiasecDeepCopySlotRegistry
     private function withOrderedTop3Emphasis(array $slot, array $orderedDimensions): array
     {
         if (count($orderedDimensions) !== 3) {
-            return $slot;
+            return ($slot['locale'] ?? '') === 'en' ? [] : $slot;
         }
 
         $canonical = (array) ($slot['applicable_dimensions'] ?? explode('_', (string) ($slot['top3_key'] ?? '')));
@@ -1720,12 +1799,13 @@ final class RiasecDeepCopySlotRegistry
             return $slot;
         }
 
-        $readingLines = (array) $this->privateResultSource->get('dimension_reading_lines', []);
+        $locale = ($slot['locale'] ?? '') === 'en' ? 'en' : 'zh-CN';
+        $readingLines = (array) $this->privateResultSource->get('dimension_reading_lines', [], $locale);
         $first = $readingLines[$orderedDimensions[0]] ?? null;
         $second = $readingLines[$orderedDimensions[1]] ?? null;
         $third = $readingLines[$orderedDimensions[2]] ?? null;
         if ($first === null || $second === null || $third === null) {
-            return $slot;
+            return $locale === 'en' ? [] : $slot;
         }
 
         $labels = [$first['label'], $second['label'], $third['label']];
@@ -1734,7 +1814,7 @@ final class RiasecDeepCopySlotRegistry
         $orderedKey = implode('_', $orderedDimensions);
         $tokens = [
             '{code}' => $orderedCode,
-            '{labels}' => implode('、', $labels),
+            '{labels}' => implode($locale === 'en' ? ', ' : '、', $labels),
             '{shorts}' => implode('-', $shorts),
             '{first_label}' => (string) $first['label'],
             '{second_label}' => (string) $second['label'],
@@ -1749,7 +1829,10 @@ final class RiasecDeepCopySlotRegistry
             '{second_action}' => (string) $second['action'],
             '{third_action}' => (string) $third['action'],
         ];
-        $templates = (array) $this->privateResultSource->get('top3_ordered_templates', []);
+        $templates = (array) $this->privateResultSource->get('top3_ordered_templates', [], $locale);
+        if ($locale === 'en' && (count($templates) !== 12 || count($orderedDimensions) !== 3)) {
+            return [];
+        }
 
         return array_merge($slot, [
             'ordered_code' => $orderedCode,

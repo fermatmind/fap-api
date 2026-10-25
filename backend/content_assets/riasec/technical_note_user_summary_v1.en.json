@@ -7,27 +7,67 @@
   "summary_sections": [
     {
       "title": "What this assessment measures",
-      "copy": "RIASEC measures your interest strength across different work activities, such as hands-on work, analysis, expression, support, persuasion, and organization."
+      "copy": "RIASEC measures your interest strength across different work activities, such as hands-on work, analysis, expression, support, persuasion, and organization.",
+      "section_key": "test_goal",
+      "data_status": null,
+      "source_data_status": "currently_operational",
+      "data_status_note": "Source status retained separately. English operational status is UNKNOWN; not auto-promoted from Chinese metadata."
     },
     {
       "title": "What this assessment does not measure",
-      "copy": "It does not measure ability, personality identity, career success, income, job performance, or hiring risk."
+      "copy": "It does not measure ability, personality identity, career success, income, job performance, or hiring risk.",
+      "section_key": "measurement_boundary",
+      "data_status": null,
+      "source_data_status": "currently_operational",
+      "data_status_note": "Source status retained separately. English operational status is UNKNOWN; not auto-promoted from Chinese metadata."
     },
     {
       "title": "How 60Q and 140Q relate",
-      "copy": "60Q describes the basic interest structure. 140Q separates task, environment, and role-responsibility clues. 140Q is more contextual, not more accurate, and it does not overturn 60Q."
+      "copy": "60Q describes the basic interest structure. 140Q separates task, environment, and role-responsibility clues. 140Q is more contextual, not more accurate, and it does not overturn 60Q.",
+      "section_key": "riasec_140_context",
+      "data_status": null,
+      "source_data_status": "currently_operational",
+      "data_status_note": "Source status retained separately. English operational status is UNKNOWN; not auto-promoted from Chinese metadata."
     },
     {
       "title": "How to read scores",
-      "copy": "0-100 is a within-form interest-strength conversion. It is not a population percentile and it is not an ability score."
+      "copy": "0-100 is a within-form interest-strength conversion. It is not a population percentile and it is not an ability score.",
+      "section_key": "score_space_boundary",
+      "data_status": null,
+      "source_data_status": "currently_operational",
+      "data_status_note": "Source status retained separately. English operational status is UNKNOWN; not auto-promoted from Chinese metadata."
     },
     {
       "title": "How to read occupation examples",
-      "copy": "Occupation examples only show where some activities may appear. When source rows are not attached, they must be labeled as content examples."
+      "copy": "Occupation examples only show where some activities may appear. When source rows are not attached, they must be labeled as content examples.",
+      "section_key": "career_examples_boundary",
+      "data_status": null,
+      "source_data_status": "partial",
+      "data_status_note": "Source status retained separately. English operational status is UNKNOWN; not auto-promoted from Chinese metadata."
     },
     {
       "title": "How feedback is used",
-      "copy": "Saved, excluded, aspiration, disagreement, and experiment feedback can shape exploration paths, but they do not change assessment scores, report snapshots, or share content."
+      "copy": "Feedback belongs to exploration, not measurement. It must not change assessment scores, report snapshots, or share content. In this version, feedback records are not connected to the report.",
+      "section_key": "feedback_boundary",
+      "data_status": null,
+      "source_data_status": "planned",
+      "data_status_note": "Source status retained separately. English operational status is UNKNOWN; not auto-promoted from Chinese metadata."
+    },
+    {
+      "title": "Quality boundary",
+      "copy": "60Q currently declares only a minimum answer-completion rule. It does not support a strong low_quality judgment.",
+      "section_key": "quality_boundary",
+      "data_status": null,
+      "source_data_status": "currently_operational",
+      "data_status_note": "Source status retained separately. English operational status is UNKNOWN; not auto-promoted from Chinese metadata."
+    },
+    {
+      "title": "Report snapshot",
+      "copy": "A formal report must be bound to the snapshot at generation. Share, PDF, and history surfaces should read the same auditable result.",
+      "section_key": "snapshot_boundary",
+      "data_status": null,
+      "source_data_status": "currently_operational",
+      "data_status_note": "Source status retained separately. English operational status is UNKNOWN; not auto-promoted from Chinese metadata."
     }
   ],
   "required_boundaries": [
@@ -62,5 +102,87 @@
   ],
   "frontend_fallback_allowed": false,
   "fallback_behavior": "omit_module",
-  "v5_editorial_note": "English technical summary draft separates measurement, form specificity, and feedback scope."
+  "v5_editorial_note": "LOCAL r2 candidate only. Eight sections and missing runtime boundaries are supplied for review; operational status remains UNKNOWN. No source or runtime review flags changed.",
+  "runtime_method_boundaries": {
+    "career_interest_only": {
+      "label": "Measurement object",
+      "copy": "RIASEC explains tendencies in work-activity interests. It does not measure ability, personality identity, career values, mental state, income potential, or probability of career success.",
+      "evidence_level": "runtime_contract",
+      "content_maturity": "v0.1"
+    },
+    "not_career_recommendation": {
+      "label": "Occupation example boundary",
+      "copy": "Occupation examples must be explained through activities and tasks. They are content examples, not matches, recommendations, rankings, or job-fit decisions.",
+      "evidence_level": "method_boundary",
+      "content_maturity": "v0.1"
+    },
+    "same_scale_not_same_score_space": {
+      "label": "Score space",
+      "copy": "riasec_60 and riasec_140 both belong to RIASEC, but use different raw score spaces. Raw score differences must not be compared across forms by default.",
+      "evidence_level": "measurement_contract",
+      "content_maturity": "v0.1"
+    },
+    "riasec_140_contextual_not_more_accurate": {
+      "label": "60Q and 140Q",
+      "copy": "140Q can only be described as contextual interest clues about daily work, not a more accurate answer.",
+      "evidence_level": "method_boundary",
+      "content_maturity": "v0.1"
+    },
+    "content_examples_not_registry_match": {
+      "label": "Occupation example boundary",
+      "copy": "Without a reviewed registry source, occupation examples must be labeled content_example_not_registry_match.",
+      "evidence_level": "content_boundary",
+      "content_maturity": "v0.1"
+    },
+    "feedback_no_score_mutation": {
+      "label": "Feedback boundary",
+      "copy": "User feedback belongs only to the exploration layer. It does not override measured_holland_code, dimension scores, or the formal report snapshot.",
+      "evidence_level": "method_boundary",
+      "content_maturity": "v0.1"
+    },
+    "snapshot_bound_report": {
+      "label": "Formal report snapshot binding",
+      "copy": "Formal reports, share, PDF, and history must use a snapshot-bound report as the basis for display.",
+      "evidence_level": "runtime_contract",
+      "content_maturity": "v0.1"
+    },
+    "quality_boundary_60q_minimal": {
+      "label": "60Q quality boundary",
+      "copy": "60Q currently has no strong low_quality rule. It can only declare minimal_answer_completion_only.",
+      "evidence_level": "measurement_contract",
+      "content_maturity": "v0.1"
+    }
+  },
+  "runtime_disclaimers": [
+    {
+      "key": "not_ability_or_personality",
+      "label": "Not an ability or personality measure",
+      "copy": "RIASEC does not measure ability, personality, values, or long-term career outcomes."
+    },
+    {
+      "key": "not_hiring_screening",
+      "label": "Not for hiring or screening",
+      "copy": "RIASEC must not be used for recruiting, promotion, elimination, or employment screening."
+    },
+    {
+      "key": "no_cross_form_raw_delta",
+      "label": "No cross-form raw score differences",
+      "copy": "60Q and 140Q do not permit raw score difference comparisons by default."
+    },
+    {
+      "key": "riasec_140_not_more_accurate",
+      "label": "140Q is not a more accurate result",
+      "copy": "140Q can only provide more specific contextual interest clues."
+    },
+    {
+      "key": "examples_not_matches",
+      "label": "Occupation examples are not matches",
+      "copy": "Occupation examples are content examples, not occupational database matches or job recommendations."
+    },
+    {
+      "key": "feedback_overlay_boundary",
+      "label": "Feedback-layer boundary",
+      "copy": "Feedback does not change measured_holland_code, scores, or the formal report snapshot."
+    }
+  ]
 }

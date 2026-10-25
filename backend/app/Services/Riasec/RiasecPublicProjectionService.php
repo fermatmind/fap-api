@@ -347,10 +347,12 @@ final class RiasecPublicProjectionService
             );
         }
 
-        foreach ($this->selectedPairKeys($topCode) as $pairKey) {
+        foreach ($this->selectedPairKeys($topCode) as $pairIndex => $pairKey) {
+            $pairSlot = $this->deepCopySlots->resolvePairBlendSlot($pairKey);
+            $pairSlot['_actual_top2_pair'] = $pairIndex === 0;
             $this->appendRenderableSlot(
                 $slots,
-                $this->deepCopySlots->resolvePairBlendSlot($pairKey),
+                $pairSlot,
                 'pair_blend',
                 $modulePolicy,
                 $locale
@@ -895,6 +897,15 @@ final class RiasecPublicProjectionService
         $contentKeys = [
             'title',
             'core_drive',
+            'interest_activity_focus',
+            'possible_drains',
+            'context_costs',
+            'misread_guardrails',
+            'validation_questions',
+            'pair_tension',
+            'micro_experiment',
+            'result_page_teaser',
+            'deep_report_extension_hint',
             'positive_value',
             'real_world_cost',
             'high_score_reading',
@@ -944,7 +955,11 @@ final class RiasecPublicProjectionService
             'role' => 'role_responsibility_card',
             default => null,
         };
+        $englishOnlyContentKeys = ['interest_activity_focus', 'possible_drains', 'context_costs', 'misread_guardrails', 'validation_questions', 'pair_tension', 'micro_experiment', 'result_page_teaser', 'deep_report_extension_hint'];
         foreach ($contentKeys as $key) {
+            if (! str_starts_with(strtolower($locale), 'en') && in_array($key, $englishOnlyContentKeys, true)) {
+                continue;
+            }
             if ($layerContentKey !== null && in_array($key, ['task_activity_card', 'environment_card', 'role_responsibility_card'], true) && $key !== $layerContentKey) {
                 continue;
             }
@@ -973,6 +988,7 @@ final class RiasecPublicProjectionService
             ...$this->publicReviewContract->project($slot['review_status'] ?? null),
             'source_status' => (string) ($slot['source_status'] ?? ''),
             'evidence_level' => (string) ($slot['evidence_level'] ?? ''),
+            ...(str_starts_with(strtolower($locale), 'en') ? ['source_review_status' => $slot['source_review_status'] ?? null, 'source_evidence_level' => $slot['source_evidence_level'] ?? null] : []),
             'locale' => (string) ($slot['locale'] ?? (str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en')),
             'frontend_fallback_allowed' => false,
             'fallback_behavior' => (string) ($slot['fallback_behavior'] ?? 'omit_module'),

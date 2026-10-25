@@ -1,0 +1,456 @@
+{
+  "schema_version": "riasec.deep_copy_slot_schema.v1_plus_medium_score_reading_candidate",
+  "locale": "en",
+  "content_version": "riasec_dimension_deep_copy_v1.en",
+  "frontend_fallback_allowed": false,
+  "dimensions": [
+    {
+      "dimension_code": "R",
+      "locale": "en",
+      "review_status": "draft_human_review_required",
+      "content_status": "editorial_candidate",
+      "required_boundaries": [
+        "interest_evidence_only",
+        "not_career_recommendation",
+        "not_job_fit",
+        "not_success_prediction",
+        "not_ability_or_skill_measure",
+        "no_hiring_or_screening_use",
+        "no_60q_140q_raw_delta",
+        "140q_contextual_not_more_accurate",
+        "feedback_does_not_mutate_measured_result",
+        "missing_content_fails_closed",
+        "frontend_fallback_forbidden"
+      ],
+      "forbidden_claims": [
+        "ability_or_skill_inference",
+        "personality_identity",
+        "job_fit",
+        "career_success_prediction",
+        "hiring_or_screening_use",
+        "occupation_matching",
+        "occupation_ranking",
+        "income_prediction",
+        "admission_or_promotion_decision",
+        "140q_more_accurate_claim",
+        "cross_form_raw_delta_claim"
+      ],
+      "source_binding": {
+        "source_pointer": "/dimensions/0",
+        "source_content_version": "riasec_dimension_deep_copy_v1.zh-CN.r3",
+        "source_review_status": "approved_for_production",
+        "source_evidence_level": "theory_based"
+      },
+      "title": "Realistic",
+      "core_drive": "Interest in using tools, working with materials, or caring for tangible things through hands-on work with visible results. Repair, making things, operating equipment, and outdoor work can all involve these activities.",
+      "positive_value": "The appeal of these activities often comes from working directly with something: adjusting a part, testing a material, or getting equipment running again. Notice whether you enjoy making things, troubleshooting, or seeing a tangible result.",
+      "real_world_cost": "Physical demands, safety training, and coordination on site vary widely between settings. Enjoying model making does not necessarily mean enjoying long periods of outdoor work. Learning about specific tasks and conditions is more useful than looking only at job titles.",
+      "high_score_reading": "In this response, you expressed greater interest in working hands-on with tangible things. You could first explore activities involving operating, making, or troubleshooting on site, then compare how different materials, tools, and work settings feel to you.",
+      "medium_score_reading": "Your interest in hands-on activities may depend on what you work with and the setting. Think back to practical problems you willingly took on, and distinguish which parts of making, repairing, or working outdoors appealed to you.",
+      "low_score_safe_reading": "In this response, hands-on activities held relatively limited appeal. This does not mean you lack practical skills. When something specific interests you, a small, safe task can still help you explore further.",
+      "work_activity_examples": [
+        "Assemble or repair a simple object",
+        "Make and adjust a physical model",
+        "Observe equipment in operation and record anything unusual",
+        "Compare how materials differ in practical use"
+      ],
+      "common_misread": "Realistic interest does not mean strong practical skills, and it does not mean being limited to physical work. Actual skills and training conditions need separate consideration.",
+      "action_advice": "Choose something familiar from the activities below and try operating it or observing it. Afterwards, look back at the part you most wanted to continue.",
+      "interest_activity_focus": [
+        "Using tools and making physical objects"
+      ],
+      "validation_questions": [
+        "Which part do I most want to continue: working with tools and materials, troubleshooting on site, or turning steps into a visible result?",
+        "What training, safety requirements, or resources does this activity involve?",
+        "Does the interest remain when the setting or position of responsibility changes?"
+      ],
+      "possible_drains": [
+        "Physical demands, safety training, and coordination on site vary widely between settings. Enjoying model making does not necessarily mean enjoying long periods of outdoor work. Learning about specific tasks and conditions is more useful than looking only at job titles."
+      ],
+      "context_costs": [
+        "Physical demands, safety training, and coordination on site vary widely between settings. Enjoying model making does not necessarily mean enjoying long periods of outdoor work. Learning about specific tasks and conditions is more useful than looking only at job titles."
+      ],
+      "misread_guardrails": [
+        "Realistic interest does not mean strong practical skills, and it does not mean being limited to physical work. Actual skills and training conditions need separate consideration."
+      ],
+      "user_visible_boundary": "The interpretations below describe interest in activities. Skills, qualifications, and career choices require other information as well."
+    },
+    {
+      "dimension_code": "I",
+      "locale": "en",
+      "review_status": "draft_human_review_required",
+      "content_status": "editorial_candidate",
+      "required_boundaries": [
+        "interest_evidence_only",
+        "not_career_recommendation",
+        "not_job_fit",
+        "not_success_prediction",
+        "not_ability_or_skill_measure",
+        "no_hiring_or_screening_use",
+        "no_60q_140q_raw_delta",
+        "140q_contextual_not_more_accurate",
+        "feedback_does_not_mutate_measured_result",
+        "missing_content_fails_closed",
+        "frontend_fallback_forbidden"
+      ],
+      "forbidden_claims": [
+        "ability_or_skill_inference",
+        "personality_identity",
+        "job_fit",
+        "career_success_prediction",
+        "hiring_or_screening_use",
+        "occupation_matching",
+        "occupation_ranking",
+        "income_prediction",
+        "admission_or_promotion_decision",
+        "140q_more_accurate_claim",
+        "cross_form_raw_delta_claim"
+      ],
+      "source_binding": {
+        "source_pointer": "/dimensions/1",
+        "source_content_version": "riasec_dimension_deep_copy_v1.zh-CN.r3",
+        "source_review_status": "approved_for_production",
+        "source_evidence_level": "theory_based"
+      },
+      "title": "Investigative",
+      "core_drive": "Interest in asking questions, gathering evidence, and analyzing causes to understand why things work as they do. Reading research material, comparing explanations, and testing hypotheses are typical activities.",
+      "positive_value": "The appeal may lie in the question itself or in the process of checking evidence and reasoning. Notice whether you want to investigate inconsistencies, revise explanations, and keep exploring when there is no conclusion yet.",
+      "real_world_cost": "Research tasks often involve incomplete information, repeated checking, and accepting that conclusions remain uncertain. Different fields also require relevant knowledge and methodological training. Interest can be a starting point for learning.",
+      "high_score_reading": "In this response, you expressed greater interest in analysis and inquiry. You could first try looking up information, comparing evidence, or explaining a phenomenon, and observe which questions you want to explore in depth.",
+      "medium_score_reading": "You may want to investigate some topics in depth while preferring a quick, practical conclusion for others. Looking at specific questions and past experiences is more useful than labeling yourself as someone who loves research.",
+      "low_score_safe_reading": "In this response, sustained inquiry and abstract analysis held relatively limited appeal. This does not mean lower understanding or learning ability, and it does not prevent you from using analytical methods when needed.",
+      "work_activity_examples": [
+        "Turn a vague question into one that can be checked against evidence",
+        "Compare information from different sources",
+        "Propose different explanations for the same phenomenon",
+        "Design observations that distinguish between explanations"
+      ],
+      "common_misread": "Interest in research is distinct from intelligence, subject knowledge, and research skills. The score cannot demonstrate these abilities or determine a specific field of study.",
+      "action_advice": "Choose a question you are curious about. Start with a question, evidence-checking, or hypothesis activity below, then look back at the step that most interested you.",
+      "interest_activity_focus": [
+        "Checking evidence and analyzing problems"
+      ],
+      "validation_questions": [
+        "Do I want to spend time checking evidence, modeling, and comparing evidence, or do I mainly want a quick answer?",
+        "What training, data access, or professional background does this question require?",
+        "When there is no clear answer, do I want to keep asking questions or move on to carrying something out?"
+      ],
+      "possible_drains": [
+        "Research tasks often involve incomplete information, repeated checking, and accepting that conclusions remain uncertain. Different fields also require relevant knowledge and methodological training. Interest can be a starting point for learning."
+      ],
+      "context_costs": [
+        "Research tasks often involve incomplete information, repeated checking, and accepting that conclusions remain uncertain. Different fields also require relevant knowledge and methodological training. Interest can be a starting point for learning."
+      ],
+      "misread_guardrails": [
+        "Interest in research is distinct from intelligence, subject knowledge, and research skills. The score cannot demonstrate these abilities or determine a specific field of study."
+      ],
+      "user_visible_boundary": "The interpretations below describe interest in activities. Skills, qualifications, and career choices require other information as well."
+    },
+    {
+      "dimension_code": "A",
+      "locale": "en",
+      "review_status": "draft_human_review_required",
+      "content_status": "editorial_candidate",
+      "required_boundaries": [
+        "interest_evidence_only",
+        "not_career_recommendation",
+        "not_job_fit",
+        "not_success_prediction",
+        "not_ability_or_skill_measure",
+        "no_hiring_or_screening_use",
+        "no_60q_140q_raw_delta",
+        "140q_contextual_not_more_accurate",
+        "feedback_does_not_mutate_measured_result",
+        "missing_content_fails_closed",
+        "frontend_fallback_forbidden"
+      ],
+      "forbidden_claims": [
+        "ability_or_skill_inference",
+        "personality_identity",
+        "job_fit",
+        "career_success_prediction",
+        "hiring_or_screening_use",
+        "occupation_matching",
+        "occupation_ranking",
+        "income_prediction",
+        "admission_or_promotion_decision",
+        "140q_more_accurate_claim",
+        "cross_form_raw_delta_claim"
+      ],
+      "source_binding": {
+        "source_pointer": "/dimensions/2",
+        "source_content_version": "riasec_dimension_deep_copy_v1.zh-CN.r3",
+        "source_review_status": "approved_for_production",
+        "source_evidence_level": "theory_based"
+      },
+      "title": "Artistic",
+      "core_drive": "Interest in creating, expressing ideas, and exploring different forms by turning ideas into writing, images, sound, or performance. These activities usually allow multiple forms of expression rather than one standard answer.",
+      "positive_value": "The appeal may lie in developing a new angle, choosing a style, or repeatedly refining a piece of work. Distinguish whether you prefer creating freely, communicating to an audience, or improving existing content.",
+      "real_world_cost": "Creative work often involves revisions, feedback, deadlines, and audience requirements. Personal and commercial projects may offer different levels of freedom. Understanding these conditions can help you consider whether your interest will continue.",
+      "high_score_reading": "In this response, you expressed greater interest in creating and expressing ideas. You could first try different media, such as writing, visuals, or sound, and compare which forms you want to keep refining.",
+      "medium_score_reading": "Your interest in expression may center on particular media or topics. Start with your experience and distinguish whether you enjoy developing ideas, making work, or appreciating it. You do not need to be interested in every artistic activity.",
+      "low_score_safe_reading": "In this response, open-ended creative work held relatively limited appeal. This does not mean a lack of creativity or aesthetic appreciation, and it does not rule out enjoying a particular form of expression.",
+      "work_activity_examples": [
+        "Develop different ways to express the same topic",
+        "Turn complex information into an explanatory diagram",
+        "Write, take photographs, or make a sound piece",
+        "Revise the structure and style of a piece of work in response to feedback"
+      ],
+      "common_misread": "The Artistic score reflects interest in creative activities. It does not evaluate the quality of your work, your creativity, or your aesthetic ability.",
+      "action_advice": "Choose a form of expression below and finish a small piece of work. Then look back at whether you want to revise it and what you would change.",
+      "interest_activity_focus": [
+        "Creating and expressing ideas"
+      ],
+      "validation_questions": [
+        "Which part do I most want to continue: developing ideas, choosing a style, refining versions, or adjusting after feedback?",
+        "What training, tools, aesthetic standards, or conditions for collaboration does this task require?",
+        "When the work is evaluated, does my interest grow, weaken, or shift to another part of the activity?"
+      ],
+      "possible_drains": [
+        "Creative work often involves revisions, feedback, deadlines, and audience requirements. Personal and commercial projects may offer different levels of freedom. Understanding these conditions can help you consider whether your interest will continue."
+      ],
+      "context_costs": [
+        "Creative work often involves revisions, feedback, deadlines, and audience requirements. Personal and commercial projects may offer different levels of freedom. Understanding these conditions can help you consider whether your interest will continue."
+      ],
+      "misread_guardrails": [
+        "The Artistic score reflects interest in creative activities. It does not evaluate the quality of your work, your creativity, or your aesthetic ability."
+      ],
+      "user_visible_boundary": "The interpretations below describe interest in activities. Skills, qualifications, and career choices require other information as well."
+    },
+    {
+      "dimension_code": "S",
+      "locale": "en",
+      "review_status": "draft_human_review_required",
+      "content_status": "editorial_candidate",
+      "required_boundaries": [
+        "interest_evidence_only",
+        "not_career_recommendation",
+        "not_job_fit",
+        "not_success_prediction",
+        "not_ability_or_skill_measure",
+        "no_hiring_or_screening_use",
+        "no_60q_140q_raw_delta",
+        "140q_contextual_not_more_accurate",
+        "feedback_does_not_mutate_measured_result",
+        "missing_content_fails_closed",
+        "frontend_fallback_forbidden"
+      ],
+      "forbidden_claims": [
+        "ability_or_skill_inference",
+        "personality_identity",
+        "job_fit",
+        "career_success_prediction",
+        "hiring_or_screening_use",
+        "occupation_matching",
+        "occupation_ranking",
+        "income_prediction",
+        "admission_or_promotion_decision",
+        "140q_more_accurate_claim",
+        "cross_form_raw_delta_claim"
+      ],
+      "source_binding": {
+        "source_pointer": "/dimensions/3",
+        "source_content_version": "riasec_dimension_deep_copy_v1.zh-CN.r3",
+        "source_review_status": "approved_for_production",
+        "source_evidence_level": "theory_based"
+      },
+      "title": "Social",
+      "core_drive": "Interest in helping people understand problems, learn, and grow through explaining, listening, guiding, or supporting. The focus is on the process of helping people, rather than simply how often you interact with them.",
+      "positive_value": "The appeal may lie in understanding someone's needs, helping them learn something, or helping resolve a specific difficulty. Observe whether you prefer teaching, listening, or finding a way forward together.",
+      "real_world_cost": "Supporting others requires communication, patience, and clear limits of responsibility. Some roles also involve professional qualifications and emotional demands. Everyday help and professional services have different requirements.",
+      "high_score_reading": "In this response, you expressed greater interest in helping and guiding others. You could first try explaining, listening, or supporting learning, and compare how different people and ways of interacting feel to you.",
+      "medium_score_reading": "You may be willing to help others with familiar topics or within familiar relationships without wanting an ongoing support role. The person, communication style, and scope of responsibility may affect your willingness.",
+      "low_score_safe_reading": "In this response, activities centered on sustained help for others held relatively limited appeal. This does not mean a lack of empathy or an inability to cooperate.",
+      "work_activity_examples": [
+        "Explain a concept and respond to questions",
+        "Listen and check what the person actually needs",
+        "Help someone practice a skill you know",
+        "Organize materials suited to a particular learner"
+      ],
+      "common_misread": "Social interest does not mean being outgoing, kind, or well liked. An interest in helping others also cannot replace the professional training needed for teaching, counseling, or care.",
+      "action_advice": "Choose a situation where you can offer everyday help within your abilities. With the other person's willingness to participate, look back at which kind of support you enjoyed.",
+      "interest_activity_focus": [
+        "Explaining and supporting others"
+      ],
+      "validation_questions": [
+        "Which part do I most want to continue: understanding needs, explaining information, offering companionship and support, or coordinating resources?",
+        "What ethical boundaries, professional training, or capacity to handle emotional demands does this interaction require?",
+        "Does my interest remain steady when responsibility increases or the person receiving support changes?"
+      ],
+      "possible_drains": [
+        "Supporting others requires communication, patience, and clear limits of responsibility. Some roles also involve professional qualifications and emotional demands. Everyday help and professional services have different requirements."
+      ],
+      "context_costs": [
+        "Supporting others requires communication, patience, and clear limits of responsibility. Some roles also involve professional qualifications and emotional demands. Everyday help and professional services have different requirements."
+      ],
+      "misread_guardrails": [
+        "Social interest does not mean being outgoing, kind, or well liked. An interest in helping others also cannot replace the professional training needed for teaching, counseling, or care."
+      ],
+      "user_visible_boundary": "The interpretations below describe interest in activities. Skills, qualifications, and career choices require other information as well."
+    },
+    {
+      "dimension_code": "E",
+      "locale": "en",
+      "review_status": "draft_human_review_required",
+      "content_status": "editorial_candidate",
+      "required_boundaries": [
+        "interest_evidence_only",
+        "not_career_recommendation",
+        "not_job_fit",
+        "not_success_prediction",
+        "not_ability_or_skill_measure",
+        "no_hiring_or_screening_use",
+        "no_60q_140q_raw_delta",
+        "140q_contextual_not_more_accurate",
+        "feedback_does_not_mutate_measured_result",
+        "missing_content_fails_closed",
+        "frontend_fallback_forbidden"
+      ],
+      "forbidden_claims": [
+        "ability_or_skill_inference",
+        "personality_identity",
+        "job_fit",
+        "career_success_prediction",
+        "hiring_or_screening_use",
+        "occupation_matching",
+        "occupation_ranking",
+        "income_prediction",
+        "admission_or_promotion_decision",
+        "140q_more_accurate_claim",
+        "cross_form_raw_delta_claim"
+      ],
+      "source_binding": {
+        "source_pointer": "/dimensions/4",
+        "source_content_version": "riasec_dimension_deep_copy_v1.zh-CN.r3",
+        "source_review_status": "approved_for_production",
+        "source_evidence_level": "theory_based"
+      },
+      "title": "Enterprising",
+      "core_drive": "Interest in advancing goals, gaining support, coordinating resources, or influencing decisions. Starting projects, explaining proposals, negotiating, and organizing progress can all involve these activities.",
+      "positive_value": "The appeal may lie in finding opportunities, persuading others, or moving something forward. Distinguish whether you prefer proposing a direction, securing resources, or coordinating implementation.",
+      "real_world_cost": "Moving work forward often involves disagreement, pressure for results, and uncertainty. Decision-making authority, resources, and responsibility differ between roles. Enjoying starting projects does not mean wanting every management responsibility.",
+      "high_score_reading": "In this response, you expressed greater interest in influencing and moving things forward. You could first try making a proposal, gaining support, or organizing a small project, and observe which parts of the process you want to take on.",
+      "medium_score_reading": "Your willingness to move things forward may depend on whether you support the goal and whether resources are available. Think back to where you wanted to take the initiative and where you preferred to help carry things out.",
+      "low_score_safe_reading": "In this response, persuasion, competition, or taking the lead in moving things forward held relatively limited appeal. This does not mean you lack leadership potential, and it does not prevent you from taking responsibility in familiar situations.",
+      "work_activity_examples": [
+        "Explain a proposal to others and seek support",
+        "Compare the resources needed to reach a goal",
+        "Coordinate a group's responsibilities and progress",
+        "Discuss workable arrangements when views differ"
+      ],
+      "common_misread": "Enterprising interest does not mean you must start a business, and it does not demonstrate leadership or business judgment. It describes interest in influencing, organizing, and moving things forward.",
+      "action_advice": "Choose a small shared task with clear responsibilities. Look back at whether you preferred initiating it, communicating, or organizing its execution.",
+      "interest_activity_focus": [
+        "Influencing and organizing progress"
+      ],
+      "validation_questions": [
+        "Which part do I most want to continue: setting goals, securing resources, persuading people to collaborate, or making choices about risk?",
+        "What authority, resources, responsibility, and capacity to handle risk does this task require?",
+        "Am I still willing to keep moving it forward when the outcome is uncertain or feedback slows down?"
+      ],
+      "possible_drains": [
+        "Moving work forward often involves disagreement, pressure for results, and uncertainty. Decision-making authority, resources, and responsibility differ between roles. Enjoying starting projects does not mean wanting every management responsibility."
+      ],
+      "context_costs": [
+        "Moving work forward often involves disagreement, pressure for results, and uncertainty. Decision-making authority, resources, and responsibility differ between roles. Enjoying starting projects does not mean wanting every management responsibility."
+      ],
+      "misread_guardrails": [
+        "Enterprising interest does not mean you must start a business, and it does not demonstrate leadership or business judgment. It describes interest in influencing, organizing, and moving things forward."
+      ],
+      "user_visible_boundary": "The interpretations below describe interest in activities. Skills, qualifications, and career choices require other information as well."
+    },
+    {
+      "dimension_code": "C",
+      "locale": "en",
+      "review_status": "draft_human_review_required",
+      "content_status": "editorial_candidate",
+      "required_boundaries": [
+        "interest_evidence_only",
+        "not_career_recommendation",
+        "not_job_fit",
+        "not_success_prediction",
+        "not_ability_or_skill_measure",
+        "no_hiring_or_screening_use",
+        "no_60q_140q_raw_delta",
+        "140q_contextual_not_more_accurate",
+        "feedback_does_not_mutate_measured_result",
+        "missing_content_fails_closed",
+        "frontend_fallback_forbidden"
+      ],
+      "forbidden_claims": [
+        "ability_or_skill_inference",
+        "personality_identity",
+        "job_fit",
+        "career_success_prediction",
+        "hiring_or_screening_use",
+        "occupation_matching",
+        "occupation_ranking",
+        "income_prediction",
+        "admission_or_promotion_decision",
+        "140q_more_accurate_claim",
+        "cross_form_raw_delta_claim"
+      ],
+      "source_binding": {
+        "source_pointer": "/dimensions/5",
+        "source_content_version": "riasec_dimension_deep_copy_v1.zh-CN.r3",
+        "source_review_status": "approved_for_production",
+        "source_evidence_level": "theory_based"
+      },
+      "title": "Conventional",
+      "core_drive": "Interest in organizing information, checking details, and maintaining processes under clear rules. Classifying, recording, checking data, and handling tasks in an orderly way are common activities.",
+      "positive_value": "The appeal may lie in making information clear, finding errors, or keeping a process running steadily. Distinguish whether you prefer establishing order, following existing steps, or improving details.",
+      "real_world_cost": "Jobs differ in their demands for repetition, accuracy, and meeting deadlines. Enjoying organizing information does not necessarily mean enjoying long periods of repeated data entry. The clarity of a process and the reasonableness of its standards also affect the experience.",
+      "high_score_reading": "In this response, you expressed greater interest in organizing, checking, and handling tasks according to rules. You could first try classifying information, mapping a process, or checking data, and observe which parts most interest you.",
+      "medium_score_reading": "You may be willing to organize details when a task calls for it without wanting that to be the main part of your work. Compare whether you prefer establishing rules, checking for problems, or following a process over time.",
+      "low_score_safe_reading": "In this response, activities with clear rules and substantial repetition held relatively limited appeal. This does not mean you are careless or unable to complete work according to standards.",
+      "work_activity_examples": [
+        "Organize information and establish classification rules",
+        "Check the differences between two records",
+        "Write a procedure for a common task",
+        "Maintain a checklist and track the status of items"
+      ],
+      "common_misread": "Conventional interest does not mean being conservative, lacking creativity, or being reliable at work. An interest score cannot replace an evaluation of attention to detail or actual work quality.",
+      "action_advice": "Choose a set of real information that contains nothing sensitive. Try organizing or checking it, then look back at whether you enjoyed the order, finding errors, or improving the process.",
+      "interest_activity_focus": [
+        "Organizing and checking information"
+      ],
+      "validation_questions": [
+        "Which part do I most want to continue: organizing, checking, building a process, or keeping records consistent?",
+        "What understanding of rules, system access, or responsibility for errors does this task require?",
+        "Does my interest grow or decline when rules change or repetition increases?"
+      ],
+      "possible_drains": [
+        "Jobs differ in their demands for repetition, accuracy, and meeting deadlines. Enjoying organizing information does not necessarily mean enjoying long periods of repeated data entry. The clarity of a process and the reasonableness of its standards also affect the experience."
+      ],
+      "context_costs": [
+        "Jobs differ in their demands for repetition, accuracy, and meeting deadlines. Enjoying organizing information does not necessarily mean enjoying long periods of repeated data entry. The clarity of a process and the reasonableness of its standards also affect the experience."
+      ],
+      "misread_guardrails": [
+        "Conventional interest does not mean being conservative, lacking creativity, or being reliable at work. An interest score cannot replace an evaluation of attention to detail or actual work quality."
+      ],
+      "user_visible_boundary": "The interpretations below describe interest in activities. Skills, qualifications, and career choices require other information as well."
+    }
+  ],
+  "purpose": "LOCAL EDITORIAL REVIEW ONLY — NOT A RUNTIME ASSET",
+  "candidate_revision": "W08-EN16-content-r1",
+  "review_status": "draft_human_review_required",
+  "formal_domain_review": "NOT_EXECUTED",
+  "independent_english_review": "NOT_EXECUTED",
+  "production_eligible": false,
+  "asset_version": null,
+  "runtime_registration": null,
+  "source_binding": {
+    "path": "backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
+    "repository_commit": "94063d7e8ef0886bb1fe2882ab16b3a4c501d8d6",
+    "raw_sha256": "12f7fe4bff50fe978f3ef03aa720be21b8166e2a1cbcc396184403498f1267fd",
+    "canonical_decoded_sha256": "e7adf747d7ea9395daad59751f7ff6490bff89dec9c3ea0ad0812619e9a4188b",
+    "manifest_bound": true,
+    "manifest_source_hash": "f222c798dd7d12c43bb003d2957e9bfb44a533bf485c2850cb0fc2be138cd3c7",
+    "asset_review_status": "approved_for_production",
+    "provenance": "FermatMind backend-authored content assets; repository final-QA scope and explicit user authorization for local translation",
+    "permission_scope": "Internal editorial translation/review only; no external redistribution license inferred",
+    "third_party_license": "UNKNOWN; no third-party passages or assessment items introduced"
+  },
+  "source_embedded_historical_digest": "33b6fb7dffb1441c59f8fafd19e26ae4d3faf56e28734bf8c4f0c9ab6276a465",
+  "source_digest_note": "Embedded source_asset_sha256 is retained as historical metadata, not used as the current file digest. Manifest semantic digest and raw bytes are independently bound above."
+}

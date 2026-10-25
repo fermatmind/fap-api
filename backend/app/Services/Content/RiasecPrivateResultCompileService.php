@@ -21,7 +21,7 @@ final class RiasecPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.riasec.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.1.0';
+    public const COMPILER_VERSION = '1.2.0';
 
     public const ENGLISH_ACTIVITY_ASSET = 'activity_task_examples_v1.en.jsonl';
 
@@ -35,20 +35,28 @@ final class RiasecPrivateResultCompileService
         self::ENGLISH_ACTIVITY_ASSET => ['role' => 'English activity and task examples', 'schema' => 'riasec.activity_task_example.v1', 'surfaces' => ['result', 'report']],
         'activity_task_examples_v1.zh-CN.jsonl' => ['role' => 'activity and task examples', 'schema' => 'riasec.activity_task_example.v1', 'surfaces' => ['result', 'report']],
         'aspirations_calibration_v1.zh-CN.jsonl' => ['role' => 'aspiration calibration copy', 'schema' => 'riasec.aspirations_calibration.v1', 'surfaces' => ['result', 'history']],
+        'dimension_deep_copy_v1.en.json' => ['role' => 'selected English dimension band copy', 'schema' => 'riasec.deep_copy_slot_schema.v1_plus_medium_score_reading_candidate', 'surfaces' => ['result', 'report', 'pdf']],
         'dimension_deep_copy_v1.zh-CN.r3.json' => ['role' => 'six dimension band copy', 'schema' => 'riasec.deep_copy_slot_schema.v1_plus_medium_score_reading_candidate', 'surfaces' => ['result', 'report', 'pdf']],
         'disagree_path_v1.zh-CN.jsonl' => ['role' => 'result disagreement path copy', 'schema' => 'riasec.disagree_path.v1', 'surfaces' => ['result', 'history']],
+        'faq_v1.en.json' => ['role' => 'English private result FAQ', 'schema' => 'riasec.faq.asset.v1', 'surfaces' => ['result', 'report']],
         'faq_v1.zh-CN.json' => ['role' => 'private result FAQ', 'schema' => 'riasec.faq.asset.v1', 'surfaces' => ['result', 'report']],
         'feedback_action_lab_v1.zh-CN.jsonl' => ['role' => 'feedback and action copy', 'schema' => 'riasec.feedback_action_lab.v1', 'surfaces' => ['result', 'history']],
         'low_quality_cautious_reading_v1.zh-CN.json' => ['role' => 'low-quality cautious reading copy', 'schema' => 'riasec.low_quality.asset.v1', 'surfaces' => ['result', 'report', 'share', 'pdf']],
         'near_tie_alternate_code_copy_v1.zh-CN.json' => ['role' => 'near-tie and alternate-code copy', 'schema' => 'riasec.near_tie.asset.v1', 'surfaces' => ['result', 'report']],
         'next_exploration_nodes_v1.zh-CN.jsonl' => ['role' => 'next exploration copy', 'schema' => 'riasec.next_exploration_node.v1', 'surfaces' => ['result', 'report']],
         'occupation_examples_boundary_v1.zh-CN.jsonl' => ['role' => 'bounded occupation examples', 'schema' => 'riasec.occupation_example_boundary.v1', 'surfaces' => ['result', 'report']],
+        'pair_blend_15_pairs_v1.en.jsonl' => ['role' => 'three selected English pair blends', 'schema' => 'riasec.pair_blend_asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'pair_blend_15_pairs_v1.zh-CN.jsonl' => ['role' => 'fifteen pair blend copy', 'schema' => 'riasec.pair_blend_asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
+        'professional_method_boundary_v1.en.json' => ['role' => 'English method and claim boundaries', 'schema' => 'riasec.professional_method_boundary.asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'professional_method_boundary_v1.zh-CN.json' => ['role' => 'method and claim boundaries', 'schema' => 'riasec.professional_method_boundary.asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'profile_shape_copy_v1.zh-CN.json' => ['role' => 'profile shape copy', 'schema' => 'riasec.profile_shape.asset.v1', 'surfaces' => ['result', 'report']],
+        'runtime_surface_copy_v1.en.json' => ['role' => 'selected English ordered templates and generic context cards', 'schema' => 'riasec.runtime_surface_copy.v1', 'surfaces' => ['result', 'report']],
         'runtime_surface_copy_v1.zh-CN.json' => ['role' => 'runtime summary, quality, tie, and structural surface copy', 'schema' => 'riasec.runtime_surface_copy.v1', 'surfaces' => ['result', 'report', 'pdf', 'history', 'compare']],
+        'share_pdf_history_v1.en.json' => ['role' => 'English secondary surface source copy', 'schema' => 'riasec.secondary_surfaces.asset.v1', 'surfaces' => ['share', 'pdf', 'print', 'history', 'compare']],
         'share_pdf_history_v1.zh-CN.json' => ['role' => 'share, PDF, print, history, and compare copy', 'schema' => 'riasec.secondary_surfaces.asset.v1', 'surfaces' => ['share', 'pdf', 'print', 'history', 'compare']],
+        'technical_note_user_summary_v1.en.json' => ['role' => 'English private technical note with unknown data status', 'schema' => 'riasec.technical_note.asset.v1', 'surfaces' => ['result', 'report']],
         'technical_note_user_summary_v1.zh-CN.json' => ['role' => 'technical note user summary', 'schema' => 'riasec.technical_note.asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
+        'top3_code_chain_strategy_v1.en.jsonl' => ['role' => 'one selected English top-three group', 'schema' => 'riasec.top3_code_chain_strategy.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'top3_code_chain_strategy_v1.zh-CN.jsonl' => ['role' => 'top-three code chain copy', 'schema' => 'riasec.top3_code_chain_strategy.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'top_code_confidence_copy_v1.zh-CN.json' => ['role' => 'top-code confidence copy', 'schema' => 'riasec.top_code_confidence.asset.v1', 'surfaces' => ['result', 'report']],
     ];
@@ -87,6 +95,7 @@ final class RiasecPrivateResultCompileService
         }
 
         $this->assertEnglishActivities($assets[self::ENGLISH_ACTIVITY_ASSET], $assets['activity_task_examples_v1.zh-CN.jsonl']);
+        $this->assertSelectedEnglishSources($assets);
         $sourceHash = hash('sha256', $sourceHashInput);
         $coverage = $this->coverage($assets);
         $manifest = [
@@ -211,7 +220,8 @@ final class RiasecPrivateResultCompileService
             'activity_occupation_task' => true,
             'feedback_action' => true,
             'secondary_surfaces' => ['faq', 'technical_note', 'pdf', 'print', 'history', 'compare', 'share', 'lifecycle'],
-            'locale_modules' => ['en' => ['activity_explorer_v0_1']],
+            'locale_modules' => ['en' => ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1']],
+            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => ['R_I', 'R_A', 'I_A'], 'top3_groups' => ['R_I_A'], 'ordered_codes' => ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'], 'generic_context_cards' => 4, 'dimension_state_rows' => 0, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8],
         ];
     }
 
@@ -275,7 +285,7 @@ final class RiasecPrivateResultCompileService
             if (! isset($row['schema_version']) && (! isset($row['asset_id']) || trim((string) $row['asset_id']) === '')) {
                 throw new RuntimeException("RIASEC canonical source lacks schema identity: {$location}");
             }
-            if (! $jsonLines && ($row['locale'] ?? null) !== 'zh-CN') {
+            if (! $jsonLines && ($row['locale'] ?? null) !== (str_contains($path, '.en.') ? 'en' : 'zh-CN')) {
                 throw new RuntimeException("RIASEC canonical source locale mismatch: {$location}");
             }
         }
@@ -285,7 +295,8 @@ final class RiasecPrivateResultCompileService
     public static function sourceContract(string $compilerVersion): array
     {
         return match ($compilerVersion) {
-            '1.0.0' => array_diff_key(self::SOURCE_CONTRACT, [self::ENGLISH_ACTIVITY_ASSET => true]),
+            '1.0.0' => array_filter(self::SOURCE_CONTRACT, static fn (string $path): bool => ! str_contains($path, '.en.'), ARRAY_FILTER_USE_KEY),
+            '1.1.0' => array_filter(self::SOURCE_CONTRACT, static fn (string $path): bool => ! str_contains($path, '.en.') || $path === self::ENGLISH_ACTIVITY_ASSET, ARRAY_FILTER_USE_KEY),
             self::COMPILER_VERSION => self::SOURCE_CONTRACT,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
@@ -328,6 +339,138 @@ final class RiasecPrivateResultCompileService
         foreach (['R', 'I', 'A', 'S', 'E', 'C'] as $dimension) {
             if (count(array_filter($rows, static fn (array $row): bool => $row['dimensions'] === [$dimension])) !== 3) {
                 throw new RuntimeException('RIASEC English activity dimension coverage is incomplete.');
+            }
+        }
+    }
+
+    public function assertSelectedEnglishSources(array $assets): void
+    {
+        foreach (self::sourceContract(self::COMPILER_VERSION) as $filename => $contract) {
+            if (str_contains($filename, '.en.')) {
+                $rows = str_ends_with($filename, '.jsonl') ? ($assets[$filename] ?? []) : [$assets[$filename] ?? []];
+                foreach ($rows as $row) {
+                    if (($row['locale'] ?? null) !== 'en') {
+                        throw new RuntimeException('RIASEC selected English source locale is invalid.');
+                    }
+                }
+            }
+            if (str_contains($filename, '.en.') && preg_match('/[\x{3400}-\x{9fff}]/u', json_encode($assets[$filename] ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)) === 1) {
+                throw new RuntimeException('RIASEC selected English source contains Chinese text.');
+            }
+        }
+        $dimensions = $assets['dimension_deep_copy_v1.en.json']['dimensions'] ?? [];
+        $pairs = $assets['pair_blend_15_pairs_v1.en.jsonl'] ?? [];
+        $top3 = $assets['top3_code_chain_strategy_v1.en.jsonl'] ?? [];
+        $runtime = $assets['runtime_surface_copy_v1.en.json'] ?? [];
+        if (array_column($dimensions, 'dimension_code') !== ['R', 'I', 'A', 'S', 'E', 'C']
+            || array_column($pairs, 'pair_key') !== ['R_I', 'R_A', 'I_A']
+            || array_column($top3, 'unordered_top3_key') !== ['R_I_A']
+            || ($top3[0]['dimensions'] ?? null) !== ['R', 'I', 'A']
+            || ($runtime['supported_unordered_key'] ?? null) !== 'R_I_A'
+            || (count($runtime['dimension_reading_lines'] ?? []) !== 3 || array_diff(array_keys($runtime['dimension_reading_lines'] ?? []), ['R', 'I', 'A']) !== [])
+            || count($runtime['top3_ordered_templates'] ?? []) !== 12
+            || count($runtime['generic_slots']['layer_140q'] ?? []) !== 4
+            || count($assets['faq_v1.en.json']['questions'] ?? []) !== 20
+            || count($assets['technical_note_user_summary_v1.en.json']['summary_sections'] ?? []) !== 8
+            || count($assets['technical_note_user_summary_v1.en.json']['runtime_method_boundaries'] ?? []) !== 8
+            || count($assets['technical_note_user_summary_v1.en.json']['runtime_disclaimers'] ?? []) !== 6
+            || count($assets['professional_method_boundary_v1.en.json']['sections'] ?? []) !== 8) {
+            throw new RuntimeException('RIASEC selected English source coverage is invalid.');
+        }
+        foreach ($dimensions as $row) {
+            if (($row['locale'] ?? null) !== 'en') {
+                throw new RuntimeException('RIASEC selected English dimension locale is invalid.');
+            }
+            foreach (['work_activity_examples', 'interest_activity_focus', 'validation_questions', 'possible_drains', 'context_costs', 'misread_guardrails'] as $field) {
+                if (! is_array($row[$field] ?? null) || $row[$field] === [] || count(array_filter($row[$field], static fn ($text): bool => is_string($text) && trim($text) !== '')) !== count($row[$field])) {
+                    throw new RuntimeException('RIASEC selected English dimension list is incomplete.');
+                }
+            }
+            foreach (['title', 'core_drive', 'positive_value', 'real_world_cost', 'high_score_reading', 'medium_score_reading', 'low_score_safe_reading', 'common_misread', 'action_advice', 'user_visible_boundary'] as $key) {
+                if (! is_string($row[$key] ?? null) || trim($row[$key]) === '') {
+                    throw new RuntimeException('RIASEC selected English dimension field is missing.');
+                }
+            }
+        }
+        foreach (['pair_blend_15_pairs_v1.en.jsonl' => 'riasec_pair_blend_15_pairs_v1.en', 'top3_code_chain_strategy_v1.en.jsonl' => 'riasec_top3_code_chain_strategy_v1.en'] as $filename => $version) {
+            foreach ($assets[$filename] as $row) {
+                if (($row['locale'] ?? null) !== 'en' || ($row['asset_version'] ?? null) !== $version || ($row['frontend_fallback_allowed'] ?? true) !== false || ($row['schema_version'] ?? null) !== self::SOURCE_CONTRACT[$filename]['schema']) {
+                    throw new RuntimeException('RIASEC selected English row identity is invalid.');
+                }
+            }
+        }
+        foreach ($pairs as $row) {
+            if (($row['dimensions'] ?? null) !== explode('_', $row['pair_key'])) {
+                throw new RuntimeException('RIASEC selected English pair dimensions are invalid.');
+            }
+            foreach (['pair_label', 'short_label', 'chemistry', 'positive_value', 'pair_tension', 'real_world_cost', 'common_misread', 'micro_experiment', 'result_page_teaser', 'deep_report_extension_hint', 'user_visible_boundary'] as $field) {
+                if (! is_string($row[$field] ?? null) || trim($row[$field]) === '') {
+                    throw new RuntimeException('RIASEC selected English pair copy is incomplete.');
+                }
+            }
+            foreach (['activities_to_validate', 'context_costs', 'validation_questions'] as $field) {
+                if (! is_array($row[$field] ?? null) || $row[$field] === []) {
+                    throw new RuntimeException('RIASEC selected English pair copy is incomplete.');
+                }
+            }
+        }
+        $generic = $runtime['generic_slots']['layer_140q'];
+        if (array_diff(array_keys($generic), ['task_activity_card', 'environment_card', 'role_responsibility_card', '140q_cta']) !== []) {
+            throw new RuntimeException('RIASEC selected English generic card identity is invalid.');
+        }
+        foreach ($generic as $key => $card) {
+            $cta = $key === '140q_cta';
+            if (($card['applicable_form_codes'] ?? null) !== ($cta ? ['riasec_60'] : ['riasec_140'])
+                || ($card['layer_state'] ?? null) !== ($cta ? 'unavailable' : '140q_completed_state')
+                || ($cta && (($card['contextual_detail_only'] ?? false) !== true || ($card['accuracy_upgrade_claim_allowed'] ?? true) !== false || ($card['overrides_60q_result'] ?? true) !== false))) {
+                throw new RuntimeException('RIASEC selected English card applicability is invalid.');
+            }
+        }
+        $templateKeys = ['strategy_label', 'activity_chain', 'core_reading', 'positive_value', 'first_experiment', 'ordered_code_handling', 'low_risk_validation', 'primary_activity_chain', 'secondary_support_line', 'tertiary_stabilizer', 'activity_sequence', 'free_page_teaser'];
+        if (array_diff($templateKeys, array_keys($runtime['top3_ordered_templates'])) !== []) {
+            throw new RuntimeException('RIASEC selected English template is missing.');
+        }
+        foreach (['faq_v1.en.json' => ['questions', ['q', 'a']], 'technical_note_user_summary_v1.en.json' => ['summary_sections', ['title', 'copy']], 'professional_method_boundary_v1.en.json' => ['sections', ['key', 'title', 'body']]] as $filename => [$collection, $fields]) {
+            foreach ($assets[$filename][$collection] as $row) {
+                foreach ($fields as $field) {
+                    if (! is_string($row[$field] ?? null) || trim($row[$field]) === '') {
+                        throw new RuntimeException('RIASEC selected English lifecycle copy is incomplete.');
+                    }
+                }
+            }
+        }
+        foreach ($assets['technical_note_user_summary_v1.en.json']['runtime_method_boundaries'] as $row) {
+            if (trim((string) ($row['label'] ?? '')) === '' || trim((string) ($row['copy'] ?? '')) === '') {
+                throw new RuntimeException('RIASEC selected English method boundary is incomplete.');
+            }
+        }
+        $tokens = ['code', 'labels', 'shorts'];
+        foreach (['first', 'second', 'third'] as $position) {
+            foreach (['label', 'short', 'focus', 'action'] as $field) {
+                $tokens[] = $position.'_'.$field;
+            }
+        }
+        foreach ($runtime['dimension_reading_lines'] as $line) {
+            foreach (['label', 'short', 'focus', 'action'] as $field) {
+                if (trim((string) ($line[$field] ?? '')) === '') {
+                    throw new RuntimeException('RIASEC selected English reading line is missing.');
+                }
+            }
+        }
+        foreach ($runtime['top3_ordered_templates'] as $template) {
+            foreach (is_array($template) ? $template : [$template] as $text) {
+                if (! is_string($text) || trim($text) === '') {
+                    throw new RuntimeException('RIASEC selected English template is missing.');
+                }
+                preg_match_all('/\{([a-z_]+)\}/', $text, $matches);
+                if (array_diff($matches[1], $tokens) !== []) {
+                    throw new RuntimeException('RIASEC selected English template token is unsupported.');
+                }
+            }
+        }
+        foreach ($assets['technical_note_user_summary_v1.en.json']['summary_sections'] as $section) {
+            if (! array_key_exists('data_status', $section) || $section['data_status'] !== null) {
+                throw new RuntimeException('RIASEC private English technical status must remain unknown.');
             }
         }
     }

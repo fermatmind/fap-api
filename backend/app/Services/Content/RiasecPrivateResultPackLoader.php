@@ -26,16 +26,18 @@ final class RiasecPrivateResultPackLoader
         $locale = $locale === '' || $locale === 'zh' || str_starts_with($locale, 'zh-') ? 'zh-CN'
             : ($locale === 'en' || str_starts_with($locale, 'en-') ? 'en' : $locale);
         $english = $locale === 'en';
+        $selected = ($payload['compiler']['version'] ?? '') === '1.2.0';
+        $modules = $selected ? ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1'] : ['activity_explorer_v0_1'];
         if ($locale !== 'zh-CN' && (! $english
-            || ($payload['coverage']['locale_modules']['en'] ?? null) !== ['activity_explorer_v0_1']
+            || ($payload['coverage']['locale_modules']['en'] ?? null) !== $modules
             || ! isset($payload['assets'][RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET]))) {
             throw new RuntimeException('RIASEC_PRIVATE_RESULT_LOCALE_UNAVAILABLE');
         }
         $assets = (array) $payload['assets'];
         if ($english) {
-            $assets = [RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET => $assets[RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET]];
+            $assets = array_filter($assets, static fn (string $path): bool => str_contains($path, '.en.'), ARRAY_FILTER_USE_KEY);
         } else {
-            unset($assets[RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET]);
+            $assets = array_filter($assets, static fn (string $path): bool => ! str_contains($path, '.en.'), ARRAY_FILTER_USE_KEY);
         }
 
         return [
@@ -43,15 +45,16 @@ final class RiasecPrivateResultPackLoader
             'payload' => $payload,
             'authority' => [
                 'schema_version' => 'fap.riasec.private_result_authority.v1',
-                'authority_id' => $english ? RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_AUTHORITY_ID : RiasecPrivateResultCompileService::AUTHORITY_ID,
+                'authority_id' => $english ? ($selected ? 'FERMATMIND_RIASEC_PRIVATE_RESULT_EN_SELECTED' : RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_AUTHORITY_ID) : RiasecPrivateResultCompileService::AUTHORITY_ID,
                 'mode' => 'canonical',
+                ...($english ? ['coverage_scope' => 'selected_modules', 'modules' => $modules] : []),
                 'locale' => $locale,
                 'source_hash' => (string) $payload['source_hash'],
                 'compiled_hash' => (string) $payload['compiled_hash'],
                 'compiled_schema' => RiasecPrivateResultCompileService::SCHEMA,
                 'compiler_schema' => (string) $payload['compiler']['schema'],
                 'compiler_version' => (string) $payload['compiler']['version'],
-                'runtime_contract' => $english ? 'riasec.activity_explorer.v0.1' : (string) $payload['runtime_contract'],
+                'runtime_contract' => $english ? ($selected ? 'riasec.public_projection.v2' : 'riasec.activity_explorer.v0.1') : (string) $payload['runtime_contract'],
             ],
         ];
     }
@@ -151,7 +154,16 @@ final class RiasecPrivateResultPackLoader
         }
 
         if (isset($contract[RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET])) {
-            if (($coverage['locale_modules']['en'] ?? null) !== ['activity_explorer_v0_1']) {
+            $modules = ($compiler['version'] ?? '') === '1.2.0' ? ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1'] : ['activity_explorer_v0_1'];
+            if (($coverage['locale_modules']['en'] ?? null) !== $modules) {
+                throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
+            }
+            if (($compiler['version'] ?? '') === '1.2.0') {
+                $this->compiler->assertSelectedEnglishSources($payload['assets']);
+                if ($this->canonicalJson($coverage['english_selected_sources'] ?? null) !== $this->canonicalJson(['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => ['R_I', 'R_A', 'I_A'], 'top3_groups' => ['R_I_A'], 'ordered_codes' => ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'], 'generic_context_cards' => 4, 'dimension_state_rows' => 0, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8])) {
+                    throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
+                }
+            } elseif (isset($coverage['english_selected_sources'])) {
                 throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
             }
             $this->compiler->assertEnglishActivities($payload['assets'][RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET], $payload['assets']['activity_task_examples_v1.zh-CN.jsonl']);

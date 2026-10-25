@@ -14,14 +14,13 @@ use Tests\TestCase;
 
 final class RiasecLocaleContentResolutionTest extends TestCase
 {
-    public function test_english_activity_is_available_while_unselected_deep_feedback_and_lifecycle_fail_closed(): void
+    public function test_selected_english_modules_are_available_while_feedback_fails_closed(): void
     {
         $registry = app(RiasecDeepCopySlotRegistry::class);
         $deepSlot = $registry->resolveForLocale($registry->resolveDimensionSlot('R'), 'en-US');
 
         $this->assertSame('en', $deepSlot['locale']);
-        $this->assertSame('zh-CN', $deepSlot['source_locale']);
-        $this->assertSame('unavailable', $deepSlot['content_status']);
+        $this->assertSame('authored', $deepSlot['content_status']);
         $this->assertSame('omit_module', $deepSlot['fallback_behavior']);
         $this->assertFalse($deepSlot['frontend_fallback_allowed']);
 
@@ -42,9 +41,9 @@ final class RiasecLocaleContentResolutionTest extends TestCase
         $lifecycle = app(RiasecLifecycleCopyService::class);
         $lifecycleContract = $lifecycle->runtimeLifecycleCopyContract(true, 'en-US');
         $this->assertSame('en', $lifecycleContract['locale']);
-        $this->assertSame('unavailable', $lifecycleContract['status']);
-        $this->assertSame([], $lifecycleContract['surfaces']);
-        $this->assertSame([], $lifecycleContract['faq_items']);
+        $this->assertSame('available', $lifecycleContract['status']);
+        $this->assertCount(5, $lifecycleContract['surfaces']);
+        $this->assertCount(20, $lifecycleContract['faq_items']);
         $this->assertFalse($lifecycleContract['faq_markdown_reference_available']);
 
         $serialized = json_encode([
@@ -62,11 +61,11 @@ final class RiasecLocaleContentResolutionTest extends TestCase
 
         $this->assertSame('en', $projection['locale']);
         $this->assertSame('en', $projection['deep_content_slots_v1']['locale']);
-        $this->assertSame([], $projection['deep_content_slots_v1']['slots']);
+        $this->assertNotEmpty($projection['deep_content_slots_v1']['slots']);
         $this->assertSame('content_examples_only', $projection['activity_explorer_v0_1']['status']);
         $this->assertNull($projection['private_result_authority']);
         $this->assertSame('unavailable', $projection['exploration_feedback_overlay_v0_1']['action_lab_v1']['status']);
-        $this->assertSame('unavailable', $projection['lifecycle_copy_v1']['status']);
+        $this->assertSame('available', $projection['lifecycle_copy_v1']['status']);
 
         foreach ($projection['deep_content_slots_v1']['slots'] as $slot) {
             $this->assertSame('en', $slot['locale']);

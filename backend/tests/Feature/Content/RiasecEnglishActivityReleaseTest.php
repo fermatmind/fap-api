@@ -21,11 +21,11 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
         $loader->assertPackage($compiled['manifest'], $compiled['payload'], $compiled['bytes']);
         $english = $loader->load('en-US');
         $chinese = $loader->load('zh-CN');
-        $this->assertSame([Compiler::ENGLISH_ACTIVITY_ASSET], array_keys($english['assets']));
+        $this->assertCount(9, $english['assets']);
         $this->assertCount(19, $chinese['assets']);
-        $this->assertSame(Compiler::ENGLISH_ACTIVITY_AUTHORITY_ID, $english['authority']['authority_id']);
-        $this->assertSame('riasec.activity_explorer.v0.1', $english['authority']['runtime_contract']);
-        $this->assertSame(['en' => ['activity_explorer_v0_1']], $compiled['payload']['coverage']['locale_modules']);
+        $this->assertSame('FERMATMIND_RIASEC_PRIVATE_RESULT_EN_SELECTED', $english['authority']['authority_id']);
+        $this->assertSame('riasec.public_projection.v2', $english['authority']['runtime_contract']);
+        $this->assertSame(['en' => ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1']], $compiled['payload']['coverage']['locale_modules']);
         $repository = new RiasecPrivateResultSourceRepository($loader);
         $service = new RiasecActivityExplorerService(privateResultSource: $repository);
         $rows = $english['assets'][Compiler::ENGLISH_ACTIVITY_ASSET];
@@ -65,11 +65,12 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
         $compiled = app(Compiler::class)->compile();
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
-        unset($payload['assets'][Compiler::ENGLISH_ACTIVITY_ASSET], $payload['coverage']['locale_modules']);
+        $payload['assets'] = array_intersect_key($payload['assets'], Compiler::sourceContract('1.0.0'));
+        unset($payload['coverage']['locale_modules'], $payload['coverage']['english_selected_sources']);
         $payload['compiler']['version'] = '1.0.0';
         $manifest['compiler'] = $payload['compiler'];
         $manifest['coverage'] = $payload['coverage'];
-        $manifest['source_files'] = array_values(array_filter($manifest['source_files'], fn ($row) => $row['path'] !== Compiler::ENGLISH_ACTIVITY_ASSET));
+        $manifest['source_files'] = array_values(array_filter($manifest['source_files'], fn ($row) => isset(Compiler::sourceContract('1.0.0')[$row['path']])));
         $sourceHash = hash('sha256', implode('', array_map(fn ($row) => $row['path']."\0".$row['sha256']."\n", $manifest['source_files'])));
         $payload['source_hash'] = $manifest['source_hash'] = $manifest['content_hash'] = $sourceHash;
         unset($payload['compiled_hash']);
@@ -85,6 +86,34 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('RIASEC_PRIVATE_RESULT_LOCALE_UNAVAILABLE');
         Loader::localeProjection($payload, 'en');
+    }
+
+    public function test_activity_only_immutable_release_retains_its_exact_hashes_and_scope(): void
+    {
+        $compiled = app(Compiler::class)->compile();
+        $payload = $compiled['payload'];
+        $manifest = $compiled['manifest'];
+        $contract = Compiler::sourceContract('1.1.0');
+        $payload['assets'] = array_intersect_key($payload['assets'], $contract);
+        unset($payload['coverage']['english_selected_sources']);
+        $payload['coverage']['locale_modules']['en'] = ['activity_explorer_v0_1'];
+        $payload['compiler']['version'] = '1.1.0';
+        $manifest['compiler'] = $payload['compiler'];
+        $manifest['coverage'] = $payload['coverage'];
+        $manifest['source_files'] = array_values(array_filter($manifest['source_files'], fn ($row) => isset($contract[$row['path']])));
+        $sourceHash = hash('sha256', implode('', array_map(fn ($row) => $row['path']."\0".$row['sha256']."\n", $manifest['source_files'])));
+        $payload['source_hash'] = $manifest['source_hash'] = $manifest['content_hash'] = $sourceHash;
+        unset($payload['compiled_hash']);
+        $payload['compiled_hash'] = hash('sha256', $this->canonical($payload));
+        $manifest['compiled_hash'] = $payload['compiled_hash'];
+        $bytes = $this->canonical($payload)."\n";
+        $manifest['artifacts'][0]['sha256'] = hash('sha256', $bytes);
+        $this->assertSame('fee5193dc0434d4cb420b7a72cfe65ff3a0030ed24d8e671846a62a7b865aa1a', $sourceHash);
+        $this->assertSame('1ea12b9301ef242da0531a72b49ecdc729f6b94b6fe419d0abc0debd733c2bf1', $payload['compiled_hash']);
+        app(Loader::class)->assertPackage($manifest, $payload, $bytes);
+        $english = Loader::localeProjection($payload, 'en');
+        $this->assertSame([Compiler::ENGLISH_ACTIVITY_ASSET], array_keys($english['assets']));
+        $this->assertSame(['activity_explorer_v0_1'], $english['authority']['modules']);
     }
 
     public function test_each_missing_selected_activity_empties_the_entire_code_pack(): void
