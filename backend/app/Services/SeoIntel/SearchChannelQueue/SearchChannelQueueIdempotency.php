@@ -52,13 +52,18 @@ final class SearchChannelQueueIdempotency
                 ->where('locale', $locale)
                 ->where('channel', $channel)
                 ->orderByDesc('id')
-                ->get(['id', 'approval_state', 'execution_state', 'lastmod', 'content_hash', 'updated_at', 'idempotency_key']);
+                ->get(['id', 'page_entity_type', 'source_authority', 'approval_state', 'execution_state', 'lastmod', 'content_hash', 'updated_at', 'idempotency_key']);
 
             $sourceTimestamp = $this->timestamp($sourceLastmod);
             $normalizedSourceContentHash = $this->normalizedContentHash($sourceContentHash);
             $staleSubmittedItems = [];
 
             foreach ($rows as $row) {
+                // A never-submitted, unversioned legacy draft must not pin a new
+                // Article decision. Keep versioned drafts and uncertain attempts blocking.
+                if ($this->unsubmittedLegacyArticleDraft($row, $canonicalUrl, $locale, $channel, $normalizedSourceContentHash, $sourceVersion, $connectionName)) {
+                    continue;
+                }
                 $staleReason = $this->submittedItemStaleReason($row, $sourceTimestamp, $normalizedSourceContentHash, $sourceVersion === null ? null : $this->key($canonicalUrl, $locale, $channel, $sourceVersion));
                 if ($staleReason !== null) {
                     $staleSubmittedItems[] = [
@@ -87,6 +92,30 @@ final class SearchChannelQueueIdempotency
             ];
         } catch (\Throwable) {
             return $this->emptyStatus();
+        }
+    }
+
+    private function unsubmittedLegacyArticleDraft(object $row, string $url, string $locale, string $channel, ?string $contentHash, ?string $version, string $connection): bool
+    {
+        if ($row->page_entity_type !== 'article' || $row->source_authority !== 'backend_cms'
+            || $row->execution_state !== 'dry_run_ready' || ! in_array($row->approval_state, ['pending', 'approved'], true)
+            || $row->content_hash !== null || ! hash_equals($this->key($url, $locale, $channel), (string) $row->idempotency_key)
+            || preg_match('/\Aarticle-decision:[1-9][0-9]*:content:([a-f0-9]{64})\z/', $version ?? '', $match) !== 1
+            || $contentHash === null || ! hash_equals($match[1], $contentHash)) {
+            return false;
+        }
+
+        try {
+            if (! \App\Support\SchemaBaseline::tableExists('seo_search_channel_queue_events', $connection)) {
+                return false;
+            }
+            $events = DB::connection($connection)->table('seo_search_channel_queue_events')
+                ->where('queue_item_id', $row->id)->pluck('event_type')->all();
+
+            return in_array('queue_item_planned', $events, true)
+                && array_diff($events, ['queue_item_planned', 'queue_item_existing_preserved', 'search_channel_queue_approved']) === [];
+        } catch (\Throwable) {
+            return false;
         }
     }
 

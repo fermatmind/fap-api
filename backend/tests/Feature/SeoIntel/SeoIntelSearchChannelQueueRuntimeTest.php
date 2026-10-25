@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueIdempotency;
+use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueWriteService;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -30,6 +33,109 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
 
         DB::purge('seo_intel');
         $this->createSeoIntelTables();
+    }
+
+    #[DataProvider('legacyApprovalStates')]
+    public function test_new_article_decision_can_plan_past_an_audited_unsubmitted_legacy_draft(string $approval): void
+    {
+        $url = 'https://fermatmind.com/en/articles/updated-article';
+        $hash = str_repeat('a', 64);
+        $id = $this->seedQueueItem($url, ['page_entity_type' => 'article', 'approval_state' => $approval]);
+        $this->legacyDraftEvent($id, 'queue_item_planned');
+        if ($approval === 'approved') {
+            $this->legacyDraftEvent($id, 'search_channel_queue_approved');
+        }
+        $before = DB::connection('seo_intel')->table('seo_search_channel_queue_items')->get()->toArray();
+        $this->seedSeoUrl(['canonical_url' => $url, 'page_entity_type' => 'article', 'metadata_json' => [
+            'claim_safe' => true, 'publication_state' => 'published', 'source_table' => 'articles',
+            'content_hash' => $hash, 'article_search_decision_id' => 42,
+        ]]);
+        $output = $this->runQueueCommand(['--dry-run' => true, '--no-write' => true, '--json' => true,
+            '--canonical-url' => $url, '--channel' => 'indexnow', '--page-type' => 'article', '--limit' => 1]);
+        $this->assertSame(1, $output['planned_queue_count']);
+        $key = app(SearchChannelQueueIdempotency::class)->key($url, 'en', 'indexnow', 'article-decision:42:content:'.$hash);
+        $plan = app(SearchChannelQueuePlanner::class)->plan('indexnow', 'article', 1, $url);
+        $this->assertSame($key, $plan['planned_items'][0]['idempotency_key']);
+        $this->assertEquals($before, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->get()->toArray());
+        $this->assertSame(0, $output['stale_submitted_queue_item_count']);
+        $currentId = $this->seedQueueItem($url, ['page_entity_type' => 'article', 'idempotency_key' => $key, 'content_hash' => $hash]);
+        $again = $this->runQueueCommand(['--dry-run' => true, '--no-write' => true, '--json' => true,
+            '--canonical-url' => $url, '--channel' => 'indexnow', '--page-type' => 'article', '--limit' => 1], false);
+        $this->assertSame(0, $again['planned_queue_count']);
+        $againPlan = app(SearchChannelQueuePlanner::class)->plan('indexnow', 'article', 1, $url);
+        $this->assertSame($currentId, $againPlan['blocked_items'][0]['duplicate_queue_item_id']);
+    }
+
+    public static function legacyApprovalStates(): array
+    {
+        return [['pending'], ['approved']];
+    }
+
+    #[DataProvider('unsafeLegacyDrafts')]
+    public function test_same_version_or_uncertain_legacy_queue_items_still_block(string $case): void
+    {
+        $url = 'https://fermatmind.com/en/articles/updated-article';
+        $hash = str_repeat('a', 64);
+        $version = 'article-decision:42:content:'.$hash;
+        $overrides = ['page_entity_type' => 'article'];
+        match ($case) {
+            'other_family' => $overrides['page_entity_type'] = 'research_report',
+            'other_authority' => $overrides['source_authority'] = 'other',
+            'versioned_key' => $overrides['idempotency_key'] = app(SearchChannelQueueIdempotency::class)->key($url, 'en', 'indexnow', $version),
+            'known_hash' => $overrides['content_hash'] = str_repeat('b', 64),
+            'submitting', 'submit_failed', 'provider_security_hold', 'platform_action_required' => $overrides['execution_state'] = $case,
+            'rejected' => $overrides['approval_state'] = 'rejected',
+            'missing_version' => $version = null,
+            'invalid_version' => $version = 'unverified-version',
+            'mismatched_hash' => $hash = str_repeat('b', 64),
+            'missing_hash' => $hash = null,
+            default => null,
+        };
+        $id = $this->seedQueueItem($url, $overrides);
+        if ($case !== 'no_audit') {
+            $this->legacyDraftEvent($id, 'queue_item_planned');
+        }
+        if (in_array($case, ['submission_attempt', 'retry_reset', 'unknown_event'], true)) {
+            $this->legacyDraftEvent($id, match ($case) {
+                'submission_attempt' => 'bounded_live_submission_started',
+                'retry_reset' => 'search_channel_retry_reset_applied',
+                default => 'unknown_event',
+            });
+        }
+        if ($case === 'audit_unavailable') {
+            Schema::connection('seo_intel')->drop('seo_search_channel_queue_events');
+        }
+        if ($case === 'audit_probe_failure') {
+            \App\Support\SchemaBaseline::clearCache();
+            DB::connection('seo_intel')->beforeExecuting(static function ($query): void {
+                if (str_contains($query, 'sqlite_master') && str_contains($query, 'seo_search_channel_queue_events')) {
+                    throw new \RuntimeException('schema unavailable');
+                }
+            });
+        }
+        if ($case === 'audit_read_failure') {
+            DB::connection('seo_intel')->beforeExecuting(static function ($query): void {
+                if (str_contains($query, 'from "seo_search_channel_queue_events"')) {
+                    throw new \RuntimeException('audit unavailable');
+                }
+            });
+        }
+        $before = DB::connection('seo_intel')->table('seo_search_channel_queue_items')->get()->toArray();
+        $status = app(SearchChannelQueueIdempotency::class)->duplicateStatus($url, 'en', 'indexnow', now(), $hash, $version);
+        $this->assertSame($id, $status['blocking_item']['id']);
+        $this->assertEquals($before, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->get()->toArray());
+    }
+
+    public static function unsafeLegacyDrafts(): array
+    {
+        return array_map(fn ($case) => [$case], ['other_family', 'other_authority', 'versioned_key', 'known_hash', 'submitting', 'submit_failed', 'provider_security_hold', 'platform_action_required', 'rejected', 'missing_version', 'invalid_version', 'mismatched_hash', 'missing_hash', 'no_audit', 'submission_attempt', 'retry_reset', 'unknown_event', 'audit_unavailable', 'audit_probe_failure', 'audit_read_failure']);
+    }
+
+    private function legacyDraftEvent(int $id, string $type): void
+    {
+        DB::connection('seo_intel')->table('seo_search_channel_queue_events')->insert([
+            'queue_item_id' => $id, 'event_type' => $type, 'event_payload' => '{}', 'actor_type' => 'system', 'created_at' => now(),
+        ]);
     }
 
     #[Test]
