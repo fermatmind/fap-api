@@ -3,7 +3,7 @@
   "locale": "en",
   "content_version": "riasec_runtime_surface_copy_v1.en",
   "frontend_fallback_allowed": false,
-  "supported_unordered_key": "R_I_A",
+  "supported_unordered_keys": ["R_I_A","R_I_S","R_I_E","R_I_C","R_A_S","R_A_E","R_A_C","R_S_E","R_S_C","R_E_C","I_A_S","I_A_E","I_A_C","I_S_E","I_S_C","I_E_C","A_S_E","A_S_C","A_E_C","S_E_C"],
   "dimension_reading_lines": {
     "R": {
       "label": "Realistic",
@@ -22,6 +22,24 @@
       "short": "expression",
       "focus": "expression, style, narrative, form, and experience",
       "action": "try different approaches to expression, style, narrative, or form"
+    },
+    "S": {
+      "label": "Social",
+      "short": "support",
+      "focus": "real people, understanding, support, communication, and collaboration",
+      "action": "observe real people's needs for understanding, support, communication, or collaboration"
+    },
+    "E": {
+      "label": "Enterprising",
+      "short": "moving things forward",
+      "focus": "goals, resources, opportunities, influence, and moving things forward",
+      "action": "observe goals, resources, opportunities, influence, or actions that move things forward"
+    },
+    "C": {
+      "label": "Conventional",
+      "short": "process",
+      "focus": "rules, data, processes, order, and reviewable records",
+      "action": "organize rules, data, processes, order, or reviewable records"
     }
   },
   "top3_ordered_templates": {
@@ -42,7 +60,7 @@
     ],
     "free_page_teaser": "The {labels} interest clues can be observed in the order {code} without rushing to a career answer."
   },
-  "scope": "Only R_I_A and its six orders; no new 20-group or 120-code editorial expansion.",
+  "scope": "selected_modules",
   "generic_slots": {
     "layer_140q": {
       "task_activity_card": {

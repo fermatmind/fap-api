@@ -82,6 +82,16 @@ final class RiasecEnglishDimensionStateReleaseTest extends TestCase
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
         $payload['compiler']['version'] = '1.2.0';
+        $payload['assets']['top3_code_chain_strategy_v1.en.jsonl'] = array_slice($payload['assets']['top3_code_chain_strategy_v1.en.jsonl'], 0, 1);
+        $runtime = &$payload['assets']['runtime_surface_copy_v1.en.json'];
+        $runtime['dimension_reading_lines'] = array_intersect_key($runtime['dimension_reading_lines'], array_fill_keys(['R', 'I', 'A'], true));
+        unset($runtime['supported_unordered_keys']);
+        $runtime['supported_unordered_key'] = 'R_I_A';
+        $runtime['scope'] = 'Only R_I_A and its six orders; no new 20-group or 120-code editorial expansion.';
+        unset($runtime);
+        $payload['coverage']['english_selected_sources']['top3_groups'] = ['R_I_A'];
+        $payload['coverage']['english_selected_sources']['ordered_codes'] = ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'];
+
         unset($payload['assets'][Compiler::ENGLISH_DIMENSION_STATE_ASSET]);
         $payload['coverage']['english_selected_sources']['dimension_state_rows'] = 0;
         $manifest['compiler'] = $payload['compiler'];

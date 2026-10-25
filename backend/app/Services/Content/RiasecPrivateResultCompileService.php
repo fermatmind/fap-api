@@ -21,7 +21,11 @@ final class RiasecPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.riasec.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.4.0';
+    public const COMPILER_VERSION = '1.5.0';
+
+    public const ENGLISH_TOP3_KEYS = ['R_I_A', 'R_I_S', 'R_I_E', 'R_I_C', 'R_A_S', 'R_A_E', 'R_A_C', 'R_S_E', 'R_S_C', 'R_E_C', 'I_A_S', 'I_A_E', 'I_A_C', 'I_S_E', 'I_S_C', 'I_E_C', 'A_S_E', 'A_S_C', 'A_E_C', 'S_E_C'];
+
+    public const ENGLISH_TOP3_READER_FIELDS = ['strategy_label', 'activity_chain', 'core_reading', 'positive_value', 'real_world_cost', 'first_experiment', 'ordered_code_handling', 'low_risk_validation', 'primary_activity_chain', 'secondary_support_line', 'tertiary_stabilizer', 'likely_tension', 'activity_sequence', 'when_to_use_140q', 'when_not_to_overread', 'free_page_teaser', 'deep_report_extension'];
 
     public const ENGLISH_PAIR_KEYS = ['R_I', 'R_A', 'R_S', 'R_E', 'R_C', 'I_A', 'I_S', 'I_E', 'I_C', 'A_S', 'A_E', 'A_C', 'S_E', 'S_C', 'E_C'];
 
@@ -65,7 +69,7 @@ final class RiasecPrivateResultCompileService
         'share_pdf_history_v1.zh-CN.json' => ['role' => 'share, PDF, print, history, and compare copy', 'schema' => 'riasec.secondary_surfaces.asset.v1', 'surfaces' => ['share', 'pdf', 'print', 'history', 'compare']],
         'technical_note_user_summary_v1.en.json' => ['role' => 'English private technical note with unknown data status', 'schema' => 'riasec.technical_note.asset.v1', 'surfaces' => ['result', 'report']],
         'technical_note_user_summary_v1.zh-CN.json' => ['role' => 'technical note user summary', 'schema' => 'riasec.technical_note.asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
-        'top3_code_chain_strategy_v1.en.jsonl' => ['role' => 'one selected English top-three group', 'schema' => 'riasec.top3_code_chain_strategy.v1', 'surfaces' => ['result', 'report', 'pdf']],
+        'top3_code_chain_strategy_v1.en.jsonl' => ['role' => 'English top-three group copy for all twenty identities', 'schema' => 'riasec.top3_code_chain_strategy.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'top3_code_chain_strategy_v1.zh-CN.jsonl' => ['role' => 'top-three code chain copy', 'schema' => 'riasec.top3_code_chain_strategy.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'top_code_confidence_copy_v1.zh-CN.json' => ['role' => 'top-code confidence copy', 'schema' => 'riasec.top_code_confidence.asset.v1', 'surfaces' => ['result', 'report']],
     ];
@@ -230,7 +234,7 @@ final class RiasecPrivateResultCompileService
             'feedback_action' => true,
             'secondary_surfaces' => ['faq', 'technical_note', 'pdf', 'print', 'history', 'compare', 'share', 'lifecycle'],
             'locale_modules' => ['en' => ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1']],
-            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => self::englishPairCoverage(self::COMPILER_VERSION), 'top3_groups' => ['R_I_A'], 'ordered_codes' => ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'], 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8],
+            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => self::englishPairCoverage(self::COMPILER_VERSION), 'top3_groups' => self::englishTop3Coverage(self::COMPILER_VERSION), 'ordered_codes' => self::englishOrderedCodeCoverage(self::COMPILER_VERSION), 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8],
         ];
     }
 
@@ -308,16 +312,20 @@ final class RiasecPrivateResultCompileService
             '1.1.0' => array_filter(self::SOURCE_CONTRACT, static fn (string $path): bool => ! str_contains($path, '.en.') || $path === self::ENGLISH_ACTIVITY_ASSET, ARRAY_FILTER_USE_KEY),
             '1.2.0' => array_diff_key(self::legacySelectedSourceContract(), [self::ENGLISH_DIMENSION_STATE_ASSET => true]),
             '1.3.0' => self::legacySelectedSourceContract(),
+            '1.4.0' => self::legacySelectedSourceContract(completePairs: true),
             self::COMPILER_VERSION => self::SOURCE_CONTRACT,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
 
-    /** Keep immutable 1.2/1.3 manifest metadata as published. */
-    private static function legacySelectedSourceContract(): array
+    /** Keep immutable selected-module manifest metadata as published. */
+    private static function legacySelectedSourceContract(bool $completePairs = false): array
     {
         $contract = self::SOURCE_CONTRACT;
-        $contract['pair_blend_15_pairs_v1.en.jsonl']['role'] = 'three selected English pair blends';
+        if (! $completePairs) {
+            $contract['pair_blend_15_pairs_v1.en.jsonl']['role'] = 'three selected English pair blends';
+        }
+        $contract['top3_code_chain_strategy_v1.en.jsonl']['role'] = 'one selected English top-three group';
 
         return $contract;
     }
@@ -326,9 +334,29 @@ final class RiasecPrivateResultCompileService
     {
         return match ($compilerVersion) {
             '1.2.0', '1.3.0' => ['R_I', 'R_A', 'I_A'],
-            self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
+            '1.4.0', self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
+    }
+
+    public static function englishTop3Coverage(string $compilerVersion): array
+    {
+        return match ($compilerVersion) {
+            '1.2.0', '1.3.0', '1.4.0' => ['R_I_A'],
+            self::COMPILER_VERSION => self::ENGLISH_TOP3_KEYS,
+            default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
+        };
+    }
+
+    public static function englishOrderedCodeCoverage(string $compilerVersion): array
+    {
+        $codes = [];
+        foreach (self::englishTop3Coverage($compilerVersion) as $key) {
+            [$a, $b, $c] = explode('_', $key);
+            array_push($codes, $a.$b.$c, $a.$c.$b, $b.$a.$c, $b.$c.$a, $c.$a.$b, $c.$b.$a);
+        }
+
+        return $codes;
     }
 
     /** @param list<array<string,mixed>> $rows @param list<array<string,mixed>> $chineseRows */
@@ -465,6 +493,55 @@ final class RiasecPrivateResultCompileService
         }
     }
 
+    /** @param list<array<string,mixed>> $rows @param list<array<string,mixed>> $chineseRows */
+    public function assertEnglishTop3Sources(array $rows, array $chineseRows): void
+    {
+        if (count($rows) !== 20 || count($chineseRows) !== 20
+            || array_column($rows, 'unordered_top3_key') !== self::ENGLISH_TOP3_KEYS
+            || hash('sha256', $this->canonicalJson($chineseRows)) !== '1fbda7c7396793b6df28f9335bf2123a52eda798247a88e879f84d136ec9cf90') {
+            throw new RuntimeException('RIASEC English Top3 coverage or source binding is invalid.');
+        }
+        $boundary = $rows[0]['user_visible_boundary'] ?? null;
+        if (! is_string($boundary) || trim($boundary) === '' || preg_match('/[\x{3400}-\x{9fff}]/u', $boundary) === 1) {
+            throw new RuntimeException('RIASEC English Top3 boundary is incomplete.');
+        }
+        foreach ($rows as $index => $row) {
+            $source = $chineseRows[$index];
+            if (($row['locale'] ?? null) !== 'en'
+                || ($row['schema_version'] ?? null) !== 'riasec.top3_code_chain_strategy.v1'
+                || ($row['asset_version'] ?? null) !== 'riasec_top3_code_chain_strategy_v1.en'
+                || ($row['frontend_fallback_allowed'] ?? true) !== false
+                || ($row['fallback_behavior'] ?? 'omit_module') !== 'omit_module'
+                || array_intersect(array_keys($row), ['asset_status', 'review_status', 'source_status', 'evidence_level', 'target_review_status_after_owner_signoff']) !== []) {
+                throw new RuntimeException('RIASEC English Top3 identity or evidence metadata is invalid.');
+            }
+            foreach (['dimensions', 'required_boundaries', 'forbidden_claims'] as $field) {
+                if (($row[$field] ?? null) !== $source[$field]) {
+                    throw new RuntimeException('RIASEC English Top3 machine boundary is invalid.');
+                }
+            }
+            if (array_key_exists('user_visible_boundary', $row)
+                && (! is_string($row['user_visible_boundary']) || trim($row['user_visible_boundary']) === '' || preg_match('/[\x{3400}-\x{9fff}]/u', $row['user_visible_boundary']) === 1)) {
+                throw new RuntimeException('RIASEC English Top3 boundary is incomplete.');
+            }
+            foreach (self::ENGLISH_TOP3_READER_FIELDS as $field) {
+                $value = $row[$field] ?? null;
+                if ($field === 'activity_sequence') {
+                    if (! is_array($value) || ! array_is_list($value) || count($value) !== count($source[$field])) {
+                        throw new RuntimeException('RIASEC English Top3 activity sequence is incomplete.');
+                    }
+                } elseif (! is_string($value)) {
+                    throw new RuntimeException('RIASEC English Top3 reader text is invalid.');
+                }
+                foreach (is_array($value) ? $value : [$value] as $text) {
+                    if (! is_string($text) || trim($text) === '' || preg_match('/[\x{3400}-\x{9fff}]/u', $text) === 1) {
+                        throw new RuntimeException('RIASEC English Top3 reader text is invalid.');
+                    }
+                }
+            }
+        }
+    }
+
     public function assertSelectedEnglishSources(array $assets, string $compilerVersion = self::COMPILER_VERSION): void
     {
         foreach (self::sourceContract($compilerVersion) as $filename => $contract) {
@@ -487,19 +564,31 @@ final class RiasecPrivateResultCompileService
         $pairs = $assets['pair_blend_15_pairs_v1.en.jsonl'] ?? [];
         $pairKeys = array_column($pairs, 'pair_key');
         $expectedPairKeys = self::englishPairCoverage($compilerVersion);
-        if ($compilerVersion === self::COMPILER_VERSION) {
+        if (in_array($compilerVersion, ['1.4.0', self::COMPILER_VERSION], true)) {
             sort($pairKeys, SORT_STRING);
             sort($expectedPairKeys, SORT_STRING);
             $this->assertEnglishPairSources($pairs, $assets['pair_blend_15_pairs_v1.zh-CN.jsonl'] ?? []);
         }
         $top3 = $assets['top3_code_chain_strategy_v1.en.jsonl'] ?? [];
         $runtime = $assets['runtime_surface_copy_v1.en.json'] ?? [];
+        $completeTop3 = $compilerVersion === self::COMPILER_VERSION;
+        if ($completeTop3) {
+            $this->assertEnglishTop3Sources($top3, $assets['top3_code_chain_strategy_v1.zh-CN.jsonl'] ?? []);
+        }
+        $expectedReadingDimensions = $completeTop3 ? ['R', 'I', 'A', 'S', 'E', 'C'] : ['R', 'I', 'A'];
+        $readingDimensions = array_keys($runtime['dimension_reading_lines'] ?? []);
+        sort($expectedReadingDimensions, SORT_STRING);
+        sort($readingDimensions, SORT_STRING);
+        $supportedGroupsValid = $completeTop3
+            ? ($runtime['supported_unordered_keys'] ?? null) === self::ENGLISH_TOP3_KEYS && ! isset($runtime['supported_unordered_key']) && ($runtime['scope'] ?? null) === 'selected_modules'
+            : ($runtime['supported_unordered_key'] ?? null) === 'R_I_A';
+
         if (array_column($dimensions, 'dimension_code') !== ['R', 'I', 'A', 'S', 'E', 'C']
             || $pairKeys !== $expectedPairKeys
-            || array_column($top3, 'unordered_top3_key') !== ['R_I_A']
+            || array_column($top3, 'unordered_top3_key') !== self::englishTop3Coverage($compilerVersion)
             || ($top3[0]['dimensions'] ?? null) !== ['R', 'I', 'A']
-            || ($runtime['supported_unordered_key'] ?? null) !== 'R_I_A'
-            || (count($runtime['dimension_reading_lines'] ?? []) !== 3 || array_diff(array_keys($runtime['dimension_reading_lines'] ?? []), ['R', 'I', 'A']) !== [])
+            || ! $supportedGroupsValid
+            || $readingDimensions !== $expectedReadingDimensions
             || count($runtime['top3_ordered_templates'] ?? []) !== 12
             || count($runtime['generic_slots']['layer_140q'] ?? []) !== 4
             || count($assets['faq_v1.en.json']['questions'] ?? []) !== 20
@@ -584,7 +673,7 @@ final class RiasecPrivateResultCompileService
         }
         foreach ($runtime['dimension_reading_lines'] as $line) {
             foreach (['label', 'short', 'focus', 'action'] as $field) {
-                if (trim((string) ($line[$field] ?? '')) === '') {
+                if (! is_string($line[$field] ?? null) || trim($line[$field]) === '') {
                     throw new RuntimeException('RIASEC selected English reading line is missing.');
                 }
             }

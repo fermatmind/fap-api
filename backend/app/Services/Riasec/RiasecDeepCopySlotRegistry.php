@@ -278,9 +278,23 @@ final class RiasecDeepCopySlotRegistry
                 }
             }
         } elseif ($key === 'triad_blend_copy') {
-            foreach ($this->privateResultSource->optionalAsset('top3_code_chain_strategy_v1.en.jsonl', 'en') as $row) {
+            $rows = $this->privateResultSource->optionalAsset('top3_code_chain_strategy_v1.en.jsonl', 'en');
+            $commonBoundary = null;
+            foreach ($rows as $row) {
+                if (($row['unordered_top3_key'] ?? null) === 'R_I_A') {
+                    $commonBoundary = $row['user_visible_boundary'] ?? null;
+                    break;
+                }
+            }
+            foreach ($rows as $row) {
                 if (($row['unordered_top3_key'] ?? null) === ($identity['top3_key'] ?? null)) {
-                    $slot = $this->authoredTop3ChainSlot($row['unordered_top3_key'], $row);
+                    $boundary = array_key_exists('user_visible_boundary', $row) ? $row['user_visible_boundary'] : $commonBoundary;
+                    if (! is_string($boundary) || trim($boundary) === '' || preg_match('/[\x{3400}-\x{9fff}]/u', $boundary) === 1) {
+                        return [];
+                    }
+                    $content = $row;
+                    $content['user_visible_boundary'] = $boundary;
+                    $slot = $this->authoredTop3ChainSlot($row['unordered_top3_key'], $content);
                     $slot['content_version'] = $row['asset_version'];
                     $slot['required_boundaries'] = $this->requiredBoundaries();
                     $slot['locale'] = 'en';
