@@ -235,20 +235,6 @@ final class ArticlePublishService
                 $transactionGuard($article, $workingRevision);
             }
 
-            $reviewedSource = data_get($workingRevision->authority_metadata_json, 'reviewed_source_v1');
-            if (is_array($reviewedSource)) {
-                $source = Article::withoutGlobalScopes()->whereKey($article->source_article_id)->lockForUpdate()->first();
-                if (! $source instanceof Article || ! $source->isSourceArticle()
-                    || (int) $source->org_id !== (int) $article->org_id
-                    || (int) $source->id !== (int) ($reviewedSource['article_id'] ?? 0)
-                    || (int) $source->working_revision_id !== (int) ($reviewedSource['working_revision_id'] ?? 0)
-                    || $source->translation_group_id !== $article->translation_group_id
-                    || $source->locale !== $article->source_locale) {
-                    throw new RuntimeException('reviewed_source_identity_changed');
-                }
-                ArticleSourceTargetSnapshot::assertPublicationHash($source, (string) ($reviewedSource['article_state_sha256'] ?? ''), true);
-            }
-
             $this->assertIndependentCandidateTags($article, $workingRevision, true);
 
             $this->articleBodyHeadingGuard->assertNoBodyH1((string) $workingRevision->content_md);
@@ -264,10 +250,6 @@ final class ArticlePublishService
                 'is_public' => true,
                 'published_at' => $article->published_at ?? $publishedAt,
                 'published_revision_id' => $workingRevisionId,
-                ...(is_array($reviewedSource) ? [
-                    'translated_from_version_hash' => $workingRevision->translated_from_version_hash,
-                    'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
-                ] : []),
             ])->save();
 
             $workingRevision->forceFill([

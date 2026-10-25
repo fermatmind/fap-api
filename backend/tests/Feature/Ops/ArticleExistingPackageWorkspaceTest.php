@@ -13,9 +13,6 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\Permission;
 use App\Models\Role;
-use App\Services\Cms\ArticlePublishService;
-use App\Services\Cms\ArticleTranslationRevisionWorkspace;
-use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -33,109 +30,6 @@ use Tests\TestCase;
 final class ArticleExistingPackageWorkspaceTest extends TestCase
 {
     use RefreshDatabase;
-
-    public function test_reviewed_source_binds_only_new_working_revision_and_promotion_retains_provenance(): void
-    {
-        $this->login();
-        [$source, $article] = $this->translationPair();
-        $published = $article->publishedRevision->getRawOriginal();
-        $publicHash = $article->translated_from_version_hash;
-        app(ArticleExistingPackageWorkspace::class)->import($article, $this->withSource($article, $source));
-        $article->refresh()->load(['publishedRevision', 'workingRevision']);
-        $this->assertSame($published, $article->publishedRevision->getRawOriginal());
-        $this->assertSame($publicHash, $article->translated_from_version_hash);
-        $this->assertSame('human_review', $article->workingRevision->revision_status);
-        $this->assertSame($source->source_version_hash, $article->workingRevision->translated_from_version_hash);
-        $this->assertFalse(app(ArticleTranslationRevisionWorkspace::class)->isWorkingRevisionStale($article));
-        $article->workingRevision->forceFill(['revision_status' => 'approved'])->save();
-        app(ArticlePublishService::class)->promoteExistingWorkingRevision($article->id, $article->working_revision_id, $article->published_revision_id, dispatchFollowUp: false);
-        $article->refresh();
-        $this->assertSame($source->source_version_hash, $article->translated_from_version_hash);
-        $this->assertSame('published', $article->translation_status);
-        $this->assertSame($article->working_revision_id, $article->published_revision_id);
-    }
-
-    public function test_legacy_transport_does_not_silently_rebind_a_stale_translation(): void
-    {
-        $this->login();
-        [$source, $article] = $this->translationPair();
-        app(ArticleExistingPackageWorkspace::class)->import($article, $this->transport($article));
-        $this->assertTrue(app(ArticleTranslationRevisionWorkspace::class)->isWorkingRevisionStale($article->fresh('workingRevision')));
-    }
-
-    #[DataProvider('invalidSourceBindings')]
-    public function test_source_binding_rejects_identity_and_concurrent_changes_without_writes(string $case): void
-    {
-        $this->login();
-        [$source, $article] = $this->translationPair();
-        $input = $this->withSource($article, $source, $case);
-        if (in_array($case, ['wrong_tenant', 'wrong_source_locale', 'wrong_source_group'], true)) {
-            $field = ['wrong_tenant' => 'org_id', 'wrong_source_locale' => 'locale', 'wrong_source_group' => 'translation_group_id'][$case];
-            $source->forceFill([$field => $case === 'wrong_tenant' ? 99 : 'wrong'])->saveQuietly();
-        }
-        if ($case === 'source_drift') {
-            $source->workingRevision->forceFill(['content_md' => 'Concurrent source change'])->saveQuietly();
-        }
-        $before = $article->getRawOriginal();
-        try {
-            app(ArticleExistingPackageWorkspace::class)->import($article, $input);
-            $this->fail('Source drift must reject the complete import.');
-        } catch (ValidationException) {
-            $this->assertSame($before, $article->fresh()->getRawOriginal());
-        }
-        $this->assertDatabaseCount('article_translation_revisions', 2);
-        $this->assertDatabaseCount('article_editorial_package_imports', 0);
-        $this->assertTemporaryInputsRemoved();
-    }
-
-    public static function invalidSourceBindings(): array
-    {
-        return [['wrong_source'], ['wrong_revision'], ['wrong_snapshot'], ['source_drift'], ['wrong_tenant'], ['wrong_source_locale'], ['wrong_source_group']];
-    }
-
-    public function test_source_change_after_approval_blocks_promotion_without_changing_publication(): void
-    {
-        $this->login();
-        [$source, $article] = $this->translationPair();
-        app(ArticleExistingPackageWorkspace::class)->import($article, $this->withSource($article, $source));
-        $article->refresh()->load(['publishedRevision', 'workingRevision']);
-        $published = $article->publishedRevision->getRawOriginal();
-        $article->workingRevision->forceFill(['revision_status' => 'approved'])->save();
-        $source->workingRevision->forceFill(['content_md' => 'Source changed after review'])->saveQuietly();
-        try {
-            app(ArticlePublishService::class)->promoteExistingWorkingRevision($article->id, $article->working_revision_id, $article->published_revision_id, dispatchFollowUp: false);
-            $this->fail('Source changed after approval must reject promotion.');
-        } catch (RuntimeException $exception) {
-            $this->assertSame('article_publication_state_changed', $exception->getMessage());
-        }
-        $this->assertSame($published, $article->fresh('publishedRevision')->publishedRevision->getRawOriginal());
-    }
-
-    private function translationPair(): array
-    {
-        $target = $this->article();
-        $source = Article::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => $target->slug, 'locale' => 'zh-CN', 'source_locale' => 'zh-CN', 'translation_status' => 'source', 'translation_group_id' => $target->translation_group_id, 'title' => 'Source title', 'excerpt' => 'Source summary', 'content_md' => 'Source body', 'source_version_hash' => str_repeat('a', 64)]);
-        $revision = ArticleTranslationRevision::withoutGlobalScopes()->create(['org_id' => 0, 'article_id' => $source->id, 'source_article_id' => $source->id, 'translation_group_id' => $source->translation_group_id, 'locale' => 'zh-CN', 'source_locale' => 'zh-CN', 'revision_number' => 1, 'revision_status' => 'source', 'source_version_hash' => $source->source_version_hash, 'title' => $source->title, 'excerpt' => $source->excerpt, 'content_md' => $source->content_md]);
-        $source->forceFill(['working_revision_id' => $revision->id])->save();
-        $target->forceFill(['source_article_id' => $source->id, 'source_locale' => 'zh-CN', 'translation_status' => 'published', 'translated_from_version_hash' => str_repeat('b', 64)])->save();
-        $target->publishedRevision->forceFill(['source_article_id' => $source->id, 'source_locale' => 'zh-CN', 'source_version_hash' => str_repeat('b', 64), 'translated_from_version_hash' => str_repeat('b', 64)])->save();
-
-        return [$source->fresh('workingRevision'), $target->fresh(['workingRevision', 'publishedRevision', 'seoMeta'])];
-    }
-
-    private function withSource(Article $article, Article $source, string $case = ''): string
-    {
-        $transport = json_decode($this->transport($article), true);
-        $manifest = json_decode(base64_decode($transport['manifest_base64']), true);
-        $manifest['reviewed_source'] = ['article_id' => $case === 'wrong_source' ? 99999 : (int) $source->id,
-            'working_revision_id' => $case === 'wrong_revision' ? 99999 : (int) $source->working_revision_id,
-            'article_state_sha256' => $case === 'wrong_snapshot' ? str_repeat('0', 64) : ArticleSourceTargetSnapshot::publicationHash($source)];
-        $raw = json_encode($manifest, JSON_THROW_ON_ERROR);
-        $transport['manifest_base64'] = base64_encode($raw);
-        $transport['manifest_sha256'] = hash('sha256', $raw);
-
-        return json_encode($transport, JSON_THROW_ON_ERROR);
-    }
 
     public function test_native_import_updates_only_working_revision_and_replay_rejects_stale_baseline(): void
     {

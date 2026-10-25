@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Support;
 
 use App\Models\Article;
-use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\SeoContentPackage\SeoContentPackageExistingArticleUpdater;
 use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Support\Facades\DB;
@@ -51,21 +50,11 @@ final class ArticleExistingPackageWorkspace
                     $this->require(false, 'article_update_baseline_changed');
                 }
                 $this->assertTarget($article, $manifest);
-                $reviewedSource = $this->reviewedSource($article, $manifest);
                 $options = $this->options($root, $manifest);
                 $plan = $this->updater->planFromDirectory($options);
                 $this->assertPlan($plan);
                 $result = $this->updater->updateWorkingRevisionFromDirectory([...$options, 'execute' => true, 'dry_run' => false]);
                 $this->assertPlan($result);
-                if ($reviewedSource !== null) {
-                    $revision = ArticleTranslationRevision::withoutGlobalScopes()->findOrFail($result['articles'][0]['working_revision_id']);
-                    $this->require((int) $revision->id !== (int) $article->published_revision_id, 'reviewed_source_requires_isolated_revision');
-                    $revision->forceFill([
-                        'source_version_hash' => $reviewedSource['source_version_hash'],
-                        'translated_from_version_hash' => $reviewedSource['source_version_hash'],
-                        'authority_metadata_json' => array_merge((array) $revision->authority_metadata_json, ['reviewed_source_v1' => $reviewedSource]),
-                    ])->save();
-                }
 
                 // Native code owns the import gate, review status and transaction.
                 // No package payload or server directory is returned to Livewire.
@@ -74,40 +63,6 @@ final class ArticleExistingPackageWorkspace
         } finally {
             File::deleteDirectory($root);
         }
-    }
-
-    /**
-     * An explicit source review binds only this new working candidate, never published history.
-     *
-     * @review-surface article_translation_revision
-     */
-    private function reviewedSource(Article $article, array $manifest): ?array
-    {
-        if (! array_key_exists('reviewed_source', $manifest)) {
-            return null;
-        }
-        $binding = $manifest['reviewed_source'];
-        $this->require(is_array($binding) && ! $article->isSourceArticle(), 'invalid_reviewed_source');
-        $this->require(is_int($binding['article_id'] ?? null) && $binding['article_id'] === (int) $article->source_article_id, 'reviewed_source_identity_mismatch');
-        $source = Article::withoutGlobalScopes()->whereKey($binding['article_id'])->lockForUpdate()->first();
-        $this->require($source instanceof Article && $source->isSourceArticle()
-            && (int) $source->org_id === 0 && $source->deleted_at === null
-            && $source->translation_group_id === $article->translation_group_id
-            && $source->locale === $article->source_locale, 'reviewed_source_identity_mismatch');
-        $this->require(is_int($binding['working_revision_id'] ?? null)
-            && $binding['working_revision_id'] === (int) $source->working_revision_id, 'reviewed_source_revision_changed');
-        try {
-            ArticleSourceTargetSnapshot::assertPublicationHash($source, (string) ($binding['article_state_sha256'] ?? ''), true);
-        } catch (\RuntimeException) {
-            $this->require(false, 'reviewed_source_state_changed');
-        }
-        $revision = ArticleTranslationRevision::withoutGlobalScopes()->whereKey($source->working_revision_id)->lockForUpdate()->first();
-        $this->require($revision instanceof ArticleTranslationRevision && (int) $revision->article_id === (int) $source->id
-            && (int) $revision->org_id === 0 && $revision->locale === $source->locale
-            && $revision->translation_group_id === $source->translation_group_id
-            && preg_match('/^[a-f0-9]{64}$/D', (string) $revision->source_version_hash) === 1, 'reviewed_source_revision_invalid');
-
-        return [...$binding, 'source_version_hash' => (string) $revision->source_version_hash];
     }
 
     private function assertTarget(Article $article, array $manifest): void
