@@ -59,7 +59,7 @@ final class SearchChannelQueueIdempotency
             $staleSubmittedItems = [];
 
             foreach ($rows as $row) {
-                // A never-submitted, unversioned legacy draft must not pin a new
+                // A never-submitted legacy draft without a content version must not pin a new
                 // Article decision. Keep versioned drafts and uncertain attempts blocking.
                 if ($this->unsubmittedLegacyArticleDraft($row, $canonicalUrl, $locale, $channel, $normalizedSourceContentHash, $sourceVersion, $connectionName)) {
                     continue;
@@ -99,7 +99,7 @@ final class SearchChannelQueueIdempotency
     {
         if ($row->page_entity_type !== 'article' || $row->source_authority !== 'backend_cms'
             || $row->execution_state !== 'dry_run_ready' || ! in_array($row->approval_state, ['pending', 'approved'], true)
-            || $row->content_hash !== null || ! hash_equals($this->key($url, $locale, $channel), (string) $row->idempotency_key)
+            || $row->content_hash !== null || ! $this->legacyDraftKeyMatches($row, $url, $locale, $channel)
             || preg_match('/\Aarticle-decision:[1-9][0-9]*:content:([a-f0-9]{64})\z/', $version ?? '', $match) !== 1
             || $contentHash === null || ! hash_equals($match[1], $contentHash)) {
             return false;
@@ -117,6 +117,17 @@ final class SearchChannelQueueIdempotency
         } catch (\Throwable) {
             return false;
         }
+    }
+
+    private function legacyDraftKeyMatches(object $row, string $url, string $locale, string $channel): bool
+    {
+        $key = (string) $row->idempotency_key;
+        if (hash_equals($this->key($url, $locale, $channel), $key)) {
+            return true;
+        }
+        $lastmod = trim((string) $row->lastmod);
+
+        return $lastmod !== '' && hash_equals($this->key($url, $locale, $channel, 'lastmod:'.$lastmod), $key);
     }
 
     private function submittedItemStaleReason(object $row, ?int $sourceTimestamp, ?string $sourceContentHash, ?string $expectedKey): ?string

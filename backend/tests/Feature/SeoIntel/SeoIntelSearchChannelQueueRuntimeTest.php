@@ -36,11 +36,15 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[DataProvider('legacyApprovalStates')]
-    public function test_new_article_decision_can_plan_past_an_audited_unsubmitted_legacy_draft(string $approval): void
+    public function test_new_article_decision_can_plan_past_an_audited_unsubmitted_legacy_draft(string $approval, bool $lastmodKey): void
     {
         $url = 'https://fermatmind.com/en/articles/updated-article';
         $hash = str_repeat('a', 64);
-        $id = $this->seedQueueItem($url, ['page_entity_type' => 'article', 'approval_state' => $approval]);
+        $overrides = ['page_entity_type' => 'article', 'approval_state' => $approval, 'lastmod' => '2026-05-27 00:10:46'];
+        if ($lastmodKey) {
+            $overrides['idempotency_key'] = app(SearchChannelQueueIdempotency::class)->key($url, 'en', 'indexnow', 'lastmod:'.$overrides['lastmod']);
+        }
+        $id = $this->seedQueueItem($url, $overrides);
         $this->legacyDraftEvent($id, 'queue_item_planned');
         if ($approval === 'approved') {
             $this->legacyDraftEvent($id, 'search_channel_queue_approved');
@@ -68,7 +72,7 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
 
     public static function legacyApprovalStates(): array
     {
-        return [['pending'], ['approved']];
+        return [['pending', false], ['approved', false], ['pending', true], ['approved', true]];
     }
 
     #[DataProvider('unsafeLegacyDrafts')]
@@ -82,6 +86,7 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
             'other_family' => $overrides['page_entity_type'] = 'research_report',
             'other_authority' => $overrides['source_authority'] = 'other',
             'versioned_key' => $overrides['idempotency_key'] = app(SearchChannelQueueIdempotency::class)->key($url, 'en', 'indexnow', $version),
+            'unrelated_lastmod_key' => $overrides['idempotency_key'] = app(SearchChannelQueueIdempotency::class)->key($url, 'en', 'indexnow', 'lastmod:2000-01-01 00:00:00'),
             'known_hash' => $overrides['content_hash'] = str_repeat('b', 64),
             'submitting', 'submit_failed', 'provider_security_hold', 'platform_action_required' => $overrides['execution_state'] = $case,
             'rejected' => $overrides['approval_state'] = 'rejected',
@@ -128,7 +133,7 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
 
     public static function unsafeLegacyDrafts(): array
     {
-        return array_map(fn ($case) => [$case], ['other_family', 'other_authority', 'versioned_key', 'known_hash', 'submitting', 'submit_failed', 'provider_security_hold', 'platform_action_required', 'rejected', 'missing_version', 'invalid_version', 'mismatched_hash', 'missing_hash', 'no_audit', 'submission_attempt', 'retry_reset', 'unknown_event', 'audit_unavailable', 'audit_probe_failure', 'audit_read_failure']);
+        return array_map(fn ($case) => [$case], ['other_family', 'other_authority', 'versioned_key', 'unrelated_lastmod_key', 'known_hash', 'submitting', 'submit_failed', 'provider_security_hold', 'platform_action_required', 'rejected', 'missing_version', 'invalid_version', 'mismatched_hash', 'missing_hash', 'no_audit', 'submission_attempt', 'retry_reset', 'unknown_event', 'audit_unavailable', 'audit_probe_failure', 'audit_read_failure']);
     }
 
     private function legacyDraftEvent(int $id, string $type): void
