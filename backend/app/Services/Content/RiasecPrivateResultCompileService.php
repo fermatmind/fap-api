@@ -21,7 +21,11 @@ final class RiasecPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.riasec.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.3.0';
+    public const COMPILER_VERSION = '1.4.0';
+
+    public const ENGLISH_PAIR_KEYS = ['R_I', 'R_A', 'R_S', 'R_E', 'R_C', 'I_A', 'I_S', 'I_E', 'I_C', 'A_S', 'A_E', 'A_C', 'S_E', 'S_C', 'E_C'];
+
+    public const ENGLISH_PAIR_READER_FIELDS = ['pair_label', 'short_label', 'chemistry', 'positive_value', 'real_world_cost', 'common_misread', 'activities_to_validate', 'micro_experiment', 'user_visible_boundary', 'result_page_teaser', 'deep_report_extension_hint', 'pair_tension', 'context_costs', 'validation_questions'];
 
     public const ENGLISH_DIMENSION_STATE_ASSET = '140q_task_environment_role_v1.en.jsonl';
 
@@ -50,7 +54,7 @@ final class RiasecPrivateResultCompileService
         'near_tie_alternate_code_copy_v1.zh-CN.json' => ['role' => 'near-tie and alternate-code copy', 'schema' => 'riasec.near_tie.asset.v1', 'surfaces' => ['result', 'report']],
         'next_exploration_nodes_v1.zh-CN.jsonl' => ['role' => 'next exploration copy', 'schema' => 'riasec.next_exploration_node.v1', 'surfaces' => ['result', 'report']],
         'occupation_examples_boundary_v1.zh-CN.jsonl' => ['role' => 'bounded occupation examples', 'schema' => 'riasec.occupation_example_boundary.v1', 'surfaces' => ['result', 'report']],
-        'pair_blend_15_pairs_v1.en.jsonl' => ['role' => 'three selected English pair blends', 'schema' => 'riasec.pair_blend_asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
+        'pair_blend_15_pairs_v1.en.jsonl' => ['role' => 'English pair blend copy for all fifteen identities', 'schema' => 'riasec.pair_blend_asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'pair_blend_15_pairs_v1.zh-CN.jsonl' => ['role' => 'fifteen pair blend copy', 'schema' => 'riasec.pair_blend_asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'professional_method_boundary_v1.en.json' => ['role' => 'English method and claim boundaries', 'schema' => 'riasec.professional_method_boundary.asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'professional_method_boundary_v1.zh-CN.json' => ['role' => 'method and claim boundaries', 'schema' => 'riasec.professional_method_boundary.asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
@@ -226,7 +230,7 @@ final class RiasecPrivateResultCompileService
             'feedback_action' => true,
             'secondary_surfaces' => ['faq', 'technical_note', 'pdf', 'print', 'history', 'compare', 'share', 'lifecycle'],
             'locale_modules' => ['en' => ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1']],
-            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => ['R_I', 'R_A', 'I_A'], 'top3_groups' => ['R_I_A'], 'ordered_codes' => ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'], 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8],
+            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => self::englishPairCoverage(self::COMPILER_VERSION), 'top3_groups' => ['R_I_A'], 'ordered_codes' => ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'], 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8],
         ];
     }
 
@@ -302,8 +306,27 @@ final class RiasecPrivateResultCompileService
         return match ($compilerVersion) {
             '1.0.0' => array_filter(self::SOURCE_CONTRACT, static fn (string $path): bool => ! str_contains($path, '.en.'), ARRAY_FILTER_USE_KEY),
             '1.1.0' => array_filter(self::SOURCE_CONTRACT, static fn (string $path): bool => ! str_contains($path, '.en.') || $path === self::ENGLISH_ACTIVITY_ASSET, ARRAY_FILTER_USE_KEY),
-            '1.2.0' => array_diff_key(self::SOURCE_CONTRACT, [self::ENGLISH_DIMENSION_STATE_ASSET => true]),
+            '1.2.0' => array_diff_key(self::legacySelectedSourceContract(), [self::ENGLISH_DIMENSION_STATE_ASSET => true]),
+            '1.3.0' => self::legacySelectedSourceContract(),
             self::COMPILER_VERSION => self::SOURCE_CONTRACT,
+            default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
+        };
+    }
+
+    /** Keep immutable 1.2/1.3 manifest metadata as published. */
+    private static function legacySelectedSourceContract(): array
+    {
+        $contract = self::SOURCE_CONTRACT;
+        $contract['pair_blend_15_pairs_v1.en.jsonl']['role'] = 'three selected English pair blends';
+
+        return $contract;
+    }
+
+    public static function englishPairCoverage(string $compilerVersion): array
+    {
+        return match ($compilerVersion) {
+            '1.2.0', '1.3.0' => ['R_I', 'R_A', 'I_A'],
+            self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -386,6 +409,62 @@ final class RiasecPrivateResultCompileService
         }
     }
 
+    /** @param list<array<string,mixed>> $rows @param list<array<string,mixed>> $chineseRows */
+    public function assertEnglishPairSources(array $rows, array $chineseRows): void
+    {
+        $sourceHash = 'd406bf9b4913c8b6db6a08ab4a7358d8b4b7cdb335730a20642392e753e4cd4a';
+        if (count($rows) !== 15 || count($chineseRows) !== 15
+            || hash('sha256', $this->canonicalJson($chineseRows)) !== $sourceHash) {
+            throw new RuntimeException('RIASEC English pair coverage or source binding is invalid.');
+        }
+        $sourceByKey = array_column($chineseRows, null, 'pair_key');
+        $identities = [];
+        foreach ($rows as $row) {
+            $key = $row['pair_key'] ?? '';
+            $source = $sourceByKey[$key] ?? null;
+            if (! is_array($source) || isset($identities[$key])
+                || ($row['locale'] ?? null) !== 'en'
+                || ($row['schema_version'] ?? null) !== 'riasec.pair_blend_asset.v1'
+                || ($row['asset_version'] ?? null) !== 'riasec_pair_blend_15_pairs_v1.en'
+                || ($row['frontend_fallback_allowed'] ?? true) !== false
+                || ($row['review_status'] ?? null) !== 'draft_human_review_required'
+                || isset($row['evidence_level'])
+                || ($row['source_review_status'] ?? null) !== $source['review_status']
+                || ($row['source_line'] ?? null) !== array_search($key, array_column($chineseRows, 'pair_key'), true) + 1) {
+                throw new RuntimeException('RIASEC English pair identity or locale is invalid.');
+            }
+            $identities[$key] = true;
+            foreach (['dimensions', 'required_boundaries', 'forbidden_claims', 'applicable_form_codes', 'applicable_profile_shapes', 'applicable_quality_states'] as $field) {
+                if (($row[$field] ?? null) !== $source[$field]) {
+                    throw new RuntimeException('RIASEC English pair machine boundary is invalid.');
+                }
+            }
+            if (! in_array($key, ['R_I', 'R_A', 'I_A'], true)
+                && $this->canonicalJson($row['source_binding'] ?? null) !== $this->canonicalJson([
+                    'source_asset' => 'pair_blend_15_pairs_v1.zh-CN.jsonl',
+                    'raw_sha256' => 'f75848ed7e21c80402fa21666703c99f0ae00448039c3a4b3ca93bb707110f9b',
+                    'source_row' => $row['source_line'],
+                ])) {
+                throw new RuntimeException('RIASEC English pair provenance is invalid.');
+            }
+            foreach (self::ENGLISH_PAIR_READER_FIELDS as $field) {
+                $value = $row[$field] ?? null;
+                if (is_array($source[$field])) {
+                    if (! is_array($value) || ! array_is_list($value) || count($value) !== count($source[$field])) {
+                        throw new RuntimeException('RIASEC English pair reader list is incomplete.');
+                    }
+                } elseif (! is_string($value)) {
+                    throw new RuntimeException('RIASEC English pair reader text is invalid.');
+                }
+                foreach (is_array($value) ? $value : [$value] as $text) {
+                    if (! is_string($text) || trim($text) === '' || preg_match('/[\x{3400}-\x{9fff}]/u', $text) === 1) {
+                        throw new RuntimeException('RIASEC English pair reader text is invalid.');
+                    }
+                }
+            }
+        }
+    }
+
     public function assertSelectedEnglishSources(array $assets, string $compilerVersion = self::COMPILER_VERSION): void
     {
         foreach (self::sourceContract($compilerVersion) as $filename => $contract) {
@@ -406,10 +485,17 @@ final class RiasecPrivateResultCompileService
         }
         $dimensions = $assets['dimension_deep_copy_v1.en.json']['dimensions'] ?? [];
         $pairs = $assets['pair_blend_15_pairs_v1.en.jsonl'] ?? [];
+        $pairKeys = array_column($pairs, 'pair_key');
+        $expectedPairKeys = self::englishPairCoverage($compilerVersion);
+        if ($compilerVersion === self::COMPILER_VERSION) {
+            sort($pairKeys, SORT_STRING);
+            sort($expectedPairKeys, SORT_STRING);
+            $this->assertEnglishPairSources($pairs, $assets['pair_blend_15_pairs_v1.zh-CN.jsonl'] ?? []);
+        }
         $top3 = $assets['top3_code_chain_strategy_v1.en.jsonl'] ?? [];
         $runtime = $assets['runtime_surface_copy_v1.en.json'] ?? [];
         if (array_column($dimensions, 'dimension_code') !== ['R', 'I', 'A', 'S', 'E', 'C']
-            || array_column($pairs, 'pair_key') !== ['R_I', 'R_A', 'I_A']
+            || $pairKeys !== $expectedPairKeys
             || array_column($top3, 'unordered_top3_key') !== ['R_I_A']
             || ($top3[0]['dimensions'] ?? null) !== ['R', 'I', 'A']
             || ($runtime['supported_unordered_key'] ?? null) !== 'R_I_A'

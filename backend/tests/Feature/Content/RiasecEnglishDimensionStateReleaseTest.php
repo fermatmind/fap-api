@@ -87,6 +87,16 @@ final class RiasecEnglishDimensionStateReleaseTest extends TestCase
         $manifest['compiler'] = $payload['compiler'];
         $manifest['coverage'] = $payload['coverage'];
         $manifest['source_files'] = array_values(array_filter($manifest['source_files'], fn ($row) => $row['path'] !== Compiler::ENGLISH_DIMENSION_STATE_ASSET));
+        $payload['assets']['pair_blend_15_pairs_v1.en.jsonl'] = array_slice($payload['assets']['pair_blend_15_pairs_v1.en.jsonl'], 0, 3);
+        $payload['coverage']['english_selected_sources']['pairs'] = Compiler::englishPairCoverage('1.2.0');
+        $manifest['coverage'] = $payload['coverage'];
+        $canonical = fn ($value) => (new \ReflectionMethod(Compiler::class, 'canonicalJson'))->invoke(app(Compiler::class), $value);
+        foreach ($manifest['source_files'] as &$row) {
+            $row = array_merge($row, Compiler::sourceContract('1.2.0')[$row['path']]);
+            $row['sha256'] = hash('sha256', $canonical($payload['assets'][$row['path']]));
+        }
+        unset($row);
+
         $payload['source_hash'] = $manifest['source_hash'] = $manifest['content_hash'] = hash('sha256', implode('', array_map(fn ($row) => $row['path']."\0".$row['sha256']."\n", $manifest['source_files'])));
         unset($payload['compiled_hash']);
         $canonical = fn ($value) => (new \ReflectionMethod(Compiler::class, 'canonicalJson'))->invoke(app(Compiler::class), $value);
