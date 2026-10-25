@@ -95,10 +95,10 @@ final class SeoContentPackageExistingArticleUpdater
 
             $revision = $this->revisionWorkspace->saveWorkingRevision($locked, [
                 'title' => (string) $item['title'],
-                'excerpt' => (string) $item['excerpt'],
+                'excerpt' => $item['excerpt'],
                 'content_md' => (string) $item['body_markdown'],
-                'seo_title' => (string) $item['meta_title'],
-                'seo_description' => (string) $item['meta_description'],
+                'seo_title' => $item['meta_title'],
+                'seo_description' => $item['meta_description'],
                 'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
             ]);
 
@@ -189,7 +189,7 @@ final class SeoContentPackageExistingArticleUpdater
             } elseif ($articleId > 0) {
                 $errors[] = $this->issue('article_id', 'article_not_found', 'Target article was not found.');
             }
-            $item = $this->buildPackageItem($packageRoot, $manifest, $identityLock, $expectedLocale, $errors, $warnings);
+            $item = $this->buildPackageItem($packageRoot, $manifest, $identityLock, $expectedLocale, $article, $baselineGuard !== [], $errors, $warnings);
             if ($article instanceof Article && $item !== []) {
                 $item['article'] = $article;
                 $item['baseline_guard'] = $baselineGuard;
@@ -598,6 +598,8 @@ final class SeoContentPackageExistingArticleUpdater
         array $manifest,
         array $identityLock,
         string $expectedLocale,
+        ?Article $article,
+        bool $baselineLocked,
         array &$errors,
         array &$warnings
     ): array {
@@ -629,11 +631,32 @@ final class SeoContentPackageExistingArticleUpdater
             'llms_change_allowed' => (bool) ($import['llms_change_allowed'] ?? $fields['llms_change_allowed'] ?? false),
         ];
 
-        if ((string) $item['excerpt'] === '') {
+        if ($baselineLocked && $article?->publishedRevision instanceof ArticleTranslationRevision
+            && $article->publishedRevision->getRawOriginal('excerpt') === null
+            && ($import['excerpt'] ?? $fields['excerpt'] ?? $manifestPage['excerpt'] ?? null) === null) {
+            $item['excerpt'] = null;
+        } elseif ((string) $item['excerpt'] === '') {
             $item['excerpt'] = mb_substr((string) $item['meta_description'], 0, 240);
         }
 
-        $this->validateItem($item, $errors, $warnings);
+        // A locked body-only import may retain absent revision SEO. Do not turn
+        // NULL into an empty string or invent metadata for an existing article.
+        $published = $article?->publishedRevision;
+        $working = $article?->workingRevision;
+        $preservesMissingSeo = $baselineLocked
+            && $published instanceof ArticleTranslationRevision
+            && $working instanceof ArticleTranslationRevision
+            && $item['title'] === $published->title
+            && $item['excerpt'] === $published->excerpt
+            && $this->bodyHash($body) !== $this->bodyHash((string) $published->content_md);
+        foreach (['meta_title' => 'seo_title', 'meta_description' => 'seo_description'] as $field => $attribute) {
+            if ($preservesMissingSeo && $item[$field] === ''
+                && $published->getRawOriginal($attribute) === null
+                && $working->getRawOriginal($attribute) === null) {
+                $item[$field] = null;
+            }
+        }
+        $this->validateItem($item, $errors, $warnings, $preservesMissingSeo);
 
         return $item;
     }
@@ -770,10 +793,13 @@ final class SeoContentPackageExistingArticleUpdater
      * @param  list<array<string,mixed>>  $errors
      * @param  list<array<string,mixed>>  $warnings
      */
-    private function validateItem(array $item, array &$errors, array &$warnings): void
+    private function validateItem(array $item, array &$errors, array &$warnings, bool $preservesMissingSeo = false): void
     {
         $locale = (string) $item['locale'];
         foreach (['translation_group_id', 'slug', 'title', 'meta_title', 'meta_description', 'canonical_url', 'body_markdown'] as $field) {
+            if ($preservesMissingSeo && in_array($field, ['meta_title', 'meta_description'], true) && $item[$field] === null) {
+                continue;
+            }
             if (trim((string) ($item[$field] ?? '')) === '') {
                 $errors[] = $this->issue($locale.'.'.$field, 'missing_required_field', $field.' is required.');
             }

@@ -262,11 +262,13 @@ final class ArticlePublishService
             ])->saveQuietly();
 
             $seoUpdates = [];
-            if (filled($workingRevision->seo_title)) {
+            if (filled($workingRevision->seo_title)
+                && $workingRevision->getRawOriginal('seo_title') !== $previousPublishedRevision->getRawOriginal('seo_title')) {
                 $seoUpdates['seo_title'] = (string) $workingRevision->seo_title;
                 $seoUpdates['og_title'] = (string) $workingRevision->seo_title;
             }
-            if (filled($workingRevision->seo_description)) {
+            if (filled($workingRevision->seo_description)
+                && $workingRevision->getRawOriginal('seo_description') !== $previousPublishedRevision->getRawOriginal('seo_description')) {
                 $seoUpdates['seo_description'] = (string) $workingRevision->seo_description;
                 $seoUpdates['og_description'] = (string) $workingRevision->seo_description;
             }

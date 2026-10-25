@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Support;
 use App\Events\PublicAuthorityChanged;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Models\Article;
+use App\Services\Cms\ArticleSeoService;
 use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -258,7 +259,8 @@ final class ArticleControlledPublicationWorkspace
                 '--current-published-revision-id' => (string) $article->published_revision_id,
                 '--translation-group-id' => (string) $article->translation_group_id,
                 '--expected-slug' => (string) $article->slug,
-                '--expected-canonical' => (string) $article->seoMeta?->canonical_url,
+                '--expected-canonical' => (string) (filled($article->seoMeta?->canonical_url) ? $article->seoMeta->canonical_url
+                    : app(ArticleSeoService::class)->buildCanonicalUrl((string) $article->slug, (string) $article->locale)),
                 '--revalidate-after-commit' => true,
             ];
             if ($acknowledgeClaims) {

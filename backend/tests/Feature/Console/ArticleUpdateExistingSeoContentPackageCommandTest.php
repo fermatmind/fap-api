@@ -29,6 +29,42 @@ final class ArticleUpdateExistingSeoContentPackageCommandTest extends TestCase
 
     private const CANONICAL = '/zh/articles/riasec-holland-career-interest-test-explained';
 
+    public function test_guarded_body_only_import_retains_null_seo_without_creating_metadata(): void
+    {
+        $article = $this->createExistingPublishedArticle40();
+        $article->seoMeta->delete();
+        $article->publishedRevision->forceFill(['excerpt' => null, 'seo_title' => null, 'seo_description' => null])->save();
+        $article = $article->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $package = $this->writeExistingUpdatePackage(function (array &$files) use ($article): void {
+            foreach ($files as &$file) {
+                if (! is_array($file)) {
+                    continue;
+                }
+                unset($file['meta_title'], $file['meta_description']);
+                if (isset($file['title'])) {
+                    $file['title'] = $article->publishedRevision->title;
+                    $file['excerpt'] = $article->publishedRevision->excerpt;
+                }
+                foreach ($file['pages'] ?? [] as $index => $page) {
+                    unset($page['meta_title_draft'], $page['meta_description_draft']);
+                    $page['title'] = $article->publishedRevision->title;
+                    $file['pages'][$index] = $page;
+                }
+            }
+        });
+        $this->assertSame(1, Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, ['--dry-run' => true, '--json' => true])));
+        $this->assertErrorCode($this->jsonOutput(), 'missing_required_field');
+        $this->assertSame(0, Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, [
+            ...$this->baselineOptions($article), '--execute' => true, '--json' => true,
+        ])), Artisan::output());
+        $working = $article->fresh(['workingRevision'])->workingRevision;
+        $this->assertNotSame((int) $article->published_revision_id, (int) $working->id);
+        $this->assertNull($working->getRawOriginal('excerpt'));
+        $this->assertNull($working->getRawOriginal('seo_title'));
+        $this->assertNull($working->getRawOriginal('seo_description'));
+        $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $article->id)->count());
+    }
+
     public function test_guarded_plan_is_read_only_and_guarded_execute_forks_only_working_revision(): void
     {
         $article = $this->createExistingPublishedArticle40();

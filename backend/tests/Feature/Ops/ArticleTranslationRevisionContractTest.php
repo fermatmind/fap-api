@@ -693,6 +693,31 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $this->assertSame('Protected revision body', $revision->content_md);
     }
 
+    public function test_byline_only_editor_save_preserves_absent_media_and_revision_fields(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $org = $this->createOrganization();
+        app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
+        $article = $this->createArticle(0, 'en', 'Existing editorial article');
+        $this->runRevisionBackfill();
+        $article->refresh();
+        $article->workingRevision->forceFill(['created_by' => $admin->id])->saveQuietly();
+        $article->forceFill(['cover_image_variants' => null])->saveQuietly();
+        $before = $article->fresh(['workingRevision', 'seoMeta']);
+        $revision = $before->workingRevision->getAttributes();
+        session($this->opsSession($admin, $org));
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        Livewire::test(EditArticle::class, ['record' => $article->getKey()])
+            ->fillForm(['author_name' => 'FermatMind Editorial'])->call('save')->assertHasNoFormErrors();
+        $after = $article->fresh(['workingRevision', 'seoMeta']);
+        $this->assertSame('FermatMind Editorial', $after->author_name);
+        foreach (['cover_image_url', 'cover_image_alt', 'cover_image_width', 'cover_image_height', 'cover_image_variants', 'content_md', 'working_revision_id', 'published_revision_id'] as $field) {
+            $this->assertSame($before->getRawOriginal($field), $after->getRawOriginal($field), $field);
+        }
+        $this->assertSame($revision, $after->workingRevision->getAttributes());
+        $this->assertSame($before->seoMeta?->getAttributes(), $after->seoMeta?->getAttributes());
+    }
+
     public function test_filament_cover_variants_roundtrip_nested_json_without_revision_or_body_changes(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);

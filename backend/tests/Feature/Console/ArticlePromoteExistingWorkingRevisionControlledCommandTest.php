@@ -32,6 +32,95 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
 
     private const CANONICAL = '/zh/articles/eq-test-tool-guide';
 
+    #[DataProvider('bodyOnlySeoStates')]
+    public function test_locked_body_only_editor_publication_preserves_absent_and_existing_seo(bool $hasSeo, ?string $canonical): void
+    {
+        $this->loginPublisher();
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        Http::fake(['*' => Http::response(self::frontendArticleSuccessReceipt())]);
+
+        $article = $this->bodyOnlyArticle($hasSeo, $canonical);
+        $old = (int) $article->published_revision_id;
+        $seo = $article->seoMeta?->getAttributes();
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $prepared = $workspace->prepare($article);
+        $this->assertTrue(json_decode($prepared['preflight'], true)['ok'], $prepared['preflight']);
+        $result = $workspace->publish($article, ['target_hash' => $prepared['target_hash'], 'preview_approved' => true]);
+        $this->assertTrue($result['ok'], json_encode($result));
+        $article = $article->fresh(['seoMeta']);
+        $this->assertNotSame($old, (int) $article->published_revision_id);
+        $this->assertSame($seo, $article->seoMeta?->getAttributes());
+        $this->assertSame($hasSeo, $article->is_indexable);
+        $this->assertSame($hasSeo, $article->sitemap_eligible);
+        $this->assertSame($hasSeo, $article->llms_eligible);
+        $this->assertNull($article->cover_image_url);
+
+    }
+
+    #[DataProvider('bodyOnlyFailures')]
+    public function test_body_only_exceptions_require_snapshot_exact_import_and_unchanged_metadata(string $failure): void
+    {
+
+        $article = $this->bodyOnlyArticle(false);
+        if ($failure === 'import') {
+            $import = ArticleEditorialPackageImport::query()->withoutGlobalScopes()->where('article_id', $article->id)->latest('id')->firstOrFail();
+            $summary = $import->validation_summary_json;
+            $summary['published_revision_id'] = 999999;
+            $import->forceFill(['validation_summary_json' => $summary])->save();
+        } elseif (in_array($failure, ['title', 'seo_title'], true)) {
+            $article->workingRevision->forceFill([$failure => 'Different metadata'])->save();
+        }
+        $options = ['--dry-run' => true, '--json' => true];
+        if ($failure !== 'snapshot') {
+            $options['--expected-article-state-sha256'] = \App\Support\ArticleSourceTargetSnapshot::publicationHash($article->fresh());
+        }
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, $options)));
+        $this->assertErrorCode($this->jsonOutput(), 'cover_image_or_alt_missing');
+
+    }
+
+    public static function bodyOnlySeoStates(): array
+    {
+        return [[false, null], [true, null], [true, ''], [true, self::CANONICAL]];
+    }
+
+    public static function bodyOnlyFailures(): array
+    {
+        return [['snapshot'], ['import'], ['title'], ['seo_title']];
+    }
+
+    private function bodyOnlyArticle(bool $hasSeo, ?string $canonical = null): Article
+    {
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $published = $article->publishedRevision;
+        $fields = [];
+        foreach (['title', 'excerpt', 'seo_title', 'seo_description'] as $field) {
+            $fields[$field] = $published->getRawOriginal($field);
+        }
+        $article->workingRevision->forceFill($fields)->save();
+        $article->forceFill(['cover_image_url' => null, 'cover_image_alt' => null,
+            'is_indexable' => $hasSeo, 'sitemap_eligible' => $hasSeo, 'llms_eligible' => $hasSeo])->save();
+        $article->tags()->detach();
+        if ($hasSeo) {
+            $article->seoMeta->forceFill(['canonical_url' => $canonical])->save();
+        } else {
+            $article->seoMeta->delete();
+            $published->forceFill(['excerpt' => null, 'seo_title' => null, 'seo_description' => null])->save();
+            $article->workingRevision->forceFill(['excerpt' => null, 'seo_title' => null, 'seo_description' => null])->save();
+        }
+        $import = ArticleEditorialPackageImport::query()->withoutGlobalScopes()->where('article_id', $article->id)->latest('id')->firstOrFail();
+        $summary = $import->validation_summary_json;
+        $summary['article_id'] = (int) $article->id;
+        $summary['working_revision_id'] = (int) $article->working_revision_id;
+        $summary['published_revision_id'] = (int) $published->id;
+        $exactness = $import->exactness_json;
+        $exactness['translation_group_id'] = (string) $article->translation_group_id;
+        $import->forceFill(['validation_summary_json' => $summary, 'exactness_json' => $exactness])->save();
+
+        return $article->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+    }
+
     public function test_editor_promotes_existing_revision_and_distinguishes_committed_cache_failure(): void
     {
         $this->loginPublisher();

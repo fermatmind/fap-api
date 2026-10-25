@@ -430,6 +430,11 @@ class EditArticle extends EditRecord
         /** @var Article $record */
         $record = $this->getRecord();
         $data['org_id'] = (int) $record->org_id;
+        if ($record->getRawOriginal('cover_image_variants') === null
+            && array_key_exists('cover_image_variants', $data)
+            && $data['cover_image_variants'] === []) {
+            unset($data['cover_image_variants']);
+        }
         $this->workingRevisionPayload = [
             'title' => $data['title'] ?? null,
             'excerpt' => $data['excerpt'] ?? null,
