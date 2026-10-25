@@ -579,7 +579,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         Event::assertNotDispatched(PublicAuthorityChanged::class);
     }
 
-    public function test_article15_seven_and_eight_faqs_are_complete_while_normal_api_stays_at_six_and_json_ld_returns_eight(): void
+    public function test_article15_and_existing_eight_item_editorial_faqs_remain_complete_in_api_and_json_ld(): void
     {
         foreach (['B', 'C'] as $batch) {
             $this->seedBatch($batch);
@@ -601,7 +601,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
 
         $normal = $this->createNormalEightFaqArticle();
         $response = $this->getJson('/api/v0.5/articles/'.$normal->slug.'?locale=en')->assertOk();
-        $this->assertCount(6, $response->json('answer_surface_v1.faq_blocks'));
+        $this->assertCount(8, $response->json('answer_surface_v1.faq_blocks'));
         $seoResponse = $this->getJson('/api/v0.5/articles/'.$normal->slug.'/seo?locale=en')->assertOk();
         $faqPage = collect((array) $seoResponse->json('jsonld.hasPart'))->firstWhere('@type', 'FAQPage');
         $this->assertCount(8, (array) ($faqPage['mainEntity'] ?? []));

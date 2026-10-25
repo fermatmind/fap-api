@@ -345,7 +345,7 @@ class EditArticle extends EditRecord
                         ->schema([
                             Textarea::make('question')->label(__('ops.resources.articles.published_faq.question'))->readOnly()->required()->rows(2),
                             Textarea::make('answer')->label(__('ops.resources.articles.published_faq.answer'))->required()->maxLength(10000)->rows(5),
-                        ])->addable(false)->deletable(false)->reorderable(false)->minItems(1)->maxItems(6),
+                        ])->addable(false)->deletable(false)->reorderable(false)->minItems(1)->maxItems(9),
                 ])
                 ->action(function (array $data): void {
                     try {

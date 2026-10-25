@@ -115,7 +115,7 @@ final class ArticlePublishedFaqWorkspace
             && is_string($visibility) && trim($visibility) !== '' && $visibility !== 'disabled', 'article_faq_surface_not_editable');
         $items = data_get($schema, 'editorial_package_v1.answer_surface_v1.faq_items',
             data_get($metadata, 'answer_surface_v1.faq_items', []));
-        $this->require(is_array($items) && array_is_list($items) && count($items) > 0 && count($items) <= 6, 'article_faq_inventory_not_supported');
+        $this->require(is_array($items) && array_is_list($items) && count($items) > 0 && count($items) <= 9, 'article_faq_inventory_not_supported');
         foreach ($items as $item) {
             $this->require(is_array($item) && is_string($item['question'] ?? $item['q'] ?? null)
                 && is_string($item['answer'] ?? $item['a'] ?? null), 'article_faq_inventory_not_supported');

@@ -586,7 +586,9 @@ final class ArticleSeoService
 
         $answerSurface = is_array($metadata['answer_surface_v1'] ?? null) ? $metadata['answer_surface_v1'] : [];
         $faqItems = is_array($answerSurface['faq_items'] ?? null) ? $answerSurface['faq_items'] : [];
-        $faqLimit = IqPublicArticleFaqProjection::limit($article, $metadata, 8);
+        $faqLimit = (int) $article->id !== 15 && array_is_list($faqItems) && count($faqItems) >= 7 && count($faqItems) <= 9
+            ? count($faqItems) : 8;
+        $faqLimit = IqPublicArticleFaqProjection::limit($article, $metadata, $faqLimit);
         $faqLimit = MbtiReportArticleRelease::faqLimit($article, $metadata, $faqLimit);
 
         $mainEntity = [];

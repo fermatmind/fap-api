@@ -156,7 +156,55 @@ final class ArticlePublishedFaqWorkspaceTest extends TestCase
         $this->assertJsonValueSame($variants, $article->fresh()->cover_image_variants);
     }
 
-    public function test_disabled_or_large_inventory_stays_outside_this_action(): void
+    #[DataProvider('existingLongInventories')]
+    public function test_existing_long_inventory_updates_answers_through_native_action(int $count): void
+    {
+        $this->login();
+        $article = $this->article();
+        $schema = $article->seoMeta->schema_json;
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'] = array_map(
+            static fn (int $index): array => ['key' => 'faq_'.$index, 'question' => 'Question '.$index.'?', 'answer' => 'Answer '.$index.'.'],
+            range(1, $count),
+        );
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'][0] = [
+            'key' => 'faq_1', 'q' => 'Question 1?', 'a' => 'Answer 1.', 'opaque' => ['source' => 'preserved'],
+        ];
+        $article->seoMeta->update(['schema_json' => $schema]);
+        $before = NativeUpdater::state($article->fresh());
+        Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+        $component = Livewire::test(EditArticle::class, ['record' => $article->id])->mountAction('updatePublishedFaq');
+        $form = $component->get('mountedActionsData')[0];
+        $this->assertCount($count, $form['faq_items']);
+        $key = array_key_first($form['faq_items']);
+        $form['faq_items'][$key]['answer'] = 'When eligible, read the Beta reference; keep missing values unavailable.';
+        $lastKey = array_key_last($form['faq_items']);
+        $form['faq_items'][$lastKey]['answer'] = 'The last reviewed answer remains visible.';
+        $component->setActionData($form)->callMountedAction()->assertHasNoActionErrors()
+            ->assertNotified(__('ops.resources.articles.published_faq.success'))->assertRedirect();
+        $after = NativeUpdater::state($article->fresh());
+        $this->assertSame($before['article'], $after['article']);
+        $this->assertSame($before['history'], $after['history']);
+        $items = data_get($article->fresh()->seoMeta->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items');
+        $expected = $schema['editorial_package_v1']['answer_surface_v1']['faq_items'];
+        $expected[0]['a'] = $form['faq_items'][$key]['answer'];
+        $expected[$count - 1]['answer'] = $form['faq_items'][$lastKey]['answer'];
+        $this->assertSame($expected, $items);
+        $this->getJson('/api/v0.5/articles/native-faq?locale=en&org_id=0')->assertOk()
+            ->assertJsonCount($count, 'answer_surface_v1.faq_blocks')
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.answer', $expected[0]['a'])
+            ->assertJsonPath('answer_surface_v1.faq_blocks.'.($count - 1).'.answer', $expected[$count - 1]['answer'])
+            ->assertJsonPath('answer_surface_v1.faq_blocks.'.($count - 1).'.question', $expected[$count - 1]['question']);
+        $this->getJson('/api/v0.5/articles/native-faq/seo?locale=en&org_id=0')->assertOk()
+            ->assertJsonCount($count, 'jsonld.hasPart.0.mainEntity')
+            ->assertJsonPath('jsonld.hasPart.0.mainEntity.'.($count - 1).'.acceptedAnswer.text', $expected[$count - 1]['answer']);
+    }
+
+    public static function existingLongInventories(): array
+    {
+        return [[7], [8], [9]];
+    }
+
+    public function test_disabled_or_oversized_inventory_stays_outside_this_action(): void
     {
         $this->login();
         $article = $this->article();
@@ -171,7 +219,7 @@ final class ArticlePublishedFaqWorkspaceTest extends TestCase
             $this->assertSame($before, NativeUpdater::state($article->fresh()));
         }
         $schema['editorial_package_v1']['answer_surface_visibility'] = 'visible';
-        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'] = array_fill(0, 7, ['question' => 'Question?', 'answer' => 'Answer.']);
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'] = array_fill(0, 10, ['question' => 'Question?', 'answer' => 'Answer.']);
         $article->seoMeta->update(['schema_json' => $schema]);
         $this->expectException(ValidationException::class);
         app(ArticlePublishedFaqWorkspace::class)->prepare($article);

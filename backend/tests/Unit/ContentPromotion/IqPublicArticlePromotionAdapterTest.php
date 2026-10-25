@@ -1444,7 +1444,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         }
     }
 
-    public function test_all_reviewed_faqs_reach_the_real_api_and_schema_projection_without_raising_other_limits(): void
+    public function test_all_reviewed_faqs_reach_the_real_api_and_schema_projection_after_native_metadata_edits(): void
     {
         $this->seedExisting();
         [$adapter, $context] = $this->publish();
@@ -1465,6 +1465,11 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         $seo = $article->seoMeta;
         $schema = $seo->schema_json;
         unset($schema['editorial_package_v1']['iq_article_exact_package_v1']);
+        $seo->forceFill(['schema_json' => $schema])->saveQuietly();
+        $article->unsetRelation('seoMeta')->load('seoMeta');
+        self::assertCount(9, $faqProjection->invoke($controller, $article));
+        self::assertCount(9, $schemaProjection->invoke($seoService, $article, $article->seoMeta, null)['mainEntity']);
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'][] = ['question' => 'Beyond ordinary inventory?', 'answer' => 'The old bounds remain.'];
         $seo->forceFill(['schema_json' => $schema])->saveQuietly();
         $article->unsetRelation('seoMeta')->load('seoMeta');
         self::assertCount(6, $faqProjection->invoke($controller, $article));

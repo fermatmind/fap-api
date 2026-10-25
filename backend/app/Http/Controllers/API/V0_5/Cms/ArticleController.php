@@ -559,6 +559,9 @@ class ArticleController extends Controller
             (int) $article->id,
             (int) ($article->published_revision_id ?? 0),
         ) ? 8 : 6;
+        if ((int) $article->id !== 15 && array_is_list($faqItems) && count($faqItems) >= 7 && count($faqItems) <= 9) {
+            $faqLimit = count($faqItems);
+        }
         $faqLimit = IqPublicArticleFaqProjection::limit($article, $metadata, $faqLimit);
         $faqLimit = \App\Services\Cms\MbtiReportArticleRelease::faqLimit($article, $metadata, $faqLimit);
         $blocks = [];

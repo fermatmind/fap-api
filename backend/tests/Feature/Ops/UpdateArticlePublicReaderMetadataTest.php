@@ -110,6 +110,9 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
     public function test_faq_array_replaces_schema_array_without_changing_fallback_metadata(): void
     {
         $article = $this->article();
+        $schema = $article->seoMeta->schema_json;
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'] = [['question' => 'An existing question?', 'answer' => 'Original answer.']];
+        $article->seoMeta->update(['schema_json' => $schema]);
         $items = array_fill(0, 8, ['question' => 'Old question', 'answer' => 'Old answer']);
         $article->cover_image_variants = ['editorial_package_v1' => ['answer_surface_v1' => ['faq_items' => $items]]];
         $article->saveQuietly();
@@ -187,7 +190,7 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $this->assertSame($before, $after);
     }
 
-    public function test_changes_or_reordering_to_existing_seven_faqs_are_refused_without_writes(): void
+    public function test_inventory_changes_to_existing_seven_faqs_are_refused_without_writes(): void
     {
         $article = $this->article();
         $schema = $this->package($article)['candidate']['schema_json'];
@@ -198,8 +201,10 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $before = Updater::state($article);
         $actor = $this->actor();
         $changed = $items;
-        $changed[0]['answer'] = 'Changed answer';
-        foreach ([$changed, array_reverse($items)] as $replacement) {
+        $changed[0]['question'] = 'Changed question?';
+        $changedKey = $items;
+        $changedKey[0]['key'] = 'changed';
+        foreach ([$changed, $changedKey, array_reverse($items), array_slice($items, 0, 6), [...$items, $items[0]]] as $replacement) {
             $package = $this->package($article);
             $package['candidate']['schema_json'] = $schema;
             $package['candidate']['schema_json']['editorial_package_v1']['answer_surface_v1']['faq_items'] = $replacement;
@@ -224,6 +229,52 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $this->assertSame(1, $this->runPackage($package, $this->actor()));
         $this->assertSame('ordinary_faq_scope_invalid', json_decode(Artisan::output(), true)['error']);
         $this->assertSame($before, Updater::state($article->fresh()));
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    public function test_long_faq_answer_updates_cannot_change_other_reader_authority(): void
+    {
+        $article = $this->article();
+        $schema = $this->package($article)['candidate']['schema_json'];
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'] = $this->faqItems(7);
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'][0]['opaque'] = ['source' => 'keep'];
+        $article->seoMeta->update(['schema_json' => $schema]);
+        $article = $article->fresh();
+        $before = Updater::state($article);
+        $actor = $this->actor();
+        foreach (['policy', 'visibility', 'article_field', 'opaque', 'too_long', 'answer_key', 'integer', 'boolean', 'array', 'shrink_integer'] as $case) {
+            $package = $this->package($article);
+            $package['candidate']['article_fields'] = [];
+            $package['candidate']['schema_json'] = $schema;
+            $candidate = &$package['candidate']['schema_json']['editorial_package_v1'];
+            $candidate['answer_surface_v1']['faq_items'][0]['answer'] = 'An updated eligible reference answer.';
+            if ($case === 'policy') {
+                $candidate['answer_surface_policy'] = 'changed';
+            } elseif ($case === 'visibility') {
+                $candidate['answer_surface_visibility'] = 'changed';
+            } elseif ($case === 'article_field') {
+                $package['candidate']['article_fields'] = ['reading_minutes' => 20];
+            } elseif ($case === 'opaque') {
+                $candidate['answer_surface_v1']['faq_items'][0]['opaque'] = ['source' => 'changed'];
+            } elseif ($case === 'too_long') {
+                $candidate['answer_surface_v1']['faq_items'][0]['answer'] = str_repeat('a', 10001);
+            } elseif ($case === 'integer') {
+                $candidate['answer_surface_v1']['faq_items'][0]['answer'] = 123;
+            } elseif ($case === 'boolean') {
+                $candidate['answer_surface_v1']['faq_items'][0]['answer'] = true;
+            } elseif ($case === 'array') {
+                $candidate['answer_surface_v1']['faq_items'][0]['answer'] = ['invalid'];
+            } elseif ($case === 'shrink_integer') {
+                array_pop($candidate['answer_surface_v1']['faq_items']);
+                $candidate['answer_surface_v1']['faq_items'][0]['answer'] = 123;
+            } else {
+                unset($candidate['answer_surface_v1']['faq_items'][0]['answer']);
+                $candidate['answer_surface_v1']['faq_items'][0]['a'] = 'A renamed answer key.';
+            }
+            unset($candidate);
+            $this->assertSame(1, $this->runPackage($package, $actor), $case);
+            $this->assertSame($before, Updater::state($article->fresh()), $case);
+        }
         $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
     }
 

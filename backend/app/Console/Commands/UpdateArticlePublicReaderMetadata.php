@@ -129,7 +129,14 @@ final class UpdateArticlePublicReaderMetadata extends Command
                 $oldItems = data_get($oldSchema, 'editorial_package_v1.answer_surface_v1.faq_items', $oldAnswer['faq_items'] ?? []);
                 unset($oldAnswer['faq_items'], $newAnswer['faq_items']);
                 if (Hash::hash($oldAnswer) !== Hash::hash($newAnswer) || ! is_array($items) || ! array_is_list($items)
-                    || (count($items) > 6 && Hash::hash($items) !== Hash::hash($oldItems))) {
+                    || ! is_array($oldItems) || ! array_is_list($oldItems)) {
+                    throw new RuntimeException('ordinary_faq_scope_invalid');
+                }
+                $longFaqAnswerUpdate = max(count($items), count($oldItems)) > 6 && Hash::hash($items) !== Hash::hash($oldItems);
+                if ($longFaqAnswerUpdate && (! $this->preservesExistingFaqInventory($oldItems, $items)
+                    || ($oldMetadata['answer_surface_policy'] ?? null) !== ($newMetadata['answer_surface_policy'] ?? null)
+                    || ($oldMetadata['answer_surface_visibility'] ?? null) !== ($newMetadata['answer_surface_visibility'] ?? null)
+                    || (array) data_get($p, 'candidate.article_fields', []) !== [])) {
                     throw new RuntimeException('ordinary_faq_scope_invalid');
                 }
                 if (($oldMetadata['answer_surface_visibility'] ?? null) === 'disabled'
@@ -137,9 +144,12 @@ final class UpdateArticlePublicReaderMetadata extends Command
                     throw new RuntimeException('disabled_surface_hold_preserved');
                 }
                 foreach ($items as $item) {
-                    if (! is_array($item) || array_diff(array_keys($item), ['key', 'id', 'question', 'answer', 'q', 'a']) !== []
+                    if (! is_array($item) || (! $longFaqAnswerUpdate && array_diff(array_keys($item), ['key', 'id', 'question', 'answer', 'q', 'a']) !== [])
+                        || ($longFaqAnswerUpdate && (! is_string($item['question'] ?? $item['q'] ?? null)
+                            || ! is_string($item['answer'] ?? $item['a'] ?? null)))
                         || trim((string) ($item['question'] ?? $item['q'] ?? '')) === ''
-                        || trim((string) ($item['answer'] ?? $item['a'] ?? '')) === '') {
+                        || trim((string) ($item['answer'] ?? $item['a'] ?? '')) === ''
+                        || ($longFaqAnswerUpdate && mb_strlen($item['answer'] ?? $item['a']) > 10000)) {
                         throw new RuntimeException('visible_faq_item_invalid');
                     }
                 }
@@ -231,5 +241,27 @@ final class UpdateArticlePublicReaderMetadata extends Command
                 }
             }
         }
+    }
+
+    /** Existing longer FAQ inventories may change answers without adding, removing, or moving questions. */
+    private function preservesExistingFaqInventory(array $before, array $after): bool
+    {
+        if (count($before) !== count($after) || count($after) > 9) {
+            return false;
+        }
+
+        foreach ($before as $index => $item) {
+            if (! is_array($item) || ! is_array($after[$index])) {
+                return false;
+            }
+            $candidate = $after[$index];
+            $answerKey = array_key_exists('answer', $item) ? 'answer' : 'a';
+            unset($item[$answerKey], $candidate[$answerKey]);
+            if (Hash::hash($item) !== Hash::hash($candidate)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
