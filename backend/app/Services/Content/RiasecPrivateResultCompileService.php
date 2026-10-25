@@ -21,7 +21,11 @@ final class RiasecPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.riasec.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.2.0';
+    public const COMPILER_VERSION = '1.3.0';
+
+    public const ENGLISH_DIMENSION_STATE_ASSET = '140q_task_environment_role_v1.en.jsonl';
+
+    public const DIMENSION_STATE_READER_FIELDS = ['title', 'summary', 'cannot_claim', 'example_question', 'task_activity_card', 'environment_card', 'role_responsibility_card', 'layer_focus', 'science_boundary', 'observation_question'];
 
     public const ENGLISH_ACTIVITY_ASSET = 'activity_task_examples_v1.en.jsonl';
 
@@ -31,6 +35,7 @@ final class RiasecPrivateResultCompileService
 
     /** @var array<string,array{role:string,schema:string,surfaces:list<string>}> */
     public const SOURCE_CONTRACT = [
+        self::ENGLISH_DIMENSION_STATE_ASSET => ['role' => 'English dimension-state task, environment, and role copy', 'schema' => 'riasec.140q_layer_copy.v1', 'surfaces' => ['result']],
         '140q_task_environment_role_v1.zh-CN.jsonl' => ['role' => '140q task, environment, and role projection copy', 'schema' => 'riasec.140q_layer_copy.v1', 'surfaces' => ['result', 'report', 'pdf', 'history']],
         self::ENGLISH_ACTIVITY_ASSET => ['role' => 'English activity and task examples', 'schema' => 'riasec.activity_task_example.v1', 'surfaces' => ['result', 'report']],
         'activity_task_examples_v1.zh-CN.jsonl' => ['role' => 'activity and task examples', 'schema' => 'riasec.activity_task_example.v1', 'surfaces' => ['result', 'report']],
@@ -221,7 +226,7 @@ final class RiasecPrivateResultCompileService
             'feedback_action' => true,
             'secondary_surfaces' => ['faq', 'technical_note', 'pdf', 'print', 'history', 'compare', 'share', 'lifecycle'],
             'locale_modules' => ['en' => ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1']],
-            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => ['R_I', 'R_A', 'I_A'], 'top3_groups' => ['R_I_A'], 'ordered_codes' => ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'], 'generic_context_cards' => 4, 'dimension_state_rows' => 0, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8],
+            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => ['R_I', 'R_A', 'I_A'], 'top3_groups' => ['R_I_A'], 'ordered_codes' => ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'], 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8],
         ];
     }
 
@@ -297,6 +302,7 @@ final class RiasecPrivateResultCompileService
         return match ($compilerVersion) {
             '1.0.0' => array_filter(self::SOURCE_CONTRACT, static fn (string $path): bool => ! str_contains($path, '.en.'), ARRAY_FILTER_USE_KEY),
             '1.1.0' => array_filter(self::SOURCE_CONTRACT, static fn (string $path): bool => ! str_contains($path, '.en.') || $path === self::ENGLISH_ACTIVITY_ASSET, ARRAY_FILTER_USE_KEY),
+            '1.2.0' => array_diff_key(self::SOURCE_CONTRACT, [self::ENGLISH_DIMENSION_STATE_ASSET => true]),
             self::COMPILER_VERSION => self::SOURCE_CONTRACT,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
@@ -343,9 +349,46 @@ final class RiasecPrivateResultCompileService
         }
     }
 
-    public function assertSelectedEnglishSources(array $assets): void
+    /** @param list<array<string,mixed>> $rows @param list<array<string,mixed>> $chineseRows */
+    public function assertEnglishDimensionStates(array $rows, array $chineseRows): void
     {
-        foreach (self::sourceContract(self::COMPILER_VERSION) as $filename => $contract) {
+        if (count($rows) !== 126 || count($chineseRows) !== 126) {
+            throw new RuntimeException('RIASEC English dimension-state coverage is incomplete.');
+        }
+        // Provenance binds the frozen source bytes; semantic equality below protects every machine field.
+        $sourceRawHash = 'e3461f36b5650d51c538dc6945beb62b653a5cec3a5886d519c1e72a3c4b336f';
+        if (hash('sha256', $this->canonicalJson($chineseRows)) !== '7dccdf182291c068e2823463bfed3dd8a721f6f4f6f8d9b2072accbc69fa0e4e') {
+            throw new RuntimeException('RIASEC English dimension-state source binding is stale.');
+        }
+        $identities = [];
+        foreach ($rows as $index => $row) {
+            $source = $chineseRows[$index];
+            $identity = implode('.', [$row['dimension'] ?? '', $row['layer'] ?? '', $row['layer_state'] ?? '']);
+            if (isset($identities[$identity])
+                || ($row['locale'] ?? null) !== 'en'
+                || ($row['asset_version'] ?? null) !== 'riasec_140q_task_environment_role_v1.en'
+                || $this->canonicalJson($row['source_binding'] ?? null) !== $this->canonicalJson(['source_asset' => '140q_task_environment_role_v1.zh-CN.jsonl', 'raw_sha256' => $sourceRawHash, 'source_row' => $index + 1])) {
+                throw new RuntimeException('RIASEC English dimension-state identity or provenance is invalid.');
+            }
+            $identities[$identity] = true;
+            foreach (self::DIMENSION_STATE_READER_FIELDS as $field) {
+                if (! is_string($row[$field] ?? null) || trim($row[$field]) === ''
+                    || preg_match('/[\x{3400}-\x{9fff}]/u', $row[$field]) === 1) {
+                    throw new RuntimeException('RIASEC English dimension-state reader copy is invalid.');
+                }
+                unset($row[$field], $source[$field]);
+            }
+            unset($row['locale'], $row['source_binding']);
+            $row['asset_version'] = $source['asset_version'];
+            if ($this->canonicalJson($row) !== $this->canonicalJson($source)) {
+                throw new RuntimeException('RIASEC English dimension-state machine contract is invalid.');
+            }
+        }
+    }
+
+    public function assertSelectedEnglishSources(array $assets, string $compilerVersion = self::COMPILER_VERSION): void
+    {
+        foreach (self::sourceContract($compilerVersion) as $filename => $contract) {
             if (str_contains($filename, '.en.')) {
                 $rows = str_ends_with($filename, '.jsonl') ? ($assets[$filename] ?? []) : [$assets[$filename] ?? []];
                 foreach ($rows as $row) {
@@ -357,6 +400,9 @@ final class RiasecPrivateResultCompileService
             if (str_contains($filename, '.en.') && preg_match('/[\x{3400}-\x{9fff}]/u', json_encode($assets[$filename] ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)) === 1) {
                 throw new RuntimeException('RIASEC selected English source contains Chinese text.');
             }
+        }
+        if (isset(self::sourceContract($compilerVersion)[self::ENGLISH_DIMENSION_STATE_ASSET])) {
+            $this->assertEnglishDimensionStates($assets[self::ENGLISH_DIMENSION_STATE_ASSET] ?? [], $assets['140q_task_environment_role_v1.zh-CN.jsonl'] ?? []);
         }
         $dimensions = $assets['dimension_deep_copy_v1.en.json']['dimensions'] ?? [];
         $pairs = $assets['pair_blend_15_pairs_v1.en.jsonl'] ?? [];

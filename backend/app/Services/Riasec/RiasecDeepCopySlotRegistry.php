@@ -290,6 +290,26 @@ final class RiasecDeepCopySlotRegistry
                     break;
                 }
             }
+        } elseif (($identity['slot_group'] ?? '') === '140q_layer_copy' && isset($identity['layer_dimension'])) {
+            foreach ($this->privateResultSource->optionalAsset('140q_task_environment_role_v1.en.jsonl', 'en') as $row) {
+                $state = $this->normalize140qLayerState((string) ($row['layer_state'] ?? ''));
+                if (($row['dimension'] ?? null) === $identity['layer_dimension']
+                    && ($row['layer'] ?? null) === ($identity['layer'] ?? null)
+                    && $state === ($identity['layer_state'] ?? null)) {
+                    $name = (string) $identity['slot_name'];
+                    $content = $this->normalize140qLayerAssetRow($row, $row['dimension'], $row['layer'], $state, $name);
+                    $runtime = $this->privateResultSource->optionalAsset('runtime_surface_copy_v1.en.json', 'en');
+                    $boundary = $runtime['generic_slots']['layer_140q']['task_activity_card']['user_visible_boundary'] ?? null;
+                    if (! is_string($boundary) || trim($boundary) === '') {
+                        return [];
+                    }
+                    $content['user_visible_boundary'] = $boundary;
+                    $slot = $this->authored140qAssetSlot($name, $content);
+                    $slot['source_review_status'] = $row['review_status'] ?? null;
+                    $slot['source_evidence_level'] = $row['evidence_level'] ?? null;
+                    break;
+                }
+            }
         } elseif (($identity['slot_group'] ?? '') === '140q_layer_copy' && ! isset($identity['layer_dimension'])) {
             $asset = $this->privateResultSource->optionalAsset('runtime_surface_copy_v1.en.json', 'en');
             $name = (string) ($identity['slot_name'] ?? '');

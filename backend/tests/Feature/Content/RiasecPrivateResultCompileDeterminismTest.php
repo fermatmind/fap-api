@@ -33,7 +33,7 @@ final class RiasecPrivateResultCompileDeterminismTest extends TestCase
     {
         $root = sys_get_temp_dir().'/riasec-canonical-'.bin2hex(random_bytes(6));
         mkdir($root, 0775, true);
-        file_put_contents($root.'/140q_task_environment_role_v1.zh-CN.jsonl', json_encode([
+        file_put_contents($root.'/'.array_key_first(RiasecPrivateResultCompileService::SOURCE_CONTRACT), json_encode([
             'schema_version' => 'wrong.schema',
             'frontend_fallback_allowed' => false,
         ], JSON_THROW_ON_ERROR)."\n");
@@ -43,7 +43,7 @@ final class RiasecPrivateResultCompileDeterminismTest extends TestCase
             $this->expectExceptionMessage('schema mismatch');
             (new RiasecPrivateResultCompileService($root))->compile();
         } finally {
-            @unlink($root.'/140q_task_environment_role_v1.zh-CN.jsonl');
+            @unlink($root.'/'.array_key_first(RiasecPrivateResultCompileService::SOURCE_CONTRACT));
             @rmdir($root);
         }
     }

@@ -65,12 +65,12 @@ final class RiasecEnglishSelectedSourceReleaseTest extends TestCase
         $this->assertSame(['high', 'high', 'medium', 'medium', 'low', 'low'], $bands);
     }
 
-    public function test_unselected_codes_dimension_states_and_other_modules_remain_unavailable(): void
+    public function test_unselected_codes_remain_unavailable_and_generic_context_selection_is_preserved(): void
     {
         $registry = app(RiasecDeepCopySlotRegistry::class);
         $this->assertSame('unavailable', $registry->resolveForLocale($registry->resolveTop3ChainSlot('SEC'), 'en')['content_status']);
         $this->assertSame('unavailable', $registry->resolveForLocale($registry->resolvePairBlendSlot('S_E'), 'en')['content_status']);
-        $this->assertSame('unavailable', $registry->resolveForLocale($registry->resolve140qDimensionLayerSlot('R', 'task', 'agreement'), 'en')['content_status']);
+        $this->assertSame('authored', $registry->resolveForLocale($registry->resolve140qDimensionLayerSlot('R', 'task', 'agreement'), 'en')['content_status']);
         $slots = $this->projection('RIA', 'riasec_140')['deep_content_slots_v1']['slots'];
         $context = array_values(array_filter($slots, fn ($s) => $s['module_key'] === '140q_context_cards'));
         $this->assertCount(3, $context);

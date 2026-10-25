@@ -26,7 +26,7 @@ final class RiasecPrivateResultPackLoader
         $locale = $locale === '' || $locale === 'zh' || str_starts_with($locale, 'zh-') ? 'zh-CN'
             : ($locale === 'en' || str_starts_with($locale, 'en-') ? 'en' : $locale);
         $english = $locale === 'en';
-        $selected = ($payload['compiler']['version'] ?? '') === '1.2.0';
+        $selected = in_array($payload['compiler']['version'] ?? '', ['1.2.0', '1.3.0'], true);
         $modules = $selected ? ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1'] : ['activity_explorer_v0_1'];
         if ($locale !== 'zh-CN' && (! $english
             || ($payload['coverage']['locale_modules']['en'] ?? null) !== $modules
@@ -154,13 +154,13 @@ final class RiasecPrivateResultPackLoader
         }
 
         if (isset($contract[RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET])) {
-            $modules = ($compiler['version'] ?? '') === '1.2.0' ? ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1'] : ['activity_explorer_v0_1'];
+            $modules = in_array($compiler['version'] ?? '', ['1.2.0', '1.3.0'], true) ? ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1'] : ['activity_explorer_v0_1'];
             if (($coverage['locale_modules']['en'] ?? null) !== $modules) {
                 throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
             }
-            if (($compiler['version'] ?? '') === '1.2.0') {
-                $this->compiler->assertSelectedEnglishSources($payload['assets']);
-                if ($this->canonicalJson($coverage['english_selected_sources'] ?? null) !== $this->canonicalJson(['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => ['R_I', 'R_A', 'I_A'], 'top3_groups' => ['R_I_A'], 'ordered_codes' => ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'], 'generic_context_cards' => 4, 'dimension_state_rows' => 0, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8])) {
+            if (in_array($compiler['version'] ?? '', ['1.2.0', '1.3.0'], true)) {
+                $this->compiler->assertSelectedEnglishSources($payload['assets'], $compiler['version']);
+                if ($this->canonicalJson($coverage['english_selected_sources'] ?? null) !== $this->canonicalJson(['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => ['R_I', 'R_A', 'I_A'], 'top3_groups' => ['R_I_A'], 'ordered_codes' => ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'], 'generic_context_cards' => 4, 'dimension_state_rows' => isset($contract[RiasecPrivateResultCompileService::ENGLISH_DIMENSION_STATE_ASSET]) ? 126 : 0, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8])) {
                     throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
                 }
             } elseif (isset($coverage['english_selected_sources'])) {
