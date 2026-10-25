@@ -21,7 +21,7 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
         $loader->assertPackage($compiled['manifest'], $compiled['payload'], $compiled['bytes']);
         $english = $loader->load('en-US');
         $chinese = $loader->load('zh-CN');
-        $this->assertCount(10, $english['assets']);
+        $this->assertCount(11, $english['assets']);
         $this->assertCount(19, $chinese['assets']);
         $this->assertSame('FERMATMIND_RIASEC_PRIVATE_RESULT_EN_SELECTED', $english['authority']['authority_id']);
         $this->assertSame('riasec.public_projection.v2', $english['authority']['runtime_contract']);
