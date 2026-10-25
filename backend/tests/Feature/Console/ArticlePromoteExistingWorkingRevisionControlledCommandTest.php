@@ -32,6 +32,67 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
 
     private const CANONICAL = '/zh/articles/eq-test-tool-guide';
 
+    #[DataProvider('heldNoindexRobots')]
+    public function test_editor_can_promote_reviewed_content_and_metadata_without_releasing_noindex(string $robots): void
+    {
+        $this->loginPublisher();
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        Http::fake(['*' => Http::response(self::frontendArticleSuccessReceipt())]);
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $article->forceFill(['is_indexable' => false, 'sitemap_eligible' => false, 'llms_eligible' => false])->saveQuietly();
+        $article->seoMeta->forceFill(['is_indexable' => false, 'robots' => $robots])->saveQuietly();
+        $article = $article->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $schema = $article->seoMeta->schema_json;
+        $oldBody = $article->publishedRevision->content_md;
+        $oldRevision = $article->publishedRevision;
+        $candidate = $article->workingRevision;
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $prepared = $workspace->prepare($article);
+        $this->assertTrue(json_decode($prepared['preflight'], true)['ok'], $prepared['preflight']);
+        $result = $workspace->publish($article, ['target_hash' => $prepared['target_hash'], 'preview_approved' => true]);
+        $this->assertTrue($result['ok'], json_encode($result));
+        $article = $article->fresh(['publishedRevision', 'seoMeta']);
+        $this->assertSame((int) $candidate->id, (int) $article->published_revision_id);
+        $this->assertSame($candidate->title, $article->title);
+        $this->assertSame($candidate->content_md, $article->content_md);
+        $this->assertSame($candidate->seo_title, $article->seoMeta->seo_title);
+        $this->assertSame($oldBody, $oldRevision->fresh()->content_md);
+        $this->assertFalse($article->is_indexable);
+        $this->assertFalse($article->seoMeta->is_indexable);
+        $this->assertFalse($article->sitemap_eligible);
+        $this->assertFalse($article->llms_eligible);
+        $this->assertSame($robots, $article->seoMeta->robots);
+        $this->assertSame($schema, $article->seoMeta->schema_json);
+    }
+
+    public static function heldNoindexRobots(): array
+    {
+        return [['noindex,follow'], ['noindex,nofollow']];
+    }
+
+    #[DataProvider('heldNoindexFailures')]
+    public function test_noindex_metadata_promotion_requires_snapshot_and_consistent_discovery_holds(string $failure): void
+    {
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $article->forceFill(['is_indexable' => false, 'sitemap_eligible' => $failure === 'sitemap', 'llms_eligible' => $failure === 'llms'])->saveQuietly();
+        $article->seoMeta->forceFill(['is_indexable' => $failure === 'seo_flag',
+            'robots' => $failure === 'robots' ? 'index,follow' : 'noindex,nofollow'])->saveQuietly();
+        $article = $article->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $options = ['--dry-run' => true, '--json' => true];
+        if ($failure !== 'snapshot') {
+            $options['--expected-article-state-sha256'] = \App\Support\ArticleSourceTargetSnapshot::publicationHash($article);
+        }
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, $options)));
+        $this->assertErrorCode($this->jsonOutput(), 'existing_article_not_indexable');
+        $this->assertSame((int) $article->published_revision_id, (int) $article->fresh()->published_revision_id);
+    }
+
+    public static function heldNoindexFailures(): array
+    {
+        return [['snapshot'], ['seo_flag'], ['robots'], ['sitemap'], ['llms']];
+    }
+
     #[DataProvider('bodyOnlySeoStates')]
     public function test_locked_body_only_editor_publication_preserves_absent_and_existing_seo(bool $hasSeo, ?string $canonical): void
     {

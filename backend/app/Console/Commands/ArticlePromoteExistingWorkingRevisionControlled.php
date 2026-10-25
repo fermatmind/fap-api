@@ -1458,7 +1458,14 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 }
             }
 
-            if (! (bool) $article->is_indexable || (string) $seoMeta->robots !== 'index,follow') {
+            $preservesHeldNoindex = $identityLock === null
+                && filled($this->option('expected-article-state-sha256'))
+                && ! (bool) $article->is_indexable
+                && ! (bool) $seoMeta->is_indexable
+                && ! (bool) $article->sitemap_eligible
+                && ! (bool) $article->llms_eligible
+                && in_array((string) $seoMeta->robots, ['noindex,follow', 'noindex,nofollow'], true);
+            if ((! (bool) $article->is_indexable || (string) $seoMeta->robots !== 'index,follow') && ! $preservesHeldNoindex) {
                 $errors[] = $this->issue('indexability', 'existing_article_not_indexable', 'Existing SEO article must already be indexable before promotion.');
             }
         }
