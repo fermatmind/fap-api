@@ -24,7 +24,7 @@ final class RiasecEnglishSelectedSourceReleaseTest extends TestCase
             $projection = $this->projection($code);
             $this->assertNull($projection['private_result_authority']);
             $slots = $projection['deep_content_slots_v1']['slots'];
-            $this->assertCount(11, $slots);
+            $this->assertCount(14, $slots);
             $actualTop2 = str_split(substr($code, 0, 2));
             usort($actualTop2, fn ($a, $b) => array_search($a, ['R', 'I', 'A', 'S', 'E', 'C']) <=> array_search($b, ['R', 'I', 'A', 'S', 'E', 'C']));
             foreach ($slots as $slot) {

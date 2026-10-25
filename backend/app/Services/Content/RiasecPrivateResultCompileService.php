@@ -21,7 +21,9 @@ final class RiasecPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.riasec.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.5.0';
+    public const COMPILER_VERSION = '1.6.0';
+
+    public const ENGLISH_DISAGREE_CARDS = ['user_not_wrong_message', 'feedback_no_mutation_boundary', 'next_step'];
 
     public const ENGLISH_TOP3_KEYS = ['R_I_A', 'R_I_S', 'R_I_E', 'R_I_C', 'R_A_S', 'R_A_E', 'R_A_C', 'R_S_E', 'R_S_C', 'R_E_C', 'I_A_S', 'I_A_E', 'I_A_C', 'I_S_E', 'I_S_C', 'I_E_C', 'A_S_E', 'A_S_C', 'A_E_C', 'S_E_C'];
 
@@ -234,7 +236,7 @@ final class RiasecPrivateResultCompileService
             'feedback_action' => true,
             'secondary_surfaces' => ['faq', 'technical_note', 'pdf', 'print', 'history', 'compare', 'share', 'lifecycle'],
             'locale_modules' => ['en' => ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1']],
-            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => self::englishPairCoverage(self::COMPILER_VERSION), 'top3_groups' => self::englishTop3Coverage(self::COMPILER_VERSION), 'ordered_codes' => self::englishOrderedCodeCoverage(self::COMPILER_VERSION), 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8],
+            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => self::englishPairCoverage(self::COMPILER_VERSION), 'top3_groups' => self::englishTop3Coverage(self::COMPILER_VERSION), 'ordered_codes' => self::englishOrderedCodeCoverage(self::COMPILER_VERSION), 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8, 'generic_disagree_cards' => 3],
         ];
     }
 
@@ -313,7 +315,7 @@ final class RiasecPrivateResultCompileService
             '1.2.0' => array_diff_key(self::legacySelectedSourceContract(), [self::ENGLISH_DIMENSION_STATE_ASSET => true]),
             '1.3.0' => self::legacySelectedSourceContract(),
             '1.4.0' => self::legacySelectedSourceContract(completePairs: true),
-            self::COMPILER_VERSION => self::SOURCE_CONTRACT,
+            '1.5.0', self::COMPILER_VERSION => self::SOURCE_CONTRACT,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -334,7 +336,7 @@ final class RiasecPrivateResultCompileService
     {
         return match ($compilerVersion) {
             '1.2.0', '1.3.0' => ['R_I', 'R_A', 'I_A'],
-            '1.4.0', self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
+            '1.4.0', '1.5.0', self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -343,7 +345,7 @@ final class RiasecPrivateResultCompileService
     {
         return match ($compilerVersion) {
             '1.2.0', '1.3.0', '1.4.0' => ['R_I_A'],
-            self::COMPILER_VERSION => self::ENGLISH_TOP3_KEYS,
+            '1.5.0', self::COMPILER_VERSION => self::ENGLISH_TOP3_KEYS,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -542,6 +544,40 @@ final class RiasecPrivateResultCompileService
         }
     }
 
+    /** The seven new reader leaves are bound to the unchanged Chinese generic cards. */
+    public function assertEnglishDisagreeSources(array $runtime, array $chineseRuntime): void
+    {
+        $source = ['cards' => $chineseRuntime['generic_slots']['disagree'] ?? null, 'boundary' => $chineseRuntime['boundaries']['disagree'] ?? null];
+        if (hash('sha256', $this->canonicalJson($source)) !== '0ec7e564b9a14e957914654b87539402a63735052a22dcf58b42da8bd1d26734') {
+            throw new RuntimeException('RIASEC English disagreement source binding is invalid.');
+        }
+        $cards = $runtime['generic_slots']['disagree'] ?? [];
+        $keys = is_array($cards) ? array_keys($cards) : [];
+        $expected = self::ENGLISH_DISAGREE_CARDS;
+        sort($keys, SORT_STRING);
+        sort($expected, SORT_STRING);
+        if ($keys !== $expected || array_keys($runtime['boundaries'] ?? []) !== ['disagree']) {
+            throw new RuntimeException('RIASEC English disagreement coverage is incomplete.');
+        }
+        foreach ($cards as $name => $card) {
+            $fields = is_array($card) ? array_keys($card) : [];
+            sort($fields, SORT_STRING);
+            if ($fields !== ['disagree_state', 'summary', 'title']
+                || ($card['disagree_state'] ?? null) !== $source['cards'][$name]['disagree_state']) {
+                throw new RuntimeException('RIASEC English disagreement identity is invalid.');
+            }
+            foreach (['title', 'summary'] as $field) {
+                if (! is_string($card[$field]) || trim($card[$field]) === '' || preg_match('/\p{Han}/u', $card[$field]) === 1) {
+                    throw new RuntimeException('RIASEC English disagreement reader text is invalid.');
+                }
+            }
+        }
+        $boundary = $runtime['boundaries']['disagree'];
+        if (! is_string($boundary) || trim($boundary) === '' || preg_match('/\p{Han}/u', $boundary) === 1) {
+            throw new RuntimeException('RIASEC English disagreement boundary is invalid.');
+        }
+    }
+
     public function assertSelectedEnglishSources(array $assets, string $compilerVersion = self::COMPILER_VERSION): void
     {
         foreach (self::sourceContract($compilerVersion) as $filename => $contract) {
@@ -564,14 +600,17 @@ final class RiasecPrivateResultCompileService
         $pairs = $assets['pair_blend_15_pairs_v1.en.jsonl'] ?? [];
         $pairKeys = array_column($pairs, 'pair_key');
         $expectedPairKeys = self::englishPairCoverage($compilerVersion);
-        if (in_array($compilerVersion, ['1.4.0', self::COMPILER_VERSION], true)) {
+        if (in_array($compilerVersion, ['1.4.0', '1.5.0', self::COMPILER_VERSION], true)) {
             sort($pairKeys, SORT_STRING);
             sort($expectedPairKeys, SORT_STRING);
             $this->assertEnglishPairSources($pairs, $assets['pair_blend_15_pairs_v1.zh-CN.jsonl'] ?? []);
         }
         $top3 = $assets['top3_code_chain_strategy_v1.en.jsonl'] ?? [];
         $runtime = $assets['runtime_surface_copy_v1.en.json'] ?? [];
-        $completeTop3 = $compilerVersion === self::COMPILER_VERSION;
+        $completeTop3 = in_array($compilerVersion, ['1.5.0', self::COMPILER_VERSION], true);
+        if ($compilerVersion === self::COMPILER_VERSION) {
+            $this->assertEnglishDisagreeSources($runtime, $assets['runtime_surface_copy_v1.zh-CN.json'] ?? []);
+        }
         if ($completeTop3) {
             $this->assertEnglishTop3Sources($top3, $assets['top3_code_chain_strategy_v1.zh-CN.jsonl'] ?? []);
         }

@@ -88,7 +88,9 @@ final class RiasecEnglishDimensionStateReleaseTest extends TestCase
         unset($runtime['supported_unordered_keys']);
         $runtime['supported_unordered_key'] = 'R_I_A';
         $runtime['scope'] = 'Only R_I_A and its six orders; no new 20-group or 120-code editorial expansion.';
+        unset($runtime['generic_slots']['disagree'], $runtime['boundaries']);
         unset($runtime);
+        unset($payload['coverage']['english_selected_sources']['generic_disagree_cards']);
         $payload['coverage']['english_selected_sources']['top3_groups'] = ['R_I_A'];
         $payload['coverage']['english_selected_sources']['ordered_codes'] = ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'];
 

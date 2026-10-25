@@ -123,6 +123,26 @@
         "layer_state": "unavailable",
         "user_visible_boundary": "140Q provides clues about tasks, environments, and role responsibilities. It only makes observation of daily work more specific; it does not rewrite 60Q, compare raw scores, or provide job conclusions."
       }
+    },
+    "disagree": {
+      "user_not_wrong_message": {
+        "title": "You can disagree with this result",
+        "summary": "Disagreeing with a result is valid feedback in itself. It will inform the exploration path, helping you examine your state while answering, near ties, and directions for exploring activities.",
+        "disagree_state": "disagrees_quality_normal"
+      },
+      "feedback_no_mutation_boundary": {
+        "title": "Feedback does not change scores",
+        "summary": "Disagreeing, adding favorites, making exclusions, and providing feedback from experiments do not change assessment results, report snapshots, default shared content, or PDF content.",
+        "disagree_state": "disagrees_quality_caution"
+      },
+      "next_step": {
+        "title": "Next step",
+        "summary": "First check response quality and near ties. Then choose whether to retake the assessment, save a preferred direction, or try a small experiment to observe specific activities.",
+        "disagree_state": "save_feedback_only"
+      }
     }
+  },
+  "boundaries": {
+    "disagree": "Disagreeing with the result only affects the exploration path; it does not change the Holland code or RIASEC scores measured in this assessment, the report snapshot, shared content, or the PDF."
   }
 }

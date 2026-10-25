@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Riasec;
 
+use App\Services\Content\RiasecPrivateResultCompileService;
+
 final class RiasecDeepCopySlotRegistry
 {
     private const CONTENT_VERSION = 'riasec_dimension_deep_copy_v1.zh-CN.r3';
@@ -304,6 +306,22 @@ final class RiasecDeepCopySlotRegistry
                     break;
                 }
             }
+        } elseif ($key === 'disagree_path_copy' && in_array($identity['slot_name'] ?? '', RiasecPrivateResultCompileService::ENGLISH_DISAGREE_CARDS, true)) {
+            $asset = $this->privateResultSource->optionalAsset('runtime_surface_copy_v1.en.json', 'en');
+            $name = $identity['slot_name'];
+            $content = $asset['generic_slots']['disagree'][$name] ?? null;
+            $boundary = $asset['boundaries']['disagree'] ?? null;
+            if (! is_array($content) || ($content['disagree_state'] ?? null) !== ($identity['disagree_state'] ?? null)) {
+                return [];
+            }
+            foreach ([$content['title'] ?? null, $content['summary'] ?? null, $boundary] as $text) {
+                if (! is_string($text) || trim($text) === '' || preg_match('/\p{Han}/u', $text) === 1) {
+                    return [];
+                }
+            }
+            $content['user_visible_boundary'] = $boundary;
+            $slot = $this->disagreePathSlot($name, $content);
+            $slot['content_version'] = $asset['content_version'];
         } elseif (($identity['slot_group'] ?? '') === '140q_layer_copy' && isset($identity['layer_dimension'])) {
             foreach ($this->privateResultSource->optionalAsset('140q_task_environment_role_v1.en.jsonl', 'en') as $row) {
                 $state = $this->normalize140qLayerState((string) ($row['layer_state'] ?? ''));
