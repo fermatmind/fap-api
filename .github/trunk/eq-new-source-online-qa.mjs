@@ -25,6 +25,7 @@ export function assertSsrCandidate(document, row) {
 async function browserVisibleDocument(selector, expandDetails) {
   const start=Date.now();
   while ((document.readyState!=='complete' || !document.querySelector(selector)) && Date.now()-start<12000) await new Promise(resolve=>setTimeout(resolve,100));
+  if (document.readyState!=='complete' || !document.querySelector(selector)) throw new Error('EQ_BROWSER_DOCUMENT_NOT_READY');
   if (expandDetails) for (const detail of document.querySelectorAll(`${selector} details`)) detail.open=true;
   await new Promise(resolve=>setTimeout(resolve,500));
   const visible = element => {
@@ -88,6 +89,22 @@ export async function closeOwnedBrowser(child, close, profile) {
   }
   rmSync(profile,{recursive:true,force:true});
 }
+// A load event is not an identity for the requested navigation. Read the committed
+// main-frame loader instead, then retain the actual DOM/CSS readiness checks.
+export async function readNavigatedDocument(request, url, sessionId, selector, expandDetails) {
+  const navigation=await request('Page.navigate',{url},sessionId);
+  if(navigation.errorText || !navigation.frameId || !navigation.loaderId) throw new Error('EQ_BROWSER_NAVIGATION_FAILED');
+  for(let attempt=0;attempt<120;attempt++) {
+    const {frameTree}=await request('Page.getFrameTree',{},sessionId);
+    if(frameTree?.frame?.id===navigation.frameId && frameTree.frame.loaderId===navigation.loaderId) {
+      const result=await request('Runtime.evaluate',{expression:`(${browserVisibleDocument.toString()})(${JSON.stringify(selector)},${Boolean(expandDetails)})`,awaitPromise:true,returnByValue:true},sessionId);
+      if(result.exceptionDetails || !result.result?.value) throw new Error('EQ_BROWSER_READBACK_FAILED');
+      return result.result.value;
+    }
+    await new Promise(resolve=>setTimeout(resolve,100));
+  }
+  throw new Error('EQ_BROWSER_NAVIGATION_UNCOMMITTED');
+}
 export async function renderedDocument(url, {selector='article[data-testid="article-detail-content"]', width=1366, expandDetails=false} = {}) {
   if(!['article[data-testid="article-detail-content"]','main article','main'].includes(selector) || ![390,1366].includes(width)) throw new Error('EQ_BROWSER_OPTIONS_INVALID');
   const browser=['/usr/bin/google-chrome','/usr/bin/chromium','/usr/bin/chromium-browser','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(path=>existsSync(path));
@@ -96,17 +113,16 @@ export async function renderedDocument(url, {selector='article[data-testid="arti
   const child=spawn(browser,['--headless','--disable-gpu','--no-first-run','--no-default-browser-check',
     '--disable-background-networking','--disable-component-update',`--user-data-dir=${profile}`,'--remote-debugging-pipe'],
     {stdio:['ignore','ignore','ignore','pipe','pipe']});
-  let sequence=0,buffer='',loadSession;const pending=new Map();
-  const rejectAll=()=>{for(const waiter of pending.values())waiter.reject(new Error('EQ_BROWSER_READBACK_FAILED'));pending.clear();};
-  child.on('error',rejectAll);child.on('exit',rejectAll);
-  child.stdio[3].on('error',rejectAll);child.stdio[4].setEncoding('utf8');
+  let sequence=0,buffer='',activeMethod='BROWSER_START';const pending=new Map();
+  const rejectAll=(error=new Error('EQ_BROWSER_READBACK_FAILED'))=>{for(const waiter of pending.values())waiter.reject(error);pending.clear();};
+  child.on('error',()=>rejectAll());child.on('exit',()=>rejectAll());
+  child.stdio[3].on('error',()=>rejectAll());child.stdio[4].setEncoding('utf8');
   child.stdio[4].on('data',chunk=>{
     buffer+=chunk.toString();let end;
     while((end=buffer.indexOf('\0'))>=0) {
       const raw=buffer.slice(0,end);buffer=buffer.slice(end+1);
       try {
         const message=JSON.parse(raw);
-        if(message.method==='Page.loadEventFired' && message.sessionId===loadSession) {pending.get('load')?.resolve();pending.delete('load');}
         const waiter=pending.get(message.id);
         if(waiter){pending.delete(message.id);message.error ? waiter.reject(new Error('EQ_BROWSER_READBACK_FAILED')) : waiter.resolve(message.result);}
       } catch {rejectAll();}
@@ -114,21 +130,15 @@ export async function renderedDocument(url, {selector='article[data-testid="arti
   });
   const request=(method,params={},sessionId)=>new Promise((resolve,reject)=>{
     if(child.exitCode!==null || child.signalCode!==null || child.killed) {reject(new Error('EQ_BROWSER_READBACK_FAILED'));return;}
-    const id=++sequence;pending.set(id,{resolve,reject});child.stdio[3].write(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})})+'\0');
+    activeMethod=method;const id=++sequence;pending.set(id,{resolve,reject});child.stdio[3].write(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})})+'\0');
   });
-  const timeout=setTimeout(()=>{rejectAll();child.kill();},45000);
+  const timeout=setTimeout(()=>{rejectAll(new Error('EQ_BROWSER_READBACK_TIMEOUT_'+activeMethod.replace(/[^A-Za-z0-9]/g,'_').toUpperCase()));child.kill();},45000);
   try {
     const {targetId}=await request('Target.createTarget',{url:'about:blank'});
     const {sessionId}=await request('Target.attachToTarget',{targetId,flatten:true});
-    await request('Page.enable',{},sessionId);loadSession=sessionId;
+    await request('Page.enable',{},sessionId);
     await request('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:width===390},sessionId);
-    const loaded=new Promise((resolve,reject)=>pending.set('load',{resolve,reject}));loaded.catch(()=>{});
-    const navigation=await request('Page.navigate',{url},sessionId);
-    if(navigation.errorText) throw new Error('EQ_BROWSER_READBACK_FAILED');
-    await loaded;
-    const result=await request('Runtime.evaluate',{expression:`(${browserVisibleDocument.toString()})(${JSON.stringify(selector)},${Boolean(expandDetails)})`,awaitPromise:true,returnByValue:true},sessionId);
-    if(result.exceptionDetails || !result.result?.value) throw new Error('EQ_BROWSER_READBACK_FAILED');
-    return result.result.value;
+    return await readNavigatedDocument(request,url,sessionId,selector,expandDetails);
   } finally {
     clearTimeout(timeout);
     await closeOwnedBrowser(child,()=>request('Browser.close'),profile);

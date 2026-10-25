@@ -5,7 +5,7 @@ import { spawn } from 'node:child_process';
 import { once } from 'node:events';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { assertSsrCandidate, expectedVisibleBody, closeOwnedBrowser, renderedDocument, verifyOnlineCandidates } from './eq-new-source-online-qa.mjs';
+import { assertSsrCandidate, expectedVisibleBody, closeOwnedBrowser, renderedDocument, readNavigatedDocument, verifyOnlineCandidates } from './eq-new-source-online-qa.mjs';
 import { recoveryFailure, buildExecution } from './eq-new-source-publish.mjs';
 const rows=JSON.parse(readFileSync('backend/content_assets/eq_public/candidate/20261009-new-articles/assets.json','utf8')).candidates.filter(row=>row.identity.locale==='zh-CN');
 const document=row=>({title:row.snapshot.seo_title+' | FermatMind',description:row.snapshot.seo_description,headings:[row.snapshot.title],articleVisible:true,body:expectedVisibleBody(row.snapshot.content_md)});
@@ -72,5 +72,34 @@ test('DOM text titles preserve literal entities and reject different titles',asy
    assert.throws(()=>assertSsrCandidate({...actual,headings:[wrong]},row),/EQ_SSR_TITLE_MISMATCH/);
   }
   assert.doesNotThrow(()=>assertSsrCandidate({...actual,headings:[' \n'+title+'\t ']},row));
+ }
+});
+
+
+test('navigation readback does not depend on a load event and never reads the previous loader',async()=>{
+ const accepted=document(rows[0]);let frames=0,evaluations=0;
+ const request=async(method,params,session)=>{
+  assert.equal(session,'session');
+  if(method==='Page.navigate') return {frameId:'main',loaderId:'requested'};
+  if(method==='Page.getFrameTree') return {frameTree:{frame:{id:'main',loaderId:++frames===1?'previous':'requested'}}};
+  assert.equal(method,'Runtime.evaluate');evaluations++;
+  assert.equal(frames,2);assert.equal(params.awaitPromise,true);
+  assert.match(params.expression,/document.readyState!==\'complete\'/);
+  return {result:{value:accepted}};
+ };
+ assert.deepEqual(await readNavigatedDocument(request,'https://example.invalid','session','main',false),accepted);
+ assert.equal(evaluations,1);
+});
+
+test('failed navigation and evaluation remain fail closed without a second navigation',async()=>{
+ for(const mode of ['navigation-error','missing-loader','evaluation-error']) {
+  let navigations=0;
+  const request=async method=>{
+   if(method==='Page.navigate') {navigations++;return mode==='navigation-error'?{errorText:'fixture'}:mode==='missing-loader'?{frameId:'main'}:{frameId:'main',loaderId:'requested'};}
+   if(method==='Page.getFrameTree') return {frameTree:{frame:{id:'main',loaderId:'requested'}}};
+   return {exceptionDetails:{}};
+  };
+  await assert.rejects(readNavigatedDocument(request,'https://example.invalid','session','main',false),/EQ_BROWSER_(NAVIGATION_FAILED|READBACK_FAILED)/);
+  assert.equal(navigations,1);
  }
 });
