@@ -17,7 +17,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Validation\ValidationException;
+use Livewire\Component as LivewireComponent;
 
 class PersonalityVariantCloneContentResource extends Resource
 {
@@ -75,7 +77,12 @@ class PersonalityVariantCloneContentResource extends Resource
                 ->required()
                 ->searchable()
                 ->native(false)
-                ->options(fn (): array => self::variantOptions())
+                ->options(fn (LivewireComponent $livewire): array => self::variantOptions(
+                    $livewire instanceof Pages\CreatePersonalityVariantCloneContent
+                        ? $livewire->personalityProfileId
+                        : null,
+                ))
+                ->in(fn (Forms\Components\Select $component): array => array_keys($component->getOptions()))
                 ->helperText('Bound to existing PersonalityProfileVariant owner rows only. Import fails if the variant does not exist.'),
             Forms\Components\Select::make('template_key')
                 ->required()
@@ -270,7 +277,12 @@ class PersonalityVariantCloneContentResource extends Resource
 
         return PersonalityProfileVariant::query()
             ->withoutGlobalScopes()
-            ->with('profile')
+            ->with(['profile' => static function (BelongsTo $query): void {
+                $query->withoutGlobalScopes()
+                    ->where('org_id', 0)
+                    ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
+                    ->whereIn('locale', PersonalityProfile::SUPPORTED_LOCALES);
+            }])
             ->when(
                 $personalityProfileId > 0,
                 fn (Builder $query): Builder => $query->where('personality_profile_id', $personalityProfileId),
@@ -285,10 +297,23 @@ class PersonalityVariantCloneContentResource extends Resource
             ->orderBy('id')
             ->get()
             ->mapWithKeys(static function (PersonalityProfileVariant $variant): array {
-                $locale = (string) ($variant->profile?->locale ?? 'unknown');
+                $profile = $variant->profile;
+                if (! $profile instanceof PersonalityProfile) {
+                    return [];
+                }
 
                 return [
-                    (int) $variant->id => (string) $variant->runtime_type_code.' · '.$locale,
+                    (int) $variant->id => sprintf(
+                        '%s · %s · profile_org=%d · profile=%d · variant_org=%d · variant=%d · is_published=%s · published_at=%s',
+                        $variant->runtime_type_code,
+                        $profile->locale,
+                        $profile->org_id,
+                        $profile->id,
+                        $variant->org_id,
+                        $variant->id,
+                        $variant->is_published ? 'true' : 'false',
+                        $variant->published_at?->toIso8601String() ?? 'unset',
+                    ),
                 ];
             })
             ->all();

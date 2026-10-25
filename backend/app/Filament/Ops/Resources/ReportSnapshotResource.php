@@ -175,6 +175,9 @@ class ReportSnapshotResource extends Resource
                 Tables\Columns\TextColumn::make('org_id')
                     ->label(__('ops.custom_pages.reports.columns.org_id'))
                     ->sortable(),
+                Tables\Columns\TextColumn::make('attempt_org_id')
+                    ->label('Attempt org ID')
+                    ->placeholder('Unknown'),
             ])
             ->defaultSort('updated_at', 'desc')
             ->filters([

@@ -71,6 +71,7 @@ final class ReportPdfCenterTest extends TestCase
             ->assertTableColumnExists('big5_result_page_v2_validation_error_count')
             ->assertTableColumnExists('big5_result_page_v2_audited_at')
             ->assertTableColumnExists('org_id')
+            ->assertTableColumnExists('attempt_org_id')
             ->assertTableActionExists('view', null, $chain['snapshot'])
             ->assertTableActionDoesNotExist('edit', null, $chain['snapshot'])
             ->assertTableActionDoesNotExist('delete', null, $chain['snapshot']);
@@ -260,6 +261,47 @@ final class ReportPdfCenterTest extends TestCase
             ->assertCanSeeTableRecords([$foreign['snapshot']])
             ->searchTable((string) $foreign['share_id'])
             ->assertCanSeeTableRecords([$foreign['snapshot']]);
+    }
+
+    public function test_report_pdf_center_separates_attempt_owner_from_snapshot_org_without_detail_reads(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_MENU_SUPPORT,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Selected Metadata Org');
+        $chain = $this->seedDiagnosticChain(orgId: 0);
+        DB::table('report_snapshots')->where('attempt_id', $chain['attempt_id'])->update(['org_id' => 81]);
+        $snapshot = ReportSnapshot::query()->withoutGlobalScopes()->findOrFail($chain['attempt_id']);
+
+        session($this->opsSession($admin, $selectedOrg));
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        DB::flushQueryLog();
+        DB::enableQueryLog();
+        try {
+            Livewire::test(ListReportSnapshots::class)
+                ->searchTable((string) $chain['attempt_id'])
+                ->assertCanSeeTableRecords([$snapshot])
+                ->assertTableColumnStateSet('org_id', 81, $snapshot)
+                ->assertTableColumnStateSet('attempt_org_id', 0, $snapshot)
+                ->assertDontSee((string) $chain['report_secret']);
+            $queries = array_column(DB::getQueryLog(), 'query');
+        } finally {
+            DB::disableQueryLog();
+        }
+
+        $this->assertFalse(collect($queries)->contains(
+            fn (string $query): bool => str_contains(strtolower($query), 'attempt_answers'),
+        ));
+        DB::table('attempts')->where('id', $chain['attempt_id'])->delete();
+        $orphan = app(ReportSnapshotExplorerSupport::class)->indexQuery()->firstWhere('attempt_id', $chain['attempt_id']);
+        $this->assertInstanceOf(ReportSnapshot::class, $orphan);
+        $this->assertNull($orphan?->attempt_org_id);
+
+        $unauthorized = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        session($this->opsSession($unauthorized, $selectedOrg));
+        $this->actingAs($unauthorized, (string) config('admin.guard', 'admin'));
+        Livewire::test(ListReportSnapshots::class)->assertForbidden();
     }
 
     public function test_report_pdf_center_uses_benefit_grant_for_unlock_truth_and_keeps_report_job_auxiliary(): void

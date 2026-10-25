@@ -9,6 +9,7 @@ use App\Filament\Ops\Resources\PersonalityProfileResource\Pages\EditPersonalityP
 use App\Filament\Ops\Resources\PersonalityProfileResource\Pages\ListPersonalityProfiles;
 use App\Filament\Ops\Resources\PersonalityProfileResource\Support\PersonalityWorkspace;
 use App\Filament\Ops\Resources\PersonalityVariantCloneContentResource;
+use App\Filament\Ops\Resources\PersonalityVariantCloneContentResource\Pages\CreatePersonalityVariantCloneContent;
 use App\Filament\Ops\Resources\PersonalityVariantCloneContentResource\Pages\ListPersonalityVariantCloneContents;
 use App\Models\AdminUser;
 use App\Models\Organization;
@@ -22,11 +23,13 @@ use App\Models\Role;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\Select;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportLockedProperties\CannotUpdateLockedPropertyException;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -215,6 +218,89 @@ final class PersonalityWorkspaceTest extends TestCase
             $variantOptionIds,
             array_map('intval', array_keys(PersonalityVariantCloneContentResource::variantOptions())),
         );
+    }
+
+    public function test_desktop_create_retains_exact_profile_and_metadata_without_request_query(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ, PermissionNames::ADMIN_CONTENT_PUBLISH]);
+        $org = $this->createSelectedOrg();
+        $profile = $this->seedProfile();
+        $otherLocale = $this->seedProfile(['locale' => 'zh-CN']);
+        $foreignProfile = $this->seedProfile(['org_id' => (int) $org->id]);
+        $assertive = $this->seedVariant($profile, 'A');
+        $turbulent = $this->seedVariant($profile, 'T');
+        $otherVariant = $this->seedVariant($otherLocale, 'A');
+        $foreignVariant = $this->seedVariant($foreignProfile, 'A');
+        $turbulent->update(['is_published' => true, 'published_at' => '2026-01-02 03:04:05']);
+
+        $this->useOpsContext($admin, $org);
+        $page = Livewire::withQueryParams(['profile' => (int) $profile->id])
+            ->test(CreatePersonalityVariantCloneContent::class)
+            ->assertSet('personalityProfileId', (int) $profile->id);
+
+        app()->instance('request', Request::create('/livewire/update', 'POST'));
+        $checkOptions = function (Select $field) use ($profile, $assertive, $turbulent): bool {
+            $this->assertNull(request()->query('profile'));
+            $options = $field->getOptions();
+            $this->assertSame([(int) $assertive->id, (int) $turbulent->id], array_keys($options));
+            $this->assertStringContainsString(' · en · profile_org=0 · profile='.$profile->id, $options[$assertive->id]);
+            $this->assertStringContainsString('variant='.$assertive->id.' · is_published=false · published_at=unset', $options[$assertive->id]);
+            $this->assertStringContainsString('variant='.$turbulent->id.' · is_published=true · published_at=2026-01-02T03:04:05+00:00', $options[$turbulent->id]);
+
+            return true;
+        };
+        $page->assertFormFieldExists('personality_profile_variant_id', $checkOptions)
+            ->call('$refresh')
+            ->assertSet('personalityProfileId', (int) $profile->id)
+            ->assertFormFieldExists('personality_profile_variant_id', $checkOptions)
+            ->fillForm(['personality_profile_variant_id' => (int) $otherVariant->id])
+            ->call('create')
+            ->assertHasFormErrors(['personality_profile_variant_id' => 'in']);
+
+        $legacyOptions = PersonalityVariantCloneContentResource::variantOptions(0);
+        $this->assertEqualsCanonicalizing(
+            [(int) $assertive->id, (int) $turbulent->id, (int) $otherVariant->id],
+            array_keys($legacyOptions),
+        );
+        $this->assertArrayNotHasKey((int) $foreignVariant->id, $legacyOptions);
+        $this->assertStringContainsString(' · zh-CN · ', $legacyOptions[$otherVariant->id]);
+        $this->assertDatabaseCount('personality_profile_variant_clone_contents', 0);
+        $this->assertFalse($assertive->fresh()->is_published);
+        $this->assertTrue($turbulent->fresh()->is_published);
+    }
+
+    public function test_desktop_create_profile_context_cannot_be_changed_by_client(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ, PermissionNames::ADMIN_CONTENT_PUBLISH]);
+        $org = $this->createSelectedOrg();
+        $profile = $this->seedProfile();
+        $other = $this->seedProfile(['locale' => 'zh-CN']);
+        $this->seedVariant($profile, 'A');
+        $this->useOpsContext($admin, $org);
+
+        $page = Livewire::withQueryParams(['profile' => (int) $profile->id])
+            ->test(CreatePersonalityVariantCloneContent::class);
+
+        $this->expectException(CannotUpdateLockedPropertyException::class);
+        $page->set('personalityProfileId', (int) $other->id);
+    }
+
+    public function test_desktop_create_preserves_permissions_and_rejects_foreign_profile_context(): void
+    {
+        $org = $this->createSelectedOrg();
+        $foreign = $this->seedProfile(['org_id' => (int) $org->id]);
+        $reader = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $this->useOpsContext($reader, $org);
+        Livewire::withQueryParams(['profile' => 999999])
+            ->test(CreatePersonalityVariantCloneContent::class)
+            ->assertForbidden();
+
+        $publisher = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ, PermissionNames::ADMIN_CONTENT_PUBLISH]);
+        $this->useOpsContext($publisher, $org);
+        Livewire::withQueryParams(['profile' => (int) $foreign->id])
+            ->test(CreatePersonalityVariantCloneContent::class)
+            ->assertNotFound();
+        $this->assertDatabaseCount('personality_profile_variant_clone_contents', 0);
     }
 
     public function test_workspace_sync_updates_profile_sections_seo_and_revision_counter(): void
@@ -408,6 +494,16 @@ final class PersonalityWorkspaceTest extends TestCase
         $this->assertContains($globalProfile->id, $ids);
         $this->assertNotContains($tenantProfile->id, $ids);
         $this->assertNotContains($otherScale->id, $ids);
+    }
+
+    private function useOpsContext(AdminUser $admin, Organization $org): void
+    {
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        session([
+            'ops_org_id' => (int) $org->id,
+            'ops_admin_totp_verified_user_id' => (int) $admin->id,
+        ]);
+        app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
     }
 
     private function createSelectedOrg(): Organization

@@ -159,6 +159,7 @@ final class ReportSnapshotExplorerSupport
 
         if (SchemaBaseline::hasTable('attempts')) {
             foreach ([
+                'org_id' => 'attempt_org_id',
                 'locale' => 'locale',
                 'region' => 'region',
             ] as $column => $alias) {
