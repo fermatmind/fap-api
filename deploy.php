@@ -1699,6 +1699,36 @@ BASH);
     });
 });
 
+task('runtime:configure-pdf-print', function (): void {
+    if (deploySkipsAuthorityMutations()) {
+        return;
+    }
+
+    $secret = (string) (getenv('GOTENBERG_RESULT_PRINT_TOKEN_SECRET') ?: '');
+    if (preg_match('/\A[0-9a-f]{64}\z/D', $secret) !== 1) {
+        throw new \RuntimeException('PDF_PRINT_RUNTIME_KEY_UNAVAILABLE');
+    }
+    $local = tempnam(sys_get_temp_dir(), 'pdf-print-runtime-');
+    if (! is_string($local)) {
+        throw new \RuntimeException('PDF_PRINT_RUNTIME_TEMP_FAILED');
+    }
+    $remote = '{{release_path}}/.pdf-print-runtime-key';
+    try {
+        if (! chmod($local, 0600) || file_put_contents($local, $secret) !== 64) {
+            throw new \RuntimeException('PDF_PRINT_RUNTIME_INPUT_FAILED');
+        }
+        upload($local, $remote);
+        run(sprintf(
+            'set -euo pipefail; set +x; patch=%s; trap \'rm -f "$patch"\' EXIT; chmod 600 "$patch"; {{bin/php}} -d display_errors=0 %s %s "$patch"',
+            deployPlaceholderPathArg($remote),
+            deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/configure_pdf_print_runtime.php'),
+            deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/.env'),
+        ));
+    } finally {
+        @unlink($local);
+    }
+});
+
 task('crawler:configure-aggregate-runtime', function () {
     if (deploySkipsAuthorityMutations()) {
         writeln('<comment>Skipping crawler aggregate runtime configuration for a non-authority deployment.</comment>');
@@ -5737,6 +5767,7 @@ after('deploy:vendors', 'bootstrap-cache:clear-release');
 after('deploy:shared', 'guard:shared-permissions');
 after('guard:shared-permissions', 'crawler:configure-aggregate-runtime');
 after('crawler:configure-aggregate-runtime', 'runtime:configure-seo-intel');
+after('runtime:configure-seo-intel', 'runtime:configure-pdf-print');
 before('artisan:config:cache', 'guard:seo-intel-runtime-config');
 
 /**

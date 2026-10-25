@@ -912,6 +912,7 @@ jobs:
           ' seo-competitive-evidence-staging.json >/dev/null
       - name: Deploy staging and run repository smoke chain
         env:
+          GOTENBERG_RESULT_PRINT_TOKEN_SECRET: ${{ secrets.GOTENBERG_RESULT_PRINT_TOKEN_SECRET }}
           SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
           SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
           SEO_INTEL_DB_DATABASE: ${{ secrets.SEO_INTEL_DB_DATABASE }}
@@ -1605,6 +1606,7 @@ jobs:
         id: activation
         if: steps.baseline.outputs.skip != 'true'
         env:
+          GOTENBERG_RESULT_PRINT_TOKEN_SECRET: ${{ secrets.GOTENBERG_RESULT_PRINT_TOKEN_SECRET }}
           SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY: ${{ secrets.SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY }}
           SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
           SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
