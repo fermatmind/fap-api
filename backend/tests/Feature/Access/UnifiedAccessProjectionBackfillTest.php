@@ -60,6 +60,7 @@ final class UnifiedAccessProjectionBackfillTest extends TestCase
         $attempt = Attempt::query()->create([
             'id' => $attemptId,
             'anon_id' => 'anon-access',
+            'locale' => 'zh-CN',
             'scale_code' => 'MBTI',
             'scale_version' => 'v1',
             'question_count' => 1,
