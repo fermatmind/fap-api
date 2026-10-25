@@ -22,8 +22,8 @@ final class ReportPdfArtifactStore
      */
     public function legacyPaths(string $scaleCode, string $attemptId, string $manifestHash, string $variant): array
     {
-        // Unversioned Big Five/MBTI PDFs may contain metadata or an obsolete print surface.
-        if (in_array(strtoupper(trim($scaleCode)), ['BIG5_OCEAN', 'MBTI'], true)) {
+        // Unversioned Big Five/MBTI/IQ PDFs may contain metadata or an obsolete print surface.
+        if (in_array(strtoupper(trim($scaleCode)), ['BIG5_OCEAN', 'MBTI', 'IQ_RAVEN', 'IQ_INTELLIGENCE_QUOTIENT'], true)) {
             return [];
         }
 

@@ -96,6 +96,17 @@ final class ReportPdfDocumentService
     public function metadata(Attempt $attempt, array $gate = [], ?Result $result = null): array
     {
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if (\App\Services\Report\ReportAccess::isIqScale($scaleCode)) {
+            return [
+                'pdf_surface_version' => IqReportPdfRenderer::SURFACE_VERSION,
+                'scale_code' => $scaleCode,
+                'form_code' => IqReportPdfProjection::BANK,
+                'form_label' => $attempt->locale === 'zh-CN' ? '原创30题' : 'Original 30 items',
+                'filename_hint' => 'fermatmind-iq-original30-'.($attempt->locale === 'zh-CN' ? 'zh' : 'en').'.pdf',
+                'report_schema_version' => 'iq.report.v1',
+            ];
+        }
+
         if ($scaleCode === 'RIASEC') {
             return $this->riasecMetadata($attempt, $gate);
         }
@@ -303,6 +314,11 @@ final class ReportPdfDocumentService
 
     public function resolveArtifactPath(Attempt $attempt, string $variant, ?Result $result = null): string
     {
+        // IQ artifacts include the authorized report projection; only getOrGenerate can resolve that path.
+        if (\App\Services\Report\ReportAccess::isIqScale((string) $attempt->scale_code)) {
+            throw new \LogicException('IQ PDF paths require a complete report gate.');
+        }
+
         return $this->artifactStore->path(
             (string) ($attempt->scale_code ?? 'UNKNOWN'),
             (string) $attempt->id,
@@ -313,6 +329,11 @@ final class ReportPdfDocumentService
 
     public function readArtifact(Attempt $attempt, string $variant, ?Result $result = null): ?string
     {
+        // IQ cache reads require the current full gate, owned by getOrGenerate.
+        if (\App\Services\Report\ReportAccess::isIqScale((string) $attempt->scale_code)) {
+            return null;
+        }
+
         $variant = $this->normalizeVariant($variant);
         $manifestHash = $this->artifactManifestHash($attempt, $variant, $result);
         $path = $this->artifactStore->path(
@@ -354,9 +375,21 @@ final class ReportPdfDocumentService
             return $this->getOrGenerateMbtiResultPageExport($attempt, $gate, $result);
         }
 
+        $iqView = null;
+        if (\App\Services\Report\ReportAccess::isIqScale((string) $attempt->scale_code)) {
+            if (! $result instanceof Result) {
+                throw new \App\Exceptions\Api\ApiProblemException(409, 'IQ_PDF_NOT_AVAILABLE', 'A scored original-30 result is required.', headers: ['Cache-Control' => 'private, no-store']);
+            }
+            // Qualify before cache reads; blocked, partial or revoked access never reaches an artifact.
+            $iqView = app(IqReportPdfProjection::class)->project($attempt, $result, $gate);
+        }
+
         $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $locked = (bool) ($gate['locked'] ?? true);
         $manifestHash = $this->resolveManifestHash($attempt, $result);
+        if ($iqView !== null) {
+            $manifestHash = hash('sha256', json_encode([$manifestHash, $iqView], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        }
         $path = $this->artifactStore->path(
             (string) ($attempt->scale_code ?? 'UNKNOWN'),
             (string) $attempt->id,
@@ -414,6 +447,7 @@ final class ReportPdfDocumentService
         $normEvidence = is_array($report['norms'] ?? null) ? $report['norms'] : [];
 
         $pdfBinary = match ($scaleCode) {
+            'IQ_RAVEN', 'IQ_INTELLIGENCE_QUOTIENT' => app(IqReportPdfRenderer::class)->render($iqView),
             'BIG5_OCEAN' => app(BigFiveReportPdfRenderer::class)->render($report, (string) $attempt->locale, $locked),
             'MBTI' => $this->buildMbtiDocument($attempt, $result, $locked),
             default => $this->buildDocument(
@@ -442,6 +476,14 @@ final class ReportPdfDocumentService
 
     public function resolveManifestHash(Attempt $attempt, ?Result $result = null): string
     {
+        if (\App\Services\Report\ReportAccess::isIqScale((string) $attempt->scale_code)) {
+            // Base identity; getOrGenerate additionally binds the emitted safe projection.
+            return hash('sha256', json_encode([
+                IqReportPdfRenderer::SURFACE_VERSION, \App\Services\Iq\IqBetaReferenceScore::MODEL_VERSION,
+                $attempt->locale, $attempt->question_count, $result?->result_json, $result?->normed_json,
+            ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        }
+
         $hash = $this->baseContentManifestHash($attempt, $result);
 
         if (strtoupper((string) $attempt->scale_code) === 'BIG5_OCEAN') {

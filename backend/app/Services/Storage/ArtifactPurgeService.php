@@ -367,6 +367,20 @@ final class ArtifactPurgeService
             $paths['pdf_'.$variant] = $this->artifactStore->pdfCanonicalPath($scaleCode, $attemptId, $manifestHash, $variant);
         }
 
+        if (\App\Services\Report\ReportAccess::isIqScale($scaleCode)) {
+            // IQ report/source revisions have different hashes. Keep purge bounded to this attempt's IQ PDFs.
+            foreach (['IQ_RAVEN', 'IQ_INTELLIGENCE_QUOTIENT'] as $iqScale) {
+                $prefix = dirname($this->artifactStore->pdfCanonicalPath($iqScale, $attemptId, 'nohash', 'full'), 2);
+                foreach (Storage::disk('local')->allFiles($prefix) as $path) {
+                    if (preg_match('#^'.preg_quote($prefix, '#').'/[a-f0-9]{64}/report_(free|full)\.pdf$#D', $path) === 1) {
+                        $paths['iq_revision_'.count($paths)] = $path;
+                    }
+                }
+            }
+
+            return $paths;
+        }
+
         if (strtoupper(trim($scaleCode)) !== 'MBTI') {
             return $paths;
         }

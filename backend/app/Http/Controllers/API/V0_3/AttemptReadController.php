@@ -1154,6 +1154,23 @@ class AttemptReadController extends Controller
             ]);
         }
 
+        if (ReportAccess::isIqScale($scaleCode)) {
+            $pdfState = 'missing';
+            if ($resultExists && $accessState === 'ready' && $reportState === 'ready') {
+                $iqResult = Result::where('org_id', $orgId)->where('attempt_id', $attempt->id)->first();
+                if ($iqResult instanceof Result) {
+                    $iqGate = $this->reportGatekeeper->resolve($orgId, (string) $attempt->id,
+                        $readUserId !== null ? (string) $readUserId : null, $readAnonId, $this->currentOrgContext()->role(), false, false);
+                    try {
+                        app(\App\Services\Report\Pdf\IqReportPdfProjection::class)->project($attempt, $iqResult, $iqGate);
+                        $pdfState = 'ready';
+                    } catch (ApiProblemException) {
+                        // Preserve readable results and text exports without advertising an unavailable PDF.
+                    }
+                }
+            }
+        }
+
         if ($repairFailed && $resultExists) {
             $reasonCode = in_array($reasonCode, ['', 'projection_missing_result_ready'], true)
                 ? 'projection_repair_failed_result_ready_fallback'
@@ -3052,7 +3069,7 @@ class AttemptReadController extends Controller
         try {
             $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
         } catch (ApiProblemException $e) {
-            if ($scaleCode !== 'MBTI' || $e->getStatusCode() !== 404) {
+            if (($scaleCode !== 'MBTI' && ! ReportAccess::isIqScale($scaleCode)) || $e->getStatusCode() !== 404) {
                 throw $e;
             }
 
@@ -3094,6 +3111,13 @@ class AttemptReadController extends Controller
                 };
             }
 
+            if (ReportAccess::isIqScale($scaleCode)) {
+                return $this->privateNoStoreJson([
+                    'ok' => false, 'error_code' => 'IQ_PDF_NOT_AVAILABLE',
+                    'message' => 'A complete original-30 report is not available.',
+                ], $status);
+            }
+
             abort($status, (string) ($gate['message'] ?? 'report generation failed.'));
         }
 
@@ -3128,6 +3152,13 @@ class AttemptReadController extends Controller
         try {
             $generated = $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result);
         } catch (\Throwable $e) {
+            if (ReportAccess::isIqScale($scaleCode)) {
+                return $this->privateNoStoreJson([
+                    'ok' => false,
+                    'error_code' => $e instanceof ApiProblemException ? $e->errorCode() : 'IQ_PDF_GENERATION_FAILED',
+                    'message' => $e instanceof ApiProblemException ? $e->getMessage() : 'PDF is temporarily unavailable. Use TXT or Markdown and retry later.',
+                ], $e instanceof ApiProblemException ? $e->getStatusCode() : 503);
+            }
             if ($scaleCode !== 'MBTI') {
                 throw $e;
             }
@@ -3160,6 +3191,10 @@ class AttemptReadController extends Controller
                 ? (($pdfMetadata['cross_form_comparable'] ?? false) ? 'true' : 'false')
                 : '',
         ];
+
+        if (ReportAccess::isIqScale($scaleCode)) {
+            $responseHeaders['X-Pdf-Artifact-Cache'] = $generated['cached'] ? 'HIT' : 'MISS';
+        }
 
         if ($scaleCode === 'MBTI' && isset($generated['engine'])) {
             $responseHeaders = array_merge($responseHeaders, [
