@@ -64,6 +64,7 @@ final class ArticlePublishedSourceReviewService
             $request = Request::create('/ops/articles/published-source-review', 'POST');
             $request->attributes->set('org_id', 0);
             app(AuditLogger::class)->log($request, 'article_published_source_reviewed', 'article', (string) $target->id, [
+                'resource_org_id' => (int) $target->org_id,
                 'attestation_id' => (int) $attestation->id,
                 'pair_sha256' => $hash,
                 'source_article_id' => (int) $source->id,
@@ -193,7 +194,7 @@ final class ArticlePublishedSourceReviewService
 
     private function auditExists(Article $target, ReviewAttestation $record, string $hash): bool
     {
-        return AuditLog::withoutGlobalScopes()->where('org_id', 0)->where('action', 'article_published_source_reviewed')
+        return AuditLog::withoutGlobalScopes()->where('meta_json->resource_org_id', 0)->where('action', 'article_published_source_reviewed')
             ->where('target_type', 'article')->where('target_id', (string) $target->id)->where('result', 'success')
             ->where('actor_admin_id', $record->attested_by_admin_user_id)
             ->where('meta_json->attestation_id', (int) $record->id)->where('meta_json->pair_sha256', $hash)->exists();

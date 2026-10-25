@@ -9,12 +9,14 @@ use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\AuditLog;
 use App\Models\Permission;
 use App\Models\ReviewAttestation;
 use App\Models\Role;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticlePublishedSourceReviewService;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
@@ -201,6 +203,26 @@ final class ArticlePublishedSourceReviewTest extends TestCase
         }
         $this->assertDatabaseCount('review_attestations', 0);
         $this->assertSame($before, $this->rows($source, $target));
+        $this->assertFalse($service->hasCurrentReview($target));
+    }
+
+    public function test_active_operations_org_is_preserved_while_evidence_binds_global_article_resources(): void
+    {
+        [$source, $target] = $this->fixture();
+        $before = $this->rows($source, $target);
+        app(OrgContext::class)->set(17, null, 'admin');
+        $service = app(ArticlePublishedSourceReviewService::class);
+        $service->confirm($target, [...$service->prepare($target), 'source_reviewed' => true]);
+        $audit = AuditLog::withoutGlobalScopes()->sole();
+        $this->assertSame(17, $audit->org_id);
+        $this->assertSame(0, $audit->meta_json['resource_org_id']);
+        $this->assertTrue($service->hasCurrentReview($target));
+        $this->assertSame($before, $this->rows($source, $target));
+        app(OrgContext::class)->set(18, null, 'admin');
+        $this->assertTrue($service->hasCurrentReview($target));
+        DB::table('audit_logs')->where('id', $audit->id)->update([
+            'meta_json' => json_encode([...$audit->meta_json, 'resource_org_id' => 2]),
+        ]);
         $this->assertFalse($service->hasCurrentReview($target));
     }
 
