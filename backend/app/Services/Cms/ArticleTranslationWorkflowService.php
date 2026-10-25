@@ -9,6 +9,7 @@ use App\Events\PublicAuthorityChanged;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\Article;
+use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\EditorialReview;
@@ -269,6 +270,14 @@ final class ArticleTranslationWorkflowService
                 ? $this->sourceEditorialApprovalBlockers($locked, $revision)
                 : $this->preflight($locked)['blockers'];
 
+            // Existing editorial edits have already-published translation provenance.
+            // They may be reviewed independently when only a legacy source workflow
+            // record is absent. Explicit source decisions and every other blocker remain.
+            if (! $markEditorialApproved
+                && $blockers === ['source article editorial approval missing']
+                && $this->canReviewExistingBodyIndependently($locked, $revision)) {
+                $blockers = [];
+            }
             if ($blockers !== []) {
                 throw new ArticleTranslationWorkflowException('Translation approval is blocked by preflight issues.', $blockers);
             }
@@ -309,6 +318,33 @@ final class ArticleTranslationWorkflowService
 
             return $revision->refresh();
         });
+    }
+
+    private function canReviewExistingBodyIndependently(Article $target, ArticleTranslationRevision $working): bool
+    {
+        if ($target->isSourceArticle() || $target->published_revision_id === null) {
+            return false;
+        }
+        $source = $target->sourceArticle();
+        if (! $source instanceof Article
+            || EditorialReview::withoutGlobalScopes()->where('content_type', 'article')->where('content_id', $source->id)->exists()) {
+            return false;
+        }
+        $source->loadMissing('publishedRevision');
+        $sourcePublished = $source->publishedRevision;
+        $published = $target->publishedRevision;
+        $sourceHash = $this->workspace->sourceVersionHashFor($target);
+        if (! $published instanceof ArticleTranslationRevision || ! filled($sourceHash)
+            || ! $sourcePublished instanceof ArticleTranslationRevision || $sourcePublished->approved_at === null
+            || (int) $source->working_revision_id !== (int) $source->published_revision_id
+            || ! hash_equals((string) $sourceHash, (string) $sourcePublished->source_version_hash)
+            || ! hash_equals((string) $sourceHash, (string) $published->translated_from_version_hash)) {
+            return false;
+        }
+        $import = ArticleEditorialPackageImport::withoutGlobalScopes()
+            ->where('article_id', $target->id)->latest('id')->first();
+
+        return app(ArticlePublishService::class)->isBodyOnlyUpdate($target, $working, $import, (int) $published->id);
     }
 
     public function archiveStaleRevision(Article $target): ArticleTranslationRevision

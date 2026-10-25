@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Support;
 
+use App\Models\Article;
+use App\Models\ArticleEditorialPackageImport;
+use App\Services\Cms\ArticlePublishService;
+
 final class EditorialReviewChecklist
 {
     /**
@@ -31,8 +35,22 @@ final class EditorialReviewChecklist
             $missing[] = 'body';
         }
 
-        if (! filled(data_get($record, 'excerpt'))) {
+        $bodyOnly = false;
+        if ($type === 'article' && $record instanceof Article && $record->is_public
+            && $record->published_revision_id !== null
+            && (int) $record->working_revision_id !== (int) $record->published_revision_id) {
+            $import = ArticleEditorialPackageImport::withoutGlobalScopes()
+                ->where('article_id', $record->id)->latest('id')->first();
+            $bodyOnly = app(ArticlePublishService::class)->isBodyOnlyUpdate(
+                $record, $record->workingRevision, $import, (int) $record->published_revision_id
+            );
+        }
+        if (! $bodyOnly && ! filled(data_get($record, 'excerpt'))) {
             $missing[] = 'excerpt';
+        }
+
+        if ($bodyOnly) {
+            return $missing;
         }
 
         $seoMeta = data_get($record, 'seoMeta');

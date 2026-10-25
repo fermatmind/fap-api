@@ -38,9 +38,45 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
         $this->loginPublisher();
         config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
             'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
-        Http::fake(['*' => Http::response(self::frontendArticleSuccessReceipt())]);
+        $receipt = self::frontendArticleSuccessReceipt();
+        $receipt['revalidated_paths'] = ['/en', '/en/articles', '/en/articles/eq-test-tool-guide', '/llms.txt', '/llms-full.txt', '/zh/articles', '/zh/articles/eq-test-tool-guide'];
+        $receipt['invalidated_tags'] = ['article-detail:en:eq-test-tool-guide', 'article-seo:en:eq-test-tool-guide'];
+        Http::fake(['*' => Http::response($receipt)]);
 
         $article = $this->bodyOnlyArticle($hasSeo, $canonical);
+        $source = $this->makeEnglishTranslation($article);
+        if ($hasSeo) {
+            \App\Models\EditorialReview::withoutGlobalScopes()->create([
+                'org_id' => 0, 'content_type' => 'article', 'content_id' => $source->id,
+                'workflow_state' => 'approved', 'last_transition_at' => now()->addSecond(),
+            ]);
+        }
+        $sourceBefore = $source->getAttributes();
+        $sourceRevisionBefore = $source->publishedRevision->getAttributes();
+        $article = $article->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $actorId = (int) auth('admin')->id();
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => $actorId]);
+        $article->workingRevision->forceFill([
+            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'created_by' => $actorId, 'reviewed_by' => null, 'reviewed_at' => null, 'approved_at' => null,
+        ])->save();
+        $article = $article->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $this->assertSame([], \App\Filament\Ops\Support\EditorialReviewChecklist::missing('article', $article));
+        \App\Filament\Ops\Support\EditorialReviewAudit::assignOwner($actorId, 'article', $article);
+        \App\Filament\Ops\Support\EditorialReviewAudit::assignReviewer($actorId, 'article', $article);
+        app(OrgContext::class)->set(10, $actorId, 'admin');
+        \Filament\Facades\Filament::setCurrentPanel(app(\Filament\PanelRegistry::class)->get('ops'));
+        $review = \Livewire\Livewire::test(\App\Filament\Ops\Pages\EditorialReviewPage::class);
+        $row = collect($review->get('reviewItems'))->firstWhere('id', (int) $article->id);
+        $this->assertTrue($row['can_submit']);
+        $review->call('submitItem', 'article', (int) $article->id)
+            ->call('approveItem', 'article', (int) $article->id);
+
+        $article = $article->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $this->assertSame(ArticleTranslationRevision::STATUS_APPROVED, $article->workingRevision->revision_status);
+        $this->assertSame($actorId, (int) $article->workingRevision->reviewed_by);
+        $this->assertTrue(app(\App\Services\Cms\CmsEditorialReviewAttestationService::class)
+            ->hasApprovedEvidence('article_translation_revision', $article->workingRevision));
         $old = (int) $article->published_revision_id;
         $seo = $article->seoMeta?->getAttributes();
         $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
@@ -55,6 +91,8 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
         $this->assertSame($hasSeo, $article->sitemap_eligible);
         $this->assertSame($hasSeo, $article->llms_eligible);
         $this->assertNull($article->cover_image_url);
+        $this->assertSame($sourceBefore, $source->fresh()->getAttributes());
+        $this->assertSame($sourceRevisionBefore, $source->publishedRevision->fresh()->getAttributes());
 
     }
 
@@ -70,6 +108,9 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
             $import->forceFill(['validation_summary_json' => $summary])->save();
         } elseif (in_array($failure, ['title', 'seo_title'], true)) {
             $article->workingRevision->forceFill([$failure => 'Different metadata'])->save();
+        }
+        if ($failure !== 'snapshot') {
+            $this->assertContains('seo title', \App\Filament\Ops\Support\EditorialReviewChecklist::missing('article', $article->fresh()));
         }
         $options = ['--dry-run' => true, '--json' => true];
         if ($failure !== 'snapshot') {
@@ -88,6 +129,94 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
     public static function bodyOnlyFailures(): array
     {
         return [['snapshot'], ['import'], ['title'], ['seo_title']];
+    }
+
+    #[DataProvider('legacySourceReviewFailures')]
+    public function test_legacy_source_workflow_compatibility_preserves_rejections_provenance_and_normal_translation_rules(string $failure): void
+    {
+        $this->loginPublisher();
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => (int) auth('admin')->id()]);
+        $article = $this->bodyOnlyArticle(false);
+        $source = $this->makeEnglishTranslation($article);
+        $article = $article->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $article->workingRevision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'reviewed_by' => null, 'reviewed_at' => null, 'approved_at' => null])->save();
+        if (in_array($failure, ['rejected', 'changes_requested', 'in_review', 'ready'], true)) {
+            \App\Models\EditorialReview::withoutGlobalScopes()->create(['org_id' => 0, 'content_type' => 'article',
+                'content_id' => $source->id, 'workflow_state' => $failure, 'last_transition_at' => now()->addSecond()]);
+        } elseif ($failure === 'source_hash') {
+            $source->workingRevision->forceFill(['source_version_hash' => str_repeat('b', 64)])->save();
+        } elseif ($failure === 'provenance') {
+            $article->workingRevision->forceFill(['translated_from_version_hash' => str_repeat('b', 64)])->save();
+        } elseif ($failure === 'metadata') {
+            $article->workingRevision->forceFill(['title' => 'Unselected title change'])->save();
+        } elseif ($failure === 'unapproved_source') {
+            $source->publishedRevision->forceFill(['approved_at' => null])->save();
+        } elseif ($failure === 'references') {
+            $source->forceFill(['content_md' => 'Reference: https://example.test/source'])->save();
+        }
+        $sourceBefore = $source->fresh()->getAttributes();
+        $oldPublished = (int) $article->published_revision_id;
+        $service = app(\App\Services\Cms\ArticleTranslationWorkflowService::class);
+        try {
+            if ($failure === 'ordinary_translation') {
+                $service->approveTranslation($article->fresh());
+            } else {
+                $service->approveEditorialWorkingRevision($article->fresh(), (int) auth('admin')->id());
+            }
+            $this->fail('The original approval blockers must remain effective.');
+        } catch (\App\Services\Cms\ArticleTranslationWorkflowException) {
+            $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, $article->fresh()->workingRevision->revision_status);
+            $this->assertSame($oldPublished, (int) $article->fresh()->published_revision_id);
+            $this->assertSame($sourceBefore, $source->fresh()->getAttributes());
+        }
+    }
+
+    public static function legacySourceReviewFailures(): array
+    {
+        return array_map(static fn (string $case): array => [$case], [
+            'rejected', 'changes_requested', 'in_review', 'ready', 'source_hash', 'provenance',
+            'metadata', 'unapproved_source', 'references', 'ordinary_translation',
+        ]);
+    }
+
+    private function makeEnglishTranslation(Article $target): Article
+    {
+        $source = Article::unguarded(fn (): Article => Article::withoutGlobalScopes()->create([
+            'org_id' => 0, 'slug' => 'existing-source-'.$target->id, 'locale' => 'zh-CN',
+            'source_locale' => 'zh-CN', 'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'translation_group_id' => self::TRANSLATION_GROUP_ID, 'title' => '既有公开源文',
+            'excerpt' => '既有摘要', 'content_md' => '既有已发布正文。',
+            'status' => 'published', 'is_public' => true, 'published_at' => now()->subDay(),
+        ]));
+        $hash = app(\App\Services\Cms\ArticleTranslationRevisionWorkspace::class)->hashForRevision($source, $source->getAttributes());
+        $revision = ArticleTranslationRevision::withoutGlobalScopes()->create([
+            'org_id' => 0, 'article_id' => $source->id, 'source_article_id' => $source->id,
+            'translation_group_id' => self::TRANSLATION_GROUP_ID, 'locale' => 'zh-CN', 'source_locale' => 'zh-CN',
+            'revision_number' => 1, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'title' => $source->title, 'excerpt' => $source->excerpt, 'content_md' => $source->content_md,
+            'source_version_hash' => $hash, 'published_at' => now()->subDay(),
+            'reviewed_by' => 7, 'reviewed_at' => now()->subDay(), 'approved_at' => now()->subDay(),
+        ]);
+        $source->forceFill(['working_revision_id' => $revision->id, 'published_revision_id' => $revision->id, 'source_version_hash' => $hash])->save();
+        $target->forceFill(['locale' => 'en', 'source_article_id' => $source->id, 'translated_from_article_id' => $source->id,
+            'source_locale' => 'zh-CN', 'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED])->save();
+        foreach ([$target->workingRevision, $target->publishedRevision] as $row) {
+            $row->forceFill(['locale' => 'en', 'source_article_id' => $source->id, 'source_locale' => 'zh-CN',
+                'source_version_hash' => $hash, 'translated_from_version_hash' => $hash])->save();
+        }
+        $target->workingRevision->forceFill(['content_md' => "## Teaching guide\n\n".str_repeat('Preserve units, unknown information and interpretation limits. ', 30)])->save();
+        if ($target->seoMeta) {
+            $target->seoMeta->forceFill(['locale' => 'en', 'og_image_url' => null,
+                'canonical_url' => $target->seoMeta->canonical_url === null ? null : str_replace('/zh/', '/en/', $target->seoMeta->canonical_url)])->save();
+        }
+        $import = ArticleEditorialPackageImport::withoutGlobalScopes()->where('article_id', $target->id)->latest('id')->firstOrFail();
+        $exactness = $import->exactness_json;
+        $exactness['body_hash'] = $this->bodyHash($target->workingRevision->content_md);
+        $exactness['canonical_url'] = '/en/articles/'.self::SLUG;
+        $import->forceFill(['locale' => 'en', 'body_hash' => $exactness['body_hash'], 'exactness_json' => $exactness])->save();
+
+        return $source->fresh(['publishedRevision']);
     }
 
     private function bodyOnlyArticle(bool $hasSeo, ?string $canonical = null): Article

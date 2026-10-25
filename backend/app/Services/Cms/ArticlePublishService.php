@@ -33,6 +33,62 @@ final class ArticlePublishService
         private readonly ArticleMaterialDecisionService $materialDecisions,
     ) {}
 
+    /** Recognize an exact body-only import; approval and publication remain separate. */
+    public function isBodyOnlyUpdate(
+        Article $article,
+        ?ArticleTranslationRevision $working,
+        ?ArticleEditorialPackageImport $import,
+        int $publishedRevisionId,
+    ): bool {
+        if ((string) $article->status !== 'published' || ! (bool) $article->is_public
+            || ! $working instanceof ArticleTranslationRevision
+            || ! $import instanceof ArticleEditorialPackageImport) {
+            return false;
+        }
+        if ((int) $article->working_revision_id !== (int) $working->id
+            || (int) $working->id === $publishedRevisionId
+            || (int) $working->org_id !== (int) $article->org_id
+            || (int) $working->article_id !== (int) $article->id
+            || (string) $working->locale !== (string) $article->locale
+            || (string) $working->translation_group_id !== (string) $article->translation_group_id
+            || trim((string) $working->content_md) === '') {
+            return false;
+        }
+        $bodyHash = static fn (string $body): string => hash('sha256', preg_replace("/\r\n?/", "\n", trim($body)));
+        // Use the supplied old revision even during post-promotion acceptance.
+        $published = ArticleTranslationRevision::query()->withoutGlobalScopes()
+            ->where('org_id', (int) $article->org_id)->where('article_id', (int) $article->id)
+            ->find($publishedRevisionId);
+        if (! $published instanceof ArticleTranslationRevision
+            || $bodyHash((string) $working->content_md) === $bodyHash((string) $published->content_md)) {
+            return false;
+        }
+        foreach (['title', 'excerpt', 'seo_title', 'seo_description', 'source_article_id', 'source_locale', 'translation_group_id', 'source_version_hash', 'translated_from_version_hash'] as $field) {
+            if ($working->getRawOriginal($field) !== $published->getRawOriginal($field)) {
+                return false;
+            }
+        }
+
+        return in_array((string) $import->status, [ArticleEditorialPackageImport::STATUS_IMPORTED, ArticleEditorialPackageImport::STATUS_WARNING], true)
+            && (string) $import->intended_status === 'working_revision_human_review'
+            && data_get($import->exactness_json, 'status') === 'passed'
+            && (int) $import->org_id === (int) $article->org_id
+            && (string) $import->locale === (string) $article->locale
+            && (string) $import->content_track === 'seo_content_package_existing_article_update'
+            && (int) data_get($import->exactness_json, 'article_id') === (int) $article->id
+            && (string) data_get($import->exactness_json, 'translation_group_id') === (string) $article->translation_group_id
+            && (string) data_get($import->exactness_json, 'slug') === (string) $article->slug
+            && hash_equals((string) data_get($import->exactness_json, 'body_hash'), $bodyHash((string) $working->content_md))
+            && (string) data_get($import->validation_summary_json, 'operation') === 'update_existing_article_working_revision'
+            && (int) data_get($import->validation_summary_json, 'article_id') === (int) $article->id
+            && (int) data_get($import->validation_summary_json, 'working_revision_id') === (int) $working->id
+            && (int) data_get($import->validation_summary_json, 'published_revision_id') === $publishedRevisionId
+            && data_get($import->validation_summary_json, 'schema_hreflang_search_hold') === true
+            && data_get($import->media_json, 'status') === 'unchanged_hold'
+            && data_get($import->graph_json, 'status') === 'unchanged_hold'
+            && hash_equals((string) $import->body_hash, $bodyHash((string) $working->content_md));
+    }
+
     public function publishArticle(int $articleId, string $source = 'article_publish_service', bool $dispatchFollowUp = true): Article
     {
         if ($articleId <= 0) {
