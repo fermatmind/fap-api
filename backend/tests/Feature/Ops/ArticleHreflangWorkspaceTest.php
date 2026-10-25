@@ -31,6 +31,28 @@ final class ArticleHreflangWorkspaceTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_article_fifteen_uses_the_same_reviewed_reciprocal_release_as_other_articles(): void
+    {
+        $this->login();
+        $en = $this->article();
+        $zh = $this->article('zh-CN', id: 15);
+        $workspace = app(ArticleHreflangWorkspace::class);
+        $before = [NativeUpdater::state($en), NativeUpdater::state($zh)];
+        $data = $workspace->prepare($zh);
+        $data['pair_reviewed'] = true;
+
+        $this->assertTrue($workspace->release($zh, $data)['ok']);
+
+        foreach ([$en, $zh] as $index => $article) {
+            $after = NativeUpdater::state($article->fresh());
+            $this->assertSame($before[$index]['article'], $after['article']);
+            $this->assertSame($before[$index]['history'], $after['history']);
+            $this->assertTrue(data_get($article->fresh()->seoMeta->schema_json, 'editorial_package_v1.hreflang_gate_v1.enabled'));
+        }
+        $this->assertSame(1, AuditLog::withoutGlobalScopes()->where('action', 'article_hreflang_pair_released')->count());
+        Http::assertSentCount(2);
+    }
+
     public function test_native_pair_release_keeps_content_faq_schema_identity_and_unrelated_article(): void
     {
         $this->login();
@@ -179,9 +201,13 @@ final class ArticleHreflangWorkspaceTest extends TestCase
         });
     }
 
-    private function article(string $locale = 'en', string $slug = 'native-hreflang', string $group = 'native-hreflang-group'): Article
+    private function article(string $locale = 'en', string $slug = 'native-hreflang', string $group = 'native-hreflang-group', ?int $id = null): Article
     {
-        $article = Article::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => $slug, 'locale' => $locale, 'source_locale' => 'en', 'translation_status' => 'source', 'translation_group_id' => $group, 'title' => 'Published article', 'excerpt' => 'Existing excerpt', 'content_md' => "## Existing body\n\nPublished content.", 'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'sitemap_eligible' => true, 'llms_eligible' => true, 'published_at' => now()]);
+        $article = new Article(['org_id' => 0, 'slug' => $slug, 'locale' => $locale, 'source_locale' => 'en', 'translation_status' => 'source', 'translation_group_id' => $group, 'title' => 'Published article', 'excerpt' => 'Existing excerpt', 'content_md' => "## Existing body\n\nPublished content.", 'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'sitemap_eligible' => true, 'llms_eligible' => true, 'published_at' => now()]);
+        if ($id !== null) {
+            $article->id = $id;
+        }
+        $article->save();
         $revision = ArticleTranslationRevision::withoutGlobalScopes()->create(['org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $article->id, 'translation_group_id' => $group, 'locale' => $locale, 'source_locale' => 'en', 'revision_number' => 1, 'revision_status' => 'published', 'title' => $article->title, 'content_md' => $article->content_md, 'published_at' => now()]);
         $article->forceFill(['working_revision_id' => $revision->id, 'published_revision_id' => $revision->id])->saveQuietly();
         ArticleSeoMeta::withoutGlobalScopes()->create(['org_id' => 0, 'article_id' => $article->id, 'locale' => $locale, 'seo_title' => 'Existing SEO', 'seo_description' => 'Existing description', 'canonical_url' => '/'.($locale === 'en' ? 'en' : 'zh').'/articles/'.$slug, 'robots' => 'index,follow', 'schema_json' => ['editorial_package_v1' => ['opaque_review' => 'keep', 'answer_surface_policy' => 'editor_supplied', 'answer_surface_visibility' => 'visible', 'answer_surface_v1' => ['faq_items' => [['key' => 'faq_one', 'question' => 'Original question?', 'answer' => 'Original answer.'], ['key' => 'faq_two', 'question' => 'Second question?', 'answer' => 'Original second answer.']]]]]]);

@@ -107,7 +107,7 @@ final class ArticleHreflangWorkspace
                 && $canonical !== null && in_array($article->seoMeta?->canonical_url, [$canonical, parse_url($canonical, PHP_URL_PATH)], true), 'article_hreflang_canonical_required');
             $robots = array_map('trim', explode(',', strtolower((string) $article->seoMeta?->robots)));
             $this->require(! in_array('noindex', $robots, true), 'article_hreflang_noindex_target');
-            $this->require((int) $article->id !== 15 && $article->deleted_at === null && $article->status === 'published'
+            $this->require($article->deleted_at === null && $article->status === 'published'
                 && $article->is_public && $article->is_indexable && $article->seoMeta !== null
                 && $article->publishedRevision !== null && $article->working_revision_id === $article->published_revision_id,
                 'article_hreflang_published_pair_required');
