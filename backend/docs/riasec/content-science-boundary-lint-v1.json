@@ -92,7 +92,7 @@
     },
     {
       "section_key": "activity_explorer",
-      "primary_assets": ["content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl"],
+      "primary_assets": ["content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl", "content_assets/riasec/activity_task_examples_v1.en.jsonl"],
       "service_files": ["app/Services/Riasec/RiasecActivityExplorerService.php"],
       "risk": "activity examples can become repetitive, generic, or recommendation-like",
       "repair_goal": "make activities concrete, observable, low-risk, and non-deterministic"
@@ -199,6 +199,7 @@
   "asset_inventory": [
     "content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl",
     "content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl",
+    "content_assets/riasec/activity_task_examples_v1.en.jsonl",
     "content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl",
     "content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
     "content_assets/riasec/disagree_path_v1.zh-CN.jsonl",
