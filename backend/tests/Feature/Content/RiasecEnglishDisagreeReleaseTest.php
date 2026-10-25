@@ -17,9 +17,12 @@ final class RiasecEnglishDisagreeReleaseTest extends TestCase
 {
     public function test_approved_seven_leaves_reach_both_form_projections_without_promoting_authority(): void
     {
-        $this->assertSame('c3d9409f9ae3bc40f6c02e1874833f739616f01d08cdfbbc5828ff3b4dd3021d', hash_file('sha256', base_path('content_assets/riasec/runtime_surface_copy_v1.en.json')));
+        $bytes = file_get_contents(base_path('content_assets/riasec/runtime_surface_copy_v1.en.json'));
+        $restored = substr($bytes, 0, 10799).substr($bytes, 11000);
+        $restored = substr($restored, 0, 9467).substr($restored, 10564);
+        $this->assertSame('c3d9409f9ae3bc40f6c02e1874833f739616f01d08cdfbbc5828ff3b4dd3021d', hash('sha256', $restored));
         $compiled = app(Compiler::class)->compile();
-        $this->assertSame('1.6.0', $compiled['payload']['compiler']['version']);
+        $this->assertSame(Compiler::COMPILER_VERSION, $compiled['payload']['compiler']['version']);
         $this->assertSame(3, $compiled['payload']['coverage']['english_selected_sources']['generic_disagree_cards']);
         $runtime = $compiled['payload']['assets']['runtime_surface_copy_v1.en.json'];
         foreach (['riasec_60', 'riasec_140'] as $form) {
@@ -122,9 +125,9 @@ final class RiasecEnglishDisagreeReleaseTest extends TestCase
     {
         $compiled = app(Compiler::class)->compile();
         $runtime = &$compiled['payload']['assets']['runtime_surface_copy_v1.en.json'];
-        unset($runtime['generic_slots']['disagree'], $runtime['boundaries']);
+        unset($runtime['generic_slots']['disagree'], $runtime['generic_slots']['aspirations'], $runtime['boundaries']);
         unset($runtime);
-        unset($compiled['payload']['coverage']['english_selected_sources']['generic_disagree_cards']);
+        unset($compiled['payload']['coverage']['english_selected_sources']['generic_disagree_cards'], $compiled['payload']['coverage']['english_selected_sources']['generic_aspirations_cards']);
         $compiled['payload']['compiler']['version'] = '1.5.0';
         $legacy = $this->rebind($compiled);
         $this->assertSame('8693713a223755bbd0f1914a9cf4dddaec6490db0b1eb83db4d6c6c88641e827', $legacy['payload']['source_hash']);

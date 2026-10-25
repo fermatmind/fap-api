@@ -120,9 +120,9 @@ final class RiasecEnglishTop3ReleaseTest extends TestCase
         unset($runtime['supported_unordered_keys']);
         $runtime['supported_unordered_key'] = 'R_I_A';
         $runtime['scope'] = 'Only R_I_A and its six orders; no new 20-group or 120-code editorial expansion.';
-        unset($runtime['generic_slots']['disagree'], $runtime['boundaries']);
+        unset($runtime['generic_slots']['disagree'], $runtime['generic_slots']['aspirations'], $runtime['boundaries']);
         unset($runtime);
-        unset($payload['coverage']['english_selected_sources']['generic_disagree_cards']);
+        unset($payload['coverage']['english_selected_sources']['generic_disagree_cards'], $payload['coverage']['english_selected_sources']['generic_aspirations_cards']);
         $payload['coverage']['english_selected_sources']['top3_groups'] = ['R_I_A'];
         $payload['coverage']['english_selected_sources']['ordered_codes'] = ['RIA', 'RAI', 'IRA', 'IAR', 'ARI', 'AIR'];
         $manifest['compiler'] = $payload['compiler'];

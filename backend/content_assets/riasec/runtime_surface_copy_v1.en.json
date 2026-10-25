@@ -140,9 +140,27 @@
         "summary": "First check response quality and near ties. Then choose whether to retake the assessment, save a preferred direction, or try a small experiment to observe specific activities.",
         "disagree_state": "save_feedback_only"
       }
+    },
+    "aspirations": {
+      "intro": {
+        "title": "Consider the directions you already wanted to explore alongside your result",
+        "summary": "You can note down careers, majors, courses, projects, or work settings. These are used only to generate exploration questions and do not contribute to assessment scores.",
+        "aspirations_state": "not_provided"
+      },
+      "input_boundary": {
+        "title": "Input boundaries",
+        "summary": "Aspirations provide material for exploration; they are not assessment answers. The system will only help you see which activities within these directions overlap with your current interest clues, and which real-world aspects need observation.",
+        "aspirations_state": "not_provided"
+      },
+      "no_score_mutation_boundary": {
+        "title": "No changes to assessment results",
+        "summary": "Aspirations will not override the Holland code measured in this assessment. They will not change RIASEC scores, the report snapshot, shared content, or PDF content.",
+        "aspirations_state": "not_provided"
+      }
     }
   },
   "boundaries": {
-    "disagree": "Disagreeing with the result only affects the exploration path; it does not change the Holland code or RIASEC scores measured in this assessment, the report snapshot, shared content, or the PDF."
+    "disagree": "Disagreeing with the result only affects the exploration path; it does not change the Holland code or RIASEC scores measured in this assessment, the report snapshot, shared content, or the PDF.",
+    "aspirations": "Aspirations serve only to refine exploration questions. They do not override the Holland code measured in this assessment, change RIASEC scores, or establish a career conclusion."
   }
 }
