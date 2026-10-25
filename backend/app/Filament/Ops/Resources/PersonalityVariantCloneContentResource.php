@@ -9,7 +9,11 @@ use App\Filament\Ops\Support\StatusBadge;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantCloneContent;
+use App\Models\PersonalityProfileVariantRevision;
+use App\Models\PersonalityResultIntroduction;
 use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
+use App\PersonalityCms\DesktopClone\PersonalityVariantCloneContentValidator;
+use App\Support\Idempotency\IdempotencyKey;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -18,11 +22,208 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component as LivewireComponent;
 
 class PersonalityVariantCloneContentResource extends Resource
 {
+    private const ADOPTION_KEY = 'mbti_reviewed_clone_adoption_v1';
+
+    /** Accept already hydrated, reviewed English bytes without regenerating editorial fields. */
+    public function adoptReviewedClone(int $profileId, int $variantId, array $input): PersonalityProfileVariantCloneContent
+    {
+        $adminId = $this->publishingAdminId();
+        $clone = $this->reviewedDocument($input, 'clone');
+        $intro = $this->reviewedDocument($input, 'intro');
+        $code = $clone['full_code'] ?? null;
+        $this->requireAdoption(is_string($code) && preg_match('/^[EI][SN][TF][JP]-[AT]$/D', $code) === 1
+            && ($clone['base_code'] ?? null) === substr($code, 0, 4)
+            && ($clone['locale'] ?? null) === 'en'
+            && ($clone['template_key'] ?? null) === PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1
+            && ($clone['schema_version'] ?? null) === 'v1'
+            && data_get($clone, 'content_json.hero.profile_identity.code') === $code
+            && ($intro['schema'] ?? null) === 'mbti_result_introduction.candidate.v1'
+            && data_get($intro, 'candidate.full_code') === $code
+            && data_get($intro, 'candidate.locale') === 'en', 'Package identity does not match the selected English clone.');
+        $paragraphs = data_get($intro, 'candidate.paragraphs');
+        $this->requireAdoption(is_array($paragraphs) && array_is_list($paragraphs) && count($paragraphs) === 2
+            && count(array_filter($paragraphs, fn ($p): bool => is_string($p) && trim($p) !== '')) === 2,
+            'The independent introduction must contain exactly two paragraphs.');
+        $this->requireAdoption(is_array($clone['content_json'] ?? null) && is_array($clone['asset_slots_json'] ?? null)
+            && (! isset($clone['meta_json']) || is_array($clone['meta_json'])), 'Invalid clone payload.');
+        $assets = app(PersonalityVariantCloneContentValidator::class)->assertValid($clone['content_json'], $clone['asset_slots_json'], 'published');
+        $this->requireAdoption($assets === $clone['asset_slots_json'], 'Asset normalization would change the reviewed package.');
+
+        return DB::transaction(function () use ($profileId, $variantId, $input, $clone, $intro, $code, $paragraphs, $adminId): PersonalityProfileVariantCloneContent {
+            $profile = PersonalityProfile::withoutGlobalScopes()->whereKey($profileId)->lockForUpdate()->first();
+            $variant = PersonalityProfileVariant::withoutGlobalScopes()->whereKey($variantId)->lockForUpdate()->first();
+            $this->requireAdoption($profile !== null && $variant !== null && $profile->org_id === 0 && $variant->org_id === 0
+                && $variant->personality_profile_id === $profile->id && $variant->runtime_type_code === $code
+                && $profile->type_code === $clone['base_code'] && $profile->canonical_type_code === $clone['base_code']
+                && $variant->canonical_type_code === $clone['base_code'] && $variant->variant_code === substr($code, -1)
+                && $profile->locale === 'en' && $profile->scale_code === 'MBTI' && $profile->status === 'published'
+                && $profile->is_public && $variant->is_published
+                && ($profile->published_at === null || $profile->published_at->lte(now()))
+                && ($variant->published_at === null || $variant->published_at->lte(now())), 'Selected profile or variant is not eligible.');
+            $currentIntro = PersonalityResultIntroduction::where('full_code', $code)->where('locale', 'en')->lockForUpdate()->first();
+            $record = PersonalityProfileVariantCloneContent::where('personality_profile_variant_id', $variantId)
+                ->where('template_key', $clone['template_key'])->lockForUpdate()->first();
+            $existing = $this->adoptionRevision($variantId);
+            if ($record !== null && $currentIntro !== null && $existing !== null) {
+                $snapshot = $existing->snapshot_json[self::ADOPTION_KEY];
+                if (($snapshot['clone_sha256'] ?? null) === $input['clone_sha256'] && ($snapshot['intro_sha256'] ?? null) === $input['intro_sha256']
+                    && ($snapshot['after_hash'] ?? null) === $this->pairHash($record, $currentIntro)) {
+                    return $record;
+                }
+            }
+            $this->requireAdoption($record === null, 'Clone already exists; recovery will not overwrite it.');
+            $this->requireAdoption($currentIntro !== null && $currentIntro->status === 'published' && $currentIntro->published_at?->lte(now())
+                && $currentIntro->revision === data_get($intro, 'source.revision')
+                && $currentIntro->content_hash === data_get($intro, 'source.content_hash')
+                && $currentIntro->content_hash === $this->paragraphHash($currentIntro->paragraphs), 'Introduction prestate changed.');
+            $beforeIntro = $currentIntro->only(['full_code', 'locale', 'paragraphs', 'content_hash', 'revision', 'status', 'published_at']);
+            $beforeIntro['published_at'] = $currentIntro->published_at?->toISOString();
+            $record = PersonalityProfileVariantCloneContent::create([
+                'personality_profile_variant_id' => $variantId, 'template_key' => $clone['template_key'],
+                'schema_version' => $clone['schema_version'], 'status' => 'published', 'published_at' => now(),
+                'content_json' => $clone['content_json'], 'asset_slots_json' => $clone['asset_slots_json'], 'meta_json' => $clone['meta_json'] ?? null,
+            ]);
+            $currentIntro->update(['paragraphs' => $paragraphs, 'content_hash' => $this->paragraphHash($paragraphs), 'revision' => $currentIntro->revision + 1]);
+            $record->refresh();
+            $currentIntro->refresh();
+            $this->requireAdoption($this->sameTypedJson($record->content_json, $clone['content_json']) && $this->sameTypedJson($record->asset_slots_json, $clone['asset_slots_json'])
+                && $this->sameTypedJson($record->meta_json, $clone['meta_json'] ?? null) && $currentIntro->paragraphs === $paragraphs
+                && $currentIntro->content_hash === $this->paragraphHash($paragraphs)
+                && $currentIntro->revision === $beforeIntro['revision'] + 1, 'Stored package readback differs from reviewed values.');
+            $this->createAdoptionRevision($variantId, $adminId, [
+                'role' => 'adoption', 'clone_id' => $record->id,
+                'clone_sha256' => $input['clone_sha256'], 'intro_sha256' => $input['intro_sha256'],
+                'clone_before' => null, 'intro_before' => $beforeIntro,
+                'clone_candidate' => $clone, 'intro_candidate' => $intro,
+                'after_hash' => $this->pairHash($record, $currentIntro),
+            ]);
+
+            return $record;
+        });
+    }
+
+    /** Restore the prior introduction and deactivate the newly created clone; never delete history. */
+    public function restoreReviewedClone(PersonalityProfileVariantCloneContent $record, string $expectedHash): void
+    {
+        $adminId = $this->publishingAdminId();
+        DB::transaction(function () use ($record, $expectedHash, $adminId): void {
+            $profileId = PersonalityProfileVariant::withoutGlobalScopes()->whereKey($record->personality_profile_variant_id)->value('personality_profile_id');
+            $profile = PersonalityProfile::withoutGlobalScopes()->whereKey($profileId)->lockForUpdate()->firstOrFail();
+            $variant = PersonalityProfileVariant::withoutGlobalScopes()->whereKey($record->personality_profile_variant_id)->lockForUpdate()->firstOrFail();
+            $this->requireAdoption($variant->personality_profile_id === $profile->id && $profile->org_id === 0 && $variant->org_id === 0 && $profile->locale === 'en' && $profile->scale_code === 'MBTI', 'Invalid recovery owner.');
+            $intro = PersonalityResultIntroduction::where('full_code', $variant->runtime_type_code)->where('locale', 'en')->lockForUpdate()->firstOrFail();
+            $record = PersonalityProfileVariantCloneContent::whereKey($record->id)->lockForUpdate()->firstOrFail();
+            $revision = $this->adoptionRevision($variant->id);
+            $snapshot = $revision?->snapshot_json[self::ADOPTION_KEY] ?? [];
+            $this->requireAdoption(($snapshot['clone_id'] ?? null) === $record->id && ($snapshot['after_hash'] ?? null) === $expectedHash
+                && $this->pairHash($record, $intro) === $expectedHash, 'A newer version owns the clone or introduction; recovery refused.');
+            $before = $snapshot['intro_before'];
+            $this->requireAdoption($before['full_code'] === $intro->full_code && $before['locale'] === 'en'
+                && $this->paragraphHash($before['paragraphs']) === $before['content_hash'], 'Recovery snapshot is invalid.');
+            $record->update(['status' => 'draft']);
+            $intro->update(['paragraphs' => $before['paragraphs'], 'content_hash' => $before['content_hash'],
+                'status' => $before['status'], 'published_at' => $before['published_at'], 'revision' => $intro->revision + 1]);
+            $record->refresh();
+            $intro->refresh();
+            $this->requireAdoption($record->status === 'draft' && $record->published_at === null && $intro->paragraphs === $before['paragraphs']
+                && $intro->content_hash === $before['content_hash'], 'Recovery readback failed.');
+            $this->createAdoptionRevision($variant->id, $adminId, ['role' => 'restore', 'clone_id' => $record->id,
+                'restored_revision_id' => $revision->id, 'after_hash' => $this->pairHash($record, $intro)]);
+        });
+    }
+
+    public function reviewedCloneRecoveryHash(PersonalityProfileVariantCloneContent $record): ?string
+    {
+        $this->publishingAdminId();
+        $revision = $this->adoptionRevision($record->personality_profile_variant_id);
+        $snapshot = $revision?->snapshot_json[self::ADOPTION_KEY] ?? [];
+
+        return ($snapshot['clone_id'] ?? null) === $record->id ? ($snapshot['after_hash'] ?? null) : null;
+    }
+
+    private function adoptionRevision(int $variantId): ?PersonalityProfileVariantRevision
+    {
+        return PersonalityProfileVariantRevision::where('personality_profile_variant_id', $variantId)
+            ->where('note', 'Reviewed English clone adoption')->orderByDesc('revision_no')->first();
+    }
+
+    private function createAdoptionRevision(int $variantId, int $adminId, array $snapshot): void
+    {
+        PersonalityProfileVariantRevision::create(['personality_profile_variant_id' => $variantId,
+            'revision_no' => (int) PersonalityProfileVariantRevision::where('personality_profile_variant_id', $variantId)->max('revision_no') + 1,
+            'snapshot_json' => [self::ADOPTION_KEY => $snapshot], 'note' => $snapshot['role'] === 'adoption' ? 'Reviewed English clone adoption' : 'Reviewed English clone restore',
+            'created_by_admin_user_id' => $adminId, 'created_at' => now()]);
+    }
+
+    private function pairHash(PersonalityProfileVariantCloneContent $clone, PersonalityResultIntroduction $intro): string
+    {
+        $cloneState = $clone->only(['id', 'personality_profile_variant_id', 'template_key', 'status', 'schema_version', 'content_json', 'asset_slots_json', 'meta_json']);
+        $introState = $intro->only(['id', 'full_code', 'locale', 'paragraphs', 'content_hash', 'revision', 'status']);
+
+        return IdempotencyKey::hashPayload(['clone' => [...$cloneState, 'published_at' => $clone->published_at?->toISOString()],
+            'intro' => [...$introState, 'published_at' => $intro->published_at?->toISOString()]]);
+    }
+
+    private function sameTypedJson(mixed $left, mixed $right): bool
+    {
+        if (! is_array($left) || ! is_array($right)) {
+            return $left === $right;
+        }
+        if (array_is_list($left) !== array_is_list($right) || count($left) !== count($right)) {
+            return false;
+        }
+        foreach ($left as $key => $value) {
+            if (! array_key_exists($key, $right) || ! $this->sameTypedJson($value, $right[$key])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function paragraphHash(array $paragraphs): string
+    {
+        return hash('sha256', json_encode($paragraphs, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+    }
+
+    private function reviewedDocument(array $input, string $kind): array
+    {
+        $encoded = (string) ($input[$kind.'_package_base64'] ?? '');
+        $this->requireAdoption(strlen($encoded) <= 1400000, 'Reviewed file exceeds the bounded package size.');
+        $bytes = base64_decode($encoded, true);
+        $this->requireAdoption(is_string($bytes) && strlen($bytes) <= 1048576 && preg_match('/^[a-f0-9]{64}$/D', (string) ($input[$kind.'_sha256'] ?? '')) === 1
+            && hash_equals($input[$kind.'_sha256'], hash('sha256', $bytes)), 'Reviewed '.$kind.' file SHA-256 mismatch.');
+        try {
+            $document = json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);
+        } catch (\JsonException) {
+            $document = null;
+        }
+        $this->requireAdoption(is_array($document), 'Invalid reviewed '.$kind.' JSON.');
+
+        return $document;
+    }
+
+    private function requireAdoption(bool $condition, string $message): void
+    {
+        if (! $condition) {
+            throw ValidationException::withMessages(['reviewed_package' => $message]);
+        }
+    }
+
+    private function publishingAdminId(): int
+    {
+        $admin = auth((string) config('admin.guard', 'admin'))->user();
+        abort_unless($admin !== null && ($admin->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH) || $admin->hasPermission(PermissionNames::ADMIN_OWNER)), 403);
+
+        return (int) $admin->getAuthIdentifier();
+    }
+
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $model = PersonalityProfileVariantCloneContent::class;
@@ -114,12 +315,6 @@ class PersonalityVariantCloneContentResource extends Resource
             Forms\Components\Repeater::make('asset_slots_json')
                 ->required()
                 ->default(self::defaultAssetSlots())
-                ->formatStateUsing(fn (mixed $state): array => PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots(
-                    is_array($state) ? $state : [],
-                ))
-                ->dehydrateStateUsing(fn (mixed $state): array => PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots(
-                    is_array($state) ? $state : [],
-                ))
                 ->itemLabel(static fn (array $state): string => (string) ($state['slot_id'] ?? 'asset-slot'))
                 ->schema([
                     Forms\Components\Select::make('slot_id')
@@ -156,10 +351,12 @@ class PersonalityVariantCloneContentResource extends Resource
                     Forms\Components\TextInput::make('alt')
                         ->label('alt')
                         ->maxLength(255),
-                    Forms\Components\KeyValue::make('meta')
+                    Forms\Components\Textarea::make('meta')
                         ->label('meta')
-                        ->keyLabel('key')
-                        ->valueLabel('value'),
+                        ->rules(['nullable', 'json'])
+                        ->formatStateUsing(fn (mixed $state): string => self::encodeJson($state))
+                        ->dehydrateStateUsing(fn (mixed $state): ?array => self::decodeJsonText($state, 'asset_slots_json.meta'))
+                        ->helperText('JSON preserves booleans, numbers, and ordered lists.'),
                 ])
                 ->columns(2)
                 ->reorderable(false)
