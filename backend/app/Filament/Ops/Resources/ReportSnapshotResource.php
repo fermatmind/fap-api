@@ -15,6 +15,7 @@ use Filament\Tables;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class ReportSnapshotResource extends Resource
 {
@@ -181,6 +182,25 @@ class ReportSnapshotResource extends Resource
             ])
             ->defaultSort('updated_at', 'desc')
             ->filters([
+                Tables\Filters\Filter::make('exact_attempt')
+                    ->label('Exact attempt ID')
+                    ->form([
+                        Forms\Components\TextInput::make('value')
+                            ->label('Exact attempt ID')
+                            ->helperText('Enter the complete attempt UUID; partial IDs are not matched.'),
+                    ])
+                    ->query(function (Builder $query, array $data): void {
+                        $attemptId = trim((string) ($data['value'] ?? ''));
+                        if ($attemptId === '') {
+                            return;
+                        }
+                        if (! Str::isUuid($attemptId)) {
+                            $query->whereRaw('1 = 0');
+
+                            return;
+                        }
+                        $query->where('report_snapshots.attempt_id', $attemptId);
+                    }),
                 Tables\Filters\Filter::make('activity_window')
                     ->label(__('ops.custom_pages.reports.date'))
                     ->form([

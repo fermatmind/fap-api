@@ -304,6 +304,35 @@ final class ReportPdfCenterTest extends TestCase
         Livewire::test(ListReportSnapshots::class)->assertForbidden();
     }
 
+    public function test_report_pdf_center_exact_attempt_filter_limits_metadata_to_one_primary_key(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_MENU_SUPPORT,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
+        $org = $this->createOrganization('Exact Lookup Support');
+        $selected = $this->seedDiagnosticChain(orgId: 0);
+        $other = $this->seedDiagnosticChain(orgId: 72);
+        session($this->opsSession($admin, $org));
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $page = Livewire::test(ListReportSnapshots::class)
+            ->filterTable('exact_attempt', ['value' => $selected['attempt_id']])
+            ->assertCanSeeTableRecords([$selected['snapshot']])
+            ->assertCanNotSeeTableRecords([$other['snapshot']])
+            ->assertTableColumnStateSet('attempt_org_id', 0, $selected['snapshot']);
+
+        $query = $page->instance()->getFilteredTableQuery()->toBase();
+        $sql = str_replace('`', '"', strtolower($query->toSql()));
+        $this->assertStringContainsString('"report_snapshots"."attempt_id" = ?', $sql);
+        $this->assertStringNotContainsString(' like ', $sql);
+        $this->assertContains($selected['attempt_id'], $query->getBindings());
+
+        $page->filterTable('exact_attempt', ['value' => substr($selected['attempt_id'], 0, 8)])
+            ->assertCanNotSeeTableRecords([$selected['snapshot'], $other['snapshot']]);
+        $this->assertDatabaseCount('report_snapshots', 2);
+    }
+
     public function test_report_pdf_center_uses_benefit_grant_for_unlock_truth_and_keeps_report_job_auxiliary(): void
     {
         $admin = $this->createAdminWithPermissions([
