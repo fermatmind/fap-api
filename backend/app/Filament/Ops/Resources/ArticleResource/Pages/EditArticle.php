@@ -16,6 +16,7 @@ use App\Filament\Ops\Support\ArticleManualSourceReviewWorkspace;
 use App\Filament\Ops\Support\ArticlePublishedFaqWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
+use App\Services\Cms\ArticlePublishedSourceReviewService;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Checkbox;
@@ -208,6 +209,32 @@ class EditArticle extends EditRecord
                         ]);
                     }
                     Notification::make()->title('等价工作版本已归档；公开版本保持不变')->success()->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            // @review-surface article_translation_revision
+            Action::make('confirmPublishedSourceReview')
+                ->label('复核已发布译文与当前源文')
+                ->icon('heroicon-o-language')
+                ->visible(fn (): bool => ContentAccess::canWrite() && ! $this->getRecord()->isSourceArticle()
+                    && $this->getRecord()->published_revision_id !== null
+                    && $this->getRecord()->working_revision_id === $this->getRecord()->published_revision_id
+                    && app(ArticleTranslationRevisionWorkspace::class)->isWorkingRevisionStale($this->getRecord()))
+                ->modalDescription('实读两份完整认证预览后记录当前双语版本的正式复核证据。原正文、发布revision、历史来源hash、SEO和缓存均保持；任一版本或元数据变化后证据失效。')
+                ->fillForm(fn (): array => app(ArticlePublishedSourceReviewService::class)->prepare($this->getRecord()))
+                ->form([
+                    Textarea::make('pair_hash')->label('双语版本状态')->readOnly()->required()->rows(2),
+                    Textarea::make('review_context')->label('待核对版本与预览')->readOnly()->dehydrated(false)->rows(10),
+                    Checkbox::make('source_reviewed')->label('已核对这两份完整预览，已发布译文与当前源文相符')->accepted(),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        app(ArticlePublishedSourceReviewService::class)->confirm($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.source_reviewed' => $exception->errors()['source_reviewed'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    Notification::make()->title('已发布译文源文复核已记录；原正文与历史来源保持不变')->success()->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
                 }),
             // @review-surface article_translation_revision

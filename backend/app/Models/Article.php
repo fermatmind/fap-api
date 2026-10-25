@@ -314,7 +314,8 @@ class Article extends Model
 
             return filled($sourceHash)
                 && filled($workingRevision->translated_from_version_hash)
-                && ! hash_equals((string) $sourceHash, (string) $workingRevision->translated_from_version_hash);
+                && ! hash_equals((string) $sourceHash, (string) $workingRevision->translated_from_version_hash)
+                && ! app(\App\Services\Cms\ArticlePublishedSourceReviewService::class)->hasCurrentReview($this);
         }
 
         $source ??= $this->sourceArticle();

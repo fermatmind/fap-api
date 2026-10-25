@@ -166,7 +166,8 @@ final class ArticleTranslationRevisionWorkspace
 
         return filled($sourceHash)
             && filled($revision->translated_from_version_hash)
-            && ! hash_equals((string) $sourceHash, (string) $revision->translated_from_version_hash);
+            && ! hash_equals((string) $sourceHash, (string) $revision->translated_from_version_hash)
+            && ! app(ArticlePublishedSourceReviewService::class)->hasCurrentReview($article);
     }
 
     public function sourceVersionHashFor(Article $article): ?string
