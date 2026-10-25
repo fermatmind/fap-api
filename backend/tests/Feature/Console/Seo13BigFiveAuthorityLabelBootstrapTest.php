@@ -226,6 +226,8 @@ final class Seo13BigFiveAuthorityLabelBootstrapTest extends TestCase
                 'published_at' => $publishedAt,
                 'scheduled_at' => null,
             ])->save();
+            // This persisted historical cohort predates the new-article editorial default.
+            $article->forceFill(['author_name' => null])->saveQuietly();
 
             $revision = new ArticleTranslationRevision;
             $revision->forceFill([
