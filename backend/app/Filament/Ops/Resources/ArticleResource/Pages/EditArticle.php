@@ -9,6 +9,7 @@ use App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoMetaWorkspace;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Filament\Ops\Support\ArticleControlledPublicationWorkspace;
 use App\Filament\Ops\Support\ArticleEditorialPackageWorkspace;
+use App\Filament\Ops\Support\ArticleEquivalentWorkingRevisionWorkspace;
 use App\Filament\Ops\Support\ArticleExistingPackageWorkspace;
 use App\Filament\Ops\Support\ArticleHreflangWorkspace;
 use App\Filament\Ops\Support\ArticleManualSourceReviewWorkspace;
@@ -183,6 +184,30 @@ class EditArticle extends EditRecord
                         ]))
                         ->success()
                         ->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            // @review-surface article_translation_revision
+            Action::make('archiveEquivalentWorkingRevision')
+                ->label('归档等价工作版本')
+                ->icon('heroicon-o-archive-box')
+                ->visible(fn (): bool => app(ArticleEquivalentWorkingRevisionWorkspace::class)->available($this->getRecord()))
+                ->modalDescription('仅归档与当前公开版本逐字段相同、从未发布的工作稿。保留全部版本与审核历史，公开正文和发布版本不变；不执行发布、索引释放或源文复核。')
+                ->fillForm(fn (): array => app(ArticleEquivalentWorkingRevisionWorkspace::class)->prepare($this->getRecord()))
+                ->form([
+                    Textarea::make('target_hash')->label('当前文章状态')->readOnly()->required()->rows(2),
+                    Textarea::make('published_sha256')->label('公开版本状态')->readOnly()->required()->rows(2),
+                    Textarea::make('revision_context')->label('等价版本核对')->readOnly()->dehydrated(false)->rows(8),
+                    Checkbox::make('archive_equivalent')->label('已核对这两个等价版本，保留当前公开版本并归档工作稿')->accepted(),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        app(ArticleEquivalentWorkingRevisionWorkspace::class)->archive($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.archive_equivalent' => $exception->errors()['archive_equivalent'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    Notification::make()->title('等价工作版本已归档；公开版本保持不变')->success()->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
                 }),
             // @review-surface article_translation_revision
