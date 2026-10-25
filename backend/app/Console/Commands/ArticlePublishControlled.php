@@ -435,7 +435,14 @@ final class ArticlePublishControlled extends Command
         }
 
         $faqItems = data_get($editorialPackage, 'answer_surface_v1.faq_items', []);
-        if (! is_array($faqItems) || count($faqItems) <= 0) {
+        // The native importer supports editorials whose answer is entirely in
+        // the body. Preserve that explicit contract without relaxing other tracks.
+        $bodyOnlyEditorial = $import?->content_track === 'editorial_journal'
+            && data_get($editorialPackage, 'content_track') === 'editorial_journal'
+            && data_get($editorialPackage, 'answer_surface_policy') === 'none'
+            && data_get($editorialPackage, 'answer_surface_visibility') === 'disabled'
+            && data_get($editorialPackage, 'answer_surface_v1') === [];
+        if (! $bodyOnlyEditorial && (! is_array($faqItems) || count($faqItems) <= 0)) {
             $errors[] = $this->issue('faq_items', 'faq_items_missing', 'FAQ items must be present for controlled SEO article publish.');
         }
 

@@ -315,6 +315,56 @@ final class ArticlePublishControlledCommandTest extends TestCase
         $this->assertNull($article->published_revision_id);
     }
 
+    #[DataProvider('bodyOnlyEditorialContracts')]
+    public function test_body_only_editorial_requires_the_explicit_imported_contract(string $case): void
+    {
+        $this->fakeContentReleaseEndpoint();
+        $article = $this->createControlledDraft([
+            'body' => "An editorial comparison of documented result scope.\n\n"
+                .str_repeat('Each questionnaire answers a different question; keep the provider and version with the result. ', 75),
+            'locale' => 'en',
+        ]);
+        $schema = $article->seoMeta->schema_json;
+        $schema['editorial_package_v1']['content_track'] = 'editorial_journal';
+        $schema['editorial_package_v1']['answer_surface_policy'] = 'none';
+        $schema['editorial_package_v1']['answer_surface_visibility'] = 'disabled';
+        $schema['editorial_package_v1']['answer_surface_v1'] = [];
+        if ($case === 'missing_policy') {
+            unset($schema['editorial_package_v1']['answer_surface_policy']);
+        } elseif ($case === 'visible_surface') {
+            $schema['editorial_package_v1']['answer_surface_visibility'] = 'above_body';
+        } elseif ($case === 'nonempty_surface') {
+            $schema['editorial_package_v1']['answer_surface_v1'] = ['quick_answer' => 'A separate answer'];
+        } elseif ($case === 'metadata_track_mismatch') {
+            $schema['editorial_package_v1']['content_track'] = 'evergreen_knowledge';
+        }
+        $article->seoMeta->update(['schema_json' => $schema]);
+        ArticleEditorialPackageImport::withoutGlobalScopes()->where('article_id', $article->id)
+            ->update(['content_track' => $case === 'import_track_mismatch' ? 'evergreen_knowledge' : 'editorial_journal']);
+
+        $options = ['--article' => [(string) $article->id], '--make-indexable' => true, '--json' => true];
+        if ($case === 'valid') {
+            $options['--confirm'] = "I explicitly approve Codex to publish article id {$article->id} after preflight passes.";
+        } else {
+            $options['--dry-run'] = true;
+        }
+        $exit = Artisan::call('articles:publish-controlled', $options);
+        $result = Artisan::output();
+        $this->assertSame($case === 'valid' ? 0 : 1, $exit, $result);
+        if ($case === 'valid') {
+            $this->assertTrue($article->fresh()->is_public);
+            $this->assertSame((int) $article->working_revision_id, (int) $article->fresh()->published_revision_id);
+        } else {
+            $this->assertStringContainsString('faq_items_missing', $result);
+            $this->assertNull($article->fresh()->published_revision_id);
+        }
+    }
+
+    public static function bodyOnlyEditorialContracts(): array
+    {
+        return array_map(fn ($case) => [$case], ['valid', 'missing_policy', 'visible_surface', 'nonempty_surface', 'metadata_track_mismatch', 'import_track_mismatch']);
+    }
+
     public function test_dry_run_uses_working_revision_instead_of_stale_article_and_seo_projections(): void
     {
         $article = $this->createControlledDraft();
