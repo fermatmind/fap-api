@@ -6,6 +6,7 @@ namespace Tests\Feature\SEO;
 
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleSeoService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -77,6 +78,8 @@ final class ArticleSeoServiceTest extends TestCase
             $jsonLd = $service->generateJsonLd($article);
             $this->assertSame(['@type' => 'Organization', 'name' => $name,
                 'url' => 'https://fermatmind.com/'.($locale === 'en' ? 'en' : 'zh').'/brand'], $jsonLd['author']);
+            $this->assertSame(['@type' => 'Organization', 'name' => $name,
+                'url' => 'https://fermatmind.com/'.($locale === 'en' ? 'en' : 'zh').'/brand'], $jsonLd['publisher']);
             $this->assertSame('2026-03-12T08:00:00+00:00', $jsonLd['datePublished']);
             $authority = $service->buildSeoPayload($article)['article_authority_v1'];
             $this->assertFalse($authority['published_revision_backed']);
@@ -114,6 +117,40 @@ final class ArticleSeoServiceTest extends TestCase
         $this->assertSame('https://fermatmind.com/en/articles/mbti-basics', data_get($jsonLd, 'url'));
         $this->assertStringNotContainsString('www.fermatmind.com', json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertStringNotContainsString('www.fermatmind.com', json_encode($jsonLd, JSON_THROW_ON_ERROR));
+    }
+
+    public function test_published_editorial_api_fragment_keeps_brand_publisher_separate_from_author(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $article = Article::query()->create([
+            'org_id' => 0, 'slug' => 'editorial-publisher', 'locale' => 'en',
+            'author_name' => 'FermatMind Editorial', 'title' => 'Choose a result',
+            'content_md' => 'Different questionnaires answer different questions.',
+            'status' => 'published', 'is_public' => true, 'is_indexable' => true,
+            'published_at' => now(),
+        ]);
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $article->id,
+            'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => 'en',
+            'revision_number' => 1, 'revision_status' => 'published', 'title' => $article->title,
+            'content_md' => $article->content_md,
+        ]);
+        $article->update(['working_revision_id' => $revision->id, 'published_revision_id' => $revision->id]);
+        ArticleSeoMeta::query()->create([
+            'org_id' => 0, 'article_id' => $article->id, 'locale' => 'en',
+            'schema_json' => ['editorial_package_v1' => ['article_schema_enabled' => true]],
+        ]);
+
+        $service = app(ArticleSeoService::class);
+        $publishedArticle = $article->fresh(['publishedRevision', 'seoMeta']);
+        $authority = $service->buildSeoPayload($publishedArticle)['article_authority_v1'];
+        $fragment = data_get($authority, 'structured_data_fragments.article');
+        $this->assertTrue(data_get($authority, 'structured_data_eligibility.article.enabled'));
+        $this->assertSame('FermatMind Editorial', $fragment['author']['name']);
+        $this->assertSame(['@type' => 'Organization', 'name' => 'FermatMind',
+            'url' => 'https://fermatmind.com/en/brand'], $fragment['publisher']);
+        $this->assertSame($fragment['publisher'], $service->generateJsonLd($publishedArticle)['publisher']);
+        $this->assertSame($revision->id, $article->fresh()->published_revision_id);
     }
 
     public function test_big_five_article_projection_removes_trailing_brand_but_holds_json_ld_without_reviewed_revision(): void

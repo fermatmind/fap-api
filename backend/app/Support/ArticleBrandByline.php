@@ -29,7 +29,8 @@ final class ArticleBrandByline
         $apply = static function (array $fragment) use ($author, $publisher): array {
             if (($fragment['@type'] ?? null) === 'Article') {
                 $fragment['author'] = $author;
-                if (mb_strtolower(trim((string) ($fragment['publisher']['name'] ?? ''))) === 'fermat institute') {
+                if (! isset($fragment['publisher'])
+                    || mb_strtolower(trim((string) ($fragment['publisher']['name'] ?? ''))) === 'fermat institute') {
                     $fragment['publisher'] = $publisher;
                 }
             }

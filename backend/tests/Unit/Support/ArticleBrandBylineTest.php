@@ -53,6 +53,25 @@ final class ArticleBrandBylineTest extends TestCase
         $this->assertSame('Fermat Institute', $article->author_name);
     }
 
+    public function test_editorial_projection_supplies_missing_brand_publisher_and_preserves_explicit_publisher(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $fragment = ['@type' => 'Article', 'author' => ['@type' => 'Person', 'name' => 'FermatMind Editorial']];
+        foreach (['en' => 'FermatMind', 'zh-CN' => '费马测试'] as $locale => $brand) {
+            $article = new Article(['author_name' => ArticleBrandByline::editorialName($locale)]);
+            foreach ([$fragment, ['@graph' => [$fragment]], ['fragments' => ['article' => $fragment]], $fragment + ['publisher' => null]] as $payload) {
+                $projected = ArticleBrandByline::project($payload, $article, $locale);
+                $result = $projected['@graph'][0] ?? $projected['fragments']['article'] ?? $projected;
+                $this->assertSame(['@type' => 'Organization', 'name' => $brand,
+                    'url' => 'https://fermatmind.com/'.($locale === 'en' ? 'en' : 'zh').'/brand'], $result['publisher']);
+                $this->assertSame(ArticleBrandByline::editorialName($locale), $result['author']['name']);
+            }
+            $explicit = $fragment + ['publisher' => ['@type' => 'Organization', 'name' => 'Reviewed publisher', 'url' => 'https://publisher.example']];
+            $this->assertSame($explicit['publisher'], ArticleBrandByline::project($explicit, $article, $locale)['publisher']);
+        }
+        $this->assertArrayNotHasKey('publisher', $fragment);
+    }
+
     public function test_explicit_byline_and_nested_citation_author_are_preserved(): void
     {
         $payload = ['@type' => 'Article', 'author' => ['@type' => 'Person', 'name' => 'Existing reviewed author'],
