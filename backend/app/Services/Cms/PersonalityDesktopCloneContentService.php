@@ -26,6 +26,42 @@ final class PersonalityDesktopCloneContentService
         string $scaleCode,
         string $locale,
     ): ?array {
+        return $this->publishedPayload($typeLookup, $orgId, $scaleCode, $locale, false);
+    }
+
+    /** The caller must first resolve the private report's owner and access gate. */
+    public function getPublishedForAuthorizedReport(
+        string $typeLookup,
+        int $orgId,
+        string $locale,
+        array $gate,
+    ): ?array {
+        if (($gate['locked'] ?? true) !== false || ($gate['variant'] ?? '') !== 'full') {
+            return null;
+        }
+        $modules = (array) ($gate['modules_allowed'] ?? []);
+        foreach (\App\Services\Report\ReportAccess::allDefaultModulesOffered('MBTI') as $module) {
+            if (! in_array($module, $modules, true)) {
+                return null;
+            }
+        }
+
+        $payload = $this->publishedPayload($typeLookup, $orgId, 'MBTI', $locale, true);
+        if ($payload !== null) {
+            unset($payload['_meta']['record_id'], $payload['_meta']['variant_id'], $payload['_meta']['profile_id']);
+            $payload['_meta']['access_source'] = 'authorized-report-full';
+        }
+
+        return $payload;
+    }
+
+    private function publishedPayload(
+        string $typeLookup,
+        int $orgId,
+        string $scaleCode,
+        string $locale,
+        bool $authorizedFull,
+    ): ?array {
         $runtimeTypeCode = $this->normalizeRuntimeTypeCode($typeLookup);
 
         if ($runtimeTypeCode === null) {
@@ -69,10 +105,13 @@ final class PersonalityDesktopCloneContentService
             'full_code' => (string) $variant->runtime_type_code,
             'base_code' => $baseCode,
             'locale' => (string) $profile->locale,
-            'content' => $isFreeFull ? $this->unlockPublicContent($content) : $this->redactPublicContent($content),
+            'content' => $authorizedFull || $isFreeFull ? $this->unlockPublicContent($content) : $this->redactPublicContent($content),
             'asset_slots' => MbtiZhResultContentPolicy::normalizeAssetSlots($assetSlots, $locale),
             '_meta' => [
                 'authority_source' => 'personality_profile_variant_clone_contents',
+                'content_hash' => hash('sha256', json_encode([
+                    $record->content_json, $record->asset_slots_json, $content,
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)),
                 'route_mode' => 'full_code_exact',
                 'public_route_type' => '32-type',
                 'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,

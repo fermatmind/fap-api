@@ -154,7 +154,7 @@ final class MbtiReadPathParityContractTest extends TestCase
         );
     }
 
-    public function test_result_read_and_pdf_fallback_prefer_top_level_quality_truth(): void
+    public function test_result_read_preserves_quality_truth_and_legacy_pdf_cannot_be_a_delivery_fallback(): void
     {
         $this->seedScales();
         Config::set('fap_experiments.experiments', []);
@@ -211,19 +211,10 @@ final class MbtiReadPathParityContractTest extends TestCase
 
         /** @var ReportPdfDocumentService $pdfService */
         $pdfService = app(ReportPdfDocumentService::class);
-        $pdf = $pdfService->getOrGenerate(
-            Attempt::query()->findOrFail($attemptId),
-            [
-                'variant' => 'free',
-                'locked' => true,
-                'report' => [
-                    'sections' => [
-                        ['key' => 'traits'],
-                    ],
-                ],
-            ],
-            $result
-        );
+        // Preserve the legacy renderer contract without allowing it as a live fallback.
+        Config::set('gotenberg.enabled', false);
+        $attempt = Attempt::query()->findOrFail($attemptId);
+        $pdf = ['binary' => (new \ReflectionMethod($pdfService, 'buildMbtiDocument'))->invoke($pdfService, $attempt, $result, true)];
 
         $this->assertStringStartsWith('%PDF-1.4', $pdf['binary']);
         $this->assertStringContainsString('/BaseFont /Helvetica', $pdf['binary']);
@@ -235,9 +226,12 @@ final class MbtiReadPathParityContractTest extends TestCase
         $this->assertStringNotContainsString('Scale:', $pdf['binary']);
         $this->assertStringNotContainsString('Variant:', $pdf['binary']);
         $this->assertStringNotContainsString($attemptId, $pdfService->fileNameForAttempt(Attempt::query()->findOrFail($attemptId), [], $result));
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Gotenberg result-page PDF engine is disabled.');
+        $pdfService->getOrGenerate($attempt, ['variant' => 'free', 'locked' => true], $result);
     }
 
-    public function test_mbti_pdf_uses_english_reader_facing_content_without_internal_fields(): void
+    public function test_legacy_pdf_reader_content_does_not_replace_a_failed_strict_export(): void
     {
         $this->seedScales();
         Config::set('fap_experiments.experiments', []);
@@ -263,22 +257,9 @@ final class MbtiReadPathParityContractTest extends TestCase
 
         /** @var ReportPdfDocumentService $pdfService */
         $pdfService = app(ReportPdfDocumentService::class);
-        $pdf = $pdfService->getOrGenerate(
-            $attempt,
-            [
-                'variant' => 'full',
-                'locked' => false,
-                'report' => [
-                    'sections' => [
-                        ['key' => 'traits'],
-                        ['key' => 'career'],
-                        ['key' => 'growth'],
-                        ['key' => 'relationships'],
-                    ],
-                ],
-            ],
-            $result
-        );
+        // This is a compatibility renderer check, not proof of current print-route content.
+        Config::set('gotenberg.enabled', false);
+        $pdf = ['binary' => (new \ReflectionMethod($pdfService, 'buildMbtiDocument'))->invoke($pdfService, $attempt, $result, false)];
 
         $this->assertStringStartsWith('%PDF-1.4', $pdf['binary']);
         $this->assertStringContainsString('MPDFAA+', $pdf['binary']);
@@ -310,6 +291,9 @@ final class MbtiReadPathParityContractTest extends TestCase
         $this->assertPdfDoesNotContainText($pdf['binary'], 'Quality Level');
         $this->assertStringNotContainsString($attemptId, $pdf['binary']);
         $this->assertStringNotContainsString($attemptId, $pdfService->fileNameForAttempt($attempt, [], $result));
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Gotenberg result-page PDF engine is disabled.');
+        $pdfService->getOrGenerate($attempt, ['variant' => 'full', 'locked' => false], $result);
     }
 
     private function assertPdfContainsText(string $pdfBinary, string $text): void

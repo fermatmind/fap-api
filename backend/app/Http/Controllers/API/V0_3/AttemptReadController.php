@@ -637,6 +637,18 @@ class AttemptReadController extends Controller
         }
 
         if ($scaleCode === 'MBTI') {
+            if (($attempt->locale ?? '') === 'en') {
+                $printContent = app(\App\Services\Cms\PersonalityDesktopCloneContentService::class)
+                    ->getPublishedForAuthorizedReport(
+                        (string) $result->type_code,
+                        (int) $attempt->org_id,
+                        'en',
+                        $gate
+                    );
+                if ($printContent !== null) {
+                    $responsePayload['mbti_pdf_content'] = $printContent;
+                }
+            }
             $responsePayload['mbti_public_summary_v1'] = $this->mbtiPublicSummaryV1Builder->buildFromReportEnvelope(
                 $result,
                 $responsePayload,
@@ -3026,15 +3038,26 @@ class AttemptReadController extends Controller
     /**
      * GET /api/v0.3/attempts/{id}/report.pdf
      */
-    public function reportPdf(Request $request, string $id): Response
+    public function reportPdf(Request $request, string $id): Response|JsonResponse
     {
         $orgId = $this->currentOrgContext()->orgId();
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
-        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
+        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->first();
+        if (! $result instanceof Result) {
+            return $this->privateNoStoreJson(['ok' => false, 'error_code' => 'RESULT_NOT_FOUND', 'message' => 'result not found.'], 404);
+        }
         $responseCodes = $this->resolveResponseScaleCodes($result);
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
-        $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+        try {
+            $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+        } catch (ApiProblemException $e) {
+            if ($scaleCode !== 'MBTI' || $e->getStatusCode() !== 404) {
+                throw $e;
+            }
+
+            return $this->privateNoStoreJson(['ok' => false, 'error_code' => $e->errorCode(), 'message' => $e->getMessage()], 404);
+        }
         $mbtiFormSummary = $scaleCode === 'MBTI'
             ? $this->resolveMbtiFormSummary($request, $attempt, $result)
             : null;
@@ -3045,11 +3068,16 @@ class AttemptReadController extends Controller
             ? $this->resolveEnneagramFormSummary($request, $attempt, $result)
             : null;
 
+        $emailTokenActor = null;
+        if ($scaleCode === 'MBTI') {
+            $this->enforceEmailBindingForRead($request, $orgId, $attempt, $scaleCode);
+            $emailTokenActor = $this->resultEmailReadAccess()->tokenActorForRequest($request, $orgId, $id);
+        }
         $gate = $this->reportGatekeeper->resolve(
             $orgId,
             $id,
-            $userId !== null ? (string) $userId : null,
-            $anonId,
+            $emailTokenActor['user_id'] ?? ($userId !== null ? (string) $userId : null),
+            $emailTokenActor['anon_id'] ?? $anonId,
             $this->currentOrgContext()->role(),
             false,
             false,
@@ -3097,7 +3125,15 @@ class AttemptReadController extends Controller
             $this->eventRecorder->recordFromRequest($request, 'enneagram_pdf_downloaded', $this->resolveUserId($request), $this->resolveEnneagramAnalyticsEventMeta($attempt, $result));
         }
 
-        $generated = $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result);
+        try {
+            $generated = $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result);
+        } catch (\Throwable $e) {
+            if ($scaleCode !== 'MBTI') {
+                throw $e;
+            }
+
+            return $this->resultPagePdfFailureResponse($request, $attempt, $userId, $e);
+        }
         $pdfBinary = (string) ($generated['binary'] ?? '');
         $variant = (string) ($generated['variant'] ?? $variant);
         $locked = (bool) ($generated['locked'] ?? $locked);
@@ -3125,6 +3161,20 @@ class AttemptReadController extends Controller
                 : '',
         ];
 
+        if ($scaleCode === 'MBTI' && isset($generated['engine'])) {
+            $responseHeaders = array_merge($responseHeaders, [
+                'X-Report-Pdf-Engine' => $generated['engine'],
+                'X-Pdf-Surface' => $generated['surface'],
+                'X-Pdf-Surface-Version' => $generated['surface_version'],
+                'X-Pdf-Render-Version' => $generated['render_version'],
+                'X-Pdf-Print-Asset-Hash' => $generated['print_asset_hash'],
+                'X-Pdf-Artifact-Cache' => $generated['cached'] ? 'HIT' : 'MISS',
+                'X-Legacy-Mpdf-Fallback' => 'false',
+                'X-Gotenberg-Trace' => $generated['trace_id'],
+                ...$this->resultPagePdfCorsHeaders($request),
+            ]);
+        }
+
         if (strtoupper((string) ($attempt->scale_code ?? '')) === 'ENNEAGRAM') {
             foreach ([
                 'X-Report-Schema-Version',
@@ -3149,20 +3199,36 @@ class AttemptReadController extends Controller
         $orgId = $this->currentOrgContext()->orgId();
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
-        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
+        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->first();
+        if (! $result instanceof Result) {
+            return $this->privateNoStoreJson(['ok' => false, 'error_code' => 'RESULT_NOT_FOUND', 'message' => 'result not found.'], 404);
+        }
         $responseCodes = $this->resolveResponseScaleCodes($result);
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
-        $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+        try {
+            $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+        } catch (ApiProblemException $e) {
+            if ($scaleCode !== 'MBTI' || $e->getStatusCode() !== 404) {
+                throw $e;
+            }
+
+            return $this->privateNoStoreJson(['ok' => false, 'error_code' => $e->errorCode(), 'message' => $e->getMessage()], 404);
+        }
 
         if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== 'MBTI') {
             abort(400, 'result-page PDF export is only available for MBTI attempts.');
         }
 
+        $emailTokenActor = null;
+        if ($scaleCode === 'MBTI') {
+            $this->enforceEmailBindingForRead($request, $orgId, $attempt, $scaleCode);
+            $emailTokenActor = $this->resultEmailReadAccess()->tokenActorForRequest($request, $orgId, $id);
+        }
         $gate = $this->reportGatekeeper->resolve(
             $orgId,
             $id,
-            $userId !== null ? (string) $userId : null,
-            $anonId,
+            $emailTokenActor['user_id'] ?? ($userId !== null ? (string) $userId : null),
+            $emailTokenActor['anon_id'] ?? $anonId,
             $this->currentOrgContext()->role(),
             false,
             false,
@@ -3207,41 +3273,7 @@ class AttemptReadController extends Controller
         try {
             $generated = $this->reportPdfDocumentService->getOrGenerateMbtiResultPageExport($attempt, $gate, $result);
         } catch (\Throwable $e) {
-            $traceId = $e instanceof ResultPagePdfExportException
-                ? $e->traceId()
-                : 'mbti-result-page-pdf-error-'.now()->utc()->format('Ymd\THis\Z');
-            $errorCode = $e instanceof ResultPagePdfExportException
-                ? $e->errorCode()
-                : 'RESULT_PAGE_PDF_EXPORT_FAILED';
-            $publicMessage = $errorCode === 'PDF_GENERATION_TIMEOUT'
-                ? 'PDF generation timed out'
-                : 'Result-page PDF export is temporarily unavailable. Please retry shortly.';
-            $printBaseHost = parse_url((string) config('gotenberg.result_print_base_url', ''), PHP_URL_HOST);
-            Log::error('MBTI_RESULT_PAGE_PDF_EXPORT_FAILED', [
-                'attempt_id' => (string) $attempt->id,
-                'user_id' => $userId !== null ? (string) $userId : null,
-                'surface' => ReportPdfDocumentService::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
-                'engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
-                'gotenberg_url_host' => is_string($printBaseHost) ? $printBaseHost : null,
-                'trace_id' => $traceId,
-                'error_code' => $errorCode,
-                'exception_class' => $e::class,
-                'message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
-            ]);
-
-            $requestId = $this->resolvePublicDiagnosticRequestId($request) ?? $traceId;
-
-            return response()->json([
-                'ok' => false,
-                'code' => $errorCode,
-                'error_code' => $errorCode,
-                'engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
-                'surface' => ReportPdfDocumentService::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
-                'trace' => $traceId,
-                'message' => $publicMessage,
-                'request_id' => $requestId,
-                'trace_id' => $traceId,
-            ], 503)->withHeaders($this->resultPagePdfFailureHeaders($request, $traceId));
+            return $this->resultPagePdfFailureResponse($request, $attempt, $userId, $e);
         }
 
         $pdfBinary = (string) ($generated['binary'] ?? '');
@@ -3266,6 +3298,45 @@ class AttemptReadController extends Controller
             'X-Gotenberg-Trace' => (string) ($generated['trace_id'] ?? ''),
             ...$this->resultPagePdfCorsHeaders($request),
         ]);
+    }
+
+    private function resultPagePdfFailureResponse(Request $request, Attempt $attempt, ?int $userId, \Throwable $e): JsonResponse
+    {
+        $traceId = $e instanceof ResultPagePdfExportException
+            ? $e->traceId()
+            : 'mbti-result-page-pdf-error-'.now()->utc()->format('Ymd\THis\Z');
+        $errorCode = $e instanceof ResultPagePdfExportException
+            ? $e->errorCode()
+            : 'RESULT_PAGE_PDF_EXPORT_FAILED';
+        $publicMessage = $errorCode === 'PDF_GENERATION_TIMEOUT'
+            ? 'PDF generation timed out'
+            : 'Result-page PDF export is temporarily unavailable. Please retry shortly.';
+        $printBaseHost = parse_url((string) config('gotenberg.result_print_base_url', ''), PHP_URL_HOST);
+        Log::error('MBTI_RESULT_PAGE_PDF_EXPORT_FAILED', [
+            'attempt_id' => (string) $attempt->id,
+            'user_id' => $userId !== null ? (string) $userId : null,
+            'surface' => ReportPdfDocumentService::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
+            'engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
+            'gotenberg_url_host' => is_string($printBaseHost) ? $printBaseHost : null,
+            'trace_id' => $traceId,
+            'error_code' => $errorCode,
+            'exception_class' => $e::class,
+            'message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
+        ]);
+
+        $requestId = $this->resolvePublicDiagnosticRequestId($request) ?? $traceId;
+
+        return response()->json([
+            'ok' => false,
+            'code' => $errorCode,
+            'error_code' => $errorCode,
+            'engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
+            'surface' => ReportPdfDocumentService::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
+            'trace' => $traceId,
+            'message' => $publicMessage,
+            'request_id' => $requestId,
+            'trace_id' => $traceId,
+        ], 503)->withHeaders($this->resultPagePdfFailureHeaders($request, $traceId));
     }
 
     /**

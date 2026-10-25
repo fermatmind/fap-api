@@ -16,7 +16,7 @@ use Throwable;
 
 final class ReportPdfDocumentService
 {
-    private const MBTI_PDF_SURFACE_VERSION = 'mbti.pdf_surface.v4';
+    private const MBTI_PDF_SURFACE_VERSION = 'mbti.pdf_surface.v5';
 
     public const MBTI_RESULT_PAGE_SNAPSHOT_SURFACE = 'mbti_result_page_snapshot';
 
@@ -24,11 +24,9 @@ final class ReportPdfDocumentService
 
     public const MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION = 'mbti.snapshot.print_layout.v1';
 
-    public const MBTI_RESULT_PAGE_SNAPSHOT_PRINT_ASSET_HASH = 'sha256:f8b8f8a162f469777924fb60966fac19c29ea4fdad1323b5f9ae1a19286a7614';
+    public const MBTI_RESULT_PAGE_SNAPSHOT_PRINT_ASSET_HASH = 'sha256:a70492a63d613895db0586e8541e2d56a4ba902d5d4bce922c337a839b6b6d46';
 
     public const RESULT_PAGE_EXPORT_ENGINE = 'gotenberg_chromium';
-
-    private const MBTI_LEGACY_RESULT_PAGE_EXPORT_SURFACE_VERSION = 'mbti.result_page_export.v2';
 
     public function __construct(
         private readonly ReportPdfArtifactStore $artifactStore,
@@ -308,7 +306,7 @@ final class ReportPdfDocumentService
         return $this->artifactStore->path(
             (string) ($attempt->scale_code ?? 'UNKNOWN'),
             (string) $attempt->id,
-            $this->resolveManifestHash($attempt, $result),
+            $this->artifactManifestHash($attempt, $variant, $result),
             $this->normalizeVariant($variant)
         );
     }
@@ -316,7 +314,7 @@ final class ReportPdfDocumentService
     public function readArtifact(Attempt $attempt, string $variant, ?Result $result = null): ?string
     {
         $variant = $this->normalizeVariant($variant);
-        $manifestHash = $this->resolveManifestHash($attempt, $result);
+        $manifestHash = $this->artifactManifestHash($attempt, $variant, $result);
         $path = $this->artifactStore->path(
             (string) ($attempt->scale_code ?? 'UNKNOWN'),
             (string) $attempt->id,
@@ -349,6 +347,13 @@ final class ReportPdfDocumentService
      */
     public function getOrGenerate(Attempt $attempt, array $gate, ?Result $result = null): array
     {
+        // Both MBTI actions must render the same authorized, ready print surface.
+        // The legacy v2 token is not accepted by the current private print route.
+        // Engine failure must not substitute legacy copy or technical card tags.
+        if (strtoupper(trim((string) $attempt->scale_code)) === 'MBTI') {
+            return $this->getOrGenerateMbtiResultPageExport($attempt, $gate, $result);
+        }
+
         $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $locked = (bool) ($gate['locked'] ?? true);
         $manifestHash = $this->resolveManifestHash($attempt, $result);
@@ -410,7 +415,7 @@ final class ReportPdfDocumentService
 
         $pdfBinary = match ($scaleCode) {
             'BIG5_OCEAN' => app(BigFiveReportPdfRenderer::class)->render($report, (string) $attempt->locale, $locked),
-            'MBTI' => $this->buildMbtiDocument($attempt, $result, $locked, $variant),
+            'MBTI' => $this->buildMbtiDocument($attempt, $result, $locked),
             default => $this->buildDocument(
                 (string) $attempt->id,
                 (string) ($attempt->scale_code ?? ''),
@@ -437,24 +442,7 @@ final class ReportPdfDocumentService
 
     public function resolveManifestHash(Attempt $attempt, ?Result $result = null): string
     {
-        $summary = is_array($attempt->answers_summary_json ?? null) ? $attempt->answers_summary_json : [];
-        $meta = is_array($summary['meta'] ?? null) ? $summary['meta'] : [];
-        $hash = trim((string) ($meta['pack_release_manifest_hash'] ?? ''));
-        if ($hash !== '') {
-            return strtoupper((string) $attempt->scale_code) === 'BIG5_OCEAN'
-                ? $hash.'-'.BigFiveReportPdfRenderer::SURFACE_VERSION
-                : $hash;
-        }
-
-        $resultPayload = is_array($result?->result_json ?? null) ? $result?->result_json : [];
-        $hash = trim((string) (
-            data_get($resultPayload, 'version_snapshot.content_manifest_hash')
-            ?? data_get($resultPayload, 'normed_json.version_snapshot.content_manifest_hash')
-            ?? data_get($resultPayload, 'content_manifest_hash')
-            ?? ''
-        ));
-
-        $hash = $hash !== '' ? $hash : 'nohash';
+        $hash = $this->baseContentManifestHash($attempt, $result);
 
         if (strtoupper((string) $attempt->scale_code) === 'BIG5_OCEAN') {
             return $hash.'-'.BigFiveReportPdfRenderer::SURFACE_VERSION;
@@ -465,6 +453,20 @@ final class ReportPdfDocumentService
         }
 
         return $hash;
+    }
+
+    private function artifactManifestHash(Attempt $attempt, string $variant, ?Result $result): string
+    {
+        if (strtoupper(trim((string) $attempt->scale_code)) === 'MBTI') {
+            $variant = $this->normalizeVariant($variant);
+
+            return $this->resolveResultPageExportManifestHash($attempt, [
+                'variant' => $variant,
+                'locked' => $variant !== 'full',
+            ], $result);
+        }
+
+        return $this->resolveManifestHash($attempt, $result);
     }
 
     /**
@@ -489,9 +491,20 @@ final class ReportPdfDocumentService
             throw new \RuntimeException('Result-page PDF export is only available for MBTI attempts.');
         }
 
+        if (($gate['generating'] ?? false) || ($gate['snapshot_error'] ?? false)
+            || data_get($gate, 'meta.generating', false) || data_get($gate, 'meta.snapshot_error', false)) {
+            throw new ResultPagePdfExportException(
+                $this->newMbtiResultPageExportTraceId($attempt), 'REPORT_NOT_READY', 'Report is not ready for PDF export.'
+            );
+        }
+
         $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $locked = (bool) ($gate['locked'] ?? true);
         $traceId = $this->newMbtiResultPageExportTraceId($attempt);
+        if (! $locked && $variant === 'full' && array_key_exists('modules_allowed', $gate)
+            && array_diff(\App\Services\Report\ReportAccess::allDefaultModulesOffered('MBTI'), (array) $gate['modules_allowed']) !== []) {
+            throw new ResultPagePdfExportException($traceId, 'PDF_CONTENT_UNAVAILABLE', 'Complete report modules are unavailable.');
+        }
         $manifestHash = $this->resolveResultPageExportManifestHash($attempt, $gate, $result);
         $path = $this->artifactStore->path('MBTI', (string) $attempt->id, $manifestHash, $variant);
 
@@ -514,6 +527,11 @@ final class ReportPdfDocumentService
         }
 
         $pdfBinary = $this->buildMbtiResultPageExportDocument($attempt, $gate, $traceId);
+        if (! hash_equals($manifestHash, $this->resolveResultPageExportManifestHash($attempt, $gate, $result))) {
+            throw new ResultPagePdfExportException(
+                $traceId, 'pdf_content_revision_changed', 'Published report content changed during PDF generation.'
+            );
+        }
         $this->artifactStore->put($path, $pdfBinary);
 
         return [
@@ -539,6 +557,28 @@ final class ReportPdfDocumentService
     {
         $baseHash = $this->baseContentManifestHash($attempt, $result);
         $rawLocale = strtolower(trim((string) ($attempt->locale ?? '')));
+        $apiLocale = str_starts_with($rawLocale, 'zh') ? 'zh-CN' : 'en';
+        $result = Result::query()->where('org_id', (int) $attempt->org_id)->where('attempt_id', $attempt->id)->first() ?? $result;
+        // Bind immutable result/form values as well as the live reader content.
+        // A changed score, quality envelope or version cannot reuse an earlier PDF.
+        $baseHash = hash('sha256', json_encode([
+            $baseHash,
+            $attempt->only(['form_code', 'question_count', 'content_package_version', 'scoring_spec_version']),
+            $result?->only(['type_code', 'scores_pct', 'axis_states', 'result_json', 'content_package_version', 'scoring_spec_version', 'report_engine_version']),
+        ], JSON_THROW_ON_ERROR));
+        $content = app(\App\Services\Cms\PersonalityDesktopCloneContentService::class)->getPublishedByType(
+            (string) ($result?->type_code ?? ''), (int) $attempt->org_id, 'MBTI', $apiLocale
+        );
+        $contentHash = $content['_meta']['content_hash'] ?? null;
+        if (is_string($contentHash) && $contentHash !== '') {
+            $introHash = \App\Models\PersonalityResultIntroduction::publishedFor((string) $result?->type_code, $apiLocale)?->content_hash;
+            $traitHash = $apiLocale === 'zh-CN'
+                ? (app(\App\Services\Cms\MbtiTraitExplanations::class)->published()['content_hash'] ?? null)
+                : null;
+            $baseHash = hash('sha256', json_encode([$baseHash, $contentHash, $introHash, $traitHash], JSON_THROW_ON_ERROR));
+        } else {
+            $baseHash = hash('sha256', json_encode([$baseHash, null, null, null], JSON_THROW_ON_ERROR));
+        }
         $locale = str_starts_with($rawLocale, 'zh') ? 'zh' : 'en';
         $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $entitlement = ((bool) ($gate['locked'] ?? true)) ? 'locked' : 'unlocked';
@@ -677,25 +717,15 @@ final class ReportPdfDocumentService
         return sprintf('fermatmind-enneagram-%s-%s.pdf', $slug, $date);
     }
 
-    private function buildMbtiDocument(Attempt $attempt, ?Result $result, bool $locked, string $variant): string
+    private function buildMbtiDocument(Attempt $attempt, ?Result $result, bool $locked): string
     {
         if ($locked) {
-            $gotenbergPdf = $this->buildMbtiGotenbergDocument($attempt);
-            if (is_string($gotenbergPdf)) {
-                return $gotenbergPdf;
-            }
-
             $isChinese = str_starts_with(strtolower(trim((string) ($attempt->locale ?? ''))), 'zh');
 
             return $this->buildSimplePdfDocument(
                 $isChinese ? '费马测试 MBTI 报告' : 'FermatMind MBTI Report',
                 [$isChinese ? '完整报告将在解锁后提供。' : 'The full report is available after access is unlocked.']
             );
-        }
-
-        $gotenbergPdf = $this->buildMbtiGotenbergDocument($attempt);
-        if (is_string($gotenbergPdf)) {
-            return $gotenbergPdf;
         }
 
         $locale = strtolower(trim((string) ($attempt->locale ?? '')));
@@ -741,24 +771,6 @@ final class ReportPdfDocumentService
             $isChinese ? 'FermatMind · 费马测试' : 'FermatMind',
             $isChinese
         );
-    }
-
-    private function buildMbtiGotenbergDocument(Attempt $attempt): ?string
-    {
-        if (! $this->gotenbergChromiumPdfClient->enabled()) {
-            return null;
-        }
-
-        $printUrl = $this->mbtiLegacyResultPrintUrl($attempt);
-        if ($printUrl === null) {
-            return null;
-        }
-
-        try {
-            return $this->gotenbergChromiumPdfClient->convertUrl($printUrl);
-        } catch (Throwable) {
-            return null;
-        }
     }
 
     /**
@@ -861,48 +873,6 @@ final class ReportPdfDocumentService
         }
 
         return 'RESULT_PAGE_PDF_EXPORT_FAILED';
-    }
-
-    /**
-     * @param  array<string,mixed>  $gate
-     */
-    private function mbtiLegacyResultPrintUrl(Attempt $attempt): ?string
-    {
-        $baseUrl = rtrim(trim((string) config('gotenberg.result_print_base_url', '')), '/');
-        if ($baseUrl === '') {
-            return null;
-        }
-
-        $rawLocale = strtolower(trim((string) ($attempt->locale ?? '')));
-        $locale = str_starts_with($rawLocale, 'zh') ? 'zh' : 'en';
-        $attemptId = trim((string) $attempt->id);
-        if ($attemptId === '') {
-            return null;
-        }
-
-        $pathTemplate = trim((string) config('gotenberg.result_print_path_template', '/{locale}/result/{attempt_id}'));
-        $pathTemplate = $pathTemplate !== '' ? $pathTemplate : '/{locale}/result/{attempt_id}';
-        $path = strtr($pathTemplate, [
-            '{locale}' => rawurlencode($locale),
-            '{attempt_id}' => rawurlencode($attemptId),
-        ]);
-
-        $url = $baseUrl.'/'.ltrim($path, '/');
-        $pdfToken = $this->resultPagePdfTokenService->issueForMbtiResultPageExport(
-            $attempt,
-            [],
-            $locale,
-            self::MBTI_LEGACY_RESULT_PAGE_EXPORT_SURFACE_VERSION,
-        );
-        $separator = str_contains($url, '?') ? '&' : '?';
-        $url .= $separator.http_build_query([
-            'pdf' => '1',
-            'surface' => self::MBTI_LEGACY_RESULT_PAGE_EXPORT_SURFACE_VERSION,
-            'pdf_token' => $pdfToken,
-            'result_access_token' => $pdfToken,
-        ], '', '&', PHP_QUERY_RFC3986);
-
-        return $url;
     }
 
     /**
