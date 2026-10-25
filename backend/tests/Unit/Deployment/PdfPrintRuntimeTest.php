@@ -68,9 +68,48 @@ final class PdfPrintRuntimeTest extends TestCase
         }
     }
 
-    private function runHelper(string $env, string $input): Process
+    public function test_unexpected_errors_report_only_fixed_stage_metadata_and_preserve_environment(): void
     {
-        $process = new Process([PHP_BINARY, dirname(__DIR__, 3).'/scripts/deploy/configure_pdf_print_runtime.php', $env, $input]);
+        foreach (['fsync', 'fsync,fclose'] as $disabled) {
+            $this->fixture(function (string $env, string $input, string $key) use ($disabled): void {
+                $original = "APP_ENV=production\n";
+                file_put_contents($env, $original);
+                $process = $this->runHelper($env, $input, ['-d', 'disable_functions='.$disabled]);
+                self::assertNotSame(0, $process->getExitCode());
+                self::assertMatchesRegularExpression('/\APDF_PRINT_RUNTIME_FAILED stage=sync exception=Error line=[0-9]+ activated=0\n\z/', $process->getErrorOutput());
+                self::assertStringNotContainsString($key, $process->getOutput().$process->getErrorOutput());
+                self::assertStringNotContainsString($env, $process->getOutput().$process->getErrorOutput());
+                self::assertSame($original, file_get_contents($env));
+            });
+        }
+    }
+
+    public function test_native_filesystem_warnings_do_not_expose_paths_or_override_the_fixed_diagnostic(): void
+    {
+        if (function_exists('posix_geteuid') && posix_geteuid() === 0) {
+            self::markTestSkipped('Permission denial requires a non-root process.');
+        }
+        $this->fixture(function (string $env, string $input, string $key): void {
+            $original = "APP_ENV=production\n";
+            file_put_contents($env, $original);
+            chmod($env, 0000);
+            try {
+                $process = $this->runHelper($env, $input, ['-d', 'display_errors=0']);
+            } finally {
+                chmod($env, 0600);
+            }
+            self::assertNotSame(0, $process->getExitCode());
+            self::assertMatchesRegularExpression('/\APDF_PRINT_RUNTIME_FAILED stage=lock exception=ErrorException line=[0-9]+ activated=0\n\z/', $process->getErrorOutput());
+            self::assertStringNotContainsString($key, $process->getOutput().$process->getErrorOutput());
+            self::assertStringNotContainsString(dirname($env), $process->getOutput().$process->getErrorOutput());
+            self::assertStringNotContainsString('configure_pdf_print_runtime.php', $process->getOutput().$process->getErrorOutput());
+            self::assertSame($original, file_get_contents($env));
+        });
+    }
+
+    private function runHelper(string $env, string $input, array $phpArguments = []): Process
+    {
+        $process = new Process([PHP_BINARY, ...$phpArguments, dirname(__DIR__, 3).'/scripts/deploy/configure_pdf_print_runtime.php', $env, $input]);
         $process->run();
 
         return $process;
