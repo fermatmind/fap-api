@@ -338,6 +338,35 @@ final class RiasecDeepCopySlotRegistry
             $content['user_visible_boundary'] = $boundary;
             $slot = $this->aspirationSlot($name, $content);
             $slot['content_version'] = $asset['content_version'];
+        } elseif ($key === 'near_tie_alternate_code_copy' && in_array($identity['slot_name'] ?? '', RiasecPrivateResultCompileService::ENGLISH_NEAR_TIE_STATES, true)) {
+            $asset = $this->privateResultSource->optionalAsset(RiasecPrivateResultCompileService::ENGLISH_NEAR_TIE_ASSET, 'en');
+            $name = $identity['slot_name'];
+            if (($asset['locale'] ?? null) !== 'en' || ($asset['asset_id'] ?? null) !== 'near_tie_alternate_code_copy_v1.en'
+                || ($identity['near_tie_copy_state'] ?? null) !== $name) {
+                return [];
+            }
+            foreach ((array) ($asset['states'] ?? []) as $row) {
+                if (($row['state'] ?? null) !== $name) {
+                    continue;
+                }
+                $boundary = $asset['user_visible_boundary'] ?? null;
+                foreach ([$row['title'] ?? null, $row['copy'] ?? null, $boundary] as $text) {
+                    if (! is_string($text) || trim($text) === '' || preg_match('/\p{Han}/u', $text) === 1) {
+                        return [];
+                    }
+                }
+                $slot = $this->interpretationStateSlot($key, $name, [
+                    'near_tie_copy_state' => $name,
+                    'title' => $row['title'],
+                    'summary' => $row['copy'],
+                    'body' => $row['copy'],
+                    'copy' => $row['copy'],
+                    'content_version' => $asset['asset_id'],
+                    'user_visible_boundary' => $boundary,
+                    'source_review_status' => $asset['review_status'] ?? null,
+                ]);
+                break;
+            }
         } elseif (($identity['slot_group'] ?? '') === '140q_layer_copy' && isset($identity['layer_dimension'])) {
             foreach ($this->privateResultSource->optionalAsset('140q_task_environment_role_v1.en.jsonl', 'en') as $row) {
                 $state = $this->normalize140qLayerState((string) ($row['layer_state'] ?? ''));

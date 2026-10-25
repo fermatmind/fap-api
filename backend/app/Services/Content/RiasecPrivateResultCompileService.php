@@ -21,7 +21,11 @@ final class RiasecPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.riasec.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.7.0';
+    public const COMPILER_VERSION = '1.8.0';
+
+    public const ENGLISH_NEAR_TIE_ASSET = 'near_tie_alternate_code_copy_v1.en.json';
+
+    public const ENGLISH_NEAR_TIE_STATES = ['top1_top2_near_tie', 'top2_top3_near_tie', 'multi_near_tie', 'alternate_code_available'];
 
     public const ENGLISH_ASPIRATIONS_CARDS = ['intro', 'input_boundary', 'no_score_mutation_boundary'];
 
@@ -59,6 +63,7 @@ final class RiasecPrivateResultCompileService
         'faq_v1.zh-CN.json' => ['role' => 'private result FAQ', 'schema' => 'riasec.faq.asset.v1', 'surfaces' => ['result', 'report']],
         'feedback_action_lab_v1.zh-CN.jsonl' => ['role' => 'feedback and action copy', 'schema' => 'riasec.feedback_action_lab.v1', 'surfaces' => ['result', 'history']],
         'low_quality_cautious_reading_v1.zh-CN.json' => ['role' => 'low-quality cautious reading copy', 'schema' => 'riasec.low_quality.asset.v1', 'surfaces' => ['result', 'report', 'share', 'pdf']],
+        self::ENGLISH_NEAR_TIE_ASSET => ['role' => 'English selected near-tie and alternate-code copy', 'schema' => 'riasec.near_tie.asset.v1', 'surfaces' => ['result', 'report']],
         'near_tie_alternate_code_copy_v1.zh-CN.json' => ['role' => 'near-tie and alternate-code copy', 'schema' => 'riasec.near_tie.asset.v1', 'surfaces' => ['result', 'report']],
         'next_exploration_nodes_v1.zh-CN.jsonl' => ['role' => 'next exploration copy', 'schema' => 'riasec.next_exploration_node.v1', 'surfaces' => ['result', 'report']],
         'occupation_examples_boundary_v1.zh-CN.jsonl' => ['role' => 'bounded occupation examples', 'schema' => 'riasec.occupation_example_boundary.v1', 'surfaces' => ['result', 'report']],
@@ -238,7 +243,7 @@ final class RiasecPrivateResultCompileService
             'feedback_action' => true,
             'secondary_surfaces' => ['faq', 'technical_note', 'pdf', 'print', 'history', 'compare', 'share', 'lifecycle'],
             'locale_modules' => ['en' => ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1']],
-            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => self::englishPairCoverage(self::COMPILER_VERSION), 'top3_groups' => self::englishTop3Coverage(self::COMPILER_VERSION), 'ordered_codes' => self::englishOrderedCodeCoverage(self::COMPILER_VERSION), 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8, 'generic_disagree_cards' => 3, 'generic_aspirations_cards' => 3],
+            'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => self::englishPairCoverage(self::COMPILER_VERSION), 'top3_groups' => self::englishTop3Coverage(self::COMPILER_VERSION), 'ordered_codes' => self::englishOrderedCodeCoverage(self::COMPILER_VERSION), 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8, 'generic_disagree_cards' => 3, 'generic_aspirations_cards' => 3, 'near_tie_states' => self::ENGLISH_NEAR_TIE_STATES],
         ];
     }
 
@@ -317,7 +322,8 @@ final class RiasecPrivateResultCompileService
             '1.2.0' => array_diff_key(self::legacySelectedSourceContract(), [self::ENGLISH_DIMENSION_STATE_ASSET => true]),
             '1.3.0' => self::legacySelectedSourceContract(),
             '1.4.0' => self::legacySelectedSourceContract(completePairs: true),
-            '1.5.0', '1.6.0', self::COMPILER_VERSION => self::SOURCE_CONTRACT,
+            '1.5.0', '1.6.0', '1.7.0' => array_diff_key(self::SOURCE_CONTRACT, [self::ENGLISH_NEAR_TIE_ASSET => true]),
+            self::COMPILER_VERSION => self::SOURCE_CONTRACT,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -325,7 +331,7 @@ final class RiasecPrivateResultCompileService
     /** Keep immutable selected-module manifest metadata as published. */
     private static function legacySelectedSourceContract(bool $completePairs = false): array
     {
-        $contract = self::SOURCE_CONTRACT;
+        $contract = self::sourceContract('1.7.0');
         if (! $completePairs) {
             $contract['pair_blend_15_pairs_v1.en.jsonl']['role'] = 'three selected English pair blends';
         }
@@ -338,7 +344,7 @@ final class RiasecPrivateResultCompileService
     {
         return match ($compilerVersion) {
             '1.2.0', '1.3.0' => ['R_I', 'R_A', 'I_A'],
-            '1.4.0', '1.5.0', '1.6.0', self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
+            '1.4.0', '1.5.0', '1.6.0', '1.7.0', self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -347,7 +353,7 @@ final class RiasecPrivateResultCompileService
     {
         return match ($compilerVersion) {
             '1.2.0', '1.3.0', '1.4.0' => ['R_I_A'],
-            '1.5.0', '1.6.0', self::COMPILER_VERSION => self::ENGLISH_TOP3_KEYS,
+            '1.5.0', '1.6.0', '1.7.0', self::COMPILER_VERSION => self::ENGLISH_TOP3_KEYS,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -618,6 +624,41 @@ final class RiasecPrivateResultCompileService
         }
     }
 
+    /** Bind the nine reader leaves to the four existing machine-selected states. */
+    public function assertEnglishNearTieSources(array $english, array $source): void
+    {
+        if (hash('sha256', $this->canonicalJson($source)) !== 'a17b698b2033b202564f00617593ed54907e2ca0e04b823dba0711ad78fa50c0') {
+            throw new RuntimeException('RIASEC English near-tie source binding is invalid.');
+        }
+        $states = $english['states'] ?? [];
+        if (! is_array($states) || ! array_is_list($states) || array_column($states, 'state') !== self::ENGLISH_NEAR_TIE_STATES) {
+            throw new RuntimeException('RIASEC English near-tie coverage is incomplete.');
+        }
+        $restored = $english;
+        foreach ($states as $index => $row) {
+            foreach (['title', 'copy'] as $field) {
+                $text = $row[$field] ?? null;
+                if (! is_string($text) || trim($text) === '' || preg_match('/\p{Han}/u', $text) === 1) {
+                    throw new RuntimeException('RIASEC English near-tie reader text is invalid.');
+                }
+                $restored['states'][$index][$field] = $source['states'][$index][$field];
+            }
+        }
+        $boundary = $english['user_visible_boundary'] ?? null;
+        if (! is_string($boundary) || trim($boundary) === '' || preg_match('/\p{Han}/u', $boundary) === 1) {
+            throw new RuntimeException('RIASEC English near-tie boundary is invalid.');
+        }
+        if (($english['locale'] ?? null) !== 'en' || ($english['asset_id'] ?? null) !== 'near_tie_alternate_code_copy_v1.en') {
+            throw new RuntimeException('RIASEC English near-tie locale identity is invalid.');
+        }
+        $restored['locale'] = $source['locale'];
+        $restored['asset_id'] = $source['asset_id'];
+        $restored['user_visible_boundary'] = $source['user_visible_boundary'];
+        if ($this->canonicalJson($restored) !== $this->canonicalJson($source)) {
+            throw new RuntimeException('RIASEC English near-tie machine identity is invalid.');
+        }
+    }
+
     public function assertSelectedEnglishSources(array $assets, string $compilerVersion = self::COMPILER_VERSION): void
     {
         foreach (self::sourceContract($compilerVersion) as $filename => $contract) {
@@ -640,19 +681,22 @@ final class RiasecPrivateResultCompileService
         $pairs = $assets['pair_blend_15_pairs_v1.en.jsonl'] ?? [];
         $pairKeys = array_column($pairs, 'pair_key');
         $expectedPairKeys = self::englishPairCoverage($compilerVersion);
-        if (in_array($compilerVersion, ['1.4.0', '1.5.0', '1.6.0', self::COMPILER_VERSION], true)) {
+        if (in_array($compilerVersion, ['1.4.0', '1.5.0', '1.6.0', '1.7.0', self::COMPILER_VERSION], true)) {
             sort($pairKeys, SORT_STRING);
             sort($expectedPairKeys, SORT_STRING);
             $this->assertEnglishPairSources($pairs, $assets['pair_blend_15_pairs_v1.zh-CN.jsonl'] ?? []);
         }
         $top3 = $assets['top3_code_chain_strategy_v1.en.jsonl'] ?? [];
         $runtime = $assets['runtime_surface_copy_v1.en.json'] ?? [];
-        $completeTop3 = in_array($compilerVersion, ['1.5.0', '1.6.0', self::COMPILER_VERSION], true);
-        if (in_array($compilerVersion, ['1.6.0', self::COMPILER_VERSION], true)) {
+        $completeTop3 = in_array($compilerVersion, ['1.5.0', '1.6.0', '1.7.0', self::COMPILER_VERSION], true);
+        if (in_array($compilerVersion, ['1.6.0', '1.7.0', self::COMPILER_VERSION], true)) {
             $this->assertEnglishDisagreeSources($runtime, $assets['runtime_surface_copy_v1.zh-CN.json'] ?? [], $compilerVersion);
         }
-        if ($compilerVersion === self::COMPILER_VERSION) {
+        if (in_array($compilerVersion, ['1.7.0', self::COMPILER_VERSION], true)) {
             $this->assertEnglishAspirationsSources($runtime, $assets['runtime_surface_copy_v1.zh-CN.json'] ?? []);
+        }
+        if ($compilerVersion === self::COMPILER_VERSION) {
+            $this->assertEnglishNearTieSources($assets[self::ENGLISH_NEAR_TIE_ASSET] ?? [], $assets['near_tie_alternate_code_copy_v1.zh-CN.json'] ?? []);
         }
         if ($completeTop3) {
             $this->assertEnglishTop3Sources($top3, $assets['top3_code_chain_strategy_v1.zh-CN.jsonl'] ?? []);

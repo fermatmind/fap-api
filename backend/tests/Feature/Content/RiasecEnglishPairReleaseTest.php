@@ -100,6 +100,11 @@ final class RiasecEnglishPairReleaseTest extends TestCase
         $manifest['compiler'] = $payload['compiler'];
         $manifest['coverage'] = $payload['coverage'];
         $canonical = fn ($value) => (new \ReflectionMethod(Compiler::class, 'canonicalJson'))->invoke(app(Compiler::class), $value);
+        if (! isset(Compiler::sourceContract($payload['compiler']['version'])[Compiler::ENGLISH_NEAR_TIE_ASSET])) {
+            unset($payload['assets'][Compiler::ENGLISH_NEAR_TIE_ASSET], $payload['coverage']['english_selected_sources']['near_tie_states']);
+            $manifest['coverage'] = $payload['coverage'];
+            $manifest['source_files'] = array_values(array_filter($manifest['source_files'], fn ($row) => $row['path'] !== Compiler::ENGLISH_NEAR_TIE_ASSET));
+        }
         foreach ($manifest['source_files'] as &$row) {
             $row = array_merge($row, Compiler::sourceContract('1.3.0')[$row['path']]);
             $row['sha256'] = hash('sha256', $canonical($payload['assets'][$row['path']]));

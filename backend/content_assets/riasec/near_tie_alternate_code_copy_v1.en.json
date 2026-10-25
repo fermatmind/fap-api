@@ -1,0 +1,63 @@
+{
+  "asset_id": "near_tie_alternate_code_copy_v1.en",
+  "asset_status": "content_review_v7_3_final_preflight_candidate",
+  "locale": "en",
+  "scale_code": "RIASEC",
+  "review_status": "content_review_v7_3_final_preflight_candidate",
+  "target_review_status_after_owner_signoff": "owner_signoff_required_before_runtime_import_after_owner_signoff",
+  "states": [
+    {
+      "state": "top1_top2_near_tie",
+      "title": "The top two dimensions are close",
+      "copy": "Use the current Code as your primary reference, while also considering the combination of activity clues with the first two dimensions swapped. You are not \"another Code\"; the two interest entry points are close."
+    },
+    {
+      "state": "top2_top3_near_tie",
+      "title": "The second and third dimensions are close",
+      "copy": "The third dimension is not just a peripheral detail. It may determine whether this combination of activity clues ultimately focuses on materials, expression, real people, goals, or order."
+    },
+    {
+      "state": "multi_near_tie",
+      "title": "Multiple dimensions are close",
+      "copy": "Look at activities first, rather than letters. When multiple dimensions are close, what really helps is using small tasks to observe which kinds of activities appeal to you more."
+    },
+    {
+      "state": "alternate_code_available",
+      "title": "An alternate code to consider",
+      "copy": "An alternate code is a reading aid, not a second answer. It helps you understand how the emphasis within a combination of activity clues shifts across different orders."
+    }
+  ],
+  "user_visible_boundary": "An alternate code is a reference for reading alongside the result. It does not overturn the result, and it is not a new identity label.",
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module"
+}
