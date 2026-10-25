@@ -20,6 +20,21 @@ final class ArticleCmsWriteAuthTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_new_articles_default_to_localized_editorial_without_changing_explicit_authors(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        foreach (['en' => 'FermatMind Editorial', 'zh-CN' => '费马测试编辑部'] as $locale => $expected) {
+            $slug = 'editorial-default-'.strtolower($locale);
+            $response = $this->withSession(['ops_org_id' => 12])->actingAs($admin, (string) config('admin.guard', 'admin'))
+                ->postJson('/api/v0.5/cms/articles', array_merge($this->articlePayload($slug), ['locale' => $locale]));
+            $response->assertStatus(201);
+            $this->assertDatabaseHas('articles', ['slug' => $slug, 'locale' => $locale, 'author_name' => $expected]);
+        }
+        $article = Article::query()->create(['org_id' => 12, 'locale' => 'en', 'slug' => 'explicit-author',
+            'title' => 'Explicit author', 'content_md' => 'Existing body', 'author_name' => 'Existing named author']);
+        $this->assertSame('Existing named author', $article->author_name);
+    }
+
     public function test_unauthenticated_cms_write_is_rejected(): void
     {
         $response = $this->postJson('/api/v0.5/cms/articles', $this->articlePayload());

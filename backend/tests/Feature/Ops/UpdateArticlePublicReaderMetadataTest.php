@@ -15,17 +15,62 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\ScaleRegistry;
 use App\Services\Audit\AuditLogger;
+use App\Services\Cms\ArticlePublicListReadCache;
 use App\Support\CanonicalTranslationPayloadHash as Hash;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use RuntimeException;
 use Tests\TestCase;
 
 final class UpdateArticlePublicReaderMetadataTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_editorial_author_previews_and_updates_only_locked_metadata_then_invalidates_lists(): void
+    {
+        $article = $this->article();
+        $article->forceFill(['author_name' => 'Existing author'])->saveQuietly();
+        $before = Updater::state($article->fresh());
+        $package = $this->package($article->fresh());
+        $package['candidate'] = ['schema_json' => $article->fresh()->seoMeta->schema_json,
+            'article_fields' => ['author_name' => 'FermatMind Editorial']];
+        $generationKey = ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation';
+        Cache::forever($generationKey, 'before-author-update');
+        $exit = $this->runPackage($package);
+        $output = Artisan::output();
+        $this->assertSame(0, $exit, $output);
+        $this->assertJson($output);
+        $preview = json_decode($output, true);
+        $this->assertSame('FermatMind Editorial', $preview['candidate_author_name']);
+        $this->assertArrayHasKey('candidate_jsonld', $preview);
+        $this->assertSame($before, Updater::state($article->fresh()));
+        $this->assertSame('before-author-update', Cache::get($generationKey));
+        $this->assertSame(0, $this->runPackage($package, $this->actor()), Artisan::output());
+        $this->assertNotSame('before-author-update', Cache::get($generationKey));
+        $after = Updater::state($article->fresh());
+        $before['article']['author_name'] = 'FermatMind Editorial';
+        unset($before['article']['updated_at'], $after['article']['updated_at'], $before['seo']['updated_at'], $after['seo']['updated_at']);
+        $this->assertSame($before, $after);
+    }
+
+    public function test_wrong_locale_or_personal_author_is_rejected_and_failure_does_not_invalidate_lists(): void
+    {
+        $article = $this->article();
+        $before = Updater::state($article);
+        $generationKey = ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation';
+        Cache::forever($generationKey, 'before-author-update');
+        foreach (['费马测试编辑部', 'A named person'] as $invalid) {
+            $package = $this->package($article);
+            $package['candidate']['article_fields'] = ['author_name' => $invalid];
+            $this->assertSame(1, $this->runPackage($package, $this->actor()));
+            $this->assertSame('localized_editorial_author_required', json_decode(Artisan::output(), true)['error']);
+            $this->assertSame('before-author-update', Cache::get($generationKey));
+            $this->assertSame($before, Updater::state($article->fresh()));
+        }
+    }
 
     public function test_repeated_default_preflight_preserves_all_native_state(): void
     {
@@ -257,9 +302,12 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $article = $this->article();
         $before = Updater::state($article);
         $p = $this->package($article);
-        $p['candidate']['article_fields'] = ['cover_image_alt' => 'Updated alt'];
+        $p['candidate']['article_fields'] = ['cover_image_alt' => 'Updated alt', 'author_name' => 'FermatMind Editorial'];
+        $generationKey = ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation';
+        Cache::forever($generationKey, 'before-rollback');
         $this->mock(AuditLogger::class)->shouldReceive('log')->once()->andThrow(new RuntimeException('audit_failed'));
         $this->assertSame(1, $this->runPackage($p, $this->actor()));
+        $this->assertSame('before-rollback', Cache::get($generationKey));
         $this->assertSame($before, Updater::state($article->fresh()));
     }
 

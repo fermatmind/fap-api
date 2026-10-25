@@ -556,6 +556,7 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
                 ->with(['workingRevision', 'seoMeta'])
                 ->findOrFail((int) $articleResult['article_id']);
 
+            $this->assertSame($article->locale === 'zh-CN' ? '费马测试编辑部' : 'FermatMind Editorial', $article->author_name);
             $this->assertSame('draft', (string) $article->status);
             $this->assertFalse((bool) $article->is_public);
             $this->assertFalse((bool) $article->is_indexable);

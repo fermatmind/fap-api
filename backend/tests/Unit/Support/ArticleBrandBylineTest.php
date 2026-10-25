@@ -10,6 +10,31 @@ use Tests\TestCase;
 
 final class ArticleBrandBylineTest extends TestCase
 {
+    public function test_editorial_projection_localizes_author_without_renaming_publisher_or_citation(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $fragment = ['@type' => 'Article', 'author' => ['@type' => 'Person', 'name' => 'FermatMind Editorial'],
+            'publisher' => ['@type' => 'Organization', 'name' => 'Fermat Institute'],
+            'citation' => ['@type' => 'Article', 'author' => ['@type' => 'Person', 'name' => 'Research source author']],
+            'datePublished' => '2026-04-23T12:24:03Z'];
+        foreach (['FermatMind Editorial', '费马测试编辑部'] as $original) {
+            foreach (['en' => 'FermatMind Editorial', 'zh-CN' => '费马测试编辑部'] as $locale => $name) {
+                $article = new Article(['author_name' => $original]);
+                foreach ([$fragment, ['@graph' => [$fragment]], ['fragments' => ['article' => $fragment]]] as $payload) {
+                    $projected = ArticleBrandByline::project($payload, $article, $locale);
+                    $result = $projected['@graph'][0] ?? $projected['fragments']['article'] ?? $projected;
+                    $this->assertSame('Organization', $result['author']['@type']);
+                    $this->assertSame($name, $result['author']['name']);
+                    $this->assertSame($locale === 'en' ? 'FermatMind' : '费马测试', $result['publisher']['name']);
+                    $this->assertSame($fragment['citation'], $result['citation']);
+                    $this->assertSame($fragment['datePublished'], $result['datePublished']);
+                }
+                $this->assertSame($original, $article->author_name);
+            }
+        }
+        $this->assertNull(ArticleBrandByline::project(null, new Article(['author_name' => 'FermatMind Editorial']), 'en'));
+    }
+
     public function test_brand_projection_keeps_gate_dates_and_cms_record_unchanged(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);

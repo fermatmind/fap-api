@@ -11,6 +11,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
+use App\Support\ArticleBrandByline;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -185,7 +186,7 @@ final class SeoContentPackageDraftImporter
         $article->forceFill([
             'org_id' => 0,
             'category_id' => (int) $category->id,
-            'author_name' => 'Fermat Institute',
+            'author_name' => ArticleBrandByline::editorialName((string) $item['locale']),
             'reviewer_name' => null,
             'reading_minutes' => $this->readingMinutes($body),
             'slug' => (string) $item['slug'],

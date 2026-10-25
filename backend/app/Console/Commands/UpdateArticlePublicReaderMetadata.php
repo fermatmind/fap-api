@@ -10,6 +10,9 @@ use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ScaleRegistry;
 use App\Services\Audit\AuditLogger;
+use App\Services\Cms\ArticlePublicListReadCache;
+use App\Services\Cms\ArticleSeoService;
+use App\Support\ArticleBrandByline;
 use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\CanonicalTranslationPayloadHash as Hash;
 use App\Support\Rbac\PermissionNames;
@@ -31,7 +34,7 @@ final class UpdateArticlePublicReaderMetadata extends Command
         {--deployed-sha= : Exact active production revision}
         {--confirm= : Exact package bytes SHA-256 for execute}';
 
-    protected $description = 'Merge bounded FAQ, cover alt, reading time and test entry metadata while preserving content, history, pointers and eligibility.';
+    protected $description = 'Merge bounded editorial byline, FAQ, cover alt, reading time and test entry metadata while preserving content, history, pointers and eligibility.';
 
     /** @return array<string,mixed> */
     public static function state(Article $article, bool $lock = false): array
@@ -47,7 +50,7 @@ final class UpdateArticlePublicReaderMetadata extends Command
             'history' => ArticleSourceTargetSnapshot::sourceRevisions($article, [], $lock)];
     }
 
-    public function handle(AuditLogger $logger): int
+    public function handle(AuditLogger $logger, ArticlePublicListReadCache $listCache): int
     {
         $execute = (bool) $this->option('execute');
         $guard = auth((string) config('admin.guard', 'admin'));
@@ -141,7 +144,7 @@ final class UpdateArticlePublicReaderMetadata extends Command
                     }
                 }
                 $fields = (array) data_get($p, 'candidate.article_fields', []);
-                if (array_diff(array_keys($fields), ['cover_image_alt', 'related_test_slug', 'reading_minutes']) !== []) {
+                if (array_diff(array_keys($fields), ['author_name', 'cover_image_alt', 'related_test_slug', 'reading_minutes']) !== []) {
                     throw new RuntimeException('article_metadata_scope_invalid');
                 }
                 foreach ($fields as $key => $value) {
@@ -155,13 +158,24 @@ final class UpdateArticlePublicReaderMetadata extends Command
                     if (! is_string($value) || trim($value) === '' || ($key === 'related_test_slug' && preg_match('/\A[a-z0-9][a-z0-9-]*\z/', $value) !== 1)) {
                         throw new RuntimeException('article_metadata_value_invalid');
                     }
+                    if ($key === 'author_name' && $value !== ArticleBrandByline::editorialName((string) $article->locale)) {
+                        throw new RuntimeException('localized_editorial_author_required');
+                    }
                     if ($key === 'related_test_slug' && ! ScaleRegistry::withoutGlobalScopes()->where('org_id', 0)
                         ->where('is_active', true)->where('is_public', true)->where('primary_slug', $value)->exists()) {
                         throw new RuntimeException('canonical_public_test_required');
                     }
                 }
                 if (! $execute) {
-                    return ['article_id' => $article->id, 'readonly' => true, 'faq_count' => count($items)];
+                    $preview = ['article_id' => $article->id, 'readonly' => true, 'faq_count' => count($items)];
+                    if (array_key_exists('author_name', $fields)) {
+                        $candidate = clone $article;
+                        $candidate->author_name = $fields['author_name'];
+                        $preview['candidate_author_name'] = $candidate->author_name;
+                        $preview['candidate_jsonld'] = app(ArticleSeoService::class)->generateJsonLd($candidate);
+                    }
+
+                    return $preview;
                 }
                 $seo = $article->seoMeta;
                 $seo->schema_json = $schema;
@@ -193,9 +207,15 @@ final class UpdateArticlePublicReaderMetadata extends Command
                 event(new PublicAuthorityChanged('article', (string) $article->id, (string) $article->locale,
                     Hash::hash(self::state($article)), 'authority_revision'));
 
-                return ['article_id' => $article->id, 'readonly' => false, 'readback_passed' => true, 'faq_count' => count($items)];
+                return ['article_id' => $article->id, 'readonly' => false, 'readback_passed' => true, 'faq_count' => count($items),
+                    'author_changed' => array_key_exists('author_name', $fields) && $fields['author_name'] !== ($before['article']['author_name'] ?? null)];
             };
-            $this->line(json_encode(['ok' => true, ...($execute ? DB::transaction($operation) : $operation())], JSON_THROW_ON_ERROR));
+            $result = $execute ? DB::transaction($operation) : $operation();
+            if ($execute && ($result['author_changed'] ?? false)) {
+                $listCache->invalidate();
+            }
+            unset($result['author_changed']);
+            $this->line(json_encode(['ok' => true, ...$result], JSON_THROW_ON_ERROR));
 
             return self::SUCCESS;
         } catch (Throwable $exception) {

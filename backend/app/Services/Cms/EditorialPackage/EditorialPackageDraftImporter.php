@@ -14,6 +14,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Services\Cms\EditorialPackage\Config\EvergreenAnchors;
+use App\Support\ArticleBrandByline;
 use App\Support\PublicMediaUrlGuard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -401,7 +402,7 @@ final class EditorialPackageDraftImporter
             'slug' => Str::slug(trim((string) ($package['slug'] ?? ''))),
             'locale' => trim((string) ($localeOverride ?: ($package['locale'] ?? 'en'))),
             'translation_group_id' => trim((string) ($package['translation_group_id'] ?? '')),
-            'author' => trim((string) ($package['author'] ?? 'Fermat Institute')),
+            'author' => trim((string) ($package['author'] ?? '')) ?: ArticleBrandByline::editorialName(trim((string) ($localeOverride ?: ($package['locale'] ?? 'en')))),
             'intended_status' => trim((string) ($package['intended_status'] ?? 'draft')),
             'body_markdown' => trim($body),
             'references' => $this->stringList($package['references'] ?? []),

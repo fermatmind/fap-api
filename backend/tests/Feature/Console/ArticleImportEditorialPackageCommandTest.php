@@ -94,6 +94,16 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame(0, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_missing_author_defaults_to_localized_editorial_while_explicit_author_is_preserved(): void
+    {
+        foreach (['en' => 'FermatMind Editorial', 'zh-CN' => '费马测试编辑部'] as $locale => $expected) {
+            $package = $this->editorialPackage(['slug' => 'editorial-default-'.strtolower($locale)]);
+            unset($package['author']);
+            $this->artisan('articles:import-editorial-package', ['--file' => $this->writePackage($package), '--locale' => $locale])->assertExitCode(0);
+            $this->assertSame($expected, Article::withoutGlobalScopes()->where('slug', $package['slug'])->value('author_name'));
+        }
+    }
+
     public function test_import_creates_non_public_cms_draft_with_exact_body_metadata_and_answer_surface_boundary(): void
     {
         $package = $this->editorialPackage([
@@ -130,6 +140,7 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertNull($article->published_revision_id);
         $this->assertSame('article_mbti_vs_holland_career_choice_v1', (string) $article->translation_group_id);
         $this->assertSame($package['title'], (string) $article->title);
+        $this->assertSame($package['author'], $article->author_name);
         $this->assertSame($expectedBody, (string) $article->content_md);
         $this->assertFalse(app(ArticleBodyHeadingGuard::class)->containsMarkdownH1((string) $article->content_md));
         $this->assertSame($package['cover_image'], (string) $article->cover_image_url);

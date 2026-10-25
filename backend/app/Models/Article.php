@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Concerns\HasOrgScope;
+use App\Support\ArticleBrandByline;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -111,6 +112,12 @@ class Article extends Model
 
     protected static function booted(): void
     {
+        static::creating(function (Article $article): void {
+            if (trim((string) $article->author_name) === '') {
+                $article->author_name = ArticleBrandByline::editorialName((string) $article->locale);
+            }
+        });
+
         static::saving(function (Article $article): void {
             $article->translation_status = $article->translation_status ?: self::TRANSLATION_STATUS_SOURCE;
 
