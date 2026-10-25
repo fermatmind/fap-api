@@ -110,14 +110,14 @@
     },
     {
       "section_key": "140q_cta",
-      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl"],
+      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl", "content_assets/riasec/140q_task_environment_role_v1.en.jsonl"],
       "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php"],
       "risk": "140Q can be misread as more accurate or as a repair for 60Q",
       "repair_goal": "describe 140Q as a contextual detail layer that does not override 60Q"
     },
     {
       "section_key": "140q_context_cards",
-      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl"],
+      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl", "content_assets/riasec/140q_task_environment_role_v1.en.jsonl"],
       "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php", "app/Services/Riasec/RiasecPublicProjectionService.php"],
       "risk": "task, environment, and role cards can be over-generalized",
       "repair_goal": "make work-daily context specific without comparing raw scores or concluding occupations"
@@ -168,7 +168,7 @@
     },
     {
       "section_key": "140q_layer_copy",
-      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl"],
+      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl", "content_assets/riasec/140q_task_environment_role_v1.en.jsonl"],
       "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php"],
       "risk": "layer copy can drift between task, environment, role, and CTA meanings",
       "repair_goal": "make the three 140Q layers consistent and boundary-safe"
@@ -183,7 +183,7 @@
     },
     {
       "section_key": "structural_difference_copy",
-      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl"],
+      "primary_assets": ["content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl", "content_assets/riasec/140q_task_environment_role_v1.en.jsonl"],
       "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php", "app/Services/Riasec/RiasecPublicProjectionService.php"],
       "risk": "60Q and 140Q differences can be read as better or worse results",
       "repair_goal": "describe emphasis differences without raw-score comparison or override"
@@ -206,6 +206,7 @@
   ],
   "asset_inventory": [
     "content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl",
+    "content_assets/riasec/140q_task_environment_role_v1.en.jsonl",
     "content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl",
     "content_assets/riasec/activity_task_examples_v1.en.jsonl",
     "content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl",
