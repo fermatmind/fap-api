@@ -21,13 +21,18 @@ final class RiasecPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.riasec.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.0.0';
+    public const COMPILER_VERSION = '1.1.0';
+
+    public const ENGLISH_ACTIVITY_ASSET = 'activity_task_examples_v1.en.jsonl';
+
+    public const ENGLISH_ACTIVITY_AUTHORITY_ID = 'FERMATMIND_RIASEC_ACTIVITY_EXAMPLES_EN';
 
     public const ARTIFACT_FILENAME = 'private_result.compiled.json';
 
     /** @var array<string,array{role:string,schema:string,surfaces:list<string>}> */
     public const SOURCE_CONTRACT = [
         '140q_task_environment_role_v1.zh-CN.jsonl' => ['role' => '140q task, environment, and role projection copy', 'schema' => 'riasec.140q_layer_copy.v1', 'surfaces' => ['result', 'report', 'pdf', 'history']],
+        self::ENGLISH_ACTIVITY_ASSET => ['role' => 'English activity and task examples', 'schema' => 'riasec.activity_task_example.v1', 'surfaces' => ['result', 'report']],
         'activity_task_examples_v1.zh-CN.jsonl' => ['role' => 'activity and task examples', 'schema' => 'riasec.activity_task_example.v1', 'surfaces' => ['result', 'report']],
         'aspirations_calibration_v1.zh-CN.jsonl' => ['role' => 'aspiration calibration copy', 'schema' => 'riasec.aspirations_calibration.v1', 'surfaces' => ['result', 'history']],
         'dimension_deep_copy_v1.zh-CN.r3.json' => ['role' => 'six dimension band copy', 'schema' => 'riasec.deep_copy_slot_schema.v1_plus_medium_score_reading_candidate', 'surfaces' => ['result', 'report', 'pdf']],
@@ -81,6 +86,7 @@ final class RiasecPrivateResultCompileService
             $assets[$path] = $decoded;
         }
 
+        $this->assertEnglishActivities($assets[self::ENGLISH_ACTIVITY_ASSET], $assets['activity_task_examples_v1.zh-CN.jsonl']);
         $sourceHash = hash('sha256', $sourceHashInput);
         $coverage = $this->coverage($assets);
         $manifest = [
@@ -205,6 +211,7 @@ final class RiasecPrivateResultCompileService
             'activity_occupation_task' => true,
             'feedback_action' => true,
             'secondary_surfaces' => ['faq', 'technical_note', 'pdf', 'print', 'history', 'compare', 'share', 'lifecycle'],
+            'locale_modules' => ['en' => ['activity_explorer_v0_1']],
         ];
     }
 
@@ -270,6 +277,57 @@ final class RiasecPrivateResultCompileService
             }
             if (! $jsonLines && ($row['locale'] ?? null) !== 'zh-CN') {
                 throw new RuntimeException("RIASEC canonical source locale mismatch: {$location}");
+            }
+        }
+    }
+
+    /** The original 1.0.0 contract remains readable for immutable releases and rollback. */
+    public static function sourceContract(string $compilerVersion): array
+    {
+        return match ($compilerVersion) {
+            '1.0.0' => array_diff_key(self::SOURCE_CONTRACT, [self::ENGLISH_ACTIVITY_ASSET => true]),
+            self::COMPILER_VERSION => self::SOURCE_CONTRACT,
+            default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
+        };
+    }
+
+    /** @param list<array<string,mixed>> $rows @param list<array<string,mixed>> $chineseRows */
+    public function assertEnglishActivities(array $rows, array $chineseRows): void
+    {
+        if (count($rows) !== 18 || count($chineseRows) !== 18) {
+            throw new RuntimeException('RIASEC English activity coverage is incomplete.');
+        }
+        $identities = [];
+        foreach ($rows as $index => $row) {
+            $key = $row['activity_key'] ?? null;
+            if (! is_string($key) || isset($identities[$key])
+                || $key !== ($chineseRows[$index]['activity_key'] ?? null)
+                || ($row['dimensions'] ?? null) !== ($chineseRows[$index]['dimensions'] ?? null)
+                || ($row['schema_version'] ?? null) !== 'riasec.activity_task_example.v1'
+                || ($row['asset_version'] ?? null) !== 'riasec_activity_task_examples_v1.en'
+                || ($row['locale'] ?? null) !== 'en'
+                || ($row['source_status'] ?? null) !== 'content_example_not_registry_match'
+                || ($row['frontend_fallback_allowed'] ?? true) !== false
+                || ($row['not_a_recommendation'] ?? false) !== true
+                || ! is_array($row['task_examples'] ?? null) || count($row['task_examples']) < 3
+                || ! is_array($row['action_duration_options'] ?? null)) {
+                throw new RuntimeException('RIASEC English activity identity or locale contract is invalid.');
+            }
+            $identities[$key] = true;
+            $readerStrings = [($row['activity_label'] ?? null), ($row['low_risk_validation'] ?? null),
+                ...$row['task_examples']];
+            foreach (['15min', '30min', '2h', '1week'] as $duration) {
+                $readerStrings[] = $row['action_duration_options'][$duration] ?? null;
+            }
+            foreach ($readerStrings as $text) {
+                if (! is_string($text) || trim($text) === '' || preg_match('/[\x{3400}-\x{9fff}]/u', $text)) {
+                    throw new RuntimeException('RIASEC English activity reader copy is invalid.');
+                }
+            }
+        }
+        foreach (['R', 'I', 'A', 'S', 'E', 'C'] as $dimension) {
+            if (count(array_filter($rows, static fn (array $row): bool => $row['dimensions'] === [$dimension])) !== 3) {
+                throw new RuntimeException('RIASEC English activity dimension coverage is incomplete.');
             }
         }
     }

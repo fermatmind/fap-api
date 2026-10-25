@@ -44,20 +44,20 @@ final class RiasecActivityExplorerService
         $code = $this->normalizeCode($hollandCode);
         $dimensions = $this->dimensionsForCode($code);
 
-        if ($normalizedLocale === 'en') {
+        if ($normalizedLocale === 'en' && $this->loadActivityTaskAssetRows('en') === []) {
             return $this->unavailableLocalePayload($code, $normalizedLocale);
         }
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
-            'content_version' => self::CONTENT_VERSION,
+            'content_version' => 'activity_task_examples_v1.'.$normalizedLocale,
             'status' => 'content_examples_only',
             'source_status' => self::SOURCE_STATUS,
             'source_name' => self::SOURCE_NAME,
             'locale' => $normalizedLocale,
             'holland_code' => $code,
             'boundary' => [
-                'occupation_examples_label' => $this->occupationExamplesLabel(),
+                'occupation_examples_label' => $normalizedLocale === 'zh-CN' ? $this->occupationExamplesLabel() : '',
                 'occupation_examples_policy' => 'content_example_not_registry_match_without_reviewed_registry_source',
                 'ranking_allowed' => false,
                 'fit_score_allowed' => false,
@@ -68,7 +68,7 @@ final class RiasecActivityExplorerService
                 'occupation_examples_history_default_visible' => false,
                 'registry_source_connected' => false,
             ],
-            'dimension_activity_families' => $this->dimensionFamilies($dimensions, $normalizedLocale),
+            'dimension_activity_families' => $normalizedLocale === 'zh-CN' ? $this->dimensionFamilies($dimensions, $normalizedLocale) : [],
             'code_activity_pack' => $this->codeActivityPack($code, $normalizedLocale),
         ];
     }
@@ -204,7 +204,7 @@ final class RiasecActivityExplorerService
             return [];
         }
 
-        $rows = $this->loadActivityTaskAssetRows();
+        $rows = $this->loadActivityTaskAssetRows($locale);
         if ($rows === []) {
             return [];
         }
@@ -242,22 +242,25 @@ final class RiasecActivityExplorerService
     /**
      * @return list<array{activity_key:string,source_status:string,dimensions:list<string>,activity_label:string,task_examples:list<string>,low_risk_validation:string,action_duration_options:array<string,string>}>
      */
-    private function loadActivityTaskAssetRows(): array
+    private function loadActivityTaskAssetRows(string $locale = 'zh-CN'): array
     {
-        static $cache = [];
+        $filename = 'activity_task_examples_v1.'.$locale.'.jsonl';
+        $assetPath = $this->activityTaskAssetPath;
+        try {
+            $decodedRows = $assetPath === null
+                ? $this->privateResultSource->asset($filename, $locale)
+                : $this->decodeJsonLinesFile($this->resolveAssetPath($assetPath));
+        } catch (\RuntimeException $exception) {
+            if ($exception->getMessage() !== 'RIASEC_PRIVATE_RESULT_LOCALE_UNAVAILABLE') {
+                throw $exception;
+            }
 
-        $assetPath = $this->activityTaskAssetPath ?? 'canonical:'.self::ACTIVITY_TASK_ASSET_PATH;
-        if (array_key_exists($assetPath, $cache)) {
-            return $cache[$assetPath];
+            return [];
         }
-
-        $decodedRows = $this->activityTaskAssetPath === null
-            ? $this->privateResultSource->asset(basename(self::ACTIVITY_TASK_ASSET_PATH))
-            : $this->decodeJsonLinesFile($this->resolveAssetPath($assetPath));
         $rows = [];
         foreach ($decodedRows as $decoded) {
-            if (! is_array($decoded) || ! $this->isValidActivityTaskRow($decoded)) {
-                return $cache[$assetPath] = [];
+            if (! is_array($decoded) || ! $this->isValidActivityTaskRow($decoded, $locale)) {
+                return [];
             }
 
             $rows[] = [
@@ -271,19 +274,20 @@ final class RiasecActivityExplorerService
             ];
         }
 
-        return $cache[$assetPath] = $rows;
+        return $rows;
     }
 
     /**
      * @param  array<string,mixed>  $row
      */
-    private function isValidActivityTaskRow(array $row): bool
+    private function isValidActivityTaskRow(array $row, string $locale = 'zh-CN'): bool
     {
         if (($row['schema_version'] ?? null) !== 'riasec.activity_task_example.v1') {
             return false;
         }
 
-        if (($row['asset_version'] ?? null) !== 'riasec_activity_task_examples_v1.zh-CN') {
+        if (($row['asset_version'] ?? null) !== 'riasec_activity_task_examples_v1.'.$locale
+            || ($locale === 'en' && ($row['locale'] ?? null) !== 'en')) {
             return false;
         }
 
@@ -323,6 +327,7 @@ final class RiasecActivityExplorerService
      */
     private function normalizeFileBackedActivity(array $row, string $locale): array
     {
+        $chineseAuthority = $locale === 'zh-CN';
         $nextExperiments = array_values(array_filter([
             $row['action_duration_options']['15min'] ?? null,
             $row['action_duration_options']['30min'] ?? null,
@@ -332,9 +337,9 @@ final class RiasecActivityExplorerService
         return [
             'activity_key' => $row['activity_key'],
             'riasec_dimensions' => $row['dimensions'],
-            'activity_label' => $locale === 'zh-CN' ? $row['activity_label'] : $row['activity_key'],
+            'activity_label' => $row['activity_label'],
             'activity_user_copy' => $row['low_risk_validation'],
-            'content_version' => self::CONTENT_VERSION,
+            'content_version' => $chineseAuthority ? self::CONTENT_VERSION : 'activity_task_examples_v1.en',
             'evidence_level' => 'backend_authoritative_activity_task_asset',
             'source_status' => $row['source_status'],
             'source_name' => self::SOURCE_NAME,
@@ -343,7 +348,8 @@ final class RiasecActivityExplorerService
             'fit_score_allowed' => false,
             'selection_boundary' => 'activity_example_not_recommendation',
             'task_examples' => $row['task_examples'],
-            'occupation_examples' => $this->occupationExamplesForActivityDimensions($row['dimensions']),
+            ...($chineseAuthority ? [] : ['action_duration_options' => $row['action_duration_options']]),
+            'occupation_examples' => $chineseAuthority ? $this->occupationExamplesForActivityDimensions($row['dimensions']) : [],
             'next_experiments' => $nextExperiments,
         ];
     }

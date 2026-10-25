@@ -465,21 +465,7 @@ final class ContentPackV2Publisher
             throw new RuntimeException('RIASEC_PRIVATE_RESULT_RELEASE_PAYLOAD_INVALID');
         }
 
-        $sourceHash = strtolower(trim((string) ($payload['source_hash'] ?? '')));
-        $compiledHash = strtolower(trim((string) ($payload['compiled_hash'] ?? '')));
-        $artifactHash = strtolower(trim((string) data_get($manifest, 'artifacts.0.sha256', '')));
-        $unsigned = $payload;
-        unset($unsigned['compiled_hash']);
-        $computedCompiledHash = hash('sha256', $this->canonicalJson($unsigned));
-        if (($payload['schema'] ?? null) !== RiasecPrivateResultCompileService::SCHEMA
-            || ($payload['authority_id'] ?? null) !== RiasecPrivateResultCompileService::AUTHORITY_ID
-            || ($payload['version'] ?? null) !== RiasecPrivateResultCompileService::PACK_VERSION
-            || ! hash_equals($sourceHash, strtolower(trim((string) ($manifest['source_hash'] ?? ''))))
-            || ! hash_equals($compiledHash, strtolower(trim((string) ($manifest['compiled_hash'] ?? ''))))
-            || ! hash_equals($compiledHash, $computedCompiledHash)
-            || ! hash_equals($artifactHash, hash('sha256', (string) $artifactBytes))) {
-            throw new RuntimeException('RIASEC_PRIVATE_RESULT_RELEASE_HASH_MISMATCH');
-        }
+        app(\App\Services\Content\RiasecPrivateResultPackLoader::class)->assertPackage($manifest, $payload, $artifactBytes);
     }
 
     private function assertEnneagramPrivateResultReleaseValid(object $release): void

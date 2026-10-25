@@ -16,29 +16,50 @@ final class RiasecPrivateResultPackLoader
     /** @return array{assets:array<string,mixed>,authority:array<string,mixed>,payload:array<string,mixed>} */
     public function load(string $locale = 'zh-CN'): array
     {
-        $normalizedLocale = strtolower(trim($locale));
-        if ($normalizedLocale !== '' && $normalizedLocale !== 'zh' && ! str_starts_with($normalizedLocale, 'zh-')) {
+        return self::localeProjection($this->loadCompiled(), $locale);
+    }
+
+    /** Activity coverage never establishes a complete English report. */
+    public static function localeProjection(array $payload, string $locale): array
+    {
+        $locale = strtolower(trim($locale));
+        $locale = $locale === '' || $locale === 'zh' || str_starts_with($locale, 'zh-') ? 'zh-CN'
+            : ($locale === 'en' || str_starts_with($locale, 'en-') ? 'en' : $locale);
+        $english = $locale === 'en';
+        if ($locale !== 'zh-CN' && (! $english
+            || ($payload['coverage']['locale_modules']['en'] ?? null) !== ['activity_explorer_v0_1']
+            || ! isset($payload['assets'][RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET]))) {
             throw new RuntimeException('RIASEC_PRIVATE_RESULT_LOCALE_UNAVAILABLE');
         }
-
-        $payload = $this->loadCompiled();
+        $assets = (array) $payload['assets'];
+        if ($english) {
+            $assets = [RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET => $assets[RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET]];
+        } else {
+            unset($assets[RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET]);
+        }
 
         return [
-            'assets' => (array) $payload['assets'],
+            'assets' => $assets,
             'payload' => $payload,
             'authority' => [
                 'schema_version' => 'fap.riasec.private_result_authority.v1',
-                'authority_id' => RiasecPrivateResultCompileService::AUTHORITY_ID,
+                'authority_id' => $english ? RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_AUTHORITY_ID : RiasecPrivateResultCompileService::AUTHORITY_ID,
                 'mode' => 'canonical',
-                'locale' => 'zh-CN',
+                'locale' => $locale,
                 'source_hash' => (string) $payload['source_hash'],
                 'compiled_hash' => (string) $payload['compiled_hash'],
                 'compiled_schema' => RiasecPrivateResultCompileService::SCHEMA,
-                'compiler_schema' => RiasecPrivateResultCompileService::COMPILER_SCHEMA,
-                'compiler_version' => RiasecPrivateResultCompileService::COMPILER_VERSION,
-                'runtime_contract' => (string) $payload['runtime_contract'],
+                'compiler_schema' => (string) $payload['compiler']['schema'],
+                'compiler_version' => (string) $payload['compiler']['version'],
+                'runtime_contract' => $english ? 'riasec.activity_explorer.v0.1' : (string) $payload['runtime_contract'],
             ],
         ];
+    }
+
+    public function assertPackage(array $manifest, array $payload, string $artifactBytes): void
+    {
+        $this->assertValid($payload);
+        $this->assertManifestValid($manifest, $payload, $artifactBytes);
     }
 
     /** @return array<string,mixed> */
@@ -66,8 +87,7 @@ final class RiasecPrivateResultPackLoader
             if (! is_array($manifest)) {
                 throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_MANIFEST_INVALID');
             }
-            $this->assertValid($payload);
-            $this->assertManifestValid($manifest, $payload, $artifactBytes);
+            $this->assertPackage($manifest, $payload, $artifactBytes);
 
             return $payload;
         }
@@ -89,6 +109,7 @@ final class RiasecPrivateResultPackLoader
         $compiledHash = strtolower(trim((string) ($payload['compiled_hash'] ?? '')));
         $compiler = is_array($payload['compiler'] ?? null) ? $payload['compiler'] : [];
         $coverage = is_array($payload['coverage'] ?? null) ? $payload['coverage'] : [];
+        $contract = RiasecPrivateResultCompileService::sourceContract((string) ($compiler['version'] ?? ''));
         if (($payload['schema'] ?? null) !== RiasecPrivateResultCompileService::SCHEMA
             || ($payload['authority_id'] ?? null) !== RiasecPrivateResultCompileService::AUTHORITY_ID
             || ($payload['scale_code'] ?? null) !== 'RIASEC'
@@ -96,11 +117,10 @@ final class RiasecPrivateResultPackLoader
             || ($payload['version'] ?? null) !== RiasecPrivateResultCompileService::PACK_VERSION
             || ($payload['runtime_contract'] ?? null) !== 'riasec.report.v1'
             || ($compiler['schema'] ?? null) !== RiasecPrivateResultCompileService::COMPILER_SCHEMA
-            || ($compiler['version'] ?? null) !== RiasecPrivateResultCompileService::COMPILER_VERSION
             || preg_match('/\A[0-9a-f]{64}\z/', $sourceHash) !== 1
             || preg_match('/\A[0-9a-f]{64}\z/', $compiledHash) !== 1
             || ! is_array($payload['assets'] ?? null)
-            || count((array) $payload['assets']) !== count(RiasecPrivateResultCompileService::SOURCE_CONTRACT)
+            || count((array) $payload['assets']) !== count($contract)
             || ($coverage['dimensions'] ?? null) !== ['R', 'I', 'A', 'S', 'E', 'C']
             || (int) ($coverage['pair_count'] ?? 0) !== 15
             || ($coverage['forms'] ?? null) !== ['riasec_60', 'riasec_140']) {
@@ -108,13 +128,13 @@ final class RiasecPrivateResultPackLoader
         }
 
         $assetNames = array_keys((array) $payload['assets']);
-        $expectedAssetNames = array_keys(RiasecPrivateResultCompileService::SOURCE_CONTRACT);
+        $expectedAssetNames = array_keys($contract);
         sort($assetNames, SORT_STRING);
         sort($expectedAssetNames, SORT_STRING);
         if ($assetNames !== $expectedAssetNames) {
             throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
         }
-        foreach (RiasecPrivateResultCompileService::SOURCE_CONTRACT as $filename => $contract) {
+        foreach ($contract as $filename => $sourceContract) {
             $asset = $payload['assets'][$filename];
             $rows = str_ends_with($filename, '.jsonl') ? $asset : [$asset];
             if (! is_array($asset) || $rows === []) {
@@ -123,11 +143,20 @@ final class RiasecPrivateResultPackLoader
             foreach ($rows as $row) {
                 if (! is_array($row)
                     || ($row['frontend_fallback_allowed'] ?? true) !== false
-                    || (isset($row['schema_version']) && $row['schema_version'] !== $contract['schema'])
+                    || (isset($row['schema_version']) && $row['schema_version'] !== $sourceContract['schema'])
                     || (! isset($row['schema_version']) && trim((string) ($row['asset_id'] ?? '')) === '')) {
                     throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
                 }
             }
+        }
+
+        if (isset($contract[RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET])) {
+            if (($coverage['locale_modules']['en'] ?? null) !== ['activity_explorer_v0_1']) {
+                throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
+            }
+            $this->compiler->assertEnglishActivities($payload['assets'][RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET], $payload['assets']['activity_task_examples_v1.zh-CN.jsonl']);
+        } elseif (isset($coverage['locale_modules'])) {
+            throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
         }
 
         $unsigned = $payload;
@@ -140,6 +169,7 @@ final class RiasecPrivateResultPackLoader
     /** @param array<string,mixed> $manifest @param array<string,mixed> $payload */
     private function assertManifestValid(array $manifest, array $payload, string $artifactBytes): void
     {
+        $contract = RiasecPrivateResultCompileService::sourceContract((string) ($payload['compiler']['version'] ?? ''));
         $sourceHashInput = '';
         $sourceRows = [];
         foreach ((array) ($manifest['source_files'] ?? []) as $row) {
@@ -147,13 +177,13 @@ final class RiasecPrivateResultPackLoader
                 $sourceRows[$row['path']] = $row;
             }
         }
-        foreach (RiasecPrivateResultCompileService::SOURCE_CONTRACT as $filename => $contract) {
+        foreach ($contract as $filename => $sourceContract) {
             $row = $sourceRows[$filename] ?? [];
             $digest = hash('sha256', $this->canonicalJson($payload['assets'][$filename]));
             if (($row['required'] ?? false) !== true
-                || ($row['role'] ?? null) !== $contract['role']
-                || ($row['schema'] ?? null) !== $contract['schema']
-                || ($row['surfaces'] ?? null) !== $contract['surfaces']
+                || ($row['role'] ?? null) !== $sourceContract['role']
+                || ($row['schema'] ?? null) !== $sourceContract['schema']
+                || ($row['surfaces'] ?? null) !== $sourceContract['surfaces']
                 || ! hash_equals($digest, strtolower(trim((string) ($row['sha256'] ?? ''))))) {
                 throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_MANIFEST_CONTRACT_INVALID');
             }
@@ -165,7 +195,10 @@ final class RiasecPrivateResultPackLoader
         if (($manifest['schema'] ?? null) !== RiasecPrivateResultCompileService::MANIFEST_SCHEMA
             || ($manifest['authority_id'] ?? null) !== RiasecPrivateResultCompileService::AUTHORITY_ID
             || ($manifest['version'] ?? null) !== RiasecPrivateResultCompileService::PACK_VERSION
-            || count($sourceRows) !== count(RiasecPrivateResultCompileService::SOURCE_CONTRACT)
+            || ($manifest['compiler'] ?? null) !== ($payload['compiler'] ?? null)
+            || ($manifest['coverage'] ?? null) !== ($payload['coverage'] ?? null)
+            || count((array) ($manifest['source_files'] ?? [])) !== count($contract)
+            || count($sourceRows) !== count($contract)
             || ! hash_equals($sourceHash, strtolower(trim((string) ($manifest['source_hash'] ?? ''))))
             || ! hash_equals($sourceHash, strtolower(trim((string) ($payload['source_hash'] ?? ''))))
             || ! hash_equals(strtolower(trim((string) ($payload['compiled_hash'] ?? ''))), strtolower(trim((string) ($manifest['compiled_hash'] ?? ''))))

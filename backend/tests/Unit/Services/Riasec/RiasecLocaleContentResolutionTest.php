@@ -14,7 +14,7 @@ use Tests\TestCase;
 
 final class RiasecLocaleContentResolutionTest extends TestCase
 {
-    public function test_english_deep_activity_feedback_and_lifecycle_content_fail_closed_without_chinese_fallback(): void
+    public function test_english_activity_is_available_while_unselected_deep_feedback_and_lifecycle_fail_closed(): void
     {
         $registry = app(RiasecDeepCopySlotRegistry::class);
         $deepSlot = $registry->resolveForLocale($registry->resolveDimensionSlot('R'), 'en-US');
@@ -27,9 +27,9 @@ final class RiasecLocaleContentResolutionTest extends TestCase
 
         $activity = app(RiasecActivityExplorerService::class)->build('IAS', 'en-US');
         $this->assertSame('en', $activity['locale']);
-        $this->assertSame('unavailable', $activity['status']);
+        $this->assertSame('content_examples_only', $activity['status']);
         $this->assertSame([], $activity['dimension_activity_families']);
-        $this->assertSame([], $activity['code_activity_pack']['activities']);
+        $this->assertCount(9, $activity['code_activity_pack']['activities']);
 
         $result = $this->resultFixture();
         $feedback = app(RiasecExplorationFeedbackOverlayService::class)->build($result, $this->projectionFixture(), true, 'en-US');
@@ -63,7 +63,8 @@ final class RiasecLocaleContentResolutionTest extends TestCase
         $this->assertSame('en', $projection['locale']);
         $this->assertSame('en', $projection['deep_content_slots_v1']['locale']);
         $this->assertSame([], $projection['deep_content_slots_v1']['slots']);
-        $this->assertSame('unavailable', $projection['activity_explorer_v0_1']['status']);
+        $this->assertSame('content_examples_only', $projection['activity_explorer_v0_1']['status']);
+        $this->assertNull($projection['private_result_authority']);
         $this->assertSame('unavailable', $projection['exploration_feedback_overlay_v0_1']['action_lab_v1']['status']);
         $this->assertSame('unavailable', $projection['lifecycle_copy_v1']['status']);
 
