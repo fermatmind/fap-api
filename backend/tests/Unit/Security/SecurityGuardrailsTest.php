@@ -23,6 +23,9 @@ final class SecurityGuardrailsTest extends TestCase
         '/api/v0.2/{any?}',
         '/api/v0.3/webhooks/payment/{provider}',
         '/api/v0.3/auth/guest',
+        // Anonymous game creation and guessing use scoped browser capabilities, not account sessions.
+        '/api/v0.3/friendship/challenges',
+        '/api/v0.3/friendship/challenges/{id}/entries',
         // Account bootstrap verifies signed Google credentials or one-time email proofs, not an existing session.
         '/api/v0.3/auth/google/challenge',
         '/api/v0.3/auth/google',
@@ -62,6 +65,7 @@ final class SecurityGuardrailsTest extends TestCase
         'AdminAuth',
         'IntegrationsIngestAuth',
         'PartnerApiKeyAuth',
+        'FriendshipOwnerAuth',
     ];
 
     /**

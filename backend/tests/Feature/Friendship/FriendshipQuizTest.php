@@ -69,6 +69,8 @@ final class FriendshipQuizTest extends TestCase
         $this->assertSame($this->payload['question_ids'], array_column($public['questions'], 'id'));
         $this->withToken($this->friend)->getJson($url.'/manage')->assertNotFound();
         $this->withToken($this->friend)->deleteJson($url.'/manage')->assertNotFound();
+        $this->withToken($this->friend)->patchJson($url.'/manage', ['closed' => true])->assertNotFound();
+        $this->withToken('')->patchJson($url.'/manage', ['closed' => true])->assertUnauthorized();
         $this->withToken($this->owner)->getJson($url.'/manage')->assertOk()->assertJsonPath('answers.0', 0);
     }
 

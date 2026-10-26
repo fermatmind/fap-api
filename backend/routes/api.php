@@ -174,9 +174,9 @@ Route::prefix('v0.3')->middleware([
         Route::get('/challenges/{id}', 'show')->whereUuid('id');
         Route::post('/challenges/{id}/entries', 'submit')->whereUuid('id')->middleware('throttle:10,1');
         Route::get('/challenges/{id}/result', 'result')->whereUuid('id');
-        Route::get('/challenges/{id}/manage', 'manage')->whereUuid('id');
-        Route::patch('/challenges/{id}/manage', 'update')->whereUuid('id')->middleware('throttle:20,1');
-        Route::delete('/challenges/{id}/manage', 'destroy')->whereUuid('id')->middleware('throttle:10,1');
+        Route::get('/challenges/{id}/manage', 'manage')->whereUuid('id')->middleware(\App\Http\Middleware\FriendshipOwnerAuth::class);
+        Route::patch('/challenges/{id}/manage', 'update')->whereUuid('id')->middleware([\App\Http\Middleware\FriendshipOwnerAuth::class, 'throttle:20,1']);
+        Route::delete('/challenges/{id}/manage', 'destroy')->whereUuid('id')->middleware([\App\Http\Middleware\FriendshipOwnerAuth::class, 'throttle:10,1']);
     });
 
     $payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'apple_iap', 'alipay'];

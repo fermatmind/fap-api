@@ -1416,6 +1416,181 @@
                 ]
             }
         },
+        "/api/v0.3/friendship/catalog": {
+            "get": {
+                "operationId": "get_api_v0_3_friendship_catalog",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@catalog",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            }
+        },
+        "/api/v0.3/friendship/challenges": {
+            "post": {
+                "operationId": "post_api_v0_3_friendship_challenges",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@create",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:10,1"
+                ]
+            }
+        },
+        "/api/v0.3/friendship/challenges/{id}": {
+            "get": {
+                "operationId": "get_api_v0_3_friendship_challenges_id_",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            }
+        },
+        "/api/v0.3/friendship/challenges/{id}/entries": {
+            "post": {
+                "operationId": "post_api_v0_3_friendship_challenges_id_entries",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@submit",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:10,1"
+                ]
+            }
+        },
+        "/api/v0.3/friendship/challenges/{id}/manage": {
+            "delete": {
+                "operationId": "delete_api_v0_3_friendship_challenges_id_manage",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@destroy",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FriendshipOwnerAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:10,1"
+                ]
+            },
+            "get": {
+                "operationId": "get_api_v0_3_friendship_challenges_id_manage",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@manage",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FriendshipOwnerAuth"
+                ]
+            },
+            "patch": {
+                "operationId": "patch_api_v0_3_friendship_challenges_id_manage",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@update",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FriendshipOwnerAuth",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:20,1"
+                ]
+            }
+        },
+        "/api/v0.3/friendship/challenges/{id}/result": {
+            "get": {
+                "operationId": "get_api_v0_3_friendship_challenges_id_result",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@result",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            }
+        },
+        "/api/v0.3/friendship/stats": {
+            "get": {
+                "operationId": "get_api_v0_3_friendship_stats",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@stats",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:30,1"
+                ]
+            }
+        },
         "/api/v0.3/iq-owner-original-30/assets/{path}": {
             "get": {
                 "operationId": "api.v0_3.iq_owner_original_30.assets.show",
