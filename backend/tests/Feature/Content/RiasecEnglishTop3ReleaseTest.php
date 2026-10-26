@@ -113,6 +113,10 @@ final class RiasecEnglishTop3ReleaseTest extends TestCase
         $compiled = app(Compiler::class)->compile();
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
+        // Rebuild immutable releases with their original reader copy, not today's source.
+        foreach (json_decode(file_get_contents(base_path('tests/Fixtures/riasec_activity_reader_copy_precleanup.v1.json')), true, 512, JSON_THROW_ON_ERROR) as $original) {
+            data_set($payload['assets'][Compiler::ENGLISH_ACTIVITY_ASSET], $original['row'].'.'.$original['path'], $original['copy']);
+        }
         $payload['compiler']['version'] = '1.4.0';
         $payload['assets']['top3_code_chain_strategy_v1.en.jsonl'] = array_slice($payload['assets']['top3_code_chain_strategy_v1.en.jsonl'], 0, 1);
         $runtime = &$payload['assets']['runtime_surface_copy_v1.en.json'];

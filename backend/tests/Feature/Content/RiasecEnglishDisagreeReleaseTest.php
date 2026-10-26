@@ -124,6 +124,10 @@ final class RiasecEnglishDisagreeReleaseTest extends TestCase
     public function test_original_1_5_package_and_existing_slots_remain_identical(): void
     {
         $compiled = app(Compiler::class)->compile();
+        // Rebuild immutable releases with their original reader copy, not today's source.
+        foreach (json_decode(file_get_contents(base_path('tests/Fixtures/riasec_activity_reader_copy_precleanup.v1.json')), true, 512, JSON_THROW_ON_ERROR) as $original) {
+            data_set($compiled['payload']['assets'][Compiler::ENGLISH_ACTIVITY_ASSET], $original['row'].'.'.$original['path'], $original['copy']);
+        }
         $runtime = &$compiled['payload']['assets']['runtime_surface_copy_v1.en.json'];
         unset($runtime['generic_slots']['disagree'], $runtime['generic_slots']['aspirations'], $runtime['boundaries']);
         unset($runtime);

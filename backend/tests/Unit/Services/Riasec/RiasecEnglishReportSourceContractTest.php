@@ -194,9 +194,19 @@ final class RiasecEnglishReportSourceContractTest extends TestCase
         $c = app(Compiler::class)->compile();
         $p = $c['payload'];
         $m = $c['manifest'];
+        // Rebuild immutable releases with their original reader copy, not today's source.
+        foreach (json_decode(file_get_contents(base_path('tests/Fixtures/riasec_activity_reader_copy_precleanup.v1.json')), true, 512, JSON_THROW_ON_ERROR) as $original) {
+            data_set($p['assets'][Compiler::ENGLISH_ACTIVITY_ASSET], $original['row'].'.'.$original['path'], $original['copy']);
+        }
         $p['compiler']['version'] = '1.8.0';
         unset($p['assets'][Contract::SURFACE_ASSET], $p['coverage']['english_report_sources'], $p['compiled_hash']);
         $m['source_files'] = array_values(array_filter($m['source_files'], fn ($row) => $row['path'] !== Contract::SURFACE_ASSET));
+        foreach ($m['source_files'] as &$row) {
+            if ($row['path'] === Compiler::ENGLISH_ACTIVITY_ASSET) {
+                $row['sha256'] = Contract::digest($p['assets'][Compiler::ENGLISH_ACTIVITY_ASSET]);
+            }
+        }
+        unset($row);
         $p['source_hash'] = $m['source_hash'] = $m['content_hash'] = hash('sha256', implode('', array_map(fn ($row) => $row['path']."\0".$row['sha256']."\n", $m['source_files'])));
         $p['compiled_hash'] = $m['compiled_hash'] = Contract::digest($p);
         $m['compiler'] = $p['compiler'];
