@@ -349,6 +349,107 @@ final class ArticlePublishedSourceReviewTest extends TestCase
         return app(ArticleTranslationOpsService::class)->dashboard(['slug' => $source->slug])['groups'][0];
     }
 
+    public function test_console_consumes_current_published_pair_review_without_rewriting_historical_hashes(): void
+    {
+        [$source, $target] = $this->differentSourcePair();
+        $before = $this->rows($source, $target);
+        $this->assertTrue($this->consoleLocale($source, $target)['is_published_stale']);
+        $service = app(ArticlePublishedSourceReviewService::class);
+        Livewire::test(EditArticle::class, ['record' => $target->id])
+            ->callAction('confirmPublishedSourceReview', [...$service->prepare($target), 'source_reviewed' => true])
+            ->assertHasNoActionErrors();
+        $locale = $this->consoleLocale($source, $target);
+        $this->assertFalse($locale['is_stale']);
+        $this->assertFalse($locale['is_published_stale']);
+        $this->assertTrue($locale['is_freshness_known']);
+        $this->assertFalse($locale['preflight']['ok']);
+        $this->assertStringContainsString('editorial approval missing', implode(' ', $locale['preflight']['blockers']));
+        $this->assertStringContainsString('historical source fingerprint retained', implode(' ', $locale['compare_summary']));
+        $this->assertStringNotContainsString('source/target hash current', implode(' ', $locale['compare_summary']));
+        $actor = (string) auth('admin')->id();
+        Livewire::test(EditorialReviewPage::class)
+            ->set('ownerAssignments.article_'.$source->id, $actor)->call('assignOwnerItem', 'article', $source->id)
+            ->set('reviewerAssignments.article_'.$source->id, $actor)->call('assignReviewerItem', 'article', $source->id)
+            ->call('submitItem', 'article', $source->id)->call('approveItem', 'article', $source->id)
+            ->assertHasNoErrors();
+        $locale = $this->consoleLocale($source, $target);
+        $this->assertFalse($locale['is_stale']);
+        $this->assertTrue($locale['preflight']['ok'], implode(' ', $locale['preflight']['blockers']));
+        $this->assertSame($before, $this->rows($source, $target));
+        $this->assertDatabaseCount('article_translation_revisions', 3);
+        $this->assertNotSame($source->source_version_hash, $target->publishedRevision->translated_from_version_hash);
+    }
+
+    #[DataProvider('opsInvalidCurrentPairs')]
+    public function test_console_rejects_changed_or_incomplete_current_pair_evidence(string $case): void
+    {
+        [$source, $target] = $this->differentSourcePair();
+        $service = app(ArticlePublishedSourceReviewService::class);
+        $service->confirm($target, [...$service->prepare($target), 'source_reviewed' => true]);
+        $this->assertFalse($this->consoleLocale($source, $target)['is_stale']);
+        match ($case) {
+            'source_body' => $source->forceFill(['content_md' => 'Changed source'])->saveQuietly(),
+            'source_metadata' => $source->forceFill(['related_test_slug' => 'another-test'])->saveQuietly(),
+            'source_seo' => $source->seoMeta->forceFill(['seo_title' => 'Changed source SEO'])->saveQuietly(),
+            'target_seo' => $target->seoMeta->forceFill(['seo_title' => 'Changed target SEO'])->saveQuietly(),
+            'target_history' => $target->publishedRevision->forceFill(['translated_from_version_hash' => str_repeat('b', 64)])->saveQuietly(),
+            'target_private_working' => $target->forceFill(['working_revision_id' => null])->saveQuietly(),
+            'separate_private_working' => $target->forceFill(['working_revision_id' => ArticleTranslationRevision::withoutGlobalScopes()->where('article_id', $target->id)->where('id', '!=', $target->published_revision_id)->sole()->id])->saveQuietly(),
+            'source_pointer' => $source->forceFill(['working_revision_id' => null])->saveQuietly(),
+            'missing_audit' => AuditLog::withoutGlobalScopes()->where('action', 'article_published_source_reviewed')->delete(),
+            'incomplete_evidence' => DB::table('review_attestation_target_evidences')->where('review_attestation_id', ReviewAttestation::sole()->id)->limit(1)->delete(),
+        };
+        $this->assertTrue($this->consoleLocale($source, $target)['is_stale']);
+    }
+
+    public static function opsInvalidCurrentPairs(): array
+    {
+        return array_map(fn ($case): array => [$case], ['source_body', 'source_metadata', 'source_seo', 'target_seo', 'target_history',
+            'target_private_working', 'separate_private_working', 'source_pointer', 'missing_audit', 'incomplete_evidence']);
+    }
+
+    #[DataProvider('nonApprovedSourceStates')]
+    public function test_current_pair_review_does_not_replace_source_editorial_approval(string $state): void
+    {
+        [$source, $target] = $this->differentSourcePair();
+        $actor = (int) auth('admin')->id();
+        EditorialReviewAudit::assignOwner($actor, 'article', $source);
+        EditorialReviewAudit::assignReviewer($actor, 'article', $source);
+        EditorialReviewAudit::submit('article', $source);
+        EditorialReviewAudit::mark('approved', 'article', $source);
+        $service = app(ArticlePublishedSourceReviewService::class);
+        $service->confirm($target, [...$service->prepare($target), 'source_reviewed' => true]);
+        if ($state === 'missing') {
+            EditorialReview::withoutGlobalScopes()->delete();
+        } else {
+            EditorialReview::withoutGlobalScopes()->update(['workflow_state' => $state]);
+        }
+        $locale = $this->consoleLocale($source, $target);
+        $this->assertFalse($locale['is_stale']);
+        $this->assertFalse($locale['preflight']['ok']);
+        $this->assertStringContainsString('editorial approval missing', implode(' ', $locale['preflight']['blockers']));
+    }
+
+    public static function nonApprovedSourceStates(): array
+    {
+        return [['missing'], ['ready'], ['rejected'], ['changes_requested']];
+    }
+
+    private function consoleLocale(Article $source, Article $target): array
+    {
+        return collect($this->metadataDashboard($source)['locales'])->firstWhere('article_id', $target->id);
+    }
+
+    private function differentSourcePair(): array
+    {
+        [$source, $target] = $this->metadataDriftPair();
+        $source->forceFill(['related_test_slug' => null])->saveQuietly();
+        $target->publishedRevision->forceFill(['source_version_hash' => str_repeat('a', 64), 'translated_from_version_hash' => str_repeat('a', 64)])->saveQuietly();
+        $target->forceFill(['translated_from_version_hash' => str_repeat('a', 64)])->saveQuietly();
+
+        return [$source->fresh(['workingRevision', 'publishedRevision', 'seoMeta']), $target->fresh(['workingRevision', 'publishedRevision', 'seoMeta'])];
+    }
+
     private function metadataDriftPair(): array
     {
         [$source, $target] = $this->fixture();

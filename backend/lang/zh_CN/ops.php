@@ -762,6 +762,7 @@ return [
             'source_changed_after_target_revision' => '源文在目标版本后发生变化',
             'source_target_hash_current' => '源文与目标哈希当前一致',
             'current_source_metadata_reviewed' => '当前源文与元数据已复核；保留历史指纹 :recorded；当前字段指纹 :computed。',
+            'current_published_source_reviewed' => '当前已发布译文已与当前源文复核；历史来源指纹保留。',
             'published_revision_stale' => '已发布版本过期',
             'working_revision_is_published_revision' => '工作版本就是发布版本',
             'working_revision_differs_from_published_revision' => '工作版本不同于最近发布版本',

@@ -762,6 +762,7 @@ return [
             'source_changed_after_target_revision' => 'source changed after target revision',
             'source_target_hash_current' => 'source/target hash current',
             'current_source_metadata_reviewed' => 'Current source and metadata reviewed; historical fingerprint :recorded retained; current field fingerprint :computed.',
+            'current_published_source_reviewed' => 'Current published translation reviewed against the current source; historical source fingerprint retained.',
             'published_revision_stale' => 'published revision is stale',
             'working_revision_is_published_revision' => 'working revision is published revision',
             'working_revision_differs_from_published_revision' => 'working revision differs from latest published revision',

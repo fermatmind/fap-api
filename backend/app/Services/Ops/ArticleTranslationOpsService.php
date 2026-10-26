@@ -186,10 +186,17 @@ final class ArticleTranslationOpsService
         $isFreshnessKnown = $isWorkingKnown && (! $isPublished || $isPublishedKnown);
         $isPublishedStale = ! $isSource && $isPublished && filled($publishedSourceHash) && filled($publishedHash)
             && ! hash_equals((string) $publishedSourceHash, (string) $publishedHash);
+        $reviewedPublishedSource = ! $isSource
+            && ($isWorkingStale || $isPublishedStale || $status === Article::TRANSLATION_STATUS_STALE)
+            && app(ArticlePublishedSourceReviewService::class)->hasCurrentReview($article);
+        if ($reviewedPublishedSource) {
+            $isWorkingStale = false;
+            $isPublishedStale = false;
+        }
         $hasSeparateWorkingRevision = $workingRevision instanceof ArticleTranslationRevision
             && (! $publishedRevision instanceof ArticleTranslationRevision || (int) $workingRevision->id !== (int) $publishedRevision->id);
         $isDraftStale = ! $isSource && $isWorkingStale && (! $isPublished || $hasSeparateWorkingRevision);
-        if (! $isSource && $status === Article::TRANSLATION_STATUS_STALE) {
+        if (! $isSource && $status === Article::TRANSLATION_STATUS_STALE && ! $reviewedPublishedSource) {
             if ($isPublished) {
                 $isPublishedStale = true;
             } else {
@@ -247,7 +254,7 @@ final class ArticleTranslationOpsService
             'ownership_issues' => $ownershipIssues,
             'edit_url' => ArticleResource::getUrl('edit', ['record' => $article]),
             'revision_history' => $this->revisionHistory($articleRevisions),
-            'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isWorkingStale, $isPublishedStale, $isWorkingKnown, $reviewedMetadataDrift),
+            'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isWorkingStale, $isPublishedStale, $isWorkingKnown, $reviewedMetadataDrift, $reviewedPublishedSource),
             'preflight' => $this->localizedPreflight($preflight),
             'has_non_stale_blockers' => $hasNonStaleBlockers,
             'actions' => $this->localeActions($article, $status, $isWorkingStale, $isSource),
@@ -633,7 +640,8 @@ final class ArticleTranslationOpsService
         bool $isWorkingStale,
         bool $isPublishedStale,
         bool $isWorkingKnown,
-        bool $reviewedMetadataDrift
+        bool $reviewedMetadataDrift,
+        bool $reviewedPublishedSource
     ): array {
         $summary = [];
         $summary[] = __('ops.translation_ops.compare.source_hash', ['hash' => $this->shortHash($sourceHash) ?? __('ops.status.missing')]);
@@ -643,11 +651,16 @@ final class ArticleTranslationOpsService
                 'recorded' => $this->shortHash($source?->source_version_hash),
                 'computed' => $source ? $this->shortHash($source->computeSourceVersionHash()) : null,
             ])
+            : ($reviewedPublishedSource
+            ? __('ops.translation_ops.compare.current_published_source_reviewed')
             : ($isWorkingStale
             ? __('ops.translation_ops.compare.source_changed_after_target_revision')
             : ($isWorkingKnown
                 ? __('ops.translation_ops.compare.source_target_hash_current')
-                : __('ops.translation_ops.compare.source_hash_unverified')));
+                : __('ops.translation_ops.compare.source_hash_unverified'))));
+        if ($reviewedMetadataDrift && $reviewedPublishedSource) {
+            $summary[] = __('ops.translation_ops.compare.current_published_source_reviewed');
+        }
         if ($isPublishedStale) {
             $summary[] = __('ops.translation_ops.compare.published_revision_stale');
         }
