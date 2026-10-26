@@ -310,13 +310,16 @@ final class ArticleSeoGateRollout
             }
 
             foreach (['en', 'zh-CN'] as $locale) {
-                $sibling = Article::query()
-                    ->withoutGlobalScopes()
-                    ->where('org_id', (int) $article->org_id)
-                    ->where('translation_group_id', (string) $article->translation_group_id)
-                    ->where('locale', $locale)
-                    ->publiclyIndexable()
-                    ->first();
+                $reviewedPair = app(ArticleReviewedCounterpartService::class)->resolve($article);
+                $sibling = $reviewedPair !== null
+                    ? collect($reviewedPair)->first(fn (Article $member): bool => $member->locale === $locale)
+                    : Article::query()
+                        ->withoutGlobalScopes()
+                        ->where('org_id', (int) $article->org_id)
+                        ->where('translation_group_id', (string) $article->translation_group_id)
+                        ->where('locale', $locale)
+                        ->publiclyIndexable()
+                        ->first();
 
                 if (! $sibling instanceof Article) {
                     $errors[] = $this->issue('article.'.$article->id.'.hreflang', 'hreflang_counterpart_not_found', 'Hreflang counterpart article was not found.', [
@@ -378,25 +381,26 @@ final class ArticleSeoGateRollout
             if ($held || ($gate['enabled'] ?? null) !== true
                 || ($gate['policy'] ?? null) !== 'reciprocal_counterparts_verified'
                 || isset($gate['reason'])) {
-                $package['hreflang_gate_v1'] = [
+                $package['hreflang_gate_v1'] = array_replace($gate, [
                     'enabled' => true,
                     'policy' => 'reciprocal_counterparts_verified',
                     'verified_by' => 'articles:seo-gate-rollout',
                     'verified_at' => now()->toIso8601String(),
-                ];
+                ]);
+                unset($package['hreflang_gate_v1']['reason']);
             }
         } elseif ((bool) ($options['no_hreflang_policy'] ?? false)) {
             $reason = trim((string) ($options['hreflang_policy_reason'] ?? 'no_verified_reciprocal_counterpart'));
             unset($package['hreflang_hold']);
             if ($held || ($gate['enabled'] ?? null) !== false || ($gate['policy'] ?? null) !== 'no_hreflang'
                 || ($gate['reason'] ?? null) !== $reason) {
-                $package['hreflang_gate_v1'] = [
+                $package['hreflang_gate_v1'] = array_replace($gate, [
                     'enabled' => false,
                     'policy' => 'no_hreflang',
                     'reason' => $reason,
                     'recorded_by' => 'articles:seo-gate-rollout',
                     'recorded_at' => now()->toIso8601String(),
-                ];
+                ]);
             }
         }
 

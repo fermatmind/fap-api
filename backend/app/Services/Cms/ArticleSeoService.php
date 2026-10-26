@@ -721,7 +721,10 @@ final class ArticleSeoService
         $variants = [];
         $translationGroupId = trim((string) ($article->translation_group_id ?? ''));
 
-        if ($translationGroupId !== '') {
+        $reviewedPair = app(ArticleReviewedCounterpartService::class)->resolve($article);
+        if ($reviewedPair !== null) {
+            $variants = $reviewedPair !== [] ? $reviewedPair : [$article];
+        } elseif ($translationGroupId !== '') {
             $variants = Article::query()
                 ->withoutGlobalScopes()
                 ->where('org_id', (int) $article->org_id)
@@ -733,7 +736,7 @@ final class ArticleSeoService
         }
 
         // Explicit translation groups are authoritative; a shared slug is not pairing evidence.
-        if ($translationGroupId === '') {
+        if ($reviewedPair === null && $translationGroupId === '') {
             $variants = Article::query()
                 ->withoutGlobalScopes()
                 ->where('org_id', (int) $article->org_id)

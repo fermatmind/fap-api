@@ -1264,7 +1264,7 @@ class ArticleController extends Controller
         $seoMeta['seo_description'] = $revision->seo_description;
         $seoMeta['canonical_url'] = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta['canonical_url'] ?? null);
         if (is_array($seoMeta['schema_json'] ?? null)) {
-            $this->projectPublicSeoGateMetadata($seoMeta, $seoMeta['schema_json']);
+            $this->projectPublicSeoGateMetadata($seoMeta, $seoMeta['schema_json'], $article);
             $seoMeta['schema_json'] = PublicMediaUrlGuard::sanitizeJsonLdImageFields(
                 CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json'])
             );
@@ -1450,7 +1450,7 @@ class ArticleController extends Controller
 
         $seoMeta['canonical_url'] = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta['canonical_url'] ?? null);
         if (is_array($seoMeta['schema_json'] ?? null)) {
-            $this->projectPublicSeoGateMetadata($seoMeta, $seoMeta['schema_json']);
+            $this->projectPublicSeoGateMetadata($seoMeta, $seoMeta['schema_json'], $article);
             $seoMeta['schema_json'] = PublicMediaUrlGuard::sanitizeJsonLdImageFields(
                 CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json'])
             );
@@ -1464,7 +1464,7 @@ class ArticleController extends Controller
      * @param  array<string,mixed>  $seoMeta
      * @param  array<string,mixed>  $schemaJson
      */
-    private function projectPublicSeoGateMetadata(array &$seoMeta, array $schemaJson): void
+    private function projectPublicSeoGateMetadata(array &$seoMeta, array $schemaJson, Article $article): void
     {
         $editorialPackage = $schemaJson['editorial_package_v1'] ?? null;
         if (! is_array($editorialPackage)) {
@@ -1489,6 +1489,9 @@ class ArticleController extends Controller
         $hreflangGate = $editorialPackage['hreflang_gate_v1'] ?? null;
         if (is_array($hreflangGate) && is_bool($hreflangGate['enabled'] ?? null)) {
             $publicHreflangGate = ['enabled' => (bool) $hreflangGate['enabled']];
+            if (array_key_exists('counterpart_binding_v1', $hreflangGate)) {
+                $publicHreflangGate['enabled'] = count(app(\App\Services\Cms\ArticleReviewedCounterpartService::class)->resolve($article) ?? []) === 2;
+            }
 
             foreach (['policy', 'reason'] as $key) {
                 if (is_string($hreflangGate[$key] ?? null) && trim((string) $hreflangGate[$key]) !== '') {

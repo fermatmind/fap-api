@@ -21,7 +21,9 @@ use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Set;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
@@ -349,6 +351,51 @@ class EditArticle extends EditRecord
                         $notification->title(__('ops.resources.articles.cover_alt.success'))->success();
                     } else {
                         $notification->title(__('ops.resources.articles.cover_alt.cache_failed'))->warning()->persistent();
+                    }
+                    $notification->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            // @review-surface article
+            Action::make('linkReviewedCounterpart')
+                ->label('关联已审双语页面')
+                ->icon('heroicon-o-language')->color('gray')
+                ->visible(fn (): bool => app(ArticleHreflangWorkspace::class)->independentAvailable($this->getRecord()))
+                ->modalDescription('两篇文章保留独立来源、翻译组、原URL与全部历史。实读双方当前发布版本并确认实质等价后，仅记录版本绑定的语言互返；后续公开版本变化将使旧对应失效。')
+                ->form([
+                    Select::make('counterpart_id')->label('对应文章')->required()->searchable()->live()
+                        ->options(fn (): array => app(ArticleHreflangWorkspace::class)->independentOptions($this->getRecord()))
+                        ->afterStateUpdated(function (mixed $state, Set $set): void {
+                            $set('pair_reviewed', false);
+                            $set('target_hash', '');
+                            $set('preflight', '');
+                            if (! $state) {
+                                return;
+                            }
+                            try {
+                                $prepared = app(ArticleHreflangWorkspace::class)->prepare($this->getRecord(), (int) $state);
+                                $set('target_hash', $prepared['target_hash']);
+                                $set('preflight', $prepared['preflight']);
+                            } catch (ValidationException $exception) {
+                                $set('preflight', $exception->getMessage());
+                            }
+                        }),
+                    Textarea::make('target_hash')->label('双方当前版本状态')->readOnly()->required()->rows(2),
+                    Textarea::make('preflight')->label('当前发布版本与认证预览')->readOnly()->dehydrated(false)->rows(12),
+                    Checkbox::make('pair_reviewed')->label('已完整核对双方预览，正文实质等价且适合作语言互返')->accepted()->required(),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        $result = app(ArticleHreflangWorkspace::class)->release($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.pair_reviewed' => $exception->errors()['pair_reviewed'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    $notification = Notification::make();
+                    if ($result['ok']) {
+                        $notification->title('双语对应已关联；独立来源与公开版本保持不变')->success();
+                    } else {
+                        $notification->title('双语对应已提交；定点缓存收尾失败，请仅续办缓存')->warning()->persistent();
                     }
                     $notification->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));

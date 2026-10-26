@@ -20,7 +20,7 @@ final class ContentReleaseFollowUp
     }
 
     /** Strict closeout for an already committed native article publication. */
-    public static function dispatchArticlePathsStrict(\App\Models\Article $article, string $source, bool $includeDiscoverability = false): void
+    public static function dispatchArticlePathsStrict(\App\Models\Article $article, string $source, bool $includeDiscoverability = false, bool $includeReviewedCounterparts = true): void
     {
         if (! self::articleCacheConfigured()) {
             throw new \RuntimeException('Article cache transport is not configured.');
@@ -46,7 +46,7 @@ final class ContentReleaseFollowUp
                     'article-detail:'.$article->locale.':'.$article->slug,
                     'article-seo:'.$article->locale.':'.$article->slug,
                 ],
-            ]);
+            ], includeReviewedCounterparts: $includeReviewedCounterparts);
         if (count($receipts) !== count(self::cacheInvalidationUrls())) {
             throw new \RuntimeException('Article cache acknowledgement is missing.');
         }
@@ -56,6 +56,23 @@ final class ContentReleaseFollowUp
     {
         $payload = self::payload($type, $record, $source);
         self::dispatchPayload($request, $payload);
+        if ($type === 'article' && $record instanceof \App\Models\Article) {
+            self::dispatchReviewedPeers($record, $source, false);
+        }
+    }
+
+    /** Raw bindings remain usable for cache removal after a revision invalidates correspondence. */
+    private static function dispatchReviewedPeers(\App\Models\Article $article, string $source, bool $throwOnFailure): void
+    {
+        foreach (app(\App\Services\Cms\ArticleReviewedCounterpartService::class)->cachePeers($article) as $peer) {
+            try {
+                self::dispatchArticlePathsStrict($peer, $source, includeReviewedCounterparts: false);
+            } catch (\Throwable $exception) {
+                if ($throwOnFailure) {
+                    throw $exception;
+                }
+            }
+        }
     }
 
     /**
@@ -72,6 +89,7 @@ final class ContentReleaseFollowUp
         bool $broadcast = true,
         bool $throwOnFailure = false,
         ?array $expectedCacheReceipt = null,
+        bool $includeReviewedCounterparts = true,
     ): array {
         $payload = self::payload(
             type: $type,
@@ -82,7 +100,12 @@ final class ContentReleaseFollowUp
             event: 'content_release_revalidate',
         );
 
-        return self::dispatchPayload($request, $payload, $broadcast, $throwOnFailure, $expectedCacheReceipt);
+        $receipts = self::dispatchPayload($request, $payload, $broadcast, $throwOnFailure, $expectedCacheReceipt);
+        if ($includeReviewedCounterparts && $type === 'article' && $record instanceof \App\Models\Article) {
+            self::dispatchReviewedPeers($record, $source, $throwOnFailure);
+        }
+
+        return $receipts;
     }
 
     /**
