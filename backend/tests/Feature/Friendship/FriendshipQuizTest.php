@@ -130,6 +130,28 @@ final class FriendshipQuizTest extends TestCase
         $this->assertSame(0, DB::table('friendship_challenges')->count());
     }
 
+    public function test_mysql_ddl_avoids_implicit_timestamp_defaults(): void
+    {
+        $connection = new \Illuminate\Database\MySqlConnection(
+            fn () => throw new \LogicException('DDL generation must not open a database'),
+            'friendship_contract', '', ['charset' => 'utf8mb4', 'collation' => 'utf8mb4_unicode_ci']
+        );
+        $connection->setSchemaGrammar(new \Illuminate\Database\Schema\Grammars\MySqlGrammar($connection));
+        $original = \Illuminate\Support\Facades\Schema::getFacadeRoot();
+        \Illuminate\Support\Facades\Schema::swap($connection->getSchemaBuilder());
+        try {
+            $queries = $connection->pretend(function () {
+                (require database_path('migrations/2026_10_26_150000_create_friendship_challenges.php'))->up();
+            });
+        } finally {
+            \Illuminate\Support\Facades\Schema::swap($original);
+        }
+        $sql = strtolower(implode("\n", array_column($queries, 'query')));
+        $this->assertStringContainsString('`expires_at` datetime not null', $sql);
+        $this->assertStringContainsString('`created_at` datetime not null', $sql);
+        $this->assertStringNotContainsString(' timestamp', $sql);
+    }
+
     public function test_maximum_length_and_real_opt_in_counts(): void
     {
         $pack = app(FriendshipQuiz::class)->catalog();

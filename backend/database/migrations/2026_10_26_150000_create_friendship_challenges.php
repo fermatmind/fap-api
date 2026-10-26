@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('payload_hash', 64);
             $table->boolean('closed')->default(false);
             $table->boolean('contribute')->default(false);
-            $table->timestamp('created_at');
-            $table->timestamp('expires_at')->index();
+            $table->dateTime('created_at');
+            $table->dateTime('expires_at')->index();
         });
         Schema::create('friendship_entries', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('correct');
             $table->json('categories');
             $table->boolean('hidden')->default(false);
-            $table->timestamp('created_at');
+            $table->dateTime('created_at');
             $table->unique(['challenge_id', 'player_hash']);
         });
     }
