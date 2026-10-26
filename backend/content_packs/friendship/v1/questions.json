@@ -1,0 +1,4351 @@
+{
+  "version": "friendship-v1",
+  "categories": {
+    "food": {
+      "en": "Food",
+      "zh": "美食"
+    },
+    "connection": {
+      "en": "Connection",
+      "zh": "相处"
+    },
+    "play": {
+      "en": "Fun & movement",
+      "zh": "玩乐与运动"
+    },
+    "reflection": {
+      "en": "Real talk",
+      "zh": "真心话"
+    },
+    "personality": {
+      "en": "Personal style",
+      "zh": "个人风格"
+    },
+    "daily": {
+      "en": "Daily life",
+      "zh": "日常"
+    }
+  },
+  "questions": [
+    {
+      "id": "food-01",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A familiar breakfast",
+          "Something different each morning"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "固定的早餐",
+          "每天换个花样"
+        ]
+      }
+    },
+    {
+      "id": "food-02",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A crunchy snack",
+          "A soft snack"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "酥脆零食",
+          "软糯零食"
+        ]
+      }
+    },
+    {
+      "id": "food-03",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Soup first",
+          "Soup with the meal"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先喝汤",
+          "边吃边喝汤"
+        ]
+      }
+    },
+    {
+      "id": "food-04",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A picnic outdoors",
+          "A cozy meal indoors"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "户外野餐",
+          "室内舒舒服服吃"
+        ]
+      }
+    },
+    {
+      "id": "food-05",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Cook from a recipe",
+          "Make it up as I go"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "照着食谱做",
+          "凭感觉发挥"
+        ]
+      }
+    },
+    {
+      "id": "food-06",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Order my usual",
+          "Try the special"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "点老样子",
+          "试试今日推荐"
+        ]
+      }
+    },
+    {
+      "id": "food-07",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A sweet breakfast",
+          "A savory breakfast"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "甜口早餐",
+          "咸口早餐"
+        ]
+      }
+    },
+    {
+      "id": "food-08",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "One big dish to share",
+          "A few small plates"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "分享一道大菜",
+          "点几道小菜"
+        ]
+      }
+    },
+    {
+      "id": "food-09",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Fruit for dessert",
+          "Cake for dessert"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "饭后吃水果",
+          "饭后吃蛋糕"
+        ]
+      }
+    },
+    {
+      "id": "food-10",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A warm drink",
+          "An iced drink"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "热饮",
+          "冰饮"
+        ]
+      }
+    },
+    {
+      "id": "food-11",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A long leisurely brunch",
+          "An early quick breakfast"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "慢悠悠的早午餐",
+          "早起快速吃早餐"
+        ]
+      }
+    },
+    {
+      "id": "food-12",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Crunchy peanut butter",
+          "Smooth peanut butter"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "颗粒花生酱",
+          "顺滑花生酱"
+        ]
+      }
+    },
+    {
+      "id": "food-13",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A sour treat",
+          "A sweet treat"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "酸味小点心",
+          "甜味小点心"
+        ]
+      }
+    },
+    {
+      "id": "food-14",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Eat the best bite first",
+          "Save the best bite for last"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "最好吃的先吃",
+          "最好吃的留到最后"
+        ]
+      }
+    },
+    {
+      "id": "food-15",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A food market",
+          "A sit-down restaurant"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "逛小吃集市",
+          "去餐厅坐下吃"
+        ]
+      }
+    },
+    {
+      "id": "food-16",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Pack lunch",
+          "Buy lunch"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "自带午饭",
+          "出门买午饭"
+        ]
+      }
+    },
+    {
+      "id": "food-17",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A spicy sauce",
+          "A mild sauce"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "辣酱",
+          "不辣的酱"
+        ]
+      }
+    },
+    {
+      "id": "food-18",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "One favorite cuisine",
+          "A different cuisine every week"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "钟爱一种菜系",
+          "每周尝试不同菜系"
+        ]
+      }
+    },
+    {
+      "id": "food-19",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A bowl of noodles",
+          "A rice dish"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "一碗面",
+          "一份米饭套餐"
+        ]
+      }
+    },
+    {
+      "id": "food-20",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A small dinner party",
+          "Dinner for two"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "小型聚餐",
+          "两个人吃饭"
+        ]
+      }
+    },
+    {
+      "id": "food-21",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Cook together",
+          "Take turns cooking"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "一起做饭",
+          "轮流做饭"
+        ]
+      }
+    },
+    {
+      "id": "food-22",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A crisp apple",
+          "A juicy orange"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "脆苹果",
+          "多汁的橙子"
+        ]
+      }
+    },
+    {
+      "id": "food-23",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A hot dessert",
+          "A chilled dessert"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "热甜品",
+          "冰甜品"
+        ]
+      }
+    },
+    {
+      "id": "food-24",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A window table",
+          "A quiet corner table"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "靠窗的位置",
+          "安静的角落"
+        ]
+      }
+    },
+    {
+      "id": "food-25",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Breakfast for dinner",
+          "Dinner leftovers for breakfast"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "晚饭吃早餐那一套",
+          "早餐吃昨晚剩饭"
+        ]
+      }
+    },
+    {
+      "id": "food-26",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Try a new restaurant",
+          "Return to a favorite"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "去新餐厅",
+          "去喜欢的老店"
+        ]
+      }
+    },
+    {
+      "id": "food-27",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Drink from a mug",
+          "Drink from a glass"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "用马克杯",
+          "用玻璃杯"
+        ]
+      }
+    },
+    {
+      "id": "food-28",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Plan meals ahead",
+          "Decide when hungry"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "提前安排菜单",
+          "饿了再决定"
+        ]
+      }
+    },
+    {
+      "id": "food-29",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A toasted sandwich",
+          "A cold sandwich"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "烤三明治",
+          "冷三明治"
+        ]
+      }
+    },
+    {
+      "id": "food-30",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A tasting menu with small courses",
+          "One generous main course"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "多道小份品尝套餐",
+          "一道分量足的主菜"
+        ]
+      }
+    },
+    {
+      "id": "food-31",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Make dessert",
+          "Make the main course"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "负责做甜品",
+          "负责做主菜"
+        ]
+      }
+    },
+    {
+      "id": "food-32",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A tangy dressing",
+          "A creamy dressing"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "酸爽的沙拉酱",
+          "浓稠顺滑的沙拉酱"
+        ]
+      }
+    },
+    {
+      "id": "food-33",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Eat at the table",
+          "Eat on the sofa"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "在餐桌吃",
+          "在沙发吃"
+        ]
+      }
+    },
+    {
+      "id": "food-34",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A snack while cooking",
+          "Wait for the whole meal"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "做饭时先吃点",
+          "等饭菜齐了再吃"
+        ]
+      }
+    },
+    {
+      "id": "food-35",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A fizzy drink",
+          "A still drink"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "气泡饮料",
+          "无气泡饮料"
+        ]
+      }
+    },
+    {
+      "id": "food-36",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A packed food tour",
+          "One slow cooking class"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "紧凑的美食之旅",
+          "慢节奏的烹饪课"
+        ]
+      }
+    },
+    {
+      "id": "food-37",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A thin pizza crust",
+          "A thick pizza crust"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "薄底披萨",
+          "厚底披萨"
+        ]
+      }
+    },
+    {
+      "id": "food-38",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A plain yogurt",
+          "A fruit yogurt"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "原味酸奶",
+          "水果酸奶"
+        ]
+      }
+    },
+    {
+      "id": "food-39",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Eat while it's piping hot",
+          "Let it cool a little"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "趁热吃",
+          "稍微晾凉再吃"
+        ]
+      }
+    },
+    {
+      "id": "food-40",
+      "category": "food",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Give a homemade treat",
+          "Give a favorite shop's treat"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "送亲手做的点心",
+          "送喜欢店铺的点心"
+        ]
+      }
+    },
+    {
+      "id": "connection-01",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A thoughtful message",
+          "A thoughtful little gift"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "一段用心的信息",
+          "一件用心的小礼物"
+        ]
+      }
+    },
+    {
+      "id": "connection-02",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Talk side by side on a walk",
+          "Talk face to face over a drink"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "并肩散步聊天",
+          "面对面喝东西聊天"
+        ]
+      }
+    },
+    {
+      "id": "connection-03",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Plan a surprise",
+          "Ask what they'd like"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "策划惊喜",
+          "先问对方喜欢什么"
+        ]
+      }
+    },
+    {
+      "id": "connection-04",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Catch up little and often",
+          "Have a long catch-up sometimes"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "经常简短联系",
+          "偶尔长聊一次"
+        ]
+      }
+    },
+    {
+      "id": "connection-05",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A handwritten note",
+          "A voice message"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "手写便条",
+          "语音留言"
+        ]
+      }
+    },
+    {
+      "id": "connection-06",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Spend time one on one",
+          "Meet with the whole group"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "单独相处",
+          "和大家一起见面"
+        ]
+      }
+    },
+    {
+      "id": "connection-07",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Ask for advice",
+          "Ask for a listening ear"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "请对方提建议",
+          "请对方听我说"
+        ]
+      }
+    },
+    {
+      "id": "connection-08",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Give practical help",
+          "Offer comforting words"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "提供实际帮助",
+          "说些安慰的话"
+        ]
+      }
+    },
+    {
+      "id": "connection-09",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Make the first invitation",
+          "Wait for an invitation"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "主动约人",
+          "等别人来约"
+        ]
+      }
+    },
+    {
+      "id": "connection-10",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A quiet birthday",
+          "A lively birthday"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "安静过生日",
+          "热闹过生日"
+        ]
+      }
+    },
+    {
+      "id": "connection-11",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Share a hobby",
+          "Try each other's hobbies"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "培养共同爱好",
+          "体验彼此的爱好"
+        ]
+      }
+    },
+    {
+      "id": "connection-12",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A planned visit",
+          "A spontaneous visit after checking"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "提前安排见面",
+          "临时确认后见面"
+        ]
+      }
+    },
+    {
+      "id": "connection-13",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Celebrate with a meal",
+          "Celebrate with an activity"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "吃顿饭庆祝",
+          "一起做件事庆祝"
+        ]
+      }
+    },
+    {
+      "id": "connection-14",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A funny nickname",
+          "Use my actual name"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "有趣的昵称",
+          "叫我的本名"
+        ]
+      }
+    },
+    {
+      "id": "connection-15",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Hear the full story",
+          "Get the short version first"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "从头听完整故事",
+          "先听简短版"
+        ]
+      }
+    },
+    {
+      "id": "connection-16",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Receive help without asking",
+          "Be asked before someone helps"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "不用开口就得到帮助",
+          "先征求我意见再帮忙"
+        ]
+      }
+    },
+    {
+      "id": "connection-17",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A small circle of close friends",
+          "A wide circle of friends"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "小而熟的朋友圈",
+          "广一些的朋友圈"
+        ]
+      }
+    },
+    {
+      "id": "connection-18",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Meet in a familiar spot",
+          "Explore somewhere new together"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "在熟悉的地方见",
+          "一起探索新地方"
+        ]
+      }
+    },
+    {
+      "id": "connection-19",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Remember the exact date",
+          "Remember the little details"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "记住准确纪念日",
+          "记住生活小细节"
+        ]
+      }
+    },
+    {
+      "id": "connection-20",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Make plans early",
+          "Keep the weekend flexible"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "早点约好",
+          "周末先留点弹性"
+        ]
+      }
+    },
+    {
+      "id": "connection-21",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A shared playlist",
+          "A shared photo album"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "共同歌单",
+          "共同相册"
+        ]
+      }
+    },
+    {
+      "id": "connection-22",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Revisit an old memory",
+          "Make a new memory"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "重温旧回忆",
+          "创造新回忆"
+        ]
+      }
+    },
+    {
+      "id": "connection-23",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A friend who nudges me out",
+          "A friend who slows down with me"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "带我出门的朋友",
+          "陪我慢下来的朋友"
+        ]
+      }
+    },
+    {
+      "id": "connection-24",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Talk things out straight away",
+          "Take a breather before talking"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "立刻说开",
+          "缓一缓再谈"
+        ]
+      }
+    },
+    {
+      "id": "connection-25",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Show affection with words",
+          "Show affection with actions"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "用语言表达在意",
+          "用行动表达在意"
+        ]
+      }
+    },
+    {
+      "id": "connection-26",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Host friends at home",
+          "Meet friends outside"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "在家招待朋友",
+          "在外面和朋友见"
+        ]
+      }
+    },
+    {
+      "id": "connection-27",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A regular weekly call",
+          "Calls whenever we both feel like it"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "每周固定通话",
+          "都有兴致时再聊"
+        ]
+      }
+    },
+    {
+      "id": "connection-28",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Share silly photos",
+          "Share interesting articles"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "分享搞笑照片",
+          "分享有趣文章"
+        ]
+      }
+    },
+    {
+      "id": "connection-29",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A team activity together",
+          "Parallel hobbies in the same room"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "一起做团队活动",
+          "同处一室各做爱好"
+        ]
+      }
+    },
+    {
+      "id": "connection-30",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Ask follow-up questions",
+          "Share a similar experience"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "追问细节",
+          "分享类似经历"
+        ]
+      }
+    },
+    {
+      "id": "connection-31",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A long goodbye",
+          "A quick goodbye"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "慢慢道别",
+          "利落道别"
+        ]
+      }
+    },
+    {
+      "id": "connection-32",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Reconnect by text",
+          "Reconnect in person"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "发消息重新联系",
+          "见面重新联系"
+        ]
+      }
+    },
+    {
+      "id": "connection-33",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Get a recommendation",
+          "Discover something together"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "听对方推荐",
+          "一起发现新东西"
+        ]
+      }
+    },
+    {
+      "id": "connection-34",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A friend's honest opinion",
+          "A friend's encouragement first"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先听朋友直说看法",
+          "先听朋友鼓励"
+        ]
+      }
+    },
+    {
+      "id": "connection-35",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Give a gift privately",
+          "Give a gift at the celebration"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "私下送礼物",
+          "庆祝时送礼物"
+        ]
+      }
+    },
+    {
+      "id": "connection-36",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A playful debate",
+          "A shared creative project"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "轻松辩一辩",
+          "共同做个创意项目"
+        ]
+      }
+    },
+    {
+      "id": "connection-37",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Bring a plus-one after asking",
+          "Keep the original small group"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "问过后带一位朋友",
+          "维持原来的小圈子"
+        ]
+      }
+    },
+    {
+      "id": "connection-38",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Send a photo update",
+          "Tell the story later"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先发张近况照片",
+          "回头慢慢讲故事"
+        ]
+      }
+    },
+    {
+      "id": "connection-39",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A low-key reunion",
+          "A big reunion"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "小范围重聚",
+          "大规模聚会"
+        ]
+      }
+    },
+    {
+      "id": "connection-40",
+      "category": "connection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Choose a place for the group",
+          "Let someone else choose"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "为大家选地方",
+          "让别人选地方"
+        ]
+      }
+    },
+    {
+      "id": "play-01",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A board game night",
+          "An outdoor game"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "桌游之夜",
+          "户外游戏"
+        ]
+      }
+    },
+    {
+      "id": "play-02",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Watch a live show",
+          "Watch a film"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "看现场演出",
+          "看电影"
+        ]
+      }
+    },
+    {
+      "id": "play-03",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A puzzle to solve",
+          "A story to follow"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "解一道谜题",
+          "追一个故事"
+        ]
+      }
+    },
+    {
+      "id": "play-04",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A museum visit",
+          "A nature trail"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "逛博物馆",
+          "走自然步道"
+        ]
+      }
+    },
+    {
+      "id": "play-05",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A fast-paced game",
+          "A slow strategy game"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "快节奏游戏",
+          "慢节奏策略游戏"
+        ]
+      }
+    },
+    {
+      "id": "play-06",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Learn a dance",
+          "Learn a song"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "学一支舞",
+          "学一首歌"
+        ]
+      }
+    },
+    {
+      "id": "play-07",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Watch the game",
+          "Play the game"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "看比赛",
+          "亲自上场"
+        ]
+      }
+    },
+    {
+      "id": "play-08",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A short series",
+          "A long novel"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "短篇剧集",
+          "长篇小说"
+        ]
+      }
+    },
+    {
+      "id": "play-09",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Make something by hand",
+          "Explore a new app"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "动手做东西",
+          "探索新应用"
+        ]
+      }
+    },
+    {
+      "id": "play-10",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A team sport",
+          "A solo workout"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "团队运动",
+          "独自锻炼"
+        ]
+      }
+    },
+    {
+      "id": "play-11",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A beach day",
+          "A mountain day"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "去海边一天",
+          "去山里一天"
+        ]
+      }
+    },
+    {
+      "id": "play-12",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A comedy",
+          "A mystery"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "喜剧",
+          "悬疑片"
+        ]
+      }
+    },
+    {
+      "id": "play-13",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A guided tour",
+          "Explore on my own"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "参加导览",
+          "自己探索"
+        ]
+      }
+    },
+    {
+      "id": "play-14",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Try karaoke",
+          "Try an escape room"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "唱卡拉OK",
+          "玩密室逃脱"
+        ]
+      }
+    },
+    {
+      "id": "play-15",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Draw a picture",
+          "Take a photograph"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "画画",
+          "拍照"
+        ]
+      }
+    },
+    {
+      "id": "play-16",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A competitive game",
+          "A cooperative game"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "对抗型游戏",
+          "合作型游戏"
+        ]
+      }
+    },
+    {
+      "id": "play-17",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A physical challenge",
+          "A brain teaser"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "体能挑战",
+          "脑筋谜题"
+        ]
+      }
+    },
+    {
+      "id": "play-18",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "An indoor climbing wall",
+          "A long bike ride"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "室内攀岩",
+          "骑行远一点"
+        ]
+      }
+    },
+    {
+      "id": "play-19",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A live concert",
+          "A small listening session"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "现场音乐会",
+          "小范围听歌"
+        ]
+      }
+    },
+    {
+      "id": "play-20",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Make a playlist",
+          "Listen to someone else's"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "自己编歌单",
+          "听别人的歌单"
+        ]
+      }
+    },
+    {
+      "id": "play-21",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A game with clear rules",
+          "A game we invent"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "规则明确的游戏",
+          "自己发明的游戏"
+        ]
+      }
+    },
+    {
+      "id": "play-22",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Explore a city",
+          "Explore the countryside"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "探索城市",
+          "探索乡间"
+        ]
+      }
+    },
+    {
+      "id": "play-23",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A short intense workout",
+          "A long gentle walk"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "短时高强度运动",
+          "长时间轻松步行"
+        ]
+      }
+    },
+    {
+      "id": "play-24",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Watch with subtitles",
+          "Watch a dubbed version"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "看字幕版",
+          "看配音版"
+        ]
+      }
+    },
+    {
+      "id": "play-25",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Collect things",
+          "Create things"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "收藏东西",
+          "创作东西"
+        ]
+      }
+    },
+    {
+      "id": "play-26",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Go skating",
+          "Go swimming"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "滑冰",
+          "游泳"
+        ]
+      }
+    },
+    {
+      "id": "play-27",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A craft workshop",
+          "A cooking workshop"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "手工体验课",
+          "烹饪体验课"
+        ]
+      }
+    },
+    {
+      "id": "play-28",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Listen to an album in order",
+          "Shuffle favorite tracks"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "按顺序听专辑",
+          "随机听喜欢的歌"
+        ]
+      }
+    },
+    {
+      "id": "play-29",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A familiar game with new people",
+          "A new game with familiar people"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "和新朋友玩熟悉游戏",
+          "和老朋友玩新游戏"
+        ]
+      }
+    },
+    {
+      "id": "play-30",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A comic book",
+          "An audiobook"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "漫画",
+          "有声书"
+        ]
+      }
+    },
+    {
+      "id": "play-31",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "An afternoon match",
+          "An evening match"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "下午的比赛",
+          "晚上的比赛"
+        ]
+      }
+    },
+    {
+      "id": "play-32",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A dance floor",
+          "A quiet viewing spot"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "进舞池",
+          "安静观看"
+        ]
+      }
+    },
+    {
+      "id": "play-33",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Record a fun moment",
+          "Enjoy it without recording"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "录下有趣时刻",
+          "不录下来直接享受"
+        ]
+      }
+    },
+    {
+      "id": "play-34",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A challenging hike",
+          "A scenic easy walk"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "有挑战的徒步",
+          "轻松看景的散步"
+        ]
+      }
+    },
+    {
+      "id": "play-35",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A game of chance",
+          "A game of skill"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "运气型游戏",
+          "技巧型游戏"
+        ]
+      }
+    },
+    {
+      "id": "play-36",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Try a demo first",
+          "Read a review first"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先试玩",
+          "先看评测"
+        ]
+      }
+    },
+    {
+      "id": "play-37",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "An open-world game",
+          "A tightly told story game"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "开放世界游戏",
+          "故事紧凑的游戏"
+        ]
+      }
+    },
+    {
+      "id": "play-38",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Rewatch a favorite",
+          "Watch a new release"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "重看心头好",
+          "看新上映的"
+        ]
+      }
+    },
+    {
+      "id": "play-39",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A creative contest",
+          "A trivia contest"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "创意比赛",
+          "知识问答比赛"
+        ]
+      }
+    },
+    {
+      "id": "play-40",
+      "category": "play",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Leave a free day unplanned",
+          "Fill it with activities"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "空出一天随性过",
+          "安排满一天活动"
+        ]
+      }
+    },
+    {
+      "id": "reflection-01",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Think aloud",
+          "Think quietly first"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "边说边想",
+          "先安静想一想"
+        ]
+      }
+    },
+    {
+      "id": "reflection-02",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Write down a worry",
+          "Talk through a worry"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "把担心写下来",
+          "把担心说出来"
+        ]
+      }
+    },
+    {
+      "id": "reflection-03",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A fresh start",
+          "A gradual adjustment"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "重新开始",
+          "慢慢调整"
+        ]
+      }
+    },
+    {
+      "id": "reflection-04",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Note something I’m grateful for",
+          "Note a question I want to explore"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "记下一件感恩的小事",
+          "记下一个想探索的问题"
+        ]
+      }
+    },
+    {
+      "id": "reflection-05",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Ask what happened",
+          "Ask how someone felt"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先问发生了什么",
+          "先问对方什么感受"
+        ]
+      }
+    },
+    {
+      "id": "reflection-06",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Reminisce about a special place",
+          "Reminisce about a meaningful conversation"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "回想一个特别的地方",
+          "回味一段有意义的对话"
+        ]
+      }
+    },
+    {
+      "id": "reflection-07",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Set a clear goal",
+          "Choose a general direction"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "定明确目标",
+          "选大致方向"
+        ]
+      }
+    },
+    {
+      "id": "reflection-08",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Keep a private journal",
+          "Keep a photo diary"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "写私人日记",
+          "用照片记生活"
+        ]
+      }
+    },
+    {
+      "id": "reflection-09",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Get reassurance",
+          "Get space to work it out"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "希望有人安慰",
+          "希望有空间想明白"
+        ]
+      }
+    },
+    {
+      "id": "reflection-10",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Revisit a big decision",
+          "Move on to the next step"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "回看重要决定",
+          "着手下一步"
+        ]
+      }
+    },
+    {
+      "id": "reflection-11",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Know how something works",
+          "Know why it matters"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "了解怎么运作",
+          "了解为什么重要"
+        ]
+      }
+    },
+    {
+      "id": "reflection-12",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Share a work in progress",
+          "Share when it's ready"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "分享未完成的作品",
+          "准备好了再分享"
+        ]
+      }
+    },
+    {
+      "id": "reflection-13",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A practical question",
+          "An imaginary what-if"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "讨论实际问题",
+          "讨论假设情景"
+        ]
+      }
+    },
+    {
+      "id": "reflection-14",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Notice what improved",
+          "Notice what still needs work"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先看进步的地方",
+          "先看还需改的地方"
+        ]
+      }
+    },
+    {
+      "id": "reflection-15",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A reminder of home",
+          "A reminder of an adventure"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "想起家的东西",
+          "想起冒险的东西"
+        ]
+      }
+    },
+    {
+      "id": "reflection-16",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Look at old photos",
+          "Listen to old favorite songs"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "看旧照片",
+          "听过去喜欢的歌"
+        ]
+      }
+    },
+    {
+      "id": "reflection-17",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Try again quickly",
+          "Reflect before trying again"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "尽快再试",
+          "想清楚后再试"
+        ]
+      }
+    },
+    {
+      "id": "reflection-18",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Plan a meaningful milestone",
+          "Enjoy an ordinary good day"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "规划有意义的节点",
+          "享受平常的好日子"
+        ]
+      }
+    },
+    {
+      "id": "reflection-19",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A question with one clear answer",
+          "A question with many possible answers"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "有明确答案的问题",
+          "有多种答案的问题"
+        ]
+      }
+    },
+    {
+      "id": "reflection-20",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Leave a note for my future self",
+          "Make a time capsule"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "给未来自己写信",
+          "做时间胶囊"
+        ]
+      }
+    },
+    {
+      "id": "reflection-21",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Talk about a small win",
+          "Talk about something I learned"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "聊小小的成功",
+          "聊学到的东西"
+        ]
+      }
+    },
+    {
+      "id": "reflection-22",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A reassuring routine",
+          "A change of scenery"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "安心的日常",
+          "换个环境"
+        ]
+      }
+    },
+    {
+      "id": "reflection-23",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Choose a word for the year",
+          "Choose one concrete project"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "选一个年度关键词",
+          "选一个具体项目"
+        ]
+      }
+    },
+    {
+      "id": "reflection-24",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Ask for feedback early",
+          "Figure out my view first"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "尽早听反馈",
+          "先形成自己的看法"
+        ]
+      }
+    },
+    {
+      "id": "reflection-25",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Spend a quiet hour alone",
+          "Spend a quiet hour with someone"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "独自安静一小时",
+          "有人陪着安静一小时"
+        ]
+      }
+    },
+    {
+      "id": "reflection-26",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Keep a childhood object",
+          "Keep a recent memento"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "留童年物件",
+          "留近期纪念品"
+        ]
+      }
+    },
+    {
+      "id": "reflection-27",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Let a difficult day settle",
+          "Do something to reset it"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "让难过的一天慢慢过去",
+          "做点事转换心情"
+        ]
+      }
+    },
+    {
+      "id": "reflection-28",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Learn through experience",
+          "Learn through reflection"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "亲身体验中学习",
+          "回想思考中学习"
+        ]
+      }
+    },
+    {
+      "id": "reflection-29",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Celebrate progress quietly",
+          "Tell someone about my progress"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "默默庆祝进步",
+          "把进步告诉别人"
+        ]
+      }
+    },
+    {
+      "id": "reflection-30",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Make a list of possibilities",
+          "Choose one thing to explore"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "列出各种可能",
+          "先挑一件探索"
+        ]
+      }
+    },
+    {
+      "id": "reflection-31",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A long-term dream",
+          "A near-term adventure"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "长远梦想",
+          "近期小冒险"
+        ]
+      }
+    },
+    {
+      "id": "reflection-32",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A thoughtful question",
+          "An unexpected observation"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "一个值得想的问题",
+          "一个意外的发现"
+        ]
+      }
+    },
+    {
+      "id": "reflection-33",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Keep a promise to myself",
+          "Leave room to change my mind"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "坚持对自己的承诺",
+          "允许自己改变主意"
+        ]
+      }
+    },
+    {
+      "id": "reflection-34",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A conversation about the past",
+          "A conversation about the future"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "聊过去",
+          "聊未来"
+        ]
+      }
+    },
+    {
+      "id": "reflection-35",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Process news on a walk",
+          "Process news while sitting quietly"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "边走边消化消息",
+          "坐着安静消化消息"
+        ]
+      }
+    },
+    {
+      "id": "reflection-36",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Talk about my feelings right away",
+          "Take some time before talking about them"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "马上聊聊自己的感受",
+          "先体会一阵再聊"
+        ]
+      }
+    },
+    {
+      "id": "reflection-37",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A familiar comforting story",
+          "An inspiring new story"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "熟悉的暖心故事",
+          "鼓舞人的新故事"
+        ]
+      }
+    },
+    {
+      "id": "reflection-38",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Remember a kind gesture",
+          "Remember useful advice"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "记住善意举动",
+          "记住实用建议"
+        ]
+      }
+    },
+    {
+      "id": "reflection-39",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Mark a milestone with an object",
+          "Mark it with an experience"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "用物件纪念节点",
+          "用一次经历纪念节点"
+        ]
+      }
+    },
+    {
+      "id": "reflection-40",
+      "category": "reflection",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Learn more about one subject",
+          "Explore several different subjects"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "深入学一个主题",
+          "广泛探索几个主题"
+        ]
+      }
+    },
+    {
+      "id": "personality-01",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Lead the first round",
+          "Watch one round first"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "第一轮就带头",
+          "先看一轮"
+        ]
+      }
+    },
+    {
+      "id": "personality-02",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Follow instructions closely",
+          "Find my own way"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "认真照步骤",
+          "摸索自己的办法"
+        ]
+      }
+    },
+    {
+      "id": "personality-03",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A neat workspace",
+          "A workspace with personal touches"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "整齐的工作空间",
+          "有生活气息的工作空间"
+        ]
+      }
+    },
+    {
+      "id": "personality-04",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Speak in short points",
+          "Tell the whole story"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "简要说重点",
+          "完整讲故事"
+        ]
+      }
+    },
+    {
+      "id": "personality-05",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Decide quickly",
+          "Compare a few options"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "快速决定",
+          "比较几个选项"
+        ]
+      }
+    },
+    {
+      "id": "personality-06",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Start with the details",
+          "Start with the big picture"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "从细节入手",
+          "先看整体"
+        ]
+      }
+    },
+    {
+      "id": "personality-07",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "One project at a time",
+          "A few projects on the go"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "一次一个项目",
+          "几个项目同时推进"
+        ]
+      }
+    },
+    {
+      "id": "personality-08",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A little friendly competition",
+          "Working toward a shared target"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "一点友好竞争",
+          "奔着共同目标协作"
+        ]
+      }
+    },
+    {
+      "id": "personality-09",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A familiar role",
+          "A chance to try a new role"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "熟悉的角色",
+          "试试新角色"
+        ]
+      }
+    },
+    {
+      "id": "personality-10",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Say yes after thinking",
+          "Say yes on instinct"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "想一想再答应",
+          "凭直觉答应"
+        ]
+      }
+    },
+    {
+      "id": "personality-11",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "An early finish",
+          "A last-minute burst"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "提前完成",
+          "最后阶段集中冲刺"
+        ]
+      }
+    },
+    {
+      "id": "personality-12",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A detailed explanation",
+          "A quick demonstration"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "详细讲解",
+          "快速示范"
+        ]
+      }
+    },
+    {
+      "id": "personality-13",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A bold color",
+          "A muted color"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "鲜明颜色",
+          "柔和颜色"
+        ]
+      }
+    },
+    {
+      "id": "personality-14",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A tidy plan",
+          "An open-ended experiment"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "清晰计划",
+          "开放式尝试"
+        ]
+      }
+    },
+    {
+      "id": "personality-15",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Be pleasantly surprised",
+          "Know what to expect"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "享受小惊喜",
+          "知道接下来会怎样"
+        ]
+      }
+    },
+    {
+      "id": "personality-16",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Ask the first question",
+          "Answer the first question"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先发问",
+          "先回答"
+        ]
+      }
+    },
+    {
+      "id": "personality-17",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Try a small version first",
+          "Dive into the full thing"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先做个小版本",
+          "直接完整投入"
+        ]
+      }
+    },
+    {
+      "id": "personality-18",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A steady pace",
+          "Short bursts of energy"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "稳定节奏",
+          "一阵阵集中发力"
+        ]
+      }
+    },
+    {
+      "id": "personality-19",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Speak up in the group",
+          "Talk to someone afterward"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "当着大家说",
+          "事后单独聊"
+        ]
+      }
+    },
+    {
+      "id": "personality-20",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Change the plan as I go",
+          "Stick to the original plan"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "边做边调计划",
+          "按原计划走"
+        ]
+      }
+    },
+    {
+      "id": "personality-21",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Keep useful things",
+          "Keep meaningful things"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "留实用的东西",
+          "留有意义的东西"
+        ]
+      }
+    },
+    {
+      "id": "personality-22",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A clear deadline",
+          "A flexible timeline"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "明确截止时间",
+          "弹性时间安排"
+        ]
+      }
+    },
+    {
+      "id": "personality-23",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Offer the first idea",
+          "Build on another idea"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先提出想法",
+          "接着别人的想法完善"
+        ]
+      }
+    },
+    {
+      "id": "personality-24",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "An efficient shortcut",
+          "A scenic detour"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "高效捷径",
+          "风景好的绕路"
+        ]
+      }
+    },
+    {
+      "id": "personality-25",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A playful answer",
+          "A straightforward answer"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "俏皮回答",
+          "直接回答"
+        ]
+      }
+    },
+    {
+      "id": "personality-26",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A private compliment",
+          "Public recognition"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "私下的夸奖",
+          "公开的肯定"
+        ]
+      }
+    },
+    {
+      "id": "personality-27",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Explore many ideas",
+          "Polish one idea"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "探索很多想法",
+          "打磨一个想法"
+        ]
+      }
+    },
+    {
+      "id": "personality-28",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Work in silence",
+          "Work with background sound"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "安静做事",
+          "有背景声音做事"
+        ]
+      }
+    },
+    {
+      "id": "personality-29",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A small clear task",
+          "A broad creative brief"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "具体的小任务",
+          "宽泛的创意命题"
+        ]
+      }
+    },
+    {
+      "id": "personality-30",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Discover an error myself",
+          "Have someone point it out"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "自己发现错误",
+          "有人及时指出"
+        ]
+      }
+    },
+    {
+      "id": "personality-31",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Plan the route",
+          "Navigate along the way"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先规划路线",
+          "一路走一路看"
+        ]
+      }
+    },
+    {
+      "id": "personality-32",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Make a careful estimate",
+          "Try and see how long it takes"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "先仔细估时",
+          "做了再看花多久"
+        ]
+      }
+    },
+    {
+      "id": "personality-33",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A memorable opening",
+          "A strong ending"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "令人印象深的开头",
+          "有力的结尾"
+        ]
+      }
+    },
+    {
+      "id": "personality-34",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Get settled before chatting",
+          "Chat while getting settled"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "安顿好再聊天",
+          "边安顿边聊天"
+        ]
+      }
+    },
+    {
+      "id": "personality-35",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Keep things simple",
+          "Add a personal twist"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "保持简单",
+          "加点个人风格"
+        ]
+      }
+    },
+    {
+      "id": "personality-36",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Keep my options open",
+          "Commit to a choice"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "保留选择余地",
+          "定下一个选择"
+        ]
+      }
+    },
+    {
+      "id": "personality-37",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A calm introduction",
+          "An energetic introduction"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "平和的自我介绍",
+          "活力满满的自我介绍"
+        ]
+      }
+    },
+    {
+      "id": "personality-38",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Notice patterns",
+          "Notice exceptions"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "留意规律",
+          "留意例外"
+        ]
+      }
+    },
+    {
+      "id": "personality-39",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A hands-on explanation",
+          "A visual explanation"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "动手演示的解释",
+          "图示的解释"
+        ]
+      }
+    },
+    {
+      "id": "personality-40",
+      "category": "personality",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Make something dependable",
+          "Make something surprising"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "做可靠的东西",
+          "做出人意料的东西"
+        ]
+      }
+    },
+    {
+      "id": "daily-01",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Wake up slowly",
+          "Get up right away"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "慢慢醒来",
+          "醒来就起床"
+        ]
+      }
+    },
+    {
+      "id": "daily-02",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A shower in the morning",
+          "A shower in the evening"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "早上洗澡",
+          "晚上洗澡"
+        ]
+      }
+    },
+    {
+      "id": "daily-03",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Pack the night before",
+          "Pack before leaving"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "前晚收拾包",
+          "出门前收拾包"
+        ]
+      }
+    },
+    {
+      "id": "daily-04",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Keep notifications on",
+          "Check messages at set times"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "开着消息提醒",
+          "固定时间看消息"
+        ]
+      }
+    },
+    {
+      "id": "daily-05",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Take the stairs",
+          "Take the lift"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "走楼梯",
+          "坐电梯"
+        ]
+      }
+    },
+    {
+      "id": "daily-06",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A paper notebook",
+          "A notes app"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "纸笔记本",
+          "记事应用"
+        ]
+      }
+    },
+    {
+      "id": "daily-07",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Tidy a little each day",
+          "Have one bigger tidy-up"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "每天整理一点",
+          "集中整理一次"
+        ]
+      }
+    },
+    {
+      "id": "daily-08",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Window open a little",
+          "Window closed for quiet"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "窗户开一点",
+          "关窗保持安静"
+        ]
+      }
+    },
+    {
+      "id": "daily-09",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A reusable tote",
+          "A backpack"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "环保手提袋",
+          "双肩包"
+        ]
+      }
+    },
+    {
+      "id": "daily-10",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Arrive early",
+          "Arrive just on time"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "提前到",
+          "刚好准点到"
+        ]
+      }
+    },
+    {
+      "id": "daily-11",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Walk a short distance",
+          "Cycle a short distance"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "短距离步行",
+          "短距离骑车"
+        ]
+      }
+    },
+    {
+      "id": "daily-12",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A bright room",
+          "A softly lit room"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "明亮的房间",
+          "柔和灯光的房间"
+        ]
+      }
+    },
+    {
+      "id": "daily-13",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Music on the commute",
+          "Quiet on the commute"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "通勤听音乐",
+          "通勤安静待着"
+        ]
+      }
+    },
+    {
+      "id": "daily-14",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "An analog clock",
+          "A digital clock"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "指针钟",
+          "数字钟"
+        ]
+      }
+    },
+    {
+      "id": "daily-15",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Choose clothes the night before",
+          "Choose clothes in the morning"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "前晚选好衣服",
+          "早上再选衣服"
+        ]
+      }
+    },
+    {
+      "id": "daily-16",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A long bath when possible",
+          "A quick shower"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "有条件时慢慢泡澡",
+          "快速冲澡"
+        ]
+      }
+    },
+    {
+      "id": "daily-17",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A clear phone home screen",
+          "Lots of useful widgets"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "简洁手机桌面",
+          "放很多实用小组件"
+        ]
+      }
+    },
+    {
+      "id": "daily-18",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Shop with a list",
+          "Browse and decide"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "列清单购物",
+          "逛着决定买什么"
+        ]
+      }
+    },
+    {
+      "id": "daily-19",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A fixed bedtime",
+          "A flexible bedtime"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "固定睡觉时间",
+          "灵活的睡觉时间"
+        ]
+      }
+    },
+    {
+      "id": "daily-20",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Keep a calendar",
+          "Keep a to-do list"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "用日历安排",
+          "用待办清单"
+        ]
+      }
+    },
+    {
+      "id": "daily-21",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Open messages right away",
+          "Open them when I can reply"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "马上打开消息",
+          "有空回复时再打开"
+        ]
+      }
+    },
+    {
+      "id": "daily-22",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Air-dry my hair",
+          "Use a hair dryer"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "自然晾干头发",
+          "用吹风机"
+        ]
+      }
+    },
+    {
+      "id": "daily-23",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A cool room for sleep",
+          "A warmer room for sleep"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "凉一点的卧室",
+          "暖一点的卧室"
+        ]
+      }
+    },
+    {
+      "id": "daily-24",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Travel light",
+          "Pack for possibilities"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "轻装出行",
+          "多带点以备需要"
+        ]
+      }
+    },
+    {
+      "id": "daily-25",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A morning errand",
+          "An afternoon errand"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "上午办杂事",
+          "下午办杂事"
+        ]
+      }
+    },
+    {
+      "id": "daily-26",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Use bookmarks",
+          "Keep tabs open"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "收藏网页",
+          "留着标签页"
+        ]
+      }
+    },
+    {
+      "id": "daily-27",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Make the bed straight away",
+          "Make it later"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "起床立刻叠被",
+          "过会儿再整理"
+        ]
+      }
+    },
+    {
+      "id": "daily-28",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A longer weekend lie-in",
+          "Keep my weekday wake-up time"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "周末多睡一会儿",
+          "按平日起床时间起"
+        ]
+      }
+    },
+    {
+      "id": "daily-29",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A quiet morning",
+          "A chatty morning"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "安静的早晨",
+          "聊聊天的早晨"
+        ]
+      }
+    },
+    {
+      "id": "daily-30",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Repair a small thing myself",
+          "Have someone experienced fix it"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "自己修小东西",
+          "找有经验的人修"
+        ]
+      }
+    },
+    {
+      "id": "daily-31",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Use a timer",
+          "Check the clock"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "用计时器",
+          "自己看时钟"
+        ]
+      }
+    },
+    {
+      "id": "daily-32",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A familiar walking route",
+          "A different route home"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "走熟悉的路",
+          "换条路回家"
+        ]
+      }
+    },
+    {
+      "id": "daily-33",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Take breaks outdoors",
+          "Take breaks by a window"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "休息时到户外",
+          "休息时待在窗边"
+        ]
+      }
+    },
+    {
+      "id": "daily-34",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Water plants in the morning",
+          "Water plants in the evening"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "早上浇花",
+          "晚上浇花"
+        ]
+      }
+    },
+    {
+      "id": "daily-35",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Carry an umbrella just in case",
+          "Check the forecast before leaving"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "随身带伞备用",
+          "出门前看预报"
+        ]
+      }
+    },
+    {
+      "id": "daily-36",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Handle small tasks immediately",
+          "Batch small tasks together"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "小事立刻办",
+          "小事集中办"
+        ]
+      }
+    },
+    {
+      "id": "daily-37",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Read before bed",
+          "Listen to something before bed"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "睡前阅读",
+          "睡前听点东西"
+        ]
+      }
+    },
+    {
+      "id": "daily-38",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Fold clothes",
+          "Hang clothes"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "叠放衣服",
+          "挂放衣服"
+        ]
+      }
+    },
+    {
+      "id": "daily-39",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "A weekend at home",
+          "A weekend out and about"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "周末多待在家",
+          "周末多出门逛"
+        ]
+      }
+    },
+    {
+      "id": "daily-40",
+      "category": "daily",
+      "en": {
+        "prompt": "Which would I choose?",
+        "options": [
+          "Charge my phone overnight",
+          "Top it up during the day"
+        ]
+      },
+      "zh": {
+        "prompt": "我更会选哪一个？",
+        "options": [
+          "夜里充手机",
+          "白天随用随充"
+        ]
+      }
+    }
+  ]
+}

@@ -437,6 +437,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('friendship:prune')->hourly()->withoutOverlapping();
         // 示例（需要就开）：
         // $schedule->command('fap:self-check')->dailyAt('03:10');
         // $schedule->command('fap:validate-report --attempt=...')->hourly();
