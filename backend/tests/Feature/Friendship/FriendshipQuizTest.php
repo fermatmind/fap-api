@@ -23,6 +23,7 @@ final class FriendshipQuizTest extends TestCase
     {
         parent::setUp();
         (require database_path('migrations/2026_10_26_150000_create_friendship_challenges.php'))->up();
+        (require database_path('migrations/2026_10_26_180000_create_friendship_progress.php'))->up();
         $this->owner = bin2hex(random_bytes(32));
         $this->friend = bin2hex(random_bytes(32));
         $pack = app(FriendshipQuiz::class)->catalog();
@@ -40,6 +41,87 @@ final class FriendshipQuizTest extends TestCase
         $this->withToken($this->owner)->postJson($this->base, $this->payload)->assertOk();
 
         return $this->base.'/'.$this->payload['id'];
+    }
+
+    public function test_sequential_feedback_reveals_only_locked_choices_and_restores_combos(): void
+    {
+        $url = $this->create();
+        $this->withToken($this->friend)->getJson($url.'/progress')->assertNotFound();
+        $this->withToken('')->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => 0, 'guess' => 0])->assertUnauthorized();
+        $this->withToken($this->friend)->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => 1, 'guess' => 0])->assertStatus(409);
+        foreach ([0, 0, 1, 0] as $index => $guess) {
+            $response = $this->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => $index, 'guess' => $guess])->assertOk();
+            $response->assertJsonCount($index + 1, 'answers')->assertJsonCount($index + 1, 'guesses');
+        }
+        $this->getJson($url.'/progress')->assertOk()->assertJsonPath('combo', 1)->assertJsonPath('best_combo', 2)->assertJsonCount(4, 'answers');
+        $this->assertSame(0, DB::table('friendship_entries')->count());
+        $this->assertSame(1, DB::table('friendship_progress')->count());
+        $public = $this->getJson($url)->assertOk()->json();
+        $this->assertArrayNotHasKey('answers', $public);
+        $this->assertArrayNotHasKey('question_stats', $public);
+        $this->withToken(bin2hex(random_bytes(32)))->getJson($url.'/progress')->assertNotFound();
+    }
+
+    public function test_feedback_retry_is_idempotent_and_revealed_guesses_cannot_be_changed_at_submit(): void
+    {
+        $url = $this->create();
+        $data = ['nickname' => 'Friend', 'index' => 0, 'guess' => 1];
+        $first = $this->withToken($this->friend)->postJson($url.'/answers', $data)->assertOk()->json();
+        $this->assertSame($first, $this->postJson($url.'/answers', $data)->assertOk()->json());
+        $this->postJson($url.'/answers', array_replace($data, ['guess' => 0]))->assertStatus(409);
+        $this->postJson($url.'/answers', array_replace($data, ['nickname' => 'Changed']))->assertStatus(409);
+        $this->postJson($url.'/answers', array_replace($data, ['guess' => '0']))->assertUnprocessable();
+        $this->postJson($url.'/entries', ['nickname' => 'Friend', 'guesses' => array_fill(0, 30, 0)])->assertStatus(409);
+        // Old bulk clients can finish unanswered questions, but must preserve the committed prefix.
+        $guesses = array_fill(0, 30, 0);
+        $guesses[0] = 1;
+        $this->postJson($url.'/entries', ['nickname' => 'Friend', 'guesses' => $guesses])->assertOk()->assertJsonPath('correct', 29);
+        $this->getJson($url.'/result')->assertOk()->assertJsonPath('correct', 29);
+        $this->assertSame(1, DB::table('friendship_entries')->count());
+    }
+
+    public function test_progress_obeys_closure_and_cascades_on_expiry_or_owner_deletion(): void
+    {
+        $url = $this->create();
+        $this->withToken($this->friend)->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => 0, 'guess' => 0])->assertOk();
+        $this->withToken($this->owner)->patchJson($url.'/manage', ['closed' => true])->assertOk();
+        $this->withToken($this->friend)->getJson($url.'/progress')->assertStatus(410);
+        $this->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => 1, 'guess' => 0])->assertStatus(410);
+        $this->withToken($this->owner)->patchJson($url.'/manage', ['closed' => false])->assertOk();
+        $this->deleteJson($url.'/manage')->assertOk();
+        $this->assertSame(0, DB::table('friendship_progress')->count());
+        $url = $this->create();
+        $this->withToken($this->friend)->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => 0, 'guess' => 0])->assertOk();
+        DB::table('friendship_challenges')->where('id', $this->payload['id'])->update(['expires_at' => now()->subMinute()]);
+        $this->getJson($url.'/progress')->assertStatus(410);
+        $this->artisan('friendship:prune')->assertExitCode(0);
+        $this->assertSame(0, DB::table('friendship_progress')->count());
+    }
+
+    public function test_unfinished_progress_is_bounded_without_entering_the_friendboard(): void
+    {
+        $url = $this->create();
+        $rows = [];
+        for ($i = 0; $i < 1000; $i++) {
+            $rows[] = ['challenge_id' => $this->payload['id'], 'player_hash' => hash('sha256', 'synthetic-'.$i), 'nickname' => 'Synthetic', 'guesses' => '[0]', 'created_at' => now()];
+        }
+        foreach (array_chunk($rows, 100) as $batch) {
+            DB::table('friendship_progress')->insert($batch);
+        }
+        $this->withToken($this->friend)->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => 0, 'guess' => 0])->assertStatus(409);
+        $this->getJson($url)->assertOk()->assertJsonCount(0, 'entries');
+        $this->assertSame(1000, DB::table('friendship_progress')->count());
+    }
+
+    public function test_question_accuracy_is_authorized_and_excludes_hidden_and_preview_entries(): void
+    {
+        $url = $this->create();
+        $result = $this->withToken($this->friend)->postJson($url.'/entries', ['nickname' => 'Friend', 'guesses' => array_fill(0, 30, 0)])->assertOk();
+        $result->assertJsonPath('question_stats.0.correct', 1)->assertJsonPath('question_stats.0.total', 1);
+        $this->withToken($this->owner)->postJson($url.'/entries', ['nickname' => 'Preview', 'guesses' => array_fill(0, 30, 0)])->assertJsonPath('question_stats.0.total', 1);
+        $this->patchJson($url.'/manage', ['entry_id' => $result->json('id'), 'hidden' => true])->assertOk()->assertJsonPath('question_stats.0.total', 0);
+        $this->withToken(bin2hex(random_bytes(32)))->getJson($url.'/result')->assertNotFound();
+        $this->getJson($url)->assertOk()->assertJsonMissingPath('question_stats');
     }
 
     public function test_catalog_has_balanced_original_bilingual_choices(): void
@@ -142,6 +224,7 @@ final class FriendshipQuizTest extends TestCase
         try {
             $queries = $connection->pretend(function () {
                 (require database_path('migrations/2026_10_26_150000_create_friendship_challenges.php'))->up();
+                (require database_path('migrations/2026_10_26_180000_create_friendship_progress.php'))->up();
             });
         } finally {
             \Illuminate\Support\Facades\Schema::swap($original);
@@ -150,6 +233,7 @@ final class FriendshipQuizTest extends TestCase
         $this->assertStringContainsString('`expires_at` datetime not null', $sql);
         $this->assertStringContainsString('`created_at` datetime not null', $sql);
         $this->assertStringNotContainsString(' timestamp', $sql);
+        $this->assertStringContainsString('create table `friendship_progress`', $sql);
     }
 
     public function test_maximum_length_and_real_opt_in_counts(): void
@@ -162,6 +246,10 @@ final class FriendshipQuizTest extends TestCase
         $this->payload['question_ids'] = $ids;
         $this->payload['answers'] = array_fill(0, 150, 0);
         $url = $this->create();
+        for ($i = 0; $i < 150; $i++) {
+            $this->withToken($this->friend)->postJson($url.'/answers', ['nickname' => 'Synthetic', 'index' => $i, 'guess' => 0])
+                ->assertOk()->assertJsonCount($i + 1, 'answers')->assertJsonPath('combo', $i + 1);
+        }
         $this->withToken($this->friend)->postJson($url.'/entries', ['nickname' => 'Synthetic', 'guesses' => array_fill(0, 150, 0)])
             ->assertOk()->assertJsonPath('correct', 150)->assertJsonPath('percent', 100);
         // Fixed synthetic rows exercise the threshold, without pretending to be real users.

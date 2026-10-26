@@ -26,6 +26,7 @@ final class SecurityGuardrailsTest extends TestCase
         // Anonymous game creation and guessing use scoped browser capabilities, not account sessions.
         '/api/v0.3/friendship/challenges',
         '/api/v0.3/friendship/challenges/{id}/entries',
+        '/api/v0.3/friendship/challenges/{id}/answers',
         // Account bootstrap verifies signed Google credentials or one-time email proofs, not an existing session.
         '/api/v0.3/auth/google/challenge',
         '/api/v0.3/auth/google',

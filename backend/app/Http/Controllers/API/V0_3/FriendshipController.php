@@ -83,6 +83,19 @@ final class FriendshipController extends Controller
         return $this->response($this->quiz->result($this->quiz->challenge($id), $this->key($request)));
     }
 
+    public function progress(Request $request, string $id): JsonResponse
+    {
+        return $this->response($this->quiz->progress($this->quiz->challenge($id), $this->key($request)));
+    }
+
+    public function answer(Request $request, string $id): JsonResponse
+    {
+        $key = $this->key($request);
+        $data = $request->validate(['nickname' => $this->nameRules(), 'index' => ['required', 'integer', 'min:0', 'max:149'], 'guess' => $this->choiceRules()]);
+
+        return $this->response($this->quiz->answer($id, $data, $key));
+    }
+
     public function manage(Request $request, string $id): JsonResponse
     {
         $challenge = $this->quiz->challenge($id);

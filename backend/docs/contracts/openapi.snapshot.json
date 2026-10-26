@@ -1474,6 +1474,26 @@
                 ]
             }
         },
+        "/api/v0.3/friendship/challenges/{id}/answers": {
+            "post": {
+                "operationId": "post_api_v0_3_friendship_challenges_id_answers",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@answer",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:90,1"
+                ]
+            }
+        },
         "/api/v0.3/friendship/challenges/{id}/entries": {
             "post": {
                 "operationId": "post_api_v0_3_friendship_challenges_id_entries",
@@ -1549,6 +1569,25 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FriendshipOwnerAuth",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:20,1"
+                ]
+            }
+        },
+        "/api/v0.3/friendship/challenges/{id}/progress": {
+            "get": {
+                "operationId": "get_api_v0_3_friendship_challenges_id_progress",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\FriendshipController@progress",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
                 ]
             }
         },

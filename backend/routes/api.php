@@ -172,6 +172,8 @@ Route::prefix('v0.3')->middleware([
         Route::get('/stats', 'stats')->middleware('throttle:30,1');
         Route::post('/challenges', 'create')->middleware('throttle:10,1');
         Route::get('/challenges/{id}', 'show')->whereUuid('id');
+        Route::get('/challenges/{id}/progress', 'progress')->whereUuid('id');
+        Route::post('/challenges/{id}/answers', 'answer')->whereUuid('id')->middleware('throttle:90,1');
         Route::post('/challenges/{id}/entries', 'submit')->whereUuid('id')->middleware('throttle:10,1');
         Route::get('/challenges/{id}/result', 'result')->whereUuid('id');
         Route::get('/challenges/{id}/manage', 'manage')->whereUuid('id')->middleware(\App\Http\Middleware\FriendshipOwnerAuth::class);

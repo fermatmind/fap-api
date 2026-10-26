@@ -75,6 +75,7 @@ final class FriendshipQuiz
         if ($owner) {
             $result['answers'] = json_decode($challenge->answers, true);
             $result['entries'] = $this->entries($challenge->id, true);
+            $result['question_stats'] = $this->questionStats($challenge);
         } else {
             $result['entries'] = $this->entries($challenge->id);
         }
@@ -119,7 +120,7 @@ final class FriendshipQuiz
             'percent' => (int) round(100 * $correct / count($answers)), 'categories' => $categories,
             'answers' => $answers, 'guesses' => $data['guesses']];
         if (hash_equals($challenge->owner_hash, hash('sha256', $key))) {
-            return $result + ['preview' => true, 'entries' => $this->entries($challenge->id)];
+            return $result + ['preview' => true, 'entries' => $this->entries($challenge->id), 'question_stats' => $this->questionStats($challenge)];
         }
         $hash = hash('sha256', $key);
 
@@ -127,11 +128,16 @@ final class FriendshipQuiz
             // Locking the challenge serializes capacity, closure and entry idempotency.
             $locked = $this->challenge($challenge->id, true);
             abort_if($locked->closed, 410, 'QUIZ_CLOSED');
+            $progress = DB::table('friendship_progress')->where('challenge_id', $challenge->id)->where('player_hash', $hash)->first();
+            if ($progress) {
+                $committed = json_decode($progress->guesses, true);
+                abort_unless(array_slice($data['guesses'], 0, count($committed)) === $committed && $data['nickname'] === $progress->nickname, 409, 'ANSWER_ALREADY_REVEALED');
+            }
             $entry = DB::table('friendship_entries')->where('challenge_id', $challenge->id)->where('player_hash', $hash)->first();
             if ($entry) {
                 abort_unless(json_decode($entry->guesses, true) === $data['guesses'] && $entry->nickname === $data['nickname'], 409, 'ALREADY_PLAYED');
 
-                return $result + ['id' => $entry->id, 'preview' => false, 'entries' => $this->entries($challenge->id)];
+                return $result + ['id' => $entry->id, 'preview' => false, 'entries' => $this->entries($challenge->id), 'question_stats' => $this->questionStats($challenge)];
             }
             abort_if(DB::table('friendship_entries')->where('challenge_id', $challenge->id)->count() >= 1000, 409, 'QUIZ_FULL');
             $id = (string) Str::uuid();
@@ -141,8 +147,77 @@ final class FriendshipQuiz
                 'categories' => json_encode($result['categories']), 'created_at' => now(),
             ]);
 
-            return $result + ['id' => $id, 'preview' => false, 'entries' => $this->entries($challenge->id)];
+            return $result + ['id' => $id, 'preview' => false, 'entries' => $this->entries($challenge->id), 'question_stats' => $this->questionStats($challenge)];
         });
+    }
+
+    public function progress(object $challenge, string $key): array
+    {
+        abort_if($challenge->closed, 410, 'QUIZ_CLOSED');
+        $row = DB::table('friendship_progress')->where('challenge_id', $challenge->id)->where('player_hash', hash('sha256', $key))->first();
+        abort_unless($row, 404, 'PROGRESS_NOT_FOUND');
+
+        return $this->progressProjection($challenge, $row->nickname, json_decode($row->guesses, true));
+    }
+
+    public function answer(string $id, array $data, string $key): array
+    {
+        return DB::transaction(function () use ($id, $data, $key) {
+            $challenge = $this->challenge($id, true);
+            abort_if($challenge->closed, 410, 'QUIZ_CLOSED');
+            $hash = hash('sha256', $key);
+            abort_if(hash_equals($challenge->owner_hash, $hash), 409, 'USE_OWNER_PREVIEW');
+            $row = DB::table('friendship_progress')->where('challenge_id', $id)->where('player_hash', $hash)->first();
+            $guesses = $row ? json_decode($row->guesses, true) : [];
+            $index = $data['index'];
+            $size = count(json_decode($challenge->answers, true));
+            abort_unless($index < $size && $index <= count($guesses), 409, 'ANSWER_IN_ORDER');
+            abort_if($row && $row->nickname !== $data['nickname'], 409, 'PLAYER_CONFLICT');
+            if ($index < count($guesses)) {
+                abort_unless($guesses[$index] === $data['guess'], 409, 'ANSWER_ALREADY_REVEALED');
+            } else {
+                abort_if(DB::table('friendship_entries')->where('challenge_id', $id)->where('player_hash', $hash)->exists(), 409, 'ALREADY_PLAYED');
+                if (! $row) {
+                    abort_if(DB::table('friendship_progress')->where('challenge_id', $id)->count() >= 1000 || DB::table('friendship_entries')->where('challenge_id', $id)->count() >= 1000, 409, 'QUIZ_FULL');
+                }
+                $guesses[] = $data['guess'];
+                DB::table('friendship_progress')->updateOrInsert(['challenge_id' => $id, 'player_hash' => $hash], [
+                    'nickname' => $data['nickname'], 'guesses' => json_encode($guesses), 'created_at' => $row?->created_at ?? now(),
+                ]);
+            }
+
+            return $this->progressProjection($challenge, $data['nickname'], $guesses);
+        });
+    }
+
+    private function progressProjection(object $challenge, string $nickname, array $guesses): array
+    {
+        // Return only committed answers, never the next question's key.
+        $answers = array_slice(json_decode($challenge->answers, true), 0, count($guesses));
+        $combo = 0;
+        $best = 0;
+        foreach ($guesses as $i => $guess) {
+            $combo = $guess === $answers[$i] ? $combo + 1 : 0;
+            $best = max($best, $combo);
+        }
+
+        return ['nickname' => $nickname, 'guesses' => $guesses, 'answers' => $answers, 'combo' => $combo, 'best_combo' => $best];
+    }
+
+    private function questionStats(object $challenge): array
+    {
+        $answers = json_decode($challenge->answers, true);
+        $rows = DB::table('friendship_entries')->where('challenge_id', $challenge->id)->where('hidden', false)->limit(1000)->pluck('guesses');
+        $counts = array_fill(0, count($answers), 0);
+        foreach ($rows as $json) {
+            foreach (json_decode($json, true) as $i => $guess) {
+                if ($guess === $answers[$i]) {
+                    $counts[$i]++;
+                }
+            }
+        }
+
+        return array_map(fn ($count) => ['correct' => $count, 'total' => $rows->count()], $counts);
     }
 
     public function result(object $challenge, string $key): array
