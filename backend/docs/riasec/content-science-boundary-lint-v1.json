@@ -81,7 +81,8 @@
     {
       "section_key": "six_dimension_map",
       "primary_assets": ["content_assets/riasec/profile_shape_copy_v1.zh-CN.json", "content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json", "content_assets/riasec/runtime_surface_copy_v1.zh-CN.json",
-        "content_assets/riasec/runtime_surface_copy_v1.en.json"],
+        "content_assets/riasec/runtime_surface_copy_v1.en.json",
+        "content_assets/riasec/report_surface_copy_v1.en.json"],
       "service_files": ["app/Services/Riasec/RiasecReportModuleSelector.php", "app/Services/Riasec/RiasecPublicProjectionService.php"],
       "risk": "high or flat bars can be overread as absolute strength or ability",
       "repair_goal": "explain relative shape, flatness, near ties, and reading strength"
@@ -176,7 +177,8 @@
     {
       "section_key": "quality_copy",
       "primary_assets": ["content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json", "content_assets/riasec/runtime_surface_copy_v1.zh-CN.json",
-        "content_assets/riasec/runtime_surface_copy_v1.en.json"],
+        "content_assets/riasec/runtime_surface_copy_v1.en.json",
+        "content_assets/riasec/report_surface_copy_v1.en.json"],
       "service_files": ["app/Services/Riasec/RiasecDeepCopySlotRegistry.php", "app/Services/Riasec/RiasecQualityRuleContract.php"],
       "risk": "low-quality copy can blame the user or upsell 140Q",
       "repair_goal": "explain cautious reading, retake guidance, and hidden strong modules"
@@ -228,6 +230,7 @@
     "content_assets/riasec/profile_shape_copy_v1.zh-CN.json",
     "content_assets/riasec/runtime_surface_copy_v1.zh-CN.json",
         "content_assets/riasec/runtime_surface_copy_v1.en.json",
+    "content_assets/riasec/report_surface_copy_v1.en.json",
     "content_assets/riasec/share_pdf_history_v1.en.json",
     "content_assets/riasec/share_pdf_history_v1.zh-CN.json",
     "content_assets/riasec/technical_note_user_summary_v1.en.json",
