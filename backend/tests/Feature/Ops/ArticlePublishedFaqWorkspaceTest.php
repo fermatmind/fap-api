@@ -167,7 +167,7 @@ final class ArticlePublishedFaqWorkspaceTest extends TestCase
             range(1, $count),
         );
         $schema['editorial_package_v1']['answer_surface_v1']['faq_items'][0] = [
-            'key' => 'faq_1', 'q' => 'Question 1?', 'a' => 'Answer 1.', 'opaque' => ['source' => 'preserved'],
+            'key' => 'faq_1', 'q' => 'Question 1?', 'a' => 'Answer 1.', 'opaque' => ['source' => 'preserved'], 'visible' => true,
         ];
         $article->seoMeta->update(['schema_json' => $schema]);
         $before = NativeUpdater::state($article->fresh());
@@ -201,7 +201,7 @@ final class ArticlePublishedFaqWorkspaceTest extends TestCase
 
     public static function existingLongInventories(): array
     {
-        return [[7], [8], [9]];
+        return [[5], [7], [8], [9]];
     }
 
     public function test_disabled_or_oversized_inventory_stays_outside_this_action(): void

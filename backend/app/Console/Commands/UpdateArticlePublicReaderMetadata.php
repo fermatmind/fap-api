@@ -132,7 +132,10 @@ final class UpdateArticlePublicReaderMetadata extends Command
                     || ! is_array($oldItems) || ! array_is_list($oldItems)) {
                     throw new RuntimeException('ordinary_faq_scope_invalid');
                 }
-                $longFaqAnswerUpdate = max(count($items), count($oldItems)) > 6 && Hash::hash($items) !== Hash::hash($oldItems);
+                $hasExistingItemMetadata = collect($oldItems)->contains(static fn ($item): bool => is_array($item)
+                    && array_diff(array_keys($item), ['key', 'id', 'question', 'answer', 'q', 'a']) !== []);
+                $longFaqAnswerUpdate = (max(count($items), count($oldItems)) > 6 || $hasExistingItemMetadata)
+                    && Hash::hash($items) !== Hash::hash($oldItems);
                 if ($longFaqAnswerUpdate && (! $this->preservesExistingFaqInventory($oldItems, $items)
                     || ($oldMetadata['answer_surface_policy'] ?? null) !== ($newMetadata['answer_surface_policy'] ?? null)
                     || ($oldMetadata['answer_surface_visibility'] ?? null) !== ($newMetadata['answer_surface_visibility'] ?? null)

@@ -232,11 +232,12 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
     }
 
-    public function test_long_faq_answer_updates_cannot_change_other_reader_authority(): void
+    #[\PHPUnit\Framework\Attributes\DataProvider('protectedExistingInventorySizes')]
+    public function test_long_faq_answer_updates_cannot_change_other_reader_authority(int $count): void
     {
         $article = $this->article();
         $schema = $this->package($article)['candidate']['schema_json'];
-        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'] = $this->faqItems(7);
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'] = $this->faqItems($count);
         $schema['editorial_package_v1']['answer_surface_v1']['faq_items'][0]['opaque'] = ['source' => 'keep'];
         $article->seoMeta->update(['schema_json' => $schema]);
         $article = $article->fresh();
@@ -276,6 +277,11 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
             $this->assertSame($before, Updater::state($article->fresh()), $case);
         }
         $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    public static function protectedExistingInventorySizes(): array
+    {
+        return [[5], [7]];
     }
 
     private function faqItems(int $count): array

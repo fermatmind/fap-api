@@ -96,7 +96,6 @@ final class ArticleManualSourceReviewWorkspace
             || (int) $target->org_id !== 0 || (int) $source->org_id !== 0 || ! $source->isSourceArticle()
             || ! in_array($target->locale, ['en', 'zh-CN'], true) || $target->locale === $source->locale
             || $target->source_locale !== $source->locale || $target->translation_group_id !== $source->translation_group_id
-            || $target->slug !== $source->slug
             || (int) $target->translated_from_article_id !== (int) $source->id
             || ! $source->is_public || $source->status !== 'published'
             || ! $source->published_revision_id || $source->working_revision_id !== $source->published_revision_id

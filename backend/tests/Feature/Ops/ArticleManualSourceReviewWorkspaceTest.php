@@ -32,9 +32,13 @@ final class ArticleManualSourceReviewWorkspaceTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_review_binds_exact_current_source_without_publishing_or_changing_editorial_content(): void
+    #[DataProvider('sourceAndTargetSlugs')]
+    public function test_review_binds_exact_current_source_without_publishing_or_changing_editorial_content(bool $differentSlug): void
     {
         [$source, $target] = $this->fixture();
+        if ($differentSlug) {
+            $target->forceFill(['slug' => 'independent-english-url'])->saveQuietly();
+        }
         $before = $target->getRawOriginal();
         $published = $target->publishedRevision->getRawOriginal();
         $working = $target->workingRevision->getRawOriginal();
@@ -58,6 +62,11 @@ final class ArticleManualSourceReviewWorkspaceTest extends TestCase
         $this->assertNull($target->workingRevision->approved_at);
     }
 
+    public static function sourceAndTargetSlugs(): array
+    {
+        return [[false], [true]];
+    }
+
     #[DataProvider('drifts')]
     public function test_drift_rejects_without_rebinding(string $surface): void
     {
@@ -71,6 +80,8 @@ final class ArticleManualSourceReviewWorkspaceTest extends TestCase
             'target_seo' => $target->seoMeta->forceFill(['robots' => 'index,follow'])->save(),
             'approved' => $target->workingRevision->forceFill(['revision_status' => 'approved', 'approved_at' => now()])->save(),
             'source_pointer' => $source->forceFill(['working_revision_id' => null])->saveQuietly(),
+            'group' => $target->forceFill(['translation_group_id' => 'unrelated-group'])->saveQuietly(),
+            'source_identity' => $target->forceFill(['translated_from_article_id' => 99999])->saveQuietly(),
         };
         $this->assertRejected($service, $target, [...$input, 'source_reviewed' => true]);
         $this->assertSame(str_repeat('a', 64), $target->fresh('workingRevision')->workingRevision->translated_from_version_hash);
@@ -79,7 +90,7 @@ final class ArticleManualSourceReviewWorkspaceTest extends TestCase
 
     public static function drifts(): array
     {
-        return array_map(static fn (string $case): array => [$case], ['source_body', 'target_body', 'source_seo', 'target_seo', 'approved', 'source_pointer']);
+        return array_map(static fn (string $case): array => [$case], ['source_body', 'target_body', 'source_seo', 'target_seo', 'approved', 'source_pointer', 'group', 'source_identity']);
     }
 
     public function test_permission_and_step_up_and_explicit_review_are_required(): void
