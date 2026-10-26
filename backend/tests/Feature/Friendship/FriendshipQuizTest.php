@@ -113,6 +113,22 @@ final class FriendshipQuizTest extends TestCase
         $this->assertSame(1000, DB::table('friendship_progress')->count());
     }
 
+    public function test_real_answer_throttle_does_not_consume_the_completion_bucket(): void
+    {
+        $this->withMiddleware(\Illuminate\Routing\Middleware\ThrottleRequests::class);
+        config(['fap.rate_limits.bypass_in_test_env' => false]);
+        $url = $this->create();
+        for ($i = 0; $i < 30; $i++) {
+            $this->withToken($this->friend)->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => $i, 'guess' => 0])->assertOk();
+        }
+        $this->postJson($url.'/entries', ['nickname' => 'Friend', 'guesses' => array_fill(0, 30, 0)])->assertOk();
+        for ($i = 0; $i < 60; $i++) {
+            $this->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => 0, 'guess' => 0])->assertOk();
+        }
+        $this->postJson($url.'/answers', ['nickname' => 'Friend', 'index' => 0, 'guess' => 0])->assertStatus(429);
+        $this->getJson($url.'/result')->assertOk()->assertJsonPath('correct', 30);
+    }
+
     public function test_question_accuracy_is_authorized_and_excludes_hidden_and_preview_entries(): void
     {
         $url = $this->create();
