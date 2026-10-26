@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {spawn,spawnSync} from 'node:child_process';
-import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,existsSync,symlinkSync,cpSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,existsSync,symlinkSync,cpSync,chmodSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
 import {createServer} from 'node:net';
@@ -149,6 +149,60 @@ test('every existing trunk contract job provisions native tools before its tests
  assert.match(block,/require_tools\.sh rg php composer curl grep sed lsof cmp awk ps which/);
  assert.match(block,/extension_loaded\("pdo_sqlite"\)/);assert.doesNotMatch(block,/\|\| true|continue-on-error/);
  }
+});
+
+const classifierToolSetup=()=>readFileSync(join(root,'.github/workflows/ci.yml'),'utf8')
+ .match(/      - name: Install classifier contract test tools\n        run: \|\n((?:          .*\n)+)/)[1]
+ .split('\n').filter(Boolean).map(line=>line.slice(10)).join('\n');
+
+test('classifier APT fetches are visible, bounded and strict about partial update failure',()=>{
+ const script=classifierToolSetup();
+ const commands=script.split('\n').filter(line=>line.startsWith('sudo apt-get '));
+ assert.equal(commands.length,2);
+ for(const command of commands){
+  assert.match(command,/-o Acquire::Retries=0/);
+  assert.match(command,/-o Acquire::http::Timeout=20/);
+  assert.match(command,/-o Acquire::https::Timeout=20/);
+ }
+ assert.match(commands[0],/-o APT::Update::Error-Mode=any update$/);
+ assert.match(commands[1],/install -y --no-install-recommends --no-upgrade bash coreutils curl grep sed lsof diffutils procps mawk debianutils php-cli php-sqlite3 composer ripgrep$/);
+ assert.doesNotMatch(script,/--quiet|(?:^|\s)-q|\|\||\b(?:while|until)\b|continue-on-error/);
+});
+
+test('classifier tool preparation preserves success and stops on acquisition or final guard failures',async t=>{
+ const bash=spawnSync('bash',['-c','command -v bash'],{encoding:'utf8'}).stdout.trim();
+ for(const scenario of [
+  {name:'success',status:0,aptCalls:2,phpCalls:1},
+  {name:'strict partial update failure',update:100,status:100,aptCalls:1,phpCalls:0},
+  {name:'acquisition timeout failure',update:100,status:100,aptCalls:1,phpCalls:0},
+  {name:'install failure',install:100,status:100,aptCalls:2,phpCalls:0},
+  {name:'missing required rg',missing:'rg',status:127,aptCalls:2,phpCalls:0},
+  {name:'missing SQLite extension',php:1,status:1,aptCalls:2,phpCalls:1},
+ ])await t.test(scenario.name,()=>{
+  const directory=mkdtempSync(join(tmpdir(),'fm-classifier-tools-'));const bin=join(directory,'bin');
+  try{
+   mkdirSync(bin);mkdirSync(join(directory,'backend/scripts/ci'),{recursive:true});
+   cpSync(join(root,'backend/scripts/ci/require_tools.sh'),join(directory,'backend/scripts/ci/require_tools.sh'));
+   symlinkSync(bash,join(bin,'bash'));
+   const executable=(name,body)=>{const file=join(bin,name);writeFileSync(file,'#!'+bash+'\n'+body+'\n');chmodSync(file,0o755);};
+   for(const tool of ['rg','composer','curl','grep','sed','lsof','cmp','awk','ps','which'])if(tool!==scenario.missing)executable(tool,'exit 0');
+   executable('sudo',`printf '%s\\n' "$*" >> "$APT_PROBE_LOG"
+case " $* " in
+ *" update "*) exit "${scenario.update??0}";;
+ *" install "*) exit "${scenario.install??0}";;
+ *) exit 99;;
+esac`);
+   executable('php',`printf 'php\\n' >> "$PHP_PROBE_LOG"; exit ${scenario.php??0}`);
+   const aptLog=join(directory,'apt.log'),phpLog=join(directory,'php.log');
+   const result=spawnSync(bash,['-e','-o','pipefail','-c',classifierToolSetup()],{
+    cwd:directory,encoding:'utf8',env:{PATH:bin,APT_PROBE_LOG:aptLog,PHP_PROBE_LOG:phpLog},timeout:5000,
+   });
+   assert.equal(result.status,scenario.status,result.stderr);
+   assert.equal(readFileSync(aptLog,'utf8').trim().split('\n').length,scenario.aptCalls);
+   assert.equal(existsSync(phpLog)?readFileSync(phpLog,'utf8').trim().split('\n').length:0,scenario.phpCalls);
+   if(scenario.missing)assert.match(result.stderr,/missing required tool: rg/);
+  }finally{rmSync(directory,{recursive:true,force:true});}
+ });
 });
 
 
