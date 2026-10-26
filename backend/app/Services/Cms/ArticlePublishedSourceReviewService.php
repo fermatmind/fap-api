@@ -23,6 +23,18 @@ final class ArticlePublishedSourceReviewService
 {
     private const SCOPE = 'cms_article_source_review';
 
+    /** A published pair can need a current review even when its historical hashes match. */
+    public function needsCurrentReview(Article $selected): bool
+    {
+        try {
+            $this->pair($selected);
+
+            return ! $this->hasCurrentReview($selected);
+        } catch (Throwable) {
+            return false;
+        }
+    }
+
     public function prepare(Article $selected): array
     {
         $this->authorize();

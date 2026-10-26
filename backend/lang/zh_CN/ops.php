@@ -761,6 +761,7 @@ return [
             'translated_from' => '译文依据：:hash',
             'source_changed_after_target_revision' => '源文在目标版本后发生变化',
             'source_target_hash_current' => '源文与目标哈希当前一致',
+            'current_source_metadata_reviewed' => '当前源文与元数据已复核；保留历史指纹 :recorded；当前字段指纹 :computed。',
             'published_revision_stale' => '已发布版本过期',
             'working_revision_is_published_revision' => '工作版本就是发布版本',
             'working_revision_differs_from_published_revision' => '工作版本不同于最近发布版本',

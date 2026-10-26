@@ -220,7 +220,7 @@ class EditArticle extends EditRecord
                 ->visible(fn (): bool => ContentAccess::canWrite() && ! $this->getRecord()->isSourceArticle()
                     && $this->getRecord()->published_revision_id !== null
                     && $this->getRecord()->working_revision_id === $this->getRecord()->published_revision_id
-                    && app(ArticleTranslationRevisionWorkspace::class)->isWorkingRevisionStale($this->getRecord()))
+                    && app(ArticlePublishedSourceReviewService::class)->needsCurrentReview($this->getRecord()))
                 ->modalDescription('实读两份完整认证预览后记录当前双语版本的正式复核证据。原正文、发布revision、历史来源hash、SEO和缓存均保持；任一版本或元数据变化后证据失效。')
                 ->fillForm(fn (): array => app(ArticlePublishedSourceReviewService::class)->prepare($this->getRecord()))
                 ->form([

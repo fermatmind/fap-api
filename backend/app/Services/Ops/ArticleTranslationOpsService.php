@@ -6,14 +6,18 @@ namespace App\Services\Ops;
 
 use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\EditorialReview;
+use App\Services\Cms\ArticlePublishedSourceReviewService;
 use App\Services\Cms\ArticleTranslationWorkflowService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 
+/** @review-surface article_translation_revision */
 final class ArticleTranslationOpsService
 {
     private const PUBLIC_ARTICLE_ORG_ID = 0;
@@ -91,6 +95,8 @@ final class ArticleTranslationOpsService
         $source = $sourceArticles->isNotEmpty()
             ? $this->selectSourceArticle($sourceArticles, $articles)
             : ($sourceCandidates->count() === 1 ? $sourceCandidates->first() : null);
+        $reviewedMetadataDrift = $this->reviewedSourceMetadataDrift($source, $articles);
+        $sourceVersionIssues = $source instanceof Article ? $this->sourceVersionIssues($source, $reviewedMetadataDrift) : [];
         $sourceHash = $this->sourceHash($source);
         $publishedSourceHash = $source?->publishedRevision?->source_version_hash;
         $articleIds = $articles->pluck('id')->map(fn (mixed $id): int => (int) $id)->all();
@@ -100,7 +106,7 @@ final class ArticleTranslationOpsService
 
         $locales = $articles
             ->sortBy(fn (Article $article): string => ($this->isSource($article) ? '0-' : '1-').(string) $article->locale)
-            ->map(fn (Article $article): array => $this->summarizeLocale($article, $source, $sourceHash, $publishedSourceHash, $revisions))
+            ->map(fn (Article $article): array => $this->summarizeLocale($article, $source, $sourceHash, $publishedSourceHash, $revisions, $sourceVersionIssues, $reviewedMetadataDrift))
             ->values();
         $coverage = $this->coverage($locales, $this->targetLocales(), (string) ($source?->locale ?? ''));
 
@@ -111,7 +117,7 @@ final class ArticleTranslationOpsService
             ->merge($orphanRevisions->isNotEmpty() ? ['orphan revision'] : [])
             ->values()
             ->all();
-        $canonicalIssues = $this->canonicalIssues($sourceArticles, $sourceCandidates, $articles, $source);
+        $canonicalIssues = $this->canonicalIssues($sourceArticles, $sourceCandidates, $articles, $source, $sourceVersionIssues);
         $alerts = $this->alerts($locales, $coverage['missing_target_locales'], $canonicalIssues, $ownershipIssues);
 
         return [
@@ -122,6 +128,13 @@ final class ArticleTranslationOpsService
             'source_article_status' => (string) ($source?->status ?? 'missing'),
             'source_edit_url' => $source instanceof Article ? ArticleResource::getUrl('edit', ['record' => $source]) : null,
             'latest_source_hash' => $sourceHash,
+            'source_metadata_review' => $reviewedMetadataDrift ? [
+                'state' => 'reviewed_current',
+                'recorded_hash' => $source->source_version_hash,
+                'computed_hash' => $source->computeSourceVersionHash(),
+                'published_revision_id' => $source->published_revision_id,
+                'historical_hash_preserved' => true,
+            ] : null,
             'locales' => $locales->all(),
             'locale_codes' => $locales->pluck('locale')->all(),
             'published_locales' => $publishedLocales->pluck('locale')->all(),
@@ -149,11 +162,12 @@ final class ArticleTranslationOpsService
         ?Article $source,
         ?string $sourceHash,
         ?string $publishedSourceHash,
-        Collection $revisions
+        Collection $revisions,
+        array $sourceVersionIssues,
+        bool $reviewedMetadataDrift
     ): array {
         $workingRevision = $article->workingRevision;
         $publishedRevision = $article->publishedRevision;
-        $sourceVersionIssues = $source instanceof Article ? $this->sourceVersionIssues($source) : [];
         $sourceVersionConflict = $sourceVersionIssues !== [];
         $status = (string) ($workingRevision?->revision_status ?? $article->translation_status ?? Article::TRANSLATION_STATUS_SOURCE);
         $translatedFromHash = $workingRevision?->translated_from_version_hash;
@@ -233,7 +247,7 @@ final class ArticleTranslationOpsService
             'ownership_issues' => $ownershipIssues,
             'edit_url' => ArticleResource::getUrl('edit', ['record' => $article]),
             'revision_history' => $this->revisionHistory($articleRevisions),
-            'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isWorkingStale, $isPublishedStale, $isWorkingKnown),
+            'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isWorkingStale, $isPublishedStale, $isWorkingKnown, $reviewedMetadataDrift),
             'preflight' => $this->localizedPreflight($preflight),
             'has_non_stale_blockers' => $hasNonStaleBlockers,
             'actions' => $this->localeActions($article, $status, $isWorkingStale, $isSource),
@@ -310,7 +324,7 @@ final class ArticleTranslationOpsService
      * @param  Collection<int, Article>  $articles
      * @return list<string>
      */
-    private function canonicalIssues(Collection $sourceArticles, Collection $sourceCandidates, Collection $articles, ?Article $source): array
+    private function canonicalIssues(Collection $sourceArticles, Collection $sourceCandidates, Collection $articles, ?Article $source, array $sourceVersionIssues): array
     {
         $issues = [];
 
@@ -325,7 +339,7 @@ final class ArticleTranslationOpsService
             return $issues;
         }
 
-        foreach ($this->sourceVersionIssues($source) as $sourceVersionIssue) {
+        foreach ($sourceVersionIssues as $sourceVersionIssue) {
             $issues[] = $sourceVersionIssue === 'source row hash differs from current content'
                 ? __('ops.translation_ops.ownership_issues.source_row_hash_mismatch')
                 : __('ops.translation_ops.ownership_issues.source_published_revision_hash_mismatch');
@@ -348,7 +362,7 @@ final class ArticleTranslationOpsService
     }
 
     /** @return list<string> */
-    private function sourceVersionIssues(Article $source): array
+    private function sourceVersionIssues(Article $source, bool $reviewedMetadataDrift): array
     {
         $working = $source->workingRevision;
         $published = $source->publishedRevision;
@@ -360,8 +374,9 @@ final class ArticleTranslationOpsService
         }
 
         $issues = [];
-        if (! filled($source->source_version_hash)
-            || ! hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash())) {
+        if ((! filled($source->source_version_hash)
+            || ! hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash()))
+            && ! $reviewedMetadataDrift) {
             $issues[] = 'source row hash differs from current content';
         }
         if (! filled($source->source_version_hash)
@@ -371,6 +386,27 @@ final class ArticleTranslationOpsService
         }
 
         return $issues;
+    }
+
+    /** A current pair review supplements historical metadata fingerprints; it never rewrites them. */
+    private function reviewedSourceMetadataDrift(?Article $source, Collection $articles): bool
+    {
+        if (! $source instanceof Article || (int) $source->org_id !== self::PUBLIC_ARTICLE_ORG_ID
+            || ! $source->isSourceArticle() || $articles->count() !== 2
+            || ! filled($source->source_version_hash)
+            || hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash())
+            || (EditorialReviewAudit::latestState('article', $source)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
+            return false;
+        }
+        $reviews = EditorialReview::withoutGlobalScopes()->where('content_type', 'article')
+            ->where('content_id', $source->id)->get(['org_id']);
+        if ($reviews->count() !== 1 || (int) $reviews->first()->org_id !== (int) $source->org_id) {
+            return false;
+        }
+        $targets = $articles->filter(fn (Article $article): bool => (int) $article->id !== (int) $source->id);
+
+        return $targets->count() === 1
+            && app(ArticlePublishedSourceReviewService::class)->hasCurrentReview($targets->first());
     }
 
     /**
@@ -596,16 +632,22 @@ final class ArticleTranslationOpsService
         ?string $sourceHash,
         bool $isWorkingStale,
         bool $isPublishedStale,
-        bool $isWorkingKnown
+        bool $isWorkingKnown,
+        bool $reviewedMetadataDrift
     ): array {
         $summary = [];
         $summary[] = __('ops.translation_ops.compare.source_hash', ['hash' => $this->shortHash($sourceHash) ?? __('ops.status.missing')]);
         $summary[] = __('ops.translation_ops.compare.translated_from', ['hash' => $this->shortHash($workingRevision?->translated_from_version_hash) ?? __('ops.status.missing')]);
-        $summary[] = $isWorkingStale
+        $summary[] = $reviewedMetadataDrift
+            ? __('ops.translation_ops.compare.current_source_metadata_reviewed', [
+                'recorded' => $this->shortHash($source?->source_version_hash),
+                'computed' => $source ? $this->shortHash($source->computeSourceVersionHash()) : null,
+            ])
+            : ($isWorkingStale
             ? __('ops.translation_ops.compare.source_changed_after_target_revision')
             : ($isWorkingKnown
                 ? __('ops.translation_ops.compare.source_target_hash_current')
-                : __('ops.translation_ops.compare.source_hash_unverified'));
+                : __('ops.translation_ops.compare.source_hash_unverified')));
         if ($isPublishedStale) {
             $summary[] = __('ops.translation_ops.compare.published_revision_stale');
         }
