@@ -13,6 +13,8 @@ final class RiasecPrivateResultSourceRepository
     /** @var array<string,array<string,mixed>> */
     private array $loaded = [];
 
+    private array $reportAuthorities = [];
+
     public function __construct(private readonly ?RiasecPrivateResultPackLoader $loader = null) {}
 
     /** @return array<string,mixed> */
@@ -64,6 +66,31 @@ final class RiasecPrivateResultSourceRepository
     public function authority(): array
     {
         return $this->loaded()['authority'];
+    }
+
+    /** Valid package provenance only; the projection checks each report instance separately. */
+    public function reportSourceAuthority(string $locale): ?array
+    {
+        if (! array_key_exists($locale, $this->reportAuthorities)) {
+            $this->reportAuthorities[$locale] = RiasecPrivateResultPackLoader::reportSourceAuthority($this->loaded()['payload'], $locale);
+        }
+
+        return $this->reportAuthorities[$locale];
+    }
+
+    /** Old immutable packages retain their existing inline copy, never new report authority. */
+    public function englishReportCopy(string $path, mixed $legacy): mixed
+    {
+        $loaded = $this->loaded();
+        if (($loaded['payload']['compiler']['version'] ?? null) !== '1.9.0') {
+            return $legacy;
+        }
+        $value = data_get($this->asset(RiasecEnglishReportSourceContract::SURFACE_ASSET, 'en'), $path);
+        if ($value === null) {
+            throw new RuntimeException('RIASEC_EN_REPORT_COPY_MISSING:'.$path);
+        }
+
+        return $value;
     }
 
     /** @return array{assets:array<string,mixed>,authority:array<string,mixed>,payload:array<string,mixed>} */

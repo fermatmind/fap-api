@@ -21,7 +21,7 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
         $loader->assertPackage($compiled['manifest'], $compiled['payload'], $compiled['bytes']);
         $english = $loader->load('en-US');
         $chinese = $loader->load('zh-CN');
-        $this->assertCount(11, $english['assets']);
+        $this->assertCount(12, $english['assets']);
         $this->assertCount(19, $chinese['assets']);
         $this->assertSame('FERMATMIND_RIASEC_PRIVATE_RESULT_EN_SELECTED', $english['authority']['authority_id']);
         $this->assertSame('riasec.public_projection.v2', $english['authority']['runtime_contract']);
@@ -66,7 +66,7 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
         $payload['assets'] = array_intersect_key($payload['assets'], Compiler::sourceContract('1.0.0'));
-        unset($payload['coverage']['locale_modules'], $payload['coverage']['english_selected_sources']);
+        unset($payload['coverage']['locale_modules'], $payload['coverage']['english_selected_sources'], $payload['coverage']['english_report_sources']);
         $payload['compiler']['version'] = '1.0.0';
         $manifest['compiler'] = $payload['compiler'];
         $manifest['coverage'] = $payload['coverage'];
@@ -95,7 +95,7 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
         $manifest = $compiled['manifest'];
         $contract = Compiler::sourceContract('1.1.0');
         $payload['assets'] = array_intersect_key($payload['assets'], $contract);
-        unset($payload['coverage']['english_selected_sources']);
+        unset($payload['coverage']['english_selected_sources'], $payload['coverage']['english_report_sources']);
         $payload['coverage']['locale_modules']['en'] = ['activity_explorer_v0_1'];
         $payload['compiler']['version'] = '1.1.0';
         $manifest['compiler'] = $payload['compiler'];

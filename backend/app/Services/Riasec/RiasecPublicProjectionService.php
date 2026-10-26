@@ -239,6 +239,43 @@ final class RiasecPublicProjectionService
         }
         $projection['exploration_feedback_overlay_v0_1'] = $this->feedbackOverlay->build($result, $projection, $snapshotBound, $locale);
         $projection['lifecycle_copy_v1'] = $this->lifecycleCopy->runtimeLifecycleCopyContract($snapshotBound, $locale);
+        if ($projection['locale'] === 'en') {
+            $sourceAuthority = $this->privateResultSource->reportSourceAuthority('en');
+            if ($sourceAuthority !== null) {
+                $validation = RiasecEnglishReportSourceContract::validateProjection($projection, $sourceAuthority, [
+                    'scores' => $rawDimensionScores,
+                    'original_form_code' => $payload['form_code'] ?? data_get($payload, 'measurement_contract_v1.form.form_code'),
+                    'measurement_form_code' => data_get($payload, 'measurement_contract_v1.form.form_code'),
+                    'answer_count' => $payload['answer_count'] ?? null,
+                    'quality_grade' => $payload['quality_grade'] ?? data_get($payload, 'quality.grade'),
+                    'result_type_code' => $result->type_code,
+                    'version_candidates' => [
+                        'scoring_spec_version' => [$result->scoring_spec_version, data_get($payload, 'version_snapshot.scoring_spec_version'), $payload['scoring_spec_version'] ?? null],
+                        'form_version' => [$result->dir_version, data_get($payload, 'version_snapshot.pack_version')],
+                        'content_package_version' => [$result->content_package_version, data_get($payload, 'version_snapshot.pack_version')],
+                    ],
+                    'top_code' => (string) ($v1['top_code'] ?? ''),
+                ], [
+                    'summary' => $snapshotBound ? $this->resultSummary($projection, $locale, true) : null,
+                    'module_policy' => $this->moduleSelector->build($projection),
+                    'interpretation_state' => $this->publicInterpretationState($interpretationRule, $locale),
+                    'score_rows' => $this->dimensionScoreRows($v1['scores_0_100'], $locale),
+                    'quality' => $projection['quality'],
+                    'quality_display' => $this->qualityDisplay($locale, (string) ($v1['quality_grade'] ?? ''), $qualityRule),
+                    'tie_display' => $this->publicInterpretationState($interpretationRule, $locale)['tie_display_v1'],
+                    'slots' => $this->deepContentSlotsEnvelope($projection, $locale)['slots'],
+                    'lifecycle' => $this->lifecycleCopy->runtimeLifecycleCopyContract($snapshotBound, $locale),
+                    'activity' => $this->activityExplorer->build((string) ($v1['top_code'] ?? ''), $locale),
+                ]);
+                $projection['report_content_v1'] = $validation;
+                if ($validation['status'] === 'complete') {
+                    $projection['private_result_authority'] = $sourceAuthority + [
+                        'instance_contract_id' => $validation['contract_id'],
+                        'instance_hash' => $validation['instance_hash'],
+                    ];
+                }
+            }
+        }
         unset($projection['_dimension_scores_complete']);
 
         return $projection;
@@ -282,17 +319,17 @@ final class RiasecPublicProjectionService
             'snapshot_scope' => (bool) data_get($projection, 'measurement_evidence.snapshot_bound', false)
                 ? 'report_snapshot'
                 : 'persisted_result',
-            'headline' => $isZh ? (string) $this->privateResultSource->get('result_summary.headline') : 'Your interest result summary',
+            'headline' => $isZh ? (string) $this->privateResultSource->get('result_summary.headline') : $this->privateResultSource->englishReportCopy('result_summary.headline', 'Your interest result summary'),
             'ranking_display' => (string) data_get($tie, 'display_copy.headline', data_get($projection, 'holland_code.code', '')),
             'tie_note' => (string) data_get($tie, 'display_copy.note', ''),
             'quality_summary' => implode($isZh ? '；' : '; ', $qualityParts),
             'highlights' => array_slice($highlights, 0, 3),
             'next_step' => $isZh
                 ? (string) $this->privateResultSource->get('result_summary.next_step')
-                : 'Choose one of the first three interest dimensions for a 15–30 minute low-risk activity, then note whether you want to continue.',
+                : $this->privateResultSource->englishReportCopy('result_summary.next_step', 'Choose one of the first three interest dimensions for a 15–30 minute low-risk activity, then note whether you want to continue.'),
             'boundary' => $isZh
                 ? (string) $this->privateResultSource->get('result_summary.boundary')
-                : 'This result describes career-interest signals from this response only; it is not an ability, identity, career-match, or outcome conclusion.',
+                : $this->privateResultSource->englishReportCopy('result_summary.boundary', 'This result describes career-interest signals from this response only; it is not an ability, identity, career-match, or outcome conclusion.'),
         ];
     }
 
@@ -303,14 +340,14 @@ final class RiasecPublicProjectionService
             return (array) $this->privateResultSource->get('result_summary.dimension_bands', []);
         }
 
-        return [
+        return (array) $this->privateResultSource->englishReportCopy('result_summary.dimension_bands', [
             'R' => ['high' => 'Hands-on work stands out here; test it with one practical task.', 'medium' => 'Your interest in practical work may depend on the tools, goal, and setting.', 'low' => 'Practical work ranks lower here; a short task can still clarify the experience.'],
             'I' => ['high' => 'Questioning and evidence analysis stand out here; test them on a real problem.', 'medium' => 'Your interest in analysis may depend on the problem and room to explore.', 'low' => 'Analysis ranks lower here; notice whether a concrete question still draws you into investigation.'],
             'A' => ['high' => 'Creative expression stands out here; test it through a small original piece.', 'medium' => 'Your interest in expression may depend on autonomy and the medium.', 'low' => 'Creative expression ranks lower here; a lightweight piece can clarify your response.'],
             'S' => ['high' => 'Understanding and supporting people stand out here; test this in real collaboration.', 'medium' => 'Your interest in helping may depend on the relationship and interaction style.', 'low' => 'Helping activity ranks lower here; distinguish sustained interaction from support in specific settings.'],
             'E' => ['high' => 'Advancing goals and organizing action stand out here; test them in a small initiative.', 'medium' => 'Your interest in driving action may depend on purpose and autonomy.', 'low' => 'Influence activity ranks lower here; notice whether contributing ideas feels better than leading.'],
             'C' => ['high' => 'Organizing information and processes stands out here; test it in a structured task.', 'medium' => 'Your interest in structure may depend on clear rules and room to improve them.', 'low' => 'Routine structure ranks lower here; separate repetition from a genuine need for clarity.'],
-        ];
+        ]);
     }
 
     /**
@@ -749,7 +786,7 @@ final class RiasecPublicProjectionService
         }
         $flags = array_values(array_unique($flags));
 
-        $copy = $isZh ? (array) $this->privateResultSource->get('quality_display', []) : [
+        $copy = $isZh ? (array) $this->privateResultSource->get('quality_display', []) : $this->privateResultSource->englishReportCopy('quality_display', [
             'headlines' => [
                 'A' => 'Your responses are stable enough for a standard reading',
                 'B' => 'A mild response-quality note applies; read the result alongside your real experience',
@@ -778,7 +815,7 @@ final class RiasecPublicProjectionService
                 'missing_items' => 'Complete every required item before generating a new result.',
             ],
             'boundary' => 'This note concerns the readability of this response set; it does not judge ability, personality, or personal worth.',
-        ];
+        ]);
 
         $reasons = [];
         $improvements = [];
@@ -786,7 +823,7 @@ final class RiasecPublicProjectionService
         if (count($attentionFlags) === 2) {
             $reasons[] = $isZh
                 ? (string) $this->privateResultSource->get('quality_display.reasons.both_attention_failed')
-                : 'Both attention checks were missed, so some answers may not fully reflect your usual preferences.';
+                : $this->privateResultSource->englishReportCopy('quality_display.reasons.both_attention_failed', 'Both attention checks were missed, so some answers may not fully reflect your usual preferences.');
             $improvements[] = $copy['improvements']['attention_133_failed'];
         }
         foreach ($flags as $flag) {
@@ -801,10 +838,10 @@ final class RiasecPublicProjectionService
         if ($normalizedGrade !== 'A' && $reasons === []) {
             $reasons[] = $isZh
                 ? (string) $this->privateResultSource->get('quality_display.reasons.generic')
-                : 'This response set received a quality note, so the result may be less distinct or stable.';
+                : $this->privateResultSource->englishReportCopy('quality_display.reasons.generic', 'This response set received a quality note, so the result may be less distinct or stable.');
             $improvements[] = $isZh
                 ? (string) $this->privateResultSource->get('quality_display.improvements.generic')
-                : 'Consider retaking when settled and free from distractions, answering from everyday experience.';
+                : $this->privateResultSource->englishReportCopy('quality_display.improvements.generic', 'Consider retaking when settled and free from distractions, answering from everyday experience.');
         }
 
         return [
@@ -1171,22 +1208,22 @@ final class RiasecPublicProjectionService
             $zhCopy = (array) $this->privateResultSource->get('tie_display.score_code_mismatch', []);
 
             return [
-                'headline' => $isZh ? (string) ($zhCopy['headline'] ?? '') : 'This result cannot be interpreted yet',
-                'note' => $isZh ? (string) ($zhCopy['note'] ?? '') : 'The score order and result code do not agree, so interpretive content is hidden; the six dimension scores remain available for review.',
-                'boundary' => $isZh ? (string) ($zhCopy['boundary'] ?? '') : 'Please check the result again; do not infer an interest order, ability, or career conclusion from this page.',
+                'headline' => $isZh ? (string) ($zhCopy['headline'] ?? '') : $this->privateResultSource->englishReportCopy('tie_display.score_code_mismatch.headline', 'This result cannot be interpreted yet'),
+                'note' => $isZh ? (string) ($zhCopy['note'] ?? '') : $this->privateResultSource->englishReportCopy('tie_display.score_code_mismatch.note', 'The score order and result code do not agree, so interpretive content is hidden; the six dimension scores remain available for review.'),
+                'boundary' => $isZh ? (string) ($zhCopy['boundary'] ?? '') : $this->privateResultSource->englishReportCopy('tie_display.score_code_mismatch.boundary', 'Please check the result again; do not infer an interest order, ability, or career conclusion from this page.'),
             ];
         }
 
         return match ($kind) {
             'exact_tie' => [
                 'headline' => $this->exactTieHeadline($code, $dimensions, $groups, $position, $isZh),
-                'note' => $isZh ? (string) $this->privateResultSource->get('tie_display.exact_tie_note') : 'These dimensions have the same score; their letter order does not indicate a difference.',
-                'boundary' => $isZh ? (string) $this->privateResultSource->get('tie_display.exact_tie_boundary') : 'The tie describes this interest score only; it is not an ability, identity, or career conclusion.',
+                'note' => $isZh ? (string) $this->privateResultSource->get('tie_display.exact_tie_note') : $this->privateResultSource->englishReportCopy('tie_display.exact_tie.note', 'These dimensions have the same score; their letter order does not indicate a difference.'),
+                'boundary' => $isZh ? (string) $this->privateResultSource->get('tie_display.exact_tie_boundary') : $this->privateResultSource->englishReportCopy('tie_display.exact_tie.boundary', 'The tie describes this interest score only; it is not an ability, identity, or career conclusion.'),
             ],
             'near_tie' => [
                 'headline' => $isZh ? strtr((string) $this->privateResultSource->get('tie_display.near_tie_headline'), ['{code}' => $code, '{dimensions}' => $joined]) : $code.' ('.$joined.' are close)',
-                'note' => $isZh ? (string) $this->privateResultSource->get('tie_display.near_tie_note') : 'These scores are close, so the order should not be emphasized.',
-                'boundary' => $isZh ? (string) $this->privateResultSource->get('tie_display.near_tie_boundary') : 'This is a provisional reading threshold, not a statistical-significance or measurement-error conclusion, and it does not create a second measured result.',
+                'note' => $isZh ? (string) $this->privateResultSource->get('tie_display.near_tie_note') : $this->privateResultSource->englishReportCopy('tie_display.near_tie.note', 'These scores are close, so the order should not be emphasized.'),
+                'boundary' => $isZh ? (string) $this->privateResultSource->get('tie_display.near_tie_boundary') : $this->privateResultSource->englishReportCopy('tie_display.near_tie.boundary', 'This is a provisional reading threshold, not a statistical-significance or measurement-error conclusion, and it does not create a second measured result.'),
             ],
             default => [
                 'headline' => $code,

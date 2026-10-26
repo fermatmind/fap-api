@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Content;
 
+use App\Services\Riasec\RiasecEnglishReportSourceContract;
 use RuntimeException;
 
 final class RiasecPrivateResultPackLoader
@@ -26,7 +27,7 @@ final class RiasecPrivateResultPackLoader
         $locale = $locale === '' || $locale === 'zh' || str_starts_with($locale, 'zh-') ? 'zh-CN'
             : ($locale === 'en' || str_starts_with($locale, 'en-') ? 'en' : $locale);
         $english = $locale === 'en';
-        $selected = in_array($payload['compiler']['version'] ?? '', ['1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0'], true);
+        $selected = in_array($payload['compiler']['version'] ?? '', ['1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', '1.9.0'], true);
         $modules = $selected ? ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1'] : ['activity_explorer_v0_1'];
         if ($locale !== 'zh-CN' && (! $english
             || ($payload['coverage']['locale_modules']['en'] ?? null) !== $modules
@@ -57,6 +58,12 @@ final class RiasecPrivateResultPackLoader
                 'runtime_contract' => $english ? ($selected ? 'riasec.public_projection.v2' : 'riasec.activity_explorer.v0.1') : (string) $payload['runtime_contract'],
             ],
         ];
+    }
+
+    public static function reportSourceAuthority(array $payload, string $locale): ?array
+    {
+        return preg_match('/\Aen(?:[-_].*)?\z/i', trim($locale)) === 1
+            ? RiasecEnglishReportSourceContract::sourceAuthority($payload) : null;
     }
 
     public function assertPackage(array $manifest, array $payload, string $artifactBytes): void
@@ -154,13 +161,13 @@ final class RiasecPrivateResultPackLoader
         }
 
         if (isset($contract[RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET])) {
-            $modules = in_array($compiler['version'] ?? '', ['1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0'], true) ? ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1'] : ['activity_explorer_v0_1'];
+            $modules = in_array($compiler['version'] ?? '', ['1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', '1.9.0'], true) ? ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1'] : ['activity_explorer_v0_1'];
             if (($coverage['locale_modules']['en'] ?? null) !== $modules) {
                 throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
             }
-            if (in_array($compiler['version'] ?? '', ['1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0'], true)) {
+            if (in_array($compiler['version'] ?? '', ['1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', '1.9.0'], true)) {
                 $this->compiler->assertSelectedEnglishSources($payload['assets'], $compiler['version']);
-                if ($this->canonicalJson($coverage['english_selected_sources'] ?? null) !== $this->canonicalJson(['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => RiasecPrivateResultCompileService::englishPairCoverage($compiler['version']), 'top3_groups' => RiasecPrivateResultCompileService::englishTop3Coverage($compiler['version']), 'ordered_codes' => RiasecPrivateResultCompileService::englishOrderedCodeCoverage($compiler['version']), 'generic_context_cards' => 4, 'dimension_state_rows' => isset($contract[RiasecPrivateResultCompileService::ENGLISH_DIMENSION_STATE_ASSET]) ? 126 : 0, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8, ...(in_array($compiler['version'] ?? '', ['1.6.0', '1.7.0', '1.8.0'], true) ? ['generic_disagree_cards' => 3] : []), ...(in_array($compiler['version'] ?? '', ['1.7.0', '1.8.0'], true) ? ['generic_aspirations_cards' => 3] : []), ...(($compiler['version'] ?? '') === '1.8.0' ? ['near_tie_states' => RiasecPrivateResultCompileService::ENGLISH_NEAR_TIE_STATES] : [])])) {
+                if ($this->canonicalJson($coverage['english_selected_sources'] ?? null) !== $this->canonicalJson(['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => RiasecPrivateResultCompileService::englishPairCoverage($compiler['version']), 'top3_groups' => RiasecPrivateResultCompileService::englishTop3Coverage($compiler['version']), 'ordered_codes' => RiasecPrivateResultCompileService::englishOrderedCodeCoverage($compiler['version']), 'generic_context_cards' => 4, 'dimension_state_rows' => isset($contract[RiasecPrivateResultCompileService::ENGLISH_DIMENSION_STATE_ASSET]) ? 126 : 0, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8, ...(in_array($compiler['version'] ?? '', ['1.6.0', '1.7.0', '1.8.0', '1.9.0'], true) ? ['generic_disagree_cards' => 3] : []), ...(in_array($compiler['version'] ?? '', ['1.7.0', '1.8.0', '1.9.0'], true) ? ['generic_aspirations_cards' => 3] : []), ...(in_array($compiler['version'] ?? '', ['1.8.0', '1.9.0'], true) ? ['near_tie_states' => RiasecPrivateResultCompileService::ENGLISH_NEAR_TIE_STATES] : [])])) {
                     throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
                 }
             } elseif (isset($coverage['english_selected_sources'])) {
@@ -169,6 +176,14 @@ final class RiasecPrivateResultPackLoader
             $this->compiler->assertEnglishActivities($payload['assets'][RiasecPrivateResultCompileService::ENGLISH_ACTIVITY_ASSET], $payload['assets']['activity_task_examples_v1.zh-CN.jsonl']);
         } elseif (isset($coverage['locale_modules'])) {
             throw new RuntimeException('RIASEC_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
+        }
+
+        if (($compiler['version'] ?? null) === '1.9.0') {
+            if ($this->canonicalJson($coverage['english_report_sources'] ?? null) !== $this->canonicalJson(RiasecEnglishReportSourceContract::coverage($payload['assets']))) {
+                throw new RuntimeException('RIASEC_EN_REPORT_SOURCE_COVERAGE_INVALID');
+            }
+        } elseif (isset($coverage['english_report_sources'])) {
+            throw new RuntimeException('RIASEC_EN_REPORT_SOURCE_COVERAGE_INVALID');
         }
 
         $unsigned = $payload;

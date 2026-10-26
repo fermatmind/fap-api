@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Content;
 
+use App\Services\Riasec\RiasecEnglishReportSourceContract;
 use JsonException;
 use RuntimeException;
 
@@ -21,7 +22,7 @@ final class RiasecPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.riasec.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.8.0';
+    public const COMPILER_VERSION = '1.9.0';
 
     public const ENGLISH_NEAR_TIE_ASSET = 'near_tie_alternate_code_copy_v1.en.json';
 
@@ -72,6 +73,7 @@ final class RiasecPrivateResultCompileService
         'professional_method_boundary_v1.en.json' => ['role' => 'English method and claim boundaries', 'schema' => 'riasec.professional_method_boundary.asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'professional_method_boundary_v1.zh-CN.json' => ['role' => 'method and claim boundaries', 'schema' => 'riasec.professional_method_boundary.asset.v1', 'surfaces' => ['result', 'report', 'pdf']],
         'profile_shape_copy_v1.zh-CN.json' => ['role' => 'profile shape copy', 'schema' => 'riasec.profile_shape.asset.v1', 'surfaces' => ['result', 'report']],
+        RiasecEnglishReportSourceContract::SURFACE_ASSET => ['role' => 'Existing English report summary, quality and tie copy', 'schema' => 'riasec.report_surface_copy.v1', 'surfaces' => ['result', 'report']],
         'runtime_surface_copy_v1.en.json' => ['role' => 'selected English ordered templates and generic context cards', 'schema' => 'riasec.runtime_surface_copy.v1', 'surfaces' => ['result', 'report']],
         'runtime_surface_copy_v1.zh-CN.json' => ['role' => 'runtime summary, quality, tie, and structural surface copy', 'schema' => 'riasec.runtime_surface_copy.v1', 'surfaces' => ['result', 'report', 'pdf', 'history', 'compare']],
         'share_pdf_history_v1.en.json' => ['role' => 'English secondary surface source copy', 'schema' => 'riasec.secondary_surfaces.asset.v1', 'surfaces' => ['share', 'pdf', 'print', 'history', 'compare']],
@@ -243,6 +245,7 @@ final class RiasecPrivateResultCompileService
             'feedback_action' => true,
             'secondary_surfaces' => ['faq', 'technical_note', 'pdf', 'print', 'history', 'compare', 'share', 'lifecycle'],
             'locale_modules' => ['en' => ['activity_explorer_v0_1', 'deep_content_slots_v1', 'lifecycle_copy_v1']],
+            'english_report_sources' => RiasecEnglishReportSourceContract::coverage($assets),
             'english_selected_sources' => ['dimensions' => ['R', 'I', 'A', 'S', 'E', 'C'], 'pairs' => self::englishPairCoverage(self::COMPILER_VERSION), 'top3_groups' => self::englishTop3Coverage(self::COMPILER_VERSION), 'ordered_codes' => self::englishOrderedCodeCoverage(self::COMPILER_VERSION), 'generic_context_cards' => 4, 'dimension_state_rows' => 126, 'faq_items' => 20, 'technical_sections' => 8, 'method_sections' => 8, 'generic_disagree_cards' => 3, 'generic_aspirations_cards' => 3, 'near_tie_states' => self::ENGLISH_NEAR_TIE_STATES],
         ];
     }
@@ -322,7 +325,8 @@ final class RiasecPrivateResultCompileService
             '1.2.0' => array_diff_key(self::legacySelectedSourceContract(), [self::ENGLISH_DIMENSION_STATE_ASSET => true]),
             '1.3.0' => self::legacySelectedSourceContract(),
             '1.4.0' => self::legacySelectedSourceContract(completePairs: true),
-            '1.5.0', '1.6.0', '1.7.0' => array_diff_key(self::SOURCE_CONTRACT, [self::ENGLISH_NEAR_TIE_ASSET => true]),
+            '1.5.0', '1.6.0', '1.7.0' => array_diff_key(self::SOURCE_CONTRACT, [self::ENGLISH_NEAR_TIE_ASSET => true, RiasecEnglishReportSourceContract::SURFACE_ASSET => true]),
+            '1.8.0' => array_diff_key(self::SOURCE_CONTRACT, [RiasecEnglishReportSourceContract::SURFACE_ASSET => true]),
             self::COMPILER_VERSION => self::SOURCE_CONTRACT,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
@@ -344,7 +348,7 @@ final class RiasecPrivateResultCompileService
     {
         return match ($compilerVersion) {
             '1.2.0', '1.3.0' => ['R_I', 'R_A', 'I_A'],
-            '1.4.0', '1.5.0', '1.6.0', '1.7.0', self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
+            '1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', self::COMPILER_VERSION => self::ENGLISH_PAIR_KEYS,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -353,7 +357,7 @@ final class RiasecPrivateResultCompileService
     {
         return match ($compilerVersion) {
             '1.2.0', '1.3.0', '1.4.0' => ['R_I_A'],
-            '1.5.0', '1.6.0', '1.7.0', self::COMPILER_VERSION => self::ENGLISH_TOP3_KEYS,
+            '1.5.0', '1.6.0', '1.7.0', '1.8.0', self::COMPILER_VERSION => self::ENGLISH_TOP3_KEYS,
             default => throw new RuntimeException('RIASEC_PRIVATE_RESULT_COMPILER_UNSUPPORTED'),
         };
     }
@@ -677,25 +681,28 @@ final class RiasecPrivateResultCompileService
         if (isset(self::sourceContract($compilerVersion)[self::ENGLISH_DIMENSION_STATE_ASSET])) {
             $this->assertEnglishDimensionStates($assets[self::ENGLISH_DIMENSION_STATE_ASSET] ?? [], $assets['140q_task_environment_role_v1.zh-CN.jsonl'] ?? []);
         }
+        if ($compilerVersion === '1.9.0') {
+            RiasecEnglishReportSourceContract::assertSurface($assets);
+        }
         $dimensions = $assets['dimension_deep_copy_v1.en.json']['dimensions'] ?? [];
         $pairs = $assets['pair_blend_15_pairs_v1.en.jsonl'] ?? [];
         $pairKeys = array_column($pairs, 'pair_key');
         $expectedPairKeys = self::englishPairCoverage($compilerVersion);
-        if (in_array($compilerVersion, ['1.4.0', '1.5.0', '1.6.0', '1.7.0', self::COMPILER_VERSION], true)) {
+        if (in_array($compilerVersion, ['1.4.0', '1.5.0', '1.6.0', '1.7.0', '1.8.0', self::COMPILER_VERSION], true)) {
             sort($pairKeys, SORT_STRING);
             sort($expectedPairKeys, SORT_STRING);
             $this->assertEnglishPairSources($pairs, $assets['pair_blend_15_pairs_v1.zh-CN.jsonl'] ?? []);
         }
         $top3 = $assets['top3_code_chain_strategy_v1.en.jsonl'] ?? [];
         $runtime = $assets['runtime_surface_copy_v1.en.json'] ?? [];
-        $completeTop3 = in_array($compilerVersion, ['1.5.0', '1.6.0', '1.7.0', self::COMPILER_VERSION], true);
-        if (in_array($compilerVersion, ['1.6.0', '1.7.0', self::COMPILER_VERSION], true)) {
+        $completeTop3 = in_array($compilerVersion, ['1.5.0', '1.6.0', '1.7.0', '1.8.0', self::COMPILER_VERSION], true);
+        if (in_array($compilerVersion, ['1.6.0', '1.7.0', '1.8.0', self::COMPILER_VERSION], true)) {
             $this->assertEnglishDisagreeSources($runtime, $assets['runtime_surface_copy_v1.zh-CN.json'] ?? [], $compilerVersion);
         }
-        if (in_array($compilerVersion, ['1.7.0', self::COMPILER_VERSION], true)) {
+        if (in_array($compilerVersion, ['1.7.0', '1.8.0', self::COMPILER_VERSION], true)) {
             $this->assertEnglishAspirationsSources($runtime, $assets['runtime_surface_copy_v1.zh-CN.json'] ?? []);
         }
-        if ($compilerVersion === self::COMPILER_VERSION) {
+        if (in_array($compilerVersion, ['1.8.0', self::COMPILER_VERSION], true)) {
             $this->assertEnglishNearTieSources($assets[self::ENGLISH_NEAR_TIE_ASSET] ?? [], $assets['near_tie_alternate_code_copy_v1.zh-CN.json'] ?? []);
         }
         if ($completeTop3) {

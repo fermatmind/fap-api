@@ -192,6 +192,10 @@ final class RiasecEnglishDisagreeReleaseTest extends TestCase
         $canonical = fn ($value) => (new \ReflectionMethod(Compiler::class, 'canonicalJson'))->invoke(app(Compiler::class), $value);
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
+        if ($payload['compiler']['version'] !== Compiler::COMPILER_VERSION) {
+            unset($payload['assets']['report_surface_copy_v1.en.json'], $payload['coverage']['english_report_sources']);
+            $manifest['source_files'] = array_values(array_filter($manifest['source_files'], fn ($row) => $row['path'] !== 'report_surface_copy_v1.en.json'));
+        }
         if (! isset(Compiler::sourceContract($payload['compiler']['version'])[Compiler::ENGLISH_NEAR_TIE_ASSET])) {
             unset($payload['assets'][Compiler::ENGLISH_NEAR_TIE_ASSET], $payload['coverage']['english_selected_sources']['near_tie_states']);
             $manifest['source_files'] = array_values(array_filter($manifest['source_files'], fn ($row) => $row['path'] !== Compiler::ENGLISH_NEAR_TIE_ASSET));
