@@ -297,6 +297,38 @@ class EditArticle extends EditRecord
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
                 }),
             // @review-surface article
+            Action::make('fillPublishedCanonical')
+                ->label('补齐当前自指 canonical')
+                ->icon('heroicon-o-link')
+                ->visible(fn (): bool => ContentAccess::canRelease() && (int) $this->getRecord()->org_id === 0
+                    && $this->getRecord()->published_revision_id !== null
+                    && $this->getRecord()->working_revision_id === $this->getRecord()->published_revision_id
+                    && $this->getRecord()->seoMeta !== null && blank($this->getRecord()->seoMeta->canonical_url))
+                ->modalDescription('仅将缺失的 canonical 补为当前文章自指 URL。保留正文、全部版本与历史来源指纹；不执行发布或索引提交。')
+                ->fillForm(fn (): array => app(ArticleControlledPublicationWorkspace::class)->prepareCanonical($this->getRecord()))
+                ->form([
+                    Textarea::make('target_hash')->label('当前文章状态')->readOnly()->required()->rows(2),
+                    Textarea::make('canonical_url')->label('当前自指 URL')->readOnly()->required()->rows(2),
+                    Checkbox::make('canonical_reviewed')->label('已核对当前公开页和自指 URL')->accepted(),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        $result = app(ArticleControlledPublicationWorkspace::class)->fillCanonical($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.canonical_reviewed' => [$exception->getMessage()],
+                        ]);
+                    }
+                    $notification = Notification::make();
+                    if ($result['ok'] ?? false) {
+                        $notification->title('自指 canonical 已补齐')->success();
+                    } else {
+                        $notification->title('canonical 已提交，缓存收尾失败，请勿重复提交')->warning()->persistent();
+                    }
+                    $notification->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            // @review-surface article
             Action::make('releasePublishedSeo')
                 ->label(__('ops.resources.articles.seo_release.action'))
                 ->icon('heroicon-o-globe-alt')

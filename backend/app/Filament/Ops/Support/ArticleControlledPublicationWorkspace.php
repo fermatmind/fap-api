@@ -130,6 +130,61 @@ final class ArticleControlledPublicationWorkspace
         return $plans;
     }
 
+    public function prepareCanonical(Article $selected): array
+    {
+        $article = $this->canonicalArticle($selected);
+
+        return ['target_hash' => ArticleSourceTargetSnapshot::publicationHash($article),
+            'canonical_url' => app(ArticleSeoService::class)->buildCanonicalUrl((string) $article->slug, (string) $article->locale), 'canonical_reviewed' => false];
+    }
+
+    /** Fill a missing explicit canonical without saving a working revision. */
+    public function fillCanonical(Article $selected, array $data): array
+    {
+        $article = $this->canonicalArticle($selected);
+        $canonical = app(ArticleSeoService::class)->buildCanonicalUrl((string) $article->slug, (string) $article->locale);
+        if (($data['canonical_reviewed'] ?? false) !== true || ($data['canonical_url'] ?? null) !== $canonical) {
+            $this->reject('canonical_review_required');
+        }
+        if (! ContentReleaseFollowUp::articleCacheConfigured()) {
+            $this->reject('article_cache_configuration_required');
+        }
+        DB::transaction(function () use ($article, $data, $canonical): void {
+            try {
+                ArticleSourceTargetSnapshot::assertPublicationHash($article, (string) ($data['target_hash'] ?? ''), true);
+            } catch (\RuntimeException $exception) {
+                $this->reject($exception->getMessage());
+            }
+            $locked = $this->canonicalArticle($article);
+            app(\App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoMetaWorkspace::class)
+                ->save($locked, ['canonical_url' => $canonical]);
+            app(\App\Services\Audit\AuditLogger::class)->log(request(), 'article_missing_canonical_filled', 'article', (string) $locked->id,
+                ['published_revision_id' => $locked->published_revision_id, 'before_sha256' => $data['target_hash'], 'canonical_url' => $canonical],
+                reason: 'native_article_missing_canonical', result: 'success');
+        });
+        try {
+            ContentReleaseFollowUp::dispatchArticlePathsStrict($article->fresh(['publishedRevision', 'seoMeta']), 'article_missing_canonical_filled');
+
+            return ['ok' => true, 'metadata' => 'committed', 'cache_closeout' => 'success'];
+        } catch (\Throwable) {
+            return ['ok' => false, 'metadata' => 'committed', 'cache_closeout' => 'failed'];
+        }
+    }
+
+    private function canonicalArticle(Article $selected): Article
+    {
+        $article = $this->selected($selected);
+        if ($article->status !== 'published' || ! $article->is_public || $article->published_revision_id === null
+            || $article->working_revision_id !== $article->published_revision_id || $article->seoMeta === null
+            || filled($article->seoMeta->canonical_url)
+            || (bool) $article->seoMeta->is_indexable !== (bool) $article->is_indexable
+            || blank(app(ArticleSeoService::class)->buildCanonicalUrl((string) $article->slug, (string) $article->locale))) {
+            $this->reject('missing_canonical_state_required');
+        }
+
+        return $article;
+    }
+
     public function prepareCoverAlt(Article $selected): array
     {
         $article = $this->selected($selected);
