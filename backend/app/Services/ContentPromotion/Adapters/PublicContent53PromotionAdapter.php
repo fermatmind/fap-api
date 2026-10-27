@@ -244,7 +244,7 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
                 \Illuminate\Support\Facades\Cache::forget('content_page:v1:0:'.$row['identity']['slug'].':'.$row['identity']['locale']);
             }
         }
-        if (array_filter($rows, static fn (array $row): bool => ! in_array($row['kind'], ['page', 'guide'], true))) {
+        if (array_filter($rows, static fn (array $row): bool => ! in_array($row['kind'], ['page', 'guide', 'mbti-result'], true))) {
             $this->cache->flushArticleDiscoverabilityCaches(false);
         }
         app(\App\Services\ContentPromotion\PublicContent53FrontendRevalidator::class)->revalidate($rows);

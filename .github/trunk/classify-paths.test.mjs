@@ -640,20 +640,26 @@ test('two frozen Ops read projections and their producer select focused consumer
  assert.equal(classifyPaths([...ops,'backend/app/Http/Middleware/OpsAccessControl.php']).operations.seo_council_orchestration,true);
 });
 
-test('IQ Article fixed packages and acceptance repairs select their bound publication', () => {
-  for (const path of ['backend/content_assets/iq_public/articles/20261010-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261010-v1/snapshots/IQ-06/en.json', 'backend/content_assets/iq_public/articles/20261015-seo-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261015-en-parity/manifest.json', 'backend/content_assets/iq_public/articles/20261015-mensa-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261015-matrix-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261016-comparison-v1/manifest.json', '.github/trunk/iq-public-article-online-qa.mjs']) {
+test('IQ Article publication requires changed content; shared acceptance readers retain checks', () => {
+  for (const path of ['backend/content_assets/iq_public/articles/20261010-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261010-v1/snapshots/IQ-06/en.json', 'backend/content_assets/iq_public/articles/20261015-seo-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261015-en-parity/manifest.json', 'backend/content_assets/iq_public/articles/20261015-mensa-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261015-matrix-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261016-comparison-v1/manifest.json']) {
     const result = classifyPaths([path]);
     assert.equal(result.operations.iq_public_articles_publish, true);
     assert.equal(result.operations.iq_public_articles_checks, true);
     assert.equal(result.operations.iq_public_scale_publish, false);
     assert.equal(result.operations.eq_new_source_articles_publish, false);
   }
-  for (const path of ['backend/app/Services/ContentPromotion/Adapters/IqPublicArticlePromotionAdapter.php', 'backend/app/Services/Cms/IqPublicArticleFaqProjection.php', '.github/trunk/iq-public-article-publish.mjs', 'backend/scripts/deploy/run_iq_public_article_publish.php']) {
+  for (const path of ['.github/trunk/iq-public-article-online-qa.mjs', 'backend/app/Services/ContentPromotion/Adapters/IqPublicArticlePromotionAdapter.php', 'backend/app/Services/Cms/IqPublicArticleFaqProjection.php', '.github/trunk/iq-public-article-publish.mjs', 'backend/scripts/deploy/run_iq_public_article_publish.php']) {
     const result = classifyPaths([path]);
     assert.equal(result.operations.iq_public_articles_checks, true);
     assert.equal(result.operations.iq_public_articles_publish, false);
   }
   assert.equal(classifyPaths(['backend/content_assets/iq_public/articles/other/manifest.json']).operations.iq_public_articles_publish, false);
+  const privateCopy = classifyPaths(['.github/trunk/iq-public-article-online-qa.mjs', 'backend/content_assets/public_content_53/mbti-result-copy.json']);
+  assert.equal(privateCopy.operations.public_content_53_publish, true);
+  assert.equal(privateCopy.operations.public_content_53_package, 'mbti-result-copy');
+  assert.equal(privateCopy.operations.iq_public_articles_checks, true);
+  assert.equal(privateCopy.operations.iq_public_articles_publish, false);
+  assert.equal(classifyPaths([...privateCopy.paths, 'backend/content_assets/iq_public/articles/20261018-xor-v1/manifest.json']).operations.iq_public_articles_publish, true);
 });
 
 test('IQ EQ Topic publication requires its fixed package and never selects other publishers', () => {

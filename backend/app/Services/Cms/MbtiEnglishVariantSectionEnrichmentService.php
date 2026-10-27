@@ -99,6 +99,10 @@ final class MbtiEnglishVariantSectionEnrichmentService
      */
     private function body(string $sectionKey, array $context): ?string
     {
+        if ($sectionKey === 'growth.motivators' && $context['runtime_type_code'] === 'INTJ-T') {
+            return 'You may find a task engaging when you can turn a complex problem into a clear structure. Check this against your own experience. For this T reading, consider whether feedback helps you make a visible improvement while keeping the original purpose in view.';
+        }
+
         $label = (string) $context['label'];
         $base = (array) $context['base'];
         $variant = (array) $context['variant'];

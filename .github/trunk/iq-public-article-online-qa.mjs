@@ -232,9 +232,16 @@ export async function readOnlinePrestate(environment, backendRoot, fetcher = fet
   }
   return result;
 }
-export async function renderPage(url, { surface = 'article', verifyDOM = null } = {}) {
-  const selectors = { article: ['article[data-testid="article-detail-content"]'], entry: ['main[data-test-landing-read-source]'], topic: ['#overview', '#faq'], public_page: ['main:not(main main)'] }[surface];
+export async function renderPage(url, { surface = 'article', verifyDOM = null, mbtiSample = null } = {}) {
+  const selectors = { article: ['article[data-testid="article-detail-content"]'], entry: ['main[data-test-landing-read-source]'], topic: ['#overview', '#faq'], public_page: ['main:not(main main)'], mbti_result: ['main:not(main main)', '#mbti-desktop-growth'] }[surface];
   if (!Array.isArray(selectors) || (verifyDOM !== null && typeof verifyDOM !== 'function')) throw new Error('IQ_ARTICLE_ONLINE_RENDER_OPTIONS_INVALID');
+  if (surface === 'mbti_result') {
+    const target = new URL(url);
+    if (!['https://fermatmind.com','https://staging.fermatmind.com'].includes(target.origin)
+      || !/^\/en\/result\/[a-f0-9-]{36}$/.test(target.pathname) || target.search || target.hash
+      || !mbtiSample || !/^codex_probe_[a-f0-9-]{36}$/.test(mbtiSample.anonId) || !/^fm_[A-Za-z0-9._-]+$/.test(mbtiSample.token))
+      throw new Error('MBTI_RESULT_COPY_QA_SESSION_INVALID');
+  } else if (mbtiSample !== null) throw new Error('MBTI_RESULT_COPY_QA_SESSION_INVALID');
   // Read the hydrated DOM and computed visibility in the same real Chrome page.
   // CDP uses this child process's private pipes; no public debugging port exists.
   const profile = mkdtempSync(join(tmpdir(), 'iq-article-online-qa-'));
@@ -273,6 +280,12 @@ export async function renderPage(url, { surface = 'article', verifyDOM = null } 
         const target = await send('Target.createTarget', { url: 'about:blank' });
         const { sessionId } = await send('Target.attachToTarget', { targetId: target.targetId, flatten: true });
         await send('Page.enable', {}, sessionId);
+        if (surface === 'mbti_result') {
+          // Only the newly created synthetic QA guest enters this disposable profile.
+          // Neither this script nor the private result URL enters receipts or logs.
+          const values = {fm_auth_token: mbtiSample.token, fap_anonymous_id_v1: mbtiSample.anonId};
+          await send('Page.addScriptToEvaluateOnNewDocument', {source: `for (const [key,value] of Object.entries(${JSON.stringify(values)})) localStorage.setItem(key,value);`}, sessionId);
+        }
         const navigation = await send('Page.navigate', { url }, sessionId);
         if (navigation.errorText) throw new Error('navigation failed');
         const expression = `(async () => {

@@ -94,6 +94,7 @@ final class PublicContent53Writer
                 continue;
             }
             match ($row['kind']) {
+                PublicContent53MbtiResultCopy::KIND => app(PublicContent53MbtiResultCopy::class)->publish($row, $saved, $context),
                 'guide' => $this->guide($row, $saved, $context),
                 'article' => $this->article($row, $saved, $context),
                 'page' => $this->page($row, $saved, $context),
@@ -185,6 +186,11 @@ final class PublicContent53Writer
             throw new DomainException('public_content_53_rollback_concurrent_state');
         }
         foreach ($before as $id => $saved) {
+            if ($saved['table'] === 'personality_profile_variant_sections') {
+                app(PublicContent53MbtiResultCopy::class)->restore($context, $saved, $after[$id]);
+
+                continue;
+            }
             if (($saved['missing'] ?? false) || ($saved['retained_draft'] ?? false)) {
                 app(RiasecCodeSampleArticles::class)->unpublish($after[$id], $context);
 
@@ -221,6 +227,9 @@ final class PublicContent53Writer
     private function businessHash(array $state): string
     {
         foreach ($state as &$saved) {
+            if ($saved['table'] === 'personality_profile_variant_sections') {
+                unset($saved['controls']['revisions']);
+            }
             if ($saved['table'] === 'career_guides') {
                 unset($saved['revisions']);
             }

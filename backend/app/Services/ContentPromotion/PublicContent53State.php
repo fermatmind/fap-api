@@ -30,6 +30,11 @@ final class PublicContent53State
         }
         $state = [];
         foreach ($this->package->read(base_path(), $sha)['candidates'] as $row) {
+            if ($row['kind'] === PublicContent53MbtiResultCopy::KIND) {
+                $state[$row['page_id']] = app(PublicContent53MbtiResultCopy::class)->read($lock);
+
+                continue;
+            }
             $table = ['article' => 'articles', 'page' => 'content_pages', 'surface' => 'landing_surfaces', 'profile' => 'topic_profiles', 'guide' => 'career_guides'][$row['kind']];
             $where = $row['identity'];
             if ($row['kind'] === 'surface') {
@@ -143,6 +148,9 @@ final class PublicContent53State
 
     public function projection(array $row): array
     {
+        if ($row['kind'] === PublicContent53MbtiResultCopy::KIND) {
+            return app(PublicContent53MbtiResultCopy::class)->projection();
+        }
         $paths = ['article' => 'articles', 'page' => 'content-pages', 'surface' => 'landing-surfaces', 'profile' => 'topics', 'guide' => 'career-guides'];
         $controllers = ['article' => ArticleController::class, 'page' => ContentPageController::class,
             'surface' => LandingSurfaceController::class, 'profile' => TopicController::class, 'guide' => CareerGuideController::class];
@@ -206,6 +214,11 @@ final class PublicContent53State
     {
         foreach ($rows as $row) {
             $saved = $state[$row['page_id']];
+            if ($row['kind'] === PublicContent53MbtiResultCopy::KIND) {
+                app(PublicContent53MbtiResultCopy::class)->assertBaseline($row, $saved);
+
+                continue;
+            }
             if (($row['new_article'] ?? false) && (($saved['missing'] ?? false) || ($saved['retained_draft'] ?? false))) {
                 continue;
             }

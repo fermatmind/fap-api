@@ -1,3 +1,4 @@
+import { readMbtiResultCopySample } from './mbti-result-copy-online-qa.mjs';
 import { execFileSync } from 'node:child_process';
 import { canonical } from './iq-public-scale-package.mjs';
 import { readCandidateRows } from './public-content-53-package.mjs';
@@ -124,6 +125,10 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
   const [api,web] = hosts(environment); const result={};
   const rows = readCandidateRows(backendRoot,packageSha256).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
   for (const row of rows) {
+    if (row.kind === 'mbti-result') {
+      result[row.page_id] = await readMbtiResultCopySample(environment,row,fetcher,renderer);
+      continue;
+    }
     const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
     if (bytes === null) { result[row.page_id]={missing:true};continue; }
     const data=parseApi(bytes);const value=projection(row,data);
@@ -370,6 +375,15 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
   const [api,web]=hosts(environment);if(!prestate) throw new Error('PUBLIC_CONTENT_53_PRESTATE_REQUIRED');
   const rows = readCandidateRows(backendRoot,packageSha256).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
   for (const row of rows) {
+    if (row.kind === 'mbti-result') {
+      const before = prestate[row.page_id];
+      const current = await readMbtiResultCopySample(environment,row,fetcher,renderer);
+      if (!before || !equal(current.copy,row.snapshot) || current.controls_sha256 !== before.controls_sha256
+        || current.variant_section_count !== before.variant_section_count
+        || current.h1_count !== before.h1_count || current.headings_sha256 !== before.headings_sha256)
+        throw new Error('MBTI_RESULT_COPY_QA_NATIVE_READBACK_FAILED');
+      continue;
+    }
     const data=parseApi(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
     const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
     const createdArticle = row.new_article === true && before?.missing === true;

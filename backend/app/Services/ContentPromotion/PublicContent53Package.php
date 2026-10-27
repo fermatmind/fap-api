@@ -117,6 +117,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/mbti-result-copy.json')) {
+            $chain = "fermatmind.mbti_english_result_copy.v1\n";
+            foreach (['mbti-result-copy.json', 'mbti-result-copy-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return PublicContent53MbtiResultCopy::package($this->bytes($root, 'mbti-result-copy.json'), $this->bytes($root, 'mbti-result-copy-review.json'));
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/english-career-guides.json')) {
             $chain = "fermatmind.public_content_english_career_guides.v1\n";
             foreach (['english-career-guides.json', 'english-career-guides-review.json'] as $name) {
