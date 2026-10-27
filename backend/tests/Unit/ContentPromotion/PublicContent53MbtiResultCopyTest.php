@@ -152,6 +152,52 @@ final class PublicContent53MbtiResultCopyTest extends TestCase
         }
     }
 
+    public function test_real_four_phase_service_publishes_and_restores_the_private_native_resource(): void
+    {
+        $this->seedTargets();
+        config(['ops.content_release_observability.hmac_revalidation_url' => 'https://staging.fermatmind.com/api/content-release/revalidate',
+            'ops.content_release_observability.hmac_revalidation_secret' => 'test-only-secret']);
+        \Illuminate\Support\Facades\Http::preventStrayRequests();
+        $directory = sys_get_temp_dir().'/mbti-result-copy-phases-'.bin2hex(random_bytes(8));
+        mkdir($directory, 0700);
+        $context = $this->context();
+        $states = app(PublicContent53State::class);
+        $rows = app(PublicContent53Package::class)->read(base_path(), $this->digest())['candidates'];
+        $before = $states->read($this->digest());
+        $previous = '';
+        $publicationReference = '';
+        try {
+            foreach (['preflight', 'draft-import', 'publish', 'live-qa'] as $phase) {
+                config(['content_promotion.execution.previous_receipt' => $previous]);
+                $path = $directory.'/'.$phase.'.json';
+                $result = app(\App\Services\ContentPromotion\ExactPackagePromotionService::class)->execute($context, $phase, $path);
+                $this->assertSame('SUCCEEDED', $result['receipt']['result']);
+                $this->assertSame(1, $result['receipt']['readback_count']);
+                $this->assertSame($states->hash($states->read($this->digest())), $result['receipt']['target_state_sha256']);
+                if ($phase === 'publish') {
+                    $publicationReference = $result['receipt']['rollback_reference'];
+                }
+                $previous = $path;
+            }
+            $this->assertSame($rows[0]['snapshot'], $states->projection($rows[0]));
+            // MySQL JSON storage reorders object keys. A persisted rollback
+            // snapshot must retain the same meaning after that round trip.
+            $snapshot = \App\Models\ContentReleaseSnapshot::findOrFail((int) substr($publicationReference, strlen('content-release-snapshot:')));
+            $snapshot->meta_json = json_decode(\App\Services\ContentPromotion\PromotionContextFactory::canonicalJson($snapshot->meta_json), true, 512, JSON_THROW_ON_ERROR);
+            $snapshot->save();
+            app(\App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter::class)->rollback($context, $publicationReference);
+            $this->assertSame($rows[0]['before'], $states->projection($rows[0]));
+            $this->assertSame($before[$rows[0]['page_id']]['controls']['profile'], $states->read($this->digest())[$rows[0]['page_id']]['controls']['profile']);
+            $this->assertDatabaseCount('attempts', 0);
+            \Illuminate\Support\Facades\Http::assertNothingSent();
+        } finally {
+            foreach (glob($directory.'/*') as $file) {
+                unlink($file);
+            }
+            rmdir($directory);
+        }
+    }
+
     private function digest(): string
     {
         $chain = "fermatmind.mbti_english_result_copy.v1\n";

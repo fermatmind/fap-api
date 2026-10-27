@@ -153,7 +153,8 @@ final class PublicContent53MbtiResultCopy
 
     private function assertUnchangedControls(array $before, array $after): void
     {
-        if ($before['controls']['profile'] !== $after['controls']['profile'] || $before['controls']['variants'] !== $after['controls']['variants']) {
+        if (PromotionContextFactory::canonicalJson($before['controls']['profile']) !== PromotionContextFactory::canonicalJson($after['controls']['profile'])
+            || PromotionContextFactory::canonicalJson($before['controls']['variants']) !== PromotionContextFactory::canonicalJson($after['controls']['variants'])) {
             throw new DomainException('mbti_result_copy_parent_changed');
         }
         $scrub = static function (array $state): array {
@@ -168,7 +169,7 @@ final class PublicContent53MbtiResultCopy
                 return $section;
             }, $state['controls']['sections']);
         };
-        if ($scrub($before) !== $scrub($after)) {
+        if (PromotionContextFactory::canonicalJson($scrub($before)) !== PromotionContextFactory::canonicalJson($scrub($after))) {
             throw new DomainException('mbti_result_copy_unowned_field_changed');
         }
     }

@@ -150,6 +150,14 @@ test('publication retains bounded page diagnostics and separate recovery errors 
    assert.equal(sample.receipt.error_code,diagnostic);
   }
  }
+ for (const code of ['MBTI_RESULT_COPY_QA_BROWSER_FAILED','MBTI_RESULT_COPY_QA_NATIVE_READBACK_FAILED']) {
+  const sample=await recoveryFailure(execution,failed,new Error(code));
+  assert.equal(sample.receipt.error_code,code);
+ }
+ for (const code of ['MBTI_RESULT_COPY_QA_fm_private_token','MBTI_RESULT_COPY_QA_ATTEMPT_aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa']) {
+  const sample=await recoveryFailure(execution,failed,new Error(code));
+  assert.equal(sample.receipt.error_code,'PUBLIC_CONTENT_53_PUBLICATION_FAILED');
+ }
  const unknown=await recoveryFailure(execution,failed,new Error('PUBLIC_CONTENT_53_VISIBLE_BODY_RIASEC-XYZ-en'));
  assert.equal(unknown.receipt.error_code,'PUBLIC_CONTENT_53_PUBLICATION_FAILED');
  const unknownGuide=await recoveryFailure(execution,failed,new Error('PUBLIC_CONTENT_53_VISIBLE_BODY_EN-GUIDE-other-guide'));
