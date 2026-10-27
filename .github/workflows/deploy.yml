@@ -552,8 +552,8 @@ jobs:
             | jq -r .content | base64 --decode > "$manifest"
           jq -e '
             .contract_version == "mbti.zh_result_authority_release.v1"
-            and .package_id == "mbti-zh-result-b69b5d1d8335d59c"
-            and .package_hash == "b69b5d1d8335d59c475ccb3d6689c1c3c22b3b0d5a3f3f8e209c4216cd01a97b"
+            and (.package_hash | type == "string" and test("^[a-f0-9]{64}$"))
+            and .package_id == ("mbti-zh-result-" + .package_hash[0:16])
             and .locale == "zh-CN"
             and .template_key == "mbti_desktop_clone_v1"
             and .record_count == 32

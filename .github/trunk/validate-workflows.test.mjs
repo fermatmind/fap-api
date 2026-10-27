@@ -111,3 +111,31 @@ test("changed language runner uses exact range from repo root and inherits the m
 });
 
 test('checks the actual templated run length that GitHub rejects before job creation',()=>{const sample="        run: |\n          echo '${{ github.sha }}'\n"+'          x\n'.repeat(11000);assert.ok(templatedRunLengths(sample)[0].length>21000);const result=validateWorkflowSet(resolve(import.meta.dirname,'../..'),'final');assert.equal(result.valid,true,result.errors.join('\n'));});
+
+
+test("MBTI authority binding accepts the current exact-SHA manifest instead of one historical package", () => {
+  const workflow = readFileSync(resolve(import.meta.dirname, "../workflows/deploy.yml"), "utf8");
+  const step = workflow.split("name: Bind exact MBTI zh result authority operation\n")[1]?.split("\n  staging:")[0];
+  assert.ok(step);
+  assert.ok(step.includes("mbti_zh_result_authority_release.v1.json?ref=$DEPLOY_SHA"));
+  const match = /jq -e '([\s\S]*?)' "\$manifest"/.exec(step);
+  assert.ok(match);
+  const manifest = JSON.parse(readFileSync(resolve(import.meta.dirname, "../../backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json"), "utf8"));
+  const run = value => spawnSync("jq", ["-e", match[1]], { input: JSON.stringify(value), encoding: "utf8" });
+  assert.equal(run(manifest).status, 0, "current compiled package must bind");
+  const future = { ...manifest, package_hash: "e".repeat(64), package_id: "mbti-zh-result-" + "e".repeat(16) };
+  assert.equal(run(future).status, 0, "the binding validates a package identity rather than freezing the first release");
+  for (const broken of [
+    { ...manifest, package_hash: "a".repeat(63) },
+    { ...manifest, package_hash: "A".repeat(64) },
+    { ...manifest, package_hash: null },
+    { ...manifest, package_id: "mbti-zh-result-" + "f".repeat(16) },
+    { ...manifest, package_id: "other-" + manifest.package_hash.slice(0, 16) },
+    { ...manifest, locale: "en" },
+    { ...manifest, record_count: 31 },
+    { ...manifest, disabled_slot_count: 223 },
+    { ...manifest, admin_actor_user_id: 2 },
+    { ...manifest, template_key: "other-template" },
+    { ...manifest, negative_guarantees: { ...manifest.negative_guarantees, sitemap_mutated: true } },
+  ]) assert.notEqual(run(broken).status, 0, "malformed or widened package must fail closed");
+});
