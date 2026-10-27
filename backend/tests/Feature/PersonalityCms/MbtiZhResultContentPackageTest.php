@@ -171,6 +171,51 @@ final class MbtiZhResultContentPackageTest extends TestCase
         $this->assertSame(384, $count);
     }
 
+    public function test_reviewed_trait_copy_changes_only_the_two_adopted_consent_sentences(): void
+    {
+        $baseline = json_decode((string) file_get_contents(base_path('../content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json')), true, flags: JSON_THROW_ON_ERROR);
+        $variants = collect($baseline['variants'])->keyBy('full_code');
+        $before = '为了不让对方失望而隐去拒绝，容易使含糊被理解为同意。';
+        $after = '只用缓和气氛代替表达，可能使真实意愿没有被理解；含糊或沉默不表示同意，也不取消你拒绝或改变选择的权利。';
+        $changed = 0;
+        foreach (app(MbtiZhResultContentPackage::class)->compile()['rows'] as $row) {
+            foreach (['career', 'growth', 'relationships'] as $chapter) {
+                $expected = $variants[$row['full_code']]['content_json']['chapters'][$chapter]['traits_unlock'];
+                if ($chapter === 'relationships' && in_array($row['full_code'], ['ISFP-A', 'ISFP-T'], true)) {
+                    $this->assertSame('relationship_trait_1', $expected['items'][0]['id']);
+                    $this->assertSame($before, $expected['items'][0]['overuse_risk']);
+                    $expected['items'][0]['overuse_risk'] = $after;
+                    $changed++;
+                }
+                $this->assertSame($expected, $row['content_json']['chapters'][$chapter]['traits_unlock'], $row['full_code'].'.'.$chapter);
+            }
+        }
+        $this->assertSame(2, $changed);
+    }
+
+    public function test_reviewed_trait_copy_rejects_missing_and_duplicate_target_identity(): void
+    {
+        $service = app(MbtiResultChapterCopy::class);
+        $copy = $service->load()['ISFP-A'];
+        $package = app(MbtiZhResultContentPackage::class)->compile();
+        $original = collect($package['rows'])->firstWhere('full_code', 'ISFP-A')['content_json'];
+        foreach (['missing', 'duplicate'] as $fault) {
+            $content = $original;
+            $items = &$content['chapters']['relationships']['traits_unlock']['items'];
+            if ($fault === 'missing') {
+                array_shift($items);
+            } else {
+                $items[] = $items[0];
+            }
+            try {
+                $service->apply($content, $copy);
+                $this->fail('Expected ambiguous or missing trait identity to fail closed.');
+            } catch (\RuntimeException $error) {
+                $this->assertSame('Reviewed MBTI trait text needs exactly one existing target.', $error->getMessage());
+            }
+        }
+    }
+
     public function test_cross_type_content_similarity_stays_below_frozen_thresholds(): void
     {
         $rows = app(MbtiZhResultContentPackage::class)->compile()['rows'];

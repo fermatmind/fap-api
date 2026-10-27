@@ -29,7 +29,9 @@ final class MbtiResultChapterCopy
             'locale' => ['required', 'in:zh-CN'],
             'revision' => ['required', 'integer', 'in:1'],
             'rows' => ['required', 'array', 'size:32'],
-            'rows.*' => ['required', 'array:full_code,chapters,faq'],
+            'rows.*' => ['required', 'array:full_code,chapters,faq,trait_overuse_risk'],
+            'rows.*.trait_overuse_risk' => ['sometimes', 'array:relationship_trait_1', 'size:1'],
+            'rows.*.trait_overuse_risk.*' => ['required', 'string', 'min:1', 'max:230'],
             'rows.*.full_code' => ['required', 'string', 'distinct:strict', 'regex:/^[EI][SN][TF][JP]-[AT]$/D'],
             'rows.*.chapters' => ['required', 'array:career,growth,relationships', 'size:3'],
             'rows.*.chapters.*' => ['required', 'array', 'size:2'],
@@ -53,6 +55,14 @@ final class MbtiResultChapterCopy
             $content['chapters'][$chapter]['intro'] = $copy['chapters'][$chapter];
         }
         $content['faq'] = $copy['faq'];
+        foreach ($copy['trait_overuse_risk'] ?? [] as $id => $text) {
+            $items = data_get($content, 'chapters.relationships.traits_unlock.items', []);
+            $matches = array_keys(array_filter($items, static fn (array $item): bool => ($item['id'] ?? null) === $id));
+            if (count($matches) !== 1) {
+                throw new RuntimeException('Reviewed MBTI trait text needs exactly one existing target.');
+            }
+            $content['chapters']['relationships']['traits_unlock']['items'][$matches[0]]['overuse_risk'] = $text;
+        }
 
         return $content;
     }
