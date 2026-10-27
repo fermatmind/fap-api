@@ -507,7 +507,11 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('meta.article_authority_v1.structured_data_fragments.breadcrumb_list', null)
             ->assertJsonPath('jsonld.url', $canonical)
             ->assertJsonPath('jsonld.mainEntityOfPage', $canonical.'#webpage')
-            ->assertJsonMissingPath('jsonld.publisher')
+            ->assertJsonPath('jsonld.publisher', [
+                '@type' => 'Organization',
+                'name' => 'FermatMind',
+                'url' => 'https://staging.fermatmind.com/en/brand',
+            ])
             ->assertJsonMissingPath('jsonld.license')
             ->assertJsonMissingPath('jsonld.distribution')
             ->assertJsonMissingPath('jsonld.downloadUrl');
