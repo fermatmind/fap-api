@@ -56,7 +56,17 @@ export async function readMbtiResultCopySample(environment, row, fetcher = fetch
   if (!equal(copy,before) && !equal(copy,row.snapshot)) throw new Error('MBTI_RESULT_COPY_QA_PRESTATE_DRIFT');
   const controls = variants.map(section=>{
     if (section.key !== 'growth.motivators') return section;
-    const clone=structuredClone(section); delete clone.body_md; delete clone.payload.teaser; return clone;
+    const clone=structuredClone(section); delete clone.body_md; delete clone.payload.teaser;
+    // The native personalization service copies this body into its skeleton.
+    // Verify that exact derived leaf, then protect every other block field.
+    if (clone.payload.blocks !== undefined) {
+      if (!Array.isArray(clone.payload.blocks)) throw new Error('MBTI_RESULT_COPY_QA_DERIVED_BODY_MISMATCH');
+      const skeletons=clone.payload.blocks.filter(block=>block?.id === 'growth.motivators.type_skeleton');
+      if (skeletons.length !== 1 || skeletons[0].kind !== 'type_skeleton' || skeletons[0].text !== copy.body_md)
+        throw new Error('MBTI_RESULT_COPY_QA_DERIVED_BODY_MISMATCH');
+      delete skeletons[0].text;
+    }
+    return clone;
   });
   const privateUrl = web+'/en/result/'+attempt;
   const verifyDOM = html => assertMbtiResultCopyDom(html,copy.body_md);

@@ -35,12 +35,17 @@ test('the real result chapter needs both visible copies; scripts, hidden markup 
   assert.throws(()=>assertMbtiResultCopyDom(html(copy).replace('noindex, nofollow','index, follow'),copy),/VISIBLE_BODY_MISMATCH/);
 });
 
-function fixtures(copy=row.before) {
+function fixtures(copy=row.before, mutate=()=>{}) {
   const attempt='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
   const token='fm_synthetic_own_sample_only';
   const calls=[];let session;
   const sections=Array.from({length:18},(_,i)=>({key:'control.'+i,title:'Keep '+i,render:'rich_text',body_md:'Retain '+i,payload:null,is_enabled:true,source:'variant'}));
   sections.push({key:'growth.motivators',title:'Motivators',render:'premium_teaser',body_md:copy.body_md,payload:{teaser:copy.teaser,is_premium:true,future:'retain'},is_enabled:true,source:'variant'});
+  sections.at(-1).payload.blocks=[
+    {id:'growth.motivators.type_skeleton',kind:'type_skeleton',label:'Type skeleton',text:copy.body_md},
+    {id:'growth.motivators.identity.t',kind:'identity',label:'Identity layer',text:'Retain the identity explanation.'},
+  ];
+  mutate(sections);
   const fetcher=async(url,options)=>{
     const u=new URL(url);assert.equal(u.origin,'https://staging-api.fermatmind.com');
     assert.equal(options.redirect,'error');assert.match(options.headers['X-Anon-Id'],/^codex_probe_/);
@@ -77,6 +82,38 @@ test('the candidate copy retains the same hash of the eighteen unchanged section
   const after=await readMbtiResultCopySample('staging',row,b.fetcher,b.renderer);
   assert.equal(after.controls_sha256,before.controls_sha256);
   assert.deepEqual(after.copy,row.snapshot);
+});
+
+test('the source-derived body cannot hide stale, invented or duplicate skeleton text',async()=>{
+  for (const mutate of [
+    sections=>{sections.at(-1).payload.blocks[0].text=row.before.body_md;},
+    sections=>{sections.at(-1).payload.blocks[0].kind='invented';},
+    sections=>{sections.at(-1).payload.blocks.push({...sections.at(-1).payload.blocks[0]});},
+    sections=>{sections.at(-1).payload.blocks={text:row.snapshot.body_md};},
+  ]) {
+    const f=fixtures(row.snapshot,mutate);
+    await assert.rejects(readMbtiResultCopySample('staging',row,f.fetcher,()=>{throw new Error('must not render');}),/DERIVED_BODY_MISMATCH/);
+  }
+});
+
+test('the other eighteen sections, skeleton metadata and other personalized text stay protected',async()=>{
+  const a=fixtures();const before=await readMbtiResultCopySample('staging',row,a.fetcher,a.renderer);
+  for (const mutate of [
+    sections=>{sections[0].body_md='An unrelated edit.';},
+    sections=>{sections.at(-1).payload.blocks[0].label='A changed label.';},
+    sections=>{sections.at(-1).payload.blocks[1].text='A changed identity explanation.';},
+  ]) {
+    const f=fixtures(row.snapshot,mutate);const after=await readMbtiResultCopySample('staging',row,f.fetcher,f.renderer);
+    assert.notEqual(after.controls_sha256,before.controls_sha256);
+  }
+});
+
+test('a source without optional personalization blocks still follows the legacy two-copy contract',async()=>{
+  const a=fixtures(row.before,sections=>{delete sections.at(-1).payload.blocks;});
+  const b=fixtures(row.snapshot,sections=>{delete sections.at(-1).payload.blocks;});
+  const before=await readMbtiResultCopySample('staging',row,a.fetcher,a.renderer);
+  const after=await readMbtiResultCopySample('staging',row,b.fetcher,b.renderer);
+  assert.equal(after.controls_sha256,before.controls_sha256);
 });
 
 test('unreviewed reader copy fails before a browser can consume a private session',async()=>{

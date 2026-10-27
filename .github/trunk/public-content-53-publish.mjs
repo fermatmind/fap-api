@@ -44,7 +44,7 @@ const parseResponse = bytes => {
     throw error;
   }
 };
-const mbtiQaCodes = new Set(['IDENTITY_INVALID','TRANSPORT_FAILED','API_FAILED','BANK_INVALID','GUEST_INVALID','ATTEMPT_INVALID','RESULT_INVALID','SECTION_INVALID','PRESTATE_DRIFT','BROWSER_FAILED','DOM_INVALID','NATIVE_READBACK_FAILED'].map(code => 'MBTI_RESULT_COPY_QA_' + code));
+const mbtiQaCodes = new Set(['IDENTITY_INVALID','TRANSPORT_FAILED','API_FAILED','BANK_INVALID','GUEST_INVALID','ATTEMPT_INVALID','RESULT_INVALID','SECTION_INVALID','PRESTATE_DRIFT','BROWSER_FAILED','DOM_INVALID','NATIVE_READBACK_FAILED','DERIVED_BODY_MISMATCH'].map(code => 'MBTI_RESULT_COPY_QA_' + code));
 const diagnosticCode = error => mbtiQaCodes.has(error?.message) ? error.message : /^(?:PUBLIC_CONTENT_53_[A-Z0-9_]+(?:_(?:PAGE-[0-9]{2}|RIASEC-(?:RIC|IAR|SAE)-(?:zh-CN|en)|EN-GUIDE-(?:annual-career-review-system|big5-for-career-decisions|build-five-year-career-roadmap|build-portfolio-for-career-switch|career-growth-with-manager|career-risk-management|cross-industry-move-strategy|first-90-days-in-new-role|from-mbti-to-job-fit|how-to-choose-college-major|improve-workplace-competitiveness|interview-strategy-by-role|leader-track-vs-expert-track|networking-that-actually-works|personal-brand-for-professionals|prevent-burnout-while-growing|salary-negotiation-framework))(?:_ITEM_[0-9]{1,4})?)?|public_content_53_[a-z0-9_]+)$/.test(error?.message ?? '') ? error.message : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED';
 export async function recoveryFailure(execution, execute = request => transport(execution, request), cause) {
   let completed = false;

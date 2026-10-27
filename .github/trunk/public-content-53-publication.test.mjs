@@ -150,7 +150,7 @@ test('publication retains bounded page diagnostics and separate recovery errors 
    assert.equal(sample.receipt.error_code,diagnostic);
   }
  }
- for (const code of ['MBTI_RESULT_COPY_QA_BROWSER_FAILED','MBTI_RESULT_COPY_QA_NATIVE_READBACK_FAILED']) {
+ for (const code of ['MBTI_RESULT_COPY_QA_BROWSER_FAILED','MBTI_RESULT_COPY_QA_NATIVE_READBACK_FAILED','MBTI_RESULT_COPY_QA_DERIVED_BODY_MISMATCH']) {
   const sample=await recoveryFailure(execution,failed,new Error(code));
   assert.equal(sample.receipt.error_code,code);
  }
