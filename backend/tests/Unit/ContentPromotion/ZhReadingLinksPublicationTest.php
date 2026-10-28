@@ -133,7 +133,7 @@ final class ZhReadingLinksPublicationTest extends TestCase
                     app(PublicContent53Package::class)->read($root, $this->digest($root));
                     self::fail('Out-of-scope package accepted: '.$case);
                 } catch (DomainException $e) {
-                    self::assertStringStartsWith('public_content_53_zh_reading_',$e->getMessage());
+                    self::assertStringStartsWith('public_content_53_zh_reading_', $e->getMessage());
                 }
             }
         } finally {
