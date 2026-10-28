@@ -38,13 +38,14 @@ For example, 18 correct answers give a raw result of 18 and an accuracy of 18÷3
 
 If a result includes item-group summaries, read them in terms of each group's correct-answer count and item count. Group names and percentages help organise this attempt's performance; they do not establish validated independent ability subscales or stable “spatial” or “numerical” intelligence types.
 
-## Understanding Your IQ Score and Results
+## How to read your results
 
-After you complete and submit all 30 questions, the results page displays your IQ score, proportion exceeded, answer accuracy, correct answers, time taken and five-axis ability radar.
+After you complete and submit all 30 questions, your free results include correct-answer count, answer accuracy, time taken and performance by item group. You can practise with separate original worked examples and save a TXT or Markdown summary. Item-group performance describes this attempt; it is not a set of validated independent abilities.
 
-The current IQ score converts the number of correct answers using predefined scoring rules, with a range of 73–145. For example, 5 correct answers give a score of 100, 10 give 110, 20 give 130, and 30 give 145. Other correct-answer counts are converted within their respective intervals and rounded to the nearest integer for display.
+When eligible reference data is available, the result also shows a Beta reference score and a model-reference percentile, together with their reference source and version. The Beta reference score converts the number of correct answers using the current designed reference model, with a range of 73–145. For example, 5 correct answers give a score of 100, 10 give 110, 20 give 130, and 30 give 145. Other correct-answer counts are converted within their respective intervals and rounded to the nearest integer for display.
 
-“Proportion exceeded” is calculated from the scoring model’s reference distribution and differs from answer accuracy. For example, 8 correct answers give an IQ score of 106, a displayed proportion exceeded of 65.54%, and answer accuracy of approximately 26.7%. These figures describe different measures and are not interchangeable. This model-based proportion is not a ranking among actual test takers or a population percentile. See [IQ Scores and Interpretation Limits](/en/articles/iq-test-score-and-limits-explained) for the calculation details.
+The model-reference percentile is calculated from the designed reference distribution and differs from answer accuracy. For example, 8 correct answers map to a Beta reference score of 106 and a model-reference percentile of 65.54%, while answer accuracy is approximately 26.7%. These figures describe different measures and are not interchangeable. This model-based proportion is not a ranking among actual test takers or a population percentile. See [IQ Scores and Interpretation Limits](/en/articles/iq-test-score-and-limits-explained) for the calculation details.
+
 ## How to judge what a result can be used for
 
 Ask separately what the questions cover, how scoring works, which ages and languages are supported, how the reference sample was obtained, whether scores are reliable, and whether evidence supports the judgment you want to make. Questions resembling classic intelligence puzzles, an open formula or numbers on a scale centred around 100 cannot establish these points by themselves.
@@ -55,6 +56,6 @@ This page is for experiencing visual reasoning tasks, understanding this attempt
 
 ## After finishing, choose one concrete next step
 
-To understand this site's tool and its conditions of use, read the [FermatMind IQ test guide](/en/articles/iq-test-tool-guide). For questions about correct answers, answer accuracy, IQ score and proportion exceeded, read [IQ scores and interpretation limits](/en/articles/iq-test-score-and-limits-explained). To improve rule checking and review habits, read [IQ test practice and review](/en/articles/iq-test-growth-guide).
+To understand this site's tool and its conditions of use, read the [FermatMind IQ test guide](/en/articles/iq-test-tool-guide). For questions about correct answers, answer accuracy, Beta reference score and model-reference percentile, read [IQ scores and interpretation limits](/en/articles/iq-test-score-and-limits-explained). To improve rule checking and review habits, read [IQ test practice and review](/en/articles/iq-test-growth-guide).
 
 First record one testable question, such as “Did I choose an answer after checking only the first row?”, then observe whether it happens again on entirely new practice material. Repeating the same questions can increase familiarity and answer memory; a score increase alone does not prove an increase in general intelligence. A single low score likewise does not prove a lack of potential; consider real learning performance, response conditions and support needs.

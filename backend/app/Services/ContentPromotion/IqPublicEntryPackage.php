@@ -11,7 +11,7 @@ final class IqPublicEntryPackage
 {
     public const PACKAGE = 'content_assets/iq_public/entry/20261009-v1';
 
-    public const SHA256 = '145969e2c05df3786fe6170134d2a9bea81fd5a0af81087d1136fcee0e9d1aeb';
+    public const SHA256 = 'efcf48412783538a6a51772c4106697bf1b311a295cd2222df6e3f78c715ddd8';
 
     public const CODE = 'IQ_RAVEN';
 

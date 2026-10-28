@@ -5,51 +5,80 @@
       "locales": [
         {
           "locale": "zh-CN",
-          "body_sha256": "9697b4ee4f4acef4234accaeefef5a19dba777bbf07148c8ebe5e246ce9b1dd0",
-          "candidate_json_sha256": "f73530c2b73d1018e8dae56917652d6a9031be885c4385924e51e7b6b613fcf0",
+          "body_sha256": "ca30c5d9d32b3e70ea4d75365af6d9e47384f37e1c95fcdb43fb7c00534a405e",
+          "candidate_json_sha256": "2508f918e7228be2bf25a2d26ea858b1039cb87df83b878862c301ef750e2425",
           "decision": "PASS",
           "findings": [],
           "copy_review": {
             "reviewer": "fm_independent_reviewer",
-            "task": "iq_copy_review",
-            "frozen_index_sha256": "7723898898b411bdc51f1f789df55ef0292166c46ee62aa8c799914186752bdb",
-            "scope": "Approved current-model copy, bilingual correspondence, 31-row math, FAQ/metadata consistency; not population validation or publication."
+            "task": "iq_entry_frozen_review_20261028",
+            "date": "2026-10-28",
+            "frozen_index_sha256": "eafb12622891a4b0b5dbb8c97fb9db1c57aa50b9924040b39a97524541589ba8",
+            "returned_review_sha256": "641cc79297ac3650c4e906b5e85aacf2c21a6fad2e9164cbd718ba7e7a2f5ea9",
+            "scope": "Current result terminology, model examples, bilingual meaning, existing output promises and preserved current public fields. Not deployment, population validation or SEO growth."
           },
+          "source_checks": [
+            {
+              "source": "backend/app/Services/Iq/IqBetaReferenceScore.php:14-51",
+              "read_scope": "Current designed reference model; independent recomputation of displayed examples."
+            },
+            {
+              "source": "fap-web/lib/iq/presentation.ts:129-149",
+              "read_scope": "Current Beta eligibility and source/version display."
+            },
+            {
+              "source": "fap-web/lib/iq/export.ts:17-56; components/result/iq/IqProcessPractice.tsx:8-39",
+              "read_scope": "Existing TXT/Markdown summary and separate original worked examples."
+            }
+          ],
           "previous_review": {
             "locale": "zh-CN",
-            "body_sha256": "ced815e0b60de8477a99a5f586e10c5a870c27543260bdbcc772c7206cf0c21a",
-            "candidate_json_sha256": "b9f38f106b2ef9c3547b66983194890b63b501592de5e2c548e7dd4ab1569172",
+            "body_sha256": "9697b4ee4f4acef4234accaeefef5a19dba777bbf07148c8ebe5e246ce9b1dd0",
+            "candidate_json_sha256": "f73530c2b73d1018e8dae56917652d6a9031be885c4385924e51e7b6b613fcf0",
             "decision": "PASS",
             "findings": [],
-            "source_checks": [
-              {
-                "url": "source-current/fap-api/backend/app/Services/Assessment/IqBetaStandardScore.php",
-                "actual_read_scope": "已完整读取冻结实现并独立复算。候选“R = 0的实际公式输出为62”“当前整数正确题数12–30都会得到封顶值145”与均值5.096、标准差2.034、四舍五入及55–145截断一致；R=8得到121。实现明确使用随机模拟基线，且不具备人口常模及百分位解释资格。",
-                "limitation": "这是冻结源代码事实，不证明当前生产部署或界面显示。候选已明确区分技术指标与报告显示。"
-              },
-              {
-                "url": "source-current/fap-api/backend/app/Services/Iq/IqOwnerOriginal30BankService.php",
-                "actual_read_scope": "读取第1–130、136–209、320–340及570–590行，核对原创30题身份、正确题计分、原始成绩回退及版本边界；同时读取冻结入口API相关字段和前端presentation.ts第70–140行。",
-                "limitation": "未读取答案键，未运行完整作答流程；约20分钟属于入口预计用时，不是已验证硬性倒计时。"
-              },
-              {
-                "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
-                "actual_read_scope": "读取原始PDF第21–23页的用途与效度论述，以及冻结摘录中的5.7–5.11。候选“公开公式不等于人群常模”符合解释需有用途、参照人群及相应证据的原则。",
-                "limitation": "未读240页全文。冻结索引所指PDF第20页没有提供所需效度正文，已直接读取原始PDF相关页弥补；来源不验证费马工具。"
-              }
-            ],
-            "unverified": [
-              "PASS仅为冻结正文与meta的科学主张及来源对齐裁定；14份正文均逐文件完整读取，正文hash与各自JSON记录一致。",
-              "已读取任务、真实路径下的独立核查Skill、适用AGENTS、GOAL及相关原始包；未读取candidates或reviews，未继承作者意见。",
-              "宿主明确为read-only；实际命令尝试创建shell heredoc临时文件被系统拒绝，随后仅用无写入的读取命令。未改候选、未调用业务写入或生产入口；此证据不等于对全部宿主权限完成隔离审计。",
-              "未核CMS、线上QA、当前生产SHA、搜索排名或产品心理测量验证；部分current材料只核对相关字段和段落，未逐页完整复读全部旧SSR投影。"
-            ],
-            "frontend_metadata_sync": {
+            "copy_review": {
               "reviewer": "fm_independent_reviewer",
-              "task": "iq_translation_review",
-              "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
-              "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
-              "verdict": "PASS"
+              "task": "iq_copy_review",
+              "frozen_index_sha256": "7723898898b411bdc51f1f789df55ef0292166c46ee62aa8c799914186752bdb",
+              "scope": "Approved current-model copy, bilingual correspondence, 31-row math, FAQ/metadata consistency; not population validation or publication."
+            },
+            "previous_review": {
+              "locale": "zh-CN",
+              "body_sha256": "ced815e0b60de8477a99a5f586e10c5a870c27543260bdbcc772c7206cf0c21a",
+              "candidate_json_sha256": "b9f38f106b2ef9c3547b66983194890b63b501592de5e2c548e7dd4ab1569172",
+              "decision": "PASS",
+              "findings": [],
+              "source_checks": [
+                {
+                  "url": "source-current/fap-api/backend/app/Services/Assessment/IqBetaStandardScore.php",
+                  "actual_read_scope": "已完整读取冻结实现并独立复算。候选“R = 0的实际公式输出为62”“当前整数正确题数12–30都会得到封顶值145”与均值5.096、标准差2.034、四舍五入及55–145截断一致；R=8得到121。实现明确使用随机模拟基线，且不具备人口常模及百分位解释资格。",
+                  "limitation": "这是冻结源代码事实，不证明当前生产部署或界面显示。候选已明确区分技术指标与报告显示。"
+                },
+                {
+                  "url": "source-current/fap-api/backend/app/Services/Iq/IqOwnerOriginal30BankService.php",
+                  "actual_read_scope": "读取第1–130、136–209、320–340及570–590行，核对原创30题身份、正确题计分、原始成绩回退及版本边界；同时读取冻结入口API相关字段和前端presentation.ts第70–140行。",
+                  "limitation": "未读取答案键，未运行完整作答流程；约20分钟属于入口预计用时，不是已验证硬性倒计时。"
+                },
+                {
+                  "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+                  "actual_read_scope": "读取原始PDF第21–23页的用途与效度论述，以及冻结摘录中的5.7–5.11。候选“公开公式不等于人群常模”符合解释需有用途、参照人群及相应证据的原则。",
+                  "limitation": "未读240页全文。冻结索引所指PDF第20页没有提供所需效度正文，已直接读取原始PDF相关页弥补；来源不验证费马工具。"
+                }
+              ],
+              "unverified": [
+                "PASS仅为冻结正文与meta的科学主张及来源对齐裁定；14份正文均逐文件完整读取，正文hash与各自JSON记录一致。",
+                "已读取任务、真实路径下的独立核查Skill、适用AGENTS、GOAL及相关原始包；未读取candidates或reviews，未继承作者意见。",
+                "宿主明确为read-only；实际命令尝试创建shell heredoc临时文件被系统拒绝，随后仅用无写入的读取命令。未改候选、未调用业务写入或生产入口；此证据不等于对全部宿主权限完成隔离审计。",
+                "未核CMS、线上QA、当前生产SHA、搜索排名或产品心理测量验证；部分current材料只核对相关字段和段落，未逐页完整复读全部旧SSR投影。"
+              ],
+              "frontend_metadata_sync": {
+                "reviewer": "fm_independent_reviewer",
+                "task": "iq_translation_review",
+                "scope": "Chinese-source translation completeness and meaning only; not scientific validation, publication or live QA",
+                "frozen_manifest_sha256": "d641278d4912e75aca108367a781b55443265a4e59e607a61ff969af9019fafd",
+                "verdict": "PASS"
+              }
             }
           }
         },
