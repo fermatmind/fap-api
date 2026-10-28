@@ -49,11 +49,11 @@ test('all selected publisher combinations add independently without sharing reco
   assert.ok(requiredSeconds(60,{career_current_authority_release:true,iq_public_scale_publish:true})>7200);
 });
 
-test('actual production admission enforces the restored cap and elapsed setup time',()=>{
+test('actual production admission enforces the configured cap and elapsed setup time',()=>{
   const workflow=read('../workflows/deploy.yml');
   const production=workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
-  assert.ok(production.includes('timeout-minutes: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 180 || 120 }}'));
-  assert.ok(production.includes('PRODUCTION_JOB_BUDGET_SECONDS: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 10800 || 7200 }}'));
+  assert.ok(production.includes('timeout-minutes: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 190 || 120 }}'));
+  assert.ok(production.includes('PRODUCTION_JOB_BUDGET_SECONDS: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 11400 || 7200 }}'));
   const admission=production.match(/          remaining=\$\(\([\s\S]*?          test "\$remaining" -ge "\$required"[^\n]*/)?.[0];
   assert.ok(admission);
   assert.match(admission,/remaining=\$\(\(PRODUCTION_JOB_BUDGET_SECONDS -/);
@@ -66,6 +66,27 @@ test('actual production admission enforces the restored cap and elapsed setup ti
   const late=run(608);
   assert.notEqual(late.status,0);
   assert.match(late.stderr,/Production budget insufficient/);
+});
+
+test('five Chinese reading pages retain the 60m forward path and all recovery reserves after setup',()=>{
+ const workflow=read('../workflows/deploy.yml');
+ const production=workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
+ const admission=production.match(/          remaining=\$\(\([\s\S]*?          test "\$remaining" -ge "\$required"[^\n]*/)?.[0];
+ assert.ok(admission);
+ const operations={public_content_53_publish:true,public_content_53_package:'zh-reading-links',career_current_authority_release:true};
+ const rows=inspectPackage(fileURLToPath(new URL('../../backend',import.meta.url)),'zh-reading-links').expected_row_count;
+ assert.equal(rows,5);
+ assert.equal(requiredSeconds(60,operations,rows),10960);
+ const script=admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/,`'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
+ const run=(cap,elapsed)=>spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
+  deploy_minutes:'60',PRODUCTION_JOB_BUDGET_SECONDS:String(cap),PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed)}});
+ const original=run(10800,66);
+ assert.notEqual(original.status,0);
+ assert.match(original.stderr,/required=10960s/);
+ assert.equal(run(11400,300).status,0);
+ const exhausted=run(11400,441);
+ assert.notEqual(exhausted.status,0);
+ assert.match(exhausted.stderr,/Production budget insufficient/);
 });
 
 

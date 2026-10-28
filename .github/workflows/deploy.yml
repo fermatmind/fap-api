@@ -1444,11 +1444,14 @@ jobs:
     needs: [policy, staging]
     if: needs.staging.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 180 || 120 }}
+    # Five reviewed pages plus the 60m forward path reserve 10960s including
+    # LKG and closeout. 190m leaves 440s for setup; admission still checks
+    # the actual selected row count and elapsed time before any activation.
+    timeout-minutes: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 190 || 120 }}
     environment: production
     env:
       PUBLIC_CONTENT_53_PACKAGE_NAME: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_package }}
-      PRODUCTION_JOB_BUDGET_SECONDS: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 10800 || 7200 }}
+      PRODUCTION_JOB_BUDGET_SECONDS: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 11400 || 7200 }}
       ASSETS_SHA256: ${{ needs.policy.outputs.career_current_assets_sha256 }}
       SOURCE_MERGE_SHA: ${{ needs.policy.outputs.career_current_source_merge_sha }}
       MANIFEST_SHA256: ${{ needs.policy.outputs.career_current_manifest_sha256 }}
