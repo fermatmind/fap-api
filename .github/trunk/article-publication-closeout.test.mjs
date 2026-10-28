@@ -17,9 +17,9 @@ const alignmentDigest = () => createHash('sha256').update('fermatmind.public_con
 
 function productionBudget(production, publication) {
   const condition='fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish';
-  assert.ok(production.includes('timeout-minutes: ${{ '+condition+' && 180 || 120 }}'));
-  assert.ok(production.includes('PRODUCTION_JOB_BUDGET_SECONDS: ${{ '+condition+' && 10800 || 7200 }}'));
-  return publication ? 10800 : 7200;
+  assert.ok(production.includes('timeout-minutes: ${{ '+condition+' && 190 || 120 }}'));
+  assert.ok(production.includes('PRODUCTION_JOB_BUDGET_SECONDS: ${{ '+condition+' && 11400 || 7200 }}'));
+  return publication ? 11400 : 7200;
 }
 
 test('recovery and admitted deploy serialize production mutations together', () => {
@@ -79,7 +79,7 @@ test('an oversized ten-page CMS and Career package is refused without borrowing 
   const required = requiredSeconds(60,operations,rows.length);
   assert.equal(required,6360+1600+10*600);
   assert.ok(9000 < 6360+26000,'the former lane-wide reserve rejected before Deployer started');
-  assert.ok(jobSeconds-300 < required,'the original 120m cap cannot admit this combination with full recovery');
+  assert.ok(jobSeconds-300 < required,'the configured publication cap cannot admit this larger combination with full recovery');
   assert.ok(requiredSeconds(60,operations,53) > jobSeconds,'an oversized package must still be refused');
   for (const count of [0,-1,1.5,NaN,Infinity,'10']) {
     assert.throws(()=>requiredSeconds(60,operations,count),/PUBLIC_CONTENT_ROW_COUNT_INVALID/);
