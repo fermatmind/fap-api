@@ -9,6 +9,32 @@ import { selectPublicContentPackage, packageDigest, executorPaths, inspectPackag
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
 import { assertNewArticleDiscovery, assertDom, domOf, pathFor, read, projection, readOnlinePrestate, verifyOnlineCandidates } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
+test('Chinese directory card package selects one native surface and retains serial publication',()=>{
+ const paths=['backend/content_assets/public_content_53/directory-card-copy.json','backend/content_assets/public_content_53/directory-card-copy-review.json'];
+ assert.equal(selectPublicContentPackage(paths),'directory-card-copy');
+ assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/article-amendment.json']),/MULTIPLE_PACKAGES/);
+ const binding=inspectPackage(root,'directory-card-copy');
+ assert.equal(binding.expected_row_count,1);
+ const rows=readCandidateRows(root,binding.package_sha256).candidates;
+ assert.equal(rows.length,1);
+ assert.deepEqual(rows[0].identity,{org_id:0,slug:'tests',locale:'zh-CN'});
+ assert.equal(pathFor(rows[0]),'/zh/tests');
+});
+
+test('Chinese directory card DOM acceptance requires the changed labels and preserves metadata',()=>{
+ const raw=readCandidateRows(root,packageDigest(root,'directory-card-copy')).candidates[0];
+ const escape=x=>x.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
+ for(const environment of ['production','staging']) {
+  const row=environment==='staging'?{...raw,snapshot:raw.staging_snapshot}:raw;
+  const p=row.snapshot.payload_json,labels=['93 / 144 题','约 10 / 15 分钟','90 / 120 题','约 11 / 15 分钟'];
+  const html=`<html><head><meta charset="utf-8"><title>${escape(p.seo.title)} | FermatMind</title><meta name="description" content="${escape(p.seo.description)}"><link rel="canonical" href="https://fermatmind.com/zh/tests"></head><body><main><h1>${escape(p.hero.title)}</h1>${labels.map(x=>`<p>${x}</p>`).join('')}</main></body></html>`;
+  const before={dom:domOf(html)};
+  assert.doesNotThrow(()=>assertDom(row,html,before,environment));
+  for(const label of ['约 10 / 15 分钟','约 11 / 15 分钟'])
+   assert.throws(()=>assertDom(row,html.replace(label,'旧预计用时'),before,environment),/VISIBLE_BODY/);
+  assert.throws(()=>assertDom(row,html.replace('<title>','<title>Unselected '),before,environment),/METADATA/);
+ }
+});
 process.env.PUBLIC_CONTENT_53_PACKAGE_NAME='riasec-code-samples';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 const riasecDigest=()=>createHash('sha256').update('fermatmind.public_content_article_amendment.v1\n'+['riasec-amendment.json','riasec-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');

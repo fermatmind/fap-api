@@ -117,6 +117,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/directory-card-copy.json')) {
+            $chain = "fermatmind.tests_directory_card_copy.v1\n";
+            foreach (['directory-card-copy.json', 'directory-card-copy-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readDirectoryCardCopy($root, $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/mbti-result-copy.json')) {
             $chain = "fermatmind.mbti_english_result_copy.v1\n";
             foreach (['mbti-result-copy.json', 'mbti-result-copy-review.json'] as $name) {
@@ -623,6 +632,62 @@ final class PublicContent53Package
     {
         return self::environment() === 'staging' && ($row['page_id'] ?? null) === 'PAGE-60'
             && isset($row['staging_bootstrap']);
+    }
+
+    private function readDirectoryCardCopy(string $root, string $sha): array
+    {
+        $bytes = $this->bytes($root, 'directory-card-copy.json');
+        $data = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $review = json_decode($this->bytes($root, 'directory-card-copy-review.json'), true, 64, JSON_THROW_ON_ERROR);
+        $rows = $data['candidates'] ?? [];
+        if (($data['schema'] ?? null) !== 'fermatmind.tests_directory_card_copy.v1'
+            || ! is_array($rows) || count($rows) !== 1
+            || ($review['schema'] ?? null) !== 'fermatmind.tests_directory_card_copy.review.v1'
+            || ($review['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($review['verdict'] ?? null) !== 'PASS' || ($review['pages'] ?? null) !== ['PAGE-61' => 'PASS']) {
+            throw new DomainException('public_content_53_directory_review_invalid');
+        }
+        $row = $rows[0];
+        if (($row['page_id'] ?? null) !== 'PAGE-61' || ($row['kind'] ?? null) !== 'surface'
+            || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => 'tests', 'locale' => 'zh-CN']
+            || ($row['source_identity'] ?? null) !== [] || ($row['staging_source_identity'] ?? null) !== []
+            || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'staging_snapshot', 'source_identity', 'staging_source_identity']) !== []) {
+            throw new DomainException('public_content_53_directory_identity_invalid');
+        }
+        foreach (['' => 'snapshot', 'staging_' => 'staging_snapshot'] as $prefix => $version) {
+            $before = $row[$prefix.'before'] ?? null;
+            $after = $row[$version] ?? null;
+            if (! is_array($before) || ! is_array($after) || array_keys($before) !== ['payload_json']
+                || array_keys($after) !== ['payload_json'] || ! is_array($before['payload_json']) || ! is_array($after['payload_json'])) {
+                throw new DomainException('public_content_53_directory_fields_invalid');
+            }
+            $this->assertDirectoryCardCopyOnly($before['payload_json'], $after['payload_json']);
+        }
+        if (function_exists('app') && app()->bound('config') && self::environment() === 'staging') {
+            $rows[0]['snapshot'] = $row['staging_snapshot'];
+        }
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
+    private function assertDirectoryCardCopyOnly(mixed $before, mixed $after, string $path = '', string $card = ''): void
+    {
+        if ($before === $after) {
+            return;
+        }
+        if (is_array($before) && is_array($after) && array_keys($before) === array_keys($after)) {
+            $card = is_string($before['key'] ?? null) ? $before['key'] : $card;
+            foreach ($after as $key => $value) {
+                $this->assertDirectoryCardCopyOnly($before[$key], $value, ltrim($path.'.'.$key, '.'), $card);
+            }
+
+            return;
+        }
+        if (! is_string($before) || ! is_string($after) || trim($after) === ''
+            || ! in_array($card, ['mbti-personality-test-16-personality-types', 'big-five-personality-test-ocean-model'], true)
+            || preg_match('/\Afamilies\.items\.\d+\.tests\.\d+\.(?:questionsLabel|durationLabel)\z/', $path) !== 1) {
+            throw new DomainException('public_content_53_directory_protected_field');
+        }
     }
 
     private function readCopyAmendment(string $root, string $sha): array
