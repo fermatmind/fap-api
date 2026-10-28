@@ -36,6 +36,8 @@ final class EntertainmentStatisticsPage extends Page
 
     public array $catalog = [];
 
+    public string $catalogSource = 'baseline';
+
     public array $rows = [];
 
     public array $summary = [];
@@ -84,7 +86,9 @@ final class EntertainmentStatisticsPage extends Page
     private function refreshRows(): void
     {
         abort_unless(self::canAccess(), 403);
-        $this->catalog = app(EntertainmentActivity::class)->catalog();
+        $state = app(EntertainmentActivity::class)->catalogState();
+        $this->catalog = $state['items'];
+        $this->catalogSource = $state['source'];
         $this->validate([
             'fromDate' => ['required', 'date_format:Y-m-d'],
             'toDate' => ['required', 'date_format:Y-m-d', 'after_or_equal:fromDate', 'before_or_equal:'.CarbonImmutable::now('Asia/Shanghai')->toDateString()],

@@ -1,5 +1,6 @@
 <x-filament-panels::page>
     <p class="text-sm text-slate-600">{{ __('entertainment-activity.note') }}</p>
+    @if($catalogSource !== 'live')<p role="status" class="text-sm text-amber-800">{{ __('entertainment-activity.catalog_fallback') }}</p>@endif
     <form wire:submit.prevent="applyFilters" class="rounded-xl border bg-white p-5">
         <div class="grid gap-4 md:grid-cols-3">
             <label>{{ __('entertainment-activity.from') }}<input type="date" wire:model="fromDate" class="block w-full rounded-lg border-slate-300" /></label>

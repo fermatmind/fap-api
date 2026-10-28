@@ -8,16 +8,49 @@ use App\Filament\Ops\Pages\EntertainmentStatisticsPage;
 use App\Models\AdminUser;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Services\Analytics\EntertainmentActivity;
 use App\Support\Rbac\PermissionNames;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class EntertainmentActivityTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Cache::forget(EntertainmentActivity::CATALOG_CACHE);
+        Cache::forget(EntertainmentActivity::CATALOG_CACHE.':last-known');
+        Http::fake(['https://fermatmind.com/api/entertainment-catalog' => Http::response([], 503)]);
+    }
+
+    public function test_registry_refreshes_new_public_tests_and_exposes_a_known_fallback_on_outage(): void
+    {
+        $baseline = app(EntertainmentActivity::class)->catalog();
+        Cache::forget(EntertainmentActivity::CATALOG_CACHE);
+        $new = ['slug' => 'new-published-quiz', 'title' => ['en' => 'New quiz', 'zh' => '新测试'], 'path' => '/tests/explore/new-published-quiz', 'privacy' => 'explicit_opt_in', 'roles' => ['single']];
+        Http::swap(new \Illuminate\Http\Client\Factory);
+        Http::fake(['https://fermatmind.com/api/entertainment-catalog' => Http::sequence()
+            ->push(['schema' => 'entertainment.catalog.v1', 'items' => $baseline])
+            ->push(['schema' => 'entertainment.catalog.v1', 'items' => [...$baseline, $new]])]);
+        $this->assertSame('live', app(EntertainmentActivity::class)->catalogState()['source']);
+        $data = $this->envelope(slug: 'new-published-quiz');
+        $data['payload']['consent_state'] = 'activity_opt_in';
+        $this->send($data)->assertStatus(202);
+        $this->send($this->envelope(slug: 'new-published-quiz'))->assertUnprocessable();
+        Cache::forget(EntertainmentActivity::CATALOG_CACHE);
+        Http::swap(new \Illuminate\Http\Client\Factory);
+        Http::fake(['https://fermatmind.com/api/entertainment-catalog' => Http::response([], 503)]);
+        $state = app(EntertainmentActivity::class)->catalogState();
+        $this->assertSame('last_known', $state['source']);
+        $this->assertSame('new-published-quiz', end($state['items'])['slug']);
+    }
 
     private function envelope(string $event = 'fun_start', string $role = 'single', string $slug = 'what-dog-breed-am-i', string $locale = 'en'): array
     {
