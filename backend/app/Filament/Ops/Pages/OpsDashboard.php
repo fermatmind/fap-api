@@ -93,6 +93,10 @@ class OpsDashboard extends Dashboard
             Action::make('accessTestStatistics')
                 ->label(__('ops.dashboard.actions.access_test_statistics'))
                 ->url('/ops/access-test-statistics?scope=global_org0'),
+            Action::make('entertainmentStatistics')
+                ->label(__('entertainment-activity.title'))
+                ->url('/ops/entertainment-statistics')
+                ->visible(fn (): bool => \App\Filament\Ops\Support\OpsMetricsAccess::canViewTestMetrics()),
             Action::make('contentProbe')
                 ->label(__('ops.dashboard.actions.content_probe'))
                 ->url('/ops/content-pack-releases'),

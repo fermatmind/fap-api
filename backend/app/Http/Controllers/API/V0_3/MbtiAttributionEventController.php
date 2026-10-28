@@ -165,6 +165,12 @@ final class MbtiAttributionEventController extends Controller
     {
         $authenticatedServer = $this->authorizeIngest($request);
         $this->rejectUnexpectedKeys($request->all(), self::TOP_LEVEL_KEYS, 'request');
+        if (in_array($request->input('eventName'), \App\Services\Analytics\EntertainmentActivity::EVENTS, true)) {
+            abort_unless($authenticatedServer, 401);
+            app(\App\Services\Analytics\EntertainmentActivity::class)->record($request, $this->resolveOrgId($request));
+
+            return response()->json(['ok' => true], 202);
+        }
         $payloadInput = $request->input('payload');
         if ($payloadInput !== null && ! is_array($payloadInput)) {
             throw ValidationException::withMessages([
