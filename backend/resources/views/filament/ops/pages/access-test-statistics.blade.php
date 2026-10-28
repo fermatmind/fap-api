@@ -27,13 +27,15 @@
             <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                 <div class="mb-4 flex flex-wrap items-start justify-between gap-3">
                     <div><h2 class="text-lg font-semibold text-slate-950">{{ __('ops.pages.access_test_statistics.sections.summary') }}</h2><p class="mt-1 text-sm text-slate-500">{{ $meta['is_multi_day'] ? __('ops.pages.access_test_statistics.daily_sum_note') : __('ops.pages.access_test_statistics.daily_unique_note') }}</p></div>
-                    <div class="text-right text-xs text-slate-500">{{ $meta['timezone'] }} · {{ $meta['coverage'] }}<br>{{ __('ops.pages.access_test_statistics.last_refresh') }} {{ $meta['last_successful_refresh_at'] ?: 'n/a' }}</div>
+                    <div class="text-right text-xs text-slate-500">{{ $meta['timezone'] }} · {{ __('ops.pages.access_test_statistics.table.coverage') }}: {{ $meta['coverage'] }}<br>{{ __('ops.pages.access_test_statistics.last_refresh') }} {{ $meta['last_successful_refresh_at'] ?: 'n/a' }}</div>
                 </div>
                 <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
                     @foreach ($summary as $key => $value)
                         <article class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4"><div class="text-xs font-semibold text-slate-500">{{ __('ops.pages.access_test_statistics.metrics.'.$key) }}</div><div class="mt-3 text-2xl font-semibold text-slate-950">{{ $this->formatInt((int) $value) }}</div></article>
                     @endforeach
                 </div>
+                <p class="mt-4 text-xs text-slate-500">{{ __('ops.pages.access_test_statistics.coverage_note') }}</p>
+                <p class="mt-2 text-xs text-slate-500">{{ __('ops.pages.access_test_statistics.metric_note') }}</p>
                 <div class="mt-4 text-xs text-slate-500">{{ __('ops.pages.access_test_statistics.data_through') }} {{ $meta['data_through_at'] ?: 'n/a' }} · {{ __('ops.pages.access_test_statistics.rule_version') }} {{ $meta['source_version'] }}</div>
             </section>
 
