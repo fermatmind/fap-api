@@ -50,12 +50,15 @@ final class ArticlePublishedProvenanceBinder
         }
         $audit = AuditLog::withoutGlobalScopes()->whereKey($input['editorial_review_audit_id'] ?? 0)
             ->when($lock, fn ($q) => $q->lockForUpdate())->first();
-        if (! $audit instanceof AuditLog || (int) $audit->org_id !== (int) $article->org_id || $audit->target_type !== 'article'
+        if (! $audit instanceof AuditLog || $audit->target_type !== 'article'
             || (string) $audit->target_id !== (string) $article->id || $audit->action !== 'editorial_review_approved'
+            || $audit->reason !== 'cms_editorial_review' || data_get($audit->meta_json, 'locale') !== $article->locale
             || $audit->result !== 'success' || (int) $audit->actor_admin_id !== $revision->reviewed_by
             || ! $audit->created_at || $audit->created_at->lt($revision->reviewed_at)) {
             throw new RuntimeException('published_provenance_review_record_missing');
         }
+        // Audit org_id is the Ops session context, not the global Article tenant.
+        // Resource org/locale/body are bound by the original exact content target below.
         // Preserve the original exact content approval. This is a derived metadata binding,
         // not a claim that its new metadata was present in that historical approval.
         $reviewRevision = clone $revision;
@@ -125,7 +128,8 @@ final class ArticlePublishedProvenanceBinder
         $beforeMetadata = $revision->authority_metadata_json;
         $metadata = $beforeMetadata ?? [];
         $record = ['revision_id' => $revision->id, 'body_sha256' => $input['body_sha256'],
-            'editorial_review_audit_id' => $audit->id, 'original_approved_target' => $target,
+            'editorial_review_audit_id' => $audit->id, 'editorial_review_audit_org_id' => (int) $audit->org_id,
+            'original_approved_target' => $target,
             'review_attestation_id' => $evidence->review_attestation_id, 'review_target_evidence_id' => $evidence->id,
             'citations' => $ledger];
         foreach (['visible_provenance' => $provenance, 'published_provenance_binding_v1' => $record] as $key => $value) {

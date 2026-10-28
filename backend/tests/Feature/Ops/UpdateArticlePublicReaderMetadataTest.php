@@ -509,6 +509,16 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $this->assertSame($before, Updater::state($article->fresh()));
     }
 
+    public function test_published_provenance_uses_exact_resource_tenant_not_the_ops_audit_context(): void
+    {
+        [$article, $actor, $package] = $this->provenanceFixture();
+        $revision = $article->publishedRevision;
+        $revision->org_id = 2;
+        $revision->saveQuietly();
+        $this->assertSame(1, $this->runPackage($package, $actor));
+        $this->assertFalse(data_get($article->fresh()->seoMeta->schema_json, 'editorial_package_v1.article_schema_enabled', false));
+    }
+
     public function test_published_provenance_audit_failure_rolls_back_metadata_and_schema(): void
     {
         [$article, $actor, $package] = $this->provenanceFixture();
@@ -562,8 +572,9 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         app(CmsEditorialReviewAttestationService::class)->bindOrCreateApproved(null,
             'cms_editorial_review', 'article:'.$article->id.':workflow:fixture',
             [['surface_id' => 'article_translation_revision', 'record' => $revision]], $actor->id);
-        $audit = AuditLog::query()->create(['org_id' => 0, 'actor_admin_id' => $actor->id,
+        $audit = AuditLog::query()->create(['org_id' => 1, 'actor_admin_id' => $actor->id,
             'action' => 'editorial_review_approved', 'target_type' => 'article', 'target_id' => (string) $article->id,
+            'reason' => 'cms_editorial_review', 'meta_json' => ['locale' => $locale],
             'result' => 'success', 'created_at' => now()]);
         $article = $article->fresh();
         $package = $this->package($article);
