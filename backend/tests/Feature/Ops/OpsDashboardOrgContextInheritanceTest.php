@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Widgets\CommerceKpiWidget;
+use App\Filament\Ops\Widgets\EntertainmentStatisticsWidget;
 use App\Filament\Ops\Widgets\FunnelWidget;
 use App\Filament\Ops\Widgets\HealthzStatusWidget;
 use App\Filament\Ops\Widgets\OpsActionQueueWidget;
@@ -22,6 +23,7 @@ use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Livewire\LivewireManager;
 use Tests\Feature\Ops\Support\InteractsWithCommerceOpsWorkbench;
 use Tests\TestCase;
@@ -54,7 +56,8 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
             $this->insertDailyMetric('2026-06-20', 0, 'BIG5_OCEAN', 'BIG_FIVE_OCEAN_MODEL', 'big5-120', 'en', 11, 1, 12, 14);
             $this->insertDailyMetric('2026-06-20', (int) $selectedOrg->id, 'RIASEC', 'RIASEC_HOLLAND_CAREER_INTERESTS', 'riasec-60', 'zh-CN', 100, 100, 200, 210);
 
-            $this->withSession([
+            Http::fake(['https://fermatmind.com/api/entertainment-catalog' => Http::response([], 503)]);
+            $response = $this->withSession([
                 'ops_admin_totp_verified_user_id' => (int) $admin->id,
                 'ops_org_id' => (int) $selectedOrg->id,
             ])->withCookie('ops_org_id', (string) $selectedOrg->id)
@@ -65,6 +68,7 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
                 ->assertSee(__('ops.widgets.paid_orders_today'))
                 ->assertSee(__('ops.widgets.test_kpi_overview'))
                 ->assertSee(__('ops.widgets.test_kpi_daily_detail'))
+                ->assertSee(__('entertainment-activity.dashboard_title'))
                 ->assertSee(__('ops.widgets.action_queue.title'))
                 ->assertSee('MBTI_PERSONALITY_TEST_16_TYPES')
                 ->assertSee('BIG_FIVE_OCEAN_MODEL')
@@ -79,6 +83,9 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
                 ->assertSee('setLocale(', false)
                 ->assertSee('window.__opsLivewirePageExpiredRecoveryHookInstalled', false)
                 ->assertSee("const autoRefreshStorageKeyPrefix = 'ops-livewire-page-expired-at:'", false);
+            $html = $response->getContent();
+            $this->assertLessThan(strpos($html, 'entertainment-statistics-heading'), strpos($html, __('ops.widgets.test_kpi_daily_detail')));
+            $this->assertLessThan(strpos($html, __('ops.widgets.funnel_snapshot_7d')), strpos($html, 'entertainment-statistics-heading'));
         } finally {
             Carbon::setTestNow();
         }
@@ -110,6 +117,7 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
             ->assertDontSee(__('ops.widgets.paid_orders_today'))
             ->assertDontSee(__('ops.widgets.paid_without_grant'))
             ->assertDontSee(__('ops.widgets.test_kpi_overview'))
+            ->assertDontSee(__('entertainment-activity.dashboard_title'))
             ->assertDontSee(__('ops.widgets.funnel_snapshot_7d'))
             ->assertDontSee(__('ops.widgets.webhook_monitoring'));
     }
@@ -131,6 +139,7 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
         $this->assertFalse(CommerceKpiWidget::isLazy());
         $this->assertFalse(TestKpiSummaryWidget::isLazy());
         $this->assertFalse(TestKpiDailyInlineWidget::isLazy());
+        $this->assertFalse(EntertainmentStatisticsWidget::isLazy());
         $this->assertFalse(FunnelWidget::isLazy());
         $this->assertFalse(WebhookFailureWidget::isLazy());
         $this->assertFalse(QueueFailureWidget::isLazy());

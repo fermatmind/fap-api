@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Analytics;
 
 use App\Filament\Ops\Pages\EntertainmentStatisticsPage;
+use App\Filament\Ops\Widgets\EntertainmentStatisticsWidget;
 use App\Models\AdminUser;
 use App\Models\Permission;
 use App\Models\Role;
@@ -134,6 +135,14 @@ final class EntertainmentActivityTest extends TestCase
             $this->assertSame(array_fill_keys(['fun_start', 'fun_complete', 'fun_result_view', 'fun_share'], 1), $page->summary);
             $this->assertCount(1, $page->rows);
             $this->assertSame(['copy' => 1], $page->rows[0]['methods']);
+            $widget = app(EntertainmentStatisticsWidget::class);
+            $widget->fromDate = $widget->toDate = '2026-10-28';
+            $widget->test = 'friendship-quiz';
+            $widget->locale = 'zh';
+            $widget->role = 'creator';
+            $widget->applyFilters();
+            $this->assertSame($page->summary, $widget->summary);
+            $this->assertSame($page->rows, $widget->rows);
             \Filament\Facades\Filament::setCurrentPanel(app(\Filament\PanelRegistry::class)->get('ops'));
             \Livewire\Livewire::test(EntertainmentStatisticsPage::class)
                 ->set('test', 'friendship-quiz')->set('locale', 'zh')->set('role', 'creator')
@@ -144,6 +153,42 @@ final class EntertainmentActivityTest extends TestCase
         } finally {
             CarbonImmutable::setTestNow();
         }
+    }
+
+    public function test_dashboard_widget_defaults_to_beijing_today_and_keeps_every_registered_test_accessible(): void
+    {
+        $this->authenticateOps();
+        CarbonImmutable::setTestNow(CarbonImmutable::parse('2026-10-27T17:00:00Z'));
+        try {
+            $this->send($this->envelope('fun_start', 'solo', 'friendship-quiz', 'en'))->assertStatus(202);
+            $catalog = app(EntertainmentActivity::class)->catalog();
+            $totalRows = array_sum(array_map(fn (array $test): int => count($test['roles']) * 2, $catalog));
+            \Filament\Facades\Filament::setCurrentPanel(app(\Filament\PanelRegistry::class)->get('ops'));
+            $component = \Livewire\Livewire::test(EntertainmentStatisticsWidget::class)
+                ->assertSet('fromDate', '2026-10-28')->assertSet('toDate', '2026-10-28')
+                ->assertSet('totalRows', $totalRows)->assertCount('rows', 50)
+                ->assertSet('summary.fun_start', 1)
+                ->call('movePage', 1)->assertSet('offset', 50)->assertCount('rows', 50);
+            $component->set('offset', intdiv($totalRows - 1, 50) * 50)->call('movePage', 1)
+                ->assertSee($catalog[array_key_last($catalog)]['slug'])
+                ->set('test', 'friendship-quiz')->set('locale', 'en')->set('role', 'solo')
+                ->call('applyFilters')->assertSet('offset', 0)->assertCount('rows', 1)
+                ->assertSet('summary.fun_start', 1)->assertSet('summary.fun_complete', 0)
+                ->assertSee('friendship-quiz');
+            $component->set('fromDate', '2026-10-27')->set('toDate', '2026-10-27')
+                ->call('applyFilters')->assertSet('summary.fun_start', 0);
+            app()->setLocale('en');
+            $component->set('toDate', '2026-10-28')->call('applyFilters')
+                ->assertSee('Fun quiz activity details')->assertSee('Friendship solo');
+        } finally {
+            CarbonImmutable::setTestNow();
+        }
+    }
+
+    public function test_unauthorized_widget_read_is_denied(): void
+    {
+        $this->assertFalse(EntertainmentStatisticsWidget::canView());
+        \Livewire\Livewire::test(EntertainmentStatisticsWidget::class)->assertForbidden();
     }
 
     public function test_unauthorized_page_read_is_denied(): void

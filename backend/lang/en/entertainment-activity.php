@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'dashboard_title' => 'Fun quiz activity details',
     'title' => 'Fun quiz statistics',
     'note' => 'Site-wide anonymous entertainment activity for consenting visitors, grouped by test, language and play role; the organization selector does not change this public-site scope. These are actions, not unique people or clinical assessment completions. Private answers, scores, names, dates of birth and invitation links are never recorded. Asia/Shanghai calendar dates; up to 90 days. Counts begin with this integration; missing history is not reconstructed.',
     'catalog_fallback' => 'The live public directory is temporarily unavailable. Showing the last verified directory; newly published tests may be missing until it reconnects. Accepted activity is retained.',

@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Pages;
 
 use App\Filament\Ops\Widgets\AccessTestStatisticsWidget;
 use App\Filament\Ops\Widgets\CommerceKpiWidget;
+use App\Filament\Ops\Widgets\EntertainmentStatisticsWidget;
 use App\Filament\Ops\Widgets\FunnelWidget;
 use App\Filament\Ops\Widgets\HealthzStatusWidget;
 use App\Filament\Ops\Widgets\OpsActionQueueWidget;
@@ -61,7 +62,7 @@ class OpsDashboard extends Dashboard
         }
 
         if (TestKpiSummaryWidget::canView()) {
-            array_unshift($widgets, TestKpiSummaryWidget::class, TestKpiDailyInlineWidget::class);
+            array_unshift($widgets, TestKpiSummaryWidget::class, TestKpiDailyInlineWidget::class, EntertainmentStatisticsWidget::class);
         }
 
         if (AccessTestStatisticsWidget::canView()) {
