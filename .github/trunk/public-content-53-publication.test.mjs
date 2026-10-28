@@ -35,6 +35,34 @@ test('Chinese directory card DOM acceptance requires the changed labels and pres
   assert.throws(()=>assertDom(row,html.replace('<title>','<title>Unselected '),before,environment),/METADATA/);
  }
 });
+test('Chinese reading links select exactly five reviewed native articles',()=>{
+ const paths=['backend/content_assets/public_content_53/zh-reading-links.json','backend/content_assets/public_content_53/zh-reading-links-review.json'];
+ assert.equal(selectPublicContentPackage(paths),'zh-reading-links');
+ assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/directory-card-copy.json']),/MULTIPLE_PACKAGES/);
+ const binding=inspectPackage(root,'zh-reading-links');
+ assert.equal(binding.expected_row_count,5);
+ const rows=readCandidateRows(root,binding.package_sha256).candidates;
+ assert.equal(new Set(rows.map(row=>pathFor(row))).size,5);
+ assert.ok(rows.every(row=>row.kind==='article' && row.identity.locale==='zh-CN' && row.identity.org_id===0));
+});
+test('Chinese reading link acceptance requires visible contextual anchors in both environments',()=>{
+ const rows=readCandidateRows(root,packageDigest(root,'zh-reading-links')).candidates;
+ const destinations=[['mbti-narrative-portrait'],['ric-holland-code-career-exploration','iar-holland-code-career-exploration','sae-holland-code-career-exploration'],['enneagram-workplace-friction-core-motivations'],['ocean-traits-what-the-five-letters-mean','big-five-score-ranges-what-high-middle-low-can-mean'],['eq60-score-and-results-guide','emotional-awareness-regulation-and-relationship-practice']];
+ const escape=x=>x.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+ for(const environment of ['production','staging']) for(const [i,source] of rows.entries()) for(const slug of destinations[i]) {
+  const candidate=environment==='staging'?source.staging_snapshot:source.snapshot;
+  const target='/zh/articles/'+slug;
+  const line=candidate.content_md.split('\n').find(line=>line.includes(']('+target+')'));
+  assert.ok(line,`${source.page_id} must include the selected contextual link`);
+  const row={...source,snapshot:{title:candidate.title,content_md:line}};
+  const paragraph=escape(line).replace(/^[-*] /,'').replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2">$1</a>');
+  const url='https://fermatmind.com'+pathFor(row);
+  const html=`<html><head><meta charset="utf-8"><link rel="canonical" href="${url}"></head><body><main><h1>${escape(candidate.title)}</h1><p>${paragraph}</p></main></body></html>`;
+  const before={dom:domOf(html)};
+  assert.doesNotThrow(()=>assertDom(row,html,before,environment));
+  assert.throws(()=>assertDom(row,html.replace(`href="${target}"`,'href="/zh/articles/unselected"'),before,environment),/LINK|VISIBLE_BODY/);
+ }
+});
 process.env.PUBLIC_CONTENT_53_PACKAGE_NAME='riasec-code-samples';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 const riasecDigest=()=>createHash('sha256').update('fermatmind.public_content_article_amendment.v1\n'+['riasec-amendment.json','riasec-amendment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve(root,'content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');

@@ -27,6 +27,14 @@ final class PublicContent53Package
         'PAGE-68' => ['article', 'mbti-vs-holland-code-career-choice', 'en'],
     ];
 
+    private const ZH_READING_LINKS_TARGETS = [
+        'ZH-READ-MBTI' => 'mbti-basics',
+        'ZH-READ-RIASEC' => 'riasec-holland-career-interest-test-explained',
+        'ZH-READ-ENNEAGRAM' => 'enneagram-personality-test-explained',
+        'ZH-READ-BIG5' => 'big-five-tool-guide',
+        'ZH-READ-EQ' => 'eq-test-tool-guide',
+    ];
+
     private const IAR_AMENDMENT_TARGETS = [
         'IAR-ZH' => ['article', 'iar-holland-code-career-exploration', 'zh-CN'],
         'IAR-EN' => ['article', 'iar-holland-code-career-exploration', 'en'],
@@ -117,6 +125,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/zh-reading-links.json')) {
+            $chain = "fermatmind.public_content_zh_reading_links.v1\n";
+            foreach (['zh-reading-links.json', 'zh-reading-links-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readZhReadingLinks($root, $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/directory-card-copy.json')) {
             $chain = "fermatmind.tests_directory_card_copy.v1\n";
             foreach (['directory-card-copy.json', 'directory-card-copy-review.json'] as $name) {
@@ -632,6 +649,59 @@ final class PublicContent53Package
     {
         return self::environment() === 'staging' && ($row['page_id'] ?? null) === 'PAGE-60'
             && isset($row['staging_bootstrap']);
+    }
+
+    private function readZhReadingLinks(string $root, string $sha): array
+    {
+        $bytes = $this->bytes($root, 'zh-reading-links.json');
+        $data = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $review = json_decode($this->bytes($root, 'zh-reading-links-review.json'), true, 64, JSON_THROW_ON_ERROR);
+        $rows = $data['candidates'] ?? [];
+        $verdicts = array_fill_keys(array_keys(self::ZH_READING_LINKS_TARGETS), 'PASS');
+        if (($data['schema'] ?? null) !== 'fermatmind.public_content_zh_reading_links.v1'
+            || ! is_array($rows) || count($rows) !== count(self::ZH_READING_LINKS_TARGETS)
+            || ($review['schema'] ?? null) !== 'fermatmind.public_content_zh_reading_links.review.v1'
+            || ($review['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($review['verdict'] ?? null) !== 'PASS' || ($review['pages'] ?? null) !== $verdicts) {
+            throw new DomainException('public_content_53_zh_reading_review_invalid');
+        }
+        $seen = [];
+        foreach ($rows as &$row) {
+            $id = $row['page_id'] ?? '';
+            if (! isset(self::ZH_READING_LINKS_TARGETS[$id]) || isset($seen[$id])
+                || ($row['kind'] ?? null) !== 'article'
+                || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => self::ZH_READING_LINKS_TARGETS[$id], 'locale' => 'zh-CN']
+                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'staging_snapshot', 'source_identity', 'staging_source_identity']) !== []) {
+                throw new DomainException('public_content_53_zh_reading_identity_invalid');
+            }
+            $seen[$id] = true;
+            foreach (['' => 'snapshot', 'staging_' => 'staging_snapshot'] as $prefix => $version) {
+                $before = $row[$prefix.'before'] ?? [];
+                $after = $row[$version] ?? [];
+                foreach ([$before, $after] as $copy) {
+                    $fields = array_keys($copy);
+                    sort($fields);
+                    if ($fields !== ['content_md', 'excerpt', 'title']
+                        || array_filter($copy, static fn ($value): bool => ! is_string($value) || trim($value) === '')) {
+                        throw new DomainException('public_content_53_zh_reading_fields_invalid');
+                    }
+                }
+                if ($before['title'] !== $after['title'] || $before['excerpt'] !== $after['excerpt']) {
+                    throw new DomainException('public_content_53_zh_reading_nonbody_changed');
+                }
+                $identity = $row[$prefix.'source_identity'] ?? [];
+                if (! is_array($identity) || ($identity['translation_group_id'] ?? '') === ''
+                    || ($identity['source_locale'] ?? null) !== 'zh-CN') {
+                    throw new DomainException('public_content_53_zh_reading_source_invalid');
+                }
+            }
+            if (function_exists('app') && app()->bound('config') && self::environment() === 'staging') {
+                $row['snapshot'] = $row['staging_snapshot'];
+            }
+        }
+        unset($row);
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
     }
 
     private function readDirectoryCardCopy(string $root, string $sha): array
