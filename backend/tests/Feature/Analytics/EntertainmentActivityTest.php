@@ -65,11 +65,13 @@ final class EntertainmentActivityTest extends TestCase
         $this->send($data)->assertUnprocessable();
         $this->send($this->envelope(slug: 'unknown-quiz'))->assertUnprocessable();
         $this->send($this->envelope(role: 'friend'))->assertUnprocessable();
-        $data = $this->envelope(slug: 'habit-patterns-test');
-        $this->send($data)->assertUnprocessable();
-        $data['payload']['consent_state'] = 'activity_opt_in';
-        $this->send($data)->assertStatus(202);
-        $this->assertSame(1, DB::table('events')->where('event_code', 'fun_start')->count());
+        foreach (['habit-patterns-test', 'four-axes-test'] as $slug) {
+            $data = $this->envelope(slug: $slug);
+            $this->send($data)->assertUnprocessable();
+            $data['payload']['consent_state'] = 'activity_opt_in';
+            $this->send($data)->assertStatus(202);
+        }
+        $this->assertSame(2, DB::table('events')->where('event_code', 'fun_start')->count());
     }
 
     public function test_cms_filters_languages_roles_dates_and_excludes_qa_and_other_orgs(): void
