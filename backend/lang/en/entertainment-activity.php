@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'title' => 'Fun quiz statistics',
-    'note' => 'Anonymous activity counts for consenting visitors, grouped by public test, language and play role. These are actions, not unique people or clinical assessment completions. Private answers, scores, names, dates of birth and invitation links are never recorded. Asia/Shanghai calendar dates; up to 90 days. Counts begin with this integration; missing history is not reconstructed.',
+    'note' => 'Site-wide anonymous entertainment activity for consenting visitors, grouped by test, language and play role; the organization selector does not change this public-site scope. These are actions, not unique people or clinical assessment completions. Private answers, scores, names, dates of birth and invitation links are never recorded. Asia/Shanghai calendar dates; up to 90 days. Counts begin with this integration; missing history is not reconstructed.',
     'from' => 'From',
     'to' => 'To',
     'test' => 'Test',
@@ -33,7 +33,7 @@ return [
         'view' => 'Result views',
         'share' => 'Share actions',
         'methods' => 'Share action breakdown',
-        'version' => 'Observed / current version',
+        'version' => 'Observed content versions',
         'privacy' => 'Collection policy',
     ],
     'roles' => [

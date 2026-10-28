@@ -152,7 +152,7 @@ final class EntertainmentStatisticsPage extends Page
                     }
                     $row = $counts[$test['slug'].'|'.$locale.'|'.$role] ?? [];
                     $all[] = ['slug' => $test['slug'], 'title' => $test['title'][app()->getLocale() === 'en' ? 'en' : 'zh'],
-                        'locale' => $locale, 'role' => $role, 'privacy' => $test['privacy'], 'current_version' => $test['version'],
+                        'locale' => $locale, 'role' => $role, 'privacy' => $test['privacy'],
                         'versions' => implode(', ', array_keys($row['versions'] ?? [])), 'methods' => $row['methods'] ?? [],
                         'counts' => array_replace(array_fill_keys(EntertainmentActivity::EVENTS, 0), array_intersect_key($row, $this->summary))];
                 }
