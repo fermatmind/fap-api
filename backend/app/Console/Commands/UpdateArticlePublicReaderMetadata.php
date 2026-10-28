@@ -11,6 +11,8 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ScaleRegistry;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticlePublicListReadCache;
+use App\Services\Cms\ArticlePublishedProvenanceBinder;
+use App\Services\Cms\ArticleSeoGateRollout;
 use App\Services\Cms\ArticleSeoService;
 use App\Support\ArticleBrandByline;
 use App\Support\ArticleSourceTargetSnapshot;
@@ -23,7 +25,10 @@ use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Throwable;
 
-/** Existing public reader metadata only; does not approve, publish or modify a text revision. */
+/** Existing public metadata only; does not approve, publish or modify a text revision.
+ * @review-surface article
+ * @review-surface article_translation_revision
+ */
 final class UpdateArticlePublicReaderMetadata extends Command
 {
     protected $signature = 'articles:update-public-reader-metadata
@@ -179,8 +184,22 @@ final class UpdateArticlePublicReaderMetadata extends Command
                         throw new RuntimeException('canonical_public_test_required');
                     }
                 }
+                $provenancePlan = null;
+                if (array_key_exists('published_provenance', $p['candidate'] ?? [])) {
+                    if ($fields !== [] || ! Hash::sameValue($oldSchema, $schema)
+                        || ! is_array($p['candidate']['published_provenance'])) {
+                        throw new RuntimeException('published_provenance_separate_scope_required');
+                    }
+                    $provenancePlan = app(ArticlePublishedProvenanceBinder::class)->plan(
+                        $article, $p['candidate']['published_provenance'], $execute);
+                }
                 if (! $execute) {
                     $preview = ['article_id' => $article->id, 'readonly' => true, 'faq_count' => count($items)];
+                    if ($provenancePlan !== null) {
+                        $preview['candidate_author_name'] = $article->author_name;
+                        $preview['candidate_jsonld'] = $provenancePlan['jsonld'];
+                        $preview['citation_count'] = count($provenancePlan['record']['citations']);
+                    }
                     if (array_key_exists('author_name', $fields)) {
                         $candidate = clone $article;
                         $candidate->author_name = $fields['author_name'];
@@ -197,9 +216,34 @@ final class UpdateArticlePublicReaderMetadata extends Command
                     // Match the existing metadata updater: text provenance is immutable here.
                     $article->forceFill($fields)->saveQuietly();
                 }
+                if ($provenancePlan !== null) {
+                    app(ArticlePublishedProvenanceBinder::class)->apply($provenancePlan);
+                    $rollout = app(ArticleSeoGateRollout::class)->run([
+                        'article_ids' => (string) $article->id, 'expected_slugs' => $article->slug,
+                        'translation_group_id' => $article->translation_group_id, 'execute' => true,
+                        'enable_article_schema' => true, 'enable_breadcrumb_schema' => true, 'hold_faq_schema' => true,
+                        'no_publish' => true, 'no_search' => true, 'no_sitemap_llms_change' => true,
+                        'no_content_change' => true, 'no_revalidation' => true,
+                    ], false);
+                    if (! ($rollout['ok'] ?? false)) {
+                        throw new RuntimeException('published_provenance_schema_gate_failed');
+                    }
+                    $schema['editorial_package_v1']['article_schema_enabled'] = true;
+                    $schema['editorial_package_v1']['breadcrumb_schema_enabled'] = true;
+                    $schema['editorial_package_v1']['faq_schema_enabled'] = false;
+                    unset($schema['editorial_package_v1']['schema_hold']);
+                }
                 $article->refresh();
                 $after = self::state($article, true);
                 $expected = $before;
+                if ($provenancePlan !== null) {
+                    // The binder verifies every selected revision field except the two additive metadata keys.
+                    // All other historical revisions remain protected by the original full-state guard.
+                    $withoutSelected = fn (array $history): array => array_values(array_filter($history,
+                        fn (array $row): bool => $row['revision_id'] !== (int) $article->published_revision_id));
+                    $expected['history'] = $withoutSelected($expected['history']);
+                    $after['history'] = $withoutSelected($after['history']);
+                }
                 foreach ($fields as $key => $value) {
                     $expected['article'][$key] = $value;
                 }
@@ -216,6 +260,9 @@ final class UpdateArticlePublicReaderMetadata extends Command
                     ['package_sha256' => $sha, 'before_sha256' => Hash::hash($before),
                         'before_schema_json' => $oldSchema, 'before_article_fields' => array_intersect_key($before['article'], $fields),
                         'actor' => 'delegated_cli', 'authorized_operator_id' => (int) $this->option('admin-user-id'),
+                        ...($provenancePlan !== null ? ['published_provenance_binding' => $provenancePlan['record'],
+                            'before_revision_metadata' => $provenancePlan['before_metadata'],
+                            'after_provenance_sha256' => Hash::hash($provenancePlan['metadata'])] : []),
                         'editorial_attestation_created' => false], 'Operator-authorized native reader metadata update');
                 event(new PublicAuthorityChanged('article', (string) $article->id, (string) $article->locale,
                     Hash::hash(self::state($article)), 'authority_revision'));

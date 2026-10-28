@@ -43,6 +43,7 @@ final class BigFiveVisibleProvenanceProjector
 
     private const SOURCE_CATEGORY_MAP = [
         'academic_evidence' => 'academic_evidence',
+        'official_guidance' => 'official_guidance',
         'internal_policy' => 'internal_policy',
         'internal_repository_evidence' => 'internal_policy',
         'official_product_evidence' => 'product_authority',
@@ -322,6 +323,7 @@ final class BigFiveVisibleProvenanceProjector
     {
         $prefix = match ($category) {
             'academic_evidence' => 'source-ledger:academic:',
+            'official_guidance' => 'source-ledger:official-guidance:',
             'internal_policy' => 'policy:',
             'product_authority' => 'product-contract:',
             default => null,

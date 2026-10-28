@@ -41,12 +41,12 @@ final class BigFiveVisibleDateProjector
         $published = null;
         if ($articleIsPublic && $revisionMatches) {
             $published = $this->directDate(
-                $publishedRevision->published_at !== null
-                    ? $publishedRevision->published_at
-                    : $article->published_at,
-                $publishedRevision->published_at !== null
-                    ? 'article_translation_revisions.published_at'
-                    : 'articles.published_at',
+                $article->published_at !== null
+                    ? $article->published_at
+                    : $publishedRevision->published_at,
+                $article->published_at !== null
+                    ? 'articles.published_at'
+                    : 'article_translation_revisions.published_at',
                 'cms_publication',
             );
         }

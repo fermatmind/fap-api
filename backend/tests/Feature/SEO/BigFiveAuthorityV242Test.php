@@ -94,14 +94,18 @@ final class BigFiveAuthorityV242Test extends TestCase
         $projection = $this->projector->forArticle($article, $revision);
 
         $this->assertSame([
-            'published_at' => '2026-07-03T00:00:00+00:00',
+            'published_at' => '2026-07-01T00:00:00+00:00',
             'reviewed_at' => '2026-07-02T00:00:00+00:00',
             'updated_at' => '2026-07-04T00:00:00+00:00',
         ], $projection['visible_dates']);
-        $this->assertSame('article_translation_revisions.published_at', $projection['provenance']['published_at']['source_field']);
+        $this->assertSame('articles.published_at', $projection['provenance']['published_at']['source_field']);
         $this->assertSame('manual_review', $projection['provenance']['reviewed_at']['source_kind']);
         $this->assertSame('editorial_update', $projection['provenance']['updated_at']['source_kind']);
         $this->assertTrue($projection['eligibility']['published_date_eligible']);
+        $article->published_at = null;
+        $fallback = $this->projector->forArticle($article, $revision);
+        $this->assertSame('2026-07-03T00:00:00+00:00', $fallback['visible_dates']['published_at']);
+        $this->assertSame('article_translation_revisions.published_at', $fallback['provenance']['published_at']['source_field']);
     }
 
     public function test_personality_topic_and_landing_project_their_own_authority_dates(): void

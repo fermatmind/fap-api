@@ -16,6 +16,8 @@ use App\Models\Role;
 use App\Models\ScaleRegistry;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticlePublicListReadCache;
+use App\Services\Cms\ArticleSeoService;
+use App\Services\Cms\CmsEditorialReviewAttestationService;
 use App\Support\CanonicalTranslationPayloadHash as Hash;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -427,6 +429,154 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
             app()['env'] = $environment;
         }
         $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    public function test_published_provenance_previews_without_writes_and_atomically_releases_only_schema(): void
+    {
+        foreach (['en', 'zh-CN'] as $locale) {
+            [$article, $actor, $package] = $this->provenanceFixture($locale);
+            $before = Updater::state($article);
+            $auditCount = AuditLog::withoutGlobalScopes()->count();
+            $exit = $this->runPackage($package);
+            $output = Artisan::output();
+            $this->assertSame(0, $exit, $output);
+            $preview = json_decode($output, true);
+            $this->assertSame($before, Updater::state($article->fresh()));
+            $this->assertSame($auditCount, AuditLog::withoutGlobalScopes()->count());
+            $this->assertSame(3, $preview['citation_count']);
+            $this->assertStringNotContainsString('admin_user:', $output);
+            $this->assertStringNotContainsString('source-ledger:', $output);
+            $this->assertSame(0, $this->runPackage($package, $actor), Artisan::output());
+            $article->refresh()->load('publishedRevision', 'seoMeta');
+            $jsonld = app(ArticleSeoService::class)->generateJsonLd($article, $article->publishedRevision);
+            $this->assertSame($preview['candidate_jsonld'], $jsonld);
+            $fragments = collect($jsonld['@graph']);
+            $this->assertSame(['Article', 'BreadcrumbList'], $fragments->pluck('@type')->all());
+            $this->assertSame('Organization', data_get($fragments->first(), 'author.@type'));
+            $this->assertSame($article->author_name, data_get($fragments->first(), 'author.name'));
+            $this->assertSame($article->published_at->toIso8601String(), $fragments->first()['datePublished']);
+            $this->assertCount(3, $fragments->first()['citation']);
+            $this->assertFalse(data_get($article->seoMeta->schema_json, 'editorial_package_v1.faq_schema_enabled'));
+            $after = Updater::state($article);
+            $this->assertSame($before['article'], $after['article']);
+            $this->assertSame($before['history'][0], $after['history'][0]);
+            $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_public_reader_metadata_updated')->latest('id')->firstOrFail();
+            $this->assertSame($actor->id, $audit->meta_json['authorized_operator_id']);
+            $this->assertSame(['old_metadata' => true], $audit->meta_json['before_revision_metadata']);
+            $this->assertSame(1, $this->runPackage($package, $actor)); // No replay after a commit.
+            $noop = $package;
+            $noop['before_sha256'] = Hash::hash(Updater::state($article->fresh()));
+            $noop['candidate']['schema_json'] = $article->fresh()->seoMeta->schema_json;
+            $this->assertSame(0, $this->runPackage($noop), Artisan::output());
+        }
+    }
+
+    public function test_published_provenance_refuses_unbacked_review_and_citation_or_body_drift(): void
+    {
+        [$article, $actor, $package] = $this->provenanceFixture();
+        $before = Updater::state($article);
+        foreach (['body', 'review', 'quote', 'private_url', 'actor', 'category'] as $invalid) {
+            $candidate = $package;
+            $input = &$candidate['candidate']['published_provenance'];
+            match ($invalid) {
+                'body' => $input['body_sha256'] = str_repeat('a', 64),
+                'review' => $input['editorial_review_audit_id'] = 999999,
+                'quote' => $input['citations'][0]['body_quote'] = 'Not in the published body',
+                'private_url' => $input['citations'][0]['url'] = 'https://example.test/private?token=secret',
+                'actor' => $input['author'] = ['identity' => 'admin_user:999'],
+                'category' => $input['citations'][0]['category'] = 'peer_reviewed_claim',
+            };
+            $this->assertSame(1, $this->runPackage($candidate, $actor), $invalid);
+            $this->assertSame($before, Updater::state($article->fresh()));
+        }
+        $article->publishedRevision->update(['reviewed_by' => null]);
+        $package['before_sha256'] = Hash::hash(Updater::state($article->fresh()));
+        $this->assertSame(1, $this->runPackage($package, $actor));
+    }
+
+    public function test_published_provenance_rejects_an_approval_for_a_different_revision_payload(): void
+    {
+        [$article, $actor, $package] = $this->provenanceFixture();
+        $revision = $article->publishedRevision;
+        $revision->content_md .= "\nAn unreviewed body change.";
+        $revision->saveQuietly();
+        $package['before_sha256'] = Hash::hash(Updater::state($article->fresh()));
+        $package['candidate']['published_provenance']['body_sha256'] = hash('sha256', $revision->content_md);
+        $before = Updater::state($article->fresh());
+        $this->assertSame(1, $this->runPackage($package, $actor));
+        $output = Artisan::output();
+        $this->assertSame('published_provenance_exact_review_evidence_missing', json_decode($output, true)['error']);
+        $this->assertSame($before, Updater::state($article->fresh()));
+    }
+
+    public function test_published_provenance_audit_failure_rolls_back_metadata_and_schema(): void
+    {
+        [$article, $actor, $package] = $this->provenanceFixture();
+        $before = Updater::state($article);
+        $this->mock(AuditLogger::class)->shouldReceive('log')->once()->andThrow(new RuntimeException('audit_failed'));
+        $this->assertSame(1, $this->runPackage($package, $actor));
+        $this->assertSame($before, Updater::state($article->fresh()));
+        $this->assertSame(1, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    public function test_published_provenance_gate_audit_failure_rolls_back_every_write(): void
+    {
+        [$article, $actor, $package] = $this->provenanceFixture();
+        $before = Updater::state($article);
+        AuditLog::creating(static function (AuditLog $log): void {
+            if ($log->action === 'articles_seo_gate_rollout') {
+                throw new RuntimeException('injected_gate_audit_failure');
+            }
+        });
+        try {
+            $this->assertSame(1, $this->runPackage($package, $actor));
+            $this->assertSame($before, Updater::state($article->fresh()));
+            $this->assertSame(1, AuditLog::withoutGlobalScopes()->count());
+        } finally {
+            AuditLog::flushEventListeners();
+        }
+    }
+
+    private function provenanceFixture(string $locale = 'en'): array
+    {
+        $this->travelTo(now()->startOfSecond());
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $actor = $this->actor();
+        $article = $this->article();
+        $article->forceFill(['slug' => 'big-five-provenance-'.strtolower($locale), 'locale' => $locale,
+            'author_name' => $locale === 'en' ? 'FermatMind Editorial' : '费马测试编辑部',
+            'is_indexable' => true, 'published_at' => now()->subDays(10)])->saveQuietly();
+        $old = $article->publishedRevision;
+        $body = "Sources\n- Soto & John (2017). [BFI-2](https://doi.org/10.1037/pspp0000096).\n"
+            ."- CCI. [Assert Yourself](https://www.cci.health.wa.gov.au/example.pdf).\n"
+            .'- FermatMind. [Product scope](/en/tests/explore/social-battery-test).';
+        $revision = $old->replicate();
+        $revision->forceFill(['revision_number' => 2, 'locale' => $locale, 'revision_status' => 'published',
+            'content_md' => $body, 'created_by' => $actor->id, 'reviewed_by' => $actor->id,
+            'reviewed_at' => now()->subHours(2), 'approved_at' => now()->subHours(2),
+            'published_at' => now()->subHour(), 'authority_metadata_json' => ['old_metadata' => true]])->save();
+        $article->forceFill(['content_md' => $body, 'published_revision_id' => $revision->id,
+            'working_revision_id' => $revision->id])->saveQuietly();
+        $article->seoMeta->update(['locale' => $locale, 'is_indexable' => true, 'robots' => 'index,follow']);
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => $actor->id]);
+        app(CmsEditorialReviewAttestationService::class)->bindOrCreateApproved(null,
+            'cms_editorial_review', 'article:'.$article->id.':workflow:fixture',
+            [['surface_id' => 'article_translation_revision', 'record' => $revision]], $actor->id);
+        $audit = AuditLog::query()->create(['org_id' => 0, 'actor_admin_id' => $actor->id,
+            'action' => 'editorial_review_approved', 'target_type' => 'article', 'target_id' => (string) $article->id,
+            'result' => 'success', 'created_at' => now()]);
+        $article = $article->fresh();
+        $package = $this->package($article);
+        $package['candidate']['schema_json'] = $article->seoMeta->schema_json;
+        $quotes = explode("\n", $body);
+        $package['candidate']['published_provenance'] = ['body_sha256' => hash('sha256', $body),
+            'editorial_review_audit_id' => $audit->id, 'preview_qa_acknowledged' => true, 'citations' => [
+                ['url' => 'https://doi.org/10.1037/pspp0000096', 'label' => 'Soto & John (2017).', 'category' => 'academic_evidence', 'body_quote' => $quotes[1]],
+                ['url' => 'https://www.cci.health.wa.gov.au/example.pdf', 'label' => 'CCI.', 'category' => 'official_guidance', 'body_quote' => $quotes[2]],
+                ['url' => '/en/tests/explore/social-battery-test', 'label' => 'FermatMind.', 'category' => 'product_authority', 'body_quote' => $quotes[3]],
+            ]];
+
+        return [$article, $actor, $package];
     }
 
     private function article(): Article
