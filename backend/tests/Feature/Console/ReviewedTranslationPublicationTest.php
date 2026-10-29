@@ -215,6 +215,7 @@ final class ReviewedTranslationPublicationTest extends TestCase
         $this->assertTrue(json_decode($prepared['preflight'], true)['ok']);
         $this->assertSame($before, F::targetHash($s));
         $this->assertDatabaseCount('audit_logs', 0);
+        app(\App\Support\OrgContext::class)->set(91, null, 'admin');
         $result = $workspace->publish($t, ['target_hash' => $prepared['target_hash'], 'preview_approved' => true, 'make_indexable' => true]);
         $this->assertTrue($result['ok']);
         $this->assertSame('success', $result['cache_closeout']);
@@ -282,6 +283,38 @@ final class ReviewedTranslationPublicationTest extends TestCase
         $this->assertSame($t->working_revision_id, $t->fresh()->published_revision_id);
         $this->expectException(\Illuminate\Validation\ValidationException::class);
         $workspace->publish($t, $data);
+    }
+
+    #[DataProvider('translationTaxonomyContexts')]
+    public function test_translation_taxonomy_uses_resource_org_and_rejects_foreign_or_dangling_bindings(string $case): void
+    {
+        [$s, $t, $p] = $this->fixture();
+        if ($case === 'foreign_category') {
+            $category = ArticleCategory::withoutGlobalScopes()->create(['org_id' => 91, 'name' => 'Foreign', 'slug' => 'foreign']);
+            $t->forceFill(['category_id' => $category->id])->saveQuietly();
+        } elseif ($case !== 'valid') {
+            if ($case === 'dangling') {
+                \Illuminate\Support\Facades\DB::table('article_tag_map')->insert(['article_id' => $t->id, 'tag_id' => 999999, 'org_id' => 0, 'created_at' => now()]);
+            } else {
+                $tag = ArticleTag::withoutGlobalScopes()->create(['org_id' => $case === 'foreign_tag' ? 91 : 0, 'name' => 'Other', 'slug' => 'other']);
+                $t->tags()->attach($tag->id, ['org_id' => $case === 'foreign_pivot' ? 91 : 0]);
+            }
+        }
+        $p['target_snapshot_hash'] = F::targetHash($s);
+        $before = F::targetHash($s);
+        app(\App\Support\OrgContext::class)->set(91, null, 'admin');
+        $this->assertSame($case === 'valid' ? 0 : 1, $this->runPublish($p), Artisan::output());
+        $this->assertSame($before, F::targetHash($s));
+        $this->assertFalse($t->fresh()->is_public);
+        if ($case === 'valid') {
+            $this->assertSame(0, $this->runPublish($p, true), Artisan::output());
+            $this->assertTrue($t->fresh()->is_public);
+        }
+    }
+
+    public static function translationTaxonomyContexts(): array
+    {
+        return array_map(fn ($case) => [$case], ['valid', 'foreign_category', 'foreign_tag', 'foreign_pivot', 'dangling']);
     }
 
     private function editorSession(bool $badCache = false): void

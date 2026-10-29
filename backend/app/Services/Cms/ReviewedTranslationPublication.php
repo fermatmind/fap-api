@@ -109,7 +109,19 @@ final readonly class ReviewedTranslationPublication
             || Fingerprint::sourceHash($s, $lock) !== $p['source_snapshot_hash'] || Fingerprint::targetHash($s, $lock) !== $p['target_snapshot_hash']) {
             throw new RuntimeException('translation_snapshot_drift');
         }
-        $t->load(['workingRevision', 'publishedRevision', 'seoMeta', 'category', 'tags']);
+        $t->load(['workingRevision', 'publishedRevision', 'seoMeta',
+            'category' => fn ($query) => $query->withoutGlobalScopes()->where('article_categories.org_id', (int) $t->org_id),
+            'tags' => fn ($query) => $query->withoutGlobalScopes()->where('article_tags.org_id', (int) $t->org_id)]);
+        $invalidTagBinding = DB::table('article_tag_map as links')
+            ->leftJoin('article_tags as tags', 'tags.id', '=', 'links.tag_id')
+            ->where('links.article_id', (int) $t->id)
+            ->where(function ($query) use ($t): void {
+                $query->where('links.org_id', '!=', (int) $t->org_id)->orWhereNull('links.org_id')
+                    ->orWhereNull('tags.id')->orWhere('tags.org_id', '!=', (int) $t->org_id)->orWhereNull('tags.org_id');
+            })->exists();
+        if ($invalidTagBinding) {
+            throw new RuntimeException('translation_taxonomy_binding_invalid');
+        }
         $s->load('publishedRevision');
         $projection = $existing ? $t->publishedRevision : $t->workingRevision;
         if (! $t->workingRevision instanceof ArticleTranslationRevision || $t->workingRevision->revision_status !== 'approved'
