@@ -103,6 +103,10 @@ final class MbtiEnglishVariantSectionEnrichmentService
             return 'You may find a task engaging when you can turn a complex problem into a clear structure. Check this against your own experience. For this T reading, consider whether feedback helps you make a visible improvement while keeping the original purpose in view.';
         }
 
+        if ($sectionKey === 'trait_overview' && $context['runtime_type_code'] === 'INTJ-T') {
+            return 'The INTJ-T description combines four preference themes: private processing, focused attention and lower-noise settings; attention to patterns, possibilities and deeper meaning; logic-based decision-making; and a preference for structure, planning and clear follow-through. The T variant adds more self-questioning, stronger stress awareness and a tendency to look for improvements rather than creating a separate personality type.';
+        }
+
         $label = (string) $context['label'];
         $base = (array) $context['base'];
         $variant = (array) $context['variant'];
@@ -255,7 +259,9 @@ final class MbtiEnglishVariantSectionEnrichmentService
 
         return [
             ['title' => 'Work style fit', 'body' => "{$context['label']} often contributes best through {$base['work_strength']}."],
-            ['title' => 'Decision advantage', 'body' => "Your {$context['decision_title']} pattern helps you {$base['decision_advantage']}."],
+            ['title' => 'Decision advantage', 'body' => $context['runtime_type_code'] === 'INTJ-T'
+                ? 'One possible work pattern to check is building coherent plans and protecting progress that matters most. A Thinking preference does not establish planning skill.'
+                : "Your {$context['decision_title']} pattern helps you {$base['decision_advantage']}."],
             ['title' => 'Environment signal', 'body' => "You tend to notice whether a role supports {$base['work_need']} quickly."],
             ['title' => "{$context['variant_label']} edge", 'body' => (string) $variant['career_advantage']],
         ];
@@ -322,7 +328,9 @@ final class MbtiEnglishVariantSectionEnrichmentService
         $variant = (array) $context['variant'];
 
         return [
-            ['title' => 'Overextension risk', 'body' => "{$context['label']} can get stuck when {$base['growth_risk']}."],
+            ['title' => 'Overextension risk', 'body' => $context['runtime_type_code'] === 'INTJ-T'
+                ? 'INTJ-T Architect can get stuck in detached over-optimization.'
+                : "{$context['label']} can get stuck when {$base['growth_risk']}."],
             ['title' => 'Blind spot', 'body' => "Your {$context['decision_title']} pattern can miss context when {$base['blind_spot']}."],
             ['title' => "{$context['variant_label']} watchout", 'body' => (string) $variant['growth_risk']],
             ['title' => 'Repair move', 'body' => 'The useful move is not to reject the type label, but to choose one small behavior that balances it.'],

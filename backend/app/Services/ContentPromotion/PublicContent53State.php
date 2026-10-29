@@ -31,7 +31,7 @@ final class PublicContent53State
         $state = [];
         foreach ($this->package->read(base_path(), $sha)['candidates'] as $row) {
             if ($row['kind'] === PublicContent53MbtiResultCopy::KIND) {
-                $state[$row['page_id']] = app(PublicContent53MbtiResultCopy::class)->read($lock);
+                $state[$row['page_id']] = app(PublicContent53MbtiResultCopy::class)->read($lock, $row);
 
                 continue;
             }
@@ -149,7 +149,7 @@ final class PublicContent53State
     public function projection(array $row): array
     {
         if ($row['kind'] === PublicContent53MbtiResultCopy::KIND) {
-            return app(PublicContent53MbtiResultCopy::class)->projection();
+            return app(PublicContent53MbtiResultCopy::class)->projection($row);
         }
         $paths = ['article' => 'articles', 'page' => 'content-pages', 'surface' => 'landing-surfaces', 'profile' => 'topics', 'guide' => 'career-guides'];
         $controllers = ['article' => ArticleController::class, 'page' => ContentPageController::class,

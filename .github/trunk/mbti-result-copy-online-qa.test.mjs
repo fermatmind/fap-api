@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { assertMbtiResultCopyDom, readMbtiResultCopySample } from './mbti-result-copy-online-qa.mjs';
+import { assertMbtiFourLeafDom, assertMbtiResultCopyDom, readMbtiResultCopySample } from './mbti-result-copy-online-qa.mjs';
 import { renderPage } from './iq-public-article-online-qa.mjs';
 import { inspectPackage, readCandidateRows, selectPublicContentPackage } from './public-content-53-package.mjs';
 
@@ -35,7 +35,7 @@ test('the real result chapter needs both visible copies; scripts, hidden markup 
   assert.throws(()=>assertMbtiResultCopyDom(html(copy).replace('noindex, nofollow','index, follow'),copy),/VISIBLE_BODY_MISMATCH/);
 });
 
-function fixtures(copy=row.before, mutate=()=>{}) {
+function fixtures(copy=row.before, mutate=()=>{}, fourCopy=null) {
   const attempt='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
   const token='fm_synthetic_own_sample_only';
   const calls=[];let session;
@@ -45,6 +45,13 @@ function fixtures(copy=row.before, mutate=()=>{}) {
     {id:'growth.motivators.type_skeleton',kind:'type_skeleton',label:'Type skeleton',text:copy.body_md},
     {id:'growth.motivators.identity.t',kind:'identity',label:'Identity layer',text:'Retain the identity explanation.'},
   ];
+  if(fourCopy) {
+    sections.splice(0,4,
+      {key:'trait_overview',render:'trait_dimension_grid',body_md:fourCopy.trait_overview,payload:{blocks:[{id:'trait_overview.type_skeleton',kind:'type_skeleton',text:fourCopy.trait_overview}]},is_enabled:true,source:'variant'},
+      {key:'career.advantages',render:'bullets',payload:{items:[{body:'Keep first'},{body:fourCopy.career_advantage}]},is_enabled:true,source:'variant'},
+      {key:'growth.weaknesses',render:'bullets',payload:{items:[{body:fourCopy.growth_weakness}]},is_enabled:true,source:'variant'},
+      {key:'faq',render:'faq',payload:{items:[...Array.from({length:5},()=>({answer:'Keep'})),{question:'What stresses INTJ-T?',intent:'stress',answer:fourCopy.stress_answer}]},is_enabled:true,source:'variant'});
+  }
   mutate(sections);
   const fetcher=async(url,options)=>{
     const u=new URL(url);assert.equal(u.origin,'https://staging-api.fermatmind.com');
@@ -63,7 +70,7 @@ function fixtures(copy=row.before, mutate=()=>{}) {
   const renderer=async(url,options)=>{
     assert.equal(url,'https://staging.fermatmind.com/en/result/'+attempt);assert.equal(options.surface,'mbti_result');
     assert.equal(options.mbtiSample.token,token);session=options.mbtiSample;
-    const body=html(copy.body_md);options.verifyDOM(body);return body;
+    const body=fourCopy?fourHtml(fourCopy):html(copy.body_md);options.verifyDOM(body);return body;
   };
   return {fetcher,renderer,attempt,token,calls,get session(){return session;}};
 }
@@ -126,4 +133,48 @@ test('synthetic result-session bootstrapping is confined to the exact protected 
   for(const url of ['https://example.com/en/result/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','https://fermatmind.com/en/articles/anything','https://fermatmind.com/en/result/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa?token=unsafe'])
     await assert.rejects(renderPage(url,{surface:'mbti_result',mbtiSample}),/QA_SESSION_INVALID/);
   await assert.rejects(renderPage('https://fermatmind.com/en/articles/anything',{surface:'article',mbtiSample}),/QA_SESSION_INVALID/);
+});
+
+const fourRow=JSON.parse(readFileSync(new URL('../../backend/content_assets/public_content_53/mbti-four-leaf-copy.json',import.meta.url),'utf8')).candidates[0];
+const fourHtml=copy=>documentOf(`<section id="mbti-desktop-traits"><p>${copy.trait_overview}</p></section><section id="mbti-desktop-career"><p>${copy.career_advantage}</p></section><section id="mbti-desktop-growth"><p>${copy.growth_weakness}</p></section><section><p>${copy.stress_answer}</p></section>`);
+
+test('four native leaves select the existing lane with their own immutable package identity',()=>{
+  assert.equal(selectPublicContentPackage(['backend/content_assets/public_content_53/mbti-four-leaf-copy.json']),'mbti-four-leaf-copy');
+  const binding=inspectPackage(root,'mbti-four-leaf-copy');
+  assert.equal(binding.expected_row_count,1);
+  assert.deepEqual(readCandidateRows(root,binding.package_sha256).candidates,[fourRow]);
+});
+
+test('four-leaf before and after retain all unowned text including the accepted motivators',async()=>{
+  const a=fixtures(row.snapshot,()=>{},fourRow.before),b=fixtures(row.snapshot,()=>{},fourRow.snapshot);
+  const before=await readMbtiResultCopySample('staging',fourRow,a.fetcher,a.renderer);
+  const after=await readMbtiResultCopySample('staging',fourRow,b.fetcher,b.renderer);
+  assert.deepEqual(after.copy,fourRow.snapshot);assert.equal(after.visible_copy_occurrences,4);
+  assert.equal(before.controls_sha256,after.controls_sha256);
+  const changed=fixtures(row.snapshot,sections=>{sections.at(-1).body_md='Changed accepted motivator';},fourRow.snapshot);
+  const result=await readMbtiResultCopySample('staging',fourRow,changed.fetcher,changed.renderer);
+  assert.notEqual(result.controls_sha256,before.controls_sha256);
+  for(const secret of [a.attempt,a.token,a.session.anonId,'Never return this'])assert.equal(JSON.stringify(before).includes(secret),false);
+});
+
+test('four-leaf reader rejects another FAQ identity, malformed fields and stale derived text',async()=>{
+  for(const [mutate,error] of [
+    [sections=>{sections[3].payload.items[5].question='Different question';},/FAQ_IDENTITY_DRIFT/],
+    [sections=>{sections[3].payload.items[5].intent='other';},/FAQ_IDENTITY_DRIFT/],
+    [sections=>{delete sections[1].payload.items[1].body;},/SECTION_INVALID/],
+    [sections=>{sections[0].payload.blocks[0].text='Old skeleton';},/DERIVED_BODY_MISMATCH/],
+  ]) {
+    const f=fixtures(row.snapshot,mutate,fourRow.snapshot);
+    await assert.rejects(readMbtiResultCopySample('staging',fourRow,f.fetcher,()=>{throw new Error('must not render');}),error);
+  }
+});
+
+test('four-leaf visible acceptance binds each sentence once to its actual result chapter',()=>{
+  const body=fourHtml(fourRow.snapshot);assert.doesNotThrow(()=>assertMbtiFourLeafDom(body,fourRow.snapshot));
+  for(const changed of [
+    body.replace('mbti-desktop-career','another-chapter'),
+    body.replace(`<p>${fourRow.snapshot.stress_answer}</p>`,`<p hidden>${fourRow.snapshot.stress_answer}</p>`),
+    body.replace('</main>',`<p>${fourRow.snapshot.trait_overview}</p></main>`),
+    body.replace('noindex, nofollow','index, follow'),
+  ])assert.throws(()=>assertMbtiFourLeafDom(changed,fourRow.snapshot),/FOUR_VISIBLE_MISMATCH/);
 });

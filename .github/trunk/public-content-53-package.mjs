@@ -9,6 +9,7 @@ export const packagePath = 'content_assets/public_content_53';
 const packages = {
   'zh-reading-links': ['fermatmind.public_content_zh_reading_links.v1', ['zh-reading-links.json','zh-reading-links-review.json']],
   'directory-card-copy': ['fermatmind.tests_directory_card_copy.v1', ['directory-card-copy.json','directory-card-copy-review.json']],
+  'mbti-four-leaf-copy': ['fermatmind.mbti_english_four_leaf_copy.v1', ['mbti-four-leaf-copy.json','mbti-four-leaf-copy-review.json']],
   'mbti-result-copy': ['fermatmind.mbti_english_result_copy.v1', ['mbti-result-copy.json','mbti-result-copy-review.json']],
   'english-career-guides': ['fermatmind.public_content_english_career_guides.v1', ['english-career-guides.json','english-career-guides-review.json']],
   'riasec-code-samples': ['fermatmind.riasec_code_samples.v1', ['riasec-code-samples.json','riasec-code-samples-review.json']],

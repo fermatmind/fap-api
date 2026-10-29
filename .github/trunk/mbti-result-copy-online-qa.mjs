@@ -51,10 +51,21 @@ export async function readMbtiResultCopySample(environment, row, fetcher = fetch
   const selected = variants.filter(s=>s.key === 'growth.motivators');
   if (selected.length !== 1 || variants.length < 19 || selected[0].is_enabled !== true || selected[0].render !== 'premium_teaser')
     throw new Error('MBTI_RESULT_COPY_QA_SECTION_INVALID');
-  const target = selected[0]; const copy = {body_md:target.body_md,teaser:target.payload?.teaser};
+  const target = selected[0]; const four = row.page_id === 'MBTI-EN-INTJ-T-FOUR-LEAVES';
+  const copy = four ? readFourLeafCopy(variants) : {body_md:target.body_md,teaser:target.payload?.teaser};
   const before = environment === 'staging' ? row.staging_before : row.before;
   if (!equal(copy,before) && !equal(copy,row.snapshot)) throw new Error('MBTI_RESULT_COPY_QA_PRESTATE_DRIFT');
   const controls = variants.map(section=>{
+    if (four) {
+      const clone=structuredClone(section);
+      if (section.key === 'trait_overview') {
+        delete clone.body_md;
+        protectDerivedBody(clone,copy.trait_overview);
+      } else if (section.key === 'career.advantages') delete clone.payload.items[1].body;
+      else if (section.key === 'growth.weaknesses') delete clone.payload.items[0].body;
+      else if (section.key === 'faq') delete clone.payload.items[5].answer;
+      return clone;
+    }
     if (section.key !== 'growth.motivators') return section;
     const clone=structuredClone(section); delete clone.body_md; delete clone.payload.teaser;
     // The native personalization service copies this body into its skeleton.
@@ -69,13 +80,49 @@ export async function readMbtiResultCopySample(environment, row, fetcher = fetch
     return clone;
   });
   const privateUrl = web+'/en/result/'+attempt;
-  const verifyDOM = html => assertMbtiResultCopyDom(html,copy.body_md);
+  const verifyDOM = html => four ? assertMbtiFourLeafDom(html,copy) : assertMbtiResultCopyDom(html,copy.body_md);
   let html;
   try { html = await renderer(privateUrl,{surface:'mbti_result',mbtiSample:{anonId,token},verifyDOM}); }
   catch { throw new Error('MBTI_RESULT_COPY_QA_BROWSER_FAILED'); }
-  const dom = assertMbtiResultCopyDom(html,copy.body_md);
+  const dom = verifyDOM(html);
   // No raw report, answer, guest credential, attempt identity or private URL is returned.
-  return {runtime_type:'INTJ-T',copy,controls_sha256:hash(controls),variant_section_count:variants.length,visible_copy_occurrences:2,h1_count:dom.h1_count,headings_sha256:hash(dom.headings),steps};
+  return {runtime_type:'INTJ-T',copy,controls_sha256:hash(controls),variant_section_count:variants.length,visible_copy_occurrences:four?4:2,h1_count:dom.h1_count,headings_sha256:hash(dom.headings),steps};
+}
+
+function readFourLeafCopy(variants) {
+  const section=(key,render)=>{
+    const rows=variants.filter(s=>s.key === key);
+    if (rows.length !== 1 || rows[0].render !== render || rows[0].is_enabled !== true) throw new Error('MBTI_RESULT_COPY_QA_SECTION_INVALID');
+    return rows[0];
+  };
+  const trait=section('trait_overview','trait_dimension_grid'),career=section('career.advantages','bullets'),growth=section('growth.weaknesses','bullets');
+  const faq=section('faq','faq').payload?.items?.[5];
+  if (faq?.question !== 'What stresses INTJ-T?' || faq?.intent !== 'stress') throw new Error('MBTI_RESULT_COPY_QA_FAQ_IDENTITY_DRIFT');
+  const copy={trait_overview:trait.body_md,career_advantage:career.payload?.items?.[1]?.body,growth_weakness:growth.payload?.items?.[0]?.body,stress_answer:faq.answer};
+  if (Object.values(copy).some(v=>typeof v !== 'string' || !v.trim())) throw new Error('MBTI_RESULT_COPY_QA_SECTION_INVALID');
+  return copy;
+}
+
+function protectDerivedBody(section, expected) {
+  if (section.payload?.blocks === undefined) return;
+  if (!Array.isArray(section.payload.blocks)) throw new Error('MBTI_RESULT_COPY_QA_DERIVED_BODY_MISMATCH');
+  const skeletons=section.payload.blocks.filter(b=>b?.id === section.key+'.type_skeleton');
+  if (skeletons.length !== 1 || skeletons[0].kind !== 'type_skeleton' || skeletons[0].text !== expected)
+    throw new Error('MBTI_RESULT_COPY_QA_DERIVED_BODY_MISMATCH');
+  delete skeletons[0].text;
+}
+
+export function assertMbtiFourLeafDom(html, copy) {
+  if (typeof html !== 'string' || !copy || Object.values(copy).length !== 4 || Object.values(copy).some(v=>typeof v !== 'string' || !v.trim()))
+    throw new Error('MBTI_RESULT_COPY_QA_DOM_INVALID');
+  const value=visibleMainText(html);
+  if (!value.growth || !value.noindex || value.main_count !== 1 || value.h1_count < 1) throw new Error('MBTI_RESULT_COPY_QA_FOUR_VISIBLE_MISMATCH');
+  const chapters={trait_overview:value.traits,career_advantage:value.career,growth_weakness:value.body,stress_answer:value.main_body};
+  for (const [name,text] of Object.entries(copy)) {
+    if (compact(value.main_body).split(compact(text)).length-1 !== 1 || compact(chapters[name]).split(compact(text)).length-1 !== 1)
+      throw new Error('MBTI_RESULT_COPY_QA_FOUR_VISIBLE_MISMATCH');
+  }
+  return {h1_count:value.h1_count,headings:value.headings};
 }
 
 export function assertMbtiResultCopyDom(html, expected) {
@@ -95,7 +142,7 @@ function visibleMainText(html) {
 $doc=new DOMDocument;libxml_use_internal_errors(true);if(!$doc->loadHTML(stream_get_contents(STDIN),LIBXML_NONET))throw new RuntimeException('invalid');
 $xp=new DOMXPath($doc);$visible=function($node){for($p=$node;$p!==null;$p=$p->parentNode)if($p instanceof DOMElement&&($p->getAttribute('data-iq-qa-hidden')==='true'||$p->hasAttribute('hidden')||$p->getAttribute('aria-hidden')==='true'))return false;return true;};$select=function($query)use($xp,$visible){return array_values(array_filter(iterator_to_array($xp->query($query)),$visible));};$m=$select('//main[not(ancestor::main)]');$g=$select('//main//*[@id="mbti-desktop-growth"]');$h=$select('//main//h1');$noindex=false;foreach($xp->query('//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="robots"]')as$meta){if(preg_match('/(?:^|[,\s])noindex(?:$|[,\s])/i',$meta->getAttribute('content')))$noindex=true;}
 $walk=function($node)use(&$walk){if($node instanceof DOMElement&&(in_array($node->tagName,['script','style','template','noscript'])||$node->getAttribute('data-iq-qa-hidden')==='true'||$node->hasAttribute('hidden')||$node->getAttribute('aria-hidden')==='true'))return '';if($node instanceof DOMText)return $node->nodeValue;$s='';foreach($node->childNodes as $c)$s.=' '.$walk($c);return $s;};
-echo json_encode(['noindex'=>$noindex,'main_count'=>count($m),'h1_count'=>count($h),'headings'=>array_map($walk,$h),'growth'=>count($g)===1,'body'=>count($g)===1?$walk($g[0]):''],JSON_THROW_ON_ERROR);`;
+echo json_encode(['noindex'=>$noindex,'main_count'=>count($m),'h1_count'=>count($h),'headings'=>array_map($walk,$h),'growth'=>count($g)===1,'body'=>count($g)===1?$walk($g[0]):'','main_body'=>count($m)===1?$walk($m[0]):'','traits'=>implode(' ',array_map($walk,$select('//main//*[@id="mbti-desktop-traits"]'))),'career'=>implode(' ',array_map($walk,$select('//main//*[@id="mbti-desktop-career"]')))],JSON_THROW_ON_ERROR);`;
   try { return JSON.parse(execFileSync('php',['-r',code],{input:html,encoding:'utf8',timeout:15000,maxBuffer:2000000,stdio:['pipe','pipe','pipe']})); }
   catch { throw new Error('MBTI_RESULT_COPY_QA_DOM_INVALID'); }
 }

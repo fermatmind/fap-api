@@ -143,6 +143,15 @@ final class PublicContent53Package
                 return $this->readDirectoryCardCopy($root, $expectedSha256);
             }
         }
+        if (is_file($root.'/'.self::PACKAGE.'/mbti-four-leaf-copy.json')) {
+            $chain = "fermatmind.mbti_english_four_leaf_copy.v1\n";
+            foreach (['mbti-four-leaf-copy.json', 'mbti-four-leaf-copy-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return PublicContent53MbtiResultCopy::fourLeafPackage($this->bytes($root, 'mbti-four-leaf-copy.json'), $this->bytes($root, 'mbti-four-leaf-copy-review.json'));
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/mbti-result-copy.json')) {
             $chain = "fermatmind.mbti_english_result_copy.v1\n";
             foreach (['mbti-result-copy.json', 'mbti-result-copy-review.json'] as $name) {
