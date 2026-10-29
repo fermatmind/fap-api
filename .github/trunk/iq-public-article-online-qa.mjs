@@ -289,7 +289,10 @@ export async function renderPage(url, { surface = 'article', verifyDOM = null, m
         const navigation = await send('Page.navigate', { url }, sessionId);
         if (navigation.errorText) throw new Error('navigation failed');
         const expression = `(async () => {
-          if (document.readyState !== 'complete') await new Promise(resolve => window.addEventListener('load', resolve, {once:true}));
+          // Private result text can be ready while the document is still interactive.
+          // Keep article load semantics; bind MBTI acceptance to its visible result DOM.
+          if (${surface === 'mbti_result' ? "document.readyState === 'loading'" : "document.readyState !== 'complete'"})
+            await new Promise(resolve => window.addEventListener(${JSON.stringify(surface === 'mbti_result' ? 'DOMContentLoaded' : 'load')}, resolve, {once:true}));
           const visible = element => {
             if (!element.getClientRects().length) return false;
             for (let node = element; node; node = node.parentElement) {
@@ -316,7 +319,7 @@ export async function renderPage(url, { surface = 'article', verifyDOM = null, m
           const result = await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true }, sessionId);
           const captured = result.result?.value;
           if (result.exceptionDetails || typeof captured?.html !== 'string' || captured.html.length > 2000000 || typeof captured.ready !== 'boolean') throw new Error('DOM failed');
-          deadline ??= Date.now() + 12000;
+          deadline ??= Date.now() + (surface === 'mbti_result' ? 40000 : 12000);
           if (captured.ready) {
             try { await verifyDOM?.(captured.html); return captured.html; } catch {}
           }
