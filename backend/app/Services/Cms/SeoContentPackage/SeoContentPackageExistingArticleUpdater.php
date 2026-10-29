@@ -90,8 +90,9 @@ final class SeoContentPackageExistingArticleUpdater
                     throw new RuntimeException((string) $baselineErrors[0]['code']);
                 }
             }
-            $createdIsolatedWorkingRevision = $this->usesPublishedRevisionAsWorkingRevision($locked);
-            $locked = $this->ensureIsolatedWorkingRevision($locked);
+            $forkWorkingRevision = (bool) $item['fork_working_revision'];
+            $createdIsolatedWorkingRevision = $forkWorkingRevision || $this->usesPublishedRevisionAsWorkingRevision($locked);
+            $locked = $this->ensureIsolatedWorkingRevision($locked, $forkWorkingRevision);
 
             $revision = $this->revisionWorkspace->saveWorkingRevision($locked, [
                 'title' => (string) $item['title'],
@@ -152,6 +153,9 @@ final class SeoContentPackageExistingArticleUpdater
 
         $this->validateCommandSafety($options, $errors);
         $baselineGuard = $this->baselineGuard($options, $errors);
+        if ((bool) ($options['fork_working_revision'] ?? false) && $baselineGuard === []) {
+            $errors[] = $this->issue('fork_working_revision', 'fork_baseline_required', 'Forking the working revision requires the complete baseline guard.');
+        }
 
         if ($articleId <= 0) {
             $errors[] = $this->issue('article_id', 'missing_article_id', '--article-id is required.');
@@ -193,6 +197,7 @@ final class SeoContentPackageExistingArticleUpdater
             if ($article instanceof Article && $item !== []) {
                 $item['article'] = $article;
                 $item['baseline_guard'] = $baselineGuard;
+                $item['fork_working_revision'] = (bool) ($options['fork_working_revision'] ?? false);
                 $this->validateItemAgainstLocks($item, $article, $expectedSlug, $expectedCanonical, $expectedTranslationGroupId, $errors);
                 $this->validateJsonFieldSerialization($item, $errors, $warnings);
             }
@@ -892,7 +897,7 @@ final class SeoContentPackageExistingArticleUpdater
             'working_revision_id' => $article->working_revision_id !== null ? (int) $article->working_revision_id : null,
             'published_revision_id' => $article->published_revision_id !== null ? (int) $article->published_revision_id : null,
             'working_revision_is_published_revision' => $this->usesPublishedRevisionAsWorkingRevision($article),
-            'will_create_isolated_working_revision' => $this->usesPublishedRevisionAsWorkingRevision($article),
+            'will_create_isolated_working_revision' => (bool) $item['fork_working_revision'] || $this->usesPublishedRevisionAsWorkingRevision($article),
             'status' => (string) $article->status,
             'is_public' => (bool) $article->is_public,
             'is_indexable' => (bool) $article->is_indexable,
@@ -911,21 +916,24 @@ final class SeoContentPackageExistingArticleUpdater
             && (int) $article->working_revision_id === (int) $article->published_revision_id;
     }
 
-    private function ensureIsolatedWorkingRevision(Article $article): Article
+    private function ensureIsolatedWorkingRevision(Article $article, bool $forkWorkingRevision = false): Article
     {
-        if (! $this->usesPublishedRevisionAsWorkingRevision($article)) {
+        if (! $forkWorkingRevision && ! $this->usesPublishedRevisionAsWorkingRevision($article)) {
             return $article;
         }
 
-        $published = $article->publishedRevision instanceof ArticleTranslationRevision
-            ? $article->publishedRevision
+        $base = $forkWorkingRevision ? $article->workingRevision : $article->publishedRevision;
+        $base = $base instanceof ArticleTranslationRevision
+            ? $base
             : ArticleTranslationRevision::query()
                 ->withoutGlobalScopes()
-                ->whereKey((int) $article->published_revision_id)
+                ->where('org_id', (int) $article->org_id)
+                ->where('article_id', (int) $article->id)
+                ->whereKey((int) ($forkWorkingRevision ? $article->working_revision_id : $article->published_revision_id))
                 ->first();
 
-        if (! $published instanceof ArticleTranslationRevision) {
-            throw new RuntimeException('Cannot isolate working revision because the published revision was not found.');
+        if (! $base instanceof ArticleTranslationRevision) {
+            throw new RuntimeException('Cannot isolate working revision because its base revision was not found.');
         }
 
         $nextRevisionNumber = ((int) ArticleTranslationRevision::query()
@@ -934,27 +942,26 @@ final class SeoContentPackageExistingArticleUpdater
             ->max('revision_number')) + 1;
 
         $working = ArticleTranslationRevision::query()->withoutGlobalScopes()->create([
-            'org_id' => (int) $published->org_id,
+            'org_id' => (int) $base->org_id,
             'article_id' => (int) $article->id,
-            'source_article_id' => $published->source_article_id !== null ? (int) $published->source_article_id : (int) $article->id,
-            'translation_group_id' => (string) $published->translation_group_id,
-            'locale' => (string) $published->locale,
-            'source_locale' => $published->source_locale,
+            'source_article_id' => $base->source_article_id !== null ? (int) $base->source_article_id : (int) $article->id,
+            'translation_group_id' => (string) $base->translation_group_id,
+            'locale' => (string) $base->locale,
+            'source_locale' => $base->source_locale,
             'revision_number' => $nextRevisionNumber,
             'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
-            'source_version_hash' => (string) $published->source_version_hash,
-            'translated_from_version_hash' => (string) $published->translated_from_version_hash,
-            'title' => (string) $published->title,
-            'excerpt' => $published->excerpt,
-            'content_md' => (string) $published->content_md,
-            'seo_title' => $published->seo_title,
-            'seo_description' => $published->seo_description,
-            'supersedes_revision_id' => (int) $published->id,
+            'source_version_hash' => (string) $base->source_version_hash,
+            'translated_from_version_hash' => (string) $base->translated_from_version_hash,
+            'title' => (string) $base->title,
+            'excerpt' => $base->excerpt,
+            'content_md' => (string) $base->content_md,
+            'seo_title' => $base->seo_title,
+            'seo_description' => $base->seo_description,
+            'supersedes_revision_id' => (int) $base->id,
         ]);
 
         $article->forceFill(['working_revision_id' => (int) $working->id])->saveQuietly();
         $article->setRelation('workingRevision', $working);
-        $article->setRelation('publishedRevision', $published);
 
         return $article;
     }

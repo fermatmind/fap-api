@@ -23,6 +23,7 @@ final class ArticleUpdateExistingSeoContentPackage extends Command
         {--expected-published-revision-id= : Expected current published revision}
         {--expected-working-body-sha256= : SHA256 of exact stored working body bytes}
         {--expected-published-body-sha256= : SHA256 of exact stored published body bytes}
+        {--fork-working-revision : Preserve the current working revision and edit a new revision; requires the complete baseline guard}
         {--dry-run : Validate and plan without writing to the database}
         {--execute : Apply the working revision update}
         {--json : Emit a JSON summary}
@@ -76,6 +77,7 @@ final class ArticleUpdateExistingSeoContentPackage extends Command
             'expected_published_revision_id' => $this->option('expected-published-revision-id'),
             'expected_working_body_sha256' => $this->option('expected-working-body-sha256'),
             'expected_published_body_sha256' => $this->option('expected-published-body-sha256'),
+            'fork_working_revision' => (bool) $this->option('fork-working-revision'),
             'dry_run' => $dryRun,
             'execute' => $execute,
             'json' => (bool) $this->option('json'),

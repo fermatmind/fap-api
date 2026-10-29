@@ -29,6 +29,84 @@ final class ArticleUpdateExistingSeoContentPackageCommandTest extends TestCase
 
     private const CANONICAL = '/zh/articles/riasec-holland-career-interest-test-explained';
 
+    public function test_explicit_fork_preserves_distinct_working_and_published_history(): void
+    {
+        $article = $this->createExistingPublishedArticle40();
+        $oldWorking = $article->publishedRevision->replicate();
+        $oldWorking->forceFill([
+            'revision_number' => 2,
+            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'content_md' => "## Earlier editor corrections\n\nKeep these unpublished corrections in history.\n",
+            'supersedes_revision_id' => $article->published_revision_id,
+        ])->save();
+        $article->forceFill(['working_revision_id' => $oldWorking->id])->save();
+        $article = $article->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $history = ArticleTranslationRevision::query()->withoutGlobalScopes()->orderBy('id')->get()
+            ->mapWithKeys(fn (ArticleTranslationRevision $revision): array => [$revision->id => $revision->getAttributes()])->all();
+        $publicState = $article->only(['published_revision_id', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible']);
+        $options = $this->commandOptions($this->writeExistingUpdatePackage(), [
+            ...$this->baselineOptions($article), '--fork-working-revision' => true, '--json' => true,
+        ]);
+
+        $this->assertSame(0, Artisan::call('articles:update-existing-seo-content-package', [...$options, '--dry-run' => true]));
+        $this->assertTrue($this->jsonOutput()['articles'][0]['will_create_isolated_working_revision']);
+        $this->assertSame(2, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, Artisan::call('articles:update-existing-seo-content-package', [...$options, '--execute' => true]));
+        $article = $article->fresh(['workingRevision', 'publishedRevision']);
+        foreach ($history as $id => $attributes) {
+            $this->assertSame($attributes, ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail($id)->getAttributes());
+        }
+        $this->assertSame($publicState, $article->only(array_keys($publicState)));
+        $this->assertNotSame((int) $oldWorking->id, (int) $article->working_revision_id);
+        $this->assertSame((int) $oldWorking->id, (int) $article->workingRevision->supersedes_revision_id);
+        $this->assertSame(3, (int) $article->workingRevision->revision_number);
+        $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, $article->workingRevision->revision_status);
+        $this->assertTrue($this->jsonOutput()['articles'][0]['created_isolated_working_revision']);
+
+        // The same exact-state invocation must not fork or import a second time.
+        $this->assertSame(1, Artisan::call('articles:update-existing-seo-content-package', [...$options, '--execute' => true]));
+        $this->assertErrorCode($this->jsonOutput(), 'baseline_expected_working_revision_id_mismatch');
+        $this->assertSame(3, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame(1, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_explicit_fork_without_baseline_is_rejected_without_writes(): void
+    {
+        $article = $this->createExistingPublishedArticle40();
+        $before = $article->workingRevision->getAttributes();
+        $this->assertSame(1, Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($this->writeExistingUpdatePackage(), [
+            '--fork-working-revision' => true, '--execute' => true, '--json' => true,
+        ])));
+        $this->assertErrorCode($this->jsonOutput(), 'fork_baseline_required');
+        $this->assertSame($before, $article->fresh(['workingRevision'])->workingRevision->getAttributes());
+        $this->assertSame(1, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_explicit_fork_rolls_back_pointer_and_revision_when_import_record_fails(): void
+    {
+        $article = $this->createExistingPublishedArticle40();
+        $before = $article->getAttributes();
+        $revisionBefore = $article->workingRevision->getAttributes();
+        $event = 'eloquent.creating: '.ArticleEditorialPackageImport::class;
+        Event::listen($event, static function (): void {
+            throw new \RuntimeException('import_record_write_failed');
+        });
+        try {
+            $this->assertSame(1, Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($this->writeExistingUpdatePackage(), [
+                ...$this->baselineOptions($article), '--fork-working-revision' => true, '--execute' => true, '--json' => true,
+            ])));
+            $this->assertErrorCode($this->jsonOutput(), 'runtime_error');
+        } finally {
+            Event::forget($event);
+        }
+        $this->assertSame($before, $article->fresh()->getAttributes());
+        $this->assertSame($revisionBefore, $article->fresh(['workingRevision'])->workingRevision->getAttributes());
+        $this->assertSame(1, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_guarded_body_only_import_retains_null_seo_without_creating_metadata(): void
     {
         $article = $this->createExistingPublishedArticle40();
