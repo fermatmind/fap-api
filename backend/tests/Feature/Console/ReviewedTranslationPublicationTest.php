@@ -201,6 +201,110 @@ final class ReviewedTranslationPublicationTest extends TestCase
         $this->assertSame($published->content_md, $t->fresh()->content_md);
     }
 
+    public function test_editor_first_translation_uses_native_locked_lane_and_preserves_prior_draft(): void
+    {
+        [$s, $t] = $this->fixture();
+        $this->editorSession();
+        $old = $t->workingRevision->replicate();
+        $old->forceFill(['revision_number' => 2, 'revision_status' => 'stale'])->saveQuietly();
+        $history = $old->fresh()->getAttributes();
+        $source = F::sourceHash($s->fresh());
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $before = F::targetHash($s);
+        $prepared = $workspace->prepare($t);
+        $this->assertTrue(json_decode($prepared['preflight'], true)['ok']);
+        $this->assertSame($before, F::targetHash($s));
+        $this->assertDatabaseCount('audit_logs', 0);
+        $result = $workspace->publish($t, ['target_hash' => $prepared['target_hash'], 'preview_approved' => true, 'make_indexable' => true]);
+        $this->assertTrue($result['ok']);
+        $this->assertSame('success', $result['cache_closeout']);
+        $this->assertSame($t->working_revision_id, $t->fresh()->published_revision_id);
+        $this->assertTrue($t->fresh()->is_indexable);
+        $this->assertSame('index,follow', $t->seoMeta->fresh()->robots);
+        $this->assertSame($history, $old->fresh()->getAttributes());
+        $this->assertSame($source, F::sourceHash($s->fresh()));
+        $this->assertDatabaseCount('article_editorial_package_imports', 0);
+        $this->assertDatabaseHas('audit_logs', ['action' => 'codex_controlled_translation_publish', 'actor_admin_id' => auth('admin')->id()]);
+    }
+
+    #[DataProvider('editorTranslationRejects')]
+    public function test_editor_translation_rejects_conflicts_or_missing_authority_without_publication(string $case): void
+    {
+        [$s, $t] = $this->fixture();
+        $this->editorSession();
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $prepared = $workspace->prepare($t);
+        $data = ['target_hash' => $prepared['target_hash'], 'preview_approved' => true, 'make_indexable' => true];
+        if ($case === 'source') {
+            $s->forceFill(['excerpt' => 'Concurrent source metadata'])->saveQuietly();
+        } elseif ($case === 'target') {
+            $t->seoMeta->forceFill(['og_title' => 'Concurrent target metadata'])->saveQuietly();
+        } elseif ($case === 'unreviewed') {
+            $t->workingRevision->forceFill(['revision_status' => 'human_review'])->saveQuietly();
+        } elseif ($case === 'no_preview') {
+            $data['preview_approved'] = false;
+        } elseif ($case === 'no_mfa') {
+            session()->forget('ops_admin_totp_verified_user_id');
+        } elseif ($case === 'no_cache') {
+            config(['ops.content_release_observability.cache_invalidation_urls' => []]);
+        } elseif ($case === 'no_release_permission') {
+            $reader = AdminUser::create(['name' => 'Reader', 'email' => 'reader@example.test', 'password' => bcrypt('test'), 'is_active' => 1]);
+            $this->actingAs($reader, 'admin');
+            session(['ops_admin_totp_verified_user_id' => (int) $reader->id]);
+        }
+        $before = F::targetHash($s->fresh());
+        try {
+            $workspace->publish($t->fresh(), $data);
+            $this->fail('Must reject '.$case);
+        } catch (\Illuminate\Validation\ValidationException|\Symfony\Component\HttpKernel\Exception\HttpException $exception) {
+            $this->assertNull($t->fresh()->published_revision_id);
+            $this->assertSame($before, F::targetHash($s->fresh()));
+            $this->assertDatabaseCount('audit_logs', 0);
+        }
+    }
+
+    public static function editorTranslationRejects(): array
+    {
+        return array_map(fn ($case) => [$case], ['source', 'target', 'unreviewed', 'no_preview', 'no_mfa', 'no_cache', 'no_release_permission']);
+    }
+
+    public function test_editor_translation_reports_bad_cache_receipt_as_committed_and_rejects_replay(): void
+    {
+        [$s, $t] = $this->fixture();
+        $this->editorSession(badCache: true);
+        $workspace = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class);
+        $prepared = $workspace->prepare($t);
+        $data = ['target_hash' => $prepared['target_hash'], 'preview_approved' => true, 'make_indexable' => true];
+        $result = $workspace->publish($t, $data);
+        $this->assertFalse($result['ok']);
+        $this->assertSame('committed', $result['publication']);
+        $this->assertSame('failed', $result['cache_closeout']);
+        $this->assertSame($t->working_revision_id, $t->fresh()->published_revision_id);
+        $this->expectException(\Illuminate\Validation\ValidationException::class);
+        $workspace->publish($t, $data);
+    }
+
+    private function editorSession(bool $badCache = false): void
+    {
+        $role = \App\Models\Role::create(['name' => 'translation-publisher']);
+        $role->permissions()->attach(\App\Models\Permission::firstOrCreate(['name' => 'admin.owner'], ['description' => 'Owner']));
+        auth('admin')->user()->roles()->attach($role);
+        config(['admin.totp.enabled' => true,
+            'ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/api/content-release/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        session(['ops_admin_totp_verified_user_id' => (int) auth('admin')->id()]);
+        \Illuminate\Support\Facades\Http::fake(['*' => function ($request) use ($badCache) {
+            if ($badCache) {
+                return \Illuminate\Support\Facades\Http::response(['ok' => true]);
+            }
+
+            return \Illuminate\Support\Facades\Http::response(['ok' => true,
+                'revalidated_paths' => array_values(array_unique([...data_get($request->data(), 'cache_signal.paths', []),
+                    '/zh/articles', '/en/articles', '/zh/articles/reviewed-translation', '/en/articles/reviewed-translation', '/llms.txt', '/llms-full.txt'])),
+                'rejected_paths' => [], 'invalidated_tags' => ['article-detail:en:reviewed-translation', 'article-seo:en:reviewed-translation']]);
+        }]);
+    }
+
     private function existingFixture(bool $indexable): array
     {
         [$s, $t, $p] = $this->fixture();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Support;
 
+use App\Console\Commands\ArticleForkPrivateTranslationLinks as TranslationFingerprint;
 use App\Events\PublicAuthorityChanged;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Models\Article;
@@ -228,7 +229,7 @@ final class ArticleControlledPublicationWorkspace
     public function prepare(Article $selected): array
     {
         $article = $this->selected($selected);
-        $hash = ArticleSourceTargetSnapshot::publicationHash($article);
+        $hash = $this->publicationHash($article);
         $plan = $this->run($article, $hash, true, false, true);
 
         return [
@@ -240,7 +241,7 @@ final class ArticleControlledPublicationWorkspace
                 'published_revision_id' => $article->published_revision_id,
                 'preview_url' => ArticleWorkspace::previewUrl($article, (int) $article->working_revision_id),
                 'ok' => $plan['ok'],
-                'errors' => $plan['errors'],
+                'errors' => $plan['errors'] ?? [],
             ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
             'preview_approved' => false,
             'acknowledge_claims' => false,
@@ -256,7 +257,10 @@ final class ArticleControlledPublicationWorkspace
         }
         $hash = (string) ($data['target_hash'] ?? '');
         try {
-            ArticleSourceTargetSnapshot::assertPublicationHash($article, $hash);
+            if (! hash_equals($this->publicationHash($article), $hash)) {
+                throw new \RuntimeException('article_publication_state_changed');
+            }
+            ArticleSourceTargetSnapshot::assertPublicationHash($article, ArticleSourceTargetSnapshot::publicationHash($article));
         } catch (\RuntimeException) {
             $this->reject('article_publication_state_changed');
         }
@@ -289,6 +293,9 @@ final class ArticleControlledPublicationWorkspace
 
     private function run(Article $article, string $hash, bool $makeIndexable, bool $acknowledgeClaims, bool $dryRun): array
     {
+        if ($this->isFirstTranslation($article)) {
+            return $this->runTranslation($article, $hash, $makeIndexable, $dryRun);
+        }
         $options = ['--expected-article-state-sha256' => $hash, '--json' => true];
         if ($dryRun) {
             $options['--dry-run'] = true;
@@ -334,6 +341,96 @@ final class ArticleControlledPublicationWorkspace
         Artisan::call($command, $options, $output);
 
         return json_decode(trim($output->fetch()), true, 64, JSON_THROW_ON_ERROR);
+    }
+
+    private function isFirstTranslation(Article $article): bool
+    {
+        return ! $article->isSourceArticle() && $article->published_revision_id === null;
+    }
+
+    private function translationPackage(Article $article): array
+    {
+        $source = Article::withoutGlobalScopes()->where('org_id', 0)->findOrFail($article->source_article_id);
+
+        return ['schema' => 'reviewed_article_translation_publication_v1',
+            'source_id' => (int) $source->id, 'target_id' => (int) $article->id,
+            'source_published_revision_id' => (int) $source->published_revision_id,
+            'working_revision_id' => (int) $article->working_revision_id,
+            'source_snapshot_hash' => TranslationFingerprint::sourceHash($source),
+            'target_snapshot_hash' => TranslationFingerprint::targetHash($source),
+            'body_sha256' => hash('sha256', (string) $article->workingRevision->content_md)];
+    }
+
+    /** Bind source changes as well as the selected saved article to preview QA. */
+    private function publicationHash(Article $article): string
+    {
+        $hash = ArticleSourceTargetSnapshot::publicationHash($article);
+
+        return $this->isFirstTranslation($article)
+            ? hash('sha256', $hash.json_encode($this->translationPackage($article), JSON_THROW_ON_ERROR))
+            : $hash;
+    }
+
+    /** Reuse the native reviewed-translation command in the real Ops session. */
+    private function runTranslation(Article $article, string $hash, bool $makeIndexable, bool $dryRun): array
+    {
+        $package = $this->translationPackage($article);
+        try {
+            if (! ContentReleaseFollowUp::articleCacheConfigured()) {
+                throw new \RuntimeException('single_article_cache_configuration_required');
+            }
+            if (! hash_equals($this->publicationHash($article), $hash)) {
+                throw new \RuntimeException('article_publication_state_changed');
+            }
+            $plan = app(\App\Services\Cms\ReviewedTranslationPublication::class)->run($package, false, false, '', $makeIndexable);
+        } catch (\RuntimeException $exception) {
+            return ['ok' => false, 'errors' => [['code' => $exception->getMessage()]]];
+        }
+        if ($dryRun) {
+            return $plan;
+        }
+        $root = storage_path('app/private/article-translation-publications');
+        \Illuminate\Support\Facades\File::ensureDirectoryExists($root, 0700);
+        $file = tempnam($root, 'publish-');
+        $committed = false;
+        $summary = [];
+        try {
+            if ($file === false || ! chmod($file, 0600)) {
+                throw new \RuntimeException('translation_package_unavailable');
+            }
+            $bytes = json_encode($package, JSON_THROW_ON_ERROR);
+            if (file_put_contents($file, $bytes) !== strlen($bytes)) {
+                throw new \RuntimeException('translation_package_unavailable');
+            }
+            Event::defer(function () use ($article, $file, $bytes, $makeIndexable, &$summary, &$committed): void {
+                $options = ['--article' => [(string) $article->id], '--translation-locks' => $file,
+                    '--translation-sha256' => hash('sha256', $bytes), '--preview-approved' => true, '--json' => true,
+                    '--confirm' => "I explicitly approve Codex to publish article id {$article->id} after preflight passes."];
+                if ($makeIndexable) {
+                    $options['--make-indexable'] = true;
+                }
+                $output = new BufferedOutput;
+                Artisan::call('articles:publish-controlled', $options, $output);
+                $summary = json_decode(trim($output->fetch()), true, 64, JSON_THROW_ON_ERROR);
+                $committed = ($summary['ok'] ?? false) === true;
+            }, [PublicAuthorityChanged::class]);
+            if (! $committed) {
+                return $summary;
+            }
+            ContentReleaseFollowUp::dispatchArticlePathsStrict($article->fresh(['publishedRevision', 'seoMeta']), 'article_native_translation_published');
+
+            return $summary + ['publication' => 'committed', 'cache_closeout' => 'success'];
+        } catch (\Throwable $exception) {
+            if (! $committed) {
+                throw $exception;
+            }
+
+            return ['ok' => false, 'publication' => 'committed', 'cache_closeout' => 'failed'];
+        } finally {
+            if (is_string($file) && is_file($file)) {
+                unlink($file);
+            }
+        }
     }
 
     private function reject(string $code): never
