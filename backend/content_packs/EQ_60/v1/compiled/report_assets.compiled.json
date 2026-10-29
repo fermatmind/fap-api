@@ -3,7 +3,7 @@
     "pack_id": "EQ_60",
     "pack_version": "v1",
     "authority_id": "FERMATMIND_EQ_60_BILINGUAL_CANONICAL",
-    "source_hash": "f1645cbd8b9c5b5686d2611a22e12a90609a2d64647eb5a5d348d12c2d056de7",
+    "source_hash": "cfc129a6883ab0fd8b6716fc6e3d58901008ee8e5efe7f94a365288a2af08d30",
     "assets": {
         "scientific_contract": {
             "schema": "eq60.report_assets.scientific_contract.v1",
@@ -16,7 +16,7 @@
                         "non_clinical_statement": "本报告不用于临床诊断、治疗评估、医疗建议、危机处置或心理风险判断。若情绪困扰持续影响睡眠、工作、人际安全或日常功能，应寻求合格专业人士或现实支持。",
                         "non_hiring_statement": "本结果不得用于招聘、录用、淘汰、晋升、岗位分配、绩效评估、团队筛选或任何高风险组织决策，也不应用来评价他人是否适合某个岗位。",
                         "non_ability_statement": "EQ-60 不是情绪能力测验、MSCEIT、认证工具、临床工具或招聘工具，不能证明真实沟通能力、关系能力或工作能力。",
-                        "norm_status_statement": "标准分、百分位和等级使用当前版本的阶段性常模；百分位只表示你在阶段性样本中的相对位置，不是能力、价值或职业竞争力排名。",
+                        "norm_status_statement": "标准分、百分位和等级应结合报告所列参照版本理解。采用 bootstrap 等模型参照时，百分位是按模型参数估计的相对位置，不是实际样本内排名；采用样本参照时，应结合对应参照组和版本解读。它不是能力、价值或职业竞争力排名。",
                         "quality_rules_statement": "解释置信度会参考作答速度、连续相同选择、极端选择、中立选择和一致性线索。低置信结果应优先作为作答质量提示和复测建议，不适合输出强画像、强职业判断或强下一步练习重点。",
                         "version_statement": "报告记录题目、计分、常模和内容版本，便于复测比较与质量追踪；版本号不代表临床、招聘或能力认证。",
                         "user_safe_summary": "适合用于自我理解、关系复盘、低风险沟通练习和职业环境变量反思。",
@@ -28,7 +28,7 @@
                         "non_clinical_statement": "This report is not for clinical diagnosis, treatment evaluation, medical advice, crisis decisions, or psychological risk assessment. If distress keeps affecting sleep, work, interpersonal safety, or daily functioning, seek qualified professional or real-world support.",
                         "non_hiring_statement": "This result must not be used for hiring, selection, rejection, promotion, role assignment, performance review, team screening, or any high-stakes organizational decision. It should not be used to judge whether another person is suitable for a role.",
                         "non_ability_statement": "EQ-60 is not an emotional-ability test, MSCEIT, certification, clinical tool, or hiring tool. It cannot prove communication, relationship, or work ability.",
-                        "norm_status_statement": "Standard scores, percentiles, and bands use the current version's provisional norms. A percentile is only a relative position in that provisional sample, not a ranking of ability, worth, or career competitiveness.",
+                        "norm_status_statement": "Read standard scores, percentiles, and bands with the reference version stated in the report. With a bootstrap or other model-based reference, percentiles are estimated from model parameters, not observed sample ranks. With sample-based norms, use the stated reference group and version. They do not rank ability, worth, or career competitiveness.",
                         "quality_rules_statement": "Interpretation confidence considers response speed, repeated identical choices, extreme choices, neutral choices, and consistency signals. Low-confidence results should be treated primarily as response-quality guidance and retest advice, not as strong profiling, career conclusions, or practice recommendations.",
                         "version_statement": "The report records item, scoring, norm, and content versions for retest comparison and quality tracking; version numbers do not confer clinical, hiring, or ability certification.",
                         "user_safe_summary": "Use it for self-understanding, relational reflection, low-risk communication practice, and work-environment variable review.",
@@ -570,14 +570,14 @@
             },
             "score_notes": {
                 "zh-CN": {
-                    "percentile": "百分位只表示当前阶段性样本中的相对位置参考，不是能力排名、真实水平排名、全球正式常模排名或职业竞争力排名。",
+                    "percentile": "百分位的含义取决于报告所列参照版本：bootstrap 等模型参照给出按模型参数估计的位置，不是实际样本内排名；样本参照应结合对应参照组和版本解读。它不是能力排名、真实水平排名、全球正式常模排名或职业竞争力排名。",
                     "standard_score": "标准分用于稳定展示和维度比较，是阅读入口，不是现场表现证明或能力证明。",
                     "band": "等级用于降低阅读负担，不代表固定人格、能力证书、临床结论、招聘信号或职业判断。",
                     "provisional_norm": "当前常模为阶段性常模，后续样本、语言版本和内容版本更新都可能改变解释边界。",
                     "commercial_boundary": "总分不应单独使用；完整解释必须结合四维、质量、证据状态、机制和场景边界。"
                 },
                 "en": {
-                    "percentile": "Percentile only provides a relative-position reference within the current provisional sample. It is not an ability ranking, true-level ranking, final global norm, or career-competitiveness ranking.",
+                    "percentile": "A percentile depends on the reference version stated in the report: a bootstrap or other model-based reference gives a position estimated from model parameters, not an observed sample rank; sample-based norms should be read with the stated reference group and version. It is not an ability ranking, true-level ranking, final global norm, or career-competitiveness ranking.",
                     "standard_score": "Standard score supports stable display and dimension comparison. It is a reading entry, not proof of live performance or ability.",
                     "band": "Bands reduce reading effort; they are not fixed identities, credentials, clinical findings, hiring signals, or career judgments.",
                     "provisional_norm": "Current norms are provisional. Future samples, language versions, and content versions may change interpretation boundaries.",
@@ -27591,18 +27591,18 @@
                 "eq.evidence.norm_status": {
                     "zh-CN": {
                         "status": "provisional",
-                        "body": "当前标准分、百分位和等级采用阶段性常模口径。它们表示在当前样本和版本中的相对自我报告位置，不是全球正式常模、能力排名或现实表现排名。",
-                        "do_not_overread": "百分位只是当前版本阶段性样本中的相对位置。",
+                        "body": "当前标准分、百分位和等级采用阶段性参照。bootstrap 等模型参照表示按模型参数估计的位置，不表示实际样本内排名；采用样本参照时，应结合对应参照组和版本理解。它们不是全球正式常模、能力排名或现实表现排名。",
+                        "do_not_overread": "先核对参照版本；bootstrap 等模型参照不表示实际样本内排名，样本参照也只适用于对应参照组和版本。",
                         "user_facing_status_label": "常模状态：阶段性",
                         "what_this_means_for_user": "分数适合帮助你定位本次作答的大致相对位置，但不适合用于比较个人价值、能力高低、职业前景或关系质量。",
                         "next_validation_step": "继续扩大样本、分层检查语言/地区/年龄等变量，定期发布常模版本说明和解释限制。"
                     },
                     "en": {
                         "status": "provisional",
-                        "body": "Current standard scores, percentiles, and bands use a provisional norming approach. They describe relative self-report position in the current sample and version, not final global norms, ability ranking, or real-world performance ranking.",
-                        "do_not_overread": "Percentiles are relative positions in the current versioned provisional sample.",
+                        "body": "Current standard scores, percentiles, and bands use a provisional reference. A bootstrap or other model-based reference estimates position from model parameters, rather than observed sample ranks; sample-based norms should be read with the stated reference group and version. These are not final global norms, ability rankings, or real-world performance rankings.",
+                        "do_not_overread": "Check the reference version first: a bootstrap or other model-based reference is not an observed sample rank, and sample-based norms apply only to the stated reference group and version.",
                         "user_facing_status_label": "Norm status: provisional",
-                        "what_this_means_for_user": "Scores can help locate this response pattern roughly within the current sample, but should not be used to compare personal worth, ability level, career prospects, or relationship quality.",
+                        "what_this_means_for_user": "Scores can help locate this response pattern roughly against the stated reference, but should not be used to compare personal worth, ability level, career prospects, or relationship quality.",
                         "next_validation_step": "Continue expanding samples, stratify by language/region/age and related variables, and publish norm-version notes with interpretation limits."
                     },
                     "meta": {
