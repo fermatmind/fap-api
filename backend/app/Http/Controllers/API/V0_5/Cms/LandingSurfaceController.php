@@ -318,7 +318,7 @@ final class LandingSurfaceController extends Controller
             ->whereHas('publishedRevision')
             ->select('articles.*')
             ->selectSub($this->articlePublicListQuery->materialChangedAtSubquery(), 'recommendation_material_changed_at')
-            ->orderByRaw('COALESCE(recommendation_material_changed_at, articles.published_at) DESC')
+            ->orderByDesc('articles.published_at')
             ->orderByDesc('id')
             ->get()
             ->filter(fn (Article $article): bool => $this->isRecommendedArticleRenderEligible($article))

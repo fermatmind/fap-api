@@ -70,7 +70,7 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
     }
 
     #[DataProvider('locales')]
-    public function test_material_update_reaches_homepage_without_changing_original_publication_date(string $locale): void
+    public function test_homepage_prioritizes_original_publication_dates_over_material_updates(string $locale): void
     {
         Carbon::setTestNow('2026-05-27T00:00:00Z');
         $this->createHomeSurface($locale);
@@ -82,6 +82,7 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
         $originalDate = '2026-04-01T00:00:00.000000Z';
         $updated->forceFill(['published_at' => $originalDate])->saveQuietly();
         $this->recordMaterialDecision($updated, '2026-05-26T00:00:00Z');
+        $this->recordMaterialDecision($recent[6], '2026-05-20T00:00:00Z');
 
         // Ordinary saves, stale revisions and another tenant/language cannot boost recency.
         $recent[0]->forceFill(['updated_at' => now()])->saveQuietly();
@@ -91,14 +92,15 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
 
         $items = $this->recommendedItems($locale);
         $this->assertSame(
-            [$updated->slug, 'recent-6', 'recent-5', 'recent-4', 'recent-3', 'recent-2'],
+            ['recent-6', 'recent-5', 'recent-4', 'recent-3', 'recent-2', 'recent-1'],
             array_column(array_column($items, 'article'), 'slug'),
         );
-        $this->assertSame($originalDate, $items[0]['article']['published_at']);
-        $this->assertSame('2026-05-26T00:00:00.000000Z', $items[0]['article']['material_updated_at']);
+        $this->assertNotContains($updated->slug, array_column(array_column($items, 'article'), 'slug'));
+        $this->assertSame('2026-05-15T00:00:00.000000Z', $items[0]['article']['published_at']);
+        $this->assertSame('2026-05-20T00:00:00.000000Z', $items[0]['article']['material_updated_at']);
         $this->assertSame('2026-05-15T00:00:00.000000Z', $items[1]['article']['material_updated_at']);
         $this->assertSame($originalDate, $updated->fresh()->published_at->toISOString());
-        $this->assertSame($updated->published_revision_id, $items[0]['article']['published_revision_id']);
+        $this->assertSame($recent[6]->published_revision_id, $items[0]['article']['published_revision_id']);
         $this->assertArrayNotHasKey('recommendation_material_changed_at', $items[0]['article']);
     }
 
