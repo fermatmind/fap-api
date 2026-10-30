@@ -79,6 +79,7 @@ final class RiasecEnglishDimensionStateReleaseTest extends TestCase
     public function test_selected_1_2_release_retains_exact_hashes_and_omits_new_asset(): void
     {
         $compiled = app(Compiler::class)->compile();
+        $compiled = \Tests\Support\RiasecLegacyReaderCopyFixture::restoreCompiled($compiled);
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
         // Rebuild immutable releases with their original reader copy, not today's source.

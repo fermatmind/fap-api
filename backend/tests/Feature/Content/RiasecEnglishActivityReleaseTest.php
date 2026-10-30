@@ -63,6 +63,7 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
     public function test_original_chinese_release_still_validates_and_english_remains_unavailable(): void
     {
         $compiled = app(Compiler::class)->compile();
+        $compiled = \Tests\Support\RiasecLegacyReaderCopyFixture::restoreCompiled($compiled);
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
         $payload['assets'] = array_intersect_key($payload['assets'], Compiler::sourceContract('1.0.0'));
@@ -91,6 +92,7 @@ final class RiasecEnglishActivityReleaseTest extends TestCase
     public function test_activity_only_immutable_release_retains_its_exact_hashes_and_scope(): void
     {
         $compiled = app(Compiler::class)->compile();
+        $compiled = \Tests\Support\RiasecLegacyReaderCopyFixture::restoreCompiled($compiled);
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
         // Rebuild immutable releases with their original reader copy, not today's source.

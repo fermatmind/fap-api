@@ -111,6 +111,7 @@ final class RiasecEnglishTop3ReleaseTest extends TestCase
     {
         $this->assertSame('eb59709ef2aca0ee5ff4a95b53e86ef9b2db72f09b37f4aeec4f76c97d091eb2', hash('sha256', file(base_path('content_assets/riasec/top3_code_chain_strategy_v1.en.jsonl'))[0]));
         $compiled = app(Compiler::class)->compile();
+        $compiled = \Tests\Support\RiasecLegacyReaderCopyFixture::restoreCompiled($compiled);
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
         // Rebuild immutable releases with their original reader copy, not today's source.

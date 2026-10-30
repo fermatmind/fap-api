@@ -80,6 +80,7 @@ final class RiasecEnglishPairReleaseTest extends TestCase
     {
         $this->assertSame('459c27aee43e5a1eb483d560cb8f56d74e6c75173b6de2187a792ccf613a0bf7', hash('sha256', implode('', array_slice(file(base_path('content_assets/riasec/pair_blend_15_pairs_v1.en.jsonl')), 0, 3))));
         $compiled = app(Compiler::class)->compile();
+        $compiled = \Tests\Support\RiasecLegacyReaderCopyFixture::restoreCompiled($compiled);
         $payload = $compiled['payload'];
         $manifest = $compiled['manifest'];
         // Rebuild immutable releases with their original reader copy, not today's source.

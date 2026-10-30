@@ -192,6 +192,7 @@ final class RiasecEnglishReportSourceContractTest extends TestCase
     public function test_published_1_8_bytes_and_selected_authority_remain_immutable_and_readable(): void
     {
         $c = app(Compiler::class)->compile();
+        $c = \Tests\Support\RiasecLegacyReaderCopyFixture::restoreCompiled($c);
         $p = $c['payload'];
         $m = $c['manifest'];
         // Rebuild immutable releases with their original reader copy, not today's source.
