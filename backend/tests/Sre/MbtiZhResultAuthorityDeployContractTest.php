@@ -20,7 +20,7 @@ final class MbtiZhResultAuthorityDeployContractTest extends TestCase
 
         $this->assertIsString($workflow);
         $this->assertSame('mbti.zh_result_authority_release.v1', $manifest['contract_version']);
-        $this->assertSame('208d63bf7ebc41a563aea25ba454d33ad747a422f08e42aa2d1f50c91e3f9d07', $manifest['package_hash']);
+        $this->assertSame('7733c08d3defaa5f18803c8f345eb8600758007c4a106adeb308b7a8f3ee249a', $manifest['package_hash']);
         $this->assertSame(32, $manifest['record_count']);
         $this->assertSame(224, $manifest['disabled_slot_count']);
         $this->assertSame(1, $manifest['admin_actor_user_id']);

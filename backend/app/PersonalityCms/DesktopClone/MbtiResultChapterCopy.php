@@ -113,6 +113,72 @@ final class MbtiResultChapterCopy
             }
         }
 
+        // Equate only these reviewed keyword pairs; identity and every other keyword stay protected.
+        $reviewedKeywords = [
+            'ENFP-A' => [
+                3 => ['共情力', '关注他人感受'],
+            ],
+            'ENTJ-A' => [
+                1 => ['决策力', '关注决策'],
+                5 => ['领导力', '关注组织方向'],
+            ],
+            'ENTP-A' => [
+                5 => ['快速学习', '喜欢探索新知'],
+            ],
+            'ENTP-T' => [
+                5 => ['快速学习', '喜欢探索新知'],
+            ],
+            'ESFJ-A' => [
+                1 => ['组织力', '重视组织安排'],
+            ],
+            'ESFJ-T' => [
+                2 => ['组织力', '重视组织安排'],
+            ],
+            'ESFP-T' => [
+                5 => ['动荡自省', '关注自我反馈'],
+            ],
+            'ESTJ-A' => [
+                1 => ['执行力', '重视落实'],
+                5 => ['决断力', '偏好及时决策'],
+            ],
+            'ESTJ-T' => [
+                1 => ['执行力', '重视落实'],
+                4 => ['组织力', '重视组织安排'],
+            ],
+            'INFJ-A' => [
+                1 => ['洞察力', '关注深层意义'],
+            ],
+            'INFJ-T' => [
+                0 => ['洞察力', '关注深层意义'],
+            ],
+            'INFP-T' => [
+                1 => ['共情力', '关注他人感受'],
+            ],
+            'ISFJ-T' => [
+                2 => ['稳定可靠', '重视稳定'],
+            ],
+            'ISTJ-A' => [
+                4 => ['可靠', '重视承诺'],
+            ],
+            'ISTJ-T' => [
+                4 => ['可靠', '重视承诺'],
+            ],
+            'ISTP-A' => [
+                1 => ['动手能力', '偏好动手实践'],
+            ],
+            'ISTP-T' => [
+                1 => ['动手能力', '偏好动手实践'],
+            ],
+        ];
+        $code = (string) data_get($content, 'hero.profile_identity.code', '');
+        foreach ($reviewedKeywords[$code] ?? [] as $index => $pair) {
+            $path = 'hero.profile_identity.keywords.'.$index;
+            if (! in_array(data_get($content, $path), $pair, true)) {
+                throw new RuntimeException('Unreviewed MBTI preference keyword at '.$code.'.'.$index);
+            }
+            data_set($content, $path, '');
+        }
+
         return $content;
     }
 

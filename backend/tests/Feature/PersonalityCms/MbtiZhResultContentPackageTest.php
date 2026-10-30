@@ -81,6 +81,65 @@ final class MbtiZhResultContentPackageTest extends TestCase
         }
     }
 
+    public function test_reviewed_preference_keywords_preserve_identity_and_reject_unreviewed_changes(): void
+    {
+        $package = app(MbtiZhResultContentPackage::class)->compile();
+        $original = collect($package['rows'])->firstWhere('full_code', 'ENTJ-A')['content_json'];
+        $this->assertSame('关注决策', data_get($original, 'hero.profile_identity.keywords.1'));
+        $this->assertSame('关注组织方向', data_get($original, 'hero.profile_identity.keywords.5'));
+        $old = $original;
+        data_set($old, 'hero.profile_identity.keywords.1', '决策力');
+        data_set($old, 'hero.profile_identity.keywords.5', '领导力');
+        $masked = MbtiResultChapterCopy::withoutEditorialSlots($original);
+        $this->assertSame($masked, MbtiResultChapterCopy::withoutEditorialSlots($old));
+        foreach ([
+            'hero.profile_identity.code' => 'INTJ-A',
+            'hero.profile_identity.nickname' => 'Unreviewed identity',
+            'hero.profile_identity.keywords.0' => 'Unreviewed neighboring keyword',
+        ] as $path => $value) {
+            $changed = $original;
+            data_set($changed, $path, $value);
+            $this->assertNotSame($masked, MbtiResultChapterCopy::withoutEditorialSlots($changed), $path);
+        }
+        $reordered = $original;
+        $reordered['hero']['profile_identity']['keywords'] = array_reverse($reordered['hero']['profile_identity']['keywords']);
+        try {
+            MbtiResultChapterCopy::withoutEditorialSlots($reordered);
+            $this->fail('Reordered keywords must not be masked.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringStartsWith('Unreviewed MBTI preference keyword at ENTJ-A.', $exception->getMessage());
+        }
+        foreach (['', null, [], 'Unreviewed ability claim'] as $unreviewed) {
+            $changed = $original;
+            data_set($changed, 'hero.profile_identity.keywords.1', $unreviewed);
+            try {
+                MbtiResultChapterCopy::withoutEditorialSlots($changed);
+                $this->fail('Unknown keyword must fail closed, including empty or non-string values.');
+            } catch (\RuntimeException $exception) {
+                $this->assertSame('Unreviewed MBTI preference keyword at ENTJ-A.1', $exception->getMessage());
+            }
+        }
+        $removed = $original;
+        array_pop($removed['hero']['profile_identity']['keywords']);
+        try {
+            MbtiResultChapterCopy::withoutEditorialSlots($removed);
+            $this->fail('A removed keyword must not be masked.');
+        } catch (\RuntimeException $exception) {
+            $this->assertSame('Unreviewed MBTI preference keyword at ENTJ-A.5', $exception->getMessage());
+        }
+        $otherType = collect($package['rows'])->firstWhere('full_code', 'INTJ-T')['content_json'];
+        $changed = $otherType;
+        data_set($changed, 'hero.profile_identity.keywords.1', '关注决策');
+        $this->assertNotSame(MbtiResultChapterCopy::withoutEditorialSlots($otherType), MbtiResultChapterCopy::withoutEditorialSlots($changed));
+    }
+
+    public function test_typo_correction_preserves_one_description_and_three_separate_examples(): void
+    {
+        $rows = collect(app(MbtiZhResultContentPackage::class)->compile()['rows']);
+        $item = data_get($rows->firstWhere('full_code', 'ESFP-T'), 'content_json.chapters.career.career_ideas.items.1.description');
+        $this->assertSame('核实岗位技能、投诉处理、班次与支持条件，不能只看互动是否热闹或容易获得好评。'."\n".'示例：高端消费场景的前台与顾问，如餐饮、酒店、健身房等；客户成功、用户运营、社群运营；美容美发、形象顾问等以体验为核心的职业', $item);
+    }
+
     public function test_package_is_deterministic_complete_and_has_no_consumable_media(): void
     {
         $first = app(MbtiZhResultContentPackage::class)->compile();
