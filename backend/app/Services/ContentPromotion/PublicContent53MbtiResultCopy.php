@@ -281,7 +281,12 @@ final class PublicContent53MbtiResultCopy
             unset($leaf);
             $state = ['table' => 'personality_profile_variant_sections', 'values' => reset($selected), 'relations' => [],
                 'native_sections' => $selected, 'native_leaf_map' => $map, 'native_row' => $row,
-                'controls' => ['profile' => $profile, 'variants' => $variants, 'sections' => $ownSections,
+                'controls' => ['profile' => $profile, 'variants' => $variants, 'sections' => array_map(
+                    static fn (array $section): array => isset($selected[$section['section_key']])
+                        ? $section
+                        : ['id' => $section['id'], 'unowned_section_sha256' => hash('sha256', PromotionContextFactory::canonicalJson($section))],
+                    $ownSections
+                ),
                     'revisions' => $this->query('personality_profile_variant_revisions', ['personality_profile_variant_id' => $variant['id']], $lock)]];
             $this->copy($state);
 
@@ -331,6 +336,17 @@ final class PublicContent53MbtiResultCopy
         return $this->projectionFromState($state, $row);
     }
 
+    /** Project the same native leaves from the writer's freshly locked CAS state. */
+    public function lockedNativeProjection(array $row, array $state): array
+    {
+        if (DB::transactionLevel() < 1 || ! isset($state['native_sections'])
+            || PromotionContextFactory::canonicalJson($state['native_row'] ?? []) !== PromotionContextFactory::canonicalJson($row)) {
+            throw new DomainException('mbti_result_copy_locked_projection_invalid');
+        }
+
+        return $this->projectionFromState($state, $row);
+    }
+
     private function projectionFromState(array $state, ?array $row): array
     {
         $profile = new PersonalityProfile;
@@ -340,12 +356,18 @@ final class PublicContent53MbtiResultCopy
         $target = array_values(array_filter($state['controls']['variants'], static fn ($v): bool => $v['runtime_type_code'] === $runtime))[0];
         $variant->setRawAttributes($target, true);
         if (isset($state['native_sections'])) {
+            // These leaves are all enabled variant overrides. Other sections
+            // are protected by their complete-row hashes, never restored or
+            // consumed by this bounded projection.
+            $profile->setRelation('sections', new \Illuminate\Database\Eloquent\Collection);
+            $profile->setRelation('seoMeta', null);
+            $variant->setRelation('seoMeta', null);
             $variant->setRelation('sections', new \Illuminate\Database\Eloquent\Collection(array_map(static function (array $attributes): \App\Models\PersonalityProfileVariantSection {
                 $section = new \App\Models\PersonalityProfileVariantSection;
                 $section->setRawAttributes($attributes, true);
 
                 return $section;
-            }, $state['controls']['sections'])));
+            }, array_values($state['native_sections']))));
         }
         $adapter = app(MbtiPersonalityProfileAuthoritySourceAdapter::class);
         $authority = $adapter->overlayVariant($adapter->fromBaseProfile($profile), $variant);

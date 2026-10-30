@@ -90,7 +90,10 @@ final class PublicContent53Writer
 
                 continue;
             }
-            if ($this->states->hash($this->states->projection($row)) === $this->states->hash($row['snapshot'])) {
+            $projection = isset($saved['native_sections'])
+                ? app(PublicContent53MbtiResultCopy::class)->lockedNativeProjection($row, $saved)
+                : $this->states->projection($row);
+            if ($this->states->hash($projection) === $this->states->hash($row['snapshot'])) {
                 continue;
             }
             match ($row['kind']) {

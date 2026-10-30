@@ -153,6 +153,47 @@ final class PublicContent53MbtiNativeLeafCopyTest extends TestCase
         }
     }
 
+    public function test_unowned_bodies_are_fully_fingerprinted_but_not_duplicated_into_rollback_state(): void
+    {
+        $this->seedTargets();
+        $row = $this->rows()[0];
+        $variant = PersonalityProfileVariant::where('runtime_type_code', $row['source_identity']['runtime_type_code'])->firstOrFail();
+        $section = PersonalityProfileVariantSection::where('personality_profile_variant_id', $variant->id)->where('section_key', 'overview')->firstOrFail();
+        $body = str_repeat('Preserve the complete unowned HTML. ', 30000);
+        $section->update(['body_html' => $body]);
+        $raw = (array) DB::table('personality_profile_variant_sections')->where('id', $section->id)->first();
+        $native = app(PublicContent53MbtiResultCopy::class);
+        $state = $native->read(false, $row);
+        $control = collect($state['controls']['sections'])->firstWhere('id', $section->id);
+        $this->assertSame(['id' => $section->id, 'unowned_section_sha256' => hash('sha256', PromotionContextFactory::canonicalJson($raw))], $control);
+        $this->assertLessThan(200000, strlen(PromotionContextFactory::canonicalJson($state)));
+        $this->assertSame($body, $section->fresh()->body_html);
+
+        $adapter = app(\App\Services\Mbti\Adapters\MbtiPersonalityProfileAuthoritySourceAdapter::class);
+        $authority = $adapter->overlayVariant($adapter->fromBaseProfile($variant->profile), $variant);
+        $projection = DB::transaction(function () use ($native, $row, $state): array {
+            DB::enableQueryLog();
+            DB::flushQueryLog();
+            try {
+                $projection = $native->lockedNativeProjection($row, $state);
+                $this->assertCount(0, DB::getQueryLog(), 'The writer already locked and compared these exact native rows.');
+
+                return $projection;
+            } finally {
+                DB::disableQueryLog();
+            }
+        });
+        foreach ($state['native_leaf_map'] as $name => $leaf) {
+            $path = $leaf['path'];
+            if ($path[0] === 'payload_json') {
+                $path[0] = 'payload';
+            }
+            $this->assertSame(data_get($authority['sections'][$leaf['section_key']], implode('.', $path)), $projection[$name]);
+        }
+        $this->expectExceptionMessage('mbti_result_copy_locked_projection_invalid');
+        $native->lockedNativeProjection($this->rows()[1], $state);
+    }
+
     public static function environments(): array
     {
         return [['staging'], ['production']];
