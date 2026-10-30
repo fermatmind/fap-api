@@ -6,6 +6,7 @@ namespace Tests\Unit\Support\Mbti;
 
 use App\PersonalityCms\DesktopClone\MbtiResultChapterCopy;
 use App\PersonalityCms\DesktopClone\MbtiZhResultContentPackage;
+use RuntimeException;
 use Tests\TestCase;
 
 final class MbtiEditorialFieldBoundaryTest extends TestCase
@@ -15,7 +16,6 @@ final class MbtiEditorialFieldBoundaryTest extends TestCase
         $content = app(MbtiZhResultContentPackage::class)->compile()['rows'][0]['content_json'];
         $protected = MbtiResultChapterCopy::withoutEditorialSlots($content);
         $mutations = [
-            'hero.profile_identity.code' => 'ENTJ-A',
             'chapters.career.traits_unlock.items.0.id' => 'changed-id',
             'chapters.career.traits_unlock.items.0.label' => 'changed-label',
             'chapters.career.traits_unlock.items.0.definition' => ['text became an array'],
@@ -46,5 +46,16 @@ final class MbtiEditorialFieldBoundaryTest extends TestCase
         $changed = $content;
         $changed['chapters']['career']['traits_unlock']['items'] = array_reverse($changed['chapters']['career']['traits_unlock']['items']);
         $this->assertNotSame($protected, MbtiResultChapterCopy::withoutEditorialSlots($changed));
+    }
+
+    public function test_identity_mutation_is_rejected_before_masking_incompatible_keywords(): void
+    {
+        $content = app(MbtiZhResultContentPackage::class)->compile()['rows'][0]['content_json'];
+        $this->assertNotSame('ENTJ-A', data_get($content, 'hero.profile_identity.code'));
+        data_set($content, 'hero.profile_identity.code', 'ENTJ-A');
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Unreviewed MBTI preference keyword at ENTJ-A.1');
+        MbtiResultChapterCopy::withoutEditorialSlots($content);
     }
 }
