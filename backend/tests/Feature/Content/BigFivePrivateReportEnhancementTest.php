@@ -79,6 +79,10 @@ final class BigFivePrivateReportEnhancementTest extends TestCase
         $this->assertSame('UNKNOWN', data_get($payload, 'quality.grade'));
         $this->assertSame('unavailable', data_get($payload, 'norm_evidence.status'));
         $this->assertFalse((bool) data_get($payload, 'norm_evidence.comparison_allowed'));
+        $norms = collect((array) ($payload['sections'] ?? []))->firstWhere('section_key', 'norms_comparison');
+        $this->assertCount(1, $norms['blocks']);
+        $this->assertSame('BigFiveNormEvidenceCard', $norms['blocks'][0]['component']);
+        $this->assertNotEmpty($norms['blocks'][0]['resolved_copy']['unavailable_explanation']);
         foreach ($this->selectedActions($payload) as $action) {
             $this->assertSame('observe', $action['bucket'] ?? null);
         }

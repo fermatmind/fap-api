@@ -67,6 +67,9 @@ final class SectionInstructionAssembler
         }
 
         $blocksBySection['facet_details'] = $this->facetDetailsBlocks($context, $facetAnomalies, $registry);
+        if (($normEvidence['comparison_allowed'] ?? false) !== true) {
+            $blocksBySection['norms_comparison'] = [];
+        }
         array_unshift($blocksBySection['norms_comparison'], $this->normEvidenceBlock($normEvidence));
 
         $methodology = is_array($registry['shared']['methodology'] ?? null) ? $registry['shared']['methodology'] : [];

@@ -95,7 +95,7 @@ final class BigFiveEnglishRegistryLocaleTest extends TestCase
             'C1' => 'Self-Efficacy', 'C2' => 'Order', 'C3' => 'Dutifulness', 'C4' => 'Achievement Striving', 'C5' => 'Delayed-Feedback Persistence', 'C6' => 'Deliberation',
             'E1' => 'Warmth', 'E2' => 'Group Participation', 'E3' => 'Assertiveness', 'E4' => 'Activity Level', 'E5' => 'Excitement Seeking', 'E6' => 'Positive Emotion',
             'A1' => 'Trust', 'A2' => 'Straightforwardness', 'A3' => 'Altruism', 'A4' => 'Conflict Mediation', 'A5' => 'Modesty', 'A6' => 'Compassion',
-            'N1' => 'Anxiety Sensitivity', 'N2' => 'Anger Activation', 'N3' => 'Sustained-Stress Depletion', 'N4' => 'Social Self-Consciousness', 'N5' => 'Overload Exit Urge', 'N6' => 'Coping-Limit Vulnerability',
+            'N1' => 'Anxiety Sensitivity', 'N2' => 'Anger Activation', 'N3' => 'Low Mood', 'N4' => 'Social Self-Consciousness', 'N5' => 'Immoderation', 'N6' => 'Coping-Limit Vulnerability',
         ];
         $actualFacetLabels = [];
         foreach ($registry['facet_glossary'] as $pack) {
