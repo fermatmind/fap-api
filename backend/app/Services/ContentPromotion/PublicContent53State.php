@@ -29,7 +29,18 @@ final class PublicContent53State
             throw new DomainException('public_content_53_lock_requires_transaction');
         }
         $state = [];
-        foreach ($this->package->read(base_path(), $sha)['candidates'] as $row) {
+        $rows = $this->package->read(base_path(), $sha)['candidates'];
+        if ($this->nativeBatch($rows)) {
+            return app(PublicContent53MbtiResultCopy::class)->withNativeRead($rows, $lock, static function (PublicContent53MbtiResultCopy $native) use ($rows, $lock): array {
+                $state = [];
+                foreach ($rows as $row) {
+                    $state[$row['page_id']] = $native->read($lock, $row);
+                }
+
+                return $state;
+            });
+        }
+        foreach ($rows as $row) {
             if ($row['kind'] === PublicContent53MbtiResultCopy::KIND) {
                 $state[$row['page_id']] = app(PublicContent53MbtiResultCopy::class)->read($lock, $row);
 
@@ -180,6 +191,15 @@ final class PublicContent53State
 
     public function assertBaseline(array $rows): void
     {
+        if ($this->nativeBatch($rows)) {
+            app(PublicContent53MbtiResultCopy::class)->withNativeRead($rows, false, static function (PublicContent53MbtiResultCopy $native) use ($rows): void {
+                foreach ($rows as $row) {
+                    $native->assertBaseline($row, $native->read(false, $row));
+                }
+            });
+
+            return;
+        }
         foreach ($rows as $row) {
             if ($row['kind'] === PublicContent53MbtiResultCopy::KIND && str_ends_with($row['page_id'], '-NATIVE-LEAVES')) {
                 $native = app(PublicContent53MbtiResultCopy::class);
@@ -305,6 +325,17 @@ final class PublicContent53State
 
     public function assertPublished(array $rows, array $state): void
     {
+        if ($this->nativeBatch($rows)) {
+            app(PublicContent53MbtiResultCopy::class)->withNativeRead($rows, false, function (PublicContent53MbtiResultCopy $native) use ($rows): void {
+                foreach ($rows as $row) {
+                    if ($this->hash($native->projection($row)) !== $this->hash($row['snapshot'])) {
+                        throw new DomainException('public_content_53_public_readback_drift');
+                    }
+                }
+            });
+
+            return;
+        }
         foreach ($rows as $row) {
             if ($this->hash($this->projection($row)) !== $this->hash($row['snapshot'])) {
                 throw new DomainException('public_content_53_public_readback_drift');
@@ -319,6 +350,12 @@ final class PublicContent53State
     public function hash(array $value): string
     {
         return hash('sha256', PromotionContextFactory::canonicalJson($value));
+    }
+
+    private function nativeBatch(array $rows): bool
+    {
+        return count($rows) === 32 && count(array_filter($rows, static fn ($row): bool => $row['kind'] === PublicContent53MbtiResultCopy::KIND
+            && str_ends_with($row['page_id'], '-NATIVE-LEAVES'))) === 32;
     }
 
     private function blockCopy(array $blocks, array $keys): array

@@ -109,6 +109,29 @@ final class PublicContent53MbtiNativeLeafCopyTest extends TestCase
         $this->assertSame([576, 125, 156], [$count, $changed, $leaves]);
     }
 
+    public function test_fresh_batch_read_preserves_every_control_without_per_variant_query_round_trips(): void
+    {
+        $this->seedTargets();
+        $native = app(PublicContent53MbtiResultCopy::class);
+        $linear = [];
+        foreach ($this->rows() as $row) {
+            $linear[$row['page_id']] = $native->read(false, $row);
+        }
+        DB::enableQueryLog();
+        DB::flushQueryLog();
+        $batch = app(PublicContent53State::class)->read($this->digest());
+        $queries = DB::getQueryLog();
+        DB::disableQueryLog();
+        $this->assertSame($linear, $batch);
+        $this->assertCount(4, $queries, 'Read the same four protected native tables once per fresh batch.');
+
+        $revision = PersonalityProfileVariantRevision::firstOrFail();
+        $revision->update(['note' => 'Concurrent operator note must be freshly observed']);
+        $fresh = DB::transaction(fn () => app(PublicContent53State::class)->read($this->digest(), true));
+        $this->assertNotSame($batch, $fresh, 'No query data survives into another phase or locked read.');
+        $this->assertSame('Concurrent operator note must be freshly observed', $native->read(false, $this->rows()[0])['controls']['revisions'][0]['note']);
+    }
+
     public static function environments(): array
     {
         return [['staging'], ['production']];

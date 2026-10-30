@@ -14,6 +14,39 @@ use Illuminate\Support\Facades\DB;
 /** Existing English result-copy resource; no attempts, entitlements or URL inventory. */
 final class PublicContent53MbtiResultCopy
 {
+    /** Scoped to one fresh batch read; never retained across writes or phases. */
+    private ?array $nativeReadRows = null;
+
+    public function withNativeRead(array $rows, bool $lock, callable $consume): mixed
+    {
+        $codes = array_map(fn (array $row): ?string => $this->nativeCode($row), $rows);
+        $expected = self::nativeCodes();
+        sort($codes);
+        sort($expected);
+        if ($codes !== $expected || $this->nativeReadRows !== null || ($lock && DB::transactionLevel() < 1)) {
+            throw new DomainException('mbti_result_copy_batch_identity_invalid');
+        }
+        $get = static function ($query) use ($lock): array {
+            if ($lock) {
+                $query->lockForUpdate();
+            }
+
+            return array_map(static fn ($row): array => (array) $row, $query->orderBy('id')->get()->all());
+        };
+        $profiles = $get(DB::table('personality_profiles')->where('org_id', 0)->where('locale', 'en')->where('scale_code', 'MBTI')
+            ->whereIn('type_code', array_unique(array_map(static fn ($code) => substr($code, 0, 4), $codes))));
+        $variants = $get(DB::table('personality_profile_variants')->whereIn('personality_profile_id', array_column($profiles, 'id')));
+        $sections = $get(DB::table('personality_profile_variant_sections')->whereIn('personality_profile_variant_id', array_column($variants, 'id')));
+        $revisions = $get(DB::table('personality_profile_variant_revisions')->whereIn('personality_profile_variant_id', array_column($variants, 'id')));
+        $this->nativeReadRows = ['personality_profiles' => $profiles, 'personality_profile_variants' => $variants,
+            'personality_profile_variant_sections' => $sections, 'personality_profile_variant_revisions' => $revisions];
+        try {
+            return $consume($this);
+        } finally {
+            $this->nativeReadRows = null;
+        }
+    }
+
     public const KIND = 'mbti-result';
 
     public const FOUR_LEAF_PAGE = 'MBTI-EN-INTJ-T-FOUR-LEAVES';
@@ -294,12 +327,26 @@ final class PublicContent53MbtiResultCopy
     public function projection(?array $row = null): array
     {
         $state = $this->read(false, $row);
+
+        return $this->projectionFromState($state, $row);
+    }
+
+    private function projectionFromState(array $state, ?array $row): array
+    {
         $profile = new PersonalityProfile;
         $profile->setRawAttributes($state['controls']['profile'], true);
         $variant = new PersonalityProfileVariant;
         $runtime = $this->nativeCode($row) ?? 'INTJ-T';
         $target = array_values(array_filter($state['controls']['variants'], static fn ($v): bool => $v['runtime_type_code'] === $runtime))[0];
         $variant->setRawAttributes($target, true);
+        if (isset($state['native_sections'])) {
+            $variant->setRelation('sections', new \Illuminate\Database\Eloquent\Collection(array_map(static function (array $attributes): \App\Models\PersonalityProfileVariantSection {
+                $section = new \App\Models\PersonalityProfileVariantSection;
+                $section->setRawAttributes($attributes, true);
+
+                return $section;
+            }, $state['controls']['sections'])));
+        }
         $adapter = app(MbtiPersonalityProfileAuthoritySourceAdapter::class);
         $authority = $adapter->overlayVariant($adapter->fromBaseProfile($profile), $variant);
         if (isset($state['native_sections'])) {
@@ -321,7 +368,7 @@ final class PublicContent53MbtiResultCopy
     {
         $copy = $this->copy($state);
         if (isset($state['native_sections'])) {
-            if ($this->projection($row) !== $copy) {
+            if ($this->projectionFromState($state, $row) !== $copy) {
                 throw new DomainException('mbti_result_copy_native_readback_failed');
             }
             foreach ($copy as $name => $value) {
@@ -368,7 +415,7 @@ final class PublicContent53MbtiResultCopy
             }
             $after = $this->read(true, $row);
             $this->assertUnchangedControls($before, $after);
-            if ($this->copy($after) !== $row['snapshot'] || $this->projection($row) !== $row['snapshot']) {
+            if ($this->copy($after) !== $row['snapshot'] || $this->projectionFromState($after, $row) !== $row['snapshot']) {
                 throw new DomainException('mbti_result_copy_native_readback_failed');
             }
             $this->revision($context, $before, $after, 'publish');
@@ -550,6 +597,17 @@ final class PublicContent53MbtiResultCopy
 
     private function query(string $table, array $where, bool $lock): array
     {
+        if ($this->nativeReadRows !== null) {
+            return array_values(array_filter($this->nativeReadRows[$table], static function (array $row) use ($where): bool {
+                foreach ($where as $key => $value) {
+                    if (! array_key_exists($key, $row) || (string) $row[$key] !== (string) $value) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }));
+        }
         $query = DB::table($table)->where($where)->orderBy('id');
         if ($lock) {
             $query->lockForUpdate();
