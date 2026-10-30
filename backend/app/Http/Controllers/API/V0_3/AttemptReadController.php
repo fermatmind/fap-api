@@ -746,6 +746,12 @@ class AttemptReadController extends Controller
             if (is_array($reportV2)) {
                 $responsePayload['enneagram_report_v2'] = $reportV2;
             }
+            $readingCopy = app(\App\Services\Enneagram\EnneagramReadingCopyProjection::class)->project(
+                is_array($responsePayload['report'] ?? null) ? $responsePayload['report'] : [],
+            );
+            if ($readingCopy !== null) {
+                $responsePayload['enneagram_reading_copy_v1'] = $readingCopy;
+            }
         } elseif ($scaleCode === 'RIASEC') {
             if (is_array($riasecFormSummary)) {
                 $responsePayload['riasec_form_v1'] = $riasecFormSummary;

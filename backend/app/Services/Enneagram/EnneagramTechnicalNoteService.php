@@ -47,6 +47,12 @@ final class EnneagramTechnicalNoteService
                 if (! is_array($copy)) {
                     throw new \DomainException('technical_note_section_locale_unavailable');
                 }
+                if ($sectionKey === 'diffuse') {
+                    if (! is_string($entry['body'] ?? null) || trim($entry['body']) === '') {
+                        throw new \DomainException('technical_note_section_locale_unavailable');
+                    }
+                    $copy['body'] = $entry['body'];
+                }
                 $entry = array_replace($entry, $copy);
             }
             $sections[] = [
@@ -140,7 +146,14 @@ final class EnneagramTechnicalNoteService
                 if (! isset($publicCopy[$key])) {
                     throw new \DomainException('technical_note_method_locale_unavailable');
                 }
-                $entry = array_replace($entry, $publicCopy[$key]);
+                $copy = $publicCopy[$key];
+                if ($key === 'diffuse_boundary') {
+                    if (! is_string($entry['copy'] ?? null) || trim($entry['copy']) === '') {
+                        throw new \DomainException('technical_note_method_locale_unavailable');
+                    }
+                    $copy['copy'] = $entry['copy'];
+                }
+                $entry = array_replace($entry, $copy);
             }
             $entries[$key] = [
                 'label' => trim((string) ($entry['label'] ?? '')),
