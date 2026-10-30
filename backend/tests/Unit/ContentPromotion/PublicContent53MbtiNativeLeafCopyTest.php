@@ -132,6 +132,27 @@ final class PublicContent53MbtiNativeLeafCopyTest extends TestCase
         $this->assertSame('Concurrent operator note must be freshly observed', $native->read(false, $this->rows()[0])['controls']['revisions'][0]['note']);
     }
 
+    public function test_phase_lookup_never_hydrates_other_publication_rollback_bodies(): void
+    {
+        $unrelated = \App\Models\ContentReleaseSnapshot::create(['pack_id' => 'public-content-53',
+            'pack_version' => 'unrelated', 'reason' => 'content_promotion_before_draft_import',
+            'meta_json' => ['phase_idempotency_key' => str_repeat('f', 64), 'unrelated_body' => str_repeat('x', 1000000)]]);
+        $dispatcher = \App\Models\ContentReleaseSnapshot::getEventDispatcher();
+        \App\Models\ContentReleaseSnapshot::setEventDispatcher(clone $dispatcher);
+        $hydrated = 0;
+        \App\Models\ContentReleaseSnapshot::retrieved(static function ($snapshot) use (&$hydrated, $unrelated): void {
+            $hydrated += $snapshot->id === $unrelated->id ? 1 : 0;
+        });
+        try {
+            $method = new \ReflectionMethod(\App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter::class, 'snapshot');
+            $found = $method->invoke(app(\App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter::class), $this->context(), $this->rows(), 'before_draft_import');
+            $this->assertNull($found);
+            $this->assertSame(0, $hydrated, 'Unrelated package bodies must remain in storage, not be loaded and filtered in PHP.');
+        } finally {
+            \App\Models\ContentReleaseSnapshot::setEventDispatcher($dispatcher);
+        }
+    }
+
     public static function environments(): array
     {
         return [['staging'], ['production']];

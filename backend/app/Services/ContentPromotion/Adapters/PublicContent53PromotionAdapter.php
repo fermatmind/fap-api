@@ -229,9 +229,9 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
     private function snapshot(PromotionContext $context, array $rows, string $phase): ?ContentReleaseSnapshot
     {
         $key = PromotionPhaseIdentity::idempotencyKey($context, $phase, $this->targets($rows));
-        $ids = ContentReleaseSnapshot::query()->where('pack_id', self::PACK)->where('reason', 'content_promotion_'.$phase)->orderBy('id')->pluck('id');
-        $snapshot = ContentReleaseSnapshot::query()->whereIn('id', $ids)->get()->sortBy('id')->values()
-            ->first(static fn (ContentReleaseSnapshot $snapshot): bool => data_get($snapshot->meta_json, 'phase_idempotency_key') === $key);
+        // Select this immutable phase before transferring large rollback bodies.
+        $snapshot = ContentReleaseSnapshot::query()->where('pack_id', self::PACK)->where('reason', 'content_promotion_'.$phase)
+            ->where('meta_json->phase_idempotency_key', $key)->orderBy('id')->first();
 
         return $snapshot === null ? null : $this->resolve($context, $rows, $phase, 'content-release-snapshot:'.$snapshot->id);
     }
