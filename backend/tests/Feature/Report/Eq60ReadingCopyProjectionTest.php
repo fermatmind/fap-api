@@ -229,8 +229,10 @@ final class Eq60ReadingCopyProjectionTest extends TestCase
             File::ensureDirectoryExists($compiledDirectory);
             File::copyDirectory(base_path('content_packs/EQ_60/v1/compiled'), $compiledDirectory);
             // Reconstruct exact historical bytes without shipping duplicate question banks.
-            (new \Symfony\Component\Process\Process(['git', 'apply', '--reverse', base_path('tests/Fixtures/eq60_843_to_reading_v2_compiled.patch')], $temporary))->mustRun();
-            (new \Symfony\Component\Process\Process(['git', 'apply', '--reverse', base_path('tests/Fixtures/eq60_737_to_current_compiled.patch')], $temporary))->mustRun();
+            foreach (['eq60_843_to_reading_v2_compiled', 'eq60_737_to_current_compiled'] as $name) {
+                $fixture = json_decode((string) file_get_contents(base_path('tests/Fixtures/'.$name.'.patch.json')), true, 512, JSON_THROW_ON_ERROR);
+                (new \Symfony\Component\Process\Process(['git', 'apply', '--reverse', '-'], $temporary))->setInput($fixture['patch'])->mustRun();
+            }
             $manifest = json_decode((string) file_get_contents($compiledDirectory.'/manifest.json'), true, 512, JSON_THROW_ON_ERROR);
             $this->assertSame('f1645cbd8b9c5b5686d2611a22e12a90609a2d64647eb5a5d348d12c2d056de7', $manifest['source_hash']);
             foreach ($manifest['hashes'] as $name => $expected) {
