@@ -113,7 +113,9 @@ final class MbtiEnglishVariantSectionEnrichmentService
 
         return match ($sectionKey) {
             'overview' => "{$label} describes a {$base['identity']} pattern with {$variant['identity']} identity signals. You are usually at your best when {$base['best_when']}.\n\n".self::OVERVIEW_READER_GUIDANCE,
-            'trait_overview' => "{$label} combines {$context['energy_phrase']}, {$context['information_phrase']}, {$context['decision_phrase']}, and {$context['rhythm_phrase']}. The {$context['variant_code']} variant adds {$variant['state']} rather than creating a separate personality type.",
+            'trait_overview' => $context['variant_code'] === 'A'
+                ? "{$label} combines {$context['energy_phrase']}, {$context['information_phrase']}, {$context['decision_phrase']}, and {$context['rhythm_phrase']}. The A variant adds a self-reported description of confidence in judgments and responses to feedback rather than creating a separate personality type. This does not establish recovery speed or coping ability."
+                : "{$label} combines {$context['energy_phrase']}, {$context['information_phrase']}, {$context['decision_phrase']}, and {$context['rhythm_phrase']}. The {$context['variant_code']} variant adds {$variant['state']} rather than creating a separate personality type.",
             'career.summary' => "{$label} usually does its best work when the role rewards {$base['career_anchor']} and gives enough room for {$base['work_need']}. The {$context['variant_label']} side changes how you handle feedback: {$variant['career_signal']}.\n\nUse this section as a starting filter, then test the fit against your skills, industry, education, and real work history.",
             'career.upgrade_suggestions' => "For {$label}, career growth should be built around small experiments instead of a fixed job title. Start by choosing one role cluster, one work-environment condition, and one feedback habit that fits the {$context['variant_code']} pattern.",
             'growth.summary' => "{$label} growth usually starts by protecting the strengths that already work, then noticing where those strengths become automatic. The {$context['variant_code']} variant adds a specific growth edge: {$variant['growth_edge']}.",
@@ -164,7 +166,7 @@ final class MbtiEnglishVariantSectionEnrichmentService
                 ['letter' => $context['information_letter'], 'title' => (string) $context['information_title'], 'description' => (string) $context['information_phrase']],
                 ['letter' => $context['decision_letter'], 'title' => (string) $context['decision_title'], 'description' => (string) $context['decision_phrase']],
                 ['letter' => $context['rhythm_letter'], 'title' => (string) $context['rhythm_title'], 'description' => (string) $context['rhythm_phrase']],
-                ['letter' => $context['variant_code'], 'title' => (string) $context['variant_label'], 'description' => (string) ((array) $context['variant'])['state']],
+                ['letter' => $context['variant_code'], 'title' => (string) $context['variant_label'], 'description' => $context['variant_code'] === 'A' ? 'The A description concerns self-reported confidence in judgments and responses to feedback. It does not establish recovery speed or coping ability.' : (string) ((array) $context['variant'])['state']],
             ],
             'structure_contract' => 'mbti_personality_variant_english_content.v1',
             'intent' => 'what_this_type_is_and_at_difference',
@@ -204,7 +206,7 @@ final class MbtiEnglishVariantSectionEnrichmentService
             'code' => $axisId,
             'name' => (string) $context[$kind.'_name'],
             'label' => (string) $context[$kind.'_title'],
-            'summary' => (string) $context[$kind.'_phrase'],
+            'summary' => $axisId === 'AT' && $context['variant_code'] === 'A' ? 'The A description concerns self-reported confidence in judgments and responses to feedback. It does not establish recovery speed or coping ability.' : (string) $context[$kind.'_phrase'],
             'description' => $axisId === 'AT'
                 ? 'A/T describes identity-state differences; it does not replace the four-letter base type.'
                 : self::PREFERENCE_READER_GUIDANCE,
@@ -312,7 +314,7 @@ final class MbtiEnglishVariantSectionEnrichmentService
 
         return [
             ['title' => 'Natural growth route', 'body' => "A growth approach to test for {$context['label']} is turning {$base['core_strength']} into a repeatable practice."],
-            ['title' => 'Self-awareness signal', 'body' => "Your {$context['information_title']} pattern helps you notice {$base['learning_signal']}."],
+            ['title' => 'Self-awareness signal', 'body' => "Check whether you noticed {$base['learning_signal']} in a recent situation. The {$context['information_title']} preference does not establish this skill."],
             ['title' => 'Identity strength', 'body' => (string) $variant['growth_strength']],
             ['title' => 'Practical reset', 'body' => "When the pattern is working, you can usually return to clarity by {$base['reset']}."],
         ];
@@ -348,7 +350,7 @@ final class MbtiEnglishVariantSectionEnrichmentService
 
         return [
             ['title' => 'Connection style', 'body' => "{$context['label']} often builds trust through {$base['relationship_gift']}."],
-            ['title' => 'Communication value', 'body' => "Your {$context['decision_title']} pattern can help others understand {$base['communication_value']}."],
+            ['title' => 'Communication value', 'body' => "Check how you communicated about {$base['communication_value']} in a recent interaction, and ask how the other person understood it. A {$context['decision_title']} preference does not establish communication skill."],
             ['title' => 'Support rhythm', 'body' => "You usually support people best when {$base['support_rhythm']}."],
             ['title' => "{$context['variant_label']} signal", 'body' => (string) $variant['relationship_strength']],
         ];
@@ -456,20 +458,20 @@ final class MbtiEnglishVariantSectionEnrichmentService
                 'identity' => 'steadier self-trust, lower reactivity, and a stronger bias toward moving on after feedback',
                 'state' => 'more stable self-confidence, lower stress reactivity, and a tendency to recover faster from criticism',
                 'career_signal' => 'you may commit faster and need deliberate check-ins so confidence does not skip useful feedback',
-                'career_advantage' => 'You can often keep momentum when a role is ambiguous or feedback is mixed.',
+                'career_advantage' => 'In one ambiguous task, check whether you maintained momentum and what helped. An A reading does not establish this ability.',
                 'career_risk' => 'Assertive confidence can make weak signals look less urgent than they are.',
                 'career_experiment' => 'Add one scheduled feedback checkpoint before you finalize a plan.',
                 'role_group' => 'Self-directed ownership',
                 'role_desc' => 'Roles where confidence, autonomy, and accountable decision-making are useful.',
                 'role_examples' => ['independent project ownership', 'strategy execution', 'founder-style problem solving'],
                 'growth_edge' => 'learning to invite feedback before the cost of adjustment becomes high',
-                'growth_strength' => 'You can stabilize yourself and others when a situation becomes noisy.',
+                'growth_strength' => 'When a situation becomes noisy, check what actually helped you and others respond. An A reading does not establish an ability to stabilize anyone.',
                 'growth_risk' => 'You may move past discomfort too quickly and miss the information inside it.',
                 'motivator' => 'you can act with trust in your judgment and see visible progress',
                 'drainer' => 'feedback is delayed until a problem is already expensive',
                 'relationship_signal' => 'you may bring calm and independence, but you need to show others when you are still listening',
                 'relationship_advantage' => 'your calm helps reduce emotional escalation',
-                'relationship_strength' => 'You can stay steady during tension and avoid turning every disagreement into a crisis.',
+                'relationship_strength' => 'In one difficult conversation, check whether you remained steady and what helped. An A reading does not establish this ability.',
                 'relationship_risk' => 'others may experience your confidence as dismissiveness if you do not make room for their doubts',
             ],
             'T' => [
@@ -477,20 +479,20 @@ final class MbtiEnglishVariantSectionEnrichmentService
                 'identity' => 'higher self-monitoring, stronger sensitivity to feedback, and a drive to keep improving',
                 'state' => 'more self-questioning, stronger stress awareness, and a tendency to scan for what should be improved',
                 'career_signal' => 'you may refine work more carefully, but need boundaries so improvement does not become endless revision',
-                'career_advantage' => 'You can catch weak signals early and improve a plan before problems become public.',
+                'career_advantage' => 'Check whether you noticed a weak signal early in a recent task and whether your response improved the plan. A T reading does not establish this ability.',
                 'career_risk' => 'Turbulent self-monitoring can turn normal ambiguity into overcorrection or delay.',
                 'career_experiment' => 'Set a good-enough threshold before you start refining.',
                 'role_group' => 'Quality and improvement loops',
                 'role_desc' => 'Roles where sensitivity to feedback, iteration, and careful adjustment create value.',
                 'role_examples' => ['quality improvement', 'research refinement', 'customer insight loops'],
                 'growth_edge' => 'turning self-critique into one clear adjustment instead of a full identity verdict',
-                'growth_strength' => 'You can notice small issues early and use them as useful signals for growth.',
+                'growth_strength' => 'Check whether you noticed a small issue early and whether responding helped. A T reading does not establish this ability.',
                 'growth_risk' => 'You may treat every flaw as urgent and exhaust yourself before the pattern is clear.',
                 'motivator' => 'you can turn feedback into visible improvement without losing the original purpose',
                 'drainer' => 'every choice feels like a referendum on your competence',
                 'relationship_signal' => 'you may be more sensitive and repair-oriented, but you need to avoid making every silence mean rejection',
                 'relationship_advantage' => 'your sensitivity helps you notice emotional shifts before they harden',
-                'relationship_strength' => 'You can repair and improve relationships because you notice subtle feedback.',
+                'relationship_strength' => 'If you noticed feedback in a recent relationship, ask whether your response helped repair it. A T reading does not establish sensitivity or relationship skill.',
                 'relationship_risk' => 'self-doubt can make neutral feedback feel like rejection or proof that something is wrong',
             ],
         ];

@@ -81,9 +81,10 @@ final class PublicContent53MbtiNativeLeafCopyTest extends TestCase
         }
     }
 
-    public function test_all_576_generator_sections_change_only_the_156_reviewed_leaves_and_faq_stays_native(): void
+    public function test_all_576_generator_sections_change_only_the_364_reviewed_union_leaves_and_faq_stays_native(): void
     {
         $fixture = json_decode((string) file_get_contents(base_path('tests/Fixtures/mbti_english_pre_native_copy_sections.json')), true, 64, JSON_THROW_ON_ERROR);
+        $legacy = array_column(json_decode((string) file_get_contents(base_path('tests/Fixtures/mbti_native187_package.json')), true, 64, JSON_THROW_ON_ERROR)['candidates'], null, 'page_id');
         $factory = new MbtiEnglishVariantSectionEnrichmentService;
         $this->assertNotContains('faq', $factory->sectionKeys());
         $changed = $leaves = $count = 0;
@@ -97,7 +98,7 @@ final class PublicContent53MbtiNativeLeafCopyTest extends TestCase
                         continue;
                     }
                     $this->assertSame($row['snapshot'][$name], data_get($built, implode('.', $leaf['path'])));
-                    data_set($old, implode('.', $leaf['path']), $row['before'][$name]);
+                    data_set($old, implode('.', $leaf['path']), ($legacy[$row['page_id']]['before'][$name] ?? $row['before'][$name]));
                     $leaves++;
                 }
                 $beforeHash = $fixture['sections'][$code][$key];
@@ -106,7 +107,31 @@ final class PublicContent53MbtiNativeLeafCopyTest extends TestCase
                 $count++;
             }
         }
-        $this->assertSame([576, 125, 156], [$count, $changed, $leaves]);
+        $this->assertSame([576, 190, 364], [$count, $changed, $leaves]);
+    }
+
+    public function test_revision2_is_exact_union_and_revision1_remains_accepted(): void
+    {
+        $bytes = (string) file_get_contents(base_path('tests/Fixtures/mbti_native187_package.json'));
+        $old = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $review = ['schema' => 'fermatmind.mbti_english_native_leaf_copy.review.v1', 'candidate_sha256' => hash('sha256', $bytes),
+            'verdict' => 'PASS', 'pages' => array_fill_keys(array_column($old['candidates'], 'page_id'), 'PASS')];
+        $this->assertSame($old, PublicContent53MbtiResultCopy::nativeLeafPackage($bytes, json_encode($review)));
+        $new = $this->rows();
+        $newLeaves = 0;
+        foreach ($old['candidates'] as $index => $legacy) {
+            $row = $new[$index];
+            foreach ($legacy['snapshot'] as $name => $value) {
+                $this->assertSame($value, $row['before'][$name]);
+                $this->assertSame($value, $row['snapshot'][$name], 'Already accepted187 leaves are zero delta.');
+                $this->assertSame($legacy['source_identity']['leaf_map'][$name], $row['source_identity']['leaf_map'][$name]);
+            }
+            $newLeaves += count(array_diff_key($row['snapshot'], $legacy['snapshot']));
+        }
+        $this->assertSame(208, $newLeaves);
+        $this->assertCount(6, $new[21]['snapshot'], 'INTJ-T owns old growth0 plus five separately checked new leaves.');
+        $this->expectExceptionMessage('mbti_result_copy_identity_invalid');
+        PublicContent53MbtiResultCopy::nativeIdentity('INTJ-T', 3);
     }
 
     public function test_fresh_batch_read_preserves_every_control_without_per_variant_query_round_trips(): void
@@ -210,10 +235,18 @@ final class PublicContent53MbtiNativeLeafCopyTest extends TestCase
         $before = $states->read($this->digest());
         $drafts = PersonalityProfileVariantRevision::orderBy('id')->get()->map->getRawOriginal()->all();
         $this->assertCount(32, $rows);
-        $this->assertSame(187, array_sum(array_map(static fn ($row) => count($row['snapshot']), $rows)));
-        $this->assertSame(156, array_sum(array_map(static fn ($saved) => count($saved['native_sections']), $before)));
+        $this->assertSame(395, array_sum(array_map(static fn ($row) => count($row['snapshot']), $rows)));
+        $this->assertSame(221, array_sum(array_map(static fn ($saved) => count($saved['native_sections']), $before)));
         $states->assertBaseline($rows);
-        $published = DB::transaction(fn () => $writer->publish($this->context(), $before));
+        DB::enableQueryLog();
+        DB::flushQueryLog();
+        try {
+            $published = DB::transaction(fn () => $writer->publish($this->context(), $before));
+            $sectionWrites = array_filter(DB::getQueryLog(), static fn (array $query): bool => str_starts_with($query['query'], 'update "personality_profile_variant_sections"'));
+            $this->assertCount(128, $sectionWrites, 'Only208 new leaves in128 sections are physically written; accepted187 stay zero delta.');
+        } finally {
+            DB::disableQueryLog();
+        }
         $this->assertSame(32, $published['written_count']);
         foreach ($rows as $row) {
             $this->assertSame($row['snapshot'], $states->projection($row));

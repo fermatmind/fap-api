@@ -77,21 +77,41 @@ final class PublicContent53MbtiResultCopy
         return $codes;
     }
 
-    public static function nativeIdentity(string $code): array
+    public static function nativeIdentity(string $code, int $revision = 1): array
     {
-        if (! in_array($code, self::nativeCodes(), true)) {
+        if (! in_array($code, self::nativeCodes(), true) || ! in_array($revision, [1, 2], true)) {
             throw new DomainException('mbti_result_copy_identity_invalid');
         }
         $map = $code === 'INTJ-T' ? ['growth_strength' => self::NATIVE_LEAVES['growth_strength']] : self::NATIVE_LEAVES;
+        if ($revision === 2) {
+            foreach ([
+                'en_nat_ability_01' => ['career.advantages', ['payload_json', 'items', 3, 'body'], 'bullets'],
+                'en_nat_ability_02' => ['growth.strengths', ['payload_json', 'items', 1, 'body'], 'bullets'],
+                'en_nat_ability_03' => ['growth.strengths', ['payload_json', 'items', 2, 'body'], 'bullets'],
+                'en_nat_ability_04' => ['relationships.strengths', ['payload_json', 'items', 1, 'body'], 'bullets'],
+                'en_nat_ability_05' => ['relationships.strengths', ['payload_json', 'items', 3, 'body'], 'bullets'],
+                ...(str_ends_with($code, '-A') ? [
+                    'en_nat_recovery_01' => ['letters_intro', ['payload_json', 'letters', 4, 'description'], 'letters_intro'],
+                    'en_nat_recovery_02' => ['trait_overview', ['payload_json', 'dimensions', 4, 'summary'], 'trait_dimension_grid'],
+                    'en_nat_recovery_03' => ['trait_overview', ['body_md'], 'trait_dimension_grid'],
+                ] : []),
+            ] as $name => [$section, $path, $render]) {
+                $map[$name] = ['section_key' => $section, 'path' => $path, 'render_variant' => $render];
+            }
+        }
         $identity = ['canonical_type_code' => substr($code, 0, 4), 'runtime_type_code' => $code, 'leaf_map' => $map];
         if ($code !== 'INTJ-T') {
             $identity['faq_identity'] = ['question' => 'What stresses '.$code.'?', 'intent' => 'stress'];
         }
 
+        if ($revision === 2) {
+            $identity['copy_revision'] = 2;
+        }
+
         return $identity;
     }
 
-    /** The fixed 32 variants own exactly 187 leaves; accepted older packages are immutable. */
+    /** Revision 1 owns 187 leaves; revision 2 owns the fixed 395 union, never caller-supplied paths. */
     public static function nativeLeafPackage(string $bytes, string $reviewBytes): array
     {
         $data = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
@@ -105,9 +125,13 @@ final class PublicContent53MbtiResultCopy
             || ($review['verdict'] ?? null) !== 'PASS' || ($review['pages'] ?? null) !== $pages) {
             throw new DomainException('mbti_result_copy_package_invalid');
         }
+        $revision = $rows[0]['source_identity']['copy_revision'] ?? 1;
+        if (! is_int($revision)) {
+            throw new DomainException('mbti_result_copy_identity_invalid');
+        }
         foreach ($codes as $index => $code) {
             $row = $rows[$index];
-            $identity = self::nativeIdentity($code);
+            $identity = self::nativeIdentity($code, $revision);
             if (array_keys($row) !== ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'source_identity', 'staging_source_identity']
                 || $row['page_id'] !== 'MBTI-EN-'.$code.'-NATIVE-LEAVES' || $row['kind'] !== self::KIND
                 || $row['identity'] !== ['org_id' => 0, 'slug' => strtolower($code), 'locale' => 'en']
@@ -129,6 +153,16 @@ final class PublicContent53MbtiResultCopy
         return $data;
     }
 
+    private function nativeRevision(?array $row): int
+    {
+        $revision = $row['source_identity']['copy_revision'] ?? 1;
+        if (! is_int($revision) || ! in_array($revision, [1, 2], true)) {
+            throw new DomainException('mbti_result_copy_identity_invalid');
+        }
+
+        return $revision;
+    }
+
     private function nativeCode(?array $row): ?string
     {
         if (! str_ends_with((string) ($row['page_id'] ?? ''), '-NATIVE-LEAVES')) {
@@ -136,7 +170,7 @@ final class PublicContent53MbtiResultCopy
         }
         $code = (string) ($row['source_identity']['runtime_type_code'] ?? '');
         if (($row['page_id'] ?? null) !== 'MBTI-EN-'.$code.'-NATIVE-LEAVES'
-            || PromotionContextFactory::canonicalJson($row['source_identity'] ?? []) !== PromotionContextFactory::canonicalJson(self::nativeIdentity($code))
+            || PromotionContextFactory::canonicalJson($row['source_identity'] ?? []) !== PromotionContextFactory::canonicalJson(self::nativeIdentity($code, $this->nativeRevision($row)))
             || PromotionContextFactory::canonicalJson($row['identity'] ?? []) !== PromotionContextFactory::canonicalJson(['org_id' => 0, 'slug' => strtolower($code), 'locale' => 'en'])) {
             throw new DomainException('mbti_result_copy_identity_invalid');
         }
@@ -252,7 +286,7 @@ final class PublicContent53MbtiResultCopy
         if ($nativeCode !== null) {
             // Each row owns one variant. The package's 32 locked rows jointly protect both A/T siblings.
             $ownSections = array_values(array_filter($allSections, static fn ($section): bool => (int) $section['personality_profile_variant_id'] === (int) $variant['id']));
-            $map = self::nativeIdentity($nativeCode)['leaf_map'];
+            $map = self::nativeIdentity($nativeCode, $this->nativeRevision($row))['leaf_map'];
             $selected = [];
             foreach ($map as $name => &$leaf) {
                 $key = $leaf['section_key'];
@@ -572,7 +606,7 @@ final class PublicContent53MbtiResultCopy
     {
         if (isset($state['native_sections'])) {
             $copy = [];
-            foreach (array_keys(self::nativeIdentity($state['native_row']['source_identity']['runtime_type_code'])['leaf_map']) as $name) {
+            foreach (array_keys(self::nativeIdentity($state['native_row']['source_identity']['runtime_type_code'], $this->nativeRevision($state['native_row']))['leaf_map']) as $name) {
                 $leaf = $state['native_leaf_map'][$name];
                 $section = $state['native_sections'][$leaf['section_key']] ?? [];
                 $value = $leaf['path'][0] === 'body_md' ? ($section['body_md'] ?? null)

@@ -21,6 +21,18 @@ final class MbtiBigFiveSynthesisService
         'career.next_step',
     ];
 
+    private const LEGACY_ENGLISH_COPY = [
+        'big5.neuroticism.high.buffer_reactivity' => ['Big Five add-on: high neuroticism amplifies context shifts', 'Your Big Five result points to higher neuroticism, which can intensify how MBTI context-sensitive stability feels in daily life. The useful read is not to question the type itself, but to create recovery room, lower-friction pacing, and emotional buffering earlier.'],
+        'big5.neuroticism.low.reinforce_stability' => ['Big Five add-on: low neuroticism supports steadiness', 'Your Big Five result points to lower neuroticism, which helps you recover faster when MBTI boundary shifts show up. You can still switch styles across contexts, but you are more likely to keep an inner sense of steadiness.'],
+        'big5.neuroticism.mid.context_window' => ['Big Five add-on: mid neuroticism shapes the stability window', 'Your Big Five result sits in the middle range for neuroticism, which means the MBTI stability pattern is more sensitive to context load. The important move is not eliminating the shift, but noticing earlier which situations push you toward the edge.'],
+        'big5.conscientiousness.high.use_structured_sprints' => ['Big Five add-on: high conscientiousness favors structured follow-through', 'Your Big Five result points to higher conscientiousness, so MBTI next actions work best when compressed into fixed rhythm, explicit standards, and trackable checklists. Reusing the same action template beats trying too many moves at once.'],
+        'big5.conscientiousness.low.use_external_scaffolding' => ['Big Five add-on: low conscientiousness needs external scaffolding', 'Your Big Five result points to lower conscientiousness, so MBTI next actions should not rely on willpower alone. Smaller reversible steps plus reminders, social accountability, or fixed triggers will make execution much more stable.'],
+        'big5.conscientiousness.mid.repeat_light_structure' => ['Big Five add-on: mid conscientiousness favors light structure', 'Your Big Five result sits in the middle range for conscientiousness, so MBTI next actions work best with light but repeatable structure. A reliable start cue and stop condition will help more than trying to design the perfect plan.'],
+        'big5.career_next_step.high.commit_to_milestone' => ['Big Five add-on: the next career step works best as a milestone', 'Your Big Five result points to higher conscientiousness, so the next career step works best when turned into a milestone with a deadline, owner, and proof point.'],
+        'big5.career_next_step.low.reduce_activation_friction' => ['Big Five add-on: the next career step benefits from lower friction', 'Your Big Five result points to lower conscientiousness, so the next career step should avoid large abstract leaps. A single conversation, application, portfolio update, or environment test will work better.'],
+        'big5.career_next_step.mid.keep_light_cadence' => ['Big Five add-on: the next career step favors steady cadence', 'Your Big Five result sits in the middle range for conscientiousness, so the next career step works best as a light but repeatable weekly move.'],
+    ];
+
     public function __construct(
         private readonly BigFivePublicProjectionService $bigFivePublicProjectionService,
     ) {}
@@ -201,28 +213,70 @@ final class MbtiBigFiveSynthesisService
     /**
      * @return array<string, mixed>
      */
+    /** Refresh only known display leaves in supported saved authority; never fetch a newer result. */
+    public function refreshSavedEnglishCopy(array $personalization, string $locale): array
+    {
+        $authority = $personalization['cross_assessment_v1'] ?? null;
+        if ($locale !== 'en' || ($personalization['schema_version'] ?? null) !== 'mbti.personalization.phase9e.v1'
+            || ! is_array($authority) || ($authority['version'] ?? null) !== self::VERSION
+            || ($authority['supporting_scales'] ?? null) !== ['BIG5_OCEAN']
+            || ! is_array($authority['section_enhancements'] ?? null)) {
+            return $personalization;
+        }
+        foreach ($authority['section_enhancements'] as $section => $saved) {
+            if (! is_array($saved)) {
+                continue;
+            }
+            $key = $saved['synthesis_key'] ?? null;
+            $legacy = is_string($key) ? (self::LEGACY_ENGLISH_COPY[$key] ?? null) : null;
+            if ($legacy === null || ($saved['title'] ?? null) !== $legacy[0] || ($saved['body'] ?? null) !== $legacy[1]) {
+                continue;
+            }
+            foreach (['high', 'low', 'mid'] as $band) {
+                $current = match ($section) {
+                    'growth.stability_confidence' => $this->buildStabilityEnhancement($band, 'en'),
+                    'growth.next_actions' => $this->buildNextActionEnhancement($band, 'en'),
+                    'career.next_step' => $this->buildCareerNextStepEnhancement($band, 'en'),
+                    default => [],
+                };
+                if ($current === [] || ($current['synthesis_key'] ?? null) !== $key) {
+                    continue;
+                }
+                foreach (['section_key', 'supporting_scale', 'synthesis_key', 'influence_keys'] as $field) {
+                    if (($saved[$field] ?? null) !== $current[$field]) {
+                        continue 2;
+                    }
+                }
+                $personalization['cross_assessment_v1']['section_enhancements'][$section]['title'] = $current['title'];
+                $personalization['cross_assessment_v1']['section_enhancements'][$section]['body'] = $current['body'];
+            }
+        }
+
+        return $personalization;
+    }
+
     private function buildStabilityEnhancement(string $band, string $locale): array
     {
         [$headline, $body, $synthesisKey] = match ($band) {
             'high' => [
-                $locale === 'zh-CN' ? 'Big Five 补充：高情绪性会放大情境敏感' : 'Big Five add-on: high neuroticism amplifies context shifts',
+                $locale === 'zh-CN' ? 'Big Five 补充：高情绪性会放大情境敏感' : 'Big Five add-on: examine stress and available support',
                 $locale === 'zh-CN'
                     ? 'Big Five 显示你的情绪性更高，这会放大 MBTI 里“情境敏感型稳定”的体感强度。更有帮助的读法不是怀疑类型本身，而是提前给恢复窗口、节奏减压和情绪缓冲留出位置。'
-                    : 'Your Big Five result points to higher neuroticism, which can intensify how MBTI context-sensitive stability feels in daily life. The useful read is not to question the type itself, but to create recovery room, lower-friction pacing, and emotional buffering earlier.',
+                    : 'The available Big Five projection marks N as high. If stress or self-questioning is relevant now, check current demands, context and available support. Record what actually helps; this band does not explain MBTI type stability or establish coping ability.',
                 'big5.neuroticism.high.buffer_reactivity',
             ],
             'low' => [
-                $locale === 'zh-CN' ? 'Big Five 补充：低情绪性会托住稳定感' : 'Big Five add-on: low neuroticism supports steadiness',
+                $locale === 'zh-CN' ? 'Big Five 补充：低情绪性会托住稳定感' : 'Big Five add-on: check responses in a demanding situation',
                 $locale === 'zh-CN'
                     ? 'Big Five 显示你的情绪性更低，这会帮助你在 MBTI 的近边界切换里更快回到可用区。你仍然会在情境里切换表达方式，但更容易保持内在稳定感。'
-                    : 'Your Big Five result points to lower neuroticism, which helps you recover faster when MBTI boundary shifts show up. You can still switch styles across contexts, but you are more likely to keep an inner sense of steadiness.',
+                    : 'The available Big Five projection marks N as low. Check how you actually responded in one demanding situation. This band does not establish faster recovery, a stable MBTI type, or automatic switching near an MBTI midpoint.',
                 'big5.neuroticism.low.reinforce_stability',
             ],
             default => [
-                $locale === 'zh-CN' ? 'Big Five 补充：中段情绪性决定了稳定窗口' : 'Big Five add-on: mid neuroticism shapes the stability window',
+                $locale === 'zh-CN' ? 'Big Five 补充：中段情绪性决定了稳定窗口' : 'Big Five add-on: keep stability questions open',
                 $locale === 'zh-CN'
                     ? 'Big Five 显示你的情绪性位于中段，这意味着 MBTI 里的稳定与切换会更受情境负荷影响。最关键的不是改掉切换，而是更早识别什么场景会把你推向边界。'
-                    : 'Your Big Five result sits in the middle range for neuroticism, which means the MBTI stability pattern is more sensitive to context load. The important move is not eliminating the shift, but noticing earlier which situations push you toward the edge.',
+                    : 'The available Big Five projection marks N as mid. Use concrete examples to examine demands and responses. A middle band does not define a stability window or show that an MBTI preference changes with context.',
                 'big5.neuroticism.mid.context_window',
             ],
         };
@@ -244,24 +298,24 @@ final class MbtiBigFiveSynthesisService
     {
         [$headline, $body, $synthesisKey] = match ($band) {
             'high' => [
-                $locale === 'zh-CN' ? 'Big Five 补充：高尽责性适合结构化推进' : 'Big Five add-on: high conscientiousness favors structured follow-through',
+                $locale === 'zh-CN' ? 'Big Five 补充：高尽责性适合结构化推进' : 'Big Five add-on: test a small amount of structure',
                 $locale === 'zh-CN'
                     ? 'Big Five 显示你的尽责性更高，所以 MBTI 的下一步动作最适合被压成固定节奏、明确标准和可追踪清单。比起一次做很多，持续复用同一套动作模板会更快见效。'
-                    : 'Your Big Five result points to higher conscientiousness, so MBTI next actions work best when compressed into fixed rhythm, explicit standards, and trackable checklists. Reusing the same action template beats trying too many moves at once.',
+                    : 'The available Big Five projection marks C as high. One option to test is a small checklist with clear start and stop conditions. Compare actual completion, effort and feedback; keep the structure only if it helps.',
                 'big5.conscientiousness.high.use_structured_sprints',
             ],
             'low' => [
-                $locale === 'zh-CN' ? 'Big Five 补充：低尽责性更需要外部支架' : 'Big Five add-on: low conscientiousness needs external scaffolding',
+                $locale === 'zh-CN' ? 'Big Five 补充：低尽责性更需要外部支架' : 'Big Five add-on: test a smaller first step',
                 $locale === 'zh-CN'
                     ? 'Big Five 显示你的尽责性更低，所以 MBTI 的下一步动作不要依赖纯意志力。把动作拆成更小的可逆步骤，再借助外部提醒、同伴反馈或固定触发器，执行会稳定很多。'
-                    : 'Your Big Five result points to lower conscientiousness, so MBTI next actions should not rely on willpower alone. Smaller reversible steps plus reminders, social accountability, or fixed triggers will make execution much more stable.',
+                    : 'The available Big Five projection marks C as low. You could try a smaller reversible step, with an optional reminder or agreed feedback. Record whether it helps you begin and complete the task; the band does not establish that you need external support.',
                 'big5.conscientiousness.low.use_external_scaffolding',
             ],
             default => [
-                $locale === 'zh-CN' ? 'Big Five 补充：中段尽责性适合轻量节奏' : 'Big Five add-on: mid conscientiousness favors light structure',
+                $locale === 'zh-CN' ? 'Big Five 补充：中段尽责性适合轻量节奏' : 'Big Five add-on: try a repeatable action',
                 $locale === 'zh-CN'
                     ? 'Big Five 显示你的尽责性位于中段，因此 MBTI 的下一步动作最适合轻量但连续的节奏。给动作一个可重复的起点和结束条件，比追求完美计划更有效。'
-                    : 'Your Big Five result sits in the middle range for conscientiousness, so MBTI next actions work best with light but repeatable structure. A reliable start cue and stop condition will help more than trying to design the perfect plan.',
+                    : 'The available Big Five projection marks C as mid. Try one manageable action with a clear start and stop condition. Use actual results to decide whether to repeat or change it; a middle band does not determine the best routine.',
                 'big5.conscientiousness.mid.repeat_light_structure',
             ],
         };
@@ -283,24 +337,24 @@ final class MbtiBigFiveSynthesisService
     {
         [$headline, $body, $synthesisKey] = match ($band) {
             'high' => [
-                $locale === 'zh-CN' ? 'Big Five 补充：职业下一步适合被做成明确里程碑' : 'Big Five add-on: the next career step works best as a milestone',
+                $locale === 'zh-CN' ? 'Big Five 补充：职业下一步适合被做成明确里程碑' : 'Big Five add-on: test a concrete career milestone',
                 $locale === 'zh-CN'
                     ? 'Big Five 显示你的尽责性更高，所以职业下一步最适合被写成带时间边界的里程碑：先定一个可交付成果，再把协作对象、截止时间和验证标准一起钉住。'
-                    : 'Your Big Five result points to higher conscientiousness, so the next career step works best when turned into a milestone with a deadline, owner, and proof point.',
+                    : 'The available Big Five projection marks C as high. If useful for your current decision, define one deliverable, a time boundary and a way to check progress. Compare the result with your actual responsibilities and resources; the band does not establish the best career action.',
                 'big5.career_next_step.high.commit_to_milestone',
             ],
             'low' => [
-                $locale === 'zh-CN' ? 'Big Five 补充：职业下一步更适合先降低动作摩擦' : 'Big Five add-on: the next career step benefits from lower friction',
+                $locale === 'zh-CN' ? 'Big Five 补充：职业下一步更适合先降低动作摩擦' : 'Big Five add-on: test a low-friction career action',
                 $locale === 'zh-CN'
                     ? 'Big Five 显示你的尽责性更低，所以职业下一步不要设计成又大又抽象的跃迁。更有效的做法是先把动作缩成一次对话、一次投递、一次作品更新或一次环境试探。'
-                    : 'Your Big Five result points to lower conscientiousness, so the next career step should avoid large abstract leaps. A single conversation, application, portfolio update, or environment test will work better.',
+                    : 'The available Big Five projection marks C as low. One option is a conversation, application, portfolio update or observation of a work setting. Choose an appropriate low-risk action and review the evidence it produces rather than assuming it will work better.',
                 'big5.career_next_step.low.reduce_activation_friction',
             ],
             default => [
-                $locale === 'zh-CN' ? 'Big Five 补充：职业下一步适合轻量而连续地推进' : 'Big Five add-on: the next career step favors steady cadence',
+                $locale === 'zh-CN' ? 'Big Five 补充：职业下一步适合轻量而连续地推进' : 'Big Five add-on: test a manageable career cadence',
                 $locale === 'zh-CN'
                     ? 'Big Five 显示你的尽责性位于中段，所以职业下一步最适合保持轻量但连续：每周固定推进一次，比偶尔冲刺更容易积累可见进展。'
-                    : 'Your Big Five result sits in the middle range for conscientiousness, so the next career step works best as a light but repeatable weekly move.',
+                    : 'The available Big Five projection marks C as mid. You could try one manageable career action and review whether its timing fits your situation. Repeat it only if the evidence is useful; a middle band does not establish an ideal weekly cadence.',
                 'big5.career_next_step.mid.keep_light_cadence',
             ],
         };

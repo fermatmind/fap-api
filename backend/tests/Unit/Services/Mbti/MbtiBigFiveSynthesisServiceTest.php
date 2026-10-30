@@ -74,4 +74,52 @@ final class MbtiBigFiveSynthesisServiceTest extends TestCase
             (string) ($careerNextStep['title'] ?? '')
         );
     }
+
+    public function test_all_nine_new_and_saved_enhancements_preserve_measurement_and_unknown_state(): void
+    {
+        $fixture = json_decode((string) file_get_contents(base_path('tests/Fixtures/mbti_big5_cross_copy.json')), true, 64, JSON_THROW_ON_ERROR);
+        $service = app(MbtiBigFiveSynthesisService::class);
+        $reader = app(\App\Services\Mbti\MbtiResultPersonalizationService::class);
+        $ownedCases = json_decode((string) file_get_contents(base_path('tests/Fixtures/mbti_precloseout_personalization_20261030.json')), true, 512, JSON_THROW_ON_ERROR)['cases'];
+        $ownedCase = collect($ownedCases)->firstWhere('locale', 'en');
+        foreach ($fixture as $case) {
+            $before = $case['before'];
+            $after = $case['after'];
+            $band = explode('.', $before['influence_keys'][0])[3];
+            $authority = $service->buildAuthorityFromProjection(['trait_bands' => ['N' => $band, 'C' => $band]], [], 'en', 'fixed-no-answers');
+            $this->assertSame($after, $authority['section_enhancements'][$before['section_key']]);
+            $authority['section_enhancements'][$before['section_key']] = $before;
+            $authority['future'] = ['preserve' => true];
+            $saved = ['schema_version' => 'mbti.personalization.phase9e.v1', 'locale' => 'en',
+                'interpretation_copy_version' => 'mbti.interpretation_copy.20261030.v1',
+                'scores' => ['N' => 67, 'C' => 41], 'cross_assessment_v1' => $authority];
+            $expected = $saved;
+            $expected['cross_assessment_v1']['section_enhancements'][$before['section_key']] = $after;
+            $this->assertSame($expected, $service->refreshSavedEnglishCopy($saved, 'en'));
+            $this->assertSame($expected, $service->refreshSavedEnglishCopy($expected, 'en'));
+            $this->assertSame($expected, $reader->applyToProjection(['sections' => []], $saved)['_meta']['personalization']);
+            $this->assertSame($authority, $saved['cross_assessment_v1']);
+            $fullSaved = $ownedCase['personalization'];
+            $fullSaved['cross_assessment_v1'] = $authority;
+            $viaExisting = $reader->attachCtaBundleForExistingPersonalization($fullSaved, $ownedCase['context']);
+            $this->assertSame($expected['cross_assessment_v1'], $viaExisting['cross_assessment_v1']);
+            $this->assertSame($fullSaved['axis_vector'], $viaExisting['axis_vector']);
+            $this->assertSame($authority, $fullSaved['cross_assessment_v1']);
+            foreach (['schema_version', 'version', 'title', 'body', 'supporting_scale', 'synthesis_key', 'influence_keys'] as $field) {
+                $unknown = $saved;
+                if ($field === 'schema_version') {
+                    $unknown[$field] = 'future';
+                } elseif ($field === 'version') {
+                    $unknown['cross_assessment_v1'][$field] = 'future';
+                } else {
+                    $unknown['cross_assessment_v1']['section_enhancements'][$before['section_key']][$field] = 'future';
+                }
+                $this->assertSame($unknown, $service->refreshSavedEnglishCopy($unknown, 'en'), $field);
+            }
+            $this->assertSame($saved, $service->refreshSavedEnglishCopy($saved, 'zh-CN'));
+            $future = $saved;
+            $future['interpretation_copy_version'] = 'mbti.interpretation_copy.future';
+            $this->assertSame($future, $reader->applyToProjection(['sections' => []], $future)['_meta']['personalization']);
+        }
+    }
 }

@@ -965,6 +965,12 @@ final class MbtiResultPersonalizationService
     /** Refresh display copy from saved scores without rewriting the stored report or user state. */
     private function refreshInterpretationCopy(array $personalization, ?array $doc = null, ?string $locale = null): array
     {
+        if (! array_key_exists('interpretation_copy_version', $personalization)
+            || $personalization['interpretation_copy_version'] === self::INTERPRETATION_COPY_VERSION) {
+            $personalization = $this->bigFiveSynthesisService->refreshSavedEnglishCopy(
+                $personalization, $this->normalizeLocale($locale ?? (string) ($personalization['locale'] ?? ''))
+            );
+        }
         if (array_key_exists('interpretation_copy_version', $personalization)
             || ($personalization['schema_version'] ?? null) !== 'mbti.personalization.phase9e.v1') {
             return $personalization;
