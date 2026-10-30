@@ -10,6 +10,7 @@ import { inspectPackage, readCandidateRows, selectPublicContentPackage } from '.
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 const row=JSON.parse(readFileSync(new URL('../../backend/content_assets/public_content_53/mbti-result-copy.json',import.meta.url),'utf8')).candidates[0];
 const documentOf=body=>`<html><head><meta name="robots" content="noindex, nofollow"></head><body><main><h1>INTJ-T result</h1>${body}</main></body></html>`;
+const nativeHtml=copy=>documentOf(`<section id="mbti-desktop-growth"><p>${copy.growth_strength}</p><p>${copy.en_nat_ability_02??''}</p><p>${copy.en_nat_ability_03??''}</p></section><section id="mbti-desktop-career"><p>${copy.en_nat_ability_01??''}</p></section><section id="mbti-desktop-relationships"><p>${copy.en_nat_ability_04??''}</p><p>${copy.en_nat_ability_05??''}</p></section>`);
 const html=copy=>documentOf(`<section id="mbti-desktop-growth"><p>${copy}</p><p>${copy}</p></section>`);
 
 test('the exact one-row package is selected by changed source paths and its immutable digest',()=>{
@@ -53,7 +54,13 @@ function fixtures(copy=row.before, mutate=()=>{}, fourCopy=null, nativeCopy=null
       {key:'growth.weaknesses',render:'bullets',payload:{items:[{body:fourCopy.growth_weakness}]},is_enabled:true,source:'variant'},
       {key:'faq',render:'faq',payload:{items:[...Array.from({length:5},()=>({answer:'Keep'})),{question:'What stresses INTJ-T?',intent:'stress',answer:fourCopy.stress_answer}]},is_enabled:true,source:'variant'});
   }
-  if(nativeCopy) sections[0]={key:'growth.strengths',render:'bullets',payload:{items:[{body:nativeCopy.growth_strength},{body:'Keep second strength'}],future:'retain'},is_enabled:true,source:'variant'};
+  if(nativeCopy) {
+    sections[0]={key:'growth.strengths',render:'bullets',payload:{items:[{body:nativeCopy.growth_strength},{body:nativeCopy.en_nat_ability_02??'Keep second strength'},{body:nativeCopy.en_nat_ability_03??'Keep third strength'},{body:'Keep fourth strength'}],future:'retain'},is_enabled:true,source:'variant'};
+    if(nativeCopy.en_nat_ability_01) {
+      sections[1]={key:'career.advantages',render:'bullets',payload:{items:[{body:'Keep career0'},{body:'Keep career1'},{body:'Keep career2'},{body:nativeCopy.en_nat_ability_01}]},is_enabled:true,source:'variant'};
+      sections[2]={key:'relationships.strengths',render:'bullets',payload:{items:[{body:'Keep relationship0'},{body:nativeCopy.en_nat_ability_04},{body:'Keep relationship2'},{body:nativeCopy.en_nat_ability_05}]},is_enabled:true,source:'variant'};
+    }
+  }
   mutate(sections);
   const fetcher=async(url,options)=>{
     const u=new URL(url);assert.equal(u.origin,'https://staging-api.fermatmind.com');
@@ -72,7 +79,7 @@ function fixtures(copy=row.before, mutate=()=>{}, fourCopy=null, nativeCopy=null
   const renderer=async(url,options)=>{
     assert.equal(url,'https://staging.fermatmind.com/en/result/'+attempt);assert.equal(options.surface,'mbti_result');
     assert.equal(options.mbtiSample.token,token);session=options.mbtiSample;
-    const body=nativeCopy?documentOf(`<section id="mbti-desktop-growth"><p>${nativeCopy.growth_strength}</p></section>`):fourCopy?fourHtml(fourCopy):html(copy.body_md);options.verifyDOM(body);return body;
+    const body=nativeCopy?nativeHtml(nativeCopy):fourCopy?fourHtml(fourCopy):html(copy.body_md);options.verifyDOM(body);return body;
   };
   return {fetcher,renderer,attempt,token,calls,get session(){return session;}};
 }
@@ -90,9 +97,9 @@ test('native batch selects 32 exact rows but runs the fixed browser anchor only 
   const binding=inspectPackage(root,'mbti-native-leaf-copy');
   const rows=readCandidateRows(root,binding.package_sha256).candidates;
   assert.equal(binding.expected_row_count,32);
-  assert.equal(rows.reduce((count,row)=>count+Object.keys(row.snapshot).length,0),187);
+  assert.equal(rows.reduce((count,row)=>count+Object.keys(row.snapshot).length,0),395);
   const anchor=rows.find(row=>row.identity.slug==='intj-t');
-  assert.deepEqual(Object.keys(anchor.snapshot),['growth_strength']);
+  assert.deepEqual(Object.keys(anchor.snapshot),['growth_strength','en_nat_ability_01','en_nat_ability_02','en_nat_ability_03','en_nat_ability_04','en_nat_ability_05']);
   const before=fixtures(row.before,()=>{},null,anchor.before);
   const prestate=await readOnlinePrestate('staging',root,before.fetcher,before.renderer,binding.package_sha256);
   assert.equal(before.calls.length,5);
@@ -119,7 +126,7 @@ test('native strength must be visible exactly once in the growth chapter and pro
   const a=await readMbtiResultCopySample('staging',anchor,before.fetcher,before.renderer);
   const b=await readMbtiResultCopySample('staging',anchor,after.fetcher,after.renderer);
   assert.equal(a.controls_sha256,b.controls_sha256);
-  const changed=fixtures(row.before,sections=>{sections[0].payload.items[1].body='Unowned sibling changed';},null,anchor.snapshot);
+  const changed=fixtures(row.before,sections=>{sections[0].payload.items[3].body='Unowned sibling changed';},null,anchor.snapshot);
   const c=await readMbtiResultCopySample('staging',anchor,changed.fetcher,changed.renderer);
   assert.notEqual(c.controls_sha256,a.controls_sha256);
 });
@@ -218,4 +225,15 @@ test('four-leaf visible acceptance binds each sentence once to its actual result
     body.replace('</main>',`<p>${fourRow.snapshot.trait_overview}</p></main>`),
     body.replace('noindex, nofollow','index, follow'),
   ])assert.throws(()=>assertMbtiFourLeafDom(changed,fourRow.snapshot),/FOUR_VISIBLE_MISMATCH/);
+});
+
+test('native revision2 checks every five additional consumer leaves and rejects hidden or misplaced content',()=>{
+  const anchor=readCandidateRows(root,inspectPackage(root,'mbti-native-leaf-copy').package_sha256).candidates.find(row=>row.identity.slug==='intj-t');
+  assert.doesNotThrow(()=>assertMbtiNativeLeafDom(nativeHtml(anchor.snapshot),anchor.snapshot));
+  for(const [name,body]of Object.entries(anchor.snapshot)) {
+    const rendered=nativeHtml(anchor.snapshot);
+    assert.throws(()=>assertMbtiNativeLeafDom(rendered.replace(`<p>${body}</p>`,`<p hidden>${body}</p>`),anchor.snapshot),/NATIVE_VISIBLE_MISMATCH/,name);
+    assert.throws(()=>assertMbtiNativeLeafDom(rendered.replace(`<p>${body}</p>`,``).replace('</main>',`<p>${body}</p></main>`),anchor.snapshot),/NATIVE_VISIBLE_MISMATCH/,name);
+  }
+  assert.doesNotThrow(()=>assertMbtiNativeLeafDom(nativeHtml({growth_strength:anchor.snapshot.growth_strength}),{growth_strength:anchor.snapshot.growth_strength}));
 });
