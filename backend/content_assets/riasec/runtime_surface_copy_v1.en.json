@@ -127,7 +127,7 @@
     "disagree": {
       "user_not_wrong_message": {
         "title": "You can disagree with this result",
-        "summary": "Disagreeing with a result is valid feedback in itself. It will inform the exploration path, helping you examine your state while answering, near ties, and directions for exploring activities.",
+        "summary": "You can disagree with this result. Check response quality, close scores, and the activities you pictured while answering. You may record your own observations in the optional trial notes; this page does not use that text to change the measured result.",
         "disagree_state": "disagrees_quality_normal"
       },
       "feedback_no_mutation_boundary": {
@@ -137,7 +137,7 @@
       },
       "next_step": {
         "title": "Next step",
-        "summary": "First check response quality and near ties. Then choose whether to retake the assessment, save a preferred direction, or try a small experiment to observe specific activities.",
+        "summary": "First check response quality and close scores. Then choose whether to retake when ready or try a small activity. You may write a preferred direction in your own notes and copy it before leaving; those notes stay only in this page’s memory.",
         "disagree_state": "save_feedback_only"
       }
     },
@@ -149,7 +149,7 @@
       },
       "input_boundary": {
         "title": "Input boundaries",
-        "summary": "Aspirations provide material for exploration; they are not assessment answers. The system will only help you see which activities within these directions overlap with your current interest clues, and which real-world aspects need observation.",
+        "summary": "Aspirations are your own material for exploration, not assessment answers. You can use your notes to compare activities in a direction with your current interest clues and list real-world conditions to check. This page does not automatically score or match a target occupation.",
         "aspirations_state": "not_provided"
       },
       "no_score_mutation_boundary": {
