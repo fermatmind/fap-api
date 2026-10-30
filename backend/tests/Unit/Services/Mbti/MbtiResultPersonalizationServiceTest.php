@@ -329,7 +329,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             ['career.next_step', 'career.work_experiments', 'career.work_environment', 'career.collaboration_fit'],
             data_get($clear, 'career_journey_keys')
         );
-        $this->assertStringContainsString('一周内能重复', (string) ($clear['action_plan_summary'] ?? ''));
+        $this->assertStringContainsString('一周内可重复', (string) ($clear['action_plan_summary'] ?? ''));
         $this->assertContains('weekly_action.theme.name_decision_rule', data_get($clear, 'weekly_action_keys'));
         $this->assertContains('relationship_action.theme.name_decision_rule', data_get($clear, 'relationship_action_keys'));
         $this->assertContains('work_experiment.theme.name_decision_rule', data_get($clear, 'work_experiment_keys'));
@@ -469,15 +469,15 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             ($this->section($strong, 'overview')['selected_blocks'][0] ?? null)
         );
         $this->assertStringContainsString(
-            '稳定的外倾倾向',
+            '本次回答更偏向外倾',
             (string) ($this->section($clear, 'overview')['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '外倾偏好已经很鲜明',
+            '本次回答呈现较强的外倾方向',
             (string) ($this->section($strong, 'overview')['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '两套判断入口之间来回校准',
+            '不能证明你会自动切换',
             (string) ($clear['sections']['relationships.rel_risks']['blocks'][3]['text'] ?? '')
         );
         $this->assertSame(
@@ -589,39 +589,39 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             )
         );
         $this->assertStringContainsString(
-            '判断入口',
+            '当前代码',
             (string) ($clear['sections']['traits.why_this_type']['blocks'][1]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '读不准你',
+            '不同的自我描述',
             (string) ($clear['sections']['traits.why_this_type']['blocks'][2]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '只拉开了7个点差',
+            '距50%中点7个百分点',
             (string) ($clear['sections']['traits.close_call_axes']['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '和ENFJ看起来有点像',
+            'ENFJ',
             (string) ($clear['sections']['traits.adjacent_type_contrast']['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '结果测错了',
+            '比较入口',
             (string) ($clear['sections']['traits.adjacent_type_contrast']['blocks'][1]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '可被照顾的能力',
+            '分数',
             (string) ($clear['sections']['growth.stability_confidence']['blocks'][0]['text'] ?? '')
         );
-        $this->assertStringContainsString(
-            '恢复方式',
+        $this->assertMatchesRegularExpression(
+            '/调整|修正理解/u',
             (string) ($clear['sections']['growth.stability_confidence']['blocks'][1]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '拉回可用区',
+            '是否有帮助',
             (string) ($clear['sections']['growth.stability_confidence']['blocks'][2]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '压力升高时',
+            '可以核对一个情境假设',
             (string) data_get($clear, 'scene_fingerprint.stress_recovery.summary', '')
         );
     }
@@ -817,11 +817,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             $clear['variant_keys']['growth.stress_recovery'] ?? null
         );
         $this->assertStringContainsString(
-            '过载时和恢复时可能会切到不同挡位',
+            '不能说明压力下或恢复时会采用哪种方式',
             (string) ($boundary['sections']['growth.stress_recovery']['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '更稳定的应对入口',
+            '不等于更稳定的应对方式',
             (string) ($clear['sections']['growth.stress_recovery']['blocks'][0]['text'] ?? '')
         );
     }
@@ -995,7 +995,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'engine_version' => 'report_phase6a_contract',
         ]);
 
-        $this->assertSame(['AT', 'JP'], array_map(
+        $this->assertSame(['AT'], array_map(
             static fn (array $axis): string => (string) ($axis['axis'] ?? ''),
             data_get($personalization, 'close_call_axes', [])
         ));
@@ -1044,11 +1044,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
 
         $this->assertSame('en', $english['locale']);
         $this->assertStringContainsString(
-            'stable Extraversion preference',
+            'this response set leans toward Extraversion',
             (string) ($this->section($english, 'overview')['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            'At work, you usually start through',
+            'Check a situational hypothesis',
             (string) data_get($english, 'scene_fingerprint.work.summary', '')
         );
         $this->assertStringNotContainsString(

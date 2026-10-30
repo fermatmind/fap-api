@@ -19,6 +19,8 @@ final class MbtiResultPersonalizationService
      */
     private const AXIS_ORDER = ['EI', 'SN', 'TF', 'JP', 'AT'];
 
+    private const INTERPRETATION_COPY_VERSION = 'mbti.interpretation_copy.20261030.v1';
+
     /**
      * @var list<string>
      */
@@ -362,192 +364,192 @@ final class MbtiResultPersonalizationService
      * @var array<string, string>
      */
     private const DEFAULT_AXIS_STRENGTH_TEMPLATES = [
-        'overview.boundary' => '在{{axis_label}}上，你现在更接近均衡区间。{{side_label}}仍然是主方向，但另一侧会在不同场景里频繁参与，所以这不是“绝对单向”的结果。',
-        'overview.clear' => '在{{axis_label}}上，你已经呈现出稳定的{{side_label}}倾向；它会解释你多数第一反应，但不会压扁另一侧的可用性。',
-        'overview.strong' => '在{{axis_label}}上，你的{{side_label}}偏好已经很鲜明。你通常不会先停在中间，而会自然把注意力和行动拉向这一侧。',
-        'overview.very_strong' => '在{{axis_label}}上，你呈现出非常鲜明的{{side_label}}偏好。这会让你的风格高度一致，也让别人更容易快速感受到你的主导方式。',
-        'growth.boundary' => '成长上，最有效的动作不是把自己推向极端，而是学会识别什么时候该让另一侧补位。',
-        'growth.clear' => '成长上，你更适合先放大这条已经清晰的{{side_label}}优势，再为它补一条低成本的对侧校正动作。',
-        'growth.strong' => '成长上，你不缺方向感，缺的是校正机制。因为{{side_label}}已经很强，真正有价值的是给它加上稳定的对侧检查点。',
-        'growth.very_strong' => '成长上，你最需要防的不是“不够像自己”，而是把{{side_label}}一路推到底。越强的偏好，越需要可重复的反向校正。',
-        'relationships.boundary' => '在人际里，这条轴接近边界，意味着你不会一直用同一种方式靠近别人；不同关系会唤起你不同侧的表达。',
-        'relationships.clear' => '在人际里，{{side_label}}已经是你更常见的默认方式。别人感受到你的节奏时，通常会先接收到这一侧。',
-        'relationships.strong' => '在人际里，{{side_label}}已经很鲜明。它会带来明显优势，也会让误读更容易围绕这一侧发生。',
-        'relationships.very_strong' => '在人际里，你的{{side_label}}风格非常稳定。好处是边界清楚、识别度高，代价是别人更容易把你的主导方式当作全部的你。',
+        'overview.boundary' => '在{{axis_label}}上，本次回答的方向接近中点。可以用一个符合{{side_label}}描述的实际例子和一个反例核对，暂时保留两侧解释。',
+        'overview.clear' => '在{{axis_label}}上，本次回答更偏向{{side_label}}。这描述当前方向，不证明多数第一反应或长期稳定性。',
+        'overview.strong' => '在{{axis_label}}上，本次回答呈现较强的{{side_label}}方向。可以回看一个实际情境，核对这个线索是否符合，也记录反例。',
+        'overview.very_strong' => '在{{axis_label}}上，本次{{side_label}}方向信号较强；不能据此判断行为一直一致，或他人会怎样看你。',
+        'growth.boundary' => '本次回答的方向接近中点。成长练习可以先比较两侧做法：在一个低风险情境中试一个小调整，记录实际反馈，再决定是否继续。',
+        'growth.clear' => '成长练习可以从一个符合{{side_label}}偏好的小动作开始，再尝试一个对侧做法，用实际反馈判断是否有用。',
+        'growth.strong' => '本次{{side_label}}方向较强。可以尝试增加一个对侧检查点，但是否需要校正应由具体情境和反馈决定。',
+        'growth.very_strong' => '本次{{side_label}}方向信号较强。若某个具体问题需要其他视角，可以加入一个对侧检查点，再用反馈判断是否有帮助。',
+        'relationships.boundary' => '本次回答的方向接近中点，不能据此确定你在不同关系中的表达方式。可以比较两次具体互动，并询问对方怎样理解你的表达。',
+        'relationships.clear' => '本次回答更偏向{{side_label}}。在人际中，可以核对这个线索是否符合一次具体互动，并询问对方的实际感受。',
+        'relationships.strong' => '本次{{side_label}}方向较强。可以核对它是否影响相处方式；不能据此推断关系优势或误解一定来自这一侧。',
+        'relationships.very_strong' => '本次{{side_label}}方向信号较强，不代表关系风格长期稳定。请用具体互动核对符合和不符合的部分。',
         'career.boundary' => '在工作里，这条轴更像弹性档位而不是固定齿轮；不同任务会把你拉向不同侧，因此环境匹配比职位名称更重要。',
         'career.clear' => '在工作里，{{side_label}}已经是你较稳定的默认操作方式。它会影响你更顺手的工作节奏、协作方式和反馈偏好。',
         'career.strong' => '在工作里，{{side_label}}已经很鲜明。你通常不是“什么环境都行”，而是会在某类节奏里明显更快进入高质量输出。',
         'career.very_strong' => '在工作里，你的{{side_label}}偏好非常强。这会让你在适配环境里效率极高，但也会放大与不匹配环境之间的摩擦感。',
-        'work.boundary' => '在工作场景里，这条轴靠近中线，意味着你会根据任务、人和节奏切换挡位；真正关键的是你何时切换，以及团队是否读得懂这种切换。',
-        'work.clear' => '在工作场景里，{{side_label}}已经是你较稳定的默认工作方式。它会影响你启动任务、协作和接收反馈的第一反应。',
-        'work.strong' => '在工作场景里，{{side_label}}已经很鲜明。匹配环境会放大你的效率，不匹配环境也会更快放大摩擦。',
-        'work.very_strong' => '在工作场景里，你的{{side_label}}风格极其稳定。优势是输出速度和风格识别度都很高，代价是环境不合拍时不适感也会非常明显。',
-        'decision.boundary' => '做决定时，这条轴靠近中线，所以你不是单一路径地下判断，而是会在两套入口之间切换。',
-        'decision.clear' => '做决定时，{{side_label}}已经是你更常见的默认入口，但另一侧仍然会在复核和收尾阶段发挥作用。',
-        'decision.strong' => '做决定时，{{side_label}}已经很鲜明。你往往会先沿着这一侧推进，再决定是否需要另一侧补位。',
-        'decision.very_strong' => '做决定时，你的{{side_label}}倾向非常强。这会让判断更快更稳，也会让别人更容易把你理解成“只会这样判断的人”。',
-        'stress_recovery.boundary' => '在压力与恢复上，这条轴靠近中线，意味着你在过载时和恢复时可能会切到不同挡位。',
-        'stress_recovery.clear' => '在压力与恢复上，{{side_label}}已经是你更稳定的应对入口，但恢复阶段通常还需要另一侧来重新平衡。',
-        'stress_recovery.strong' => '在压力与恢复上，{{side_label}}已经很鲜明。你容易先用这一侧救火，所以更需要一条固定的恢复回路。',
-        'stress_recovery.very_strong' => '在压力与恢复上，你的{{side_label}}风格非常强。优势是应对快，风险是过度依赖同一套自救方式。',
-        'communication.boundary' => '在沟通里，这条轴靠近中线，所以你不是只会一种表达方式；你会根据对象、氛围和目标来切换。',
-        'communication.clear' => '在沟通里，{{side_label}}已经是你更常见的起手方式，但当场景变化时，另一侧仍会迅速进场补位。',
-        'communication.strong' => '在沟通里，{{side_label}}已经很鲜明。别人通常会先感受到这一侧，因此误读也往往从这里开始。',
-        'communication.very_strong' => '在沟通里，你的{{side_label}}风格非常稳定。优势是辨识度高，风险是别人容易把你的表达方式误读成你的全部意图。',
+        'work.boundary' => '本次回答的方向接近中点。可以比较两个具体工作任务，记录任务要求、协作条件和自己的实际做法，核对是否出现不同选择。',
+        'work.clear' => '本次回答更偏向{{side_label}}。请核对它是否影响启动任务、协作或接收反馈，而不要把它当作固定工作方式。',
+        'work.strong' => '本次{{side_label}}方向较强。可以试着调整一个工作条件，并观察结果；方向得分不证明输出或摩擦会怎样变化。',
+        'work.very_strong' => '本次{{side_label}}方向信号较强，不证明工作速度、风格一致性或环境适配结果。请用具体任务验证。',
+        'decision.boundary' => '本次回答的方向接近中点。做决定时，可以把两侧相关的信息和判断标准分别列出，再依据证据与后果取舍，不预设自己会自动切换。',
+        'decision.clear' => '本次回答更偏向{{side_label}}。可以回看一次具体选择，核对实际使用的信息与判断标准，再考虑是否需要补充其他视角。',
+        'decision.strong' => '本次回答呈现较强的{{side_label}}方向。做决定时，可以核对自己实际采用的信息和判断标准，再检查是否遗漏其他相关视角。',
+        'decision.very_strong' => '本次{{side_label}}方向信号较强，不表示判断更快、更稳或更准确。重要决定仍需证据、后果和对侧视角。',
+        'stress_recovery.boundary' => '本次回答的方向接近中点，不能说明压力下或恢复时会采用哪种方式。可以记录一次具体经历中的负荷、实际做法和有帮助的支持。',
+        'stress_recovery.clear' => '本次回答更偏向{{side_label}}，不等于更稳定的应对方式。面对压力时，可以先核对当前负荷、实际反应和可用支持，再选择一个负担较小的调整。',
+        'stress_recovery.strong' => '本次{{side_label}}方向较强，但它不能说明你如何应对压力。可以回看一次具体经历，记录压力来源、实际做法及有帮助的支持。',
+        'stress_recovery.very_strong' => '本次{{side_label}}方向较强，不代表应对速度或恢复能力。请先核对压力来源、可用支持和实际有效的恢复方式。',
+        'communication.boundary' => '本次回答的方向接近中点。可以回看面向不同对象的两次对话，核对表达是否确有变化，以及对方实际怎样理解。',
+        'communication.clear' => '本次回答更偏向{{side_label}}。可以核对一次具体对话中的开场、表达和回应，再根据对方反馈考虑是否调整。',
+        'communication.strong' => '本次{{side_label}}方向较强。可以用一次具体对话核对它是否符合你的表达方式，并询问对方实际怎样理解，而不预设误读来自这条轴。',
+        'communication.very_strong' => '本次{{side_label}}方向信号较强，不证明沟通方式长期一致或别人会误读你。请用具体对话核对。',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_AXIS_STRENGTH_TEMPLATES_EN = [
-        'overview.boundary' => 'On {{axis_label}}, you currently sit close to the middle. {{side_label}} still leads, but the opposite side stays active in different situations, so this is not a single-direction reading.',
-        'overview.clear' => 'On {{axis_label}}, you already show a stable {{side_label}} preference. It explains many first reactions without flattening the opposite side completely.',
-        'overview.strong' => 'On {{axis_label}}, your {{side_label}} preference is already very visible. You usually do not pause in the middle; attention and action naturally move toward this side.',
-        'overview.very_strong' => 'On {{axis_label}}, your {{side_label}} preference is extremely visible. That makes your style highly consistent and easy for others to notice quickly.',
-        'growth.boundary' => 'For growth, the most useful move is not to force yourself toward an extreme, but to notice when the opposite side should come in as support.',
-        'growth.clear' => 'For growth, you are better off building on this already-clear {{side_label}} strength and pairing it with one low-cost correction from the opposite side.',
-        'growth.strong' => 'For growth, you do not lack direction; you need calibration. Because {{side_label}} is already strong, the real leverage comes from a repeatable opposite-side check.',
-        'growth.very_strong' => 'For growth, the main risk is not being less yourself; it is running {{side_label}} too far without a stable correction loop.',
-        'relationships.boundary' => 'In relationships, this axis sits near the boundary. You do not approach people in only one way, and different relationships can pull out different sides of you.',
-        'relationships.clear' => 'In relationships, {{side_label}} is already your more common default. People usually feel this side first when they experience your rhythm.',
-        'relationships.strong' => 'In relationships, {{side_label}} is already quite strong. It creates obvious strengths, but it also makes misunderstandings cluster around that same side.',
-        'relationships.very_strong' => 'In relationships, your {{side_label}} style is extremely stable. The upside is clarity and recognizability; the downside is that others may mistake your dominant style for the whole of you.',
+        'overview.boundary' => 'On {{axis_label}}, this response set is near the midpoint. Check one actual example that fits {{side_label}} and one counterexample, keeping both directions open.',
+        'overview.clear' => 'On {{axis_label}}, this response set leans toward {{side_label}}. This describes the current direction, not most first reactions or long-term stability.',
+        'overview.strong' => 'On {{axis_label}}, this response set shows a stronger {{side_label}} direction. Review one actual situation to check whether this clue fits, and record a counterexample too.',
+        'overview.very_strong' => 'On {{axis_label}}, this response set has a stronger {{side_label}} signal; it does not establish consistent behavior or how others see you.',
+        'growth.boundary' => 'This response set is near the midpoint. For growth, compare approaches from both sides: try one small adjustment in a low-risk situation, record actual feedback and decide whether to continue.',
+        'growth.clear' => 'For growth, test one small action consistent with {{side_label}} and one opposite-side approach, then use actual feedback to judge whether they help.',
+        'growth.strong' => 'This response set has a stronger {{side_label}} direction. Try an opposite-side checkpoint if useful; the situation and feedback determine whether correction is needed.',
+        'growth.very_strong' => 'This response set has a stronger {{side_label}} signal. If a specific problem calls for another perspective, try an opposite-side checkpoint and use feedback to judge whether it helps.',
+        'relationships.boundary' => 'This response set is near the midpoint and does not establish how you express yourself across relationships. Compare two specific interactions and ask how the other person understood your expression.',
+        'relationships.clear' => 'This response set leans toward {{side_label}}. In relationships, check whether this clue fits one specific interaction and ask about the other person\'s actual experience.',
+        'relationships.strong' => 'This response set has a stronger {{side_label}} direction. Check whether it affects interaction; it does not establish relationship strengths or the cause of misunderstandings.',
+        'relationships.very_strong' => 'A stronger {{side_label}} signal in this response set does not establish a stable relationship style. Check both fitting and non-fitting examples from actual interactions.',
         'career.boundary' => 'At work, this axis behaves more like a flexible gear than a fixed setting. Different tasks can pull you toward different sides, so environment fit matters more than job labels.',
         'career.clear' => 'At work, {{side_label}} is already a stable operating mode. It shapes the pace, collaboration pattern, and feedback style that feel most natural to you.',
         'career.strong' => 'At work, {{side_label}} is already strong. You are not equally effective everywhere; some environments let you enter high-quality output much faster.',
         'career.very_strong' => 'At work, your {{side_label}} preference is very strong. That can make you exceptionally effective in a good-fit environment and noticeably strained in a bad-fit one.',
-        'work.boundary' => 'At work, this axis sits close to the middle, which means you shift gears depending on task, people, and pace. The real question is when you switch and whether the team can read that switch.',
-        'work.clear' => 'At work, {{side_label}} is already your more stable operating mode. It shapes how you start, collaborate, and take feedback.',
-        'work.strong' => 'At work, {{side_label}} is already strong. Fit environments amplify your output, while poor-fit environments amplify friction faster.',
-        'work.very_strong' => 'At work, your {{side_label}} style is extremely stable. The upside is speed and recognizability; the downside is that mismatch becomes much more obvious.',
-        'decision.boundary' => 'In decisions, this axis sits close to the middle, so you do not judge through one path only. You switch between two entry points.',
-        'decision.clear' => 'In decisions, {{side_label}} is already your more common first entry point, while the opposite side still comes in during review and closure.',
-        'decision.strong' => 'In decisions, {{side_label}} is already strong. You often move forward through this side first, then decide whether the opposite side needs to step in.',
-        'decision.very_strong' => 'In decisions, your {{side_label}} preference is very strong. That makes your judgment faster and more stable, but also easier for others to oversimplify.',
-        'stress_recovery.boundary' => 'In stress and recovery, this axis sits close to the middle. Your overload mode and your recovery mode may not use the same gear.',
-        'stress_recovery.clear' => 'In stress and recovery, {{side_label}} is already your steadier coping entry point, but recovery often still needs the opposite side to rebalance.',
-        'stress_recovery.strong' => 'In stress and recovery, {{side_label}} is already strong. You naturally use this side to contain overload, so you need a deliberate reset loop.',
-        'stress_recovery.very_strong' => 'In stress and recovery, your {{side_label}} style is very strong. The upside is fast coping; the downside is over-relying on the same self-protection move.',
-        'communication.boundary' => 'In communication, this axis sits close to the middle, so you do not express yourself in only one way. You switch with audience, atmosphere, and goal.',
-        'communication.clear' => 'In communication, {{side_label}} is already your more common opening move, but the opposite side still comes in quickly when the context changes.',
-        'communication.strong' => 'In communication, {{side_label}} is already strong. People usually feel this side first, so misunderstandings often begin there too.',
-        'communication.very_strong' => 'In communication, your {{side_label}} style is extremely stable. The upside is recognizability; the downside is that people may mistake the style for the whole intention.',
+        'work.boundary' => 'This response set is near the midpoint. Compare two specific work tasks and record their demands, collaboration conditions and what you actually did, checking whether your choices differed.',
+        'work.clear' => 'This response set leans toward {{side_label}}. Check whether it affects starting tasks, collaboration or feedback rather than treating it as a fixed operating mode.',
+        'work.strong' => 'This response set has a stronger {{side_label}} direction. Test one work condition and observe the result; the score does not establish how output or friction will change.',
+        'work.very_strong' => 'A stronger {{side_label}} signal does not establish work speed, style consistency or environment fit. Check it against concrete tasks.',
+        'decision.boundary' => 'This response set is near the midpoint. When deciding, list the information and criteria associated with both sides, then weigh the evidence and consequences without assuming you automatically switch between approaches.',
+        'decision.clear' => 'This response set leans toward {{side_label}}. Review one specific choice, check the information and criteria you actually used, and consider whether another perspective is needed.',
+        'decision.strong' => 'This response set shows a stronger {{side_label}} direction. When deciding, review the information and criteria you actually used, then check whether other relevant perspectives were missed.',
+        'decision.very_strong' => 'A stronger {{side_label}} signal does not mean faster, steadier or more accurate judgment. Important decisions still need evidence, consequences and an opposite-side perspective.',
+        'stress_recovery.boundary' => 'This response set is near the midpoint and does not establish how you respond under pressure or during recovery. Record the demands, what you actually did and any helpful support in one specific experience.',
+        'stress_recovery.clear' => 'This response set leans toward {{side_label}}; that does not establish a steadier coping approach. Under pressure, first check current demands, actual responses and available support, then choose a lower-burden adjustment.',
+        'stress_recovery.strong' => 'This response set has a stronger {{side_label}} direction, but it does not establish how you cope with pressure. Review one specific experience and record the pressure source, what you actually did and any helpful support.',
+        'stress_recovery.very_strong' => 'A stronger {{side_label}} direction does not establish coping speed or recovery ability. Check the pressure source, available support and recovery approaches that actually help.',
+        'communication.boundary' => 'This response set is near the midpoint. Review two conversations with different people, checking whether your expression actually changed and how each person understood it.',
+        'communication.clear' => 'This response set leans toward {{side_label}}. Review the opening, expression and responses in one specific conversation, then use the other person\'s feedback to consider an adjustment.',
+        'communication.strong' => 'This response set has a stronger {{side_label}} direction. Check it against one specific conversation and ask how the other person understood you, without assuming this axis caused a misunderstanding.',
+        'communication.very_strong' => 'A stronger {{side_label}} signal does not establish a consistently fixed communication style or that others misread you. Check it against actual conversations.',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_SCENE_TEMPLATES = [
-        'overview' => '放到日常场景里，这条主轴通常会表现成：{{scene_side_hint}}。这会决定别人首先从哪里理解你。',
-        'growth' => '把它放进成长情境时，更有效的做法不是否定这条主轴，而是让它在{{axis_label}}上多带一个反向校正动作：{{scene_side_hint}}。',
-        'relationships' => '放到关系里，这条主轴通常会变成一种相处节奏：{{scene_side_hint}}。如果对方没有读懂这一点，就容易把你的方式误解成距离感、迟疑或控制感。',
+        'overview' => '日常观察中，可以核对这个线索是否符合：{{scene_side_hint}}。用一次具体经历和一个反例比较，不预设别人会怎样理解你。',
+        'growth' => '成长练习可以围绕{{axis_label}}尝试一种做法：{{scene_side_hint}}。只在具体问题需要时补充另一侧视角，再用反馈判断是否有用。',
+        'relationships' => '关系中，可以把这个线索作为讨论起点：{{scene_side_hint}}。询问对方实际怎样理解，不由偏好预判误解或相处结果。',
         'career' => '放到工作里，这条主轴更像你的默认操作系统：{{scene_side_hint}}。它会直接影响你更适配的岗位节奏与协作环境。',
-        'work' => '放到工作里，这条主轴更像你的默认操作系统：{{scene_side_hint}}。它会直接影响你更适配的岗位节奏与协作环境。',
-        'decision' => '放到决策里，这条主轴会决定你先用哪一种入口缩小范围：{{scene_side_hint}}。',
-        'stress_recovery' => '放到压力与恢复里，这条主轴通常会变成你最先启动的自救方式：{{scene_side_hint}}。',
-        'communication' => '放到沟通里，这条主轴通常会变成你的起手表达方式：{{scene_side_hint}}。',
-        'work_style' => '放到工作方式上，这条主轴会决定你默认怎么开工、怎么协作、怎么接收反馈：{{scene_side_hint}}。',
-        'role_fit' => '放到岗位匹配上，这条主轴最容易让你在某类角色里快速进入状态：{{scene_side_hint}}。',
-        'collaboration_fit' => '放到团队协作里，这条主轴会决定你更自然的对齐、配合与修正方式：{{scene_side_hint}}。',
-        'work_env' => '放到工作环境里，这条主轴会决定你更需要哪类节奏、边界和反馈方式：{{scene_side_hint}}。',
-        'career_next_step' => '放到职业下一步，这条主轴提示你先去试一个更贴近自己的动作：{{scene_side_hint}}。',
-        'next_action' => '把它翻译成下一步动作，最值得先做的是：{{scene_side_hint}}。先让这个动作小到一周内能重复，而不是一次做成大的自我改造。',
-        'weekly_experiment' => '放到这周可执行实验，这条主轴最适合变成一个低成本重复动作：{{scene_side_hint}}。目标不是证明你是谁，而是观察哪种做法让你更稳。',
-        'relationship_practice' => '放到本周关系练习，这条主轴最适合变成一个可见的小动作：{{scene_side_hint}}。重点不是表现完美，而是让对方更容易读懂你的真实节奏。',
-        'work_experiment' => '放到工作实验，这条主轴最适合先试一个可逆动作：{{scene_side_hint}}。先用小范围验证环境、协作或节奏是否更贴近你。',
-        'watchout' => '放到风险提醒，这条主轴最容易在高压时把你推向一种默认反应：{{scene_side_hint}}。真正要防的不是做错一次，而是在没察觉的情况下反复复制同一种失衡。',
+        'work' => '在这个情境中，可以核对一个假设：{{scene_side_hint}}。再用实际任务、条件和反馈判断是否符合；这不预测岗位适配或表现。',
+        'decision' => '做决定时，可以核对这个线索：{{scene_side_hint}}。回看一次具体选择中实际用了哪些信息，以及哪些视角还需要补充。',
+        'stress_recovery' => '面对压力时，可以把这个线索作为一个待核对的尝试：{{scene_side_hint}}。结合当前负荷与可用支持判断是否适合，并观察实际反馈。',
+        'communication' => '沟通时，可以用一次具体对话核对这个线索：{{scene_side_hint}}。再根据对方的回应决定是否调整表达。',
+        'work_style' => '在这个情境中，可以核对一个假设：{{scene_side_hint}}。再用实际任务、条件和反馈判断是否符合；这不预测岗位适配或表现。',
+        'role_fit' => '在这个情境中，可以核对一个假设：{{scene_side_hint}}。再用实际任务、条件和反馈判断是否符合；这不预测岗位适配或表现。',
+        'collaboration_fit' => '团队协作时，可以观察这个线索是否符合：{{scene_side_hint}}。结合分工、对齐或意见不同时的实际经历，也向合作方询问他们需要怎样的配合。',
+        'work_env' => '了解工作环境时，可以把这个线索变成一个问题：{{scene_side_hint}}。询问具体的节奏、边界和反馈安排，再与实际任务及现实限制核对。',
+        'career_next_step' => '职业下一步可以围绕这个线索做一个可逆验证：{{scene_side_hint}}。先核对任务、技能和现实条件，再决定是否继续。',
+        'next_action' => '下一步可以从这个线索选一个小尝试：{{scene_side_hint}}。把它缩成一周内可重复、可撤回的动作，记录能否实际完成及得到的反馈。',
+        'weekly_experiment' => '本周可以围绕这个线索设计一次低成本实验：{{scene_side_hint}}。只改变一个做法，记录当时条件、结果与反例，不预设它一定更有效。',
+        'relationship_practice' => '本周关系练习可以从这个线索提出一个小调整：{{scene_side_hint}}。在双方愿意的低风险对话中试一次表达或倾听调整，再询问对方是否觉得有帮助。',
+        'work_experiment' => '工作实验可以围绕这个线索尝试一次可逆调整：{{scene_side_hint}}。尽量保持任务相近，只改变一个环境、协作或节奏条件，再根据记录决定保留、调整或停止。',
+        'watchout' => '风险提醒可以先核对一个假设：{{scene_side_hint}}。记录具体情境与实际反应；若没有相应问题，不必把它当作你的高压默认模式。',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_SCENE_TEMPLATES_EN = [
-        'overview' => 'In everyday situations, this lead axis often shows up as {{scene_side_hint}}. That shapes where other people begin to understand you.',
-        'growth' => 'In growth work, the best move is not to reject this axis but to add one opposite-side correction on {{axis_label}}: {{scene_side_hint}}.',
-        'relationships' => 'In relationships, this axis often turns into a rhythm: {{scene_side_hint}}. If the other person misses that pattern, they may misread your style as distance, hesitation, or control.',
+        'overview' => 'In everyday observation, check whether this clue fits: {{scene_side_hint}}. Compare one actual example with a counterexample, without assuming how others understand you.',
+        'growth' => 'For growth, try an approach related to {{axis_label}}: {{scene_side_hint}}. Add an opposite-side perspective if the specific problem calls for it, then use feedback to judge whether it helps.',
+        'relationships' => 'In relationships, use this clue as a starting point for discussion: {{scene_side_hint}}. Ask how the other person actually understands you rather than predicting misunderstandings or outcomes from a preference.',
         'career' => 'At work, this axis behaves like your default operating system: {{scene_side_hint}}. It directly affects the pace and collaboration environment that fit you best.',
-        'work' => 'At work, this axis behaves like your default operating system: {{scene_side_hint}}. It directly affects the pace and collaboration environment that fit you best.',
-        'decision' => 'In decisions, this axis shapes which entry point you use first to narrow the field: {{scene_side_hint}}.',
-        'stress_recovery' => 'In stress and recovery, this axis often becomes the first coping move you activate: {{scene_side_hint}}.',
-        'communication' => 'In communication, this axis often becomes your opening expression style: {{scene_side_hint}}.',
-        'work_style' => 'In work style, this axis shapes how you start, collaborate, and receive feedback by default: {{scene_side_hint}}.',
-        'role_fit' => 'In role fit, this axis points to the kinds of roles where you enter high-quality work faster: {{scene_side_hint}}.',
-        'collaboration_fit' => 'In collaboration, this axis shapes the alignment, pacing, and repair moves that feel most natural to you: {{scene_side_hint}}.',
-        'work_env' => 'In work environment fit, this axis shapes the pace, boundaries, and feedback conditions you need most: {{scene_side_hint}}.',
-        'career_next_step' => 'For your next career move, this axis suggests the first experiment worth trying: {{scene_side_hint}}.',
-        'next_action' => 'Turn this into a next step by starting with one move that fits your pattern: {{scene_side_hint}}. Keep it small enough to repeat within a week instead of turning it into a full self-overhaul.',
-        'weekly_experiment' => 'As a weekly experiment, this axis is best translated into one low-cost repeatable move: {{scene_side_hint}}. The goal is not to prove who you are, but to see which move makes you steadier.',
-        'relationship_practice' => 'As a relationship practice for this week, this axis is best turned into one visible small move: {{scene_side_hint}}. The point is not perfect performance, but making your rhythm easier for the other person to read.',
-        'work_experiment' => 'As a work experiment, this axis is best tested through one reversible move first: {{scene_side_hint}}. Use a small-scope trial to see whether the environment, collaboration, or pace fits you better.',
-        'watchout' => 'As a watchout, this axis is most likely to push you into one default reaction under pressure: {{scene_side_hint}}. The real risk is not one bad move; it is repeating the same imbalance without noticing.',
+        'work' => 'In this situation, check a hypothesis: {{scene_side_hint}}. Use actual tasks, conditions and feedback to judge whether it fits; this does not predict role fit or performance.',
+        'decision' => 'When making a decision, check this clue: {{scene_side_hint}}. Review which information you actually used in one specific choice and which perspectives still need attention.',
+        'stress_recovery' => 'Under pressure, treat this clue as a possible trial to check: {{scene_side_hint}}. Consider current demands and available support when deciding whether it fits, and observe actual feedback.',
+        'communication' => 'In communication, check this clue against one specific conversation: {{scene_side_hint}}. Use the other person\'s response to decide whether to adjust your expression.',
+        'work_style' => 'In this situation, check a hypothesis: {{scene_side_hint}}. Use actual tasks, conditions and feedback to judge whether it fits; this does not predict role fit or performance.',
+        'role_fit' => 'In this situation, check a hypothesis: {{scene_side_hint}}. Use actual tasks, conditions and feedback to judge whether it fits; this does not predict role fit or performance.',
+        'collaboration_fit' => 'In teamwork, observe whether this clue fits: {{scene_side_hint}}. Check actual experiences of dividing work, aligning or disagreeing, and ask collaborators what cooperation they need.',
+        'work_env' => 'When exploring a work environment, turn this clue into a question: {{scene_side_hint}}. Ask about specific pacing, boundaries and feedback arrangements, then compare them with actual tasks and practical constraints.',
+        'career_next_step' => 'For your next career step, use this clue for a reversible trial: {{scene_side_hint}}. Check tasks, skills and practical conditions before deciding whether to continue.',
+        'next_action' => 'For your next step, choose a small trial based on this clue: {{scene_side_hint}}. Make it repeatable within one week and reversible, and record whether you could carry it out and what feedback followed.',
+        'weekly_experiment' => 'This week, design a low-cost experiment around this clue: {{scene_side_hint}}. Change one practice and record the conditions, outcome and counterexamples without assuming it will work better.',
+        'relationship_practice' => 'For this week’s relationship practice, use this clue to suggest a small adjustment: {{scene_side_hint}}. Try a change in expression or listening during a mutually agreed, low-stakes conversation, then ask whether the other person found it helpful.',
+        'work_experiment' => 'For a work experiment, try a reversible adjustment around this clue: {{scene_side_hint}}. Keep the task similar where possible, change one environmental, collaboration or pacing condition, then use the record to decide whether to keep, adjust or stop it.',
+        'watchout' => 'For a watchout, first check a hypothesis: {{scene_side_hint}}. Record the situation and actual response; if the problem is absent, do not treat it as your default pattern under pressure.',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_ACTION_PLAN_SUMMARY_TEMPLATES = [
-        'stable' => '接下来最值得做的，不是继续解释自己，而是把{{growth_hint}}、{{relationship_hint}}和{{work_hint}}分别变成一个小动作。因为你的结果整体较稳定，重点是把高匹配动作重复出来。',
-        'mixed' => '接下来最值得做的，是把{{growth_hint}}、{{relationship_hint}}和{{work_hint}}变成低成本可重复的动作。你的主类型已清楚，但局部会随情境切换，所以动作要小、可见、可复盘。',
-        'context_sensitive' => '接下来最值得做的，是用更小的动作去验证自己在不同情境里的切换。先从{{growth_hint}}、{{relationship_hint}}和{{work_hint}}各做一个一周内能重复的版本，不要一次想定终局。',
+        'stable' => '本次核心轴的方向分离相对清晰，但不证明跨情境或长期稳定。把“{{growth_hint}}”作为一个待验证线索，在一周内重复一个可逆的小动作；记录情境、行动、反馈及反例，再决定保留、调整或停止。',
+        'mixed' => '本次部分轴的方向较清晰，另一些更接近中点，仍需保留不确定性。只选一个与“{{growth_hint}}”相关的具体情境，试一个一周内可重复、可撤回的小动作；记下前后条件和实际反馈，不用结果证明固定人格。',
+        'context_sensitive' => '本次有多条轴接近中点，当前代码只是整理结果的一种方式。先核对“{{growth_hint}}”及其反例，再选一个一周内可重复的可逆尝试；记录当时的条件、是否实际完成和得到的反馈，允许保留多个解释。',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_ACTION_PLAN_SUMMARY_TEMPLATES_EN = [
-        'stable' => 'The next valuable move is not more self-explanation, but turning {{growth_hint}}, {{relationship_hint}}, and {{work_hint}} into small actions. Because your result is relatively stable, the goal is to repeat the moves that already fit.',
-        'mixed' => 'The next valuable move is to turn {{growth_hint}}, {{relationship_hint}}, and {{work_hint}} into low-cost repeatable actions. Your core type is clear, but some parts still shift by context, so the move should stay small, visible, and reviewable.',
-        'context_sensitive' => 'The next valuable move is to use smaller actions to test your switching pattern across contexts. Start by making one one-week version of {{growth_hint}}, {{relationship_hint}}, and {{work_hint}} instead of trying to decide the whole answer at once.',
+        'stable' => 'The core directions are more separated in this response set, without establishing stability across contexts or time. Treat “{{growth_hint}}” as one hypothesis and repeat a small reversible action during one week. Record the situation, action, feedback and counterexamples, then decide whether to keep, adjust or stop it.',
+        'mixed' => 'Some directions are clearer in this response set while others are nearer the midpoint, so uncertainty remains. Choose one concrete situation related to “{{growth_hint}}” and try a small reversible action that can be repeated during one week. Record the conditions and actual feedback rather than using the outcome to prove a fixed personality.',
+        'context_sensitive' => 'Several axes are near the midpoint in this response set; the current code is one way to organize the result. Check “{{growth_hint}}” and a counterexample, then choose a reversible trial that can be repeated during one week. Record the conditions, whether the action happened and the feedback received, keeping multiple explanations open.',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_SCENE_FINGERPRINT_TEMPLATES = [
-        'work' => '在工作里，你通常先用{{primary_hint}}开局，再用{{support_hint}}把节奏拉回可执行。{{identity_clause}} {{boundary_clause}}',
-        'relationships' => '在关系里，你常先以{{primary_hint}}让别人感受到你，再通过{{support_hint}}决定要靠近、回应还是设边界。{{identity_clause}} {{boundary_clause}}',
-        'growth' => '成长上，你的高杠杆点通常来自{{primary_hint}}；当你再补上{{support_hint}}时，进步会更稳定。{{identity_clause}} {{boundary_clause}}',
-        'decision' => '做决定时，你通常先靠{{primary_hint}}缩小范围，再用{{support_hint}}确认是否值得推进。{{identity_clause}} {{boundary_clause}}',
-        'stress_recovery' => '压力升高时，你容易先滑向{{primary_hint}}来求快或求稳；恢复阶段则更需要{{support_hint}}把你拉回可用区。{{identity_clause}} {{boundary_clause}}',
-        'communication' => '沟通里，你通常先以{{primary_hint}}发起，再用{{support_hint}}修正对齐。{{identity_clause}} {{boundary_clause}}',
+        'work' => '可以核对一个情境假设：你是否先用{{primary_hint}}，再用{{support_hint}}？记录符合与不符合的例子，当前分数不能确定固定顺序。{{identity_clause}} {{boundary_clause}}',
+        'relationships' => '可以核对一个情境假设：你是否先用{{primary_hint}}，再用{{support_hint}}？记录符合与不符合的例子，当前分数不能确定固定顺序。{{identity_clause}} {{boundary_clause}}',
+        'growth' => '可以核对一个情境假设：你是否先用{{primary_hint}}，再用{{support_hint}}？记录符合与不符合的例子，当前分数不能确定固定顺序。{{identity_clause}} {{boundary_clause}}',
+        'decision' => '可以核对一个情境假设：你是否先用{{primary_hint}}，再用{{support_hint}}？记录符合与不符合的例子，当前分数不能确定固定顺序。{{identity_clause}} {{boundary_clause}}',
+        'stress_recovery' => '可以核对一个情境假设：你是否先用{{primary_hint}}，再用{{support_hint}}？记录符合与不符合的例子，当前分数不能确定固定顺序。{{identity_clause}} {{boundary_clause}}',
+        'communication' => '可以核对一个情境假设：你是否先用{{primary_hint}}，再用{{support_hint}}？记录符合与不符合的例子，当前分数不能确定固定顺序。{{identity_clause}} {{boundary_clause}}',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_SCENE_FINGERPRINT_TEMPLATES_EN = [
-        'work' => 'At work, you usually start through {{primary_hint}}, then use {{support_hint}} to bring the rhythm back into something executable. {{identity_clause}} {{boundary_clause}}',
-        'relationships' => 'In relationships, people often feel you first through {{primary_hint}}, and then through {{support_hint}} you decide how to approach, respond, or set boundaries. {{identity_clause}} {{boundary_clause}}',
-        'growth' => 'In growth work, your biggest leverage often comes from {{primary_hint}}; when you add {{support_hint}}, progress becomes more repeatable. {{identity_clause}} {{boundary_clause}}',
-        'decision' => 'In decisions, you usually narrow the field through {{primary_hint}} first, then use {{support_hint}} to decide whether it is worth moving forward. {{identity_clause}} {{boundary_clause}}',
-        'stress_recovery' => 'When pressure rises, you tend to slide toward {{primary_hint}} first to cope quickly or stay stable; recovery then needs {{support_hint}} to bring you back into a usable range. {{identity_clause}} {{boundary_clause}}',
-        'communication' => 'In communication, you usually open through {{primary_hint}} and then use {{support_hint}} to recalibrate alignment. {{identity_clause}} {{boundary_clause}}',
+        'work' => 'Check a situational hypothesis: do you start with {{primary_hint}} and then use {{support_hint}}? Record fitting and non-fitting examples; the current scores do not establish a fixed sequence. {{identity_clause}} {{boundary_clause}}',
+        'relationships' => 'Check a situational hypothesis: do you start with {{primary_hint}} and then use {{support_hint}}? Record fitting and non-fitting examples; the current scores do not establish a fixed sequence. {{identity_clause}} {{boundary_clause}}',
+        'growth' => 'Check a situational hypothesis: do you start with {{primary_hint}} and then use {{support_hint}}? Record fitting and non-fitting examples; the current scores do not establish a fixed sequence. {{identity_clause}} {{boundary_clause}}',
+        'decision' => 'Check a situational hypothesis: do you start with {{primary_hint}} and then use {{support_hint}}? Record fitting and non-fitting examples; the current scores do not establish a fixed sequence. {{identity_clause}} {{boundary_clause}}',
+        'stress_recovery' => 'Check a situational hypothesis: do you start with {{primary_hint}} and then use {{support_hint}}? Record fitting and non-fitting examples; the current scores do not establish a fixed sequence. {{identity_clause}} {{boundary_clause}}',
+        'communication' => 'Check a situational hypothesis: do you start with {{primary_hint}} and then use {{support_hint}}? Record fitting and non-fitting examples; the current scores do not establish a fixed sequence. {{identity_clause}} {{boundary_clause}}',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_BOUNDARY_NARRATIVE_TEMPLATES = [
-        'overview' => '{{axis_label}}靠近中线时，你不是“有点像两边”，而是会在不同情境下切换入口。熟悉场景里你可能先用{{side_label}}，压力或高风险情境里又会迅速调动{{opposite_side_label}}。别人如果只看到其中一面，就容易把你误读成忽冷忽热、摇摆或前后不一。',
-        'relationships' => '在人际里，{{axis_label}}靠近中线意味着你不会永远只走{{side_label}}这一条路。你可能先用{{side_label}}靠近，遇到压力或误解时又改用{{opposite_side_label}}保护自己。别人如果只看到其中一段，就会误判你到底是在拉近、保持距离，还是突然变得难以捉摸。',
-        'growth' => '成长上，{{axis_label}}靠近中线意味着你真正要学的不是选边站，而是识别什么时候该让{{side_label}}先开路，什么时候该让{{opposite_side_label}}接手收尾。会切换并不可怕，不知道自己在什么时候切换才会让你觉得“我怎么又变了”。',
-        'work' => '在工作里，{{axis_label}}靠近中线会让你在任务、协作和压力场景下切换齿轮。你有时像{{side_label}}，有时又会突然拉出{{opposite_side_label}}来修正，所以团队很容易只记住其中一面。真正有价值的是让别人知道：你在什么信号下会切换，以及切换后需要怎样的协作方式。',
-        'decision' => '做决定时，{{axis_label}}靠近中线意味着你并不是摇摆不定，而是在两套判断入口之间来回校准。你可能先用{{side_label}}开路，再用{{opposite_side_label}}复核；场景一变，顺序也会反过来。别人会以为你前后矛盾，其实你是在同时守住速度与准确度、标准与关系，或结构与弹性。',
-        'stress_recovery' => '压力上来时，{{axis_label}}靠近中线意味着你可能先滑向{{side_label}}来保住当下，再在恢复阶段调回{{opposite_side_label}}重新平衡。它的难点不是“你为什么不稳定”，而是如果你没意识到自己在切换，就会把这种来回误读成状态失控。',
-        'communication' => '沟通里，{{axis_label}}靠近中线意味着你不会永远只用一种表达方式。你可能先用{{side_label}}出手，但一旦对方反馈变化，又迅速调动{{opposite_side_label}}补位。别人如果只看到前半段，常会误读你的真实意图；而你自己则会觉得“我明明已经说清楚了”。',
+        'overview' => '在{{axis_label}}上，本次回答接近中点。可以比较{{side_label}}和{{opposite_side_label}}在具体情境中的例子；小分差不能证明你会自动切换，也不能解释他人如何理解你。',
+        'relationships' => '在{{axis_label}}上，本次回答接近中点。可以比较{{side_label}}和{{opposite_side_label}}在具体情境中的例子；小分差不能证明你会自动切换，也不能解释他人如何理解你。',
+        'growth' => '在{{axis_label}}上，本次回答接近中点。可以比较{{side_label}}和{{opposite_side_label}}在具体情境中的例子；小分差不能证明你会自动切换，也不能解释他人如何理解你。',
+        'work' => '在{{axis_label}}上，本次回答接近中点。可以比较{{side_label}}和{{opposite_side_label}}在具体情境中的例子；小分差不能证明你会自动切换，也不能解释他人如何理解你。',
+        'decision' => '在{{axis_label}}上，本次回答接近中点。可以比较{{side_label}}和{{opposite_side_label}}在具体情境中的例子；小分差不能证明你会自动切换，也不能解释他人如何理解你。',
+        'stress_recovery' => '在{{axis_label}}上，本次回答接近中点。可以比较{{side_label}}和{{opposite_side_label}}在具体情境中的例子；小分差不能证明你会自动切换，也不能解释他人如何理解你。',
+        'communication' => '在{{axis_label}}上，本次回答接近中点。可以比较{{side_label}}和{{opposite_side_label}}在具体情境中的例子；小分差不能证明你会自动切换，也不能解释他人如何理解你。',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_BOUNDARY_NARRATIVE_TEMPLATES_EN = [
-        'overview' => 'When {{axis_label}} sits near the middle, you are not simply “a bit of both.” You switch entry points across situations. In familiar settings you may lead with {{side_label}}, while pressure or high-stakes contexts quickly bring in {{opposite_side_label}}. If people only see one side, they can misread you as inconsistent or hard to pin down.',
-        'relationships' => 'In relationships, a near-boundary {{axis_label}} means you do not move through connection in only one way. You may open with {{side_label}}, then shift into {{opposite_side_label}} when stress or misunderstanding rises. If someone only sees one segment of that pattern, they may misread whether you are moving closer, taking distance, or protecting yourself.',
-        'growth' => 'For growth, a near-boundary {{axis_label}} means the real task is not picking one side forever. It is learning when {{side_label}} should open the move and when {{opposite_side_label}} should finish it. Switching is not the problem; not knowing when you switch is what creates the feeling that you are changing unpredictably.',
-        'work' => 'At work, a near-boundary {{axis_label}} makes you shift gears across tasks, collaboration, and pressure. Sometimes you read as {{side_label}}, then suddenly pull in {{opposite_side_label}} to correct course. Teams often remember only one side. The useful move is to make the switch legible: what triggers it, and what collaboration pattern helps once it happens.',
-        'decision' => 'In decisions, a near-boundary {{axis_label}} does not mean you are indecisive. It means you recalibrate between two judgment entry points. You may start with {{side_label}} and then use {{opposite_side_label}} to verify, or reverse that order when the context changes. People may call it inconsistency when it is really a dual-track calibration.',
-        'stress_recovery' => 'Under stress, a near-boundary {{axis_label}} means you may slide toward {{side_label}} to contain the moment, then return through {{opposite_side_label}} during recovery. The hard part is not instability; it is failing to notice the shift and then misreading it as being out of control.',
-        'communication' => 'In communication, a near-boundary {{axis_label}} means you do not express yourself in only one register. You may open with {{side_label}}, then rapidly bring in {{opposite_side_label}} as feedback changes. If people only catch the first half, they can misunderstand your intent; if you miss the shift yourself, it can feel like you already made yourself clear.',
+        'overview' => 'On {{axis_label}}, this response set is near the midpoint. Compare examples of {{side_label}} and {{opposite_side_label}} in specific situations; a small gap does not establish automatic switching or explain how others understand you.',
+        'relationships' => 'On {{axis_label}}, this response set is near the midpoint. Compare examples of {{side_label}} and {{opposite_side_label}} in specific situations; a small gap does not establish automatic switching or explain how others understand you.',
+        'growth' => 'On {{axis_label}}, this response set is near the midpoint. Compare examples of {{side_label}} and {{opposite_side_label}} in specific situations; a small gap does not establish automatic switching or explain how others understand you.',
+        'work' => 'On {{axis_label}}, this response set is near the midpoint. Compare examples of {{side_label}} and {{opposite_side_label}} in specific situations; a small gap does not establish automatic switching or explain how others understand you.',
+        'decision' => 'On {{axis_label}}, this response set is near the midpoint. Compare examples of {{side_label}} and {{opposite_side_label}} in specific situations; a small gap does not establish automatic switching or explain how others understand you.',
+        'stress_recovery' => 'On {{axis_label}}, this response set is near the midpoint. Compare examples of {{side_label}} and {{opposite_side_label}} in specific situations; a small gap does not establish automatic switching or explain how others understand you.',
+        'communication' => 'On {{axis_label}}, this response set is near the midpoint. Compare examples of {{side_label}} and {{opposite_side_label}} in specific situations; a small gap does not establish automatic switching or explain how others understand you.',
     ];
 
     /**
@@ -582,56 +584,56 @@ final class MbtiResultPersonalizationService
      * @var array<string, string>
      */
     private const DEFAULT_BOUNDARY_TEMPLATES = [
-        'EI' => 'E / I 这一轴离中线较近，所以你更像“会因场景切换能量入口的人”，而不是永远固定在单一社交档位。',
-        'SN' => 'S / N 这一轴离中线较近，所以你既会看具体事实，也会快速跳到模式与意义；关键在于任务当下需要哪一种入口。',
-        'TF' => 'T / F 这一轴离中线较近，所以你并不是单纯“理性”或“感性”，而是会在标准与关系之间反复校准。',
-        'JP' => 'J / P 这一轴离中线较近，所以你既需要一定结构，也需要一定弹性；节奏感比绝对规则更重要。',
-        'AT' => 'A / T 这一轴离中线较近，所以你的稳定感和敏感度都在参与结果，不适合把自己读成单一的“稳”或“紧”。',
+        'EI' => 'E / I接近中点，表示本次回答两侧分离较小；不能据此确定社交方式会怎样随情境变化。',
+        'SN' => 'S / N接近中点，表示本次方向仍不清晰。可分别核对关注事实与关注模式的经历，不推断切换能力。',
+        'TF' => 'T / F接近中点，表示本次判断偏好的分离较小；思考和情感偏好不等于理性与情绪水平。',
+        'JP' => 'J / P接近中点，表示本次结构与弹性方向的分离较小。请结合具体安排任务的经历核对。',
+        'AT' => 'A / T接近中点，表示这项FermatMind附加扩展的方向分离较小；不代表情绪稳定或紧张程度。',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_BOUNDARY_TEMPLATES_EN = [
-        'EI' => 'Your E / I axis sits close to the middle, so you are better described as someone whose energy entry point changes with context than someone locked into one social mode.',
-        'SN' => 'Your S / N axis sits close to the middle, so you can work from concrete facts and from patterns; the key is which entry point the task demands now.',
-        'TF' => 'Your T / F axis sits close to the middle, so you are not purely rational or purely emotional; you keep recalibrating between standards and relationships.',
-        'JP' => 'Your J / P axis sits close to the middle, so you need both structure and flexibility. Rhythm matters more than rigid rules.',
-        'AT' => 'Your A / T axis sits close to the middle, so both steadiness and sensitivity are active in the result. It is not useful to read yourself as purely calm or purely tense.',
+        'EI' => 'An E / I score near the midpoint means the two directions were less separated in this response set; it does not establish how social behavior changes across contexts.',
+        'SN' => 'An S / N score near the midpoint leaves the current direction less clear. Compare examples of attending to facts and patterns; it does not establish switching ability.',
+        'TF' => 'A T / F score near the midpoint shows less separation in this response set; Thinking and Feeling preferences are not levels of rationality or emotion.',
+        'JP' => 'A J / P score near the midpoint shows less separation between the reported directions. Check it against concrete experiences of organizing tasks.',
+        'AT' => 'An A / T score near the midpoint shows less separation in this additional FermatMind extension; it is not a measure of emotional stability or tension.',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_IDENTITY_TEMPLATES = [
-        'A' => 'A 身份层会让你在当前类型骨架上更容易保持稳定推进、少被短期波动牵着走。',
-        'T' => 'T 身份层会让你在当前类型骨架上更容易放大细节波动与结果质量，因此同一类型也会表现出更高的自我校准和压力感知。',
+        'A' => 'A是FermatMind附加扩展中的一个方向。请核对自己面对评价和反馈的具体经历，不由此推断恢复速度、抗压或工作能力。',
+        'T' => 'T是FermatMind附加扩展中的一个方向。请核对自我质疑和反馈敏感的具体经历，不由此推断自我觉察、能力或健康水平。',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_IDENTITY_TEMPLATES_EN = [
-        'A' => 'The A identity layer makes this type skeleton feel steadier in execution and less reactive to short-term fluctuation.',
-        'T' => 'The T identity layer makes this type skeleton more sensitive to quality shifts and detail-level variance, so the same type can feel more self-calibrating and pressure-aware.',
+        'A' => 'A is one direction in FermatMind’s additional extension. Check it against actual experiences of evaluation and feedback; it does not establish recovery speed, coping ability or work ability.',
+        'T' => 'T is one direction in FermatMind’s additional extension. Check examples of self-questioning and feedback sensitivity; it does not establish self-awareness, ability or health.',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES = [
-        'stable' => '你的结果主要由{{dominant_axis_label}}上的{{dominant_side_label}}偏好拉开差距，因此主类型较稳定。真正最接近边界的是{{close_axis_label}}，它会决定你在哪些场景下更像相邻类型。',
-        'mixed' => '你的结果已经有清晰主轴，但仍保留几条会随场景切换的近边界轴。{{dominant_axis_label}}上的{{dominant_side_label}}解释了“你为什么是这个类型”，而{{close_axis_label}}解释了“你为什么又不像刻板印象里的那种类型”。',
-        'context_sensitive' => '你的结果不是模糊，而是有几条非常接近边界的轴在一起工作。{{dominant_axis_label}}上的{{dominant_side_label}}仍然决定了主类型，但{{close_axis_label}}会显著影响你在不同情境里看起来像哪一类人。',
+        'stable' => '本次核心轴的方向分离相对清晰；这不证明跨情境或长期稳定。请同时核对符合和不符合的实际例子。',
+        'mixed' => '本次部分轴的方向较清晰，另一些更接近中点。保留不确定性，不把当前代码当作固定人格。',
+        'context_sensitive' => '本次有多条轴接近中点。当前代码用于整理结果，不证明稳定偏好；可以比较相邻方向并记录反例。',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES_EN = [
-        'stable' => 'Your result is mainly separated by a stronger {{dominant_side_label}} preference on {{dominant_axis_label}}, so the core type is comparatively stable. The closest call is {{close_axis_label}}, which explains where you can still resemble a nearby type.',
-        'mixed' => 'Your result already has a clear structural axis, but a few near-boundary axes still change shape with context. {{dominant_axis_label}} and {{dominant_side_label}} explain why this type won, while {{close_axis_label}} explains why you do not always feel like the stereotype of it.',
-        'context_sensitive' => 'Your result is not vague; it is context-sensitive because several axes sit close to the middle at once. {{dominant_axis_label}} and {{dominant_side_label}} still decide the main type, but {{close_axis_label}} strongly affects which nearby type you can resemble in different situations.',
+        'stable' => 'The core directions are more separated in this response set; this does not establish stability across contexts or over time. Check both fitting and non-fitting examples.',
+        'mixed' => 'Some directions are clearer in this response set while others sit closer to the midpoint. Preserve uncertainty rather than treating the current code as a fixed personality.',
+        'context_sensitive' => 'Several axes are near the midpoint in this response set. The current code organizes the result rather than proving a stable preference; compare neighboring directions and record counterexamples.',
     ];
 
     /**
@@ -639,16 +641,16 @@ final class MbtiResultPersonalizationService
      */
     private const DEFAULT_MISUNDERSTANDING_FIX_TEMPLATES = [
         'why_this_type' => [
-            'boundary' => '别人之所以会误读你，往往不是因为主类型不成立，而是{{close_axis_label}}和{{identity_clause}}让你在外显风格上保留了更多弹性。你看起来不像刻板印象里的{{dominant_side_label}}，但主判断还是会回到{{dominant_side_label}}。',
-            'clear' => '你会被误读成别的样子，常常是因为{{close_axis_label}}仍会在不同情境里借用另一侧节奏；但主类型成立的真正原因，是{{dominant_axis_label}}上的{{dominant_side_label}}已经形成稳定拉力。{{identity_clause}}',
-            'strong' => '你会被误读成别的样子，通常是因为{{dominant_axis_label}}上的{{dominant_side_label}}已经很强，但{{close_axis_label}}仍会让外显节奏带着一点另一侧的影子。主类型成立，不代表表达方式只有一种。{{identity_clause}}',
-            'very_strong' => '你会被误读成别的样子，更多是因为{{dominant_axis_label}}上的{{dominant_side_label}}太强，以至于别人会把你的局部切换当成整体变化。{{close_axis_label}}解释的是外显波动，不是主类型失效。{{identity_clause}}',
+            'boundary' => '不同的自我描述可能与情境、已学会的行为或措辞有关。请比较{{dominant_side_label}}及另一侧的具体例子；这份结果不证明你最后总会回到同一判断方式。{{identity_clause}}',
+            'clear' => '不同的自我描述可能与情境、已学会的行为或措辞有关。请比较{{dominant_side_label}}及另一侧的具体例子；这份结果不证明你最后总会回到同一判断方式。{{identity_clause}}',
+            'strong' => '不同的自我描述可能与情境、已学会的行为或措辞有关。请比较{{dominant_side_label}}及另一侧的具体例子；这份结果不证明你最后总会回到同一判断方式。{{identity_clause}}',
+            'very_strong' => '不同的自我描述可能与情境、已学会的行为或措辞有关。请比较{{dominant_side_label}}及另一侧的具体例子；这份结果不证明你最后总会回到同一判断方式。{{identity_clause}}',
         ],
         'adjacent_type_contrast' => [
-            'boundary' => '最容易把你看成{{neighbor_type}}，是因为{{axis_label}}离中线太近，外显风格会借用{{opposite_side_label}}的节奏；但真正的差异在于你最终仍会回到{{side_label}}做主判断。{{identity_clause}}',
-            'clear' => '最容易把你看成{{neighbor_type}}，通常不是因为结果错了，而是{{axis_label}}上的{{side_label}}还没有把外显节奏完全锁死，所以你看起来会借一点{{opposite_side_label}}的影子。真正拉开差异的是最后你仍然会回到{{side_label}}来收尾。{{identity_clause}}',
-            'strong' => '如果只看最接近边界的外显部分，别人最容易把你看成{{neighbor_type}}。原因不是你“测错了”，而是{{axis_label}}上的{{side_label}}会在表达上短暂借用{{opposite_side_label}}的节奏。真正区分你们的，不是表面像不像，而是你最终仍会回到{{side_label}}来做主判断和收尾。{{identity_clause}}',
-            'very_strong' => '你最容易被看成{{neighbor_type}}的时刻，往往来自{{axis_label}}上的{{side_label}}已经很强，却仍保留了足够的近边界弹性，让外显风格偶尔像{{opposite_side_label}}。但真正决定你是谁的，仍然是最后回到{{side_label}}的那一步。{{identity_clause}}',
+            'boundary' => '{{neighbor_type}}只是一个比较入口，不是别人一定会把你看成的类型。请比较{{side_label}}与{{opposite_side_label}}的具体例子，不从外在相似推断内在判断。{{identity_clause}}',
+            'clear' => '{{neighbor_type}}只是一个比较入口，不是别人一定会把你看成的类型。请比较{{side_label}}与{{opposite_side_label}}的具体例子，不从外在相似推断内在判断。{{identity_clause}}',
+            'strong' => '{{neighbor_type}}只是一个比较入口，不是别人一定会把你看成的类型。请比较{{side_label}}与{{opposite_side_label}}的具体例子，不从外在相似推断内在判断。{{identity_clause}}',
+            'very_strong' => '{{neighbor_type}}只是一个比较入口，不是别人一定会把你看成的类型。请比较{{side_label}}与{{opposite_side_label}}的具体例子，不从外在相似推断内在判断。{{identity_clause}}',
         ],
     ];
 
@@ -657,43 +659,43 @@ final class MbtiResultPersonalizationService
      */
     private const DEFAULT_MISUNDERSTANDING_FIX_TEMPLATES_EN = [
         'why_this_type' => [
-            'boundary' => 'People misread you not because the core type is invalid, but because {{close_axis_label}} and {{identity_clause}} keep more elasticity in your surface style. You do not look like a stereotype of {{dominant_side_label}}, but your final judgment still returns there.',
-            'clear' => 'You can be misread because {{close_axis_label}} still borrows the rhythm of the opposite side across contexts; the real reason the core type stands is that {{dominant_axis_label}} and {{dominant_side_label}} already create a stable pull. {{identity_clause}}',
-            'strong' => 'You can be misread because {{dominant_axis_label}} and {{dominant_side_label}} are already strong, while {{close_axis_label}} still lets your surface rhythm borrow some of the opposite side. The core type still stands, but expression does not collapse into one shape.',
-            'very_strong' => 'You can be misread because {{dominant_axis_label}} and {{dominant_side_label}} are so strong that people treat local switching as a full type change. {{close_axis_label}} explains surface fluctuation, not a failed core type. {{identity_clause}}',
+            'boundary' => 'A different self-description can reflect context, learned behavior or wording. Compare concrete examples of {{dominant_side_label}} and the opposite approach; this result does not establish that your judgment always returns to the same side. {{identity_clause}}',
+            'clear' => 'A different self-description can reflect context, learned behavior or wording. Compare concrete examples of {{dominant_side_label}} and the opposite approach; this result does not establish that your judgment always returns to the same side. {{identity_clause}}',
+            'strong' => 'A different self-description can reflect context, learned behavior or wording. Compare concrete examples of {{dominant_side_label}} and the opposite approach; this result does not establish that your judgment always returns to the same side. {{identity_clause}}',
+            'very_strong' => 'A different self-description can reflect context, learned behavior or wording. Compare concrete examples of {{dominant_side_label}} and the opposite approach; this result does not establish that your judgment always returns to the same side. {{identity_clause}}',
         ],
         'adjacent_type_contrast' => [
-            'boundary' => 'The easiest mistake is to read you as {{neighbor_type}}, because {{axis_label}} sits close enough to the middle that your surface style borrows the rhythm of {{opposite_side_label}}; the real difference is that you still return to {{side_label}} for final judgment. {{identity_clause}}',
-            'clear' => 'The easiest mistake is to read you as {{neighbor_type}}, usually not because the result is wrong but because the {{side_label}} on {{axis_label}} has not fully locked your surface rhythm, so you can look like you are borrowing a bit of {{opposite_side_label}}. The real split is that you still return to {{side_label}} to close the loop. {{identity_clause}}',
-            'strong' => 'If someone only looks at your closest-boundary surface, they are most likely to read you as {{neighbor_type}}. That is not because the result is wrong; it is because the {{side_label}} on {{axis_label}} may borrow the rhythm of {{opposite_side_label}} in expression. The real difference is that you still return to {{side_label}} for judgment and closure. {{identity_clause}}',
-            'very_strong' => 'The moments when you are most likely to be read as {{neighbor_type}} come from a strong {{side_label}} on {{axis_label}} that still keeps enough near-boundary elasticity to look a bit like {{opposite_side_label}}. What still decides who you are, though, is the final return to {{side_label}}. {{identity_clause}}',
+            'boundary' => '{{neighbor_type}} is a comparison prompt, not a type that others necessarily see in you. Compare concrete examples of {{side_label}} and {{opposite_side_label}} rather than inferring inner judgment from outward resemblance. {{identity_clause}}',
+            'clear' => '{{neighbor_type}} is a comparison prompt, not a type that others necessarily see in you. Compare concrete examples of {{side_label}} and {{opposite_side_label}} rather than inferring inner judgment from outward resemblance. {{identity_clause}}',
+            'strong' => '{{neighbor_type}} is a comparison prompt, not a type that others necessarily see in you. Compare concrete examples of {{side_label}} and {{opposite_side_label}} rather than inferring inner judgment from outward resemblance. {{identity_clause}}',
+            'very_strong' => '{{neighbor_type}} is a comparison prompt, not a type that others necessarily see in you. Compare concrete examples of {{side_label}} and {{opposite_side_label}} rather than inferring inner judgment from outward resemblance. {{identity_clause}}',
         ],
     ];
 
-    private const DEFAULT_CLOSE_CALL_AXIS_TEMPLATE = '在{{axis_label}}上，你最后仍偏向{{side_label}}，但和另一侧只拉开了{{delta}}个点差。也就是说，这条轴更像“近身拉扯”而不是绝对定型：熟悉情境下你常会先用{{side_label}}，而高压、误解或角色变化时，{{opposite_side_label}}会很快进场补位。';
+    private const DEFAULT_CLOSE_CALL_AXIS_TEMPLATE = '在{{axis_label}}上，本次所选方向{{side_label}}为{{percent}}%，距50%中点{{delta}}个百分点。这个数值不是与另一侧的分差，也不证明稳定偏好或情境切换。';
 
-    private const DEFAULT_CLOSE_CALL_AXIS_TEMPLATE_EN = 'On {{axis_label}}, you still end up leaning toward {{side_label}}, but the margin is only {{delta}} points. This axis behaves more like a live tension than a fixed identity: in familiar situations you may start with {{side_label}}, while pressure, misunderstanding, or role shifts can quickly pull in {{opposite_side_label}} as a correction.';
+    private const DEFAULT_CLOSE_CALL_AXIS_TEMPLATE_EN = 'On {{axis_label}}, the selected {{side_label}} direction is {{percent}}%, {{delta}} percentage points from the 50% midpoint. This is not the gap from the opposite side and does not establish a stable preference or switching across contexts.';
 
-    private const DEFAULT_ADJACENT_TYPE_CONTRAST_TEMPLATE = '如果只看最接近边界的部分，别人最容易把你看成{{neighbor_type}}。原因不是你“测错了”，而是{{axis_label}}离中线太近，导致你在外显风格上经常会借用{{opposite_side_label}}那一面的节奏。真正区分你们的，不是表面像不像，而是你最终仍会回到{{side_label}}来做主判断和收尾。';
+    private const DEFAULT_ADJACENT_TYPE_CONTRAST_TEMPLATE = '{{neighbor_type}}是跨过{{axis_label}}当前归类方向后可比较的标签。请核对{{side_label}}和{{opposite_side_label}}的具体例子；相似感不证明其中一个标签就是固定的你。';
 
-    private const DEFAULT_ADJACENT_TYPE_CONTRAST_TEMPLATE_EN = 'If someone only notices the closest-call part of your profile, they are most likely to read you as {{neighbor_type}}. That does not mean the result is wrong; it means {{axis_label}} sits close enough to the middle that your surface style often borrows the rhythm of {{opposite_side_label}}. The real difference is that your final judgment and closure still return to {{side_label}}.';
+    private const DEFAULT_ADJACENT_TYPE_CONTRAST_TEMPLATE_EN = '{{neighbor_type}} is a comparison label reached by crossing the current classification direction on {{axis_label}}. Check concrete examples of {{side_label}} and {{opposite_side_label}}; resemblance does not establish either label as a fixed identity.';
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_STABILITY_EXPLANATION_TEMPLATES = [
-        'stable' => '这一份结果整体比较稳定。主类型不会因为普通情境波动就频繁改写，真正需要留意的，是在{{close_axis_label}}上什么时候需要主动给另一侧留一点空间。',
-        'mixed' => '这一份结果整体属于“主类型明确，但局部会随场景切换”。你不是不稳定，而是有几条轴会根据任务、人际和压力负荷切换表达入口。',
-        'context_sensitive' => '这一份结果最需要读成“情境敏感型稳定”，而不是简单稳定或简单摇摆。主类型仍然成立，但近边界轴太多时，你在不同场景里会更明显地表现出不同的切换模式。',
+        'stable' => '本次核心轴的方向分离相对清晰；这不证明跨情境或长期稳定。请同时核对符合和不符合的实际例子。',
+        'mixed' => '本次部分轴的方向较清晰，另一些更接近中点。保留不确定性，不把当前代码当作固定人格。',
+        'context_sensitive' => '本次有多条轴接近中点。当前代码用于整理结果，不证明稳定偏好；可以比较相邻方向并记录反例。',
     ];
 
     /**
      * @var array<string, string>
      */
     private const DEFAULT_STABILITY_EXPLANATION_TEMPLATES_EN = [
-        'stable' => 'This result is comparatively stable overall. The core type should not rewrite itself under ordinary context shifts; the real thing to watch is when {{close_axis_label}} needs deliberate room for the opposite side.',
-        'mixed' => 'This result is best read as a clear type with local context shifts. You are not unstable; a few axes simply change entry points across task, relationship, and pressure conditions.',
-        'context_sensitive' => 'This result is best read as context-sensitive stability rather than simple stability or simple wavering. The main type still holds, but several near-boundary axes make your switching pattern more visible across situations.',
+        'stable' => 'The core directions are more separated in this response set; this does not establish stability across contexts or over time. Check both fitting and non-fitting examples.',
+        'mixed' => 'Some directions are clearer in this response set while others sit closer to the midpoint. Preserve uncertainty rather than treating the current code as a fixed personality.',
+        'context_sensitive' => 'Several axes are near the midpoint in this response set. The current code organizes the result rather than proving a stable preference; compare neighboring directions and record counterexamples.',
     ];
 
     /**
@@ -701,16 +703,16 @@ final class MbtiResultPersonalizationService
      */
     private const DEFAULT_STABILITY_REFRAME_TEMPLATES = [
         'stable' => [
-            'zh-CN' => '稳定性不是“一直一样”，而是你在{{close_axis_label}}附近仍能保持主类型的回弹能力。{{identity_clause}}',
-            'en' => 'Stability is not “staying the same”; it is the ability to bounce back to the core type even around {{close_axis_label}}. {{identity_clause}}',
+            'zh-CN' => '本次核心轴的方向分离相对清晰；这不证明跨情境或长期稳定。请同时核对符合和不符合的实际例子。',
+            'en' => 'The core directions are more separated in this response set; this does not establish stability across contexts or over time. Check both fitting and non-fitting examples.',
         ],
         'mixed' => [
-            'zh-CN' => '你的稳定更像“可校准”：主类型会保留，但压力一上来，你会在{{close_axis_label}}和{{identity_clause}}之间重新分配注意力与恢复资源。',
-            'en' => 'Your stability is more like something you can recalibrate: the core type remains, but under pressure you redistribute attention and recovery resources between {{close_axis_label}} and {{identity_clause}}.',
+            'zh-CN' => '本次部分轴的方向较清晰，另一些更接近中点。保留不确定性，不把当前代码当作固定人格。',
+            'en' => 'Some directions are clearer in this response set while others sit closer to the midpoint. Preserve uncertainty rather than treating the current code as a fixed personality.',
         ],
         'context_sensitive' => [
-            'zh-CN' => '你是情境敏感型稳定：不是不稳，而是面对不同压力源时会切换不同的恢复入口。最重要的是把这种切换看成可复用的恢复机制，而不是自我怀疑。{{identity_clause}}',
-            'en' => 'You are context-sensitive in a stable way: not unstable, but switching recovery entry points as different pressure sources appear. The key is to treat that switching as a reusable recovery mechanism, not as self-doubt. {{identity_clause}}',
+            'zh-CN' => '本次有多条轴接近中点。当前代码用于整理结果，不证明稳定偏好；可以比较相邻方向并记录反例。',
+            'en' => 'Several axes are near the midpoint in this response set. The current code organizes the result rather than proving a stable preference; compare neighboring directions and record counterexamples.',
         ],
     ];
 
@@ -719,16 +721,16 @@ final class MbtiResultPersonalizationService
      */
     private const DEFAULT_STABILITY_REFRAME_TEMPLATES_EN = [
         'stable' => [
-            'zh-CN' => '稳定性不是“一直一样”，而是你在{{close_axis_label}}附近仍能保持主类型的回弹能力。{{identity_clause}}',
-            'en' => 'Stability is not “staying the same”; it is the ability to bounce back to the core type even around {{close_axis_label}}. {{identity_clause}}',
+            'zh-CN' => '本次核心轴的方向分离相对清晰；这不证明跨情境或长期稳定。请同时核对符合和不符合的实际例子。',
+            'en' => 'The core directions are more separated in this response set; this does not establish stability across contexts or over time. Check both fitting and non-fitting examples.',
         ],
         'mixed' => [
-            'zh-CN' => '你的稳定更像“可校准”：主类型会保留，但压力一上来，你会在{{close_axis_label}}和{{identity_clause}}之间重新分配注意力与恢复资源。',
-            'en' => 'Your stability is more like something you can recalibrate: the core type remains, but under pressure you redistribute attention and recovery resources between {{close_axis_label}} and {{identity_clause}}.',
+            'zh-CN' => '本次部分轴的方向较清晰，另一些更接近中点。保留不确定性，不把当前代码当作固定人格。',
+            'en' => 'Some directions are clearer in this response set while others sit closer to the midpoint. Preserve uncertainty rather than treating the current code as a fixed personality.',
         ],
         'context_sensitive' => [
-            'zh-CN' => '你是情境敏感型稳定：不是不稳，而是面对不同压力源时会切换不同的恢复入口。最重要的是把这种切换看成可复用的恢复机制，而不是自我怀疑。{{identity_clause}}',
-            'en' => 'You are context-sensitive in a stable way: not unstable, but switching recovery entry points as different pressure sources appear. The key is to treat that switching as a reusable recovery mechanism, not as self-doubt. {{identity_clause}}',
+            'zh-CN' => '本次有多条轴接近中点。当前代码用于整理结果，不证明稳定偏好；可以比较相邻方向并记录反例。',
+            'en' => 'Several axes are near the midpoint in this response set. The current code organizes the result rather than proving a stable preference; compare neighboring directions and record counterexamples.',
         ],
     ];
 
@@ -835,6 +837,7 @@ final class MbtiResultPersonalizationService
 
         $personalization = $this->userStateOrchestrationService->withBaseline([
             'schema_version' => 'mbti.personalization.phase9e.v1',
+            'interpretation_copy_version' => self::INTERPRETATION_COPY_VERSION,
             'locale' => $locale,
             'type_code' => $typeCode,
             'identity' => $identity,
@@ -953,9 +956,165 @@ final class MbtiResultPersonalizationService
             'locale' => $locale,
         ];
         $dynamicDoc = $this->loadDynamicSectionsDoc($resolvedContext, $locale);
+        $personalization = $this->refreshInterpretationCopy($personalization, $dynamicDoc, $locale);
         $personalization = $this->attachToneLayer($personalization, $resolvedContext, $dynamicDoc, $locale);
 
         return $this->attachCtaBundle($personalization, $resolvedContext, $locale);
+    }
+
+    /** Refresh display copy from saved scores without rewriting the stored report or user state. */
+    private function refreshInterpretationCopy(array $personalization, ?array $doc = null, ?string $locale = null): array
+    {
+        if (array_key_exists('interpretation_copy_version', $personalization)
+            || ($personalization['schema_version'] ?? null) !== 'mbti.personalization.phase9e.v1') {
+            return $personalization;
+        }
+        $axes = $personalization['axis_vector'] ?? null;
+        if (! is_array($axes) || ! is_array($personalization['sections'] ?? null)
+            || array_diff(self::AXIS_ORDER, array_keys($axes)) !== []) {
+            return $personalization;
+        }
+        foreach (self::AXIS_ORDER as $code) {
+            if (! is_array($axes[$code]) || ! is_numeric($axes[$code]['pct'] ?? null)
+                || ! is_numeric($axes[$code]['delta'] ?? null) || ! is_string($axes[$code]['side'] ?? null)
+                || ! is_string($axes[$code]['band'] ?? null) || ! is_string($axes[$code]['axis_label'] ?? null)
+                || ! is_string($axes[$code]['side_label'] ?? null)) {
+                return $personalization;
+            }
+        }
+        $validAxis = static function (mixed $axis) use ($axes): bool {
+            if (! is_array($axis) || ! isset($axes[$axis['axis'] ?? ''])) {
+                return false;
+            }
+            $source = $axes[$axis['axis']];
+            foreach (['pct', 'delta', 'side', 'band', 'axis_label', 'side_label'] as $field) {
+                if (! array_key_exists($field, $axis) || $axis[$field] !== $source[$field]) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+        if (array_diff(self::TARGET_SECTIONS, array_keys($personalization['sections'])) !== []) {
+            return $personalization;
+        }
+        foreach (self::TARGET_SECTIONS as $key) {
+            $section = $personalization['sections'][$key];
+            if (! is_array($section) || ! $validAxis($section['primary_axis'] ?? null)
+                || ! is_array($section['blocks'] ?? null)
+                || (isset($section['support_axis']) && ! $validAxis($section['support_axis']))) {
+                return $personalization;
+            }
+            foreach ($section['blocks'] as $block) {
+                if (! is_array($block) || ! is_string($block['id'] ?? null)
+                    || ! is_string($block['kind'] ?? null) || ! is_string($block['text'] ?? null)) {
+                    return $personalization;
+                }
+            }
+        }
+        $scenes = $personalization['scene_fingerprint'] ?? null;
+        if (! is_array($scenes) || array_diff(self::SCENE_FINGERPRINT_ORDER, array_keys($scenes)) !== []) {
+            return $personalization;
+        }
+        foreach (self::SCENE_FINGERPRINT_ORDER as $key) {
+            $scene = $scenes[$key];
+            if (! is_array($scene) || ! $validAxis($scene['primary_axis'] ?? null)
+                || (isset($scene['support_axis']) && ! $validAxis($scene['support_axis']))
+                || ! is_string($scene['summary'] ?? null)) {
+                return $personalization;
+            }
+        }
+        foreach (['work_style_summary', 'action_plan_summary', 'explainability_summary'] as $key) {
+            if (! is_string($personalization[$key] ?? null)) {
+                return $personalization;
+            }
+        }
+        $locale = $this->normalizeLocale($locale ?? (string) ($personalization['locale'] ?? ''));
+        $doc ??= $this->loadDynamicSectionsDoc([
+            'pack_id' => (string) ($personalization['pack_id'] ?? ''),
+            'dir_version' => (string) ($personalization['content_package_dir'] ?? ''),
+        ], $locale);
+        if ($locale === 'zh-CN' && $doc === []) {
+            return $personalization;
+        }
+        $identity = (string) ($personalization['identity'] ?? '');
+        $closeCalls = $this->resolveCloseCallAxes($axes, $locale);
+        $personalization['close_call_axes'] = $closeCalls;
+        foreach (self::SCENE_FINGERPRINT_ORDER as $key) {
+            $scene = $scenes[$key];
+            $text = $this->resolveSceneFingerprintText($doc, (string) $key, $locale, $axes,
+                $scene['primary_axis'], is_array($scene['support_axis'] ?? null) ? $scene['support_axis'] : null,
+                $identity, $this->normalizeStringList($scene['boundary_axes'] ?? []));
+            $scene['summary'] = $text;
+            $scenes[$key] = $scene;
+        }
+        $personalization['scene_fingerprint'] = $scenes;
+        if (is_string($personalization['work_style_summary'] ?? null) && is_string(data_get($scenes, 'work.summary'))) {
+            $personalization['work_style_summary'] = data_get($scenes, 'work.summary');
+        }
+        $bucket = $this->resolveToneStabilityBucket($personalization);
+        $personalization['action_plan_summary'] = $this->buildActionPlanSummary($scenes, $bucket, $doc, $locale);
+        $summary = $this->resolveTemplate(data_get($doc, 'explainability_summary_templates.'.$bucket), $locale,
+            $locale === 'zh-CN' ? (self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES[$bucket] ?? self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES['mixed'])
+                : (self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES_EN[$bucket] ?? self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES_EN['mixed']));
+        $personalization['explainability_summary'] = $this->renderTemplate($summary, [
+            'close_axis_label' => (string) ($closeCalls[0]['axis_label'] ?? ''),
+            'identity_clause' => $this->shortIdentityClause($identity, $locale),
+        ]);
+        foreach ($personalization['sections'] as $key => &$section) {
+            if (! is_array($section) || ! is_array($section['primary_axis'] ?? null) || ! is_array($section['blocks'] ?? null)) {
+                continue;
+            }
+            $primary = $section['primary_axis'];
+            $sceneKey = (string) ($section['scene_key'] ?? self::SECTION_SCENE_MAP[$key] ?? 'overview');
+            $tone = (string) ($section['tone_mode'] ?? '');
+            $section['close_call_axes'] = array_values(array_filter((array) ($section['close_call_axes'] ?? []),
+                fn ($axis): bool => is_array($axis) && $this->isExplainabilityCloseCall($axis)));
+            $kept = [];
+            foreach ($section['blocks'] as $block) {
+                if (! is_array($block)) {
+                    continue;
+                }
+                $kind = (string) ($block['kind'] ?? '');
+                $text = '';
+                if ($key === 'traits.close_call_axes' && $kind === 'borderline_axis') {
+                    $id = (string) ($block['id'] ?? '');
+                    $matches = array_values(array_filter($closeCalls, static fn (array $axis): bool => str_contains($id, '.borderline_axis.'.$axis['axis'].'.')));
+                    if ($matches === []) {
+                        continue;
+                    }
+                    $text = $this->resolveCloseCallAxisText($doc, $locale, $matches[0]);
+                } elseif ($kind === 'axis_strength') {
+                    $text = $this->resolveAxisStrengthText($doc, $this->templateGroupForSection((string) $key, $sceneKey), (string) ($primary['band'] ?? 'clear'), $locale, $primary);
+                } elseif ($kind === 'identity') {
+                    $text = $this->resolveIdentityText($doc, $identity, $locale);
+                } elseif ($kind === 'boundary') {
+                    $axis = (string) (($section['boundary_axes'] ?? [])[0] ?? '');
+                    if (isset($axes[$axis])) {
+                        $text = $this->resolveBoundaryNarrativeText($doc, $sceneKey, $axis, $locale, $axes, $primary);
+                    }
+                } elseif ($kind === $this->sceneBlockKind($sceneKey, (string) $key)) {
+                    $text = $this->resolveSceneText($doc, $this->sceneTemplateKeyForSection((string) $key, $sceneKey), $locale, $primary, (string) $key, $tone);
+                }
+                $toned = $this->resolveToneAdjustedText($doc, $locale, (string) $key, $kind, $tone, $section, $personalization);
+                if ($toned !== '') {
+                    $text = $toned;
+                }
+                if ($text !== '') {
+                    $block['text'] = $text;
+                }
+                $kept[] = $block;
+            }
+            $section['blocks'] = $kept;
+            if ($key === 'traits.close_call_axes') {
+                $ids = array_column($kept, 'id');
+                $section['selected_blocks'] = array_values(array_filter((array) ($section['selected_blocks'] ?? []), static fn ($id): bool => in_array($id, $ids, true)));
+            }
+        }
+        unset($section);
+        $personalization['interpretation_copy_version'] = self::INTERPRETATION_COPY_VERSION;
+
+        return $personalization;
     }
 
     /**
@@ -1473,6 +1632,8 @@ final class MbtiResultPersonalizationService
         if ($personalization === []) {
             return $projection;
         }
+
+        $personalization = $this->refreshInterpretationCopy($personalization);
 
         $projection['_meta'] = is_array($projection['_meta'] ?? null) ? $projection['_meta'] : [];
         $projection['_meta']['personalization'] = $personalization;
@@ -3059,7 +3220,10 @@ final class MbtiResultPersonalizationService
      */
     private function resolveCloseCallAxes(array $axisVector, string $locale): array
     {
-        return array_slice($this->resolveExplainabilityAxes($axisVector, $locale), 0, 2);
+        return array_slice(array_values(array_filter(
+            $this->resolveExplainabilityAxes($axisVector, $locale),
+            fn (array $axis): bool => $this->isExplainabilityCloseCall($axis),
+        )), 0, 2);
     }
 
     /**
@@ -3183,6 +3347,12 @@ final class MbtiResultPersonalizationService
         array $closeCallAxes,
         string $toneMode = ''
     ): string {
+        if ((int) ($primaryAxis['pct'] ?? -1) === 50) {
+            return $locale === 'zh-CN'
+                ? '本次核心轴持平时，代码只沿用预设归类规则；不能把该方向解释为稳定主导偏好。请比较两侧和相邻类型的具体例子。'
+                : 'When the core axis is tied in this response set, the code follows the preset classification rule; it does not establish a stable dominant preference. Compare examples from both sides and neighboring types.';
+        }
+
         $band = trim((string) ($primaryAxis['band'] ?? 'clear'));
         $template = $this->resolveTemplate(
             $this->resolveToneTemplateNode($doc, 'traits.why_this_type', 'why_this_type', $toneMode)
@@ -3205,6 +3375,12 @@ final class MbtiResultPersonalizationService
 
     private function resolveCloseCallAxisText(array $doc, string $locale, array $axis): string
     {
+        if ((int) ($axis['pct'] ?? -1) === 50) {
+            return $locale === 'zh-CN'
+                ? '在'.trim((string) ($axis['axis_label'] ?? '')).'上，本次两侧持平。代码沿用预设归类规则，不证明偏好方向；请同时比较两侧的具体经历。'
+                : 'On '.trim((string) ($axis['axis_label'] ?? '')).', the two directions are tied in this response set. The code follows the preset classification rule, not an established preference; compare examples from both sides.';
+        }
+
         $template = $this->resolveTemplate(
             data_get($doc, 'close_call_axis_templates.default'),
             $locale,
@@ -3216,6 +3392,7 @@ final class MbtiResultPersonalizationService
             'side_label' => trim((string) ($axis['side_label'] ?? '')),
             'opposite_side_label' => trim((string) ($axis['opposite_side_label'] ?? '')),
             'delta' => (string) ($axis['delta'] ?? ''),
+            'percent' => (string) ($axis['pct'] ?? ''),
         ]);
     }
 
@@ -3231,6 +3408,12 @@ final class MbtiResultPersonalizationService
         array $closeCallAxes,
         string $toneMode = ''
     ): string {
+        if ($closeCallAxes === []) {
+            return $locale === 'zh-CN'
+                ? '本次没有达到现有近分条件的轴。相邻标签仍可用于比较，但不能据此声称你接近中点或经常表现成另一类型。'
+                : 'No axis meets the existing close-call condition in this response set. Neighboring labels can still support comparison, but this does not imply a midpoint score or that you often behave like another type.';
+        }
+
         $template = $this->resolveTemplate(
             $this->resolveToneTemplateNode($doc, 'traits.adjacent_type_contrast', 'adjacent_type_contrast', $toneMode)
                 ?? data_get($doc, 'adjacent_type_contrast_templates.default'),
@@ -3889,14 +4072,14 @@ final class MbtiResultPersonalizationService
     {
         if ($identity === 'A') {
             return $locale === 'zh-CN'
-                ? 'A 身份层让这个场景里的你更稳、更不容易被短期波动带偏。'
-                : 'The A identity layer makes this scene feel steadier and less reactive to short-term fluctuation.';
+                ? 'A是FermatMind附加扩展中的一个方向。请核对自己面对评价和反馈的具体经历，不由此推断恢复速度、抗压或工作能力。'
+                : 'A is one direction in FermatMind’s additional extension. Check it against actual experiences of evaluation and feedback; it does not establish recovery speed, coping ability or work ability.';
         }
 
         if ($identity === 'T') {
             return $locale === 'zh-CN'
-                ? 'T 身份层会放大你对反馈、细节和结果波动的感知。'
-                : 'The T identity layer heightens your sensitivity to feedback, detail, and outcome variance.';
+                ? 'T是FermatMind附加扩展中的一个方向。请核对自我质疑和反馈敏感的具体经历，不由此推断自我觉察、能力或健康水平。'
+                : 'T is one direction in FermatMind’s additional extension. Check examples of self-questioning and feedback sensitivity; it does not establish self-awareness, ability or health.';
         }
 
         return '';
@@ -3945,6 +4128,12 @@ final class MbtiResultPersonalizationService
      */
     private function resolveAxisStrengthText(array $doc, string $sectionKey, string $band, string $locale, array $axis): string
     {
+        if ((int) ($axis['pct'] ?? -1) === 50) {
+            return $locale === 'zh-CN'
+                ? '本次两侧持平，未形成清晰方向。代码沿用预设归类规则，不代表稳定偏好。'
+                : 'The two directions are tied in this response set. The code follows the preset classification rule rather than an established stable preference.';
+        }
+
         $fallbackTemplate = $locale === 'zh-CN'
             ? (self::DEFAULT_AXIS_STRENGTH_TEMPLATES["{$sectionKey}.{$band}"] ?? '')
             : (self::DEFAULT_AXIS_STRENGTH_TEMPLATES_EN["{$sectionKey}.{$band}"] ?? '');
