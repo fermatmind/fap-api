@@ -18,6 +18,9 @@ final class RiasecEnglishReportSourceContract
 
     private const SURFACE_DIGEST = 'e0f1275beaf15a9b53fbde7a96c23c178bf99e8983e2775eebbf557a5eb093a3';
 
+    // Preserve immutable 1.9 snapshots while admitting the reviewed low-band copy.
+    private const REVISED_SURFACE_DIGEST = '4583f96ec3ae19abd4038af5515eab11ee3c0cb099fcb8fda6370db9d76e23e2';
+
     /** @param array<string,mixed> $assets */
     public static function assertSurface(array $assets): void
     {
@@ -26,7 +29,7 @@ final class RiasecEnglishReportSourceContract
             || ($surface['schema_version'] ?? null) !== 'riasec.report_surface_copy.v1'
             || ($surface['locale'] ?? null) !== 'en'
             || ($surface['frontend_fallback_allowed'] ?? true) !== false
-            || ! hash_equals(self::SURFACE_DIGEST, self::digest($surface))) {
+            || ! in_array(self::digest($surface), [self::SURFACE_DIGEST, self::REVISED_SURFACE_DIGEST], true)) {
             throw new RuntimeException('RIASEC_EN_REPORT_SURFACE_SOURCE_INVALID');
         }
     }

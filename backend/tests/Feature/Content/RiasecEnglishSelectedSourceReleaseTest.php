@@ -106,6 +106,58 @@ final class RiasecEnglishSelectedSourceReleaseTest extends TestCase
         }
     }
 
+    public function test_low_absolute_interest_is_not_described_as_a_low_rank_even_for_the_top_dimension(): void
+    {
+        foreach (['en', 'zh-CN'] as $locale) {
+            foreach (['RIA', 'SEC'] as $code) {
+                $scores = array_fill_keys(['R', 'I', 'A', 'S', 'E', 'C'], 15);
+                foreach (str_split($code) as $index => $dimension) {
+                    $scores[$dimension] = [33, 30, 27][$index];
+                }
+                $result = new Result(['scale_code' => 'RIASEC', 'type_code' => $code, 'scores_pct' => $scores,
+                    'result_json' => ['top_code' => $code, 'primary_type' => $code[0], 'secondary_type' => $code[1], 'tertiary_type' => $code[2],
+                        'form_code' => 'riasec_60', 'answer_count' => 60, 'quality_grade' => 'A', 'quality_flags' => []]]);
+                $projection = app(RiasecPublicProjectionService::class)->buildV2FromResult($result, $locale, true);
+                $highlights = $projection['result_summary_v1']['highlights'];
+                $this->assertSame(str_split($code), array_column($highlights, 'dimension_code'));
+                foreach ($highlights as $highlight) {
+                    $this->assertStringContainsString($locale === 'en' ? 'lower range for this form' : '本表单较低范围', $highlight['text']);
+                }
+                $this->assertSame(33, $scores[$code[0]]);
+            }
+        }
+    }
+
+    public function test_visible_share_copy_discloses_the_existing_code_and_scores(): void
+    {
+        $copy = app(RiasecLifecycleCopyService::class)->runtimeLifecycleCopyContract(true, 'en');
+        foreach (['share_safe_card', 'low_quality_share'] as $key) {
+            $surface = collect($copy['surfaces'])->firstWhere('surface', $key);
+            $this->assertStringContainsString('Holland code and six 0–100 interest', $surface['copy']);
+            $this->assertStringContainsString('comfortable making', $surface['copy']);
+            $this->assertFalse($surface['raw_scores_allowed']);
+            $this->assertFalse($surface['raw_feedback_allowed']);
+        }
+        $this->assertStringContainsString('six 0–100 interest dimension scores', $copy['faq_items'][17]['a']);
+    }
+
+    public function test_reviewed_surface_keeps_immutable_legacy_copy_and_rejects_other_edits(): void
+    {
+        $assets = app(Compiler::class)->compile()['payload']['assets'];
+        $legacy = $assets;
+        $legacy[\App\Services\Riasec\RiasecEnglishReportSourceContract::SURFACE_ASSET]['result_summary']['dimension_bands']['R']['low'] = 'Practical work ranks lower here; a short task can still clarify the experience.';
+        $legacy[\App\Services\Riasec\RiasecEnglishReportSourceContract::SURFACE_ASSET]['result_summary']['dimension_bands']['I']['low'] = 'Analysis ranks lower here; notice whether a concrete question still draws you into investigation.';
+        $legacy[\App\Services\Riasec\RiasecEnglishReportSourceContract::SURFACE_ASSET]['result_summary']['dimension_bands']['A']['low'] = 'Creative expression ranks lower here; a lightweight piece can clarify your response.';
+        $legacy[\App\Services\Riasec\RiasecEnglishReportSourceContract::SURFACE_ASSET]['result_summary']['dimension_bands']['S']['low'] = 'Helping activity ranks lower here; distinguish sustained interaction from support in specific settings.';
+        $legacy[\App\Services\Riasec\RiasecEnglishReportSourceContract::SURFACE_ASSET]['result_summary']['dimension_bands']['E']['low'] = 'Influence activity ranks lower here; notice whether contributing ideas feels better than leading.';
+        $legacy[\App\Services\Riasec\RiasecEnglishReportSourceContract::SURFACE_ASSET]['result_summary']['dimension_bands']['C']['low'] = 'Routine structure ranks lower here; separate repetition from a genuine need for clarity.';
+        \App\Services\Riasec\RiasecEnglishReportSourceContract::assertSurface($assets);
+        \App\Services\Riasec\RiasecEnglishReportSourceContract::assertSurface($legacy);
+        $legacy[\App\Services\Riasec\RiasecEnglishReportSourceContract::SURFACE_ASSET]['result_summary']['boundary'] = 'Unreviewed change';
+        $this->expectExceptionMessage('RIASEC_EN_REPORT_SURFACE_SOURCE_INVALID');
+        \App\Services\Riasec\RiasecEnglishReportSourceContract::assertSurface($legacy);
+    }
+
     public function test_missing_templates_wrong_identity_and_false_known_status_fail_closed(): void
     {
         $assets = app(Compiler::class)->compile()['payload']['assets'];
