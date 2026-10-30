@@ -28,8 +28,8 @@
       "selected_asset_ids": {
         "core_formulation": "eq.formulation.balanced_integrated",
         "mechanisms": [
-          "SA_ER_high_high",
-          "EM_RM_high_high"
+          "SA_ER_mixed",
+          "EM_RM_mixed"
         ],
         "scenes": [
           "eq.scene.feedback.balanced_integrated.primary",
@@ -47,8 +47,8 @@
         ]
       },
       "why_this_route_exists": {
-        "zh-CN": "本次自评主要呈现均衡整合：四维相对均衡，适合维护已经可用的节奏。建议优先阅读能解释这个模式的机制、场景和行动。",
-        "en": "This self-report result mainly shows Integrated balance: the four dimensions sit relatively evenly; maintain what already works. Start with mechanisms, scenes, and actions that explain this pattern."
+        "zh-CN": "本次采用四维综合观察路径，把自我觉察、情绪调节、共情理解和关系管理放在一起阅读。机制、场景和行动用于提出可核对的问题，不表示四维都高或已经稳定整合。",
+        "en": "This result uses a four-dimension overview to read self-awareness, emotion regulation, empathy, and relationship management together. Mechanisms, scenes, and actions provide questions to check; they do not establish that all four dimensions are high or consistently integrated."
       },
       "do_not_overread": {
         "zh-CN": "这是一条自我报告阅读顺序，用于决定先读哪些内容；它不是评分规则、固定人格标签、能力判断、诊断、人事筛选或职业预测。",
@@ -63,17 +63,17 @@
       },
       "locales": {
         "zh-CN": {
-          "route_headline": "本次自我报告呈现：均衡整合",
-          "why_this_feels_specific": "四维相对均衡，适合维护已经可用的节奏；这只是本次作答组织出的阅读顺序，不是对你的固定定义。",
+          "route_headline": "本次自评：四维综合观察",
+          "why_this_feels_specific": "先结合四维位置和近期互动理解本次结果；这条阅读路径本身不表示四维都高、彼此接近或已经稳定整合。",
           "evidence_snapshot_label": "解读依据：核心解读、四维相对位置、质量信号和相关内容。",
-          "next_best_action": "选一个高压场景，观察你的稳定做法如何被保持。",
+          "next_best_action": "选一个普通、低风险场景，记录你的觉察、调节、共情和关系行动如何衔接。",
           "save_reason": "保存本次结果，之后可用真实互动检验它是否仍然贴近。"
         },
         "en": {
-          "route_headline": "Self-report pattern: Integrated balance",
-          "why_this_feels_specific": "The four dimensions sit relatively evenly; maintain what already works. This is a reading order organized from this response session, not a fixed definition of you.",
+          "route_headline": "This self-report: a four-dimension overview",
+          "why_this_feels_specific": "Read this result alongside the four dimension positions and recent interactions. This reading path does not itself establish that all four are high, close together, or consistently integrated.",
           "evidence_snapshot_label": "interpretation basis: core interpretation, relative dimension positions, response-quality signals, and selected content.",
-          "next_best_action": "Pick one pressure scene and notice how your steady pattern is maintained.",
+          "next_best_action": "Choose one ordinary, low-risk situation and record how awareness, regulation, empathy, and relationship action connect.",
           "save_reason": "Save this result so you can compare it with real interactions later."
         }
       }
@@ -2114,8 +2114,8 @@
       "selected_asset_ids": {
         "core_formulation": "eq.formulation.balanced_integrated",
         "mechanisms": [
-          "EM_RM_high_high",
-          "ER_RM_high_high"
+          "SA_ER_mixed",
+          "EM_RM_mixed"
         ],
         "scenes": [
           "eq.scene.team_collaboration.balanced_integrated.primary",
@@ -2134,8 +2134,8 @@
         ]
       },
       "why_this_route_exists": {
-        "zh-CN": "本次自评主要呈现均衡整合，但维度差距更值得先看；路线会把注意力放在差距相关场景和低风险行动上。",
-        "en": "This self-report result mainly shows Integrated balance, but the dimension gap deserves first attention; start with gap-related scenes and low-risk action."
+        "zh-CN": "本次四维落在不同参照区间，因此先结合维度差距阅读具体场景和低风险行动。这条路径用于组织观察，不能把维度差异改读成均衡或已整合的证明。",
+        "en": "The four dimensions fall in different reference ranges, so this path reads dimension gaps alongside specific scenes and low-risk actions first. It organizes observation; dimension differences do not establish balance or consistent integration."
       },
       "do_not_overread": {
         "zh-CN": "这是一条自我报告阅读顺序，用于决定先读哪些内容；它不是评分规则、固定人格标签、能力判断、诊断、人事筛选或职业预测。",
@@ -2150,15 +2150,15 @@
       },
       "locales": {
         "zh-CN": {
-          "route_headline": "本次自我报告呈现：均衡整合，先看最大差距",
-          "why_this_feels_specific": "四维相对均衡，适合维护已经可用的节奏；同时，维度之间的差距会影响你先读哪些场景。",
+          "route_headline": "本次自评：四维综合观察，先看维度差距",
+          "why_this_feels_specific": "四维处于不同参照区间，先结合维度差距核对具体互动；这仍是本次自评的阅读入口，需要用真实反馈检验。",
           "evidence_snapshot_label": "解读依据：核心解读、最大维度差距、质量信号和相关内容。",
           "next_best_action": "先读差距相关场景，再做一个不涉及高风险关系的微练习。",
           "save_reason": "保存本次结果，之后可观察最大差距是否也出现在真实互动中。"
         },
         "en": {
-          "route_headline": "Self-report pattern: Integrated balance; read the largest gap first",
-          "why_this_feels_specific": "The four dimensions sit relatively evenly; maintain what already works; the dimension gap also changes which scenes should be read first.",
+          "route_headline": "This self-report: a four-dimension overview; read the dimension gaps first",
+          "why_this_feels_specific": "The four dimensions fall in different reference ranges. Read the dimension gaps alongside specific interactions, and check this self-report reading against real feedback.",
           "evidence_snapshot_label": "interpretation basis: core interpretation, largest dimension gap, response-quality signals, and selected content.",
           "next_best_action": "Read the gap-related scene first, then try one low-risk practice outside high-stakes relationships.",
           "save_reason": "Save this result so you can later check whether the largest gap appears in real interactions."

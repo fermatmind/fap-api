@@ -440,6 +440,55 @@ final class Eq60V5ReportContractTest extends TestCase
         }
     }
 
+    public function test_overview_fallback_keeps_real_scores_and_neutral_copy_in_report_and_agent_consumers(): void
+    {
+        $this->prepareEqContent();
+        config()->set('ai.eq_agent.llm_enabled', false);
+        foreach (['zh-CN', 'en'] as $locale) {
+            foreach (['mixed', 'all_high', 'low_quality'] as $kind) {
+                $positions = $kind === 'all_high' ? [81, 81, 81, 81] : [64, 26, 64, 26];
+                $dimensions = [];
+                foreach (['SA', 'ER', 'EM', 'RM'] as $i => $code) {
+                    $dimensions[$code] = [100 + $i, $positions[$i]];
+                }
+                $score = $this->rankingScore($dimensions);
+                if ($kind === 'low_quality') {
+                    $score['quality']['level'] = 'D';
+                }
+                $before = $score;
+                $fixture = $this->canonicalFixtureFromScore('EQ60_OVERVIEW_'.$kind, $locale, $score);
+                $this->assertSame($before, $score);
+                $this->assertSame($kind === 'low_quality' ? 'low_confidence_result' : 'balanced_integrated', data_get($fixture, 'report.interpretation.core_formulation_id'));
+                foreach (['SA', 'ER', 'EM', 'RM'] as $i => $code) {
+                    $this->assertSame($positions[$i], data_get($fixture, 'report.scores.dimensions.'.$code.'.percentile'));
+                }
+                if ($kind === 'low_quality') {
+                    $this->assertSame([], data_get($fixture, 'report.assets.mechanisms'));
+                    $this->assertSame([], data_get($fixture, 'report.assets.result_page_depth_modules'));
+
+                    continue;
+                }
+                $this->assertSame(['SA_ER_mixed', 'EM_RM_mixed'], data_get($fixture, 'report.interpretation.primary_mechanism_ids'));
+                $this->assertNotEmpty(data_get($fixture, 'report.assets.mechanisms'));
+                $report = $fixture['report'];
+                $attempt = new Attempt(['id' => 'local-overview', 'locale' => $locale]);
+                $context = app(\App\Services\Eq\EqAgentContextBuilder::class)->build($attempt, new Result(['id' => 'local-result']), $report,
+                    ['scale_code' => 'EQ_60', 'scale_code_legacy' => 'EQ_60', 'scale_code_v2' => 'EQ_60', 'scale_uid' => null], $locale, 'understand_my_result');
+                foreach (['core_formulation.core_claim', 'result_snapshot.core_judgment', 'result_snapshot.evidence_point'] as $field) {
+                    $copy = data_get($context, 'resolved_assets.'.$field);
+                    $this->assertSame(data_get($report, 'assets.'.$field), $copy);
+                    $this->assertStringContainsString($locale === 'en' ? 'does not establish' : '不', $copy);
+                }
+                $runtime = app(\App\Services\Eq\EqAgentRuntimeResponder::class)->respond($context, null, 'understand_my_result', $locale);
+                $this->assertSame('deterministic_read_only', $runtime['mode']);
+                $this->assertNotSame('', data_get($runtime, 'assistant_response.text'));
+                $safe = (new \App\Services\Eq\EqAgentProviderRequest($context, $runtime, '', 'understand_my_result', $locale))->safeContext();
+                $this->assertSame($context['resolved_assets'], $safe['resolved_assets']);
+                $this->assertSame($report['scores'], data_get($safe, 'report_context.scores'));
+            }
+        }
+    }
+
     private function prepareEqContent(): void
     {
         /** @var Eq60ContentCompileService $compiler */
