@@ -2,11 +2,12 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import test from 'node:test';
-import {requiredSeconds, IQ_PUBLIC_SCALE_BUDGET_SECONDS} from './production-release-budget.mjs';
+import {requiredSeconds, publicContentOnlineRows, IQ_PUBLIC_SCALE_BUDGET_SECONDS} from './production-release-budget.mjs';
 import {IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS} from './iq-public-scale-publish.mjs';
 import {IQ_CANDIDATE_READ_TIMEOUT_MS, IQ_HTTP_READ_TIMEOUT_MS} from './iq-public-scale-online-qa.mjs';
 import {classifyPaths} from './classify-paths.mjs';
-import {inspectPackage} from './public-content-53-package.mjs';
+import {inspectPackage,readCandidateRows,packageDigest} from './public-content-53-package.mjs';
+const readNativeBudgetRows = () => readCandidateRows('backend',packageDigest('backend','mbti-native-leaf-copy')).candidates;
 import {fileURLToPath} from 'node:url';
 
 const read = path => readFileSync(new URL(path, import.meta.url),'utf8');
@@ -105,4 +106,16 @@ test('the selected reviewed package admits with full forward, recovery and settl
  const late=run(firstLateElapsed);
  assert.notEqual(late.status,0);
  assert.match(late.stderr,/Production budget insufficient/);
+});
+
+
+test('native32 keeps all adapter phases but budgets the one actual online consumer', () => {
+  const operations = {public_content_53_publish:true,public_content_53_package:'mbti-native-leaf-copy'};
+  const rows = readNativeBudgetRows();
+  assert.equal(rows.length,32);
+  assert.equal(publicContentOnlineRows(rows),1);
+  assert.equal(requiredSeconds(30,operations,publicContentOnlineRows(rows)),6760);
+  assert.equal(publicContentOnlineRows([{kind:'page',page_id:'PAGE-01',identity:{slug:'example'}}]),1);
+  assert.equal(publicContentOnlineRows([...rows,{kind:'page',page_id:'PAGE-01',identity:{slug:'example'}}]),2);
+  assert.equal(requiredSeconds(30,operations,32),25360);
 });

@@ -20,6 +20,14 @@ export const IQ_PUBLIC_SCALE_BUDGET_SECONDS = Math.ceil(
     + 4 * IQ_HTTP_READ_TIMEOUT_MS + 2 * (45000 + 30000 + 6500 + 30000)) / 1000 + 120,
 );
 
+// Match the existing online QA: 31 native rows are covered by all four
+// server adapter phases; the one INTJ-T row consumes the shared real QA sample.
+export function publicContentOnlineRows(rows) {
+  const adapterOnly = rows.filter(row => row.kind === 'mbti-result'
+    && row.page_id.endsWith('-NATIVE-LEAVES') && row.identity.slug !== 'intj-t').length;
+  return rows.length - adapterOnly || undefined;
+}
+
 export function requiredSeconds(deployMinutes, operations, publicContentRows = 53, newArticleDiscovery = false) {
   if (![30,35,60].includes(deployMinutes)) throw new Error('DEPLOY_BUDGET_INVALID');
   if (!operations || typeof operations !== 'object' || Array.isArray(operations)) throw new Error('OPERATIONS_INVALID');
@@ -46,6 +54,6 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const operations = JSON.parse(Buffer.from(process.argv[3], 'base64').toString());
   const rows = operations.public_content_53_publish === true ? readCandidateRows('backend',packageDigest('backend',operations.public_content_53_package)).candidates : [];
-  const count = rows.length || undefined;
+  const count = publicContentOnlineRows(rows);
   process.stdout.write(String(requiredSeconds(Number(process.argv[2]),operations,count,rows.some(row=>row.new_article)))+'\n');
 }
