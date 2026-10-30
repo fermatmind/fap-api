@@ -192,7 +192,7 @@ final class RiasecEnglishReportSourceContractTest extends TestCase
     public function test_published_1_8_bytes_and_selected_authority_remain_immutable_and_readable(): void
     {
         $c = app(Compiler::class)->compile();
-        $c = \Tests\Support\RiasecLegacyReaderCopyFixture::restoreCompiled($c);
+        $c = \Tests\Unit\Services\Riasec\RiasecEnglishReportSourceContractTest::restoreLegacyReaderCopy($c);
         $p = $c['payload'];
         $m = $c['manifest'];
         // Rebuild immutable releases with their original reader copy, not today's source.
@@ -237,5 +237,38 @@ final class RiasecEnglishReportSourceContractTest extends TestCase
             'scores_pct' => ['R' => 75, 'I' => 90, 'A' => 87.5, 'S' => 55, 'E' => 40, 'C' => 30],
             'result_json' => ['top_code' => 'IAR', 'form_code' => $form, 'answer_count' => $form === 'riasec_140' ? 140 : 60, 'quality_grade' => 'A', 'quality_flags' => []],
         ]);
+    }
+
+    /** Reconstruct earlier fixtures from the accepted 1.9 reader, never current copy. */
+    public static function restoreLegacyReaderCopy(array $compiled): array
+    {
+        $payload = $compiled['payload'];
+        $manifest = $compiled['manifest'];
+        $rows = json_decode((string) file_get_contents(base_path('tests/Fixtures/riasec_reader_copy_precloseout_1_9.json')), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($rows as $row) {
+            \PHPUnit\Framework\Assert::assertArrayHasKey($row['asset'], $payload['assets']);
+            data_set($payload['assets'][$row['asset']], implode('.', $row['path']), $row['copy']);
+        }
+        $compiler = app(Compiler::class);
+        $canonical = new \ReflectionMethod($compiler, 'canonicalJson');
+        $coverage = (new \ReflectionMethod($compiler, 'coverage'))->invoke($compiler, $payload['assets']);
+        $payload['coverage'] = $manifest['coverage'] = $coverage;
+        foreach ($manifest['source_files'] as &$source) {
+            $source['sha256'] = Contract::digest($payload['assets'][$source['path']]);
+        }
+        unset($source);
+        $sourceHash = hash('sha256', implode('', array_map(fn ($row) => $row['path']."\0".$row['sha256']."\n", $manifest['source_files'])));
+        $payload['source_hash'] = $manifest['source_hash'] = $manifest['content_hash'] = $sourceHash;
+        unset($payload['compiled_hash']);
+        $payload['compiled_hash'] = $manifest['compiled_hash'] = Contract::digest($payload);
+        $bytes = $canonical->invoke($compiler, $payload)."\n";
+        $manifest['artifacts'][0]['sha256'] = hash('sha256', $bytes);
+
+        \PHPUnit\Framework\Assert::assertSame('58910dbd3a03a1c57c099c365ab55470218dc87c8828545caacc95af1758ce43', $sourceHash);
+        \PHPUnit\Framework\Assert::assertSame('0e53b7c1cfd3b731fac97a94b735393fb8f268ca5a7a7f3ef99baecc0f9d46ac', $payload['compiled_hash']);
+
+        return ['payload' => $payload, 'manifest' => $manifest, 'bytes' => $bytes,
+            'manifest_bytes' => $canonical->invoke($compiler, $manifest)."\n",
+            'source_hash' => $sourceHash, 'compiled_hash' => $payload['compiled_hash']];
     }
 }
