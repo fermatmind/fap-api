@@ -73,6 +73,12 @@ final class BigFiveReportEngineAllTraitsRolloutTest extends TestCase
      */
     private function context(array $domains): array
     {
+        $referenceFixture = json_decode(
+            (string) file_get_contents(base_path('content_packs/BIG5_OCEAN/v2/registry/fixtures/quality_d_common_profile.context.json')),
+            true,
+            512,
+            JSON_THROW_ON_ERROR,
+        );
         $mapped = [];
         foreach ($domains as $traitCode => [$percentile, $band, $gradientId]) {
             $mapped[$traitCode] = [
@@ -86,6 +92,8 @@ final class BigFiveReportEngineAllTraitsRolloutTest extends TestCase
             'locale' => 'zh-CN',
             'scale_code' => 'BIG5_OCEAN',
             'form_code' => 'big5_90',
+            'quality' => ['level' => 'A'],
+            'meta' => $referenceFixture['meta'],
             'score_vector' => [
                 'domains' => $mapped,
                 'facets' => [],
