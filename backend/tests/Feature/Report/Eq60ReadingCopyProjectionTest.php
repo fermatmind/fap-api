@@ -28,13 +28,21 @@ final class Eq60ReadingCopyProjectionTest extends TestCase
         return json_decode((string) file_get_contents(base_path('tests/Fixtures/eq60_precloseout_reading_reports_20261030.json')), true, 512, JSON_THROW_ON_ERROR);
     }
 
+    private function nonBalancedCases(): array
+    {
+        return json_decode((string) file_get_contents(base_path('tests/Fixtures/eq60_843_nonbalanced_reading_reports_20261030.json')), true, 512, JSON_THROW_ON_ERROR);
+    }
+
     private function prepareReleases(): void
     {
-        foreach ($this->cases() as $case) {
-            DB::table('content_pack_releases')->insert([...$case['testing_release'], 'created_at' => now(), 'updated_at' => now()]);
+        foreach ([...$this->cases(), ...$this->nonBalancedCases()] as $case) {
+            if (! DB::table('content_pack_releases')->where('id', $case['testing_release']['id'])->exists()) {
+                DB::table('content_pack_releases')->insert([...$case['testing_release'], 'created_at' => now(), 'updated_at' => now()]);
+            }
         }
         $publisher = app(ContentPackV2Publisher::class);
-        $release = $publisher->publishCompiled('EQ_60', 'v1', ['source_commit' => '81ba984aca1ffafba36b0b7102baa760fe17cd0a']);
+        // Explicit local fixture identity; this uncommitted candidate is not the old source commit.
+        $release = $publisher->publishCompiled('EQ_60', 'v1', ['source_commit' => str_repeat('0', 40)]);
         $this->createdReleases[] = $release;
         $publisher->activateRelease($release['id']);
     }
@@ -109,6 +117,51 @@ final class Eq60ReadingCopyProjectionTest extends TestCase
         }
     }
 
+    public function test_nonbalanced_843_snapshots_and_new_composer_share_the_finite_copy_without_rescoring(): void
+    {
+        $this->prepareReleases();
+        Http::preventStrayRequests();
+        foreach ($this->nonBalancedCases() as $key => $case) {
+            $original = $case['report'];
+            $view = app(Eq60ReadingCopyProjection::class)->project($original);
+            $this->assertSame('ready', $view['status'], $key.':'.($view['reason'] ?? ''));
+            $this->assertSame(Eq60ReadingCopyProjection::REVISION, $view['revision']);
+            foreach (['scores', 'dimension_summary', 'quality', 'methodology', 'access', 'next_module', '_meta', 'generated_at', 'interpretation', 'asset_refs'] as $fact) {
+                $this->assertSame($original[$fact], $view['report'][$fact], $key.'.'.$fact);
+            }
+            $this->assertNotSame($original['assets'], $view['report']['assets']);
+            foreach ($original['assets']['mechanisms'] as $i => $mechanism) {
+                foreach (['id', 'pair', 'state'] as $identity) {
+                    $this->assertSame($mechanism[$identity], $view['report']['assets']['mechanisms'][$i][$identity]);
+                }
+            }
+            $codes = ['scale_code' => 'EQ_60', 'scale_code_legacy' => 'EQ_60', 'scale_code_v2' => 'EQ_60', 'scale_uid' => null];
+            $context = app(EqAgentContextBuilder::class)->build(new Attempt(['locale' => $original['locale']]), new Result,
+                ['report' => $original], $codes, $original['locale'], null);
+            $this->assertTrue($context['ready']);
+            $this->assertSame($view['report']['assets']['mechanisms'], $context['resolved_assets']['mechanisms']);
+            $this->assertSame($view['report']['assets']['core_formulation'], $context['resolved_assets']['core_formulation']);
+            $this->assertSame($case['report'], $original);
+
+            // Exact same bounded score input through the current real composer; no question answers or scorer call.
+            $composed = app(\App\Services\Report\Eq60ReportComposer::class)->composeVariant(
+                new Attempt(['locale' => $original['locale'], 'scale_code' => 'EQ_60', 'dir_version' => 'v1']),
+                new Result(['result_json' => ['normed_json' => $case['score_input']]]), 'full'
+            );
+            $this->assertTrue($composed['ok'] ?? false);
+            $fresh = app(Eq60ReadingCopyProjection::class)->project($composed['report']);
+            $this->assertSame('ready', $fresh['status']);
+            $this->assertSame($view['report']['assets']['mechanisms'], $fresh['report']['assets']['mechanisms']);
+        }
+        $original = $this->nonBalancedCases()['self_clear_repair_weak.en']['report'];
+        $original['assets']['mechanisms'][1]['title'] = 'Unknown third mechanism copy';
+        $view = app(Eq60ReadingCopyProjection::class)->project($this->rebind($original));
+        $this->assertSame('unavailable', $view['status']);
+        $this->assertSame('reading_copy_prestate_unknown', $view['reason']);
+        $this->assertArrayNotHasKey('report', $view);
+        Http::assertNothingSent();
+    }
+
     public function test_agent_uses_the_same_reading_assets_and_stops_unsupported_history_before_provider(): void
     {
         $this->prepareReleases();
@@ -176,6 +229,7 @@ final class Eq60ReadingCopyProjectionTest extends TestCase
             File::ensureDirectoryExists($compiledDirectory);
             File::copyDirectory(base_path('content_packs/EQ_60/v1/compiled'), $compiledDirectory);
             // Reconstruct exact historical bytes without shipping duplicate question banks.
+            (new \Symfony\Component\Process\Process(['git', 'apply', '--reverse', base_path('tests/Fixtures/eq60_843_to_reading_v2_compiled.patch')], $temporary))->mustRun();
             (new \Symfony\Component\Process\Process(['git', 'apply', '--reverse', base_path('tests/Fixtures/eq60_737_to_current_compiled.patch')], $temporary))->mustRun();
             $manifest = json_decode((string) file_get_contents($compiledDirectory.'/manifest.json'), true, 512, JSON_THROW_ON_ERROR);
             $this->assertSame('f1645cbd8b9c5b5686d2611a22e12a90609a2d64647eb5a5d348d12c2d056de7', $manifest['source_hash']);

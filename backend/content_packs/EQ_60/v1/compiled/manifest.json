@@ -7,19 +7,19 @@
         "zh-CN",
         "en"
     ],
-    "source_hash": "843d96bf99c6fa35feb0505832d01dd03ec7e9561fc7f93ca64f73b01a56f764",
-    "content_hash": "843d96bf99c6fa35feb0505832d01dd03ec7e9561fc7f93ca64f73b01a56f764",
-    "compiled_hash": "102869c94126f5524f904f7f46538bd05163f90b24d9364489ea659804a6cd11",
+    "source_hash": "6e8b606be9905dcf3c0313302e6af8d65bc3354d40f7884495440281bcae0a08",
+    "content_hash": "6e8b606be9905dcf3c0313302e6af8d65bc3354d40f7884495440281bcae0a08",
+    "compiled_hash": "3e1d76c55bb3c5595d484c2247bf5fc9a8e0ff5f6e031088451c20a7d6ad571f",
     "source_hash_rule": "sha256(concat(POSIX-byte-sorted relative_path + NUL + sha256(exact UTF-8 LF file bytes) + LF)); this manifest is excluded",
     "compiled_hash_rule": "sha256(concat(filename-sorted payload_name + NUL + sha256(exact canonical payload bytes including trailing LF) + LF)); compiled manifest is excluded",
     "hashes": {
-        "golden_cases.compiled.json": "ff9727870c5c671498ccc0a69886c9dc732bf545beadcdee81439a4630bed555",
-        "landing.compiled.json": "0678764a794442de2ba79b6829c08f0ef5dafa342e082b3349b92141437b6293",
-        "options.compiled.json": "f18993c9aa001bd7aa99bc788536f15eb43c8cbb3649bae3904a2fe01278f3e9",
-        "policy.compiled.json": "8c75c87f7e10133aa29df84dfa212f4b1cf84363ad62a4c7fb439d94133c453b",
-        "questions.compiled.json": "ca53fc80fa3638e35c8c65c621bb2938145696892186a1d424d1d3b49c886951",
-        "report.compiled.json": "7c64cafa4ce7c685a0fc7707d1d3a692bbcfc1dcc72600b130ece25104fb7a36",
-        "report_assets.compiled.json": "020be16018b7227544152b60b495de688eb75d4f5c65bb515ab0d78faa5d7177"
+        "golden_cases.compiled.json": "a5c6b6614cb019fe29b4d6a7693d4c2781e114f265e2be210dc21b3391db0578",
+        "landing.compiled.json": "e5caa94c02790bfade34896f058bac6f331f57f12e36598dbb4089dbdb8697e3",
+        "options.compiled.json": "5590672d5469d7fd59c3c1541e42aa73d887dba99edf0687886e2aaf3fb85ac1",
+        "policy.compiled.json": "097e8de891c0c43e6096a001abe071f5d7b949cbc27db09a8adb28fbe8258b15",
+        "questions.compiled.json": "51d665801dbd18c61dbe604f059d9cc9857db181a9f51199974239f6720f67fd",
+        "report.compiled.json": "958d3d969e638c7d1e414fd53efa09cbaa6ef2f6b417a8ea88ecee2847f6d78f",
+        "report_assets.compiled.json": "8fd3b9e85e1b3845409c8b9f949efb11b0dd648821afa5cfe9200f5b0ffe0494"
     },
     "compiled_files": [
         "golden_cases.compiled.json",
@@ -36,43 +36,43 @@
             "path": "golden_cases.compiled.json",
             "kind": "payload",
             "included_in_compiled_hash": true,
-            "sha256": "ff9727870c5c671498ccc0a69886c9dc732bf545beadcdee81439a4630bed555"
+            "sha256": "a5c6b6614cb019fe29b4d6a7693d4c2781e114f265e2be210dc21b3391db0578"
         },
         {
             "path": "landing.compiled.json",
             "kind": "payload",
             "included_in_compiled_hash": true,
-            "sha256": "0678764a794442de2ba79b6829c08f0ef5dafa342e082b3349b92141437b6293"
+            "sha256": "e5caa94c02790bfade34896f058bac6f331f57f12e36598dbb4089dbdb8697e3"
         },
         {
             "path": "options.compiled.json",
             "kind": "payload",
             "included_in_compiled_hash": true,
-            "sha256": "f18993c9aa001bd7aa99bc788536f15eb43c8cbb3649bae3904a2fe01278f3e9"
+            "sha256": "5590672d5469d7fd59c3c1541e42aa73d887dba99edf0687886e2aaf3fb85ac1"
         },
         {
             "path": "policy.compiled.json",
             "kind": "payload",
             "included_in_compiled_hash": true,
-            "sha256": "8c75c87f7e10133aa29df84dfa212f4b1cf84363ad62a4c7fb439d94133c453b"
+            "sha256": "097e8de891c0c43e6096a001abe071f5d7b949cbc27db09a8adb28fbe8258b15"
         },
         {
             "path": "questions.compiled.json",
             "kind": "payload",
             "included_in_compiled_hash": true,
-            "sha256": "ca53fc80fa3638e35c8c65c621bb2938145696892186a1d424d1d3b49c886951"
+            "sha256": "51d665801dbd18c61dbe604f059d9cc9857db181a9f51199974239f6720f67fd"
         },
         {
             "path": "report.compiled.json",
             "kind": "payload",
             "included_in_compiled_hash": true,
-            "sha256": "7c64cafa4ce7c685a0fc7707d1d3a692bbcfc1dcc72600b130ece25104fb7a36"
+            "sha256": "958d3d969e638c7d1e414fd53efa09cbaa6ef2f6b417a8ea88ecee2847f6d78f"
         },
         {
             "path": "report_assets.compiled.json",
             "kind": "payload",
             "included_in_compiled_hash": true,
-            "sha256": "020be16018b7227544152b60b495de688eb75d4f5c65bb515ab0d78faa5d7177"
+            "sha256": "8fd3b9e85e1b3845409c8b9f949efb11b0dd648821afa5cfe9200f5b0ffe0494"
         },
         {
             "path": "manifest.json",
