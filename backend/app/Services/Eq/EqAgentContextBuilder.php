@@ -12,6 +12,7 @@ final class EqAgentContextBuilder
 {
     public function __construct(
         private Eq60PackLoader $packLoader,
+        private readonly Eq60ReadingCopyProjection $readingCopy,
     ) {}
 
     /**
@@ -29,6 +30,11 @@ final class EqAgentContextBuilder
     ): array {
         $resolvedLocale = $this->packLoader->normalizeLocale($locale !== null && $locale !== '' ? $locale : (string) ($attempt->locale ?? 'zh-CN'));
         $report = is_array($reportEnvelope['report'] ?? null) ? $reportEnvelope['report'] : $reportEnvelope;
+        $view = $this->readingCopy->project($report);
+        if (($view['status'] ?? null) !== 'ready' || ($view['locale'] ?? null) !== $resolvedLocale) {
+            return $this->nonReady((string) $attempt->id, 'historical_eq_report_not_supported', $responseCodes['scale_code']);
+        }
+        $report = $view['report'];
         $assets = is_array($report['assets'] ?? null) ? $report['assets'] : [];
         $agentKnowledge = $this->agentKnowledgeSchema();
 
@@ -45,6 +51,12 @@ final class EqAgentContextBuilder
             'locale' => $resolvedLocale,
             'private_result_authority' => $this->arrayOrEmpty(data_get($report, '_meta.eq60_private_result_authority')),
             'snapshot_binding_v1' => $this->arrayOrEmpty(data_get($report, '_meta.snapshot_binding_v1')),
+            'reading_copy' => [
+                'revision' => $view['revision'],
+                'original_report_sha256' => $view['original_report_sha256'],
+                'projected_report_sha256' => $view['projected_report_sha256'],
+                'reading_authority' => $view['reading_authority'],
+            ],
             'report_context' => $this->reportContext($report),
             'resolved_assets' => $this->resolvedAssets($assets),
             'agent_knowledge' => $agentKnowledge,

@@ -606,6 +606,10 @@ class AttemptReadController extends Controller
         if (isset($gate['meta']) && is_array($gate['meta'])) {
             $gateMeta = $gate['meta'];
         }
+        // Bind the original composer payload before adding response-only scale aliases.
+        $eqReadingCopy = $scaleCode === 'EQ_60' && is_array($gate['report'] ?? null)
+            ? app(\App\Services\Eq\Eq60ReadingCopyProjection::class)->project($gate['report'])
+            : null;
         if (isset($gate['report']) && is_array($gate['report'])) {
             $gate['report'] = $this->projectScaleCodePayload($gate['report'], $responseCodes);
         }
@@ -627,6 +631,10 @@ class AttemptReadController extends Controller
                 'report_engine_version' => (string) ($result->report_engine_version ?? 'v1.2'),
             ]),
         ]);
+
+        if ($eqReadingCopy !== null) {
+            $responsePayload['eq60_reading_copy_v1'] = $eqReadingCopy;
+        }
 
         if ($scaleCode === 'ENNEAGRAM' && (bool) ($gate['generating'] ?? false)) {
             if (is_array($enneagramFormSummary)) {
@@ -929,10 +937,6 @@ class AttemptReadController extends Controller
             false,
             $requestedReportLocale,
         );
-
-        if (isset($gate['report']) && is_array($gate['report'])) {
-            $gate['report'] = $this->projectScaleCodePayload($gate['report'], $responseCodes);
-        }
 
         if ((bool) ($gate['generating'] ?? false) || ! is_array($gate['report'] ?? null)) {
             return response()->json(array_merge(

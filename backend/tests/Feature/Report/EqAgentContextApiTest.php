@@ -805,6 +805,47 @@ final class EqAgentContextApiTest extends TestCase
         }
     }
 
+    public function test_bound_old_snapshot_report_and_agent_share_one_reading_view_and_legacy_stops_before_provider(): void
+    {
+        config(['fap.features.report_snapshot_strict_v2' => true]);
+        $this->prepareEqContent();
+        $publisher = app(\App\Services\Content\Publisher\ContentPackV2Publisher::class);
+        $current = $publisher->publishCompiled('EQ_60', 'v1', ['source_commit' => '81ba984aca1ffafba36b0b7102baa760fe17cd0a']);
+        try {
+            $publisher->activateRelease($current['id']);
+            $anonId = 'local_eq_old_snapshot_reading';
+            $token = $this->issueFmToken($anonId);
+            $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+            $this->withHeaders(['X-Anon-Id' => $anonId, 'Authorization' => 'Bearer '.$token]);
+            $this->getJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-context?locale=en')->assertOk()->assertJsonPath('ready', true);
+            $fixture = json_decode((string) file_get_contents(base_path('tests/Fixtures/eq60_precloseout_reading_reports_20261030.json')), true, 512, JSON_THROW_ON_ERROR)['en'];
+            DB::table('content_pack_releases')->insert([...$fixture['testing_release'], 'created_at' => now(), 'updated_at' => now()]);
+            $original = $fixture['report'];
+            $bytes = json_encode($original, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $this->assertSame(1, DB::table('report_snapshots')->where('attempt_id', $attemptId)->update(['status' => 'ready', 'report_json' => $bytes, 'report_full_json' => $bytes]));
+            $report = $this->getJson('/api/v0.3/attempts/'.$attemptId.'/report?locale=en')->assertOk()->assertJsonPath('eq60_reading_copy_v1.status', 'ready');
+            $agent = $this->getJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-context?locale=en')->assertOk()->assertJsonPath('ready', true);
+            $this->assertSame($report->json('eq60_reading_copy_v1.original_report_sha256'), $agent->json('reading_copy.original_report_sha256'));
+            $this->assertSame($report->json('eq60_reading_copy_v1.report.assets.result_snapshot'), $agent->json('resolved_assets.result_snapshot'));
+            $this->assertEquals($original['scores'], $report->json('eq60_reading_copy_v1.report.scores'));
+            $this->assertSame($bytes, DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('report_full_json'));
+            $original['_meta']['eq60_private_result_authority']['mode'] = 'immutable_legacy_snapshot';
+            $legacyBytes = json_encode($original, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            DB::table('report_snapshots')->where('attempt_id', $attemptId)->update(['report_json' => $legacyBytes, 'report_full_json' => $legacyBytes]);
+            config(['ai.eq_agent.llm_enabled' => true, 'ai.eq_agent.staging_only' => false,
+                'ai.eq_agent.openai.base_url' => 'https://api.openai.test/v1', 'ai.eq_agent.openai.api_key' => 'test-only', 'ai.eq_agent.openai.model' => 'gpt-test']);
+            Http::preventStrayRequests();
+            Http::fake();
+            $this->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', ['locale' => 'en', 'message' => 'Explain this report'])
+                ->assertStatus(202)->assertJsonPath('ready', false)->assertJsonPath('reason_code', 'historical_eq_report_not_supported');
+            Http::assertNothingSent();
+            $this->assertSame($legacyBytes, DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('report_full_json'));
+        } finally {
+            File::deleteDirectory(storage_path('app/'.$current['storage_path']));
+            File::deleteDirectory(storage_path('app/content_packs_v2/EQ_60/v1/'.$current['id']));
+        }
+    }
+
     private function prepareEqContent(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
