@@ -17,7 +17,7 @@ final class RiasecEnglishAspirationsReleaseTest extends TestCase
 {
     public function test_approved_seven_leaves_reach_both_form_projections_without_promoting_authority(): void
     {
-        $this->assertSame('956e96c3cf16b030f9f65e7d4d4a44ed4555c18634f265ede188dd9f01265b36', hash_file('sha256', base_path('content_assets/riasec/runtime_surface_copy_v1.en.json')));
+        $this->assertSame('aa9568d769f4ecb0300237bce37be9438649bd96d93858e30e9e8de3848907c8', hash_file('sha256', base_path('content_assets/riasec/runtime_surface_copy_v1.en.json')));
         $compiled = app(Compiler::class)->compile();
         $this->assertSame(Compiler::COMPILER_VERSION, $compiled['payload']['compiler']['version']);
         $this->assertSame(3, $compiled['payload']['coverage']['english_selected_sources']['generic_aspirations_cards']);
@@ -118,7 +118,7 @@ final class RiasecEnglishAspirationsReleaseTest extends TestCase
         }
     }
 
-    public function test_original_1_6_package_and_existing_disagree_slots_remain_identical(): void
+    public function test_original_1_6_package_and_disagree_contract_survive_reviewed_copy_updates(): void
     {
         $compiled = app(Compiler::class)->compile();
         $compiled = \Tests\Unit\Services\Riasec\RiasecEnglishReportSourceContractTest::restoreLegacyReaderCopy($compiled);
@@ -141,8 +141,16 @@ final class RiasecEnglishAspirationsReleaseTest extends TestCase
             $this->assertSame('unavailable', $registry->resolveForLocale($registry->resolveAspirationsSlot($name), 'en')['content_status']);
         }
         $current = app(Registry::class);
+        $reviewedSummaries = [
+            'user_not_wrong_message' => 'You can disagree with this result. Check response quality, close scores, and the activities you pictured while answering. You may record your own observations in the optional trial notes; this page does not use that text to change the measured result.',
+            'next_step' => 'First check response quality and close scores. Then choose whether to retake when ready or try a small activity. You may write a preferred direction in your own notes and copy it before leaving; those notes stay only in this page’s memory.',
+        ];
         foreach (Compiler::ENGLISH_DISAGREE_CARDS as $name) {
-            $this->assertSame($registry->resolveForLocale($registry->resolveDisagreePathSlot($name), 'en'), $current->resolveForLocale($current->resolveDisagreePathSlot($name), 'en'));
+            $expected = $registry->resolveForLocale($registry->resolveDisagreePathSlot($name), 'en');
+            if (isset($reviewedSummaries[$name])) {
+                $expected['summary'] = $reviewedSummaries[$name];
+            }
+            $this->assertSame($expected, $current->resolveForLocale($current->resolveDisagreePathSlot($name), 'en'));
         }
         $bad = $legacy['payload']['assets'];
         $bad['top3_code_chain_strategy_v1.en.jsonl'][1]['likely_tension'] = '';

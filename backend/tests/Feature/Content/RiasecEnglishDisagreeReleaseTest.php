@@ -18,6 +18,19 @@ final class RiasecEnglishDisagreeReleaseTest extends TestCase
     public function test_approved_seven_leaves_reach_both_form_projections_without_promoting_authority(): void
     {
         $bytes = file_get_contents(base_path('content_assets/riasec/runtime_surface_copy_v1.en.json'));
+        $this->assertSame('aa9568d769f4ecb0300237bce37be9438649bd96d93858e30e9e8de3848907c8', hash('sha256', $bytes));
+        $current = json_decode($bytes, true, 512, JSON_THROW_ON_ERROR);
+        // Restore only the reviewed copy leaves before the original byte-boundary check.
+        foreach (json_decode(file_get_contents(base_path('tests/Fixtures/riasec_reader_copy_precloseout_1_9.json')), true, 512, JSON_THROW_ON_ERROR) as $original) {
+            if ($original['asset'] !== 'runtime_surface_copy_v1.en.json') {
+                continue;
+            }
+            $now = json_encode(data_get($current, implode('.', $original['path'])), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+            $before = json_encode($original['copy'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+            $this->assertSame(1, substr_count($bytes, $now));
+            $bytes = str_replace($now, $before, $bytes);
+        }
+        $this->assertSame('956e96c3cf16b030f9f65e7d4d4a44ed4555c18634f265ede188dd9f01265b36', hash('sha256', $bytes));
         $restored = substr($bytes, 0, 10799).substr($bytes, 11000);
         $restored = substr($restored, 0, 9467).substr($restored, 10564);
         $this->assertSame('c3d9409f9ae3bc40f6c02e1874833f739616f01d08cdfbbc5828ff3b4dd3021d', hash('sha256', $restored));

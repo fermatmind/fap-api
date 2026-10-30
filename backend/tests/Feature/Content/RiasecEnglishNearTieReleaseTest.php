@@ -17,8 +17,8 @@ final class RiasecEnglishNearTieReleaseTest extends TestCase
 {
     public function test_selected_near_tie_states_reach_both_forms_with_exact_source_aliases_and_boundaries(): void
     {
-        $this->assertSame('a6dedda591505fcfebb97597afbf21a5c392c46b177630b4d35f80e86c53253e', hash_file('sha256', base_path('content_assets/riasec/'.Compiler::ENGLISH_NEAR_TIE_ASSET)));
-        $this->assertSame('956e96c3cf16b030f9f65e7d4d4a44ed4555c18634f265ede188dd9f01265b36', hash_file('sha256', base_path('content_assets/riasec/runtime_surface_copy_v1.en.json')));
+        $this->assertSame('0b3a870ca876ccf8dfe6e605defa21619f3b6efafdd7abc6c928cc873c8fd893', hash_file('sha256', base_path('content_assets/riasec/'.Compiler::ENGLISH_NEAR_TIE_ASSET)));
+        $this->assertSame('aa9568d769f4ecb0300237bce37be9438649bd96d93858e30e9e8de3848907c8', hash_file('sha256', base_path('content_assets/riasec/runtime_surface_copy_v1.en.json')));
         $compiled = app(Compiler::class)->compile();
         $source = $compiled['payload']['assets'][Compiler::ENGLISH_NEAR_TIE_ASSET];
         $rows = array_column($source['states'], null, 'state');

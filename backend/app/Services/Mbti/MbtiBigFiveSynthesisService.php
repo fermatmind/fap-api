@@ -126,9 +126,9 @@ final class MbtiBigFiveSynthesisService
         $neuroticismBand = $this->normalizeBand((string) ($traitBands['N'] ?? 'mid'));
         $conscientiousnessBand = $this->normalizeBand((string) ($traitBands['C'] ?? 'mid'));
 
-        $stabilityEnhancement = $this->buildStabilityEnhancement($neuroticismBand, $locale);
-        $actionEnhancement = $this->buildNextActionEnhancement($conscientiousnessBand, $locale);
-        $careerNextStepEnhancement = $this->buildCareerNextStepEnhancement($conscientiousnessBand, $locale);
+        $stabilityEnhancement = self::buildStabilityEnhancement($neuroticismBand, $locale);
+        $actionEnhancement = self::buildNextActionEnhancement($conscientiousnessBand, $locale);
+        $careerNextStepEnhancement = self::buildCareerNextStepEnhancement($conscientiousnessBand, $locale);
         $dominantTraits = is_array($big5Projection['dominant_traits'] ?? null) ? $big5Projection['dominant_traits'] : [];
 
         $synthesisKeys = array_values(array_filter([
@@ -214,7 +214,7 @@ final class MbtiBigFiveSynthesisService
      * @return array<string, mixed>
      */
     /** Refresh only known display leaves in supported saved authority; never fetch a newer result. */
-    public function refreshSavedEnglishCopy(array $personalization, string $locale): array
+    public static function refreshSavedEnglishCopy(array $personalization, string $locale): array
     {
         $authority = $personalization['cross_assessment_v1'] ?? null;
         if ($locale !== 'en' || ($personalization['schema_version'] ?? null) !== 'mbti.personalization.phase9e.v1'
@@ -234,9 +234,9 @@ final class MbtiBigFiveSynthesisService
             }
             foreach (['high', 'low', 'mid'] as $band) {
                 $current = match ($section) {
-                    'growth.stability_confidence' => $this->buildStabilityEnhancement($band, 'en'),
-                    'growth.next_actions' => $this->buildNextActionEnhancement($band, 'en'),
-                    'career.next_step' => $this->buildCareerNextStepEnhancement($band, 'en'),
+                    'growth.stability_confidence' => self::buildStabilityEnhancement($band, 'en'),
+                    'growth.next_actions' => self::buildNextActionEnhancement($band, 'en'),
+                    'career.next_step' => self::buildCareerNextStepEnhancement($band, 'en'),
                     default => [],
                 };
                 if ($current === [] || ($current['synthesis_key'] ?? null) !== $key) {
@@ -255,7 +255,7 @@ final class MbtiBigFiveSynthesisService
         return $personalization;
     }
 
-    private function buildStabilityEnhancement(string $band, string $locale): array
+    private static function buildStabilityEnhancement(string $band, string $locale): array
     {
         [$headline, $body, $synthesisKey] = match ($band) {
             'high' => [
@@ -294,7 +294,7 @@ final class MbtiBigFiveSynthesisService
     /**
      * @return array<string, mixed>
      */
-    private function buildNextActionEnhancement(string $band, string $locale): array
+    private static function buildNextActionEnhancement(string $band, string $locale): array
     {
         [$headline, $body, $synthesisKey] = match ($band) {
             'high' => [
@@ -333,7 +333,7 @@ final class MbtiBigFiveSynthesisService
     /**
      * @return array<string, mixed>
      */
-    private function buildCareerNextStepEnhancement(string $band, string $locale): array
+    private static function buildCareerNextStepEnhancement(string $band, string $locale): array
     {
         [$headline, $body, $synthesisKey] = match ($band) {
             'high' => [

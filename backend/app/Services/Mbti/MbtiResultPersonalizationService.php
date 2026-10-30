@@ -967,7 +967,7 @@ final class MbtiResultPersonalizationService
     {
         if (! array_key_exists('interpretation_copy_version', $personalization)
             || $personalization['interpretation_copy_version'] === self::INTERPRETATION_COPY_VERSION) {
-            $personalization = $this->bigFiveSynthesisService->refreshSavedEnglishCopy(
+            $personalization = MbtiBigFiveSynthesisService::refreshSavedEnglishCopy(
                 $personalization, $this->normalizeLocale($locale ?? (string) ($personalization['locale'] ?? ''))
             );
         }
