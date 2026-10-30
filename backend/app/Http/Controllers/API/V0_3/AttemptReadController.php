@@ -676,6 +676,13 @@ class AttemptReadController extends Controller
             if (is_array($big5FormSummary)) {
                 $responsePayload['big5_form_v1'] = $big5FormSummary;
             }
+            // Keep the original snapshot and its identity; the reader consumes this separate view.
+            $readingCopy = app(\App\Services\BigFive\BigFiveReadingCopyProjection::class)->project(
+                is_array($responsePayload['report'] ?? null) ? $responsePayload['report'] : [],
+            );
+            if ($readingCopy !== null) {
+                $responsePayload['big5_reading_copy_v1'] = $readingCopy;
+            }
             $projection = data_get($responsePayload, 'report._meta.big5_public_projection_v1');
             if (! is_array($projection)) {
                 $projection = [

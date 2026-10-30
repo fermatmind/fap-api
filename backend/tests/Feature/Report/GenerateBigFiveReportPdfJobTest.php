@@ -150,14 +150,6 @@ final class GenerateBigFiveReportPdfJobTest extends TestCase
         $this->assertNotNull($attempt);
         $this->assertNotNull($result);
 
-        $fullPath = $pdfService->resolveArtifactPath($attempt, 'full', $result);
-        $freePath = $pdfService->resolveArtifactPath($attempt, 'free', $result);
-
-        $this->assertTrue(
-            Storage::disk('local')->exists($fullPath) || Storage::disk('local')->exists($freePath),
-            'expected full or free pdf artifact to be generated'
-        );
-
         $event = DB::table('events')
             ->where('event_code', 'report_pdf_generated')
             ->orderByDesc('created_at')
@@ -165,6 +157,8 @@ final class GenerateBigFiveReportPdfJobTest extends TestCase
         $this->assertNotNull($event);
         $meta = json_decode((string) ($event->meta_json ?? '{}'), true);
         $this->assertIsArray($meta);
+        $this->assertTrue(Storage::disk('local')->exists((string) ($meta['artifact_path'] ?? '')), 'expected the actual generated artifact to exist');
+        $this->assertStringContainsString(\App\Services\BigFive\BigFiveReadingCopyProjection::REVISION, (string) ($meta['manifest_hash'] ?? ''));
         $this->assertSame('BIG5_OCEAN', (string) ($meta['scale_code'] ?? ''));
         $this->assertSame($attemptId, (string) ($meta['attempt_id'] ?? ''));
     }

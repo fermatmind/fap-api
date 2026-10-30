@@ -117,6 +117,31 @@ final class BigFiveReportPdfContentTest extends TestCase
         $this->assertStringNotContainsString('OLD_METADATA_ONLY', $generated['binary']);
         $this->assertSame([], $store->legacyPaths('BIG5_OCEAN', $attempt->id, 'original-manifest', 'full'));
         $this->assertTrue($service->getOrGenerate($attempt, $gate)['cached']);
-        $this->assertSame($generated['binary'], $service->readArtifact($attempt, 'full'));
+        $this->assertSame($generated['binary'], $service->readArtifact($attempt, 'full', null, $gate));
+        $changed = $gate;
+        $changed['report']['sections'][0]['blocks'][0]['resolved_copy']['body'] = 'Revised reader copy for this cache fixture.';
+        $fresh = $service->getOrGenerate($attempt, $changed);
+        $this->assertFalse($fresh['cached']);
+        $this->assertNotSame($generated['manifest_hash'], $fresh['manifest_hash']);
+        $this->assertNotSame($generated['storage_path'], $fresh['storage_path']);
+        $this->assertSame($generated['binary'], $store->get($generated['storage_path']));
+        $this->assertSame($fresh['storage_path'], $service->resolveArtifactPath($attempt, 'full', null, $changed));
+        $conflict = $gate;
+        $conflict['report']['scale_code'] = 'BIG5_OCEAN';
+        $conflict['report']['locale'] = 'en';
+        $conflict['report']['_meta']['big5_report_engine_v2']['locale'] = 'zh-CN';
+        foreach ([
+            fn () => $service->getOrGenerate($attempt, $conflict),
+            fn () => $service->readArtifact($attempt, 'full', null, $conflict),
+            fn () => $service->resolveArtifactPath($attempt, 'full', null, $conflict),
+        ] as $read) {
+            try {
+                $read();
+                $this->fail('An unavailable reading projection must not serve a cached PDF.');
+            } catch (\RuntimeException $exception) {
+                $this->assertSame('BIG5_READING_COPY_UNAVAILABLE', $exception->getMessage());
+            }
+        }
+        $this->assertSame($generated['binary'], $store->get($generated['storage_path']));
     }
 }

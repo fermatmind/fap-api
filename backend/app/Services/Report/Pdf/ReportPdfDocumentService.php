@@ -312,7 +312,7 @@ final class ReportPdfDocumentService
         ];
     }
 
-    public function resolveArtifactPath(Attempt $attempt, string $variant, ?Result $result = null): string
+    public function resolveArtifactPath(Attempt $attempt, string $variant, ?Result $result = null, ?array $gate = null): string
     {
         // IQ artifacts include the authorized report projection; only getOrGenerate can resolve that path.
         if (\App\Services\Report\ReportAccess::isIqScale((string) $attempt->scale_code)) {
@@ -322,12 +322,14 @@ final class ReportPdfDocumentService
         return $this->artifactStore->path(
             (string) ($attempt->scale_code ?? 'UNKNOWN'),
             (string) $attempt->id,
-            $this->artifactManifestHash($attempt, $variant, $result),
+            $gate !== null && strtoupper(trim((string) $attempt->scale_code)) === 'BIG5_OCEAN'
+                ? $this->bigFiveReadingManifest($this->artifactManifestHash($attempt, $variant, $result), (array) ($gate['report'] ?? []))[0]
+                : $this->artifactManifestHash($attempt, $variant, $result),
             $this->normalizeVariant($variant)
         );
     }
 
-    public function readArtifact(Attempt $attempt, string $variant, ?Result $result = null): ?string
+    public function readArtifact(Attempt $attempt, string $variant, ?Result $result = null, ?array $gate = null): ?string
     {
         // IQ cache reads require the current full gate, owned by getOrGenerate.
         if (\App\Services\Report\ReportAccess::isIqScale((string) $attempt->scale_code)) {
@@ -336,6 +338,9 @@ final class ReportPdfDocumentService
 
         $variant = $this->normalizeVariant($variant);
         $manifestHash = $this->artifactManifestHash($attempt, $variant, $result);
+        if ($gate !== null && strtoupper(trim((string) $attempt->scale_code)) === 'BIG5_OCEAN') {
+            [$manifestHash] = $this->bigFiveReadingManifest($manifestHash, (array) ($gate['report'] ?? []));
+        }
         $path = $this->artifactStore->path(
             (string) ($attempt->scale_code ?? 'UNKNOWN'),
             (string) $attempt->id,
@@ -387,6 +392,12 @@ final class ReportPdfDocumentService
         $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $locked = (bool) ($gate['locked'] ?? true);
         $manifestHash = $this->resolveManifestHash($attempt, $result);
+        $report = is_array($gate['report'] ?? null) ? $gate['report'] : [];
+        if (strtoupper(trim((string) $attempt->scale_code)) === 'BIG5_OCEAN') {
+            // Resolve approved reading copy before looking up an artifact. Gate-selected body and
+            // its read revision are part of the cache identity, including partial/locked sections.
+            [$manifestHash, $report] = $this->bigFiveReadingManifest($manifestHash, $report);
+        }
         if ($iqView !== null) {
             $manifestHash = hash('sha256', json_encode([$manifestHash, $iqView], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         }
@@ -424,7 +435,6 @@ final class ReportPdfDocumentService
             }
         }
 
-        $report = is_array($gate['report'] ?? null) ? $gate['report'] : [];
         $sections = array_map(
             'strval',
             array_values(
@@ -472,6 +482,22 @@ final class ReportPdfDocumentService
             'manifest_hash' => $manifestHash,
             'cached' => false,
         ];
+    }
+
+    /** @return array{string,array<string,mixed>} */
+    private function bigFiveReadingManifest(string $base, array $report): array
+    {
+        $view = app(\App\Services\BigFive\BigFiveReadingCopyProjection::class)->project($report);
+        if ($view !== null && ($view['status'] ?? null) !== 'ready') {
+            throw new \RuntimeException('BIG5_READING_COPY_UNAVAILABLE');
+        }
+        $reading = $view['report'] ?? $report;
+        $digest = hash('sha256', json_encode([
+            \App\Services\BigFive\BigFiveReadingCopyProjection::REVISION,
+            $reading['sections'] ?? [], $reading['norms'] ?? [], $reading['quality'] ?? [],
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
+        return [$base.'-'.\App\Services\BigFive\BigFiveReadingCopyProjection::REVISION.'-'.$digest, $reading];
     }
 
     public function resolveManifestHash(Attempt $attempt, ?Result $result = null): string
