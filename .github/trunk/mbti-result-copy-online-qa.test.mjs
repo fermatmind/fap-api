@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { assertMbtiFourLeafDom, assertMbtiResultCopyDom, readMbtiResultCopySample } from './mbti-result-copy-online-qa.mjs';
+import { assertMbtiFourLeafDom, assertMbtiNativeLeafDom, assertMbtiResultCopyDom, readMbtiResultCopySample } from './mbti-result-copy-online-qa.mjs';
+import { readOnlinePrestate, verifyOnlineCandidates } from './public-content-53-online-qa.mjs';
 import { renderPage } from './iq-public-article-online-qa.mjs';
 import { inspectPackage, readCandidateRows, selectPublicContentPackage } from './public-content-53-package.mjs';
 
@@ -35,7 +36,7 @@ test('the real result chapter needs both visible copies; scripts, hidden markup 
   assert.throws(()=>assertMbtiResultCopyDom(html(copy).replace('noindex, nofollow','index, follow'),copy),/VISIBLE_BODY_MISMATCH/);
 });
 
-function fixtures(copy=row.before, mutate=()=>{}, fourCopy=null) {
+function fixtures(copy=row.before, mutate=()=>{}, fourCopy=null, nativeCopy=null) {
   const attempt='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
   const token='fm_synthetic_own_sample_only';
   const calls=[];let session;
@@ -52,6 +53,7 @@ function fixtures(copy=row.before, mutate=()=>{}, fourCopy=null) {
       {key:'growth.weaknesses',render:'bullets',payload:{items:[{body:fourCopy.growth_weakness}]},is_enabled:true,source:'variant'},
       {key:'faq',render:'faq',payload:{items:[...Array.from({length:5},()=>({answer:'Keep'})),{question:'What stresses INTJ-T?',intent:'stress',answer:fourCopy.stress_answer}]},is_enabled:true,source:'variant'});
   }
+  if(nativeCopy) sections[0]={key:'growth.strengths',render:'bullets',payload:{items:[{body:nativeCopy.growth_strength},{body:'Keep second strength'}],future:'retain'},is_enabled:true,source:'variant'};
   mutate(sections);
   const fetcher=async(url,options)=>{
     const u=new URL(url);assert.equal(u.origin,'https://staging-api.fermatmind.com');
@@ -70,7 +72,7 @@ function fixtures(copy=row.before, mutate=()=>{}, fourCopy=null) {
   const renderer=async(url,options)=>{
     assert.equal(url,'https://staging.fermatmind.com/en/result/'+attempt);assert.equal(options.surface,'mbti_result');
     assert.equal(options.mbtiSample.token,token);session=options.mbtiSample;
-    const body=fourCopy?fourHtml(fourCopy):html(copy.body_md);options.verifyDOM(body);return body;
+    const body=nativeCopy?documentOf(`<section id="mbti-desktop-growth"><p>${nativeCopy.growth_strength}</p></section>`):fourCopy?fourHtml(fourCopy):html(copy.body_md);options.verifyDOM(body);return body;
   };
   return {fetcher,renderer,attempt,token,calls,get session(){return session;}};
 }
@@ -81,6 +83,45 @@ test('a complete synthetic flow returns only source copy, control hashes and san
   assert.match(result.controls_sha256,/^[a-f0-9]{64}$/);assert.equal(f.calls.length,5);
   const saved=JSON.stringify(result);
   for(const privateValue of [f.attempt,f.token,f.session.anonId,'Never return this','/en/result/'])assert.equal(saved.includes(privateValue),false);
+});
+
+test('native batch selects 32 exact rows but runs the fixed browser anchor only once per phase',async()=>{
+  assert.equal(selectPublicContentPackage(['backend/content_assets/public_content_53/mbti-native-leaf-copy.json']),'mbti-native-leaf-copy');
+  const binding=inspectPackage(root,'mbti-native-leaf-copy');
+  const rows=readCandidateRows(root,binding.package_sha256).candidates;
+  assert.equal(binding.expected_row_count,32);
+  assert.equal(rows.reduce((count,row)=>count+Object.keys(row.snapshot).length,0),187);
+  const anchor=rows.find(row=>row.identity.slug==='intj-t');
+  assert.deepEqual(Object.keys(anchor.snapshot),['growth_strength']);
+  const before=fixtures(row.before,()=>{},null,anchor.before);
+  const prestate=await readOnlinePrestate('staging',root,before.fetcher,before.renderer,binding.package_sha256);
+  assert.equal(before.calls.length,5);
+  assert.equal(Object.values(prestate).filter(row=>row.native_adapter_phase_only).length,31);
+  const after=fixtures(row.before,()=>{},null,anchor.snapshot);
+  const accepted=await verifyOnlineCandidates('staging',root,after.fetcher,after.renderer,prestate,binding.package_sha256);
+  assert.equal(after.calls.length,1);
+  assert.equal(before.calls.filter(path=>path.endsWith('/attempts/start')).length,1);
+  assert.equal(before.calls.filter(path=>path.endsWith('/attempts/submit')).length,1);
+  assert.equal(after.calls.filter(path=>path.endsWith('/attempts/start')||path.endsWith('/attempts/submit')).length,0);
+  assert.equal(after.calls[0],before.calls.at(-1));
+  assert.deepEqual(after.session,before.session);
+  assert.deepEqual([accepted.api_readback_count,accepted.dom_readback_count,accepted.native_adapter_phase_only_row_count,accepted.package_row_count],[1,1,31,32]);
+  const saved=JSON.stringify(prestate);
+  for(const privateValue of [before.token,before.attempt,before.session.anonId])assert.equal(saved.includes(privateValue),false);
+});
+
+test('native strength must be visible exactly once in the growth chapter and protects all other fields',async()=>{
+  const anchor=readCandidateRows(root,inspectPackage(root,'mbti-native-leaf-copy').package_sha256).candidates.find(row=>row.identity.slug==='intj-t');
+  const body=anchor.snapshot.growth_strength;
+  for(const snippet of [`<section id="mbti-desktop-growth"></section><p>${body}</p>`,`<section id="mbti-desktop-growth"><p hidden>${body}</p></section>`,`<section id="mbti-desktop-growth"><p>${body}${body}</p></section>`])
+    assert.throws(()=>assertMbtiNativeLeafDom(documentOf(snippet),anchor.snapshot),/NATIVE_VISIBLE_MISMATCH/);
+  const before=fixtures(row.before,()=>{},null,anchor.before),after=fixtures(row.before,()=>{},null,anchor.snapshot);
+  const a=await readMbtiResultCopySample('staging',anchor,before.fetcher,before.renderer);
+  const b=await readMbtiResultCopySample('staging',anchor,after.fetcher,after.renderer);
+  assert.equal(a.controls_sha256,b.controls_sha256);
+  const changed=fixtures(row.before,sections=>{sections[0].payload.items[1].body='Unowned sibling changed';},null,anchor.snapshot);
+  const c=await readMbtiResultCopySample('staging',anchor,changed.fetcher,changed.renderer);
+  assert.notEqual(c.controls_sha256,a.controls_sha256);
 });
 
 test('the candidate copy retains the same hash of the eighteen unchanged sections and protected target payload',async()=>{

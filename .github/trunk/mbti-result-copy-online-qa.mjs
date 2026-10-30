@@ -5,15 +5,21 @@ import { renderPage } from './iq-public-article-online-qa.mjs';
 const equal = (a,b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
 const compact = value => String(value ?? '').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'');
 const hash = value => createHash('sha256').update(JSON.stringify(canonical(value))).digest('hex');
+// Native copy publication reads the same owned sample before and after the CMS transaction.
+// Process memory only: no credentials, answers or attempt identity enter receipts or disk.
+const nativeSamples = new Map();
 
-/** One newly created QA guest only. Private identifiers never leave this function. */
+/** Owned QA only; native publication reuses it in this process without serializing its session. */
 export async function readMbtiResultCopySample(environment, row, fetcher = fetch, renderer = renderPage) {
   if (!['staging','production'].includes(environment) || row.kind !== 'mbti-result'
     || row.identity?.org_id !== 0 || row.identity.locale !== 'en' || row.identity.slug !== 'intj-t')
     throw new Error('MBTI_RESULT_COPY_QA_IDENTITY_INVALID');
   const api = environment === 'staging' ? 'https://staging-api.fermatmind.com/api/v0.3' : 'https://api.fermatmind.com/api/v0.3';
   const web = environment === 'staging' ? 'https://staging.fermatmind.com' : 'https://fermatmind.com';
-  const anonId = 'codex_probe_'+randomUUID(); let token = ''; const steps = []; const began = Date.now();
+  const sampleKey = row.page_id === 'MBTI-EN-INTJ-T-NATIVE-LEAVES' ? environment : null;
+  const saved = sampleKey ? nativeSamples.get(sampleKey) : undefined;
+  const anonId = saved?.anonId ?? 'codex_probe_'+randomUUID(); let token = saved?.token ?? '';
+  let attempt = saved?.attempt; const steps = []; const began = Date.now();
   const request = async (path, body, stage = path) => {
     let response, data;
     try {
@@ -26,6 +32,7 @@ export async function readMbtiResultCopySample(environment, row, fetcher = fetch
     if (![200,202].includes(response.status) || data?.ok !== true) throw new Error('MBTI_RESULT_COPY_QA_API_FAILED');
     return data;
   };
+  if (!saved) {
   const bank = await request('/scales/MBTI/questions?form_code=mbti_93&locale=en&region=CN_MAINLAND');
   const questions = bank.questions?.items;
   if (bank.form_code !== 'mbti_93' || bank.locale !== 'en' || !Array.isArray(questions) || questions.length !== 93
@@ -35,9 +42,10 @@ export async function readMbtiResultCopySample(environment, row, fetcher = fetch
   token = [guest.fm_token,guest.token,guest.auth_token,guest.data?.fm_token,guest.data?.token,guest.data?.auth_token].find(x=>typeof x==='string' && /^fm_[A-Za-z0-9._-]+$/.test(x)) ?? '';
   if (!token) throw new Error('MBTI_RESULT_COPY_QA_GUEST_INVALID');
   const started = await request('/attempts/start',{scale_code:'MBTI',form_code:'mbti_93',anon_id:anonId,locale:'en',region:'CN_MAINLAND',channel:'product_qa'});
-  const attempt = started.attempt_id;
+  attempt = started.attempt_id;
   if (typeof attempt !== 'string' || !/^[a-f0-9-]{36}$/.test(attempt)) throw new Error('MBTI_RESULT_COPY_QA_ATTEMPT_INVALID');
   await request('/attempts/submit',{attempt_id:attempt,answers:questions.map((q,i)=>({question_id:q.question_id,code:'ABCDE'[i%5]})),duration_ms:Date.now()-began});
+  }
   let projection;
   for (let n=0;n<8;n++) {
     const report = await request('/attempts/'+attempt+'/report?locale=en',undefined,'/attempts/OWN_QA_SAMPLE/report');
@@ -52,10 +60,21 @@ export async function readMbtiResultCopySample(environment, row, fetcher = fetch
   if (selected.length !== 1 || variants.length < 19 || selected[0].is_enabled !== true || selected[0].render !== 'premium_teaser')
     throw new Error('MBTI_RESULT_COPY_QA_SECTION_INVALID');
   const target = selected[0]; const four = row.page_id === 'MBTI-EN-INTJ-T-FOUR-LEAVES';
-  const copy = four ? readFourLeafCopy(variants) : {body_md:target.body_md,teaser:target.payload?.teaser};
+  const native = row.page_id === 'MBTI-EN-INTJ-T-NATIVE-LEAVES';
+  const strength = variants.filter(section=>section.key === 'growth.strengths');
+  if (native && (strength.length !== 1 || strength[0].render !== 'bullets' || strength[0].is_enabled !== true
+    || typeof strength[0].payload?.items?.[0]?.body !== 'string' || !strength[0].payload.items[0].body.trim()))
+    throw new Error('MBTI_RESULT_COPY_QA_SECTION_INVALID');
+  const copy = native ? {growth_strength:strength[0].payload.items[0].body}
+    : four ? readFourLeafCopy(variants) : {body_md:target.body_md,teaser:target.payload?.teaser};
   const before = environment === 'staging' ? row.staging_before : row.before;
   if (!equal(copy,before) && !equal(copy,row.snapshot)) throw new Error('MBTI_RESULT_COPY_QA_PRESTATE_DRIFT');
   const controls = variants.map(section=>{
+    if (native) {
+      const clone=structuredClone(section);
+      if (section.key === 'growth.strengths') delete clone.payload.items[0].body;
+      return clone;
+    }
     if (four) {
       const clone=structuredClone(section);
       if (section.key === 'trait_overview') {
@@ -80,13 +99,24 @@ export async function readMbtiResultCopySample(environment, row, fetcher = fetch
     return clone;
   });
   const privateUrl = web+'/en/result/'+attempt;
-  const verifyDOM = html => four ? assertMbtiFourLeafDom(html,copy) : assertMbtiResultCopyDom(html,copy.body_md);
+  const verifyDOM = html => native ? assertMbtiNativeLeafDom(html,copy) : four ? assertMbtiFourLeafDom(html,copy) : assertMbtiResultCopyDom(html,copy.body_md);
   let html;
   try { html = await renderer(privateUrl,{surface:'mbti_result',mbtiSample:{anonId,token},verifyDOM}); }
   catch { throw new Error('MBTI_RESULT_COPY_QA_BROWSER_FAILED'); }
   const dom = verifyDOM(html);
+  if (sampleKey) nativeSamples.set(sampleKey,{anonId,token,attempt});
   // No raw report, answer, guest credential, attempt identity or private URL is returned.
-  return {runtime_type:'INTJ-T',copy,controls_sha256:hash(controls),variant_section_count:variants.length,visible_copy_occurrences:four?4:2,h1_count:dom.h1_count,headings_sha256:hash(dom.headings),steps};
+  return {runtime_type:'INTJ-T',copy,controls_sha256:hash(controls),variant_section_count:variants.length,visible_copy_occurrences:native?1:four?4:2,h1_count:dom.h1_count,headings_sha256:hash(dom.headings),steps};
+}
+
+export function assertMbtiNativeLeafDom(html, copy) {
+  if (typeof html !== 'string' || !copy || Object.keys(copy).join(',') !== 'growth_strength'
+    || typeof copy.growth_strength !== 'string' || !copy.growth_strength.trim()) throw new Error('MBTI_RESULT_COPY_QA_DOM_INVALID');
+  const value=visibleMainText(html), text=compact(copy.growth_strength);
+  if (!value.growth || !value.noindex || value.main_count !== 1 || value.h1_count < 1
+    || compact(value.body).split(text).length-1 !== 1 || compact(value.main_body).split(text).length-1 !== 1)
+    throw new Error('MBTI_RESULT_COPY_QA_NATIVE_VISIBLE_MISMATCH');
+  return {h1_count:value.h1_count,headings:value.headings};
 }
 
 function readFourLeafCopy(variants) {

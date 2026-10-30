@@ -126,6 +126,10 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
   const rows = readCandidateRows(backendRoot,packageSha256).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
   for (const row of rows) {
     if (row.kind === 'mbti-result') {
+      if (row.page_id.endsWith('-NATIVE-LEAVES') && row.identity.slug !== 'intj-t') {
+        result[row.page_id] = {native_adapter_phase_only:true};
+        continue;
+      }
       result[row.page_id] = await readMbtiResultCopySample(environment,row,fetcher,renderer);
       continue;
     }
@@ -376,6 +380,10 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
   const rows = readCandidateRows(backendRoot,packageSha256).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
   for (const row of rows) {
     if (row.kind === 'mbti-result') {
+      if (row.page_id.endsWith('-NATIVE-LEAVES') && row.identity.slug !== 'intj-t') {
+        if (prestate[row.page_id]?.native_adapter_phase_only !== true) throw new Error('MBTI_RESULT_COPY_QA_PRESTATE_REQUIRED');
+        continue;
+      }
       const before = prestate[row.page_id];
       const current = await readMbtiResultCopySample(environment,row,fetcher,renderer);
       if (!before || !equal(current.copy,row.snapshot) || current.controls_sha256 !== before.controls_sha256
@@ -417,5 +425,8 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
       } catch(error) {if(Date.now()>=deadline) throw new Error('PUBLIC_CONTENT_53_NEW_ARTICLE_DISCOVERY');await new Promise(resolve=>setTimeout(resolve,10000));}
     }
   }
-  return {environment,api_readback_count:rows.length,dom_readback_count:rows.length,raw_html_readback_count:newRows.length,discovery_readback_count:environment === 'production'?newRows.length:0};
+  const adapterOnly=rows.filter(row=>row.kind === 'mbti-result' && row.page_id.endsWith('-NATIVE-LEAVES') && row.identity.slug !== 'intj-t').length;
+  return {environment,api_readback_count:rows.length-adapterOnly,dom_readback_count:rows.length-adapterOnly,
+    ...(adapterOnly?{native_adapter_phase_only_row_count:adapterOnly,package_row_count:rows.length}:{}),
+    raw_html_readback_count:newRows.length,discovery_readback_count:environment === 'production'?newRows.length:0};
 }

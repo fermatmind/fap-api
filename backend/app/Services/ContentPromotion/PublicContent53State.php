@@ -181,6 +181,12 @@ final class PublicContent53State
     public function assertBaseline(array $rows): void
     {
         foreach ($rows as $row) {
+            if ($row['kind'] === PublicContent53MbtiResultCopy::KIND && str_ends_with($row['page_id'], '-NATIVE-LEAVES')) {
+                $native = app(PublicContent53MbtiResultCopy::class);
+                $native->assertBaseline($row, $native->read(false, $row));
+
+                continue;
+            }
             if (($row['new_article'] ?? false) && ! DB::table('articles')->where($row['identity'])->exists()) {
                 continue;
             }

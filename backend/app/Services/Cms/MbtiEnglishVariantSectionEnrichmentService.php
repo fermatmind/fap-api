@@ -117,7 +117,7 @@ final class MbtiEnglishVariantSectionEnrichmentService
             'career.summary' => "{$label} usually does its best work when the role rewards {$base['career_anchor']} and gives enough room for {$base['work_need']}. The {$context['variant_label']} side changes how you handle feedback: {$variant['career_signal']}.\n\nUse this section as a starting filter, then test the fit against your skills, industry, education, and real work history.",
             'career.upgrade_suggestions' => "For {$label}, career growth should be built around small experiments instead of a fixed job title. Start by choosing one role cluster, one work-environment condition, and one feedback habit that fits the {$context['variant_code']} pattern.",
             'growth.summary' => "{$label} growth usually starts by protecting the strengths that already work, then noticing where those strengths become automatic. The {$context['variant_code']} variant adds a specific growth edge: {$variant['growth_edge']}.",
-            'growth.motivators' => "{$label} is usually energized by {$base['motivator']}. The {$context['variant_code']} side tends to feel most alive when {$variant['motivator']}.",
+            'growth.motivators' => "{$label} may feel engaged when {$base['motivator']}. The {$context['variant_code']} side tends to feel most alive when {$variant['motivator']}.",
             'growth.drainers' => "{$label} is usually drained by {$base['drainer']}. The {$context['variant_code']} side can make that drain sharper when {$variant['drainer']}.",
             'relationships.summary' => "In relationships, {$label} tends to bring {$base['relationship_gift']} while needing {$base['relationship_need']}. The {$context['variant_label']} side changes the emotional rhythm: {$variant['relationship_signal']}.\n\nThis is not a compatibility verdict. It is a practical map for communication, repair, boundaries, and the moments when taking the test together can turn vague tension into clearer language.",
             'relationships.rel_advantages' => "{$label} often creates trust through {$base['relationship_gift']}. The {$context['variant_code']} side can make that advantage more visible when {$variant['relationship_advantage']}.",
@@ -261,7 +261,7 @@ final class MbtiEnglishVariantSectionEnrichmentService
             ['title' => 'Work style fit', 'body' => "{$context['label']} often contributes best through {$base['work_strength']}."],
             ['title' => 'Decision advantage', 'body' => $context['runtime_type_code'] === 'INTJ-T'
                 ? 'One possible work pattern to check is building coherent plans and protecting progress that matters most. A Thinking preference does not establish planning skill.'
-                : "Your {$context['decision_title']} pattern helps you {$base['decision_advantage']}."],
+                : "Check whether {$base['decision_advantage']} in a recent work example. A {$context['decision_title']} preference does not establish skill in this area."],
             ['title' => 'Environment signal', 'body' => "You tend to notice whether a role supports {$base['work_need']} quickly."],
             ['title' => "{$context['variant_label']} edge", 'body' => (string) $variant['career_advantage']],
         ];
@@ -311,7 +311,7 @@ final class MbtiEnglishVariantSectionEnrichmentService
         $variant = (array) $context['variant'];
 
         return [
-            ['title' => 'Natural growth route', 'body' => "{$context['label']} grows fastest by turning {$base['core_strength']} into a repeatable practice."],
+            ['title' => 'Natural growth route', 'body' => "A growth approach to test for {$context['label']} is turning {$base['core_strength']} into a repeatable practice."],
             ['title' => 'Self-awareness signal', 'body' => "Your {$context['information_title']} pattern helps you notice {$base['learning_signal']}."],
             ['title' => 'Identity strength', 'body' => (string) $variant['growth_strength']],
             ['title' => 'Practical reset', 'body' => "When the pattern is working, you can usually return to clarity by {$base['reset']}."],
@@ -330,7 +330,7 @@ final class MbtiEnglishVariantSectionEnrichmentService
         return [
             ['title' => 'Overextension risk', 'body' => $context['runtime_type_code'] === 'INTJ-T'
                 ? 'INTJ-T Architect can get stuck in detached over-optimization.'
-                : "{$context['label']} can get stuck when {$base['growth_risk']}."],
+                : "{$context['label']} can get stuck in {$base['growth_risk']}."],
             ['title' => 'Blind spot', 'body' => "Your {$context['decision_title']} pattern can miss context when {$base['blind_spot']}."],
             ['title' => "{$context['variant_label']} watchout", 'body' => (string) $variant['growth_risk']],
             ['title' => 'Repair move', 'body' => 'The useful move is not to reject the type label, but to choose one small behavior that balances it.'],

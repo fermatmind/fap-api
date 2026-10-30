@@ -46,7 +46,7 @@ final class PublicContent53MbtiFourLeafCopyTest extends TestCase
                 continue;
             }
             $this->assertStringContainsString($type, $factory->build($type, 'Personality', 'trait_overview')['body_md']);
-            $this->assertStringStartsWith('Your ', $factory->build($type, 'Personality', 'career.advantages')['payload_json']['items'][1]['body']);
+            $this->assertStringStartsWith('Check whether ', $factory->build($type, 'Personality', 'career.advantages')['payload_json']['items'][1]['body']);
         }
         $legacy = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/mbti-result-copy.json')), true, 64, JSON_THROW_ON_ERROR)['candidates'][0];
         $this->assertSame($legacy['snapshot']['body_md'], $factory->build('INTJ-T', 'Architect', 'growth.motivators')['body_md']);
