@@ -14,6 +14,19 @@ final class EnneagramReadingCopyProjectionTest extends TestCase
         return json_decode((string) file_get_contents(base_path('tests/Fixtures/enneagram_precloseout_reading_reports_20261030.json')), true, 512, JSON_THROW_ON_ERROR);
     }
 
+    private function expectedCandidateFacts(array $candidate): array
+    {
+        unset($candidate['sections']);
+        foreach ((array) ($candidate['growth_actions'] ?? []) as $index => $action) {
+            if (($candidate['type_id'] ?? null) === '8' && ($action['action_id'] ?? null) === 'type-8-action-01'
+                && ($action['instruction'] ?? null) === 'In the next disagreement, ask three questions before stating a position: what the other person sees, fears, and wants decided. Clarify without hiding rebuttal inside the questions.') {
+                $candidate['growth_actions'][$index]['instruction'] = 'In the next disagreement, ask three questions before stating a position: what the other person sees, what they are concerned about, and who they think should decide. Clarify without hiding rebuttal inside the questions.';
+            }
+        }
+
+        return $candidate;
+    }
+
     private function oldStrings(): array
     {
         static $strings = null;
@@ -50,8 +63,8 @@ final class EnneagramReadingCopyProjectionTest extends TestCase
             }
             foreach ($original['candidates'] as $i => $candidate) {
                 $copy = $reading['candidates'][$i];
-                unset($candidate['sections'], $copy['sections']);
-                $this->assertSame($candidate, $copy);
+                unset($copy['sections']);
+                $this->assertSame($this->expectedCandidateFacts($candidate), $copy);
             }
             $this->assertSame($report['_meta']['enneagram_private_result_authority'], $view['original_authority']);
             $this->assertSame($before, json_encode($report, JSON_THROW_ON_ERROR));
@@ -116,8 +129,8 @@ final class EnneagramReadingCopyProjectionTest extends TestCase
                 $this->assertSame($original['classification'], $view['report_v2']['classification']);
                 foreach ($original['candidates'] as $i => $candidate) {
                     $reading = $view['report_v2']['candidates'][$i];
-                    unset($candidate['sections'], $reading['sections']);
-                    $this->assertSame($candidate, $reading);
+                    unset($reading['sections']);
+                    $this->assertSame($this->expectedCandidateFacts($candidate), $reading);
                 }
                 $pair = $view['report_v2']['modules'][1];
                 if ($types[0] < 5) {
@@ -128,6 +141,51 @@ final class EnneagramReadingCopyProjectionTest extends TestCase
                 }
                 unset($original);
             }
+        }
+    }
+
+    public function test_two_canonical_english_meaning_corrections_reach_candidates_and_mirrored_actions_without_changing_facts(): void
+    {
+        $packs = json_decode((string) file_get_contents(base_path('tests/Fixtures/enneagram_precloseout_semantic_registry.json')), true, 512, JSON_THROW_ON_ERROR);
+        $composer = app(\App\Services\Report\EnneagramReportComposer::class);
+        $call = static fn (string $name, ...$args) => (new \ReflectionMethod($composer, $name))->invoke($composer, ...$args);
+        $indexes = $call('indexRegistryPack', $packs['en']);
+        foreach (['enneagram_likert_105', 'enneagram_forced_choice_144'] as $form) {
+            $report = $this->reports()['en/'.$form];
+            $projection = $report['_meta']['enneagram_public_projection_v2'];
+            foreach ([6, 8, 2] as $i => $type) {
+                $projection['scores']['top_types'][$i]['type'] = (string) $type;
+            }
+            $original = &$report['_meta']['enneagram_report_v2'];
+            $original['candidates'] = $call('buildCanonicalCandidates', $projection, $indexes);
+            $original['modules'] = [$call('buildGrowthActionsModule', $projection, $indexes)];
+            $original['pages'] = [['modules' => $original['modules']]];
+            $before = $report;
+            $view = app(EnneagramReadingCopyProjection::class)->project($report);
+            $this->assertSame('ready', $view['status'], $form.':'.($view['reason'] ?? ''));
+            $reading = $view['report_v2'];
+            $section = array_values(array_filter($reading['candidates'][0]['sections'], static fn ($s) => $s['section_id'] === '4.2'))[0];
+            $this->assertSame('You want to check whether the other person is reliable, but repeated testing may leave them feeling distrusted. Replace indirect tests with an explicit request: what information, updates, or actions would help you feel more at ease?', $section['paragraphs'][0]);
+            $instruction = 'In the next disagreement, ask three questions before stating a position: what the other person sees, what they are concerned about, and who they think should decide. Clarify without hiding rebuttal inside the questions.';
+            $this->assertSame($instruction, $reading['candidates'][1]['growth_actions'][0]['instruction']);
+            $this->assertSame($instruction, $reading['modules'][0]['content']['candidates'][1]['actions'][0]['instruction']);
+            $this->assertSame($instruction, $reading['pages'][0]['modules'][0]['content']['candidates'][1]['actions'][0]['instruction']);
+            foreach ($original['candidates'] as $i => $candidate) {
+                $copy = $reading['candidates'][$i];
+                unset($copy['sections']);
+                $this->assertSame($this->expectedCandidateFacts($candidate), $copy);
+            }
+            $this->assertSame($before, $report);
+            foreach (['action_id', 'type_id'] as $field) {
+                $bad = $report;
+                if ($field === 'action_id') {
+                    $bad['_meta']['enneagram_report_v2']['candidates'][1]['growth_actions'][0]['action_id'] = 'unknown';
+                } else {
+                    $bad['_meta']['enneagram_report_v2']['candidates'][0]['type_id'] = 'unknown';
+                }
+                $this->assertSame('unmatched_copy_identity', app(EnneagramReadingCopyProjection::class)->project($bad)['reason']);
+            }
+            unset($original);
         }
     }
 

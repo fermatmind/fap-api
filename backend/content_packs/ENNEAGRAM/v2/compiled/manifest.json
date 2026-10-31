@@ -2,18 +2,18 @@
     "artifacts": [
         {
             "path": "private_result.compiled.json",
-            "sha256": "bd6a0f1160e5af020a2328a1386c0d08f3e28d28420a43eb263860fbb6e477ee"
+            "sha256": "f0f2401b1c313b1d3f80cb2479cff470d345f90bbeb540e2e4d836e6d7a2634c"
         }
     ],
     "authority_id": "FERMATMIND_ENNEAGRAM_PRIVATE_RESULT_CANONICAL",
     "authority_root": "backend/content_packs/ENNEAGRAM/v2/registry",
-    "compiled_hash": "a1b2b551fd45009f2d14d24206a755655cc2431b8c9d732867d13d02df5e8f1c",
+    "compiled_hash": "cd8812aa5d8c7cc45b68a1ec7e87090b90eb1bcab62a2d2bfd6b86a8e655c1cd",
     "compiled_hash_rule": "sha256(canonical JSON of compiled payload excluding compiled_hash)",
     "compiler": {
         "schema": "fap.enneagram.private_result.compiler.v1",
         "version": "1.3.0"
     },
-    "content_hash": "cc7e5d6c0c0c3fd3bee701c3cb7636db7e0957aff1423c1a96aef5b0044de7c5",
+    "content_hash": "7fe3a9ebb43d42a42a55ab90e63964eb511f0d509f6f6d2ac7f1fe3304e15365",
     "content_maturity_values": [
         "scaffold",
         "p0_placeholder",
@@ -109,7 +109,7 @@
                 ],
                 "role": "seven-chapter candidate sections and growth actions",
                 "schema": "fap.enneagram.chapter_registry.v1",
-                "sha256": "73f4ac3ca003071f7d3c43c5055e7a138e74b25588b906c0fe93c9288576560c"
+                "sha256": "ce491ceda5b12b7f0f049fe8bee59a71e36ac15d1b5f49d50af05f89a2b7186b"
             },
             {
                 "consumer_surfaces": [
@@ -638,7 +638,7 @@
         ]
     },
     "locale_source_hashes": {
-        "en": "0c36339808356fe62fe50861140d3111786e660aad3592490ab3fb9b97fd5fd2",
+        "en": "8592110210dfeb7a646254e3f16a1ef0f5a5078fd943cd8c179898ff37197ae6",
         "zh-CN": "5239f7147d4b88d57f5a13b0d2afedb732487626dca5bdbd599c800d6ac7645c"
     },
     "locales": [
@@ -1002,7 +1002,7 @@
             "sha256": "f82f7481cfc5319785788f9ff9d54153fcaebf7dcccee0d31d78963016b365fa"
         }
     ],
-    "source_hash": "cc7e5d6c0c0c3fd3bee701c3cb7636db7e0957aff1423c1a96aef5b0044de7c5",
+    "source_hash": "7fe3a9ebb43d42a42a55ab90e63964eb511f0d509f6f6d2ac7f1fe3304e15365",
     "source_hash_rule": "sha256(concat(sorted locale/path + NUL + sha256(canonical decoded JSON) + LF))",
     "supported_context_modes": [
         "individual",
