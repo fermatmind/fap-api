@@ -470,6 +470,330 @@ final class ArticlePublishedSourceReviewTest extends TestCase
         return [$source->fresh(['workingRevision', 'publishedRevision', 'seoMeta']), $target->fresh(['workingRevision', 'publishedRevision', 'seoMeta'])];
     }
 
+    public function test_independent_draft_review_uses_public_source_and_keeps_private_source_and_history_unchanged(): void
+    {
+        [$source, $target] = $this->independentFixture();
+        $sourceBefore = \App\Console\Commands\ArticleForkPrivateTranslationLinks::sourceHash($source);
+        $oldHash = $target->workingRevision->translated_from_version_hash;
+        $oldDraft = $target->workingRevision->getAttributes();
+        app(OrgContext::class)->set(17, (int) auth('admin')->id(), 'admin');
+        Livewire::test(EditArticle::class, ['record' => $target->id])
+            ->callAction('forkPrivateWorkingRevision', ['target_hash' => \App\Support\ArticleSourceTargetSnapshot::publicationHash($target)])
+            ->assertHasNoActionErrors()->assertRedirect();
+        $target->refresh();
+        Livewire::test(EditArticle::class, ['record' => $target->id])->fillForm([
+            'title' => 'Final independently researched English article',
+            'excerpt' => 'A revised complete summary from the real Ops editor.',
+            'content_md' => '## Final independently researched body',
+            'seo_title' => 'Can personality traits change?',
+            'seo_description' => 'Separate adult development, intentional change and score differences.',
+            'og_title' => 'Can personality traits change?',
+            'og_description' => 'Separate adult development, intentional change and score differences.',
+            'working_revision_status' => 'human_review',
+        ])->call('save')->assertHasNoFormErrors();
+        $target = $target->fresh(['workingRevision', 'seoMeta']);
+        $this->assertNotSame($oldDraft['id'], $target->working_revision_id);
+        $this->assertSame($oldDraft, ArticleTranslationRevision::withoutGlobalScopes()->find($oldDraft['id'])->getAttributes());
+        foreach (['title', 'excerpt', 'content_md'] as $field) {
+            $this->assertSame($target->workingRevision->{$field}, $target->{$field}, $field);
+        }
+        $service = app(ArticlePublishedSourceReviewService::class);
+        $this->assertFalse(app(\App\Services\Cms\ArticleTranslationWorkflowService::class)->preflight($target)['ok']);
+        $input = $service->prepareIndependent($target);
+        $context = json_decode($input['review_context'], true);
+        $this->assertSame($source->published_revision_id, $context['source_published_revision_id']);
+        $this->assertSame($source->working_revision_id, $context['source_unpublished_working_revision_id']);
+        $this->assertStringContainsString('revision='.$source->published_revision_id, $context['source_preview']);
+        $this->assertStringContainsString('preview=published_source', $context['source_preview']);
+        $org = \App\Models\Organization::create(['name' => 'Preview operator org', 'owner_user_id' => 9101, 'status' => 'active',
+            'domain' => 'source-preview.example.test', 'timezone' => 'Asia/Shanghai', 'locale' => 'en']);
+        $this->withSession(['ops_org_id' => $org->id, 'ops_admin_totp_verified_user_id' => auth('admin')->id()])
+            ->get($context['source_preview'])->assertOk()->assertSee('当前源文')
+            ->assertSee('Published source revision preview')->assertDontSee('Separate unpublished Chinese draft');
+        $this->get($context['target_preview'])->assertOk()->assertSee('Final independently researched body');
+        app(OrgContext::class)->set(17, (int) auth('admin')->id(), 'admin');
+        Livewire::test(EditArticle::class, ['record' => $target->id])
+            ->callAction('confirmIndependentSourceReview', [...$input, 'source_reviewed' => true,
+                'review_notes' => 'Read the complete public source and independent research; retained evidence boundaries and documented new intervention evidence.'])
+            ->assertHasNoActionErrors()->assertRedirect();
+        $this->assertTrue($service->hasCurrentIndependentReview($target));
+        $this->assertFalse($target->fresh()->isTranslationStale());
+        $workflow = app(\App\Services\Cms\ArticleTranslationWorkflowService::class);
+        $this->assertTrue($workflow->preflight($target->fresh())['ok']);
+        $workflow->approveEditorialWorkingRevision($target, (int) auth('admin')->id());
+        $target = $target->fresh(['workingRevision', 'seoMeta']);
+        $this->assertTrue($service->hasCurrentIndependentReview($target));
+        $this->assertTrue(app(\App\Services\Cms\CmsEditorialReviewAttestationService::class)
+            ->hasApprovedEvidence('article_translation_revision', $source->publishedRevision));
+        $this->assertSame($oldHash, $target->workingRevision->translated_from_version_hash);
+        $this->assertSame($sourceBefore, \App\Console\Commands\ArticleForkPrivateTranslationLinks::sourceHash($source->fresh()));
+        $this->assertDatabaseCount('editorial_reviews', 0);
+        $history = \App\Support\ArticleSourceTargetSnapshot::sourceRevisions($target, [(int) $target->working_revision_id]);
+        $fingerprint = \App\Console\Commands\ArticleForkPrivateTranslationLinks::class;
+        $package = ['schema' => 'reviewed_article_translation_publication_v1', 'source_id' => (int) $source->id,
+            'target_id' => (int) $target->id, 'source_published_revision_id' => (int) $source->published_revision_id,
+            'working_revision_id' => (int) $target->working_revision_id, 'source_snapshot_hash' => $fingerprint::sourceHash($source),
+            'target_snapshot_hash' => $fingerprint::targetHash($source), 'body_sha256' => hash('sha256', $target->workingRevision->content_md)];
+        $publication = app(\App\Services\Cms\ReviewedTranslationPublication::class);
+        $this->assertTrue($publication->run($package, false, false, '', true)['ok']);
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        \Illuminate\Support\Facades\Http::fake(function ($request) {
+            $payload = $request->data();
+            $locale = $payload['content']['locale'];
+            $slug = $payload['content']['slug'];
+            $paths = array_values(array_unique([...$payload['cache_signal']['paths'], '/zh/articles', '/en/articles',
+                '/zh/articles/'.$slug, '/en/articles/'.$slug, '/llms.txt', '/llms-full.txt']));
+
+            return \Illuminate\Support\Facades\Http::response(['ok' => true, 'revalidated_paths' => $paths, 'rejected_paths' => [],
+                'invalidated_tags' => ['article-detail:'.$locale.':'.$slug, 'article-seo:'.$locale.':'.$slug]]);
+        });
+        $publishInput = app(\App\Filament\Ops\Support\ArticleControlledPublicationWorkspace::class)->prepare($target);
+        Livewire::test(EditArticle::class, ['record' => $target->id])->callAction('publishControlled', [
+            ...$publishInput, 'preview_approved' => true, 'make_indexable' => true,
+        ])->assertHasNoActionErrors()->assertRedirect();
+        \Illuminate\Support\Facades\Http::assertSent(fn ($request): bool => $request->url() === 'https://cache.example.test/revalidate');
+        $target = $target->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $this->assertTrue($target->is_public);
+        $this->assertSame($package['working_revision_id'], $target->published_revision_id);
+        $this->assertSame($history, \App\Support\ArticleSourceTargetSnapshot::sourceRevisions($target, [(int) $target->working_revision_id]));
+        $this->assertSame($sourceBefore, $fingerprint::sourceHash($source->fresh()));
+        $this->assertTrue($service->hasCurrentIndependentReview($target));
+        $code = \Illuminate\Support\Facades\Artisan::call('articles:seo-gate-rollout', [
+            '--article-ids' => (string) $target->id, '--translation-group-id' => $target->translation_group_id,
+            '--expected-slugs' => $target->slug, '--enable-article-schema' => true, '--enable-breadcrumb-schema' => true,
+            '--hold-faq-schema' => true, '--execute' => true, '--no-publish' => true, '--no-search' => true,
+            '--no-sitemap-llms-change' => true, '--no-content-change' => true, '--no-revalidation' => true, '--json' => true,
+        ]);
+        $this->assertSame(0, $code, \Illuminate\Support\Facades\Artisan::output());
+        $this->assertTrue($service->hasCurrentIndependentReview($target->fresh()));
+        $this->assertFalse($target->fresh()->isTranslationStale());
+        $seo = $target->seoMeta->fresh();
+        $schema = $seo->schema_json;
+        $schema['editorial_package_v1']['faq_items'] = [['question' => 'Changed FAQ?', 'answer' => 'Changed substantive answer.']];
+        $seo->forceFill(['schema_json' => $schema])->saveQuietly();
+        $this->assertFalse($service->hasCurrentIndependentReview($target->fresh()));
+    }
+
+    #[DataProvider('publishedSourcePreviewConflicts')]
+    public function test_published_source_http_preview_is_explicit_revision_bound_and_preserves_working_preview(string $case): void
+    {
+        [$source, $target] = $this->independentFixture();
+        $org = \App\Models\Organization::create(['name' => 'Preview operator org', 'owner_user_id' => 9101, 'status' => 'active',
+            'domain' => 'source-preview.example.test', 'timezone' => 'Asia/Shanghai', 'locale' => 'en']);
+        $this->withSession(['ops_org_id' => $org->id, 'ops_admin_totp_verified_user_id' => auth('admin')->id()]);
+        $url = \App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace::publishedSourcePreviewUrl($source);
+        $this->get($url)->assertOk()->assertSee('当前源文')->assertDontSee('Separate unpublished Chinese draft');
+        $this->get(route('ops.articles.preview', ['article' => $source->id]))->assertOk()->assertSee('Separate unpublished Chinese draft');
+        $this->get(route('ops.articles.preview', ['article' => $source->id, 'revision' => $source->published_revision_id]))->assertStatus(409);
+        $status = 409;
+        parse_str((string) parse_url($url, PHP_URL_QUERY), $query);
+        match ($case) {
+            'source_public_body' => $source->publishedRevision->forceFill(['content_md' => 'Changed public source'])->saveQuietly(),
+            'published_pointer' => $source->forceFill(['published_revision_id' => $source->working_revision_id])->saveQuietly(),
+            'wrong_owner' => DB::table('article_translation_revisions')->where('id', $source->published_revision_id)->update(['article_id' => $target->id, 'revision_number' => 99]),
+            'wrong_tenant' => DB::table('article_translation_revisions')->where('id', $source->published_revision_id)->update(['org_id' => 2]),
+            'source_private' => $source->forceFill(['is_public' => false])->saveQuietly(),
+            'wrong_hash' => $query['revision_hash'] = str_repeat('a', 64),
+            'missing_hash' => (function () use (&$query, &$status): void {
+                unset($query['revision_hash']);
+                $status = 422;
+            })(),
+        };
+        $response = $this->get(route('ops.articles.preview', ['article' => $source->id, ...$query]))->assertStatus($status);
+        if ($status === 409) {
+            $response->assertHeader('X-Robots-Tag', 'noindex, noarchive, nosnippet');
+        }
+    }
+
+    public static function publishedSourcePreviewConflicts(): array
+    {
+        return array_map(fn ($case): array => [$case], ['source_public_body', 'published_pointer', 'wrong_owner', 'wrong_tenant', 'source_private', 'wrong_hash', 'missing_hash']);
+    }
+
+    #[DataProvider('independentDrifts')]
+    public function test_independent_review_rejects_drift_and_does_not_make_default_stale_rules_optional(string $case): void
+    {
+        [$source, $target] = $this->independentFixture();
+        $service = app(ArticlePublishedSourceReviewService::class);
+        $input = $service->prepareIndependent($target);
+        $input = [...$input, 'source_reviewed' => true, 'review_notes' => 'Read both complete previews and original research; independent added evidence has bounded claims.'];
+        $service->confirmIndependent($target, $input);
+        match ($case) {
+            'source_private_body' => $source->workingRevision->forceFill(['content_md' => 'Changed unpublished draft'])->saveQuietly(),
+            'source_public_body' => $source->publishedRevision->forceFill(['content_md' => 'Changed public source'])->saveQuietly(),
+            'source_pointer' => $source->forceFill(['working_revision_id' => $source->published_revision_id])->saveQuietly(),
+            'source_tenant' => DB::table('articles')->where('id', $source->id)->update(['org_id' => 3]),
+            'target_body' => $target->workingRevision->forceFill(['content_md' => 'Changed target'])->saveQuietly(),
+            'target_seo' => $target->seoMeta->forceFill(['seo_title' => 'Changed SEO'])->saveQuietly(),
+            'target_metadata' => $target->forceFill(['related_test_slug' => 'another-test'])->saveQuietly(),
+            'category_record' => DB::table('article_categories')->where('id', $target->category_id)->update(['name' => 'Changed category']),
+            'tag_record' => DB::table('article_tags')->update(['name' => 'Changed tag']),
+            'target_tags' => DB::table('article_tag_map')->insert(['article_id' => $target->id, 'tag_id' => 999, 'org_id' => 2]),
+            'target_fork' => $target->forceFill(['working_revision_id' => null])->saveQuietly(),
+            'missing_audit' => AuditLog::withoutGlobalScopes()->where('action', 'article_independent_source_reviewed')->delete(),
+            'incomplete_evidence' => DB::table('review_attestation_target_evidences')->where('review_attestation_id', ReviewAttestation::sole()->id)->limit(1)->delete(),
+        };
+        $this->assertFalse($service->hasCurrentIndependentReview($target));
+        if ($case !== 'missing_audit') {
+            try {
+                $service->confirmIndependent($target, $input);
+                $this->fail('Old review must reject drift.');
+            } catch (ValidationException|RuntimeException) {
+            }
+        }
+    }
+
+    public static function independentDrifts(): array
+    {
+        return array_map(fn ($case): array => [$case], ['source_private_body', 'source_public_body', 'source_pointer', 'source_tenant',
+            'target_body', 'target_seo', 'target_metadata', 'category_record', 'tag_record', 'target_tags', 'target_fork', 'missing_audit', 'incomplete_evidence']);
+    }
+
+    public function test_independent_review_requires_owner_step_up_notes_and_audit_and_rolls_back_failed_audit(): void
+    {
+        [, $target] = $this->independentFixture();
+        $service = app(ArticlePublishedSourceReviewService::class);
+        $input = $service->prepareIndependent($target);
+        try {
+            $service->confirmIndependent($target, [...$input, 'source_reviewed' => true]);
+            $this->fail('Notes required.');
+        } catch (ValidationException) {
+        }
+        config(['admin.totp.enabled' => true]);
+        session()->forget('ops_admin_totp_verified_user_id');
+        try {
+            $service->confirmIndependent($target, [...$input, 'source_reviewed' => true, 'review_notes' => str_repeat('Reviewed ', 10)]);
+            $this->fail('Step up required.');
+        } catch (HttpException $e) {
+            $this->assertSame(403, $e->getStatusCode());
+        }
+        session(['ops_admin_totp_verified_user_id' => auth('admin')->id()]);
+        $this->mock(AuditLogger::class)->shouldReceive('log')->once()->andThrow(new RuntimeException('audit failure'));
+        try {
+            $service->confirmIndependent($target, [...$input, 'source_reviewed' => true, 'review_notes' => str_repeat('Reviewed ', 10)]);
+            $this->fail('Audit failure required.');
+        } catch (RuntimeException $e) {
+            $this->assertSame('audit failure', $e->getMessage());
+        }
+        $this->assertDatabaseCount('review_attestations', 0);
+    }
+
+    public function test_private_fork_preserves_original_draft_and_source_with_real_ops_org_context(): void
+    {
+        [$source, $target] = $this->independentFixture();
+        $old = $target->workingRevision->getAttributes();
+        $before = \App\Console\Commands\ArticleForkPrivateTranslationLinks::sourceHash($source);
+        $hash = \App\Support\ArticleSourceTargetSnapshot::publicationHash($target);
+        app(OrgContext::class)->set(17, (int) auth('admin')->id(), 'admin');
+        Livewire::test(EditArticle::class, ['record' => $target->id])
+            ->callAction('forkPrivateWorkingRevision', ['target_hash' => $hash])->assertHasNoActionErrors()->assertRedirect();
+        $target->refresh()->load('workingRevision');
+        $this->assertNotSame($old['id'], $target->working_revision_id);
+        $this->assertSame($old, ArticleTranslationRevision::withoutGlobalScopes()->find($old['id'])->getAttributes());
+        $this->assertSame($old['id'], $target->workingRevision->supersedes_revision_id);
+        $this->assertNull($target->published_revision_id);
+        $this->assertSame($before, \App\Console\Commands\ArticleForkPrivateTranslationLinks::sourceHash($source->fresh()));
+        try {
+            app(ArticleTranslationRevisionWorkspace::class)->forkPrivateWorkingRevision($target, $hash, (int) auth('admin')->id());
+            $this->fail('Stale snapshot must reject.');
+        } catch (RuntimeException $e) {
+            $this->assertSame('article_publication_state_changed', $e->getMessage());
+        }
+    }
+
+    public function test_real_ops_save_of_published_target_preserves_public_body_and_source(): void
+    {
+        [$source, $target] = $this->fixture();
+        Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+        app(OrgContext::class)->set(17, (int) auth('admin')->id(), 'admin');
+        $sourceBefore = \App\Console\Commands\ArticleForkPrivateTranslationLinks::sourceHash($source);
+        $old = $target->publishedRevision->getAttributes();
+        $projection = $target->only(['title', 'excerpt', 'content_md', 'published_revision_id', 'status', 'is_public']);
+        Livewire::test(EditArticle::class, ['record' => $target->id])->fillForm([
+            'title' => 'Pending published-target edit', 'excerpt' => 'Pending excerpt', 'content_md' => '## Pending complete body',
+        ])->call('save')->assertHasNoFormErrors();
+        $target->refresh()->load(['workingRevision', 'publishedRevision']);
+        $this->assertSame($projection, $target->only(array_keys($projection)));
+        $this->assertSame($old, $target->publishedRevision->getAttributes());
+        $this->assertNotSame($old['id'], $target->working_revision_id);
+        $this->assertSame('## Pending complete body', $target->workingRevision->content_md);
+        $this->assertSame($sourceBefore, \App\Console\Commands\ArticleForkPrivateTranslationLinks::sourceHash($source->fresh()));
+    }
+
+    #[DataProvider('independentOgFields')]
+    public function test_independent_review_rejects_og_that_native_publication_would_overwrite(string $field): void
+    {
+        [$source, $target] = $this->independentFixture();
+        $target->seoMeta->forceFill([$field => 'Different reviewed OG content'])->saveQuietly();
+        $before = \App\Console\Commands\ArticleForkPrivateTranslationLinks::targetHash($source);
+        try {
+            app(ArticlePublishedSourceReviewService::class)->prepareIndependent($target);
+            $this->fail('An OG difference must reject before review or publication.');
+        } catch (ValidationException $e) {
+            $this->assertSame(['independent_source_publication_projection_mismatch'], $e->errors()['source_reviewed']);
+        }
+        $this->assertSame($before, \App\Console\Commands\ArticleForkPrivateTranslationLinks::targetHash($source));
+        $this->assertFalse($target->fresh()->is_public);
+        $this->assertDatabaseCount('review_attestations', 0);
+    }
+
+    public static function independentOgFields(): array
+    {
+        return [['og_title'], ['og_description']];
+    }
+
+    public function test_first_publication_with_separate_source_working_draft_still_rejects_without_independent_review(): void
+    {
+        [$source, $target] = $this->independentFixture();
+        $target->workingRevision->forceFill(['revision_status' => 'approved', 'approved_at' => now(), 'reviewed_by' => auth('admin')->id()])->saveQuietly();
+        app(\App\Services\Cms\CmsEditorialReviewAttestationService::class)->bindOrCreateApproved(null, 'cms_article_review',
+            'test:unbound:'.$target->working_revision_id, [['surface_id' => 'article_translation_revision', 'record' => $target->workingRevision->fresh()]], (int) auth('admin')->id());
+        $f = \App\Console\Commands\ArticleForkPrivateTranslationLinks::class;
+        $package = ['schema' => 'reviewed_article_translation_publication_v1', 'source_id' => (int) $source->id,
+            'target_id' => (int) $target->id, 'source_published_revision_id' => (int) $source->published_revision_id,
+            'working_revision_id' => (int) $target->working_revision_id, 'source_snapshot_hash' => $f::sourceHash($source),
+            'target_snapshot_hash' => $f::targetHash($source), 'body_sha256' => hash('sha256', $target->workingRevision->content_md)];
+        $before = $f::targetHash($source);
+        try {
+            app(\App\Services\Cms\ReviewedTranslationPublication::class)->run($package, true, true,
+                'I explicitly approve Codex to publish article id '.$target->id.' after preflight passes.', true);
+            $this->fail('Separate private source must not be implicitly accepted.');
+        } catch (RuntimeException $e) {
+            $this->assertSame('translation_snapshot_drift', $e->getMessage());
+        }
+        $this->assertSame($before, $f::targetHash($source));
+        $this->assertFalse($target->fresh()->is_public);
+    }
+
+    private function independentFixture(): array
+    {
+        [$source, $target] = $this->fixture();
+        $working = $source->publishedRevision->replicate();
+        $working->forceFill(['revision_number' => 2, 'revision_status' => 'human_review', 'published_at' => null,
+            'content_md' => '## Separate unpublished Chinese draft', 'source_version_hash' => str_repeat('b', 64)])->saveQuietly();
+        $source->forceFill(['working_revision_id' => $working->id, 'source_version_hash' => str_repeat('b', 64)])->saveQuietly();
+        $targetRevision = ArticleTranslationRevision::withoutGlobalScopes()->where('article_id', $target->id)->where('revision_status', 'human_review')->sole();
+        $target->forceFill(['status' => 'draft', 'is_public' => false, 'is_indexable' => false, 'published_at' => null,
+            'published_revision_id' => null, 'working_revision_id' => $targetRevision->id, 'translation_status' => 'human_review',
+            'title' => $targetRevision->title, 'excerpt' => $targetRevision->excerpt, 'content_md' => $targetRevision->content_md])->saveQuietly();
+        $category = \App\Models\ArticleCategory::create(['org_id' => 0, 'name' => 'Big Five', 'slug' => 'big-five', 'is_active' => true]);
+        $tag = \App\Models\ArticleTag::create(['org_id' => 0, 'name' => 'Big Five', 'slug' => 'big-five', 'is_active' => true]);
+        $target->forceFill(['category_id' => $category->id, 'author_name' => 'FermatMind Editorial',
+            'cover_image_url' => 'https://assets.fermatmind.com/cover.jpg', 'cover_image_alt' => 'Illustration of personality development'])->saveQuietly();
+        $target->tags()->sync([$tag->id => ['org_id' => 0]]);
+        $target->seoMeta->forceFill(['og_title' => $targetRevision->seo_title, 'og_description' => $targetRevision->seo_description,
+            'og_image_url' => $target->cover_image_url, 'schema_json' => ['editorial_package_v1' => ['article_schema_enabled' => false,
+                'breadcrumb_schema_enabled' => false, 'faq_schema_enabled' => false, 'schema_hold' => true,
+                'faq_items' => [['question' => 'Can scores change?', 'answer' => 'A change needs context and evidence.']]]]])->saveQuietly();
+        Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+        config(['admin.totp.enabled' => true]);
+        auth('admin')->user()->forceFill(['totp_enabled_at' => now()])->saveQuietly();
+        session(['ops_admin_totp_verified_user_id' => auth('admin')->id()]);
+
+        return [$source->fresh(['workingRevision', 'publishedRevision']), $target->fresh(['workingRevision', 'seoMeta'])];
+    }
+
     private function rows(Article $source, Article $target): array
     {
         return [$source->fresh()->getAttributes(), $target->fresh()->getAttributes(), $source->publishedRevision->fresh()->getAttributes(), $target->publishedRevision->fresh()->getAttributes(), $target->seoMeta->fresh()->getAttributes()];

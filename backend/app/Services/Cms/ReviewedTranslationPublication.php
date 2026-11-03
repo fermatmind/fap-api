@@ -100,7 +100,9 @@ final readonly class ReviewedTranslationPublication
         $s = $rows->get($p['source_id']);
         $t = $rows->get($p['target_id']);
         if (! $s instanceof Article || ! $t instanceof Article || ! in_array($s->locale, ['en', 'zh-CN'], true) || ! in_array($t->locale, ['en', 'zh-CN'], true) || $s->locale === $t->locale || ! $s->isSourceArticle()
-            || $s->published_revision_id !== $p['source_published_revision_id'] || $s->working_revision_id !== $s->published_revision_id
+            || $s->published_revision_id !== $p['source_published_revision_id']
+            || ($s->working_revision_id !== $s->published_revision_id
+                && ! app(ArticlePublishedSourceReviewService::class)->hasCurrentIndependentReview($t))
             || $t->working_revision_id !== $p['working_revision_id']
             || ($existing
                 ? ($t->published_revision_id !== $p['target_published_revision_id'] || $t->working_revision_id === $t->published_revision_id || $t->status !== 'published' || ! $t->is_public)
@@ -134,7 +136,8 @@ final readonly class ReviewedTranslationPublication
             || $t->content_md !== $projection->content_md
             || ! $this->reviews->hasApprovedEvidence('article_translation_revision', $t->workingRevision)
             || ! $s->publishedRevision instanceof ArticleTranslationRevision
-            || ! $this->reviews->hasApprovedEvidence('article_translation_revision', $s->publishedRevision) || ! $this->workflow->preflight($t)['ok']) {
+            || (! $this->reviews->hasApprovedEvidence('article_translation_revision', $s->publishedRevision)
+                && ! app(ArticlePublishedSourceReviewService::class)->hasCurrentIndependentReview($t)) || ! $this->workflow->preflight($t)['ok']) {
             throw new RuntimeException('translation_review_or_lineage_invalid');
         }
         if (! $t->category || $t->tags->isEmpty() || ! filled($t->cover_image_url) || ! filled($t->cover_image_alt) || ! $t->seoMeta

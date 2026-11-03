@@ -128,6 +128,9 @@
                 <div class="fields">
                     <div class="field"><span>Article ID</span>{{ $previewContext['article_id'] }}</div>
                     <div class="field"><span>Working revision</span>{{ $previewContext['working_revision_id'] ?? 'none' }}</div>
+                    @if (($previewContext['preview_mode'] ?? 'working') === 'published_source')
+                        <div class="field"><span>Published source revision preview</span>{{ $previewContext['preview_revision_id'] ?? 'none' }}</div>
+                    @endif
                     <div class="field"><span>Status</span>{{ $previewContext['status'] }}</div>
                     <div class="field"><span>Public URL candidate</span>{{ $publicUrl ?? 'not available' }}</div>
                     <div class="field"><span>Canonical metadata value</span>{{ $canonicalUrl ?? 'not set' }}</div>

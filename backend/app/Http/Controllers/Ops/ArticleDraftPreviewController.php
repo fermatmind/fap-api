@@ -36,9 +36,25 @@ final class ArticleDraftPreviewController extends Controller
             ->whereIn('org_id', $this->allowedOrgIds($orgId))
             ->firstOrFail();
 
-        $revision = $record->workingRevision instanceof ArticleTranslationRevision
-            ? $record->workingRevision
-            : null;
+        $previewMode = $request->query('preview', 'working');
+        abort_unless(in_array($previewMode, ['working', 'published_source'], true), 422);
+        $publishedSource = $previewMode === 'published_source';
+        if ($publishedSource) {
+            abort_unless($request->has('revision') && $request->has('revision_hash'), 422);
+            $revision = $record->publishedRevision;
+            if (! $record->isSourceArticle() || $record->trashed() || $record->status !== 'published' || ! $record->is_public
+                || $record->published_at === null || $record->published_at->isFuture()
+                || in_array($record->lifecycle_state, [Article::LIFECYCLE_ARCHIVED, Article::LIFECYCLE_SOFT_DELETED], true)
+                || ! $revision instanceof ArticleTranslationRevision || (int) $revision->id !== (int) $record->published_revision_id
+                || (int) $revision->article_id !== (int) $record->id || (int) $revision->org_id !== (int) $record->org_id
+                || $revision->locale !== $record->locale || $revision->source_locale !== $record->locale
+                || (int) $revision->source_article_id !== (int) $record->id || $revision->translation_group_id !== $record->translation_group_id
+                || ! in_array($revision->revision_status, [ArticleTranslationRevision::STATUS_SOURCE, ArticleTranslationRevision::STATUS_PUBLISHED], true)) {
+                return $this->revisionConflict($record);
+            }
+        } else {
+            $revision = $record->workingRevision instanceof ArticleTranslationRevision ? $record->workingRevision : null;
+        }
         if ($request->has('revision')) {
             $expected = $request->query('revision');
             abort_unless(is_string($expected) && ctype_digit($expected) && (int) $expected > 0, 422);
@@ -90,7 +106,9 @@ final class ArticleDraftPreviewController extends Controller
             'previewContext' => [
                 'is_preview' => true,
                 'article_id' => (int) $record->id,
-                'working_revision_id' => $revision?->id !== null ? (int) $revision->id : null,
+                'working_revision_id' => $record->working_revision_id !== null ? (int) $record->working_revision_id : null,
+                'preview_mode' => $previewMode,
+                'preview_revision_id' => $revision?->id !== null ? (int) $revision->id : null,
                 'published_revision_id' => $record->published_revision_id !== null ? (int) $record->published_revision_id : null,
                 'status' => (string) $record->status,
                 'is_public' => (bool) $record->is_public,

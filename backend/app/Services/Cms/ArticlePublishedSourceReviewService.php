@@ -128,6 +128,209 @@ final class ArticlePublishedSourceReviewService
         }
     }
 
+    /** Review an unpublished independent adaptation against an explicit public source, never its private working draft. */
+    public function prepareIndependent(Article $selected): array
+    {
+        $this->authorize();
+
+        return DB::transaction(function () use ($selected): array {
+            [$target, $source, $revision, $published] = $this->independentPair($selected, true);
+            $this->require($target->published_revision_id === null
+                && $revision->revision_status === ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+                'independent_source_review_not_available');
+
+            return ['pair_hash' => $this->independentHash($target, $source, $revision, $published, true),
+                'source_reviewed' => false, 'review_notes' => '',
+                'review_context' => json_encode([
+                    'review_mode' => 'independent_editorial_adaptation',
+                    'source_article_id' => (int) $source->id,
+                    'source_published_revision_id' => (int) $published->id,
+                    'source_unpublished_working_revision_id' => $source->working_revision_id !== $published->id ? $source->working_revision_id : null,
+                    'source_preview' => ArticleWorkspace::publishedSourcePreviewUrl($source),
+                    'target_article_id' => (int) $target->id,
+                    'target_working_revision_id' => (int) $revision->id,
+                    'target_preview' => ArticleWorkspace::previewUrl($target, (int) $revision->id),
+                    'historical_source_hash_retained' => $revision->translated_from_version_hash,
+                    'private_source_draft_reviewed_or_approved' => false,
+                ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)];
+        });
+    }
+
+    public function confirmIndependent(Article $selected, array $data): void
+    {
+        $this->authorize();
+        $notes = trim((string) ($data['review_notes'] ?? ''));
+        $this->require(($data['source_reviewed'] ?? false) === true && mb_strlen($notes) >= 20 && mb_strlen($notes) <= 6000,
+            'independent_source_review_and_notes_required');
+        DB::transaction(function () use ($selected, $data, $notes): void {
+            $this->require(\App\Support\SchemaBaseline::hasTable('audit_logs'), 'independent_source_audit_unavailable');
+            [$target, $source, $revision, $published] = $this->independentPair($selected, true);
+            $this->require($target->published_revision_id === null && $revision->revision_status === ArticleTranslationRevision::STATUS_HUMAN_REVIEW
+                && $revision->approved_at === null && $revision->published_at === null && $revision->reviewed_by === null,
+                'independent_source_review_not_available');
+            $hash = $this->independentHash($target, $source, $revision, $published, true);
+            $this->require(hash_equals($hash, (string) ($data['pair_hash'] ?? '')), 'source_or_target_changed');
+            $actor = (int) auth((string) config('admin.guard', 'admin'))->id();
+            $attestation = app(CmsEditorialReviewAttestationService::class)->bindOrCreateApproved(null,
+                'cms_article_independent_source_review', $this->independentIdentity($target, $source),
+                $this->resources($target, $source, $revision, $published), $actor, $hash);
+            $request = Request::create('/ops/articles/independent-source-review', 'POST');
+            $request->attributes->set('org_id', 0);
+            app(AuditLogger::class)->log($request, 'article_independent_source_reviewed', 'article', (string) $target->id, [
+                'resource_org_id' => 0, 'attestation_id' => (int) $attestation->id, 'pair_sha256' => $hash,
+                'source_article_id' => (int) $source->id, 'source_published_revision_id' => (int) $published->id,
+                'source_working_revision_id' => (int) $source->working_revision_id, 'target_working_revision_id' => (int) $revision->id,
+                'review_notes' => $notes, 'review_mode' => 'independent_editorial_adaptation',
+                'historical_source_hash_rewritten' => false, 'private_source_draft_approved' => false, 'published' => false,
+            ], reason: 'independent_editorial_public_source_review', result: 'success');
+            $this->require($this->hasCurrentIndependentReview($target), 'independent_source_review_readback_failed');
+        });
+    }
+
+    /** Exact review remains valid through the target's normal approve/publish outputs, not through edits. */
+    public function hasCurrentIndependentReview(Article $selected): bool
+    {
+        try {
+            [$target, $source, $revision, $published] = $this->independentPair($selected);
+            $hash = $this->independentHash($target, $source, $revision, $published);
+            $record = ReviewAttestation::query()->where('scope_type', 'cms_article_independent_source_review')
+                ->where('scope_identity', $this->independentIdentity($target, $source))->where('package_sha256', $hash)
+                ->where('review_mode', 'solo_owner')->where('review_source', (string) config('review_governance.attestation.review_source'))
+                ->where('decision', 'approved_all')->where('target_count', 4)
+                ->where('attested_by_admin_user_id', (int) config('review_governance.solo_owner_admin_user_id'))->latest('id')->first();
+            if (! $record || ! AuditLog::withoutGlobalScopes()->where('action', 'article_independent_source_reviewed')
+                ->where('target_type', 'article')->where('target_id', (string) $target->id)->where('result', 'success')
+                ->where('actor_admin_id', $record->attested_by_admin_user_id)->where('meta_json->resource_org_id', 0)
+                ->where('meta_json->attestation_id', (int) $record->id)->where('meta_json->pair_sha256', $hash)->exists()) {
+                return false;
+            }
+            $adapter = app(CmsEditorialReviewAttestationService::class);
+            $resources = $this->resources($target, $source, $revision, $published);
+            $adapter->preflight($record->canonical_evidence_json, $resources, $hash);
+            if ($record->targetEvidences->count() !== 4) {
+                return false;
+            }
+            foreach ($adapter->targets($resources) as $expected) {
+                if ($record->targetEvidences->where('target_identity', $expected['target_identity'])
+                    ->where('target_sha256', $expected['target_sha256'])->where('target_decision', 'approved')->count() !== 1) {
+                    return false;
+                }
+            }
+
+            return true;
+        } catch (Throwable) {
+            return false;
+        }
+    }
+
+    private function independentPair(Article $selected, bool $lock = false): array
+    {
+        $initial = Article::withoutGlobalScopes()->findOrFail($selected->getKey());
+        $rows = Article::withoutGlobalScopes()->whereIn('id', [$initial->id, $initial->source_article_id])->orderBy('id')
+            ->when($lock, fn ($q) => $q->lockForUpdate())->get()->keyBy('id');
+        $target = $rows->get($initial->id);
+        $source = $rows->get($target?->source_article_id);
+        $this->require($target instanceof Article && $source instanceof Article && $source->isSourceArticle() && ! $target->isSourceArticle()
+            && (int) $target->org_id === 0 && (int) $source->org_id === 0 && ! $target->trashed() && ! $source->trashed()
+            && in_array($source->locale, ['en', 'zh-CN'], true) && in_array($target->locale, ['en', 'zh-CN'], true)
+            && $source->locale !== $target->locale && $target->source_locale === $source->locale
+            && (int) $target->translated_from_article_id === (int) $source->id && filled($source->translation_group_id)
+            && $target->translation_group_id === $source->translation_group_id
+            && $source->status === 'published' && $source->is_public && $source->published_at !== null && ! $source->published_at->isFuture()
+            && $source->working_revision_id !== null && $source->published_revision_id !== null
+            && (($target->published_revision_id === null && $target->status === 'draft' && ! $target->is_public)
+                || ($target->working_revision_id === $target->published_revision_id && $target->status === 'published'
+                    && $target->is_public && $target->published_at !== null && ! $target->published_at->isFuture())),
+            'independent_source_pair_invalid');
+        foreach ([$source, $target] as $article) {
+            $this->require(! in_array($article->lifecycle_state, [Article::LIFECYCLE_ARCHIVED, Article::LIFECYCLE_SOFT_DELETED], true),
+                'independent_source_lifecycle_invalid');
+        }
+        $this->require(\App\Models\ArticleCategory::withoutGlobalScopes()->whereKey($target->category_id)->where('org_id', 0)->exists()
+            && ! DB::table('article_tag_map as links')->leftJoin('article_tags as tags', 'tags.id', '=', 'links.tag_id')
+                ->where('links.article_id', $target->id)->where(function ($query): void {
+                    $query->where('links.org_id', '!=', 0)->orWhereNull('links.org_id')->orWhereNull('tags.id')
+                        ->orWhere('tags.org_id', '!=', 0)->orWhereNull('tags.org_id');
+                })->exists(), 'independent_source_taxonomy_invalid');
+        $revisions = ArticleTranslationRevision::withoutGlobalScopes()->whereIn('id', [$target->working_revision_id, $source->published_revision_id, $source->working_revision_id])
+            ->orderBy('id')->when($lock, fn ($q) => $q->lockForUpdate())->get()->keyBy('id');
+        $revision = $revisions->get($target->working_revision_id);
+        $published = $revisions->get($source->published_revision_id);
+        $working = $revisions->get($source->working_revision_id);
+        foreach ([[$target, $revision], [$source, $published], [$source, $working]] as [$article, $r]) {
+            $this->require($r instanceof ArticleTranslationRevision && (int) $r->org_id === 0 && (int) $r->article_id === (int) $article->id
+                && $r->locale === $article->locale && $r->source_locale === $source->locale
+                && (int) $r->source_article_id === (int) $source->id && $r->translation_group_id === $source->translation_group_id,
+                'independent_source_revision_invalid');
+        }
+        $this->require(in_array($revision->revision_status, [ArticleTranslationRevision::STATUS_HUMAN_REVIEW, ArticleTranslationRevision::STATUS_APPROVED, ArticleTranslationRevision::STATUS_PUBLISHED], true)
+            && in_array($published->revision_status, [ArticleTranslationRevision::STATUS_SOURCE, ArticleTranslationRevision::STATUS_PUBLISHED], true)
+            && preg_match('/^[a-f0-9]{64}$/D', (string) $published->source_version_hash) === 1,
+            'independent_source_revision_invalid');
+        foreach ([[$source, $published], [$target, $revision]] as [$article, $r]) {
+            foreach (['title', 'excerpt', 'content_md'] as $field) {
+                $this->require($article->getRawOriginal($field) === $r->getRawOriginal($field), 'independent_source_projection_mismatch');
+            }
+        }
+
+        // publishTranslation projects the revision SEO into both search and OG fields.
+        // Refuse a different reviewed OG now, before approval/publication can overwrite it.
+        $seo = \App\Models\ArticleSeoMeta::withoutGlobalScopes()->where('article_id', $target->id)
+            ->when($lock, fn ($q) => $q->lockForUpdate())->get();
+        $this->require($seo->count() === 1, 'independent_source_publication_projection_mismatch');
+        foreach (['title', 'description'] as $field) {
+            $value = $revision->{'seo_'.$field};
+            if (filled($value)) {
+                $this->require($seo->first()->{'seo_'.$field} === $value && $seo->first()->{'og_'.$field} === $value,
+                    'independent_source_publication_projection_mismatch');
+            }
+        }
+
+        return [$target, $source, $revision, $published];
+    }
+
+    private function independentIdentity(Article $target, Article $source): string
+    {
+        return 'article:'.$target->id.':revision:'.$target->working_revision_id.':source:'.$source->id.':published:'.$source->published_revision_id;
+    }
+
+    private function independentHash(Article $target, Article $source, ArticleTranslationRevision $revision, ArticleTranslationRevision $published, bool $lock = false): string
+    {
+        $seo = \App\Models\ArticleSeoMeta::withoutGlobalScopes()->where('article_id', $target->id)->orderBy('id')
+            ->when($lock, fn ($q) => $q->lockForUpdate())->get()->map(function ($row) use ($target): array {
+                $this->require((int) $row->org_id === 0 && $row->locale === $target->locale, 'independent_source_seo_invalid');
+
+                // These are outputs of the subsequent native publication/schema release only.
+                $attributes = array_diff_key($row->getAttributes(), array_fill_keys(['updated_at', 'robots', 'is_indexable'], true));
+                $schema = $row->schema_json;
+                if (is_array($schema) && is_array($schema['editorial_package_v1'] ?? null)) {
+                    $schema['editorial_package_v1'] = array_diff_key($schema['editorial_package_v1'], array_fill_keys([
+                        'article_schema_enabled', 'breadcrumb_schema_enabled', 'faq_schema_enabled', 'schema_hold', 'hreflang_gate',
+                    ], true));
+                    if ($schema['editorial_package_v1'] === []) {
+                        unset($schema['editorial_package_v1']);
+                    }
+                }
+                $attributes['schema_json'] = $schema === [] ? null : $schema;
+
+                return $attributes;
+            })->all();
+
+        return Hash::hash(['source' => \App\Console\Commands\ArticleForkPrivateTranslationLinks::sourceHash($source, $lock),
+            'source_tags' => ArticleSourceTargetSnapshot::tagsHash($source, $lock),
+            'source_working_revision_id' => $source->working_revision_id, 'source_published_revision_id' => $source->published_revision_id,
+            'target_working_revision_id' => $target->working_revision_id,
+            'resources' => app(CmsEditorialReviewAttestationService::class)->targets($this->resources($target, $source, $revision, $published)),
+            'target_seo' => $seo, 'target_tags' => ArticleSourceTargetSnapshot::tagsHash($target, $lock),
+            'target_category' => \App\Models\ArticleCategory::withoutGlobalScopes()->whereKey($target->category_id)
+                ->when($lock, fn ($q) => $q->lockForUpdate())->first()?->getAttributes(),
+            'target_tag_records' => DB::table('article_tags')->whereIn('id', DB::table('article_tag_map')->where('article_id', $target->id)->select('tag_id'))
+                ->orderBy('id')->when($lock, fn ($q) => $q->lockForUpdate())->get()->map(fn ($row): array => (array) $row)->all(),
+            'target_test_edges' => DB::table('article_test_edges')->where('article_id', $target->id)->orderBy('id')
+                ->when($lock, fn ($q) => $q->lockForUpdate())->get()->map(fn ($row): array => (array) $row)->all(),
+        ]);
+    }
+
     private function authorize(): void
     {
         abort_unless(ContentAccess::canWrite(), 403);

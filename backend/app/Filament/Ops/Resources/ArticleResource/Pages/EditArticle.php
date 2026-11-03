@@ -240,6 +240,46 @@ class EditArticle extends EditRecord
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
                 }),
             // @review-surface article_translation_revision
+            Action::make('forkPrivateWorkingRevision')
+                ->label('保留旧草稿并创建工作副本')
+                ->visible(fn (): bool => ContentAccess::canWrite() && ! $this->getRecord()->isSourceArticle()
+                    && $this->getRecord()->status === 'draft' && $this->getRecord()->published_revision_id === null)
+                ->requiresConfirmation()
+                ->modalDescription('创建一个未批准工作副本，完整保留原草稿和历史来源；不发布任何内容。')
+                ->fillForm(fn (): array => ['target_hash' => \App\Support\ArticleSourceTargetSnapshot::publicationHash($this->getRecord())])
+                ->form([Textarea::make('target_hash')->label('当前草稿快照')->readOnly()->required()->rows(2)])
+                ->action(function (array $data): void {
+                    app(ArticleTranslationRevisionWorkspace::class)->forkPrivateWorkingRevision($this->getRecord(),
+                        (string) $data['target_hash'], (int) auth((string) config('admin.guard', 'admin'))->id());
+                    Notification::make()->title('旧草稿已保留；新工作副本仍未批准')->success()->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            // @review-surface article_translation_revision
+            Action::make('confirmIndependentSourceReview')
+                ->label('审核独立扩写与已公开源版本')
+                ->visible(fn (): bool => ContentAccess::canWrite() && ! $this->getRecord()->isSourceArticle()
+                    && $this->getRecord()->published_revision_id === null
+                    && $this->getRecord()->workingRevision?->revision_status === \App\Models\ArticleTranslationRevision::STATUS_HUMAN_REVIEW)
+                ->modalDescription('完整阅读明确的已公开源版本及英文候选，记录独立研究差量与来源。此操作不审核源文未发工作稿、不重写历史来源，之后仍需编辑审核和原生发布。')
+                ->fillForm(fn (): array => app(ArticlePublishedSourceReviewService::class)->prepareIndependent($this->getRecord()))
+                ->form([
+                    Textarea::make('pair_hash')->label('源与候选快照')->readOnly()->required()->rows(2),
+                    Textarea::make('review_context')->label('已公开源版本与候选预览')->readOnly()->dehydrated(false)->rows(12),
+                    Textarea::make('review_notes')->label('实读来源、独立研究差量与保留边界')->required()->minLength(20)->maxLength(6000)->rows(6),
+                    Checkbox::make('source_reviewed')->label('已完整核对这两份预览及研究差量；仅批准此候选使用该已公开源版本')->accepted()->required(),
+                ])
+                ->action(function (array $data): void {
+                    try {
+                        app(ArticlePublishedSourceReviewService::class)->confirmIndependent($this->getRecord(), $data);
+                    } catch (ValidationException $exception) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.source_reviewed' => $exception->errors()['source_reviewed'] ?? [$exception->getMessage()],
+                        ]);
+                    }
+                    Notification::make()->title('已记录独立扩写的公开源版本审阅；仍需编辑审核')->success()->send();
+                    $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
+                }),
+            // @review-surface article_translation_revision
             Action::make('confirmManualSourceReview')
                 ->label('确认人工译文源版本')
                 ->icon('heroicon-o-language')

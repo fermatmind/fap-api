@@ -188,7 +188,8 @@ final class ArticleTranslationOpsService
             && ! hash_equals((string) $publishedSourceHash, (string) $publishedHash);
         $reviewedPublishedSource = ! $isSource
             && ($isWorkingStale || $isPublishedStale || $status === Article::TRANSLATION_STATUS_STALE)
-            && app(ArticlePublishedSourceReviewService::class)->hasCurrentReview($article);
+            && (app(ArticlePublishedSourceReviewService::class)->hasCurrentReview($article)
+                || app(ArticlePublishedSourceReviewService::class)->hasCurrentIndependentReview($article));
         if ($reviewedPublishedSource) {
             $isWorkingStale = false;
             $isPublishedStale = false;

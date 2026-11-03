@@ -425,7 +425,13 @@ final class ArticleTranslationWorkflowService
         if (! $source instanceof Article || ! $source->isSourceArticle()) {
             $blockers[] = 'source canonical invalid';
         } else {
-            $blockers = array_merge($blockers, $this->translationScopeBlockers($target, $source));
+            $scopeBlockers = $this->translationScopeBlockers($target, $source);
+            if (app(ArticlePublishedSourceReviewService::class)->hasCurrentIndependentReview($target)) {
+                // This exact public source revision was reviewed for this independent candidate.
+                // The source's separate private draft is neither approved nor published by that review.
+                $scopeBlockers = array_values(array_diff($scopeBlockers, ['source article editorial approval missing']));
+            }
+            $blockers = array_merge($blockers, $scopeBlockers);
             if ($workingRevision instanceof ArticleTranslationRevision
                 && (! filled($source->source_version_hash) || ! filled($workingRevision->translated_from_version_hash))) {
                 $blockers[] = 'translation provenance unknown';

@@ -42,6 +42,20 @@ final class ArticleWorkspace
         ]));
     }
 
+    /** Bind a read-only preview to the source's public revision, independently of its private working draft. */
+    public static function publishedSourcePreviewUrl(Article $record): ?string
+    {
+        $revision = $record->publishedRevision;
+        if (! $record->isSourceArticle() || ! $revision instanceof ArticleTranslationRevision
+            || (int) $revision->id !== (int) $record->published_revision_id
+            || (int) $revision->article_id !== (int) $record->id || (int) $revision->org_id !== (int) $record->org_id) {
+            return null;
+        }
+
+        return route('ops.articles.preview', ['article' => $record->getKey(), 'preview' => 'published_source',
+            'revision' => (int) $revision->id, 'revision_hash' => self::previewFingerprint($revision)]);
+    }
+
     public static function previewFingerprint(ArticleTranslationRevision $revision): string
     {
         return hash('sha256', json_encode($revision->only([

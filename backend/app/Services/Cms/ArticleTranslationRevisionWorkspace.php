@@ -9,6 +9,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use Illuminate\Support\Facades\DB;
 
+/** @review-surface article_translation_revision */
 final class ArticleTranslationRevisionWorkspace
 {
     public function __construct(
@@ -138,6 +139,17 @@ final class ArticleTranslationRevisionWorkspace
                     ->update(['updated_at' => $now]);
             }
 
+            // An unpublished translation has no public projection to preserve. Keep its
+            // saved draft projection aligned for the normal Ops preview/review/publish path.
+            // Published targets and source articles retain their existing pointer protection.
+            if ((int) $locked->org_id === 0 && ! $locked->isSourceArticle()
+                && $locked->published_revision_id === null && $locked->status === 'draft' && ! $locked->is_public) {
+                DB::table('articles')->where('id', $locked->id)->update([
+                    'title' => $revision->title, 'excerpt' => $revision->excerpt,
+                    'content_md' => $revision->content_md, 'content_html' => null,
+                ]);
+            }
+
             if ($locked->isSourceArticle()) {
                 DB::table('articles')
                     ->where('id', $locked->id)
@@ -148,6 +160,45 @@ final class ArticleTranslationRevisionWorkspace
             }
 
             return $revision->refresh();
+        });
+    }
+
+    /** Explicitly preserve an unpublished baseline before importing a replacement candidate. */
+    public function forkPrivateWorkingRevision(Article $selected, string $expectedSnapshot, int $actor): ArticleTranslationRevision
+    {
+        abort_unless(\App\Filament\Ops\Support\ContentAccess::canWrite()
+            && app(CmsEditorialReviewAttestationService::class)->isConfiguredSoloOwner($actor)
+            && (int) auth((string) config('admin.guard', 'admin'))->id() === $actor, 403);
+        abort_if((bool) config('admin.totp.enabled', true)
+            && (int) session('ops_admin_totp_verified_user_id', 0) !== $actor, 403);
+
+        return DB::transaction(function () use ($selected, $expectedSnapshot, $actor): ArticleTranslationRevision {
+            $article = Article::withoutGlobalScopes()->whereKey($selected->getKey())->lockForUpdate()->firstOrFail();
+            \App\Support\ArticleSourceTargetSnapshot::assertPublicationHash($article, $expectedSnapshot, true);
+            $old = ArticleTranslationRevision::withoutGlobalScopes()->whereKey($article->working_revision_id)->lockForUpdate()->firstOrFail();
+            if ((int) $article->org_id !== 0 || $article->isSourceArticle() || $article->trashed() || $article->status !== 'draft'
+                || $article->is_public || $article->published_revision_id !== null || $article->published_at !== null
+                || (int) $old->org_id !== 0 || (int) $old->article_id !== (int) $article->id || $old->locale !== $article->locale
+                || $old->translation_group_id !== $article->translation_group_id
+                || (int) $old->source_article_id !== (int) $article->source_article_id
+                || ! in_array($old->revision_status, [ArticleTranslationRevision::STATUS_MACHINE_DRAFT, ArticleTranslationRevision::STATUS_HUMAN_REVIEW], true)
+                || $old->approved_at !== null || $old->published_at !== null) {
+                throw new \RuntimeException('private_working_fork_not_available');
+            }
+            $revision = $old->replicate();
+            $revision->forceFill(['revision_number' => (int) ArticleTranslationRevision::withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number') + 1,
+                'supersedes_revision_id' => (int) $old->id, 'revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT,
+                'created_by' => $actor, 'reviewed_by' => null, 'reviewed_at' => null, 'approved_at' => null, 'published_at' => null,
+                'authority_asset_key' => null, 'authority_source_package' => null, 'authority_source_hash' => null,
+                'authority_package_sha256' => null, 'authority_metadata_json' => null])->save();
+            $article->forceFill(['working_revision_id' => (int) $revision->id])->saveQuietly();
+            app(\App\Services\Audit\AuditLogger::class)->log(\Illuminate\Http\Request::create('/ops/articles/fork-private-working', 'POST'),
+                'article_private_working_revision_forked', 'article', (string) $article->id,
+                ['resource_org_id' => 0, 'previous_working_revision_id' => (int) $old->id,
+                    'new_working_revision_id' => (int) $revision->id, 'before_snapshot_sha256' => $expectedSnapshot],
+                reason: 'preserve_private_draft_before_edit', result: 'success');
+
+            return $revision;
         });
     }
 
@@ -167,7 +218,8 @@ final class ArticleTranslationRevisionWorkspace
         return filled($sourceHash)
             && filled($revision->translated_from_version_hash)
             && ! hash_equals((string) $sourceHash, (string) $revision->translated_from_version_hash)
-            && ! app(ArticlePublishedSourceReviewService::class)->hasCurrentReview($article);
+            && ! app(ArticlePublishedSourceReviewService::class)->hasCurrentReview($article)
+            && ! app(ArticlePublishedSourceReviewService::class)->hasCurrentIndependentReview($article);
     }
 
     public function sourceVersionHashFor(Article $article): ?string
