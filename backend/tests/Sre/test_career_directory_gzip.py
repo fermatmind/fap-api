@@ -43,6 +43,12 @@ server { listen 80; server_name api.fermatmind.com; return 301 https://$host$req
 
 
 class CareerGzipTransformTest(unittest.TestCase):
+    def test_external_command_failure_reports_only_operation_and_exit_code(self):
+        error = subprocess.CalledProcessError(60, ['curl', 'private-url'], stderr=b'private diagnostics')
+        with patch.object(module.subprocess, 'run', side_effect=error):
+            with self.assertRaisesRegex(ValueError, '^curl failed with exit 60$'):
+                module.run('curl', 'private-url')
+
     def test_cli_failure_does_not_hide_the_configuration_reason(self):
         result = subprocess.run(['python3', str(SCRIPT), '--site', '/not-read', '--host', 'not-allowlisted.invalid'], capture_output=True, text=True)
         self.assertNotEqual(0, result.returncode)

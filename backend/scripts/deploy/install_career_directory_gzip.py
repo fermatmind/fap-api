@@ -94,7 +94,14 @@ def transform(source, host, loader):
 
 
 def run(*args):
-    return subprocess.run(args, check=True, capture_output=True, timeout=40).stdout
+    try:
+        return subprocess.run(args, check=True, capture_output=True, timeout=40).stdout
+    except subprocess.CalledProcessError as error:
+        # Command output may contain request bodies, paths, or private topology.
+        operation = Path(args[0]).name
+        if operation in ('nginx', 'systemctl'):
+            operation += ' ' + args[1]
+        raise ValueError(operation + ' failed with exit ' + str(error.returncode)) from None
 
 
 def read_response(host, locale, encoding):
