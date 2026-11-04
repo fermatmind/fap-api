@@ -62,12 +62,26 @@ final class ArticlePublishedProvenanceBinder
         // Preserve the original exact content approval. This is a derived metadata binding,
         // not a claim that its new metadata was present in that historical approval.
         $reviewRevision = clone $revision;
-        $reviewMetadata = $revision->authority_metadata_json ?? [];
-        unset($reviewMetadata['visible_provenance'], $reviewMetadata['published_provenance_binding_v1']);
+        $reviewMetadata = $revision->authority_metadata_json;
+        if (is_array($reviewMetadata)) {
+            unset($reviewMetadata['visible_provenance'], $reviewMetadata['published_provenance_binding_v1']);
+        }
         $reviewRevision->authority_metadata_json = $reviewMetadata;
         $target = app(CmsEditorialReviewAttestationService::class)->targets([
             ['surface_id' => 'article_translation_revision', 'record' => $reviewRevision],
         ])[0];
+        // Derived keys turn an originally null metadata value into an array. Only
+        // the existing binding's exact approved target can justify restoring null.
+        $originalTarget = data_get($revision->authority_metadata_json, 'published_provenance_binding_v1.original_approved_target');
+        if ($reviewMetadata === [] && is_array($originalTarget) && ! Hash::sameValue($target, $originalTarget)) {
+            $reviewRevision->authority_metadata_json = null;
+            $nullTarget = app(CmsEditorialReviewAttestationService::class)->targets([
+                ['surface_id' => 'article_translation_revision', 'record' => $reviewRevision],
+            ])[0];
+            if (Hash::sameValue($nullTarget, $originalTarget)) {
+                $target = $nullTarget;
+            }
+        }
         $evidence = ReviewAttestationTargetEvidence::query()->with('attestation')
             ->where('target_identity', $target['target_identity'])->where('target_sha256', $target['target_sha256'])
             ->where('target_decision', 'approved')

@@ -434,40 +434,42 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
     public function test_published_provenance_previews_without_writes_and_atomically_releases_only_schema(): void
     {
         foreach (['en', 'zh-CN'] as $locale) {
-            [$article, $actor, $package] = $this->provenanceFixture($locale);
-            $before = Updater::state($article);
-            $auditCount = AuditLog::withoutGlobalScopes()->count();
-            $exit = $this->runPackage($package);
-            $output = Artisan::output();
-            $this->assertSame(0, $exit, $output);
-            $preview = json_decode($output, true);
-            $this->assertSame($before, Updater::state($article->fresh()));
-            $this->assertSame($auditCount, AuditLog::withoutGlobalScopes()->count());
-            $this->assertSame(3, $preview['citation_count']);
-            $this->assertStringNotContainsString('admin_user:', $output);
-            $this->assertStringNotContainsString('source-ledger:', $output);
-            $this->assertSame(0, $this->runPackage($package, $actor), Artisan::output());
-            $article->refresh()->load('publishedRevision', 'seoMeta');
-            $jsonld = app(ArticleSeoService::class)->generateJsonLd($article, $article->publishedRevision);
-            $this->assertSame($preview['candidate_jsonld'], $jsonld);
-            $fragments = collect($jsonld['@graph']);
-            $this->assertSame(['Article', 'BreadcrumbList'], $fragments->pluck('@type')->all());
-            $this->assertSame('Organization', data_get($fragments->first(), 'author.@type'));
-            $this->assertSame($article->author_name, data_get($fragments->first(), 'author.name'));
-            $this->assertSame($article->published_at->toIso8601String(), $fragments->first()['datePublished']);
-            $this->assertCount(3, $fragments->first()['citation']);
-            $this->assertFalse(data_get($article->seoMeta->schema_json, 'editorial_package_v1.faq_schema_enabled'));
-            $after = Updater::state($article);
-            $this->assertSame($before['article'], $after['article']);
-            $this->assertSame($before['history'][0], $after['history'][0]);
-            $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_public_reader_metadata_updated')->latest('id')->firstOrFail();
-            $this->assertSame($actor->id, $audit->meta_json['authorized_operator_id']);
-            $this->assertSame(['old_metadata' => true], $audit->meta_json['before_revision_metadata']);
-            $this->assertSame(1, $this->runPackage($package, $actor)); // No replay after a commit.
-            $noop = $package;
-            $noop['before_sha256'] = Hash::hash(Updater::state($article->fresh()));
-            $noop['candidate']['schema_json'] = $article->fresh()->seoMeta->schema_json;
-            $this->assertSame(0, $this->runPackage($noop), Artisan::output());
+            foreach ([null, [], ['old_metadata' => true]] as $metadata) {
+                [$article, $actor, $package] = $this->provenanceFixture($locale, $metadata);
+                $before = Updater::state($article);
+                $auditCount = AuditLog::withoutGlobalScopes()->count();
+                $exit = $this->runPackage($package);
+                $output = Artisan::output();
+                $this->assertSame(0, $exit, $output);
+                $preview = json_decode($output, true);
+                $this->assertSame($before, Updater::state($article->fresh()));
+                $this->assertSame($auditCount, AuditLog::withoutGlobalScopes()->count());
+                $this->assertSame(3, $preview['citation_count']);
+                $this->assertStringNotContainsString('admin_user:', $output);
+                $this->assertStringNotContainsString('source-ledger:', $output);
+                $this->assertSame(0, $this->runPackage($package, $actor), Artisan::output());
+                $article->refresh()->load('publishedRevision', 'seoMeta');
+                $jsonld = app(ArticleSeoService::class)->generateJsonLd($article, $article->publishedRevision);
+                $this->assertSame($preview['candidate_jsonld'], $jsonld);
+                $fragments = collect($jsonld['@graph']);
+                $this->assertSame(['Article', 'BreadcrumbList'], $fragments->pluck('@type')->all());
+                $this->assertSame('Organization', data_get($fragments->first(), 'author.@type'));
+                $this->assertSame($article->author_name, data_get($fragments->first(), 'author.name'));
+                $this->assertSame($article->published_at->toIso8601String(), $fragments->first()['datePublished']);
+                $this->assertCount(3, $fragments->first()['citation']);
+                $this->assertFalse(data_get($article->seoMeta->schema_json, 'editorial_package_v1.faq_schema_enabled'));
+                $after = Updater::state($article);
+                $this->assertSame($before['article'], $after['article']);
+                $this->assertSame($before['history'][0], $after['history'][0]);
+                $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_public_reader_metadata_updated')->latest('id')->firstOrFail();
+                $this->assertSame($actor->id, $audit->meta_json['authorized_operator_id']);
+                $this->assertSame($metadata, $audit->meta_json['before_revision_metadata']);
+                $this->assertSame(1, $this->runPackage($package, $actor)); // No replay after a commit.
+                $noop = $package;
+                $noop['before_sha256'] = Hash::hash(Updater::state($article->fresh()));
+                $noop['candidate']['schema_json'] = $article->fresh()->seoMeta->schema_json;
+                $this->assertSame(0, $this->runPackage($noop), Artisan::output());
+            }
         }
     }
 
@@ -509,6 +511,51 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $this->assertSame($before, Updater::state($article->fresh()));
     }
 
+    public function test_published_provenance_rejects_unreviewed_metadata_changes(): void
+    {
+        foreach ([[null, []], [[], null], [null, ['unreviewed' => true]], [['old_metadata' => true], []]] as [$approved, $changed]) {
+            [$article, $actor, $package] = $this->provenanceFixture('en', $approved);
+            $article->publishedRevision->forceFill(['authority_metadata_json' => $changed])->saveQuietly();
+            $before = Updater::state($article->fresh());
+            $package['before_sha256'] = Hash::hash($before);
+            $this->assertSame(1, $this->runPackage($package, $actor));
+            $this->assertSame('published_provenance_exact_review_evidence_missing', json_decode(Artisan::output(), true)['error']);
+            $this->assertSame($before, Updater::state($article->fresh()));
+        }
+    }
+
+    public function test_published_provenance_rejects_payload_drift_after_binding(): void
+    {
+        foreach ([null, [], ['old_metadata' => true]] as $metadata) {
+            foreach (['body', 'metadata', 'original_target'] as $drift) {
+                [$article, $actor, $package] = $this->provenanceFixture('en', $metadata);
+                $this->assertSame(0, $this->runPackage($package, $actor), Artisan::output());
+                $revision = $article->fresh()->publishedRevision;
+                if ($drift === 'body') {
+                    $revision->content_md .= "\nUnreviewed body.";
+                } else {
+                    $changed = $revision->authority_metadata_json;
+                    if ($drift === 'metadata') {
+                        $changed['unreviewed'] = true;
+                    } else {
+                        $changed['published_provenance_binding_v1']['original_approved_target']['target_sha256'] = str_repeat('a', 64);
+                    }
+                    $revision->authority_metadata_json = $changed;
+                }
+                $revision->saveQuietly();
+                $before = Updater::state($article->fresh());
+                $package['before_sha256'] = Hash::hash($before);
+                $package['candidate']['schema_json'] = $article->fresh()->seoMeta->schema_json;
+                $package['candidate']['published_provenance']['body_sha256'] = hash('sha256', $revision->content_md);
+                $this->assertSame(1, $this->runPackage($package, $actor), $drift);
+                $this->assertContains(json_decode(Artisan::output(), true)['error'], [
+                    'published_provenance_exact_review_evidence_missing', 'published_provenance_existing_binding_conflict',
+                ]);
+                $this->assertSame($before, Updater::state($article->fresh()));
+            }
+        }
+    }
+
     public function test_published_provenance_uses_exact_resource_tenant_not_the_ops_audit_context(): void
     {
         [$article, $actor, $package] = $this->provenanceFixture();
@@ -547,13 +594,13 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         }
     }
 
-    private function provenanceFixture(string $locale = 'en'): array
+    private function provenanceFixture(string $locale = 'en', ?array $metadata = ['old_metadata' => true]): array
     {
         $this->travelTo(now()->startOfSecond());
         config(['app.frontend_url' => 'https://fermatmind.com']);
         $actor = $this->actor();
         $article = $this->article();
-        $article->forceFill(['slug' => 'big-five-provenance-'.strtolower($locale), 'locale' => $locale,
+        $article->forceFill(['slug' => 'big-five-provenance-'.strtolower($locale).'-'.$article->id, 'locale' => $locale,
             'author_name' => $locale === 'en' ? 'FermatMind Editorial' : '费马测试编辑部',
             'is_indexable' => true, 'published_at' => now()->subDays(10)])->saveQuietly();
         $old = $article->publishedRevision;
@@ -564,7 +611,7 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $revision->forceFill(['revision_number' => 2, 'locale' => $locale, 'revision_status' => 'published',
             'content_md' => $body, 'created_by' => $actor->id, 'reviewed_by' => $actor->id,
             'reviewed_at' => now()->subHours(2), 'approved_at' => now()->subHours(2),
-            'published_at' => now()->subHour(), 'authority_metadata_json' => ['old_metadata' => true]])->save();
+            'published_at' => now()->subHour(), 'authority_metadata_json' => $metadata])->save();
         $article->forceFill(['content_md' => $body, 'published_revision_id' => $revision->id,
             'working_revision_id' => $revision->id])->saveQuietly();
         $article->seoMeta->update(['locale' => $locale, 'is_indexable' => true, 'robots' => 'index,follow']);
