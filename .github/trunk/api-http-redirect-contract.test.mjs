@@ -66,3 +66,15 @@ test("both deploy targets use strict GitHub SSH over the reachable TLS port", ()
   assert.equal(deployer.split(`->set('git_ssh_command', '${command}')`).length - 1, 2);
   assert.equal(deployer.split("->setSshArguments(['-o ServerAliveInterval=15', '-o ServerAliveCountMax=8', '-o TCPKeepAlive=yes'])").length - 1, 2);
 });
+
+test("staging verifies the forwarded repository identity before release materialization", () => {
+  const start = workflow.indexOf("      - name: Configure staging SSH identities");
+  const end = workflow.indexOf("      - name: Read staging A08 state", start);
+  const identity = workflow.slice(start, end);
+  assert.match(identity, /STAGING_REPO_READ_SSH_KEY/);
+  assert.match(identity, /ssh-add - >\/dev\/null 2>&1/);
+  assert.match(identity, /timeout 45 ssh -A -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes/);
+  assert.match(identity, /-i "\$host_key"/);
+  assert.match(identity, /git ls-remote git@github\.com:fermatmind\/fap-api\.git HEAD >\/dev\/null/);
+  assert.doesNotMatch(identity, /StrictHostKeyChecking=no|ssh-add -l|cat "\$host_key"/);
+});
