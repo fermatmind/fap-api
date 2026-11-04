@@ -190,5 +190,9 @@ if __name__ == '__main__':
     options = parser.parse_args()
     try:
         install(options.site, options.host)
-    except (OSError, ValueError, subprocess.SubprocessError):
-        raise SystemExit('career_directory_gzip=failed; previous configuration restored where applicable')
+    except (OSError, ValueError, subprocess.SubprocessError) as error:
+        # Report only our fixed probe/configuration messages, never command output,
+        # response bodies, file paths, or deployment credentials.
+        reason = str(error) if type(error) is ValueError else type(error).__name__
+        raise SystemExit('career_directory_gzip=failed; reason=' + reason
+                         + '; previous configuration restored where applicable')

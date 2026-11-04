@@ -22,6 +22,7 @@ spec = importlib.util.spec_from_file_location('career_gzip', SCRIPT)
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 HANDLER = '''location ~ \\.php$ {
+    try_files $uri =404;
     include fastcgi_params;
     fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
     fastcgi_param SCRIPT_NAME $fastcgi_script_name;
@@ -42,6 +43,12 @@ server { listen 80; server_name api.fermatmind.com; return 301 https://$host$req
 
 
 class CareerGzipTransformTest(unittest.TestCase):
+    def test_cli_failure_does_not_hide_the_configuration_reason(self):
+        result = subprocess.run(['python3', str(SCRIPT), '--site', '/not-read', '--host', 'not-allowlisted.invalid'], capture_output=True, text=True)
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn('reason=root and allowlisted API host required', result.stderr)
+        self.assertNotIn('/not-read', result.stderr)
+
     def test_exact_location_reuses_complete_php_handler_and_is_idempotent(self):
         candidate = module.transform(SOURCE, 'api.fermatmind.com', lambda _: HANDLER)
         self.assertEqual(candidate, module.transform(candidate, 'api.fermatmind.com', lambda _: HANDLER))
