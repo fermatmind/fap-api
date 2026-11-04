@@ -4104,6 +4104,16 @@ task('ensure:nginx-dns-resilience', function () {
     run('sudo -n python3 '.$script, ['timeout' => 120]);
 });
 
+task('ensure:career-directory-gzip', function () {
+    if (deploySkipsAuthorityMutations()) {
+        return;
+    }
+    $script = deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/install_career_directory_gzip.py');
+    $site = deployShellArg(deploySafeAbsolutePath((string) get('nginx_site'), 'nginx_site'));
+    $host = deployShellArg(deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host'));
+    run('sudo -n python3 '.$script.' --site '.$site.' --host '.$host, ['timeout' => 240]);
+});
+
 task('reload:nginx', function () {
     if (deployIsCodeOnly() || deployUsesCareerContentPackage()) {
         writeln('<comment>Skip nginx reload in isolated deploy mode</comment>');
@@ -5875,6 +5885,7 @@ after('ensure:nginx-public-static-media-route', 'ensure:nginx-api-http-redirect'
 after('deploy:symlink', 'reload:php-fpm');
 after('ensure:nginx-api-http-redirect', 'reload:nginx');
 before('reload:nginx', 'ensure:nginx-dns-resilience');
+before('reload:nginx', 'ensure:career-directory-gzip');
 after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:career-content-only');
