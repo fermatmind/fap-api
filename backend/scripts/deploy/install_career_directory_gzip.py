@@ -132,6 +132,9 @@ def probe(host, compressed):
                 raise ValueError('directory gzip round-trip mismatch')
             if 'accept-encoding' not in headers.get('vary', '').lower() or len(encoded) > len(raw) * 0.1:
                 raise ValueError('directory compression budget or Vary mismatch')
+            disabled_headers, disabled_body = read_response(host, locale, 'gzip;q=0')
+            if disabled_headers.get('content-encoding') or disabled_body != raw:
+                raise ValueError('directory gzip refusal was not respected')
     return counts
 
 

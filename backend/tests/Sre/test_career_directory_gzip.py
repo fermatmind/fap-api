@@ -93,6 +93,16 @@ class CareerGzipTransformTest(unittest.TestCase):
             self.assertEqual(source, site.read_text())
             self.assertEqual([False, True, False], calls)
 
+    def test_public_probe_rejects_gzip_when_client_refuses_it(self):
+        payload = json.dumps({'bundle_kind': 'career_job_index', 'items': [{'slug': 'public-role'}], 'padding': 'x' * 5000}).encode()
+        def response(host, locale, encoding):
+            if encoding == 'identity':
+                return {}, payload
+            return {'content-encoding': 'gzip', 'vary': 'Origin, Accept-Encoding'}, gzip.compress(payload)
+        with patch.object(module, 'read_response', side_effect=response):
+            with self.assertRaisesRegex(ValueError, 'refusal'):
+                module.probe('api.fermatmind.com', True)
+
     def test_failed_syntax_or_reload_restores_and_revalidates_previous_config(self):
         for failing_command in [('/usr/sbin/nginx', '-t'), ('/usr/bin/systemctl', 'reload', 'nginx')]:
             with self.subTest(command=failing_command), tempfile.TemporaryDirectory() as directory:
