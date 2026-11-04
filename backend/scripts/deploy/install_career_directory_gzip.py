@@ -7,6 +7,7 @@ import os
 import re
 import subprocess
 import tempfile
+import time
 from pathlib import Path
 
 ROUTE = '/api/v0.5/career/jobs'
@@ -93,15 +94,30 @@ def transform(source, host, loader):
     return source[:end - 1] + managed + source[end - 1:]
 
 
-def run(*args):
-    try:
-        return subprocess.run(args, check=True, capture_output=True, timeout=40).stdout
-    except subprocess.CalledProcessError as error:
-        # Command output may contain request bodies, paths, or private topology.
-        operation = Path(args[0]).name
-        if operation in ('nginx', 'systemctl'):
-            operation += ' ' + args[1]
-        raise ValueError(operation + ' failed with exit ' + str(error.returncode)) from None
+def run(*args, retry_http2=False):
+    deadline = time.monotonic() + 30 if retry_http2 else None
+    for attempt in range(2 if retry_http2 else 1):
+        command = list(args)
+        timeout = 40
+        if deadline is not None:
+            timeout = deadline - time.monotonic()
+            if timeout <= 0:
+                raise subprocess.TimeoutExpired(command, 30)
+            command[command.index('--max-time') + 1] = str(timeout)
+        try:
+            return subprocess.run(command, check=True, capture_output=True, timeout=timeout).stdout
+        except subprocess.CalledProcessError as error:
+            if retry_http2 and attempt == 0 and error.returncode == 16 and deadline - time.monotonic() > 0.2:
+                # A fresh, identical HTTP/2 GET may recover while reload drains an
+                # old worker. Keep the original total deadline and all checks.
+                print('career_directory_gzip_transport_retry=curl_http2_framing', flush=True)
+                time.sleep(0.2)
+                continue
+            # Never disclose command output, response bodies, or private topology.
+            operation = Path(args[0]).name
+            if operation in ('nginx', 'systemctl'):
+                operation += ' ' + args[1]
+            raise ValueError(operation + ' failed with exit ' + str(error.returncode)) from None
 
 
 def read_response(host, locale, encoding):
@@ -114,7 +130,8 @@ def read_response(host, locale, encoding):
                      '-H', 'Accept-Encoding: ' + encoding,
                      '-H', 'X-FAP-Locale: ' + locale,
                      '-D', str(headers), '-o', str(body), '-w', '%{http_code}',
-                     'https://' + host + ROUTE + '?locale=' + locale).decode()
+                     'https://' + host + ROUTE + '?locale=' + locale,
+                     retry_http2=True).decode()
         if status != '200':
             raise ValueError('directory compression probe did not return 200')
         pairs = [line.split(':', 1) for line in headers.read_text().splitlines() if ':' in line]

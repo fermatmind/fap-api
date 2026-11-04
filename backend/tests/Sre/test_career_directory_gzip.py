@@ -43,6 +43,23 @@ server { listen 80; server_name api.fermatmind.com; return 301 https://$host$req
 
 
 class CareerGzipTransformTest(unittest.TestCase):
+    def test_one_http2_framing_failure_retries_the_same_read_within_original_budget(self):
+        error = subprocess.CalledProcessError(16, ['curl'])
+        with patch.object(module.subprocess, 'run', side_effect=[error, subprocess.CompletedProcess([], 0, b'200')]) as run, patch.object(module.time, 'sleep'), patch.object(module.time, 'monotonic', side_effect=[0, 0, 1, 1.2]):
+            self.assertEqual(b'200', module.run('curl', '--max-time', '30', 'https://public.invalid', retry_http2=True))
+        self.assertEqual(2, run.call_count)
+        first, second = [call.args[0] for call in run.call_args_list]
+        self.assertEqual(first[:2] + first[3:], second[:2] + second[3:])
+        self.assertEqual('30', first[2]);self.assertEqual('28.8', second[2])
+        self.assertFalse(any(flag in second for flag in ['--http1.1', '--insecure']))
+
+    def test_persistent_http2_or_other_transport_failure_still_fails(self):
+        for code, attempts in [(16, 2), (60, 1), (28, 1)]:
+            with self.subTest(code=code), patch.object(module.subprocess, 'run', side_effect=subprocess.CalledProcessError(code, ['curl'])) as run, patch.object(module.time, 'sleep'):
+                with self.assertRaisesRegex(ValueError, 'curl failed with exit ' + str(code)):
+                    module.run('curl', '--max-time', '30', 'https://public.invalid', retry_http2=True)
+                self.assertEqual(attempts, run.call_count)
+
     def test_external_command_failure_reports_only_operation_and_exit_code(self):
         error = subprocess.CalledProcessError(60, ['curl', 'private-url'], stderr=b'private diagnostics')
         with patch.object(module.subprocess, 'run', side_effect=error):
