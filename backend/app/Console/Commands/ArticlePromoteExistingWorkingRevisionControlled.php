@@ -8,6 +8,7 @@ use App\Filament\Ops\Support\ContentReleaseFollowUp;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticleEditorialCompletenessGate;
@@ -61,6 +62,8 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         {--article-id= : Exact already-published article id}
         {--expected-article-state-sha256= : Optional single-article editor snapshot, rechecked under the native transaction lock}
         {--working-revision-id= : Exact approved working revision id to promote}
+        {--preserve-og-title : Keep the existing Open Graph title when promoting a new SEO title}
+        {--remove-related-test-cta= : Remove the exact legacy test slug and its matching editorial CTA}
         {--current-published-revision-id= : Exact currently-published revision id lock}
         {--translation-group-id= : Expected translation group lock}
         {--expected-slug= : Expected existing slug lock}
@@ -89,6 +92,18 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 
     public function handle(ArticlePublishService $publisher, AuditLogger $auditLogger): int
     {
+        $removeTestSlug = $this->option('remove-related-test-cta');
+        $preserveOgTitle = (bool) $this->option('preserve-og-title');
+        if (($removeTestSlug !== null || $preserveOgTitle)
+            && (! filled($this->option('expected-article-state-sha256'))
+                || filled($this->option('batch')) || filled($this->option('blog-v1-file')))) {
+            $this->emitSummary(['ok' => false, 'errors' => [
+                $this->issue('metadata', 'single_target_snapshot_required', 'Scoped metadata requires a locked single-article snapshot.'),
+            ]]);
+
+            return self::FAILURE;
+        }
+
         if ((bool) $this->option('revalidate-after-commit')
             && ((string) $this->option('blog-v1-file') !== '' || trim((string) $this->option('batch')) !== '')) {
             $this->emitSummary(['ok' => false, 'errors' => [$this->issue('mode', 'single_target_mode_required', 'Revalidation is restricted to the existing single-target lane.')]]);
@@ -178,6 +193,14 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             }
         }
 
+        if ($removeTestSlug !== null && $errors === []) {
+            try {
+                $this->planTestCtaRemoval(Article::withoutGlobalScopes()->findOrFail($articleId), (string) $removeTestSlug);
+            } catch (RuntimeException $exception) {
+                $errors[] = $this->issue('related_test_slug', 'related_test_cta_lock_mismatch', $exception->getMessage());
+            }
+        }
+
         $summary = [
             'ok' => $errors === [],
             'dry_run' => $dryRun,
@@ -204,16 +227,22 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                     $currentPublishedRevisionId,
                     'controlled_existing_article_working_revision_promotion',
                     dispatchFollowUp: false,
-                    transactionGuard: function (Article $lockedArticle, ArticleTranslationRevision $lockedRevision): void {
+                    transactionGuard: function (Article $lockedArticle, ArticleTranslationRevision $lockedRevision) use ($removeTestSlug): void {
                         if ($this->option('expected-article-state-sha256') !== null) {
                             ArticleSourceTargetSnapshot::assertPublicationHash($lockedArticle, (string) $this->option('expected-article-state-sha256'), true);
                         }
                         $this->assertEditorialCompleteness($lockedArticle, $lockedRevision);
+                        if ($removeTestSlug !== null) {
+                            [$seo, $schema] = $this->planTestCtaRemoval($lockedArticle, (string) $removeTestSlug, true);
+                            $seo->forceFill(['schema_json' => $schema])->save();
+                            $lockedArticle->related_test_slug = null;
+                        }
                     },
                     onCommitted: function (Article $committed) use (&$summary): void {
                         $summary['publication'] = 'committed';
                         $summary['promoted_article_id'] = (int) $committed->id;
                     },
+                    preserveOgTitle: $preserveOgTitle,
                 );
 
                 $this->logPromotion($auditLogger, $article, $plan, $confirmation);
@@ -289,6 +318,40 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
     }
 
     /** @review-surface article_translation_revision */
+    /** @return array{ArticleSeoMeta, array} */
+    private function planTestCtaRemoval(Article $article, string $slug, bool $lock = false): array
+    {
+        $locale = match ($article->locale) {
+            'zh-CN' => 'zh',
+            'en' => 'en',
+            default => null,
+        };
+        if ($locale === null || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
+            || $article->related_test_slug !== $slug) {
+            throw new RuntimeException('The current related test does not match the removal lock.');
+        }
+
+        $href = '/'.$locale.'/tests/'.$slug;
+        $matches = static fn (mixed $slot): bool => is_array($slot) && ($slot['href'] ?? $slot['url'] ?? null) === $href;
+        $rows = ArticleSeoMeta::withoutGlobalScopes()->where('article_id', $article->id)
+            ->when($lock, fn ($query) => $query->lockForUpdate())->get();
+        $seo = $rows->sole();
+        $schema = $seo->schema_json;
+        $slots = data_get($schema, 'editorial_package_v1.cta_slots');
+        $variantSlots = (array) data_get($article->cover_image_variants, 'editorial_package_v1.cta_slots', []);
+        $edgeExists = $article->testEdges()->where('org_id', $article->org_id)->where('locale', $article->locale)
+            ->where('visibility', ArticleTestEdge::VISIBILITY_PUBLIC)->where('test_slug', $slug)->exists();
+        if ((int) $seo->org_id !== (int) $article->org_id || $seo->locale !== $article->locale
+            || ! is_array($slots) || ! array_is_list($slots) || count(array_filter($slots, $matches)) !== 1
+            || $variantSlots !== [] || $edgeExists) {
+            throw new RuntimeException('The test must have exactly one matching schema CTA and no alternate test edge or variant CTA.');
+        }
+
+        $schema['editorial_package_v1']['cta_slots'] = array_values(array_filter($slots, static fn (mixed $slot): bool => ! $matches($slot)));
+
+        return [$seo, $schema];
+    }
+
     private function handleBlogV1(): int
     {
         $execute = (bool) $this->option('execute');
@@ -1658,6 +1721,8 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 'claim_status' => (string) ($plan['claim_status'] ?? ''),
                 'hold_flags' => $this->holdFlags(),
                 'preview_approved' => (bool) $this->option('preview-approved'),
+                'preserved_og_title' => (bool) $this->option('preserve-og-title'),
+                'removed_related_test_cta' => $this->option('remove-related-test-cta'),
                 'source' => 'controlled_existing_article_working_revision_promotion',
             ],
             reason: 'controlled_existing_article_working_revision_promotion',

@@ -189,6 +189,7 @@ final class ArticlePublishService
         bool $recordReleaseAudit = true,
         bool $invalidateDiscoverabilityCaches = true,
         ?Closure $onCommitted = null,
+        bool $preserveOgTitle = false,
     ): Article {
         if ($articleId <= 0) {
             throw new InvalidArgumentException('article_id must be positive.');
@@ -211,7 +212,7 @@ final class ArticlePublishService
             throw new InvalidArgumentException('follow-up dispatch cannot run when release audit is held.');
         }
 
-        $article = DB::transaction(function () use ($articleId, $workingRevisionId, $currentPublishedRevisionId, $transactionGuard): Article {
+        $article = DB::transaction(function () use ($articleId, $workingRevisionId, $currentPublishedRevisionId, $transactionGuard, $preserveOgTitle): Article {
             $article = Article::query()
                 ->withoutGlobalScopes()
                 ->where('id', $articleId)
@@ -321,7 +322,9 @@ final class ArticlePublishService
             if (filled($workingRevision->seo_title)
                 && $workingRevision->getRawOriginal('seo_title') !== $previousPublishedRevision->getRawOriginal('seo_title')) {
                 $seoUpdates['seo_title'] = (string) $workingRevision->seo_title;
-                $seoUpdates['og_title'] = (string) $workingRevision->seo_title;
+                if (! $preserveOgTitle) {
+                    $seoUpdates['og_title'] = (string) $workingRevision->seo_title;
+                }
             }
             if (filled($workingRevision->seo_description)
                 && $workingRevision->getRawOriginal('seo_description') !== $previousPublishedRevision->getRawOriginal('seo_description')) {

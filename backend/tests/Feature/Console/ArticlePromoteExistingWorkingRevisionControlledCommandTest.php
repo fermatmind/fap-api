@@ -838,6 +838,54 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
         $this->assertErrorCode($this->jsonOutput(), 'independent_candidate_tags_drift');
     }
 
+    public function test_exact_cta_removal_and_og_title_preservation_on_promotion(): void
+    {
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $slug = 'eq-test-emotional-intelligence-assessment';
+        $slot = ['href' => '/zh/tests/'.$slug, 'label' => 'EQ'];
+        $other = ['href' => '/zh/tests/other-test', 'label' => 'Other'];
+        $article->forceFill(['related_test_slug' => $slug])->saveQuietly();
+        $schema = $article->seoMeta->schema_json ?? [];
+        $schema['editorial_package_v1']['cta_slots'] = [$slot, $other];
+        $article->seoMeta->forceFill(['schema_json' => $schema, 'og_title' => 'Existing social title'])->saveQuietly();
+        $article = $article->fresh(['workingRevision', 'publishedRevision', 'seoMeta']);
+        $this->assertNotSame($article->workingRevision->seo_title, $article->publishedRevision->seo_title);
+        $options = [
+            '--remove-related-test-cta' => $slug,
+            '--preserve-og-title' => true,
+            '--json' => true,
+        ];
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, $options + ['--dry-run' => true])));
+        $this->assertErrorCode($this->jsonOutput(), 'single_target_snapshot_required');
+        $options['--expected-article-state-sha256'] = \App\Support\ArticleSourceTargetSnapshot::publicationHash($article);
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, array_replace($options, [
+            '--dry-run' => true,
+            '--remove-related-test-cta' => 'wrong-test',
+        ]))));
+        $this->assertErrorCode($this->jsonOutput(), 'related_test_cta_lock_mismatch');
+        $this->assertSame(0, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, $options + ['--dry-run' => true])), Artisan::output());
+        $this->assertSame($slug, $article->fresh()->related_test_slug);
+        $this->assertSame($schema, $article->seoMeta->fresh()->schema_json);
+        $this->assertSame(0, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, $options + [
+            '--execute' => true,
+            '--confirm' => $this->expectedConfirmation((int) $article->id, (int) $article->working_revision_id),
+            '--preview-approved' => true,
+            '--schema-hold' => true,
+            '--hreflang-hold' => true,
+            '--search-hold' => true,
+            '--no-revalidation' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+        ])), Artisan::output());
+        $after = $article->fresh(['publishedRevision', 'seoMeta']);
+        $schema['editorial_package_v1']['cta_slots'] = [$other];
+        $this->assertNull($after->related_test_slug);
+        $this->assertSame($schema, $after->seoMeta->schema_json);
+        $this->assertSame('Existing social title', $after->seoMeta->og_title);
+        $this->assertSame($article->workingRevision->seo_title, $after->seoMeta->seo_title);
+        $this->assertSame($article->workingRevision->content_md, $after->publishedRevision->content_md);
+    }
+
     public function test_execute_promotes_existing_article_working_revision_and_preserves_route_state(): void
     {
         config()->set('ops.content_release_observability.cache_invalidation_urls', ['https://cache.example.test/revalidate']);
