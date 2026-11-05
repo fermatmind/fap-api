@@ -141,7 +141,7 @@ class ListArticles extends ListRecords
         $translateExpiredCount = (clone $base)->where('translation_status', Article::TRANSLATION_STATUS_STALE)
             ->count();
 
-        // SEO gap: published/public articles whose SEO meta is missing key fields.
+        // This saved view only counts missing SEO titles or descriptions on published public articles.
         $seoGapCount = 0;
         if (SchemaBaseline::hasTable('article_seo_meta')) {
             $seoGapCount = $this->applySeoGap(clone $base)->count();

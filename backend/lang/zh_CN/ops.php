@@ -3354,7 +3354,7 @@ return [
                 'draft' => '草稿',
                 'review' => '待审核',
                 'pending_publish' => '待发布',
-                'seo_gap' => 'SEO 缺口',
+                'seo_gap' => '缺 SEO 标题或描述',
                 'translate_expired' => '翻译过期',
             ],
         ],

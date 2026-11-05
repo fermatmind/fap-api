@@ -3354,7 +3354,7 @@ return [
                 'draft' => 'Drafts',
                 'review' => 'In review',
                 'pending_publish' => 'Pending publish',
-                'seo_gap' => 'SEO gaps',
+                'seo_gap' => 'Missing SEO title or description',
                 'translate_expired' => 'Translation expired',
             ],
         ],

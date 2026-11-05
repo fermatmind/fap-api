@@ -256,6 +256,8 @@ final class OpsCmsListPolishTest extends TestCase
         $component = Livewire::test(ListArticles::class)->loadTable();
 
         $component
+            ->assertSee('Missing SEO title or description')
+            ->assertSee('Canonical mismatch')
             ->call('applySavedView', 'draft')
             ->assertCanSeeTableRecords([$draft])
             ->assertCanNotSeeTableRecords([$all, $review, $pending, $seoGap, $seoReady, $stale, $foreign])

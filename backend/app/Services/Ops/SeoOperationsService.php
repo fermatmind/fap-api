@@ -150,7 +150,7 @@ final class SeoOperationsService
             ];
         }
 
-        if ($expectedCanonical !== null && trim((string) data_get($seoMeta, 'canonical_url', '')) !== $expectedCanonical) {
+        if ($expectedCanonical !== null && ! $this->matchesCanonical($type, $seoMeta, $expectedCanonical)) {
             $issues[] = [
                 'code' => self::ISSUE_CANONICAL,
                 'label' => __('ops.custom_pages.seo_operations.issue_labels.canonical_mismatch'),
@@ -199,10 +199,16 @@ final class SeoOperationsService
 
     public function isSeoReady(string $type, object $record): bool
     {
-        return collect($this->issuesFor($type, $record))
-            ->pluck('code')
-            ->intersect(self::CORE_SEO_ISSUES)
-            ->isEmpty();
+        return $this->seoReadinessIssues($type, $record) === [];
+    }
+
+    /** @return list<array{code:string,label:string,autofix:array<int,string>}> */
+    public function seoReadinessIssues(string $type, object $record): array
+    {
+        return array_values(array_filter(
+            $this->issuesFor($type, $record),
+            static fn (array $issue): bool => in_array($issue['code'], self::CORE_SEO_ISSUES, true),
+        ));
     }
 
     public function isGrowthReady(string $type, object $record): bool
@@ -534,8 +540,20 @@ final class SeoOperationsService
     private function hasGrowthBlocker(string $type, object $record, ?object $seoMeta): bool
     {
         return $this->hasMetadataGap($type, $record, $seoMeta)
-            || trim((string) data_get($seoMeta, 'canonical_url', '')) !== $this->expectedCanonical($type, $record)
+            || ! $this->matchesCanonical($type, $seoMeta, $this->expectedCanonical($type, $record))
             || trim((string) data_get($seoMeta, 'robots', '')) !== $this->expectedRobots($type, $record);
+    }
+
+    private function matchesCanonical(string $type, ?object $seoMeta, ?string $expectedCanonical): bool
+    {
+        $stored = trim((string) data_get($seoMeta, 'canonical_url', ''));
+        if ($stored === $expectedCanonical) {
+            return true;
+        }
+
+        // Article metadata also supports the exact root-relative path of the public canonical.
+        return $type === 'article' && $expectedCanonical !== null && $stored !== ''
+            && $stored === parse_url($expectedCanonical, PHP_URL_PATH);
     }
 
     private function isPublishedPublic(string $type, object $record): bool

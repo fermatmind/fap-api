@@ -464,6 +464,37 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSee('The opportunity read model is unavailable in this environment.');
     }
 
+    public function test_article_seo_readiness_accepts_the_exact_public_canonical_path(): void
+    {
+        $article = new Article([
+            'slug' => 'canonical-check', 'locale' => 'zh-CN', 'status' => 'published',
+            'is_public' => true, 'is_indexable' => true,
+        ]);
+        $seo = new ArticleSeoMeta([
+            'seo_title' => 'Title', 'seo_description' => 'Description', 'og_title' => 'Social title',
+            'og_description' => 'Social description', 'og_image_url' => 'https://example.test/cover.png',
+            'robots' => 'index,follow', 'is_indexable' => true,
+        ]);
+        $article->setRelation('seoMeta', $seo);
+        $service = app(SeoOperationsService::class);
+        $path = '/zh/articles/canonical-check';
+
+        foreach ([$path, 'https://example.test'.$path] as $canonical) {
+            $seo->canonical_url = $canonical;
+            $this->assertSame([], $service->issuesFor('article', $article));
+            $this->assertTrue($service->isSeoReady('article', $article));
+            $this->assertTrue($service->isGrowthReady('article', $article));
+        }
+
+        foreach (['', 'https://wrong.test'.$path, '//wrong.test'.$path, '/en/articles/canonical-check',
+            $path.'?ref=other', $path.'#section', 'http://example.test'.$path] as $canonical) {
+            $seo->canonical_url = $canonical;
+            $codes = array_column($service->issuesFor('article', $article), 'code');
+            $this->assertSame([SeoOperationsService::ISSUE_CANONICAL, SeoOperationsService::ISSUE_GROWTH], $codes, $canonical);
+            $this->assertFalse($service->isSeoReady('article', $article));
+        }
+    }
+
     public function test_seo_operations_can_apply_bulk_actions_to_fix_operational_gaps(): void
     {
         $admin = $this->createAdminWithPermissions([

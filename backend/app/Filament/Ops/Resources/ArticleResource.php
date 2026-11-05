@@ -18,6 +18,7 @@ use App\Models\MediaAsset;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Services\Cms\MediaVariantGenerator;
 use App\Services\Ops\SeoContentScopeViewModel;
+use App\Services\Ops\SeoOperationsService;
 use App\Support\PublicMediaUrlGuard;
 use App\Support\SchemaBaseline;
 use Filament\Forms;
@@ -491,7 +492,8 @@ class ArticleResource extends Resource
                     ->trueIcon('heroicon-o-check-circle')
                     ->falseIcon('heroicon-o-exclamation-triangle')
                     ->trueColor('success')
-                    ->falseColor('danger'),
+                    ->falseColor('danger')
+                    ->tooltip(fn (Article $record, bool $state): ?string => $state ? null : self::seoReadinessTooltip($record)),
                 Tables\Columns\TextColumn::make('author_name')
                     ->label(__('ops.resources.articles.owner'))
                     ->searchable()
@@ -722,9 +724,20 @@ class ArticleResource extends Resource
 
         static $service;
 
-        $service ??= app(\App\Services\Ops\SeoOperationsService::class);
+        $service ??= app(SeoOperationsService::class);
 
         return $service->isSeoReady('article', $record);
+    }
+
+    private static function seoReadinessTooltip(Article $record): ?string
+    {
+        if (! SchemaBaseline::hasTable('article_seo_meta')) {
+            return __('ops.resources.articles.placeholders.not_set_yet');
+        }
+
+        $issues = app(SeoOperationsService::class)->seoReadinessIssues('article', $record);
+
+        return implode(' · ', array_column($issues, 'label')) ?: null;
     }
 
     private static function canRead(): bool
