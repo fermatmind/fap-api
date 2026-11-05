@@ -236,6 +236,18 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                             [$seo, $schema] = $this->planTestCtaRemoval($lockedArticle, (string) $removeTestSlug, true);
                             $seo->forceFill(['schema_json' => $schema])->save();
                             $lockedArticle->related_test_slug = null;
+                            if ($lockedArticle->isSourceArticle()) {
+                                $projected = clone $lockedArticle;
+                                $projected->forceFill([
+                                    'title' => (string) $lockedRevision->title,
+                                    'excerpt' => $lockedRevision->excerpt,
+                                    'content_md' => (string) $lockedRevision->content_md,
+                                    'content_html' => null,
+                                ]);
+                                $sourceHash = $projected->computeSourceVersionHash();
+                                $lockedRevision->source_version_hash = $sourceHash;
+                                $lockedRevision->translated_from_version_hash = $sourceHash;
+                            }
                         }
                     },
                     onCommitted: function (Article $committed) use (&$summary): void {

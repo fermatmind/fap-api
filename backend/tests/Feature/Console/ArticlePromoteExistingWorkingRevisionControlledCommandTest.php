@@ -884,6 +884,8 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
         $this->assertSame('Existing social title', $after->seoMeta->og_title);
         $this->assertSame($article->workingRevision->seo_title, $after->seoMeta->seo_title);
         $this->assertSame($article->workingRevision->content_md, $after->publishedRevision->content_md);
+        $this->assertSame($after->computeSourceVersionHash(), $after->publishedRevision->source_version_hash);
+        $this->assertSame($after->source_version_hash, $after->publishedRevision->translated_from_version_hash);
     }
 
     public function test_execute_promotes_existing_article_working_revision_and_preserves_route_state(): void
