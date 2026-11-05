@@ -17,6 +17,7 @@ use App\Models\EditorialReview;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Services\Cms\ArticleReviewedCounterpartService;
 use App\Services\Cms\ArticleTranslationWorkflowException;
 use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Services\Ops\ArticleTranslationOpsService;
@@ -172,6 +173,62 @@ final class ArticleTranslationOpsPageTest extends TestCase
             ->assertSet('metrics.published_target_locale_count', 1)
             ->assertSet('summaryCards.0.value', '100%')
             ->assertSet('selectedGroup', null);
+    }
+
+    public function test_independent_language_page_is_distinguished_from_a_reviewed_counterpart(): void
+    {
+        $source = $this->createSourceOnlyGroup('independent-language-page');
+        $counterpart = Article::query()->create([
+            'org_id' => 0, 'slug' => $source->slug, 'locale' => 'en', 'source_locale' => 'en',
+            'translation_group_id' => 'independent-english-language-page',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'title' => 'Independent English page', 'excerpt' => 'English summary', 'content_md' => 'English body',
+            'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'published_at' => now(),
+        ]);
+        $revision = $this->createRevision($counterpart, ['published_at' => now()]);
+        $counterpart->forceFill(['working_revision_id' => $revision->id, 'published_revision_id' => $revision->id])->saveQuietly();
+        ArticleSeoMeta::query()->create([
+            'org_id' => 0, 'article_id' => $counterpart->id, 'locale' => 'en', 'is_indexable' => true,
+            'canonical_url' => '/en/articles/'.$source->slug,
+        ]);
+        $source->seoMeta->update(['canonical_url' => '/zh/articles/'.$source->slug]);
+
+        $dashboard = app(CmsTranslationOpsService::class);
+        $filters = ['slug' => $source->slug, 'source_locale' => 'zh-CN', 'target_locale' => 'en'];
+        $unpaired = $dashboard->dashboard($filters);
+        $this->assertSame(1, $unpaired['metrics']['missing_translation_count']);
+        $this->assertSame('independent_page_unpaired', $unpaired['coverage_matrix'][0]['cells']['en']['state']);
+        $this->assertSame('#'.$counterpart->id, $unpaired['coverage_matrix'][0]['cells']['en']['record_label']);
+        $this->assertFalse(collect($unpaired['groups'][0]['group_actions'])->firstWhere('wire_action', 'createTranslationDraft')['enabled']);
+
+        $provider = $this->mock(ArticleMachineTranslationProvider::class);
+        $provider->shouldReceive('isConfigured')->andReturnTrue();
+        $provider->shouldNotReceive('translate');
+        try {
+            app(ArticleTranslationWorkflowService::class)->createMachineDraft($source, 'en');
+            $this->fail('Expected an occupied target slug to block draft creation.');
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->assertSame('The target locale already uses this article slug.', $exception->getMessage());
+        }
+
+        $members = [$source->fresh(['seoMeta', 'publishedRevision']), $counterpart->fresh(['seoMeta', 'publishedRevision'])];
+        $binding = app(ArticleReviewedCounterpartService::class)->createBinding($members);
+        foreach ($members as $member) {
+            $member->seoMeta->update(['schema_json' => ['editorial_package_v1' => ['hreflang_gate_v1' => [
+                'enabled' => true, 'policy' => 'reciprocal_counterparts_verified', 'counterpart_binding_v1' => $binding,
+            ]]]]);
+        }
+        $reviewed = $dashboard->dashboard($filters);
+        $this->assertSame(0, $reviewed['metrics']['missing_translation_count']);
+        $this->assertSame(1, $reviewed['metrics']['published_target_locale_count']);
+        $this->assertSame('reviewed_counterpart', $reviewed['coverage_matrix'][0]['cells']['en']['state']);
+        $this->assertCount(1, $reviewed['groups'][0]['locales']);
+        $this->assertSame([], $dashboard->dashboard($filters + ['missing_locale' => true])['groups']);
+
+        $counterpart->update(['excerpt' => 'Changed after review']);
+        $invalidated = $dashboard->dashboard($filters);
+        $this->assertSame(1, $invalidated['metrics']['missing_translation_count']);
+        $this->assertSame('independent_page_unpaired', $invalidated['coverage_matrix'][0]['cells']['en']['state']);
     }
 
     public function test_translation_ops_page_localizes_visible_chinese_console_copy(): void

@@ -618,6 +618,8 @@ return [
             'not_published' => 'Not published',
             'not_available' => 'n/a',
             'no_target_record' => 'No target record',
+            'reviewed_counterpart' => 'Reviewed language counterpart',
+            'independent_page_unpaired' => 'Independent page without a language pairing',
             'healthy' => 'Healthy',
             'needs_action' => 'Needs action',
             'blocked' => 'Blocked',
@@ -716,6 +718,7 @@ return [
             'translation_source_locale_mismatch' => 'translation source_locale mismatch',
         ],
         'blockers' => [
+            'target_locale_slug_already_in_use' => 'An existing article already uses this slug in the target locale.',
             'target_article_is_source' => 'target article is source',
             'source_row_status_is_not_source' => 'source row status is not source',
             'source_article_status_is_not_source' => 'source article status is not source',

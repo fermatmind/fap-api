@@ -341,7 +341,7 @@ final class CmsTranslationOpsService
                 if ($targetLocale !== 'all') {
                     $hasTargetLocale = collect($group['locales'] ?? [])->contains(
                         fn (array $locale): bool => ! (bool) $locale['is_source'] && (string) $locale['locale'] === $targetLocale
-                    );
+                    ) || isset($group['coverage']['independent_pages'][$targetLocale]);
                     if (! $hasTargetLocale && ! (bool) ($filters['missing_locale'] ?? false)) {
                         return false;
                     }
@@ -569,6 +569,30 @@ final class CmsTranslationOpsService
                     (array) ($localeRow['readiness_blockers'] ?? []),
                 ))),
                 'actions' => $this->groupActionsByPriority((array) ($localeRow['actions'] ?? [])),
+            ];
+        }
+
+        $independent = $group['coverage']['independent_pages'][$locale] ?? null;
+        if (is_array($independent)) {
+            $reviewed = $independent['reviewed'];
+
+            return [
+                'locale' => $locale,
+                'state' => $reviewed ? 'reviewed_counterpart' : 'independent_page_unpaired',
+                'status_state' => $reviewed ? 'success' : 'warning',
+                'status_label' => __('ops.translation_ops.matrix.'.($reviewed ? 'reviewed_counterpart' : 'independent_page_unpaired')),
+                'freshness_label' => __('ops.translation_ops.matrix.not_available'),
+                'freshness_state' => 'gray',
+                'publish_label' => __('ops.translation_ops.matrix.published'),
+                'publish_state' => 'success',
+                'record_label' => '#'.$independent['record_id'],
+                'workflow_label' => '',
+                'blockers' => [],
+                'actions' => $this->groupActionsByPriority([[
+                    'label' => __('ops.translation_ops.actions.open_target_article'),
+                    'enabled' => true,
+                    'url' => $independent['edit_url'],
+                ]]),
             ];
         }
 

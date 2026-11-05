@@ -12,6 +12,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\EditorialReview;
 use App\Services\Cms\ArticlePublishedSourceReviewService;
+use App\Services\Cms\ArticleReviewedCounterpartService;
 use App\Services\Cms\ArticleTranslationWorkflowService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
@@ -63,12 +64,15 @@ final class ArticleTranslationOpsService
                 ->get()
                 ->groupBy(fn (ArticleTranslationRevision $revision): string => (string) $revision->translation_group_id);
 
+        $independentSourcesBySlug = $articles->filter(fn (Article $article): bool => $article->isSourceArticle())
+            ->groupBy('slug');
         $groups = $articles
             ->groupBy(fn (Article $article): string => (string) $article->translation_group_id)
             ->map(fn (Collection $groupArticles, string $groupId): array => $this->summarizeGroup(
                 $groupId,
                 $groupArticles,
-                $revisionsByGroup->get($groupId, collect())
+                $revisionsByGroup->get($groupId, collect()),
+                $independentSourcesBySlug,
             ))
             ->sortBy('slug')
             ->values();
@@ -86,9 +90,10 @@ final class ArticleTranslationOpsService
     /**
      * @param  Collection<int, Article>  $articles
      * @param  Collection<int, ArticleTranslationRevision>  $revisions
+     * @param  Collection<string, Collection<int, Article>>  $independentSourcesBySlug
      * @return array<string, mixed>
      */
-    private function summarizeGroup(string $groupId, Collection $articles, Collection $revisions): array
+    private function summarizeGroup(string $groupId, Collection $articles, Collection $revisions, Collection $independentSourcesBySlug): array
     {
         $sourceArticles = $articles->filter(fn (Article $article): bool => $this->isSource($article));
         $sourceCandidates = $articles->filter(fn (Article $article): bool => $this->isSourceCandidate($article));
@@ -109,6 +114,10 @@ final class ArticleTranslationOpsService
             ->map(fn (Article $article): array => $this->summarizeLocale($article, $source, $sourceHash, $publishedSourceHash, $revisions, $sourceVersionIssues, $reviewedMetadataDrift))
             ->values();
         $coverage = $this->coverage($locales, $this->targetLocales(), (string) ($source?->locale ?? ''));
+        $coverage['independent_pages'] = $this->independentPages($source, $coverage['missing_target_locales'], $independentSourcesBySlug);
+        $reviewedLocales = array_keys(array_filter($coverage['independent_pages'], fn (array $page): bool => $page['reviewed']));
+        $coverage['published_target_locales'] = array_merge($coverage['published_target_locales'], $reviewedLocales);
+        $coverage['missing_target_locales'] = array_values(array_diff($coverage['missing_target_locales'], $reviewedLocales));
 
         $staleLocales = $locales->filter(fn (array $locale): bool => (bool) $locale['is_stale']);
         $publishedLocales = $locales->filter(fn (array $locale): bool => (bool) $locale['is_published']);
@@ -118,7 +127,7 @@ final class ArticleTranslationOpsService
             ->values()
             ->all();
         $canonicalIssues = $this->canonicalIssues($sourceArticles, $sourceCandidates, $articles, $source, $sourceVersionIssues);
-        $alerts = $this->alerts($locales, $coverage['missing_target_locales'], $canonicalIssues, $ownershipIssues);
+        $alerts = $this->alerts($locales, $coverage['missing_target_locales'], $canonicalIssues, $ownershipIssues, $coverage['independent_pages']);
 
         return [
             'translation_group_id' => $groupId,
@@ -149,8 +158,34 @@ final class ArticleTranslationOpsService
             'orphan_revision_count' => $orphanRevisions->count(),
             'alerts' => $alerts,
             'revision_history' => $this->revisionHistory($revisions),
-            'actions' => $this->groupActions($source, $coverage['missing_target_locales'], empty($canonicalIssues)),
+            'actions' => $this->groupActions($source, $coverage['missing_target_locales'], empty($canonicalIssues), $coverage['independent_pages']),
         ];
+    }
+
+    private function independentPages(?Article $source, array $missingLocales, Collection $sourcesBySlug): array
+    {
+        if (! $source instanceof Article || ! $source->isSourceArticle() || $missingLocales === []) {
+            return [];
+        }
+
+        $resolver = app(ArticleReviewedCounterpartService::class);
+        $reviewed = collect($resolver->resolve($source));
+        $sameSlug = $sourcesBySlug->get($source->slug, collect());
+        $pages = [];
+        foreach ($missingLocales as $locale) {
+            $counterpart = $reviewed->firstWhere('locale', $locale);
+            $independent = $counterpart ?? $sameSlug->first(fn (Article $article): bool => $article->locale === $locale
+                && $article->translation_group_id !== $source->translation_group_id && $resolver->eligible($article));
+            if ($independent instanceof Article) {
+                $pages[$locale] = [
+                    'record_id' => (int) $independent->id,
+                    'reviewed' => $counterpart instanceof Article,
+                    'edit_url' => ArticleResource::getUrl('edit', ['record' => $independent]),
+                ];
+            }
+        }
+
+        return $pages;
     }
 
     /**
@@ -423,7 +458,7 @@ final class ArticleTranslationOpsService
      * @param  list<string>  $ownershipIssues
      * @return list<array{label:string,state:string}>
      */
-    private function alerts(Collection $locales, array $missingTargetLocales, array $canonicalIssues, array $ownershipIssues): array
+    private function alerts(Collection $locales, array $missingTargetLocales, array $canonicalIssues, array $ownershipIssues, array $independentPages): array
     {
         $alerts = [];
 
@@ -439,7 +474,9 @@ final class ArticleTranslationOpsService
             $alerts[] = ['label' => __('ops.translation_ops.alerts.missing_published_revision'), 'state' => 'failed'];
         }
         foreach ($missingTargetLocales as $missingLocale) {
-            $alerts[] = ['label' => __('ops.translation_ops.alerts.missing_locale', ['locale' => $missingLocale]), 'state' => 'warning'];
+            $alerts[] = ['label' => isset($independentPages[$missingLocale])
+                ? __('ops.translation_ops.matrix.independent_page_unpaired')
+                : __('ops.translation_ops.alerts.missing_locale', ['locale' => $missingLocale]), 'state' => 'warning'];
         }
         if (! empty($ownershipIssues)) {
             $alerts[] = ['label' => __('ops.translation_ops.alerts.ownership_mismatch'), 'state' => 'failed'];
@@ -477,8 +514,9 @@ final class ArticleTranslationOpsService
      * @param  list<string>  $missingTargetLocales
      * @return list<array<string, mixed>>
      */
-    private function groupActions(?Article $source, array $missingTargetLocales, bool $canonicalOk): array
+    private function groupActions(?Article $source, array $missingTargetLocales, bool $canonicalOk, array $independentPages): array
     {
+        $missingTargetLocales = array_values(array_diff($missingTargetLocales, array_keys($independentPages)));
         $workflow = app(ArticleTranslationWorkflowService::class);
         $defaultTargetLocale = in_array(self::DEFAULT_TARGET_LOCALE, $missingTargetLocales, true)
             ? self::DEFAULT_TARGET_LOCALE
@@ -489,6 +527,12 @@ final class ArticleTranslationOpsService
             && ContentAccess::canWrite()
             && in_array($defaultTargetLocale, $missingTargetLocales, true)
             && $workflow->canGenerateMachineDraft();
+        $createBlockedReason = match (true) {
+            $canCreate => null,
+            isset($independentPages[$defaultTargetLocale]) => __('ops.translation_ops.blockers.target_locale_slug_already_in_use'),
+            $workflow->canGenerateMachineDraft() => __('ops.translation_ops.reasons.target_locale_exists_or_missing_permission'),
+            default => $this->localizedReason($workflow->machineDraftUnavailableReason()),
+        };
 
         return [
             [
@@ -504,11 +548,7 @@ final class ArticleTranslationOpsService
                 'article_id' => $source instanceof Article ? (int) $source->id : null,
                 'target_locale' => $defaultTargetLocale,
                 'url' => null,
-                'reason' => $canCreate
-                    ? null
-                    : ($workflow->canGenerateMachineDraft()
-                        ? __('ops.translation_ops.reasons.target_locale_exists_or_missing_permission')
-                        : $this->localizedReason($workflow->machineDraftUnavailableReason())),
+                'reason' => $createBlockedReason,
             ],
             [
                 'label' => __('ops.translation_ops.actions.resync_from_source'),
@@ -728,6 +768,7 @@ final class ArticleTranslationOpsService
                 && ! $missingLocale
                 && $published !== 'unpublished'
                 && ! in_array($targetLocale, $group['locale_codes'], true)
+                && ! isset($group['coverage']['independent_pages'][$targetLocale])
             ) {
                 return false;
             }
@@ -745,7 +786,8 @@ final class ArticleTranslationOpsService
             $publicationLocales = $targetLocale === 'all'
                 ? $locales
                 : $locales->filter(fn (array $locale): bool => (string) $locale['locale'] === $targetLocale);
-            $hasPublishedLocale = $publicationLocales->contains(fn (array $locale): bool => (bool) $locale['is_published']);
+            $hasPublishedLocale = $publicationLocales->contains(fn (array $locale): bool => (bool) $locale['is_published'])
+                || (bool) ($group['coverage']['independent_pages'][$targetLocale]['reviewed'] ?? false);
 
             if ($published === 'published' && ! $hasPublishedLocale) {
                 return false;
@@ -753,7 +795,7 @@ final class ArticleTranslationOpsService
             if ($published === 'unpublished' && $hasPublishedLocale) {
                 return false;
             }
-            if ($missingLocale && in_array($missingLocaleTarget, $group['locale_codes'], true)) {
+            if ($missingLocale && ! in_array($missingLocaleTarget, $group['coverage']['missing_target_locales'], true)) {
                 return false;
             }
             if ($ownership === 'mismatch' && (bool) $group['ownership_ok']) {
@@ -781,7 +823,7 @@ final class ArticleTranslationOpsService
             'translation_groups' => $groups->count(),
             'stale_groups' => $groups->filter(fn (array $group): bool => (int) $group['stale_locales_count'] > 0)->count(),
             'published_groups' => $groups->filter(fn (array $group): bool => ! empty($group['published_locales']))->count(),
-            'missing_target_locale' => $groups->filter(fn (array $group): bool => ! in_array($targetLocale, $group['locale_codes'], true))->count(),
+            'missing_target_locale' => $groups->filter(fn (array $group): bool => in_array($targetLocale, $group['coverage']['missing_target_locales'], true))->count(),
             'ownership_mismatch_groups' => $groups->filter(fn (array $group): bool => ! (bool) $group['ownership_ok'])->count(),
             'canonical_risk_groups' => $groups->filter(fn (array $group): bool => ! (bool) $group['canonical_ok'])->count(),
         ];

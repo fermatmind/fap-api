@@ -83,6 +83,13 @@ final class ArticleTranslationWorkflowService
                 ]);
             }
 
+            if (Article::withoutGlobalScopes()->where('org_id', $lockedSource->org_id)
+                ->where('locale', $targetLocale)->where('slug', $lockedSource->slug)->exists()) {
+                throw new ArticleTranslationWorkflowException('The target locale already uses this article slug.', [
+                    'target locale slug already in use',
+                ]);
+            }
+
             $payload = $this->provider->translate($lockedSource, $targetLocale);
             $sourceHash = $this->sourceHashFor($lockedSource);
             $target = $this->createTargetArticle($lockedSource, $targetLocale, $payload, $sourceHash);

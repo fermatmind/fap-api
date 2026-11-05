@@ -618,6 +618,8 @@ return [
             'not_published' => '未发布',
             'not_available' => '不可用',
             'no_target_record' => '暂无目标记录',
+            'reviewed_counterpart' => '已审语言对应页',
+            'independent_page_unpaired' => '已有独立文章，未配对',
             'healthy' => '健康',
             'needs_action' => '需要处理',
             'blocked' => '阻塞',
@@ -716,6 +718,7 @@ return [
             'translation_source_locale_mismatch' => '译文 source_locale 不一致',
         ],
         'blockers' => [
+            'target_locale_slug_already_in_use' => '目标语言已存在使用此 slug 的文章。',
             'target_article_is_source' => '目标文章是源文',
             'source_row_status_is_not_source' => '候选源文记录的翻译状态不是 source',
             'source_article_status_is_not_source' => '候选源文章的翻译状态不是 source',
