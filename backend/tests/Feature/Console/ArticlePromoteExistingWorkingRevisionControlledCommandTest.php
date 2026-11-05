@@ -12,6 +12,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticlePublishService;
+use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\OrgContext;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -765,6 +766,67 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
         $this->assertErrorCode($payload, 'body_han_characters_below_minimum');
         $this->assertFalse((bool) data_get($payload, 'plan.editorial_completeness.ok'));
         $this->assertSame(2000, data_get($payload, 'plan.editorial_completeness.minimum_han_characters'));
+    }
+
+    public function test_locked_summary_repair_promotes_unchanged_legacy_body_and_refreshes_public_fields(): void
+    {
+        config(['ops.content_release_observability.cache_invalidation_urls' => ['https://cache.example.test/revalidate'],
+            'ops.content_release_observability.cache_invalidation_secret' => 'fixture-only-secret']);
+        Http::fake(['*' => Http::response(self::frontendArticleSuccessReceipt())]);
+        $article = $this->createLegacySummaryRepair();
+        $published = $article->publishedRevision;
+        $working = $article->workingRevision;
+        $exitCode = Artisan::call('articles:promote-existing-working-revision', $this->revalidationOptions($article, [
+            '--expected-article-state-sha256' => ArticleSourceTargetSnapshot::publicationHash($article),
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, json_encode($payload));
+        $this->assertSame('committed', $payload['publication']);
+        $this->assertSame('success', $payload['cache_closeout']);
+        $this->assertTrue($payload['plan']['ok']);
+        $this->assertSame('zh_published_summary_repair_v1', data_get($payload, 'plan.editorial_completeness.profile'));
+
+        $after = $article->fresh(['publishedRevision', 'seoMeta']);
+        $this->assertSame($working->id, $after->published_revision_id);
+        $this->assertSame($published->title, $after->title);
+        $this->assertSame($published->content_md, $after->publishedRevision->content_md);
+        $this->assertSame($article->cover_image_url, $after->cover_image_url);
+        $this->assertSame($article->seoMeta->canonical_url, $after->seoMeta->canonical_url);
+        $this->assertSame($published->seo_title, $after->seoMeta->seo_title);
+        $this->assertSame($working->seo_description, $after->seoMeta->seo_description);
+        $this->assertSame($working->seo_description, $after->seoMeta->og_description);
+        $this->getJson('/api/v0.5/articles/'.self::SLUG.'?org_id=0&locale=zh-CN')
+            ->assertOk()->assertJsonPath('article.excerpt', $working->excerpt);
+        Http::assertSentCount(1);
+    }
+
+    public function test_short_summary_repair_without_snapshot_or_with_changed_body_is_rejected(): void
+    {
+        $article = $this->createLegacySummaryRepair();
+        $options = ['--dry-run' => true, '--json' => true];
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, $options)));
+        $this->assertErrorCode($this->jsonOutput(), 'body_han_characters_below_minimum');
+
+        $article->publishedRevision->forceFill(['content_md' => '不同的旧正文。'])->saveQuietly();
+        $article->forceFill(['content_md' => $article->publishedRevision->content_md])->saveQuietly();
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, $options + [
+            '--expected-article-state-sha256' => ArticleSourceTargetSnapshot::publicationHash($article),
+        ])));
+        $this->assertErrorCode($this->jsonOutput(), 'body_han_characters_below_minimum');
+    }
+
+    private function createLegacySummaryRepair(): Article
+    {
+        $placeholder = 'Big Five Authority V2 draft candidate pending manual review.';
+        $article = $this->createExistingArticleWithWorkingRevision(['working_body' => "## Existing EQ article\n\n旧正文。"]);
+        $published = $article->publishedRevision;
+        $published->forceFill(['excerpt' => $placeholder, 'seo_description' => $placeholder])->saveQuietly();
+        $article->workingRevision->forceFill(['title' => $published->title, 'seo_title' => $published->seo_title])->saveQuietly();
+        $article->forceFill(['excerpt' => $placeholder])->saveQuietly();
+        $article->seoMeta->forceFill(['seo_description' => $placeholder, 'og_description' => $placeholder])->saveQuietly();
+
+        return $article->fresh(['publishedRevision', 'workingRevision', 'seoMeta']);
     }
 
     public function test_execute_revalidates_editorial_completeness_inside_promotion_transaction(): void

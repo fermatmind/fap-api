@@ -22,10 +22,15 @@ final class ArticleEditorialCompletenessGate
 
     /**
      * @param  array<string,string|null>  $readerFacingFields
+     * @param  array<string,string|null>  $publishedSummaries  Summaries from the verified, otherwise unchanged publication.
      * @return array<string,mixed>
      */
-    public function inspect(string $locale, string $bodyMarkdown, array $readerFacingFields): array
-    {
+    public function inspect(
+        string $locale,
+        string $bodyMarkdown,
+        array $readerFacingFields,
+        array $publishedSummaries = [],
+    ): array {
         $issues = [];
         $matchedMarkers = $this->matchedMarkers($readerFacingFields);
         $hanCharacterCount = $this->hanCharacterCount($bodyMarkdown);
@@ -42,7 +47,11 @@ final class ArticleEditorialCompletenessGate
             );
         }
 
-        if ($minimumHanCharacters !== null && $hanCharacterCount < $minimumHanCharacters) {
+        $shortBody = $minimumHanCharacters !== null && $hanCharacterCount < $minimumHanCharacters;
+        $summaryRepair = $shortBody && $hanCharacterCount > 0 && $matchedMarkers === []
+            && $this->replacesDraftSummaries($publishedSummaries, $readerFacingFields);
+
+        if ($shortBody && ! $summaryRepair) {
             $issues[] = $this->issue(
                 'editorial_completeness.body',
                 'body_han_characters_below_minimum',
@@ -56,13 +65,33 @@ final class ArticleEditorialCompletenessGate
 
         return [
             'ok' => $issues === [],
-            'profile' => $minimumHanCharacters === null ? 'marker_only_v1' : 'zh_seo_article_v1',
+            'profile' => match (true) {
+                $summaryRepair => 'zh_published_summary_repair_v1',
+                $minimumHanCharacters === null => 'marker_only_v1',
+                default => 'zh_seo_article_v1',
+            },
             'locale' => $locale,
             'actual_han_characters' => $hanCharacterCount,
             'minimum_han_characters' => $minimumHanCharacters,
             'matched_forbidden_markers' => $matchedMarkers,
             'issues' => $issues,
         ];
+    }
+
+    /**
+     * @param  array<string,string|null>  $publishedSummaries
+     * @param  array<string,string|null>  $readerFacingFields
+     */
+    private function replacesDraftSummaries(array $publishedSummaries, array $readerFacingFields): bool
+    {
+        foreach (['working_revision.excerpt', 'working_revision.seo_description'] as $field) {
+            if (trim((string) ($readerFacingFields[$field] ?? '')) === ''
+                || $this->matchedMarkers([$field => $publishedSummaries[$field] ?? null]) === []) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

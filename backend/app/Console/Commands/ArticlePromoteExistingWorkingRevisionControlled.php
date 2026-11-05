@@ -231,7 +231,11 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                         if ($this->option('expected-article-state-sha256') !== null) {
                             ArticleSourceTargetSnapshot::assertPublicationHash($lockedArticle, (string) $this->option('expected-article-state-sha256'), true);
                         }
-                        $this->assertEditorialCompleteness($lockedArticle, $lockedRevision);
+                        $this->assertEditorialCompleteness(
+                            $lockedArticle,
+                            $lockedRevision,
+                            $this->hasPublishedSummaryRepairLock() ? (int) $lockedArticle->published_revision_id : null,
+                        );
                         if ($removeTestSlug !== null) {
                             [$seo, $schema] = $this->planTestCtaRemoval($lockedArticle, (string) $removeTestSlug, true);
                             $seo->forceFill(['schema_json' => $schema])->save();
@@ -1551,7 +1555,12 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             $errors[] = $this->issue('tags', 'independent_candidate_tags_drift', $exception->getMessage());
         }
 
-        $editorialCompleteness = $this->editorialCompleteness($article, $workingRevision);
+        $editorialCompleteness = $this->editorialCompleteness(
+            $article,
+            $workingRevision,
+            $this->hasPublishedSummaryRepairLock() ? $currentPublishedRevisionId : null,
+            $afterPromotion,
+        );
         foreach ((array) $editorialCompleteness['issues'] as $issue) {
             if (is_array($issue)) {
                 $errors[] = $issue;
@@ -1625,8 +1634,12 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
     /**
      * @return array<string,mixed>
      */
-    private function editorialCompleteness(Article $article, ?ArticleTranslationRevision $workingRevision): array
-    {
+    private function editorialCompleteness(
+        Article $article,
+        ?ArticleTranslationRevision $workingRevision,
+        ?int $publishedSummaryBaselineId = null,
+        bool $afterPromotion = false,
+    ): array {
         return $this->editorialCompletenessGate->inspect(
             (string) $article->locale,
             (string) ($workingRevision?->content_md ?? ''),
@@ -1637,12 +1650,66 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 'working_revision.seo_title' => (string) ($workingRevision?->seo_title ?? ''),
                 'working_revision.seo_description' => (string) ($workingRevision?->seo_description ?? ''),
             ],
+            $this->publishedSummariesForRepair($article, $workingRevision, $publishedSummaryBaselineId, $afterPromotion),
         );
     }
 
-    private function assertEditorialCompleteness(Article $article, ArticleTranslationRevision $workingRevision): void
+    private function hasPublishedSummaryRepairLock(): bool
     {
-        $result = $this->editorialCompleteness($article, $workingRevision);
+        return preg_match('/^[a-f0-9]{64}$/D', (string) $this->option('expected-article-state-sha256')) === 1
+            && ! filled($this->option('batch'))
+            && ! filled($this->option('blog-v1-file'))
+            && $this->option('remove-related-test-cta') === null;
+    }
+
+    /**
+     * @return array<string,string|null>
+     */
+    private function publishedSummariesForRepair(
+        Article $article,
+        ?ArticleTranslationRevision $working,
+        ?int $publishedSummaryBaselineId,
+        bool $afterPromotion,
+    ): array {
+        if (! $working instanceof ArticleTranslationRevision || $publishedSummaryBaselineId === null) {
+            return [];
+        }
+
+        // Closeout uses the original publication because the pointer has already advanced.
+        $published = $afterPromotion
+            ? ArticleTranslationRevision::query()->withoutGlobalScopes()->find($publishedSummaryBaselineId)
+            : $article->publishedRevision;
+
+        if (! $published instanceof ArticleTranslationRevision
+            || (int) $published->id !== $publishedSummaryBaselineId
+            || (int) $published->article_id !== (int) $article->id
+            || (int) $published->org_id !== (int) $article->org_id
+            || $published->locale !== $article->locale
+            || $published->translation_group_id !== $article->translation_group_id) {
+            return [];
+        }
+
+        $validPublication = ! $afterPromotion
+            ? $published->isPubliclyReadableForArticle($article)
+            : $published->revision_status === ArticleTranslationRevision::STATUS_STALE
+                && (int) $article->published_revision_id === (int) $working->id;
+        if (! $validPublication
+            || $published->only(['title', 'content_md', 'seo_title']) !== $working->only(['title', 'content_md', 'seo_title'])) {
+            return [];
+        }
+
+        return [
+            'working_revision.excerpt' => $published->excerpt,
+            'working_revision.seo_description' => $published->seo_description,
+        ];
+    }
+
+    private function assertEditorialCompleteness(
+        Article $article,
+        ArticleTranslationRevision $workingRevision,
+        ?int $publishedSummaryBaselineId = null,
+    ): void {
+        $result = $this->editorialCompleteness($article, $workingRevision, $publishedSummaryBaselineId);
         if ((bool) $result['ok']) {
             return;
         }
