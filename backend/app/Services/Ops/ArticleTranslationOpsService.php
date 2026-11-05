@@ -96,6 +96,7 @@ final class ArticleTranslationOpsService
     private function summarizeGroup(string $groupId, Collection $articles, Collection $revisions, Collection $independentSourcesBySlug): array
     {
         $sourceArticles = $articles->filter(fn (Article $article): bool => $this->isSource($article));
+        $independentSourcePair = $this->isReviewedIndependentSourcePair($articles, $sourceArticles);
         $sourceCandidates = $articles->filter(fn (Article $article): bool => $this->isSourceCandidate($article));
         $source = $sourceArticles->isNotEmpty()
             ? $this->selectSourceArticle($sourceArticles, $articles)
@@ -114,6 +115,9 @@ final class ArticleTranslationOpsService
             ->map(fn (Article $article): array => $this->summarizeLocale($article, $source, $sourceHash, $publishedSourceHash, $revisions, $sourceVersionIssues, $reviewedMetadataDrift))
             ->values();
         $coverage = $this->coverage($locales, $this->targetLocales(), (string) ($source?->locale ?? ''));
+        if ($independentSourcePair) {
+            $coverage['published_target_locales'] = array_values(array_intersect($coverage['target_locales'], $coverage['published_locales']));
+        }
         $coverage['independent_pages'] = $this->independentPages($source, $coverage['missing_target_locales'], $independentSourcesBySlug);
         $reviewedLocales = array_keys(array_filter($coverage['independent_pages'], fn (array $page): bool => $page['reviewed']));
         $coverage['published_target_locales'] = array_merge($coverage['published_target_locales'], $reviewedLocales);
@@ -126,13 +130,16 @@ final class ArticleTranslationOpsService
             ->merge($orphanRevisions->isNotEmpty() ? ['orphan revision'] : [])
             ->values()
             ->all();
-        $canonicalIssues = $this->canonicalIssues($sourceArticles, $sourceCandidates, $articles, $source, $sourceVersionIssues);
+        $canonicalIssues = $independentSourcePair
+            ? $sourceArticles->flatMap(fn (Article $article): array => $this->localizedSourceVersionIssues($this->sourceVersionIssues($article, false)))->unique()->values()->all()
+            : $this->canonicalIssues($sourceArticles, $sourceCandidates, $articles, $source, $sourceVersionIssues);
         $alerts = $this->alerts($locales, $coverage['missing_target_locales'], $canonicalIssues, $ownershipIssues, $coverage['independent_pages']);
 
         return [
             'translation_group_id' => $groupId,
             'slug' => (string) ($source?->slug ?? $articles->first()?->slug ?? ''),
             'source_locale' => (string) ($source?->locale ?? ''),
+            'independent_source_pair' => $independentSourcePair,
             'source_article_id' => $source?->id ? (int) $source->id : null,
             'source_article_status' => (string) ($source?->status ?? 'missing'),
             'source_edit_url' => $source instanceof Article ? ArticleResource::getUrl('edit', ['record' => $source]) : null,
@@ -158,8 +165,34 @@ final class ArticleTranslationOpsService
             'orphan_revision_count' => $orphanRevisions->count(),
             'alerts' => $alerts,
             'revision_history' => $this->revisionHistory($revisions),
-            'actions' => $this->groupActions($source, $coverage['missing_target_locales'], empty($canonicalIssues), $coverage['independent_pages']),
+            'actions' => $independentSourcePair ? [] : $this->groupActions($source, $coverage['missing_target_locales'], empty($canonicalIssues), $coverage['independent_pages']),
         ];
+    }
+
+    private function isReviewedIndependentSourcePair(Collection $articles, Collection $sources): bool
+    {
+        if ($articles->count() !== 2 || $sources->pluck('locale')->sort()->values()->all() !== ['en', 'zh-CN']) {
+            return false;
+        }
+
+        $resolver = app(ArticleReviewedCounterpartService::class);
+
+        return $sources->every(function (Article $article) use ($resolver, $articles): bool {
+            $revision = $article->publishedRevision;
+            $package = (array) data_get($article->seoMeta?->schema_json, 'editorial_package_v1', []);
+            $gate = (array) ($package['hreflang_gate_v1'] ?? []);
+
+            return $resolver->eligible($article)
+                && (int) $revision?->article_id === (int) $article->id
+                && (int) $revision?->source_article_id === (int) $article->id
+                && $revision?->source_locale === $article->locale
+                && $revision?->translation_group_id === $article->translation_group_id
+                && ($gate['enabled'] ?? null) === true
+                && ($gate['policy'] ?? null) === 'reciprocal_counterparts_verified'
+                && ! ($package['hreflang_hold'] ?? false)
+                && ($resolver->binding($article) === null
+                    || collect($resolver->resolve($article))->pluck('id')->sort()->values()->all() === $articles->pluck('id')->sort()->values()->all());
+        });
     }
 
     private function independentPages(?Article $source, array $missingLocales, Collection $sourcesBySlug): array
@@ -382,11 +415,7 @@ final class ArticleTranslationOpsService
             return $issues;
         }
 
-        foreach ($sourceVersionIssues as $sourceVersionIssue) {
-            $issues[] = $sourceVersionIssue === 'source row hash differs from current content'
-                ? __('ops.translation_ops.ownership_issues.source_row_hash_mismatch')
-                : __('ops.translation_ops.ownership_issues.source_published_revision_hash_mismatch');
-        }
+        $issues = array_merge($issues, $this->localizedSourceVersionIssues($sourceVersionIssues));
 
         foreach ($articles as $article) {
             if ((int) $article->id === (int) $source->id) {
@@ -402,6 +431,13 @@ final class ArticleTranslationOpsService
         }
 
         return array_values(array_unique($issues));
+    }
+
+    private function localizedSourceVersionIssues(array $issues): array
+    {
+        return array_map(fn (string $issue): string => $issue === 'source row hash differs from current content'
+            ? __('ops.translation_ops.ownership_issues.source_row_hash_mismatch')
+            : __('ops.translation_ops.ownership_issues.source_published_revision_hash_mismatch'), $issues);
     }
 
     /** @return list<string> */
@@ -760,7 +796,8 @@ final class ArticleTranslationOpsService
             if ($slug !== '' && ! str_contains(Str::lower((string) $group['slug']), $slug)) {
                 return false;
             }
-            if ($sourceLocale !== 'all' && (string) $group['source_locale'] !== $sourceLocale) {
+            if ($sourceLocale !== 'all' && (string) $group['source_locale'] !== $sourceLocale
+                && ! ($group['independent_source_pair'] && in_array($sourceLocale, $group['locale_codes'], true))) {
                 return false;
             }
             if (

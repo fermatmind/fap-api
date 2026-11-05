@@ -620,6 +620,7 @@ return [
             'no_target_record' => '暂无目标记录',
             'reviewed_counterpart' => '已审语言对应页',
             'independent_page_unpaired' => '已有独立文章，未配对',
+            'independent_source_pair' => '双语独立源稿',
             'healthy' => '健康',
             'needs_action' => '需要处理',
             'blocked' => '阻塞',

@@ -178,20 +178,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
     public function test_independent_language_page_is_distinguished_from_a_reviewed_counterpart(): void
     {
         $source = $this->createSourceOnlyGroup('independent-language-page');
-        $counterpart = Article::query()->create([
-            'org_id' => 0, 'slug' => $source->slug, 'locale' => 'en', 'source_locale' => 'en',
-            'translation_group_id' => 'independent-english-language-page',
-            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
-            'title' => 'Independent English page', 'excerpt' => 'English summary', 'content_md' => 'English body',
-            'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'published_at' => now(),
-        ]);
-        $revision = $this->createRevision($counterpart, ['published_at' => now()]);
-        $counterpart->forceFill(['working_revision_id' => $revision->id, 'published_revision_id' => $revision->id])->saveQuietly();
-        ArticleSeoMeta::query()->create([
-            'org_id' => 0, 'article_id' => $counterpart->id, 'locale' => 'en', 'is_indexable' => true,
-            'canonical_url' => '/en/articles/'.$source->slug,
-        ]);
-        $source->seoMeta->update(['canonical_url' => '/zh/articles/'.$source->slug]);
+        $counterpart = $this->createIndependentEnglishSource($source, 'independent-english-language-page');
 
         $dashboard = app(CmsTranslationOpsService::class);
         $filters = ['slug' => $source->slug, 'source_locale' => 'zh-CN', 'target_locale' => 'en'];
@@ -229,6 +216,42 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $invalidated = $dashboard->dashboard($filters);
         $this->assertSame(1, $invalidated['metrics']['missing_translation_count']);
         $this->assertSame('independent_page_unpaired', $invalidated['coverage_matrix'][0]['cells']['en']['state']);
+    }
+
+    public function test_independent_sources_in_one_group_require_reviewed_public_reciprocity(): void
+    {
+        $source = $this->createSourceOnlyGroup('reviewed-dual-source');
+        $counterpart = $this->createIndependentEnglishSource($source, $source->translation_group_id);
+        $dashboard = app(CmsTranslationOpsService::class);
+        $filters = ['slug' => $source->slug];
+        $unverified = $dashboard->dashboard($filters);
+        $this->assertSame(1, $unverified['metrics']['canonical_risk_groups']);
+        $this->assertFalse($unverified['groups'][0]['independent_source_pair']);
+
+        $gate = ['editorial_package_v1' => ['hreflang_gate_v1' => [
+            'enabled' => true, 'policy' => 'reciprocal_counterparts_verified',
+        ]]];
+        foreach ([$source, $counterpart] as $member) {
+            $member->seoMeta->update(['schema_json' => $gate]);
+        }
+        $reviewed = $dashboard->dashboard($filters + ['target_locale' => 'en']);
+        $this->assertSame(0, $reviewed['metrics']['canonical_risk_groups']);
+        $this->assertSame(1, $reviewed['metrics']['published_target_locale_count']);
+        $this->assertTrue($reviewed['groups'][0]['independent_source_pair']);
+        $this->assertNull($reviewed['groups'][0]['source_record_id']);
+        $this->assertSame('source', $reviewed['coverage_matrix'][0]['cells']['en']['state']);
+        $this->assertSame('source', $reviewed['coverage_matrix'][0]['cells']['zh-CN']['state']);
+        $this->assertSame([], $reviewed['groups'][0]['group_actions']);
+
+        $counterpart->forceFill(['source_version_hash' => str_repeat('0', 64)])->saveQuietly();
+        $drifted = $dashboard->dashboard($filters);
+        $this->assertTrue($drifted['groups'][0]['independent_source_pair']);
+        $this->assertSame(1, $drifted['metrics']['canonical_risk_groups']);
+
+        $counterpart->seoMeta->update(['schema_json' => []]);
+        $unpaired = $dashboard->dashboard($filters);
+        $this->assertFalse($unpaired['groups'][0]['independent_source_pair']);
+        $this->assertSame(1, $unpaired['metrics']['canonical_risk_groups']);
     }
 
     public function test_translation_ops_page_localizes_visible_chinese_console_copy(): void
@@ -1332,6 +1355,26 @@ final class ArticleTranslationOpsPageTest extends TestCase
                 'last_transition_at' => now(),
             ],
         );
+    }
+
+    private function createIndependentEnglishSource(Article $source, string $groupId): Article
+    {
+        $counterpart = Article::query()->create([
+            'org_id' => 0, 'slug' => $source->slug, 'locale' => 'en', 'source_locale' => 'en',
+            'translation_group_id' => $groupId,
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'title' => 'Independent English page', 'excerpt' => 'English summary', 'content_md' => 'English body',
+            'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'published_at' => now(),
+        ]);
+        $revision = $this->createRevision($counterpart, ['published_at' => now()]);
+        $counterpart->forceFill(['working_revision_id' => $revision->id, 'published_revision_id' => $revision->id])->saveQuietly();
+        ArticleSeoMeta::query()->create([
+            'org_id' => 0, 'article_id' => $counterpart->id, 'locale' => 'en', 'is_indexable' => true,
+            'canonical_url' => '/en/articles/'.$source->slug,
+        ]);
+        $source->seoMeta->update(['canonical_url' => '/zh/articles/'.$source->slug]);
+
+        return $counterpart->fresh(['seoMeta', 'publishedRevision']);
     }
 
     /**

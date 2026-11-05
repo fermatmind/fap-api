@@ -90,9 +90,10 @@ final class CmsTranslationOpsService
                 'translation_group_id' => (string) $group['translation_group_id'],
                 'slug' => (string) $group['slug'],
                 'source_locale' => (string) $group['source_locale'],
-                'source_record_id' => $group['source_article_id'],
+                'independent_source_pair' => $group['independent_source_pair'],
+                'source_record_id' => $group['independent_source_pair'] ? null : $group['source_article_id'],
                 'source_status' => (string) $group['source_article_status'],
-                'source_edit_url' => $group['source_edit_url'],
+                'source_edit_url' => $group['independent_source_pair'] ? null : $group['source_edit_url'],
                 'latest_source_hash' => $group['latest_source_hash'],
                 'locales' => array_map(fn (array $locale): array => [
                     'record_id' => (int) $locale['article_id'],
@@ -333,7 +334,8 @@ final class CmsTranslationOpsService
                 }
 
                 $sourceLocale = (string) ($filters['source_locale'] ?? 'all');
-                if ($sourceLocale !== 'all' && (string) $group['source_locale'] !== $sourceLocale) {
+                if ($sourceLocale !== 'all' && (string) $group['source_locale'] !== $sourceLocale
+                    && ! (($group['independent_source_pair'] ?? false) && in_array($sourceLocale, $group['coverage']['existing_locales'], true))) {
                     return false;
                 }
 
@@ -341,7 +343,8 @@ final class CmsTranslationOpsService
                 if ($targetLocale !== 'all') {
                     $hasTargetLocale = collect($group['locales'] ?? [])->contains(
                         fn (array $locale): bool => ! (bool) $locale['is_source'] && (string) $locale['locale'] === $targetLocale
-                    ) || isset($group['coverage']['independent_pages'][$targetLocale]);
+                    ) || isset($group['coverage']['independent_pages'][$targetLocale])
+                        || (($group['independent_source_pair'] ?? false) && in_array($targetLocale, $group['coverage']['existing_locales'], true));
                     if (! $hasTargetLocale && ! (bool) ($filters['missing_locale'] ?? false)) {
                         return false;
                     }
@@ -518,6 +521,7 @@ final class CmsTranslationOpsService
                 'slug' => (string) $group['slug'],
                 'translation_group_id' => (string) $group['translation_group_id'],
                 'source_locale' => (string) $group['source_locale'],
+                'independent_source_pair' => $group['independent_source_pair'] ?? false,
                 'source_record_id' => $group['source_record_id'],
                 'source_edit_url' => $group['source_edit_url'],
                 'alerts' => $group['alerts'] ?? [],

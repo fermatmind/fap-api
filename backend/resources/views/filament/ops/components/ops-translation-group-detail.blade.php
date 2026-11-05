@@ -12,7 +12,7 @@
             :fields="[
                 ['label' => __('ops.translation_ops.fields.content_type'), 'value' => (string) $group['content_type_label'], 'state' => 'info'],
                 ['label' => __('ops.translation_ops.fields.translation_group'), 'value' => (string) $group['translation_group_id'], 'state' => 'info'],
-                ['label' => __('ops.translation_ops.fields.source_row'), 'value' => $group['source_locale'].' #'.$group['source_record_id'], 'state' => $group['canonical_ok'] ? 'success' : 'failed'],
+                ['label' => __('ops.translation_ops.fields.source_row'), 'value' => ($group['independent_source_pair'] ?? false) ? __('ops.translation_ops.matrix.independent_source_pair') : $group['source_locale'].' #'.$group['source_record_id'], 'state' => $group['canonical_ok'] ? 'success' : 'failed'],
                 ['label' => __('ops.translation_ops.fields.published_locales'), 'value' => $emptyValue($group['published_locales'] ?? []), 'state' => 'success'],
                 ['label' => __('ops.translation_ops.fields.stale_locales'), 'value' => (string) $group['stale_locales_count'], 'state' => $group['stale_locales_count'] > 0 ? 'warning' : 'success'],
                 ['label' => __('ops.translation_ops.fields.ownership'), 'value' => $group['ownership_ok'] ? __('ops.translation_ops.health.ok') : implode(', ', $group['ownership_issues']), 'state' => $group['ownership_ok'] ? 'success' : 'failed'],

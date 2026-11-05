@@ -45,6 +45,9 @@
                             </td>
                             <td>
                                 <x-filament.ops.shared.status-pill :state="$row['health_state']" :label="$row['health_label']" />
+                                @if ($row['independent_source_pair'] ?? false)
+                                    <p class="ops-control-hint">{{ __('ops.translation_ops.matrix.independent_source_pair') }}</p>
+                                @endif
                                 @foreach (($row['alerts'] ?? []) as $alert)
                                     <p class="ops-control-hint">{{ $alert['label'] }}</p>
                                 @endforeach

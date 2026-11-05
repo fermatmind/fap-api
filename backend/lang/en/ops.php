@@ -620,6 +620,7 @@ return [
             'no_target_record' => 'No target record',
             'reviewed_counterpart' => 'Reviewed language counterpart',
             'independent_page_unpaired' => 'Independent page without a language pairing',
+            'independent_source_pair' => 'Independently authored language versions',
             'healthy' => 'Healthy',
             'needs_action' => 'Needs action',
             'blocked' => 'Blocked',
