@@ -287,6 +287,7 @@ final class OpsCmsListPolishTest extends TestCase
 
         Livewire::test(ListArticles::class)
             ->loadTable()
+            ->assertSee('Byline')
             ->assertTableColumnExists('author_name')
             ->searchTable('Alice Operator')
             ->assertCanSeeTableRecords([$alice])

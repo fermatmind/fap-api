@@ -1148,10 +1148,18 @@ final class ContentCmsProductLayerTest extends TestCase
         ])->save();
 
         $this->setOpsContext((int) $session['ops_org_id'], $admin, '/ops/editorial-review');
-        $items = collect(Livewire::test(EditorialReviewPage::class)->assertOk()->get('reviewItems'));
+        $page = Livewire::test(EditorialReviewPage::class)->assertOk();
+        $items = collect($page->get('reviewItems'))->keyBy('id');
 
-        $this->assertTrue($items->contains(fn (array $item): bool => (int) $item['id'] === (int) $source->id));
-        $this->assertTrue($items->contains(fn (array $item): bool => (int) $item['id'] === (int) $target->id));
+        $this->assertSame('published_recheck', $items[$source->id]['review_kind']);
+        $this->assertSame('unpublished', $items[$target->id]['review_kind']);
+        $counts = collect($page->get('reviewFields'))->pluck('value', 'label');
+        foreach (['published_recheck', 'unpublished'] as $kind) {
+            $this->assertSame('1', $counts[__('ops.custom_pages.editorial_review.review_kinds.'.$kind)]);
+        }
+
+        $page->set('reviewKindFilter', 'unpublished')->assertSee($target->title)->assertDontSee($source->title)
+            ->set('reviewKindFilter', 'published_recheck')->assertSee($source->title)->assertDontSee($target->title);
     }
 
     public function test_reassigning_reviewer_invalidates_existing_approval_until_resubmitted(): void

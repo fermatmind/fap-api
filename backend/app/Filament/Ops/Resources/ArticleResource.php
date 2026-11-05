@@ -15,6 +15,7 @@ use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use App\Models\MediaAsset;
+use App\Services\Cms\ArticlePublishedSourceReviewService;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Services\Cms\MediaVariantGenerator;
 use App\Services\Ops\SeoContentScopeViewModel;
@@ -495,7 +496,7 @@ class ArticleResource extends Resource
                     ->falseColor('danger')
                     ->tooltip(fn (Article $record, bool $state): ?string => $state ? null : self::seoReadinessTooltip($record)),
                 Tables\Columns\TextColumn::make('author_name')
-                    ->label(__('ops.resources.articles.owner'))
+                    ->label(__('ops.resources.articles.byline'))
                     ->searchable()
                     ->placeholder(__('ops.resources.articles.placeholders.not_set_yet'))
                     ->toggleable(),
@@ -530,7 +531,7 @@ class ArticleResource extends Resource
                     ->label(__('ops.resources.articles.fields.stale_state'))
                     ->state(fn (Article $record): string => self::staleStateLabel($record))
                     ->badge()
-                    ->color(fn (Article $record): string => self::revisionWorkspace()->isWorkingRevisionStale($record) ? 'warning' : 'success'),
+                    ->color(fn (Article $record): string => self::hasStaleTranslation($record) ? 'warning' : 'success'),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label(__('ops.resources.articles.fields.category'))
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -543,7 +544,7 @@ class ArticleResource extends Resource
                 OpsTable::updatedAt(label: __('ops.resources.articles.fields.updated')),
             ])
             ->modifyQueryUsing(fn (Builder $query): Builder => $query->with([
-                'translatedFrom',
+                'translatedFrom.workingRevision',
                 'sourceCanonical.workingRevision',
                 'workingRevision',
                 'publishedRevision',
@@ -584,7 +585,8 @@ class ArticleResource extends Resource
                 Tables\Filters\SelectFilter::make('locale_scope')
                     ->label(__('ops.locale_scope.filter_label'))
                     ->options(fn (): array => OpsContentLocaleScope::filterOptions())
-                    ->default(fn (): string => OpsContentLocaleScope::currentContentLocale())
+                    ->default(fn (Pages\ListArticles $livewire): string => $livewire->savedView === 'translate_expired'
+                        ? OpsContentLocaleScope::ALL_LOCALES : OpsContentLocaleScope::currentContentLocale())
                     ->query(fn (Builder $query, array $data): Builder => OpsContentLocaleScope::applyToQuery($query, $data)),
             ])
             ->emptyStateHeading(fn (object $livewire): string => OpsContentLocaleScope::emptyStateHeading($livewire, (string) static::getPluralModelLabel()))
@@ -694,9 +696,25 @@ class ArticleResource extends Resource
             return (string) __('ops.resources.articles.placeholders.source_current');
         }
 
-        return self::revisionWorkspace()->isWorkingRevisionStale($record)
+        return self::hasStaleTranslation($record)
             ? (string) __('ops.resources.articles.placeholders.stale')
             : (string) __('ops.resources.articles.placeholders.current');
+    }
+
+    public static function hasStaleTranslation(Article $record): bool
+    {
+        if ($record->isSourceArticle()) {
+            return false;
+        }
+
+        $status = $record->workingRevision?->revision_status ?? $record->translation_status;
+        if ($status !== Article::TRANSLATION_STATUS_STALE) {
+            return self::revisionWorkspace()->isWorkingRevisionStale($record);
+        }
+
+        $review = app(ArticlePublishedSourceReviewService::class);
+
+        return ! $review->hasCurrentReview($record) && ! $review->hasCurrentIndependentReview($record);
     }
 
     private static function revisionSummary(?ArticleTranslationRevision $revision): string

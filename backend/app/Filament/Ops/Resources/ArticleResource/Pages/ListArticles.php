@@ -35,6 +35,9 @@ class ListArticles extends ListRecords
     #[Url(as: 'savedView')]
     public string $savedView = 'all';
 
+    /** @var list<int>|null */
+    private ?array $staleTranslationIds = null;
+
     public function mount(): void
     {
         parent::mount();
@@ -113,7 +116,7 @@ class ListArticles extends ListRecords
             'review' => $query->where('translation_status', Article::TRANSLATION_STATUS_HUMAN_REVIEW),
             'pending_publish' => $query->where('status', 'scheduled'),
             'seo_gap' => $this->applySeoGap($query),
-            'translate_expired' => $query->where('translation_status', Article::TRANSLATION_STATUS_STALE),
+            'translate_expired' => $query->whereKey($this->staleTranslationIds()),
             default => $query,
         };
     }
@@ -138,8 +141,7 @@ class ListArticles extends ListRecords
             ->count();
         $pendingPublishCount = (clone $base)->where('status', 'scheduled')
             ->count();
-        $translateExpiredCount = (clone $base)->where('translation_status', Article::TRANSLATION_STATUS_STALE)
-            ->count();
+        $translateExpiredCount = count($this->staleTranslationIds());
 
         // This saved view only counts missing SEO titles or descriptions on published public articles.
         $seoGapCount = 0;
@@ -203,5 +205,23 @@ class ListArticles extends ListRecords
                     ->whereNotNull('seo_description')
                     ->whereRaw("TRIM(seo_description) <> ''");
             });
+    }
+
+    /** @return list<int> */
+    private function staleTranslationIds(): array
+    {
+        return $this->staleTranslationIds ??= ArticleResource::getEloquentQuery()
+            ->where(function (Builder $query): void {
+                $query->whereNotNull('source_article_id')
+                    ->orWhereNotNull('translated_from_article_id')
+                    ->orWhere('translation_status', Article::TRANSLATION_STATUS_STALE)
+                    ->orWhereHas('workingRevision', fn (Builder $revision): Builder => $revision->where('revision_status', Article::TRANSLATION_STATUS_STALE));
+            })
+            ->with(['workingRevision', 'publishedRevision', 'sourceCanonical.workingRevision', 'translatedFrom.workingRevision'])
+            ->get()
+            ->filter(fn (Article $record): bool => ArticleResource::hasStaleTranslation($record))
+            ->map(fn (Article $record): int => (int) $record->id)
+            ->values()
+            ->all();
     }
 }

@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\ArticleResource\Pages\ListArticles;
 use App\Filament\Ops\Support\OpsContentLocaleScope;
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
@@ -136,6 +137,68 @@ final class ArticleTranslationContractTest extends TestCase
             ->filterTable('locale_scope', OpsContentLocaleScope::ALL_LOCALES)
             ->assertSee($enArticle->title)
             ->assertSee($zhArticle->title);
+    }
+
+    public function test_expired_translation_view_counts_source_version_drift_and_opens_all_locales(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization();
+        app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
+        session($this->opsSession($admin, $org, 'zh_CN'));
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $source = $this->createArticle(0, 'zh-CN', '中文源文');
+        $stale = $this->createPublishedTranslation($source, 'English translation awaiting update');
+        $source->update(['title' => '中文源文新版']);
+        $otherSource = $this->createArticle(0, 'zh-CN', '另一篇源文');
+        $current = $this->createPublishedTranslation($otherSource, 'Current English translation');
+        $this->assertSame(Article::TRANSLATION_STATUS_PUBLISHED, $stale->translation_status);
+
+        $page = Livewire::test(ListArticles::class)->loadTable();
+        $views = collect($page->instance()->getHeader()->getData()['savedViews'])->keyBy('id');
+        $this->assertSame(1, $views['translate_expired']['count']);
+
+        $page->assertCanNotSeeTableRecords([$stale, $current])
+            ->call('applySavedView', 'translate_expired')
+            ->assertCanSeeTableRecords([$stale])
+            ->assertCanNotSeeTableRecords([$source, $current])
+            ->assertTableColumnStateSet('translation_stale', __('ops.resources.articles.placeholders.stale'), $stale);
+
+        Livewire::withQueryParams(['savedView' => 'translate_expired'])->test(ListArticles::class)
+            ->loadTable()
+            ->assertCanSeeTableRecords([$stale])
+            ->assertCanNotSeeTableRecords([$source, $current]);
+    }
+
+    private function createPublishedTranslation(Article $source, string $title): Article
+    {
+        $translation = $this->createArticle(0, 'en', $title, [
+            'translation_group_id' => $source->translation_group_id,
+            'source_locale' => $source->locale,
+            'translated_from_article_id' => $source->id,
+            'source_article_id' => $source->id,
+            'translated_from_version_hash' => $source->source_version_hash,
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+            'status' => 'published',
+            'is_public' => true,
+        ]);
+        $revision = ArticleTranslationRevision::withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'article_id' => $translation->id,
+            'source_article_id' => $source->id,
+            'translation_group_id' => $source->translation_group_id,
+            'locale' => 'en',
+            'source_locale' => $source->locale,
+            'translated_from_version_hash' => $source->source_version_hash,
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'title' => $translation->title,
+            'content_md' => $translation->content_md,
+            'published_at' => now(),
+        ]);
+        $translation->forceFill(['working_revision_id' => $revision->id, 'published_revision_id' => $revision->id])->save();
+
+        return $translation;
     }
 
     /**

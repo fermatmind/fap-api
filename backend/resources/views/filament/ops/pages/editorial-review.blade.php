@@ -39,6 +39,15 @@
                             </select>
                         </label>
 
+                        <label class="ops-control-stack" for="editorial-review-kind">
+                            <span class="ops-control-label">{{ __('ops.custom_pages.editorial_review.review_kind') }}</span>
+                            <select id="editorial-review-kind" wire:model.live="reviewKindFilter" class="ops-input">
+                                <option value="all">{{ __('ops.custom_pages.common.filters.all') }}</option>
+                                <option value="unpublished">{{ __('ops.custom_pages.editorial_review.review_kinds.unpublished') }}</option>
+                                <option value="published_recheck">{{ __('ops.custom_pages.editorial_review.review_kinds.published_recheck') }}</option>
+                            </select>
+                        </label>
+
                         <label class="ops-control-stack" for="editorial-review-state">
                             <span class="ops-control-label">{{ __('ops.custom_pages.common.table.review_state') }}</span>
                             <select id="editorial-review-state" wire:model.live="reviewStateFilter" class="ops-input">
@@ -65,6 +74,7 @@
                     <tr>
                         <th>{{ __('ops.custom_pages.common.table.type') }}</th>
                         <th>{{ __('ops.custom_pages.common.table.title') }}</th>
+                        <th>{{ __('ops.custom_pages.editorial_review.review_kind') }}</th>
                         <th>{{ __('ops.custom_pages.common.table.review_state') }}</th>
                         <th>{{ __('ops.custom_pages.common.table.owner') }}</th>
                         <th>{{ __('ops.custom_pages.common.table.reviewer') }}</th>
@@ -79,6 +89,7 @@
                     <tr wire:key="editorial-review-row-{{ $item['type'] }}-{{ md5($item['title'].$item['updated_at']) }}">
                         <td>{{ $item['type_label'] }}</td>
                         <td>{{ $item['title'] }}</td>
+                        <td>{{ __('ops.custom_pages.editorial_review.review_kinds.'.$item['review_kind']) }}</td>
                         <td class="ops-table__status">
                             <x-filament.ops.shared.status-pill
                                 :state="match ($item['review_state']) { 'approved' => 'success', 'ready' => 'info', 'in_review' => 'info', 'changes_requested' => 'warning', 'rejected' => 'danger', default => 'warning' }"
@@ -96,7 +107,7 @@
                                     <x-filament::button size="xs" color="gray" tag="a" href="{{ $item['edit_url'] }}">
                                         {{ __('ops.custom_pages.common.actions.open') }}
                                     </x-filament::button>
-                                    @if ($item['review_state'] === 'approved')
+                                    @if ($item['review_state'] === 'approved' && $item['review_kind'] === 'unpublished')
                                         <x-filament::button size="xs" color="primary" tag="a" href="{{ \App\Filament\Ops\Pages\ContentReleasePage::getUrl() }}">
                                             {{ __('ops.custom_pages.common.nav.release_queue') }}
                                         </x-filament::button>

@@ -61,6 +61,8 @@ class EditorialReviewPage extends Page
 
     public string $reviewStateFilter = 'all';
 
+    public string $reviewKindFilter = 'all';
+
     public function mount(): void
     {
         $this->loadAssignmentOptions();
@@ -73,6 +75,11 @@ class EditorialReviewPage extends Page
     }
 
     public function updatedReviewStateFilter(): void
+    {
+        $this->refreshReviewSurface();
+    }
+
+    public function updatedReviewKindFilter(): void
     {
         $this->refreshReviewSurface();
     }
@@ -320,6 +327,11 @@ class EditorialReviewPage extends Page
             $filteredItems = $filteredItems->where('review_state', $this->reviewStateFilter);
         }
 
+        $kindCounts = $filteredItems->countBy('review_kind');
+        if ($this->reviewKindFilter !== 'all') {
+            $filteredItems = $filteredItems->where('review_kind', $this->reviewKindFilter);
+        }
+
         $readyCount = $allItems->where('review_state', EditorialReviewAudit::STATE_READY)->count();
         $inReviewCount = $allItems->where('review_state', EditorialReviewAudit::STATE_IN_REVIEW)->count();
         $approvedCount = $allItems->where('review_state', EditorialReviewAudit::STATE_APPROVED)->count();
@@ -334,9 +346,12 @@ class EditorialReviewPage extends Page
 
         $this->reviewFields = [
             [
-                'label' => __('ops.custom_pages.editorial_review.fields.draft_queue'),
-                'value' => (string) $allItems->count(),
-                'hint' => __('ops.custom_pages.editorial_review.fields.draft_queue_hint'),
+                'label' => __('ops.custom_pages.editorial_review.review_kinds.unpublished'),
+                'value' => (string) ($kindCounts['unpublished'] ?? 0),
+            ],
+            [
+                'label' => __('ops.custom_pages.editorial_review.review_kinds.published_recheck'),
+                'value' => (string) ($kindCounts['published_recheck'] ?? 0),
             ],
             [
                 'label' => __('ops.custom_pages.editorial_review.fields.ready'),
@@ -404,6 +419,8 @@ class EditorialReviewPage extends Page
             checklistLabel: $missing === [] ? __('ops.custom_pages.editorial_review.checklist_ready') : __('ops.custom_pages.editorial_review.checklist_missing', ['items' => implode(', ', $missing)]),
             updatedAt: optional($record->updated_at)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown'),
             editUrl: ArticleResource::getUrl('edit', ['record' => $record]),
+            reviewKind: $record->status === 'published' && (int) $record->working_revision_id === (int) $record->published_revision_id
+                ? 'published_recheck' : 'unpublished',
         );
     }
 
@@ -476,6 +493,7 @@ class EditorialReviewPage extends Page
         string $checklistLabel,
         string $updatedAt,
         string $editUrl,
+        string $reviewKind = 'unpublished',
     ): array {
         $workflowKey = $this->workflowKey($type, $id);
 
@@ -487,6 +505,7 @@ class EditorialReviewPage extends Page
             'title' => $title !== '' ? $title : __('ops.custom_pages.common.values.untitled'),
             'locale' => $locale !== '' ? $locale : __('ops.custom_pages.common.values.unknown'),
             'review_state' => $reviewState,
+            'review_kind' => $reviewKind,
             'owner_admin_user_id' => $ownerAdminId > 0 ? $ownerAdminId : null,
             'owner_label' => $ownerLabel !== '' ? $ownerLabel : __('ops.custom_pages.common.values.unassigned'),
             'reviewer_admin_user_id' => $reviewerAdminId > 0 ? $reviewerAdminId : null,
