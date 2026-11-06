@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources\ContentPageResource\Pages;
 
 use App\Filament\Ops\Resources\ContentPageResource;
+use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
+use App\Services\Cms\BigFivePolicyContentRepair;
 use App\Services\Cms\CmsEditorialReviewTransitionService;
 use App\Services\Cms\ContentPagePublishGate;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\ValidationException;
@@ -48,6 +52,25 @@ class EditContentPage extends EditRecord
                 ->url(ContentPageResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
+            Actions\Action::make('approvePreparedBigFivePolicy')
+                ->label(__('ops.resources.content_pages.approve_prepared_big_five_policy'))
+                ->visible(fn (): bool => ContentAccess::canReview()
+                    && app(BigFivePolicyContentRepair::class)->canReview($this->getRecord()))
+                ->action(function (): void {
+                    if (! ContentAccess::canReview()) {
+                        throw new AuthorizationException;
+                    }
+
+                    app(BigFivePolicyContentRepair::class)->approve(
+                        (int) $this->getRecord()->getKey(),
+                        (int) auth((string) config('admin.guard', 'admin'))->id(),
+                    );
+                    $this->getRecord()->refresh();
+                    Notification::make()
+                        ->title(__('ops.resources.content_pages.prepared_big_five_policy_approved'))
+                        ->success()
+                        ->send();
+                }),
             Actions\DeleteAction::make()->visible(false),
         ];
     }
@@ -119,6 +142,8 @@ class EditContentPage extends EditRecord
             && (bool) $record->is_public;
         $status = (string) $data['status'];
         $reviewState = (string) $data['review_state'];
+        $working = $record->workingRevision;
+        $headings = $working?->payload_json['headings_json'] ?? $record->headings_json;
         $payload = [
             'title' => trim((string) $data['title']),
             'summary' => $data['summary'] ?? null,
@@ -136,7 +161,7 @@ class EditContentPage extends EditRecord
             'legal_review_required' => (bool) ($data['legal_review_required'] ?? false),
             'science_review_required' => (bool) ($data['science_review_required'] ?? false),
             'source_doc' => $data['source_doc'] ?? null,
-            'headings_json' => [],
+            'headings_json' => is_array($headings) ? $headings : [],
             'meta_description' => $data['meta_description'] ?? null,
             'canonical_path' => $data['canonical_path'] ?? null,
             'is_public' => (bool) ($data['is_public'] ?? false),
@@ -155,7 +180,6 @@ class EditContentPage extends EditRecord
             'schema_eligibility_reviewed_at' => $data['schema_eligibility_reviewed_at'] ?? null,
         ];
 
-        $working = $record->workingRevision;
         $hasUnpublishedTranslationRevision = ! $record->isSourceContent()
             && $wasPublished
             && $record->published_revision_id !== null
@@ -182,8 +206,6 @@ class EditContentPage extends EditRecord
                     'status' => 'Only an exact draft revision can be saved here without changing identity, publication, or review state.',
                 ]);
             }
-
-            $payload['headings_json'] = $working->payload_json['headings_json'];
 
             return app(CmsEditorialReviewTransitionService::class)->saveRevisionedResource(
                 contentType: 'content_page',

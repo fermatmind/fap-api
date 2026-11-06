@@ -2966,6 +2966,10 @@ return [
     ],
 
     'resources' => [
+        'content_pages' => [
+            'approve_prepared_big_five_policy' => '审核并批准当前政策工作稿',
+            'prepared_big_five_policy_approved' => '已批准当前政策工作稿',
+        ],
         'scale_registry' => [
             'slug_projection_help' => '该只读投影由主 Slug 与 Slugs JSON 在同一事务中确定性生成；请编辑父级 V2 量表来修改 Slug。',
         ],

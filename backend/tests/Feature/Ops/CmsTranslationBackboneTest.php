@@ -18,6 +18,7 @@ use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\SupportArticle;
+use App\Services\Cms\BigFivePolicyContentRepair;
 use App\Services\Cms\CmsTranslationWorkflowException;
 use App\Services\Cms\DisabledCmsMachineTranslationProvider;
 use App\Services\Cms\RowBackedRevisionWorkspace;
@@ -381,6 +382,180 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertSame($before['content_md'], $public->content_md);
         $this->assertSame($before['seo_title'], $public->seo_title);
         $this->assertDatabaseCount('audit_logs', 0);
+    }
+
+    public function test_first_publication_draft_edits_preserve_headings_path_and_source_binding(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $organization = $this->createOrganization($admin);
+        $source = $this->createSourceContentPage('policy-placeholder', '/zh/personality/big-five/policy-placeholder');
+        $target = $this->createTargetTranslation('content_page', $source, 'en');
+        $target->forceFill([
+            'path' => '/policy-placeholder', 'canonical_path' => null, 'translated_from_version_hash' => null,
+        ])->saveQuietly();
+
+        $workspace = app(RowBackedRevisionWorkspace::class);
+        $placeholder = $workspace->ensureInitialRevision('content_page', $target);
+        $target->forceFill(['published_revision_id' => $placeholder->id])->saveQuietly();
+        $payload = $workspace->adapter('content_page')->snapshotPayload($target);
+        $payload['path'] = '/en/personality/big-five/policy-placeholder';
+        $payload['canonical_path'] = $payload['path'];
+        $payload['headings_json'] = ['First section'];
+        $target = $workspace->saveWorkingDraft('content_page', $target->fresh(), $payload, CmsTranslationRevision::STATUS_DRAFT);
+        $target->workingRevision->forceFill(['translated_from_version_hash' => $source->source_version_hash])->saveQuietly();
+
+        $this->withSession($this->opsSession($admin, $organization))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+        Livewire::test(EditContentPage::class, ['record' => $target->id])
+            ->fillForm(['content_md' => 'Edited English draft'])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $target->refresh();
+        $working = $target->workingRevision;
+        $this->assertSame('/policy-placeholder', $target->path);
+        $this->assertSame('/en/personality/big-five/policy-placeholder', $working->payload_json['canonical_path']);
+        $this->assertSame('Edited English draft', $working->payload_json['body_md']);
+        $this->assertSame(['First section'], $working->payload_json['headings_json']);
+        $this->assertSame($source->source_version_hash, $working->translated_from_version_hash);
+        $this->assertNull($target->translated_from_version_hash);
+
+        $published = $workspace->publishWorkingRevision('content_page', $target);
+        $this->assertSame('/en/personality/big-five/policy-placeholder', $published->path);
+        $this->assertSame($published->path, $published->canonical_path);
+        $this->assertSame(['First section'], $published->headings_json);
+        $this->assertSame($source->source_version_hash, $published->translated_from_version_hash);
+    }
+
+    public function test_inactive_use_boundaries_pair_archives_without_rewriting_history(): void
+    {
+        $replacement = $this->createSourceContentPage('method-boundaries-fixture', '/method-boundaries');
+        $translation = $this->createTargetTranslation('content_page', $replacement, 'en');
+        foreach ([$replacement, $translation] as $page) {
+            $page->forceFill([
+                'slug' => 'method-boundaries', 'status' => ContentPage::STATUS_PUBLISHED, 'is_public' => true, 'review_state' => 'approved',
+                'publish_allowed' => true, 'claim_gate_status' => 'passed', 'operator_approval_required' => false,
+            ])->saveQuietly();
+        }
+        $identities = [
+            [39, 'zh-CN', 33, 'dc71d8d6df55857b336e9d205cc5f5792a8c2365696125424c704c1fd81fa373'],
+            [40, 'en', 39, '72e1844568517ffe125cbbf1ab61008297970db5b1449a499e3f933fe8dd2aef'],
+        ];
+        $historical = [];
+        foreach ($identities as [$id, $locale, $pointer, $hash]) {
+            $page = $replacement->replicate();
+            $page->forceFill([
+                'id' => $id, 'slug' => 'help-use-boundaries', 'path' => '/help/use-boundaries',
+                'canonical_path' => null, 'locale' => $locale, 'is_indexable' => false, 'page_type' => 'boundary',
+                'publish_allowed' => false, 'claim_gate_status' => 'not_reviewed',
+                'source_version_hash' => $hash, 'translation_group_id' => 'content-page-help-use-boundaries',
+                'working_revision_id' => $pointer, 'published_revision_id' => $pointer,
+            ])->saveQuietly();
+            $historical[] = $page;
+        }
+        $command = 'content-pages:archive-superseded-use-boundaries';
+        $result = Artisan::call($command);
+        $this->assertSame(0, $result, Artisan::output());
+        $this->assertTrue($historical[0]->fresh()->is_public);
+
+        $historical[1]->forceFill(['working_revision_id' => 47])->saveQuietly();
+        $this->assertSame(1, Artisan::call($command, ['--execute' => true]));
+        $this->assertTrue($historical[0]->fresh()->is_public);
+        $historical[1]->forceFill(['working_revision_id' => 39])->saveQuietly();
+        $beforeRows = array_map(fn (ContentPage $page): array => $page->fresh()->getAttributes(), $historical);
+        $this->assertSame(0, Artisan::call($command, ['--execute' => true]));
+        foreach ($historical as $key => $old) {
+            $before = $beforeRows[$key];
+            $after = $old->fresh()->getAttributes();
+            $this->assertSame(ContentPage::STATUS_ARCHIVED, $after['status']);
+            $this->assertFalse($old->fresh()->is_public);
+            foreach (['status', 'is_public', 'updated_at'] as $changed) {
+                unset($before[$changed], $after[$changed]);
+            }
+            $this->assertSame($before, $after);
+        }
+        $this->assertSame(0, Artisan::call($command, ['--execute' => true]));
+        $this->assertSame(2, AuditLog::query()->withoutGlobalScopes()->where('action', 'content_page_superseded_use_boundaries_archived')->count());
+        $slugs = array_column(app(CmsTranslationOpsService::class)->dashboard()['groups'], 'slug');
+        $this->assertContains('method-boundaries', $slugs);
+        $this->assertNotContains('help-use-boundaries', $slugs);
+    }
+
+    public function test_prepared_policy_requires_separate_owner_review_and_exact_publish_lock(): void
+    {
+        $owner = $this->createAdminWithPermissions([PermissionNames::ADMIN_OWNER]);
+        $org = $this->createOrganization($owner);
+        config()->set('review_governance.mode', 'solo_owner');
+        config()->set('review_governance.solo_owner_admin_user_id', (int) $owner->id);
+        $slug = 'source-review-policy';
+        $source = new ContentPage;
+        $source->forceFill([
+            'id' => 56, 'org_id' => 0, 'slug' => $slug, 'locale' => 'zh-CN', 'source_locale' => 'zh-CN',
+            'translation_group_id' => 'prepared-policy-test', 'translation_status' => ContentPage::TRANSLATION_STATUS_SOURCE,
+            'path' => '/zh/personality/big-five/'.$slug, 'kind' => 'policy', 'page_type' => 'trust',
+            'title' => 'Chinese source', 'content_md' => 'Chinese evidence', 'seo_title' => 'Chinese SEO title',
+            'seo_description' => 'Chinese SEO description', 'template' => 'policy', 'animation_profile' => 'none',
+            'status' => ContentPage::STATUS_PUBLISHED, 'review_state' => 'approved', 'is_public' => true, 'is_indexable' => true,
+            'published_at' => now()->subDay(),
+        ]);
+        $source->source_version_hash = $source->freshSourceVersionHash();
+        $source->saveQuietly();
+        $target = new ContentPage;
+        $target->forceFill(array_replace($source->replicate()->getAttributes(), [
+            'id' => 54, 'locale' => 'en', 'source_content_id' => 56, 'path' => '/'.$slug, 'published_at' => null,
+            'translation_status' => ContentPage::TRANSLATION_STATUS_DRAFT, 'title' => 'Private placeholder',
+            'content_md' => 'Placeholder body', 'status' => ContentPage::STATUS_DRAFT, 'review_state' => 'draft',
+            'is_public' => false, 'is_indexable' => false, 'working_revision_id' => 121, 'published_revision_id' => 120,
+            'translated_from_version_hash' => null,
+        ]))->saveQuietly();
+
+        $workspace = app(RowBackedRevisionWorkspace::class);
+        $payload = $workspace->adapter('content_page')->snapshotPayload($target);
+        $path = '/en/personality/big-five/'.$slug;
+        $body = file_get_contents(base_path('content_assets/big_five_policy_cms_repairs/54.md'));
+        $payload = array_replace($payload, [
+            'title' => 'English policy', 'path' => $path, 'canonical_path' => $path, 'body_md' => $body, 'body_html' => '',
+            'headings_json' => ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'],
+        ]);
+        (new CmsTranslationRevision)->forceFill([
+            'id' => 121, 'org_id' => 0, 'content_type' => 'content_page', 'content_id' => 54, 'source_content_id' => 56,
+            'translation_group_id' => 'prepared-policy-test', 'locale' => 'en', 'source_locale' => 'zh-CN',
+            'revision_number' => 2, 'revision_status' => CmsTranslationRevision::STATUS_DRAFT,
+            'payload_json' => $payload, 'translated_from_version_hash' => $source->source_version_hash,
+        ])->saveQuietly();
+
+        $repair = app(BigFivePolicyContentRepair::class);
+        $repair->stage(54);
+        $receipt = $repair->inspect(54);
+        $this->assertTrue($receipt['prepared']);
+        $this->assertFalse($receipt['public_ready']);
+        $this->assertSame('/'.$slug, $target->fresh()->path);
+        $command = 'content-pages:repair-reviewed-big-five-policy';
+        $lock = ['id' => 54, '--publish' => true, '--revision' => 121, '--payload-sha256' => $receipt['payload_sha256']];
+        $this->assertSame(1, Artisan::call($command, $lock));
+        $this->assertFalse($target->fresh()->is_public);
+
+        $this->withSession($this->opsSession($owner, $org))
+            ->actingAs($owner, (string) config('admin.guard', 'admin'));
+        Livewire::test(EditContentPage::class, ['record' => 54])
+            ->callAction('approvePreparedBigFivePolicy')
+            ->assertHasNoActionErrors();
+        $approved = $repair->inspect(54);
+        $this->assertTrue($approved['approved']);
+        $this->assertFalse($approved['public_ready']);
+        $this->assertSame(1, Artisan::call($command, $lock));
+        $lock['--payload-sha256'] = $approved['payload_sha256'];
+        $exit = Artisan::call($command, $lock);
+        $this->assertSame(0, $exit, Artisan::output());
+        $this->assertSame(0, Artisan::call($command, $lock));
+        $published = $target->fresh();
+        $this->assertSame(121, $published->published_revision_id);
+        $this->assertSame($path, $published->canonical_path);
+        $this->assertSame($path, $published->path);
+        $this->assertSame($body, $published->content_md);
+        $this->assertSame($payload['headings_json'], $published->headings_json);
+        $this->assertSame($source->source_version_hash, $published->translated_from_version_hash);
+        $this->assertSame(1, AuditLog::query()->withoutGlobalScopes()->where('action', 'content_release_publish')->where('target_id', '54')->count());
     }
 
     public function test_editing_an_unpublished_translation_draft_preserves_the_published_content_page(): void

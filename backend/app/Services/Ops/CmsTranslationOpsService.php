@@ -7,6 +7,7 @@ namespace App\Services\Ops;
 use App\Contracts\Cms\SiblingTranslationAdapter;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\CmsTranslationRevision;
+use App\Models\ContentPage;
 use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Services\Cms\SiblingTranslationWorkflowService;
 use Illuminate\Database\Eloquent\Model;
@@ -157,6 +158,8 @@ final class CmsTranslationOpsService
 
         return $records
             ->groupBy(fn (Model $record): string => (string) $record->translation_group_id)
+            ->reject(fn (Collection $groupRecords): bool => $contentType === 'content_page'
+                && $groupRecords->every(fn (Model $record): bool => $record->status === ContentPage::STATUS_ARCHIVED && ! $record->is_public))
             ->map(fn (Collection $groupRecords, string $groupId): array => $this->summarizeSiblingGroup($contentType, $adapter, $groupId, $groupRecords))
             ->values();
     }

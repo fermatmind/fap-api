@@ -2966,6 +2966,10 @@ return [
     ],
 
     'resources' => [
+        'content_pages' => [
+            'approve_prepared_big_five_policy' => 'Approve the prepared policy revision',
+            'prepared_big_five_policy_approved' => 'The exact policy revision was approved',
+        ],
         'scale_registry' => [
             'slug_projection_help' => 'Read-only projection derived transactionally from Primary Slug and Slugs JSON. Edit the parent V2 scale to change slugs.',
         ],

@@ -123,6 +123,15 @@ final class RowBackedRevisionWorkspace
             && $adapter->isSource($record)
             && filled($record->published_revision_id)
             && $recordAttributes === [];
+        $existingTranslationHash = $record->translated_from_version_hash;
+        if ($contentType === 'content_page' && filled($record->source_content_id)
+            && (int) $currentWorking->source_content_id === (int) $record->source_content_id
+            && (string) $currentWorking->source_locale === (string) $record->source_locale
+            && (string) $currentWorking->translation_group_id === (string) $record->translation_group_id
+            && filled($currentWorking->translated_from_version_hash)) {
+            $existingTranslationHash = $currentWorking->translated_from_version_hash;
+        }
+        $translatedFromVersionHash = (string) ($recordAttributes['translated_from_version_hash'] ?? $existingTranslationHash);
         $publishedRevisionId = $record->published_revision_id ? (int) $record->published_revision_id : null;
         $shouldFork = $publishedRevisionId !== null && (int) $currentWorking->id === $publishedRevisionId;
 
@@ -138,7 +147,7 @@ final class RowBackedRevisionWorkspace
                 'revision_number' => ((int) $currentWorking->revision_number) + 1,
                 'revision_status' => $revisionStatus,
                 'source_version_hash' => $record->source_version_hash ? (string) $record->source_version_hash : null,
-                'translated_from_version_hash' => (string) ($recordAttributes['translated_from_version_hash'] ?? $record->translated_from_version_hash),
+                'translated_from_version_hash' => $translatedFromVersionHash,
                 'payload_json' => $payload,
                 'supersedes_revision_id' => (int) $currentWorking->id,
                 'created_by_admin_id' => $adminUserId,
@@ -155,7 +164,7 @@ final class RowBackedRevisionWorkspace
                 'source_locale' => (string) ($record->source_locale ?: $record->locale),
                 'revision_status' => $revisionStatus,
                 'source_version_hash' => $record->source_version_hash ? (string) $record->source_version_hash : null,
-                'translated_from_version_hash' => (string) ($recordAttributes['translated_from_version_hash'] ?? $record->translated_from_version_hash),
+                'translated_from_version_hash' => $translatedFromVersionHash,
                 'payload_json' => $payload,
                 'created_by_admin_id' => $adminUserId ?? $working->created_by_admin_id,
                 'reviewed_at' => $revisionStatus === CmsTranslationRevision::STATUS_HUMAN_REVIEW ? now() : null,
@@ -259,6 +268,13 @@ final class RowBackedRevisionWorkspace
 
         $adapter->applyRevisionPayload($record, $working->payload_json ?? []);
         $adapter->markPublished($record);
+        if ($contentType === 'content_page' && ! $contentPageSource
+            && filled($record->source_content_id)
+            && (int) $working->source_content_id === (int) $record->source_content_id
+            && (string) $working->source_locale === (string) $record->source_locale
+            && filled($working->translated_from_version_hash)) {
+            $record->translated_from_version_hash = $working->translated_from_version_hash;
+        }
         $record->forceFill([
             'translation_status' => $contentPageSource ? CmsTranslationRevision::STATUS_SOURCE : CmsTranslationRevision::STATUS_PUBLISHED,
             'working_revision_id' => (int) $working->id,
