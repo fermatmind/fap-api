@@ -408,6 +408,8 @@ final class PostReleaseObservabilityPageTest extends TestCase
 
     public function test_controlled_publish_service_triggers_failure_alerts_and_observability_ignores_other_org_rows(): void
     {
+        $this->freezeTime();
+
         config()->set('ops.content_release_observability.cache_invalidation_urls', [
             'https://cache.example.test/invalidate?webhook_secret=cache-secret',
         ]);
@@ -536,6 +538,7 @@ final class PostReleaseObservabilityPageTest extends TestCase
             ->assertSet('headlineFields.2.value', '1')
             ->assertSet('headlineFields.3.value', '1')
             ->assertSet('headlineFields.5.value', '1')
+            ->assertSet('auditCards.0.meta', 'content_release_failure_alert | article')
             ->assertSet('auditCards.0.status', 'success');
     }
 

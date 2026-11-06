@@ -121,6 +121,7 @@ class PostReleaseObservabilityPage extends Page
             ->latest('created_at');
 
         $recentAuditRows = (clone $releaseAuditsQuery)
+            ->orderByDesc('id')
             ->limit(6)
             ->get();
 
