@@ -353,7 +353,7 @@ final class ArticlePublishedSourceReviewService
             && $target->source_locale === $source->locale && in_array($source->locale, ['en', 'zh-CN'], true)
             && in_array($target->locale, ['en', 'zh-CN'], true) && $target->locale !== $source->locale
             && filled($source->translation_group_id) && $target->translation_group_id === $source->translation_group_id
-            && $target->slug === $source->slug && (int) $target->translated_from_article_id === (int) $source->id,
+            && (int) $target->translated_from_article_id === (int) $source->id,
             'published_source_pair_invalid');
         foreach ([$target, $source] as $article) {
             $this->require((int) $article->org_id === 0 && ! $article->trashed()
@@ -381,7 +381,38 @@ final class ArticlePublishedSourceReviewService
         $this->require(preg_match('/^[a-f0-9]{64}$/D', (string) $sourceRevision->source_version_hash) === 1
             && hash_equals((string) $source->source_version_hash, (string) $sourceRevision->source_version_hash), 'published_source_hash_invalid');
 
+        if ($target->slug !== $source->slug) {
+            $this->require($this->hasPublishedLocalizedPair($target, $source), 'published_source_pair_invalid');
+        }
+
         return [$target, $source, $targetRevision, $sourceRevision];
+    }
+
+    private function hasPublishedLocalizedPair(Article $target, Article $source): bool
+    {
+        $counterparts = app(ArticleReviewedCounterpartService::class);
+        $ids = Article::withoutGlobalScopes()->where('org_id', 0)
+            ->where('translation_group_id', $source->translation_group_id)
+            ->whereIn('locale', [$source->locale, $target->locale])
+            ->publiclyIndexable()->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
+        $expected = [(int) $source->id, (int) $target->id];
+        sort($expected, SORT_NUMERIC);
+        if ($ids !== $expected) {
+            return false;
+        }
+        foreach ([$source, $target] as $article) {
+            if (! $counterparts->eligible($article)
+                || data_get($article->seoMeta->schema_json, 'editorial_package_v1.hreflang_gate_v1.enabled') !== true
+                || data_get($article->seoMeta->schema_json, 'editorial_package_v1.hreflang_hold')) {
+                return false;
+            }
+            $binding = $counterparts->resolve($article);
+            if ($binding !== null && array_map(fn (Article $member): int => (int) $member->id, $binding) !== $expected) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function pairHash(Article $target, Article $source, ArticleTranslationRevision $targetRevision, ArticleTranslationRevision $sourceRevision, bool $lock = false): string

@@ -64,6 +64,33 @@ final class ArticlePublishedSourceReviewTest extends TestCase
         $this->assertDatabaseCount('audit_logs', 1);
     }
 
+    public function test_current_review_accepts_existing_reciprocal_localized_public_slugs(): void
+    {
+        [$source, $target] = $this->metadataDriftPair();
+        $target->forceFill(['slug' => 'english-localized-slug', 'is_indexable' => true])->saveQuietly();
+        $source->forceFill(['is_indexable' => true])->saveQuietly();
+        foreach ([$source, $target] as $article) {
+            $locale = $article->locale === 'en' ? 'en' : 'zh';
+            $article->seoMeta->forceFill([
+                'canonical_url' => 'https://fermatmind.com/'.$locale.'/articles/'.$article->slug,
+                'is_indexable' => true,
+                'schema_json' => ['editorial_package_v1' => ['hreflang_gate_v1' => ['enabled' => true]]],
+            ])->saveQuietly();
+        }
+
+        $service = app(ArticlePublishedSourceReviewService::class);
+        $this->assertTrue($service->needsCurrentReview($target));
+        $before = $this->rows($source, $target);
+        $input = $service->prepare($target);
+        $service->confirm($target, [...$input, 'source_reviewed' => true]);
+        $this->assertTrue($service->hasCurrentReview($target));
+        $this->assertSame($before, $this->rows($source, $target));
+
+        $target->seoMeta->forceFill(['canonical_url' => 'https://fermatmind.com/en/articles/another-article'])->saveQuietly();
+        $this->assertFalse($service->hasCurrentReview($target));
+        $this->assertFalse($service->needsCurrentReview($target));
+    }
+
     #[DataProvider('drifts')]
     public function test_any_pair_or_metadata_drift_invalidates_evidence_and_old_confirmation(string $case): void
     {
