@@ -400,6 +400,8 @@ final class PostReleaseObservabilityPageTest extends TestCase
             ->assertOk()
             ->assertSee('First publishes in last 24h')
             ->assertSee('Public article updates in last 24h')
+            ->assertSee('First publication dates for selected-org articles and global career content.')
+            ->assertSee('Site-wide public articles whose current revision went live after first publication and within this window.')
             ->assertSet('headlineFields.0.value', '0')
             ->assertSet('headlineFields.1.value', '1');
     }

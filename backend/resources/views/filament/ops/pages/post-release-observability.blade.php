@@ -19,7 +19,7 @@
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.post_release_observability.telemetry_title')"
         >
-            <x-filament-ops::ops-field-grid :fields="$headlineFields" :show-hints="false" />
+            <x-filament-ops::ops-field-grid :fields="$headlineFields" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
