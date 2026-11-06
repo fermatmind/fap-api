@@ -9,12 +9,68 @@ use App\Services\Audit\AuditLogger;
 use App\Services\Queue\QueueDlqService;
 use App\Support\OrgContext;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Queue\Factory as QueueFactory;
+use Illuminate\Contracts\Queue\Queue;
+use Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Mockery;
 use Tests\TestCase;
 
 final class QueueMonitorReplayContractTest extends TestCase
 {
+    public function test_replay_uses_the_numeric_row_id_even_when_another_uuid_matches_it_numerically(): void
+    {
+        (require database_path('migrations/0001_01_01_000002_create_jobs_table.php'))->up();
+        (require database_path('migrations/2026_02_08_030000_create_queue_dlq_replays_table.php'))->up();
+
+        $neighbor = [
+            'id' => 11,
+            'uuid' => '12af0000-0000-4000-8000-000000000011',
+            'connection' => 'redis',
+            'queue' => 'default',
+            'payload' => '{"id":"neighbor"}',
+            'exception' => 'test failure',
+        ];
+        $target = array_replace($neighbor, [
+            'id' => 12,
+            'uuid' => 'ab000000-0000-4000-8000-000000000012',
+            'payload' => '{"id":"target"}',
+        ]);
+        DB::table('failed_jobs')->insert([$neighbor, $target]);
+
+        // MySQL coerces UUID text in an integer comparison; the UUID provider
+        // exposes the resulting UUID as "id" and removes the "uuid" property.
+        $uuidProvider = Mockery::mock(DatabaseUuidFailedJobProvider::class);
+        $uuidProvider->allows('find')->with(Mockery::on(static fn ($id) => $id === '12'))->andReturnNull();
+        $uuidProvider->allows('find')->with(Mockery::on(static fn ($id) => $id === 12))->andReturn((object) [
+            'id' => $neighbor['uuid'],
+            'connection' => $neighbor['connection'],
+            'queue' => $neighbor['queue'],
+            'payload' => $neighbor['payload'],
+        ]);
+        app()->instance('queue.failer', $uuidProvider);
+
+        $queue = Mockery::mock(Queue::class);
+        $queue->expects('pushRaw')->with($target['payload'], 'default')->andReturn('target');
+        $factory = Mockery::mock(QueueFactory::class);
+        $factory->expects('connection')->with('redis')->andReturn($queue);
+        $service = new QueueDlqService($factory);
+
+        $result = $service->replayFailedJob(12, 'admin:73');
+
+        self::assertSame('replayed', $result['status']);
+        $this->assertDatabaseMissing('failed_jobs', ['id' => 12]);
+        $this->assertDatabaseHas('failed_jobs', $neighbor);
+        $this->assertDatabaseHas('queue_dlq_replays', [
+            'failed_job_id' => 12,
+            'failed_job_uuid' => $target['uuid'],
+            'replayed_job_id' => 'target',
+        ]);
+        self::assertSame('already_replayed', $service->replayFailedJob(12, 'admin:73')['status']);
+        self::assertSame('not_found', $service->replayFailedJob(12, 'admin:73', force: true)['status']);
+    }
+
     public function test_queue_monitor_routes_replay_through_dlq_service_once(): void
     {
         $guard = Mockery::mock(Guard::class);

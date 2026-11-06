@@ -114,7 +114,12 @@ class QueueDlqService
             }
         }
 
-        $failedJob = $this->findFailedJob($failedJobId);
+        // Ops passes the failed_jobs primary key. Laravel's UUID provider takes
+        // a UUID instead, and MySQL can coerce a UUID prefix to a numeric ID.
+        $failedJobQuery = \App\Support\SchemaBaseline::hasTable('failed_jobs')
+            ? DB::table('failed_jobs')->useWritePdo()->where('id', $failedJobId)
+            : null;
+        $failedJob = $failedJobQuery?->first();
         if ($failedJob === null) {
             $this->insertReplayLog($failedJobId, null, '', '', 'not_found', null, $requestedBy, 'failed job not found');
 
@@ -161,7 +166,7 @@ class QueueDlqService
                 ->connection($connection)
                 ->pushRaw($payload, $queue);
 
-            $this->forgetFailedJob($failedJobId, $failedJob);
+            $failedJobQuery->delete();
             $replayLogId = $this->insertReplayLog(
                 $failedJobId,
                 $this->failedJobUuid($failedJob),
@@ -203,59 +208,6 @@ class QueueDlqService
                 'error' => 'REPLAY_FAILED',
                 'message' => 'failed job replay failed.',
             ];
-        }
-    }
-
-    private function findFailedJob(int $failedJobId): ?object
-    {
-        $failer = app('queue.failer');
-        if (is_object($failer) && method_exists($failer, 'find')) {
-            $row = $failer->find((string) $failedJobId);
-            if (is_object($row)) {
-                return $row;
-            }
-
-            $row = $failer->find($failedJobId);
-            if (is_object($row)) {
-                return $row;
-            }
-        }
-
-        if (! \App\Support\SchemaBaseline::hasTable('failed_jobs')) {
-            return null;
-        }
-
-        $row = DB::table('failed_jobs')->where('id', $failedJobId)->first();
-
-        return is_object($row) ? $row : null;
-    }
-
-    private function forgetFailedJob(int $failedJobId, ?object $failedJob = null): void
-    {
-        $failer = app('queue.failer');
-        if (is_object($failer) && method_exists($failer, 'forget')) {
-            $candidates = [];
-            $uuid = $failedJob !== null ? $this->failedJobUuid($failedJob) : null;
-            if ($uuid !== null) {
-                $candidates[] = $uuid;
-            }
-            $candidates[] = (string) $failedJobId;
-
-            foreach (array_unique($candidates) as $candidate) {
-                try {
-                    $failer->forget($candidate);
-                } catch (\Throwable $e) {
-                    Log::warning('QUEUE_DLQ_FORGET_FAILED', [
-                        'candidate_id' => (string) $candidate,
-                        'failed_job_id' => $failedJobId,
-                        'exception' => $e,
-                    ]);
-                }
-            }
-        }
-
-        if (\App\Support\SchemaBaseline::hasTable('failed_jobs')) {
-            DB::table('failed_jobs')->where('id', $failedJobId)->delete();
         }
     }
 
