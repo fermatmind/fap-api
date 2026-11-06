@@ -231,6 +231,9 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                         if ($this->option('expected-article-state-sha256') !== null) {
                             ArticleSourceTargetSnapshot::assertPublicationHash($lockedArticle, (string) $this->option('expected-article-state-sha256'), true);
                         }
+                        if (! ArticleSourceTargetSnapshot::boundPublishedSourceIsCurrent($lockedArticle, $lockedRevision, lock: true)) {
+                            throw new RuntimeException('published_translation_source_drift');
+                        }
                         $this->assertEditorialCompleteness(
                             $lockedArticle,
                             $lockedRevision,
@@ -1317,6 +1320,10 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         $errors = [];
         $warnings = [];
         $bodyOnly = $this->isLockedBodyOnlyUpdate($article, $workingRevision, $import, $currentPublishedRevisionId);
+        if (! $afterPromotion && $workingRevision instanceof ArticleTranslationRevision
+            && ! ArticleSourceTargetSnapshot::boundPublishedSourceIsCurrent($article, $workingRevision)) {
+            $errors[] = $this->issue('source_guard', 'published_translation_source_drift', 'The bound published source changed before promotion.');
+        }
         if (! $afterPromotion && $this->option('expected-article-state-sha256') !== null) {
             try {
                 ArticleSourceTargetSnapshot::assertPublicationHash($article, (string) $this->option('expected-article-state-sha256'));

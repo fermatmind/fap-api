@@ -71,6 +71,75 @@ final class ArticleUpdateExistingSeoContentPackageCommandTest extends TestCase
         $this->assertSame(1, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_fork_can_bind_exact_published_translation_source_without_changing_public_history(): void
+    {
+        $target = $this->createExistingPublishedArticle40();
+        $source = Article::withoutGlobalScopes()->create([
+            'org_id' => 0, 'slug' => self::SLUG, 'locale' => 'en',
+            'translation_group_id' => self::TRANSLATION_GROUP_ID,
+            'source_locale' => 'en', 'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'title' => 'English source', 'excerpt' => 'English excerpt',
+            'content_md' => 'English body', 'status' => 'published', 'is_public' => true,
+        ]);
+        $sourceRevision = ArticleTranslationRevision::withoutGlobalScopes()->create([
+            ...$source->only(['org_id', 'locale', 'source_locale', 'translation_group_id', 'title', 'excerpt', 'content_md', 'source_version_hash']),
+            'article_id' => $source->id, 'source_article_id' => $source->id, 'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+        ]);
+        $source->forceFill(['working_revision_id' => $sourceRevision->id, 'published_revision_id' => $sourceRevision->id])->saveQuietly();
+        $target->forceFill([
+            'source_article_id' => $source->id, 'translated_from_article_id' => $source->id,
+            'source_locale' => 'en', 'translation_status' => 'published',
+        ])->saveQuietly();
+        $target->publishedRevision->forceFill([
+            'source_article_id' => $source->id, 'source_locale' => 'en',
+            'source_version_hash' => str_repeat('a', 64), 'translated_from_version_hash' => str_repeat('a', 64),
+        ])->saveQuietly();
+        $oldWorking = $target->publishedRevision->replicate();
+        $oldWorking->forceFill(['revision_number' => 2, 'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW])->save();
+        $target->forceFill(['working_revision_id' => $oldWorking->id])->saveQuietly();
+        $target->refresh();
+        $oldWorkingBefore = $oldWorking->fresh()->getAttributes();
+        $publishedBefore = $target->publishedRevision->getAttributes();
+        $seoBefore = $target->seoMeta->getAttributes();
+        $options = $this->commandOptions($this->writeExistingUpdatePackage(), [
+            ...$this->baselineOptions($target), '--fork-working-revision' => true, '--json' => true,
+            '--expected-source-published-revision-id' => $sourceRevision->id,
+            '--expected-source-version-hash' => $source->source_version_hash,
+        ]);
+
+        $this->assertSame(1, Artisan::call('articles:update-existing-seo-content-package', [
+            ...$options, '--expected-source-published-revision-id' => $oldWorking->id, '--execute' => true,
+        ]));
+        $this->assertErrorCode($this->jsonOutput(), 'published_translation_source_drift');
+        $this->assertSame(1, Artisan::call('articles:update-existing-seo-content-package', [
+            ...$options, '--fork-working-revision' => false, '--execute' => true,
+        ]));
+        $this->assertErrorCode($this->jsonOutput(), 'published_translation_source_guard_invalid');
+        $source->forceFill(['working_revision_id' => $oldWorking->id])->saveQuietly();
+        $this->assertSame(1, Artisan::call('articles:update-existing-seo-content-package', [...$options, '--execute' => true]));
+        $this->assertErrorCode($this->jsonOutput(), 'published_translation_source_drift');
+        $source->forceFill(['working_revision_id' => $sourceRevision->id])->saveQuietly();
+        $sourceBefore = $source->fresh()->getAttributes();
+        $this->assertSame(3, ArticleTranslationRevision::withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::withoutGlobalScopes()->count());
+
+        $this->assertSame(0, Artisan::call('articles:update-existing-seo-content-package', [...$options, '--dry-run' => true]), Artisan::output());
+        $this->assertSame(3, ArticleTranslationRevision::withoutGlobalScopes()->count());
+        $this->assertSame(0, Artisan::call('articles:update-existing-seo-content-package', [...$options, '--execute' => true]), Artisan::output());
+        $target->refresh();
+        $this->assertSame($oldWorkingBefore, $oldWorking->fresh()->getAttributes());
+        $this->assertSame($publishedBefore, $target->publishedRevision->getAttributes());
+        $this->assertSame($seoBefore, $target->seoMeta->getAttributes());
+        $this->assertSame($sourceBefore, $source->fresh()->getAttributes());
+        $this->assertSame($oldWorking->id, $target->workingRevision->supersedes_revision_id);
+        $this->assertSame($source->source_version_hash, $target->workingRevision->source_version_hash);
+        $this->assertSame($source->source_version_hash, $target->workingRevision->translated_from_version_hash);
+        $this->assertTrue(\App\Support\ArticleSourceTargetSnapshot::boundPublishedSourceIsCurrent($target, $target->workingRevision));
+        $source->forceFill(['working_revision_id' => $oldWorking->id])->saveQuietly();
+        $this->assertFalse(\App\Support\ArticleSourceTargetSnapshot::boundPublishedSourceIsCurrent($target, $target->workingRevision));
+    }
+
     public function test_explicit_fork_without_baseline_is_rejected_without_writes(): void
     {
         $article = $this->createExistingPublishedArticle40();

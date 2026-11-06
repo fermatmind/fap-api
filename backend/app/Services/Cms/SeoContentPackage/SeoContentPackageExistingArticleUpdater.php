@@ -9,6 +9,7 @@ use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
+use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -92,7 +93,11 @@ final class SeoContentPackageExistingArticleUpdater
             }
             $forkWorkingRevision = (bool) $item['fork_working_revision'];
             $createdIsolatedWorkingRevision = $forkWorkingRevision || $this->usesPublishedRevisionAsWorkingRevision($locked);
-            $locked = $this->ensureIsolatedWorkingRevision($locked, $forkWorkingRevision);
+            $sourceGuard = $item['source_guard'];
+            if ($sourceGuard !== [] && ! ArticleSourceTargetSnapshot::matchesPublishedSource($locked, $sourceGuard, lock: true)) {
+                throw new RuntimeException('published_translation_source_drift');
+            }
+            $locked = $this->ensureIsolatedWorkingRevision($locked, $forkWorkingRevision, $sourceGuard);
 
             $revision = $this->revisionWorkspace->saveWorkingRevision($locked, [
                 'title' => (string) $item['title'],
@@ -157,6 +162,8 @@ final class SeoContentPackageExistingArticleUpdater
             $errors[] = $this->issue('fork_working_revision', 'fork_baseline_required', 'Forking the working revision requires the complete baseline guard.');
         }
 
+        $sourceGuard = $this->sourceGuard($options, $baselineGuard, $errors);
+
         if ($articleId <= 0) {
             $errors[] = $this->issue('article_id', 'missing_article_id', '--article-id is required.');
         }
@@ -190,6 +197,9 @@ final class SeoContentPackageExistingArticleUpdater
             if ($article instanceof Article) {
                 $this->validateArticle($article, $expectedLocale, $expectedSlug, $expectedCanonical, $expectedTranslationGroupId, $errors);
                 $errors = array_merge($errors, $this->baselineErrors($article, $baselineGuard));
+                if ($sourceGuard !== [] && ! ArticleSourceTargetSnapshot::matchesPublishedSource($article, $sourceGuard)) {
+                    $errors[] = $this->issue('source_guard', 'published_translation_source_drift', 'The current published source does not match the supplied source identity and revision.');
+                }
             } elseif ($articleId > 0) {
                 $errors[] = $this->issue('article_id', 'article_not_found', 'Target article was not found.');
             }
@@ -197,6 +207,7 @@ final class SeoContentPackageExistingArticleUpdater
             if ($article instanceof Article && $item !== []) {
                 $item['article'] = $article;
                 $item['baseline_guard'] = $baselineGuard;
+                $item['source_guard'] = $sourceGuard;
                 $item['fork_working_revision'] = (bool) ($options['fork_working_revision'] ?? false);
                 $this->validateItemAgainstLocks($item, $article, $expectedSlug, $expectedCanonical, $expectedTranslationGroupId, $errors);
                 $this->validateJsonFieldSerialization($item, $errors, $warnings);
@@ -224,6 +235,7 @@ final class SeoContentPackageExistingArticleUpdater
             'active_surface_guard_scan' => $guardScan,
             'safety_flags' => $this->safetyFlagSnapshot($options),
             'baseline_guard' => $baselineGuard,
+            'source_guard' => $sourceGuard,
             'articles' => $plannedArticle,
             'package_item' => $ok ? $item : [],
             'errors' => $errors,
@@ -564,6 +576,30 @@ final class SeoContentPackageExistingArticleUpdater
         }
 
         return $guard;
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     * @param  array<string,string>  $baseline
+     * @param  list<array<string,mixed>>  $errors
+     * @return array{revision_id:int,hash:string}|array{}
+     */
+    private function sourceGuard(array $options, array $baseline, array &$errors): array
+    {
+        $revision = $options['expected_source_published_revision_id'] ?? null;
+        $hash = $options['expected_source_version_hash'] ?? null;
+        if ($revision === null && $hash === null) {
+            return [];
+        }
+        $revisionId = filter_var($revision, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+        if ($revisionId === false || ! is_string($hash) || preg_match('/^[a-f0-9]{64}$/D', $hash) !== 1
+            || $baseline === [] || ! ($options['fork_working_revision'] ?? false)) {
+            $errors[] = $this->issue('source_guard', 'published_translation_source_guard_invalid', 'Supply both source locks, the complete target baseline and an explicit working revision fork.');
+
+            return [];
+        }
+
+        return ['revision_id' => $revisionId, 'hash' => $hash];
     }
 
     /** @param array<string,string> $guard @return list<array<string,mixed>> */
@@ -916,7 +952,7 @@ final class SeoContentPackageExistingArticleUpdater
             && (int) $article->working_revision_id === (int) $article->published_revision_id;
     }
 
-    private function ensureIsolatedWorkingRevision(Article $article, bool $forkWorkingRevision = false): Article
+    private function ensureIsolatedWorkingRevision(Article $article, bool $forkWorkingRevision = false, array $sourceGuard = []): Article
     {
         if (! $forkWorkingRevision && ! $this->usesPublishedRevisionAsWorkingRevision($article)) {
             return $article;
@@ -950,14 +986,15 @@ final class SeoContentPackageExistingArticleUpdater
             'source_locale' => $base->source_locale,
             'revision_number' => $nextRevisionNumber,
             'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
-            'source_version_hash' => (string) $base->source_version_hash,
-            'translated_from_version_hash' => (string) $base->translated_from_version_hash,
+            'source_version_hash' => $sourceGuard['hash'] ?? (string) $base->source_version_hash,
+            'translated_from_version_hash' => $sourceGuard['hash'] ?? (string) $base->translated_from_version_hash,
             'title' => (string) $base->title,
             'excerpt' => $base->excerpt,
             'content_md' => (string) $base->content_md,
             'seo_title' => $base->seo_title,
             'seo_description' => $base->seo_description,
             'supersedes_revision_id' => (int) $base->id,
+            ...($sourceGuard === [] ? [] : ['authority_metadata_json' => ['published_translation_source_v1' => $sourceGuard]]),
         ]);
 
         $article->forceFill(['working_revision_id' => (int) $working->id])->saveQuietly();

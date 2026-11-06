@@ -42,6 +42,62 @@ final class ArticleSourceTargetSnapshot
         }
     }
 
+    /** @param array{revision_id:int,hash:string} $guard */
+    public static function matchesPublishedSource(Article $target, array $guard, bool $lock = false): bool
+    {
+        if ($target->isSourceArticle() || ! $target->source_article_id
+            || (int) $target->source_article_id !== (int) $target->translated_from_article_id) {
+            return false;
+        }
+
+        $source = Article::query()->withoutGlobalScopes()
+            ->where('org_id', (int) $target->org_id)
+            ->whereKey($target->source_article_id)
+            ->whereNull('deleted_at')
+            ->when($lock, fn ($query) => $query->lockForUpdate())
+            ->first();
+        if (! $source instanceof Article || ! $source->isSourceArticle()
+            || $source->translation_group_id !== $target->translation_group_id
+            || $source->locale === $target->locale || $source->locale !== $target->source_locale
+            || $source->status !== 'published' || ! $source->is_public
+            || (int) $source->published_revision_id !== $guard['revision_id']
+            || (int) $source->working_revision_id !== $guard['revision_id']
+            || ! hash_equals($guard['hash'], (string) $source->source_version_hash)
+            || ! hash_equals($guard['hash'], $source->computeSourceVersionHash())) {
+            return false;
+        }
+
+        $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()
+            ->where('org_id', (int) $source->org_id)
+            ->where('article_id', (int) $source->id)
+            ->whereKey($guard['revision_id'])
+            ->when($lock, fn ($query) => $query->lockForUpdate())
+            ->first();
+
+        return $revision instanceof ArticleTranslationRevision
+            && (int) $revision->source_article_id === (int) $source->id
+            && $revision->translation_group_id === $source->translation_group_id
+            && $revision->locale === $source->locale
+            && in_array($revision->revision_status, [ArticleTranslationRevision::STATUS_PUBLISHED, ArticleTranslationRevision::STATUS_SOURCE], true)
+            && hash_equals($guard['hash'], (string) $revision->source_version_hash)
+            && $revision->title === $source->title
+            && $revision->excerpt === $source->excerpt
+            && $revision->content_md === $source->content_md;
+    }
+
+    public static function boundPublishedSourceIsCurrent(Article $target, ArticleTranslationRevision $revision, bool $lock = false): bool
+    {
+        $guard = data_get($revision->authority_metadata_json, 'published_translation_source_v1');
+        if ($guard === null) {
+            return true;
+        }
+
+        return is_array($guard) && is_int($guard['revision_id'] ?? null) && is_string($guard['hash'] ?? null)
+            && $revision->source_version_hash === $guard['hash']
+            && $revision->translated_from_version_hash === $guard['hash']
+            && self::matchesPublishedSource($target, $guard, $lock);
+    }
+
     public static function tagsHash(Article $target, bool $lock = false): string
     {
         $query = DB::table('article_tag_map')->where('article_id', $target->id)->orderBy('org_id')->orderBy('tag_id');
