@@ -806,11 +806,10 @@ final class ArticleTranslationWorkflowService
         if ($source->published_at instanceof \DateTimeInterface && $source->published_at > now()) {
             $blockers[] = 'source article publish date is future';
         }
-        if (($this->sourceEditorialReviewState($source)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
+        $publishedRevision = $source->publishedRevision;
+        if (! $this->hasSourceEditorialApproval($source, $publishedRevision)) {
             $blockers[] = 'source article editorial approval missing';
         }
-
-        $publishedRevision = $source->publishedRevision;
         if (! $publishedRevision instanceof ArticleTranslationRevision) {
             $blockers[] = 'source article published revision missing';
 
@@ -832,12 +831,31 @@ final class ArticleTranslationWorkflowService
         return $blockers;
     }
 
-    /**
-     * @return array{state:string,label:string,reviewed_at:string,owner_admin_user_id:int|null,owner_label:string,reviewer_admin_user_id:int|null,reviewer_label:string}|null
-     */
-    private function sourceEditorialReviewState(Article $source): ?array
+    private function hasSourceEditorialApproval(Article $source, ?ArticleTranslationRevision $publishedRevision): bool
     {
-        return EditorialReviewAudit::latestState('article', $source);
+        if ((EditorialReviewAudit::latestState('article', $source)['state'] ?? null) === EditorialReviewAudit::STATE_APPROVED) {
+            return true;
+        }
+
+        if (! $this->reviewAttestations->usesSoloOwnerMode()
+            || $publishedRevision === null
+            || (int) $source->working_revision_id !== (int) $publishedRevision->id
+            || $this->revisionOwnershipBlockers($source, $publishedRevision, 'source published revision') !== []) {
+            return false;
+        }
+
+        // Publication and metadata writes can advance updated_at without changing either approved target.
+        // Exact evidence can recover that approval, but must respect a newer workflow decision.
+        $workflowStates = EditorialReview::withoutGlobalScopes()
+            ->where('org_id', $source->org_id)
+            ->where('content_type', 'article')
+            ->where('content_id', $source->id)
+            ->pluck('workflow_state')
+            ->all();
+
+        return in_array($workflowStates, [[], [EditorialReviewAudit::STATE_APPROVED]], true)
+            && $this->reviewAttestations->hasApprovedEvidence('article', $source)
+            && $this->reviewAttestations->hasApprovedEvidence('article_translation_revision', $publishedRevision);
     }
 
     private function referencesPreserved(Article $source, ArticleTranslationRevision $targetRevision): bool

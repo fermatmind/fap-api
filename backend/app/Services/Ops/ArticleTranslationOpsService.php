@@ -14,6 +14,7 @@ use App\Models\EditorialReview;
 use App\Services\Cms\ArticlePublishedSourceReviewService;
 use App\Services\Cms\ArticleReviewedCounterpartService;
 use App\Services\Cms\ArticleTranslationWorkflowService;
+use App\Services\Cms\CmsEditorialReviewAttestationService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
@@ -101,7 +102,11 @@ final class ArticleTranslationOpsService
         $source = $sourceArticles->isNotEmpty()
             ? $this->selectSourceArticle($sourceArticles, $articles)
             : ($sourceCandidates->count() === 1 ? $sourceCandidates->first() : null);
-        $reviewedMetadataDrift = $this->reviewedSourceMetadataDrift($source, $articles);
+        $independentSourceReviews = ($independentSourcePair || $articles->count() === 1)
+            ? $sourceArticles->filter(fn (Article $article): bool => $this->reviewedIndependentSourceMetadataDrift($article))->keyBy('id')
+            : collect();
+        $reviewedMetadataDrift = $independentSourceReviews->has($source?->id)
+            || $this->reviewedSourceMetadataDrift($source, $articles);
         $sourceVersionIssues = $source instanceof Article ? $this->sourceVersionIssues($source, $reviewedMetadataDrift) : [];
         $sourceHash = $this->sourceHash($source);
         $publishedSourceHash = $source?->publishedRevision?->source_version_hash;
@@ -131,7 +136,9 @@ final class ArticleTranslationOpsService
             ->values()
             ->all();
         $canonicalIssues = $independentSourcePair
-            ? $sourceArticles->flatMap(fn (Article $article): array => $this->localizedSourceVersionIssues($this->sourceVersionIssues($article, false)))->unique()->values()->all()
+            ? $sourceArticles->flatMap(fn (Article $article): array => $this->localizedSourceVersionIssues(
+                $this->sourceVersionIssues($article, $independentSourceReviews->has($article->id))
+            ))->unique()->values()->all()
             : $this->canonicalIssues($sourceArticles, $sourceCandidates, $articles, $source, $sourceVersionIssues);
         $alerts = $this->alerts($locales, $coverage['missing_target_locales'], $canonicalIssues, $ownershipIssues, $coverage['independent_pages']);
 
@@ -465,6 +472,45 @@ final class ArticleTranslationOpsService
         }
 
         return $issues;
+    }
+
+    /**
+     * Independent sources have no translated-from hash to rebind. Exact current approval
+     * can verify the live projection while preserving the original publication fingerprint.
+     */
+    private function reviewedIndependentSourceMetadataDrift(Article $source): bool
+    {
+        $published = $source->publishedRevision;
+        if ((int) $source->org_id !== self::PUBLIC_ARTICLE_ORG_ID
+            || $source->source_article_id !== null
+            || $source->translated_from_article_id !== null
+            || $source->source_locale !== $source->locale
+            || ! $published instanceof ArticleTranslationRevision
+            || (int) $source->working_revision_id !== (int) $published->id
+            || (int) $published->source_article_id !== (int) $source->id
+            || $published->source_locale !== $source->locale
+            || ! filled($source->source_version_hash)
+            || $source->source_version_hash !== $published->source_version_hash
+            || hash_equals($source->source_version_hash, $source->computeSourceVersionHash())
+            || $published->title !== $source->title
+            || $published->excerpt !== $source->excerpt
+            || $published->content_md !== $source->content_md
+            || ! app(ArticleReviewedCounterpartService::class)->eligible($source)
+            || (EditorialReviewAudit::latestState('article', $source)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
+            return false;
+        }
+
+        $reviews = EditorialReview::withoutGlobalScopes()->where('content_type', 'article')
+            ->where('content_id', $source->id)->get(['org_id']);
+        if ($reviews->count() !== 1 || (int) $reviews->first()->org_id !== (int) $source->org_id) {
+            return false;
+        }
+
+        $attestations = app(CmsEditorialReviewAttestationService::class);
+
+        return $attestations->usesSoloOwnerMode()
+            && $attestations->hasApprovedEvidence('article', $source)
+            && $attestations->hasApprovedEvidence('article_translation_revision', $published);
     }
 
     /** A current pair review supplements historical metadata fingerprints; it never rewrites them. */

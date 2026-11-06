@@ -20,6 +20,7 @@ use App\Models\Role;
 use App\Services\Cms\ArticleReviewedCounterpartService;
 use App\Services\Cms\ArticleTranslationWorkflowException;
 use App\Services\Cms\ArticleTranslationWorkflowService;
+use App\Services\Cms\CmsEditorialReviewAttestationService;
 use App\Services\Ops\ArticleTranslationOpsService;
 use App\Services\Ops\CmsTranslationOpsService;
 use App\Support\Rbac\PermissionNames;
@@ -252,6 +253,38 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $unpaired = $dashboard->dashboard($filters);
         $this->assertFalse($unpaired['groups'][0]['independent_source_pair']);
         $this->assertSame(1, $unpaired['metrics']['canonical_risk_groups']);
+    }
+
+    public function test_independent_sources_preserve_a_reviewed_historical_hash_after_metadata_edits(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_APPROVAL_REVIEW]);
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => (int) $admin->id]);
+        $source = $this->createSourceOnlyGroup('reviewed-source-metadata');
+        $counterpart = $this->createIndependentEnglishSource($source, $source->translation_group_id);
+        $gate = ['editorial_package_v1' => ['hreflang_gate_v1' => [
+            'enabled' => true, 'policy' => 'reciprocal_counterparts_verified',
+        ]]];
+        foreach ([$source, $counterpart] as $member) {
+            $member->seoMeta->update(['schema_json' => $gate]);
+        }
+
+        $oldHash = $counterpart->source_version_hash;
+        $counterpart->forceFill(['cover_image_alt' => 'Updated cover description'])->saveQuietly();
+        $this->setArticleReviewState($counterpart, EditorialReviewAudit::STATE_APPROVED);
+        $dashboard = app(CmsTranslationOpsService::class);
+        $filters = ['slug' => $source->slug];
+        $this->assertSame(1, $dashboard->dashboard($filters)['metrics']['canonical_risk_groups']);
+
+        app(CmsEditorialReviewAttestationService::class)->bindOrCreateApproved(null, 'cms_editorial_review', 'article:'.$counterpart->id.':fixture', [
+            ['surface_id' => 'article', 'record' => $counterpart->fresh()],
+            ['surface_id' => 'article_translation_revision', 'record' => $counterpart->publishedRevision],
+        ], (int) $admin->id);
+        $this->assertSame(0, $dashboard->dashboard($filters)['metrics']['canonical_risk_groups']);
+        $this->assertSame($oldHash, $counterpart->fresh()->source_version_hash);
+        $this->assertSame($oldHash, $counterpart->publishedRevision->fresh()->source_version_hash);
+
+        $counterpart->forceFill(['cover_image_alt' => 'A second unreviewed description'])->saveQuietly();
+        $this->assertSame(1, $dashboard->dashboard($filters)['metrics']['canonical_risk_groups']);
     }
 
     public function test_translation_ops_page_localizes_visible_chinese_console_copy(): void
@@ -967,6 +1000,37 @@ final class ArticleTranslationOpsPageTest extends TestCase
             $this->assertSame('Translation publish preflight failed.', $exception->getMessage());
             $this->assertContains('source article editorial approval missing', $exception->blockers);
         }
+    }
+
+    public function test_source_preflight_accepts_exact_solo_owner_evidence_without_a_current_workflow_timestamp(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_APPROVAL_REVIEW]);
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => (int) $admin->id]);
+        $group = $this->createPublishedTranslationGroup('exact-source-approval');
+        $source = $group['source']->fresh();
+        $revision = $group['sourceRevision']->fresh();
+        $translation = $group['translation'];
+        $this->setArticleReviewState($source, EditorialReviewAudit::STATE_APPROVED);
+        $source->forceFill(['updated_at' => now()->addMinute()])->saveQuietly();
+        $workflow = app(ArticleTranslationWorkflowService::class);
+        $attestations = app(CmsEditorialReviewAttestationService::class);
+        $missing = 'source article editorial approval missing';
+
+        $this->assertContains($missing, $workflow->preflight($translation->fresh())['blockers']);
+        $attestations->bindOrCreateApproved(null, 'cms_editorial_review', 'article:'.$source->id.':fixture', [
+            ['surface_id' => 'article', 'record' => $source->fresh()],
+            ['surface_id' => 'article_translation_revision', 'record' => $revision],
+        ], (int) $admin->id);
+        $this->assertNotContains($missing, $workflow->preflight($translation->fresh())['blockers']);
+
+        $this->setArticleReviewState($source, EditorialReviewAudit::STATE_CHANGES_REQUESTED);
+        $this->assertContains($missing, $workflow->preflight($translation->fresh())['blockers']);
+
+        EditorialReview::withoutGlobalScopes()->where('content_type', 'article')->where('content_id', $source->id)->delete();
+        $this->assertNotContains($missing, $workflow->preflight($translation->fresh())['blockers']);
+
+        $revision->forceFill(['seo_description' => 'A different published description'])->saveQuietly();
+        $this->assertContains($missing, $workflow->preflight($translation->fresh())['blockers']);
     }
 
     public function test_translation_workflow_promotes_approves_and_publishes_with_guardrails(): void
