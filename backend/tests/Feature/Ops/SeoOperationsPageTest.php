@@ -134,6 +134,36 @@ final class SeoOperationsPageTest extends TestCase
         }
     }
 
+    public function test_connected_search_performance_renders_metrics_and_rows(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization('Connected SEO performance');
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->withSession($this->opsSession($admin, $org));
+        app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
+
+        Livewire::withQueryParams(['workspace' => 'performance'])->test(SeoOperationsPage::class)
+            ->set('platformReadModels', [
+                'performance' => [
+                    'gsc' => [
+                        'connected' => true,
+                        'totals' => ['clicks' => 123, 'impressions' => 456, 'ctr_percent' => 26.97, 'average_position' => 4.2],
+                        'query_page_rows' => [[
+                            'query' => 'synthetic query',
+                            'canonical_path' => '/en/articles/test',
+                            'clicks' => 123,
+                            'impressions' => 456,
+                        ]],
+                    ],
+                ],
+            ])
+            ->assertSuccessful()
+            ->assertSee('123')
+            ->assertSee('456')
+            ->assertSee('synthetic query')
+            ->assertSee('/en/articles/test');
+    }
+
     public function test_council_workspace_is_not_accessible_without_content_permission(): void
     {
         $admin = $this->createAdminWithPermissions([]);
@@ -328,7 +358,7 @@ final class SeoOperationsPageTest extends TestCase
         $jobReady = CareerJob::query()->create([
             'org_id' => 0,
             'job_code' => 'seo-ready-job',
-            'slug' => 'seo-ready-job',
+            'slug' => 'accountants-and-auditors',
             'locale' => 'en',
             'title' => 'SEO Ready Job',
             'excerpt' => 'Ready job excerpt',
@@ -343,7 +373,7 @@ final class SeoOperationsPageTest extends TestCase
             'job_id' => (int) $jobReady->id,
             'seo_title' => 'SEO Ready Job Title',
             'seo_description' => 'SEO Ready Job Description',
-            'canonical_url' => 'https://example.test/en/career/jobs/seo-ready-job',
+            'canonical_url' => 'https://example.test/en/career/jobs/accountants-and-auditors',
             'og_title' => 'SEO Ready Job OG Title',
             'og_description' => 'SEO Ready Job OG Description',
             'og_image_url' => 'https://example.test/images/seo-ready-job.png',
@@ -419,26 +449,27 @@ final class SeoOperationsPageTest extends TestCase
         Livewire::test(SeoOperationsPage::class)
             ->assertOk()
             ->assertSet('headlineFields.0.value', '50% (1/2)')
-            ->assertSet('headlineFields.1.value', '50% (2/4)')
-            ->assertSet('headlineFields.2.value', '5')
+            ->assertSet('headlineFields.1.value', '67% (2/3)')
+            ->assertSet('headlineFields.2.value', '4')
             ->assertSet('headlineFields.3.value', '3')
-            ->assertSet('headlineFields.4.value', '3')
+            ->assertSet('headlineFields.4.value', '2')
             ->assertSet('headlineFields.0.scope', 'global_articles')
             ->assertSet('headlineFields.0.source', 'primary.articles')
             ->assertSet('headlineFields.0.freshness', 'fresh')
             ->assertSet('coverageFields.0.value', '50% (1/2)')
             ->assertSet('coverageFields.1.value', '50% (1/2)')
             ->assertSet('coverageFields.2.value', '50% (1/2)')
-            ->assertSet('coverageFields.3.value', '50% (1/2)')
-            ->assertSet('coverageFields.4.value', '3')
-            ->assertSet('growthFields.0.value', '2')
-            ->assertSet('growthFields.1.value', '3')
+            ->assertSet('coverageFields.3.value', '100% (1/1)')
+            ->assertSet('coverageFields.4.value', '2')
+            ->assertSet('growthFields.0.value', '1')
+            ->assertSet('growthFields.1.value', '2')
             ->assertSet('growthFields.2.value', '1')
-            ->assertSet('growthFields.3.value', '50% (3/6)')
+            ->assertSet('growthFields.3.value', '60% (3/5)')
             ->assertCount('issueQueue', 3)
             ->set('activeAutomationSection', 'operations')
             ->set('activeWorkspace', 'automation')
-            ->assertSee('Published with discovery blockers')
+            ->assertSee('Blocked by noindex')
+            ->assertSee('Historical job without a current public page')
             ->assertDontSee('Other Org SEO Article')
             ->set('scopeFilter', 'global_articles')
             ->assertCount('issueQueue', 1)
@@ -462,6 +493,42 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSee('Root-cause clusters are not production-proven')
             ->set('activeWorkspace', 'performance')
             ->assertSee('The opportunity read model is unavailable in this environment.');
+    }
+
+    public function test_published_career_seo_uses_rendered_fallbacks_and_excludes_historical_jobs(): void
+    {
+        $service = app(SeoOperationsService::class);
+        $guide = new CareerGuide([
+            'slug' => 'test-guide', 'locale' => 'en', 'title' => 'Guide', 'excerpt' => 'Guide excerpt',
+            'status' => CareerGuide::STATUS_PUBLISHED, 'is_public' => true, 'is_indexable' => true,
+        ]);
+        $meta = new CareerGuideSeoMeta;
+        $guide->setRelation('seoMeta', $meta);
+        $this->assertSame([], $service->issuesFor('guide', $guide));
+        $this->assertTrue($service->hasCanonicalCoverage('guide', $guide));
+        $this->assertTrue($service->isGrowthReady('guide', $guide));
+
+        $meta->forceFill(['canonical_url' => 'https://example.test/wrong', 'robots' => 'noindex,follow']);
+        $this->assertSame([
+            SeoOperationsService::ISSUE_CANONICAL,
+            SeoOperationsService::ISSUE_ROBOTS,
+            SeoOperationsService::ISSUE_GROWTH,
+        ], array_column($service->issuesFor('guide', $guide), 'code'));
+
+        $job = new CareerJob([
+            'slug' => 'accountants-and-auditors', 'locale' => 'en', 'title' => 'Accountants and Auditors',
+            'status' => CareerJob::STATUS_PUBLISHED, 'is_public' => true, 'is_indexable' => true,
+        ]);
+        $job->setRelation('seoMeta', new CareerJobSeoMeta);
+        $this->assertSame([], $service->issuesFor('job', $job));
+        $this->assertTrue($service->isGrowthReady('job', $job));
+
+        $job->slug = 'software-developers';
+        $this->assertSame([SeoOperationsService::ISSUE_GROWTH], array_column($service->issuesFor('job', $job), 'code'));
+        $this->assertSame([], $service->issuesFor('job', $job)[0]['autofix']);
+        $this->assertFalse($service->isSeoReady('job', $job));
+        $this->assertFalse($service->isGrowthReady('job', $job));
+        $this->assertFalse($service->hasPublishedDiscoveryBlocker('job', $job));
     }
 
     public function test_article_seo_readiness_accepts_the_exact_public_canonical_path(): void
@@ -590,10 +657,10 @@ final class SeoOperationsPageTest extends TestCase
             ->set('issueFilter', SeoOperationsService::ISSUE_GROWTH)
             ->assertCount('issueQueue', 0)
             ->set('issueFilter', SeoOperationsService::ISSUE_SOCIAL)
-            ->assertCount('issueQueue', 2)
+            ->assertCount('issueQueue', 1)
             ->set('activeAutomationSection', 'operations')
             ->set('activeWorkspace', 'automation')
-            ->assertSee('Fix Guide')
+            ->assertDontSee('Fix Guide')
             ->assertSee('Fix Me Article');
 
         $article->refresh();

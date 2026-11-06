@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Pages;
 
 use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
@@ -41,7 +42,8 @@ class PostReleaseObservabilityPage extends Page
     public function mount(): void
     {
         $currentOrgIds = $this->currentOrgIds();
-        $recentThreshold = Carbon::now()->subDay();
+        $now = Carbon::now();
+        $recentThreshold = $now->copy()->subDay();
 
         $articleBaseQuery = Article::query()->whereIn('org_id', $currentOrgIds);
         $guideBaseQuery = CareerGuide::query()
@@ -53,18 +55,34 @@ class PostReleaseObservabilityPage extends Page
 
         $articleRecentPublishes = (clone $articleBaseQuery)
             ->whereNotNull('published_at')
-            ->where('published_at', '>=', $recentThreshold)
+            ->whereBetween('published_at', [$recentThreshold, $now])
             ->count();
         $guideRecentPublishes = (clone $guideBaseQuery)
             ->whereNotNull('published_at')
-            ->where('published_at', '>=', $recentThreshold)
+            ->whereBetween('published_at', [$recentThreshold, $now])
             ->count();
         $jobRecentPublishes = (clone $jobBaseQuery)
             ->whereNotNull('published_at')
-            ->where('published_at', '>=', $recentThreshold)
+            ->whereBetween('published_at', [$recentThreshold, $now])
             ->count();
 
         $recentPublishes = $articleRecentPublishes + $guideRecentPublishes + $jobRecentPublishes;
+
+        $currentArticleUpdates = Article::query()
+            ->withoutGlobalScopes()
+            ->where('articles.org_id', 0)
+            ->whereNull('articles.deleted_at')
+            ->where('articles.status', 'published')
+            ->where('articles.is_public', true)
+            ->join((new ArticleTranslationRevision)->getTable().' as current_revision', function ($join): void {
+                $join->on('current_revision.id', '=', 'articles.published_revision_id')
+                    ->on('current_revision.article_id', '=', 'articles.id')
+                    ->on('current_revision.org_id', '=', 'articles.org_id')
+                    ->on('current_revision.locale', '=', 'articles.locale');
+            })
+            ->whereColumn('current_revision.published_at', '>', 'articles.published_at')
+            ->whereBetween('current_revision.published_at', [$recentThreshold, $now])
+            ->count();
 
         $visibilityGaps = (clone $articleBaseQuery)
             ->where('status', 'published')
@@ -139,6 +157,11 @@ class PostReleaseObservabilityPage extends Page
                 'label' => __('ops.custom_pages.post_release_observability.fields.publishes_24h'),
                 'value' => (string) $recentPublishes,
                 'hint' => __('ops.custom_pages.post_release_observability.fields.publishes_24h_hint'),
+            ],
+            [
+                'label' => __('ops.custom_pages.post_release_observability.fields.article_updates_24h'),
+                'value' => (string) $currentArticleUpdates,
+                'hint' => __('ops.custom_pages.post_release_observability.fields.article_updates_24h_hint'),
             ],
             [
                 'label' => __('ops.custom_pages.post_release_observability.fields.audits_24h'),

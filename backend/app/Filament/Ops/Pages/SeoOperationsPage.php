@@ -755,28 +755,28 @@ class SeoOperationsPage extends Page
 
         $articleTotal = $articles->count();
         $guideTotal = $guides->count();
-        $jobTotal = $jobs->count();
+        $seoJobs = $jobs->reject(fn (object $job): bool => $service->isNonCurrentPublishedJob('job', $job));
+        $jobTotal = $seoJobs->count();
         $careerTotal = $guideTotal + $jobTotal;
 
         $articleSeoReady = $this->countSeoReady($service, 'article', $articles);
         $guideSeoReady = $this->countSeoReady($service, 'guide', $guides);
-        $jobSeoReady = $this->countSeoReady($service, 'job', $jobs);
+        $jobSeoReady = $this->countSeoReady($service, 'job', $seoJobs);
         $careerSeoReady = $guideSeoReady + $jobSeoReady;
 
         $articleCanonicalCoverage = $this->countCanonicalCoverage($service, 'article', $articles);
         $guideCanonicalCoverage = $this->countCanonicalCoverage($service, 'guide', $guides);
-        $jobCanonicalCoverage = $this->countCanonicalCoverage($service, 'job', $jobs);
+        $jobCanonicalCoverage = $this->countCanonicalCoverage($service, 'job', $seoJobs);
 
         $articleSocialCoverage = $this->countSocialCoverage($articles);
-        $careerSocialCoverage = $this->countSocialCoverage($guides) + $this->countSocialCoverage($jobs);
 
         $indexableFootprint = $articles->where('is_indexable', true)->count()
             + $guides->where('is_indexable', true)->count()
-            + $jobs->where('is_indexable', true)->count();
+            + $seoJobs->where('is_indexable', true)->count();
 
         $publicSeoReady = $this->countGrowthReady($service, 'article', $articles)
             + $this->countGrowthReady($service, 'guide', $guides)
-            + $this->countGrowthReady($service, 'job', $jobs);
+            + $this->countGrowthReady($service, 'job', $seoJobs);
 
         $seoAttentionQueue = ($articleTotal - $articleSeoReady)
             + ($guideTotal - $guideSeoReady)
@@ -784,19 +784,19 @@ class SeoOperationsPage extends Page
 
         $robotsGaps = $this->countRobotsGaps($service, 'article', $articles)
             + $this->countRobotsGaps($service, 'guide', $guides)
-            + $this->countRobotsGaps($service, 'job', $jobs);
+            + $this->countRobotsGaps($service, 'job', $seoJobs);
 
         $publishedDiscoveryBlocked = $this->countPublishedDiscoveryBlocked($service, 'article', $articles)
             + $this->countPublishedDiscoveryBlocked($service, 'guide', $guides)
-            + $this->countPublishedDiscoveryBlocked($service, 'job', $jobs);
+            + $this->countPublishedDiscoveryBlocked($service, 'job', $seoJobs);
 
         $socialPreviewBlocked = $this->countIssueCode($service, 'social', 'article', $articles)
             + $this->countIssueCode($service, 'social', 'guide', $guides)
-            + $this->countIssueCode($service, 'social', 'job', $jobs);
+            + $this->countIssueCode($service, 'social', 'job', $seoJobs);
 
         $noindexInventory = $articles->where('is_indexable', false)->count()
             + $guides->where('is_indexable', false)->count()
-            + $jobs->where('is_indexable', false)->count();
+            + $seoJobs->where('is_indexable', false)->count();
 
         $this->headlineFields = [
             [
@@ -941,8 +941,8 @@ class SeoOperationsPage extends Page
 
         $this->scopeSummary = [
             array_merge(['key' => SeoContentScopeViewModel::SCOPE_GLOBAL_ARTICLES, 'label' => __('ops.custom_pages.seo_operations.scopes.global_articles'), 'count' => $articleTotal], $articleContract),
-            array_merge(['key' => SeoContentScopeViewModel::SCOPE_GLOBAL_CAREER, 'label' => __('ops.custom_pages.seo_operations.scopes.global_career'), 'count' => $careerTotal], $careerContract),
-            array_merge(['key' => SeoContentScopeViewModel::SCOPE_COMBINED, 'label' => __('ops.custom_pages.seo_operations.scopes.combined'), 'count' => $totalInventory], $combinedContract),
+            array_merge(['key' => SeoContentScopeViewModel::SCOPE_GLOBAL_CAREER, 'label' => __('ops.custom_pages.seo_operations.scopes.global_career'), 'count' => $careerRecords->count()], $careerContract),
+            array_merge(['key' => SeoContentScopeViewModel::SCOPE_COMBINED, 'label' => __('ops.custom_pages.seo_operations.scopes.combined'), 'count' => $articleTotal + $careerRecords->count()], $combinedContract),
         ];
 
     }
@@ -1157,12 +1157,7 @@ class SeoOperationsPage extends Page
      */
     private function countCanonicalCoverage(SeoOperationsService $service, string $type, Collection $records): int
     {
-        return $records->filter(function (object $record) use ($service, $type): bool {
-            $expectedCanonical = $service->expectedCanonical($type, $record);
-
-            return $expectedCanonical !== null
-                && trim((string) data_get($record, 'seoMeta.canonical_url', '')) === $expectedCanonical;
-        })->count();
+        return $records->filter(fn (object $record): bool => $service->hasCanonicalCoverage($type, $record))->count();
     }
 
     /**

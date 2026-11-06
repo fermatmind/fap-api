@@ -278,14 +278,6 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ($deploymentEvents !== [])
-                        <h3>{{ __('ops.custom_pages.seo_operations.performance.event_annotations') }}</h3>
-                        <div class="ops-tag-list">
-                            @foreach ($deploymentEvents as $event)
-                                <span class="ops-tag">{{ $event['occurred_at'] ?? '-' }} · {{ $event['environment'] }} · {{ $event['status'] }} · {{ \Illuminate\Support\Str::limit($event['revision'], 12, '') }}</span>
-                            @endforeach
-                        </div>
-                    @endif
                     @php($publicFunnel = (array) data_get($platformReadModels, 'performance.public_funnel', []))
                     <h3>{{ __('ops.custom_pages.seo_operations.platform.public_funnel') }}</h3>
                     @if ((array) ($publicFunnel['warnings'] ?? []) === [])

@@ -34,7 +34,7 @@
         <x-filament-ops::ops-state-message
             :state="$snapshot['trend_state']"
             :title="__('ops.custom_pages.seo_operations.states.MEASUREMENT_HOLD.label')"
-            :description="''"
+            :description="__($copy.'.trend.hold_description')"
         />
     </section>
 

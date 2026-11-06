@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Ops;
 
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\CareerGuide;
@@ -57,6 +58,7 @@ final class SeoOperationsService
         private readonly CareerGuideSeoService $careerGuideSeoService,
         private readonly CareerJobSeoService $careerJobSeoService,
         private readonly SeoContentScopeViewModel $scope,
+        private readonly CareerContentV3CanonicalReader $careerAuthority,
     ) {}
 
     /**
@@ -119,6 +121,10 @@ final class SeoOperationsService
                 continue;
             }
 
+            if ($action === self::ACTION_MARK_INDEXABLE && $this->isNonCurrentPublishedJob($type, $record)) {
+                continue;
+            }
+
             $this->applyActionToRecord($type, $record, $action);
             $updatedKeys[] = $selectionKey;
         }
@@ -134,7 +140,15 @@ final class SeoOperationsService
      */
     public function issuesFor(string $type, object $record): array
     {
-        $seoMeta = $this->seoMetaFor($record);
+        if ($this->isNonCurrentPublishedJob($type, $record)) {
+            return [[
+                'code' => self::ISSUE_GROWTH,
+                'label' => __('ops.custom_pages.seo_operations.issue_labels.non_current_career_job'),
+                'autofix' => [],
+            ]];
+        }
+
+        $seoMeta = $this->seoMetaForChecks($type, $record);
         $expectedCanonical = $this->expectedCanonical($type, $record);
         $expectedRobots = $this->expectedRobots($type, $record);
         $isPublishedPublic = $this->isPublishedPublic($type, $record);
@@ -199,7 +213,18 @@ final class SeoOperationsService
 
     public function isSeoReady(string $type, object $record): bool
     {
-        return $this->seoReadinessIssues($type, $record) === [];
+        return ! $this->isNonCurrentPublishedJob($type, $record) && $this->seoReadinessIssues($type, $record) === [];
+    }
+
+    public function hasCanonicalCoverage(string $type, object $record): bool
+    {
+        if ($this->isNonCurrentPublishedJob($type, $record)) {
+            return false;
+        }
+
+        $expected = $this->expectedCanonical($type, $record);
+
+        return $expected !== null && $this->matchesCanonical($type, $this->seoMetaForChecks($type, $record), $expected);
     }
 
     /** @return list<array{code:string,label:string,autofix:array<int,string>}> */
@@ -214,16 +239,18 @@ final class SeoOperationsService
     public function isGrowthReady(string $type, object $record): bool
     {
         return $this->isPublishedPublic($type, $record)
+            && ! $this->isNonCurrentPublishedJob($type, $record)
             && (bool) data_get($record, 'is_indexable')
-            && ! $this->hasGrowthBlocker($type, $record, $this->seoMetaFor($record));
+            && ! $this->hasGrowthBlocker($type, $record, $this->seoMetaForChecks($type, $record));
     }
 
     public function hasPublishedDiscoveryBlocker(string $type, object $record): bool
     {
         return $this->isPublishedPublic($type, $record)
+            && ! $this->isNonCurrentPublishedJob($type, $record)
             && (
                 ! (bool) data_get($record, 'is_indexable')
-                || $this->hasGrowthBlocker($type, $record, $this->seoMetaFor($record))
+                || $this->hasGrowthBlocker($type, $record, $this->seoMetaForChecks($type, $record))
             );
     }
 
@@ -506,6 +533,10 @@ final class SeoOperationsService
 
     private function hasMetadataGap(string $type, object $record, ?object $seoMeta): bool
     {
+        if ($type !== 'article' && $this->isPublishedPublic($type, $record)) {
+            return ! filled(data_get($seoMeta, 'seo_title')) || ! filled(data_get($seoMeta, 'seo_description'));
+        }
+
         $fields = [
             trim((string) data_get($seoMeta, 'seo_title', '')),
             trim((string) data_get($seoMeta, 'seo_description', '')),
@@ -523,6 +554,12 @@ final class SeoOperationsService
 
     private function hasSocialGap(string $type, object $record, ?object $seoMeta): bool
     {
+        if ($type !== 'article' && $this->isPublishedPublic($type, $record)) {
+            // Career pages can use a text-only preview. An image is editorially optional.
+            return collect(['og_title', 'og_description', 'twitter_title', 'twitter_description'])
+                ->contains(fn (string $field): bool => ! filled(data_get($seoMeta, $field)));
+        }
+
         $fields = [
             trim((string) data_get($seoMeta, 'og_title', '')),
             trim((string) data_get($seoMeta, 'og_description', '')),
@@ -568,17 +605,19 @@ final class SeoOperationsService
 
     public function growthSignal(string $type, object $record): string
     {
-        $seoMeta = $this->seoMetaFor($record);
-
         if (! $this->isPublishedPublic($type, $record)) {
             return __('ops.custom_pages.seo_operations.growth_signals.not_discoverable');
+        }
+
+        if ($this->isNonCurrentPublishedJob($type, $record)) {
+            return __('ops.custom_pages.seo_operations.issue_labels.non_current_career_job');
         }
 
         if (! (bool) data_get($record, 'is_indexable')) {
             return __('ops.custom_pages.seo_operations.growth_signals.blocked_by_noindex');
         }
 
-        if ($this->hasGrowthBlocker($type, $record, $seoMeta)) {
+        if ($this->hasGrowthBlocker($type, $record, $this->seoMetaForChecks($type, $record))) {
             return __('ops.custom_pages.seo_operations.growth_signals.published_blockers');
         }
 
@@ -625,6 +664,44 @@ final class SeoOperationsService
         $this->fillMetadata($type, $record);
 
         return $this->seoMetaFor($record instanceof Article || $record instanceof CareerGuide || $record instanceof CareerJob ? $record->fresh('seoMeta') : $record);
+    }
+
+    public function isNonCurrentPublishedJob(string $type, object $record): bool
+    {
+        return $type === 'job'
+            && $record instanceof CareerJob
+            && $this->isPublishedPublic($type, $record)
+            && ! isset($this->careerAuthority->authority()['entries'][$record->slug][$record->locale]);
+    }
+
+    private function seoMetaForChecks(string $type, object $record): ?object
+    {
+        $stored = $this->seoMetaFor($record);
+        if (! $this->isPublishedPublic($type, $record)) {
+            return $stored;
+        }
+
+        $projection = match (true) {
+            $type === 'guide' && $record instanceof CareerGuide => $this->careerGuideSeoService->buildSeoPayload($record),
+            $type === 'job' && $record instanceof CareerJob => $this->careerJobSeoService->buildMeta($record, $record->locale, frontendDetailAvailable: true),
+            default => null,
+        };
+        if ($projection === null) {
+            return $stored;
+        }
+
+        return (object) [
+            'seo_title' => $projection['title'],
+            'seo_description' => $projection['description'],
+            // Keep explicitly divergent stored overrides visible for cleanup.
+            'canonical_url' => filled($stored?->canonical_url) ? $stored->canonical_url : $projection['canonical'],
+            'robots' => filled($stored?->robots) ? $stored->robots : $projection['robots'],
+            'og_title' => $projection['og']['title'],
+            'og_description' => $projection['og']['description'],
+            'og_image_url' => $projection['og']['image'],
+            'twitter_title' => $projection['twitter']['title'],
+            'twitter_description' => $projection['twitter']['description'],
+        ];
     }
 
     private function seoMetaFor(object $record): ?object

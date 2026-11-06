@@ -10,6 +10,7 @@ use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleRevision;
 use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
 use App\Models\CareerGuide;
 use App\Models\CareerGuideSeoMeta;
@@ -343,14 +344,64 @@ final class PostReleaseObservabilityPageTest extends TestCase
         Livewire::test(PostReleaseObservabilityPage::class)
             ->assertOk()
             ->assertSet('headlineFields.0.value', '3')
-            ->assertSet('headlineFields.1.value', '1')
+            ->assertSet('headlineFields.1.value', '0')
             ->assertSet('headlineFields.2.value', '1')
             ->assertSet('headlineFields.3.value', '1')
-            ->assertSet('headlineFields.4.value', '0')
-            ->assertSet('headlineFields.5.value', '2')
-            ->assertSet('headlineFields.6.value', '1')
+            ->assertSet('headlineFields.4.value', '1')
+            ->assertSet('headlineFields.5.value', '0')
+            ->assertSet('headlineFields.6.value', '2')
+            ->assertSet('headlineFields.7.value', '1')
             ->assertSet('releaseCards.0.title', 'Observability Article')
             ->assertCount('auditCards', 4);
+    }
+
+    public function test_recent_article_updates_count_only_live_global_revisions_after_first_publication(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_RELEASE]);
+        $org = $this->createOrganization('Release counts');
+        $this->withSession($this->opsSession($admin, $org))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
+
+        $now = Carbon::now();
+        $old = $now->copy()->subDays(2);
+        $recent = $now->copy()->subHours(3);
+        $future = $now->copy()->addHours(3);
+        $cases = [
+            'current' => [0, true, $old, $recent],
+            'old' => [0, true, $old->copy()->subDay(), $old],
+            'first-publish' => [0, true, $recent, $recent],
+            'private' => [0, false, $old, $recent],
+            'future' => [0, true, $old, $future],
+            'other-org' => [(int) $org->id, true, $old, $recent],
+            'wrong-article' => [0, true, $old, $recent],
+        ];
+
+        $updatedRevision = null;
+        foreach ($cases as $slug => [$orgId, $public, $original, $updated]) {
+            $article = Article::query()->withoutGlobalScopes()->create([
+                'org_id' => $orgId, 'slug' => $slug, 'locale' => 'en', 'title' => $slug,
+                'content_md' => 'Body', 'status' => 'published', 'is_public' => $public, 'published_at' => $original,
+            ]);
+            $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->create([
+                'org_id' => $orgId, 'article_id' => $article->id, 'translation_group_id' => $article->translation_group_id,
+                'locale' => 'en', 'revision_number' => 1, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+                'title' => $slug, 'content_md' => 'Body', 'published_at' => $updated,
+            ]);
+            if ($slug === 'current') {
+                $updatedRevision = $revision->id;
+            }
+            $article->forceFill([
+                'published_revision_id' => $slug === 'wrong-article' ? $updatedRevision : $revision->id,
+            ])->saveQuietly();
+        }
+
+        Livewire::test(PostReleaseObservabilityPage::class)
+            ->assertOk()
+            ->assertSee('First publishes in last 24h')
+            ->assertSee('Public article updates in last 24h')
+            ->assertSet('headlineFields.0.value', '0')
+            ->assertSet('headlineFields.1.value', '1');
     }
 
     public function test_controlled_publish_service_triggers_failure_alerts_and_observability_ignores_other_org_rows(): void
@@ -480,9 +531,9 @@ final class PostReleaseObservabilityPageTest extends TestCase
 
         Livewire::test(PostReleaseObservabilityPage::class)
             ->assertOk()
-            ->assertSet('headlineFields.1.value', '1')
             ->assertSet('headlineFields.2.value', '1')
-            ->assertSet('headlineFields.4.value', '1')
+            ->assertSet('headlineFields.3.value', '1')
+            ->assertSet('headlineFields.5.value', '1')
             ->assertSet('auditCards.0.status', 'success');
     }
 
