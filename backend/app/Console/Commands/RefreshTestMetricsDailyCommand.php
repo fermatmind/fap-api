@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Analytics\TestMetricsDailyBuilder;
+use App\Services\Analytics\TestMetricsDay;
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ final class RefreshTestMetricsDailyCommand extends Command
         {--to= : Inclusive end date (Y-m-d)}
         {--scale=* : Limit refresh to one or more scale codes}
         {--org=* : Limit refresh to one or more org ids}
-        {--scheduled-current-day : Scheduler-only mode that refreshes today for all orgs and all scales}
+        {--scheduled-current-day : Scheduler-only mode that refreshes the current day and finalizes the previous day for all orgs and scales}
         {--dry-run : Preview the aggregation without writing rows}
         {--confirm-write= : Required exact confirmation token for non-dry-run refresh writes}';
 
@@ -33,12 +34,14 @@ final class RefreshTestMetricsDailyCommand extends Command
     public function handle(): int
     {
         $scheduledCurrentDay = (bool) $this->option('scheduled-current-day');
-        $today = now()->toDateString();
+        $today = TestMetricsDay::dateFor(now());
+        $currentDay = CarbonImmutable::parse($today, 'UTC');
+        // Rebuild both sides of the cutover and include the previous day's final scheduler interval.
         $from = $scheduledCurrentDay
-            ? CarbonImmutable::parse($today)->startOfDay()
+            ? ($today >= TestMetricsDay::BEIJING_CUTOVER ? $currentDay->subDay() : $currentDay)
             : $this->parseDateOption((string) $this->option('from'), $today);
         $to = $scheduledCurrentDay
-            ? CarbonImmutable::parse($today)->startOfDay()
+            ? $currentDay
             : $this->parseDateOption((string) $this->option('to'), $today);
 
         if ($from->greaterThan($to)) {

@@ -314,6 +314,7 @@ return [
         'operational_stability' => 'Operational Stability',
         'webhook_monitoring' => 'Webhook Monitoring',
         'funnel_snapshot_7d' => '7-Day Funnel Snapshot',
+        'test_kpi_refresh_time' => 'Last summarized :time (UTC+08:00)',
         'test_kpi_overview' => 'Test KPI Overview',
         'test_kpi_daily_detail' => 'Today By-Test Detail',
         'test_kpi_daily_detail_desc' => 'Always reads sitewide org_id=0 and shows today single-day test volume by test, form, and locale.',

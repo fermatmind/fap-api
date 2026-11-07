@@ -131,6 +131,53 @@ final class RefreshTestMetricsDailyCommandTest extends TestCase
         }
     }
 
+    public function test_scheduled_refresh_reassigns_beijing_morning_without_double_counting_the_cutover(): void
+    {
+        Carbon::setTestNow('2026-11-06 21:15:00 UTC');
+
+        try {
+            $before = CarbonImmutable::parse('2026-11-06 15:59:59 UTC');
+            $midnight = $before->addSecond();
+            $morning = CarbonImmutable::parse('2026-11-06 23:59:59 UTC');
+            $nextMidnight = CarbonImmutable::parse('2026-11-07 16:00:00 UTC');
+            $previousId = (string) Str::uuid();
+            $midnightId = (string) Str::uuid();
+            $morningId = (string) Str::uuid();
+            $nextId = (string) Str::uuid();
+            $this->insertAttempt($previousId, 12, 'MBTI', 'MBTI', 'zh-CN', $before, $before);
+            $this->insertAttempt($midnightId, 12, 'MBTI', 'MBTI', 'zh-CN', $midnight, $midnight);
+            $this->insertAttempt($morningId, 12, 'MBTI', 'MBTI', 'zh-CN', $morning, $morning);
+            $this->insertAttempt($nextId, 12, 'MBTI', 'MBTI', 'zh-CN', $nextMidnight, $nextMidnight);
+            $this->insertSubmission($midnightId, 12, 'succeeded', $midnight->addSecond());
+            $this->insertSubmission($morningId, 12, 'failed', $morning);
+
+            $this->artisan('analytics:refresh-test-metrics-daily', [
+                '--scheduled-current-day' => true,
+            ])
+                ->expectsOutputToContain('from=2026-11-06')
+                ->expectsOutputToContain('to=2026-11-07')
+                ->assertExitCode(0);
+
+            $this->assertDatabaseHas('analytics_test_metrics_daily', [
+                'day' => '2026-11-06',
+                'org_id' => 12,
+                'started_attempts' => 1,
+                'successful_attempts' => 1,
+                'failed_attempts' => 0,
+            ]);
+            $this->assertDatabaseHas('analytics_test_metrics_daily', [
+                'day' => '2026-11-07',
+                'org_id' => 12,
+                'started_attempts' => 2,
+                'successful_attempts' => 2,
+                'failed_attempts' => 1,
+            ]);
+            $this->assertDatabaseMissing('analytics_test_metrics_daily', ['day' => '2026-11-08']);
+        } finally {
+            Carbon::setTestNow();
+        }
+    }
+
     public function test_scheduled_current_day_blocks_manual_scope_overrides(): void
     {
         Carbon::setTestNow('2026-06-17 10:15:00');

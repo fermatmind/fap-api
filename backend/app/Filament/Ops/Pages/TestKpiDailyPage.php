@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Pages;
 
 use App\Filament\Ops\Support\OpsMetricsAccess;
+use App\Services\Analytics\TestMetricsDay;
 use App\Support\OrgContext;
 use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
@@ -65,8 +66,8 @@ final class TestKpiDailyPage extends Page
 
     public function mount(): void
     {
-        $this->fromDate = now()->subDays(13)->toDateString();
-        $this->toDate = now()->toDateString();
+        $this->toDate = TestMetricsDay::dateFor(now());
+        $this->fromDate = CarbonImmutable::parse($this->toDate, 'UTC')->subDays(13)->toDateString();
         $this->scope = $this->normalizeScope(request()->query('scope', self::SCOPE_GLOBAL_ORG0));
         $this->refreshPage();
     }

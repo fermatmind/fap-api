@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Widgets\TestKpiDailyInlineWidget;
 use App\Filament\Ops\Widgets\TestKpiSummaryWidget;
 use App\Support\OrgContext;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,7 +33,10 @@ final class TestKpiSummaryWidgetTest extends TestCase
             $valuesByLabel = [];
             foreach ($this->widgetStats() as $stat) {
                 $valuesByLabel[(string) $stat->getLabel()] = (string) $stat->getValue();
-                $this->assertNull($stat->getDescription());
+                $expectedDescription = $stat->getLabel() === __('ops.widgets.test_success_today')
+                    ? __('ops.widgets.test_kpi_refresh_time', ['time' => '2026-06-20 18:00:00'])
+                    : null;
+                $this->assertSame($expectedDescription, $stat->getDescription());
                 $this->assertSame('ops-stat-centered', $stat->getExtraAttributes()['class'] ?? null);
             }
 
@@ -40,6 +44,32 @@ final class TestKpiSummaryWidgetTest extends TestCase
             $this->assertSame('3', $valuesByLabel[__('ops.widgets.test_failures_today')] ?? null);
             $this->assertSame('23', $valuesByLabel[__('ops.widgets.site_success_cumulative')] ?? null);
             $this->assertSame('6', $valuesByLabel[__('ops.widgets.site_failures_cumulative')] ?? null);
+        } finally {
+            Carbon::setTestNow();
+        }
+    }
+
+    public function test_both_widgets_show_the_beijing_day_and_refresh_time_before_utc_midnight(): void
+    {
+        Carbon::setTestNow('2026-11-06 18:30:00 UTC');
+
+        try {
+            $this->insertDailyMetric('2026-11-06', 0, 'MBTI', 'zh-CN', 8, 0, 8);
+            $this->insertDailyMetric('2026-11-07', 0, 'MBTI', 'zh-CN', 3, 0, 3);
+            DB::table('analytics_test_metrics_daily')->where('day', '2026-11-07')
+                ->update(['last_refreshed_at' => '2026-11-06 18:15:07']);
+
+            $summary = $this->widgetStats()[0];
+            $detail = new ReflectionMethod(TestKpiDailyInlineWidget::class, 'getViewData')
+                ->invoke(app(TestKpiDailyInlineWidget::class));
+            $refresh = __('ops.widgets.test_kpi_refresh_time', ['time' => '2026-11-07 02:15:07']);
+
+            $this->assertSame('3', (string) $summary->getValue());
+            $this->assertSame($refresh, $summary->getDescription());
+            $this->assertSame($refresh, $detail['refreshDescription']);
+            $this->assertCount(1, $detail['rows']);
+            $this->assertSame('2026-11-07', $detail['rows'][0]['day']);
+            $this->assertSame(3, $detail['rows'][0]['successful_attempts']);
         } finally {
             Carbon::setTestNow();
         }

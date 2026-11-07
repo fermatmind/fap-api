@@ -40,14 +40,18 @@ final class TestMetricsDailyBuilder
         array $orgIds = [],
         array $scaleCodes = [],
     ): array {
-        $fromAt = CarbonImmutable::parse($from)->startOfDay();
-        $toAt = CarbonImmutable::parse($to)->endOfDay();
+        $fromDate = $from->format('Y-m-d');
+        $toDate = $to->format('Y-m-d');
+        $fromAt = TestMetricsDay::startsAtUtc($fromDate);
+        $untilAt = TestMetricsDay::startsAtUtc(
+            CarbonImmutable::parse($toDate, 'UTC')->addDay()->toDateString()
+        );
         $normalizedOrgIds = $this->normalizeOrgIds($orgIds);
         $normalizedScaleCodes = $this->normalizeScaleCodes($scaleCodes);
 
-        $started = $this->collectStartedEntries($fromAt, $toAt, $normalizedOrgIds, $normalizedScaleCodes);
-        $successful = $this->collectSuccessfulEntries($fromAt, $toAt, $normalizedOrgIds, $normalizedScaleCodes);
-        $failed = $this->collectFailedEntries($fromAt, $toAt, $normalizedOrgIds, $normalizedScaleCodes);
+        $started = $this->collectStartedEntries($fromAt, $untilAt, $normalizedOrgIds, $normalizedScaleCodes);
+        $successful = $this->collectSuccessfulEntries($fromAt, $untilAt, $normalizedOrgIds, $normalizedScaleCodes);
+        $failed = $this->collectFailedEntries($fromAt, $untilAt, $normalizedOrgIds, $normalizedScaleCodes);
 
         $attemptIds = $this->candidateAttemptIds($started, $successful, $failed);
         $dimensions = $this->loadAttemptDimensions($attemptIds, $normalizedOrgIds, $normalizedScaleCodes);
@@ -58,8 +62,8 @@ final class TestMetricsDailyBuilder
             'attempted_rows' => count($rows),
             'org_scope' => $normalizedOrgIds,
             'scale_scope' => $normalizedScaleCodes,
-            'from' => $fromAt->toDateString(),
-            'to' => $toAt->toDateString(),
+            'from' => $fromDate,
+            'to' => $toDate,
         ];
     }
 
@@ -286,7 +290,7 @@ final class TestMetricsDailyBuilder
      */
     private function collectStartedEntries(
         CarbonImmutable $fromAt,
-        CarbonImmutable $toAt,
+        CarbonImmutable $untilAt,
         array $orgIds,
         array $scaleCodes
     ): array {
@@ -296,7 +300,8 @@ final class TestMetricsDailyBuilder
 
         $timeColumn = SchemaBaseline::hasColumn('attempts', 'started_at') ? 'started_at' : 'created_at';
         $query = DB::table('attempts')
-            ->whereBetween($timeColumn, [$fromAt, $toAt])
+            ->where($timeColumn, '>=', $fromAt)
+            ->where($timeColumn, '<', $untilAt)
             ->select(['id as attempt_id', 'anon_id', $timeColumn.' as metric_at']);
 
         $this->applyOrgFilter($query, 'attempts', $orgIds);
@@ -312,7 +317,7 @@ final class TestMetricsDailyBuilder
      */
     private function collectSuccessfulEntries(
         CarbonImmutable $fromAt,
-        CarbonImmutable $toAt,
+        CarbonImmutable $untilAt,
         array $orgIds,
         array $scaleCodes
     ): array {
@@ -320,7 +325,8 @@ final class TestMetricsDailyBuilder
 
         if (SchemaBaseline::hasTable('attempts') && SchemaBaseline::hasColumn('attempts', 'submitted_at')) {
             $query = DB::table('attempts')
-                ->whereBetween('submitted_at', [$fromAt, $toAt])
+                ->where('submitted_at', '>=', $fromAt)
+                ->where('submitted_at', '<', $untilAt)
                 ->select(['id as attempt_id', 'anon_id', 'submitted_at as metric_at']);
             $this->applyOrgFilter($query, 'attempts', $orgIds);
             $this->applyScaleFilter($query, 'attempts', $scaleCodes);
@@ -332,7 +338,8 @@ final class TestMetricsDailyBuilder
             $query = DB::table('attempt_submissions')
                 ->join('attempts', 'attempts.id', '=', 'attempt_submissions.attempt_id')
                 ->whereIn('attempt_submissions.state', self::SUCCESS_STATES)
-                ->whereBetween(DB::raw($timeExpression), [$fromAt, $toAt])
+                ->where(DB::raw($timeExpression), '>=', $fromAt)
+                ->where(DB::raw($timeExpression), '<', $untilAt)
                 ->select([
                     'attempt_submissions.attempt_id as attempt_id',
                     'attempts.anon_id',
@@ -347,7 +354,8 @@ final class TestMetricsDailyBuilder
             $timeColumn = SchemaBaseline::hasColumn('results', 'computed_at') ? 'computed_at' : 'created_at';
             $query = DB::table('results')
                 ->join('attempts', 'attempts.id', '=', 'results.attempt_id')
-                ->whereBetween('results.'.$timeColumn, [$fromAt, $toAt])
+                ->where('results.'.$timeColumn, '>=', $fromAt)
+                ->where('results.'.$timeColumn, '<', $untilAt)
                 ->select([
                     'results.attempt_id as attempt_id',
                     'attempts.anon_id',
@@ -368,7 +376,7 @@ final class TestMetricsDailyBuilder
      */
     private function collectFailedEntries(
         CarbonImmutable $fromAt,
-        CarbonImmutable $toAt,
+        CarbonImmutable $untilAt,
         array $orgIds,
         array $scaleCodes
     ): array {
@@ -380,7 +388,8 @@ final class TestMetricsDailyBuilder
         $query = DB::table('attempt_submissions')
             ->join('attempts', 'attempts.id', '=', 'attempt_submissions.attempt_id')
             ->where('attempt_submissions.state', 'failed')
-            ->whereBetween(DB::raw($timeExpression), [$fromAt, $toAt])
+            ->where(DB::raw($timeExpression), '>=', $fromAt)
+            ->where(DB::raw($timeExpression), '<', $untilAt)
             ->select([
                 'attempt_submissions.attempt_id as attempt_id',
                 'attempts.anon_id',
@@ -411,7 +420,7 @@ final class TestMetricsDailyBuilder
                 continue;
             }
 
-            $day = CarbonImmutable::parse($metricAt)->toDateString();
+            $day = TestMetricsDay::dateFor($metricAt);
             $entries[$attemptId.'|'.$day] = [
                 'attempt_id' => $attemptId,
                 'day' => $day,

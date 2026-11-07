@@ -314,6 +314,7 @@ return [
         'operational_stability' => '运行稳定性',
         'webhook_monitoring' => 'Webhook 监控',
         'funnel_snapshot_7d' => '7 天漏斗快照',
+        'test_kpi_refresh_time' => '上次汇总 :time（北京时间）',
         'test_kpi_overview' => '测试量总览',
         'test_kpi_daily_detail' => '今日各测试明细',
         'test_kpi_daily_detail_desc' => '固定读取全站 org_id=0，按测试、表单和语言展示今日单日测试次数。',

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Widgets;
 
 use App\Filament\Ops\Support\OpsMetricsAccess;
+use App\Services\Analytics\TestMetricsDay;
 use App\Support\SchemaBaseline;
 use Filament\Widgets\Widget;
 use Illuminate\Support\Collection;
@@ -35,13 +36,14 @@ final class TestKpiDailyInlineWidget extends Widget
         if (! SchemaBaseline::hasTable('analytics_test_metrics_daily')) {
             return [
                 'rows' => [],
+                'refreshDescription' => null,
                 'warning' => __('ops.pages.test_kpi_daily.missing_read_model'),
             ];
         }
 
         $rows = DB::table('analytics_test_metrics_daily')
             ->where('org_id', self::GLOBAL_ORG_ID)
-            ->where('day', now()->toDateString())
+            ->where('day', TestMetricsDay::dateFor(now()))
             ->select([
                 'day',
                 'scale_code',
@@ -53,6 +55,7 @@ final class TestKpiDailyInlineWidget extends Widget
             ->selectRaw('SUM(successful_attempts) as successful_attempts')
             ->selectRaw('SUM(failed_attempts) as failed_attempts')
             ->selectRaw('SUM(total_attempts) as total_attempts')
+            ->selectRaw('MAX(last_refreshed_at) as last_refreshed_at')
             ->groupBy('day', 'scale_code', 'scale_code_v2', 'form_code', 'locale')
             ->orderByDesc('total_attempts')
             ->orderBy('scale_code')
@@ -63,6 +66,7 @@ final class TestKpiDailyInlineWidget extends Widget
 
         return [
             'rows' => $this->formatRows($rows),
+            'refreshDescription' => TestMetricsDay::refreshDescription($rows->max('last_refreshed_at')),
             'warning' => $rows->isEmpty()
                 ? __('ops.widgets.no_test_kpi_daily_rows')
                 : null,

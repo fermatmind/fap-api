@@ -2,6 +2,9 @@
     <section class="ops-inline-data-section">
         <div class="ops-inline-data-section__header">
             <h2>{{ __('ops.widgets.test_kpi_daily_detail') }}</h2>
+            @if ($refreshDescription !== null)
+                <p>{{ $refreshDescription }}</p>
+            @endif
         </div>
 
         @if ($warning !== null)

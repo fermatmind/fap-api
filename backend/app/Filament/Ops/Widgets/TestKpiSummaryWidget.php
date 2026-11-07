@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Widgets;
 
 use App\Filament\Ops\Support\OpsMetricsAccess;
+use App\Services\Analytics\TestMetricsDay;
 use App\Support\SchemaBaseline;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -32,7 +33,7 @@ final class TestKpiSummaryWidget extends BaseWidget
             return [$this->emptyReadModelStat()];
         }
 
-        $today = now()->toDateString();
+        $today = TestMetricsDay::dateFor(now());
         $query = DB::table('analytics_test_metrics_daily')
             ->where('org_id', self::GLOBAL_ORG_ID);
 
@@ -40,6 +41,7 @@ final class TestKpiSummaryWidget extends BaseWidget
             ->selectRaw('COUNT(*) as row_count')
             ->selectRaw('SUM(CASE WHEN day = ? THEN successful_attempts ELSE 0 END) as today_successful_attempts', [$today])
             ->selectRaw('SUM(CASE WHEN day = ? THEN failed_attempts ELSE 0 END) as today_failed_attempts', [$today])
+            ->selectRaw('MAX(CASE WHEN day = ? THEN last_refreshed_at END) as today_last_refreshed_at', [$today])
             ->selectRaw('SUM(successful_attempts) as cumulative_successful_attempts')
             ->selectRaw('SUM(failed_attempts) as cumulative_failed_attempts')
             ->first();
@@ -55,6 +57,7 @@ final class TestKpiSummaryWidget extends BaseWidget
 
         return [
             Stat::make(__('ops.widgets.test_success_today'), (string) $todaySuccess)
+                ->description(TestMetricsDay::refreshDescription($row->today_last_refreshed_at))
                 ->extraAttributes(['class' => 'ops-stat-centered'])
                 ->color($todaySuccess > 0 ? 'success' : 'gray'),
             Stat::make(__('ops.widgets.test_failures_today'), (string) $todayFailures)
