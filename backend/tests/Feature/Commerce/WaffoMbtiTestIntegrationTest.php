@@ -82,7 +82,7 @@ final class WaffoMbtiTestIntegrationTest extends TestCase
         return ['id' => 'PAY_fixture', 'eventId' => 'PAY_fixture', 'timestamp' => now()->toIso8601String(),
             'eventType' => $type, 'mode' => 'test', 'storeId' => 'STO_test', 'data' => [
                 'orderId' => 'ORD_fixture', 'paymentId' => 'PAY_fixture', 'orderStatus' => 'completed', 'paymentStatus' => 'succeeded',
-                'currency' => 'USD', 'chargedAmount' => '1.99', 'amount' => '1.99', 'refundedAmount' => '1.99',
+                'refundStatus' => 'succeeded', 'currency' => 'USD', 'chargedAmount' => '1.99', 'amount' => '1.99', 'refundedAmount' => '1.99',
                 'originalPayment' => ['total' => '1.99'], 'orderMerchantExternalId' => $order,
                 'orderMetadata' => ['fap_order_no' => $order, 'fap_attempt_id' => $attempt, 'fap_product_id' => 'PROD_fixture'],
             ]];
@@ -126,7 +126,7 @@ final class WaffoMbtiTestIntegrationTest extends TestCase
         $payload = $this->event($order, $attempt);
         $this->deliver($payload, tamper: true)->assertStatus(401);
         $this->deliver($payload, (int) floor(microtime(true) * 1000) - 46 * 60 * 1000)->assertStatus(401);
-        foreach ([['mode', 'prod'], ['storeId', 'STO_other'], ['data.currency', 'CNY'], ['data.chargedAmount', '1.98'], ['data.chargedAmount', 1.99]] as [$path, $value]) {
+        foreach ([['mode', 'prod'], ['storeId', 'STO_other'], ['data.currency', 'CNY'], ['data.chargedAmount', '1.98'], ['data.chargedAmount', 1.99], ['data.chargedAmount', null], ['data.orderId', '']] as [$path, $value]) {
             $bad = $payload;
             data_set($bad, $path, $value);
             $bad['eventId'] = Str::uuid()->toString();
@@ -171,6 +171,10 @@ final class WaffoMbtiTestIntegrationTest extends TestCase
             $p['data']['refundedAmount'] = '0.99';
             $this->deliver($p)->assertJsonPath('ok', false);
         }
+        $missing = $this->event($order, $attempt, 'refund.succeeded');
+        $missing['eventId'] = 'REF_missing_actual';
+        unset($missing['data']['refundedAmount']);
+        $this->deliver($missing)->assertJsonPath('ok', false);
         $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $order)->where('status', 'active')->count());
     }
 

@@ -49,13 +49,14 @@ final class WaffoGateway implements PaymentGatewayInterface
             || ($meta['fap_product_id'] ?? '') !== config('payments.waffo.product_id')
             || ($meta['fap_order_no'] ?? '') !== ($data['orderMerchantExternalId'] ?? null)
             || ($data['currency'] ?? '') !== 'USD'
+            || ! is_string($data['orderId'] ?? null) || $data['orderId'] === ''
             || ! is_string($payload['eventId'] ?? null) || $payload['eventId'] === '') {
             return [];
         }
         $refund = $event === 'refund.succeeded';
-        $amount = self::cents($refund ? ($data['originalPayment']['total'] ?? null) : ($data['chargedAmount'] ?? $data['amount'] ?? null));
-        $refundAmount = $refund ? self::cents($data['refundedAmount'] ?? $data['amount'] ?? null) : 0;
-        if ($amount === null || $amount <= 0 || ($refund && $refundAmount !== $amount)
+        $amount = self::cents($refund ? ($data['originalPayment']['total'] ?? null) : ($data['chargedAmount'] ?? null));
+        $refundAmount = $refund ? self::cents($data['refundedAmount'] ?? null) : 0;
+        if ($amount === null || $amount <= 0 || ($refund && ($refundAmount !== $amount || ($data['refundStatus'] ?? '') !== 'succeeded'))
             || (! $refund && (($data['paymentStatus'] ?? '') !== 'succeeded' || ($data['orderStatus'] ?? '') !== 'completed'))) {
             return [];
         }
