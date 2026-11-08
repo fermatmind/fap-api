@@ -1,6 +1,6 @@
 {
   "schema": "fermatmind.public_support_contact.review.v1",
-  "candidate_sha256": "c24f1101e7cd3acf2c44d7906b774593068bc9fc80d03dcd5a8e189250352c90",
+  "candidate_sha256": "e1acde1860643d11d9fa30ed77b1410d951ee9a2977ca090077ef1ea5d7d1788",
   "verdict": "PASS",
   "pages": {
     "CONTACT-TERMS-ZH": "PASS",
@@ -8,7 +8,11 @@
     "CONTACT-REFUND-ZH": "PASS",
     "CONTACT-REFUND-EN": "PASS",
     "CONTACT-CONTACT-ZH": "PASS",
-    "CONTACT-CONTACT-EN": "PASS"
+    "CONTACT-CONTACT-EN": "PASS",
+    "CONTACT-UNLOCK-ZH": "PASS",
+    "CONTACT-UNLOCK-EN": "PASS",
+    "CONTACT-RECOVERY-ZH": "PASS",
+    "CONTACT-RECOVERY-EN": "PASS"
   },
-  "review_scope": "Parent review of the owner-explicitly-authorized public Outlook support/refund address across six existing bilingual terms, refund and contact pages. Only contact text/FAQ answers and the native support_contact field change. Original pricing/refund eligibility, titles, publication flags, sources and drafts remain protected by the native publisher."
+  "review_scope": "Parent review of the owner-explicitly-authorized public Outlook support/refund address across ten existing bilingual terms, refund, contact, unlock-failure and result-recovery pages. The first six approved contact changes are retained and remain no-op when already published; four additional existing help support_contact fields are synchronized. Pricing/refund rules, titles, publication flags, sources and drafts remain protected by the unchanged native publisher."
 }

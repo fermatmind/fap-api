@@ -812,18 +812,18 @@ final class PublicContent53Package
         $review = json_decode($reviewBytes, true, 64, JSON_THROW_ON_ERROR);
         $rows = $package['candidates'] ?? [];
         $targets = [];
-        foreach (['TERMS' => 'terms', 'REFUND' => 'help-payment-refund', 'CONTACT' => 'help-contact'] as $key => $slug) {
+        foreach (['TERMS' => 'terms', 'REFUND' => 'help-payment-refund', 'CONTACT' => 'help-contact', 'UNLOCK' => 'help-unlock-failure', 'RECOVERY' => 'help-result-recovery'] as $key => $slug) {
             foreach (['ZH' => 'zh-CN', 'EN' => 'en'] as $suffix => $locale) {
                 $targets['CONTACT-'.$key.'-'.$suffix] = ['org_id' => 0, 'slug' => $slug, 'locale' => $locale];
             }
         }
         $email = $rows[0]['snapshot']['support_contact'] ?? '';
         if (($package['schema'] ?? null) !== 'fermatmind.public_support_contact.v1'
-            || ! is_array($rows) || ! array_is_list($rows) || count($rows) !== 6
+            || ! is_array($rows) || ! array_is_list($rows) || count($rows) !== 10
             || ! is_string($email) || filter_var($email, FILTER_VALIDATE_EMAIL) === false
             || ($review['schema'] ?? null) !== 'fermatmind.public_support_contact.review.v1'
             || ($review['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
-            || ($review['verdict'] ?? null) !== 'PASS' || count($review['pages'] ?? []) !== 6) {
+            || ($review['verdict'] ?? null) !== 'PASS' || count($review['pages'] ?? []) !== 10) {
             throw new DomainException('public_content_53_support_contact_review_invalid');
         }
         $seen = [];

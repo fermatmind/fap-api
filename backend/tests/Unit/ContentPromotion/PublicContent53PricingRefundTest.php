@@ -27,37 +27,41 @@ final class PublicContent53PricingRefundTest extends TestCase
 
     public static function environments(): array
     {
-        return [['staging', 'pricing-refund'], ['production', 'pricing-refund'], ['staging', 'support-contact'], ['production', 'support-contact']];
+        return [['staging', 'pricing-refund'], ['production', 'pricing-refund'], ['staging', 'support-contact'], ['production', 'support-contact'], ['staging', 'support-contact', true], ['production', 'support-contact', true]];
     }
 
     #[DataProvider('environments')]
-    public function test_native_publication_replay_restore_and_new_owner_preserve_drafts_and_controls(string $environment, string $selection): void
+    public function test_native_publication_replay_restore_and_new_owner_preserve_drafts_and_controls(string $environment, string $selection, bool $existingContactPublished = false): void
     {
         $this->selection = $selection;
         config(['content_promotion.public_content_53_environment' => $environment]);
-        $this->seedPages();
+        $this->seedPages($existingContactPublished);
         $states = app(PublicContent53State::class);
         $writer = app(PublicContent53Writer::class);
         $rows = $this->rows();
+        $expectedWrites = count(array_filter($rows, static fn (array $row): bool => PublicContent53Package::before($row) !== $row['snapshot']));
+        if ($existingContactPublished) {
+            $expectedWrites -= 6;
+        }
         $before = $states->read($this->digest());
         $immutable = CmsTranslationRevision::query()->orderBy('id')->get()->map->getRawOriginal()->all();
         $states->assertBaseline($rows);
         $after = DB::transaction(fn () => $writer->publish($this->context(), $before));
-        self::assertSame(count($rows), $after['written_count']);
+        self::assertSame($expectedWrites, $after['written_count']);
         Cache::flush();
         $states->assertPublished($rows, $after['state']);
         self::assertSame(0, DB::transaction(fn () => $writer->publish($this->context(), $after['state']))['written_count']);
         foreach ($immutable as $revision) {
             self::assertSame($revision, CmsTranslationRevision::findOrFail($revision['id'])->getRawOriginal());
         }
-        foreach (ContentPage::query()->where('locale', 'en')->whereIn('slug', ['terms', 'policies', 'help-payment-refund', 'help-faq', 'help-contact'])->get() as $page) {
+        foreach (ContentPage::query()->where('locale', 'en')->whereIn('slug', ['terms', 'policies', 'help-payment-refund', 'help-faq', 'help-contact', 'help-unlock-failure', 'help-result-recovery'])->get() as $page) {
             self::assertSame(ContentPage::findOrFail($page->source_content_id)->source_version_hash, $page->translated_from_version_hash);
         }
         DB::transaction(fn () => $writer->restore($this->context(), $before, $after['state']));
         Cache::flush();
         self::assertSame($before, $states->read($this->digest()));
         $again = DB::transaction(fn () => $writer->publish($this->context('f'), $before));
-        self::assertSame(count($rows), $again['written_count']);
+        self::assertSame($expectedWrites, $again['written_count']);
         Cache::flush();
         $states->assertPublished($rows, $again['state']);
         self::assertDatabaseCount('orders', 0);
@@ -170,13 +174,14 @@ final class PublicContent53PricingRefundTest extends TestCase
         return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->digest(), 'W3', 'PUBLIC-CONTENT-53', str_repeat($owner, 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), count($this->rows()), str_repeat('e', 64));
     }
 
-    private function seedPages(): void
+    private function seedPages(bool $existingContactPublished = false): void
     {
         $sources = [];
         foreach ($this->rows() as $row) {
             $locale = $row['identity']['locale'];
             $slug = $row['identity']['slug'];
-            $copy = PublicContent53Package::before($row);
+            $copy = $existingContactPublished && ! in_array($slug, ['help-unlock-failure', 'help-result-recovery'], true)
+                ? $row['snapshot'] : PublicContent53Package::before($row);
             $page = ContentPage::query()->create($row['identity'] + $copy + [
                 'status' => 'published', 'is_public' => true, 'is_indexable' => $slug !== 'help-payment-refund',
                 'schema_enabled' => $slug === 'help-payment-refund', 'faq_schema_eligible' => true, 'schema_eligibility_reviewed_at' => now(),
@@ -195,6 +200,7 @@ final class PublicContent53PricingRefundTest extends TestCase
             $page->forceFill([
                 'translation_group_id' => 'pricing-policy-'.$slug, 'source_locale' => 'zh-CN',
                 'source_content_id' => $locale === 'en' ? $sources[$slug] : null,
+                'translated_from_version_hash' => $locale === 'en' ? ContentPage::findOrFail($sources[$slug])->source_version_hash : null,
             ])->saveQuietly();
             $revision = CmsTranslationRevision::query()->create([
                 'org_id' => 0, 'content_type' => 'content_page', 'content_id' => $page->id,
