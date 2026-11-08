@@ -21,7 +21,7 @@ final class TraditionalContentPagePublication
 
     public const FIELDS = ['title', 'kicker', 'summary', 'seo_title', 'meta_description', 'seo_description', 'content_md', 'headings', 'faq_items'];
 
-    private const SLUGS = ['about', 'brand', 'charter', 'careers'];
+    private const SLUGS = ['about', 'brand', 'charter', 'careers', 'privacy', 'terms', 'method-boundaries', 'science'];
 
     public function __construct(
         private readonly ContentPageTranslationAdapter $adapter,
@@ -69,14 +69,17 @@ final class TraditionalContentPagePublication
                     || trim((string) $copy['seo_title']) === '' || trim((string) $copy['meta_description']) === ''
                     || ! is_array($copy['headings']) || ! array_is_list($copy['headings'])
                     || array_filter($copy['headings'], static fn ($heading): bool => ! is_string($heading)) !== [] || $copy['faq_items'] !== []
-                    || preg_match('/[<>`\[\]]|^\s*~{3,}|^\s*\|/m', $copy['content_md']) === 1) {
+                    || preg_match('/[<>`]|^\s*~{3,}|^\s*\|/m', $copy['content_md']) === 1) {
                     throw new DomainException('traditional_page_format_invalid');
                 }
             }
+            if (self::markdownLinkTargets($row['source_snapshot']['content_md']) !== self::markdownLinkTargets($row['snapshot']['content_md'])) {
+                throw new DomainException('traditional_page_link_targets_changed');
+            }
             foreach (array_diff(self::FIELDS, ['faq_items']) as $field) {
-                $sourceText = json_encode($row['source_snapshot'][$field], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
-                $targetText = json_encode($row['snapshot'][$field], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
-                $tokens = '~https?://[^\s<>）)]+|\{\{[^}]*\}\}|\$?\{[^}]*\}|%\d*\$?[sdif]|\d+(?:[.,:/-]\d+)*~u';
+                $sourceText = is_array($row['source_snapshot'][$field]) ? implode("\n", $row['source_snapshot'][$field]) : (string) $row['source_snapshot'][$field];
+                $targetText = is_array($row['snapshot'][$field]) ? implode("\n", $row['snapshot'][$field]) : (string) $row['snapshot'][$field];
+                $tokens = '~https?://[^\s<>）)]+|(?<![A-Za-z0-9_./:@?=&%#-])/[A-Za-z][A-Za-z0-9-]*(?:[/?#][A-Za-z0-9._\x7e:/?#@!$&\x27*+,;=%-]*)?|\{\{[^}]*\}\}|\$?\{[^}]*\}|%\d*\$?[sdif]|\d+(?:[.,:/-]\d+)*~u';
                 preg_match_all($tokens, $sourceText, $sourceTokens);
                 preg_match_all($tokens, $targetText, $targetTokens);
                 if ($sourceTokens[0] !== $targetTokens[0]) {
@@ -85,7 +88,7 @@ final class TraditionalContentPagePublication
             }
             preg_match_all('/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/m', $row['source_snapshot']['content_md'], $sourceStructure);
             preg_match_all('/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/m', $row['snapshot']['content_md'], $targetStructure);
-            if ($sourceStructure[0] !== $targetStructure[0]) {
+            if ($sourceStructure[0] !== $targetStructure[0] || count($row['source_snapshot']['headings']) !== count($row['snapshot']['headings'])) {
                 throw new DomainException('traditional_page_structure_changed');
             }
             $pageProof = $proof['pages'][$row['page_id']] ?? [];
@@ -96,6 +99,26 @@ final class TraditionalContentPagePublication
         }
 
         return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
+    private static function markdownLinkTargets(string $text): array
+    {
+        $targets = [];
+        $remaining = preg_replace_callback('~\[([^\[\]\r\n]+)\]\(([^()\s]+)\)~u', static function (array $match) use (&$targets): string {
+            $href = $match[2];
+            if (! preg_match('~^(?:/(?!/)|\#|https?://|mailto:|tel:)~i', $href)
+                || preg_match('/[<>`\\\\\x00-\x1f\x7f]/', $href)) {
+                throw new DomainException('traditional_page_format_invalid');
+            }
+            $targets[] = $href;
+
+            return "\u{E010}";
+        }, $text);
+        if ($remaining === null || preg_match('/[\[\]]|!\x{E010}/u', $remaining)) {
+            throw new DomainException('traditional_page_format_invalid');
+        }
+
+        return $targets;
     }
 
     public function read(array $row, bool $lock): array

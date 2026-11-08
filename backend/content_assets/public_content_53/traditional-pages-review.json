@@ -1,6 +1,6 @@
 {
   "schema": "fermatmind.traditional_content_page.v1.review",
-  "candidate_sha256": "c39217ebf176cdeafbb8a060229a8e0be743831185ea7b17b63d1d73bf8d89ae",
+  "candidate_sha256": "0736aebc44a9b99a3ee901abe2672bc6523bf6acaaab608cece1dc836d489aa0",
   "verdict": "PASS",
   "pages": {
     "TRADITIONAL-about": {
@@ -18,16 +18,22 @@
     "TRADITIONAL-careers": {
       "source_sha256": "6ea32671e14efd6bc02d6f76af920e0ef8c7531143d01f6dd3439879810c2ada",
       "target_sha256": "6f3bbd2d446c04a11ee523bd03c96c2bc9e06209dda099a9a29ff9b0d18d952c"
+    },
+    "TRADITIONAL-privacy": {
+      "source_sha256": "4c54cbd6551b363769f33a1959330eb7b9531442a03f88ec01dcbb36b1bd28c1",
+      "target_sha256": "47980c5faf96d6301a5d1d3c2b97ebf925127d054c227a3700f4a47c6b1893c9"
+    },
+    "TRADITIONAL-terms": {
+      "source_sha256": "99693a5dca9ba7d6f655bbf9c64f6b19e5326fca417fcc5dd7f62922ed43c0da",
+      "target_sha256": "b5fe7eefb146cafa4a57b983b7eb637ee41bcb82c6a5746baa1bfb6abf17935b"
+    },
+    "TRADITIONAL-method-boundaries": {
+      "source_sha256": "09bc67ffd5db9466b3d508fbd5d9c93b400c1dcaae0990d25abb87f2bfbb32b2",
+      "target_sha256": "f8bb2c05f81959016743793870a74d8c6cbe5e90ab468056ef1410f82bf2f8cf"
+    },
+    "TRADITIONAL-science": {
+      "source_sha256": "a38f5b1ed4bfdf85e234b2569e29f0cea8d36fe377196e43ef8bfa048c5fa03d",
+      "target_sha256": "fd3a48a75f88bc9db6846399c22ca5ad8871fb86ce59dbbee26e2ceec308990e"
     }
-  },
-  "review_scope": [
-    "complete source-bound copy",
-    "negation and conditions preserved",
-    "no new facts or psychometric claims",
-    "structure and protected literals",
-    "noindex pilot; discoverability remains closed",
-    "context corrections: audience, personality types, expansion, decision procedures, quality and consistent reader terminology",
-    "brand, charter and careers full copy; salary/location/qualifications and permission prohibitions unchanged"
-  ],
-  "converter": "opencc-js@1.4.2:cn:twp:content-page-v1"
+  }
 }
