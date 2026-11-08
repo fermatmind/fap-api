@@ -19,8 +19,11 @@ function run(script, env) {
   });
 }
 
-test('both pinned downloads recover from HTTP 504 while retaining checksum and terminal-error rejection', async t => {
+test('both pinned official asset API downloads retain transient recovery, checksum and terminal-error rejection', async t => {
   assert.equal(steps.length, 2);
+  assert.match(workflow, /DEPLOYER_VERSION: "7\.5\.12"/);
+  assert.match(workflow, /DEPLOYER_ASSET_ID: "230685193"/);
+  assert.match(workflow, /DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"/);
   const fixture = Buffer.from('fixed deployment tool fixture\n');
   const checksum = createHash('sha256').update(fixture).digest('hex');
   const directory = mkdtempSync(join(tmpdir(), 'deployer-download-'));
@@ -29,6 +32,11 @@ test('both pinned downloads recover from HTTP 504 while retaining checksum and t
   let requests = 0, failureStatus = 504;
   const server = createServer((_request, response) => {
     requests += 1;
+    if (requests === 1 && failureStatus === 302) {
+      response.writeHead(302, { Location: '/redirected-asset.phar' });
+      response.end();
+      return;
+    }
     const failed = requests === 1 && failureStatus !== 200;
     response.statusCode = failed ? failureStatus : 200;
     response.end(failed ? 'synthetic transport error' : fixture);
@@ -38,13 +46,19 @@ test('both pinned downloads recover from HTTP 504 while retaining checksum and t
   const url = `http://127.0.0.1:${server.address().port}/deployer.phar`;
   for (const step of steps) {
     assert.match(step, /curl --retry 3 --retry-delay 2 --retry-max-time 120 --connect-timeout 15 --max-time 60 -fsSL/);
-    assert.match(step, /https:\/\/github\.com\/deployphp\/deployer\/releases\/download\/v\$\{DEPLOYER_VERSION\}\/deployer\.phar/);
+    assert.match(step, /https:\/\/api\.github\.com\/repos\/deployphp\/deployer\/releases\/assets\/\$\{DEPLOYER_ASSET_ID\}/);
+    assert.match(step, /-H "Accept: application\/octet-stream"/);
+    assert.match(step, /-H "X-GitHub-Api-Version: 2022-11-28"/);
     assert.match(step, /\| sha256sum -c -$/);
     assert.doesNotMatch(step, /--insecure|--retry-all-errors|\|\| true/);
     const output = join(directory, 'dep.phar');
-    const script = step.replace(/https:\/\/github\.com\/deployphp\/deployer\/releases\/download\/v\$\{DEPLOYER_VERSION\}\/deployer\.phar/g, url)
+    const script = step.replace(/https:\/\/api\.github\.com\/repos\/deployphp\/deployer\/releases\/assets\/\$\{DEPLOYER_ASSET_ID\}/g, url)
       .replaceAll('/tmp/dep.phar', output);
     requests = 0; failureStatus = 504;
+    assert.equal(await run(script, { DEPLOYER_SHA256: checksum }), 0);
+    assert.equal(requests, 2);
+    assert.deepEqual(readFileSync(output), fixture);
+    requests = 0; failureStatus = 302;
     assert.equal(await run(script, { DEPLOYER_SHA256: checksum }), 0);
     assert.equal(requests, 2);
     assert.deepEqual(readFileSync(output), fixture);
