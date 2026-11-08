@@ -83,6 +83,56 @@ final class ReviewedSciencePageRevisionTest extends TestCase
         $this->assertSame('Original self-report guidance.', $page->fresh()->content_md);
     }
 
+    public function test_legacy_published_payload_can_fork_but_history_and_public_copy_remain_unchanged(): void
+    {
+        $page = $this->page('zh-CN', false);
+        $this->freeze($page);
+        $old = $page->workingRevision;
+        $legacy = ['title' => $page->title, 'content_md' => $page->content_md, 'content_html' => ''];
+        $old->forceFill(['payload_json' => $legacy])->save();
+        $before = $page->fresh()->getAttributes();
+        $this->executePhase($page, 'stage');
+        $draft = $page->fresh()->workingRevision;
+        $this->assertNotSame($old->id, $draft->id);
+        $this->assertSame($old->id, $page->fresh()->published_revision_id);
+        $this->assertSame($legacy, $old->fresh()->payload_json);
+        $this->assertSame($before['content_md'], $page->fresh()->content_md);
+        $this->assertSame([], app(RowBackedRevisionWorkspace::class)->publishValidationErrors('content_page', $page->fresh(), $draft));
+        $this->executePhase($page, 'review');
+        $this->executePhase($page, 'publish');
+        $this->assertSame($this->candidate['content_md'], $page->fresh()->content_md);
+        $this->assertSame($legacy, $old->fresh()->payload_json);
+    }
+
+    public function test_legacy_compatibility_cannot_bypass_identity_payload_candidate_or_draft_checks(): void
+    {
+        $page = $this->page('zh-CN', false);
+        $this->freeze($page);
+        $revision = $page->workingRevision;
+        $original = $revision->getAttributes();
+        $legacy = ['content_md' => $page->content_md];
+        foreach (['content_type' => 'support_article', 'content_id' => 9999, 'org_id' => 999,
+            'locale' => 'en', 'translation_group_id' => 'foreign-group'] as $field => $value) {
+            $revision->forceFill(['payload_json' => $legacy, $field => $value])->save();
+            $result = $this->operation($page->fresh(), 'stage');
+            $this->assertSame('existing_science_revision_identity_invalid:'.$field, $result['errors'][0]['code']);
+            $revision->setRawAttributes($original)->save();
+        }
+        $revision->forceFill(['payload_json' => 'not-an-object'])->save();
+        $this->assertSame('existing_science_revision_payload_invalid', $this->operation($page->fresh(), 'stage')['errors'][0]['code']);
+        $revision->forceFill(['payload_json' => $legacy])->save();
+        $page->forceFill(['seo_title' => ''])->save();
+        $this->assertSame('existing_science_candidate_payload_invalid', $this->operation($page->fresh(), 'stage')['errors'][0]['code']);
+        $page->forceFill(['seo_title' => 'Item design'])->save();
+        $this->executePhase($page, 'stage');
+        $page->fresh()->workingRevision->forceFill(['payload_json' => $legacy])->save();
+        foreach (['stage', 'review', 'publish'] as $phase) {
+            $this->assertSame('existing_science_working_payload_invalid', $this->operation($page->fresh(), $phase)['errors'][0]['code']);
+        }
+        $this->assertSame('Original self-report guidance.', $page->fresh()->content_md);
+        $this->assertSame(2, CmsTranslationRevision::query()->count());
+    }
+
     public function test_state_changes_after_preflight_and_non_owner_mutations_are_refused(): void
     {
         $page = $this->page('zh-CN', false);

@@ -89,8 +89,15 @@ final readonly class ReviewedSciencePageRevision
                     throw new DomainException('existing_science_working_revision_missing');
                 }
                 $page->setRelation('workingRevision', $revision);
-                if ($this->workspace->publishValidationErrors('content_page', $page, $revision) !== []) {
-                    throw new DomainException('existing_science_revision_identity_invalid');
+                foreach (['content_type' => 'content_page', 'content_id' => (string) $page->id,
+                    'org_id' => (string) $page->org_id, 'locale' => (string) $page->locale,
+                    'translation_group_id' => (string) $page->translation_group_id] as $field => $expected) {
+                    if ((string) $revision->getAttribute($field) !== $expected) {
+                        throw new DomainException('existing_science_revision_identity_invalid:'.$field);
+                    }
+                }
+                if (! is_array($revision->payload_json)) {
+                    throw new DomainException('existing_science_revision_payload_invalid');
                 }
                 $source = null;
                 if (! $page->isSourceContent()) {
@@ -119,6 +126,16 @@ final readonly class ReviewedSciencePageRevision
                 }
                 $payload['body_md'] = $candidate['content_md'];
                 $payload['faq_items'] = $candidate['faq_items'];
+                if ($this->workspace->adapter('content_page')->requiredPayloadBlockers($payload) !== []) {
+                    throw new DomainException('existing_science_candidate_payload_invalid');
+                }
+                // Historical published snapshots use the schema that existed at publication.
+                // Only a new, baseline-locked fork may replace that snapshot with current-schema data.
+                $forkingPublished = $phase === 'stage' && ! $alreadyPublished
+                    && $page->working_revision_id === $page->published_revision_id;
+                if (! $forkingPublished && $this->workspace->publishValidationErrors('content_page', $page, $revision) !== []) {
+                    throw new DomainException('existing_science_working_payload_invalid');
+                }
                 if (! $alreadyPublished) {
                     if (! hash_equals((string) $candidate['before_body_sha256'], hash('sha256', (string) $page->content_md))
                         || ! hash_equals((string) $candidate['before_faq_sha256'], $this->hash($page->faq_items ?? []))) {
