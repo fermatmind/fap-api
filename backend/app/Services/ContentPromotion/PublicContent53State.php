@@ -41,6 +41,11 @@ final class PublicContent53State
             });
         }
         foreach ($rows as $row) {
+            if ($row['new_traditional_page'] ?? false) {
+                $state[$row['page_id']] = app(TraditionalContentPagePublication::class)->read($row, $lock);
+
+                continue;
+            }
             if ($row['kind'] === PublicContent53MbtiResultCopy::KIND) {
                 $state[$row['page_id']] = app(PublicContent53MbtiResultCopy::class)->read($lock, $row);
 
@@ -201,6 +206,12 @@ final class PublicContent53State
             return;
         }
         foreach ($rows as $row) {
+            if ($row['new_traditional_page'] ?? false) {
+                $native = app(TraditionalContentPagePublication::class);
+                $native->assertBaseline($row, $native->read($row, false));
+
+                continue;
+            }
             if ($row['kind'] === PublicContent53MbtiResultCopy::KIND && str_ends_with($row['page_id'], '-NATIVE-LEAVES')) {
                 $native = app(PublicContent53MbtiResultCopy::class);
                 $native->assertBaseline($row, $native->read(false, $row));
@@ -240,6 +251,11 @@ final class PublicContent53State
     {
         foreach ($rows as $row) {
             $saved = $state[$row['page_id']];
+            if ($row['new_traditional_page'] ?? false) {
+                app(TraditionalContentPagePublication::class)->assertBaseline($row, $saved);
+
+                continue;
+            }
             if ($row['kind'] === PublicContent53MbtiResultCopy::KIND) {
                 app(PublicContent53MbtiResultCopy::class)->assertBaseline($row, $saved);
 

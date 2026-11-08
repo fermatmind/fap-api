@@ -84,6 +84,14 @@ final class PublicContent53Writer
         $created = 0;
         foreach ($rows as $row) {
             $saved = $before[$row['page_id']];
+            if ($row['new_traditional_page'] ?? false) {
+                if (app(TraditionalContentPagePublication::class)->publish($row, $saved, $context)) {
+                    $written[$row['page_id']] = true;
+                    $created += $saved['missing'] ? 1 : 0;
+                }
+
+                continue;
+            }
             if (($row['new_article'] ?? false) && (($saved['missing'] ?? false) || ($saved['retained_draft'] ?? false))) {
                 $created += app(RiasecCodeSampleArticles::class)->create($row, $context) ? 1 : 0;
                 $written[$row['page_id']] = true;
@@ -189,6 +197,11 @@ final class PublicContent53Writer
             throw new DomainException('public_content_53_rollback_concurrent_state');
         }
         foreach ($before as $id => $saved) {
+            if ($saved['traditional_page'] ?? false) {
+                app(TraditionalContentPagePublication::class)->restore($saved, $after[$id]);
+
+                continue;
+            }
             if ($saved['table'] === 'personality_profile_variant_sections') {
                 app(PublicContent53MbtiResultCopy::class)->restore($context, $saved, $after[$id]);
 

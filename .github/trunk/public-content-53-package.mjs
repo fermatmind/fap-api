@@ -7,6 +7,7 @@ import { canonical } from './iq-public-scale-package.mjs';
 export const packagePath = 'content_assets/public_content_53';
 // Selection comes from the existing exact-range classifier, never file presence.
 const packages = {
+  'traditional-pages': ['fermatmind.traditional_content_page.v1', ['traditional-pages.json','traditional-pages-review.json']],
   'zh-reading-links': ['fermatmind.public_content_zh_reading_links.v1', ['zh-reading-links.json','zh-reading-links-review.json']],
   'directory-card-copy': ['fermatmind.tests_directory_card_copy.v1', ['directory-card-copy.json','directory-card-copy-review.json']],
   'mbti-four-leaf-copy': ['fermatmind.mbti_english_four_leaf_copy.v1', ['mbti-four-leaf-copy.json','mbti-four-leaf-copy-review.json']],
@@ -77,6 +78,12 @@ export const executorPaths = [
   "app/Services/ContentPromotion/PublicContent53Package.php",
   "app/Services/ContentPromotion/PublicContent53State.php",
   "app/Services/ContentPromotion/PublicContent53Writer.php",
+  "app/Services/ContentPromotion/TraditionalContentPagePublication.php",
+  "app/Services/Cms/SiblingTranslationWorkflowService.php",
+  "app/Support/CanonicalTranslationPayloadHash.php",
+  "app/Services/Cms/RowBackedRevisionWorkspace.php",
+  "app/Services/Cms/AbstractSiblingTranslationAdapter.php",
+  "app/Services/Cms/ContentPageTranslationAdapter.php",
   "app/Services/ContentPromotion/PublicContent53MbtiResultCopy.php",
   "app/Services/Cms/MbtiEnglishVariantSectionEnrichmentService.php",
   "app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php",
@@ -90,7 +97,7 @@ export const executorPaths = [
 ].sort();
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 export function readCandidateRows(backendRoot, digest = packageDigest(backendRoot)) {
-  const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/RiasecCodeSampleArticles.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53MbtiResultCopy.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2]), JSON_THROW_ON_ERROR);';
+  const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/RiasecCodeSampleArticles.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53MbtiResultCopy.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalContentPagePublication.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2]), JSON_THROW_ON_ERROR);';
   return JSON.parse(execFileSync('php', ['-r', code, realpathSync(backendRoot), digest], { encoding: 'utf8', timeout: 30000, maxBuffer: 4000000, stdio: ['pipe', 'pipe', 'pipe'] }));
 }
 export function inspectPackage(backendRoot, selection = process.env.PUBLIC_CONTENT_53_PACKAGE_NAME) {

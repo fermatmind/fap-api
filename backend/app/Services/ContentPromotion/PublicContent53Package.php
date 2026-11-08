@@ -125,6 +125,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/traditional-pages.json')) {
+            $chain = TraditionalContentPagePublication::SCHEMA."\n";
+            foreach (['traditional-pages.json', 'traditional-pages-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return TraditionalContentPagePublication::package($this->bytes($root, 'traditional-pages.json'), $this->bytes($root, 'traditional-pages-review.json'), $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/zh-reading-links.json')) {
             $chain = "fermatmind.public_content_zh_reading_links.v1\n";
             foreach (['zh-reading-links.json', 'zh-reading-links-review.json'] as $name) {

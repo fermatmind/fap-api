@@ -9,6 +9,7 @@ use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\Audit\AuditLogger;
+use App\Support\CanonicalTranslationPayloadHash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -116,7 +117,7 @@ final class SiblingTranslationWorkflowService
     }
 
     /** Import an offline prepared TW candidate into the existing revision workspace. */
-    public function createPreparedContentPageDraft(int $sourceId, string $expectedSourceHash, array $fields): ContentPage
+    public function createPreparedContentPageDraft(int $sourceId, string $expectedSourceHash, array $fields, ?string $expectedSourcePayloadHash = null): ContentPage
     {
         $allowed = ['title', 'kicker', 'summary', 'seo_title', 'meta_description', 'seo_description', 'content_md', 'headings', 'faq_items'];
         if (array_diff(array_keys($fields), $allowed) !== []
@@ -141,7 +142,7 @@ final class SiblingTranslationWorkflowService
             }
         }
 
-        return DB::transaction(function () use ($sourceId, $expectedSourceHash, $fields): ContentPage {
+        return DB::transaction(function () use ($sourceId, $expectedSourceHash, $fields, $expectedSourcePayloadHash): ContentPage {
             $source = ContentPage::query()->withoutGlobalScopes()->lockForUpdate()->findOrFail($sourceId);
             $adapter = $this->adapter('content_page');
             if (! $adapter->isSource($source) || $source->locale !== 'zh-CN'
@@ -149,8 +150,14 @@ final class SiblingTranslationWorkflowService
                 throw new CmsTranslationWorkflowException('Prepared translation requires a published canonical Markdown source.', ['source identity invalid']);
             }
             $this->assertSourceApprovedForMachineTranslation($adapter, $source);
-            if (! hash_equals($expectedSourceHash, $source->freshSourceVersionHash())
-                || ! hash_equals($expectedSourceHash, (string) $source->source_version_hash)) {
+            // Legacy source version keys remain opaque native authority. A
+            // publisher can bind their complete payload independently without
+            // rewriting the source hash or invalidating its historical reviews.
+            $payloadMatches = $expectedSourcePayloadHash === null
+                ? hash_equals($expectedSourceHash, $source->freshSourceVersionHash())
+                : preg_match('/^[a-f0-9]{64}$/', $expectedSourcePayloadHash)
+                    && hash_equals($expectedSourcePayloadHash, CanonicalTranslationPayloadHash::hash($adapter->snapshotPayload($source)));
+            if (! $payloadMatches || ! hash_equals($expectedSourceHash, (string) $source->source_version_hash)) {
                 throw new CmsTranslationWorkflowException('Prepared translation source changed.', ['source version mismatch']);
             }
             $existing = ContentPage::query()->withoutGlobalScopes()

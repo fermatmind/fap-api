@@ -21,7 +21,7 @@ final class PublicContent53FrontendRevalidator
             $requests[] = ['kind' => 'discovery', 'identity' => ['locale' => 'en', 'slug' => 'articles']];
         }
         foreach ($requests as $row) {
-            $segment = $row['identity']['locale'] === 'en' ? 'en' : 'zh';
+            $segment = $row['identity']['locale'] === 'zh-TW' ? 'zh-TW' : ($row['identity']['locale'] === 'en' ? 'en' : 'zh');
             $slug = $row['identity']['slug'];
             $tags = [];
             if ($row['kind'] === 'discovery') {

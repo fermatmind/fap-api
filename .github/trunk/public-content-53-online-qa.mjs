@@ -18,7 +18,7 @@ const plain = x => /^\s*```[\w-]*\s*$/.test(x) ? '' : x.replace(/!\[[^\]]*\]\([^
   .replace(/^\s*\[\^([0-9A-Za-z-]+)\]:\s*/,'$1 ').replace(/\[\^([0-9A-Za-z-]+)\]/g,'$1')
   .replace(/^\s*(?:>\s*)+|^\s*(?:#{1,6}\s*|[-*+]\s+|\d+[.)]\s+)/g,'').replace(/[*`_]/g,'');
 export const pathFor = row => {
-  const {slug,locale} = row.identity; const segment = locale === 'en' ? 'en' : 'zh';
+  const {slug,locale} = row.identity; const segment = locale === 'zh-TW' ? 'zh-TW' : locale === 'en' ? 'en' : 'zh';
   if (row.kind === 'guide') return `/${segment}/career/guides/${slug}`;
   if (row.kind === 'article') return `/${segment}/articles/${slug}`;
   if (row.kind === 'profile') return `/${segment}/topics/${slug}`;
@@ -82,7 +82,7 @@ foreach($xp->query('//link') as $node) {
 }
 $quickstart=[]; foreach($xp->query('//script[@type="application/ld+json" and @id="tests-hub-quickstart-en"]') as $node) $quickstart[]=$node->textContent;
 $homeJsonLd=[]; foreach($xp->query('//script[@type="application/ld+json"]') as $node) $homeJsonLd[]=$node->textContent;
-echo json_encode(['link_labels'=>$labels,'body'=>$values($mainQuery),'h1'=>$values($mainQuery.'//h1'),'links'=>$values($mainQuery.'//a','href'),
+echo json_encode(['language'=>$doc->documentElement->getAttribute('lang'),'link_labels'=>$labels,'body'=>$values($mainQuery),'h1'=>$values($mainQuery.'//h1'),'links'=>$values($mainQuery.'//a','href'),
  'home_jsonld'=>$homeJsonLd,'home_iq_cards'=>$values('//main//article[.//a[contains(@href,"iq-test-intelligence-quotient-assessment")]]'),
  'tests_quickstart_jsonld'=>$quickstart,'article_body'=>$values('//main//article[@data-testid="article-detail-content"]'),
  'title'=>$documentTitles,'description'=>$values('//meta[@name="description"]','content'),
@@ -133,7 +133,7 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
       result[row.page_id] = await readMbtiResultCopySample(environment,row,fetcher,renderer);
       continue;
     }
-    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
+    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || row.new_traditional_page === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
     if (bytes === null) { result[row.page_id]={missing:true};continue; }
     const data=parseApi(bytes);const value=projection(row,data);
     if (!equal(value,environment === 'staging' ? row.staging_before : row.before) && !equal(value,row.snapshot)) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DRIFT_${row.page_id}`);
@@ -220,7 +220,8 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   if (row.kind === 'page' && Object.hasOwn(row.snapshot,'seo_title')) {
     const title = row.snapshot.seo_title || row.snapshot.title;
     const description = row.snapshot.meta_description || row.snapshot.summary;
-    if (!equal(dom.title.map(compact),[compact(`${title} | FermatMind`)])
+    const brand = row.new_traditional_page ? '費馬測試' : 'FermatMind';
+    if (!equal(dom.title.map(compact),[compact(`${title} | ${brand}`)])
       || !equal(dom.description.map(compact),description ? [compact(description)] : []))
       throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
   }
@@ -301,6 +302,21 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   }
   const initializedStaging = environment === 'staging' && row.page_id === 'PAGE-60' && before.missing === true && row.staging_bootstrap;
   const newArticle = row.new_article === true;
+  const newTraditionalPage = row.new_traditional_page === true;
+  if (newTraditionalPage) {
+    const robots=dom.robots.join(',').toLowerCase().split(',').map(value=>value.trim());
+    let schemas;
+    try { schemas=dom.home_jsonld.map(bytes=>JSON.parse(bytes)); }
+    catch { throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_SCHEMA_${row.page_id}`); }
+    const url='https://fermatmind.com'+pathFor(row);
+    const webPage=schemas.some(node=>node['@type'] === 'WebPage' && node.url === url && node.inLanguage === 'zh-TW'
+      && node.name === row.snapshot.title && node.description === row.snapshot.summary);
+    const breadcrumb=schemas.some(node=>node['@type'] === 'BreadcrumbList' && node.itemListElement?.at(-1)?.item === url);
+    if (dom.language !== 'zh-TW' || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)]) || !robots.includes('noindex') || robots.includes('index')
+      || dom.alternate_entries.some(entry=>entry.hreflang)
+      || !webPage || !breadcrumb || !['創始人與博士顧問團隊','劉福威','賈睿璇','李琛'].every(text=>body.includes(compact(text))))
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_SEO_OR_TEAM_${row.page_id}`);
+  }
   if (newArticle) {
     const languages=dom.alternate_entries.filter(entry=>entry.hreflang).map(entry=>[entry.hreflang,entry.href]).sort();
     const expected=[['en',`https://fermatmind.com/en/articles/${row.identity.slug}`],['zh-CN',`https://fermatmind.com/zh/articles/${row.identity.slug}`],['x-default',`https://fermatmind.com/en/articles/${row.identity.slug}`]].sort();
@@ -330,7 +346,7 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
       throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
   }
   if (dom.canonical.length !== 1 || (!before.missing && (!equal(dom.canonical,before.dom.canonical) || !equal(dom.robots,before.dom.robots)))
-    || (!newArticle && !initializedStaging && !reviewedHreflang && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
+    || (!newArticle && !newTraditionalPage && !initializedStaging && !reviewedHreflang && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
   if (initializedStaging) {
     // The staging Article template deliberately omits hreflang and retains
     // noindex. Bind the missing locale to the observed counterpart policy;
@@ -395,11 +411,14 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     const data=parseApi(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
     const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
     const createdArticle = row.new_article === true && before?.missing === true;
+    const createdTraditional = row.new_traditional_page === true && before?.missing === true;
+    if (row.new_traditional_page && (native.is_indexable !== false || native.path !== '/zh-TW/about'))
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_QUALIFICATION_${row.page_id}`);
     if (row.new_article === true && (!['is_indexable','sitemap_eligible','llms_eligible'].every(key=>native[key] === true)
       || native.translation_group_id !== row.source_identity.translation_group_id || !Number.isInteger(native.published_revision_id))) throw new Error(`PUBLIC_CONTENT_53_NEW_ARTICLE_QUALIFICATION_${row.page_id}`);
     if(!before || !equal(projection(row,data),row.snapshot)
       || (createdStaging ? native.is_indexable !== row.staging_bootstrap.is_indexable || native.translation_group_id !== row.staging_source_identity.translation_group_id
-        : !createdArticle && (native.id !== before.id || Object.entries(before.flags).some(([k,v])=>!equal(native[k],v))))) throw new Error(`PUBLIC_CONTENT_53_NATIVE_READBACK_${row.page_id}`);
+        : !createdArticle && !createdTraditional && (native.id !== before.id || Object.entries(before.flags).some(([k,v])=>!equal(native[k],v))))) throw new Error(`PUBLIC_CONTENT_53_NATIVE_READBACK_${row.page_id}`);
     // One publication only. Existing 300-second public fetch caches can settle
     // while exact candidate DOM assertions remain strict and bounded.
     const deadline=Date.now()+360000;let last;

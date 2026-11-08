@@ -255,6 +255,11 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
         $result = PromotionAdapterResultFactory::make($context, $written, $context->expectedRowCount, $published, $reference, [
             'indexability_mutation_count' => 0, 'sitemap_mutation_count' => 0, 'llms_mutation_count' => 0, 'search_mutation_count' => 0, 'deploy_mutation_count' => 0,
         ]) + ['target_state_sha256' => $this->states->hash($state)];
+        if ($published > 0 && $written > 0
+            && array_filter($this->package->read(base_path(), $context->packageSha256)['candidates'], static fn ($row): bool => ($row['new_traditional_page'] ?? false) === true)) {
+            $result['created_count'] = $created;
+            $result['updated_count'] = $written - $created;
+        }
         if ($published > 0 && $written > 0 && \App\Services\ContentPromotion\RiasecCodeSampleArticles::matchesContext($context)) {
             $result['created_count'] = $created;
             $result['updated_count'] = $written - $created;
