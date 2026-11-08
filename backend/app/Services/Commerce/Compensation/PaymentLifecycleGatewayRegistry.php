@@ -16,6 +16,7 @@ final class PaymentLifecycleGatewayRegistry
     public function for(string $provider): ?PaymentLifecycleGatewayInterface
     {
         return match (strtolower(trim($provider))) {
+            'waffo' => app(\App\Services\Commerce\Compensation\Gateways\WaffoLifecycleGateway::class),
             'wechatpay' => app(WechatPayLifecycleGateway::class),
             'alipay' => app(AlipayLifecycleGateway::class),
             'billing' => app(BillingLifecycleGateway::class),

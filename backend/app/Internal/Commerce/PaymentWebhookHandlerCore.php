@@ -94,6 +94,11 @@ class PaymentWebhookHandlerCore
             $this->gateways[$appleIap->provider()] = $appleIap;
         }
 
+        $waffo = new \App\Services\Commerce\PaymentGateway\WaffoGateway;
+        if ($this->isProviderEnabled('waffo')) {
+            $this->gateways['waffo'] = $waffo;
+        }
+
         $alipay = new AlipayGateway;
         if ($this->isProviderEnabled($alipay->provider())) {
             $this->gateways[$alipay->provider()] = $alipay;
@@ -1789,6 +1794,7 @@ class PaymentWebhookHandlerCore
         $types = is_array($configured) ? $configured : [];
         if (count($types) === 0) {
             $types = match ($provider) {
+                'waffo' => ['order.completed'],
                 'stripe' => [
                     'payment_succeeded',
                     'payment_intent.succeeded',
@@ -1850,6 +1856,12 @@ class PaymentWebhookHandlerCore
         int $orgId
     ): array {
         $now = now();
+        if (($order->provider ?? '') === 'waffo'
+            && ((int) ($normalized['amount_cents'] ?? 0) !== (int) ($order->amount_cents ?? 0)
+                || (int) ($normalized['refund_amount_cents'] ?? 0) !== (int) ($order->amount_cents ?? 0)
+                || ($normalized['currency'] ?? '') !== ($order->currency ?? ''))) {
+            return $this->semanticReject('REFUND_AMOUNT_MISMATCH', 'Waffo refund does not match the original order.');
+        }
         $refundAmount = (int) ($normalized['refund_amount_cents'] ?? 0);
         $refundReason = trim((string) ($normalized['refund_reason'] ?? ''));
 

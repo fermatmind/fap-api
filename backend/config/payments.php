@@ -32,7 +32,17 @@ return [
     ], static fn (mixed $provider): bool => is_string($provider) && trim($provider) !== ''),
 
     'fallback_provider' => env('FAP_PAYMENT_FALLBACK_PROVIDER', 'billing'),
+    'waffo' => [
+        'environment' => 'test',
+        'merchant_id' => env('WAFFO_TEST_MERCHANT_ID', ''),
+        'store_id' => env('WAFFO_TEST_STORE_ID', ''),
+        'product_id' => env('WAFFO_TEST_MBTI_PRODUCT_ID', ''),
+        'private_key_path' => env('WAFFO_TEST_PRIVATE_KEY_PATH', ''),
+        // Pinned public verification key from official @waffo/pancake-ts 0.28.0.
+        'webhook_public_key' => file_get_contents(resource_path('payments/waffo-test-public.pem')),
+    ],
     'providers' => [
+        'waffo' => ['enabled' => (bool) env('PAYMENTS_PROVIDER_WAFFO_TEST_ENABLED', false)],
         'billing' => [
             'enabled' => (bool) env('PAYMENTS_PROVIDER_BILLING_ENABLED', true),
         ],

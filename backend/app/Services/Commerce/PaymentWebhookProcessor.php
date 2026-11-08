@@ -146,6 +146,7 @@ class PaymentWebhookProcessor
         $provider = strtolower(trim($provider));
 
         $normalized = match ($provider) {
+            'waffo' => (new \App\Services\Commerce\PaymentGateway\WaffoGateway)->normalizePayload($payload),
             'stripe' => (new StripeGateway)->normalizePayload($payload),
             'billing' => (new BillingGateway)->normalizePayload($payload),
             'lemonsqueezy' => (new LemonSqueezyGateway)->normalizePayload($payload),

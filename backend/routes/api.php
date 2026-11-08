@@ -181,7 +181,7 @@ Route::prefix('v0.3')->middleware([
         Route::delete('/challenges/{id}/manage', 'destroy')->whereUuid('id')->middleware([\App\Http\Middleware\FriendshipOwnerAuth::class, 'throttle:10,1']);
     });
 
-    $payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'apple_iap', 'alipay'];
+    $payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'apple_iap', 'alipay', 'waffo'];
     if (app()->environment(['local', 'testing']) && config('payments.allow_stub') === true) {
         $payProviders[] = 'stub';
     }

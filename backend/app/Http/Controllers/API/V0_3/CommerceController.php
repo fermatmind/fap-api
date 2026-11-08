@@ -1064,6 +1064,7 @@ class CommerceController extends Controller
         string $userAgent
     ): array {
         return match ($provider) {
+            'waffo' => app(\App\Services\Commerce\Checkout\WaffoCheckoutService::class)->createCheckout($orderNo, $attemptId, $amountCents, $currency),
             'lemonsqueezy' => $this->resolveLemonCheckoutAction(
                 $orderNo,
                 $attemptId,
@@ -1267,6 +1268,18 @@ class CommerceController extends Controller
         $payload = $scenes[$scene] ?? null;
         if (! is_array($payload)) {
             return null;
+        }
+
+        if ($provider === 'waffo') {
+            try {
+                $cachedAt = \Illuminate\Support\Carbon::parse($payload['cached_at'] ?? '1970-01-01');
+            } catch (\Throwable) {
+                return null;
+            }
+            // The Waffo session lifetime is 1800 seconds; never keep serving an expired URL.
+            if ($cachedAt->addSeconds(1800)->isPast()) {
+                return null;
+            }
         }
 
         $pay = $payload['pay'] ?? null;

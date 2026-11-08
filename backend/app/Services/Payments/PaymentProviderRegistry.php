@@ -53,6 +53,12 @@ final class PaymentProviderRegistry
             return false;
         }
 
+        if ($provider === 'waffo') {
+            return app()->environment(['local', 'testing', 'staging'])
+                && config('payments.waffo.environment') === 'test'
+                && (bool) config('payments.providers.waffo.enabled', false);
+        }
+
         // LemonSqueezy signs only the raw body in the current provider contract.
         // Without a provider-authenticated timestamp, production cannot enforce
         // webhook freshness, so checkout and webhook entry points stay disabled.

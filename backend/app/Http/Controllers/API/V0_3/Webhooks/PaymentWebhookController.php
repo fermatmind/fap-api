@@ -68,6 +68,9 @@ final class PaymentWebhookController extends Controller
         $decoded = json_decode($raw, true);
         $payload = is_array($decoded) ? $decoded : [];
         $signatureOk = $this->resolveSignatureOk($request, $provider);
+        if ($provider === 'waffo' && ! $signatureOk) {
+            return $this->errorResponse(401, 'INVALID_SIGNATURE', 'invalid signature');
+        }
 
         $result = $this->processWithRetry($provider, $payload, $signatureOk, $requestId);
         if ($result instanceof Response) {
@@ -227,6 +230,7 @@ final class PaymentWebhookController extends Controller
     private function resolveSignatureOk(Request $request, string $provider): bool
     {
         return match ($provider) {
+            'waffo' => app(\App\Services\Commerce\PaymentGateway\WaffoGateway::class)->verifySignature($request),
             'stripe' => $this->verifyStripeSignature($request),
             'billing' => $this->verifyBillingSignature($request),
             'lemonsqueezy' => $this->verifyLemonSqueezySignature($request),
