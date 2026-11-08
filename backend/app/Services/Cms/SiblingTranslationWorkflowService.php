@@ -145,7 +145,7 @@ final class SiblingTranslationWorkflowService
         return DB::transaction(function () use ($sourceId, $expectedSourceHash, $fields, $expectedSourcePayloadHash): ContentPage {
             $source = ContentPage::query()->withoutGlobalScopes()->lockForUpdate()->findOrFail($sourceId);
             $adapter = $this->adapter('content_page');
-            if (! $adapter->isSource($source) || $source->locale !== 'zh-CN'
+            if (! $adapter instanceof ContentPageTranslationAdapter || ! $adapter->isPreparedTraditionalSourceIdentity($source)
                 || ! $source->passesPublicReadinessGate() || trim((string) $source->content_html) !== '') {
                 throw new CmsTranslationWorkflowException('Prepared translation requires a published canonical Markdown source.', ['source identity invalid']);
             }

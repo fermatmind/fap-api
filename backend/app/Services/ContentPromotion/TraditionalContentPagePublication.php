@@ -195,7 +195,7 @@ final class TraditionalContentPagePublication
     {
         $source = $this->model($saved['source']);
         $checks = [
-            'identity' => $source->isSourceContent() && $source->locale === 'zh-CN' && (int) $source->org_id === 0,
+            'identity' => $this->adapter->isPreparedTraditionalSourceIdentity($source),
             'readiness' => $source->passesPublicReadinessGate(),
             'review' => $source->review_state === 'approved',
             'hold' => ! $source->legal_review_required && ! $source->science_review_required,

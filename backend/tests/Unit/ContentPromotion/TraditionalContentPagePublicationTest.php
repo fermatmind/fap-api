@@ -111,9 +111,30 @@ final class TraditionalContentPagePublicationTest extends TestCase
         }
     }
 
+    public function test_prepared_identity_accepts_published_roots_but_never_translations_or_other_locales(): void
+    {
+        $source = $this->source();
+        $adapter = app(\App\Services\Cms\ContentPageTranslationAdapter::class);
+        $values = $source->getRawOriginal();
+        $this->assertTrue($adapter->isPreparedTraditionalSourceIdentity($source));
+        $source->setRawAttributes(array_replace($values, ['translation_status' => CmsTranslationRevision::STATUS_PUBLISHED]), true);
+        $this->assertTrue($adapter->isPreparedTraditionalSourceIdentity($source));
+        $this->assertFalse($adapter->isSource($source), 'Generic translation entry keeps its existing source-only contract');
+        foreach ([['org_id' => 1], ['locale' => 'en', 'source_locale' => 'en'], ['source_locale' => 'en'],
+            ['source_content_id' => 7], ['translation_status' => 'machine_draft'], ['translation_status' => 'human_review'],
+            ['translation_status' => 'approved'], ['translation_status' => 'archived'], ['translation_status' => null]] as $invalid) {
+            $source->setRawAttributes(array_replace($values, $invalid), true);
+            $this->assertFalse($adapter->isPreparedTraditionalSourceIdentity($source));
+        }
+    }
+
     public function test_four_phase_service_preserves_four_published_pages_while_creating_four_policies(): void
     {
         $this->source();
+        // Actual staging Science lineage: a published root, not a translation.
+        DB::table('content_pages')->where('org_id', 0)->where('slug', 'science')->where('locale', 'zh-CN')
+            ->update(['translation_status' => CmsTranslationRevision::STATUS_PUBLISHED]);
+        $sourcesBefore = ContentPage::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->orderBy('id')->get()->map->getRawOriginal()->all();
         $context = $this->context();
         $rows = app(PublicContent53Package::class)->read(base_path(), $context->packageSha256)['candidates'];
         $native = app(TraditionalContentPagePublication::class);
@@ -145,6 +166,7 @@ final class TraditionalContentPagePublicationTest extends TestCase
                 $previous = $path;
             }
             $this->assertSame($preserved, ContentPage::query()->where('locale', 'zh-TW')->orderBy('id')->limit(4)->get()->map->getRawOriginal()->all());
+            $this->assertSame($sourcesBefore, ContentPage::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->orderBy('id')->get()->map->getRawOriginal()->all());
         } finally {
             foreach (glob($directory.'/*') as $file) {
                 unlink($file);

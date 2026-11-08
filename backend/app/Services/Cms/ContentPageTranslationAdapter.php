@@ -27,6 +27,18 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
             && (bool) $record->is_public;
     }
 
+    /** Identity only: prepared publication still checks readiness, review and both source hashes. */
+    public function isPreparedTraditionalSourceIdentity(ContentPage $record): bool
+    {
+        // Older native publications may keep the published lifecycle marker on
+        // a canonical root. Preserve its row, hashes and revision history.
+        return (int) $record->org_id === 0
+            && $record->locale === 'zh-CN'
+            && $record->source_locale === $record->locale
+            && $record->source_content_id === null
+            && in_array($record->translation_status, [ContentPage::TRANSLATION_STATUS_SOURCE, ContentPage::TRANSLATION_STATUS_PUBLISHED], true);
+    }
+
     public function editUrl(Model $record): string
     {
         return ContentPageResource::getUrl('edit', ['record' => $record]);
