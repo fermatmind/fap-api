@@ -22,7 +22,6 @@ set('seo_platform_10_closeout', false);
 set('seo_agent_evidence_boundary', false);
 set('seo_agent_policy_gateway', false);
 set('seo_council_orchestration', false);
-set('a08_gate_only', false);
 set('seo_competitive_evidence', false);
 set('seo_measurement_sync_env', '');
 set('seo_competitive_writer_env', '');
@@ -445,8 +444,7 @@ function deployCareerDetailMinimumTargets(string $hostAlias): int
 
 function deploySkipsAuthorityMutations(): bool
 {
-    return deployBooleanOption('a08_gate_only', false)
-        || in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only', 'career_content_only', 'career_first_publish'], true);
+    return in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only', 'career_content_only', 'career_first_publish'], true);
 }
 
 function deploySchemaOnlyMigration(): string
@@ -997,9 +995,6 @@ task('career:rebuild-directory-after-detail-repair', function () {
 
         return;
     }
-    if (deployBooleanOption('a08_gate_only', false)) {
-        return;
-    }
     if (deployMode() !== 'standard') {
         writeln('<comment>Skipping Career directory-only rebuild outside standard deploy.</comment>');
 
@@ -1051,9 +1046,9 @@ task('guard:career-discoverability-post-sitemap', function () {
 
         return;
     }
-    // This postcondition belongs to the sitemap warm operation. A08 gate-only
+    // This postcondition belongs to the sitemap warm operation. Code-only
     // releases preserve that cache and still run the authority and pre-sitemap checks.
-    if (deployBooleanOption('a08_gate_only', false) || deployMode() !== 'standard') {
+    if (deployMode() !== 'standard') {
         return;
     }
 
@@ -1505,11 +1500,6 @@ PHP;
 }
 
 task('runtime:configure-seo-intel', function (): void {
-    if (deployBooleanOption('a08_gate_only', false)) {
-        deployInstallSeoIntelRuntimeEnvironment(deploySeoQueryHmacEnvironment());
-
-        return;
-    }
     if (deploySkipsAuthorityMutations()) {
         writeln('<comment>Skipping SEO Intel runtime configuration for a non-authority deployment.</comment>');
 
@@ -3630,8 +3620,8 @@ task('career:warm-public-authority-cache', function () {
 
         return;
     }
-    if (deployBooleanOption('a08_gate_only', false) || deployUsesCareerContentPackage()) {
-        writeln('<info>A08 gate-only delivery: no cache warm.</info>');
+    if (deployUsesCareerContentPackage()) {
+        writeln('<info>Content-package delivery: no cache warm.</info>');
 
         return;
     }

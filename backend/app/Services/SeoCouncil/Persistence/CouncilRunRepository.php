@@ -91,12 +91,12 @@ final class CouncilRunRepository
     public function persist(array $receipt, string $idempotencyKey, ?Platform12FrozenMission $scheduled = null): array
     {
         $scheduledAudit = $scheduled !== null
+            && $scheduled->envelope['slot']['trigger_mode'] !== 'controlled_acceptance'
             && $scheduled->request->idempotencyKey() === $idempotencyKey
             && $scheduled->request->requestHash === ($receipt['request_hash'] ?? null)
             && ($receipt['execution_allowed'] ?? null) === false
             && data_get($receipt, 'caller_provenance.caller_type') === 'scheduler'
             && app(Platform12RuntimeControl::class)->allowsMission($scheduled->envelope['slot']['mission_id'],
-                $scheduled->envelope['slot']['trigger_mode'] === 'controlled_acceptance',
                 $scheduled->envelope['slot']['runtime_generation'] ?? 'legacy');
         if (($scheduled !== null && ! $scheduledAudit) || (! $this->gatesOpen() && ! $scheduledAudit)) {
             return ['decision' => 'DISABLED', 'receipt' => $receipt];

@@ -12,7 +12,7 @@ use Throwable;
 
 final class SeoCouncilScheduledCommand extends Command
 {
-    protected $signature = 'seo:council-scheduled {--json} {--acceptance= : One allowlisted Mission; never a natural slot}';
+    protected $signature = 'seo:council-scheduled {--json}';
 
     protected $description = 'Discover at most one due read-only Council Mission from the versioned Catalog';
 
@@ -29,15 +29,10 @@ final class SeoCouncilScheduledCommand extends Command
             return self::FAILURE;
         }
         // Managed cron runs as the deploy identity; the application owns the
-        // private activation files. Delegate only this fixed natural tick, using
+        // shared runtime state. Delegate only this fixed natural tick, using
         // the existing non-interactive PHP capability, without changing file ACLs.
         if (app()->environment('production')
             && (! function_exists('posix_geteuid') || ! function_exists('posix_getpwuid') || (posix_getpwuid(posix_geteuid())['name'] ?? null) !== 'www-data')) {
-            if ($this->option('acceptance') !== null) {
-                $this->line('{"status":"SCHEDULED_IDENTITY_HOLD","execution_allowed":false}');
-
-                return self::FAILURE;
-            }
             try {
                 $result = Process::timeout(120)->run([
                     '/usr/bin/sudo', '-n', '-u', 'www-data', '--', PHP_BINARY,
@@ -68,8 +63,7 @@ final class SeoCouncilScheduledCommand extends Command
             pcntl_alarm(120);
         }
         try {
-            $acceptance = $this->option('acceptance');
-            $this->line(json_encode($scheduler->tick(is_string($acceptance) && $acceptance !== '' ? $acceptance : null), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+            $this->line(json_encode($scheduler->tick(), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
 
             return self::SUCCESS;
         } catch (Throwable) {

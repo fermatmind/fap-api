@@ -212,7 +212,7 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         $this->assertStringNotContainsString('seo:weekly-decisions --trigger=scheduled', $deploy);
         $workflow = (string) file_get_contents(base_path('../.github/workflows/deploy.yml'));
         $this->assertMatchesRegularExpression('/staging:[\s\S]+timeout-minutes: 120[\s\S]+environment: staging/', $workflow);
-        $this->assertMatchesRegularExpression('/production:[\s\S]+timeout-minutes: 120[\s\S]+environment: production/', $workflow);
+        $this->assertMatchesRegularExpression('/production:[\s\S]+timeout-minutes: \$\{\{ fromJSON\(needs\.policy\.outputs\.classification\)\.operations\.public_content_53_publish && 190 \|\| 120 \}\}[\s\S]+environment: production/', $workflow);
         $this->assertSame(2, substr_count($workflow, 'kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task"'));
         $this->assertMatchesRegularExpression('/concurrency:\s+group: ([^\n]+)\s+cancel-in-progress: false/', $workflow);
         preg_match('/concurrency:\s+group: ([^\n]+)/', $workflow, $concurrency);

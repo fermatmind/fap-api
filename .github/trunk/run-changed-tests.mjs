@@ -28,6 +28,9 @@ export function changedTestPlan(changes, {vitest=false}={}) {
   else if(/\.sh$/.test(path))plan.shell.push(path);
   else plan.unsupported.push(path);
  }
+ // Natural checks keep their real runtime/security consumers after A08 retirement.
+ if(changes.some(({path})=>/^backend\/(?:app\/Services\/SeoCouncil\/(?:Platform12\/(?!Operations\/)|Persistence\/CouncilRunRepository\.php$)|app\/Console\/Commands\/SeoCouncil(?:Runtime|Scheduled)Command\.php$|config\/seo_council\.php$)/.test(path)))
+  plan.php.push(...['SeoPlatform12A01MissionCatalogTest','SeoPlatform12A02SchedulerStorageTest','SeoPlatform12A03SchedulerFencingTest','SeoPlatform12A04ProductionPersistenceTest','SeoPlatform12A05ReadOnlyRuntimeGateTest','SeoPlatform12A08DailyWiringTest','SeoPlatform12A08LegacyScheduleContractTest','SeoPlatform12A08ProductionEvidenceTest','SeoPlatform12A08SourceCheckTest','SeoPlatform12NaturalRefreshTest','SeoPlatform12B01DailyGscCoreRuntimeTest','SeoPlatform12B02DailyUrlTruthTest','SeoPlatform12B03DailySecurityDriftTest','SeoPlatform12F01NotificationPolicyContractTest','SeoPlatform12F02NotificationOutboxTest'].map(name=>`backend/tests/Feature/SeoIntel/${name}.php`));
  // Read-only measurement input changes must execute their shared consumers even
  // when the tests themselves did not change. Do not expand to full Council.
  if(changes.some(({path})=>path==='backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php'))

@@ -194,11 +194,10 @@ final readonly class Platform12SystemHealthReadService
         $selected = $gate['selected'] ?? null;
         $allowed = $gate['run_allowed'] ?? null;
         $pause = $runtime['pause_intent'] ?? null;
-        $softwareQualified = ($gate['software_qualified'] ?? null) === true;
         if (! is_bool($selected) || ! is_bool($allowed) || ! in_array($pause, ['RUNNING', 'PAUSED'], true)
-            || ($allowed && (! $selected || $pause === 'PAUSED' || ($runtime['public_gate'] ?? null) !== 'READY'
-                || ! ($gate['acceptance_ready'] ?? false)
-                || (! $softwareQualified && (! ($gate['source_accepted'] ?? false) || ! ($gate['end_to_end_accepted'] ?? false)))))) {
+            || ($allowed && (! $selected || $pause === 'PAUSED'
+                || ($runtime['public_gate'] ?? null) !== 'READY'
+                || ($runtime['state'] ?? null) !== 'ACTIVE_READ_ONLY'))) {
             return 'authorization_unknown';
         }
 
@@ -206,9 +205,6 @@ final readonly class Platform12SystemHealthReadService
             ! $selected => 'explicit_selection_required',
             $pause === 'PAUSED' => 'mission_paused',
             $allowed => 'natural_run_authorized',
-            ($runtime['public_gate'] ?? null) !== 'READY', ! ($gate['acceptance_ready'] ?? false) => 'public_checks_required',
-            ! ($gate['source_accepted'] ?? false) => 'source_acceptance_required',
-            ! ($gate['end_to_end_accepted'] ?? false) => 'end_to_end_required',
             default => 'runtime_blocked',
         };
     }
@@ -269,9 +265,6 @@ final readonly class Platform12SystemHealthReadService
                 'planned_time' => $set->nextRun($mission, $now),
                 'selected' => $gate['selected'] ?? null, 'run_allowed' => $gate['run_allowed'] ?? null,
                 'pause_intent' => $runtime['pause_intent'] ?? 'UNSET',
-                'acceptance_ready' => $gate['acceptance_ready'] ?? null,
-                'source_accepted' => $gate['source_accepted'] ?? null,
-                'end_to_end_accepted' => $gate['end_to_end_accepted'] ?? null,
                 'gate_reason' => $this->safeCode($gate['reason'] ?? null), 'gate_next_step' => $step,
                 'receipt_hash' => $receipt === null ? null : $row->terminal_receipt_hash,
             ];

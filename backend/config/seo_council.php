@@ -38,7 +38,6 @@ return [
     'scheduler_enabled' => (bool) env('SEO_COUNCIL_SCHEDULER_ENABLED', false),
     'daily_read_only_enabled' => (bool) env('SEO_COUNCIL_DAILY_READ_ONLY_ENABLED', false),
     'runtime_cache_store' => env('SEO_COUNCIL_RUNTIME_CACHE_STORE', env('CACHE_STORE', 'redis')),
-    'activation_receipt_path' => env('SEO_COUNCIL_ACTIVATION_RECEIPT_PATH', storage_path('app/release-receipts/seo-council-a08/activation.json')),
     'release_revision_path' => env('SEO_COUNCIL_RELEASE_REVISION_PATH', dirname(base_path()).'/REVISION'),
     'scheduler_lease_ttl_seconds' => 120,
     'scheduler_max_lease_ttl_seconds' => 300,

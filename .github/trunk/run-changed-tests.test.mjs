@@ -106,3 +106,10 @@ test('Career package fixture selects all six executable consumers without accept
  }
  assert.throws(()=>changedTestPlan([{status:'M',path:helper.replace('CareerCurrentPackageFixture','UnknownFixture')}]),/Unsupported changed tests/);
 });
+
+test('natural runtime changes select real permission, daily and notification consumers without A08 proof generation',()=>{
+ const plan=changedTestPlan([{status:'M',path:'backend/app/Services/SeoCouncil/Platform12/Platform12RuntimeControl.php'}]);
+ for(const name of ['SeoPlatform12A05ReadOnlyRuntimeGateTest','SeoPlatform12A08DailyWiringTest','SeoPlatform12NaturalRefreshTest','SeoPlatform12F02NotificationOutboxTest'])
+  assert.ok(plan.php.some(path=>path.endsWith('/'+name+'.php')));
+ assert.ok(!plan.php.some(path=>/ActivationEvidence|ActivationInstallFence/.test(path)));
+});

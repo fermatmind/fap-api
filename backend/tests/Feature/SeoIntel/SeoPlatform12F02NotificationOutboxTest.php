@@ -41,6 +41,7 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
         $this->migration()->up();
         config()->set(['seo_council.scheduler_enabled' => true, 'seo_council.daily_read_only_enabled' => true, 'seo_council.runtime_cache_store' => 'array']);
         \Illuminate\Support\Facades\Cache::store('array')->forget(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::CACHE_KEY);
+        $this->travelTo(\Carbon\CarbonImmutable::now('Asia/Shanghai')->setTime(6, 19));
         app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->change(false, [\App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[0]]);
         $this->app->instance(\App\Services\SeoCouncil\Platform12\Platform12EvidenceReader::class, new class implements \App\Services\SeoCouncil\Platform12\Platform12EvidenceReader
         {
@@ -49,7 +50,8 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
                 return ['input' => [], 'sources' => [], 'source_gaps' => [], 'captured_at' => now('UTC')->toAtomString(), 'expires_at' => now('UTC')->addHour()->toAtomString()];
             }
         });
-        $result = app(\App\Services\SeoCouncil\Platform12\Platform12DailyScheduler::class)->tick(\App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[0]);
+        $this->travelTo(\Carbon\CarbonImmutable::now('Asia/Shanghai')->setTime(6, 21));
+        $result = app(\App\Services\SeoCouncil\Platform12\Platform12DailyScheduler::class)->tick();
         $this->assertSame('TERMINAL_COMMITTED', $result['status']);
         $this->terminalHash = $result['receipt_hash'];
         DB::connection('seo_intel')->table('seo_council_notification_outbox')->delete();
@@ -60,6 +62,7 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
 
     protected function tearDown(): void
     {
+        $this->travelBack();
         DB::purge('seo_intel');
 
         parent::tearDown();
@@ -305,6 +308,7 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
         $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_notification_outbox')->where('status', 'pending')->count());
         $outbox->enqueue($this->classification('deselected'), 'failed', 'HOLD');
         $claim = $outbox->claim('worker:scoped:two')['claim'];
+        $this->travelTo(\Carbon\CarbonImmutable::now('Asia/Shanghai')->setTime(6, 19));
         app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->change(false, [\App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[1]]);
         $this->assertSame('DISABLED', $outbox->dispatch($claim, 'HOLD')['status']);
         $this->assertSame('EMPTY', $outbox->claim('worker:scoped:three')['status']);

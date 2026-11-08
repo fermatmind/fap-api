@@ -40,11 +40,8 @@ jobs:
       seo_agent_evidence_boundary: ${{ steps.classify.outputs.seo_agent_evidence_boundary }}
       seo_agent_policy_gateway: ${{ steps.classify.outputs.seo_agent_policy_gateway }}
       seo_council_orchestration: ${{ steps.classify.outputs.seo_council_orchestration }}
-      a08_scoped_checks: ${{ steps.classify.outputs.a08_scoped_checks }}
       seo_competitive_checks: ${{ steps.classify.outputs.seo_competitive_checks }}
       classification: ${{ steps.classify.outputs.classification }}
-      a08_focused: ${{ steps.classify.outputs.a08_focused }}
-      a08_scopes: ${{ steps.classify.outputs.a08_scopes }}
       big5_tests: ${{ steps.classify.outputs.big5_tests }}
       mbti_modes: ${{ steps.classify.outputs.mbti_modes }}
       test_modes: ${{ steps.classify.outputs.test_modes }}
@@ -101,12 +98,9 @@ jobs:
             echo "seo_platform_11a_closeout=$(jq -r .operations.seo_platform_11a_closeout "$RUNNER_TEMP/classification.json")"
             echo "seo_agent_evidence_boundary=$(jq -r .operations.seo_agent_evidence_boundary "$RUNNER_TEMP/classification.json")"
             echo "seo_agent_policy_gateway=$(jq -r .operations.seo_agent_policy_gateway "$RUNNER_TEMP/classification.json")"
-            echo "a08_scoped_checks=$(jq -r .operations.a08_scoped_checks "$RUNNER_TEMP/classification.json")"
             echo "seo_council_orchestration=$(jq -r .operations.seo_council_orchestration "$RUNNER_TEMP/classification.json")"
             echo "seo_competitive_checks=$(jq -r .operations.seo_competitive_checks "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
-            echo "a08_focused=$(jq -r .operations.a08_focused "$RUNNER_TEMP/classification.json")"
-            echo "a08_scopes=$(jq -c .operations.a08_scopes "$RUNNER_TEMP/classification.json")"
             echo "big5_tests=$(jq -r .operations.big5_tests "$RUNNER_TEMP/classification.json")"
             echo "content_pack_checks=$(jq -r .operations.content_pack_checks "$RUNNER_TEMP/classification.json")"
             echo "content_test_files=$(jq -c .operations.content_test_files "$RUNNER_TEMP/classification.json")"
@@ -707,12 +701,10 @@ jobs:
   seo-council-orchestration:
     name: SEO Platform 11D-11L deterministic Council orchestration
     needs: [classify, seo-agent-policy-gateway]
-    if: always() && (needs.classify.outputs.seo_council_orchestration == 'true' || needs.classify.outputs.a08_scoped_checks == 'true') && (needs.seo-agent-policy-gateway.result == 'success' || needs.seo-agent-policy-gateway.result == 'skipped')
+    if: always() && needs.classify.outputs.seo_council_orchestration == 'true' && (needs.seo-agent-policy-gateway.result == 'success' || needs.seo-agent-policy-gateway.result == 'skipped')
     runs-on: ubuntu-latest
     # The full suite and its receipt reached the previous 25-minute job limit.
     timeout-minutes: 30
-    env:
-      A08_SCOPES: ${{ needs.classify.outputs.a08_scopes }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
@@ -730,32 +722,7 @@ jobs:
       - name: Install backend dependencies
         working-directory: backend
         run: bash scripts/ci/composer_install.sh composer --no-interaction --prefer-dist --no-progress
-      - name: Run deterministic A08 software consumers
-        if: needs.classify.outputs.a08_focused == 'true'
-        working-directory: backend
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          cp -n .env.example .env || true
-          php artisan key:generate --force
-          node --input-type=module - <<'JS' > "$RUNNER_TEMP/a08-required-paths.txt"
-          import {CHECKS,LEGACY_CHECKS,PRODUCER_SCOPE_VERSION,LEGACY_SCOPE_VERSION} from '../.github/trunk/seo-platform-12a08-activation.mjs';
-          const checks=PRODUCER_SCOPE_VERSION===LEGACY_SCOPE_VERSION?LEGACY_CHECKS:CHECKS;
-          import {execFileSync} from 'node:child_process';
-          const files=execFileSync('git',['ls-files','tests'],{encoding:'utf8'}).trim().split('\n');
-          const selected=new Set();
-          for(const name of new Set(JSON.parse(process.env.A08_SCOPES).flatMap(id=>checks[id]))) {
-          const matches=files.filter(path=>path.endsWith(`/${name}.php`) || (name==='SeoPlatform11C' && path.split('/').at(-1).startsWith(name)));
-          if(!matches.length)throw new Error(`Missing required A08 consumer: ${name}`);
-          matches.forEach(path=>selected.add(path));
-          }
-          console.log([...selected].sort().join('\n'));
-          JS
-          mapfile -t required_paths < "$RUNNER_TEMP/a08-required-paths.txt"
-          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" "${required_paths[@]}"
       - name: Verify contracts, fresh SQLite schema, boundaries, and closeout
-        if: needs.classify.outputs.a08_focused != 'true'
         working-directory: backend
         env:
           GH_TOKEN: ${{ github.token }}
@@ -787,7 +754,7 @@ jobs:
           touch "$RUNNER_TEMP/seo-council.sqlite"
           php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi
           rm -f "$APP_CONFIG_CACHE"
-          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" \
+          php artisan test --compact \
             tests/Feature/SeoIntel/SeoPlatform11D*.php \
             tests/Feature/SeoIntel/SeoPlatform11E*.php \
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
@@ -1081,21 +1048,10 @@ jobs:
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' ../seo-council-orchestration-closeout.json >/dev/null
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        if: needs.classify.outputs.seo_council_orchestration == 'true' && needs.classify.outputs.a08_focused != 'true'
+        if: needs.classify.outputs.seo_council_orchestration == 'true'
         with:
           name: seo-council-orchestration-${{ github.sha }}
           path: seo-council-orchestration-closeout.json
-          if-no-files-found: error
-          retention-days: 90
-
-      - name: Bind completed A08 scoped test results
-        if: needs.classify.outputs.a08_scoped_checks == 'true'
-        run: node .github/trunk/seo-platform-12a08-activation.mjs scoped-receipt "$RUNNER_TEMP/a08-scoped-junit.xml" "$GITHUB_SHA" a08-scoped-checks.json
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        if: needs.classify.outputs.a08_scoped_checks == 'true'
-        with:
-          name: a08-scoped-checks-${{ github.sha }}
-          path: a08-scoped-checks.json
           if-no-files-found: error
           retention-days: 90
 
@@ -1184,7 +1140,7 @@ jobs:
           name: seo-agent-policy-gateway-${{ github.sha }}
           path: seo-agent-policy-gateway
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
-        if: needs.classify.outputs.seo_council_orchestration == 'true' && needs.classify.outputs.a08_focused != 'true'
+        if: needs.classify.outputs.seo_council_orchestration == 'true'
         with:
           name: seo-council-orchestration-${{ github.sha }}
           path: seo-council-orchestration
@@ -1465,9 +1421,6 @@ jobs:
               and (.receipt_hash | test("^[a-f0-9]{64}$"))
             ' seo-council-orchestration/seo-council-orchestration-closeout.json >/dev/null
             council="$(jq -c '. + {required:true}' seo-council-orchestration/seo-council-orchestration-closeout.json)"
-          elif [ "$(jq -r .operations.a08_scoped_checks trunk-path-classification.json)" = true ]; then
-            test "$SEO_COUNCIL_ORCHESTRATION_RESULT" = success
-            council='{"required":false,"result":"success","check_scope":"a08_scoped_checks"}'
           else
             test "$SEO_COUNCIL_ORCHESTRATION_RESULT" = skipped
             council='{"required":false,"result":"skipped"}'

@@ -12,7 +12,6 @@ use App\Services\SeoCouncil\Platform12\Notification\Platform12DailyNotifications
 use App\Services\SeoCouncil\SeoCouncilOrchestrator;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Sleep;
 use Throwable;
 
 final readonly class Platform12DailyScheduler
@@ -33,27 +32,20 @@ final readonly class Platform12DailyScheduler
         private Platform12DailyNotifications $notifications,
     ) {}
 
-    public function tick(?string $acceptanceMission = null): array
+    public function tick(): array
     {
-        if ($acceptanceMission !== null && ! in_array($acceptanceMission, Platform12DailyMissionSet::IDS, true)) {
-            return $this->result('ACCEPTANCE_SCOPE_DENIED');
-        }
-        $this->control->reconcile();
         $state = $this->control->status();
         if (! $state['computation_enabled']) {
             return $this->result($state['state']);
         }
-        if ($acceptanceMission !== null && ! $this->control->allowsMission($acceptanceMission, true)) {
-            return $this->result('MISSION_NOT_AUTHORIZED');
-        }
         // External acquisition has its own bounded lock and backoff. Keep it
         // outside the evaluation lease and its 120-second software budget.
-        if ($acceptanceMission === null && app()->environment('production')) {
+        if (app()->environment('production')) {
             try {
                 // Refresh eligibility is independent of the daily evaluation slot.
                 // A consumed HOLD must not suppress retries after acquisition backoff.
                 if (in_array(Platform12DailyMissionSet::IDS[2], $state['effective_mission_ids'], true)
-                    && $this->control->allowsMission(Platform12DailyMissionSet::IDS[2], false, $state['generation'])) {
+                    && $this->control->allowsMission(Platform12DailyMissionSet::IDS[2], $state['generation'])) {
                     $this->refreshEvidence($state);
                     if (! $this->sameGeneration($state)) {
                         return $this->result('PAUSED_BEFORE_RESERVATION');
@@ -65,17 +57,6 @@ final readonly class Platform12DailyScheduler
         }
         $owner = bin2hex(random_bytes(24));
         $lease = $this->store->acquire(self::LEASE, $owner, 180);
-        // Wait only before reservation. This never repeats a Mission, steals a
-        // live fence or retries a terminal failure; natural ticks stay nonblocking.
-        for ($wait = 0; $acceptanceMission !== null && ! $lease['acquired']
-            && $lease['status'] === 'LOCK_HELD' && $wait < 40; $wait++) {
-            Sleep::usleep(250_000);
-            if (! $this->sameGeneration($state)
-                || ! $this->control->allowsMission($acceptanceMission, true, $state['generation'])) {
-                return $this->result('PAUSED_BEFORE_RESERVATION');
-            }
-            $lease = $this->store->acquire(self::LEASE, $owner, 180);
-        }
         if (! $lease['acquired']) {
             return $this->result($lease['status']);
         }
@@ -83,38 +64,25 @@ final readonly class Platform12DailyScheduler
         $start = hrtime(true);
         try {
             // One outbox claim per tick; successful checks create no notification.
-            if ($acceptanceMission === null) {
-                $this->notifications->drain();
-            }
+            $this->notifications->drain();
             $catalog = $this->contracts->missionCatalog();
             $vector = $this->capabilities->snapshot()['version_vector'];
-            $row = $this->deliveries()->whereIn('mission_id', $acceptanceMission === null ? $state['effective_mission_ids'] : [$acceptanceMission])
+            $row = $this->deliveries()->whereIn('mission_id', $state['effective_mission_ids'])
                 ->where('mission_request_json->slot->runtime_generation', $state['generation'])
+                ->where('slot_key', 'not like', 'a08:acceptance:%')
                 ->whereNotIn('status', ['CLOSED', 'HELD', 'FAILED'])
                 ->orderBy('scheduled_for')->first();
-            if ($row !== null && $acceptanceMission !== null) {
-                return $this->result('ACCEPTANCE_REQUIRES_IDLE');
-            }
             if ($row === null) {
-                $slot = $acceptanceMission === null ? $this->nextSlot($state) : [
-                    'mission_id' => $acceptanceMission,
-                    'slot_key' => 'a08:acceptance:'.array_search($acceptanceMission, Platform12DailyMissionSet::IDS, true)
-                        .':'.CarbonImmutable::now('Asia/Shanghai')->toDateString().':'.$this->releaseSha(),
-                    'scheduled_for' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
-                    'trigger_mode' => 'controlled_acceptance',
-                ];
+                $slot = $this->nextSlot($state);
                 if ($slot === null) {
                     return $this->result('IDLE');
-                }
-                if ($this->deliveries()->where('slot_key', $slot['slot_key'])->exists()) {
-                    return $this->result('ACCEPTANCE_ALREADY_RECORDED');
                 }
                 $evidence = $slot['trigger_mode'] === 'missed'
                     ? ['input' => [], 'sources' => [], 'source_gaps' => ['missed_slot'],
                         'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
                         'expires_at' => now('UTC')->addMinutes(10)->format('Y-m-d\TH:i:s\Z')]
                     : $this->evidence->capture($slot['mission_id']);
-                if (! $this->sameGeneration($state) || ! $this->control->allowsMission($slot['mission_id'], $acceptanceMission !== null, $state['generation'])) {
+                if (! $this->sameGeneration($state) || ! $this->control->allowsMission($slot['mission_id'], $state['generation'])) {
                     return $this->result('PAUSED_BEFORE_RESERVATION');
                 }
                 $mission = Platform12FrozenMission::freeze($slot, $evidence, $vector, $catalog['catalog_hash']);
@@ -234,7 +202,7 @@ final readonly class Platform12DailyScheduler
         }
         if ($failure !== null) {
             $this->control->withControlLock(function () use ($state, $failure): void {
-                if ($this->control->allowsMission(Platform12DailyMissionSet::IDS[2], false, $state['generation'])) {
+                if ($this->control->allowsMission(Platform12DailyMissionSet::IDS[2], $state['generation'])) {
                     app(Platform12EvidenceSelection::class)->atomicReference([
                         'refresh_status' => 'failed', 'execution_sha' => $this->releaseSha(true),
                         'reason' => $failure, 'checked_at' => now('UTC')->toAtomString(),
@@ -269,9 +237,10 @@ final readonly class Platform12DailyScheduler
 
     private function missionAllowed(Platform12FrozenMission $mission, array $state): bool
     {
-        return ($mission->envelope['slot']['runtime_generation'] ?? null) === $state['generation']
+        return $mission->envelope['slot']['trigger_mode'] !== 'controlled_acceptance'
+            && ($mission->envelope['slot']['runtime_generation'] ?? null) === $state['generation']
             && $this->control->allowsMission($mission->envelope['slot']['mission_id'],
-                $mission->envelope['slot']['trigger_mode'] === 'controlled_acceptance', $state['generation']);
+                $state['generation']);
     }
 
     private function sameGeneration(array $started): bool

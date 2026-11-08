@@ -67,12 +67,10 @@
                     <small>{{ __('seo-council.evidence_origin') }}: {{ __('seo-council.origins.'.($mission['evidence_origin'] ?? 'unknown')) }}</small>
                     <x-filament-ops::ops-mission-result-evidence label="latest_natural" :result="$mission['latest_natural'] ?? null" />
                     <x-filament-ops::ops-mission-result-evidence label="latest_controlled" :result="$mission['latest_controlled'] ?? null" />
-                    <small>{{ __('seo-council.acceptance_ready') }}: {{ ($mission['acceptance_ready'] ?? false) ? 'READY' : 'HOLD' }} · {{ $mission['gate_reason'] ?? 'UNAVAILABLE' }}</small>
                     <strong>{{ __('seo-council.'.($mission['gate_next_step'] ?? 'authorization_unknown')) }}</strong>
                     @if (($mission['gate_next_step'] ?? null) === 'natural_run_authorized')
                         <small>{{ __('seo-council.'.(in_array($mission['state'], ['FAILED', 'EXECUTION_HOLD'], true) ? 'reasons.EXECUTION_HOLD.problem' : ($mission['state'] === 'RUNNING' ? 'currently_executing' : 'waiting_window'))) }}</small>
                     @endif
-                    <small>{{ __('seo-council.source_accepted') }}: {{ isset($mission['source_accepted']) ? ($mission['source_accepted'] ? 'READY' : 'HOLD') : 'UNAVAILABLE' }} · {{ __('seo-council.end_to_end_accepted') }}: {{ isset($mission['end_to_end_accepted']) ? ($mission['end_to_end_accepted'] ? 'READY' : 'HOLD') : 'UNAVAILABLE' }}</small>
                     <small>{{ __('seo-council.selected') }}: {{ isset($mission['selected']) ? ($mission['selected'] ? 'YES' : 'NO') : 'UNAVAILABLE' }} · {{ __('seo-council.run_allowed') }}: {{ isset($mission['run_allowed']) ? ($mission['run_allowed'] ? 'YES' : 'NO') : 'UNAVAILABLE' }}</small>
                     <small>{{ __($mission['next_run'] ? 'seo-council.next_run' : 'seo-council.planned_disabled') }}: <time datetime="{{ $mission['next_run'] ?? $mission['planned_time'] }}">{{ Platform12OperationsTime::display($mission['next_run'] ?? $mission['planned_time']) ?? __('seo-council.time_unknown') }}</time></small>
                     @if ($mission['receipt_hash'])

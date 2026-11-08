@@ -36,8 +36,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
-      a08_scoped_checks: ${{ steps.receipt.outputs.a08_scoped_checks }}
-      a08_gate_only: ${{ steps.receipt.outputs.a08_gate_only }}
       release_required: ${{ steps.receipt.outputs.deploy }}
       deploy: ${{ steps.receipt.outputs.deploy == 'true' && steps.admission.outputs.deploy == 'true' }}
       infrastructure: ${{ steps.receipt.outputs.infrastructure }}
@@ -132,6 +130,7 @@ jobs:
             and .sha == $sha
             and .ci_run_id == $run
             and .result == "success"
+            and (.classification.deploy_mode == "standard" or .classification.deploy_mode == "code_only")
             and .publisher.required == .classification.operations.publisher_required
             and .seo_agent_policy_gateway.required == .classification.operations.seo_agent_policy_gateway
             and .seo_council_orchestration.required == .classification.operations.seo_council_orchestration
@@ -321,11 +320,7 @@ jobs:
                 and .seo_council_orchestration.platform11_lifecycle.execution_allowed == false
                 and .seo_council_orchestration.execution_allowed == false)
               or (.seo_council_orchestration.required == false
-                and ((.classification.operations.a08_scoped_checks == true
-                    and .seo_council_orchestration.result == "success"
-                    and .seo_council_orchestration.check_scope == "a08_scoped_checks")
-                  or (.classification.operations.a08_scoped_checks == false
-                    and .seo_council_orchestration.result == "skipped"))))
+                and .seo_council_orchestration.result == "skipped"))
             and ((.seo_competitive_evidence.required == true
                 and .seo_competitive_evidence.receipt_version == "seo.competitive_evidence_closeout.v3"
                 and .seo_competitive_evidence.closeout_state == "OFFLINE_EVAL_READY"
@@ -426,8 +421,6 @@ jobs:
             echo "seo_agent_evidence_boundary=$seo_agent_evidence_boundary"
             echo "seo_agent_policy_gateway=$seo_agent_policy_gateway"
             echo "seo_council_orchestration=$seo_council_orchestration"
-            echo "a08_scoped_checks=$(jq -r .classification.operations.a08_scoped_checks "$receipt")"
-            echo "a08_gate_only=$(jq -r .classification.operations.a08_gate_only "$receipt")"
             echo "seo_council_runtime_closeout=$seo_council_runtime_closeout"
             echo "seo_competitive_evidence=$seo_competitive_evidence"
             echo "private_result_authority_publish_required=$private_result_authority_publish_required"
@@ -669,11 +662,6 @@ jobs:
             -i "$host_key" -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             'GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND="ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes -o Hostname=ssh.github.com -o Port=443 -o HostKeyAlias=github.com -o ConnectTimeout=10 -o ConnectionAttempts=1" git ls-remote git@github.com:fermatmind/fap-api.git HEAD >/dev/null'
           printf 'staging_repository_reader=ready\n'
-      - name: Read staging A08 state before deployment
-        if: needs.policy.outputs.career_content_only != 'true'
-        env:
-          A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
-        run: bash backend/scripts/deploy/seo_a08_transport.sh state a08-staging-before.json
       - name: Materialize inactive staging measurement candidate
         if: needs.policy.outputs.seo_council_runtime_closeout == 'true' || needs.policy.outputs.seo_competitive_evidence == 'true'
         env:
@@ -699,7 +687,6 @@ jobs:
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_runtime_closeout }}' \
-            -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
             -o release_operations='${{ needs.policy.outputs.operations }}' --no-interaction
       - name: Verify staging measurement source readiness
         id: measurement_source_readiness
@@ -938,6 +925,10 @@ jobs:
           deploy_task=deploy
           if [ '${{ needs.policy.outputs.seo_council_runtime_closeout }}' = true ] || [ '${{ needs.policy.outputs.seo_competitive_evidence }}' = true ]; then deploy_task=deploy:prepared; fi
           deploy_mode=standard
+          if [ '${{ fromJSON(needs.policy.outputs.classification).deploy_mode }}' = code_only ]; then
+            deploy_task=deploy:code-only
+            deploy_mode=code_only
+          fi
           if [ '${{ needs.policy.outputs.career_content_only }}' = true ]; then
             deploy_task=deploy:career-content-only
             deploy_mode=career_content_only
@@ -968,7 +959,6 @@ jobs:
             -o mbti_trait_content_publish='${{ needs.policy.outputs.mbti_trait_content_publish }}' \
             -o career_data_recovery='${{ needs.policy.outputs.career_data_recovery }}' \
             -o seo_council_orchestration="$council_orchestration" \
-            -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_council_closeout_deferred="$council_orchestration" "${package_args[@]}" --no-interaction
       - name: Publish and read back exact staging MBTI zh result package
@@ -1306,13 +1296,6 @@ jobs:
             and .platform11_lifecycle.execution_allowed == false
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
-      - name: Verify staging A08 pause and read-only Operations preservation
-        if: needs.policy.outputs.career_content_only != 'true'
-        env:
-          A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
-        run: |
-          bash backend/scripts/deploy/seo_a08_transport.sh state a08-staging-after.json
-          node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-staging-before.json a08-staging-after.json "$DEPLOY_SHA"
       - id: eq-source-publish
         name: Publish exact reviewed EQ Chinese source articles
         if: fromJSON(needs.policy.outputs.classification).operations.eq_new_source_articles_publish == true
@@ -1432,10 +1415,6 @@ jobs:
           path: |
             staging-timing.json
             event-ingest-runtime-staging-*.json
-            a08-staging-before.json
-            a08-staging-after.json
-            a08-staging-sources/
-            a08-staging-safety.json
             seo-agent-evidence-boundary-staging.json
             seo-agent-policy-gateway-staging.json
             seo-council-orchestration-staging.json
@@ -1598,11 +1577,6 @@ jobs:
           path: trunk-deploy-skip.json
           if-no-files-found: error
           retention-days: 90
-      - name: Read production A08 state before deployment
-        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
-        env:
-          A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
-        run: bash backend/scripts/deploy/seo_a08_transport.sh state a08-production-before.json
       - name: Capture first-publish public SEO baseline
         if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_first_publish == 'true'
         run: >-
@@ -1785,6 +1759,10 @@ jobs:
           lkg_sha='${{ steps.baseline.outputs.active }}'
           deploy_task=deploy
           deploy_mode=standard
+          if [ '${{ fromJSON(needs.policy.outputs.classification).deploy_mode }}' = code_only ]; then
+            deploy_task=deploy:code-only
+            deploy_mode=code_only
+          fi
           if [ '${{ needs.policy.outputs.career_content_only }}' = true ]; then
             deploy_task=deploy:career-content-only
             deploy_mode=career_content_only
@@ -1833,7 +1811,6 @@ jobs:
             -o mbti_result_introductions_publish='${{ needs.policy.outputs.mbti_result_introductions_publish }}' \
             -o mbti_trait_content_publish='${{ needs.policy.outputs.mbti_trait_content_publish }}' \
             -o seo_council_orchestration="$production_council_closeout" \
-            -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_measurement_sync_env="$remote_env" \
             -o seo_competitive_writer_env="$remote_writer_env" "${package_args[@]}" --no-interaction
@@ -2517,21 +2494,6 @@ jobs:
               > "$dir/first-publish-seo.json"
           fi
           PRODUCTION_FORWARD
-      - name: Verify production A08 pause and read-only Operations preservation
-        id: production-state
-        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
-        env:
-          A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
-        run: |
-          forward_remaining=$((PRODUCTION_FORWARD_DEADLINE - $(date -u +%s)))
-          if [ "$forward_remaining" -le 0 ]; then
-            echo 'Production forward deadline exhausted.' >&2
-            exit 124
-          fi
-          timeout --signal=TERM --kill-after=30s "${forward_remaining}s" bash -euo pipefail <<'PRODUCTION_FORWARD'
-          bash backend/scripts/deploy/seo_a08_transport.sh state a08-production-after.json
-          node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-production-before.json a08-production-after.json "$DEPLOY_SHA"
-          PRODUCTION_FORWARD
       - id: eq-source-publish
         name: Publish exact reviewed EQ Chinese source articles
         if: steps.baseline.outputs.skip != 'true' && fromJSON(needs.policy.outputs.classification).operations.eq_new_source_articles_publish == true
@@ -2638,7 +2600,7 @@ jobs:
           if-no-files-found: error
           retention-days: 30
       - name: Restore exact LKG after Career publisher failure
-        if: failure() && steps.activation.outcome == 'success' && (steps.career-parity.outcome == 'failure' || steps.production-state.outcome == 'failure' || steps.production-competitive.outcome == 'failure' || steps.production-evidence.outcome == 'failure' || steps.production-policy.outcome == 'failure' || steps.production-council.outcome == 'failure' || steps.career-publish.outcome == 'failure' || steps.eq-source-publish.outcome == 'failure' || steps.eq-existing-publish.outcome == 'failure' || steps.eq-english-publish.outcome == 'failure' || steps.iq-public-publish.outcome == 'failure' || steps.iq-article-publish.outcome == 'failure' || steps.iq-topic-publish.outcome == 'failure' || steps.public-content-53-publish.outcome == 'failure')
+        if: failure() && steps.activation.outcome == 'success' && (steps.career-parity.outcome == 'failure' || steps.production-competitive.outcome == 'failure' || steps.production-evidence.outcome == 'failure' || steps.production-policy.outcome == 'failure' || steps.production-council.outcome == 'failure' || steps.career-publish.outcome == 'failure' || steps.eq-source-publish.outcome == 'failure' || steps.eq-existing-publish.outcome == 'failure' || steps.eq-english-publish.outcome == 'failure' || steps.iq-public-publish.outcome == 'failure' || steps.iq-article-publish.outcome == 'failure' || steps.iq-topic-publish.outcome == 'failure' || steps.public-content-53-publish.outcome == 'failure')
         timeout-minutes: 36
         shell: bash
         run: |
@@ -2775,9 +2737,6 @@ jobs:
           path: |
             trunk-delivery-timing.json
             event-ingest-runtime-production-*.json
-            a08-production-before.json
-            a08-production-after.json
-            a08-production-sources/
             career-current-authority-production-preactivation-parity.json
             seo-agent-evidence-boundary-production.json
             seo-agent-policy-gateway-production.json

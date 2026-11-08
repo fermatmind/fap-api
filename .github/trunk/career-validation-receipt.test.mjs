@@ -36,7 +36,7 @@ function fixture(required = true) {
   write('trunk-path-classification.json', {
     deploy: true, tests_changed:false, flags:{content_assets:true},
     operations: { content_pack_checks:false,big5_tests:false,personality_current_authority_release:false,publisher_required: required, career_first_publish: required,
-      career_content_only: false, a08_scoped_checks: false },
+      career_content_only: false },
     scope: { validation_base_sha: base }, career_content_change: change,
   });
   write('career-parity/career-current-authority-parity.json', {

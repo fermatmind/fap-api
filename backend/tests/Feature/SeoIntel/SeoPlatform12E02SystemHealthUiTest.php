@@ -172,9 +172,7 @@ final class SeoPlatform12E02SystemHealthUiTest extends TestCase
         $cases = [
             [['selected' => false, 'run_allowed' => false], 'RUNNING', 'explicit_selection_required'],
             [['run_allowed' => false], 'PAUSED', 'mission_paused'],
-            [['run_allowed' => false, 'acceptance_ready' => false], 'RUNNING', 'public_checks_required'],
-            [['run_allowed' => false, 'source_accepted' => false], 'RUNNING', 'source_acceptance_required'],
-            [['run_allowed' => false, 'end_to_end_accepted' => false], 'RUNNING', 'end_to_end_required'],
+            [['run_allowed' => false, 'reason' => 'WRITE_GUARD_HOLD'], 'RUNNING', 'runtime_blocked'],
             [['run_allowed' => false], 'RUNNING', 'runtime_blocked'],
             [['selected' => false, 'run_allowed' => true], 'RUNNING', 'authorization_unknown'],
             [[], 'PAUSED', 'authorization_unknown'],
@@ -191,7 +189,7 @@ final class SeoPlatform12E02SystemHealthUiTest extends TestCase
         $this->assertSame('authorization_unknown', app(Platform12SystemHealthReadService::class)->snapshot($runtime)['daily_missions']['items'][1]['gate_next_step']);
     }
 
-    public function test_software_qualified_running_missions_keep_next_run_and_honest_business_hold(): void
+    public function test_natural_qualified_running_missions_keep_next_run_and_honest_business_hold(): void
     {
         $this->dailyReceipt('HELD', 'RECONCILIATION_INCOMPLETE_HOLD', now('UTC')->format('Y-m-d\TH:i:s\Z'));
         $runtime = $this->runtime(['software_qualified' => true, 'source_accepted' => false, 'end_to_end_accepted' => false]);
@@ -206,7 +204,7 @@ final class SeoPlatform12E02SystemHealthUiTest extends TestCase
             $this->assertStringContainsString(__('seo-council.natural_run_authorized'), $html);
             $this->assertStringNotContainsString('<button', $html);
         }
-        foreach ([['software_qualified' => false], ['selected' => false]] as $override) {
+        foreach ([['selected' => false]] as $override) {
             $denied = $this->runtime(array_replace(['software_qualified' => true, 'source_accepted' => false, 'end_to_end_accepted' => false], $override));
             $this->assertSame('authorization_unknown', app(Platform12SystemHealthReadService::class)->snapshot($denied)['daily_missions']['items'][1]['gate_next_step']);
         }

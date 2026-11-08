@@ -25,13 +25,15 @@ final class SeoPlatform12A08LegacyScheduleContractTest extends TestCase
         });
     }
 
-    public function test_controlled_acceptance_is_never_delegated_by_the_natural_entrypoint(): void
+    public function test_retired_acceptance_option_is_rejected_before_any_delegation(): void
     {
-        $this->app->instance('env', 'production');
-        config()->set('seo_council.scheduler_enabled', true);
         \Illuminate\Support\Facades\Process::fake();
-        $this->artisan('seo:council-scheduled', ['--acceptance' => 'seo.platform12.daily_private_policy_evidence_drift'])
-            ->expectsOutput('{"status":"SCHEDULED_IDENTITY_HOLD","execution_allowed":false}')->assertFailed();
+        try {
+            $this->artisan('seo:council-scheduled', ['--acceptance' => 'seo.platform12.daily_private_policy_evidence_drift'])->run();
+            $this->fail('Retired acceptance option must be rejected');
+        } catch (\Symfony\Component\Console\Exception\InvalidOptionException $error) {
+            $this->assertStringContainsString('--acceptance', $error->getMessage());
+        }
         \Illuminate\Support\Facades\Process::assertNothingRan();
     }
 

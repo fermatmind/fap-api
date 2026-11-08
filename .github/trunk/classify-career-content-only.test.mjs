@@ -74,7 +74,6 @@ test('a Current locale gaining body leaves the content-only lane and requires di
   assert.equal(classification.operations.career_content_only, false);
   assert.equal(classification.operations.career_first_publish, true);
   assert.equal(classification.flags.seo_discoverability, true);
-  assert.equal(classification.operations.a08_scoped_checks, false);
   assert.equal(classification.categories.includes('seo_discoverability'), true);
 });
 
@@ -87,7 +86,6 @@ test('missing version-bound body qualification fails closed into discoverability
   const classification = applyCareerContentOnly(classifyPaths(item.paths), receipt);
   assert.equal(classification.flags.seo_discoverability, true);
   assert.equal(classification.operations.career_content_only, false);
-  assert.equal(classification.operations.a08_scoped_checks, true);
 });
 
 test('mixed first publication and existing body refresh use the controlled mode', () => {
@@ -168,7 +166,6 @@ for (const count of [1, 100, 200]) {
     assert.match(receipt.receipt_digest, /^[a-f0-9]{64}$/);
     const classification = applyCareerContentOnly(classifyPaths(input.paths), receipt);
     assert.equal(classification.operations.career_content_only, true);
-    assert.equal(classification.operations.a08_scoped_checks, false);
     assert.equal(classification.career_content_change.contract_version, receipt.contract_version);
     assert.equal(classification.career_content_change.base_sha, receipt.base_sha);
     assert.equal(classification.career_content_change.head_sha, receipt.head_sha);

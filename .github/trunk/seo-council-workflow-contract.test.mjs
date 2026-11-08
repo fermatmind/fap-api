@@ -1,6 +1,7 @@
+import {tmpdir} from 'node:os';
 import assert from "node:assert/strict";
-import { spawnSync } from "node:child_process";
-import { readFileSync, readdirSync } from "node:fs";
+import { execFileSync, spawnSync } from "node:child_process";
+import { readFileSync, readdirSync, mkdtempSync, writeFileSync, rmSync } from "node:fs";
 import test from "node:test";
 import { classifyPaths } from "./classify-paths.mjs";
 
@@ -8,64 +9,26 @@ const ci = readFileSync(new URL("../workflows/ci.yml", import.meta.url), "utf8")
 const deploy = readFileSync(new URL("../workflows/deploy.yml", import.meta.url), "utf8");
 const deployer = readFileSync(new URL("../../deploy.php", import.meta.url), "utf8");
 
-test("focused A08 selection agrees with the final CI receipt and deployment policy", () => {
+test("daily read-only software uses existing code-only deployment without A08 proofs", () => {
   const classification = classifyPaths([
     "backend/app/Services/SeoCouncil/Platform12/Platform12RuntimeControl.php",
     "backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php",
     ".github/workflows/ci.yml", ".github/workflows/deploy.yml",
   ]);
-  assert.equal(classification.operations.a08_focused, true);
-  assert.equal(classification.operations.a08_scoped_checks, true);
+  assert.equal(classification.deploy_mode, 'code_only');
   assert.equal(classification.operations.seo_council_orchestration, false);
-  const full = ci.match(/          council_required="[^\n]+"\n          if \[ "\$council_required" = true \]; then/);
-  assert.ok(full);
-  // Real classification is checked below against the same deploy equality.
-  const match = spawnSync("jq", ["-e", ".seo_council_orchestration.required == .classification.operations.seo_council_orchestration"], {
-    encoding: "utf8", input: JSON.stringify({classification,
-      seo_council_orchestration: {required: false, result: "success", check_scope: "a08_scoped_checks"}}),
-  });
-  assert.equal(match.status, 0, match.stderr);
+  assert.ok(Object.keys(classification.operations).every(key => !key.startsWith('a08_')));
+  assert.doesNotMatch(ci + deploy, /a08_scoped_checks|a08_gate_only|a08-scoped-checks/);
+  assert.match(deploy, /deploy_task=deploy:code-only\n            deploy_mode=code_only/);
 });
 
-test("A08-only exact-SHA receipts require successful scoped checks without a legacy closeout", () => {
-  const branch = ci.match(/          elif \[ "\$\(jq -r \.operations\.a08_scoped_checks trunk-path-classification\.json\)" = true \]; then[\s\S]*?          fi/);
-  assert.ok(branch, "receipt aggregation must distinguish A08-only checks");
-  const script = `set -e\njq() { printf '%s' "$SCOPED"; }\n${branch[0].replace("elif", "if")}\nprintf '%s' "$council"`;
-  for (const scoped of ["true", "false"]) {
-    for (const result of ["success", "skipped", "failure", "cancelled"]) {
-      const run = spawnSync("bash", ["-c", script], {
-        encoding: "utf8",
-        env: { ...process.env, SCOPED: scoped, SEO_COUNCIL_ORCHESTRATION_RESULT: result },
-      });
-      const accepted = scoped === "true" ? result === "success" : result === "skipped";
-      assert.equal(run.status === 0, accepted, `${scoped}/${result}: ${run.stderr}`);
-      if (accepted) {
-        assert.deepEqual(JSON.parse(run.stdout), scoped === "true"
-          ? { required: false, result: "success", check_scope: "a08_scoped_checks" }
-          : { required: false, result: "skipped" });
-      }
-    }
-  }
-});
-
-test("deployment accepts only the matching A08-only receipt scope and result", () => {
-  const branch = deploy.match(/or \(\.seo_council_orchestration\.required == false[\s\S]*?\n            and /);
-  assert.ok(branch);
-  const predicate = branch[0].slice(3).replace(/\)\s+and $/, "").trim();
-  for (const scoped of [true, false]) {
-    for (const result of ["success", "skipped", "failure"]) {
-      for (const checkScope of ["a08_scoped_checks", "weekly_full_checks", null]) {
-        const run = spawnSync("jq", ["-e", predicate], {
-          encoding: "utf8",
-          input: JSON.stringify({
-            classification: { operations: { a08_scoped_checks: scoped } },
-            seo_council_orchestration: { required: false, result, check_scope: checkScope },
-          }),
-        });
-        const accepted = scoped ? result === "success" && checkScope === "a08_scoped_checks" : result === "skipped";
-        assert.equal(run.status === 0, accepted, `${scoped}/${result}/${checkScope}: ${run.stderr}`);
-      }
-    }
+test("deployment rejects a success result for an unselected Council job", () => {
+  const predicate = '.seo_council_orchestration.required == false and .seo_council_orchestration.result == "skipped"';
+  assert.ok(deploy.includes('and .seo_council_orchestration.result == "skipped"'));
+  for (const result of ['success', 'skipped', 'failure', 'cancelled']) {
+    const run = spawnSync('jq', ['-e', predicate], {encoding: 'utf8',
+      input: JSON.stringify({seo_council_orchestration: {required: false, result}})});
+    assert.equal(run.status === 0, result === 'skipped');
   }
 });
 
@@ -134,7 +97,7 @@ test("11D through 11L deployment stays disabled and writes immutable exact-SHA c
   assert.doesNotMatch(`${ci}\n${deploy}`, /seo-agent:/);
 });
 
-test("A08 runtime persistence uses the existing isolated writer and keeps generic SEO writes disabled", () => {
+test("Natural runtime persistence uses the existing isolated writer and keeps generic SEO writes disabled", () => {
   assert.equal((deployer.match(/task\('seo:council-runtime-db-access'/g) || []).length, 1);
   assert.doesNotMatch(deployer, /GRANT (?:SELECT|ALL|DELETE)/);
   assert.match(deployer, /SEO_COUNCIL_DB_CONNECTION' => 'seo_council'/);
@@ -168,16 +131,27 @@ test("A08 runtime persistence uses the existing isolated writer and keeps generi
 });
 
 
-test("Council-only changes do not attempt an empty A08 receipt or upload", () => {
+test("Council-only changes retain the full shared validation without A08 artifacts", () => {
   const classification = classifyPaths(["backend/lang/en/ops.php"]);
   assert.equal(classification.operations.seo_council_orchestration, true);
-  assert.equal(classification.operations.a08_scoped_checks, false);
-  assert.deepEqual(classification.operations.a08_scopes, []);
-  const binding = ci.match(/      - name: Bind completed A08 scoped test results\n([\s\S]*?)\n  seo-competitive-evidence:/)?.[1];
-  assert.ok(binding);
-  assert.match(binding, /^        if: needs\.classify\.outputs\.a08_scoped_checks == 'true'\n/);
-  assert.match(binding, /- uses: actions\/upload-artifact@[^\n]+\n        if: needs\.classify\.outputs\.a08_scoped_checks == 'true'\n/);
-  // The full Council check and its closeout remain selected for this change.
-  assert.match(ci, /if: needs\.classify\.outputs\.a08_focused != 'true'/);
-  assert.match(binding, /if-no-files-found: error/);
+  assert.doesNotMatch(ci, /a08_scoped|A08_SCOPES/);
+});
+test('HMAC bootstrap atomically installs the fixed pair and refuses existing-key rotation',()=>{
+ const deployer=readFileSync(new URL('../../deploy.php',import.meta.url),'utf8');
+ const section=deployer.slice(deployer.indexOf('function deployInstallSeoIntelRuntimeEnvironment'),deployer.indexOf("task('runtime:configure-seo-intel'"));
+ const script=section.match(/\$script = <<<'PHP'\n([\s\S]+?)\nPHP;/)[1];
+ const dir=mkdtempSync(`${tmpdir()}/a08-hmac-`), env=`${dir}/env`, patch=`${dir}/patch`;
+ const pair={SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY:'a'.repeat(64),SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION:'v1-test'};
+ const run=()=>execFileSync('php',['-d','display_errors=0','-r',script,env,patch],{stdio:['pipe','pipe','pipe']});
+ try {
+  writeFileSync(env,'UNRELATED="preserved"\n');writeFileSync(patch,JSON.stringify(pair));
+  run();const initialized=readFileSync(env,'utf8');assert.match(initialized,/UNRELATED="preserved"/);
+  run();assert.equal(readFileSync(env,'utf8'),initialized);
+  writeFileSync(patch,JSON.stringify({...pair,SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY:'b'.repeat(64)}));
+  assert.throws(run);assert.equal(readFileSync(env,'utf8'),initialized);
+  writeFileSync(patch,JSON.stringify({...pair,UNAPPROVED:'value'}));assert.throws(run);
+  assert.equal(readFileSync(env,'utf8'),initialized);
+ } finally {rmSync(dir,{recursive:true,force:true});}
+ const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
+ for(const key of Object.keys(pair)) assert.equal(deploy.split(`${key}: \${{ secrets.${key} }}`).length-1,3);
 });

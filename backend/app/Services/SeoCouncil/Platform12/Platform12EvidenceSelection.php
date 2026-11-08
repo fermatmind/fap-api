@@ -185,7 +185,7 @@ final readonly class Platform12EvidenceSelection
     {
         $this->currentReference(collect(), CarbonImmutable::now('UTC'), $sha, $receipt);
         app(Platform12RuntimeControl::class)->withControlLock(function () use ($receipt, $sha, $generation): void {
-            if (! app(Platform12RuntimeControl::class)->allowsMission(Platform12DailyMissionSet::IDS[2], false, $generation)
+            if (! app(Platform12RuntimeControl::class)->allowsMission(Platform12DailyMissionSet::IDS[2], $generation)
                 || trim((string) file_get_contents(config('seo_council.release_revision_path'))) !== $sha) {
                 throw new \RuntimeException('REFRESH_CONTROL_CHANGED');
             }

@@ -46,13 +46,23 @@ export function executionDependencyText(path, body) {
   parts.push(body.slice(previous));
   return parts.join('');
 }
-export function phpConsumers(root = process.cwd()) {
+export function phpConsumers(root = process.cwd(), range = {}) {
   root=execFileSync('git',['rev-parse','--show-toplevel'],{cwd:root}).toString().trim();
   const files = execFileSync('git', ['ls-files', '-z', 'backend/app', 'backend/config', 'backend/tests'], {cwd:root}).toString().split('\0').filter(p=>p.endsWith('.php'));
+  const deleted = new Set();
+  if (/^[a-f0-9]{40}$/.test(range.base ?? '') && /^[a-f0-9]{40}$/.test(range.head ?? '')) {
+    for (const path of execFileSync('git', ['diff', '--no-renames', '--diff-filter=D', '--name-only', '-z', range.base, range.head, '--', 'backend/app', 'backend/config'], {cwd:root}).toString().split('\0').filter(p=>p.endsWith('.php'))) {
+      deleted.add(path);
+      if (!files.includes(path)) files.push(path);
+    }
+  }
   const symbols = new Map(), sources = new Map();
   for (const path of files) {
-    if (!existsSync(`${root}/${path}`)) continue;
-    const body = readFileSync(`${root}/${path}`, 'utf8'); sources.set(path,body);
+    const present = existsSync(`${root}/${path}`);
+    if (!present && !deleted.has(path)) continue;
+    const body = present ? readFileSync(`${root}/${path}`, 'utf8')
+      : execFileSync('git', ['show', `${range.base}:${path}`], {cwd:root, encoding:'utf8'});
+    sources.set(path,body);
     const ns = /namespace\s+((?:App|Tests)\\[\w\\]+)\s*;/.exec(body)?.[1];
     const cls = /\b(?:class|interface|trait|enum)\s+(\w+)/.exec(body)?.[1];
     if (ns && cls) symbols.set(`${ns}\\${cls}`,path);
@@ -82,7 +92,7 @@ export function phpConsumers(root = process.cwd()) {
     return found;
   };
   const consumer = expressions => closure(files.filter(path=>expressions.some(re=>re.test(path))));
-  return {files, sources, edges, closure, consumer};
+  return {files: files.filter(path=>existsSync(`${root}/${path}`)), sources, edges, closure, consumer};
 }
 export function selectOperations(paths, root=process.cwd(), range={}) {
   let publicOnlyRegistration=false;
@@ -100,7 +110,7 @@ export function selectOperations(paths, root=process.cwd(), range={}) {
     } catch { /* Unknown Factory changes retain all private consumers. */ }
   }
   const privatePaths=paths.filter(path=>!(publicOnlyRegistration&&path==='backend/config/content_promotion.php') && !(iqArticleSignatureOnly&&path==='backend/app/Services/ContentPromotion/PromotionContextFactory.php'));
-  const graph=phpConsumers(root);
+  const graph=phpConsumers(root,range);
   const unknown=paths.some(p=>/^backend\/app\/.*\.php$/.test(p)&&!graph.sources.has(p));
   const shared=unknown||paths.some(p=>/^backend\/(?:routes\/|bootstrap\/|database\/migrations\/|app\/(?:Http\/Middleware\/|Providers\/)|composer\.(?:json|lock)$|config\/(?:app|database|auth|cache|fap|content_packs)\.php$)/.test(p));
   const affected=(roots,inputs=[])=>shared || paths.some(p=>roots.has(p)||inputs.some(prefix=>p.startsWith(prefix)));

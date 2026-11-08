@@ -31,7 +31,7 @@ test("M3 source preparation stays separate from full closeout and ordinary prese
   const m3 = classifyPaths(["backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php"]);
   assert.equal(m3.operations.seo_competitive_evidence, false);
   assert.equal(m3.operations.seo_competitive_checks, true);
-  assert.equal(m3.operations.a08_readonly_wiring, true);
+  assert.equal(m3.operations.seo_council_orchestration, false);
   assert.equal((deploy.match(/council_orchestration='\$\{\{ needs\.policy\.outputs\.seo_council_runtime_closeout \}\}'/g) || []).length, 3);
   assert.doesNotMatch(deploy, /needs\.policy\.outputs\.seo_council_orchestration/);
   assert.match(deploy, /measurement_source_readiness:\$source_readiness/);

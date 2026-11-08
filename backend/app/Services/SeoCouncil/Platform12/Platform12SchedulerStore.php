@@ -474,6 +474,8 @@ final readonly class Platform12SchedulerStore
                 if ($reason === null) {
                     $queued = $connection->table('seo_council_schedule_deliveries')
                         ->whereIn('status', ['PLANNED', 'CLAIMED', 'RECOVERED'])
+                        ->where(fn ($query) => $query->whereNotIn('mission_id', Platform12DailyMissionSet::IDS)
+                            ->orWhere('slot_key', 'not like', 'a08:acceptance:%'))
                         ->count();
                     if ($queued > $limit) {
                         $reason = 'QUEUE_LIMIT_EXCEEDED';
@@ -512,9 +514,9 @@ final readonly class Platform12SchedulerStore
         try {
             $mission = Platform12FrozenMission::restore(json_decode($delivery['mission_request_json'], true, 64, JSON_THROW_ON_ERROR));
 
-            return $mission->envelope['slot']['mission_id'] === $delivery['mission_id']
+            return $mission->envelope['slot']['trigger_mode'] !== 'controlled_acceptance'
+                && $mission->envelope['slot']['mission_id'] === $delivery['mission_id']
                 && app(Platform12RuntimeControl::class)->allowsMission($delivery['mission_id'],
-                    $mission->envelope['slot']['trigger_mode'] === 'controlled_acceptance',
                     $mission->envelope['slot']['runtime_generation'] ?? 'legacy');
         } catch (Throwable) {
             return false;

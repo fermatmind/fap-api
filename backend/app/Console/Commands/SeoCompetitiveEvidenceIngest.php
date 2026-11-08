@@ -179,7 +179,7 @@ final class SeoCompetitiveEvidenceIngest extends Command
             }
             config()->set('seo_agent_evidence', $originalConfig);
             $control->withControlLock(function () use ($control, $selection, $state, $sha, $cycle, $reason): void {
-                if ($control->allowsMission(\App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[2], false, $state['generation'])
+                if ($control->allowsMission(\App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[2], $state['generation'])
                     && trim((string) file_get_contents(config('seo_council.release_revision_path'))) === $sha) {
                     $selection->atomicReference(['refresh_status' => 'failed', 'execution_sha' => $sha, 'cycle' => $cycle,
                         'reason' => $reason, 'checked_at' => now('UTC')->toAtomString()]);
@@ -235,7 +235,7 @@ final class SeoCompetitiveEvidenceIngest extends Command
             || config('seo_agent_evidence.competitive.m3_refresh.external_read_enabled', false) !== true
             || config('seo_agent_evidence.competitive.m3_refresh.evidence_write_enabled', false) !== true
             || ! app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->allowsMission(
-                \App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[2], false, $generation,
+                \App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[2], $generation,
             )) {
             return false;
         }

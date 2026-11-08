@@ -131,6 +131,7 @@ final readonly class Platform12NotificationOutbox
                             : "JSON_CONTAINS(seo_council_notification_outbox.payload_json, JSON_OBJECT('id', 'council:daily-terminal', 'hash', d.terminal_receipt_hash), '$.evidence_refs')";
                         $query->selectRaw('1')->from('seo_council_schedule_deliveries AS d')
                             ->whereIn('d.mission_id', $runtime['effective_mission_ids'])
+                            ->where('d.slot_key', 'not like', 'a08:acceptance:%')
                             ->whereIn('d.status', ['CLOSED', 'HELD', 'FAILED'])
                             ->whereRaw($match);
                     })
@@ -355,8 +356,9 @@ final readonly class Platform12NotificationOutbox
         $scheduled = is_array($receipt) ? collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'scheduled_delivery') : null;
 
         return is_array($receipt) && ($scheduled['mission_id'] ?? null) === $row->mission_id
+            && in_array($scheduled['trigger_mode'] ?? null, ['scheduled', 'catch_up', 'missed'], true)
             && hash_equals($hashes[0], app(\App\Services\SeoAgentGovernance\SeoRegistryHasher::class)->hashWithout($receipt, 'receipt_hash'))
-            && app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->allowsMission($row->mission_id, false, $generation);
+            && app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->allowsMission($row->mission_id, $generation);
     }
 
     /** @return array<string, mixed> */

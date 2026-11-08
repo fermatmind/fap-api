@@ -1,6 +1,8 @@
+import {mkdtempSync,mkdirSync,writeFileSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {spawnSync} from 'node:child_process';
+import {execFileSync,spawnSync} from 'node:child_process';
 import {executionDependencyText,phpConsumers,selectOperations} from './impact-consumers.mjs';
 const matrix='backend/app/Console/Commands/CareerPublicResolutionTypeMatrix.php';
 test('literal Career owner metadata does not execute the named command; dynamic expressions stay conservative',()=>{
@@ -35,4 +37,20 @@ test('long malformed metadata finishes in a bounded independent process',()=>{
  const result=spawnSync(process.execPath,['--input-type=module','-e',source],{timeout:3000,encoding:'utf8'});
  assert.ifError(result.error);
  assert.equal(result.status,0,result.stderr);
+});
+
+test('deleted proof definitions are resolved from the baseline without selecting unrelated publishers',()=>{
+ const root=mkdtempSync(tmpdir()+'/retired-consumer-');
+ const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8'}).trim();
+ try {
+  git('init','-q');git('config','user.name','Test');git('config','user.email','test@example.test');
+  mkdirSync(root+'/backend/app/Services/SeoCouncil',{recursive:true});
+  const path='backend/app/Services/SeoCouncil/RetiredProof.php';
+  writeFileSync(root+'/'+path,'<?php namespace App\\Services\\SeoCouncil; final class RetiredProof {}');
+  git('add','--',path);git('commit','-qm','baseline');const base=git('rev-parse','HEAD');
+  git('rm','--',path);git('commit','-qm','retire');const head=git('rev-parse','HEAD');
+  assert.ok(phpConsumers(root,{base,head}).sources.has(path));
+  const operations=selectOperations([path],root,{base,head});
+  for(const key of ['big5_private_publish','riasec_private_publish','enneagram_private_publish','eq60_private_publish','url_truth','career_cache'])assert.equal(operations[key],false,key);
+ } finally {rmSync(root,{recursive:true,force:true});}
 });

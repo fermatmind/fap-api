@@ -72,7 +72,6 @@ export function applyCareerContentOnly(classification, careerReceipt) {
     && careerReceipt.release_mode === 'career_first_publish';
   classification.operations.career_content_only = careerContentOnly;
   classification.operations.career_first_publish = careerFirstPublish;
-  if (careerContentOnly || careerFirstPublish) classification.operations.a08_scoped_checks = false;
   if (careerContentOnly && careerReceipt.invariants?.indexability_unchanged === true && careerReceipt.invariants?.discoverability === false) classification.operations.url_truth = false;
   if (careerFirstPublish || ['BODY_ELIGIBILITY_CHANGED', 'BODY_ELIGIBILITY_UNPROVEN', 'MANIFEST_IDENTITY_CHANGED'].includes(careerReceipt.reason)) {
     classification.flags.seo_discoverability = true;

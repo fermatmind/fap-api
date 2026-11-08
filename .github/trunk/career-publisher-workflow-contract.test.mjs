@@ -262,7 +262,7 @@ test('actual forward readers share their deadline and reject malformed/incomplet
 });
 
 test('hung or late failing forward readers retain the separate exact-LKG path',()=>{
-  for(const step of ['career-parity','career-publish','production-state','production-evidence']) {
+  for(const step of ['career-parity','career-publish','production-evidence']) {
     assert.equal(lateRecoveryAllowed('success',step),true,step);
     assert.equal(lateRecoveryAllowed('failure',step),false,step);
   }
@@ -282,16 +282,15 @@ test('hung or late failing forward readers retain the separate exact-LKG path',(
   }
 });
 
-test('every required reader is bounded and state acceptance precedes outside business publishers',()=>{
+test('every required reader is bounded and business publishers retain late recovery',()=>{
   for(const marker of ['id: career-parity','id: career-publish','name: Read production competitive evidence receipt',
     'name: Read production SEO Evidence closeout receipt','name: Read production Policy Gateway closeout receipt',
-    'name: Read production SEO Council closeout receipt','name: Verify production A08 pause and read-only Operations preservation']) {
+    'name: Read production SEO Council closeout receipt']) {
     const script=productionStep(marker).script;
     assert.match(script,/PRODUCTION_FORWARD_DEADLINE - \$\(date/);
     assert.match(script,/timeout --signal=TERM --kill-after=30s "\$\{forward_remaining\}s" bash -euo pipefail/);
     assert.match(script,/exit 124/);
   }
-  assert.ok(deploy.indexOf('id: production-state')<deploy.indexOf('id: eq-source-publish',deploy.indexOf('  production:\n')));
   assert.match(productionStep('name: Upload Career Current publish receipt').block,/timeout-minutes: 2/);
   assert.match(productionStep('name: Persist push-to-production timing receipt').block,/timeout-minutes: 1/);
   assert.match(productionStep('name: Restore exact LKG after Career publisher failure').block,/timeout-minutes: 36/);
@@ -301,27 +300,7 @@ test('every required reader is bounded and state acceptance precedes outside bus
   assert.match(readFileSync(new URL('../../backend/scripts/deploy/run_career_current_authority_publisher.sh',import.meta.url),'utf8'),/readonly timeout_seconds=900/);
 });
 
-test('actual state acceptance rejects drift and routes it to the existing late restoration',()=>{
-  for(const drift of [false,true]) {
-    const sim=simulation();
-    try {
-      mkdirSync(join(sim.root,'backend/scripts/deploy'),{recursive:true});
-      writeFileSync(join(sim.root,'backend/scripts/deploy/seo_a08_transport.sh'),'cat "$SIM_ROOT/state.json" > "$2"\n');
-      const before={sha:lkgSha,paused:true,generation:4,selected_missions:[]};
-      writeFileSync(join(sim.root,'a08-production-before.json'),JSON.stringify(before));
-      writeFileSync(join(sim.root,'state.json'),JSON.stringify({...before,sha:candidateSha,paused:!drift,
-        gate_only:false,business_guards_closed:true,operations_readonly:true}));
-      const result=sim.run(productionStep('name: Verify production A08 pause and read-only Operations preservation').script);
-      assert.equal(result.status===0,!drift,result.stderr);
-      if(drift) {
-        assert.equal(lateRecoveryAllowed('success','production-state'),true);
-        writeFileSync(join(sim.root,'current'),candidateSha);
-        assert.equal(sim.run(productionStep('name: Restore exact LKG after Career publisher failure').script).status,0);
-        assert.equal(sim.calls().filter(x=>x==='restore').length,1);
-      }
-    } finally {sim.close();}
-  }
-});
+
 
 
 test('actual ordinary deployment task bodies cannot call full maintenance transports', () => {

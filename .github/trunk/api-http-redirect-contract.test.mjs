@@ -69,7 +69,7 @@ test("both deploy targets use strict GitHub SSH over the reachable TLS port", ()
 
 test("staging verifies the forwarded repository identity before release materialization", () => {
   const start = workflow.indexOf("      - name: Configure staging SSH identities");
-  const end = workflow.indexOf("      - name: Read staging A08 state", start);
+  const end = workflow.indexOf("      - name: Materialize", start);
   const identity = workflow.slice(start, end);
   assert.match(identity, /STAGING_REPO_READ_SSH_KEY/);
   assert.match(identity, /ssh-add - >\/dev\/null 2>&1/);

@@ -17,7 +17,6 @@ final class Platform12RuntimeControl
     public function __construct(
         private readonly Platform12ContractRegistry $contracts,
         private readonly PolicyGatewayRegistry $policy,
-        private readonly Platform12ActivationEvidence $activation,
     ) {}
 
     public function prerequisite(): string
@@ -33,72 +32,63 @@ final class Platform12RuntimeControl
             return app()->environment(['staging', 'testing']) ? 'READY' : 'ENVIRONMENT_HOLD';
         }
 
-        return $this->activation->inspect()['state'];
+        return 'READY';
     }
 
     public function status(): array
     {
         try {
             $prerequisite = $this->prerequisite();
-            $activation = $this->activation->inspect();
             $capability = app(RuntimeCapabilitySnapshotBuilder::class)->snapshot();
-            $store = $this->store();
-            $value = $store->get(self::CACHE_KEY);
+            $value = $this->store()->get(self::CACHE_KEY);
             $state = is_array($value) ? $value : [];
             $selected = $this->selection($state['selected_missions'] ?? []);
+            $paused = ($state['paused'] ?? true) !== false;
+            $generationValid = is_string($state['generation'] ?? null)
+                && preg_match('/^[a-f0-9]{32}$/D', $state['generation']) === 1;
+            $catalogValid = ($state['catalog_hash'] ?? null) === $this->contracts->missionCatalog()['catalog_hash'];
+            $naturalEnvironment = app()->environment(['production', 'testing']);
+            $reason = match (true) {
+                $paused => 'PAUSED',
+                $prerequisite !== 'READY' => $prerequisite,
+                ! $naturalEnvironment => 'ENVIRONMENT_HOLD',
+                $selected === [] => 'MISSION_SELECTION_EMPTY',
+                ! $generationValid => 'RUNTIME_GENERATION_HOLD',
+                ! $catalogValid => 'CATALOG_DRIFT_HOLD',
+                default => 'ACTIVE_READ_ONLY',
+            };
             $missionStates = [];
             $effective = [];
-            $acceptance = [];
             foreach (Platform12DailyMissionSet::IDS as $id) {
-                $gate = $activation['missions'][$id] ?? ['acceptance_ready' => false, 'source_accepted' => false,
-                    'reason' => $activation['state']];
-                if (app()->environment('staging')) {
-                    $gate = ['acceptance_ready' => true, 'source_accepted' => false, 'end_to_end_accepted' => false,
-                        'reason' => 'STAGING_CONTROLLED_ONLY'];
-                }
-                if (app()->environment('testing')) {
-                    $gate = ['acceptance_ready' => true, 'source_accepted' => true, 'end_to_end_accepted' => true, 'source_receipt_digest' => str_repeat('f', 64), 'reason' => 'OFFLINE_FIXTURE_ONLY'];
-                }
                 $chosen = in_array($id, $selected, true);
                 $first = $state['mission_activated_at'][$id] ?? null;
-                $allowed = $chosen
-                    && is_string($state['generation'] ?? null) && preg_match('/^[a-f0-9]{32}$/D', $state['generation']) === 1
-                    && ! ($state['paused'] ?? true) && $prerequisite === 'READY'
-                    && ($state['catalog_hash'] ?? null) === $this->contracts->missionCatalog()['catalog_hash'];
-                if ($allowed && $gate['acceptance_ready']) {
-                    $acceptance[] = $id;
-                }
-                $naturalAllowed = $allowed && (($gate['software_qualified'] ?? false) || ($gate['end_to_end_accepted'] ?? false)) && is_string($first) && strtotime($first) !== false
-                    && (($gate['software_qualified'] ?? false) || ($state['mission_source_hash'][$id] ?? null) === ($gate['source_receipt_digest'] ?? 'unproven'));
-                if ($naturalAllowed) {
+                $firstTimestamp = is_string($first) ? strtotime($first) : false;
+                $firstValid = $firstTimestamp !== false && $firstTimestamp <= now('UTC')->getTimestamp();
+                $allowed = $chosen && $reason === 'ACTIVE_READ_ONLY' && $firstValid;
+                if ($allowed) {
                     $effective[] = $id;
                 }
-                $missionStates[$id] = [...$gate, 'selected' => $chosen, 'first_enabled_at' => $first,
-                    'acceptance_allowed' => $allowed && $gate['acceptance_ready'],
-                    'run_allowed' => $naturalAllowed];
+                $missionStates[$id] = ['selected' => $chosen, 'first_enabled_at' => $first,
+                    'run_allowed' => $allowed,
+                    'reason' => ! $chosen ? 'MISSION_NOT_SELECTED'
+                        : ($reason !== 'ACTIVE_READ_ONLY' ? $reason : ($firstValid ? 'ACTIVE_READ_ONLY' : 'FIRST_ENABLE_HOLD'))];
             }
-            $reason = ($state['paused'] ?? true) ? 'PAUSED' : ($prerequisite !== 'READY' ? $prerequisite
-                : ($selected === [] ? 'MISSION_SELECTION_EMPTY' : ($acceptance === [] ? 'MISSION_GATE_HOLD' : 'ACTIVE_READ_ONLY')));
-            if ($reason === 'ACTIVE_READ_ONLY'
-                && ($state['catalog_hash'] ?? null) !== $this->contracts->missionCatalog()['catalog_hash']) {
-                $reason = 'CATALOG_DRIFT_HOLD';
+            if ($reason === 'ACTIVE_READ_ONLY' && $effective === []) {
+                $reason = 'FIRST_ENABLE_HOLD';
             }
 
             return [
                 'state' => $reason, 'computation_enabled' => $reason === 'ACTIVE_READ_ONLY',
                 'audit_enabled' => $prerequisite === 'READY', 'business_write_enabled' => false,
-                'a08_gate_policy' => 'SCOPED_PER_MISSION', 'public_gate' => $prerequisite,
+                'public_gate' => $prerequisite,
                 'selected_missions' => $selected, 'effective_mission_ids' => $effective, 'effective_enabled_missions' => count($effective),
-                'gate_software_delivery' => $activation['state'] === 'READY' && count(array_filter($missionStates, static fn (array $mission): bool => $mission['acceptance_ready'])) === 3 ? 'COMPLETE' : 'PENDING',
-                'acceptance_enabled_missions' => $acceptance, 'missions' => $missionStates,
+                'missions' => $missionStates,
                 'model_runtime_enabled' => false, 'tool_broker_enabled' => false,
                 'post12_agent_write_enabled' => false, '28_day_clock' => 'NOT_STARTED',
                 'activated_at' => $state['activated_at'] ?? null,
-                'pause_intent' => $state === [] ? 'UNSET' : (($state['paused'] ?? true) ? 'PAUSED' : 'RUNNING'),
+                'pause_intent' => $state === [] ? 'UNSET' : ($paused ? 'PAUSED' : 'RUNNING'),
                 'generation' => $state['generation'] ?? null,
                 'catalog_hash' => $state['catalog_hash'] ?? null,
-                'activation_source_sha' => data_get($activation, 'manifest.validation.public_checks.sha'),
-                'activation_bound_sha' => data_get($activation, 'manifest.bound_production_sha'),
                 'version_vector' => $capability['version_vector'],
                 'version_vector_hash' => $capability['version_vector_hash'],
             ];
@@ -106,9 +96,8 @@ final class Platform12RuntimeControl
             return ['state' => 'SHARED_CACHE_HOLD', 'computation_enabled' => false,
                 'audit_enabled' => false, 'business_write_enabled' => false,
                 'public_gate' => 'SHARED_CACHE_HOLD', 'selected_missions' => [], 'effective_mission_ids' => [], 'effective_enabled_missions' => 0,
-                'acceptance_enabled_missions' => [], 'missions' => [],
+                'missions' => [],
                 'activated_at' => null, 'pause_intent' => 'UNSET', 'generation' => null, 'catalog_hash' => null,
-                'activation_source_sha' => null, 'activation_bound_sha' => null,
                 'version_vector' => null, 'version_vector_hash' => null];
         }
     }
@@ -134,23 +123,15 @@ final class Platform12RuntimeControl
                     return false;
                 }
                 $first = is_array($old['mission_activated_at'] ?? null) ? $old['mission_activated_at'] : [];
-                $sources = is_array($old['mission_source_hash'] ?? null) ? $old['mission_source_hash'] : [];
                 if (! $pause) {
-                    $gates = $this->status()['missions'];
                     foreach ($missions as $id) {
-                        if (! ($gates[$id]['acceptance_ready'] ?? false)) {
-                            return false;
-                        }
-                        if ($gates[$id]['end_to_end_accepted'] ?? false) {
-                            $first[$id] ??= now('UTC')->format('Y-m-d\TH:i:s\Z');
-                            $sources[$id] = $gates[$id]['source_receipt_digest'];
-                        }
+                        $first[$id] ??= now('UTC')->format('Y-m-d\TH:i:s\Z');
                     }
                 }
 
                 return $store->forever(self::CACHE_KEY, [...$old,
                     'selected_missions' => $pause ? $this->selection($old['selected_missions'] ?? []) : $missions,
-                    'mission_activated_at' => $first, 'mission_source_hash' => $sources,
+                    'mission_activated_at' => $first,
                     'paused' => $pause,
                     'activated_at' => is_array($old) && isset($old['activated_at'])
                         ? $old['activated_at'] : ($pause ? null : now('UTC')->format('Y-m-d\TH:i:s\Z')),
@@ -160,9 +141,8 @@ final class Platform12RuntimeControl
                     'generation' => bin2hex(random_bytes(16)),
                 ]);
             };
-            // A scheduled tick may briefly hold this lock during an A08 CAS
-            // transition. Only the generation-bound path waits; all paths
-            // still validate the expected generation after acquiring it.
+            // Generation-bound callers may wait for a natural tick to finish.
+            // All paths still validate the expected generation after acquiring it.
             $lock = $store->lock(self::CACHE_KEY.':lock', $expectedGeneration === null ? 5 : 60);
             $changed = $expectedGeneration === null ? $lock->get($transition) : $lock->block(5, $transition);
 
@@ -173,52 +153,13 @@ final class Platform12RuntimeControl
         }
     }
 
-    /** Reconcile software before admission; never create a selection or resume it. */
-    public function reconcile(): void
-    {
-        if (! app()->environment('production')) {
-            return;
-        }
-        try {
-            $proof = $this->activation->inspect();
-            if ($proof['state'] !== 'READY' || ($proof['manifest']['software_delivery_only'] ?? false) !== true
-                || ! $this->businessGuardsClosed()) {
-                return;
-            }
-            $this->withControlLock(function () use ($proof): void {
-                $store = $this->store();
-                $state = $store->get(self::CACHE_KEY);
-                if (! is_array($state) || ($state['paused'] ?? true) || $this->selection($state['selected_missions'] ?? []) === []
-                    || ! is_string($state['generation'] ?? null) || preg_match('/^[a-f0-9]{32}$/D', $state['generation']) !== 1
-                    || ($state['catalog_hash'] ?? null) !== $this->contracts->missionCatalog()['catalog_hash']
-                    || ($state['query_key_version'] ?? null) !== config('seo_agent_evidence.query_hmac_key_version')) {
-                    return;
-                }
-                $first = $state['mission_activated_at'] ?? [];
-                foreach ($state['selected_missions'] as $id) {
-                    if ($proof['missions'][$id]['software_qualified'] ?? false) {
-                        // Existing explicit selection is the persistent read-only authorization.
-                        $first[$id] ??= now('UTC')->format('Y-m-d\TH:i:s\Z');
-                    }
-                }
-                if (($state['software_sha'] ?? null) !== $proof['production_sha'] || $first !== ($state['mission_activated_at'] ?? [])) {
-                    $store->forever(self::CACHE_KEY, [...$state, 'software_sha' => $proof['production_sha'],
-                        'mission_activated_at' => $first, 'version_vector' => $proof['manifest']['runtime']['version_vector']]);
-                }
-            });
-        } catch (Throwable) {
-            // A failed reconciliation cannot authorize work; expose a sanitized diagnostic.
-            logger()->warning('seo.platform12.software_reconcile_hold');
-        }
-    }
-
     public function admits(string $caller, array $request): bool
     {
         $id = (string) ($request['mission_id'] ?? '');
         $matched = false;
         $canonical = null;
         foreach (array_keys(Platform12DailyMissionSet::IDS) as $index) {
-            $matches = preg_match('/^seo\.platform12\.daily_check_'.$index.':\d{4}-\d{2}-\d{2}(?::acceptance:[a-f0-9]{12})?$/D', $id) === 1;
+            $matches = preg_match('/^seo\.platform12\.daily_check_'.$index.':\d{4}-\d{2}-\d{2}$/D', $id) === 1;
             if ($matches) {
                 $matched = true;
                 $canonical = Platform12DailyMissionSet::IDS[$index];
@@ -232,7 +173,7 @@ final class Platform12RuntimeControl
             && ($request['locale'] ?? null) === 'zh-CN'
             && ($request['tool_scope'] ?? null) === [] && ($request['egress_scope'] ?? null) === []
             && ($request['requested_role'] ?? null) === null
-            && $canonical !== null && $this->allowsMission($canonical, str_contains($id, ':acceptance:'));
+            && $canonical !== null && $this->allowsMission($canonical);
     }
 
     public function withControlLock(callable $callback): mixed
@@ -240,12 +181,12 @@ final class Platform12RuntimeControl
         return $this->store()->lock(self::CACHE_KEY.':lock', 60)->block(5, $callback);
     }
 
-    public function allowsMission(string $mission, bool $acceptance = false, ?string $generation = null): bool
+    public function allowsMission(string $mission, ?string $generation = null): bool
     {
         $state = $this->status();
 
         return ($generation === null || $generation === ($state['generation'] ?? null))
-            && in_array($mission, $state[$acceptance ? 'acceptance_enabled_missions' : 'effective_mission_ids'] ?? [], true);
+            && in_array($mission, $state['effective_mission_ids'] ?? [], true);
     }
 
     /** Invalid legacy or mixed values never imply all missions. */
