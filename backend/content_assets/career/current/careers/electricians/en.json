@@ -22652,7 +22652,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "You receive a fictional drawing and code excerpts to see whether you can sequence the work, list checkpoints, and specify measurement criteria."
+              "Choose a public introductory teaching case and annotate its work objects, missing information and questions for a qualified training provider or employer. This page supplies no drawings and does not ask you to devise an operating plan."
             ]
           },
           "id": "actors.display.fit_decision_checklist.how-detail",
@@ -22996,12 +22996,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "De-energization, verification of absence of voltage, and grounding confirmed"
+              "Actual work requires personnel who meet applicable qualification, training and authorization requirements to carry out energy isolation and confirm safe conditions under the relevant procedure. This is a description of occupational responsibility, not a universal operating sequence."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.primary",
           "source_refs": [
-            "onet"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23248,12 +23249,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Electricians install and maintain power, communication, lighting, and control systems in homes, commercial premises, and factories; the installers-and-repairers group also covers five equipment specialisms. Electrical engineers research, design, develop, and test, and may supervise implementation; the fact that they usually do not personally perform repairs is not an absolute boundary."
+              "Electricians install, maintain and repair wiring, equipment and fixtures. The equipment installers-and-repairers group includes commercial/industrial equipment, motors/power tools, transportation equipment, motor-vehicle electronics, and powerhouse/substation/relay work. Engineers focus on design, development, testing and supervision; technicians may also assemble, test, install and maintain control systems, so personally performing installation is not an absolute boundary. Sign-off authority requires a separate check of jurisdiction and credentials."
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-engineers",
+            "bls-equipment-repair",
+            "bls-engineering-tech"
           ],
           "type": "prose"
         },
@@ -23388,12 +23392,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "Follow the work permit to de-energize, verify absence of voltage, ground, and tag; work may begin only after energy status is confirmed."
+              "Actual work requires personnel who meet applicable qualification, training and authorization requirements to carry out energy isolation and confirm safe conditions under the relevant procedure. This is a description of occupational responsibility, not a universal operating sequence."
             ]
           },
           "id": "actors.display.responsibilities_block.02",
           "source_refs": [
-            "onet"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23613,12 +23618,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS OES / O*NET: nationwide median annual wage of USD 63,190 in 2025 (median hourly wage USD 30.38); five percentile figures: USD 42,640 / 49,430 / 63,190 / 83,940 / 108,510."
+              "In 2025, U.S. electricians’ annual wages at the 10th, 25th, 50th, 75th and 90th percentiles were $42,640, $49,430, $63,190, $83,940 and $108,510; the hourly median was $30.38. These describe the national wage distribution, not apprentice, junior or senior pay bands."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23627,12 +23632,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET education responses: 62% postsecondary certificate, 31% high school, 2% below high school; Zone3 describes preparation level. BLS describes a typical apprenticeship of 4–5 years; generic Zone examples do not replace the occupation-specific duration."
+              "O*NET asked respondents what education a new hire needs to perform this occupation: 62% selected a postsecondary certificate, 31% a high school diploma or equivalent, and 2% less than high school. These are survey responses, not the education distribution of current electricians or universal legal requirements. Job Zone 3 describes preparation; BLS gives a typical 4–5-year apprenticeship for this occupation."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23641,12 +23647,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Similar roles in mainland China mainly involve building electrical installation, equipment maintenance, and repair. Entrants often start in construction or repair roles and obtain certificates as locally required; these do not correspond one-to-one to this U.S. occupation. Qualifications and income must be checked by employer and region."
+              "China’s 2022 classification includes electrician (电工), 6-31-01-03, covering installation, adjustment, maintenance and repair of machinery electrical parts, system wiring and components, and indoor wiring and lighting. Duties overlap with U.S. 47-2111 without establishing one-to-one recognition. Occupational classification, skill levels, special-operations credentials and employer authorization are separate checks."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "cn-classification-2022",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23669,12 +23676,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Occupational boundaries: this page follows U.S. O*NET-SOC 47-2111.00, \"Electricians\": roles installing, maintaining, and repairing electrical wiring, equipment, and fixtures and ensuring work complies with relevant codes. Work objects and responsibility levels differ from electrical and electronics installers and repairers (repair of equipment itself in industrial, transport, and power facilities), electrical engineers (design calculations and signing design documents), and electrical and electronics engineering technologists and technicians (engineering support and test records)."
+              "Electricians install, maintain and repair wiring, equipment and fixtures. The equipment installers-and-repairers group includes commercial/industrial equipment, motors/power tools, transportation equipment, motor-vehicle electronics, and powerhouse/substation/relay work. Engineers focus on design, development, testing and supervision; technicians may also assemble, test, install and maintain control systems, so personally performing installation is not an absolute boundary. Sign-off authority requires a separate check of jurisdiction and credentials."
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-engineers",
+            "bls-equipment-repair",
+            "bls-engineering-tech"
           ],
           "type": "prose"
         }
@@ -23691,12 +23701,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Research and design electrical equipment, components, and systems, and sign design documents."
+              "Engineers focus on researching, designing, developing and testing electrical and electronic equipment, components and systems, and may supervise implementation. Project sign-off depends on jurisdiction, credentials and project requirements; the job title alone does not establish authority."
             ]
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet"
+            "bls-engineers"
           ],
           "type": "prose"
         },
@@ -23710,7 +23720,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -23724,7 +23734,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet"
+            "onet-industrial-mechanics"
           ],
           "type": "prose"
         },
@@ -23733,12 +23743,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Install and maintain safety systems such as fire alarms, detection, and suppression systems."
+              "Install, program, maintain and repair security and fire alarm wiring, equipment and related sensors under applicable codes; this does not imply installation of all fire-suppression systems."
             ]
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet"
+            "onet-alarm-installers"
           ],
           "type": "prose"
         },
@@ -23798,12 +23808,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Install and repair electrical and electronic equipment, including commercial and industrial equipment, transport equipment, power facilities, and avionics."
+              "The equipment group covers commercial and industrial equipment, electric motors and power tools, transportation equipment, motor-vehicle electronics, and powerhouse, substation and relay equipment."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.work",
           "source_refs": [
-            "onet"
+            "bls-equipment-repair"
           ],
           "type": "prose"
         },
@@ -23868,12 +23878,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Handle test records and engineering support, usually without performing on-site wiring and installation."
+              "Support engineering design and development through assembly, testing, technical records and some control-system installation and maintenance. Tasks may overlap with electricians; compare the actual role."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
           "source_refs": [
-            "onet"
+            "bls-engineering-tech"
           ],
           "type": "prose"
         },
@@ -23910,12 +23920,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Handle design calculations, compliance conclusions, and document signing, usually without personally wiring or repairing."
+              "Engineers focus on researching, designing, developing and testing electrical and electronic equipment, components and systems, and may supervise implementation. Project sign-off depends on jurisdiction, credentials and project requirements; the job title alone does not establish authority."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
           "source_refs": [
-            "onet"
+            "bls-engineers"
           ],
           "type": "prose"
         },
@@ -23943,7 +23953,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.career",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -23952,12 +23962,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The focus is HVAC and refrigeration equipment and piping; electrical work is limited to equipment controls and power-supply interfaces."
+              "Focuses on HVAC and refrigeration systems and may involve equipment wiring, circuit tests and controls. Absence of electrical work is not a hard boundary; compare the actual system and role."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -23971,7 +23981,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.choice",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -23985,7 +23995,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.career",
           "source_refs": [
-            "onet"
+            "onet-industrial-mechanics"
           ],
           "type": "prose"
         },
@@ -23994,12 +24004,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The focus is mechanical, hydraulic, and pneumatic systems; electrical work centres on equipment control circuits."
+              "Focuses on installation, repair and maintenance of industrial machinery; may use voltmeters for diagnosis or program computer-controlled machinery. Compare equipment and responsibilities rather than limiting electrical tasks to one circuit type."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
           "source_refs": [
-            "onet"
+            "onet-industrial-mechanics"
           ],
           "type": "prose"
         },
@@ -24013,7 +24023,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.choice",
           "source_refs": [
-            "onet"
+            "onet-industrial-mechanics"
           ],
           "type": "prose"
         },
@@ -24027,7 +24037,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.career",
           "source_refs": [
-            "onet"
+            "onet-alarm-installers"
           ],
           "type": "prose"
         },
@@ -24041,7 +24051,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
           "source_refs": [
-            "onet"
+            "onet-alarm-installers"
           ],
           "type": "prose"
         },
@@ -24055,7 +24065,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.choice",
           "source_refs": [
-            "onet"
+            "onet-alarm-installers"
           ],
           "type": "prose"
         },
@@ -24217,13 +24227,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "People usually start as apprentices or assistants, using practical-training and supervised-training records to demonstrate that they can follow procedures, use instruments correctly, and leave reviewable records."
+              "BLS describes a typical U.S. route through a 4–5-year apprenticeship, sometimes preceded by technical school. Check the programme, state licensing and actual job requirements separately. Paper exploration does not replace training, examinations or work qualifications."
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24262,7 +24271,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial of information retrieval, checklists, and record organization; accuracy and time spent must be measured."
+              "Suggested editorial trial of information retrieval, checklists, and record organization; accuracy and time spent must be measured."
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
@@ -24292,13 +24301,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI and digital tools can help consult electrical codes and product information, organize quantities and material lists, and read and organize test records. They cannot replace on-site verification of absence of voltage and circuit verification, root-cause judgement, work to code, or work permits, and do not bear safety or compliance responsibility. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "The 17% AI Impact Score is an editorial model estimate: drawing/list preparation and fault records receive assistance-level ratings, while on-site installation receives no substitution credit. Equally weighted editorial ratings for three representative tasks: drawing-version and location-list preparation assistance 25, on-site installation 0, and fault-record assistance 25; floor((25+0+25)/3+0.5)=17. fermatmind-ai-impact-v1, 2026-11-08; not measured working time, adoption or unemployment probability. Qualified personnel retain responsibility for actual safety checks and work under applicable procedures."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "source-fermatmind-ai-rubric",
+            "onet",
+            "osha-333"
           ],
           "type": "prose"
         },
@@ -24559,13 +24569,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "No. Tool outputs are only leads; they must be checked against on-site measurements and voltage-test results, and the worker must confirm the root cause."
+              "Tool output cannot establish whether equipment is safe. Actual safety confirmation and fault judgement require personnel who meet applicable qualification, training and authorization requirements, following the relevant procedures; this page provides no operating sequence."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -24589,13 +24600,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "You can trial code retrieval, checklists, and draft records; check accuracy and time spent first. No measured acceleration has been obtained."
+              "Editorial suggestion: try information retrieval, lists or draft records only for organizing paper materials, and check accuracy and time spent. No electrician adoption or measured productivity evidence was obtained; this does not support operating decisions."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.3.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "source-fermatmind-ai-rubric",
+            "onet"
           ],
           "type": "prose"
         },
@@ -24699,8 +24710,7 @@
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24739,13 +24749,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Official wage and employment statistics"
+              "NIST voluntary AI Risk Management Framework"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist-rmf-1"
           ],
           "type": "prose"
         },
@@ -24754,13 +24763,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Used to check median wages, five percentile figures, employment size, and outlook; the median is not an entry wage."
+              "General AI risk-management guidance; not electrician wages, adoption rates or electrical operating procedures."
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist-rmf-1"
           ],
           "type": "prose"
         },
@@ -24798,13 +24806,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST voluntary AI Risk Management Framework"
+              "National electrician wage statistics"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24813,13 +24820,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "General methods, without occupational wages, measured adoption, or electrical operating codes."
+              "2025 U.S. electrician wage percentiles; not starting-pay bands, experience grades or Chinese wages."
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24828,13 +24834,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Interest and career-exploration tools"
+              "OSHA electrical safety-related work practices"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "osha-333"
           ],
           "type": "prose"
         },
@@ -24843,13 +24848,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "For exploring interests, not personality diagnosis or hiring decisions."
+              "Use within the actual scope of 1910 Subpart S; construction and other industries require their own applicable-rule checks."
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "osha-333"
           ],
           "type": "prose"
         },
@@ -24858,13 +24862,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Official profiles of adjacent occupations"
+              "BLS electrician occupational profile"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24873,13 +24876,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Used to check differences between adjacent paths; each applies only to that adjacent occupation."
+              "Electrician duties, typical preparation, wages and outlook; not conditions in every country."
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25188,13 +25190,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Voltage verification, grounding, and confirmation of de-energization must be performed on site by the worker."
+              "Actual work requires personnel who meet applicable qualification, training and authorization requirements to carry out energy isolation and confirm safe conditions under the relevant procedure. This is a description of occupational responsibility, not a universal operating sequence."
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25398,7 +25400,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial: organizing drawing versions and material lists; no measured acceleration has been obtained."
+              "Suggested editorial trial: organizing drawing versions and material lists; no measured acceleration has been obtained."
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
@@ -25563,13 +25565,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check site dimensions, structure, and circuit status; confirm de-energization, absence of voltage, and grounding."
+              "Actual work requires personnel who meet applicable qualification, training and authorization requirements to carry out energy isolation and confirm safe conditions under the relevant procedure. This is a description of occupational responsibility, not a universal operating sequence."
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.2.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25743,13 +25745,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Control: de-energize, verify absence of voltage, ground, and tag according to the work permit; only authorized personnel may operate."
+              "Actual work requires personnel who meet applicable qualification, training and authorization requirements to carry out energy isolation and confirm safe conditions under the relevant procedure. This is a description of occupational responsibility, not a universal operating sequence."
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26063,13 +26065,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round did not obtain nationwide Chinese wages for the exact occupation; this does not establish that official data have not been published. When comparing offers, check region, industry, contract, piecework, overtime, and bonuses; certification does not guarantee a pay rise."
+              "Jiangmen’s report labelled 2025 gives calendar-2024 enterprise-sample annual wages for its electrician category: CNY 43,200, 50,400, 54,600, 70,900 and 97,000 at the 10th, 25th, 50th, 75th and 90th percentiles. This is a regional reference, not a national estimate or an exact equivalent of U.S. 47-2111; the electrician sample size is not separately stated."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs",
-            "cn-rule"
+            "cn-jiangmen-wages",
+            "cn-jiangmen-notice"
           ],
           "type": "prose"
         },
@@ -26092,12 +26094,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the National Bureau of Statistics materials checked on this page did not yield nationwide mainland China wage percentiles precisely matching \"electricians\" as a single occupation; only industry and broad personnel categories were available."
+              "Mainland China: no exact national occupational percentiles obtained; a Jiangmen enterprise sample offers a separate regional reference."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.heading",
           "source_refs": [
-            "nbs"
+            "cn-jiangmen-wages",
+            "cn-jiangmen-notice"
           ],
           "type": "prose"
         },
@@ -26106,7 +26109,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              " In 2025, nationwide annual average wages before tax in non-private/private construction were CNY 92,036/66,275; manufacturing CNY 113,594/76,055. Use as broad-scope proxies based on the actual employer's industry, not electricians' median or take-home pay."
+              "In 2025, nationwide pre-tax annual average wages of employees in urban non-private/private units were CNY 92,036/66,275 in construction and CNY 113,594/76,055 in manufacturing. These broad industry categories are context, not electrician median or take-home pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
@@ -26362,7 +26365,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Median: USD 63,190 per year (USD 30.38 per hour, month 5 of 2025); half of workers earn below and half above this value."
+              "Median: USD 63,190 per year (USD 30.38 per hour, May 2025); half of workers earn below and half above this value."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.tier.median",
@@ -27002,7 +27005,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Safety alertness"
+              "Reflect on work preferences"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.label",
@@ -27016,7 +27019,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Will you proactively confirm energy status and protection measures?"
+              "How do you prefer to organize information and communicate work plans?"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.question",
@@ -27030,7 +27033,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use a hypothetical job to see whether de-energization, voltage verification, grounding, and safety monitoring are confirmed."
+              "Preference questions can prompt reflection on communication. Safety awareness and occupational competence require actual training, procedures and work evidence."
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.answer",
@@ -27044,7 +27047,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Verification of absence of voltage"
+              "Organizing information"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27058,7 +27061,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Isolation"
+              "Communication preferences"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -27072,7 +27075,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Work sample"
+              "Preference reflection"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -27086,7 +27089,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Does not score ability."
+              "MBTI results do not test safety awareness, operating ability or occupational fitness."
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.watchout",
@@ -27100,7 +27103,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Hands-on work and physical demands"
+              "Reflect on motivation"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.label",
@@ -27114,7 +27117,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Can you stand for long periods, work at height, and lift and carry?"
+              "How do you understand your motivation when checking, reworking or asking for help?"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.question",
@@ -27128,7 +27131,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use a practical-training task to observe whether physical work is completed with protection measures in place."
+              "Reflect on checking and asking for help, read the role’s physical and environmental demands, and list questions for a qualified training provider or employer. This page assigns no climbing, lifting or electrical practical training."
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.answer",
@@ -27142,7 +27145,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Physical demands"
+              "Attitude to checking"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.signals.1",
@@ -27156,7 +27159,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Protection"
+              "Reasons for asking for help"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.signals.2",
@@ -27170,7 +27173,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Work sample"
+              "Motivational reflection"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -27184,7 +27187,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Does not constitute a medical assessment or hiring decision."
+              "Enneagram results do not test physical capacity, safety competence or hiring suitability."
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.watchout",
@@ -27198,7 +27201,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Learning motivation"
+              "Explore cognitive performance"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.label",
@@ -27212,7 +27215,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Are you willing to keep up with changes in codes and tools?"
+              "How do you perform on rule-based reasoning questions?"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.question",
@@ -27226,7 +27229,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Check learning records concerning updates to codes and tools."
+              "You may explore cognitive performance on test questions separately. Motivation to learn, understanding of procedures and electrical-work ability require their own learning and training evidence."
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.answer",
@@ -27240,7 +27243,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Codes"
+              "Rule-based reasoning"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.signals.1",
@@ -27254,7 +27257,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Updates"
+              "Test-question performance"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.signals.2",
@@ -27268,7 +27271,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Work sample"
+              "Exploration of test performance"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -27282,7 +27285,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Makes no personality conclusion."
+              "An IQ test does not measure motivation to learn or establish electrical-work competence."
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.watchout",
@@ -27492,12 +27495,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "One certificate is not mutually recognized across all five subpaths in the group."
+              "Check the target specialism, jurisdiction and actual certificate scope separately; this page does not establish that credentials are interchangeable."
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
           "source_refs": [
-            "onet"
+            "bls-equipment-repair"
           ],
           "type": "prose"
         },
@@ -27604,12 +27607,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Willing to learn refrigeration cycles, piping, and equipment commissioning."
+              "Interested in learning more about HVAC/refrigeration equipment, piping and associated electrical controls."
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.signals",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -27618,12 +27621,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Check refrigerants and corresponding regulations separately; an electrician permit does not automatically cover them."
+              "Check refrigerant-related tasks, credentials and local rules separately with the competent authority or a qualified training provider; this page makes no qualification decision."
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -27744,12 +27747,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "For this specific U.S. occupation, the median annual wage in 2025 was USD 63,190; corresponding single-occupation percentiles have not been obtained for mainland China, so U.S. figures cannot be extrapolated directly."
+              "The 2025 U.S. electrician annual median was $63,190; the calendar-2024 Jiangmen enterprise sample’s electrician median was CNY 54,600 per year. The regions and populations differ: do not directly convert these into personal starting pay. Exact corresponding national Chinese percentiles were not obtained."
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "cn-jiangmen-wages"
           ],
           "type": "prose"
         },
@@ -27828,12 +27832,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use a paper-based work task to complete the entire cycle: read drawings and codes, sequence procedures, list checkpoints and measurement criteria, and clearly describe abnormalities and stop conditions."
+              "Identify tasks and information limits in a public teaching case you choose. Record questions, missing conditions and who could clarify them, then decide whether to explore qualified training. A paper exercise does not establish operating competence."
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27898,12 +27903,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Used to check the applicability boundaries of electrical codes and licensing requirements."
+              "Adjacent electrical engineering support profile, not electrical codes or licensing law."
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27912,12 +27917,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Used to check public information entry points for occupations and training in China."
+              "Interest and career-exploration entry point, not Chinese vocational-training rules."
             ]
           },
           "id": "actors.display.personality_fit_block.source.interest-profiler",
           "source_refs": [
-            "onet"
+            "interest-profiler"
           ],
           "type": "prose"
         },
@@ -27926,12 +27931,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Used to check international information entry points on occupational safety."
+              "An adjacent-occupation search entry point, not international occupational-safety rules."
             ]
           },
           "id": "actors.display.personality_fit_block.source.agent",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27954,12 +27959,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "For exploring interests, not personality diagnosis."
+              "Chinese public statistics entry point, not evidence for an interest or personality assessment."
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27968,12 +27973,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Used to explain wage statistical methods and units."
+              "BLS occupation finder, not a specific account of the wage methods used here."
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         }
@@ -27990,13 +27995,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "De-energize, verify absence of voltage, ground, and tag according to the work permit; only authorized personnel may operate."
+              "Actual work requires personnel who meet applicable qualification, training and authorization requirements to carry out energy isolation and confirm safe conditions under the relevant procedure. This is a description of occupational responsibility, not a universal operating sequence."
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28727,15 +28732,15 @@
               {
                 "id": "scene",
                 "values": [
-                  "Work sample one: paper-based work plan",
-                  "Create a work plan from fictional drawings, including procedures, checkpoints, and safety measures."
+                  "Work sample one: case tasks and information list",
+                  "Annotate only the chosen case’s work objects, supplied information, missing conditions and questions. Do not devise procedures, safety plans or measurement criteria."
                 ]
               },
               {
                 "id": "rework",
                 "values": [
                   "Work sample two: measurement and test records",
-                  "Record measurement conditions, instruments, readings, and comparisons with criteria."
+                  "Use only fictional readings in a public teaching case you choose. Record the source, conditions, instrument names and missing information; do not take measurements."
                 ]
               },
               {
@@ -28749,7 +28754,7 @@
                 "id": "reflection",
                 "values": [
                   "Work sample four: change and retest records",
-                  "Simulate a circuit change and clearly describe its impact, retest items, and approving roles."
+                  "Change only a paper diagram, recording the hypothetical change, effects to check and reviewing roles; do not alter a real circuit."
                 ]
               }
             ]
@@ -28853,16 +28858,16 @@
                 "Depends on the role: may serve as an entry route",
                 "No: not a universal requirement",
                 "Assess recognition by the institution and employer",
-                "One to two years of study and practical-training investment",
+                "Check the programme’s actual duration, fees, practical training and employer recognition; do not infer these from a generic preparation zone.",
                 "Education does not equal licensing or work authorization"
               ],
               [
                 "Associate degree",
-                "Some technical or management roles",
+                "Specific roles that request the qualification; check the actual job requirements.",
                 "Depends on the role: may serve as a supplementary route",
                 "No: not a universal requirement",
                 "Assess recognition by the institution and employer",
-                "Two years of study and practical-training investment",
+                "Check the programme’s actual duration, fees, practical training and employer recognition; do not infer these from a generic preparation zone.",
                 "On-site work capability must be demonstrated separately"
               ],
               [
@@ -28930,14 +28935,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS: a typical U.S. apprenticeship lasts 4–5 years, with high-school or equivalent preparation; check most states' licensing requirements against actual rules. O*NET education responses of 62% postsecondary certificate, 31% high school, and 2% below high school are not Chinese entry requirements."
+              "O*NET asked respondents what education a new hire needs to perform this occupation: 62% selected a postsecondary certificate, 31% a high school diploma or equivalent, and 2% less than high school. These are survey responses, not the education distribution of current electricians or universal legal requirements. Job Zone 3 describes preparation; BLS gives a typical 4–5-year apprenticeship for this occupation."
             ]
           },
           "id": "actors.path.career-path-block.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28981,32 +28985,32 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Material one: fictional drawings and code excerpts",
-                  "Provide drawing versions, applicable provisions, and work conditions as exercise inputs.",
-                  "Exercise output: list procedures, checkpoints, and unresolved items."
+                  "Material one: case diagram and provenance",
+                  "Find a diagram version, source and stated conditions in a public teaching case you choose; this page supplies no drawings.",
+                  "List work objects, supplied information and questions without devising an operating plan."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Material two: instrument and criteria excerpts",
-                  "Provide instrument ranges, measurement methods, and acceptance criteria.",
-                  "Exercise output: state the source and applicability of the criteria for this test."
+                  "Material two: existing explanations and conditions",
+                  "Find the case’s existing explanations and sources; do not create instrument ranges, measurement methods or acceptance criteria.",
+                  "Record their scope and omissions; mark incomplete information as unknown."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Material three: measurement data table (fictional)",
-                  "Provide successive readings and measurement conditions, including one out-of-limit value and one missing condition.",
-                  "Exercise output: mark the out-of-limit item and the item with missing conditions, and state retest requirements."
+                  "Material three: fictional case readings",
+                  "If the case includes fictional readings, record their units, conditions and existing explanations; this page supplies no sequence of readings or out-of-limit values.",
+                  "Preserve the original data and unknowns; do not infer site conditions or arrange measurements."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "Material four: work and boundary description",
-                  "List reference deliverables and boundaries that must not be crossed (without actual live electrical work, work at height, or energization)."
+                  "Material four: learning and authority boundaries",
+                  "Record questions for a qualified training provider or employer; do not handle equipment, wire circuits, climb, lift or energize equipment."
                 ]
               }
             ]
@@ -29017,7 +29021,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "Introductory case materials",
+          "title": "What to look for in a public teaching case",
           "type": "cards"
         },
         {
@@ -29028,50 +29032,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read an electrical code provision",
-                  "Copy an applicable provision and state its scope and uncertainties."
+                  "Day 1: choose a case and record its source",
+                  "Choose a public introductory teaching case and explanation of applicable rules. Record its source, date, scope and questions; this page supplies no drawings or readings."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: organize a work sequence",
-                  "Use fictional drawings to sequence procedures, checkpoints, and required tools."
+                  "Day 2: annotate tasks and questions",
+                  "On the chosen teaching diagram only, annotate the tasks, required qualifications and questions to check; do not devise an operating sequence."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: write measurement criteria",
-                  "Extract measurement conditions, instrument requirements and criteria from the supplied teaching material; record the source and missing information."
+                  "Day 3: record supplied conditions and fictional readings",
+                  "Extract fictional readings and conditions from that teaching case. Mark absent conditions as unknown; do not take measurements."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: troubleshoot on paper",
-                  "On paper, list questions to check and possible conclusions from fictional symptoms and hypotheses; do not perform on-site verification."
+                  "Day 4: note fault explanations and missing evidence",
+                  "List possible explanations and required evidence for a fictional fault on paper only; do not verify it on site."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: organize a work record",
-                  "Simulate a work record including de-energization, voltage verification, procedures, and readings."
+                  "Day 5: organize the case record",
+                  "Organize the fictional case record, separating supplied and missing information and identifying who could clarify it."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: make two variants",
-                  "Change one site condition and one criterion separately, clearly describing effects and retest items."
+                  "Day 6: change one assumption on paper",
+                  "Change one assumption on paper and list questions to revisit; do not change equipment or circuits."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: review stop conditions",
-                  "Summarize conditions requiring stopping and escalation in a one-page review record."
+                  "Day 7: reflect on next steps",
+                  "Reflect on whether you want to research further, undertake qualified training and respect work boundaries. This is not an ability test or qualification decision."
                 ]
               }
             ]
@@ -29082,7 +29086,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "Seven-day, low-cost career experience",
+          "title": "Seven days of paper-based career exploration",
           "type": "timeline"
         },
         {
@@ -29090,13 +29094,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: can you accurately identify the provision's scope and exceptions rather than just copy keywords?",
-              "Day 2: can you break the work into ordered, checkable steps and list checkpoints?",
-              "Day 3: can you clearly explain measurement conditions, instrument requirements, and the source of criteria?",
-              "Day 4: can you identify what evidence would distinguish the fictional hypotheses on paper, without treating the exercise as permission for on-site testing?",
-              "Day 5: can you clearly document de-energization, voltage verification, and abnormalities without deleting data?",
-              "Day 6: can you determine the scope affected by changes and list items that must be retested?",
-              "Day 7: can you state clear stop and escalation conditions and explain who confirms them?"
+              "Can you explain the source, scope and unknowns of the materials?",
+              "Can you distinguish occupational tasks, paper exploration and actual operating authority?",
+              "Do you want to explore qualified training and check specific requirements with a provider or employer?",
+              "What questions remain about physical demands, environment, schedule and safety responsibility? Do not use this exercise to determine physical capacity, ability or hiring eligibility.",
+              "If information is missing, obtain it or consult a qualified provider first. Base the next step on your interests, practical constraints and verified information.",
+              "Which questions can further reading answer, and which require a qualified training provider or employer?",
+              "Which specific work direction do you want to explore, and what application or learning requirement will you check next?"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -29105,7 +29109,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "How to decide on day seven whether to continue",
+          "title": "How to decide on the next step on day seven",
           "type": "list"
         },
         {
@@ -29177,14 +29181,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET education responses: 62% postsecondary certificate, 31% high school, 2% below high school, Zone3; BLS typical apprenticeship 4–5 years. Do not infer duration from generic Zone examples. "
+              "O*NET asked respondents what education a new hire needs to perform this occupation: 62% selected a postsecondary certificate, 31% a high school diploma or equivalent, and 2% less than high school. These are survey responses, not the education distribution of current electricians or universal legal requirements. Job Zone 3 describes preparation; BLS gives a typical 4–5-year apprenticeship for this occupation. Before choosing a programme, check apprenticeship entry requirements, licensing rules and local wages where you plan to work; My Next Move provides state and ZIP entry points."
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "mynextmove-electricians"
           ],
           "type": "prose"
         },
@@ -30366,9 +30370,7 @@
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "onet"
           ],
           "type": "prose"
         },
@@ -30702,13 +30704,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Must learn refrigeration cycles, piping, and refrigeration equipment."
+              "Explore the target role’s HVAC/refrigeration equipment, piping, controls and diagnostic work."
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -30747,13 +30748,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Must learn mechanical, hydraulic, and pneumatic systems."
+              "Check the target industrial equipment’s maintenance, repair, component diagnosis and control-related tasks; electrician experience does not establish every machinery-repair skill."
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-industrial-mechanics"
           ],
           "type": "prose"
         },
@@ -30792,13 +30792,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Must learn fire-protection codes, alarm systems, and coordinated-system commissioning."
+              "Check alarm wiring, sensors, circuit testing and applicable codes without extending the role to commissioning all fire-suppression systems."
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-alarm-installers"
           ],
           "type": "prose"
         },
@@ -30827,8 +30826,8 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-inspectors",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30837,13 +30836,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Must develop skills in inspection standards, reporting, and evidence collection."
+              "The target inspection role involves reviewing plans and codes, inspecting work and keeping records such as logs and photographs. Check the actual role’s requirements separately; electrician experience does not establish inspection authority."
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-inspectors",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30857,8 +30856,8 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-inspectors",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30912,13 +30911,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Used to check this occupation's wages, five percentile figures, employment, growth, and openings."
+              "Electrician duties, typical preparation, employment outlook and statistics such as the median wage; see the O*NET wage table for the complete percentile distribution."
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
             "bls",
-            "oews"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30932,8 +30931,7 @@
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -30947,7 +30945,6 @@
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
             "oews"
           ],
           "type": "prose"
@@ -30957,13 +30954,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Used to check the applicability of electrical codes and licensing requirements."
+              "Electrician tasks, preparation, interests and statistical entry points; not a substitute for applicable electrical codes or licensing law."
             ]
           },
           "id": "actors.display.market_signal_card.source.onet",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         }
@@ -30990,12 +30986,15 @@
                 ]
               },
               {
-                "answer": "This occupation mainly installs and repairs electrical wiring, equipment, and fixtures in buildings and facilities, following building electrical codes, licensing, and work permits. Equipment installers and repairers mainly repair equipment itself in industrial, transport, and power facilities; electrical engineers handle design calculations, compliance conclusions, and signing design documents.",
+                "answer": "Electricians install, maintain and repair wiring, equipment and fixtures. The equipment installers-and-repairers group includes commercial/industrial equipment, motors/power tools, transportation equipment, motor-vehicle electronics, and powerhouse/substation/relay work. Engineers focus on design, development, testing and supervision; technicians may also assemble, test, install and maintain control systems, so personally performing installation is not an absolute boundary. Sign-off authority requires a separate check of jurisdiction and credentials.",
                 "id": "actors.faq.2",
                 "question": "How does it differ from electrical and electronics installers and repairers and electrical engineers?",
                 "question_key": "career.faq.electricians.2",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "bls-engineers",
+                  "bls-equipment-repair",
+                  "bls-engineering-tech"
                 ]
               },
               {
@@ -31008,12 +31007,12 @@
                 ]
               },
               {
-                "answer": "BLS OES / O*NET reports a nationwide median annual wage of USD 63,190 in 2025 (median hourly wage USD 30.38); the five percentile figures are USD 42,640 / 49,430 / 63,190 / 83,940 / 108,510.",
+                "answer": "In 2025, U.S. electricians’ annual wages at the 10th, 25th, 50th, 75th and 90th percentiles were $42,640, $49,430, $63,190, $83,940 and $108,510; the hourly median was $30.38. These describe the national wage distribution, not apprentice, junior or senior pay bands.",
                 "id": "actors.faq.4",
                 "question": "What are U.S. wages?",
                 "question_key": "career.faq.electricians.4",
                 "source_refs": [
-                  "onet"
+                  "sag-moa"
                 ]
               },
               {
@@ -31026,13 +31025,13 @@
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics materials checked this time cover only industry and broad personnel categories; nationwide wage percentiles precisely matching this specific occupation have not been obtained. This page records insufficient evidence and does not substitute industry averages or a single recruitment offer.",
+                "answer": "Jiangmen’s report labelled 2025 gives calendar-2024 enterprise-sample annual wages for its electrician category: CNY 43,200, 50,400, 54,600, 70,900 and 97,000 at the 10th, 25th, 50th, 75th and 90th percentiles. This is a regional reference, not a national estimate or an exact equivalent of U.S. 47-2111; the electrician sample size is not separately stated.",
                 "id": "actors.faq.6",
                 "question": "Can mainland China wages be found?",
                 "question_key": "career.faq.electricians.6",
                 "source_refs": [
-                  "onet",
-                  "nbs"
+                  "cn-jiangmen-wages",
+                  "cn-jiangmen-notice"
                 ]
               },
               {
@@ -31092,13 +31091,15 @@
           "data": {
             "entries": [
               "Read education, training, certificate, and work-scope requirements in recruitment notices item by item; flexibility in one condition does not mean other conditions can be substituted.",
-              "U.S. 47-2111 wages for month 5 of 2025, forecast 2025–2035; Chinese industry proxies do not replace precise electrician wages.",
-              "This page is not operating instructions, a licence, or a work permit; live electrical work, height and confined-space work, and energization and acceptance may only be performed by certified and authorized personnel under applicable procedures and employer policies."
+              "U.S. 47-2111 wages for May 2025, forecast 2025–2035; Chinese industry proxies do not replace precise electrician wages.",
+              "This page provides no operating instructions, licence or work permit. Actual work must meet the applicable legal qualification, training and employer-authorization requirements. Employer authorization cannot replace legally required certification, and a certificate does not authorize every on-site task."
             ]
           },
           "id": "actors.sources.boundary.1",
           "source_refs": [
-            "onet"
+            "bls",
+            "cn-rule",
+            "osha-333"
           ],
           "type": "list"
         },
@@ -31107,13 +31108,10 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind research workflow"
+              "FermatMind Editorial"
             ]
           },
           "id": "actors.display.source_card.author",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -31135,13 +31133,10 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-20"
+              "2026-11-08 (wages, occupational comparison, preparation and the current revisions)"
             ]
           },
           "id": "actors.display.source_card.updated-at",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -31149,12 +31144,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Check 2025 wages and the 2025–2035 forecast, and the typical U.S. 4–5-year apprenticeship; regulations follow their actual scope. The protected FAQ has not been signed off for consistency across the entire page."
+              "U.S. wages refer to 2025 and projections to 2025–2035. Jiangmen wages cover a calendar-2024 enterprise sample; region and population remain separate. Check qualifications against the actual operation and applicable rules."
             ]
           },
           "id": "actors.display.source_card.note",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "cn-jiangmen-wages",
+            "cn-rule"
           ],
           "type": "prose"
         }
@@ -31674,9 +31672,9 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Equally weighted editorial ratings for three representative tasks: drawing-version and location-list preparation assistance 25, on-site installation 0, and fault-record assistance 25; floor((25+0+25)/3+0.5)=17. fermatmind-ai-impact-v1, 2026-11-08; not measured working time, adoption or unemployment probability.",
                   "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Determine wiring and equipment locations from drawings — 50/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
+                  "Determine wiring and equipment locations from drawings — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
                   "Install conduit, pull wires, and make connections — 0/100; weight=1/3; actors.display.ai_impact_table.tasks.3.task[0]",
                   "Locate faults and replace components — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.5.task[0]"
                 ],
@@ -31684,7 +31682,7 @@
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
                 "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "period": "2026-11-08",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
@@ -31718,6 +31716,171 @@
                 "publisher": "Competent mainland China authorities",
                 "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2026/art_cb81fc42de3740ebafdcaad75af4b31f.html"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Duties and PE licensing scope; project sign-off is not a universal duty of every engineer."
+                ],
+                "evidence_type": "primary official source",
+                "id": "bls-engineers",
+                "limitation": "Use only within the source occupation, region, population and period.",
+                "market": "United States",
+                "name": "BLS: electrical and electronics engineers, duties and licensure",
+                "period": "2025–2035 occupational outlook",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/electrical-and-electronics-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Five equipment specialisms and duties for comparison, not electrician statistics."
+                ],
+                "evidence_type": "primary official source",
+                "id": "bls-equipment-repair",
+                "limitation": "Use only within the source occupation, region, population and period.",
+                "market": "United States",
+                "name": "BLS: electrical and electronics installers and repairers",
+                "period": "2025–2035 occupational outlook",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/electrical-and-electronics-installers-and-repairers.htm"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Engineering support, assembly, testing and some control-system installation and maintenance; absence of on-site installation is not a hard boundary."
+                ],
+                "evidence_type": "primary official source",
+                "id": "bls-engineering-tech",
+                "limitation": "Use only within the source occupation, region, population and period.",
+                "market": "United States",
+                "name": "BLS: electrical and electronic engineering technologists and technicians",
+                "period": "2025–2035 occupational outlook",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/electrical-and-electronics-engineering-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Duties cover machinery electrical parts, system wiring and components, and indoor wiring and lighting; overlap does not establish one-to-one international recognition."
+                ],
+                "evidence_type": "primary official source",
+                "id": "cn-classification-2022",
+                "limitation": "Use only within the source occupation, region, population and period.",
+                "market": "中国大陆",
+                "name": "China occupational classification: electrician 6-31-01-03",
+                "period": "2022",
+                "publisher": "Chinese occupational classification authorities; Guangyuan government-hosted copy",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Overall occupational table, production-related personnel row 62: annual P10/P25/P50/P75/P90 of CNY 43,200/50,400/54,600/70,900/97,000; not a selected-industry subtable."
+                ],
+                "evidence_type": "primary official source",
+                "id": "cn-jiangmen-wages",
+                "limitation": "Use only within the source occupation, region, population and period.",
+                "market": "中国大陆",
+                "name": "Jiangmen 2025 wage report: regional enterprise sample for electricians",
+                "period": "Calendar 2024; report labelled 2025; notice published 2026-01-13",
+                "publisher": "Jiangmen Human Resources and Social Security Bureau",
+                "scope": "contextual",
+                "url": "https://www.jiangmen.gov.cn/attachment/0/364/364612/3441641.pdf"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Calendar-2024 reporting period; 476 enterprises and 83,914 workers are the full valid survey sample, not the electrician sample."
+                ],
+                "evidence_type": "primary official source",
+                "id": "cn-jiangmen-notice",
+                "limitation": "Use only within the source occupation, region, population and period.",
+                "market": "中国大陆",
+                "name": "Jiangmen official wage notice and survey scope",
+                "period": "2026-01-13",
+                "publisher": "Jiangmen Human Resources and Social Security Bureau",
+                "scope": "contextual",
+                "url": "https://www.jiangmen.gov.cn/bmpd/jmsrlzyhshbzj/zcfg/jycy/content/post_3426923.html"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Use the target state or ZIP to explore training, licensing, apprenticeships and wages; specific state programme requirements have not been established here."
+                ],
+                "evidence_type": "primary official source",
+                "id": "mynextmove-electricians",
+                "limitation": "Use only within the source occupation, region, population and period.",
+                "market": "United States",
+                "name": "My Next Move: electrician training, licensing and local wage entry points",
+                "period": "2025 wage and projection references",
+                "publisher": "National Center for O*NET Development",
+                "scope": "exact",
+                "url": "https://www.mynextmove.org/profile/summary/47-2111.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Adjacent occupational definitions and tasks, not electrician wages or legal credentials."
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-hvac",
+                "limitation": "Applies to this adjacent occupation; does not establish an individual’s ability to transition.",
+                "market": "United States",
+                "name": "O*NET — HVAC and refrigeration mechanics and installers",
+                "period": "Updated 2026; checked 2026-11-08",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-9021.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Adjacent occupational definitions and tasks, not electrician wages or legal credentials."
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-industrial-mechanics",
+                "limitation": "Applies to this adjacent occupation; does not establish an individual’s ability to transition.",
+                "market": "United States",
+                "name": "O*NET — Industrial machinery mechanics",
+                "period": "Updated 2026; checked 2026-11-08",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-9041.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Adjacent occupational definitions and tasks, not electrician wages or legal credentials."
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-alarm-installers",
+                "limitation": "Applies to this adjacent occupation; does not establish an individual’s ability to transition.",
+                "market": "United States",
+                "name": "O*NET — Security and fire alarm systems installers",
+                "period": "Updated 2026; checked 2026-11-08",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-2098.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Definition and tasks: plans and codes, site inspection, logs and photographs; adjacent-duty comparison, not a determination of transition or enforcement authority."
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-inspectors",
+                "limitation": "Check actual role credentials, authority and jurisdiction separately.",
+                "market": "United States",
+                "name": "O*NET — Construction and Building Inspectors",
+                "period": "Updated 2026; checked 2026-11-08",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-4011.00"
               }
             ]
           },
@@ -32565,7 +32728,7 @@
             }
           },
           {
-            "source_ref": "nist-rmf-1",
+            "source_ref": "osha-333",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.2.answer",
               "block": "ai-impact",
@@ -32573,14 +32736,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist-rmf-1",
+              "$source": "osha-333",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "nist-rmf-1",
+              "$source": "osha-333",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32594,7 +32757,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "source-fermatmind-ai-rubric",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.3.answer",
               "block": "ai-impact",
@@ -32602,14 +32765,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "source-fermatmind-ai-rubric",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "source-fermatmind-ai-rubric",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32623,7 +32786,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "bls",
             "回答": {
               "$item": "actors.ai-impact.ai-impact-table.6",
               "block": "ai-impact",
@@ -32631,14 +32794,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32710,7 +32873,7 @@
             }
           },
           {
-            "source_ref": "nist-rmf-1",
+            "source_ref": "bls",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.7.answer",
               "block": "ai-impact",
@@ -32718,14 +32881,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist-rmf-1",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "nist-rmf-1",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33268,7 +33431,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33276,7 +33439,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34549,9 +34712,9 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "Data type",
-              "数值": "Insufficient evidence: no nationwide mainland China wage distribution precisely matching this specific occupation has been obtained",
-              "说明": "Existing official sources aggregate industries and broad personnel categories and cannot substitute for occupational wages."
+              "指标": "Jiangmen electricians · calendar 2024",
+              "数值": "Annual P10/P25/P50/P75/P90: CNY 43,200/50,400/54,600/70,900/97,000",
+              "说明": "Row 62 of the 2025 report’s overall occupational table; not a national estimate or a selected-industry subtable."
             },
             {
               "指标": "Role scope",
@@ -34695,33 +34858,14 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Historical case status",
+          "china_open": "Regional enterprise-sample reference",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "actors.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "actors.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
+          "china_ref": "Jiangmen official regional wage table: https://www.jiangmen.gov.cn/attachment/0/364/364612/3441641.pdf",
           "china_salary_note": {
             "$item": "actors.display.career_snapshot_primary_locale.boundary",
             "block": "china-salary",
@@ -34753,7 +34897,7 @@
                     "type": "prose"
                   }
                 ],
-                "separator": ""
+                "separator": "\n"
               }
             },
             {
@@ -34871,7 +35015,7 @@
               "$fact": "median",
               "field": "display_value"
             },
-            "说明": "Nationwide median (month 5 of 2025); half of workers earn below and half above this value."
+            "说明": "Nationwide median (May 2025); half of workers earn below and half above this value."
           },
           {
             "指标": "Wages · 75th percentile",
@@ -34977,11 +35121,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "Wage data for month 5 of 2025",
+        "industry_period": "Wage data for May 2025",
         "industry_rows": [
           {
             "fact_ref": "median",
-            "industry": "Government (excluding state and local education and hospitals) (month 5 of 2025)",
+            "industry": "Government (excluding state and local education and hospitals) (May 2025)",
             "median": "USD 79,820 per year (median for electricians within the industry)",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.theater",
@@ -34992,7 +35136,7 @@
           },
           {
             "fact_ref": "median",
-            "industry": "Manufacturing (month 5 of 2025)",
+            "industry": "Manufacturing (May 2025)",
             "median": "USD 74,550 per year (median for electricians within the industry)",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.education",
@@ -35003,7 +35147,7 @@
           },
           {
             "fact_ref": "median",
-            "industry": "Electrical contractors and other wiring installation contractors (month 5 of 2025)",
+            "industry": "Electrical contractors and other wiring installation contractors (May 2025)",
             "median": "USD 61,570 per year (median for electricians within the industry)",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.amusement",
@@ -35013,7 +35157,7 @@
             }
           },
           {
-            "industry": "Employment services (month 5 of 2025)",
+            "industry": "Employment services (May 2025)",
             "median": "USD 57,760 per year (median for electricians within the industry)",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
@@ -35068,7 +35212,7 @@
             "question": "How should it be used?"
           }
         ],
-        "median": "USD 63,190 per year (USD 30.38 per hour, month 5 of 2025)",
+        "median": "USD 63,190 per year (USD 30.38 per hour, May 2025)",
         "outlook_heading": {
           "$item": "actors.display.career_snapshot_secondary_locale.outlook-heading",
           "block": "us-salary",
@@ -35365,7 +35509,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35373,7 +35517,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35388,7 +35532,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "oews",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35396,7 +35540,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "oews",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35642,7 +35786,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "O*NET national wage table (BLS 2025 data)",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.bls",
@@ -37107,36 +37251,36 @@
       },
       {
         "derivation": null,
-        "display_value": "Construction (2024)",
+        "display_value": "Construction (2025)",
         "fact_id": "industry-theater",
         "market": "United States",
         "measure": "Main industry one",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "The occupational profile does not list a second main industry (2024)",
+        "display_value": "The occupational profile does not list a second main industry (2025)",
         "fact_id": "industry-education",
         "market": "United States",
         "measure": "Main industry two",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "The occupational profile lists only construction as a main industry (2024)",
+        "display_value": "The occupational profile lists only construction as a main industry (2025)",
         "fact_id": "industry-amusement",
         "market": "United States",
         "measure": "Scope of main-industry disclosure",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
@@ -37154,13 +37298,13 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "25%",
+        "derivation": "Equally weighted editorial ratings for three representative tasks: drawing-version and location-list preparation assistance 25, on-site installation 0, and fault-record assistance 25; floor((25+0+25)/3+0.5)=17. fermatmind-ai-impact-v1, 2026-11-08; not measured working time, adoption or unemployment probability.",
+        "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
         "measure": "AI Impact Score (editorial estimate)",
         "occupation_scope": "Electricians",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "period": "2026-11-08",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -37208,7 +37352,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China wage reference (insufficient evidence)"
+        "label": "Mainland China national occupational wage percentiles (not obtained)"
       }
     ]
   },
@@ -37223,7 +37367,7 @@
       "text": "Electricians: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "f146b620bb982444cb279b41f7505678bdd000577c319ae94d889e5ef071b2b4",
+  "source_content_sha256": "f3ab7ca162efac825600466f40d34ac35dd224e0e27a6950c4bd76a9a2a78150",
   "subject": {
     "canonical_slug": "electricians",
     "name": "Electricians",

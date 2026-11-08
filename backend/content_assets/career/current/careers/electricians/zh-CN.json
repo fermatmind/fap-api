@@ -22652,7 +22652,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "给你一份虚构图纸与规范摘录，看能否排出工序、列出检查点并写出测量判据。"
+              "自选公开入门教学案例，标注工作对象、资料缺项及需向合格培训机构或雇主核实的问题；本页不附图纸、不要求制定操作方案。"
             ]
           },
           "id": "actors.display.fit_decision_checklist.how-detail",
@@ -22996,12 +22996,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "停电、验电与接地已确认"
+              "实际作业由符合适用资格、培训及授权要求的人员，按具体规程完成能源隔离与安全状态确认；本页只说明职业责任，不提供通用操作顺序。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.primary",
           "source_refs": [
-            "onet"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23248,12 +23249,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "电工安装维护住宅、商业及工厂的电力通信照明控制系统；安装维修组合另含五设备方向；电气工程师研究设计开发测试并可监督实施，不以通常不亲自维修作硬边界。"
+              "电工以电气布线、设备器具安装维护维修为主；设备安装维修组合另分商业工业设备、电机电动工具、运输设备、机动车电子设备、发电站变电站继电保护等方向。工程师侧重设计开发测试与监督；技术员也可能装配、测试、安装维护控制系统，不能用“是否亲自安装”作绝对界线。签署权限另核地区与资质。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-engineers",
+            "bls-equipment-repair",
+            "bls-engineering-tech"
           ],
           "type": "prose"
         },
@@ -23388,12 +23392,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "按作业许可执行停电、验电、接地与挂牌，确认能源状态后方可作业。"
+              "实际作业由符合适用资格、培训及授权要求的人员，按具体规程完成能源隔离与安全状态确认；本页只说明职业责任，不提供通用操作顺序。"
             ]
           },
           "id": "actors.display.responsibilities_block.02",
           "source_refs": [
-            "onet"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23613,12 +23618,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS OES／O*NET：2025 年全国中位年薪 63,190 美元（中位时薪 30.38 美元）；五分位 42,640／49,430／63,190／83,940／108,510 美元。"
+              "2025年美国电工年薪第10、25、50、75、90百分位分别为42,640、49,430、63,190、83,940、108,510美元；中位时薪30.38美元。这是全国工资分布，不是学徒、初级或高级薪级。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23627,12 +23632,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET教育反馈62%中学后证书、31%高中、2%低于高中；Zone3是准备程度。BLS典型学徒4–5年，非以Zone通用举例替职业时长。"
+              "O*NET询问受访者“新入职者完成本职业工作需要什么教育程度”：62%选择中学后证书、31%高中或同等学历、2%低于高中。这不是现任电工学历占比，也不是统一法定门槛。Zone 3描述准备程度；BLS本职业典型学徒为4–5年。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23641,12 +23647,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆同类岗位多为建筑电气安装、设备维护与检修岗，多从施工或维修岗做起并按当地要求取得证书；与美国该单职业不是一一对应，资格与收入需按单位与地区核验。"
+              "中国2022职业分类列有“电工”6-31-01-03，涉及机械设备电气部分、电气系统线路器件及室内线路照明的安装调试维护维修。与美国47-2111职责重叠，不等于一一互认；职业分类、技能等级、特种作业资格及雇主授权分别核对。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "cn-classification-2022",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23669,12 +23676,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业边界：本页按美国 O*NET-SOC 47-2111.00「Electricians」编写，指安装、维护与检修电气布线、设备与器具，并确保作业符合相关规范的岗位；与电气与电子设备安装维修人员（工业、运输与电力设施的设备本体检修）、电气工程师（设计计算与设计文件签署）以及电气与电子工程技师与技术员（工程支持与测试记录）在工作对象与责任层次上不同。"
+              "电工以电气布线、设备器具安装维护维修为主；设备安装维修组合另分商业工业设备、电机电动工具、运输设备、机动车电子设备、发电站变电站继电保护等方向。工程师侧重设计开发测试与监督；技术员也可能装配、测试、安装维护控制系统，不能用“是否亲自安装”作绝对界线。签署权限另核地区与资质。"
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-engineers",
+            "bls-equipment-repair",
+            "bls-engineering-tech"
           ],
           "type": "prose"
         }
@@ -23691,12 +23701,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "研究、设计电气设备、部件与系统并签署设计文件。"
+              "工程师侧重电气与电子设备、组件和系统的研究、设计、开发、测试及监督实施；项目签署权限须另核地区、资质及项目要求，不能由职名推出。"
             ]
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet"
+            "bls-engineers"
           ],
           "type": "prose"
         },
@@ -23710,7 +23720,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -23724,7 +23734,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet"
+            "onet-industrial-mechanics"
           ],
           "type": "prose"
         },
@@ -23733,12 +23743,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "安装与维护火灾报警、探测与灭火等安全系统。"
+              "安装、编程、维护和修理安防与火灾报警线路、设备及相关传感器，按适用规范工作；不由此扩大为全部灭火系统安装。"
             ]
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet"
+            "onet-alarm-installers"
           ],
           "type": "prose"
         },
@@ -23798,12 +23808,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "安装、维修商业与工业设备、运输设备、电力设施与航空电子等电气与电子设备。"
+              "设备安装维修组合包括商业与工业设备、电机与电动工具、运输设备、机动车电子设备及发电站／变电站／继电保护等五类方向。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.work",
           "source_refs": [
-            "onet"
+            "bls-equipment-repair"
           ],
           "type": "prose"
         },
@@ -23868,12 +23878,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "承担测试记录与工程支持，通常不承担现场布线与安装。"
+              "协助工程师设计开发，参与装配、测试、技术记录及部分控制系统安装维护；与电工在任务上可能重叠，应核具体岗位。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
           "source_refs": [
-            "onet"
+            "bls-engineering-tech"
           ],
           "type": "prose"
         },
@@ -23910,12 +23920,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "承担设计计算、符合性结论与文件签署，通常不亲自布线与检修。"
+              "工程师侧重电气与电子设备、组件和系统的研究、设计、开发、测试及监督实施；项目签署权限须另核地区、资质及项目要求，不能由职名推出。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
           "source_refs": [
-            "onet"
+            "bls-engineers"
           ],
           "type": "prose"
         },
@@ -23943,7 +23953,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.career",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -23952,12 +23962,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "对象是暖通制冷设备与管路，电气部分限于设备控制与供电接口。"
+              "侧重暖通和制冷系统，可涉及设备布线、电路测试及控制部件；不能用“不做电气工作”划硬界线，应核具体系统与岗位。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -23971,7 +23981,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.choice",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -23985,7 +23995,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.career",
           "source_refs": [
-            "onet"
+            "onet-industrial-mechanics"
           ],
           "type": "prose"
         },
@@ -23994,12 +24004,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "以机械、液压与气动系统为主，电气部分侧重设备控制回路。"
+              "侧重工业生产加工机械的安装维修维护，亦可使用电压表诊断或对计算机控制机械编程；按设备和职责核对，不把电气工作限死为一种回路。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
           "source_refs": [
-            "onet"
+            "onet-industrial-mechanics"
           ],
           "type": "prose"
         },
@@ -24013,7 +24023,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.choice",
           "source_refs": [
-            "onet"
+            "onet-industrial-mechanics"
           ],
           "type": "prose"
         },
@@ -24027,7 +24037,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.career",
           "source_refs": [
-            "onet"
+            "onet-alarm-installers"
           ],
           "type": "prose"
         },
@@ -24041,7 +24051,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
           "source_refs": [
-            "onet"
+            "onet-alarm-installers"
           ],
           "type": "prose"
         },
@@ -24055,7 +24065,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.choice",
           "source_refs": [
-            "onet"
+            "onet-alarm-installers"
           ],
           "type": "prose"
         },
@@ -24217,13 +24227,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "通常从学徒或助理岗开始，用实训与带教期记录证明能按工序作业、正确使用仪表并留下可复核的记录。"
+              "BLS描述美国电工通常通过4–5年学徒训练入行，部分先读技术学校；须另核具体项目、州执照和实际岗位条件。纸面探索不替代培训、考试或工作资格。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24262,7 +24271,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试用资料检索、清单和记录整理，需实测准确性与用时。"
+              "编辑建议试用资料检索、清单和记录整理，需实测准确性与用时。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
@@ -24292,13 +24301,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 与数字化工具可辅助查阅电气规范与产品资料、整理工程量与材料清单、读取与整理测试记录；不能替代现场验电与回路确认、故障根因判断、按规范作业与作业许可，也不承担安全与合规责任。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "AI影响指数17%为编辑模型估计：图纸版本／清单准备和故障记录只按辅助档计分，现场安装不计替代。三个代表任务等权编辑估计：图纸版本与位置清单准备辅助25分、现场安装0分、故障记录辅助25分；floor((25+0+25)/3+0.5)=17。fermatmind-ai-impact-v1，2026-11-08；非实测工时、采用率或失业概率。 实际安全确认和作业责任仍按适用规程由合格人员承担。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "source-fermatmind-ai-rubric",
+            "onet",
+            "osha-333"
           ],
           "type": "prose"
         },
@@ -24559,13 +24569,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。工具输出只是线索，必须用现场测量与验电结果核对，并由作业人确认根因。"
+              "不能据工具输出判断设备是否安全。实际安全状态确认和故障判断由符合适用资格、培训及授权要求的人员，按具体规程完成；本页不提供操作顺序。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -24589,13 +24600,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可试用规范检索、清单与记录草稿，先核准确性和用时，未取得加速实测。"
+              "编辑建议：仅在纸面资料整理中尝试信息检索、清单或记录草稿，核对准确性和耗时；未取得电工实际采用或提效数据，也不能由此得出操作判断。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.3.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "source-fermatmind-ai-rubric",
+            "onet"
           ],
           "type": "prose"
         },
@@ -24699,8 +24710,7 @@
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24739,13 +24749,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方工资与就业统计"
+              "NIST自愿AI风险管理框架"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist-rmf-1"
           ],
           "type": "prose"
         },
@@ -24754,13 +24763,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对中位工资、五分位、就业规模与展望，中位数不是起薪。"
+              "用于AI风险管理的一般框架，不提供电工工资、采用率或电气作业规程。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist-rmf-1"
           ],
           "type": "prose"
         },
@@ -24798,13 +24806,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST自愿AI风险管理框架"
+              "电工全国工资统计"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24813,13 +24820,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "通用方法，无职业工资、采用实测或电气操作规范。"
+              "2025年美国电工工资百分位；不代表起薪、职级或中国工资。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24828,13 +24834,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "兴趣与职业探索工具"
+              "OSHA电气安全工作实践"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "osha-333"
           ],
           "type": "prose"
         },
@@ -24843,13 +24848,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于探索兴趣方向，不作人格诊断或录用依据。"
+              "只在1910 Subpart S实际范围内使用，施工等其他行业须另核适用规则。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "osha-333"
           ],
           "type": "prose"
         },
@@ -24858,13 +24862,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "相邻职业官方档案"
+              "BLS电工职业资料"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24873,13 +24876,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对相邻方向的差别，只适用于该相邻职业。"
+              "电工职责、典型入行、工资和就业展望；不代表所有国家的条件。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25188,13 +25190,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "验电、接地与停电确认必须由作业人现场完成。"
+              "实际作业由符合适用资格、培训及授权要求的人员，按具体规程完成能源隔离与安全状态确认；本页只说明职业责任，不提供通用操作顺序。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25398,7 +25400,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试用：图纸版本和材料清单整理；未取得加速实测。"
+              "编辑建议试用：图纸版本和材料清单整理；未取得加速实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
@@ -25563,13 +25565,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对现场尺寸、结构与回路状态，确认停电、验电与接地。"
+              "实际作业由符合适用资格、培训及授权要求的人员，按具体规程完成能源隔离与安全状态确认；本页只说明职业责任，不提供通用操作顺序。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.2.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25743,13 +25745,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "控制方式：按作业许可停电、验电、接地与挂牌，只有获授权人员可操作。"
+              "实际作业由符合适用资格、培训及授权要求的人员，按具体规程完成能源隔离与安全状态确认；本页只说明职业责任，不提供通用操作顺序。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26063,13 +26065,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未取得中国精确职业全国工资，不能推官方未发布；比较报价核地区、行业、合同、计件、加班与奖金，不保证持证加薪。"
+              "江门人社局2025年报告的整体分职业表列“电工”2024全年企业样本工资：第10、25、50、75、90百分位为4.32、5.04、5.46、7.09、9.70万元/年。此为江门地区参考，不代表全国或美国47-2111的精确等价；电工样本量未单列。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs",
-            "cn-rule"
+            "cn-jiangmen-wages",
+            "cn-jiangmen-notice"
           ],
           "type": "prose"
         },
@@ -26092,12 +26094,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页所核国家统计局资料未取得与「电工」精确对应的中国大陆全国单职业工资分位，仅到行业与人员大类口径。"
+              "中国大陆：全国精确职业分位未取得；江门地区企业样本可作独立参照。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.heading",
           "source_refs": [
-            "nbs"
+            "cn-jiangmen-wages",
+            "cn-jiangmen-notice"
           ],
           "type": "prose"
         },
@@ -26106,7 +26109,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025全国非私营/私营建筑业税前年均92,036/66,275元；制造113,594/76,055元。按实际雇主行业作宽口径代理，非电工中位或到手。"
+              "2025年全国城镇单位就业人员税前年平均工资：建筑业非私营／私营92,036／66,275元，制造业113,594／76,055元。仅为行业门类背景，不是电工中位工资或个人实发。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
@@ -27002,7 +27005,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "安全警觉"
+              "工作偏好反思"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.label",
@@ -27016,7 +27019,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "你会主动确认能源状态与防护吗？"
+              "你偏好怎样整理信息和沟通工作安排？"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.question",
@@ -27030,7 +27033,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用一次作业假设看是否确认停电、验电、接地与监护。"
+              "可借偏好问题反思沟通方式；安全警觉与作业胜任须由实际培训、规程和工作证据核验。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.answer",
@@ -27044,7 +27047,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验电"
+              "信息整理"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27058,7 +27061,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "隔离"
+              "沟通偏好"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -27072,7 +27075,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工作样本"
+              "偏好反思"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -27086,7 +27089,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不作能力评分。"
+              "MBTI结果不检测安全警觉、操作能力或职业适任。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.watchout",
@@ -27100,7 +27103,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "动手与体力"
+              "动机反思"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.label",
@@ -27114,7 +27117,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "你能长时间站立、登高与搬抬作业吗？"
+              "面对重复复核、返工或求助，你会怎样解释自己的动机？"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.question",
@@ -27128,7 +27131,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用一次实训任务观察是否在防护到位的前提下完成体力作业。"
+              "可记录自己对复核与求助的态度，并阅读岗位体力和环境要求；待向合格培训机构或雇主核实的问题另列。本页不安排登高、搬抬或电气实训。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.answer",
@@ -27142,7 +27145,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "体力"
+              "复核态度"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.signals.1",
@@ -27156,7 +27159,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "防护"
+              "求助动机"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.signals.2",
@@ -27170,7 +27173,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工作样本"
+              "动机反思"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -27184,7 +27187,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不作体检或录用结论。"
+              "九型结果不检测体能、安全胜任或录用适配。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.watchout",
@@ -27198,7 +27201,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "学习动机"
+              "认知表现探索"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.label",
@@ -27212,7 +27215,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "你愿意持续更新规范与工器具吗？"
+              "你在规则推理题中的表现如何？"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.question",
@@ -27226,7 +27229,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用对规范与工器具更新的学习记录核对。"
+              "可单独探索题目中的认知表现；学习意愿、规程理解和电工作业能力须另看实际学习与培训证据。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.answer",
@@ -27240,7 +27243,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "规范"
+              "规则推理"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.signals.1",
@@ -27254,7 +27257,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更新"
+              "题目表现"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.signals.2",
@@ -27268,7 +27271,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工作样本"
+              "题目表现探索"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -27282,7 +27285,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不作人格结论。"
+              "IQ测试不检测学习动机，也不证明电工作业胜任。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.watchout",
@@ -27492,12 +27495,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "组合五子方向不能一项证互认。"
+              "分别核对目标方向、地区及实际证件适用范围；本页不证明证件可相互替代。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
           "source_refs": [
-            "onet"
+            "bls-equipment-repair"
           ],
           "type": "prose"
         },
@@ -27604,12 +27607,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿补制冷循环、管路与设备调试。"
+              "愿意进一步了解暖通制冷设备、管路和相关电气控制任务。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.signals",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -27618,12 +27621,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "制冷剂及相应法规另核，电工许可不自动覆盖。"
+              "制冷剂相关操作涉及哪些资格、地区规则和任务边界，须向主管机构或合格培训机构另核；本页不作资格认定。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -27744,12 +27747,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国该单职业 2025 年中位年薪 63,190 美元；中国大陆未取得对应单职业分位，不能直接用美国数字外推。"
+              "美国2025年电工年薪中位为63,190美元；江门地区2024年企业样本电工工资中位为5.46万元/年。地区与总体不同，不能直接换算或当作个人起薪；全国精确对应分位本次未取得。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "cn-jiangmen-wages"
           ],
           "type": "prose"
         },
@@ -27828,12 +27832,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用一次纸面作业任务做完整闭环：读图纸与规范、排出工序、列出检查点与测量判据、写清异常与停止条件。"
+              "从自选公开教学案例辨认任务和资料边界，记录不懂之处、缺失条件及需向谁核实，再决定是否继续了解合格培训；不以纸面作品推定作业能力。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27898,12 +27903,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对电气规范与执照要求的适用边界。"
+              "相邻电气工程技术支持职业资料入口，不是电气规范或执照法规。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27912,12 +27917,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对中国职业与培训公开信息入口。"
+              "兴趣与职业探索资料入口，不是中国职业培训法规。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.interest-profiler",
           "source_refs": [
-            "onet"
+            "interest-profiler"
           ],
           "type": "prose"
         },
@@ -27926,12 +27931,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对职业安全的国际资料入口。"
+              "相邻职业查找入口，不是国际职业安全规程。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.agent",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27954,12 +27959,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于探索兴趣方向，不作人格诊断。"
+              "中国公开统计入口，不是兴趣或人格测评证据。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27968,12 +27973,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明工资统计方法与单位口径。"
+              "BLS职业查找入口，不提供本页工资方法的具体论证。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         }
@@ -27990,13 +27995,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按作业许可停电、验电、接地并挂牌，只有获授权人员可操作。"
+              "实际作业由符合适用资格、培训及授权要求的人员，按具体规程完成能源隔离与安全状态确认；本页只说明职业责任，不提供通用操作顺序。"
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "osha-333",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28727,15 +28732,15 @@
               {
                 "id": "scene",
                 "values": [
-                  "作品一：纸面作业方案",
-                  "以虚构图纸完成一份作业方案，含工序、检查点与安全措施。"
+                  "作品一：案例任务与资料清单",
+                  "只标注自选案例的工作对象、给定信息、缺失条件和待核问题，不编工序、安全方案或测量判据。"
                 ]
               },
               {
                 "id": "rework",
                 "values": [
                   "作品二：测量与测试记录",
-                  "记录测量条件、仪表、读数与判据对照结果。"
+                  "仅使用自选公开教学案例中的虚构读数，注明来源、条件、仪器名称及缺失信息，不自行测量。"
                 ]
               },
               {
@@ -28749,7 +28754,7 @@
                 "id": "reflection",
                 "values": [
                   "作品四：变更与复测记录",
-                  "模拟一次回路变更，写清影响范围、复测项与批准角色。"
+                  "仅修改纸面图示，记录假设变化、待核影响和复核角色，不改实际回路。"
                 ]
               }
             ]
@@ -28853,16 +28858,16 @@
                 "视岗位：可作为入口",
                 "否：不是普遍门槛",
                 "按院校与雇主认可度衡量",
-                "一至两年学制与实训投入",
+                "按具体项目核学制、费用、实训与雇主认可，不从职业准备区间推定。",
                 "学历不等于执照或作业授权"
               ],
               [
                 "副学士学位",
-                "部分技术型或管理型岗位",
+                "明确要求相关学历的具体岗位，须读实际招聘条件。",
                 "视岗位：可作为补充路径",
                 "否：不是普遍门槛",
                 "按院校与雇主认可度衡量",
-                "两年学制与实训投入",
+                "按具体项目核学制、费用、实训与雇主认可，不从职业准备区间推定。",
                 "需额外证明现场作业能力"
               ],
               [
@@ -28930,14 +28935,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS美国典型学徒4–5年，高中或同等准备；多数州执照要求按实际规则核。O*NET教育调查62%中学后证书、31%高中、2%低于高中不是中国门槛。"
+              "O*NET询问受访者“新入职者完成本职业工作需要什么教育程度”：62%选择中学后证书、31%高中或同等学历、2%低于高中。这不是现任电工学历占比，也不是统一法定门槛。Zone 3描述准备程度；BLS本职业典型学徒为4–5年。"
             ]
           },
           "id": "actors.path.career-path-block.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28981,32 +28985,32 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "材料一：虚构图纸与规范摘录",
-                  "给出图纸版本、适用条款与作业条件，作为练习输入。",
-                  "练习产出：列出工序、检查点与未决项清单。"
+                  "资料一：案例图示与出处",
+                  "在自选公开教学案例中查找图示版本、来源及标明的适用条件；本页未附图纸。",
+                  "整理工作对象、已给信息和待核问题，不编操作方案。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "材料二：仪表与判据摘录",
-                  "给出仪表量程、测量方法与合格判据。",
-                  "练习产出：写出本次测试的判据来源与适用范围。"
+                  "资料二：已有说明与条件",
+                  "查找案例已有的条件说明及出处，不自行制定量程、测量方法或验收判据。",
+                  "记录说明的适用范围和缺项；不完整就标未知。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "材料三：测量数据表（虚构）",
-                  "给出逐次读数与测量条件，含一处超限与一处条件缺失。",
-                  "练习产出：标出超限项与条件缺失项，并写出复测要求。"
+                  "资料三：案例虚构读数",
+                  "如案例附虚构读数，摘录其单位、条件及已有解释；本页未附连续读数或超限值。",
+                  "保留原数据和未知项，不推定现场状态或安排实测。"
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "材料四：作业与边界说明",
-                  "列出参考交付物与不得越界的范围（不涉及真实带电、登高与送电作业）。"
+                  "资料四：学习与权限边界",
+                  "记录需要向合格培训机构或雇主核实的问题，不安排接触设备、布线、登高、搬抬或送电。"
                 ]
               }
             ]
@@ -29017,7 +29021,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "入门案例材料",
+          "title": "选择公开教学案例时查找哪些资料",
           "type": "cards"
         },
         {
@@ -29028,50 +29032,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第 1 天：读一条电气规范条款",
-                  "抄录一条适用条款并写出适用范围与不确定处。"
+                  "第1天：选择案例并记出处",
+                  "自选公开入门教学案例和规范说明，记录来源、日期、适用范围与不懂之处；本页未附图纸或读数材料。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：整理一次作业工序",
-                  "用虚构图纸排出工序、检查点与所需工具。"
+                  "第2天：标注任务和待核问题",
+                  "只在自选教学案例纸面图示上标注任务、所需资格和待核问题，不编操作顺序。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：写一份测量判据",
-                  "从所给教学材料摘录测量条件、仪表要求与判据，标注来源和缺项。"
+                  "第3天：摘录给定条件和虚构读数",
+                  "从自选教学案例摘录虚构读数及条件，缺少条件就标未知，不自行测量。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：做一次纸面排故",
-                  "仅在纸面按虚构现象与假设列出需核对的问题及可能结论，不实施现场验证。"
+                  "第4天：记录故障解释及缺证",
+                  "只在纸面列虚构故障的可能解释与需要什么证据，不进行现场验证。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第 5 天：整理一份作业记录",
-                  "模拟一份含停电验电、工序与读数的作业记录。"
+                  "第5天：整理案例记录",
+                  "整理虚构案例记录，明确哪些信息已给出、哪些缺失以及应向谁核实。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：做两张变体",
-                  "分别改变一处现场条件与一处判据，写清影响与复测项。"
+                  "第6天：改变一项纸面假设",
+                  "仅改纸面图示的一项假设，列出需要重新核实的问题，不改变设备或回路。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：复盘停止条件",
-                  "总结在哪些条件下必须停止并升级，形成一页复盘记录。"
+                  "第7天：复盘下一步",
+                  "复盘你是否愿意继续查资料、接受合格培训并遵守权限；这不是能力考核或资格结论。"
                 ]
               }
             ]
@@ -29082,7 +29086,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "七天低成本职业体验",
+          "title": "七天纸面职业探索",
           "type": "timeline"
         },
         {
@@ -29090,13 +29094,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第 1 天：能否准确找出条款的适用范围与例外，而不是只抄关键词。",
-              "第 2 天：能否把作业拆成可核对的有序工序并列出检查点。",
-              "第 3 天：能否说清测量条件、仪表要求与判据来源。",
-              "第4天：能否在纸面识别区分虚构假设所需的证据，而不把练习当作现场测试许可。",
-              "第 5 天：能否在不删数据的前提下写明停电验电与异常项。",
-              "第 6 天：能否判断变更影响范围并列出必须复测的项目。",
-              "第 7 天：能否写出明确的停止与升级条件，并说明由谁确认。"
+              "能否说明资料来源、适用范围和未知项？",
+              "能否分清职业任务、纸面探索与实际操作权限？",
+              "是否愿意继续了解合格培训，并向培训机构或雇主核实具体条件？",
+              "对体力、环境、日程和安全责任仍有哪些问题？不以这次探索判定体能、能力或录用资格。",
+              "若资料不足，先补资料或咨询合格机构；是否继续由你的兴趣、现实约束和已核信息共同决定。",
+              "哪些问题可以通过继续阅读解决，哪些必须由合格培训机构或雇主解释？",
+              "你想进一步了解哪个具体工作方向，下一步准备核实哪一项申请或学习条件？"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -29105,7 +29109,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "第七天如何判断是否继续",
+          "title": "第七天如何决定下一步",
           "type": "list"
         },
         {
@@ -29177,14 +29181,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET教育调查62%中学后证书、31%高中、2%低于高中，Zone3；BLS典型学徒4–5年，不从Zone通用例子推时长。"
+              "O*NET询问受访者“新入职者完成本职业工作需要什么教育程度”：62%选择中学后证书、31%高中或同等学历、2%低于高中。这不是现任电工学历占比，也不是统一法定门槛。Zone 3描述准备程度；BLS本职业典型学徒为4–5年。 选项目前先查拟工作地区的学徒申请条件、执照规则和当地工资；My Next Move提供按州或ZIP查找的入口。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "mynextmove-electricians"
           ],
           "type": "prose"
         },
@@ -30366,9 +30370,7 @@
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "onet"
           ],
           "type": "prose"
         },
@@ -30702,13 +30704,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补制冷循环、管路与制冷设备知识。"
+              "需另学暖通制冷设备、管路、相关控制与诊断，按具体目标岗位核对。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-hvac"
           ],
           "type": "prose"
         },
@@ -30747,13 +30748,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补机械、液压与气动系统知识。"
+              "核对目标工业设备的维护维修、零部件诊断及控制系统相关任务，不把电工经验直接等同全部机械维修能力。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-industrial-mechanics"
           ],
           "type": "prose"
         },
@@ -30792,13 +30792,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补消防规范、报警系统与联动调试。"
+              "核对报警线路、传感器、电路测试和相关规范要求，不扩大为全部灭火系统调试。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-alarm-installers"
           ],
           "type": "prose"
         },
@@ -30827,8 +30826,8 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-inspectors",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30837,13 +30836,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补检查标准、报告与取证能力。"
+              "目标检查岗涉及核对图纸与规范、现场检查，以及日志和照片等检查记录；按实际岗位另核要求，不能由电工经验推定检查权限。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-inspectors",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30857,8 +30856,8 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-inspectors",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30912,13 +30911,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对本职业的工资、五分位、就业、增长与空缺。"
+              "用于核对电工职责、典型入行、就业展望和工资中位等统计；完整工资百分位另见O*NET工资表。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
             "bls",
-            "oews"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30932,8 +30931,7 @@
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -30947,7 +30945,6 @@
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
             "oews"
           ],
           "type": "prose"
@@ -30957,13 +30954,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对电气规范与执照要求的适用范围。"
+              "用于核对电工任务、准备程度、兴趣及统计入口；不代替适用电气规范或执照法规。"
             ]
           },
           "id": "actors.display.market_signal_card.source.onet",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         }
@@ -30990,12 +30986,15 @@
                 ]
               },
               {
-                "answer": "本职业以建筑与设施的电气布线、设备与器具安装维修为主，须按建筑电气规范、执照与作业许可作业；设备安装维修人员以工业、运输与电力设施的设备本体检修为主；电气工程师承担设计计算、符合性结论与设计文件签署。",
+                "answer": "电工以电气布线、设备器具安装维护维修为主；设备安装维修组合另分商业工业设备、电机电动工具、运输设备、机动车电子设备、发电站变电站继电保护等方向。工程师侧重设计开发测试与监督；技术员也可能装配、测试、安装维护控制系统，不能用“是否亲自安装”作绝对界线。签署权限另核地区与资质。",
                 "id": "actors.faq.2",
                 "question": "它和电气与电子设备安装维修人员、电气工程师有什么不同？",
                 "question_key": "career.faq.electricians.2",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "bls-engineers",
+                  "bls-equipment-repair",
+                  "bls-engineering-tech"
                 ]
               },
               {
@@ -31008,12 +31007,12 @@
                 ]
               },
               {
-                "answer": "BLS OES／O*NET 显示 2025 年全国中位年薪 63,190 美元（中位时薪 30.38 美元）；五分位为 42,640／49,430／63,190／83,940／108,510 美元。",
+                "answer": "2025年美国电工年薪第10、25、50、75、90百分位分别为42,640、49,430、63,190、83,940、108,510美元；中位时薪30.38美元。这是全国工资分布，不是学徒、初级或高级薪级。",
                 "id": "actors.faq.4",
                 "question": "美国工资是多少？",
                 "question_key": "career.faq.electricians.4",
                 "source_refs": [
-                  "onet"
+                  "sag-moa"
                 ]
               },
               {
@@ -31026,13 +31025,13 @@
                 ]
               },
               {
-                "answer": "本次所核国家统计局资料只到行业与人员大类口径，未取得与本职业精确对应的全国单职业工资分位；本页据此登记证据不足，不用行业均值或单条招聘报价替代。",
+                "answer": "江门人社局2025年报告的整体分职业表列“电工”2024全年企业样本工资：第10、25、50、75、90百分位为4.32、5.04、5.46、7.09、9.70万元/年。此为江门地区参考，不代表全国或美国47-2111的精确等价；电工样本量未单列。",
                 "id": "actors.faq.6",
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.electricians.6",
                 "source_refs": [
-                  "onet",
-                  "nbs"
+                  "cn-jiangmen-wages",
+                  "cn-jiangmen-notice"
                 ]
               },
               {
@@ -31093,12 +31092,14 @@
             "entries": [
               "招聘公告中的学历、培训、证书与作业范围要求必须逐条读取；一项可放宽不代表其他条件可替代。",
               "美国47-2111工资2025年5月、预测2025—2035；中国行业代理不替电工精确工资。",
-              "本页不构成作业指导、执照或作业许可；带电作业、登高与受限空间作业以及送电与验收，只能由持证且获授权的人员按适用规程与单位制度执行。"
+              "本页不提供操作指南、执照或工作许可。实际作业须分别满足适用的法定资格、培训和单位授权要求；单位授权不能替代依法要求的持证条件，持证也不等于具备全部现场作业权限。"
             ]
           },
           "id": "actors.sources.boundary.1",
           "source_refs": [
-            "onet"
+            "bls",
+            "cn-rule",
+            "osha-333"
           ],
           "type": "list"
         },
@@ -31107,13 +31108,10 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind research workflow"
+              "费马测试编辑部"
             ]
           },
           "id": "actors.display.source_card.author",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -31135,13 +31133,10 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-20"
+              "2026-11-08（工资、职业对应、入行与本次修订范围）"
             ]
           },
           "id": "actors.display.source_card.updated-at",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -31149,12 +31144,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "核2025工资与2025—2035预测、美国典型4–5年学徒；法规按实际范围，保护FAQ未签全页一致。"
+              "美国工资为2025年、就业预测为2025—2035年；江门地区工资为2024全年企业样本，分别标地区与总体。资格按实际作业和适用规则核对。"
             ]
           },
           "id": "actors.display.source_card.note",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "cn-jiangmen-wages",
+            "cn-rule"
           ],
           "type": "prose"
         }
@@ -31674,9 +31672,9 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "三个代表任务等权编辑估计：图纸版本与位置清单准备辅助25分、现场安装0分、故障记录辅助25分；floor((25+0+25)/3+0.5)=17。fermatmind-ai-impact-v1，2026-11-08；非实测工时、采用率或失业概率。",
                   "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "按图纸确定布线与设备位置 — 50/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
+                  "按图纸确定布线与设备位置 — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
                   "完成布管、穿线与接线 — 0/100; weight=1/3; actors.display.ai_impact_table.tasks.3.task[0]",
                   "定位故障并更换部件 — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.5.task[0]"
                 ],
@@ -31684,7 +31682,7 @@
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
                 "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "period": "2026-11-08",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
@@ -31718,6 +31716,171 @@
                 "publisher": "应急管理部等主管部门",
                 "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2026/art_cb81fc42de3740ebafdcaad75af4b31f.html"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "职责与PE许可范围；不将项目签署泛化全部工程师。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "bls-engineers",
+                "limitation": "仅按原文职业、地区、人群和期间使用。",
+                "market": "United States",
+                "name": "BLS：电气与电子工程师职责及许可",
+                "period": "2025–2035 occupational outlook",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/electrical-and-electronics-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "用于五类设备方向和任务对照，不是电工统计。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "bls-equipment-repair",
+                "limitation": "仅按原文职业、地区、人群和期间使用。",
+                "market": "United States",
+                "name": "BLS：电气与电子设备安装维修职业组合",
+                "period": "2025–2035 occupational outlook",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/electrical-and-electronics-installers-and-repairers.htm"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "包括工程支持、装配、测试和部分控制系统安装维护，不以不做现场安装划硬界线。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "bls-engineering-tech",
+                "limitation": "仅按原文职业、地区、人群和期间使用。",
+                "market": "United States",
+                "name": "BLS：电气与电子工程技术员",
+                "period": "2025–2035 occupational outlook",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/electrical-and-electronics-engineering-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "机械设备电气部分及电气系统线路器件、室内线路照明等职责；中美范围重叠不证明一一互认。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "cn-classification-2022",
+                "limitation": "仅按原文职业、地区、人群和期间使用。",
+                "market": "中国大陆",
+                "name": "职业分类大典：电工6-31-01-03",
+                "period": "2022",
+                "publisher": "中国职业分类主管部门；广元政府托管",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "整体分职业表、生产制造及有关人员序62：P10/P25/P50/P75/P90为4.32/5.04/5.46/7.09/9.70万元/年；不使用重点行业分表代替。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "cn-jiangmen-wages",
+                "limitation": "仅按原文职业、地区、人群和期间使用。",
+                "market": "中国大陆",
+                "name": "江门市2025年工资价位：电工地区企业样本",
+                "period": "2024全年；2025报告；公告2026-01-13",
+                "publisher": "江门市人力资源和社会保障局",
+                "scope": "contextual",
+                "url": "https://www.jiangmen.gov.cn/attachment/0/364/364612/3441641.pdf"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "调查期2024全年；有效476家企业83914人是全部调查样本，非电工样本数。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "cn-jiangmen-notice",
+                "limitation": "仅按原文职业、地区、人群和期间使用。",
+                "market": "中国大陆",
+                "name": "江门人社局工资价位发布与调查说明",
+                "period": "2026-01-13",
+                "publisher": "江门市人力资源和社会保障局",
+                "scope": "contextual",
+                "url": "https://www.jiangmen.gov.cn/bmpd/jmsrlzyhshbzj/zcfg/jycy/content/post_3426923.html"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "用于按目标州或ZIP继续查培训、执照、学徒与工资；本页未核某州具体项目条件。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "mynextmove-electricians",
+                "limitation": "仅按原文职业、地区、人群和期间使用。",
+                "market": "United States",
+                "name": "My Next Move：电工培训、执照与本地工资入口",
+                "period": "2025 wage and projection references",
+                "publisher": "National Center for O*NET Development",
+                "scope": "exact",
+                "url": "https://www.mynextmove.org/profile/summary/47-2111.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "用于相邻职业定义和任务对照，不作为电工工资或法定资格证据。"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-hvac",
+                "limitation": "只支持该相邻职业资料，不证明个人转行可行性。",
+                "market": "United States",
+                "name": "O*NET — HVAC and refrigeration mechanics and installers",
+                "period": "Updated 2026; checked 2026-11-08",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-9021.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "用于相邻职业定义和任务对照，不作为电工工资或法定资格证据。"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-industrial-mechanics",
+                "limitation": "只支持该相邻职业资料，不证明个人转行可行性。",
+                "market": "United States",
+                "name": "O*NET — Industrial machinery mechanics",
+                "period": "Updated 2026; checked 2026-11-08",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-9041.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "用于相邻职业定义和任务对照，不作为电工工资或法定资格证据。"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-alarm-installers",
+                "limitation": "只支持该相邻职业资料，不证明个人转行可行性。",
+                "market": "United States",
+                "name": "O*NET — Security and fire alarm systems installers",
+                "period": "Updated 2026; checked 2026-11-08",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-2098.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "原文定义及任务：图纸规范、现场检查、日志与照片记录；仅作相邻任务对照，不认定转岗或执法权限。"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-inspectors",
+                "limitation": "实际岗位资格、权限和地区要求须分别核对。",
+                "market": "United States",
+                "name": "O*NET — Construction and Building Inspectors",
+                "period": "Updated 2026; checked 2026-11-08",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-4011.00"
               }
             ]
           },
@@ -32565,7 +32728,7 @@
             }
           },
           {
-            "source_ref": "nist-rmf-1",
+            "source_ref": "osha-333",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.2.answer",
               "block": "ai-impact",
@@ -32573,14 +32736,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist-rmf-1",
+              "$source": "osha-333",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "nist-rmf-1",
+              "$source": "osha-333",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32594,7 +32757,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "source-fermatmind-ai-rubric",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.3.answer",
               "block": "ai-impact",
@@ -32602,14 +32765,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "source-fermatmind-ai-rubric",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "source-fermatmind-ai-rubric",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32623,7 +32786,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "bls",
             "回答": {
               "$item": "actors.ai-impact.ai-impact-table.6",
               "block": "ai-impact",
@@ -32631,14 +32794,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32710,7 +32873,7 @@
             }
           },
           {
-            "source_ref": "nist-rmf-1",
+            "source_ref": "bls",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.7.answer",
               "block": "ai-impact",
@@ -32718,14 +32881,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist-rmf-1",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "nist-rmf-1",
+              "$source": "bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33268,7 +33431,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33276,7 +33439,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34549,9 +34712,9 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "数据类型",
-              "数值": "证据不足：未取得与本职业精确对应的中国大陆全国单职业工资分布",
-              "说明": "现有官方来源为行业与人员大类聚合，不能替代职业级工资。"
+              "指标": "江门电工·2024全年",
+              "数值": "P10/P25/P50/P75/P90：4.32/5.04/5.46/7.09/9.70万元/年",
+              "说明": "2025报告整体分职业表序62；不是全国或某个重点行业分表。"
             },
             {
               "指标": "岗位口径",
@@ -34695,33 +34858,14 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "历史案例状态",
+          "china_open": "地区企业样本参考",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "actors.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "actors.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
+          "china_ref": "江门人社局地区工资原表：https://www.jiangmen.gov.cn/attachment/0/364/364612/3441641.pdf",
           "china_salary_note": {
             "$item": "actors.display.career_snapshot_primary_locale.boundary",
             "block": "china-salary",
@@ -34753,7 +34897,7 @@
                     "type": "prose"
                   }
                 ],
-                "separator": ""
+                "separator": "\n"
               }
             },
             {
@@ -35365,7 +35509,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35373,7 +35517,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35388,7 +35532,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "oews",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35396,7 +35540,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "oews",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35642,7 +35786,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "O*NET全国工资表（BLS 2025数据）",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.bls",
@@ -37107,36 +37251,36 @@
       },
       {
         "derivation": null,
-        "display_value": "建筑业（2024）",
+        "display_value": "建筑业（2025）",
         "fact_id": "industry-theater",
         "market": "美国",
         "measure": "主要行业一",
         "occupation_scope": "电工（O*NET-SOC 47-2111.00）",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "该职业档案未列出第二个主要行业（2024）",
+        "display_value": "该职业档案未列出第二个主要行业（2025）",
         "fact_id": "industry-education",
         "market": "美国",
         "measure": "主要行业二",
         "occupation_scope": "电工（O*NET-SOC 47-2111.00）",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "该职业档案仅列出建筑业为主要行业（2024）",
+        "display_value": "该职业档案仅列出建筑业为主要行业（2025）",
         "fact_id": "industry-amusement",
         "market": "美国",
         "measure": "主要行业披露范围",
         "occupation_scope": "电工（O*NET-SOC 47-2111.00）",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
@@ -37154,13 +37298,13 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "25%",
+        "derivation": "三个代表任务等权编辑估计：图纸版本与位置清单准备辅助25分、现场安装0分、故障记录辅助25分；floor((25+0+25)/3+0.5)=17。fermatmind-ai-impact-v1，2026-11-08；非实测工时、采用率或失业概率。",
+        "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
         "measure": "AI影响度（编辑估算）",
         "occupation_scope": "电工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "period": "2026-11-08",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -37208,7 +37352,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考（证据不足）"
+        "label": "大陆全国职业工资分位（未取得）"
       }
     ]
   },
@@ -37223,7 +37367,7 @@
       "text": "电工：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "28f45ed071d972551a906e9573b14872e110981be37a6570c458920c4324c799",
+  "source_content_sha256": "0758cb797d7461ca46ad5571c35396b323d7ba60a6b884b2a73b0fd9bae0348b",
   "subject": {
     "canonical_slug": "electricians",
     "name": "电工",
