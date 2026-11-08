@@ -123,28 +123,28 @@
         "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.career-path-block.12": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.credential-boundary.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.credential-decision.10": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.employer-evidence.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.entry-portfolio.6": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.entry-role-comparison.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.entry-work-sample-data.3": {
         "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.interview-probation.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -153,10 +153,10 @@
         "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.seven-day-decision.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.path.seven-day-trial.8": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:occupational-therapy-assistants.profile.career-quick-answers-block.7": {
         "status": "mapped"
@@ -12044,7 +12044,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "If you like breaking daily activities such as dressing and washing into practiceable steps and are willing to observe progress under therapist direction, you can explore occupational therapy assistant work."
+              "If supporting daily activities, observing changes and keeping accurate records interest you, explore U.S. OTA work further. Interest does not establish treatment competence or eligibility to practice."
             ]
           },
           "id": "occupational-therapy-assistants.quick-decision.fermat-decision-card.1",
@@ -12058,7 +12058,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Good signals are being able to listen to client goals, follow the plan, record changes accurately, and collaborate with the therapist."
+              "The paper record task can help you reflect on checking sources, keeping unknowns and revising a summary. It cannot test client transfers, physical stamina or long-term career fit."
             ]
           },
           "id": "occupational-therapy-assistants.quick-decision.fermat-decision-card.2",
@@ -12072,7 +12072,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "If you are unwilling to handle close-range care, patient privacy, fall risk, or long-term education and internships, do a compliant internship first."
+              "If close personal care, privacy, physical demands or education commitments concern you, start with job and program information. Any observation opportunity needs an institution-approved arrangement. Formal clinical fieldwork is program-based training, not a prerequisite for this paper exploration."
             ]
           },
           "id": "occupational-therapy-assistants.quick-decision.fit-decision-checklist.3",
@@ -12086,7 +12086,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use a fully fictional dressing scenario for a 45-minute paper exercise: list the observed facts, stop conditions, record format, and feedback recipient; do not touch real patients."
+              "Fictional record check OT-A1: Source A is OT-A1/v1, with two prompts, completion not recorded and equipment unspecified. Draft B says “Completed independently, with no prompts, using a button hook, with no risk.” Compare records only, without assessing movement or treatment safety. Identify four discrepancies or unsupported claims, cite the source version and list questions to verify. Reference: zero prompts conflicts with two; independent completion, the button hook and absence of risk lack source support. Keep completion and equipment unknown. No real client, treatment plan or professional feedback is provided."
             ]
           },
           "id": "occupational-therapy-assistants.quick-decision.fit-decision-checklist.4",
@@ -12108,7 +12108,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Occupational therapy assistants correspond to O*NET 31-2011.00; under therapist direction they implement activity training, observe and record progress, and feed back to the team."
+              "This page describes U.S. O*NET 31-2011.00 occupational therapy assistants (OTAs). U.S. task profiles include activity selection, observation and evaluation of daily living skills, plan implementation and feedback under occupational therapist direction. Check the relevant state and institution for assessment, planning, signing and supervision responsibilities; a task list does not confer authority."
             ]
           },
           "id": "occupational-therapy-assistants.profile.definition-block.1",
@@ -12167,12 +12167,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The difference from aides is direct implementation of activities; the difference from therapists is professional responsibility for assessment and treatment planning."
+              "Assistant and aide tasks can overlap. BLS distinguishes assistants’ treatment work from aides’ routine support, while O*NET includes assistant participation in observation, evaluation, activity selection and plan changes. Titles and task lists do not replace state and institutional requirements."
             ]
           },
           "id": "occupational-therapy-assistants.profile.onet-structured-fields-block.8",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "bls-ota-2025"
           ],
           "type": "prose"
         }
@@ -12189,12 +12190,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Occupational therapy assistants implement activities under therapist direction; aides provide routine support, and therapists are responsible for assessment and planning."
+              "Compare U.S. OTA, aide and therapist tasks, education and supervision. Avoid treating assistants as execution-only or assigning every assessment and planning task exclusively to therapists across all jobs."
             ]
           },
           "id": "occupational-therapy-assistants.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "review-neighbor-31-2012",
+            "review-neighbor-29-1122",
+            "review-neighbor-31-2021",
+            "review-neighbor-29-1127",
+            "review-neighbor-21-1015"
           ],
           "type": "prose"
         },
@@ -12231,7 +12237,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Assistants implement activity training and report progress, while aides mainly prepare and receive."
+              "BLS describes aides’ treatment-area preparation, equipment and other routine support, and assistants’ treatment activities and documentation. O*NET tasks overlap; verify the actual division of duties with the relevant state and institution."
             ]
           },
           "id": "occupational-therapy-assistants.direction-comparison.adjacent-career-comparison-table.4",
@@ -12245,7 +12251,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "If you like repeatedly practicing activities with clients and recording changes, deepen the assistant path; if you want to set plans, verify the therapist path separately."
+              "If assessment, goals and treatment planning interest you most, compare the separate occupational therapist education and licensure pathway. An interest does not establish permission to take on those responsibilities."
             ]
           },
           "id": "occupational-therapy-assistants.direction-comparison.adjacent-career-comparison-table.5",
@@ -12281,7 +12287,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Use a fictional dressing activity to practice observation steps, goals, and risk stop conditions."
+              "Fictional record check OT-A1: Source A is OT-A1/v1, with two prompts, completion not recorded and equipment unspecified. Draft B says “Completed independently, with no prompts, using a button hook, with no risk.” Compare records only, without assessing movement or treatment safety. Identify four discrepancies or unsupported claims, cite the source version and list questions to verify. Reference: zero prompts conflicts with two; independent completion, the button hook and absence of risk lack source support. Keep completion and equipment unknown. No real client, treatment plan or professional feedback is provided."
             ]
           },
           "id": "occupational-therapy-assistants.ai-impact.ai-impact-table.2",
@@ -12309,7 +12315,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Use approved tools to organize record drafts, but verify each progress item yourself."
+              "Use the complete fictional OT-A1 record for draft comparisons. Real records require separate legal, institutional and access checks; de-identification or tool approval alone does not establish full authorization to process them."
             ]
           },
           "id": "occupational-therapy-assistants.ai-impact.ai-impact-table.4",
@@ -12401,12 +12407,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese rehabilitation therapy post titles, education, and professional titles do not map one-to-one to the U.S. OTA classification; verify against local institutional recruitment and practice rules."
+              "Mainland Chinese occupational therapy education, departmental services and rehabilitation-technician jobs provide task context, not an equivalent U.S. OTA grade. The 2026 health-professional examination catalogue lists rehabilitation therapy technology at codes 107, 209 and 381 for the respective levels. Check current local application and employer conditions; certificates alone do not establish treatment permissions."
             ]
           },
           "id": "occupational-therapy-assistants.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "nbs-wages",
+            "review-cn-exam",
+            "review-cn-program",
+            "review-cn-department",
+            "review-cn-job"
           ],
           "type": "prose"
         },
@@ -12526,7 +12536,10 @@
           },
           "id": "occupational-therapy-assistants.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "onet-wages"
+            "onet-wages",
+            "bls-ota-2025",
+            "nbcot-cota-eligibility",
+            "review-acote"
           ],
           "type": "prose"
         }
@@ -12544,7 +12557,7 @@
           "data": {
             "entries": [
               "Willing to repeatedly practice activities with clients and observe progress objectively; competence is not decided by personality type.",
-              "Verify with fictional tasks or a compliant internship; assessments do not grant clinical authority."
+              "Record activities you want to explore and concerns you have. Paper tasks, questionnaires and reading or observation cannot establish clinical competence or confer authority."
             ]
           },
           "id": "occupational-therapy-assistants.fit.riasec-fit-block.1",
@@ -12558,8 +12571,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Willing to write specific movements, prompts, and responses as reviewable records.",
-              "Verify with fictional tasks or a compliant internship; assessments do not grant clinical authority."
+              "Interest in listening to goals, explaining knowns and unknowns clearly, and asking the team verification questions.",
+              "Record activities you want to explore and concerns you have. Paper tasks, questionnaires and reading or observation cannot establish clinical competence or confer authority."
             ]
           },
           "id": "occupational-therapy-assistants.fit.riasec-fit-block.2",
@@ -12573,7 +12586,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Can respect client goals and communicate with the therapist."
+              "Interest in separating sources, drafts and inferences and checking the supplied OT-A1 fields."
             ]
           },
           "id": "occupational-therapy-assistants.fit.personality-fit-block.3",
@@ -12601,7 +12614,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Can identify fall, pain, infection, and privacy risks."
+              "Willingness to check a specific role’s contact, workload, schedule and supervision, noting interests and concerns."
             ]
           },
           "id": "occupational-therapy-assistants.fit.personality-fit-block.5",
@@ -12615,8 +12628,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Accepts close-range work, transfer assistance, and physical load.",
-              "Verify with fictional tasks or a compliant internship; assessments do not grant clinical authority."
+              "Willingness to preserve unknowns, revise unsupported claims and state which abilities the exercise cannot assess.",
+              "Record activities you want to explore and concerns you have. Paper tasks, questionnaires and reading or observation cannot establish clinical competence or confer authority."
             ]
           },
           "id": "occupational-therapy-assistants.fit.personality-fit-block.6",
@@ -12630,7 +12643,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Strong match evidence is supervised observation records, not a claim of liking rehabilitation."
+              "RIASEC questionnaires provide prompts for reflecting on activity interests. They do not predict clinical competence, admission, hiring or long-term fit. Use occupational information to decide which activities you want to explore further."
             ]
           },
           "id": "occupational-therapy-assistants.fit.personality-fit-block.7",
@@ -12644,7 +12657,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The seven-day fictional case should produce activity steps, stop conditions, and a therapist feedback summary."
+              "This page has not established predictive validity of questionnaire scores for individual performance in this occupation. OT-A1 checks supplied records only; seven-day reflection is not a clinical skills, stamina or safety test."
             ]
           },
           "id": "occupational-therapy-assistants.fit.personality-fit-block.8",
@@ -12680,7 +12693,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Falls, goal drift, ill-fitting assistive devices, medical record privacy, and missed records can all harm the client; stop, document, and escalate."
+              "Falls, goal drift, equipment fit, privacy and missing records are risk areas to discuss with the team. Specific actions depend on the applicable plan, explicit criteria and institutional arrangements; this table is not a clinical protocol."
             ]
           },
           "id": "occupational-therapy-assistants.risk.career-risk-cards.2",
@@ -12744,13 +12757,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Career exploration uses only a fictional dressing case; real patient assessment, activity training, and medical records require qualifications, therapist supervision, and institutional authorization."
+              "Start with duties, accredited programs and any approved observation arrangements. OT-A1 below is entirely fictional and checks records only; it is not a clinical skills test, fieldwork evidence or a real recruitment sample."
             ]
           },
           "id": "occupational-therapy-assistants.path.recruitment-sample.1",
           "source_refs": [
             "onet-education"
           ],
+          "title": "Career exploration and paper-task boundaries",
           "type": "notice"
         },
         {
@@ -12758,13 +12772,18 @@
           "copy_key": "career.item.recruitment-signals",
           "data": {
             "paragraphs": [
-              "Recruitment signals must be verified item by item: an accredited OTA program, clinical internship, NBCOT COTA examination eligibility, target state licensure, and institutional supervision procedures."
+              "For the United States, use AOTA education and state-licensure links, ACOTE listings and NBCOT eligibility to check programs, fieldwork, examinations and the target state. Associate degrees are common; accredited bachelor-level OTA routes also exist. Mainland Chinese professional-title examinations and individual jobs are a separate system."
             ]
           },
           "id": "occupational-therapy-assistants.path.recruitment-signals.2",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "review-aota-path",
+            "review-acote",
+            "nbcot-cota-eligibility",
+            "review-oted-faq"
           ],
+          "title": "Program and job requirement checks",
           "type": "prose"
         },
         {
@@ -12772,13 +12791,14 @@
           "copy_key": "career.item.entry-work-sample-data",
           "data": {
             "paragraphs": [
-              "The portfolio sample should clearly state observed facts, the therapist's established goals, the assistant's implementation steps, stop conditions, and feedback; a paper portfolio does not prove clinical competence."
+              "Fictional record check OT-A1: Source A is OT-A1/v1, with two prompts, completion not recorded and equipment unspecified. Draft B says “Completed independently, with no prompts, using a button hook, with no risk.” Compare records only, without assessing movement or treatment safety. Identify four discrepancies or unsupported claims, cite the source version and list questions to verify. Reference: zero prompts conflicts with two; independent completion, the button hook and absence of risk lack source support. Keep completion and equipment unknown. No real client, treatment plan or professional feedback is provided."
             ]
           },
           "id": "occupational-therapy-assistants.path.entry-work-sample-data.3",
           "source_refs": [
             "onet-education"
           ],
+          "title": "Fictional OT-A1 source, draft and reference",
           "type": "notice"
         },
         {
@@ -12792,48 +12812,60 @@
               "work_evidence",
               "possible_check"
             ],
+            "column_labels": [
+              "Stage",
+              "Information or task",
+              "Scope",
+              "Material to check",
+              "Check question"
+            ],
             "rows": [
               [
-                "Occupational observation",
-                "Read the BLS/O*NET tasks and break down a fictional dressing activity.",
-                "Do not touch real patients.",
-                "Activity steps and unknown-information table.",
-                "Distinguish assistants from aides."
+                "Explore the work",
+                "Read duties and compare the supplied OT-A1 source and draft.",
+                "Do not provide client treatment, choose devices or assess treatment safety.",
+                "Source version and four-item comparison.",
+                "Can you distinguish interest, training and authority?"
               ],
               [
-                "Program application",
-                "Verify accredited OTA coursework and internship requirements.",
-                "Each program and target state is verified separately.",
-                "Official school curriculum and accreditation records.",
-                "Whether examination eligibility is met."
+                "Compare programs",
+                "Use AOTA and ACOTE to check OTA degrees, status, fieldwork and costs.",
+                "Accreditation is not a program ranking or admission guarantee.",
+                "Program website and accreditation record.",
+                "Which associate or bachelor-level requirements fit your circumstances?"
               ],
               [
-                "Supervised internship",
-                "Observe and implement activities per the therapist's plan.",
-                "Student status does not permit independent practice.",
-                "Mentor feedback and de-identified records.",
-                "Can identify stop conditions."
+                "Formal fieldwork",
+                "Learn only through an enrolled program and approved placement.",
+                "Follow student permissions, supervision and record rules.",
+                "Program requirements and qualified preceptor feedback.",
+                "Which tasks need supervision and review?"
               ],
               [
-                "Obtain qualification",
-                "Verify the COTA examination, state licensure, and institutional authorization.",
-                "Certification does not automatically equal a state license.",
-                "Examination, licensure, and supervision materials.",
-                "Whether all target state requirements are met."
+                "Certification and licensure",
+                "Check NBCOT COTA eligibility and examination separately from state licensure.",
+                "OTED concerns OTR; an overseas OT degree does not automatically establish COTA eligibility.",
+                "Current official criteria and application list.",
+                "Are eligibility, certification and licensure each addressed?"
               ],
               [
-                "On-the-job advancement",
-                "Train, record, and give feedback within the licensed scope.",
-                "Assessment and planning responsibility follows state law and therapist supervision.",
-                "Goal, response, risk, and effectiveness records.",
-                "Can escalate abnormalities promptly."
+                "A specific job",
+                "Check actual duties, supervision, signing and records permissions.",
+                "A title or paper exercise cannot expand clinical duties.",
+                "Job requirements and institutional arrangements.",
+                "What training or permission does each assigned task require?"
               ]
             ]
           },
           "id": "occupational-therapy-assistants.path.entry-role-comparison.4",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "review-aota-path",
+            "review-acote",
+            "nbcot-cota-eligibility",
+            "review-oted-faq"
           ],
+          "title": "Exploration, application, training and employment",
           "type": "table"
         },
         {
@@ -12844,16 +12876,21 @@
               {
                 "id": "occupational-therapy-assistants.employer-evidence.1",
                 "values": [
-                  "What employers usually look for",
-                  "Accredited coursework, internship, state licensure, therapist supervision, and accurate records."
+                  "Program and job checks",
+                  "Check education, fieldwork, examinations and licensure separately. Each employer’s duties, supervision, schedule and documentation requirements must also be verified; this is not a universal hiring checklist."
                 ]
               }
             ]
           },
           "id": "occupational-therapy-assistants.path.employer-evidence.5",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "review-aota-path",
+            "review-acote",
+            "nbcot-cota-eligibility",
+            "review-oted-faq"
           ],
+          "title": "What to check in programs and jobs",
           "type": "cards"
         },
         {
@@ -12864,8 +12901,8 @@
               {
                 "id": "path-6-1",
                 "values": [
-                  "Fictional dressing case",
-                  "Inputs, observations, goals, stop conditions, feedback, and review are all checkable."
+                  "OT-A1 comparison and verification questions",
+                  "Produce four checks: two prompts conflicts with zero; independent completion, the button hook and absence of risk lack source support. Cite OT-A1/v1, keep completion and equipment unknown and list questions for a qualified supervisor. Do not claim feedback was received."
                 ]
               }
             ]
@@ -12874,6 +12911,7 @@
           "source_refs": [
             "onet-education"
           ],
+          "title": "Record-check output",
           "type": "cards"
         },
         {
@@ -12886,30 +12924,36 @@
               "proof_method",
               "work_evidence"
             ],
+            "column_labels": [
+              "Time",
+              "Paper task",
+              "Checking method",
+              "Output"
+            ],
             "rows": [
               [
-                "Day 1: read the tasks",
-                "Read the fictional dressing scenario and list activity steps.",
-                "Separate observation from inference.",
-                "Step diagram and questions to verify."
+                "Day 1",
+                "Read the differences among OTA, aide and OT duties.",
+                "Separate occupational information from practice authority.",
+                "Three task groups and conditions to verify."
               ],
               [
-                "Days 2—3: verify goals",
-                "Read the therapist's preset goals.",
-                "State the observable completion criteria.",
-                "Goal and risk list."
+                "Days 2–3",
+                "Compare OT-A1/v1 with Draft B field by field.",
+                "Check prompt count, completion, equipment and the risk claim.",
+                "Four discrepancies or unsupported claims."
               ],
               [
-                "Days 4—5: implementation plan",
-                "Write step-by-step prompts and equipment preparation.",
-                "Add stop conditions for pain, fatigue, and falls.",
-                "Fictional implementation record."
+                "Days 4–5",
+                "Mark missing information and write verification questions.",
+                "Do not invent movements, devices, treatment thresholds or professional feedback.",
+                "A revised summary retaining unknowns and a question list."
               ],
               [
-                "Days 6—7: feedback",
-                "Organize activity completion.",
-                "Distinguish assistant observations from therapist plan decisions.",
-                "Re-evaluation summary for the therapist."
+                "Days 6–7",
+                "Use this page’s reference to revise the summary and reflect on interest.",
+                "Separate interest in record checks from clinical competence; check program conditions.",
+                "Revision trail, interest reflection and information links."
               ]
             ]
           },
@@ -12917,6 +12961,7 @@
           "source_refs": [
             "onet-education"
           ],
+          "title": "Seven-day paper schedule",
           "type": "table"
         },
         {
@@ -12927,8 +12972,8 @@
               {
                 "id": "path-8-1",
                 "values": [
-                  "Seven-day paper experience",
-                  "From activity steps to a fictional record and therapist feedback, without a real prescription."
+                  "Seven-day paper reflection",
+                  "Use the four stages above without a completion-time or score threshold. The reference checks consistency with the given records, not clinical suitability."
                 ]
               }
             ]
@@ -12937,6 +12982,7 @@
           "source_refs": [
             "onet-education"
           ],
+          "title": "Seven-day interest reflection",
           "type": "timeline"
         },
         {
@@ -12944,13 +12990,14 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "The paper portfolio should mark observed facts, the therapist's established plan, the assistant's implementation scope, risk stops, and matters requiring professional review."
+              "Do you want to continue checking sources and keeping unknowns? What constraints arise from education time, cost, fieldwork and the target state? If interested, start with accredited program information. For Mainland Chinese jobs, check the separate professional qualifications and employer conditions."
             ]
           },
           "id": "occupational-therapy-assistants.path.seven-day-decision.9",
           "source_refs": [
             "onet-education"
           ],
+          "title": "Decisions before further exploration",
           "type": "list"
         },
         {
@@ -12966,12 +13013,21 @@
               "audience",
               "possible_check"
             ],
+            "column_labels": [
+              "Step",
+              "Where to check",
+              "Education or credential",
+              "Conditions",
+              "Limits",
+              "Audience",
+              "Next step"
+            ],
             "rows": [
               [
                 "U.S. coursework",
                 "Verify ACOTE-accredited OTA programs.",
-                "Usually an associate degree.",
-                "Coursework and clinical internship.",
+                "Commonly an associate degree; accredited bachelor-level OTA routes also exist.",
+                "Coursework and program-arranged fieldwork.",
                 "Graduating does not automatically grant a state license.",
                 "Applicants to U.S. programs.",
                 "Verify the program's official materials."
@@ -12980,8 +13036,8 @@
                 "NBCOT COTA",
                 "Verify current examination eligibility.",
                 "Certification examination path.",
-                "Accredited education and application materials.",
-                "Examination eligibility does not equal a license.",
+                "Graduate from an ACOTE-accredited OTA program and meet current application requirements.",
+                "OTED is not a route from an overseas OT degree to COTA; examination eligibility is not state licensure.",
                 "People planning to take the examination.",
                 "Verify the original NBCOT text."
               ],
@@ -13013,20 +13069,28 @@
                 "Verify the program and licensure."
               ],
               [
-                "Chinese posts",
-                "Verify institutional recruitment and local rules.",
-                "According to the local specialty and post.",
-                "Verify education, professional title, and duties item by item.",
-                "The U.S. OTA classification does not map one-to-one.",
-                "Job seekers in China.",
-                "Keep the original rule texts."
+                "Related Mainland Chinese jobs",
+                "Check the 2026 health-professional examination catalogue and employer criteria.",
+                "Rehabilitation therapy technology codes 107/209/381 at the respective professional levels.",
+                "Check education, experience, professional title and the specific job.",
+                "Not equivalent to U.S. OTA/COTA; a certificate does not by itself establish treatment permissions.",
+                "Mainland Chinese job seekers.",
+                "Verify current local requirements and the original employer notice."
               ]
             ]
           },
           "id": "occupational-therapy-assistants.path.credential-decision.10",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "review-aota-path",
+            "review-acote",
+            "nbcot-cota-eligibility",
+            "review-oted-faq",
+            "review-cn-exam",
+            "review-cn-program",
+            "review-cn-job"
           ],
+          "title": "Education, certification, licensure and Mainland context",
           "type": "table"
         },
         {
@@ -13034,13 +13098,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "NBCOT certification examination eligibility, state licensure, and employer authorization are different steps; different U.S. states and Chinese posts must be verified separately."
+              "Check U.S. education, fieldwork, NBCOT eligibility/certification, state licensure and institutional duties separately. NBCOT OTED concerns OTR; an overseas OT degree or WFOT recognition alone is not COTA examination eligibility. Mainland Chinese qualifications and jobs require separate checks."
             ]
           },
           "id": "occupational-therapy-assistants.path.credential-boundary.11",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "review-aota-path",
+            "review-acote",
+            "nbcot-cota-eligibility",
+            "review-oted-faq"
           ],
+          "title": "Qualification and authority boundaries",
           "type": "notice"
         },
         {
@@ -13053,8 +13122,13 @@
           },
           "id": "occupational-therapy-assistants.path.career-path-block.12",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "review-aota-path",
+            "review-acote",
+            "nbcot-cota-eligibility",
+            "review-oted-faq"
           ],
+          "title": "Continuing education and another career pathway",
           "type": "prose"
         }
       ]
@@ -13172,11 +13246,13 @@
                 "question": "What education and licensure are needed to enter in the United States?",
                 "question_key": "career.faq.occupational-therapy-assistants.3",
                 "source_refs": [
-                  "onet-details"
+                  "bls-ota-2025",
+                  "nbcot-cota-eligibility",
+                  "review-aota-path"
                 ]
               },
               {
-                "answer": "According to state rules and the supervision relationship. Assistants help implement and give feedback, and final professional responsibility for assessment and planning should be verified with the therapist and institution.",
+                "answer": "This page describes U.S. O*NET 31-2011.00 occupational therapy assistants (OTAs). U.S. task profiles include activity selection, observation and evaluation of daily living skills, plan implementation and feedback under occupational therapist direction. Check the relevant state and institution for assessment, planning, signing and supervision responsibilities; a task list does not confer authority.",
                 "id": "occupational-therapy-assistants.faq.4",
                 "question": "Can assistants independently develop treatment plans?",
                 "question_key": "career.faq.occupational-therapy-assistants.4",
@@ -13185,7 +13261,7 @@
                 ]
               },
               {
-                "answer": "Can assist with document drafts in approved systems; real medical records, patient privacy, and progress judgments must be verified by a person.",
+                "answer": "Use the complete fictional OT-A1 record for draft comparisons. Real records require separate legal, institutional and access checks; de-identification or tool approval alone does not establish full authorization to process them.",
                 "id": "occupational-therapy-assistants.faq.5",
                 "question": "Which records can AI help with?",
                 "question_key": "career.faq.occupational-therapy-assistants.5",
@@ -13203,7 +13279,7 @@
                 ]
               },
               {
-                "answer": "U.S. assistants had a 2025 median annual wage of 72,300 USD and employment of 52,200; overall growth of 21.5% over 2025—2035 with average annual 8,100 openings including replacement, not a net increase of 11,200, assistant combined data, or AI causation, and no personal unemployment probability is inferred.",
+                "answer": "U.S. assistants had a 2025 median annual wage of $72,300 and employment of 52,200. Overall projected growth for 2025—2035 is 21.5%, a net increase of about 11,200 over the decade. Annual openings of 8,100 include growth and replacement and are a different measure. These are not AI-causal estimates or individual hiring or unemployment predictions.",
                 "id": "occupational-therapy-assistants.faq.7",
                 "question": "What are the 2025 wages and employment in the United States?",
                 "question_key": "career.faq.occupational-therapy-assistants.7",
@@ -13213,7 +13289,7 @@
                 ]
               },
               {
-                "answer": "Use a fictional dressing training goal to simulate observation, feedback, and safety stop conditions; do not touch real patients or give treatment prescriptions.",
+                "answer": "Fictional record check OT-A1: Source A is OT-A1/v1, with two prompts, completion not recorded and equipment unspecified. Draft B says “Completed independently, with no prompts, using a button hook, with no risk.” Compare records only, without assessing movement or treatment safety. Identify four discrepancies or unsupported claims, cite the source version and list questions to verify. Reference: zero prompts conflicts with two; independent completion, the button hook and absence of risk lack source support. Keep completion and equipment unknown. No real client, treatment plan or professional feedback is provided.",
                 "id": "occupational-therapy-assistants.faq.8",
                 "question": "How can the work be experienced with a fictional case?",
                 "question_key": "career.faq.occupational-therapy-assistants.8",
@@ -13257,37 +13333,37 @@
           "data": {
             "entries": [
               {
-                "entity": "Occupational therapy assistants",
+                "entity": "RIASEC career-interest questionnaire",
                 "id": "navigation-1",
                 "relation": "career.section",
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Occupational therapy assistants",
+                "entity": "MBTI preference questionnaire",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Occupational therapy assistants",
+                "entity": "Big Five questionnaire",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Occupational therapy assistants",
+                "entity": "MBTI preference questionnaire",
                 "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Occupational therapy assistants",
+                "entity": "Big Five questionnaire",
                 "id": "navigation-5",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Occupational therapy assistants",
+                "entity": "Occupational therapy assistant career information",
                 "id": "navigation-6",
                 "relation": "career.section",
                 "url": "/en/career/jobs/occupational-therapy-assistants"
@@ -13313,14 +13389,14 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Not an external adoption rate, replacement rate, or employment projection."
+                  "This page has not established verifiable task-level evidence for a quantitative AI score. A draft-comparison trial can use complete fictional records and field-by-field source checks; it does not establish clinical capability, adoption or time savings."
                 ],
                 "evidence_type": "versioned internal task rubric",
                 "id": "internal-ai-rubric",
-                "limitation": "Not an external adoption rate, replacement rate, or employment projection.",
+                "limitation": "Does not establish clinical effects, time savings, adoption, replacement or individual fit.",
                 "market": "GLOBAL",
-                "name": "FermatMind occupation task AI rubric v1",
-                "period": "FermatMind rubric v1; reviewed 2026-08-31",
+                "name": "FermatMind task-level AI evidence status: former editorial score withdrawn",
+                "period": "2026-11-09",
                 "publisher": "FermatMind editorial",
                 "scope": "internal_rubric",
                 "url": null
@@ -13348,7 +13424,7 @@
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "nbs-wages",
-                "limitation": "Urban legal entities exclude self-employed individuals and freelancers, the two populations are not a personal range, and they do not fill in the occupational wage or starting salary or grant clinical authority.",
+                "limitation": "The survey covers urban legal entities with at least five employees and excludes individual businesses and freelancers. The private and non-private averages are not a personal range, occupational wage or starting salary, and do not confer clinical authority.",
                 "market": "CN",
                 "name": "Average annual wages of urban unit employees, 2025",
                 "period": "2025 wages; published 2026-05-15",
@@ -13456,7 +13532,7 @@
                 "limitation": "U.S. statistics cannot be extrapolated to China; the median is not a starting salary.",
                 "market": "US",
                 "name": "Occupational Therapy Assistants wages and trends",
-                "period": "2025 wages and 2024-2034 projections; accessed 2026-08-31",
+                "period": "2025 wages; 2025—2035 projections; reviewed 2026-11-09",
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/31-2011.00#WagesEmployment"
@@ -13604,7 +13680,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "nbs-2025-wages",
-                "limitation": "Urban legal entities exclude self-employed individuals and freelancers, the two populations are not a personal range, and they do not fill in the occupational wage or starting salary or grant clinical authority.",
+                "limitation": "The survey covers urban legal entities with at least five employees and excludes individual businesses and freelancers. The private and non-private averages are not a personal range, occupational wage or starting salary, and do not confer clinical authority.",
                 "market": "Mainland China",
                 "name": "Average annual wages of urban unit employees, 2025",
                 "period": "2025 wages; published 2026-05-15",
@@ -13644,20 +13720,241 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Guide activities per the therapist's plan — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Explain the use of the selected device — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "Organize activity completion — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "This page has not established verifiable task-level evidence for a quantitative AI score. A draft-comparison trial can use complete fictional records and field-by-field source checks; it does not establish clinical capability, adoption or time savings."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "Does not establish clinical effects, time savings, adoption, replacement or individual fit.",
+                "name": "FermatMind task-level AI evidence status: former editorial score withdrawn",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "Fictional record checks; quantitative evidence missing",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Main text351—500: OTA associate/bachelor routes, fieldwork, program and state-licensure links; not school rankings."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-aota-path",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "AOTA: Become an occupational therapy practitioner",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "AOTA",
+                "scope": "Main text351—500: OTA associate/bachelor routes, fieldwork, program and state-licensure links; not school rankings.",
+                "url": "https://www.aota.org/career/become-an-ot-ota/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Accreditation role and examination/licensure application relationship155—161; not a substitute for state requirements."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-acote",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "ACOTE About",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "ACOTE",
+                "scope": "Accreditation role and examination/licensure application relationship155—161; not a substitute for state requirements.",
+                "url": "https://acoteonline.org/about/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Overseas OT degree eligibility is not COTA eligibility; OTED concerns OTR, per FAQ108—112."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-oted-faq",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "NBCOT OTED FAQ",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "NBCOT",
+                "scope": "Overseas OT degree eligibility is not COTA eligibility; OTED concerns OTR, per FAQ108—112.",
+                "url": "https://www.nbcot.org/oted-faq"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2026 examination conditions and catalogue codes107/209/381; not equivalent U.S. OTA licensure."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-cn-exam",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "CN",
+                "name": "关于2026年度卫生专业技术资格考试有关问题的通知",
+                "period": "2026 examination; notice2025-11-24",
+                "publisher": "国家卫生健康委人才交流服务中心",
+                "scope": "2026 examination conditions and catalogue codes107/209/381; not equivalent U.S. OTA licensure.",
+                "url": "https://www.21wecan.com/wsrcw/c100193/202511/1002724.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One institution’s standard four-year BSc program; not national entry requirements or quantified shortages."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-cn-program",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "CN",
+                "name": "康复作业治疗专业介绍",
+                "period": "2026-04-17",
+                "publisher": "山东中医药大学康复医学院",
+                "scope": "One institution’s standard four-year BSc program; not national entry requirements or quantified shortages.",
+                "url": "https://kfyxy.sdutcm.edu.cn/info/1013/2170.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Departmental text155—174: services and daily-living goals, not authority for every worker."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-cn-department",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "CN",
+                "name": "作业治疗科（OT）",
+                "period": "current departmental page; reviewed2026-11-09",
+                "publisher": "中国康复研究中心",
+                "scope": "Departmental text155—174: services and daily-living goals, not authority for every worker.",
+                "url": "https://crrc.com.cn/Html/Departments/Main/Index_189.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One historical combined PT/OT/ST vacancy: relevant college education or above, rehabilitation-technician qualification or higher and over three years’ relevant experience; closed July10, no salary amount."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-cn-job",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "CN",
+                "name": "北京交通大学医院招聘中医理疗康复技师",
+                "period": "notice2026-06-24; closed2026-07-10",
+                "publisher": "北京交通大学医院",
+                "scope": "One historical combined PT/OT/ST vacancy: relevant college education or above, rehabilitation-technician qualification or higher and over three years’ relevant experience; closed July10, no salary amount.",
+                "url": "https://xyy.bjtu.edu.cn/tzgg/2272e820d2f14f6dbbe1c93703a6e8c7.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Selected tasks around125—150; not state licensure rules or Mainland equivalence."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-neighbor-31-2012",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "O*NET 31-2012.00 Occupational Therapy Aides",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "O*NET",
+                "scope": "Selected tasks around125—150; not state licensure rules or Mainland equivalence.",
+                "url": "https://www.onetonline.org/link/details/31-2012.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Selected tasks around125—150; not state licensure rules or Mainland equivalence."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-neighbor-29-1122",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "O*NET 29-1122.00 Occupational Therapists",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "O*NET",
+                "scope": "Selected tasks around125—150; not state licensure rules or Mainland equivalence.",
+                "url": "https://www.onetonline.org/link/details/29-1122.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Selected tasks around125—150; not state licensure rules or Mainland equivalence."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-neighbor-31-2021",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "O*NET 31-2021.00 Physical Therapist Assistants",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "O*NET",
+                "scope": "Selected tasks around125—150; not state licensure rules or Mainland equivalence.",
+                "url": "https://www.onetonline.org/link/details/31-2021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Selected tasks around125—150; not state licensure rules or Mainland equivalence."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-neighbor-29-1127",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "O*NET 29-1127.00 Speech-Language Pathologists",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "O*NET",
+                "scope": "Selected tasks around125—150; not state licensure rules or Mainland equivalence.",
+                "url": "https://www.onetonline.org/link/details/29-1127.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Selected tasks around125—150; not state licensure rules or Mainland equivalence."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-neighbor-21-1015",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "O*NET 21-1015.00 Rehabilitation Counselors",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "O*NET",
+                "scope": "Selected tasks around125—150; not state licensure rules or Mainland equivalence.",
+                "url": "https://www.onetonline.org/link/details/21-1015.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Selected tasks around125—150; not state licensure rules or Mainland equivalence."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-neighbor-29-1125",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "O*NET 29-1125.00 Recreational Therapists",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "O*NET",
+                "scope": "Selected tasks around125—150; not state licensure rules or Mainland equivalence.",
+                "url": "https://www.onetonline.org/link/details/29-1125.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Selected tasks around125—150; not state licensure rules or Mainland equivalence."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-neighbor-31-9092",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "O*NET 31-9092.00 Medical Assistants",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "O*NET",
+                "scope": "Selected tasks around125—150; not state licensure rules or Mainland equivalence.",
+                "url": "https://www.onetonline.org/link/details/31-9092.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Selected tasks around125—150; not state licensure rules or Mainland equivalence."
+                ],
+                "evidence_type": "primary public source",
+                "id": "review-neighbor-31-1131",
+                "limitation": "Supports only the stated subject, period and jurisdiction; does not establish individual authority or effects.",
+                "market": "US",
+                "name": "O*NET 31-1131.00 Nursing Assistants",
+                "period": "current page; reviewed 2026-11-09",
+                "publisher": "O*NET",
+                "scope": "Selected tasks around125—150; not state licensure rules or Mainland equivalence.",
+                "url": "https://www.onetonline.org/link/details/31-1131.00"
               }
             ]
           },
@@ -13707,20 +14004,20 @@
             "label": "BLS assistants and aides"
           },
           {
-            "href": "https://www.onetonline.org/link/details/31-2011.00",
-            "label": "O*NET assistants"
+            "href": "https://www.onetonline.org/link/details/31-2012.00",
+            "label": "O*NET adjacent tasks: Occupational Therapy Aides"
           },
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
-            "label": "BLS similar occupations"
+            "href": "https://www.onetonline.org/link/details/29-1122.00",
+            "label": "O*NET adjacent tasks: Occupational Therapists"
           },
           {
-            "href": "https://www.onetonline.org/link/details/31-2011.00",
-            "label": "O*NET work tasks"
+            "href": "https://www.onetonline.org/link/details/31-2021.00",
+            "label": "O*NET adjacent tasks: Physical Therapist Assistants"
           },
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
-            "label": "BLS education differences"
+            "href": "https://www.onetonline.org/link/details/29-1127.00",
+            "label": "O*NET adjacent tasks: Speech-Language Pathologists"
           }
         ],
         "evidence_note": {
@@ -13754,13 +14051,13 @@
             "职业方向": "Occupational therapy assistants"
           },
           {
-            "关键区别": "Routine support, without independent treatment",
+            "关键区别": "BLS emphasizes routine support; tasks may overlap and permissions require separate checks",
             "更适合什么选择": "Likes organizing the site",
             "核心工作与产出": "Equipment preparation, cleaning, escort, and forms",
             "职业方向": "Occupational therapy aide"
           },
           {
-            "关键区别": "Bears professional responsibility for the treatment plan",
+            "关键区别": "More extensive assessment and planning duties; check state and institutional division of responsibilities",
             "更适合什么选择": "Likes clinical judgment",
             "核心工作与产出": "Assessment, planning, intervention, and re-evaluation",
             "职业方向": "Occupational therapist"
@@ -13845,7 +14142,7 @@
             }
           }
         ],
-        "answer": "AI can organize de-identified record drafts and activity options; client goals, actual movements, risks, treatment plan changes, and medical record signing are the responsibility of the authorized treatment team. The U.S. assistant overall 21.5% with average annual 8,100 openings including replacement is employment background only and is not AI adoption or replacement or personal unemployment probability. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
+        "answer": "This page has not established verifiable task-level evidence for a quantitative AI score. A draft-comparison trial can use complete fictional records and field-by-field source checks; it does not establish clinical capability, adoption or time savings.",
         "authority_links": [
           {
             "来源": "BLS duties",
@@ -13890,20 +14187,20 @@
             "链接": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm"
           }
         ],
-        "difference_intro": "The following are editorial trial directions drawn from the occupational tasks, and they do not verify documentation speed, accuracy, or adoption rates for this occupation; a model draft cannot replace professional verification of real-time movements, fatigue, fall risk, and client goals.",
+        "difference_intro": "The following are information-checking trial ideas using the fictional OT-A1 materials. Speed, accuracy, adoption and clinical effects have not been measured; these trials do not produce real activity, device or treatment recommendations.",
         "difference_rows": [
           {
-            "AI主要改变": "Organize drafts and missing-measurement reminders.",
+            "AI主要改变": "Trial a draft field-comparison table; effects unverified.",
             "仍由人负责": "Verify real observations and medical records.",
             "方向": "Progress records"
           },
           {
-            "AI主要改变": "Suggest candidate steps.",
-            "仍由人负责": "Adjust on site per the therapist's plan and ensure safety.",
+            "AI主要改变": "Draft questions to check in a fictional case.",
+            "仍由人负责": "Do not derive treatment steps, device choices or safety thresholds from the draft.",
             "方向": "Activity training"
           },
           {
-            "AI主要改变": "Draft summaries.",
+            "AI主要改变": "Trial drafting verification questions, without claiming communication occurred.",
             "仍由人负责": "Verify plan changes and referral with the therapist.",
             "方向": "Team communication"
           }
@@ -13940,7 +14237,7 @@
           },
           {
             "source_ref": "bls-ep-2025",
-            "使用限制": "Not a net increase of 11200, the combined 8600, AI adoption or replacement, or personal unemployment probability, and does not infer Chinese demand.",
+            "使用限制": "Annual openings of 8,100 differ from a ten-year net increase of about 11,200 and from the combined occupation’s 8,600 annual openings. These do not establish AI effects or individual unemployment probability.",
             "来源": "Overall BLS employment projection for the single assistant occupation",
             "研究对象": "U.S. 31-2011; 2025—2035",
             "结论": "Overall growth of 21.5%, with average annual 8,100 openings including replacement.",
@@ -13970,7 +14267,7 @@
             "问题": "Can AI implement treatment for assistants?"
           },
           {
-            "回答": "Handle only within institutional approval and privacy requirements.",
+            "回答": "Use fictional material for this exercise. For real records, first check applicable law, access permissions, institutional approval and processing arrangements; this page cannot authorize an upload.",
             "来源": "O*NET tasks",
             "链接": "https://www.onetonline.org/link/details/31-2011.00",
             "问题": "Can real medical records be uploaded?"
@@ -14000,33 +14297,33 @@
             "问题": "Who judges whether an assistive device fits?"
           },
           {
-            "回答": "Stop the activity and report immediately per institutional procedure.",
+            "回答": "This page is not a clinical response protocol. An authorized team must follow the applicable plan, explicit criteria and institutional reporting arrangements; readers should not devise treatment-response steps.",
             "来源": "O*NET tasks",
             "链接": "https://www.onetonline.org/link/details/31-2011.00",
             "问题": "What should be done when a patient feels unwell?"
           }
         ],
-        "responsibility_intro": "Use only a fully fictional dressing case to practice observation and recording; real patient materials are handled per institutional permission.",
+        "responsibility_intro": "The following is a fictional record-check trial, not client treatment or clinical tool deployment.",
         "responsibility_steps": [
           {
             "步骤": "Define inputs",
-            "说明": "Use only fictional or authorized minimum-necessary materials."
+            "说明": "Use only the complete fictional OT-A1 source and Draft B."
           },
           {
-            "步骤": "Verify observations",
-            "说明": "Distinguish actual movements from model inferences."
+            "步骤": "Check the source",
+            "说明": "Check the version, two prompts and two unspecified fields."
           },
           {
-            "步骤": "Verify the plan",
-            "说明": "Check the therapist's instructions and contraindications."
+            "步骤": "Mark unknowns",
+            "说明": "Do not treat inferences as facts or assess treatment safety."
           },
           {
-            "步骤": "Human review",
-            "说明": "Authorized personnel sign off on records and adjustments."
+            "步骤": "Revise the draft",
+            "说明": "Remove unsupported claims and retain a comparison trail."
           },
           {
-            "步骤": "Trail and re-evaluation",
-            "说明": "Record changes, feedback, and abnormality escalation."
+            "步骤": "List questions",
+            "说明": "State what needs a qualified supervisor’s clarification; do not claim feedback was received."
           }
         ],
         "risk_rows": [
@@ -14037,7 +14334,7 @@
           },
           {
             "为什么重要": "Tools cannot see real-time transfer status.",
-            "控制方式": "Report according to the stop conditions.",
+            "控制方式": "This task only flags missing risk information; real cases require explicit criteria and institutional arrangements.",
             "风险": "Overlooking falls"
           },
           {
@@ -14058,49 +14355,49 @@
         ],
         "task_rows": [
           {
-            "人的控制点": "Verify real movements and unknown factors",
-            "任务": "Record fictional dressing steps",
-            "工作方向": "Activity observation",
-            "当前变化": "Can generate observation forms"
+            "人的控制点": "Verify the supplied source; do not use real client records",
+            "任务": "Check OT-A1/v1 and Draft B",
+            "工作方向": "Source identification",
+            "当前变化": "Trial extracting version and source"
           },
           {
-            "人的控制点": "Verify the plan, contraindications, and client feedback",
-            "任务": "Guide activities per the therapist's plan",
-            "工作方向": "Training implementation",
-            "当前变化": "Can suggest candidate steps"
+            "人的控制点": "Retain the source count; do not infer motor ability",
+            "任务": "Compare two prompts with zero",
+            "工作方向": "Prompt count",
+            "当前变化": "Trial flagging the numerical conflict"
           },
           {
-            "人的控制点": "On-site fitting and safety demonstration",
-            "任务": "Explain the use of the selected device",
-            "工作方向": "Assistive device instruction",
-            "当前变化": "Can draft easy-to-understand explanations"
+            "人的控制点": "Keep completion unknown; do not assess function",
+            "任务": "Compare not recorded with completed independently",
+            "工作方向": "Completion",
+            "当前变化": "Trial finding an unsupported assertion"
           },
           {
-            "人的控制点": "Verify sources, accuracy, and medical record authority",
-            "任务": "Organize activity completion",
-            "工作方向": "Progress records",
-            "当前变化": "Can produce a draft"
+            "人的控制点": "Do not select or trial real equipment",
+            "任务": "Compare unspecified with button hook",
+            "工作方向": "Equipment",
+            "当前变化": "Trial checking the equipment source"
           },
           {
-            "人的控制点": "Verify understanding, privacy, and supervision requirements",
-            "任务": "Draft home practice reminders",
-            "工作方向": "Family communication",
-            "当前变化": "Can simplify the text"
+            "人的控制点": "No risk assessment is supplied; do not assess treatment safety",
+            "任务": "Check support for no risk",
+            "工作方向": "Risk wording",
+            "当前变化": "Trial finding an overstrong conclusion"
           },
           {
-            "人的控制点": "Stop immediately and inform the therapist",
-            "任务": "Record pain, fatigue, or fall risk",
-            "工作方向": "Abnormality escalation",
-            "当前变化": "Can flag omissions"
+            "人的控制点": "Check every field; do not generate a clinical response",
+            "任务": "Replace unsupported claims with unknowns",
+            "工作方向": "Summary revision",
+            "当前变化": "Trial drafting a source summary"
           },
           {
-            "人的控制点": "The therapist decides plan adjustments",
-            "任务": "Summarize stage changes",
-            "工作方向": "Team feedback",
-            "当前变化": "Can organize comparisons"
+            "人的控制点": "Do not fabricate a professional response or plan approval",
+            "任务": "List questions for a qualified supervisor",
+            "工作方向": "Team questions",
+            "当前变化": "Trial organizing verification questions"
           }
         ],
-        "transition": "Those who want final responsibility for assessment and planning should separately verify occupational therapist education and state licensure."
+        "transition": "For more extensive assessment and planning responsibilities, compare occupational therapist education and licensure. Task differences are not a universal exclusive rule for every job."
       },
       "breadcrumb": {
         "label": "Occupational therapy assistants",
@@ -14115,12 +14412,7 @@
         },
         "competence_ladder": [
           {
-            "description": {
-              "$item": "occupational-therapy-assistants.path.career-path-block.12",
-              "block": "path",
-              "copy_key": "career.item.career-path-block",
-              "type": "prose"
-            },
+            "description": "Begin with duties, program comparisons and OT-A1 record checks, without treating clients.",
             "stage": "Observation"
           },
           {
@@ -14132,43 +14424,48 @@
             "stage": "Safety"
           },
           {
-            "description": "Use records to help the therapist re-evaluate and adjust.",
-            "stage": "Feedback"
+            "description": {
+              "$item": "occupational-therapy-assistants.path.career-path-block.12",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            "stage": "Continuing education and progression"
           }
         ],
-        "direct_answer": "The United States usually requires an accredited occupational therapy assistant associate program, a clinical internship, and state licensure; NBCOT COTA examination eligibility and state licensure differ. Chinese post conditions are verified against the institution and local rules.",
+        "direct_answer": "For the United States, use AOTA education and state-licensure links, ACOTE listings and NBCOT eligibility to check programs, fieldwork, examinations and the target state. Associate degrees are common; accredited bachelor-level OTA routes also exist. Mainland Chinese professional-title examinations and individual jobs are a separate system.",
         "entry_heading": "From coursework to supervised treatment implementation",
         "heading": "Occupational therapy assistant entry and advancement",
         "locale_requirements": {
-          "credential_boundary": "The therapist is responsible for assessment and planning; the assistant implements and gives feedback per state law, supervision, and institutional authority.",
+          "credential_boundary": "This page describes U.S. O*NET 31-2011.00 occupational therapy assistants (OTAs). U.S. task profiles include activity selection, observation and evaluation of daily living skills, plan implementation and feedback under occupational therapist direction. Check the relevant state and institution for assessment, planning, signing and supervision responsibilities; a task list does not confer authority.",
           "jurisdiction": "U.S. states, NBCOT certification, and Chinese rehabilitation posts are verified separately.",
           "summary": "U.S. assistants usually need an accredited associate program, internship, examination, and state licensure; NBCOT COTA eligibility does not automatically equal a state license."
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
+            "href": "https://www.aota.org/career/become-an-ot-ota/",
             "id": "bls",
-            "label": "BLS education and licensure",
-            "scope": "U.S. assistant education, duties, and licensure boundaries"
+            "label": "AOTA program, fieldwork and state-licensure links",
+            "scope": "Use Find a school, Fieldwork and State licensure on this page, then check specific criteria."
           },
           {
-            "href": "https://www.onetonline.org/link/details/31-2011.00",
+            "href": "https://acoteonline.org/about/",
             "id": "nasa",
-            "label": "O*NET tasks",
-            "scope": "U.S. assistant education, duties, and licensure boundaries"
+            "label": "ACOTE accreditation and directory links",
+            "scope": "Distinguish OTA Associate/Baccalaureate and OT programs; accreditation is not a ranking."
           },
           {
             "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
             "id": "onet-training",
-            "label": "BLS assistant work",
-            "scope": "U.S. assistant education, duties, and licensure boundaries"
+            "label": "BLS education and assistant/aide distinction",
+            "scope": "Common U.S. pathways, not universal or Mainland practice permission."
           },
           {
             "href": "https://www.nbcot.org/get-certified/eligibility",
             "id": "faa",
-            "label": "NBCOT COTA examination eligibility",
-            "scope": "U.S. COTA examination eligibility; not equal to a state license or institutional authority."
+            "label": "NBCOT examination eligibility",
+            "scope": "Read COTA and OTR separately; OTED concerns OTR, not overseas OT-to-COTA conversion."
           }
         ],
         "tracks": [
@@ -14176,65 +14473,65 @@
             "id": "office-support",
             "stages": [
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Self-care activity training and progress records; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Check program admissions and approved observation arrangements without assuming clinical authority.",
+                "next_moves": "Decide whether to explore further and list course, cost and time questions.",
+                "readiness_evidence": "OT-A1 source checks, unknowns and a program comparison.",
+                "responsibility": "Read about occupational therapy activities and records in clinical or nursing-facility settings, comparing duties and learning requirements without treating clients.",
                 "role": "Observational learning"
               },
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Self-care activity training and progress records; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Check enrollment, host arrangements, student permissions and supervision.",
+                "next_moves": "Address specific feedback; a paper exercise cannot substitute for fieldwork.",
+                "readiness_evidence": "Actual qualified-preceptor feedback; handle materials under institutional rules.",
+                "responsibility": "Learn basic OTA activities, observation and documentation only through a formal program and approved placement; this does not mean nursing practice or a preceptor role.",
                 "role": "Supervised implementation"
               },
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Self-care activity training and progress records; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Verify applicable state licensure, assigned duties and institutional supervision.",
+                "next_moves": "Check whether changed duties require further training or authority.",
+                "readiness_evidence": "Records and team review within actual permissions.",
+                "responsibility": "Develop experience in authorized OTA activities, records and team feedback in a specific job, within state, supervision and institutional requirements.",
                 "role": "Skilled execution"
               },
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Self-care activity training and progress records; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Check added responsibilities and educator requirements; advancement is not automatic.",
+                "next_moves": "Compare continuing education; OT transition requires separate education and licensure.",
+                "readiness_evidence": "Document issues, feedback and revisions using approved materials.",
+                "responsibility": "With relevant experience and institutional assignment, contribute to authorized documentation-quality or teaching improvements; check preceptor responsibilities and requirements separately.",
                 "role": "Preceptorship and improvement"
               }
             ],
-            "title": "Clinical and nursing"
+            "title": "Clinical and nursing-facility settings"
           },
           {
             "id": "supplier-cost",
             "stages": [
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Support participation and home practice; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Check program admissions and approved observation arrangements without assuming clinical authority.",
+                "next_moves": "Decide whether to explore further and list course, cost and time questions.",
+                "readiness_evidence": "OT-A1 source checks, unknowns and a program comparison.",
+                "responsibility": "Read duties, programs and the schools and community setting; do not treat clients.",
                 "role": "Observational learning"
               },
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Support participation and home practice; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Check enrollment, host arrangements, student permissions and supervision.",
+                "next_moves": "Address specific feedback; a paper exercise cannot substitute for fieldwork.",
+                "readiness_evidence": "Actual qualified-preceptor feedback; handle materials under institutional rules.",
+                "responsibility": "Learn schools and community tasks only through formal program placements.",
                 "role": "Supervised implementation"
               },
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Support participation and home practice; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Verify applicable state licensure, assigned duties and institutional supervision.",
+                "next_moves": "Check whether changed duties require further training or authority.",
+                "readiness_evidence": "Records and team review within actual permissions.",
+                "responsibility": "Perform authorized schools and community tasks and records in a specific OTA job.",
                 "role": "Skilled execution"
               },
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Support participation and home practice; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Check added responsibilities and educator requirements; advancement is not automatic.",
+                "next_moves": "Compare continuing education; OT transition requires separate education and licensure.",
+                "readiness_evidence": "Document issues, feedback and revisions using approved materials.",
+                "responsibility": "Support schools and community documentation quality or teaching as assigned.",
                 "role": "Preceptorship and improvement"
               }
             ],
@@ -14244,35 +14541,35 @@
             "id": "records-information",
             "stages": [
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Feedback quality, continuing education, or therapist education; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Check program admissions and approved observation arrangements without assuming clinical authority.",
+                "next_moves": "Decide whether to explore further and list course, cost and time questions.",
+                "readiness_evidence": "OT-A1 source checks, unknowns and a program comparison.",
+                "responsibility": "Read about OTA documentation quality and continuing education, comparing duties and learning requirements without treating clients.",
                 "role": "Observational learning"
               },
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Feedback quality, continuing education, or therapist education; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Check enrollment, host arrangements, student permissions and supervision.",
+                "next_moves": "Address specific feedback; a paper exercise cannot substitute for fieldwork.",
+                "readiness_evidence": "Actual qualified-preceptor feedback; handle materials under institutional rules.",
+                "responsibility": "Learn basic OTA activities, observation and documentation only through a formal program and approved placement; this does not mean nursing practice or a preceptor role.",
                 "role": "Supervised implementation"
               },
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Feedback quality, continuing education, or therapist education; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Verify applicable state licensure, assigned duties and institutional supervision.",
+                "next_moves": "Check whether changed duties require further training or authority.",
+                "readiness_evidence": "Records and team review within actual permissions.",
+                "responsibility": "Develop experience in authorized OTA activities, records and team feedback in a specific job, within state, supervision and institutional requirements.",
                 "role": "Skilled execution"
               },
               {
-                "credentials": "Verify accredited programs, the COTA examination, and target state licensure.",
-                "next_moves": "First verify supervision and authority, then expand settings or continue education.",
-                "readiness_evidence": "Supervised fictional cases, clinical feedback, and safety records.",
-                "responsibility": "Feedback quality, continuing education, or therapist education; responsibility is verified against state law and therapist supervision.",
+                "credentials": "Check added responsibilities and educator requirements; advancement is not automatic.",
+                "next_moves": "Compare continuing education; OT transition requires separate education and licensure.",
+                "readiness_evidence": "Document issues, feedback and revisions using approved materials.",
+                "responsibility": "With relevant experience and institutional assignment, contribute to authorized documentation-quality or teaching improvements; check preceptor responsibilities and requirements separately.",
                 "role": "Preceptorship and improvement"
               }
             ],
-            "title": "Preceptorship and advancement"
+            "title": "OTA documentation quality and continuing education"
           }
         ]
       },
@@ -14293,7 +14590,7 @@
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "Core tasks",
+                  "label": "Implementation and observation",
                   "secondary_value": {
                     "$item": "occupational-therapy-assistants.profile.work-context-block.6",
                     "block": "profile",
@@ -14309,20 +14606,20 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "Core tasks",
+                  "label": "Role boundaries",
                   "secondary_value": {
                     "$item": "occupational-therapy-assistants.profile.onet-structured-fields-block.8",
                     "block": "profile",
                     "copy_key": "career.item.onet-structured-fields-block",
                     "type": "prose"
                   },
-                  "value": "Under occupational therapist direction, implement activity training, observe client responses, record progress, and feed back to the treatment team."
+                  "value": "Check the target role’s activity selection, observation, assessment, planning and signing requirements."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Core tasks",
+                  "label": "Documentation and reporting",
                   "secondary_value": null,
-                  "value": "Under occupational therapist direction, implement activity training, observe client responses, record progress, and feed back to the treatment team."
+                  "value": "Record actual observations and unknowns, and report changes to the therapist; do not turn a draft inference into an observed fact."
                 }
               ]
             }
@@ -14336,7 +14633,7 @@
                 {
                   "alternate_value": null,
                   "label": "Activity instruction",
-                  "secondary_value": "Practice step-by-step prompts with a fictional dressing task.",
+                  "secondary_value": "The paper exercise checks the OT-A1 source and draft; do not devise activity prompts.",
                   "value": "Can explain activity steps according to the therapist's plan."
                 },
                 {
@@ -14354,7 +14651,7 @@
                 {
                   "alternate_value": null,
                   "label": "Safety awareness",
-                  "secondary_value": "Stops and reports promptly when abnormalities occur.",
+                  "secondary_value": "Check the applicable plan’s criteria and institutional reporting arrangements.",
                   "value": "Identify fall, transfer, and infection risks."
                 },
                 {
@@ -14495,7 +14792,7 @@
               "privacy"
             ],
             "id": "personal-data",
-            "mitigation": "Trial on site and feed back to the therapist.",
+            "mitigation": "Have authorized personnel check fitting requirements and arrangements; do not independently trial devices based on this page.",
             "scenario": "Teaching use without verifying size and environment.",
             "title": "Ill-fitting assistive devices"
           },
@@ -14615,22 +14912,22 @@
             {
               "学历段": "Relevant professional study",
               "岗位方向": "Rehabilitation and occupational therapy",
-              "说明": "Chinese education and specialty requirements are verified by post."
+              "说明": "Shandong University of Traditional Chinese Medicine’s 2026 program page describes a standard four-year occupational therapy degree awarding a BSc; this is one institution’s pathway, not a national OTA requirement."
             },
             {
               "学历段": "Clinical internship",
               "岗位方向": "Activity training and records",
-              "说明": "Supervised by an authorized team."
+              "说明": "The China Rehabilitation Research Center OT department describes daily-living goals and departmental services, not permission for every worker to provide every intervention."
             },
             {
               "学历段": "Institutional entry",
               "岗位方向": "Treatment collaboration",
-              "说明": "Verify duties, documentation authority, and patient safety."
+              "说明": "A June 24, 2026 Beijing Jiaotong University Hospital notice for one combined PT/OT/ST rehabilitation-technician job required relevant college education or above, a rehabilitation-technician qualification or higher and over three years’ related experience. It closed July 10 and provides no usable salary amount."
             },
             {
               "学历段": "Continuing education",
               "岗位方向": "Effect re-evaluation and safety",
-              "说明": "According to the professional title, institution, and local rules."
+              "说明": "Check 2026 professional-qualification catalogue codes 107/209/381; examination level, qualification and assigned duties are separate from U.S. OTA licensure."
             }
           ],
           "china_industry_table": [
@@ -14647,12 +14944,12 @@
               "需求": "Verify the home environment, referral, and supervision."
             }
           ],
-          "china_intl": "O*NET U.S. 31-2011 occupational tasks (not Chinese wages)｜https://www.onetonline.org/link/details/31-2011.00",
+          "china_intl": "2026 health-professional examination catalogue｜https://www.21wecan.com/wsrcw/c100193/202511/1002724.shtml",
           "china_name_row": "China wages: medical rehabilitation industry background and assistant gap",
-          "china_open": "Chinese rehabilitation therapy post titles and training do not map one-to-one to the U.S. OTA classification; verify against the specific institution and local rules.",
+          "china_open": "Mainland Chinese occupational therapy education, departmental services and rehabilitation-technician jobs provide task context, not an equivalent U.S. OTA grade. The 2026 health-professional examination catalogue lists rehabilitation therapy technology at codes 107, 209 and 381 for the respective levels. Check current local application and employer conditions; certificates alone do not establish treatment permissions.",
           "china_open_note": "Real activity training, medical record documentation, and patient transfer must meet institutional authorization, privacy, and supervision requirements.",
           "china_ref": "Average annual wages of urban unit employees, 2025｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
-          "china_salary_note": "The 2025 industry pre-tax annual average and the Chinese assistant occupational wage gap are presented separately; urban legal entities exclude self-employed individuals and freelancers, the two populations do not constitute a personal income range, schools and other employers must be verified separately, and they do not fill in the occupational wage or starting salary or confer treatment authority.",
+          "china_salary_note": "The 2025 industry pre-tax annual averages are separate from the missing Chinese assistant occupational wage. The survey covers urban legal entities with at least five employees and excludes individual businesses and freelancers. The private and non-private averages are not a personal income range; schools and other employers need separate checks. These figures do not supply occupational wages or starting pay or confer treatment authority.",
           "china_salary_table": [
             {
               "城市/区间": "China data status",
@@ -14781,7 +15078,7 @@
             "note": "BLS May 2025 median assistant industry wage."
           },
           {
-            "industry": "Therapist practices",
+            "industry": "Offices of physical, occupational and speech therapists, and audiologists",
             "median": "$70,740",
             "note": "BLS May 2025 median assistant industry wage."
           },
@@ -14795,24 +15092,19 @@
         "interpretation_heading": "How to interpret",
         "interpretation_rows": [
           {
-            "answer": {
-              "$join": [
-                "No. It is the midpoint of the overall U.S. assistant occupational wage distribution.",
-                {
-                  "$item": "occupational-therapy-assistants.us-salary.career-snapshot-secondary-locale.5",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
+            "answer": "The median is the midpoint of the wage distribution covered by the survey, not a uniform starting salary, individual take-home pay or contract offer.",
             "question": "Is the median wage an entry offer?"
           },
           {
             "answer": {
               "$join": [
-                "No. The two differ in occupation, education, and responsibility.",
+                "No; assistants and aides are counted separately.",
+                {
+                  "$item": "occupational-therapy-assistants.us-salary.career-snapshot-secondary-locale.4",
+                  "block": "us-salary",
+                  "copy_key": "career.item.career-snapshot-secondary-locale",
+                  "type": "prose"
+                },
                 {
                   "$item": "occupational-therapy-assistants.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -14820,12 +15112,23 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "question": "Can aide and assistant wages be mixed?"
           },
           {
-            "answer": "The combined 8600 cannot be allocated. BLS Table 1.2 already provides average annual 8100 openings including replacement for the single assistant occupation, not a net increase of 11200 or an AI replacement number.",
+            "answer": {
+              "$join": [
+                "Annual openings of 8,100 include growth and replacement. The ten-year net increase of about 11,200 is a different measure; the combined 8,600 cannot be allocated to assistants.",
+                {
+                  "$item": "occupational-therapy-assistants.us-salary.career-snapshot-secondary-locale.5",
+                  "block": "us-salary",
+                  "copy_key": "career.item.career-snapshot-secondary-locale",
+                  "type": "prose"
+                }
+              ],
+              "separator": "\n"
+            },
             "question": "Do the combined occupation's openings belong to assistants?"
           },
           {
@@ -14837,7 +15140,7 @@
         "outlook_heading": "Employment outlook",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "Wage tiers",
+          "Wage percentile",
           "Annual salary reference",
           "Monthly equivalent",
           "Explanation"
@@ -14863,18 +15166,7 @@
           },
           {
             "equivalent": "Personal monthly salary is not inferred",
-            "interpretation": {
-              "$join": [
-                "The midpoint of the U.S. 31-2011 wage distribution.",
-                {
-                  "$item": "occupational-therapy-assistants.us-salary.career-snapshot-secondary-locale.3",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
+            "interpretation": "The median is the midpoint of the wage distribution covered by the survey, not a uniform starting salary, individual take-home pay or contract offer.",
             "label": "Median",
             "value": "$72,300"
           },
@@ -14882,9 +15174,9 @@
             "equivalent": "Personal monthly salary is not inferred",
             "interpretation": {
               "$join": [
-                "A high wage percentile is not a personal promise.",
+                "The 90th percentile is a wage-ranking threshold, not an individual guarantee; the upper percentiles from the same table are shown for comparison.",
                 {
-                  "$item": "occupational-therapy-assistants.us-salary.career-snapshot-secondary-locale.4",
+                  "$item": "occupational-therapy-assistants.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
                   "copy_key": "career.item.career-snapshot-secondary-locale",
                   "type": "prose"
@@ -14897,7 +15189,7 @@
           }
         ]
       },
-      "definition_block": "Occupational therapy assistants help therapists implement daily activity training, observe responses, and record progress; assessment and planning responsibility follows state law, therapist supervision, and institutional authorization.",
+      "definition_block": "This page describes U.S. O*NET 31-2011.00 occupational therapy assistants (OTAs). U.S. task profiles include activity selection, observation and evaluation of daily living skills, plan implementation and feedback under occupational therapist direction. Check the relevant state and institution for assessment, planning, signing and supervision responsibilities; a task list does not confer authority.",
       "faq_block": {
         "items": {
           "$item": "occupational-therapy-assistants.sources.faq-block.1",
@@ -14908,37 +15200,37 @@
       },
       "fermat_decision_card": {
         "caveat": {
-          "$item": "occupational-therapy-assistants.quick-decision.fit-decision-checklist.4",
-          "block": "quick-decision",
-          "copy_key": "career.item.fit-decision-checklist",
-          "type": "prose"
-        },
-        "summary": "If you are willing to accompany clients in practicing dressing, washing, and similar activities under therapist direction, observe, record, and re-evaluate accurately, and bear clinical safety discipline, you can continue to verify accredited coursework, internship, and state licensure.",
-        "title": "Occupational therapy assistants"
-      },
-      "fit_decision_checklist": {
-        "boundary": {
-          "$item": "occupational-therapy-assistants.quick-decision.fermat-decision-card.1",
-          "block": "quick-decision",
-          "copy_key": "career.item.fermat-decision-card",
-          "type": "prose"
-        },
-        "how": {
           "$item": "occupational-therapy-assistants.quick-decision.fermat-decision-card.2",
           "block": "quick-decision",
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "suit": {
+        "summary": "Compare the U.S. OTA, aide and occupational therapist pathways, then use the supplied record-check exercise to reflect on your interests. Mainland Chinese education, professional qualifications and jobs require separate checks.",
+        "title": "Occupational therapy assistants"
+      },
+      "fit_decision_checklist": {
+        "boundary": {
           "$item": "occupational-therapy-assistants.quick-decision.fit-decision-checklist.3",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "how": {
+          "$item": "occupational-therapy-assistants.quick-decision.fit-decision-checklist.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "occupational-therapy-assistants.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         }
       },
       "hero": {
         "h1": "Occupational therapy assistants",
-        "quick_answer": "Under therapist direction, assist with implementing treatment activities and observe and record progress; this differs from the routine support tasks of aides, and practice follows state licensure and institutional authorization.",
+        "quick_answer": "This page describes U.S. O*NET 31-2011.00 occupational therapy assistants (OTAs). U.S. task profiles include activity selection, observation and evaluation of daily living skills, plan implementation and feedback under occupational therapist direction. Check the relevant state and institution for assessment, planning, signing and supervision responsibilities; a task list does not confer authority.",
         "title": "Occupational therapy assistants"
       },
       "market_signal_card": {
@@ -14992,9 +15284,9 @@
           },
           {
             "geography": "United States",
-            "horizon": "Under occupational therapist direction, implement activity training, observe responses, record progress, and hand over risks.",
+            "horizon": "2025—2035",
             "interpretation": "The 31-2011 overall projection is not attributed to AI; the net increase of 11200 is distinguished from the average annual 8100 openings including replacement.",
-            "limitation": "Under occupational therapist direction, implement activity training, observe responses, record progress, and hand over risks.",
+            "limitation": "An overall projection, not current vacancies, AI causation or an individual hiring guarantee.",
             "metric": "2025—2035 growth",
             "occupation_scope": "Single U.S. BLS assistant occupation",
             "source_id": "ep",
@@ -15002,7 +15294,7 @@
           },
           {
             "geography": "United States",
-            "horizon": "Under occupational therapist direction, implement activity training, observe responses, record progress, and hand over risks.",
+            "horizon": "2025—2035",
             "interpretation": "Includes new jobs and replacement, is not split from the combined 8600, and is not a net increase of 11200 or Chinese demand.",
             "limitation": "Not AI adoption, replacement, or personal unemployment probability.",
             "metric": "Average annual openings",
@@ -15022,82 +15314,82 @@
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "ep",
-            "label": "BLS Table 1.2 overall projection for the single assistant occupation",
-            "scope": "U.S. 31-2011; 2025—2035, not attributed to AI"
+            "label": "BLS Table1.2 assistant line item",
+            "scope": "31-2011; 2025—2035 overall projection"
           },
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
+            "href": "https://www.onetonline.org/link/details/31-2012.00",
             "id": "nbs",
-            "label": "BLS education and projections",
-            "scope": "U.S. assistant duties and employment measure"
+            "label": "Adjacent O*NET tasks",
+            "scope": "Selected tasks for that profession only; no cross-profession authority."
           },
           {
-            "href": "https://www.onetonline.org/link/details/31-2011.00",
+            "href": "https://www.onetonline.org/link/details/31-2021.00",
             "id": "onet",
-            "label": "O*NET work activities",
-            "scope": "U.S. assistant duties and employment measure"
+            "label": "Adjacent O*NET tasks",
+            "scope": "Selected tasks for that profession only; no cross-profession authority."
           }
         ],
         "transitions": [
           {
-            "capability_gaps": "Wants to take on assessment and planning responsibility.",
-            "shared_capabilities": "Patient communication, observation, records, and team handover.",
+            "capability_gaps": "Assessment, goals and treatment planning; check OT education and licensure separately.",
+            "shared_capabilities": "Some communication, observation and record experience may be relevant, but cannot substitute for target-profession training.",
             "target_href": "/zh/career/jobs/occupational-therapists",
             "target_slug": "occupational-therapists",
             "target_title": "Occupational therapist",
             "transition_distance": "Verify the other occupation's education, licensure, and practice scope."
           },
           {
-            "capability_gaps": "Leans toward equipment preparation, cleaning, and reception.",
-            "shared_capabilities": "Patient communication, observation, records, and team handover.",
+            "capability_gaps": "Work areas, equipment, reception and routine support; check the specific job.",
+            "shared_capabilities": "Some communication, observation and record experience may be relevant, but cannot substitute for target-profession training.",
             "target_href": "/zh/career/jobs/occupational-therapy-aides",
             "target_slug": "occupational-therapy-aides",
             "target_title": "Occupational therapy aide",
             "transition_distance": "Verify the other occupation's education, licensure, and practice scope."
           },
           {
-            "capability_gaps": "Leans toward motor function training.",
-            "shared_capabilities": "Patient communication, observation, records, and team handover.",
+            "capability_gaps": "Physical therapy activities, mobility records and PT collaboration; check education and licensure.",
+            "shared_capabilities": "Some communication, observation and record experience may be relevant, but cannot substitute for target-profession training.",
             "target_href": "/zh/career/jobs/physical-therapist-assistants",
             "target_slug": "physical-therapist-assistants",
             "target_title": "Physical therapist assistant",
             "transition_distance": "Verify the other occupation's education, licensure, and practice scope."
           },
           {
-            "capability_gaps": "Leans toward communication and swallowing.",
-            "shared_capabilities": "Patient communication, observation, records, and team handover.",
+            "capability_gaps": "Communication/swallowing assessment, interventions and records; check specialist training and permissions.",
+            "shared_capabilities": "Some communication, observation and record experience may be relevant, but cannot substitute for target-profession training.",
             "target_href": "/zh/career/jobs/speech-language-pathologists",
             "target_slug": "speech-language-pathologists",
             "target_title": "Speech-language pathologist",
             "transition_distance": "Verify the other occupation's education, licensure, and practice scope."
           },
           {
-            "capability_gaps": "Leans toward education and employment resource coordination.",
-            "shared_capabilities": "Patient communication, observation, records, and team handover.",
+            "capability_gaps": "Employment barriers, service plans, resources and placement tasks.",
+            "shared_capabilities": "Some communication, observation and record experience may be relevant, but cannot substitute for target-profession training.",
             "target_href": "/zh/career/jobs/rehabilitation-counselors",
             "target_slug": "rehabilitation-counselors",
             "target_title": "Rehabilitation counselor",
             "transition_distance": "Verify the other occupation's education, licensure, and practice scope."
           },
           {
-            "capability_gaps": "Leans toward recreational activity participation.",
-            "shared_capabilities": "Patient communication, observation, records, and team handover.",
+            "capability_gaps": "Needs assessment, therapeutic recreation plans and participation records.",
+            "shared_capabilities": "Some communication, observation and record experience may be relevant, but cannot substitute for target-profession training.",
             "target_href": "/zh/career/jobs/recreational-therapists",
             "target_slug": "recreational-therapists",
             "target_title": "Recreational therapist",
             "transition_distance": "Verify the other occupation's education, licensure, and practice scope."
           },
           {
-            "capability_gaps": "Leans toward general outpatient clinical administration.",
-            "shared_capabilities": "Patient communication, observation, records, and team handover.",
+            "capability_gaps": "Administrative and clinical support both occur; check specific tasks and permissions.",
+            "shared_capabilities": "Some communication, observation and record experience may be relevant, but cannot substitute for target-profession training.",
             "target_href": "/zh/career/jobs/medical-assistants",
             "target_slug": "medical-assistants",
             "target_title": "Medical assistant",
             "transition_distance": "Verify the other occupation's education, licensure, and practice scope."
           },
           {
-            "capability_gaps": "Leans toward daily nursing support.",
-            "shared_capabilities": "Patient communication, observation, records, and team handover.",
+            "capability_gaps": "Daily care, transfers, observation and reporting to nursing staff; check qualifications separately.",
+            "shared_capabilities": "Some communication, observation and record experience may be relevant, but cannot substitute for target-profession training.",
             "target_href": "/zh/career/jobs/nursing-assistants",
             "target_slug": "nursing-assistants",
             "target_title": "Nursing assistant",
@@ -15161,7 +15453,7 @@
             },
             "id": "riasec",
             "label": "Holland interests",
-            "question": "What abilities and working style does being an occupational therapy assistant require?",
+            "question": "Which interests or work preferences can this reflection help explore?",
             "signals": {
               "$item": "occupational-therapy-assistants.fit.riasec-fit-block.1",
               "block": "fit",
@@ -15171,13 +15463,13 @@
             "watchout": "Scale results do not equal school admission, licensure, or employer authorization."
           },
           {
-            "answer": "Observe whether you can describe specific activities and client responses and feed back to the therapist promptly during frustration or discomfort.",
+            "answer": "Reflect on listening to goals, explaining information clearly and communicating with a team. This RIASEC link is not a communication skills test.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "View the RIASEC interest assessment",
             "evidence_level": "Editorial career exploration suggestion; no individual predictive validity validation on this page",
             "id": "big-five",
-            "label": "Communication style",
-            "question": "What abilities and working style does being an occupational therapy assistant require?",
+            "label": "Interest in communication",
+            "question": "Which interests or work preferences can this reflection help explore?",
             "signals": {
               "$item": "occupational-therapy-assistants.fit.riasec-fit-block.2",
               "block": "fit",
@@ -15187,13 +15479,13 @@
             "watchout": "Scale results do not equal school admission, licensure, or employer authorization."
           },
           {
-            "answer": "Record movements, number of prompts, and actual responses separately, and do not fabricate when something is unknown; the preceptor points out omissions.",
+            "answer": "Separate sources from inferences in OT-A1 and reflect on your interest in detailed checks; completion does not establish client-observation skill.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "View the RIASEC interest assessment",
             "evidence_level": "Editorial career exploration suggestion; no individual predictive validity validation on this page",
             "id": "mbti",
-            "label": "Observation ability",
-            "question": "What abilities and working style does being an occupational therapy assistant require?",
+            "label": "Interest in record checks",
+            "question": "Which interests or work preferences can this reflection help explore?",
             "signals": {
               "$item": "occupational-therapy-assistants.fit.personality-fit-block.3",
               "block": "fit",
@@ -15203,13 +15495,13 @@
             "watchout": "Scale results do not equal school admission, licensure, or employer authorization."
           },
           {
-            "answer": "Reflect on whether you are willing to patiently support client goals under therapist supervision and accept repeated practice and documentation responsibility.",
+            "answer": "Reflect on valuing other people’s goals and sustained support. An interest questionnaire cannot determine clinical decisions or eligibility to practice.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "View the RIASEC interest assessment",
             "evidence_level": "Editorial career exploration suggestion; no individual predictive validity validation on this page",
             "id": "enneagram",
             "label": "Value preferences",
-            "question": "What abilities and working style does being an occupational therapy assistant require?",
+            "question": "Which interests or work preferences can this reflection help explore?",
             "signals": {
               "$item": "occupational-therapy-assistants.fit.personality-fit-block.4",
               "block": "fit",
@@ -15219,13 +15511,13 @@
             "watchout": "Scale results do not equal school admission, licensure, or employer authorization."
           },
           {
-            "answer": "Verify the close contact, transfer load, shifts, and supervision arrangements for hospital, school, nursing, or home tasks.",
+            "answer": "List interests and concerns about hospital, school, nursing-facility or home settings, then check actual schedules, contact and workload. A questionnaire does not test stamina.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "View the RIASEC interest assessment",
             "evidence_level": "Editorial career exploration suggestion; no individual predictive validity validation on this page",
             "id": "iq",
             "label": "Setting preferences",
-            "question": "What abilities and working style does being an occupational therapy assistant require?",
+            "question": "Which interests or work preferences can this reflection help explore?",
             "signals": {
               "$item": "occupational-therapy-assistants.fit.personality-fit-block.5",
               "block": "fit",
@@ -15235,13 +15527,13 @@
             "watchout": "Scale results do not equal school admission, licensure, or employer authorization."
           },
           {
-            "answer": "Use only fictional scenarios to understand whether you are willing to break down activities, list unknowns, and revise records; real practice must follow program and institutional supervision.",
+            "answer": "Use only OT-A1’s complete input and reference to reflect on checking records and keeping unknowns; do not plan client activities or treatment.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "View the RIASEC interest assessment",
             "evidence_level": "Editorial career exploration suggestion; no individual predictive validity validation on this page",
             "id": "eq",
             "label": "Fictional case",
-            "question": "What abilities and working style does being an occupational therapy assistant require?",
+            "question": "Which interests or work preferences can this reflection help explore?",
             "signals": {
               "$item": "occupational-therapy-assistants.fit.personality-fit-block.6",
               "block": "fit",
@@ -15252,7 +15544,7 @@
           }
         ],
         "boundary": "Assessments are for exploration only and do not prove clinical competence; U.S. accredited coursework, internship, examination, state licensure, and institutional authorization are verified separately.",
-        "direct_answer": "Suited to people willing to repeatedly accompany clients in practicing daily activities under therapist direction, record real changes, and handle safety issues; patience is needed for patient privacy, team communication, and clinical training.",
+        "direct_answer": "Explore your interest in daily-activity support, records and teamwork alongside education commitments, working conditions and supervision. Keep interests separate from actual skills, legal requirements and institutional assessment.",
         "directions": [
           {
             "direction": "Occupational therapist",
@@ -15318,43 +15610,43 @@
         "heading": "Who is suited to be an occupational therapy assistant?",
         "questions": [
           {
-            "answer": "Find evidence with a fictional dressing activity and a compliant internship; self-rating cannot prove competence.",
+            "answer": "Write one activity you want to explore and one concern. Use OT-A1 only to check record consistency, then investigate a specific program or job. Without actual supervised training and feedback, do not infer clinical competence.",
             "question": "Am I willing to accompany daily activity practice over the long term?"
           },
           {
-            "answer": "Find evidence with a fictional dressing activity and a compliant internship; self-rating cannot prove competence.",
+            "answer": "Write one activity you want to explore and one concern. Use OT-A1 only to check record consistency, then investigate a specific program or job. Without actual supervised training and feedback, do not infer clinical competence.",
             "question": "Can I observe movements rather than guess?"
           },
           {
-            "answer": "Find evidence with a fictional dressing activity and a compliant internship; self-rating cannot prove competence.",
+            "answer": "Write one activity you want to explore and one concern. Use OT-A1 only to check record consistency, then investigate a specific program or job. Without actual supervised training and feedback, do not infer clinical competence.",
             "question": "Can I act according to the therapist's plan?"
           },
           {
-            "answer": "Find evidence with a fictional dressing activity and a compliant internship; self-rating cannot prove competence.",
+            "answer": "Write one activity you want to explore and one concern. Use OT-A1 only to check record consistency, then investigate a specific program or job. Without actual supervised training and feedback, do not infer clinical competence.",
             "question": "Am I willing to record progress accurately?"
           },
           {
-            "answer": "Find evidence with a fictional dressing activity and a compliant internship; self-rating cannot prove competence.",
+            "answer": "Write one activity you want to explore and one concern. Use OT-A1 only to check record consistency, then investigate a specific program or job. Without actual supervised training and feedback, do not infer clinical competence.",
             "question": "Can I handle client frustration and discomfort?"
           },
           {
-            "answer": "Find evidence with a fictional dressing activity and a compliant internship; self-rating cannot prove competence.",
+            "answer": "Write one activity you want to explore and one concern. Use OT-A1 only to check record consistency, then investigate a specific program or job. Without actual supervised training and feedback, do not infer clinical competence.",
             "question": "Can I observe privacy and infection control?"
           },
           {
-            "answer": "Find evidence with a fictional dressing activity and a compliant internship; self-rating cannot prove competence.",
+            "answer": "Write one activity you want to explore and one concern. Use OT-A1 only to check record consistency, then investigate a specific program or job. Without actual supervised training and feedback, do not infer clinical competence.",
             "question": "Do I accept close-range and physical work?"
           },
           {
-            "answer": "Find evidence with a fictional dressing activity and a compliant internship; self-rating cannot prove competence.",
-            "question": "Can I stop and escalate when abnormalities occur?"
+            "answer": "Write one activity you want to explore and one concern. Use OT-A1 only to check record consistency, then investigate a specific program or job. Without actual supervised training and feedback, do not infer clinical competence.",
+            "question": "Am I willing to learn applicable criteria and team reporting requirements?"
           },
           {
-            "answer": "Find evidence with a fictional dressing activity and a compliant internship; self-rating cannot prove competence.",
+            "answer": "Write one activity you want to explore and one concern. Use OT-A1 only to check record consistency, then investigate a specific program or job. Without actual supervised training and feedback, do not infer clinical competence.",
             "question": "Am I willing to communicate with an interdisciplinary team?"
           },
           {
-            "answer": "Find evidence with a fictional dressing activity and a compliant internship; self-rating cannot prove competence.",
+            "answer": "Write one activity you want to explore and one concern. Use OT-A1 only to check record consistency, then investigate a specific program or job. Without actual supervised training and feedback, do not infer clinical competence.",
             "question": "Can I invest in the coursework, internship, and licensure path?"
           }
         ],
@@ -15367,13 +15659,13 @@
             "tone": "positive"
           },
           {
-            "body": "Can write movement changes and discomfort concretely.",
+            "body": "If personal care, workload or education commitments concern you, check the specific job or program conditions first.",
             "id": "caution",
             "label": "Observation records",
             "tone": "caution"
           },
           {
-            "body": "Stops promptly when risks occur and feeds back to the therapist.",
+            "body": "Use OT-A1 below to make four record checks, identify unknowns and list information to seek next.",
             "id": "experiment",
             "label": "Keeps supervision boundaries",
             "tone": "action"
@@ -15431,11 +15723,11 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Take a test: do you enjoy accompanying clients and adjusting activity training?",
+        "label": "Explore your work-activity interests",
         "source_page_type": "Career information page",
         "subject_key": "occupational-therapy-assistants",
         "subject_kind": "Occupational therapy assistants",
-        "target_action": "Practice observation, recording, and safety escalation with a fictional activity training case",
+        "target_action": "Reflect on activity interests with RIASEC; do not test clinical skills",
         "test_slug": "holland-career-interest-test-riasec"
       },
       "responsibilities_block": {
@@ -15452,16 +15744,22 @@
       },
       "source_card": {
         "eeat_signals": {
-          "author": {
-            "$item": "occupational-therapy-assistants.sources.boundary-notice.2",
-            "block": "sources",
-            "copy_key": "career.item.boundary-notice",
-            "type": "prose"
-          },
-          "source": "BLS/O*NET U.S. assistant duties, wages, and employment; NBCOT certification; the National Bureau of Statistics China wage gap.",
-          "updated_at": "Verified by the author of the nine modules on 2026-10-12, with statistical periods retained separately."
+          "author": "FermatMind Editorial",
+          "source": "BLS/O*NET U.S. duties, wages and projections; AOTA/ACOTE/NBCOT education and credentials; NBS industry averages; Mainland examination catalogue and original program, department and historical job pages.",
+          "updated_at": "2026-11-09; statistical periods, jurisdictions and source scopes are stated separately."
         },
-        "note": "The evidence supports only scope-level judgments about occupational therapy assistants within the labeled market and period, and does not constitute a guarantee of personal income, hiring, or fit.",
+        "note": {
+          "$join": [
+            "The evidence supports only scope-level judgments about occupational therapy assistants within the labeled market and period, and does not constitute a guarantee of personal income, hiring, or fit.",
+            {
+              "$item": "occupational-therapy-assistants.sources.boundary-notice.2",
+              "block": "sources",
+              "copy_key": "career.item.boundary-notice",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
+        },
         "secondary_links": [
           {
             "href": {
@@ -15717,13 +16015,13 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
+        "derivation": "The former 42% editorial score is withdrawn: the 25/25/75 ratings lack task-effect evidence. No replacement score is invented.",
+        "display_value": "No verified quantitative estimate",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "Task-level AI evidence status",
         "occupation_scope": "Occupational therapy assistants",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -15732,8 +16030,8 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
@@ -15786,7 +16084,7 @@
       "text": "Occupational therapy assistants: duties, wages, certification, and entry"
     }
   },
-  "source_content_sha256": "bcf6e57814cbcf21b122ea89e1867e483181252953014159e58766acee3497b6",
+  "source_content_sha256": "723d733d80ad5d18fb7894aa8b028f15dada6a2b6f53009261cd5c2d7df8ee7f",
   "subject": {
     "canonical_slug": "occupational-therapy-assistants",
     "name": "Occupational therapy assistants",
