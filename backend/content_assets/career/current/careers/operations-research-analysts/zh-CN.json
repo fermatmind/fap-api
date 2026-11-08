@@ -123,22 +123,22 @@
         "status": "mapped"
       },
       "item:operations-research-analysts.path.credential-decision.10": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:operations-research-analysts.path.employer-evidence.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:operations-research-analysts.path.entry-portfolio.6": {
         "status": "mapped"
       },
       "item:operations-research-analysts.path.entry-role-comparison.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:operations-research-analysts.path.entry-work-sample-data.3": {
         "status": "pending_mapping"
       },
       "item:operations-research-analysts.path.interview-probation.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:operations-research-analysts.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -195,16 +195,16 @@
         "status": "pending_mapping"
       },
       "item:operations-research-analysts.risk.career-risk-cards.4": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:operations-research-analysts.risk.career-risk-cards.5": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:operations-research-analysts.source-register.published.1": {
         "status": "pending_mapping"
       },
       "item:operations-research-analysts.sources.boundary-notice.2": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:operations-research-analysts.sources.faq-block.1": {
         "status": "mapped"
@@ -3132,12 +3132,30 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.affected_roles": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "components",
+            "career_risk_cards",
+            "risks",
+            0,
+            "affected_roles"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "career_risk_cards.risks.01.consequence": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "components",
+            "career_risk_cards",
+            "risks",
+            0,
+            "consequence"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.01": {
         "ref": {
@@ -3168,8 +3186,17 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.mitigation": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "components",
+            "career_risk_cards",
+            "risks",
+            0,
+            "mitigation"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "career_risk_cards.risks.01.scenario": {
         "ref": null,
@@ -3343,8 +3370,16 @@
         "status": "unfilled"
       },
       "career_risk_cards.risks.04.scenario": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "operations-research-analysts.risk.career-risk-cards.4",
+          "path": [
+            "data",
+            "paragraphs",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "career_risk_cards.risks.04.title": {
         "ref": {
@@ -9495,8 +9530,16 @@
         "status": "mapped"
       },
       "source_card.eeat_signals.author": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "components",
+            "source_card",
+            "eeat_signals",
+            "author"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "source_card.eeat_signals.source": {
         "ref": null,
@@ -9507,8 +9550,16 @@
         "status": "unfilled"
       },
       "source_card.note": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "operations-research-analysts.sources.boundary-notice.2",
+          "path": [
+            "data",
+            "paragraphs",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
         "ref": {
@@ -12227,12 +12278,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全试作：用虚构配送需求设计两种路线或班次方案，写清目标函数、约束、敏感性与失败条件"
+              "用本页题定的A+B、2A、2B三种班次组合，比较20件需求下的容量、费用与未用容量，再将需求改为23件复核。记录目标、约束、失效条件和未建模限制，不设计未知路线或执行真实排程。"
             ]
           },
           "id": "operations-research-analysts.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12296,12 +12347,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "核心流程为：与利益相关方确认目标、约束和评价指标。；收集运营数据并查缺失、偏差和时间口径。；建立优化、预测或仿真模型。；比较成本、时间、资源与服务水平的取舍。。"
+              "先与业务方确认决策问题和评价目标，再核数据、定义变量与约束，求解并比较方案；检验模型和参数变化后，解释假设与限制，并与执行方跟踪实施结果。"
             ]
           },
           "id": "operations-research-analysts.profile.work-context-block.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12324,12 +12376,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "常用工具和系统：电子表格、SQL、Python或R、优化求解器、仿真和可视化工具。"
+              "O*NET热技术页按2025全年美国招聘列46项软件技能：Excel26%、Office18%、PowerPoint15%、SQL11%、Power BI和Tableau各10%、Python5%、R2%。分母为关联15-2031的唯一招聘信息，分子为提及该技能的唯一信息；不是部署率、能力重要性或每个职位的必需条件。具体求解器与仿真工具按目标岗位核。"
             ]
           },
           "id": "operations-research-analysts.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-hot-tech"
           ],
           "type": "prose"
         },
@@ -12338,12 +12390,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "与相邻岗位相比，本职业负责问题建模与决策支持，不等同只做报表的数据分析或直接做管理批准。"
+              "运筹分析侧重把运营决策转成目标、约束和模型，并比较可实施方案；工作可与数据科学、统计和管理分析交叉，也包括验证、沟通及协作实施。具体批准权依组织分工，不能仅凭职名推定。"
             ]
           },
           "id": "operations-research-analysts.profile.work-context-block.6",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12352,12 +12405,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "合格交付要能证明：可复现模型、输入数据字典、情景比较和决策说明。"
+              "对于虚构练习，可准备可复现模型、输入数据字典、情景比较和决策说明；这些是编辑学习示例，不是所有雇主的统一交付标准。"
             ]
           },
           "id": "operations-research-analysts.profile.career-quick-answers-block.7",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-editorial",
+            "or-details"
           ],
           "type": "prose"
         },
@@ -12366,12 +12420,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "美国职业范围与中国岗位名称或许可不必一一对应；本地要求按地区和雇主核。"
+              "既需数学建模与数据验证，也需解释目标冲突、识别不可行约束，并与业务和执行团队沟通；会求解不等于问题定义正确。"
             ]
           },
           "id": "operations-research-analysts.profile.definition-block.8",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-ooh",
+            "or-editorial"
           ],
           "type": "prose"
         }
@@ -12388,12 +12444,19 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "数据科学家主要做广泛数据建模与机器学习，本职业更重负责问题建模与决策支持，不等同只做报表的数据分析或直接做管理批准。"
+              "这些职业在数据、方法和实施任务上可能交叉；应比较实际问题、产出与准备条件，不假定排他边界或权限互认。"
             ]
           },
           "id": "operations-research-analysts.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-editorial",
+            "or-neighbor-ds",
+            "or-neighbor-stat",
+            "or-neighbor-management",
+            "or-neighbor-logistics",
+            "or-neighbor-math",
+            "or-neighbor-industrial"
           ],
           "type": "prose"
         },
@@ -12402,12 +12465,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "统计学家重点为统计设计与推断，职业任务和训练不同。"
+              "比较使用各职业自己的O*NET定义及已读任务，不能据此证明准入规则、转岗距离或成功率。"
             ]
           },
           "id": "operations-research-analysts.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-neighbor-ds",
+            "or-neighbor-stat",
+            "or-neighbor-management",
+            "or-neighbor-logistics",
+            "or-neighbor-math",
+            "or-neighbor-industrial"
           ],
           "type": "prose"
         },
@@ -12416,12 +12485,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "管理分析师偏组织流程与管理建议，应看最终产出而非相似称呼。"
+              "下表按典型任务与产出比较运筹分析师及六个相关职业，职名相近或共享工具仅是探索起点。"
             ]
           },
           "id": "operations-research-analysts.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-neighbor-ds",
+            "or-neighbor-stat",
+            "or-neighbor-management",
+            "or-neighbor-logistics",
+            "or-neighbor-math",
+            "or-neighbor-industrial"
           ],
           "type": "prose"
         },
@@ -12430,12 +12505,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "数据科学家与本职业区别：运筹分析更重约束和优化决策。"
+              "数据科学可涉及预测与优化；运筹更聚焦给定目标和约束下的方案比较，两者可交叉。"
             ]
           },
           "id": "operations-research-analysts.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-neighbor-ds",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12444,12 +12521,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "选择数据科学家更适合喜欢探索预测模型。"
+              "若更关注数据特征、预测或分析应用，可考察数据科学任务。"
             ]
           },
           "id": "operations-research-analysts.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-neighbor-ds",
+            "or-editorial"
           ],
           "type": "prose"
         }
@@ -12471,7 +12550,8 @@
           },
           "id": "operations-research-analysts.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12480,12 +12560,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用虚构样本认识问题定义。"
+              "用题定虚构班次案例练目标、约束及独立复算；练习用于学习，不是胜任考核。"
             ]
           },
           "id": "operations-research-analysts.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12494,12 +12575,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在岗者"
+              "在岗分析者"
             ]
           },
           "id": "operations-research-analysts.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12508,12 +12590,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核可复现模型、输入数据字典、情景比较和决策说明并守授权。"
+              "在获准且界定的输入上试用工具，以独立算式和已知案例对照输出；记录错误与限制，不预设收益。"
             ]
           },
           "id": "operations-research-analysts.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12522,12 +12605,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "带班者"
+              "团队或项目负责人"
             ]
           },
           "id": "operations-research-analysts.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12536,12 +12620,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检查目标与约束设定、数据质量判断和方案采纳责任和异常升级。"
+              "核实际项目中谁确认目标、复核数据和模型、发布变更及采纳方案，并依组织验证与异常处理流程。"
             ]
           },
           "id": "operations-research-analysts.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12550,12 +12635,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "转岗者"
+              "转岗探索者"
             ]
           },
           "id": "operations-research-analysts.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12564,12 +12650,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "补目标设备或岗位训练，核资格。"
+              "比较目标岗位的数学方法、编程、行业知识和协作任务，列训练缺口，不把短课当岗位保证。"
             ]
           },
           "id": "operations-research-analysts.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         }
@@ -12586,7 +12673,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国运筹分析师全国同口径工资中位数未取得。2025规模以上企业专业技术人员年税前年均155,491元，只建模与决策支持任务方向宽岗位背景；含其他专业岗位，非本职业工资或个人区间，政府机关与管理批准岗另核，不含个体自由职业。"
+              "2025年规模以上企业专业技术人员税前年平均155491元，其中科学研究和技术服务业该岗位均值172877元。统计包含多种专业职业；本页将其作为宽岗位及特定行业背景，不是运筹分析师样本、中位数、起薪或个人收入区间，不覆盖个体工商户和自由职业者，不能自动套用于政府机关。"
             ]
           },
           "id": "operations-research-analysts.china-salary.career-snapshot-primary-locale.1",
@@ -12650,12 +12737,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确职业15-2031.00在2025年薪中位数为88,940美元；统计分布不代表个人合同。"
+              "2025年美国运筹分析师年薪中位数为88,940美元，这是职业工资分布统计，不是个人合同报价或起薪。"
             ]
           },
           "id": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-2025-35-15-2031"
+            "or-wages"
           ],
           "type": "prose"
         },
@@ -12664,12 +12751,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分位以同职业官方明细为准，不能把父类或相邻职业的分位搬来。"
+              "2025年P10为57,060美元/年，是工资分布中的一个位置，不是法定最低工资或入职起薪。"
             ]
           },
           "id": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "or-wages"
           ],
           "type": "prose"
         },
@@ -12678,12 +12765,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "地区、行业、班制、工时、经验和资格可改变实际报价。"
+              "中位数描述工资分布的中间位置，不代表职级、起薪或个人报价。"
             ]
           },
           "id": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "or-wages"
           ],
           "type": "prose"
         },
@@ -12692,12 +12779,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年美国在岗约113100人，统计范围为15-2031.00。"
+              "2025年P90为159,910美元/年，仍有工资高于该位置，不是最高收入或个人报价。"
             ]
           },
           "id": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-2025-35-15-2031"
+            "or-wages"
           ],
           "type": "prose"
         },
@@ -12706,12 +12793,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国15-2031精确职业2025—2035总体增长11.9%、官方净增13,500人，年均7,500空缺含替补；空缺非净变化当前招聘，预测非AI采用替代或个人失业。"
+              "美国与中国工资统计的总体、市场和制度不同，换算币种不能得到中国职业工资估计或可比个人报价。"
             ]
           },
           "id": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls-2025-35-15-2031"
+            "or-wages",
+            "or-nbs",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12720,12 +12809,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资与预测不能代替中国工资或个人录用概率。"
+              "中位数是分布中点，不是起薪，具体岗位、地点、工时与报价应另核。"
             ]
           },
           "id": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "or-wages",
+            "or-nbs",
+            "or-editorial"
           ],
           "type": "prose"
         }
@@ -12742,13 +12833,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "能追问数据质量、假设和边界，并把优化结果讲给非技术决策者。",
-              "能追问数据质量、假设和边界，并把优化结果讲给非技术决策者。"
+              "是否愿意把模糊运营问题整理为可检查的变量和约束？",
+              "是否愿意反复核数据、单位和记录，而不只追求一次求解结果？"
             ]
           },
           "id": "operations-research-analysts.fit.riasec-fit-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-summary",
+            "or-editorial"
           ],
           "type": "list"
         },
@@ -12757,13 +12849,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "愿持续执行问题定义与数据核验。",
-              "愿持续执行问题定义与数据核验。"
+              "模型结果不符合预期时，是否保留检验记录并查找原因？",
+              "收到业务方或同伴反例后，是否说明哪些假设或约束需要修改？"
             ]
           },
           "id": "operations-research-analysts.fit.personality-fit-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-editorial"
           ],
           "type": "list"
         },
@@ -12772,13 +12865,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "能把可复现模型、输入数据字典、情景比较和决策说明交给下一责任人。",
-              "能把可复现模型、输入数据字典、情景比较和决策说明交给下一责任人。"
+              "业务访谈与独立建模各需要哪些准备和支持？",
+              "能否用书面模型说明与口头讨论互相核对，而不把沟通方式固定为类型限制？"
             ]
           },
           "id": "operations-research-analysts.fit.personality-fit-block.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-editorial"
           ],
           "type": "list"
         },
@@ -12787,13 +12880,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "异常时按程序停下并升级。",
-              "异常时按程序停下并升级。"
+              "被要求更改目标函数时，能否区分个人偏好、业务目标与不可更改的约束？",
+              "意见冲突时，能否记录争议和证据，并交实际责任人决定取舍？"
             ]
           },
           "id": "operations-research-analysts.fit.personality-fit-block.4",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-editorial"
           ],
           "type": "list"
         },
@@ -12802,13 +12895,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "不愿承担目标错设风险须谨慎。",
-              "不愿承担目标错设风险须谨慎。"
+              "能否说明班次数为何取整数，以及容量约束中的单位？",
+              "能否发现23件需求下原2B方案不可行，并解释原因？"
             ]
           },
           "id": "operations-research-analysts.fit.personality-fit-block.5",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-ooh",
+            "or-editorial"
           ],
           "type": "list"
         },
@@ -12817,13 +12911,15 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "忽视目标与约束设定、数据质量判断和方案采纳责任不宜独立工作。",
-              "忽视目标与约束设定、数据质量判断和方案采纳责任不宜独立工作。"
+              "能否先复述执行团队担心的服务或产能问题，再解释方案？",
+              "模型有遗漏时，能否承认并说明需要补什么资料，而不是为原结论辩护？"
             ]
           },
           "id": "operations-research-analysts.fit.riasec-fit-block.6",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-ooh",
+            "or-editorial"
           ],
           "type": "list"
         },
@@ -12832,12 +12928,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能力判断可观察受监督建模、数据核验及决策说明反馈；兴趣只作探索，不证明模型质量或批准权。"
+              "O*NET给本职业的兴趣代码为IC。研究型线索可联系数学问题探索，常规型线索可联系按程序整理数据与信息；它们描述职业活动，不表示个人必须有某种分数，也不能证明建模或决策能力。"
             ]
           },
           "id": "operations-research-analysts.fit.personality-fit-block.7",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-summary",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12846,12 +12943,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "试作只使用虚构信息，真实任务须按资格和监督边界。"
+              "依据本职业O*NET兴趣段，未取得本站兴趣结果预测运筹工作表现的验证。"
             ]
           },
           "id": "operations-research-analysts.fit.personality-fit-block.8",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-summary",
+            "or-editorial"
           ],
           "type": "prose"
         }
@@ -12868,7 +12966,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "目标错设：只优化单一成本而漏服务或公平约束。；可能导致方案在现实中不可接受。。控制：与业务方复核目标和限制。"
+              "目标错设：只优化单一成本而漏服务或公平约束；可能导致方案在现实中不可接受。控制：与业务方复核目标和限制。"
             ]
           },
           "id": "operations-research-analysts.risk.career-risk-cards.1",
@@ -12882,7 +12980,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "数据偏差：样本过时或缺失。；可能导致模型输出误导决策。。控制：做质量检查和敏感性分析。"
+              "数据偏差：样本过时或缺失；可能导致模型输出误导决策。控制：做质量检查和敏感性分析。"
             ]
           },
           "id": "operations-research-analysts.risk.career-risk-cards.2",
@@ -12896,12 +12994,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "约束遗漏：未计产能、法规或人工规则。；可能导致方案不可执行。。控制：让执行方审模型。"
+              "O*NET提供任务与模型验证背景；风险场景和动作是编辑核对，不是发生率、法律义务或所有机构规程。"
             ]
           },
           "id": "operations-research-analysts.risk.career-risk-cards.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12910,12 +13009,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "求解过拟合：模型只在历史情景有效。；可能导致需求变化时失效。。控制：保留压力情景和备选方案。"
+              "模型沿用历史需求、成本或容量，未检查当前条件是否仍成立。"
             ]
           },
           "id": "operations-research-analysts.risk.career-risk-cards.4",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12924,12 +13024,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "共同升级：遇到设备、人员、资料或授权异常先暂停，留痕并交有权限人员。"
+              "关键数据无法核实、目标或约束存在争议，或结果超出已验证范围时，记录受影响结论并交实际项目责任人决定下一步；是否暂停真实运营依风险和现场程序处理。"
             ]
           },
           "id": "operations-research-analysts.risk.career-risk-cards.5",
           "source_refs": [
-            "source-pack-onet-details"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         }
@@ -12946,13 +13047,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "安全探索只用虚构样本：比较配送路线或班次，写目标、约束、敏感性与失败条件，不改变真实运营。题面：一天必须送完20件；整班A容量12件、费用100元，整班B容量10件、费用90元，各最多2班，可少装，费用与装载量无关，班数非负整数。只在A+B、2A、2B三案比较总费用，列容量和未用容量，再把需求改为23件复核；不把三个候选最优称为真实业务全局最优。"
+              "虚构纸面练习：比较题定班次组合，不处理真实客户、路线或运营。题面：一天必须送完20件；整班A容量12件、费用100元，整班B容量10件、费用90元，各最多2班，可少装，费用与装载量无关，班数非负整数。只在A+B、2A、2B三案比较总费用，列容量和未用容量，再把需求改为23件复核；不把三个候选最优称为真实业务全局最优。 未给出的路程、送达时窗、人员和公平要求不等于不存在，不能据此评价真实配送可行性或个人职业胜任。"
             ]
           },
           "id": "operations-research-analysts.path.recruitment-sample.1",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "or-editorial"
           ],
+          "title": "虚构班次比较题面",
           "type": "notice"
         },
         {
@@ -12960,12 +13062,13 @@
           "copy_key": "career.item.recruitment-signals",
           "data": {
             "paragraphs": [
-              "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。；真实职责依当地规则和雇主授权，转岗须补目标岗位训练。"
+              "BLS描述美国典型入职要求为至少本科，部分雇主要求或偏好硕士；数学、编程和行业知识仍须实践积累。应核具体岗位，不把课程或学历当作数据访问、发布或方案批准权。"
             ]
           },
           "id": "operations-research-analysts.path.recruitment-signals.2",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "or-ooh",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -12974,12 +13077,12 @@
           "copy_key": "career.item.entry-work-sample-data",
           "data": {
             "paragraphs": [
-              "参考交付：20件时A+B容量22费190未用2；2A容量24费200未用4；2B容量20费180未用0，三案都可行，2B最低。需求23时只有2A容量24可行，费200未用1；原低成本方案失效。交数据字典、三案可行性费用表、需求敏感性、遗漏时窗/路程/公平限制说明。数学训练不等于真实调度批准权。"
+              "参考交付：20件时A+B容量22费190未用2；2A容量24费200未用4；2B容量20费180未用0，三案都可行，2B最低。需求23时只有2A容量24可行，费200未用1；原低成本方案失效。交数据字典、三案可行性费用表、需求敏感性、遗漏时窗/路程/公平限制说明。数学训练不等于真实调度批准权。 这展示题定模型的计算与说明，不证明真实数据判断、业务协商或职业胜任，也不产生排程批准权。"
             ]
           },
           "id": "operations-research-analysts.path.entry-work-sample-data.3",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "or-editorial"
           ],
           "type": "notice"
         },
@@ -12994,48 +13097,57 @@
               "work_evidence",
               "possible_check"
             ],
+            "column_labels": [
+              "任务环节",
+              "可练习的任务",
+              "责任边界",
+              "可检查产物",
+              "复核问题"
+            ],
             "rows": [
               [
                 "问题定义",
-                "与利益相关方确认目标、约束和评价指标。",
-                "目标与约束设定、数据质量判断和方案采纳责任",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "核问题定义记录"
+                "写决策、目标和候选",
+                "不自行决定业务价值",
+                "问题陈述与假设表",
+                "遗漏了谁的目标？"
               ],
               [
                 "数据核验",
-                "收集运营数据并查缺失、偏差和时间口径。",
-                "目标与约束设定、数据质量判断和方案采纳责任",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "核数据核验记录"
+                "核单位、来源和缺值",
+                "不补造未知数据",
+                "数据字典与问题清单",
+                "哪些缺项改变结论？"
               ],
               [
                 "模型构建",
-                "建立优化、预测或仿真模型。",
-                "目标与约束设定、数据质量判断和方案采纳责任",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "核模型构建记录"
+                "写变量、约束并测试",
+                "运行不证明模型正确",
+                "模型、代码和反例测试",
+                "约束是否对应题意？"
               ],
               [
                 "情景求解",
-                "比较成本、时间、资源与服务水平的取舍。",
-                "目标与约束设定、数据质量判断和方案采纳责任",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "核情景求解记录"
+                "分列可行性和费用",
+                "不扩称真实业务最优",
+                "三案比较及推荐理由",
+                "为何淘汰不可行方案？"
               ],
               [
                 "敏感性测试",
-                "改变需求或约束，检查方案稳健性。",
-                "目标与约束设定、数据质量判断和方案采纳责任",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "核敏感性测试记录"
+                "改需求并解释失效",
+                "情景不是概率预测",
+                "20与23件比较",
+                "什么条件需要重评？"
               ]
             ]
           },
           "id": "operations-research-analysts.path.entry-role-comparison.4",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "or-details",
+            "or-editorial"
           ],
+          "title": "入门任务与可检查产物",
           "type": "table"
         },
         {
@@ -13068,8 +13180,10 @@
           },
           "id": "operations-research-analysts.path.employer-evidence.5",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "or-details",
+            "or-editorial"
           ],
+          "title": "任务练习核对点（编辑示例）",
           "type": "cards"
         },
         {
@@ -13081,28 +13195,28 @@
                 "id": "or-portfolio-routing",
                 "values": [
                   "问题定义样本",
-                  "记录20件/整班整数/容量费用及三候选，只比较给定三案，不假设真实配送规则。"
+                  "写明20件需求、目标费用及三个候选，区分题定条件与未给资料。"
                 ]
               },
               {
                 "id": "or-portfolio-staffing",
                 "values": [
                   "数据核验样本",
-                  "数据字典核A(12,100)、B(10,90)、各最多2班与可少装整班定价，不混工资统计。"
+                  "列A容量12、费用100，B容量10、费用90，各最多2班，可少装且按整班计费，并保留单位。"
                 ]
               },
               {
                 "id": "or-portfolio-inventory",
                 "values": [
                   "模型与情景样本",
-                  "列三案容量成本，20件选2B费180；23件只有2A费200，附失败条件与模型局限。"
+                  "展示20件选2B费用180、23件只有2A可行费用200的三案比较，附算式、失效条件和限制。"
                 ]
               }
             ]
           },
           "id": "operations-research-analysts.path.entry-portfolio.6",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "or-editorial"
           ],
           "type": "cards"
         },
@@ -13116,37 +13230,45 @@
               "boundary",
               "possible_check"
             ],
+            "column_labels": [
+              "情境",
+              "问题描述",
+              "建议核对",
+              "可讨论的问题"
+            ],
             "rows": [
               [
                 "目标错设",
                 "只优化单一成本而漏服务或公平约束。",
                 "与业务方复核目标和限制。",
-                "核目标错设处置"
+                "如果成本降低却服务恶化，应找谁确认目标？"
               ],
               [
                 "数据偏差",
                 "样本过时或缺失。",
                 "做质量检查和敏感性分析。",
-                "核数据偏差处置"
+                "数据缺失时，哪些结果不能继续引用？"
               ],
               [
                 "约束遗漏",
                 "未计产能、法规或人工规则。",
                 "让执行方审模型。",
-                "核约束遗漏处置"
+                "求解结果违反实际产能时，如何追查遗漏约束？"
               ],
               [
-                "求解过拟合",
-                "模型只在历史情景有效。",
-                "保留压力情景和备选方案。",
-                "核求解过拟合处置"
+                "情景与参数失配",
+                "模型沿用历史需求、成本或容量，未检查当前条件是否仍成立。",
+                "保留输入版本和基准结果，测试需求与容量变化，标明失效条件及未建模限制。",
+                "需求改变后原方案失效，怎样保留并解释重算记录？"
               ]
             ]
           },
           "id": "operations-research-analysts.path.interview-probation.7",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "or-editorial",
+            "or-details"
           ],
+          "title": "可讨论的面试情境示例",
           "type": "table"
         },
         {
@@ -13172,14 +13294,14 @@
                 "id": "or-day-5-7",
                 "values": [
                   "第5—7天：压力与说明",
-                  "需求23重算只有2A可行200，写假设遗漏/敏感性/决策说明，交可复现表，不执行真实排程。"
+                  "需求23重算只有2A可行200，写假设遗漏/敏感性/决策说明，交可复现表，不执行真实排程。 有条件时请他人复核算式及已知、未知的区分，否则保存明确标为自查的记录；反馈用于学习，不认证模型或个人胜任。"
                 ]
               }
             ]
           },
           "id": "operations-research-analysts.path.seven-day-trial.8",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "or-editorial"
           ],
           "type": "timeline"
         },
@@ -13188,12 +13310,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。；真实职责依当地规则和雇主授权，转岗须补目标岗位训练。"
+              "写明决策、候选和未解决问题。"
             ]
           },
           "id": "operations-research-analysts.path.career-path-block.9",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         },
@@ -13210,67 +13333,79 @@
               "audience",
               "proof_method"
             ],
+            "column_labels": [
+              "准备阶段",
+              "可检查材料",
+              "所核条件",
+              "待核信息",
+              "边界",
+              "使用对象",
+              "核实方法"
+            ],
             "rows": [
               [
                 "岗位观察",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "学习者",
-                "核课程、授权和反馈"
+                "任务清单与真实职位记录",
+                "美国典型至少本科，部分雇主要求或偏好硕士",
+                "目标雇主实际学历与任务",
+                "美国典型条件不等于中国准入",
+                "探索者",
+                "读职位原文并记录来源日期"
               ],
               [
                 "基础训练",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
+                "小模型、算式与代码测试",
+                "相关数学和编程基础",
+                "课程内容与先修要求",
+                "课程通过不证明职业胜任",
                 "学习者",
-                "核课程、授权和反馈"
+                "对照课程内容及独立练习反馈"
               ],
               [
                 "受监督实践",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "学习者",
-                "核课程、授权和反馈"
+                "数据字典、模型修订和反馈",
+                "实际数据与工具使用条件",
+                "可访问数据、监督人及项目范围",
+                "不把虚构样例包装为真实经历",
+                "实践者",
+                "向项目方核范围并保留真实记录"
               ],
               [
-                "资格核验",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "从业者",
-                "核课程、授权和反馈"
+                "任职条件核验",
+                "职位条件与待核清单",
+                "具体法域、行业及雇主条件",
+                "是否涉及额外行业资格或许可",
+                "本页未核全部地区的个人许可",
+                "求职者",
+                "回到具体主管规则与雇主说明"
               ],
               [
-                "独立交接",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "从业者",
-                "核课程、授权和反馈"
+                "界定任务交接",
+                "版本、测试、假设和交接说明",
+                "项目分工及模型发布条件",
+                "谁复核、谁发布、谁采纳方案",
+                "熟练度不自动产生批准权",
+                "承担任务者",
+                "与实际项目责任人确认"
               ],
               [
                 "进阶复盘",
-                "可复现模型、输入数据字典、情景比较和决策说明",
-                "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "从业者",
-                "核课程、授权和反馈"
+                "实际结果与模型偏差说明",
+                "后续方法与行业训练需求",
+                "哪些假设已改变、如何更新",
+                "无真实项目时不编造效果",
+                "在岗者",
+                "用可比数据和团队反馈复核"
               ]
             ]
           },
           "id": "operations-research-analysts.path.credential-decision.10",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "or-ooh",
+            "or-details",
+            "or-editorial"
           ],
+          "title": "学习与任职条件核对示例",
           "type": "table"
         }
       ]
@@ -13342,12 +13477,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻职业要比较负责问题建模与决策支持，不等同只做报表的数据分析或直接做管理批准及具体训练。"
+              "运筹分析侧重把运营决策转成目标、约束和模型，并比较可实施方案；工作可与数据科学、统计和管理分析交叉，也包括验证、沟通及协作实施。具体批准权依组织分工，不能仅凭职名推定。"
             ]
           },
           "id": "operations-research-analysts.market-signals.market-signal-card.5",
           "source_refs": [
-            "source-pack-onet-summary"
+            "or-details",
+            "or-editorial"
           ],
           "type": "prose"
         }
@@ -13374,43 +13510,46 @@
                 ]
               },
               {
-                "answer": "与利益相关方确认目标、约束和评价指标。；收集运营数据并查缺失、偏差和时间口径。；建立优化、预测或仿真模型。；比较成本、时间、资源与服务水平的取舍。",
+                "answer": "与业务方确认目标和约束，核验数据，构建并测试模型，比较可行方案；解释假设与限制，再与执行团队复核实施结果。",
                 "id": "operations-research-analysts.faq.2",
                 "question": "关键任务有哪些？",
                 "question_key": "career.faq.operations-research-analysts.2",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "or-details"
                 ]
               },
               {
-                "answer": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
+                "answer": "BLS描述美国典型入职要求为至少本科，部分雇主要求或偏好硕士；相关数学与编程准备重要，具体岗位要求有别。 数学、编程、行业知识及实际任职条件分别核；学历不授予数据访问或方案批准权。",
                 "id": "operations-research-analysts.faq.3",
                 "question": "入行需要什么？",
                 "question_key": "career.faq.operations-research-analysts.3",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "or-ooh",
+                  "or-editorial"
                 ]
               },
               {
-                "answer": "目标错设：只优化单一成本而漏服务或公平约束。；与业务方复核目标和限制。",
+                "answer": "目标可能遗漏服务、公平或其他重要条件，使数学上看似有利的结果在实际中无法接受；应向实际利益相关方核目标与约束。这是编辑示例，不是风险发生率或严重程度排名。",
                 "id": "operations-research-analysts.faq.4",
-                "question": "工作中最大风险？",
+                "question": "一项重要建模风险是什么？",
                 "question_key": "career.faq.operations-research-analysts.4",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "or-details",
+                  "or-editorial"
                 ]
               },
               {
-                "answer": "不能；目标与约束设定、数据质量判断和方案采纳责任由有权限人员核。",
+                "answer": "不能由本页给所有系统下统一结论。限定的代码或表格任务可设自动执行，真实模型须核输入、测试、适用范围及决策程序；自动执行不等于免除组织责任。",
                 "id": "operations-research-analysts.faq.5",
                 "question": "AI能独立完成吗？",
                 "question_key": "career.faq.operations-research-analysts.5",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "or-editorial",
+                  "or-ilo"
                 ]
               },
               {
-                "answer": "证据不足：中国同职业全国中位分位起薪未取得。2025规模以上企业专业技术宽岗位年税前年均155491元，仅建模与专业决策支持方向，含其他专业岗位非运筹工资个人区间；科研技术服务企业同人口172877仅该行业雇主子组，政府机关另核，不含个体自由职业。",
+                "answer": "2025年规模以上企业专业技术人员税前年平均155491元，其中科学研究和技术服务业该岗位均值172877元。统计包含多种专业职业；本页将其作为宽岗位及特定行业背景，不是运筹分析师样本、中位数、起薪或个人收入区间，不覆盖个体工商户和自由职业者，不能自动套用于政府机关。",
                 "id": "operations-research-analysts.faq.6",
                 "question": "中国工资是多少？",
                 "question_key": "career.faq.operations-research-analysts.6",
@@ -13419,21 +13558,22 @@
                 ]
               },
               {
-                "answer": "美国15-2031在2025中位年薪88940美元；2025—2035总体增长11.9%、净增13500人，年均7500空缺含替补，非当前招聘、AI采用替代或个人失业。",
+                "answer": "2025年美国年薪中位数为88,940美元；BLS预测就业从2025年113,100人至2035年126,600人，增长11.9%、净增13,500人。年均7,500个空缺含增长和替代需要，不是当前招聘、AI效果或个人录用概率。",
                 "id": "operations-research-analysts.faq.7",
                 "question": "美国工资和前景？",
                 "question_key": "career.faq.operations-research-analysts.7",
                 "source_refs": [
+                  "or-wages",
                   "bls-2025-35-15-2031"
                 ]
               },
               {
-                "answer": "用虚构配送需求设计两种路线或班次方案，写清目标函数、约束、敏感性与失败条件",
+                "answer": "用本页题定的A+B、2A、2B三种班次组合，比较20件需求下的容量、费用与未用容量，再将需求改为23件复核。记录目标、约束、失效条件和未建模限制，不设计未知路线或执行真实排程。",
                 "id": "operations-research-analysts.faq.8",
                 "question": "如何安全探索？",
                 "question_key": "career.faq.operations-research-analysts.8",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "or-editorial"
                 ]
               }
             ]
@@ -13449,7 +13589,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "美国15-2031.00精确职业与中国岗位分开；工资和预测保留年份及统计范围。"
+              "美国15-2031.00精确职业与中国岗位分开；工资和预测保留年份及统计范围。 证据只支持运筹学分析师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。"
             ]
           },
           "id": "operations-research-analysts.sources.boundary-notice.2",
@@ -13541,7 +13681,7 @@
                 "url": "https://www.onetonline.org/link/localcert/15-2031.00"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-11-08",
                 "details": [
                   "美国职业范围。"
                 ],
@@ -13556,39 +13696,39 @@
                 "url": "https://www.onetonline.org/link/details/15-2031.00"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-11-08",
                 "details": [
                   "招聘广告提及率不是能力重要性或录用保证。"
                 ],
                 "evidence_type": "官方职业页招聘技术信号",
                 "id": "or-hot-tech",
-                "limitation": "招聘广告提及率不是能力重要性或录用保证。",
+                "limitation": "关联15-2031的美国唯一招聘信息中技能提及占比，不是部署、重要性、AI采用率或统一要求。",
                 "market": "US",
                 "name": "Hot technologies for Operations Research Analysts",
-                "period": "2025招聘信息",
+                "period": "2025-01-01–2025-12-31; accessed 2026-11-08",
                 "publisher": "O*NET OnLine / Lightcast",
                 "scope": "market_signal",
                 "url": "https://www.onetonline.org/link/hot_tech/15-2031.00"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-11-08",
                 "details": [
-                  "全球暴露研究，不是该职业的失业概率预测。"
+                  "已读摘要、方法、抽样及限制指定章；这是跨职业任务暴露研究，不验证本页评分或工具效果。"
                 ],
                 "evidence_type": "国际组织AI任务研究",
                 "id": "or-ilo",
                 "limitation": "全球暴露研究，不是该职业的失业概率预测。",
                 "market": "GLOBAL",
-                "name": "Generative AI and Jobs: A Refined Global Index",
-                "period": "2025",
+                "name": "ILO第140号工作论文：生成式AI与就业——精细化全球职业暴露指数",
+                "period": "2025; selected original sections read 2026-11-08",
                 "publisher": "International Labour Organization",
                 "scope": "market_signal",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.ilo.org/sites/default/files/2025-05/WP140_web.pdf"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-08",
                 "details": [
-                  "表6规模以上企业专业技术人员155491元年税前年均；表7科研技术服务业同岗位人口172877元，仅该行业企业雇主方向。",
+                  "2025年规模以上企业专业技术人员税前年平均155491元，其中科学研究和技术服务业该岗位均值172877元。统计包含多种专业职业；本页将其作为宽岗位及特定行业背景，不是运筹分析师样本、中位数、起薪或个人收入区间，不覆盖个体工商户和自由职业者，不能自动套用于政府机关。",
                   "作者按数学建模优化仿真数据验证决策支持任务匹配宽专业技术岗位，非管理批准权，不代表运筹工资。"
                 ],
                 "evidence_type": "官方工资统计",
@@ -13599,25 +13739,25 @@
                 "period": "2025年工资；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-11-08",
                 "details": [
-                  "自愿性跨行业框架，不替代所在地法律或组织授权。"
+                  "官方自愿组织风险框架概览，非GenAI Profile全文或本职业能力研究。"
                 ],
                 "evidence_type": "官方AI风险框架",
                 "id": "or-nist",
                 "limitation": "自愿性跨行业框架，不替代所在地法律或组织授权。",
                 "market": "US",
-                "name": "NIST AI RMF Generative AI Profile",
-                "period": "2024—2026",
+                "name": "NIST AI风险管理框架概览",
+                "period": "2026-11-08读取官方概览",
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "market_signal",
-                "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-11-08",
                 "details": [
                   "美国职业范围；就业数据来自BLS。"
                 ],
@@ -13647,9 +13787,9 @@
                 "url": "https://www.onetonline.org/link/updates/15-2031.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-08",
                 "details": [
-                  "2025精确15-2031年薪五分位57060/68360/88940/125990/159910美元。"
+                  "2025年美国15-2031年薪分位：P10为57,060美元、P25为68,360美元、P50为88,940美元、P75为125,990美元、P90为159,910美元。"
                 ],
                 "evidence_type": "官方工资统计",
                 "id": "or-wages",
@@ -13798,20 +13938,148 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "与利益相关方确认目标、约束和评价指标。 — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "建立优化、预测或仿真模型。 — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "比较成本、时间、资源与服务水平的取舍。 — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "本页编辑情景指数，三个限定信息产出等权，floor((50+75+75)/3+0.5)=67，不是代表职业全任务的实测比例。",
+                  "50档假设实质辅助，需较多问题澄清和修订；75档假设在完整给定输入与规则时，多数信息草稿可由工具形成并接受核对。档位是编辑判断假设，未做本职业效果测量。",
+                  "50/100：把业务方已确认的目标、容量、成本与服务要求整理为候选目标和约束清单。工具不替业务方决定价值取舍或补造限制；对应task_rows[0]。",
+                  "75/100：只针对本页完整题定的A/B整数班次问题，形成变量、容量约束和枚举代码草稿，须用参考算式及可行、不可行案例核对；不是任意真实优化模型的能力比例，对应task_rows[2]。",
+                  "75/100：只针对本页三案与20/23件需求，形成可行性、成本比较及说明草稿；逐数复算，不扩称未知路线或真实业务全局最优，对应task_rows[3]。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "limitation": "67是预设情景档位的编辑汇总，尚未验证评分可靠性、职业代表性、实际节时或输出质量。O*NET提供任务背景，ILO提供暴露方法边界，均未验证本分数；真实数据、模型上线和方案采纳依实际机构的验证、访问和决策程序。",
                 "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "period": "估算规则v1日期2026-10-18；2026-11-08明确情景范围，未开展能力实验。",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "运筹分析中三个选定信息产出的假设情景，未验证职业代表性。",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "编辑建议与外部职业事实分别标明。",
+                  "虚构案例或任务清单不认证胜任，也不授予实际运营权限。"
+                ],
+                "evidence_type": "编辑综合及虚构教学示例",
+                "id": "or-editorial",
+                "limitation": "仅支持所述范围，不证明转岗资格、工具实测效果或经验证招聘标准。",
+                "market": "编辑说明",
+                "name": "费马测试编辑部：职业探索说明",
+                "period": "2026-11-08读取或编写",
+                "publisher": "FermatMind / 费马测试",
+                "scope": "contextual",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "实际读取定义或指定原章，不声称完整准入或许可核查。",
+                  "具体岗位、机构与法域另核。"
+                ],
+                "evidence_type": "官方职业任务、教育、行业工资与前景",
+                "id": "or-ooh",
+                "limitation": "仅支持所述范围，不证明转岗资格、工具实测效果或经验证招聘标准。",
+                "market": "美国",
+                "name": "BLS职业展望手册：运筹分析师",
+                "period": "2026-11-08读取或编写",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/math/operations-research-analysts.htm"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "实际读取定义或指定原章，不声称完整准入或许可核查。",
+                  "具体岗位、机构与法域另核。"
+                ],
+                "evidence_type": "官方定义与已读指定任务背景",
+                "id": "or-neighbor-ds",
+                "limitation": "仅支持所述范围，不证明转岗资格、工具实测效果或经验证招聘标准。",
+                "market": "美国",
+                "name": "O*NET 15-2051.00职业定义",
+                "period": "2026-11-08读取或编写",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-2051.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "实际读取定义或指定原章，不声称完整准入或许可核查。",
+                  "具体岗位、机构与法域另核。"
+                ],
+                "evidence_type": "官方定义与已读指定任务背景",
+                "id": "or-neighbor-stat",
+                "limitation": "仅支持所述范围，不证明转岗资格、工具实测效果或经验证招聘标准。",
+                "market": "美国",
+                "name": "O*NET 15-2041.00职业定义",
+                "period": "2026-11-08读取或编写",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-2041.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "实际读取定义或指定原章，不声称完整准入或许可核查。",
+                  "具体岗位、机构与法域另核。"
+                ],
+                "evidence_type": "官方定义与已读指定任务背景",
+                "id": "or-neighbor-management",
+                "limitation": "仅支持所述范围，不证明转岗资格、工具实测效果或经验证招聘标准。",
+                "market": "美国",
+                "name": "O*NET 13-1111.00职业定义",
+                "period": "2026-11-08读取或编写",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/13-1111.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "实际读取定义或指定原章，不声称完整准入或许可核查。",
+                  "具体岗位、机构与法域另核。"
+                ],
+                "evidence_type": "官方定义与已读指定任务背景",
+                "id": "or-neighbor-logistics",
+                "limitation": "仅支持所述范围，不证明转岗资格、工具实测效果或经验证招聘标准。",
+                "market": "美国",
+                "name": "O*NET 13-1081.00职业定义",
+                "period": "2026-11-08读取或编写",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/13-1081.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "实际读取定义或指定原章，不声称完整准入或许可核查。",
+                  "具体岗位、机构与法域另核。"
+                ],
+                "evidence_type": "官方定义与已读指定任务背景",
+                "id": "or-neighbor-math",
+                "limitation": "仅支持所述范围，不证明转岗资格、工具实测效果或经验证招聘标准。",
+                "market": "美国",
+                "name": "O*NET 15-2021.00职业定义",
+                "period": "2026-11-08读取或编写",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-2021.00"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "实际读取定义或指定原章，不声称完整准入或许可核查。",
+                  "具体岗位、机构与法域另核。"
+                ],
+                "evidence_type": "官方定义与已读指定任务背景",
+                "id": "or-neighbor-industrial",
+                "limitation": "仅支持所述范围，不证明转岗资格、工具实测效果或经验证招聘标准。",
+                "market": "美国",
+                "name": "O*NET 17-2112.00职业定义",
+                "period": "2026-11-08读取或编写",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/17-2112.00"
               }
             ]
           },
@@ -13857,24 +14125,28 @@
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "职业任务"
+            "href": "https://www.onetonline.org/link/summary/15-2051.00",
+            "label": "数据科学家：官方定义"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "label": "相邻职业"
+            "href": "https://www.onetonline.org/link/summary/15-2041.00",
+            "label": "统计师：官方定义"
           },
           {
-            "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "工作活动"
+            "href": "https://www.onetonline.org/link/summary/13-1111.00",
+            "label": "管理分析师：官方定义"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "label": "教育差异"
+            "href": "https://www.onetonline.org/link/summary/13-1081.00",
+            "label": "物流师：官方定义"
           },
           {
-            "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "职业边界"
+            "href": "https://www.onetonline.org/link/summary/15-2021.00",
+            "label": "数学家：官方定义"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/17-2112.00",
+            "label": "工业工程师：官方定义"
           }
         ],
         "evidence_note": {
@@ -13904,37 +14176,37 @@
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "核心工作与产出": "广泛数据建模与机器学习",
+            "核心工作与产出": "从结构化或非结构化数据提取、解释并报告信息，可用数据挖掘和机器学习。",
             "职业方向": "数据科学家"
           },
           {
-            "关键区别": "运筹分析更重运营方案求解",
-            "更适合什么选择": "喜欢推断方法",
-            "核心工作与产出": "统计设计与推断",
+            "关键区别": "统计工作可支持决策，应比较其数据收集与推断问题和运筹的方案求解，不划排他边界。",
+            "更适合什么选择": "若更关注研究设计、估计与不确定性，可考察统计任务。",
+            "核心工作与产出": "开发或应用统计方法收集、整理、解释数值数据。",
             "职业方向": "统计学家"
           },
           {
-            "关键区别": "不一定构建数学优化模型",
-            "更适合什么选择": "喜欢组织咨询",
-            "核心工作与产出": "组织流程与管理建议",
+            "关键区别": "管理分析也分析数据并协作实施，区别在项目问题和产物，不是是否做报表。",
+            "更适合什么选择": "若更关注访谈、流程评估和组织改进，可考察管理分析。",
+            "核心工作与产出": "研究组织与程序，提出系统、流程或组织改进建议。",
             "职业方向": "管理分析师"
           },
           {
-            "关键区别": "运筹分析可建物流模型但不必运营执行",
-            "更适合什么选择": "喜欢供应链执行",
-            "核心工作与产出": "供应链运行与协调",
+            "关键区别": "物流师也可重新设计物流流动，应比较持续协调与数学模型求解的侧重，实际任务可重叠。",
+            "更适合什么选择": "若更关注物料流动、客户和供应方协调，可考察物流任务。",
+            "核心工作与产出": "分析并协调采购、分配、交付等持续物流活动。",
             "职业方向": "物流师"
           },
           {
-            "关键区别": "运筹分析更直接解决运营约束",
-            "更适合什么选择": "喜欢理论研究",
-            "核心工作与产出": "数学理论与应用",
+            "关键区别": "数学家既有理论也有应用工作，不能等同纯理论；应比较具体数学问题与运营方案产物。",
+            "更适合什么选择": "若更关注数学方法本身及跨领域应用，可考察数学家任务。",
+            "核心工作与产出": "研究数学基础或将数学方法应用于科学、管理等问题。",
             "职业方向": "数学家"
           },
           {
-            "关键区别": "更常负责工程实施",
-            "更适合什么选择": "喜欢生产现场",
-            "核心工作与产出": "生产系统与工艺优化",
+            "关键区别": "工业工程也使用优化与统计，应比较生产系统设计评价和运筹项目的具体对象，不由职名判断是否现场或实施。",
+            "更适合什么选择": "若更关注生产系统、人机因素和工程评价，可考察工业工程任务。",
+            "核心工作与产出": "设计、测试和评价含人员、质量、库存、物流与成本的生产系统。",
             "职业方向": "工业工程师"
           }
         ],
@@ -13999,7 +14271,7 @@
             }
           }
         ],
-        "answer": "工具可辅助代码草稿、数据清理建议和方案摘要；目标与约束设定、数据质量判断和方案采纳责任必须由有权限人员核实。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
+        "answer": "代码、数据核对与方案说明可作为工具试用对象。这里的67%是三项限定信息产出的编辑情景指数，按预设50/75/75等权计算，不是实际自动化、节时或失业比例。输入和规则须先明确，输出须用独立算式或测试核对；目标取舍、真实上线和方案采纳按组织程序负责。",
         "authority_links": [
           {
             "来源": "职业任务",
@@ -14044,21 +14316,21 @@
             "链接": "https://www.onetonline.org/link/details/15-2031.00"
           }
         ],
-        "difference_intro": "代码、数据清理和摘要辅助为编辑试用建议；目标、约束、数据质量和方案采纳须人核，未取得单项AI效果实测。",
+        "difference_intro": "下列为按任务拆分的编辑试用建议，辅助能力取决于输入、系统和核对方式，未测本职业实际效率或替代率。",
         "difference_rows": [
           {
-            "AI主要改变": "辅助归纳记录与候选",
-            "仍由人负责": "目标与约束设定、数据质量判断和方案采纳责任",
+            "AI主要改变": "将已确认需求整理成目标和约束候选清单。",
+            "仍由人负责": "向业务方确认何者是硬约束、何者可权衡，不让生成内容补造公平或服务要求。",
             "方向": "问题定义"
           },
           {
-            "AI主要改变": "辅助归纳记录与候选",
-            "仍由人负责": "目标与约束设定、数据质量判断和方案采纳责任",
+            "AI主要改变": "草拟数据字典、缺失值检查或单位核对代码。",
+            "仍由人负责": "回到数据来源核时间窗、单位、连接键和缺失机制，记录不能解决的问题。",
             "方向": "数据核验"
           },
           {
-            "AI主要改变": "辅助归纳记录与候选",
-            "仍由人负责": "目标与约束设定、数据质量判断和方案采纳责任",
+            "AI主要改变": "为明确给定的小问题草拟变量、模型和求解代码。",
+            "仍由人负责": "核目标方向、变量取值、约束和结果可行性，用独立已知案例测试，不以代码能运行当模型正确。",
             "方向": "模型构建"
           }
         ],
@@ -14086,25 +14358,25 @@
             "链接": "https://www.onetonline.org/link/details/15-2031.00"
           },
           {
-            "使用限制": "具体授权按所在地和雇主。",
-            "来源": "教育与资格",
+            "使用限制": "美国典型教育不等于中国法律要求或组织的数据、决策权限。",
+            "来源": "BLS职业展望手册：教育",
             "研究对象": "运筹分析师",
-            "结论": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+            "结论": "美国典型入职要求为至少本科，部分雇主要求或偏好硕士。",
+            "链接": "https://www.bls.gov/ooh/math/operations-research-analysts.htm"
           },
           {
             "source_ref": "bls-2025-35-15-2031",
-            "使用限制": "非净增13500或当前招聘，非AI采用替代、个人失业或中国需求。",
+            "使用限制": "年均空缺不等于十年净增、当前招聘、AI采用、个人岗位流失或中国需求。",
             "来源": "BLS精确职业总体预测",
             "研究对象": "美国15-2031；2025—2035年",
             "结论": "总体增长11.9%，年均7500空缺含替补。",
             "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
-        "heading": "运筹分析师：工具辅助与人的控制",
+        "heading": "AI辅助：情景与验证",
         "method_cards": [
           {
-            "含义": "工具可辅助部分信息整理；任务描述不等于自动化率。",
+            "含义": "建议试用针对限定信息产出；67%情景指数是预设，不是已验证工具表现或职业自动化比例。",
             "概念": "任务辅助"
           },
           {
@@ -14112,75 +14384,75 @@
             "概念": "机构采用"
           },
           {
-            "含义": "15-2031总体11.9%、年均7500含替补，非净增13500；不测AI采用替代或个人失业。",
+            "含义": "已有资料未给本职业实际替代比例，BLS总体就业预测不是AI因果估计，67%的编辑情景指数不能换算岗位数量。",
             "概念": "就业影响"
           }
         ],
         "questions": [
           {
-            "回答": "不能；目标与约束设定、数据质量判断和方案采纳责任须人工核。",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "回答": "不能由本页给所有系统下统一结论。限定的代码或表格任务可设自动执行，真实模型须核输入、测试、适用范围及决策程序；自动执行不等于免除组织责任。",
+            "来源": "费马测试编辑核对建议，非统一操作规程",
+            "链接": "#career-ai-assessment-method",
             "问题": "AI可独立操作吗？"
           },
           {
-            "回答": "回到原始记录并暂停高风险操作。",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "回答": "标记受影响输入与输出，回查来源、单位、时间窗和变换，修正后重算。是否停止实际运营由真实风险和程序决定，本页不授予停运权。",
+            "来源": "费马测试编辑核对建议，非统一操作规程",
+            "链接": "#career-ai-assessment-method",
             "问题": "输入错误怎么办？"
           },
           {
-            "回答": "只用获准系统和权限。",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "回答": "先核组织允许的数据、工具、保留和访问条件，不把客户或个人明细上传到未经批准的系统；纸面练习只用题定虚构数据。",
+            "来源": "费马测试编辑核对建议，非统一操作规程",
+            "链接": "#career-ai-assessment-method",
             "问题": "可上传真实数据吗？"
           },
           {
-            "回答": "对照可复现模型、输入数据字典、情景比较和决策说明和现场。",
-            "来源": "官方职业资料",
-            "链接": "https://www.onetonline.org/link/details/15-2031.00",
+            "回答": "检查目标、变量、约束、单位和数据版本，独立复算样例，并测试不可行和参数变化；能运行或格式完整不证明正确。",
+            "来源": "费马测试编辑核对建议，非统一操作规程",
+            "链接": "#career-ai-assessment-method",
             "问题": "如何检查输出？"
           },
           {
-            "回答": "官方就业表不能推导单项替代率。",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "回答": "已有资料未给本职业实际替代比例，BLS总体就业预测不是AI因果估计，67%的编辑情景指数不能换算岗位数量。",
+            "来源": "ILO任务暴露方法，非本职业替代率",
+            "链接": "https://www.ilo.org/sites/default/files/2025-05/WP140_web.pdf",
             "问题": "AI会替代多少岗位？"
           },
           {
-            "回答": "目标与约束设定、数据质量判断和方案采纳责任",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "回答": "核实际项目的目标确认、数据提供、模型验证、部署和采纳分别由谁负责，工具输出不改变既有合同或组织分工。",
+            "来源": "费马测试编辑核对建议，非统一操作规程",
+            "链接": "#career-ai-assessment-method",
             "问题": "谁承担结果责任？"
           },
           {
-            "回答": "与业务方复核目标和限制。",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "回答": "关键数据无法核实、模型不可行、约束或目标存在争议、结果超出验证范围时，记录问题并交实际责任人决定下一步。",
+            "来源": "费马测试编辑核对建议，非统一操作规程",
+            "链接": "#career-ai-assessment-method",
             "问题": "何时升级？"
           }
         ],
         "responsibility_intro": "只用虚构样本试工具，真实业务核数据权限、模型验证、可复现性与公平性。",
         "responsibility_steps": [
           {
-            "步骤": "核对象",
-            "说明": "与利益相关方确认目标、约束和评价指标。"
+            "步骤": "明确决策与输入",
+            "说明": "与业务方确认目标、约束和可用输入。"
           },
           {
-            "步骤": "核任务",
-            "说明": "收集运营数据并查缺失、偏差和时间口径。"
+            "步骤": "核数据与版本",
+            "说明": "核单位、来源、时间窗、缺值和输入版本。"
           },
           {
-            "步骤": "核记录",
-            "说明": "可复现模型、输入数据字典、情景比较和决策说明"
+            "步骤": "独立复算与反例测试",
+            "说明": "复算样例，测试不可行和反例情景。"
           },
           {
-            "步骤": "核异常",
-            "说明": "与业务方复核目标和限制。"
+            "步骤": "核适用范围与异常",
+            "说明": "记录验证范围、变化条件和未解决异常。"
           },
           {
-            "步骤": "核授权",
-            "说明": "目标与约束设定、数据质量判断和方案采纳责任"
+            "步骤": "确认实际责任人",
+            "说明": "确认数据、模型发布和真实方案采纳分别由谁负责。"
           }
         ],
         "risk_rows": [
@@ -14200,9 +14472,9 @@
             "风险": "约束遗漏"
           },
           {
-            "为什么重要": "需求变化时失效。",
-            "控制方式": "保留压力情景和备选方案。",
-            "风险": "求解过拟合"
+            "为什么重要": "方案可能在新条件下不可行或成本失真。",
+            "控制方式": "保留输入版本和基准结果，测试需求与容量变化，标明失效条件及未建模限制。",
+            "风险": "情景与参数失配"
           },
           {
             "为什么重要": "管理者误用结果。",
@@ -14212,46 +14484,46 @@
         ],
         "task_rows": [
           {
-            "人的控制点": "目标与约束设定、数据质量判断和方案采纳责任",
+            "人的控制点": "向业务方确认何者是硬约束、何者可权衡，不让生成内容补造公平或服务要求。",
             "任务": "与利益相关方确认目标、约束和评价指标。",
             "工作方向": "问题定义",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "将已确认需求整理成目标和约束候选清单。"
           },
           {
-            "人的控制点": "目标与约束设定、数据质量判断和方案采纳责任",
+            "人的控制点": "回到数据来源核时间窗、单位、连接键和缺失机制，记录不能解决的问题。",
             "任务": "收集运营数据并查缺失、偏差和时间口径。",
             "工作方向": "数据核验",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "草拟数据字典、缺失值检查或单位核对代码。"
           },
           {
-            "人的控制点": "目标与约束设定、数据质量判断和方案采纳责任",
+            "人的控制点": "核目标方向、变量取值、约束和结果可行性，用独立已知案例测试，不以代码能运行当模型正确。",
             "任务": "建立优化、预测或仿真模型。",
             "工作方向": "模型构建",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "为明确给定的小问题草拟变量、模型和求解代码。"
           },
           {
-            "人的控制点": "目标与约束设定、数据质量判断和方案采纳责任",
+            "人的控制点": "逐项复算容量成本，区分给定候选中最优、模型最优与真实业务可用。",
             "任务": "比较成本、时间、资源与服务水平的取舍。",
             "工作方向": "情景求解",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "按题定参数生成候选方案比较表及摘要。"
           },
           {
-            "人的控制点": "目标与约束设定、数据质量判断和方案采纳责任",
+            "人的控制点": "核变化范围及业务含义，识别不可行、方案切换及未建模限制。",
             "任务": "改变需求或约束，检查方案稳健性。",
             "工作方向": "敏感性测试",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "草拟需求或成本变化情景并批量重算。"
           },
           {
-            "人的控制点": "目标与约束设定、数据质量判断和方案采纳责任",
+            "人的控制点": "回查数字、假设和不确定性是否保留，不把可能性或条件改成承诺。",
             "任务": "向决策者解释假设、限制和备选方案。",
             "工作方向": "结果沟通",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "起草面向非技术读者的图表说明和方案摘要。"
           },
           {
-            "人的控制点": "目标与约束设定、数据质量判断和方案采纳责任",
+            "人的控制点": "核数据是否可比及哪些假设已改变，模型变更和实际执行按真实批准与回退程序。",
             "任务": "跟踪实际结果并更新模型与参数。",
             "工作方向": "部署复盘",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "整理预测与实际结果的差异、版本和更新建议。"
           }
         ],
         "transition": "转相邻岗位需补目标职业训练和资格。"
@@ -14275,36 +14547,36 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             },
-            "stage": "观察"
+            "stage": "识别问题"
           },
           {
-            "description": "收集运营数据并查缺失、偏差和时间口径。",
-            "stage": "受训"
+            "description": "复现小模型，记录核对和修改。",
+            "stage": "受监督复现"
           },
           {
-            "description": "可复现模型、输入数据字典、情景比较和决策说明",
-            "stage": "独立"
+            "description": "按项目分工维护界定的模型模块、测试及已知限制。",
+            "stage": "承担界定任务"
           },
           {
-            "description": "目标与约束设定、数据质量判断和方案采纳责任",
-            "stage": "进阶"
+            "description": "交清假设、变化条件及下一责任人仍须核实的事项。",
+            "stage": "复核交接"
           }
         ],
-        "direct_answer": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-        "entry_heading": "先学基础任务，再受监督实践",
-        "heading": "运筹分析师训练与资格路径",
+        "direct_answer": "BLS描述美国典型入职要求为至少本科，部分雇主要求或偏好硕士；数学、编程和行业知识仍须实践积累。应核具体岗位，不把课程或学历当作数据访问、发布或方案批准权。",
+        "entry_heading": "先探索任务，再积累学习反馈",
+        "heading": "学习路径与任职条件核对",
         "locale_requirements": {
           "credential_boundary": "课程或兴趣分数不自动授独立工作权限。",
           "jurisdiction": "美国15-2031.00与中国岗位资格分别核。",
-          "summary": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。"
+          "summary": "BLS描述美国典型入职要求为至少本科，部分雇主要求或偏好硕士；数学、编程和行业知识仍须实践积累。应核具体岗位，不把课程或学历当作数据访问、发布或方案批准权。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.bls.gov/ooh/math/operations-research-analysts.htm",
             "id": "bls",
-            "label": "典型教育与训练统计",
-            "scope": "美国15-2031典型本科学历；部分职位研究生偏好见BLS OOH，组织数据访问和方案采纳权另核。"
+            "label": "BLS典型教育与工作要求",
+            "scope": "仅为美国典型准备，中国岗位与组织责任另核。"
           },
           {
             "href": "https://www.onetonline.org/link/details/15-2031.00",
@@ -14330,32 +14602,32 @@
             "id": "office-support",
             "stages": [
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "与利益相关方确认目标、约束和评价指标。；按岗位授权。",
-                "role": "观察学习"
+                "credentials": "核目标岗位的数学与业务基础要求",
+                "next_moves": "请业务方指出遗漏目标",
+                "readiness_evidence": "一页问题陈述与待访谈清单",
+                "responsibility": "辨认谁作决定、要比较什么及目标冲突",
+                "role": "理解问题"
               },
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "与利益相关方确认目标、约束和评价指标。；按岗位授权。",
-                "role": "受训执行"
+                "credentials": "数据和访谈访问依实际许可",
+                "next_moves": "与执行方核可行条件",
+                "readiness_evidence": "带来源的目标与约束清单及修订记录",
+                "responsibility": "区分硬约束、可权衡目标与尚未证实假设",
+                "role": "受监督澄清"
               },
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "与利益相关方确认目标、约束和评价指标。；按岗位授权。",
-                "role": "独立交接"
+                "credentials": "任务承担不等于方案批准权",
+                "next_moves": "检查模型是否仍对应原决策",
+                "readiness_evidence": "经团队复核的问题定义与变更说明",
+                "responsibility": "维护约定范围，记录需求变更及影响",
+                "role": "承担已界定任务"
               },
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "与利益相关方确认目标、约束和评价指标。；按岗位授权。",
-                "role": "进阶复核"
+                "credentials": "复杂项目所需行业训练另核",
+                "next_moves": "向实际决策者交清取舍和限制",
+                "readiness_evidence": "目标权衡说明、备选方案及未决事项",
+                "responsibility": "比较多个利益相关方目标并说明未解决冲突",
+                "role": "复核复杂取舍"
               }
             ],
             "title": "问题定义"
@@ -14364,32 +14636,32 @@
             "id": "supplier-cost",
             "stages": [
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "建立优化、预测或仿真模型。；按岗位授权。",
-                "role": "观察学习"
+                "credentials": "学习相关数学与基础编程",
+                "next_moves": "解释每条约束为何存在",
+                "readiness_evidence": "本页班次模型与手算表",
+                "responsibility": "标明变量、单位、目标和约束",
+                "role": "读懂小模型"
               },
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "建立优化、预测或仿真模型。；按岗位授权。",
-                "role": "受训执行"
+                "credentials": "核工具和数据使用条件",
+                "next_moves": "增加不可行或边界案例",
+                "readiness_evidence": "代码、输入、预期结果及错误修订",
+                "responsibility": "在获准环境复现模型并测试反例",
+                "role": "复现与测试"
               },
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "建立优化、预测或仿真模型。；按岗位授权。",
-                "role": "独立交接"
+                "credentials": "模型发布遵守项目审查程序",
+                "next_moves": "请同伴独立核变量和约束",
+                "readiness_evidence": "可复现模型、测试及已知限制",
+                "responsibility": "将已确认业务规则转成模型并记录求解设置",
+                "role": "承担模型模块"
               },
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "建立优化、预测或仿真模型。；按岗位授权。",
-                "role": "进阶复核"
+                "credentials": "复杂方法训练按职责另核",
+                "next_moves": "跟踪实施反馈并提出更新建议",
+                "readiness_evidence": "模型比较、版本和交接文档",
+                "responsibility": "检查替代建模方法、数值结果及适用范围",
+                "role": "复核与交接"
               }
             ],
             "title": "模型构建"
@@ -14398,32 +14670,32 @@
             "id": "records-information",
             "stages": [
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "改变需求或约束，检查方案稳健性。；按岗位授权。",
-                "role": "观察学习"
+                "credentials": "理解单位和基本模型",
+                "next_moves": "选择一个有意义的变化情景",
+                "readiness_evidence": "输入表与变化理由",
+                "responsibility": "列需求、成本、容量等可能变化输入",
+                "role": "识别变化"
               },
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "改变需求或约束，检查方案稳健性。；按岗位授权。",
-                "role": "受训执行"
+                "credentials": "参数范围须有题定或业务依据",
+                "next_moves": "解释方案何时失效",
+                "readiness_evidence": "基准与变化结果、可行性和费用差异",
+                "responsibility": "一次改变指定参数并保留基准",
+                "role": "受监督重算"
               },
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "改变需求或约束，检查方案稳健性。；按岗位授权。",
-                "role": "独立交接"
+                "credentials": "不把压力情景当预测概率",
+                "next_moves": "请执行方核变化是否现实",
+                "readiness_evidence": "情景矩阵、失效条件及未建模限制",
+                "responsibility": "核多个变化组合，区分不可行和较贵方案",
+                "role": "组织情景比较"
               },
               {
-                "credentials": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "可复现模型、输入数据字典、情景比较和决策说明",
-                "responsibility": "改变需求或约束，检查方案稳健性。；按岗位授权。",
-                "role": "进阶复核"
+                "credentials": "实际监控和变更权限另核",
+                "next_moves": "与责任人约定复核方式",
+                "readiness_evidence": "决策说明、重评触发条件及未决问题",
+                "responsibility": "说明推荐对哪些假设敏感、何时需要重评",
+                "role": "交付决策边界"
               }
             ],
             "title": "敏感性测试"
@@ -14447,7 +14719,7 @@
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "运筹学分析师：运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+                  "label": "工作场景与流程",
                   "secondary_value": {
                     "$item": "operations-research-analysts.profile.work-context-block.3",
                     "block": "profile",
@@ -14463,7 +14735,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "运筹学分析师：运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+                  "label": "工具与职责边界",
                   "secondary_value": {
                     "$item": "operations-research-analysts.profile.onet-structured-fields-block.5",
                     "block": "profile",
@@ -14479,7 +14751,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "运筹学分析师：运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+                  "label": "可检查的分析产物",
                   "secondary_value": null,
                   "value": {
                     "$item": "operations-research-analysts.profile.career-quick-answers-block.7",
@@ -14505,50 +14777,50 @@
                 {
                   "alternate_value": null,
                   "label": "问题定义",
-                  "secondary_value": "目标与约束设定、数据质量判断和方案采纳责任",
+                  "secondary_value": "向业务方确认何者是硬约束、何者可权衡，不让生成内容补造公平或服务要求。",
                   "value": "与利益相关方确认目标、约束和评价指标。"
                 },
                 {
                   "alternate_value": null,
                   "label": "数据核验",
-                  "secondary_value": "目标与约束设定、数据质量判断和方案采纳责任",
+                  "secondary_value": "回到数据来源核时间窗、单位、连接键和缺失机制，记录不能解决的问题。",
                   "value": "收集运营数据并查缺失、偏差和时间口径。"
                 },
                 {
                   "alternate_value": null,
                   "label": "模型构建",
-                  "secondary_value": "目标与约束设定、数据质量判断和方案采纳责任",
+                  "secondary_value": "核目标方向、变量取值、约束和结果可行性，用独立已知案例测试，不以代码能运行当模型正确。",
                   "value": "建立优化、预测或仿真模型。"
                 },
                 {
                   "alternate_value": null,
                   "label": "情景求解",
-                  "secondary_value": "目标与约束设定、数据质量判断和方案采纳责任",
+                  "secondary_value": "逐项复算容量成本，区分给定候选中最优、模型最优与真实业务可用。",
                   "value": "比较成本、时间、资源与服务水平的取舍。"
                 },
                 {
                   "alternate_value": null,
                   "label": "敏感性测试",
-                  "secondary_value": "目标与约束设定、数据质量判断和方案采纳责任",
+                  "secondary_value": "核变化范围及业务含义，识别不可行、方案切换及未建模限制。",
                   "value": "改变需求或约束，检查方案稳健性。"
                 },
                 {
                   "alternate_value": null,
                   "label": "结果沟通",
-                  "secondary_value": "目标与约束设定、数据质量判断和方案采纳责任",
+                  "secondary_value": "回查数字、假设和不确定性是否保留，不把可能性或条件改成承诺。",
                   "value": "向决策者解释假设、限制和备选方案。"
                 },
                 {
                   "alternate_value": null,
                   "label": "部署复盘",
-                  "secondary_value": "目标与约束设定、数据质量判断和方案采纳责任",
+                  "secondary_value": "核数据是否可比及哪些假设已改变，模型变更和实际执行按真实批准与回退程序。",
                   "value": "跟踪实际结果并更新模型与参数。"
                 }
               ]
             }
           },
           {
-            "answer": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。",
+            "answer": "BLS描述美国典型入职要求为至少本科，部分雇主要求或偏好硕士；相关数学与编程准备重要，具体岗位要求有别。",
             "key": "qa1",
             "question": "怎样入行？",
             "table": {
@@ -14557,37 +14829,37 @@
                   "alternate_value": null,
                   "label": "基础教育",
                   "secondary_value": "核招聘",
-                  "value": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。"
+                  "value": "BLS描述美国典型入职要求为至少本科，部分雇主要求或偏好硕士；相关数学与编程准备重要，具体岗位要求有别。"
                 },
                 {
                   "alternate_value": null,
                   "label": "技能训练",
                   "secondary_value": "核岗位",
-                  "value": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。"
+                  "value": "从代数、概率、统计及编程出发，用小模型练变量、单位、约束与测试；具体软件按岗位核。"
                 },
                 {
                   "alternate_value": null,
                   "label": "受监督实践",
                   "secondary_value": "核反馈",
-                  "value": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。"
+                  "value": "在获准数据和环境下复现已有模型，记录错误、反馈及修改；纸面样例不替代实习或正式项目。"
                 },
                 {
                   "alternate_value": null,
                   "label": "职业资格",
                   "secondary_value": "核地区",
-                  "value": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。"
+                  "value": "未核得中国全部岗位的统一个人许可要求；核具体职位、法域及可能适用的行业条件，不由学历推出许可。"
                 },
                 {
                   "alternate_value": null,
                   "label": "机构授权",
-                  "secondary_value": "核有效期",
-                  "value": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。"
+                  "secondary_value": "核实际责任分工",
+                  "value": "向雇主确认数据访问、模型上线、排程执行及方案批准分别由谁负责；不设全行业统一有效期。"
                 },
                 {
                   "alternate_value": null,
                   "label": "中国岗位",
                   "secondary_value": "核本地规则",
-                  "value": "BLS列通常需学士学位；数学、统计、计算机、工程或相关领域训练有帮助，部分岗位偏好研究生。"
+                  "value": "中国职位需按实际任务、行业、地点和招聘要求比较；美国典型学历不是中国统一准入。"
                 }
               ]
             }
@@ -14623,21 +14895,16 @@
         "heading": "运筹分析师的主要风险",
         "risks": [
           {
-            "affected_roles": {
+            "affected_roles": "分析师、目标设定者及受资源配置影响的团队。",
+            "consequence": "遗漏服务或公平目标，可能使方案无法被接受或使受影响群体受损。",
+            "evidence_refs": [
+              "or-details",
+              "or-editorial"
+            ],
+            "id": "cost-change",
+            "mitigation": {
               "$join": [
-                "分析师、目标设定者及受资源配置影响的团队。目标背景：",
-                {
-                  "$item": "operations-research-analysts.risk.career-risk-cards.4",
-                  "block": "risk",
-                  "copy_key": "career.item.career-risk-cards",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "consequence": {
-              "$join": [
-                "可能牺牲服务或公平目标，使方案不可接受。升级边界：",
+                "与业务方复核目标和限制。",
                 {
                   "$item": "operations-research-analysts.risk.career-risk-cards.5",
                   "block": "risk",
@@ -14645,14 +14912,8 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "evidence_refs": [
-              "onet",
-              "onet"
-            ],
-            "id": "cost-change",
-            "mitigation": "与业务方复核目标和限制。",
             "scenario": "只优化单一成本而漏服务或公平约束。",
             "title": "目标错设"
           },
@@ -14660,8 +14921,8 @@
             "affected_roles": "分析师、数据提供者及使用模型的决策者。",
             "consequence": "可能让估计与方案偏离真实需求。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "or-details",
+              "or-editorial"
             ],
             "id": "record-version",
             "mitigation": "做质量检查和敏感性分析。",
@@ -14672,8 +14933,8 @@
             "affected_roles": "分析师、业务执行方及决策者。",
             "consequence": "可能得到违反产能或业务条件的不可执行方案。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "or-details",
+              "or-editorial"
             ],
             "id": "personal-data",
             "mitigation": "让执行方审模型。",
@@ -14682,22 +14943,27 @@
           },
           {
             "affected_roles": "模型开发者、运营团队及方案使用者。",
-            "consequence": "可能在需求变化时失效并导致错配资源。",
+            "consequence": "方案可能在新条件下不可行或成本失真。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "or-details",
+              "or-editorial"
             ],
             "id": "technical-boundary",
-            "mitigation": "保留压力情景和备选方案。",
-            "scenario": "模型只在历史情景有效。",
-            "title": "求解过拟合"
+            "mitigation": "保留输入版本和基准结果，测试需求与容量变化，标明失效条件及未建模限制。",
+            "scenario": {
+              "$item": "operations-research-analysts.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "title": "情景与参数失配"
           },
           {
             "affected_roles": "分析师、管理者及执行方案的团队。",
             "consequence": "可能误解模型条件或将结果用于超范围决策。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "or-details",
+              "or-editorial"
             ],
             "id": "single-coverage",
             "mitigation": "记录假设和边际影响。",
@@ -14708,8 +14974,8 @@
             "affected_roles": "分析师、客户、数据主体和数据管理员。",
             "consequence": "可能暴露受限明细并违反适用合同或数据规则。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "or-details",
+              "or-editorial"
             ],
             "id": "delivery-acceptance",
             "mitigation": "用获准环境与脱敏样本。",
@@ -14726,10 +14992,10 @@
             "scope": "O*NET支持15-2031任务、模型验证与沟通背景；BLS仅工资、预测与典型学历。风险为编辑提示，非数据法条或发生频率。"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.bls.gov/ooh/math/operations-research-analysts.htm",
             "id": "bls",
-            "label": "资格",
-            "scope": "O*NET支持15-2031任务、模型验证与沟通背景；BLS仅工资、预测与典型学历。风险为编辑提示，非数据法条或发生频率。"
+            "label": "BLS典型教育",
+            "scope": "美国典型教育，不证明数据访问、批准权或统一风险规程。"
           },
           {
             "href": "https://www.onetonline.org/link/details/15-2031.00",
@@ -14748,6 +15014,18 @@
             "id": "onet",
             "label": "职业活动",
             "scope": "O*NET支持15-2031任务、模型验证与沟通背景；BLS仅工资、预测与典型学历。风险为编辑提示，非数据法条或发生频率。"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/15-2031.00",
+            "id": "or-details",
+            "label": "O*NET任务与模型验证",
+            "scope": "仅为职业任务背景，场景是编辑示例，不是官方操作程序。"
+          },
+          {
+            "href": null,
+            "id": "or-editorial",
+            "label": "本页编辑风险示例",
+            "scope": "明确标示的编辑问题，不是外部实证、法律或发生率。"
           }
         ]
       },
@@ -14772,12 +15050,12 @@
             {
               "指标": "2025规模以上企业·专业技术人员",
               "数值": "155,491元/年（税前）",
-              "说明": "仅模型分析与专业决策支持方向宽岗位，含其他专业岗位，非运筹工资个人区间。"
+              "说明": "包含多种专业职业的宽岗位总体，本页仅用作背景，不是运筹分析师工资样本或个人区间。"
             },
             {
               "指标": "科研技术服务业·规模以上企业专业技术人员",
               "数值": "172,877元/年（税前，2025）",
-              "说明": "仅该行业企业雇主方向背景，非所有运筹分析师；政府机关另核，不含个体自由职业。"
+              "说明": "该行业内相应专业技术宽岗位子群，不是全部运筹分析师或政府机关；不含个体工商户和自由职业者。"
             }
           ],
           "china_ai_row": {
@@ -14832,8 +15110,8 @@
           "china_name_row": "中国工资：专业技术宽岗位参考",
           "china_open": "中国岗位与美国15-2031.00不一一映射。",
           "china_open_note": "核地区、雇主、资格、工时与福利。",
-          "china_ref": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
-          "china_salary_note": "证据不足：同职业全国中位分位起薪未取得；155491为2025规模以上企业专业技术宽岗位年税前年均，172877仅该人口科研技术服务行业子组，含其他专业岗位，非个人区间，不含个体自由职业。",
+          "china_ref": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "2025年规模以上企业专业技术人员税前年平均155491元，其中科学研究和技术服务业该岗位均值172877元。统计包含多种专业职业；本页将其作为宽岗位及特定行业背景，不是运筹分析师样本、中位数、起薪或个人收入区间，不覆盖个体工商户和自由职业者，不能自动套用于政府机关。",
           "china_salary_table": [
             {
               "城市/区间": "中国数据状态",
@@ -14859,7 +15137,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
+          "sources_note": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
           "ui": {
             "ai_heading": "工具与责任边界",
             "driver_heading": "影响因素",
@@ -14875,7 +15153,7 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "BLS单项统计与行业工资｜https://www.bls.gov/ooh/math/operations-research-analysts.htm；O*NET五分位｜https://www.onetonline.org/link/localwages/15-2031.00",
+        "authority_sources": "BLS单项统计与行业工资｜https://www.bls.gov/ooh/math/operations-research-analysts.htm；O*NET工资分位｜https://www.onetonline.org/link/localwages/15-2031.00",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
@@ -14904,24 +15182,23 @@
           },
           {
             "指标": "就业人数",
-            "数值": "约113100",
+            "数值": "2025年约113,100人",
             "说明": "BLS 15-2031.00精确职业。"
           },
           {
             "指标": "就业前景 2025—2035",
             "数值": "11.9%",
-            "说明": "总体增长11.9%、官方净增13500，非AI归因。"
+            "说明": "预测从2025年113,100人至2035年126,600人，官方净增13,500人；这是总体就业变化，不是AI效果。"
           },
           {
             "指标": "就业岗位空缺（平均年度）",
-            "数值": "约7500",
-            "说明": "年均7500含替补，非净增13500或当前招聘。"
+            "数值": "年均约7,500个空缺",
+            "说明": "2025—2035年均值含增长和替代需要，不是当前空缺或个人录用概率。"
           }
         ],
         "boundary": "仅适用美国15-2031.00；不能跨国换算、代替个人报价或混用父类统计。",
         "direct_answer": {
           "$join": [
-            "美国15-2031在2025中位年薪88940美元；2025—2035总体增长11.9%、净增13500，年均7500空缺含替补，非AI或个人失业。",
             {
               "$item": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14929,7 +15206,7 @@
               "type": "prose"
             }
           ],
-          "separator": "；"
+          "separator": ""
         },
         "factor_rows": [
           {
@@ -14957,9 +15234,9 @@
             "note": "BLS OOH：2025年5月美国15-2031该行业年薪中位数；非行业分位、起薪或中国工资。"
           },
           {
-            "industry": "联邦政府",
-            "median": "$139,980",
-            "note": "BLS OOH：2025年5月美国15-2031该行业年薪中位数；非行业分位、起薪或中国工资。"
+            "industry": "公司和企业管理",
+            "median": "$97,610",
+            "note": "2025年5月美国运筹分析师在该行业的年薪中位数，非分位、起薪或个人报价。"
           },
           {
             "industry": "金融与保险",
@@ -14967,9 +15244,9 @@
             "note": "BLS OOH：2025年5月美国15-2031该行业年薪中位数；非行业分位、起薪或中国工资。"
           },
           {
-            "industry": "制造业",
-            "median": "$108,120",
-            "note": "BLS OOH：2025年5月美国15-2031该行业年薪中位数；非行业分位、起薪或中国工资。"
+            "industry": "教育服务（州、地方和私营）",
+            "median": "$79,640",
+            "note": "2025年5月美国运筹分析师在该行业的年薪中位数，非分位、起薪或个人报价。"
           }
         ],
         "industry_value_label": "年薪中位数（美元）",
@@ -14978,7 +15255,6 @@
           {
             "answer": {
               "$join": [
-                "不能；市场和岗位口径不同。",
                 {
                   "$item": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.5",
                   "block": "us-salary",
@@ -14986,14 +15262,13 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": ""
             },
             "question": "美国数值可换算中国工资吗？"
           },
           {
             "answer": {
               "$join": [
-                "不是，工资分布中点。",
                 {
                   "$item": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -15001,12 +15276,12 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": ""
             },
             "question": "中位数是起薪吗？"
           },
           {
-            "answer": "不是，年均7500空缺含替补，非十年净增13500。",
+            "answer": "不是。2025—2035年均7,500个空缺包含增长和替代需要，不是当前招聘数量，也不是十年净增13,500人。",
             "question": "年均空缺是当前招聘吗？"
           },
           {
@@ -15020,7 +15295,7 @@
         "wage_column_labels": [
           "工资层级",
           "年薪参考",
-          "月度等值",
+          "换算边界",
           "解释"
         ],
         "wage_heading": "工资数据",
@@ -15029,7 +15304,6 @@
             "equivalent": "不换算中国月薪",
             "interpretation": {
               "$join": [
-                "工资分位不等于个人合同或起薪。",
                 {
                   "$item": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.2",
                   "block": "us-salary",
@@ -15037,7 +15311,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": ""
             },
             "label": "低工资分位",
             "value": "$57,060"
@@ -15046,7 +15320,6 @@
             "equivalent": "不换算中国月薪",
             "interpretation": {
               "$join": [
-                "工资分位不等于个人合同或起薪。",
                 {
                   "$item": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
@@ -15054,7 +15327,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": ""
             },
             "label": "中位数",
             "value": "$88,940"
@@ -15063,7 +15336,6 @@
             "equivalent": "不换算中国月薪",
             "interpretation": {
               "$join": [
-                "工资分位不等于个人合同或起薪。",
                 {
                   "$item": "operations-research-analysts.us-salary.career-snapshot-secondary-locale.4",
                   "block": "us-salary",
@@ -15071,7 +15343,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": ""
             },
             "label": "高工资分位",
             "value": "$159,910"
@@ -15146,7 +15418,7 @@
             "horizon": "2025基期",
             "interpretation": {
               "$join": [
-                "就业及其他背景分开解读：",
+                "就业及相关职业背景的读法：",
                 {
                   "$item": "operations-research-analysts.market-signals.market-signal-card.2",
                   "block": "market-signals",
@@ -15172,7 +15444,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "limitation": "15-2031精确职业就业存量；非当前招聘、AI归因或中国需求。",
             "metric": "2025在岗",
@@ -15230,68 +15502,68 @@
         ],
         "transitions": [
           {
-            "capability_gaps": "运筹分析更重约束和优化决策",
-            "shared_capabilities": "数学建模、统计推断、编程、数据质量评估和沟通",
+            "capability_gaps": "核并补目标岗位的分析应用与数据处理经验，共享方法不证明已经胜任。",
+            "shared_capabilities": "数据准备、编程及模型评估",
             "target_href": "/zh/career/jobs/data-scientists",
             "target_slug": "data-scientists",
             "target_title": "数据科学家",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "编辑准备比较，不是实测转岗距离、训练互认或成功率。"
           },
           {
-            "capability_gaps": "运筹分析更重运营方案求解",
-            "shared_capabilities": "数学建模、统计推断、编程、数据质量评估和沟通",
+            "capability_gaps": "核并补目标岗位的统计设计与推断经验，共享方法不证明已经胜任。",
+            "shared_capabilities": "数理推理、数据核查及不确定性解释",
             "target_href": "/zh/career/jobs/statisticians",
             "target_slug": "statisticians",
             "target_title": "统计学家",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "编辑准备比较，不是实测转岗距离、训练互认或成功率。"
           },
           {
-            "capability_gaps": "不一定构建数学优化模型",
-            "shared_capabilities": "数学建模、统计推断、编程、数据质量评估和沟通",
+            "capability_gaps": "核并补目标岗位的组织访谈与流程经验，共享方法不证明已经胜任。",
+            "shared_capabilities": "问题定义、访谈及建议说明",
             "target_href": "/zh/career/jobs/management-analysts",
             "target_slug": "management-analysts",
             "target_title": "管理分析师",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "编辑准备比较，不是实测转岗距离、训练互认或成功率。"
           },
           {
-            "capability_gaps": "运筹分析可建物流模型但不必运营执行",
-            "shared_capabilities": "数学建模、统计推断、编程、数据质量评估和沟通",
+            "capability_gaps": "核并补目标岗位的物流协调与履约经验，共享方法不证明已经胜任。",
+            "shared_capabilities": "资源约束、计划与实施反馈",
             "target_href": "/zh/career/jobs/logisticians",
             "target_slug": "logisticians",
             "target_title": "物流师",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "编辑准备比较，不是实测转岗距离、训练互认或成功率。"
           },
           {
-            "capability_gaps": "运筹分析更直接解决运营约束",
-            "shared_capabilities": "数学建模、统计推断、编程、数据质量评估和沟通",
+            "capability_gaps": "核并补目标岗位的目标数学方法经验，共享方法不证明已经胜任。",
+            "shared_capabilities": "数学表达、推理及数值方法",
             "target_href": "/zh/career/jobs/mathematicians",
             "target_slug": "mathematicians",
             "target_title": "数学家",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "编辑准备比较，不是实测转岗距离、训练互认或成功率。"
           },
           {
-            "capability_gaps": "更常负责工程实施",
-            "shared_capabilities": "数学建模、统计推断、编程、数据质量评估和沟通",
+            "capability_gaps": "核并补目标岗位的生产系统与工程评价经验，共享方法不证明已经胜任。",
+            "shared_capabilities": "系统分析、约束、成本及流程改进",
             "target_href": "/zh/career/jobs/industrial-engineers",
             "target_slug": "industrial-engineers",
             "target_title": "工业工程师",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "编辑准备比较，不是实测转岗距离、训练互认或成功率。"
           },
           {
-            "capability_gaps": "运筹分析更重约束和优化决策",
-            "shared_capabilities": "数学建模、统计推断、编程、数据质量评估和沟通",
+            "capability_gaps": "核并补目标岗位的分析应用与数据处理经验，共享方法不证明已经胜任。",
+            "shared_capabilities": "数据准备、编程及模型评估",
             "target_href": "/zh/career/jobs/data-scientists",
             "target_slug": "data-scientists",
             "target_title": "数据科学家",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "编辑准备比较，不是实测转岗距离、训练互认或成功率。"
           },
           {
-            "capability_gaps": "运筹分析更重运营方案求解",
-            "shared_capabilities": "数学建模、统计推断、编程、数据质量评估和沟通",
+            "capability_gaps": "核并补目标岗位的统计设计与推断经验，共享方法不证明已经胜任。",
+            "shared_capabilities": "数理推理、数据核查及不确定性解释",
             "target_href": "/zh/career/jobs/statisticians",
             "target_slug": "statisticians",
             "target_title": "统计学家",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "编辑准备比较，不是实测转岗距离、训练互认或成功率。"
           }
         ]
       },
@@ -15342,7 +15614,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看霍兰德兴趣测评",
+            "cta_label": "了解我的职业兴趣",
             "evidence_level": {
               "$item": "operations-research-analysts.fit.personality-fit-block.8",
               "block": "fit",
@@ -15350,103 +15622,103 @@
               "type": "prose"
             },
             "id": "riasec",
-            "label": "职业兴趣",
-            "question": "做运筹学分析师需要怎样的能力与工作方式？",
+            "label": "霍兰德职业兴趣（RIASEC）",
+            "question": "IC兴趣线索与运筹工作有哪些联系？",
             "signals": {
               "$item": "operations-research-analysts.fit.riasec-fit-block.1",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
+            "watchout": "兴趣接近只是探索线索，不能代替数学训练、项目反馈或实际数据权限。"
           },
           {
-            "answer": "核数据字典、单位、缺失值、时间窗及模型可复现性，记录发现的错误。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看霍兰德兴趣测评",
-            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
+            "answer": "本轮未取得大五测评预测本职业模型质量或工作绩效的对应研究。可用结果提出自我反思问题，再观察是否记录假设、核对数据和接受反例，不能由特质分数直接推定这些行为。",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_label": "了解我的大五特质",
+            "evidence_level": "任务相关的编辑观察，不是经验证招聘标准。",
             "id": "big-five",
-            "label": "细节能力",
-            "question": "做运筹学分析师需要怎样的能力与工作方式？",
+            "label": "大五人格特质",
+            "question": "怎样把人格反思与具体工作行为分开？",
             "signals": {
               "$item": "operations-research-analysts.fit.personality-fit-block.2",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
+            "watchout": "不设置人格合格线，不以高分授予独立建模或方案批准权。"
           },
           {
-            "answer": "练识别样本偏差、不可行约束与情景失效，说明暂停和升级条件。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看霍兰德兴趣测评",
-            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
+            "answer": "本页没有最适合运筹分析师的MBTI类型证据。可反思偏好的讨论和整理信息方式，但项目选择还要核数学方法、数据、业务知识与合作要求，不能由类型决定。",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "了解我的人格偏好",
+            "evidence_level": "未取得本职业对应的类型筛选或预测效度证据。",
             "id": "mbti",
-            "label": "风险处理",
-            "question": "做运筹学分析师需要怎样的能力与工作方式？",
+            "label": "MBTI人格偏好",
+            "question": "MBTI能决定我适合哪种运筹项目吗？",
             "signals": {
               "$item": "operations-research-analysts.fit.personality-fit-block.3",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
+            "watchout": "不按类型分配能力高低、数据访问或项目批准责任。"
           },
           {
-            "answer": "比较定量求解、业务协作和解释取舍是否符合自己的工作价值。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看霍兰德兴趣测评",
-            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
+            "answer": "未取得九型人格预测本职业表现或训练回报的对应证据。若用于反思，可记录自己面对成本、公平和服务目标冲突时在意什么，再回到项目证据和实际责任讨论，不用类型替代判断。",
+            "cta_href": "/zh/tests/enneagram-personality-test",
+            "cta_label": "了解我的动机线索",
+            "evidence_level": "编辑反思建议，不是职业分类或胜任标准。",
             "id": "enneagram",
-            "label": "工作价值",
-            "question": "做运筹学分析师需要怎样的能力与工作方式？",
+            "label": "九型人格动机反思",
+            "question": "动机反思怎样用于面对模型争议？",
             "signals": {
               "$item": "operations-research-analysts.fit.personality-fit-block.4",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
+            "watchout": "不由动机类型推断诚信、风险承受能力或批准权。"
           },
           {
-            "answer": "核办公室建模、业务访谈、跨团队协作和截止期是否适合。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看霍兰德兴趣测评",
-            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
+            "answer": "不能。BLS指出本职业的方法涉及统计、微积分和线性代数等数学训练；一次推理测评不等于掌握建模、编程、验证或行业知识。本页不提供录用分数线，也未验证本站分数预测本职业绩效。",
+            "cta_href": "/zh/tests/iq-test",
+            "cta_label": "了解我的认知与推理表现",
+            "evidence_level": "职业数学要求有原章，本站测评与运筹绩效的对应关系未核。",
             "id": "iq",
-            "label": "场景偏好",
-            "question": "做运筹学分析师需要怎样的能力与工作方式？",
+            "label": "认知表现与数理推理",
+            "question": "推理测评能代替运筹方法训练吗？",
             "signals": {
               "$item": "operations-research-analysts.fit.personality-fit-block.5",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
+            "watchout": "本页练习只检查题定计算和解释，不是IQ测验或职业能力认证。"
           },
           {
-            "answer": "用既有虚构配送练习说明目标、约束和敏感性；样本不授真实调度权。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看霍兰德兴趣测评",
-            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
+            "answer": "可观察是否听清业务方担忧、区分事实与价值取舍，并清楚说明模型限制。这些是任务相关观察，未取得情绪智力测评分数预测本职业沟通或绩效的验证。",
+            "cta_href": "/zh/tests/emotional-intelligence-test",
+            "cta_label": "了解我的情绪与沟通线索",
+            "evidence_level": "O*NET与BLS支持沟通任务背景，不证明某一情绪测评有效。",
             "id": "eq",
-            "label": "虚构案例",
-            "question": "做运筹学分析师需要怎样的能力与工作方式？",
+            "label": "情绪智力与沟通反思",
+            "question": "解释不受欢迎的方案时，可以观察什么？",
             "signals": {
               "$item": "operations-research-analysts.fit.riasec-fit-block.6",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
+            "watchout": "不把一次讨论或情绪分数当作胜任、诚信或领导能力结论。"
           }
         ],
-        "boundary": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。",
-        "direct_answer": "能追问数据质量、假设和边界，并把优化结果讲给非技术决策者。",
+        "boundary": "六类工具讨论的对象不同，兴趣、特质、偏好、动机或测评表现都不自动证明数学训练、模型质量或组织权限，应结合具体任务、学习进步和项目反馈核对。",
+        "direct_answer": "可探索自己对建模、证据核查和解释取舍的兴趣，再观察实际学习及反馈回应，不以单次测评证明职业胜任。",
         "directions": [
           {
             "direction": "数据科学家",
-            "fit_signals": "喜欢探索预测模型",
+            "fit_signals": "若更关注数据特征、预测或分析应用，可考察数据科学任务。",
             "target": {
               "href": "/zh/career/jobs/data-scientists",
               "slug": "data-scientists",
@@ -15456,7 +15728,7 @@
           },
           {
             "direction": "统计学家",
-            "fit_signals": "喜欢推断方法",
+            "fit_signals": "若更关注研究设计、估计与不确定性，可考察统计任务。",
             "target": {
               "href": "/zh/career/jobs/statisticians",
               "slug": "statisticians",
@@ -15466,7 +15738,7 @@
           },
           {
             "direction": "管理分析师",
-            "fit_signals": "喜欢组织咨询",
+            "fit_signals": "若更关注访谈、流程评估和组织改进，可考察管理分析。",
             "target": {
               "href": "/zh/career/jobs/management-analysts",
               "slug": "management-analysts",
@@ -15476,7 +15748,7 @@
           },
           {
             "direction": "物流师",
-            "fit_signals": "喜欢供应链执行",
+            "fit_signals": "若更关注物料流动、客户和供应方协调，可考察物流任务。",
             "target": {
               "href": "/zh/career/jobs/logisticians",
               "slug": "logisticians",
@@ -15486,7 +15758,7 @@
           },
           {
             "direction": "数学家",
-            "fit_signals": "喜欢理论研究",
+            "fit_signals": "若更关注数学方法本身及跨领域应用，可考察数学家任务。",
             "target": {
               "href": "/zh/career/jobs/mathematicians",
               "slug": "mathematicians",
@@ -15496,7 +15768,7 @@
           },
           {
             "direction": "工业工程师",
-            "fit_signals": "喜欢生产现场",
+            "fit_signals": "若更关注生产系统、人机因素和工程评价，可考察工业工程任务。",
             "target": {
               "href": "/zh/career/jobs/industrial-engineers",
               "slug": "industrial-engineers",
@@ -15508,43 +15780,43 @@
         "heading": "谁适合运筹分析师？",
         "questions": [
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
+            "answer": "先用一句话写决策对象，再区分目标与硬约束，说不清之处列为待访谈问题。",
             "question": "我愿执行问题定义吗？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
+            "answer": "给每个输入写单位、来源和时间窗，记录缺值是否影响方案。",
             "question": "我愿执行数据核验吗？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
+            "answer": "从本页整数班次模型开始，检查变量和约束；运行成功不等于模型正确。",
             "question": "我愿执行模型构建吗？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
+            "answer": "把可行性与费用分列，再说明给定三案中为何选择某案。",
             "question": "我愿执行情景求解吗？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
+            "answer": "将需求从20改为23，解释哪些方案失效，不只报新答案。",
             "question": "我愿执行敏感性测试吗？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
+            "answer": "用不含求解术语的一段话解释假设、推荐和未解决限制。",
             "question": "我愿执行结果沟通吗？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
+            "answer": "若没有真实项目，只写将来希望比较哪些预测与实际指标，不伪造实施结果。",
             "question": "我愿执行部署复盘吗？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
+            "answer": "记录成本、服务与公平目标的冲突，交实际目标确认者讨论取舍。",
             "question": "我能处理目标错设吗？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
+            "answer": "先查时间窗、缺失和来源差异，再决定哪些结论需要重算或暂缓使用。",
             "question": "我能处理数据偏差吗？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
+            "answer": "请执行方核产能、时间和业务规则，本页未给的限制不能假定不存在。",
             "question": "我能处理约束遗漏吗？"
           }
         ],
@@ -15571,44 +15843,44 @@
         ],
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "O*NET 15-2031.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.onetonline.org/link/summary/15-2031.00",
+            "label": "O*NET职业摘要",
+            "usage": "IC兴趣与职业背景，不作测评分数筛选。"
           },
           {
             "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "O*NET 15-2031.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "label": "O*NET任务与工作情境",
+            "usage": "任务与群体工作情境回答，不是个人能力分数。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "O*NET 15-2031.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.bls.gov/ooh/math/operations-research-analysts.htm",
+            "label": "BLS教育与工作要求",
+            "usage": "美国典型准备，不是中国法律或测评效度。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "O*NET 15-2031.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.onetonline.org/link/localwages/15-2031.00",
+            "label": "O*NET工资分位",
+            "usage": "美国2025职业工资分位，不是个人报价。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "O*NET 15-2031.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.onetonline.org/link/hot_tech/15-2031.00",
+            "label": "O*NET招聘技能提及",
+            "usage": "美国2025唯一招聘技能提及，不是部署或胜任。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "O*NET 15-2031.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+            "label": "国家统计局宽口径工资",
+            "usage": "专业技术宽岗位与行业均值，不是运筹分析师样本。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "O*NET 15-2031.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.ilo.org/sites/default/files/2025-05/WP140_web.pdf",
+            "label": "ILO任务暴露方法",
+            "usage": "暴露方法背景，不验证本页评分。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/15-2031.00",
-            "label": "O*NET 15-2031.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.onetonline.org/link/summary/17-2112.00",
+            "label": "O*NET工业工程定义",
+            "usage": "相邻职业定义，不保证转岗。"
           }
         ]
       },
@@ -15621,11 +15893,11 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "用虚构排程案例练模型判断",
+        "label": "用职业兴趣测评探索方向",
         "source_page_type": "职业资料页",
         "subject_key": "operations-research-analysts",
         "subject_kind": "运筹分析师",
-        "target_action": "用虚构配送需求设计两种路线或班次方案，写清目标函数、约束、敏感性与失败条件",
+        "target_action": "将兴趣结果作为讨论线索，再比较本页任务与纸面案例；测评不运行排程模型或证明胜任。",
         "test_slug": "holland-career-interest-test-riasec"
       },
       "responsibilities_block": {
@@ -15635,23 +15907,23 @@
         "type": "list"
       },
       "riasec_fit_block": {
-        "fit_interest": "能追问数据质量、假设和边界，并把优化结果讲给非技术决策者。",
-        "interest": "能追问数据质量、假设和边界，并把优化结果讲给非技术决策者。",
-        "riasec": "职业兴趣可用于探索；量表不证明岗位能力或授权。",
-        "riasec_short": "模型、约束、方案与决策"
+        "fit_interest": "反思自己是否喜欢数学问题探索和有序的数据工作，实际学习进步与项目反馈另核。",
+        "interest": "O*NET给本职业的兴趣代码为IC。研究型线索可联系数学问题探索，常规型线索可联系按程序整理数据与信息；它们描述职业活动，不表示个人必须有某种分数，也不能证明建模或决策能力。",
+        "riasec": "兴趣接近只是探索线索，不能代替数学训练、项目反馈或实际数据权限。",
+        "riasec_short": "IC：研究型、常规型"
       },
       "source_card": {
         "eeat_signals": {
-          "author": {
-            "$item": "operations-research-analysts.sources.boundary-notice.2",
-            "block": "sources",
-            "copy_key": "career.item.boundary-notice",
-            "type": "prose"
-          },
+          "author": "费马测试编辑部",
           "source": "BLS美国15-2031工资与就业；O*NET任务与工资分位；NBS2025专业技术宽岗位与科研技术服务企业子组。",
-          "updated_at": "2026-10-12"
+          "updated_at": "2026-11-08"
         },
-        "note": "证据只支持运筹学分析师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
+        "note": {
+          "$item": "operations-research-analysts.sources.boundary-notice.2",
+          "block": "sources",
+          "copy_key": "career.item.boundary-notice",
+          "type": "prose"
+        },
         "secondary_links": [
           {
             "href": {
@@ -15661,7 +15933,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI测评（英文）"
+            "label": "MBTI（英文）"
           },
           {
             "href": {
@@ -15671,7 +15943,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "大五人格测评（英文）"
+            "label": "大五人格（英文）"
           },
           {
             "href": {
@@ -15681,7 +15953,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI测评（中文）"
+            "label": "MBTI（中文）"
           },
           {
             "href": {
@@ -15691,7 +15963,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "大五人格测评（中文）"
+            "label": "大五人格（中文）"
           }
         ]
       },
@@ -15779,7 +16051,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI辅助情景",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15802,7 +16074,7 @@
         "fact_id": "or-cn-prof-wage",
         "market": "中国大陆",
         "measure": "规模以上企业专业技术人员年平均工资",
-        "occupation_scope": "仅建模与专业决策支持任务方向宽岗位，含其他专业岗位非运筹工资个人区间，不含个体自由职业",
+        "occupation_scope": "包含多种专业职业的宽岗位总体，本页仅用作背景，不是运筹分析师工资样本或个人区间。",
         "period": "2025年",
         "source_refs": [
           "or-nbs"
@@ -15814,7 +16086,7 @@
         "fact_id": "or-cn-science-wage",
         "market": "中国大陆",
         "measure": "科学研究和技术服务业·规模以上企业专业技术人员年平均工资",
-        "occupation_scope": "仅该行业企业雇主方向人口子组，非所有运筹分析師，含其他专业岗非个人区间，机关另核",
+        "occupation_scope": "该行业内相应专业技术宽岗位子群，不是全部运筹分析师或政府机关；不含个体工商户和自由职业者。",
         "period": "2025年",
         "source_refs": [
           "or-nbs"
@@ -15881,13 +16153,13 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+        "derivation": "预设三项信息产出档位50/75/75并等权，floor((50+75+75)/3+0.5)=67。评分对象和条件见方法记录，不是全职业工时、实测质量、采用率或岗位流失比例。",
         "display_value": "67%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "运筹学分析师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "measure": "AI辅助情景指数（编辑估算）",
+        "occupation_scope": "运筹分析中三个选定信息产出的假设情景，未验证职业代表性。",
+        "period": "估算规则v1日期2026-10-18；2026-11-08明确情景范围，未开展能力实验。",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -15899,7 +16171,7 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI辅助情景指数（编辑估算）"
     },
     "badges": [
       "运筹分析师 · O*NET 15-2031.00",
@@ -15950,7 +16222,7 @@
       "text": "运筹分析师：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "57d6da1cfd0505005fb44f7350d4790c7e0007c324937283758c25b7447344bb",
+  "source_content_sha256": "adf9350f525125ff5cfd19ee64c9540d20e21a26beba669848a25af0673713a5",
   "subject": {
     "canonical_slug": "operations-research-analysts",
     "name": "运筹分析师",
