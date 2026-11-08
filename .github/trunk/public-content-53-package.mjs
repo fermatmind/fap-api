@@ -7,6 +7,7 @@ import { canonical } from './iq-public-scale-package.mjs';
 export const packagePath = 'content_assets/public_content_53';
 // Selection comes from the existing exact-range classifier, never file presence.
 const packages = {
+  'pricing-refund': ['fermatmind.public_content_pricing_refund.v1', ['pricing-refund.json','pricing-refund-review.json']],
   'traditional-pages': ['fermatmind.traditional_content_page.v1', ['traditional-pages.json','traditional-pages-review.json']],
   'zh-reading-links': ['fermatmind.public_content_zh_reading_links.v1', ['zh-reading-links.json','zh-reading-links-review.json']],
   'directory-card-copy': ['fermatmind.tests_directory_card_copy.v1', ['directory-card-copy.json','directory-card-copy-review.json']],

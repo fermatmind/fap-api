@@ -125,6 +125,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/pricing-refund.json')) {
+            $chain = "fermatmind.public_content_pricing_refund.v1\n";
+            foreach (['pricing-refund.json', 'pricing-refund-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return self::pricingRefundPackage($this->bytes($root, 'pricing-refund.json'), $this->bytes($root, 'pricing-refund-review.json'), $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/traditional-pages.json')) {
             $chain = TraditionalContentPagePublication::SCHEMA."\n";
             foreach (['traditional-pages.json', 'traditional-pages-review.json'] as $name) {
@@ -785,6 +794,71 @@ final class PublicContent53Package
             || preg_match('/\Afamilies\.items\.\d+\.tests\.\d+\.(?:questionsLabel|durationLabel)\z/', $path) !== 1) {
             throw new DomainException('public_content_53_directory_protected_field');
         }
+    }
+
+    /** Copy-only publication of the eight existing billing/policy pages. */
+    public static function pricingRefundPackage(string $bytes, string $reviewBytes, string $sha): array
+    {
+        $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $review = json_decode($reviewBytes, true, 64, JSON_THROW_ON_ERROR);
+        $rows = $package['candidates'] ?? [];
+        $targets = [];
+        foreach (['TERMS' => 'terms', 'POLICIES' => 'policies', 'REFUND' => 'help-payment-refund', 'FAQ' => 'help-faq'] as $key => $slug) {
+            foreach (['ZH' => 'zh-CN', 'EN' => 'en'] as $suffix => $locale) {
+                $targets['PR-'.$key.'-'.$suffix] = ['org_id' => 0, 'slug' => $slug, 'locale' => $locale];
+            }
+        }
+        if (($package['schema'] ?? null) !== 'fermatmind.public_content_pricing_refund.v1'
+            || ! is_array($rows) || ! array_is_list($rows) || count($rows) !== count($targets)
+            || ($review['schema'] ?? null) !== 'fermatmind.public_content_pricing_refund.review.v1'
+            || ($review['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($review['verdict'] ?? null) !== 'PASS' || count($review['pages'] ?? []) !== count($targets)) {
+            throw new DomainException('public_content_53_pricing_refund_review_invalid');
+        }
+        $seen = [];
+        foreach ($rows as $row) {
+            $id = $row['page_id'] ?? '';
+            if (! isset($targets[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'page'
+                || ($row['identity'] ?? null) !== $targets[$id] || ($review['pages'][$id] ?? null) !== 'PASS'
+                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'staging_snapshot', 'source_identity', 'staging_source_identity']) !== []) {
+                throw new DomainException('public_content_53_pricing_refund_scope_invalid');
+            }
+            $seen[$id] = true;
+            foreach (['before', 'staging_before', 'snapshot', 'staging_snapshot'] as $version) {
+                $copy = $row[$version] ?? null;
+                if (! is_array($copy) || array_keys($copy) !== ['title', 'summary', 'content_md', 'faq_items']
+                    || ! is_string($copy['title']) || trim($copy['title']) === ''
+                    || ! is_string($copy['summary']) || ! is_string($copy['content_md']) || trim($copy['content_md']) === ''
+                    || ! is_array($copy['faq_items']) || ! array_is_list($copy['faq_items'])) {
+                    throw new DomainException('public_content_53_pricing_refund_fields_invalid');
+                }
+                foreach ($copy['faq_items'] as $faq) {
+                    $keys = is_array($faq) ? array_keys($faq) : [];
+                    sort($keys);
+                    if ($keys !== ['answer', 'question'] || ! is_string($faq['question']) || trim($faq['question']) === ''
+                        || ! is_string($faq['answer']) || trim($faq['answer']) === '') {
+                        throw new DomainException('public_content_53_pricing_refund_faq_invalid');
+                    }
+                }
+            }
+            foreach (['' => 'before', 'staging_' => 'staging_before'] as $prefix => $before) {
+                $snapshot = $row[$prefix.'snapshot'];
+                $flags = $row[$prefix.'source_identity'] ?? null;
+                if ($snapshot['title'] !== $row[$before]['title']
+                    || ($row['identity']['slug'] !== 'help-payment-refund' && $snapshot['faq_items'] !== $row[$before]['faq_items'])
+                    || $flags !== []) {
+                    throw new DomainException('public_content_53_pricing_refund_controls_invalid');
+                }
+            }
+        }
+        if (function_exists('app') && app()->bound('config') && self::environment() === 'staging') {
+            foreach ($rows as &$row) {
+                $row['snapshot'] = $row['staging_snapshot'];
+            }
+            unset($row);
+        }
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
     }
 
     private function readCopyAmendment(string $root, string $sha): array

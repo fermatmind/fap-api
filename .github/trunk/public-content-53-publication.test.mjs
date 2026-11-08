@@ -9,6 +9,29 @@ import { selectPublicContentPackage, packageDigest, executorPaths, inspectPackag
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
 import { assertNewArticleDiscovery, assertDom, domOf, pathFor, read, projection, readOnlinePrestate, verifyOnlineCandidates } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
+test('pricing/refund publication selects only eight existing bilingual pages and keeps native publication controls',()=>{
+ const paths=['backend/content_assets/public_content_53/pricing-refund.json','backend/content_assets/public_content_53/pricing-refund-review.json'];
+ assert.equal(selectPublicContentPackage(paths),'pricing-refund');
+ assert.equal(classifyPaths(paths).operations.public_content_53_package,'pricing-refund');
+ assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/translation-batch.json']),/MULTIPLE_PACKAGES/);
+ const binding=inspectPackage(root,'pricing-refund');
+ assert.equal(binding.expected_row_count,8);
+ const rows=readCandidateRows(root,binding.package_sha256).candidates;
+ assert.deepEqual(new Set(rows.map(row=>pathFor(row))),new Set(['terms','policies','help/payment-refund','help/faq'].flatMap(path=>['zh','en'].map(locale=>`/${locale}/${path}`))));
+ for(const row of rows) {
+  assert.equal(row.kind,'page');
+  assert.deepEqual(Object.keys(row.snapshot),['title','summary','content_md','faq_items']);
+  assert.equal(row.snapshot.title,row.before.title);
+  assert.equal(row.staging_snapshot.title,row.staging_before.title);
+  const body=row.snapshot.content_md;
+  assert.ok(body.includes('9.99')&&body.includes('1.99'));
+  assert.ok(body.includes(row.identity.locale==='en'?'7 business days':'7 个工作日')||row.identity.slug==='help-faq'||row.identity.slug==='policies');
+  if(row.identity.slug==='help-payment-refund') {
+   assert.equal(row.snapshot.faq_items.length,4);
+   for(const faq of row.snapshot.faq_items) assert.ok(body.includes(faq.question)&&body.includes(faq.answer));
+  }
+ }
+});
 test('Chinese directory card package selects one native surface and retains serial publication',()=>{
  const paths=['backend/content_assets/public_content_53/directory-card-copy.json','backend/content_assets/public_content_53/directory-card-copy-review.json'];
  assert.equal(selectPublicContentPackage(paths),'directory-card-copy');
