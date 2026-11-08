@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import test from 'node:test';
+import { productionPlan } from './production-release-budget.mjs';
 
 const workflow = readFileSync(new URL('../workflows/deploy.yml', import.meta.url), 'utf8');
 const deploy = readFileSync(new URL('../../deploy.php', import.meta.url), 'utf8');
@@ -248,27 +249,29 @@ test('staging budgets include Career cache work without changing default or coun
 });
 
 test('Career cache and Current production budgets preserve complete mixed-scope checks', () => {
-  const start = workflow.indexOf('          deploy_timeout=30m', workflow.indexOf('          lkg_sha='));
+  const start = workflow.indexOf('          deploy_minutes="$PRODUCTION_DEPLOY_MINUTES"');
   assert.notEqual(start, -1);
   const end = workflow.indexOf('          set +e', start);
+  assert.ok(end > start);
   const budget = workflow.slice(start, end);
-  for (const [current, cache, competitive, council, expected] of [
-    [false, false, false, false, '30m'], [false, false, true, false, '35m'],
-    [true, false, false, false, '60m'], [true, false, true, false, '60m'],
-    [false, false, false, true, '60m'], [true, false, true, true, '60m'],
-    [false, true, false, false, '60m'], [false, true, true, false, '60m'],
-    [false, true, false, true, '60m'], [true, true, true, true, '60m'],
-  ]) {
-    const script = budget
-      .replaceAll('${{ needs.policy.outputs.career_current }}', String(current))
-      .replaceAll('${{ fromJSON(needs.policy.outputs.classification).operations.career_cache }}', String(cache))
-      .replaceAll('${{ needs.policy.outputs.operations }}', Buffer.from(JSON.stringify({career_current_authority_release:current})).toString('base64'));
-    const actual = execFileSync('bash', ['-eu', '-c', `${script}\nprintf '%s' "$deploy_timeout"`], {
-      encoding: 'utf8',
-      env: { ...process.env, competitive_evidence: String(competitive), production_council_closeout: String(council),
-        PRODUCTION_JOB_BUDGET_SECONDS:'7200',PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)),GITHUB_ENV:'/dev/null' },
-    });
-    assert.equal(actual, expected);
+  assert.match(workflow, /PRODUCTION_DEPLOY_MINUTES: \$\{\{ needs\.policy\.outputs\.production_deploy_minutes \}\}/);
+  assert.match(workflow, /PRODUCTION_REQUIRED_SECONDS: \$\{\{ needs\.policy\.outputs\.production_required_seconds \}\}/);
+  for (const current of [false, true]) for (const cache of [false, true]) {
+    for (const competitive of [false, true]) for (const council of [false, true]) {
+      const plan = productionPlan({ career_cache: cache }, {
+        careerCurrent: current, competitiveEvidence: competitive, councilRuntimeCloseout: council,
+      });
+      const expected = current || cache || (competitive && council) ? 60 : competitive ? 35 : 30;
+      assert.equal(plan.deploy_minutes, expected);
+      const actual = execFileSync('bash', ['-eu', '-c', `${budget}\nprintf '%s' "$deploy_minutes"`], {
+        encoding: 'utf8',
+        env: { ...process.env, PRODUCTION_DEPLOY_MINUTES: String(plan.deploy_minutes),
+          PRODUCTION_REQUIRED_SECONDS: String(plan.required_seconds),
+          PRODUCTION_JOB_BUDGET_SECONDS: String(plan.job_budget_seconds),
+          PRODUCTION_JOB_STARTED_EPOCH: String(Math.floor(Date.now()/1000)), GITHUB_ENV: '/dev/null' },
+      });
+      assert.equal(actual, String(expected));
+    }
   }
   const production = workflow.slice(start);
   assert.match(production, /timeout --signal=TERM --kill-after=30s "\$deploy_timeout"/);

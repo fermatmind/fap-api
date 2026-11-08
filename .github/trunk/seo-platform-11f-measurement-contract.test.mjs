@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { productionPlan } from "./production-release-budget.mjs";
 
 const ci = readFileSync(new URL("../workflows/ci.yml", import.meta.url), "utf8");
 const deploy = readFileSync(new URL("../workflows/deploy.yml", import.meta.url), "utf8");
@@ -103,7 +104,13 @@ test("staging refreshes real measurement and production validates before conditi
   assert.match(production, /ConnectionAttempts=3/);
   assert.match(production, /production_council_closeout=false/);
   assert.match(production, /if \[ "\$competitive_evidence" = true \] && \[ "\$council_orchestration" = true \]; then/);
-  assert.match(production, /if test "\$production_council_closeout" = true; then deploy_timeout=60m; fi/);
+  assert.match(deploy, /COMPETITIVE_EVIDENCE: \$\{\{ steps\.receipt\.outputs\.seo_competitive_evidence \}\}/);
+  assert.match(deploy, /COUNCIL_RUNTIME_CLOSEOUT: \$\{\{ steps\.receipt\.outputs\.seo_council_runtime_closeout \}\}/);
+  assert.match(deploy, /production_deploy_minutes: \$\{\{ steps\.production-budget\.outputs\.deploy_minutes \}\}/);
+  assert.match(production, /deploy_minutes="\$PRODUCTION_DEPLOY_MINUTES"/);
+  assert.equal(productionPlan({}, { competitiveEvidence: true, councilRuntimeCloseout: true }).deploy_minutes, 60);
+  assert.equal(productionPlan({}, { competitiveEvidence: true, councilRuntimeCloseout: false }).deploy_minutes, 35);
+  assert.equal(productionPlan({}, { competitiveEvidence: false, councilRuntimeCloseout: true }).deploy_minutes, 30);
   assert.match(production, /-o seo_council_orchestration="\$production_council_closeout"/);
 });
 
