@@ -21,7 +21,9 @@ final class TraditionalContentPagePublication
 
     public const FIELDS = ['title', 'kicker', 'summary', 'seo_title', 'meta_description', 'seo_description', 'content_md', 'headings', 'faq_items'];
 
-    private const SLUGS = ['about', 'brand', 'charter', 'careers', 'privacy', 'terms', 'method-boundaries', 'science', 'help-contact'];
+    private const SLUGS = ['about', 'brand', 'charter', 'careers', 'privacy', 'terms', 'method-boundaries', 'science', 'help-contact', 'foundation', 'policies', 'help-faq', 'help-about', 'help-team', 'help-used-and-mentioned', 'help-for-business-and-research'];
+
+    private const ENVIRONMENT_SLUGS = ['help-contact', 'foundation', 'policies', 'help-faq', 'help-about', 'help-team', 'help-used-and-mentioned', 'help-for-business-and-research'];
 
     /** Fixed classifications only: never return SQL, payloads or exception text. */
     public static function failureCode(\Throwable $error): string
@@ -92,8 +94,11 @@ final class TraditionalContentPagePublication
             $slug = $row['identity']['slug'] ?? null;
             $keys = array_keys($row);
             $expectedKeys = ['before', 'identity', 'kind', 'new_traditional_page', 'page_id', 'snapshot', 'source_snapshot', 'staging_before'];
+            if (in_array($slug, self::ENVIRONMENT_SLUGS, true)) {
+                $expectedKeys = [...$expectedKeys, 'staging_source_snapshot', 'staging_snapshot'];
+            }
             if ($slug === 'help-contact') {
-                $expectedKeys = [...$expectedKeys, 'staging_source_snapshot', 'staging_snapshot', 'protected_fields'];
+                $expectedKeys[] = 'protected_fields';
             }
             sort($keys);
             sort($expectedKeys);
@@ -106,13 +111,15 @@ final class TraditionalContentPagePublication
             $seen[$slug] = true;
             $pageProof = $proof['pages'][$row['page_id']] ?? [];
             self::assertReviewedCopy($row, $pageProof);
+            if (in_array($slug, self::ENVIRONMENT_SLUGS, true)) {
+                self::assertReviewedCopy(['source_snapshot' => $row['staging_source_snapshot'], 'snapshot' => $row['staging_snapshot']], $pageProof, 'staging_');
+            }
             if ($slug === 'help-contact') {
                 $email = $row['protected_fields']['support_contact'] ?? null;
                 if (! is_array($row['protected_fields']) || array_keys($row['protected_fields']) !== ['support_contact']
                     || ! is_string($email) || filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                     throw new DomainException('traditional_page_contact_binding_invalid');
                 }
-                self::assertReviewedCopy(['source_snapshot' => $row['staging_source_snapshot'], 'snapshot' => $row['staging_snapshot']], $pageProof, 'staging_');
                 foreach ([$row['source_snapshot'], $row['staging_source_snapshot']] as $sourceCopy) {
                     if (! str_contains($sourceCopy['content_md'], '](mailto:'.$email.')')) {
                         throw new DomainException('traditional_page_contact_binding_invalid');
@@ -130,7 +137,7 @@ final class TraditionalContentPagePublication
         if (! in_array($environment, ['staging', 'production'], true)) {
             throw new DomainException('traditional_page_environment_invalid');
         }
-        if ($environment === 'staging' && $row['identity']['slug'] === 'help-contact') {
+        if ($environment === 'staging' && in_array($row['identity']['slug'], self::ENVIRONMENT_SLUGS, true)) {
             return array_replace($row, ['source_snapshot' => $row['staging_source_snapshot'], 'snapshot' => $row['staging_snapshot']]);
         }
 
@@ -189,7 +196,7 @@ final class TraditionalContentPagePublication
 
     private static function targetPath(string $slug): string
     {
-        return $slug === 'help-contact' ? '/zh-TW/help/contact' : '/zh-TW/'.$slug;
+        return '/zh-TW/'.(str_starts_with($slug, 'help-') ? 'help/'.substr($slug, 5) : $slug);
     }
 
     private static function markdownLinkTargets(string $text): array
@@ -246,9 +253,11 @@ final class TraditionalContentPagePublication
             'html' => trim((string) $source->content_html) === '',
             'version' => (bool) preg_match('/^[a-f0-9]{64}$/', (string) $source->source_version_hash),
         ];
+        if (in_array($row['identity']['slug'], self::ENVIRONMENT_SLUGS, true)) {
+            $checks['path'] = preg_replace('#^/(?:en|zh)(?=/|$)#', '', (string) $source->path) === substr(self::targetPath($source->slug), 6);
+        }
         if ($row['identity']['slug'] === 'help-contact') {
             $checks['support_contact'] = $source->support_contact === $row['protected_fields']['support_contact'];
-            $checks['path'] = preg_replace('#^/(?:en|zh)(?=/|$)#', '', (string) $source->path) === '/help/contact';
         }
         $copy = $this->copy($source);
         foreach (self::FIELDS as $field) {

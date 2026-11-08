@@ -47,7 +47,8 @@ final class PublicContent53FrontendRevalidator
             } elseif ($row['kind'] === 'profile') {
                 $paths = ["/$segment/topics/$slug"];
                 $content = ['type' => 'public_content_53'];
-            } elseif ($row['kind'] === 'page' && in_array($slug, ['about', 'careers', 'charter', 'help-faq', 'help-contact', 'help-for-business-and-research'], true)) {
+            } elseif ($row['kind'] === 'page' && in_array($slug, ['about', 'careers', 'charter', 'help-faq', 'help-contact', 'help-for-business-and-research'], true)
+                || ($row['kind'] === 'page' && $row['identity']['locale'] === 'zh-TW' && in_array($slug, ['foundation', 'policies', 'help-about', 'help-team', 'help-used-and-mentioned'], true))) {
                 $path = str_starts_with($slug, 'help-') ? 'help/'.substr($slug, 5) : $slug;
                 $paths = ["/$segment/$path"];
                 $content = ['type' => 'public_content_53'];

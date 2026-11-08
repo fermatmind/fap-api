@@ -912,26 +912,30 @@ test('AI method hreflang acceptance requires its exact reciprocal pair and keeps
  }
 });
 
-test('Traditional CMS package selects nine reviewed variants with distinct contact environment sources and verifies complete noindex DOM',()=>{
+test('Traditional CMS package selects sixteen reviewed variants with exact environment sources and verifies complete noindex DOM',()=>{
  const paths=['backend/content_assets/public_content_53/traditional-pages.json','backend/content_assets/public_content_53/traditional-pages-review.json'];
  assert.equal(selectPublicContentPackage(paths),'traditional-pages');
  assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/translation-batch.json']),/MULTIPLE_PACKAGES/);
  const binding=inspectPackage(root,'traditional-pages');
- assert.equal(binding.expected_row_count,9);
+ assert.equal(binding.expected_row_count,16);
  const rows=readCandidateRows(root,binding.package_sha256).candidates;
- assert.deepEqual(rows.map(row=>row.identity.slug),['about','brand','charter','careers','privacy','terms','method-boundaries','science','help-contact']);
+ assert.deepEqual(rows.map(row=>row.identity.slug),['about','brand','charter','careers','privacy','terms','method-boundaries','science','help-contact','foundation','policies','help-faq','help-about','help-team','help-used-and-mentioned','help-for-business-and-research']);
  const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
  for(const original of rows) {
   for(const environment of ['staging','production']) {
   const row=environment==='staging'&&original.staging_snapshot?{...original,snapshot:original.staging_snapshot}:original;
   assert.equal(row.identity.locale,'zh-TW');
-  assert.equal(pathFor(row),row.identity.slug==='help-contact'?'/zh-TW/help/contact':`/zh-TW/${row.identity.slug}`);
+  assert.equal(pathFor(row),`/zh-TW/${row.identity.slug.startsWith('help-')?'help/'+row.identity.slug.slice(5):row.identity.slug}`);
   assert.equal(row.snapshot.is_indexable,false);
   const links=[['/method-boundaries','/zh/method-boundaries','方法邊界'],['/item-design-notes','/zh/item-design-notes','題目設計說明'],['/reliability-validity','/zh/reliability-validity','信度與效度'],['/tests/mbti-personality-test-16-personality-types','/zh/tests/mbti-personality-test-16-personality-types','MBTI免費測試'],['/tests/big-five-personality-test','/zh/tests/big-five-personality-test-ocean-model','大五人格免費測試'],['/tests/holland-career-interest-test-riasec','/zh/tests/holland-career-interest-test-riasec','霍蘭德職業興趣免費測試']];
   const body=row.snapshot.content_md.split('\n').filter(line=>line && !/^# content_md$|^visible_faq_items:$/.test(line)).map(line=>{
    let copy=escape(line.replace(/^#{1,6}\s+/,'').replaceAll('*',''));
    copy=copy.replace(/\[([^\[\]\n]+)\]\(([^()\s]+)\)/g,(_,label,href)=>`<a href="${href}">${label}</a>`);
-   for(const [path,href,label] of links)copy=copy.replaceAll(path,`<a href="${href}">${label}</a>`);
+   copy=copy.split(/(<a\b[^>]*>[\s\S]*?<\/a>)/g).map((chunk,index)=>{
+    if(index%2)return chunk;
+    for(const [path,href,label] of links)chunk=chunk.replaceAll(path,`<a href="${href}">${label}</a>`);
+    return chunk;
+   }).join('');
    return `<p>${copy}</p>`;
   }).join('');
   const url='https://fermatmind.com'+pathFor(row);
