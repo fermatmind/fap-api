@@ -375,7 +375,7 @@ final class ContentPageController extends Controller
     private function validateReadQuery(Request $request): array|JsonResponse
     {
         $validator = Validator::make($request->query(), [
-            'locale' => ['nullable', 'string', Rule::in(['en', 'zh-CN', 'zh'])],
+            'locale' => ['nullable', 'string', Rule::in(['en', 'zh-CN', 'zh', 'zh-TW'])],
             'org_id' => ['nullable', 'integer', 'min:0'],
         ]);
 
@@ -501,6 +501,12 @@ final class ContentPageController extends Controller
     private function normalizeLocale(string $locale): string
     {
         $normalized = strtolower(str_replace('_', '-', trim($locale)));
+
+        // Display-language variants are independent ContentPage identities.
+        // Never serve the simplified row/cache for an explicitly requested TW page.
+        if ($normalized === 'zh-tw') {
+            return 'zh-TW';
+        }
 
         return str_starts_with($normalized, 'zh') ? 'zh-CN' : 'en';
     }

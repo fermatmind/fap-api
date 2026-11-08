@@ -7,6 +7,7 @@ namespace App\Services\Cms;
 use App\Contracts\Cms\SiblingTranslationAdapter;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\CmsTranslationRevision;
+use App\Models\ContentPage;
 use App\Services\Audit\AuditLogger;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -111,6 +112,97 @@ final class SiblingTranslationWorkflowService
             ]);
 
             return $target;
+        });
+    }
+
+    /** Import an offline prepared TW candidate into the existing revision workspace. */
+    public function createPreparedContentPageDraft(int $sourceId, string $expectedSourceHash, array $fields): ContentPage
+    {
+        $allowed = ['title', 'kicker', 'summary', 'seo_title', 'meta_description', 'seo_description', 'content_md', 'headings', 'faq_items'];
+        if (array_diff(array_keys($fields), $allowed) !== []
+            || array_diff($allowed, array_keys($fields)) !== []
+            || ! preg_match('/^[a-f0-9]{64}$/', $expectedSourceHash)) {
+            throw new CmsTranslationWorkflowException('Prepared ContentPage fields or source binding are invalid.', ['prepared payload invalid']);
+        }
+        foreach (array_diff($allowed, ['headings', 'faq_items']) as $field) {
+            if (! is_string($fields[$field]) && $fields[$field] !== null) {
+                throw new CmsTranslationWorkflowException('Prepared ContentPage text is invalid.', ['prepared text invalid']);
+            }
+        }
+        if (! is_array($fields['headings']) || ! array_is_list($fields['headings'])
+            || array_filter($fields['headings'], static fn ($heading): bool => ! is_string($heading)) !== []
+            || ! is_array($fields['faq_items']) || ! array_is_list($fields['faq_items'])) {
+            throw new CmsTranslationWorkflowException('Prepared ContentPage structure is invalid.', ['prepared structure invalid']);
+        }
+        foreach ($fields['faq_items'] as $faq) {
+            if (! is_array($faq) || array_diff(array_keys($faq), ['question', 'answer']) !== []
+                || ! is_string($faq['question'] ?? null) || ! is_string($faq['answer'] ?? null)) {
+                throw new CmsTranslationWorkflowException('Prepared ContentPage FAQ is invalid.', ['prepared FAQ invalid']);
+            }
+        }
+
+        return DB::transaction(function () use ($sourceId, $expectedSourceHash, $fields): ContentPage {
+            $source = ContentPage::query()->withoutGlobalScopes()->lockForUpdate()->findOrFail($sourceId);
+            $adapter = $this->adapter('content_page');
+            if (! $adapter->isSource($source) || $source->locale !== 'zh-CN'
+                || ! $source->passesPublicReadinessGate() || trim((string) $source->content_html) !== '') {
+                throw new CmsTranslationWorkflowException('Prepared translation requires a published canonical Markdown source.', ['source identity invalid']);
+            }
+            $this->assertSourceApprovedForMachineTranslation($adapter, $source);
+            if (! hash_equals($expectedSourceHash, $source->freshSourceVersionHash())
+                || ! hash_equals($expectedSourceHash, (string) $source->source_version_hash)) {
+                throw new CmsTranslationWorkflowException('Prepared translation source changed.', ['source version mismatch']);
+            }
+            $existing = ContentPage::query()->withoutGlobalScopes()
+                ->where('org_id', self::PUBLIC_EDITORIAL_ORG_ID)->where('locale', 'zh-TW')
+                ->where(static function ($query) use ($source): void {
+                    $query->where('translation_group_id', $source->translation_group_id)->orWhere('slug', $source->slug);
+                })->lockForUpdate()->exists();
+            if ($existing) {
+                throw new CmsTranslationWorkflowException('Prepared translation target already exists.', ['target identity collision']);
+            }
+            $payload = $adapter->snapshotPayload($source);
+            foreach (['title', 'kicker', 'summary', 'seo_title', 'meta_description', 'seo_description', 'faq_items'] as $field) {
+                $payload[$field] = $fields[$field];
+            }
+            $payload['body_md'] = $fields['content_md'];
+            $payload['body_html'] = '';
+            $payload['headings_json'] = $fields['headings'];
+            // Source approvals never approve a new translation. It remains a
+            // private working revision until the native review/publication flow.
+            $payload['is_public'] = false;
+            $payload['is_indexable'] = false;
+            $payload['publish_allowed'] = false;
+            $payload['operator_approval_required'] = true;
+            $payload['operator_approved_at'] = null;
+            $payload['claim_gate_status'] = 'not_reviewed';
+            $payload['faq_schema_eligible'] = false;
+            $payload['schema_eligibility_reviewed_at'] = null;
+            $payload['reviewer'] = null;
+            $path = preg_replace('#^/(?:en|zh)(?=/|$)#', '', (string) $source->path);
+            if (! is_string($path) || ! preg_match('#^/[a-z0-9]+(?:[-/][a-z0-9]+)*$#', $path)) {
+                throw new CmsTranslationWorkflowException('Prepared source path is invalid.', ['source path invalid']);
+            }
+            $payload['path'] = '/zh-TW'.$path;
+            $payload['canonical_path'] = $payload['path'];
+            if ($adapter->requiredPayloadBlockers($payload) !== []) {
+                throw new CmsTranslationWorkflowException('Prepared ContentPage is incomplete.', ['prepared payload incomplete']);
+            }
+            /** @var ContentPage $target */
+            $target = $adapter->createTarget($source, 'zh-TW', $payload);
+            $target = $this->workspace->saveWorkingDraft('content_page', $target, $adapter->snapshotPayload($target),
+                CmsTranslationRevision::STATUS_MACHINE_DRAFT, [
+                    'org_id' => self::PUBLIC_EDITORIAL_ORG_ID,
+                    'source_content_id' => (int) $source->id,
+                    'source_locale' => 'zh-CN',
+                    'translation_group_id' => (string) $source->translation_group_id,
+                    'translated_from_version_hash' => $expectedSourceHash,
+                ]);
+            $this->log('cms_prepared_translation_draft_created', 'content_page', $target, [
+                'source_content_id' => (int) $source->id, 'target_locale' => 'zh-TW', 'translation_provider' => 'offline_prepared',
+            ]);
+
+            return $target->refresh();
         });
     }
 
