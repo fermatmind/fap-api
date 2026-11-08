@@ -73,6 +73,7 @@ class CommerceController extends Controller
         return response()->json([
             'ok' => true,
             'items' => $items,
+            ...($scale === 'MBTI' ? ['purchase_preparation' => config('report_unlock.mbti_web_purchase_preparation')] : []),
             FreemiumLocalePolicy::PAYLOAD_KEY => $this->freemiumLocalePolicy->frontendPayload($localePolicy),
         ]);
     }
@@ -651,6 +652,18 @@ class CommerceController extends Controller
         }
         if ($sku === '') {
             abort(422, 'sku unavailable.');
+        }
+
+        if (\App\Support\Mbti\MbtiReportAccessPolicy::grantsFreeFull('MBTI')) {
+            $violation = $this->freemiumLocalePolicyOrderViolation(
+                $request,
+                ['sku' => $sku],
+                $this->trimNullableString($payload['attempt_id'] ?? null),
+                $orgId,
+            );
+            if ($violation !== null) {
+                return $violation;
+            }
         }
 
         $provider = strtolower(trim((string) ($payload['provider'] ?? '')));

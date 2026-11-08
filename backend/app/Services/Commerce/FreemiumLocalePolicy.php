@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce;
 
+use App\Support\Mbti\MbtiReportAccessPolicy;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Carbon;
 
@@ -90,6 +91,18 @@ final class FreemiumLocalePolicy
             'order_creation_allowed' => (bool) ($localeConfig['order_creation_allowed'] ?? false),
             'free_until' => $this->stringOrNull($localeConfig['free_until'] ?? null),
         ]);
+
+        // The public catalog and new orders must agree with the existing report mode.
+        // Historical order recovery and webhook grants do not consume this policy.
+        if (MbtiReportAccessPolicy::grantsFreeFull($scaleCode)) {
+            $policy['policy'] = 'free_only';
+            $policy['report_access_level'] = 'full';
+            $policy['report_access']['free_modules'] = array_values(array_unique(array_merge(
+                $policy['report_access']['free_modules'],
+                $policy['report_access']['paid_modules'],
+            )));
+            $policy['report_access']['paid_modules'] = [];
+        }
 
         if ($policy['policy'] === 'free_until') {
             $freeUntil = $this->parseFreeUntil($policy['free_until']);

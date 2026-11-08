@@ -130,6 +130,50 @@ final class FreemiumLocalePolicyTest extends TestCase
         $this->assertSame(0, DB::table('orders')->count());
     }
 
+    public function test_free_full_catalog_exposes_planning_prices_without_a_sellable_offer(): void
+    {
+        $this->seedScales();
+        config()->set('report_unlock.mbti_access_mode', 'free_full');
+        foreach (['zh-CN', 'zh-TW', 'en'] as $locale) {
+            $this->getJson('/api/v0.3/skus?scale=MBTI&locale='.$locale)
+                ->assertOk()
+                ->assertJsonPath('items', [])
+                ->assertJsonPath('locale_freemium_policy.policy', 'free_only')
+                ->assertJsonPath('locale_freemium_policy.report_access_level', 'full')
+                ->assertJsonPath('locale_freemium_policy.order_creation_allowed', false)
+                ->assertJsonPath('locale_freemium_policy.price_cents', null)
+                ->assertJsonPath('purchase_preparation.purchase_available', false)
+                ->assertJsonPath('purchase_preparation.purchase_type', 'one_time')
+                ->assertJsonPath('purchase_preparation.scope', 'attempt')
+                ->assertJsonPath('purchase_preparation.basic_result_free', true)
+                ->assertJsonPath('purchase_preparation.market_prices.CN_MAINLAND.price_cents', 999)
+                ->assertJsonPath('purchase_preparation.market_prices.CN_MAINLAND.currency', 'CNY')
+                ->assertJsonPath('purchase_preparation.market_prices.TW.price_cents', 199)
+                ->assertJsonPath('purchase_preparation.market_prices.TW.currency', 'USD')
+                ->assertJsonPath('purchase_preparation.market_prices.US.price_cents', 199)
+                ->assertJsonPath('purchase_preparation.market_prices.US.currency', 'USD');
+        }
+        $this->assertSame(199, (int) DB::table('skus')->where('sku', 'MBTI_REPORT_FULL_199')->value('price_cents'));
+    }
+
+    public function test_free_full_rejects_new_mbti_orders_through_both_web_entrypoints(): void
+    {
+        $this->seedScales();
+        config()->set('report_unlock.mbti_access_mode', 'free_full');
+        $attemptId = $this->createMbtiAttemptWithResult('anon_mbti_preparing', 'zh-CN');
+        $token = $this->issueAnonToken('anon_mbti_preparing');
+        foreach (['/api/v0.3/orders' => 'target_attempt_id', '/api/v0.3/orders/checkout' => 'attempt_id'] as $url => $field) {
+            $this->withHeaders(['Authorization' => 'Bearer '.$token, 'X-Fap-Locale' => 'zh-CN'])
+                ->postJson($url, ['sku' => 'MBTI_REPORT_FULL_199', 'provider' => 'billing', $field => $attemptId])
+                ->assertStatus(422)
+                ->assertJsonPath('error_code', 'LOCALE_POLICY_ORDER_NOT_ALLOWED');
+        }
+        $this->assertSame(0, DB::table('orders')->count());
+        $this->withHeaders(['Authorization' => 'Bearer '.$token, 'X-Fap-Locale' => 'zh-CN'])
+            ->getJson('/api/v0.3/attempts/'.$attemptId.'/report')
+            ->assertOk()->assertJsonPath('locked', false)->assertJsonPath('offers', [])->assertJsonPath('cta.visible', false);
+    }
+
     private function seedScales(): void
     {
         (new ScaleRegistrySeeder)->run();

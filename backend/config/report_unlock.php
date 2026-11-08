@@ -13,6 +13,19 @@ $csv = static fn (string $key, string $default = ''): array => array_values(arra
 return [
     'contract_version' => 'report_unlock.v1',
     'mbti_access_mode' => env('MBTI_REPORT_ACCESS_MODE', 'free_full'),
+    // Planning prices only: no SKU activation, gateway selection or checkout permission.
+    'mbti_web_purchase_preparation' => [
+        'status' => 'preparing',
+        'purchase_available' => false,
+        'purchase_type' => 'one_time',
+        'scope' => 'attempt',
+        'basic_result_free' => true,
+        'market_prices' => [
+            'CN_MAINLAND' => ['currency' => 'CNY', 'price_cents' => 999],
+            'TW' => ['currency' => 'USD', 'price_cents' => 199],
+            'US' => ['currency' => 'USD', 'price_cents' => 199],
+        ],
+    ],
     'benefit' => 'full_report',
     'scope' => 'attempt',
     'currency' => 'CNY',
