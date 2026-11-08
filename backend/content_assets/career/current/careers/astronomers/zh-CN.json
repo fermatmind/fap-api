@@ -36,13 +36,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +63,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -31508,22 +31508,37 @@
                 "question_key": "career.faq.astronomers.7"
               },
               {
-                "answer": "O*NET 展示的数据给出 19-2011.00 本职业 2024 年在岗约 1,800 人、2024—2034 年预计增长 1%—2%、预测期约 100 个岗位空缺；BLS 职业展望手册对物理学家与天文学家合并口径给出 2025—2035 年增长 7%、平均每年约 1,500 个空缺。可转向的方向包括计算机与信息研究科学家、数学家、统计师、数据科学家、物理学家、大气与空间科学家、地球科学家与高校物理教师，但各方向的方法要求与责任边界不同。",
+                "answer": "BLS 表1.2单列天文学家（19-2011）：2025年约2,400人，2025—2035年预计增长7.8%，平均每年约100个岗位空缺，空缺包含增长与人员替代需求，并非每年净新增100个岗位。物理学家与天文学家合并组的OOH预测约为增长7%、平均每年1,500个空缺，不能用合并组代替天文学家单列数据。可探索的相邻方向包括计算机与信息研究科学家、数学家、统计师、数据科学家、物理学家、大气与空间科学家、地球科学家与高校物理教师；各方向的方法、资格和责任要求需分别核对。",
                 "id": "astronomers.faq.8",
                 "question": "天文学家的前景与转向如何判断？",
-                "question_key": "career.faq.astronomers.8"
+                "question_key": "career.faq.astronomers.8",
+                "source_refs": [
+                  "bls-ep-2025-2035-current",
+                  "operations",
+                  "onet"
+                ]
               },
               {
-                "answer": "O*NET 展示的 2025 年工资分位是 19-2011.00 Astronomers 本职业口径（中位年薪 128,820 美元），与 BLS 职业展望手册公布的天文学家中位年薪一致；但 BLS 职业展望手册的就业与预测用的是物理学家与天文学家合并口径（2025 年约 25,600 人、2025—2035 年增长 7%）。两者覆盖范围与资料期不同，不能混用，也不能外推为中国大陆的工资。",
+                "answer": "O*NET展示的2025年工资分位对应天文学家单列职业（19-2011.00），中位年薪128,820美元，与BLS职业展望手册的天文学家单列值一致。BLS同时公布天文学家单列和物理学家与天文学家合并组：本页就业与预测使用天文学家单列；合并组数据仅供对照。不能将不同职业分组的数据混用，也不能外推为中国大陆工资。",
                 "id": "astronomers.faq.9",
                 "question": "美国工资为什么有两个口径？",
-                "question_key": "career.faq.astronomers.9"
+                "question_key": "career.faq.astronomers.9",
+                "source_refs": [
+                  "onet-wages",
+                  "operations",
+                  "bls-ep-2025-2035-current"
+                ]
               },
               {
-                "answer": "常见误解包括：认为「喜欢星空」或天文摄影爱好即可进入研究岗位（实际需要系统的研究训练与方法能力）；认为该职业主要是夜间目视观测（实际大量时间用于数据处理、编程与分析）；认为学位自动带来观测时间、经费或署名资格（实际由机构与项目分配）；以及认为 AI 已整体取代该职业（实际官方预测为 2024—2034 年本职业增长 1%—2%、合并职业群 2025—2035 年增长 7%，任务自动化不等于岗位消失）。",
+                "answer": "常见误解包括：认为「喜欢星空」或天文摄影爱好即可进入研究岗位（实际需要系统的研究训练与方法能力）；认为该职业主要是夜间目视观测（实际大量时间用于数据处理、编程与分析）；认为学位自动带来观测时间、经费或署名资格（实际由机构与项目分配）。任务自动化也不等于岗位消失；BLS预测天文学家2025—2035年就业增长7.8%，但就业预测不能证明某项AI工具的实际影响，也不保证个人就业。",
                 "id": "astronomers.faq.10",
                 "question": "关于天文学家有哪些常见误解？",
-                "question_key": "career.faq.astronomers.10"
+                "question_key": "career.faq.astronomers.10",
+                "source_refs": [
+                  "bls-ep-2025-2035-current",
+                  "operations",
+                  "onet"
+                ]
               }
             ]
           },
@@ -31535,7 +31550,9 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "bls-ep-2025-2035-current",
+            "operations"
           ],
           "type": "faq"
         },
@@ -32318,6 +32335,21 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "表1.2的就业人数与年均岗位空缺以千人为单位；天文学家单列19-2011。"
+                ],
+                "evidence_type": "官方就业预测",
+                "id": "bls-ep-2025-2035-current",
+                "limitation": "预测不等于已发生结果或个人获聘概率；年均空缺包含增长与人员替代需求，不能当作净新增。",
+                "market": "美国",
+                "name": "BLS 职业预测表1.2（2025—2035）",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -37308,39 +37340,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1,800人",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "2,400人（2025年）",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "2024 年在岗人数（19-2011.00 本职业口径）",
+        "measure": "就业人数",
         "occupation_scope": "天文学家",
-        "period": "2024 年；访问 2026-09-15",
+        "period": "2025",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1%—2%（慢于平均）",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "7.8%（2025—2035年预测）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "2024—2034 年就业增长率",
+        "measure": "预测就业增长率",
         "occupation_scope": "天文学家",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "period": "2025—2035",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "100个净新增岗位",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "平均每年约100个岗位空缺（2025—2035年）",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "2024—2034 年预测期岗位空缺",
+        "measure": "年均岗位空缺，含增长与人员替代需求",
         "occupation_scope": "天文学家",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "period": "2025—2035",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
@@ -37512,39 +37544,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1,800人",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "2,400人（2025年）",
         "fact_id": "us-employment-parent",
         "market": "美国",
-        "measure": "2024 年在岗人数（本职业口径）",
+        "measure": "就业人数",
         "occupation_scope": "天文学家",
-        "period": "2024 年",
+        "period": "2025",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1%—2%",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "7.8%（2025—2035年预测）",
         "fact_id": "us-growth-parent",
         "market": "美国",
-        "measure": "2024—2034 年就业增长率",
+        "measure": "预测就业增长率",
         "occupation_scope": "天文学家",
-        "period": "2024—2034 年",
+        "period": "2025—2035",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "100个净新增岗位",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "平均每年约100个岗位空缺（2025—2035年）",
         "fact_id": "us-openings-parent",
         "market": "美国",
-        "measure": "2024—2034 年预测期岗位空缺",
+        "measure": "年均岗位空缺，含增长与人员替代需求",
         "occupation_scope": "天文学家",
-        "period": "2024—2034 年",
+        "period": "2025—2035",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
@@ -37584,19 +37616,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（本职业口径）"
+        "label": "美国就业增长（2025—2035年预测）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（本职业口径）"
+        "label": "美国就业人数（2025年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预测期岗位空缺（2025—2035）"
+        "label": "美国年均岗位空缺（2025—2035年）"
       },
       {
         "availability": "missing",
@@ -37617,7 +37649,7 @@
       "text": "天文学家"
     }
   },
-  "source_content_sha256": "31330ca3f580328537ec880f870686762b7528e61c924df091e952925802cd15",
+  "source_content_sha256": "70c23d0ff72d1103ad3044ff416c26dd135f0fd828dd186f52b342d85aa827d8",
   "subject": {
     "canonical_slug": "astronomers",
     "name": "天文学家",

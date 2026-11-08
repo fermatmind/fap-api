@@ -31511,19 +31511,34 @@
                 "answer": "BLS projects Astronomers employment from 2,400 in 2025 to 2,600 in 2035, a 7.8% increase, with about 100 openings per year on average including growth and replacement needs. Annual openings are not the net increase over ten years or an individual hiring probability.",
                 "id": "astronomers.faq.8",
                 "question": "How should the outlook and transfers for astronomers be judged?",
-                "question_key": "career.faq.astronomers.8"
+                "question_key": "career.faq.astronomers.8",
+                "source_refs": [
+                  "bls-ep-2025-2035-current",
+                  "operations",
+                  "onet"
+                ]
               },
               {
-                "answer": "The 2025 wage percentiles shown by O*NET use the 19-2011.00 Astronomers occupation-specific measure (median annual wage 128,820 US dollars), consistent with the astronomer median annual wage published in the BLS Occupational Outlook Handbook; but the employment and projection in the BLS Occupational Outlook Handbook use the combined physicists and astronomers measure (about 25,600 people in 2025, 7% growth for 2025—2035). The two have different coverage and data periods, cannot be mixed, and cannot be extrapolated to wages in mainland China.",
+                "answer": "The 2025 wage percentiles shown by O*NET refer to Astronomers (19-2011.00), with a median annual wage of $128,820, consistent with the astronomer figure in the BLS Occupational Outlook Handbook. BLS publishes both astronomer-specific figures and a combined physicists-and-astronomers group. This page uses the astronomer-specific employment and projections; combined-group figures are for comparison only. Do not mix occupational groups or extrapolate these U.S. figures to wages in mainland China.",
                 "id": "astronomers.faq.9",
                 "question": "Why are there two measures for US wages?",
-                "question_key": "career.faq.astronomers.9"
+                "question_key": "career.faq.astronomers.9",
+                "source_refs": [
+                  "onet-wages",
+                  "operations",
+                  "bls-ep-2025-2035-current"
+                ]
               },
               {
-                "answer": "Common misconceptions include: that liking the night sky or enjoying astrophotography as a hobby is enough to enter a research post (in fact systematic research training and method ability are needed); that the occupation is mainly night visual observation (in fact a large amount of time goes into data processing, programming and analysis); that a degree automatically brings observing time, funding or authorship eligibility (in fact these are allocated by institutions and projects); and that AI has already wholly replaced this occupation (in fact the official projection is 1%—2% growth for this occupation in 2024—2034 and 7% growth for the combined occupation group in 2025—2035, and task automation does not equal the disappearance of jobs).",
+                "answer": "Common misconceptions include thinking that an interest in the night sky or astrophotography is enough to enter a research post, that astronomers mainly observe the sky visually at night, or that a degree automatically grants observing time, funding, or authorship. Research roles require systematic training, substantial data analysis and programming, and access governed by institutions and projects. Task automation does not by itself mean an occupation will disappear. BLS projects 7.8% employment growth for astronomers from 2025 to 2035; that projection neither measures the effects of a particular AI tool nor guarantees an individual a job.",
                 "id": "astronomers.faq.10",
                 "question": "What common misconceptions are there about astronomers?",
-                "question_key": "career.faq.astronomers.10"
+                "question_key": "career.faq.astronomers.10",
+                "source_refs": [
+                  "bls-ep-2025-2035-current",
+                  "operations",
+                  "onet"
+                ]
               }
             ]
           },
@@ -31535,7 +31550,9 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "bls-ep-2025-2035-current",
+            "operations"
           ],
           "type": "faq"
         },
@@ -32320,7 +32337,7 @@
                 "url": "#career-ai-assessment-method"
               },
               {
-                "accessed_at": "2026-10-19",
+                "accessed_at": "2026-11-08",
                 "details": [
                   "Employment and annual openings are in thousands in the original table."
                 ],
@@ -37527,39 +37544,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1,800 people",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "2,400 people (2025)",
         "fact_id": "us-employment-parent",
         "market": "United States",
-        "measure": "Number employed in 2024 (occupation-specific measure)",
+        "measure": "Employment base",
         "occupation_scope": "Astronomers",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1%—2%",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "7.8% projected employment growth (2025–2035)",
         "fact_id": "us-growth-parent",
         "market": "United States",
-        "measure": "2024—2034 employment growth rate",
+        "measure": "Projected employment growth",
         "occupation_scope": "Astronomers",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "100 net new jobs",
+        "derivation": "BLS Table 1.2, 2025–2035; 19-2011 Astronomers.",
+        "display_value": "100 openings per year on average (2025–2035)",
         "fact_id": "us-openings-parent",
         "market": "United States",
-        "measure": "Job openings over the 2024—2034 projection period",
+        "measure": "Average annual openings, including growth and replacement",
         "occupation_scope": "Astronomers",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "operations"
+          "bls-ep-2025-2035-current"
         ]
       },
       {
@@ -37632,7 +37649,7 @@
       "text": "Astronomers"
     }
   },
-  "source_content_sha256": "f2ea90a135f973cd4a505e2c120307d76191b718aeab7a7d4a8f6b7972c0c35a",
+  "source_content_sha256": "4e2044dd2b29243f830fdd5e8bc9a87963f513ec733598cfbbc0602445ab298b",
   "subject": {
     "canonical_slug": "astronomers",
     "name": "Astronomers",
