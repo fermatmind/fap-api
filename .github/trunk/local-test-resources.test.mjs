@@ -142,7 +142,7 @@ test('real MySQL command TERM stops its child and removes its owned container', 
 test('every existing trunk contract job provisions native tools before its tests',()=>{
  for(const file of ['ci.yml','nightly.yml']) {
  const source=readFileSync(join(root,'.github/workflows',file),'utf8');
- const setup=source.indexOf('- name: Install classifier contract test tools');const tests=source.indexOf('node --test .github/trunk/*.test.mjs');
+ const setup=source.indexOf('- name: Install classifier contract test tools');const command=file==='ci.yml'?'node --test --test-concurrency=1 .github/trunk/*.test.mjs':'node --test .github/trunk/*.test.mjs';const tests=source.indexOf(command);
  assert.ok(setup>0&&setup<tests,file);
  const block=source.slice(setup,tests);
  for(const pkg of ['bash','coreutils','curl','grep','sed','lsof','diffutils','procps','mawk','debianutils','php-cli','php-sqlite3','composer','ripgrep'])assert.match(block,new RegExp('(?: |^)'+pkg+'(?: |\\n)'));

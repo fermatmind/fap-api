@@ -115,7 +115,8 @@ jobs:
           bash backend/scripts/ci/require_tools.sh rg php composer curl grep sed lsof cmp awk ps which
           php -r 'if (!extension_loaded("pdo_sqlite")) { fwrite(STDERR, "pdo_sqlite is required for classifier contract tests\n"); exit(1); }'
       - name: Test classifier and migration policy
-        run: node --test .github/trunk/*.test.mjs
+        # These contracts start real Chrome processes; share the runner serially.
+        run: node --test --test-concurrency=1 .github/trunk/*.test.mjs
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: trunk-classification-${{ github.sha }}
