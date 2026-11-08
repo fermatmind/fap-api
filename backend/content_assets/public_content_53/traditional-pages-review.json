@@ -1,11 +1,11 @@
 {
   "schema": "fermatmind.traditional_content_page.v1.review",
-  "candidate_sha256": "80ffb8fcaf10c6e82ad3bb0b44ff62c23abd1b5374e83978c6859b63cab41fe9",
+  "candidate_sha256": "6f8e18ee7834fe38db928a78dfb3646a5fc0b826da285229c9ab488c237fe478",
   "verdict": "PASS",
   "pages": {
     "TRADITIONAL-about": {
       "source_sha256": "71f00f2094d125519865055aae12a1eb06984279aff50e4276002b6c9db4da62",
-      "target_sha256": "5bc5ac4f519ec61871f40959c4615c2abe002be6ac65a6e5465e77653cb8b4f6"
+      "target_sha256": "59b103eafd0b1be509bb4f4b685d70a42af1c723e1ec57a0c8fd94c66a712f59"
     }
   },
   "review_scope": [
@@ -13,7 +13,8 @@
     "negation and conditions preserved",
     "no new facts or psychometric claims",
     "structure and protected literals",
-    "noindex pilot; discoverability remains closed"
+    "noindex pilot; discoverability remains closed",
+    "context corrections: audience, personality types, expansion, decision procedures, quality and consistent reader terminology"
   ],
   "converter": "opencc-js@1.4.2:cn:twp:content-page-v1"
 }
