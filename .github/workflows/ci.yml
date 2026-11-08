@@ -324,6 +324,12 @@ jobs:
         if: fromJSON(needs.classify.outputs.classification).operations.eq_new_english_articles_checks == true
         working-directory: backend
         run: php artisan test tests/Unit/ContentPromotion/EqEnglishArticlePromotionTest.php tests/Unit/ContentPromotion/ArticleCmsPromotionAdapterTest.php --no-ansi
+      - name: Verify fixed reviewed science-page revisions and recovery
+        if: fromJSON(needs.classify.outputs.classification).operations.reviewed_science_pages_checks == true
+        working-directory: backend
+        run: |
+          php artisan test tests/Feature/ContentPages/ReviewedSciencePageRevisionTest.php --no-ansi
+          node --test ../.github/trunk/reviewed-science-pages.test.mjs
       - name: Verify exact IQ public entry package and publication failure paths
         if: fromJSON(needs.classify.outputs.classification).operations.iq_public_scale_checks == true
         working-directory: backend

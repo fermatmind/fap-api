@@ -201,6 +201,8 @@ export function classifyPaths(inputPaths) {
       || /^\.github\/(?:trunk\/|workflows\/(?:ci|deploy)\.yml$)/.test(path));
   const publicContentPackage = selectPublicContentPackage(paths);
   const operations = {
+    reviewed_science_pages_publish: paths.includes('backend/content_assets/science_pages/reviewed-existing/20261108-item-design-notes.json'),
+    reviewed_science_pages_checks: paths.some(path => /ReviewedSciencePage|reviewed-science-pages|run_reviewed_science_pages/.test(path) || path.startsWith('backend/content_assets/science_pages/reviewed-existing/')),
     public_content_53_publish: publicContentPackage !== null,
     public_content_53_package: publicContentPackage,
     public_content_53_checks: paths.some(path => /PublicContent53|RiasecCodeSample|public.content.53/.test(path)),

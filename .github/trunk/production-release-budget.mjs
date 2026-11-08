@@ -32,6 +32,7 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
   if (![30,35,60].includes(deployMinutes)) throw new Error('DEPLOY_BUDGET_INVALID');
   if (!operations || typeof operations !== 'object' || Array.isArray(operations)) throw new Error('OPERATIONS_INVALID');
   const consumers = {
+    reviewed_science_pages_publish: 1500,
     eq_new_source_articles_publish: 2600,
     eq_existing_public_pages_publish: 6000,
     eq_new_english_articles_publish: 2600,

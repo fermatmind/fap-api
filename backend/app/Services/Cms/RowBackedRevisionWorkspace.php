@@ -144,7 +144,10 @@ final class RowBackedRevisionWorkspace
                 'translation_group_id' => (string) $record->translation_group_id,
                 'locale' => (string) $record->locale,
                 'source_locale' => (string) ($record->source_locale ?: $record->locale),
-                'revision_number' => ((int) $currentWorking->revision_number) + 1,
+                // Restoring an older public pointer retains later immutable history.
+                // The caller holds the content row lock for controlled publication.
+                'revision_number' => max((int) $currentWorking->revision_number, (int) CmsTranslationRevision::query()
+                    ->where('content_type', $contentType)->where('content_id', $record->getKey())->max('revision_number')) + 1,
                 'revision_status' => $revisionStatus,
                 'source_version_hash' => $record->source_version_hash ? (string) $record->source_version_hash : null,
                 'translated_from_version_hash' => $translatedFromVersionHash,
