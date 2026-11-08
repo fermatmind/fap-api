@@ -41,7 +41,7 @@ final class PublicContent53Writer
         if (PublicContent53Package::environment() !== 'staging') {
             return 0;
         }
-        foreach ($this->package->read(base_path(), $context->packageSha256)['candidates'] as $row) {
+        foreach ($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'] as $row) {
             if (! PublicContent53Package::stagingBootstrap($row)) {
                 continue;
             }
@@ -77,7 +77,7 @@ final class PublicContent53Writer
         if ($this->states->hash($this->states->read($context->packageSha256, true)) !== $this->states->hash($before)) {
             throw new DomainException('public_content_53_native_prestate_drift');
         }
-        $rows = $this->package->read(base_path(), $context->packageSha256)['candidates'];
+        $rows = $this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'];
         $this->states->assertLockedBaseline($rows, $before);
         usort($rows, static fn (array $a, array $b): int => ($a['identity']['locale'] === 'en') <=> ($b['identity']['locale'] === 'en'));
         $written = [];
@@ -449,7 +449,7 @@ final class PublicContent53Writer
     private function assertContext(PromotionContext $context): void
     {
         if (DB::transactionLevel() < 1 || $context->lane !== 'W3' || $context->subscope !== 'PUBLIC-CONTENT-53'
-            || $context->expectedRowCount !== count($this->package->read(base_path(), $context->packageSha256)['candidates']) || realpath($context->packageDirectory) !== realpath(base_path(PublicContent53Package::PACKAGE))) {
+            || $context->expectedRowCount !== count($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates']) || realpath($context->packageDirectory) !== realpath(base_path(PublicContent53Package::PACKAGE))) {
             throw new DomainException('public_content_53_writer_context_invalid');
         }
     }

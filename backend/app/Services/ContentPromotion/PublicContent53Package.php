@@ -122,7 +122,7 @@ final class PublicContent53Package
         'PAGE-HELP-PAYMENT' => 'help-payment-refund', 'PAGE-HELP-UNLOCK' => 'help-unlock-failure', 'PAGE-HELP-RECOVERY' => 'help-result-recovery',
     ];
 
-    public function read(string $backendRoot, string $expectedSha256): array
+    public function read(string $backendRoot, string $expectedSha256, string $environment = 'production'): array
     {
         $root = realpath($backendRoot);
         if (is_file($root.'/'.self::PACKAGE.'/support-contact.json')) {
@@ -149,7 +149,10 @@ final class PublicContent53Package
                 $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
             }
             if (hash_equals($expectedSha256, hash('sha256', $chain))) {
-                return TraditionalContentPagePublication::package($this->bytes($root, 'traditional-pages.json'), $this->bytes($root, 'traditional-pages-review.json'), $expectedSha256);
+                $package = TraditionalContentPagePublication::package($this->bytes($root, 'traditional-pages.json'), $this->bytes($root, 'traditional-pages-review.json'), $expectedSha256);
+                $package['candidates'] = array_map(static fn (array $row): array => TraditionalContentPagePublication::forEnvironment($row, $environment), $package['candidates']);
+
+                return $package;
             }
         }
         if (is_file($root.'/'.self::PACKAGE.'/zh-reading-links.json')) {

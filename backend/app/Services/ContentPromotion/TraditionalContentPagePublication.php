@@ -21,7 +21,7 @@ final class TraditionalContentPagePublication
 
     public const FIELDS = ['title', 'kicker', 'summary', 'seo_title', 'meta_description', 'seo_description', 'content_md', 'headings', 'faq_items'];
 
-    private const SLUGS = ['about', 'brand', 'charter', 'careers', 'privacy', 'terms', 'method-boundaries', 'science'];
+    private const SLUGS = ['about', 'brand', 'charter', 'careers', 'privacy', 'terms', 'method-boundaries', 'science', 'help-contact'];
 
     /** Fixed classifications only: never return SQL, payloads or exception text. */
     public static function failureCode(\Throwable $error): string
@@ -33,9 +33,10 @@ final class TraditionalContentPagePublication
             'traditional_page_lock_requires_transaction', 'traditional_page_identity_collision', 'traditional_page_source_drift_or_hold',
             'traditional_page_target_not_owned', 'traditional_page_retained_draft_changed', 'traditional_page_published_target_changed',
             'traditional_page_transaction_required', 'traditional_page_restore_transaction_required',
+            'traditional_page_environment_invalid', 'traditional_page_contact_binding_invalid',
         ];
         if ($error instanceof DomainException && (in_array($error->getMessage(), $nativeCodes, true)
-            || preg_match('/^traditional_page_source_(?:identity|readiness|review|hold|html|version|copy_(?:'.implode('|', self::FIELDS).'))_(?:'.implode('|', self::SLUGS).')$/D', $error->getMessage()))) {
+            || preg_match('/^traditional_page_source_(?:identity|readiness|review|hold|html|version|path|support_contact|copy_(?:'.implode('|', self::FIELDS).'))_(?:'.implode('|', self::SLUGS).')$/D', $error->getMessage()))) {
             return 'public_content_53_'.$error->getMessage();
         }
         if ($error instanceof \App\Services\Cms\CmsTranslationWorkflowException) {
@@ -90,62 +91,105 @@ final class TraditionalContentPagePublication
         foreach ($rows as $row) {
             $slug = $row['identity']['slug'] ?? null;
             $keys = array_keys($row);
+            $expectedKeys = ['before', 'identity', 'kind', 'new_traditional_page', 'page_id', 'snapshot', 'source_snapshot', 'staging_before'];
+            if ($slug === 'help-contact') {
+                $expectedKeys = [...$expectedKeys, 'staging_source_snapshot', 'staging_snapshot', 'protected_fields'];
+            }
             sort($keys);
-            if ($keys !== ['before', 'identity', 'kind', 'new_traditional_page', 'page_id', 'snapshot', 'source_snapshot', 'staging_before']
-                || ! in_array($slug, self::SLUGS, true) || isset($seen[$slug])
+            sort($expectedKeys);
+            if ($keys !== $expectedKeys || ! in_array($slug, self::SLUGS, true) || isset($seen[$slug])
                 || $row['kind'] !== 'page' || $row['new_traditional_page'] !== true || $row['page_id'] !== 'TRADITIONAL-'.$slug
                 || $row['identity'] !== ['org_id' => 0, 'slug' => $slug, 'locale' => 'zh-TW']
-                || $row['before'] !== [] || $row['staging_before'] !== []
-                || array_diff(array_keys($row['source_snapshot']), self::FIELDS) !== []
-                || array_diff(self::FIELDS, array_keys($row['source_snapshot'])) !== []
-                || array_diff(array_keys($row['snapshot']), [...self::FIELDS, 'status', 'is_public', 'is_indexable']) !== []
-                || array_diff([...self::FIELDS, 'status', 'is_public', 'is_indexable'], array_keys($row['snapshot'])) !== []
-                || $row['snapshot']['status'] !== 'published' || $row['snapshot']['is_public'] !== true
-                || $row['snapshot']['is_indexable'] !== false) {
+                || $row['before'] !== [] || $row['staging_before'] !== []) {
                 throw new DomainException('traditional_page_identity_or_fields_invalid');
             }
             $seen[$slug] = true;
-            foreach (['source_snapshot', 'snapshot'] as $field) {
-                $copy = $row[$field];
-                foreach (array_diff(self::FIELDS, ['headings', 'faq_items']) as $text) {
-                    if (! is_string($copy[$text]) && $copy[$text] !== null) {
-                        throw new DomainException('traditional_page_text_invalid');
+            $pageProof = $proof['pages'][$row['page_id']] ?? [];
+            self::assertReviewedCopy($row, $pageProof);
+            if ($slug === 'help-contact') {
+                $email = $row['protected_fields']['support_contact'] ?? null;
+                if (! is_array($row['protected_fields']) || array_keys($row['protected_fields']) !== ['support_contact']
+                    || ! is_string($email) || filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                    throw new DomainException('traditional_page_contact_binding_invalid');
+                }
+                self::assertReviewedCopy(['source_snapshot' => $row['staging_source_snapshot'], 'snapshot' => $row['staging_snapshot']], $pageProof, 'staging_');
+                foreach ([$row['source_snapshot'], $row['staging_source_snapshot']] as $sourceCopy) {
+                    if (! str_contains($sourceCopy['content_md'], '](mailto:'.$email.')')) {
+                        throw new DomainException('traditional_page_contact_binding_invalid');
                     }
                 }
-                if (trim((string) $copy['title']) === '' || trim((string) $copy['content_md']) === ''
-                    || trim((string) $copy['seo_title']) === '' || trim((string) $copy['meta_description']) === ''
-                    || ! is_array($copy['headings']) || ! array_is_list($copy['headings'])
-                    || array_filter($copy['headings'], static fn ($heading): bool => ! is_string($heading)) !== [] || $copy['faq_items'] !== []
-                    || preg_match('/[<>`]|^\s*~{3,}|^\s*\|/m', $copy['content_md']) === 1) {
-                    throw new DomainException('traditional_page_format_invalid');
-                }
-            }
-            if (self::markdownLinkTargets($row['source_snapshot']['content_md']) !== self::markdownLinkTargets($row['snapshot']['content_md'])) {
-                throw new DomainException('traditional_page_link_targets_changed');
-            }
-            foreach (array_diff(self::FIELDS, ['faq_items']) as $field) {
-                $sourceText = is_array($row['source_snapshot'][$field]) ? implode("\n", $row['source_snapshot'][$field]) : (string) $row['source_snapshot'][$field];
-                $targetText = is_array($row['snapshot'][$field]) ? implode("\n", $row['snapshot'][$field]) : (string) $row['snapshot'][$field];
-                $tokens = '~https?://[^\s<>）)]+|(?<![A-Za-z0-9_./:@?=&%#-])/[A-Za-z][A-Za-z0-9-]*(?:[/?#][A-Za-z0-9._\x7e:/?#@!$&\x27*+,;=%-]*)?|\{\{[^}]*\}\}|\$?\{[^}]*\}|%\d*\$?[sdif]|\d+(?:[.,:/-]\d+)*~u';
-                preg_match_all($tokens, $sourceText, $sourceTokens);
-                preg_match_all($tokens, $targetText, $targetTokens);
-                if ($sourceTokens[0] !== $targetTokens[0]) {
-                    throw new DomainException('traditional_page_protected_tokens_changed');
-                }
-            }
-            preg_match_all('/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/m', $row['source_snapshot']['content_md'], $sourceStructure);
-            preg_match_all('/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/m', $row['snapshot']['content_md'], $targetStructure);
-            if ($sourceStructure[0] !== $targetStructure[0] || count($row['source_snapshot']['headings']) !== count($row['snapshot']['headings'])) {
-                throw new DomainException('traditional_page_structure_changed');
-            }
-            $pageProof = $proof['pages'][$row['page_id']] ?? [];
-            if (($pageProof['source_sha256'] ?? null) !== self::hash($row['source_snapshot'])
-                || ($pageProof['target_sha256'] ?? null) !== self::hash($row['snapshot'])) {
-                throw new DomainException('traditional_page_review_binding_invalid');
             }
         }
 
         return ['candidates' => $rows, 'package_sha256' => $sha];
+    }
+
+    /** Select only after both reviewed pairs passed package validation. */
+    public static function forEnvironment(array $row, string $environment): array
+    {
+        if (! in_array($environment, ['staging', 'production'], true)) {
+            throw new DomainException('traditional_page_environment_invalid');
+        }
+        if ($environment === 'staging' && $row['identity']['slug'] === 'help-contact') {
+            return array_replace($row, ['source_snapshot' => $row['staging_source_snapshot'], 'snapshot' => $row['staging_snapshot']]);
+        }
+
+        return $row;
+    }
+
+    private static function assertReviewedCopy(array $row, array $pageProof, string $proofPrefix = ''): void
+    {
+        if (! is_array($row['source_snapshot']) || ! is_array($row['snapshot'])
+            || array_diff(array_keys($row['source_snapshot']), self::FIELDS) !== []
+            || array_diff(self::FIELDS, array_keys($row['source_snapshot'])) !== []
+            || array_diff(array_keys($row['snapshot']), [...self::FIELDS, 'status', 'is_public', 'is_indexable']) !== []
+            || array_diff([...self::FIELDS, 'status', 'is_public', 'is_indexable'], array_keys($row['snapshot'])) !== []
+            || $row['snapshot']['status'] !== 'published' || $row['snapshot']['is_public'] !== true
+            || $row['snapshot']['is_indexable'] !== false) {
+            throw new DomainException('traditional_page_identity_or_fields_invalid');
+        }
+        foreach (['source_snapshot', 'snapshot'] as $field) {
+            $copy = $row[$field];
+            foreach (array_diff(self::FIELDS, ['headings', 'faq_items']) as $text) {
+                if (! is_string($copy[$text]) && $copy[$text] !== null) {
+                    throw new DomainException('traditional_page_text_invalid');
+                }
+            }
+            if (trim((string) $copy['title']) === '' || trim((string) $copy['content_md']) === ''
+                || trim((string) $copy['seo_title']) === '' || trim((string) $copy['meta_description']) === ''
+                || ! is_array($copy['headings']) || ! array_is_list($copy['headings'])
+                || array_filter($copy['headings'], static fn ($heading): bool => ! is_string($heading)) !== [] || $copy['faq_items'] !== []
+                || preg_match('/[<>`]|^\s*~{3,}|^\s*\|/m', $copy['content_md']) === 1) {
+                throw new DomainException('traditional_page_format_invalid');
+            }
+        }
+        if (self::markdownLinkTargets($row['source_snapshot']['content_md']) !== self::markdownLinkTargets($row['snapshot']['content_md'])) {
+            throw new DomainException('traditional_page_link_targets_changed');
+        }
+        foreach (array_diff(self::FIELDS, ['faq_items']) as $field) {
+            $sourceText = is_array($row['source_snapshot'][$field]) ? implode("\n", $row['source_snapshot'][$field]) : (string) $row['source_snapshot'][$field];
+            $targetText = is_array($row['snapshot'][$field]) ? implode("\n", $row['snapshot'][$field]) : (string) $row['snapshot'][$field];
+            $tokens = '~https?://[^\s<>）)]+|(?<![A-Za-z0-9_./:@?=&%#-])/[A-Za-z][A-Za-z0-9-]*(?:[/?#][A-Za-z0-9._\x7e:/?#@!$&\x27*+,;=%-]*)?|\{\{[^}]*\}\}|\$?\{[^}]*\}|%\d*\$?[sdif]|\d+(?:[.,:/-]\d+)*~u';
+            preg_match_all($tokens, $sourceText, $sourceTokens);
+            preg_match_all($tokens, $targetText, $targetTokens);
+            if ($sourceTokens[0] !== $targetTokens[0]) {
+                throw new DomainException('traditional_page_protected_tokens_changed');
+            }
+        }
+        preg_match_all('/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/m', $row['source_snapshot']['content_md'], $sourceStructure);
+        preg_match_all('/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/m', $row['snapshot']['content_md'], $targetStructure);
+        if ($sourceStructure[0] !== $targetStructure[0] || count($row['source_snapshot']['headings']) !== count($row['snapshot']['headings'])) {
+            throw new DomainException('traditional_page_structure_changed');
+        }
+        if (($pageProof[$proofPrefix.'source_sha256'] ?? null) !== self::hash($row['source_snapshot'])
+            || ($pageProof[$proofPrefix.'target_sha256'] ?? null) !== self::hash($row['snapshot'])) {
+            throw new DomainException('traditional_page_review_binding_invalid');
+        }
+    }
+
+    private static function targetPath(string $slug): string
+    {
+        return $slug === 'help-contact' ? '/zh-TW/help/contact' : '/zh-TW/'.$slug;
     }
 
     private static function markdownLinkTargets(string $text): array
@@ -202,6 +246,10 @@ final class TraditionalContentPagePublication
             'html' => trim((string) $source->content_html) === '',
             'version' => (bool) preg_match('/^[a-f0-9]{64}$/', (string) $source->source_version_hash),
         ];
+        if ($row['identity']['slug'] === 'help-contact') {
+            $checks['support_contact'] = $source->support_contact === $row['protected_fields']['support_contact'];
+            $checks['path'] = preg_replace('#^/(?:en|zh)(?=/|$)#', '', (string) $source->path) === '/help/contact';
+        }
         $copy = $this->copy($source);
         foreach (self::FIELDS as $field) {
             $checks['copy_'.$field] = self::hash([$copy[$field]]) === self::hash([$row['source_snapshot'][$field]]);
@@ -220,7 +268,8 @@ final class TraditionalContentPagePublication
         if (count($revisions) !== 1 || $target->slug !== $source->slug || $target->locale !== 'zh-TW'
             || (int) $target->source_content_id !== (int) $source->id || $target->source_locale !== 'zh-CN'
             || $target->translation_group_id !== $source->translation_group_id
-            || $target->path !== '/zh-TW/'.$source->slug || $target->canonical_path !== '/zh-TW/'.$source->slug
+            || $target->path !== self::targetPath($source->slug) || $target->canonical_path !== self::targetPath($source->slug)
+            || ($source->slug === 'help-contact' && $target->support_contact !== $row['protected_fields']['support_contact'])
             || $revisions[0]['authority_source_package'] !== self::AUTHORITY
             || (int) $revisions[0]['org_id'] !== 0 || $revisions[0]['locale'] !== 'zh-TW'
             || (int) $revisions[0]['source_content_id'] !== (int) $source->id

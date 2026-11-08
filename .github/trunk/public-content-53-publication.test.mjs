@@ -253,7 +253,7 @@ test('publication retains bounded page diagnostics and separate recovery errors 
  assert.equal(error.receipt.error_code,'PUBLIC_CONTENT_53_VISIBLE_BODY_PAGE-02_ITEM_14');
  assert.equal(error.receipt.recovery_error_code,'public_content_53_revalidation_http_429');
  assert.equal(error.receipt.recovery_completed,false);
- for(const id of ['TRADITIONAL-about','TRADITIONAL-brand','TRADITIONAL-charter','TRADITIONAL-careers','TRADITIONAL-privacy','TRADITIONAL-terms','TRADITIONAL-method-boundaries','TRADITIONAL-science','RIASEC-RIC-zh-CN','RIASEC-IAR-en','RIASEC-SAE-en','EN-GUIDE-annual-career-review-system','EN-GUIDE-build-five-year-career-roadmap','EN-GUIDE-build-portfolio-for-career-switch','EN-GUIDE-cross-industry-move-strategy']) {
+ for(const id of ['TRADITIONAL-about','TRADITIONAL-brand','TRADITIONAL-charter','TRADITIONAL-careers','TRADITIONAL-privacy','TRADITIONAL-terms','TRADITIONAL-method-boundaries','TRADITIONAL-science','TRADITIONAL-help-contact','RIASEC-RIC-zh-CN','RIASEC-IAR-en','RIASEC-SAE-en','EN-GUIDE-annual-career-review-system','EN-GUIDE-build-five-year-career-roadmap','EN-GUIDE-build-portfolio-for-career-switch','EN-GUIDE-cross-industry-move-strategy']) {
   for(const diagnostic of [`PUBLIC_CONTENT_53_NEW_ARTICLE_SEO_${id}`,`PUBLIC_CONTENT_53_VISIBLE_BODY_${id}_ITEM_14`]) {
    const sample=await recoveryFailure(execution,failed,new Error(diagnostic));
    assert.equal(sample.receipt.error_code,diagnostic);
@@ -912,18 +912,20 @@ test('AI method hreflang acceptance requires its exact reciprocal pair and keeps
  }
 });
 
-test('Traditional CMS package selects the eight reviewed variants and verifies complete noindex DOM',()=>{
+test('Traditional CMS package selects nine reviewed variants with distinct contact environment sources and verifies complete noindex DOM',()=>{
  const paths=['backend/content_assets/public_content_53/traditional-pages.json','backend/content_assets/public_content_53/traditional-pages-review.json'];
  assert.equal(selectPublicContentPackage(paths),'traditional-pages');
  assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/translation-batch.json']),/MULTIPLE_PACKAGES/);
  const binding=inspectPackage(root,'traditional-pages');
- assert.equal(binding.expected_row_count,8);
+ assert.equal(binding.expected_row_count,9);
  const rows=readCandidateRows(root,binding.package_sha256).candidates;
- assert.deepEqual(rows.map(row=>row.identity.slug),['about','brand','charter','careers','privacy','terms','method-boundaries','science']);
+ assert.deepEqual(rows.map(row=>row.identity.slug),['about','brand','charter','careers','privacy','terms','method-boundaries','science','help-contact']);
  const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
- for(const row of rows) {
+ for(const original of rows) {
+  for(const environment of ['staging','production']) {
+  const row=environment==='staging'&&original.staging_snapshot?{...original,snapshot:original.staging_snapshot}:original;
   assert.equal(row.identity.locale,'zh-TW');
-  assert.equal(pathFor(row),`/zh-TW/${row.identity.slug}`);
+  assert.equal(pathFor(row),row.identity.slug==='help-contact'?'/zh-TW/help/contact':`/zh-TW/${row.identity.slug}`);
   assert.equal(row.snapshot.is_indexable,false);
   const links=[['/method-boundaries','/zh/method-boundaries','方法邊界'],['/item-design-notes','/zh/item-design-notes','題目設計說明'],['/reliability-validity','/zh/reliability-validity','信度與效度'],['/tests/mbti-personality-test-16-personality-types','/zh/tests/mbti-personality-test-16-personality-types','MBTI免費測試'],['/tests/big-five-personality-test','/zh/tests/big-five-personality-test-ocean-model','大五人格免費測試'],['/tests/holland-career-interest-test-riasec','/zh/tests/holland-career-interest-test-riasec','霍蘭德職業興趣免費測試']];
   const body=row.snapshot.content_md.split('\n').filter(line=>line && !/^# content_md$|^visible_faq_items:$/.test(line)).map(line=>{
@@ -936,8 +938,8 @@ test('Traditional CMS package selects the eight reviewed variants and verifies c
   const schema=[{'@type':'WebPage',url,inLanguage:'zh-TW',name:row.snapshot.title,description:row.snapshot.summary ?? ''},{'@type':'BreadcrumbList',itemListElement:[{item:url}]}].map(node=>`<script type="application/ld+json">${JSON.stringify(node)}</script>`).join('');
   const team=row.identity.slug==='about'?'<section>創始人與博士顧問團隊 劉福威 賈睿璇 李琛</section>':'';
   const html=`<html lang="zh-TW"><head><meta charset="utf-8"><title>${escape(row.snapshot.seo_title)} | 費馬測試</title><meta name="description" content="${escape(row.snapshot.meta_description)}"><meta name="robots" content="noindex, follow"><link rel="canonical" href="${url}"></head><body>${schema}<main><h1>${escape(row.snapshot.title)}</h1>${body}${team}</main></body></html>`;
-  for(const environment of ['staging','production']) assert.doesNotThrow(()=>assertDom(row,html,{missing:true},environment));
-  for(const altered of [html.replace('lang="zh-TW"','lang="zh-CN"'),html.replace('noindex, follow','index, follow'),html.replace(`/zh-TW/${row.identity.slug}`,`/zh/${row.identity.slug}`),html.replace(escape(row.snapshot.title),'Incomplete title')])
+  assert.doesNotThrow(()=>assertDom(row,html,{missing:true},environment));
+  for(const altered of [html.replace('lang="zh-TW"','lang="zh-CN"'),html.replace('noindex, follow','index, follow'),html.replace(pathFor(row),pathFor(row).replace('/zh-TW/','/zh/')),html.replace(escape(row.snapshot.title),'Incomplete title')])
    assert.throws(()=>assertDom(row,altered,{missing:true},'production'));
   if(team) assert.throws(()=>assertDom(row,html.replace('劉福威',''),{missing:true},'production'));
   if(row.identity.slug==='terms') {
@@ -968,5 +970,30 @@ test('Traditional CMS package selects the eight reviewed variants and verifies c
    for(const [path,href,label] of links) raw=raw.replace(`<a href="${href}">${label}</a>`,path);
    assert.throws(()=>assertDom(row,raw,{missing:true},'production'),/LINK/);
   }
+  if(row.identity.slug==='help-contact') {
+   const opposite={...original,snapshot:environment==='staging'?original.snapshot:original.staging_snapshot};
+   assert.throws(()=>assertDom(opposite,html,{missing:true},environment),/METADATA|VISIBLE_BODY|SEO/);
+   assert.throws(()=>assertDom(row,html.replace('mailto:fuwei8868@outlook.com','mailto:wrong@example.invalid'),{missing:true},environment),/LINK/);
+  }
+  }
+ }
+});
+
+test('contact native diagnostics retain only fixed source conditions and declared slugs',async()=>{
+ const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123',workflow_run_attempt:1,mode:'publish'},binding:{package_sha256:'b'.repeat(64),executor_release_sha256:'c'.repeat(64)}};
+ for(const status of [0,1])for(const [code,known] of [
+  ['public_content_53_traditional_page_source_path_help-contact',true],
+  ['public_content_53_traditional_page_source_support_contact_help-contact',true],
+  ['public_content_53_traditional_page_source_copy_summary_method-boundaries',true],
+  ['public_content_53_traditional_page_source_password_help-contact',false],
+  ['public_content_53_traditional_page_source_identity_private-token',false],
+ ]){
+  const execute=request=>request.mode==='recover'
+   ? {status:0,stdout:JSON.stringify({ok:true,mode:'recover',source_commit:request.source_commit,workflow_run_id:request.workflow_run_id,workflow_run_attempt:1,package_sha256:execution.binding.package_sha256,executor_release_sha256:execution.binding.executor_release_sha256,restored:false,recovery_status:'not_required',sanitized:true})}
+   : {status,stdout:JSON.stringify({ok:false,error_code:code,sanitized:true})};
+  await assert.rejects(()=>publish(execution,execute),error=>{
+   assert.equal(error.receipt.error_code,known?code:status===1?'PUBLIC_CONTENT_53_SSH_EXIT_1':'PUBLIC_CONTENT_53_PUBLICATION_RESPONSE_INVALID');
+   assert.equal(error.receipt.recovery_completed,true);return true;
+  });
  }
 });

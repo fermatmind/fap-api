@@ -31,7 +31,7 @@ final class TraditionalContentPagePublicationTest extends TestCase
         }
 
         return new PromotionContext(base_path(PublicContent53Package::PACKAGE), hash('sha256', $chain), 'W3', 'PUBLIC-CONTENT-53',
-            str_repeat($commit, 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 8, str_repeat('e', 64));
+            str_repeat($commit, 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 9, str_repeat('e', 64));
     }
 
     private function row(): array
@@ -39,23 +39,25 @@ final class TraditionalContentPagePublicationTest extends TestCase
         return app(PublicContent53Package::class)->read(base_path(), $this->context()->packageSha256)['candidates'][0];
     }
 
-    private function source(): ContentPage
+    private function source(string $environment = 'production'): ContentPage
     {
         $about = null;
         foreach (app(PublicContent53Package::class)->read(base_path(), $this->context()->packageSha256)['candidates'] as $row) {
+            $row = TraditionalContentPagePublication::forEnvironment($row, $environment);
             $copy = $row['source_snapshot'];
             $headings = $copy['headings'];
             unset($copy['headings']);
             $slug = $row['identity']['slug'];
             $policy = in_array($slug, ['privacy', 'terms', 'method-boundaries', 'science'], true);
             $source = ContentPage::query()->withoutGlobalScopes()->create($copy + [
-                'org_id' => 0, 'slug' => $row['identity']['slug'], 'locale' => 'zh-CN', 'path' => '/'.$row['identity']['slug'], 'kind' => $policy ? 'policy' : 'company',
-                'page_type' => $policy ? ($slug === 'method-boundaries' ? 'boundary' : $slug) : 'company', 'template' => $policy ? 'policy' : 'company', 'animation_profile' => 'none',
+                'org_id' => 0, 'slug' => $row['identity']['slug'], 'locale' => 'zh-CN', 'path' => $slug === 'help-contact' ? '/help/contact' : '/'.$slug, 'kind' => $slug === 'help-contact' ? 'help' : ($policy ? 'policy' : 'company'),
+                'support_contact' => $slug === 'help-contact' ? $row['protected_fields']['support_contact'] : null,
+                'page_type' => $slug === 'help-contact' ? 'support_static' : ($policy ? ($slug === 'method-boundaries' ? 'boundary' : $slug) : 'company'), 'template' => $slug === 'help-contact' ? 'help' : ($policy ? 'policy' : 'company'), 'animation_profile' => 'none',
                 'headings_json' => $headings, 'content_html' => '', 'review_state' => 'approved',
                 'source_updated_at' => '2026-04-19', 'effective_at' => $slug === 'science' ? null : '2026-04-19', 'policy_version' => 'original-policy-v1',
                 'status' => 'published', 'is_public' => true, 'is_indexable' => true,
-                'publish_allowed' => ! in_array($slug, ['privacy', 'terms'], true),
-                'claim_gate_status' => in_array($slug, ['privacy', 'terms'], true) ? 'not_reviewed' : 'passed',
+                'publish_allowed' => ! in_array($slug, ['privacy', 'terms', 'help-contact'], true),
+                'claim_gate_status' => in_array($slug, ['privacy', 'terms', 'help-contact'], true) ? 'not_reviewed' : 'passed',
                 'operator_approval_required' => true, 'operator_approved_at' => in_array($slug, ['method-boundaries', 'science'], true) ? now() : null,
             ])->refresh();
             if ($source->slug === 'about') {
@@ -95,7 +97,7 @@ final class TraditionalContentPagePublicationTest extends TestCase
                 $path = $directory.'/'.$phase.'.json';
                 $result = app(\App\Services\ContentPromotion\ExactPackagePromotionService::class)->execute($context, $phase, $path);
                 $this->assertSame('SUCCEEDED', $result['receipt']['result']);
-                $this->assertSame(8, $result['receipt']['readback_count']);
+                $this->assertSame(9, $result['receipt']['readback_count']);
                 $this->assertSame(0, $result['receipt']['written_count']);
                 $previous = $path;
             }
@@ -109,6 +111,94 @@ final class TraditionalContentPagePublicationTest extends TestCase
             }
             rmdir($directory);
         }
+    }
+
+    public function test_contact_binds_each_environment_to_its_reviewed_source_and_target(): void
+    {
+        $rows = app(PublicContent53Package::class)->read(base_path(), $this->context()->packageSha256)['candidates'];
+        $row = array_values(array_filter($rows, static fn ($row) => $row['identity']['slug'] === 'help-contact'))[0];
+        $production = TraditionalContentPagePublication::forEnvironment($row, 'production');
+        $staging = TraditionalContentPagePublication::forEnvironment($row, 'staging');
+        $this->assertNotSame($production['source_snapshot'], $staging['source_snapshot']);
+        $this->assertNotSame($production['snapshot'], $staging['snapshot']);
+        $this->assertSame($row['staging_source_snapshot'], $staging['source_snapshot']);
+        $this->assertSame($row['staging_snapshot'], $staging['snapshot']);
+        $this->assertSame($production['identity'], $staging['identity']);
+        $this->assertSame($production['protected_fields'], $staging['protected_fields']);
+        config(['content_promotion.public_content_53_environment' => 'staging']);
+        $selected = app(PublicContent53Package::class)->read(base_path(), $this->context()->packageSha256, 'staging')['candidates'];
+        $selected = array_values(array_filter($selected, static fn ($row) => $row['identity']['slug'] === 'help-contact'))[0];
+        $this->assertSame($staging, $selected, 'State, writer and promotion adapter must consume the same selected pair');
+    }
+
+    public function test_contact_rejects_an_unreviewed_staging_source_even_after_package_rehash(): void
+    {
+        $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/traditional-pages.json')), true);
+        $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/traditional-pages-review.json')), true);
+        $index = array_search('TRADITIONAL-help-contact', array_column($package['candidates'], 'page_id'), true);
+        $package['candidates'][$index]['staging_source_snapshot']['summary'] = 'Changed staging authority';
+        $bytes = json_encode($package, JSON_THROW_ON_ERROR);
+        $proof['candidate_sha256'] = hash('sha256', $bytes);
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessage('traditional_page_review_binding_invalid');
+        TraditionalContentPagePublication::package($bytes, json_encode($proof), str_repeat('a', 64));
+    }
+
+    public function test_contact_preserves_native_contact_and_nested_path_without_changing_the_source(): void
+    {
+        $this->source();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $this->context()->packageSha256)['candidates'];
+        $row = array_values(array_filter($rows, static fn ($row) => $row['identity']['slug'] === 'help-contact'))[0];
+        $native = app(TraditionalContentPagePublication::class);
+        $before = $native->read($row, false);
+        $changed = $before;
+        $changed['source']['support_contact'] = 'wrong@example.invalid';
+        try {
+            $native->assertBaseline($row, $changed);
+            $this->fail('Changed contact authority must not be copied');
+        } catch (DomainException $error) {
+            $this->assertSame('traditional_page_source_support_contact_help-contact', $error->getMessage());
+        }
+        DB::transaction(fn () => $native->publish($row, $native->read($row, true), $this->context()));
+        $after = $native->read($row, false);
+        $native->assertBaseline($row, $after);
+        $this->assertSame('/zh-TW/help/contact', $after['values']['path']);
+        $this->assertSame($row['protected_fields']['support_contact'], $after['values']['support_contact']);
+        $this->assertSame($before['source'], $after['source']);
+        $this->assertSame($before['source_revisions'], $after['source_revisions']);
+    }
+
+    public function test_staging_contact_publication_cannot_use_the_production_source_snapshot(): void
+    {
+        config(['content_promotion.public_content_53_environment' => 'staging']);
+        $this->source('staging');
+        $rows = app(PublicContent53Package::class)->read(base_path(), $this->context()->packageSha256, 'staging')['candidates'];
+        $row = array_values(array_filter($rows, static fn ($row) => $row['identity']['slug'] === 'help-contact'))[0];
+        $original = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/traditional-pages.json')), true);
+        $production = array_values(array_filter($original['candidates'], static fn ($row) => $row['identity']['slug'] === 'help-contact'))[0];
+        $native = app(TraditionalContentPagePublication::class);
+        $before = $native->read($row, false);
+        try {
+            $native->assertBaseline($production, $before);
+            $this->fail('A different environment source is not an approved fallback');
+        } catch (DomainException $error) {
+            $this->assertSame('traditional_page_source_copy_summary_help-contact', $error->getMessage());
+        }
+        config(['ops.content_release_observability.hmac_revalidation_url' => 'https://staging.fermatmind.com/api/content-release/revalidate',
+            'ops.content_release_observability.hmac_revalidation_secret' => 'test-only-secret']);
+        Http::preventStrayRequests();
+        $context = $this->context();
+        app(\App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter::class)->preflight($context);
+        $states = app(PublicContent53State::class);
+        $beforeState = $states->read($context->packageSha256);
+        $published = DB::transaction(fn () => app(PublicContent53Writer::class)->publish($context, $beforeState));
+        $states->assertPublished($rows, $published['state']);
+        Http::assertNothingSent();
+        $after = $native->read($row, false);
+        $target = ContentPage::query()->withoutGlobalScopes()->where('slug', 'help-contact')->where('locale', 'zh-TW')->firstOrFail();
+        $this->assertSame(array_intersect_key($row['snapshot'], array_flip(TraditionalContentPagePublication::FIELDS)), $native->copy($target));
+        $this->assertSame($before['source'], $after['source']);
+        $this->assertSame($before['source_revisions'], $after['source_revisions']);
     }
 
     public function test_publication_failure_codes_are_fixed_and_never_disclose_raw_errors(): void
@@ -173,7 +263,7 @@ final class TraditionalContentPagePublicationTest extends TestCase
         }
     }
 
-    public function test_four_phase_service_preserves_four_published_pages_while_creating_four_policies(): void
+    public function test_four_phase_service_preserves_four_published_pages_while_creating_five_new_pages(): void
     {
         $this->source();
         // Actual staging Science lineage: a published root, not a translation.
@@ -203,14 +293,15 @@ final class TraditionalContentPagePublicationTest extends TestCase
                 $path = $directory.'/'.$phase.'.json';
                 $result = app(\App\Services\ContentPromotion\ExactPackagePromotionService::class)->execute($context, $phase, $path);
                 $this->assertSame('SUCCEEDED', $result['receipt']['result']);
-                $this->assertSame(8, $result['receipt']['readback_count']);
+                $this->assertSame(9, $result['receipt']['readback_count']);
                 if ($phase === 'publish') {
-                    $this->assertSame(4, $result['receipt']['created_count']);
+                    $this->assertSame(5, $result['receipt']['created_count']);
                     $this->assertSame(4, $result['receipt']['unchanged_count']);
                 }
                 $previous = $path;
             }
-            Http::assertSentCount(3); // Real writes still complete the existing signed cache closeout.
+            Http::assertSentCount(4); // Real writes still complete the existing signed cache closeout.
+            Http::assertSent(fn ($request) => $request->data()['cache_signal']['paths'] === ['/zh-TW/help/contact']);
             $this->assertSame($preserved, ContentPage::query()->where('locale', 'zh-TW')->orderBy('id')->limit(4)->get()->map->getRawOriginal()->all());
             $this->assertSame($sourcesBefore, ContentPage::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->orderBy('id')->get()->map->getRawOriginal()->all());
         } finally {
@@ -234,15 +325,15 @@ final class TraditionalContentPagePublicationTest extends TestCase
         $before = $states->read($context->packageSha256);
         $states->assertBaseline($rows);
         $published = DB::transaction(fn () => $writer->publish($context, $before));
-        $this->assertSame(8, $published['created_count']);
-        $this->assertSame(8, $published['written_count']);
+        $this->assertSame(9, $published['created_count']);
+        $this->assertSame(9, $published['written_count']);
         $this->assertSame($sourceBefore, $source->fresh()->getRawOriginal());
         $this->assertSame($allSourcesBefore, ContentPage::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->orderBy('id')->get()->map->getRawOriginal()->all());
         foreach ($rows as $row) {
             $slug = $row['identity']['slug'];
             Cache::forget('content_page:v1:0:'.$slug.':zh-TW');
             $variant = $this->getJson('/api/v0.5/content-pages/'.$slug.'?locale=zh-TW')->assertOk()->json('page');
-            $this->assertSame('/zh-TW/'.$slug, $variant['path']);
+            $this->assertSame($slug === 'help-contact' ? '/zh-TW/help/contact' : '/zh-TW/'.$slug, $variant['path']);
             $this->assertSame($row['snapshot']['content_md'], $variant['content_md']);
             $this->assertSame($slug === 'science' ? null : '2026-04-19', $variant['effective_at']);
             $this->assertSame('original-policy-v1', $variant['policy_version']);
@@ -264,7 +355,7 @@ final class TraditionalContentPagePublicationTest extends TestCase
         $states->assertBaseline($rows);
         $restored = $states->read($context->packageSha256);
         $again = DB::transaction(fn () => $writer->publish($this->context('f'), $restored));
-        $this->assertSame(8, $again['written_count']);
+        $this->assertSame(9, $again['written_count']);
         $this->assertSame(0, $again['created_count']);
         foreach ($history as $old) {
             $this->assertSame($old, CmsTranslationRevision::query()->withoutGlobalScopes()->findOrFail($old['id'])->getRawOriginal());
@@ -272,7 +363,7 @@ final class TraditionalContentPagePublicationTest extends TestCase
         Http::assertNothingSent();
     }
 
-    public function test_existing_about_is_preserved_while_three_new_variants_publish(): void
+    public function test_existing_about_is_preserved_while_eight_new_variants_publish(): void
     {
         $this->source();
         $native = app(TraditionalContentPagePublication::class);
@@ -284,8 +375,8 @@ final class TraditionalContentPagePublicationTest extends TestCase
         $context = $this->context('f');
         $before = app(PublicContent53State::class)->read($context->packageSha256);
         $after = DB::transaction(fn () => app(PublicContent53Writer::class)->publish($context, $before));
-        $this->assertSame(7, $after['created_count']);
-        $this->assertSame(7, $after['written_count']);
+        $this->assertSame(8, $after['created_count']);
+        $this->assertSame(8, $after['written_count']);
         $this->assertSame($beforeAbout, $about->fresh()->getRawOriginal());
         $this->assertSame($beforeRevisions, CmsTranslationRevision::query()->withoutGlobalScopes()->where('content_id', $about->id)->orderBy('id')->get()->map->getRawOriginal()->all());
     }
@@ -379,7 +470,7 @@ final class TraditionalContentPagePublicationTest extends TestCase
             try {
                 $result = TraditionalContentPagePublication::package($bytes, json_encode($review, JSON_THROW_ON_ERROR), str_repeat('a', 64));
                 $this->assertSame('valid', $mode);
-                $this->assertCount(8, $result['candidates']);
+                $this->assertCount(9, $result['candidates']);
             } catch (DomainException $error) {
                 $this->assertNotSame('valid', $mode);
                 $this->assertSame('traditional_page_link_targets_changed', $error->getMessage());
@@ -399,7 +490,7 @@ final class TraditionalContentPagePublicationTest extends TestCase
         } catch (DomainException $error) {
             $this->assertSame('public_content_53_native_prestate_drift', $error->getMessage());
         }
-        $this->assertSame(8, ContentPage::query()->withoutGlobalScopes()->count());
+        $this->assertSame(9, ContentPage::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, CmsTranslationRevision::query()->withoutGlobalScopes()->count());
     }
 

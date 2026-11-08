@@ -45,7 +45,9 @@ const parseResponse = bytes => {
   }
 };
 const mbtiQaCodes = new Set(['IDENTITY_INVALID','TRANSPORT_FAILED','API_FAILED','BANK_INVALID','GUEST_INVALID','ATTEMPT_INVALID','RESULT_INVALID','SECTION_INVALID','PRESTATE_DRIFT','BROWSER_FAILED','DOM_INVALID','NATIVE_READBACK_FAILED','DERIVED_BODY_MISMATCH'].map(code => 'MBTI_RESULT_COPY_QA_' + code));
-const diagnosticCode = error => mbtiQaCodes.has(error?.message) ? error.message : /^(?:PUBLIC_CONTENT_53_[A-Z0-9_]+(?:_(?:PAGE-[0-9]{2}|TRADITIONAL-(?:about|brand|charter|careers|privacy|terms|method-boundaries|science)|RIASEC-(?:RIC|IAR|SAE)-(?:zh-CN|en)|EN-GUIDE-(?:annual-career-review-system|big5-for-career-decisions|build-five-year-career-roadmap|build-portfolio-for-career-switch|career-growth-with-manager|career-risk-management|cross-industry-move-strategy|first-90-days-in-new-role|from-mbti-to-job-fit|how-to-choose-college-major|improve-workplace-competitiveness|interview-strategy-by-role|leader-track-vs-expert-track|networking-that-actually-works|personal-brand-for-professionals|prevent-burnout-while-growing|salary-negotiation-framework))(?:_ITEM_[0-9]{1,4})?)?|public_content_53_[a-z0-9_]+)$/.test(error?.message ?? '') ? error.message : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED';
+const nativeTraditionalCode = value => /^public_content_53_traditional_page_source_(?:identity|readiness|review|hold|html|version|path|support_contact|copy_(?:title|kicker|summary|seo_title|meta_description|seo_description|content_md|headings|faq_items))_(?:about|brand|charter|careers|privacy|terms|method-boundaries|science|help-contact)$/.test(value ?? '');
+const safeNativeCode = value => /^public_content_53_[a-z0-9_]+$/.test(value ?? '') || nativeTraditionalCode(value);
+const diagnosticCode = error => (mbtiQaCodes.has(error?.message) || nativeTraditionalCode(error?.message)) ? error.message : /^(?:PUBLIC_CONTENT_53_[A-Z0-9_]+(?:_(?:PAGE-[0-9]{2}|TRADITIONAL-(?:about|brand|charter|careers|privacy|terms|method-boundaries|science|help-contact)|RIASEC-(?:RIC|IAR|SAE)-(?:zh-CN|en)|EN-GUIDE-(?:annual-career-review-system|big5-for-career-decisions|build-five-year-career-roadmap|build-portfolio-for-career-switch|career-growth-with-manager|career-risk-management|cross-industry-move-strategy|first-90-days-in-new-role|from-mbti-to-job-fit|how-to-choose-college-major|improve-workplace-competitiveness|interview-strategy-by-role|leader-track-vs-expert-track|networking-that-actually-works|personal-brand-for-professionals|prevent-burnout-while-growing|salary-negotiation-framework))(?:_ITEM_[0-9]{1,4})?)?|public_content_53_[a-z0-9_]+)$/.test(error?.message ?? '') ? error.message : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED';
 export async function recoveryFailure(execution, execute = request => transport(execution, request), cause) {
   let completed = false;
   let recoveryCode;
@@ -79,12 +81,12 @@ export async function publish(execution, execute = request => transport(executio
     if (response.status !== 0) {
       let failure;
       try { failure = JSON.parse(response.stdout ?? ''); } catch { /* No valid remote business error. */ }
-      if (failure?.ok === false && failure.sanitized === true && /^public_content_53_[a-z0-9_]+$/.test(failure.error_code ?? ''))
+      if (failure?.ok === false && failure.sanitized === true && safeNativeCode(failure.error_code))
         throw new Error(failure.error_code);
       throw new Error('PUBLIC_CONTENT_53_SSH_EXIT_' + (Number.isInteger(response.status) && response.status >= 1 && response.status <= 255 ? response.status : 'FAILED'));
     }
     const output = parseResponse(response.stdout);
-    if (output.ok === false && /^public_content_53_[a-z0-9_]+$/.test(output.error_code ?? '')) throw new Error(output.error_code);
+    if (output.ok === false && safeNativeCode(output.error_code)) throw new Error(output.error_code);
     if (response.status !== 0 || output.ok !== true || output.schema !== 'public.content53.publish.v1'
       || output.source_commit !== execution.request.source_commit || output.workflow_run_id !== execution.request.workflow_run_id
       || output.workflow_run_attempt !== 1 || output.package_sha256 !== execution.binding.package_sha256

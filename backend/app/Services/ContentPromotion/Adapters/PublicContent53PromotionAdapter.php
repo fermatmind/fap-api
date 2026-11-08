@@ -171,7 +171,7 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
 
         $this->activePackageSha = $context->packageSha256;
 
-        $rows = $this->package->read(base_path(), $context->packageSha256)['candidates'];
+        $rows = $this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'];
         if (count($rows) !== $context->expectedRowCount) {
             throw new DomainException('public_content_53_context_count_invalid');
         }
@@ -242,7 +242,7 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
 
     private function invalidate(): void
     {
-        $rows = $this->package->read(base_path(), $this->activePackageSha)['candidates'];
+        $rows = $this->package->read(base_path(), $this->activePackageSha, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'];
         foreach ($rows as $row) {
             if ($row['kind'] === 'page') {
                 \Illuminate\Support\Facades\Cache::forget('content_page:v1:0:'.$row['identity']['slug'].':'.$row['identity']['locale']);
@@ -260,7 +260,7 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
             'indexability_mutation_count' => 0, 'sitemap_mutation_count' => 0, 'llms_mutation_count' => 0, 'search_mutation_count' => 0, 'deploy_mutation_count' => 0,
         ]) + ['target_state_sha256' => $this->states->hash($state)];
         if ($published > 0 && $written > 0
-            && array_filter($this->package->read(base_path(), $context->packageSha256)['candidates'], static fn ($row): bool => ($row['new_traditional_page'] ?? false) === true)) {
+            && array_filter($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'], static fn ($row): bool => ($row['new_traditional_page'] ?? false) === true)) {
             $result['created_count'] = $created;
             $result['updated_count'] = $written - $created;
         }

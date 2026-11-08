@@ -29,7 +29,7 @@ final class PublicContent53State
             throw new DomainException('public_content_53_lock_requires_transaction');
         }
         $state = [];
-        $rows = $this->package->read(base_path(), $sha)['candidates'];
+        $rows = $this->package->read(base_path(), $sha, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'];
         if ($this->nativeBatch($rows)) {
             return app(PublicContent53MbtiResultCopy::class)->withNativeRead($rows, $lock, static function (PublicContent53MbtiResultCopy $native) use ($rows, $lock): array {
                 $state = [];
