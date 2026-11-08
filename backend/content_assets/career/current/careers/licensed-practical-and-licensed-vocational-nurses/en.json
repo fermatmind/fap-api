@@ -7234,7 +7234,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Licensed practical and licensed vocational nurses turn orders and patient status into reviewable basic care: measuring/recording vital signs, administering medication as ordered, changing dressings/providing wound care, collecting samples, assisting eating/mobility and promptly reporting abnormalities to registered nurses or doctors."
+              "U.S. LPN/LVNs provide basic nursing care within their state scope and training: observing and recording patient information, assisting with daily care, performing permitted ordered tasks, and communicating with the care team. The list is not a universal clinical sequence or authorization to perform every task."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.quick-decision.fermat-decision-card.2",
@@ -7248,7 +7248,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Entirely fictional basic-care sample: Given a fictional patient summary, three vital-sign readings and a medication order, produce vital-sign records, medication-check records, a wound-dressing step description and an abnormality report within 60 minutes. Inputs must contain no real patient identity, medical-record numbers or identifying information."
+              "This fictional record-checking exercise involves no patients, medicines or equipment. Source record: patient N01, 09:00, temperature 36.8°C, pulse 78/min, blood pressure 118/76 mmHg. A separate unresolved record is labelled N02, 09:10, with medication status “order unverified; administration not documented.” The handover has no recipient. A draft changes N01’s pulse to 87/min and states “medication administered at 09:10.” List the source information, discrepancies, unknowns and questions for authorized review. Do not interpret clinical status, select medicines or doses, or write a dressing procedure. Work at your own pace; completion speed does not establish clinical competence. Review reference: identify 78→87, the unresolved N01/N02 mismatch, unsupported administration status and the missing handover recipient. Preserve source values and flag unknowns without inventing a clinical conclusion. A paper exercise can explore interest in careful record checking; it cannot establish tolerance for standing, patient handling or shift work. Explore those demands separately through the specific job and appropriate arrangements."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.quick-decision.fermat-decision-card.3",
@@ -7262,7 +7262,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Sample outputs and reflection: Check reviewability of vital signs, the check–administer–record medication loop, aseptic dressing steps and procedural reporting. Consider tolerance for shifts, prolonged standing/patient moving, accuracy during repeated checks and stopping before reporting uncertainty."
+              "People interested in helping others, careful source checking and team communication may wish to explore the work further. Interest or a paper exercise does not establish clinical competence, licensure or tolerance for shifts and physical demands; check those separately against the specific role and appropriate training."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.quick-decision.fermat-decision-card.4",
@@ -7284,7 +7284,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "U.S. 29-2061 LPN/LVN are licensed personnel providing basic medical care under RN or physician supervision. Medication, IV procedures and direct-supervision levels depend on state/institutional rules. The Chinese title establishes no equivalence with Chinese registered nurses or advanced practice nurses."
+              "U.S. licensed practical nurses (LPNs) and licensed vocational nurses (LVNs) provide basic nursing care, generally under registered-nurse or physician supervision. Medication, IV duties and direct-supervision requirements depend on the state, training and institutional authorization. These U.S. licenses are not equivalent to mainland Chinese nurse registration or advanced-practice qualifications."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.profile.definition-block.1",
@@ -7328,13 +7328,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Complete workflow: verify patients/orders at handover → measure/record vital signs → execute orders through check–administer–record → dressings/basic care → sample collection/daily-living assistance → update care records → report abnormalities and hand over."
+              "Task illustration, not a fixed clinical sequence: review authorized care information, observe and record, carry out permitted care, and communicate or hand over to the team. Urgent response and reporting must not wait for routine care or documentation to finish."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.profile.responsibilities-block.4",
           "source_refs": [
             "onet-details-lpn",
-            "onet-summary-lpn"
+            "onet-summary-lpn",
+            "bls-ooh-lpn",
+            "review-cn-nurses"
           ],
           "type": "list"
         },
@@ -7373,7 +7375,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Tools and materials: electronic health-record/medication systems, blood-pressure monitors/pulse oximeters and other monitoring equipment, syringes/infusion supplies, wound-care/sterile supplies, sample-collection equipment and PPE."
+              "Examples include electronic care records, vital-sign measurement equipment and supplies appropriate to permitted care and personal protection. Specific devices and their use depend on the job, training and authorization; this is not a universal equipment list."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.profile.onet-structured-fields-block.7",
@@ -7485,13 +7487,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "RNs perform nursing assessments/diagnoses and have fuller medication/procedural authority, typically requiring bachelor's/associate education and separate licensing. LPN/LVNs provide basic care under supervision and report assessment or authorization matters beyond scope."
+              "Registered nurses assess care needs, develop and implement nursing care plans, and maintain records. LPN/LVNs provide basic care within their licensed scope. Moving into an RN role requires meeting the destination state’s separate education, examination and registration requirements."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
             "onet-summary-lpn",
-            "bls-ooh-lpn"
+            "bls-ooh-lpn",
+            "neighbor-rn"
           ],
           "type": "prose"
         },
@@ -7500,13 +7503,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Nursing aides primarily assist daily living (eating, turning, hygiene), usually without licensure. LPN/LVNs additionally perform licensed basic-care tasks such as medication, dressings and vital-sign monitoring."
+              "Nursing assistants mainly support daily living and basic care. State-approved training, competency examinations, licensing or certification, and registry requirements vary; these roles should not be described as generally unlicensed. LPN/LVNs require their own state license and work within applicable state and institutional limits."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
             "onet-summary-lpn",
-            "bls-ooh-lpn"
+            "bls-ooh-lpn",
+            "neighbor-assistants"
           ],
           "type": "prose"
         },
@@ -7515,13 +7519,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Advanced practice nurses (nurse practitioners/anesthetists/midwives) need master's-level or higher education and have independent diagnosis/prescribing authority. LPN/LVNs provide supervised basic care without diagnostic/prescribing responsibility."
+              "Advanced practice nurses take on advanced clinical responsibilities, but independent-practice and prescribing authority depend on the state and role. An LPN/LVN license does not itself confer those permissions."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
             "onet-summary-lpn",
-            "bls-ooh-lpn"
+            "bls-ooh-lpn",
+            "neighbor-aprn"
           ],
           "type": "prose"
         },
@@ -7530,13 +7535,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Postsecondary nursing teachers primarily teach courses, supervise clinical learning and research; LPN/LVNs perform front-line care without teaching/academic-evaluation responsibility."
+              "Postsecondary nursing teachers focus on courses, clinical instruction and student assessment. LPN/LVNs focus on authorized patient care and may also provide patient education or approved staff guidance."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
             "onet-summary-lpn",
-            "bls-ooh-lpn"
+            "bls-ooh-lpn",
+            "neighbor-teachers"
           ],
           "type": "prose"
         }
@@ -7568,7 +7574,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: Test record drafts/reminder organization in authorized isolated environments. Ordinary monitoring automation is not generative AI. No occupational adoption, time-saving or clinical effects obtained; outputs are not medication orders or independent diagnoses. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "This page has not established verifiable occupation-specific evidence for task-level AI effects, so no quantitative impact score is provided. Record drafts and reminder organization are proposed scenarios for evaluation, not evidence of clinical effectiveness, adoption or job loss."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.ai-impact.ai-impact-table.2",
@@ -7628,7 +7634,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Practice reversibly with fictional patients in isolated environments first, recording errors/human reviews without real patient information or records."
+              "For an optional paper experiment, use only the fictional N01/N02 records and check any proposed draft against the originals. Do not upload real health records or carry out clinical actions."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.ai-impact.ai-impact-table.6",
@@ -7643,7 +7649,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: Tools may organize records/generate reminders; current materials do not establish widespread care-institution adoption."
+              "Proposed test: ask for a draft organized from fictional source records, then check every statement manually. No time-saving, adoption or clinical result has been established here."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.ai-impact.ai-impact-table.7",
@@ -7715,7 +7721,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "China's Nurses Regulation requires practice registration and a nurse practice certificate; examinations, degrees, training and registration are different statuses. U.S. LPN/LVN state licenses do not automatically replace Chinese nurse registration."
+              "Mainland Chinese nursing practice requires registration and a nurse practice certificate. Article 7 of the Nurses Regulation sets education, clinical internship, qualification-examination and other registration conditions. Passing an examination, completing training and obtaining practice registration are distinct statuses. A roughly one-year U.S. LPN/LVN pathway does not automatically satisfy these requirements. Article 21 requires nursing supervision for clinical internships."
             ]
           },
           "fact_refs": [
@@ -7933,13 +7939,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Trial activity: Use an entirely fictional patient summary/order to complete vital-sign records, medication checks and abnormality reports; ask others to test reproducibility."
+              "Use the fictional N01/N02 exercise on this page to produce a discrepancy list and a list of unknowns or review questions. Ask another person whether each observation can be traced to the supplied source. This checks the paper record, not clinical skill."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.fit.riasec-fit-block.5",
           "source_refs": [
             "onet-details-lpn",
-            "bls-ooh-lpn"
+            "bls-ooh-lpn",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7948,7 +7955,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET shows mainly S (Social) and C (Conventional) interests, emphasizing helping others and following rules. These describe activity preferences only, not qualifications or performance."
+              "O*NET lists SCR: Social, Conventional and Realistic. Helping people, working with procedures and practical activities are interests to explore, not evidence of licensure or clinical performance."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.fit.riasec-fit-block.6",
@@ -8037,7 +8044,9 @@
           "id": "licensed-practical-and-licensed-vocational-nurses.risk.career-risk-cards.3",
           "source_refs": [
             "onet-details-lpn",
-            "internal-rubric"
+            "internal-rubric",
+            "cdc-standard-precautions",
+            "review-osha-bloodborne"
           ],
           "type": "prose"
         },
@@ -8052,7 +8061,8 @@
           "id": "licensed-practical-and-licensed-vocational-nurses.risk.career-risk-cards.4",
           "source_refs": [
             "onet-details-lpn",
-            "internal-rubric"
+            "internal-rubric",
+            "review-cn-nurses"
           ],
           "type": "prose"
         },
@@ -8114,13 +8124,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "United States: complete a state-approved community-college/technical-school certificate or diploma program (about 1 year) and pass licensing exams; actual conditions follow state nursing boards/recruitment announcements. Mainland China: verify nursing education/practice qualifications under authority/employer rules."
+              "United States: complete a state-approved practical/vocational nursing program, commonly a certificate or diploma offered by community colleges or technical schools, typically about one year and including supervised clinical experience. Check the destination nursing board’s eligibility, examination and licensing requirements; completion alone does not grant a license. Mainland Chinese nursing practice requires registration and a nurse practice certificate. Article 7 of the Nurses Regulation sets education, clinical internship, qualification-examination and other registration conditions. Passing an examination, completing training and obtaining practice registration are distinct statuses. A roughly one-year U.S. LPN/LVN pathway does not automatically satisfy these requirements. Article 21 requires nursing supervision for clinical internships."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.path.career-path-block.3",
           "source_refs": [
             "bls-ooh-lpn",
-            "onet-summary-lpn"
+            "onet-summary-lpn",
+            "review-cn-nurses",
+            "ncsbn-board-directory"
           ],
           "type": "prose"
         },
@@ -8144,7 +8156,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Entry stage: Under supervision in nursing/residential care, hospitals or clinics, measure vital signs, provide basic medication/dressings and keep records/handovers."
+              "After completing the required education and obtaining the applicable license, provide authorized basic care and maintain records under the required supervision. The specific setting determines which tasks are permitted; a novice paper exercise grants no clinical permission."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.path.career-path-block.5",
@@ -8159,7 +8171,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: Demonstrate procedural checking/communication with reproducible vital-sign records, medication checks and abnormality reports."
+              "Before entry, use the fictional record discrepancy and unknowns lists only to explore careful checking. For actual practice, education, supervised training and authorized assessment are separate evidence; do not upload real patient records to this page."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.path.career-path-block.6",
@@ -8255,13 +8267,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Transferable capabilities: vital-sign measurement/recording, medication/checking, basic wound/catheter care, patient communication, infection control and procedural records."
+              "Patient observation, source-based nursing records and team communication may be useful prior experience. They do not substitute for the RN role’s separate assessment, care-planning and qualification requirements."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.market-signals.market-signal-card.4",
           "source_refs": [
             "bls-ooh-lpn",
-            "onet-summary-lpn"
+            "onet-summary-lpn",
+            "neighbor-rn"
           ],
           "type": "prose"
         },
@@ -8270,13 +8283,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Gaps to fill: destination licensing/continuing education or additional education for assessment/procedural authority (such as LPN-to-RN)."
+              "Check the destination state’s RN education, examinations and licensing/registration requirements. LPN/LVN experience is not an automatic RN qualification."
             ]
           },
           "id": "licensed-practical-and-licensed-vocational-nurses.market-signals.market-signal-card.5",
           "source_refs": [
             "bls-ooh-lpn",
-            "onet-summary-lpn"
+            "onet-summary-lpn",
+            "neighbor-rn"
           ],
           "type": "prose"
         }
@@ -8304,17 +8318,21 @@
                 ]
               },
               {
-                "answer": "LPN/LVNs provide supervised basic care; RNs assess and have fuller medication/procedural authority; nursing aides primarily support daily living and usually need no license; advanced practice nurses have master's-level or higher education and independent diagnosis/prescribing authority. Compare scope, responsibility and qualifications rather than titles alone.",
+                "answer": "RNs assess care needs and plan nursing care; nursing assistants focus on daily-living and basic-care support with state-specific training, examination, licensing/certification or registry requirements. Advanced-practice scope varies by state and role. LPN/LVN licensing is a separate route; job titles do not confer another profession’s permissions.",
                 "id": "licensed-practical-and-licensed-vocational-nurses.faq.2",
                 "question": "How does this occupation differ from adjacent roles?",
                 "question_key": "career.faq.licensed-practical-and-licensed-vocational-nurses.role-comparison",
                 "source_refs": [
                   "onet-summary-lpn",
-                  "bls-ooh-lpn"
+                  "bls-ooh-lpn",
+                  "neighbor-rn",
+                  "neighbor-assistants",
+                  "neighbor-aprn",
+                  "neighbor-teachers"
                 ]
               },
               {
-                "answer": "Observable signals: procedural medication checks, repeated-operation accuracy, patience with patients and recording/reporting abnormalities. O*NET mainly S (Social) and C (Conventional) interests describe preferences only, not competence or license eligibility.",
+                "answer": "O*NET lists SCR activity interests: helping others, working with procedures and practical tasks. The fictional record exercise can help explore attention to source information. Neither interests nor paper answers establish clinical competence, licensure or hiring suitability.",
                 "id": "licensed-practical-and-licensed-vocational-nurses.faq.3",
                 "question": "What signals suggest I might fit?",
                 "question_key": "career.faq.licensed-practical-and-licensed-vocational-nurses.fit",
@@ -8323,7 +8341,7 @@
                 ]
               },
               {
-                "answer": "AI/automated equipment may assist record organization, vital-sign trends and reminders, but licensed people retain medication checks, patient-status judgments, abnormality recognition/reporting and privacy. Uses are task hypotheses, not widespread institutional adoption.",
+                "answer": "This page has not established verifiable occupation-specific evidence for task-level AI effects, so no quantitative impact score is provided. Record drafts and reminder organization are proposed scenarios for evaluation, not evidence of clinical effectiveness, adoption or job loss.",
                 "id": "licensed-practical-and-licensed-vocational-nurses.faq.4",
                 "question": "How will AI affect this occupation?",
                 "question_key": "career.faq.licensed-practical-and-licensed-vocational-nurses.ai-impact",
@@ -8332,12 +8350,14 @@
                 ]
               },
               {
-                "answer": "Human responsibilities include medication/patient-identity checks using the five rights, reviewing monitoring data/original orders, deciding immediate abnormality reporting, infection control/privacy and referring beyond-authority handling to RNs/doctors.",
+                "answer": "Qualified staff check patient identity, orders, source measurements and permitted duties under applicable clinical and institutional procedures. Urgent response and reporting must not wait for documentation. The page is not a complete medication, emergency-care or infection-control protocol.",
                 "id": "licensed-practical-and-licensed-vocational-nurses.faq.5",
                 "question": "Which judgments must remain human responsibilities?",
                 "question_key": "career.faq.licensed-practical-and-licensed-vocational-nurses.human-control",
                 "source_refs": [
-                  "internal-rubric"
+                  "internal-rubric",
+                  "bls-ooh-lpn",
+                  "review-cn-nurses"
                 ]
               },
               {
@@ -8360,13 +8380,15 @@
                 ]
               },
               {
-                "answer": "The U.S. side requires state-approved education (typically about 1 year) and licensing exams. Some employers require/prefer CPR or basic life support (BLS) certification. Mainland China nursing practice qualifications are managed by health authorities; verify separately.",
+                "answer": "United States: complete a state-approved practical/vocational nursing program, commonly a certificate or diploma offered by community colleges or technical schools, typically about one year and including supervised clinical experience. Check the destination nursing board’s eligibility, examination and licensing requirements; completion alone does not grant a license. Mainland Chinese nursing practice requires registration and a nurse practice certificate. Article 7 of the Nurses Regulation sets education, clinical internship, qualification-examination and other registration conditions. Passing an examination, completing training and obtaining practice registration are distinct statuses. A roughly one-year U.S. LPN/LVN pathway does not automatically satisfy these requirements. Article 21 requires nursing supervision for clinical internships.",
                 "id": "licensed-practical-and-licensed-vocational-nurses.faq.8",
                 "question": "What are the entry and training pathways?",
                 "question_key": "career.faq.licensed-practical-and-licensed-vocational-nurses.education-path",
                 "source_refs": [
                   "bls-ooh-lpn",
-                  "onet-summary-lpn"
+                  "onet-summary-lpn",
+                  "review-cn-nurses",
+                  "ncsbn-board-directory"
                 ]
               },
               {
@@ -8376,7 +8398,10 @@
                 "question_key": "career.faq.licensed-practical-and-licensed-vocational-nurses.risk-boundary",
                 "source_refs": [
                   "onet-details-lpn",
-                  "internal-rubric"
+                  "internal-rubric",
+                  "cdc-standard-precautions",
+                  "review-osha-bloodborne",
+                  "review-cn-nurses"
                 ]
               },
               {
@@ -8389,16 +8414,17 @@
                 ]
               },
               {
-                "answer": "If you tolerate shifts/physical demands and will provide procedural care under supervision, try a low-cost, entirely fictional nursing task package. Adjacent RN and other roles require corresponding education, licensing and authorization evidence.",
+                "answer": "Use the complete fictional N01/N02 record check to explore interest in source checking and communication. It does not demonstrate clinical or physical fitness. RN and other adjacent routes require separate education, licensing and scope checks.",
                 "id": "licensed-practical-and-licensed-vocational-nurses.faq.11",
                 "question": "Is this occupation worth exploring further through a trial?",
                 "question_key": "career.faq.licensed-practical-and-licensed-vocational-nurses.career-worth",
                 "source_refs": [
-                  "onet-summary-lpn"
+                  "onet-summary-lpn",
+                  "internal-rubric"
                 ]
               },
               {
-                "answer": "Evidence for China, the United States and specific institutions is stated separately: do not combine pay, employment, licensing, privacy or AI conclusions across scopes. This LPN/LVN page provides career assessment and safe-trial information, not local law, clinical standards, practice licensing or professional advice. Any 'insufficient evidence' statement means only that a bounded search did not establish reliably corresponding data; do not fabricate figures using proxies or memory.",
+                "answer": "This page separates U.S. occupational statistics, mainland qualification law and historical employer examples. It offers career information and a fictional record exercise, not clinical instructions, credential recognition or an individual eligibility decision. Missing evidence is reported without inventing figures.",
                 "id": "licensed-practical-and-licensed-vocational-nurses.faq.boundary",
                 "question": "What are the boundaries of this page's use?",
                 "question_key": "career.faq.licensed-practical-and-licensed-vocational-nurses.boundary"
@@ -8583,23 +8609,22 @@
                 "url": "https://www.onetonline.org/link/localwages/29-2061.00"
               },
               {
-                "accessed_at": "2026-09-24",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "29-2061.00 employment size and projections.",
-                  "Projections are not hiring guarantees; period differs from current BLS OOH."
+                  "The directly retrieved current national table reports 2025 employment of 666,900, 2035 employment of 686,700, rounded 3% growth and 51,800 annual openings including replacement."
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends-lpn",
-                "limitation": "Projections are not hiring guarantees; period differs from current BLS OOH.",
+                "limitation": "Employment stock, net change and annual openings are separate measures; not live vacancies or personal hiring probabilities.",
                 "market": "United States",
                 "name": "O*NET 29-2061.00 national employment trends",
-                "period": "Current O*NET/BLS employment data; accessed 2026-09-24",
+                "period": "2025–2035; reviewed 2026-11-09",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/29-2061.00"
               },
               {
-                "accessed_at": "2026-09-24",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Technology mentions associated with this occupation.",
                   "Recruitment mentions do not prove proficiency, adoption or automation shares."
@@ -8609,7 +8634,7 @@
                 "limitation": "Recruitment mentions do not prove proficiency, adoption or automation shares.",
                 "market": "United States",
                 "name": "Hot Technologies: 29-2061.00",
-                "period": "O*NET technology data current 2026; accessed 2026-09-24",
+                "period": "Lightcast U.S. postings, January 1–December 31, 2025",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/29-2061.00"
@@ -8647,47 +8672,201 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-10-11",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Articles 2 and 7: registration/certificates; Article 17: critical-condition notification, necessary emergency care and questionable-order reporting; Article 18: privacy."
                 ],
                 "id": "review-cn-nurses",
                 "limitation": "Establishes no Chinese LPN/LVN equivalence.",
                 "name": "Nurses Regulation: registration, obligations and institutional duties",
-                "period": "State Council Order No. 517, effective 2008; current public text checked this round",
+                "period": "Promulgated 2008; amended 2020; reviewed 2026-11-09",
                 "publisher": "State Council; Beijing Municipal Health Commission",
                 "scope": "Chinese nurse registration and obligations",
                 "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230408_2993021.html"
               },
               {
-                "accessed_at": "2026-10-11",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Bloodborne-pathogen occupational-exposure control entry point: engineering/work-practice controls, protection and training."
+                  "U.S. occupational exposure: engineering/work-practice controls and vaccination/post-exposure evaluation and follow-up; selected provisions only."
                 ],
                 "id": "review-osha-bloodborne",
                 "limitation": "Not complete nursing or medication procedures.",
                 "name": "OSHA：Bloodborne Pathogens",
-                "period": "Current official overview",
+                "period": "29 CFR 1910.1030(d)/(f); reviewed 2026-11-09",
                 "publisher": "OSHA",
                 "scope": "U.S. occupational exposure",
-                "url": "https://www.osha.gov/bloodborne-pathogens"
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1030"
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Administer and check ordered medication — 0/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Measure and record vital signs — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Perform aseptic dressings and basic care — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                  "Earlier 17% editorial estimate withdrawn: no verified task-level basis for the 0/50/0 ratings.",
+                  "Proposed fictional-record tests are separate from clinical capability or outcome evidence.",
+                  "Previously selected task: ordered medication checks; no supported AI rating.",
+                  "Previously selected task: measuring and recording vital signs; no supported AI rating.",
+                  "Previously selected task: dressings and basic care; no supported AI rating."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "Occupational task descriptions do not validate AI task ratings, clinical effects, adoption, work-time shares or job loss. Missing evidence is not proof of technical impossibility.",
+                "name": "FermatMind AI evidence status for LPN/LVN tasks",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "Status of evidence for the three previously selected tasks; not a quantitative result.",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "U.S. care assessment, planning and nursing duties; not mainland credential equivalence."
+                ],
+                "evidence_type": "official source",
+                "id": "neighbor-rn",
+                "limitation": "U.S. care assessment, planning and nursing duties; not mainland credential equivalence.",
+                "name": "O*NET: Registered Nurses",
+                "period": "Source-specific period; reviewed 2026-11-09",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "U.S. care assessment, planning and nursing duties; not mainland credential equivalence.",
+                "url": "https://www.onetonline.org/link/summary/29-1141.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Duties and distinct state education, examinations, licensing/certification and registry requirements; not a generally uncredentialed role."
+                ],
+                "evidence_type": "official source",
+                "id": "neighbor-assistants",
+                "limitation": "Duties and distinct state education, examinations, licensing/certification and registry requirements; not a generally uncredentialed role.",
+                "name": "BLS: Nursing Assistants and Orderlies",
+                "period": "Source-specific period; reviewed 2026-11-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "Duties and distinct state education, examinations, licensing/certification and registry requirements; not a generally uncredentialed role.",
+                "url": "https://www.bls.gov/ooh/healthcare/nursing-assistants.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "U.S. scope varies by state and role; not universal independent-practice or prescribing authority."
+                ],
+                "evidence_type": "official source",
+                "id": "neighbor-aprn",
+                "limitation": "U.S. scope varies by state and role; not universal independent-practice or prescribing authority.",
+                "name": "BLS: Advanced Practice Nursing Roles",
+                "period": "Source-specific period; reviewed 2026-11-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "U.S. scope varies by state and role; not universal independent-practice or prescribing authority.",
+                "url": "https://www.bls.gov/ooh/healthcare/nurse-anesthetists-nurse-midwives-and-nurse-practitioners.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Courses, clinical instruction and student assessment; this does not exclude LPN patient education or approved guidance."
+                ],
+                "evidence_type": "official source",
+                "id": "neighbor-teachers",
+                "limitation": "Courses, clinical instruction and student assessment; this does not exclude LPN patient education or approved guidance.",
+                "name": "O*NET: Postsecondary Nursing Teachers",
+                "period": "Source-specific period; reviewed 2026-11-09",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "Courses, clinical instruction and student assessment; this does not exclude LPN patient education or approved guidance.",
+                "url": "https://www.onetonline.org/link/summary/25-1072.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Specialty care, nursing standards and staff guidance; state qualifications require separate checks."
+                ],
+                "evidence_type": "official source",
+                "id": "neighbor-cns",
+                "limitation": "Specialty care, nursing standards and staff guidance; state qualifications require separate checks.",
+                "name": "O*NET: Clinical Nurse Specialists",
+                "period": "Source-specific period; reviewed 2026-11-09",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "Specialty care, nursing standards and staff guidance; state qualifications require separate checks.",
+                "url": "https://www.onetonline.org/link/summary/29-1141.04"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Current 29-2072 records, coding and confidentiality tasks; not nursing licensure."
+                ],
+                "evidence_type": "official source",
+                "id": "neighbor-medical-records",
+                "limitation": "Current 29-2072 records, coding and confidentiality tasks; not nursing licensure.",
+                "name": "O*NET: Medical Records Specialists",
+                "period": "Source-specific period; reviewed 2026-11-09",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "Current 29-2072 records, coding and confidentiality tasks; not nursing licensure.",
+                "url": "https://www.onetonline.org/link/summary/29-2072.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Current 29-9021 systems, data and registry tasks; distinct from 29-2072."
+                ],
+                "evidence_type": "official source",
+                "id": "neighbor-health-information",
+                "limitation": "Current 29-9021 systems, data and registry tasks; distinct from 29-2072.",
+                "name": "O*NET: Health Information Technologists and Medical Registrars",
+                "period": "Source-specific period; reviewed 2026-11-09",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "Current 29-9021 systems, data and registry tasks; distinct from 29-2072.",
+                "url": "https://www.onetonline.org/link/summary/29-9021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Overview dated April 3, 2024: hand hygiene, protection, equipment/environment and sharps safety; not a complete clinical procedure."
+                ],
+                "evidence_type": "official source",
+                "id": "cdc-standard-precautions",
+                "limitation": "Overview dated April 3, 2024: hand hygiene, protection, equipment/environment and sharps safety; not a complete clinical procedure.",
+                "name": "CDC: Standard Precautions for All Patient Care",
+                "period": "2024-04-03; reviewed 2026-11-09",
+                "publisher": "Centers for Disease Control and Prevention",
+                "scope": "Overview dated April 3, 2024: hand hygiene, protection, equipment/environment and sharps safety; not a complete clinical procedure.",
+                "url": "https://www.cdc.gov/infection-control/hcp/basics/standard-precautions.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One institution advertised one contract nurse on July 10, 2026; nurse applications closed July 24. Monthly starting amounts differ by title, not national wages; tax basis and full composition are unspecified."
+                ],
+                "evidence_type": "historical single-employer recruitment",
+                "id": "cn-huangpu-nursing-sample",
+                "limitation": "One institution advertised one contract nurse on July 10, 2026; nurse applications closed July 24. Monthly starting amounts differ by title, not national wages; tax basis and full composition are unspecified.",
+                "name": "Huangpu District Elderly Home: historical 2026 recruitment",
+                "period": "2026-07-10; applications closed 2026-07-24",
+                "publisher": "广州市黄埔区老人院 / Huangpu District Elderly Home",
+                "scope": "One institution advertised one contract nurse on July 10, 2026; nurse applications closed July 24. Monthly starting amounts differ by title, not national wages; tax basis and full composition are unspecified.",
+                "url": "https://www.hp.gov.cn/xwzx/tzgg/zpgg/content/post_10897562.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Find the target state regulator to check program approval, licensing and scope; the directory does not determine individual eligibility."
+                ],
+                "evidence_type": "regulator contact directory",
+                "id": "ncsbn-board-directory",
+                "limitation": "Find the target state regulator to check program approval, licensing and scope; the directory does not determine individual eligibility.",
+                "name": "NCSBN: U.S. Nursing Regulatory Body Directory",
+                "period": "Source-specific period; reviewed 2026-11-09",
+                "publisher": "National Council of State Boards of Nursing",
+                "scope": "Find the target state regulator to check program approval, licensing and scope; the directory does not determine individual eligibility.",
+                "url": "https://www.ncsbn.org/membership/us-members/contact-bon.page"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Exam registration differs from the regulator’s eligibility and licensing process; this page neither registers candidates nor guarantees eligibility."
+                ],
+                "evidence_type": "examination registration guidance",
+                "id": "nclex-registration",
+                "limitation": "Exam registration differs from the regulator’s eligibility and licensing process; this page neither registers candidates nor guarantees eligibility.",
+                "name": "NCLEX: Examination Registration",
+                "period": "Source-specific period; reviewed 2026-11-09",
+                "publisher": "National Council of State Boards of Nursing / NCLEX",
+                "scope": "Exam registration differs from the regulator’s eligibility and licensing process; this page neither registers candidates nor guarantees eligibility.",
+                "url": "https://www.nclex.com/registration.page"
               }
             ]
           },
@@ -8727,7 +8906,7 @@
     ],
     "components": {
       "adjacent_career_comparison_table": {
-        "conclusion": "First test objects, methods, boundaries and delivery with reviewable vital-sign, medication-check and reporting samples, then assess direction; income/personality does not produce a single ranking.",
+        "conclusion": "Compare duties and credential requirements, then use the fictional record check to explore interest. Do not rank occupations by pay or treat a paper exercise as clinical evidence.",
         "evidence_links": [
           {
             "href": {
@@ -8776,6 +8955,70 @@
               "field": "name",
               "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
             }
+          },
+          {
+            "href": {
+              "$source": "neighbor-rn",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "label": {
+              "$source": "neighbor-rn",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "neighbor-assistants",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "label": {
+              "$source": "neighbor-assistants",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "neighbor-aprn",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "label": {
+              "$source": "neighbor-aprn",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "neighbor-teachers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "label": {
+              "$source": "neighbor-teachers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            }
           }
         ],
         "evidence_note": "Adjacency supports comparing directions, not automatic transfer, mutual qualification recognition or license reciprocity.",
@@ -8783,8 +9026,8 @@
         "intro": "Compare LPN/LVNs and adjacent roles by actual objects, core deliverables and responsibility boundaries, without interchanging qualifications by title.",
         "rows": [
           {
-            "关键区别": "Perform assessments and hold fuller medication/procedural authority; LPN/LVNs provide basic care under their supervision.",
-            "更适合什么选择": "Compare if you prefer greater clinical responsibility/authority.",
+            "关键区别": "RN assessment and care planning require separate qualifications.",
+            "更适合什么选择": "Compare an interest in care assessment and planning, then check the RN qualification route.",
             "核心工作与产出": {
               "$item": "licensed-practical-and-licensed-vocational-nurses.direction-comparison.adjacent-career-comparison-table.2",
               "block": "direction-comparison",
@@ -8794,8 +9037,8 @@
             "职业方向": "Registered Nurses"
           },
           {
-            "关键区别": "Primarily assist daily living, usually without licensure; LPN/LVNs provide licensed basic care.",
-            "更适合什么选择": "Compare if you prefer care roles with lower entry thresholds.",
+            "关键区别": "Training, competency, certification/licensing and registry conditions vary by state.",
+            "更适合什么选择": "Compare an interest in daily living support and the specific role’s requirements.",
             "核心工作与产出": {
               "$item": "licensed-practical-and-licensed-vocational-nurses.direction-comparison.adjacent-career-comparison-table.3",
               "block": "direction-comparison",
@@ -8805,8 +9048,8 @@
             "职业方向": "Nursing Aides"
           },
           {
-            "关键区别": "Have independent diagnosis/prescribing authority; LPN/LVNs do not diagnose or prescribe.",
-            "更适合什么选择": "Compare if willing to invest in higher education and independent clinical practice.",
+            "关键区别": "Independent practice and prescribing vary by state and advanced role.",
+            "更适合什么选择": "Compare advanced clinical roles only alongside their separate education and regulatory requirements.",
             "核心工作与产出": {
               "$item": "licensed-practical-and-licensed-vocational-nurses.direction-comparison.adjacent-career-comparison-table.4",
               "block": "direction-comparison",
@@ -8816,8 +9059,8 @@
             "职业方向": "Advanced Practice Nurses"
           },
           {
-            "关键区别": "Primarily teach/research; LPN/LVNs provide front-line care.",
-            "更适合什么选择": "Compare if you prefer teaching and research.",
+            "关键区别": "Teaching nursing students differs from patient education or approved staff guidance.",
+            "更适合什么选择": "Compare teaching, curriculum design and student assessment with direct patient care.",
             "核心工作与产出": {
               "$item": "licensed-practical-and-licensed-vocational-nurses.direction-comparison.adjacent-career-comparison-table.5",
               "block": "direction-comparison",
@@ -8833,7 +9076,7 @@
         "action_rows": [
           {
             "人群": "New entrants",
-            "应对重点": "Practice vital signs, medication checks and reporting with fictional patients, without real medical records."
+            "应对重点": "Use the fictional N01/N02 exercise to check record discrepancies and unknowns; no real patient records or clinical procedures."
           },
           {
             "人群": "Current workers",
@@ -8919,7 +9162,7 @@
             "方向": "Medication and records"
           },
           {
-            "AI主要改变": "May assist trend alerts",
+            "AI主要改变": "Fictional record organization may be tested; clinical trend alerts remain unverified.",
             "仍由人负责": "Abnormality judgments, reporting and clinical treatment",
             "方向": "Monitoring and reporting"
           }
@@ -8997,7 +9240,7 @@
         },
         "method_cards": [
           {
-            "含义": "State only specific assistable steps; a demonstration is not institutional adoption.",
+            "含义": "Separate a proposed use from verified functionality and effects. Ordinary monitoring automation is not necessarily generative AI.",
             "概念": "Technical capability"
           },
           {
@@ -9011,7 +9254,7 @@
         ],
         "questions": [
           {
-            "回答": "O*NET supports task breakdown for records, trend alerts and reminders. Assistance is a task hypothesis, not automated medication or diagnosis.",
+            "回答": "O*NET describes nursing tasks, not AI performance. This page proposes fictional draft and missing-field checks for evaluation; it does not establish automated monitoring, medication or diagnosis.",
             "来源": {
               "$source": "onet-details-lpn",
               "block": "source-register",
@@ -9096,8 +9339,8 @@
             "风险": "Medication or record errors"
           },
           {
-            "为什么重要": "Patient information is protected health information",
-            "控制方式": "Restrict access under minimum-necessary principles and institutional policy",
+            "为什么重要": "Records may include patient identity and health information.",
+            "控制方式": "Check applicable privacy rules, access authority and institutional policy; use fictional inputs for this exercise.",
             "风险": "Patient information leaks"
           },
           {
@@ -9127,19 +9370,19 @@
             "人的控制点": "Verify patients, original readings, measurement times and records; promptly report abnormalities through procedures.",
             "任务": "Measure and record vital signs",
             "工作方向": "Monitoring and records",
-            "当前变化": "May assist trend alerts and record organization"
+            "当前变化": "Trend-detection performance has not been established here. Only fictional record transcription is proposed for checking against its source."
           },
           {
             "人的控制点": "Licensed personnel confirm procedures/results.",
             "任务": "Perform aseptic dressings and basic care",
             "工作方向": "Wound and catheter care",
-            "当前变化": "May assist care-checklist organization"
+            "当前变化": "No clinical procedure effect is established. A paper exercise may check whether supplied record fields are complete, not generate a dressing procedure."
           },
           {
             "人的控制点": "Judge/report under institutional procedures.",
             "任务": "Recognize and report abnormalities",
             "工作方向": "Abnormality reporting",
-            "当前变化": "May generate reminders, without automatic treatment"
+            "当前变化": "A missing-handover-field reminder is an editorial test scenario, not evidence of automated detection or clinical response."
           }
         ],
         "transition": {
@@ -9277,12 +9520,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI/automated equipment may assist records and trend alerts, but licensed people retain medication checks, patient-status judgments, abnormality reporting and privacy."
+          "This page has not established verifiable occupation-specific evidence for task-level AI effects, so no quantitative impact score is provided. Record drafts and reminder organization are proposed scenarios for evaluation, not evidence of clinical effectiveness, adoption or job loss."
         ],
         "heading": "LPN/LVN work objects and AI boundaries"
       },
       "career_path_block": {
-        "boundary": "Education, licensing, authorization and permissions follow jurisdiction/institution verification.",
+        "boundary": "These tracks are editorial examples, not a universal promotion sequence. State licensing, education and institutional authorization determine each role; experience or a team title does not expand clinical scope. Any professional records remain within authorized institutional handling.",
         "competence_ladder": [
           {
             "description": "Confirm identity, orders, authorization and institutional rules.",
@@ -9320,7 +9563,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "U.S. state nursing-board licenses; mainland China verified under health-authority rules",
+          "jurisdiction": "U.S. destination-state nursing regulator; mainland Chinese practice-registration authority.",
           "summary": {
             "$item": "licensed-practical-and-licensed-vocational-nurses.path.career-path-block.3",
             "block": "path",
@@ -9368,7 +9611,7 @@
           },
           {
             "href": {
-              "$source": "onet-details-lpn",
+              "$source": "ncsbn-board-directory",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9376,17 +9619,17 @@
             },
             "id": "licensed-practical-and-licensed-vocational-nurses.display.source.2",
             "label": {
-              "$source": "onet-details-lpn",
+              "$source": "ncsbn-board-directory",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
             },
-            "scope": "29-2061.00 tasks/context, for pathway hypotheses only."
+            "scope": "Official regulator directory; check the target state’s approved programs and licensing."
           },
           {
             "href": {
-              "$source": "onet-wages-lpn",
+              "$source": "review-cn-nurses",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9394,13 +9637,13 @@
             },
             "id": "licensed-practical-and-licensed-vocational-nurses.display.source.3",
             "label": {
-              "$source": "onet-wages-lpn",
+              "$source": "review-cn-nurses",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
             },
-            "scope": "U.S. wage percentiles, not individual offers."
+            "scope": "Mainland registration and obligations; not U.S. license equivalence."
           }
         ],
         "tracks": [
@@ -9438,7 +9681,7 @@
                   "type": "prose"
                 },
                 "readiness_evidence": "Reviewable medication/vital-sign records.",
-                "responsibility": "Independently complete medication checks/records and identify reportable abnormalities.",
+                "responsibility": "Perform permitted medication checks and care documentation under the required supervision, and promptly raise concerns through applicable procedures.",
                 "role": "Medication and records lead"
               },
               {
@@ -9449,11 +9692,11 @@
                 "role": "Care coordination"
               },
               {
-                "credentials": "Determined by institutional appointment.",
+                "credentials": "Check state scope, experience and institutional authorization; appointment alone is insufficient.",
                 "next_moves": "Maintain interprofessional collaboration continuously.",
                 "readiness_evidence": "Reviewable care outcomes.",
-                "responsibility": "Lead care standards, staffing and abnormality handling.",
-                "role": "Team head"
+                "responsibility": "Assist with shift coordination, apply established care standards and report safety issues within state licensing and institutional authorization. A team title does not expand clinical authority.",
+                "role": "Authorized team-coordination support"
               }
             ],
             "title": "Basic-care delivery"
@@ -9479,15 +9722,15 @@
                 "credentials": "Within license scope.",
                 "next_moves": "Add specialty-procedure training.",
                 "readiness_evidence": "Outpatient care/procedure records.",
-                "responsibility": "Provide medication, dressings and procedural assistance in specialty clinics.",
+                "responsibility": "Provide only the basic care and procedural assistance permitted by the state, training and clinic authorization.",
                 "role": "Outpatient and specialty support"
               },
               {
-                "credentials": "Determined by institutional appointment.",
-                "next_moves": "Create repeatable specialty procedures.",
+                "credentials": "Check specialty training, state scope and institutional authorization.",
+                "next_moves": "Give feedback through the authorized quality process; do not independently create clinical procedures.",
                 "readiness_evidence": "Specialty-care outcomes/records.",
-                "responsibility": "Lead one specialty's basic-care standards/quality control.",
-                "role": "Specialty-care lead"
+                "responsibility": "Contribute to record review and quality improvement within authorized specialty basic care. Clinical procedures remain subject to the appropriate clinical governance process.",
+                "role": "Specialty-care quality support"
               }
             ],
             "title": "Settings and specialty care"
@@ -9517,11 +9760,11 @@
                 "role": "Advanced training (LPN-to-RN)"
               },
               {
-                "credentials": "Determined by licensing and education.",
+                "credentials": "Meet the destination state’s separate RN education, examination and registration requirements.",
                 "next_moves": "Maintain licenses/continuing education.",
                 "readiness_evidence": "Licensing/clinical-competence records.",
-                "responsibility": "Perform assessments, nursing diagnoses and fuller medication responsibilities.",
-                "role": "Registered nurse or advanced direction"
+                "responsibility": "Perform the assessment, planning and nursing duties of the separately qualified RN role. APRN roles require further distinct regulatory checks.",
+                "role": "Registered nurse — separate qualification required"
               }
             ],
             "title": "Supervision and advancement"
@@ -9572,56 +9815,56 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "How do you assess a complete work loop?",
+            "question": "Which responsibilities and checks are involved?",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "Work loop",
+                  "label": "Scope reminder",
                   "secondary_value": null,
-                  "value": "From handover checks to abnormality reports and handover"
+                  "value": "Task examples, not a fixed sequence; urgent care must not wait for documentation."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step one",
+                  "label": "Identity and authority",
                   "secondary_value": null,
-                  "value": "Verify patients/orders at handover"
+                  "value": "Check patient identity, relevant orders and the practitioner’s authorization."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step two",
+                  "label": "Observation and records",
                   "secondary_value": null,
-                  "value": "Measure and record vital signs"
+                  "value": "Observe and record within the trained role and communicate concerns promptly."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step three",
+                  "label": "Permitted medication duties",
                   "secondary_value": null,
-                  "value": "Check medication using the five rights"
+                  "value": "Follow applicable institutional identity and medication-check procedures within the licensed scope."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step four",
+                  "label": "Basic care",
                   "secondary_value": null,
-                  "value": "Dressings and basic care"
+                  "value": "Provide the basic care permitted by the setting, training and supervision."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step five",
+                  "label": "Team coordination",
                   "secondary_value": null,
-                  "value": "Collect samples and assist daily living"
+                  "value": "Coordinate permitted specimen or daily-living support tasks with the team."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step six",
+                  "label": "Prompt reporting and handover",
                   "secondary_value": null,
-                  "value": "Records and abnormality reporting"
+                  "value": "Respond and report under applicable clinical procedures, then preserve the necessary record and handover."
                 }
               ]
             }
           },
           {
-            "answer": "Education, licensing, authorization and job permissions follow specific jurisdiction/institution verification. U.S. entry requires state-approved programs/licensing exams; mainland China follows health-authority rules. This page does not assess individual eligibility.",
+            "answer": "United States: complete a state-approved practical/vocational nursing program, commonly a certificate or diploma offered by community colleges or technical schools, typically about one year and including supervised clinical experience. Check the destination nursing board’s eligibility, examination and licensing requirements; completion alone does not grant a license. Mainland Chinese nursing practice requires registration and a nurse practice certificate. Article 7 of the Nurses Regulation sets education, clinical internship, qualification-examination and other registration conditions. Passing an examination, completing training and obtaining practice registration are distinct statuses. A roughly one-year U.S. LPN/LVN pathway does not automatically satisfy these requirements. Article 21 requires nursing supervision for clinical internships.",
             "key": "qa1",
             "question": "What are the qualification boundaries?",
             "table": {
@@ -9630,7 +9873,7 @@
                   "alternate_value": null,
                   "label": "Boundaries",
                   "secondary_value": null,
-                  "value": "Verify by institution"
+                  "value": "U.S. state license and permitted scope; mainland registration checked separately."
                 },
                 {
                   "alternate_value": null,
@@ -9677,7 +9920,7 @@
           }
         ],
         "direct_answer": "Address risks through triggers, consequences, controls and escalation boundaries.",
-        "evidence_scope": "BLS/O*NET supports U.S. duties/state variation; OSHA supports occupational bloodborne-exposure controls. China's Nurses Regulation separately supports registration, privacy and questionable-order reporting; medical treatment follows applicable clinical procedures.",
+        "evidence_scope": "BLS/O*NET describe U.S. duties and state differences. CDC provides the Standard Precautions overview. OSHA 1910.1030(d)/(f) concerns U.S. occupational bloodborne exposure. The mainland Nurses Regulation separately addresses registration, urgent care and privacy. These sources do not form a complete clinical protocol.",
         "heading": "LPN/LVN work risks and boundaries",
         "risks": [
           {
@@ -9700,10 +9943,11 @@
             "affected_roles": "Monitoring and nursing roles",
             "consequence": "Delayed treatment increases deterioration risk.",
             "evidence_refs": [
-              "licensed-practical-and-licensed-vocational-nurses.display.source.1"
+              "licensed-practical-and-licensed-vocational-nurses.display.source.1",
+              "licensed-practical-and-licensed-vocational-nurses.display.source.cn-nursing-law"
             ],
             "id": "risk-2",
-            "mitigation": "Immediately record/report to RNs/doctors under institutional thresholds, retaining a timeline.",
+            "mitigation": "Respond and report promptly under applicable clinical and institutional procedures; completing documentation must not delay urgent care. Mainland Chinese nurses are separately subject to Article 17 of the Nurses Regulation.",
             "scenario": "When abnormal vital signs are not promptly recorded/reported.",
             "title": {
               "$item": "licensed-practical-and-licensed-vocational-nurses.risk.career-risk-cards.2",
@@ -9716,10 +9960,11 @@
             "affected_roles": "Injection and wound-care roles",
             "consequence": "Needlestick injuries/cross-infection affect patient and worker safety.",
             "evidence_refs": [
-              "licensed-practical-and-licensed-vocational-nurses.display.source.3"
+              "licensed-practical-and-licensed-vocational-nurses.display.source.3",
+              "licensed-practical-and-licensed-vocational-nurses.display.source.cdc-standard-precautions"
             ],
             "id": "risk-3",
-            "mitigation": "Follow standard precautions, proper waste handling and exposure reporting.",
+            "mitigation": "Follow the applicable infection-control training and Standard Precautions, including hand hygiene, appropriate protection and sharps handling. U.S. occupational exposures have separate OSHA reporting and follow-up requirements; this overview is not a procedure manual.",
             "scenario": "When standard precautions are absent during injections, dressings or body-fluid handling.",
             "title": {
               "$item": "licensed-practical-and-licensed-vocational-nurses.risk.career-risk-cards.3",
@@ -9732,10 +9977,11 @@
             "affected_roles": "Care-record and handover roles",
             "consequence": "Violates privacy and affects trust/compliance.",
             "evidence_refs": [
-              "licensed-practical-and-licensed-vocational-nurses.display.source.1"
+              "licensed-practical-and-licensed-vocational-nurses.display.source.1",
+              "licensed-practical-and-licensed-vocational-nurses.display.source.cn-nursing-law"
             ],
             "id": "risk-4",
-            "mitigation": "Handle information under minimum necessity/privacy policy and restrict access.",
+            "mitigation": "Check applicable privacy rules, access permissions and institutional policy. Mainland nurses must protect patient privacy under Article 18; this page does not establish the full applicability of U.S. privacy law.",
             "scenario": "When patient information, records or handovers disclose too broadly.",
             "title": {
               "$item": "licensed-practical-and-licensed-vocational-nurses.risk.career-risk-cards.4",
@@ -9845,6 +10091,42 @@
               "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
             },
             "scope": "U.S. bloodborne-pathogen occupational-exposure control, not clinical standards."
+          },
+          {
+            "href": {
+              "$source": "review-cn-nurses",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "id": "licensed-practical-and-licensed-vocational-nurses.display.source.cn-nursing-law",
+            "label": {
+              "$source": "review-cn-nurses",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "scope": "Mainland Nurses Regulation, Articles 7, 17, 18 and 21; separate from U.S. law."
+          },
+          {
+            "href": {
+              "$source": "cdc-standard-precautions",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "id": "licensed-practical-and-licensed-vocational-nurses.display.source.cdc-standard-precautions",
+            "label": {
+              "$source": "cdc-standard-precautions",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "scope": "CDC Standard Precautions overview; not a complete care protocol."
           }
         ]
       },
@@ -9881,38 +10163,38 @@
           },
           "china_edu_table": [
             {
-              "学历段": "Not separately measured",
-              "岗位方向": "Institutional appointment",
-              "说明": "NBS wages use industry/registration type, not occupational education tiers."
+              "学历段": "National occupational median",
+              "岗位方向": "Not established for a directly comparable mainland occupation",
+              "说明": "The U.S. LPN/LVN identity does not itself define a mainland statistical occupation."
             },
             {
-              "学历段": "Not separately measured",
-              "岗位方向": "Institutional appointment",
-              "说明": "NBS wages use industry/registration type, not occupational education tiers."
+              "学历段": "Industry annual average",
+              "岗位方向": "CNY 146,266/year",
+              "说明": "2025 urban non-private health/social-work units, all relevant occupations; not an LPN/LVN or nurse median."
             },
             {
-              "学历段": "Not separately measured",
-              "岗位方向": "Institutional appointment",
-              "说明": "NBS wages use industry/registration type, not occupational education tiers."
+              "学历段": "Historical employer sample",
+              "岗位方向": "CNY 6,500 / 6,700 / 8,000 monthly starting amounts",
+              "说明": "Huangpu Elderly Home listed nurse, hushi and zhuguan hushi (Chinese professional titles) in July 2026; nurse applications closed July 24. These are not U.S. NP/APRN equivalents. Tax basis and full composition were unspecified."
             },
             {
-              "学历段": "Not separately measured",
-              "岗位方向": "Institutional appointment",
-              "说明": "NBS wages use industry/registration type, not occupational education tiers."
+              "学历段": "Credentials and pay",
+              "岗位方向": "Separate questions",
+              "说明": "Registration conditions, professional title and employer appointment do not determine an individual wage or establish cross-border equivalence."
             }
           ],
           "china_industry_table": [
             {
               "行业": "Health and social work (urban non-private units)",
-              "需求": "146,266 yuan/year"
+              "需求": "146,266 yuan/year — 2025 urban non-private industry annual mean; not an occupational wage or employment share."
             },
             {
               "行业": "Resident services, repairs and other services (urban non-private units)",
-              "需求": "70,226 yuan/year"
+              "需求": "70,226 yuan/year — 2025 urban non-private industry annual mean; not an occupational wage or employment share."
             },
             {
               "行业": "Public administration, social security and social organizations (urban non-private units)",
-              "需求": "119,465 yuan/year"
+              "需求": "119,465 yuan/year — 2025 urban non-private industry annual mean; not an occupational wage or employment share."
             }
           ],
           "china_intl": {
@@ -9962,7 +10244,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "Keep mainland China industry definitions separate from U.S. occupational statistics; do not combine across markets.",
+          "china_salary_note": "Keep mainland China industry definitions separate from U.S. occupational statistics; do not combine across markets. The single-employer advertisement is historical and closed; neither its title-based offers nor industry means define a national occupational wage or cross-border credential equivalence.",
           "china_salary_table": [
             {
               "城市/区间": "Nationwide · Health/social work (non-private)",
@@ -9983,10 +10265,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": {
+          "edu": {
             "$join": [
               {
-                "$source": "nbs-wages",
+                "$source": "review-cn-nurses",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -9994,7 +10276,27 @@
               },
               "｜",
               {
-                "$source": "nbs-wages",
+                "$source": "review-cn-nurses",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "cn-huangpu-nursing-sample",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "cn-huangpu-nursing-sample",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10344,19 +10646,19 @@
           {
             "equivalent": "$23.91/hour",
             "interpretation": "10th-percentile boundary, not an individual offer.",
-            "label": "Lowest 10%",
+            "label": "10th percentile",
             "value": "$49,740/year"
           },
           {
             "equivalent": "$30.96/hour",
             "interpretation": "2025 U.S. nationwide median annual pay.",
-            "label": "Median (50%)",
+            "label": "50th percentile (median)",
             "value": "$64,400/year"
           },
           {
             "equivalent": "$40.12/hour",
             "interpretation": "90th-percentile boundary, not an individual offer.",
-            "label": "Highest 90%",
+            "label": "90th percentile",
             "value": "$83,440/year"
           }
         ]
@@ -10542,6 +10844,132 @@
               "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
             },
             "scope": "Chinese industry wage proxy, not occupational wages."
+          },
+          {
+            "href": {
+              "$source": "neighbor-rn",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "id": "licensed-practical-and-licensed-vocational-nurses.display.source.neighbor-rn",
+            "label": {
+              "$source": "neighbor-rn",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "scope": "U.S. care assessment, planning and nursing duties; not mainland credential equivalence."
+          },
+          {
+            "href": {
+              "$source": "neighbor-assistants",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "id": "licensed-practical-and-licensed-vocational-nurses.display.source.neighbor-assistants",
+            "label": {
+              "$source": "neighbor-assistants",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "scope": "Duties and distinct state education, examinations, licensing/certification and registry requirements; not a generally uncredentialed role."
+          },
+          {
+            "href": {
+              "$source": "neighbor-aprn",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "id": "licensed-practical-and-licensed-vocational-nurses.display.source.neighbor-aprn",
+            "label": {
+              "$source": "neighbor-aprn",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "scope": "U.S. scope varies by state and role; not universal independent-practice or prescribing authority."
+          },
+          {
+            "href": {
+              "$source": "neighbor-teachers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "id": "licensed-practical-and-licensed-vocational-nurses.display.source.neighbor-teachers",
+            "label": {
+              "$source": "neighbor-teachers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "scope": "Courses, clinical instruction and student assessment; this does not exclude LPN patient education or approved guidance."
+          },
+          {
+            "href": {
+              "$source": "neighbor-cns",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "id": "licensed-practical-and-licensed-vocational-nurses.display.source.neighbor-cns",
+            "label": {
+              "$source": "neighbor-cns",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "scope": "Specialty care, nursing standards and staff guidance; state qualifications require separate checks."
+          },
+          {
+            "href": {
+              "$source": "neighbor-medical-records",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "id": "licensed-practical-and-licensed-vocational-nurses.display.source.neighbor-medical-records",
+            "label": {
+              "$source": "neighbor-medical-records",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "scope": "Current 29-2072 records, coding and confidentiality tasks; not nursing licensure."
+          },
+          {
+            "href": {
+              "$source": "neighbor-health-information",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "id": "licensed-practical-and-licensed-vocational-nurses.display.source.neighbor-health-information",
+            "label": {
+              "$source": "neighbor-health-information",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
+            },
+            "scope": "Current 29-9021 systems, data and registry tasks; distinct from 29-2072."
           }
         ],
         "transitions": [
@@ -10561,7 +10989,7 @@
             "target_href": "/zh/career/jobs/registered-nurses",
             "target_slug": "registered-nurses",
             "target_title": "Registered Nurses",
-            "transition_distance": "Additional evidence needed"
+            "transition_distance": "Separate RN qualification route"
           },
           {
             "capability_gaps": "Nursing-assistant duties are narrower; verify state certification/registration, without assuming no qualifications.",
@@ -10569,39 +10997,39 @@
             "target_href": "/zh/career/jobs/nursing-assistants",
             "target_slug": "nursing-assistants",
             "target_title": "Nursing Aides",
-            "transition_distance": "Relatively close"
+            "transition_distance": "Daily-living support; check state credential rules"
           },
           {
-            "capability_gaps": "Add RN foundations, graduate education and advanced-practice registration; verify state prescribing/independent-practice permissions.",
+            "capability_gaps": "Check the target state’s NP/APRN education, licensing and certification route. Independent practice and prescribing are not permissions conferred by LPN/LVN licensing.",
             "shared_capabilities": "Clinical nursing foundations.",
             "target_href": "/zh/career/jobs/nurse-practitioners",
             "target_slug": "nurse-practitioners",
-            "target_title": "Nurse Practitioners (advanced)",
-            "transition_distance": "Relatively distant"
+            "target_title": "Nurse practitioner (NP)",
+            "transition_distance": "Separate advanced-practice route"
           },
           {
-            "capability_gaps": "Add teaching/research experience.",
+            "capability_gaps": "Develop curriculum, teaching and student-assessment capabilities, and check the employer’s requirements. Patient education alone does not establish readiness to teach nursing students.",
             "shared_capabilities": "Clinical experience and communication.",
             "target_href": "/zh/career/jobs/nursing-instructors-and-teachers-postsecondary",
             "target_slug": "nursing-instructors-and-teachers-postsecondary",
             "target_title": "Nursing Teachers, Postsecondary",
-            "transition_distance": "Relatively distant"
+            "transition_distance": "Teaching and student-assessment transition"
           },
           {
-            "capability_gaps": "Add coding/health-information management knowledge.",
+            "capability_gaps": "The former O*NET reference 29-2071 now points to records/coding (29-2072) and health information systems/registries (29-9021). Check the actual target job’s skills separately.",
             "shared_capabilities": "Care records and procedures.",
             "target_href": "/zh/career/jobs/medical-records-and-health-information-technicians",
             "target_slug": "medical-records-and-health-information-technicians",
-            "target_title": "Medical Records Specialists",
-            "transition_distance": "Additional evidence needed"
+            "target_title": "Medical records and health information technicians",
+            "transition_distance": "Records/coding or information-systems direction"
           },
           {
-            "capability_gaps": "Add specialty certification/higher education.",
+            "capability_gaps": "Check the destination state’s CNS/APRN requirements and develop specialty assessment, evidence-based practice and staff-guidance capabilities. This is not automatic progression from LPN/LVN experience.",
             "shared_capabilities": "Specialty nursing foundations.",
             "target_href": "/zh/career/jobs/clinical-nurse-specialists",
             "target_slug": "clinical-nurse-specialists",
             "target_title": "Clinical Nurse Specialists",
-            "transition_distance": "Relatively distant"
+            "transition_distance": "Separate specialty role and regulatory requirements"
           }
         ]
       },
@@ -10633,16 +11061,16 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career-interest trial",
+            "cta_label": "Continue with career-interest exploration",
             "evidence_level": "Occupational activity materials and editorial paper-trial suggestions",
             "id": "riasec",
             "label": "RIASEC",
-            "question": "Check through work samples, without substituting labels for judgment.",
+            "question": "Which nursing-related activities interest you?",
             "signals": [
-              "Observable tasks",
-              "Process records"
+              "Helping people",
+              "Procedural and practical activities"
             ],
-            "watchout": "These cannot establish hiring, qualifications or performance."
+            "watchout": "Career interests cannot determine licensing, clinical competence or hiring."
           },
           {
             "answer": {
@@ -10652,16 +11080,16 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career-interest trial",
+            "cta_label": "Continue with career-interest exploration",
             "evidence_level": "Occupational activity materials and editorial paper-trial suggestions",
             "id": "big-five",
             "label": "Big Five personality",
-            "question": "Check through work samples, without substituting labels for judgment.",
+            "question": "Do occupational work styles equal a Big Five score?",
             "signals": [
-              "Observable tasks",
-              "Process records"
+              "Work-style descriptions",
+              "No individual trait score"
             ],
-            "watchout": "Work styles are not Big Five measurements and cannot establish licensure/clinical ability."
+            "watchout": "This button opens the RIASEC career-interest test. It does not administer the other model named on the card or assess licensure, clinical ability or employment suitability."
           },
           {
             "answer": {
@@ -10671,58 +11099,58 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career-interest trial",
+            "cta_label": "Continue with career-interest exploration",
             "evidence_level": "Occupational activity materials and editorial paper-trial suggestions",
             "id": "mbti",
             "label": "MBTI",
-            "question": "Check through work samples, without substituting labels for judgment.",
+            "question": "Can a type preference establish clinical competence?",
             "signals": [
-              "Observable tasks",
-              "Process records"
+              "Preference reflection",
+              "No performance proof"
             ],
-            "watchout": "These cannot establish hiring, qualifications or performance."
+            "watchout": "This button opens the RIASEC career-interest test. It does not administer the other model named on the card or assess licensure, clinical ability or employment suitability."
           },
           {
-            "answer": "Continue checking real tasks, responsibility boundaries and reviewable delivery.",
+            "answer": "Motivation may guide reflection; a type label does not show whether someone can provide safe care. Consider actual responsibilities and qualified feedback separately.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career-interest trial",
+            "cta_label": "Continue with career-interest exploration",
             "evidence_level": "Occupational activity materials and editorial paper-trial suggestions",
             "id": "enneagram",
             "label": "Enneagram",
-            "question": "Check through work samples, without substituting labels for judgment.",
+            "question": "Can reflection on motivation replace clinical evidence?",
             "signals": [
-              "Observable tasks",
-              "Process records"
+              "Motivation reflection",
+              "Not a credential"
             ],
-            "watchout": "These cannot establish hiring, qualifications or performance."
+            "watchout": "This button opens the RIASEC career-interest test. It does not administer the other model named on the card or assess licensure, clinical ability or employment suitability."
           },
           {
-            "answer": "Continue checking real tasks, responsibility boundaries and reviewable delivery.",
+            "answer": "The fictional exercise checks whether claims match supplied records. It is not a cognitive test, a nursing examination or evidence of clinical competence.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career-interest trial",
+            "cta_label": "Continue with career-interest exploration",
             "evidence_level": "Occupational activity materials and editorial paper-trial suggestions",
             "id": "iq",
             "label": "Cognitive ability",
-            "question": "Check through work samples, without substituting labels for judgment.",
+            "question": "Does finding a record discrepancy demonstrate general clinical ability?",
             "signals": [
-              "Observable tasks",
-              "Process records"
+              "Source discrepancies",
+              "Not a cognitive-test result"
             ],
-            "watchout": "These cannot establish hiring, qualifications or performance."
+            "watchout": "This button opens the RIASEC career-interest test. It does not administer the other model named on the card or assess licensure, clinical ability or employment suitability."
           },
           {
-            "answer": "Continue checking real tasks, responsibility boundaries and reviewable delivery.",
+            "answer": "Writing a response is different from communicating with patients in practice. This page does not measure emotional ability or certify communication performance.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career-interest trial",
+            "cta_label": "Continue with career-interest exploration",
             "evidence_level": "Occupational activity materials and editorial paper-trial suggestions",
             "id": "eq",
             "label": "Emotional ability",
-            "question": "Check through work samples, without substituting labels for judgment.",
+            "question": "Does a paper answer demonstrate patient-communication skill?",
             "signals": [
-              "Observable tasks",
-              "Process records"
+              "Paper versus real interaction",
+              "Feedback in approved training"
             ],
-            "watchout": "These cannot establish hiring, qualifications or performance."
+            "watchout": "This button opens the RIASEC career-interest test. It does not administer the other model named on the card or assess licensure, clinical ability or employment suitability."
           }
         ],
         "boundary": "RIASEC, personality and ability tools cannot replace licensing, clinical or employer judgments.",
@@ -10772,7 +11200,7 @@
         },
         "questions": [
           {
-            "answer": "Use this sample to assess sustained standing, patient moving and shift acceptance.",
+            "answer": "A paper record exercise cannot establish tolerance for standing, patient handling or shifts. Check the demands of the specific job and appropriate training or observation arrangements separately.",
             "question": "Can you tolerate shifts and physical demands?"
           },
           {
@@ -10788,7 +11216,7 @@
             "question": "How do you handle abnormalities?"
           },
           {
-            "answer": "Use patient information only within authorization and minimum necessity.",
+            "answer": "Check access authority and applicable institutional privacy rules. This exercise uses fictional records only and does not assess compliance for a real patient-data workflow.",
             "question": "How do you handle patient privacy?"
           },
           {
@@ -10800,7 +11228,7 @@
             "question": "How can others review your records?"
           },
           {
-            "answer": "Complete a vital-sign, medication and reporting exercise with fictional patients.",
+            "answer": "Try the complete fictional N01/N02 record check on this page. Compare discrepancies and unknowns with the review reference; do not perform medication or dressing procedures.",
             "question": "How can you trial this next?"
           }
         ],
@@ -10920,7 +11348,7 @@
           "entry": "licensed-practical-and-licensed-vocational-nurses.navigation.1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit LPN/LVN work",
+        "label": "Explore interests in nursing-related tasks",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -10967,12 +11395,12 @@
       "riasec_fit_block": {
         "fit_interest": "Interests/work styles only help design trials, not judge qualifications, licensure or performance.",
         "interest": "Observe helping-patient and procedural-work preferences through actual tasks.",
-        "riasec": "SC",
-        "riasec_short": "Primarily Social and Conventional, as a hypothesis only."
+        "riasec": "SCR",
+        "riasec_short": "Social, Conventional and Realistic activity preferences; not a qualification test."
       },
       "source_card": {
         "eeat_signals": {
-          "author": "FermatMind research workflow",
+          "author": "FermatMind Editorial",
           "source": {
             "$source": "bls-ooh-lpn",
             "block": "source-register",
@@ -10980,15 +11408,9 @@
             "field": "name",
             "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
           },
-          "updated_at": {
-            "$source": "bls-ooh-lpn",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "period",
-            "item": "licensed-practical-and-licensed-vocational-nurses.source-register.published.1"
-          }
+          "updated_at": "2026-11-09"
         },
-        "note": "Checked 2026-10-11: current BLS/O*NET 2025—2035 projections agree; five wage percentiles/industry pay verified. States determine medication/supervision scope; programs include supervised practice. China's Nurses Regulation and U.S. state licensing are separate; OSHA concerns occupational exposure only. Protected practical exercises, titles and older shared-source period notes were not overwritten beyond scope."
+        "note": "U.S. May 2025 wage percentiles and 2025–2035 projections are distinct from mainland industry averages or a single employer’s historical offer. State scope and mainland registration requirements are checked separately. The fictional record exercise is not clinical training or proof of competence."
       },
       "work_context_block": {
         "$item": "licensed-practical-and-licensed-vocational-nurses.profile.work-context-block.5",
@@ -10998,6 +11420,10 @@
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.interest_code_heading": "How to interpret SCR",
+      "interface.quick_decision.caution_heading": "What are the limits of this exercise?"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11164,7 +11590,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no nationwide mainland China LPN/LVN wage median obtained (2025 official public definition)",
+        "display_value": "No mainland national occupational median directly comparable with U.S. LPN/LVNs has been established for this page.",
         "fact_id": "cn-wage-gap",
         "market": "Mainland China nationwide definition",
         "measure": "occupation wage availability",
@@ -11175,13 +11601,13 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
+        "derivation": "The earlier editorial 17% estimate is withdrawn: the selected clinical-task ratings 0/50/0 were not established by task-level effect evidence. No replacement score is invented.",
+        "display_value": "No verified quantitative estimate",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Licensed Practical and Licensed Vocational Nurses",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "measure": "Task-level AI quantitative evidence status",
+        "occupation_scope": "U.S. LPN/LVN tasks; occupational duties do not establish clinical AI effectiveness.",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -11190,15 +11616,15 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
     "badges": [
-      "Vital signs and medication",
-      "Patient observation and records",
-      "Licensing and authorization boundaries"
+      "U.S. LPN/LVN",
+      "Observation, care and handover",
+      "State license and permitted duties"
     ],
     "metrics": [
       {
@@ -11237,17 +11663,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "LPN/LVNs turn orders, vital signs, medication, wound care and patient records into reviewable basic care in nursing/residential care, hospitals, clinics and homes, under RN/physician supervision. U.S. entry requires state-approved education/licensing exams. Assess this career through work loops, responsibility boundaries, evidence definitions, risk controls and observable entry-level samples."
+      "text": "Explore U.S. LPN/LVN duties, state licensing, 2025 pay and employment outlook. Compare nursing routes and work through fictional record checks without treating them as clinical training."
     },
     "title": {
       "availability": "available",
-      "text": "LPN/LVN Career Assessment: Work, Entry and Risk Boundaries"
+      "text": "U.S. LPN/LVN careers: duties, licensing, pay and entry routes"
     }
   },
-  "source_content_sha256": "a9d24f9bb63f9fdb220d30c4118543f91ac788b2a99ddff2bac9caee9a817914",
+  "source_content_sha256": "e6a9e9ab93903d7c5111619f8fdcb2d7d68cc7c07a8d70bee7e95877e87b2b78",
   "subject": {
     "canonical_slug": "licensed-practical-and-licensed-vocational-nurses",
     "name": "Licensed Practical and Licensed Vocational Nurses",
-    "summary": "LPN/LVNs provide basic care under RN/physician supervision: vital signs, ordered medication, dressings/wound care, samples, eating/mobility assistance and prompt abnormality reports, delivering reviewable care/safety records."
+    "summary": "This page covers U.S. licensed practical and licensed vocational nurses (LPN/LVNs). They provide basic nursing care, generally under registered-nurse or physician supervision. Permitted duties and supervision depend on state rules and training. Mainland Chinese nursing registration and professional titles form a separate system; they are not equivalent LPN/LVN grades."
   }
 }

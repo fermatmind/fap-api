@@ -132,19 +132,19 @@
         "status": "mapped"
       },
       "item:optometrists.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:optometrists.path.employer-evidence.3": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:optometrists.path.entry-portfolio.4": {
         "status": "pending_mapping"
       },
       "item:optometrists.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:optometrists.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:optometrists.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -12183,12 +12183,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Direct judgment: If you are willing to complete optometric professional training, take on examination and prescribing responsibility, and promptly identify diseases that need referral to ophthalmology, you can explore optometrist work"
+              "Interest exploration and paper review confer neither practice credentials nor evidence of clinical competence; check jurisdiction, institution and individual scope for real duties."
             ]
           },
           "id": "optometrists.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "onet-details"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12197,12 +12198,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Positive evidence: Can integrate vision, intraocular pressure, history, and eye examinations, and does not ignore dangerous symptoms because a single measurement is normal."
+              "Optionally use this page’s fictional I/J records to review laterality, unsupported inference and missing authority, listing questions for professional review."
             ]
           },
           "id": "optometrists.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet-details"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12211,12 +12213,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Safe trial: Use public teaching cases to map vision examination, prescribing, and referral boundaries; do not diagnose or administer medication to real patients"
+              "Are you interested in examination information, precision equipment and patient explanation, and willing to learn about the professional training?"
             ]
           },
           "id": "optometrists.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet-details"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12225,12 +12228,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "During review, check patient history, eye examinations, prescribing scope, and referral indications, and confirm responsibility and authorization boundaries."
+              "Review fictional records and further questions only; do not diagnose, medicate, prescribe or sign for real patients."
             ]
           },
           "id": "optometrists.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "onet-details"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         }
@@ -12247,7 +12251,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This page corresponds to O*NET 29-1041.00 Optometrists; the core is examining the visual system, diagnosing and managing eye problems within the scope of practice, prescribing corrective lenses, and providing treatment or medication under local licensing; difficult and surgical needs are referred to an ophthalmologist."
+              "This page describes U.S. Optometrists, O*NET 29-1041.00: examining the eyes and visual system, diagnosing and managing conditions within state-authorized practice, and prescribing corrective lenses. Medication and some procedural permissions vary by state; care beyond the practitioner’s scope or expertise requires referral."
             ]
           },
           "id": "optometrists.profile.definition-block.1",
@@ -12266,7 +12270,7 @@
               "Observe indicators such as the anterior segment, fundus, and intraocular pressure.",
               "Identify refractive or ocular abnormalities together with the history.",
               "Prescribe lenses or contact lenses according to practice authority.",
-              "Treat within licensing and refer high-risk disease to ophthalmology.",
+              "Provide care within the licensed scope and consult or refer when additional care is needed or the case exceeds the practitioner’s scope or expertise.",
               "Explain care, follow-up, and dangerous symptoms."
             ]
           },
@@ -12281,7 +12285,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Core process: Check symptoms, medications, prior eye disease, and risks.; Measure distance and near vision, refraction, and binocular coordination.; Observe indicators such as the anterior segment, fundus, and intraocular pressure.; Identify refractive or ocular abnormalities together with the history."
+              "U.S. practice combines patient history, vision testing and relevant eye examinations, followed by care, explanation and referral within the practitioner’s scope. Qualified professionals determine the appropriate examination for the patient."
             ]
           },
           "id": "optometrists.profile.work-context-block.3",
@@ -12309,7 +12313,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Common tools and systems: refractors, slit lamps, tonometers, perimeters, OCT, and electronic medical records."
+              "Work involves vision, refraction and eye-examination equipment and patient-record systems; check the equipment, training and permitted procedures for the particular setting and role."
             ]
           },
           "id": "optometrists.profile.onet-structured-fields-block.5",
@@ -12323,7 +12327,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Compared with adjacent roles, this occupation holds optometric practice credentials, with scope varying by regional law; it differs from dispensing opticians who fit to a prescription and from the surgical responsibility of ophthalmologists."
+              "U.S. ophthalmologists and optometrists differ in education and surgical scope; optometrists may also diagnose and treat within licensed practice."
             ]
           },
           "id": "optometrists.profile.definition-block.6",
@@ -12337,7 +12341,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Qualified delivery must demonstrate: examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes."
+              "Records may include examination findings, a lens prescription, a treatment plan or referral information, depending on the service and the practitioner’s scope; not every encounter produces all of them."
             ]
           },
           "id": "optometrists.profile.work-context-block.8",
@@ -12359,12 +12363,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Ophthalmologists mainly perform medical diagnosis, treatment, and surgery of eye disease; this occupation focuses more on holding optometric practice credentials, with scope varying by regional law; it differs from dispensing opticians who fit to a prescription and from the surgical responsibility of ophthalmologists."
+              "U.S. ophthalmologists and optometrists differ in education and surgical scope; optometrists may also diagnose and treat within licensed practice."
             ]
           },
           "id": "optometrists.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh",
+            "neighbor-29-1241.00",
+            "neighbor-29-2081.00",
+            "neighbor-29-2057.00",
+            "neighbor-29-2099.05",
+            "neighbor-29-1299.02",
+            "neighbor-51-9083.00"
           ],
           "type": "prose"
         },
@@ -12373,12 +12383,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Dispensing opticians focus on fitting lenses and frames to a prescription, with different occupational tasks and training."
+              "This table compares U.S. occupational tasks; it does not determine mainland admission or an individual’s transfer eligibility."
             ]
           },
           "id": "optometrists.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh",
+            "neighbor-29-1241.00",
+            "neighbor-29-2081.00",
+            "neighbor-29-2057.00",
+            "neighbor-29-2099.05",
+            "neighbor-29-1299.02",
+            "neighbor-51-9083.00"
           ],
           "type": "prose"
         },
@@ -12387,12 +12403,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Ophthalmic medical technicians lean toward ophthalmic examinations under physician supervision; look at the final output rather than similar titles."
+              "Compare the client or work object, actual output and education or training; similar titles do not merge occupations."
             ]
           },
           "id": "optometrists.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh",
+            "neighbor-29-1241.00",
+            "neighbor-29-2081.00",
+            "neighbor-29-2057.00",
+            "neighbor-29-2099.05",
+            "neighbor-29-1299.02",
+            "neighbor-51-9083.00"
           ],
           "type": "prose"
         },
@@ -12401,12 +12423,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Difference between ophthalmologists and this occupation: physician training and surgical scope differ."
+              "Optometrists also diagnose and treat within state-authorized practice; the distinction is not simply whether they treat disease."
             ]
           },
           "id": "optometrists.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh",
+            "neighbor-29-1241.00",
+            "neighbor-29-2081.00",
+            "neighbor-29-2057.00",
+            "neighbor-29-2099.05",
+            "neighbor-29-1299.02",
+            "neighbor-51-9083.00"
           ],
           "type": "prose"
         },
@@ -12415,12 +12443,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Choosing ophthalmology suits those who prefer medicine and surgery."
+              "Interest in learning about physician education and surgical work."
             ]
           },
           "id": "optometrists.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh",
+            "neighbor-29-1241.00",
+            "neighbor-29-2081.00",
+            "neighbor-29-2057.00",
+            "neighbor-29-2099.05",
+            "neighbor-29-1299.02",
+            "neighbor-51-9083.00"
           ],
           "type": "prose"
         }
@@ -12442,7 +12476,8 @@
           },
           "id": "optometrists.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12451,12 +12486,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Use fictional samples to learn about history taking."
+              "Optionally use the fictional I/J records for information review; this does not establish clinical competence."
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12465,12 +12501,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Incumbent"
+              "Practitioner"
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12479,12 +12516,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes, and observe authorization."
+              "Before evaluating a tool, define its intended use and validation conditions, and review original records and practice scope."
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12493,12 +12531,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Crew lead"
+              "Educator or team lead"
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12507,12 +12546,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check the practice responsibility for examination and diagnosis, lens prescribing, medication, and referral and anomaly escalation."
+              "Distinguish student, technical and clinical participation, including who reviews work and holds the actual responsibility."
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12521,12 +12561,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Career changer"
+              "Considering a related role"
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12535,12 +12576,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Complete training for the target equipment or position and verify qualifications."
+              "Check the target role’s education, training and credential gaps; AI or interest scores do not establish transfer eligibility."
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         }
@@ -12557,7 +12599,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: a nationwide comparable median for Chinese optometrists was not obtained. In 2025, pre-tax annual averages for health and social work were 146,266 yuan for urban non-private and 75,631 yuan for private, which is only a broad medical institution employer industry, includes other clinical and social work positions and is not this occupation's wage or an individual range; excludes self-employed individuals and freelancers and owner-operated clinic profits, and in-store sales require separate verification."
+              "A comparable national occupational median for mainland optometry-related roles was not established. In 2025, annual average employee pay in the urban health and social work industry was RMB 146,266 in non-private units and RMB 75,631 in private units, before tax. Employee averages for the health and social work industry, covering many occupations—not optometrist pay or a personal range. Check the employing unit’s industry classification for optical retail; these figures do not estimate self-employment income or clinic profits."
             ]
           },
           "id": "optometrists.china-salary.career-snapshot-primary-locale.1",
@@ -12571,12 +12613,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese positions require separate verification of region, employer, duties, shift system, and qualifications; the U.S. 29-1041.00 annual salary cannot be directly converted."
+              "An Ankang human-resources notice dated 9 February 2026 listed eight employer-described optometry positions at Ankang Aier Eye Hospital, with monthly pay from RMB 3,500 and specified education, credential, equipment and communication requirements. This is one historical employer listing, not a national wage or universal legal qualification; tax basis, pay composition and current availability were not established."
             ]
           },
           "id": "optometrists.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "cn-ankang-job"
           ],
           "type": "prose"
         },
@@ -12599,12 +12641,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Verification note: vision examinations, lens prescribing, treatment medication, and referral must be verified against Chinese local statutory qualifications and organizational authority; a U.S. OD license and wages do not grant Chinese authority, and industry wages do not prove clinical practice licensing."
+              "Related mainland roles include spectacle refraction workers and eye-care positions in medical institutions; they are not interchangeable with a U.S. OD. A spectacle-refraction prescription is not a drug prescription or medical-practice credential. Medical diagnosis and treatment require separate checks of registration and institutional and job scope. Verify skill certification, education, medical credentials and employer requirements separately."
             ]
           },
           "id": "optometrists.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs-wages"
+            "cn-optician-standard",
+            "cn-medical-practice",
+            "cn-medical-exam",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12677,12 +12722,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "In 2025, about 45100 people were employed in the United States, with the statistical scope being 29-1041.00."
+              "The 2025 90th percentile is USD 202,180; it is neither a salary ceiling nor a seniority band."
             ]
           },
           "id": "optometrists.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-2025-35-29-1041"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -12691,12 +12736,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The U.S. precise occupation 29-1041 is projected to grow 9.5% overall over 2025—2035, with an official net increase of 4300 people and annual average openings of 2000 including replacements; not net change or current hiring, AI adoption replacement, or individual unemployment."
+              "U.S. occupational wages cannot be directly converted into mainland earnings; jurisdictions, populations, employment arrangements and duties differ."
             ]
           },
           "id": "optometrists.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls-2025-35-29-1041"
+            "onet-wages",
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -12705,7 +12751,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. wages and projections cannot replace Chinese wages or individual hiring probability."
+              "The median is the midpoint of the wage distribution, not starting pay; check locality, duties, hours and qualifications for an individual offer."
             ]
           },
           "id": "optometrists.us-salary.career-snapshot-secondary-locale.6",
@@ -12727,8 +12773,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Can integrate vision, intraocular pressure, history, and eye examinations, and does not ignore dangerous symptoms because a single measurement is normal.",
-              "Can integrate vision, intraocular pressure, history, and eye examinations, and does not ignore dangerous symptoms because a single measurement is normal."
+              "Are you interested in analyzing examination information and uncertainty?",
+              "Would you like to learn about precision equipment and patient communication?"
             ]
           },
           "id": "optometrists.fit.riasec-fit-block.1",
@@ -12742,9 +12788,9 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Willing to consistently perform history taking and vision examinations.",
-              "Willing to consistently perform history taking and vision examinations.",
-              "Willing to consistently perform history taking and vision examinations."
+              "Would you check laterality item by item in fictional records?",
+              "Would you retain original inputs and list missing information?",
+              "Would you ask about unfamiliar terminology?"
             ]
           },
           "id": "optometrists.fit.personality-fit-block.2",
@@ -12758,8 +12804,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Can hand over examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes to the next responsible person.",
-              "Can hand over examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes to the next responsible person."
+              "Would you acknowledge that paper records do not determine an actual diagnosis?",
+              "Would you ask a professional about unverified authority?"
             ]
           },
           "id": "optometrists.fit.personality-fit-block.3",
@@ -12773,8 +12819,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Stops and escalates according to procedures during anomalies.",
-              "Stops and escalates according to procedures during anomalies."
+              "Do you value explaining information to service users?",
+              "Would you like to learn about communication during follow-up care?"
             ]
           },
           "id": "optometrists.fit.riasec-fit-block.4",
@@ -12788,9 +12834,9 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Those unwilling to take on missed serious eye disease risk should be cautious.",
-              "Those unwilling to take on missed serious eye disease risk should be cautious.",
-              "Those unwilling to take on missed serious eye disease risk should be cautious."
+              "Would you compare clinical and optical-retail settings?",
+              "Would you ask about evening or weekend schedules?",
+              "Would you learn what sustained close work is actually like?"
             ]
           },
           "id": "optometrists.fit.personality-fit-block.5",
@@ -12804,8 +12850,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Neglecting the practice responsibility for examination and diagnosis, lens prescribing, medication, and referral makes independent work unsuitable.",
-              "Neglecting the practice responsibility for examination and diagnosis, lens prescribing, medication, and referral makes independent work unsuitable."
+              "Which laterality or inference conflicts appear in I?",
+              "Which credential or signature information is missing in J?"
             ]
           },
           "id": "optometrists.fit.personality-fit-block.6",
@@ -12819,7 +12865,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Ability judgment can observe supervised examination records, prescription verification, and referral feedback; interests are for exploration only and do not grant licensure, medication, or surgical authority."
+              "These questions help identify what you want to explore further. Actual clinical capability requires appropriate education, supervised practice and professional assessment."
             ]
           },
           "id": "optometrists.fit.riasec-fit-block.7",
@@ -12833,7 +12879,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Trials use fictional information only; real tasks must follow qualification and supervision boundaries."
+              "Editorial exploration questions, not validity evidence for predicting clinical performance, safety or credentials."
             ]
           },
           "id": "optometrists.fit.personality-fit-block.8",
@@ -12855,12 +12901,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Missed serious eye disease: vision loss is treated only as a refractive problem.; May delay treatment. Control: integrate examinations and refer to ophthalmology."
+              "Occupational risk information does not replace professional examination or authorization; this page provides no individual diagnosis or treatment rules."
             ]
           },
           "id": "optometrists.risk.career-risk-cards.1",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12869,12 +12915,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Prescription error: power or left and right eyes are recorded incorrectly.; May cause vision and usability problems. Control: verify the examination and prescription."
+              "Record errors, work beyond scope, contact-lens infection and privacy merit attention. These are review questions, not incidence estimates or a risk ranking."
             ]
           },
           "id": "optometrists.risk.career-risk-cards.2",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "cdc-contact-lenses",
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -12883,12 +12931,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Overstepping medication: prescribing exceeds state or regional licensing.; May harm the patient and create license risk. Control: verify statutory scope and contraindications."
+              "O*NET supports tasks and BLS supports U.S. qualification context; CDC/NEI cover specific infection and symptom information, while PIPL covers only the cited privacy provisions. These sources are not interchangeable."
             ]
           },
           "id": "optometrists.risk.career-risk-cards.3",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "bls-optometrist-ooh",
+            "cdc-contact-lenses",
+            "nei-glaucoma",
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -12897,7 +12949,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Contact lens injury: hygiene and wearing education is insufficient.; May cause corneal infection. Control: clarify care and follow-up."
+              "These situations involve patients, relevant practitioners and collaborators; confirm responsibilities for the actual role."
             ]
           },
           "id": "optometrists.risk.career-risk-cards.4",
@@ -12911,12 +12963,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Shared escalation: when equipment, personnel, documentation, or authorization anomalies occur, pause first, document, and hand over to authorized personnel."
+              "Retain original information when records or authority are incomplete and ask the appropriate professional to review it. Applicable clinical processes determine actual urgency and management."
             ]
           },
           "id": "optometrists.risk.career-risk-cards.5",
           "source_refs": [
-            "onet-details"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         }
@@ -12940,6 +12993,7 @@
           "source_refs": [
             "internal-rubric"
           ],
+          "title": "Paper exercise and limits",
           "type": "notice"
         },
         {
@@ -12953,41 +13007,48 @@
               "work_evidence",
               "possible_check"
             ],
+            "column_labels": [
+              "Task area",
+              "Learning or work content",
+              "Responsibilities and authorization",
+              "Possible records",
+              "Questions to check"
+            ],
             "rows": [
               [
                 "History taking",
                 "Check symptoms, medications, prior eye disease, and risks.",
-                "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "Verify history taking records"
+                "Check participation and clinical duties against specific credentials and supervision.",
+                "History and unresolved questions",
+                "How are laterality and history sources confirmed?"
               ],
               [
                 "Vision examination",
                 "Measure distance and near vision, refraction, and binocular coordination.",
-                "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "Verify vision examination records"
+                "Check participation and clinical duties against specific credentials and supervision.",
+                "Vision or refraction measurement record",
+                "Who checks measurement conditions and findings?"
               ],
               [
                 "Eye examination",
                 "Observe indicators such as the anterior segment, fundus, and intraocular pressure.",
-                "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "Verify eye examination records"
+                "Check participation and clinical duties against specific credentials and supervision.",
+                "Relevant eye-examination findings",
+                "Which examinations fall within this role?"
               ],
               [
                 "Result judgment",
                 "Identify refractive or ocular abnormalities together with the history.",
-                "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "Verify result judgment records"
+                "Check participation and clinical duties against specific credentials and supervision.",
+                "Assessment and referral considerations",
+                "Which questions require an appropriate professional?"
               ],
               [
                 "Prescription services",
                 "Prescribe lenses or contact lenses according to practice authority.",
-                "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "Verify prescription service records"
+                "Check participation and clinical duties against specific credentials and supervision.",
+                "Applicable lens prescription and review record",
+                "How are the prescriber and this authority verified?"
               ]
             ]
           },
@@ -12995,6 +13056,7 @@
           "source_refs": [
             "onet-summary"
           ],
+          "title": "Task areas and responsibilities",
           "type": "table"
         },
         {
@@ -13029,6 +13091,7 @@
           "source_refs": [
             "internal-rubric"
           ],
+          "title": "Fictional I/J records and review reference",
           "type": "cards"
         },
         {
@@ -13070,11 +13133,17 @@
               "boundary",
               "possible_check"
             ],
+            "column_labels": [
+              "Risk scenario",
+              "Issue in the record",
+              "Review or referral boundary",
+              "Questions for an appropriate professional"
+            ],
             "rows": [
               [
                 "Missed serious eye disease",
                 "Vision loss is treated only as a refractive problem.",
-                "Integrate examinations and refer to ophthalmology.",
+                "Qualified professionals review the history and examination and consult or refer as needed within the applicable scope; this page does not determine care for an individual patient.",
                 "Verify missed serious eye disease handling"
               ],
               [
@@ -13099,8 +13168,12 @@
           },
           "id": "optometrists.path.interview-probation.5",
           "source_refs": [
-            "onet-summary"
+            "onet-summary",
+            "cdc-contact-lenses",
+            "bls-optometrist-ooh",
+            "internal-rubric"
           ],
+          "title": "Risk scenarios and questions for professionals",
           "type": "table"
         },
         {
@@ -13126,7 +13199,7 @@
                 "id": "optometrists.trial.day7",
                 "values": [
                   "Days 6—7: submit the work",
-                  "Submit the two tables, the original records and correction trail, and the authorized transfer notes; keep the four risks of missed diagnosis, prescription error, overstepping medication, and contact lenses, and do not diagnose, administer medication, or actually dispense."
+                  "Submit both tables, original records, a correction trail and simulated handover notes; review unresolved questions without diagnosing, medicating or dispensing eyewear."
                 ]
               }
             ]
@@ -13150,66 +13223,78 @@
               "audience",
               "proof_method"
             ],
+            "column_labels": [
+              "Learning or practice step",
+              "Records to discuss",
+              "Education and qualifications to check",
+              "Applicable conditions",
+              "Limits",
+              "Audience",
+              "How to check"
+            ],
             "rows": [
               [
-                "Job observation",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
-                "Learner",
-                "Verify courses, authorization, and feedback"
+                "Identify the target role",
+                "Actual job description",
+                "Separate mainland medical, technical and optical-service routes",
+                "Specific employer and locality",
+                "A job title does not establish authority",
+                "Explorer",
+                "Compare the job with competent-authority requirements"
               ],
               [
-                "Basic training",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
-                "Learner",
-                "Verify courses, authorization, and feedback"
+                "U.S. professional education",
+                "Course and clinical-training requirements",
+                "Accredited OD program and undergraduate prerequisites",
+                "Specific program",
+                "Four OD years are not the total education requirement",
+                "Prospective U.S. student",
+                "Check admission and accreditation with the program"
               ],
               [
-                "Supervised practice",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
-                "Learner",
-                "Verify courses, authorization, and feedback"
+                "Supervised clinical training",
+                "Permitted learning-evaluation records",
+                "Admission to the specific placement or clinical program",
+                "Designated institution and supervisor",
+                "Students do not independently provide patient care",
+                "Trainee",
+                "Check participation limits and feedback"
               ],
               [
-                "Qualification verification",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
+                "Verify practice credentials",
+                "Credential, license or registration information",
+                "U.S. state licensure; mainland requirements for the target role",
+                "Jurisdiction and institution",
+                "A skill credential is not medical registration",
+                "Prospective practitioner",
+                "Check the regulator and institution"
+              ],
+              [
+                "Work within scope",
+                "Records appropriate to the service",
+                "Valid personal credentials and actual practice scope",
+                "Specific duties",
+                "A credential does not grant unlimited authority",
                 "Practitioner",
-                "Verify courses, authorization, and feedback"
+                "Check permissions and professional review"
               ],
               [
-                "Independent handoff",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
+                "Continue learning",
+                "Continuing-education or quality-improvement records",
+                "Applicable renewal and learning requirements",
+                "Jurisdiction, role and additional tasks",
+                "No automatic promotion or additional procedural permission",
                 "Practitioner",
-                "Verify courses, authorization, and feedback"
-              ],
-              [
-                "Advanced review",
-                "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
-                "Practitioner",
-                "Verify courses, authorization, and feedback"
+                "Check with the regulator and institution"
               ]
             ]
           },
           "id": "optometrists.path.credential-decision.7",
           "source_refs": [
-            "bls-optometrist-ooh"
+            "bls-optometrist-ooh",
+            "cn-optician-standard",
+            "cn-medical-practice",
+            "cn-medical-exam"
           ],
           "type": "table"
         },
@@ -13218,11 +13303,14 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.; Real duties depend on local rules and employer authorization, and changing roles requires training for the target position."
+              "U.S. entry typically requires a four-year accredited OD program and state licensure. Admission requires at least three years of undergraduate education, and applicants usually hold a bachelor’s degree; four years is not the total education requirement. All states require licensing examinations, continuing education and periodic renewal. Board certification is optional. Related mainland roles include spectacle refraction workers and eye-care positions in medical institutions; they are not interchangeable with a U.S. OD. A spectacle-refraction prescription is not a drug prescription or medical-practice credential. Medical diagnosis and treatment require separate checks of registration and institutional and job scope. Verify skill certification, education, medical credentials and employer requirements separately."
             ]
           },
           "id": "optometrists.path.credential-boundary.8",
           "source_refs": [
+            "cn-optician-standard",
+            "cn-medical-practice",
+            "cn-medical-exam",
             "bls-optometrist-ooh"
           ],
           "type": "notice"
@@ -13232,11 +13320,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.; Real duties depend on local rules and employer authorization, and changing roles requires training for the target position."
+              "For mainland work, first distinguish a medical-practitioner role from eye-care technical work or optical retail, then check the specific program, practical training, skill assessment and job scope. U.S. OD education and state licensure form a separate route and do not automatically confer mainland medical-practice credentials."
             ]
           },
           "id": "optometrists.path.career-path-block.9",
           "source_refs": [
+            "cn-optician-standard",
+            "cn-medical-practice",
+            "cn-medical-exam",
             "bls-optometrist-ooh"
           ],
           "type": "prose"
@@ -13310,7 +13401,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Adjacent occupations should be compared on holding optometric practice credentials, with scope varying by regional law; this differs from dispensing opticians who fit to a prescription and from the surgical responsibility of ophthalmologists, including the specific training."
+              "Check tasks, credentials and supervision for each related role; some prior experience does not establish authority for the target duties."
             ]
           },
           "id": "optometrists.market-signals.market-signal-card.5",
@@ -13333,7 +13424,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Examine the visual system, diagnose and manage eye problems within the scope of practice, prescribe corrective lenses, and provide treatment or medication under local licensing; difficult and surgical needs are referred to an ophthalmologist.",
+                "answer": "This page describes U.S. Optometrists, O*NET 29-1041.00: examining the eyes and visual system, diagnosing and managing conditions within state-authorized practice, and prescribing corrective lenses. Medication and some procedural permissions vary by state; care beyond the practitioner’s scope or expertise requires referral.",
                 "id": "optometrists.faq.1",
                 "question": "What do optometrists do?",
                 "question_key": "career.faq.optometrists.1",
@@ -13342,7 +13433,7 @@
                 ]
               },
               {
-                "answer": "Check symptoms, medications, prior eye disease, and risks.; Measure distance and near vision, refraction, and binocular coordination.; Observe indicators such as the anterior segment, fundus, and intraocular pressure.; Identify refractive or ocular abnormalities together with the history.",
+                "answer": "Review history and symptoms, examine vision, refraction and relevant eye findings, interpret results, and provide correction, care and referral within the licensed scope.",
                 "id": "optometrists.faq.2",
                 "question": "What are the key tasks?",
                 "question_key": "career.faq.optometrists.2",
@@ -13351,34 +13442,40 @@
                 ]
               },
               {
-                "answer": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
+                "answer": "U.S. entry typically requires a four-year accredited OD program and state licensure. Admission requires at least three years of undergraduate education, and applicants usually hold a bachelor’s degree; four years is not the total education requirement. All states require licensing examinations, continuing education and periodic renewal. Board certification is optional. For mainland work, first distinguish a medical-practitioner role from eye-care technical work or optical retail, then check the specific program, practical training, skill assessment and job scope. U.S. OD education and state licensure form a separate route and do not automatically confer mainland medical-practice credentials.",
                 "id": "optometrists.faq.3",
                 "question": "What is needed to enter?",
                 "question_key": "career.faq.optometrists.3",
                 "source_refs": [
-                  "bls-optometrist-ooh"
+                  "bls-optometrist-ooh",
+                  "cn-optician-standard",
+                  "cn-medical-practice",
+                  "cn-medical-exam"
                 ]
               },
               {
-                "answer": "Missed serious eye disease: vision loss is treated only as a refractive problem.; Integrate examinations and refer to ophthalmology.",
+                "answer": "Consider delayed recognition of eye disease, record or prescription errors, work beyond scope, contact-lens infection and privacy. Specific review points depend on the role and applicable processes; this page does not rank risk incidence.",
                 "id": "optometrists.faq.4",
-                "question": "What is the biggest risk at work?",
+                "question": "What work risks and review points matter?",
                 "question_key": "career.faq.optometrists.4",
                 "source_refs": [
-                  "onet-details"
+                  "onet-details",
+                  "cdc-contact-lenses",
+                  "cn-pipl",
+                  "nei-glaucoma"
                 ]
               },
               {
-                "answer": "No; the practice responsibility for examination and diagnosis, lens prescribing, medication, and referral is verified by authorized personnel.",
+                "answer": "The available evidence does not establish whether AI can independently perform this occupation’s tasks. Patient care and prescribing must meet local qualification, scope-of-practice and institutional requirements; tool output does not replace them.",
                 "id": "optometrists.faq.5",
-                "question": "Can AI do it independently?",
+                "question": "Does this page establish independent AI capability?",
                 "question_key": "career.faq.optometrists.5",
                 "source_refs": [
                   "onet-details"
                 ]
               },
               {
-                "answer": "Insufficient evidence: nationwide medians, percentiles, and starting pay for Chinese optometrists were not obtained. In 2025, pre-tax annual averages for health and social work of 146266 yuan for urban non-private and 75631 yuan for private are only a broad medical employer industry, include other clinical and social work positions and are not this occupation's wage or an individual range, exclude self-employed freelancers and private clinic profits, and in-store sales require separate verification.",
+                "answer": "A comparable national occupational median for mainland optometry-related roles was not established. In 2025, annual average employee pay in the urban health and social work industry was RMB 146,266 in non-private units and RMB 75,631 in private units, before tax. Employee averages for the health and social work industry, covering many occupations—not optometrist pay or a personal range. Check the employing unit’s industry classification for optical retail; these figures do not estimate self-employment income or clinic profits.",
                 "id": "optometrists.faq.6",
                 "question": "What are the wages in China?",
                 "question_key": "career.faq.optometrists.6",
@@ -13396,7 +13493,7 @@
                 ]
               },
               {
-                "answer": "Use public teaching cases to map vision examination, prescribing, and referral boundaries; do not diagnose or administer medication to real patients",
+                "answer": "Try the fictional I/J records below to check eye laterality, unsupported inferences and missing authorization information; do not diagnose, medicate or prescribe for real patients.",
                 "id": "optometrists.faq.8",
                 "question": "How to explore safely?",
                 "question_key": "career.faq.optometrists.8",
@@ -13509,13 +13606,13 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Tables 2/5: pre-tax annual averages for health and social work of 146266 yuan for non-private and 75631 yuan for private; based on vision examination, diagnosis, treatment, and referral tasks, the author matched it to the medical institution employer direction only."
+                  "Tables 2 and 5 cover health and social work: annual pre-tax employee averages of RMB 146,266 for non-private units and RMB 75,631 for private units, not occupational medians."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "Includes other clinical and social work positions and is not optometrist wages or an individual range; the two populations are listed separately; self-employed freelancers and private clinic profits are excluded; in-store sales require separate verification; and it does not prove licensing.",
+                "limitation": "Employee averages for the health and social work industry, covering many occupations—not optometrist pay or a personal range. Check the employing unit’s industry classification for optical retail; these figures do not estimate self-employment income or clinic profits.",
                 "market": "CN",
                 "name": "2025 Urban Unit Employment Annual Average Wage Situation",
                 "period": "2025 wages; released 2026-05-15",
@@ -13539,7 +13636,7 @@
                 "url": "https://www.onetonline.org/link/localcert/29-1041.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Employer tasks and local authorization vary."
                 ],
@@ -13548,28 +13645,28 @@
                 "limitation": "Employer tasks and local authorization vary.",
                 "market": "US",
                 "name": "Optometrists detailed occupation profile",
-                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "period": "O*NET 2026 profile; only specified task, context and education sections reviewed",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-1041.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Posting mentions do not prove proficiency, adoption or automation rate."
+                  "The current strict-HTTPS read shows three browsers each at 8%, Excel under 1%, and other listed values unavailable. The denominator is unique postings linked to the occupation, not medical-AI adoption."
                 ],
                 "evidence_type": "official job-posting technology summary",
                 "id": "onet-hot",
                 "limitation": "Posting mentions do not prove proficiency, adoption or automation rate.",
                 "market": "US",
                 "name": "Hot Technologies 29-1041.00 Optometrists",
-                "period": "O*NET technology data current 2026; accessed 2026-08-31",
+                "period": "U.S. Lightcast unique job postings, 1 January–31 December 2025",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/29-1041.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "29-1041 precise 10 tasks: examining the visual system and analyzing results to plan treatment, correcting vision with lenses and contact lenses, medication under state licensing, education and care, preoperative and postoperative care, consultation and referral, and low vision rehabilitation."
                 ],
@@ -13578,7 +13675,7 @@
                 "limitation": "U.S. tasks and authorization boundaries; Chinese position qualifications require separate verification; not diagnostic guidelines.",
                 "market": "US",
                 "name": "29-1041.00 Optometrists",
-                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "period": "O*NET 2026 profile; only specified task, context and education sections reviewed",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1041.00"
@@ -13629,7 +13726,7 @@
                 "url": "https://www.onetonline.org/link/custom/29-1041.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13638,37 +13735,37 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "29-1041.00 - Optometrists",
-                "period": "O*NET 2026 occupational profile; checked 2026-10-12",
+                "period": "O*NET 2026 profile; only specified task, context and education sections reviewed",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-1041.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "The current strict-HTTPS read shows three browsers each at 8%, Excel under 1%, and other listed values unavailable. The denominator is unique postings linked to the occupation, not medical-AI adoption."
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "Hot Technologies: 29-1041.00 - Optometrists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "U.S. Lightcast unique job postings, 1 January–31 December 2025",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/29-1041.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "The current strict-HTTPS read shows health and social assistance 80%, retail 13% and other industries 7%. The page does not state the statistical year; do not infer it from a separate summary."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "Industries: 29-1041.00 - Optometrists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Statistical year not stated in the reviewed industry-page snapshot",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/29-1041.00"
@@ -13719,7 +13816,7 @@
                 "url": "https://www.onetonline.org/link/localwages/29-1041.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13728,7 +13825,7 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "29-1041.00 - Optometrists",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "O*NET 2026 profile; only specified task, context and education sections reviewed",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1041.00"
@@ -13761,7 +13858,7 @@
                 "period": "Author editorial exercise 2026-10-02",
                 "publisher": "FermatMind",
                 "scope": "internal_rubric",
-                "url": null
+                "url": "https://fermatmind.com/en/career/jobs/optometrists"
               },
               {
                 "accessed_at": "2026-10-02",
@@ -13780,20 +13877,221 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Measure distance and near vision, refraction, and binocular coordination. — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Observe indicators such as the anterior segment, fundus, and intraocular pressure. — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "Identify refractive or ocular abnormalities together with the history. — 50/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "The previous 42% editorial estimate is withdrawn: the available sources do not validate the 25/50/50 ratings for three clinical tasks. No replacement score is assigned.",
+                  "Information organization and missing-field prompts for fictional records are candidates for evaluation; no capability ratings are assigned to diagnostic imaging, prescribing or treatment.",
+                  "Previously selected vision/refraction measurement task: occupational sources describe duties without establishing an AI measurement-capability rating.",
+                  "Previously selected examination-findings task: no AI performance rating for image or ocular-finding interpretation was established.",
+                  "Previously selected history-and-finding interpretation task: no AI clinical-decision performance rating was established."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "This occupation; task descriptions, software mentions in job postings and employment projections do not establish clinical AI performance",
+                "name": "FermatMind note on missing quantitative AI evidence",
+                "period": "Original method 2026-10-18; withdrawal review 2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "Withdrawal of the prior editorial score; neither measured performance nor clinical authorization",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "PDF pages 2–10 reviewed; definition on page 6. Based on the 2015 classification; assessment conditions are not universal current hiring requirements or a medical license."
+                ],
+                "evidence_type": "official or primary institutional source",
+                "id": "cn-optician-standard",
+                "limitation": "Only the stated sections and role; not a universal hiring or clinical-practice authorization.",
+                "market": "CN",
+                "name": "National occupational skill standard: spectacle refraction worker (2018)",
+                "period": "2018 edition, published 26 December 2018",
+                "publisher": "Ministry of Human Resources and Social Security of China",
+                "scope": "jurisdiction_or_role_specific",
+                "url": "https://www.osta.org.cn/api/sys/downloadFile/decrypt?fileName=4eNsZIOv3WFNDfbnldJHeA%2F2024%2F4%2F29%2Fc109461d3ecf4b24957f3f34bdf21c52.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Relevant sections: articles 2 and 9–14 on qualifications, examination, registration and scope of practice."
+                ],
+                "evidence_type": "official or primary institutional source",
+                "id": "cn-medical-practice",
+                "limitation": "Only the stated sections and role; not a universal hiring or clinical-practice authorization.",
+                "market": "CN",
+                "name": "Physicians Law of the People’s Republic of China",
+                "period": "Effective 1 March 2022",
+                "publisher": "Standing Committee of the National People’s Congress; Beijing government official text",
+                "scope": "jurisdiction_or_role_specific",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Article 6 educational eligibility distinguishes medical technology and optometric medicine; historical enrollment exceptions must be read as stated."
+                ],
+                "evidence_type": "official or primary institutional source",
+                "id": "cn-medical-exam",
+                "limitation": "Only the stated sections and role; not a universal hiring or clinical-practice authorization.",
+                "market": "CN",
+                "name": "Eligibility provisions for the medical qualification examination (2014)",
+                "period": "2014 eligibility provisions; official page lists them as effective",
+                "publisher": "Former National Health and Family Planning Commission and related ministries; Beijing government official text",
+                "scope": "jurisdiction_or_role_specific",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202408/t20240821_3779268.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "An Ankang human-resources notice dated 9 February 2026 listed eight employer-described optometry positions at Ankang Aier Eye Hospital, with monthly pay from RMB 3,500 and specified education, credential, equipment and communication requirements. This is one historical employer listing, not a national wage or universal legal qualification; tax basis, pay composition and current availability were not established."
+                ],
+                "evidence_type": "official or primary institutional source",
+                "id": "cn-ankang-job",
+                "limitation": "Only the stated sections and role; not a universal hiring or clinical-practice authorization.",
+                "market": "CN",
+                "name": "Ankang employment listings, second batch of 2026",
+                "period": "Historical employer listing dated 9 February 2026",
+                "publisher": "Ankang Municipal Human Resources and Social Security Bureau",
+                "scope": "historical_single_employer_sample",
+                "url": "https://rsj.ankang.gov.cn/Content-2895851.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Only articles 4, 28 and 29: personal information, sensitive health information and processing conditions; no finding that a particular platform is compliant."
+                ],
+                "evidence_type": "official law",
+                "id": "cn-pipl",
+                "limitation": "Specified provisions only; no complete compliance assessment.",
+                "market": "CN",
+                "name": "Personal Information Protection Law of China",
+                "period": "Effective 1 November 2021",
+                "publisher": "Standing Committee of the National People’s Congress; Cyberspace Administration of China official text",
+                "scope": "articles_4_28_29",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Reviewed the specified infection-risk and symptom sections: pain and sudden blur warrant immediate contact with an eye doctor; this is not a general clinical workflow for all eye disease."
+                ],
+                "evidence_type": "official public health information",
+                "id": "cdc-contact-lenses",
+                "limitation": "Contact-lens context; not a diagnostic or treatment protocol.",
+                "market": "US",
+                "name": "What Causes Contact Lens-related Eye Infections",
+                "period": "2025-05-27",
+                "publisher": "U.S. Centers for Disease Control and Prevention",
+                "scope": "contact_lens_related_infections",
+                "url": "https://www.cdc.gov/contact-lenses/causes/index.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Medical eye care and a broader range of ophthalmic surgery.",
+                  "Optometrists also diagnose and treat within state-authorized practice; the distinction is not simply whether they treat disease."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-29-1241.00",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "Ophthalmologist",
+                "period": "Specified definition and task sections of the 2026 occupation profile",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/29-1241.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Fit and adjust lenses and frames using prescriptions and client measurements, and verify finished eyewear.",
+                  "These optical-service tasks do not establish independent eye-disease diagnosis authority."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-29-2081.00",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "Dispensing optician",
+                "period": "Specified definition and task sections of the 2026 occupation profile",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/29-2081.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Assist ophthalmologists with histories, vision and pressure tests and related clinical tasks.",
+                  "Check the specific supervision, duties and scope for the job."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-29-2057.00",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "Ophthalmic medical technician",
+                "period": "Specified definition and task sections of the 2026 occupation profile",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/29-2057.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Work may include ophthalmic photography, ultrasound, staff instruction and surgical assistance.",
+                  "Tasks overlap with technician work; titles do not establish independent practice authority."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-29-2099.05",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "Ophthalmic medical technologist",
+                "period": "Specified definition and task sections of the 2026 occupation profile",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/29-2099.05"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Assess binocular vision, abnormal eye movements and related conditions, with nonsurgical management.",
+                  "The work is broader than eye-muscle exercises; check its professional route and scope."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-29-1299.02",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "Orthoptist",
+                "period": "Specified definition and task sections of the 2026 occupation profile",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/29-1299.02"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Cut, grind, polish, inspect and mount optical lenses to production specifications.",
+                  "The focus is optical manufacturing rather than eye-disease diagnosis."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-51-9083.00",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "Ophthalmic laboratory technician",
+                "period": "Specified definition and task sections of the 2026 occupation profile",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/51-9083.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Specified symptoms and help-seeking sections: angle closure can cause sudden intense pain, nausea, redness and blur, for which NEI advises immediate care; not used to diagnose the reader."
+                ],
+                "evidence_type": "official public health information",
+                "id": "nei-glaucoma",
+                "limitation": "Condition-specific public information, not an individual triage or treatment protocol.",
+                "market": "US",
+                "name": "Glaucoma",
+                "period": "Updated 19 August 2026",
+                "publisher": "U.S. National Eye Institute",
+                "scope": "glaucoma_warning_information",
+                "url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma"
               }
             ]
           },
@@ -13839,24 +14137,24 @@
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
-            "label": "Occupational tasks"
+            "href": "https://www.onetonline.org/link/summary/29-1241.00",
+            "label": "Ophthalmologist"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "label": "Adjacent occupations"
+            "href": "https://www.onetonline.org/link/summary/29-2081.00",
+            "label": "Dispensing optician"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
-            "label": "Work activities"
+            "href": "https://www.onetonline.org/link/summary/29-2057.00",
+            "label": "Ophthalmic medical technician"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "label": "Education differences"
+            "href": "https://www.onetonline.org/link/summary/29-2099.05",
+            "label": "Ophthalmic medical technologist"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
-            "label": "Occupational boundaries"
+            "href": "https://www.onetonline.org/link/summary/29-1299.02",
+            "label": "Orthoptist"
           }
         ],
         "evidence_note": {
@@ -13886,37 +14184,37 @@
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "核心工作与产出": "Medical diagnosis, treatment, and surgery of eye disease",
+            "核心工作与产出": "Medical eye care and a broader range of ophthalmic surgery.",
             "职业方向": "Ophthalmologist"
           },
           {
-            "关键区别": "Does not independently diagnose or prescribe",
-            "更适合什么选择": "Likes dispensing services",
-            "核心工作与产出": "Fits lenses and frames to a prescription",
+            "关键区别": "These optical-service tasks do not establish independent eye-disease diagnosis authority.",
+            "更适合什么选择": "Interest in lenses, frames, measurement and customer service.",
+            "核心工作与产出": "Fit and adjust lenses and frames using prescriptions and client measurements, and verify finished eyewear.",
             "职业方向": "Dispensing optician"
           },
           {
-            "关键区别": "Does not carry the optometrist's independent practice responsibility",
-            "更适合什么选择": "Likes clinical assistance",
-            "核心工作与产出": "Performs ophthalmic examinations under physician supervision",
+            "关键区别": "Check the specific supervision, duties and scope for the job.",
+            "更适合什么选择": "Interest in examination-support work in a clinical team.",
+            "核心工作与产出": "Assist ophthalmologists with histories, vision and pressure tests and related clinical tasks.",
             "职业方向": "Ophthalmic medical technician"
           },
           {
-            "关键区别": "Primarily assists the physician",
-            "更适合什么选择": "Likes imaging technology",
-            "核心工作与产出": "Complex examinations and imaging",
+            "关键区别": "Tasks overlap with technician work; titles do not establish independent practice authority.",
+            "更适合什么选择": "Interest in ophthalmic imaging equipment and technical instruction.",
+            "核心工作与产出": "Work may include ophthalmic photography, ultrasound, staff instruction and surgical assistance.",
             "职业方向": "Ophthalmic medical technologist"
           },
           {
-            "关键区别": "A dedicated rehabilitation direction",
-            "更适合什么选择": "Likes visual function training",
-            "核心工作与产出": "Binocular vision and eye muscle training",
-            "职业方向": "Vision therapist"
+            "关键区别": "The work is broader than eye-muscle exercises; check its professional route and scope.",
+            "更适合什么选择": "Interest in binocular vision and nonsurgical management.",
+            "核心工作与产出": "Assess binocular vision, abnormal eye movements and related conditions, with nonsurgical management.",
+            "职业方向": "Orthoptist"
           },
           {
-            "关键区别": "Production rather than diagnosis",
-            "更适合什么选择": "Likes precision manufacturing",
-            "核心工作与产出": "Cutting, grinding, and assembling lenses",
+            "关键区别": "The focus is optical manufacturing rather than eye-disease diagnosis.",
+            "更适合什么选择": "Interest in precision manufacturing and product inspection.",
+            "核心工作与产出": "Cut, grind, polish, inspect and mount optical lenses to production specifications.",
             "职业方向": "Ophthalmic laboratory technician"
           }
         ],
@@ -13981,7 +14279,7 @@
             }
           }
         ],
-        "answer": "Tools can assist with imaging prompts, medical record summaries, and visual function trend organization; the practice responsibility for examination and diagnosis, lens prescribing, medication, and referral must be verified by authorized personnel. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
+        "answer": "This page has not established verifiable task-level AI performance or an impact percentage; the previous 42% editorial estimate is withdrawn. The fictional I/J records below can be used to evaluate information organization and missing-field prompts. Check every output against the input; this is neither evidence of clinical capability nor authorization for patient care.",
         "authority_links": [
           {
             "来源": "Occupational tasks",
@@ -14026,25 +14324,25 @@
             "链接": "https://www.onetonline.org/link/details/29-1041.00"
           }
         ],
-        "difference_intro": "Imaging prompts, summaries, and visual function trend organization are editorial trial suggestions; clinical judgment, prescribing, medication, and referral require human verification, and no single-item efficiency measurements were obtained.",
+        "difference_intro": "Separate record-assistance scenarios awaiting evaluation from clinical tasks. Occupational task lists and overall employment projections do not establish AI performance.",
         "difference_rows": [
           {
-            "AI主要改变": "Assists with summarizing records and candidates",
-            "仍由人负责": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
+            "AI主要改变": "Extraction from supplied text is a trial candidate; verify accuracy item by item.",
+            "仍由人负责": "Check source history, laterality, omissions and patient confirmation.",
             "方向": "History taking"
           },
           {
-            "AI主要改变": "Assists with summarizing records and candidates",
-            "仍由人负责": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
+            "AI主要改变": "This page has not verified vision or refraction measurement capability.",
+            "仍由人负责": "Qualified staff check the measurement process and findings.",
             "方向": "Vision examination"
           },
           {
-            "AI主要改变": "Assists with summarizing records and candidates",
-            "仍由人负责": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
+            "AI主要改变": "This page has not verified interpretation of images or ocular findings.",
+            "仍由人负责": "Professionals review interpretation alongside the actual examination.",
             "方向": "Eye examination"
           }
         ],
-        "evidence_intro": "O*NET lists 29-1041.00 tasks; BLS employment tables do not measure single-item AI effects.",
+        "evidence_intro": "The sources below support occupational, wage and qualification context; they are not performance trials of medical AI products for this occupation.",
         "evidence_rows": [
           {
             "使用限制": "Describes occupational tasks, does not measure AI effects.",
@@ -14069,10 +14367,10 @@
           },
           {
             "source_ref": "bls-optometrist-ooh",
-            "使用限制": "Specific authorization is by location and employer.",
+            "使用限制": "Check U.S. practice scope separately from mainland credentials; this does not establish AI capability.",
             "来源": "Education and qualifications",
             "研究对象": "Optometrist",
-            "结论": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
+            "结论": "U.S. practice typically requires an accredited OD program and state licensure. Medication and some procedural permissions vary by state; continuing education and periodic renewal are required, while board certification is optional.",
             "链接": "https://www.bls.gov/ooh/healthcare/optometrists.htm"
           },
           {
@@ -14087,11 +14385,11 @@
         "heading": "Optometrist: tool assistance and human control",
         "method_cards": [
           {
-            "含义": "Tools can assist with part of the information organization; task descriptions do not equal automation rates.",
+            "含义": "Information organization is a scenario awaiting evaluation, without a claim of clinical efficiency or automation rate.",
             "概念": "Task assistance"
           },
           {
-            "含义": "Authorization, reliability, reviewers, and failure handling must be verified first.",
+            "含义": "Use in an institutional workflow requires separate validation of data handling, intended scope and responsibility.",
             "概念": "Organizational adoption"
           },
           {
@@ -14101,75 +14399,82 @@
         ],
         "questions": [
           {
-            "回答": "No; the practice responsibility for examination and diagnosis, lens prescribing, medication, and referral must be verified by humans.",
-            "来源": "Official occupational information",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "问题": "Can AI operate independently?"
+            "source_ref": "bls-optometrist-ooh",
+            "回答": "No such conclusion is established: the reviewed sources do not measure occupational task-level AI performance. Actual patient care and prescribing must meet applicable qualification and practice-scope requirements.",
+            "来源": "Practice background, not an AI performance trial",
+            "链接": "https://www.bls.gov/ooh/healthcare/optometrists.htm",
+            "问题": "Does this page establish independent AI capability?"
           },
           {
-            "回答": "Return to the original records and pause high-risk operations.",
-            "来源": "Official occupational information",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "问题": "What to do about input errors?"
+            "source_ref": "internal-rubric",
+            "回答": "In the I/J exercise, retain the original records and mark conflicts and unknowns. Do not change laterality, diagnose or sign for someone else.",
+            "来源": "This page’s I/J editorial exercise, not clinical guidance",
+            "链接": "https://fermatmind.com/en/career/jobs/optometrists",
+            "问题": "What if records conflict?"
           },
           {
-            "回答": "Use only approved systems and permissions.",
-            "来源": "Official occupational information",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "source_ref": "cn-pipl",
+            "回答": "This exercise uses fictional information only. Under China’s PIPL, health information is sensitive personal information; actual processing requires separate checks of legal, institutional and system conditions. This page does not establish upload compliance.",
+            "来源": "Specified Personal Information Protection Law provisions",
+            "链接": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
             "问题": "Can real data be uploaded?"
           },
           {
-            "回答": "Cross-check against examination records, eyeglass or contact lens prescriptions, treatment plans, referral notes, and the site.",
-            "来源": "Official occupational information",
-            "链接": "https://www.onetonline.org/link/details/29-1041.00",
-            "问题": "How to check outputs?"
+            "source_ref": "internal-rubric",
+            "回答": "Compare it item by item with I/J inputs for laterality, unsupported inference, credentials and signature gaps. Retain tool suggestions and unresolved questions separately.",
+            "来源": "This page’s I/J editorial exercise, not a performance validation",
+            "链接": "https://fermatmind.com/en/career/jobs/optometrists",
+            "问题": "How should an output be checked?"
           },
           {
-            "回答": "Official employment tables cannot be used to derive single-item replacement rates.",
-            "来源": "Official occupational information",
+            "source_ref": "bls-2025-35-29-1041",
+            "回答": "Overall employment projections do not establish a number of jobs replaced by AI on this page.",
+            "来源": "BLS overall projections, without AI attribution",
             "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "问题": "How many jobs will AI replace?"
           },
           {
-            "回答": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
-            "来源": "Official occupational information",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "问题": "Who bears responsibility for outcomes?"
+            "source_ref": "bls-optometrist-ooh",
+            "回答": "Responsibility follows local law, qualifications, actual duties and institutional processes. Tool output does not replace these requirements; this page does not allocate responsibility for a specific case.",
+            "来源": "Overview of U.S. practice scope",
+            "链接": "https://www.bls.gov/ooh/healthcare/optometrists.htm",
+            "问题": "Who is responsible for clinical outcomes?"
           },
           {
-            "回答": "Integrate examinations and refer to ophthalmology.",
-            "来源": "Official occupational information",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "问题": "When to escalate?"
+            "source_ref": "cdc-contact-lenses",
+            "回答": "No. In the contact-lens symptom context, CDC advises immediate contact with an eye doctor for pain, sudden blur and related symptoms. This page provides no individual diagnosis or triage protocol.",
+            "来源": "CDC contact-lens infection risks and symptoms",
+            "链接": "https://www.cdc.gov/contact-lenses/causes/index.html",
+            "问题": "Can this page determine clinical urgency?"
           }
         ],
-        "responsibility_intro": "Use fictional samples only when trying tools; real operations require verifying patient privacy, device validation, licensing scope, and human clinical review.",
+        "responsibility_intro": "The I/J exercise below uses fictional records only. Paper review does not assess clinical competence or determine patient care or permission to upload data.",
         "responsibility_steps": [
           {
             "步骤": "Verify objects",
-            "说明": "Check symptoms, medications, prior eye disease, and risks."
+            "说明": "Confirm fictional labeling; do not use real patient records."
           },
           {
             "步骤": "Verify tasks",
-            "说明": "Measure distance and near vision, refraction, and binocular coordination."
+            "说明": "Separate original records, tool suggestions and personal inferences."
           },
           {
             "步骤": "Verify records",
-            "说明": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes"
+            "说明": "Check I’s laterality and inference, and J’s missing credentials and signatures."
           },
           {
             "步骤": "Verify anomalies",
-            "说明": "Integrate examinations and refer to ophthalmology."
+            "说明": "List conflicts as unresolved questions; do not alter facts, diagnose or sign for others."
           },
           {
             "步骤": "Verify authorization",
-            "说明": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral"
+            "说明": "State that real work requires review by appropriately qualified professionals within their actual responsibilities."
           }
         ],
         "risk_rows": [
           {
             "为什么重要": "Delayed treatment.",
-            "控制方式": "Integrate examinations and refer to ophthalmology.",
+            "控制方式": "Qualified professionals review the history and examination and consult or refer as needed within the applicable scope; this page does not determine care for an individual patient.",
             "风险": "Missed serious eye disease"
           },
           {
@@ -14195,46 +14500,46 @@
         ],
         "task_rows": [
           {
-            "人的控制点": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
+            "人的控制点": "Check source history, laterality, omissions and patient confirmation.",
             "任务": "Check symptoms, medications, prior eye disease, and risks.",
             "工作方向": "History taking",
-            "当前变化": "Assists with summarizing records and candidates"
+            "当前变化": "Extraction from supplied text is a trial candidate; verify accuracy item by item."
           },
           {
-            "人的控制点": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
+            "人的控制点": "Qualified staff check the measurement process and findings.",
             "任务": "Measure distance and near vision, refraction, and binocular coordination.",
             "工作方向": "Vision examination",
-            "当前变化": "Assists with summarizing records and candidates"
+            "当前变化": "This page has not verified vision or refraction measurement capability."
           },
           {
-            "人的控制点": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
+            "人的控制点": "Professionals review interpretation alongside the actual examination.",
             "任务": "Observe indicators such as the anterior segment, fundus, and intraocular pressure.",
             "工作方向": "Eye examination",
-            "当前变化": "Assists with summarizing records and candidates"
+            "当前变化": "This page has not verified interpretation of images or ocular findings."
           },
           {
-            "人的控制点": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
+            "人的控制点": "Clinicians assess evidence, differential considerations and their scope.",
             "任务": "Identify refractive or ocular abnormalities together with the history.",
             "工作方向": "Result judgment",
-            "当前变化": "Assists with summarizing records and candidates"
+            "当前变化": "This page has not established AI performance in diagnosis using patient history."
           },
           {
-            "人的控制点": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
+            "人的控制点": "Appropriately qualified staff verify prescription content and authority.",
             "任务": "Prescribe lenses or contact lenses according to practice authority.",
             "工作方向": "Prescription services",
-            "当前变化": "Assists with summarizing records and candidates"
+            "当前变化": "This page has not established autonomous lens- or drug-prescribing capability."
           },
           {
-            "人的控制点": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
-            "任务": "Treat within licensing and refer high-risk disease to ophthalmology.",
+            "人的控制点": "Qualified professionals decide using patient circumstances and applicable processes.",
+            "任务": "Provide care within the licensed scope and consult or refer when additional care is needed or the case exceeds the practitioner’s scope or expertise.",
             "工作方向": "Treatment and referral",
-            "当前变化": "Assists with summarizing records and candidates"
+            "当前变化": "This page has not established AI performance in treatment or referral decisions."
           },
           {
-            "人的控制点": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
+            "人的控制点": "Check the audience, approved source instructions and patient understanding.",
             "任务": "Explain care, follow-up, and dangerous symptoms.",
             "工作方向": "Follow-up education",
-            "当前变化": "Assists with summarizing records and candidates"
+            "当前变化": "Readable drafts of approved instructions are trial candidates requiring professional review."
           }
         ],
         "transition": "Moving to an adjacent position requires training and qualifications for the target occupation."
@@ -14268,39 +14573,39 @@
             "stage": "Seven-day paper exercise"
           }
         ],
-        "direct_answer": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-        "entry_heading": "Learn basic tasks first, then practice under supervision",
+        "direct_answer": "U.S. entry typically requires a four-year accredited OD program and state licensure. Admission requires at least three years of undergraduate education, and applicants usually hold a bachelor’s degree; four years is not the total education requirement. All states require licensing examinations, continuing education and periodic renewal. Board certification is optional. For mainland work, first distinguish a medical-practitioner role from eye-care technical work or optical retail, then check the specific program, practical training, skill assessment and job scope. U.S. OD education and state licensure form a separate route and do not automatically confer mainland medical-practice credentials.",
+        "entry_heading": "Identify the role before checking education and practice requirements",
         "heading": "Optometrist training and qualification path",
         "locale_requirements": {
-          "credential_boundary": "Courses or interest scores do not automatically grant independent work authority.",
-          "jurisdiction": "U.S. 29-1041.00 and Chinese position qualifications are verified separately.",
-          "summary": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification."
+          "credential_boundary": "These learning areas are not a universal promotion timetable; observation, clinical training and independent practice have different permissions.",
+          "jurisdiction": "Verify U.S. 29-1041.00 practice separately from the distinct mainland roles, education and credentials.",
+          "summary": "Related mainland roles include spectacle refraction workers and eye-care positions in medical institutions; they are not interchangeable with a U.S. OD. A spectacle-refraction prescription is not a drug prescription or medical-practice credential. Medical diagnosis and treatment require separate checks of registration and institutional and job scope. Verify skill certification, education, medical credentials and employer requirements separately."
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
             "href": "https://www.bls.gov/ooh/healthcare/optometrists.htm",
             "id": "bls",
-            "label": "Education and qualifications",
-            "scope": "Overview of U.S. OD education and state licensure; permitted medication classes, surgery, and other scopes vary by state, board certification is optional; Chinese qualifications and organizational authority require separate verification."
+            "label": "U.S. education and state licensure",
+            "scope": "An OD usually involves four years of graduate study, and every state requires a license; the permitted medication classes and surgical scope vary by state."
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
+            "href": "https://www.osta.org.cn/api/sys/downloadFile/decrypt?fileName=4eNsZIOv3WFNDfbnldJHeA%2F2024%2F4%2F29%2Fc109461d3ecf4b24957f3f34bdf21c52.pdf",
             "id": "nasa",
-            "label": "Occupational tasks",
-            "scope": "U.S. 29-1041.00 precise occupation"
+            "label": "Mainland spectacle-refraction skill definition",
+            "scope": "PDF pages 2–10 reviewed; definition on page 6. Based on the 2015 classification; assessment conditions are not universal current hiring requirements or a medical license."
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202408/t20240821_3779268.html",
             "id": "onet-training",
-            "label": "Occupational projections",
-            "scope": "U.S. 29-1041.00 precise occupation"
+            "label": "Mainland medical-examination educational eligibility",
+            "scope": "Article 6 educational eligibility distinguishes medical technology and optometric medicine; historical enrollment exceptions must be read as stated."
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
+            "href": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html",
             "id": "faa",
-            "label": "Work activities",
-            "scope": "U.S. 29-1041.00 precise occupation"
+            "label": "Mainland medical registration and practice scope",
+            "scope": "Relevant sections: articles 2 and 9–14 on qualifications, examination, registration and scope of practice."
           }
         ],
         "tracks": [
@@ -14308,31 +14613,31 @@
             "id": "office-support",
             "stages": [
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Check symptoms, medications, prior eye disease, and risks.; As authorized by the position.",
+                "credentials": "Institutional permission for observation is not clinical-training eligibility.",
+                "next_moves": "Check the specific program and its next admission requirements.",
+                "readiness_evidence": "Personal learning questions without real patient information.",
+                "responsibility": "Observe an authorized history-taking and documentation workflow, noting terminology and questions without independent patient care.",
                 "role": "Observe and learn"
               },
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Check symptoms, medications, prior eye disease, and risks.; As authorized by the position.",
+                "credentials": "Admission and supervision requirements for the specific program or placement.",
+                "next_moves": "Address learning gaps using feedback; do not independently take over patient care.",
+                "readiness_evidence": "Learning records reviewed by the designated supervisor, without public disclosure of patient records.",
+                "responsibility": "After entering an approved clinical education or placement arrangement, participate in history taking under designated supervision.",
                 "role": "Perform under training"
               },
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Check symptoms, medications, prior eye disease, and risks.; As authorized by the position.",
+                "credentials": "U.S. state licensure, or applicable mainland role credentials and institutional scope.",
+                "next_moves": "Develop according to the actual job’s evaluation and regulatory requirements.",
+                "readiness_evidence": "Professional records appropriate to the service, rather than every possible document at each encounter.",
+                "responsibility": "With applicable credentials and authority, review history, symptoms and record completeness within the role.",
                 "role": "Independent handoff"
               },
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Check symptoms, medications, prior eye disease, and risks.; As authorized by the position.",
+                "credentials": "Continuing education or quality improvement does not automatically expand practice authority.",
+                "next_moves": "Recheck training, credentials and authorization for any new task.",
+                "readiness_evidence": "Review findings or improvement records used with institutional permission.",
+                "responsibility": "Join case review or documentation-quality improvement; any additional duties still require a separate scope check.",
                 "role": "Advanced review"
               }
             ],
@@ -14342,31 +14647,31 @@
             "id": "supplier-cost",
             "stages": [
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Observe indicators such as the anterior segment, fundus, and intraocular pressure.; As authorized by the position.",
+                "credentials": "Institutional permission for observation is not clinical-training eligibility.",
+                "next_moves": "Check the specific program and its next admission requirements.",
+                "readiness_evidence": "Personal learning questions without real patient information.",
+                "responsibility": "Observe how professionals organize examinations; do not independently examine patients or interpret findings.",
                 "role": "Observe and learn"
               },
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Observe indicators such as the anterior segment, fundus, and intraocular pressure.; As authorized by the position.",
+                "credentials": "Admission and supervision requirements for the specific program or placement.",
+                "next_moves": "Address learning gaps using feedback; do not independently take over patient care.",
+                "readiness_evidence": "Learning records reviewed by the designated supervisor, without public disclosure of patient records.",
+                "responsibility": "Learn the relevant equipment and examination process under approved training and designated supervision.",
                 "role": "Perform under training"
               },
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Observe indicators such as the anterior segment, fundus, and intraocular pressure.; As authorized by the position.",
+                "credentials": "U.S. state licensure, or applicable mainland role credentials and institutional scope.",
+                "next_moves": "Develop according to the actual job’s evaluation and regulatory requirements.",
+                "readiness_evidence": "Professional records appropriate to the service, rather than every possible document at each encounter.",
+                "responsibility": "With applicable credentials, perform examinations and analysis within the individual scope of practice.",
                 "role": "Independent handoff"
               },
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Observe indicators such as the anterior segment, fundus, and intraocular pressure.; As authorized by the position.",
+                "credentials": "Continuing education or quality improvement does not automatically expand practice authority.",
+                "next_moves": "Recheck training, credentials and authorization for any new task.",
+                "readiness_evidence": "Review findings or improvement records used with institutional permission.",
+                "responsibility": "Continue learning examination techniques and reviewing quality without assuming new procedural authority.",
                 "role": "Advanced review"
               }
             ],
@@ -14376,31 +14681,31 @@
             "id": "records-information",
             "stages": [
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Prescribe lenses or contact lenses according to practice authority.; As authorized by the position.",
+                "credentials": "Institutional permission for observation is not clinical-training eligibility.",
+                "next_moves": "Check the specific program and its next admission requirements.",
+                "readiness_evidence": "Personal learning questions without real patient information.",
+                "responsibility": "Learn how prescriptions are formed and checked without prescribing for patients.",
                 "role": "Observe and learn"
               },
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Prescribe lenses or contact lenses according to practice authority.; As authorized by the position.",
+                "credentials": "Admission and supervision requirements for the specific program or placement.",
+                "next_moves": "Address learning gaps using feedback; do not independently take over patient care.",
+                "readiness_evidence": "Learning records reviewed by the designated supervisor, without public disclosure of patient records.",
+                "responsibility": "Study prescription review in an approved clinical-education arrangement; the supervisor determines permitted participation.",
                 "role": "Perform under training"
               },
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Prescribe lenses or contact lenses according to practice authority.; As authorized by the position.",
+                "credentials": "U.S. state licensure, or applicable mainland role credentials and institutional scope.",
+                "next_moves": "Develop according to the actual job’s evaluation and regulatory requirements.",
+                "readiness_evidence": "Professional records appropriate to the service, rather than every possible document at each encounter.",
+                "responsibility": "Provide the relevant prescription service only with the applicable credentials and scope.",
                 "role": "Independent handoff"
               },
               {
-                "credentials": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
-                "next_moves": "Check quality and authority first, then expand task scope.",
-                "readiness_evidence": "Examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes",
-                "responsibility": "Prescribe lenses or contact lenses according to practice authority.; As authorized by the position.",
+                "credentials": "Continuing education or quality improvement does not automatically expand practice authority.",
+                "next_moves": "Recheck training, credentials and authorization for any new task.",
+                "readiness_evidence": "Review findings or improvement records used with institutional permission.",
+                "responsibility": "Review prescription quality and follow-up communication; additional medication or procedural authority requires separate verification.",
                 "role": "Advanced review"
               }
             ],
@@ -14425,7 +14730,7 @@
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "Optometrist: optometrists complete a checkable occupational loop around the work object, task process, result review, and responsibility handover; specific requirements should go back to official occupational sources, employer processes, and local rules",
+                  "label": "Setting and process",
                   "secondary_value": {
                     "$item": "optometrists.profile.work-context-block.3",
                     "block": "profile",
@@ -14441,7 +14746,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "Optometrist: optometrists complete a checkable occupational loop around the work object, task process, result review, and responsibility handover; specific requirements should go back to official occupational sources, employer processes, and local rules",
+                  "label": "Related roles and equipment",
                   "secondary_value": {
                     "$item": "optometrists.profile.onet-structured-fields-block.5",
                     "block": "profile",
@@ -14457,7 +14762,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "Optometrist: optometrists complete a checkable occupational loop around the work object, task process, result review, and responsibility handover; specific requirements should go back to official occupational sources, employer processes, and local rules",
+                  "label": "Typical records",
                   "secondary_value": null,
                   "value": {
                     "$item": "optometrists.profile.work-context-block.8",
@@ -14470,7 +14775,7 @@
             }
           },
           {
-            "answer": "The core is examining the visual system, diagnosing and managing eye problems within the scope of practice, prescribing corrective lenses, and providing treatment or medication under local licensing; difficult and surgical needs are referred to an ophthalmologist.; Abilities are verified through supervisory feedback and delivery records.",
+            "answer": "Relevant abilities include precise examination, clear explanation and recognizing when care needs referral. Assess them through appropriate professional training and practice; interests and paper exercises do not establish clinical competence.",
             "key": "qa2",
             "question": "What abilities are needed?",
             "table": {
@@ -14509,7 +14814,7 @@
                   "alternate_value": null,
                   "label": "Treatment and referral",
                   "secondary_value": "Practice responsibility for examination and diagnosis, lens prescribing, medication, and referral",
-                  "value": "Treat within licensing and refer high-risk disease to ophthalmology."
+                  "value": "Provide care within the licensed scope and consult or refer when additional care is needed or the case exceeds the practitioner’s scope or expertise."
                 },
                 {
                   "alternate_value": null,
@@ -14521,46 +14826,46 @@
             }
           },
           {
-            "answer": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification.",
+            "answer": "U.S. optometrists typically need accredited OD education and state licensure. Distinguish mainland medical, technical and optical-service roles before checking their education and credential requirements.",
             "key": "qa1",
             "question": "How to enter?",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "Basic education",
-                  "secondary_value": "Verify hiring",
-                  "value": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification."
+                  "label": "U.S. professional education",
+                  "secondary_value": "Check the specific accredited program and prerequisite courses.",
+                  "value": "Typically an accredited four-year OD program, with at least three undergraduate years before entry; applicants usually hold a bachelor’s degree."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Skills training",
-                  "secondary_value": "Verify position",
-                  "value": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification."
+                  "label": "Supervised clinical training",
+                  "secondary_value": "Check the program’s clinical education arrangements.",
+                  "value": "OD education includes clinical experience; participation follows program and supervision arrangements."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Supervised practice",
-                  "secondary_value": "Verify feedback",
-                  "value": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification."
+                  "label": "State licensure",
+                  "secondary_value": "Check the target state licensing board.",
+                  "value": "Complete applicable examinations and state license requirements; some states require additional examinations."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Occupational qualifications",
-                  "secondary_value": "Verify region",
-                  "value": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification."
+                  "label": "Continuing education and renewal",
+                  "secondary_value": "Distinguish state renewal rules from voluntary certification.",
+                  "value": "All states require continuing education and periodic renewal; board certification is optional."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Organizational authorization",
-                  "secondary_value": "Verify validity period",
-                  "value": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification."
+                  "label": "Mainland medical-practitioner route",
+                  "secondary_value": "Check educational-eligibility provisions, the Physicians Law and the institution.",
+                  "value": "Check medical education, practice, examination and registration separately; a U.S. OD does not automatically confer mainland medical credentials."
                 },
                 {
                   "alternate_value": null,
-                  "label": "Chinese positions",
-                  "secondary_value": "Verify local rules",
-                  "value": "BLS lists a doctoral or professional degree; in the United States, optometric professional education and a state license are required, medication authority varies by state, and Chinese positions and statutory qualifications require separate verification."
+                  "label": "Mainland technical and optical-service routes",
+                  "secondary_value": "Check occupational standards, skill assessment and the specific job.",
+                  "value": "Check the program or skill training and actual duties; a spectacle-refraction prescription is not a drug prescription or medical-practice credential."
                 }
               ]
             }
@@ -14598,7 +14903,7 @@
           {
             "affected_roles": {
               "$join": [
-                "Patients, receiving optometrists, and the consulting team. Examination context:",
+                "Patients, practitioners and relevant collaborators. Role context:",
                 {
                   "$item": "optometrists.risk.career-risk-cards.4",
                   "block": "risk",
@@ -14610,7 +14915,7 @@
             },
             "consequence": {
               "$join": [
-                "May delay identification and treatment of eye disease. Escalation boundary:",
+                "Recognition and care may be delayed. Review boundary:",
                 {
                   "$item": "optometrists.risk.career-risk-cards.5",
                   "block": "risk",
@@ -14622,10 +14927,10 @@
             },
             "evidence_refs": [
               "onet",
-              "onet"
+              "nei"
             ],
             "id": "cost-change",
-            "mitigation": "Integrate examinations and refer to ophthalmology.",
+            "mitigation": "Review using professional examination and applicable responsibilities; a single normal result does not exclude all eye disease.",
             "scenario": "Vision loss is treated only as a refractive problem.",
             "title": "Missed serious eye disease"
           },
@@ -14634,10 +14939,10 @@
             "consequence": "May cause correction errors and usability problems.",
             "evidence_refs": [
               "onet",
-              "onet"
+              "editorial"
             ],
             "id": "record-version",
-            "mitigation": "Verify the examination and prescription.",
+            "mitigation": "Check laterality and original records; I only practices finding conflicts, not changing real prescriptions.",
             "scenario": "Power or left and right eyes are recorded incorrectly.",
             "title": "Prescription error"
           },
@@ -14645,11 +14950,11 @@
             "affected_roles": "Patients, prescribing optometrists, and pharmacy collaborators.",
             "consequence": "May cause medication harm or violate applicable licensing rules.",
             "evidence_refs": [
-              "onet",
+              "bls",
               "onet"
             ],
             "id": "personal-data",
-            "mitigation": "Verify statutory scope and contraindications.",
+            "mitigation": "Check local rules and personal scope of practice; tool output does not confer prescribing authority.",
             "scenario": "Prescribing exceeds state or regional licensing.",
             "title": "Overstepping medication"
           },
@@ -14657,11 +14962,11 @@
             "affected_roles": "Contact lens users, optometrists, and follow-up personnel.",
             "consequence": "Eye injury or infection may occur.",
             "evidence_refs": [
-              "onet",
+              "facilities",
               "onet"
             ],
             "id": "technical-boundary",
-            "mitigation": "Clarify care and follow-up.",
+            "mitigation": "Provide care education following professional and product instructions; seek help for the relevant symptoms as advised by CDC.",
             "scenario": "Hygiene and wearing education is insufficient.",
             "title": "Contact lens injury"
           },
@@ -14669,23 +14974,23 @@
             "affected_roles": "Patients, optometrists, and the ophthalmology team receiving the referral.",
             "consequence": "May delay emergency handling and damage vision.",
             "evidence_refs": [
-              "onet",
+              "nei",
               "onet"
             ],
             "id": "single-coverage",
-            "mitigation": "Refer according to the emergency procedure.",
-            "scenario": "Eye pain or sudden vision loss is not escalated.",
-            "title": "Missed emergency referral"
+            "mitigation": "NEI advises immediate care for the specified sudden intense pain, redness, blur and related symptoms; this page does not determine their cause.",
+            "scenario": "Treating the sudden intense pain, redness or blur described by NEI only as a routine optical-service issue.",
+            "title": "Ignoring symptoms needing prompt attention"
           },
           {
             "affected_roles": "Patients, optometrists, and medical record and imaging administrators.",
             "consequence": "May leak medical records or imaging data.",
             "evidence_refs": [
-              "onet",
+              "privacy",
               "onet"
             ],
             "id": "delivery-acceptance",
-            "mitigation": "Use approved systems.",
+            "mitigation": "Check applicable law, institutional requirements and system conditions for actual health-information processing; use fictional records for this exercise.",
             "scenario": "Ocular images or medical records are leaked externally.",
             "title": "Privacy leakage"
           }
@@ -14695,32 +15000,44 @@
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "id": "onet",
-            "label": "Tasks",
-            "scope": "O*NET supports the context of 29-1041.00 examination, prescribing, care education, and referral; risks are editorial notes, not clinical thresholds, incident rates, or specific state licensing rules."
+            "label": "Occupational tasks",
+            "scope": "Employer tasks and local authorization vary."
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.bls.gov/ooh/healthcare/optometrists.htm",
             "id": "bls",
-            "label": "Qualifications",
-            "scope": "O*NET supports the context of 29-1041.00 examination, prescribing, care education, and referral; risks are editorial notes, not clinical thresholds, incident rates, or specific state licensing rules."
+            "label": "U.S. qualification scope",
+            "scope": "An OD usually involves four years of graduate study, and every state requires a license; the permitted medication classes and surgical scope vary by state."
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
+            "href": "https://www.cdc.gov/contact-lenses/causes/index.html",
             "id": "facilities",
-            "label": "Work environment",
-            "scope": "O*NET supports the context of 29-1041.00 examination, prescribing, care education, and referral; risks are editorial notes, not clinical thresholds, incident rates, or specific state licensing rules."
+            "label": "Contact-lens infection",
+            "scope": "Reviewed the specified infection-risk and symptom sections: pain and sudden blur warrant immediate contact with an eye doctor; this is not a general clinical workflow for all eye disease."
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
             "id": "privacy",
-            "label": "Employment information",
-            "scope": "O*NET supports the context of 29-1041.00 examination, prescribing, care education, and referral; risks are editorial notes, not clinical thresholds, incident rates, or specific state licensing rules."
+            "label": "Mainland personal-information protection",
+            "scope": "Only articles 4, 28 and 29: personal information, sensitive health information and processing conditions; no finding that a particular platform is compliant."
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "id": "onet",
-            "label": "Occupational activities",
-            "scope": "O*NET supports the context of 29-1041.00 examination, prescribing, care education, and referral; risks are editorial notes, not clinical thresholds, incident rates, or specific state licensing rules."
+            "label": "Occupational collaboration",
+            "scope": "Employer tasks and local authorization vary."
+          },
+          {
+            "href": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma",
+            "id": "nei",
+            "label": "Condition-specific glaucoma warnings",
+            "scope": "Symptoms and immediate help-seeking information, not individual diagnosis or a universal triage standard."
+          },
+          {
+            "href": "https://fermatmind.com/en/career/jobs/optometrists",
+            "id": "editorial",
+            "label": "This page’s fictional I/J record exercise",
+            "scope": "Paper record review only, without clinical-competence validation."
           }
         ]
       },
@@ -14745,12 +15062,12 @@
             {
               "指标": "2025 health and social work · urban non-private",
               "数值": "146,266 yuan/year (pre-tax)",
-              "说明": "Broad medical institution employer industry; includes other clinical and social work positions and is not optometrist wages or an individual range."
+              "说明": "Employee averages for the health and social work industry, covering many occupations—not optometrist pay or a personal range. Check the employing unit’s industry classification for optical retail; these figures do not estimate self-employment income or clinic profits."
             },
             {
               "指标": "2025 health and social work · urban private",
               "数值": "75,631 yuan/year (pre-tax)",
-              "说明": "The two populations are listed separately and are not an individual range; self-employed individuals and freelancers and owner-operated clinic profits are excluded, and in-store sales require separate verification."
+              "说明": "Employee averages for the health and social work industry, covering many occupations—not optometrist pay or a personal range. Check the employing unit’s industry classification for optical retail; these figures do not estimate self-employment income or clinic profits."
             }
           ],
           "china_ai_row": {
@@ -14767,48 +15084,48 @@
           },
           "china_edu_table": [
             {
-              "学历段": "Professional education",
-              "岗位方向": "Vision science and clinical practice",
-              "说明": "Check the program."
+              "学历段": "Clinical education, including optometric medicine",
+              "岗位方向": "Medical-practitioner route",
+              "说明": "Similar program names do not establish eligibility: check qualifying medical education, practice, examination and registration."
             },
             {
-              "学历段": "Clinical training",
-              "岗位方向": "Examination, prescribing, and referral",
-              "说明": "Supervised."
+              "学历段": "Optometry-related science or technical programs",
+              "岗位方向": "Eye-care technical route",
+              "说明": "Check the specific program and supervised practical arrangements; technical education or a skill certificate does not automatically confer medical-practice credentials."
             },
             {
-              "学历段": "Practice licensing",
-              "岗位方向": "Regional statutory entry",
-              "说明": "Check the validity period."
+              "学历段": "Spectacle refraction skill roles",
+              "岗位方向": "Refraction and related services",
+              "说明": "The occupational standard describes spectacle-refraction prescriptions and vision rehabilitation training, not equivalent drug-prescribing or medical-practice authority."
             },
             {
-              "学历段": "Continuing education",
-              "岗位方向": "Eye disease and technology updates",
-              "说明": "Per regulation."
+              "学历段": "Target job requirements",
+              "岗位方向": "Employer, institution and locality",
+              "说明": "Check actual duties, training, supervision, qualifications and institutional scope separately; a U.S. OD is not an automatic credential conversion."
             }
           ],
           "china_industry_table": [
             {
-              "行业": "Eye clinic",
-              "需求": "Vision examination and referral."
+              "行业": "Medical-institution technical or support roles",
+              "需求": "Participation in examinations, records and services follows credentials, supervision and duties."
             },
             {
-              "行业": "Optometric center",
-              "需求": "Refraction and lens services."
+              "行业": "Optical-service settings",
+              "需求": "Check refraction, dispensing, customer communication, product and aftercare duties for the job."
             },
             {
-              "行业": "Medical institution",
-              "需求": "Eye disease identification and collaboration."
+              "行业": "Medical-practitioner roles",
+              "需求": "Verify medical qualifications, registration, institution and personal scope of practice."
             }
           ],
           "china_intl": "O*NET U.S. occupational tasks｜https://www.onetonline.org/link/details/29-1041.00",
-          "china_name_row": "China wages: broad medical employer industry reference",
-          "china_open": "Chinese positions do not map one-to-one to U.S. 29-1041.00.",
+          "china_name_row": "Mainland pay: industry context and one employer sample",
+          "china_open": "Related mainland roles include spectacle refraction workers and eye-care positions in medical institutions; they are not interchangeable with a U.S. OD. A spectacle-refraction prescription is not a drug prescription or medical-practice credential. Medical diagnosis and treatment require separate checks of registration and institutional and job scope. Verify skill certification, education, medical credentials and employer requirements separately.",
           "china_open_note": "Check region, employer, qualifications, hours, and benefits.",
           "china_ref": "2025 Urban Unit Employment Annual Average Wage Situation｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
           "china_salary_note": {
             "$join": [
-              "Insufficient evidence: nationwide optometrist medians, percentiles, and starting pay were not obtained; the 2025 pre-tax annual averages for health and social work of 146266 yuan for non-private and 75631 yuan for private are only a broad medical employer industry, include other positions and are not this occupation's wage or an individual range, and exclude self-employed individuals and freelancers, self-employment profits, and in-store sales.",
+              "A comparable national occupational median for mainland optometry-related roles was not established. In 2025, annual average employee pay in the urban health and social work industry was RMB 146,266 in non-private units and RMB 75,631 in private units, before tax. Employee averages for the health and social work industry, covering many occupations—not optometrist pay or a personal range. Check the employing unit’s industry classification for optical retail; these figures do not estimate self-employment income or clinic profits.",
               {
                 "$item": "optometrists.china-salary.career-snapshot-primary-locale.5",
                 "block": "china-salary",
@@ -14830,7 +15147,7 @@
             },
             {
               "城市/区间": "Public source coverage",
-              "月薪参考": "Insufficient to support precise wages for this occupation"
+              "月薪参考": "One historical employer listing does not establish a national occupational median."
             },
             {
               "城市/区间": "Usage boundaries",
@@ -14843,7 +15160,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "2025 Urban Unit Employment Annual Average Wage Situation｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
+          "sources_note": "Settings are examples for distinguishing roles, not industry shares or demand forecasts. Pay uses the 2025 NBS tables; qualifications use the occupational standard and cited medical-practice provisions. The Ankang listing is one historical employer sample.",
           "ui": {
             "ai_heading": "Tools and responsibility boundaries",
             "driver_heading": "Influencing factors",
@@ -14888,7 +15205,7 @@
           },
           {
             "指标": "Employment",
-            "数值": "About 45100",
+            "数值": "About 45,100 jobs",
             "说明": "BLS 29-1041.00 precise occupation."
           },
           {
@@ -14898,14 +15215,14 @@
           },
           {
             "指标": "Job openings (annual average)",
-            "数值": "About 2000",
+            "数值": "About 2,000 per year",
             "说明": "Annual average 2000 includes replacements, not a net increase of 4300 or current hiring."
           }
         ],
         "boundary": "Applies only to U.S. 29-1041.00; cannot be converted across countries, substitute for individual offers, or mixed with parent group statistics.",
         "direct_answer": {
           "$join": [
-            "The U.S. 29-1041 precise 2025 median is 136570 U.S. dollars; over 2025—2035 overall 9.5%, an official net increase of 4300, and annual average openings of 2000 including replacements, not AI or individual unemployment.",
+            "Employment is projected to grow 9.5% over 2025–2035, a net increase of about 4,300; 2,000 annual openings include growth and replacement and are not live vacancies or an AI effect.",
             {
               "$item": "optometrists.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -15004,7 +15321,7 @@
         "wage_column_labels": [
           "Wage tier",
           "Annual salary reference",
-          "Monthly equivalent",
+          "Conversion limits",
           "Explanation"
         ],
         "wage_heading": "Wage data",
@@ -15062,7 +15379,7 @@
           }
         ]
       },
-      "definition_block": "Examine the visual system, diagnose and manage eye problems within the scope of practice, prescribe corrective lenses, and provide treatment or medication under local licensing; difficult and surgical needs are referred to an ophthalmologist.",
+      "definition_block": "This page describes U.S. Optometrists, O*NET 29-1041.00: examining the eyes and visual system, diagnosing and managing conditions within state-authorized practice, and prescribing corrective lenses. Medication and some procedural permissions vary by state; care beyond the practitioner’s scope or expertise requires referral.",
       "faq_block": {
         "items": {
           "$item": "optometrists.sources.faq-block.1",
@@ -15078,7 +15395,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "If you are willing to complete optometric professional training, take on examination and prescribing responsibility, and promptly identify diseases that need referral to ophthalmology, you can explore optometrist work; fictional samples can be used to check examination records, eyeglass or contact lens prescriptions, treatment plans, and referral notes.",
+        "summary": "If eye-care work interests you, compare the distinct mainland routes and U.S. OD scope before checking target education, duties and credentials. I/J supports paper-record exploration only.",
         "title": "Optometrist"
       },
       "fit_decision_checklist": {
@@ -15103,7 +15420,7 @@
       },
       "hero": {
         "h1": "Optometrist",
-        "quick_answer": "Examine the visual system, diagnose and manage eye problems within the scope of practice, prescribe corrective lenses, and provide treatment or medication under local licensing; difficult and surgical needs are referred to an ophthalmologist.",
+        "quick_answer": "This page describes U.S. Optometrists, O*NET 29-1041.00: examining the eyes and visual system, diagnosing and managing conditions within state-authorized practice, and prescribing corrective lenses. Medication and some procedural permissions vary by state; care beyond the practitioner’s scope or expertise requires referral.",
         "title": "Optometrist"
       },
       "market_signal_card": {
@@ -15214,68 +15531,68 @@
         ],
         "transitions": [
           {
-            "capability_gaps": "Physician training and surgical scope differ",
-            "shared_capabilities": "Vision examination, prescribing, eye disease identification, patient education, and referral communication",
-            "target_href": "/zh/career/jobs/ophthalmologists-except-pediatric",
+            "capability_gaps": "Check physician education, credentials and surgical training; this is not an automatic job conversion.",
+            "shared_capabilities": "Existing patient-communication and eye-record experience.",
+            "target_href": "/en/career/jobs/ophthalmologists-except-pediatric",
             "target_slug": "ophthalmologists-except-pediatric",
             "target_title": "Ophthalmologist",
-            "transition_distance": "Check training and authorization separately for the target occupation."
+            "transition_distance": "These are experience and training questions to verify, not evidence of an automatic transition."
           },
           {
-            "capability_gaps": "Does not independently diagnose or prescribe",
-            "shared_capabilities": "Vision examination, prescribing, eye disease identification, patient education, and referral communication",
-            "target_href": "/zh/career/jobs/opticians-dispensing",
+            "capability_gaps": "Check dispensing workflows, finished-eyewear verification and local credential requirements.",
+            "shared_capabilities": "Experience with lens information, measurement records and customer explanations.",
+            "target_href": "/en/career/jobs/opticians-dispensing",
             "target_slug": "opticians-dispensing",
             "target_title": "Dispensing optician",
-            "transition_distance": "Check training and authorization separately for the target occupation."
+            "transition_distance": "These are experience and training questions to verify, not evidence of an automatic transition."
           },
           {
-            "capability_gaps": "Does not carry the optometrist's independent practice responsibility",
-            "shared_capabilities": "Vision examination, prescribing, eye disease identification, patient education, and referral communication",
-            "target_href": "/zh/career/jobs/ophthalmic-medical-technicians",
+            "capability_gaps": "Check training, supervision and scope for the intended examinations.",
+            "shared_capabilities": "Experience with history records, equipment and team handovers.",
+            "target_href": "/en/career/jobs/ophthalmic-medical-technicians",
             "target_slug": "ophthalmic-medical-technicians",
             "target_title": "Ophthalmic medical technician",
-            "transition_distance": "Check training and authorization separately for the target occupation."
+            "transition_distance": "These are experience and training questions to verify, not evidence of an automatic transition."
           },
           {
-            "capability_gaps": "Primarily assists the physician",
-            "shared_capabilities": "Vision examination, prescribing, eye disease identification, patient education, and referral communication",
-            "target_href": "/zh/career/jobs/ophthalmic-medical-technologists",
+            "capability_gaps": "Check training for the specific imaging, instructional or surgical-assistance tasks.",
+            "shared_capabilities": "Experience with eye-examination records, equipment and collaboration.",
+            "target_href": "/en/career/jobs/ophthalmic-medical-technologists",
             "target_slug": "ophthalmic-medical-technologists",
             "target_title": "Ophthalmic medical technologist",
-            "transition_distance": "Check training and authorization separately for the target occupation."
+            "transition_distance": "These are experience and training questions to verify, not evidence of an automatic transition."
           },
           {
-            "capability_gaps": "A dedicated rehabilitation direction",
-            "shared_capabilities": "Vision examination, prescribing, eye disease identification, patient education, and referral communication",
-            "target_href": "/zh/career/jobs/orthoptists",
+            "capability_gaps": "Check specialist training in binocular assessment and nonsurgical management.",
+            "shared_capabilities": "Experience with vision information and patient explanations.",
+            "target_href": "/en/career/jobs/orthoptists",
             "target_slug": "orthoptists",
-            "target_title": "Vision therapist",
-            "transition_distance": "Check training and authorization separately for the target occupation."
+            "target_title": "Orthoptist",
+            "transition_distance": "These are experience and training questions to verify, not evidence of an automatic transition."
           },
           {
-            "capability_gaps": "Production rather than diagnosis",
-            "shared_capabilities": "Vision examination, prescribing, eye disease identification, patient education, and referral communication",
-            "target_href": "/zh/career/jobs/ophthalmic-laboratory-technicians",
+            "capability_gaps": "Check production equipment, processing, inspection and safety training.",
+            "shared_capabilities": "Experience reading prescription specifications and checking product quality.",
+            "target_href": "/en/career/jobs/ophthalmic-laboratory-technicians",
             "target_slug": "ophthalmic-laboratory-technicians",
             "target_title": "Ophthalmic laboratory technician",
-            "transition_distance": "Check training and authorization separately for the target occupation."
+            "transition_distance": "These are experience and training questions to verify, not evidence of an automatic transition."
           },
           {
-            "capability_gaps": "Physician training and surgical scope differ",
-            "shared_capabilities": "Vision examination, prescribing, eye disease identification, patient education, and referral communication",
-            "target_href": "/zh/career/jobs/ophthalmologists-except-pediatric",
+            "capability_gaps": "OD or technical education does not substitute for physician education; verify the target jurisdiction’s medical credentials and surgical training.",
+            "shared_capabilities": "First verify existing education, physician qualifications and registration.",
+            "target_href": "/en/career/jobs/ophthalmologists-except-pediatric",
             "target_slug": "ophthalmologists-except-pediatric",
             "target_title": "Ophthalmologist",
-            "transition_distance": "Check training and authorization separately for the target occupation."
+            "transition_distance": "A separate check of target credentials or tasks, not a second opportunity count."
           },
           {
-            "capability_gaps": "Does not independently diagnose or prescribe",
-            "shared_capabilities": "Vision examination, prescribing, eye disease identification, patient education, and referral communication",
-            "target_href": "/zh/career/jobs/opticians-dispensing",
+            "capability_gaps": "Check the target store’s frame-adjustment, aftercare and product-service duties.",
+            "shared_capabilities": "Review experience with client measurements, prescription specifications and finished-eyewear verification.",
+            "target_href": "/en/career/jobs/opticians-dispensing",
             "target_slug": "opticians-dispensing",
             "target_title": "Dispensing optician",
-            "transition_distance": "Check training and authorization separately for the target occupation."
+            "transition_distance": "A separate check of target credentials or tasks, not a second opportunity count."
           }
         ]
       },
@@ -15293,7 +15610,7 @@
             "alternate_value": null,
             "label": "Tasks",
             "secondary_value": null,
-            "value": "Examine the visual system, diagnose and manage eye problems within the scope of practice, prescribe corrective lenses, and provide treatment or medication under local licensing; difficult and surgical needs are referred to an ophthalmologist."
+            "value": "This page describes U.S. Optometrists, O*NET 29-1041.00: examining the eyes and visual system, diagnosing and managing conditions within state-authorized practice, and prescribing corrective lenses. Medication and some procedural permissions vary by state; care beyond the practitioner’s scope or expertise requires referral."
           },
           {
             "alternate_value": null,
@@ -15334,222 +15651,222 @@
               "type": "prose"
             },
             "id": "riasec",
-            "label": "Occupational interests",
-            "question": "What abilities and ways of working are needed to be an optometrist?",
+            "label": "Exploration interests",
+            "question": "Which eye-care tasks do I want to learn about?",
             "signals": {
               "$item": "optometrists.fit.riasec-fit-block.1",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "Interest assessments do not prove ability or qualification for the practice responsibility of examination and diagnosis, lens prescribing, medication, and referral."
+            "watchout": "The assessment explores interests; it does not verify clinical skills or qualifications associated with these questions."
           },
           {
-            "answer": "Check history, examination eye laterality, original results, and prescription records, and observe whether conflicts and over-inference are found.",
+            "answer": "Observe fictional-record review habits without treating a few detected conflicts as evidence of clinical ability.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "View the Holland interest assessment",
-            "evidence_level": "Editorial exploration suggestions based on occupational tasks; the validity of this page's self-assessment in predicting performance or safety was not obtained.",
+            "evidence_level": "Editorial exploration questions, not validity evidence for predicting clinical performance, safety or credentials.",
             "id": "big-five",
-            "label": "Detail abilities",
-            "question": "What abilities and ways of working are needed to be an optometrist?",
+            "label": "Record-review habits",
+            "question": "How willing am I to review record details?",
             "signals": {
               "$item": "optometrists.fit.personality-fit-block.2",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "Interest assessments do not prove ability or qualification for the practice responsibility of examination and diagnosis, lens prescribing, medication, and referral."
+            "watchout": "The assessment explores interests; it does not verify clinical skills or qualifications associated with these questions."
           },
           {
-            "answer": "Facing eye pain, sudden vision loss, or unclear authority, practice keeping unresolved questions and escalating per organizational procedures.",
+            "answer": "Ask about examinations, supervision, credentials and referral requirements; assessment results do not replace professional judgment.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "View the Holland interest assessment",
-            "evidence_level": "Editorial exploration suggestions based on occupational tasks; the validity of this page's self-assessment in predicting performance or safety was not obtained.",
+            "evidence_level": "Editorial exploration questions, not validity evidence for predicting clinical performance, safety or credentials.",
             "id": "mbti",
-            "label": "Risk handling",
-            "question": "What abilities and ways of working are needed to be an optometrist?",
+            "label": "Responsibility questions",
+            "question": "Which responsibility boundaries should I ask a professional about?",
             "signals": {
               "$item": "optometrists.fit.personality-fit-block.3",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "Interest assessments do not prove ability or qualification for the practice responsibility of examination and diagnosis, lens prescribing, medication, and referral."
+            "watchout": "The assessment explores interests; it does not verify clinical skills or qualifications associated with these questions."
           },
           {
-            "answer": "Compare whether clinical judgment, patient education, long-term follow-up, and referral fit your work values.",
+            "answer": "Learn about explanation, listening and continuing communication without claiming that a personality guarantees suitability.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "View the Holland interest assessment",
-            "evidence_level": "Editorial exploration suggestions based on occupational tasks; the validity of this page's self-assessment in predicting performance or safety was not obtained.",
+            "evidence_level": "Editorial exploration questions, not validity evidence for predicting clinical performance, safety or credentials.",
             "id": "enneagram",
-            "label": "Work values",
-            "question": "What abilities and ways of working are needed to be an optometrist?",
+            "label": "Service values",
+            "question": "Would I like to learn about patient education and follow-up?",
             "signals": {
               "$item": "optometrists.fit.riasec-fit-block.4",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "Interest assessments do not prove ability or qualification for the practice responsibility of examination and diagnosis, lens prescribing, medication, and referral."
+            "watchout": "The assessment explores interests; it does not verify clinical skills or qualifications associated with these questions."
           },
           {
-            "answer": "Check whether patient contact, fine examinations, repeated record verification, and collaborative shifts suit you.",
+            "answer": "Compare duties and schedules in clinics, medical institutions and optical retail instead of choosing by title alone.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "View the Holland interest assessment",
-            "evidence_level": "Editorial exploration suggestions based on occupational tasks; the validity of this page's self-assessment in predicting performance or safety was not obtained.",
+            "evidence_level": "Editorial exploration questions, not validity evidence for predicting clinical performance, safety or credentials.",
             "id": "iq",
-            "label": "Scenario preferences",
-            "question": "What abilities and ways of working are needed to be an optometrist?",
+            "label": "Work settings",
+            "question": "Which settings should I learn about firsthand?",
             "signals": {
               "$item": "optometrists.fit.personality-fit-block.5",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "Interest assessments do not prove ability or qualification for the practice responsibility of examination and diagnosis, lens prescribing, medication, and referral."
+            "watchout": "The assessment explores interests; it does not verify clinical skills or qualifications associated with these questions."
           },
           {
-            "answer": "Along the existing I/J problems, verify the eye laterality reasoning and authorization gaps, and do not diagnose, fabricate entries, or sign prescriptions on behalf of others.",
+            "answer": "Use the original I/J inputs to review laterality, inference and authorization gaps; do not alter real records or sign prescriptions.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "View the Holland interest assessment",
-            "evidence_level": "Editorial exploration suggestions based on occupational tasks; the validity of this page's self-assessment in predicting performance or safety was not obtained.",
+            "evidence_level": "Editorial exploration questions, not validity evidence for predicting clinical performance, safety or credentials.",
             "id": "eq",
-            "label": "Fictional cases",
-            "question": "What abilities and ways of working are needed to be an optometrist?",
+            "label": "Paper reflection",
+            "question": "Which questions remain after the I/J exercise?",
             "signals": {
               "$item": "optometrists.fit.personality-fit-block.6",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "Interest assessments do not prove ability or qualification for the practice responsibility of examination and diagnosis, lens prescribing, medication, and referral."
+            "watchout": "The assessment explores interests; it does not verify clinical skills or qualifications associated with these questions."
           }
         ],
         "boundary": "Interest assessments do not prove ability or qualification for the practice responsibility of examination and diagnosis, lens prescribing, medication, and referral.",
-        "direct_answer": "Can integrate vision, intraocular pressure, history, and eye examinations, and does not ignore dangerous symptoms because a single measurement is normal.",
+        "direct_answer": "Explore interests and work settings, then check professional training and credentials; an interest score does not assess clinical capability.",
         "directions": [
           {
             "direction": "Ophthalmologist",
-            "fit_signals": "Likes medicine and surgery",
+            "fit_signals": "Interest in learning about physician education and surgical work.",
             "target": {
               "href": "/en/career/jobs/ophthalmologists-except-pediatric",
               "slug": "ophthalmologists-except-pediatric",
               "title": "Ophthalmologist"
             },
-            "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
+            "watchouts": "Check physician education, credentials and surgical training; this is not an automatic job conversion."
           },
           {
             "direction": "Dispensing optician",
-            "fit_signals": "Likes dispensing services",
+            "fit_signals": "Interest in lenses, frames, measurement and customer service.",
             "target": {
               "href": "/en/career/jobs/opticians-dispensing",
               "slug": "opticians-dispensing",
               "title": "Dispensing optician"
             },
-            "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
+            "watchouts": "Check dispensing workflows, finished-eyewear verification and local credential requirements."
           },
           {
             "direction": "Ophthalmic medical technician",
-            "fit_signals": "Likes clinical assistance",
+            "fit_signals": "Interest in examination-support work in a clinical team.",
             "target": {
               "href": "/en/career/jobs/ophthalmic-medical-technicians",
               "slug": "ophthalmic-medical-technicians",
               "title": "Ophthalmic medical technician"
             },
-            "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
+            "watchouts": "Check training, supervision and scope for the intended examinations."
           },
           {
             "direction": "Ophthalmic medical technologist",
-            "fit_signals": "Likes imaging technology",
+            "fit_signals": "Interest in ophthalmic imaging equipment and technical instruction.",
             "target": {
               "href": "/en/career/jobs/ophthalmic-medical-technologists",
               "slug": "ophthalmic-medical-technologists",
               "title": "Ophthalmic medical technologist"
             },
-            "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
+            "watchouts": "Check training for the specific imaging, instructional or surgical-assistance tasks."
           },
           {
-            "direction": "Vision therapist",
-            "fit_signals": "Likes visual function training",
+            "direction": "Orthoptist",
+            "fit_signals": "Interest in binocular vision and nonsurgical management.",
             "target": {
               "href": "/en/career/jobs/orthoptists",
               "slug": "orthoptists",
-              "title": "Vision therapist"
+              "title": "Orthoptist"
             },
-            "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
+            "watchouts": "Check specialist training in binocular assessment and nonsurgical management."
           },
           {
             "direction": "Ophthalmic laboratory technician",
-            "fit_signals": "Likes precision manufacturing",
+            "fit_signals": "Interest in precision manufacturing and product inspection.",
             "target": {
               "href": "/en/career/jobs/ophthalmic-laboratory-technicians",
               "slug": "ophthalmic-laboratory-technicians",
               "title": "Ophthalmic laboratory technician"
             },
-            "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
+            "watchouts": "Check production equipment, processing, inspection and safety training."
           }
         ],
         "heading": "Who is suited to be an optometrist?",
         "questions": [
           {
-            "answer": "Verify with fictional samples and supervisory feedback; real work depends on qualification authorization.",
-            "question": "Am I willing to perform history taking?"
+            "answer": "Separate documentation questions from clinical judgment; fictional material does not establish an actual patient history.",
+            "question": "What would I like to learn about history taking?"
           },
           {
-            "answer": "Verify with fictional samples and supervisory feedback; real work depends on qualification authorization.",
-            "question": "Am I willing to perform vision examinations?"
+            "answer": "Learn about equipment, patient contact and documentation, then check training routes.",
+            "question": "Which aspects of vision-testing work interest me?"
           },
           {
-            "answer": "Verify with fictional samples and supervisory feedback; real work depends on qualification authorization.",
-            "question": "Am I willing to perform eye examinations?"
+            "answer": "Ask the target institution about permitted tasks, supervision and student participation.",
+            "question": "Which examinations require specific training and supervision?"
           },
           {
-            "answer": "Verify with fictional samples and supervisory feedback; real work depends on qualification authorization.",
-            "question": "Am I willing to perform result judgment?"
+            "answer": "Check professional coursework and supervised practice; a paper exercise does not establish diagnostic capability.",
+            "question": "What professional learning does interpretation require?"
           },
           {
-            "answer": "Verify with fictional samples and supervisory feedback; real work depends on qualification authorization.",
-            "question": "Am I willing to perform prescription services?"
+            "answer": "Verify jurisdiction, personal credentials and the specific procedure rather than inferring authority from a title.",
+            "question": "How is prescribing authority checked for the target role?"
           },
           {
-            "answer": "Verify with fictional samples and supervisory feedback; real work depends on qualification authorization.",
-            "question": "Am I willing to perform treatment and referral?"
+            "answer": "Ask about actual institutional responsibilities; this page does not decide patient management.",
+            "question": "When do clinicians need to refer to other professionals?"
           },
           {
-            "answer": "Verify with fictional samples and supervisory feedback; real work depends on qualification authorization.",
-            "question": "Am I willing to perform follow-up education?"
+            "answer": "Learn about explaining approved information, listening to questions and follow-up communication.",
+            "question": "What communication tasks occur in education and follow-up?"
           },
           {
-            "answer": "Verify with fictional samples and supervisory feedback; real work depends on qualification authorization.",
-            "question": "Can I handle missed serious eye disease?"
+            "answer": "Ask about education, supervision and review rather than using self-report to claim capability to manage missed diagnosis.",
+            "question": "What should I ask professionals about missed-diagnosis risks?"
           },
           {
-            "answer": "Verify with fictional samples and supervisory feedback; real work depends on qualification authorization.",
-            "question": "Can I handle prescription errors?"
+            "answer": "Retain the original left/right-eye inputs and single finding, then list conflicts and unsupported inference.",
+            "question": "How can I identify record or inference gaps in I?"
           },
           {
-            "answer": "Verify with fictional samples and supervisory feedback; real work depends on qualification authorization.",
-            "question": "Can I handle overstepping medication?"
+            "answer": "List missing information and questions for authorized review without signing or choosing medication.",
+            "question": "How can I mark unknown authority and signatures in J?"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
         "signals": [
           {
-            "body": "Check symptoms, medications, prior eye disease, and risks.",
+            "body": "Are you interested in analyzing examination information, explaining eye-health matters and precision-equipment work? Interests support exploration, not clinical-competence assessment.",
             "id": "fit",
-            "label": "History taking",
+            "label": "Interest",
             "tone": "positive"
           },
           {
-            "body": "Measure distance and near vision, refraction, and binocular coordination.",
+            "body": "Ask professionals about actual training, supervision and responsibilities.",
             "id": "caution",
-            "label": "Vision examination",
+            "label": "Questions to verify",
             "tone": "caution"
           },
           {
-            "body": "Observe indicators such as the anterior segment, fundus, and intraocular pressure.",
+            "body": "Use this page’s fictional I/J records without real patient information.",
             "id": "experiment",
-            "label": "Eye examination",
+            "label": "Optional paper exploration",
             "tone": "action"
           }
         ],
@@ -15557,42 +15874,42 @@
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "usage": "Occupational context for exploration questions, not evidence of clinical validity for this self-reflection."
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "usage": "Occupational context for exploration questions, not evidence of clinical validity for this self-reflection."
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "usage": "Occupational context for exploration questions, not evidence of clinical validity for this self-reflection."
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "usage": "Occupational context for exploration questions, not evidence of clinical validity for this self-reflection."
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "usage": "Occupational context for exploration questions, not evidence of clinical validity for this self-reflection."
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "usage": "Occupational context for exploration questions, not evidence of clinical validity for this self-reflection."
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "usage": "Occupational context for exploration questions, not evidence of clinical validity for this self-reflection."
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "usage": "Occupational context for exploration questions, not evidence of clinical validity for this self-reflection."
           }
         ]
       },
@@ -15605,11 +15922,11 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Practice referral with fictional optometry cases",
+        "label": "Explore career interests",
         "source_page_type": "Career information page",
         "subject_key": "optometrists",
         "subject_kind": "Optometrist",
-        "target_action": "Use public teaching cases to map vision examination, prescribing, and referral boundaries; do not diagnose or administer medication to real patients",
+        "target_action": "Explore occupational interests; this does not assess clinical competence or confer practice credentials",
         "test_slug": "holland-career-interest-test-riasec"
       },
       "responsibilities_block": {
@@ -15619,23 +15936,29 @@
         "type": "list"
       },
       "riasec_fit_block": {
-        "fit_interest": "Can integrate vision, intraocular pressure, history, and eye examinations, and does not ignore dangerous symptoms because a single measurement is normal.",
-        "interest": "Can integrate vision, intraocular pressure, history, and eye examinations, and does not ignore dangerous symptoms because a single measurement is normal.",
+        "fit_interest": "Are you interested in analyzing examination information, explaining eye-health matters and precision-equipment work? Interests support exploration, not clinical-competence assessment.",
+        "interest": "Are you interested in analyzing examination information, explaining eye-health matters and precision-equipment work? Interests support exploration, not clinical-competence assessment.",
         "riasec": "Occupational interests can be used for exploration; scales do not prove position ability or authorization.",
-        "riasec_short": "Vision examination, prescribing, and referral"
+        "riasec_short": "Information analysis, service communication and precision work"
       },
       "source_card": {
         "eeat_signals": {
-          "author": {
-            "$item": "optometrists.sources.boundary-notice.2",
-            "block": "sources",
-            "copy_key": "career.item.boundary-notice",
-            "type": "prose"
-          },
+          "author": "FermatMind Editorial",
           "source": "O*NET precise tasks and BLS2025 wage percentiles; BLS industry wages, the OD and state licensing overview, and the 2025—2035 single-item projection; NBS health and social work broad industry background.",
-          "updated_at": "2026-10-12"
+          "updated_at": "2026-11-09"
         },
-        "note": "The evidence supports only scope-limited judgments about optometrists in the labeled market and period, and does not constitute a guarantee of personal income, hiring, or fit.",
+        "note": {
+          "$join": [
+            "The evidence supports only scope-limited judgments about optometrists in the labeled market and period, and does not constitute a guarantee of personal income, hiring, or fit.",
+            {
+              "$item": "optometrists.sources.boundary-notice.2",
+              "block": "sources",
+              "copy_key": "career.item.boundary-notice",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
+        },
         "secondary_links": [
           {
             "href": {
@@ -15787,7 +16110,7 @@
         "market": "United States",
         "measure": "official occupation code",
         "occupation_scope": "Optometrists exact occupation",
-        "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+        "period": "O*NET 2026 occupational profile; specified sections checked 2026-11-09",
         "source_refs": [
           "onet-details"
         ]
@@ -15798,7 +16121,7 @@
         "fact_id": "cn-wage-nonprivate",
         "market": "Chinese mainland",
         "measure": "Annual average wage for urban non-private health and social work",
-        "occupation_scope": "Broad medical employer industry only; includes other positions and is not optometrist wages or an individual range; self-employment profits and in-store sales are excluded",
+        "occupation_scope": "Employee averages for the health and social work industry, covering many occupations—not optometrist pay or a personal range. Check the employing unit’s industry classification for optical retail; these figures do not estimate self-employment income or clinic profits.",
         "period": "2025 wages",
         "source_refs": [
           "nbs-wages"
@@ -15810,7 +16133,7 @@
         "fact_id": "cn-wage-private",
         "market": "Chinese mainland",
         "measure": "Annual average wage for urban private health and social work",
-        "occupation_scope": "Broad medical employer industry only; includes other positions and is not optometrist wages or an individual range; self-employment profits and in-store sales are excluded",
+        "occupation_scope": "Employee averages for the health and social work industry, covering many occupations—not optometrist pay or a personal range. Check the employing unit’s industry classification for optical retail; these figures do not estimate self-employment income or clinic profits.",
         "period": "2025 wages",
         "source_refs": [
           "nbs-wages"
@@ -15877,13 +16200,13 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
+        "derivation": "The previous 42% editorial estimate is withdrawn: the available sources do not validate the 25/50/50 ratings for three clinical tasks. No replacement score is assigned.",
+        "display_value": "Quantitative evidence unavailable",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Optometrist",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "measure": "Status of quantitative task-level AI evidence",
+        "occupation_scope": "This occupation; task descriptions, software mentions in job postings and employment projections do not establish clinical AI performance",
+        "period": "Reviewed 2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -15892,8 +16215,8 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
@@ -15931,7 +16254,7 @@
         "availability": "available",
         "fact_ref": "cn-wage-nonprivate",
         "key": "china_pay",
-        "label": "Broad medical industry · non-private"
+        "label": "Health/social work · non-private"
       }
     ]
   },
@@ -15946,10 +16269,10 @@
       "text": "Optometrist: work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "6a592297b30386c912e6ab70c6d47e4d5ec2da8d49e9862e6ba841876f5a1657",
+  "source_content_sha256": "3ca85dc4cb5578aa938fc1abfe16e65ee1aadd2797d0c49c94c429b5e0c9ac3a",
   "subject": {
     "canonical_slug": "optometrists",
     "name": "Optometrist",
-    "summary": "Examine the visual system, diagnose and manage eye problems within the scope of practice, prescribe corrective lenses, and provide treatment or medication under local licensing; difficult and surgical needs are referred to an ophthalmologist."
+    "summary": "This page describes U.S. Optometrists, O*NET 29-1041.00: examining the eyes and visual system, diagnosing and managing conditions within state-authorized practice, and prescribing corrective lenses. Medication and some procedural permissions vary by state; care beyond the practitioner’s scope or expertise requires referral."
   }
 }

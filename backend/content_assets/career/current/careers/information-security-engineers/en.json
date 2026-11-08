@@ -7205,14 +7205,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signals | This page corresponds to O*NET-SOC 15-1299.05 Information Security Engineers. The official description is developing and overseeing the implementation of information security programs and policies, building, maintaining and upgrading security technologies such as firewalls, designing and implementing security controls to identify vulnerabilities and protect digital files and electronic infrastructure, monitoring and responding to security breaches and conducting forensic investigations, and possibly overseeing the assessment of information security systems. This occupation is marked Bright Outlook. The core deliverable is not blocking everything, but converting assets, threats and business constraints into verifiable security controls, monitoring and recovery plans. Risks come from scanning or accessing without authorization, deploying firewall or detection rules without verification, personal information in incident records, and treating tool output as authorization or a forensic conclusion. O*NET’s U.S. wage and employment figures refer to the broader Computer Occupations, All Other group (15-1299), not separate estimates for Information Security Engineers (15-1299.05). The group’s 2025 median annual wage was $116,580 and employment was 471,200; projected growth for 2025–2035 is 5%, with 27,000 annual openings on average including growth and replacement needs. If it is hard for you to bear emergency pace, cross-team conflict and strict authorization constraints, treat these as real costs that need serious weighing."
+              "Information security engineers develop security policies, build and maintain protective technologies, and design and evaluate controls for systems and data. Their work can include monitoring, incident response and forensic investigation; actual duties and authority depend on the job. U.S. wages and employment below describe the broader 15-1299 group, not a separately measured engineer occupation."
             ]
           },
           "id": "information-security-engineers.quick-decision.fermat-decision-card.1",
           "source_refs": [
             "onet-exact",
-            "source-pack-onet-localwages",
-            "onet-parent-trends"
+            "onet-parent-summary"
           ],
           "type": "prose"
         },
@@ -7221,12 +7220,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Taking on judgment | True fit comes from whether you can do three things at once in the same job: do the security controls solidly (confirm assets and threats, design controls, verify before deployment, monitor and respond, debrief and improve, producing reviewable control and incident records); keep authorization and compliance under control (scanning and access scope, change approval and rollback, personal information processing boundaries, evidence preservation, executed per jurisdiction and institutional rules); and bear a definable position responsibility (be responsible for your own design and conclusions, and request or hand over production changes, data compliance judgments and incident grading per the authorization chain). It is suggested to test this with one verifiable experience (completing a completely fictional security engineering task package and debriefing record), rather than relying only on the conclusions of an interest questionnaire."
+              "The work connects technical controls with business needs: explain the asset and risk, document the proposed control and its checks, and communicate unresolved issues to the authorized decision-maker. A technical finding does not itself authorize access or a production change."
             ]
           },
           "id": "information-security-engineers.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "bls-analysts"
+            "onet-exact"
           ],
           "type": "prose"
         },
@@ -7235,12 +7234,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "To judge whether you suit information security engineers, first use public or simulated material for one verifiable drill: set up a completely fictional security engineering scenario (for example designing access control and monitoring rules for a set of fictional assets), and write out the process from confirming scope and authorization, identifying assets and threats, designing and testing controls, deployment and monitoring, response and recovery, to debriefing and recording, marking each step's check points and possible problems (unauthorized scanning or data access, changes going live without testing, personal information in logs and images, an incomplete evidence chain, making an incident conclusion beyond authority). When done, check: whether the authorization scope, change and rollback, personal information boundaries and evidence integrity are treated as non-omittable items; whether production changes or compliance judgments beyond personal authority are written as requests or handovers; and whether the process is kept as a reviewable record. All material must be fictional; do not scan real networks or access real data."
+              "Fictional access-control and evidence-checking exercise. Inputs: WEB-A is a public directory, API-B an internal service and LOG-C an audit-record store. Business rules: visitors may access WEB-A only; WEB-A may call API-B; only a designated operations role may read LOG-C. The approved fictional change window is 20:00–20:30. Review on paper only. Records: 09:00 visitor→WEB-A allowed; 09:02 visitor→API-B denied; 09:05 an unknown role requests LOG-C, with no result recorded. Draft proposal: allow visitors direct access to API-B; execute at 19:55; omit the rollback owner and verification method; describe the 09:05 record as confirmed data leakage. Produce an access matrix, three paper tests with expected results, a timeline separating facts from inferences, and a list of unknowns and approval questions. Reference: direct visitor access violates the stated API-B rule; 19:55 is outside the given window; rollback ownership and verification are unspecified; the 09:05 record proves neither successful access nor leakage. A denied request is not a successful intrusion. Do not invent missing results. These assets, rules and times are editorial inputs, not legal requirements or a production procedure. Do not scan, access or change real systems. This exercise explores interest in careful checking; it does not establish job competence or confer authority."
             ]
           },
           "id": "information-security-engineers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "bls-analysts"
+            "onet-exact"
           ],
           "type": "prose"
         },
@@ -7249,12 +7248,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fit signals | The O*NET 15-1299.05 work activities are mainly using computers, getting information, identifying objects and changes in events, updating and applying knowledge, analyzing data, and communicating with supervisors and peers. If you are willing to keep investigating assets, threats and technical evidence, can accurately record assumptions, tests, deviations and remediation results, and deliver stably under authorization and change constraints, these daily demands are closer to your way of working; interest and personality tools are used only to design exercises and cannot judge hiring qualifications or performance."
+              "Consider whether you enjoy tracing an unexpected access request, checking a configuration against a stated rule, and explaining what a record does and does not prove. These interests may warrant further exploration; a correct paper answer does not establish engineering competence, readiness for on-call work or hiring suitability."
             ]
           },
           "id": "information-security-engineers.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "bls-analysts"
+            "onet-exact"
           ],
           "type": "prose"
         }
@@ -7277,13 +7276,7 @@
           "id": "information-security-engineers.profile.definition-block.1",
           "source_refs": [
             "onet-exact",
-            "source-pack-onet-custom",
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "source-pack-onet-localcert",
-            "source-pack-onet-localwages",
-            "source-pack-onet-summary"
+            "onet-parent-summary"
           ],
           "type": "prose"
         },
@@ -7391,7 +7384,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The work loop is judged in four steps: input check (confirm assets, threats and authorization scope) → task limitation (design and monitor only within the known scope) → execution and recording (complete control deployment and verification per standards and leave a trail) → review and escalation (stop immediately and report anomalies, out-of-authority access and production changes). The loop holds only if authorization, changes and versions are verifiable, not if only a tool run succeeded once."
+              "Check the actual duties and authority before acting. Do not access systems or make changes without authorization. For an anomaly or change that exceeds authority or meets the institution’s pre-agreed stop conditions, pause the affected step and escalate through the designated route; do not treat every normal approved change as a reason to stop."
             ]
           },
           "id": "information-security-engineers.profile.career-quick-answers-block.9",
@@ -7472,12 +7465,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Security manager direction | The core output is security governance, budget and risk acceptance, with responsibility for organizational security objectives. This occupation focuses on security architecture, control engineering and technical implementation; the authorization level and responsibility scope differ, and sharing tools does not mean sharing responsibility."
+              "Directs organizational security, including physical security and the safety of people and facilities. O*NET’s old 11-9199.07 code is retired; the current profile is 11-3013.01. This is not automatically a cybersecurity-management role."
             ]
           },
           "id": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-exact"
+            "review-neighbor-managers"
           ],
           "type": "prose"
         },
@@ -7486,12 +7479,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Computer and information systems manager direction | The core output is coordinating organization-level IT resources, systems and project delivery. This occupation focuses on network and system protection, monitoring and forensics; the management scope and assessment objects differ and cannot be interchanged by job title alone."
+              "Directs IT operations, staff, resources and projects, including budgets and system planning; management responsibility extends beyond one security control."
             ]
           },
           "id": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-exact"
+            "review-neighbor-it-managers"
           ],
           "type": "prose"
         },
@@ -7500,12 +7493,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Security management specialist direction | The core output leans toward security policy, control and compliance coordination. This occupation places more emphasis on control design, deployment verification, and technical evidence from logs and vulnerabilities; the evidence types and authorization boundaries differ and must be checked separately."
+              "Assesses physical security and staff/facility safety and designs related systems and processes; not simply another title for digital security engineering."
             ]
           },
           "id": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-exact"
+            "review-neighbor-specialists"
           ],
           "type": "prose"
         },
@@ -7514,12 +7507,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Computer systems analyst direction | The core output is improving system processes and efficiency and bridging business and IT. This occupation takes security risk and protective controls as its main deliverable; the basis for judgment and the responsibility boundary differ and the two cannot be applied to each other."
+              "Analyzes business and computing needs, integrates systems and improves workflows; the objective is broader than information-security controls."
             ]
           },
           "id": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "onet-exact"
+            "review-neighbor-systems"
           ],
           "type": "prose"
         }
@@ -7551,12 +7544,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "No measured generative AI adoption rate, productivity or net job effect was obtained for this precise occupation; material summarization, comparison and drafting for security control design, deployment verification, monitoring and investigation are editorial trial candidates and require checking the original evidence, authority and actual effects, with no substitution probability or timetable given. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "This page has not established verifiable occupation-specific evidence for task-level AI effects, so it provides no quantitative impact score. Organizing fictional records, describing configuration differences and drafting reports are proposed evaluation scenarios, not evidence of operational security effectiveness, adoption, time savings or job loss."
             ]
           },
           "id": "information-security-engineers.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "nist-csf"
+            "onet-exact",
+            "ilo-genai",
+            "review-nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -7607,12 +7602,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First check the inputs, versions and responsibility for security control design, deployment verification, monitoring and investigation, then evaluate tools in an authorized environment; there is no evidence of general efficiency gains or irreplaceability."
+              "Optionally compare a proposed draft against the supplied WEB-A/API-B/LOG-C inputs. Check every claim against its source, distinguish unknowns, and evaluate performance before considering any real authorized use. This page has established no time-saving or security outcome."
             ]
           },
           "id": "information-security-engineers.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "nist-csf"
+            "review-nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -7635,12 +7630,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check the original logs, assets and network system status, and review against actual change, preservation and information handling duties; unrelated electrical systems are not included."
+              "Check source logs, assets and network/system state. Verify the actual authorization, change, evidence-handling and information-processing responsibilities."
             ]
           },
           "id": "information-security-engineers.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "nist-csf"
+            "onet-exact"
           ],
           "type": "prose"
         }
@@ -7702,13 +7697,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The AI task score is an editorial estimate, not a measured adoption rate or pay effect. Wage statistics do not establish AI-caused pay changes, and the score does not predict individual earnings."
+              "No occupation-specific AI wage effect has been established. The paper scenarios above do not predict pay, hiring or job losses."
             ]
           },
           "id": "information-security-engineers.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "source-fermatmind-ai-rubric",
-            "cn-enterprise-wages-2025"
+            "review-nist-ai-rmf"
           ],
           "type": "prose"
         }
@@ -7896,7 +7890,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Trial action | Use a completely fictional security engineering task package for one drill: design access control and monitoring rules for fictional assets, write test and deployment verification records, and give an incident timeline and escalation record; test with an observable deliverable rather than relying only on an interest questionnaire."
+              "Use the supplied WEB-A/API-B/LOG-C exercise to produce an access matrix, three paper tests, a fact/inference timeline and questions for review. Compare with the reference; do not describe tests or changes as executed."
             ]
           },
           "id": "information-security-engineers.fit.riasec-fit-block.5",
@@ -8004,7 +7998,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Evidence and record risk | Trigger: an incomplete timeline, version loss of control, or unverified remediation. Consequence: may cause misjudgment, unclear responsibility or unusable forensic conclusions. Control: keep the original records and change trails, distinguish facts from inferences, and stop and escalate on anomalies. Boundary: the division of responsibility and incident grading follow institutional rules and the authorization chain."
+              "Evidence and record risks"
             ]
           },
           "id": "information-security-engineers.risk.career-risk-cards.4",
@@ -8045,7 +8039,7 @@
           },
           "id": "information-security-engineers.path.career-path-block.1",
           "source_refs": [
-            "mohrss-standard",
+            "onet-exact",
             "nist-nice",
             "nist-ssdf"
           ],
@@ -8056,12 +8050,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The current O*NET education survey shows 47% bachelor's, 16% postsecondary non-degree certificate and 11% some college no degree; Job Zone4 is an occupational group preparation description and does not set a uniform individual bachelor threshold or training period. First check the target position's tasks, experience, supervision and production authority."
+              "O*NET respondents reported entry education requirements including a bachelor’s degree (47%), a postsecondary certificate (16%) and some college without a degree (11%). Job Zone 4 describes preparation across a group of occupations, not a uniform individual degree or training-duration requirement. Check the actual vacancy requirements."
             ]
           },
           "id": "information-security-engineers.path.career-path-block.2",
           "source_refs": [
-            "mohrss-standard"
+            "onet-exact"
           ],
           "type": "prose"
         },
@@ -8070,12 +8064,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Specific jurisdiction requirements | On the US side, O*NET preparation information represents the typical path combined with position training; position entry, cybersecurity obligations and personal information processing requirements in mainland China are governed by the Cybersecurity Law, the Personal Information Protection Law and institutional rules and must be checked separately and cannot be applied to each other."
+              "For mainland China, check the specific job, applicable Cybersecurity Law and Personal Information Protection Law duties, and organizational authorization. The Cybersecurity Law applies to networks in China; Article 23 sets operator protection obligations. PIPL Articles 4, 6 and 13 address personal-information scope, necessary/minimal processing and lawful bases; consent is not the only lawful basis. These are legal-context references, not a universal individual license or a complete compliance assessment. U.S. job requirements must be checked separately."
             ]
           },
           "id": "information-security-engineers.path.career-path-block.3",
           "source_refs": [
-            "mohrss-standard"
+            "prc-cyber-law",
+            "prc-pipl",
+            "review-cyber-amendment"
           ],
           "type": "prose"
         },
@@ -8084,12 +8080,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education, training, certificates, hiring and production authority are separate; the Chinese data security engineering technical personnel standard is an adjacent evaluation reference and not a unified license, and this round's access to the original PDF was unsuccessful, so the specific content is retained pending verification."
+              "Separate education, training, exams, hiring and production authority. A university curriculum is one learning example, not a national entry rule. Guangzhou’s 2026 official exam FAQ lists the intermediate Information Security Engineer examination without degree, seniority or age restrictions on registration; that exam rule does not establish competence, hiring eligibility or permission to access systems. The adjacent data-security standard does not establish entry conditions for this occupation."
             ]
           },
           "id": "information-security-engineers.path.career-path-block.4",
           "source_refs": [
-            "mohrss-standard"
+            "review-gz-exam",
+            "review-nuist"
           ],
           "type": "prose"
         },
@@ -8098,12 +8095,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial responsibility scope: checking assets and scope must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority."
+              "Check the fictional asset list, the stated access rules and the limits of the paper review. In a real role, confirm the assigned scope before handling systems or data."
             ]
           },
           "id": "information-security-engineers.path.career-path-block.5",
           "source_refs": [
-            "mohrss-standard"
+            "onet-exact"
           ],
           "type": "prose"
         },
@@ -8112,12 +8109,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Reviewable evidence | Use a completely fictional security engineering task package to demonstrate ability: threat modeling, security code review points, automated testing, and vulnerability remediation and deployment verification samples; do not use real networks or personal data, and note the basis and assumptions."
+              "Keep the asset/rule table, access matrix, three proposed tests, fact/inference timeline and unknowns from this page’s paper exercise. Label all work as fictional and unexecuted."
             ]
           },
           "id": "information-security-engineers.path.career-path-block.6",
           "source_refs": [
-            "mohrss-standard"
+            "onet-exact"
           ],
           "type": "prose"
         },
@@ -8126,12 +8123,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Next action | Complete one fictional task package and debriefing record, and ask an experienced person to challenge your authorization judgments, change verification and evidence chain; NICE uses work roles, tasks, knowledge and skills to build a capability language and can turn learning into verifiable task evidence, but a work role is not an occupation or position."
+              "Ask someone to trace each paper observation to its supplied input. Study network, operating-system and programming foundations alongside actual vacancy requirements. NICE provides task, knowledge and skill language; its work roles are not occupations or credentials. Use SSDF for secure-development practices where software work is relevant, not as an entry license."
             ]
           },
           "id": "information-security-engineers.path.career-path-block.7",
           "source_refs": [
-            "mohrss-standard"
+            "nist-nice",
+            "nist-ssdf",
+            "review-nuist"
           ],
           "type": "prose"
         },
@@ -8140,12 +8139,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Transition path | Before transitioning, first list the transferable capabilities (threat modeling, control design, log and vulnerability analysis, change and rollback, evidence and records), then clarify the new position's tools, qualifications and responsibility evidence that must be made up; moving to data security requires adding data classification and processing rules, moving to penetration testing requires adding authorized attack evidence, and moving to security architecture requires adding cross-system trade-offs and governance."
+              "Before changing roles, compare the target’s actual tasks with your experience. Identify additional skills, qualifications and evidence required by that role. Data-security work adds data-classification and processing requirements; penetration testing requires an explicitly authorized scope; security architecture requires cross-system design and governance evidence."
             ]
           },
           "id": "information-security-engineers.path.career-path-block.8",
           "source_refs": [
-            "mohrss-standard"
+            "onet-exact",
+            "nist-nice",
+            "nist-ssdf"
           ],
           "type": "prose"
         }
@@ -8198,7 +8199,7 @@
           },
           "id": "information-security-engineers.market-signals.market-signal-card.3",
           "source_refs": [
-            "prc-cyber-law"
+            "onet-parent-trends"
           ],
           "type": "prose"
         },
@@ -8207,12 +8208,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Transferable capabilities | The foundations shared by adjacent directions include: threat and risk identification, control design and verification, log and evidence analysis, change and rollback, and cross-team communication and record trail; but each path must make up the tools, qualifications and responsibility evidence corresponding to its new output and responsibility."
+              "Some adjacent roles share risk assessment, technical checking and communication. Compare the target’s actual work object and output; develop the required skills and obtain supporting evidence for its responsibilities. These overlaps do not establish qualification recognition or access authority."
             ]
           },
           "id": "information-security-engineers.market-signals.market-signal-card.4",
           "source_refs": [
-            "prc-cyber-law"
+            "onet-exact",
+            "review-neighbor-systems"
           ],
           "type": "prose"
         },
@@ -8226,7 +8228,7 @@
           },
           "id": "information-security-engineers.market-signals.market-signal-card.5",
           "source_refs": [
-            "prc-cyber-law"
+            "review-neighbor-managers"
           ],
           "type": "prose"
         }
@@ -8254,13 +8256,18 @@
                 ]
               },
               {
-                "answer": "This occupation focuses on security architecture, control engineering and technical implementation: designing and implementing security controls, monitoring and responding to breaches, and conducting forensic investigations. Security managers focus on governance and risk acceptance, computer and information systems managers on organization-level IT resources and projects, security management specialists on policy and compliance, computer systems analysts on business processes and system improvement, and information security analysts on monitoring, analysis and mitigation recommendations. Judgment should follow the core output, authorization scope and responsibility boundaries, and the titles cannot simply be interchanged.",
+                "answer": "Compare the work object and output. Security managers and security management specialists include physical, people and facility security. IT managers coordinate broader IT resources and projects; systems analysts improve business/computing systems. Information security analysts share monitoring and mitigation tasks, while web administrators maintain web environments, availability and backups. Overlap does not make titles or authority interchangeable.",
                 "id": "information-security-engineers.faq.2",
                 "question": "How is this occupation distinguished from adjacent occupations?",
                 "question_key": "career.faq.information-security-engineers.role-comparison",
                 "source_refs": [
-                  "source-pack-onet-details",
-                  "onet-exact"
+                  "onet-exact",
+                  "review-neighbor-managers",
+                  "review-neighbor-it-managers",
+                  "review-neighbor-specialists",
+                  "review-neighbor-systems",
+                  "review-neighbor-analysts",
+                  "review-neighbor-web"
                 ]
               },
               {
@@ -8273,17 +8280,18 @@
                 ]
               },
               {
-                "answer": "Generative AI can assist with standard and baseline queries, log summarization, generation of detection code and report drafts, and configuration difference comparison; however, authorization scope confirmation, production change approval, evidence preservation, data compliance judgment, incident grading and human review remain with people. Task exposure does not equal job substitution or widespread adoption, and this page gives no substitution probability or timetable.",
+                "answer": "This page has not established verifiable occupation-specific evidence for task-level AI effects, so it provides no quantitative impact score. Organizing fictional records, describing configuration differences and drafting reports are proposed evaluation scenarios, not evidence of operational security effectiveness, adoption, time savings or job loss.",
                 "id": "information-security-engineers.faq.4",
                 "question": "How will AI affect this occupation?",
                 "question_key": "career.faq.information-security-engineers.ai-impact",
                 "source_refs": [
+                  "onet-exact",
                   "ilo-genai",
-                  "nist-csf"
+                  "review-nist-ai-rmf"
                 ]
               },
               {
-                "answer": "AI output cannot replace authorization scope confirmation, production change approval, evidence preservation, data compliance judgment, incident grading or human review. People must trace back to the original data, systems and electrical systems and review key judgments, and bear responsibility for authorization, changes, evidence and incident conclusions.",
+                "answer": "Trace claims back to source logs, assets and network/system state. Check who is responsible and authorized to approve changes, handle evidence and make incident or data-processing decisions; a tool output does not transfer those responsibilities.",
                 "id": "information-security-engineers.faq.5",
                 "question": "Which judgments must remain with people?",
                 "question_key": "career.faq.information-security-engineers.human-control",
@@ -8312,13 +8320,12 @@
                 ]
               },
               {
-                "answer": "The O*NET preparation information shows that this occupation mostly requires a four-year bachelor's degree (not required for some), Job Zone level four, and a considerable amount of work-related skill and experience. Entering this occupation should combine basic learning, position training and verifiable security engineering deliverables; education, certificates, licenses, position hiring, institutional authority and production authority must be checked separately, and a course or certificate does not automatically grant a license, signature rights or production authority.",
+                "answer": "O*NET respondents reported entry education requirements including a bachelor’s degree (47%), a postsecondary certificate (16%) and some college without a degree (11%). Job Zone 4 describes preparation across a group of occupations, not a uniform individual degree or training-duration requirement. Check the actual vacancy requirements.",
                 "id": "information-security-engineers.faq.8",
                 "question": "What are the entry and training paths?",
                 "question_key": "career.faq.information-security-engineers.education-path",
                 "source_refs": [
-                  "onet-exact",
-                  "mohrss-standard"
+                  "onet-exact"
                 ]
               },
               {
@@ -8342,7 +8349,7 @@
                 ]
               },
               {
-                "answer": "This page gives no employment or hiring conclusion; instead it provides a verifiable experiment path: use a completely fictional security engineering task package to test threat modeling, control design, testing and evidence records; use an observable deliverable to decide whether to continue, rather than relying only on an interest questionnaire or publicity.",
+                "answer": "Try the complete fictional WEB-A/API-B/LOG-C exercise and compare with the reference. Use it to explore interest in evidence checking, not to infer hiring suitability or operational competence.",
                 "id": "information-security-engineers.faq.11",
                 "question": "Is this occupation worth further experimentation?",
                 "question_key": "career.faq.information-security-engineers.career-worth",
@@ -8358,7 +8365,8 @@
                 "question_key": "career.faq.information-security-engineers.boundary",
                 "source_refs": [
                   "onet-exact",
-                  "mohrss-standard"
+                  "prc-cyber-law",
+                  "prc-pipl"
                 ]
               }
             ]
@@ -8485,8 +8493,7 @@
               {
                 "accessed_at": "2026-08-29",
                 "details": [
-                  "US adjacent proxy wages and projections.",
-                  "Not the precise O*NET 15-1299.05 basis."
+                  "Adjacent 15-1212 analyst profile; not the engineer occupation or its 15-1299 parent."
                 ],
                 "evidence_type": "official labor statistics",
                 "id": "bls-analysts",
@@ -8495,7 +8502,7 @@
                 "name": "Information Security Analysts - Occupational Outlook Handbook",
                 "period": "May 2025 wages; 2025-2035 outlook",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "parent_occupation_proxy",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm"
               },
               {
@@ -8517,17 +8524,16 @@
               {
                 "accessed_at": "2026-08-29",
                 "details": [
-                  "The adjacent Chinese data security capability and evaluation boundary.",
-                  "Not the precise occupation and does not provide wages."
+                  "Adjacent data-security standard; its contents have not been verified for claims on this page."
                 ],
                 "evidence_type": "official occupational standard",
                 "id": "mohrss-standard",
-                "limitation": "Not the precise occupation and does not provide wages.",
+                "limitation": "Not verified here and not used to establish education, wages, framework contents or entry requirements.",
                 "market": "CN",
                 "name": "National Occupational Standard for Data Security Engineering Technical Personnel (2023 edition)",
                 "period": "2023",
                 "publisher": "Ministry of Human Resources and Social Security",
-                "scope": "parent_occupation_proxy",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/qt/gztz/202303/P020230327570509396537.pdf"
               },
               {
@@ -8557,7 +8563,7 @@
                 "limitation": "A work role is not an occupation or qualification.",
                 "market": "global",
                 "name": "NICE Framework: Current Versions",
-                "period": "v2.2.0 April 2025; updated May 2026",
+                "period": "Components v2.2.0 (28 April 2025); structure SP 800-181 Rev.1 (November 2020)",
                 "publisher": "NIST",
                 "scope": "combined_official",
                 "url": "https://www.nist.gov/itl/applied-cybersecurity/nice/nice-framework-resource-center/nice-framework-current-versions"
@@ -8611,7 +8617,7 @@
                 "url": "https://www.cac.gov.cn/2025-12/29/c_1768735112911946.htm"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Personal information processing boundaries in incident data.",
                   "Does not provide wages or technical steps."
@@ -8622,9 +8628,9 @@
                 "market": "CN",
                 "name": "Personal Information Protection Law of the People's Republic of China",
                 "period": "effective 2021",
-                "publisher": "Ministry of Industry and Information Technology",
+                "publisher": "中国网信网",
                 "scope": "combined_official",
-                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-09-02",
@@ -8682,12 +8688,12 @@
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Applies only to that O*NET occupation and the US market; it does not establish a China mapping, Chinese wages or legal authorization.",
+                "limitation": "The industry subpage was not established as readable; parent-group context here uses the summary, not this entry.",
                 "market": "United States",
                 "name": "Industries: 15-1299.05 - Information Security Engineers",
                 "period": "current page; accessed 2026-09-02",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "parent_group",
                 "url": "https://www.onetonline.org/link/industry/15-1299.05"
               },
               {
@@ -8739,20 +8745,17 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Identify threats and design security controls — 75/100; weight=1/3; information-security-engineers.profile.responsibilities-block.4[0]",
-                  "Validate deployments and monitor systems — 75/100; weight=1/3; information-security-engineers.profile.responsibilities-block.4[0]",
-                  "Respond recover and improve controls — 50/100; weight=1/3; information-security-engineers.profile.responsibilities-block.4[0]"
+                  "This page has not established verifiable occupation-specific evidence for task-level AI effects, so it provides no quantitative impact score. Organizing fictional records, describing configuration differences and drafting reports are proposed evaluation scenarios, not evidence of operational security effectiveness, adoption, time savings or job loss.",
+                  "Prior ratings for control design, deployment/monitoring and response/recovery are unverified; the former 67% estimate is withdrawn."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "Occupational tasks, risk frameworks and exposure methods do not validate the former ratings or occupational AI effects.",
+                "name": "FermatMind AI task-evidence status",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "Evidence status of three previously selected engineering tasks; no quantitative result",
+                "url": null
               },
               {
                 "accessed_at": "2026-11-08",
@@ -8828,6 +8831,171 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1299.05"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use only the stated scope; not evidence of AI effects or individual authority."
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-managers",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "US",
+                "name": "Security Managers — O*NET 11-3013.01",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-3013.01"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use only the stated scope; not evidence of AI effects or individual authority."
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-it-managers",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "US",
+                "name": "Computer and Information Systems Managers — O*NET 11-3021.00",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-3021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use only the stated scope; not evidence of AI effects or individual authority."
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-specialists",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "US",
+                "name": "Security Management Specialists — O*NET 13-1199.07",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/13-1199.07"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use only the stated scope; not evidence of AI effects or individual authority."
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-systems",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "US",
+                "name": "Computer Systems Analysts — O*NET 15-1211.00",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1211.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use only the stated scope; not evidence of AI effects or individual authority."
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-analysts",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "US",
+                "name": "Information Security Analysts — O*NET 15-1212.00",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1212.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use only the stated scope; not evidence of AI effects or individual authority."
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-web",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "US",
+                "name": "Web Administrators — O*NET 15-1299.01",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1299.01"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use only the stated scope; not evidence of AI effects or individual authority."
+                ],
+                "evidence_type": "official source",
+                "id": "review-nist-ai-rmf",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "US",
+                "name": "NIST AI Risk Management Framework",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use only the stated scope; not evidence of AI effects or individual authority."
+                ],
+                "evidence_type": "official source",
+                "id": "review-nuist",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "CN",
+                "name": "NUIST information-security program",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "南京信息工程大学",
+                "scope": "contextual",
+                "url": "https://cse.nuist.edu.cn/9924/list.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use only the stated scope; not evidence of AI effects or individual authority."
+                ],
+                "evidence_type": "official source",
+                "id": "review-gz-exam",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "CN",
+                "name": "Guangzhou 2026 computer qualification examination FAQ",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "广州市人力资源和社会保障局",
+                "scope": "contextual",
+                "url": "https://rsj.gz.gov.cn/ywzt/rcgz/rsks/bmtz/content/post_10736860.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One public employer’s task and selection example; deadline 22 June 2026. No numerical salary established."
+                ],
+                "evidence_type": "official source",
+                "id": "review-sh-job",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "CN",
+                "name": "Shanghai Network and Information Security Emergency Management Center: 2026 recruitment notice; application period closed",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "上海市人力资源和社会保障局",
+                "scope": "contextual",
+                "url": "https://rsj.sh.gov.cn/tzpgg_17408/20260604/t0035_1441182.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use only the stated scope; not evidence of AI effects or individual authority."
+                ],
+                "evidence_type": "official source",
+                "id": "review-cyber-amendment",
+                "limitation": "Not an equivalence, hiring or authorization guarantee.",
+                "market": "CN",
+                "name": "Presidential Order 61: Cybersecurity Law amendment commencement",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "中国网信网",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2025-10/29/c_1763461514706581.htm"
               }
             ]
           },
@@ -8867,17 +9035,103 @@
     ],
     "components": {
       "adjacent_career_comparison_table": {
-        "conclusion": "Adjacent occupations require separately making up the tools, qualifications and responsibility evidence.",
+        "conclusion": "For each target, compare actual tasks and obtain the skills, qualifications and supporting evidence it requires; adjacency does not establish a transfer entitlement.",
         "evidence_links": [
           {
             "href": {
-              "$source": "bls-analysts",
+              "$source": "review-neighbor-managers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "label": "Sources for this occupation"
+            "label": {
+              "$source": "review-neighbor-managers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-neighbor-it-managers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-neighbor-it-managers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-neighbor-specialists",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-neighbor-specialists",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-neighbor-systems",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-neighbor-systems",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-neighbor-analysts",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-neighbor-analysts",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-neighbor-web",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-neighbor-web",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
           }
         ],
         "evidence_note": "Adjacency is used only for direction comparison and does not represent automatic transfer or mutual recognition of qualifications.",
@@ -8885,8 +9139,8 @@
         "intro": "Compare core output, responsibility boundaries and work mode; do not interchange by name.",
         "rows": [
           {
-            "关键区别": "The core output is security governance, budget and risk acceptance, with responsibility for organizational security objectives.",
-            "更适合什么选择": "Compare when you are willing to take on organizational governance and resource decisions.",
+            "关键区别": "Directs organizational security, including physical security and the safety of people and facilities. O*NET’s old 11-9199.07 code is retired; the current profile is 11-3013.01. This is not automatically a cybersecurity-management role.",
+            "更适合什么选择": "Explore if protecting people and facilities and coordinating security resources interests you.",
             "核心工作与产出": {
               "$item": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.2",
               "block": "direction-comparison",
@@ -8896,7 +9150,7 @@
             "职业方向": "Security managers"
           },
           {
-            "关键区别": "The core output is coordinating organization-level IT resources, systems and project delivery.",
+            "关键区别": "Directs IT operations, staff, resources and projects, including budgets and system planning; management responsibility extends beyond one security control.",
             "更适合什么选择": "Compare when you are willing to expand from technical engineering to organizational management.",
             "核心工作与产出": {
               "$item": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.3",
@@ -8907,8 +9161,8 @@
             "职业方向": "Computer and information systems managers"
           },
           {
-            "关键区别": "The core output leans toward security policy, control and compliance coordination.",
-            "更适合什么选择": "Compare when you lean toward policy control or toward technical evidence.",
+            "关键区别": "Assesses physical security and staff/facility safety and designs related systems and processes; not simply another title for digital security engineering.",
+            "更适合什么选择": "Compare physical-security assessment and design with digital-system protection.",
             "核心工作与产出": {
               "$item": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.4",
               "block": "direction-comparison",
@@ -8918,7 +9172,7 @@
             "职业方向": "Security management specialists"
           },
           {
-            "关键区别": "The core output is improving system processes and efficiency and bridging business and IT.",
+            "关键区别": "Analyzes business and computing needs, integrates systems and improves workflows; the objective is broader than information-security controls.",
             "更适合什么选择": "Choose when comparing security objectives with general system improvement objectives.",
             "核心工作与产出": {
               "$item": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.5",
@@ -8935,7 +9189,7 @@
         "action_rows": [
           {
             "人群": "Entrants",
-            "应对重点": "Practice with a reviewable work sample."
+            "应对重点": "Check the complete WEB-A/API-B/LOG-C paper exercise against its supplied reference."
           },
           {
             "人群": "Incumbents",
@@ -9016,12 +9270,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "Information organization",
+            "AI主要改变": "Proposed fictional-input evaluation; effect not established",
             "仍由人负责": "Responsibility and authorization",
             "方向": "Security engineering and implementation"
           },
           {
-            "AI主要改变": "Retrieval and debriefing",
+            "AI主要改变": "Proposed fictional-input evaluation; effect not established",
             "仍由人负责": "Original record checking",
             "方向": "Monitoring and response"
           }
@@ -9042,7 +9296,7 @@
               "field": "name",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "研究对象": "Precise security engineering tasks and parent group statistics",
+            "研究对象": "Adjacent Information Security Analysts occupation (15-1212), not the engineer occupation or its parent group",
             "结论": "Does not provide this precise occupation's adoption rate, productivity or net job causality.",
             "链接": {
               "$source": "bls-analysts",
@@ -9061,7 +9315,7 @@
               "field": "name",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "研究对象": "Precise security engineering tasks and parent group statistics",
+            "研究对象": "Global occupational task-exposure methodology, not measured effects for 15-1299.05",
             "结论": "Does not provide this precise occupation's adoption rate, productivity or net job causality.",
             "链接": {
               "$source": "ilo-genai",
@@ -9080,7 +9334,7 @@
               "field": "name",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "研究对象": "Precise security engineering tasks and parent group statistics",
+            "研究对象": "Exact O*NET engineering tasks; wages and employment shown for the broader parent group",
             "结论": "Does not provide this precise occupation's adoption rate, productivity or net job causality.",
             "链接": {
               "$source": "onet-exact",
@@ -9107,7 +9361,7 @@
             "概念": "Adoption conditions"
           },
           {
-            "含义": "A decommissioning time cannot be derived from task exposure.",
+            "含义": "Task exposure does not establish when job losses will occur.",
             "概念": "Position outcomes"
           }
         ],
@@ -9122,7 +9376,7 @@
             "回答": "No adoption, effect, substitution probability or timetable was obtained for this precise occupation; task descriptions, exposure and governance suggestions do not equal job causality, and output must be verified per actual authority.",
             "来源": "NIST AI RMF and editorial task analysis",
             "链接": "https://www.nist.gov/itl/ai-risk-management-framework",
-            "问题": "Can task exposure derive a decommissioning time?"
+            "问题": "Can task exposure establish when jobs will be lost?"
           },
           {
             "回答": "No adoption, effect, substitution probability or timetable was obtained for this precise occupation; task descriptions, exposure and governance suggestions do not equal job causality, and output must be verified per actual authority.",
@@ -9152,7 +9406,7 @@
           },
           {
             "步骤": "Record escalation",
-            "说明": "Stop immediately on anomalies and report."
+            "说明": "Pause affected actions and escalate when authorization or approved change conditions are not satisfied. Triage, respond to and document other alerts under the applicable response plan."
           }
         ],
         "risk_rows": [
@@ -9196,7 +9450,7 @@
             "当前变化": "Editorial trial candidates: material organization, comparison or drafting; this occupation's adoption and effects were not measured."
           },
           {
-            "人的控制点": "Check the institution's actual decision, approval and execution responsibilities, and hand exceptions to the responsible person; do not apply a military chain of command.",
+            "人的控制点": "Check who may decide, approve and execute; refer exceptions to the responsible person.",
             "任务": "Key judgments",
             "工作方向": "Response and forensics",
             "当前变化": "Editorial trial candidates: material organization, comparison or drafting; this occupation's adoption and effects were not measured."
@@ -9343,12 +9597,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI can assist with record organization and information summarization but cannot replace authorization judgments and final responsibility."
+          "This page has not established verifiable occupation-specific evidence for task-level AI effects, so it provides no quantitative impact score. Organizing fictional records, describing configuration differences and drafting reports are proposed evaluation scenarios, not evidence of operational security effectiveness, adoption, time savings or job loss."
         ],
         "heading": "Information security engineer work objects and the AI boundary"
       },
       "career_path_block": {
-        "boundary": "Entry requirements, licenses, training and final responsibility are verified by the specific jurisdiction, institution or employer.",
+        "boundary": "These are learning and work-evidence examples, not mandatory documents for every job, fixed grades or automatic promotions. Check responsibilities, education, qualifications and authority for the specific employer and jurisdiction.",
         "competence_ladder": [
           {
             "description": "Confirm the source, authority and version.",
@@ -9398,67 +9652,13 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls-analysts",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "id": "information-security-engineers.display.source.0",
-            "label": {
-              "$source": "bls-analysts",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "scope": "Check against the original document object; the adjacent analyst education does not equal security engineer education, the ILO does not provide entry conditions, and this round's access to the data security standard PDF was unsuccessful."
-          },
-          {
-            "href": {
-              "$source": "ilo-genai",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "id": "information-security-engineers.display.source.1",
-            "label": {
-              "$source": "ilo-genai",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "scope": "Check against the original document object; the adjacent analyst education does not equal security engineer education, the ILO does not provide entry conditions, and this round's access to the data security standard PDF was unsuccessful."
-          },
-          {
-            "href": {
-              "$source": "mohrss-standard",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "id": "information-security-engineers.display.source.2",
-            "label": {
-              "$source": "mohrss-standard",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "scope": "Check against the original document object; the adjacent analyst education does not equal security engineer education, the ILO does not provide entry conditions, and this round's access to the data security standard PDF was unsuccessful."
-          },
-          {
-            "href": {
               "$source": "onet-exact",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "id": "information-security-engineers.display.source.3",
+            "id": "information-security-engineers.display.path.source.0",
             "label": {
               "$source": "onet-exact",
               "block": "source-register",
@@ -9466,7 +9666,79 @@
               "field": "name",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "scope": "Check against the original document object; the adjacent analyst education does not equal security engineer education, the ILO does not provide entry conditions, and this round's access to the data security standard PDF was unsuccessful."
+            "scope": "Use only the stated occupational, learning or framework scope; none grants production authority."
+          },
+          {
+            "href": {
+              "$source": "nist-nice",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "id": "information-security-engineers.display.path.source.1",
+            "label": {
+              "$source": "nist-nice",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "scope": "Use only the stated occupational, learning or framework scope; none grants production authority."
+          },
+          {
+            "href": {
+              "$source": "nist-ssdf",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "id": "information-security-engineers.display.path.source.2",
+            "label": {
+              "$source": "nist-ssdf",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "scope": "Use only the stated occupational, learning or framework scope; none grants production authority."
+          },
+          {
+            "href": {
+              "$source": "review-nuist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "id": "information-security-engineers.display.path.source.3",
+            "label": {
+              "$source": "review-nuist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "scope": "Use only the stated occupational, learning or framework scope; none grants production authority."
+          },
+          {
+            "href": {
+              "$source": "review-gz-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "id": "information-security-engineers.display.path.source.4",
+            "label": {
+              "$source": "review-gz-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "scope": "Use only the stated occupational, learning or framework scope; none grants production authority."
           }
         ],
         "tracks": [
@@ -9503,22 +9775,22 @@
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: understanding control requirements must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "readiness_evidence": "A business-rule to control-objective map",
+                "responsibility": "Compare stated business rules with proposed control requirements.",
                 "role": "Understand the control requirements"
               },
               {
                 "credentials": "Check the target position's education, experience, training and actual duties; certificates, hiring, approval and execution authority are checked separately.",
-                "next_moves": "Make up the tools, qualifications and responsibility evidence.",
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: testing under supervision must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "next_moves": "Review this evidence with the responsible person; identify gaps before taking on further work.",
+                "readiness_evidence": "Test conditions, expected results and observations in separate columns; paper proposals labelled unexecuted",
+                "responsibility": "Plan supervised checks and separate expected results from observations.",
                 "role": "Testing under supervision"
               },
               {
                 "credentials": "Check the target position's education, experience, training and actual duties; certificates, hiring, approval and execution authority are checked separately.",
-                "next_moves": "Make up the tools, qualifications and responsibility evidence.",
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: confirming change authority must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "next_moves": "Review this evidence with the responsible person; identify gaps before taking on further work.",
+                "readiness_evidence": "An approver, window, rollback and stop-condition checklist",
+                "responsibility": "Confirm the approver, change window and rollback conditions.",
                 "role": "Confirm change authority"
               }
             ],
@@ -9529,30 +9801,30 @@
             "stages": [
               {
                 "credentials": "Check the target position's education, experience, training and actual duties; certificates, hiring, approval and execution authority are checked separately.",
-                "next_moves": "Make up the tools, qualifications and responsibility evidence.",
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: control design must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "next_moves": "Review this evidence with the responsible person; identify gaps before taking on further work.",
+                "readiness_evidence": "A control proposal, alternatives and trade-off rationale",
+                "responsibility": "Compare control proposals and document trade-offs.",
                 "role": "Control design"
               },
               {
                 "credentials": "Check the target position's education, experience, training and actual duties; certificates, hiring, approval and execution authority are checked separately.",
-                "next_moves": "Make up the tools, qualifications and responsibility evidence.",
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: deployment verification must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "next_moves": "Review this evidence with the responsible person; identify gaps before taking on further work.",
+                "readiness_evidence": "The approved version, verification records and unmet conditions",
+                "responsibility": "Verify the approved version and record unmet conditions.",
                 "role": "Deployment verification"
               },
               {
                 "credentials": "Check the target position's education, experience, training and actual duties; certificates, hiring, approval and execution authority are checked separately.",
-                "next_moves": "Make up the tools, qualifications and responsibility evidence.",
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: monitoring and checking must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "next_moves": "Review this evidence with the responsible person; identify gaps before taking on further work.",
+                "readiness_evidence": "Source alerts separated from interpretation",
+                "responsibility": "Check source alerts before interpreting them.",
                 "role": "Monitoring and checking"
               },
               {
                 "credentials": "Check the target position's education, experience, training and actual duties; certificates, hiring, approval and execution authority are checked separately.",
-                "next_moves": "Make up the tools, qualifications and responsibility evidence.",
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: recovery and debriefing must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "next_moves": "Review this evidence with the responsible person; identify gaps before taking on further work.",
+                "readiness_evidence": "An incident fact timeline, recovery checks and improvement questions",
+                "responsibility": "Document incident facts and verify recovery outcomes.",
                 "role": "Recovery and debriefing"
               }
             ],
@@ -9563,30 +9835,30 @@
             "stages": [
               {
                 "credentials": "Check the target position's education, experience, training and actual duties; certificates, hiring, approval and execution authority are checked separately.",
-                "next_moves": "Make up the tools, qualifications and responsibility evidence.",
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: cross-system coordination must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "next_moves": "Review this evidence with the responsible person; identify gaps before taking on further work.",
+                "readiness_evidence": "System dependencies, owners and unresolved interfaces",
+                "responsibility": "Coordinate system dependencies and unresolved interfaces.",
                 "role": "Cross-system coordination"
               },
               {
                 "credentials": "Check the target position's education, experience, training and actual duties; certificates, hiring, approval and execution authority are checked separately.",
-                "next_moves": "Make up the tools, qualifications and responsibility evidence.",
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: control quality assessment must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "next_moves": "Review this evidence with the responsible person; identify gaps before taking on further work.",
+                "readiness_evidence": "Measures with their evidence sources and coverage limits",
+                "responsibility": "Evaluate controls against stated measures and evidence limits.",
                 "role": "Control quality assessment"
               },
               {
                 "credentials": "Check the target position's education, experience, training and actual duties; certificates, hiring, approval and execution authority are checked separately.",
-                "next_moves": "Make up the tools, qualifications and responsibility evidence.",
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: risk communication must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "next_moves": "Review this evidence with the responsible person; identify gaps before taking on further work.",
+                "readiness_evidence": "Facts, business impact, options and decisions needed",
+                "responsibility": "Communicate facts, business impact and decisions needed.",
                 "role": "Risk communication"
               },
               {
                 "credentials": "Check the target position's education, experience, training and actual duties; certificates, hiring, approval and execution authority are checked separately.",
-                "next_moves": "Make up the tools, qualifications and responsibility evidence.",
-                "readiness_evidence": "Keep reviewable deliverables.",
-                "responsibility": "Editorial responsibility scope: responsibility and resource coordination must follow the specific position tasks and authorization, and a stage name does not represent a unified grade or automatic approval authority.",
+                "next_moves": "Review this evidence with the responsible person; identify gaps before taking on further work.",
+                "readiness_evidence": "Decision owners, resource constraints and authorization records",
+                "responsibility": "Clarify decision ownership, resources and authority.",
                 "role": "Responsibility and resource coordination"
               }
             ],
@@ -9801,7 +10073,7 @@
               "information-security-engineers.display.source.0"
             ],
             "id": "risk-4",
-            "mitigation": "Editorial check suggestion: keep the original records and change trails, distinguish facts from inferences, and stop and escalate on anomalies. Specific measures are checked per institutional process and applicable jurisdiction.",
+            "mitigation": "Check the timeline against source records, preserve version references and change trails, and verify remediation before drawing conclusions. Distinguish facts from inferences, record unknowns and refer unresolved gaps to the responsible reviewer. Pause affected actions and escalate when authorization or approved change conditions are not satisfied; handle other alerts under the applicable response plan.",
             "scenario": "An incomplete timeline, version loss of control, or unverified remediation.",
             "title": {
               "$item": "information-security-engineers.risk.career-risk-cards.4",
@@ -9899,38 +10171,38 @@
           },
           "china_edu_table": [
             {
-              "学历段": "Insufficient evidence: no safe mapping established (high school or secondary vocational)",
-              "岗位方向": "Verify per institutional announcements",
-              "说明": "No proxy numbers are used."
+              "学历段": "High school / vocational school",
+              "岗位方向": "Check the specific vacancy",
+              "说明": "No education-specific occupational wage estimate established"
             },
             {
-              "学历段": "Insufficient evidence: no safe mapping established (associate degree)",
-              "岗位方向": "Verify per institutional announcements",
-              "说明": "No proxy numbers are used."
+              "学历段": "Associate-level study",
+              "岗位方向": "Check the specific vacancy",
+              "说明": "No education-specific occupational wage estimate established"
             },
             {
-              "学历段": "Insufficient evidence: no safe mapping established (bachelor's degree)",
-              "岗位方向": "Verify per institutional announcements",
-              "说明": "No proxy numbers are used."
+              "学历段": "Bachelor-level study",
+              "岗位方向": "Check the specific vacancy",
+              "说明": "No education-specific occupational wage estimate established"
             },
             {
-              "学历段": "Insufficient evidence: no safe mapping established (other)",
-              "岗位方向": "Verify per the specific jurisdiction",
-              "说明": "No proxy numbers are used."
+              "学历段": "Other routes",
+              "岗位方向": "Check the specific vacancy",
+              "说明": "No education-specific occupational wage estimate established"
             }
           ],
           "china_industry_table": [
             {
               "行业": "Information transmission, software and information technology services (industry category)",
-              "需求": "No safe value available yet"
+              "需求": "Industry context only; not occupation-specific vacancies or demand"
             },
             {
               "行业": "Finance (industry category)",
-              "需求": "No safe value available yet"
+              "需求": "Industry context only; not occupation-specific vacancies or demand"
             },
             {
               "行业": "Public administration, social security and social organizations (industry category)",
-              "需求": "No safe value available yet"
+              "需求": "Industry context only; not occupation-specific vacancies or demand"
             }
           ],
           "china_intl": "International occupational tasks: https://www.onetonline.org/link/details/15-1299.05; the ILO exposure research does not establish a Chinese wage correspondence.",
@@ -9945,16 +10217,16 @@
           "china_salary_note": "The mainland China basis is kept separate from the US, global and specific-unit bases and cannot be spliced across markets.",
           "china_salary_table": [
             {
-              "城市/区间": "Insufficient evidence: no safe mapping established",
-              "月薪参考": "No safe value available yet"
+              "城市/区间": "City-level estimate",
+              "月薪参考": "Not established by this page’s enterprise-sample evidence"
             },
             {
-              "城市/区间": "Insufficient evidence: no safe mapping established",
-              "月薪参考": "No safe value available yet"
+              "城市/区间": "Starting salary",
+              "月薪参考": "Not established by this page’s enterprise-sample evidence"
             },
             {
-              "城市/区间": "Insufficient evidence: no safe mapping established",
-              "月薪参考": "No safe value available yet"
+              "城市/区间": "Individual take-home pay",
+              "月薪参考": "Not established by this page’s enterprise-sample evidence"
             }
           ],
           "china_soc_row": {
@@ -10065,24 +10337,24 @@
         "industry_period": "2025 parent group; not a precise industry wage",
         "industry_rows": [
           {
-            "industry": "Precise security engineer in-industry wages",
-            "median": "No safe value available yet",
-            "note": "No in-industry wage for this precise occupation was obtained, and the parent group distribution and the adjacent analyst industry wages cannot be filled in."
+            "industry": "Parent-group industry context",
+            "median": "No exact occupation-specific industry estimate",
+            "note": "The summary lists professional/scientific/technical services and government for the broader parent group, not exact engineer industry wages."
           },
           {
-            "industry": "Precise security engineer in-industry wages",
-            "median": "No safe value available yet",
-            "note": "No in-industry wage for this precise occupation was obtained, and the parent group distribution and the adjacent analyst industry wages cannot be filled in."
+            "industry": "Exact occupation in-industry pay",
+            "median": "No exact occupation-specific industry estimate",
+            "note": "No verified industry-specific wage for 15-1299.05 is supplied."
           },
           {
-            "industry": "Precise security engineer in-industry wages",
-            "median": "No safe value available yet",
-            "note": "No in-industry wage for this precise occupation was obtained, and the parent group distribution and the adjacent analyst industry wages cannot be filled in."
+            "industry": "Industry share versus vacancies",
+            "median": "No exact occupation-specific industry estimate",
+            "note": "An industry share is not a count of open jobs or a hiring probability."
           },
           {
-            "industry": "Precise security engineer in-industry wages",
-            "median": "No safe value available yet",
-            "note": "No in-industry wage for this precise occupation was obtained, and the parent group distribution and the adjacent analyst industry wages cannot be filled in."
+            "industry": "Target employer offer",
+            "median": "No exact occupation-specific industry estimate",
+            "note": "Check the role, location, compensation components and reporting period separately."
           }
         ],
         "industry_value_label": "Industry value",
@@ -10173,7 +10445,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of people suit information security engineers?"
+        "title": "Who might be interested in information security engineering?"
       },
       "fit_decision_checklist": {
         "boundary": "This is a work sample check, not a personality diagnosis or a hiring conclusion.",
@@ -10282,7 +10554,7 @@
           },
           {
             "href": {
-              "$source": "mohrss-standard",
+              "$source": "onet-parent-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10290,7 +10562,7 @@
             },
             "id": "information-security-engineers.display.source.2",
             "label": {
-              "$source": "mohrss-standard",
+              "$source": "onet-parent-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10334,7 +10606,7 @@
             "target_href": "/zh/career/jobs/security-managers",
             "target_slug": "security-managers",
             "target_title": "Security managers",
-            "transition_distance": "Editorial comparison; the target duties and evidence must be made up"
+            "transition_distance": "Editorial task comparison; check the target role’s requirements and supporting evidence."
           },
           {
             "capability_gaps": "Organization-level resources, budget and roadmap planning",
@@ -10342,15 +10614,15 @@
             "target_href": "/zh/career/jobs/computer-and-information-systems-managers",
             "target_slug": "computer-and-information-systems-managers",
             "target_title": "Computer and information systems managers",
-            "transition_distance": "Editorial comparison; the target duties and evidence must be made up"
+            "transition_distance": "Editorial task comparison; check the target role’s requirements and supporting evidence."
           },
           {
-            "capability_gaps": "Add the target security management object, physical security assessment and rules; a target gap must not be rewritten as more technical logs.",
+            "capability_gaps": "Develop physical-threat assessment, people/facility protection and relevant system-design evidence for the target role.",
             "shared_capabilities": "Controls, policy and risk language",
             "target_href": "/zh/career/jobs/security-management-specialists",
             "target_slug": "security-management-specialists",
             "target_title": "Security management specialists",
-            "transition_distance": "Editorial comparison; the target duties and evidence must be made up"
+            "transition_distance": "Editorial task comparison; check the target role’s requirements and supporting evidence."
           },
           {
             "capability_gaps": "Business process modeling and solution delivery",
@@ -10358,15 +10630,15 @@
             "target_href": "/zh/career/jobs/computer-systems-analysts",
             "target_slug": "computer-systems-analysts",
             "target_title": "Computer systems analysts",
-            "transition_distance": "Editorial comparison; the target duties and evidence must be made up"
+            "transition_distance": "Editorial task comparison; check the target role’s requirements and supporting evidence."
           },
           {
-            "capability_gaps": "Analysis reports and mitigation recommendations",
+            "capability_gaps": "Compare the target’s assessment, mitigation implementation and reporting responsibilities; engineering and analyst duties can overlap.",
             "shared_capabilities": "Monitoring, logs and risk judgment",
             "target_href": "/zh/career/jobs/information-security-analysts",
             "target_slug": "information-security-analysts",
             "target_title": "Information security analysts",
-            "transition_distance": "Editorial comparison; the target duties and evidence must be made up"
+            "transition_distance": "Editorial task comparison; check the target role’s requirements and supporting evidence."
           },
           {
             "capability_gaps": "Add website operation, content publishing, availability, backup and service delivery; not an automatic transfer.",
@@ -10374,7 +10646,7 @@
             "target_href": "/zh/career/jobs/web-administrators",
             "target_slug": "web-administrators",
             "target_title": "Web administrators",
-            "transition_distance": "Editorial comparison; the target duties and evidence must be made up"
+            "transition_distance": "Editorial task comparison; check the target role’s requirements and supporting evidence."
           }
         ]
       },
@@ -10406,16 +10678,16 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Understand RIASEC",
+            "cta_label": "Explore career interests",
             "evidence_level": "official_descriptive",
             "id": "riasec",
             "label": "RIASEC",
-            "question": "Check with a work sample rather than substituting labels for judgment.",
+            "question": "Who might be interested in information security engineering?",
             "signals": [
               "Observable tasks",
               "Process records"
             ],
-            "watchout": "No hiring, qualification or performance conclusion can be derived from this."
+            "watchout": "Use this assessment to explore the topic named on the card. It does not establish engineering competence, access authority or hiring suitability."
           },
           {
             "answer": {
@@ -10425,7 +10697,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/big-five-personality-test",
-            "cta_label": "Understand the Big Five",
+            "cta_label": "Explore Big Five personality traits",
             "evidence_level": "editorial",
             "id": "big-five",
             "label": "Big Five",
@@ -10434,7 +10706,7 @@
               "Observable tasks",
               "Process records"
             ],
-            "watchout": "No hiring, qualification or performance conclusion can be derived from this."
+            "watchout": "Use this assessment to explore the topic named on the card. It does not establish engineering competence, access authority or hiring suitability."
           },
           {
             "answer": {
@@ -10444,7 +10716,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/mbti-personality-test",
-            "cta_label": "Understand MBTI",
+            "cta_label": "Explore MBTI preferences",
             "evidence_level": "editorial",
             "id": "mbti",
             "label": "MBTI",
@@ -10453,12 +10725,12 @@
               "Observable tasks",
               "Process records"
             ],
-            "watchout": "No hiring, qualification or performance conclusion can be derived from this."
+            "watchout": "Use this assessment to explore the topic named on the card. It does not establish engineering competence, access authority or hiring suitability."
           },
           {
             "answer": "No Enneagram occupational performance validity was obtained; observe the actual task preference.",
             "cta_href": "/zh/tests/enneagram-personality-test",
-            "cta_label": "Understand the Enneagram",
+            "cta_label": "Explore Enneagram patterns",
             "evidence_level": "editorial",
             "id": "enneagram",
             "label": "Enneagram",
@@ -10467,12 +10739,12 @@
               "Observable tasks",
               "Process records"
             ],
-            "watchout": "No hiring, qualification or performance conclusion can be derived from this."
+            "watchout": "Use this assessment to explore the topic named on the card. It does not establish engineering competence, access authority or hiring suitability."
           },
           {
             "answer": "No uniform IQ threshold or validity of this page's scale for occupational performance was obtained; check actual data and method tasks.",
             "cta_href": "/zh/tests/iq-test",
-            "cta_label": "Understand cognitive ability",
+            "cta_label": "Try the IQ reasoning test",
             "evidence_level": "editorial",
             "id": "iq",
             "label": "Cognitive ability",
@@ -10481,12 +10753,12 @@
               "Observable tasks",
               "Process records"
             ],
-            "watchout": "No hiring, qualification or performance conclusion can be derived from this."
+            "watchout": "Use this assessment to explore the topic named on the card. It does not establish engineering competence, access authority or hiring suitability."
           },
           {
             "answer": "No emotional ability scale performance validity was obtained; observe communication, explaining the basis and feedback behavior.",
             "cta_href": "/zh/tests/eq-test",
-            "cta_label": "Understand emotional ability",
+            "cta_label": "Explore emotional skills with the EQ test",
             "evidence_level": "editorial",
             "id": "eq",
             "label": "Emotional ability",
@@ -10495,7 +10767,7 @@
               "Observable tasks",
               "Process records"
             ],
-            "watchout": "No hiring, qualification or performance conclusion can be derived from this."
+            "watchout": "Use this assessment to explore the topic named on the card. It does not establish engineering competence, access authority or hiring suitability."
           }
         ],
         "boundary": "RIASEC, personality and ability tools cannot replace qualification, medical, safety or employer judgments.",
@@ -10529,7 +10801,7 @@
           {
             "direction": "Secure development and software supply chain",
             "fit_signals": "Willing to put security requirements into the development and release process.",
-            "watchouts": "Requires making up development process and supply chain evidence."
+            "watchouts": "Develop knowledge of software development and obtain supporting supply-chain evidence."
           },
           {
             "direction": "Security governance and risk communication",
@@ -10573,7 +10845,7 @@
             "question": "Is there an observable deliverable?"
           },
           {
-            "answer": "First check the target position's tasks, education and authority; the deliverables and exercise content are retained within the original protection scope.",
+            "answer": "Try the complete fictional access-control exercise on this page and compare each observation with the reference. Note which tasks interest you and what remains unknown.",
             "question": "What is the next experiment?"
           }
         ],
@@ -10650,14 +10922,14 @@
           },
           {
             "href": {
-              "$source": "mohrss-standard",
+              "$source": "nist-ssdf",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "information-security-engineers.source-register.published.1"
             },
             "label": {
-              "$source": "mohrss-standard",
+              "$source": "nist-ssdf",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10949,9 +11221,9 @@
       },
       "source_card": {
         "eeat_signals": {
-          "author": "FermatMind research workflow",
+          "author": "FermatMind Editorial",
           "source": "O*NET wages and trends; BLS OEWS concepts; China’s enterprise wage table labelled 2025; China’s 2022 occupational classification. Links are listed in the source register.",
-          "updated_at": "These statistical scopes and sources were checked on 8 November 2026. Source periods are listed separately; this does not revalidate every unchanged section."
+          "updated_at": "Reviewed on 9 November 2026; source periods and limits are listed separately."
         },
         "note": "U.S. statistics use O*NET’s broader 15-1299 group; Chinese wages concern category 2021007 in a national enterprise sample, not an exact equivalent. City and education-specific pay and actual AI pay effects remain unverified."
       },
@@ -10963,6 +11235,9 @@
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.interest_code_heading": "How to interpret CIR"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11065,13 +11340,13 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
+        "derivation": "The earlier 67% editorial estimate is withdrawn: the 75/75/50 ratings for three complete engineering tasks were not established by task-level effect evidence. No replacement score is supplied.",
+        "display_value": "No verified quantitative estimate",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "Task-level AI evidence status",
         "occupation_scope": "Information security engineers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -11092,8 +11367,8 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
@@ -11143,13 +11418,13 @@
     },
     "title": {
       "availability": "available",
-      "text": "Information security engineer occupational judgment: work, entry and risk boundaries"
+      "text": "Information security engineer careers: duties, training and pay"
     }
   },
-  "source_content_sha256": "78537fd4bfec6b29d4df58b8e0dd5da5c98e32c0b6420d98a32d6ed41f1bfa0b",
+  "source_content_sha256": "6f30c3323cd1cfcf3d598a95819781e586599d744ded5d1d63983500ad9cc091",
   "subject": {
     "canonical_slug": "information-security-engineers",
     "name": "Information security engineers",
-    "summary": "Information security engineers convert assets, threats and business constraints into verifiable security controls, monitoring and recovery plans. The official scope of O*NET-SOC 15-1299.05 includes: developing and overseeing information security programs and policies, building, maintaining and upgrading security technologies such as firewalls, designing and implementing security controls to identify vulnerabilities, monitoring and responding to security breaches and conducting forensic investigations, and possibly overseeing the assessment of information security systems. The work includes threat modeling, control design, deployment verification, monitoring and response and post-event improvement. O*NET’s U.S. wage and employment figures refer to the broader Computer Occupations, All Other group (15-1299), not separate estimates for Information Security Engineers (15-1299.05). The group’s 2025 median annual wage was $116,580 and employment was 471,200; projected growth for 2025–2035 is 5%, with 27,000 annual openings on average including growth and replacement needs. China’s classification includes information security engineering professionals (2-02-10-07), whose duties overlap without establishing a one-to-one international equivalence. In the national enterprise survey table labelled 2025, that Chinese category’s 50th-percentile annual wage was CNY 80,000. This does not represent every security role, city starting pay or an individual’s income."
+    "summary": "Information security engineers develop security policies, build and maintain protective technologies, and design and evaluate controls for systems and data. Their work can include monitoring, incident response and forensic investigation; actual duties and authority depend on the job. U.S. wages and employment below describe the broader 15-1299 group, not a separately measured engineer occupation."
   }
 }

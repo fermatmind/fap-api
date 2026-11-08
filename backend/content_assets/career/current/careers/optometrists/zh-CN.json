@@ -132,19 +132,19 @@
         "status": "mapped"
       },
       "item:optometrists.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:optometrists.path.employer-evidence.3": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:optometrists.path.entry-portfolio.4": {
         "status": "pending_mapping"
       },
       "item:optometrists.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:optometrists.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:optometrists.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -12183,12 +12183,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "直接判断：愿完成视光专业训练、承担检查和处方责任，并及时识别需转眼科的疾病，可探索验光师"
+              "兴趣探索或纸面核对不授执业资格，也不证明临床胜任；真实职责须核法域、机构与个人范围。"
             ]
           },
           "id": "optometrists.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "onet-details"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12197,12 +12198,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "正向证据：能综合视力、眼压、病史和眼部检查，不因单个测量正常而忽略危险症状。"
+              "可选使用本文I/J虚构记录，核眼别、单项推断与授权缺项，列未决问题向专业人员询问。"
             ]
           },
           "id": "optometrists.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet-details"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12211,12 +12213,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全试作：用公开教学病例画视力检查、处方和转诊边界；不对真实患者诊断或给药"
+              "是否对检查信息分析、精细设备工作及患者解释感兴趣，并愿进一步了解专业训练？"
             ]
           },
           "id": "optometrists.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet-details"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12225,12 +12228,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "复盘时核患者病史、眼部检查、处方范围和转诊指征，并确认职责和授权边界。"
+              "仅核虚构记录与下一步问题，不对真实患者诊断、给药、开处方或代签。"
             ]
           },
           "id": "optometrists.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "onet-details"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         }
@@ -12247,7 +12251,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页对应O*NET 29-1041.00 Optometrists；核心是检查视觉系统，诊断和管理执业范围内的眼部问题，开具矫正镜片处方，并按所在地许可提供治疗或药物；疑难及手术需求转眼科医生。"
+              "本页按美国O*NET 29-1041.00介绍Optometrists：检查眼和视觉系统，在州许可范围内诊断、管理和治疗相关问题，并开具矫正镜片处方。药物及部分操作权限因州而异；超出本人执业范围或经验时转诊。"
             ]
           },
           "id": "optometrists.profile.definition-block.1",
@@ -12266,7 +12270,7 @@
               "观察眼前节、眼底和眼压等指标。",
               "结合病史识别屈光或眼部异常。",
               "按执业权限开镜片或接触镜处方。",
-              "按许可治疗并把高风险疾病转眼科。",
+              "按许可范围提供照护，并在患者需要额外诊疗或超出本人范围、经验时会诊或转诊。",
               "说明护理、复查和危险症状。"
             ]
           },
@@ -12281,7 +12285,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "核心流程为：核症状、用药、既往眼病和风险。；测远近视力、屈光和双眼协调。；观察眼前节、眼底和眼压等指标。；结合病史识别屈光或眼部异常。。"
+              "美国岗位通常结合病史、视力及相关眼部检查分析结果，再按执业范围提供照护、解释与必要转诊。具体检查由有资格人员按患者情况决定。"
             ]
           },
           "id": "optometrists.profile.work-context-block.3",
@@ -12309,7 +12313,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "常用工具和系统：验光仪、裂隙灯、眼压计、视野仪、OCT和电子病历。"
+              "会使用视力、屈光及眼部检查设备和病历系统；具体设备、训练与操作范围按机构及岗位核对。"
             ]
           },
           "id": "optometrists.profile.onet-structured-fields-block.5",
@@ -12323,7 +12327,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "与相邻岗位相比，本职业具备视光执业资格，范围随地区法律变化；不同于配镜师按处方选配，也不同于眼科医师手术职责。"
+              "美国眼科医师与OD的教育及手术范围不同；OD同样可能在许可范围内诊疗，不能仅用是否治病划分。"
             ]
           },
           "id": "optometrists.profile.definition-block.6",
@@ -12337,7 +12341,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "合格交付要能证明：检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明。"
+              "可能形成检查记录、镜片处方、治疗计划或转诊说明，具体取决于本次服务及个人执业范围，并非每次都应产生全套文件。"
             ]
           },
           "id": "optometrists.profile.work-context-block.8",
@@ -12359,12 +12363,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "眼科医生主要做眼病医学诊疗与手术，本职业更重具备视光执业资格，范围随地区法律变化；不同于配镜师按处方选配，也不同于眼科医师手术职责。"
+              "美国眼科医师与OD的教育及手术范围不同；OD同样可能在许可范围内诊疗，不能仅用是否治病划分。"
             ]
           },
           "id": "optometrists.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh",
+            "neighbor-29-1241.00",
+            "neighbor-29-2081.00",
+            "neighbor-29-2057.00",
+            "neighbor-29-2099.05",
+            "neighbor-29-1299.02",
+            "neighbor-51-9083.00"
           ],
           "type": "prose"
         },
@@ -12373,12 +12383,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "配镜师重点为按处方选配镜片镜架，职业任务和训练不同。"
+              "下表比较美国职业任务，不直接决定大陆岗位准入或个人转岗资格。"
             ]
           },
           "id": "optometrists.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh",
+            "neighbor-29-1241.00",
+            "neighbor-29-2081.00",
+            "neighbor-29-2057.00",
+            "neighbor-29-2099.05",
+            "neighbor-29-1299.02",
+            "neighbor-51-9083.00"
           ],
           "type": "prose"
         },
@@ -12387,12 +12403,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "眼科医疗技术员偏医生监督下做眼科检查，应看最终产出而非相似称呼。"
+              "分别比较服务对象、实际产出及所需教育训练，不按相似岗位名称合并职业。"
             ]
           },
           "id": "optometrists.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh",
+            "neighbor-29-1241.00",
+            "neighbor-29-2081.00",
+            "neighbor-29-2057.00",
+            "neighbor-29-2099.05",
+            "neighbor-29-1299.02",
+            "neighbor-51-9083.00"
           ],
           "type": "prose"
         },
@@ -12401,12 +12423,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "眼科医生与本职业区别：医师训练和手术范围不同。"
+              "OD也在州许可范围内诊疗，差别不是是否治病。"
             ]
           },
           "id": "optometrists.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh",
+            "neighbor-29-1241.00",
+            "neighbor-29-2081.00",
+            "neighbor-29-2057.00",
+            "neighbor-29-2099.05",
+            "neighbor-29-1299.02",
+            "neighbor-51-9083.00"
           ],
           "type": "prose"
         },
@@ -12415,12 +12443,18 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "选择眼科医生更适合喜欢医学与手术。"
+              "愿进一步了解医师教育及手术工作。"
             ]
           },
           "id": "optometrists.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh",
+            "neighbor-29-1241.00",
+            "neighbor-29-2081.00",
+            "neighbor-29-2057.00",
+            "neighbor-29-2099.05",
+            "neighbor-29-1299.02",
+            "neighbor-51-9083.00"
           ],
           "type": "prose"
         }
@@ -12442,7 +12476,8 @@
           },
           "id": "optometrists.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12451,12 +12486,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用虚构样本认识病史采集。"
+              "可选用I/J虚构记录练资料核对，不能据此判定临床胜任。"
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12470,7 +12506,8 @@
           },
           "id": "optometrists.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12479,12 +12516,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明并守授权。"
+              "若评估工具，先明确具体用途与验证条件，并核原始记录和执业范围。"
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12493,12 +12531,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "带班者"
+              "教学或团队负责人"
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12507,12 +12546,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检查检查诊断、镜片处方、用药与转诊的执业责任和异常升级。"
+              "区分学生、技术与临床角色的参与范围，说明谁复核、谁负责实际职责。"
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12521,12 +12561,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "转岗者"
+              "考虑转向相关岗位者"
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12535,12 +12576,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "补目标设备或岗位训练，核资格。"
+              "核目标岗位的教育、训练与资格缺口，不从AI分数或兴趣结果推定可转岗。"
             ]
           },
           "id": "optometrists.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "onet-hot"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         }
@@ -12557,7 +12599,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国验光师全国同口径中位数未取得。2025卫生和社会工作城镇非私营146,266元、私营75,631元年税前年均，仅医疗机构雇主宽行业，含其他临床社会岗位非本职工资个人区间；不含个体自由职业或自营诊所利润，门店销售另核。"
+              "未取得大陆验光相关岗位同口径全国工资中位数。2025年卫生和社会工作行业城镇非私营单位年平均工资为146,266元，私营单位为75,631元，均为税前行业背景。卫生和社会工作行业的单位就业人员均值，含多种岗位，不是验光师工资或个人区间；眼镜零售单位按其行业分类核对，不能用于个体经营收入或诊所利润。"
             ]
           },
           "id": "optometrists.china-salary.career-snapshot-primary-locale.1",
@@ -12571,12 +12613,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国岗位应另核地区、单位、职责、班制和资格；美国29-1041.00年薪不可直接换算。"
+              "安康人社2026年2月9日岗位表中，安康爱尔眼科医院列验光师8人、月薪3500元起，要求大专及以上、公告所称相关职业资格及设备和沟通能力。这是当时单一雇主样本，税前后、收入构成及是否仍招聘未核，不代表全国工资或统一法定资格。"
             ]
           },
           "id": "optometrists.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "cn-ankang-job"
           ],
           "type": "prose"
         },
@@ -12599,12 +12641,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "核查提示：视觉检查、镜片处方、治疗用药和转诊须按中国当地法定资格与机构权限核；美国OD执照及工资不授中国权限，行业工资不证明临床执业许可。"
+              "大陆相关岗位包括眼镜验光员及医疗机构中的眼视光岗位，与美国O.D.不一一对应。眼镜验光处方不等于药物处方或医师执业资格；涉及眼病诊疗须另核医师注册、机构及岗位范围。技能等级、学历、医师资格与雇主要求分别核对。"
             ]
           },
           "id": "optometrists.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs-wages"
+            "cn-optician-standard",
+            "cn-medical-practice",
+            "cn-medical-exam",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12677,12 +12722,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年美国在岗约45100人，统计范围为29-1041.00。"
+              "2025年第90百分位为202,180美元，不是工资上限，也不是按工龄划分的薪级。"
             ]
           },
           "id": "optometrists.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-2025-35-29-1041"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -12691,12 +12736,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国29-1041精确职业2025—2035总体增长9.5%、官方净增4300人，年均2000空缺含替补；非净变化当前招聘、AI采用替代或个人失业。"
+              "美国职业工资不能直接换算为大陆收入；法域、统计人口、雇佣形式与岗位职责不同。"
             ]
           },
           "id": "optometrists.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls-2025-35-29-1041"
+            "onet-wages",
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -12705,7 +12751,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资与预测不能代替中国工资或个人录用概率。"
+              "中位数是工资分布中点，不能当起薪；个人报价需另核地区、职责、工时和资格。"
             ]
           },
           "id": "optometrists.us-salary.career-snapshot-secondary-locale.6",
@@ -12727,8 +12773,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "能综合视力、眼压、病史和眼部检查，不因单个测量正常而忽略危险症状。",
-              "能综合视力、眼压、病史和眼部检查，不因单个测量正常而忽略危险症状。"
+              "是否对分析检查信息及其不确定性感兴趣？",
+              "是否愿了解精细设备工作和患者沟通？"
             ]
           },
           "id": "optometrists.fit.riasec-fit-block.1",
@@ -12742,9 +12788,9 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "愿持续执行病史采集与视力检查。",
-              "愿持续执行病史采集与视力检查。",
-              "愿持续执行病史采集与视力检查。"
+              "是否愿逐项核对虚构记录的眼别？",
+              "是否愿保留原输入并列出缺项？",
+              "是否愿对不清楚的术语主动提问？"
             ]
           },
           "id": "optometrists.fit.personality-fit-block.2",
@@ -12758,8 +12804,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "能把检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明交给下一责任人。",
-              "能把检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明交给下一责任人。"
+              "是否愿承认纸面资料不能决定真实诊断？",
+              "遇到未核权限时是否愿向专业人员求证？"
             ]
           },
           "id": "optometrists.fit.personality-fit-block.3",
@@ -12773,8 +12819,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "异常时按程序停下并升级。",
-              "异常时按程序停下并升级。"
+              "是否重视向服务对象解释信息？",
+              "是否愿了解长期随访中的沟通工作？"
             ]
           },
           "id": "optometrists.fit.riasec-fit-block.4",
@@ -12788,9 +12834,9 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "不愿承担严重眼病漏诊风险须谨慎。",
-              "不愿承担严重眼病漏诊风险须谨慎。",
-              "不愿承担严重眼病漏诊风险须谨慎。"
+              "是否想了解诊所与零售场景的差别？",
+              "是否愿询问晚间或周末班次安排？",
+              "是否愿了解长时间近距离工作的实际体验？"
             ]
           },
           "id": "optometrists.fit.personality-fit-block.5",
@@ -12804,8 +12850,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "忽视检查诊断、镜片处方、用药与转诊的执业责任不宜独立工作。",
-              "忽视检查诊断、镜片处方、用药与转诊的执业责任不宜独立工作。"
+              "I题有哪些眼别或推理冲突？",
+              "J题有哪些未核资格或签名信息？"
             ]
           },
           "id": "optometrists.fit.personality-fit-block.6",
@@ -12819,7 +12865,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能力判断可观察受监督检查记录、处方核对及转诊反馈；兴趣仅探索，不授执照、药物或手术权限。"
+              "这些问题用于了解自己想继续探索什么；实际临床能力须在相应教育、监督实践及专业评价中核验。"
             ]
           },
           "id": "optometrists.fit.riasec-fit-block.7",
@@ -12833,7 +12879,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "试作只使用虚构信息，真实任务须按资格和监督边界。"
+              "编辑探索问题，不是预测临床绩效、安全或资格的效度证据。"
             ]
           },
           "id": "optometrists.fit.personality-fit-block.8",
@@ -12855,12 +12901,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "严重眼病漏诊：把视力下降仅当屈光问题。；可能导致延误治疗。。控制：综合检查并转眼科。"
+              "职业风险提示不能替代专业检查或授权，本文不提供患者诊断和治疗规则。"
             ]
           },
           "id": "optometrists.risk.career-risk-cards.1",
           "source_refs": [
-            "onet-details"
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         },
@@ -12869,12 +12915,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "处方错误：度数或左右眼记错。；可能导致视力和使用不适。。控制：复核检查与处方。"
+              "需关注记录错误、超范围操作、接触镜感染与隐私等风险；以下是核对问题，不是发生率或风险排序。"
             ]
           },
           "id": "optometrists.risk.career-risk-cards.2",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "cdc-contact-lenses",
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -12883,12 +12931,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "越权用药：处方超州或地区许可。；可能导致患者伤害和执照风险。。控制：核法定范围与禁忌。"
+              "O*NET支持职业任务，BLS支持美国资格背景；感染与症状提示引用CDC/NEI，隐私仅引用PIPL指定条款，不能相互替代。"
             ]
           },
           "id": "optometrists.risk.career-risk-cards.3",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "bls-optometrist-ooh",
+            "cdc-contact-lenses",
+            "nei-glaucoma",
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -12897,7 +12949,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "接触镜损伤：卫生与佩戴教育不足。；可能导致角膜感染。。控制：明确护理和复查。"
+              "这些情境涉及患者、相关接诊及协作人员；具体职责按实际岗位确认。"
             ]
           },
           "id": "optometrists.risk.career-risk-cards.4",
@@ -12911,12 +12963,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "共同升级：遇到设备、人员、资料或授权异常先暂停，留痕并交有权限人员。"
+              "记录或权限有缺项时保留原信息并向相应专业人员核对；真实紧急程度和处置由适用临床流程决定。"
             ]
           },
           "id": "optometrists.risk.career-risk-cards.5",
           "source_refs": [
-            "onet-details"
+            "internal-rubric",
+            "bls-optometrist-ooh"
           ],
           "type": "prose"
         }
@@ -12940,6 +12993,7 @@
           "source_refs": [
             "internal-rubric"
           ],
+          "title": "纸面练习与使用边界",
           "type": "notice"
         },
         {
@@ -12953,41 +13007,48 @@
               "work_evidence",
               "possible_check"
             ],
+            "column_labels": [
+              "任务方向",
+              "学习或工作内容",
+              "职责与权限边界",
+              "可能形成的记录",
+              "可询问的核对点"
+            ],
             "rows": [
               [
                 "病史采集",
                 "核症状、用药、既往眼病和风险。",
-                "检查诊断、镜片处方、用药与转诊的执业责任",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "核病史采集记录"
+                "学习参与与临床职责须按具体资格及监督核对。",
+                "病史与未决问题记录",
+                "如何确认眼别与病史来源？"
               ],
               [
                 "视力检查",
                 "测远近视力、屈光和双眼协调。",
-                "检查诊断、镜片处方、用药与转诊的执业责任",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "核视力检查记录"
+                "学习参与与临床职责须按具体资格及监督核对。",
+                "视力或屈光测量记录",
+                "谁核测量条件及结果？"
               ],
               [
                 "眼部检查",
                 "观察眼前节、眼底和眼压等指标。",
-                "检查诊断、镜片处方、用药与转诊的执业责任",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "核眼部检查记录"
+                "学习参与与临床职责须按具体资格及监督核对。",
+                "相应眼部检查发现记录",
+                "本岗位能做哪些检查？"
               ],
               [
                 "结果判断",
                 "结合病史识别屈光或眼部异常。",
-                "检查诊断、镜片处方、用药与转诊的执业责任",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "核结果判断记录"
+                "学习参与与临床职责须按具体资格及监督核对。",
+                "分析与转诊考虑记录",
+                "哪些问题需交相应专业人员？"
               ],
               [
                 "处方服务",
                 "按执业权限开镜片或接触镜处方。",
-                "检查诊断、镜片处方、用药与转诊的执业责任",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "核处方服务记录"
+                "学习参与与临床职责须按具体资格及监督核对。",
+                "适用的镜片处方及核对记录",
+                "处方人及该项权限如何核？"
               ]
             ]
           },
@@ -12995,6 +13056,7 @@
           "source_refs": [
             "onet-summary"
           ],
+          "title": "任务方向与职责边界",
           "type": "table"
         },
         {
@@ -13029,6 +13091,7 @@
           "source_refs": [
             "internal-rubric"
           ],
+          "title": "I/J虚构记录与核对参考",
           "type": "cards"
         },
         {
@@ -13070,11 +13133,17 @@
               "boundary",
               "possible_check"
             ],
+            "column_labels": [
+              "风险情境",
+              "记录中的问题",
+              "核对或转交边界",
+              "向合适人员询问"
+            ],
             "rows": [
               [
                 "严重眼病漏诊",
                 "把视力下降仅当屈光问题。",
-                "综合检查并转眼科。",
+                "由专业人员结合病史和检查核对，必要时按患者需要及执业范围会诊或转诊；本页不决定具体患者处置。",
                 "核严重眼病漏诊处置"
               ],
               [
@@ -13099,8 +13168,12 @@
           },
           "id": "optometrists.path.interview-probation.5",
           "source_refs": [
-            "onet-summary"
+            "onet-summary",
+            "cdc-contact-lenses",
+            "bls-optometrist-ooh",
+            "internal-rubric"
           ],
+          "title": "风险情境与专业核对问题",
           "type": "table"
         },
         {
@@ -13126,7 +13199,7 @@
                 "id": "optometrists.trial.day7",
                 "values": [
                   "第6—7天交作品",
-                  "交两表、原记录与更正留痕、授权转交说明；保漏诊处方错误越权用药接触镜四风险，不诊断给药或实际配镜。"
+                  "交两表、原记录与更正留痕和模拟转交说明；复盘未决问题，不诊断、给药或实际配镜。"
                 ]
               }
             ]
@@ -13150,66 +13223,78 @@
               "audience",
               "proof_method"
             ],
+            "column_labels": [
+              "学习或执业环节",
+              "可能查看的记录",
+              "应核的教育与资格",
+              "适用条件",
+              "限制",
+              "适用读者",
+              "核对方式"
+            ],
             "rows": [
               [
-                "岗位观察",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "学习者",
-                "核课程、授权和反馈"
+                "选择目标岗位",
+                "岗位职责说明",
+                "大陆医师、技术、验配路径分别核",
+                "具体单位与地区",
+                "岗位名称不证明权限",
+                "探索者",
+                "对照真实岗位及主管规则"
               ],
               [
-                "基础训练",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "学习者",
-                "核课程、授权和反馈"
+                "美国专业学习",
+                "课程与临床训练要求",
+                "认可OD项目及入学前置教育",
+                "具体项目",
+                "四年OD不是全部教育总时长",
+                "拟赴美学习者",
+                "向项目核招生与认可状态"
               ],
               [
-                "受监督实践",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "学习者",
-                "核课程、授权和反馈"
+                "受监督临床训练",
+                "获准使用的学习评价记录",
+                "具体实习或临床教学准入",
+                "指定机构与监督人",
+                "学生不得自行独立诊疗",
+                "受训者",
+                "核参加范围及反馈"
               ],
               [
-                "资格核验",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
+                "执业资格核验",
+                "资格、执照或注册记录",
+                "美国州许可；大陆按目标岗位核",
+                "地区及机构",
+                "技能等级不等同医师注册",
+                "拟执业者",
+                "查主管机关与机构要求"
+              ],
+              [
+                "职责内服务",
+                "与本次服务相符的专业记录",
+                "个人有效资格及实际执业范围",
+                "具体职责",
+                "不因持有某证无限扩权",
                 "从业者",
-                "核课程、授权和反馈"
+                "核权限与专业复核"
               ],
               [
-                "独立交接",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
+                "继续学习",
+                "继续教育或质量改进记录",
+                "适用续期及学习要求",
+                "地区、角色及新增任务",
+                "不自动构成晋升或新增操作许可",
                 "从业者",
-                "核课程、授权和反馈"
-              ],
-              [
-                "进阶复盘",
-                "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "从业者",
-                "核课程、授权和反馈"
+                "向监管与机构核对"
               ]
             ]
           },
           "id": "optometrists.path.credential-decision.7",
           "source_refs": [
-            "bls-optometrist-ooh"
+            "bls-optometrist-ooh",
+            "cn-optician-standard",
+            "cn-medical-practice",
+            "cn-medical-exam"
           ],
           "type": "table"
         },
@@ -13218,11 +13303,14 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。；真实职责依当地规则和雇主授权，转岗须补目标岗位训练。"
+              "美国通常须完成经认可的四年制O.D.课程并取得州执照。入学至少需三年本科教育，通常已有学士学位；四年并非全部教育总时长。各州要求许可考试、继续教育及定期续期，board certification为可选。 大陆相关岗位包括眼镜验光员及医疗机构中的眼视光岗位，与美国O.D.不一一对应。眼镜验光处方不等于药物处方或医师执业资格；涉及眼病诊疗须另核医师注册、机构及岗位范围。技能等级、学历、医师资格与雇主要求分别核对。"
             ]
           },
           "id": "optometrists.path.credential-boundary.8",
           "source_refs": [
+            "cn-optician-standard",
+            "cn-medical-practice",
+            "cn-medical-exam",
             "bls-optometrist-ooh"
           ],
           "type": "notice"
@@ -13232,11 +13320,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。；真实职责依当地规则和雇主授权，转岗须补目标岗位训练。"
+              "先分清目标是大陆临床医师、视光技术还是零售验配，再核具体专业、实践、技能评价及岗位范围。美国O.D.教育和州执照是另一条路径，不能直接转换为大陆执业资格。"
             ]
           },
           "id": "optometrists.path.career-path-block.9",
           "source_refs": [
+            "cn-optician-standard",
+            "cn-medical-practice",
+            "cn-medical-exam",
             "bls-optometrist-ooh"
           ],
           "type": "prose"
@@ -13310,7 +13401,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻职业要比较具备视光执业资格，范围随地区法律变化；不同于配镜师按处方选配，也不同于眼科医师手术职责及具体训练。"
+              "相邻岗位需分别核任务、资格和监督安排；已有部分经验不代表已经具备目标职责权限。"
             ]
           },
           "id": "optometrists.market-signals.market-signal-card.5",
@@ -13333,7 +13424,7 @@
           "data": {
             "entries": [
               {
-                "answer": "检查视觉系统，诊断和管理执业范围内的眼部问题，开具矫正镜片处方，并按所在地许可提供治疗或药物；疑难及手术需求转眼科医生。",
+                "answer": "本页按美国O*NET 29-1041.00介绍Optometrists：检查眼和视觉系统，在州许可范围内诊断、管理和治疗相关问题，并开具矫正镜片处方。药物及部分操作权限因州而异；超出本人执业范围或经验时转诊。",
                 "id": "optometrists.faq.1",
                 "question": "验光师做什么？",
                 "question_key": "career.faq.optometrists.1",
@@ -13342,7 +13433,7 @@
                 ]
               },
               {
-                "answer": "核症状、用药、既往眼病和风险。；测远近视力、屈光和双眼协调。；观察眼前节、眼底和眼压等指标。；结合病史识别屈光或眼部异常。",
+                "answer": "核对病史和症状，检查视力、屈光及相关眼部情况，分析结果，并在执业范围内提供矫正、照护和转诊。",
                 "id": "optometrists.faq.2",
                 "question": "关键任务有哪些？",
                 "question_key": "career.faq.optometrists.2",
@@ -13351,34 +13442,40 @@
                 ]
               },
               {
-                "answer": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
+                "answer": "美国通常须完成经认可的四年制O.D.课程并取得州执照。入学至少需三年本科教育，通常已有学士学位；四年并非全部教育总时长。各州要求许可考试、继续教育及定期续期，board certification为可选。 先分清目标是大陆临床医师、视光技术还是零售验配，再核具体专业、实践、技能评价及岗位范围。美国O.D.教育和州执照是另一条路径，不能直接转换为大陆执业资格。",
                 "id": "optometrists.faq.3",
                 "question": "入行需要什么？",
                 "question_key": "career.faq.optometrists.3",
                 "source_refs": [
-                  "bls-optometrist-ooh"
+                  "bls-optometrist-ooh",
+                  "cn-optician-standard",
+                  "cn-medical-practice",
+                  "cn-medical-exam"
                 ]
               },
               {
-                "answer": "严重眼病漏诊：把视力下降仅当屈光问题。；综合检查并转眼科。",
+                "answer": "需关注眼病识别延误、记录或处方错误、超范围操作、接触镜感染及隐私等风险。具体核对项目取决于岗位和适用流程；本文不对风险作发生率排序。",
                 "id": "optometrists.faq.4",
-                "question": "工作中最大风险？",
+                "question": "有哪些工作风险与核对点？",
                 "question_key": "career.faq.optometrists.4",
                 "source_refs": [
-                  "onet-details"
+                  "onet-details",
+                  "cdc-contact-lenses",
+                  "cn-pipl",
+                  "nei-glaucoma"
                 ]
               },
               {
-                "answer": "不能；检查诊断、镜片处方、用药与转诊的执业责任由有权限人员核。",
+                "answer": "现有原证不能判断本职业各项任务的AI独立完成能力。真实诊疗与处方仍需符合所在地法定资格、执业范围及机构规定，不能由工具输出替代。",
                 "id": "optometrists.faq.5",
-                "question": "AI能独立完成吗？",
+                "question": "本页能证明AI可独立完成吗？",
                 "question_key": "career.faq.optometrists.5",
                 "source_refs": [
                   "onet-details"
                 ]
               },
               {
-                "answer": "证据不足：中国验光师全国中位分位起薪未取得。2025卫生社会工作城镇非私营146266/私营75631元年税前年均，仅医疗雇主宽行业，含其他临床社会岗非本职工资个人区间，不含个体自由职业自营诊所利润，门店销售另核。",
+                "answer": "未取得大陆验光相关岗位同口径全国工资中位数。2025年卫生和社会工作行业城镇非私营单位年平均工资为146,266元，私营单位为75,631元，均为税前行业背景。卫生和社会工作行业的单位就业人员均值，含多种岗位，不是验光师工资或个人区间；眼镜零售单位按其行业分类核对，不能用于个体经营收入或诊所利润。",
                 "id": "optometrists.faq.6",
                 "question": "中国工资是多少？",
                 "question_key": "career.faq.optometrists.6",
@@ -13396,7 +13493,7 @@
                 ]
               },
               {
-                "answer": "用公开教学病例画视力检查、处方和转诊边界；不对真实患者诊断或给药",
+                "answer": "安全试作：用下方I/J虚构记录核对眼别、推断与资格缺项；不对真实患者诊断、给药或开处方。",
                 "id": "optometrists.faq.8",
                 "question": "如何安全探索？",
                 "question_key": "career.faq.optometrists.8",
@@ -13509,13 +13606,13 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "表2/5卫生社会工作非私营146266/私营75631年税前年均；作者按视觉检查诊療治疗转诊任务仅医疗机构雇主方向。"
+                  "表2/5对应卫生和社会工作行业；非私营146266/私营75631元年税前均值，非职业中位数。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "含其他临床社会岗非验光师工资个人区间，两人口分列，个体自由职业自营诊所利润排除，门店销售另核，不证明许可。",
+                "limitation": "卫生和社会工作行业的单位就业人员均值，含多种岗位，不是验光师工资或个人区间；眼镜零售单位按其行业分类核对，不能用于个体经营收入或诊所利润。",
                 "market": "CN",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025年工资；2026-05-15发布",
@@ -13539,7 +13636,7 @@
                 "url": "https://www.onetonline.org/link/localcert/29-1041.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Employer tasks and local authorization vary."
                 ],
@@ -13548,28 +13645,28 @@
                 "limitation": "Employer tasks and local authorization vary.",
                 "market": "US",
                 "name": "Optometrists detailed occupation profile",
-                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "period": "O*NET 2026职业页面；本次仅读指定任务、环境、教育等段",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-1041.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Posting mentions do not prove proficiency, adoption or automation rate."
+                  "严格HTTPS当前实读三种浏览器各8%，Excel不足1%，其余列示NA；分母为关联职业去重招聘广告，不是医学AI采用率。"
                 ],
                 "evidence_type": "official job-posting technology summary",
                 "id": "onet-hot",
                 "limitation": "Posting mentions do not prove proficiency, adoption or automation rate.",
                 "market": "US",
                 "name": "Hot Technologies 29-1041.00 Optometrists",
-                "period": "O*NET technology data current 2026; accessed 2026-08-31",
+                "period": "2025-01-01—2025-12-31美国Lightcast去重招聘广告",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/29-1041.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "29-1041精确10任务：检查视觉系统分析结果治疗计划，镜片接触镜矫正视力，依州许可药物、教育护理、术前术后、会诊转诊、低视力康复。"
                 ],
@@ -13578,7 +13675,7 @@
                 "limitation": "美国任务及授权边界，中国岗位资格另核，不是诊疗指南。",
                 "market": "US",
                 "name": "29-1041.00 Optometrists",
-                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "period": "O*NET 2026职业页面；本次仅读指定任务、环境、教育等段",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1041.00"
@@ -13629,7 +13726,7 @@
                 "url": "https://www.onetonline.org/link/custom/29-1041.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13638,37 +13735,37 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "29-1041.00 - Optometrists",
-                "period": "O*NET 2026 occupational profile; checked 2026-10-12",
+                "period": "O*NET 2026职业页面；本次仅读指定任务、环境、教育等段",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-1041.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "严格HTTPS当前实读三种浏览器各8%，Excel不足1%，其余列示NA；分母为关联职业去重招聘广告，不是医学AI采用率。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "Hot Technologies: 29-1041.00 - Optometrists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "2025-01-01—2025-12-31美国Lightcast去重招聘广告",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/29-1041.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "严格HTTPS当前实读卫生和社会工作80%、零售13%、其他7%；页面未标统计年，不据另一摘要补年。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "Industries: 29-1041.00 - Optometrists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "本次子页快照未标统计年",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/29-1041.00"
@@ -13719,7 +13816,7 @@
                 "url": "https://www.onetonline.org/link/localwages/29-1041.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13728,7 +13825,7 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "29-1041.00 - Optometrists",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "O*NET 2026职业页面；本次仅读指定任务、环境、教育等段",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1041.00"
@@ -13761,7 +13858,7 @@
                 "period": "作者编辑练习2026-10-02",
                 "publisher": "FermatMind",
                 "scope": "internal_rubric",
-                "url": null
+                "url": "https://fermatmind.com/zh/career/jobs/optometrists"
               },
               {
                 "accessed_at": "2026-10-02",
@@ -13780,20 +13877,221 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "测远近视力、屈光和双眼协调。 — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "观察眼前节、眼底和眼压等指标。 — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "结合病史识别屈光或眼部异常。 — 50/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "原42%编辑估算已撤回：现有原证不足以验证三项临床任务的25/50/50档位；不另造替代分数。",
+                  "只讨论虚构记录的信息整理与缺项提示是否值得验证，不对影像诊断、处方或治疗赋能力档位。",
+                  "原选定视觉及屈光测量任务：职业来源描述职责，未建立其AI测量能力档位。",
+                  "原选定眼部指标观察任务：未建立影像或体征判读的AI效果档位。",
+                  "原选定病史整合判断任务：未建立临床决策的AI效果档位。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "limitation": "本职业；不能由任务描述、招聘技术提及或就业预测推算临床AI效果",
+                "name": "FermatMind AI定量证据缺口说明",
+                "period": "原方法2026-10-18；撤回复核2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "scope": "原编辑分数撤回说明；不是外部实测或临床许可",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "PDF第2–10页实读，定义在第6页；基于2015职业分类，鉴定条件非当前统一招聘或医师许可。"
+                ],
+                "evidence_type": "official or primary institutional source",
+                "id": "cn-optician-standard",
+                "limitation": "Only the stated sections and role; not a universal hiring or clinical-practice authorization.",
+                "market": "CN",
+                "name": "眼镜验光员国家职业技能标准（2018年版）",
+                "period": "2018版，2018-12-26发布",
+                "publisher": "人力资源和社会保障部",
+                "scope": "jurisdiction_or_role_specific",
+                "url": "https://www.osta.org.cn/api/sys/downloadFile/decrypt?fileName=4eNsZIOv3WFNDfbnldJHeA%2F2024%2F4%2F29%2Fc109461d3ecf4b24957f3f34bdf21c52.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第2、9–14条医师定义、资格考试、注册与执业范围；只引用相关条款。"
+                ],
+                "evidence_type": "official or primary institutional source",
+                "id": "cn-medical-practice",
+                "limitation": "Only the stated sections and role; not a universal hiring or clinical-practice authorization.",
+                "market": "CN",
+                "name": "中华人民共和国医师法",
+                "period": "2022-03-01施行",
+                "publisher": "全国人大常委会；北京市政府公开文本",
+                "scope": "jurisdiction_or_role_specific",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "学历审核第六条医学技术类与眼视光医学条款；历史入学例外须按原文。"
+                ],
+                "evidence_type": "official or primary institutional source",
+                "id": "cn-medical-exam",
+                "limitation": "Only the stated sections and role; not a universal hiring or clinical-practice authorization.",
+                "market": "CN",
+                "name": "医师资格考试报名资格规定（2014版）",
+                "period": "2014版，页面列现行有效",
+                "publisher": "原国家卫生计生委等；北京市政府公开文本",
+                "scope": "jurisdiction_or_role_specific",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202408/t20240821_3779268.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "安康人社2026年2月9日岗位表中，安康爱尔眼科医院列验光师8人、月薪3500元起，要求大专及以上、公告所称相关职业资格及设备和沟通能力。这是当时单一雇主样本，税前后、收入构成及是否仍招聘未核，不代表全国工资或统一法定资格。"
+                ],
+                "evidence_type": "official or primary institutional source",
+                "id": "cn-ankang-job",
+                "limitation": "Only the stated sections and role; not a universal hiring or clinical-practice authorization.",
+                "market": "CN",
+                "name": "安康市2026年第二批就业岗位需求信息",
+                "period": "2026-02-09历史招聘",
+                "publisher": "安康市人力资源和社会保障局",
+                "scope": "historical_single_employer_sample",
+                "url": "https://rsj.ankang.gov.cn/Content-2895851.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅引用第4、28、29条；医疗健康等敏感个人信息与处理条件，不认定某平台已合规。"
+                ],
+                "evidence_type": "official law",
+                "id": "cn-pipl",
+                "limitation": "Specified provisions only; no complete compliance assessment.",
+                "market": "CN",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021-11-01施行",
+                "publisher": "全国人大常委会；中央网信办公开文本",
+                "scope": "articles_4_28_29",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "已读感染风险及症状指定段；眼痛、突发模糊等需立即联系眼科专业人员，不扩为所有眼病诊疗流程。"
+                ],
+                "evidence_type": "official public health information",
+                "id": "cdc-contact-lenses",
+                "limitation": "Contact-lens context; not a diagnostic or treatment protocol.",
+                "market": "US",
+                "name": "What Causes Contact Lens-related Eye Infections",
+                "period": "2025-05-27",
+                "publisher": "U.S. Centers for Disease Control and Prevention",
+                "scope": "contact_lens_related_infections",
+                "url": "https://www.cdc.gov/contact-lenses/causes/index.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "眼病医学诊疗和较广范围的眼科手术。",
+                  "OD也在州许可范围内诊疗，差别不是是否治病。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-29-1241.00",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "眼科医师",
+                "period": "2026职业页面指定定义与任务段",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/29-1241.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "依据处方和客户测量调整镜片镜架、核成品与配戴。",
+                  "侧重验配服务；不能由这些任务推定独立眼病诊断权限。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-29-2081.00",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "配镜师",
+                "period": "2026职业页面指定定义与任务段",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/29-2081.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "协助眼科医师做病史、视力、眼压等检查及相关临床任务。",
+                  "具体监督、工作范围及职责须按岗位核。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-29-2057.00",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "眼科医疗技术员",
+                "period": "2026职业页面指定定义与任务段",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/29-2057.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "可涉及摄影、超声、人员指导及协助手术等任务。",
+                  "与技术员任务重叠，不凭称呼推定独立执业权。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-29-2099.05",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "眼科医疗技术师",
+                "period": "2026职业页面指定定义与任务段",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/29-2099.05"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "评估双眼视觉、异常眼动、斜视弱视等，并作非手术管理。",
+                  "不只眼肌训练；职责与所需专业路径另核。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-29-1299.02",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "视功能矫治师",
+                "period": "2026职业页面指定定义与任务段",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/29-1299.02"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "按生产规格切磨、抛光、检验及装配光学镜片。",
+                  "重点是光学制造，不是眼病诊断。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "neighbor-51-9083.00",
+                "limitation": "American occupational task context; not a mainland credential crosswalk or an automatic transfer qualification.",
+                "market": "US",
+                "name": "眼镜光学实验室技师",
+                "period": "2026职业页面指定定义与任务段",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact_related_occupation",
+                "url": "https://www.onetonline.org/link/summary/51-9083.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "指定症状与求助段：闭角型青光眼可突发剧烈眼痛、恶心、红眼和模糊，NEI建议立即就医；不据此为读者诊断。"
+                ],
+                "evidence_type": "official public health information",
+                "id": "nei-glaucoma",
+                "limitation": "Condition-specific public information, not an individual triage or treatment protocol.",
+                "market": "US",
+                "name": "Glaucoma",
+                "period": "2026-08-19更新",
+                "publisher": "U.S. National Eye Institute",
+                "scope": "glaucoma_warning_information",
+                "url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma"
               }
             ]
           },
@@ -13839,24 +14137,24 @@
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
-            "label": "职业任务"
+            "href": "https://www.onetonline.org/link/summary/29-1241.00",
+            "label": "眼科医师"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "label": "相邻职业"
+            "href": "https://www.onetonline.org/link/summary/29-2081.00",
+            "label": "配镜师"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
-            "label": "工作活动"
+            "href": "https://www.onetonline.org/link/summary/29-2057.00",
+            "label": "眼科医疗技术员"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "label": "教育差异"
+            "href": "https://www.onetonline.org/link/summary/29-2099.05",
+            "label": "眼科医疗技术师"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
-            "label": "职业边界"
+            "href": "https://www.onetonline.org/link/summary/29-1299.02",
+            "label": "视功能矫治师"
           }
         ],
         "evidence_note": {
@@ -13886,37 +14184,37 @@
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "核心工作与产出": "眼病医学诊疗与手术",
-            "职业方向": "眼科医生"
+            "核心工作与产出": "眼病医学诊疗和较广范围的眼科手术。",
+            "职业方向": "眼科医师"
           },
           {
-            "关键区别": "不独立诊断开处方",
-            "更适合什么选择": "喜欢配镜服务",
-            "核心工作与产出": "按处方选配镜片镜架",
+            "关键区别": "侧重验配服务；不能由这些任务推定独立眼病诊断权限。",
+            "更适合什么选择": "对镜架镜片、测量与顾客服务感兴趣。",
+            "核心工作与产出": "依据处方和客户测量调整镜片镜架、核成品与配戴。",
             "职业方向": "配镜师"
           },
           {
-            "关键区别": "不承担验光师独立执业职责",
-            "更适合什么选择": "喜欢临床辅助",
-            "核心工作与产出": "医生监督下做眼科检查",
+            "关键区别": "具体监督、工作范围及职责须按岗位核。",
+            "更适合什么选择": "希望了解临床团队中的检查辅助工作。",
+            "核心工作与产出": "协助眼科医师做病史、视力、眼压等检查及相关临床任务。",
             "职业方向": "眼科医疗技术员"
           },
           {
-            "关键区别": "以医生协助为主",
-            "更适合什么选择": "喜欢影像技术",
-            "核心工作与产出": "复杂检查与影像",
+            "关键区别": "与技术员任务重叠，不凭称呼推定独立执业权。",
+            "更适合什么选择": "对眼科影像设备及技术指导工作感兴趣。",
+            "核心工作与产出": "可涉及摄影、超声、人员指导及协助手术等任务。",
             "职业方向": "眼科医疗技术师"
           },
           {
-            "关键区别": "专门康复方向",
-            "更适合什么选择": "喜欢视功能训练",
-            "核心工作与产出": "双眼视觉和眼肌训练",
+            "关键区别": "不只眼肌训练；职责与所需专业路径另核。",
+            "更适合什么选择": "对双眼视觉及非手术管理方向感兴趣。",
+            "核心工作与产出": "评估双眼视觉、异常眼动、斜视弱视等，并作非手术管理。",
             "职业方向": "视功能矫治师"
           },
           {
-            "关键区别": "生产而非诊断",
-            "更适合什么选择": "喜欢精密制造",
-            "核心工作与产出": "切磨装配镜片",
+            "关键区别": "重点是光学制造，不是眼病诊断。",
+            "更适合什么选择": "对精密制造与产品检验感兴趣。",
+            "核心工作与产出": "按生产规格切磨、抛光、检验及装配光学镜片。",
             "职业方向": "眼镜光学实验室技师"
           }
         ],
@@ -13981,7 +14279,7 @@
             }
           }
         ],
-        "answer": "工具可辅助影像提示、病历摘要和视功能趋势整理；检查诊断、镜片处方、用药与转诊的执业责任必须由有权限人员核实。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
+        "answer": "本页尚未建立可核验的任务级AI效果或影响比例，原42%编辑估算已撤回。可用下方I/J虚构记录测试资料整理与缺项提示，但输出是否准确需逐项核对；这不是临床能力或真实患者使用许可。",
         "authority_links": [
           {
             "来源": "职业任务",
@@ -14026,25 +14324,25 @@
             "链接": "https://www.onetonline.org/link/details/29-1041.00"
           }
         ],
-        "difference_intro": "影像提示、摘要与视功能趋势整理为编辑试用建议；临床判断、处方、用药和转诊须人核，未取得单项提效实测。",
+        "difference_intro": "区分待验证的记录辅助与临床任务，不能用职业任务清单或总体就业预测证明AI效果。",
         "difference_rows": [
           {
-            "AI主要改变": "辅助归纳记录与候选",
-            "仍由人负责": "检查诊断、镜片处方、用药与转诊的执业责任",
+            "AI主要改变": "仅把已给文字摘录作为试验候选，准确性待逐项核对。",
+            "仍由人负责": "核原病史来源、眼别、遗漏与患者确认。",
             "方向": "病史采集"
           },
           {
-            "AI主要改变": "辅助归纳记录与候选",
-            "仍由人负责": "检查诊断、镜片处方、用药与转诊的执业责任",
+            "AI主要改变": "本页未验证视力或屈光测量能力。",
+            "仍由人负责": "有资格人员核测量过程与结果。",
             "方向": "视力检查"
           },
           {
-            "AI主要改变": "辅助归纳记录与候选",
-            "仍由人负责": "检查诊断、镜片处方、用药与转诊的执业责任",
+            "AI主要改变": "本页未验证影像或眼部体征判读能力。",
+            "仍由人负责": "专业人员结合实际检查核判读。",
             "方向": "眼部检查"
           }
         ],
-        "evidence_intro": "O*NET列29-1041.00任务；BLS就业表不测单项AI效果。",
+        "evidence_intro": "下列资料支持职业、工资及资格范围，不是本职业医学AI产品的效能试验。",
         "evidence_rows": [
           {
             "使用限制": "描述职业任务，不测AI效果。",
@@ -14069,10 +14367,10 @@
           },
           {
             "source_ref": "bls-optometrist-ooh",
-            "使用限制": "具体授权按所在地和雇主。",
+            "使用限制": "美国许可概述与大陆资格分别核，不证明AI能力。",
             "来源": "教育与资格",
             "研究对象": "验光师",
-            "结论": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
+            "结论": "美国通常需完成认可O.D.课程和州许可；药物及部分操作范围因州而异，须继续教育及定期续期，board certification可选。",
             "链接": "https://www.bls.gov/ooh/healthcare/optometrists.htm"
           },
           {
@@ -14087,11 +14385,11 @@
         "heading": "验光师：工具辅助与人的控制",
         "method_cards": [
           {
-            "含义": "工具可辅助部分信息整理；任务描述不等于自动化率。",
+            "含义": "资料整理仅作为待验证情景，不宣称临床提效或自动化率。",
             "概念": "任务辅助"
           },
           {
-            "含义": "须先核权限、可靠性、复核人和失败处理。",
+            "含义": "工具是否可进入实际机构流程需单独验证，并核数据处理、适用范围和责任安排。",
             "概念": "机构采用"
           },
           {
@@ -14101,75 +14399,82 @@
         ],
         "questions": [
           {
-            "回答": "不能；检查诊断、镜片处方、用药与转诊的执业责任须人工核。",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "问题": "AI可独立操作吗？"
+            "source_ref": "bls-optometrist-ooh",
+            "回答": "不能建立这一结论；现有来源没有给出本职业AI任务级效能。真实诊疗和处方仍须符合适用资格及执业范围。",
+            "来源": "职责与执业背景，非AI效能试验",
+            "链接": "https://www.bls.gov/ooh/healthcare/optometrists.htm",
+            "问题": "本页能证明AI可独立完成吗？"
           },
           {
-            "回答": "回到原始记录并暂停高风险操作。",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "问题": "输入错误怎么办？"
+            "source_ref": "internal-rubric",
+            "回答": "在本页I/J练习中保留原记录、标出冲突与未核项，不自行更改眼别、诊断或代签。",
+            "来源": "本页I/J编辑练习，非临床指南",
+            "链接": "https://fermatmind.com/zh/career/jobs/optometrists",
+            "问题": "记录有冲突怎么办？"
           },
           {
-            "回答": "只用获准系统和权限。",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "source_ref": "cn-pipl",
+            "回答": "本练习只用虚构资料。在中国大陆，医疗健康信息涉及敏感个人信息保护；真实处理须另核法律、机构及系统条件，本页不认定上传合规。",
+            "来源": "个人信息保护法指定条款",
+            "链接": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
             "问题": "可上传真实数据吗？"
           },
           {
-            "回答": "对照检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明和现场。",
-            "来源": "官方职业资料",
-            "链接": "https://www.onetonline.org/link/details/29-1041.00",
+            "source_ref": "internal-rubric",
+            "回答": "对照I/J原输入逐项检查眼别、单项推断、资格和签名缺项，保留工具建议与未决问题。",
+            "来源": "本页I/J编辑练习，非效能验证",
+            "链接": "https://fermatmind.com/zh/career/jobs/optometrists",
             "问题": "如何检查输出？"
           },
           {
-            "回答": "官方就业表不能推导单项替代率。",
-            "来源": "官方职业资料",
+            "source_ref": "bls-2025-35-29-1041",
+            "回答": "本页不能由总体就业预测推算AI替代岗位数量。",
+            "来源": "BLS总体就业预测，非AI归因",
             "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "问题": "AI会替代多少岗位？"
           },
           {
-            "回答": "检查诊断、镜片处方、用药与转诊的执业责任",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "问题": "谁承担结果责任？"
+            "source_ref": "bls-optometrist-ooh",
+            "回答": "应按所在地法律、人员资格、实际职责和机构流程明确；工具输出不能替代这些要求，本页不分配具体个案责任。",
+            "来源": "美国执业范围概述",
+            "链接": "https://www.bls.gov/ooh/healthcare/optometrists.htm",
+            "问题": "谁负责真实临床结果？"
           },
           {
-            "回答": "综合检查并转眼科。",
-            "来源": "官方职业资料",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "问题": "何时升级？"
+            "source_ref": "cdc-contact-lenses",
+            "回答": "不能。CDC在接触镜相关症状语境中提示眼痛、突发视物模糊等需立即联系眼科专业人员；本页不提供个案诊断或分诊规则。",
+            "来源": "CDC接触镜感染风险与症状",
+            "链接": "https://www.cdc.gov/contact-lenses/causes/index.html",
+            "问题": "本页能判断患者紧急程度吗？"
           }
         ],
-        "responsibility_intro": "只用虚构样本试工具，真实业务核患者隐私、设备验证、许可范围和人工临床复核。",
+        "responsibility_intro": "下方I/J只使用虚构记录；纸面核对不评价临床能力，不决定真实诊疗或数据上传权限。",
         "responsibility_steps": [
           {
             "步骤": "核对象",
-            "说明": "核症状、用药、既往眼病和风险。"
+            "说明": "确认材料带虚构标识，不使用真实病历。"
           },
           {
             "步骤": "核任务",
-            "说明": "测远近视力、屈光和双眼协调。"
+            "说明": "区分原记录、工具建议与个人推断。"
           },
           {
             "步骤": "核记录",
-            "说明": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明"
+            "说明": "逐项核I眼别/单项推断和J资格/签名缺项。"
           },
           {
             "步骤": "核异常",
-            "说明": "综合检查并转眼科。"
+            "说明": "把冲突列为未决问题，不擅改、诊断或代签。"
           },
           {
             "步骤": "核授权",
-            "说明": "检查诊断、镜片处方、用药与转诊的执业责任"
+            "说明": "说明真实业务须由相应有资格人员按实际职责核对。"
           }
         ],
         "risk_rows": [
           {
             "为什么重要": "延误治疗。",
-            "控制方式": "综合检查并转眼科。",
+            "控制方式": "由专业人员结合病史和检查核对，必要时按患者需要及执业范围会诊或转诊；本页不决定具体患者处置。",
             "风险": "严重眼病漏诊"
           },
           {
@@ -14195,46 +14500,46 @@
         ],
         "task_rows": [
           {
-            "人的控制点": "检查诊断、镜片处方、用药与转诊的执业责任",
+            "人的控制点": "核原病史来源、眼别、遗漏与患者确认。",
             "任务": "核症状、用药、既往眼病和风险。",
             "工作方向": "病史采集",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "仅把已给文字摘录作为试验候选，准确性待逐项核对。"
           },
           {
-            "人的控制点": "检查诊断、镜片处方、用药与转诊的执业责任",
+            "人的控制点": "有资格人员核测量过程与结果。",
             "任务": "测远近视力、屈光和双眼协调。",
             "工作方向": "视力检查",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "本页未验证视力或屈光测量能力。"
           },
           {
-            "人的控制点": "检查诊断、镜片处方、用药与转诊的执业责任",
+            "人的控制点": "专业人员结合实际检查核判读。",
             "任务": "观察眼前节、眼底和眼压等指标。",
             "工作方向": "眼部检查",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "本页未验证影像或眼部体征判读能力。"
           },
           {
-            "人的控制点": "检查诊断、镜片处方、用药与转诊的执业责任",
+            "人的控制点": "临床人员核证据、鉴别及其执业范围。",
             "任务": "结合病史识别屈光或眼部异常。",
             "工作方向": "结果判断",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "本页未建立结合病史作诊断的AI效果。"
           },
           {
-            "人的控制点": "检查诊断、镜片处方、用药与转诊的执业责任",
+            "人的控制点": "具备适用资格者核处方内容与范围。",
             "任务": "按执业权限开镜片或接触镜处方。",
             "工作方向": "处方服务",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "本页未建立自主开具镜片或药物处方的能力。"
           },
           {
-            "人的控制点": "检查诊断、镜片处方、用药与转诊的执业责任",
-            "任务": "按许可治疗并把高风险疾病转眼科。",
+            "人的控制点": "有资格人员根据患者情况及适用流程决定。",
+            "任务": "按许可范围提供照护，并在患者需要额外诊疗或超出本人范围、经验时会诊或转诊。",
             "工作方向": "治疗转诊",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "本页未建立治疗或转诊决策的AI效果。"
           },
           {
-            "人的控制点": "检查诊断、镜片处方、用药与转诊的执业责任",
+            "人的控制点": "核说明对象、原批准内容和患者理解。",
             "任务": "说明护理、复查和危险症状。",
             "工作方向": "随访教育",
-            "当前变化": "辅助归纳记录与候选"
+            "当前变化": "既定说明的易读草稿可作试验候选，内容须专业核对。"
           }
         ],
         "transition": "转相邻岗位需补目标职业训练和资格。"
@@ -14268,39 +14573,39 @@
             "stage": "七日纸面作品"
           }
         ],
-        "direct_answer": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-        "entry_heading": "先学基础任务，再受监督实践",
+        "direct_answer": "美国通常须完成经认可的四年制O.D.课程并取得州执照。入学至少需三年本科教育，通常已有学士学位；四年并非全部教育总时长。各州要求许可考试、继续教育及定期续期，board certification为可选。 先分清目标是大陆临床医师、视光技术还是零售验配，再核具体专业、实践、技能评价及岗位范围。美国O.D.教育和州执照是另一条路径，不能直接转换为大陆执业资格。",
+        "entry_heading": "先分清岗位，再核教育与执业路径",
         "heading": "验光师训练与资格路径",
         "locale_requirements": {
-          "credential_boundary": "课程或兴趣分数不自动授独立工作权限。",
-          "jurisdiction": "美国29-1041.00与中国岗位资格分别核。",
-          "summary": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。"
+          "credential_boundary": "学习观察点不是统一晋升时间表；观察、临床受训与独立执业权限不同。",
+          "jurisdiction": "美国29-1041.00职责与大陆不同岗位、教育和资格分别核对。",
+          "summary": "大陆相关岗位包括眼镜验光员及医疗机构中的眼视光岗位，与美国O.D.不一一对应。眼镜验光处方不等于药物处方或医师执业资格；涉及眼病诊疗须另核医师注册、机构及岗位范围。技能等级、学历、医师资格与雇主要求分别核对。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
             "href": "https://www.bls.gov/ooh/healthcare/optometrists.htm",
             "id": "bls",
-            "label": "教育与资格",
-            "scope": "美国OD教育和州执照概述；药物种类、手术及其他操作许可因州不同，board certification可选；中国资格和机构权限另核。"
+            "label": "美国教育与州执照",
+            "scope": "OD通常四年研究生学习、每州须执照，允许药物种类与手术等范围因州不同。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
+            "href": "https://www.osta.org.cn/api/sys/downloadFile/decrypt?fileName=4eNsZIOv3WFNDfbnldJHeA%2F2024%2F4%2F29%2Fc109461d3ecf4b24957f3f34bdf21c52.pdf",
             "id": "nasa",
-            "label": "职业任务",
-            "scope": "美国29-1041.00精确职业"
+            "label": "大陆眼镜验光员技能定义",
+            "scope": "PDF第2–10页实读，定义在第6页；基于2015职业分类，鉴定条件非当前统一招聘或医师许可。"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202408/t20240821_3779268.html",
             "id": "onet-training",
-            "label": "职业预测",
-            "scope": "美国29-1041.00精确职业"
+            "label": "大陆医师报考学历条件",
+            "scope": "学历审核第六条医学技术类与眼视光医学条款；历史入学例外须按原文。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
+            "href": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html",
             "id": "faa",
-            "label": "工作活动",
-            "scope": "美国29-1041.00精确职业"
+            "label": "大陆医师注册与执业范围",
+            "scope": "第2、9–14条医师定义、资格考试、注册与执业范围；只引用相关条款。"
           }
         ],
         "tracks": [
@@ -14308,31 +14613,31 @@
             "id": "office-support",
             "stages": [
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "核症状、用药、既往眼病和风险。；按岗位授权。",
+                "credentials": "观察须经机构许可，不等于临床受训资格。",
+                "next_moves": "先核适用项目及下一步准入条件。",
+                "readiness_evidence": "个人学习问题清单，不包含真实患者信息。",
+                "responsibility": "观察获准的病史访谈与记录流程，记下术语和疑问，不独立接诊。",
                 "role": "观察学习"
               },
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "核症状、用药、既往眼病和风险。；按岗位授权。",
+                "credentials": "具体课程/实习准入与监督安排。",
+                "next_moves": "按反馈补学习缺口，不自行接管患者。",
+                "readiness_evidence": "由指定监督人员评价的学习记录，不公开真实病历。",
+                "responsibility": "进入获准的临床教学或实习后，在指定监督下参与病史采集。",
                 "role": "受训执行"
               },
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "核症状、用药、既往眼病和风险。；按岗位授权。",
+                "credentials": "美国州执照；大陆对应岗位的法定资格及机构范围。",
+                "next_moves": "按实际岗位评价与法规要求发展。",
+                "readiness_evidence": "与本次职责相符的专业记录，并非每次全套文件。",
+                "responsibility": "具备适用资格与权限后，按职责核病史、症状及资料完整性。",
                 "role": "独立交接"
               },
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "核症状、用药、既往眼病和风险。；按岗位授权。",
+                "credentials": "继续教育或质量改进不自动扩展执业范围。",
+                "next_moves": "按新增任务重新核训练、资格及授权。",
+                "readiness_evidence": "经机构允许使用的复盘结论或改进记录。",
+                "responsibility": "参与病例复盘或病史记录质量改进，新增职责仍须另核权限。",
                 "role": "进阶复核"
               }
             ],
@@ -14342,31 +14647,31 @@
             "id": "supplier-cost",
             "stages": [
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "观察眼前节、眼底和眼压等指标。；按岗位授权。",
+                "credentials": "观察须经机构许可，不等于临床受训资格。",
+                "next_moves": "先核适用项目及下一步准入条件。",
+                "readiness_evidence": "个人学习问题清单，不包含真实患者信息。",
+                "responsibility": "观察专业人员如何组织眼部检查，不自行检查患者或解释结果。",
                 "role": "观察学习"
               },
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "观察眼前节、眼底和眼压等指标。；按岗位授权。",
+                "credentials": "具体课程/实习准入与监督安排。",
+                "next_moves": "按反馈补学习缺口，不自行接管患者。",
+                "readiness_evidence": "由指定监督人员评价的学习记录，不公开真实病历。",
+                "responsibility": "在获准训练及指定监督下学习相应设备和检查过程。",
                 "role": "受训执行"
               },
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "观察眼前节、眼底和眼压等指标。；按岗位授权。",
+                "credentials": "美国州执照；大陆对应岗位的法定资格及机构范围。",
+                "next_moves": "按实际岗位评价与法规要求发展。",
+                "readiness_evidence": "与本次职责相符的专业记录，并非每次全套文件。",
+                "responsibility": "具备适用资格后，在个人执业范围内开展检查与结果分析。",
                 "role": "独立交接"
               },
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "观察眼前节、眼底和眼压等指标。；按岗位授权。",
+                "credentials": "继续教育或质量改进不自动扩展执业范围。",
+                "next_moves": "按新增任务重新核训练、资格及授权。",
+                "readiness_evidence": "经机构允许使用的复盘结论或改进记录。",
+                "responsibility": "持续学习检查技术并参与质量复盘，不能据此自动增加操作权限。",
                 "role": "进阶复核"
               }
             ],
@@ -14376,31 +14681,31 @@
             "id": "records-information",
             "stages": [
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "按执业权限开镜片或接触镜处方。；按岗位授权。",
+                "credentials": "观察须经机构许可，不等于临床受训资格。",
+                "next_moves": "先核适用项目及下一步准入条件。",
+                "readiness_evidence": "个人学习问题清单，不包含真实患者信息。",
+                "responsibility": "了解处方形成与核对流程，不自行给患者开处方。",
                 "role": "观察学习"
               },
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "按执业权限开镜片或接触镜处方。；按岗位授权。",
+                "credentials": "具体课程/实习准入与监督安排。",
+                "next_moves": "按反馈补学习缺口，不自行接管患者。",
+                "readiness_evidence": "由指定监督人员评价的学习记录，不公开真实病历。",
+                "responsibility": "在获准临床教育安排中学习处方核对，执行内容由监督人员决定。",
                 "role": "受训执行"
               },
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "按执业权限开镜片或接触镜处方。；按岗位授权。",
+                "credentials": "美国州执照；大陆对应岗位的法定资格及机构范围。",
+                "next_moves": "按实际岗位评价与法规要求发展。",
+                "readiness_evidence": "与本次职责相符的专业记录，并非每次全套文件。",
+                "responsibility": "只有符合适用资格和范围时才开展相应处方服务。",
                 "role": "独立交接"
               },
               {
-                "credentials": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
-                "next_moves": "先核质量和权限，再扩大任务范围。",
-                "readiness_evidence": "检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明",
-                "responsibility": "按执业权限开镜片或接触镜处方。；按岗位授权。",
+                "credentials": "继续教育或质量改进不自动扩展执业范围。",
+                "next_moves": "按新增任务重新核训练、资格及授权。",
+                "readiness_evidence": "经机构允许使用的复盘结论或改进记录。",
+                "responsibility": "复盘处方质量与随访沟通；新增药物或操作范围须另核。",
                 "role": "进阶复核"
               }
             ],
@@ -14425,7 +14730,7 @@
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "验光师：验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+                  "label": "工作场景与过程",
                   "secondary_value": {
                     "$item": "optometrists.profile.work-context-block.3",
                     "block": "profile",
@@ -14441,7 +14746,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "验光师：验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+                  "label": "相邻职责与设备",
                   "secondary_value": {
                     "$item": "optometrists.profile.onet-structured-fields-block.5",
                     "block": "profile",
@@ -14457,7 +14762,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "验光师：验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+                  "label": "可能形成的记录",
                   "secondary_value": null,
                   "value": {
                     "$item": "optometrists.profile.work-context-block.8",
@@ -14470,7 +14775,7 @@
             }
           },
           {
-            "answer": "核心是检查视觉系统，诊断和管理执业范围内的眼部问题，开具矫正镜片处方，并按所在地许可提供治疗或药物；疑难及手术需求转眼科医生。；能力靠监督反馈和交付记录验证。",
+            "answer": "相关能力包括细致检查、解释信息与判断何时转交；须在相应专业训练与实践中评价，兴趣或纸面练习不能证明临床胜任。",
             "key": "qa2",
             "question": "需要哪些能力？",
             "table": {
@@ -14509,7 +14814,7 @@
                   "alternate_value": null,
                   "label": "治疗转诊",
                   "secondary_value": "检查诊断、镜片处方、用药与转诊的执业责任",
-                  "value": "按许可治疗并把高风险疾病转眼科。"
+                  "value": "按许可范围提供照护，并在患者需要额外诊疗或超出本人范围、经验时会诊或转诊。"
                 },
                 {
                   "alternate_value": null,
@@ -14521,46 +14826,46 @@
             }
           },
           {
-            "answer": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。",
+            "answer": "大陆先辨医师、视光技术及验配岗位，再核相应教育与资格；美国Optometrist通常需认可OD教育和州许可。",
             "key": "qa1",
             "question": "怎样入行？",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "基础教育",
-                  "secondary_value": "核招聘",
-                  "value": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。"
+                  "label": "大陆医师方向",
+                  "secondary_value": "核报名学历规定、医师法及目标机构。",
+                  "value": "医学学历及实践、医师考试和注册分别核；美国OD不自动授予大陆医师资格。"
                 },
                 {
                   "alternate_value": null,
-                  "label": "技能训练",
-                  "secondary_value": "核岗位",
-                  "value": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。"
+                  "label": "大陆技术与验配方向",
+                  "secondary_value": "核职业标准、技能评价及具体职责。",
+                  "value": "核专业或技能训练和真实岗位；眼镜验光处方不等同药物处方或医师执业资格。"
                 },
                 {
                   "alternate_value": null,
-                  "label": "受监督实践",
-                  "secondary_value": "核反馈",
-                  "value": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。"
+                  "label": "美国专业教育",
+                  "secondary_value": "核具体认可项目及前置课程。",
+                  "value": "通常为认可的四年OD课程，入学至少三年本科教育，申请者通常已有学士学位。"
                 },
                 {
                   "alternate_value": null,
-                  "label": "职业资格",
-                  "secondary_value": "核地区",
-                  "value": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。"
+                  "label": "受监督临床训练",
+                  "secondary_value": "核项目的临床教学安排。",
+                  "value": "OD课程包含临床训练；参与范围按项目及监督安排。"
                 },
                 {
                   "alternate_value": null,
-                  "label": "机构授权",
-                  "secondary_value": "核有效期",
-                  "value": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。"
+                  "label": "州许可",
+                  "secondary_value": "核目标州许可委员会要求。",
+                  "value": "需完成适用考试和州执照申请；部分州另有考试。"
                 },
                 {
                   "alternate_value": null,
-                  "label": "中国岗位",
-                  "secondary_value": "核本地规则",
-                  "value": "BLS列博士或专业学位；美国须完成视光专业教育并获州执照，药物权限因州而异，中国岗位与法定资格另核。"
+                  "label": "继续教育与续期",
+                  "secondary_value": "核州续期规则，不与自愿认证混同。",
+                  "value": "各州要求继续教育及定期续期；board certification可选。"
                 }
               ]
             }
@@ -14598,7 +14903,7 @@
           {
             "affected_roles": {
               "$join": [
-                "患者、接诊验光师和会诊团队。检查背景：",
+                "患者、接诊及相关协作人员。职责背景：",
                 {
                   "$item": "optometrists.risk.career-risk-cards.4",
                   "block": "risk",
@@ -14610,7 +14915,7 @@
             },
             "consequence": {
               "$join": [
-                "可能延误眼病识别和治疗。升级边界：",
+                "可能延误识别与照护。核对边界：",
                 {
                   "$item": "optometrists.risk.career-risk-cards.5",
                   "block": "risk",
@@ -14622,10 +14927,10 @@
             },
             "evidence_refs": [
               "onet",
-              "onet"
+              "nei"
             ],
             "id": "cost-change",
-            "mitigation": "综合检查并转眼科。",
+            "mitigation": "结合专业检查与适用职责核对，不用单项正常结果排除全部眼病。",
             "scenario": "把视力下降仅当屈光问题。",
             "title": "严重眼病漏诊"
           },
@@ -14634,10 +14939,10 @@
             "consequence": "可能导致矫正错误与使用不适。",
             "evidence_refs": [
               "onet",
-              "onet"
+              "editorial"
             ],
             "id": "record-version",
-            "mitigation": "复核检查与处方。",
+            "mitigation": "核眼别及原记录；本页I题只练找冲突，不自行更正真实处方。",
             "scenario": "度数或左右眼记错。",
             "title": "处方错误"
           },
@@ -14645,11 +14950,11 @@
             "affected_roles": "患者、处方验光师及药学协作人员。",
             "consequence": "可能造成药物伤害或违反适用许可规则。",
             "evidence_refs": [
-              "onet",
+              "bls",
               "onet"
             ],
             "id": "personal-data",
-            "mitigation": "核法定范围与禁忌。",
+            "mitigation": "核所在地规则和个人执业范围，不从工具输出取得处方权限。",
             "scenario": "处方超州或地区许可。",
             "title": "越权用药"
           },
@@ -14657,11 +14962,11 @@
             "affected_roles": "接触镜使用者、验光师及随访人员。",
             "consequence": "可能发生眼部损伤或感染。",
             "evidence_refs": [
-              "onet",
+              "facilities",
               "onet"
             ],
             "id": "technical-boundary",
-            "mitigation": "明确护理和复查。",
+            "mitigation": "按专业人员及产品要求进行护理教育；相关症状按CDC提示及时求助。",
             "scenario": "卫生与佩戴教育不足。",
             "title": "接触镜损伤"
           },
@@ -14669,23 +14974,23 @@
             "affected_roles": "患者、验光师及接收转诊的眼科团队。",
             "consequence": "可能延误急症处理并损伤视力。",
             "evidence_refs": [
-              "onet",
+              "nei",
               "onet"
             ],
             "id": "single-coverage",
-            "mitigation": "按急症流程转诊。",
-            "scenario": "眼痛或骤降视力未升级。",
-            "title": "急症漏转"
+            "mitigation": "NEI列出的突发剧烈眼痛、红眼、视物模糊等需立即就医，不由本页判断病因。",
+            "scenario": "把NEI所述突发剧烈眼痛、红眼或视物模糊等仅当普通验配问题。",
+            "title": "需及时求助的症状被忽略"
           },
           {
             "affected_roles": "患者、验光师及病历影像管理人员。",
             "consequence": "可能泄露病历或影像资料。",
             "evidence_refs": [
-              "onet",
+              "privacy",
               "onet"
             ],
             "id": "delivery-acceptance",
-            "mitigation": "用获准系统。",
+            "mitigation": "真实医疗信息处理须另核适用法律、机构规定与系统条件；练习只用虚构记录。",
             "scenario": "眼部影像病历外传。",
             "title": "隐私泄露"
           }
@@ -14695,32 +15000,44 @@
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "id": "onet",
-            "label": "任务",
-            "scope": "O*NET支持29-1041.00检查、处方、护理教育及转诊背景；风险为编辑提示，非临床阈值、事故率或具体州权限规则。"
+            "label": "职业任务背景",
+            "scope": "Employer tasks and local authorization vary."
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.bls.gov/ooh/healthcare/optometrists.htm",
             "id": "bls",
-            "label": "资格",
-            "scope": "O*NET支持29-1041.00检查、处方、护理教育及转诊背景；风险为编辑提示，非临床阈值、事故率或具体州权限规则。"
+            "label": "美国资格范围",
+            "scope": "OD通常四年研究生学习、每州须执照，允许药物种类与手术等范围因州不同。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1041.00",
+            "href": "https://www.cdc.gov/contact-lenses/causes/index.html",
             "id": "facilities",
-            "label": "工作环境",
-            "scope": "O*NET支持29-1041.00检查、处方、护理教育及转诊背景；风险为编辑提示，非临床阈值、事故率或具体州权限规则。"
+            "label": "接触镜感染",
+            "scope": "已读感染风险及症状指定段；眼痛、突发模糊等需立即联系眼科专业人员，不扩为所有眼病诊疗流程。"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
             "id": "privacy",
-            "label": "就业资料",
-            "scope": "O*NET支持29-1041.00检查、处方、护理教育及转诊背景；风险为编辑提示，非临床阈值、事故率或具体州权限规则。"
+            "label": "大陆个人信息保护",
+            "scope": "仅引用第4、28、29条；医疗健康等敏感个人信息与处理条件，不认定某平台已合规。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "id": "onet",
-            "label": "职业活动",
-            "scope": "O*NET支持29-1041.00检查、处方、护理教育及转诊背景；风险为编辑提示，非临床阈值、事故率或具体州权限规则。"
+            "label": "职业协作背景",
+            "scope": "Employer tasks and local authorization vary."
+          },
+          {
+            "href": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma",
+            "id": "nei",
+            "label": "青光眼特定警示信息",
+            "scope": "症状与立即求助信息；不作个案诊断或全科分诊标准。"
+          },
+          {
+            "href": "https://fermatmind.com/zh/career/jobs/optometrists",
+            "id": "editorial",
+            "label": "本页I/J虚构记录练习",
+            "scope": "仅纸面记录核对；不验证真实临床能力。"
           }
         ]
       },
@@ -14745,12 +15062,12 @@
             {
               "指标": "2025卫生和社会工作·城镇非私营",
               "数值": "146,266元/年（税前）",
-              "说明": "仅医疗机构雇主宽行业，含其他临床社会岗位非验光师工资个人区间。"
+              "说明": "卫生和社会工作行业的单位就业人员均值，含多种岗位，不是验光师工资或个人区间；眼镜零售单位按其行业分类核对，不能用于个体经营收入或诊所利润。"
             },
             {
               "指标": "2025卫生和社会工作·城镇私营",
               "数值": "75,631元/年（税前）",
-              "说明": "两人口分列非个人区间，个体自由职业自营诊所利润排除，门店销售另核。"
+              "说明": "卫生和社会工作行业的单位就业人员均值，含多种岗位，不是验光师工资或个人区间；眼镜零售单位按其行业分类核对，不能用于个体经营收入或诊所利润。"
             }
           ],
           "china_ai_row": {
@@ -14767,48 +15084,48 @@
           },
           "china_edu_table": [
             {
-              "学历段": "专业教育",
-              "岗位方向": "视觉科学与临床",
-              "说明": "核项目。"
+              "学历段": "眼视光医学等临床路径",
+              "岗位方向": "临床医师方向",
+              "说明": "专业名称相近不等于报考资格；核符合条件的医学学历、实践、考试及医师注册。"
             },
             {
-              "学历段": "临床训练",
-              "岗位方向": "检查处方与转诊",
-              "说明": "受监督。"
+              "学历段": "眼视光学或眼视光技术",
+              "岗位方向": "视光技术方向",
+              "说明": "核具体项目培养与实践安排；技术学历或技能证书不自动授予医师执业资格。"
             },
             {
-              "学历段": "执业许可",
-              "岗位方向": "地区法定准入",
-              "说明": "核有效期。"
+              "学历段": "眼镜验光员技能岗位",
+              "岗位方向": "眼镜验光及相关服务",
+              "说明": "国家标准描述眼镜验光处方和视觉康复训练；不等同药物处方或眼病诊疗权限。"
             },
             {
-              "学历段": "继续教育",
-              "岗位方向": "眼病与技术更新",
-              "说明": "按监管。"
+              "学历段": "目标岗位要求",
+              "岗位方向": "雇主、机构及地区",
+              "说明": "分别核真实职责、训练监督、资格及机构范围，不按美国OD直接换证。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "眼科门诊",
-              "需求": "视力检查与转诊。"
+              "行业": "医疗机构技术或辅助岗位",
+              "需求": "按资格、监督与职责配合检查、记录及服务。"
             },
             {
-              "行业": "视光中心",
-              "需求": "屈光和镜片服务。"
+              "行业": "眼镜验配服务场景",
+              "需求": "验光配镜、顾客沟通、产品与售后职责须逐岗核。"
             },
             {
-              "行业": "医疗机构",
-              "需求": "眼病识别与协作。"
+              "行业": "临床医师岗位",
+              "需求": "核医师资格、注册、机构及个人执业范围。"
             }
           ],
           "china_intl": "O*NET美国职业任务｜https://www.onetonline.org/link/details/29-1041.00",
-          "china_name_row": "中国工资：医疗雇主宽行业参考",
-          "china_open": "中国岗位与美国29-1041.00不一一映射。",
+          "china_name_row": "大陆工资：行业背景与单雇主样本",
+          "china_open": "大陆相关岗位包括眼镜验光员及医疗机构中的眼视光岗位，与美国O.D.不一一对应。眼镜验光处方不等于药物处方或医师执业资格；涉及眼病诊疗须另核医师注册、机构及岗位范围。技能等级、学历、医师资格与雇主要求分别核对。",
           "china_open_note": "核地区、雇主、资格、工时与福利。",
           "china_ref": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
           "china_salary_note": {
             "$join": [
-              "证据不足：全国验光师同职中位分位起薪未取得；2025卫生社会工作非私营146266/私营75631年税前年均仅医疗雇主宽行业，含其他岗非本职工资个人区间，排个体自由职业自营利润与门店销售。",
+              "未取得大陆验光相关岗位同口径全国工资中位数。2025年卫生和社会工作行业城镇非私营单位年平均工资为146,266元，私营单位为75,631元，均为税前行业背景。卫生和社会工作行业的单位就业人员均值，含多种岗位，不是验光师工资或个人区间；眼镜零售单位按其行业分类核对，不能用于个体经营收入或诊所利润。",
               {
                 "$item": "optometrists.china-salary.career-snapshot-primary-locale.5",
                 "block": "china-salary",
@@ -14830,7 +15147,7 @@
             },
             {
               "城市/区间": "公开来源覆盖",
-              "月薪参考": "不足以支持该职业的精确工资"
+              "月薪参考": "单一历史雇主样本不能代表全国职业中位数。"
             },
             {
               "城市/区间": "使用边界",
@@ -14843,7 +15160,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
+          "sources_note": "工作场景为区分岗位的示例，不是行业份额或岗位需求预测；工资见国家统计局2025原表，资格见职业标准及医师相关原章，招聘仅安康单雇主历史样本。",
           "ui": {
             "ai_heading": "工具与责任边界",
             "driver_heading": "影响因素",
@@ -14888,7 +15205,7 @@
           },
           {
             "指标": "就业人数",
-            "数值": "约45100",
+            "数值": "约45,100人",
             "说明": "BLS 29-1041.00精确职业。"
           },
           {
@@ -14898,14 +15215,14 @@
           },
           {
             "指标": "就业岗位空缺（平均年度）",
-            "数值": "约2000",
+            "数值": "约2,000个/年",
             "说明": "年均2000含替补，非净增4300或当前招聘。"
           }
         ],
         "boundary": "仅适用美国29-1041.00；不能跨国换算、代替个人报价或混用父类统计。",
         "direct_answer": {
           "$join": [
-            "美国29-1041精确2025中位136570美元；2025—2035总体9.5%、官方净增4300，年均2000空缺含替补，非AI或个人失业。",
+            "2025—2035年预计总体就业增长9.5%、净增约4,300人，年均2,000个空缺含增长与替补，不是当前招聘或AI效果。",
             {
               "$item": "optometrists.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -15004,7 +15321,7 @@
         "wage_column_labels": [
           "工资层级",
           "年薪参考",
-          "月度等值",
+          "换算限制",
           "解释"
         ],
         "wage_heading": "工资数据",
@@ -15062,7 +15379,7 @@
           }
         ]
       },
-      "definition_block": "检查视觉系统，诊断和管理执业范围内的眼部问题，开具矫正镜片处方，并按所在地许可提供治疗或药物；疑难及手术需求转眼科医生。",
+      "definition_block": "本页按美国O*NET 29-1041.00介绍Optometrists：检查眼和视觉系统，在州许可范围内诊断、管理和治疗相关问题，并开具矫正镜片处方。药物及部分操作权限因州而异；超出本人执业范围或经验时转诊。",
       "faq_block": {
         "items": {
           "$item": "optometrists.sources.faq-block.1",
@@ -15078,7 +15395,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "愿完成视光专业训练、承担检查和处方责任，并及时识别需转眼科的疾病，可探索验光师；可用虚构样本核检查记录、眼镜或隐形眼镜处方、治疗计划和转诊说明。",
+        "summary": "若对视光任务感兴趣，先比较大陆不同岗位路径与美国OD范围，再核目标教育、职责与资格；本文I/J只用于纸面记录探索。",
         "title": "验光师"
       },
       "fit_decision_checklist": {
@@ -15103,7 +15420,7 @@
       },
       "hero": {
         "h1": "验光师",
-        "quick_answer": "检查视觉系统，诊断和管理执业范围内的眼部问题，开具矫正镜片处方，并按所在地许可提供治疗或药物；疑难及手术需求转眼科医生。",
+        "quick_answer": "本页按美国O*NET 29-1041.00介绍Optometrists：检查眼和视觉系统，在州许可范围内诊断、管理和治疗相关问题，并开具矫正镜片处方。药物及部分操作权限因州而异；超出本人执业范围或经验时转诊。",
         "title": "验光师"
       },
       "market_signal_card": {
@@ -15214,68 +15531,68 @@
         ],
         "transitions": [
           {
-            "capability_gaps": "医师训练和手术范围不同",
-            "shared_capabilities": "视觉检查、处方、眼病识别、患者教育和转诊沟通",
+            "capability_gaps": "须核医师教育、资格及手术训练，不能直接换岗。",
+            "shared_capabilities": "患者沟通与眼部信息记录的既有经验。",
             "target_href": "/zh/career/jobs/ophthalmologists-except-pediatric",
             "target_slug": "ophthalmologists-except-pediatric",
-            "target_title": "眼科医生",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "target_title": "眼科医师",
+            "transition_distance": "以下是需核对的经验与缺口，不代表可以自动转岗。"
           },
           {
-            "capability_gaps": "不独立诊断开处方",
-            "shared_capabilities": "视觉检查、处方、眼病识别、患者教育和转诊沟通",
+            "capability_gaps": "补成品核验、验配流程及当地资格要求。",
+            "shared_capabilities": "镜片资料、测量记录与顾客解释经验。",
             "target_href": "/zh/career/jobs/opticians-dispensing",
             "target_slug": "opticians-dispensing",
             "target_title": "配镜师",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "以下是需核对的经验与缺口，不代表可以自动转岗。"
           },
           {
-            "capability_gaps": "不承担验光师独立执业职责",
-            "shared_capabilities": "视觉检查、处方、眼病识别、患者教育和转诊沟通",
+            "capability_gaps": "核目标检查项目的训练、监督及岗位范围。",
+            "shared_capabilities": "病史记录、设备使用和团队交接经验。",
             "target_href": "/zh/career/jobs/ophthalmic-medical-technicians",
             "target_slug": "ophthalmic-medical-technicians",
             "target_title": "眼科医疗技术员",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "以下是需核对的经验与缺口，不代表可以自动转岗。"
           },
           {
-            "capability_gaps": "以医生协助为主",
-            "shared_capabilities": "视觉检查、处方、眼病识别、患者教育和转诊沟通",
+            "capability_gaps": "核具体影像、教学指导或手术辅助训练。",
+            "shared_capabilities": "眼科检查记录、设备和协作经验。",
             "target_href": "/zh/career/jobs/ophthalmic-medical-technologists",
             "target_slug": "ophthalmic-medical-technologists",
             "target_title": "眼科医疗技术师",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "以下是需核对的经验与缺口，不代表可以自动转岗。"
           },
           {
-            "capability_gaps": "专门康复方向",
-            "shared_capabilities": "视觉检查、处方、眼病识别、患者教育和转诊沟通",
+            "capability_gaps": "核双眼视觉评估及非手术管理的专业训练。",
+            "shared_capabilities": "视觉检查信息与患者解释的既有经验。",
             "target_href": "/zh/career/jobs/orthoptists",
             "target_slug": "orthoptists",
             "target_title": "视功能矫治师",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "以下是需核对的经验与缺口，不代表可以自动转岗。"
           },
           {
-            "capability_gaps": "生产而非诊断",
-            "shared_capabilities": "视觉检查、处方、眼病识别、患者教育和转诊沟通",
+            "capability_gaps": "核生产设备操作、工艺、检验和安全训练。",
+            "shared_capabilities": "处方规格阅读与产品质量核对经验。",
             "target_href": "/zh/career/jobs/ophthalmic-laboratory-technicians",
             "target_slug": "ophthalmic-laboratory-technicians",
             "target_title": "眼镜光学实验室技师",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "以下是需核对的经验与缺口，不代表可以自动转岗。"
           },
           {
-            "capability_gaps": "医师训练和手术范围不同",
-            "shared_capabilities": "视觉检查、处方、眼病识别、患者教育和转诊沟通",
+            "capability_gaps": "OD或技术教育不替代医师教育；目标法域的医师资格与手术训练另核。",
+            "shared_capabilities": "先核既有学历、医师资格与注册情况。",
             "target_href": "/zh/career/jobs/ophthalmologists-except-pediatric",
             "target_slug": "ophthalmologists-except-pediatric",
-            "target_title": "眼科医生",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "target_title": "眼科医师",
+            "transition_distance": "专门核对目标资格或操作要求，不是第二份岗位机会统计。"
           },
           {
-            "capability_gaps": "不独立诊断开处方",
-            "shared_capabilities": "视觉检查、处方、眼病识别、患者教育和转诊沟通",
+            "capability_gaps": "需了解目标门店的镜架调整、售后及产品服务职责。",
+            "shared_capabilities": "核对客户测量、处方规格阅读及成品核验经验。",
             "target_href": "/zh/career/jobs/opticians-dispensing",
             "target_slug": "opticians-dispensing",
             "target_title": "配镜师",
-            "transition_distance": "按目标职业另核训练和授权。"
+            "transition_distance": "专门核对目标资格或操作要求，不是第二份岗位机会统计。"
           }
         ]
       },
@@ -15293,7 +15610,7 @@
             "alternate_value": null,
             "label": "任务",
             "secondary_value": null,
-            "value": "检查视觉系统，诊断和管理执业范围内的眼部问题，开具矫正镜片处方，并按所在地许可提供治疗或药物；疑难及手术需求转眼科医生。"
+            "value": "本页按美国O*NET 29-1041.00介绍Optometrists：检查眼和视觉系统，在州许可范围内诊断、管理和治疗相关问题，并开具矫正镜片处方。药物及部分操作权限因州而异；超出本人执业范围或经验时转诊。"
           },
           {
             "alternate_value": null,
@@ -15334,222 +15651,222 @@
               "type": "prose"
             },
             "id": "riasec",
-            "label": "职业兴趣",
-            "question": "做验光师需要怎样的能力与工作方式？",
+            "label": "观察兴趣",
+            "question": "我想进一步了解哪些视光任务？",
             "signals": {
               "$item": "optometrists.fit.riasec-fit-block.1",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
+            "watchout": "测评仅探索兴趣，不验证这些问题对应的临床能力或资格。"
           },
           {
-            "answer": "核病史、检查眼别、原结果与处方记录，观察是否发现冲突与过度推断。",
+            "answer": "只观察虚构记录核对习惯，不把发现几处冲突当临床能力证明。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "查看霍兰德兴趣测评",
-            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
+            "evidence_level": "编辑探索问题，不是预测临床绩效、安全或资格的效度证据。",
             "id": "big-five",
-            "label": "细节能力",
-            "question": "做验光师需要怎样的能力与工作方式？",
+            "label": "记录习惯",
+            "question": "我愿意怎样核对记录细节？",
             "signals": {
               "$item": "optometrists.fit.personality-fit-block.2",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
+            "watchout": "测评仅探索兴趣，不验证这些问题对应的临床能力或资格。"
           },
           {
-            "answer": "面对眼痛、骤降视力或权限不明，练保留未决问题并按机构流程升级。",
+            "answer": "询问检查、监督、资格及转交要求，不让测评替代专业判断。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "查看霍兰德兴趣测评",
-            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
+            "evidence_level": "编辑探索问题，不是预测临床绩效、安全或资格的效度证据。",
             "id": "mbti",
-            "label": "风险处理",
-            "question": "做验光师需要怎样的能力与工作方式？",
+            "label": "责任问题",
+            "question": "有哪些职责边界需要向专业人员询问？",
             "signals": {
               "$item": "optometrists.fit.personality-fit-block.3",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
+            "watchout": "测评仅探索兴趣，不验证这些问题对应的临床能力或资格。"
           },
           {
-            "answer": "比较临床判断、患者教育、长期随访和转诊是否符合工作价值。",
+            "answer": "了解解释信息、倾听疑问和持续沟通的现实，不保证特定性格更适合。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "查看霍兰德兴趣测评",
-            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
+            "evidence_level": "编辑探索问题，不是预测临床绩效、安全或资格的效度证据。",
             "id": "enneagram",
-            "label": "工作价值",
-            "question": "做验光师需要怎样的能力与工作方式？",
+            "label": "服务价值",
+            "question": "我是否愿了解患者教育与随访？",
             "signals": {
               "$item": "optometrists.fit.riasec-fit-block.4",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
+            "watchout": "测评仅探索兴趣，不验证这些问题对应的临床能力或资格。"
           },
           {
-            "answer": "核患者接触、精细检查、反复记录核对和协作班次是否适合。",
+            "answer": "比较诊所、医疗机构与零售岗位的职责和班次，避免只凭名称选择。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "查看霍兰德兴趣测评",
-            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
+            "evidence_level": "编辑探索问题，不是预测临床绩效、安全或资格的效度证据。",
             "id": "iq",
-            "label": "场景偏好",
-            "question": "做验光师需要怎样的能力与工作方式？",
+            "label": "工作场景",
+            "question": "哪些工作场景值得实地了解？",
             "signals": {
               "$item": "optometrists.fit.personality-fit-block.5",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
+            "watchout": "测评仅探索兴趣，不验证这些问题对应的临床能力或资格。"
           },
           {
-            "answer": "沿既有I/J题核眼别推理及权限缺项，不诊断、不编填或代签处方。",
+            "answer": "沿原I/J核对眼别、单项推断及授权缺项，不改真实病历或代签处方。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "查看霍兰德兴趣测评",
-            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
+            "evidence_level": "编辑探索问题，不是预测临床绩效、安全或资格的效度证据。",
             "id": "eq",
-            "label": "虚构案例",
-            "question": "做验光师需要怎样的能力与工作方式？",
+            "label": "纸面复盘",
+            "question": "I/J练习留下了哪些未决问题？",
             "signals": {
               "$item": "optometrists.fit.personality-fit-block.6",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
+            "watchout": "测评仅探索兴趣，不验证这些问题对应的临床能力或资格。"
           }
         ],
         "boundary": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。",
-        "direct_answer": "能综合视力、眼压、病史和眼部检查，不因单个测量正常而忽略危险症状。",
+        "direct_answer": "先看兴趣与工作情境，再核专业训练及资格；兴趣分数不评价临床能力。",
         "directions": [
           {
-            "direction": "眼科医生",
-            "fit_signals": "喜欢医学与手术",
+            "direction": "眼科医师",
+            "fit_signals": "愿进一步了解医师教育及手术工作。",
             "target": {
               "href": "/zh/career/jobs/ophthalmologists-except-pediatric",
               "slug": "ophthalmologists-except-pediatric",
-              "title": "眼科医生"
+              "title": "眼科医师"
             },
-            "watchouts": "目标职业教育、资格和责任范围另核。"
+            "watchouts": "须核医师教育、资格及手术训练，不能直接换岗。"
           },
           {
             "direction": "配镜师",
-            "fit_signals": "喜欢配镜服务",
+            "fit_signals": "对镜架镜片、测量与顾客服务感兴趣。",
             "target": {
               "href": "/zh/career/jobs/opticians-dispensing",
               "slug": "opticians-dispensing",
               "title": "配镜师"
             },
-            "watchouts": "目标职业教育、资格和责任范围另核。"
+            "watchouts": "补成品核验、验配流程及当地资格要求。"
           },
           {
             "direction": "眼科医疗技术员",
-            "fit_signals": "喜欢临床辅助",
+            "fit_signals": "希望了解临床团队中的检查辅助工作。",
             "target": {
               "href": "/zh/career/jobs/ophthalmic-medical-technicians",
               "slug": "ophthalmic-medical-technicians",
               "title": "眼科医疗技术员"
             },
-            "watchouts": "目标职业教育、资格和责任范围另核。"
+            "watchouts": "核目标检查项目的训练、监督及岗位范围。"
           },
           {
             "direction": "眼科医疗技术师",
-            "fit_signals": "喜欢影像技术",
+            "fit_signals": "对眼科影像设备及技术指导工作感兴趣。",
             "target": {
               "href": "/zh/career/jobs/ophthalmic-medical-technologists",
               "slug": "ophthalmic-medical-technologists",
               "title": "眼科医疗技术师"
             },
-            "watchouts": "目标职业教育、资格和责任范围另核。"
+            "watchouts": "核具体影像、教学指导或手术辅助训练。"
           },
           {
             "direction": "视功能矫治师",
-            "fit_signals": "喜欢视功能训练",
+            "fit_signals": "对双眼视觉及非手术管理方向感兴趣。",
             "target": {
               "href": "/zh/career/jobs/orthoptists",
               "slug": "orthoptists",
               "title": "视功能矫治师"
             },
-            "watchouts": "目标职业教育、资格和责任范围另核。"
+            "watchouts": "核双眼视觉评估及非手术管理的专业训练。"
           },
           {
             "direction": "眼镜光学实验室技师",
-            "fit_signals": "喜欢精密制造",
+            "fit_signals": "对精密制造与产品检验感兴趣。",
             "target": {
               "href": "/zh/career/jobs/ophthalmic-laboratory-technicians",
               "slug": "ophthalmic-laboratory-technicians",
               "title": "眼镜光学实验室技师"
             },
-            "watchouts": "目标职业教育、资格和责任范围另核。"
+            "watchouts": "核生产设备操作、工艺、检验和安全训练。"
           }
         ],
         "heading": "谁适合验光师？",
         "questions": [
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
-            "question": "我愿执行病史采集吗？"
+            "answer": "先区分记录问题与临床判断，不用虚构材料推断真实病史。",
+            "question": "想了解病史采集中的哪些问题？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
-            "question": "我愿执行视力检查吗？"
+            "answer": "了解测量设备、患者接触与记录工作，再核训练路径。",
+            "question": "想了解视力检查的哪些工作内容？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
-            "question": "我愿执行眼部检查吗？"
+            "answer": "向目标机构核获准项目、监督人和学习参与范围。",
+            "question": "哪些眼部检查需要特定训练与监督？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
-            "question": "我愿执行结果判断吗？"
+            "answer": "核专业课程与监督实践，纸面题不证明诊断能力。",
+            "question": "结果分析有哪些专业学习要求？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
-            "question": "我愿执行处方服务吗？"
+            "answer": "按法域、个人资格及具体操作核，不按职位名推断。",
+            "question": "目标岗位的处方权限如何核？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
-            "question": "我愿执行治疗转诊吗？"
+            "answer": "询问目标机构的实际职责分工，不由本页决定患者处置。",
+            "question": "临床人员何时需要转交其他专业人员？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
-            "question": "我愿执行随访教育吗？"
+            "answer": "了解如何解释既定信息、倾听疑问和安排后续沟通。",
+            "question": "患者教育和随访有哪些沟通任务？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
-            "question": "我能处理严重眼病漏诊吗？"
+            "answer": "询问教育、监督及复核安排，不用自评断言能处理漏诊。",
+            "question": "漏诊风险应向专业人员了解什么？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
-            "question": "我能处理处方错误吗？"
+            "answer": "保留左右眼原输入和单项结果，列冲突与过度推断。",
+            "question": "如何在I题识别记录或推理缺口？"
           },
           {
-            "answer": "用虚构样本和监督反馈验证；真实工作依资格授权。",
-            "question": "我能处理越权用药吗？"
+            "answer": "列缺项和待授权人员核对的问题，不自行补签或选药。",
+            "question": "如何在J题标出未核权限和签名？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
         "signals": [
           {
-            "body": "核症状、用药、既往眼病和风险。",
+            "body": "是否对分析检查信息、解释眼健康问题及精细设备工作感兴趣？兴趣只支持探索，不能评价临床胜任。",
             "id": "fit",
-            "label": "病史采集",
+            "label": "兴趣",
             "tone": "positive"
           },
           {
-            "body": "测远近视力、屈光和双眼协调。",
+            "body": "向专业人员了解实际训练、监督和职责。",
             "id": "caution",
-            "label": "视力检查",
+            "label": "需要核实",
             "tone": "caution"
           },
           {
-            "body": "观察眼前节、眼底和眼压等指标。",
+            "body": "使用本文I/J虚构记录，不接触真实患者资料。",
             "id": "experiment",
-            "label": "眼部检查",
+            "label": "可选纸面尝试",
             "tone": "action"
           }
         ],
@@ -15557,42 +15874,42 @@
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "usage": "职业背景支持探索提问，不提供本页自评的临床效度证据。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "usage": "职业背景支持探索提问，不提供本页自评的临床效度证据。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "usage": "职业背景支持探索提问，不提供本页自评的临床效度证据。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "usage": "职业背景支持探索提问，不提供本页自评的临床效度证据。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "usage": "职业背景支持探索提问，不提供本页自评的临床效度证据。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "usage": "职业背景支持探索提问，不提供本页自评的临床效度证据。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "usage": "职业背景支持探索提问，不提供本页自评的临床效度证据。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "label": "O*NET 29-1041.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "usage": "职业背景支持探索提问，不提供本页自评的临床效度证据。"
           }
         ]
       },
@@ -15605,11 +15922,11 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "用虚构视光案例练转诊",
+        "label": "查看职业兴趣测评",
         "source_page_type": "职业资料页",
         "subject_key": "optometrists",
         "subject_kind": "验光师",
-        "target_action": "用公开教学病例画视力检查、处方和转诊边界；不对真实患者诊断或给药",
+        "target_action": "探索职业兴趣；不评价临床能力或授予执业资格",
         "test_slug": "holland-career-interest-test-riasec"
       },
       "responsibilities_block": {
@@ -15619,23 +15936,29 @@
         "type": "list"
       },
       "riasec_fit_block": {
-        "fit_interest": "能综合视力、眼压、病史和眼部检查，不因单个测量正常而忽略危险症状。",
-        "interest": "能综合视力、眼压、病史和眼部检查，不因单个测量正常而忽略危险症状。",
+        "fit_interest": "是否对分析检查信息、解释眼健康问题及精细设备工作感兴趣？兴趣只支持探索，不能评价临床胜任。",
+        "interest": "是否对分析检查信息、解释眼健康问题及精细设备工作感兴趣？兴趣只支持探索，不能评价临床胜任。",
         "riasec": "职业兴趣可用于探索；量表不证明岗位能力或授权。",
-        "riasec_short": "视觉检查、处方与转诊"
+        "riasec_short": "信息分析、服务沟通与精细工作"
       },
       "source_card": {
         "eeat_signals": {
-          "author": {
-            "$item": "optometrists.sources.boundary-notice.2",
-            "block": "sources",
-            "copy_key": "career.item.boundary-notice",
-            "type": "prose"
-          },
+          "author": "费马测试编辑部",
           "source": "O*NET精确任务及BLS2025工资分位；BLS行业工资、OD与州执照概述及2025—2035单项预测；NBS卫生社会工作宽行业背景。",
-          "updated_at": "2026-10-12"
+          "updated_at": "2026-11-09"
         },
-        "note": "证据只支持验光师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
+        "note": {
+          "$join": [
+            "证据只支持验光师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
+            {
+              "$item": "optometrists.sources.boundary-notice.2",
+              "block": "sources",
+              "copy_key": "career.item.boundary-notice",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
+        },
         "secondary_links": [
           {
             "href": {
@@ -15787,7 +16110,7 @@
         "market": "美国",
         "measure": "official occupation code",
         "occupation_scope": "Optometrists exact occupation",
-        "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+        "period": "O*NET 2026职业页面；2026-11-09核指定段",
         "source_refs": [
           "onet-details"
         ]
@@ -15798,7 +16121,7 @@
         "fact_id": "cn-wage-nonprivate",
         "market": "中国大陆",
         "measure": "卫生社会工作城镇非私营年平均工资",
-        "occupation_scope": "仅医疗雇主宽行业含其他岗非验光师工资个人区间，个体自营利润门店销售排除",
+        "occupation_scope": "卫生和社会工作行业的单位就业人员均值，含多种岗位，不是验光师工资或个人区间；眼镜零售单位按其行业分类核对，不能用于个体经营收入或诊所利润。",
         "period": "2025年工资",
         "source_refs": [
           "nbs-wages"
@@ -15810,7 +16133,7 @@
         "fact_id": "cn-wage-private",
         "market": "中国大陆",
         "measure": "卫生社会工作城镇私营年平均工资",
-        "occupation_scope": "仅医疗雇主宽行业含其他岗非验光师工资个人区间，个体自营利润门店销售排除",
+        "occupation_scope": "卫生和社会工作行业的单位就业人员均值，含多种岗位，不是验光师工资或个人区间；眼镜零售单位按其行业分类核对，不能用于个体经营收入或诊所利润。",
         "period": "2025年工资",
         "source_refs": [
           "nbs-wages"
@@ -15877,13 +16200,13 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
+        "derivation": "原42%编辑估算已撤回：现有原证不足以验证三项临床任务的25/50/50档位；不另造替代分数。",
+        "display_value": "尚无可核验定量",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "验光师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "measure": "AI任务级定量证据状态",
+        "occupation_scope": "本职业；不能由任务描述、招聘技术提及或就业预测推算临床AI效果",
+        "period": "2026-11-09复核",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -15892,8 +16215,8 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI影响度"
     },
@@ -15931,7 +16254,7 @@
         "availability": "available",
         "fact_ref": "cn-wage-nonprivate",
         "key": "china_pay",
-        "label": "医疗宽行业·非私营"
+        "label": "卫生社会工作·非私营"
       }
     ]
   },
@@ -15946,10 +16269,10 @@
       "text": "验光师：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "5ce05ce198305505612d0752b0f94c9c09bc7045dad4e189dd567c95bba0f931",
+  "source_content_sha256": "5d3d740d7c89819ddfdeaaf11aad5b3c6af6f03b8f5073b5cab234089b64c10b",
   "subject": {
     "canonical_slug": "optometrists",
     "name": "验光师",
-    "summary": "检查视觉系统，诊断和管理执业范围内的眼部问题，开具矫正镜片处方，并按所在地许可提供治疗或药物；疑难及手术需求转眼科医生。"
+    "summary": "本页按美国O*NET 29-1041.00介绍Optometrists：检查眼和视觉系统，在州许可范围内诊断、管理和治疗相关问题，并开具矫正镜片处方。药物及部分操作权限因州而异；超出本人执业范围或经验时转诊。"
   }
 }

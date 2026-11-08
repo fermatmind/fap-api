@@ -7205,14 +7205,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜本页对应 O*NET-SOC 15-1299.05「Information Security Engineers」。官方描述为开发并监督信息安全程序与政策的实施，构建、维护和升级防火墙等安全技术，设计并实施安全控制以识别漏洞、保护数字文件与电子基础设施，监测并响应安全入侵并开展取证调查，可能监督信息安全系统的评估。该职业标注 Bright Outlook。核心交付不是「阻止一切」，而是把资产、威胁与业务约束转成可验证的安全控制、监测与恢复方案。风险来自未获授权就扫描或访问、未经验证就部署防火墙或检测规则、事件记录中含个人信息、以及把工具输出当作授权或取证结论。O*NET展示的美国工资与就业统计来自Computer Occupations, All Other（15-1299）父组，不是15-1299.05信息安全工程师单列数据。2025年中位年薪116,580美元、就业471,200人；2025—2035年预计增长5%，平均每年27,000个岗位空缺，包含增长与人员替代需求。 若你难以承受应急节奏、跨团队冲突与严格授权约束，应把这些作为需要认真权衡的现实成本。"
+              "信息安全工程师制定安全制度，构建和维护防护技术，并设计、评估系统与数据的安全控制。工作可涉及监测、事件响应和取证调查，具体职责与权限按岗位核对。下方美国工资与就业属于15-1299父组，不是信息安全工程师单列统计。"
             ]
           },
           "id": "information-security-engineers.quick-decision.fermat-decision-card.1",
           "source_refs": [
             "onet-exact",
-            "source-pack-onet-localwages",
-            "onet-parent-trends"
+            "onet-parent-summary"
           ],
           "type": "prose"
         },
@@ -7221,12 +7220,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项工作中同时完成三件事：把安全控制做实（确认资产与威胁、设计控制、部署前验证、监测与响应、复盘改进，产出可复核的控制与事件记录）；把授权与合规管住（扫描与访问范围、变更审批与回滚、个人信息处理边界、证据保全，按法域与机构制度执行）；并承担可界定的岗位责任（对本人设计与结论负责，对生产变更、数据合规判断与事故分级按授权链请示或转交）。建议用一次可核验的体验（完成一份完全虚构的安全工程任务包及复盘记录）来检验，而不是仅依据兴趣问卷的结论。"
+              "工作需要把技术控制与业务要求接起来：说明资产与风险，记录拟采用的控制及核验方法，并向有权限的决策者说明未决问题。技术发现本身不授予访问或生产变更权限。"
             ]
           },
           "id": "information-security-engineers.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "bls-analysts"
+            "onet-exact"
           ],
           "type": "prose"
         },
@@ -7235,12 +7234,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合信息安全工程师，先用公开或模拟材料做一次可核验的演练：设定一个完全虚构的安全工程情境（例如为一批虚构资产设计访问控制与监测规则），写出从确认范围与授权、识别资产与威胁、设计并测试控制、部署与监测、响应与恢复、到复盘与记录的流程，标注每一步的核对点与可能出现的问题（未获授权的扫描或数据访问、未测试就上线的变更、日志与镜像中的个人信息、证据链不完整、越权作出事故结论）。完成后核对：是否把授权范围、变更与回滚、个人信息边界与证据完整性作为不可省略项；是否把超出个人权限的生产变更或合规判断写成请示或转交；是否把过程留成可复核记录。全部材料须为虚构，不扫描真实网络、不访问真实数据。"
+              "虚构访问控制与证据核对练习。输入：WEB-A是公开目录，API-B是内部服务，LOG-C是审计记录库。业务规则：访客仅可访问WEB-A；WEB-A可调用API-B；只有指定运维角色可读LOG-C。题设批准的变更时窗为20:00—20:30，仅做纸面评审。记录：09:00访客→WEB-A获准；09:02访客→API-B被拒；09:05未知角色请求LOG-C，未记录处理结果。待审方案：允许访客直接访问API-B；拟19:55实施；未写回退负责人或验证方法；把09:05写成“已确认数据泄露”。交付：访问矩阵、三项纸面测试及预期、事实与推断分开的时间线、未知项和需批准问题表。参考核对：访客直连违反API-B题设规则；19:55超出题设时窗；回退负责人和验证方法缺失；09:05不足以证明访问成功或泄露。拒绝记录不等于成功入侵，不补造缺失结果。资产、规则及时间均为编辑题设，不是法律要求或生产规程。不扫描、访问或修改真实系统；本练习用于探索细致核验的兴趣，不能证明岗位胜任或授予权限。"
             ]
           },
           "id": "information-security-engineers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "bls-analysts"
+            "onet-exact"
           ],
           "type": "prose"
         },
@@ -7249,12 +7248,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜O*NET 15-1299.05 的工作活动以使用计算机、获取信息、识别对象与事件变化、更新与应用知识、分析数据、与主管同事沟通为主。若你愿意围绕资产、威胁和技术证据持续探究，能把假设、测试、偏差与修复结果准确记录，并在授权与变更约束下稳定交付，这些日常要求与你的工作方式更接近；兴趣与人格工具只用于设计试验，不能判断录用资格或表现。"
+              "可以观察自己是否愿意追查异常访问请求、逐项核配置与规则，并说明记录能证明什么、不能证明什么。这些兴趣可支持继续了解；纸面答对不证明工程胜任、应急轮值适应或录用适配。"
             ]
           },
           "id": "information-security-engineers.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "bls-analysts"
+            "onet-exact"
           ],
           "type": "prose"
         }
@@ -7277,13 +7276,7 @@
           "id": "information-security-engineers.profile.definition-block.1",
           "source_refs": [
             "onet-exact",
-            "source-pack-onet-custom",
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "source-pack-onet-localcert",
-            "source-pack-onet-localwages",
-            "source-pack-onet-summary"
+            "onet-parent-summary"
           ],
           "type": "prose"
         },
@@ -7391,7 +7384,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "判断工作闭环看四步：输入核对（确认资产、威胁与授权范围）→任务限定（只在已知范围内设计与监测）→执行并记录（按标准完成控制部署与验证并留痕）→复核与升级（异常、越权访问与生产变更立即停止并上报）。闭环成立的前提是授权、变更与版本可核验，而不是只看是否跑通一次工具。"
+              "行动前核实际职责与权限，不执行未授权访问或变更。异常或变更超出权限、或满足机构预定停止条件时，暂停受影响步骤并按既定路径升级；正常获批变更不因属于生产变更就一律停止。"
             ]
           },
           "id": "information-security-engineers.profile.career-quick-answers-block.9",
@@ -7472,12 +7465,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "安全经理方向｜核心产出是安全治理、预算与风险接受，并对组织安全目标负责。本职业以安全架构、控制工程与技术落地为主；授权层级与责任范围不同，共享工具不等于责任相同。"
+              "统筹组织安全，包括实体安全、人员及设施安全。O*NET旧代码11-9199.07已停用，现行资料为11-3013.01；不能自动视为纯网络安全管理岗位。"
             ]
           },
           "id": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-exact"
+            "review-neighbor-managers"
           ],
           "type": "prose"
         },
@@ -7486,12 +7479,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "计算机与信息系统经理方向｜核心产出是组织级 IT 资源、系统与项目交付的协调。本职业以网络与系统防护、监测与取证为主；管理范围与考核对象不同，不能只按职位名称互换。"
+              "统筹IT运行、人员、资源及项目，包括预算与系统规划，管理责任超出单项安全控制。"
             ]
           },
           "id": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-exact"
+            "review-neighbor-it-managers"
           ],
           "type": "prose"
         },
@@ -7500,12 +7493,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "安全管理专员方向｜核心产出偏安全政策、控制与合规协调。本职业更强调控制设计、部署验证、日志与漏洞的技术证据；证据类型与授权边界不同，须分别核对。"
+              "评估实体安全、人员及设施安全并设计相应系统与流程，不只是数字安全工程的另一称呼。"
             ]
           },
           "id": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-exact"
+            "review-neighbor-specialists"
           ],
           "type": "prose"
         },
@@ -7514,12 +7507,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "计算机系统分析师方向｜核心产出是改进系统流程与效率并衔接业务与 IT。本职业以安全风险与防护控制为主要交付；判断依据与责任边界不同，不能相互套用。"
+              "分析业务与计算需求、集成系统并改进流程，目标比信息安全控制更广。"
             ]
           },
           "id": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "onet-exact"
+            "review-neighbor-systems"
           ],
           "type": "prose"
         }
@@ -7551,12 +7544,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "未取得本精确职业生成式AI采用率、生产率或净岗位效果实测；安全控制设计、部署验证、监测及调查的资料归纳、对比和草拟为编辑试用候选，须核原始证据、权限及实际效果，不给替代概率或时间表。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。虚构记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。"
             ]
           },
           "id": "information-security-engineers.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "nist-csf"
+            "onet-exact",
+            "ilo-genai",
+            "review-nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -7607,12 +7602,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先核安全控制设计、部署验证、监测及调查的输入、版本与责任，再在授权环境评估工具；没有普遍提效或不可替代证据。"
+              "可选择把草稿与本页WEB-A/API-B/LOG-C题设逐项比对，核每个断言、区分未知项；真实获授权场景仍须另行评估效果。本页未建立节时或安全结果。"
             ]
           },
           "id": "information-security-engineers.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "nist-csf"
+            "review-nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -7635,12 +7630,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核原始日志、资产和网络系统状态，按实际变更、保全与信息处理职责复核；不含无关电气系统。"
+              "核原始日志、资产及网络和系统状态，并核实际授权、变更、证据保全及信息处理职责。"
             ]
           },
           "id": "information-security-engineers.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "nist-csf"
+            "onet-exact"
           ],
           "type": "prose"
         }
@@ -7702,13 +7697,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页AI任务分数是编辑估算，不是企业采用率或工资影响实测。工资统计不能证明AI造成工资涨跌，分数不预测个人收入。"
+              "未建立本职业AI工资效果；上述纸面情景不预测工资、录用或岗位减少。"
             ]
           },
           "id": "information-security-engineers.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "source-fermatmind-ai-rubric",
-            "cn-enterprise-wages-2025"
+            "review-nist-ai-rmf"
           ],
           "type": "prose"
         }
@@ -7896,7 +7890,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作｜用完全虚构的安全工程任务包做一次演练：为虚构资产设计访问控制与监测规则、写出测试与部署验证记录、给出事件时间线与升级记录；用可观察交付检验，而不是只凭兴趣问卷。"
+              "用给定WEB-A/API-B/LOG-C练习形成访问矩阵、三项纸面测试、事实/推断时间线及核实问题表，对照参考，不把纸面设计写成已执行测试或变更。"
             ]
           },
           "id": "information-security-engineers.fit.riasec-fit-block.5",
@@ -8004,7 +7998,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据与记录风险｜触发：时间线不完整、版本失控或修复未验证。后果：可能造成误判、责任不清或取证结论不可用。控制：保留原始记录与变更线索、区分事实与推断、异常时停止并升级。边界：责任划分与事故分级以机构制度与授权链为准。"
+              "证据与记录风险"
             ]
           },
           "id": "information-security-engineers.risk.career-risk-cards.4",
@@ -8045,7 +8039,7 @@
           },
           "id": "information-security-engineers.path.career-path-block.1",
           "source_refs": [
-            "mohrss-standard",
+            "onet-exact",
             "nist-nice",
             "nist-ssdf"
           ],
@@ -8056,12 +8050,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET当前教育调查47%学士、16%高中后非学位证书、11%大学无学位；Job Zone4是职业组准备描述，不设统一个人学士门槛或培训期。先核目标岗位任务、经历、监督与生产权限。"
+              "O*NET受访者回答的新聘人员教育要求包括47%学士、16%高中后非学位证书、11%大学学习但未获学位。Job Zone4描述一组职业的准备程度，不是统一的个人学历或训练年限门槛；具体招聘条件另核。"
             ]
           },
           "id": "information-security-engineers.path.career-path-block.2",
           "source_refs": [
-            "mohrss-standard"
+            "onet-exact"
           ],
           "type": "prose"
         },
@@ -8070,12 +8064,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "特定法域要求｜美国侧以 O*NET 准备信息代表典型路径并结合岗位训练；中国大陆的岗位准入、网络安全义务与个人信息处理要求受《网络安全法》《个人信息保护法》与机构制度约束，须分别核对，不能互相套用。"
+              "大陆岗位需分别核具体招聘、适用《网络安全法》《个人信息保护法》义务及机构授权。网络安全法适用于境内网络，第23条规定运营者保护义务；个保法第4、6、13条分别涉及个人信息范围、必要与最小处理范围及合法处理依据，同意不是唯一依据。这是法律背景，不是统一个人执照或完整合规评估；美国岗位条件另核。"
             ]
           },
           "id": "information-security-engineers.path.career-path-block.3",
           "source_refs": [
-            "mohrss-standard"
+            "prc-cyber-law",
+            "prc-pipl",
+            "review-cyber-amendment"
           ],
           "type": "prose"
         },
@@ -8084,12 +8080,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历、训练、证书、录用与生产权限分开；中国数据安全工程技术人员标准为相邻评价参照，非统一执照，本轮该PDF原文访问未成功，具体内容保留待核。"
+              "学历、训练、考试、录用与生产权限分开。高校课程只能作为学习例子，不是全国准入规则。广州2026官方考试问答列中级“信息安全工程师”，报名不受学历、资历、年龄限制；这是考试报名条件，不证明能力、录用条件或访问系统权限。相邻数据安全标准不建立本职业的准入条件。"
             ]
           },
           "id": "information-security-engineers.path.career-path-block.4",
           "source_refs": [
-            "mohrss-standard"
+            "review-gz-exam",
+            "review-nuist"
           ],
           "type": "prose"
         },
@@ -8098,12 +8095,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑责任范围：核资产与范围须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。"
+              "核虚构资产表、给定访问规则及纸面评审范围；真实岗位应先核分配范围，再处理系统或数据。"
             ]
           },
           "id": "information-security-engineers.path.career-path-block.5",
           "source_refs": [
-            "mohrss-standard"
+            "onet-exact"
           ],
           "type": "prose"
         },
@@ -8112,12 +8109,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可复核证据｜用完全虚构的安全工程任务包展示能力：威胁建模、安全代码评审要点、自动化测试、漏洞修复与部署验证样本；不使用真实网络或个人数据，注明依据与假设。"
+              "保留本页纸面题的资产规则表、访问矩阵、三项拟定测试、事实/推断时间线及未知项，注明虚构且未执行。"
             ]
           },
           "id": "information-security-engineers.path.career-path-block.6",
           "source_refs": [
-            "mohrss-standard"
+            "onet-exact"
           ],
           "type": "prose"
         },
@@ -8126,12 +8123,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步动作｜完成一次虚构任务包与复盘记录，请有经验者挑战你的授权判断、变更验证与证据链；NICE 用 work role、task、knowledge 和 skill 建立能力语言，可把学习转为可验证任务证据，但 work role 不是职业或岗位。"
+              "请他人把每项纸面观察追溯至给定输入；结合具体招聘学习网络、操作系统及编程基础。NICE提供任务、知识与技能语言，work role不是职业或证书；涉及软件工作时可参考SSDF安全开发实践，不把它当准入执照。"
             ]
           },
           "id": "information-security-engineers.path.career-path-block.7",
           "source_refs": [
-            "mohrss-standard"
+            "nist-nice",
+            "nist-ssdf",
+            "review-nuist"
           ],
           "type": "prose"
         },
@@ -8145,7 +8144,9 @@
           },
           "id": "information-security-engineers.path.career-path-block.8",
           "source_refs": [
-            "mohrss-standard"
+            "onet-exact",
+            "nist-nice",
+            "nist-ssdf"
           ],
           "type": "prose"
         }
@@ -8198,7 +8199,7 @@
           },
           "id": "information-security-engineers.market-signals.market-signal-card.3",
           "source_refs": [
-            "prc-cyber-law"
+            "onet-parent-trends"
           ],
           "type": "prose"
         },
@@ -8207,12 +8208,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移能力｜相邻方向共享的基础包括：威胁与风险识别、控制设计与验证、日志与证据分析、变更与回滚、跨团队沟通与记录留痕；但每条路径都要补齐与新输出和责任相对应的工具、资格与责任证据。"
+              "部分邻职共享风险评估、技术核验及沟通。仍需按目标实际对象与产出，补所需技能及责任证据；任务重合不建立资格互认或访问授权。"
             ]
           },
           "id": "information-security-engineers.market-signals.market-signal-card.4",
           "source_refs": [
-            "prc-cyber-law"
+            "onet-exact",
+            "review-neighbor-systems"
           ],
           "type": "prose"
         },
@@ -8226,7 +8228,7 @@
           },
           "id": "information-security-engineers.market-signals.market-signal-card.5",
           "source_refs": [
-            "prc-cyber-law"
+            "review-neighbor-managers"
           ],
           "type": "prose"
         }
@@ -8254,13 +8256,18 @@
                 ]
               },
               {
-                "answer": "本职业以安全架构、控制工程与技术落地为主：设计并实施安全控制、监测与响应入侵、开展取证调查。安全经理以治理与风险接受为主，计算机与信息系统经理以组织级 IT 资源与项目为主，安全管理专员偏政策与合规，计算机系统分析师偏业务流程与系统改进，信息安全分析师偏监测、分析与缓解建议。应按核心产出、授权范围与责任边界判断，不能只按职位名称互换。",
+                "answer": "按对象与产出比较：安全经理和安全管理专员包含实体、人员与设施安全；IT经理统筹更广的IT资源与项目；系统分析师改进业务及计算系统。信息安全分析师与本职业有监测、缓解任务重合；网站管理员维护网站环境、可用性与备份。任务重合不使名称或权限互换。",
                 "id": "information-security-engineers.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.information-security-engineers.role-comparison",
                 "source_refs": [
-                  "source-pack-onet-details",
-                  "onet-exact"
+                  "onet-exact",
+                  "review-neighbor-managers",
+                  "review-neighbor-it-managers",
+                  "review-neighbor-specialists",
+                  "review-neighbor-systems",
+                  "review-neighbor-analysts",
+                  "review-neighbor-web"
                 ]
               },
               {
@@ -8273,17 +8280,18 @@
                 ]
               },
               {
-                "answer": "生成式 AI 可辅助标准与基线查询、日志归纳、检测代码与报告草稿生成、配置差异比对；但授权范围确认、生产变更审批、证据保全、数据合规判断、事故分级与人工复核仍由人员承担。任务暴露不等于岗位替代，也不等于已普遍采用，本页不给出替代概率或时间表。",
+                "answer": "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。虚构记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。",
                 "id": "information-security-engineers.faq.4",
                 "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.information-security-engineers.ai-impact",
                 "source_refs": [
+                  "onet-exact",
                   "ilo-genai",
-                  "nist-csf"
+                  "review-nist-ai-rmf"
                 ]
               },
               {
-                "answer": "AI 输出不能替代授权范围确认、生产变更审批、证据保全、数据合规判断、事故分级和人工复核。人类必须回看原始数据、系统与电气系统并复核关键判断，并对授权、变更、证据与事故结论承担责任。",
+                "answer": "把断言追溯到原始日志、资产及网络和系统状态，核谁负责且获准审批变更、保全证据、作出事件或信息处理决定；工具输出不转移这些责任。",
                 "id": "information-security-engineers.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.information-security-engineers.human-control",
@@ -8312,13 +8320,12 @@
                 ]
               },
               {
-                "answer": "O*NET 准备信息显示该职业多数要求四年制学士学位（部分不要求），Job Zone 第四级，并需要相当量的工作相关技能与经验。进入该职业应结合基础学习、岗位训练和可验证的安全工程作品；学历、证书、执照、岗位录用、机构授权与生产权限必须分别核对，课程或证书不自动授予执照、签字或生产权限。",
+                "answer": "O*NET受访者回答的新聘人员教育要求包括47%学士、16%高中后非学位证书、11%大学学习但未获学位。Job Zone4描述一组职业的准备程度，不是统一的个人学历或训练年限门槛；具体招聘条件另核。",
                 "id": "information-security-engineers.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.information-security-engineers.education-path",
                 "source_refs": [
-                  "onet-exact",
-                  "mohrss-standard"
+                  "onet-exact"
                 ]
               },
               {
@@ -8342,7 +8349,7 @@
                 ]
               },
               {
-                "answer": "本页不给出就业或录用结论，而是提供可核验的试验路径：用完全虚构的安全工程任务包检验威胁建模、控制设计、测试与证据记录；用可观察交付判断是否继续，而不是只凭兴趣问卷或宣传。",
+                "answer": "先做本页完整WEB-A/API-B/LOG-C虚构练习并对照参考，探索证据核对兴趣，不据此推断录用适配或生产操作胜任。",
                 "id": "information-security-engineers.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.information-security-engineers.career-worth",
@@ -8358,7 +8365,8 @@
                 "question_key": "career.faq.information-security-engineers.boundary",
                 "source_refs": [
                   "onet-exact",
-                  "mohrss-standard"
+                  "prc-cyber-law",
+                  "prc-pipl"
                 ]
               }
             ]
@@ -8485,8 +8493,7 @@
               {
                 "accessed_at": "2026-08-29",
                 "details": [
-                  "美国相邻代理工资和预测。",
-                  "非 O*NET 15-1299.05 精确口径。"
+                  "相邻15-1212分析师资料，不是工程师职业或其15-1299父组。"
                 ],
                 "evidence_type": "official labor statistics",
                 "id": "bls-analysts",
@@ -8495,7 +8502,7 @@
                 "name": "Information Security Analysts - Occupational Outlook Handbook",
                 "period": "May 2025 wages; 2025-2035 outlook",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "parent_occupation_proxy",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm"
               },
               {
@@ -8517,17 +8524,16 @@
               {
                 "accessed_at": "2026-08-29",
                 "details": [
-                  "中国相邻数据安全能力与评价边界。",
-                  "非精确职业，不提供工资。"
+                  "相邻数据安全标准；本页未核定其具体内容，不用于支持正文主张。"
                 ],
                 "evidence_type": "official occupational standard",
                 "id": "mohrss-standard",
-                "limitation": "非精确职业，不提供工资。",
+                "limitation": "此处内容未核，不承接学历、工资、框架内容或准入条件。",
                 "market": "CN",
                 "name": "数据安全工程技术人员国家职业标准（2023年版）",
                 "period": "2023",
                 "publisher": "人力资源和社会保障部",
-                "scope": "parent_occupation_proxy",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/qt/gztz/202303/P020230327570509396537.pdf"
               },
               {
@@ -8557,7 +8563,7 @@
                 "limitation": "work role 不是职业或资格。",
                 "market": "global",
                 "name": "NICE Framework: Current Versions",
-                "period": "v2.2.0 April 2025; updated May 2026",
+                "period": "Components v2.2.0 (28 April 2025); structure SP 800-181 Rev.1 (November 2020)",
                 "publisher": "NIST",
                 "scope": "combined_official",
                 "url": "https://www.nist.gov/itl/applied-cybersecurity/nice/nice-framework-resource-center/nice-framework-current-versions"
@@ -8611,7 +8617,7 @@
                 "url": "https://www.cac.gov.cn/2025-12/29/c_1768735112911946.htm"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "事件数据中个人信息处理边界。",
                   "不提供工资或技术步骤。"
@@ -8622,9 +8628,9 @@
                 "market": "CN",
                 "name": "中华人民共和国个人信息保护法",
                 "period": "effective 2021",
-                "publisher": "工业和信息化部",
+                "publisher": "中国网信网",
                 "scope": "combined_official",
-                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-09-02",
@@ -8682,12 +8688,12 @@
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
+                "limitation": "行业子页未确认为可读；本页父组行业背景采用概览，不由本条承接。",
                 "market": "美国",
                 "name": "Industries: 15-1299.05 - Information Security Engineers",
                 "period": "current page; accessed 2026-09-02",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "parent_group",
                 "url": "https://www.onetonline.org/link/industry/15-1299.05"
               },
               {
@@ -8739,20 +8745,17 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "识别资产威胁并设计控制 — 75/100; weight=1/3; information-security-engineers.profile.responsibilities-block.4[0]",
-                  "部署验证与监测 — 75/100; weight=1/3; information-security-engineers.profile.responsibilities-block.4[0]",
-                  "响应恢复与事后改进 — 50/100; weight=1/3; information-security-engineers.profile.responsibilities-block.4[0]"
+                  "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。虚构记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。",
+                  "控制设计、部署监测及响应恢复三项原档位均待核，原67%估算撤回。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "limitation": "职业任务、风险框架及暴露方法不验证原档位或职业AI效果。",
+                "name": "FermatMind AI任务证据状态",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "scope": "原三项选定工程任务的证据状态，不是定量结果",
+                "url": null
               },
               {
                 "accessed_at": "2026-11-08",
@@ -8828,6 +8831,171 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1299.05"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅按已说明范围使用，不证明AI效果或个人权限。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-managers",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "US",
+                "name": "安全经理 — O*NET 11-3013.01",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-3013.01"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅按已说明范围使用，不证明AI效果或个人权限。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-it-managers",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "US",
+                "name": "计算机与信息系统经理 — O*NET 11-3021.00",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-3021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅按已说明范围使用，不证明AI效果或个人权限。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-specialists",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "US",
+                "name": "安全管理专员 — O*NET 13-1199.07",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/13-1199.07"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅按已说明范围使用，不证明AI效果或个人权限。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-systems",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "US",
+                "name": "计算机系统分析师 — O*NET 15-1211.00",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1211.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅按已说明范围使用，不证明AI效果或个人权限。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-analysts",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "US",
+                "name": "信息安全分析师 — O*NET 15-1212.00",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1212.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅按已说明范围使用，不证明AI效果或个人权限。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-neighbor-web",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "US",
+                "name": "网站管理员 — O*NET 15-1299.01",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1299.01"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅按已说明范围使用，不证明AI效果或个人权限。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-nist-ai-rmf",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "US",
+                "name": "NIST AI Risk Management Framework",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅按已说明范围使用，不证明AI效果或个人权限。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-nuist",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "CN",
+                "name": "南京信息工程大学信息安全专业介绍",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "南京信息工程大学",
+                "scope": "contextual",
+                "url": "https://cse.nuist.edu.cn/9924/list.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅按已说明范围使用，不证明AI效果或个人权限。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-gz-exam",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "CN",
+                "name": "广州2026年计算机技术与软件专业技术资格考试问答",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "广州市人力资源和社会保障局",
+                "scope": "contextual",
+                "url": "https://rsj.gz.gov.cn/ywzt/rcgz/rsks/bmtz/content/post_10736860.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "单一事业单位任务与选拔例子，截止2026年6月22日；未给可用数值薪资。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-sh-job",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "CN",
+                "name": "上海市网络与信息安全应急管理事务中心2026招聘公告，申请期已结束",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "上海市人力资源和社会保障局",
+                "scope": "contextual",
+                "url": "https://rsj.sh.gov.cn/tzpgg_17408/20260604/t0035_1441182.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅按已说明范围使用，不证明AI效果或个人权限。"
+                ],
+                "evidence_type": "official source",
+                "id": "review-cyber-amendment",
+                "limitation": "不保证职业等价、录用或授权。",
+                "market": "CN",
+                "name": "主席令第六十一号：网络安全法修改施行日期",
+                "period": "Source date and scope stated in the linked document",
+                "publisher": "中国网信网",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2025-10/29/c_1763461514706581.htm"
               }
             ]
           },
@@ -8867,17 +9035,103 @@
     ],
     "components": {
       "adjacent_career_comparison_table": {
-        "conclusion": "相邻职业需要分别补足工具、资格和责任证据。",
+        "conclusion": "逐个目标核实际任务，补其技能、资格及支持证据；相邻不等于可以直接转岗。",
         "evidence_links": [
           {
             "href": {
-              "$source": "bls-analysts",
+              "$source": "review-neighbor-managers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "label": "本职业来源"
+            "label": {
+              "$source": "review-neighbor-managers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-neighbor-it-managers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-neighbor-it-managers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-neighbor-specialists",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-neighbor-specialists",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-neighbor-systems",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-neighbor-systems",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-neighbor-analysts",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-neighbor-analysts",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-neighbor-web",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-neighbor-web",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            }
           }
         ],
         "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
@@ -8885,8 +9139,8 @@
         "intro": "比较核心产出、责任边界和工作模式，不按名称互换。",
         "rows": [
           {
-            "关键区别": "核心产出是安全治理、预算与风险接受，对组织安全目标负责。",
-            "更适合什么选择": "愿意承担组织治理和资源决策时比较。",
+            "关键区别": "统筹组织安全，包括实体安全、人员及设施安全。O*NET旧代码11-9199.07已停用，现行资料为11-3013.01；不能自动视为纯网络安全管理岗位。",
+            "更适合什么选择": "若愿意了解人员设施保护及安全资源协调，可进一步比较。",
             "核心工作与产出": {
               "$item": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.2",
               "block": "direction-comparison",
@@ -8896,7 +9150,7 @@
             "职业方向": "安全经理"
           },
           {
-            "关键区别": "核心产出是组织级 IT 资源、系统与项目交付的协调。",
+            "关键区别": "统筹IT运行、人员、资源及项目，包括预算与系统规划，管理责任超出单项安全控制。",
             "更适合什么选择": "愿意从技术工程扩大到组织管理时比较。",
             "核心工作与产出": {
               "$item": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.3",
@@ -8907,8 +9161,8 @@
             "职业方向": "计算机与信息系统经理"
           },
           {
-            "关键区别": "核心产出偏安全政策、控制与合规协调。",
-            "更适合什么选择": "偏政策控制或偏技术证据时比较。",
+            "关键区别": "评估实体安全、人员及设施安全并设计相应系统与流程，不只是数字安全工程的另一称呼。",
+            "更适合什么选择": "比较实体安全评估设计与数字系统防护的不同对象。",
             "核心工作与产出": {
               "$item": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.4",
               "block": "direction-comparison",
@@ -8918,7 +9172,7 @@
             "职业方向": "安全管理专员"
           },
           {
-            "关键区别": "核心产出是改进系统流程与效率，衔接业务与 IT。",
+            "关键区别": "分析业务与计算需求、集成系统并改进流程，目标比信息安全控制更广。",
             "更适合什么选择": "比较安全目标与一般系统改进目标时选择。",
             "核心工作与产出": {
               "$item": "information-security-engineers.direction-comparison.adjacent-career-comparison-table.5",
@@ -8935,7 +9189,7 @@
         "action_rows": [
           {
             "人群": "入行者",
-            "应对重点": "练习可复核工作样本。"
+            "应对重点": "用完整WEB-A/API-B/LOG-C纸面题及参考核对。"
           },
           {
             "人群": "在岗者",
@@ -9016,12 +9270,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "信息整理",
+            "AI主要改变": "虚构输入上的待验证试验，效果未建立",
             "仍由人负责": "责任与授权",
             "方向": "安全工程与落地"
           },
           {
-            "AI主要改变": "检索与复盘",
+            "AI主要改变": "虚构输入上的待验证试验，效果未建立",
             "仍由人负责": "原始记录核对",
             "方向": "监测与响应"
           }
@@ -9042,7 +9296,7 @@
               "field": "name",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "研究对象": "精确安全工程任务与父组统计",
+            "研究对象": "相邻信息安全分析师职业15-1212，非本工程师职业或其父组",
             "结论": "不提供本精确职业采用率、生产率或净岗位因果。",
             "链接": {
               "$source": "bls-analysts",
@@ -9061,7 +9315,7 @@
               "field": "name",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "研究对象": "精确安全工程任务与父组统计",
+            "研究对象": "全球职业任务暴露研究方法，非15-1299.05效果实测",
             "结论": "不提供本精确职业采用率、生产率或净岗位因果。",
             "链接": {
               "$source": "ilo-genai",
@@ -9080,7 +9334,7 @@
               "field": "name",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "研究对象": "精确安全工程任务与父组统计",
+            "研究对象": "O*NET精确工程任务；工资和就业另为更宽父组",
             "结论": "不提供本精确职业采用率、生产率或净岗位因果。",
             "链接": {
               "$source": "onet-exact",
@@ -9152,7 +9406,7 @@
           },
           {
             "步骤": "记录升级",
-            "说明": "异常立即停止并上报。"
+            "说明": "发现越权或不满足批准、变更条件时，暂停受影响操作并升级；其他告警按适用预案核查、响应与记录。"
           }
         ],
         "risk_rows": [
@@ -9196,7 +9450,7 @@
             "当前变化": "编辑试用候选：资料整理、比较或草拟，未取得本职业采用和效果实测。"
           },
           {
-            "人的控制点": "核机构实际决定、批准与执行职责，遇例外交责任人；不套用军事指挥链。",
+            "人的控制点": "核谁可决定、批准和执行，例外交责任人处理。",
             "任务": "关键判断",
             "工作方向": "响应与取证",
             "当前变化": "编辑试用候选：资料整理、比较或草拟，未取得本职业采用和效果实测。"
@@ -9343,12 +9597,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+          "本页尚未建立可核验的本职业任务级AI效果依据，暂不提供量化影响分数。虚构记录整理、配置差异说明和报告草稿仅是待验证的编辑试验情景，不据此推断生产安全效果、采用率、节时或岗位减少。"
         ],
         "heading": "信息安全工程师的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "入口要求、执照、训练和最终责任由具体法域、机构或雇主核验。",
+        "boundary": "以下是学习及工作证据示例，不是每个岗位的统一必备件、固定职级或自动晋升安排；按具体机构和法域核职责、学历、资格及权限。",
         "competence_ladder": [
           {
             "description": "确认来源、权限和版本。",
@@ -9398,67 +9652,13 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls-analysts",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "id": "information-security-engineers.display.source.0",
-            "label": {
-              "$source": "bls-analysts",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "scope": "按原始文档对象核；相邻分析师教育不等安全工程师教育，ILO不提供入行条件，数据安全标准PDF本轮访问未成功。"
-          },
-          {
-            "href": {
-              "$source": "ilo-genai",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "id": "information-security-engineers.display.source.1",
-            "label": {
-              "$source": "ilo-genai",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "scope": "按原始文档对象核；相邻分析师教育不等安全工程师教育，ILO不提供入行条件，数据安全标准PDF本轮访问未成功。"
-          },
-          {
-            "href": {
-              "$source": "mohrss-standard",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "id": "information-security-engineers.display.source.2",
-            "label": {
-              "$source": "mohrss-standard",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "information-security-engineers.source-register.published.1"
-            },
-            "scope": "按原始文档对象核；相邻分析师教育不等安全工程师教育，ILO不提供入行条件，数据安全标准PDF本轮访问未成功。"
-          },
-          {
-            "href": {
               "$source": "onet-exact",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "id": "information-security-engineers.display.source.3",
+            "id": "information-security-engineers.display.path.source.0",
             "label": {
               "$source": "onet-exact",
               "block": "source-register",
@@ -9466,7 +9666,79 @@
               "field": "name",
               "item": "information-security-engineers.source-register.published.1"
             },
-            "scope": "按原始文档对象核；相邻分析师教育不等安全工程师教育，ILO不提供入行条件，数据安全标准PDF本轮访问未成功。"
+            "scope": "仅按各职业、学习或框架范围使用，均不授予生产权限。"
+          },
+          {
+            "href": {
+              "$source": "nist-nice",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "id": "information-security-engineers.display.path.source.1",
+            "label": {
+              "$source": "nist-nice",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "scope": "仅按各职业、学习或框架范围使用，均不授予生产权限。"
+          },
+          {
+            "href": {
+              "$source": "nist-ssdf",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "id": "information-security-engineers.display.path.source.2",
+            "label": {
+              "$source": "nist-ssdf",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "scope": "仅按各职业、学习或框架范围使用，均不授予生产权限。"
+          },
+          {
+            "href": {
+              "$source": "review-nuist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "id": "information-security-engineers.display.path.source.3",
+            "label": {
+              "$source": "review-nuist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "scope": "仅按各职业、学习或框架范围使用，均不授予生产权限。"
+          },
+          {
+            "href": {
+              "$source": "review-gz-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "id": "information-security-engineers.display.path.source.4",
+            "label": {
+              "$source": "review-gz-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "information-security-engineers.source-register.published.1"
+            },
+            "scope": "仅按各职业、学习或框架范围使用，均不授予生产权限。"
           }
         ],
         "tracks": [
@@ -9503,22 +9775,22 @@
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：理解控制要求须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "readiness_evidence": "业务规则到控制目标的对应表",
+                "responsibility": "在分配范围内推进“理解控制要求”相关工作。",
                 "role": "理解控制要求"
               },
               {
                 "credentials": "核目标岗位教育、经历、训练与实际职责；证书、录用、批准及执行权限分别核。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：监督下测试须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "next_moves": "与责任人核对上述证据，先辨缺口再承接后续工作。",
+                "readiness_evidence": "测试条件、预期与观察分栏，纸面方案注明未执行",
+                "responsibility": "在分配范围内推进“监督下测试”相关工作。",
                 "role": "监督下测试"
               },
               {
                 "credentials": "核目标岗位教育、经历、训练与实际职责；证书、录用、批准及执行权限分别核。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：确认变更权限须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "next_moves": "与责任人核对上述证据，先辨缺口再承接后续工作。",
+                "readiness_evidence": "批准者、时窗、回退与停止条件核对表",
+                "responsibility": "在分配范围内推进“确认变更权限”相关工作。",
                 "role": "确认变更权限"
               }
             ],
@@ -9529,30 +9801,30 @@
             "stages": [
               {
                 "credentials": "核目标岗位教育、经历、训练与实际职责；证书、录用、批准及执行权限分别核。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：控制设计须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "next_moves": "与责任人核对上述证据，先辨缺口再承接后续工作。",
+                "readiness_evidence": "控制方案、备选方案及取舍理由",
+                "responsibility": "在分配范围内推进“控制设计”相关工作。",
                 "role": "控制设计"
               },
               {
                 "credentials": "核目标岗位教育、经历、训练与实际职责；证书、录用、批准及执行权限分别核。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：部署验证须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "next_moves": "与责任人核对上述证据，先辨缺口再承接后续工作。",
+                "readiness_evidence": "获批版本、验证记录及未满足项",
+                "responsibility": "在分配范围内推进“部署验证”相关工作。",
                 "role": "部署验证"
               },
               {
                 "credentials": "核目标岗位教育、经历、训练与实际职责；证书、录用、批准及执行权限分别核。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：监测核查须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "next_moves": "与责任人核对上述证据，先辨缺口再承接后续工作。",
+                "readiness_evidence": "原始告警与判断分开的记录",
+                "responsibility": "在分配范围内推进“监测核查”相关工作。",
                 "role": "监测核查"
               },
               {
                 "credentials": "核目标岗位教育、经历、训练与实际职责；证书、录用、批准及执行权限分别核。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：恢复与复盘须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "next_moves": "与责任人核对上述证据，先辨缺口再承接后续工作。",
+                "readiness_evidence": "事件事实时间线、恢复核验及改进问题",
+                "responsibility": "在分配范围内推进“恢复与复盘”相关工作。",
                 "role": "恢复与复盘"
               }
             ],
@@ -9563,30 +9835,30 @@
             "stages": [
               {
                 "credentials": "核目标岗位教育、经历、训练与实际职责；证书、录用、批准及执行权限分别核。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：跨系统协调须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "next_moves": "与责任人核对上述证据，先辨缺口再承接后续工作。",
+                "readiness_evidence": "系统依赖、负责人及未决接口",
+                "responsibility": "在分配范围内推进“跨系统协调”相关工作。",
                 "role": "跨系统协调"
               },
               {
                 "credentials": "核目标岗位教育、经历、训练与实际职责；证书、录用、批准及执行权限分别核。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：控制质量评估须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "next_moves": "与责任人核对上述证据，先辨缺口再承接后续工作。",
+                "readiness_evidence": "指标、证据来源及覆盖限制",
+                "responsibility": "在分配范围内推进“控制质量评估”相关工作。",
                 "role": "控制质量评估"
               },
               {
                 "credentials": "核目标岗位教育、经历、训练与实际职责；证书、录用、批准及执行权限分别核。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：风险沟通须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "next_moves": "与责任人核对上述证据，先辨缺口再承接后续工作。",
+                "readiness_evidence": "事实、业务影响、选项及待决定事项",
+                "responsibility": "在分配范围内推进“风险沟通”相关工作。",
                 "role": "风险沟通"
               },
               {
                 "credentials": "核目标岗位教育、经历、训练与实际职责；证书、录用、批准及执行权限分别核。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "编辑责任范围：责任与资源协同须按具体岗位任务与授权，阶段名称不代表统一职级或自动批准权。",
+                "next_moves": "与责任人核对上述证据，先辨缺口再承接后续工作。",
+                "readiness_evidence": "决策责任人、资源约束及授权记录",
+                "responsibility": "在分配范围内推进“责任与资源协同”相关工作。",
                 "role": "责任与资源协同"
               }
             ],
@@ -9801,7 +10073,7 @@
               "information-security-engineers.display.source.0"
             ],
             "id": "risk-4",
-            "mitigation": "编辑核对建议：保留原始记录与变更线索、区分事实与推断、异常时停止并升级。 具体措施按机构流程及适用法域核。",
+            "mitigation": "将时间线逐项追溯至原始记录，保留版本依据与变更线索，验证修复后再形成结论。区分事实与推断、标明未知项，将未解决的证据缺口交责任人复核。发现越权或不满足批准、变更条件时，暂停受影响操作并升级；其他告警按适用预案处理。",
             "scenario": "时间线不完整、版本失控或修复未验证。",
             "title": {
               "$item": "information-security-engineers.risk.career-risk-cards.4",
@@ -9899,38 +10171,38 @@
           },
           "china_edu_table": [
             {
-              "学历段": "证据不足：未建立安全映射（高中/中专）",
-              "岗位方向": "按机构公告核验",
-              "说明": "不使用代理数字。"
+              "学历段": "高中/中专",
+              "岗位方向": "核具体招聘条件",
+              "说明": "未建立按该学历分组的职业工资估计"
             },
             {
-              "学历段": "证据不足：未建立安全映射（大专）",
-              "岗位方向": "按机构公告核验",
-              "说明": "不使用代理数字。"
+              "学历段": "大专",
+              "岗位方向": "核具体招聘条件",
+              "说明": "未建立按该学历分组的职业工资估计"
             },
             {
-              "学历段": "证据不足：未建立安全映射（本科）",
-              "岗位方向": "按机构公告核验",
-              "说明": "不使用代理数字。"
+              "学历段": "本科",
+              "岗位方向": "核具体招聘条件",
+              "说明": "未建立按该学历分组的职业工资估计"
             },
             {
-              "学历段": "证据不足：未建立安全映射（其他）",
-              "岗位方向": "按具体法域核验",
-              "说明": "不使用代理数字。"
+              "学历段": "其他路径",
+              "岗位方向": "核具体招聘条件",
+              "说明": "未建立按该学历分组的职业工资估计"
             }
           ],
           "china_industry_table": [
             {
               "行业": "信息传输、软件和信息技术服务业（行业门类）",
-              "需求": "暂无安全数值"
+              "需求": "仅行业背景，不是本职业空缺或需求"
             },
             {
               "行业": "金融业（行业门类）",
-              "需求": "暂无安全数值"
+              "需求": "仅行业背景，不是本职业空缺或需求"
             },
             {
               "行业": "公共管理、社会保障和社会组织（行业门类）",
-              "需求": "暂无安全数值"
+              "需求": "仅行业背景，不是本职业空缺或需求"
             }
           ],
           "china_intl": "国际职业任务：https://www.onetonline.org/link/details/15-1299.05；ILO暴露研究不建立中国工资对应。",
@@ -9945,16 +10217,16 @@
           "china_salary_note": "中国大陆口径与美国、全球及具体单位分开，不能跨市场拼接。",
           "china_salary_table": [
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "城市估计",
+              "月薪参考": "本页企业抽样证据未建立该值"
             },
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "入职起薪",
+              "月薪参考": "本页企业抽样证据未建立该值"
             },
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "个人实发收入",
+              "月薪参考": "本页企业抽样证据未建立该值"
             }
           ],
           "china_soc_row": {
@@ -10065,24 +10337,24 @@
         "industry_period": "2025父组；非精确行业工资",
         "industry_rows": [
           {
-            "industry": "精确安全工程师行业内工资",
-            "median": "暂无安全数值",
-            "note": "未取得本精确职业行业工资，父组分布与相邻分析师行业工资不能代填。"
+            "industry": "父组行业背景",
+            "median": "无精确职业行业估计",
+            "note": "概览列专业科学技术服务及政府等父组主要行业，不是精确工程师行业工资。"
           },
           {
-            "industry": "精确安全工程师行业内工资",
-            "median": "暂无安全数值",
-            "note": "未取得本精确职业行业工资，父组分布与相邻分析师行业工资不能代填。"
+            "industry": "精确职业行业内工资",
+            "median": "无精确职业行业估计",
+            "note": "未提供已核实的15-1299.05行业内工资。"
           },
           {
-            "industry": "精确安全工程师行业内工资",
-            "median": "暂无安全数值",
-            "note": "未取得本精确职业行业工资，父组分布与相邻分析师行业工资不能代填。"
+            "industry": "行业份额与空缺",
+            "median": "无精确职业行业估计",
+            "note": "行业份额不等于当前招聘数或录用概率。"
           },
           {
-            "industry": "精确安全工程师行业内工资",
-            "median": "暂无安全数值",
-            "note": "未取得本精确职业行业工资，父组分布与相邻分析师行业工资不能代填。"
+            "industry": "目标机构报价",
+            "median": "无精确职业行业估计",
+            "note": "分别核岗位、地区、报酬组成及期间。"
           }
         ],
         "industry_value_label": "行业值",
@@ -10173,7 +10445,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "信息安全工程师适合什么样的人？"
+        "title": "哪些人可能愿意进一步了解信息安全工程工作？"
       },
       "fit_decision_checklist": {
         "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
@@ -10282,7 +10554,7 @@
           },
           {
             "href": {
-              "$source": "mohrss-standard",
+              "$source": "onet-parent-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10290,7 +10562,7 @@
             },
             "id": "information-security-engineers.display.source.2",
             "label": {
-              "$source": "mohrss-standard",
+              "$source": "onet-parent-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10334,7 +10606,7 @@
             "target_href": "/zh/career/jobs/security-managers",
             "target_slug": "security-managers",
             "target_title": "安全经理",
-            "transition_distance": "编辑比較，需补目标职责与证据"
+            "transition_distance": "编辑任务比较，需核目标岗位条件及支持证据。"
           },
           {
             "capability_gaps": "组织级资源、预算与路线规划",
@@ -10342,15 +10614,15 @@
             "target_href": "/zh/career/jobs/computer-and-information-systems-managers",
             "target_slug": "computer-and-information-systems-managers",
             "target_title": "计算机与信息系统经理",
-            "transition_distance": "编辑比較，需补目标职责与证据"
+            "transition_distance": "编辑任务比较，需核目标岗位条件及支持证据。"
           },
           {
-            "capability_gaps": "补目标安全管理对象、实体安全评估与制度，不能把目标缺口反写成更多技术日志。",
+            "capability_gaps": "补目标岗位的实体威胁评估、人员设施保护及相关系统设计证据。",
             "shared_capabilities": "控制、政策与风险语言",
             "target_href": "/zh/career/jobs/security-management-specialists",
             "target_slug": "security-management-specialists",
             "target_title": "安全管理专员",
-            "transition_distance": "编辑比較，需补目标职责与证据"
+            "transition_distance": "编辑任务比较，需核目标岗位条件及支持证据。"
           },
           {
             "capability_gaps": "业务流程建模与方案交付",
@@ -10358,15 +10630,15 @@
             "target_href": "/zh/career/jobs/computer-systems-analysts",
             "target_slug": "computer-systems-analysts",
             "target_title": "计算机系统分析师",
-            "transition_distance": "编辑比較，需补目标职责与证据"
+            "transition_distance": "编辑任务比较，需核目标岗位条件及支持证据。"
           },
           {
-            "capability_gaps": "分析报告与缓解建议",
+            "capability_gaps": "核目标评估、缓解实施及报告职责；工程师与分析师的职责可重叠。",
             "shared_capabilities": "监测、日志与风险判断",
             "target_href": "/zh/career/jobs/information-security-analysts",
             "target_slug": "information-security-analysts",
             "target_title": "信息安全分析师",
-            "transition_distance": "编辑比較，需补目标职责与证据"
+            "transition_distance": "编辑任务比较，需核目标岗位条件及支持证据。"
           },
           {
             "capability_gaps": "补网站运行、内容发布、可用性、备份与服务交付，非自动转岗。",
@@ -10374,7 +10646,7 @@
             "target_href": "/zh/career/jobs/web-administrators",
             "target_slug": "web-administrators",
             "target_title": "网站管理员",
-            "transition_distance": "编辑比較，需补目标职责与证据"
+            "transition_distance": "编辑任务比较，需核目标岗位条件及支持证据。"
           }
         ]
       },
@@ -10406,16 +10678,16 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "了解RIASEC",
+            "cta_label": "探索职业兴趣",
             "evidence_level": "official_descriptive",
             "id": "riasec",
             "label": "RIASEC",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "哪些人可能愿意进一步了解信息安全工程工作？",
             "signals": [
               "可观察任务",
               "过程记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "本入口用于探索卡片所列主题，不证明工程能力、访问授权或录用适配。"
           },
           {
             "answer": {
@@ -10425,7 +10697,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/big-five-personality-test",
-            "cta_label": "了解大五人格",
+            "cta_label": "探索大五人格特质",
             "evidence_level": "editorial",
             "id": "big-five",
             "label": "大五人格",
@@ -10434,7 +10706,7 @@
               "可观察任务",
               "过程记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "本入口用于探索卡片所列主题，不证明工程能力、访问授权或录用适配。"
           },
           {
             "answer": {
@@ -10444,7 +10716,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/mbti-personality-test",
-            "cta_label": "了解MBTI",
+            "cta_label": "探索MBTI偏好",
             "evidence_level": "editorial",
             "id": "mbti",
             "label": "MBTI",
@@ -10453,12 +10725,12 @@
               "可观察任务",
               "过程记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "本入口用于探索卡片所列主题，不证明工程能力、访问授权或录用适配。"
           },
           {
             "answer": "未取得九型人格职业绩效效度，观察实际任务偏好。",
             "cta_href": "/zh/tests/enneagram-personality-test",
-            "cta_label": "了解九型人格",
+            "cta_label": "探索九型人格",
             "evidence_level": "editorial",
             "id": "enneagram",
             "label": "九型人格",
@@ -10467,12 +10739,12 @@
               "可观察任务",
               "过程记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "本入口用于探索卡片所列主题，不证明工程能力、访问授权或录用适配。"
           },
           {
             "answer": "未取得IQ统一门槛或本页量表职业绩效效度，核实际数据和方法任务。",
             "cta_href": "/zh/tests/iq-test",
-            "cta_label": "了解认知能力",
+            "cta_label": "尝试IQ推理测评",
             "evidence_level": "editorial",
             "id": "iq",
             "label": "认知能力",
@@ -10481,12 +10753,12 @@
               "可观察任务",
               "过程记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "本入口用于探索卡片所列主题，不证明工程能力、访问授权或录用适配。"
           },
           {
             "answer": "未取得情绪能力量表绩效效度，观察沟通、解释依据与反馈行为。",
             "cta_href": "/zh/tests/eq-test",
-            "cta_label": "了解情绪能力",
+            "cta_label": "尝试EQ情绪能力测评",
             "evidence_level": "editorial",
             "id": "eq",
             "label": "情绪能力",
@@ -10495,7 +10767,7 @@
               "可观察任务",
               "过程记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "本入口用于探索卡片所列主题，不证明工程能力、访问授权或录用适配。"
           }
         ],
         "boundary": "RIASEC、人格和能力工具不能替代资格、医疗、安全或雇主判断。",
@@ -10529,7 +10801,7 @@
           {
             "direction": "安全开发与软件供应链",
             "fit_signals": "愿意把安全要求落到开发与发布流程。",
-            "watchouts": "需要补足开发流程与供应链证据。"
+            "watchouts": "需学习软件开发流程并取得相应供应链证据。"
           },
           {
             "direction": "安全治理与风险沟通",
@@ -10573,7 +10845,7 @@
             "question": "是否有可观察交付？"
           },
           {
-            "answer": "先核目标岗位任务、教育和权限；作品和试验内容按原保护范围保留。",
+            "answer": "先做本页完整虚构访问控制题，逐项对照参考，记录哪些任务让你愿意继续了解及尚不明确之处。",
             "question": "下一步试验是什么？"
           }
         ],
@@ -10650,14 +10922,14 @@
           },
           {
             "href": {
-              "$source": "mohrss-standard",
+              "$source": "nist-ssdf",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "information-security-engineers.source-register.published.1"
             },
             "label": {
-              "$source": "mohrss-standard",
+              "$source": "nist-ssdf",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10949,9 +11221,9 @@
       },
       "source_card": {
         "eeat_signals": {
-          "author": "FermatMind research workflow",
+          "author": "费马测试编辑部",
           "source": "O*NET工资与趋势；BLS OEWS概念；人社部2025年表列企业工资；2022中国职业分类。具体链接见来源登记。",
-          "updated_at": "上述统计范围及来源于2026-11-08核对；各资料期分别列示，未变内容不因此视为新核。"
+          "updated_at": "2026年11月9日核对；各来源期间与限制另列。"
         },
         "note": "美国工资与趋势为O*NET展示的15-1299父组；中国工资为2021007分类职业的全国企业抽样数据，不作精确等价。城市、学历分组工资和实际AI工资影响仍未取得。"
       },
@@ -10963,6 +11235,9 @@
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.interest_code_heading": "怎样理解CIR"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11065,13 +11340,13 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
+        "derivation": "原67%编辑估算已撤回：三项完整工程任务的75/75/50档位未建立任务级效果依据，不另造替代分数。",
+        "display_value": "尚无可核验定量",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "AI任务级定量证据状态",
         "occupation_scope": "信息安全工程师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -11092,8 +11367,8 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI影响度"
     },
@@ -11146,10 +11421,10 @@
       "text": "信息安全工程师职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "02e12d8665421659314853389919b756024a826540e68189c12644dbe39823b5",
+  "source_content_sha256": "7c12fe5a53a6ec9004787383b2c38de9dccd2d30582626c510c6db343172f42f",
   "subject": {
     "canonical_slug": "information-security-engineers",
     "name": "信息安全工程师",
-    "summary": "信息安全工程师把资产、威胁和业务约束转成可验证的安全控制、监测与恢复方案。O*NET-SOC 15-1299.05 的官方范围包括：制定并监督信息安全程序与策略、构建维护升级防火墙等安全技术、设计并实施安全控制以识别漏洞、监测并响应安全入侵并开展取证调查，可能监督信息安全系统的评估。工作包括威胁建模、控制设计、部署验证、监测响应与事后改进。O*NET展示的美国工资与就业统计来自Computer Occupations, All Other（15-1299）父组，不是15-1299.05信息安全工程师单列数据。2025年中位年薪116,580美元、就业471,200人；2025—2035年预计增长5%，平均每年27,000个岗位空缺，包含增长与人员替代需求。 中国分类列有信息安全工程技术人员（2-02-10-07），职责与本页职业有重合，但不是已核实的一对一跨国对应。人社部原表标注2025年的全国企业抽样调查中，该中国分类职业第50分位工资为8.00万元/年，不代表所有安全岗位、城市起薪或个人收入。"
+    "summary": "信息安全工程师制定安全制度，构建和维护防护技术，并设计、评估系统与数据的安全控制。工作可涉及监测、事件响应和取证调查，具体职责与权限按岗位核对。下方美国工资与就业属于15-1299父组，不是信息安全工程师单列统计。"
   }
 }
