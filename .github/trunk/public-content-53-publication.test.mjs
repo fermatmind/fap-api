@@ -253,7 +253,7 @@ test('publication retains bounded page diagnostics and separate recovery errors 
  assert.equal(error.receipt.error_code,'PUBLIC_CONTENT_53_VISIBLE_BODY_PAGE-02_ITEM_14');
  assert.equal(error.receipt.recovery_error_code,'public_content_53_revalidation_http_429');
  assert.equal(error.receipt.recovery_completed,false);
- for(const id of ['RIASEC-RIC-zh-CN','RIASEC-IAR-en','RIASEC-SAE-en','EN-GUIDE-annual-career-review-system','EN-GUIDE-build-five-year-career-roadmap','EN-GUIDE-build-portfolio-for-career-switch','EN-GUIDE-cross-industry-move-strategy']) {
+ for(const id of ['TRADITIONAL-about','TRADITIONAL-brand','TRADITIONAL-charter','TRADITIONAL-careers','TRADITIONAL-privacy','TRADITIONAL-terms','TRADITIONAL-method-boundaries','TRADITIONAL-science','RIASEC-RIC-zh-CN','RIASEC-IAR-en','RIASEC-SAE-en','EN-GUIDE-annual-career-review-system','EN-GUIDE-build-five-year-career-roadmap','EN-GUIDE-build-portfolio-for-career-switch','EN-GUIDE-cross-industry-move-strategy']) {
   for(const diagnostic of [`PUBLIC_CONTENT_53_NEW_ARTICLE_SEO_${id}`,`PUBLIC_CONTENT_53_VISIBLE_BODY_${id}_ITEM_14`]) {
    const sample=await recoveryFailure(execution,failed,new Error(diagnostic));
    assert.equal(sample.receipt.error_code,diagnostic);
@@ -933,7 +933,7 @@ test('Traditional CMS package selects the eight reviewed variants and verifies c
    return `<p>${copy}</p>`;
   }).join('');
   const url='https://fermatmind.com'+pathFor(row);
-  const schema=[{'@type':'WebPage',url,inLanguage:'zh-TW',name:row.snapshot.title,description:row.snapshot.summary},{'@type':'BreadcrumbList',itemListElement:[{item:url}]}].map(node=>`<script type="application/ld+json">${JSON.stringify(node)}</script>`).join('');
+  const schema=[{'@type':'WebPage',url,inLanguage:'zh-TW',name:row.snapshot.title,description:row.snapshot.summary ?? ''},{'@type':'BreadcrumbList',itemListElement:[{item:url}]}].map(node=>`<script type="application/ld+json">${JSON.stringify(node)}</script>`).join('');
   const team=row.identity.slug==='about'?'<section>創始人與博士顧問團隊 劉福威 賈睿璇 李琛</section>':'';
   const html=`<html lang="zh-TW"><head><meta charset="utf-8"><title>${escape(row.snapshot.seo_title)} | 費馬測試</title><meta name="description" content="${escape(row.snapshot.meta_description)}"><meta name="robots" content="noindex, follow"><link rel="canonical" href="${url}"></head><body>${schema}<main><h1>${escape(row.snapshot.title)}</h1>${body}${team}</main></body></html>`;
   for(const environment of ['staging','production']) assert.doesNotThrow(()=>assertDom(row,html,{missing:true},environment));
@@ -957,6 +957,10 @@ test('Traditional CMS package selects the eight reviewed variants and verifies c
    ]) assert.throws(()=>assertDom(linkedRow,altered,{missing:true},'production'),/LINK/);
   }
   if(row.identity.slug==='science') {
+   assert.equal(row.snapshot.summary,null);
+   assert.throws(()=>assertDom(row,html.replace('\"description\":\"\"','\"description\":null'),{missing:true},'production'),/SEO_OR_TEAM/);
+   const withSummary={...row,snapshot:{...row.snapshot,summary:'Nonempty reviewed summary'}};
+   assert.throws(()=>assertDom(withSummary,html,{missing:true},'production'),/SEO_OR_TEAM/);
    assert.doesNotThrow(()=>assertDom(row,html.replace('href="/zh/method-boundaries"','href="/zh-TW/method-boundaries"'),{missing:true},'production'));
    for(const altered of [html.replace('<a href="/zh/method-boundaries">方法邊界</a>','方法邊界'),html.replace('href="/zh/method-boundaries"','href="/zh/account"'),html.replace('href="/zh/tests/big-five-personality-test-ocean-model"','href="/tests/big-five-personality-test"'),html.replace('href="/zh/tests/big-five-personality-test-ocean-model"','href="/tests/big-five-personality-test-ocean-model"'),html.replace('href="/zh/method-boundaries"','href="/zh/method-boundaries?unexpected=1"')])
     assert.throws(()=>assertDom(row,altered,{missing:true},'production'),/LINK/);

@@ -336,7 +336,7 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
     catch { throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_SCHEMA_${row.page_id}`); }
     const url='https://fermatmind.com'+pathFor(row);
     const webPage=schemas.some(node=>node['@type'] === 'WebPage' && node.url === url && node.inLanguage === 'zh-TW'
-      && node.name === row.snapshot.title && node.description === row.snapshot.summary);
+      && node.name === row.snapshot.title && node.description === (row.snapshot.summary ?? ''));
     const breadcrumb=schemas.some(node=>node['@type'] === 'BreadcrumbList' && node.itemListElement?.at(-1)?.item === url);
     if (dom.language !== 'zh-TW' || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)]) || !robots.includes('noindex') || robots.includes('index')
       || dom.alternate_entries.some(entry=>entry.hreflang)
