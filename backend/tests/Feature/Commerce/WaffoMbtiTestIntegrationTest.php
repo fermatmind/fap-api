@@ -49,7 +49,7 @@ final class WaffoMbtiTestIntegrationTest extends TestCase
         parent::tearDown();
     }
 
-    private function prepare(): array
+    private function prepare(bool $remoteExists = false): array
     {
         $this->seedScales();
         $row = (array) DB::table('skus')->where('sku', 'MBTI_REPORT_FULL_199')->first();
@@ -63,9 +63,9 @@ final class WaffoMbtiTestIntegrationTest extends TestCase
         config()->set('report_unlock.mbti_access_mode', 'paid_unlock');
         $attempt = $this->createAttemptWithResult('anon_waffo_fixture');
         $token = $this->issueAnonToken('anon_waffo_fixture');
-        Http::fake(['https://api.waffo.ai/v1/actions/checkout/create-session' => Http::sequence()->push(['data' => [
-            'sessionId' => 'cs_fixture', 'checkoutUrl' => 'https://pancake.waffo.ai/store/fixture/checkout/cs_fixture?env=test',
-        ]])->push(['data' => ['sessionId' => 'cs_renewed', 'checkoutUrl' => 'https://pancake.waffo.ai/store/fixture/checkout/cs_renewed']])->push([], 503)]);
+        Http::fake(['https://api.waffo.ai/v1/graphql' => Http::response(['data' => ['onetimeOrders' => $remoteExists ? [['id' => 'ORD_pending']] : []]]), 'https://api.waffo.ai/v1/actions/checkout/create-session' => Http::sequence()->push(['data' => [
+            'expiresAt' => now()->addMinutes(30)->toIso8601String(), 'sessionId' => 'cs_fixture', 'checkoutUrl' => 'https://pancake.waffo.ai/store/fixture/checkout/cs_fixture?env=test',
+        ]])->push(['data' => ['expiresAt' => now()->addMinutes(30)->toIso8601String(), 'sessionId' => 'cs_fixture', 'checkoutUrl' => 'https://pancake.waffo.ai/store/fixture/checkout/cs_fixture?env=test']])->push([], 503)]);
 
         return [$attempt, $token];
     }
@@ -148,6 +148,10 @@ final class WaffoMbtiTestIntegrationTest extends TestCase
         [$attempt, $token] = $this->prepare();
         $this->checkout($attempt, $token);
         Http::assertSent(function ($request) {
+            if (! str_ends_with($request->url(), '/checkout/create-session')) {
+                return false;
+            }
+            $this->assertStringStartsWith('mbti-checkout-', $request->header('X-Idempotency-Key')[0]);
             $t = $request->header('X-Timestamp')[0];
             $canonical = "POST\n/v1/actions/checkout/create-session\n".$t."\n".base64_encode(hash('sha256', $request->body(), true));
             $this->assertSame(1, openssl_verify($canonical, base64_decode($request->header('X-Signature')[0]), $this->publicKey, OPENSSL_ALGO_SHA256));
@@ -191,20 +195,48 @@ final class WaffoMbtiTestIntegrationTest extends TestCase
         $this->assertSame('unknown', $gateway->queryPaymentStatus($context)['status']);
     }
 
-    public function test_expired_checkout_is_renewed_and_platform_failure_does_not_grant(): void
+    public function test_expired_checkout_and_platform_failure_never_return_expired_links_or_grant(): void
     {
         [$attempt, $token] = $this->prepare();
         $order = $this->checkout($attempt, $token);
         $lookup = fn () => $this->withHeaders(['Authorization' => 'Bearer '.$token])->postJson('/api/v0.3/orders/lookup', ['order_no' => $order]);
         $lookup()->assertOk()->assertJsonPath('pay.type', 'redirect');
-        Http::assertSentCount(1);
-        $this->travel(31)->minutes();
-        $lookup()->assertOk()->assertJsonPath('pay.value', 'https://pancake.waffo.ai/store/fixture/checkout/cs_renewed');
         Http::assertSentCount(2);
         $this->travel(31)->minutes();
         $lookup()->assertOk()->assertJsonPath('pay', null);
-        Http::assertSentCount(3);
+        Http::assertSentCount(4);
+        $this->travel(31)->minutes();
+        $lookup()->assertOk()->assertJsonPath('pay', null);
+        Http::assertSentCount(6);
         $this->assertSame(0, DB::table('benefit_grants')->where('order_no', $order)->count());
+    }
+
+    public function test_existing_platform_order_prevents_a_second_checkout(): void
+    {
+        [$attempt, $token] = $this->prepare();
+        $order = $this->checkout($attempt, $token);
+        $this->deliver($this->event($order, $attempt))->assertOk();
+        $result = app(\App\Services\Commerce\Checkout\WaffoCheckoutService::class)->createCheckout($order, $attempt, 199, 'USD');
+        $this->assertFalse($result['ok']);
+        Http::assertSentCount(2);
+    }
+
+    public function test_existing_platform_order_blocks_a_second_payment_request(): void
+    {
+        [$attempt, $token] = $this->prepare(remoteExists: true);
+        $this->withHeaders(['Authorization' => 'Bearer '.$token, 'X-Fap-Locale' => 'zh-CN'])
+            ->postJson('/api/v0.3/orders/checkout', ['provider' => 'waffo', 'sku' => 'MBTI_REPORT_FULL_USD_199_TEST', 'attempt_id' => $attempt])->assertStatus(422);
+        Http::assertSentCount(1);
+        $this->assertSame(0, DB::table('benefit_grants')->count());
+    }
+
+    public function test_production_never_returns_a_cached_test_checkout(): void
+    {
+        [$attempt, $token] = $this->prepare();
+        $order = $this->checkout($attempt, $token);
+        $this->app['env'] = 'production';
+        $this->withHeaders(['Authorization' => 'Bearer '.$token])->postJson('/api/v0.3/orders/lookup', ['order_no' => $order])->assertOk()->assertJsonPath('pay', null);
+        Http::assertSentCount(2);
     }
 
     public function test_refunded_platform_payment_cannot_be_reconciled_as_paid(): void
@@ -226,8 +258,7 @@ final class WaffoMbtiTestIntegrationTest extends TestCase
     {
         $token = 'fm_'.(string) Str::uuid();
 
-        DB::table('fm_tokens')->insert([
-            'token' => $token,
+        DB::table('auth_tokens')->insert([
             'token_hash' => hash('sha256', $token),
             'user_id' => null,
             'anon_id' => $anonId,

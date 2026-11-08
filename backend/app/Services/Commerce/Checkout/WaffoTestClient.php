@@ -10,9 +10,9 @@ use RuntimeException;
 
 final class WaffoTestClient
 {
-    public function createSession(array $payload): array
+    public function createSession(array $payload, string $idempotencyKey): array
     {
-        return $this->post('/v1/actions/checkout/create-session', $payload);
+        return $this->post('/v1/actions/checkout/create-session', $payload, $idempotencyKey);
     }
 
     public function findOrder(string $orderNo): ?array
@@ -56,10 +56,10 @@ final class WaffoTestClient
             'reason' => 'MBTI sandbox full refund',
             'requestedAmount' => ['amount' => '1.99', 'currency' => 'USD'],
             'refundTicketMerchantExternalId' => $reference,
-        ]);
+        ], 'mbti-refund-'.hash('sha256', $reference));
     }
 
-    private function post(string $path, array $payload): array
+    private function post(string $path, array $payload, ?string $idempotencyKey = null): array
     {
         if (! app(PaymentProviderRegistry::class)->isEnabled('waffo')) {
             throw new RuntimeException('Waffo test provider is disabled.');
@@ -84,6 +84,7 @@ final class WaffoTestClient
                 'X-Merchant-Id' => $merchant,
                 'X-Timestamp' => $timestamp,
                 'X-Signature' => base64_encode($signature),
+                ...($idempotencyKey !== null ? ['X-Idempotency-Key' => $idempotencyKey] : []),
             ])->withBody($body, 'application/json')->post('https://api.waffo.ai'.$path);
         } catch (\Throwable) {
             throw new RuntimeException('Waffo test request failed.');

@@ -15,7 +15,8 @@ final class WaffoCheckoutService
         if (! $order || ! $attempt || $order->provider !== 'waffo'
             || $attempt->scale_code !== 'MBTI' || $order->target_attempt_id !== $attemptId
             || (int) $order->amount_cents !== 199 || $order->currency !== 'USD'
-            || $amountCents !== 199 || $currency !== 'USD') {
+            || $amountCents !== 199 || $currency !== 'USD'
+            || ! in_array(\App\Models\Order::normalizePaymentState($order->payment_state ?? '', $order->status ?? ''), ['created', 'pending'], true)) {
             return $this->unavailable();
         }
         $productId = (string) config('payments.waffo.product_id', '');
@@ -29,7 +30,13 @@ final class WaffoCheckoutService
             return $this->unavailable();
         }
         try {
-            $data = app(WaffoTestClient::class)->createSession([
+            $client = app(WaffoTestClient::class);
+            // An existing platform order may be processing or paid despite a lost callback.
+            // Reconcile it instead of starting a second payment.
+            if ($client->findOrder($orderNo) !== null) {
+                return $this->unavailable();
+            }
+            $data = $client->createSession([
                 'productId' => $productId,
                 'currency' => 'USD',
                 'successUrl' => $waitUrl,
@@ -39,7 +46,10 @@ final class WaffoCheckoutService
                 'language' => $language,
                 'expiresInSeconds' => 1800,
                 'allowPromotionCodes' => false,
-            ]);
+            ], 'mbti-checkout-'.hash('sha256', $orderNo));
+            if (! is_string($data['expiresAt'] ?? null) || \Illuminate\Support\Carbon::parse($data['expiresAt'])->isPast()) {
+                return $this->unavailable();
+            }
         } catch (\Throwable) {
             return $this->unavailable();
         }
@@ -53,7 +63,7 @@ final class WaffoCheckoutService
             return $this->unavailable();
         }
 
-        return ['ok' => true, 'type' => 'redirect', 'value' => $url, 'provider_session_ref' => $data['sessionId']];
+        return ['ok' => true, 'type' => 'redirect', 'value' => $url, 'provider_session_ref' => $data['sessionId'], 'expires_at' => $data['expiresAt']];
     }
 
     private function unavailable(): array

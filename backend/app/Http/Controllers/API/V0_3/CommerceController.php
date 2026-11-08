@@ -797,6 +797,7 @@ class CommerceController extends Controller
                     'provider' => $provider,
                     'pay' => $payPayload,
                     'checkout_url' => $checkoutUrl,
+                    ...($provider === 'waffo' ? ['expires_at' => $payAction['expires_at'] ?? null] : []),
                 ],
                 $this->trimNullableString($paymentAttempt->id ?? null)
             );
@@ -1207,7 +1208,7 @@ class CommerceController extends Controller
         $this->persistOrderPaymentPayload(
             $freshOrder,
             $scene,
-            $presented,
+            [...$presented, ...($normalizedProvider === 'waffo' ? ['expires_at' => $payAction['expires_at'] ?? null] : [])],
             $this->trimNullableString($paymentAttempt->id ?? null)
         );
 
@@ -1255,7 +1256,7 @@ class CommerceController extends Controller
      */
     private function resolveCachedOrderPaymentPayload(object $order, ?string $provider, string $scene): ?array
     {
-        if ($provider === null || $scene === '') {
+        if ($provider === null || $scene === '' || ($provider === 'waffo' && ! $this->isProviderEnabled('waffo'))) {
             return null;
         }
 
@@ -1272,12 +1273,12 @@ class CommerceController extends Controller
 
         if ($provider === 'waffo') {
             try {
-                $cachedAt = \Illuminate\Support\Carbon::parse($payload['cached_at'] ?? '1970-01-01');
+                $expiresAt = \Illuminate\Support\Carbon::parse($payload['expires_at'] ?? '1970-01-01');
             } catch (\Throwable) {
                 return null;
             }
-            // The Waffo session lifetime is 1800 seconds; never keep serving an expired URL.
-            if ($cachedAt->addSeconds(1800)->isPast()) {
+            // Platform idempotency replays must never extend the original session lifetime.
+            if ($expiresAt->subSeconds(5)->isPast()) {
                 return null;
             }
         }
@@ -1345,6 +1346,7 @@ class CommerceController extends Controller
             'checkout_url' => $checkoutUrl,
             'payment_attempt_id' => $paymentAttemptId,
             'cached_at' => now()->toIso8601String(),
+            ...($provider === 'waffo' ? ['expires_at' => $payload['expires_at'] ?? null] : []),
         ];
         $cache[$provider] = $providerCache;
         $meta['payment_action_cache'] = $cache;
