@@ -61,6 +61,7 @@ try {
         }
     }
     echo json_encode(['ok' => false, 'schema' => 'science.reviewed_pages.delivery.v1',
-        'error_code' => 'science_delivery_failed', 'recovery' => $restored, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
+        'error_code' => $error instanceof DomainException && preg_match('/\A(?:science_|existing_science_)[a-z0-9_:]{1,140}\z/', $error->getMessage()) === 1
+            ? $error->getMessage() : 'science_delivery_failed', 'recovery' => $restored, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
     exit(1);
 }

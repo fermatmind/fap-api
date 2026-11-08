@@ -43,11 +43,16 @@ export function execution(env) {
 export function invoke(ex,mode,run=spawnSync) {
   const out=run('ssh',ex.args,{input:JSON.stringify({binding:ex.binding,signature:ex.signature,mode}),encoding:'utf8',
     timeout:transportTimeout,maxBuffer:262144,stdio:['pipe','pipe','pipe']});
-  const value=JSON.parse(out.stdout??'');
+  let value;
+  try {value=JSON.parse(out.stdout??'');}
+  catch {
+    const denied=/not allowed to execute|a password is required|not in the sudoers/i.test(out.stderr??'');
+    throw Error(denied?'SCIENCE_TRANSPORT_SUDO_DENIED':out.error?.code==='ETIMEDOUT'?'SCIENCE_TRANSPORT_TIMEOUT':'SCIENCE_TRANSPORT_RESPONSE_INVALID');
+  }
   if(out.status!==0 || value.ok!==true || value.schema!=='science.reviewed_pages.delivery.v1'
     || value.mode!==mode || !equal(value.binding,ex.binding) || value.sanitized!==true
     || (mode==='publish' ? value.published_count!==2 : !((value.restored===true && value.recovery_status==='restored') || (value.restored===false && value.recovery_status==='not_required'))))
-    throw Error('SCIENCE_NATIVE_OPERATION_FAILED');
+    throw Error(/^(?:science_|existing_science_)[a-z0-9_:]{1,140}$/.test(value.error_code??'')?value.error_code:'SCIENCE_NATIVE_OPERATION_FAILED');
   return value;
 }
 const hosts=environment=>environment==='staging'
@@ -96,16 +101,17 @@ export async function verify(states,environment,recover=false,fetcher=fetch,rend
 }
 async function cli() {
   const env=process.env;let ex,states,started=false;
-  const receipt={schema:'science.reviewed_pages.delivery.v1',ok:false,sanitized:true,binding:{source_commit:env.DEPLOY_SHA,workflow_run_id:env.GITHUB_RUN_ID,workflow_run_attempt:1,environment:env.SCIENCE_PUBLISH_ENVIRONMENT,package_sha256:packageSha}};
+  const receipt={failure_phase:'prestate',transport_started:false,schema:'science.reviewed_pages.delivery.v1',ok:false,sanitized:true,binding:{source_commit:env.DEPLOY_SHA,workflow_run_id:env.GITHUB_RUN_ID,workflow_run_attempt:1,environment:env.SCIENCE_PUBLISH_ENVIRONMENT,package_sha256:packageSha}};
   const directory=resolve(env.RUNNER_TEMP,'reviewed-science-pages');mkdirSync(directory,{recursive:true,mode:0o700});
   try {
     if(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==env.DEPLOY_SHA) throw Error('SCIENCE_CHECKOUT_MISMATCH');
     const data=candidate();ex=execution(env);receipt.binding=ex.binding;
     states=await prestate(env.SCIENCE_PUBLISH_ENVIRONMENT,data);
-    started=true;invoke(ex,'publish');
+    started=true;receipt.transport_started=true;receipt.failure_phase='native_publish';invoke(ex,'publish');
+    receipt.failure_phase='online_acceptance';
     receipt.acceptance=await verify(states,ex.binding.environment);receipt.ok=true;receipt.published_count=2;
-  } catch {
-    receipt.failure_code='SCIENCE_DELIVERY_FAILED';
+  } catch(error) {
+    receipt.failure_code=/^(?:SCIENCE_|PUBLIC_CONTENT_53_|science_|existing_science_)[A-Za-z0-9_:.-]{1,140}$/.test(error.message??'')?error.message:'SCIENCE_DELIVERY_FAILED';
     receipt.recovery_completed=!started;
     if(started) {
       try {invoke(ex,'recover');await verify(states,ex.binding.environment,true);receipt.recovery_completed=true;}

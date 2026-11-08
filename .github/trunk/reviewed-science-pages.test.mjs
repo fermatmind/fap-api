@@ -43,3 +43,10 @@ test('public readback requires exact body, FAQ and unchanged protected fields',(
   assert.doesNotThrow(()=>assertApi(expected,{ok:true,page:expected}));
   for(const patch of [{content_md:'Old text'},{faq_items:[]},{is_indexable:true},{published_at:'2026-11-08'},{canonical_path:'/other'},{schema_enabled:true}]) assert.throws(()=>assertApi(expected,{ok:true,page:{...expected,...patch}}));
 });
+
+test('failed native execution retains a bounded rejection code without raw stderr',()=>{
+  const ex=execution(env);
+  assert.throws(()=>invoke(ex,'publish',()=>({status:1,stdout:JSON.stringify({ok:false,error_code:'existing_science_working_revision_missing'})})),/existing_science_working_revision_missing/);
+  assert.throws(()=>invoke(ex,'publish',()=>({status:1,stdout:'',stderr:'sudo: not allowed to execute private command'})),/SCIENCE_TRANSPORT_SUDO_DENIED/);
+  assert.throws(()=>invoke(ex,'publish',()=>({status:1,stdout:JSON.stringify({ok:false,error_code:'/private/path?secret=value'})})),/SCIENCE_NATIVE_OPERATION_FAILED/);
+});
