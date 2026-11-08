@@ -147,10 +147,22 @@ export function githubProductionEvidence(repository) {
       if (artifacts(runId).some(a => /^trunk-deploy-skip-[a-f0-9]{40}$/.test(a.name))) {
         result.jobs[i] = {...job, steps: [{name: activationStepName, conclusion: 'skipped'}]};
       } else {
-        const log = execFileSync('gh', ['api', `repos/${repository}/actions/jobs/${job.id}/logs`], {
-          encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 32 * 1024 * 1024,
+        // Read the binary attempt archive rather than printing raw job logs:
+        // newer gh versions correctly refuse terminal escape sequences even
+        // on a pipe. No archive member is extracted or shown in the terminal.
+        const bytes = execFileSync('gh', ['api', `repos/${repository}/actions/runs/${runId}/attempts/1/logs`], {
+          timeout: 30000, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 32 * 1024 * 1024,
         });
-        result.jobs[i] = recoverProductionSteps(job, log);
+        const temp = mkdtempSync(join(tmpdir(), 'production-log-'));
+        try {
+          const zip = join(temp, 'logs.zip'); writeFileSync(zip, bytes);
+          const members = execFileSync('unzip', ['-Z1', zip], {encoding:'utf8'}).trim().split('\n');
+          const selected = members.filter(name => /^\d+_/.test(name)
+            && name.replace(/^\d+_/, '') === `${productionJobName}.txt`);
+          if (selected.length !== 1) throw new Error('Missing or ambiguous production job log');
+          const log = execFileSync('unzip', ['-p', zip, selected[0]], {encoding:'utf8', maxBuffer:32*1024*1024});
+          result.jobs[i] = recoverProductionSteps(job, log);
+        } finally { rmSync(temp, {recursive:true, force:true}); }
       }
     }
     return result.jobs;
