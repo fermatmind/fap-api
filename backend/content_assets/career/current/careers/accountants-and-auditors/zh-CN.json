@@ -24035,7 +24035,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先用本页的一笔虚构报销体验核对：比较申请、发票和付款金额，区分已知事实与证据缺口，写出资料追问和复核建议。记录准确性、表达清晰度和精力感受，再请有经验的人复核。这只是一个入门切片，不能代表整套会计或审计工作；后续还需尝试不同任务、阅读具体岗位要求并访谈从业者。职业兴趣或人格测评只能作为补充，不能替代实际体验。"
+              "先用本页的一笔虚构报销体验核对：比较申请、发票和付款金额，区分已知事实与证据缺口，写出资料追问和复核建议。默认按给定400元差额及参考逐项自核、保留修改记录；条件允许时再请从业者、教师或有经验同学反馈，不假称已获得专业复核。这只是入门切片，不能代表整套会计或审计工作；后续可比较其他任务与具体岗位。兴趣或人格测评仅作补充。"
             ]
           },
           "id": "fit-decision-checklist-2",
@@ -24571,10 +24571,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国职业身份和分类边界"
+              "2026初、中级报名条件与考试安排；年度通知不等于岗位录用要求。"
             ]
           },
           "id": "onet-structured-fields-block-4",
+          "source_refs": [
+            "source-18"
+          ],
           "type": "prose"
         },
         {
@@ -24582,10 +24585,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "财务报告目标、确认计量和信息质量要求"
+              "诚信守法、准则责任与持续学习的职业道德背景。"
             ]
           },
           "id": "onet-structured-fields-block-5",
+          "source_refs": [
+            "review-mof-ethics"
+          ],
           "type": "prose"
         },
         {
@@ -24593,10 +24599,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "总体目标、重要性、职业判断与合理保证边界"
+              "审计意见、职业判断、充分适当证据与非绝对保证的解释；不是准则条文全文。"
             ]
           },
           "id": "onet-structured-fields-block-6",
+          "source_refs": [
+            "review-1101-guidance"
+          ],
           "type": "prose"
         },
         {
@@ -24635,10 +24644,15 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "比较维度综合中国与国际职业标准：人力资源和社会保障部《中华人民共和国职业分类大典（2022年版）》对会计专业人员、审计专业人员及相关职业的任务分类；财政部《会计人员职业道德规范》对诚信、准则、责任和专业能力的要求；中国注册会计师审计准则对职业判断与充分、适当审计证据的要求；并参考美国劳工统计局（BLS）与 O*NET 13-2011.00 的职业职责和工作活动定义。"
+              "本表按工作对象、输出和责任作编辑比较，并参考BLS与O*NET的美国任务资料。大陆伦理背景使用财政部《会计人员职业道德规范》；审计意见、证据和职业判断说明参考1101号应用指南（2019年修订），不把指南称为准则条文或把美国任务直接转换为中国资格。"
             ]
           },
           "id": "adjacent-career-comparison-table-2",
+          "source_refs": [
+            "source-8",
+            "source-10",
+            "review-1101-guidance"
+          ],
           "type": "prose"
         },
         {
@@ -24945,10 +24959,10 @@
                 "url": "https://www.onetonline.org/link/details/13-2011.00"
               },
               {
-                "entity": "人社部：国家职业分类大典（2022年版）",
+                "entity": "O*NET美国职业任务摘要",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/dongtaixinwen/buneiyaowen/rsxw/202207/t20220714_457800.html"
+                "url": "https://www.onetonline.org/link/summary/13-2011.00"
               },
               {
                 "entity": "财政部：会计人员职业道德规范",
@@ -24957,7 +24971,7 @@
                 "url": "https://www.mof.gov.cn/jrttts/202302/t20230201_3864880.htm"
               },
               {
-                "entity": "中注协：中国注册会计师审计准则第1101号",
+                "entity": "1101号应用指南（2019年修订）",
                 "id": "link-5",
                 "relation": "related-evidence",
                 "url": "https://www.cicpa.org.cn/ztzl1/Professional_standards/Professional_guidelines/201904/W020210421541410318522.pdf"
@@ -25068,7 +25082,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "历史评分依据未能复算；本轮采用下述独立编辑估算方法。BLS 预计美国会计师和审计师总体就业继续增长，并认为例行任务自动化会提高效率；WEF 雇主预期和审计研究则提示部分岗位或人员结构会变化。凭证识别、匹配对账、异常筛查和文档初稿可由 AI 辅助，但会计政策判断、审计证据评价、职业怀疑及签字责任仍须由专业人员承担。任务能否稳定自动化取决于数据、系统、控制和组织采用方式，不能据此断言所有初级岗位最先被替代。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "尚无经核实的本职业定量AI影响估计，原67%已撤回。BLS在2025—2035预测中认为，例行任务自动化可能提高效率，并不预计降低该职业总体需求；这是预测，不保证任何个人岗位。两项美国审计研究采用不同年代、样本和AI人力代理指标，观察到不同层级的人员变化，不能换算为当前生成式AI的统一替代率。本页完整虚构报销题可用于文字和金额核对试验，但不产生会计政策、审计意见或真实业务授权。"
             ]
           },
           "id": "ai-impact-table-9",
@@ -25367,7 +25381,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业预计增长 {{fact:bls-us-accountants-employment-growth-2025-2035}}，年均约 {{fact:bls-us-accountants-openings-2025-2035}} 个职位空缺；例行任务会自动化，但总体需求预计不会因此下降。"
+              "BLS预计美国2025—2035年就业增长 {{fact:bls-us-accountants-employment-growth-2025-2035}}，年均约 {{fact:bls-us-accountants-openings-2025-2035}} 个空缺。BLS认为部分例行任务可能自动化，但不预计这会降低总体需求；这是预测，不测实际采用速度或个人失业。"
             ]
           },
           "fact_refs": [
@@ -25628,7 +25642,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS；ILO"
+              "BLS：美国职业展望"
             ]
           },
           "id": "ai-impact-table-56",
@@ -25654,7 +25668,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "PCAOB；中注协"
+              "PCAOB：技术辅助分析新闻说明"
             ]
           },
           "id": "ai-impact-table-58",
@@ -25709,7 +25723,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS；审计实证研究"
+              "BLS：美国职业展望"
             ]
           },
           "id": "ai-impact-table-62",
@@ -25735,7 +25749,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中注协；PCAOB"
+              "中注协：AI审计风险提示"
             ]
           },
           "id": "ai-impact-table-64",
@@ -25762,7 +25776,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "WEF；BLS；ILO"
+              "WEF：受访雇主就业预期"
             ]
           },
           "id": "ai-impact-table-66",
@@ -25773,7 +25787,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "重点不是记住某个工具品牌，而是理解数据来源、权限、提示与输出验证、异常调查、模型局限、工作记录和责任边界。会计人员还应加强 SQL、数据可视化和流程控制；审计人员应加强技术辅助分析、证据评价和职业怀疑。"
+              "编辑学习建议：重点不是记住某个工具品牌，而是理解数据来源、权限、提示与输出验证、异常调查、模型局限、工作记录和责任边界。会计人员还应加强 SQL、数据可视化和流程控制；审计人员应加强技术辅助分析、证据评价和职业怀疑。"
             ]
           },
           "id": "ai-impact-table-67",
@@ -25788,7 +25802,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中注协；PCAOB"
+              "中注协：AI审计风险提示"
             ]
           },
           "id": "ai-impact-table-68",
@@ -26371,13 +26385,13 @@
                 "url": "https://link.springer.com/article/10.1007/s11142-022-09697-x"
               },
               {
-                "entity": "BLS；ILO",
+                "entity": "BLS：美国职业展望",
                 "id": "link-13",
                 "relation": "related-evidence",
                 "url": "https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
               },
               {
-                "entity": "PCAOB；中注协",
+                "entity": "PCAOB：技术辅助分析新闻说明",
                 "id": "link-14",
                 "relation": "related-evidence",
                 "url": "https://pcaobus.org/news-events/news-releases/news-release-detail/pcaob-updates-its-standards-to-clarify-auditor-responsibilities-when-using-technology-assisted-analysis"
@@ -26389,25 +26403,25 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "BLS；审计实证研究",
+                "entity": "BLS：美国职业展望",
                 "id": "link-16",
                 "relation": "related-evidence",
                 "url": "https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
               },
               {
-                "entity": "中注协；PCAOB",
+                "entity": "中注协：AI审计风险提示",
                 "id": "link-17",
                 "relation": "related-evidence",
                 "url": "https://www.cicpa.org.cn/xxfb/news/202603/t20260305_65842.html"
               },
               {
-                "entity": "WEF；BLS；ILO",
+                "entity": "WEF：受访雇主就业预期",
                 "id": "link-18",
                 "relation": "related-evidence",
                 "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/in-full/2-jobs-outlook/"
               },
               {
-                "entity": "中注协；PCAOB",
+                "entity": "中注协：AI审计风险提示",
                 "id": "link-19",
                 "relation": "related-evidence",
                 "url": "https://www.cicpa.org.cn/xxfb/news/202603/t20260305_65842.html"
@@ -26986,7 +27000,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工资数据均为税前参考。官方年工资包含的项目、招聘指南的基本月薪和单个职位报价口径不同；月均等值不是到手工资，也不构成个人收入承诺。"
+              "工资按原表公布口径解释。官方年工资、招聘指南基本月薪与单个职位报价的包含项目不同；编辑月均值不是到手工资，也不是个人收入承诺。"
             ]
           },
           "id": "career-snapshot-primary-locale-42",
@@ -27008,7 +27022,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 年工资中位数为 {{fact:mohrss-cn-economic-financial-wage-median-2025}}／年；编辑换算的月均等值为 {{fact:editorial-cn-economic-financial-monthly-median-2025}}。这是包含奖金、津贴和加班工资的宽口径税前年工资，不是个人到手月薪。"
+              "2025年宽职业中类年工资中位数为 {{fact:mohrss-cn-economic-financial-wage-median-2025}}；编辑月均等值为 {{fact:editorial-cn-economic-financial-monthly-median-2025}}。原调查工资包括奖金、津贴和加班工资等项目，不等于个人到手月薪，也不是会计单职业中位数。"
             ]
           },
           "fact_refs": [
@@ -27167,7 +27181,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025 全国工资数据｜https://www.bls.gov/news.release/ocwage.t01.htm；O*NET 2025 工资分位与地区查询｜https://www.onetonline.org/link/localwages/13-2011.00?zip=75001；BLS 职业展望、行业工资与就业预测｜https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
+              "BLS 2025 全国工资数据｜https://www.bls.gov/news.release/ocwage.t01.htm；O*NET 2025 工资分位与地区查询｜https://www.onetonline.org/link/localwages/13-2011.00；BLS 职业展望、行业工资与就业预测｜https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
             ]
           },
           "id": "career-snapshot-secondary-locale-1",
@@ -27195,7 +27209,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "税前月均等值约 $4,668；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
+              "税前月均等值约 $4,668；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00"
             ]
           },
           "id": "career-snapshot-secondary-locale-3",
@@ -27223,7 +27237,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "税前月均等值约 $5,585；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
+              "税前月均等值约 $5,585；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00"
             ]
           },
           "id": "career-snapshot-secondary-locale-5",
@@ -27242,7 +27256,8 @@
           ],
           "id": "career-snapshot-secondary-locale-6",
           "source_refs": [
-            "source-6"
+            "source-6",
+            "source-7"
           ],
           "type": "prose"
         },
@@ -27251,7 +27266,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑换算：{{fact:bls-us-accountants-wage-median-2025}} ÷ 12，四舍五入约为 {{fact:editorial-us-accountants-monthly-median-2025}}；BLS OEWS 2025 年 5 月年薪中位数｜https://www.bls.gov/news.release/ocwage.t01.htm"
+              "编辑换算：{{fact:bls-us-accountants-wage-median-2025}} ÷ 12，四舍五入约为 {{fact:editorial-us-accountants-monthly-median-2025}}；O*NET所列BLS OEWS 2025年5月年薪中位数｜https://www.onetonline.org/link/localwages/13-2011.00"
             ]
           },
           "fact_refs": [
@@ -27260,7 +27275,8 @@
           ],
           "id": "career-snapshot-secondary-locale-7",
           "source_refs": [
-            "source-6"
+            "source-6",
+            "source-7"
           ],
           "type": "prose"
         },
@@ -27286,7 +27302,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "税前月均等值约 $9,151；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
+              "税前月均等值约 $9,151；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00"
             ]
           },
           "id": "career-snapshot-secondary-locale-9",
@@ -27314,7 +27330,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "税前月均等值约 $12,008；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
+              "税前月均等值约 $12,008；O*NET 2025 工资分位｜https://www.onetonline.org/link/localwages/13-2011.00"
             ]
           },
           "id": "career-snapshot-secondary-locale-11",
@@ -27427,7 +27443,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "按 BLS 2025 年 5 月全国工资数据，会计师和审计师年薪中位数为 {{fact:bls-us-accountants-wage-median-2025}}；编辑换算：{{fact:bls-us-accountants-wage-median-2025}} ÷ 12，四舍五入约为 {{fact:editorial-us-accountants-monthly-median-2025}}。10% 的从业者年薪不高于 {{fact:bls-us-accountants-wage-p10-2025}}，10% 的从业者年薪不低于 {{fact:bls-us-accountants-wage-p90-2025}}。这里的全国数据合并统计会计师与审计师，不是入门工资、到手月薪或某个城市的岗位报价。"
+              "按BLS 2025年5月全国OEWS工资数据，覆盖的受雇会计师和审计师年薪中位数为 {{fact:bls-us-accountants-wage-median-2025}}；编辑换算年值÷12、四舍五入约 {{fact:editorial-us-accountants-monthly-median-2025}}。该总体10%的受雇人员年薪不高于 {{fact:bls-us-accountants-wage-p10-2025}}，10%不低于 {{fact:bls-us-accountants-wage-p90-2025}}。不含自雇收入；不是新人起薪、到手月薪或某城市的岗位报价。"
             ]
           },
           "fact_refs": [
@@ -27439,7 +27455,8 @@
           "id": "career-snapshot-secondary-locale-19",
           "source_refs": [
             "source-6",
-            "source-7"
+            "source-7",
+            "review-oews-concepts"
           ],
           "type": "prose"
         },
@@ -27687,10 +27704,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不是。这是美国全部会计师和审计师的全国工资中位数，包含不同经验、地区和职责。10–25 分位同样来自全体从业者，不能直接当作起薪；应核对目标地区与职责相当的入门职位报价。"
+              "不是。这是OEWS覆盖的美国受雇会计师和审计师全国工资中位数，含不同经验、地区和职责，不含自雇收入。第10—25分位同样不是新人样本；入门报价须另核目标地区与相近职责。"
             ]
           },
           "id": "career-snapshot-secondary-locale-39",
+          "source_refs": [
+            "review-oews-concepts"
+          ],
           "type": "prose"
         },
         {
@@ -27864,10 +27884,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格把人格描述为五个连续维度，而不是把人分成固定类型。汇总 54 项元分析的研究显示，尽责性与整体绩效的平均关联最强（ρ≈0.19），但效应有限且随任务而变；对会计而言，它主要对应准确、留痕、复核、期限管理和持续执行。"
+              "大五用连续维度描述人格。54项元分析综合报告尽责性与总体表现的平均关联ρ≈0.19，效应有限且随表现类别而变。编辑建议可用它反思准确记录、计划、复核与期限管理等习惯；这不是会计专属预测、能力合格线或本站量表的效度证明。"
             ]
           },
           "id": "personality-fit-block-6",
+          "source_refs": [
+            "review-wiley-big5"
+          ],
           "type": "prose"
         },
         {
@@ -27921,7 +27944,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有科学依据支持某一种 MBTI 是会计或审计的“最佳类型”。MBTI 描述四组偏好，不测技能、职业伦理或工作绩效；其官方也明确反对用它招聘、筛选或分配岗位。它更适合帮助你比较自己偏好的信息处理、决策和协作方式。"
+              "Myers-Briggs官方职业页说明，偏好不决定能力、技能或胜任力，测评不是为招聘或岗位筛选设计的。本页不按某种MBTI类型设置会计或审计的录用、排除或岗位分配条件；可把偏好用于反思信息处理、决策和协作方式，再用课程与任务材料了解实际要求。"
             ]
           },
           "id": "personality-fit-block-11",
@@ -27967,7 +27990,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能凭 MBTI 接受或排除职业，也不能据此预测绩效；最终应看知识、技能、行为证据和真实工作样本。"
+              "本页不按MBTI类型作录用或职业排除决定；岗位能力要看相应知识、技能与实际任务证据。"
             ]
           },
           "id": "personality-fit-block-15",
@@ -28035,10 +28058,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "智力商数（IQ）是基于标准化心理测验得到的分数，不等于一个人的全部能力。BLS 与 O*NET 没有为会计或审计设置统一 IQ 门槛；职业真正要求的是理解规则、分析比较数字、发现异常并说明判断，部分量化岗位还会使用统计分析等进阶数学。"
+              "本页不使用IQ分数设置会计或审计入行门槛。先看具体任务中的规则理解、数字比较、异常识别与判断解释；BLS列数理分析要求，ACCA文章说明多数会计学习常用基础运算、百分比、比率、估算及表格公式，部分金融或量化方向另需进阶数学。"
             ]
           },
           "id": "personality-fit-block-21",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -28046,7 +28072,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "标准化心理测量；非职业门槛"
+              "数理与规则理解；按具体任务核查"
             ]
           },
           "id": "personality-fit-block-22",
@@ -28092,10 +28118,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "科学文献通常称“情绪智力”（emotional intelligence，EI），“情商”或 EQ 是通俗说法，并非全球统一的一种分数。能力模型关注识别、运用、理解和调节情绪信息；会计与审计没有统一 EI 门槛，但 BLS 明确把倾听、讨论事实和解释结论列为重要工作能力。"
+              "先把沟通要求落到可观察行为：倾听问题、讨论事实、解释结论，以及向同事或客户清楚追问资料。BLS明确列出这些沟通能力。本页不以一个EQ分数判定会计或审计资格，也不把一般沟通练习当成本站测评效度证明。"
             ]
           },
           "id": "personality-fit-block-26",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -28103,7 +28132,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力能力模型"
+              "倾听、提问与解释事实"
             ]
           },
           "id": "personality-fit-block-27",
@@ -28138,7 +28167,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "EI 的不同模型和量表不能混为一个固定 EQ 分数；它也不能替代会计知识、独立性、职业怀疑和伦理判断。"
+              "本页仅将测评用于反思；实际沟通、专业知识、独立性、职业怀疑与伦理责任须分别核对，不能由一次分数代替。"
             ]
           },
           "id": "personality-fit-block-30",
@@ -28149,7 +28178,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以上测评仅用于职业探索。RIASEC 描述兴趣，大五人格提供概率性特质信息，MBTI 与九型人格不能预测绩效，IQ 与情绪智力也没有会计职业统一门槛。请结合教育、知识技能、真实工作样本、从业者访谈和具体岗位要求判断。"
+              "以上测评仅用于本站职业探索。本页不依据MBTI或九型类型预测个人绩效、作录用或排除决定，也不设置IQ或EQ分数门槛；还需结合知识、训练、任务表现与具体岗位要求判断。"
             ]
           },
           "id": "personality-fit-block-31",
@@ -28340,7 +28369,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "模糊信息、利益相关者协商，以及用不完整数据给出建议的压力。"
+              "这里链接金融与投资分析师，仅用于比较相关分析任务，不等同企业管理会计或FP&A岗位；需另核具体职责、课程与招聘条件。"
             ]
           },
           "id": "personality-fit-block-48",
@@ -28474,7 +28503,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有经科学验证的“最佳 MBTI”。MBTI 描述信息处理、决策与协作偏好，不测量会计知识、职业伦理、准确率或岗位绩效；Myers-Briggs 官方也不支持用类型筛选、录用或排除候选人。与其按 ISTJ、INTJ 等标签排名，不如观察自己更偏好结构化流程还是开放分析、独立研究还是频繁协作，再分别体验总账、审计、税务或 FP&A 的真实任务。能力应通过课程、案例和工作样本验证。"
+              "MBTI职业页强调各类型都可以出现在各职业中，职业选择还需考虑兴趣、价值观和能力。偏好不是会计知识、职业伦理或准确率的测量，也不应用于招聘筛选。可比较结构化流程与开放分析、独立工作与频繁协作等偏好，再分别了解总账、审计、税务或FP&A任务；本页不发布最佳类型榜。"
             ]
           },
           "id": "personality-fit-block-60",
@@ -28496,10 +28525,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "尽责性与会计工作的关联最直接，因为准确、计划、复核、期限管理和持续执行都需要可靠的自我管理。汇总 54 项元分析的研究显示，尽责性与总体绩效的平均关联最强，但效应并不大且会随任务变化，这不是会计岗位专属结论或合格线。情绪稳定性有助于应对忙季和返工，开放性有助于学习新准则与系统，外向性在客户和领导岗位更有价值。人格只能提供概率线索，训练、经验、控制流程和团队环境同样重要。"
+              "Wiley摘要所载54项元分析综合发现，尽责性与总体表现的平均关联为ρ≈0.19，工作表现子类约0.20，且效应随表现类别而变。这不是会计职业或本站量表的专属效度。编辑建议是把准确记录、计划、复核和期限管理作为可观察的任务习惯，与训练、经验、流程和团队条件一起看，不把人格分数当合格线。"
             ]
           },
           "id": "personality-fit-block-62",
+          "source_refs": [
+            "review-wiley-big5"
+          ],
           "type": "prose"
         },
         {
@@ -28507,10 +28539,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "多数会计岗位不要求高等数学天赋，也没有统一 IQ 门槛。日常更常用的是基础数感、比例与表格工具，以及阅读规则、识别逻辑矛盾、对账和解释差异；估值、量化分析等方向才可能需要更深的统计或数学。IQ 是标准化心理测验得到的分数，不等于完整职业能力。比单次分数更有参考价值的是：你能否学会会计循环、独立完成一份对账或报表案例，并在复核后修正错误。"
+              "不要仅凭一次认知测评分数排除自己。本页建议观察是否能理解题目的规则、比较金额、解释400元差额并保留未知，再按已有参考修改。多数会计岗位的数学要求与具体方向有关；ACCA列基础运算与工具，估值或量化分析可能另需更深数学。纸面练习不验证完整职业能力，也不替代课程与监督下的真实训练。"
             ]
           },
           "id": "personality-fit-block-63",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -28518,10 +28553,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有统一“高情商”门槛，但沟通要求会随岗位上升。科学文献通常使用情绪智力（EI），指识别、理解和调节情绪信息的能力；EQ 是常见简称，并非全球统一分数。初级核算更依赖技术准确性，审计访谈、客户服务、跨部门追问和管理岗位则更需要倾听、读懂情境、坚定但不激化冲突地索取证据。具体倾听与沟通行为可通过练习和反馈改进，但不能替代专业能力、独立性、职业怀疑和伦理责任。"
+              "会计与审计沟通要求可包括倾听、解释数字、访谈、跨部门追问和提出清楚的证据需求。可用本页虚构材料练习写资料追问，再观察事实、语气与未决问题是否表达清楚；本页不设置EQ分数门槛，也不据此判断能否履行真实专业职责。"
             ]
           },
           "id": "personality-fit-block-64",
+          "source_refs": [
+            "source-8"
+          ],
           "type": "prose"
         },
         {
@@ -28529,7 +28567,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有证据证明某个九型人格号码更适合会计或审计。针对 104 个独立样本的系统综述发现，九型人格的信度和效度证据混合，对九个独立类型、侧翼和类型移动的支持有限。因此它更适合用来反思压力下的动机——例如你是否因标准、安全、成就或掌控而投入，以及是否容易陷入完美主义、回避或焦虑——不能用来预测职业能力、发布“最佳类型榜”或替代真实工作样本。"
+              "一项含104个独立样本的系统综述发现，九型人格信效度证据混合，对九个独立类型、侧翼和类型移动的支持有限。现有证据不足以支持用九型结果预测个人在会计或审计岗位的能力。本站只用于反思压力下的动机和行为，例如规则、安全或成就如何影响复核与沟通；结合真实任务证据继续探索。"
             ]
           },
           "id": "personality-fit-block-65",
@@ -28540,7 +28578,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "按你愿意长期重复的核心任务来选，而不是只看职位名称。企业会计偏流程、月结、对账和记录完整性；审计偏证据、职业怀疑、访谈与项目协作；税务偏法规解释、申报和硬期限；FP&A 偏预测、商业分析、表达与影响决策。先各做一个小样本——完成对账、核查审计证据、解释一条税务规则或做预算差异分析——再比较准确率、学习速度、沟通负担和精力消耗，通常比人格标签更能判断方向。"
+              "按愿意长期重复的任务来探索方向：企业会计偏流程、月结、对账和记录；审计偏证据、职业怀疑、访谈与项目协作；税务偏规则与申报期限；FP&A偏预测、分析与沟通。先完成本页给定报销题并按参考自核，再比较自己的兴趣与困难。后续若有合适课程或获准材料，可继续研究其他任务；单题不能比较所有方向的职业能力。"
             ]
           },
           "id": "personality-fit-block-66",
@@ -28701,7 +28739,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好、能力、招聘和绩效预测限制"
+              "偏好与能力的区分，以及不用于招聘或岗位筛选的官方使用范围。"
             ]
           },
           "id": "personality-fit-block-80",
@@ -28723,7 +28761,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "IQ 的心理测量定义与解释边界"
+              "BLS列举的分析、数理与规则理解等职业能力；不提供IQ合格线。"
             ]
           },
           "id": "personality-fit-block-82",
@@ -28745,7 +28783,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力定义、分支与测量边界"
+              "BLS列举的倾听、讨论事实和解释结论等沟通行为；不是EQ测量效度。"
             ]
           },
           "id": "personality-fit-block-84",
@@ -28841,10 +28879,10 @@
                 "url": "https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
               },
               {
-                "entity": "大五人格与绩效：54 项元分析综合",
+                "entity": "Wiley：大五与表现的54项元分析综合",
                 "id": "link-15",
                 "relation": "related-evidence",
-                "url": "https://pubmed.ncbi.nlm.nih.gov/34687041/"
+                "url": "https://doi.org/10.1111/jopy.12683"
               },
               {
                 "entity": "Myers-Briggs 官方：人格类型与职业使用边界",
@@ -28859,10 +28897,10 @@
                 "url": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
               },
               {
-                "entity": "APA 心理学词典：智力商数（IQ）",
+                "entity": "BLS：会计师和审计师的分析与数理要求",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://dictionary.apa.org/iq"
+                "url": "https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
               },
               {
                 "entity": "ACCA：会计与数学能力",
@@ -28871,10 +28909,10 @@
                 "url": "https://www.accaglobal.com/an/en/study-with-acca/blog/do-you-need-to-be-good-at-math-for-accounting.html"
               },
               {
-                "entity": "Mayer–Salovey–Caruso：情绪智力能力模型",
+                "entity": "BLS：会计师和审计师的沟通能力",
                 "id": "link-20",
                 "relation": "related-evidence",
-                "url": "https://sites.usnh.edu/jdmayer/wp-content/uploads/sites/261/2024/03/rp2016-mayer-caruso-salovey.pdf"
+                "url": "https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm"
               }
             ]
           },
@@ -28916,7 +28954,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "工作情境参考 O*NET 与 BLS；职业责任参考 IESBA 及中国注册会计师职业道德规范。以下内容用于职业探索，不替代当地执业、税务或法律意见。"
+              "工作情境参考O*NET与BLS；职业伦理参考IESBA概览及中国上市公司2025年年报审计通知等特定资料。风险卡的具体控制措施为编辑建议，实施须依当地规则、机构制度与授权；本页不把概览当作完整Code或全部技术控制要求。"
             ]
           },
           "id": "career-risk-cards-3",
@@ -29250,7 +29288,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "遵循最小权限、职责分离、访问复核和安全传输；不把敏感资料输入未获批准的工具。"
+              "编辑建议：按机构制度核最小权限、职责分离、访问复核和安全传输；不要把敏感资料输入未获批准的工具。具体控制职责与审批按适用制度核查。"
             ]
           },
           "id": "career-risk-cards-32",
@@ -29434,7 +29472,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国注册会计师年报审计的独立性与职业怀疑要求。"
+              "中国上市公司2025年年报审计中的独立性与职业怀疑要求，非所有会计岗位准入。"
             ]
           },
           "id": "career-risk-cards-48",
@@ -29696,7 +29734,7 @@
                 "id": "portfolio-review",
                 "values": [
                   "用复核结果评价作品",
-                  "检查准确性、证据可追溯性、假设记录、判断解释和第二次修改是否减少错误。课程结业证书不能代替这些工作证据。"
+                  "先按本页参考自核准确性、证据追溯、假设与表达，再比较修改是否减少错误。条件允许时另请反馈，不把获得外部复核当完成条件。课程结业证书不替代这些练习材料。"
                 ]
               }
             ]
@@ -29802,8 +29840,8 @@
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天｜接受复核",
-                  "请从业者、教师或有经验同学检查准确性、证据和表达；记录每条意见。"
+                  "第6天｜按参考自核",
+                  "逐项对照给定400元差额、已知事实和缺失材料的参考，自核准确性、证据与表达，保留修改。条件允许时请从业者或教师补充反馈；没有回复就标未取得，不伪造意见。"
                 ]
               },
               {
@@ -29936,7 +29974,7 @@
               "先分清岗位、考试、会员与执业：审计助理是岗位，不是执业身份；CPA 全科合格是考试结果，不等于已经入会或注册执业；非执业会员不等于执业注册会计师。",
               "企业招聘偏好与法律必须是两类证据。本页只有在雇主招聘资料中出现时才写“加分项”或“可能偏好”；只有财政部、中注协和现行法律支持时才使用“必须”“须”或“执业”。",
               "证书不能替代工作样本，也不保证录用、加薪或晋升。现在是否报考，应同时看目标岗位是否使用该知识、自己是否满足条件，以及考试投入是否会挤占更直接的实习和作品准备。",
-              "法律时效：2026年修正法已经公布，自2027年1月1日起施行；本轮不把该修正文本当作2026年10月已经生效的规则。当前会员申请条件依据中注协2026年说明，项目权限另按届时有效法规和事务所授权核对。"
+              "法律时效：2026年修改决定已公布，自2027年1月1日起施行。会员申请条件参考中注协2026年说明；具体注册与项目权限仍按办理和执业时有效规则、事务所授权及业务安排分别核对，不以未来生效文本替代当前要求。"
             ]
           },
           "id": "accountant-credential-boundary",
@@ -30076,7 +30114,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆职业语境"
+              "大陆岗位与资格为主要语境；美国州路径另列，不作互认"
             ]
           },
           "id": "career-path-block-12",
@@ -30087,10 +30125,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "企业会计、管理会计和内部审计的入行条件由岗位与单位决定；依法需要注册、执业或签字的工作须满足当地法规及行业规则。"
+              "企业会计、管理会计和内部审计的入行条件由岗位与单位决定；依法需要注册、执业或签字的工作须满足当地法规及行业规则。 美国路径另行核对：先选目标州，再分别查考试资格、课程、经验与认证/许可要求。Texas官方FAQ列2026年8月1日起的Pathway B：学士、120学时及两年合规经验，另有指定课程等条件；这是Texas例子，不是全美统一要求。"
             ]
           },
           "id": "career-path-block-13",
+          "source_refs": [
+            "source-8",
+            "source-20",
+            "review-nasba",
+            "review-texas"
+          ],
           "type": "prose"
         },
         {
@@ -30921,6 +30965,18 @@
                 "id": "link-4",
                 "relation": "related-evidence",
                 "url": "https://www.cicpa.org.cn/xxfb/tzgg/202512/t20251231_65777.html"
+              },
+              {
+                "entity": "NASBA：美国CPA州路径导航",
+                "id": "link-5",
+                "relation": "related-evidence",
+                "url": "https://nasba.org/pathways/"
+              },
+              {
+                "entity": "Texas Board：考试与认证路径FAQ",
+                "id": "link-6",
+                "relation": "related-evidence",
+                "url": "https://portal.tsbpa.texas.gov/pdffiles/exam/new_pathwayFAQ.pdf"
               }
             ]
           },
@@ -31913,7 +31969,7 @@
                 ]
               },
               {
-                "answer": "更可能发生的是任务重组和岗位分化，而不是整个职业同时消失。结构化、规则明确、可重复验证的录入、匹配和初筛会更快自动化；但政策选择、重大性判断、异常追问、相互矛盾证据的评价、独立性与伦理处理、责任签署和困难沟通仍需要专业人员。美国 BLS 目前预计 2025–2035 年该职业就业增长 {{fact:bls-us-accountants-employment-growth-2025-2035}}、年均约 {{fact:bls-us-accountants-openings-2025-2035}} 个职位空缺，但这是美国预测，不等于全球保证。个人应把能力从“手工处理”升级为“设计控制、复核系统输出并解释结论”。",
+                "answer": "录入、匹配与初筛等规则较明确的任务可优先评估工具辅助；能否采用、速度与误差取决于数据、系统、权限和复核条件。本页没有经核实的自动化速度或全职业替代率。会计政策、重大性、证据与责任签署仍由符合要求的专业人员按适用规则判断。BLS预计美国2025—2035年就业增长 {{fact:bls-us-accountants-employment-growth-2025-2035}}、年均约 {{fact:bls-us-accountants-openings-2025-2035}} 个空缺，这是美国总体预测，不代表个人或全球结果。",
                 "fact_refs": [
                   "bls-us-accountants-employment-growth-2025-2035",
                   "bls-us-accountants-openings-2025-2035"
@@ -31947,7 +32003,7 @@
                 ]
               },
               {
-                "answer": "没有一个数字能代表所有会计与审计岗位，工资应按国家、城市、岗位方向、经验、资质、行业和责任范围比较。美国 BLS 的 2025 年 5 月全国年薪中位数为 {{fact:bls-us-accountants-wage-median-2025}}，这表示一半从业者高于该值、一半低于该值，并不是入门工资或个人报价。中国大陆没有与这一美国合并职业分类完全对应的统一单职业官方中位数，因此本页把官方口径与招聘市场代理数据分开呈现。比较机会时，还应同时看加班季节、奖金、证书要求、晋升路径和生活成本。",
+                "answer": "美国2025年5月，OEWS覆盖的受雇会计师和审计师年薪中位数为 {{fact:bls-us-accountants-wage-median-2025}}，不是起薪或到手工资。本页尚未取得与美国13-2011合并口径可直接对应的中国单职业全国工资中位数。现列人社部经济和金融专业人员宽中类年工资，以及任仕达指定城市/岗位的基本月薪参考；两者均不等于全国会计师个人工资或新人起薪。",
                 "fact_refs": [
                   "bls-us-accountants-wage-median-2025"
                 ],
@@ -31955,8 +32011,9 @@
                 "question": "会计师和审计师工资一般多少？",
                 "question_key": "career.faq.accounting.salary",
                 "source_refs": [
-                  "source-6",
-                  "source-2",
+                  "source-7",
+                  "review-oews-concepts",
+                  "source-mohrss-national-2025-revision",
                   "source-5"
                 ]
               },
@@ -32031,7 +32088,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮将全国2025宽口径工资、招聘指南基本月薪、美国工资分位及就业预测分别核对。法律时效：2026年修正注册会计师法自2027年1月1日起施行；历史source-21的“现行法律”标注不作为本轮当前申请条件依据，路径以2026会员说明和届时有效规则核对。"
+              "工资分别采用人社部2025年经济和金融专业人员宽中类统计、任仕达2026指定岗位与城市基本月薪，以及美国OEWS工资和BLS就业预测，不能混作同一总体。法律时效：2026年修改注册会计师法的决定自2027年1月1日起施行；会员申请与具体业务权限须按实际申请和执业时有效规则分别核对。"
             ]
           },
           "id": "source-card-2",
@@ -32042,7 +32099,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-07"
+              "2026-11-09"
             ]
           },
           "id": "source-card-3",
@@ -32171,10 +32228,10 @@
                 "url": "https://www.randstad.cn/s3fs-media/cn/public/2026-01/full_report-cn-_2026_market_outlook_salary_guide._1.pdf?VersionId=U3OTHrqNC4P5y8OSSUqJNe03m5xla54s"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "May 2025 U.S. accountants and auditors median annual wage: $83,680",
-                  "This OEWS wage snapshot is kept separate from the 2025–2035 Employment Projections dataset"
+                  "OEWS表1列该职业就业、平均工资和中位时薪。",
+                  "年薪中位83,680美元直接列示见O*NET工资页及BLS职业手册；OEWS工资与就业预测人口分开解释。"
                 ],
                 "evidence_type": "官方工资统计",
                 "id": "source-6",
@@ -32183,23 +32240,23 @@
                 "name": "bls_oes_2025_accountants_wages",
                 "period": "2025 年 5 月",
                 "publisher": "BLS OEWS",
-                "scope": "Accountants and Auditors (SOC 13-2011) 全国年薪中位数",
+                "scope": "美国13-2011工资概览；年薪中位数同时绑定直接列示的source-7",
                 "url": "https://www.bls.gov/news.release/ocwage.t01.htm"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "2025 national wage percentiles for accountants and auditors: $56,020, $67,020, $83,680, $109,810, $144,090"
                 ],
-                "evidence_type": "官方职业工资分位投影",
+                "evidence_type": "官方工资分位统计（O*NET展示BLS OEWS）",
                 "id": "source-7",
                 "limitation": "全国工资分位不能替代具体州、城市、雇主或入门岗位报价。",
                 "market": "美国",
-                "name": "onet_2025_accountants_wages",
+                "name": "O*NET全国工资13-2011：BLS OEWS 2025分位",
                 "period": "2025 年 5 月",
                 "publisher": "O*NET / BLS OEWS",
                 "scope": "Accountants and Auditors (SOC 13-2011) 全国工资分位",
-                "url": "https://www.onetonline.org/link/localwages/13-2011.00?zip=75001"
+                "url": "https://www.onetonline.org/link/localwages/13-2011.00"
               },
               {
                 "accessed_at": "2026-08-29",
@@ -32425,30 +32482,26 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "会计｜账务处理、对账与期末结账｜记录和汇总交易，执行账户及系统对账、差异调节、调整分录和期末结账。 — 75/100; weight=1/3; responsibilities-block-1[1]",
-                  "共有｜财务分析、复核与管理沟通｜分析财务状况、经营成果、现金流和异常变动，解释驱动因素、风险及决策影响。 — 75/100; weight=1/3; responsibilities-block-1[3]",
-                  "审计｜审计证据评价、意见形成与沟通｜评价证据、错报和控制缺陷，形成审计意见，并与管理层和治理层沟通。 — 50/100; weight=1/3; responsibilities-block-1[5]"
+                  "原67%及75/75/50三项任务档位已撤回，缺少可核实的完整任务效果依据。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "limitation": "无替代定量分数；任务暴露、雇主预期和特定审计样本不等于全职业替代率或个人失业概率。",
                 "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "表1-1职业中类206经济和金融专业人员：年工资50%分位为8.01万元。",
                   "调查以全国为总体，按地区与行业分层PPS抽样；工资包括基本工资、奖金、津贴及加班工资等。"
                 ],
                 "evidence_type": "全国企业薪酬抽样调查",
                 "id": "source-mohrss-national-2025-revision",
-                "limitation": "宽口径职业中类，不是会计师和审计师单一职业、应届生或具体城市工资。直连抓取受限，本轮核对官方搜索索引返回的完整表头、该行与方法说明。",
+                "limitation": "经济和金融专业人员宽中类，不是会计单职业、应届生或具体城市工资。官方网页直连未取得正文，工资行、表头及方法来自该页官方搜索索引。",
                 "market": "中国大陆｜全国企业抽样调查",
                 "name": "人社部企业薪酬调查信息（2025年）",
                 "period": "工资观察期2025年；发布2026-07-08",
@@ -32457,34 +32510,169 @@
                 "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202607/t20260708_579822.html"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "要求独立、客观、公正、规范执业；识别管理利益冲突并保持职业怀疑。"
                 ],
                 "evidence_type": "行业执业通知",
                 "id": "source-cicpa-annual-audit-2025-revision",
-                "limitation": "适用于通知所述年报审计；不能当作企业会计所有岗位的法律条文或个人担责结论。",
+                "limitation": "特定上市公司年报审计与事务所责任，不是全体企业会计岗位要求。",
                 "market": "中国大陆｜会计师事务所年报审计",
-                "name": "中注协关于做好2025年年报审计工作的通知",
+                "name": "关于做好上市公司2025年年报审计工作的通知",
                 "period": "发布2025-12-31；2025年年报审计",
                 "publisher": "中国注册会计师协会",
                 "scope": "contextual",
                 "url": "https://www.cicpa.org.cn/xxfb/tzgg/202512/t20251231_65777.html"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "2026年6月26日通过修改决定，自2027年1月1日起施行。"
                 ],
                 "evidence_type": "主管部门法律时效解读",
                 "id": "source-cicpa-cpa-law-effective-2027-revision",
-                "limitation": "本记录仅支持公布与施行日期，不能作为2026年10月当前注册条件的完整法律文本；本轮未成功直连读取财政部2026修正全文。",
+                "limitation": "仅支持修改决定公布与施行日期，不代替相关时点完整法律、注册或项目授权要求；未据此说明财政部修正全文已完整读取。",
                 "market": "中国大陆",
                 "name": "2026年修正注册会计师法的施行日期说明",
                 "period": "解读发布2026-09-04；修正法自2027-01-01施行",
                 "publisher": "财政部条法司／中国注册会计师协会",
                 "scope": "contextual",
                 "url": "https://www.cicpa.org.cn/xxfb/news/202609/t20260904_66074.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "State-pathway navigation; final eligibility and authorization are determined by the relevant board."
+                ],
+                "evidence_type": "primary institutional or research source",
+                "id": "review-nasba",
+                "limitation": "State-pathway navigation; final eligibility and authorization are determined by the relevant board.",
+                "market": "US",
+                "name": "NASBA pathways",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "NASBA",
+                "scope": "contextual",
+                "url": "https://nasba.org/pathways/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Texas Pathway B effective 2026-08-01; examination and certification have different coursework requirements, plus qualifying supervised experience. Not nationwide."
+                ],
+                "evidence_type": "primary institutional or research source",
+                "id": "review-texas",
+                "limitation": "Texas Pathway B effective 2026-08-01; examination and certification have different coursework requirements, plus qualifying supervised experience. Not nationwide.",
+                "market": "US",
+                "name": "Texas new CPA pathway FAQ",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "Texas State Board of Public Accountancy",
+                "scope": "contextual",
+                "url": "https://portal.tsbpa.texas.gov/pdffiles/exam/new_pathwayFAQ.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Abstract read: general performance associations, not accounting-specific or FermatMind assessment validation."
+                ],
+                "evidence_type": "primary institutional or research source",
+                "id": "review-wiley-big5",
+                "limitation": "Abstract read: general performance associations, not accounting-specific or FermatMind assessment validation.",
+                "market": "GLOBAL",
+                "name": "Big Five traits and performance: synthesis of 54 meta-analyses",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "Journal of Personality / Wiley",
+                "scope": "contextual",
+                "url": "https://doi.org/10.1111/jopy.12683"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Covered wage and salary employees, straight-time gross pay; excludes self-employment income. Methodology, not an additional wage estimate."
+                ],
+                "evidence_type": "primary institutional or research source",
+                "id": "review-oews-concepts",
+                "limitation": "Covered wage and salary employees, straight-time gross pay; excludes self-employment income. Methodology, not an additional wage estimate.",
+                "market": "US",
+                "name": "OEWS concepts",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Selected application-guidance sections on opinion scope, evidence, judgment and non-absolute assurance; not the complete standard text or latest full standards inventory."
+                ],
+                "evidence_type": "primary institutional or research source",
+                "id": "review-1101-guidance",
+                "limitation": "Selected application-guidance sections on opinion scope, evidence, judgment and non-absolute assurance; not the complete standard text or latest full standards inventory.",
+                "market": "CN",
+                "name": "1101 application guidance, 2019 revision",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "CICPA",
+                "scope": "contextual",
+                "url": "https://www.cicpa.org.cn/ztzl1/Professional_standards/Professional_guidelines/201904/W020210421541410318522.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Overview of principles and the threats framework; not full Code text or local legal implementation."
+                ],
+                "evidence_type": "primary institutional or research source",
+                "id": "review-iesba",
+                "limitation": "Overview of principles and the threats framework; not full Code text or local legal implementation.",
+                "market": "GLOBAL",
+                "name": "IESBA Code overview",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "IESBA",
+                "scope": "contextual",
+                "url": "https://www.ethicsboard.org/iesba-code"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Four professional-skill competence areas, addressed to IFAC member organizations, effective 2026-07-01; not national licensing authority."
+                ],
+                "evidence_type": "primary institutional or research source",
+                "id": "review-ies3",
+                "limitation": "Four professional-skill competence areas, addressed to IFAC member organizations, effective 2026-07-01; not national licensing authority.",
+                "market": "GLOBAL",
+                "name": "IES 3 Professional Skills (2026)",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "IFAC",
+                "scope": "contextual",
+                "url": "https://education.ifac.org/part/ies-3"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Selected sections on continuing competence and CPD evidence; examples are not universal statutory hour requirements."
+                ],
+                "evidence_type": "primary institutional or research source",
+                "id": "review-ies7",
+                "limitation": "Selected sections on continuing competence and CPD evidence; examples are not universal statutory hour requirements.",
+                "market": "GLOBAL",
+                "name": "IES 7 Continuing Professional Development",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "IFAC",
+                "scope": "contextual",
+                "url": "https://education.ifac.org/part/ies-7"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2023 attachment: integrity/lawful conduct, standards/responsibility and continuing learning."
+                ],
+                "evidence_type": "official professional ethics notice attachment",
+                "id": "review-mof-ethics",
+                "limitation": "One-page ethics principles, not the Accounting Standards for Business Enterprises or a CPA licensing rule.",
+                "market": "CN",
+                "name": "会计人员职业道德规范",
+                "period": "2023-01-12; notice published 2023-02-01",
+                "publisher": "Ministry of Finance, China",
+                "scope": "contextual",
+                "url": "https://www.mof.gov.cn/jrttts/202302/P020230201636147943253.pdf"
               }
             ]
           },
@@ -33254,7 +33442,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "概念": "哪些会计与审计任务会真正自动化？"
+            "概念": "哪些例行任务可评估工具辅助？"
           },
           {
             "含义": {
@@ -33943,6 +34131,42 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-5",
+              "field": "url"
+            },
+            "id": "nasba",
+            "label": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-5",
+              "field": "entity"
+            },
+            "scope": "导航与州别条件；不授予许可"
+          },
+          {
+            "href": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-6",
+              "field": "url"
+            },
+            "id": "texas",
+            "label": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-6",
+              "field": "entity"
+            },
+            "scope": "仅Texas，考试条件与认证条件分开核，含课程及经验要求"
           }
         ],
         "tracks": [
@@ -35724,7 +35948,7 @@
           "field": "period"
         },
         "wage_column_labels": [
-          "统计位置（全体从业者）",
+          "工资分位（OEWS覆盖受雇人员）",
           "2025年税前年薪（美元）",
           "年值÷12（编辑换算）",
           "使用边界"
@@ -35733,7 +35957,7 @@
         "wage_tiers": [
           {
             "equivalent": "税前月均等值约 $4,668",
-            "interpretation": "全体从业者的第10分位，不是入门工资，也不能据此推定经验或职位等级。",
+            "interpretation": "OEWS覆盖的受雇人员的第10分位，不是入门工资，也不能据此推定经验或职位等级。",
             "label": "第10分位",
             "value": {
               "$fact": "bls-us-accountants-wage-p10-2025",
@@ -35742,7 +35966,7 @@
           },
           {
             "equivalent": "税前月均等值约 $6,973",
-            "interpretation": "全体从业者的第50分位，不是平均起薪或个人工资承诺。",
+            "interpretation": "OEWS覆盖的受雇人员的第50分位，不是平均起薪或个人工资承诺。",
             "label": "中位数（第50分位）",
             "value": {
               "$fact": "bls-us-accountants-wage-median-2025",
@@ -35751,7 +35975,7 @@
           },
           {
             "equivalent": "税前月均等值约 $12,008",
-            "interpretation": "全体从业者的第90分位，不能据此推定资历、管理职责或同地区个人报价。",
+            "interpretation": "OEWS覆盖的受雇人员的第90分位，不能据此推定资历、管理职责或同地区个人报价。",
             "label": "第90分位",
             "value": {
               "$fact": "bls-us-accountants-wage-p90-2025",
@@ -36357,7 +36581,7 @@
           },
           {
             "alternate_value": null,
-            "label": "《中华人民共和国职业分类大典（2022年版）》",
+            "label": "财政部2026会计资格年度通知",
             "secondary_value": null,
             "value": {
               "$item": "onet-structured-fields-block-4",
@@ -36368,7 +36592,7 @@
           },
           {
             "alternate_value": null,
-            "label": "《企业会计准则——基本准则》",
+            "label": "财政部《会计人员职业道德规范》",
             "secondary_value": null,
             "value": {
               "$item": "onet-structured-fields-block-5",
@@ -36379,7 +36603,7 @@
           },
           {
             "alternate_value": null,
-            "label": "《中国注册会计师审计准则第1101号》",
+            "label": "1101号应用指南（2019年修订）",
             "secondary_value": null,
             "value": {
               "$item": "onet-structured-fields-block-6",
@@ -37418,7 +37642,8 @@
         "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
         "period": "2025 年 5 月",
         "source_refs": [
-          "source-6"
+          "source-6",
+          "source-7"
         ]
       },
       {
@@ -37562,7 +37787,8 @@
         "occupation_scope": "Accountants and Auditors (SOC 13-2011)",
         "period": "2025 年 5 月",
         "source_refs": [
-          "source-6"
+          "source-6",
+          "source-7"
         ]
       },
       {
@@ -37614,13 +37840,13 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
+        "derivation": "撤回原67%编辑估算；75/75/50为三项完整核心任务设定的档位缺少可验证的效果依据，不生成替代分数。",
+        "display_value": "尚无经核实的定量影响估计",
         "fact_id": "fermatmind-accountants-task-exposure",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "任务级AI证据状态",
         "occupation_scope": "会计师和审计师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -37653,8 +37879,8 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-accountants-task-exposure",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI影响度"
     },
@@ -37690,7 +37916,7 @@
       },
       {
         "availability": "available",
-        "fact_ref": "mohrss-cn-economic-financial-wage-median-2024",
+        "fact_ref": "mohrss-cn-economic-financial-wage-median-2025",
         "key": "china_pay",
         "label": "中国经济和金融专业人员年工资中位数"
       }
@@ -37707,7 +37933,7 @@
       "text": "会计师和审计师"
     }
   },
-  "source_content_sha256": "e48c59f62c8375514368c0d0d1ea940a06cbb2f111948e75a26b7156aba755b2",
+  "source_content_sha256": "3ad12fc765c185eee7c572f8d38ce4d2e3bedf19e63a7c1b9f949c6764e25e30",
   "subject": {
     "canonical_slug": "accountants-and-auditors",
     "name": "会计师和审计师",
