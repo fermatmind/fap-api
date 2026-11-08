@@ -21,6 +21,8 @@ final class TraditionalContentPagePublication
 
     public const FIELDS = ['title', 'kicker', 'summary', 'seo_title', 'meta_description', 'seo_description', 'content_md', 'headings', 'faq_items'];
 
+    private const SLUGS = ['about', 'brand', 'charter', 'careers'];
+
     public function __construct(
         private readonly ContentPageTranslationAdapter $adapter,
         private readonly SiblingTranslationWorkflowService $workflow,
@@ -31,18 +33,21 @@ final class TraditionalContentPagePublication
         $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
         $proof = json_decode($review, true, 64, JSON_THROW_ON_ERROR);
         $rows = $package['candidates'] ?? [];
-        if (($package['schema'] ?? null) !== self::SCHEMA || count($rows) !== 1
+        if (($package['schema'] ?? null) !== self::SCHEMA || count($rows) < 1 || count($rows) > count(self::SLUGS)
             || ($proof['schema'] ?? null) !== self::SCHEMA.'.review'
             || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
-            || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== 1) {
+            || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
             throw new DomainException('traditional_page_package_invalid');
         }
+        $seen = [];
         foreach ($rows as $row) {
+            $slug = $row['identity']['slug'] ?? null;
             $keys = array_keys($row);
             sort($keys);
             if ($keys !== ['before', 'identity', 'kind', 'new_traditional_page', 'page_id', 'snapshot', 'source_snapshot', 'staging_before']
-                || $row['kind'] !== 'page' || $row['new_traditional_page'] !== true || $row['page_id'] !== 'TRADITIONAL-about'
-                || $row['identity'] !== ['org_id' => 0, 'slug' => 'about', 'locale' => 'zh-TW']
+                || ! in_array($slug, self::SLUGS, true) || isset($seen[$slug])
+                || $row['kind'] !== 'page' || $row['new_traditional_page'] !== true || $row['page_id'] !== 'TRADITIONAL-'.$slug
+                || $row['identity'] !== ['org_id' => 0, 'slug' => $slug, 'locale' => 'zh-TW']
                 || $row['before'] !== [] || $row['staging_before'] !== []
                 || array_diff(array_keys($row['source_snapshot']), self::FIELDS) !== []
                 || array_diff(self::FIELDS, array_keys($row['source_snapshot'])) !== []
@@ -52,6 +57,7 @@ final class TraditionalContentPagePublication
                 || $row['snapshot']['is_indexable'] !== false) {
                 throw new DomainException('traditional_page_identity_or_fields_invalid');
             }
+            $seen[$slug] = true;
             foreach (['source_snapshot', 'snapshot'] as $field) {
                 $copy = $row[$field];
                 foreach (array_diff(self::FIELDS, ['headings', 'faq_items']) as $text) {
@@ -134,7 +140,7 @@ final class TraditionalContentPagePublication
         if (count($revisions) !== 1 || $target->slug !== $source->slug || $target->locale !== 'zh-TW'
             || (int) $target->source_content_id !== (int) $source->id || $target->source_locale !== 'zh-CN'
             || $target->translation_group_id !== $source->translation_group_id
-            || $target->path !== '/zh-TW/about' || $target->canonical_path !== '/zh-TW/about'
+            || $target->path !== '/zh-TW/'.$source->slug || $target->canonical_path !== '/zh-TW/'.$source->slug
             || $revisions[0]['authority_source_package'] !== self::AUTHORITY
             || (int) $revisions[0]['org_id'] !== 0 || $revisions[0]['locale'] !== 'zh-TW'
             || (int) $revisions[0]['source_content_id'] !== (int) $source->id

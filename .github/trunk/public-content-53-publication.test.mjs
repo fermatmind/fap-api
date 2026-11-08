@@ -857,21 +857,27 @@ test('AI method hreflang acceptance requires its exact reciprocal pair and keeps
  }
 });
 
-test('Traditional CMS package selects a single native variant and verifies its complete noindex DOM',()=>{
+test('Traditional CMS package selects the four reviewed variants and verifies complete noindex DOM',()=>{
  const paths=['backend/content_assets/public_content_53/traditional-pages.json','backend/content_assets/public_content_53/traditional-pages-review.json'];
  assert.equal(selectPublicContentPackage(paths),'traditional-pages');
  assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/translation-batch.json']),/MULTIPLE_PACKAGES/);
  const binding=inspectPackage(root,'traditional-pages');
- assert.equal(binding.expected_row_count,1);
- const row=readCandidateRows(root,binding.package_sha256).candidates[0];
- assert.deepEqual(row.identity,{org_id:0,slug:'about',locale:'zh-TW'});
- assert.equal(pathFor(row),'/zh-TW/about');
- assert.equal(row.snapshot.is_indexable,false);
+ assert.equal(binding.expected_row_count,4);
+ const rows=readCandidateRows(root,binding.package_sha256).candidates;
+ assert.deepEqual(rows.map(row=>row.identity.slug),['about','brand','charter','careers']);
  const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
- const body=row.snapshot.content_md.split('\n').filter(Boolean).map(line=>line.startsWith('## ') ? `<h2>${escape(line.slice(3))}</h2>` : `<p>${escape(line)}</p>`).join('');
- const schema=[{'@type':'WebPage',url:'https://fermatmind.com/zh-TW/about',inLanguage:'zh-TW',name:row.snapshot.title,description:row.snapshot.summary},{'@type':'BreadcrumbList',itemListElement:[{item:'https://fermatmind.com/zh-TW/about'}]}].map(node=>`<script type="application/ld+json">${JSON.stringify(node)}</script>`).join('');
- const html=`<html lang="zh-TW"><head><meta charset="utf-8"><title>${escape(row.snapshot.seo_title)} | 費馬測試</title><meta name="description" content="${escape(row.snapshot.meta_description)}"><meta name="robots" content="noindex, follow"><link rel="canonical" href="https://fermatmind.com/zh-TW/about"></head><body>${schema}<main><h1>${escape(row.snapshot.title)}</h1>${body}<section>創始人與博士顧問團隊 劉福威 賈睿璇 李琛</section></main></body></html>`;
- for(const environment of ['staging','production']) assert.doesNotThrow(()=>assertDom(row,html,{missing:true},environment));
- for(const altered of [html.replace('lang="zh-TW"','lang="zh-CN"'),html.replace('noindex, follow','index, follow'),html.replace('劉福威',''),html.replace('/zh-TW/about','/zh/about'),html.replace(escape(row.snapshot.title),'Incomplete title')])
-  assert.throws(()=>assertDom(row,altered,{missing:true},'production'));
+ for(const row of rows) {
+  assert.equal(row.identity.locale,'zh-TW');
+  assert.equal(pathFor(row),`/zh-TW/${row.identity.slug}`);
+  assert.equal(row.snapshot.is_indexable,false);
+  const body=row.snapshot.content_md.split('\n').filter(Boolean).map(line=>`<p>${escape(line.replace(/^#{1,6}\s+/,'').replaceAll('*',''))}</p>`).join('');
+  const url='https://fermatmind.com'+pathFor(row);
+  const schema=[{'@type':'WebPage',url,inLanguage:'zh-TW',name:row.snapshot.title,description:row.snapshot.summary},{'@type':'BreadcrumbList',itemListElement:[{item:url}]}].map(node=>`<script type="application/ld+json">${JSON.stringify(node)}</script>`).join('');
+  const team=row.identity.slug==='about'?'<section>創始人與博士顧問團隊 劉福威 賈睿璇 李琛</section>':'';
+  const html=`<html lang="zh-TW"><head><meta charset="utf-8"><title>${escape(row.snapshot.seo_title)} | 費馬測試</title><meta name="description" content="${escape(row.snapshot.meta_description)}"><meta name="robots" content="noindex, follow"><link rel="canonical" href="${url}"></head><body>${schema}<main><h1>${escape(row.snapshot.title)}</h1>${body}${team}</main></body></html>`;
+  for(const environment of ['staging','production']) assert.doesNotThrow(()=>assertDom(row,html,{missing:true},environment));
+  for(const altered of [html.replace('lang="zh-TW"','lang="zh-CN"'),html.replace('noindex, follow','index, follow'),html.replace(`/zh-TW/${row.identity.slug}`,`/zh/${row.identity.slug}`),html.replace(escape(row.snapshot.title),'Incomplete title')])
+   assert.throws(()=>assertDom(row,altered,{missing:true},'production'));
+  if(team) assert.throws(()=>assertDom(row,html.replace('劉福威',''),{missing:true},'production'));
+ }
 });

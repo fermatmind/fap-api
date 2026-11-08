@@ -314,7 +314,7 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
     const breadcrumb=schemas.some(node=>node['@type'] === 'BreadcrumbList' && node.itemListElement?.at(-1)?.item === url);
     if (dom.language !== 'zh-TW' || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)]) || !robots.includes('noindex') || robots.includes('index')
       || dom.alternate_entries.some(entry=>entry.hreflang)
-      || !webPage || !breadcrumb || !['創始人與博士顧問團隊','劉福威','賈睿璇','李琛'].every(text=>body.includes(compact(text))))
+      || !webPage || !breadcrumb || (row.identity.slug === 'about' && !['創始人與博士顧問團隊','劉福威','賈睿璇','李琛'].every(text=>body.includes(compact(text)))))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_SEO_OR_TEAM_${row.page_id}`);
   }
   if (newArticle) {
@@ -412,7 +412,7 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
     const createdArticle = row.new_article === true && before?.missing === true;
     const createdTraditional = row.new_traditional_page === true && before?.missing === true;
-    if (row.new_traditional_page && (native.is_indexable !== false || native.path !== '/zh-TW/about'))
+    if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_QUALIFICATION_${row.page_id}`);
     if (row.new_article === true && (!['is_indexable','sitemap_eligible','llms_eligible'].every(key=>native[key] === true)
       || native.translation_group_id !== row.source_identity.translation_group_id || !Number.isInteger(native.published_revision_id))) throw new Error(`PUBLIC_CONTENT_53_NEW_ARTICLE_QUALIFICATION_${row.page_id}`);
