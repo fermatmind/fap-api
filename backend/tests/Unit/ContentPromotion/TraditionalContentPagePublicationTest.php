@@ -66,6 +66,51 @@ final class TraditionalContentPagePublicationTest extends TestCase
         return $about;
     }
 
+    public function test_unchanged_published_package_retains_caches_and_does_not_call_revalidation(): void
+    {
+        $this->source();
+        $context = $this->context();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $context->packageSha256)['candidates'];
+        $native = app(TraditionalContentPagePublication::class);
+        DB::transaction(function () use ($native, $rows, $context): void {
+            foreach ($rows as $row) {
+                $native->publish($row, $native->read($row, true), $context);
+            }
+        });
+        $before = ContentPage::query()->withoutGlobalScopes()->orderBy('id')->get()->map->getRawOriginal()->all();
+        $revisions = CmsTranslationRevision::query()->withoutGlobalScopes()->orderBy('id')->get()->map->getRawOriginal()->all();
+        $key = 'content_page:v1:0:about:zh-TW';
+        app(PublicContent53State::class)->projection($rows[0]);
+        $cached = Cache::get($key);
+        $this->assertIsArray($cached);
+        config(['ops.content_release_observability.hmac_revalidation_url' => 'https://frontend.invalid/api/content-release/revalidate',
+            'ops.content_release_observability.hmac_revalidation_secret' => 'test-only-secret']);
+        Http::preventStrayRequests();
+        $directory = sys_get_temp_dir().'/traditional-unchanged-'.bin2hex(random_bytes(8));
+        mkdir($directory, 0700);
+        $previous = '';
+        try {
+            foreach (['preflight', 'draft-import', 'publish', 'live-qa'] as $phase) {
+                config(['content_promotion.execution.previous_receipt' => $previous]);
+                $path = $directory.'/'.$phase.'.json';
+                $result = app(\App\Services\ContentPromotion\ExactPackagePromotionService::class)->execute($context, $phase, $path);
+                $this->assertSame('SUCCEEDED', $result['receipt']['result']);
+                $this->assertSame(8, $result['receipt']['readback_count']);
+                $this->assertSame(0, $result['receipt']['written_count']);
+                $previous = $path;
+            }
+            $this->assertSame($cached, Cache::get($key));
+            Http::assertNothingSent();
+            $this->assertSame($before, ContentPage::query()->withoutGlobalScopes()->orderBy('id')->get()->map->getRawOriginal()->all());
+            $this->assertSame($revisions, CmsTranslationRevision::query()->withoutGlobalScopes()->orderBy('id')->get()->map->getRawOriginal()->all());
+        } finally {
+            foreach (glob($directory.'/*') ?: [] as $file) {
+                unlink($file);
+            }
+            rmdir($directory);
+        }
+    }
+
     public function test_publication_failure_codes_are_fixed_and_never_disclose_raw_errors(): void
     {
         $this->assertSame('public_content_53_traditional_page_source_drift_or_hold',
@@ -165,6 +210,7 @@ final class TraditionalContentPagePublicationTest extends TestCase
                 }
                 $previous = $path;
             }
+            Http::assertSentCount(3); // Real writes still complete the existing signed cache closeout.
             $this->assertSame($preserved, ContentPage::query()->where('locale', 'zh-TW')->orderBy('id')->limit(4)->get()->map->getRawOriginal()->all());
             $this->assertSame($sourcesBefore, ContentPage::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->orderBy('id')->get()->map->getRawOriginal()->all());
         } finally {

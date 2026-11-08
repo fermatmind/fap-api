@@ -113,7 +113,11 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
             return ['reference' => $reference, ...$result];
         }, 3);
         try {
-            $this->invalidate();
+            // An unchanged immutable package retains its valid derived caches.
+            // Real writes still require the complete existing cache closeout.
+            if ($published['written_count'] > 0) {
+                $this->invalidate();
+            }
             $this->states->assertPublished($rows, $published['state']);
         } catch (Throwable $error) {
             if ($published['written_count'] > 0) {
