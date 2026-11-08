@@ -23,6 +23,52 @@ final class TraditionalContentPagePublication
 
     private const SLUGS = ['about', 'brand', 'charter', 'careers', 'privacy', 'terms', 'method-boundaries', 'science'];
 
+    /** Fixed classifications only: never return SQL, payloads or exception text. */
+    public static function failureCode(\Throwable $error): string
+    {
+        $nativeCodes = [
+            'traditional_page_package_invalid', 'traditional_page_identity_or_fields_invalid',
+            'traditional_page_text_invalid', 'traditional_page_format_invalid', 'traditional_page_link_targets_changed',
+            'traditional_page_protected_tokens_changed', 'traditional_page_structure_changed', 'traditional_page_review_binding_invalid',
+            'traditional_page_lock_requires_transaction', 'traditional_page_identity_collision', 'traditional_page_source_drift_or_hold',
+            'traditional_page_target_not_owned', 'traditional_page_retained_draft_changed', 'traditional_page_published_target_changed',
+            'traditional_page_transaction_required', 'traditional_page_restore_transaction_required',
+        ];
+        if ($error instanceof DomainException && in_array($error->getMessage(), $nativeCodes, true)) {
+            return 'public_content_53_'.$error->getMessage();
+        }
+        if ($error instanceof \App\Services\Cms\CmsTranslationWorkflowException) {
+            $blockers = [
+                'source identity invalid' => 'source_identity_invalid', 'source version mismatch' => 'source_version_mismatch',
+                'target identity collision' => 'target_identity_collision', 'source path invalid' => 'source_path_invalid',
+                'prepared payload incomplete' => 'payload_incomplete', 'prepared payload invalid' => 'payload_invalid',
+                'prepared text invalid' => 'text_invalid', 'prepared structure invalid' => 'structure_invalid',
+                'prepared FAQ invalid' => 'faq_invalid', 'source row org mismatch' => 'source_org_mismatch',
+                'source row not published' => 'source_not_published', 'source row not approved' => 'source_not_approved',
+                'source row not public' => 'source_not_public', 'source row adapter publication check failed' => 'source_not_publishable',
+            ];
+            foreach ($blockers as $blocker => $code) {
+                if (in_array($blocker, $error->blockers(), true)) {
+                    return 'public_content_53_prepared_'.$code;
+                }
+            }
+        }
+        if ($error instanceof \PDOException) {
+            $code = match ((int) ($error->errorInfo[1] ?? 0)) {
+                1048, 1364 => 'required_value_missing',
+                1062 => 'duplicate_identity',
+                1265, 1366 => 'value_invalid',
+                1406 => 'value_too_long',
+                default => null,
+            };
+            if ($code !== null) {
+                return 'public_content_53_storage_'.$code;
+            }
+        }
+
+        return 'public_content_53_publication_failed';
+    }
+
     public function __construct(
         private readonly ContentPageTranslationAdapter $adapter,
         private readonly SiblingTranslationWorkflowService $workflow,

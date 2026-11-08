@@ -66,6 +66,64 @@ final class TraditionalContentPagePublicationTest extends TestCase
         return $about;
     }
 
+    public function test_publication_failure_codes_are_fixed_and_never_disclose_raw_errors(): void
+    {
+        $this->assertSame('public_content_53_traditional_page_source_drift_or_hold',
+            TraditionalContentPagePublication::failureCode(new DomainException('traditional_page_source_drift_or_hold')));
+        $this->assertSame('public_content_53_prepared_payload_incomplete',
+            TraditionalContentPagePublication::failureCode(new \App\Services\Cms\CmsTranslationWorkflowException('private message', ['prepared payload incomplete'])));
+        $storage = new \PDOException('private SQL and content');
+        $storage->errorInfo = ['23000', 1062, 'private SQL and content'];
+        $this->assertSame('public_content_53_storage_duplicate_identity', TraditionalContentPagePublication::failureCode($storage));
+        foreach ([new DomainException('traditional_page_private_payload'), new \RuntimeException('private URL and secret'),
+            new \App\Services\Cms\CmsTranslationWorkflowException('private message', ['private blocker'])] as $unknown) {
+            $this->assertSame('public_content_53_publication_failed', TraditionalContentPagePublication::failureCode($unknown));
+        }
+        $this->assertStringContainsString('TraditionalContentPagePublication::failureCode($error)', file_get_contents(base_path('scripts/deploy/run_public_content_53_publish.php')));
+    }
+
+    public function test_four_phase_service_preserves_four_published_pages_while_creating_four_policies(): void
+    {
+        $this->source();
+        $context = $this->context();
+        $rows = app(PublicContent53Package::class)->read(base_path(), $context->packageSha256)['candidates'];
+        $native = app(TraditionalContentPagePublication::class);
+        DB::transaction(function () use ($rows, $native, $context): void {
+            foreach (array_slice($rows, 0, 4) as $row) {
+                $native->publish($row, $native->read($row, true), $context);
+            }
+        });
+        $preserved = ContentPage::query()->where('locale', 'zh-TW')->orderBy('id')->get()->map->getRawOriginal()->all();
+        config(['ops.content_release_observability.hmac_revalidation_url' => 'https://staging.fermatmind.com/api/content-release/revalidate',
+            'ops.content_release_observability.hmac_revalidation_secret' => 'test-only-secret']);
+        Http::preventStrayRequests();
+        Http::fake(fn ($request) => Http::response(['ok' => true,
+            'revalidated_paths' => $request->data()['cache_signal']['paths'], 'rejected_paths' => [], 'invalidated_tags' => []]));
+        $directory = sys_get_temp_dir().'/traditional-eight-service-'.bin2hex(random_bytes(8));
+        mkdir($directory, 0700);
+        $previous = '';
+        try {
+            foreach (['preflight', 'draft-import', 'publish', 'live-qa'] as $phase) {
+                config(['content_promotion.execution.previous_receipt' => $previous]);
+                $path = $directory.'/'.$phase.'.json';
+                $result = app(\App\Services\ContentPromotion\ExactPackagePromotionService::class)->execute($context, $phase, $path);
+                $this->assertSame('SUCCEEDED', $result['receipt']['result']);
+                $this->assertSame(8, $result['receipt']['readback_count']);
+                if ($phase === 'publish') {
+                    $this->assertSame(4, $result['receipt']['created_count']);
+                    $this->assertSame(4, $result['receipt']['unchanged_count']);
+                }
+                $previous = $path;
+            }
+            $this->assertSame($preserved, ContentPage::query()->where('locale', 'zh-TW')->orderBy('id')->limit(4)->get()->map->getRawOriginal()->all());
+        } finally {
+            foreach (glob($directory.'/*') as $file) {
+                unlink($file);
+            }
+            rmdir($directory);
+        }
+    }
+
     public function test_native_transaction_publishes_full_copy_and_preserves_originals_and_history(): void
     {
         Http::preventStrayRequests();

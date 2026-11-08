@@ -6,6 +6,7 @@ use App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter;
 use App\Services\ContentPromotion\ExactPackagePromotionService;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use App\Services\ContentPromotion\PublicContent53Package;
+use App\Services\ContentPromotion\TraditionalContentPagePublication;
 use Illuminate\Contracts\Console\Kernel;
 
 // This exact-package driver runs only from the existing deployment workflow.
@@ -199,6 +200,6 @@ try {
             $restored = false;
         }
     }
-    echo json_encode(['ok' => false, 'error_code' => ($error instanceof DomainException && preg_match('/\Apublic_content_53_[a-z0-9_]+\z/', $error->getMessage()) ? $error->getMessage() : 'public_content_53_publication_failed'), 'recovery_completed' => $restored, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
+    echo json_encode(['ok' => false, 'error_code' => ($error instanceof DomainException && preg_match('/\Apublic_content_53_[a-z0-9_]+\z/', $error->getMessage()) ? $error->getMessage() : (class_exists(TraditionalContentPagePublication::class, false) ? TraditionalContentPagePublication::failureCode($error) : 'public_content_53_publication_failed')), 'recovery_completed' => $restored, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
     exit(1);
 }
