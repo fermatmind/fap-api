@@ -22608,12 +22608,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本页不构成执照、作业许可或录用结论；带电作业、登高与送电只能由持证或获授权的人员按适用规程执行。"
+              "本页不构成作业指导或资格认定。实际作业须分别满足适用的法定资格、培训和单位授权要求；单位授权不能替代依法要求的持证条件，持证也不等于具备全部现场作业权限。"
             ]
           },
           "id": "actors.display.fermat_decision_card.caveat",
           "source_refs": [
-            "onet"
+            "cn-rule",
+            "cn-catalogue-2026",
+            "osha-333"
           ],
           "type": "prose"
         },
@@ -23568,12 +23570,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "持证、培训与授权按实际法域和目录作业分别核；不能因受监督或已有一张证就自动满足全部电气、高处与受限空间要求。"
+              "按实际作业和法域核对资格、培训与单位授权。中国2026目录规定，有效高压电工作业证可覆盖低压作业；持有效电工作业证从事本职工作时，可不再考高处作业证。上述规定不免除适用的现场防护、培训和授权要求，也不能据此覆盖全部有限空间或其他作业。"
             ]
           },
           "id": "actors.display.work_context_block.quality",
           "source_refs": [
-            "onet"
+            "cn-rule",
+            "cn-catalogue-2026"
           ],
           "type": "prose"
         },
@@ -24399,8 +24402,7 @@
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24444,8 +24446,7 @@
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -24459,8 +24460,7 @@
           },
           "id": "actors.display.ai_impact_table.evidence.4.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -24789,8 +24789,7 @@
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26643,7 +26642,8 @@
           },
           "id": "actors.fit.personality-fit-block.4",
           "source_refs": [
-            "onet"
+            "bls",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28125,13 +28125,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页不替代适用电气规范、执照规定与单位安全制度；带电作业、登高与送电只能由持证或获授权的人员按适用规程执行。"
+              "本页不构成作业指导或资格认定。实际作业须分别满足适用的法定资格、培训和单位授权要求；单位授权不能替代依法要求的持证条件，持证也不等于具备全部现场作业权限。"
             ]
           },
           "id": "actors.display.career_risk_cards.boundary",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule",
+            "cn-catalogue-2026",
+            "osha-333"
           ],
           "type": "prose"
         },
@@ -28795,7 +28796,7 @@
                 "试用与带教期",
                 "在监督下完成常规作业并留痕。",
                 "核对工序遵守、记录完整与安全步骤。",
-                "越权或违规立即停止并复训。"
+                "按单位程序停止相关作业、报告，由有权人员确定后续处理。"
               ],
               [
                 "独立承担期",
@@ -28866,21 +28867,21 @@
               ],
               [
                 "电工执照",
-                "多数地区要求的从业条件",
+                "美国多数州的职业执照要求",
                 "视法域：按工作地规定核验",
-                "是：多数地区要求",
+                "美国多数州要求；核具体州和地方规则",
                 "需通过考试并满足学徒或经验年限要求",
                 "考试、经验年限与维持费用",
                 "仅在其适用法域与业务范围内有效"
               ],
               [
                 "特种作业操作证",
-                "中国大陆常见上岗要求",
+                "从事适用目录操作项目的人员",
                 "视岗位：按当地规定核验",
                 "实际目录内作业须持证，非仅雇主自行核定。",
-                "现行MEM19号培训考试持证；9条条件免培训不免考免证。",
+                "按现行第19号令核培训、考试与持证；第9条条件免培训。证书互通可依现行条件免培训，仍须相应考核或考试。",
                 "培训、考试与现行换证投入。",
-                "证书不等于本单位作业许可"
+                "按有效证书操作项目及现行互通规则核范围；不替代单位作业授权。"
               ],
               [
                 "雇主作业与送电授权",
@@ -28895,9 +28896,10 @@
           },
           "id": "actors.path.credential-decision.1",
           "source_refs": [
-            "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-catalogue-2026",
+            "cn-recognition-2026"
           ],
           "title": "训练、资格与材料怎么选择",
           "type": "table"
@@ -28908,16 +28910,17 @@
           "data": {
             "paragraphs": [
               "招聘公告中的学历、培训、证书与作业范围要求必须逐条读取；一项可放宽不代表其他条件可替代。",
-              "本页建议的作品与七天体验只用于职业探索，不构成作业指导、执照或作业许可。",
-              "带电作业、登高与受限空间作业以及送电与验收，只能由持证、受训且获授权的人员按适用规程与单位制度执行。",
+              "本页作品与七天体验只用于纸面职业探索：仅用虚构或公开教学材料，不接触真实设备，不自行接线、测量或送电。",
+              "本页不构成作业指导或资格认定。实际作业须分别满足适用的法定资格、培训和单位授权要求；单位授权不能替代依法要求的持证条件，持证也不等于具备全部现场作业权限。",
               "本页练习使用虚构材料，不代表任何真实项目、设备与作业结论。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
-            "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-catalogue-2026",
+            "osha-333"
           ],
           "title": "训练、资格与合同边界",
           "type": "notice"
@@ -29040,14 +29043,14 @@
                 "id": "day-3",
                 "values": [
                   "第 3 天：写一份测量判据",
-                  "写出通过准则、测量条件与仪表要求。"
+                  "从所给教学材料摘录测量条件、仪表要求与判据，标注来源和缺项。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
                   "第 4 天：做一次纸面排故",
-                  "按现象与假设列出验证步骤与可能结论。"
+                  "仅在纸面按虚构现象与假设列出需核对的问题及可能结论，不实施现场验证。"
                 ]
               },
               {
@@ -29090,7 +29093,7 @@
               "第 1 天：能否准确找出条款的适用范围与例外，而不是只抄关键词。",
               "第 2 天：能否把作业拆成可核对的有序工序并列出检查点。",
               "第 3 天：能否说清测量条件、仪表要求与判据来源。",
-              "第 4 天：能否把排查写成可执行的验证步骤而非笼统猜测。",
+              "第4天：能否在纸面识别区分虚构假设所需的证据，而不把练习当作现场测试许可。",
               "第 5 天：能否在不删数据的前提下写明停电验电与异常项。",
               "第 6 天：能否判断变更影响范围并列出必须复测的项目。",
               "第 7 天：能否写出明确的停止与升级条件，并说明由谁确认。"
@@ -31014,12 +31017,12 @@
                 ]
               },
               {
-                "answer": "O*NET/BLS 显示 2024 年就业约 818,700 人，2024—2034 年预计增长远快于平均（7% 或更高），预计空缺约 81,000 个；空缺含增长与替补。",
+                "answer": "BLS职业展望手册列出：美国电工2025年就业约821,000人，2025—2035年预计增长9%，平均每年约72,700个岗位空缺，包含增长与人员替代需求。年均空缺不是十年净新增，也不等于个人录用概率。",
                 "id": "actors.faq.5",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.electricians.5",
                 "source_refs": [
-                  "onet"
+                  "bls"
                 ]
               },
               {
@@ -31033,13 +31036,15 @@
                 ]
               },
               {
-                "answer": "美国 O*NET 调查中约 62% 回答需要中学后证书、31% 需要高中文凭；多数地区要求通过执照考试，具体按工作地核验。中国大陆：若作业落入《特种作业目录》（如低压电工作业、高压电工作业等），依应急管理部令第 19 号第四条须经专门安全技术培训并考核合格、取得《特种作业操作证》后方可上岗；建筑电工等其他专门岗位另按住房城乡建设等主管部门与用人单位要求核验。",
+                "answer": "BLS列出的美国典型入门学历为高中或同等学历。美国多数州要求电工取得执照；BLS所述常见路径包括4—5年学徒训练，具体执照条件按州及地方规则核验。中国大陆应按实际作业核对2026《特种作业目录》，区分高压、低压等电工作业与建筑电工。适用应急管理部第19号令的人员须按规定考核合格、取得相应操作证后上岗；符合第9条条件者可免培训。有效低压或高压证持有人申请建筑电工证、有效建筑电工证持有人申请低压证，现有互通政策允许免培训，但仍须参加相应考核或考试，并非自动取得另一证书。有效高压证可覆盖低压作业；持有效电工作业证从事本职工作，可不再考高处作业证。证书范围与单位作业授权仍需分别满足。",
                 "id": "actors.faq.7",
                 "question": "需要什么学历和执照？",
                 "question_key": "career.faq.electricians.7",
                 "source_refs": [
-                  "onet",
-                  "cn-rule"
+                  "bls",
+                  "cn-rule",
+                  "cn-catalogue-2026",
+                  "cn-recognition-2026"
                 ]
               },
               {
@@ -31073,7 +31078,11 @@
           },
           "id": "actors.sources.faq.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "cn-rule",
+            "cn-catalogue-2026",
+            "cn-recognition-2026"
           ],
           "type": "faq"
         },
@@ -31298,7 +31307,7 @@
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-08",
                 "details": [
                   "核对本职业的中位工资、就业规模、增长与空缺。",
                   "只适用于该美国单职业口径。"
@@ -31308,23 +31317,23 @@
                 "limitation": "只适用于美国单职业口径；中位数不是起薪，空缺不等于净新增。",
                 "market": "美国",
                 "name": "BLS OOH — 电工（Electricians）",
-                "period": "2025 年 5 月工资数据；2024—2034 年预测",
+                "period": "2025年5月工资、2025年就业；2025—2035年预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/construction-and-extraction/electricians.htm"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-08",
                 "details": [
                   "第三条规定特种作业的范围由《特种作业目录》确定；第四条规定特种作业人员必须经专门的安全技术培训并考核合格、取得《特种作业操作证》后方可上岗作业。",
-                  "未列入《特种作业目录》的岗位不适用该证书要求；建筑电工等专门岗位另按住房城乡建设等主管部门要求核验，其资质与设备放行仍按雇主规定。"
+                  "依据实际作业的目录、主管部门规定及现行证书衔接政策分别核验；单位授权不能替代法定持证，持证不等于所有现场作业权限。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "cn-rule",
                 "limitation": "仅适用于《特种作业目录》所列作业，不构成对全部电工岗位的统一资格要求，也不替代雇主授权与行业专门要求。",
                 "market": "中国",
                 "name": "应急管理部：《特种作业人员安全技术培训考核管理规定》（2025 年第 19 号令）",
-                "period": "2025-12-17 公布，自 2026-06-01 施行；accessed 2026-09-30",
+                "period": "2025-12-17公布，2026-06-01施行；2026-11-08核查",
                 "publisher": "中华人民共和国应急管理部",
                 "scope": "contextual",
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
@@ -31679,6 +31688,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "第1—2页电工作业、第17页建筑电工、第24—25页证书范围与衔接。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "cn-catalogue-2026",
+                "limitation": "适用具体操作项目与政策条件，不能从职位名称或单位授权推定资格。",
+                "market": "中国大陆",
+                "name": "2026《特种作业目录》",
+                "period": "2026",
+                "publisher": "应急管理部等主管部门",
+                "scope": "contextual",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/W020260526532904903760.pdf"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "第一部分第（一）项：有关电工证书申请可免培训，仍须相应考核或考试。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "cn-recognition-2026",
+                "limitation": "适用具体操作项目与政策条件，不能从职位名称或单位授权推定资格。",
+                "market": "中国大陆",
+                "name": "关于推进职业技能证书互通互认的通知（人社厅发〔2026〕1号）",
+                "period": "2026",
+                "publisher": "应急管理部等主管部门",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2026/art_cb81fc42de3740ebafdcaad75af4b31f.html"
               }
             ]
           },
@@ -34812,7 +34851,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "low",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$fact": "low",
@@ -34840,7 +34879,7 @@
             "说明": "全国第 75 百分位，来自同一工资统计口径。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "high",
             "指标": "薪资 · 90 分位",
             "数值": {
               "$fact": "high",
@@ -34849,19 +34888,19 @@
             "说明": "全国第 90 百分位，不代表连续有薪时数或总收入。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "employment",
             "指标": "2025就业·职业人数",
             "数值": "821,000人",
             "说明": "总体预测非AI归因，存量和年均空缺不等于净增或当前招聘。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "growth",
             "指标": "2025—2035总体增长",
             "数值": "9%",
             "说明": "总体预测非AI归因，存量和年均空缺不等于净增或当前招聘。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "openings",
             "指标": "2025—2035年均空缺",
             "数值": "72,700个/年（含更替）",
             "说明": "总体预测非AI归因，存量和年均空缺不等于净增或当前招聘。"
@@ -35275,12 +35314,12 @@
             },
             "metric": "就业规模",
             "occupation_scope": "O*NET-SOC 47-2111.00（电工）",
-            "source_id": "ratify",
+            "source_id": "bls",
             "value": "821,000人"
           },
           {
             "geography": "美国",
-            "horizon": "2024—2034",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35293,10 +35332,10 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "预计空缺",
+            "metric": "平均每年岗位空缺",
             "occupation_scope": "O*NET-SOC 47-2111.00（电工）",
-            "source_id": "employer",
-            "value": "约 81,000 个"
+            "source_id": "bls",
+            "value": "约72,700个/年"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -37032,38 +37071,38 @@
       },
       {
         "derivation": null,
-        "display_value": "约 818,700 人（2024 年）",
+        "display_value": "约821,000人（2025年）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "美国就业规模",
+        "measure": "就业规模",
         "occupation_scope": "电工（O*NET-SOC 47-2111.00）",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "远快于平均（7% 或更高，2024—2034）",
+        "display_value": "9%（2025—2035年预计增长）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "美国就业增长",
+        "measure": "预计就业增长",
         "occupation_scope": "电工（O*NET-SOC 47-2111.00）",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 81,000 个（2024—2034）",
+        "display_value": "平均每年约72,700个（2025—2035年，包含增长与人员替代需求）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "美国预计空缺",
+        "measure": "平均每年岗位空缺",
         "occupation_scope": "电工（O*NET-SOC 47-2111.00）",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
@@ -37138,7 +37177,7 @@
     "badges": [
       "建筑与设施的电气安装、维护与检修 · O*NET-SOC 47-2111.00",
       "2025 年美国工资数据 · 中位年薪 63,190 美元（中位时薪 30.38 美元）",
-      "2024 年就业约 818,700 人 · 2024—2034 年预计增长远快于平均（7% 或更高） · 兴趣代码 RC"
+      "2025年就业约821,000人 · 2025—2035年预计增长9% · 兴趣代码RC"
     ],
     "metrics": [
       {
@@ -37163,7 +37202,7 @@
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国预计空缺"
+        "label": "美国平均每年岗位空缺"
       },
       {
         "availability": "missing",
@@ -37177,14 +37216,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "美国 O*NET-SOC 47-2111.00：2025 年中位年薪 63,190 美元，2024 年就业约 818,700 人，2024—2034 年预计增长远快于平均（7% 或更高）；含学徒与执照路径、工作环境与中国大陆口径说明。"
+      "text": "了解电工的安装、维护与检修任务、学徒和执照路径，以及中国大陆特种作业证书的适用范围。美国2025年中位年薪63,190美元、就业约821,000人，2025—2035年预计增长9%；美国统计不能代替大陆工资或资格要求。"
     },
     "title": {
       "availability": "available",
       "text": "电工：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "2e67de31a66c22ab9e3a5c2908b0f3e0c9d8bdb5424dd5fc8e0cd92fc6335f3a",
+  "source_content_sha256": "28f45ed071d972551a906e9573b14872e110981be37a6570c458920c4324c799",
   "subject": {
     "canonical_slug": "electricians",
     "name": "电工",

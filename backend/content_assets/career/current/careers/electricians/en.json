@@ -22608,12 +22608,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "This page does not constitute a licence, a work permit, or a hiring decision; live electrical work, work at height, and energization may only be performed by certified or authorized personnel under applicable procedures."
+              "This page is not operating guidance or a qualification decision. Actual work must meet the applicable legal qualification, training, and employer-authorization requirements. Employer authorization does not replace legally required certification, and a certificate does not authorize every task."
             ]
           },
           "id": "actors.display.fermat_decision_card.caveat",
           "source_refs": [
-            "onet"
+            "cn-rule",
+            "cn-catalogue-2026",
+            "osha-333"
           ],
           "type": "prose"
         },
@@ -23568,12 +23570,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Certification, training, and authorization must each be checked against the actual jurisdiction and listed work categories; supervision or possession of one certificate does not automatically satisfy every electrical, height, and confined-space requirement."
+              "Check qualifications, training, and employer authorization against the actual task and jurisdiction. Under mainland China’s 2026 catalogue, a valid high-voltage electrical-work certificate also permits low-voltage electrical work. Holders of a valid electrical-work certificate need not obtain a separate work-at-height certificate when performing their own trade. These provisions do not remove applicable safety, training, or authorization requirements or cover every confined-space task."
             ]
           },
           "id": "actors.display.work_context_block.quality",
           "source_refs": [
-            "onet"
+            "cn-rule",
+            "cn-catalogue-2026"
           ],
           "type": "prose"
         },
@@ -24399,8 +24402,7 @@
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24444,8 +24446,7 @@
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -24459,8 +24460,7 @@
           },
           "id": "actors.display.ai_impact_table.evidence.4.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -24789,8 +24789,7 @@
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26643,7 +26642,8 @@
           },
           "id": "actors.fit.personality-fit-block.4",
           "source_refs": [
-            "onet"
+            "bls",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28125,13 +28125,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "This page does not replace applicable electrical codes, licensing rules, or employer safety systems; live electrical work, work at height, and energization may only be performed by certified or authorized personnel under applicable procedures."
+              "This page is not operating guidance or a qualification decision. Actual work must meet the applicable legal qualification, training, and employer-authorization requirements. Employer authorization does not replace legally required certification, and a certificate does not authorize every task."
             ]
           },
           "id": "actors.display.career_risk_cards.boundary",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule",
+            "cn-catalogue-2026",
+            "osha-333"
           ],
           "type": "prose"
         },
@@ -28795,7 +28796,7 @@
                 "Probation and supervised-training period",
                 "Complete routine work under supervision and leave records.",
                 "Check adherence to procedures, completeness of records, and safety steps.",
-                "Stop immediately and retrain if authority is exceeded or rules are violated."
+                "Follow employer procedures to stop the relevant work and report it; an authorized person determines the follow-up."
               ],
               [
                 "Period of independent responsibility",
@@ -28866,21 +28867,21 @@
               ],
               [
                 "Electrician licence",
-                "An occupational condition required in most regions",
+                "Licensing requirement in most U.S. states",
                 "Depends on jurisdiction: verify workplace rules",
-                "Yes: required in most regions",
+                "Required in most U.S. states; check state and local rules",
                 "Must pass an examination and meet apprenticeship or experience-duration requirements",
                 "Examination, required experience duration, and maintenance costs",
                 "Valid only within its applicable jurisdiction and scope of work"
               ],
               [
                 "Special Operations Operator Certificate",
-                "Common work-entry requirement in mainland China",
+                "People performing operations covered by the applicable catalogue",
                 "Depends on the role: verify local rules",
                 "Certification is required for actual work listed in the catalogue, not merely determined by the employer.",
-                "Training, examination, and certification under current MEM19 Order; the conditional exemption in Article 9 exempts training, not examinations or certification.",
+                "Check training, assessment and certification under MEM Order No. 19, including the Article 9 training exemption. Recognition arrangements may exempt training but still require the relevant assessment or examination.",
                 "Investment in training, examination, and renewal under current rules.",
-                "A certificate does not equal this employer's work permit"
+                "Check the valid certificate’s operations and current recognition rules; it does not replace employer authorization."
               ],
               [
                 "Employer authorization for work and energization",
@@ -28895,9 +28896,10 @@
           },
           "id": "actors.path.credential-decision.1",
           "source_refs": [
-            "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-catalogue-2026",
+            "cn-recognition-2026"
           ],
           "title": "How to choose training, qualifications, and materials",
           "type": "table"
@@ -28908,16 +28910,17 @@
           "data": {
             "paragraphs": [
               "Read education, training, certificate, and work-scope requirements in recruitment notices item by item; flexibility in one condition does not mean other conditions can be substituted.",
-              "The work samples and seven-day experience suggested on this page are for career exploration only; they are not operating instructions, a licence, or a work permit.",
-              "Live electrical work, height and confined-space work, and energization and acceptance may only be performed by certified, trained, and authorized personnel under applicable procedures and employer policies.",
+              "The work samples and seven-day experience are paper-based career exploration only. Use fictional or public teaching materials; do not handle real equipment, wire circuits, take electrical measurements, or energize equipment.",
+              "This page is not operating guidance or a qualification decision. Actual work must meet the applicable legal qualification, training, and employer-authorization requirements. Employer authorization does not replace legally required certification, and a certificate does not authorize every task.",
               "Exercises on this page use fictional materials and do not represent any real project, equipment, or work conclusion."
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
-            "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-catalogue-2026",
+            "osha-333"
           ],
           "title": "Training, qualifications, and contractual boundaries",
           "type": "notice"
@@ -29040,14 +29043,14 @@
                 "id": "day-3",
                 "values": [
                   "Day 3: write measurement criteria",
-                  "State pass criteria, measurement conditions, and instrument requirements."
+                  "Extract measurement conditions, instrument requirements and criteria from the supplied teaching material; record the source and missing information."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
                   "Day 4: troubleshoot on paper",
-                  "List verification steps and possible conclusions based on symptoms and hypotheses."
+                  "On paper, list questions to check and possible conclusions from fictional symptoms and hypotheses; do not perform on-site verification."
                 ]
               },
               {
@@ -29090,7 +29093,7 @@
               "Day 1: can you accurately identify the provision's scope and exceptions rather than just copy keywords?",
               "Day 2: can you break the work into ordered, checkable steps and list checkpoints?",
               "Day 3: can you clearly explain measurement conditions, instrument requirements, and the source of criteria?",
-              "Day 4: can you turn troubleshooting into actionable verification steps rather than vague guesses?",
+              "Day 4: can you identify what evidence would distinguish the fictional hypotheses on paper, without treating the exercise as permission for on-site testing?",
               "Day 5: can you clearly document de-energization, voltage verification, and abnormalities without deleting data?",
               "Day 6: can you determine the scope affected by changes and list items that must be retested?",
               "Day 7: can you state clear stop and escalation conditions and explain who confirms them?"
@@ -31014,12 +31017,12 @@
                 ]
               },
               {
-                "answer": "O*NET/BLS reports employment of approximately 818,700 people in 2024, projected growth much faster than average (7% or higher) from 2024 to 2034, and approximately 81,000 projected openings; openings include growth and replacement needs.",
+                "answer": "BLS reports about 821,000 electricians employed in the U.S. in 2025, with 9% projected growth from 2025 to 2035 and about 72,700 openings per year on average, including growth and replacement needs. Annual openings are neither the net increase over ten years nor an individual hiring probability.",
                 "id": "actors.faq.5",
                 "question": "What is the U.S. employment outlook?",
                 "question_key": "career.faq.electricians.5",
                 "source_refs": [
-                  "onet"
+                  "bls"
                 ]
               },
               {
@@ -31033,13 +31036,15 @@
                 ]
               },
               {
-                "answer": "In the U.S. O*NET survey, approximately 62% reported requiring a postsecondary certificate and 31% a high-school diploma. Most regions require passing a licensing examination; verify actual workplace rules. Mainland China: where work falls within the Catalogue of Special Operations (such as low-voltage or high-voltage electrical work), Article Four of Ministry of Emergency Management Order No. 19 requires specialized safety-technical training, passing assessment, and obtaining a Special Operations Operator Certificate before work may begin. Other specialized roles, such as construction electricians, must separately be checked against housing and urban-rural development authorities' and employers' requirements.",
+                "answer": "BLS lists a high school diploma or equivalent as the typical U.S. entry-level education. Most U.S. states require electricians to be licensed. BLS describes a typical four- or five-year apprenticeship; check state and local licensing rules. In mainland China, check the actual task against the 2026 Catalogue of Special Operations, distinguishing high- and low-voltage electrical work from construction-electrician work. Personnel covered by MEM Order No. 19 must pass the required assessment and obtain the relevant operating certificate; those meeting Article 9 conditions may be exempt from training. Valid low- or high-voltage certificate holders applying for a construction-electrician certificate, and construction-electrician certificate holders applying for a low-voltage certificate, may skip training but must still take the relevant assessment or examination. This does not automatically grant another certificate. A valid high-voltage certificate covers low-voltage work; valid electrical-work certificate holders performing their own trade need not obtain a separate work-at-height certificate. Certificate scope and employer authorization remain separate requirements.",
                 "id": "actors.faq.7",
                 "question": "What education and licensing are required?",
                 "question_key": "career.faq.electricians.7",
                 "source_refs": [
-                  "onet",
-                  "cn-rule"
+                  "bls",
+                  "cn-rule",
+                  "cn-catalogue-2026",
+                  "cn-recognition-2026"
                 ]
               },
               {
@@ -31073,7 +31078,11 @@
           },
           "id": "actors.sources.faq.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "cn-rule",
+            "cn-catalogue-2026",
+            "cn-recognition-2026"
           ],
           "type": "faq"
         },
@@ -31298,7 +31307,7 @@
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-08",
                 "details": [
                   "Check this occupation's median wages, employment size, growth, and openings.",
                   "Applies only to this specific U.S. occupation's scope."
@@ -31308,23 +31317,23 @@
                 "limitation": "Applies only to this specific U.S. occupation's scope; the median is not an entry wage, and openings do not equal net additions.",
                 "market": "United States",
                 "name": "BLS OOH — Electricians",
-                "period": "Wage data for month 5 of 2025; forecast for 2024–2034",
+                "period": "May 2025 wages, 2025 employment; 2025–2035 projections",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/construction-and-extraction/electricians.htm"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-08",
                 "details": [
                   "Article Three specifies that the scope of special operations is determined by the Catalogue of Special Operations; Article Four requires special-operations personnel to complete specialized safety-technical training, pass assessment, and obtain a Special Operations Operator Certificate before undertaking the work.",
-                  "Roles outside the Catalogue of Special Operations are not subject to this certificate requirement; specialized roles such as construction electricians must separately be checked against housing and urban-rural development authorities' requirements, while their qualifications and equipment release remain subject to employer rules."
+                  "Check the actual operation against the catalogue, competent authority’s rules and current recognition arrangements. Employer authorization does not replace legally required certification; certification does not authorize every task."
                 ],
                 "evidence_type": "official regulation",
                 "id": "cn-rule",
                 "limitation": "Applies only to operations listed in the Catalogue of Special Operations; it is not a uniform qualification requirement for all electrician roles, nor a substitute for employer authorization or specialized industry requirements.",
                 "market": "China",
                 "name": "Ministry of Emergency Management: Provisions on the Administration of Safety-Technical Training and Assessment for Special-Operations Personnel (Order No. 19 of 2025)",
-                "period": "Promulgated 2025-12-17, effective 2026-06-01; accessed 2026-09-30",
+                "period": "Promulgated 2025-12-17; effective 2026-06-01; checked 2026-11-08",
                 "publisher": "Ministry of Emergency Management of the People's Republic of China",
                 "scope": "contextual",
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
@@ -31679,6 +31688,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Pages 1–2: electrical operations; page 17: construction electricians; pages 24–25: certificate scope and recognition."
+                ],
+                "evidence_type": "official regulation",
+                "id": "cn-catalogue-2026",
+                "limitation": "Applies to specified operations and policy conditions; a job title or employer authorization does not establish eligibility.",
+                "market": "Mainland China",
+                "name": "2026 Catalogue of Special Operations",
+                "period": "2026",
+                "publisher": "Competent mainland China authorities",
+                "scope": "contextual",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/W020260526532904903760.pdf"
+              },
+              {
+                "accessed_at": "2026-11-08",
+                "details": [
+                  "Part I(1): specified electrician-certificate applications may waive training but still require the relevant assessment or examination."
+                ],
+                "evidence_type": "official regulation",
+                "id": "cn-recognition-2026",
+                "limitation": "Applies to specified operations and policy conditions; a job title or employer authorization does not establish eligibility.",
+                "market": "Mainland China",
+                "name": "Notice on mutual recognition of vocational skill certificates (2026 No. 1)",
+                "period": "2026",
+                "publisher": "Competent mainland China authorities",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2026/art_cb81fc42de3740ebafdcaad75af4b31f.html"
               }
             ]
           },
@@ -34812,7 +34851,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "low",
             "指标": "Wages · 10th percentile",
             "数值": {
               "$fact": "low",
@@ -34840,7 +34879,7 @@
             "说明": "Nationwide 75th percentile, from the same wage statistical scope."
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "high",
             "指标": "Wages · 90th percentile",
             "数值": {
               "$fact": "high",
@@ -34849,19 +34888,19 @@
             "说明": "Nationwide 90th percentile; does not represent continuous paid hours or total income."
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "employment",
             "指标": "2025 employment · number in the occupation",
             "数值": "821,000 people",
             "说明": "The overall forecast is not attributed to AI; employment stock and average annual openings do not equal net additions or current recruitment."
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "growth",
             "指标": "2025–2035 overall growth",
             "数值": "9%",
             "说明": "The overall forecast is not attributed to AI; employment stock and average annual openings do not equal net additions or current recruitment."
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "openings",
             "指标": "2025–2035 average annual openings",
             "数值": "72,700 openings per year (including replacement needs)",
             "说明": "The overall forecast is not attributed to AI; employment stock and average annual openings do not equal net additions or current recruitment."
@@ -35275,12 +35314,12 @@
             },
             "metric": "Employment size",
             "occupation_scope": "O*NET-SOC 47-2111.00 (Electricians)",
-            "source_id": "ratify",
+            "source_id": "bls",
             "value": "821,000 people"
           },
           {
             "geography": "United States",
-            "horizon": "2024—2034",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35293,10 +35332,10 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "Projected openings",
+            "metric": "Average annual job openings",
             "occupation_scope": "O*NET-SOC 47-2111.00 (Electricians)",
-            "source_id": "employer",
-            "value": "Approximately 81,000 openings"
+            "source_id": "bls",
+            "value": "About 72,700 per year"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -36996,12 +37035,12 @@
       },
       {
         "derivation": null,
-        "display_value": "USD 63,190 per year (USD 30.38 per hour, month 5 of 2025)",
+        "display_value": "USD 63,190 per year (USD 30.38 per hour, May 2025)",
         "fact_id": "median",
         "market": "United States",
         "measure": "U.S. median wage",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
-        "period": "Month 5 of 2025",
+        "period": "May 2025",
         "source_refs": [
           "onet"
         ]
@@ -37013,7 +37052,7 @@
         "market": "United States",
         "measure": "U.S. lower-end wage",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
-        "period": "Month 5 of 2025",
+        "period": "May 2025",
         "source_refs": [
           "sag-moa"
         ]
@@ -37025,45 +37064,45 @@
         "market": "United States",
         "measure": "U.S. higher-end wage",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
-        "period": "Month 5 of 2025",
+        "period": "May 2025",
         "source_refs": [
           "sag-moa"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 818,700 people (2024)",
+        "display_value": "Approximately 821,000 people (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "U.S. employment size",
+        "measure": "Employment",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Much faster than average (7% or higher, 2024–2034)",
+        "display_value": "9% projected growth (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "U.S. employment growth",
+        "measure": "Projected employment growth",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 81,000 openings (2024–2034)",
+        "display_value": "About 72,700 per year on average (2025–2035, including growth and replacement needs)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "U.S. projected openings",
+        "measure": "Average annual job openings",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
@@ -37138,7 +37177,7 @@
     "badges": [
       "Electrical installation, maintenance, and repair in buildings and facilities · O*NET-SOC 47-2111.00",
       "2025 U.S. wage data · median annual wage USD 63,190 (median hourly wage USD 30.38)",
-      "Employment of approximately 818,700 people in 2024 · projected growth much faster than average (7% or higher) from 2024 to 2034 · interest code RC"
+      "About 821,000 employed in 2025 · projected growth of 9% from 2025 to 2035 · interest code RC"
     ],
     "metrics": [
       {
@@ -37163,7 +37202,7 @@
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. projected openings"
+        "label": "U.S. average annual job openings"
       },
       {
         "availability": "missing",
@@ -37177,14 +37216,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "U.S. O*NET-SOC 47-2111.00: median annual wage of USD 63,190 in 2025, employment of approximately 818,700 people in 2024, and projected growth much faster than average (7% or higher) from 2024 to 2034; includes apprenticeship and licensing paths, work environment, and notes on mainland China's statistical scope."
+      "text": "Explore electrician duties, apprenticeships and licensing. U.S. figures: $63,190 median pay and 821,000 employed in 2025; 9% projected growth for 2025–2035. Mainland China certification rules are explained separately."
     },
     "title": {
       "availability": "available",
       "text": "Electricians: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "557c747d2f90704a3f2a4c6997c2bc6bad83b92e7e94a73f39d05887333e86b3",
+  "source_content_sha256": "f146b620bb982444cb279b41f7505678bdd000577c319ae94d889e5ef071b2b4",
   "subject": {
     "canonical_slug": "electricians",
     "name": "Electricians",
