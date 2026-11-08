@@ -224,6 +224,18 @@ test('publication transport fails closed and recovers malformed phase counts',as
  await assert.rejects(()=>publish(execution,async request=>{if(request.mode==='recover'){recovery++;return {status:0,stdout:JSON.stringify({ok:true,mode:'recover',restored:false,recovery_status:'not_required',source_commit:request.source_commit,workflow_run_id:request.workflow_run_id,workflow_run_attempt:1,package_sha256:request.package_sha256,executor_release_sha256:request.executor_release_sha256,sanitized:true})};}return {status:0,stdout:'{}'};}),error=>error.receipt.recovery_completed === true);
  assert.equal(recovery,1);
 });
+test('reader link labels exclude hidden ancestors and unrelated loading mains',()=>{
+ for(const attribute of ['hidden','aria-hidden="true"','data-iq-qa-hidden="true"']) {
+  const dom=domOf(`<html><body><main><span ${attribute}><a href="/hidden">Support</a></span><p>Support</p><a href="/visible">Visible</a></main></body></html>`);
+  assert.equal(dom.link_labels['/hidden'],undefined);
+  assert.deepEqual(dom.link_labels['/visible'].map(value=>value.trim()),['Visible']);
+ }
+ const article=domOf('<html><body><main><a href="/loading">Loading</a></main><div hidden><main><article data-testid="article-detail-content"><a href="/visible">Visible</a><span hidden><a href="/hidden">Hidden</a></span></article></main></div></body></html>',{articleSsr:true});
+ assert.equal(article.body.length,1);
+ assert.equal(article.link_labels['/loading'],undefined);
+ assert.equal(article.link_labels['/hidden'],undefined);
+ assert.deepEqual(article.link_labels['/visible'].map(value=>value.trim()),['Visible']);
+});
 test('DOM acceptance cannot pass from script-only content or HTTP availability',()=>{
  const row={page_id:'PAGE-02',kind:'page',identity:{locale:'en',slug:'about'},snapshot:{title:'About',content_md:'Expected visible paragraph.'}};
  const html='<html><head><link rel="canonical" href="https://fermatmind.com/en/about"></head><body><main><h1>About</h1><p>Expected visible paragraph.</p></main></body></html>';

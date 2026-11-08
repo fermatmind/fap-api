@@ -68,7 +68,17 @@ $walk = function($node) use (&$walk) {
  if ($node instanceof DOMText) return $node->nodeValue;
  $text=''; foreach($node->childNodes as $child) $text .= ' '.$walk($child); return $text;
 };
-$labels=[]; foreach($xp->query('//main//a') as $anchor) { $label=$walk($anchor); if (trim($label)!=='') $labels[$anchor->getAttribute('href')][]=$label; }
+$labels=[]; foreach($xp->query($mainQuery.'//a') as $anchor) {
+ $hidden=false;
+ // Visibility inside the selected reader matters; raw Article transport
+ // outside its main is verified by the separate browser acceptance.
+ for($parent=$anchor;$parent instanceof DOMElement;$parent=$parent->parentNode) {
+  if ($parent->hasAttribute('hidden') || $parent->getAttribute('aria-hidden') === 'true' || $parent->getAttribute('data-iq-qa-hidden') === 'true') { $hidden=true; break; }
+  if ($parent->tagName === 'main') break;
+ }
+ if ($hidden) continue;
+ $label=$walk($anchor); if (trim($label)!=='') $labels[$anchor->getAttribute('href')][]=$label;
+}
 $values = function($query,$attr=null) use($xp,$walk) { $out=[];foreach($xp->query($query) as $node) $out[]=$attr===null?$walk($node):$node->getAttribute($attr);return $out;};
 $documentTitles=[]; foreach($xp->query('/html/head/title | /html/body/title') as $node) $documentTitles[]=$node->textContent;
 $alternateEntries=[]; $canonicalLinks=[]; $alternateLinks=[];
