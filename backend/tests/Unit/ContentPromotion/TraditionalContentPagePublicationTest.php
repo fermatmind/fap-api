@@ -82,6 +82,35 @@ final class TraditionalContentPagePublicationTest extends TestCase
         $this->assertStringContainsString('TraditionalContentPagePublication::failureCode($error)', file_get_contents(base_path('scripts/deploy/run_public_content_53_publish.php')));
     }
 
+    public function test_source_diagnostics_identify_the_failed_condition_without_disclosing_values(): void
+    {
+        $this->source();
+        $row = $this->row();
+        $native = app(TraditionalContentPagePublication::class);
+        $original = $native->read($row, false);
+        foreach ([
+            ['source_locale', 'en', 'identity'],
+            ['status', 'draft', 'readiness'],
+            ['review_state', 'draft', 'review'],
+            ['legal_review_required', 1, 'hold'],
+            ['content_html', '<p>private body</p>', 'html'],
+            ['source_version_hash', null, 'version'],
+            ['summary', 'private changed text', 'copy_summary'],
+        ] as [$field, $value, $condition]) {
+            $saved = $original;
+            $saved['source'][$field] = $value;
+            try {
+                $native->assertBaseline($row, $saved);
+                $this->fail('Changed source must be rejected');
+            } catch (DomainException $error) {
+                $this->assertSame('public_content_53_traditional_page_source_'.$condition.'_about', $native::failureCode($error));
+            }
+        }
+        foreach (['traditional_page_source_copy_password_about', 'traditional_page_source_identity_private-id'] as $unknown) {
+            $this->assertSame('public_content_53_publication_failed', $native::failureCode(new DomainException($unknown)));
+        }
+    }
+
     public function test_four_phase_service_preserves_four_published_pages_while_creating_four_policies(): void
     {
         $this->source();

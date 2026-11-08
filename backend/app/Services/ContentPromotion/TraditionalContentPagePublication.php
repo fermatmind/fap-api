@@ -34,7 +34,8 @@ final class TraditionalContentPagePublication
             'traditional_page_target_not_owned', 'traditional_page_retained_draft_changed', 'traditional_page_published_target_changed',
             'traditional_page_transaction_required', 'traditional_page_restore_transaction_required',
         ];
-        if ($error instanceof DomainException && in_array($error->getMessage(), $nativeCodes, true)) {
+        if ($error instanceof DomainException && (in_array($error->getMessage(), $nativeCodes, true)
+            || preg_match('/^traditional_page_source_(?:identity|readiness|review|hold|html|version|copy_(?:'.implode('|', self::FIELDS).'))_(?:'.implode('|', self::SLUGS).')$/D', $error->getMessage()))) {
             return 'public_content_53_'.$error->getMessage();
         }
         if ($error instanceof \App\Services\Cms\CmsTranslationWorkflowException) {
@@ -193,12 +194,22 @@ final class TraditionalContentPagePublication
     public function assertBaseline(array $row, array $saved): void
     {
         $source = $this->model($saved['source']);
-        if (! $source->isSourceContent() || $source->locale !== 'zh-CN' || (int) $source->org_id !== 0
-            || ! $source->passesPublicReadinessGate() || $source->review_state !== 'approved'
-            || $source->legal_review_required || $source->science_review_required || trim((string) $source->content_html) !== ''
-            || self::hash($this->copy($source)) !== self::hash($row['source_snapshot'])
-            || ! preg_match('/^[a-f0-9]{64}$/', (string) $source->source_version_hash)) {
-            throw new DomainException('traditional_page_source_drift_or_hold');
+        $checks = [
+            'identity' => $source->isSourceContent() && $source->locale === 'zh-CN' && (int) $source->org_id === 0,
+            'readiness' => $source->passesPublicReadinessGate(),
+            'review' => $source->review_state === 'approved',
+            'hold' => ! $source->legal_review_required && ! $source->science_review_required,
+            'html' => trim((string) $source->content_html) === '',
+            'version' => (bool) preg_match('/^[a-f0-9]{64}$/', (string) $source->source_version_hash),
+        ];
+        $copy = $this->copy($source);
+        foreach (self::FIELDS as $field) {
+            $checks['copy_'.$field] = self::hash([$copy[$field]]) === self::hash([$row['source_snapshot'][$field]]);
+        }
+        foreach ($checks as $check => $passed) {
+            if (! $passed) {
+                throw new DomainException('traditional_page_source_'.$check.'_'.$row['identity']['slug']);
+            }
         }
         if ($saved['missing']) {
             return;
