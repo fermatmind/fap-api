@@ -147,13 +147,13 @@
         "status": "pending_mapping"
       },
       "item:oral-and-maxillofacial-surgeons.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:oral-and-maxillofacial-surgeons.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:oral-and-maxillofacial-surgeons.path.interview-probation.10": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:oral-and-maxillofacial-surgeons.profile.definition-block.1": {
         "status": "mapped"
@@ -11957,7 +11957,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "直接判断：愿完成牙科专业教育和外科住院训练，承担麻醉、手术及并发症风险，可探索口腔颌面外科"
+              "若你对口腔颌面疾病、手术与重建有兴趣，愿长期学习并承担患者沟通和团队责任，可继续研究具体课程与岗位；兴趣不是执业资格。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.quick-decision.fermat-decision-card.1",
@@ -11971,7 +11971,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "正向证据：能系统核病史、影像、气道和感染风险，并与麻醉、修复及正畸团队合作。"
+              "先观察自己的探索意愿：能否耐心比较给定文字记录、保留未知、向团队提出清楚问题。病史影像判读和临床风险评估须通过正式教育、监督训练及相应考核，不能由本页纸面练习验证。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.quick-decision.fermat-decision-card.2",
@@ -11985,12 +11985,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全试作：用公开教学病例画术前风险、知情同意、会诊和术后随访流程；不对真实患者操作"
+              "安全试作：完成本页K01/L01-v1虚构记录对照，只比较文字侧别、缺项与未知，不需要另找病例或接触患者。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-details"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -11999,12 +11999,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "复盘时核适应证、影像、麻醉风险、知情同意与术后监测，并确认职责和授权边界。"
+              "复盘时逐字段对照给定参考，保留原值和未决问题；侧别一致或表格填完不证明临床安全、专业能力或获准手术。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.quick-decision.fit-decision-checklist.4",
           "source_refs": [
-            "onet-details"
+            "internal-rubric"
           ],
           "type": "prose"
         }
@@ -12036,12 +12036,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "口腔颌面外科工作从病史、口内检查、咬合与影像开始，形成适应证、替代方案、麻醉级别、术式、器械、急症预案和随访输出。 第1个核验点要求把患者、临床病历、影像、用药、麻醉、手术操作、护理交接和执业授权放在同一责任链中；任何信息不足都应停止、人工复核或升级，不能用流程速度代替患者安全。"
+              "本职业对口腔颌面硬软组织疾病、损伤与缺损开展诊疗和外科工作，与麻醉、正畸和修复等团队协作。病史、检查、影像、方案、知情同意及随访记录形成连续责任链；重要记录冲突或缺项须按机构流程及时核实与转交。急症须由合格团队及时处理，不能把“资料不全就停止一切”当通用临床规则。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "cn-physician-law"
           ],
           "type": "prose"
         },
@@ -12092,12 +12093,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "与相邻岗位相比，本职业需要牙科专业学位、外科住院训练及当地执照与手术权限；不同于普通牙科、正畸或牙科技师。"
+              "美国普通牙医也需要专业牙科教育及州许可；口腔颌面外科另有专科外科训练。中国口腔医学教育、医师资格、执业注册和岗位要求分别核对，不能把美国DDS/DMD或专科认证直接转换为中国授权。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.profile.definition-block.6",
           "source_refs": [
-            "onet-details"
+            "bls-dentists",
+            "review-aboms",
+            "cn-physician-law"
           ],
           "type": "prose"
         },
@@ -12142,12 +12145,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "普通牙医主要做常规口腔诊疗，本职业更重需要牙科专业学位、外科住院训练及当地执照与手术权限；不同于普通牙科、正畸或牙科技师。"
+              "普通牙医和口腔颌面外科都属于需专业教育及许可的诊疗职业；区别要看专科训练、实际任务与权限，不能写成“普通牙医不手术”。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet-details"
+            "review-neighbor-dentists-general",
+            "review-neighbor-orthodontists",
+            "review-neighbor-prosthodontists",
+            "review-neighbor-pediatric-surgeons",
+            "review-neighbor-dental-assistants",
+            "review-neighbor-dental-laboratory-technicians"
           ],
           "type": "prose"
         },
@@ -12156,12 +12164,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "正畸医生重点为牙颌矫治，职业任务和训练不同。"
+              "以下比较依据各职业美国O*NET任务定义，不证明资格互认或可直接转岗。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-details"
+            "review-neighbor-dentists-general",
+            "review-neighbor-orthodontists",
+            "review-neighbor-prosthodontists",
+            "review-neighbor-pediatric-surgeons",
+            "review-neighbor-dental-assistants",
+            "review-neighbor-dental-laboratory-technicians"
           ],
           "type": "prose"
         },
@@ -12170,12 +12183,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "修复医生偏牙列与口腔修复，应看最终产出而非相似称呼。"
+              "正畸重牙颌矫治、修复重功能与修复体；牙科助理和技师分别承担有限协助与制作任务。儿科外科另有不同人群与医学训练。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-details"
+            "review-neighbor-dentists-general",
+            "review-neighbor-orthodontists",
+            "review-neighbor-prosthodontists",
+            "review-neighbor-pediatric-surgeons",
+            "review-neighbor-dental-assistants",
+            "review-neighbor-dental-laboratory-technicians"
           ],
           "type": "prose"
         },
@@ -12184,12 +12202,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "普通牙医与本职业区别：颌面外科需额外手术训练。"
+              "普通牙医也需专业牙科教育和许可；OMS另有专科手术训练，不能用是否“做手术”简单二分。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-details"
+            "review-neighbor-dentists-general",
+            "review-neighbor-orthodontists",
+            "review-neighbor-prosthodontists",
+            "review-neighbor-pediatric-surgeons",
+            "review-neighbor-dental-assistants",
+            "review-neighbor-dental-laboratory-technicians"
           ],
           "type": "prose"
         },
@@ -12198,12 +12221,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "选择普通牙医更适合喜欢一般牙科。"
+              "比较自己对综合口腔诊疗与专科外科的兴趣。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "onet-details"
+            "review-neighbor-dentists-general",
+            "review-neighbor-orthodontists",
+            "review-neighbor-prosthodontists",
+            "review-neighbor-pediatric-surgeons",
+            "review-neighbor-dental-assistants",
+            "review-neighbor-dental-laboratory-technicians"
           ],
           "type": "prose"
         }
@@ -12235,13 +12263,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用虚构样本认识病史影像。"
+              "用完整K01/L01-v1虚构文字记录试验比较字段，核每项输出能否追溯原值；不判影像、疾病或手术。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "onet-details",
-            "who-ai"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -12280,7 +12307,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "带班者"
+              "团队负责人"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.ai-impact.ai-impact-table.5",
@@ -12348,7 +12375,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国口腔颌面外科医生全国同口径中位数未取得。2025卫生和社会工作城镇非私营146,266元、私营75,631元年税前年均，仅医疗雇主宽行业，含其他临床社会岗位非本职工资个人区间；不含个体自由职业或自营诊所利润，不用于器械制造销售。"
+              "尚无本职业全国同口径中位数、分位或统一起薪。2025卫生和社会工作城镇非私营146,266元、私营75,631元，为分别统计的年税前平均工资；行业含多种职业，不是本职业工资、个人区间或自营诊所利润。调查覆盖城镇5人及以上法人单位，按非私营/私营调查口径分别解释，不含个体工商户和自由职业等非单位就业者。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.china-salary.career-snapshot-primary-locale.1",
@@ -12468,7 +12495,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国29-1022精确职业2025—2035总体增长5.6%、官方净增300人，年均200空缺含替补；非净变化当前招聘、AI采用替代或个人失业。"
+              "美国29-1022精确职业2025—2035总体就业增长5.6%，官方十年净增300人。年均200个空缺包含替补，既非十年净增人数，也非当前招聘数；这些总体预测不能推导AI采用、技术替代或个人失业。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.us-salary.career-snapshot-secondary-locale.5",
@@ -12504,12 +12531,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "能系统核病史、影像、气道和感染风险，并与麻醉、修复及正畸团队合作。",
-              "能系统核病史、影像、气道和感染风险，并与麻醉、修复及正畸团队合作。"
+              "愿意比较给定记录，并承认自己尚不能作临床判断。",
+              "遇到侧别冲突时能保留原值，写清需要谁核实。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.1",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12519,12 +12547,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "愿持续执行病史影像与诊断评估。",
-              "愿持续执行病史影像与诊断评估。"
+              "愿意持续学习口腔解剖、疾病与外科基础。",
+              "愿意核对具体课程的学制、训练内容和准入条件。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.2",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12534,12 +12563,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "能把影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录交给下一责任人。",
-              "能把影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录交给下一责任人。"
+              "愿意向团队清楚说明已知、未知与未决问题。",
+              "能在文字练习中区分自己的注释与原始记录。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.3",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12549,12 +12579,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "异常时按程序停下并升级。",
-              "异常时按程序停下并升级。"
+              "愿意接受监督、反馈并按机构安排报告问题。",
+              "不把预约、工具输出或兴趣分数当作授权。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.4",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12564,12 +12595,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "不愿承担气道风险须谨慎。",
-              "不愿承担气道风险须谨慎。"
+              "需要认真了解临床工作中感染、出血等风险及正式训练要求。",
+              "若不愿承担长期学习和严格责任，可比较其他方向。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.5",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12579,12 +12611,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "忽视手术适应证、麻醉、知情同意和并发症处置责任不宜独立工作。",
-              "忽视手术适应证、麻醉、知情同意和并发症处置责任不宜独立工作。"
+              "愿意学习患者沟通与真实知情同意的专业要求。",
+              "能接受没有专业回复时把问题保留为待核事项。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.6",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12636,7 +12669,9 @@
           "id": "oral-and-maxillofacial-surgeons.risk.career-risk-cards.1",
           "source_refs": [
             "onet-details",
-            "aaoms-impacted-third-molars"
+            "internal-rubric",
+            "review-nhs-wisdom",
+            "review-nhs-abscess"
           ],
           "type": "prose"
         },
@@ -12645,13 +12680,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "口腔颌面外科需重视气道、感染、神经损伤、出血、部位核对和术后随访的责任交接。"
+              "可了解感染、呼吸/吞咽困难、智齿拔除后的神经损伤与出血等风险背景，以及团队如何沟通与衔接。以下按特定来源和编辑问题分别表述，不排名或给发生率。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.risk.career-risk-cards.2",
           "source_refs": [
             "onet-details",
-            "aaoms-impacted-third-molars"
+            "review-nhs-wisdom",
+            "review-nhs-abscess"
           ],
           "type": "prose"
         },
@@ -12660,13 +12696,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET支持职业任务；AAOMS第三磨牙说明支持特定手术感染及神经损伤背景。六卡为编辑归纳，不表示风险概率或通用临床处置标准。"
+              "NHS牙脓肿患者页说明感染需要及时专业治疗，并列呼吸或吞咽困难等紧急情境；NHS智齿拔除页介绍感染、神经损伤及持续出血求助。它们是英国患者信息，不是所有颌面手术的完整指南。文字记录冲突与随访问题由编辑提出；下面的核对问题不规定临床处置。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.risk.career-risk-cards.3",
           "source_refs": [
             "onet-details",
-            "aaoms-impacted-third-molars"
+            "review-nhs-wisdom",
+            "review-nhs-abscess"
           ],
           "type": "prose"
         },
@@ -12675,13 +12712,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "涉及气道风险评估、手术及随访的口腔颌面外科团队"
+              "参与感染评估、转交和紧急照护衔接的合格团队"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.risk.career-risk-cards.4",
           "source_refs": [
             "onet-details",
-            "aaoms-impacted-third-molars"
+            "review-nhs-wisdom",
+            "review-nhs-abscess"
           ],
           "type": "prose"
         },
@@ -12690,13 +12728,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "气道受压或麻醉相关问题可能威胁呼吸安全。"
+              "牙脓肿可能伴随呼吸或吞咽困难等需紧急专业处理的情况；本页不提供麻醉或气道处置方案。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.risk.career-risk-cards.5",
           "source_refs": [
             "onet-details",
-            "aaoms-impacted-third-molars"
+            "review-nhs-wisdom",
+            "review-nhs-abscess"
           ],
           "type": "prose"
         }
@@ -12713,7 +12752,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "安全探索只用虚构颌面手术记录核资料与转交，不对真实患者操作。纸面规则只核标识、部位与资料完整性，非手术适应证、麻醉阈值或医嘱；真实工作须牙科外科训练与当地权限。"
+              "以下是编辑设计的文字核对练习。只核给定记录的标识、版本、侧别和缺项，保留未知并写待核问题；不判断疾病、手术适应证、麻醉或是否可开台，不接触真实患者或病例。完成练习不授予任何医疗资格。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.1",
@@ -12727,12 +12766,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。；真实职责依当地规则和雇主授权，转岗须补目标岗位训练。"
+              "美国通常先完成DDS/DMD等牙科专业教育，再接受口腔颌面外科4—6年专科训练，部分项目结合MD；州执照、ABOMS专科认证及医院权限是不同事项。大陆须分别核对口腔医学教育、医师资格考试、执业注册与岗位要求；现有从业者的专培项目不等于初次入行条件。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.2",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "bls-dentists",
+            "review-aboms",
+            "cn-physician-law",
+            "review-jilin-oms"
           ],
           "type": "prose"
         },
@@ -12746,7 +12788,10 @@
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.3",
           "source_refs": [
-            "internal-rubric"
+            "bls-dentists",
+            "review-aboms",
+            "cn-physician-law",
+            "review-jilin-oms"
           ],
           "type": "prose"
         },
@@ -12755,7 +12800,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "题面：虚构K01计划部位左侧，影像标签写右侧，知情同意仍左侧；L01三者部位一致，但麻醉评估与授权复核签名为空，新人想按预约开台。纸面规则：标识部位须一致且资料完整交授权人核。列暂停与转交问题，不选术式或麻醉药。"
+              "完整虚构输入（v1，非临床记录）：K01的计划侧别=左，影像标签侧别=右，知情同意侧别=左；麻醉评估栏=未提供，授权复核签名栏=未提供。L01的计划侧别=右，影像标签侧别=右，知情同意侧别=右；麻醉评估栏=空白，授权复核签名栏=空白。两行标识均与各自记录一致，没有影像、诊断、患者情况、实际预约或专业反馈。题目：分别抄录原值，标出侧别冲突及缺项/未知，列待向有资格团队核实的问题。不得补填评估、签名或更改侧别。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.4",
@@ -12783,7 +12828,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参考：K部位冲突暂缓核原计划影像同意，保输入不改侧别；L缺评估签名标不完整交授权医师与团队，不凭预约放行。交两行核对表：虚构标识、三处部位、评估签名缺项、待核问题、转交及模拟复核，更正保原记录，不判断适应证或手术。"
+              "逐字段参考（v1）：K01｜计划左｜影像标签右｜同意左｜评估未提供｜签名未提供；侧别冲突，无法判定哪一侧正确，两个未提供字段保持未知。L01｜计划右｜影像标签右｜同意右｜评估空白｜签名空白；侧别一致只是一致性结果，不证明评估完成、获准手术或患者安全。交一张两行原值与标记表，并写：K01应向有资格团队核实三份原始文件及未提供栏；L01应核实两个空白栏是否另有有效记录。另交问题清单与更正留痕说明，保留原值并标清个人注释；本题未提供专业回复，不能声称已获复核或放行。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.6",
@@ -12797,7 +12842,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "暂缓转交参考"
+              "文字核对参考与待核问题"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.7",
@@ -12811,7 +12856,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日：第1天抄K/L输入规则及边界；第2—3天建两行计划影像同意与评估签名核对表；第4—5天查错侧与缺项写暂停和转交；第6—7天交两表、未决问题与更正留痕说明。保气道感染神经损伤出血四风险，不开台或安排真实手术麻醉。"
+              "七日探索：第1天读完整K01/L01-v1题面与边界；第2—3天抄两行原值，不改侧别；第4—5天按参考标侧别冲突、未提供与空白，区分“未知”和“没有”；第6—7天交原值标记表、问题清单及更正留痕说明，再记录自己是否愿意继续学习细致记录与团队沟通。另把气道、感染、神经损伤和出血列为了解正式课程与团队职责时要问的问题，不从本题推断风险或作临床决定。"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.8",
@@ -12830,6 +12875,13 @@
               "boundary",
               "work_evidence",
               "possible_check"
+            ],
+            "column_labels": [
+              "学习领域",
+              "专业任务",
+              "权限边界",
+              "可能形成的记录",
+              "了解项目时的问题"
             ],
             "rows": [
               [
@@ -12871,8 +12923,11 @@
           },
           "id": "oral-and-maxillofacial-surgeons.path.entry-role-comparison.9",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "onet-details",
+            "bls-dentists",
+            "cn-physician-law"
           ],
+          "title": "需通过正式教育与监督训练学习的任务",
           "type": "table"
         },
         {
@@ -12885,37 +12940,46 @@
               "boundary",
               "possible_check"
             ],
+            "column_labels": [
+              "主题",
+              "来源中的有限背景",
+              "职责核对问题",
+              "资料使用边界"
+            ],
             "rows": [
               [
-                "气道风险",
-                "颌面肿胀或麻醉评估不足。",
-                "术前评估并备应急团队。",
-                "核气道风险处置"
+                "感染与呼吸/吞咽困难",
+                "NHS牙脓肿页列呼吸或吞咽困难等紧急情境。",
+                "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+                "非发生率、风险排名或临床处置指令"
               ],
               [
-                "感染扩散",
-                "深部颌面感染迟处理。",
-                "急症识别与转院会诊。",
-                "核感染扩散处置"
+                "牙源性感染",
+                "NHS说明牙脓肿是牙齿或牙龈感染相关脓液积聚，需及时牙科治疗。",
+                "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+                "非发生率、风险排名或临床处置指令"
               ],
               [
-                "神经损伤",
-                "手术范围和影像核对不足。",
-                "影像规划与知情同意。",
-                "核神经损伤处置"
+                "智齿拔除与神经损伤",
+                "NHS说明智齿拔除可能损伤邻近神经，导致感觉异常。",
+                "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+                "非发生率、风险排名或临床处置指令"
               ],
               [
-                "出血",
-                "凝血或血管风险漏评。",
-                "核病史和止血预案。",
-                "核出血处置"
+                "智齿拔除后出血",
+                "NHS智齿拔除页将持续出血列为应寻求及时专业帮助的情况。",
+                "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+                "非发生率、风险排名或临床处置指令"
               ]
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.interview-probation.10",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "review-nhs-wisdom",
+            "review-nhs-abscess",
+            "internal-rubric"
           ],
+          "title": "向正式项目或机构了解风险职责",
           "type": "table"
         },
         {
@@ -12931,67 +12995,82 @@
               "audience",
               "proof_method"
             ],
+            "column_labels": [
+              "阶段",
+              "材料或证据",
+              "需核条件",
+              "场景限制",
+              "不能推定什么",
+              "适用人群",
+              "怎样核查"
+            ],
             "rows": [
               [
-                "岗位观察",
-                "影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录",
-                "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "学习者",
-                "核课程、授权和反馈"
+                "纸面探索",
+                "K01/L01原值标记表与问题单",
+                "无需临床资格，只限给定虚构文字",
+                "不接触患者或真实病历",
+                "不证明临床能力",
+                "探索者",
+                "按给定参考逐字段核对"
               ],
               [
-                "基础训练",
-                "影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录",
-                "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "学习者",
-                "核课程、授权和反馈"
+                "基础教育研究",
+                "具体学校课程和招生说明",
+                "核口腔医学/牙科专业教育及录取条件",
+                "依学校和地区",
+                "课程名称不授执业权",
+                "申请者",
+                "读正式课程与招生公告"
               ],
               [
-                "受监督实践",
-                "影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录",
-                "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "学习者",
-                "核课程、授权和反馈"
+                "正式监督训练",
+                "项目课程、轮转与监督评价",
+                "核进入项目的学历、已有资格及监督安排",
+                "限适当项目与获准任务",
+                "不能用纸面练习替代",
+                "符合条件的受训者",
+                "核项目官方要求及评价方式"
               ],
               [
-                "资格核验",
-                "影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录",
-                "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "从业者",
-                "核课程、授权和反馈"
+                "法定资格核验",
+                "适用许可/资格与注册材料",
+                "美国按州；大陆核医师资格和执业注册",
+                "依实际法域、类别、地点与范围",
+                "外国学历或专科认证不自动互认",
+                "准备执业者",
+                "核主管机构现行要求"
               ],
               [
-                "独立交接",
-                "影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录",
-                "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "从业者",
-                "核课程、授权和反馈"
+                "机构任务安排",
+                "岗位职责与授予的具体权限",
+                "核手术、麻醉、监督及紧急协作职责",
+                "限机构和具体任务",
+                "不因一般资格推定所有操作可做",
+                "合格从业者",
+                "核机构正式岗位与授权安排"
               ],
               [
-                "进阶复盘",
-                "影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录",
-                "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
-                "按地区及雇主",
-                "培训不自动授独立权限",
-                "从业者",
-                "核课程、授权和反馈"
+                "在岗进阶",
+                "继续教育、专业考核和团队反馈",
+                "依项目、执业与岗位要求核更新条件",
+                "限适用专业与职责",
+                "不以阶段标签自动升任",
+                "在岗人员",
+                "核具体项目、考核与权限更新"
               ]
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.credential-decision.11",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "bls-dentists",
+            "review-aboms",
+            "review-aboms-oce",
+            "cn-physician-law",
+            "review-jilin-oms",
+            "internal-rubric"
           ],
+          "title": "探索、训练与从业条件分开核对",
           "type": "table"
         }
       ]
@@ -13040,7 +13119,7 @@
           },
           "id": "oral-and-maxillofacial-surgeons.market-signals.market-signal-card.3",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-2025-35-29-1022"
           ],
           "type": "prose"
         },
@@ -13054,7 +13133,7 @@
           },
           "id": "oral-and-maxillofacial-surgeons.market-signals.market-signal-card.4",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-2025-35-29-1022"
           ],
           "type": "prose"
         },
@@ -13068,7 +13147,8 @@
           },
           "id": "oral-and-maxillofacial-surgeons.market-signals.market-signal-card.5",
           "source_refs": [
-            "source-pack-onet-summary"
+            "review-oews-concepts",
+            "bls-2025-35-29-1022"
           ],
           "type": "prose"
         }
@@ -13104,34 +13184,39 @@
                 ]
               },
               {
-                "answer": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
+                "answer": "美国通常先完成DDS/DMD等牙科专业教育，再接受口腔颌面外科4—6年专科训练，部分项目结合MD；州执照、ABOMS专科认证及医院权限是不同事项。大陆须分别核对口腔医学教育、医师资格考试、执业注册与岗位要求；现有从业者的专培项目不等于初次入行条件。",
                 "id": "oral-and-maxillofacial-surgeons.faq.3",
                 "question": "入行需要什么？",
                 "question_key": "career.faq.oral-and-maxillofacial-surgeons.3",
                 "source_refs": [
-                  "onet-details"
+                  "bls-dentists",
+                  "review-aboms",
+                  "cn-physician-law",
+                  "review-jilin-oms"
                 ]
               },
               {
-                "answer": "气道风险：颌面肿胀或麻醉评估不足。；术前评估并备应急团队。",
+                "answer": "NHS智齿资料说明感染、神经损伤及持续出血求助背景，牙脓肿资料列呼吸/吞咽困难等紧急情境；不是风险排名或通用临床流程。探索课程时问清风险沟通、术后联络和升级责任。",
                 "id": "oral-and-maxillofacial-surgeons.faq.4",
-                "question": "工作中最大风险？",
+                "question": "应了解哪些风险与团队职责？",
                 "question_key": "career.faq.oral-and-maxillofacial-surgeons.4",
                 "source_refs": [
-                  "onet-details"
+                  "review-nhs-wisdom",
+                  "review-nhs-abscess"
                 ]
               },
               {
-                "answer": "不能；手术适应证、麻醉、知情同意和并发症处置责任由有权限人员核。",
+                "answer": "本页AI试验仅核虚构文字字段，不作诊断、手术、麻醉或开台决定；不能从记录整理能力推断临床效果。",
                 "id": "oral-and-maxillofacial-surgeons.faq.5",
                 "question": "AI能独立完成吗？",
                 "question_key": "career.faq.oral-and-maxillofacial-surgeons.5",
                 "source_refs": [
-                  "onet-details"
+                  "internal-rubric",
+                  "who-ai"
                 ]
               },
               {
-                "answer": "证据不足：中国口腔颌面外科医生全国中位分位起薪未取得。2025卫生社会工作城镇非私营146266/私营75631元年税前年均，仅医疗雇主宽行业，含其他临床社会岗非本职工资个人区间，不含个体自由职业自营诊所利润，不用于器械制造销售。",
+                "answer": "尚无本职业全国同口径中位数、分位或统一起薪。2025卫生和社会工作城镇非私营146,266元、私营75,631元，为分别统计的年税前平均工资；行业含多种职业，不是本职业工资、个人区间或自营诊所利润。调查覆盖城镇5人及以上法人单位，按非私营/私营调查口径分别解释，不含个体工商户和自由职业等非单位就业者。",
                 "id": "oral-and-maxillofacial-surgeons.faq.6",
                 "question": "中国工资是多少？",
                 "question_key": "career.faq.oral-and-maxillofacial-surgeons.6",
@@ -13149,12 +13234,12 @@
                 ]
               },
               {
-                "answer": "用公开教学病例画术前风险、知情同意、会诊和术后随访流程；不对真实患者操作",
+                "answer": "安全试作：完成本页K01/L01-v1虚构记录对照，只比较文字侧别、缺项与未知，不需要另找病例或接触患者。",
                 "id": "oral-and-maxillofacial-surgeons.faq.8",
                 "question": "如何安全探索？",
                 "question_key": "career.faq.oral-and-maxillofacial-surgeons.8",
                 "source_refs": [
-                  "onet-details"
+                  "internal-rubric"
                 ]
               }
             ]
@@ -13307,19 +13392,19 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "No US specialty equivalence or wage data."
+                  "医师法第9、13、14条资格与注册；手术等风险告知及急危患者及时救治责任。"
                 ],
                 "evidence_type": "national law",
                 "id": "cn-physician-law",
-                "limitation": "No US specialty equivalence or wage data.",
+                "limitation": "按适用条款解释中国医师资格、注册及职责，不证明外国专业互认或具体手术麻醉权限。",
                 "market": "CN",
                 "name": "中华人民共和国医师法",
                 "period": "effective 2022; accessed 2026-08-30",
                 "publisher": "全国人大常委会；北京市卫生健康委员会转载",
                 "scope": "exact",
-                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html"
               },
               {
                 "accessed_at": "2026-08-30",
@@ -13532,19 +13617,19 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "表2/5卫生社会工作非私营146266/私营75631年税前年均；作者据颌面诊療手术麻醉影像任务仅医疗雇主方向。"
+                  "卫生和社会工作整个行业的城镇单位统计，包含多种职业；不是口腔颌面外科医生工资或个人区间。按NBS调查范围解释，不含个体工商户、自由职业等非单位就业者及经营利润。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "含其他临床社会岗非颌面外科医生工资个人区间，两人口分列，个体自由职业自营利润排除，不用于器械制造销售或证明许可。",
+                "limitation": "卫生和社会工作整个行业的城镇单位统计，包含多种职业；不是口腔颌面外科医生工资或个人区间。按NBS调查范围解释，不含个体工商户、自由职业等非单位就业者及经营利润。",
                 "market": "CN",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025年工资；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-02",
@@ -13562,36 +13647,272 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "阻生第三磨牙相关感染、愈合及神经损伤风险；不支持风险发生率或所有颌面手术治疗指南。"
+                  "本次未取得正文，不作为本页已核风险依据；已核具体风险背景另列NHS患者资料。"
                 ],
                 "evidence_type": "professional clinical guidance",
                 "id": "aaoms-impacted-third-molars",
-                "limitation": "特定牙槽手术的背景；其余风险为编辑情境归纳，临床处置依现行指南与团队权限。",
+                "limitation": "本次未取得正文，不作为本页已核风险依据；已核具体风险背景另列NHS患者资料。",
                 "market": "US",
                 "name": "AAOMS Management of Impacted Third Molar Teeth",
-                "period": "2024临床说明",
+                "period": "2026-11-09 access unsuccessful; full text unverified",
                 "publisher": "AAOMS",
                 "scope": "exact",
                 "url": "https://aaoms.org/wp-content/uploads/2024/07/impacted_third_molars.pdf"
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "核症状、口腔颌面影像和全身风险。 — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "定手术范围、麻醉和会诊方案。 — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "按资质完成拔牙、颌骨或软组织手术。 — 0/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                  "原33%及50/50/0任务评分已撤回，缺少可核实任务效果证据。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
+                "limitation": "无替代定量分数；不是临床效果、AI采用、裁员或个人失业概率证据。",
                 "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "历史估算撤回说明",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "UK patient information on wisdom-tooth removal: complications and seeking professional help; not all maxillofacial operations, incidence estimates or clinical training."
+                ],
+                "evidence_type": "public health service patient information",
+                "id": "review-nhs-wisdom",
+                "limitation": "UK patient information on wisdom-tooth removal: complications and seeking professional help; not all maxillofacial operations, incidence estimates or clinical training.",
+                "market": "UK",
+                "name": "NHS Wisdom tooth removal",
+                "period": "page reviewed 2024-06-12",
+                "publisher": "NHS",
+                "scope": "market_signal",
+                "url": "https://www.nhs.uk/tests-and-treatments/wisdom-tooth-removal/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "UK patient information on dental infection and emergency contexts; no clinical treatment protocol, mainland authorization or occupation-specific risk ranking."
+                ],
+                "evidence_type": "public health service patient information",
+                "id": "review-nhs-abscess",
+                "limitation": "UK patient information on dental infection and emergency contexts; no clinical treatment protocol, mainland authorization or occupation-specific risk ranking.",
+                "market": "UK",
+                "name": "NHS Dental abscess",
+                "period": "page reviewed 2026-03-18",
+                "publisher": "NHS",
+                "scope": "market_signal",
+                "url": "https://www.nhs.uk/conditions/dental-abscess/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Single-school four-year certificate and six-year integrated MD examples; not universal admissions or licensing rules."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-umaryland-oms",
+                "limitation": "Single-school four-year certificate and six-year integrated MD examples; not universal admissions or licensing rules.",
+                "market": "US",
+                "name": "University of Maryland OMS residency",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "University of Maryland",
+                "scope": "market_signal",
+                "url": "https://www.dental.umaryland.edu/departments--divisions/oral-and-maxillofacial-surgery/residency/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "QE, OCE and maintenance; board certification does not grant a state license."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-aboms",
+                "limitation": "QE, OCE and maintenance; board certification does not grant a state license.",
+                "market": "US",
+                "name": "ABOMS board certification",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "ABOMS",
+                "scope": "market_signal",
+                "url": "https://www.aboms.org/become-certified"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Specific certification application education, license and hospital-privilege conditions; not all state anesthesia rules."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-aboms-oce",
+                "limitation": "Specific certification application education, license and hospital-privilege conditions; not all state anesthesia rules.",
+                "market": "US",
+                "name": "ABOMS OCE application details",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "ABOMS",
+                "scope": "market_signal",
+                "url": "https://www.aboms.org/become-certified/oral-certifying-examination/how-apply"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "School curriculum example; undated institutional narrative, not current admissions, employment outcomes or national duration."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-sjtu-dental",
+                "limitation": "School curriculum example; undated institutional narrative, not current admissions, employment outcomes or national duration.",
+                "market": "CN",
+                "name": "Shanghai Jiao Tong dental education",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "Shanghai Jiao Tong University School of Medicine",
+                "scope": "market_signal",
+                "url": "https://www.shsmu.edu.cn/kqxy/zsjy/zsxx1.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Two-year program for applicants meeting stated prior-practice conditions; September application closed, not a universal entry route or career wage."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-jilin-oms",
+                "limitation": "Two-year program for applicants meeting stated prior-practice conditions; September application closed, not a universal entry route or career wage.",
+                "market": "CN",
+                "name": "2026 OMS specialty training",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "Jilin University Dental Hospital",
+                "scope": "market_signal",
+                "url": "https://jdkq.jlu.edu.cn/info/1008/5568.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Post-specific conditions, deadline May 31 2026 passed; no salary, not current vacancies or a national minimum."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-tongji-job",
+                "limitation": "Post-specific conditions, deadline May 31 2026 passed; no salary, not current vacancies or a national minimum.",
+                "market": "CN",
+                "name": "2026 dental hospital recruitment",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "Tongji University Dental Hospital",
+                "scope": "market_signal",
+                "url": "https://kouqiang.tongji.edu.cn/info/1020/4151.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Named subspecialty post examples, deadline February 15 2026 passed; no salary and no extrapolation from merged table cells."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-wuhan-job",
+                "limitation": "Named subspecialty post examples, deadline February 15 2026 passed; no salary and no extrapolation from merged table cells.",
+                "market": "CN",
+                "name": "2026 dental hospital recruitment",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "Wuhan University Hospital of Stomatology",
+                "scope": "market_signal",
+                "url": "https://www.whuss.com/article/12964"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "开展预防、检查、诊疗和修复，也可能进行部分口腔/牙周手术。"
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-dentists-general",
+                "limitation": "美国任务定义，不证明中国映射、相同许可或直接转岗资格。",
+                "market": "US",
+                "name": "普通牙医 · 29-1021.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "通过诊断记录及矫治装置调整牙齿与牙颌关系。"
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-orthodontists",
+                "limitation": "美国任务定义，不证明中国映射、相同许可或直接转岗资格。",
+                "market": "US",
+                "name": "正畸医生 · 29-1023.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1023.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "设计、修复和适配牙科修复体，恢复口腔功能与外观。"
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-prosthodontists",
+                "limitation": "美国任务定义，不证明中国映射、相同许可或直接转岗资格。",
+                "market": "US",
+                "name": "修复医生 · 29-1024.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1024.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "为胎儿、婴幼儿、儿童与青少年开展相关外科诊治。"
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-pediatric-surgeons",
+                "limitation": "美国任务定义，不证明中国映射、相同许可或直接转岗资格。",
+                "market": "US",
+                "name": "儿科外科医师 · 29-1243.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1243.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "在牙医指导下承担有限临床协助及病历、预约等行政任务。"
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-dental-assistants",
+                "limitation": "美国任务定义，不证明中国映射、相同许可或直接转岗资格。",
+                "market": "US",
+                "name": "牙科助理 · 31-9091.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/31-9091.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "按处方或规格、模型制作与修理义齿及牙科装置。"
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-dental-laboratory-technicians",
+                "limitation": "美国任务定义，不证明中国映射、相同许可或直接转岗资格。",
+                "market": "US",
+                "name": "牙科实验室技师 · 51-9081.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-9081.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Employee wage population and straight-time gross wage concept; excludes self-employment income, overtime and specified non-wage items."
+                ],
+                "evidence_type": "official statistical methodology",
+                "id": "review-oews-concepts",
+                "limitation": "Methodological context only; not an additional OMS wage estimate or employment forecast.",
+                "market": "US",
+                "name": "BLS OEWS concepts",
+                "period": "current concepts chapter; accessed 2026-11-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               }
             ]
           },
@@ -13637,24 +13958,24 @@
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "职业任务"
+            "href": "https://www.onetonline.org/link/details/29-1021.00",
+            "label": "普通牙医"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "label": "相邻职业"
+            "href": "https://www.onetonline.org/link/details/29-1023.00",
+            "label": "正畸医生"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "工作活动"
+            "href": "https://www.onetonline.org/link/summary/29-1024.00",
+            "label": "修复医生"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "label": "教育差异"
+            "href": "https://www.onetonline.org/link/summary/29-1243.00",
+            "label": "儿科外科医师"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "职业边界"
+            "href": "https://www.onetonline.org/link/summary/31-9091.00",
+            "label": "牙科助理"
           }
         ],
         "evidence_note": {
@@ -13684,37 +14005,37 @@
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "核心工作与产出": "常规口腔诊疗",
+            "核心工作与产出": "开展预防、检查、诊疗和修复，也可能进行部分口腔/牙周手术。",
             "职业方向": "普通牙医"
           },
           {
-            "关键区别": "更重长期非手术矫正",
-            "更适合什么选择": "喜欢正畸计划",
-            "核心工作与产出": "牙颌矫治",
+            "关键区别": "重点是牙颌关系与矫治计划，需另核该专科训练和执业要求。",
+            "更适合什么选择": "了解自己是否更关注牙颌矫治及长期记录。",
+            "核心工作与产出": "通过诊断记录及矫治装置调整牙齿与牙颌关系。",
             "职业方向": "正畸医生"
           },
           {
-            "关键区别": "更重修复体设计",
-            "更适合什么选择": "喜欢口腔修复",
-            "核心工作与产出": "牙列与口腔修复",
+            "关键区别": "重点是修复体、功能与适配，制作协作与临床职责须分别核对。",
+            "更适合什么选择": "比较对功能、修复体设计与适配的兴趣。",
+            "核心工作与产出": "设计、修复和适配牙科修复体，恢复口腔功能与外观。",
             "职业方向": "修复医生"
           },
           {
-            "关键区别": "专业资格和解剖范围不同",
-            "更适合什么选择": "喜欢其他外科领域",
-            "核心工作与产出": "其他器官手术",
-            "职业方向": "其他外科医生"
+            "关键区别": "人群、解剖范围和儿科外科训练不同，牙科资格不等于儿科外科资格。",
+            "更适合什么选择": "只有对儿科人群与相应医学训练有兴趣时继续研究。",
+            "核心工作与产出": "为胎儿、婴幼儿、儿童与青少年开展相关外科诊治。",
+            "职业方向": "儿科外科医师"
           },
           {
-            "关键区别": "不承担独立手术",
-            "更适合什么选择": "喜欢临床协助",
-            "核心工作与产出": "牙科诊疗辅助",
+            "关键区别": "有限协助职责按适用规则确定，不授独立诊断或手术权。",
+            "更适合什么选择": "比较对临床协助、准备和记录工作的兴趣。",
+            "核心工作与产出": "在牙医指导下承担有限临床协助及病历、预约等行政任务。",
             "职业方向": "牙科助理"
           },
           {
-            "关键区别": "制造而非患者手术",
-            "更适合什么选择": "喜欢精密制作",
-            "核心工作与产出": "制作牙科修复体",
+            "关键区别": "重点为制作和装置技术；临床沟通背景不等于已掌握制作技能或患者诊疗权。",
+            "更适合什么选择": "比较对材料、精密制作与规格检查的兴趣。",
+            "核心工作与产出": "按处方或规格、模型制作与修理义齿及牙科装置。",
             "职业方向": "牙科实验室技师"
           }
         ],
@@ -13779,7 +14100,7 @@
             }
           }
         ],
-        "answer": "编辑分析：可在获准系统中试验病历文本整理和待核问题列表；影像判读、手术计划和临床操作须按医疗器械适用范围及专业权限核验，本页未取得本职业AI采用率或效果实测。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
+        "answer": "尚无经核实的本职业定量AI影响估计。原33%已撤下。WHO健康AI治理介绍提供一般伦理与人权背景，未验证本职业的临床效果、采用率或失业概率。可用下方完整K01/L01虚构文字记录试验字段比较，但不能据此诊断、选术式或麻醉方案，也不能证明已具备临床能力。",
         "authority_links": [
           {
             "来源": "职业任务",
@@ -13824,21 +14145,21 @@
             "链接": "https://www.onetonline.org/link/details/29-1022.00"
           }
         ],
-        "difference_intro": "以下为有条件的任务辅助设想，尚未证明本职业已采用或提高效率；临床判断与患者安全责任仍须由专业团队承担。",
+        "difference_intro": "以下只是在K01/L01-v1虚构文字上的工具试验设想，不评价影像、患者、术式或麻醉，也没有测量速度、准确性或临床效果。",
         "difference_rows": [
           {
-            "AI主要改变": "编辑候选，采用效果未验证：在获准系统整理病史文字和待核影像清单。",
-            "仍由人负责": "核患者、原始影像和全身风险，影像判读由合格团队。",
+            "AI主要改变": "试验列出所用原件",
+            "仍由人负责": "只使用题面，不补患者或临床资料",
             "方向": "病史影像"
           },
           {
-            "AI主要改变": "编辑候选，采用效果未验证：整理已记录症状、证据和待核问题。",
-            "仍由人负责": "专业团队核诊断、不确定性和会诊，模型不确诊。",
+            "AI主要改变": "试验标出K01冲突",
+            "仍由人负责": "保留左/右原值，不决定正确侧别",
             "方向": "诊断评估"
           },
           {
-            "AI主要改变": "编辑候选，采用效果未验证：整理既定会诊、术前资料和记录版本。",
-            "仍由人负责": "有权临床团队决定适应证、范围和麻醉。",
+            "AI主要改变": "试验识别未提供",
+            "仍由人负责": "未提供保持未知，不改成已完成或没有",
             "方向": "术前计划"
           }
         ],
@@ -13898,140 +14219,140 @@
         ],
         "questions": [
           {
-            "回答": "不能；手术适应证、麻醉、知情同意和并发症处置责任须人工核。",
-            "来源": "WHO健康AI治理（一般原则）",
+            "回答": "不能；只比较给定文字，不决定诊断、术式、麻醉或开台。",
+            "来源": "本站编辑练习；WHO链接仅为一般治理背景",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "AI可独立操作吗？"
+            "问题": "这项试验能作临床决定吗？"
           },
           {
-            "回答": "回到原始记录并暂停高风险操作。",
-            "来源": "WHO健康AI治理（一般原则）",
+            "回答": "本题保留原值并指出冲突，不让工具猜哪一侧正确。",
+            "来源": "本站编辑练习；WHO链接仅为一般治理背景",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "输入错误怎么办？"
+            "问题": "模型改错侧别怎么办？"
           },
           {
-            "回答": "只用获准系统和权限。",
-            "来源": "WHO健康AI治理（一般原则）",
+            "回答": "本题只用已给出的虚构输入，不需要或接收真实病例。",
+            "来源": "本站编辑练习；WHO链接仅为一般治理背景",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "可上传真实数据吗？"
+            "问题": "可以使用真实患者资料吗？"
           },
           {
-            "回答": "对照影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录和现场。",
-            "来源": "WHO健康AI治理（一般原则）",
+            "回答": "逐字段对照K01/L01-v1及参考，区分原值、空白、未提供和个人注释。",
+            "来源": "本站编辑练习；WHO链接仅为一般治理背景",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "如何检查输出？"
+            "问题": "怎样核输出？"
           },
           {
-            "回答": "官方就业表不能推导单项替代率。",
+            "回答": "本页没有可核实的比例；总体就业预测不能回答单项技术的因果。",
             "来源": "官方职业资料",
             "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "问题": "AI会替代多少岗位？"
           },
           {
-            "回答": "临床团队按法定执业范围与机构授权承担诊疗责任；具体责任认定依当地法律。",
-            "来源": "WHO健康AI治理（一般原则）",
+            "回答": "只形成一份文字核对练习，不能证明临床能力或取得医疗资格。",
+            "来源": "本站编辑练习；WHO链接仅为一般治理背景",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "谁承担结果责任？"
+            "问题": "完成题目证明什么？"
           },
           {
-            "回答": "出现标识冲突、关键资料缺失或超出授权时，交有权限团队处置；急症按医疗机构流程处理。",
-            "来源": "WHO健康AI治理（一般原则）",
+            "回答": "写成待核问题，不伪造专业回复、签名或放行。",
+            "来源": "本站编辑练习；WHO链接仅为一般治理背景",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "何时升级？"
+            "问题": "有未决问题怎么办？"
           }
         ],
-        "responsibility_intro": "只用虚构样本试工具，真实业务核患者数据权限、影像验证、手术授权和医师复核。",
+        "responsibility_intro": "以下为本站纸面试验要求，WHO发布页仅提供一般治理背景；不是WHO规定的临床SOP。",
         "responsibility_steps": [
           {
-            "步骤": "核对象",
-            "说明": "核症状、口腔颌面影像和全身风险。"
+            "步骤": "限定输入",
+            "说明": "只用完整K01/L01-v1虚构文字。"
           },
           {
-            "步骤": "核任务",
-            "说明": "识别阻生牙、感染、肿瘤或创伤。"
+            "步骤": "核原值",
+            "说明": "逐字段核标识、侧别、评估与签名。"
           },
           {
-            "步骤": "核记录",
-            "说明": "影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录"
+            "步骤": "保未知",
+            "说明": "不补题目未提供的信息。"
           },
           {
-            "步骤": "核异常",
-            "说明": "术前评估并备应急团队。"
+            "步骤": "留痕迹",
+            "说明": "注释和更正不覆盖原件。"
           },
           {
-            "步骤": "核授权",
-            "说明": "手术适应证、麻醉、知情同意和并发症处置责任"
+            "步骤": "列问题",
+            "说明": "不冒充已获专业复核或手术放行。"
           }
         ],
         "risk_rows": [
           {
-            "为什么重要": "呼吸危及生命。",
-            "控制方式": "术前评估并备应急团队。",
-            "风险": "气道风险"
+            "为什么重要": "需要合格团队及时评估，不由职业兴趣练习判断严重程度。",
+            "控制方式": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "风险": "感染与呼吸/吞咽困难"
           },
           {
-            "为什么重要": "败血症或气道受压。",
-            "控制方式": "急症识别与转院会诊。",
-            "风险": "感染扩散"
+            "为什么重要": "病情需要专业诊疗，不能从纸面题目推治疗方案。",
+            "控制方式": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "风险": "牙源性感染"
           },
           {
-            "为什么重要": "感觉或功能障碍。",
-            "控制方式": "影像规划与知情同意。",
-            "风险": "神经损伤"
+            "为什么重要": "感觉异常可能持续；不据此给个人预测或所有手术发生率。",
+            "控制方式": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "风险": "智齿拔除与神经损伤"
           },
           {
-            "为什么重要": "术中严重出血。",
-            "控制方式": "核病史和止血预案。",
-            "风险": "出血"
+            "为什么重要": "需要专业评估；本页不推断凝血或血管原因。",
+            "控制方式": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "风险": "智齿拔除后出血"
           },
           {
-            "为什么重要": "错误拔牙。",
-            "控制方式": "患者、影像和部位三重核查。",
-            "风险": "错位手术"
+            "为什么重要": "只可判文字不一致，不能决定患者的手术侧别。",
+            "控制方式": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "风险": "虚构记录侧别冲突"
           }
         ],
         "task_rows": [
           {
-            "人的控制点": "核患者、原始影像和全身风险，影像判读由合格团队。",
-            "任务": "核症状、口腔颌面影像和全身风险。",
-            "工作方向": "病史影像",
-            "当前变化": "编辑候选，采用效果未验证：在获准系统整理病史文字和待核影像清单。"
+            "人的控制点": "只使用题面，不补患者或临床资料",
+            "任务": "核K01/L01标识与v1版本",
+            "工作方向": "定位输入",
+            "当前变化": "试验列出所用原件"
           },
           {
-            "人的控制点": "专业团队核诊断、不确定性和会诊，模型不确诊。",
-            "任务": "识别阻生牙、感染、肿瘤或创伤。",
-            "工作方向": "诊断评估",
-            "当前变化": "编辑候选，采用效果未验证：整理已记录症状、证据和待核问题。"
+            "人的控制点": "保留左/右原值，不决定正确侧别",
+            "任务": "对照计划、影像标签和同意栏",
+            "工作方向": "比较侧别",
+            "当前变化": "试验标出K01冲突"
           },
           {
-            "人的控制点": "有权临床团队决定适应证、范围和麻醉。",
-            "任务": "定手术范围、麻醉和会诊方案。",
-            "工作方向": "术前计划",
-            "当前变化": "编辑候选，采用效果未验证：整理既定会诊、术前资料和记录版本。"
+            "人的控制点": "未提供保持未知，不改成已完成或没有",
+            "任务": "检查K01评估与签名栏",
+            "工作方向": "识别未知",
+            "当前变化": "试验识别未提供"
           },
           {
-            "人的控制点": "负责团队核风险替代方案并完成真实沟通同意。",
-            "任务": "解释替代方案、风险与恢复。",
-            "工作方向": "知情同意",
-            "当前变化": "编辑候选，采用效果未验证：试作经审核资料的表达草稿。"
+            "人的控制点": "不生成评估、签名或授权",
+            "任务": "检查L01评估与签名栏",
+            "工作方向": "识别空白",
+            "当前变化": "试验区分空白和未提供"
           },
           {
-            "人的控制点": "具资格与机构权限者执行手术，文书工具不操作。",
-            "任务": "按资质完成拔牙、颌骨或软组织手术。",
-            "工作方向": "外科手术",
-            "当前变化": "编辑候选，采用效果未验证：仅整理已产生的手术记录及未决项。"
+            "人的控制点": "一致性不证明临床安全或可以手术",
+            "任务": "检查侧别一致能证明什么",
+            "工作方向": "审查推断",
+            "当前变化": "试验查找过强结论"
           },
           {
-            "人的控制点": "按当前机构流程由合格团队评估升级，不等模型输出。",
-            "任务": "处理感染、创伤及术中异常。",
-            "工作方向": "急症处置",
-            "当前变化": "编辑候选，采用效果未验证：整理已记录的异常时间线供团队核。"
+            "人的控制点": "个人注释与原件分开，不覆盖来源",
+            "任务": "对照参考保留原值和注释",
+            "工作方向": "记录更正",
+            "当前变化": "试验草拟比较表"
           },
           {
-            "人的控制点": "核真实患者反应、随访及异常处置责任。",
-            "任务": "监测出血、感染、神经功能和愈合。",
-            "工作方向": "术后随访",
-            "当前变化": "编辑候选，采用效果未验证：汇总已记录症状与随访待核项。"
+            "人的控制点": "没有专业反馈，不假称已获复核或放行",
+            "任务": "列需要合格团队核实的事项",
+            "工作方向": "整理问题",
+            "当前变化": "试验组织问题单"
           }
         ],
         "transition": "转相邻岗位需补目标职业训练和资格。"
@@ -14100,13 +14421,13 @@
             "stage": "七日纸面作品"
           }
         ],
-        "direct_answer": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
-        "entry_heading": "先学基础任务，再受监督实践",
+        "direct_answer": "美国通常先完成DDS/DMD等牙科专业教育，再接受口腔颌面外科4—6年专科训练，部分项目结合MD；州执照、ABOMS专科认证及医院权限是不同事项。大陆须分别核对口腔医学教育、医师资格考试、执业注册与岗位要求；现有从业者的专培项目不等于初次入行条件。",
+        "entry_heading": "先核教育资格，再区分纸面探索与正式训练",
         "heading": "口腔颌面外科医生训练与资格路径",
         "locale_requirements": {
           "credential_boundary": "课程或兴趣分数不自动授独立工作权限。",
           "jurisdiction": "美国29-1022.00与中国岗位资格分别核。",
-          "summary": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。"
+          "summary": "美国通常先完成DDS/DMD等牙科专业教育，再接受口腔颌面外科4—6年专科训练，部分项目结合MD；州执照、ABOMS专科认证及医院权限是不同事项。大陆须分别核对口腔医学教育、医师资格考试、执业注册与岗位要求；现有从业者的专培项目不等于初次入行条件。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14123,16 +14444,16 @@
             "scope": "美国29-1022.00精确职业"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://jdkq.jlu.edu.cn/info/1008/5568.htm",
             "id": "onet-training",
-            "label": "职业预测",
-            "scope": "美国29-1022.00精确职业"
+            "label": "吉林2026在岗OMS专培",
+            "scope": "在岗人员项目例，非初次入行统一条件"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
+            "href": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html",
             "id": "faa",
-            "label": "工作活动",
-            "scope": "美国29-1022.00精确职业"
+            "label": "中国医师法",
+            "scope": "医师资格、注册及职责，非美国牙科许可"
           }
         ],
         "tracks": [
@@ -14151,14 +14472,14 @@
                 "next_moves": "根据监督反馈、实际能力和资格核验决定下一步；不以阶段标签自动授予权限。",
                 "readiness_evidence": "监督者反馈、病历核对及能力评估记录。",
                 "responsibility": "在相应教育与临床训练中，由监督者指导开展病史影像相关任务。",
-                "role": "受训执行"
+                "role": "正式监督训练"
               },
               {
                 "credentials": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
                 "next_moves": "根据监督反馈、实际能力和资格核验决定下一步；不以阶段标签自动授予权限。",
                 "readiness_evidence": "获准任务记录、知情同意与下一责任人确认。",
-                "responsibility": "具备相应执业资格和机构权限后，核症状、口腔颌面影像和全身风险。；记录判断、沟通与转交。",
-                "role": "独立交接"
+                "responsibility": "具备相应执业资格和机构权限后，核症状、口腔颌面影像和全身风险；记录判断、沟通与转交。",
+                "role": "在执业与岗位范围内履职"
               },
               {
                 "credentials": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
@@ -14185,14 +14506,14 @@
                 "next_moves": "根据监督反馈、实际能力和资格核验决定下一步；不以阶段标签自动授予权限。",
                 "readiness_evidence": "监督者反馈、病历核对及能力评估记录。",
                 "responsibility": "在相应教育与临床训练中，由监督者指导开展术前计划相关任务。",
-                "role": "受训执行"
+                "role": "正式监督训练"
               },
               {
                 "credentials": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
                 "next_moves": "根据监督反馈、实际能力和资格核验决定下一步；不以阶段标签自动授予权限。",
                 "readiness_evidence": "获准任务记录、知情同意与下一责任人确认。",
-                "responsibility": "具备相应执业资格和机构权限后，定手术范围、麻醉和会诊方案。；记录判断、沟通与转交。",
-                "role": "独立交接"
+                "responsibility": "具备相应执业资格和机构权限后，定手术范围、麻醉和会诊方案；记录判断、沟通与转交。",
+                "role": "在执业与岗位范围内履职"
               },
               {
                 "credentials": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
@@ -14219,14 +14540,14 @@
                 "next_moves": "根据监督反馈、实际能力和资格核验决定下一步；不以阶段标签自动授予权限。",
                 "readiness_evidence": "监督者反馈、病历核对及能力评估记录。",
                 "responsibility": "在相应教育与临床训练中，由监督者指导开展外科手术相关任务。",
-                "role": "受训执行"
+                "role": "正式监督训练"
               },
               {
                 "credentials": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
                 "next_moves": "根据监督反馈、实际能力和资格核验决定下一步；不以阶段标签自动授予权限。",
                 "readiness_evidence": "获准任务记录、知情同意与下一责任人确认。",
-                "responsibility": "具备相应执业资格和机构权限后，按资质完成拔牙、颌骨或软组织手术。；记录判断、沟通与转交。",
-                "role": "独立交接"
+                "responsibility": "具备相应执业资格和机构权限后，按资质完成拔牙、颌骨或软组织手术；记录判断、沟通与转交。",
+                "role": "在执业与岗位范围内履职"
               },
               {
                 "credentials": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
@@ -14257,7 +14578,7 @@
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "外科医师：外科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+                  "label": "场景与流程",
                   "secondary_value": {
                     "$item": "oral-and-maxillofacial-surgeons.profile.definition-block.3",
                     "block": "profile",
@@ -14273,7 +14594,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "外科医师：外科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+                  "label": "专业训练与工具",
                   "secondary_value": {
                     "$item": "oral-and-maxillofacial-surgeons.profile.definition-block.5",
                     "block": "profile",
@@ -14289,7 +14610,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "外科医师：外科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+                  "label": "记录与交接",
                   "secondary_value": null,
                   "value": {
                     "$item": "oral-and-maxillofacial-surgeons.profile.definition-block.7",
@@ -14358,7 +14679,7 @@
             }
           },
           {
-            "answer": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。",
+            "answer": "美国通常先完成DDS/DMD等牙科专业教育，再接受口腔颌面外科4—6年专科训练，部分项目结合MD；州执照、ABOMS专科认证及医院权限是不同事项。大陆须分别核对口腔医学教育、医师资格考试、执业注册与岗位要求；现有从业者的专培项目不等于初次入行条件。",
             "key": "qa1",
             "question": "怎样入行？",
             "table": {
@@ -14366,38 +14687,38 @@
                 {
                   "alternate_value": null,
                   "label": "基础教育",
-                  "secondary_value": "核招聘",
-                  "value": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。"
+                  "secondary_value": "通常DDS/DMD；项目录取条件另核",
+                  "value": "美国牙科专业教育"
                 },
                 {
                   "alternate_value": null,
                   "label": "技能训练",
-                  "secondary_value": "核岗位",
-                  "value": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。"
+                  "secondary_value": "OMS通常4—6年，部分结合MD；非人人必须MD",
+                  "value": "美国专科训练"
                 },
                 {
                   "alternate_value": null,
                   "label": "受监督实践",
-                  "secondary_value": "核反馈",
-                  "value": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。"
+                  "secondary_value": "在合适的正式教育、监督与任务范围内学习，纸面练习不能替代",
+                  "value": "正式受监督实践"
                 },
                 {
                   "alternate_value": null,
                   "label": "职业资格",
-                  "secondary_value": "核地区",
-                  "value": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。"
+                  "secondary_value": "州许可和ABOMS QE/OCE认证不同；按实际适用要求核对",
+                  "value": "州执照与专科认证"
                 },
                 {
                   "alternate_value": null,
                   "label": "机构授权",
-                  "secondary_value": "核有效期",
-                  "value": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。"
+                  "secondary_value": "核具体手术、麻醉、监督及急症职责，不凭课程或认证推定",
+                  "value": "机构权限"
                 },
                 {
                   "alternate_value": null,
                   "label": "中国岗位",
-                  "secondary_value": "核本地规则",
-                  "value": "BLS列博士或专业学位及实习/住院医师训练；美国牙科执照、口腔颌面外科培训与麻醉手术权限按州和机构核，中国医师/口腔资格另核。"
+                  "secondary_value": "分别核教育、法定资格、注册及机构要求；校院案例不推广全国",
+                  "value": "大陆路径与岗位"
                 }
               ]
             }
@@ -14447,72 +14768,72 @@
             },
             "evidence_refs": [
               "onet",
-              "clinical"
+              "abscess"
             ],
             "id": "cost-change",
-            "mitigation": "术前评估并备应急团队。",
-            "scenario": "颌面肿胀或麻醉评估不足。",
-            "title": "气道风险"
+            "mitigation": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "scenario": "NHS牙脓肿页列呼吸或吞咽困难等紧急情境。",
+            "title": "感染与呼吸/吞咽困难"
           },
           {
-            "affected_roles": "涉及感染扩散评估、手术及随访的口腔颌面外科团队",
-            "consequence": "感染进展可能影响患者安全并增加急症处置负担。",
+            "affected_roles": "相关合格临床团队",
+            "consequence": "病情需要专业诊疗，不能从纸面题目推治疗方案。",
             "evidence_refs": [
               "onet",
-              "clinical"
+              "abscess"
             ],
             "id": "record-version",
-            "mitigation": "急症识别与转院会诊。",
-            "scenario": "深部颌面感染迟处理。",
-            "title": "感染扩散"
+            "mitigation": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "scenario": "NHS说明牙脓肿是牙齿或牙龈感染相关脓液积聚，需及时牙科治疗。",
+            "title": "牙源性感染"
           },
           {
-            "affected_roles": "涉及神经损伤评估、手术及随访的口腔颌面外科团队",
-            "consequence": "可能发生感觉异常或功能受损。",
+            "affected_roles": "相关合格临床团队",
+            "consequence": "感觉异常可能持续；不据此给个人预测或所有手术发生率。",
             "evidence_refs": [
               "onet",
               "clinical"
             ],
             "id": "personal-data",
-            "mitigation": "影像规划与知情同意。",
-            "scenario": "手术范围和影像核对不足。",
-            "title": "神经损伤"
+            "mitigation": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "scenario": "NHS说明智齿拔除可能损伤邻近神经，导致感觉异常。",
+            "title": "智齿拔除与神经损伤"
           },
           {
-            "affected_roles": "涉及出血评估、手术及随访的口腔颌面外科团队",
-            "consequence": "可能发生出血并影响手术安全。",
+            "affected_roles": "相关合格临床团队",
+            "consequence": "需要专业评估；本页不推断凝血或血管原因。",
             "evidence_refs": [
               "onet",
               "clinical"
             ],
             "id": "technical-boundary",
-            "mitigation": "核病史和止血预案。",
-            "scenario": "凝血或血管风险漏评。",
-            "title": "出血"
+            "mitigation": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "scenario": "NHS智齿拔除页将持续出血列为应寻求及时专业帮助的情况。",
+            "title": "智齿拔除后出血"
           },
           {
-            "affected_roles": "涉及错位手术评估、手术及随访的口腔颌面外科团队",
-            "consequence": "可能对错误牙位或部位实施操作。",
+            "affected_roles": "相关合格临床团队",
+            "consequence": "只可判文字不一致，不能决定患者的手术侧别。",
             "evidence_refs": [
-              "onet",
-              "clinical"
+              "fermat-input",
+              "fermat-reference"
             ],
             "id": "single-coverage",
-            "mitigation": "患者、影像和部位三重核查。",
-            "scenario": "牙位或手术部位不符。",
-            "title": "错位手术"
+            "mitigation": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "scenario": "K01-v1的计划左、影像标签右、知情同意左，尚不能确定正确侧别。",
+            "title": "虚构记录侧别冲突"
           },
           {
-            "affected_roles": "涉及术后漏访评估、手术及随访的口腔颌面外科团队",
-            "consequence": "可能延迟识别术后出血、感染或其他并发症。",
+            "affected_roles": "相关合格临床团队",
+            "consequence": "沟通缺口可能妨碍及时获得专业帮助，不能据本题判断真实患者情况。",
             "evidence_refs": [
               "onet",
               "clinical"
             ],
             "id": "delivery-acceptance",
-            "mitigation": "明确复诊与急症说明。",
-            "scenario": "感染或出血未及时复查。",
-            "title": "术后漏访"
+            "mitigation": "职业核对问题：向正式项目或机构了解风险告知、术后联络和异常升级由谁负责；具体处置按其现行规程。",
+            "scenario": "NHS智齿拔除资料列症状加重、感染及出血等求助情境；具体随访安排依机构。",
+            "title": "术后沟通与随访"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -14530,28 +14851,28 @@
             "scope": "美国牙医合并叙述与专科训练"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "id": "facilities",
-            "label": "工作环境",
-            "scope": "美国29-1022.00精确职业"
+            "href": "#career-visual-group-path",
+            "id": "fermat-input",
+            "label": "FermatMind虚构题面",
+            "scope": "本站K01/L01-v1原值，编辑设例而非临床记录"
           },
           {
-            "href": "https://www.who.int/publications/i/item/9789240029200",
-            "id": "privacy",
-            "label": "健康AI治理",
-            "scope": "一般治理原则；不提供临床风险概率"
+            "href": "#career-visual-group-path",
+            "id": "fermat-reference",
+            "label": "FermatMind文字核对参考",
+            "scope": "本站逐字段参考与待核问题，不是O*NET/BLS临床证据"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "id": "onet",
-            "label": "职业活动",
-            "scope": "美国29-1022.00精确职业"
+            "href": "https://www.nhs.uk/conditions/dental-abscess/",
+            "id": "abscess",
+            "label": "NHS牙脓肿患者信息",
+            "scope": "感染与紧急求助背景；不规定本页临床处置"
           },
           {
-            "href": "https://aaoms.org/wp-content/uploads/2024/07/impacted_third_molars.pdf",
+            "href": "https://www.nhs.uk/tests-and-treatments/wisdom-tooth-removal/",
             "id": "clinical",
-            "label": "AAOMS阻生第三磨牙说明",
-            "scope": "特定牙槽手术风险背景；六卡为编辑归纳"
+            "label": "NHS智齿拔除患者信息",
+            "scope": "仅智齿手术相关背景；非所有颌面手术指南"
           }
         ]
       },
@@ -14576,12 +14897,12 @@
             {
               "指标": "2025卫生和社会工作·城镇非私营",
               "数值": "146,266元/年（税前）",
-              "说明": "仅医疗雇主宽行业，含其他临床社会岗位非颌面外科医生工资个人区间。"
+              "说明": "卫生和社会工作整个行业的城镇单位统计，包含多种职业；不是口腔颌面外科医生工资或个人区间。按NBS调查范围解释，不含个体工商户、自由职业等非单位就业者及经营利润。"
             },
             {
               "指标": "2025卫生和社会工作·城镇私营",
               "数值": "75,631元/年（税前）",
-              "说明": "两人口分列非个人区间，个体自由职业自营利润排除，不用于器械制造销售。"
+              "说明": "卫生和社会工作整个行业的城镇单位统计，包含多种职业；不是口腔颌面外科医生工资或个人区间。按NBS调查范围解释，不含个体工商户、自由职业等非单位就业者及经营利润。"
             }
           ],
           "china_ai_row": {
@@ -14598,46 +14919,46 @@
           },
           "china_edu_table": [
             {
-              "学历段": "牙科教育",
-              "岗位方向": "口腔医学与临床",
-              "说明": "核专业学位。"
+              "学历段": "口腔医学教育",
+              "岗位方向": "校例：上海交通大学口腔医学院",
+              "说明": "页面列口腔外科、畸形、肿瘤与修复等课程；不作当前招生批次或全国统一学制证明。"
             },
             {
-              "学历段": "外科住院训练",
-              "岗位方向": "手术与麻醉",
-              "说明": "受监督。"
+              "学历段": "法定资格与注册",
+              "岗位方向": "大陆医师资格和口腔类别注册",
+              "说明": "按医师法及注册规则核资格、执业地点/类别/范围；学历或培训不自动授手术权限。"
             },
             {
-              "学历段": "执照授权",
-              "岗位方向": "法定准入及机构权限",
-              "说明": "按地区。"
+              "学历段": "在岗专培校院例",
+              "岗位方向": "吉林大学2026口腔颌面外科专培",
+              "说明": "该项目两年，申请者须满足公告中的已有训练/职称等条件及口腔执业资格；非初次入行只需两年。"
             },
             {
-              "学历段": "继续教育",
-              "岗位方向": "新技术与并发症",
-              "说明": "按监管。"
+              "学历段": "具体岗位条件",
+              "岗位方向": "同济口腔医院2026已截止招聘",
+              "说明": "该口腔颌面外科岗位要求博士及相关专业，口腔临床岗另列住培或主治资格；非全国最低条件。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "口腔医院",
-              "需求": "复杂拔牙与颌面手术。"
+              "行业": "口腔医院岗位例",
+              "需求": "同济2026公告列口腔颌面外科博士岗位，5月31日截止；没有工资金额。"
             },
             {
-              "行业": "综合医院",
-              "需求": "创伤感染和重建。"
+              "行业": "亚专科岗位例",
+              "需求": "武大口腔2026公告列正颌/唇腭裂、头颈肿瘤及创伤等方向，2月15日截止；不证明当前空缺。"
             },
             {
-              "行业": "教学医院",
-              "需求": "手术与专科培养。"
+              "行业": "培养场景例",
+              "需求": "吉林2026专培安排门诊、病房及相关科室轮转；属于培养安排，不是招聘或工资数据。"
             }
           ],
           "china_intl": "O*NET美国职业任务｜https://www.onetonline.org/link/details/29-1022.00",
-          "china_name_row": "中国工资：医疗雇主宽行业参考",
+          "china_name_row": "中国工资：卫生和社会工作行业背景",
           "china_open": "中国岗位与美国29-1022.00不一一映射。",
           "china_open_note": "核地区、雇主、资格、工时与福利。",
-          "china_ref": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
-          "china_salary_note": "证据不足：全国同职中位分位起薪未取得；2025卫生社会工作非私营146266/私营75631年税前年均仅医疗雇主宽行业，含其他岗非本职工资个人区间，排个体自由职业自营诊所利润，不用于器械制造销售。",
+          "china_ref": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "尚无本职业全国同口径中位数、分位或统一起薪。2025卫生和社会工作城镇非私营146,266元、私营75,631元，为分别统计的年税前平均工资；行业含多种职业，不是本职业工资、个人区间或自营诊所利润。调查覆盖城镇5人及以上法人单位，按非私营/私营调查口径分别解释，不含个体工商户和自由职业等非单位就业者。",
           "china_salary_table": [
             {
               "城市/区间": "中国数据状态",
@@ -14663,7 +14984,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
+          "sources_note": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
           "ui": {
             "ai_heading": "工具与责任边界",
             "driver_heading": "影响因素",
@@ -14898,7 +15219,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "愿完成牙科专业教育和外科住院训练，承担麻醉、手术及并发症风险，可探索口腔颌面外科；可用虚构样本核影像诊断、手术计划、麻醉评估、知情同意、手术与随访记录。",
+        "summary": "若你愿长期学习口腔颌面外科并了解患者沟通与团队责任，可继续研究具体课程与岗位。先用K01/L01-v1练习比较文字原值、侧别冲突、缺项和未知，再列待核问题；不核影像诊断、手术计划或临床能力。",
         "title": "口腔颌面外科医生"
       },
       "fit_decision_checklist": {
@@ -15025,64 +15346,64 @@
         ],
         "transitions": [
           {
-            "capability_gaps": "普通牙科方向需核广泛的预防与基础诊疗能力、当地许可和机构授权；目标页面采用SOC29-1020牙医大类，含普通及专科，大类统计不能替代普通牙医统计。",
-            "shared_capabilities": "病史采集、口腔检查、患者沟通与感染控制。",
+            "capability_gaps": "普通牙医也需专业牙科教育和许可；OMS另有专科手术训练，不能用是否“做手术”简单二分。",
+            "shared_capabilities": "开展预防、检查、诊疗和修复，也可能进行部分口腔/牙周手术。",
             "target_href": "/zh/career/jobs/dentists-general",
             "target_slug": "dentists-general",
-            "target_title": "牙医（大类页面）",
+            "target_title": "普通牙医",
             "transition_distance": "编辑判断：需另核资格"
           },
           {
-            "capability_gaps": "更重长期非手术矫正",
-            "shared_capabilities": "口腔颌面影像与多学科治疗计划沟通。",
+            "capability_gaps": "重点是牙颌关系与矫治计划，需另核该专科训练和执业要求。",
+            "shared_capabilities": "通过诊断记录及矫治装置调整牙齿与牙颌关系。",
             "target_href": "/zh/career/jobs/orthodontists",
             "target_slug": "orthodontists",
             "target_title": "正畸医生",
             "transition_distance": "编辑判断：需另核资格"
           },
           {
-            "capability_gaps": "更重修复体设计",
-            "shared_capabilities": "口腔颌面评估、修复需求沟通和团队协作。",
+            "capability_gaps": "重点是修复体、功能与适配，制作协作与临床职责须分别核对。",
+            "shared_capabilities": "设计、修复和适配牙科修复体，恢复口腔功能与外观。",
             "target_href": "/zh/career/jobs/prosthodontists",
             "target_slug": "prosthodontists",
             "target_title": "修复医生",
             "transition_distance": "编辑判断：需另核资格"
           },
           {
-            "capability_gaps": "原其他外科目标无固定页，改供比较真实儿科外科；须另补儿科医学、全身外科训练和执业机构授权，非牙科手术权限平移。",
-            "shared_capabilities": "围手术期沟通、病历与风险交接。",
+            "capability_gaps": "人群、解剖范围和儿科外科训练不同，牙科资格不等于儿科外科资格。",
+            "shared_capabilities": "为胎儿、婴幼儿、儿童与青少年开展相关外科诊治。",
             "target_href": "/zh/career/jobs/pediatric-surgeons",
             "target_slug": "pediatric-surgeons",
             "target_title": "儿科外科医师",
             "transition_distance": "编辑判断：需另核资格"
           },
           {
-            "capability_gaps": "不承担独立手术",
-            "shared_capabilities": "牙科环境、器械与感染控制知识；助理按岗位范围协助。",
+            "capability_gaps": "有限协助职责按适用规则确定，不授独立诊断或手术权。",
+            "shared_capabilities": "在牙医指导下承担有限临床协助及病历、预约等行政任务。",
             "target_href": "/zh/career/jobs/dental-assistants",
             "target_slug": "dental-assistants",
             "target_title": "牙科助理",
             "transition_distance": "编辑判断：需另核资格"
           },
           {
-            "capability_gaps": "制造而非患者手术",
-            "shared_capabilities": "口腔解剖及修复需求沟通；制作技术需另学。",
+            "capability_gaps": "重点为制作和装置技术；临床沟通背景不等于已掌握制作技能或患者诊疗权。",
+            "shared_capabilities": "按处方或规格、模型制作与修理义齿及牙科装置。",
             "target_href": "/zh/career/jobs/dental-laboratory-technicians",
             "target_slug": "dental-laboratory-technicians",
             "target_title": "牙科实验室技师",
             "transition_distance": "编辑判断：需另核资格"
           },
           {
-            "capability_gaps": "普通牙科方向需核广泛的预防与基础诊疗能力、当地许可和机构授权；目标页面采用SOC29-1020牙医大类，含普通及专科，大类统计不能替代普通牙医统计。",
-            "shared_capabilities": "病史采集、口腔检查、患者沟通与感染控制。",
+            "capability_gaps": "下一步问题：目标项目与岗位如何区分综合诊疗、专科转诊及机构权限？",
+            "shared_capabilities": "对照常规口腔诊疗与OMS专科任务，不使用大类工资代替单项职业统计。",
             "target_href": "/zh/career/jobs/dentists-general",
             "target_slug": "dentists-general",
-            "target_title": "牙医（大类页面）",
+            "target_title": "普通牙医",
             "transition_distance": "编辑判断：需另核资格"
           },
           {
-            "capability_gaps": "更重长期非手术矫正",
-            "shared_capabilities": "口腔颌面影像与多学科治疗计划沟通。",
+            "capability_gaps": "下一步问题：所需正畸专科课程、监督实践与当地资格是什么？",
+            "shared_capabilities": "比较牙颌矫治计划、记录随访与颌面外科协作中的兴趣。",
             "target_href": "/zh/career/jobs/orthodontists",
             "target_slug": "orthodontists",
             "target_title": "正畸医生",
@@ -15237,110 +15558,110 @@
           }
         ],
         "boundary": "兴趣测评不证明手术适应证、麻醉、知情同意和并发症处置责任能力或资格。",
-        "direct_answer": "能系统核病史、影像、气道和感染风险，并与麻醉、修复及正畸团队合作。",
+        "direct_answer": "兴趣只帮助决定是否继续探索；本页文字练习观察记录核对与提问意愿，不验证诊疗能力。",
         "directions": [
           {
             "direction": "普通牙医",
-            "fit_signals": "喜欢一般牙科",
+            "fit_signals": "比较自己对综合口腔诊疗与专科外科的兴趣。",
             "target": {
               "href": "/zh/career/jobs/dentists-general",
               "slug": "dentists-general",
-              "title": "牙医（大类页面）"
+              "title": "普通牙医"
             },
-            "watchouts": "普通牙科方向仍需核一般诊疗能力与当地授权；链接当前为SOC29-1020牙医大类，包含普通牙医和各专科，不能把页面大类工资视为普通牙医工资。"
+            "watchouts": "普通牙医也需专业牙科教育和许可；OMS另有专科手术训练，不能用是否“做手术”简单二分。"
           },
           {
             "direction": "正畸医生",
-            "fit_signals": "喜欢正畸计划",
+            "fit_signals": "了解自己是否更关注牙颌矫治及长期记录。",
             "target": {
               "href": "/zh/career/jobs/orthodontists",
               "slug": "orthodontists",
               "title": "正畸医生"
             },
-            "watchouts": "目标职业教育、资格和责任范围另核。"
+            "watchouts": "重点是牙颌关系与矫治计划，需另核该专科训练和执业要求。"
           },
           {
             "direction": "修复医生",
-            "fit_signals": "喜欢口腔修复",
+            "fit_signals": "比较对功能、修复体设计与适配的兴趣。",
             "target": {
               "href": "/zh/career/jobs/prosthodontists",
               "slug": "prosthodontists",
               "title": "修复医生"
             },
-            "watchouts": "目标职业教育、资格和责任范围另核。"
+            "watchouts": "重点是修复体、功能与适配，制作协作与临床职责须分别核对。"
           },
           {
             "direction": "儿科外科医师",
-            "fit_signals": "若偏好该方向任务，可观察：围手术期沟通、病历与风险交接。",
+            "fit_signals": "只有对儿科人群与相应医学训练有兴趣时继续研究。",
             "target": {
               "href": "/zh/career/jobs/pediatric-surgeons",
               "slug": "pediatric-surgeons",
               "title": "儿科外科医师"
             },
-            "watchouts": "原其他外科目标无固定页，改供比较真实儿科外科；须另补儿科医学、全身外科训练和执业机构授权，非牙科手术权限平移。"
+            "watchouts": "人群、解剖范围和儿科外科训练不同，牙科资格不等于儿科外科资格。"
           },
           {
             "direction": "牙科助理",
-            "fit_signals": "喜欢临床协助",
+            "fit_signals": "比较对临床协助、准备和记录工作的兴趣。",
             "target": {
               "href": "/zh/career/jobs/dental-assistants",
               "slug": "dental-assistants",
               "title": "牙科助理"
             },
-            "watchouts": "目标职业教育、资格和责任范围另核。"
+            "watchouts": "有限协助职责按适用规则确定，不授独立诊断或手术权。"
           },
           {
             "direction": "牙科实验室技师",
-            "fit_signals": "喜欢精密制作",
+            "fit_signals": "比较对材料、精密制作与规格检查的兴趣。",
             "target": {
               "href": "/zh/career/jobs/dental-laboratory-technicians",
               "slug": "dental-laboratory-technicians",
               "title": "牙科实验室技师"
             },
-            "watchouts": "目标职业教育、资格和责任范围另核。"
+            "watchouts": "重点为制作和装置技术；临床沟通背景不等于已掌握制作技能或患者诊疗权。"
           }
         ],
         "heading": "谁适合口腔颌面外科医生？",
         "questions": [
           {
-            "answer": "仅在公开虚构资料或合法教学中观察病史与影像如何对应，原始患者资料须授权。",
-            "question": "我愿执行病史影像吗？"
+            "answer": "未入行时先用K01/L01-v1比较文字原值、缺项与未知，并列课程或团队职责问题；没有诊断、影像或临床反馈可供判断。本题不评估任何诊疗能力。",
+            "question": "我愿了解病史与影像工作的正式学习要求吗？"
           },
           {
-            "answer": "先了解诊断证据与不确定性，真实诊断须正式教育和执业范围。",
-            "question": "我愿执行诊断评估吗？"
+            "answer": "未入行时先用K01/L01-v1比较文字原值、缺项与未知，并列课程或团队职责问题；没有诊断、影像或临床反馈可供判断。本题不评估任何诊疗能力。",
+            "question": "我愿学习如何处理诊断不确定性吗？"
           },
           {
-            "answer": "在教学案例中标注待核条件和责任人，不生成可执行手术方案。",
-            "question": "我愿执行术前计划吗？"
+            "answer": "未入行时先用K01/L01-v1比较文字原值、缺项与未知，并列课程或团队职责问题；没有诊断、影像或临床反馈可供判断。本题不评估任何诊疗能力。",
+            "question": "我愿了解术前团队如何分工吗？"
           },
           {
-            "answer": "模拟解释目的、限制与提问，真实知情同意由负责临床团队完成。",
-            "question": "我愿执行知情同意吗？"
+            "answer": "未入行时先用K01/L01-v1比较文字原值、缺项与未知，并列课程或团队职责问题；没有诊断、影像或临床反馈可供判断。本题不评估任何诊疗能力。",
+            "question": "我愿学习患者沟通和知情同意吗？"
           },
           {
-            "answer": "先观察正式训练及职责，不用桌面练习操作真实患者。",
-            "question": "我愿执行外科手术吗？"
+            "answer": "未入行时先用K01/L01-v1比较文字原值、缺项与未知，并列课程或团队职责问题；没有诊断、影像或临床反馈可供判断。本题不评估任何诊疗能力。",
+            "question": "我愿接受长期正规的外科训练吗？"
           },
           {
-            "answer": "在公开案例中识别何时联系合格团队，真实急症按机构程序。",
-            "question": "我愿执行急症处置吗？"
+            "answer": "未入行时先用K01/L01-v1比较文字原值、缺项与未知，并列课程或团队职责问题；没有诊断、影像或临床反馈可供判断。本题不评估任何诊疗能力。",
+            "question": "我愿了解合格团队的急症职责吗？"
           },
           {
-            "answer": "模拟整理反应、时间与待核项，真实随访须获权。",
-            "question": "我愿执行术后随访吗？"
+            "answer": "未入行时先用K01/L01-v1比较文字原值、缺项与未知，并列课程或团队职责问题；没有诊断、影像或临床反馈可供判断。本题不评估任何诊疗能力。",
+            "question": "我愿了解随访记录与团队沟通吗？"
           },
           {
-            "answer": "认识气道评估与团队升级责任，不能以自评分授处置权。",
-            "question": "我能处理气道风险吗？"
+            "answer": "未入行时先用K01/L01-v1比较文字原值、缺项与未知，并列课程或团队职责问题；没有诊断、影像或临床反馈可供判断。本题不评估任何诊疗能力。",
+            "question": "我愿学习气道风险相关的正式课程与职责吗？"
           },
           {
-            "answer": "观察感染线索如何记录并升级，不从兴趣判断临床能力。",
-            "question": "我能处理感染扩散吗？"
+            "answer": "未入行时先用K01/L01-v1比较文字原值、缺项与未知，并列课程或团队职责问题；没有诊断、影像或临床反馈可供判断。本题不评估任何诊疗能力。",
+            "question": "我愿了解感染风险与及时转交的责任吗？"
           },
           {
-            "answer": "在教学资料核风险解释与随访责任，正式能力须监督训练考核。",
-            "question": "我能处理神经损伤吗？"
+            "answer": "未入行时先用K01/L01-v1比较文字原值、缺项与未知，并列课程或团队职责问题；没有诊断、影像或临床反馈可供判断。本题不评估任何诊疗能力。",
+            "question": "我愿学习神经损伤相关的风险沟通吗？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -15358,7 +15679,7 @@
             "tone": "caution"
           },
           {
-            "body": "先在合法教学情境观察病史影像核对、知情同意与跨专业交接；真实诊疗须具备资格。",
+            "body": "安全试作：完成本页K01/L01-v1虚构记录对照，只比较文字侧别、缺项与未知，不需要另找病例或接触患者。",
             "id": "experiment",
             "label": "术前计划",
             "tone": "action"
@@ -15366,34 +15687,34 @@
         ],
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.onetonline.org/link/details/29-1021.00",
+            "label": "普通牙医",
+            "usage": "美国职业定义与任务；不是跨地区准入或转岗证明。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.onetonline.org/link/details/29-1023.00",
+            "label": "正畸医生",
+            "usage": "美国职业定义与任务；不是跨地区准入或转岗证明。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.onetonline.org/link/summary/29-1024.00",
+            "label": "修复医生",
+            "usage": "美国职业定义与任务；不是跨地区准入或转岗证明。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.onetonline.org/link/summary/29-1243.00",
+            "label": "儿科外科医师",
+            "usage": "美国职业定义与任务；不是跨地区准入或转岗证明。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.onetonline.org/link/summary/31-9091.00",
+            "label": "牙科助理",
+            "usage": "美国职业定义与任务；不是跨地区准入或转岗证明。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "职业任务与能力；兴趣解释仅供探索。"
+            "href": "https://www.onetonline.org/link/summary/51-9081.00",
+            "label": "牙科实验室技师",
+            "usage": "美国职业定义与任务；不是跨地区准入或转岗证明。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1022.00",
@@ -15416,11 +15737,11 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "用虚构病例练手术决策边界",
+        "label": "探索职业兴趣",
         "source_page_type": "职业资料页",
         "subject_key": "oral-and-maxillofacial-surgeons",
         "subject_kind": "口腔颌面外科医生",
-        "target_action": "用公开教学病例画术前风险、知情同意、会诊和术后随访流程；不对真实患者操作",
+        "target_action": "通过RIASEC职业兴趣测评反思探索方向；不评定医疗能力或资格。",
         "test_slug": "holland-career-interest-test-riasec"
       },
       "responsibilities_block": {
@@ -15430,23 +15751,29 @@
         "type": "list"
       },
       "riasec_fit_block": {
-        "fit_interest": "能系统核病史、影像、气道和感染风险，并与麻醉、修复及正畸团队合作。",
-        "interest": "能系统核病史、影像、气道和感染风险，并与麻醉、修复及正畸团队合作。",
+        "fit_interest": "观察自己是否愿意继续了解口腔颌面外科的长期教育、细致记录、患者沟通与团队职责；不把兴趣当临床能力。",
+        "interest": "观察自己是否愿意继续了解口腔颌面外科的长期教育、细致记录、患者沟通与团队职责；不把兴趣当临床能力。",
         "riasec": "职业兴趣可用于探索；量表不证明岗位能力或授权。",
         "riasec_short": "颌面诊断、手术与重建"
       },
       "source_card": {
         "eeat_signals": {
-          "author": {
-            "$item": "oral-and-maxillofacial-surgeons.sources.boundary-notice.2",
-            "block": "sources",
-            "copy_key": "career.item.boundary-notice",
-            "type": "prose"
-          },
+          "author": "费马测试编辑部",
           "source": "BLS 29-1022.00 2025—2035精确职业统计；O*NET任务；国家统计局中国工资缺口。",
-          "updated_at": "2026-10-12作者核当前职业任务、工资、总体预测与来源用途；待独立复核。"
+          "updated_at": "2026-11-09核对任务、统计口径与教育岗位来源；具体招录状态以原机构公告为准。"
         },
-        "note": "证据只支持外科医师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
+        "note": {
+          "$join": [
+            "证据只支持外科医师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
+            {
+              "$item": "oral-and-maxillofacial-surgeons.sources.boundary-notice.2",
+              "block": "sources",
+              "copy_key": "career.item.boundary-notice",
+              "type": "prose"
+            }
+          ],
+          "separator": "；"
+        },
         "secondary_links": [
           {
             "href": {
@@ -15456,7 +15783,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI偏好测评"
           },
           {
             "href": {
@@ -15466,7 +15793,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -15476,7 +15803,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI偏好测评"
           },
           {
             "href": {
@@ -15486,7 +15813,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -15496,6 +15823,7 @@
     "interface": {
       "interface.fit.directions_heading": "相邻职业方向",
       "interface.fit.interest_code_heading": "兴趣倾向",
+      "interface.path.competence_ladder_heading": "资格与纸面探索材料",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "解读边界",
       "interface.us_salary.section_label": "美国工资",
@@ -15634,7 +15962,7 @@
         "fact_id": "cn-oms-nonprivate-2025",
         "market": "中国大陆",
         "measure": "卫生社会工作城镇非私营年平均工资",
-        "occupation_scope": "仅医疗雇主宽行业含其他临床社会岗非本职工资个人区间，个体自营利润器械制造销售排除",
+        "occupation_scope": "卫生和社会工作整个行业的城镇单位统计，包含多种职业；不是口腔颌面外科医生工资或个人区间。按NBS调查范围解释，不含个体工商户、自由职业等非单位就业者及经营利润。",
         "period": "2025年",
         "source_refs": [
           "nbs-wages"
@@ -15646,20 +15974,20 @@
         "fact_id": "cn-oms-private-2025",
         "market": "中国大陆",
         "measure": "卫生社会工作城镇私营年平均工资",
-        "occupation_scope": "仅医疗雇主宽行业含其他临床社会岗非本职工资个人区间，个体自营利润器械制造销售排除",
+        "occupation_scope": "卫生和社会工作整个行业的城镇单位统计，包含多种职业；不是口腔颌面外科医生工资或个人区间。按NBS调查范围解释，不含个体工商户、自由职业等非单位就业者及经营利润。",
         "period": "2025年",
         "source_refs": [
           "nbs-wages"
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
+        "derivation": "撤下原33%编辑估算；50/50/0任务档位没有经核实的任务效果依据，不生成替代分数。",
+        "display_value": "尚无经核实的定量影响估计",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "外科医师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "measure": "任务级AI证据状态",
+        "occupation_scope": "口腔颌面外科医生",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -15668,8 +15996,8 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI影响度"
     },
@@ -15707,7 +16035,7 @@
         "availability": "available",
         "fact_ref": "cn-oms-nonprivate-2025",
         "key": "china_pay",
-        "label": "医疗宽行业·非私营"
+        "label": "卫生和社会工作大行业·非私营"
       }
     ]
   },
@@ -15722,7 +16050,7 @@
       "text": "口腔颌面外科医生：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "547a771ebdb95a7f8e36ad2d7ed293b430647916cd78c217d0e7046de67aa8c8",
+  "source_content_sha256": "0fce39f41f8374a8f5ebc3f472393d6778cd91955e014d39bb0c2dbee6ab434b",
   "subject": {
     "canonical_slug": "oral-and-maxillofacial-surgeons",
     "name": "口腔颌面外科医生",

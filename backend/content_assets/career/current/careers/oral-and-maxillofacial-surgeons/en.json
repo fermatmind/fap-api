@@ -147,13 +147,13 @@
         "status": "pending_mapping"
       },
       "item:oral-and-maxillofacial-surgeons.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:oral-and-maxillofacial-surgeons.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:oral-and-maxillofacial-surgeons.path.interview-probation.10": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:oral-and-maxillofacial-surgeons.profile.definition-block.1": {
         "status": "mapped"
@@ -11957,7 +11957,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Direct judgment: If you are willing to complete dental professional education and surgical residency training and take on anesthesia, surgical, and complication risks, you can explore oral and maxillofacial surgery"
+              "If oral and maxillofacial disease, surgery and reconstruction interest you, and sustained study, patient communication and team responsibilities appeal to you, explore specific programs and jobs. Interest is not a license to practise."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.quick-decision.fermat-decision-card.1",
@@ -11971,7 +11971,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Positive evidence: Can systematically verify history, imaging, airway, and infection risks, and collaborate with anesthesia, prosthodontics, and orthodontic teams."
+              "Start by observing your willingness to explore: patiently compare supplied text records, retain unknowns and ask a team clear questions. Clinical history and image interpretation and risk assessment require formal education, supervised training and appropriate assessment; this paper exercise cannot verify them."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.quick-decision.fermat-decision-card.2",
@@ -11985,12 +11985,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Safe trial: Use public teaching cases to map preoperative risk, informed consent, consultation, and postoperative follow-up processes; do not operate on real patients"
+              "Safe trial: complete this page’s fictional K01/L01-v1 record comparison, checking textual sides, missing fields and unknowns. No additional case search or patient contact is required."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-details"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -11999,12 +11999,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "During review, check indications, imaging, anesthesia risk, informed consent, and postoperative monitoring, and confirm responsibility and authorization boundaries."
+              "Review each field against the supplied reference, retaining originals and unresolved questions. Matching sides or completing the table does not prove clinical safety, professional competence or authorization for surgery."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.quick-decision.fit-decision-checklist.4",
           "source_refs": [
-            "onet-details"
+            "internal-rubric"
           ],
           "type": "prose"
         }
@@ -12036,12 +12036,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Oral and maxillofacial surgery work starts with history, intraoral examination, occlusion, and imaging, producing indications, alternatives, anesthesia level, surgical approach, instruments, emergency plans, and follow-up outputs. The 1st verification point requires putting the patient, clinical records, imaging, medications, anesthesia, surgical operations, nursing handover, and practice authorization in the same chain of responsibility; any insufficient information should stop, undergo human review, or escalate, and process speed must not replace patient safety."
+              "This occupation provides clinical and surgical care for diseases, injuries and defects of oral and maxillofacial hard and soft tissues, working with anesthesia, orthodontic and prosthodontic teams. History, examinations, imaging, plans, consent and follow-up records form a chain of responsibility. Material record conflicts or omissions need timely verification and handover under institutional procedures. Qualified teams must address emergencies promptly; incomplete paperwork is not a universal instruction to stop all care."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "cn-physician-law"
           ],
           "type": "prose"
         },
@@ -12092,12 +12093,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Compared with adjacent roles, this occupation requires a dental professional degree, surgical residency training, and local licensure and surgical authority; it differs from general dentistry, orthodontics, or dental technicians."
+              "U.S. general dentists also require professional dental education and state licensure; oral and maxillofacial surgery involves additional specialty surgical training. Check mainland China dental education, physician qualifications, registration and post requirements separately; a U.S. DDS/DMD or board certification does not directly grant Chinese authority."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.profile.definition-block.6",
           "source_refs": [
-            "onet-details"
+            "bls-dentists",
+            "review-aboms",
+            "cn-physician-law"
           ],
           "type": "prose"
         },
@@ -12142,12 +12145,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "General dentists mainly perform routine oral diagnosis and treatment; this occupation focuses more on requiring a dental professional degree, surgical residency training, and local licensure and surgical authority; it differs from general dentistry, orthodontics, or dental technicians."
+              "General dentistry and OMS both involve professional education and licensing. Compare specialty training, tasks and authority, rather than claiming general dentists do not perform surgery."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet-details"
+            "review-neighbor-dentists-general",
+            "review-neighbor-orthodontists",
+            "review-neighbor-prosthodontists",
+            "review-neighbor-pediatric-surgeons",
+            "review-neighbor-dental-assistants",
+            "review-neighbor-dental-laboratory-technicians"
           ],
           "type": "prose"
         },
@@ -12156,12 +12164,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Orthodontists focus on dentofacial correction, with different occupational tasks and training."
+              "These comparisons use each U.S. O*NET task definition and establish neither credential equivalence nor direct transfer eligibility."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-details"
+            "review-neighbor-dentists-general",
+            "review-neighbor-orthodontists",
+            "review-neighbor-prosthodontists",
+            "review-neighbor-pediatric-surgeons",
+            "review-neighbor-dental-assistants",
+            "review-neighbor-dental-laboratory-technicians"
           ],
           "type": "prose"
         },
@@ -12170,12 +12183,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Prosthodontists lean toward dentition and oral prosthetics; look at the final output rather than similar titles."
+              "Orthodontics focuses on dentofacial correction and prosthodontics on function and prostheses. Dental assistants and technicians undertake limited assistance and fabrication respectively. Pediatric surgery involves different populations and medical training."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-details"
+            "review-neighbor-dentists-general",
+            "review-neighbor-orthodontists",
+            "review-neighbor-prosthodontists",
+            "review-neighbor-pediatric-surgeons",
+            "review-neighbor-dental-assistants",
+            "review-neighbor-dental-laboratory-technicians"
           ],
           "type": "prose"
         },
@@ -12184,12 +12202,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Difference between general dentists and this occupation: maxillofacial surgery requires additional surgical training."
+              "General dentists also need professional dental education and licensing; OMS adds specialty surgical training, rather than a simple surgery/no-surgery distinction."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-details"
+            "review-neighbor-dentists-general",
+            "review-neighbor-orthodontists",
+            "review-neighbor-prosthodontists",
+            "review-neighbor-pediatric-surgeons",
+            "review-neighbor-dental-assistants",
+            "review-neighbor-dental-laboratory-technicians"
           ],
           "type": "prose"
         },
@@ -12198,12 +12221,17 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Choosing general dentistry suits those who prefer general dental practice."
+              "Compare your interest in broad dental care and specialty surgery."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "onet-details"
+            "review-neighbor-dentists-general",
+            "review-neighbor-orthodontists",
+            "review-neighbor-prosthodontists",
+            "review-neighbor-pediatric-surgeons",
+            "review-neighbor-dental-assistants",
+            "review-neighbor-dental-laboratory-technicians"
           ],
           "type": "prose"
         }
@@ -12235,13 +12263,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Use fictional samples to learn about history and imaging."
+              "Trial field comparison with the complete fictional K01/L01-v1 text records, checking every output against its source value; do not interpret images, diagnose disease or decide surgery."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "onet-details",
-            "who-ai"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -12280,7 +12307,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Crew lead"
+              "Team lead"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.ai-impact.ai-impact-table.5",
@@ -12348,7 +12375,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: a nationwide comparable median for Chinese oral and maxillofacial surgeons was not obtained. In 2025, pre-tax annual averages for health and social work were 146,266 yuan for urban non-private and 75,631 yuan for private, which is only a broad medical employer industry, includes other clinical and social work positions and is not this occupation's wage or an individual range; excludes self-employed individuals and freelancers and owner-operated clinic profits, and does not apply to instrument manufacturing or sales."
+              "A comparable nationwide occupational median, percentiles and uniform starting pay remain unavailable. In 2025, urban non-private and private health and social work averages were 146,266 and 75,631 yuan per year before tax, measured separately. The industry includes multiple occupations; these are not OMS wages, an individual range or owner-operated clinic profits. The survey covers urban legal entities with five or more workers under the respective non-private/private survey methods, excluding individual businesses and freelancers outside unit employment."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.china-salary.career-snapshot-primary-locale.1",
@@ -12468,7 +12495,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The U.S. precise occupation 29-1022 is projected to grow 5.6% overall over 2025—2035, with an official net increase of 300 people and annual average openings of 200 including replacements; not net change or current hiring, AI adoption replacement, or individual unemployment."
+              "For exact U.S. occupation 29-1022, projected employment growth for 2025–2035 is 5.6%, with an official net increase of 300 over the decade. The 200 annual average openings include replacements; they are neither the decade’s net increase nor current vacancies. Aggregate projections establish no AI adoption, technology displacement or individual unemployment."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.us-salary.career-snapshot-secondary-locale.5",
@@ -12504,12 +12531,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Can systematically verify history, imaging, airway, and infection risks, and collaborate with anesthesia, prosthodontics, and orthodontic teams.",
-              "Can systematically verify history, imaging, airway, and infection risks, and collaborate with anesthesia, prosthodontics, and orthodontic teams."
+              "Willing to compare supplied records while acknowledging a lack of clinical authority.",
+              "Retain original values when sides conflict and state who needs to verify them."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.1",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12519,12 +12547,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Willing to consistently perform history and imaging and diagnostic assessment.",
-              "Willing to consistently perform history and imaging and diagnostic assessment."
+              "Interested in sustained study of oral anatomy, disease and surgical foundations.",
+              "Willing to check a specific program’s duration, curriculum and admission conditions."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.2",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12534,12 +12563,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Can hand over imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, and follow-up records to the next responsible person.",
-              "Can hand over imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, and follow-up records to the next responsible person."
+              "Willing to communicate knowns, unknowns and unresolved questions clearly.",
+              "Distinguish personal annotations from source records in the paper exercise."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.3",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12549,12 +12579,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Stops and escalates according to procedures during anomalies.",
-              "Stops and escalates according to procedures during anomalies."
+              "Willing to receive supervision and feedback and report problems under institutional arrangements.",
+              "Do not treat appointments, tool outputs or interest scores as authorization."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.4",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12564,12 +12595,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Those unwilling to take on airway risk should be cautious.",
-              "Those unwilling to take on airway risk should be cautious."
+              "Prepared to learn about clinical risks such as infection and bleeding and the formal training required.",
+              "Compare other directions if sustained study and strict responsibilities do not appeal to you."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.5",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12579,12 +12611,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "Neglecting surgical indications, anesthesia, informed consent, and complication management responsibility makes independent work unsuitable.",
-              "Neglecting surgical indications, anesthesia, informed consent, and complication management responsibility makes independent work unsuitable."
+              "Willing to learn professional requirements for patient communication and informed consent.",
+              "Leave questions unresolved when no qualified response is supplied."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.fit.personality-fit-block.6",
           "source_refs": [
+            "internal-rubric",
             "onet-details"
           ],
           "type": "list"
@@ -12636,7 +12669,9 @@
           "id": "oral-and-maxillofacial-surgeons.risk.career-risk-cards.1",
           "source_refs": [
             "onet-details",
-            "aaoms-impacted-third-molars"
+            "internal-rubric",
+            "review-nhs-wisdom",
+            "review-nhs-abscess"
           ],
           "type": "prose"
         },
@@ -12645,13 +12680,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Oral and maxillofacial surgery must pay attention to airway, infection, nerve injury, bleeding, site verification, and the responsibility handover of postoperative follow-up."
+              "Explore the context of infection, breathing or swallowing difficulty, and nerve injury or bleeding after wisdom-tooth removal, alongside team communication and handover. The cards distinguish specific source contexts from editorial questions, without ranking or incidence estimates."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.risk.career-risk-cards.2",
           "source_refs": [
             "onet-details",
-            "aaoms-impacted-third-molars"
+            "review-nhs-wisdom",
+            "review-nhs-abscess"
           ],
           "type": "prose"
         },
@@ -12660,13 +12696,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET supports occupational tasks; the AAOMS third molar statement supports the context of infection and nerve injury in specific surgery. The six cards are editorial summaries and do not indicate risk probability or general clinical handling standards."
+              "NHS patient information on dental abscess describes infection requiring timely professional treatment and emergency contexts such as breathing or swallowing difficulty. Its wisdom-tooth-removal page discusses infection, nerve injury and seeking help for persistent bleeding. These are UK patient resources, not complete guidance for every maxillofacial operation. Record-conflict and follow-up questions are editorial prompts, not clinical management instructions."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.risk.career-risk-cards.3",
           "source_refs": [
             "onet-details",
-            "aaoms-impacted-third-molars"
+            "review-nhs-wisdom",
+            "review-nhs-abscess"
           ],
           "type": "prose"
         },
@@ -12675,13 +12712,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Oral and maxillofacial surgery teams involved in airway risk assessment, surgery, and follow-up"
+              "Qualified teams responsible for infection assessment, handover and emergency-care coordination"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.risk.career-risk-cards.4",
           "source_refs": [
             "onet-details",
-            "aaoms-impacted-third-molars"
+            "review-nhs-wisdom",
+            "review-nhs-abscess"
           ],
           "type": "prose"
         },
@@ -12690,13 +12728,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Airway compression or anesthesia-related problems may threaten respiratory safety."
+              "Dental abscess may involve breathing or swallowing difficulty requiring urgent professional care. This page provides no anesthesia or airway-management plan."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.risk.career-risk-cards.5",
           "source_refs": [
             "onet-details",
-            "aaoms-impacted-third-molars"
+            "review-nhs-wisdom",
+            "review-nhs-abscess"
           ],
           "type": "prose"
         }
@@ -12713,7 +12752,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Safe exploration uses fictional maxillofacial surgery records only to verify documents and transfer; do not operate on real patients. The paper rules verify only identifiers, site, and document completeness and are not surgical indications, anesthesia thresholds, or physician orders; real work requires dental surgical training and local authority."
+              "This editorial paper exercise checks only the supplied identifiers, versions, sides and missing fields. Retain unknowns and write verification questions. Do not determine disease, surgical indications, anesthesia or readiness for surgery; use no real patients or records. Completion grants no medical qualification."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.1",
@@ -12727,12 +12766,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.; Real duties depend on local rules and employer authorization, and changing roles requires training for the target position."
+              "In the U.S., professional dental education such as a DDS/DMD is generally followed by four to six years of OMS specialty training, sometimes combined with an MD. State licensure, ABOMS board certification and hospital privileges are distinct. For mainland China, check dental education, physician qualification examinations, registration and post requirements separately. Specialty training for existing practitioners is not an initial entry route."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.2",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "bls-dentists",
+            "review-aboms",
+            "cn-physician-law",
+            "review-jilin-oms"
           ],
           "type": "prose"
         },
@@ -12746,7 +12788,10 @@
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.3",
           "source_refs": [
-            "internal-rubric"
+            "bls-dentists",
+            "review-aboms",
+            "cn-physician-law",
+            "review-jilin-oms"
           ],
           "type": "prose"
         },
@@ -12755,7 +12800,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Problem statement: fictional K01 planned site is the left side, the imaging label says right side, and informed consent still says left; for L01 the three sites agree, but the anesthesia assessment and authorized review signature are blank, and a newcomer wants to start surgery as scheduled. Paper rule: identifiers and site must agree and complete documents must be reviewed by an authorized person. List the hold and transfer questions, and do not select a surgical approach or anesthetic agent."
+              "Complete fictional inputs (v1; not clinical records): K01 has planned side=left, imaging-label side=right, consent side=left; anesthesia-assessment field=not supplied, authorized-review signature field=not supplied. L01 has planned side=right, imaging-label side=right, consent side=right; anesthesia-assessment field=blank, authorized-review signature field=blank. Each identifier agrees across its own records. No images, diagnoses, patient circumstances, actual appointments or professional feedback are supplied. Task: copy each original value, flag side conflicts and missing/unknown fields, and list questions for a qualified team. Do not complete assessments, add signatures or change sides."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.4",
@@ -12783,7 +12828,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Reference: K's site conflict is held pending verification of the original plan, imaging, and consent, and the input is kept without changing the side; L is marked incomplete for the missing assessment and signature and handed to the authorized physician and team, and is not released based on the appointment. Submit a two-line verification table: fictional identifiers, the three sites, missing assessment and signature items, questions to verify, transfer, and simulated review; corrections keep the original record, and no indication or surgery is judged."
+              "Field-by-field reference (v1): K01 | plan left | imaging label right | consent left | assessment not supplied | signature not supplied. The sides conflict; the correct side cannot be determined, and the two unspecified fields remain unknown. L01 | plan right | imaging label right | consent right | assessment blank | signature blank. Agreement is only a consistency finding; it does not establish completed assessment, authorization for surgery or patient safety. Submit one two-row original-value and flag table. Ask a qualified team to verify K01’s three original documents and unspecified fields, and whether valid records exist elsewhere for L01’s two blank fields. Submit a separate question list and correction-trail note that retains originals and labels personal annotations. No professional response is supplied; do not claim review or clearance occurred."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.6",
@@ -12797,7 +12842,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Hold and transfer reference"
+              "Text-checking reference and verification questions"
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.7",
@@ -12811,7 +12856,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Seven days: Day 1 copy the K/L inputs, rules, and boundaries; Days 2—3 build the two-line table verifying plan, imaging, consent, and assessment signature; Days 4—5 find the wrong side and missing items and write the hold and transfer; Days 6—7 submit the two tables, unresolved questions, and the correction trail. Keep the four risks of airway, infection, nerve injury, and bleeding, and do not start surgery or arrange real surgery or anesthesia."
+              "Seven-day exploration: Day 1 read the complete K01/L01-v1 inputs and boundaries. Days 2–3 copy the two original rows without changing sides. Days 4–5 use the reference to flag conflicting sides, unspecified fields and blanks, distinguishing unknown from absent. Days 6–7 submit the original-value table, question list and correction-trail note; reflect on your interest in detailed records and team communication. List airway, infection, nerve injury and bleeding as topics to ask about in formal programs and team responsibilities, without inferring clinical risks or decisions from this exercise."
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.career-path-block.8",
@@ -12830,6 +12875,13 @@
               "boundary",
               "work_evidence",
               "possible_check"
+            ],
+            "column_labels": [
+              "Study area",
+              "Professional task",
+              "Scope boundary",
+              "Potential records",
+              "Questions for a program"
             ],
             "rows": [
               [
@@ -12871,8 +12923,11 @@
           },
           "id": "oral-and-maxillofacial-surgeons.path.entry-role-comparison.9",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "onet-details",
+            "bls-dentists",
+            "cn-physician-law"
           ],
+          "title": "Tasks requiring formal education and supervised training",
           "type": "table"
         },
         {
@@ -12885,37 +12940,46 @@
               "boundary",
               "possible_check"
             ],
+            "column_labels": [
+              "Topic",
+              "Limited source context",
+              "Responsibility question",
+              "Evidence boundary"
+            ],
             "rows": [
               [
-                "Airway risk",
-                "Maxillofacial swelling or inadequate anesthesia assessment.",
-                "Preoperative assessment and an emergency team on standby.",
-                "Verify airway risk handling"
+                "Infection and breathing or swallowing difficulty",
+                "The NHS dental-abscess page identifies breathing or swallowing difficulty as emergency contexts.",
+                "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+                "No incidence estimate, risk ranking or clinical instruction"
               ],
               [
-                "Infection spread",
-                "Deep maxillofacial infection is treated late.",
-                "Emergency identification and hospital transfer consultation.",
-                "Verify infection spread handling"
+                "Dental infection",
+                "The NHS describes dental abscess as an infection-related build-up of pus requiring timely dental treatment.",
+                "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+                "No incidence estimate, risk ranking or clinical instruction"
               ],
               [
-                "Nerve injury",
-                "Insufficient verification of surgical scope and imaging.",
-                "Imaging planning and informed consent.",
-                "Verify nerve injury handling"
+                "Wisdom-tooth removal and nerve injury",
+                "The NHS explains that wisdom-tooth removal can damage nearby nerves and cause altered sensation.",
+                "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+                "No incidence estimate, risk ranking or clinical instruction"
               ],
               [
-                "Bleeding",
-                "Coagulation or vascular risk is not assessed.",
-                "Verify history and hemostasis plans.",
-                "Verify bleeding handling"
+                "Bleeding after wisdom-tooth removal",
+                "The NHS wisdom-tooth-removal page identifies persistent bleeding as a reason to seek timely professional help.",
+                "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+                "No incidence estimate, risk ranking or clinical instruction"
               ]
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.interview-probation.10",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "review-nhs-wisdom",
+            "review-nhs-abscess",
+            "internal-rubric"
           ],
+          "title": "Ask programs or institutions about risk responsibilities",
           "type": "table"
         },
         {
@@ -12931,67 +12995,82 @@
               "audience",
               "proof_method"
             ],
+            "column_labels": [
+              "Stage",
+              "Materials or evidence",
+              "Conditions to verify",
+              "Context limit",
+              "What cannot be inferred",
+              "Audience",
+              "How to check"
+            ],
             "rows": [
               [
-                "Job observation",
-                "Imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, and follow-up records",
-                "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
-                "Learner",
-                "Verify courses, authorization, and feedback"
+                "Paper exploration",
+                "K01/L01 source-value table and question list",
+                "No clinical qualification needed for the supplied fictional text only",
+                "No patients or real records",
+                "No evidence of clinical competence",
+                "Explorers",
+                "Check each field against the supplied reference"
               ],
               [
-                "Basic training",
-                "Imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, and follow-up records",
-                "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
-                "Learner",
-                "Verify courses, authorization, and feedback"
+                "Researching basic education",
+                "A specific school’s curriculum and admissions",
+                "Check dental education and program admission conditions",
+                "School and jurisdiction specific",
+                "Course titles grant no practice rights",
+                "Applicants",
+                "Read official curriculum and admissions materials"
               ],
               [
-                "Supervised practice",
-                "Imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, and follow-up records",
-                "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
-                "Learner",
-                "Verify courses, authorization, and feedback"
+                "Formal supervised training",
+                "Curriculum, rotations and supervisor assessment",
+                "Check education, existing credentials and supervision requirements",
+                "Appropriate program and permitted tasks only",
+                "Paper exercises do not replace clinical training",
+                "Eligible trainees",
+                "Check official program requirements and assessments"
               ],
               [
-                "Qualification verification",
-                "Imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, and follow-up records",
-                "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
-                "Practitioner",
-                "Verify courses, authorization, and feedback"
+                "Statutory qualifications",
+                "Applicable licensing, qualification and registration records",
+                "U.S. state requirements; Chinese physician qualification and registration",
+                "Actual jurisdiction, category, location and scope",
+                "No automatic foreign credential equivalence",
+                "Prospective practitioners",
+                "Check current regulatory requirements"
               ],
               [
-                "Independent handoff",
-                "Imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, and follow-up records",
-                "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
-                "Practitioner",
-                "Verify courses, authorization, and feedback"
+                "Institutional duties",
+                "Post responsibilities and specific privileges",
+                "Verify surgery, anesthesia, supervision and emergency teamwork duties",
+                "Institution and task specific",
+                "General qualifications do not permit every procedure",
+                "Qualified practitioners",
+                "Check formal job and authorization arrangements"
               ],
               [
-                "Advanced review",
-                "Imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, and follow-up records",
-                "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
-                "By region and employer",
-                "Training does not automatically grant independent authority",
-                "Practitioner",
-                "Verify courses, authorization, and feedback"
+                "Further professional development",
+                "Continuing education, assessments and team feedback",
+                "Check program, licensing and job renewal requirements",
+                "Applicable specialty and responsibilities",
+                "Stage labels do not confer advancement",
+                "Practitioners",
+                "Check specific programs, assessments and updated privileges"
               ]
             ]
           },
           "id": "oral-and-maxillofacial-surgeons.path.credential-decision.11",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "bls-dentists",
+            "review-aboms",
+            "review-aboms-oce",
+            "cn-physician-law",
+            "review-jilin-oms",
+            "internal-rubric"
           ],
+          "title": "Check exploration, training and practice conditions separately",
           "type": "table"
         }
       ]
@@ -13040,7 +13119,7 @@
           },
           "id": "oral-and-maxillofacial-surgeons.market-signals.market-signal-card.3",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-2025-35-29-1022"
           ],
           "type": "prose"
         },
@@ -13054,7 +13133,7 @@
           },
           "id": "oral-and-maxillofacial-surgeons.market-signals.market-signal-card.4",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-2025-35-29-1022"
           ],
           "type": "prose"
         },
@@ -13068,7 +13147,8 @@
           },
           "id": "oral-and-maxillofacial-surgeons.market-signals.market-signal-card.5",
           "source_refs": [
-            "source-pack-onet-summary"
+            "review-oews-concepts",
+            "bls-2025-35-29-1022"
           ],
           "type": "prose"
         }
@@ -13104,34 +13184,39 @@
                 ]
               },
               {
-                "answer": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
+                "answer": "In the U.S., professional dental education such as a DDS/DMD is generally followed by four to six years of OMS specialty training, sometimes combined with an MD. State licensure, ABOMS board certification and hospital privileges are distinct. For mainland China, check dental education, physician qualification examinations, registration and post requirements separately. Specialty training for existing practitioners is not an initial entry route.",
                 "id": "oral-and-maxillofacial-surgeons.faq.3",
                 "question": "What is needed to enter?",
                 "question_key": "career.faq.oral-and-maxillofacial-surgeons.3",
                 "source_refs": [
-                  "onet-details"
+                  "bls-dentists",
+                  "review-aboms",
+                  "cn-physician-law",
+                  "review-jilin-oms"
                 ]
               },
               {
-                "answer": "Airway risk: maxillofacial swelling or inadequate anesthesia assessment.; Preoperative assessment and an emergency team on standby.",
+                "answer": "NHS wisdom-tooth information discusses infection, nerve injury and help for persistent bleeding; dental-abscess information identifies emergencies such as breathing or swallowing difficulty. These are not risk rankings or universal clinical protocols. Ask programs about risk communication, postoperative contact and escalation responsibilities.",
                 "id": "oral-and-maxillofacial-surgeons.faq.4",
-                "question": "What is the biggest risk at work?",
+                "question": "Which risks and team responsibilities should I understand?",
                 "question_key": "career.faq.oral-and-maxillofacial-surgeons.4",
                 "source_refs": [
-                  "onet-details"
+                  "review-nhs-wisdom",
+                  "review-nhs-abscess"
                 ]
               },
               {
-                "answer": "No; the responsibility for surgical indications, anesthesia, informed consent, and complication management is verified by authorized personnel.",
+                "answer": "This page’s AI trial checks fictional text fields only and makes no diagnostic, surgical, anesthesia or operating-room decision; record organization does not establish clinical effects.",
                 "id": "oral-and-maxillofacial-surgeons.faq.5",
                 "question": "Can AI do it independently?",
                 "question_key": "career.faq.oral-and-maxillofacial-surgeons.5",
                 "source_refs": [
-                  "onet-details"
+                  "internal-rubric",
+                  "who-ai"
                 ]
               },
               {
-                "answer": "Insufficient evidence: nationwide medians, percentiles, and starting pay for Chinese oral and maxillofacial surgeons were not obtained. In 2025, pre-tax annual averages for health and social work of 146266 yuan for urban non-private and 75631 yuan for private are only a broad medical employer industry, include other clinical and social work positions and are not this occupation's wage or an individual range, exclude self-employed freelancers and private clinic profits, and do not apply to instrument manufacturing or sales.",
+                "answer": "A comparable nationwide occupational median, percentiles and uniform starting pay remain unavailable. In 2025, urban non-private and private health and social work averages were 146,266 and 75,631 yuan per year before tax, measured separately. The industry includes multiple occupations; these are not OMS wages, an individual range or owner-operated clinic profits. The survey covers urban legal entities with five or more workers under the respective non-private/private survey methods, excluding individual businesses and freelancers outside unit employment.",
                 "id": "oral-and-maxillofacial-surgeons.faq.6",
                 "question": "What are the wages in China?",
                 "question_key": "career.faq.oral-and-maxillofacial-surgeons.6",
@@ -13149,12 +13234,12 @@
                 ]
               },
               {
-                "answer": "Use public teaching cases to map preoperative risk, informed consent, consultation, and postoperative follow-up processes; do not operate on real patients",
+                "answer": "Safe trial: complete this page’s fictional K01/L01-v1 record comparison, checking textual sides, missing fields and unknowns. No additional case search or patient contact is required.",
                 "id": "oral-and-maxillofacial-surgeons.faq.8",
                 "question": "How to explore safely?",
                 "question_key": "career.faq.oral-and-maxillofacial-surgeons.8",
                 "source_refs": [
-                  "onet-details"
+                  "internal-rubric"
                 ]
               }
             ]
@@ -13307,19 +13392,19 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "No US specialty equivalence or wage data."
+                  "Physicians Law articles 9, 13 and 14 on qualification and registration; risk communication and timely emergency-care responsibilities."
                 ],
                 "evidence_type": "national law",
                 "id": "cn-physician-law",
-                "limitation": "No US specialty equivalence or wage data.",
+                "limitation": "Chinese qualification, registration and responsibilities under the applicable articles; no foreign-specialty equivalence or specific surgery/anesthesia privilege.",
                 "market": "CN",
                 "name": "Physicians Law of the People's Republic of China",
                 "period": "effective 2022; accessed 2026-08-30",
                 "publisher": "Standing Committee of the National People's Congress; republished by the Beijing Municipal Health Commission",
                 "scope": "exact",
-                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html"
               },
               {
                 "accessed_at": "2026-08-30",
@@ -13532,19 +13617,19 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Tables 2/5: pre-tax annual averages for health and social work of 146266 yuan for non-private and 75631 yuan for private; based on maxillofacial diagnosis, surgery, anesthesia, and imaging tasks, the author matched it to the medical employer direction only."
+                  "Urban-unit statistics for the whole health and social work industry, covering multiple occupations; not OMS occupational pay or an individual range. Interpret within the NBS survey population; individual businesses, freelancers and business profits are outside this employee-wage measure."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "Includes other clinical and social work positions and is not oral and maxillofacial surgeon wages or an individual range; the two populations are listed separately; self-employed freelancers and private profits are excluded; and it is not used for instrument manufacturing or sales or to prove licensing.",
+                "limitation": "Urban-unit statistics for the whole health and social work industry, covering multiple occupations; not OMS occupational pay or an individual range. Interpret within the NBS survey population; individual businesses, freelancers and business profits are outside this employee-wage measure.",
                 "market": "CN",
                 "name": "2025 Urban Unit Employment Annual Average Wage Situation",
                 "period": "2025 wages; released 2026-05-15",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-02",
@@ -13562,36 +13647,272 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Risk of infection, healing problems, and nerve injury related to impacted third molars; does not support risk incidence rates or treatment guidelines for all maxillofacial surgery."
+                  "The full text was not obtained in this review and is not used as verified risk evidence on this page. Verified limited risk context is provided separately by NHS patient information."
                 ],
                 "evidence_type": "professional clinical guidance",
                 "id": "aaoms-impacted-third-molars",
-                "limitation": "Background for specific alveolar surgery; the remaining risks are editorial scenario summaries, and clinical handling follows current guidelines and team authority.",
+                "limitation": "The full text was not obtained in this review and is not used as verified risk evidence on this page. Verified limited risk context is provided separately by NHS patient information.",
                 "market": "US",
                 "name": "AAOMS Management of Impacted Third Molar Teeth",
-                "period": "2024 clinical statement",
+                "period": "2026-11-09 access unsuccessful; full text unverified",
                 "publisher": "AAOMS",
                 "scope": "exact",
                 "url": "https://aaoms.org/wp-content/uploads/2024/07/impacted_third_molars.pdf"
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Check symptoms, oral and maxillofacial imaging, and systemic risks. — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Determine the surgical scope, anesthesia, and consultation plan. — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "Perform extractions, jaw, or soft tissue surgery according to credentials. — 0/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
+                  "The former 33% and 50/50/0 task ratings are withdrawn for lack of verified task-effect evidence."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
+                "limitation": "No replacement quantitative score; not evidence of clinical effects, AI adoption, layoffs or individual unemployment.",
                 "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "Withdrawal notice for a historical estimate",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "UK patient information on wisdom-tooth removal: complications and seeking professional help; not all maxillofacial operations, incidence estimates or clinical training."
+                ],
+                "evidence_type": "public health service patient information",
+                "id": "review-nhs-wisdom",
+                "limitation": "UK patient information on wisdom-tooth removal: complications and seeking professional help; not all maxillofacial operations, incidence estimates or clinical training.",
+                "market": "UK",
+                "name": "NHS Wisdom tooth removal",
+                "period": "page reviewed 2024-06-12",
+                "publisher": "NHS",
+                "scope": "market_signal",
+                "url": "https://www.nhs.uk/tests-and-treatments/wisdom-tooth-removal/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "UK patient information on dental infection and emergency contexts; no clinical treatment protocol, mainland authorization or occupation-specific risk ranking."
+                ],
+                "evidence_type": "public health service patient information",
+                "id": "review-nhs-abscess",
+                "limitation": "UK patient information on dental infection and emergency contexts; no clinical treatment protocol, mainland authorization or occupation-specific risk ranking.",
+                "market": "UK",
+                "name": "NHS Dental abscess",
+                "period": "page reviewed 2026-03-18",
+                "publisher": "NHS",
+                "scope": "market_signal",
+                "url": "https://www.nhs.uk/conditions/dental-abscess/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Single-school four-year certificate and six-year integrated MD examples; not universal admissions or licensing rules."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-umaryland-oms",
+                "limitation": "Single-school four-year certificate and six-year integrated MD examples; not universal admissions or licensing rules.",
+                "market": "US",
+                "name": "University of Maryland OMS residency",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "University of Maryland",
+                "scope": "market_signal",
+                "url": "https://www.dental.umaryland.edu/departments--divisions/oral-and-maxillofacial-surgery/residency/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "QE, OCE and maintenance; board certification does not grant a state license."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-aboms",
+                "limitation": "QE, OCE and maintenance; board certification does not grant a state license.",
+                "market": "US",
+                "name": "ABOMS board certification",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "ABOMS",
+                "scope": "market_signal",
+                "url": "https://www.aboms.org/become-certified"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Specific certification application education, license and hospital-privilege conditions; not all state anesthesia rules."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-aboms-oce",
+                "limitation": "Specific certification application education, license and hospital-privilege conditions; not all state anesthesia rules.",
+                "market": "US",
+                "name": "ABOMS OCE application details",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "ABOMS",
+                "scope": "market_signal",
+                "url": "https://www.aboms.org/become-certified/oral-certifying-examination/how-apply"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "School curriculum example; undated institutional narrative, not current admissions, employment outcomes or national duration."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-sjtu-dental",
+                "limitation": "School curriculum example; undated institutional narrative, not current admissions, employment outcomes or national duration.",
+                "market": "CN",
+                "name": "Shanghai Jiao Tong dental education",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "Shanghai Jiao Tong University School of Medicine",
+                "scope": "market_signal",
+                "url": "https://www.shsmu.edu.cn/kqxy/zsjy/zsxx1.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Two-year program for applicants meeting stated prior-practice conditions; September application closed, not a universal entry route or career wage."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-jilin-oms",
+                "limitation": "Two-year program for applicants meeting stated prior-practice conditions; September application closed, not a universal entry route or career wage.",
+                "market": "CN",
+                "name": "2026 OMS specialty training",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "Jilin University Dental Hospital",
+                "scope": "market_signal",
+                "url": "https://jdkq.jlu.edu.cn/info/1008/5568.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Post-specific conditions, deadline May 31 2026 passed; no salary, not current vacancies or a national minimum."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-tongji-job",
+                "limitation": "Post-specific conditions, deadline May 31 2026 passed; no salary, not current vacancies or a national minimum.",
+                "market": "CN",
+                "name": "2026 dental hospital recruitment",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "Tongji University Dental Hospital",
+                "scope": "market_signal",
+                "url": "https://kouqiang.tongji.edu.cn/info/1020/4151.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Named subspecialty post examples, deadline February 15 2026 passed; no salary and no extrapolation from merged table cells."
+                ],
+                "evidence_type": "institutional primary source",
+                "id": "review-wuhan-job",
+                "limitation": "Named subspecialty post examples, deadline February 15 2026 passed; no salary and no extrapolation from merged table cells.",
+                "market": "CN",
+                "name": "2026 dental hospital recruitment",
+                "period": "source as published; checked 2026-11-09",
+                "publisher": "Wuhan University Hospital of Stomatology",
+                "scope": "market_signal",
+                "url": "https://www.whuss.com/article/12964"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Provide prevention, examination, treatment and restoration, sometimes including oral or periodontal surgery."
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-dentists-general",
+                "limitation": "U.S. task definition; not proof of a Chinese mapping, shared license or direct transfer eligibility.",
+                "market": "US",
+                "name": "General dentists · 29-1021.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use diagnostic records and appliances to change tooth and jaw relationships."
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-orthodontists",
+                "limitation": "U.S. task definition; not proof of a Chinese mapping, shared license or direct transfer eligibility.",
+                "market": "US",
+                "name": "Orthodontists · 29-1023.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1023.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Design, restore and fit prostheses to support oral function and appearance."
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-prosthodontists",
+                "limitation": "U.S. task definition; not proof of a Chinese mapping, shared license or direct transfer eligibility.",
+                "market": "US",
+                "name": "Prosthodontists · 29-1024.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1024.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Provide relevant surgical diagnosis and care for fetuses, infants, children and adolescents."
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-pediatric-surgeons",
+                "limitation": "U.S. task definition; not proof of a Chinese mapping, shared license or direct transfer eligibility.",
+                "market": "US",
+                "name": "Pediatric surgeons · 29-1243.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1243.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Perform limited clinical assistance under a dentist’s direction and administrative tasks such as records and scheduling."
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-dental-assistants",
+                "limitation": "U.S. task definition; not proof of a Chinese mapping, shared license or direct transfer eligibility.",
+                "market": "US",
+                "name": "Dental assistants · 31-9091.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/31-9091.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Construct and repair dentures and appliances using prescriptions or specifications and models."
+                ],
+                "evidence_type": "official occupation definition and tasks",
+                "id": "review-neighbor-dental-laboratory-technicians",
+                "limitation": "U.S. task definition; not proof of a Chinese mapping, shared license or direct transfer eligibility.",
+                "market": "US",
+                "name": "Dental laboratory technicians · 51-9081.00",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-9081.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Employee wage population and straight-time gross wage concept; excludes self-employment income, overtime and specified non-wage items."
+                ],
+                "evidence_type": "official statistical methodology",
+                "id": "review-oews-concepts",
+                "limitation": "Methodological context only; not an additional OMS wage estimate or employment forecast.",
+                "market": "US",
+                "name": "BLS OEWS concepts",
+                "period": "current concepts chapter; accessed 2026-11-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               }
             ]
           },
@@ -13637,24 +13958,24 @@
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "Occupational tasks"
+            "href": "https://www.onetonline.org/link/details/29-1021.00",
+            "label": "General dentists"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "label": "Adjacent occupations"
+            "href": "https://www.onetonline.org/link/details/29-1023.00",
+            "label": "Orthodontists"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "Work activities"
+            "href": "https://www.onetonline.org/link/summary/29-1024.00",
+            "label": "Prosthodontists"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
-            "label": "Education differences"
+            "href": "https://www.onetonline.org/link/summary/29-1243.00",
+            "label": "Pediatric surgeons"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "Occupational boundaries"
+            "href": "https://www.onetonline.org/link/summary/31-9091.00",
+            "label": "Dental assistants"
           }
         ],
         "evidence_note": {
@@ -13684,38 +14005,38 @@
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "核心工作与产出": "Routine oral diagnosis and treatment",
-            "职业方向": "General dentist"
+            "核心工作与产出": "Provide prevention, examination, treatment and restoration, sometimes including oral or periodontal surgery.",
+            "职业方向": "General dentists"
           },
           {
-            "关键区别": "Focuses more on long-term nonsurgical correction",
-            "更适合什么选择": "Likes orthodontic planning",
-            "核心工作与产出": "Dentofacial correction",
-            "职业方向": "Orthodontist"
+            "关键区别": "Focuses on jaw relationships and corrective plans; verify specialty training and practice requirements separately.",
+            "更适合什么选择": "Explore interest in dentofacial correction and longitudinal records.",
+            "核心工作与产出": "Use diagnostic records and appliances to change tooth and jaw relationships.",
+            "职业方向": "Orthodontists"
           },
           {
-            "关键区别": "Focuses more on prosthesis design",
-            "更适合什么选择": "Likes oral prosthetics",
-            "核心工作与产出": "Dentition and oral prosthetics",
-            "职业方向": "Prosthodontist"
+            "关键区别": "Focuses on prostheses, function and fitting; distinguish fabrication collaboration from clinical responsibilities.",
+            "更适合什么选择": "Compare interest in function, prosthetic design and fitting.",
+            "核心工作与产出": "Design, restore and fit prostheses to support oral function and appearance.",
+            "职业方向": "Prosthodontists"
           },
           {
-            "关键区别": "Professional credentials and anatomical scope differ",
-            "更适合什么选择": "Likes other surgical fields",
-            "核心工作与产出": "Surgery on other organs",
-            "职业方向": "Other surgeons"
+            "关键区别": "Patient populations, anatomy and pediatric surgical training differ; dental credentials are not pediatric surgical qualifications.",
+            "更适合什么选择": "Research further if pediatric populations and the relevant medical training interest you.",
+            "核心工作与产出": "Provide relevant surgical diagnosis and care for fetuses, infants, children and adolescents.",
+            "职业方向": "Pediatric surgeons"
           },
           {
-            "关键区别": "Does not carry out independent surgery",
-            "更适合什么选择": "Likes clinical assistance",
-            "核心工作与产出": "Dental diagnosis and treatment assistance",
-            "职业方向": "Dental assistant"
+            "关键区别": "Limited assisting duties depend on applicable rules and do not grant independent diagnostic or surgical rights.",
+            "更适合什么选择": "Compare interest in clinical assistance, preparation and records.",
+            "核心工作与产出": "Perform limited clinical assistance under a dentist’s direction and administrative tasks such as records and scheduling.",
+            "职业方向": "Dental assistants"
           },
           {
-            "关键区别": "Manufacturing rather than patient surgery",
-            "更适合什么选择": "Likes precision fabrication",
-            "核心工作与产出": "Making dental restorations",
-            "职业方向": "Dental laboratory technician"
+            "关键区别": "Focuses on fabrication and device techniques; clinical communication background proves neither fabrication skill nor patient-care authority.",
+            "更适合什么选择": "Compare interest in materials, precise fabrication and specification checks.",
+            "核心工作与产出": "Construct and repair dentures and appliances using prescriptions or specifications and models.",
+            "职业方向": "Dental laboratory technicians"
           }
         ],
         "transition": "Compare final output, training, and responsibility before choosing a target occupation."
@@ -13779,7 +14100,7 @@
             }
           }
         ],
-        "answer": "Editorial analysis: medical record text organization and pending-question lists can be trialed in approved systems; imaging interpretation, surgical planning, and clinical operations must be verified against the applicable scope of medical devices and professional authority, and this page obtains no AI adoption rate or measured effect for this occupation. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
+        "answer": "No verified quantitative AI estimate is available for this occupation; the former 33% has been withdrawn. The WHO health-AI governance overview provides general ethics and human-rights context, not evidence of occupational clinical effects, adoption or job loss. The complete fictional K01/L01 records below can support a field-comparison trial, without diagnosis, selection of surgery or anesthesia, or evidence of clinical competence.",
         "authority_links": [
           {
             "来源": "Occupational tasks",
@@ -13824,21 +14145,21 @@
             "链接": "https://www.onetonline.org/link/details/29-1022.00"
           }
         ],
-        "difference_intro": "The following are conditional task assistance ideas that have not yet been shown to be adopted by this occupation or to improve efficiency; clinical judgment and patient safety responsibility must still be borne by the professional team.",
+        "difference_intro": "These are tool-trial ideas using the fictional K01/L01-v1 text only. They evaluate no images, patients, surgery or anesthesia, and measure no speed, accuracy or clinical effect.",
         "difference_rows": [
           {
-            "AI主要改变": "Editorial candidate, adoption effect unverified: organize history text and pending imaging lists in approved systems.",
-            "仍由人负责": "Verify the patient, original imaging, and systemic risks; imaging interpretation is done by a qualified team.",
+            "AI主要改变": "Trial listing the source records",
+            "仍由人负责": "Use only the supplied text; add no patient or clinical details",
             "方向": "History and imaging"
           },
           {
-            "AI主要改变": "Editorial candidate, adoption effect unverified: organize recorded symptoms, evidence, and pending questions.",
-            "仍由人负责": "The professional team verifies diagnosis, uncertainty, and consultation; the model does not confirm a diagnosis.",
+            "AI主要改变": "Trial flagging K01’s conflict",
+            "仍由人负责": "Retain left/right values; do not decide the correct side",
             "方向": "Diagnostic assessment"
           },
           {
-            "AI主要改变": "Editorial candidate, adoption effect unverified: organize the established consultation, preoperative documents, and record versions.",
-            "仍由人负责": "The authorized clinical team decides indications, scope, and anesthesia.",
+            "AI主要改变": "Trial identifying unspecified information",
+            "仍由人负责": "Keep unspecified fields unknown, not completed or absent",
             "方向": "Preoperative planning"
           }
         ],
@@ -13898,140 +14219,140 @@
         ],
         "questions": [
           {
-            "回答": "No; the responsibility for surgical indications, anesthesia, informed consent, and complication management must be verified by humans.",
-            "来源": "WHO health AI governance (general principles)",
+            "回答": "No. It compares supplied text and determines no diagnosis, surgery, anesthesia or readiness for an operation.",
+            "来源": "Site editorial exercise; WHO link is general governance context only",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "Can AI operate independently?"
+            "问题": "Can this trial make clinical decisions?"
           },
           {
-            "回答": "Return to the original records and pause high-risk operations.",
-            "来源": "WHO health AI governance (general principles)",
+            "回答": "Retain the original values and flag the conflict; do not let the tool guess the correct side.",
+            "来源": "Site editorial exercise; WHO link is general governance context only",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "What to do about input errors?"
+            "问题": "What if a model changes the side?"
           },
           {
-            "回答": "Use only approved systems and permissions.",
-            "来源": "WHO health AI governance (general principles)",
+            "回答": "This task uses only the supplied fictional inputs and needs or accepts no real cases.",
+            "来源": "Site editorial exercise; WHO link is general governance context only",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "Can real data be uploaded?"
+            "问题": "Can real patient records be used?"
           },
           {
-            "回答": "Cross-check against imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, follow-up records, and the site.",
-            "来源": "WHO health AI governance (general principles)",
+            "回答": "Compare each field with K01/L01-v1 and the reference, distinguishing source values, blanks, unspecified fields and annotations.",
+            "来源": "Site editorial exercise; WHO link is general governance context only",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "How to check outputs?"
+            "问题": "How should output be checked?"
           },
           {
-            "回答": "Official employment tables cannot be used to derive single-item replacement rates.",
+            "回答": "No verified proportion is available here; aggregate projections cannot establish a specific technology’s causal effects.",
             "来源": "Official occupational information",
             "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "问题": "How many jobs will AI replace?"
           },
           {
-            "回答": "The clinical team bears diagnosis and treatment responsibility according to statutory scope of practice and organizational authorization; specific responsibility determination follows local law.",
-            "来源": "WHO health AI governance (general principles)",
+            "回答": "Only a text-checking exercise, not clinical competence or a medical qualification.",
+            "来源": "Site editorial exercise; WHO link is general governance context only",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "Who bears responsibility for outcomes?"
+            "问题": "What does completion demonstrate?"
           },
           {
-            "回答": "When identifier conflicts, missing critical documents, or exceeding authorization occur, hand over to an authorized team; handle emergencies according to medical institution procedures.",
-            "来源": "WHO health AI governance (general principles)",
+            "回答": "List them for verification; fabricate no professional response, signature or clearance.",
+            "来源": "Site editorial exercise; WHO link is general governance context only",
             "链接": "https://www.who.int/publications/i/item/9789240029200",
-            "问题": "When to escalate?"
+            "问题": "What about unresolved questions?"
           }
         ],
-        "responsibility_intro": "Use fictional samples only when trying tools; real operations require verifying patient data permissions, imaging validation, surgical authorization, and physician review.",
+        "responsibility_intro": "These are this site’s paper-trial requirements. The WHO overview supplies general governance context, not a WHO clinical protocol.",
         "responsibility_steps": [
           {
-            "步骤": "Verify objects",
-            "说明": "Check symptoms, oral and maxillofacial imaging, and systemic risks."
+            "步骤": "Limit inputs",
+            "说明": "Use only the complete fictional K01/L01-v1 text."
           },
           {
-            "步骤": "Verify tasks",
-            "说明": "Identify impacted teeth, infection, tumors, or trauma."
+            "步骤": "Check originals",
+            "说明": "Check identifiers, sides, assessments and signatures field by field."
           },
           {
-            "步骤": "Verify records",
-            "说明": "Imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, and follow-up records"
+            "步骤": "Retain unknowns",
+            "说明": "Add no information absent from the supplied text."
           },
           {
-            "步骤": "Verify anomalies",
-            "说明": "Preoperative assessment and an emergency team on standby."
+            "步骤": "Keep a trail",
+            "说明": "Annotations and corrections do not overwrite originals."
           },
           {
-            "步骤": "Verify authorization",
-            "说明": "Responsibility for surgical indications, anesthesia, informed consent, and complication management"
+            "步骤": "List questions",
+            "说明": "Claim no professional review or surgical clearance."
           }
         ],
         "risk_rows": [
           {
-            "为什么重要": "Life-threatening respiratory compromise.",
-            "控制方式": "Preoperative assessment and an emergency team on standby.",
-            "风险": "Airway risk"
+            "为什么重要": "A qualified team must assess the situation promptly; a career-interest exercise cannot grade its severity.",
+            "控制方式": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "风险": "Infection and breathing or swallowing difficulty"
           },
           {
-            "为什么重要": "Sepsis or airway compression.",
-            "控制方式": "Emergency identification and hospital transfer consultation.",
-            "风险": "Infection spread"
+            "为什么重要": "Professional dental care is needed; the paper exercise cannot generate treatment plans.",
+            "控制方式": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "风险": "Dental infection"
           },
           {
-            "为什么重要": "Sensory or functional impairment.",
-            "控制方式": "Imaging planning and informed consent.",
-            "风险": "Nerve injury"
+            "为什么重要": "Altered sensation may persist; this does not predict an individual outcome or incidence across all surgery.",
+            "控制方式": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "风险": "Wisdom-tooth removal and nerve injury"
           },
           {
-            "为什么重要": "Severe intraoperative bleeding.",
-            "控制方式": "Verify history and hemostasis plans.",
-            "风险": "Bleeding"
+            "为什么重要": "Professional assessment is needed; this page infers no coagulation or vascular cause.",
+            "控制方式": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "风险": "Bleeding after wisdom-tooth removal"
           },
           {
-            "为什么重要": "Wrong tooth extraction.",
-            "控制方式": "Triple verification of patient, imaging, and site.",
-            "风险": "Wrong-site surgery"
+            "为什么重要": "Only textual disagreement can be established; the patient’s surgical side cannot be decided.",
+            "控制方式": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "风险": "Conflicting sides in fictional records"
           }
         ],
         "task_rows": [
           {
-            "人的控制点": "Verify the patient, original imaging, and systemic risks; imaging interpretation is done by a qualified team.",
-            "任务": "Check symptoms, oral and maxillofacial imaging, and systemic risks.",
-            "工作方向": "History and imaging",
-            "当前变化": "Editorial candidate, adoption effect unverified: organize history text and pending imaging lists in approved systems."
+            "人的控制点": "Use only the supplied text; add no patient or clinical details",
+            "任务": "Check K01/L01 identifiers and v1",
+            "工作方向": "Identify inputs",
+            "当前变化": "Trial listing the source records"
           },
           {
-            "人的控制点": "The professional team verifies diagnosis, uncertainty, and consultation; the model does not confirm a diagnosis.",
-            "任务": "Identify impacted teeth, infection, tumors, or trauma.",
-            "工作方向": "Diagnostic assessment",
-            "当前变化": "Editorial candidate, adoption effect unverified: organize recorded symptoms, evidence, and pending questions."
+            "人的控制点": "Retain left/right values; do not decide the correct side",
+            "任务": "Compare plan, imaging label and consent",
+            "工作方向": "Compare sides",
+            "当前变化": "Trial flagging K01’s conflict"
           },
           {
-            "人的控制点": "The authorized clinical team decides indications, scope, and anesthesia.",
-            "任务": "Determine the surgical scope, anesthesia, and consultation plan.",
-            "工作方向": "Preoperative planning",
-            "当前变化": "Editorial candidate, adoption effect unverified: organize the established consultation, preoperative documents, and record versions."
+            "人的控制点": "Keep unspecified fields unknown, not completed or absent",
+            "任务": "Check K01 assessment and signature fields",
+            "工作方向": "Identify unknowns",
+            "当前变化": "Trial identifying unspecified information"
           },
           {
-            "人的控制点": "The responsible team verifies risks and alternatives and completes real communication and consent.",
-            "任务": "Explain alternatives, risks, and recovery.",
-            "工作方向": "Informed consent",
-            "当前变化": "Editorial candidate, adoption effect unverified: draft the expression of reviewed documents."
+            "人的控制点": "Generate no assessment, signature or authorization",
+            "任务": "Check L01 assessment and signature fields",
+            "工作方向": "Identify blanks",
+            "当前变化": "Trial distinguishing blank from unspecified"
           },
           {
-            "人的控制点": "A person with credentials and organizational authority performs the surgery; the documentation tool does not operate.",
-            "任务": "Perform extractions, jaw, or soft tissue surgery according to credentials.",
-            "工作方向": "Surgery",
-            "当前变化": "Editorial candidate, adoption effect unverified: organize only the surgery records already produced and the pending items."
+            "人的控制点": "Agreement proves neither clinical safety nor readiness for surgery",
+            "任务": "Check what matching sides establish",
+            "工作方向": "Review inferences",
+            "当前变化": "Trial finding overstrong conclusions"
           },
           {
-            "人的控制点": "A qualified team assesses and escalates per current organizational procedures, without waiting for model output.",
-            "任务": "Handle infection, trauma, and intraoperative anomalies.",
-            "工作方向": "Emergency handling",
-            "当前变化": "Editorial candidate, adoption effect unverified: organize the recorded anomaly timeline for team verification."
+            "人的控制点": "Separate personal annotations from originals; do not overwrite sources",
+            "任务": "Use the reference while retaining originals and annotations",
+            "工作方向": "Document corrections",
+            "当前变化": "Trial drafting a comparison table"
           },
           {
-            "人的控制点": "Verify real patient reactions, follow-up, and the responsibility for anomaly handling.",
-            "任务": "Monitor bleeding, infection, nerve function, and healing.",
-            "工作方向": "Postoperative follow-up",
-            "当前变化": "Editorial candidate, adoption effect unverified: summarize recorded symptoms and pending follow-up items."
+            "人的控制点": "No professional feedback is supplied; claim no review or clearance",
+            "任务": "List matters requiring a qualified team’s verification",
+            "工作方向": "Organize questions",
+            "当前变化": "Trial organizing a question list"
           }
         ],
         "transition": "Moving to an adjacent position requires training and qualifications for the target occupation."
@@ -14100,13 +14421,13 @@
             "stage": "Seven-day paper exercise"
           }
         ],
-        "direct_answer": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
-        "entry_heading": "Learn basic tasks first, then practice under supervision",
+        "direct_answer": "In the U.S., professional dental education such as a DDS/DMD is generally followed by four to six years of OMS specialty training, sometimes combined with an MD. State licensure, ABOMS board certification and hospital privileges are distinct. For mainland China, check dental education, physician qualification examinations, registration and post requirements separately. Specialty training for existing practitioners is not an initial entry route.",
+        "entry_heading": "Check education and qualifications; distinguish paper exploration from formal training",
         "heading": "Oral and maxillofacial surgeon training and qualification path",
         "locale_requirements": {
           "credential_boundary": "Courses or interest scores do not automatically grant independent work authority.",
           "jurisdiction": "U.S. 29-1022.00 and Chinese position qualifications are verified separately.",
-          "summary": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification."
+          "summary": "In the U.S., professional dental education such as a DDS/DMD is generally followed by four to six years of OMS specialty training, sometimes combined with an MD. State licensure, ABOMS board certification and hospital privileges are distinct. For mainland China, check dental education, physician qualification examinations, registration and post requirements separately. Specialty training for existing practitioners is not an initial entry route."
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14123,16 +14444,16 @@
             "scope": "U.S. 29-1022.00 precise occupation"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://jdkq.jlu.edu.cn/info/1008/5568.htm",
             "id": "onet-training",
-            "label": "Occupational projections",
-            "scope": "U.S. 29-1022.00 precise occupation"
+            "label": "Jilin 2026 OMS specialty training",
+            "scope": "Example for existing practitioners, not universal initial entry conditions"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
+            "href": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html",
             "id": "faa",
-            "label": "Work activities",
-            "scope": "U.S. 29-1022.00 precise occupation"
+            "label": "China Physicians Law",
+            "scope": "Chinese physician qualification, registration and duties, not U.S. dental licensing"
           }
         ],
         "tracks": [
@@ -14151,14 +14472,14 @@
                 "next_moves": "Decide the next step based on supervisory feedback, actual ability, and qualification verification; stage labels do not automatically grant authority.",
                 "readiness_evidence": "Supervisor feedback, medical record verification, and ability assessment records.",
                 "responsibility": "In the corresponding education and clinical training, perform history and imaging related tasks under supervisor guidance.",
-                "role": "Perform under training"
+                "role": "Supervised clinical training"
               },
               {
                 "credentials": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
                 "next_moves": "Decide the next step based on supervisory feedback, actual ability, and qualification verification; stage labels do not automatically grant authority.",
                 "readiness_evidence": "Approved task records, informed consent, and confirmation by the next responsible person.",
-                "responsibility": "After obtaining the corresponding practice credentials and organizational authority, check symptoms, oral and maxillofacial imaging, and systemic risks.; Record judgments, communication, and transfer.",
-                "role": "Independent handoff"
+                "responsibility": "After obtaining the corresponding practice credentials and organizational authority, check symptoms, oral and maxillofacial imaging, and systemic risks. Record judgments, communication, and transfer.",
+                "role": "Practice within licensed and assigned scope"
               },
               {
                 "credentials": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
@@ -14185,14 +14506,14 @@
                 "next_moves": "Decide the next step based on supervisory feedback, actual ability, and qualification verification; stage labels do not automatically grant authority.",
                 "readiness_evidence": "Supervisor feedback, medical record verification, and ability assessment records.",
                 "responsibility": "In the corresponding education and clinical training, perform preoperative planning related tasks under supervisor guidance.",
-                "role": "Perform under training"
+                "role": "Supervised clinical training"
               },
               {
                 "credentials": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
                 "next_moves": "Decide the next step based on supervisory feedback, actual ability, and qualification verification; stage labels do not automatically grant authority.",
                 "readiness_evidence": "Approved task records, informed consent, and confirmation by the next responsible person.",
-                "responsibility": "After obtaining the corresponding practice credentials and organizational authority, determine the surgical scope, anesthesia, and consultation plan.; Record judgments, communication, and transfer.",
-                "role": "Independent handoff"
+                "responsibility": "After obtaining the corresponding practice credentials and organizational authority, determine the surgical scope, anesthesia, and consultation plan. Record judgments, communication, and transfer.",
+                "role": "Practice within licensed and assigned scope"
               },
               {
                 "credentials": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
@@ -14219,14 +14540,14 @@
                 "next_moves": "Decide the next step based on supervisory feedback, actual ability, and qualification verification; stage labels do not automatically grant authority.",
                 "readiness_evidence": "Supervisor feedback, medical record verification, and ability assessment records.",
                 "responsibility": "In the corresponding education and clinical training, perform surgery related tasks under supervisor guidance.",
-                "role": "Perform under training"
+                "role": "Supervised clinical training"
               },
               {
                 "credentials": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
                 "next_moves": "Decide the next step based on supervisory feedback, actual ability, and qualification verification; stage labels do not automatically grant authority.",
                 "readiness_evidence": "Approved task records, informed consent, and confirmation by the next responsible person.",
-                "responsibility": "After obtaining the corresponding practice credentials and organizational authority, perform extractions, jaw, or soft tissue surgery according to credentials.; Record judgments, communication, and transfer.",
-                "role": "Independent handoff"
+                "responsibility": "After obtaining the corresponding practice credentials and organizational authority, perform extractions, jaw, or soft tissue surgery according to credentials. Record judgments, communication, and transfer.",
+                "role": "Practice within licensed and assigned scope"
               },
               {
                 "credentials": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
@@ -14257,7 +14578,7 @@
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "Surgeon: surgeons complete a checkable occupational loop around the work object, task process, result review, and responsibility handover; specific requirements should go back to official occupational sources, employer processes, and local rules",
+                  "label": "Settings and workflow",
                   "secondary_value": {
                     "$item": "oral-and-maxillofacial-surgeons.profile.definition-block.3",
                     "block": "profile",
@@ -14273,7 +14594,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "Surgeon: surgeons complete a checkable occupational loop around the work object, task process, result review, and responsibility handover; specific requirements should go back to official occupational sources, employer processes, and local rules",
+                  "label": "Specialty training and tools",
                   "secondary_value": {
                     "$item": "oral-and-maxillofacial-surgeons.profile.definition-block.5",
                     "block": "profile",
@@ -14289,7 +14610,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "Surgeon: surgeons complete a checkable occupational loop around the work object, task process, result review, and responsibility handover; specific requirements should go back to official occupational sources, employer processes, and local rules",
+                  "label": "Records and handover",
                   "secondary_value": null,
                   "value": {
                     "$item": "oral-and-maxillofacial-surgeons.profile.definition-block.7",
@@ -14358,7 +14679,7 @@
             }
           },
           {
-            "answer": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification.",
+            "answer": "In the U.S., professional dental education such as a DDS/DMD is generally followed by four to six years of OMS specialty training, sometimes combined with an MD. State licensure, ABOMS board certification and hospital privileges are distinct. For mainland China, check dental education, physician qualification examinations, registration and post requirements separately. Specialty training for existing practitioners is not an initial entry route.",
             "key": "qa1",
             "question": "How to enter?",
             "table": {
@@ -14366,38 +14687,38 @@
                 {
                   "alternate_value": null,
                   "label": "Basic education",
-                  "secondary_value": "Verify hiring",
-                  "value": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification."
+                  "secondary_value": "Usually DDS/DMD; check each program’s admission conditions",
+                  "value": "U.S. professional dental education"
                 },
                 {
                   "alternate_value": null,
                   "label": "Skills training",
-                  "secondary_value": "Verify position",
-                  "value": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification."
+                  "secondary_value": "OMS usually takes four to six years; only some programs include an MD",
+                  "value": "U.S. specialty training"
                 },
                 {
                   "alternate_value": null,
                   "label": "Supervised practice",
-                  "secondary_value": "Verify feedback",
-                  "value": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification."
+                  "secondary_value": "Appropriate education, supervision and assigned scope; a paper exercise is no substitute",
+                  "value": "Formal supervised practice"
                 },
                 {
                   "alternate_value": null,
                   "label": "Occupational qualifications",
-                  "secondary_value": "Verify region",
-                  "value": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification."
+                  "secondary_value": "State licensing differs from ABOMS QE/OCE certification; check applicable requirements",
+                  "value": "State licensure and certification"
                 },
                 {
                   "alternate_value": null,
                   "label": "Organizational authorization",
-                  "secondary_value": "Verify validity period",
-                  "value": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification."
+                  "secondary_value": "Verify surgery, anesthesia, supervision and emergency responsibilities separately",
+                  "value": "Institutional privileges"
                 },
                 {
                   "alternate_value": null,
                   "label": "Chinese positions",
-                  "secondary_value": "Verify local rules",
-                  "value": "BLS lists a doctoral or professional degree and internship/residency training; U.S. dental licensure, oral and maxillofacial surgery training, and anesthesia and surgical authority are verified by state and organization, and Chinese physician/dental qualifications require separate verification."
+                  "secondary_value": "Check education, statutory qualification, registration and institutional requirements; do not generalize examples",
+                  "value": "Mainland routes and posts"
                 }
               ]
             }
@@ -14447,72 +14768,72 @@
             },
             "evidence_refs": [
               "onet",
-              "clinical"
+              "abscess"
             ],
             "id": "cost-change",
-            "mitigation": "Preoperative assessment and an emergency team on standby.",
-            "scenario": "Maxillofacial swelling or inadequate anesthesia assessment.",
-            "title": "Airway risk"
+            "mitigation": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "scenario": "The NHS dental-abscess page identifies breathing or swallowing difficulty as emergency contexts.",
+            "title": "Infection and breathing or swallowing difficulty"
           },
           {
-            "affected_roles": "Oral and maxillofacial surgery teams involved in infection spread assessment, surgery, and follow-up",
-            "consequence": "Infection progression may affect patient safety and increase the emergency handling burden.",
+            "affected_roles": "The relevant qualified clinical team",
+            "consequence": "Professional dental care is needed; the paper exercise cannot generate treatment plans.",
             "evidence_refs": [
               "onet",
-              "clinical"
+              "abscess"
             ],
             "id": "record-version",
-            "mitigation": "Emergency identification and hospital transfer consultation.",
-            "scenario": "Deep maxillofacial infection is treated late.",
-            "title": "Infection spread"
+            "mitigation": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "scenario": "The NHS describes dental abscess as an infection-related build-up of pus requiring timely dental treatment.",
+            "title": "Dental infection"
           },
           {
-            "affected_roles": "Oral and maxillofacial surgery teams involved in nerve injury assessment, surgery, and follow-up",
-            "consequence": "Paresthesia or functional impairment may occur.",
+            "affected_roles": "The relevant qualified clinical team",
+            "consequence": "Altered sensation may persist; this does not predict an individual outcome or incidence across all surgery.",
             "evidence_refs": [
               "onet",
               "clinical"
             ],
             "id": "personal-data",
-            "mitigation": "Imaging planning and informed consent.",
-            "scenario": "Insufficient verification of surgical scope and imaging.",
-            "title": "Nerve injury"
+            "mitigation": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "scenario": "The NHS explains that wisdom-tooth removal can damage nearby nerves and cause altered sensation.",
+            "title": "Wisdom-tooth removal and nerve injury"
           },
           {
-            "affected_roles": "Oral and maxillofacial surgery teams involved in bleeding assessment, surgery, and follow-up",
-            "consequence": "Bleeding may occur and affect surgical safety.",
+            "affected_roles": "The relevant qualified clinical team",
+            "consequence": "Professional assessment is needed; this page infers no coagulation or vascular cause.",
             "evidence_refs": [
               "onet",
               "clinical"
             ],
             "id": "technical-boundary",
-            "mitigation": "Verify history and hemostasis plans.",
-            "scenario": "Coagulation or vascular risk is not assessed.",
-            "title": "Bleeding"
+            "mitigation": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "scenario": "The NHS wisdom-tooth-removal page identifies persistent bleeding as a reason to seek timely professional help.",
+            "title": "Bleeding after wisdom-tooth removal"
           },
           {
-            "affected_roles": "Oral and maxillofacial surgery teams involved in wrong-site assessment, surgery, and follow-up",
-            "consequence": "May operate on the wrong tooth or site.",
+            "affected_roles": "The relevant qualified clinical team",
+            "consequence": "Only textual disagreement can be established; the patient’s surgical side cannot be decided.",
             "evidence_refs": [
-              "onet",
-              "clinical"
+              "fermat-input",
+              "fermat-reference"
             ],
             "id": "single-coverage",
-            "mitigation": "Triple verification of patient, imaging, and site.",
-            "scenario": "Tooth or surgical site mismatch.",
-            "title": "Wrong-site surgery"
+            "mitigation": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "scenario": "K01-v1 records plan left, imaging label right and consent left; the correct side remains undetermined.",
+            "title": "Conflicting sides in fictional records"
           },
           {
-            "affected_roles": "Oral and maxillofacial surgery teams involved in missed follow-up assessment, surgery, and follow-up",
-            "consequence": "May delay identification of postoperative bleeding, infection, or other complications.",
+            "affected_roles": "The relevant qualified clinical team",
+            "consequence": "Communication gaps may impede timely professional help; this exercise cannot assess real patient circumstances.",
             "evidence_refs": [
               "onet",
               "clinical"
             ],
             "id": "delivery-acceptance",
-            "mitigation": "Clarify follow-up and emergency instructions.",
-            "scenario": "Infection or bleeding is not reviewed in time.",
-            "title": "Missed postoperative follow-up"
+            "mitigation": "Career-research question: ask a formal program or institution who is responsible for risk communication, postoperative contact and escalation; specific management follows its current protocols.",
+            "scenario": "NHS wisdom-tooth-removal information identifies worsening symptoms, infection and bleeding as reasons to seek help; follow-up arrangements depend on the provider.",
+            "title": "Postoperative communication and follow-up"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -14530,28 +14851,28 @@
             "scope": "U.S. dentist combined narrative and specialty training"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "id": "facilities",
-            "label": "Work environment",
-            "scope": "U.S. 29-1022.00 precise occupation"
+            "href": "#career-visual-group-path",
+            "id": "fermat-input",
+            "label": "FermatMind fictional inputs",
+            "scope": "This site’s K01/L01-v1 values; editorial fiction, not clinical records"
           },
           {
-            "href": "https://www.who.int/publications/i/item/9789240029200",
-            "id": "privacy",
-            "label": "Health AI governance",
-            "scope": "General governance principles; does not provide clinical risk probabilities"
+            "href": "#career-visual-group-path",
+            "id": "fermat-reference",
+            "label": "FermatMind text-checking reference",
+            "scope": "This site’s field-by-field reference and questions, not O*NET/BLS clinical evidence"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "id": "onet",
-            "label": "Occupational activities",
-            "scope": "U.S. 29-1022.00 precise occupation"
+            "href": "https://www.nhs.uk/conditions/dental-abscess/",
+            "id": "abscess",
+            "label": "NHS dental-abscess information",
+            "scope": "Infection and urgent-care context; not a management protocol for this page"
           },
           {
-            "href": "https://aaoms.org/wp-content/uploads/2024/07/impacted_third_molars.pdf",
+            "href": "https://www.nhs.uk/tests-and-treatments/wisdom-tooth-removal/",
             "id": "clinical",
-            "label": "AAOMS impacted third molar statement",
-            "scope": "Risk context for specific alveolar surgery; the six cards are editorial summaries"
+            "label": "NHS wisdom-tooth-removal information",
+            "scope": "Wisdom-tooth-removal context only; not guidance for all maxillofacial surgery"
           }
         ]
       },
@@ -14576,12 +14897,12 @@
             {
               "指标": "2025 health and social work · urban non-private",
               "数值": "146,266 yuan/year (pre-tax)",
-              "说明": "Broad medical employer industry only; includes other clinical and social work positions and is not oral and maxillofacial surgeon wages or an individual range."
+              "说明": "Urban-unit statistics for the whole health and social work industry, covering multiple occupations; not OMS occupational pay or an individual range. Interpret within the NBS survey population; individual businesses, freelancers and business profits are outside this employee-wage measure."
             },
             {
               "指标": "2025 health and social work · urban private",
               "数值": "75,631 yuan/year (pre-tax)",
-              "说明": "The two populations are listed separately and are not an individual range; self-employed individuals and freelancers and self-employment profits are excluded, and it is not used for instrument manufacturing or sales."
+              "说明": "Urban-unit statistics for the whole health and social work industry, covering multiple occupations; not OMS occupational pay or an individual range. Interpret within the NBS survey population; individual businesses, freelancers and business profits are outside this employee-wage measure."
             }
           ],
           "china_ai_row": {
@@ -14599,45 +14920,45 @@
           "china_edu_table": [
             {
               "学历段": "Dental education",
-              "岗位方向": "Oral medicine and clinical practice",
-              "说明": "Check the professional degree."
+              "岗位方向": "Example: Shanghai Jiao Tong dental school",
+              "说明": "Lists oral surgery, deformity, tumor and prosthodontic courses; not proof of a current admissions round or nationwide duration."
             },
             {
-              "学历段": "Surgical residency training",
-              "岗位方向": "Surgery and anesthesia",
-              "说明": "Supervised."
+              "学历段": "Qualifications and registration",
+              "岗位方向": "Mainland physician qualifications and dental-category registration",
+              "说明": "Check qualification, practice location, category and scope under applicable law; education or training grants no automatic surgical authority."
             },
             {
-              "学历段": "Licensure and authorization",
-              "岗位方向": "Statutory entry and organizational authority",
-              "说明": "By region."
+              "学历段": "Specialty-training example",
+              "岗位方向": "Jilin University’s 2026 OMS program",
+              "说明": "Two years for this program, subject to its prior training/title and dental-practice requirements; not a two-year initial entry route."
             },
             {
-              "学历段": "Continuing education",
-              "岗位方向": "New technology and complications",
-              "说明": "Per regulation."
+              "学历段": "Specific job conditions",
+              "岗位方向": "Tongji dental hospital’s closed 2026 recruitment",
+              "说明": "The OMS post required a doctorate and relevant specialty; clinical dental posts also listed residency completion or attending qualification. Not a national minimum."
             }
           ],
           "china_industry_table": [
             {
-              "行业": "Dental hospital",
-              "需求": "Complex extractions and maxillofacial surgery."
+              "行业": "Dental-hospital post example",
+              "需求": "Tongji’s 2026 notice listed an OMS doctoral post, closed May 31; no wage amount."
             },
             {
-              "行业": "General hospital",
-              "需求": "Trauma, infection, and reconstruction."
+              "行业": "Subspecialty post examples",
+              "需求": "Wuhan’s 2026 notice listed orthognathic/cleft, head-and-neck tumor and trauma directions, closed February 15; not evidence of current vacancies."
             },
             {
-              "行业": "Teaching hospital",
-              "需求": "Surgery and specialty training."
+              "行业": "Training setting example",
+              "需求": "Jilin’s 2026 program describes clinic, ward and related rotations; training arrangements, not recruitment or wage statistics."
             }
           ],
           "china_intl": "O*NET U.S. occupational tasks｜https://www.onetonline.org/link/details/29-1022.00",
-          "china_name_row": "China wages: broad medical employer industry reference",
+          "china_name_row": "China wages: health and social work industry context",
           "china_open": "Chinese positions do not map one-to-one to U.S. 29-1022.00.",
           "china_open_note": "Check region, employer, qualifications, hours, and benefits.",
-          "china_ref": "2025 Urban Unit Employment Annual Average Wage Situation｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
-          "china_salary_note": "Insufficient evidence: nationwide medians, percentiles, and starting pay for this occupation were not obtained; the 2025 pre-tax annual averages for health and social work of 146266 yuan for non-private and 75631 yuan for private are only a broad medical employer industry, include other positions and are not this occupation's wage or an individual range, exclude self-employed individuals and freelancers and owner-operated clinic profits, and are not used for instrument manufacturing or sales.",
+          "china_ref": "NBS 2025 urban-unit annual average wages｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "A comparable nationwide occupational median, percentiles and uniform starting pay remain unavailable. In 2025, urban non-private and private health and social work averages were 146,266 and 75,631 yuan per year before tax, measured separately. The industry includes multiple occupations; these are not OMS wages, an individual range or owner-operated clinic profits. The survey covers urban legal entities with five or more workers under the respective non-private/private survey methods, excluding individual businesses and freelancers outside unit employment.",
           "china_salary_table": [
             {
               "城市/区间": "China data status",
@@ -14663,7 +14984,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "2025 Urban Unit Employment Annual Average Wage Situation｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
+          "sources_note": "NBS 2025 urban-unit annual average wages｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
           "ui": {
             "ai_heading": "Tools and responsibility boundaries",
             "driver_heading": "Influencing factors",
@@ -14898,7 +15219,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "If you are willing to complete dental professional education and surgical residency training and take on anesthesia, surgical, and complication risks, you can explore oral and maxillofacial surgery; fictional samples can be used to check imaging diagnosis, surgical plans, anesthesia assessment, informed consent, surgery, and follow-up records.",
+        "summary": "If sustained OMS study, patient communication and team responsibilities appeal to you, explore specific programs and jobs. Start with K01/L01-v1: compare original text values, conflicting sides, omissions and unknowns, then list verification questions. The exercise evaluates no imaging diagnosis, surgical plan or clinical competence.",
         "title": "Oral and maxillofacial surgeon"
       },
       "fit_decision_checklist": {
@@ -15025,67 +15346,67 @@
         ],
         "transitions": [
           {
-            "capability_gaps": "The general dentistry direction requires verification of broad preventive and basic diagnostic and treatment ability, local licensing, and organizational authorization; the target page uses the SOC29-1020 dentist parent group, which includes general and specialty practice, and parent group statistics cannot replace general dentist statistics.",
-            "shared_capabilities": "History taking, oral examination, patient communication, and infection control.",
+            "capability_gaps": "General dentists also need professional dental education and licensing; OMS adds specialty surgical training, rather than a simple surgery/no-surgery distinction.",
+            "shared_capabilities": "Provide prevention, examination, treatment and restoration, sometimes including oral or periodontal surgery.",
             "target_href": "/zh/career/jobs/dentists-general",
             "target_slug": "dentists-general",
-            "target_title": "Dentists (parent page)",
+            "target_title": "General dentists",
             "transition_distance": "Editorial judgment: qualifications require separate verification"
           },
           {
-            "capability_gaps": "Focuses more on long-term nonsurgical correction",
-            "shared_capabilities": "Oral and maxillofacial imaging and multidisciplinary treatment plan communication.",
+            "capability_gaps": "Focuses on jaw relationships and corrective plans; verify specialty training and practice requirements separately.",
+            "shared_capabilities": "Use diagnostic records and appliances to change tooth and jaw relationships.",
             "target_href": "/zh/career/jobs/orthodontists",
             "target_slug": "orthodontists",
-            "target_title": "Orthodontist",
+            "target_title": "Orthodontists",
             "transition_distance": "Editorial judgment: qualifications require separate verification"
           },
           {
-            "capability_gaps": "Focuses more on prosthesis design",
-            "shared_capabilities": "Oral and maxillofacial assessment, prosthetic needs communication, and teamwork.",
+            "capability_gaps": "Focuses on prostheses, function and fitting; distinguish fabrication collaboration from clinical responsibilities.",
+            "shared_capabilities": "Design, restore and fit prostheses to support oral function and appearance.",
             "target_href": "/zh/career/jobs/prosthodontists",
             "target_slug": "prosthodontists",
-            "target_title": "Prosthodontist",
+            "target_title": "Prosthodontists",
             "transition_distance": "Editorial judgment: qualifications require separate verification"
           },
           {
-            "capability_gaps": "The original other surgery target has no fixed page, so it is replaced with real pediatric surgery for comparison; pediatric medicine, general surgery training, and institutional practice authorization must be added separately, and dental surgical authority cannot be transferred.",
-            "shared_capabilities": "Perioperative communication and medical record and risk handover.",
+            "capability_gaps": "Patient populations, anatomy and pediatric surgical training differ; dental credentials are not pediatric surgical qualifications.",
+            "shared_capabilities": "Provide relevant surgical diagnosis and care for fetuses, infants, children and adolescents.",
             "target_href": "/zh/career/jobs/pediatric-surgeons",
             "target_slug": "pediatric-surgeons",
-            "target_title": "Pediatric surgeon",
+            "target_title": "Pediatric surgeons",
             "transition_distance": "Editorial judgment: qualifications require separate verification"
           },
           {
-            "capability_gaps": "Does not carry out independent surgery",
-            "shared_capabilities": "Knowledge of the dental environment, instruments, and infection control; assistants help within their position scope.",
+            "capability_gaps": "Limited assisting duties depend on applicable rules and do not grant independent diagnostic or surgical rights.",
+            "shared_capabilities": "Perform limited clinical assistance under a dentist’s direction and administrative tasks such as records and scheduling.",
             "target_href": "/zh/career/jobs/dental-assistants",
             "target_slug": "dental-assistants",
-            "target_title": "Dental assistant",
+            "target_title": "Dental assistants",
             "transition_distance": "Editorial judgment: qualifications require separate verification"
           },
           {
-            "capability_gaps": "Manufacturing rather than patient surgery",
-            "shared_capabilities": "Oral anatomy and prosthetic needs communication; fabrication technique must be learned separately.",
+            "capability_gaps": "Focuses on fabrication and device techniques; clinical communication background proves neither fabrication skill nor patient-care authority.",
+            "shared_capabilities": "Construct and repair dentures and appliances using prescriptions or specifications and models.",
             "target_href": "/zh/career/jobs/dental-laboratory-technicians",
             "target_slug": "dental-laboratory-technicians",
-            "target_title": "Dental laboratory technician",
+            "target_title": "Dental laboratory technicians",
             "transition_distance": "Editorial judgment: qualifications require separate verification"
           },
           {
-            "capability_gaps": "The general dentistry direction requires verification of broad preventive and basic diagnostic and treatment ability, local licensing, and organizational authorization; the target page uses the SOC29-1020 dentist parent group, which includes general and specialty practice, and parent group statistics cannot replace general dentist statistics.",
-            "shared_capabilities": "History taking, oral examination, patient communication, and infection control.",
+            "capability_gaps": "Next question: how do the target program and post distinguish broad care, specialty referral and institutional privileges?",
+            "shared_capabilities": "Compare general dental care with OMS specialty tasks; do not substitute parent-group wages for exact occupational statistics.",
             "target_href": "/zh/career/jobs/dentists-general",
             "target_slug": "dentists-general",
-            "target_title": "Dentists (parent page)",
+            "target_title": "General dentists",
             "transition_distance": "Editorial judgment: qualifications require separate verification"
           },
           {
-            "capability_gaps": "Focuses more on long-term nonsurgical correction",
-            "shared_capabilities": "Oral and maxillofacial imaging and multidisciplinary treatment plan communication.",
+            "capability_gaps": "Next question: which orthodontic specialty courses, supervised practice and local qualifications apply?",
+            "shared_capabilities": "Compare interest in orthodontic plans, longitudinal records and collaboration with OMS.",
             "target_href": "/zh/career/jobs/orthodontists",
             "target_slug": "orthodontists",
-            "target_title": "Orthodontist",
+            "target_title": "Orthodontists",
             "transition_distance": "Editorial judgment: qualifications require separate verification"
           }
         ]
@@ -15237,110 +15558,110 @@
           }
         ],
         "boundary": "Interest assessments do not prove ability or qualification for surgical indications, anesthesia, informed consent, or complication management responsibility.",
-        "direct_answer": "Can systematically verify history, imaging, airway, and infection risks, and collaborate with anesthesia, prosthodontics, and orthodontic teams.",
+        "direct_answer": "Interests can guide further exploration. This text exercise observes willingness to check records and ask questions, not clinical competence.",
         "directions": [
           {
-            "direction": "General dentist",
-            "fit_signals": "Likes general dentistry",
+            "direction": "General dentists",
+            "fit_signals": "Compare your interest in broad dental care and specialty surgery.",
             "target": {
               "href": "/en/career/jobs/dentists-general",
               "slug": "dentists-general",
-              "title": "Dentists (parent page)"
+              "title": "General dentists"
             },
-            "watchouts": "The general dentistry direction still requires verification of general diagnostic and treatment ability and local authorization; the link is currently the SOC29-1020 dentist parent group, which includes general dentists and specialties, so the parent page wages cannot be treated as general dentist wages."
+            "watchouts": "General dentists also need professional dental education and licensing; OMS adds specialty surgical training, rather than a simple surgery/no-surgery distinction."
           },
           {
-            "direction": "Orthodontist",
-            "fit_signals": "Likes orthodontic planning",
+            "direction": "Orthodontists",
+            "fit_signals": "Explore interest in dentofacial correction and longitudinal records.",
             "target": {
               "href": "/en/career/jobs/orthodontists",
               "slug": "orthodontists",
-              "title": "Orthodontist"
+              "title": "Orthodontists"
             },
-            "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
+            "watchouts": "Focuses on jaw relationships and corrective plans; verify specialty training and practice requirements separately."
           },
           {
-            "direction": "Prosthodontist",
-            "fit_signals": "Likes oral prosthetics",
+            "direction": "Prosthodontists",
+            "fit_signals": "Compare interest in function, prosthetic design and fitting.",
             "target": {
               "href": "/en/career/jobs/prosthodontists",
               "slug": "prosthodontists",
-              "title": "Prosthodontist"
+              "title": "Prosthodontists"
             },
-            "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
+            "watchouts": "Focuses on prostheses, function and fitting; distinguish fabrication collaboration from clinical responsibilities."
           },
           {
-            "direction": "Pediatric surgeon",
-            "fit_signals": "If you prefer that direction's tasks, you can observe: perioperative communication and medical record and risk handover.",
+            "direction": "Pediatric surgeons",
+            "fit_signals": "Research further if pediatric populations and the relevant medical training interest you.",
             "target": {
               "href": "/en/career/jobs/pediatric-surgeons",
               "slug": "pediatric-surgeons",
-              "title": "Pediatric surgeon"
+              "title": "Pediatric surgeons"
             },
-            "watchouts": "The original other surgery target has no fixed page, so it is replaced with real pediatric surgery for comparison; pediatric medicine, general surgery training, and institutional practice authorization must be added separately, and dental surgical authority cannot be transferred."
+            "watchouts": "Patient populations, anatomy and pediatric surgical training differ; dental credentials are not pediatric surgical qualifications."
           },
           {
-            "direction": "Dental assistant",
-            "fit_signals": "Likes clinical assistance",
+            "direction": "Dental assistants",
+            "fit_signals": "Compare interest in clinical assistance, preparation and records.",
             "target": {
               "href": "/en/career/jobs/dental-assistants",
               "slug": "dental-assistants",
-              "title": "Dental assistant"
+              "title": "Dental assistants"
             },
-            "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
+            "watchouts": "Limited assisting duties depend on applicable rules and do not grant independent diagnostic or surgical rights."
           },
           {
-            "direction": "Dental laboratory technician",
-            "fit_signals": "Likes precision fabrication",
+            "direction": "Dental laboratory technicians",
+            "fit_signals": "Compare interest in materials, precise fabrication and specification checks.",
             "target": {
               "href": "/en/career/jobs/dental-laboratory-technicians",
               "slug": "dental-laboratory-technicians",
-              "title": "Dental laboratory technician"
+              "title": "Dental laboratory technicians"
             },
-            "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
+            "watchouts": "Focuses on fabrication and device techniques; clinical communication background proves neither fabrication skill nor patient-care authority."
           }
         ],
         "heading": "Who is suited to be an oral and maxillofacial surgeon?",
         "questions": [
           {
-            "answer": "Observe how history and imaging correspond only in public fictional materials or lawful teaching; original patient data requires authorization.",
-            "question": "Am I willing to perform history and imaging?"
+            "answer": "Before entry, compare text values, omissions and unknowns in K01/L01-v1 and list questions about programs or team responsibilities. No diagnosis, images or clinical feedback are supplied. This task assesses no clinical competence.",
+            "question": "Am I interested in the formal study behind history and imaging work?"
           },
           {
-            "answer": "First understand diagnostic evidence and uncertainty; real diagnosis requires formal education and scope of practice.",
-            "question": "Am I willing to perform diagnostic assessment?"
+            "answer": "Before entry, compare text values, omissions and unknowns in K01/L01-v1 and list questions about programs or team responsibilities. No diagnosis, images or clinical feedback are supplied. This task assesses no clinical competence.",
+            "question": "Am I willing to learn how clinicians handle diagnostic uncertainty?"
           },
           {
-            "answer": "Mark pending conditions and responsible persons in teaching cases, and do not generate executable surgical plans.",
-            "question": "Am I willing to perform preoperative planning?"
+            "answer": "Before entry, compare text values, omissions and unknowns in K01/L01-v1 and list questions about programs or team responsibilities. No diagnosis, images or clinical feedback are supplied. This task assesses no clinical competence.",
+            "question": "Am I interested in preoperative team responsibilities?"
           },
           {
-            "answer": "Simulate explaining purposes, limitations, and questions; real informed consent is completed by the responsible clinical team.",
-            "question": "Am I willing to perform informed consent?"
+            "answer": "Before entry, compare text values, omissions and unknowns in K01/L01-v1 and list questions about programs or team responsibilities. No diagnosis, images or clinical feedback are supplied. This task assesses no clinical competence.",
+            "question": "Am I willing to study patient communication and informed consent?"
           },
           {
-            "answer": "First observe formal training and duties, and do not operate on real patients with desktop exercises.",
-            "question": "Am I willing to perform surgery?"
+            "answer": "Before entry, compare text values, omissions and unknowns in K01/L01-v1 and list questions about programs or team responsibilities. No diagnosis, images or clinical feedback are supplied. This task assesses no clinical competence.",
+            "question": "Am I prepared to explore sustained formal surgical training?"
           },
           {
-            "answer": "Identify in public cases when to contact the qualified team; handle real emergencies according to organizational procedures.",
-            "question": "Am I willing to perform emergency handling?"
+            "answer": "Before entry, compare text values, omissions and unknowns in K01/L01-v1 and list questions about programs or team responsibilities. No diagnosis, images or clinical feedback are supplied. This task assesses no clinical competence.",
+            "question": "Am I interested in a qualified team’s emergency responsibilities?"
           },
           {
-            "answer": "Simulate organizing reactions, timing, and pending items; real follow-up requires authorization.",
-            "question": "Am I willing to perform postoperative follow-up?"
+            "answer": "Before entry, compare text values, omissions and unknowns in K01/L01-v1 and list questions about programs or team responsibilities. No diagnosis, images or clinical feedback are supplied. This task assesses no clinical competence.",
+            "question": "Am I interested in follow-up records and team communication?"
           },
           {
-            "answer": "Understand airway assessment and team escalation responsibility; self-ratings cannot grant handling authority.",
-            "question": "Can I handle airway risk?"
+            "answer": "Before entry, compare text values, omissions and unknowns in K01/L01-v1 and list questions about programs or team responsibilities. No diagnosis, images or clinical feedback are supplied. This task assesses no clinical competence.",
+            "question": "Am I willing to learn formal training and responsibilities concerning airway risks?"
           },
           {
-            "answer": "Observe how infection clues are recorded and escalated, and do not judge clinical ability from interests.",
-            "question": "Can I handle infection spread?"
+            "answer": "Before entry, compare text values, omissions and unknowns in K01/L01-v1 and list questions about programs or team responsibilities. No diagnosis, images or clinical feedback are supplied. This task assesses no clinical competence.",
+            "question": "Am I interested in infection risks and timely handover responsibilities?"
           },
           {
-            "answer": "Verify risk explanations and follow-up responsibility in teaching materials; formal ability requires supervised training and assessment.",
-            "question": "Can I handle nerve injury?"
+            "answer": "Before entry, compare text values, omissions and unknowns in K01/L01-v1 and list questions about programs or team responsibilities. No diagnosis, images or clinical feedback are supplied. This task assesses no clinical competence.",
+            "question": "Am I willing to study risk communication concerning nerve injury?"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -15358,7 +15679,7 @@
             "tone": "caution"
           },
           {
-            "body": "First observe history and imaging verification, informed consent, and cross-disciplinary handover in lawful teaching settings; real diagnosis and treatment requires credentials.",
+            "body": "Safe trial: complete this page’s fictional K01/L01-v1 record comparison, checking textual sides, missing fields and unknowns. No additional case search or patient contact is required.",
             "id": "experiment",
             "label": "Preoperative planning",
             "tone": "action"
@@ -15366,34 +15687,34 @@
         ],
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "href": "https://www.onetonline.org/link/details/29-1021.00",
+            "label": "General dentists",
+            "usage": "U.S. definition and tasks; not proof of cross-jurisdiction entry or transfer eligibility."
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "href": "https://www.onetonline.org/link/details/29-1023.00",
+            "label": "Orthodontists",
+            "usage": "U.S. definition and tasks; not proof of cross-jurisdiction entry or transfer eligibility."
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "href": "https://www.onetonline.org/link/summary/29-1024.00",
+            "label": "Prosthodontists",
+            "usage": "U.S. definition and tasks; not proof of cross-jurisdiction entry or transfer eligibility."
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "href": "https://www.onetonline.org/link/summary/29-1243.00",
+            "label": "Pediatric surgeons",
+            "usage": "U.S. definition and tasks; not proof of cross-jurisdiction entry or transfer eligibility."
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "href": "https://www.onetonline.org/link/summary/31-9091.00",
+            "label": "Dental assistants",
+            "usage": "U.S. definition and tasks; not proof of cross-jurisdiction entry or transfer eligibility."
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-1022.00",
-            "label": "O*NET 29-1022.00",
-            "usage": "Occupational tasks and abilities; interest explanations are for exploration only."
+            "href": "https://www.onetonline.org/link/summary/51-9081.00",
+            "label": "Dental laboratory technicians",
+            "usage": "U.S. definition and tasks; not proof of cross-jurisdiction entry or transfer eligibility."
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1022.00",
@@ -15416,11 +15737,11 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Practice surgical decision boundaries with fictional cases",
+        "label": "Explore career interests",
         "source_page_type": "Career information page",
         "subject_key": "oral-and-maxillofacial-surgeons",
         "subject_kind": "Oral and maxillofacial surgeon",
-        "target_action": "Use public teaching cases to map preoperative risk, informed consent, consultation, and postoperative follow-up processes; do not operate on real patients",
+        "target_action": "Reflect on exploration directions with the RIASEC career-interest assessment; it does not assess medical competence or qualifications.",
         "test_slug": "holland-career-interest-test-riasec"
       },
       "responsibilities_block": {
@@ -15430,23 +15751,29 @@
         "type": "list"
       },
       "riasec_fit_block": {
-        "fit_interest": "Can systematically verify history, imaging, airway, and infection risks, and collaborate with anesthesia, prosthodontics, and orthodontic teams.",
-        "interest": "Can systematically verify history, imaging, airway, and infection risks, and collaborate with anesthesia, prosthodontics, and orthodontic teams.",
+        "fit_interest": "Reflect on your willingness to explore sustained OMS education, detailed records, patient communication and team responsibilities; interest is not clinical competence.",
+        "interest": "Reflect on your willingness to explore sustained OMS education, detailed records, patient communication and team responsibilities; interest is not clinical competence.",
         "riasec": "Occupational interests can be used for exploration; scales do not prove position ability or authorization.",
         "riasec_short": "Maxillofacial diagnosis, surgery, and reconstruction"
       },
       "source_card": {
         "eeat_signals": {
-          "author": {
-            "$item": "oral-and-maxillofacial-surgeons.sources.boundary-notice.2",
-            "block": "sources",
-            "copy_key": "career.item.boundary-notice",
-            "type": "prose"
-          },
+          "author": "FermatMind Editorial",
           "source": "BLS 29-1022.00 2025—2035 precise occupation statistics; O*NET tasks; NBS Chinese wage gap.",
-          "updated_at": "2026-10-12: the author verified the current occupational tasks, wages, overall projection, and source purpose; pending independent review."
+          "updated_at": "Tasks, statistical scope and education and job sources checked on 9 November 2026; consult the original institutions for specific application status."
         },
-        "note": "The evidence supports only scope-limited judgments about surgeons in the labeled market and period, and does not constitute a guarantee of personal income, hiring, or fit.",
+        "note": {
+          "$join": [
+            "The evidence supports only scope-limited judgments about surgeons in the labeled market and period, and does not constitute a guarantee of personal income, hiring, or fit.",
+            {
+              "$item": "oral-and-maxillofacial-surgeons.sources.boundary-notice.2",
+              "block": "sources",
+              "copy_key": "career.item.boundary-notice",
+              "type": "prose"
+            }
+          ],
+          "separator": "；"
+        },
         "secondary_links": [
           {
             "href": {
@@ -15456,7 +15783,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Occupational tasks"
+            "label": "MBTI preference assessment"
           },
           {
             "href": {
@@ -15466,7 +15793,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Wages and employment"
+            "label": "Big Five personality assessment"
           },
           {
             "href": {
@@ -15476,7 +15803,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Qualification or rules"
+            "label": "MBTI preference assessment"
           },
           {
             "href": {
@@ -15486,7 +15813,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Statistical boundaries"
+            "label": "Big Five personality assessment"
           }
         ]
       },
@@ -15496,6 +15823,7 @@
     "interface": {
       "interface.fit.directions_heading": "Adjacent career directions",
       "interface.fit.interest_code_heading": "Interest tendencies",
+      "interface.path.competence_ladder_heading": "Qualifications and paper-exploration materials",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "Interpretation boundaries",
       "interface.us_salary.section_label": "U.S. wages",
@@ -15634,7 +15962,7 @@
         "fact_id": "cn-oms-nonprivate-2025",
         "market": "Chinese mainland",
         "measure": "Annual average wage for urban non-private health and social work",
-        "occupation_scope": "Broad medical employer industry only; includes other clinical and social work positions and is not this occupation's wage or an individual range; self-employment profits and instrument manufacturing and sales are excluded",
+        "occupation_scope": "Urban-unit statistics for the whole health and social work industry, covering multiple occupations; not OMS occupational pay or an individual range. Interpret within the NBS survey population; individual businesses, freelancers and business profits are outside this employee-wage measure.",
         "period": "2025",
         "source_refs": [
           "nbs-wages"
@@ -15646,20 +15974,20 @@
         "fact_id": "cn-oms-private-2025",
         "market": "Chinese mainland",
         "measure": "Annual average wage for urban private health and social work",
-        "occupation_scope": "Broad medical employer industry only; includes other clinical and social work positions and is not this occupation's wage or an individual range; self-employment profits and instrument manufacturing and sales are excluded",
+        "occupation_scope": "Urban-unit statistics for the whole health and social work industry, covering multiple occupations; not OMS occupational pay or an individual range. Interpret within the NBS survey population; individual businesses, freelancers and business profits are outside this employee-wage measure.",
         "period": "2025",
         "source_refs": [
           "nbs-wages"
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+50+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
+        "derivation": "The former 33% editorial estimate is withdrawn. The 50/50/0 task ratings lack verified task-effect evidence; no replacement score is generated.",
+        "display_value": "No verified quantitative estimate",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "Task-level AI evidence status",
         "occupation_scope": "Oral and maxillofacial surgeon",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -15668,8 +15996,8 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
@@ -15707,7 +16035,7 @@
         "availability": "available",
         "fact_ref": "cn-oms-nonprivate-2025",
         "key": "china_pay",
-        "label": "Broad medical industry · non-private"
+        "label": "Health and social work industry · non-private"
       }
     ]
   },
@@ -15722,7 +16050,7 @@
       "text": "Oral and maxillofacial surgeon: work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "e6b8ed3c7de445af8dc9e0e27295704dc618de8a8fc09f48596ac917037408fe",
+  "source_content_sha256": "23cb9c885f7a0a0608547d7d6432b0fa93d0583dc43de1d0c6bb4a67c4aa79af",
   "subject": {
     "canonical_slug": "oral-and-maxillofacial-surgeons",
     "name": "Oral and maxillofacial surgeon",
