@@ -133,6 +133,40 @@ final class ReviewedSciencePageRevisionTest extends TestCase
         $this->assertSame(2, CmsTranslationRevision::query()->count());
     }
 
+    public function test_binding_observation_is_readonly_and_distinguishes_topology_status_and_missing_parent(): void
+    {
+        $source = $this->page('zh-CN', false);
+        $target = $this->page('en', true, $source);
+        $source->forceFill(['translation_status' => 'published'])->saveQuietly();
+        $before = [$source->fresh()->getAttributes(), $target->fresh()->getAttributes()];
+        $history = CmsTranslationRevision::query()->get()->map->getAttributes()->all();
+        $delivery = app(ReviewedSciencePageDelivery::class);
+        $facts = $delivery->bindingDiagnostics();
+        $this->assertSame('after_failure_recovery', $facts['capture']);
+        $this->assertSame('source', $facts['pages']['zh-CN']['topology']);
+        $this->assertSame('published', $facts['pages']['zh-CN']['translation_status']);
+        $this->assertTrue($facts['pages']['en']['source_topology_valid']);
+        $this->assertFalse($facts['pages']['en']['source_status_is_source']);
+        $this->assertTrue($facts['pages']['en']['source_group_matches']);
+        $this->assertSame($before, [$source->fresh()->getAttributes(), $target->fresh()->getAttributes()]);
+        $this->assertSame($history, CmsTranslationRevision::query()->get()->map->getAttributes()->all());
+        $source->forceFill(['translation_status' => 'source', 'source_locale' => 'en'])->saveQuietly();
+        $facts = $delivery->bindingDiagnostics();
+        $this->assertFalse($facts['pages']['en']['source_topology_valid']);
+        $this->assertTrue($facts['pages']['en']['source_status_is_source']);
+        $source->forceFill(['source_locale' => 'zh-CN'])->saveQuietly();
+        $target->forceFill(['source_content_id' => null])->saveQuietly();
+        $facts = $delivery->bindingDiagnostics();
+        $this->assertSame('unlinked_translation', $facts['pages']['en']['topology']);
+        $this->assertFalse($facts['pages']['en']['source_id_present']);
+        $this->assertSame('not_evaluated', $facts['pages']['en']['source_group_matches']);
+        foreach ($facts['pages'] as $row) {
+            foreach ($row as $value) {
+                $this->assertTrue(is_bool($value) || in_array($value, ['not_evaluated', 'source', 'published', 'unlinked_translation'], true));
+            }
+        }
+    }
+
     public function test_state_changes_after_preflight_and_non_owner_mutations_are_refused(): void
     {
         $page = $this->page('zh-CN', false);

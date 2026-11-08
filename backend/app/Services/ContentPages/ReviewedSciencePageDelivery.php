@@ -27,6 +27,60 @@ final readonly class ReviewedSciencePageDelivery
 
     public function __construct(private ReviewedSciencePageRevision $revisions, private ContentReleaseSnapshotCatalogService $snapshots) {}
 
+    /** Metadata-only observation after a failed operation; never a publication preflight or authority. */
+    public function bindingDiagnostics(): array
+    {
+        $result = [];
+        $status = static fn (?string $value): string => in_array($value, ['source', 'published', 'draft', 'machine_draft', 'human_review', 'approved', 'stale', 'archived'], true) ? $value : 'other';
+        $topology = static function (ContentPage $page): string {
+            if (! filled($page->source_locale)) {
+                return 'invalid';
+            }
+            if ($page->source_content_id === null) {
+                return $page->source_locale === $page->locale ? 'source' : 'unlinked_translation';
+            }
+
+            return 'linked_translation';
+        };
+        foreach (['zh-CN', 'en'] as $locale) {
+            $page = ContentPage::query()->withoutGlobalScopes()->where('org_id', 0)->where('slug', 'item-design-notes')->where('locale', $locale)->first();
+            if (! $page instanceof ContentPage) {
+                $result[$locale] = ['page_present' => false];
+
+                continue;
+            }
+            $revision = $page->workingRevision;
+            $source = $page->source_content_id === null ? null : ContentPage::query()->withoutGlobalScopes()
+                ->where('org_id', 0)->whereKey($page->source_content_id)->first();
+            $identity = $revision !== null && $revision->content_type === 'content_page'
+                && (int) $revision->content_id === (int) $page->id && (int) $revision->org_id === 0
+                && $revision->locale === $page->locale && $revision->translation_group_id === $page->translation_group_id;
+            $result[$locale] = [
+                'page_present' => true,
+                'topology' => $topology($page),
+                'translation_status' => $status($page->translation_status),
+                'working_equals_published' => filled($page->working_revision_id) && $page->working_revision_id === $page->published_revision_id,
+                'revision_identity_valid' => $identity,
+                'source_id_present' => $page->source_content_id !== null,
+                'source_found_in_org0' => $source !== null,
+                'source_topology_valid' => $source === null ? 'not_evaluated' : $topology($source) === 'source',
+                'source_status_is_source' => $source === null ? 'not_evaluated' : $source->translation_status === 'source',
+                'source_published' => $source === null ? 'not_evaluated' : $source->status === 'published',
+                'source_public' => $source === null ? 'not_evaluated' : (bool) $source->is_public,
+                'source_slug_matches' => $source === null ? 'not_evaluated' : $source->slug === $page->slug,
+                'source_locale_matches' => $source === null ? 'not_evaluated' : $source->locale === $page->source_locale,
+                'source_group_matches' => $source === null ? 'not_evaluated' : $source->translation_group_id === $page->translation_group_id,
+                'source_hash_present' => $source === null ? 'not_evaluated' : filled($source->source_version_hash),
+                'revision_source_id_matches' => $revision === null ? 'not_evaluated' : $revision->source_content_id === $page->source_content_id,
+                'revision_source_locale_matches' => $revision === null ? 'not_evaluated' : $revision->source_locale === $page->source_locale,
+                'provenance_hash_matches' => $source === null || $revision === null ? 'not_evaluated'
+                    : filled($source->source_version_hash) && $revision->translated_from_version_hash === $source->source_version_hash,
+            ];
+        }
+
+        return ['capture' => 'after_failure_recovery', 'pages' => $result];
+    }
+
     public function publish(array $binding): array
     {
         $this->assertBinding($binding);

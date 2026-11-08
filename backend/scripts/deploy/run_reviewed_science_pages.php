@@ -53,15 +53,22 @@ try {
         'binding' => $binding, ...$result, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
 } catch (Throwable $error) {
     $restored = null;
+    $diagnostics = null;
     if ($delivery !== null && $binding !== null) {
         try {
             $restored = $delivery->recover($binding);
         } catch (Throwable) {
             $restored = ['restored' => false, 'recovery_status' => 'failed'];
         }
+        try {
+            $diagnostics = $delivery->bindingDiagnostics();
+        } catch (Throwable) {
+            // Database failure is not permission to expose an exception or raw row.
+        }
     }
     echo json_encode(['ok' => false, 'schema' => 'science.reviewed_pages.delivery.v1',
         'error_code' => $error instanceof DomainException && preg_match('/\A(?:science_|existing_science_)[a-z0-9_:]{1,140}\z/', $error->getMessage()) === 1
-            ? $error->getMessage() : 'science_delivery_failed', 'recovery' => $restored, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
+            ? $error->getMessage() : 'science_delivery_failed', 'binding_diagnostics' => $diagnostics,
+        'recovery' => $restored, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
     exit(1);
 }

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync,mkdtempSync,mkdirSync,writeFileSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
-import {candidate,execution,invoke,packagePath,assertApi,packageSha} from './reviewed-science-pages.mjs';
+import {candidate,execution,invoke,packagePath,assertApi,packageSha,sanitizeBindingDiagnostics} from './reviewed-science-pages.mjs';
 import {classifyPaths} from './classify-paths.mjs';
 import {requiredSeconds} from './production-release-budget.mjs';
 const root=resolve(import.meta.dirname,'../../backend');
@@ -49,4 +49,20 @@ test('failed native execution retains a bounded rejection code without raw stder
   assert.throws(()=>invoke(ex,'publish',()=>({status:1,stdout:JSON.stringify({ok:false,error_code:'existing_science_working_revision_missing'})})),/existing_science_working_revision_missing/);
   assert.throws(()=>invoke(ex,'publish',()=>({status:1,stdout:'',stderr:'sudo: not allowed to execute private command'})),/SCIENCE_TRANSPORT_SUDO_DENIED/);
   assert.throws(()=>invoke(ex,'publish',()=>({status:1,stdout:JSON.stringify({ok:false,error_code:'/private/path?secret=value'})})),/SCIENCE_NATIVE_OPERATION_FAILED/);
+});
+
+test('binding diagnostics expose only fixed locale predicates and bounded enums',()=>{
+  const raw={capture:'after_failure_recovery',private_path:'/private/value',pages:{
+    en:{page_present:true,topology:'unlinked_translation',translation_status:'published',source_found_in_org0:false,
+      source_group_matches:'not_evaluated',source_slug_matches:'/private/value',source_id:999,content_md:'private'},
+    'zh-CN':{page_present:true,topology:'source',translation_status:'source'},fr:{page_present:true}}};
+  const expected={capture:'after_failure_recovery',pages:{'zh-CN':{page_present:true,topology:'source',translation_status:'source'},
+    en:{page_present:true,source_found_in_org0:false,source_group_matches:'not_evaluated',topology:'unlinked_translation',translation_status:'published'}}};
+  assert.deepEqual(sanitizeBindingDiagnostics(raw),expected);
+  assert.equal(sanitizeBindingDiagnostics({capture:'other',pages:raw.pages}),undefined);
+  const ex=execution(env);
+  assert.throws(()=>invoke(ex,'publish',()=>({status:1,stdout:JSON.stringify({ok:false,
+    error_code:'existing_science_source_binding_invalid',binding_diagnostics:raw})})),error=>{
+      assert.deepEqual(error.bindingDiagnostics,expected);return true;
+    });
 });

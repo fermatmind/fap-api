@@ -52,8 +52,28 @@ export function invoke(ex,mode,run=spawnSync) {
   if(out.status!==0 || value.ok!==true || value.schema!=='science.reviewed_pages.delivery.v1'
     || value.mode!==mode || !equal(value.binding,ex.binding) || value.sanitized!==true
     || (mode==='publish' ? value.published_count!==2 : !((value.restored===true && value.recovery_status==='restored') || (value.restored===false && value.recovery_status==='not_required'))))
-    throw Error(/^(?:science_|existing_science_)[a-z0-9_:]{1,140}$/.test(value.error_code??'')?value.error_code:'SCIENCE_NATIVE_OPERATION_FAILED');
+    {
+      const error=Error(/^(?:science_|existing_science_)[a-z0-9_:]{1,140}$/.test(value.error_code??'')?value.error_code:'SCIENCE_NATIVE_OPERATION_FAILED');
+      error.bindingDiagnostics=sanitizeBindingDiagnostics(value.binding_diagnostics);
+      throw error;
+    }
   return value;
+}
+export function sanitizeBindingDiagnostics(value) {
+  if(value?.capture!=='after_failure_recovery' || !value.pages || typeof value.pages!=='object') return undefined;
+  const pages={};
+  const booleanFields=['page_present','working_equals_published','revision_identity_valid','source_id_present','source_found_in_org0',
+    'source_topology_valid','source_status_is_source','source_published','source_public','source_slug_matches','source_locale_matches',
+    'source_group_matches','source_hash_present','revision_source_id_matches','revision_source_locale_matches','provenance_hash_matches'];
+  for(const locale of ['zh-CN','en']) {
+    const row=value.pages[locale];if(!row || typeof row!=='object' || Array.isArray(row)) continue;
+    const result={};
+    for(const key of booleanFields) if(typeof row[key]==='boolean' || row[key]==='not_evaluated') result[key]=row[key];
+    if(['source','linked_translation','unlinked_translation','invalid'].includes(row.topology)) result.topology=row.topology;
+    if(['source','published','draft','machine_draft','human_review','approved','stale','archived','other'].includes(row.translation_status)) result.translation_status=row.translation_status;
+    pages[locale]=result;
+  }
+  return {capture:'after_failure_recovery',pages};
 }
 const hosts=environment=>environment==='staging'
   ? ['https://staging-api.fermatmind.com','https://staging.fermatmind.com']
@@ -112,6 +132,7 @@ async function cli() {
     receipt.acceptance=await verify(states,ex.binding.environment);receipt.ok=true;receipt.published_count=2;
   } catch(error) {
     receipt.failure_code=/^(?:SCIENCE_|PUBLIC_CONTENT_53_|science_|existing_science_)[A-Za-z0-9_:.-]{1,140}$/.test(error.message??'')?error.message:'SCIENCE_DELIVERY_FAILED';
+    if(error.bindingDiagnostics) receipt.binding_diagnostics=error.bindingDiagnostics;
     receipt.recovery_completed=!started;
     if(started) {
       try {invoke(ex,'recover');await verify(states,ex.binding.environment,true);receipt.recovery_completed=true;}
