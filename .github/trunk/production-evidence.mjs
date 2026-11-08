@@ -64,6 +64,36 @@ export function readProductionCI(candidate, timing, api) {
   return cis[0];
 }
 
+const productionJobName = 'Production exact-SHA activation, smoke, and LKG fallback';
+const activationStepName = 'Deploy once and automatically restore LKG after committed smoke failure';
+
+// GitHub can return a terminal job with an empty steps array. Read the same
+// authenticated job log; never substitute a timing receipt for activation.
+export function recoverProductionSteps(job, log) {
+  if (job.name !== productionJobName || job.status !== 'completed' || job.conclusion !== 'success'
+    || !Array.isArray(job.steps) || job.steps.length !== 0) throw new Error('Invalid missing-step recovery');
+  const lines = log.replace(/\x1b\[[0-9;]*m/g, '').split('\n')
+    .map(line => line.replace(/^\d{4}-\d{2}-\d{2}T\S+Z /, '').trimEnd());
+  const position = text => {
+    const matches = lines.flatMap((line, index) => line === text ? [index] : []);
+    if (matches.length !== 1) throw new Error('Missing or ambiguous production activation log');
+    return matches[0];
+  };
+  const ordered = [
+    `Complete job name: ${productionJobName}`,
+    '##[group]task deploy:symlink',
+    '##[group]task queue:reload-workers',
+    '##[group]task healthcheck:public',
+    '##[group]task healthcheck:auth-guest-contract',
+    '##[group]task healthcheck:scale-lookup',
+    '[production] info successfully deployed!',
+    '##[group]task cache:accept-public-projection',
+  ].map(position);
+  if (ordered.some((index, i) => i > 0 && index <= ordered[i - 1])
+    || lines.some(line => line.startsWith('##[error]'))) throw new Error('Invalid production activation log');
+  return {...job, steps: [{name: activationStepName, conclusion: 'success'}]};
+}
+
 export function githubProductionEvidence(repository) {
   const api = path => JSON.parse(execFileSync('gh', ['api', `repos/${repository}/${path}`], {
     encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 8 * 1024 * 1024,
@@ -104,6 +134,27 @@ export function githubProductionEvidence(repository) {
     const outcome = repository.endsWith('/fap-web') ? read('deploy-outcome.json') : null;
     return verifyProductionBinding({run, artifact, timing, outcome, ci, receipt, job});
   };
+  reader.jobs = async (runId) => {
+    const result = api(`actions/runs/${runId}/attempts/1/jobs?per_page=100`);
+    if (result.total_count !== result.jobs?.length) throw new Error('Incomplete deployment jobs response');
+    for (let i = 0; i < result.jobs.length; i++) {
+      const job = result.jobs[i];
+      if (job.name !== productionJobName || job.status !== 'completed' || job.conclusion !== 'success'
+        || !Array.isArray(job.steps) || job.steps.length !== 0) continue;
+      if (!Number.isSafeInteger(job.id)) throw new Error('Invalid production job identity');
+      // A bound native skip proves nonactivation. It is still fully verified by
+      // reader.skip before the resolver can move to an earlier accepted run.
+      if (artifacts(runId).some(a => /^trunk-deploy-skip-[a-f0-9]{40}$/.test(a.name))) {
+        result.jobs[i] = {...job, steps: [{name: activationStepName, conclusion: 'skipped'}]};
+      } else {
+        const log = execFileSync('gh', ['api', `repos/${repository}/actions/jobs/${job.id}/logs`], {
+          encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 32 * 1024 * 1024,
+        });
+        result.jobs[i] = recoverProductionSteps(job, log);
+      }
+    }
+    return result.jobs;
+  };
   reader.skip = async (run,jobs) => {
     const inventory=artifacts(run.id),matches=inventory.filter(a=>/^trunk-deploy-skip-[a-f0-9]{40}$/.test(a.name));
     if(!matches.length) {
@@ -129,9 +180,8 @@ export function githubProductionEvidence(repository) {
     if(proof.reason==='docs_rules_tests_only'&&receipt.classification?.deploy===false)return;
     if(!['already_accepted','stale_accepted_ancestor'].includes(proof.reason)||!sha(proof.accepted_sha)||proof.accepted_run_id===run.id)throw new Error('Unknown skip disposition');
     const acceptedRun=api(`actions/runs/${proof.accepted_run_id}`);
-    const acceptedJobs=api(`actions/runs/${proof.accepted_run_id}/attempts/1/jobs?per_page=100`);
-    if(acceptedJobs.total_count!==acceptedJobs.jobs?.length) throw new Error('Incomplete accepted job inventory');
-    const activations=acceptedJobs.jobs.filter(job=>job.name.startsWith('Production exact-SHA') && job.steps?.some(step=>step.name.startsWith('Deploy once')&&step.conclusion==='success'));
+    const acceptedJobs=await reader.jobs(proof.accepted_run_id);
+    const activations=acceptedJobs.filter(job=>job.name.startsWith('Production exact-SHA') && job.steps?.some(step=>step.name.startsWith('Deploy once')&&step.conclusion==='success'));
     if(activations.length!==1) throw new Error('Missing accepted activation binding');
     const accepted=await reader(acceptedRun,activations[0]);
     if(accepted!==proof.accepted_sha||(proof.reason==='already_accepted'?proof.sha!==accepted:!sha(proof.sha)))throw new Error('Invalid accepted skip baseline');

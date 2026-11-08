@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { downloadProductionArtifact, readProductionCI, verifyProductionBinding } from './production-evidence.mjs';
+import { downloadProductionArtifact, readProductionCI, verifyProductionBinding, recoverProductionSteps } from './production-evidence.mjs';
 
 const bytes = Buffer.from('immutable artifact fixture');
 const artifact = {id: 1, expired: false, digest: `sha256:${createHash('sha256').update(bytes).digest('hex')}`};
@@ -77,5 +77,41 @@ test('legacy timing uses one exact-SHA and timestamp match and still rejects mis
   ]})).id,7);
   for(const workflow_runs of [[],[ciRun(),{...ciRun(),id:8}]]) {
     assert.throws(()=>readProductionCI(candidate,timing,()=>({workflow_runs})),/Ambiguous production CI binding/);
+  }
+});
+
+const missingStepsJob = {name:'Production exact-SHA activation, smoke, and LKG fallback',status:'completed',conclusion:'success',steps:[]};
+const activationLines = [
+  `Complete job name: ${missingStepsJob.name}`,
+  '##[group]task deploy:symlink',
+  '##[group]task queue:reload-workers',
+  '##[group]task healthcheck:public',
+  '##[group]task healthcheck:auth-guest-contract',
+  '##[group]task healthcheck:scale-lookup',
+  '[production] info successfully deployed!',
+  '##[group]task cache:accept-public-projection',
+];
+const activationLog = lines => lines.map(line=>`2026-11-08T03:22:05.1234567Z ${line}`).join('\n');
+
+test('missing GitHub steps require the same successful job log with activation and ordered smoke', () => {
+  const recovered = recoverProductionSteps(missingStepsJob,activationLog(activationLines));
+  assert.deepEqual(recovered.steps,[{name:'Deploy once and automatically restore LKG after committed smoke failure',conclusion:'success'}]);
+  assert.deepEqual(missingStepsJob.steps,[]);
+});
+
+test('log recovery rejects missing, duplicate, reordered, failed and nonproduction activation', () => {
+  for(let i=0;i<activationLines.length;i++) {
+    assert.throws(()=>recoverProductionSteps(missingStepsJob,activationLog(activationLines.filter((_,j)=>j!==i))));
+    assert.throws(()=>recoverProductionSteps(missingStepsJob,activationLog([...activationLines,activationLines[i]])));
+  }
+  const reordered=[...activationLines];[reordered[2],reordered[3]]=[reordered[3],reordered[2]];
+  for(const lines of [[],reordered,[...activationLines,'##[error]late failure'],
+    ['Persist push-to-production timing receipt','production_outcome=success']]) {
+    assert.throws(()=>recoverProductionSteps(missingStepsJob,activationLog(lines)));
+  }
+  for(const mutation of [{name:'Staging exact-SHA deploy and smoke'},{status:'in_progress'},
+    {conclusion:'failure'},{conclusion:'skipped'},{steps:undefined},
+    {steps:[{name:'Deploy once and automatically restore LKG after committed smoke failure',conclusion:'skipped'}]}]) {
+    assert.throws(()=>recoverProductionSteps({...missingStepsJob,...mutation},activationLog(activationLines)),/Invalid missing-step recovery/);
   }
 });
