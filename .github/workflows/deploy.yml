@@ -41,6 +41,10 @@ jobs:
       infrastructure: ${{ steps.receipt.outputs.infrastructure }}
       classification: ${{ steps.receipt.outputs.classification }}
       operations: ${{ steps.receipt.outputs.operations }}
+      production_deploy_minutes: ${{ steps.production-budget.outputs.deploy_minutes }}
+      production_required_seconds: ${{ steps.production-budget.outputs.required_seconds }}
+      production_timeout_minutes: ${{ steps.production-budget.outputs.job_timeout_minutes }}
+      production_budget_seconds: ${{ steps.production-budget.outputs.job_budget_seconds }}
       artifact_digest: ${{ steps.artifact.outputs.digest }}
       config_fingerprint: ${{ steps.receipt.outputs.config_fingerprint }}
       career_current: ${{ steps.receipt.outputs.career_current }}
@@ -498,7 +502,7 @@ jobs:
             echo "tree_sha=$(jq -r .candidate_tree_sha "$package_receipt")"
           } >> "$GITHUB_OUTPUT"
       - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
-        if: steps.receipt.outputs.career_current == 'true'
+        if: steps.receipt.outputs.career_current == 'true' || (steps.receipt.outputs.deploy == 'true' && steps.admission.outputs.deploy == 'true' && fromJSON(steps.receipt.outputs.classification || '{}').operations.public_content_53_publish)
         with:
           php-version: '8.4'
           coverage: none
@@ -562,6 +566,17 @@ jobs:
             echo "actor=$actor"
             echo "operation_key=$operation_key"
           } >> "$GITHUB_OUTPUT"
+
+      - id: production-budget
+        name: Bind selected consumers to one bounded production budget
+        if: steps.receipt.outputs.deploy == 'true' && steps.admission.outputs.deploy == 'true'
+        env:
+          OPERATIONS_BASE64: ${{ steps.receipt.outputs.operations }}
+          CAREER_CURRENT: ${{ steps.receipt.outputs.career_current }}
+          COMPETITIVE_EVIDENCE: ${{ steps.receipt.outputs.seo_competitive_evidence }}
+          COUNCIL_RUNTIME_CLOSEOUT: ${{ steps.receipt.outputs.seo_council_runtime_closeout }}
+          PUBLIC_CONTENT_53_ENVIRONMENT: production
+        run: node .github/trunk/production-release-budget.mjs plan >> "$GITHUB_OUTPUT"
 
   staging:
     name: Staging exact-SHA deploy and smoke
@@ -1443,14 +1458,15 @@ jobs:
     needs: [policy, staging]
     if: needs.staging.result == 'success'
     runs-on: ubuntu-latest
-    # Five reviewed pages plus the 60m forward path reserve 10960s including
-    # LKG and closeout. 190m leaves 440s for setup; admission still checks
-    # the actual selected row count and elapsed time before any activation.
-    timeout-minutes: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 190 || 120 }}
+    # The verified selected consumers size both the job and activation guard.
+    # Individual forward, reader, recovery and closeout bounds remain unchanged.
+    timeout-minutes: ${{ fromJSON(needs.policy.outputs.production_timeout_minutes || '120') }}
     environment: production
     env:
       PUBLIC_CONTENT_53_PACKAGE_NAME: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_package }}
-      PRODUCTION_JOB_BUDGET_SECONDS: ${{ fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish && 11400 || 7200 }}
+      PRODUCTION_JOB_BUDGET_SECONDS: ${{ needs.policy.outputs.production_budget_seconds || '7200' }}
+      PRODUCTION_DEPLOY_MINUTES: ${{ needs.policy.outputs.production_deploy_minutes }}
+      PRODUCTION_REQUIRED_SECONDS: ${{ needs.policy.outputs.production_required_seconds }}
       ASSETS_SHA256: ${{ needs.policy.outputs.career_current_assets_sha256 }}
       SOURCE_MERGE_SHA: ${{ needs.policy.outputs.career_current_source_merge_sha }}
       MANIFEST_SHA256: ${{ needs.policy.outputs.career_current_manifest_sha256 }}
@@ -1794,18 +1810,12 @@ jobs:
               -o career_content_package_tree_sha='${{ needs.policy.outputs.career_package_tree_sha }}'
             )
           fi
-          deploy_timeout=30m
-          if test "$competitive_evidence" = true; then deploy_timeout=35m; fi
-          # Career cache repair and both sitemap readbacks also run without a
-          # Current asset change; retain every task's individual fail-closed bound.
-          if test '${{ needs.policy.outputs.career_current }}' = true; then deploy_timeout=60m; fi
-          if test '${{ fromJSON(needs.policy.outputs.classification).operations.career_cache }}' = true; then deploy_timeout=60m; fi
-          if test "$production_council_closeout" = true; then deploy_timeout=60m; fi
           # One forward deadline includes Deployer, installed Career readback,
           # and required state checks. LKG and closeout remain outside it.
-          deploy_minutes="${deploy_timeout%m}"
+          deploy_minutes="$PRODUCTION_DEPLOY_MINUTES"
           remaining=$((PRODUCTION_JOB_BUDGET_SECONDS - $(date -u +%s) + PRODUCTION_JOB_STARTED_EPOCH))
-          required="$(node .github/trunk/production-release-budget.mjs "$deploy_minutes" '${{ needs.policy.outputs.operations }}')"
+          required="$PRODUCTION_REQUIRED_SECONDS"
+          [[ "$deploy_minutes" =~ ^(30|35|60)$ && "$required" =~ ^[1-9][0-9]*$ ]]
           test "$remaining" -ge "$required" || { echo "Production budget insufficient: remaining=${remaining}s required=${required}s" >&2; exit 1; }
           PRODUCTION_FORWARD_DEADLINE=$(( $(date -u +%s) + deploy_minutes * 60 ))
           echo "PRODUCTION_FORWARD_DEADLINE=$PRODUCTION_FORWARD_DEADLINE" >> "$GITHUB_ENV"

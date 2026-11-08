@@ -52,9 +52,43 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
     .reduce((sum,[name,seconds])=>sum+(operations[name] === true ? seconds : 0),0);
 }
 
+// Explicit setup policy, not an observed upper bound. Elapsed setup is still
+// charged by the activation guard. All child and recovery allowances stay intact.
+export const PRODUCTION_SETUP_RESERVE_SECONDS = 600;
+// https://docs.github.com/en/actions/reference/limits — GitHub-hosted job limit.
+export const PRODUCTION_MAX_JOB_MINUTES = 360;
+
+export function productionJobBudget(required, publicContent = false) {
+  if (!Number.isSafeInteger(required) || required <= 0 || typeof publicContent !== 'boolean') throw Error('PRODUCTION_BUDGET_INVALID');
+  const minutes = Math.max(publicContent ? 190 : 120, Math.ceil((required + PRODUCTION_SETUP_RESERVE_SECONDS) / 60));
+  if (minutes > PRODUCTION_MAX_JOB_MINUTES) throw Error('PRODUCTION_BUDGET_EXCEEDS_PLATFORM_LIMIT');
+  return {setup_reserve_seconds:PRODUCTION_SETUP_RESERVE_SECONDS,job_timeout_minutes:minutes,job_budget_seconds:minutes*60};
+}
+
+export function productionPlan(operations, context = {}, publicContentRows, newArticleDiscovery = false) {
+  if (!operations || typeof operations !== 'object' || Array.isArray(operations)) throw Error('OPERATIONS_INVALID');
+  if (!context || typeof context !== 'object' || Array.isArray(context)
+    || Object.entries(context).some(([key,value]) => !['careerCurrent','competitiveEvidence','councilRuntimeCloseout'].includes(key) || typeof value !== 'boolean')) throw Error('PRODUCTION_CONTEXT_INVALID');
+  if (operations.career_cache !== undefined && typeof operations.career_cache !== 'boolean') throw Error('OPERATION_INVALID');
+  if (operations.public_content_53_publish === true && (!Number.isSafeInteger(publicContentRows) || publicContentRows < 1)) throw Error('PUBLIC_CONTENT_ROW_COUNT_INVALID');
+  const deployMinutes = context.careerCurrent || operations.career_cache === true
+    || (context.competitiveEvidence && context.councilRuntimeCloseout) ? 60 : context.competitiveEvidence ? 35 : 30;
+  const required = requiredSeconds(deployMinutes,operations,publicContentRows,newArticleDiscovery);
+  return {deploy_minutes:deployMinutes,required_seconds:required,...productionJobBudget(required,operations.public_content_53_publish === true)};
+}
+
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
-  const operations = JSON.parse(Buffer.from(process.argv[3], 'base64').toString());
+  const planMode = process.argv[2] === 'plan';
+  const operations = JSON.parse(Buffer.from(planMode ? process.env.OPERATIONS_BASE64 : process.argv[3], 'base64').toString());
   const rows = operations.public_content_53_publish === true ? readCandidateRows('backend',packageDigest('backend',operations.public_content_53_package)).candidates : [];
   const count = publicContentOnlineRows(rows);
-  process.stdout.write(String(requiredSeconds(Number(process.argv[2]),operations,count,rows.some(row=>row.new_article)))+'\n');
+  if (planMode) {
+    const flag = name => {
+      if (!['true','false'].includes(process.env[name])) throw Error('PRODUCTION_CONTEXT_INVALID');
+      return process.env[name] === 'true';
+    };
+    const plan = productionPlan(operations,{careerCurrent:flag('CAREER_CURRENT'),competitiveEvidence:flag('COMPETITIVE_EVIDENCE'),
+      councilRuntimeCloseout:flag('COUNCIL_RUNTIME_CLOSEOUT')},count,rows.some(row=>row.new_article));
+    for (const [key,value] of Object.entries(plan)) process.stdout.write(`${key}=${value}\n`);
+  } else process.stdout.write(String(requiredSeconds(Number(process.argv[2]),operations,count,rows.some(row=>row.new_article)))+'\n');
 }

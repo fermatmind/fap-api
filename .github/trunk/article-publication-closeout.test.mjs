@@ -7,7 +7,7 @@ import {resolve} from 'node:path';
 import {readback} from './mbti-report-article-readback.mjs';
 import test from 'node:test';
 import {classifyPaths} from './classify-paths.mjs';
-import {requiredSeconds} from './production-release-budget.mjs';
+import {requiredSeconds,productionPlan} from './production-release-budget.mjs';
 import {classifyRelease} from './classify-release.mjs';
 import {selectOperations} from './impact-consumers.mjs';
 import {readCandidateRows} from './public-content-53-package.mjs';
@@ -15,11 +15,11 @@ import {readCandidateRows} from './public-content-53-package.mjs';
 const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
 const alignmentDigest = () => createHash('sha256').update('fermatmind.public_content_seo_alignment.v1\n'+['seo-alignment.json','seo-alignment-review.json'].map(name=>`${name}\n${createHash('sha256').update(readFileSync(resolve('backend/content_assets/public_content_53',name))).digest('hex')}\n`).join('')).digest('hex');
 
-function productionBudget(production, publication) {
-  const condition='fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish';
-  assert.ok(production.includes('timeout-minutes: ${{ '+condition+' && 190 || 120 }}'));
-  assert.ok(production.includes('PRODUCTION_JOB_BUDGET_SECONDS: ${{ '+condition+' && 11400 || 7200 }}'));
-  return publication ? 11400 : 7200;
+function productionBudget(production, operations, context = {}, rows) {
+  assert.ok(production.includes("timeout-minutes: ${{ fromJSON(needs.policy.outputs.production_timeout_minutes || '120') }}"));
+  assert.ok(production.includes("PRODUCTION_JOB_BUDGET_SECONDS: ${{ needs.policy.outputs.production_budget_seconds || '7200' }}"));
+  assert.ok(production.includes('required="$PRODUCTION_REQUIRED_SECONDS"'));
+  return productionPlan(operations,context,rows).job_budget_seconds;
 }
 
 test('recovery and admitted deploy serialize production mutations together', () => {
@@ -46,9 +46,9 @@ test('pending IQ publication fits the production job with matching remaining bud
   const workflow = read('../workflows/deploy.yml');
   const production = workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
   assert.ok(production);
-  const jobSeconds = productionBudget(production,false);
   assert.match(production,/remaining=\$\(\(PRODUCTION_JOB_BUDGET_SECONDS -/);
   const operations = classifyPaths(['backend/content_assets/iq_public/entry/20261009-v1/IQ-01-en.md']).operations;
+  const jobSeconds = productionBudget(production,operations);
   assert.equal(operations.iq_public_scale_publish, true);
   const required = requiredSeconds(30, operations);
   assert.equal(required, 6593);
@@ -58,17 +58,16 @@ test('pending IQ publication fits the production job with matching remaining bud
   assert.ok(admission);
   const script = admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/, `'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
   const runAdmission = elapsed => spawnSync('bash', ['-eu', '-c', script], {encoding:'utf8', env:{...process.env,
-    deploy_minutes:'30', PRODUCTION_JOB_BUDGET_SECONDS:String(jobSeconds), PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
+    deploy_minutes:'30',PRODUCTION_REQUIRED_SECONDS:String(required), PRODUCTION_JOB_BUDGET_SECONDS:String(jobSeconds), PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
   }});
   const admitted = runAdmission(60);
   assert.equal(admitted.status, 0, admitted.stderr);
   assert.notEqual(runAdmission(jobSeconds-required+60).status, 0, 'actual workflow must still refuse admission when recovery no longer fits');
 });
 
-test('an oversized ten-page CMS and Career package is refused without borrowing recovery', () => {
+test('a ten-page CMS and Career package sizes the job without borrowing recovery', () => {
   const workflow = read('../workflows/deploy.yml');
   const production = workflow.match(/\n  production:\n([\s\S]*?)(?=\n  [\w-]+:|$)/)?.[1];
-  const jobSeconds = productionBudget(production,true);
   assert.match(production,/remaining=\$\(\(PRODUCTION_JOB_BUDGET_SECONDS -/);
   const rows = readCandidateRows(resolve('backend'),alignmentDigest()).candidates;
   assert.equal(rows.length,10);
@@ -77,10 +76,12 @@ test('an oversized ten-page CMS and Career package is refused without borrowing 
   assert.equal(operations.public_content_53_publish,true);
   assert.equal(operations.career_current_authority_release,true);
   const required = requiredSeconds(60,operations,rows.length);
+  const jobSeconds = productionBudget(production,operations,{careerCurrent:true},rows.length);
   assert.equal(required,6360+1600+10*600);
   assert.ok(9000 < 6360+26000,'the former lane-wide reserve rejected before Deployer started');
-  assert.ok(jobSeconds-300 < required,'the configured publication cap cannot admit this larger combination with full recovery');
-  assert.ok(requiredSeconds(60,operations,53) > jobSeconds,'an oversized package must still be refused');
+  assert.ok(11400-300 < required,'the former fixed cap could not admit the real package');
+  assert.ok(jobSeconds-300 >= required,'the derived cap includes every existing reserve');
+  assert.throws(()=>productionPlan(operations,{careerCurrent:true},53),/EXCEEDS_PLATFORM_LIMIT/);
   for (const count of [0,-1,1.5,NaN,Infinity,'10']) {
     assert.throws(()=>requiredSeconds(60,operations,count),/PUBLIC_CONTENT_ROW_COUNT_INVALID/);
   }
@@ -88,10 +89,11 @@ test('an oversized ten-page CMS and Career package is refused without borrowing 
   assert.ok(admission);
   const script = admission.replace(/'\$\{\{ needs.policy.outputs.operations \}\}'/,`'${Buffer.from(JSON.stringify(operations)).toString('base64')}'`);
   const run = elapsed => spawnSync('bash',['-eu','-c',script],{encoding:'utf8',env:{...process.env,
-    deploy_minutes:'60',PRODUCTION_JOB_BUDGET_SECONDS:String(jobSeconds),PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
+    deploy_minutes:'60',PRODUCTION_REQUIRED_SECONDS:String(required),PRODUCTION_JOB_BUDGET_SECONDS:String(jobSeconds),PRODUCTION_JOB_STARTED_EPOCH:String(Math.floor(Date.now()/1000)-elapsed),
   }});
-  const refused=run(300);
-  assert.notEqual(refused.status,0,'the selected ten-page package must not borrow the unrelated small package budget');
+  assert.equal(run(300).status,0);
+  const refused=run(jobSeconds-required+1);
+  assert.notEqual(refused.status,0,'elapsed setup must not consume recovery reserves');
   assert.match(refused.stderr,/Production budget insufficient/);
 });
 
