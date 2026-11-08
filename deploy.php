@@ -3852,7 +3852,7 @@ task('seo:refresh-sitemap-source-before-activation', function () {
 });
 
 task('guard:public-content-release', function () {
-    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
+    if (in_array(deployMode(), ['standard', 'code_only', 'career_content_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: guard:public-content-release.');
 
         return;

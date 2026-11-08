@@ -47,6 +47,36 @@ test('dedicated mode preserves parity and atomic publish while excluding unrelat
   assert.match(deploy, /cp -a "\\\$current\/\."/);
 });
 
+test('Career body-only release skips unrelated CMS inventory while explicit checks still fail closed', () => {
+  const body = deploy.split("task('guard:public-content-release', function () {")[1]?.split('\n});')[0];
+  assert.ok(body);
+  for (const mode of ['standard', 'code_only', 'career_content_only', 'maintenance', 'career_first_publish']) {
+    const result = JSON.parse(execFileSync('php', ['-r', `namespace Deployer;
+$mode = $argv[1]; $commands = [];
+function deployMode() { return $GLOBALS['mode']; }
+function writeln($message) {}
+function deployPlaceholderPathArg($root, $suffix) { return $root.'/'.$suffix; }
+function run($command) {
+    $GLOBALS['commands'][] = $command;
+    throw new \\RuntimeException('CMS_INVENTORY_REJECTED');
+}
+$task = function () { ${body} };
+$error = null;
+try { $task(); } catch (\\Throwable $failure) { $error = $failure->getMessage(); }
+echo json_encode(['commands' => $commands, 'error' => $error]);`, '--', mode], {
+      encoding: 'utf8', env: { ...process.env, DEPLOY_PUBLIC_CONTENT_STRICT_CAREER: '0' },
+    }));
+    if (['standard', 'code_only', 'career_content_only'].includes(mode)) {
+      assert.deepEqual(result.commands, [], mode);
+      assert.equal(result.error, null, mode);
+    } else {
+      assert.equal(result.commands.length, 1, mode);
+      assert.match(result.commands[0], /timeout 180 .*release:verify-public-content/);
+      assert.equal(result.error, 'CMS_INVENTORY_REJECTED', mode);
+    }
+  }
+});
+
 test('all activating modes refresh their own sitemap generation immediately before symlink', () => {
   const hook = "before('deploy:symlink', 'seo:refresh-sitemap-source-before-activation');";
   assert.equal(deploy.split(hook).length - 1, 1);
