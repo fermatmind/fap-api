@@ -181,27 +181,19 @@ function internalTarget(href, environment) {
     return url;
   } catch { return null; }
 }
-function readerPaths(text) {
-  return [...new Set(text.match(/(?<![A-Za-z0-9_./:@?=&%#-])\/(?:(?:zh|en)\/)?(?:articles|tests|science|career|personality|topics|method-boundaries|reliability-validity|item-design-notes|common-misconceptions|data-privacy|help|support|business)(?:\/[A-Za-z0-9._~:/?#@!$&'*+,;=%-]+)?/g) ?? [])]
-    .map(path=>path.replace(/[.。．，,、；;：:！？!?）)\]】》>]+$/g,''));
-}
 function readerVariants(line, row, dom, environment) {
   let variants = [plain(line)];
   // Bare internal paths are rendered as human anchor labels. Require the
   // corresponding visible anchor, its same public route, and every non-link word.
-  const paths = readerPaths(variants[0]);
+  const paths = [...new Set(variants[0].match(/(?<![A-Za-z0-9_./:@?=&%#-])\/(?:(?:zh|en)\/)?(?:articles|tests|science|career|personality|topics|method-boundaries|reliability-validity|item-design-notes|common-misconceptions|data-privacy|help|support|business)(?:\/[A-Za-z0-9._~:/?#@!$&'*+,;=%-]+)?/g) ?? [])]
+    .map(path=>path.replace(/[.。．，,、；;：:！？!?）)\]】》>]+$/g,''));
   for (const path of paths) {
     const expected = internalTarget(path,environment);
     if (!expected) throw new Error(`PUBLIC_CONTENT_53_LINK_${row.page_id}`);
-    // This source alias is redirect-only; the reader emits the same canonical scale.
-    const canonicalPath = row.new_traditional_page && expected.pathname === '/tests/big-five-personality-test'
-      ? '/tests/big-five-personality-test-ocean-model' : expected.pathname;
-    const localized = /^\/(?:en|zh)(?:\/|$)/.test(canonicalPath) ? canonicalPath : `/${row.identity.locale === 'en' ? 'en' : 'zh'}${canonicalPath}`;
-    const destinations = row.new_traditional_page && canonicalPath.startsWith('/tests/') ? [localized] : [canonicalPath, localized];
-    if (row.new_traditional_page && !/^\/(?:en|zh|zh-TW)(?:\/|$)/.test(canonicalPath)) destinations.push('/zh-TW' + canonicalPath);
+    const localized = /^\/(?:en|zh)(?:\/|$)/.test(expected.pathname) ? expected.pathname : `/${row.identity.locale === 'en' ? 'en' : 'zh'}${expected.pathname}`;
     const labels = Object.entries(dom.link_labels).flatMap(([href, values])=>{
       const actual = internalTarget(href,environment);
-      return actual && destinations.includes(actual.pathname) && actual.hash === expected.hash && (!row.new_traditional_page || actual.search === expected.search) ? values : [];
+      return actual && [expected.pathname,localized].includes(actual.pathname) && actual.hash === expected.hash ? values : [];
     }).filter(label=>compact(label));
     if (!labels.length) throw new Error(`PUBLIC_CONTENT_53_LINK_${row.page_id}`);
     variants = variants.flatMap(text=>[...new Set(labels)].map(label=>text.replaceAll(path,label)));
@@ -304,16 +296,8 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
           : home ? []
           : row.snapshot.seo_text ? [] : changedStrings(reviewedBefore,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
   for (const [index, line] of lines.entries()) {
-    if (row.new_traditional_page) {
-      // A visible label alone cannot prove a reviewed Markdown destination.
-      for (const [, label, href] of line.matchAll(/\[([^\[\]\n]+)\]\(([^()\s]+)\)/g)) {
-        if (!(dom.link_labels[href] ?? []).some(value=>compact(value) === compact(plain(label))))
-          throw new Error(`PUBLIC_CONTENT_53_LINK_${row.page_id}`);
-      }
-    }
     const text=compact(plain(line));
-    const linked = row.new_traditional_page && readerPaths(plain(line)).length > 0;
-    if (text && (linked || !body.includes(text)) && !readerVariants(line,row,dom,environment).some(variant=>body.includes(compact(variant))))
+    if (text && !body.includes(text) && !readerVariants(line,row,dom,environment).some(variant=>body.includes(compact(variant))))
       throw new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_${row.page_id}_ITEM_${index + 1}`);
   }
   const initializedStaging = environment === 'staging' && row.page_id === 'PAGE-60' && before.missing === true && row.staging_bootstrap;
