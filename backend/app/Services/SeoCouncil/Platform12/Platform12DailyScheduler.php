@@ -204,7 +204,7 @@ final readonly class Platform12DailyScheduler
             $this->control->withControlLock(function () use ($state, $failure): void {
                 if ($this->control->allowsMission(Platform12DailyMissionSet::IDS[2], $state['generation'])) {
                     app(Platform12EvidenceSelection::class)->atomicReference([
-                        'refresh_status' => 'failed', 'execution_sha' => $this->releaseSha(true),
+                        'refresh_status' => 'failed', 'execution_sha' => $this->releaseSha(),
                         'reason' => $failure, 'checked_at' => now('UTC')->toAtomString(),
                     ]);
                 }
@@ -250,18 +250,18 @@ final readonly class Platform12DailyScheduler
         return $current['computation_enabled'] && $current['generation'] === $started['generation'];
     }
 
-    private function releaseSha(bool $full = false): string
+    private function releaseSha(): string
     {
         $path = (string) config('seo_council.release_revision_path', dirname(base_path()).'/REVISION');
         $sha = is_file($path) ? strtolower(trim((string) file_get_contents($path))) : '';
         if (preg_match('/^[a-f0-9]{40}$/D', $sha) !== 1) {
             if (app()->environment('testing')) {
-                return str_repeat('0', $full ? 40 : 12);
+                return str_repeat('0', 40);
             }
             throw new \RuntimeException('RELEASE_REVISION_HOLD');
         }
 
-        return $full ? $sha : substr($sha, 0, 12);
+        return $sha;
     }
 
     private function storeVector(Platform12FrozenMission $mission): array

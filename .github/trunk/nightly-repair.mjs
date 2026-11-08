@@ -10,7 +10,8 @@ const codeqlInput = path => /\.(?:[jt]sx?|[cm][jt]s|es6?|html?|xhtml?|vue|hbs|ej
 const semgrepConfig = path => path === '.github/workflows/nightly.yml'
  || /(?:^|\/)\.semgrep(?:ignore|\.(?:yml|yaml))$/.test(path);
 export function repairDomains(paths,root=process.cwd(),executionInputs=[],scanPaths=paths) {
- const graph=phpConsumers(root),required=new Set(paths.filter(p=>/^backend\/tests\/.*Test\.php$/.test(p)));
+ const graph=phpConsumers(root),currentTests=new Set(graph.files.filter(p=>/^backend\/tests\/.*Test\.php$/.test(p)));
+ const required=new Set(paths.filter(p=>currentTests.has(p)));
  for(const file of graph.files.filter(p=>/^backend\/tests\/.*Test\.php$/.test(p))) if(paths.some(p=>graph.closure([file]).has(p))||executionConsumes(graph.sources.get(file),executionInputs)) required.add(file);
  // These runner guards can recover a publication and switch the release to LKG.
  // Revalidate the existing publication transactions and their derived-cache recovery,

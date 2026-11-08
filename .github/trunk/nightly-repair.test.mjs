@@ -72,6 +72,9 @@ test('JS/TS scan inputs and configuration select security without broad PHP chec
   }
   const workflow=plan(['.github/workflows/ci.yml']);assert.equal(workflow.security,true);assert.equal(workflow.workflow,true);assert.equal(workflow.php_required,false);
   // A PHP-skipped repair must not make every later PHP test re-scan old JS.
+  mkdirSync(join(root,'backend/tests/Unit'),{recursive:true});
+  writeFileSync(join(root,'backend/tests/Unit/ChangedTest.php'),'<?php namespace Tests\\Unit; final class ChangedTest {}');
+  execFileSync('git',['add','-f','backend/tests/Unit/ChangedTest.php'],{cwd:root});
   const later=repairDomains(['old.mjs','backend/tests/Unit/ChangedTest.php'],root,[],['backend/tests/Unit/ChangedTest.php']);
   assert.equal(later.security,false);assert.equal(later.php_required,true);
  } finally {rmSync(root,{recursive:true,force:true});}
@@ -110,5 +113,21 @@ process.stdout.write(JSON.stringify(path.includes('/jobs?')?{total_count:1,jobs:
   for(const [before,sha] of [['',head],['0'.repeat(40),head],['unknown',head],[head,base]]) {
    const failed=execute(before,sha);assert.notEqual(failed.status,0);assert.match(failed.stderr,/NIGHTLY_(?:REPAIR|PUSH)_BASE_HOLD/);
   }
+ } finally {rmSync(root,{recursive:true,force:true});}
+});
+
+test('retired test files leave repair selection while surviving runtime consumers stay required',()=>{
+ const root=mkdtempSync(join(tmpdir(),'nightly-retired-tests-'));
+ try {
+  const git=(...args)=>execFileSync('git',args,{cwd:root});
+  git('init','-q');mkdirSync(join(root,'backend/tests/Unit'),{recursive:true});mkdirSync(join(root,'backend/app/Ops'),{recursive:true});
+  writeFileSync(join(root,'backend/app/Ops/Daily.php'),'<?php namespace App\\Ops; final class Daily {}');
+  writeFileSync(join(root,'backend/tests/Unit/LiveTest.php'),'<?php namespace Tests\\Unit; use App\\Ops\\Daily; final class LiveTest {}');
+  const retired='backend/tests/Unit/RetiredProofTest.php';
+  writeFileSync(join(root,retired),'<?php namespace Tests\\Unit; final class RetiredProofTest {}');
+  git('add','--','backend');git('rm','-f','--',retired);
+  assert.deepEqual(repairDomains([retired],root).php_files,[]);
+  const plan=repairDomains([retired,'backend/app/Ops/Daily.php'],root);
+  assert.equal(plan.php_required,true);assert.deepEqual(plan.php_files,['tests/Unit/LiveTest.php']);
  } finally {rmSync(root,{recursive:true,force:true});}
 });
