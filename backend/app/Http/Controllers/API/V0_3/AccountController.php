@@ -24,7 +24,7 @@ final class AccountController extends Controller
 {
     public function emailLogin(Request $request): JsonResponse
     {
-        $data = $request->validate(['email' => 'required|email|max:254', 'locale' => 'nullable|in:zh,en']);
+        $data = $request->validate(['email' => 'required|email|max:254', 'locale' => 'nullable|in:zh,en,zh-TW']);
         abort_if($this->currentPublicUserId($request) !== null, 409, 'Sign out before signing in to another account.');
         $email = mb_strtolower(trim($data['email']));
         $this->sendVerification($email, [
@@ -53,7 +53,7 @@ final class AccountController extends Controller
     public function google(Request $request, GoogleLoginVerifier $verifier): JsonResponse
     {
         abort_unless(config('services.google_login.enabled'), 503, 'Google login is not enabled. Use email sign-in.');
-        $data = $request->validate(['credential' => 'required|string|max:16000', 'challenge_id' => 'required|string|size:64', 'locale' => 'nullable|in:zh,en']);
+        $data = $request->validate(['credential' => 'required|string|max:16000', 'challenge_id' => 'required|string|size:64', 'locale' => 'nullable|in:zh,en,zh-TW']);
         $key = 'account:login:'.hash('sha256', $data['challenge_id']);
 
         return Cache::lock($key.':lock', 15)->block(2, function () use ($key, $data, $verifier, $request): JsonResponse {
@@ -110,7 +110,7 @@ final class AccountController extends Controller
     public function sendGoogleLink(Request $request): JsonResponse
     {
         abort_unless(config('services.google_login.enabled'), 503, 'Google login is not enabled. Use email sign-in.');
-        $data = $request->validate(['verification_ticket' => 'required|string|size:64', 'locale' => 'nullable|in:zh,en']);
+        $data = $request->validate(['verification_ticket' => 'required|string|size:64', 'locale' => 'nullable|in:zh,en,zh-TW']);
         $key = 'account:link-ticket:'.hash('sha256', $data['verification_ticket']);
         $payload = Cache::get($key);
         abort_unless(is_array($payload), 422, 'Verification request expired.');
@@ -123,7 +123,7 @@ final class AccountController extends Controller
     public function recoverEmail(Request $request): JsonResponse
     {
         $userId = $this->userId($request);
-        $data = $request->validate(['email' => 'required|email|max:254', 'locale' => 'nullable|in:zh,en']);
+        $data = $request->validate(['email' => 'required|email|max:254', 'locale' => 'nullable|in:zh,en,zh-TW']);
         $email = mb_strtolower(trim($data['email']));
         $this->sendVerification($email, ['purpose' => 'asset_link', 'user_id' => $userId, 'email_hash' => app(PiiCipher::class)->emailHash($email)], $data['locale'] ?? 'zh');
 
@@ -192,7 +192,7 @@ final class AccountController extends Controller
     public function update(Request $request): JsonResponse
     {
         $userId = $this->userId($request);
-        $data = $request->validate(['name' => 'required|string|max:100', 'locale' => 'required|in:zh,en']);
+        $data = $request->validate(['name' => 'required|string|max:100', 'locale' => 'required|in:zh,en,zh-TW']);
         DB::transaction(function () use ($userId, $data): void {
             DB::table('users')->where('id', $userId)->update(['name' => trim($data['name']), 'updated_at' => now()]);
             $identities = DB::table('identities')->where('user_id', $userId)->whereIn('provider', ['google', 'email'])->lockForUpdate()->get();
@@ -283,6 +283,12 @@ final class AccountController extends Controller
             : "Open this link and confirm to sign in to FermatMind. A verified new email creates an account. This link expires in 15 minutes and can be used once. Ignore it if you did not request it.\n\n".$url) : ($locale === 'zh'
             ? "请确认你发起了费马账号关联。打开链接后需再次确认，链接15分钟内有效。若非本人操作，请忽略。\n\n".$url
             : "Confirm the FermatMind account link you requested. Open this link and confirm to continue. It expires in 15 minutes. Ignore this message if you did not request it.\n\n".$url);
+        if ($locale === 'zh-TW') {
+            $subject = $login ? '登入你的費馬帳號' : '確認費馬帳號連結';
+            $body = ($login
+                ? '開啟連結並確認即可登入費馬測試。首次使用的電子郵件地址會在驗證後建立帳號。連結15分鐘內有效，僅可使用一次。若非本人操作，請忽略。'
+                : '請確認你發起了費馬帳號連結。開啟連結後需再次確認，連結15分鐘內有效。若非本人操作，請忽略。')."\n\n".$url;
+        }
         try {
             Mail::raw($body, fn ($mail) => $mail->to($email)->subject($subject));
         } catch (\Throwable) {

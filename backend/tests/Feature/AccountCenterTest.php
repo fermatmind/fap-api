@@ -47,6 +47,67 @@ final class AccountCenterTest extends TestCase
         $this->withToken($session->json('fm_token'))->patchJson('/api/v0.3/me/account', ['name' => 'Email owner', 'locale' => 'zh'])->assertOk()->assertJsonPath('account.locale', 'zh');
     }
 
+    public function test_taiwan_signin_mail_and_preference_preserve_explicit_single_use_confirmation(): void
+    {
+        $this->postJson('/api/v0.3/auth/account/email', ['email' => 'taiwan@example.test', 'locale' => 'zh-TW'])
+            ->assertOk()->assertJsonPath('verification_email_captured', true)->assertJsonPath('verification_email_sent', false);
+        $this->assertDatabaseCount('users', 0);
+        $mail = Mail::mailer('array')->getSymfonyTransport()->messages()->last()->getOriginalMessage();
+        $this->assertSame('登入你的費馬帳號', $mail->getSubject());
+        $this->assertStringContainsString('首次使用的電子郵件地址會在驗證後建立帳號', $mail->getTextBody());
+        $this->assertStringContainsString('15分鐘內有效，僅可使用一次', $mail->getTextBody());
+        $this->assertStringContainsString('/zh-TW/account#verify=', $mail->getTextBody());
+        $proof = $this->emailProof();
+        $session = $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $proof])
+            ->assertOk()->assertJsonPath('account.locale', 'zh-TW');
+        $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $proof])->assertUnprocessable();
+        foreach (['zh', 'en', 'zh-TW'] as $locale) {
+            $this->withToken($session->json('fm_token'))->patchJson('/api/v0.3/me/account', ['name' => 'Taiwan reader', 'locale' => $locale])
+                ->assertOk()->assertJsonPath('account.locale', $locale);
+        }
+    }
+
+    public function test_taiwan_google_link_and_asset_recovery_mail_use_the_same_protected_native_flow(): void
+    {
+        $this->googleVerifier();
+        $user = User::factory()->create(['email' => 'account@example.test']);
+        $challenge = $this->postJson('/api/v0.3/auth/google/challenge')->assertOk()->json('challenge_id');
+        $ticket = $this->postJson('/api/v0.3/auth/google', ['credential' => 'signed-test', 'challenge_id' => $challenge, 'locale' => 'zh-TW'])
+            ->assertOk()->assertJsonPath('status', 'verification_required')->json('verification_ticket');
+        $this->postJson('/api/v0.3/auth/google/link-email', ['verification_ticket' => $ticket, 'locale' => 'zh-TW'])->assertOk();
+        $mail = Mail::mailer('array')->getSymfonyTransport()->messages()->last()->getOriginalMessage();
+        $this->assertSame('確認費馬帳號連結', $mail->getSubject());
+        $this->assertStringContainsString('開啟連結後需再次確認', $mail->getTextBody());
+        $this->assertStringContainsString('/zh-TW/account#verify=', $mail->getTextBody());
+        $session = $this->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $this->emailProof()])
+            ->assertOk()->assertJsonPath('account.id', (string) $user->id)->assertJsonPath('account.locale', 'zh-TW');
+        $this->withToken($session->json('fm_token'))->postJson('/api/v0.3/me/account/recover-email', ['email' => 'account@example.test', 'locale' => 'zh-TW'])->assertOk();
+        $recovery = Mail::mailer('array')->getSymfonyTransport()->messages()->last()->getOriginalMessage();
+        $this->assertSame('確認費馬帳號連結', $recovery->getSubject());
+        $this->assertStringContainsString('/zh-TW/account#verify=', $recovery->getTextBody());
+        $this->withToken($session->json('fm_token'))->postJson('/api/v0.3/auth/account/confirm-email', ['token' => $this->emailProof()])->assertOk();
+        $this->assertDatabaseCount('users', 1);
+    }
+
+    public function test_account_language_extension_does_not_silently_accept_other_chinese_variants(): void
+    {
+        Http::preventStrayRequests();
+        $this->withToken($this->token(User::factory()->create()));
+        foreach (['zh-HK', 'zh-Hant'] as $locale) {
+            foreach ([
+                ['/api/v0.3/auth/account/email', ['email' => 'language@example.test']],
+                ['/api/v0.3/auth/google', ['credential' => 'unused', 'challenge_id' => str_repeat('x', 64)]],
+                ['/api/v0.3/auth/google/link-email', ['verification_ticket' => str_repeat('x', 64)]],
+                ['/api/v0.3/me/account/recover-email', ['email' => 'language@example.test']],
+            ] as [$path, $payload]) {
+                $this->postJson($path, $payload + ['locale' => $locale])->assertUnprocessable()->assertJsonValidationErrors('locale');
+            }
+            $this->patchJson('/api/v0.3/me/account', ['name' => 'Reader', 'locale' => $locale])->assertUnprocessable()->assertJsonValidationErrors('locale');
+        }
+        Http::assertNothingSent();
+        $this->assertCount(0, Mail::mailer('array')->getSymfonyTransport()->messages());
+    }
+
     public function test_email_signin_reuses_existing_user_and_claims_only_verified_assets(): void
     {
         $user = User::factory()->create(['email' => 'owner@example.test']);
@@ -307,7 +368,12 @@ final class AccountCenterTest extends TestCase
     public function test_paid_anonymous_report_still_reads_and_downloads_after_proof_claim(): void
     {
         (new \Database\Seeders\ScaleRegistrySeeder)->run();
-        config(['fap.features.report_snapshot_strict_v2' => false, 'gotenberg.enabled' => false]);
+        // Account ownership remains native; stub only the current external PDF engine.
+        config(['fap.features.report_snapshot_strict_v2' => false, 'gotenberg.enabled' => true,
+            'gotenberg.base_url' => 'http://gotenberg:3000', 'gotenberg.result_print_base_url' => 'http://frontend:3000',
+            'gotenberg.result_print_token_secret' => 'account-test-print-secret']);
+        Http::preventStrayRequests();
+        Http::fake(['http://gotenberg:3000/forms/chromium/convert/url' => Http::response("%PDF-1.4\naccount-ownership-fixture\n%%EOF", 200, ['Content-Type' => 'application/pdf'])]);
         Storage::fake('local');
         [$attempt, $proof] = $this->attempt();
         $attempt->update(['locale' => 'zh-CN', 'region' => 'CN_MAINLAND', 'question_count' => 144, 'pack_id' => config('content_packs.default_pack_id'), 'dir_version' => 'MBTI-CN-v0.3']);
@@ -326,6 +392,8 @@ final class AccountCenterTest extends TestCase
         $other = User::factory()->create();
         $this->withToken($this->token($other))->getJson('/api/v0.3/attempts/'.$attempt->id.'/report')->assertNotFound();
         $this->getJson('/api/v0.3/attempts/'.$attempt->id.'/report.pdf')->assertNotFound();
+        Http::assertSentCount(1);
+        Http::assertSent(fn ($request): bool => $request->method() === 'POST' && $request->url() === 'http://gotenberg:3000/forms/chromium/convert/url');
     }
 
     public function test_six_assessments_include_eq_iq_access_actions_and_form_identity(): void
