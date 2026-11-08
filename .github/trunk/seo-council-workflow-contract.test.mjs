@@ -155,3 +155,16 @@ test('HMAC bootstrap atomically installs the fixed pair and refuses existing-key
  const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
  for(const key of Object.keys(pair)) assert.equal(deploy.split(`${key}: \${{ secrets.${key} }}`).length-1,3);
 });
+
+test('code-only keeps ordinary full-inventory and cache-maintenance skips executable',()=>{
+ for(const name of ['seo:url-truth-reconciliation-receipt','healthcheck:sitemap-source','career:warm-public-authority-cache']) {
+  const start=deployer.indexOf(`task('${name}'`);assert.ok(start>=0,name);
+  const end=deployer.indexOf('\n    }\n',start);assert.ok(end>start,name);
+  const prefix=deployer.slice(start,end+'\n    }\n'.length);
+  const script=`namespace Deployer; function deployMode(){return getenv('TEST_MODE');} function deployIsCodeOnly(){return deployMode()==='code_only';} function writeln($text){} function task($name,$callback){$callback();} ${prefix} throw new \\RuntimeException('FULL_MAINTENANCE_REACHED'); });`;
+  for(const mode of ['standard','code_only','schema_only']) {
+   const r=spawnSync('php',['-r',script],{env:{...process.env,TEST_MODE:mode},encoding:'utf8'});
+   assert.equal(r.status===0,mode!=='schema_only',`${name}/${mode}: ${r.stderr}`);
+  }
+ }
+});

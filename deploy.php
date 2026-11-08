@@ -810,7 +810,7 @@ before('deploy:symlink', 'guard:public-dns-health');
  */
 task('guard:career-detail-cache-coverage', function () {
     // Ordinary releases verify affected readers; full maintenance is not deployment.
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: guard:career-detail-cache-coverage.');
 
         return;
@@ -879,7 +879,7 @@ task('guard:career-detail-cache-coverage', function () {
  */
 task('career:repair-published-detail-cache-coverage', function () {
     // Ordinary releases verify affected readers; full maintenance is not deployment.
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: career:repair-published-detail-cache-coverage.');
 
         return;
@@ -947,7 +947,7 @@ before('deploy:symlink', 'guard:queue-reload-capability');
  */
 task('guard:career-runtime-projection-authority', function () {
     // Ordinary releases verify affected readers; full maintenance is not deployment.
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: guard:career-runtime-projection-authority.');
 
         return;
@@ -985,7 +985,7 @@ BASH,
  */
 task('career:rebuild-directory-after-detail-repair', function () {
     // Ordinary releases verify affected readers; full maintenance is not deployment.
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: career:rebuild-directory-after-detail-repair.');
 
         return;
@@ -1014,7 +1014,7 @@ task('career:rebuild-directory-after-detail-repair', function () {
 
 task('guard:career-discoverability-pre-sitemap', function () {
     // Ordinary releases verify affected readers; full maintenance is not deployment.
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: guard:career-discoverability-pre-sitemap.');
 
         return;
@@ -1036,7 +1036,7 @@ task('guard:career-discoverability-pre-sitemap', function () {
 
 task('guard:career-discoverability-post-sitemap', function () {
     // Ordinary releases verify affected readers; full maintenance is not deployment.
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: guard:career-discoverability-post-sitemap.');
 
         return;
@@ -3027,7 +3027,7 @@ BASH);
 
 task('seo:url-truth-reconciliation-receipt', function () {
     // Ordinary releases verify affected readers; full maintenance is not deployment.
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: seo:url-truth-reconciliation-receipt.');
 
         return;
@@ -3131,7 +3131,7 @@ function runUrlTruthWithPerformance(string $command): void
 
 task('seo:url-truth-controlled-reconcile', function () {
     // Ordinary releases verify affected readers; full maintenance is not deployment.
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: seo:url-truth-controlled-reconcile.');
 
         return;
@@ -3590,7 +3590,7 @@ task('cache:accept-public-projection', function () {
 
 task('career:prune-public-cache-versions', function () {
     // Ordinary releases verify affected readers; full maintenance is not deployment.
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: career:prune-public-cache-versions.');
 
         return;
@@ -3610,7 +3610,7 @@ task('career:prune-public-cache-versions', function () {
 
 task('career:warm-public-authority-cache', function () {
     // Ordinary releases verify affected readers; full maintenance is not deployment.
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: career:warm-public-authority-cache.');
 
         return;
@@ -3819,7 +3819,7 @@ BASH,
 }
 
 task('seo:warm-sitemap-source-cache', function () {
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip sitemap prewarming during ordinary deployment.');
 
         return;
@@ -3828,7 +3828,7 @@ task('seo:warm-sitemap-source-cache', function () {
 });
 
 task('seo:refresh-sitemap-source-before-activation', function () {
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         // Fast releases carry a still-fresh compatible snapshot into their own key.
         // Changed inputs or unavailable authority must rebuild before activation, never publish fallback.
         $sudoPrefix = deployCanSudoWwwData() ? 'sudo -n -u www-data --' : '';
@@ -3852,7 +3852,7 @@ task('seo:refresh-sitemap-source-before-activation', function () {
 });
 
 task('guard:public-content-release', function () {
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: guard:public-content-release.');
 
         return;
@@ -4837,7 +4837,7 @@ task('healthcheck:career-content-only', function () {
 });
 
 task('healthcheck:sitemap-source', function () {
-    if (deployMode() === 'standard') {
+    if (in_array(deployMode(), ['standard', 'code_only'], true)) {
         writeln('Skip full maintenance during ordinary deployment: healthcheck:sitemap-source.');
 
         return;
