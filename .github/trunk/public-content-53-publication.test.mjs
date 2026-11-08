@@ -9,6 +9,26 @@ import { selectPublicContentPackage, packageDigest, executorPaths, inspectPackag
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
 import { assertNewArticleDiscovery, assertDom, domOf, pathFor, read, projection, readOnlinePrestate, verifyOnlineCandidates } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
+test('support contact selects six existing bilingual pages with only approved email changes',()=>{
+ const paths=['backend/content_assets/public_content_53/support-contact.json','backend/content_assets/public_content_53/support-contact-review.json'];
+ assert.equal(selectPublicContentPackage(paths),'support-contact');
+ assert.equal(classifyPaths(paths).operations.public_content_53_package,'support-contact');
+ assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/pricing-refund.json']),/MULTIPLE_PACKAGES/);
+ const binding=inspectPackage(root,'support-contact');
+ assert.equal(binding.expected_row_count,6);
+ const rows=readCandidateRows(root,binding.package_sha256).candidates;
+ assert.deepEqual(new Set(rows.map(pathFor)),new Set(['terms','help/payment-refund','help/contact'].flatMap(path=>['zh','en'].map(locale=>`/${locale}/${path}`))));
+ for(const row of rows) for(const prefix of ['', 'staging_']) {
+  const before=row[prefix+'before'], after=row[prefix+'snapshot'];
+  assert.deepEqual(Object.keys(after),['title','summary','content_md','faq_items','support_contact']);
+  assert.equal(after.title,before.title);
+  assert.equal(after.summary,before.summary);
+  assert.equal(after.support_contact,'fuwei8868@outlook.com');
+  assert.ok(after.content_md.includes('mailto:fuwei8868@outlook.com'));
+  assert.ok(!after.content_md.includes('support@fermatmind.com'));
+  if(row.identity.slug!=='help-contact') assert.equal(after.content_md,before.content_md.replaceAll('support@fermatmind.com',after.support_contact));
+ }
+});
 test('pricing/refund publication selects only eight existing bilingual pages and keeps native publication controls',()=>{
  const paths=['backend/content_assets/public_content_53/pricing-refund.json','backend/content_assets/public_content_53/pricing-refund-review.json'];
  assert.equal(selectPublicContentPackage(paths),'pricing-refund');

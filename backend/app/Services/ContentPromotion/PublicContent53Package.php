@@ -125,6 +125,15 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
+        if (is_file($root.'/'.self::PACKAGE.'/support-contact.json')) {
+            $chain = "fermatmind.public_support_contact.v1\n";
+            foreach (['support-contact.json', 'support-contact-review.json'] as $name) {
+                $chain .= $name."\n".hash('sha256', $this->bytes($root, $name))."\n";
+            }
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return self::supportContactPackage($this->bytes($root, 'support-contact.json'), $this->bytes($root, 'support-contact-review.json'), $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/pricing-refund.json')) {
             $chain = "fermatmind.public_content_pricing_refund.v1\n";
             foreach (['pricing-refund.json', 'pricing-refund-review.json'] as $name) {
@@ -794,6 +803,82 @@ final class PublicContent53Package
             || preg_match('/\Afamilies\.items\.\d+\.tests\.\d+\.(?:questionsLabel|durationLabel)\z/', $path) !== 1) {
             throw new DomainException('public_content_53_directory_protected_field');
         }
+    }
+
+    /** Update only the authorized support address and its existing contact explanations. */
+    public static function supportContactPackage(string $bytes, string $reviewBytes, string $sha): array
+    {
+        $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $review = json_decode($reviewBytes, true, 64, JSON_THROW_ON_ERROR);
+        $rows = $package['candidates'] ?? [];
+        $targets = [];
+        foreach (['TERMS' => 'terms', 'REFUND' => 'help-payment-refund', 'CONTACT' => 'help-contact'] as $key => $slug) {
+            foreach (['ZH' => 'zh-CN', 'EN' => 'en'] as $suffix => $locale) {
+                $targets['CONTACT-'.$key.'-'.$suffix] = ['org_id' => 0, 'slug' => $slug, 'locale' => $locale];
+            }
+        }
+        $email = $rows[0]['snapshot']['support_contact'] ?? '';
+        if (($package['schema'] ?? null) !== 'fermatmind.public_support_contact.v1'
+            || ! is_array($rows) || ! array_is_list($rows) || count($rows) !== 6
+            || ! is_string($email) || filter_var($email, FILTER_VALIDATE_EMAIL) === false
+            || ($review['schema'] ?? null) !== 'fermatmind.public_support_contact.review.v1'
+            || ($review['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || ($review['verdict'] ?? null) !== 'PASS' || count($review['pages'] ?? []) !== 6) {
+            throw new DomainException('public_content_53_support_contact_review_invalid');
+        }
+        $seen = [];
+        foreach ($rows as $row) {
+            $id = $row['page_id'] ?? '';
+            if (! isset($targets[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'page'
+                || ($row['identity'] ?? null) !== $targets[$id] || ($review['pages'][$id] ?? null) !== 'PASS'
+                || array_diff(array_keys($row), ['page_id', 'kind', 'identity', 'before', 'staging_before', 'snapshot', 'staging_snapshot', 'source_identity', 'staging_source_identity']) !== []) {
+                throw new DomainException('public_content_53_support_contact_scope_invalid');
+            }
+            $seen[$id] = true;
+            foreach (['' => 'before', 'staging_' => 'staging_before'] as $prefix => $beforeKey) {
+                $before = $row[$beforeKey] ?? [];
+                $after = $row[$prefix.'snapshot'] ?? [];
+                foreach ([$before, $after] as $copy) {
+                    if (! is_array($copy) || array_keys($copy) !== ['title', 'summary', 'content_md', 'faq_items', 'support_contact']
+                        || ! is_string($copy['title']) || trim($copy['title']) === ''
+                        || ! is_string($copy['summary'])
+                        || ($copy['support_contact'] !== null && ! is_string($copy['support_contact']))
+                        || ! is_string($copy['content_md']) || ! is_array($copy['faq_items'])
+                        || ! array_is_list($copy['faq_items'])) {
+                        throw new DomainException('public_content_53_support_contact_fields_invalid');
+                    }
+                    foreach ($copy['faq_items'] as $faq) {
+                        $keys = is_array($faq) ? array_keys($faq) : [];
+                        sort($keys);
+                        if ($keys !== ['answer', 'question'] || ! is_string($faq['question']) || ! is_string($faq['answer'])) {
+                            throw new DomainException('public_content_53_support_contact_faq_invalid');
+                        }
+                    }
+                }
+                $body = str_replace('support@fermatmind.com', $email, $before['content_md']);
+                $faq = $before['faq_items'];
+                foreach ($faq as &$item) {
+                    $item['answer'] = str_replace('support@fermatmind.com', $email, $item['answer']);
+                }
+                unset($item);
+                if ($after['title'] !== $before['title'] || $after['summary'] !== $before['summary']
+                    || $after['support_contact'] !== $email || $after['faq_items'] !== $faq
+                    || ($row[$prefix.'source_identity'] ?? null) !== []
+                    || ($row['identity']['slug'] === 'help-contact'
+                        ? ! str_ends_with($after['content_md'], $body) || ! str_contains($after['content_md'], 'mailto:'.$email)
+                        : $after['content_md'] !== $body)) {
+                    throw new DomainException('public_content_53_support_contact_noncontact_change');
+                }
+            }
+        }
+        if (function_exists('app') && app()->bound('config') && self::environment() === 'staging') {
+            foreach ($rows as &$row) {
+                $row['snapshot'] = $row['staging_snapshot'];
+            }
+            unset($row);
+        }
+
+        return ['candidates' => $rows, 'package_sha256' => $sha];
     }
 
     /** Copy-only publication of the eight existing billing/policy pages. */

@@ -23,14 +23,17 @@ final class PublicContent53PricingRefundTest extends TestCase
 {
     use RefreshDatabase;
 
+    private string $selection = 'pricing-refund';
+
     public static function environments(): array
     {
-        return [['staging'], ['production']];
+        return [['staging', 'pricing-refund'], ['production', 'pricing-refund'], ['staging', 'support-contact'], ['production', 'support-contact']];
     }
 
     #[DataProvider('environments')]
-    public function test_native_publication_replay_restore_and_new_owner_preserve_drafts_and_controls(string $environment): void
+    public function test_native_publication_replay_restore_and_new_owner_preserve_drafts_and_controls(string $environment, string $selection): void
     {
+        $this->selection = $selection;
         config(['content_promotion.public_content_53_environment' => $environment]);
         $this->seedPages();
         $states = app(PublicContent53State::class);
@@ -40,21 +43,21 @@ final class PublicContent53PricingRefundTest extends TestCase
         $immutable = CmsTranslationRevision::query()->orderBy('id')->get()->map->getRawOriginal()->all();
         $states->assertBaseline($rows);
         $after = DB::transaction(fn () => $writer->publish($this->context(), $before));
-        self::assertSame(8, $after['written_count']);
+        self::assertSame(count($rows), $after['written_count']);
         Cache::flush();
         $states->assertPublished($rows, $after['state']);
         self::assertSame(0, DB::transaction(fn () => $writer->publish($this->context(), $after['state']))['written_count']);
         foreach ($immutable as $revision) {
             self::assertSame($revision, CmsTranslationRevision::findOrFail($revision['id'])->getRawOriginal());
         }
-        foreach (ContentPage::query()->where('locale', 'en')->whereIn('slug', ['terms', 'policies', 'help-payment-refund', 'help-faq'])->get() as $page) {
+        foreach (ContentPage::query()->where('locale', 'en')->whereIn('slug', ['terms', 'policies', 'help-payment-refund', 'help-faq', 'help-contact'])->get() as $page) {
             self::assertSame(ContentPage::findOrFail($page->source_content_id)->source_version_hash, $page->translated_from_version_hash);
         }
         DB::transaction(fn () => $writer->restore($this->context(), $before, $after['state']));
         Cache::flush();
         self::assertSame($before, $states->read($this->digest()));
         $again = DB::transaction(fn () => $writer->publish($this->context('f'), $before));
-        self::assertSame(8, $again['written_count']);
+        self::assertSame(count($rows), $again['written_count']);
         Cache::flush();
         $states->assertPublished($rows, $again['state']);
         self::assertDatabaseCount('orders', 0);
@@ -117,6 +120,36 @@ final class PublicContent53PricingRefundTest extends TestCase
         PublicContent53Package::pricingRefundPackage(json_encode($original, JSON_THROW_ON_ERROR), file_get_contents(base_path(PublicContent53Package::PACKAGE.'/pricing-refund-review.json')), $this->digest());
     }
 
+    public function test_support_contact_rejects_noncontact_changes_and_invalid_mailboxes(): void
+    {
+        $original = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/support-contact.json')), true, 64, JSON_THROW_ON_ERROR);
+        foreach (['missing', 'duplicate', 'locale', 'org', 'title', 'control', 'email', 'body', 'faq'] as $mutation) {
+            $package = $original;
+            match ($mutation) {
+                'missing' => array_pop($package['candidates']),
+                'duplicate' => $package['candidates'][1] = $package['candidates'][0],
+                'locale' => $package['candidates'][0]['identity']['locale'] = 'zh-TW',
+                'org' => $package['candidates'][0]['identity']['org_id'] = 1,
+                'title' => $package['candidates'][0]['snapshot']['title'] = 'Changed title',
+                'control' => $package['candidates'][0]['snapshot']['is_indexable'] = true,
+                'email' => $package['candidates'][0]['snapshot']['support_contact'] = 'invalid',
+                'body' => $package['candidates'][0]['snapshot']['content_md'] .= ' Changed refund terms',
+                'faq' => $package['candidates'][0]['snapshot']['faq_items'] = [['question' => 'New question', 'answer' => 'New answer']],
+            };
+            $bytes = json_encode($package, JSON_THROW_ON_ERROR);
+            $review = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/support-contact-review.json')), true, 64, JSON_THROW_ON_ERROR);
+            $review['candidate_sha256'] = hash('sha256', $bytes);
+            try {
+                PublicContent53Package::supportContactPackage($bytes, json_encode($review, JSON_THROW_ON_ERROR), str_repeat('a', 64));
+                self::fail('Accepted '.$mutation);
+            } catch (DomainException $e) {
+                self::assertStringStartsWith('public_content_53_support_contact_', $e->getMessage());
+            }
+        }
+        $this->expectExceptionMessage('public_content_53_support_contact_review_invalid');
+        PublicContent53Package::supportContactPackage(json_encode($original, JSON_THROW_ON_ERROR), file_get_contents(base_path(PublicContent53Package::PACKAGE.'/support-contact-review.json')), str_repeat('a', 64));
+    }
+
     private function rows(): array
     {
         return app(PublicContent53Package::class)->read(base_path(), $this->digest())['candidates'];
@@ -124,8 +157,8 @@ final class PublicContent53PricingRefundTest extends TestCase
 
     private function digest(): string
     {
-        $chain = "fermatmind.public_content_pricing_refund.v1\n";
-        foreach (['pricing-refund.json', 'pricing-refund-review.json'] as $name) {
+        $chain = ($this->selection === 'support-contact' ? 'fermatmind.public_support_contact.v1' : 'fermatmind.public_content_pricing_refund.v1')."\n";
+        foreach ([$this->selection.'.json', $this->selection.'-review.json'] as $name) {
             $chain .= $name."\n".hash_file('sha256', base_path(PublicContent53Package::PACKAGE.'/'.$name))."\n";
         }
 
@@ -134,7 +167,7 @@ final class PublicContent53PricingRefundTest extends TestCase
 
     private function context(string $owner = 'a'): PromotionContext
     {
-        return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->digest(), 'W3', 'PUBLIC-CONTENT-53', str_repeat($owner, 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 8, str_repeat('e', 64));
+        return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->digest(), 'W3', 'PUBLIC-CONTENT-53', str_repeat($owner, 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), count($this->rows()), str_repeat('e', 64));
     }
 
     private function seedPages(): void
