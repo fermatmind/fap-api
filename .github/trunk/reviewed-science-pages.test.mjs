@@ -53,11 +53,13 @@ test('failed native execution retains a bounded rejection code without raw stder
 
 test('binding diagnostics expose only fixed locale predicates and bounded enums',()=>{
   const raw={capture:'after_failure_recovery',private_path:'/private/value',pages:{
-    en:{page_present:true,topology:'unlinked_translation',translation_status:'published',source_found_in_org0:false,
+    en:{page_present:true,topology:'unlinked_translation',translation_status:'published',revision_status:'published',source_found_in_org0:false,
+      pair_group_matches:true,row_source_hash_valid:true,row_source_hash:'private-hash',
       source_group_matches:'not_evaluated',source_slug_matches:'/private/value',source_id:999,content_md:'private'},
     'zh-CN':{page_present:true,topology:'source',translation_status:'source'},fr:{page_present:true}}};
   const expected={capture:'after_failure_recovery',pages:{'zh-CN':{page_present:true,topology:'source',translation_status:'source'},
-    en:{page_present:true,source_found_in_org0:false,source_group_matches:'not_evaluated',topology:'unlinked_translation',translation_status:'published'}}};
+    en:{page_present:true,source_found_in_org0:false,source_group_matches:'not_evaluated',pair_group_matches:true,row_source_hash_valid:true,
+      topology:'unlinked_translation',translation_status:'published',revision_status:'published'}}};
   assert.deepEqual(sanitizeBindingDiagnostics(raw),expected);
   assert.equal(sanitizeBindingDiagnostics({capture:'other',pages:raw.pages}),undefined);
   const ex=execution(env);

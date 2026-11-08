@@ -100,7 +100,15 @@ final readonly class ReviewedSciencePageRevision
                     throw new DomainException('existing_science_revision_payload_invalid');
                 }
                 $source = null;
-                if (! $page->isSourceContent()) {
+                // Native publication recognises this source topology and normalises its
+                // status to source. Older public rows may still carry published here.
+                $legacySource = $page->translation_status === CmsTranslationRevision::STATUS_PUBLISHED
+                    && $page->source_content_id === null && $page->source_locale === $locale;
+                if ($legacySource && $page->working_revision_id !== $page->published_revision_id
+                    && (int) $revision->supersedes_revision_id !== (int) $page->published_revision_id) {
+                    throw new DomainException('existing_science_legacy_source_lineage_invalid');
+                }
+                if (! $page->isSourceContent() && ! $legacySource) {
                     $source = ContentPage::query()->withoutGlobalScopes()->where('org_id', 0)->whereKey($page->source_content_id)
                         ->when($execute, fn ($q) => $q->lockForUpdate())->first();
                     if (! $source instanceof ContentPage || ! $source->isSourceContent()

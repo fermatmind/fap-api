@@ -14,6 +14,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class ReviewedSciencePageRevisionTest extends TestCase
@@ -295,6 +296,87 @@ final class ReviewedSciencePageRevisionTest extends TestCase
         $this->assertSame('not_required', app(ReviewedSciencePageDelivery::class)->recover($this->binding())['recovery_status']);
     }
 
+    public function test_legacy_source_status_is_preserved_until_native_publication_and_requires_fork_lineage(): void
+    {
+        $page = $this->page('zh-CN', false);
+        $page->forceFill(['translation_status' => 'published'])->saveQuietly();
+        $this->freeze($page);
+        $old = $page->workingRevision;
+        $old->forceFill(['payload_json' => ['content_md' => $page->content_md]])->save();
+        $history = $old->fresh()->getAttributes();
+        $this->executePhase($page, 'stage');
+        $draft = $page->fresh()->workingRevision;
+        $draft->forceFill(['supersedes_revision_id' => null])->save();
+        $this->assertSame('existing_science_legacy_source_lineage_invalid', $this->operation($page->fresh(), 'review')['errors'][0]['code']);
+        $draft->forceFill(['supersedes_revision_id' => $old->id])->save();
+        $this->assertSame('published', $page->fresh()->translation_status);
+        $this->executePhase($page->fresh(), 'review');
+        $this->assertSame('published', $page->fresh()->translation_status);
+        $this->executePhase($page->fresh(), 'publish');
+        $this->assertSame('source', $page->fresh()->translation_status);
+        $this->assertSame($history, $old->fresh()->getAttributes());
+    }
+
+    public function test_fixed_pair_uses_native_initial_link_and_restores_unlinked_legacy_state(): void
+    {
+        [$source, $target] = $this->legacyPair();
+        $before = [$source->getAttributes(), $target->getAttributes()];
+        $history = CmsTranslationRevision::query()->get()->map->getAttributes()->all();
+        $service = app(ReviewedSciencePageDelivery::class);
+        foreach ([$this->binding(), [...$this->binding(), 'workflow_run_id' => '124']] as $binding) {
+            $this->assertSame(2, $service->publish($binding)['published_count']);
+            $this->assertSame('source', $source->fresh()->translation_status);
+            $this->assertSame($source->id, $target->fresh()->source_content_id);
+            $this->assertSame($source->fresh()->source_version_hash, $target->fresh()->translated_from_version_hash);
+            $this->assertDatabaseHas('audit_logs', ['action' => 'content_page_source_linked', 'target_id' => (string) $target->id]);
+            foreach ($history as $attributes) {
+                $this->assertSame($attributes, CmsTranslationRevision::query()->findOrFail($attributes['id'])->getAttributes());
+            }
+            $this->assertSame('restored', $service->recover($binding)['recovery_status']);
+            $this->assertSame($before, [$source->fresh()->getAttributes(), $target->fresh()->getAttributes()]);
+        }
+    }
+
+    #[DataProvider('legacyLinkRefusals')]
+    public function test_native_initial_link_refusal_rolls_back_source_publication(string $case, string $code): void
+    {
+        [$source, $target] = $this->legacyPair();
+        if ($case === 'group') {
+            $target->forceFill(['translation_group_id' => 'foreign-group'])->saveQuietly();
+            $target->workingRevision->forceFill(['translation_group_id' => 'foreign-group'])->save();
+        } elseif ($case === 'provenance') {
+            $target->forceFill(['translated_from_version_hash' => str_repeat('b', 64)])->saveQuietly();
+            $target->workingRevision->forceFill(['translated_from_version_hash' => str_repeat('b', 64)])->save();
+        } elseif ($case === 'draft') {
+            $workspace = app(RowBackedRevisionWorkspace::class);
+            $payload = $workspace->adapter('content_page')->snapshotPayload($target);
+            $payload['body_md'] = 'Foreign private work';
+            $workspace->saveWorkingDraft('content_page', $target, $payload, CmsTranslationRevision::STATUS_DRAFT);
+            $target->refresh()->forceFill(['translation_status' => 'published'])->saveQuietly();
+        } else {
+            ContentPage::query()->create(['org_id' => 0, 'slug' => 'other-page', 'locale' => 'en', 'path' => '/other-page',
+                'title' => 'Other page', 'translation_group_id' => $source->translation_group_id]);
+        }
+        $before = [$source->fresh()->getAttributes(), $target->fresh()->getAttributes()];
+        $history = CmsTranslationRevision::query()->get()->map->getAttributes()->all();
+        $auditCount = DB::table('audit_logs')->count();
+        try {
+            app(ReviewedSciencePageDelivery::class)->publish($this->binding());
+            $this->fail('Expected native linkage refusal');
+        } catch (\DomainException $error) {
+            $this->assertSame('science_initial_link_refused:'.$code, $error->getMessage());
+        }
+        $this->assertSame($before, [$source->fresh()->getAttributes(), $target->fresh()->getAttributes()]);
+        $this->assertSame($history, CmsTranslationRevision::query()->get()->map->getAttributes()->all());
+        $this->assertSame($auditCount, DB::table('audit_logs')->count());
+    }
+
+    public static function legacyLinkRefusals(): array
+    {
+        return [['group', 'group_pair_ambiguous'], ['provenance', 'target_link_or_provenance_drift'],
+            ['draft', 'target_revision_pointer_drift'], ['third_member', 'group_pair_ambiguous']];
+    }
+
     public function test_pair_recovery_refuses_a_later_editorial_change(): void
     {
         [$source] = $this->frozenPair();
@@ -309,6 +391,19 @@ final class ReviewedSciencePageRevisionTest extends TestCase
     {
         return ['source_commit' => str_repeat('a', 40), 'workflow_run_id' => '123', 'workflow_run_attempt' => 1,
             'environment' => 'production', 'package_sha256' => ReviewedSciencePageDelivery::SHA];
+    }
+
+    private function legacyPair(): array
+    {
+        [$source, $target] = $this->frozenPair();
+        $source->forceFill(['translation_status' => 'published'])->saveQuietly();
+        $target->forceFill(['source_content_id' => null, 'translated_from_version_hash' => null])->saveQuietly();
+        $target->workingRevision->forceFill(['source_content_id' => null, 'translated_from_version_hash' => null])->save();
+        foreach ([$source, $target] as $page) {
+            $page->workingRevision->forceFill(['payload_json' => ['title' => $page->title, 'content_md' => $page->content_md]])->save();
+        }
+
+        return [$source->fresh(), $target->fresh()];
     }
 
     private function frozenPair(): array

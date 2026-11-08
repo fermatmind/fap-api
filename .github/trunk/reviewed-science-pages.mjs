@@ -64,13 +64,14 @@ export function sanitizeBindingDiagnostics(value) {
   const pages={};
   const booleanFields=['page_present','working_equals_published','revision_identity_valid','source_id_present','source_found_in_org0',
     'source_topology_valid','source_status_is_source','source_published','source_public','source_slug_matches','source_locale_matches',
-    'source_group_matches','source_hash_present','revision_source_id_matches','revision_source_locale_matches','provenance_hash_matches'];
+    'source_group_matches','source_hash_present','revision_source_id_matches','revision_source_locale_matches','provenance_hash_matches',
+    'source_locale_is_zh_cn','pair_group_matches','pair_group_exact','row_source_hash_valid','row_provenance_absent','revision_provenance_absent'];
   for(const locale of ['zh-CN','en']) {
     const row=value.pages[locale];if(!row || typeof row!=='object' || Array.isArray(row)) continue;
     const result={};
     for(const key of booleanFields) if(typeof row[key]==='boolean' || row[key]==='not_evaluated') result[key]=row[key];
     if(['source','linked_translation','unlinked_translation','invalid'].includes(row.topology)) result.topology=row.topology;
-    if(['source','published','draft','machine_draft','human_review','approved','stale','archived','other'].includes(row.translation_status)) result.translation_status=row.translation_status;
+    for(const key of ['translation_status','revision_status']) if(['source','published','draft','machine_draft','human_review','approved','stale','archived','other'].includes(row[key])) result[key]=row[key];
     pages[locale]=result;
   }
   return {capture:'after_failure_recovery',pages};

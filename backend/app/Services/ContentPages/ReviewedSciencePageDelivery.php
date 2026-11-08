@@ -10,6 +10,7 @@ use App\Models\ContentReleaseSnapshot;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use App\Services\Storage\ContentReleaseSnapshotCatalogService;
 use DomainException;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -31,6 +32,19 @@ final readonly class ReviewedSciencePageDelivery
     public function bindingDiagnostics(): array
     {
         $result = [];
+        $pair = ContentPage::query()->withoutGlobalScopes()->where('org_id', 0)->where('slug', 'item-design-notes')
+            ->whereIn('locale', ['zh-CN', 'en'])->get()->keyBy('locale');
+        $zh = $pair->get('zh-CN');
+        $en = $pair->get('en');
+        $sameGroup = $zh && $en ? filled($zh->translation_group_id) && $zh->translation_group_id === $en->translation_group_id : 'not_evaluated';
+        $exactPair = 'not_evaluated';
+        if ($zh && $en) {
+            $ids = $sameGroup === true ? ContentPage::query()->withoutGlobalScopes()->where('org_id', 0)
+                ->where('translation_group_id', $zh->translation_group_id)->orderBy('id')->limit(3)->pluck('id')->all() : [];
+            $expected = [$zh->id, $en->id];
+            sort($expected);
+            $exactPair = $ids === $expected;
+        }
         $status = static fn (?string $value): string => in_array($value, ['source', 'published', 'draft', 'machine_draft', 'human_review', 'approved', 'stale', 'archived'], true) ? $value : 'other';
         $topology = static function (ContentPage $page): string {
             if (! filled($page->source_locale)) {
@@ -43,7 +57,7 @@ final readonly class ReviewedSciencePageDelivery
             return 'linked_translation';
         };
         foreach (['zh-CN', 'en'] as $locale) {
-            $page = ContentPage::query()->withoutGlobalScopes()->where('org_id', 0)->where('slug', 'item-design-notes')->where('locale', $locale)->first();
+            $page = $pair->get($locale);
             if (! $page instanceof ContentPage) {
                 $result[$locale] = ['page_present' => false];
 
@@ -59,6 +73,13 @@ final readonly class ReviewedSciencePageDelivery
                 'page_present' => true,
                 'topology' => $topology($page),
                 'translation_status' => $status($page->translation_status),
+                'revision_status' => $status($revision?->revision_status),
+                'source_locale_is_zh_cn' => $page->source_locale === 'zh-CN',
+                'pair_group_matches' => $sameGroup,
+                'pair_group_exact' => $exactPair,
+                'row_source_hash_valid' => preg_match('/\A[a-f0-9]{64}\z/', (string) $page->source_version_hash) === 1,
+                'row_provenance_absent' => ! filled($page->translated_from_version_hash),
+                'revision_provenance_absent' => $revision === null ? 'not_evaluated' : ! filled($revision->translated_from_version_hash),
                 'working_equals_published' => filled($page->working_revision_id) && $page->working_revision_id === $page->published_revision_id,
                 'revision_identity_valid' => $identity,
                 'source_id_present' => $page->source_content_id !== null,
@@ -91,11 +112,12 @@ final readonly class ReviewedSciencePageDelivery
         $actor = (int) config('review_governance.solo_owner_admin_user_id');
         $snapshot = DB::transaction(function () use ($binding, $path, $actor): ContentReleaseSnapshot {
             $before = $this->pages(true);
+            // Both rows are locked and the whole operation is atomic. Validate the
+            // English candidate against the newly published source, not a legacy hash.
             foreach (['zh-CN', 'en'] as $locale) {
-                $this->operation($locale, 'stage', $path, false, '', $actor, $binding['environment']);
-            }
-            // Publish the source first; the English draft then binds its actual new hash.
-            foreach (['zh-CN', 'en'] as $locale) {
+                if ($locale === 'en') {
+                    $this->linkUnambiguousLegacyTarget();
+                }
                 foreach (['stage', 'review', 'publish'] as $phase) {
                     $preflight = $this->operation($locale, $phase, $path, false, '', $actor, $binding['environment']);
                     $this->operation($locale, $phase, $path, true, $preflight['state_sha256'], $actor, $binding['environment']);
@@ -112,6 +134,32 @@ final readonly class ReviewedSciencePageDelivery
         $this->clearCache();
 
         return ['published_count' => 2, 'snapshot_id' => $snapshot->id];
+    }
+
+    private function linkUnambiguousLegacyTarget(): void
+    {
+        $source = ContentPage::query()->withoutGlobalScopes()->where('org_id', 0)->where('slug', 'item-design-notes')->where('locale', 'zh-CN')->firstOrFail();
+        $target = ContentPage::query()->withoutGlobalScopes()->where('org_id', 0)->where('slug', 'item-design-notes')->where('locale', 'en')->firstOrFail();
+        if ($target->source_content_id !== null || $target->source_locale !== 'zh-CN') {
+            return;
+        }
+        // The existing native command owns eligibility, exact row/hash locks,
+        // revision identity, audit and the refusal to attest unknown provenance.
+        $options = ['--source-id' => $source->id, '--target-id' => $target->id,
+            '--group-id' => $source->translation_group_id, '--slug' => 'item-design-notes',
+            '--source-hash' => $source->source_version_hash, '--target-hash' => $target->source_version_hash,
+            '--revision-id' => $target->published_revision_id,
+            '--source-updated-at' => $source->updated_at?->toDateTimeString(),
+            '--target-updated-at' => $target->updated_at?->toDateTimeString(), '--json' => true];
+        foreach ([false, true] as $execute) {
+            $mode = $execute ? ['--execute' => true, '--confirm' => sprintf('Link content page target %d to source %d in group %s.', $target->id, $source->id, $source->translation_group_id)] : ['--dry-run' => true];
+            $exit = Artisan::call('translation:link-content-page-source', [...$options, ...$mode]);
+            $result = json_decode(Artisan::output(), true);
+            if ($exit !== 0 || ! is_array($result) || ($result['ok'] ?? false) !== true) {
+                $code = $result['errors'][0] ?? '';
+                throw new DomainException('science_initial_link_refused'.(is_string($code) && preg_match('/\A[a-z_]{1,80}\z/', $code) === 1 ? ':'.$code : ''));
+            }
+        }
     }
 
     public function recover(array $binding): array
