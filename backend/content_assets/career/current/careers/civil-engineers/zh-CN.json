@@ -38,6 +38,9 @@
       "fact:civil-us-federal-wage-2025": {
         "status": "pending_mapping"
       },
+      "fact:civil-us-heavy-construction-wage-2025": {
+        "status": "pending_mapping"
+      },
       "fact:civil-us-local-government-wage-2025": {
         "status": "pending_mapping"
       },
@@ -23543,10 +23546,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：土木工程师不是「画图与跑工地」的组合，而是对结构物与设施的设计与施工与维护承担技术责任并签字的职业；O*NET 把该职业定义为从事规划、设计与监督建筑结构与设施（道路、铁路、机场、桥梁、港口、航道、大坝、灌溉工程、管线、电厂与给排水系统）的建设与维护的工程工作。"
+              "土木工程师把勘察数据、设计条件与现场反馈转成可复核的技术文件和核查记录；签章仅由适用规则下有权人员承担。"
             ]
           },
           "id": "civil-engineers.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editorial",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -23554,10 +23561,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你愿意为计算与设计结论负责并接受复核与签字责任，也能在多专业与多方协作中把技术问题讲清楚；O*NET 工作情境显示 100% 每天使用电子邮件、90% 每天进行电话交谈、76% 每天面对面讨论、52% 认为精确或准确极其重要、57% 的典型工作周超过 40 小时、43% 认为错误后果极其严重、52% 每周或更频繁地感受到时间压力。"
+              "愿意追查数值的单位和版本，能说明哪些是计算结果、哪些仍需确认，并能把问题交给合适的专业负责人，可继续探索。先用本页虚构题观察这些具体行为。"
             ]
           },
           "id": "civil-engineers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23565,10 +23575,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停高额投入的条件：你还没有完整参与过一次从方案到施工图的技术工作，也没有核对过规范条文与计算取值；该职业通常需要四年制本科学历（教育分布为学士 86%、硕士 10%），并在美国通常还需完成 FE 与 PE 等执业路径，投入周期以年计。"
+              "先看实际岗位的专业、任务、现场安排和复核责任，再决定是否补学位或训练。美国典型入口是相关工程本科；初级岗位、州许可和考试要分别看。"
             ]
           },
           "id": "civil-engineers.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editorial",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -23576,10 +23590,15 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历、资格与授权必须分别核对：O*NET 把该职业列为 Job Zone Four（需要相当程度准备），SVP 区间 7.0 至 8.0 以下；在美国，注册工程师（PE）资格与设计签字权属于州级执业体系，通常需要受认可学历与工作经验并通过考试；O*NET 该职业页面列出 26 项行业认证（含 NCEES 的 FE 与 PE 方向），认证与执照与雇主授权是三件不同的事。中国大陆另有勘察设计注册工程师等执业体系。"
+              "学历、雇主条件和个人注册分别核对；工作样本只展示方法。可先做本页交叉点题，按给定参考自核，不需要真实工程文件。"
             ]
           },
           "id": "civil-engineers.quick-decision.fermat-decision-card.6",
+          "source_refs": [
+            "editorial",
+            "civil-ooh-current",
+            "civil-cn-practice-registration"
+          ],
           "type": "prose"
         },
         {
@@ -23587,10 +23606,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个「取值与规范对不对、结构安全有没有把握、多专业接口是否对齐、签字能不能负责」比方案是否新颖更决定成败的职业；如果你愿意为自己的计算与图纸承担长期责任，它值得认真考虑。"
+              "先问自己是否愿意反复复算、说明假设、保留未决事项，并接受技术复核。实际签章与现场职责取决于专业、文件和授权。"
             ]
           },
           "id": "civil-engineers.quick-decision.fermat-decision-card.7",
+          "source_refs": [
+            "editorial",
+            "civil-cn-practice-registration"
+          ],
           "type": "prose"
         }
       ]
@@ -23759,10 +23782,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "土木工程师的工作可以分成三类相连但独立的工作面。第一类是分析与计算：分析测量报告与地图与图纸与航拍与地形与地质资料，计算荷载与坡度与流量与材料应力以确定设计规格，测试土壤与材料以判断基础与混凝土与沥青与钢材的适用性与强度。第二类是设计与文件：使用计算机辅助设计与绘图工具规划设计运输或水工系统与结构，估算材料与设备与人工的数量与成本以判断项目可行性，准备或陈述投标方案与环境影响说明与产权与路权描述等公开报告。第三类是施工与监督：指导施工与运行与维护活动，检查现场进度与是否符合设计规格与安全与卫生标准，指导或参与测量以放样并建立基准点与标高，并提供关于设计或施工或改造或结构维修的技术建议。"
+              "常见工作分三类：分析现场资料和复核计算；设计方案与编制技术文件；检查施工进度并解释设计要求。具体分工看项目和岗位。"
             ]
           },
           "id": "civil-engineers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -24120,7 +24147,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按本人职责和适用要求核现场偏差并保存原始记录。中国设计文件修改由原设计单位或依法经书面同意委托的其他有资质单位办理，重大修改报原批准机关；施工、监理与建设单位不得擅改，普通口头或书面确认不替代程序。"
+              "中国大陆：一般修改由原勘察设计单位办理，或由建设单位经原单位书面同意委托相应资质单位。涉及重大修改，建设单位须报原审批机关批准后方可修改。已签章文件由原签章注册工程师修改；其不能修改的特殊情况，由同专业其他注册工程师修改、重新签章并对修改部分负责。"
             ]
           },
           "id": "civil-engineers.profile.career-quick-answers-block.30",
@@ -24128,7 +24155,8 @@
             "civil-ooh-current",
             "civil-design-law",
             "civil-quality-law",
-            "editorial"
+            "editorial",
+            "civil-cn-practice-registration"
           ],
           "type": "prose"
         },
@@ -24187,10 +24215,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "土木工程师从事规划、设计与监督建筑结构与设施的建造与维护的工程工作，对象包括道路、铁路、机场、桥梁、港口、航道、大坝、灌溉工程、管线、电厂与给排水系统；典型闭环是分析场地与资料、计算荷载与水力与材料应力、设计与比选方案、编制图纸与技术文件、监督施工并检验是否符合设计与规范。"
+              "美国O*NET把设计、施工监督与维护放在17-2051.00。大陆按职责参照《职业分类大典（2022年版）》：建筑和市政设计工程技术人员（2-02-18-01）做设计、咨询和技术服务；土木建筑工程技术人员（2-02-18-02）侧重施工技术与监督管理；工程勘察与岩土工程技术人员（2-02-18-05）涉及勘察、专项设计和检测监测。道路桥隧、给排水等再核实际岗位。两国分类、资格和工资不能直接互换。"
             ]
           },
           "id": "civil-engineers.profile.definition-block.11",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-cn-classification"
+          ],
           "type": "prose"
         },
         {
@@ -24442,7 +24474,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "六个方向与本职业共享一部分能力：规范与图纸理解、计算与权衡、多专业协调、现场判断。真正的区别在于责任（是否承担设计签字）、对象（新建改造还是既有运维或场地修复）与角色（技术责任还是项目与管理责任）。选择时建议先用一次可交付的设计计算与图纸校核验证，而不是先比名称。"
+              "几个方向都用到图纸与多方协调。比较你想交付什么：技术核查、现场交付、空间设计、维护记录或交通分析。资格和签章只在实际岗位及法域要求时核对。先试本页的版本差异题，再看目标岗位。"
             ]
           },
           "id": "civil-engineers.direction-comparison.adjacent-career-comparison-table.8",
@@ -24486,7 +24518,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "愿意管现场与合同与团队的人适合施工经理方向；愿意对设计负责并签字的人适合本职业。"
+              "想组织工期、分包、合同和现场团队，可先看施工管理；想核计算、图纸和技术接口，可试做土木工程工作样本。"
             ]
           },
           "id": "civil-engineers.direction-comparison.adjacent-career-comparison-table.12",
@@ -24739,7 +24771,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "从本职业转向相邻方向通常需要补足新的经验与资格：施工与项目经理方向需要合同与成本与团队管理经验，设施经理方向需要运维与能耗管理经验，建筑方向需要建筑学教育与注册路径，棕地与交通方向需要在对应专业领域积累项目记录。计算与规范与协调能力可以迁移，但签字与注册责任必须重新取得。"
+              "转向时按实际工作补经验：施工管理侧重合同、成本与现场组织；设施管理侧重运维；建筑设计、场地修复和交通分析另核相应专业训练。仅在目标角色及法域要求时核资格和签章。"
             ]
           },
           "id": "civil-engineers.direction-comparison.adjacent-career-comparison-table.35",
@@ -25090,7 +25122,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑工具试测建议：资料提取、方案草稿、计算核对与记录可作为试用方向，核错误、漏项和总复核工时。本轮没有本职业工具提速或机构采用率证据；软件招聘关键词不证明BIM或生成式AI实际采用。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可先用虚构资料试做文字提取、计算记录或版本差异检查，核对错误、遗漏与复核时间。现有证据不能量化本职业的工具成效、机构采用率或个人替代风险。软件招聘词只描述个别岗位的要求。"
             ]
           },
           "id": "civil-engineers.ai-impact.ai-impact-table.18",
@@ -25581,10 +25613,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET完整表列23软件类别，Hot Technologies为24关键词；2025美国Lightcast招聘提及AutoCAD22%、Office18%、Civil3D16%、Excel12%、MicroStation10%、Revit8%。每词可重叠，三词Not available，不填0；关键词不是使用率或AI能力。"
+              "O*NET普通职业档案列23类软件；招聘技术页列24项技能。2025年美国Lightcast中，与本SOC对应的去重招聘公告里，AutoCAD 22%、Office 18%、Civil 3D 16%、Excel 12%、MicroStation 10%、Revit 8%。同一公告可提多项，三项未列可用占比，不能当0。这些是招聘提及，不是软件实际使用或AI采用率。"
             ]
           },
           "id": "civil-engineers.ai-impact.ai-impact-table.60",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25957,10 +25993,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把未经确认的现场做法当作已批准的变更，会在验收与结算阶段集中暴露安全与合同风险。"
+              "单位、基准或工况不一致时，工具可能给出看似合理却无法比较的结果。仅凭输出顺畅不能确认输入正确。"
             ]
           },
           "id": "civil-engineers.ai-impact.ai-impact-table.90",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25968,14 +26007,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国设计修改按勘察设计条例第28条由原设计单位或依法经书面同意委托的其他有资质单位办理，重大修改报原批准机关；建设、施工、监理不得擅改，普通书面确认或AI输出不替代程序。"
+              "回原记录逐项核单位、基准、版本和适用工况；单独复算并标明未知，不能根据工具稿确认实际安全。"
             ]
           },
           "id": "civil-engineers.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "civil-design-law",
-            "civil-quality-law",
-            "civil-ooh-current",
             "editorial"
           ],
           "type": "prose"
@@ -26510,7 +26546,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "适用于归入建筑业的施工单位背景，含门类所有职业；不与科学技术服务业合并为本职业工资区间，也不代政府岗位工资。"
+              "适用于归入建筑业的施工单位背景，含门类所有职业；不与科学研究和技术服务业合并为本职业工资区间，也不代政府岗位工资。"
             ]
           },
           "id": "civil-engineers.china-salary.career-snapshot-primary-locale.12",
@@ -26898,7 +26934,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得本职业精确中国全国工资；2025科学技术服务业、建筑业年均工资已列为相应用人单位背景，不是本职业工资、月薪区间或城市排名，不能由检索缺口断言官方从未发布。"
+              "未取得本职业精确中国全国工资；2025科学研究和技术服务业、建筑业年均工资已列为相应用人单位背景，不是本职业工资、月薪区间或城市排名，不能由检索缺口断言官方从未发布。"
             ]
           },
           "id": "civil-engineers.china-salary.career-snapshot-primary-locale.45",
@@ -26924,10 +26960,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中华人民共和国职业分类大典（2022 年版）公布信息｜https://www.mohrss.gov.cn/"
+              "职业分类大典（2022年版）｜https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
             ]
           },
           "id": "civil-engineers.china-salary.career-snapshot-primary-locale.47",
+          "source_refs": [
+            "civil-cn-classification"
+          ],
           "type": "prose"
         },
         {
@@ -27024,10 +27063,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照：美国 O*NET-SOC 17-2051.00（Civil Engineers）；中国大陆本条证据路由未建立一一对应的职业细类，相关技术工作可能分布在勘察设计与施工与市政与交通与水利等序列，须按实际职责与单位类型归类，页面语言不构成职业等价或工资映射。"
+              "美国O*NET把设计、施工监督与维护放在17-2051.00。大陆按职责参照《职业分类大典（2022年版）》：建筑和市政设计工程技术人员（2-02-18-01）做设计、咨询和技术服务；土木建筑工程技术人员（2-02-18-02）侧重施工技术与监督管理；工程勘察与岩土工程技术人员（2-02-18-05）涉及勘察、专项设计和检测监测。道路桥隧、给排水等再核实际岗位。两国分类、资格和工资不能直接互换。"
             ]
           },
           "id": "civil-engineers.china-salary.career-snapshot-primary-locale.55",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-cn-classification"
+          ],
           "type": "prose"
         },
         {
@@ -27047,13 +27090,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025行业工资表2/5和调查说明｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；精确职业代码映射本轮未核定"
+              "国家统计局2025年城镇单位行业工资表2及表5｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；行业年平均工资，非单一职业。"
             ]
           },
           "id": "civil-engineers.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
             "civil-nbs-current",
-            "editorial"
+            "editorial",
+            "civil-cn-classification"
           ],
           "type": "prose"
         },
@@ -27321,7 +27365,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "380,600人（2025）"
+              "2025年美国土木工程师就业岗位380,600个"
             ]
           },
           "id": "civil-engineers.us-salary.career-snapshot-secondary-locale.19",
@@ -27489,10 +27533,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OOH列2025工程服务51%、州政府11%、地方政府10%、非住宅建筑施工7%、联邦政府3%等主要雇主；不同于O*NET门类55/24/13/8。OOH说明政府资金波动可能影响公共项目机会，不能据此断言个人工资的因果变化。"
+              "BLS职业手册列2025年主要雇主：工程服务51%、州政府11%、地方政府10%（州及地方均不含教育和医院）、非住宅建筑施工7%、重型与土木工程施工3%。O*NET职业档案采用更宽行业分组：专业、科学和技术服务55%、政府24%、建筑业13%；独立行业页还列其他8%。这是就业分布，不能当工资。"
             ]
           },
           "id": "civil-engineers.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "civil-ooh-current",
+            "civil-industry-current",
+            "civil-onet-current"
+          ],
           "type": "prose"
         },
         {
@@ -27526,7 +27575,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "联邦政府（不含邮政）"
+              "重型与土木工程施工"
             ]
           },
           "id": "civil-engineers.us-salary.career-snapshot-secondary-locale.34",
@@ -27540,7 +27589,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "117,790美元/年（中位数）"
+              "93,350美元/年（中位数）"
             ]
           },
           "id": "civil-engineers.us-salary.career-snapshot-secondary-locale.35",
@@ -28148,10 +28197,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣取向：该职业工作内容的兴趣代码为 RIC（现实型、研究型、常规型），日常任务以分析资料与计算设计、编制文件与协调接口、监督施工与检验为主。"
+              "没有一个适合所有土木工程师的类型。可反思自己如何在独立复算、团队协调和现场反馈之间切换。试着用一句话向别人解释本页两版净距的差异，观察准备方式。"
             ]
           },
           "id": "civil-engineers.fit.personality-fit-block.10",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28247,7 +28299,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET完整表：基本技能10、可迁移25、知识33、能力52。主动倾听75、批判思维/数学/阅读/口语72；知识设计93、工程技术92、建筑88、数学87、英语75、物理68；能力演绎、归纳、口头理解表达、问题敏感性、书面理解表达各75。职业重要度不是个人能力分数或统一门槛。"
+              "试着逐项读出输入、单位、公式和版本，独立复算并说明结果边界。O*NET的职业能力描述不是个人IQ分数，本页不设录用分数线。"
             ]
           },
           "id": "civil-engineers.fit.personality-fit-block.18",
@@ -28299,10 +28351,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业沟通强度与文书强度都高：O*NET 工作情境显示 100% 每天使用电子邮件、90% 每天进行电话交谈、76% 每天面对面讨论、67% 每周或更频繁地撰写信件与备忘录。"
+              "练习把两版冲突说清楚，复述对方问题，记录仍未确认的事项和确认人。本页未核实该职业有EQ分数门槛。"
             ]
           },
           "id": "civil-engineers.fit.personality-fit-block.22",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29199,7 +29254,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国安全条例要求专项作业资格、安全交底、防护和培训；开挖、高处等场景需核具体安全条件。本轮没有本职业伤害概率估计，佩戴防护不等于可以进入危险区域。"
+              "大陆施工安全条例分别规定特种作业人员的培训与持证，以及达到规定规模的危险性较大分部分项工程的专项方案。进入新的岗位或施工现场前，作业人员应接受安全生产教育培训。"
             ]
           },
           "id": "civil-engineers.risk.career-risk-cards.20",
@@ -29215,7 +29270,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按实际岗位完成安全交底、培训并正确用防护，危险作业依专项方案和资格执行；遇直接危及人身安全的紧急情况，作业人员可停止自身作业或采取必要应急措施后撤离危险区域（第32条）。本卡不授全项目停工或恢复许可。"
+              "核实际岗位培训、防护和项目管理要求。第32条规定，出现危及人身安全的紧急情况时，作业人员可停止自身作业，或采取必要应急措施后撤离危险区域。项目整体停复工另按实际权限办理。"
             ]
           },
           "id": "civil-engineers.risk.career-risk-cards.21",
@@ -29270,7 +29325,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑建议维护版本发放、回收和审查意见记录。中国设计修改由原设计单位或依法经书面同意委托的其他有资质单位办理，重大修改报原批准机关；普通项目书面确认不替代法定程序。"
+              "中国大陆：一般修改由原勘察设计单位办理，或由建设单位经原单位书面同意委托相应资质单位。涉及重大修改，建设单位须报原审批机关批准后方可修改。已签章文件由原签章注册工程师修改；其不能修改的特殊情况，由同专业其他注册工程师修改、重新签章并对修改部分负责。"
             ]
           },
           "id": "civil-engineers.risk.career-risk-cards.25",
@@ -29278,7 +29333,8 @@
             "civil-design-law",
             "civil-quality-law",
             "civil-ooh-current",
-            "editorial"
+            "editorial",
+            "civil-cn-practice-registration"
           ],
           "type": "prose"
         },
@@ -29736,7 +29792,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "教育、培训/认证、法定执业许可和机构授权分别核。美国初级岗位不必先持PE，公众服务通常需州许可；NCEES提供FE/PE考试，州机构负责许可，考试通过不等于执照。O*NET当前26相关条目含考试及认证，不是26项统一行业门槛。"
+              "大陆先选设计、施工技术或勘察等方向，再核实际岗位条件。注册勘察设计执业区分资格证书、受聘于有相应资质的单位和注册；相应专业人员按规定对适用文件签字盖章。湖北2026考务列岩土、港航、水利水电、道路等类别，结构与公用设备另列。 美国典型入口是土木或相关工程本科。先查有监督和复核的初级岗位；宾州 Civil Engineer Trainee 职类是一个州级例子。NCEES提供FE、PE考试，州委员会审核学历、经验和发照。初级岗位一般不要求先持州执照，直接向公众提供专业服务通常涉及州许可。"
             ]
           },
           "id": "civil-engineers.path.career-path-block.21",
@@ -29747,7 +29803,10 @@
             "civil-ooh-current",
             "civil-design-law",
             "civil-safety-law",
-            "editorial"
+            "editorial",
+            "civil-cn-practice-registration",
+            "civil-cn-exam-2026",
+            "civil-us-pa-trainee"
           ],
           "type": "prose"
         },
@@ -29767,14 +29826,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET Job Zone Four、SVP7.0至<8.0为职业准备层级，不是本人固定培训年限；教育为新入职要求问卷。中国精确职业映射本轮未核定，单位资质、人员注册及职责按实际岗位法规另核。"
+              "美国O*NET把设计、施工监督与维护放在17-2051.00。大陆按职责参照《职业分类大典（2022年版）》：建筑和市政设计工程技术人员（2-02-18-01）做设计、咨询和技术服务；土木建筑工程技术人员（2-02-18-02）侧重施工技术与监督管理；工程勘察与岩土工程技术人员（2-02-18-05）涉及勘察、专项设计和检测监测。道路桥隧、给排水等再核实际岗位。两国分类、资格和工资不能直接互换。"
             ]
           },
           "id": "civil-engineers.path.career-path-block.23",
           "source_refs": [
             "civil-ooh-current",
             "civil-onet-current",
-            "editorial"
+            "editorial",
+            "civil-cn-classification"
           ],
           "type": "prose"
         },
@@ -30619,38 +30679,41 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构任务：依据一份虚构场地地勘摘要与总平面图，为一处虚构挡土墙与一段虚构排水管完成校核计算与接口条件整理。",
-                  "虚构条件：一份虚构设计说明（含荷载取值与安全等级与适用规范版本）与一份虚构图纸版本记录（提示存在一处标高不一致）。",
-                  "虚构资料：一份虚构地勘钻孔柱状图与一份虚构降雨与流量参数表。",
-                  "虚构约束：一份虚构机构流程（计算书需写明公式与取值与规范条文，变更需走变更程序并重新签署）。"
+                  "题面｜虚构管线与梁的交叉点",
+                  "三个高程使用同一虚构基准：管顶1.80米，结构图R0梁底2.40米，未确认的R1草稿梁底2.10米。",
+                  "本题净距＝梁底高程减管顶高程。题设检查线为至少0.40米。",
+                  "R1没有获准使用的记录；题面没给哪个版本应执行。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "第一步：写出计算清单（构件与工况与计算式与取值来源与单位），并说明你如何处理标高不一致的问题。",
-                  "第二步：整理一份多专业接口条件表（预留与荷载与标高与接口做法与确认方），并指出哪两项需要优先确认。",
-                  "第三步：写出一份现场技术交底要点（关键工序与验收要求与不符合项处理），并说明哪些事项必须由具备注册资格人员签署。"
+                  "任务｜复算并登记差异",
+                  "分别算R0与R1，列出数值、单位、版本及各自与题设检查线的差。",
+                  "给结构和排水负责人各写一个问题：哪版获准使用？变更是否影响此处接口？把状态留为待确认。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考交付：一份含依据与单位的计算清单、一份接口条件表、一份技术交底要点。",
-                  "评价依据：计算式与取值是否可复核、规范条文是否引用、接口表是否可执行、是否区分「可自行处理」与「须注册人员签署」。",
-                  "允许多种合理写法；若认为某些信息不足以判断，应明确写出不足以判断的部分与所需补充信息。"
+                  "参考｜R0净距0.60米，比题设线多0.20米；R1净距0.30米，少0.10米。",
+                  "两版结果相差0.30米。记录两个版本，不自行择版，不改原记录；待确认后再更新。",
+                  "对照以上结果自核，不需要现场、软件或他人回复。可选的额外意见另记来源。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "本练习全部材料为虚构，不得用于真实工程设计、施工或验收判断；真实项目须由具备相应注册资格与授权的人员按规范与合同处理。",
-                  "题面给定的地勘与参数与图纸均为虚构值，仅用于练习计算与接口整理方法。"
+                  "边界｜0.40米只用于本题，不是工程规范或验收条件。",
+                  "练习只做数值、版本与交接问题核对，不给出施工指令、实际安全或签章结论。"
                 ]
               }
             ]
           },
           "id": "civil-engineers.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "纸面案例与任务",
           "type": "cards"
         },
@@ -30662,35 +30725,38 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "一张表：把岗位要求（学历与专业方向、项目经历、软件能力、注册状态、现场与安全培训）逐条拆成「条件—可证明的经历—证据位置」。",
-                  "证据形式包括脱敏后的计算书与图纸样本、审查意见关闭记录、注册与培训记录与带教评价。",
-                  "对没有证据的条目明确写「待补」并给出补足计划。"
+                  "从一份可读岗位说明摘出学历、职责、复核和现场条件。",
+                  "在旁边写能核实的学习或工作记录，注明出处。",
+                  "没有证据写待补；别把虚构题算为真实项目经历。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "对他人的一份计算书做校核（使用虚构或脱敏材料），列出你检查过的要素是否完整（取值、单位、规范条文、版本、接口、签署）。",
-                  "写出你不同意或需要补充的地方，并说明依据。"
+                  "附上本页题的两版净距计算和题设线。",
+                  "注明单位、版本、差值和为什么不自行择版。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一份一页纸的设计说明摘要：设计条件与依据、方案与关键假设、需要澄清或补充的事项。",
-                  "一份现场配合摘要：检查部位与时间、发现的问题与处理方式、关闭状态与后续要求。"
+                  "用一页整理输入、计算、未决事项和确认人。",
+                  "另附一条澄清问题；题设没有现场检查或施工结论。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "一份工具记录：你使用过的设计建模与计算与协同工具与用途，以及你如何管理版本与资料权限。",
-                  "一份协作说明：你与专业负责人与施工与监理与审查方的对接方式，以及信息如何留痕。"
+                  "说明用纸笔或表格记录了什么、如何保留两个版本。",
+                  "说明准备向哪个专业负责人确认什么；不假称已收回复。"
                 ]
               }
             ]
           },
           "id": "civil-engineers.path.entry-portfolio.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "作品与证据准备",
           "type": "cards"
         },
@@ -30749,55 +30815,58 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天：读懂地勘与图纸与设计说明",
-                  "把虚构地勘关键参数与设计条件与适用规范版本摘成一张核对表。"
+                  "第1天｜摘录输入",
+                  "把管顶、两版梁底、单位和题设检查线写入表中。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天：完成一次校核计算",
-                  "按给定荷载与参数校核一处构件或一段管线并写明公式与取值。"
+                  "第2天｜独立复算",
+                  "分别用梁底减管顶。把R0、R1的结果写在各自的行。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天：处理版本与标高问题",
-                  "找出标高不一致的位置，写出澄清问题与你的处理方式。"
+                  "第3天｜标出版本冲突",
+                  "比较净距与题设线。记录差值及R1尚未获确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天：整理接口条件表",
-                  "列出一份多专业接口条件表并标出需要优先确认的两项。"
+                  "第4天｜写接口记录",
+                  "写明交叉点、两版、受影响专业、确认人和待确认状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天：写出技术交底要点",
-                  "针对关键工序写出交底要点与验收要求与不符合项处理方式。"
+                  "第5天｜写澄清问题",
+                  "询问哪版获准及变更对接口有什么影响。写问题即可，不发外部消息。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天：检查签字与合规",
-                  "写出哪些文件需要注册资格人员签署，以及你会如何记录版本与变更。"
+                  "第6天｜按参考自核",
+                  "用0.60和0.30米复核计算；核0.10米差距、版本、未决事项和题设范围。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天：做出判断",
-                  "回答三个问题：你是否愿意重复这件事；哪一步让你最投入；下一周你会补哪一项能力（计算与规范、建模工具、接口协调还是现场与质量）。"
+                  "第7天｜复盘下一步",
+                  "哪一步最投入？若还想尝试，选一项能力补练，并找一个真实岗位核对工作内容。"
                 ]
               }
             ]
           },
           "id": "civil-engineers.path.seven-day-trial.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "七天渐进体验",
           "type": "timeline"
         },
@@ -30806,16 +30875,19 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "变化：做完这七天练习后，你对「土木工程师」的印象与开始时有什么不同？请写具体变化。",
-              "事实与选择：过程中你依赖了哪些给定信息，哪些是你自行假设的？假设是否都写明了。",
-              "练习消耗：这七天里最花时间的是校核计算、处理版本问题还是整理接口？哪一步让你觉得吃力。",
-              "材料边界：你是否意识到题面材料是虚构的，以及结论不能用于真实工程设计或施工判断。",
-              "反馈反应：当专业负责人指出你的取值或接口问题时，你的第一反应是解释还是重新核对？这会影响你后续的成长速度。",
-              "过程兴趣：如果把这套流程重复十次并逐步提高项目复杂度，你的兴趣是上升还是下降。",
-              "下一步：写出你接下来两周要补的一项能力，以及验证它的方式。"
+              "写下开始前后的具体印象差异。",
+              "区分已给的三个高程、题设规则和仍未知的准用版本。",
+              "比较复算、查版本和写交接问题，哪一步耗时最多？",
+              "用一句话说明0.40米仅属题设，不能作工程判断。",
+              "假设收到给定反馈“若R1将采用，请复算并保留未决状态”。更新练习记录，注明不是实际批准。",
+              "你愿意重复做这类核对吗？想尝试的下一项任务是什么？",
+              "选一项能力和一个可自己检查的练习结果。"
             ]
           },
           "id": "civil-engineers.path.seven-day-decision.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "七天后的判断问题",
           "type": "list"
         },
@@ -30916,10 +30988,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "教育、培训/认证、执业许可、单位资质和实际岗位职责分别核。美国初级岗位不必先持许可，公众服务通常需州PE；FE和PE是NCEES考试，发照由州机构审核。O*NET26相关条目含考试，不全是统一行业认证。中国单位资质与人员注册、设计质量责任及修改程序按实际法规和专业类别判断；普通机构授权不能替代法定资格。",
-              "美国：NCEES提供FE和PE考试，执照由州机构审核。初级岗位无需先持PE，公众服务通常需许可，具体学历、经验及考试条件按州核；26相关条目包含考试与认证，不能全称行业认证。",
-              "中国：依法须注册执业的专业与岗位按实际规定核，单位资质、设计人员责任及设计修改程序分开，不将所有土木初级岗位都设为注册准入。",
-              "本页不保证任何培训或认证被特定机构或法域承认，也不代替执业资格与签字权限的具体判断。"
+              "大陆先选设计、施工技术或勘察等方向，再核实际岗位条件。注册勘察设计执业区分资格证书、受聘于有相应资质的单位和注册；相应专业人员按规定对适用文件签字盖章。湖北2026考务列岩土、港航、水利水电、道路等类别，结构与公用设备另列。",
+              "美国典型入口是土木或相关工程本科。先查有监督和复核的初级岗位；宾州 Civil Engineer Trainee 职类是一个州级例子。NCEES提供FE、PE考试，州委员会审核学历、经验和发照。初级岗位一般不要求先持州执照，直接向公众提供专业服务通常涉及州许可。",
+              "实际职位的职责、单位资质、证书与注册状态需分别核对。",
+              "练习作品只用于展示核对过程，不替代授权、合格经历或签章。"
             ]
           },
           "id": "civil-engineers.path.credential-boundary.1",
@@ -30930,7 +31002,10 @@
             "civil-ooh-current",
             "civil-design-law",
             "civil-safety-law",
-            "editorial"
+            "editorial",
+            "civil-cn-practice-registration",
+            "civil-cn-exam-2026",
+            "civil-us-pa-trainee"
           ],
           "title": "资格与练习边界",
           "type": "notice"
@@ -30940,11 +31015,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "关于招聘样本：本页不使用招聘平台报价作为工资依据，也不把单条招聘公告写成统一门槛；招聘条件中的学历、专业方向、注册状态与项目经验会随机构与项目变化。",
-              "关于岗位名称：该类岗位可能使用设计工程师、结构工程师、项目经理、总工、技术负责人等名称，比较时应以实际职责与签署权限与单位类型为准，而不是名称。"
+              "中国大陆样本：中铁十六局2027届校招在天津工业大学于2026年9月29日宣讲，土木类包含桥梁、隧道、道路和岩土等，流程包括简历筛选及面试。该活动已过，不代表仍开放，不提供本职确切工资。",
+              "美国宾州样本：Civil Engineer Trainee 要求土木工程本科，或紧密相关领域本科并具备土木工程主修课程；另一条路径是一年土木工程经验，并持有宾夕法尼亚州注册委员会签发或认可的有效 EIT 证书。工作受专业工程师密切监督并在过程中和完成后复核。该职类不是实时招聘或全国要求。"
             ]
           },
           "id": "civil-engineers.path.recruitment-sample.1",
+          "source_refs": [
+            "civil-cn-railway-campus",
+            "civil-us-pa-trainee"
+          ],
           "title": "招聘样本使用说明",
           "type": "notice"
         }
@@ -31346,7 +31425,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025年工资、2026-05-15发布；本轮查阅2026-10-09"
+              "2025年工资；2026-05-15发布"
             ]
           },
           "id": "civil-engineers.market-signals.market-signal-card.24",
@@ -31361,7 +31440,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国精确职业工资仍证据不足；2025科学技术服务业、建筑业年平均工资只作相应用人单位背景，不是职业收入或就业增长预测。"
+              "国家统计局2025年科学研究和技术服务业、建筑业的年平均工资用于行业背景。本页未核到土木工程师全国工资分布。"
             ]
           },
           "id": "civil-engineers.market-signals.market-signal-card.25",
@@ -31402,12 +31481,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆（精确职业对应本轮未核定）"
+              "中国大陆：按职责参照职业类别，工资只作行业背景"
             ]
           },
           "id": "civil-engineers.market-signals.market-signal-card.28",
           "source_refs": [
-            "editorial"
+            "editorial",
+            "civil-cn-classification",
+            "civil-nbs-current"
           ],
           "type": "prose"
         },
@@ -31754,7 +31835,7 @@
                 "question_key": "career.faq.civil-engineers.daily-work"
               },
               {
-                "answer": "施工经理负责现场与合同与团队；建筑与工程经理统筹项目与多专业团队；设施经理负责既有设施运维；建筑师侧重空间与功能并注册执业；本职业承担结构与系统的设计与技术责任并对设计文件签署负责。共享能力不代表可以互换：注册资格与签字权与责任层级不同。",
+                "answer": "土木工程师侧重设施或结构的设计、计算和技术复核；施工经理侧重组织施工和现场交付；建筑师侧重空间功能与建筑设计。实际接口和签章责任依专业、角色、文件及所在地规则核对。",
                 "id": "civil-engineers.faq.2",
                 "question": "土木工程师和相邻职业的边界在哪里？",
                 "question_key": "career.faq.civil-engineers.comparison"
@@ -31766,10 +31847,15 @@
                 "question_key": "career.faq.civil-engineers.ai-replacement"
               },
               {
-                "answer": "受影响较早的是可结构化输入的环节：资料提取、方案比选、计算校核、工程量与成本初稿、文件与记录整理。受影响较晚的是需要现场判断与签字责任的环节：施工监督与隐蔽工程验收、环境与公众风险判断、以及设计文件的签署。",
+                "answer": "可在获准范围内试用资料提取、草稿整理和版本比对，并独立复核来源、数值、单位和未决问题。现有证据不能确定任务会按什么次序自动化；工程判断、签署和现场责任按实际制度办理。",
                 "id": "civil-engineers.faq.4",
-                "question": "哪些任务最容易被自动化？",
-                "question_key": "career.faq.civil-engineers.automatable-tasks"
+                "question": "哪些土木工程任务可以试用AI辅助？",
+                "question_key": "career.faq.civil-engineers.automatable-tasks",
+                "source_refs": [
+                  "civil-nist-current",
+                  "ilo-genai",
+                  "editorial"
+                ]
               },
               {
                 "answer": "判断取值与假设是否适用、确认适用规范与场地条件、在现场识别不符合项并决定处置、以及把设计结论写成可复核并愿意签署的文件。这些能力依赖工程训练与执业责任。",
@@ -31778,22 +31864,41 @@
                 "question_key": "career.faq.civil-engineers.human-skills"
               },
               {
-                "answer": "美国 2025 年 5 月该职业时薪中位数为 48.48 美元、年薪中位数为 100,840 美元，年薪 10 与 25 与 75 与 90 分位分别为 68,240 与 79,930 与 129,680 与 163,220 美元。该统计不含自雇主收入，也不代表某一资质等级；中国大陆本页只发布一条已标注的宽行业代理值并登记职业级缺口。",
+                "answer": "美国全国2025年5月土木工程师年薪中位数为100,840美元，时薪中位数48.48美元；年薪P10/P25/P75/P90依次为68,240、79,930、129,680、163,220美元。大陆资料只给两行业、两类城镇单位的平均值，未核到精确职业全国分布。",
                 "id": "civil-engineers.faq.6",
                 "question": "土木工程师的收入大概是多少？",
-                "question_key": "career.faq.civil-engineers.salary"
+                "question_key": "career.faq.civil-engineers.salary",
+                "source_refs": [
+                  "onet-localwages",
+                  "civil-nbs-current",
+                  "bls-oews-methods"
+                ]
               },
               {
-                "answer": "该职业页面的教育分布为学士 86%、硕士 10%、学士后证书 5%；多数岗位要求四年制工程相关学历并具备扎实的力学与数学基础，在美国通常还需沿 FE 与 PE 等州级执业路径积累工作经验与考试。",
+                "answer": "美国BLS的典型入门学历是土木或相关工程本科。大陆先查目标设计、施工或勘察岗位的专业和学历要求；各岗位可不同。可用一份实际岗位说明核课程和实习缺口。",
                 "id": "civil-engineers.faq.7",
                 "question": "做土木工程师需要什么学历？",
-                "question_key": "career.faq.civil-engineers.education"
+                "question_key": "career.faq.civil-engineers.education",
+                "source_refs": [
+                  "civil-ooh-current",
+                  "civil-cn-classification",
+                  "civil-us-pa-trainee",
+                  "civil-cn-railway-campus"
+                ]
               },
               {
-                "answer": "在美国，注册工程师（PE）资格与设计签字权属于州级执业体系，通常需要受认可学历与工作经验并通过考试；O*NET 该职业页面列出 26 项行业认证（含 NCEES 的 FE 与 PE 方向，以及 LEED 与能源与价值工程等方向），认证与执照与雇主授权的作用不同。中国大陆另有勘察设计注册工程师等执业体系。",
+                "answer": "大陆的勘察设计注册执业要区分资格证书、受聘单位资质和注册，按专业规定签章。美国初级岗位通常无需先持州执照，直接向公众提供专业服务通常涉及州许可。FE和PE是NCEES考试，州委员会审核并发照。",
                 "id": "civil-engineers.faq.8",
                 "question": "需要哪些执照或认证？",
-                "question_key": "career.faq.civil-engineers.credentials"
+                "question_key": "career.faq.civil-engineers.credentials",
+                "source_refs": [
+                  "civil-cn-practice-registration",
+                  "civil-cn-exam-2026",
+                  "civil-us-pa-trainee",
+                  "civil-ooh-current",
+                  "civil-fe-current",
+                  "civil-pe-current"
+                ]
               },
               {
                 "answer": "可行但路径较长：多数岗位要求工程学历，且注册路径以年计。有施工或测绘或工程管理背景的人可以把现场与图纸经验迁移过来，但仍需系统学习力学与结构或水力或岩土等专业课程并积累设计项目经验。",
@@ -31802,28 +31907,45 @@
                 "question_key": "career.faq.civil-engineers.career-change"
               },
               {
-                "answer": "取决于你是否愿意为技术结论承担长期责任并接受审查与复核。BLS 预测 2024 至 2034 年该职业增长 5% 至 6%（快于所有职业平均）、十年约 23,600 个空缺，该职业页面标注 Bright Outlook。建议先用页面里的七日练习验证自己是否愿意重复这套流程。",
+                "answer": "美国BLS预计2025—2035年土木工程师就业岗位由380,600个增至405,100个，增长6.4%（职业手册取整6%）；年均约22,700个空缺，包含转岗和退出职业后的替补。这是美国预测。先做本页虚构版本核对题，再查看你所在地区的岗位。",
                 "id": "civil-engineers.faq.10",
                 "question": "这个职业值得投入吗？",
-                "question_key": "career.faq.civil-engineers.career-worth"
+                "question_key": "career.faq.civil-engineers.career-worth",
+                "source_refs": [
+                  "civil-ep-current",
+                  "civil-ooh-current",
+                  "editorial"
+                ]
               },
               {
-                "answer": "本条证据路由把全国单职业工资登记为已核实不可得（数据状态：暂无可安全使用的数据），处理说明 为「以建筑业平均工资作为显式代理」。因此本页只发布一条已标注的宽行业代理值（2025 年城镇非私营单位建筑业就业人员年平均工资），不发布职业级数值，也不以相邻岗位报价推算。",
+                "answer": "国家统计局2025年城镇单位年平均工资：科学研究和技术服务业非私营182,064元、私营83,560元；建筑业非私营92,036元、私营66,275元。它们包含各行业的多种工作，不能当土木工程师工资中位数或个人报价。",
                 "id": "civil-engineers.faq.12",
                 "question": "中国大陆的数据为什么只有行业代理？",
-                "question_key": "career.faq.civil-engineers.china-data-scope"
+                "question_key": "career.faq.civil-engineers.china-data-scope",
+                "source_refs": [
+                  "civil-nbs-current"
+                ]
               },
               {
-                "answer": "美国工资为 BLS OEWS 2025 年 5 月全国统计（经 O*NET National Wages 页面显示），描述受雇工资薪金岗位，不含自雇主收入；就业与展望为 BLS 就业预测 2024 至 2034 年；O*NET 该职业页面未提供按行业或地区细分的工资中位数。BLS Occupational Outlook Handbook 该职业页本轮直接访问返回 HTTP 403，本页已登记该访问缺口。",
+                "answer": "美国工资来自2025年5月BLS OEWS全国统计，由O*NET列示，覆盖工资薪金雇员，不含自雇收入。就业岗位和年均空缺来自BLS 2025—2035预测。中国大陆四项年均值是国家统计局2025年城镇单位的行业平均，不是土木工程师职业中位数；本页未核到全国精确职业工资。",
                 "id": "civil-engineers.faq.13",
                 "question": "美国数据是什么口径？",
-                "question_key": "career.faq.civil-engineers.us-data-scope"
+                "question_key": "career.faq.civil-engineers.us-data-scope",
+                "source_refs": [
+                  "onet-localwages",
+                  "bls-oews-methods",
+                  "civil-ep-current",
+                  "civil-nbs-current"
+                ]
               },
               {
-                "answer": "练习与七日安排是费马测试编辑设计的虚构材料，用于帮助读者判断自己是否愿意重复这套工作流程，不是研究发现也不是行业事实；不得用于真实工程设计、施工或验收判断，真实项目须由具备相应注册资格与授权的人员处理。",
+                "answer": "可直接用本页虚构交叉点数据做纸面练习：独立算两版净距、对照参考、登记冲突并写澄清问题。0.40米仅为题设，不给出真实工程设计、施工或验收结论。",
                 "id": "civil-engineers.faq.14",
                 "question": "页面里的练习是什么性质？",
-                "question_key": "career.faq.civil-engineers.exercise-boundary"
+                "question_key": "career.faq.civil-engineers.exercise-boundary",
+                "source_refs": [
+                  "editorial"
+                ]
               }
             ]
           },
@@ -31835,7 +31957,13 @@
             "ilo-genai",
             "nbs-wages",
             "onet-details",
-            "onet-training"
+            "onet-training",
+            "civil-cn-practice-registration",
+            "civil-cn-exam-2026",
+            "civil-us-pa-trainee",
+            "civil-ooh-current",
+            "civil-fe-current",
+            "civil-pe-current"
           ],
           "type": "faq"
         },
@@ -31846,7 +31974,7 @@
             "entries": [
               "本页把职业身份与任务（O*NET）、美国工资（BLS OEWS）、美国就业预测（BLS 就业预测）、行业口径与大陆统计缺口分别标注来源与限制，不混用不同口径。",
               "编辑归纳（能力阶段、风险情境、练习材料与七日安排）与来源事实分开表述，并在相应位置标明性质。",
-              "本页不提供中国大陆该职业的职业级工资数值，也不把美国数值换算为人民币；一条大陆数值为已标注的宽行业代理值；涉及注册执业与安全与环境的表述均为一般框架，不替代法规或规范原文。"
+              "大陆数据是明确标注的行业年平均工资；暂未核到本职业全国工资分布。"
             ]
           },
           "id": "civil-engineers.sources.boundary.1",
@@ -31871,7 +31999,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮2026-10-09逐段核九模块：O*NET17-2051.00职责和完整现行表、OEWS2025年5月工资、BLS2025—2035表1.2及OOH原文；中国精确工资仍缺，另补2025匹配行业背景。旧登记与事实有范围外共享消费者，保留并追加隔离本轮材料；旧403与旧数字不作为本轮新结论。"
+              "美国职业任务见O*NET；美国工资与就业预测分别见OEWS与BLS就业预测表。大陆行业平均见国家统计局，不能替代本职业工资。虚构练习由费马编写。"
             ]
           },
           "id": "civil-engineers.sources.source-card.1",
@@ -31917,7 +32045,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本次九模块阅读与修订日期2026-10-09；来源统计期、发布日期、法规版本分别登记，不将检索日期当数据期。"
+              "2026-11-09核对本页公开来源。统计期、公告日期和法规版本以各条来源为准。"
             ]
           },
           "id": "civil-engineers.sources.source-card.3",
@@ -32096,12 +32224,12 @@
               {
                 "accessed_at": "2026-09-17",
                 "details": [
-                  "官方入行说明入口（本轮 403）",
-                  "访问缺口登记"
+                  "典型学历与入门职业职责。",
+                  "州许可、FE/PE考试和直接向公众提供服务的边界。"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-entry",
-                "limitation": "该页本轮直接访问返回 HTTP 403，未取得页面原文；本页入行与执业路径表述以 O*NET 准备层级与认证页面为准，本条登记为访问缺口。",
+                "limitation": "BLS提供美国典型路径；具体许可由州主管机构核定。",
                 "market": "美国",
                 "name": "BLS Occupational Outlook Handbook：Civil Engineers",
                 "period": "当前页面；检索 2026-09",
@@ -32128,18 +32256,18 @@
               {
                 "accessed_at": "2026-09-17",
                 "details": [
-                  "官方就业预测",
-                  "2024 至 2034 年预测与十年空缺"
+                  "美国SOC 17-2051，表1.2。",
+                  "基期380,600个岗位，预计405,100个；净增24,500个，年均约22,700个空缺。"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-outlook",
-                "limitation": "支持就业预测（2024 年 368,900 人、增长 5% 至 6%、十年约 23,600 个空缺）；预测含假设与误差。",
+                "limitation": "美国全国职业预测；年均空缺含替补，不能当成当前招聘或中国需求。",
                 "market": "美国",
-                "name": "BLS 就业预测（17-2051.00，2024 至 2034 年，经 O*NET 显示）",
-                "period": "2024 至 2034 年预测",
+                "name": "BLS土木工程师就业预测（2025—2035）",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics / O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/17-2051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32155,7 +32283,7 @@
                 "period": "2025 年及以前已发布资料",
                 "publisher": "国家统计局（中华人民共和国）",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32165,13 +32293,13 @@
                 ],
                 "evidence_type": "official source",
                 "id": "nasa-seh",
-                "limitation": "支持岗位映射边界说明；本页不据此建立与 O*NET-SOC 17-2051.00 的一一对应关系。",
+                "limitation": "按职责参照；不是美国SOC、资格或工资的一一对应。",
                 "market": "中国大陆",
-                "name": "中华人民共和国职业分类大典（2022 年版）公布信息",
+                "name": "职业分类大典（2022年版）",
                 "period": "2022 年版公布信息；检索 2026-09",
                 "publisher": "人力资源和社会保障部",
                 "scope": "contextual",
-                "url": "https://www.mohrss.gov.cn/"
+                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32217,9 +32345,9 @@
                 "market": "本页编辑设计",
                 "name": "费马测试编辑设计与虚构练习",
                 "period": "2026-09",
-                "publisher": "费马测试职业内容编辑组",
+                "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
-                "url": null
+                "url": "#career-visual-group-path"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32235,7 +32363,7 @@
                 "period": "当前页面；检索 2026-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-2051.00#WorkContext"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32292,7 +32420,7 @@
                 ],
                 "evidence_type": "official statistical release",
                 "id": "civil-nbs-current",
-                "limitation": "科学技术服务业/建筑业表2非私营及表5私营，年平均工资覆盖整个门类；5人及以上城镇法人单位，不含个体/自由职业；不能当本职业中位数或月薪",
+                "limitation": "科学研究和技术服务业/建筑业表2非私营及表5私营，年平均工资覆盖整个门类；5人及以上城镇法人单位，不含个体/自由职业；不能当本职业中位数或月薪",
                 "market": "中国大陆",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025年工资；2026-05-15发布",
@@ -32307,7 +32435,7 @@
                 ],
                 "evidence_type": "official legal text",
                 "id": "civil-design-law",
-                "limitation": "第7—10条单位资质、范围和人员注册；第28条设计文件修改主体、书面同意委托和重大修改报批，不把普通项目确认当改图授权",
+                "limitation": "第7至10条涉及资质及注册；第28条区分修改单位，并要求建设单位先取得原审批机关对重大修改的批准。",
                 "market": "中国大陆",
                 "name": "建设工程勘察设计管理条例（2017修改公开文本）",
                 "period": "2017修改公开文本；2026-10-09读取",
@@ -32343,7 +32471,7 @@
                 "period": "2004-02-01施行公开文本；2026-10-09读取",
                 "publisher": "教育部公开国务院法规",
                 "scope": "contextual",
-                "url": "https://www.moe.gov.cn/jyb_xwfb/xw_zt/moe_357/s3581/moe_2698/moe_2825/tnull_53863.html"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202307/t20230719_3165890.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32512,20 +32640,95 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "设计与计算｜计算荷载与水力与材料应力并确定设计规格｜计算荷载与坡度要求与流量或材料应力系数以确定设计规格；使用计算机辅助设计与绘图工具规划设计运输或水工系统与结构；设计节能或环境友好的土木结构（对应 O*NET 任务第四与第五与第十一项）。 — 75/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[0]",
-                  "资料与场地分析｜分析测量与地质与航拍资料｜分析测量报告与地图与图纸与蓝图与航拍照片或其他地形或地质数据；指导或参与测量以放样并建立基准点与坡度或标高以指导施工（对应 O*NET 任务第七与第八项）。 — 75/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[2]",
-                  "试验与风险｜测试材料并识别环境风险｜测试土壤或材料以判断基础与混凝土与沥青或钢材的适用性与强度；识别环境风险并为土木工程项目制定风险管理策略；开展交通流或环境条件研究以识别工程问题并评估潜在项目影响（对应 O*NET 任务第十二与第十三与第十四项）。 — 25/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[3]"
+                  "原编辑量化估算已撤回，无替代分数。",
+                  "原始资料与最终复核仍须可追溯。",
+                  "设计与计算：用原始条件独立复算；草稿不能用于工程判定。",
+                  "调查与版本：核现场资料的来源、时间、范围和缺项。",
+                  "试验和风险：由有权人员按实际项目要求解释并处理。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "limitation": "不提供岗位、工时或机构采用率估计。",
+                "name": "FermatMind 土木工程任务AI证据说明",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2-02-18-01建筑和市政设计、-02土木建筑施工技术、-05工程勘察与岩土工程。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "civil-cn-classification",
+                "limitation": "按职责参照；不是美国SOC、资格或工资的一一对应。",
+                "market": "中国大陆",
+                "name": "职业分类大典（2022年版）",
+                "period": "原文件版本",
+                "publisher": "人社部门公开版本",
+                "scope": "contextual",
+                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第18、20、21条：聘用与注册、相应专业文件签章及已签章文件修改。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "civil-cn-practice-registration",
+                "limitation": "须核专业、文件、角色和实际适用规则。",
+                "market": "中国大陆",
+                "name": "勘察设计注册工程师管理规定",
+                "period": "原文件版本",
+                "publisher": "住房城乡建设部",
+                "scope": "contextual",
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2023/art_17339_775516.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "岩土、港航、水利水电、道路的土木注册类别；另列结构和公用设备。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "civil-cn-exam-2026",
+                "limitation": "年度考务示例，不等于统一求职门槛。",
+                "market": "中国大陆",
+                "name": "湖北2026勘察设计注册工程师考务",
+                "period": "原文件版本",
+                "publisher": "湖北省人事考试网",
+                "scope": "contextual",
+                "url": "https://rst.hubei.gov.cn/hbrsksw/zyjslks/zyjsry/2026ks/2026kcsjzcgcs/202608/t20260804_5988526.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2026年9月29日宣讲，土木类包含桥梁、隧道、道路和岩土等；列简历筛选与面试。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "civil-cn-railway-campus",
+                "limitation": "历史校招示例，不给出土木岗位确切工资，不据此保证当前可投。",
+                "market": "中国大陆",
+                "name": "中铁十六局2027届校园招聘宣讲资料",
+                "period": "原文件版本",
+                "publisher": "天津工业大学就业网发布",
+                "scope": "contextual",
+                "url": "https://job.tiangong.edu.cn/recruitment/content/type/2/id/2750.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "相关学士或符合条件的工程经历加EIT，受PE近距离监督并在过程和完成时审核。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "civil-us-pa-trainee",
+                "limitation": "州级职类样本，不代表正在招聘或其他州规则。",
+                "market": "Pennsylvania, United States",
+                "name": "宾夕法尼亚州 Civil Engineer Trainee 职类",
+                "period": "原文件版本",
+                "publisher": "Commonwealth of Pennsylvania",
+                "scope": "contextual",
+                "url": "https://careers.employment.pa.gov/Home/GetJobNameInfo?jobCode=11119"
               }
             ]
           },
@@ -34801,8 +35004,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-summary"
+              "civil-safety-law",
+              "onet-context"
             ],
             "id": "risk-site-safety",
             "mitigation": {
@@ -34833,8 +35036,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-summary"
+              "civil-design-law",
+              "civil-cn-practice-registration"
             ],
             "id": "risk-document-signing",
             "mitigation": {
@@ -35032,6 +35235,60 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "civil-safety-law",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "id": "civil-safety-law",
+            "label": {
+              "$source": "civil-safety-law",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "scope": "仅适用于相应的大陆工程场景。"
+          },
+          {
+            "href": {
+              "$source": "civil-design-law",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "id": "civil-design-law",
+            "label": {
+              "$source": "civil-design-law",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "scope": "仅适用于相应的大陆工程场景。"
+          },
+          {
+            "href": {
+              "$source": "civil-cn-practice-registration",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "id": "civil-cn-practice-registration",
+            "label": {
+              "$source": "civil-cn-practice-registration",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "scope": "仅适用于相应的大陆工程场景。"
           }
         ]
       },
@@ -35626,7 +35883,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "civil-us-federal-wage-2025",
+            "fact_ref": "civil-us-heavy-construction-wage-2025",
             "industry": {
               "$item": "civil-engineers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36044,6 +36301,7 @@
               "type": "prose"
             },
             "source_id": "nbs",
+            "source_ref": "civil-nbs-current",
             "value": {
               "$item": "civil-engineers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36543,7 +36801,7 @@
             },
             "id": "mbti",
             "label": "迈尔斯-布里格斯类型指标（MBTI）",
-            "question": "哪种 MBTI 最适合土木工程师？",
+            "question": "MBTI偏好可以怎样用于探索这项工作？",
             "signals": {
               "$item": "civil-engineers.fit.personality-fit-block.12",
               "block": "fit",
@@ -36608,7 +36866,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "了解我的智力与推理表现",
+            "cta_label": "探索我的推理表现",
             "evidence_level": {
               "$item": "civil-engineers.fit.personality-fit-block.19",
               "block": "fit",
@@ -36617,7 +36875,7 @@
             },
             "id": "iq",
             "label": "智力商数（IQ）与数理推理",
-            "question": "智商或数学不好，能做土木工程师吗？",
+            "question": "怎样体验土木工作中的数理核对？",
             "signals": {
               "$item": "civil-engineers.fit.personality-fit-block.20",
               "block": "fit",
@@ -36645,7 +36903,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "cta_label": "了解我的情绪智力能力",
+            "cta_label": "反思日常沟通方式",
             "evidence_level": {
               "$item": "civil-engineers.fit.personality-fit-block.23",
               "block": "fit",
@@ -36654,7 +36912,7 @@
             },
             "id": "eq",
             "label": "情绪智力（EI，常称“情商”）",
-            "question": "做土木工程师需要高情商吗？",
+            "question": "土木工程沟通可以怎么练？",
             "signals": {
               "$item": "civil-engineers.fit.personality-fit-block.24",
               "block": "fit",
@@ -37222,7 +37480,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合土木工程师",
+        "label": "探索职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37436,7 +37694,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI能辅助哪些土木工程任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37492,62 +37750,62 @@
       },
       {
         "derivation": null,
-        "display_value": "368,900人（2024 年）",
+        "display_value": "380,600个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "BLS 就业预测公布的该职业就业人数",
-        "occupation_scope": "土木工程师",
-        "period": "2024 年",
+        "measure": "就业岗位数或变化",
+        "occupation_scope": "SOC17-2051",
+        "period": "2025",
         "source_refs": [
-          "bls-outlook"
+          "civil-ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 387,345—391,034人（2034 年预计）",
+        "display_value": "预计405,100个岗位",
         "fact_id": "us-employment-2035",
         "market": "美国",
-        "measure": "按 BLS 公布的 2024 年 368,900 人与 2024—2034 年增长 5% 至 6% 计算",
-        "occupation_scope": "土木工程师",
-        "period": "2034 年（预测）",
+        "measure": "就业岗位数或变化",
+        "occupation_scope": "SOC17-2051",
+        "period": "2035（预测）",
         "source_refs": [
-          "bls-outlook"
+          "civil-ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长 5%—6%（2024—2034 年）",
+        "display_value": "增长6.4%（OOH取整6%）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "BLS 就业预测的就业变化率（快于所有职业平均）",
-        "occupation_scope": "土木工程师",
-        "period": "2024—2034 年（预测）",
+        "measure": "BLS表1.2 就业变化率",
+        "occupation_scope": "SOC17-2051",
+        "period": "2025—2035（预测）",
         "source_refs": [
-          "bls-outlook"
+          "civil-ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 +18,445—+22,134人（2024—2034 年）",
+        "display_value": "预计净增24,500个岗位",
         "fact_id": "us-change-2025-2035",
         "market": "美国",
-        "measure": "按 BLS 公布的 2024 年 368,900 人与 5% 至 6% 增长率计算",
-        "occupation_scope": "土木工程师",
-        "period": "2024—2034 年（预测）",
+        "measure": "就业岗位数或变化",
+        "occupation_scope": "SOC17-2051",
+        "period": "2025—2035（预测）",
         "source_refs": [
-          "bls-outlook"
+          "civil-ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 23,600个（2024—2034 年十年累计）",
+        "display_value": "约22,700个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "BLS 就业预测公布的十年累计空缺（含替补需求）",
-        "occupation_scope": "土木工程师",
-        "period": "2024—2034 年（预测）",
+        "measure": "BLS表1.2 年均空缺含替补非净增",
+        "occupation_scope": "SOC17-2051",
+        "period": "2025—2035年均（预测）",
         "source_refs": [
-          "bls-outlook"
+          "civil-ep-current"
         ]
       },
       {
@@ -37624,14 +37882,15 @@
       },
       {
         "derivation": null,
-        "display_value": "专业科学与技术服务行业就业占比 56%、政府 24%、建筑业 12%、其他行业 8%（O*NET 行业分布，非工资数据）",
+        "display_value": "专业、科学和技术服务55%；政府24%；建筑业13%；其他8%",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "美国",
-        "measure": "行业分布（非工资数据）",
+        "measure": "美国就业行业占比，不是工资",
         "occupation_scope": "土木工程师",
-        "period": "当前页面；检索 2026-09",
+        "period": "O*NET职业档案标示2025年",
         "source_refs": [
-          "onet-industry"
+          "civil-onet-current",
+          "civil-industry-current"
         ]
       },
       {
@@ -37647,11 +37906,11 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：未取得该职业按行业细分的工资中位数；BLS Occupational Outlook Handbook 该页本轮直接访问返回 HTTP 403",
+        "derivation": "当前直接读到的职业手册行业表未列联邦政府。",
+        "display_value": "本页不列联邦政府行业值",
         "fact_id": "us-industry-wage-federal-2025",
         "market": "美国",
-        "measure": "来源未提供（缺口）",
+        "measure": "行业工资证据边界",
         "occupation_scope": "土木工程师",
         "period": "2025 年 5 月",
         "source_refs": [
@@ -37708,10 +37967,10 @@
       },
       {
         "derivation": null,
-        "display_value": "380,600人",
+        "display_value": "380,600个岗位",
         "fact_id": "civil-employment-2025",
         "market": "美国",
-        "measure": "BLS表1.2 基期就业",
+        "measure": "就业岗位数或变化",
         "occupation_scope": "SOC17-2051",
         "period": "2025",
         "source_refs": [
@@ -37720,10 +37979,10 @@
       },
       {
         "derivation": null,
-        "display_value": "405,100人（预测）",
+        "display_value": "预计405,100个岗位",
         "fact_id": "civil-employment-2035",
         "market": "美国",
-        "measure": "BLS表1.2 预测就业",
+        "measure": "就业岗位数或变化",
         "occupation_scope": "SOC17-2051",
         "period": "2035（预测）",
         "source_refs": [
@@ -37744,10 +38003,10 @@
       },
       {
         "derivation": null,
-        "display_value": "净增24,500人（预测）",
+        "display_value": "预计净增24,500个岗位",
         "fact_id": "civil-change-2025-2035",
         "market": "美国",
-        "measure": "BLS表1.2 净就业变化",
+        "measure": "就业岗位数或变化",
         "occupation_scope": "SOC17-2051",
         "period": "2025—2035（预测）",
         "source_refs": [
@@ -37827,11 +38086,11 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "117,790美元/年（中位数）",
+        "derivation": "带参数的检索版本出现联邦非邮政行业；当前职业手册直读表未列该项，本页仅使用后者直接核到的行。",
+        "display_value": "本页不采用联邦政府行业值",
         "fact_id": "civil-us-federal-wage-2025",
         "market": "美国",
-        "measure": "BLS OEWS同行业本职业年工资中位数",
+        "measure": "行业工资证据边界",
         "occupation_scope": "SOC17-2051，联邦政府不含邮政",
         "period": "2025年5月",
         "source_refs": [
@@ -37875,25 +38134,37 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
+        "derivation": "原编辑估算缺少可复核的完整任务效果资料，已撤回；无替代分数。",
+        "display_value": "尚无经核实的定量估计",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "任务级AI证据状态",
         "occupation_scope": "土木工程师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": "直接使用BLS职业手册行业年薪中位数。",
+        "display_value": "93,350美元/年（中位数）",
+        "fact_id": "civil-us-heavy-construction-wage-2025",
+        "market": "美国",
+        "measure": "BLS OEWS同行业本职业年工资中位数",
+        "occupation_scope": "美国SOC 17-2051在重型与土木工程施工行业",
+        "period": "2025年5月",
+        "source_refs": [
+          "civil-ooh-current"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI证据状态"
     },
     "badges": [
       "RIASEC · RIC",
@@ -37909,21 +38180,21 @@
       },
       {
         "availability": "available",
-        "fact_ref": "us-growth-2025-2035",
+        "fact_ref": "civil-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（本职业分项口径）"
+        "label": "美国就业增长（2025—2035年预测）"
       },
       {
         "availability": "available",
-        "fact_ref": "us-employment-2025",
+        "fact_ref": "civil-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（本职业分项口径，2024 年）"
+        "label": "美国就业岗位数（2025年）"
       },
       {
         "availability": "available",
-        "fact_ref": "us-openings-2025-2035",
+        "fact_ref": "civil-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（本职业分项口径）"
+        "label": "美国年均职位空缺（2025—2035年预测）"
       },
       {
         "availability": "missing",
@@ -37944,10 +38215,10 @@
       "text": "土木工程师"
     }
   },
-  "source_content_sha256": "5e3c51df259bdaaa5416358eac06de9cf463f8b1096d20d439887e875264f8b4",
+  "source_content_sha256": "7e99eb79121d800f56435bc41ca7c2d7963a6aa48a5ff4bbe0152fa544558215",
   "subject": {
     "canonical_slug": "civil-engineers",
     "name": "土木工程师",
-    "summary": "从事规划、设计与监督建筑结构与设施（道路、铁路、机场、桥梁、港口、航道、大坝、灌溉工程、管线、电厂与给排水系统）的建设与维护的工程工作：分析测量与地质与环境资料、计算荷载与水力与材料应力、设计方案并编制设计与技术文件、协调多专业接口、监督施工并检验符合性。"
+    "summary": "土木工程师参与道路、桥梁、建筑及给排水等设施的规划与设计，核对技术资料，并配合施工和维护。具体工作随项目和专业分工而变。"
   }
 }

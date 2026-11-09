@@ -38,6 +38,9 @@
       "fact:civil-us-federal-wage-2025": {
         "status": "pending_mapping"
       },
+      "fact:civil-us-heavy-construction-wage-2025": {
+        "status": "pending_mapping"
+      },
       "fact:civil-us-local-government-wage-2025": {
         "status": "pending_mapping"
       },
@@ -23363,10 +23366,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-line judgment: a civil engineer is not a combination of drawing and visiting sites, but an occupation that carries technical responsibility and signs for the design, construction and maintenance of structures and facilities; O*NET defines the occupation as engineering work that plans, designs and supervises the construction and maintenance of building structures and facilities (roads, railways, airports, bridges, harbours, channels, dams, irrigation projects, pipelines, power plants and water and sewerage systems)."
+              "Civil engineers turn survey data, design conditions and site feedback into technical records others can review. Signing or sealing applies only to authorized people under the relevant rules."
             ]
           },
           "id": "civil-engineers.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editorial",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -23374,10 +23381,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: you are willing to be responsible for calculation and design conclusions and to accept review and signing responsibility, and can explain technical problems clearly in multi-disciplinary and multi-party collaboration; the O*NET work context shows that 100% use email every day, 90% have telephone conversations every day, 76% have face-to-face discussions every day, 52% consider precision or accuracy extremely important, 57% have a typical work week above 40 hours, 43% consider the consequences of an error extremely serious, and 52%\nfeel time pressure weekly or more often."
+              "Explore further if you enjoy tracing units and versions, explaining what the calculations show and what remains open, and getting questions to the right discipline lead. Use the fictional exercise to observe those behaviors."
             ]
           },
           "id": "civil-engineers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23385,10 +23395,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing before a large investment: you have not yet taken part in a complete technical process from scheme to construction drawings, and you have not checked specification clauses and the values taken in calculations; this occupation usually requires a four-year bachelor's degree (the education distribution is bachelor's 86% and master's 10%), and in the United States a practice pathway such as the FE and PE is usually also required, with an investment measured in years."
+              "Check each job’s discipline, tasks, site schedule and review responsibilities before investing in a degree or training. A related engineering bachelor’s is typical in the U.S.; junior hiring, examinations and state licensure are separate."
             ]
           },
           "id": "civil-engineers.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editorial",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -23396,10 +23410,15 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education, qualifications and authorization must be checked separately: O*NET lists this occupation as Job Zone Four (considerable preparation), SVP range 7.0 to below 8.0; in the United States, the Professional Engineer (PE) qualification and design signing authority belong to the state practice system and usually require an accredited education, work experience and passing an examination; the O*NET page for this occupation lists 26 industry certifications (including the NCEES FE and\nPE directions), and certification and licence and employer authorization are three different things. Mainland China has a separate practice system such as registered survey and design engineers."
+              "Check education, employer requirements and personal registration separately. The work sample shows a method. Try the crossing exercise and check your result against the supplied reference."
             ]
           },
           "id": "civil-engineers.quick-decision.fermat-decision-card.6",
+          "source_refs": [
+            "editorial",
+            "civil-ooh-current",
+            "civil-cn-practice-registration"
+          ],
           "type": "prose"
         },
         {
@@ -23407,10 +23426,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one line: this is an occupation where whether the values and specifications are right, whether structural safety is assured, whether multi-disciplinary interfaces are aligned and whether the signature can be stood behind matter more than whether the scheme is novel; if you are willing to carry long-term responsibility for your calculations and drawings, it is worth serious consideration."
+              "Ask whether you would enjoy recalculating, explaining assumptions, keeping open issues visible and accepting technical review. Signing and site responsibilities depend on the discipline, documents and authorization."
             ]
           },
           "id": "civil-engineers.quick-decision.fermat-decision-card.7",
+          "source_refs": [
+            "editorial",
+            "civil-cn-practice-registration"
+          ],
           "type": "prose"
         }
       ]
@@ -23579,10 +23602,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The work of a civil engineer can be divided into three connected but distinct work dimensions. The first is analysis and calculation: analyse survey reports and maps and drawings and aerial photographs and topographic and geological data, calculate loads and slopes and flows and material stresses to determine design specifications, and test soils and materials to judge the suitability and strength of foundations and concrete and asphalt and steel. The second is design and documents: use computer-aided design and drafting tools to plan and design transport or hydraulic systems and structures, estimate the quantities and costs of materials and equipment and labour\nto judge project feasibility, and prepare or present public reports such as bid schemes and environmental impact statements and property and right-of-way descriptions. The third is construction and supervision: direct construction and operation and maintenance activities, check site progress and compliance with design specifications and safety and health standards, direct or take part in surveys to set out and establish benchmarks and elevations, and provide technical advice on design or construction or renovation or structural repair."
+              "Civil engineers analyze site data and check calculations, prepare designs and technical documents, and monitor construction or advise on maintenance. The mix depends on the project and role."
             ]
           },
           "id": "civil-engineers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -23940,7 +23967,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Check site deviations against your own duties and the applicable requirements and keep the primary records. In China changes to design documents are handled by the original design unit or another qualified unit lawfully commissioned with written consent, and major changes are reported to the original approving authority; the contractor, supervisor and client must not alter them without authorization, and ordinary oral or written confirmation does not replace the procedure."
+              "In mainland China, changes are made by the original survey or design organization, or another qualified organization commissioned by the project owner with the original organization’s written consent. The project owner must obtain approval from the original approving authority before major revisions. The registered engineer who signed and sealed a document revises it. If that engineer cannot do so in special circumstances, another registered engineer in the same discipline makes the revision, signs and seals it, and takes responsibility for the changes."
             ]
           },
           "id": "civil-engineers.profile.career-quick-answers-block.30",
@@ -23948,7 +23975,8 @@
             "civil-ooh-current",
             "civil-design-law",
             "civil-quality-law",
-            "editorial"
+            "editorial",
+            "civil-cn-practice-registration"
           ],
           "type": "prose"
         },
@@ -24007,10 +24035,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Civil engineers carry out engineering work that plans, designs and supervises the construction and maintenance of building structures and facilities, covering roads, railways, airports, bridges, harbours, channels, dams, irrigation projects, pipelines, power plants and water and sewerage systems; the typical closed loop is analysing the site and data, calculating loads and hydraulics and material stresses, designing and comparing options, preparing drawings and technical documents, and supervising construction and checking compliance with the design and specifications."
+              "O*NET groups design, construction oversight and maintenance under U.S. 17-2051.00. Mainland China divides related duties among building and municipal design engineering personnel (2-02-18-01), civil construction engineering personnel (2-02-18-02), and geotechnical investigation and engineering personnel (2-02-18-05). Check the actual duties for roads, bridges, tunnels or water and drainage. These categories do not make wages or credentials equivalent."
             ]
           },
           "id": "civil-engineers.profile.definition-block.11",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-cn-classification"
+          ],
           "type": "prose"
         },
         {
@@ -24262,7 +24294,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The six directions share some capabilities with this occupation: understanding of specifications and drawings, calculation and trade-offs, multi-disciplinary coordination, and site judgment. The real differences lie in the responsibility (whether design signing is carried), the object (new build or renovation, or existing operation and maintenance or site remediation) and the role (technical responsibility, or project and management responsibility). When choosing, it is better to test with one deliverable design calculation and drawing check than to compare titles."
+              "These roles share drawings and coordination. Compare what you want to deliver: technical checks, site delivery, building design, maintenance records or transport analysis. Verify licenses and signing requirements for the actual role and jurisdiction. Try the version-checking exercise first."
             ]
           },
           "id": "civil-engineers.direction-comparison.adjacent-career-comparison-table.8",
@@ -24306,7 +24338,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "People willing to manage the site and contracts and the team are suited to the construction manager direction; people willing to take responsibility for the design and sign are suited to this occupation."
+              "Compare construction management if you want to coordinate schedules, subcontractors and site teams. Try a civil engineering sample if you prefer checking calculations, drawings and technical interfaces."
             ]
           },
           "id": "civil-engineers.direction-comparison.adjacent-career-comparison-table.12",
@@ -24559,7 +24591,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Moving from this occupation to an adjacent direction usually requires filling in new experience and qualifications: the construction and project manager directions require contract and cost and team management experience, the facilities manager direction requires operation and maintenance and energy management experience, the architecture direction requires architectural education and a registration pathway, and the brownfield and transport directions require accumulating project records in the corresponding specialty. Calculation and specification and coordination ability transfer, but signing and registration responsibility must be obtained anew."
+              "Build experience for the target work: contracts, costs and site organization for construction management; operations for facilities management; and discipline-specific training for architecture, remediation or transport analysis. Check licensing and signing rules where they apply to the target role."
             ]
           },
           "id": "civil-engineers.direction-comparison.adjacent-career-comparison-table.35",
@@ -24910,7 +24942,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial tool pilot suggestion: material extraction, scheme drafts, calculation checking and records can be directions for trials, checking errors, omissions and total review hours. In this round there is no evidence of tool speed-up or institutional adoption for this occupation; software recruiting keywords do not prove actual BIM or generative AI adoption. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Use fictional data to try extracting text, organizing calculation records or checking changes between versions. Check errors, omissions and review time. Available evidence does not quantify tool effectiveness, adoption or individual replacement risk for this occupation. Software terms in job postings describe those particular roles."
             ]
           },
           "id": "civil-engineers.ai-impact.ai-impact-table.18",
@@ -25401,10 +25433,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The complete O*NET table lists 23 software categories and Hot Technologies lists 24 keywords; 2025 U.S. Lightcast recruiting mentions were AutoCAD22%, Office18%, Civil3D16%, Excel12%, MicroStation10% and Revit8%. Each keyword can overlap, three words are Not available and are not filled with 0; keywords are not a usage rate or an AI capability."
+              "The O*NET occupation profile lists 23 software categories; its employer technology table lists 24 skills. In deduplicated 2025 U.S. Lightcast postings linked to this SOC, AutoCAD was mentioned in 22%, Office in 18%, Civil 3D in 16%, Excel in 12%, MicroStation in 10% and Revit in 8%. A posting can mention multiple skills. Three entries have no reported share. Mentions do not measure actual use or AI adoption."
             ]
           },
           "id": "civil-engineers.ai-impact.ai-impact-table.60",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25777,10 +25813,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Treating an unconfirmed site practice as an approved change concentrates safety and contract risk and surfaces it at the acceptance and settlement stage."
+              "Inconsistent units, datums or load cases can produce plausible-looking results that cannot be compared. A polished output does not establish that the inputs are correct."
             ]
           },
           "id": "civil-engineers.ai-impact.ai-impact-table.90",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25788,14 +25827,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "In China design changes are handled under Article 28 of the survey and design regulations by the original design unit or another qualified unit lawfully commissioned with written consent, and major changes are reported to the original approving authority; the client, contractor and supervisor must not alter them without authorization, and ordinary written confirmation or AI output does not replace the procedure."
+              "Check units, datum, versions and applicable conditions against the original records. Recalculate independently, record unknowns and leave real safety judgments to authorized review."
             ]
           },
           "id": "civil-engineers.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "civil-design-law",
-            "civil-quality-law",
-            "civil-ooh-current",
             "editorial"
           ],
           "type": "prose"
@@ -26744,10 +26780,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Announcement information of the Occupational Classification Code of the People's Republic of China (2022 edition)｜https://www.mohrss.gov.cn/"
+              "China Occupational Classification, 2022 edition｜https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
             ]
           },
           "id": "civil-engineers.china-salary.career-snapshot-primary-locale.47",
+          "source_refs": [
+            "civil-cn-classification"
+          ],
           "type": "prose"
         },
         {
@@ -26844,10 +26883,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupation comparison: the U.S. O*NET-SOC 17-2051.00 (Civil Engineers); this evidence route has not established a one-to-one detailed occupation category for mainland China, and the related technical work may be distributed across the survey and design and construction and municipal and transport and water conservancy series, and must be classified by actual duties and unit type, with the page language not constituting occupational equivalence or a wage mapping."
+              "O*NET groups design, construction oversight and maintenance under U.S. 17-2051.00. Mainland China divides related duties among building and municipal design engineering personnel (2-02-18-01), civil construction engineering personnel (2-02-18-02), and geotechnical investigation and engineering personnel (2-02-18-05). Check the actual duties for roads, bridges, tunnels or water and drainage. These categories do not make wages or credentials equivalent."
             ]
           },
           "id": "civil-engineers.china-salary.career-snapshot-primary-locale.55",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-cn-classification"
+          ],
           "type": "prose"
         },
         {
@@ -26867,13 +26910,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025 industry wage Tables 2/5 and the survey notes｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html; the precise occupational code mapping was not determined in this round"
+              "China NBS 2025 urban-unit industry wages, Tables 2 and 5｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html; annual industry averages rather than a single occupation."
             ]
           },
           "id": "civil-engineers.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
             "civil-nbs-current",
-            "editorial"
+            "editorial",
+            "civil-cn-classification"
           ],
           "type": "prose"
         },
@@ -27141,7 +27185,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "380,600 people (2025)"
+              "380,600 U.S. civil engineering jobs in 2025"
             ]
           },
           "id": "civil-engineers.us-salary.career-snapshot-secondary-locale.19",
@@ -27309,10 +27353,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OOH lists for 2025 engineering services 51%, state government 11%, local government 10%, non-residential building construction 7% and federal government 3% and other main employers; this differs from the O*NET categories 55/24/13/8. OOH notes that fluctuations in government funding may affect public project opportunities, and this cannot be used to assert a causal change in individual wages."
+              "The BLS handbook lists major employers in 2025: engineering services 51%, state government 11% and local government 10% (both excluding education and hospitals), nonresidential building construction 7%, and heavy and civil engineering construction 3%. O*NET uses broader groups: professional, scientific and technical services 55%, government 24% and construction 13%; its industry page lists 8% in other industries. These are employment shares."
             ]
           },
           "id": "civil-engineers.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "civil-ooh-current",
+            "civil-industry-current",
+            "civil-onet-current"
+          ],
           "type": "prose"
         },
         {
@@ -27346,7 +27395,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Federal government (excluding postal service)"
+              "Heavy and civil engineering construction"
             ]
           },
           "id": "civil-engineers.us-salary.career-snapshot-secondary-locale.34",
@@ -27360,7 +27409,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "117,790 USD per year (median)"
+              "$93,350 per year (median)"
             ]
           },
           "id": "civil-engineers.us-salary.career-snapshot-secondary-locale.35",
@@ -27968,10 +28017,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Interest orientation: the interest codes for the work content are RIC (Realistic, Investigative, Conventional), and daily tasks are mainly analysing data and calculating designs, preparing documents and coordinating interfaces, and supervising construction and inspection."
+              "There is no single type for civil engineers. Reflect on how you switch between independent checking, team coordination and site feedback. Try explaining the two clearance results in one sentence and notice what preparation helps."
             ]
           },
           "id": "civil-engineers.fit.personality-fit-block.10",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28067,7 +28119,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The complete O*NET table: 10 basic skills, 25 cross-functional, 33 knowledge areas and 52 abilities. Active listening 75, critical thinking and mathematics and reading and speaking 72; knowledge of design 93, engineering and technology 92, building and construction 88, mathematics 87, English language 75 and physics 68; deductive and inductive reasoning, oral comprehension and expression, problem sensitivity and written comprehension and expression 75 each. Occupational importance is not an individual ability score or a uniform threshold."
+              "Read the inputs, units, formula and versions, then recalculate and explain the limits. O*NET describes job abilities; it does not assign a personal IQ score. This page sets no hiring cutoff."
             ]
           },
           "id": "civil-engineers.fit.personality-fit-block.18",
@@ -28119,10 +28171,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This occupation has high communication and documentation intensity: the O*NET work context shows that 100% use email every day, 90% have telephone conversations every day, 76% have face-to-face discussions every day and 67% write letters and memos weekly or more often."
+              "Practice explaining a version conflict, restating the other person’s concern and recording what remains open and who would confirm it. We have not verified an EQ cutoff for this occupation."
             ]
           },
           "id": "civil-engineers.fit.personality-fit-block.22",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29019,7 +29074,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "China's safety regulations require special operation qualifications, safety briefings, protection and training; excavation and work at height and similar settings require checking the specific safety conditions. In this round there is no estimate of the injury probability for this occupation, and wearing protection does not mean a hazardous area may be entered."
+              "Mainland rules separately cover training and credentials for specified special operations, and dedicated plans for specified high-risk work meeting the regulatory scale. Workers receive safety training before entering a new role or construction site."
             ]
           },
           "id": "civil-engineers.risk.career-risk-cards.20",
@@ -29035,7 +29090,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Complete safety briefings and training for the actual position and use protection correctly, and carry out hazardous work under the special scheme and qualifications; in an emergency directly endangering personal safety, workers may stop their own operations or take necessary emergency measures and then evacuate the hazardous area (Article 32). This card does not grant authority to stop or resume the whole project."
+              "Check the training, protection and controls for the actual role. Under Article 32, workers facing an emergency that endangers personal safety may stop their own work or take necessary emergency measures before leaving the danger area. Separate authority governs a project-wide stop or restart."
             ]
           },
           "id": "civil-engineers.risk.career-risk-cards.21",
@@ -29090,7 +29145,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorial advice is to maintain records of version issue, retrieval and review comments. In China design changes are handled by the original design unit or another qualified unit lawfully commissioned with written consent, and major changes are reported to the original approving authority; ordinary written project confirmation does not replace the statutory procedure."
+              "In mainland China, changes are made by the original survey or design organization, or another qualified organization commissioned by the project owner with the original organization’s written consent. The project owner must obtain approval from the original approving authority before major revisions. The registered engineer who signed and sealed a document revises it. If that engineer cannot do so in special circumstances, another registered engineer in the same discipline makes the revision, signs and seals it, and takes responsibility for the changes."
             ]
           },
           "id": "civil-engineers.risk.career-risk-cards.25",
@@ -29098,7 +29153,8 @@
             "civil-design-law",
             "civil-quality-law",
             "civil-ooh-current",
-            "editorial"
+            "editorial",
+            "civil-cn-practice-registration"
           ],
           "type": "prose"
         },
@@ -29556,7 +29612,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education, training and certification, statutory practice licensing and institutional authorization are checked separately. Junior positions in the United States do not need a PE first, and public service usually requires a state licence; NCEES provides the FE and PE examinations, the state body issues the licence, and passing the examination is not the same as a licence. The current 26 related O*NET entries include examinations and certifications and are not 26 uniform industry thresholds."
+              "A civil or related engineering bachelor’s is typical in the U.S. Look for junior work with supervision and review; Pennsylvania’s Civil Engineer Trainee classification is one example. NCEES administers the FE and PE exams; state boards evaluate education and experience and issue licenses. Entry-level positions generally do not require a license first. Offering professional services directly to the public typically requires state licensure. In mainland China, choose among design, construction technology and investigation, then check each job. Registered survey or design practice involves the qualification certificate, employment by an appropriately qualified organization and registration. Registered engineers in the relevant discipline sign and seal the documents specified by the rules. Hubei’s 2026 exam notice lists geotechnical, port and waterway, water resources and hydropower, and road disciplines; structural and utilities credentials are separate."
             ]
           },
           "id": "civil-engineers.path.career-path-block.21",
@@ -29567,7 +29623,10 @@
             "civil-ooh-current",
             "civil-design-law",
             "civil-safety-law",
-            "editorial"
+            "editorial",
+            "civil-cn-practice-registration",
+            "civil-cn-exam-2026",
+            "civil-us-pa-trainee"
           ],
           "type": "prose"
         },
@@ -29587,14 +29646,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET Job Zone Four and SVP7.0 to below 8.0 are the occupational preparation level, not a fixed number of training years for an individual; education is the new-hire requirement questionnaire. The precise Chinese occupation mapping was not determined in this round, and unit qualification, personnel registration and duties are checked separately under the actual position's regulations."
+              "O*NET groups design, construction oversight and maintenance under U.S. 17-2051.00. Mainland China divides related duties among building and municipal design engineering personnel (2-02-18-01), civil construction engineering personnel (2-02-18-02), and geotechnical investigation and engineering personnel (2-02-18-05). Check the actual duties for roads, bridges, tunnels or water and drainage. These categories do not make wages or credentials equivalent."
             ]
           },
           "id": "civil-engineers.path.career-path-block.23",
           "source_refs": [
             "civil-ooh-current",
             "civil-onet-current",
-            "editorial"
+            "editorial",
+            "civil-cn-classification"
           ],
           "type": "prose"
         },
@@ -30439,38 +30499,41 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional task: from a fictional site geotechnical summary and general layout drawing, complete the checking calculation and interface conditions for a fictional retaining wall and a section of fictional drainage pipe.",
-                  "Fictional conditions: a fictional design note (including the load values and safety class and applicable specification version) and a fictional drawing version record (noting one level inconsistency).",
-                  "Fictional materials: a fictional geotechnical borehole log and a fictional rainfall and flow parameter table.",
-                  "Fictional constraints: a fictional institutional procedure (the calculation sheet must state the formula and the values taken and the specification clauses, and changes must go through the change procedure and be re-signed)."
+                  "Inputs | A fictional pipe crosses below a beam",
+                  "All three elevations use the same fictional datum: top of pipe 1.80 m, beam underside 2.40 m on structural drawing R0, and 2.10 m on unconfirmed draft R1.",
+                  "For this exercise, clearance equals the underside elevation minus the top-of-pipe elevation. The exercise threshold is at least 0.40 m.",
+                  "There is no approval record for R1. The exercise does not say which version should be used."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Step one: write out the calculation list (component and load case and formula and source of values and units), and explain how you handle the level inconsistency.",
-                  "Step two: prepare a multi-disciplinary interface conditions table (openings and loads and levels and interface details and confirming party), and point out which two items need priority confirmation.",
-                  "Step three: write out the key points of a site technical briefing (critical processes and acceptance requirements and non-conformity handling), and explain which matters must be signed by personnel with the registration qualification."
+                  "Task | Recalculate and record the discrepancy",
+                  "Calculate R0 and R1 separately. Record inputs, units, versions and each result’s difference from the exercise threshold.",
+                  "Draft questions for the structural and drainage leads: Which version is authorized, and would the change affect this interface? Leave the issue pending confirmation."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference deliverables: a calculation list with basis and units, an interface conditions table, and technical briefing points.",
-                  "Review basis: whether the formula and the values taken can be reviewed, whether specification clauses are cited, whether the interface table is executable, and whether what can be handled independently and what must be signed by a registered person are distinguished.",
-                  "Several reasonable approaches are allowed; if you consider some information insufficient to judge, you should clearly write out the parts that cannot be judged and the additional information needed."
+                  "Reference | R0 gives 0.60 m, or 0.20 m above the exercise threshold. R1 gives 0.30 m, or 0.10 m below it.",
+                  "The two results differ by 0.30 m. Keep both versions in the record. Do not choose a version or overwrite the record before confirmation.",
+                  "Self-check against the reference. No site visit, software or outside reply is required. Record optional feedback separately if you obtain it."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "All materials in this exercise are fictional and must not be used for real engineering design, construction or acceptance judgments; real projects must be handled by personnel with the corresponding registration qualification and authorization under the standards and the contract.",
-                  "The geotechnical and parameter and drawing values given in the question are fictional values, used only to practise calculation and interface organization methods."
+                  "Boundary | The 0.40 m threshold is for this exercise only. It is not an engineering standard or an acceptance criterion.",
+                  "This exercise covers arithmetic, versions and handoff questions. It gives no construction instruction, safety judgment or signing decision."
                 ]
               }
             ]
           },
           "id": "civil-engineers.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "Paper case and tasks",
           "type": "cards"
         },
@@ -30482,35 +30545,38 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "One table: break the position requirements (education and specialty direction, project experience, software ability, registration status, site and safety training) item by item into condition, demonstrable experience and evidence location.",
-                  "Forms of evidence include de-identified calculation sheet and drawing samples, review comment closure records, registration and training records and supervisor evaluations.",
-                  "For items without evidence, clearly write to be added and give a plan to fill the gap."
+                  "List education, duties, review and site conditions from a job description.",
+                  "Add any verifiable learning or work evidence and cite where it came from.",
+                  "Mark missing evidence. Do not count the fictional exercise as project experience."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Check someone else's calculation sheet (using fictional or de-identified materials) and list whether the elements you checked are complete (values taken, units, specification clauses, version, interfaces, signature).",
-                  "Write out the points you disagree with or that need supplementing, and explain the basis."
+                  "Include both clearance calculations and the exercise threshold.",
+                  "Record units, versions, the discrepancy and why you did not choose a version."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "A one-page design note summary: design conditions and basis, scheme and key assumptions, and matters needing clarification or supplementation.",
-                  "A site liaison summary: the parts and times checked, the problems found and how they were handled, and the closure status and follow-up requirements."
+                  "Use one page for inputs, calculations, open issues and who would confirm them.",
+                  "Add one clarification question. The exercise includes no site inspection or construction conclusion."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "A tool record: the design modelling and calculation and collaboration tools you have used and what for, and how you manage versions and material permissions.",
-                  "A collaboration note: how you interface with the discipline lead and the contractor and supervisor and reviewing party, and how information is kept on record."
+                  "Explain what you recorded on paper or in a spreadsheet and how you retained both versions.",
+                  "State which discipline lead would confirm what. Do not claim that anyone replied."
                 ]
               }
             ]
           },
           "id": "civil-engineers.path.entry-portfolio.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "Portfolio and evidence preparation",
           "type": "cards"
         },
@@ -30569,55 +30635,58 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: understand the geotechnical data and drawings and the design note",
-                  "Extract the fictional key geotechnical parameters and design conditions and the applicable specification version into a checklist."
+                  "Day 1 | List the inputs",
+                  "List the top-of-pipe and two beam elevations, units and the exercise threshold."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: complete one checking calculation",
-                  "Check one component or one pipeline section against the given loads and parameters and write the formula and the values taken."
+                  "Day 2 | Recalculate independently",
+                  "Subtract the pipe elevation from each beam elevation and record R0 and R1 separately."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: handle the version and level problem",
-                  "Find the location where the level is inconsistent and write the clarification question and how you would handle it."
+                  "Day 3 | Flag the version conflict",
+                  "Compare clearances with the exercise threshold. Record the discrepancy and that R1 is unconfirmed."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: organize the interface conditions table",
-                  "List a multi-disciplinary interface conditions table and mark the two items needing priority confirmation."
+                  "Day 4 | Write the interface record",
+                  "Record the crossing, both versions, the affected disciplines, who would confirm and the pending status."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: write the technical briefing points",
-                  "For the critical processes, write the briefing points and acceptance requirements and how non-conformities are handled."
+                  "Day 5 | Draft clarification questions",
+                  "Ask which version is authorized and how the change would affect the interface. Draft the questions without contacting anyone."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: check signatures and compliance",
-                  "Write out which documents need to be signed by personnel with the registration qualification, and how you would record versions and changes."
+                  "Day 6 | Check against the reference",
+                  "Check the 0.60 m and 0.30 m results, the 0.10 m shortfall, versions, open issues and exercise limits."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: make a judgment",
-                  "Answer three questions: would you be willing to repeat this; which step engaged you most; and which ability will you build next week (calculation and specifications, modelling tools, interface coordination, or site and quality)."
+                  "Day 7 | Decide what to build next",
+                  "Which step engaged you most? If you want to try more, choose one skill to practice and read a real job description to check the duties."
                 ]
               }
             ]
           },
           "id": "civil-engineers.path.seven-day-trial.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "Seven-day progressive experience",
           "type": "timeline"
         },
@@ -30626,16 +30695,19 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Change: after finishing this seven-day exercise, how does your impression of a civil engineer differ from the start? Please write down the specific changes.",
-              "Facts and choices: which given information did you rely on during the process, and which parts did you assume yourself? Were all the assumptions written down?",
-              "Exercise load: in these seven days, was the checking calculation, handling the version problem or organizing interfaces the most time-consuming? Which step felt hard?",
-              "Material boundary: are you aware that the materials in the question are fictional and that the conclusions cannot be used for real engineering design or construction judgments?",
-              "Response to feedback: when the discipline lead points out a problem with your values taken or interfaces, is your first reaction to explain or to re-check? This affects how fast you grow afterwards.",
-              "Interest in the process: if you repeated this whole process ten times with gradually increasing project complexity, would your interest rise or fall?",
-              "Next step: write down one ability you will build in the next two weeks, and how you will verify it."
+              "Describe one concrete change in how you see the occupation.",
+              "Separate the supplied elevations and exercise rule from the still-unknown authorized version.",
+              "Which took the most time: arithmetic, version checking or drafting the handoff?",
+              "Explain in one sentence why 0.40 m is an exercise rule and cannot support a real engineering decision.",
+              "Use the supplied hypothetical feedback: “If R1 is to be used, recalculate and keep it pending.” Update your exercise log without treating it as actual approval.",
+              "Would you want to repeat this type of check? What task would you try next?",
+              "Choose one skill and a result you can check yourself."
             ]
           },
           "id": "civil-engineers.path.seven-day-decision.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "Judgment questions after seven days",
           "type": "list"
         },
@@ -30736,10 +30808,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Education, training and certification, practice licensing, unit qualification and actual position duties are checked separately. Junior positions in the United States do not need a licence first and public service usually requires a state PE; the FE and PE are NCEES examinations and the licence is reviewed and issued by the state body. The 26 related O*NET entries include examinations and are not all uniform industry certifications. In China unit qualification and personnel registration, design quality responsibility and change procedures are judged under the actual regulations and specialty category; ordinary institutional authorization cannot replace a statutory\nqualification.",
-              "United States: NCEES provides the FE and PE examinations and the licence is reviewed and issued by the state body. Junior positions do not need a PE first and public service usually requires a licence, with the specific education, experience and examination conditions checked by state; the 26 related entries include examinations and certifications and cannot all be called industry certifications.",
-              "China: specialties and positions that require registered practice by law are checked under the actual rules, and unit qualification, designer responsibility and design change procedures are kept separate, so not all junior civil engineering positions are set as registration entry points.",
-              "This page does not guarantee that any training or certification is recognized by a specific institution or jurisdiction, nor does it replace a specific judgment about practice qualifications and signing authority."
+              "A civil or related engineering bachelor’s is typical in the U.S. Look for junior work with supervision and review; Pennsylvania’s Civil Engineer Trainee classification is one example. NCEES administers the FE and PE exams; state boards evaluate education and experience and issue licenses. Entry-level positions generally do not require a license first. Offering professional services directly to the public typically requires state licensure.",
+              "In mainland China, choose among design, construction technology and investigation, then check each job. Registered survey or design practice involves the qualification certificate, employment by an appropriately qualified organization and registration. Registered engineers in the relevant discipline sign and seal the documents specified by the rules. Hubei’s 2026 exam notice lists geotechnical, port and waterway, water resources and hydropower, and road disciplines; structural and utilities credentials are separate.",
+              "Verify actual duties, organization qualifications, certificates and registration separately.",
+              "Use the work sample to show your checking process. It does not confer authorization or count as qualifying experience."
             ]
           },
           "id": "civil-engineers.path.credential-boundary.1",
@@ -30750,7 +30822,10 @@
             "civil-ooh-current",
             "civil-design-law",
             "civil-safety-law",
-            "editorial"
+            "editorial",
+            "civil-cn-practice-registration",
+            "civil-cn-exam-2026",
+            "civil-us-pa-trainee"
           ],
           "title": "Qualification and exercise boundaries",
           "type": "notice"
@@ -30760,11 +30835,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "On recruitment samples: this page does not use recruitment platform quotations as wage evidence, nor write a single job posting up as a uniform threshold; the education, specialty direction, registration status and project experience in recruitment conditions change with the institution and the project.",
-              "On position titles: positions of this kind may use titles such as design engineer, structural engineer, project manager, chief engineer and technical lead, and comparisons should be based on the actual duties and signing authority and unit type rather than the title."
+              "U.S. example: Pennsylvania’s Civil Engineer Trainee class accepts a civil engineering bachelor’s, or a closely related bachelor’s with major civil engineering coursework included or added. The alternative is one year of civil engineering experience and a valid EIT certificate issued or accepted by the state board. Professional engineers closely supervise the work and review it during and after completion. This is a class specification, not a live posting or a national rule.",
+              "Mainland example: China Railway 16th Bureau Group’s September 29, 2026 campus event for the 2027 graduating class listed bridge, tunnel, road and geotechnical fields and described screening and interviews. The event has passed; it does not establish current vacancies or exact pay."
             ]
           },
           "id": "civil-engineers.path.recruitment-sample.1",
+          "source_refs": [
+            "civil-cn-railway-campus",
+            "civil-us-pa-trainee"
+          ],
           "title": "Notes on the use of recruitment samples",
           "type": "notice"
         }
@@ -31166,7 +31245,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 wages, published 2026-05-15; consulted 2026-10-09 in this round"
+              "2025 wages; published May 15, 2026"
             ]
           },
           "id": "civil-engineers.market-signals.market-signal-card.24",
@@ -31181,7 +31260,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Precise occupational wages in China remain insufficient evidence; the 2025 annual average wages for scientific and technical services and construction serve only as background for the corresponding employers, not occupational income or an employment growth projection."
+              "China’s 2025 NBS figures are industry averages for scientific research and technical services and for construction. No national wage distribution for civil engineers was verified."
             ]
           },
           "id": "civil-engineers.market-signals.market-signal-card.25",
@@ -31222,12 +31301,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Mainland China (the precise occupational correspondence was not determined in this round)"
+              "Mainland China: occupations compared by duties; wages describe broad industries"
             ]
           },
           "id": "civil-engineers.market-signals.market-signal-card.28",
           "source_refs": [
-            "editorial"
+            "editorial",
+            "civil-cn-classification",
+            "civil-nbs-current"
           ],
           "type": "prose"
         },
@@ -31574,7 +31655,7 @@
                 "question_key": "career.faq.civil-engineers.daily-work"
               },
               {
-                "answer": "Construction managers are responsible for the site and contracts and the team; architectural and engineering managers coordinate the project and the multi-disciplinary team; facilities managers are responsible for the operation and maintenance of existing facilities; architects focus on space and function and practise as registered professionals; this occupation carries design and technical responsibility for structures and systems and is responsible for signing the design documents. Shared capabilities do not mean the positions can be exchanged: registration qualifications and signing authority and levels of responsibility differ.",
+                "answer": "Civil engineers focus on design, calculations and technical review for structures or infrastructure. Construction managers organize site delivery, and architects focus on building design and function. Check discipline, role, document and jurisdiction for signing responsibilities.",
                 "id": "civil-engineers.faq.2",
                 "question": "Where is the boundary between civil engineers and adjacent occupations?",
                 "question_key": "career.faq.civil-engineers.comparison"
@@ -31586,10 +31667,15 @@
                 "question_key": "career.faq.civil-engineers.ai-replacement"
               },
               {
-                "answer": "The earlier affected parts are those that can be structured as inputs: material extraction, scheme comparison, calculation checking, quantity and cost drafts, and document and record organization. The later affected parts are those requiring site judgment and signing responsibility: construction supervision and concealed works acceptance, environmental and public risk judgment, and the signing of design documents.",
+                "answer": "Try extraction, draft organization or version comparison where approved, then independently check sources, values, units and open issues. The evidence does not establish an order in which tasks will automate. Engineering judgment, signing and site responsibilities follow applicable rules.",
                 "id": "civil-engineers.faq.4",
-                "question": "Which tasks are most easily automated?",
-                "question_key": "career.faq.civil-engineers.automatable-tasks"
+                "question": "Where could you try AI assistance in civil engineering?",
+                "question_key": "career.faq.civil-engineers.automatable-tasks",
+                "source_refs": [
+                  "civil-nist-current",
+                  "ilo-genai",
+                  "editorial"
+                ]
               },
               {
                 "answer": "Judging whether the values taken and assumptions apply, confirming the applicable specifications and site conditions, identifying non-conformities on site and deciding how to handle them, and writing the design conclusions into reviewable documents that you are willing to sign. These abilities depend on engineering training and practice responsibility.",
@@ -31598,22 +31684,41 @@
                 "question_key": "career.faq.civil-engineers.human-skills"
               },
               {
-                "answer": "In the United States the May 2025 hourly median for this occupation is 48.48 USD and the annual median 100,840 USD, with the 10th and 25th and 75th and 90th annual percentiles at 68,240 and 79,930 and 129,680 and 163,220\nUSD respectively. The statistic excludes self-employment income and does not represent a particular qualification level; for mainland China this page publishes only one labelled broad industry proxy value and registers the occupation-level gap.",
+                "answer": "The May 2025 U.S. national median for civil engineers was $100,840 per year and $48.48 per hour. Annual P10, P25, P75 and P90 were $68,240, $79,930, $129,680 and $163,220. The mainland Chinese data show averages for two broad industries by type of urban employer. We did not verify a national occupation-specific distribution.",
                 "id": "civil-engineers.faq.6",
                 "question": "Roughly how much do civil engineers earn?",
-                "question_key": "career.faq.civil-engineers.salary"
+                "question_key": "career.faq.civil-engineers.salary",
+                "source_refs": [
+                  "onet-localwages",
+                  "civil-nbs-current",
+                  "bls-oews-methods"
+                ]
               },
               {
-                "answer": "The education distribution on this occupation's page is bachelor's 86%, master's 10% and post-bachelor's certificate 5%; most positions require a four-year engineering related education with solid mechanics and mathematics, and in the United States work experience and examinations are usually also accumulated along the state practice pathway such as the FE and PE.",
+                "answer": "A bachelor’s degree in civil engineering or a related field is typical in the U.S. Compare each job’s coursework and experience requirements. For mainland Chinese jobs, check the relevant discipline and employer requirements.",
                 "id": "civil-engineers.faq.7",
                 "question": "What education do you need to become a civil engineer?",
-                "question_key": "career.faq.civil-engineers.education"
+                "question_key": "career.faq.civil-engineers.education",
+                "source_refs": [
+                  "civil-ooh-current",
+                  "civil-cn-classification",
+                  "civil-us-pa-trainee",
+                  "civil-cn-railway-campus"
+                ]
               },
               {
-                "answer": "In the United States, the Professional Engineer (PE) qualification and design signing authority belong to the state practice system and usually require an accredited education, work experience and passing an examination; the O*NET page for this occupation lists 26 industry certifications (including the NCEES FE and PE directions and LEED and energy and value engineering directions), and certification and licence and employer authorization have different functions. Mainland China has a separate practice system such as registered survey and design engineers.",
+                "answer": "U.S. junior roles generally do not require an initial license. Direct services to the public typically require state licensure. NCEES administers FE and PE exams; state boards issue licenses. In mainland China, survey and design practice separates the qualification certificate, employment by a qualified organization and registration, with signing and sealing determined by the applicable discipline and document rules.",
                 "id": "civil-engineers.faq.8",
                 "question": "Which licences or certifications are needed?",
-                "question_key": "career.faq.civil-engineers.credentials"
+                "question_key": "career.faq.civil-engineers.credentials",
+                "source_refs": [
+                  "civil-cn-practice-registration",
+                  "civil-cn-exam-2026",
+                  "civil-us-pa-trainee",
+                  "civil-ooh-current",
+                  "civil-fe-current",
+                  "civil-pe-current"
+                ]
               },
               {
                 "answer": "It is feasible but the pathway is long: most positions require an engineering education, and the registration pathway is measured in years. People with a construction or surveying or engineering management background can transfer site and drawing experience, but still need to study mechanics and structural or hydraulic or geotechnical professional courses systematically and accumulate design project experience.",
@@ -31622,28 +31727,45 @@
                 "question_key": "career.faq.civil-engineers.career-change"
               },
               {
-                "answer": "It depends on whether you are willing to carry long-term responsibility for technical conclusions and accept review and checking. BLS projects growth of 5% to 6% for this occupation over 2024 to 2034 (faster than the average for all occupations) with about 23,600 openings over the decade, and this occupation's page is marked Bright Outlook. It is advisable to first use the seven-day exercise on the page to test whether you would want to repeat this process.",
+                "answer": "BLS projects U.S. civil engineering employment to rise from 380,600 jobs in 2025 to 405,100 in 2035, up 6.4% (rounded to 6% in its handbook). About 22,700 openings a year include replacements for people leaving the occupation. Try the fictional version-checking exercise here, then look at actual jobs in your area.",
                 "id": "civil-engineers.faq.10",
                 "question": "Is this occupation worth the investment?",
-                "question_key": "career.faq.civil-engineers.career-worth"
+                "question_key": "career.faq.civil-engineers.career-worth",
+                "source_refs": [
+                  "civil-ep-current",
+                  "civil-ooh-current",
+                  "editorial"
+                ]
               },
               {
-                "answer": "This evidence route registers the national single-occupation wage as verified unavailable (data status: no data that can be used safely), and the handling note is to use the construction industry average wage as an explicit proxy. This page therefore publishes only one labelled broad industry proxy value (the 2025 annual average wage of construction industry employees in urban non-private units), does not publish an occupation-level figure and does not extrapolate from quotations for adjacent positions.",
+                "answer": "In 2025, China’s NBS reported average annual wages of CNY 182,064 at urban non-private units and CNY 83,560 at urban private units in scientific research and technical services. For construction, the figures were CNY 92,036 and CNY 66,275, respectively. They cover many occupations in each industry.",
                 "id": "civil-engineers.faq.12",
                 "question": "Why is only an industry proxy available for mainland China?",
-                "question_key": "career.faq.civil-engineers.china-data-scope"
+                "question_key": "career.faq.civil-engineers.china-data-scope",
+                "source_refs": [
+                  "civil-nbs-current"
+                ]
               },
               {
-                "answer": "U.S. wages are the BLS OEWS May 2025 national statistics (shown via the O*NET National Wages page), describing employed wage and salary positions and excluding self-employment income; employment and outlook are the BLS employment projection for 2024 to 2034; the O*NET page for this occupation does not provide median wages broken down by industry or region. Direct access to the BLS Occupational\nOutlook Handbook page for this occupation returned HTTP 403 in this round, and this page has registered that access gap.",
+                "answer": "U.S. wages are May 2025 national BLS OEWS figures presented by O*NET. They cover wage and salary employees and exclude self-employed income. Job counts and annual openings come from BLS projections for 2025–2035. The mainland Chinese figures are 2025 NBS industry averages for urban units. We did not verify a national wage distribution for civil engineers in mainland China.",
                 "id": "civil-engineers.faq.13",
                 "question": "What is the basis of the U.S. data?",
-                "question_key": "career.faq.civil-engineers.us-data-scope"
+                "question_key": "career.faq.civil-engineers.us-data-scope",
+                "source_refs": [
+                  "onet-localwages",
+                  "bls-oews-methods",
+                  "civil-ep-current",
+                  "civil-nbs-current"
+                ]
               },
               {
-                "answer": "The exercises and the seven-day arrangement are fictional materials designed by the FermatMind editorial team to help readers judge whether they would want to repeat this workflow; they are not research findings or industry facts, and must not be used for real engineering design, construction or acceptance judgments, as real projects must be handled by personnel with the corresponding registration qualification and authorization.",
+                "answer": "Use the fictional crossing data on this page to calculate both clearances, compare the reference, record the conflict and draft clarification questions. The 0.40 m threshold belongs to the exercise and supports no real design, construction or acceptance decision.",
                 "id": "civil-engineers.faq.14",
                 "question": "What is the nature of the exercises on the page?",
-                "question_key": "career.faq.civil-engineers.exercise-boundary"
+                "question_key": "career.faq.civil-engineers.exercise-boundary",
+                "source_refs": [
+                  "editorial"
+                ]
               }
             ]
           },
@@ -31655,7 +31777,13 @@
             "ilo-genai",
             "nbs-wages",
             "onet-details",
-            "onet-training"
+            "onet-training",
+            "civil-cn-practice-registration",
+            "civil-cn-exam-2026",
+            "civil-us-pa-trainee",
+            "civil-ooh-current",
+            "civil-fe-current",
+            "civil-pe-current"
           ],
           "type": "faq"
         },
@@ -31666,7 +31794,7 @@
             "entries": [
               "This page labels the source and limits separately for occupational identity and tasks (O*NET), U.S. wages (BLS OEWS), the U.S. employment projection (BLS employment projections), the industry basis and the mainland China statistical gap, and does not mix different bases.",
               "Editorial summaries (capability stages, risk scenarios, exercise materials and the seven-day arrangement) are stated separately from source facts, with their nature indicated where they appear.",
-              "This page does not provide an occupation-level wage figure for this occupation in mainland China and does not convert U.S. figures into renminbi; one mainland value is a labelled broad industry proxy; statements involving registered practice and safety and the environment are general frameworks and do not replace the original regulations or standards."
+              "Mainland Chinese figures are labeled industry averages. A national occupation-specific wage distribution has not been verified."
             ]
           },
           "id": "civil-engineers.sources.boundary.1",
@@ -31691,7 +31819,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "In this round, on 2026-10-09, the nine modules were checked segment by segment: O*NET17-2051.00 duties and the complete current tables, the OEWS May 2025 wages, the BLS2025—2035 Table 1.2 and the original OOH text; the precise Chinese wage is still missing and the matched 2025 industry background has been added. The old registration and facts have out-of-scope shared consumers, so they are retained and this round's materials are appended in isolation; the old 403 and old figures are not used as new conclusions for this\nround."
+              "O*NET describes U.S. job duties. OEWS reports U.S. wages, and BLS separately projects employment. China’s NBS figures are industry averages. FermatMind wrote the fictional exercise."
             ]
           },
           "id": "civil-engineers.sources.source-card.1",
@@ -31737,7 +31865,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The date of reading and revising the nine modules this time is 2026-10-09; the source statistical periods, publication dates and regulation versions are registered separately, and the search date is not treated as the data period."
+              "Public sources checked November 9, 2026. Use each source’s own statistical period, notice date or regulation version."
             ]
           },
           "id": "civil-engineers.sources.source-card.3",
@@ -31916,12 +32044,12 @@
               {
                 "accessed_at": "2026-09-17",
                 "details": [
-                  "Official entry notes entry point (403 in this round)",
-                  "Access gap registration"
+                  "Typical education and entry duties.",
+                  "State licensure, FE and PE exams, and boundaries for direct public services."
                 ],
                 "evidence_type": "official source",
                 "id": "bls-entry",
-                "limitation": "Direct access to this page returned HTTP 403 in this round and the original page text was not obtained; the entry and practice pathway statements on this page follow the O*NET preparation level and certification pages, and this entry is registered as an access gap.",
+                "limitation": "BLS describes a typical U.S. pathway. State boards set applicable licensing rules.",
                 "market": "United States",
                 "name": "BLS Occupational Outlook Handbook：Civil Engineers",
                 "period": "Current page; searched 2026-09",
@@ -31948,18 +32076,18 @@
               {
                 "accessed_at": "2026-09-17",
                 "details": [
-                  "Official employment projection",
-                  "2024 to 2034 projection and decade openings"
+                  "U.S. SOC 17-2051 in Table 1.2.",
+                  "380,600 base-year jobs, 405,100 projected jobs, a net gain of 24,500, and about 22,700 annual openings."
                 ],
                 "evidence_type": "official source",
                 "id": "bls-outlook",
-                "limitation": "Supports the employment projection (368,900 people in 2024, growth of 5% to 6%, about 23,600 openings over the decade); a projection contains assumptions and error.",
+                "limitation": "A national U.S. projection. Annual openings include replacements and do not measure current vacancies or demand in China.",
                 "market": "United States",
-                "name": "BLS employment projection (17-2051.00, 2024 to 2034, shown via O*NET)",
-                "period": "2024 to 2034 projection",
+                "name": "BLS civil engineers employment projections, 2025–2035",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics / O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/17-2051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -31975,7 +32103,7 @@
                 "period": "Materials published in 2025 and earlier",
                 "publisher": "National Bureau of Statistics (People's Republic of China)",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -31985,13 +32113,13 @@
                 ],
                 "evidence_type": "official source",
                 "id": "nasa-seh",
-                "limitation": "Supports the note on position mapping boundaries; this page does not establish a one-to-one correspondence with O*NET-SOC 17-2051.00 on that basis.",
+                "limitation": "Comparison by duties, without equating U.S. SOC, qualifications or wages.",
                 "market": "Mainland China",
-                "name": "Announcement information of the Occupational Classification Code of the People's Republic of China (2022 edition)",
+                "name": "China Occupational Classification, 2022 edition",
                 "period": "2022 edition announcement information; searched 2026-09",
                 "publisher": "Ministry of Human Resources and Social Security",
                 "scope": "contextual",
-                "url": "https://www.mohrss.gov.cn/"
+                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32037,9 +32165,9 @@
                 "market": "Editorial design for this page",
                 "name": "FermatMind editorial design and fictional exercises",
                 "period": "2026-09",
-                "publisher": "FermatMind career content editorial team",
+                "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
-                "url": null
+                "url": "#career-visual-group-path"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32055,7 +32183,7 @@
                 "period": "Current page; searched 2026-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-2051.00#WorkContext"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32127,7 +32255,7 @@
                 ],
                 "evidence_type": "official legal text",
                 "id": "civil-design-law",
-                "limitation": "Articles 7—10 on unit qualification, scope and personnel registration; Article 28 on the party that changes design documents, written consent for commissioning and reporting major changes for approval, and ordinary project confirmation is not treated as authority to change drawings",
+                "limitation": "Articles 7–10 address qualifications and registration. Article 28 distinguishes which organization can make changes and requires prior approval from the original approving authority for major changes.",
                 "market": "Mainland China",
                 "name": "Regulations on the Administration of Engineering Survey and Design of Construction Projects (public text of the 2017 amendment)",
                 "period": "Public text of the 2017 amendment; read on 2026-10-09",
@@ -32163,7 +32291,7 @@
                 "period": "Public text in force from 2004-02-01; read on 2026-10-09",
                 "publisher": "Public State Council regulations on the Ministry of Education site",
                 "scope": "contextual",
-                "url": "https://www.moe.gov.cn/jyb_xwfb/xw_zt/moe_357/s3581/moe_2698/moe_2825/tnull_53863.html"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202307/t20230719_3165890.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32332,20 +32460,95 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Design and calculation｜Calculate loads and hydraulics and material stresses and determine design specifications｜Calculate loads and slope requirements and flows or material stress factors to determine design specifications; use computer-aided design and drafting tools to plan and design transport or hydraulic systems and structures; design energy-efficient or environmentally friendly civil structures (corresponding to the fourth and fifth and eleventh O*NET tasks). — 75/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[0]",
-                  "Data and site analysis｜Analyse survey and geological and aerial data｜Analyse survey reports and maps and drawings and blueprints and aerial photographs or other topographic or geological data; direct or take part in surveys to set out and establish benchmarks and slopes or elevations to guide construction (corresponding to the seventh and eighth O*NET tasks). — 75/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[2]",
-                  "Testing and risk｜Test materials and identify environmental risks｜Test soils or materials to judge the suitability and strength of foundations and concrete and asphalt or steel; identify environmental risks and develop risk management strategies for civil engineering projects; carry out traffic flow or environmental condition studies to identify engineering problems and assess potential project impacts (corresponding to the twelfth and thirteenth and fourteenth O*NET tasks). — 25/100; weight=1/3; civil-engineers.profile.responsibilities-block.1[3]"
+                  "The former editorial estimate is withdrawn; there is no replacement score.",
+                  "Keep original records and final checks traceable.",
+                  "Design and calculation: recompute from original inputs. A draft cannot determine engineering suitability.",
+                  "Survey and versions: check sources, dates, scope and gaps.",
+                  "Testing and risks: authorized staff interpret and handle findings under the actual project requirements."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "Does not estimate job loss, working hours or organizational adoption.",
+                "name": "FermatMind AI evidence note for civil engineering",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Categories -01 for building and municipal design, -02 for civil construction technical work and -05 for geotechnical work."
+                ],
+                "evidence_type": "primary_document",
+                "id": "civil-cn-classification",
+                "limitation": "Comparison by duties, without equating U.S. SOC, qualifications or wages.",
+                "market": "Mainland China",
+                "name": "China Occupational Classification, 2022 edition",
+                "period": "As published",
+                "publisher": "Public edition hosted by a human resources authority",
+                "scope": "contextual",
+                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Articles 18, 20 and 21 cover employment and registration, signing and sealing applicable documents, and revisions to signed documents."
+                ],
+                "evidence_type": "primary_document",
+                "id": "civil-cn-practice-registration",
+                "limitation": "Check the discipline, document, role and applicable rules.",
+                "market": "Mainland China",
+                "name": "Rules for registered survey and design engineers",
+                "period": "As published",
+                "publisher": "Ministry of Housing and Urban-Rural Development",
+                "scope": "contextual",
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2023/art_17339_775516.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Civil disciplines include geotechnical, port and waterway, water resources and hydropower, and road engineering. Structural and utilities credentials are listed separately."
+                ],
+                "evidence_type": "primary_document",
+                "id": "civil-cn-exam-2026",
+                "limitation": "Annual exam example, not a universal hiring requirement.",
+                "market": "Mainland China",
+                "name": "Hubei 2026 survey and design engineering exam notice",
+                "period": "As published",
+                "publisher": "Hubei personnel examination authority",
+                "scope": "contextual",
+                "url": "https://rst.hubei.gov.cn/hbrsksw/zyjslks/zyjsry/2026ks/2026kcsjzcgcs/202608/t20260804_5988526.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The September 29, 2026 campus event lists civil fields including bridges, tunnels, roads and geotechnical engineering, plus screening and interviews."
+                ],
+                "evidence_type": "primary_document",
+                "id": "civil-cn-railway-campus",
+                "limitation": "A past campus event; no exact pay or confirmation of current applications.",
+                "market": "Mainland China",
+                "name": "China Railway 16th Bureau Group recruitment for the 2027 graduating class",
+                "period": "As published",
+                "publisher": "Published by Tiangong University careers office",
+                "scope": "contextual",
+                "url": "https://job.tiangong.edu.cn/recruitment/content/type/2/id/2750.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A related bachelor’s or specified experience plus an acceptable EIT certificate; close PE supervision and review during and after the work."
+                ],
+                "evidence_type": "primary_document",
+                "id": "civil-us-pa-trainee",
+                "limitation": "A state job classification, not a live posting or another state’s rule.",
+                "market": "Pennsylvania, United States",
+                "name": "Pennsylvania Civil Engineer Trainee class specification",
+                "period": "As published",
+                "publisher": "Commonwealth of Pennsylvania",
+                "scope": "contextual",
+                "url": "https://careers.employment.pa.gov/Home/GetJobNameInfo?jobCode=11119"
               }
             ]
           },
@@ -34621,8 +34824,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-summary"
+              "civil-safety-law",
+              "onet-context"
             ],
             "id": "risk-site-safety",
             "mitigation": {
@@ -34653,8 +34856,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-summary"
+              "civil-design-law",
+              "civil-cn-practice-registration"
             ],
             "id": "risk-document-signing",
             "mitigation": {
@@ -34852,6 +35055,60 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "civil-safety-law",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "id": "civil-safety-law",
+            "label": {
+              "$source": "civil-safety-law",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "scope": "Applies only in the relevant mainland Chinese engineering context."
+          },
+          {
+            "href": {
+              "$source": "civil-design-law",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "id": "civil-design-law",
+            "label": {
+              "$source": "civil-design-law",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "scope": "Applies only in the relevant mainland Chinese engineering context."
+          },
+          {
+            "href": {
+              "$source": "civil-cn-practice-registration",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "id": "civil-cn-practice-registration",
+            "label": {
+              "$source": "civil-cn-practice-registration",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "civil-engineers.source-register.published.1"
+            },
+            "scope": "Applies only in the relevant mainland Chinese engineering context."
           }
         ]
       },
@@ -35446,7 +35703,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "civil-us-federal-wage-2025",
+            "fact_ref": "civil-us-heavy-construction-wage-2025",
             "industry": {
               "$item": "civil-engineers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -35660,7 +35917,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits being a civil engineer?"
+        "title": "Would you enjoy civil engineering work?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -35864,6 +36121,7 @@
               "type": "prose"
             },
             "source_id": "nbs",
+            "source_ref": "civil-nbs-current",
             "value": {
               "$item": "civil-engineers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36363,7 +36621,7 @@
             },
             "id": "mbti",
             "label": "Myers-Briggs Type Indicator (MBTI)",
-            "question": "Which MBTI type suits a civil engineer best?",
+            "question": "How could MBTI preferences inform career exploration?",
             "signals": {
               "$item": "civil-engineers.fit.personality-fit-block.12",
               "block": "fit",
@@ -36428,7 +36686,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "Understand my intelligence and reasoning performance",
+            "cta_label": "Explore my reasoning performance",
             "evidence_level": {
               "$item": "civil-engineers.fit.personality-fit-block.19",
               "block": "fit",
@@ -36437,7 +36695,7 @@
             },
             "id": "iq",
             "label": "Intelligence quotient (IQ) and numerical reasoning",
-            "question": "Can I be a civil engineer if my IQ or maths is not good?",
+            "question": "How can I try the numerical checks used in civil engineering?",
             "signals": {
               "$item": "civil-engineers.fit.personality-fit-block.20",
               "block": "fit",
@@ -36465,7 +36723,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "cta_label": "Understand my emotional intelligence ability",
+            "cta_label": "Reflect on everyday communication",
             "evidence_level": {
               "$item": "civil-engineers.fit.personality-fit-block.23",
               "block": "fit",
@@ -36474,7 +36732,7 @@
             },
             "id": "eq",
             "label": "Emotional intelligence (EI, often called EQ)",
-            "question": "Does being a civil engineer require high emotional intelligence?",
+            "question": "How can I practice communication for civil engineering?",
             "signals": {
               "$item": "civil-engineers.fit.personality-fit-block.24",
               "block": "fit",
@@ -37042,7 +37300,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit a civil engineer",
+        "label": "Explore career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37164,6 +37422,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which civil engineer direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the RIC interest codes",
+      "interface.quick_decision.suit_heading": "Signs you might enjoy this work",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to interpret this figure",
       "interface.us_salary.section_label": "U.S. salary reference",
@@ -37256,7 +37515,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "Where AI can help in civil engineering",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37312,62 +37571,62 @@
       },
       {
         "derivation": null,
-        "display_value": "368,900 people (2024)",
+        "display_value": "380,600 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "The employment level for this occupation published in the BLS employment projection",
-        "occupation_scope": "Civil engineers",
-        "period": "2024",
+        "measure": "Number of jobs or change in jobs",
+        "occupation_scope": "SOC17-2051",
+        "period": "2025",
         "source_refs": [
-          "bls-outlook"
+          "civil-ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 387,345 to 391,034 people (projected for 2034)",
+        "display_value": "405,100 projected jobs",
         "fact_id": "us-employment-2035",
         "market": "United States",
-        "measure": "Calculated from the 368,900 people in 2024 published by BLS and growth of 5% to 6% over 2024—2034",
-        "occupation_scope": "Civil engineers",
-        "period": "2034 (projection)",
+        "measure": "Number of jobs or change in jobs",
+        "occupation_scope": "SOC17-2051",
+        "period": "2035 (projection)",
         "source_refs": [
-          "bls-outlook"
+          "civil-ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Growth 5%—6% (2024—2034)",
+        "display_value": "Growth 6.4% (OOH rounds to 6%)",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "The employment change rate in the BLS employment projection (faster than the average for all occupations)",
-        "occupation_scope": "Civil engineers",
-        "period": "2024—2034 (projection)",
+        "measure": "BLS Table 1.2 employment change rate",
+        "occupation_scope": "SOC17-2051",
+        "period": "2025—2035 (projection)",
         "source_refs": [
-          "bls-outlook"
+          "civil-ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About +18,445 to +22,134 people (2024—2034)",
+        "display_value": "Projected net gain of 24,500 jobs",
         "fact_id": "us-change-2025-2035",
         "market": "United States",
-        "measure": "Calculated from the 368,900 people in 2024 published by BLS and a growth rate of 5% to 6%",
-        "occupation_scope": "Civil engineers",
-        "period": "2024—2034 (projection)",
+        "measure": "Number of jobs or change in jobs",
+        "occupation_scope": "SOC17-2051",
+        "period": "2025—2035 (projection)",
         "source_refs": [
-          "bls-outlook"
+          "civil-ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 23,600 (ten-year cumulative, 2024—2034)",
+        "display_value": "About 22,700 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "The ten-year cumulative openings published in the BLS employment projection (including replacement needs)",
-        "occupation_scope": "Civil engineers",
-        "period": "2024—2034 (projection)",
+        "measure": "BLS Table 1.2 annual average openings including replacement and not net growth",
+        "occupation_scope": "SOC17-2051",
+        "period": "Annual average over 2025—2035 (projection)",
         "source_refs": [
-          "bls-outlook"
+          "civil-ep-current"
         ]
       },
       {
@@ -37444,14 +37703,15 @@
       },
       {
         "derivation": null,
-        "display_value": "Professional, scientific and technical services 56%, government 24%, construction 12% and other industries 8% of employment (O*NET industry distribution, not wage data)",
+        "display_value": "Professional, scientific and technical services 55%; government 24%; construction 13%; other industries 8%",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "United States",
-        "measure": "Industry distribution (not wage data)",
+        "measure": "U.S. employment shares by industry",
         "occupation_scope": "Civil engineers",
-        "period": "Current page; searched 2026-09",
+        "period": "2025 in the O*NET occupational profile",
         "source_refs": [
-          "onet-industry"
+          "civil-onet-current",
+          "civil-industry-current"
         ]
       },
       {
@@ -37467,11 +37727,11 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Insufficient evidence: no median wage for this occupation broken down by industry has been obtained; direct access to that BLS Occupational Outlook Handbook page returned HTTP 403 in this round",
+        "derivation": "The directly retrieved handbook industry table does not list the federal government.",
+        "display_value": "No federal-government figure reported here",
         "fact_id": "us-industry-wage-federal-2025",
         "market": "United States",
-        "measure": "Not provided by the source (gap)",
+        "measure": "Industry wage evidence boundary",
         "occupation_scope": "Civil engineers",
         "period": "May 2025",
         "source_refs": [
@@ -37528,10 +37788,10 @@
       },
       {
         "derivation": null,
-        "display_value": "380,600 people",
+        "display_value": "380,600 jobs",
         "fact_id": "civil-employment-2025",
         "market": "United States",
-        "measure": "BLS Table 1.2 base period employment",
+        "measure": "Number of jobs or change in jobs",
         "occupation_scope": "SOC17-2051",
         "period": "2025",
         "source_refs": [
@@ -37540,10 +37800,10 @@
       },
       {
         "derivation": null,
-        "display_value": "405,100 people (projection)",
+        "display_value": "405,100 projected jobs",
         "fact_id": "civil-employment-2035",
         "market": "United States",
-        "measure": "BLS Table 1.2 projected employment",
+        "measure": "Number of jobs or change in jobs",
         "occupation_scope": "SOC17-2051",
         "period": "2035 (projection)",
         "source_refs": [
@@ -37564,10 +37824,10 @@
       },
       {
         "derivation": null,
-        "display_value": "Net gain of 24,500 people (projection)",
+        "display_value": "Projected net gain of 24,500 jobs",
         "fact_id": "civil-change-2025-2035",
         "market": "United States",
-        "measure": "BLS Table 1.2 net employment change",
+        "measure": "Number of jobs or change in jobs",
         "occupation_scope": "SOC17-2051",
         "period": "2025—2035 (projection)",
         "source_refs": [
@@ -37647,11 +37907,11 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "117,790 USD per year (median)",
+        "derivation": "A search-indexed parameterized version includes the federal nonpostal industry. The directly retrieved handbook table does not; this page uses its directly verified rows.",
+        "display_value": "No federal-government figure reported here",
         "fact_id": "civil-us-federal-wage-2025",
         "market": "United States",
-        "measure": "BLS OEWS median annual wage for this occupation in the same industry",
+        "measure": "Industry wage evidence boundary",
         "occupation_scope": "SOC17-2051, federal government excluding postal service",
         "period": "May 2025",
         "source_refs": [
@@ -37695,25 +37955,37 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
+        "derivation": "The former editorial estimate lacked verifiable evidence on complete tasks and was withdrawn. No replacement score is reported.",
+        "display_value": "No verified quantitative estimate",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "Task-level AI evidence status",
         "occupation_scope": "Civil engineers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": "Directly reported in the BLS handbook industry table.",
+        "display_value": "$93,350 per year (median)",
+        "fact_id": "civil-us-heavy-construction-wage-2025",
+        "market": "United States",
+        "measure": "BLS OEWS median annual wage for this occupation in the same industry",
+        "occupation_scope": "U.S. SOC 17-2051 in heavy and civil engineering construction",
+        "period": "May 2025",
+        "source_refs": [
+          "civil-ooh-current"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI evidence status"
     },
     "badges": [
       "RIASEC · RIC",
@@ -37725,25 +37997,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. median wage (sub-item basis for this occupation)"
+        "label": "U.S. national median pay"
       },
       {
         "availability": "available",
-        "fact_ref": "us-growth-2025-2035",
+        "fact_ref": "civil-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (sub-item basis for this occupation)"
+        "label": "U.S. employment growth (2025–2035 projection)"
       },
       {
         "availability": "available",
-        "fact_ref": "us-employment-2025",
+        "fact_ref": "civil-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment level (sub-item basis for this occupation, 2024)"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
-        "fact_ref": "us-openings-2025-2035",
+        "fact_ref": "civil-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. annual average job openings (sub-item basis for this occupation)"
+        "label": "U.S. annual openings (2025–2035 projection)"
       },
       {
         "availability": "missing",
@@ -37764,10 +38036,10 @@
       "text": "Civil engineers"
     }
   },
-  "source_content_sha256": "60323a0415ac5ad107839e9c4a2055f4939c854b25b51739b4eac0442ed458ba",
+  "source_content_sha256": "a413d68e1848f5e015f001a8d337c4c4e04cac27f138e86cac51963cef7a2329",
   "subject": {
     "canonical_slug": "civil-engineers",
     "name": "Civil engineers",
-    "summary": "Engineering work that plans, designs and supervises the construction and maintenance of building structures and facilities (roads, railways, airports, bridges, harbours, channels, dams, irrigation projects, pipelines, power plants and water and sewerage systems): analyse survey and geological and environmental data, calculate loads and hydraulics and material stresses, design schemes and prepare design and technical documents, coordinate multi-disciplinary interfaces, and supervise construction and check compliance."
+    "summary": "Civil engineers plan and design infrastructure, review technical documents, and oversee construction or maintenance. Duties vary by project and discipline."
   }
 }
