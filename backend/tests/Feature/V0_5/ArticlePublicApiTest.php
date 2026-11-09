@@ -1524,7 +1524,8 @@ final class ArticlePublicApiTest extends TestCase
         $relatedTest = 'holland-career-interest-test-riasec';
         $source = $this->createArticle(['locale' => 'en', 'slug' => 'independent-english-root', 'related_test_slug' => $relatedTest]);
         $source->forceFill(['working_revision_id' => $source->published_revision_id])->saveQuietly();
-        $seo = $this->createSeoMeta($source);
+        $this->createSeoMeta($source, ['seo_title' => 'Mutable SEO row title']);
+        $public = $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=en')->assertOk()->json('article');
         $proof = ['source' => [
             'slug' => $source->slug, 'locale' => 'en', 'id' => $source->id,
             'published_revision_id' => $source->published_revision_id, 'translation_group_id' => $source->translation_group_id,
@@ -1532,8 +1533,8 @@ final class ArticlePublicApiTest extends TestCase
             'hreflang_gate' => null,
             'snapshot_sha256' => array_map(
                 static fn (?string $value): ?string => $value === null ? null : hash('sha256', $value),
-                $source->only(['title', 'excerpt', 'content_md', 'author_name', 'cover_image_alt'])
-                    + $seo->only(['seo_title', 'seo_description', 'og_title', 'og_description']),
+                array_intersect_key($public, array_flip(['title', 'excerpt', 'content_md', 'author_name', 'cover_image_alt']))
+                    + array_intersect_key($public['seo_meta'], array_flip(['seo_title', 'seo_description', 'og_title', 'og_description'])),
             ),
         ], 'existing_chinese' => null];
         $sha = str_repeat('a', 64);

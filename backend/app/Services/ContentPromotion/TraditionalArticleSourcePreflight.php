@@ -25,7 +25,7 @@ final class TraditionalArticleSourcePreflight
         if (! in_array($sourceLocale, ['zh-CN', 'en'], true)) {
             throw new DomainException('traditional_article_source_locale_invalid');
         }
-        $source = $this->readArticle($proof['source'], $sourceLocale, null, $lock);
+        $source = $this->readArticle($proof['source'], $sourceLocale, null, $lock, publishedProjection: $sourceLocale === 'en');
         // Staging can hold a published root copied from the prepared workflow.
         // readArticle has already checked null parents, source locale and the exact public revision.
         $preparedRoot = $allowStagingPreparedRoot
@@ -96,7 +96,7 @@ final class TraditionalArticleSourcePreflight
             ->when($lock, fn ($query) => $query->lockForUpdate())->first(['id']) !== null;
     }
 
-    private function readArticle(array $expected, string $locale, ?Article $source, bool $lock): Article
+    private function readArticle(array $expected, string $locale, ?Article $source, bool $lock, bool $publishedProjection = false): Article
     {
         $sourceLocale = $source?->locale ?? $locale;
         $article = Article::query()->withoutGlobalScopes()->withTrashed()
@@ -145,6 +145,12 @@ final class TraditionalArticleSourcePreflight
                 ?? array_fill_keys(['seo_title', 'seo_description', 'og_title', 'og_description'], null)),
         ];
 
+        if ($publishedProjection) {
+            // Reader-facing SEO title and description belong to the locked published revision.
+            $article->setRelation('publishedRevision', $revision)->setRelation('seoMeta', $seo);
+            $public = app(ArticleController::class)->publicDetailProjection($article)['article'];
+            $snapshot = array_replace($snapshot, array_intersect_key($public, $snapshot), array_intersect_key($public['seo_meta'] ?? [], $snapshot));
+        }
         $gate = data_get($seo?->schema_json, 'editorial_package_v1.hreflang_gate_v1');
         $gate = is_array($gate) ? array_intersect_key($gate, array_flip(['enabled', 'policy', 'reason'])) : null;
         $snapshot = array_map(static fn (?string $value): ?string => $value === null ? null : hash('sha256', $value), $snapshot);

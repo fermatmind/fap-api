@@ -1150,3 +1150,19 @@ test('Traditional Blog featured order binds published targets and checks the vis
   rmSync(fixture,{recursive:true,force:true});
  }
 });
+
+test('Traditional Article English source preserves one independent published root per environment',()=>{
+ const selection='traditional-article-english';
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,1);
+ for (const [environment,revision] of [['staging',681],['production',844]]) {
+  const [row]=readCandidateRows(root,binding.package_sha256,environment).candidates;
+  assert.deepEqual(row.identity,{org_id:0,locale:'zh-TW',slug:'why-mbti-and-holland-code-results-dont-match'});
+  assert.equal(row.source_identity.source_locale,'en');
+  assert.equal(row.source_expectations.source.id,42);
+  assert.equal(row.source_expectations.source.published_revision_id,revision);
+  assert.equal(row.source_expectations.existing_chinese,null);
+ }
+});

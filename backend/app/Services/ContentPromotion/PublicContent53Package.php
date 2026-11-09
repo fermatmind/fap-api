@@ -180,11 +180,14 @@ final class PublicContent53Package
                 return $package;
             }
         }
-        if (is_file($root.'/'.self::PACKAGE.'/traditional-article.json')) {
-            $bytes = $this->bytes($root, 'traditional-article.json');
-            $review = $this->bytes($root, 'traditional-article-review.json');
-            $chain = TraditionalArticlePublication::SCHEMA."\ntraditional-article.json\n".hash('sha256', $bytes)
-                ."\ntraditional-article-review.json\n".hash('sha256', $review)."\n";
+        foreach (['traditional-article', 'traditional-article-english'] as $name) {
+            if (! is_file($root.'/'.self::PACKAGE.'/'.$name.'.json')) {
+                continue;
+            }
+            $bytes = $this->bytes($root, $name.'.json');
+            $review = $this->bytes($root, $name.'-review.json');
+            $chain = TraditionalArticlePublication::SCHEMA."\n".$name.".json\n".hash('sha256', $bytes)
+                ."\n".$name."-review.json\n".hash('sha256', $review)."\n";
             if (hash_equals($expectedSha256, hash('sha256', $chain))) {
                 $package = TraditionalArticlePublication::package($bytes, $review, $environment);
                 $package['candidates'][0]['package_sha256'] = $expectedSha256;
