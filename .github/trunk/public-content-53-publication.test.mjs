@@ -1584,3 +1584,28 @@ test('Traditional Enneagram and career guides preserve admissions context and re
   assert.equal(rows[5].source_expectations.unpublished_english_slug,environment==='staging'?'mbti-vs-enneagram-reading-results':undefined);
  }
 });
+
+test('Traditional admissions and reading guides preserve reviewed sources and navigation',()=>{
+ const selection='traditional-article-admissions-and-reading';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,6);
+ const revisions={
+  production:[[988,1145],[1002,1003],[683,759],[965,963],[1047,1048],[1051,1052]],
+  staging:[[78,670],[75,671],[436,25],[835,null],[839,null],[841,null]],
+ };
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates;
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english?.published_revision_id??null]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection?.faq.length??0),[4,0,5,2,0,0]);
+  assert.deepEqual(rows.map(row=>row.editorial_package_v1?.cta_slots.length??0),[1,2,1,1,0,0]);
+  assert.match(rows[0].snapshot.content_md,/服從調劑.*退檔/su);
+  assert.match(rows[1].snapshot.content_md,/一分一段表.*800 字/su);
+  assert.match(rows[3].snapshot.content_md,/SBII/u);
+  assert.match(rows[4].snapshot.content_md,/15÷60=25%/u);
+  assert.match(rows[5].snapshot.content_md,/58\.3/u);
+  assert.deepEqual(rows.slice(3).map(row=>row.source_expectations.source.id),environment==='staging'?[283,287,289]:[281,287,291]);
+  assert.deepEqual(rows[3].taxonomy_display.tags.map(({id,slug})=>[id,slug]),
+   [[18,'mbti'],[environment==='staging'?178:189,'777c03dffbf5']]);
+ }
+});

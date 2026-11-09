@@ -209,6 +209,12 @@ final class TraditionalArticlePublication
                         || preg_match('/\A[a-f0-9]{64}\z/', $record['prepared_root_projection_hash']) !== 1)) {
                     throw new DomainException('traditional_article_source_proof_invalid');
                 }
+                if (array_key_exists('historical_root_title_sha256', $record)
+                    && (! isset($record['prepared_root_projection_hash'])
+                        || ! is_string($record['historical_root_title_sha256'])
+                        || preg_match('/\A[a-f0-9]{64}\z/', $record['historical_root_title_sha256']) !== 1)) {
+                    throw new DomainException('traditional_article_source_proof_invalid');
+                }
                 if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $recordSlug) !== 1
                     || ($englishSource && (! is_int($record['id'] ?? null) || $record['id'] < 1
                         || ! is_int($record['published_revision_id'] ?? null) || $record['published_revision_id'] < 1))
@@ -273,6 +279,24 @@ final class TraditionalArticlePublication
         }
 
         $taxonomy = $mapping['taxonomy_display'];
+        if (array_key_exists('staging_target_tag_ids', $package)) {
+            $stagingTagIds = $package['staging_target_tag_ids'];
+            $targetTagsBySlug = array_column($taxonomy['tags'], 'id', 'slug');
+            if (! $projectedBatch || ! is_array($stagingTagIds) || $stagingTagIds === []
+                || array_diff_key($stagingTagIds, $targetTagsBySlug) !== []
+                || array_filter($stagingTagIds, fn ($id): bool => ! is_int($id) || ! in_array($id, $stagingTaxonomy['tag_ids'], true)) !== []) {
+                throw new DomainException('traditional_article_batch_staging_target_tags_invalid');
+            }
+            if ($environment === 'staging') {
+                foreach ($taxonomy['tags'] as &$tag) {
+                    $tag['id'] = $stagingTagIds[$tag['slug']] ?? $tag['id'];
+                }
+                unset($tag);
+                if (count(array_unique(array_column($taxonomy['tags'], 'id'))) !== count($taxonomy['tags'])) {
+                    throw new DomainException('traditional_article_batch_staging_target_tags_invalid');
+                }
+            }
+        }
         if ($projectedBatch && $environment === 'staging' && $stagingTaxonomy === ['category_id' => null, 'tag_ids' => []]) {
             $taxonomy = ['category' => ['id' => null, 'slug' => null], 'tags' => []];
         }

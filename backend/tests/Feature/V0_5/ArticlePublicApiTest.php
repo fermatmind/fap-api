@@ -1866,6 +1866,28 @@ final class ArticlePublicApiTest extends TestCase
             }
             $source->forceFill(['cover_image_alt' => null, 'source_version_hash' => $currentHash])->saveQuietly();
             $sourceRevision->forceFill(['source_version_hash' => $currentHash])->saveQuietly();
+            $source->forceFill(['title' => 'Historical staging title'])->saveQuietly();
+            $historicalTitle = $projected;
+            $historicalTitle['source']['historical_root_title_sha256'] = hash('sha256', $source->title);
+            $historicalTitle['source']['prepared_root_projection_hash'] = $source->computeSourceVersionHash();
+            $historicalTitle['source']['prepared_revision_source_hash'] = $currentHash;
+            DB::transaction(fn () => $this->assertSame($source->id, $guard->assertSource($historicalTitle, true, true)->id));
+            foreach ([[$projected, true], [$historicalTitle, false]] as [$candidateProof, $staging]) {
+                try {
+                    $guard->assertSource($candidateProof, allowStagingPreparedRoot: $staging);
+                    $this->fail('The guard accepted an unbound or non-staging historical title.');
+                } catch (DomainException $exception) {
+                    $this->assertSame('traditional_article_source_payload_changed', $exception->getMessage());
+                }
+            }
+            $source->forceFill(['title' => 'Different staging title'])->saveQuietly();
+            try {
+                $guard->assertSource($historicalTitle, allowStagingPreparedRoot: true);
+                $this->fail('The guard accepted a changed historical title.');
+            } catch (DomainException $exception) {
+                $this->assertSame('traditional_article_source_payload_changed', $exception->getMessage());
+            }
+            $source->forceFill(['title' => $sourceRevision->title])->saveQuietly();
             $seo->updateQuietly(['seo_title' => $rawSeoTitle]);
 
             $noEnglish = $proof;

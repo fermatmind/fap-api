@@ -52,7 +52,9 @@ final class TraditionalArticleSourcePreflight
         }
         $preparedProjectionHash = $proof['source']['prepared_root_projection_hash'] ?? null;
         $preparedRevisionHash = $proof['source']['prepared_revision_source_hash'] ?? null;
-        if (! $sourceHashMatches && $allowStagingChineseProjection && $preparedRoot
+        $historicalRootTitle = $allowStagingChineseProjection && $source->isSourceArticle()
+            && isset($proof['source']['historical_root_title_sha256']);
+        if (! $sourceHashMatches && $allowStagingChineseProjection && ($preparedRoot || $historicalRootTitle)
             && is_string($preparedProjectionHash) && is_string($preparedRevisionHash)
             && hash_equals((string) $source->source_version_hash, $preparedRevisionHash)) {
             // The exact prepared root and its published revision are both bound to the package.
@@ -221,8 +223,15 @@ final class TraditionalArticleSourcePreflight
         if (is_array($expectedGate)) {
             ksort($expectedGate);
         }
+        $rootTitleMatches = $article->title === $revision->title;
+        if ($allowPreparedRevisionHash && $source === null && isset($expected['historical_root_title_sha256'])) {
+            $rootTitleMatches = $article->isSourceArticle() && ! $rootTitleMatches
+                && hash_equals($expected['historical_root_title_sha256'], hash('sha256', $article->title))
+                && hash_equals($expected['prepared_root_projection_hash'], $article->computeSourceVersionHash())
+                && hash_equals($expected['prepared_revision_source_hash'], (string) $article->source_version_hash);
+        }
         if ($snapshot !== $expectedSnapshot
-            || $article->title !== $revision->title || $article->excerpt !== $revision->excerpt
+            || ! $rootTitleMatches || $article->excerpt !== $revision->excerpt
             || $article->content_md !== $revision->content_md
             || $gate !== $expectedGate) {
             throw new DomainException('traditional_article_source_payload_changed');
